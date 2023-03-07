@@ -412,9 +412,9 @@ export class modifier_item_imba_kaya_active extends BaseModifier_Plus {
         return ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW;
     }
     GetTexture(): string {
-        if (this.GetItemPlus().GetName() == "item_imba_kaya") {
+        if (this.GetItemPlus().GetAbilityName() == "item_imba_kaya") {
             return "item_kaya";
-        } else if (this.GetItemPlus().GetName() == "item_imba_arcane_nexus") {
+        } else if (this.GetItemPlus().GetAbilityName() == "item_imba_arcane_nexus") {
             return "modifiers/imba_arcane_nexus";
         }
     }

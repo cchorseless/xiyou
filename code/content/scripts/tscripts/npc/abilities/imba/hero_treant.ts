@@ -11,8 +11,8 @@ export class imba_treant_natures_grasp extends BaseAbility_Plus {
     OnSpellStart(): void {
         let cast_position = this.GetCasterPlus().GetAbsOrigin();
         let cursor_position = this.GetCursorPosition();
-        let unique_string = DoUniqueString(this.GetName());
-        let thicket_thinker = undefined;
+        let unique_string = DoUniqueString(this.GetAbilityName());
+        let thicket_thinker: IBaseNpc_Plus = undefined;
         if (cursor_position == cast_position) {
             cursor_position = cursor_position + this.GetCasterPlus().GetForwardVector() as Vector;
         }
@@ -21,9 +21,9 @@ export class imba_treant_natures_grasp extends BaseAbility_Plus {
         }
         this.GetCasterPlus().EmitSound("Hero_Treant.NaturesGrasp.Cast");
         for (let thicket = 1; thicket <= math.floor((this.GetCastRange(cursor_position, this.GetCasterPlus()) - 100) / this.GetSpecialValueFor("vine_spawn_interval")); thicket++) {
-            this.GetCasterPlus().SetContextThink(DoUniqueString("grasp_thinker"),
+            this.AddTimer(this.GetSpecialValueFor("creation_interval") * (thicket - 1),
                 () => {
-                    thicket_thinker = CreateModifierThinker(this.GetCasterPlus(), this, "modifier_imba_treant_natures_grasp_creation_thinker", {
+                    thicket_thinker = BaseModifier_Plus.CreateBuffThinker(this.GetCasterPlus(), this, "modifier_imba_treant_natures_grasp_creation_thinker", {
                         duration: this.GetSpecialValueFor("vines_duration"),
                         unique_string: unique_string
                     }, GetGroundPosition(cast_position + (cursor_position - cast_position as Vector).Normalized() * (100 + (this.GetSpecialValueFor("vine_spawn_interval") * (thicket - 1))) as Vector, undefined), this.GetCasterPlus().GetTeamNumber(), false);
@@ -31,8 +31,7 @@ export class imba_treant_natures_grasp extends BaseAbility_Plus {
                     if (thicket == math.floor((this.GetCastRange(cursor_position, this.GetCasterPlus()) - 100) / this.GetSpecialValueFor("vine_spawn_interval"))) {
                         this.thinker_tracker[unique_string] = undefined;
                     }
-                    return undefined;
-                }, this.GetSpecialValueFor("creation_interval") * (thicket - 1));
+                });
         }
     }
     OnOwnerSpawned(): void {
@@ -81,7 +80,7 @@ export class modifier_imba_treant_natures_grasp_creation_thinker extends BaseMod
         if (!this.GetAbilityPlus<imba_treant_natures_grasp>().thinker_tracker[this.unique_string] && GridNav.IsNearbyTree(this.GetParentPlus().GetAbsOrigin(), this.latch_range, false)) {
             this.GetAbilityPlus<imba_treant_natures_grasp>().thinker_tracker[this.unique_string] = true;
             this.bTouchingTree = true;
-            for (const ent of (Entities.FindAllByName("npc_dota_thinker") as IBaseNpc_Plus[])) {
+            for (const ent of (this.GetCasterPlus().FindChildByBuffName(this.GetName()) as IBaseNpc_Plus[])) {
                 let buff = ent.findBuff<modifier_imba_treant_natures_grasp_creation_thinker>(this.GetName());
                 if (buff && buff.unique_string == this.unique_string && buff.bramble_particle) {
                     ParticleManager.SetParticleControl(buff.bramble_particle, 1, Vector(1, 0, 0));

@@ -50,11 +50,11 @@ export class imba_invoker {
     static update_orb_modifiers(caster: IBaseNpc_Plus, ability: IBaseAbility_Plus, orb_to_remove: IBaseAbility_Plus) {
         let orb_modifier = undefined;
         if (orb_to_remove != null) {
-            if (orb_to_remove.GetName() == "imba_invoker_quas") {
+            if (orb_to_remove.GetAbilityName() == "imba_invoker_quas") {
                 orb_modifier = "modifier_imba_invoker_quas";
-            } else if (orb_to_remove.GetName() == "imba_invoker_wex") {
+            } else if (orb_to_remove.GetAbilityName() == "imba_invoker_wex") {
                 orb_modifier = "modifier_imba_invoker_wex";
-            } else if (orb_to_remove.GetName() == "imba_invoker_exort") {
+            } else if (orb_to_remove.GetAbilityName() == "imba_invoker_exort") {
                 orb_modifier = "modifier_imba_invoker_exort";
             }
         }
@@ -72,7 +72,7 @@ export class imba_invoker {
                 caster.RemoveModifierByName(oldest.GetName());
             }
         }
-        let new_orb = ability.GetName();
+        let new_orb = ability.GetAbilityName();
         if (new_orb == "imba_invoker_quas") {
             let bonus_strength = ability.GetSpecialValueFor("bonus_strength");
             let health_regen_per_instance = ability.GetSpecialValueFor("health_regen_per_instance");
@@ -641,7 +641,7 @@ export class modifier_imba_invoker_invoke_buff extends BaseModifier_Plus {
             this.magic_resist = this.ability.GetLevelSpecialValueFor("magic_resistance_pct", invoke_lvl);
             this.cooldown_reduction = this.ability.GetLevelSpecialValueFor("cooldown_reduction_pct", invoke_lvl);
             this.spell_lifesteal = this.ability.GetLevelSpecialValueFor("spell_lifesteal", invoke_lvl);
-            // CustomGameEventManager.Send_ServerToPlayer(PlayerResource.GetPlayer(this.caster.GetPlayerID()), "invoker_helper", {
+            // CustomGameEventManager.Send_ServerToPlayer(PlayerResource.GetPlayer(this.caster.GetPlayerOwnerID()), "invoker_helper", {
             //     ability_index: this.ability.GetAbilityIndex()
             // });
         }
@@ -678,7 +678,7 @@ export class modifier_imba_invoker_invoke_buff extends BaseModifier_Plus {
         if (IsServer()) {
             let caster = this.GetParentPlus();
             if (kv.unit == caster) {
-                if (kv.ability.GetName() == "invoker_invoke") {
+                if (kv.ability.GetAbilityName() == "invoker_invoke") {
                     // imba_invoker_invoke.Invoke(caster);
                 }
             }
@@ -712,7 +712,7 @@ export class imba_invoker_sun_strike extends BaseAbility_Plus {
         } else {
             bCataclysm = false;
         }
-        CreateModifierThinker(this.GetCasterPlus(), this, "modifier_imba_invoker_sun_strike_thinker", {
+        BaseModifier_Plus.CreateBuffThinker(this.GetCasterPlus(), this, "modifier_imba_invoker_sun_strike_thinker", {
             duration: this.GetSpecialValueFor("delay"),
             area_of_effect: this.GetSpecialValueFor("area_of_effect"),
             target_point_x: this.GetCursorPosition().x,
@@ -739,14 +739,14 @@ export class imba_invoker_sun_strike extends BaseAbility_Plus {
         for (const hero of (all_heroes)) {
             if (hero.IsRealUnit()) {
                 if (hero.GetTeam() == caster_team) {
-                    if (hero.GetPlayerID() == caster.GetPlayerID()) {
-                        CreateModifierThinker(caster, ability, "modifier_imba_invoker_sun_strike", {
+                    if (hero.GetPlayerOwnerID() == caster.GetPlayerOwnerID()) {
+                        BaseModifier_Plus.CreateBuffThinker(caster, ability, "modifier_imba_invoker_sun_strike", {
                             duration: delay,
                             area_of_effect: area_of_effect,
                             target: hero.entindex()
                         }, target_point, caster.GetTeamNumber(), false);
                     } else {
-                        CreateModifierThinker(caster, ability, "modifier_imba_invoker_sun_strike_beam_only", {
+                        BaseModifier_Plus.CreateBuffThinker(caster, ability, "modifier_imba_invoker_sun_strike_beam_only", {
                             duration: delay,
                             area_of_effect: area_of_effect,
                             target: hero.entindex(),
@@ -755,7 +755,7 @@ export class imba_invoker_sun_strike extends BaseAbility_Plus {
                         }, target_point, caster.GetTeamNumber(), false);
                     }
                 } else {
-                    CreateModifierThinker(caster, ability, "modifier_imba_invoker_sun_strike_beam_only", {
+                    BaseModifier_Plus.CreateBuffThinker(caster, ability, "modifier_imba_invoker_sun_strike_beam_only", {
                         duration: delay,
                         area_of_effect: area_of_effect,
                         target: hero.entindex(),
@@ -786,7 +786,7 @@ export class imba_invoker_sun_strike extends BaseAbility_Plus {
         EmitSoundOnLocationWithCaster(target_point, "Hero_Invoker.SunStrike.Charge", caster);
         for (const hero of (all_heroes)) {
             if (hero.IsRealUnit()) {
-                if (hero.GetPlayerID() && hero.GetTeam() != caster.GetTeam() && hero.IsAlive()) {
+                if (hero.GetPlayerOwnerID() && hero.GetTeam() != caster.GetTeam() && hero.IsAlive()) {
                     let target_point1 = hero.GetAbsOrigin() + RandomVector(math.random(minimum_range, maximum_range)) as Vector;
                     let target_point2 = hero.GetAbsOrigin() - RandomVector(math.random(minimum_range, maximum_range)) as Vector;
                     ability.CreateVisibilityNode(target_point1, vision_distance, vision_duration);
@@ -794,26 +794,26 @@ export class imba_invoker_sun_strike extends BaseAbility_Plus {
                     EmitSoundOnLocationWithCaster(target_point1, "Hero_Invoker.Cataclysm.Ignite", caster);
                     EmitSoundOnLocationWithCaster(target_point2, "Hero_Invoker.Cataclysm.Ignite", caster);
                     for (const [_, hero2] of GameFunc.iPair(all_heroes)) {
-                        if (hero2.GetPlayerID() == caster.GetPlayerID()) {
-                            CreateModifierThinker(caster, ability, "modifier_imba_invoker_sun_strike_cataclysm", {
+                        if (hero2.GetPlayerOwnerID() == caster.GetPlayerOwnerID()) {
+                            BaseModifier_Plus.CreateBuffThinker(caster, ability, "modifier_imba_invoker_sun_strike_cataclysm", {
                                 duration: delay,
                                 area_of_effect: area_of_effect,
                                 target: hero2.entindex()
                             }, target_point1, caster.GetTeamNumber(), false);
-                            CreateModifierThinker(caster, ability, "modifier_imba_invoker_sun_strike_cataclysm", {
+                            BaseModifier_Plus.CreateBuffThinker(caster, ability, "modifier_imba_invoker_sun_strike_cataclysm", {
                                 duration: delay,
                                 area_of_effect: area_of_effect,
                                 target: hero2.entindex()
                             }, target_point2, caster.GetTeamNumber(), false);
                         } else {
-                            CreateModifierThinker(caster, ability, "modifier_imba_invoker_sun_strike_beam_only", {
+                            BaseModifier_Plus.CreateBuffThinker(caster, ability, "modifier_imba_invoker_sun_strike_beam_only", {
                                 duration: delay,
                                 area_of_effect: area_of_effect,
                                 target: hero2.entindex(),
                                 show_beam: "true",
                                 show_crater: "true"
                             }, target_point1, caster.GetTeamNumber(), false);
-                            CreateModifierThinker(caster, ability, "modifier_imba_invoker_sun_strike_beam_only", {
+                            BaseModifier_Plus.CreateBuffThinker(caster, ability, "modifier_imba_invoker_sun_strike_beam_only", {
                                 duration: delay,
                                 area_of_effect: area_of_effect,
                                 target: hero2.entindex(),
@@ -974,7 +974,7 @@ export class modifier_imba_invoker_sun_strike extends BaseModifier_Plus {
             this.mini_beam_radius = this.ability.GetSpecialValueFor("incinerate_beam_radius");
             this.area_of_effect = kv.area_of_effect;
             this.degrees = 180 / 6;
-            let sun_strike_beam = ParticleManager.CreateParticleForPlayer(this.ability.ability_team_particle_effect, ParticleAttachment_t.PATTACH_POINT, this.target, PlayerResource.GetPlayer(this.target.GetPlayerID()));
+            let sun_strike_beam = ParticleManager.CreateParticleForPlayer(this.ability.ability_team_particle_effect, ParticleAttachment_t.PATTACH_POINT, this.target, PlayerResource.GetPlayer(this.target.GetPlayerOwnerID()));
             ParticleManager.SetParticleControl(sun_strike_beam, 0, this.target_point);
             ParticleManager.SetParticleControl(sun_strike_beam, 1, Vector(this.area_of_effect, 0, 0));
             this.fierd_sunstrikes = 0;
@@ -984,10 +984,10 @@ export class modifier_imba_invoker_sun_strike extends BaseModifier_Plus {
     OnIntervalThink(): void {
         if (IsServer()) {
             let small_target_point = this.target_point + (this.direction * this.mini_beam_radius);
-            let sun_strike_beam = ParticleManager.CreateParticleForPlayer(this.ability.ability_outer_beam_effect, ParticleAttachment_t.PATTACH_POINT, this.target, PlayerResource.GetPlayer(this.target.GetPlayerID()));
+            let sun_strike_beam = ParticleManager.CreateParticleForPlayer(this.ability.ability_outer_beam_effect, ParticleAttachment_t.PATTACH_POINT, this.target, PlayerResource.GetPlayer(this.target.GetPlayerOwnerID()));
             ParticleManager.SetParticleControl(sun_strike_beam, 0, small_target_point);
             let small_target_point2 = this.target_point - (this.direction * this.mini_beam_radius) as Vector;
-            let sun_strike_beam2 = ParticleManager.CreateParticleForPlayer(this.ability.ability_outer_beam_effect, ParticleAttachment_t.PATTACH_POINT, this.target, PlayerResource.GetPlayer(this.target.GetPlayerID()));
+            let sun_strike_beam2 = ParticleManager.CreateParticleForPlayer(this.ability.ability_outer_beam_effect, ParticleAttachment_t.PATTACH_POINT, this.target, PlayerResource.GetPlayer(this.target.GetPlayerOwnerID()));
             ParticleManager.SetParticleControl(sun_strike_beam2, 0, small_target_point2);
             this.fierd_sunstrikes = this.fierd_sunstrikes + 2;
             this.direction = RotatePosition(Vector(0, 0, 0), QAngle(0, this.degrees, 0), this.direction);
@@ -1017,7 +1017,7 @@ export class modifier_imba_invoker_sun_strike extends BaseModifier_Plus {
             }
             EmitSoundOnLocationWithCaster(this.target_point, "Hero_Invoker.SunStrike.Ignite", this.caster);
             this.caster.StopSound("Hero_Invoker.SunStrike.Charge");
-            let sun_strike_crater = ParticleManager.CreateParticleForPlayer(this.ability.ability_particle_effect, ParticleAttachment_t.PATTACH_POINT, this.target, PlayerResource.GetPlayer(this.target.GetPlayerID()));
+            let sun_strike_crater = ParticleManager.CreateParticleForPlayer(this.ability.ability_particle_effect, ParticleAttachment_t.PATTACH_POINT, this.target, PlayerResource.GetPlayer(this.target.GetPlayerOwnerID()));
             ParticleManager.SetParticleControl(sun_strike_crater, 0, this.target_point);
             ParticleManager.SetParticleControl(sun_strike_crater, 1, Vector(this.area_of_effect, 0, 0));
         }
@@ -1043,14 +1043,14 @@ export class modifier_imba_invoker_sun_strike_cataclysm extends BaseModifier_Plu
             this.damage = this.ability.GetLevelSpecialValueFor("damage", exort_level);
             this.incinerate_duration = this.ability.GetSpecialValueFor("incinerate_duration");
             this.area_of_effect = kv.area_of_effect;
-            let sun_strike_beam = ParticleManager.CreateParticleForPlayer(this.ability.ability_team_particle_effect, ParticleAttachment_t.PATTACH_POINT, this.target, PlayerResource.GetPlayer(this.target.GetPlayerID()));
+            let sun_strike_beam = ParticleManager.CreateParticleForPlayer(this.ability.ability_team_particle_effect, ParticleAttachment_t.PATTACH_POINT, this.target, PlayerResource.GetPlayer(this.target.GetPlayerOwnerID()));
             ParticleManager.SetParticleControl(sun_strike_beam, 0, this.target_point);
             ParticleManager.SetParticleControl(sun_strike_beam, 1, Vector(this.area_of_effect, 0, 0));
         }
     }
     OnRemoved(): void {
         if (IsServer()) {
-            let sun_strike_crater = ParticleManager.CreateParticleForPlayer(this.ability.ability_team_particle_effect, ParticleAttachment_t.PATTACH_POINT, this.target, PlayerResource.GetPlayer(this.target.GetPlayerID()));
+            let sun_strike_crater = ParticleManager.CreateParticleForPlayer(this.ability.ability_team_particle_effect, ParticleAttachment_t.PATTACH_POINT, this.target, PlayerResource.GetPlayer(this.target.GetPlayerOwnerID()));
             ParticleManager.SetParticleControl(sun_strike_crater, 0, this.target_point);
             ParticleManager.SetParticleControl(sun_strike_crater, 1, Vector(this.area_of_effect, 0, 0));
             let nearby_enemy_units = FindUnitsInRadius(this.caster.GetTeam(), this.target_point, undefined, this.area_of_effect, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS, FindOrder.FIND_ANY_ORDER, false);
@@ -1126,7 +1126,7 @@ export class modifier_imba_invoker_sun_strike_beam_only extends BaseModifier_Plu
             this.target = EntIndexToHScript(kv.target) as IBaseNpc_Plus;
             this.area_of_effect = kv.area_of_effect;
             if (this.show_beam != undefined) {
-                let sun_strike_beam = ParticleManager.CreateParticleForPlayer(this.ability.ability_team_particle_effect, ParticleAttachment_t.PATTACH_POINT, this.target, PlayerResource.GetPlayer(this.target.GetPlayerID()));
+                let sun_strike_beam = ParticleManager.CreateParticleForPlayer(this.ability.ability_team_particle_effect, ParticleAttachment_t.PATTACH_POINT, this.target, PlayerResource.GetPlayer(this.target.GetPlayerOwnerID()));
                 ParticleManager.SetParticleControl(sun_strike_beam, 0, this.target_point);
                 ParticleManager.SetParticleControl(sun_strike_beam, 1, Vector(this.area_of_effect, 0, 0));
             }
@@ -1135,7 +1135,7 @@ export class modifier_imba_invoker_sun_strike_beam_only extends BaseModifier_Plu
     OnRemoved(): void {
         if (IsServer()) {
             if (this.show_crater != undefined) {
-                let sun_strike_crater = ParticleManager.CreateParticleForPlayer(this.ability.ability_particle_effect, ParticleAttachment_t.PATTACH_POINT, this.target, PlayerResource.GetPlayer(this.target.GetPlayerID()));
+                let sun_strike_crater = ParticleManager.CreateParticleForPlayer(this.ability.ability_particle_effect, ParticleAttachment_t.PATTACH_POINT, this.target, PlayerResource.GetPlayer(this.target.GetPlayerOwnerID()));
                 ParticleManager.SetParticleControl(sun_strike_crater, 0, this.target_point);
                 ParticleManager.SetParticleControl(sun_strike_crater, 1, Vector(this.area_of_effect, 0, 0));
             }
@@ -1884,7 +1884,7 @@ export class imba_invoker_forge_spirit extends BaseAbility_Plus {
             }
             this.forged_spirits = updated_spirit_array;
             for (let i = 0; i < spirit_count; i++) {
-                let forged_spirit = BaseNpc_Plus.CreateUnitByName(spirit_name, caster.GetAbsOrigin() + RandomVector(100) as Vector, caster.GetTeamNumber(), true, caster, caster);
+                let forged_spirit = BaseNpc_Plus.CreateUnitByName(spirit_name, caster.GetAbsOrigin() + RandomVector(100) as Vector, caster, true);
                 if (caster.TempData().bPersona) {
                     forged_spirit.SetOriginalModel("models/heroes/invoker_kid/invoker_kid_trainer_dragon.vmdl");
                     forged_spirit.SetModel("models/heroes/invoker_kid/invoker_kid_trainer_dragon.vmdl");
@@ -1918,7 +1918,7 @@ export class imba_invoker_forge_spirit extends BaseAbility_Plus {
                 forged_spirit.SetBaseDamageMax(spirit_damage);
                 forged_spirit.SetBaseMaxHealth(spirit_hp);
                 forged_spirit.SetPhysicalArmorBaseValue(spirit_armor);
-                forged_spirit.SetControllableByPlayer(caster.GetPlayerID(), true);
+                forged_spirit.SetControllableByPlayer(caster.GetPlayerOwnerID(), true);
                 this.forged_spirits.push(forged_spirit);
             }
         }
@@ -2115,7 +2115,7 @@ export class imba_invoker_tornado extends BaseAbility_Plus {
                 ability.StartCooldown(unaltered_cooldown * cooldown_reduction_pct);
                 daze_duration = caster.GetTalentValue("imba_special_bonus_unique_invoker_8", "daze_duration");
             }
-            let tornado_dummy_unit = CreateModifierThinker(caster, this, undefined, {}, caster_location, caster.GetTeamNumber(), false);
+            let tornado_dummy_unit = BaseModifier_Plus.CreateBuffThinker(caster, this, undefined, {}, caster_location, caster.GetTeamNumber(), false);
             tornado_dummy_unit.EmitSound("Hero_Invoker.Tornado");
             let tornado_projectile_table: CreateLinearProjectileOptions = {
                 EffectName: imba_invoker_tornado.ability_effect_path,
@@ -2417,7 +2417,7 @@ export class imba_invoker_emp extends BaseAbility_Plus {
         let current_charge = kv.current_charge;
         let wex_level = caster.findAbliityPlus<imba_invoker_wex>("imba_invoker_wex").GetLevel() - 1;
         let delay = ability.GetLevelSpecialValueFor("delay", wex_level);
-        CreateModifierThinker(caster, ability, "modifier_imba_invoker_emp", {
+        BaseModifier_Plus.CreateBuffThinker(caster, ability, "modifier_imba_invoker_emp", {
             duration: delay,
             current_charge: current_charge
         }, target_point, caster.GetTeamNumber(), false);
@@ -2622,7 +2622,7 @@ export class imba_invoker_ice_wall extends BaseAbility_Plus {
                 thinker_point = thinker_point + (caster_direction * ice_wall_placement_distance + (ice_wall_offset * ((ice_walls - 1) / 2))) as Vector;
                 ice_wall_area_of_effect = ice_wall_area_of_effect + (100 * ((ice_walls - 1) / 2));
             }
-            CreateModifierThinker(caster, this, "modifier_imba_invoker_ice_wall", {
+            BaseModifier_Plus.CreateBuffThinker(caster, this, "modifier_imba_invoker_ice_wall", {
                 duration: ice_wall_duration,
                 ice_wall_damage_interval: ice_wall_damage_interval,
                 ice_wall_slow_duration: ice_wall_slow_duration,
@@ -2871,7 +2871,7 @@ export class imba_invoker_chaos_meteor extends BaseAbility_Plus {
     CastMeteor(caster: IBaseNpc_Plus, ability: IBaseAbility_Plus, target_point: Vector, number_of_meteors: number) {
         if (IsServer()) {
             let chaos_meteor_land_time = ability.GetSpecialValueFor("land_time");
-            CreateModifierThinker(caster, ability, "modifier_imba_invoker_chaos_meteor", {
+            BaseModifier_Plus.CreateBuffThinker(caster, ability, "modifier_imba_invoker_chaos_meteor", {
                 duration: chaos_meteor_land_time
             }, target_point, caster.GetTeamNumber(), false);
         }
@@ -2940,7 +2940,7 @@ export class modifier_imba_invoker_chaos_meteor extends BaseModifier_Plus {
             this.chaos_meteor_velocity = this.location_difference_normalized * this.chaos_meteor_travel_speed;
             this.chaos_meteor_duration = this.chaos_meteor_travel_distance / this.chaos_meteor_travel_speed;
             this.caster.EmitSound("Hero_Invoker.ChaosMeteor.Cast");
-            this.meteor_dummy = CreateModifierThinker(this.caster, this.ability, undefined, {}, this.target_point, this.caster.GetTeamNumber(), false);
+            this.meteor_dummy = BaseModifier_Plus.CreateBuffThinker(this.caster, this.ability, undefined, {}, this.target_point, this.caster.GetTeamNumber(), false);
             this.meteor_dummy.EmitSound("Hero_Invoker.ChaosMeteor.Loop");
             let chaos_meteor_fly_original_point = (this.target_point - (this.chaos_meteor_velocity * this.chaos_meteor_land_time)) + Vector(0, 0, 1000) as Vector;
             this.chaos_meteor_fly_particle_effect = ResHelper.CreateParticleEx("particles/units/heroes/hero_invoker/invoker_chaos_meteor_fly.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, this.caster);
@@ -3052,8 +3052,8 @@ export class modifier_imba_invoker_chaos_meteor_aura extends BaseModifier_Plus {
             }
             let nearby_enemy_units = FindUnitsInRadius(this.GetTeam, this.GetParentPlus().GetAbsOrigin(), undefined, this.area_of_effect, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
             for (const [_, enemy] of GameFunc.iPair(nearby_enemy_units)) {
-                if (this.hit_table[enemy.GetName()] == undefined) {
-                    this.hit_table[enemy.GetName()] = enemy;
+                if (this.hit_table[enemy.GetUnitName()] == undefined) {
+                    this.hit_table[enemy.GetUnitName()] = enemy;
                 }
                 if (enemy != undefined) {
                     enemy.AddNewModifier(this.caster, this.ability, "modifier_imba_invoker_chaos_meteor_burn", {
@@ -3152,7 +3152,7 @@ export class imba_invoker_deafening_blast extends BaseAbility_Plus {
             this.hit_table = [];
             if (caster.HasTalent("imba_special_bonus_unique_invoker_7")) {
                 let num_deafening_blasts = caster.GetTalentValue("imba_special_bonus_unique_invoker_7", "number_of_blasts");
-                CreateModifierThinker(caster, this, "modifier_imba_invoker_deafening_blast", {
+                BaseModifier_Plus.CreateBuffThinker(caster, this, "modifier_imba_invoker_deafening_blast", {
                     num_deafening_blasts: num_deafening_blasts
                 }, target_point, caster.GetTeamNumber(), false);
             } else {

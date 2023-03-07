@@ -200,7 +200,7 @@ export class imba_malfurion_living_tower extends BaseAbility_Plus {
     OnSpellStart(): void {
         if (IsServer()) {
             let tower_name = ["", "radiant", "dire"]
-            this.living_tower = BaseNpc_Plus.CreateUnitByName("npc_imba_malfurion_living_tower_" + tower_name[this.GetCasterPlus().GetTeamNumber() - 1], this.GetCursorPosition(), this.GetCasterPlus().GetTeam(), true, this.GetCasterPlus(), this.GetCasterPlus());
+            this.living_tower = BaseNpc_Plus.CreateUnitByName("npc_imba_malfurion_living_tower_" + tower_name[this.GetCasterPlus().GetTeamNumber() - 1], this.GetCursorPosition(), this.GetCasterPlus(), true);
             if (!this.GetCasterPlus().HasScepter()) {
                 this.living_tower.AddNewModifier(this.living_tower, this, "modifier_kill", {
                     duration: this.GetSpecialValueFor("duration")
@@ -211,10 +211,10 @@ export class imba_malfurion_living_tower extends BaseAbility_Plus {
                 });
             }
             this.living_tower.AddNewModifier(this.living_tower, this, "modifier_imba_malfurion_living_tower", {});
-            if (this.GetCasterPlus().GetPlayerID) {
-                this.living_tower.SetControllableByPlayer(this.GetCasterPlus().GetPlayerID(), false);
-            } else if (this.GetCasterPlus().GetOwner && this.GetCasterPlus().GetOwnerPlus().GetPlayerID) {
-                this.living_tower.SetControllableByPlayer(this.GetCasterPlus().GetOwnerPlus().GetPlayerID(), false);
+            if (this.GetCasterPlus().GetPlayerOwnerID) {
+                this.living_tower.SetControllableByPlayer(this.GetCasterPlus().GetPlayerOwnerID(), false);
+            } else if (this.GetCasterPlus().GetOwner && this.GetCasterPlus().GetOwnerPlus().GetPlayerOwnerID) {
+                this.living_tower.SetControllableByPlayer(this.GetCasterPlus().GetOwnerPlus().GetPlayerOwnerID(), false);
             }
             if (!this.GetCasterPlus().HasScepter()) {
                 this.living_tower.SetMaxHealth(this.GetSpecialValueFor("health"));

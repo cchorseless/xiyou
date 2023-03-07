@@ -901,7 +901,7 @@ export class modifier_imba_frost_armor_auto_cast extends BaseModifier_Plus {
         if (!this.ability.IsCooldownReady()) {
             return undefined;
         }
-        this.caster.CastAbilityOnTarget(target, this.ability, this.caster.GetPlayerID());
+        this.caster.CastAbilityOnTarget(target, this.ability, this.caster.GetPlayerOwnerID());
     }
     IsHidden(): boolean {
         return true;
@@ -1235,7 +1235,7 @@ export class imba_lich_chain_frost extends BaseAbility_Plus {
                 }
                 let enemies = FindUnitsInRadius(caster.GetTeamNumber(), target.GetAbsOrigin(), undefined, bounce_range, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false);
                 for (let i = GameFunc.GetCount(enemies) - 1; i >= 0; i--) {
-                    if (enemies[i] != undefined && (target == enemies[i] || enemies[i].GetName().includes("undying_zombie"))) {
+                    if (enemies[i] != undefined && (target == enemies[i] || enemies[i].GetUnitName().includes("undying_zombie"))) {
                         enemies.splice(i, 1);
                     }
                 }
@@ -1472,7 +1472,7 @@ export class modifier_imba_lich_frost_shield extends BaseModifier_Plus {
         this.AddParticle(this.particle, false, false, -1, false, false);
         this.particle2 = ResHelper.CreateParticleEx("particles/units/heroes/hero_lich/lich_frost_armor.vpcf", ParticleAttachment_t.PATTACH_OVERHEAD_FOLLOW, this.parent);
         this.AddParticle(this.particle2, false, false, -1, false, false);
-        if (this.caster.GetName().includes("lich") && RollPercentage(60)) {
+        if (this.caster.GetUnitName().includes("lich") && RollPercentage(60)) {
             this.caster.EmitSound("lich_lich_ability_armor_0" + math.random(1, 5));
         }
         this.StartIntervalThink(this.interval);
@@ -1613,7 +1613,7 @@ export class imba_lich_sinister_gaze extends BaseAbility_Plus {
             this.caster.Interrupt();
             return;
         }
-        if (this.caster.GetName().includes("lich") && RollPercentage(40)) {
+        if (this.caster.GetUnitName().includes("lich") && RollPercentage(40)) {
             this.caster.EmitSound("lich_lich_ability_ritual_0" + math.random(2, 5));
         }
         this.duration = this.GetSpecialValueFor("duration");
@@ -1810,7 +1810,7 @@ export class modifier_imba_lich_sinister_gaze extends BaseModifier_Plus {
             this.current_mana = 0;
         }
         this.mana_per_interval = (this.current_mana * this.mana_drain * 0.01) / (this.duration / this.interval);
-        if (this.caster.GetName().includes("lich")) {
+        if (this.caster.GetUnitName().includes("lich")) {
             this.particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_lich/lich_gaze.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.parent);
             ParticleManager.SetParticleControlEnt(this.particle, 0, this.parent, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, undefined, this.parent.GetAbsOrigin(), true);
             ParticleManager.SetParticleControlEnt(this.particle, 2, this.caster, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_portrait", this.caster.GetAbsOrigin(), true);

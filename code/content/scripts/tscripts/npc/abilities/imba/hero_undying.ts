@@ -66,7 +66,7 @@ export class imba_undying_decay extends BaseAbility_Plus {
         let flesh_golem_modifier = "modifier_imba_undying_flesh_golem";
         let radius = ability.GetSpecialValueFor("radius");
         caster.EmitSound(cast_sound);
-        if (caster.GetName().includes("undying") && RollPercentage(50)) {
+        if (caster.GetUnitName().includes("undying") && RollPercentage(50)) {
             if (caster.HasModifier(flesh_golem_modifier)) {
                 EmitSoundOnClient(GFuncRandom.RandomValue(responses_big), caster.GetPlayerOwner());
             } else {
@@ -81,7 +81,7 @@ export class imba_undying_decay extends BaseAbility_Plus {
         let clone_owner_units: IBaseNpc_Plus[] = []
         let enemies = FindUnitsInRadius(caster.GetTeamNumber(), target_point, undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
         for (const [_, enemy] of GameFunc.iPair(enemies)) {
-            if (enemy.IsClone() || enemy.IsTempestDouble() || enemy.GetName().includes("meepo") || enemy.GetName().includes("arc_warden")) {
+            if (enemy.IsClone() || enemy.IsTempestDouble() || enemy.GetUnitName().includes("meepo") || enemy.GetUnitName().includes("arc_warden")) {
                 clone_owner_units.push(enemy);
             } else {
                 if (enemy.IsRealUnit() && !enemy.IsIllusion()) {
@@ -105,7 +105,7 @@ export class imba_undying_decay extends BaseAbility_Plus {
                 this.DecayBuffCaster();
                 this.DecayDebuffEnemy(selected_unit);
                 for (let [i, v] of GameFunc.iPair(clone_owner_units)) {
-                    if (v && selected_unit && v.GetName() == selected_unit.GetName()) {
+                    if (v && selected_unit && v.GetUnitName() == selected_unit.GetUnitName()) {
                         this.DealDamageEnemy(v);
                         clone_owner_units.splice(i, 1);
                     }
@@ -408,7 +408,7 @@ export class imba_undying_soul_rip extends BaseAbility_Plus {
         let soul_injection_duration = ability.GetSpecialValueFor("soul_injection_duration");
         let tombstone_heal = ability.GetSpecialValueFor("tombstone_heal");
         caster.EmitSound(cast_sound);
-        if (caster.GetName().includes("undying") && RollPercentage(50)) {
+        if (caster.GetUnitName().includes("undying") && RollPercentage(50)) {
             if (this.GetCasterPlus().HasModifier(flesh_golem_modifier)) {
                 EmitSoundOnClient(GFuncRandom.RandomValue(responses_big), caster.GetPlayerOwner());
             } else {
@@ -710,7 +710,7 @@ export class imba_undying_tombstone extends BaseAbility_Plus {
         let duration = ability.GetSpecialValueFor("duration");
         let trees_destroy_radius = ability.GetSpecialValueFor("trees_destroy_radius");
         EmitSoundOnLocationWithCaster(target_point, cast_sound, caster);
-        let tombstone = BaseNpc_Plus.CreateUnitByName("npc_dota_undying_imba_tombstone", target_point, caster.GetTeamNumber(), true, caster, caster);
+        let tombstone = BaseNpc_Plus.CreateUnitByName("npc_dota_undying_imba_tombstone", target_point, caster, true);
         tombstone.SetOwner(caster);
         tombstone.SetBaseMaxHealth(tombstone_health);
         tombstone.SetMaxHealth(tombstone_health);
@@ -786,7 +786,7 @@ export class modifier_imba_undying_tombstone_aura extends BaseModifier_Plus {
         let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.caster.GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE, FindOrder.FIND_ANY_ORDER, false);
         for (const [_, enemy] of GameFunc.iPair(enemies)) {
             if (!enemy.IsCourier() && !IsUndyingZombie(enemy)) {
-                let zombie = BaseNpc_Plus.CreateUnitByName(GenerateZombieType(), enemy.GetAbsOrigin(), this.caster.GetTeamNumber(), true, this.owner, this.owner);
+                let zombie = BaseNpc_Plus.CreateUnitByName(GenerateZombieType(), enemy.GetAbsOrigin(), this.caster, true);
                 zombie.EmitSound("Undying_Zombie.Spawn");
                 zombie.SetBaseDamageMin(zombie.GetBaseDamageMin() + this.owner.GetTalentValue("special_bonus_imba_undying_tombstone_zombie_damage"));
                 zombie.SetBaseDamageMax(zombie.GetBaseDamageMax() + this.owner.GetTalentValue("special_bonus_imba_undying_tombstone_zombie_damage"));
@@ -828,7 +828,7 @@ export class modifier_imba_undying_tombstone_aura extends BaseModifier_Plus {
             for (const zombie of (zombies)) {
                 if (zombie.GetOwnerPlus() == this.owner) {
                     if (expired) {
-                        zombie.SetControllableByPlayer(this.owner.GetPlayerID(), true);
+                        zombie.SetControllableByPlayer(this.owner.GetPlayerOwnerID(), true);
                         zombie.AddNewModifier(this.owner, this.GetAbilityPlus(), this.modifier_no_home, {
                             duration: this.no_home_duration
                         });
@@ -1369,13 +1369,12 @@ export class modifier_imba_undying_flesh_golem_illusion_check extends BaseModifi
             this.GetParentPlus().findAbliityPlus<imba_undying_flesh_golem_throw>("imba_undying_flesh_golem_throw").SetActivated(false);
         }
         if (this.GetAbilityPlus() && this.GetParentPlus().IsIllusion()) {
-            let undyings = Entities.FindAllByName(this.GetParentPlus().GetName());
+            let undyings = Entities.FindAllByName(this.GetParentPlus().GetUnitName()) as IBaseNpc_Plus[];
             for (const [_, undying] of GameFunc.iPair(undyings)) {
-                if (/**undying.IsRealUnit() && */undying.GetTeamNumber() == this.GetParentPlus().GetTeamNumber()) {
+                if (undying.IsRealUnit() && undying.GetTeamNumber() == this.GetParentPlus().GetTeamNumber()) {
                     this.GetParentPlus().AddNewModifier(this.GetParentPlus().GetPlayerOwner().GetAssignedHero(), this.GetAbilityPlus(), "modifier_imba_undying_flesh_golem", {
                         duration: this.GetSpecialValueFor("duration")
                     });
-                    return;
                 }
             }
         }

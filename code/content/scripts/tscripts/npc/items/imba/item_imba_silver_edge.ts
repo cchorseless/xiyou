@@ -115,7 +115,7 @@ export class modifier_item_imba_silver_edge_invis extends BaseModifier_Plus {
                     target_pos.y = target_pos.y - offset * distance_vector.y;
                     this.GetParentPlus().SetAbsOrigin(target_pos);
                     let direction = (GFuncVector.CalculateDirection(params.target, this.GetParentPlus()));
-                    CreateModifierThinker(this.GetParentPlus(), ability, "modifier_item_imba_silver_edge_invis_attack_cleave_particle", {
+                    BaseModifier_Plus.CreateBuffThinker(this.GetParentPlus(), ability, "modifier_item_imba_silver_edge_invis_attack_cleave_particle", {
                         duration: 1,
                         direction_x: direction.x,
                         direction_y: direction.y,

@@ -175,7 +175,7 @@ export class imba_abaddon_death_coil extends BaseAbility_Plus {
                 over_channel_particle = ResHelper.CreateParticleEx("particles/dev/library/base_dust_hit_smoke.vpcf", ParticleAttachment_t.PATTACH_POINT, target);
                 ParticleManager.ReleaseParticleIndex(over_channel_particle);
             }
-            if (!special_cast && caster.GetName().includes("abaddon")) {
+            if (!special_cast && caster.GetUnitName().includes("abaddon")) {
                 this.AddTimer(0.4, () => {
                     if (this.killed) {
                         let responses = [
@@ -947,7 +947,7 @@ export class modifier_over_channel_handler extends BaseModifier_Plus {
         if (!IsServer()) {
             return;
         }
-        if (keys.unit == this.GetParentPlus() && !keys.ability.IsItem() && keys.ability.GetName() != "imba_abaddon_over_channel" && keys.ability.GetName() != "ability_capture") {
+        if (keys.unit == this.GetParentPlus() && !keys.ability.IsItem() && keys.ability.GetAbilityName() != "imba_abaddon_over_channel" && keys.ability.GetAbilityName() != "ability_capture") {
             this.GetParentPlus().AddNewModifier(this.GetParentPlus(), this.GetAbilityPlus(), "modifier_over_channel_reduction", {
                 duration: this.GetSpecialValueFor("reduction_duration")
             });
@@ -1081,7 +1081,7 @@ export class modifier_imba_borrowed_time_handler extends BaseModifier_Plus {
             let hp_threshold = this.hp_threshold;
             let current_hp = target.GetHealth();
             if (current_hp <= hp_threshold) {
-                target.CastAbilityImmediately(ability, target.GetPlayerID());
+                target.CastAbilityImmediately(ability, target.GetPlayerOwnerID());
             }
         }
     }

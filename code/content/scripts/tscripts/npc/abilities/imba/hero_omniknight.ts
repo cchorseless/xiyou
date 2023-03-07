@@ -486,7 +486,7 @@ export class imba_omniknight_heavenly_grace extends BaseAbility_Plus {
     }
     OnSpellStart(): void {
         this.GetCasterPlus().EmitSound("Hero_Omniknight.Repel");
-        if (this.GetCasterPlus().GetName().includes("omniknight")) {
+        if (this.GetCasterPlus().GetUnitName().includes("omniknight")) {
             if (this.GetCursorTarget() != this.GetCasterPlus()) {
                 this.GetCasterPlus().EmitSound("omniknight_omni_ability_repel_0" + math.random(1, 6));
             } else {

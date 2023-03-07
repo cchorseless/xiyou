@@ -124,9 +124,9 @@ export class modifier_item_imba_static_charge extends BaseModifier_Plus {
     public shield_particle: any;
     GetTexture(): string {
         if (this.GetItemPlus()) {
-            if (this.GetItemPlus().GetName() == "item_imba_mjollnir") {
+            if (this.GetItemPlus().GetAbilityName() == "item_imba_mjollnir") {
                 return "item_mjollnir";
-            } else if (this.GetItemPlus().GetName() == "item_imba_jarnbjorn") {
+            } else if (this.GetItemPlus().GetAbilityName() == "item_imba_jarnbjorn") {
                 return "modifiers/imba_jarnbjorn";
             }
         }
@@ -240,9 +240,9 @@ export class modifier_item_imba_static_charge_slow extends BaseModifier_Plus {
     public static_slow: any;
     GetTexture(): string {
         if (this.GetItemPlus()) {
-            if (this.GetItemPlus().GetName() == "item_imba_mjollnir") {
+            if (this.GetItemPlus().GetAbilityName() == "item_imba_mjollnir") {
                 return "item_mjollnir";
-            } else if (this.GetItemPlus().GetName() == "item_imba_jarnbjorn") {
+            } else if (this.GetItemPlus().GetAbilityName() == "item_imba_jarnbjorn") {
                 return "modifiers/imba_jarnbjorn";
             }
         }
@@ -284,7 +284,7 @@ export class item_imba_maelstrom extends BaseItem_Plus {
         return this.GetSpecialValueFor("chop_tree_radius");
     }
     GetBehavior(): DOTA_ABILITY_BEHAVIOR | Uint64 {
-        if (this.GetName() == "item_imba_jarnbjorn") {
+        if (this.GetAbilityName() == "item_imba_jarnbjorn") {
             return super.GetBehaviorInt() + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_AOE;
         } else {
             return super.GetBehavior();
@@ -294,7 +294,7 @@ export class item_imba_maelstrom extends BaseItem_Plus {
         if (IsClient()) {
             return super.GetCastRange(location, target);
         } else {
-            if ((this.GetName() == "item_imba_jarnbjorn" && this.GetCursorTarget() && ((this.GetCursorTarget() as any as CDOTA_MapTree).CutDown || !this.GetCursorTarget().IsCreep)) || this.bTargetingTree) {
+            if ((this.GetAbilityName() == "item_imba_jarnbjorn" && this.GetCursorTarget() && ((this.GetCursorTarget() as any as CDOTA_MapTree).CutDown || !this.GetCursorTarget().IsCreep)) || this.bTargetingTree) {
                 this.bTargetingTree = true;
                 return this.GetSpecialValueFor("chop_tree_cast_range");
             } else {
@@ -303,7 +303,7 @@ export class item_imba_maelstrom extends BaseItem_Plus {
         }
     }
     GetCooldown(level: number): number {
-        if (IsServer() && this.GetName() == "item_imba_jarnbjorn" && this.GetCursorTarget() && ((this.GetCursorTarget() as any as CDOTA_MapTree).CutDown || !this.GetCursorTarget().IsCreep)) {
+        if (IsServer() && this.GetAbilityName() == "item_imba_jarnbjorn" && this.GetCursorTarget() && ((this.GetCursorTarget() as any as CDOTA_MapTree).CutDown || !this.GetCursorTarget().IsCreep)) {
             return this.GetSpecialValueFor("chop_tree_cooldown");
         } else {
             return super.GetCooldown(level);
@@ -312,8 +312,8 @@ export class item_imba_maelstrom extends BaseItem_Plus {
     OnSpellStart(): void {
         this.bTargetingTree = false;
         let target = this.GetCursorTarget();
-        if (this.GetName() == "item_imba_mjollnir" || this.GetName() == "item_imba_jarnbjorn") {
-            if (this.GetName() == "item_imba_jarnbjorn" && target.GetUnitName == undefined) {
+        if (this.GetAbilityName() == "item_imba_mjollnir" || this.GetAbilityName() == "item_imba_jarnbjorn") {
+            if (this.GetAbilityName() == "item_imba_jarnbjorn" && target.GetUnitName == undefined) {
                 if ((target as any as CDOTA_MapTree).CutDown) {
                     (target as any as CDOTA_MapTree).CutDown(-1);
                 } else {
@@ -401,13 +401,13 @@ export class modifier_item_imba_maelstrom extends BaseModifier_Plus {
         let mjollnirs = 0;
         let jarnbjorns = 0;
         for (const [_, mod] of GameFunc.iPair(this.GetParentPlus().FindAllModifiersByName(this.GetName()))) {
-            if (mod.GetItemPlus().GetName() == "item_imba_maelstrom") {
+            if (mod.GetItemPlus().GetAbilityName() == "item_imba_maelstrom") {
                 mod.GetItemPlus().SetSecondaryCharges(maelstroms + 1);
                 maelstroms = maelstroms + 1;
-            } else if (mod.GetItemPlus().GetName() == "item_imba_mjollnir") {
+            } else if (mod.GetItemPlus().GetAbilityName() == "item_imba_mjollnir") {
                 mod.GetItemPlus().SetSecondaryCharges(mjollnirs + 1);
                 mjollnirs = mjollnirs + 1;
-            } else if (mod.GetItemPlus().GetName() == "item_imba_jarnbjorn") {
+            } else if (mod.GetItemPlus().GetAbilityName() == "item_imba_jarnbjorn") {
                 mod.GetItemPlus().SetSecondaryCharges(jarnbjorns + 1);
                 jarnbjorns = jarnbjorns + 1;
             }
@@ -421,13 +421,13 @@ export class modifier_item_imba_maelstrom extends BaseModifier_Plus {
         let mjollnirs = 0;
         let jarnbjorns = 0;
         for (const [_, mod] of GameFunc.iPair(this.GetParentPlus().FindAllModifiersByName(this.GetName()))) {
-            if (mod.GetItemPlus().GetName() == "item_imba_maelstrom") {
+            if (mod.GetItemPlus().GetAbilityName() == "item_imba_maelstrom") {
                 mod.GetItemPlus().SetSecondaryCharges(maelstroms + 1);
                 maelstroms = maelstroms + 1;
-            } else if (mod.GetItemPlus().GetName() == "item_imba_mjollnir") {
+            } else if (mod.GetItemPlus().GetAbilityName() == "item_imba_mjollnir") {
                 mod.GetItemPlus().SetSecondaryCharges(mjollnirs + 1);
                 mjollnirs = mjollnirs + 1;
-            } else if (mod.GetItemPlus().GetName() == "item_imba_jarnbjorn") {
+            } else if (mod.GetItemPlus().GetAbilityName() == "item_imba_jarnbjorn") {
                 mod.GetItemPlus().SetSecondaryCharges(jarnbjorns + 1);
                 jarnbjorns = jarnbjorns + 1;
             }
@@ -475,7 +475,7 @@ export class modifier_item_imba_maelstrom extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_RANGE_BONUS)
     CC_GetModifierAttackRangeBonus(): number {
-        if (!this.GetParentPlus().IsRangedAttacker() && ((this.GetItemPlus().GetName() == "item_imba_maelstrom" && this.GetItemPlus().GetSecondaryCharges() == 1 && !this.GetParentPlus().HasItemInInventory("item_imba_mjollnir") && !this.GetParentPlus().HasItemInInventory("item_imba_jarnbjorn") && !this.GetParentPlus().HasItemInInventory("item_imba_monkey_king_bar")) || (this.GetItemPlus().GetName() == "item_imba_mjollnir" && this.GetItemPlus().GetSecondaryCharges() == 1 && !this.GetParentPlus().HasItemInInventory("item_imba_jarnbjorn") && !this.GetParentPlus().HasItemInInventory("item_imba_monkey_king_bar")) || (this.GetItemPlus().GetName() == "item_imba_jarnbjorn" && this.GetItemPlus().GetSecondaryCharges() == 1 && !this.GetParentPlus().HasItemInInventory("item_imba_monkey_king_bar")))) {
+        if (!this.GetParentPlus().IsRangedAttacker() && ((this.GetItemPlus().GetAbilityName() == "item_imba_maelstrom" && this.GetItemPlus().GetSecondaryCharges() == 1 && !this.GetParentPlus().HasItemInInventory("item_imba_mjollnir") && !this.GetParentPlus().HasItemInInventory("item_imba_jarnbjorn") && !this.GetParentPlus().HasItemInInventory("item_imba_monkey_king_bar")) || (this.GetItemPlus().GetAbilityName() == "item_imba_mjollnir" && this.GetItemPlus().GetSecondaryCharges() == 1 && !this.GetParentPlus().HasItemInInventory("item_imba_jarnbjorn") && !this.GetParentPlus().HasItemInInventory("item_imba_monkey_king_bar")) || (this.GetItemPlus().GetAbilityName() == "item_imba_jarnbjorn" && this.GetItemPlus().GetSecondaryCharges() == 1 && !this.GetParentPlus().HasItemInInventory("item_imba_monkey_king_bar")))) {
             return this.bonus_range;
         }
     }
@@ -489,13 +489,13 @@ export class modifier_item_imba_maelstrom extends BaseModifier_Plus {
             this.bChainCooldown = true;
             this.StartIntervalThink(this.chain_cooldown);
         }
-        if (this.GetItemPlus().GetName() == "item_imba_jarnbjorn" && keys.attacker == this.GetParentPlus() && !this.GetParentPlus().IsRangedAttacker() && this.GetParentPlus().IsAlive() && !this.GetParentPlus().IsIllusion() && !keys.target.IsBuilding() && !keys.target.IsOther() && this.GetParentPlus().GetTeamNumber() != keys.target.GetTeamNumber()) {
+        if (this.GetItemPlus().GetAbilityName() == "item_imba_jarnbjorn" && keys.attacker == this.GetParentPlus() && !this.GetParentPlus().IsRangedAttacker() && this.GetParentPlus().IsAlive() && !this.GetParentPlus().IsIllusion() && !keys.target.IsBuilding() && !keys.target.IsOther() && this.GetParentPlus().GetTeamNumber() != keys.target.GetTeamNumber()) {
             DoCleaveAttack(this.GetParentPlus(), keys.target, keys.inflictor, keys.damage * this.cleave_damage_percent * 0.01, this.cleave_starting_width, this.cleave_ending_width, this.cleave_distance, "particles/econ/items/sven/sven_ti7_sword/sven_ti7_sword_spell_great_cleave.vpcf");
         }
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ORDER)
     CC_OnOrder(keys: ModifierUnitEvent): void {
-        if (keys.unit == this.GetParentPlus() && this.GetItemPlus().GetName() == "item_imba_jarnbjorn") {
+        if (keys.unit == this.GetParentPlus() && this.GetItemPlus().GetAbilityName() == "item_imba_jarnbjorn") {
             this.GetItemPlus<item_imba_maelstrom>().bTargetingTree = false;
         }
     }

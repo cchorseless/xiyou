@@ -329,7 +329,7 @@ export class imba_vengefulspirit_magic_missile extends BaseAbility_Plus {
                 split_reduce_pct = reduce_pct + (reduce_pct * (split_reduce_pct / 100));
             } else {
                 caster.EmitSound("Hero_VengefulSpirit.MagicMissile");
-                if ((math.random(1, 100) <= 5) && (caster.GetName().includes("vengefulspirit"))) {
+                if ((math.random(1, 100) <= 5) && (caster.GetUnitName().includes("vengefulspirit"))) {
                     caster.EmitSound("vengefulspirit_vng_cast_05");
                 }
             }
@@ -484,9 +484,9 @@ export class imba_vengefulspirit_wave_of_terror extends BaseAbility_Plus {
             let primary_distance = this.GetCastRange(caster_loc, caster) + GPropertyCalculate.GetCastRangeBonus(caster);
             let vision_aoe = this.GetSpecialValueFor("vision_aoe");
             let vision_duration = this.GetSpecialValueFor("vision_duration");
-            let dummy = CreateModifierThinker(this.GetCasterPlus(), this, undefined, {}, this.GetCasterPlus().GetAbsOrigin(), this.GetCasterPlus().GetTeamNumber(), false);
+            let dummy = BaseModifier_Plus.CreateBuffThinker(this.GetCasterPlus(), this, undefined, {}, this.GetCasterPlus().GetAbsOrigin(), this.GetCasterPlus().GetTeamNumber(), false);
             dummy.EmitSound("Hero_VengefulSpirit.WaveOfTerror");
-            if (caster.GetName().includes("vengefulspirit")) {
+            if (caster.GetUnitName().includes("vengefulspirit")) {
                 caster.EmitSound("vengefulspirit_vng_ability_0" + math.random(1, 9));
             }
             let direction = (target_loc - caster_loc as Vector).Normalized();
@@ -649,7 +649,7 @@ export class imba_vengefulspirit_command_aura extends BaseAbility_Plus {
                 illusion.SetHealth(illusion.GetMaxHealth());
                 illusion.AddNewModifier(this.GetCasterPlus(), this, "modifier_vengefulspirit_hybrid_special", {});
                 FindClearSpaceForUnit(illusion, this.GetCasterPlus().GetAbsOrigin() + Vector(RandomInt(0, 1), RandomInt(0, 1), 0) * 108 as Vector, true);
-                // PlayerResource.NewSelection(this.GetCasterPlus().GetPlayerID(), super_illusions);
+                // PlayerResource.NewSelection(this.GetCasterPlus().GetPlayerOwnerID(), super_illusions);
             }
         }
     }
@@ -920,9 +920,9 @@ export class modifier_imba_vengefulspirit_command_aura_723 extends BaseModifier_
     CC_OnDeath(keys: ModifierInstanceEvent): void {
         if (keys.unit == this.GetParentPlus() && keys.unit.IsRealUnit()) {
             keys.attacker.AddNewModifier(this.GetParentPlus(), this.GetAbilityPlus(), "modifier_imba_vengefulspirit_command_negative_aura_723", {});
-            this.GetCasterPlus().SetContextThink(DoUniqueString(this.GetName()), () => {
+            this.AddTimer(FrameTime(), () => {
                 for (const [_, unit] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FindOrder.FIND_ANY_ORDER, false))) {
-                    if (unit.GetName() == this.GetCasterPlus().GetName() && unit != this.GetCasterPlus() && unit.GetOwnerPlus() && unit.GetOwnerPlus() && unit.GetOwnerPlus() == this.GetCasterPlus()) {
+                    if (unit.GetUnitName() == this.GetCasterPlus().GetUnitName() && unit != this.GetCasterPlus() && unit.GetOwnerPlus() && unit.GetOwnerPlus() && unit.GetOwnerPlus() == this.GetCasterPlus()) {
                         if (unit.HasTalent("special_bonus_imba_vengefulspirit_5") && !unit.HasModifier("modifier_special_bonus_imba_vengefulspirit_5")) {
                             unit.AddNewModifier(unit, unit.findAbliityPlus("special_bonus_imba_vengefulspirit_5"), "modifier_special_bonus_imba_vengefulspirit_5", {});
                         }
@@ -931,8 +931,7 @@ export class modifier_imba_vengefulspirit_command_aura_723 extends BaseModifier_
                         }
                     }
                 }
-                return undefined;
-            }, FrameTime());
+            });
         }
     }
     IsHidden(): boolean {

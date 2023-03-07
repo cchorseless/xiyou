@@ -57,7 +57,7 @@ export class imba_undying_decay extends BaseAbility_Plus {
     OnSpellStart(): void {
         this.scepter_updated = this.GetCasterPlus().HasScepter();
         this.GetCasterPlus().EmitSound("Hero_Undying.Decay.Cast");
-        if (this.GetCasterPlus().GetName().includes("undying") && RollPercentage(50)) {
+        if (this.GetCasterPlus().GetUnitName().includes("undying") && RollPercentage(50)) {
             if (!this.responses) {
                 this.responses = {
                     "1": "undying_undying_decay_03",
@@ -348,7 +348,7 @@ export class imba_undying_soul_rip extends BaseAbility_Plus {
     public responses: any;
     public responses_big: any;
     CastFilterResultTarget(target: CDOTA_BaseNPC): UnitFilterResult {
-        if (target.GetName() == "npc_dota_unit_undying_tombstone" && target.GetTeamNumber() == this.GetCasterPlus().GetTeamNumber()) {
+        if (target.GetUnitName().includes("undying_tombstone") && target.GetTeamNumber() == this.GetCasterPlus().GetTeamNumber()) {
             return UnitFilterResult.UF_SUCCESS;
         } else {
             return UnitFilter(target, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, this.GetCasterPlus().GetTeamNumber());
@@ -356,7 +356,7 @@ export class imba_undying_soul_rip extends BaseAbility_Plus {
     }
     OnSpellStart(): void {
         this.GetCasterPlus().EmitSound("Hero_Undying.SoulRip.Cast");
-        if (this.GetCasterPlus().GetName().includes("undying") && RollPercentage(50)) {
+        if (this.GetCasterPlus().GetUnitName().includes("undying") && RollPercentage(50)) {
             if (!this.responses) {
                 this.responses = {
                     "1": "undying_undying_soulrip_02",
@@ -391,7 +391,7 @@ export class imba_undying_soul_rip extends BaseAbility_Plus {
                 }
                 ParticleManager.SetParticleControlEnt(damage_particle, 1, unit, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", unit.GetAbsOrigin(), true);
                 ParticleManager.ReleaseParticleIndex(damage_particle);
-                if (unit.GetName() != "npc_dota_unit_undying_zombie") {
+                if (!unit.GetUnitName().includes("undying_zombie")) {
                     unit.SetHealth(math.max(unit.GetHealth() - this.GetSpecialValueFor("damage_per_unit"), 1));
                 } else if (unit.GetTeamNumber() == this.GetCasterPlus().GetTeamNumber() && unit.GetTeamNumber() != target.GetTeamNumber()) {
                     unit.PerformAttack(target, true, true, true, true, false, false, true);
@@ -422,7 +422,7 @@ export class imba_undying_soul_rip extends BaseAbility_Plus {
                     //     target.CalculateStatBonus(true);
                     // }
                 }
-            } else if (target.GetTeamNumber() == this.GetCasterPlus().GetTeamNumber() && target.GetName() != "npc_dota_unit_undying_tombstone") {
+            } else if (target.GetTeamNumber() == this.GetCasterPlus().GetTeamNumber() && !target.GetUnitName().includes("undying_tombstone")) {
                 target.EmitSound("Hero_Undying.SoulRip.Ally");
                 target.Heal(this.GetSpecialValueFor("damage_per_unit") * units_ripped, this);
                 SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, target, this.GetSpecialValueFor("damage_per_unit") * units_ripped, undefined);
@@ -435,7 +435,7 @@ export class imba_undying_soul_rip extends BaseAbility_Plus {
                     //     target.CalculateStatBonus(true);
                     // }
                 }
-            } else if (target.GetTeamNumber() == this.GetCasterPlus().GetTeamNumber() && target.GetName() == "npc_dota_unit_undying_tombstone") {
+            } else if (target.GetTeamNumber() == this.GetCasterPlus().GetTeamNumber() && target.GetUnitName().includes("undying_tombstone")) {
                 target.EmitSound("Hero_Undying.SoulRip.Ally");
                 target.Heal(this.GetSpecialValueFor("tombstone_heal"), this);
                 SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, target, this.GetSpecialValueFor("tombstone_heal"), undefined);
@@ -535,7 +535,7 @@ export class imba_undying_tombstone extends BaseAbility_Plus {
             position = deathPosition;
         }
         EmitSoundOnLocationWithCaster(position, "Hero_Undying.Tombstone", this.GetCasterPlus());
-        if (this.GetCasterPlus().GetName().includes("undying")) {
+        if (this.GetCasterPlus().GetUnitName().includes("undying")) {
             if (!this.responses) {
                 this.responses = {
                     "1": "undying_undying_tombstone_01",
@@ -576,7 +576,7 @@ export class imba_undying_tombstone extends BaseAbility_Plus {
                 EmitSoundOnClient(GFuncRandom.RandomValue(this.responses), this.GetCasterPlus().GetPlayerOwner());
             }
         }
-        let tombstone = BaseNpc_Plus.CreateUnitByName("npc_dota_unit_tombstone" + this.GetLevel(), position, this.GetCasterPlus().GetTeamNumber(), true, this.GetCasterPlus(), this.GetCasterPlus());
+        let tombstone = BaseNpc_Plus.CreateUnitByName("npc_dota_unit_tombstone" + this.GetLevel(), position, this.GetCasterPlus(), true);
         tombstone.SetBaseMaxHealth(this.GetTalentSpecialValueFor("hits_to_destroy_tooltip") * 4);
         tombstone.SetMaxHealth(this.GetTalentSpecialValueFor("hits_to_destroy_tooltip") * 4);
         tombstone.SetHealth(this.GetTalentSpecialValueFor("hits_to_destroy_tooltip") * 4);
@@ -604,7 +604,8 @@ export class modifier_imba_undying_tombstone_zombie_aura extends BaseModifier_Pl
     public health_threshold_pct_tooltip: number;
     public zombie_interval: number;
     public level: any;
-    public zombie_types: any;
+    public caster: IBaseNpc_Plus;
+    public zombie_types: { [k: string]: string };
     IsHidden(): boolean {
         return true;
     }
@@ -617,6 +618,7 @@ export class modifier_imba_undying_tombstone_zombie_aura extends BaseModifier_Pl
         this.health_threshold_pct_tooltip = this.GetSpecialValueFor("health_threshold_pct_tooltip");
         this.zombie_interval = this.GetSpecialValueFor("zombie_interval");
         this.level = this.GetAbilityPlus().GetLevel();
+        this.caster = this.GetCasterPlus();
         if (!IsServer()) {
             return;
         }
@@ -628,18 +630,18 @@ export class modifier_imba_undying_tombstone_zombie_aura extends BaseModifier_Pl
         this.StartIntervalThink(this.zombie_interval);
     }
     OnIntervalThink(): void {
-        let zombie = undefined;
+        let zombie: IBaseNpc_Plus = undefined;
         let deathstrike_ability = undefined;
-        for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE, FindOrder.FIND_ANY_ORDER, false))) {
-            if (!enemy.IsCourier() && enemy.GetName() != "npc_dota_unit_undying_zombie") {
-                zombie = BaseNpc_Plus.CreateUnitByName(this.zombie_types[RandomInt(1, GameFunc.GetCount(this.zombie_types))], enemy.GetAbsOrigin(), this.GetCasterPlus().GetTeamNumber(), true, this.GetParentPlus(), this.GetParentPlus());
+        for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.caster.GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE, FindOrder.FIND_ANY_ORDER, false))) {
+            if (!enemy.IsCourier() && !enemy.GetUnitName().includes("undying_zombie")) {
+                zombie = BaseNpc_Plus.CreateUnitByName(GFuncRandom.RandomValue(this.zombie_types), enemy.GetAbsOrigin(), this.caster, true);
                 zombie.EmitSound("Undying_Zombie.Spawn");
-                zombie.SetBaseDamageMin(zombie.GetBaseDamageMin() + this.GetCasterPlus().GetTalentValue("special_bonus_imba_undying_tombstone_zombie_damage"));
-                zombie.SetBaseDamageMax(zombie.GetBaseDamageMax() + this.GetCasterPlus().GetTalentValue("special_bonus_imba_undying_tombstone_zombie_damage"));
+                zombie.SetBaseDamageMin(zombie.GetBaseDamageMin() + this.caster.GetTalentValue("special_bonus_imba_undying_tombstone_zombie_damage"));
+                zombie.SetBaseDamageMax(zombie.GetBaseDamageMax() + this.caster.GetTalentValue("special_bonus_imba_undying_tombstone_zombie_damage"));
                 FindClearSpaceForUnit(zombie, enemy.GetAbsOrigin() + RandomVector(enemy.GetHullRadius() + zombie.GetHullRadius()) as Vector, true);
                 ResolveNPCPositions(zombie.GetAbsOrigin(), zombie.GetHullRadius());
                 zombie.SetAggroTarget(enemy);
-                zombie.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_undying_tombstone_zombie_modifier", {
+                zombie.AddNewModifier(this.caster, this.GetAbilityPlus(), "modifier_imba_undying_tombstone_zombie_modifier", {
                     enemy_entindex: enemy.entindex()
                 });
                 deathstrike_ability = zombie.AddAbility("imba_undying_tombstone_zombie_deathstrike");
@@ -655,17 +657,18 @@ export class modifier_imba_undying_tombstone_zombie_aura extends BaseModifier_Pl
         if (!IsServer()) {
             return;
         }
-        for (const ent of (Entities.FindAllByName("npc_dota_unit_undying_zombie") as IBaseNpc_Plus[])) {
+        for (const ent of (this.caster.FindChildByName("npc_dota_unit_undying_zombie"))) {
             if (ent.GetOwnerPlus() == this.GetParentPlus()) {
                 if (this.GetRemainingTime() > 0) {
                     ent.ForceKill(false);
-                } else {
+                }
+                else {
                     if (ent.HasModifier("modifier_imba_undying_tombstone_zombie_modifier")) {
                         ent.findBuff<modifier_imba_undying_tombstone_zombie_modifier>("modifier_imba_undying_tombstone_zombie_modifier").bTombstoneDead = true;
                         ent.findBuff<modifier_imba_undying_tombstone_zombie_modifier>("modifier_imba_undying_tombstone_zombie_modifier").aggro_target = undefined;
                     }
                     ent.SetOwner(this.GetCasterPlus());
-                    ent.SetControllableByPlayer(this.GetCasterPlus().GetPlayerID(), true);
+                    ent.SetControllableByPlayer(this.GetCasterPlus().GetPlayerOwnerID(), true);
                     ent.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_undying_tombstone_zombie_modifier_no_home", {
                         duration: this.duration
                     });
@@ -856,7 +859,7 @@ export class modifier_imba_undying_tombstone_zombie_deathstrike extends BaseModi
     } */
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
     CC_OnAttackLanded(keys: ModifierAttackEvent): void {
-        if (this.GetAbilityPlus() && keys.attacker == this.GetParentPlus() && !keys.target.IsBuilding() && !keys.target.IsOther() && keys.target.GetTeamNumber() != keys.attacker.GetTeamNumber() && keys.target.GetName() != "npc_dota_visage_familiar") {
+        if (this.GetAbilityPlus() && keys.attacker == this.GetParentPlus() && !keys.target.IsBuilding() && !keys.target.IsOther() && keys.target.GetTeamNumber() != keys.attacker.GetTeamNumber() && !keys.target.GetUnitName().includes("visage_familiar")) {
             keys.target.AddNewModifier(this.GetParentPlus(), this.GetAbilityPlus(), "modifier_imba_undying_tombstone_zombie_deathstrike_slow_counter", {});
             let deathstrike_modifier = keys.target.AddNewModifier(this.GetParentPlus(), this.GetAbilityPlus(), "modifier_imba_undying_tombstone_zombie_deathstrike_slow", {
                 duration: this.GetSpecialValueFor("duration")
@@ -956,7 +959,7 @@ export class imba_undying_flesh_golem_grab extends BaseAbility_Plus {
     }
     CastFilterResultTarget(target: CDOTA_BaseNPC): UnitFilterResult {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_undying_flesh_golem_grab_allies")) {
-            if (target.GetName() == "npc_dota_unit_undying_tombstone") {
+            if (target.GetUnitName().includes("undying_tombstone")) {
                 return UnitFilterResult.UF_SUCCESS;
             } else if (target == this.GetCasterPlus()) {
                 return UnitFilterResult.UF_FAIL_CUSTOM;
@@ -1389,7 +1392,7 @@ export class modifier_imba_undying_flesh_golem_slow extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
     CC_GetModifierIncomingDamage_Percentage(keys: ModifierAttackEvent): number {
-        if (keys.attacker.GetName() == "npc_dota_unit_undying_zombie") {
+        if (keys.attacker.GetUnitName().includes("undying_zombie")) {
             return 100 * this.zombie_multiplier;
         }
     }

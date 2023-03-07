@@ -48,7 +48,7 @@ export class earthshaker_fissure_lua extends BaseAbility_Plus {
         let start_pos = caster.GetOrigin() + direction * block_pos as Vector;
         for (let i = 0; i < blocks; i++) {
             let block_vec = caster.GetOrigin() + direction * block_pos as Vector;
-            let blocker = CreateModifierThinker(caster, this, "modifier_earthshaker_fissure_lua_thinker", {
+            let blocker = BaseModifier_Plus.CreateBuffThinker(caster, this, "modifier_earthshaker_fissure_lua_thinker", {
                 duration: duration
             }, block_vec, caster.GetTeamNumber(), true);
             blocker.SetHullRadius(block_width);
@@ -105,7 +105,7 @@ export class modifier_earthshaker_fissure_lua_thinker extends BaseModifier_Plus 
         if (IsServer()) {
             let sound_cast = "Hero_EarthShaker.FissureDestroy";
             EmitSoundOnLocationWithCaster(this.GetParentPlus().GetOrigin(), sound_cast, this.GetCasterPlus());
-            UTIL_Remove(this.GetParentPlus());
+            GFuncEntity.SafeDestroyUnit(this.GetParentPlus());
         }
     }
 }
@@ -616,7 +616,7 @@ export class imba_earthshaker_echo_slam extends BaseAbility_Plus {
             this.GetCasterPlus().EmitSound("Hero_EarthShaker.EchoSlamSmall");
         }
         this.AddTimer(0.5, () => {
-            if (this.GetCasterPlus().GetName().includes("earthshaker")) {
+            if (this.GetCasterPlus().GetUnitName().includes("earthshaker")) {
                 if (GameFunc.GetCount(hero_enemies) == 2) {
                     let random_response = RandomInt(1, 4);
                     if (random_response >= 3) {

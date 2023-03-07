@@ -282,7 +282,7 @@ export class imba_void_spirit_resonant_pulse extends BaseAbility_Plus {
         ParticleManager.SetParticleControl(pulse_particle, 1, Vector(this.GetSpecialValueFor("speed"), 1, 0));
         ParticleManager.ReleaseParticleIndex(pulse_particle);
         this.GetCasterPlus().RemoveModifierByName("modifier_imba_void_spirit_resonant_pulse_physical_buff");
-        this.pulse_thinker = CreateModifierThinker(this.GetCasterPlus(), this, "modifier_imba_void_spirit_resonant_pulse_thinker_aura", {
+        this.pulse_thinker = BaseModifier_Plus.CreateBuffThinker(this.GetCasterPlus(), this, "modifier_imba_void_spirit_resonant_pulse_thinker_aura", {
             duration: this.GetSpecialValueFor("buff_duration")
         }, this.GetCasterPlus().GetAbsOrigin(), this.GetCasterPlus().GetTeamNumber(), false);
         this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_void_spirit_resonant_pulse_ring", {
@@ -733,7 +733,7 @@ export class modifier_imba_void_spirit_aether_remnant_helper extends BaseModifie
     } */
     @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
     CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
-        if (keys.inflictor && keys.inflictor.GetName() == "void_spirit_aether_remnant" && keys.attacker == this.GetParentPlus() && keys.unit.GetTeamNumber() != this.GetParentPlus().GetTeamNumber() && keys.unit.IsRealUnit()) {
+        if (keys.inflictor && keys.inflictor.GetAbilityName() == "void_spirit_aether_remnant" && keys.attacker == this.GetParentPlus() && keys.unit.GetTeamNumber() != this.GetParentPlus().GetTeamNumber() && keys.unit.IsRealUnit()) {
             this.GetParentPlus().AddNewModifier(this.GetCasterPlus(), keys.inflictor, "modifier_imba_void_spirit_aether_remnant_helper_buff", {
                 duration: this.GetSpecialValueFor("swiftness_duration")
             });

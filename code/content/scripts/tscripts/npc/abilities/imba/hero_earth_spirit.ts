@@ -59,7 +59,7 @@ export class imba_earth_spirit_stone_caller extends BaseAbility_Plus {
             if (unit == caster) {
                 target = caster.GetAbsOrigin() + caster.GetForwardVector() * 100 as Vector;
             }
-            let dummy = BaseNpc_Plus.CreateUnitByName("npc_imba_dota_earth_spirit_stone", target, caster.GetTeamNumber(), false, caster);
+            let dummy = BaseNpc_Plus.CreateUnitByName("npc_imba_dota_earth_spirit_stone", target, caster, false);
             dummy.AddNewModifier(caster, this, "modifier_imba_stone_remnant", {
                 duration: remnantDuration
             });
@@ -274,7 +274,7 @@ export class modifier_imba_stone_remnant extends BaseModifier_Plus {
             if (this.GetParentPlus().GetUnitName() == "npc_imba_dota_earth_spirit_stone") {
                 ParticleManager.DestroyParticle(this.remnantParticle, false);
                 ParticleManager.ReleaseParticleIndex(this.remnantParticle);
-                UTIL_Remove(this.GetParentPlus());
+                GFuncEntity.SafeDestroyUnit(this.GetParentPlus());
                 if (this.GetAbilityPlus() && !this.GetAbilityPlus().IsNull()) {
                     this.GetAbilityPlus<imba_earth_spirit_stone_caller>().KillRemnant(this.GetParentPlus().GetEntityIndex());
                 }

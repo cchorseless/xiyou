@@ -89,7 +89,7 @@ export class item_imba_trusty_shovel extends BaseItem_Plus {
                     return;
                 }
                 this.last_reward = "kobold";
-                BaseNpc_Plus.CreateUnitByName("npc_dota_neutral_kobold", this.GetCursorPosition(), DOTATeam_t.DOTA_TEAM_NEUTRALS, true, undefined, undefined);
+                BaseNpc_Plus.CreateUnitByName("npc_dota_neutral_kobold", this.GetCursorPosition(), null, true, DOTATeam_t.DOTA_TEAM_NEUTRALS);
             }
             let pfx2 = ResHelper.CreateParticleEx("particles/econ/events/ti9/shovel_revealed_generic.vpcf", ParticleAttachment_t.PATTACH_WORLDORIGIN, this.GetCasterPlus());
             ParticleManager.SetParticleControl(pfx2, 0, this.GetCursorPosition());

@@ -9,7 +9,7 @@ export class item_imba_blade_mail extends BaseItem_Plus {
 
         if (this.GetLevel() == 2) {
             return "item_bladestorm_mail";
-        } else if (this.GetCasterPlus().GetName().includes("axe")) {
+        } else if (this.GetCasterPlus().GetUnitName().includes("axe")) {
             return "imba_blade_mail_axe";
         } else {
             return "item_blade_mail";

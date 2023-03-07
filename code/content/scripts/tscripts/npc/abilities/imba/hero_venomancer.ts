@@ -83,7 +83,7 @@ export class imba_venomancer_plague_ward_v2 extends BaseAbility_Plus {
         ParticleManager.SetParticleControlEnt(spawn_fx, 0, this.GetCasterPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_attack1", this.GetCasterPlus().GetAbsOrigin(), true);
         ParticleManager.SetParticleControlEnt(spawn_fx, 1, this.GetCasterPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_attack2", this.GetCasterPlus().GetAbsOrigin(), true);
         ParticleManager.ReleaseParticleIndex(spawn_fx);
-        let plague_ward = BaseNpc_Plus.CreateUnitByName("npc_dota_venomancer_plague_ward_" + math.min(this.GetLevel(), 4), talent_spawn_location || this.GetCursorPosition(), this.GetCasterPlus().GetTeamNumber(), true, this.GetCasterPlus(), this.GetCasterPlus());
+        let plague_ward = BaseNpc_Plus.CreateUnitByName("npc_dota_venomancer_plague_ward_" + math.min(this.GetLevel(), 4), talent_spawn_location || this.GetCursorPosition(), this.GetCasterPlus(), true);
         plague_ward.EmitSound("Hero_Venomancer.Plague_Ward");
         if (this.GetCasterPlus().HasAbility("imba_venomancer_venomous_gale")) {
             GFuncEntity.AddRangeIndicator(plague_ward, this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus<imba_venomancer_venomous_gale>("imba_venomancer_venomous_gale"), "ward_range", undefined, 183, 247, 33, false, false, true);
@@ -101,12 +101,12 @@ export class imba_venomancer_plague_ward_v2 extends BaseAbility_Plus {
         plague_ward.SetHealth(this.GetSpecialValueFor("ward_hp_tooltip") * math.max(this.GetCasterPlus().GetTalentValue("special_bonus_imba_venomancer_plague_ward_upgrade"), 1));
         plague_ward.SetBaseDamageMin((this.GetSpecialValueFor("ward_damage_tooltip") * math.max(this.GetCasterPlus().GetTalentValue("special_bonus_imba_venomancer_plague_ward_upgrade"), 1)) - 1);
         plague_ward.SetBaseDamageMax((this.GetSpecialValueFor("ward_damage_tooltip") * math.max(this.GetCasterPlus().GetTalentValue("special_bonus_imba_venomancer_plague_ward_upgrade"), 1)) + 1);
-        if (this.GetCasterPlus().GetPlayerID) {
-            plague_ward.SetControllableByPlayer(this.GetCasterPlus().GetPlayerID(), true);
-        } else if (this.GetCasterPlus().GetOwnerPlus() && this.GetCasterPlus().GetOwnerPlus().GetPlayerID) {
-            plague_ward.SetControllableByPlayer(this.GetCasterPlus().GetOwnerPlus().GetPlayerID(), true);
+        if (this.GetCasterPlus().GetPlayerOwnerID) {
+            plague_ward.SetControllableByPlayer(this.GetCasterPlus().GetPlayerOwnerID(), true);
+        } else if (this.GetCasterPlus().GetOwnerPlus() && this.GetCasterPlus().GetOwnerPlus().GetPlayerOwnerID) {
+            plague_ward.SetControllableByPlayer(this.GetCasterPlus().GetOwnerPlus().GetPlayerOwnerID(), true);
         }
-        if (!talent_spawn_location && this.GetCasterPlus().GetName().includes("venomancer") && RollPercentage(25)) {
+        if (!talent_spawn_location && this.GetCasterPlus().GetUnitName().includes("venomancer") && RollPercentage(25)) {
             if (!this.responses) {
                 this.responses = {
                     "venomancer_venm_ability_ward_01": 0,
@@ -335,7 +335,7 @@ export class imba_venomancer_venomous_gale extends BaseAbility_Plus {
             return super.GetCastRange(location, target);
         } else {
             for (const [_, ally] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), location, undefined, this.GetSpecialValueFor("ward_range") + this.GetCasterPlus().GetCastRangeBonus(), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_OTHER, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false))) {
-                if (ally.GetName() == "npc_dota_venomancer_plagueward" && ally.GetOwnerPlus() == this.GetCasterPlus()) {
+                if (ally.GetUnitName().includes("venomancer_plagueward") && ally.GetOwnerPlus() == this.GetCasterPlus()) {
                     return 25000;
                 }
             }
@@ -357,7 +357,7 @@ export class imba_venomancer_venomous_gale extends BaseAbility_Plus {
         let ward_range = this.GetSpecialValueFor("ward_range") + GPropertyCalculate.GetCastRangeBonus(caster);
         if ((this.GetCasterPlus().GetAbsOrigin() - this.GetCursorPosition() as Vector).Length2D() > this.GetSpecialValueFor("cast_range") + this.GetCasterPlus().GetCastRangeBonus()) {
             for (const [_, ally] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCursorPosition(), undefined, this.GetSpecialValueFor("ward_range") + this.GetCasterPlus().GetCastRangeBonus(), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_OTHER, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false))) {
-                if (ally.GetName() == "npc_dota_venomancer_plagueward" && ally.GetOwnerPlus() == this.GetCasterPlus() && (ally.GetAbsOrigin() - this.GetCursorPosition() as Vector).Length2D() < (this.GetCasterPlus().GetAbsOrigin() - this.GetCursorPosition() as Vector).Length2D()) {
+                if (ally.GetUnitName().includes("venomancer_plagueward") && ally.GetOwnerPlus() == this.GetCasterPlus() && (ally.GetAbsOrigin() - this.GetCursorPosition() as Vector).Length2D() < (this.GetCasterPlus().GetAbsOrigin() - this.GetCursorPosition() as Vector).Length2D()) {
                     this.bWardCaster = ally;
                     return;
                 }
@@ -502,7 +502,7 @@ export class imba_venomancer_venomous_gale extends BaseAbility_Plus {
         else {
             this.tempdata[ExtraData.index].push(null);
             if (this.tempdata[ExtraData.index].length == ExtraData.projectile_count) {
-                if ((GameFunc.GetCount(this.tempdata[ExtraData.index]) > 0) && (caster.GetName().includes("venomancer"))) {
+                if ((GameFunc.GetCount(this.tempdata[ExtraData.index]) > 0) && (caster.GetUnitName().includes("venomancer"))) {
                     caster.EmitSound("venomancer_venm_cast_0" + math.random(1, 2));
                 }
                 this.tempdata[ExtraData.index] = undefined;
@@ -899,20 +899,20 @@ export class imba_venomancer_plague_ward extends BaseAbility_Plus {
             scourge_damage = scourge_damage + (scourge_damage * caster.GetTalentValue("special_bonus_imba_venomancer_5") / 100);
             plague_hp = plague_hp + (plague_hp * caster.GetTalentValue("special_bonus_imba_venomancer_5") / 100);
             plague_damage = plague_damage + (plague_damage * caster.GetTalentValue("special_bonus_imba_venomancer_5") / 100);
-            let scourge_ward = BaseNpc_Plus.CreateUnitByName("npc_imba_venomancer_scourge_ward", target_loc, caster.GetTeamNumber(), true, caster, caster);
+            let scourge_ward = BaseNpc_Plus.CreateUnitByName("npc_imba_venomancer_scourge_ward", target_loc, caster, true);
             scourge_ward.EmitSound("Hero_Venomancer.Plague_Ward");
             let spawn_fx = ResHelper.CreateParticleEx("particles/units/heroes/hero_venomancer/venomancer_ward_cast.vpcf", ParticleAttachment_t.PATTACH_POINT_FOLLOW, caster);
             ParticleManager.SetParticleControlEnt(spawn_fx, 0, caster, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_attack1", caster.GetAbsOrigin(), true);
             ParticleManager.SetParticleControlEnt(spawn_fx, 1, caster, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_attack2", caster.GetAbsOrigin(), true);
             ParticleManager.ReleaseParticleIndex(spawn_fx);
-            if ((math.random(1, 100) <= 20) && (caster.GetName().includes("venomancer"))) {
+            if ((math.random(1, 100) <= 20) && (caster.GetUnitName().includes("venomancer"))) {
                 caster.EmitSound("venomancer_venm_ability_ward_0" + math.random(1, 6));
             }
             let ability_gale = caster.findAbliityPlus<imba_venomancer_venomous_gale>("imba_venomancer_venomous_gale");
             if (ability_gale) {
                 GFuncEntity.AddRangeIndicator(scourge_ward, caster, ability_gale, "ward_range", undefined, 183, 247, 33, false, false, true);
             }
-            scourge_ward.SetControllableByPlayer(caster.GetPlayerID(), true);
+            scourge_ward.SetControllableByPlayer(caster.GetPlayerOwnerID(), true);
             scourge_ward.SetForwardVector(direction);
             scourge_ward.AddNewModifier(caster, this, "modifier_kill", {
                 duration: duration
@@ -938,8 +938,8 @@ export class imba_venomancer_plague_ward extends BaseAbility_Plus {
                 mod_ward.ward_list = []
                 for (let i = 0; i < plague_count; i++) {
                     let plague_loc = target_loc + GFuncVector.RotateVector2D(direction, start_angle + (angle * i), true) * plague_radius as Vector;
-                    let plague_ward = BaseNpc_Plus.CreateUnitByName("npc_imba_venomancer_plague_ward", plague_loc, caster.GetTeamNumber(), true, caster, caster);
-                    plague_ward.SetControllableByPlayer(caster.GetPlayerID(), true);
+                    let plague_ward = BaseNpc_Plus.CreateUnitByName("npc_imba_venomancer_plague_ward", plague_loc, caster, true);
+                    plague_ward.SetControllableByPlayer(caster.GetPlayerOwnerID(), true);
                     plague_ward.SetForwardVector(direction);
                     let mod_kill = plague_ward.AddNewModifier(caster, this, "modifier_kill", {
                         duration: duration

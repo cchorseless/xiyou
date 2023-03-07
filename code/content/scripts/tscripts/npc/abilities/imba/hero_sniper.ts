@@ -80,7 +80,7 @@ export class imba_sniper_shrapnel extends BaseAbility_Plus {
             }
         }
         this.AddTimer(delay, () => {
-            CreateModifierThinker(caster, ability, modifier_slow_aura, {
+            BaseModifier_Plus.CreateBuffThinker(caster, ability, modifier_slow_aura, {
                 duration: duration
             }, target_point, caster.GetTeamNumber(), false);
             caster.AddNewModifier(caster, ability, modifier_range, {
@@ -299,7 +299,7 @@ export class modifier_imba_shrapnel_charges extends BaseModifier_Plus {
         if (IsServer()) {
             let ability = keys.ability;
             let unit = keys.unit;
-            if (unit == this.caster && ability.GetName() == "item_refresher") {
+            if (unit == this.caster && ability.GetAbilityName() == "item_refresher") {
                 this.SetStackCount(this.max_charge_count);
             }
         }
@@ -891,7 +891,7 @@ export class imba_sniper_assassinate extends BaseAbility_Plus {
             }
             caster.StartGestureWithPlaybackRate(GameActivity_t.ACT_DOTA_CAST_ABILITY_1, 0.75 * scepter_speed_mult);
             this.timer = GTimerHelper.AddTimer(1.75 * scepter_speed_mult, GHandler.create(this, () => {
-                if (caster.GetCurrentActiveAbility() && caster.GetCurrentActiveAbility().GetName() == "imba_sniper_assassinate") {
+                if (caster.GetCurrentActiveAbility() && caster.GetCurrentActiveAbility().GetAbilityName() == "imba_sniper_assassinate") {
                     caster.FadeGesture(GameActivity_t.ACT_DOTA_CAST_ABILITY_1);
                     caster.StartGesture(GameActivity_t.ACT_DOTA_CAST_ABILITY_4);
                 }

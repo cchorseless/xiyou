@@ -72,7 +72,7 @@ function ApplyAncientSeal(caster: IBaseNpc_Plus, ability: IBaseAbility_Plus, tar
     target.AddNewModifier(caster, ability, modifier_main_seal, {
         duration: seal_duration * (1 - target.GetStatusResistance())
     });
-    CreateModifierThinker(caster, ability, modifier_thinker_aura, {
+    BaseModifier_Plus.CreateBuffThinker(caster, ability, modifier_thinker_aura, {
         duration: seal_duration
     }, target.GetAbsOrigin(), caster.GetTeamNumber(), false);
 }
@@ -83,7 +83,7 @@ function ExecuteMysticFlare(caster: IBaseNpc_Plus, ability: IBaseAbility_Plus, t
     if (caster.HasTalent("special_bonus_imba_skywrath_mage_6")) {
         damage_duration = damage_duration * caster.GetTalentValue("special_bonus_imba_skywrath_mage_6");
     }
-    CreateModifierThinker(caster, ability, modifier_mystic, {
+    BaseModifier_Plus.CreateBuffThinker(caster, ability, modifier_mystic, {
         duration: damage_duration
     }, target_point, caster.GetTeamNumber(), false);
 }

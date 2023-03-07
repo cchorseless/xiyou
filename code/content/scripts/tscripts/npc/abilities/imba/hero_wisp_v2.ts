@@ -53,7 +53,7 @@ export class modifier_imba_wisp_spirits_v2 extends BaseModifier_Plus {
         this.StartIntervalThink(this.spawn_interval);
     }
     OnIntervalThink(): void {
-        let spirit = BaseNpc_Plus.CreateUnitByName("npc_dota_wisp_spirit", this.GetCasterPlus().GetAbsOrigin() + Vector(0, this.max_range, 0) as Vector, this.GetCasterPlus().GetTeamNumber(), false, this.GetCasterPlus(), this.GetCasterPlus());
+        let spirit = BaseNpc_Plus.CreateUnitByName("npc_dota_wisp_spirit", this.GetCasterPlus().GetAbsOrigin() + Vector(0, this.max_range, 0) as Vector, this.GetCasterPlus(), false);
         spirit.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_wisp_spirit_v2_invulnerable", {});
         spirit.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_kill", {
             duration: this.ability_duration

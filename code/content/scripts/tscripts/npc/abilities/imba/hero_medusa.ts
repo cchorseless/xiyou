@@ -27,7 +27,7 @@ export class imba_medusa_split_shot extends BaseAbility_Plus {
     }
     OnAbilityPhaseStart(): boolean {
         if (GameFunc.GetCount(this.GetCasterPlus().FindAllModifiersByName("modifier_imba_medusa_enchanted_aim")) >= this.GetSpecialValueFor("enchanted_aim_stack_limit")) {
-            EventHelper.ErrorMessage("Cannot exceed " + this.GetSpecialValueFor("enchanted_aim_stack_limit") + " stacks of Enchanted Aim.", this.GetCasterPlus().GetPlayerID(),);
+            EventHelper.ErrorMessage("Cannot exceed " + this.GetSpecialValueFor("enchanted_aim_stack_limit") + " stacks of Enchanted Aim.", this.GetCasterPlus().GetPlayerOwnerID(),);
             return false;
         } else {
             return true;
@@ -59,7 +59,7 @@ export class imba_medusa_split_shot extends BaseAbility_Plus {
         this.toggle_state = this.GetToggleState();
     }
     OnUpgrade(): void {
-        if (this.GetCasterPlus().IsIllusion() && this.GetCasterPlus().GetPlayerOwner() && this.GetCasterPlus().GetPlayerOwner().GetAssignedHero() && this.GetCasterPlus().GetPlayerOwner().GetAssignedHero().IsRealUnit() && this.GetCasterPlus().GetPlayerOwner().GetAssignedHero().FindAbilityByName(this.GetName()) && this.GetCasterPlus().GetPlayerOwner().GetAssignedHero().FindAbilityByName(this.GetName()).GetToggleState() && !this.GetToggleState()) {
+        if (this.GetCasterPlus().IsIllusion() && this.GetCasterPlus().GetPlayerOwner() && this.GetCasterPlus() && this.GetCasterPlus().IsRealUnit() && this.GetCasterPlus().FindAbilityByName(this.GetAbilityName()) && this.GetCasterPlus().FindAbilityByName(this.GetAbilityName()).GetToggleState() && !this.GetToggleState()) {
             this.ToggleAbility();
         }
     }
@@ -297,7 +297,7 @@ export class imba_medusa_mystic_snake extends BaseAbility_Plus {
             return;
         }
         this.GetCasterPlus().EmitSound("Hero_Medusa.MysticSnake.Cast");
-        if (this.GetCasterPlus().GetName().includes("medusa") && RollPercentage(75)) {
+        if (this.GetCasterPlus().GetUnitName().includes("medusa") && RollPercentage(75)) {
             let random_response = RandomInt(1, 6);
             if (random_response >= 2) {
                 random_response = random_response + 1;
@@ -595,7 +595,7 @@ export class imba_medusa_mana_shield extends BaseAbility_Plus {
         }
         if (this.GetToggleState()) {
             this.GetCasterPlus().EmitSound("Hero_Medusa.ManaShield.On");
-            if (this.GetCasterPlus().GetName().includes("medusa") && RollPercentage(20)) {
+            if (this.GetCasterPlus().GetUnitName().includes("medusa") && RollPercentage(20)) {
                 if (!this.responses) {
                     this.responses = {
                         ["medusa_medus_manashield_02"]: 0,

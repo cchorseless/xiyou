@@ -165,7 +165,7 @@ export class imba_crystal_maiden_crystal_nova extends BaseAbility_Plus {
         let snowfield_duration = this.GetSpecialValueFor("snowfield_duration");
         let snowfield_vision_radius = this.GetSpecialValueFor("snowfield_vision_radius");
         EmitSoundOnLocationWithCaster(target_point, "Hero_Crystal.CrystalNova", caster);
-        let thinker = CreateModifierThinker(caster, ability, modifier_thinker_ally, {
+        let thinker = BaseModifier_Plus.CreateBuffThinker(caster, ability, modifier_thinker_ally, {
             duration: snowfield_duration
         }, target_point, caster.GetTeamNumber(), false);
         thinker.AddNewModifier(caster, ability, modifier_thinker_enemy, {
@@ -893,7 +893,7 @@ export class imba_crystal_maiden_freezing_field extends BaseAbility_Plus {
     public quadrant: any;
     public freezing_field_center: any;
     public explosion_interval: number;
-    public freezing_field_aura: any;
+    public freezing_field_aura: IBaseNpc_Plus;
     public freezing_field_particle: any;
     public shards: any;
     GetBehavior(): DOTA_ABILITY_BEHAVIOR | Uint64 {
@@ -936,7 +936,7 @@ export class imba_crystal_maiden_freezing_field extends BaseAbility_Plus {
                     duration: this.frostbite_duration * (1 - enemy.GetStatusResistance())
                 });
             }
-            this.freezing_field_aura = CreateModifierThinker(this.caster, this, "modifier_imba_crystal_maiden_freezing_field_aura", {
+            this.freezing_field_aura = BaseModifier_Plus.CreateBuffThinker(this.caster, this, "modifier_imba_crystal_maiden_freezing_field_aura", {
                 duration: duration
             }, this.freezing_field_center, this.caster.GetTeamNumber(), false);
             this.freezing_field_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_crystalmaiden/maiden_freezing_field_snow.vpcf", ParticleAttachment_t.PATTACH_CUSTOMORIGIN, this.freezing_field_aura, this.caster);
@@ -1047,7 +1047,7 @@ export class imba_crystal_maiden_freezing_field extends BaseAbility_Plus {
                         } else {
                             this.freezing_field_center = undefined;
                             if (this.freezing_field_aura && !this.freezing_field_aura.IsNull()) {
-                                UTIL_Remove(this.freezing_field_aura);
+                                GFuncEntity.SafeDestroyUnit(this.freezing_field_aura);
                                 this.freezing_field_aura = undefined;
                             }
                             return undefined;
@@ -1055,7 +1055,7 @@ export class imba_crystal_maiden_freezing_field extends BaseAbility_Plus {
                     } else {
                         this.freezing_field_center = undefined;
                         if (this.freezing_field_aura && !this.freezing_field_aura.IsNull()) {
-                            UTIL_Remove(this.freezing_field_aura);
+                            GFuncEntity.SafeDestroyUnit(this.freezing_field_aura);
                             this.freezing_field_aura = undefined;
                         }
                     }

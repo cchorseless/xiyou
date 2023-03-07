@@ -173,7 +173,7 @@ export class modifier_imba_batrider_sticky_napalm extends BaseModifier_Plus {
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
     CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
-        if (keys.attacker == this.GetCasterPlus() && keys.unit == this.GetParentPlus() && (!keys.inflictor || !this.non_trigger_inflictors[keys.inflictor.GetName()]) && bit.band(keys.damage_flags, DOTADamageFlag_t.DOTA_DAMAGE_FLAG_REFLECTION) != DOTADamageFlag_t.DOTA_DAMAGE_FLAG_REFLECTION) {
+        if (keys.attacker == this.GetCasterPlus() && keys.unit == this.GetParentPlus() && (!keys.inflictor || !this.non_trigger_inflictors[keys.inflictor.GetAbilityName()]) && bit.band(keys.damage_flags, DOTADamageFlag_t.DOTA_DAMAGE_FLAG_REFLECTION) != DOTADamageFlag_t.DOTA_DAMAGE_FLAG_REFLECTION) {
             this.damage_debuff_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_batrider/batrider_napalm_damage_debuff.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, this.GetParentPlus());
             ParticleManager.ReleaseParticleIndex(this.damage_debuff_particle);
             this.damage_debuff_particle = undefined;
@@ -200,7 +200,7 @@ export class imba_batrider_flamebreak extends BaseAbility_Plus {
         if (this.GetCursorPosition() == this.GetCasterPlus().GetAbsOrigin()) {
             this.GetCasterPlus().SetCursorPosition(this.GetCursorPosition() + this.GetCasterPlus().GetForwardVector() as Vector);
         }
-        let flamebreak_dummy = CreateModifierThinker(this.GetCasterPlus(), this, undefined, {}, this.GetCasterPlus().GetAbsOrigin(), this.GetCasterPlus().GetTeamNumber(), false);
+        let flamebreak_dummy = BaseModifier_Plus.CreateBuffThinker(this.GetCasterPlus(), this, undefined, {}, this.GetCasterPlus().GetAbsOrigin(), this.GetCasterPlus().GetTeamNumber(), false);
         flamebreak_dummy.EmitSound("Hero_Batrider.Flamebreak");
         let flamebreak_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_batrider/batrider_flamebreak.vpcf", ParticleAttachment_t.PATTACH_WORLDORIGIN, this.GetCasterPlus());
         ParticleManager.SetParticleControl(flamebreak_particle, 0, this.GetCasterPlus().GetAbsOrigin() + Vector(0, 0, 128) as Vector);
@@ -330,7 +330,7 @@ export class modifier_imba_batrider_flamebreak_damage extends BaseModifier_Plus 
     OnIntervalThink(): void {
         ApplyDamage(this.damage_table);
         SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_BONUS_SPELL_DAMAGE, this.GetParentPlus(), this.damage_per_second, undefined);
-        if (this.GetParentPlus().IsRealUnit() && !this.GetParentPlus().IsAlive() && this.GetCasterPlus().GetName().includes("batrider") && RollPercentage(50)) {
+        if (this.GetParentPlus().IsRealUnit() && !this.GetParentPlus().IsAlive() && this.GetCasterPlus().GetUnitName().includes("batrider") && RollPercentage(50)) {
             this.GetCasterPlus().EmitSound("batrider_bat_ability_firefly_0" + RandomInt(1, 6));
         }
     }
@@ -386,7 +386,7 @@ export class imba_batrider_firefly extends BaseAbility_Plus {
             this.methane_boost_ability.SetActivated(true);
         }
         this.GetCasterPlus().EmitSound("Hero_Batrider.Firefly.Cast");
-        if (this.GetCasterPlus().GetName().includes("batrider")) {
+        if (this.GetCasterPlus().GetUnitName().includes("batrider")) {
             if (!this.responses) {
                 this.responses = {
                     "1": "batrider_bat_ability_firefly_01",
@@ -470,7 +470,7 @@ export class modifier_imba_batrider_firefly extends BaseModifier_Plus {
             this.ember_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_batrider/batrider_firefly_ember.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetParentPlus());
             ParticleManager.SetParticleControl(this.ember_particle, 11, Vector(1, 0, 0));
             this.AddParticle(this.ember_particle, false, false, -1, false, false);
-            this.firefly_thinker = CreateModifierThinker(this.GetParentPlus(), this.GetAbilityPlus(), "modifier_imba_batrider_firefly_thinker", {
+            this.firefly_thinker = BaseModifier_Plus.CreateBuffThinker(this.GetParentPlus(), this.GetAbilityPlus(), "modifier_imba_batrider_firefly_thinker", {
                 duration: this.GetRemainingTime()
             }, this.GetParentPlus().GetAbsOrigin(), this.GetCasterPlus().GetTeamNumber(), false);
             this.SetStackCount(1);
@@ -581,7 +581,7 @@ export class modifier_imba_batrider_firefly extends BaseModifier_Plus {
             this.ember_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_batrider/batrider_firefly_ember.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetParentPlus());
             ParticleManager.SetParticleControl(this.ember_particle, 11, Vector(1, 0, 0));
             this.AddParticle(this.ember_particle, false, false, -1, false, false);
-            this.firefly_thinker = CreateModifierThinker(this.GetParentPlus(), this.GetAbilityPlus(), "modifier_imba_batrider_firefly_thinker", {
+            this.firefly_thinker = BaseModifier_Plus.CreateBuffThinker(this.GetParentPlus(), this.GetAbilityPlus(), "modifier_imba_batrider_firefly_thinker", {
                 duration: this.GetRemainingTime()
             }, this.GetParentPlus().GetAbsOrigin(), this.GetCasterPlus().GetTeamNumber(), false);
             this.SetStackCount(1);
@@ -655,7 +655,7 @@ export class imba_batrider_flaming_lasso extends BaseAbility_Plus {
             return;
         }
         this.GetCasterPlus().EmitSound("Hero_Batrider.FlamingLasso.Cast");
-        if (this.GetCasterPlus().GetName().includes("batrider")) {
+        if (this.GetCasterPlus().GetUnitName().includes("batrider")) {
             let random_int = RandomInt(1, 11);
             if (random_int <= 9) {
                 this.GetCasterPlus().EmitSound("batrider_bat_ability_lasso_0" + random_int);
@@ -736,7 +736,7 @@ export class modifier_imba_batrider_flaming_lasso extends BaseModifier_Plus {
         }
         this.GetParentPlus().EmitSound("Hero_Batrider.FlamingLasso.Loop");
         this.lasso_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_batrider/batrider_flaming_lasso.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetParentPlus());
-        if (this.GetCasterPlus().GetName().includes("batrider")) {
+        if (this.GetCasterPlus().GetUnitName().includes("batrider")) {
             ParticleManager.SetParticleControlEnt(this.lasso_particle, 0, this.GetCasterPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "lasso_attack", this.GetCasterPlus().GetAbsOrigin(), true);
         } else {
             ParticleManager.SetParticleControlEnt(this.lasso_particle, 0, this.GetCasterPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", this.GetCasterPlus().GetAbsOrigin(), true);
@@ -792,7 +792,7 @@ export class modifier_imba_batrider_flaming_lasso extends BaseModifier_Plus {
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ABILITY_FULLY_CAST)
     CC_OnAbilityFullyCast(keys: ModifierAbilityEvent): void {
-        if (keys.target == this.GetParentPlus() && keys.ability && (keys.ability.GetName() == "pudge_dismember" || keys.ability.GetName() == "imba_pudge_dismember" || keys.ability.GetName() == "tusk_walrus_kick" || keys.ability.GetName() == "imba_tusk_walrus_kick")) {
+        if (keys.target == this.GetParentPlus() && keys.ability && (keys.ability.GetAbilityName() == "pudge_dismember" || keys.ability.GetAbilityName() == "imba_pudge_dismember" || keys.ability.GetAbilityName() == "tusk_walrus_kick" || keys.ability.GetAbilityName() == "imba_tusk_walrus_kick")) {
             this.Destroy();
         }
     }

@@ -31,7 +31,7 @@ export class item_imba_cyclone_2 extends BaseItem_Plus {
                 target.Purge(false, true, false, false, false);
             }
             for (let tornado = 1; tornado <= this.GetSpecialValueFor("tornado_count"); tornado++) {
-                CreateModifierThinker(this.GetCasterPlus(), this, "modifier_item_imba_cyclone_2_thinker", {
+                BaseModifier_Plus.CreateBuffThinker(this.GetCasterPlus(), this, "modifier_item_imba_cyclone_2_thinker", {
                     duration: this.GetSpecialValueFor("cyclone_duration")
                 }, target.GetAbsOrigin() + RotatePosition(Vector(0, 0, 0), QAngle(0, tornado * (360 / this.GetSpecialValueFor("tornado_count")), 0), this.GetCasterPlus().GetForwardVector() * this.GetSpecialValueFor("tornado_spacing") as Vector) as Vector, this.GetCasterPlus().GetTeamNumber(), false);
             }

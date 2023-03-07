@@ -974,19 +974,17 @@ export class modifier_imba_rupture_charges extends BaseModifier_Plus {
             this.charge_replenish_rate = this.ability.GetSpecialValueFor("scepter_charge_replenish_rate");
             this.SetStackCount(this.max_charge_count);
 
-            // if (this.caster.IsRealUnit()) {
-            //     this.SetStackCount(this.max_charge_count);
-            // } else {
-            //     let playerid = this.caster.GetPlayerID();
-            //     let real_hero = playerid.GetAssignedHero();
-            //     if (hero.HasModifier(this.modifier_charge)) {
-            //         this.modifier_charge_handler = hero.FindModifierByName(this.modifier_charge);
-            //         if (this.modifier_charge_handler) {
-            //             this.SetStackCount(this.modifier_charge_handler.GetStackCount());
-            //             this.SetDuration(this.modifier_charge_handler.GetRemainingTime(), true);
-            //         }
-            //     }
-            // }
+            if (this.caster.IsRealUnit()) {
+                this.SetStackCount(this.max_charge_count);
+            } else {
+                if (this.caster.HasModifier(this.modifier_charge)) {
+                    this.modifier_charge_handler = this.caster.FindModifierByName(this.modifier_charge);
+                    if (this.modifier_charge_handler) {
+                        this.SetStackCount(this.modifier_charge_handler.GetStackCount());
+                        this.SetDuration(this.modifier_charge_handler.GetRemainingTime(), true);
+                    }
+                }
+            }
             this.StartIntervalThink(0.1);
         }
     }
@@ -1053,7 +1051,7 @@ export class modifier_imba_rupture_charges extends BaseModifier_Plus {
         if (IsServer()) {
             let ability = keys.ability;
             let unit = keys.unit;
-            if (unit == this.caster && (ability.GetName() == "item_refresher" || ability.GetName() == "item_refresher_shard")) {
+            if (unit == this.caster && (ability.GetAbilityName() == "item_refresher" || ability.GetAbilityName() == "item_refresher_shard")) {
                 this.SetStackCount(this.max_charge_count);
             }
         }

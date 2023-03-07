@@ -1087,7 +1087,7 @@ export class imba_ursa_territorial_hunter extends BaseAbility_Plus {
             }
         }
         this.territorial_tree = target as any;
-        this.territorial_aura_modifier = CreateModifierThinker(caster, this, aura, {}, this.territorial_tree.GetAbsOrigin(), caster.GetTeamNumber(), false);
+        this.territorial_aura_modifier = BaseModifier_Plus.CreateBuffThinker(caster, this, aura, {}, this.territorial_tree.GetAbsOrigin(), caster.GetTeamNumber(), false);
         GFuncEntity.AddRangeIndicator(this.territorial_aura_modifier, caster, this, "vision_range", undefined, 200, 160, 100, true, true, false);
     }
     OnOwnerSpawned(): void {

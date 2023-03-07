@@ -219,7 +219,7 @@ export class vardor_piercing_shot extends BaseAbility_Plus {
         let root_duration = ability.GetSpecialValueFor("root_duration");
         let spawn_delay = ability.GetSpecialValueFor("spawn_delay");
         let spear_duration = ability.GetSpecialValueFor("spear_duration");
-        let dummy = BaseNpc_Plus.CreateUnitByName("npc_dota_vardor_spear_dummy", target_point, caster.GetTeamNumber(), false, caster, caster);
+        let dummy = BaseNpc_Plus.CreateUnitByName("npc_dota_vardor_spear_dummy", target_point, caster, false);
         dummy.AddNewModifier(caster, this, "modifier_kill", {
             duration: spear_duration
         });
@@ -283,7 +283,7 @@ export class modifier_vardor_piercing_shot_charges extends BaseModifier_Plus {
             this.caster = this.GetCasterPlus();
             this.ability = this.GetAbilityPlus();
             this.initial_yari_count = this.ability.GetTalentSpecialValueFor("initial_yari_count");
-            let yariHolder = BaseNpc_Plus.CreateUnitByName("spearholder_unit", this.caster.GetAbsOrigin(), this.caster.GetTeam(), false, this.caster, this.caster);
+            let yariHolder = BaseNpc_Plus.CreateUnitByName("npc_spearholder_unit", this.caster.GetAbsOrigin(), this.caster, false);
             yariHolder.SetAbsOrigin(this.caster.GetAbsOrigin());
             yariHolder.AddNewModifier(this.caster, this.ability, "modifier_vardor_yari_dummy", {
                 EntIndex: this.caster.entindex(),
@@ -731,7 +731,7 @@ export class vardor_graceful_jump extends BaseAbility_Plus {
                     }
                 }
             }
-            EventHelper.ErrorMessage("#dota_hud_error_vardor_no_yaris_in_range", this.GetCasterPlus().GetPlayerID());
+            EventHelper.ErrorMessage("#dota_hud_error_vardor_no_yaris_in_range", this.GetCasterPlus().GetPlayerOwnerID());
             return;
         }
         EmitSoundOnLocationWithCaster(this.GetCursorPosition(), "Hero_SkywrathMage.ConcussiveShot.Cast", caster);

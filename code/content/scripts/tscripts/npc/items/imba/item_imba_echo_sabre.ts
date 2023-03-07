@@ -313,7 +313,7 @@ export class modifier_imba_echo_rapier_haste extends BaseModifier_Plus {
         if (item) {
             this.slow_duration = item.GetSpecialValueFor("slow_duration");
             let current_speed = this.parent.GetIncreasedAttackSpeed();
-            if (item.GetName() == "item_imba_reverb_rapier") {
+            if (item.GetAbilityName() == "item_imba_reverb_rapier") {
                 current_speed = current_speed * 3;
             } else {
                 current_speed = current_speed * 2;
@@ -389,7 +389,7 @@ export class modifier_imba_echo_rapier_debuff_slow extends BaseModifier_Plus {
         return this.movement_slow;
     }
     GetTexture(): string {
-        if (this.GetItemPlus().GetName() == "item_imba_reverb_rapier") {
+        if (this.GetItemPlus().GetAbilityName() == "item_imba_reverb_rapier") {
             return "imba_reverb_rapier";
         } else {
             return "imba_echo_sabre";

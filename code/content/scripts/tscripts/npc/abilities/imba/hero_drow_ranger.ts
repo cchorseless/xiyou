@@ -271,7 +271,7 @@ export class modifier_imba_frost_arrows_slow extends BaseModifier_Plus {
         this.parent = this.GetParentPlus();
         this.modifier_freeze = "modifier_imba_frost_arrows_freeze";
         this.caster_modifier = "modifier_imba_frost_arrows_buff";
-        if (this.GetAbilityPlus().GetName() == "imba_drow_ranger_frost_arrows_723") {
+        if (this.GetAbilityPlus().GetAbilityName() == "imba_drow_ranger_frost_arrows_723") {
             this.ms_slow_pct = this.ability.GetSpecialValueFor("frost_arrows_movement_speed");
         } else {
             this.ms_slow_pct = this.ability.GetSpecialValueFor("ms_slow_pct") * (-1);
@@ -1644,7 +1644,7 @@ export class modifier_imba_drow_ranger_marksmanship_723 extends BaseModifier_Plu
             this.GetParentPlus().RemoveModifierByName("modifier_imba_drow_ranger_marksmanship_723_proc_damage");
             if (this.GetParentPlus().HasAbility("imba_drow_ranger_frost_arrows_723") && !this.frost_arrow_modifier) {
                 for (const [_, mod] of GameFunc.iPair(this.GetParentPlus().FindAllModifiersByName("modifier_generic_orb_effect_lua"))) {
-                    if (mod.GetAbility().GetName() == "imba_drow_ranger_frost_arrows_723") {
+                    if (mod.GetAbilityPlus().GetAbilityName() == "imba_drow_ranger_frost_arrows_723") {
                         this.frost_arrow_modifier = mod as modifier_generic_orb_effect_lua;
                         return;
                     }

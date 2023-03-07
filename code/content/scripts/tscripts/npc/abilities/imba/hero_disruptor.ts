@@ -396,7 +396,7 @@ export class imba_disruptor_glimpse extends BaseAbility_Plus {
             if (RollPercentage(75)) {
                 EmitSoundOn(cast_response, caster);
             }
-            let thinker = CreateModifierThinker(caster, ability, "modifier_imba_glimpse_thinker", {}, target.GetAbsOrigin(), caster.GetTeamNumber(), false);
+            let thinker = BaseModifier_Plus.CreateBuffThinker(caster, ability, "modifier_imba_glimpse_thinker", {}, target.GetAbsOrigin(), caster.GetTeamNumber(), false);
             let thinkerBuff = thinker.findBuff<modifier_imba_glimpse_thinker>("modifier_imba_glimpse_thinker");
             let buff = target.findBuff<modifier_imba_glimpse>("modifier_imba_glimpse");
             if (buff) {
@@ -504,7 +504,7 @@ export class modifier_imba_glimpse_thinker extends BaseModifier_Plus {
                 if (hUnit.HasModifier("modifier_imba_kinetic_field_check_inside_field")) {
                 } else {
                     this.storm_radius = ability.GetSpecialValueFor("storm_radius");
-                    CreateModifierThinker(caster, ability, this.modifier_storm, {
+                    BaseModifier_Plus.CreateBuffThinker(caster, ability, this.modifier_storm, {
                         duration: this.storm_duration,
                         storm_radius: this.storm_radius
                     }, old_position, caster.GetTeamNumber(), false);
@@ -785,7 +785,7 @@ export class imba_disruptor_kinetic_field extends BaseAbility_Plus {
             ParticleManager.SetParticleControl(formation_particle_fx, 4, Vector(1, 1, 1));
             ParticleManager.SetParticleControl(formation_particle_fx, 15, target_point);
             this.AddTimer(formation_delay, () => {
-                CreateModifierThinker(caster, ability, modifier_kinetic_field, {
+                BaseModifier_Plus.CreateBuffThinker(caster, ability, modifier_kinetic_field, {
                     duration: duration,
                     target_point_x: target_point.x,
                     target_point_y: target_point.y,
@@ -884,7 +884,7 @@ export class modifier_imba_kinetic_field extends BaseModifier_Plus {
                     } else {
                         this.storm_radius = this.storm_radius + 1;
                     }
-                    CreateModifierThinker(this.caster, glimpse_ability, this.modifier_storm, {
+                    BaseModifier_Plus.CreateBuffThinker(this.caster, glimpse_ability, this.modifier_storm, {
                         duration: this.storm_duration,
                         storm_radius: this.storm_radius
                     }, enemy_origin, this.caster.GetTeamNumber(), false);
@@ -1217,7 +1217,7 @@ export class imba_disruptor_static_storm extends BaseAbility_Plus {
             } else if (RollPercentage(65)) {
                 EmitSoundOn(cast_response, caster);
             }
-            CreateModifierThinker(caster, ability, modifier_static_storm, {
+            BaseModifier_Plus.CreateBuffThinker(caster, ability, modifier_static_storm, {
                 duration: duration,
                 target_point_x: target_point.x,
                 target_point_y: target_point.y,
@@ -1304,7 +1304,7 @@ export class modifier_imba_static_storm extends BaseModifier_Plus {
             this.pulse_num = 0;
             this.max_pulses = this.duration / this.interval;
             this.particle_timer = 0;
-            CreateModifierThinker(this.caster, this.ability, this.debuff_aura, {
+            BaseModifier_Plus.CreateBuffThinker(this.caster, this.ability, this.debuff_aura, {
                 duration: this.duration
             }, this.target_point, this.caster.GetTeamNumber(), false);
             this.StartIntervalThink(this.interval);

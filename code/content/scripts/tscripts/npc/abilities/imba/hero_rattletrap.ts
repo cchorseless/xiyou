@@ -19,7 +19,7 @@ export class imba_rattletrap_battery_assault extends BaseAbility_Plus {
             return;
         }
         this.GetCasterPlus().StartGesture(GameActivity_t.ACT_DOTA_RATTLETRAP_BATTERYASSAULT);
-        if (this.GetCasterPlus().GetName().includes("rattletrap")) {
+        if (this.GetCasterPlus().GetUnitName().includes("rattletrap")) {
             let random_response = RandomInt(3, 18);
             if (random_response <= 9) {
                 this.GetCasterPlus().EmitSound("rattletrap_ratt_ability_batt_0" + random_response);
@@ -242,7 +242,7 @@ export class imba_rattletrap_power_cogs extends BaseAbility_Plus {
         let second_cog_vector = GetGroundPosition(caster_pos + Vector(0, cogs_radius * 2, 0) as Vector, undefined);
         this.GetCasterPlus().StartGesture(GameActivity_t.ACT_DOTA_RATTLETRAP_POWERCOGS);
         for (let cog = 0; cog < num_of_cogs; cog++) {
-            let cog = BaseNpc_Plus.CreateUnitByName("npc_dota_rattletrap_cog", cog_vector, this.GetCasterPlus().GetTeamNumber(), false, this.GetCasterPlus(), this.GetCasterPlus());
+            let cog = BaseNpc_Plus.CreateUnitByName("npc_dota_rattletrap_cog", cog_vector, this.GetCasterPlus(), false);
             cog.EmitSound("Hero_Rattletrap.Power_Cogs");
             cog.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_rattletrap_power_cogs", {
                 duration: this.GetSpecialValueFor("duration"),
@@ -253,7 +253,7 @@ export class imba_rattletrap_power_cogs extends BaseAbility_Plus {
                 center_z: caster_pos.z
             });
             if (this.GetCasterPlus().HasTalent("special_bonus_imba_rattletrap_second_gear")) {
-                let second_cog = BaseNpc_Plus.CreateUnitByName("npc_dota_rattletrap_cog", second_cog_vector, this.GetCasterPlus().GetTeamNumber(), false, this.GetCasterPlus(), this.GetCasterPlus());
+                let second_cog = BaseNpc_Plus.CreateUnitByName("npc_dota_rattletrap_cog", second_cog_vector, this.GetCasterPlus(), false);
                 second_cog.EmitSound("Hero_Rattletrap.Power_Cogs");
                 second_cog.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_rattletrap_power_cogs", {
                     duration: this.GetSpecialValueFor("duration"),
@@ -270,7 +270,7 @@ export class imba_rattletrap_power_cogs extends BaseAbility_Plus {
         }
         let deploy_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_rattletrap/rattletrap_cog_deploy.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, this.GetCasterPlus());
         ParticleManager.ReleaseParticleIndex(deploy_particle);
-        if (this.GetCasterPlus().GetName().includes("rattletrap") && RollPercentage(50)) {
+        if (this.GetCasterPlus().GetUnitName().includes("rattletrap") && RollPercentage(50)) {
             let responses = {
                 "1": "rattletrap_ratt_ability_cogs_01",
                 "2": "rattletrap_ratt_ability_cogs_02",
@@ -476,7 +476,7 @@ export class modifier_imba_rattletrap_cog_push extends BaseModifierMotionHorizon
         this.owner = this.GetCasterPlus().GetOwnerPlus() || this.GetCasterPlus();
         this.GetCasterPlus().EmitSound("Hero_Rattletrap.Power_Cogs_Impact");
         let attack_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_rattletrap/rattletrap_cog_attack.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetCasterPlus());
-        if (this.GetCasterPlus().GetName() == "npc_dota_rattletrap_cog") {
+        if (this.GetCasterPlus().GetUnitName() == "npc_dota_rattletrap_cog") {
             ParticleManager.SetParticleControlEnt(attack_particle, 1, this.GetParentPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", this.GetParentPlus().GetAbsOrigin(), true);
         } else {
             ParticleManager.SetParticleControlEnt(attack_particle, 1, this.GetParentPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_attack1", this.GetParentPlus().GetAbsOrigin(), true);
@@ -583,7 +583,7 @@ export class modifier_imba_rattletrap_power_cogs_charge_coil_counter extends Bas
         if (!IsServer()) {
             return;
         }
-        if (keys.attacker == this.GetParentPlus() && !keys.target.IsBuilding() && !keys.target.IsMagicImmune() && !keys.target.IsOther() && keys.target.GetName() != "npc_dota_rattletrap_cog" && !keys.target.HasModifier("modifier_imba_rattletrap_cog_push")) {
+        if (keys.attacker == this.GetParentPlus() && !keys.target.IsBuilding() && !keys.target.IsMagicImmune() && !keys.target.IsOther() && !keys.target.GetUnitName().includes("rattletrap_cog") && !keys.target.HasModifier("modifier_imba_rattletrap_cog_push")) {
             let charge_coil_instances = this.GetParentPlus().FindAllModifiersByName("modifier_imba_rattletrap_power_cogs_charge_coil_instance");
             if (GameFunc.GetCount(charge_coil_instances) >= 1) {
                 keys.target.AddNewModifier(this.GetParentPlus(), this.GetAbilityPlus(), "modifier_imba_rattletrap_cog_push", {
@@ -601,7 +601,7 @@ export class modifier_imba_rattletrap_power_cogs_charge_coil_counter extends Bas
         if (!IsServer()) {
             return;
         }
-        if (keys.attacker.IsRangedAttacker() && keys.attacker == this.GetParentPlus() && !keys.target.IsBuilding() && !keys.target.IsMagicImmune() && !keys.target.IsOther() && keys.target.GetName() != "npc_dota_rattletrap_cog" && !keys.target.HasModifier("modifier_imba_rattletrap_cog_push")) {
+        if (keys.attacker.IsRangedAttacker() && keys.attacker == this.GetParentPlus() && !keys.target.IsBuilding() && !keys.target.IsMagicImmune() && !keys.target.IsOther() && keys.target.GetUnitName() != "npc_dota_rattletrap_cog" && !keys.target.HasModifier("modifier_imba_rattletrap_cog_push")) {
             let charge_coil_instances = this.GetParentPlus().FindAllModifiersByName("modifier_imba_rattletrap_power_cogs_charge_coil_instance");
             if (GameFunc.GetCount(charge_coil_instances) >= 1) {
                 charge_coil_instances[0].Destroy();
@@ -668,7 +668,7 @@ export class imba_rattletrap_rocket_flare extends BaseAbility_Plus {
         if (this.GetCursorPosition() == this.GetCasterPlus().GetAbsOrigin()) {
             this.GetCasterPlus().SetCursorPosition(this.GetCursorPosition() + this.GetCasterPlus().GetForwardVector() as Vector);
         }
-        if (this.GetCasterPlus().GetName().includes("rattletrap")) {
+        if (this.GetCasterPlus().GetUnitName().includes("rattletrap")) {
             this.GetCasterPlus().EmitSound("rattletrap_ratt_ability_flare_0" + RandomInt(1, 7));
             let caster = this.GetCasterPlus();
             if (caster.GetTogglableWearablePlus(DOTASlotType_t.DOTA_LOADOUT_TYPE_MISC)) {
@@ -676,10 +676,10 @@ export class imba_rattletrap_rocket_flare extends BaseAbility_Plus {
             }
         }
         if (!this.GetAutoCastState()) {
-            let rocket_target = CreateModifierThinker(this.GetCasterPlus(), this, undefined, {
+            let rocket_target = BaseModifier_Plus.CreateBuffThinker(this.GetCasterPlus(), this, undefined, {
                 duration: FrameTime()
             }, this.GetCursorPosition(), this.GetCasterPlus().GetTeamNumber(), false);
-            let rocket_dummy = CreateModifierThinker(this.GetCasterPlus(), this, undefined, {}, this.GetCasterPlus().GetAbsOrigin(), this.GetCasterPlus().GetTeamNumber(), false);
+            let rocket_dummy = BaseModifier_Plus.CreateBuffThinker(this.GetCasterPlus(), this, undefined, {}, this.GetCasterPlus().GetAbsOrigin(), this.GetCasterPlus().GetTeamNumber(), false);
             if (this.GetCasterPlus().HasTalent("special_bonus_imba_rattletrap_rocket_flare_truesight")) {
                 rocket_dummy.AddNewModifier(this.GetCasterPlus(), this, "modifier_item_imba_gem_of_true_sight", {});
             }
@@ -722,10 +722,10 @@ export class imba_rattletrap_rocket_flare extends BaseAbility_Plus {
                 this.AddTimer(this.GetSpecialValueFor("carpet_fire_delay") * instance, () => {
                     if (this) {
                         let random_position = cursor_position + RandomVector(RandomInt(0, this.GetSpecialValueFor("radius") * this.GetSpecialValueFor("carpet_fire_spread"))) as Vector;
-                        let rocket_target = CreateModifierThinker(this.GetCasterPlus(), this, undefined, {
+                        let rocket_target = BaseModifier_Plus.CreateBuffThinker(this.GetCasterPlus(), this, undefined, {
                             duration: FrameTime()
                         }, random_position, this.GetCasterPlus().GetTeamNumber(), false);
-                        let rocket_dummy = CreateModifierThinker(this.GetCasterPlus(), this, undefined, {}, this.GetCasterPlus().GetAbsOrigin(), this.GetCasterPlus().GetTeamNumber(), false);
+                        let rocket_dummy = BaseModifier_Plus.CreateBuffThinker(this.GetCasterPlus(), this, undefined, {}, this.GetCasterPlus().GetAbsOrigin(), this.GetCasterPlus().GetTeamNumber(), false);
                         let rocket_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_rattletrap/rattletrap_rocket_flare.vpcf", ParticleAttachment_t.PATTACH_CUSTOMORIGIN, undefined);
                         ParticleManager.SetParticleControl(rocket_particle, 0, this.GetCasterPlus().GetAttachmentOrigin(this.GetCasterPlus().ScriptLookupAttachment("attach_rocket")));
                         ParticleManager.SetParticleControl(rocket_particle, 1, random_position);
@@ -805,7 +805,7 @@ export class imba_rattletrap_rocket_flare extends BaseAbility_Plus {
                 ability: this
             }
             ApplyDamage(damageTable);
-            if (!enemy.IsAlive() && this.GetCasterPlus().GetName().includes("rattletrap") && travel_distance >= 6000) {
+            if (!enemy.IsAlive() && this.GetCasterPlus().GetUnitName().includes("rattletrap") && travel_distance >= 6000) {
                 let random_response = RandomInt(8, 12);
                 if (random_response <= 9) {
                     this.GetCasterPlus().EmitSound("rattletrap_ratt_ability_flare_0" + random_response);
@@ -816,7 +816,7 @@ export class imba_rattletrap_rocket_flare extends BaseAbility_Plus {
         }
         AddFOWViewer(this.GetCasterPlus().GetTeamNumber(), vLocation, this.GetSpecialValueFor("radius"), this.GetSpecialValueFor("duration"), false);
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_rattletrap_rocket_flare_truesight") && !ExtraData.carpet_fire) {
-            let sight_area = CreateModifierThinker(this.GetCasterPlus(), this, "modifier_item_imba_gem_of_true_sight", {
+            let sight_area = BaseModifier_Plus.CreateBuffThinker(this.GetCasterPlus(), this, "modifier_item_imba_gem_of_true_sight", {
                 duration: this.GetSpecialValueFor("duration")
             }, vLocation, this.GetCasterPlus().GetTeamNumber(), false);
         }
@@ -1047,7 +1047,7 @@ export class modifier_imba_rattletrap_hookshot extends BaseModifierMotionHorizon
         if (this.ApplyHorizontalMotionController() == false || (this.GetCasterPlus().GetAbsOrigin() - this.target.GetAbsOrigin() as Vector).Length2D() <= this.latch_radius) {
             this.Destroy();
             return;
-        } else if (this.GetCasterPlus().GetName().includes("rattletrap")) {
+        } else if (this.GetCasterPlus().GetUnitName().includes("rattletrap")) {
             let responses = {
                 "1": "rattletrap_ratt_ability_batt_06",
                 "2": "rattletrap_ratt_ability_batt_07",
@@ -1109,15 +1109,15 @@ export class modifier_imba_rattletrap_hookshot extends BaseModifierMotionHorizon
         this.GetParentPlus().RemoveHorizontalMotionController(this);
         this.GetCasterPlus().StopSound("Hero_Rattletrap.Hookshot.Retract");
         this.GetCasterPlus().EmitSound("Hero_Rattletrap.Hookshot.Damage");
-        if (this.GetCasterPlus().GetName().includes("rattletrap") && (this.GetCasterPlus().GetAbsOrigin() - this.target.GetAbsOrigin() as Vector).Length2D() <= this.latch_radius && RollPercentage(15)) {
-            if (this.target.GetName().includes("pudge")) {
+        if (this.GetCasterPlus().GetUnitName().includes("rattletrap") && (this.GetCasterPlus().GetAbsOrigin() - this.target.GetAbsOrigin() as Vector).Length2D() <= this.latch_radius && RollPercentage(15)) {
+            if (this.target.GetUnitName().includes("pudge")) {
                 let responses = {
                     "1": "rattletrap_ratt_ability_hook_08",
                     "2": "rattletrap_ratt_ability_hook_11",
                     "3": "rattletrap_ratt_ability_hook_12"
                 }
                 this.GetCasterPlus().EmitSound(GFuncRandom.RandomValue(responses));
-            } else if (this.target.GetName().includes("tinker")) {
+            } else if (this.target.GetUnitName().includes("tinker")) {
                 this.GetCasterPlus().EmitSound("rattletrap_ratt_ability_hook_13");
             } else {
                 this.GetCasterPlus().EmitSound("rattletrap_ratt_ability_hook_0" + RandomInt(4, 5));

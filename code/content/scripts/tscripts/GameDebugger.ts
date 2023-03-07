@@ -2,9 +2,9 @@ import { GameSetting } from "./GameSetting";
 import { BotHelper } from "./helper/BotHelper";
 import { EventHelper } from "./helper/EventHelper";
 import { LogHelper } from "./helper/LogHelper";
+import { BaseNpc_Plus } from "./npc/entityPlus/BaseNpc_Plus";
 import { ActiveRootItem } from "./npc/items/ActiveRootItem";
 import { modifier_dummy_damage } from "./npc/modifier/battle/modifier_dummy_damage";
-import { unit_target_dummy } from "./npc/units/common/unit_target_dummy";
 import { GameEnum } from "./shared/GameEnum";
 import { GameProtocol } from "./shared/GameProtocol";
 import { GameServiceConfig } from "./shared/GameServiceConfig";
@@ -179,7 +179,7 @@ export class GameDebugger extends SingletonClass {
             let player = GGameScene.GetPlayer(e.PlayerID);
             if (!player) return;
             let hero = player.Hero;
-            let hDummy = unit_target_dummy.CreateOne(hero.GetAbsOrigin(), DOTATeam_t.DOTA_TEAM_BADGUYS, true, hero, hero)
+            let hDummy = BaseNpc_Plus.CreateUnitByName("unit_target_dummy", hero.GetAbsOrigin(), null, true, DOTATeam_t.DOTA_TEAM_BADGUYS)
             if (GFuncEntity.IsValid(hDummy)) {
                 modifier_dummy_damage.apply(hDummy, hDummy);
                 hDummy.SetControllableByPlayer(e.PlayerID, false);

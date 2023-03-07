@@ -434,7 +434,7 @@ export class modifier_imba_fire_remnant_charges extends BaseModifier_Plus {
         if (params.unit != this.GetParentPlus()) {
             return;
         }
-        if (params.ability.GetName() == "item_refresher" || params.ability.GetName() == "item_refresher_shard") {
+        if (params.ability.GetAbilityName() == "item_refresher" || params.ability.GetAbilityName() == "item_refresher_shard") {
             this.SetStackCount(this.max_charges);
             this.GetAbilityPlus().SetActivated(true);
         }
@@ -485,7 +485,7 @@ export class modifier_imba_fire_remnant_state extends BaseModifier_Plus {
     }
     BeDestroy(): void {
         if (IsServer()) {
-            UTIL_Remove(this.GetParentPlus());
+            GFuncEntity.SafeDestroyUnit(this.GetParentPlus());
             this.GetAbilityPlus<imba_ember_spirit_fire_remnant>().CollectRemnant();
         }
     }
@@ -750,7 +750,7 @@ export class imba_ember_spirit_fire_remnant extends BaseAbility_Plus {
         if (charges_modifier.GetStackCount() > 0) {
             charges_modifier.SetStackCount(charges_modifier.GetStackCount() - 1);
             this.GetCasterPlus().EmitSound("Hero_EmberSpirit.FireRemnant.Cast");
-            let remnant = BaseNpc_Plus.CreateUnitByName("npc_imba_ember_spirit_remnant", target_loc, this.GetCasterPlus().GetTeamNumber(), true, this.GetCasterPlus(), this.GetCasterPlus());
+            let remnant = BaseNpc_Plus.CreateUnitByName("npc_imba_ember_spirit_remnant", target_loc, this.GetCasterPlus(), true);
             remnant.SetOwner(this.GetCasterPlus());
             remnant.EmitSound("Hero_EmberSpirit.FireRemnant.Activate");
             remnant.SetRenderColor(255, 0, 0);

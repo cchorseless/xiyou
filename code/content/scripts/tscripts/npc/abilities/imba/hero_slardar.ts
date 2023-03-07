@@ -495,7 +495,7 @@ export class imba_slardar_slithereen_crush extends BaseAbility_Plus {
         ParticleManager.SetParticleControl(particle_splash_fx, 0, caster.GetAbsOrigin());
         ParticleManager.SetParticleControl(particle_splash_fx, 1, Vector(1, 1, radius + 100));
         if (this.GetCaster().HasScepter()) {
-            CreateModifierThinker(this.GetCaster(), this, "modifier_imba_slithereen_crush_puddle_aura", {
+            BaseModifier_Plus.CreateBuffThinker(this.GetCaster(), this, "modifier_imba_slithereen_crush_puddle_aura", {
                 duration: this.GetSpecialValueFor("scepter_puddle_duration")
             }, this.GetCaster().GetOrigin(), this.GetCaster().GetTeamNumber(), false);
         }
@@ -1313,7 +1313,7 @@ export class modifier_imba_rain_cloud_slardar extends BaseModifier_Plus {
                 ability.dummy.Destroy();
                 ability.dummy = undefined;
             }
-            ability.dummy = BaseNpc_Plus.CreateUnitByName("npc_dummy_unit_perma", caster.GetAbsOrigin(), caster.GetTeamNumber(), false, caster, undefined);
+            ability.dummy = BaseNpc_Plus.CreateUnitByName("npc_dummy_unit_perma", caster.GetAbsOrigin(), caster, false);
             ability.dummy.AddNewModifier(caster, ability, modifier_dummy, {});
             ability.particle_rain_fx = ResHelper.CreateParticleEx(particle_rain, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, ability.dummy);
             ParticleManager.SetParticleControl(ability.particle_rain_fx, 0, ability.dummy.GetAbsOrigin());

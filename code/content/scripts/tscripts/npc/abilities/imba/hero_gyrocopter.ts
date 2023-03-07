@@ -11,7 +11,7 @@ export class imba_gyrocopter_rocket_barrage extends BaseAbility_Plus {
     public responses: string[];
     OnSpellStart(): void {
         this.GetCasterPlus().EmitSound("Hero_Gyrocopter.Rocket_Barrage");
-        if (this.GetCasterPlus().GetName().includes("gyrocopter") && RollPercentage(75)) {
+        if (this.GetCasterPlus().GetUnitName().includes("gyrocopter") && RollPercentage(75)) {
             if (!this.responses) {
                 this.responses = ["gyrocopter_gyro_rocket_barrage_01", "gyrocopter_gyro_rocket_barrage_02", "gyrocopter_gyro_rocket_barrage_04"];
             }
@@ -240,7 +240,7 @@ export class imba_gyrocopter_homing_missile extends BaseAbility_Plus {
                 }
             }
         }
-        if (this.GetCasterPlus().GetName().includes("gyrocopter")) {
+        if (this.GetCasterPlus().GetUnitName().includes("gyrocopter")) {
             if (!this.responses) {
                 this.responses = {
                     "1": "gyrocopter_gyro_homing_missile_fire_02",
@@ -265,7 +265,7 @@ export class imba_gyrocopter_homing_missile extends BaseAbility_Plus {
             }
             missile_starting_position = this.GetCasterPlus().GetAbsOrigin() + (this.GetCasterPlus().GetForwardVector() * 150) as Vector;
         }
-        let missile = BaseNpc_Plus.CreateUnitByName("npc_dota_gyrocopter_homing_missile", missile_starting_position, this.GetCasterPlus().GetTeamNumber(), true, this.GetCasterPlus(), this.GetCasterPlus());
+        let missile = BaseNpc_Plus.CreateUnitByName("npc_dota_gyrocopter_homing_missile", missile_starting_position, this.GetCasterPlus(), true);
         missile.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_gyrocopter_homing_missile_pre_flight", {
             duration: pre_flight_time,
             bAutoCast: this.GetAutoCastState()
@@ -277,7 +277,7 @@ export class imba_gyrocopter_homing_missile extends BaseAbility_Plus {
             missile.SetForwardVector((this.GetCursorTarget().GetAbsOrigin() - this.GetCasterPlus().GetAbsOrigin() as Vector).Normalized());
         } else {
             missile.SetForwardVector((this.GetCursorPosition() - this.GetCasterPlus().GetAbsOrigin() as Vector).Normalized());
-            missile.SetControllableByPlayer(this.GetCasterPlus().GetPlayerID(), true);
+            missile.SetControllableByPlayer(this.GetCasterPlus().GetPlayerOwnerID(), true);
         }
         let fuse_particle = ResHelper.CreateParticleEx("particles/econ/items/gyrocopter/hero_gyrocopter_gyrotechnics/gyro_homing_missile_fuse.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, missile);
         ParticleManager.SetParticleControlForward(fuse_particle, 0, missile.GetForwardVector() * (-1) as Vector);
@@ -378,7 +378,7 @@ export class modifier_imba_gyrocopter_homing_missile_pre_flight extends BaseModi
         }
         this.GetParentPlus().StopSound("Hero_Gyrocopter.HomingMissile.Enemy");
         if (this.GetParentPlus().HasModifier("modifier_imba_gyrocopter_homing_missile")) {
-            this.GetParentPlus().SetControllableByPlayer(this.GetCasterPlus().GetPlayerID(), true);
+            this.GetParentPlus().SetControllableByPlayer(this.GetCasterPlus().GetPlayerOwnerID(), true);
             if (this.target && !this.target.IsNull() && this.target.IsAlive()) {
                 this.GetParentPlus().MoveToNPC(this.target);
             } else if (this.bAutoCast == 0) {
@@ -570,7 +570,7 @@ export class modifier_imba_gyrocopter_homing_missile extends BaseModifier_Plus {
                     attacker: this.GetCasterPlus(),
                     ability: this.GetAbilityPlus()
                 });
-                if (!this.target.IsAlive() && this.GetCasterPlus().GetName().includes("gyrocopter")) {
+                if (!this.target.IsAlive() && this.GetCasterPlus().GetUnitName().includes("gyrocopter")) {
                     if (!this.responses) {
                         this.responses = {
                             "1": "gyrocopter_gyro_homing_missile_impact_01",
@@ -959,7 +959,7 @@ export class modifier_imba_gyrocopter_gatling_guns_handler extends BaseModifier_
     } */
     @registerEvent(Enum_MODIFIER_EVENT.ON_ABILITY_FULLY_CAST)
     CC_OnAbilityFullyCast(keys: ModifierAbilityEvent): void {
-        if (keys.unit == this.GetParentPlus() && (keys.ability.GetName() == "item_refresher" || keys.ability.GetName() == "item_refresher_shard")) {
+        if (keys.unit == this.GetParentPlus() && (keys.ability.GetAbilityName() == "item_refresher" || keys.ability.GetAbilityName() == "item_refresher_shard")) {
             if (this.GetParentPlus().HasModifier("modifier_imba_gyrocopter_gatling_guns") && this.GetStackCount() <= 0) {
                 this.GetParentPlus().findBuff<modifier_imba_gyrocopter_gatling_guns>("modifier_imba_gyrocopter_gatling_guns").StartIntervalThink(this.GetSpecialValueFor("fire_interval"));
                 this.GetParentPlus().EmitSound("Hero_Gyrocopter.Gatling_Guns_Shoot");
@@ -1165,7 +1165,7 @@ export class imba_gyrocopter_call_down extends BaseAbility_Plus {
     }
     OnSpellStart(): void {
         this.GetCasterPlus().EmitSound("Hero_Gyrocopter.CallDown.Fire");
-        if (this.GetCasterPlus().GetName().includes("gyrocopter")) {
+        if (this.GetCasterPlus().GetUnitName().includes("gyrocopter")) {
             if (!this.responses) {
                 this.responses = {
                     "1": "gyrocopter_gyro_call_down_03",
@@ -1177,7 +1177,7 @@ export class imba_gyrocopter_call_down extends BaseAbility_Plus {
             }
             EmitSoundOnClient(this.responses[RandomInt(1, GameFunc.GetCount(this.responses))], this.GetCasterPlus().GetPlayerOwner());
         }
-        CreateModifierThinker(this.GetCasterPlus(), this, "modifier_imba_gyrocopter_call_down_thinker", {
+        BaseModifier_Plus.CreateBuffThinker(this.GetCasterPlus(), this, "modifier_imba_gyrocopter_call_down_thinker", {
             duration: this.GetSpecialValueFor("missile_delay_tooltip") * 2
         }, this.GetCursorPosition(), this.GetCasterPlus().GetTeamNumber(), false);
     }
@@ -1257,7 +1257,7 @@ export class modifier_imba_gyrocopter_call_down_thinker extends BaseModifier_Plu
                     attacker: this.GetCasterPlus(),
                     ability: this.GetAbilityPlus()
                 });
-                if (this.GetCasterPlus().GetName().includes("gyrocopter") && (enemy.IsRealUnit() || enemy.IsClone()) && !enemy.IsAlive()) {
+                if (this.GetCasterPlus().GetUnitName().includes("gyrocopter") && (enemy.IsRealUnit() || enemy.IsClone()) && !enemy.IsAlive()) {
                     EmitSoundOnClient("gyrocopter_gyro_call_down_1" + RandomInt(1, 2), this.GetCasterPlus().GetPlayerOwner());
                 }
             }
@@ -1276,7 +1276,7 @@ export class modifier_imba_gyrocopter_call_down_thinker extends BaseModifier_Plu
                     attacker: this.GetCasterPlus(),
                     ability: this.GetAbilityPlus()
                 });
-                if (this.GetCasterPlus().GetName().includes("gyrocopter") && (enemy.IsRealUnit() || enemy.IsClone()) && !enemy.IsAlive()) {
+                if (this.GetCasterPlus().GetUnitName().includes("gyrocopter") && (enemy.IsRealUnit() || enemy.IsClone()) && !enemy.IsAlive()) {
                     EmitSoundOnClient("gyrocopter_gyro_call_down_1" + RandomInt(1, 2), this.GetCasterPlus().GetPlayerOwner());
                 }
             }

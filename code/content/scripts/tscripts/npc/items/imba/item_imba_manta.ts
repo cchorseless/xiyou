@@ -18,7 +18,7 @@ export class item_imba_manta extends BaseItem_Plus {
                 return this.GetSpecialValueFor("cooldown_melee");
             }
         } else {
-            if ((this.GetCursorTarget && this.GetCursorTarget() && this.GetCursorTarget().IsRangedAttacker()) || (this.GetCasterPlus().IsRangedAttacker() && this.GetName() == "item_imba_manta")) {
+            if ((this.GetCursorTarget && this.GetCursorTarget() && this.GetCursorTarget().IsRangedAttacker()) || (this.GetCasterPlus().IsRangedAttacker() && this.GetAbilityName() == "item_imba_manta")) {
                 return this.GetSpecialValueFor("cooldown_ranged_tooltip");
             } else {
                 return this.GetSpecialValueFor("cooldown_melee");
@@ -26,13 +26,13 @@ export class item_imba_manta extends BaseItem_Plus {
         }
     }
     OnSpellStart(): void {
-        if (this.GetName() == "item_imba_manta") {
+        if (this.GetAbilityName() == "item_imba_manta") {
             this.GetCasterPlus().EmitSound("DOTA_Item.Manta.Activate");
             this.GetCasterPlus().Purge(false, true, false, false, false);
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_manta_invulnerable", {
                 duration: this.GetSpecialValueFor("invuln_duration")
             });
-        } else if (this.GetName() == "item_imba_manta_2") {
+        } else if (this.GetAbilityName() == "item_imba_manta_2") {
             let target = this.GetCursorTarget();
             target.EmitSound("DOTA_Item.Manta.Activate");
             if (target.GetTeamNumber() == this.GetCasterPlus().GetTeamNumber()) {
@@ -116,7 +116,7 @@ export class modifier_item_manta_passive extends BaseModifier_Plus {
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
     CC_OnDeath(keys: ModifierInstanceEvent): void {
-        if (this.GetItemPlus() && this.GetItemPlus().GetName() == "item_imba_manta_2" && keys.unit == this.GetParentPlus() && this.GetParentPlus().IsRealUnit() && keys.attacker != this.GetParentPlus() && (!this.GetParentPlus().IsReincarnating || (this.GetParentPlus().IsReincarnating && !this.GetParentPlus().IsReincarnating())) && (keys.attacker.IsRealUnit() || keys.attacker.IsClone() || keys.attacker.IsTempestDouble() || keys.attacker.IsIllusion())) {
+        if (this.GetItemPlus() && this.GetItemPlus().GetAbilityName() == "item_imba_manta_2" && keys.unit == this.GetParentPlus() && this.GetParentPlus().IsRealUnit() && keys.attacker != this.GetParentPlus() && (!this.GetParentPlus().IsReincarnating || (this.GetParentPlus().IsReincarnating && !this.GetParentPlus().IsReincarnating())) && (keys.attacker.IsRealUnit() || keys.attacker.IsClone() || keys.attacker.IsTempestDouble() || keys.attacker.IsIllusion())) {
             if (!keys.attacker.IsRangedAttacker()) {
                 this.outgoing_damage = this.GetItemPlus().GetSpecialValueFor("images_do_damage_percent_melee");
                 this.incoming_damage = this.GetItemPlus().GetSpecialValueFor("images_take_damage_percent_melee");

@@ -16,11 +16,11 @@ export class imba_sven_warcry_723 extends BaseAbility_Plus {
         }
         let duration = this.GetSpecialValueFor("duration") + this.GetCasterPlus().GetTalentValue("special_bonus_imba_sven_10");
         this.GetCasterPlus().EmitSound("Hero_Sven.WarCry");
-        if (this.GetCasterPlus().GetName().includes("sven")) {
+        if (this.GetCasterPlus().GetUnitName().includes("sven")) {
             this.GetCasterPlus().EmitSound("sven_sven_ability_warcry_0" + RandomInt(1, 4));
         }
         let warcry_cast_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_sven/sven_spell_warcry.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetCasterPlus());
-        if (this.GetCasterPlus().GetName().includes("sven")) {
+        if (this.GetCasterPlus().GetUnitName().includes("sven")) {
             ParticleManager.SetParticleControlEnt(warcry_cast_particle, 2, this.GetCasterPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_eyes", this.GetCasterPlus().GetAbsOrigin(), true);
         } else {
             ParticleManager.SetParticleControlEnt(warcry_cast_particle, 2, this.GetCasterPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", this.GetCasterPlus().GetAbsOrigin(), true);
@@ -91,7 +91,7 @@ export class modifier_imba_sven_warcry_723 extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TRANSLATE_ACTIVITY_MODIFIERS)
     CC_GetActivityTranslationModifiers(): string {
-        if (this.GetParentPlus().GetName().includes("sven")) {
+        if (this.GetParentPlus().GetUnitName().includes("sven")) {
             return "sven_warcry";
         }
     }
@@ -131,7 +131,7 @@ export class imba_sven_storm_bolt extends BaseAbility_Plus {
             let vision_radius = this.GetSpecialValueFor("vision_radius");
             let bolt_speed = this.GetSpecialValueFor("bolt_speed");
             caster.EmitSound("Hero_Sven.StormBolt");
-            if ((math.random(1, 100) <= 50) && (caster.GetName().includes("sven"))) {
+            if ((math.random(1, 100) <= 50) && (caster.GetUnitName().includes("sven"))) {
                 caster.EmitSound("sven_sven_ability_stormbolt_0" + math.random(1, 9));
             }
             caster.AddNewModifier(caster, this, "modifier_imba_storm_bolt_caster", {});
@@ -173,7 +173,7 @@ export class imba_sven_storm_bolt extends BaseAbility_Plus {
                 let caster_pos = caster.GetAbsOrigin();
                 let blink_pos = target_pos + (caster_pos - target_pos as Vector).Normalized() * 100 as Vector;
                 FindClearSpaceForUnit(caster, blink_pos, true);
-                if (((target_pos - caster_pos as Vector).Length2D() > 600) && (RandomInt(1, 100) <= 20) && (caster.GetName().includes("sven"))) {
+                if (((target_pos - caster_pos as Vector).Length2D() > 600) && (RandomInt(1, 100) <= 20) && (caster.GetUnitName().includes("sven"))) {
                     caster.EmitSound("sven_sven_ability_teleport_0" + math.random(1, 3));
                 }
             }
@@ -417,7 +417,7 @@ export class modifier_imba_great_cleave_active extends BaseModifier_Plus {
     } */
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TRANSLATE_ACTIVITY_MODIFIERS)
     CC_GetActivityTranslationModifiers(): string {
-        if (this.GetParentPlus().GetName().includes("sven")) {
+        if (this.GetParentPlus().GetUnitName().includes("sven")) {
             return "fear";
         }
     }
@@ -560,7 +560,7 @@ export class modifier_imba_warcry extends BaseModifier_Plus {
     } */
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TRANSLATE_ACTIVITY_MODIFIERS)
     CC_GetActivityTranslationModifiers(): string {
-        // if (this.GetParentPlus().GetName() .includes("sven")) {
+        // if (this.GetParentPlus().GetUnitName() .includes("sven")) {
         //     return "sven_warcry";
         // }
         return "sven_warcry";
@@ -575,7 +575,7 @@ export class modifier_imba_warcry extends BaseModifier_Plus {
             this.shield_size = 120;
             if (this.GetParentPlus() == this.GetCasterPlus()) {
                 this.GetCasterPlus().EmitSound("Hero_Sven.WarCry");
-                if (this.GetCasterPlus().GetName().includes("sven")) {
+                if (this.GetCasterPlus().GetUnitName().includes("sven")) {
                     this.GetCasterPlus().EmitSound("sven_sven_ability_warcry_0" + math.random(1, 6));
                 }
                 if (this.cast_fx) {
@@ -925,7 +925,7 @@ export class imba_sven_colossal_slash extends BaseAbility_Plus {
         let roar_pfx = ResHelper.CreateParticleEx("particles/units/heroes/hero_sven/sven_spell_gods_strength.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, caster);
         ParticleManager.SetParticleControlEnt(roar_pfx, 1, caster, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, undefined, caster.GetAbsOrigin(), true);
         ParticleManager.ReleaseParticleIndex(roar_pfx);
-        if (caster.GetName().includes("sven")) {
+        if (caster.GetUnitName().includes("sven")) {
             if ((math.random(1, 100) <= 25)) {
                 this.sound = "Imba.SvenGetsugaTensho";
             } else {
@@ -1116,7 +1116,7 @@ export class modifier_imba_colossal_slash_animation extends BaseModifier_Plus {
     } */
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TRANSLATE_ACTIVITY_MODIFIERS)
     CC_GetActivityTranslationModifiers(): string {
-        // if (this.GetParentPlus().GetName() .includes("sven")) {
+        // if (this.GetParentPlus().GetUnitName() .includes("sven")) {
         //     return "loadout";
         // }
         return "loadout";

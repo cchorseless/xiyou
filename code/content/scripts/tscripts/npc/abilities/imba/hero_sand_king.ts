@@ -940,7 +940,7 @@ export class imba_sandking_sand_storm_720 extends BaseAbility_Plus {
         if (GameServiceConfig.USE_MEME_SOUNDS && RollPercentage(GameServiceConfig.MEME_SOUNDS_CHANCE) && this.sand_storm == undefined) {
             this.caster.EmitSound("Imba.SandKingSandStorm");
         }
-        this.sand_storm = CreateModifierThinker(this.caster, this, "modifier_imba_sandking_sand_storm_720_thinker", {
+        this.sand_storm = BaseModifier_Plus.CreateBuffThinker(this.caster, this, "modifier_imba_sandking_sand_storm_720_thinker", {
             duration: this.AbilityDuration
         }, this.caster.GetAbsOrigin(), this.caster.GetTeamNumber(), false);
     }

@@ -61,11 +61,9 @@ export class BuildingEntityRoot extends BattleUnitEntityRoot {
         if (!IsServer()) { return };
         let hCaster = this.GetDomain<IBaseNpc_Plus>();
         let vLocation = hCaster.GetAbsOrigin();
-        let iTeamNumber = hCaster.GetTeamNumber()
         modifier_out_of_game.applyOnly(hCaster, hCaster);
         this.SetUIOverHead(false, true)
-        let hHero = PlayerResource.GetSelectedHeroEntity(hCaster.GetPlayerOwnerID())
-        let cloneRuntime = BaseNpc_Plus.CreateUnitByName(this.ConfigID, vLocation, iTeamNumber, true, hHero, hHero) as IBaseNpc_Plus;
+        let cloneRuntime = BaseNpc_Plus.CreateUnitByName(this.ConfigID, vLocation, hCaster) as IBaseNpc_Plus;
         if (cloneRuntime) {
             // cloneRuntime.RemoveGesture(GameActivity_t.ACT_DOTA_SPAWN);
             cloneRuntime.StartGestureFadeWithSequenceSettings(GameActivity_t.ACT_DOTA_TAUNT);

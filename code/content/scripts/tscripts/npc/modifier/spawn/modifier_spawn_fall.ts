@@ -50,7 +50,6 @@ export class modifier_spawn_fall extends BaseModifierMotionVertical_Plus {
     }
 
     BeDestroy() {
-        super.Destroy();
         if (IsServer()) {
             this.GetParentPlus().RemoveHorizontalMotionController(this);
             this.GetParentPlus().RemoveVerticalMotionController(this);

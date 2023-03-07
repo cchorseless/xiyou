@@ -160,8 +160,26 @@ export class BaseModifier {
                 teamNumber = caster.GetTeamNumber();
             }
             let n = CreateModifierThinker(caster, ability, this.name, modifierTable, position, teamNumber, phantomBlocker) as BaseNpc;
+            if (caster) {
+                n.SetOwner(caster);
+                n.RegOwnerSelf(true);
+            }
             GameFunc.BindInstanceToCls(n, BaseNpc);
-            n.FindModifierByNameAndCaster(this.name, caster) as InstanceType<T>;
+            return n as IBaseNpc_Plus;
+        }
+    }
+
+    public static CreateBuffThinker(caster: IBaseNpc_Plus, ability: CDOTABaseAbility, modifierName: string, modifierTable: object, position: Vector, teamNumber: DOTATeam_t = null, phantomBlocker: boolean = false) {
+        if (IsServer()) {
+            if (teamNumber == null) {
+                teamNumber = caster.GetTeamNumber();
+            }
+            let n = CreateModifierThinker(caster, ability, modifierName, modifierTable, position, teamNumber, phantomBlocker) as BaseNpc;
+            if (caster) {
+                n.SetOwner(caster);
+                n.RegOwnerSelf(true);
+            }
+            GameFunc.BindInstanceToCls(n, BaseNpc);
             return n as IBaseNpc_Plus;
         }
     }
@@ -368,7 +386,7 @@ export class BaseModifier {
         this.__AllRegisterEvent = null;
         // 计时器处理
         GTimerHelper.ClearAll(this);
-        // this.StartIntervalThink(-1);
+        this.StartIntervalThink(-1);
     }
     /**重载 
      * @Both
@@ -388,11 +406,7 @@ export class BaseNpc implements ET.IEntityRoot {
     __IN_DOTA_DATA__?: any;
     /**所有的BUFF信息 */
     __allModifiersInfo__?: { [v: string]: Array<any> };
-    /**配置表数据 */
-    __IN_KV_CACHE__?: { [v: string]: any };
-
     private __SpawnedHandler__?: Array<IGHandler>;
-    __safedestroyed__: boolean = false;
 
     /**
      *
@@ -412,22 +426,27 @@ export class BaseNpc implements ET.IEntityRoot {
         npcOwner: CBaseEntity | undefined = null,
         entityOwner: IBaseNpc_Plus = null
     ): InstanceType<T> {
-        return BaseNpc.CreateUnitByName(this.name, v, team, findClearSpace, npcOwner, entityOwner) as InstanceType<T>;
+        return BaseNpc.CreateUnitByName(this.name, v, entityOwner, findClearSpace, team, npcOwner) as InstanceType<T>;
     }
 
     static CreateUnitByName(
         unitname: string,
         v: Vector,
-        team: DOTATeam_t,
+        entityOwner: IBaseNpc_Plus,
         findClearSpace: boolean = true,
+        team: DOTATeam_t = null,
         npcOwner: CBaseEntity | undefined = null,
-        entityOwner: IBaseNpc_Plus = null
     ) {
+        npcOwner = npcOwner || entityOwner;;
+        team = team || entityOwner.GetTeam();
         let unit = CreateUnitByName(unitname, v, findClearSpace, npcOwner, entityOwner, team);
         if (unit == null) {
             GLogHelper.error("创建单位失败", unitname);
         }
-        GameFunc.BindInstanceToCls(unit, GGetRegClass(unitname) || BaseNpc);
+        else {
+            unit.RegOwnerSelf(true)
+        }
+        // GameFunc.BindInstanceToCls(unit, GGetRegClass(unitname) || BaseNpc);
         return unit as IBaseNpc_Plus;
     }
 
@@ -443,11 +462,8 @@ export class BaseNpc implements ET.IEntityRoot {
     onSpawned?(event: NpcSpawnedEvent) { }
     /**onSpawned之后执行，激活 */
     Activate?() { }
-    /**
-     * @override
-     * 删除
-     * */
-    UpdateOnRemove?() { }
+
+
     /**
      * @Server
      */
@@ -482,43 +498,6 @@ export class BaseNpc implements ET.IEntityRoot {
         return Combination as IBaseModifier_Plus;
     }
     //#endregion
-
-    /**
-     * 是否拥有魔晶
-     * @param hCaster
-     */
-    HasShard?() {
-        // return hCaster.HasModifier()
-        return false;
-    }
-
-
-    /**
-     * @Server
-     * @param entityKeyValues
-     */
-    InitActivityModifier?() {
-        if (this.__IN_DOTA_DATA__) {
-            let entityKeyValues = this.__IN_DOTA_DATA__;
-            let move = entityKeyValues.MovementSpeedActivityModifiers;
-            let attackspeed = entityKeyValues.AttackSpeedActivityModifiers;
-            let attackrange = entityKeyValues.AttackRangeActivityModifiers;
-            let obj = {};
-            if (move) {
-                obj = Object.assign(obj, move)
-            }
-            if (attackspeed) {
-                obj = Object.assign(obj, attackspeed)
-            }
-            if (attackrange) {
-                obj = Object.assign(obj, attackrange)
-            }
-            if (Object.keys(obj).length > 0) {
-                Gmodifier_activity.apply(this, this, null, obj)
-            }
-        }
-
-    }
 
 }
 

@@ -19,7 +19,7 @@ export class imba_furion_wrath_of_nature extends BaseAbility_Plus {
     OnSpellStart(): void {
         this.GetCasterPlus().EmitSound("Hero_Furion.WrathOfNature_Cast.Self");
         EmitSoundOnLocationWithCaster(this.GetCursorPosition(), "Hero_Furion.WrathOfNature_Cast", this.GetCasterPlus());
-        CreateModifierThinker(this.GetCasterPlus(), this, "modifier_imba_furion_wrath_of_nature_thinker", {}, this.GetCursorPosition(), this.GetCasterPlus().GetTeamNumber(), false);
+        BaseModifier_Plus.CreateBuffThinker(this.GetCasterPlus(), this, "modifier_imba_furion_wrath_of_nature_thinker", {}, this.GetCursorPosition(), this.GetCasterPlus().GetTeamNumber(), false);
     }
     OnOwnerSpawned(): void {
         if (!IsServer()) {

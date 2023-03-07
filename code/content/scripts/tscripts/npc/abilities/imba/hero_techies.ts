@@ -15,9 +15,9 @@ function PlantProximityMine(caster: IBaseNpc_Plus, ability: IBaseAbility_Plus, s
     } else {
         mine_name = "npc_imba_techies_land_mines";
     }
-    let mine = BaseNpc_Plus.CreateUnitByName(mine_name, spawn_point, caster.GetTeamNumber(), true, caster, caster);
+    let mine = BaseNpc_Plus.CreateUnitByName(mine_name, spawn_point, caster, true);
     GFuncEntity.AddRangeIndicator(mine, caster, undefined, undefined, ability.GetAOERadius(), 150, 22, 22);
-    let playerID = caster.GetPlayerID();
+    let playerID = caster.GetPlayerOwnerID();
     mine.SetControllableByPlayer(playerID, true);
     mine.SetOwner(caster);
     mine.AddNewModifier(caster, ability, "modifier_imba_proximity_mine", {});
@@ -333,7 +333,7 @@ export class modifier_imba_proximity_mine extends BaseModifier_Plus {
         let modifier_building_res = "modifier_imba_proximity_mine_building_res";
         let modifier_talent_shrapnel = "modifier_imba_proximity_mine_talent";
         if (this.is_big_boom) {
-            CreateModifierThinker(caster, this.ability, modifier_talent_shrapnel, {
+            BaseModifier_Plus.CreateBuffThinker(caster, this.ability, modifier_talent_shrapnel, {
                 duration: this.big_boom_shrapnel_duration
             }, casterAbsOrigin, caster.GetTeamNumber(), false);
         }
@@ -613,8 +613,8 @@ export class imba_techies_stasis_trap extends BaseAbility_Plus {
                 }
             });
         } else {
-            let trap = BaseNpc_Plus.CreateUnitByName("npc_imba_techies_stasis_trap", target_point, caster.GetTeamNumber(), true, caster, caster);
-            let playerID = caster.GetPlayerID();
+            let trap = BaseNpc_Plus.CreateUnitByName("npc_imba_techies_stasis_trap", target_point, caster, true);
+            let playerID = caster.GetPlayerOwnerID();
             trap.SetControllableByPlayer(playerID, true);
             trap.SetOwner(caster);
             trap.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_statis_trap", {});
@@ -870,8 +870,8 @@ export class imba_techies_suicide extends BaseAbility_Plus {
             target_point_z: target_point.z
         }
         if (caster.HasTalent("special_bonus_imba_techies_8")) {
-            pig = BaseNpc_Plus.CreateUnitByName("npc_imba_techies_suicide_piggy", caster.GetAbsOrigin(), caster.GetTeamNumber(), false, caster, caster);
-            let playerID = caster.GetPlayerID();
+            pig = BaseNpc_Plus.CreateUnitByName("npc_imba_techies_suicide_piggy", caster.GetAbsOrigin(), caster, false);
+            let playerID = caster.GetPlayerOwnerID();
             pig.SetControllableByPlayer(playerID, true);
             pig.SetForwardVector(caster.GetForwardVector());
             if (GameServiceConfig.USE_MEME_SOUNDS && RollPercentage(GameServiceConfig.MEME_SOUNDS_CHANCE)) {
@@ -1313,8 +1313,8 @@ export class imba_techies_remote_mines extends BaseAbility_Plus {
         }
         EmitSoundOn(sound, caster);
         EmitSoundOn(sound_cast, caster);
-        let mine = BaseNpc_Plus.CreateUnitByName("npc_imba_techies_remote_mines", target_point, caster.GetTeamNumber(), false, caster, caster);
-        let playerID = caster.GetPlayerID();
+        let mine = BaseNpc_Plus.CreateUnitByName("npc_imba_techies_remote_mines", target_point, caster, false);
+        let playerID = caster.GetPlayerOwnerID();
         mine.SetControllableByPlayer(playerID, true);
         let mine_ability_handler = mine.FindAbilityByName(mine_ability);
         if (mine_ability_handler) {
@@ -1575,7 +1575,7 @@ export class imba_techies_minefield_sign extends BaseAbility_Plus {
         if (this.assigned_sign && this.assigned_sign.Destroy) {
             this.assigned_sign.Destroy();
         }
-        let sign = BaseNpc_Plus.CreateUnitByName("npc_imba_techies_minefield_sign", target_point, caster.GetTeamNumber(), false, caster, caster);
+        let sign = BaseNpc_Plus.CreateUnitByName("npc_imba_techies_minefield_sign", target_point, caster, false);
         GFuncEntity.AddRangeIndicator(sign, caster, ability, "radius", undefined, 255, 40, 40, true);
         this.assigned_sign = sign;
         sign.AddNewModifier(caster, ability, modifier_sign, {});

@@ -106,67 +106,67 @@ export class modifier_meepo_divided_we_stand_lua extends BaseModifier_Plus {
         if (keys.ability && keys.ability.IsItem && keys.ability.IsItem() && this.GetParentPlus().GetCloneSource && (keys.unit && keys.unit == this.GetParentPlus().GetCloneSource() || (keys.target && keys.target == this.GetParentPlus().GetCloneSource() && keys.unit.GetTeamNumber() == this.GetParentPlus().GetCloneSource().GetTeamNumber()))) {
             let modifier_name = undefined;
             let modifier_duration = undefined;
-            if (keys.ability.GetName() == "item_imba_white_queen_cape" || keys.ability.GetName() == "item_minotaur_horn") {
+            if (keys.ability.GetAbilityName() == "item_imba_white_queen_cape" || keys.ability.GetAbilityName() == "item_minotaur_horn") {
                 modifier_name = "modifier_black_king_bar_immune";
                 modifier_duration = keys.ability.GetSpecialValueFor("duration");
-            } else if (keys.ability.GetName() == "item_imba_black_king_bar") {
+            } else if (keys.ability.GetAbilityName() == "item_imba_black_king_bar") {
                 modifier_name = "modifier_item_imba_black_king_bar_buff";
                 modifier_duration = keys.ability.GetSpecialValueFor("duration");
-            } else if (keys.ability.GetName() == "item_imba_angelic_alliance") {
+            } else if (keys.ability.GetAbilityName() == "item_imba_angelic_alliance") {
                 modifier_name = "modifier_imba_angelic_alliance_buff";
                 modifier_duration = keys.ability.GetSpecialValueFor("duration");
-            } else if (keys.ability.GetName() == "item_imba_blade_mail" || keys.ability.GetName() == "item_imba_bladestorm_mail") {
+            } else if (keys.ability.GetAbilityName() == "item_imba_blade_mail" || keys.ability.GetAbilityName() == "item_imba_bladestorm_mail") {
                 modifier_name = "modifier_item_imba_blade_mail_active";
                 modifier_duration = keys.ability.GetSpecialValueFor("duration");
-            } else if (keys.ability.GetName() == "item_imba_butterfly") {
+            } else if (keys.ability.GetAbilityName() == "item_imba_butterfly") {
                 modifier_name = "modifier_item_imba_butterfly_flutter";
                 modifier_duration = keys.ability.GetSpecialValueFor("flutter_duration");
-            } else if (keys.ability.GetName() == "item_imba_jarnbjorn") {
+            } else if (keys.ability.GetAbilityName() == "item_imba_jarnbjorn") {
                 modifier_name = "modifier_item_imba_static_charge";
                 modifier_duration = keys.ability.GetSpecialValueFor("static_duration");
-            } else if (keys.ability.GetName() == "item_imba_sange") {
+            } else if (keys.ability.GetAbilityName() == "item_imba_sange") {
                 modifier_name = "modifier_item_imba_sange_active";
                 modifier_duration = keys.ability.GetSpecialValueFor("active_duration");
-            } else if (keys.ability.GetName() == "item_imba_heavens_halberd") {
+            } else if (keys.ability.GetAbilityName() == "item_imba_heavens_halberd") {
                 modifier_name = "modifier_item_imba_heavens_halberd_ally_buff";
                 modifier_duration = keys.ability.GetSpecialValueFor("buff_duration");
-            } else if (keys.ability.GetName() == "item_imba_yasha") {
+            } else if (keys.ability.GetAbilityName() == "item_imba_yasha") {
                 modifier_name = "modifier_item_imba_yasha_active";
                 modifier_duration = keys.ability.GetSpecialValueFor("active_duration");
-            } else if (keys.ability.GetName() == "item_imba_kaya" || keys.ability.GetName() == "item_imba_arcane_nexus") {
+            } else if (keys.ability.GetAbilityName() == "item_imba_kaya" || keys.ability.GetAbilityName() == "item_imba_arcane_nexus") {
                 modifier_name = "modifier_item_imba_kaya_active";
                 modifier_duration = keys.ability.GetSpecialValueFor("active_duration");
-            } else if (keys.ability.GetName() == "item_imba_sange_yasha") {
+            } else if (keys.ability.GetAbilityName() == "item_imba_sange_yasha") {
                 modifier_name = "modifier_item_imba_sange_yasha_active";
                 modifier_duration = keys.ability.GetSpecialValueFor("active_duration");
-            } else if (keys.ability.GetName() == "item_imba_kaya_and_sange") {
+            } else if (keys.ability.GetAbilityName() == "item_imba_kaya_and_sange") {
                 modifier_name = "modifier_item_imba_kaya_and_sange_active";
                 modifier_duration = keys.ability.GetSpecialValueFor("active_duration");
-            } else if (keys.ability.GetName() == "item_imba_yasha_and_kaya") {
+            } else if (keys.ability.GetAbilityName() == "item_imba_yasha_and_kaya") {
                 modifier_name = "modifier_item_imba_yasha_and_kaya_active";
                 modifier_duration = keys.ability.GetSpecialValueFor("active_duration");
-            } else if (keys.ability.GetName() == "item_imba_sange_yasha") {
+            } else if (keys.ability.GetAbilityName() == "item_imba_sange_yasha") {
                 modifier_name = "modifier_item_imba_sange_yasha_active";
                 modifier_duration = keys.ability.GetSpecialValueFor("active_duration");
-            } else if (keys.ability.GetName() == "item_sphere") {
+            } else if (keys.ability.GetAbilityName() == "item_sphere") {
                 modifier_name = "modifier_item_sphere_target";
                 modifier_duration = keys.ability.GetSpecialValueFor("block_cooldown");
-            } else if (keys.ability.GetName() == "item_imba_lotus_orb") {
+            } else if (keys.ability.GetAbilityName() == "item_imba_lotus_orb") {
                 modifier_name = "modifier_item_imba_lotus_orb_active";
                 modifier_duration = keys.ability.GetSpecialValueFor("active_duration");
-            } else if (keys.ability.GetName() == "item_imba_mask_of_madness") {
+            } else if (keys.ability.GetAbilityName() == "item_imba_mask_of_madness") {
                 modifier_name = "modifier_imba_mask_of_madness_berserk";
                 modifier_duration = keys.ability.GetSpecialValueFor("berserk_duration");
-            } else if (keys.ability.GetName() == "item_imba_mjollnir") {
+            } else if (keys.ability.GetAbilityName() == "item_imba_mjollnir") {
                 modifier_name = "modifier_item_imba_static_charge";
                 modifier_duration = keys.ability.GetSpecialValueFor("static_duration");
-            } else if (keys.ability.GetName() == "item_imba_spirit_vessel") {
+            } else if (keys.ability.GetAbilityName() == "item_imba_spirit_vessel") {
                 modifier_name = "modifier_item_imba_spirit_vessel_heal";
                 modifier_duration = keys.ability.GetSpecialValueFor("duration");
-            } else if (keys.ability.GetName() == "item_imba_urn_of_shadows") {
+            } else if (keys.ability.GetAbilityName() == "item_imba_urn_of_shadows") {
                 modifier_name = "modifier_imba_urn_of_shadows_active_ally";
                 modifier_duration = keys.ability.GetSpecialValueFor("duration");
-            } else if (keys.ability.GetName() == "item_imba_valiance" && !this.GetParentPlus().GetCloneSource().HasModifier("modifier_item_imba_valiance_counter")) {
+            } else if (keys.ability.GetAbilityName() == "item_imba_valiance" && !this.GetParentPlus().GetCloneSource().HasModifier("modifier_item_imba_valiance_counter")) {
                 modifier_name = "modifier_item_imba_valiance_guard";
                 modifier_duration = keys.ability.GetSpecialValueFor("guard_duration");
             }
@@ -175,7 +175,7 @@ export class modifier_meepo_divided_we_stand_lua extends BaseModifier_Plus {
                     duration: modifier_duration
                 });
             }
-            if (keys.ability.GetName() == "item_imba_the_triumvirate_v2") {
+            if (keys.ability.GetAbilityName() == "item_imba_the_triumvirate_v2") {
                 this.GetParentPlus().AddNewModifier(this.GetParentPlus().GetCloneSource(), keys.ability, "modifier_item_imba_the_triumvirate_v2_sange", {
                     duration: keys.ability.GetSpecialValueFor("active_duration")
                 });
@@ -189,7 +189,7 @@ export class modifier_meepo_divided_we_stand_lua extends BaseModifier_Plus {
                         });
                     });
                 });
-            } else if (keys.ability.GetName() == "item_imba_black_queen_cape") {
+            } else if (keys.ability.GetAbilityName() == "item_imba_black_queen_cape") {
                 this.GetParentPlus().AddNewModifier(this.GetParentPlus().GetCloneSource(), keys.ability, "modifier_imba_black_queen_cape_active_bkb", {
                     duration: keys.ability.GetSpecialValueFor("bkb_duration")
                 });
@@ -198,28 +198,28 @@ export class modifier_meepo_divided_we_stand_lua extends BaseModifier_Plus {
                         duration: keys.ability.GetSpecialValueFor("heal_duration")
                     });
                 }
-            } else if (keys.ability.GetName() == "item_imba_satanic") {
+            } else if (keys.ability.GetAbilityName() == "item_imba_satanic") {
                 this.GetParentPlus().AddNewModifier(this.GetParentPlus().GetCloneSource(), keys.ability, "modifier_imba_satanic", {
                     duration: keys.ability.GetSpecialValueFor("unholy_rage_duration")
                 });
                 this.GetParentPlus().AddNewModifier(this.GetParentPlus().GetCloneSource(), keys.ability, "modifier_imba_satanic_active", {
                     duration: keys.ability.GetSpecialValueFor("unholy_rage_duration")
                 });
-            } else if (keys.ability.GetName() == "item_imba_bloodstone_720") {
+            } else if (keys.ability.GetAbilityName() == "item_imba_bloodstone_720") {
                 this.GetParentPlus().AddNewModifier(this.GetParentPlus().GetCloneSource(), keys.ability, "modifier_item_imba_bloodstone_active_720", {
                     duration: keys.ability.GetSpecialValueFor("restore_duration")
                 });
                 this.GetParentPlus().AddNewModifier(this.GetParentPlus().GetCloneSource(), keys.ability, "modifier_item_imba_bloodstone_active_cdr_720", {
                     duration: keys.ability.GetSpecialValueFor("active_duration")
                 });
-            } else if (keys.ability.GetName() == "item_imba_glimmerdark_shield") {
+            } else if (keys.ability.GetAbilityName() == "item_imba_glimmerdark_shield") {
                 this.GetParentPlus().AddNewModifier(this.GetParentPlus().GetCloneSource(), keys.ability, "modifier_item_imba_glimmerdark_shield_prism", {
                     duration: keys.ability.GetSpecialValueFor("prism_duration")
                 });
                 this.GetParentPlus().AddNewModifier(this.GetParentPlus().GetCloneSource(), keys.ability, "modifier_item_imba_gem_of_true_sight", {
                     duration: keys.ability.GetSpecialValueFor("prism_duration")
                 });
-            } else if (keys.ability.GetName() == "item_imba_shadow_blade") {
+            } else if (keys.ability.GetAbilityName() == "item_imba_shadow_blade") {
                 this.AddTimer(keys.ability.GetSpecialValueFor("invis_fade_time"), () => {
                     let particle_invis_start_fx = ResHelper.CreateParticleEx("particles/generic_hero_status/status_invisibility_start.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, this.GetParentPlus());
                     ParticleManager.SetParticleControl(particle_invis_start_fx, 0, this.GetParentPlus().GetAbsOrigin());
@@ -228,7 +228,7 @@ export class modifier_meepo_divided_we_stand_lua extends BaseModifier_Plus {
                         duration: keys.ability.GetSpecialValueFor("invis_duration")
                     });
                 });
-            } else if (keys.ability.GetName() == "item_imba_silver_edge") {
+            } else if (keys.ability.GetAbilityName() == "item_imba_silver_edge") {
                 this.AddTimer(keys.ability.GetSpecialValueFor("invis_fade_time"), () => {
                     let particle_invis_start_fx = ResHelper.CreateParticleEx("particles/generic_hero_status/status_invisibility_start.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, this.GetParentPlus());
                     ParticleManager.SetParticleControl(particle_invis_start_fx, 0, this.GetParentPlus().GetAbsOrigin());
@@ -242,7 +242,7 @@ export class modifier_meepo_divided_we_stand_lua extends BaseModifier_Plus {
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
     CC_OnDeath(keys: ModifierInstanceEvent): void {
-        if (keys.unit.GetPlayerOwnerID() == this.GetParentPlus().GetPlayerOwnerID() && keys.unit.GetName() == this.GetParentPlus().GetName() && !keys.unit.IsIllusion()) {
+        if (keys.unit.GetPlayerOwnerID() == this.GetParentPlus().GetPlayerOwnerID() && keys.unit.GetUnitName() == this.GetParentPlus().GetUnitName() && !keys.unit.IsIllusion()) {
             let cloned = this.GetParentPlus().GetCloneSource() as IBaseNpc_Plus;
             if (this.GetParentPlus().IsAlive()) {
                 this.GetParentPlus().TrueKilled(this.GetParentPlus(), this.GetAbilityPlus());

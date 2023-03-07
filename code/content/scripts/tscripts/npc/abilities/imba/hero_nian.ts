@@ -540,7 +540,7 @@ export class imba_nian_volcanic_burster extends BaseAbility_Plus {
             this.GetCasterPlus().SetCursorPosition(this.GetCursorPosition() + this.GetCasterPlus().GetForwardVector() as Vector);
         }
         this.GetCasterPlus().EmitSound("Hero_Nian.Volcanic_Burster_Cast");
-        let volcanic_dummy = CreateModifierThinker(this.GetCasterPlus(), this, "modifier_imba_nian_volcanic_burster_tracker", {}, this.GetCasterPlus().GetAbsOrigin() + this.GetCasterPlus().GetForwardVector() * this.GetSpecialValueFor("projectile_spawn_distance") as Vector, this.GetCasterPlus().GetTeamNumber(), false);
+        let volcanic_dummy = BaseModifier_Plus.CreateBuffThinker(this.GetCasterPlus(), this, "modifier_imba_nian_volcanic_burster_tracker", {}, this.GetCasterPlus().GetAbsOrigin() + this.GetCasterPlus().GetForwardVector() * this.GetSpecialValueFor("projectile_spawn_distance") as Vector, this.GetCasterPlus().GetTeamNumber(), false);
         volcanic_dummy.EmitSound("Hero_Nian.Volcanic_Burster_Flight");
         let velocity = (this.GetCursorPosition() - this.GetCasterPlus().GetAbsOrigin() as Vector).Normalized() * this.GetSpecialValueFor("projectile_speed") as Vector;
         let linear_projectile: CreateLinearProjectileOptions = {

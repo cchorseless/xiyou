@@ -101,7 +101,7 @@ export class imba_bristleback_viscous_nasal_goo extends BaseAbility_Plus {
             }
             ProjectileManager.CreateTrackingProjectile(projectile);
         }
-        if (this.caster.GetName().includes("bristleback") && RollPercentage(40)) {
+        if (this.caster.GetUnitName().includes("bristleback") && RollPercentage(40)) {
             this.caster.EmitSound("bristleback_bristle_nasal_goo_0" + math.random(1, 7));
         }
     }
@@ -225,19 +225,11 @@ export class modifier_imba_bristleback_viscous_nasal_goo_autocaster extends Base
         }
         if (this.ability.GetAutoCastState() && this.ability.IsFullyCastable() && !this.ability.IsInAbilityPhase() && !this.caster.IsHexed() && !this.caster.IsNightmared() && !this.caster.IsOutOfGame() && !this.caster.IsSilenced() && !this.caster.IsStunned() && !this.caster.IsChanneling()) {
             if (this.caster.HasScepter()) {
-                if (this.caster.GetPlayerID) {
-                    this.caster.CastAbilityNoTarget(this.ability, this.caster.GetPlayerID());
-                } else if (this.caster.GetPlayerOwner && this.caster.GetPlayerOwner().GetPlayerID) {
-                    this.caster.CastAbilityNoTarget(this.ability, this.caster.GetPlayerOwner().GetPlayerID());
-                }
+                this.caster.CastAbilityNoTarget(this.ability, this.caster.GetPlayerOwnerID());
             } else {
                 let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.caster.GetAbsOrigin(), undefined, this.ability.GetCastRange(this.caster.GetAbsOrigin(), this.caster) + this.caster.GetCastRangeBonus(), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_CLOSEST, false);
                 if (GameFunc.GetCount(enemies) > 0) {
-                    if (this.caster.GetPlayerID) {
-                        this.caster.CastAbilityOnTarget(enemies[0], this.ability, this.caster.GetPlayerID());
-                    } else if (this.caster.GetPlayerOwner && this.caster.GetPlayerOwner().GetPlayerID) {
-                        this.caster.CastAbilityOnTarget(enemies[0], this.ability, this.caster.GetPlayerOwner().GetPlayerID());
-                    }
+                    this.caster.CastAbilityOnTarget(enemies[0], this.ability, this.caster.GetPlayerOwnerID());
                     this.AddTimer(this.ability.GetBackswingTime(), () => {
                         if (!this.ability.IsNull() && this.ability.GetCooldownTimeRemaining() > this.ability.GetBackswingTime()) {
                             this.caster.MoveToPositionAggressive(this.caster.GetAbsOrigin());
@@ -265,7 +257,7 @@ export class imba_bristleback_quill_spray extends BaseAbility_Plus {
         if (!IsServer()) {
             return;
         }
-        CreateModifierThinker(this.caster, this, "modifier_imba_bristleback_quillspray_thinker", {
+        BaseModifier_Plus.CreateBuffThinker(this.caster, this, "modifier_imba_bristleback_quillspray_thinker", {
             duration: this.duration
         }, this.caster.GetAbsOrigin(), this.caster.GetTeamNumber(), false);
         this.caster.EmitSound("Hero_Bristleback.QuillSpray.Cast");
@@ -428,11 +420,7 @@ export class modifier_imba_bristleback_quill_spray_autocaster extends BaseModifi
             return;
         }
         if (this.ability.GetAutoCastState() && this.ability.IsFullyCastable() && !this.caster.IsHexed() && !this.caster.IsNightmared() && !this.caster.IsOutOfGame() && !this.caster.IsSilenced() && !this.caster.IsStunned() && !this.caster.IsChanneling()) {
-            if (this.caster.GetPlayerID) {
-                this.caster.CastAbilityImmediately(this.ability, this.caster.GetPlayerID());
-            } else if (this.caster.GetPlayerOwner && this.caster.GetPlayerOwner().GetPlayerID) {
-                this.caster.CastAbilityImmediately(this.ability, this.caster.GetPlayerOwner().GetPlayerID());
-            }
+            this.caster.CastAbilityImmediately(this.ability, this.caster.GetPlayerOwnerID());
         }
         if (this.ability.GetAutoCastState() && !this.caster.IsOutOfGame() && !this.caster.IsInvulnerable()) {
             this.distance = this.distance + GFuncVector.AsVector(this.caster.GetAbsOrigin() - this.last_position).Length();
@@ -635,7 +623,7 @@ export class modifier_imba_bristleback_warpath extends BaseModifier_Plus {
             return;
         }
         if (this.parent.IsIllusion()) {
-            let owners = Entities.FindAllByNameWithin("npc_dota_hero_bristleback", this.parent.GetAbsOrigin(), 100) as IBaseNpc_Plus[];
+            let owners = Entities.FindAllByNameWithin(this.parent.GetUnitName(), this.parent.GetAbsOrigin(), 100) as IBaseNpc_Plus[];
             for (const [_, owner] of GameFunc.iPair(owners)) {
                 if (!owner.IsIllusion() && owner.HasModifier("modifier_imba_bristleback_warpath") && owner.GetTeam() == this.parent.GetTeam()) {
                     this.SetStackCount(owner.findBuff<modifier_imba_bristleback_warpath>("modifier_imba_bristleback_warpath").GetStackCount());
@@ -673,7 +661,7 @@ export class modifier_imba_bristleback_warpath extends BaseModifier_Plus {
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ABILITY_FULLY_CAST)
     CC_OnAbilityFullyCast(keys: ModifierAbilityEvent): void {
-        if (keys.ability && keys.unit == this.parent && !this.parent.PassivesDisabled() && !keys.ability.IsItem() && keys.ability.GetName() != "ability_capture") {
+        if (keys.ability && keys.unit == this.parent && !this.parent.PassivesDisabled() && !keys.ability.IsItem() && keys.ability.GetAbilityName() != "ability_capture") {
             this.counter = this.counter + 1;
             this.SetStackCount(math.min(this.counter, this.max_stacks));
             if (this.GetStackCount() < this.max_stacks) {

@@ -102,7 +102,7 @@ export class modifier_imba_urn_of_shadows_passive extends BaseModifier_Plus {
                 for (let itemSlot = 0; itemSlot <= 5; itemSlot++) {
                     if (parent.GetItemInSlot) {
                         let item = parent.GetItemInSlot(itemSlot);
-                        if (item && (item.GetName() == "item_imba_black_queen_cape" || item.GetName() == "item_imba_spirit_vessel")) {
+                        if (item && (item.GetAbilityName() == "item_imba_black_queen_cape" || item.GetAbilityName() == "item_imba_spirit_vessel")) {
                             item.SetCurrentCharges(math.max(charges, 0));
                             return;
                         }
@@ -160,11 +160,11 @@ export class modifier_imba_urn_of_shadows_passive extends BaseModifier_Plus {
                     for (let i = 0; i <= 5; i++) {
                         let item = ally.GetItemInSlot(i);
                         if (item) {
-                            if ((item.GetName() == urn_item_name || item.GetName() == "item_imba_spirit_vessel") && (item.GetPurchaser() == ally)) {
+                            if ((item.GetAbilityName() == urn_item_name || item.GetAbilityName() == "item_imba_spirit_vessel") && (item.GetPurchaser() == ally)) {
                                 if ((ally.GetAbsOrigin() - target.GetAbsOrigin() as Vector).Length2D() < our_distance) {
                                     return undefined;
                                 }
-                            } else if ((item.GetName() == cape_item_name) && (item.GetPurchaser() == ally)) {
+                            } else if ((item.GetAbilityName() == cape_item_name) && (item.GetPurchaser() == ally)) {
                                 return undefined;
                             }
                         }
@@ -175,7 +175,7 @@ export class modifier_imba_urn_of_shadows_passive extends BaseModifier_Plus {
         for (let i = 0; i <= 5; i++) {
             let item = this.parent.GetItemInSlot(i);
             if (item) {
-                if (item.GetName() == urn_item_name) {
+                if (item.GetAbilityName() == urn_item_name) {
                     if (item != this.item) {
                         return undefined;
                     }

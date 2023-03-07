@@ -376,7 +376,7 @@ export class modifier_imba_templar_assassin_meld extends BaseModifier_Plus {
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ABILITY_FULLY_CAST)
     CC_OnAbilityFullyCast(keys: ModifierAbilityEvent): void {
-        if (keys.unit == this.GetParentPlus() && keys.ability != this.GetAbilityPlus() && keys.ability.GetName() != "imba_templar_assassin_trap_teleport") {
+        if (keys.unit == this.GetParentPlus() && keys.ability != this.GetAbilityPlus() && keys.ability.GetAbilityName() != "imba_templar_assassin_trap_teleport") {
             this.Destroy();
         }
     }
@@ -628,7 +628,7 @@ export class imba_templar_assassin_trap extends BaseAbility_Plus {
             }
             if (index) {
                 this.GetCasterPlus().EmitSound("Hero_TemplarAssassin.Trap.Trigger");
-                if (this.GetCasterPlus().GetName().includes("templar_assassin") && RollPercentage(50)) {
+                if (this.GetCasterPlus().GetUnitName().includes("templar_assassin") && RollPercentage(50)) {
                     if (RollPercentage(50)) {
                         this.GetCasterPlus().EmitSound("templar_assassin_temp_psionictrap_05");
                     } else {
@@ -1001,17 +1001,17 @@ export class imba_templar_assassin_psionic_trap extends BaseAbility_Plus {
         if (this.counter_modifier && this.counter_modifier.trap_table) {
             this.GetCasterPlus().EmitSound("Hero_TemplarAssassin.Trap.Cast");
             EmitSoundOnLocationWithCaster(this.GetCursorPosition(), "Hero_TemplarAssassin.Trap", this.GetCasterPlus());
-            if (this.GetCasterPlus().GetName().includes("templar_assassin")) {
+            if (this.GetCasterPlus().GetUnitName().includes("templar_assassin")) {
                 if (RollPercentage(1)) {
                     this.GetCasterPlus().EmitSound("templar_assassin_temp_psionictrap_04");
                 } else if (RollPercentage(50)) {
                     this.GetCasterPlus().EmitSound("templar_assassin_temp_psionictrap_0" + RandomInt(1, 3));
                 }
             }
-            let trap = BaseNpc_Plus.CreateUnitByName("npc_dota_templar_assassin_psionic_trap", this.GetCursorPosition(), this.GetCasterPlus().GetTeamNumber(), false, this.GetCasterPlus(), this.GetCasterPlus());
+            let trap = BaseNpc_Plus.CreateUnitByName("npc_dota_templar_assassin_psionic_trap", this.GetCursorPosition(), this.GetCasterPlus(), false);
             FindClearSpaceForUnit(trap, trap.GetAbsOrigin(), false);
             let trap_modifier = trap.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_templar_assassin_psionic_trap", {});
-            trap.SetControllableByPlayer(this.GetCasterPlus().GetPlayerID(), true);
+            trap.SetControllableByPlayer(this.GetCasterPlus().GetPlayerOwnerID(), true);
             if (trap.HasAbility("imba_templar_assassin_self_trap")) {
                 trap.findAbliityPlus<imba_templar_assassin_self_trap>("imba_templar_assassin_self_trap").SetHidden(false);
                 trap.findAbliityPlus<imba_templar_assassin_self_trap>("imba_templar_assassin_self_trap").SetLevel(this.GetLevel());
@@ -1249,7 +1249,7 @@ export class imba_templar_assassin_self_trap extends BaseAbility_Plus {
             this.trap_counter_modifier = this.GetCasterPlus().GetOwnerPlus().findBuff<modifier_imba_templar_assassin_psionic_trap_counter>("modifier_imba_templar_assassin_psionic_trap_counter");
             if (this.GetCasterPlus().HasModifier("modifier_imba_templar_assassin_psionic_trap")) {
                 this.GetCasterPlus().findBuff<modifier_imba_templar_assassin_psionic_trap>("modifier_imba_templar_assassin_psionic_trap").Explode(this, this.GetSpecialValueFor("trap_radius"), this.GetSpecialValueFor("trap_duration"), true);
-                // PlayerResource.NewSelection(this.GetCasterPlus().GetOwnerPlus().GetPlayerID(), this.GetCasterPlus().GetOwnerPlus());
+                // PlayerResource.NewSelection(this.GetCasterPlus().GetOwnerPlus().GetPlayerOwnerID(), this.GetCasterPlus().GetOwnerPlus());
             }
         }
     }

@@ -107,7 +107,7 @@ export class modifier_imba_soul_of_truth_buff extends BaseModifier_Plus {
             let gem = BaseItem_Plus.CreateItem("item_imba_gem", undefined, undefined) as item_imba_gem;
             gem.SetOwner(undefined);
             CreateItemOnPositionSync(this.GetParentPlus().GetAbsOrigin(), gem);
-            gem.dummy_unit = BaseNpc_Plus.CreateUnitByName("npc_dummy_unit_perma", this.GetParentPlus().GetAbsOrigin(), this.GetCasterPlus().GetTeam(), true, undefined, undefined,);
+            gem.dummy_unit = BaseNpc_Plus.CreateUnitByName("npc_dummy_unit_perma", this.GetParentPlus().GetAbsOrigin(), this.GetCasterPlus(), true);
             gem.dummy_unit.AddNewModifier(this.GetCasterPlus(), gem, "modifier_item_imba_gem_of_true_sight_dropped", {});
         }
     }

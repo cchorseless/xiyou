@@ -85,8 +85,8 @@ export class GameMode_Client extends SingletonClass {
         if (GFuncEntity.checkIsFirstSpawn(spawnedUnit)) {
             let className = spawnedUnit.GetClassname();
             if (className == GameEnum.Unit.UnitClass.npc_dota_creature) {
-                let cls = GGetRegClass<typeof BaseNpc_Plus>(sUnitName) || BaseNpc_Plus;
-                GameFunc.BindInstanceToCls(spawnedUnit, cls);
+                // let cls = GGetRegClass<typeof BaseNpc_Plus>(sUnitName) || BaseNpc_Plus;
+                GameFunc.BindInstanceToCls(spawnedUnit, BaseNpc_Plus);
                 if (spawnedUnit.onSpawned) {
                     spawnedUnit.onSpawned(e);
                 }

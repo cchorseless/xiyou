@@ -24,7 +24,7 @@ export class imba_bane_enfeeble_723 extends BaseAbility_Plus {
         return DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_UNIT_TARGET + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK;
     }
     GetCastAnimation(): GameActivity_t {
-        if (this.GetCasterPlus().GetName().includes("bane")) {
+        if (this.GetCasterPlus().GetUnitName().includes("bane")) {
             return GameActivity_t.ACT_DOTA_ENFEEBLE;
         } else {
             return GameActivity_t.ACT_DOTA_CAST_ABILITY_1;
@@ -35,7 +35,7 @@ export class imba_bane_enfeeble_723 extends BaseAbility_Plus {
         if (!target.TriggerSpellAbsorb(this)) {
             this.GetCasterPlus().EmitSound("Hero_Bane.Enfeeble.Cast");
             target.EmitSound("Hero_Bane.Enfeeble");
-            if (this.GetCasterPlus().GetName().includes("bane") && RollPercentage(75)) {
+            if (this.GetCasterPlus().GetUnitName().includes("bane") && RollPercentage(75)) {
                 this.GetCasterPlus().EmitSound("bane_bane_ability_enfeeble_" + string.format("%02d", RandomInt(1, 14)));
             }
             target.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_bane_enfeeble_723_effect", {
@@ -196,7 +196,7 @@ export class imba_bane_fiends_grip_723 extends BaseAbility_Plus {
     OnSpellStart(): void {
         this.target = this.GetCursorTarget();
         if (!this.target.TriggerSpellAbsorb(this)) {
-            if (this.GetCasterPlus().GetName().includes("bane")) {
+            if (this.GetCasterPlus().GetUnitName().includes("bane")) {
                 this.GetCasterPlus().EmitSound("bane_bane_ability_fiendsgrip_" + string.format("%02d", RandomInt(1, 7)));
             }
             if (!this.GetCasterPlus().HasTalent("special_bonus_imba_bane_3")) {
@@ -597,7 +597,7 @@ export class imba_bane_brain_sap extends BaseAbility_Plus {
             if (caster.HasTalent("special_bonus_imba_bane_5")) {
                 let baby_fiends_grip_duration = caster.GetTalentValue("special_bonus_imba_bane_5", "duration");
                 let baby_duration = baby_fiends_grip_duration + 1;
-                let baby_bane = BaseNpc_Plus.CreateUnitByName("npc_imba_brain_sap_baby_bane", caster.GetAbsOrigin() + RandomVector(100) as Vector, caster.GetTeam(), true, caster, caster);
+                let baby_bane = BaseNpc_Plus.CreateUnitByName("npc_imba_brain_sap_baby_bane", caster.GetAbsOrigin() + RandomVector(100) as Vector, caster);
                 baby_bane.AddNewModifier(caster, undefined, "modifier_imba_brain_sap_baby_bane", {
                     duration: baby_duration
                 });
@@ -1191,7 +1191,7 @@ export class modifier_imba_fiends_grip_handler extends BaseModifier_Plus {
                 if (GameFunc.GetCount(stacks_table) > 0) {
                     stacks_table[GameFunc.GetCount(stacks_table)] = undefined;
                     enfeeble_debuff.DecrementStackCount();
-                    let demon = BaseNpc_Plus.CreateUnitByName("npc_imba_fiends_grip_demon", caster.GetAbsOrigin() + RandomVector(100) as Vector, caster.GetTeam(), true, caster, caster,);
+                    let demon = BaseNpc_Plus.CreateUnitByName("npc_imba_fiends_grip_demon", caster.GetAbsOrigin() + RandomVector(100) as Vector, caster);
                     demon.AddNewModifier(caster, undefined, "modifier_imba_fiends_grip_demon", {});
                     demon.SetRenderColor(75, 0, 130);
                     let particle = ResHelper.CreateParticleEx(drain_particle, ParticleAttachment_t.PATTACH_ABSORIGIN, demon);
@@ -1255,7 +1255,7 @@ export class modifier_imba_fiends_grip_handler extends BaseModifier_Plus {
                     parent.TempData<any[]>().grip_link_particle_table = [];
                     let creatures = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FindOrder.FIND_ANY_ORDER, false);
                     for (const [_, creature] of GameFunc.iPair(creatures)) {
-                        if (creature.GetUnitName() == "npc_imba_fiends_grip_demon" && creature.GetPlayerOwnerID() == caster.GetPlayerID()) {
+                        if (creature.GetUnitName() == "npc_imba_fiends_grip_demon" && creature.GetPlayerOwnerID() == caster.GetPlayerOwnerID()) {
                             creature.ForceKill(false);
                         }
                     }

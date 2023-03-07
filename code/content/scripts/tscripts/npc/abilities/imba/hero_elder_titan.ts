@@ -190,9 +190,9 @@ export class imba_elder_titan_ancestral_spirit extends BaseAbility_Plus {
         let particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_elder_titan/elder_titan_ancestral_spirit_cast.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, caster);
         ParticleManager.SetParticleControl(particle, 0, target_point);
         ParticleManager.ReleaseParticleIndex(particle);
-        let astral_spirit = BaseNpc_Plus.CreateUnitByName("npc_dota_elder_titan_ancestral_spirit", target_point, caster.GetTeamNumber(), true, caster, caster);
+        let astral_spirit = BaseNpc_Plus.CreateUnitByName("npc_dota_elder_titan_ancestral_spirit", target_point, caster, true);
         caster.TempData().astral_spirit = astral_spirit;
-        astral_spirit.SetControllableByPlayer(caster.GetPlayerID(), true);
+        astral_spirit.SetControllableByPlayer(caster.GetPlayerOwnerID(), true);
         astral_spirit.AddNewModifier(astral_spirit, this, "modifier_imba_elder_titan_ancestral_spirit_self", {});
         astral_spirit.TempData().basemovespeed = spirit_movespeed;
         if (!astral_spirit.IsNull()) {
@@ -640,7 +640,7 @@ export class modifier_imba_elder_titan_natural_order extends BaseModifier_Plus {
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASEATTACK_BONUSDAMAGE)
     CC_GetModifierBaseAttack_BonusDamage(): number {
         if (this.GetCasterPlus() != undefined && this.GetCasterPlus().HasTalent("special_bonus_imba_elder_titan_4")) {
-            if (this.GetCasterPlus().GetName() == "npc_dota_elder_titan_ancestral_spirit") {
+            if (this.GetCasterPlus().GetUnitName().includes("elder_titan_ancestral_spirit")) {
                 return (this.GetCasterPlus().GetOwner() as IBaseNpc_Plus).GetTalentValue("special_bonus_imba_elder_titan_4") * (-1);
             } else {
                 return this.GetCasterPlus().GetTalentValue("special_bonus_imba_elder_titan_4") * (-1);
@@ -679,11 +679,11 @@ export class imba_elder_titan_echo_stomp_spirit extends BaseAbility_Plus {
             let ab = owner.findAbliityPlus<imba_elder_titan_echo_stomp>("imba_elder_titan_echo_stomp");
             if (owner.HasTalent("special_bonus_imba_elder_titan_7")) {
                 if (ab.IsInAbilityPhase() == false) {
-                    owner.CastAbilityNoTarget(ab, owner.GetPlayerID());
+                    owner.CastAbilityNoTarget(ab, owner.GetPlayerOwnerID());
                 }
             } else {
                 if (owner.IsChanneling() == false) {
-                    owner.CastAbilityNoTarget(ab, owner.GetPlayerID());
+                    owner.CastAbilityNoTarget(ab, owner.GetPlayerOwnerID());
                 }
             }
         }
@@ -760,7 +760,7 @@ export class imba_elder_titan_earth_splitter extends BaseAbility_Plus {
         let caster = this.GetCasterPlus();
         let caster_position = caster.GetAbsOrigin();
         let target_point = this.GetCursorPosition();
-        let playerID = caster.GetPlayerID();
+        let playerID = caster.GetPlayerOwnerID();
         let scepter = caster.HasScepter();
         let radius = this.GetSpecialValueFor("radius");
         let duration = this.GetSpecialValueFor("duration");

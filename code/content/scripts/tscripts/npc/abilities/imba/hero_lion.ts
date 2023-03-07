@@ -569,7 +569,7 @@ export class imba_lion_mana_drain extends BaseAbility_Plus {
                 if (!caster.IsChanneling()) {
                     caster.StopSound(sound_cast);
                     target.RemoveModifierByName(modifier_manadrain);
-                    return undefined;
+                    return;
                 }
                 let distance = (target.GetAbsOrigin() - caster.GetAbsOrigin() as Vector).Length2D();
                 let direction = (target.GetAbsOrigin() - caster.GetAbsOrigin() as Vector).Normalized();
@@ -578,7 +578,7 @@ export class imba_lion_mana_drain extends BaseAbility_Plus {
                     caster.InterruptChannel();
                     caster.StopSound(sound_cast);
                     target.RemoveModifierByName(modifier_manadrain);
-                    return undefined;
+                    return;
                 }
                 return interval;
             });
@@ -622,6 +622,7 @@ export class modifier_imba_manadrain_aura extends BaseModifier_Plus {
     }
     GetEffectName(): string {
         return "particles/hero/lion/aura_manadrain.vpcf";
+        // return ;
     }
     GetEffectAttachType(): ParticleAttachment_t {
         return ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW;
@@ -694,10 +695,10 @@ export class modifier_imba_manadrain_debuff extends BaseModifier_Plus {
         this.ability = this.GetAbilityPlus();
         this.parent = this.GetParentPlus();
         this.particle_drain = "particles/econ/items/lion/lion_demon_drain/lion_spell_mana_drain_demon.vpcf";
-        if (this.parent.IsIllusion() && !GFuncEntity.Custom_bIsStrongIllusion(this.parent)) {
-            this.parent.Kill(this.ability, this.caster);
-            return undefined;
-        }
+        // if (this.parent.IsIllusion() && !GFuncEntity.Custom_bIsStrongIllusion(this.parent)) {
+        //     this.parent.Kill(this.ability, this.caster);
+        //     return;
+        // }
         this.interval = this.ability.GetSpecialValueFor("interval");
         this.mana_drain_sec = this.ability.GetSpecialValueFor("mana_drain_sec");
         this.mana_pct_as_damage = this.ability.GetSpecialValueFor("mana_pct_as_damage");

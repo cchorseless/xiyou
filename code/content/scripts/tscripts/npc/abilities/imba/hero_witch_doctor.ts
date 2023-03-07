@@ -33,7 +33,7 @@ export class imba_witch_doctor_paralyzing_cask extends BaseAbility_Plus {
             let index = DoUniqueString("index");
             this.tempdata["split_" + index] = this.GetSpecialValueFor("split_amount");
             this.tempdata[index] = 1;
-            if ((this.GetCasterPlus().GetName().includes("witch_doctor"))) {
+            if ((this.GetCasterPlus().GetUnitName().includes("witch_doctor"))) {
                 this.GetCasterPlus().EmitSound("witchdoctor_wdoc_ability_cask_0" + math.random(1, 8));
             }
             let projectile = {
@@ -237,7 +237,7 @@ export class imba_witch_doctor_voodoo_restoration extends BaseAbility_Plus {
             EmitSoundOn("Hero_WitchDoctor.Voodoo_Restoration", this.GetCasterPlus());
             EmitSoundOn("Hero_WitchDoctor.Voodoo_Restoration.Loop", this.GetCasterPlus());
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_voodoo_restoration", {});
-            if ((!imba_witch_doctor_voodoo_restoration.VOODOO) && (this.GetCasterPlus().GetName().includes("witch_doctor"))) {
+            if ((!imba_witch_doctor_voodoo_restoration.VOODOO) && (this.GetCasterPlus().GetUnitName().includes("witch_doctor"))) {
                 imba_witch_doctor_voodoo_restoration.VOODOO = true;
                 this.GetCasterPlus().EmitSound("witchdoctor_wdoc_ability_voodoo_0" + math.random(1, 5));
                 this.AddTimer(10, () => {
@@ -292,16 +292,16 @@ export class modifier_special_bonus_imba_witch_doctor_6 extends BaseModifier_Plu
             if (!ability) {
                 return;
             }
-            this.GetParentPlus().SetContextThink(DoUniqueString("checkforvoodoo"), () => {
+            this.AddTimer(0, () => {
                 if (ability.GetLevel() > 0) {
                     this.GetParentPlus().AddNewModifier(this.GetParentPlus(), ability, "modifier_imba_voodoo_restoration", {});
-                    return undefined;
+                    return;
                 }
                 if (!ability.IsTrained() || this.GetParentPlus().IsIllusion()) {
-                    return undefined;
+                    return;
                 }
                 return 1.0;
-            }, 0);
+            });
         }
     }
 }
@@ -612,7 +612,7 @@ export class modifier_imba_maledict extends BaseModifier_Plus {
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
     CC_OnDeath(params: ModifierInstanceEvent): void {
-        if ((!modifier_imba_maledict.MALEDICT_KILL) && (this.GetParentPlus() == params.unit) && this.GetCasterPlus().GetName().includes("witch_doctor")) {
+        if ((!modifier_imba_maledict.MALEDICT_KILL) && (this.GetParentPlus() == params.unit) && this.GetCasterPlus().GetUnitName().includes("witch_doctor")) {
             modifier_imba_maledict.MALEDICT_KILL = true;
             this.GetCasterPlus().EmitSound("witchdoctor_wdoc_ability_maledict_0" + math.random(1, 4));
             this.AddTimer(30, () => {
@@ -629,7 +629,7 @@ export class modifier_imba_maledict extends BaseModifier_Plus {
         if (newHP > this.healthComparator) {
             return;
         }
-        if ((!modifier_imba_maledict.MALEDICT_POP) && (maxHP_pct < 0.2) && (this.soundcount == 2) && (this.GetCasterPlus().GetName().includes("witch_doctor"))) {
+        if ((!modifier_imba_maledict.MALEDICT_POP) && (maxHP_pct < 0.2) && (this.soundcount == 2) && (this.GetCasterPlus().GetUnitName().includes("witch_doctor"))) {
             modifier_imba_maledict.MALEDICT_POP = true;
             this.GetCasterPlus().EmitSound("witchdoctor_wdoc_killspecial_0" + math.random(1, 3));
             this.AddTimer(30, () => {
@@ -689,10 +689,10 @@ export class modifier_imba_maledict_talent extends BaseModifier_Plus {
 }
 @registerAbility()
 export class imba_witch_doctor_death_ward extends BaseAbility_Plus {
-    public death_ward: any;
+    public death_ward: IBaseNpc_Plus;
     public dance: any;
-    public mod_caster: any;
-    tempdata: { [k: string]: any } = {};
+    public mod_caster: modifier_imba_death_ward_caster;
+    tempdata: { [k: string]: IBaseNpc_Plus } = {};
     IsHiddenWhenStolen(): boolean {
         return false;
     }
@@ -716,22 +716,23 @@ export class imba_witch_doctor_death_ward extends BaseAbility_Plus {
                 let spawn_line_direction = GFuncVector.RotateVector2D((vPosition - this.GetCasterPlus().GetAbsOrigin() as Vector).Normalized(), 90, true);
                 let talent_ward = this.CreateWard(vPosition - ((distance / 2) * spawn_line_direction) as Vector);
                 talent_ward.TempData().bIsTalentWard = true;
+                vPosition = vPosition + ((distance / 2) * spawn_line_direction) as Vector;
+                talent_ward.EmitSound("Hero_WitchDoctor.Death_WardBuild");
                 this.AddTimer(this.GetChannelTime(), () => {
-                    UTIL_Remove(talent_ward);
+                    GFuncEntity.SafeDestroyUnit(talent_ward);
                     if (this.GetCasterPlus().HasTalent("special_bonus_imba_witch_doctor_5")) {
                         let units = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_OTHER, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FindOrder.FIND_ANY_ORDER, false);
                         for (const [_, unit] of GameFunc.iPair(units)) {
                             if (unit.TempData().bIsMiniDeathWard) {
-                                UTIL_Remove(unit);
+                                GFuncEntity.SafeDestroyUnit(unit);
                             }
                         }
                     }
                 });
-                vPosition = vPosition + ((distance / 2) * spawn_line_direction) as Vector;
-                talent_ward.EmitSound("Hero_WitchDoctor.Death_WardBuild");
+
             }
             this.death_ward = this.CreateWard(vPosition);
-            if (GameServiceConfig.USE_MEME_SOUNDS == true && RollPercentage(GameServiceConfig.MEME_SOUNDS_CHANCE)) {
+            if (GameServiceConfig.USE_MEME_SOUNDS && RollPercentage(GameServiceConfig.MEME_SOUNDS_CHANCE)) {
                 this.dance = true;
                 this.death_ward.EmitSound("Imba.WitchDoctorSingsASong");
             } else {
@@ -745,17 +746,18 @@ export class imba_witch_doctor_death_ward extends BaseAbility_Plus {
         if (bIsMiniWard) {
             damage = damage * this.GetCasterPlus().GetTalentValue("special_bonus_imba_witch_doctor_5") * 0.01;
         }
-        let death_ward = BaseNpc_Plus.CreateUnitByName("imba_witch_doctor_death_ward", vPosition, this.GetCasterPlus().GetTeam(), true, this.GetCasterPlus(), undefined);
+        let death_ward = BaseNpc_Plus.CreateUnitByName("npc_imba_witch_doctor_death_ward", vPosition, this.GetCasterPlus());
         this.AddTimer(FrameTime(), () => {
             ResolveNPCPositions(vPosition, 128);
         });
-        death_ward.SetControllableByPlayer(this.GetCasterPlus().GetPlayerID(), true);
+        death_ward.SetControllableByPlayer(this.GetCasterPlus().GetPlayerOwnerID(), true);
         death_ward.SetOwner(this.GetCasterPlus());
         death_ward.SetCanSellItems(false);
         death_ward.SetBaseAttackTime(this.GetSpecialValueFor("base_attack_time"));
-        let death_ward_mod = death_ward.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_death_ward", {
+        let death_ward_mod = death_ward.AddNewModifier(this.GetCasterPlus(), this,
+            "modifier_imba_death_ward", {
             duration: this.GetChannelTime()
-        });
+        }) as modifier_imba_death_ward;
         let exceptionList: { [k: string]: boolean } = {
             "item_imba_bfury": true,
             "item_imba_butterfly": true,
@@ -769,8 +771,8 @@ export class imba_witch_doctor_death_ward extends BaseAbility_Plus {
         }
         for (let i = 0; i <= 5; i++) {
             let item = this.GetCasterPlus().GetItemInSlot(i);
-            if (item && !exceptionList[item.GetName()]) {
-                death_ward.AddItemByName(item.GetName());
+            if (item && !exceptionList[item.GetAbilityName()]) {
+                death_ward.AddItemByName(item.GetAbilityName());
             }
             if (this.GetCasterPlus().HasModifier("modifier_item_imba_spell_fencer_unique")) {
                 death_ward.AddNewModifier(this.GetCasterPlus(), this, "modifier_item_imba_spell_fencer_unique", {});
@@ -787,7 +789,7 @@ export class imba_witch_doctor_death_ward extends BaseAbility_Plus {
         death_ward.SetBaseDamageMin(damage - damageOffset);
         this.mod_caster = this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_death_ward_caster", {
             duration: this.GetChannelTime()
-        });
+        }) as modifier_imba_death_ward_caster;
         this.mod_caster.death_ward_mod = death_ward_mod;
         let index = DoUniqueString("index");
         death_ward.TempData().index = index;
@@ -806,12 +808,12 @@ export class imba_witch_doctor_death_ward extends BaseAbility_Plus {
         if (IsServer()) {
             StopSoundOn("Hero_WitchDoctor.Death_WardBuild", this.death_ward);
             StopSoundOn("Imba.WitchDoctorSingsASong", this.death_ward);
-            UTIL_Remove(this.death_ward);
+            GFuncEntity.SafeDestroyUnit(this.death_ward);
             if (this.GetCasterPlus().HasTalent("special_bonus_imba_witch_doctor_5")) {
                 let units = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_OTHER, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FindOrder.FIND_ANY_ORDER, false);
                 for (const [_, unit] of GameFunc.iPair(units)) {
                     if (unit.TempData().bIsMiniDeathWard) {
-                        UTIL_Remove(unit);
+                        GFuncEntity.SafeDestroyUnit(unit);
                     }
                 }
             }
@@ -862,6 +864,7 @@ export class imba_witch_doctor_death_ward extends BaseAbility_Plus {
 }
 @registerModifier()
 export class modifier_imba_death_ward_caster extends BaseModifier_Plus {
+    death_ward_mod: modifier_imba_death_ward;
     IsDebuff(): boolean {
         return false;
     }
@@ -883,9 +886,11 @@ export class modifier_imba_death_ward_caster extends BaseModifier_Plus {
 }
 @registerModifier()
 export class modifier_imba_death_ward extends BaseModifier_Plus {
-    public wardParticle: any;
+    public wardParticle: ParticleID;
     public attack_range_bonus: number;
     public attack_target: any;
+    ability: imba_witch_doctor_death_ward;
+    parent: IBaseNpc_Plus;
     IsDebuff(): boolean {
         return false;
     }
@@ -909,13 +914,15 @@ export class modifier_imba_death_ward extends BaseModifier_Plus {
         ParticleManager.SetParticleControlEnt(this.wardParticle, 0, this.GetParentPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_attack1", this.GetParentPlus().GetAbsOrigin(), true);
         ParticleManager.SetParticleControl(this.wardParticle, 2, this.GetParentPlus().GetAbsOrigin());
         this.attack_range_bonus = this.GetSpecialValueFor("attack_range") - this.GetParentPlus().Script_GetAttackRange();
+        this.ability = this.GetAbilityPlus<imba_witch_doctor_death_ward>();
+        this.parent = this.GetParentPlus();
         if (IsServer()) {
             this.StartIntervalThink(this.GetParentPlus().GetBaseAttackTime());
         }
     }
     BeDestroy(): void {
         if (IsServer()) {
-            this.GetAbilityPlus<imba_witch_doctor_death_ward>().tempdata[this.GetParentPlus().TempData().index] = undefined;
+            delete this.ability.tempdata[this.parent.TempData().index];
         }
     }
     OnIntervalThink(): void {

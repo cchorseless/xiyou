@@ -59,7 +59,7 @@ export class BaseNpc_Plus extends BaseNpc {
         }
     }
     GetHeroColorPrimary?() {
-        let heroname = this.GetName();
+        let heroname = this.GetUnitName();
         for (let k in Assert_Color.hero_theme) {
             if (heroname.includes(k)) {
                 return Assert_Color.hero_theme[k as keyof typeof Assert_Color.hero_theme];
@@ -68,7 +68,7 @@ export class BaseNpc_Plus extends BaseNpc {
 
     }
     GetHeroColorSecondary?() {
-        let heroname = this.GetName();
+        let heroname = this.GetUnitName();
         for (let k in Assert_Color.hero_theme_second) {
             if (heroname.includes(k)) {
                 return Assert_Color.hero_theme_second[k as keyof typeof Assert_Color.hero_theme_second];
@@ -104,13 +104,6 @@ export class BaseNpc_Plus extends BaseNpc {
      */
     WillReincarnatePlus?() {
         return true;
-    }
-    /**
-     * todo
-     * @returns 
-     */
-    GetAdditionalOwnedUnitsPlus?() {
-        return [] as BaseNpc_Plus[];
     }
 
     GetIllusionBounty?() {
@@ -205,23 +198,7 @@ export class BaseNpc_Plus extends BaseNpc {
         }
     }
 
-    GetPlayerID?() {
-        return this.GetPlayerOwnerID();
-    }
 
-    GetSource?() {
-        if (this.IsSummoned() || this.IsClone() || this.IsIllusion()) {
-            return GFuncEntity.IsValid(this.GetSummoner()) && this.GetSummoner() || this;
-        }
-        return this
-    }
-    /**
-     *
-     * @returns todo
-     */
-    GetSummoner?() {
-        return this
-    }
     /**
       * 创建幻象
       * @param vLocation
@@ -244,7 +221,7 @@ export class BaseNpc_Plus extends BaseNpc {
         let r: IBaseNpc_Plus[] = [];
         vLocation = vLocation || copyunit.GetAbsOrigin();
         for (let i = 0; i < nNumIllusions; i++) {
-            let illusion = BaseNpc_Plus.CreateUnitByName(copyunit.GetUnitName(), vLocation, this.GetTeam(), bFindClearSpace, this, this) as IBaseNpc_Plus;
+            let illusion = BaseNpc_Plus.CreateUnitByName(copyunit.GetUnitName(), vLocation, this, bFindClearSpace) as IBaseNpc_Plus;
             illusion.MakeIllusion()
             illusion.SetForwardVector(this.GetForwardVector())
             illusion.SetControllableByPlayer(this.GetPlayerOwnerID(), !bFindClearSpace)
@@ -300,7 +277,7 @@ export class BaseNpc_Plus extends BaseNpc {
             for (let i = DOTAScriptInventorySlot_t.DOTA_ITEM_SLOT_1; i <= DOTAScriptInventorySlot_t.DOTA_ITEM_SLOT_9; i++) {
                 let item = this.GetItemInSlot(i)
                 if (item != null) {
-                    let illusion_item = BaseItem_Plus.CreateItem(item.GetName(), illusion as any, illusion as any)
+                    let illusion_item = BaseItem_Plus.CreateItem(item.GetAbilityName(), illusion as any, illusion as any)
                     if (GFuncEntity.IsValid(illusion_item)) {
                         illusion_item.EndCooldown()
                         illusion_item.SetPurchaser(null)
@@ -336,6 +313,28 @@ export class BaseNpc_Plus extends BaseNpc {
         }
         return r;
     }
+
+
+
+    /**
+     * 创建召唤物
+     * @param sUnitName
+     * @param hCaster
+     * @param vLocation
+     * @param fDuration
+     * @param bFindClearSpace
+     * @param iTeamNumber
+     * @returns
+     */
+    CreateSummon?(sUnitName: string, vLocation: Vector, fDuration: number = null, bFindClearSpace: boolean = true, iTeamNumber: DOTATeam_t = null) {
+        if (!IsServer()) { return };
+        iTeamNumber = iTeamNumber || this.GetTeamNumber()
+        let hSummon = BaseNpc_Plus.CreateUnitByName(sUnitName, vLocation, this, bFindClearSpace, iTeamNumber)
+        fDuration = fDuration + GPropertyCalculate.SumProps(this, null, GPropertyConfig.EMODIFIER_PROPERTY.SUMMON_DURATION_BONUS);
+        this.addBuff("modifier_summon", this, null, { duration: fDuration })
+        return hSummon as IBaseNpc_Plus;
+    }
+
     FindAbilityWithHighestCooldown?() {
         let highest_cd_ability: CDOTABaseAbility;
         for (let i = 0; i <= 24; i += 1) {
@@ -353,31 +352,7 @@ export class BaseNpc_Plus extends BaseNpc {
         }
         return highest_cd_ability;
     }
-    /**
-     * 不好用，只能复制英雄
-     * @param hHeroToCopy 
-     * @param hModifierKeys 
-     * @param nNumIllusions 
-     * @param nPadding 
-     * @param bScramblePosition 
-     * @param bFindClearSpace 
-     * @returns 
-     */
-    CreateIllusionPlus?(hHeroToCopy: IBaseNpc_Plus,
-        hModifierKeys: CreateIllusionsModifierKeys & { duration?: number },
-        nNumIllusions: number,
-        nPadding: number,
-        bScramblePosition: boolean,
-        bFindClearSpace: boolean): IBaseNpc_Plus[] {
-        let r = CreateIllusions(this, hHeroToCopy as any, hModifierKeys, nNumIllusions, nPadding, bScramblePosition, bFindClearSpace)
-        if (r && hModifierKeys.duration && hModifierKeys.duration > 0) {
-            for (let i = 0; i < r.length; i++) {
-                let npc = r[i] as IBaseNpc_Plus;
-                npc.AddNewModifier(this, null, "modifier_kill", { duration: hModifierKeys.duration })
-            }
-        }
-        return r;
-    }
+
 }
 declare global {
     type IBaseNpc_Plus = BaseNpc_Plus;

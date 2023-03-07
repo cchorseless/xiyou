@@ -181,7 +181,7 @@ export class modifier_imba_slark_dark_pact_pulses extends BaseModifier_Plus {
             ability: this.GetAbilityPlus()
         }
         this.GetParentPlus().EmitSound("Hero_Slark.DarkPact.Cast");
-        let visual_unit = BaseNpc_Plus.CreateUnitByName("npc_dota_slark_visual", this.GetParentPlus().GetAbsOrigin(), this.GetParentPlus().GetTeamNumber(), true, this.GetParentPlus(), this.GetParentPlus());
+        let visual_unit = BaseNpc_Plus.CreateUnitByName("npc_dota_slark_visual", this.GetParentPlus().GetAbsOrigin(), this.GetParentPlus(), true);
         visual_unit.AddNewModifier(this.GetParentPlus(), this.GetAbilityPlus(), "modifier_imba_slark_visual", {});
         visual_unit.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_kill", {
             duration: this.GetDuration()
@@ -197,9 +197,9 @@ export class modifier_imba_slark_dark_pact_pulses extends BaseModifier_Plus {
                 this.premature_modifier.IncrementStackCount();
                 this.bStoreHealth = true;
             } else if (this.GetAbilityPlus() && this.GetAbilityPlus().GetAutoCastState()) {
-                let spawn_unit = BaseNpc_Plus.CreateUnitByName("npc_dota_slark_spawn", this.GetParentPlus().GetAbsOrigin() + RandomVector(128) as Vector, this.GetParentPlus().GetTeamNumber(), true, this.GetParentPlus(), this.GetParentPlus());
-                if (this.GetParentPlus().GetPlayerID) {
-                    spawn_unit.SetControllableByPlayer(this.GetParentPlus().GetPlayerID(), false);
+                let spawn_unit = BaseNpc_Plus.CreateUnitByName("npc_dota_slark_spawn", this.GetParentPlus().GetAbsOrigin() + RandomVector(128) as Vector, this.GetParentPlus(), true);
+                if (this.GetParentPlus().GetPlayerOwnerID) {
+                    spawn_unit.SetControllableByPlayer(this.GetParentPlus().GetPlayerOwnerID(), false);
                 }
                 spawn_unit.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_kill", {
                     duration: this.premature_spawn_duration
@@ -318,7 +318,7 @@ export class imba_slark_pounce extends BaseAbility_Plus {
         this.GetCasterPlus().EmitSound("Hero_Slark.Pounce.Cast");
         let pounce_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_slark/slark_pounce_start.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetCasterPlus());
         ParticleManager.ReleaseParticleIndex(pounce_particle);
-        if (this.GetCasterPlus().GetName().includes("slark")) {
+        if (this.GetCasterPlus().GetUnitName().includes("slark")) {
             this.GetCasterPlus().StartGesture(GameActivity_t.ACT_DOTA_SLARK_POUNCE);
         }
         if (!this.GetCasterPlus().HasModifier("modifier_imba_slark_pounce")) {
@@ -418,7 +418,7 @@ export class modifier_imba_slark_pounce extends BaseModifierMotionBoth_Plus {
         }
         this.GetParentPlus().RemoveHorizontalMotionController(this);
         this.GetParentPlus().RemoveVerticalMotionController(this);
-        if (this.GetCasterPlus().GetName().includes("slark")) {
+        if (this.GetCasterPlus().GetUnitName().includes("slark")) {
             this.GetCasterPlus().FadeGesture(GameActivity_t.ACT_DOTA_SLARK_POUNCE);
         }
         GridNav.DestroyTreesAroundPoint(this.GetParentPlus().GetAbsOrigin(), 100, true);
@@ -430,7 +430,7 @@ export class modifier_imba_slark_pounce extends BaseModifierMotionBoth_Plus {
         for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetParentPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.pounce_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS, FindOrder.FIND_CLOSEST, false))) {
             if (enemy.IsRealUnit() || enemy.IsClone() || enemy.IsTempestDouble()) {
                 enemy.EmitSound("Hero_Slark.Pounce.Impact");
-                if (this.GetParentPlus().GetName().includes("slark")) {
+                if (this.GetParentPlus().GetUnitName().includes("slark")) {
                     this.GetParentPlus().EmitSound("slark_slark_pounce_0" + RandomInt(1, 6));
                 }
                 enemy.AddNewModifier(this.GetParentPlus(), this.GetAbilityPlus(), "modifier_imba_slark_pounce_leash", {
@@ -621,7 +621,7 @@ export class modifier_imba_slark_pounce_charge_counter extends BaseModifier_Plus
                 this.DecrementStackCount();
                 this.CalculateCharge();
             }
-        } else if (params.ability.GetName() == "item_refresher" || params.ability.GetName() == "item_refresher_shard") {
+        } else if (params.ability.GetAbilityName() == "item_refresher" || params.ability.GetAbilityName() == "item_refresher_shard") {
             this.StartIntervalThink(-1);
             this.SetDuration(-1, true);
             this.SetStackCount(this.GetSpecialValueFor("max_charges"));
@@ -887,7 +887,7 @@ export class imba_slark_shadow_dance extends BaseAbility_Plus {
     }
     OnSpellStart(): void {
         this.GetCasterPlus().EmitSound("Hero_Slark.ShadowDance");
-        if (this.GetCasterPlus().GetName().includes("slark") && RollPercentage(30)) {
+        if (this.GetCasterPlus().GetUnitName().includes("slark") && RollPercentage(30)) {
             if (!this.responses) {
                 this.responses = {
                     "1": "slark_slark_dark_pact_05",
@@ -905,7 +905,7 @@ export class imba_slark_shadow_dance extends BaseAbility_Plus {
                 duration: this.GetTalentSpecialValueFor("duration")
             });
         } else {
-            CreateModifierThinker(this.GetCasterPlus(), this, "modifier_imba_slark_shadow_dance_aura", {
+            BaseModifier_Plus.CreateBuffThinker(this.GetCasterPlus(), this, "modifier_imba_slark_shadow_dance_aura", {
                 duration: this.GetTalentSpecialValueFor("duration"),
                 bAutoCast: 1
             }, this.GetCasterPlus().GetAbsOrigin(), this.GetCasterPlus().GetTeamNumber(), false);
@@ -956,7 +956,7 @@ export class modifier_imba_slark_shadow_dance_passive_regen extends BaseModifier
             DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD,
             FindOrder.FIND_FARTHEST, false) as IBaseNpc_Plus[];
         for (const enemy of units) {
-            if (enemy.GetTeamNumber() != DOTATeam_t.DOTA_TEAM_NEUTRALS && !enemy.IsRoshan() && enemy.CanEntityBeSeenByMyTeam(this.GetParentPlus()) && enemy.GetName() != "npc_dota_watch_tower") {
+            if (enemy.GetTeamNumber() != DOTATeam_t.DOTA_TEAM_NEUTRALS && !enemy.IsRoshan() && enemy.CanEntityBeSeenByMyTeam(this.GetParentPlus()) && !enemy.GetUnitName().includes("watch_tower")) {
                 this.enemy_that_sees_me = enemy;
                 this.bVisible = true;
                 return;
@@ -1040,7 +1040,7 @@ export class modifier_imba_slark_shadow_dance_aura extends BaseModifier_Plus {
         this.AddParticle(this.shadow_particle, false, false, -1, false, false);
         if ((!params || params && params.bAutoCast != 1)) {
             ParticleManager.SetParticleControlEnt(this.shadow_particle, 1, this.GetCasterPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", this.GetCasterPlus().GetAbsOrigin(), true);
-            let visual_unit = BaseNpc_Plus.CreateUnitByName("npc_dota_slark_visual", this.GetCasterPlus().GetAbsOrigin(), this.GetCasterPlus().GetTeamNumber(), true, this.GetCasterPlus(), this.GetCasterPlus());
+            let visual_unit = BaseNpc_Plus.CreateUnitByName("npc_dota_slark_visual", this.GetCasterPlus().GetAbsOrigin(), this.GetCasterPlus(), true);
             visual_unit.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_slark_visual", {});
             visual_unit.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_kill", {
                 duration: this.GetAbilityPlus().GetTalentSpecialValueFor("duration") + 0.5
@@ -1078,7 +1078,7 @@ export class modifier_imba_slark_shadow_dance_aura extends BaseModifier_Plus {
         return DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES;
     }
     GetAuraSearchTeam(): DOTA_UNIT_TARGET_TEAM {
-        if (this.GetParentPlus().GetName() !== "npc_dota_thinker") {
+        if (this.GetParentPlus().GetUnitName() !== "npc_dota_thinker") {
             return DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY;
         } else {
             return DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH;

@@ -5,7 +5,6 @@ import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
-import { BaseNpc_Plus } from "../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 @registerAbility()
@@ -23,7 +22,7 @@ export class imba_alchemist_acid_spray extends BaseAbility_Plus {
         let caster = this.GetCasterPlus();
         let point = this.GetCursorPosition();
         let team_id = caster.GetTeamNumber();
-        if (this.GetCasterPlus().GetName().includes("alchemist")) {
+        if (this.GetCasterPlus().GetUnitName().includes("alchemist")) {
             let cast_responses = {
                 "1": "alchemist_alch_ability_acid_01",
                 "2": "alchemist_alch_ability_acid_02",
@@ -40,9 +39,9 @@ export class imba_alchemist_acid_spray extends BaseAbility_Plus {
             }
             EmitSoundOn(GFuncRandom.RandomOne(Object.values(cast_responses)), caster);
         }
-        let thinker = CreateModifierThinker(caster, this, "modifier_imba_acid_spray_thinker", {
+        let thinker = BaseModifier_Plus.CreateBuffThinker(caster, this, "modifier_imba_acid_spray_thinker", {
             duration: this.GetSpecialValueFor("duration")
-        }, point, team_id, false);
+        }, point, team_id);
     }
     OnOwnerSpawned(): void {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_alchemist_1") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_alchemist_1")) {
@@ -697,7 +696,7 @@ export class modifier_imba_unstable_concoction_handler extends BaseModifier_Plus
             }
             if (!(integer == 0 && decimal <= 1)) {
                 for (const [k, v] of GameFunc.iPair(allHeroes)) {
-                    if (v.GetPlayerID() && v.GetTeam() == caster.GetTeam()) {
+                    if (v.GetPlayerOwnerID() && v.GetTeam() == caster.GetTeam()) {
                         let particle = ResHelper.CreateParticleEx(particleName, ParticleAttachment_t.PATTACH_OVERHEAD_FOLLOW, caster);
                         ParticleManager.SetParticleControl(particle, 0, caster.GetAbsOrigin());
                         ParticleManager.SetParticleControl(particle, 1, Vector(0, integer, decimal));
@@ -819,7 +818,7 @@ export class imba_alchemist_goblins_greed extends BaseAbility_Plus {
         if (IsServer()) {
             if (this.greevil_active) {
                 this.EndCooldown();
-                EventHelper.ErrorMessage("#dota_hud_error_active_greevil", this.GetCasterPlus().GetPlayerID());
+                EventHelper.ErrorMessage("#dota_hud_error_active_greevil", this.GetCasterPlus().GetPlayerOwnerID());
                 return;
             }
             let caster = this.GetCasterPlus();
@@ -834,18 +833,18 @@ export class imba_alchemist_goblins_greed extends BaseAbility_Plus {
             let greevil_duration = this.GetSpecialValueFor("greevil_duration");
             this.greevil_active = true;
             target.EmitSound(cast_sound);
-            SendOverheadEventMessage(PlayerResource.GetPlayer(caster.GetPlayerID()), DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_GOLD, target, total_gold, undefined);
+            SendOverheadEventMessage(caster.GetPlayerOwner(), DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_GOLD, target, total_gold, undefined);
             let particle_fx = ResHelper.CreateParticleEx("particles/items2_fx/hand_of_midas.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, target);
             ParticleManager.SetParticleControlEnt(particle_fx, 1, caster, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", caster.GetAbsOrigin(), false);
             target.SetDeathXP(0);
             target.SetMinimumGoldBounty(0);
             target.SetMaximumGoldBounty(0);
             target.Kill(this, caster);
-            const playerroot = GGameScene.GetPlayer(caster.GetPlayerID());
+            const playerroot = GGameScene.GetPlayer(caster.GetPlayerOwnerID());
             // caster.AddExperience(total_exp, false, false);
             playerroot.PlayerDataComp().ModifyGold(total_gold, true, EDOTA_ModifyGold_Reason.DOTA_ModifyGold_Unspecified);
             modifier.SetStackCount(modifier.GetStackCount() + bonus_stacks);
-            this.greevil = BaseNpc_Plus.CreateUnitByName("npc_imba_alchemist_greevil", target.GetAbsOrigin(), caster.GetTeam(), true, caster, caster);
+            this.greevil = caster.CreateSummon("npc_imba_alchemist_greevil", target.GetAbsOrigin());
             this.greevil.SetOwner(caster);
             this.greevil_ability = this.greevil.findAbliityPlus<imba_alchemist_greevils_greed>("imba_alchemist_greevils_greed");
             this.greevil_ability.SetLevel(1);
@@ -874,7 +873,7 @@ export class modifier_imba_greevil_gold extends BaseModifier_Plus {
             let caster = this.GetCasterPlus();
             let ability = this.GetAbilityPlus();
             let gold_particle = "particles/units/heroes/hero_alchemist/alchemist_lasthit_coins.vpcf";
-            let player = PlayerResource.GetPlayer(caster.GetPlayerID());
+            let player = PlayerResource.GetPlayer(caster.GetPlayerOwnerID());
             let greed_modifier = caster.findBuff<modifier_imba_goblins_greed_passive>("modifier_imba_goblins_greed_passive");
             let stacks;
             if (greed_modifier) {
@@ -890,7 +889,7 @@ export class modifier_imba_greevil_gold extends BaseModifier_Plus {
             ParticleManager.SetParticleControl(msg_particle_fx, 1, Vector(0, total_gold, 0));
             ParticleManager.SetParticleControl(msg_particle_fx, 2, Vector(2, string.len(total_gold + "") + 1, 0));
             ParticleManager.SetParticleControl(msg_particle_fx, 3, Vector(255, 200, 33));
-            let playerroot = GGameScene.GetPlayer(caster.GetPlayerID());
+            let playerroot = GGameScene.GetPlayer(caster.GetPlayerOwnerID());
             let PlayerData = playerroot.PlayerDataComp();
             PlayerData.ModifyGold(total_gold, false, EDOTA_ModifyGold_Reason.DOTA_ModifyGold_Unspecified);
         }
@@ -943,10 +942,10 @@ export class modifier_imba_goblins_greed_passive extends BaseModifier_Plus {
             if (unit.IsRealUnit()) {
                 hero_multiplier = ability.GetSpecialValueFor("hero_multiplier");
             }
-            let playerroot = GGameScene.GetPlayer(caster.GetPlayerID());
+            let playerroot = GGameScene.GetPlayer(caster.GetPlayerOwnerID());
             let PlayerData = playerroot.PlayerDataComp();
             PlayerData.ModifyGold(stacks * hero_multiplier, false, EDOTA_ModifyGold_Reason.DOTA_ModifyGold_Unspecified);
-            let player = PlayerResource.GetPlayer(caster.GetPlayerID());
+            let player = PlayerResource.GetPlayer(caster.GetPlayerOwnerID());
             let particleName = "particles/units/heroes/hero_alchemist/alchemist_lasthit_coins.vpcf";
             let particle1 = ParticleManager.CreateParticleForPlayer(particleName, ParticleAttachment_t.PATTACH_ABSORIGIN, unit, player);
             ParticleManager.SetParticleControl(particle1, 0, unit.GetAbsOrigin());
@@ -1403,7 +1402,7 @@ export class modifier_mammonite_passive extends BaseModifier_Plus {
         if (IsServer()) {
             if (this.caster.HasScepter()) {
                 if (this.ability.GetToggleState()) {
-                    let player = GGameScene.GetPlayer(this.caster.GetPlayerID());
+                    let player = GGameScene.GetPlayer(this.caster.GetPlayerOwnerID());
                     let PlayerData = player.PlayerDataComp();
                     let gold = PlayerData.GetGold();
                     let gold_percent = this.gold_damage * 0.01;
@@ -1420,7 +1419,7 @@ export class modifier_mammonite_passive extends BaseModifier_Plus {
             if (this.caster == attacker) {
                 if (this.caster.HasScepter()) {
                     if (this.ability.GetToggleState()) {
-                        let player = GGameScene.GetPlayer(this.caster.GetPlayerID());
+                        let player = GGameScene.GetPlayer(this.caster.GetPlayerOwnerID());
                         let PlayerData = player.PlayerDataComp();
                         let gold = PlayerData.GetGold();
                         let gold_percent = this.gold_damage * 0.01;

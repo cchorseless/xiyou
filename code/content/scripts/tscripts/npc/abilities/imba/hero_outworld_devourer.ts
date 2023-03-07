@@ -235,7 +235,7 @@ export class modifier_imba_outworld_devourer_essence_flux extends BaseModifier_P
     } */
     @registerEvent(Enum_MODIFIER_EVENT.ON_ABILITY_FULLY_CAST)
     CC_OnAbilityFullyCast(keys: ModifierAbilityEvent): void {
-        if (keys.unit == this.GetParentPlus() && !keys.ability.IsToggle() && !keys.ability.IsItem() && keys.ability.GetName() !== "imba_outworld_devourer_astral_imprisonment_movement" && this.GetParentPlus().GetMaxMana) {
+        if (keys.unit == this.GetParentPlus() && !keys.ability.IsToggle() && !keys.ability.IsItem() && keys.ability.GetAbilityName() !== "imba_outworld_devourer_astral_imprisonment_movement" && this.GetParentPlus().GetMaxMana) {
             this.RollForProc();
         }
     }

@@ -903,7 +903,7 @@ export class modifier_imba_skeleton_walk_invis extends BaseModifier_Plus {
                     } else if (i == 2) {
                         pos = this.GetCasterPlus().GetAbsOrigin() + (this.GetCasterPlus().GetRightVector() * 250) as Vector;
                     }
-                    let archer = BaseNpc_Plus.CreateUnitByName("npc_dota_clinkz_skeleton_archer", pos, this.GetCasterPlus().GetTeamNumber(), true, this.GetCasterPlus(), this.GetCasterPlus());
+                    let archer = BaseNpc_Plus.CreateUnitByName("npc_dota_clinkz_skeleton_archer", pos, this.GetCasterPlus(), true);
                     archer.AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("clinkz_burning_army"), "modifier_imba_clinkz_burning_army_skeleton_custom", {});
                     archer.AddNewModifier(this.GetCasterPlus(), undefined, "modifier_kill", {
                         duration: this.GetCasterPlus().findAbliityPlus("clinkz_burning_army").GetSpecialValueFor("duration")
@@ -946,7 +946,7 @@ export class modifier_imba_skeleton_walk_invis extends BaseModifier_Plus {
         if (!IsServer() || !this.GetParentPlus().IsAlive()) {
             return;
         }
-        if (this.GetAbilityPlus() && this.GetAbilityPlus().GetName() == "imba_clinkz_skeleton_walk_723") {
+        if (this.GetAbilityPlus() && this.GetAbilityPlus().GetAbilityName() == "imba_clinkz_skeleton_walk_723") {
             this.GetParentPlus().AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_clinkz_skeleton_walk_723_strafe", {
                 duration: this.GetAbilityPlus().GetTalentSpecialValueFor("attack_speed_duration")
             });
@@ -1231,7 +1231,7 @@ export class imba_clinkz_death_pact extends BaseAbility_Plus {
             let direction = (target.GetAbsOrigin() - caster.GetAbsOrigin() as Vector).Normalized();
             let distance = (target.GetAbsOrigin() - caster.GetAbsOrigin() as Vector).Length2D();
             let summon_point = caster.GetAbsOrigin() + direction * distance - 100 as Vector;
-            let spirit = BaseNpc_Plus.CreateUnitByName("npc_imba_clinkz_spirits", summon_point, caster.GetTeamNumber(), true, caster, caster);
+            let spirit = BaseNpc_Plus.CreateUnitByName("npc_imba_clinkz_spirits", summon_point, caster, true);
             spirit.SetOwner(caster);
             spirit.SetOriginalModel(spirit_model);
             spirit.SetModelScale(spirit_scale);
@@ -1712,7 +1712,7 @@ export class modifier_imba_death_pact_hero_debuff extends BaseModifier_Plus {
                 let direction = (this.GetParentPlus().GetAbsOrigin() - this.GetCasterPlus().GetAbsOrigin() as Vector).Normalized();
                 let distance = (this.GetParentPlus().GetAbsOrigin() - this.GetCasterPlus().GetAbsOrigin() as Vector).Length2D();
                 let summon_point = this.GetCasterPlus().GetAbsOrigin() + direction * distance - 100 as Vector;
-                let spirit = BaseNpc_Plus.CreateUnitByName("npc_imba_clinkz_spirits", summon_point, this.GetCasterPlus().GetTeamNumber(), true, this.GetCasterPlus(), this.GetCasterPlus());
+                let spirit = BaseNpc_Plus.CreateUnitByName("npc_imba_clinkz_spirits", summon_point, this.GetCasterPlus(), true);
                 spirit.SetOwner(this.GetCasterPlus());
                 spirit.SetOriginalModel(spirit_model);
                 spirit.SetModelScale(spirit_scale);

@@ -28,13 +28,13 @@ export class imba_storm_spirit_static_remnant extends BaseAbility_Plus {
 
             if (remnant_count > 1) {
                 for (let i = 0; i < remnant_count; i++) {
-                    let dummy = BaseNpc_Plus.CreateUnitByName("npc_imba_dota_stormspirit_remnant", caster.GetAbsOrigin() + remnant_pos[i] as Vector, caster.GetTeamNumber(), false, caster, undefined);
+                    let dummy = BaseNpc_Plus.CreateUnitByName("npc_imba_dota_stormspirit_remnant", caster.GetAbsOrigin() + remnant_pos[i] as Vector, caster, false);
                     dummy.AddNewModifier(caster, this, "modifier_imba_static_remnant", {
                         duration: remnant_duration
                     });
                 }
             } else {
-                let dummy = BaseNpc_Plus.CreateUnitByName("npc_imba_dota_stormspirit_remnant", caster.GetAbsOrigin(), caster.GetTeamNumber(), false, caster, undefined);
+                let dummy = BaseNpc_Plus.CreateUnitByName("npc_imba_dota_stormspirit_remnant", caster.GetAbsOrigin(), caster, false);
                 dummy.AddNewModifier(caster, this, "modifier_imba_static_remnant", {
                     duration: remnant_duration
                 });
@@ -48,7 +48,7 @@ export class imba_storm_spirit_static_remnant extends BaseAbility_Plus {
 @registerModifier()
 export class modifier_imba_static_remnant extends BaseModifier_Plus {
     public ability: IBaseAbility_Plus;
-    public dummy: any;
+    public dummy: IBaseNpc_Plus;
     public caster_location: any;
     public ballLightning: any;
     public activation_delay: number;
@@ -92,7 +92,7 @@ export class modifier_imba_static_remnant extends BaseModifier_Plus {
             if (this.ability.IsNull()) {
                 ParticleManager.DestroyParticle(this.remnant_particle_fx, false);
                 ParticleManager.ReleaseParticleIndex(this.remnant_particle_fx);
-                UTIL_Remove(this.dummy);
+                GFuncEntity.SafeDestroyUnit(this.dummy);
                 return;
             }
             let remnant_blowup_sound = "Hero_StormSpirit.StaticRemnantExplode";
@@ -144,7 +144,7 @@ export class modifier_imba_static_remnant extends BaseModifier_Plus {
             }
             ParticleManager.DestroyParticle(this.remnant_particle_fx, false);
             ParticleManager.ReleaseParticleIndex(this.remnant_particle_fx);
-            UTIL_Remove(this.dummy);
+            GFuncEntity.SafeDestroyUnit(this.dummy);
         }
     }
     CheckState(): Partial<Record<modifierstate, boolean>> {
@@ -468,7 +468,7 @@ export class modifier_imba_overload extends BaseModifier_Plus {
     @registerEvent(Enum_MODIFIER_EVENT.ON_ABILITY_EXECUTED)
     CC_OnAbilityExecuted(keys: ModifierAbilityEvent): void {
         if (IsServer()) {
-            if (keys.ability && keys.ability.GetName() != "ability_capture") {
+            if (keys.ability && keys.ability.GetAbilityName() != "ability_capture") {
                 let parent = this.GetParentPlus();
                 if (keys.unit == parent) {
                     if (!parent.PassivesDisabled()) {
@@ -690,7 +690,7 @@ export class imba_storm_spirit_ball_lightning extends BaseAbility_Plus {
                     this.traveled_remnant = this.traveled_remnant - remant_interval;
                     let cast_sound = "Hero_StormSpirit.StaticRemnantPlant";
                     EmitSoundOn(cast_sound, caster);
-                    let dummy = BaseNpc_Plus.CreateUnitByName("npc_imba_dota_stormspirit_remnant", caster.GetAbsOrigin(), caster.GetTeamNumber(), false, caster, undefined);
+                    let dummy = BaseNpc_Plus.CreateUnitByName("npc_imba_dota_stormspirit_remnant", caster.GetAbsOrigin(), caster, false);
                     dummy.AddNewModifier(caster, this.remnant, "modifier_imba_static_remnant", {
                         duration: this.remnant.GetSpecialValueFor("big_remnant_duration"),
                         ballLightning: true
@@ -723,7 +723,7 @@ export class imba_storm_spirit_ball_lightning extends BaseAbility_Plus {
                 "22": "stormspirit_ss_ability_lightning_31",
                 "23": "stormspirit_ss_ability_lightning_32"
             }
-            // if (caster.GetName() .includes("storm_spirit")) {
+            // if (caster.GetUnitName() .includes("storm_spirit")) {
             // }
             caster.EmitCasterSound(Object.values(responses), 100, ResHelper.EDOTA_CAST_SOUND.FLAG_BOTH_TEAMS, undefined, undefined);
 

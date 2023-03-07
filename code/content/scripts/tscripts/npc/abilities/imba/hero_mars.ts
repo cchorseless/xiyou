@@ -29,6 +29,17 @@ export class imba_mars_spear extends BaseAbility_Plus {
         }
         return true;
     }
+
+    addProjectile(iProjectileHandle: ProjectileID) {
+        this.projectiles[iProjectileHandle + ""] = {};
+        let pos = ProjectileManager.GetLinearProjectileLocation(iProjectileHandle);
+        this.projectiles[iProjectileHandle + ""].location = pos;
+        this.projectiles[iProjectileHandle + ""].init_pos = pos;
+        let direction = ProjectileManager.GetLinearProjectileVelocity(iProjectileHandle);
+        direction.z = 0
+        direction = direction.Normalized()
+        this.projectiles[iProjectileHandle + ""].direction = direction;
+    }
     OnSpellStart(): void {
         let point = this.GetCursorPosition();
         let projectile_name = "particles/units/heroes/hero_mars/mars_spear.vpcf";
@@ -38,6 +49,7 @@ export class imba_mars_spear extends BaseAbility_Plus {
         let projectile_vision = this.GetSpecialValueFor("spear_vision");
         let heaven_spear_delay = this.GetSpecialValueFor("heaven_spear_delay");
         this.trailblazer_particles = {}
+        this.projectiles = {}
         if (!IsServer()) {
             return;
         }
@@ -70,7 +82,7 @@ export class imba_mars_spear extends BaseAbility_Plus {
                 iVisionTeamNumber: this.GetCasterPlus().GetTeamNumber()
             }
             ProjectileManager.CreateLinearProjectile(info);
-            this.trailblazer_thinker = CreateModifierThinker(this.GetCasterPlus(), this, "modifier_imba_mars_spear_trailblazer_thinker", {
+            this.trailblazer_thinker = BaseModifier_Plus.CreateBuffThinker(this.GetCasterPlus(), this, "modifier_imba_mars_spear_trailblazer_thinker", {
                 duration: this.GetSpecialValueFor("trailblazer_duration")
             }, this.GetCasterPlus().GetAbsOrigin(), this.GetCasterPlus().GetTeamNumber(), false);
         }
@@ -85,14 +97,15 @@ export class imba_mars_spear extends BaseAbility_Plus {
             this.trailblazer_thinker.SetAbsOrigin(vLocation);
         }
     }
-    OnProjectileHitHandle(target: IBaseNpc_Plus, location: Vector, iProjectileHandle: ProjectileID) {
+    OnProjectileHitHandle(target: IBaseNpc_Plus, location: Vector, _iProjectileHandle: ProjectileID) {
+        let iProjectileHandle = _iProjectileHandle + "";
         if (!this.projectiles[iProjectileHandle]) {
-            this.projectiles.Init(iProjectileHandle);
+            this.addProjectile(_iProjectileHandle);
         }
         if (!target) {
             let projectile_vision = this.GetSpecialValueFor("spear_vision");
             AddFOWViewer(this.GetCasterPlus().GetTeamNumber(), location, projectile_vision, 1, false);
-            this.projectiles.Destroy(iProjectileHandle);
+            delete this.projectiles[iProjectileHandle];
             return;
         }
         let stun = this.GetSpecialValueFor("stun_duration") + this.GetCasterPlus().GetTalentValue("special_bonus_unique_mars_spear_stun_duration");
@@ -138,16 +151,17 @@ export class imba_mars_spear extends BaseAbility_Plus {
         let sound_cast = "Hero_Mars.Spear.Target";
         EmitSoundOn(sound_cast, target);
     }
-    OnProjectileThinkHandle(iProjectileHandle: ProjectileID): void {
+    OnProjectileThinkHandle(_iProjectileHandle: ProjectileID): void {
+        let iProjectileHandle = "" + _iProjectileHandle;
         if (!this.projectiles[iProjectileHandle]) {
-            this.projectiles.Init(iProjectileHandle);
+            this.addProjectile(_iProjectileHandle);
         }
         let data = this.projectiles[iProjectileHandle];
         let tree_radius = 120;
         let wall_radius = 50;
         let building_radius = 30;
         let blocker_radius = 70;
-        let location = ProjectileManager.GetLinearProjectileLocation(iProjectileHandle);
+        let location = ProjectileManager.GetLinearProjectileLocation(_iProjectileHandle);
         data.location = location;
         if (!data.unit) {
             return;
@@ -162,39 +176,40 @@ export class imba_mars_spear extends BaseAbility_Plus {
         let arena_walls = Entities.FindAllByClassnameWithin("npc_dota_phantomassassin_gravestone", data.location, wall_radius) as IBaseNpc_Plus[];
         for (const arena_wall of (arena_walls)) {
             if (arena_wall.HasModifier("modifier_imba_mars_arena_of_blood_blocker")) {
-                this.Pinned(iProjectileHandle);
+                this.Pinned(_iProjectileHandle);
                 return;
             }
         }
         let thinkers = Entities.FindAllByClassnameWithin("npc_dota_thinker", data.location, wall_radius) as IBaseNpc_Plus[];
         for (const [_, thinker] of GameFunc.iPair(thinkers)) {
             if (thinker.IsPhantomBlocker()) {
-                this.Pinned(iProjectileHandle);
+                this.Pinned(_iProjectileHandle);
                 return;
             }
         }
         let base_loc = GetGroundPosition(data.location, data.unit);
         let search_loc = GetGroundPosition(base_loc + data.direction * wall_radius as Vector, data.unit);
         if (search_loc.z - base_loc.z > 10 && (!GridNav.IsTraversable(search_loc))) {
-            this.Pinned(iProjectileHandle);
+            this.Pinned(_iProjectileHandle);
             return;
         }
         if (GridNav.IsNearbyTree(data.location, tree_radius, false)) {
-            this.Pinned(iProjectileHandle);
+            this.Pinned(_iProjectileHandle);
             return;
         }
         let buildings = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), data.location, undefined, building_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BUILDING, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE, 0, false);
         if (GameFunc.GetCount(buildings) > 0) {
-            this.Pinned(iProjectileHandle);
+            this.Pinned(_iProjectileHandle);
             return;
         }
     }
-    Pinned(iProjectileHandle: ProjectileID) {
+    Pinned(_iProjectileHandle: ProjectileID) {
+        let iProjectileHandle = "" + _iProjectileHandle;
         let data = this.projectiles[iProjectileHandle];
         let duration = this.GetSpecialValueFor("stun_duration");
         let projectile_vision = this.GetSpecialValueFor("spear_vision");
         AddFOWViewer(this.GetCasterPlus().GetTeamNumber(), data.unit.GetOrigin(), projectile_vision, duration, false);
-        ProjectileManager.DestroyLinearProjectile(iProjectileHandle);
+        ProjectileManager.DestroyLinearProjectile(_iProjectileHandle);
         if (data.modifier && !data.modifier.IsNull()) {
             data.modifier.Destroy();
             data.unit.SetOrigin(GetGroundPosition(data.location, data.unit));
@@ -203,13 +218,14 @@ export class imba_mars_spear extends BaseAbility_Plus {
             duration: duration,
             projectile: iProjectileHandle
         });
-        this.PlayEffects(iProjectileHandle, duration);
-        this.projectiles.Destroy(iProjectileHandle);
+        this.PlayEffects(_iProjectileHandle, duration);
+        delete this.projectiles[iProjectileHandle];
     }
     PlayEffects(projID: ProjectileID, duration: number) {
+        let projID_str = "" + projID;
         let particle_cast = "particles/units/heroes/hero_mars/mars_spear_impact.vpcf";
         let sound_cast = "Hero_Mars.Spear.Root";
-        let data = this.projectiles[projID];
+        let data = this.projectiles[projID_str];
         let delta = 50;
         let location = GetGroundPosition(data.location, data.unit) + data.direction * delta as Vector;
         let effect_cast = ResHelper.CreateParticleEx(particle_cast, ParticleAttachment_t.PATTACH_WORLDORIGIN, undefined);
@@ -295,7 +311,7 @@ export class modifier_imba_mars_spear_heaven_spear extends BaseModifier_Plus {
                 ApplyDamage(damageTable);
             }
         }
-        this.trailblazer_thinker = CreateModifierThinker(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_mars_spear_trailblazer_thinker", {
+        this.trailblazer_thinker = BaseModifier_Plus.CreateBuffThinker(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_mars_spear_trailblazer_thinker", {
             duration: this.GetSpecialValueFor("trailblazer_duration"),
             heaven_spear: 1
         }, this.origin, this.GetCasterPlus().GetTeamNumber(), false);
@@ -346,6 +362,10 @@ export class modifier_imba_mars_spear_trailblazer_thinker extends BaseModifier_P
         this.StartIntervalThink(this.tick_time);
     }
     OnIntervalThink(): void {
+        if (!GFuncEntity.IsValid(this.GetCasterPlus())) {
+            this.Destroy();
+            return;
+        }
         let damage = (this.GetSpecialValueFor("damage") * (this.GetSpecialValueFor("trailblazer_damage_pct") / 100)) * this.tick_time;
         let enemies = undefined;
         if (this.heaven_spear && this.heaven_spear == 1) {
@@ -917,7 +937,7 @@ export class imba_mars_arena_of_blood extends BaseAbility_Plus {
             return;
         }
         let cast_position = this.GetCursorPosition();
-        CreateModifierThinker(this.GetCasterPlus(), this, "modifier_imba_mars_arena_of_blood_thinker", {}, cast_position, this.GetCasterPlus().GetTeamNumber(), false);
+        BaseModifier_Plus.CreateBuffThinker(this.GetCasterPlus(), this, "modifier_imba_mars_arena_of_blood_thinker", {}, cast_position, this.GetCasterPlus().GetTeamNumber(), false);
     }
     OnProjectileHitHandle(target: IBaseNpc_Plus, location: Vector, id: number) {
         let data = this.projectiles[id];
@@ -1764,7 +1784,7 @@ export class modifier_imba_mars_arena_of_blood_scepter extends BaseModifierMotio
         if (!IsServer()) {
             return;
         }
-        CreateModifierThinker(this.GetParentPlus(), this.GetAbilityPlus(), "modifier_imba_mars_arena_of_blood_thinker", {}, this.target_point, this.GetCasterPlus().GetTeamNumber(), false);
+        BaseModifier_Plus.CreateBuffThinker(this.GetParentPlus(), this.GetAbilityPlus(), "modifier_imba_mars_arena_of_blood_thinker", {}, this.target_point, this.GetCasterPlus().GetTeamNumber(), false);
         this.GetParentPlus().SetUnitOnClearGround();
         this.GetParentPlus().FadeGesture(GameActivity_t.ACT_DOTA_CAST1_STATUE);
     }

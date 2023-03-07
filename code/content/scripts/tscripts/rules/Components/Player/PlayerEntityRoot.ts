@@ -2,7 +2,7 @@
 import { EventHelper } from "../../../helper/EventHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { NetTablesHelper } from "../../../helper/NetTablesHelper";
-import { unit_base_baoxiang } from "../../../npc/units/common/unit_base_baoxiang";
+import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { GameProtocol } from "../../../shared/GameProtocol";
 import { ET } from "../../../shared/lib/Entity";
 import { PlayerConfig } from "../../../shared/PlayerConfig";
@@ -284,7 +284,7 @@ export class PlayerEntityRoot extends PlayerSystem {
         if (this.FakerHero == null) {
             let spawn = GMapSystem.GetInstance().getFakerHeroSpawnPoint(this.BelongPlayerid);
             // todo
-            (this.FakerHero as any) = unit_base_baoxiang.CreateOne(spawn, DOTATeam_t.DOTA_TEAM_BADGUYS, true);
+            (this.FakerHero as any) = BaseNpc_Plus.CreateUnitByName("unit_base_baoxiang", spawn, this.Hero, true, DOTATeam_t.DOTA_TEAM_BADGUYS);
             FakerHeroEntityRoot.Active(this.FakerHero, this.BelongPlayerid, "unit_base_baoxiang");
         }
     }

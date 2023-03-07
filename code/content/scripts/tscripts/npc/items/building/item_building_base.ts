@@ -1,14 +1,14 @@
 import { KVHelper } from "../../../helper/KVHelper";
+import { registerAbility } from "../../entityPlus/Base_Plus";
 import { ActiveRootItem } from "../ActiveRootItem";
 
-/**建筑物道具基类 */
+@registerAbility()
 export class item_building_base extends ActiveRootItem {
     GetCreateUnitName() {
         let itemname = this.GetAbilityName();
         let info = KVHelper.KvConfig().building_item_card[itemname];
         return info.bind_unit_name;
     }
-
     // CastFilterResultLocation(vLocation: Vector) {
     //     if (IsServer()) {
     //         if (this.GetCaster().IsIllusion() || this.GetCaster().IsClone()) {

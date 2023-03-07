@@ -208,7 +208,7 @@ export class modifier_imba_dazzle_poison_touch_debuff extends BaseModifier_Plus 
             let caster = ability.GetCaster();
             let originalAbility = this.GetAbilityPlus();
             let originalCaster = originalAbility.GetCaster();
-            if (ability.GetCursorTarget() == parent && caster.GetTeamNumber() == parent.GetTeamNumber() && !caster.findBuff<modifier_imba_dazzle_poison_touch_debuff>("modifier_imba_dazzle_poison_touch_debuff") && keys.ability.GetName() != "ability_capture") {
+            if (ability.GetCursorTarget() == parent && caster.GetTeamNumber() == parent.GetTeamNumber() && !caster.findBuff<modifier_imba_dazzle_poison_touch_debuff>("modifier_imba_dazzle_poison_touch_debuff") && keys.ability.GetAbilityName() != "ability_capture") {
                 let mod = caster.AddNewModifier(originalAbility.GetCaster(), originalAbility, "modifier_imba_dazzle_poison_touch_debuff", {
                     duration: originalAbility.GetSpecialValueFor("poison_duration") * (1 - caster.GetStatusResistance())
                 });
@@ -1507,7 +1507,7 @@ export class modifier_imba_dazzle_bad_juju extends BaseModifier_Plus {
         if (IsServer()) {
             let ability = params.ability;
             let unit = params.unit;
-            if (unit == this.GetCasterPlus() && !ability.IsItem() && params.ability.GetName() != "ability_capture" && params.ability.GetCooldown(params.ability.GetLevel()) > 0) {
+            if (unit == this.GetCasterPlus() && !ability.IsItem() && params.ability.GetAbilityName() != "ability_capture" && params.ability.GetCooldown(params.ability.GetLevel()) > 0) {
                 let behavior = DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC;
                 if (this.GetCasterPlus().HasTalent("special_bonus_imba_dazzle_7")) {
                     behavior = behavior + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BUILDING;

@@ -14,7 +14,7 @@ function TangoCastFilterResult(ability: IBaseItem_Plus, target: IBaseNpc_Plus) {
         return;
     }
     if (target.IsOther()) {
-        if (target.GetTeamNumber() != ability.GetCaster().GetTeamNumber() || target.GetOwner() == ability.GetCaster() || target.GetName() == "npc_dota_ward_base") {
+        if (target.GetTeamNumber() != ability.GetCaster().GetTeamNumber() || target.GetOwner() == ability.GetCaster() || target.GetUnitName().includes("ward_base")) {
             return UnitFilterResult.UF_SUCCESS;
         } else {
             return UnitFilterResult.UF_FAIL_CUSTOM;
@@ -59,7 +59,7 @@ function UseTango(ability: IBaseItem_Plus) {
             let single_tango_item = BaseItem_Plus.CreateItem(single_tango, target.GetPlayerOwner(), undefined);
             CreateItemOnPositionSync(target.GetAbsOrigin(), single_tango_item);
         }
-        if (ability.GetName() == single_tango) {
+        if (ability.GetAbilityName() == single_tango) {
             ability.EndCooldown();
         }
         gave_tango = true;
@@ -72,13 +72,13 @@ function UseTango(ability: IBaseItem_Plus) {
         }
     } else {
         target.Kill(ability, caster);
-        if (ability.GetName() == orig_tango) {
+        if (ability.GetAbilityName() == orig_tango) {
             ability.StartCooldown(ward_eat_cd);
             if (caster.HasItemInInventory(single_tango)) {
                 caster.FindItemInInventory(single_tango).StartCooldown(ward_eat_cd);
             }
         }
-        if (ability.GetName() == single_tango) {
+        if (ability.GetAbilityName() == single_tango) {
             if (caster.HasItemInInventory(orig_tango)) {
                 caster.FindItemInInventory(orig_tango).StartCooldown(ward_eat_cd);
             }

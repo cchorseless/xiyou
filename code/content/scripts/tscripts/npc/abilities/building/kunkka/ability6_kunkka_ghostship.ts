@@ -54,7 +54,7 @@ export class ability6_kunkka_ghostship extends BaseAbility_Plus {
         if (GFuncEntity.IsValid(hModifier)) {
             hModifier.AddParticle(particleID, false, false, -1, false, false)
         }
-        let thinker = unit_dummy.CreateOne(vStartPosition, caster.GetTeamNumber(), false, caster, caster)
+        let thinker = unit_dummy.CreateOne(vStartPosition, caster, false)
         modifier_dummy.apply(thinker, caster, this, null)
         EmitSoundOn(ResHelper.GetSoundReplacement("Ability.Ghostship", caster), thinker)
 

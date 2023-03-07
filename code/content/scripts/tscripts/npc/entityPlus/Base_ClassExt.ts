@@ -217,6 +217,18 @@ let tAddedValues: Record<string, string> = {
 };
 
 declare global {
+    interface CEntityInstance {
+        /**
+         * Runs when the Instance is destroyed .
+         *
+         * @both
+         */
+        OnDestroy(): void;
+    }
+}
+
+
+declare global {
     interface CDOTABaseAbility {
         /**默认值 */
         __DefaultSpecialValue__: { [k: string]: number | number[] };
@@ -342,6 +354,7 @@ if (CBaseAbility.GetLevelSpecialValueFor_Engine == undefined) {
 if (CBaseAbility.GetSpecialValueFor_Engine == null) {
     CBaseAbility.GetSpecialValueFor_Engine = CBaseAbility.GetSpecialValueFor;
 }
+
 /**
  * 设置Special默认值
  * @param s
@@ -355,7 +368,7 @@ CBaseAbility.SetDefaultSpecialValue = function (s: string, default_V: number | n
 
 CBaseAbility.GetSpecialValueFor = function (s: string, default_V = 0): number {
     let r = this.GetSpecialValueFor_Engine(s);
-    if (r && r != null) {
+    if (r && r != 0) {
         return r
     }
     else if (this.__DefaultSpecialValue__ && this.__DefaultSpecialValue__[s] && this.__DefaultSpecialValue__[s] != null) {
@@ -591,9 +604,11 @@ CBaseAbility.GetTalentValue = function (sTalent: string, sKey: string = "value")
 
 if (IsServer()) {
     CBaseAbility.GetOwnerPlus = function () {
+        if (!IsValid(this)) return;
         return this.GetOwner() as IBaseNpc_Plus
     }
     CBaseAbility.IsAbilityReady = function () {
+        if (!IsValid(this)) return false;
         let hCaster = this.GetCaster();
         let iBehavior = this.GetBehaviorInt();
 
@@ -1016,14 +1031,31 @@ declare global {
         __safedestroyed__: boolean;
         /**是否是第一次创建 */
         __bIsFirstSpawn: boolean;
-
+        /**创建的实体 */
+        __CreateChildren__: IBaseNpc_Plus[];
         __TempData: { [k: string]: any };
-
+        /**
+         * @Server 删除时回调
+         */
+        UpdateOnRemove(): void;
+        /**
+         * @Both 找到本体
+         */
+        GetSource(): IBaseNpc_Plus;
+        /**
+         * @Both
+         * 是否拥有魔晶
+         * @param hCaster
+         */
+        HasShard(): boolean;
         /**
          * @Both
          */
         TempData<T = any>(): { [k: string]: T };
-
+        /**
+         * @Server
+         */
+        InitActivityModifier(): void;
         /**
          * @Both
          */
@@ -1061,6 +1093,26 @@ declare global {
          * @Both
          */
         GetKVData<T>(key: string, defaultv?: T): T;
+        /**
+         * 父节点注册自己
+         * @Both
+         */
+        RegOwnerSelf(b: boolean): void;
+        /**
+         * 通过名字找子节点
+         * @Both
+         */
+        FindChildByName<T extends IBaseNpc_Plus>(name: string): T[];
+        /**
+         * 通过Buff名字找子节点
+         * @Both
+         */
+        FindChildByBuffName<T extends IBaseNpc_Plus>(name: string): T[];
+        /**
+         * 通过filter找子节点
+         * @Both
+         */
+        FindChildByFilter<T extends IBaseNpc_Plus>(func: (v: IBaseNpc_Plus, i: number) => boolean): T[];
         /**
          * 是否是真实单位
          * @Both
@@ -1184,7 +1236,123 @@ declare global {
 
 const BaseNPC = IsServer() ? CDOTA_BaseNPC : C_DOTA_BaseNPC;
 
-BaseNPC.TempData = function (this: CDOTA_BaseNPC) {
+
+BaseNPC.HasShard = function () {
+    return this.HasModifier("modifier_item_aghanims_shard")
+}
+BaseNPC.IsSummoned = function () {
+    return this.HasModifier("modifier_summon")
+}
+BaseNPC.IsIllusion = function () {
+    return this.HasModifier("modifier_illusion")
+}
+BaseNPC.GetSource = function () {
+    if (this.IsSummoned() || this.IsClone() || this.IsIllusion()) {
+        return IsValid(this.GetOwnerPlus()) && this.GetOwnerPlus() || this;
+    }
+    return this
+}
+BaseNPC.RegOwnerSelf = function (b: boolean) {
+    let owner = this.GetOwnerPlus();
+    if (IsValid(owner)) {
+        if (b) {
+            owner.__CreateChildren__ = owner.__CreateChildren__ || [];
+            owner.__CreateChildren__.push(this);
+        } else {
+            let index = owner.__CreateChildren__.indexOf(this);
+            if (index >= 0) {
+                owner.__CreateChildren__.splice(owner.__CreateChildren__.indexOf(this), 1);
+            }
+        }
+    }
+}
+BaseNPC.FindChildByName = function (name: string) {
+    let r: IBaseNpc_Plus[] = [];
+    if (IsValid(this)) {
+        let children = this.__CreateChildren__ || [];
+        let len = children.length;
+        for (let i = 0; i < len; i++) {
+            const child = children[i];
+            if (!IsValid(child)) {
+                children.splice(i, 1);
+                i--;
+                len--;
+                continue;
+            }
+            if (child.GetUnitName() == name) {
+                r.push(child);
+            }
+        }
+    }
+    return r;
+}
+
+BaseNPC.FindChildByBuffName = function (name: string) {
+    let r: IBaseNpc_Plus[] = [];
+    if (IsValid(this)) {
+        let children = this.__CreateChildren__ || [];
+        let len = children.length;
+        for (let i = 0; i < len; i++) {
+            const child = children[i];
+            if (!IsValid(child)) {
+                children.splice(i, 1);
+                i--;
+                len--;
+                continue;
+            }
+            if (child.HasModifier(name)) {
+                r.push(child);
+            }
+        }
+    }
+    return r;
+}
+BaseNPC.FindChildByFilter = function (func: (unit: IBaseNpc_Plus, index: number) => boolean) {
+    let r: IBaseNpc_Plus[] = [];
+    if (IsValid(this)) {
+        let children = this.__CreateChildren__ || [];
+        let len = children.length;
+        for (let i = 0; i < len; i++) {
+            const child = children[i];
+            if (!IsValid(child)) {
+                children.splice(i, 1);
+                i--;
+                len--;
+                continue;
+            }
+            if (func(child, i)) {
+                r.push(child);
+            }
+        }
+    }
+    return r;
+}
+
+BaseNPC.InitActivityModifier = function () {
+    let name = this.GetUnitName();
+    if (name == null || name.length == 0) { return };
+    let entityKeyValues = KVHelper.KvUnits[name];
+    if (entityKeyValues == null) return;
+    let move = entityKeyValues.MovementSpeedActivityModifiers;
+    let attackspeed = entityKeyValues.AttackSpeedActivityModifiers;
+    let attackrange = entityKeyValues.AttackRangeActivityModifiers;
+    let obj = {};
+    if (move) {
+        obj = Object.assign(obj, move)
+    }
+    if (attackspeed) {
+        obj = Object.assign(obj, attackspeed)
+    }
+    if (attackrange) {
+        obj = Object.assign(obj, attackrange)
+    }
+    if (Object.keys(obj).length > 0) {
+        Gmodifier_activity.apply(this, this, null, obj)
+    }
+}
+
+
+BaseNPC.TempData = function () {
     if (this.__TempData == null) {
         this.__TempData = {};
     }
@@ -1236,7 +1404,7 @@ BaseNPC.RemoveItemByName = function (ItemName, bStash) {
     for (let slot = 0; slot <= count; slot += 1) {
         let item = this.GetItemInSlot(slot);
         if (item) {
-            if (item.GetName() == ItemName) {
+            if (item.GetAbilityName() == ItemName) {
                 this.RemoveItem(item);
                 return;
             }

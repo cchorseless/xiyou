@@ -121,7 +121,7 @@ export class imba_leshrac_split_earth extends BaseAbility_Plus {
             }
             let splitter_enemies = FindUnitsInRadius(caster.GetTeamNumber(), target_point, undefined, splitter_blast_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_ANY_ORDER, false);
             if (GameFunc.GetCount(splitter_enemies) > 0) {
-                let dummy = BaseNpc_Plus.CreateUnitByName("npc_dummy_unit", target_point, caster.GetTeamNumber(), false, caster, caster);
+                let dummy = BaseNpc_Plus.CreateUnitByName("npc_dummy_unit", target_point, caster, false);
                 let orbs_fired = 0;
                 this.AddTimer(splitter_blast_delay, () => {
                     let chosen_enemy;
@@ -160,8 +160,8 @@ export class imba_leshrac_split_earth extends BaseAbility_Plus {
                     if (orbs_fired < energy_orb_count) {
                         return splitter_blast_delay;
                     } else {
-                        UTIL_Remove(dummy);
-                        return undefined;
+                        GFuncEntity.SafeDestroyUnit(dummy);
+                        return;
                     }
                 });
             }
@@ -1472,7 +1472,7 @@ export class imba_leshrac_tormented_soul_form extends BaseAbility_Plus {
             if (ability_lightning_handle) {
                 let tormented_soul_cast_duration = ability_lightning_handle.GetSpecialValueFor("tormented_soul_cast_duration");
                 if (tormented_soul_cast_duration) {
-                    CreateModifierThinker(caster, ability_lightning_handle, modifier_storm_cloud, {
+                    BaseModifier_Plus.CreateBuffThinker(caster, ability_lightning_handle, modifier_storm_cloud, {
                         duration: tormented_soul_cast_duration
                     }, caster.GetAbsOrigin(), caster.GetTeamNumber(), false);
                 }

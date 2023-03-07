@@ -10,7 +10,7 @@ export class imba_timbersaw_whirling_death extends BaseAbility_Plus {
     public responses: any;
     public dendrophobia_modifier: any;
     OnSpellStart(): void {
-        if (this.GetCasterPlus().GetName().includes("shredder") && RollPercentage(15)) {
+        if (this.GetCasterPlus().GetUnitName().includes("shredder") && RollPercentage(15)) {
             if (!this.responses) {
                 this.responses = {
                     "1": "shredder_timb_whirlingdeath_03",
@@ -267,7 +267,7 @@ export class imba_timbersaw_timber_chain extends BaseAbility_Plus {
             ExtraData: ExtraData
         });
         this.projectiles[timber_projectile] = ExtraData;
-        if (this.GetCasterPlus().GetName().includes("shredder")) {
+        if (this.GetCasterPlus().GetUnitName().includes("shredder")) {
             if (this.GetCasterPlus().GetTogglableWearablePlus(DOTASlotType_t.DOTA_LOADOUT_TYPE_WEAPON)) {
                 this.GetCasterPlus().GetTogglableWearablePlus(DOTASlotType_t.DOTA_LOADOUT_TYPE_WEAPON).AddEffects(EntityEffects.EF_NODRAW);
             }
@@ -349,7 +349,7 @@ export class imba_timbersaw_timber_chain extends BaseAbility_Plus {
         if (!target) {
             this.CreateVisibilityNode(location, 400, 0.1);
             this.GetCasterPlus().EmitSound("Hero_Shredder.TimberChain.Retract");
-            if (this.GetCasterPlus().GetName().includes("shredder")) {
+            if (this.GetCasterPlus().GetUnitName().includes("shredder")) {
                 if (!this.responses) {
                     this.responses = {
                         ["shredder_timb_failure_01"]: 0,
@@ -635,7 +635,7 @@ export class modifier_imba_timbersaw_reactive_armor extends BaseModifier_Plus {
         if (!IsServer()) {
             return;
         }
-        if (this.GetCasterPlus().GetName().includes("shredder")) {
+        if (this.GetCasterPlus().GetUnitName().includes("shredder")) {
             this.reactive_particle_1 = ResHelper.CreateParticleEx("particles/units/heroes/hero_shredder/shredder_armor_lyr1.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetParentPlus());
             ParticleManager.SetParticleControlEnt(this.reactive_particle_1, 0, this.GetParentPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_armor", this.GetParentPlus().GetAbsOrigin(), true);
             ParticleManager.SetParticleControl(this.reactive_particle_1, 2, Vector(0, 0, 0));
@@ -810,7 +810,7 @@ export class imba_timbersaw_chakram extends BaseAbility_Plus {
     OnUnStolen(): void {
         if (this.GetCasterPlus().HasAbility("imba_timbersaw_return_chakram")) {
             if (!this.GetCasterPlus().findAbliityPlus<imba_timbersaw_return_chakram>("imba_timbersaw_return_chakram").IsHidden()) {
-                this.GetCasterPlus().SwapAbilities(this.GetName(), "imba_timbersaw_return_chakram", true, false);
+                this.GetCasterPlus().SwapAbilities(this.GetAbilityName(), "imba_timbersaw_return_chakram", true, false);
             }
             this.GetCasterPlus().RemoveAbility("imba_timbersaw_return_chakram");
             if (this.GetCaster && this.GetCasterPlus() && this.GetCasterPlus().RemoveModifierByName) {
@@ -837,7 +837,7 @@ export class imba_timbersaw_chakram extends BaseAbility_Plus {
             this.projectiles = {}
         }
         this.GetCasterPlus().EmitSound("Hero_Shredder.Chakram.Cast");
-        if (this.GetCasterPlus().GetName().includes("shredder")) {
+        if (this.GetCasterPlus().GetUnitName().includes("shredder")) {
             if (!this.responses) {
                 this.responses = {
                     ["shredder_timb_chakram_02"]: 0,
@@ -890,7 +890,7 @@ export class imba_timbersaw_chakram extends BaseAbility_Plus {
             if (this.GetCasterPlus().findAbliityPlus<imba_timbersaw_return_chakram>("imba_timbersaw_return_chakram").GetLevel() != this.GetLevel()) {
                 this.GetCasterPlus().findAbliityPlus<imba_timbersaw_return_chakram>("imba_timbersaw_return_chakram").SetLevel(this.GetLevel());
             }
-            this.GetCasterPlus().SwapAbilities(this.GetName(), "imba_timbersaw_return_chakram", false, true);
+            this.GetCasterPlus().SwapAbilities(this.GetAbilityName(), "imba_timbersaw_return_chakram", false, true);
         }
         this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_timbersaw_chakram_disarm", {});
     }
@@ -973,7 +973,7 @@ export class imba_timbersaw_chakram extends BaseAbility_Plus {
             if (this.projectiles[projectileHandle].bAutoCastState) {
                 auto_cast_flag = 1;
             }
-            CreateModifierThinker(this.GetCasterPlus(), this, "modifier_imba_timbersaw_chakram_thinker", {
+            BaseModifier_Plus.CreateBuffThinker(this.GetCasterPlus(), this, "modifier_imba_timbersaw_chakram_thinker", {
                 bAutoCastState: auto_cast_flag,
                 cast_pos_x: this.projectiles[projectileHandle].cast_pos_x,
                 cast_pos_y: this.projectiles[projectileHandle].cast_pos_y,
@@ -997,7 +997,7 @@ export class imba_timbersaw_chakram extends BaseAbility_Plus {
                 this.projectiles[data.id + ""] = undefined;
             }
             if (this.GetCasterPlus().HasAbility("imba_timbersaw_return_chakram") && !this.GetCasterPlus().findAbliityPlus<imba_timbersaw_return_chakram>("imba_timbersaw_return_chakram").IsHidden() && this.IsHidden()) {
-                this.GetCasterPlus().SwapAbilities(this.GetName(), "imba_timbersaw_return_chakram", true, false);
+                this.GetCasterPlus().SwapAbilities(this.GetAbilityName(), "imba_timbersaw_return_chakram", true, false);
             }
             if ((!this.GetCasterPlus().HasAbility("imba_timbersaw_return_chakram") || (this.GetCasterPlus().HasAbility("imba_timbersaw_return_chakram") && this.GetCasterPlus().findAbliityPlus<imba_timbersaw_return_chakram>("imba_timbersaw_return_chakram").IsHidden())) && (!this.GetCasterPlus().HasAbility("imba_timbersaw_return_chakram_2") || (this.GetCasterPlus().HasAbility("imba_timbersaw_return_chakram_2") && this.GetCasterPlus().FindAbilityByName("imba_timbersaw_return_chakram_2").IsHidden())) && this.GetCasterPlus().HasModifier("modifier_imba_timbersaw_chakram_disarm")) {
                 this.GetCasterPlus().RemoveModifierByName("modifier_imba_timbersaw_chakram_disarm");
@@ -1047,7 +1047,7 @@ export class imba_timbersaw_chakram_2 extends BaseAbility_Plus {
     OnUnStolen(): void {
         if (this.GetCasterPlus().HasAbility("imba_timbersaw_return_chakram_2")) {
             if (!this.GetCasterPlus().findAbliityPlus<imba_timbersaw_return_chakram_2>("imba_timbersaw_return_chakram_2").IsHidden()) {
-                this.GetCasterPlus().SwapAbilities(this.GetName(), "imba_timbersaw_return_chakram_2", true, false);
+                this.GetCasterPlus().SwapAbilities(this.GetAbilityName(), "imba_timbersaw_return_chakram_2", true, false);
             }
             this.GetCasterPlus().RemoveAbility("imba_timbersaw_return_chakram_2");
             if (this.GetCaster && this.GetCasterPlus() && this.GetCasterPlus().RemoveModifierByName) {
@@ -1063,7 +1063,7 @@ export class imba_timbersaw_chakram_2 extends BaseAbility_Plus {
             this.projectiles = {}
         }
         this.GetCasterPlus().EmitSound("Hero_Shredder.Chakram.Cast");
-        if (this.GetCasterPlus().GetName().includes("shredder")) {
+        if (this.GetCasterPlus().GetUnitName().includes("shredder")) {
             if (!this.responses) {
                 this.responses = {
                     ["shredder_timb_chakram_02"]: 0,
@@ -1116,7 +1116,7 @@ export class imba_timbersaw_chakram_2 extends BaseAbility_Plus {
             if (this.GetCasterPlus().findAbliityPlus<imba_timbersaw_return_chakram_2>("imba_timbersaw_return_chakram_2").GetLevel() != this.GetLevel()) {
                 this.GetCasterPlus().findAbliityPlus<imba_timbersaw_return_chakram_2>("imba_timbersaw_return_chakram_2").SetLevel(this.GetLevel());
             }
-            this.GetCasterPlus().SwapAbilities(this.GetName(), "imba_timbersaw_return_chakram_2", false, true);
+            this.GetCasterPlus().SwapAbilities(this.GetAbilityName(), "imba_timbersaw_return_chakram_2", false, true);
         }
         this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_timbersaw_chakram_disarm", {});
     }
@@ -1198,7 +1198,7 @@ export class imba_timbersaw_chakram_2 extends BaseAbility_Plus {
             if (this.projectiles[projectileHandle].bAutoCastState) {
                 auto_cast_flag = 1;
             }
-            CreateModifierThinker(this.GetCasterPlus(), this, "modifier_imba_timbersaw_chakram_thinker", {
+            BaseModifier_Plus.CreateBuffThinker(this.GetCasterPlus(), this, "modifier_imba_timbersaw_chakram_thinker", {
                 bAutoCastState: auto_cast_flag,
                 cast_pos_x: this.projectiles[projectileHandle].cast_pos_x,
                 cast_pos_y: this.projectiles[projectileHandle].cast_pos_y,
@@ -1222,7 +1222,7 @@ export class imba_timbersaw_chakram_2 extends BaseAbility_Plus {
                 delete this.projectiles[data.id + ""];
             }
             if (this.GetCasterPlus().HasAbility("imba_timbersaw_return_chakram_2") && !this.GetCasterPlus().findAbliityPlus<imba_timbersaw_return_chakram_2>("imba_timbersaw_return_chakram_2").IsHidden() && this.IsHidden()) {
-                this.GetCasterPlus().SwapAbilities(this.GetName(), "imba_timbersaw_return_chakram_2", true, false);
+                this.GetCasterPlus().SwapAbilities(this.GetAbilityName(), "imba_timbersaw_return_chakram_2", true, false);
             }
             if ((!this.GetCasterPlus().HasAbility("imba_timbersaw_return_chakram") || (this.GetCasterPlus().HasAbility("imba_timbersaw_return_chakram") && this.GetCasterPlus().findAbliityPlus<imba_timbersaw_return_chakram>("imba_timbersaw_return_chakram").IsHidden())) && (!this.GetCasterPlus().HasAbility("imba_timbersaw_return_chakram_2") || (this.GetCasterPlus().HasAbility("imba_timbersaw_return_chakram_2") && this.GetCasterPlus().FindAbilityByName("imba_timbersaw_return_chakram_2").IsHidden())) && this.GetCasterPlus().HasModifier("modifier_imba_timbersaw_chakram_disarm")) {
                 this.GetCasterPlus().RemoveModifierByName("modifier_imba_timbersaw_chakram_disarm");
@@ -1287,7 +1287,7 @@ export class modifier_imba_timbersaw_chakram_thinker extends BaseModifierMotionH
             /**   if (Wearables.GetWearable(this.GetCasterPlus(), "models/items/shredder/timbersaw_ti9_immortal_offhand/timbersaw_ti9_immortal_offhand")) {
                   this.effect_name = "particles/econ/items/timbersaw/timbersaw_ti9/timbersaw_ti9_chakram_return.vpcf";
               } else */
-            if (this.GetAbilityPlus().GetName() == "imba_timbersaw_chakram_2") {
+            if (this.GetAbilityPlus().GetAbilityName() == "imba_timbersaw_chakram_2") {
                 this.effect_name = "particles/econ/items/shredder/hero_shredder_icefx/shredder_chakram_return_ice.vpcf";
             }
         } else {
@@ -1304,7 +1304,7 @@ export class modifier_imba_timbersaw_chakram_thinker extends BaseModifierMotionH
         // }
         this.chakram_particle = ResHelper.CreateParticleEx(this.stay_effect, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetParentPlus());
         if (this.GetAbilityPlus()) {
-            if (this.GetAbilityPlus().GetName() == "imba_timbersaw_chakram") {
+            if (this.GetAbilityPlus().GetAbilityName() == "imba_timbersaw_chakram") {
                 if (this.GetAbilityPlus().GetAutoCastState()) {
                     this.GetParentPlus().TempData().bTimberChainTarget = true;
                     ParticleManager.SetParticleControl(this.chakram_particle, 15, Vector(255, 255, 255));
@@ -1312,7 +1312,7 @@ export class modifier_imba_timbersaw_chakram_thinker extends BaseModifierMotionH
                 } else {
                     ParticleManager.SetParticleControl(this.chakram_particle, 16, Vector(0, 0, 0));
                 }
-            } else if (this.GetAbilityPlus().GetName() == "imba_timbersaw_chakram_2") {
+            } else if (this.GetAbilityPlus().GetAbilityName() == "imba_timbersaw_chakram_2") {
                 if (this.GetAbilityPlus().GetAutoCastState()) {
                     this.GetParentPlus().TempData().bTimberChainTarget = true;
                     ParticleManager.SetParticleControl(this.chakram_particle, 15, Vector(128, 128, 255));
@@ -1425,7 +1425,7 @@ export class modifier_imba_timbersaw_chakram_thinker extends BaseModifierMotionH
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ABILITY_FULLY_CAST)
     CC_OnAbilityFullyCast(keys: ModifierAbilityEvent): void {
-        if (keys.unit == this.GetCasterPlus() && this.GetAbilityPlus() && keys.ability.GetAssociatedPrimaryAbilities() == this.GetAbilityPlus().GetName()) {
+        if (keys.unit == this.GetCasterPlus() && this.GetAbilityPlus() && keys.ability.GetAssociatedPrimaryAbilities() == this.GetAbilityPlus().GetAbilityName()) {
             this.Destroy();
         }
     }
@@ -1523,7 +1523,7 @@ export class imba_timbersaw_return_chakram extends BaseAbility_Plus {
         return false;
     }
     OnSpellStart(): void {
-        if (this.GetCasterPlus().GetName().includes("shredder")) {
+        if (this.GetCasterPlus().GetUnitName().includes("shredder")) {
             if (!this.responses) {
                 this.responses = {
                     ["shredder_timb_chakramreturn_03"]: 0,
@@ -1593,7 +1593,7 @@ export class imba_timbersaw_return_chakram_2 extends BaseAbility_Plus {
         return false;
     }
     OnSpellStart(): void {
-        if (this.GetCasterPlus().GetName().includes("shredder")) {
+        if (this.GetCasterPlus().GetUnitName().includes("shredder")) {
             if (!this.responses) {
                 this.responses = {
                     ["shredder_timb_chakramreturn_03"]: 0,

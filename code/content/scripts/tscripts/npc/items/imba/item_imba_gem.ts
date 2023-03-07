@@ -90,13 +90,13 @@ export class modifier_item_imba_gem_of_true_sight extends BaseModifier_Plus {
         let item = this.GetItemPlus<item_imba_gem>();
         if (!this.GetParentPlus().IsRealUnit()) {
             this.GetParentPlus().DropItem(item, true);
-            item.dummy_unit = BaseNpc_Plus.CreateUnitByName("npc_dummy_unit_perma", pos, this.GetCasterPlus().GetTeam(), true, undefined, undefined);
+            item.dummy_unit = BaseNpc_Plus.CreateUnitByName("npc_dummy_unit_perma", pos, this.GetCasterPlus(), true);
             item.dummy_unit.AddNewModifier(this.GetCasterPlus(), item, "modifier_item_imba_gem_of_true_sight_dropped", {});
             return;
         }
         if (!this.GetParentPlus().IsReincarnating()) {
             this.GetParentPlus().DropItem(this.GetItemPlus(), true);
-            item.dummy_unit = BaseNpc_Plus.CreateUnitByName("npc_dummy_unit_perma", pos, this.GetCasterPlus().GetTeam(), true, undefined, undefined);
+            item.dummy_unit = BaseNpc_Plus.CreateUnitByName("npc_dummy_unit_perma", pos, this.GetCasterPlus(), true);
             item.dummy_unit.AddNewModifier(this.GetCasterPlus(), item, "modifier_item_imba_gem_of_true_sight_dropped", {});
         }
     }
@@ -165,7 +165,7 @@ export class modifier_item_imba_gem_of_true_sight_dropped extends BaseModifier_P
             ParticleManager.ReleaseParticleIndex(this.pfx);
         }
         if (this.GetParentPlus()) {
-            UTIL_Remove(this.GetParentPlus());
+            GFuncEntity.SafeDestroyUnit(this.GetParentPlus());
         }
     }
 }

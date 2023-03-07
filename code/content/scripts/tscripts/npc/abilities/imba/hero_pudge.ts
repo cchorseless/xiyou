@@ -12,14 +12,15 @@ import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_
 
 function UpdateHookStacks(caster: IBaseNpc_Plus) {
     if (!caster.FindAbilityByName("imba_pudge_meat_hook")) {
-        let pudge = Entities.FindAllByName("npc_dota_hero_pudge") as IBaseNpc_Plus[];
-        for (const main_hero of (pudge)) {
-            let borrowed_stacks = main_hero.FindAbilityByName("imba_pudge_meat_hook").GetSpecialValueFor("hook_stacks");
-            if (main_hero.HasScepter()) {
-                borrowed_stacks = main_hero.FindAbilityByName("imba_pudge_meat_hook").GetSpecialValueFor("hook_stacks") + main_hero.FindAbilityByName("imba_pudge_meat_hook").GetSpecialValueFor("scepter_hook_stacks");
-            }
-            return borrowed_stacks;
-        }
+        // let pudge = Entities.FindAllByName("npc_dota_hero_pudge") as IBaseNpc_Plus[];
+        // for (const main_hero of (pudge)) {
+        //     let borrowed_stacks = main_hero.FindAbilityByName("imba_pudge_meat_hook").GetSpecialValueFor("hook_stacks");
+        //     if (main_hero.HasScepter()) {
+        //         borrowed_stacks = main_hero.FindAbilityByName("imba_pudge_meat_hook").GetSpecialValueFor("hook_stacks") + main_hero.FindAbilityByName("imba_pudge_meat_hook").GetSpecialValueFor("scepter_hook_stacks");
+        //     }
+        //     return borrowed_stacks;
+        // }
+        return 0;
     }
     let stacks = caster.FindAbilityByName("imba_pudge_meat_hook").GetSpecialValueFor("hook_stacks");
     if (caster.HasScepter()) {
@@ -268,7 +269,7 @@ export class imba_pudge_meat_hook extends BaseAbility_Plus {
             let target = hTarget;
             let bVision = false;
             if (!target) {
-                target = BaseNpc_Plus.CreateUnitByName("npc_dummy_unit", vLocation, this.GetCasterPlus().GetTeamNumber(), false, this.GetCasterPlus(), this.GetCasterPlus());
+                target = BaseNpc_Plus.CreateUnitByName("npc_dummy_unit", vLocation, this.GetCasterPlus(), false);
             }
             ParticleManager.SetParticleControlEnt(ExtraData.pfx_index, 1, target, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", target.GetAbsOrigin() + Vector(0, 0, 96) as Vector, true);
             if (hTarget) {

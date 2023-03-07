@@ -163,7 +163,7 @@ export class modifier_item_imba_bloodstone_720 extends BaseModifier_Plus {
                 if (this == this.parent.FindAllModifiersByName(this.GetName())[0]) {
                     for (let itemSlot = 0; itemSlot <= 5; itemSlot++) {
                         let item = this.parent.GetItemInSlot(itemSlot);
-                        if (item && item.GetName() == this.ability.GetName()) {
+                        if (item && item.GetAbilityName() == this.ability.GetAbilityName()) {
                             item.SetCurrentCharges(item.GetCurrentCharges() + this.kill_charges);
                             return;
                         }

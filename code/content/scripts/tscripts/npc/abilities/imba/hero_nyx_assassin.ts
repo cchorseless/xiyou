@@ -154,7 +154,7 @@ export class imba_nyx_assassin_impale extends BaseAbility_Plus {
             target.RemoveGesture(GameActivity_t.ACT_DOTA_FLAIL);
         });
         if (impale_repeater && IsServer()) {
-            CreateModifierThinker(caster, ability, "modifier_imba_impale_talent_thinker", {
+            BaseModifier_Plus.CreateBuffThinker(caster, ability, "modifier_imba_impale_talent_thinker", {
                 duration: repeat_duration
             }, target.GetAbsOrigin(), caster.GetTeamNumber(), false);
         }
@@ -875,7 +875,7 @@ export class modifier_imba_spiked_carapace extends BaseModifier_Plus {
             this.modifier_stun = "modifier_imba_spiked_carapace_stun";
             this.modifier_vendetta = "modifier_imba_vendetta_charge";
             this.modifier_burrowed = "modifier_nyx_assassin_burrow";
-            // if (Battlepass && BATTLEPASS_NYX_ASSASSIN && Battlepass.GetRewardUnlocked(this.caster.GetPlayerID()) >= BATTLEPASS_NYX_ASSASSIN["nyx_assassin_immortal"]) {
+            // if (Battlepass && BATTLEPASS_NYX_ASSASSIN && Battlepass.GetRewardUnlocked(this.caster.GetPlayerOwnerID()) >= BATTLEPASS_NYX_ASSASSIN["nyx_assassin_immortal"]) {
             this.SetStackCount(1);
             // }
             this.stun_duration = this.ability.GetSpecialValueFor("stun_duration");
@@ -1151,7 +1151,7 @@ export class modifier_imba_vendetta extends BaseModifier_Plus {
         let ability = keys.ability;
         let caster = keys.unit;
         if (caster == this.caster) {
-            if (ability.GetName() == this.carapace_ability) {
+            if (ability.GetAbilityName() == this.carapace_ability) {
                 return undefined;
             }
             this.Destroy();

@@ -91,10 +91,10 @@ export class modifier_imba_power_treads_2 extends BaseModifier_Plus {
                     this.AddTimer(FrameTime(), () => {
                         let ownerFinder = FindUnitsInRadius(parent.GetTeamNumber(), parent.GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_DEAD + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FindOrder.FIND_ANY_ORDER, false);
                         for (const [_, hero] of GameFunc.iPair(ownerFinder)) {
-                            if (hero.GetName() == parent.GetName()) {
+                            if (hero.GetUnitName() == parent.GetUnitName()) {
                                 for (let i = 0; i <= 5; i++) {
                                     let hero_item = hero.GetItemInSlot(i) as item_imba_power_treads_2;
-                                    if (hero_item && hero_item.GetName() == "item_imba_power_treads_2") {
+                                    if (hero_item && hero_item.GetAbilityName() == "item_imba_power_treads_2") {
                                         let illusion_item = parent.GetItemInSlot(i) as item_imba_power_treads_2;
                                         let ability = this.GetItemPlus() as item_imba_power_treads_2;
                                         if (illusion_item != undefined && ability != undefined && illusion_item == ability) {

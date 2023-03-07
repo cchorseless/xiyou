@@ -136,7 +136,7 @@ export class modifier_imba_ancient_apparition_cold_feet_freeze extends BaseModif
             return;
         }
         this.GetParentPlus().EmitSound("Hero_Ancient_Apparition.ColdFeetFreeze");
-        if (this.GetCasterPlus().GetName().includes("ancient_apparition")) {
+        if (this.GetCasterPlus().GetUnitName().includes("ancient_apparition")) {
             this.GetCasterPlus().EmitSound("ancient_apparition_appa_ability_coldfeet_0" + RandomInt(2, 4));
         }
     }
@@ -186,7 +186,7 @@ export class imba_ancient_apparition_ice_vortex extends BaseAbility_Plus {
     }
     OnSpellStart(): void {
         this.GetCasterPlus().EmitSound("Hero_Ancient_Apparition.IceVortexCast");
-        if (this.GetCasterPlus().GetName().includes("ancient_apparition")) {
+        if (this.GetCasterPlus().GetUnitName().includes("ancient_apparition")) {
             if (!this.responses) {
                 this.responses = {
                     "ancient_apparition_appa_ability_vortex_01": 0,
@@ -206,7 +206,7 @@ export class imba_ancient_apparition_ice_vortex extends BaseAbility_Plus {
                 }
             }
         }
-        let vortex_thinker = CreateModifierThinker(this.GetCasterPlus(), this, "modifier_imba_ancient_apparition_ice_vortex_thinker", {
+        let vortex_thinker = BaseModifier_Plus.CreateBuffThinker(this.GetCasterPlus(), this, "modifier_imba_ancient_apparition_ice_vortex_thinker", {
             duration: this.GetSpecialValueFor("vortex_duration")
         }, this.GetCursorPosition(), this.GetCasterPlus().GetTeamNumber(), false);
     }
@@ -524,7 +524,7 @@ export class imba_ancient_apparition_anti_abrasion extends BaseAbility_Plus {
     }
     OnSpellStart(): void {
         this.GetCasterPlus().EmitSound("Hero_Ancient_Apparition.IceVortexCast");
-        let vortex_thinker = CreateModifierThinker(this.GetCasterPlus(), this, "modifier_imba_ancient_apparition_anti_abrasion_thinker", {
+        let vortex_thinker = BaseModifier_Plus.CreateBuffThinker(this.GetCasterPlus(), this, "modifier_imba_ancient_apparition_anti_abrasion_thinker", {
             duration: this.GetSpecialValueFor("vortex_duration")
         }, this.GetCursorPosition(), this.GetCasterPlus().GetTeamNumber(), false);
     }
@@ -609,7 +609,7 @@ export class imba_ancient_apparition_ice_blast extends BaseAbility_Plus {
         }
         EmitSoundOnClient("Hero_Ancient_Apparition.IceBlast.Tracker", this.GetCasterPlus().GetPlayerOwner());
         let velocity = GFuncVector.AsVector(this.GetCursorPosition() - this.GetCasterPlus().GetAbsOrigin()).Normalized() * this.GetSpecialValueFor("speed") as Vector;
-        this.ice_blast_dummy = CreateModifierThinker(this.GetCasterPlus(), this, "modifier_imba_ancient_apparition_ice_blast_thinker", {
+        this.ice_blast_dummy = BaseModifier_Plus.CreateBuffThinker(this.GetCasterPlus(), this, "modifier_imba_ancient_apparition_ice_blast_thinker", {
             x: velocity.x,
             y: velocity.y
         }, this.GetCasterPlus().GetAbsOrigin(), this.GetCasterPlus().GetTeamNumber(), false);
@@ -647,7 +647,7 @@ export class imba_ancient_apparition_ice_blast extends BaseAbility_Plus {
             this.release_ability = this.GetCasterPlus().findAbliityPlus<imba_ancient_apparition_ice_blast_release>("imba_ancient_apparition_ice_blast_release");
         }
         if (this.release_ability) {
-            this.GetCasterPlus().SwapAbilities(this.GetName(), this.release_ability.GetName(), false, true);
+            this.GetCasterPlus().SwapAbilities(this.GetAbilityName(), this.release_ability.GetAbilityName(), false, true);
         }
     }
     OnProjectileThink_ExtraData(location: Vector, data: any): void {
@@ -688,7 +688,7 @@ export class modifier_imba_ancient_apparition_ice_blast_thinker extends BaseModi
         }
         this.release_ability = this.GetCasterPlus().findAbliityPlus<imba_ancient_apparition_ice_blast_release>("imba_ancient_apparition_ice_blast_release");
         if (this.GetAbilityPlus() && this.GetAbilityPlus().IsHidden() && this.release_ability) {
-            this.GetCasterPlus().SwapAbilities(this.GetAbilityPlus().GetName(), this.release_ability.GetName(), true, false);
+            this.GetCasterPlus().SwapAbilities(this.GetAbilityPlus().GetAbilityName(), this.release_ability.GetName(), true, false);
         }
         // this.GetParentPlus().RemoveSelf();
     }
@@ -878,7 +878,7 @@ export class imba_ancient_apparition_ice_blast_release extends BaseAbility_Plus 
                 this.ice_blast_ability.ice_blast_dummy = undefined;
                 this.ice_blast_ability.initial_projectile = undefined;
             }
-            this.GetCasterPlus().SwapAbilities(this.GetName(), this.ice_blast_ability.GetName(), false, true);
+            this.GetCasterPlus().SwapAbilities(this.GetAbilityName(), this.ice_blast_ability.GetAbilityName(), false, true);
         }
     }
     OnProjectileThink_ExtraData(location: Vector, data: any): void {

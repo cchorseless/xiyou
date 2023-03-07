@@ -69,7 +69,7 @@ export class storegga_avalanche extends BaseAbility_Plus {
     OnSpellStart(): void {
         if (IsServer()) {
             this.flChannelTime = 0.0;
-            this.hThinker = CreateModifierThinker(this.GetCasterPlus(), this, "modifier_storegga_avalanche_thinker", {
+            this.hThinker = BaseModifier_Plus.CreateBuffThinker(this.GetCasterPlus(), this, "modifier_storegga_avalanche_thinker", {
                 duration: this.GetChannelTime()
             }, this.GetCasterPlus().GetOrigin(), this.GetCasterPlus().GetTeamNumber(), false);
         }

@@ -224,7 +224,7 @@ export class imba_sly_king_frost_gale extends BaseAbility_Plus {
         else {
             this.tempdata[ExtraData.index].push(null);
             if (this.tempdata[ExtraData.index].length == ExtraData.projectile_count) {
-                if ((GameFunc.GetCount(this.tempdata[ExtraData.index]) > 0) && (caster.GetName().includes("venomancer"))) {
+                if ((GameFunc.GetCount(this.tempdata[ExtraData.index]) > 0) && (caster.GetUnitName().includes("venomancer"))) {
                     caster.EmitSound("venomancer_venm_cast_0" + math.random(1, 2));
                 }
                 delete this.tempdata[ExtraData.index];
@@ -598,7 +598,7 @@ export class imba_sly_king_winterbringer extends BaseAbility_Plus {
         let duration = this.GetSpecialValueFor("duration") - this.GetSpecialValueFor("pulse_interval");
         let radius = this.GetSpecialValueFor("radius");
         EmitSoundOnLocationWithCaster(this.GetCasterPlus().GetAbsOrigin(), sound_cast, this.GetCasterPlus());
-        CreateModifierThinker(this.GetCasterPlus(), this, "modifier_imba_winterbringer_pulse", {
+        BaseModifier_Plus.CreateBuffThinker(this.GetCasterPlus(), this, "modifier_imba_winterbringer_pulse", {
             duration: duration
         }, this.GetCasterPlus().GetAbsOrigin(), this.GetCasterPlus().GetTeamNumber(), false);
     }

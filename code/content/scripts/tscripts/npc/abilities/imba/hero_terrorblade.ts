@@ -27,7 +27,7 @@ export class imba_terrorblade_reflection extends BaseAbility_Plus {
         }
         let spawn_range = 108;
         let slow_modifier = undefined;
-        if (this.GetCasterPlus().GetName().includes("terrorblade")) {
+        if (this.GetCasterPlus().GetUnitName().includes("terrorblade")) {
             if (RollPercentage(1)) {
                 if (this.GetCasterPlus().HasModifier("modifier_imba_terrorblade_metamorphosis")) {
                     EmitSoundOnClient("terrorblade_terr_morph_reflection_01", this.GetCasterPlus().GetPlayerOwner());
@@ -205,7 +205,7 @@ export class imba_terrorblade_conjure_image extends BaseAbility_Plus {
             return;
         }
         this.GetCasterPlus().EmitSound("Hero_Terrorblade.ConjureImage");
-        if (this.GetCasterPlus().GetName().includes("terrorblade")) {
+        if (this.GetCasterPlus().GetUnitName().includes("terrorblade")) {
             if (RollPercentage(2)) {
                 if (this.GetCasterPlus().HasModifier("modifier_imba_terrorblade_metamorphosis")) {
                     EmitSoundOnClient("terrorblade_terr_morph_conjureimage_03", this.GetCasterPlus().GetPlayerOwner());
@@ -278,17 +278,17 @@ export class modifier_imba_terrorblade_conjure_image_autocast extends BaseModifi
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_terrorblade_conjure_image_autocast_cooldown", {
                 duration: 1
             });
-            if (this.GetCasterPlus().GetPlayerID) {
+            if (this.GetCasterPlus().GetPlayerOwnerID) {
                 if (this.GetCasterPlus().GetAggroTarget()) {
-                    this.GetCasterPlus().CastAbilityImmediately(this.GetAbilityPlus(), this.GetCasterPlus().GetPlayerID());
+                    this.GetCasterPlus().CastAbilityImmediately(this.GetAbilityPlus(), this.GetCasterPlus().GetPlayerOwnerID());
                 } else {
-                    this.GetCasterPlus().CastAbilityNoTarget(this.GetAbilityPlus(), this.GetCasterPlus().GetPlayerID());
+                    this.GetCasterPlus().CastAbilityNoTarget(this.GetAbilityPlus(), this.GetCasterPlus().GetPlayerOwnerID());
                 }
-            } else if (this.GetCasterPlus().GetPlayerOwner && this.GetCasterPlus().GetPlayerOwner().GetPlayerID) {
+            } else if (this.GetCasterPlus().GetPlayerOwner) {
                 if (this.GetCasterPlus().GetAggroTarget()) {
-                    this.GetCasterPlus().CastAbilityImmediately(this.GetAbilityPlus(), this.GetCasterPlus().GetPlayerOwner().GetPlayerID());
+                    this.GetCasterPlus().CastAbilityImmediately(this.GetAbilityPlus(), this.GetCasterPlus().GetPlayerOwnerID());
                 } else {
-                    this.GetCasterPlus().CastAbilityNoTarget(this.GetAbilityPlus(), this.GetCasterPlus().GetPlayerOwner().GetPlayerID());
+                    this.GetCasterPlus().CastAbilityNoTarget(this.GetAbilityPlus(), this.GetCasterPlus().GetPlayerOwnerID());
                 }
             }
         }
@@ -320,7 +320,7 @@ export class imba_terrorblade_metamorphosis extends BaseAbility_Plus {
             return;
         }
         this.GetCasterPlus().EmitSound("Hero_Terrorblade.Metamorphosis");
-        if (this.GetCasterPlus().GetName().includes("terrorblade")) {
+        if (this.GetCasterPlus().GetUnitName().includes("terrorblade")) {
             if (!this.responses) {
                 this.responses = {
                     "1": "terrorblade_terr_morph_metamorphosis_01",
@@ -345,7 +345,7 @@ export class imba_terrorblade_metamorphosis extends BaseAbility_Plus {
             duration: this.GetSpecialValueFor("transformation_time")
         });
         for (const [_, unit] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.GetSpecialValueFor("metamorph_aura_tooltip"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_CREEP_HERO + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FindOrder.FIND_ANY_ORDER, false))) {
-            if (unit != this.GetCasterPlus() && unit.IsIllusion() && unit.GetPlayerOwnerID() == this.GetCasterPlus().GetPlayerOwnerID() && unit.GetName() == this.GetCasterPlus().GetName()) {
+            if (unit != this.GetCasterPlus() && unit.IsIllusion() && unit.GetPlayerOwnerID() == this.GetCasterPlus().GetPlayerOwnerID() && unit.GetUnitName() == this.GetCasterPlus().GetUnitName()) {
                 unit.RemoveModifierByName("modifier_imba_terrorblade_metamorphosis");
                 unit.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_terrorblade_metamorphosis_transform", {
                     duration: this.GetSpecialValueFor("transformation_time")
@@ -485,7 +485,7 @@ export class modifier_imba_terrorblade_metamorphosis extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_RANGE_BONUS)
     CC_GetModifierAttackRangeBonus(): number {
-        if (!this.GetParentPlus().GetName().includes("rubick")) {
+        if (!this.GetParentPlus().GetUnitName().includes("rubick")) {
             return this.bonus_range;
         }
     }
@@ -570,7 +570,7 @@ export class imba_terrorblade_terror_wave extends BaseAbility_Plus {
             return;
         }
         EmitGlobalSound("Hero_Terrorblade.Metamorphosis.Scepter");
-        CreateModifierThinker(this.GetCasterPlus(), this, "modifier_imba_terrorblade_metamorphosis_fear_thinker", {
+        BaseModifier_Plus.CreateBuffThinker(this.GetCasterPlus(), this, "modifier_imba_terrorblade_metamorphosis_fear_thinker", {
             duration: this.GetSpecialValueFor("spawn_delay") + (this.GetSpecialValueFor("radius") / this.GetSpecialValueFor("speed"))
         }, this.GetCasterPlus().GetAbsOrigin(), this.GetCasterPlus().GetTeamNumber(), false);
     }
@@ -786,7 +786,7 @@ export class imba_terrorblade_sunder extends BaseAbility_Plus {
         let target_health_percent = target.GetHealthPercent();
         this.GetCasterPlus().EmitSound("Hero_Terrorblade.Sunder.Cast");
         target.EmitSound("Hero_Terrorblade.Sunder.Target");
-        if (this.GetCasterPlus().GetName().includes("terrorblade")) {
+        if (this.GetCasterPlus().GetUnitName().includes("terrorblade")) {
             if (!this.responses) {
                 this.responses = {
                     "1": "terrorblade_terr_demonattack_08",

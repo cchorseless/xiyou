@@ -759,10 +759,8 @@ function createImbaUnit() {
             break;
         }
     }
-
-
     const _str_start = "npc_imba_";
-    const excludehero = ["npc_dota_hero_base"];
+    const excludehero = ["Version"];
     if (!fs.existsSync(imbaunitexcelPath)) {
         return;
     }
@@ -787,12 +785,12 @@ function createImbaUnit() {
         let info = obj.DOTAUnits || obj.DOTAHeroes;
         if (!info) { continue; }
         for (let k in info) {
-            if (k.indexOf(_str_start) > -1 && excludehero.indexOf(k) == -1) {
+            if (k.indexOf(_str_start) == -1 && excludehero.indexOf(k) == -1) {
                 let npcinfo = info[k];
                 let npc_name = k;
                 let newRow = [npc_name];
-                newRow[vscripts_index] = `npc/units/imba/${npc_name}`;
-                newRow[BaseClass_index] = `npc_dota_creature`;
+                // newRow[vscripts_index] = `npc/units/imba/${npc_name}`;
+                // newRow[BaseClass_index] = `npc_dota_creature`;
                 for (let npc_key in npcinfo) {
                     let value = npcinfo[npc_key];
                     switch (typeof value) {
@@ -877,7 +875,7 @@ function createImbaUnit() {
     }
     fs.writeFileSync(imbaunitexcelPath, xlsx.build(sheets));
 }
-const imbakvtmpPath = "excels/abilities/111.xlsx";
+const imbakvtmpPath = "excels/abilities/1.xlsx";
 function addkvvaluetoexcel() {
     const checkreg = /[A-Z]/g;
     const exkey = ["LinkedSpecialBonus", "var_type", "CalculateSpellDamageTooltip"]
@@ -1136,31 +1134,41 @@ function createImbaAbility2() {
     fs.writeFileSync(imbakvtmpPath, xlsx.build(sheets));
 }
 
-function temp() {
+function makeOnePropExcel(prop = "AbilityChannelTime") {
     let sheets = xlsx.parse(imbakvtmpPath);
     let sheet = sheets[0];
     let rows = sheet.data;
     let nrows = rows.length;
-    let sheet2s = xlsx.parse(imbaabilityOutPath);
-    let sheet2 = sheet2s[0];
-    let rows2 = sheet2.data;
-    let nrows2 = rows2.length;
-
-    let kv = {};
-    for (let i = 1; i < nrows2; i++) {
-        kv[rows2[i][0]] = i;
-    }
-
-    for (let i = 1; i < nrows; i++) {
-        if (rows[i][0] == null) { continue; }
-        let abilityname = rows[i][0];
-        let index = kv[abilityname];
-        for (let j = 1; j < rows[i].length; j++) {
-            let k = rows[i][j];
-            rows2[index].push(k);
+    rows.push([]);
+    const abilitystr = fs.readFileSync(old_ability_path, "utf8");
+    const lines = abilitystr.split("\n");
+    let abilitys = [];
+    for (let i = 0; i < lines.length; i++) {
+        if (lines[i].startsWith("#base")) {
+            let _kvpath = imbabasepath + lines[i].substring(6);
+            if (fs.existsSync(_kvpath)) {
+                abilitys.push(fs.readFileSync(_kvpath, "utf8"));
+            }
+        }
+        if (lines[i].includes("DOTAAbilities")) {
+            let newlines = lines.slice(i, lines.length - 1);
+            abilitys.push(newlines.join("\n"));
+            break;
         }
     }
-    fs.writeFileSync(imbaabilityOutPath, xlsx.build(sheet2s));
+    for (let str of abilitys) {
+        let obj = keyvalues.decode(str);
+        let info_ability = obj.DOTAAbilities;
+        if (!info_ability) { continue; }
+        for (let abilityname in info_ability) {
+            let abilityinfo = info_ability[abilityname];
+            if (abilityinfo[prop] != null && abilityinfo[prop] != "") {
+                let newRow = [abilityname, abilityinfo[prop]];
+                rows.push(newRow);
+            }
+        }
+    }
+    fs.writeFileSync(imbakvtmpPath, xlsx.build(sheets));
 
 }
 
@@ -1171,9 +1179,8 @@ function temp() {
     // createShiPin()
     // createItem()
     // createSound();
-    // createImbaNpc();
-    // addkvvaluetoexcel();
-    temp()
+    // createImbaUnit();
+    // makeOnePropExcel();
 })().catch((error) => {
     console.error(error);
     process.exit(1);

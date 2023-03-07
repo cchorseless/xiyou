@@ -187,11 +187,11 @@ export module PropertyCalculate {
     export function GetUnitCache(hUnit: IBaseNpc_Plus, k: string) {
         let fDefault = 0;
         if (GFuncEntity.IsValid(hUnit)) {
-            hUnit.__IN_KV_CACHE__ = hUnit.__IN_KV_CACHE__ || {};
-            if (hUnit.__IN_KV_CACHE__[k] == null) {
-                hUnit.__IN_KV_CACHE__[k] = GToNumber(KVHelper.GetUnitData(hUnit.GetUnitName(), k));
+
+            if (hUnit.TempData()[k] == null) {
+                hUnit.TempData()[k] = GToNumber(KVHelper.GetUnitData(hUnit.GetUnitName(), k));
             }
-            fDefault = hUnit.__IN_KV_CACHE__[k];
+            fDefault = hUnit.TempData()[k];
         }
         return fDefault;
     }
@@ -202,8 +202,7 @@ export module PropertyCalculate {
      */
     export function SetUnitCache(hUnit: IBaseNpc_Plus, k: string, v: number | string) {
         if (GFuncEntity.IsValid(hUnit)) {
-            hUnit.__IN_KV_CACHE__ = hUnit.__IN_KV_CACHE__ || {};
-            hUnit.__IN_KV_CACHE__[k] = v;
+            hUnit.TempData()[k] = v;
         }
     }
     export function GetBaseMaxHealth(hUnit: IBaseNpc_Plus) {

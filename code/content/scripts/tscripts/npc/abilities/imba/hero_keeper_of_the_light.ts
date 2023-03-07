@@ -103,7 +103,7 @@ export class modifier_imba_keeper_of_the_light_illuminate_self_thinker extends B
         ParticleManager.SetParticleControlEnt(this.weapon_particle, 0, this.caster, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_attack1", this.caster.GetAbsOrigin(), true);
         this.AddParticle(this.weapon_particle, false, false, -1, false, false);
         this.caster.SwapAbilities("imba_keeper_of_the_light_illuminate", "imba_keeper_of_the_light_illuminate_end", false, true);
-        let horse_thinker = CreateModifierThinker(this.caster, this.ability, undefined, {
+        let horse_thinker = BaseModifier_Plus.CreateBuffThinker(this.caster, this.ability, undefined, {
             duration: this.max_channel_time
         }, this.caster_location, this.caster.GetTeamNumber(), false);
         this.spirit = horse_thinker;
@@ -133,7 +133,7 @@ export class modifier_imba_keeper_of_the_light_illuminate_self_thinker extends B
         this.game_time_end = GameRules.GetGameTime();
         this.caster.EmitSound("Hero_KeeperOfTheLight.Illuminate.Discharge");
         this.caster.StartGesture(GameActivity_t.ACT_DOTA_CAST_ABILITY_1_END);
-        CreateModifierThinker(this.caster, this.ability, "modifier_imba_keeper_of_the_light_illuminate", {
+        BaseModifier_Plus.CreateBuffThinker(this.caster, this.ability, "modifier_imba_keeper_of_the_light_illuminate", {
             duration: this.range / this.speed,
             direction_x: this.direction.x,
             direction_y: this.direction.y,
@@ -143,7 +143,7 @@ export class modifier_imba_keeper_of_the_light_illuminate_self_thinker extends B
         if (this.spirit) {
             this.spirit.RemoveSelf();
         }
-        if (this.caster.GetName().includes("keeper_of_the_light")) {
+        if (this.caster.GetUnitName().includes("keeper_of_the_light")) {
             if (RollPercentage(5)) {
                 this.caster.EmitSound("keeper_of_the_light_keep_illuminate_06");
             } else if (RollPercentage(50)) {
@@ -366,7 +366,7 @@ export class imba_keeper_of_the_light_blinding_light extends BaseAbility_Plus {
         if (!IsServer()) {
             return;
         }
-        if (this.caster.GetName().includes("keeper_of_the_light") && RollPercentage(15)) {
+        if (this.caster.GetUnitName().includes("keeper_of_the_light") && RollPercentage(15)) {
             this.caster.EmitSound("keeper_of_the_light_keep_illuminate_02");
         }
         let counter = 1;
@@ -554,7 +554,7 @@ export class imba_keeper_of_the_light_chakra_magic extends BaseAbility_Plus {
             ParticleManager.SetParticleControlEnt(this.particle, 0, this.caster, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_attack1", this.caster.GetAbsOrigin(), true);
             ParticleManager.SetParticleControl(this.particle, 1, this.target.GetAbsOrigin());
             ParticleManager.ReleaseParticleIndex(this.particle);
-            if (this.caster.GetName().includes("keeper_of_the_light")) {
+            if (this.caster.GetUnitName().includes("keeper_of_the_light")) {
                 if (RollPercentage(15)) {
                     this.caster.EmitSound("keeper_of_the_light_keep_chakramagic_02");
                 } else if (RollPercentage(25)) {
@@ -594,7 +594,7 @@ export class imba_keeper_of_the_light_chakra_magic extends BaseAbility_Plus {
             ParticleManager.SetParticleControlEnt(this.particle, 0, this.caster, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_attack1", this.caster.GetAbsOrigin(), true);
             ParticleManager.SetParticleControl(this.particle, 1, this.target.GetAbsOrigin());
             ParticleManager.ReleaseParticleIndex(this.particle);
-            if (this.caster.GetName().includes("keeper_of_the_light")) {
+            if (this.caster.GetUnitName().includes("keeper_of_the_light")) {
                 if (RollPercentage(50)) {
                     this.caster.EmitSound("keeper_of_the_light_keep_manaleak_0" + math.random(1, 5));
                 }
@@ -911,13 +911,13 @@ export class imba_keeper_of_the_light_will_o_wisp extends BaseAbility_Plus {
         if (!IsServer()) {
             return;
         }
-        let ignis_fatuus = BaseNpc_Plus.CreateUnitByName("npc_dota_ignis_fatuus", this.position, this.caster.GetTeamNumber(), true, this.caster, this.caster);
+        let ignis_fatuus = BaseNpc_Plus.CreateUnitByName("npc_dota_ignis_fatuus", this.position, this.caster, true);
         ignis_fatuus.AddNewModifier(this.caster, this, "modifier_imba_keeper_of_the_light_will_o_wisp", {
             duration: this.duration
         });
         ignis_fatuus.SetMaximumGoldBounty(this.bounty);
         ignis_fatuus.SetMinimumGoldBounty(this.bounty);
-        if (this.caster.GetName().includes("keeper_of_the_light")) {
+        if (this.caster.GetUnitName().includes("keeper_of_the_light")) {
             let response = math.random(1, 5);
             if (response >= 4) {
                 response = (response + 1);

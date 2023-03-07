@@ -47,7 +47,7 @@ export class imba_naga_siren_mirror_image extends BaseAbility_Plus {
                 }
             }
         }
-        this.GetCasterPlus().SetContextThink(DoUniqueString("naga_siren_mirror_image"), () => {
+        this.AddTimer(this.GetSpecialValueFor("invuln_duration"), () => {
             this.illusions = this.GetCasterPlus().CreateIllusion(this.GetCasterPlus(),
                 {
                     outgoing_damage: image_out_dmg,
@@ -70,7 +70,7 @@ export class imba_naga_siren_mirror_image extends BaseAbility_Plus {
             ParticleManager.ReleaseParticleIndex(pfx);
             this.GetCasterPlus().Stop();
             return undefined;
-        }, this.GetSpecialValueFor("invuln_duration"));
+        });
         this.GetCasterPlus().EmitSound("Hero_NagaSiren.MirrorImage");
     }
 }
@@ -310,9 +310,9 @@ export class modifier_imba_naga_siren_rip_tide extends BaseModifier_Plus {
             let caster_table: IBaseNpc_Plus[] = []
             let victim_table: EntityIndex[] = []
             caster_table.push(this.GetCasterPlus());
-            let units: IBaseNpc_Plus[] = this.GetCasterPlus().GetAdditionalOwnedUnitsPlus();
+            let units: IBaseNpc_Plus[] = this.GetCasterPlus().FindChildByName(this.GetCasterPlus().GetUnitName());
             for (const unit of (units)) {
-                if (unit.GetUnitName() == this.GetCasterPlus().GetUnitName() && unit.IsIllusion()) {
+                if (unit.IsIllusion()) {
                     caster_table.push(unit);
                 }
             }
@@ -334,7 +334,7 @@ export class modifier_imba_naga_siren_rip_tide extends BaseModifier_Plus {
                             mod.SetStackCount(mod.GetStackCount() + 1);
                             damage = damage + (this.GetSpecialValueFor("wet_bonus_damage") * mod.GetStackCount());
                         } else {
-                            mod = victim.AddNewModifier(this.GetCasterPlus().GetPlayerOwner().GetAssignedHero(), this.GetAbilityPlus(), "modifier_imba_naga_siren_rip_tide_debuff", {
+                            mod = victim.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_naga_siren_rip_tide_debuff", {
                                 duration: this.GetSpecialValueFor("duration") * (1 - victim.GetStatusResistance())
                             }) as modifier_imba_naga_siren_rip_tide_debuff;
                             mod.SetStackCount(1);

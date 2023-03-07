@@ -10,7 +10,7 @@ export class item_imba_banana extends BaseItem_Plus {
         // if (this.GetCursorTarget().CalculateStatBonus(true)) {
         //     this.GetCursorTarget().CalculateStatBonus(true);
         // }
-        CreateModifierThinker(this.GetCasterPlus(), this, "modifier_item_imba_banana_thinker", {
+        BaseModifier_Plus.CreateBuffThinker(this.GetCasterPlus(), this, "modifier_item_imba_banana_thinker", {
             duration: this.GetSpecialValueFor("banana_duration")
         }, this.GetCasterPlus().GetAbsOrigin() + (this.GetCasterPlus().GetForwardVector() * (-1) * this.GetSpecialValueFor("banana_drop_distance")) as Vector, this.GetCasterPlus().GetTeamNumber(), false);
         this.SetCurrentCharges(math.max(this.GetCurrentCharges() - 1, 0));

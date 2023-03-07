@@ -51,7 +51,7 @@ export class imba_tinker_rearm extends BaseAbility_Plus {
     OnSpellStart(): void {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
-            if (caster.GetName().includes("tinker")) {
+            if (caster.GetUnitName().includes("tinker")) {
                 caster.EmitSound("tinker_tink_ability_rearm_0" + math.random(1, 9));
             }
             if (caster.HasTalent("special_bonus_imba_tinker_8")) {
@@ -129,12 +129,12 @@ export class imba_tinker_rearm extends BaseAbility_Plus {
                     let current_item = caster.GetItemInSlot(i);
                     let should_refresh = true;
                     for (const [_, forbidden_item] of GameFunc.Pair(forbidden_items)) {
-                        if (current_item && (current_item.GetName() == forbidden_item || current_item.GetPurchaser() != caster)) {
+                        if (current_item && (current_item.GetAbilityName() == forbidden_item || current_item.GetPurchaser() != caster)) {
                             should_refresh = false;
                         }
                     }
                     if (current_item && should_refresh) {
-                        if (current_item.GetName() == "item_imba_rod_of_atos_2") {
+                        if (current_item.GetAbilityName() == "item_imba_rod_of_atos_2") {
                             current_item.SpendCharge();
                         }
                         current_item.EndCooldown();
@@ -338,7 +338,7 @@ export class imba_tinker_laser extends BaseAbility_Plus {
             if (target.TriggerSpellAbsorb(this)) {
                 return undefined;
             }
-            if (RollPercentage(15) && (caster.GetName().includes("tinker"))) {
+            if (RollPercentage(15) && (caster.GetUnitName().includes("tinker"))) {
                 caster.EmitSound("tinker_tink_ability_laser_0" + math.random(1, 4));
             }
             caster.EmitSound("Hero_Tinker.Laser");
@@ -497,7 +497,7 @@ export class imba_tinker_heat_seeking_missile extends BaseAbility_Plus {
             let mini_vision_duration = this.GetTalentSpecialValueFor("mini_vision_duration");
             let mini_speed = this.GetSpecialValueFor("mini_speed");
             let mini_missile_count = this.GetSpecialValueFor("mini_missile_count");
-            if ((math.random(1, 100) <= 50) && (caster.GetName().includes("tinker"))) {
+            if ((math.random(1, 100) <= 50) && (caster.GetUnitName().includes("tinker"))) {
                 caster.EmitSound("tinker_tink_ability_heatseekingmissile_0" + math.random(1, 4));
             }
             caster.EmitSound("Hero_Tinker.Heat-Seeking_Missile");
@@ -819,7 +819,7 @@ export class imba_tinker_march_of_the_machines extends BaseAbility_Plus {
                     unlock_drone = true;
                 }
             }
-            if ((math.random(1, 100) <= 80) && (caster.GetName().includes("tinker"))) {
+            if ((math.random(1, 100) <= 80) && (caster.GetUnitName().includes("tinker"))) {
                 let sound_random = math.random(1, 11);
                 if (sound_random <= 9) {
                     caster.EmitSound("tinker_tink_ability_marchofthemachines_0" + sound_random);
@@ -1217,7 +1217,7 @@ export class imba_tinker_march_of_the_machines extends BaseAbility_Plus {
             if (ExtraData.flame_duration) {
                 this.tempdata[ExtraData.index].counter = this.tempdata[ExtraData.index].counter || 0;
                 if (this.tempdata[ExtraData.index].counter == 0) {
-                    CreateModifierThinker(caster, this, "modifier_imba_march_flame_aura", {
+                    BaseModifier_Plus.CreateBuffThinker(caster, this, "modifier_imba_march_flame_aura", {
                         duration: ExtraData.flame_duration,
                         flame_radius: ExtraData.flame_radius
                     }, location, caster.GetTeamNumber(), false);

@@ -18,7 +18,7 @@ export class imba_shadow_shaman_ether_shock extends BaseAbility_Plus {
             return;
         }
         this.GetCasterPlus().EmitSound("Hero_ShadowShaman.EtherShock");
-        if (this.GetCasterPlus().GetName().includes("shadow_shaman") && RollPercentage(75)) {
+        if (this.GetCasterPlus().GetUnitName().includes("shadow_shaman") && RollPercentage(75)) {
             this.GetCasterPlus().EmitSound("shadowshaman_shad_ability_ether_0" + RandomInt(1, 4));
         }
         let enemies = AoiHelper.FindUnitsInBicycleChain(this.GetCasterPlus().GetTeamNumber(), target.GetAbsOrigin(), this.GetCasterPlus().GetAbsOrigin(), this.GetCasterPlus().GetAbsOrigin() + ((target.GetAbsOrigin() - this.GetCasterPlus().GetAbsOrigin() as Vector).Normalized() * (this.GetSpecialValueFor("end_distance") + GPropertyCalculate.GetCastRangeBonus(this.GetCasterPlus())) as Vector) as Vector, this.GetSpecialValueFor("start_radius"), this.GetSpecialValueFor("end_radius"), undefined, this.GetAbilityTargetTeam(), this.GetAbilityTargetType(), this.GetAbilityTargetFlags(), FindOrder.FIND_CLOSEST, false);
@@ -49,7 +49,7 @@ export class imba_shadow_shaman_ether_shock extends BaseAbility_Plus {
                 let joy_buzzer_modifier = enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_shadow_shaman_ether_shock_joy_buzzer", {
                     duration: ((this.GetSpecialValueFor("joy_buzzer_stun_duration") + this.GetSpecialValueFor("joy_buzzer_off_duration")) * this.GetSpecialValueFor("joy_buzzer_instances") - this.GetSpecialValueFor("joy_buzzer_stun_duration")) * (1 - enemy.GetStatusResistance())
                 });
-                if (this == this.GetCasterPlus().FindAbilityByName(this.GetName()) && dramatic_passive_modifier && dramatic_passive_modifier.dramatic && dramatic_passive_modifier.dramatic == true) {
+                if (this == this.GetCasterPlus().FindAbilityByName(this.GetAbilityName()) && dramatic_passive_modifier && dramatic_passive_modifier.dramatic && dramatic_passive_modifier.dramatic == true) {
                     enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_shadow_shaman_ether_shock_mute", {
                         duration: this.GetSpecialValueFor("dramatic_mute_duration") * (1 - enemy.GetStatusResistance())
                     });
@@ -176,7 +176,7 @@ export class imba_shadow_shaman_voodoo extends BaseAbility_Plus {
                 if (target.IsIllusion() && !GFuncEntity.Custom_bIsStrongIllusion(target)) {
                     target.Kill(this, this.GetCasterPlus());
                 } else {
-                    if (this.GetCasterPlus().GetName().includes("shadow_shaman") && RollPercentage(75)) {
+                    if (this.GetCasterPlus().GetUnitName().includes("shadow_shaman") && RollPercentage(75)) {
                         this.GetCasterPlus().EmitSound("shadowshaman_shad_ability_voodoo_0" + RandomInt(1, 4));
                     }
                     target.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_shadow_shaman_voodoo", {
@@ -471,7 +471,7 @@ export class imba_shadow_shaman_shackles extends BaseAbility_Plus {
         if (target.GetTeamNumber() != this.GetCasterPlus().GetTeamNumber()) {
             if (!target.TriggerSpellAbsorb(this)) {
                 this.GetCasterPlus().EmitSound("Hero_ShadowShaman.Shackles.Cast");
-                if (this.GetCasterPlus().GetName().includes("shadow_shaman") && RollPercentage(75)) {
+                if (this.GetCasterPlus().GetUnitName().includes("shadow_shaman") && RollPercentage(75)) {
                     let responses = {
                         "1": "shadowshaman_shad_ability_shackle_01",
                         "2": "shadowshaman_shad_ability_shackle_02",
@@ -634,8 +634,8 @@ export class modifier_imba_shadow_shaman_shackles extends BaseModifier_Plus {
                 ability: this.GetAbilityPlus()
             }
             ApplyDamage(damageTable);
-            if (this.GetParentPlus().IsRealUnit() && this.GetParentPlus().GetPlayerID() /**&& this.GetParentPlus().ModifyGold && this.GetCasterPlus().ModifyGold*/) {
-                let actual_gold_to_steal = math.min(this.swindle_gold_per_tick, PlayerResource.GetUnreliableGold(this.GetParentPlus().GetPlayerID()));
+            if (this.GetParentPlus().IsRealUnit() && this.GetParentPlus().GetPlayerOwnerID() /**&& this.GetParentPlus().ModifyGold && this.GetCasterPlus().ModifyGold*/) {
+                let actual_gold_to_steal = math.min(this.swindle_gold_per_tick, PlayerResource.GetUnreliableGold(this.GetParentPlus().GetPlayerOwnerID()));
                 // this.GetParentPlus().ModifyGold(-actual_gold_to_steal, false, 0);
                 // this.GetCasterPlus().ModifyGold(actual_gold_to_steal, false, 0);
                 SendOverheadEventMessage(this.GetCasterPlus().GetPlayerOwner(), DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_XP, this.GetCasterPlus(), actual_gold_to_steal, undefined);
@@ -776,16 +776,16 @@ export class imba_shadow_shaman_mass_serpent_ward extends BaseAbility_Plus {
             new_hp = this.GetSpecialValueFor("snake_charmer_health");
             duration = math.max(this.GetSpecialValueFor("duration") - elapsedTime + this.GetSpecialValueFor("snake_charmer_bonus_duration"), this.GetSpecialValueFor("snake_charmer_bonus_duration"));
         }
-        let ward = BaseNpc_Plus.CreateUnitByName("npc_dota_shadow_shaman_ward_" + math.min(this.GetLevel(), 3), position, this.GetCasterPlus().GetTeamNumber(), true, this.GetCasterPlus(), this.GetCasterPlus());
+        let ward = BaseNpc_Plus.CreateUnitByName("npc_dota_shadow_shaman_ward_" + math.min(this.GetLevel(), 3), position, this.GetCasterPlus(), true);
         ward.SetForwardVector(this.GetCasterPlus().GetForwardVector());
         ward.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_mass_serpent_ward", {});
         ward.AddNewModifier(this.GetCasterPlus(), this, "modifier_kill", {
             duration: duration
         });
-        if (this.GetCasterPlus().GetPlayerID) {
-            ward.SetControllableByPlayer(this.GetCasterPlus().GetPlayerID(), true);
-        } else if (this.GetCasterPlus().GetOwnerPlus() && this.GetCasterPlus().GetOwnerPlus().GetPlayerID) {
-            ward.SetControllableByPlayer(this.GetCasterPlus().GetOwnerPlus().GetPlayerID(), true);
+        if (this.GetCasterPlus().GetPlayerOwnerID) {
+            ward.SetControllableByPlayer(this.GetCasterPlus().GetPlayerOwnerID(), true);
+        } else if (this.GetCasterPlus().GetOwnerPlus() && this.GetCasterPlus().GetOwnerPlus().GetPlayerOwnerID) {
+            ward.SetControllableByPlayer(this.GetCasterPlus().GetOwnerPlus().GetPlayerOwnerID(), true);
         }
         ward.SetBaseMaxHealth(new_hp);
         ward.SetMaxHealth(new_hp);
@@ -914,7 +914,7 @@ export class modifier_imba_mass_serpent_ward extends BaseModifier_Plus {
         if (!IsServer()) {
             return;
         }
-        if (keys.attacker == this.GetParentPlus() && keys.attacker != keys.unit && this.GetAbilityPlus() && !keys.unit.IsOther() && keys.unit.GetName() != "npc_dota_unit_undying_zombie") {
+        if (keys.attacker == this.GetParentPlus() && keys.attacker != keys.unit && this.GetAbilityPlus() && !keys.unit.IsOther() && keys.unit.GetUnitName() != "npc_dota_unit_undying_zombie") {
             if (!keys.unit.IsRealUnit() && !keys.unit.IsBuilding()) {
                 this.GetParentPlus().SetMaxHealth(this.GetParentPlus().GetMaxHealth() + this.snake_charmer_creep_count);
                 this.GetParentPlus().Heal(this.snake_charmer_creep_count, this.GetAbilityPlus());

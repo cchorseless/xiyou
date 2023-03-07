@@ -29,8 +29,8 @@ export class TriggerHelper {
         let bHasKey = false
         for (let i = 0; i < 5; i++) {
             let hItem = hHero.GetItemInSlot(i)
-            if (hItem && hItem.GetName() == "item_orb_of_passage") {
-                print("Found desired item named " + hItem.GetName() + " on " + hHero.GetUnitName())
+            if (hItem && hItem.GetAbilityName() == "item_orb_of_passage") {
+                print("Found desired item named " + hItem.GetAbilityName() + " on " + hHero.GetUnitName())
                 bHasKey = true
             }
         }

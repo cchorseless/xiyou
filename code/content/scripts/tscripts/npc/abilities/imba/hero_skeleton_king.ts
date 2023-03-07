@@ -174,8 +174,8 @@ export class imba_wraith_king_wraithfire_blast extends BaseAbility_Plus {
             let direction = (target.GetAbsOrigin() - caster.GetAbsOrigin() as Vector).Normalized();
             let distance = (target.GetAbsOrigin() - caster.GetAbsOrigin() as Vector).Length2D();
             let summon_point = caster.GetAbsOrigin() + direction * distance - 100 as Vector;
-            let wraith = BaseNpc_Plus.CreateUnitByName("npc_imba_wraith_king_wraith", summon_point, caster.GetTeamNumber(), true, caster, caster);
-            let playerid = caster.GetPlayerID();
+            let wraith = BaseNpc_Plus.CreateUnitByName("npc_imba_wraith_king_wraith", summon_point, caster, true);
+            let playerid = caster.GetPlayerOwnerID();
             if (playerid) {
                 wraith.SetControllableByPlayer(playerid, true);
             }
@@ -614,35 +614,34 @@ export class imba_wraith_king_mortal_strike extends BaseAbility_Plus {
             let skeleton: IBaseNpc_Plus = undefined;
             let skeleton_modifier = this.caster.findBuff<modifier_imba_mortal_strike>("modifier_imba_mortal_strike");
             for (let unit = 0; unit <= skeleton_modifier.GetStackCount() - 1; unit++) {
-                this.GetCasterPlus().SetContextThink(DoUniqueString(this.GetName()), () => {
+                this.AddTimer(unit * this.spawn_interval, () => {
                     for (let units_per_charge = 1; units_per_charge <= this.skeletons_per_charge; units_per_charge++) {
-                        skeleton = BaseNpc_Plus.CreateUnitByName("npc_dota_wraith_king_skeleton_warrior", this.caster.GetAbsOrigin() + RandomVector(100) as Vector, this.caster.GetTeamNumber(), true, this.caster, this.caster);
+                        skeleton = BaseNpc_Plus.CreateUnitByName("npc_dota_wraith_king_skeleton_warrior", this.caster.GetAbsOrigin() + RandomVector(100) as Vector, this.caster, true);
                         skeleton.AddNewModifier(this.caster, this, "modifier_kill", {
                             duration: this.skeleton_duration
                         });
                         skeleton.AddNewModifier(this.caster, this, "modifier_imba_mortal_strike_skeleton", {
                             duration: this.skeleton_duration - FrameTime()
                         });
-                        skeleton.SetControllableByPlayer(this.caster.GetPlayerID(), true);
+                        skeleton.SetControllableByPlayer(this.caster.GetPlayerOwnerID(), true);
                         skeleton.SetOwner(this.caster);
                         ResolveNPCPositions(skeleton.GetAbsOrigin(), skeleton.GetHullRadius());
                         skeleton.SetMaximumGoldBounty(0);
                         skeleton.SetMinimumGoldBounty(0);
                         skeleton.SetDeathXP(0);
                         skeleton.TempData().fresh = true;
-                        skeleton.SetContextThink(DoUniqueString(this.GetName()), () => {
+                        this.AddTimer(FrameTime(), () => {
                             if (this.caster.GetTeam() == DOTATeam_t.DOTA_TEAM_GOODGUYS) {
                                 skeleton.MoveToPositionAggressive(Vector(5654, 4939, 0));
                             } else if (this.caster.GetTeam() == DOTATeam_t.DOTA_TEAM_BADGUYS) {
                                 skeleton.MoveToPositionAggressive(Vector(-5864, -5340, 0));
                             }
-                            return undefined;
-                        }, FrameTime());
+                        });
                     }
                     skeleton_modifier.skeleton_counter = skeleton_modifier.skeleton_counter - 1;
                     skeleton_modifier.DecrementStackCount();
-                    return undefined;
-                }, unit * this.spawn_interval);
+                    return;
+                });
             }
         }
         this.caster.EmitSound("Hero_SkeletonKing.MortalStrike.Cast");
@@ -687,14 +686,14 @@ export class modifier_imba_mortal_strike_skeleton extends BaseModifier_Plus {
         }
     }
     OnIntervalThink(): void {
-        this.skeleton = BaseNpc_Plus.CreateUnitByName("npc_dota_wraith_king_skeleton_warrior", this.parent.GetOrigin(), this.caster.GetTeamNumber(), true, this.caster, this.caster);
+        this.skeleton = BaseNpc_Plus.CreateUnitByName("npc_dota_wraith_king_skeleton_warrior", this.parent.GetOrigin(), this.caster, true);
         this.skeleton.AddNewModifier(this.caster, this.ability, "modifier_kill", {
             duration: this.remaining_time
         });
         this.skeleton.AddNewModifier(this.caster, this.ability, "modifier_imba_mortal_strike_skeleton", {
             duration: this.remaining_time - FrameTime()
         });
-        this.skeleton.SetControllableByPlayer(this.caster.GetPlayerID(), true);
+        this.skeleton.SetControllableByPlayer(this.caster.GetPlayerOwnerID(), true);
         this.skeleton.SetOwner(this.caster);
         this.skeleton.TempData().fresh = false;
         GTimerHelper.AddFrameTimer(1, GHandler.create(this, () => {
@@ -1259,7 +1258,7 @@ export class modifier_imba_reincarnation_wraith_form_buff extends BaseModifier_P
                         wraith_form_modifier_handler.original_killer = attacker;
                         wraith_form_modifier_handler.ability_killer = keys.inflictor as IBaseAbility_Plus;
                         if (keys.inflictor) {
-                            if (keys.inflictor.GetName() == "imba_necrolyte_reapers_scythe") {
+                            if (keys.inflictor.GetAbilityName() == "imba_necrolyte_reapers_scythe") {
                                 (keys.inflictor as any).ghost_death = true;
                             }
                         }
@@ -1615,8 +1614,8 @@ export class modifier_imba_kingdom_come_slow extends BaseModifier_Plus {
                 let direction = (this.parent.GetAbsOrigin() - this.caster.GetAbsOrigin() as Vector).Normalized();
                 let distance = (this.parent.GetAbsOrigin() - this.caster.GetAbsOrigin() as Vector).Length2D();
                 let summon_point = this.caster.GetAbsOrigin() + direction * distance - 100 as Vector;
-                let wraith = BaseNpc_Plus.CreateUnitByName("npc_imba_wraith_king_wraith", summon_point, this.caster.GetTeamNumber(), true, this.caster, this.caster);
-                let playerid = this.caster.GetPlayerID();
+                let wraith = BaseNpc_Plus.CreateUnitByName("npc_imba_wraith_king_wraith", summon_point, this.caster, true);
+                let playerid = this.caster.GetPlayerOwnerID();
                 if (playerid) {
                     wraith.SetControllableByPlayer(playerid, true);
                 }

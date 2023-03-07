@@ -247,7 +247,7 @@ export class imba_enchantress_enchant extends BaseAbility_Plus {
             this.target.Purge(true, true, false, false, false);
             if (string.find(this.target.GetUnitName(), "guys_")) {
                 let lane_creep_name = this.target.GetUnitName();
-                let new_lane_creep = BaseNpc_Plus.CreateUnitByName(this.target.GetUnitName(), this.target.GetAbsOrigin(), this.caster.GetTeamNumber(), false, this.caster, this.caster);
+                let new_lane_creep = BaseNpc_Plus.CreateUnitByName(this.target.GetUnitName(), this.target.GetAbsOrigin(), this.caster, false);
                 new_lane_creep.SetBaseMaxHealth(this.target.GetMaxHealth());
                 new_lane_creep.SetHealth(this.target.GetHealth());
                 new_lane_creep.SetBaseDamageMin(this.target.GetBaseDamageMin());
@@ -260,7 +260,7 @@ export class imba_enchantress_enchant extends BaseAbility_Plus {
             }
             this.target.SetOwner(this.caster);
             this.target.SetTeam(this.caster.GetTeam());
-            this.target.SetControllableByPlayer(this.caster.GetPlayerID(), false);
+            this.target.SetControllableByPlayer(this.caster.GetPlayerOwnerID(), false);
             this.target.AddNewModifier(this.caster, this, "modifier_imba_enchantress_enchant_controlled", {
                 duration: this.dominate_duration
             });
@@ -271,7 +271,7 @@ export class imba_enchantress_enchant extends BaseAbility_Plus {
             if (this.GetCasterPlus().HasAbility("imba_enchantress_untouchable") && this.GetCasterPlus().findAbliityPlus<imba_enchantress_untouchable>("imba_enchantress_untouchable").IsTrained()) {
                 this.target.AddNewModifier(this.caster, this.GetCasterPlus().findAbliityPlus<imba_enchantress_untouchable>("imba_enchantress_untouchable"), "modifier_imba_enchantress_untouchable", {});
             }
-            if (this.caster.GetName().includes("enchantress")) {
+            if (this.caster.GetUnitName().includes("enchantress")) {
                 this.caster.EmitSound("enchantress_ench_ability_enchant_0" + math.random(1, 3));
             }
         } else {
@@ -279,7 +279,7 @@ export class imba_enchantress_enchant extends BaseAbility_Plus {
             this.target.AddNewModifier(this.caster, this, "modifier_imba_enchantress_enchant_slow", {
                 duration: this.tooltip_duration * (1 - this.target.GetStatusResistance())
             });
-            if (this.caster.GetName().includes("enchantress")) {
+            if (this.caster.GetUnitName().includes("enchantress")) {
                 this.caster.EmitSound("enchantress_ench_ability_enchant_0" + math.random(4, 6));
             }
         }
@@ -449,7 +449,7 @@ export class imba_enchantress_natures_attendants extends BaseAbility_Plus {
         this.caster.AddNewModifier(this.caster, this, "modifier_imba_enchantress_natures_attendants", {
             duration: this.duration
         });
-        if (this.caster.GetName().includes("enchantress")) {
+        if (this.caster.GetUnitName().includes("enchantress")) {
             this.caster.EmitSound("enchantress_ench_ability_nature_0" + math.random(1, 6));
         }
     }
@@ -929,7 +929,7 @@ export class modifier_imba_enchantress_impetus extends BaseModifier_Plus {
     @registerEvent(Enum_MODIFIER_EVENT.ON_ORDER)
     CC_OnOrder(keys: ModifierAbilityEvent): void {
         if (keys.unit == this.caster) {
-            if (keys.order_type == dotaunitorder_t.DOTA_UNIT_ORDER_CAST_TARGET && keys.ability.GetName() == this.ability.GetName()) {
+            if (keys.order_type == dotaunitorder_t.DOTA_UNIT_ORDER_CAST_TARGET && keys.ability.GetAbilityName() == this.ability.GetAbilityName()) {
                 this.impetus_orb = true;
             } else {
                 this.impetus_orb = false;
@@ -960,7 +960,7 @@ export class modifier_imba_enchantress_impetus_huntmastery_timer extends BaseMod
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
     CC_OnDeath(keys: ModifierInstanceEvent): void {
         if (keys.unit == this.GetParentPlus() && keys.unit.IsRealUnit() && (keys.unit.IsReincarnating && !keys.unit.IsReincarnating())) {
-            if (this.GetAbilityPlus().GetName() == "imba_enchantress_impetus_723") {
+            if (this.GetAbilityPlus().GetAbilityName() == "imba_enchantress_impetus_723") {
                 if (!this.GetCasterPlus().HasModifier("modifier_imba_enchantress_impetus_723")) {
                     let impetus_modifier = this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_enchantress_impetus_723", {});
                     if (impetus_modifier) {
@@ -976,7 +976,7 @@ export class modifier_imba_enchantress_impetus_huntmastery_timer extends BaseMod
                     impetus_modifier.IncrementStackCount();
                 }
             }
-            if (this.GetCasterPlus().GetName().includes("enchantress")) {
+            if (this.GetCasterPlus().GetUnitName().includes("enchantress")) {
                 this.GetCasterPlus().EmitSound("enchantress_ench_ability_impetus_0" + math.random(1, 7));
             }
         }

@@ -1,7 +1,6 @@
 import { EventHelper } from "../../helper/EventHelper";
 import { KVHelper } from "../../helper/KVHelper";
-import { unit_base_equip_bag } from "../../npc/units/common/unit_base_equip_bag";
-import { unit_base_gold_bag } from "../../npc/units/common/unit_base_gold_bag";
+import { BaseNpc_Plus } from "../../npc/entityPlus/BaseNpc_Plus";
 import { GameEnum } from "../../shared/GameEnum";
 import { GameProtocol } from "../../shared/GameProtocol";
 import { ET } from "../../shared/lib/Entity";
@@ -100,11 +99,11 @@ export class RoundSystemComponent extends ET.SingletonComponent {
         let maxy = posinfo[3];
         for (let i = 0; i < 30; i++) {
             let vv = Vector(RandomFloat(minx, maxx), RandomFloat(miny, maxy), 64);
-            let a = unit_base_gold_bag.CreateOne(vv, DOTATeam_t.DOTA_TEAM_BADGUYS, true);
+            let a = BaseNpc_Plus.CreateUnitByName("unit_base_gold_bag", vv, null, true, DOTATeam_t.DOTA_TEAM_BADGUYS);
             RoundPrizeUnitEntityRoot.Active(a);
             this.Domain.ETRoot.AddDomainChild(a.ETRoot);
             let vv1 = Vector(RandomFloat(minx, maxx), RandomFloat(miny, maxy), 64);
-            let b = unit_base_equip_bag.CreateOne(vv1, DOTATeam_t.DOTA_TEAM_BADGUYS, true);
+            let b = BaseNpc_Plus.CreateUnitByName("unit_base_gold_bag", vv1, null, true, DOTATeam_t.DOTA_TEAM_BADGUYS);
             RoundPrizeUnitEntityRoot.Active(b);
             this.Domain.ETRoot.AddDomainChild(b.ETRoot);
         }

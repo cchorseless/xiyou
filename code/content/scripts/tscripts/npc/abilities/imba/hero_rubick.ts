@@ -766,7 +766,7 @@ export class modifier_imba_rubick_arcane_supremacy extends BaseModifier_Plus {
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_MODIFIER_ADDED)
     CC_OnModifierAdded(keys: ModifierAddedEvent): void {
-        if (this.GetAbilityPlus() && !this.GetCasterPlus().HasModifier("modifier_imba_rubick_arcane_supremacy_flip_aura") && this.GetCasterPlus().GetPlayerID /**&& keys.issuer_player_index == this.GetCasterPlus().GetPlayerID()*/ && keys.unit && keys.unit.GetTeamNumber() != this.GetCasterPlus().GetTeamNumber() && keys.unit.FindAllModifiers) {
+        if (this.GetAbilityPlus() && !this.GetCasterPlus().HasModifier("modifier_imba_rubick_arcane_supremacy_flip_aura")  /**&& keys.issuer_player_index == this.GetCasterPlus().GetPlayerOwnerID()*/ && keys.unit && keys.unit.GetTeamNumber() != this.GetCasterPlus().GetTeamNumber() && keys.unit.FindAllModifiers) {
             for (const modifier of (keys.unit.FindAllModifiers() as IBaseModifier_Plus[])) {
                 if (modifier.IsDebuff && modifier.IsDebuff() && modifier.GetDuration() > 0 /**&& (!modifier.IgnoreTenacity || !modifier.IgnoreTenacity())*/ && ((modifier.GetCaster && modifier.GetCasterPlus() == this.GetCasterPlus()) || (modifier.GetAbility && modifier.GetAbilityPlus().GetCaster && modifier.GetAbilityPlus().GetCasterPlus() == this.GetCasterPlus())) && GameRules.GetGameTime() - modifier.GetCreationTime() <= FrameTime()) {
                     this.AddTimer(FrameTime() * 2, () => {
@@ -1047,13 +1047,13 @@ export class imba_rubick_spellsteal extends BaseAbility_Plus {
                 return UnitFilterResult.UF_FAIL_CUSTOM;
             }
             for (const banned_ability of (this.banned_abilities)) {
-                if (this.GetLastSpell(hTarget).primarySpell && this.GetLastSpell(hTarget).primarySpell.GetName && this.GetLastSpell(hTarget).primarySpell.GetName() == banned_ability) {
+                if (this.GetLastSpell(hTarget).primarySpell && this.GetLastSpell(hTarget).primarySpell.GetAbilityName() == banned_ability) {
                     return UnitFilterResult.UF_FAIL_CUSTOM;
-                } else if (this.GetLastSpell(hTarget).secondarySpell && this.GetLastSpell(hTarget).secondarySpell.GetName && this.GetLastSpell(hTarget).secondarySpell.GetName() == banned_ability) {
+                } else if (this.GetLastSpell(hTarget).secondarySpell && this.GetLastSpell(hTarget).secondarySpell.GetAbilityName() == banned_ability) {
                     return UnitFilterResult.UF_FAIL_CUSTOM;
                 }
             }
-            if (this.GetCasterPlus().HasAbility("monkey_king_primal_spring") && this.GetLastSpell(hTarget).primarySpell && this.GetLastSpell(hTarget).primarySpell.GetName && this.GetLastSpell(hTarget).primarySpell.GetName() == "monkey_king_tree_dance") {
+            if (this.GetCasterPlus().HasAbility("monkey_king_primal_spring") && this.GetLastSpell(hTarget).primarySpell && this.GetLastSpell(hTarget).primarySpell.GetAbilityName() == "monkey_king_tree_dance") {
                 return UnitFilterResult.UF_FAIL_CUSTOM;
             }
         }
@@ -1072,13 +1072,13 @@ export class imba_rubick_spellsteal extends BaseAbility_Plus {
             return "You're already stealing a spell!";
         }
         for (const [_, banned_ability] of GameFunc.iPair(this.banned_abilities)) {
-            if (this.GetLastSpell(hTarget).primarySpell && this.GetLastSpell(hTarget).primarySpell.GetName && this.GetLastSpell(hTarget).primarySpell.GetName() == banned_ability) {
+            if (this.GetLastSpell(hTarget).primarySpell && this.GetLastSpell(hTarget).primarySpell.GetAbilityName() == banned_ability) {
                 return "#dota_hud_error_spell_steal_banned_ability";
-            } else if (this.GetLastSpell(hTarget).secondarySpell && this.GetLastSpell(hTarget).secondarySpell.GetName && this.GetLastSpell(hTarget).secondarySpell.GetName() == banned_ability) {
+            } else if (this.GetLastSpell(hTarget).secondarySpell && this.GetLastSpell(hTarget).secondarySpell.GetAbilityName() == banned_ability) {
                 return "#dota_hud_error_spell_steal_banned_ability";
             }
         }
-        if (this.GetCasterPlus().HasAbility("monkey_king_primal_spring") && this.GetLastSpell(hTarget).primarySpell && this.GetLastSpell(hTarget).primarySpell.GetName && this.GetLastSpell(hTarget).primarySpell.GetName() == "monkey_king_tree_dance") {
+        if (this.GetCasterPlus().HasAbility("monkey_king_primal_spring") && this.GetLastSpell(hTarget).primarySpell && this.GetLastSpell(hTarget).primarySpell.GetAbilityName() == "monkey_king_tree_dance") {
             return "#dota_hud_error_spell_steal_monkey_king_tree_dance";
         }
     }
@@ -1255,7 +1255,7 @@ export class imba_rubick_spellsteal extends BaseAbility_Plus {
         if (this.GetCasterPlus().HasModifier("modifier_leshrac_lightning_storm_scepter_thinker")) {
             this.GetCasterPlus().RemoveModifierByName("modifier_leshrac_lightning_storm_scepter_thinker");
         }
-        if (secondarySpell != undefined && !secondarySpell.IsNull() && secondarySpell.GetName() == "leshrac_lightning_storm") {
+        if (secondarySpell != undefined && !secondarySpell.IsNull() && secondarySpell.GetAbilityName() == "leshrac_lightning_storm") {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), secondarySpell, "modifier_leshrac_lightning_storm_scepter_thinker", {});
         }
         if (primarySpell != undefined && !primarySpell.IsNull()) {

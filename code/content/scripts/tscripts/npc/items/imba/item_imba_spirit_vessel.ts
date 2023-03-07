@@ -132,14 +132,14 @@ export class modifier_item_imba_spirit_vessel extends BaseModifier_Plus {
             for (const [_, ally] of GameFunc.iPair(nearbyAllies)) {
                 if (ally == this.GetCasterPlus()) {
                     return;
-                } else if (ally.HasItemInInventory(this.GetItemPlus().GetName())) {
+                } else if (ally.HasItemInInventory(this.GetItemPlus().GetAbilityName())) {
                     return;
                 }
             }
             if (this == this.GetCasterPlus().FindAllModifiersByName("modifier_item_imba_spirit_vessel")[0]) {
                 for (let itemSlot = 0; itemSlot <= 5; itemSlot++) {
                     let item = this.GetCasterPlus().GetItemInSlot(itemSlot);
-                    if (item && item.GetName() == this.GetItemPlus().GetName()) {
+                    if (item && item.GetAbilityName() == this.GetItemPlus().GetAbilityName()) {
                         if (item.GetCurrentCharges() == 0) {
                             item.SetCurrentCharges(item.GetCurrentCharges() + this.GetItemPlus().GetSpecialValueFor("soul_initial_charge"));
                         } else {

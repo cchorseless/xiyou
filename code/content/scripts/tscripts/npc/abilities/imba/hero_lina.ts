@@ -161,7 +161,8 @@ export class imba_lina_dragon_slave extends BaseAbility_Plus {
             }
             caster.EmitSound("Hero_Lina.DragonSlave");
             this.AddTimer(split_timer - 0.1, () => {
-                let particle_fx = ResHelper.CreateParticleEx("particles/hero/lina/dragon_slave_delay.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, caster);
+                let res = "particles/units/heroes/hero_lina/lina_spell_dragon_slave_destruction.vpcf"
+                let particle_fx = ResHelper.CreateParticleEx(res, ParticleAttachment_t.PATTACH_ABSORIGIN, caster);
                 ParticleManager.SetParticleControl(particle_fx, 0, (target_loc + Vector(0, 0, 50)) as Vector);
                 ParticleManager.SetParticleControl(particle_fx, 1, (target_loc + Vector(0, 0, 50)) as Vector);
                 ParticleManager.SetParticleControl(particle_fx, 3, (target_loc + Vector(0, 0, 50)) as Vector);
@@ -321,7 +322,7 @@ export class imba_lina_light_strike_array extends BaseAbility_Plus {
             let rings_distance = this.GetSpecialValueFor("rings_distance");
             let direction = (target_loc - caster_loc as Vector).Normalized();
             caster.EmitSound("Ability.PreLightStrikeArray");
-            if ((math.random(1, 5) < 2) && (caster.GetName().includes("lina"))) {
+            if ((math.random(1, 5) < 2) && (caster.GetUnitName().includes("lina"))) {
                 caster.EmitSound("lina_lina_ability_lightstrike_0" + math.random(1, 6));
             }
             this.CreateStrike(target_loc, 0, cast_delay, radius, damage, stun_duration);
@@ -367,7 +368,7 @@ export class imba_lina_light_strike_array extends BaseAbility_Plus {
                 this.OnHit(enemy, damage, stun_duration);
             }
             if (caster.HasTalent("special_bonus_imba_lina_4")) {
-                CreateModifierThinker(caster, this, "modifier_imba_lsa_talent_magma", {
+                BaseModifier_Plus.CreateBuffThinker(caster, this, "modifier_imba_lsa_talent_magma", {
                     duration: stun_duration,
                     radius: radius
                 }, position, caster.GetTeamNumber(), false);
@@ -459,7 +460,7 @@ export class imba_lina_light_strike_array_v2 extends BaseAbility_Plus {
         return this.GetSpecialValueFor("light_strike_array_aoe");
     }
     OnSpellStart(): void {
-        CreateModifierThinker(this.GetCasterPlus(), this, "modifier_imba_lina_light_strike_array_v2_thinker", {
+        BaseModifier_Plus.CreateBuffThinker(this.GetCasterPlus(), this, "modifier_imba_lina_light_strike_array_v2_thinker", {
             duration: this.GetSpecialValueFor("light_strike_array_delay_time")
         }, this.GetCursorPosition(), this.GetCasterPlus().GetTeamNumber(), false);
     }
@@ -488,7 +489,7 @@ export class modifier_imba_lina_light_strike_array_v2_thinker extends BaseModifi
         this.OnIntervalThink();
     }
     OnIntervalThink(): void {
-        CreateModifierThinker(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_lina_light_strike_array_v2_thinker_single", {
+        BaseModifier_Plus.CreateBuffThinker(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_lina_light_strike_array_v2_thinker_single", {
             duration: this.light_strike_array_delay_time,
             light_strike_array_aoe: this.light_strike_array_aoe,
             light_strike_array_stun_duration: this.light_strike_array_stun_duration,
@@ -644,7 +645,7 @@ export class modifier_imba_fiery_soul extends BaseModifier_Plus {
             }
             let parent = this.GetParentPlus();
             let caster = params.ability.GetCaster();
-            if ((caster == parent) && params.ability.GetName() != "ability_capture") {
+            if ((caster == parent) && params.ability.GetAbilityName() != "ability_capture") {
                 parent.AddNewModifier(parent, this.GetAbilityPlus(), "modifier_imba_fiery_soul_counter", {
                     duration: this.GetSpecialValueFor("duration")
                 });
@@ -652,7 +653,7 @@ export class modifier_imba_fiery_soul extends BaseModifier_Plus {
                     let caster_ability = caster.GetAbilityByIndex(ability_id);
                     if (caster_ability) {
                         let ability_name = caster_ability.GetAbilityName();
-                        if (params.ability.GetName() == ability_name) {
+                        if (params.ability.GetAbilityName() == ability_name) {
                         } else {
                             let fiery_counter = caster.findBuff<modifier_imba_fiery_soul_counter>("modifier_imba_fiery_soul_counter");
                             if (fiery_counter) {
@@ -921,7 +922,7 @@ export class imba_lina_laguna_blade extends BaseAbility_Plus {
                     }
                 }
                 this.AddTimer(bounce_delay, () => {
-                    for (let i = 0; i < math.min(GameFunc.GetCount(enemies), bounce_amount); i++) {
+                    for (let i = 0; i < math.min(GameFunc.GetCount(enemies), bounce_amount) - 1; i++) {
                         let bounce_pfx = ResHelper.CreateParticleEx("particles/units/heroes/hero_lina/lina_spell_laguna_blade.vpcf", ParticleAttachment_t.PATTACH_CUSTOMORIGIN, caster, caster);
                         ParticleManager.SetParticleControlEnt(bounce_pfx, 0, target, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", target_loc, true);
                         ParticleManager.SetParticleControlEnt(bounce_pfx, 1, enemies[i], ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", enemies[i].GetAbsOrigin(), true);

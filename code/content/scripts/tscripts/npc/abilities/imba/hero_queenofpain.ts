@@ -152,7 +152,7 @@ export class imba_queenofpain_shadow_strike extends BaseAbility_Plus {
         } else {
             target = this.GetCursorTarget();
             caster.EmitSound("Hero_QueenOfPain.ShadowStrike");
-            if ((math.random(1, 100) <= 15) && (caster.GetName().includes("queenofpain"))) {
+            if ((math.random(1, 100) <= 15) && (caster.GetUnitName().includes("queenofpain"))) {
                 caster.EmitSound("queenofpain_pain_ability_shadowstrike_0" + math.random(1, 4));
             }
         }
@@ -573,7 +573,7 @@ export class imba_queenofpain_scream_of_pain extends BaseAbility_Plus {
                     damage_threshold: ExtraData.damage
                 });
                 if (target.IsAlive() == false) {
-                    if ((math.random(1, 100) <= 15) && (caster.GetName().includes("queenofpain"))) {
+                    if ((math.random(1, 100) <= 15) && (caster.GetUnitName().includes("queenofpain"))) {
                         caster.EmitSound("queenofpain_pain_ability_screamofpain_0" + math.random(1, 4));
                     }
                 }
@@ -805,7 +805,7 @@ export class imba_queenofpain_sonic_wave extends BaseAbility_Plus {
                 });
             }
             if (target.IsAlive() == false) {
-                if ((math.random(1, 100) <= 15) && (this.GetCasterPlus().GetName().includes("queenofpain"))) {
+                if ((math.random(1, 100) <= 15) && (this.GetCasterPlus().GetUnitName().includes("queenofpain"))) {
                     this.GetCasterPlus().EmitSound("queenofpain_pain_ability_sonicwave_0" + math.random(1, 4));
                 }
             }

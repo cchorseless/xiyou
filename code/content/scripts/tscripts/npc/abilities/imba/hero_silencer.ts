@@ -13,7 +13,7 @@ function CheckExceptions(ability: CDOTABaseAbility) {
         "imba_clinkz_searing_arrows",
         "imba_obsidian_destroyer_arcane_orb"
     ]
-    if (exceptions.includes(ability.GetName())) {
+    if (exceptions.includes(ability.GetAbilityName())) {
         return true;
     }
     if (ability.GetManaCost(-1) == 0) {
@@ -148,7 +148,7 @@ export class modifier_imba_arcane_curse_debuff extends BaseModifier_Plus {
     CC_OnAbilityExecuted(params: ModifierAbilityEvent): void {
         if (IsServer()) {
             if (params.ability) {
-                if ((!params.ability.IsItem()) && (params.unit == this.parent) && params.ability.GetName() != "ability_capture") {
+                if ((!params.ability.IsItem()) && (params.unit == this.parent) && params.ability.GetAbilityName() != "ability_capture") {
                     if (params.ability.IsToggle()) {
                         return;
                     }
@@ -175,7 +175,7 @@ export class modifier_imba_arcane_curse_debuff extends BaseModifier_Plus {
                         "17": "imba_outworld_devourer_astral_imprisonment_movement"
                     }
                     for (const [_, spell] of GameFunc.Pair(uneffected_spells)) {
-                        if (params.ability.GetName() == spell) {
+                        if (params.ability.GetAbilityName() == spell) {
                             return;
                         }
                     }
@@ -876,7 +876,7 @@ export class modifier_imba_silencer_last_word_silence_aura extends BaseModifier_
     @registerEvent(Enum_MODIFIER_EVENT.ON_ABILITY_EXECUTED)
     CC_OnAbilityExecuted(params: ModifierAbilityEvent): void {
         if (IsServer()) {
-            if ((!params.ability.IsItem()) && (params.unit == this.GetParentPlus()) && (!this.GetParentPlus().IsMagicImmune()) && params.ability.GetName() != "ability_capture") {
+            if ((!params.ability.IsItem()) && (params.unit == this.GetParentPlus()) && (!this.GetParentPlus().IsMagicImmune()) && params.ability.GetAbilityName() != "ability_capture") {
                 if (CheckExceptions(params.ability)) {
                     return;
                 }
@@ -956,7 +956,7 @@ export class modifier_imba_silencer_last_word_debuff extends BaseModifier_Plus {
     @registerEvent(Enum_MODIFIER_EVENT.ON_ABILITY_EXECUTED)
     CC_OnAbilityExecuted(params: ModifierAbilityEvent): void {
         if (IsServer()) {
-            if ((!params.ability.IsItem()) && (params.unit == this.GetParentPlus()) && params.ability.GetName() != "ability_capture") {
+            if ((!params.ability.IsItem()) && (params.unit == this.GetParentPlus()) && params.ability.GetAbilityName() != "ability_capture") {
                 if (CheckExceptions(params.ability)) {
                     return;
                 }
@@ -1242,7 +1242,7 @@ export class modifier_imba_silencer_global_silence extends BaseModifier_Plus {
             if (this.tickInterval > 0) {
                 this.StartIntervalThink(this.tickInterval);
             }
-            if (this.parent.GetCurrentActiveAbility() && !this.parent.GetCurrentActiveAbility().IsItem() && this.parent.GetCurrentActiveAbility().GetName() != "item_tpscroll" && !string.find(this.parent.GetCurrentActiveAbility().GetName(), "item_travel_boots")) {
+            if (this.parent.GetCurrentActiveAbility() && !this.parent.GetCurrentActiveAbility().IsItem() && this.parent.GetCurrentActiveAbility().GetAbilityName() != "item_tpscroll" && !string.find(this.parent.GetCurrentActiveAbility().GetAbilityName(), "item_travel_boots")) {
                 this.particle = ResHelper.CreateParticleEx(this.silenceParticle, ParticleAttachment_t.PATTACH_OVERHEAD_FOLLOW, this.parent);
                 this.particleState = 1;
                 this.spellCast = true;

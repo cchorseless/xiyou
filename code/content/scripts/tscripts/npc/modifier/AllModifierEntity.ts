@@ -2,6 +2,8 @@ import { modifier_animation } from "./animation/modifier_animation";
 import { modifier_animation_freeze } from "./animation/modifier_animation_freeze";
 import { modifier_animation_translate } from "./animation/modifier_animation_translate";
 import { modifier_animation_translate_permanent } from "./animation/modifier_animation_translate_permanent";
+import { modifier_illusion } from "./battle/modifier_illusion";
+import { modifier_summon } from "./battle/modifier_summon";
 import { modifier_sect_phyarm_up_base_3, modifier_sect_phyarm_up_base_6, modifier_sect_phyarm_up_base_9 } from "./combinationeffect/modifier_sect_phyarm_up";
 import { modifier_courier_fx_ambient_1 } from "./courier_ambient_effect/modifier_courier_fx_ambient_1";
 import { modifier_courier_fx_ambient_10 } from "./courier_ambient_effect/modifier_courier_fx_ambient_10";
@@ -42,6 +44,8 @@ import { modifier_activity } from "./modifier_activity";
 ];
 
 [
+    modifier_illusion,
+    modifier_summon,
     modifier_activity,
 ];
 

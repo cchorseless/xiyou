@@ -48,7 +48,7 @@ export class imba_phantom_lancer_spirit_lance extends BaseAbility_Plus {
     OnSpellStart(): void {
         let target = this.GetCursorTarget();
         this.GetCasterPlus().EmitSound("Hero_PhantomLancer.SpiritLance.Throw");
-        if (this.GetCasterPlus().GetName().includes("phantom_lancer")) {
+        if (this.GetCasterPlus().GetUnitName().includes("phantom_lancer")) {
             if (!this.responses) {
                 this.responses = {
                     "1": "phantom_lancer_plance_ability_spiritlance_01",
@@ -268,7 +268,7 @@ export class imba_phantom_lancer_doppelwalk extends BaseAbility_Plus {
         ParticleManager.SetParticleControl(doppleganger_particle, 2, Vector(this.GetSpecialValueFor("target_aoe"), this.GetSpecialValueFor("target_aoe"), this.GetSpecialValueFor("target_aoe")));
         ParticleManager.SetParticleControl(doppleganger_particle, 3, Vector(this.GetSpecialValueFor("delay"), 0, 0));
         ParticleManager.ReleaseParticleIndex(doppleganger_particle);
-        if (this.GetCasterPlus().GetName().includes("phantom_lancer")) {
+        if (this.GetCasterPlus().GetUnitName().includes("phantom_lancer")) {
             if (RollPercentage(5)) {
                 if (!this.rare_responses) {
                     this.rare_responses = {
@@ -330,7 +330,7 @@ export class imba_phantom_lancer_doppelwalk extends BaseAbility_Plus {
             this.illusion_3.ForceKill(false);
         }
         for (const [_, unit] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCursorPosition(), undefined, this.GetSpecialValueFor("search_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_CLOSEST, false))) {
-            if (unit.GetName() != this.GetCasterPlus().GetName() && (unit.IsRealUnit() || unit.IsClone() || unit.IsTempestDouble() || unit.IsIllusion())) {
+            if (unit.GetUnitName() != this.GetCasterPlus().GetUnitName() && (unit.IsRealUnit() || unit.IsClone() || unit.IsTempestDouble() || unit.IsIllusion())) {
                 this.illusion_3 = this.GetCasterPlus().CreateIllusion(unit, {
                     outgoing_damage: -100,
                     incoming_damage: 0,
@@ -418,7 +418,7 @@ export class modifier_imba_phantom_lancer_doppelwalk_phase extends BaseModifier_
         ParticleManager.SetParticleControlEnt(this.spawn_particle, 0, this.GetParentPlus(), ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, "attach_hitloc", this.GetParentPlus().GetAbsOrigin(), true);
         ParticleManager.SetParticleControlEnt(this.spawn_particle, 1, this.GetParentPlus(), ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, "attach_hitloc", this.GetParentPlus().GetAbsOrigin(), true);
         ParticleManager.ReleaseParticleIndex(this.spawn_particle);
-        // PlayerResource.AddToSelection(this.GetCasterPlus().GetPlayerID(), this.GetParentPlus());
+        // PlayerResource.AddToSelection(this.GetCasterPlus().GetPlayerOwnerID(), this.GetParentPlus());
     }
     CheckState(): Partial<Record<modifierstate, boolean>> {
         return {
@@ -687,7 +687,7 @@ export class imba_phantom_lancer_sun_catcher extends BaseAbility_Plus {
         ParticleManager.SetParticleControl(linear_particle, 14, Vector(1, this.GetSpecialValueFor("radius"), this.GetSpecialValueFor("radius")));
         ParticleManager.SetParticleControl(linear_particle, 15, Vector(255, 255, 128));
         ParticleManager.SetParticleControl(linear_particle, 16, Vector(255, 255, 0));
-        let sun_thinker = CreateModifierThinker(this.GetCasterPlus(), this, "modifier_imba_phantom_lancer_sun_catcher_thinker", {
+        let sun_thinker = BaseModifier_Plus.CreateBuffThinker(this.GetCasterPlus(), this, "modifier_imba_phantom_lancer_sun_catcher_thinker", {
             duration: this.GetSpecialValueFor("duration")
         }, this.GetCursorPosition(), this.GetCasterPlus().GetTeamNumber(), false);
         sun_thinker.EmitSound("Hero_Phantom_Lancer.Sun_Catcher");
@@ -847,13 +847,12 @@ export class modifier_imba_phantom_lancer_juxtapose extends BaseModifier_Plus {
         }
         this.owner = this.GetParentPlus();
         this.owner.TempData().juxtapose_table = []
-        // if (this.GetParentPlus().IsRealUnit()) {
-        //     this.owner = this.GetParentPlus();
-        //     this.owner.juxtapose_table = {}
-        // } else if (!this.GetParentPlus().IsRealUnit() && this.GetParentPlus().GetOwnerPlus() &&
-        //     this.GetParentPlus().GetOwnerPlus().GetAssignedHero()) {
-        //     this.owner = this.GetParentPlus().GetOwnerPlus().GetAssignedHero();
-        // }
+        if (this.GetParentPlus().IsRealUnit()) {
+            this.owner = this.GetParentPlus();
+            this.owner.TempData().juxtapose_table = []
+        } else if (!this.GetParentPlus().IsRealUnit() && this.GetParentPlus().GetOwnerPlus()) {
+            // this.owner = this.GetParentPlus().GetOwnerPlus().GetAssignedHero();
+        }
     }
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({

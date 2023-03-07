@@ -202,7 +202,7 @@ export class imba_necrolyte_death_pulse extends BaseAbility_Plus {
             let enemy_speed = this.GetSpecialValueFor("enemy_speed");
             let ally_speed = this.GetSpecialValueFor("ally_speed");
             caster.EmitSound("Hero_Necrolyte.DeathPulse");
-            if ((math.random(1, 100) <= 50) && (caster.GetName().includes("necrolyte"))) {
+            if ((math.random(1, 100) <= 50) && (caster.GetUnitName().includes("necrolyte"))) {
                 caster.EmitSound("necrolyte_necr_ability_tox_0" + math.random(1, 3));
             }
             let enemies = FindUnitsInRadius(caster.GetTeamNumber(), caster_loc, undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
@@ -662,6 +662,10 @@ export class modifier_imba_heartstopper_aura_damage extends BaseModifier_Plus {
     OnIntervalThink(): void {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
+            if (!GFuncEntity.IsValid(caster)) {
+                this.Destroy();
+                return
+            }
             if (this.GetParentPlus().CanEntityBeSeenByMyTeam(caster)) {
                 this.SetStackCount(this.GetAbilityPlus().GetTalentSpecialValueFor("heal_reduce_pct"));
             } else {
@@ -680,7 +684,7 @@ export class modifier_imba_heartstopper_aura_damage extends BaseModifier_Plus {
                     damage_type: DAMAGE_TYPES.DAMAGE_TYPE_PURE,
                     damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_HPLOSS + DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION
                 });
-                if ((math.random(1, 1000) <= 1) && (caster.GetName().includes("necrolyte"))) {
+                if ((math.random(1, 1000) <= 1) && (caster.GetUnitName().includes("necrolyte"))) {
                     caster.EmitSound("necrolyte_necr_ability_aura_0" + math.random(1, 3));
                 }
             }
@@ -713,7 +717,7 @@ export class imba_necrolyte_reapers_scythe extends BaseAbility_Plus {
             }
             caster.EmitSound("Hero_Necrolyte.ReapersScythe.Cast");
             target.EmitSound("Hero_Necrolyte.ReapersScythe.Target");
-            if ((math.random(1, 100) <= 30) && (caster.GetName().includes("necrolyte"))) {
+            if ((math.random(1, 100) <= 30) && (caster.GetUnitName().includes("necrolyte"))) {
                 caster.EmitSound("necrolyte_necr_ability_reap_0" + math.random(1, 3));
             }
             let damage = this.GetSpecialValueFor("damage");

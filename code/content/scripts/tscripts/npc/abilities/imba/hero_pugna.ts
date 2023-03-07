@@ -367,7 +367,7 @@ export class imba_pugna_nether_ward extends BaseAbility_Plus {
         let ability_level = ability.GetLevel();
         let sound_cast = "Hero_Pugna.NetherWard";
         let ability_ward = "imba_pugna_nether_ward_aura";
-        let player_id = caster.GetPlayerID();
+        let player_id = caster.GetPlayerOwnerID();
         let duration = ability.GetSpecialValueFor("duration");
         let point: Vector[] = [
             target_point,
@@ -378,9 +378,9 @@ export class imba_pugna_nether_ward extends BaseAbility_Plus {
         for (let i = 0; i < 1 + caster.GetTalentValue("special_bonus_imba_pugna_8"); i++) {
             let nether_ward = undefined;
             if (i != 1 || !this.GetCursorTarget() || this.GetCursorTarget() != this.GetCasterPlus()) {
-                nether_ward = BaseNpc_Plus.CreateUnitByName("npc_imba_pugna_nether_ward_" + (ability_level), point[i], caster.GetTeam(), true, caster, caster);
+                nether_ward = BaseNpc_Plus.CreateUnitByName("npc_imba_pugna_nether_ward_" + (ability_level), point[i], caster, true);
             } else {
-                nether_ward = BaseNpc_Plus.CreateUnitByName("npc_imba_pugna_nether_ward_" + (ability_level), this.GetCasterPlus().GetAbsOrigin() + (this.GetCasterPlus().GetForwardVector() * 150) as Vector, caster.GetTeam(), true, caster, caster);
+                nether_ward = BaseNpc_Plus.CreateUnitByName("npc_imba_pugna_nether_ward_" + (ability_level), this.GetCasterPlus().GetAbsOrigin() + (this.GetCasterPlus().GetForwardVector() * 150) as Vector, caster, true);
             }
             nether_ward.SetControllableByPlayer(player_id, true);
             nether_ward.AddNewModifier(caster, ability, "modifier_kill", {
@@ -619,7 +619,7 @@ export class modifier_imba_nether_ward_degen extends BaseModifier_Plus {
             if (ward.GetHealth() <= this.spell_damage) {
                 return undefined;
             }
-            let cast_ability_name = cast_ability.GetName();
+            let cast_ability_name = cast_ability.GetAbilityName();
             let forbidden_abilities = {
                 "1": "ancient_apparition_ice_blast",
                 "2": "furion_teleportation",

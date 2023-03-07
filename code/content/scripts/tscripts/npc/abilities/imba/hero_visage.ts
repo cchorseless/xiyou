@@ -15,7 +15,7 @@ export class imba_visage_grave_chill extends BaseAbility_Plus {
         }
         this.GetCasterPlus().EmitSound("Hero_Visage.GraveChill.Cast");
         target.EmitSound("Hero_Visage.GraveChill.Target");
-        if (this.GetCasterPlus().GetName().includes("visage") && RollPercentage(25)) {
+        if (this.GetCasterPlus().GetUnitName().includes("visage") && RollPercentage(25)) {
             let responses = {
                 "1": "visage_visa_gravechill_04",
                 "2": "visage_visa_gravechill_05",
@@ -65,7 +65,7 @@ export class modifier_imba_visage_grave_chill_buff extends BaseModifier_Plus {
         }
         let chill_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_visage/visage_grave_chill_caster.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetParentPlus());
         ParticleManager.SetParticleControlEnt(chill_particle, 1, this.GetParentPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_attack1", this.GetParentPlus().GetAbsOrigin(), true);
-        if (this.GetParentPlus().GetName().includes("visage") && !this.GetParentPlus().HasModifier("modifier_imba_visage_become_familiar")) {
+        if (this.GetParentPlus().GetUnitName().includes("visage") && !this.GetParentPlus().HasModifier("modifier_imba_visage_become_familiar")) {
             ParticleManager.SetParticleControlEnt(chill_particle, 2, this.GetParentPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_tail_tip", this.GetParentPlus().GetAbsOrigin(), true);
             ParticleManager.SetParticleControlEnt(chill_particle, 3, this.GetParentPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_wingtipL", this.GetParentPlus().GetAbsOrigin(), true);
             ParticleManager.SetParticleControlEnt(chill_particle, 4, this.GetParentPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_wingtipR", this.GetParentPlus().GetAbsOrigin(), true);
@@ -158,7 +158,7 @@ export class imba_visage_soul_assumption extends BaseAbility_Plus {
     OnSpellStart(): void {
         let target = this.GetCursorTarget();
         this.GetCasterPlus().EmitSound("Hero_Visage.SoulAssumption.Cast");
-        if (this.GetCasterPlus().GetName().includes("visage")) {
+        if (this.GetCasterPlus().GetUnitName().includes("visage")) {
             if (RollPercentage(10)) {
                 let responses_rare = {
                     "1": "visage_visa_soulassumption01",
@@ -623,7 +623,7 @@ export class imba_visage_summon_familiars extends BaseAbility_Plus {
     }
     OnSpellStart(): void {
         this.GetCasterPlus().EmitSound("Hero_Visage.SummonFamiliars.Cast");
-        if (this.GetCasterPlus().GetName().includes("visage")) {
+        if (this.GetCasterPlus().GetUnitName().includes("visage")) {
             if (!this.responses) {
                 this.responses = {
                     "1": "visage_visa_summon_03",
@@ -657,7 +657,7 @@ export class imba_visage_summon_familiars extends BaseAbility_Plus {
         let summon_particle = undefined;
         for (let num = 1; num <= unit_count; num++) {
             spawn_location = this.GetCasterPlus().GetAbsOrigin() + (this.GetCasterPlus().GetForwardVector() * 200) + (this.GetCasterPlus().GetRightVector() * ((math.max(unit_count - 1, 0) * 120) * (-0.5 + ((math.max(num - 1, 0)) / (unit_count - 1))))) as Vector;
-            familiar = BaseNpc_Plus.CreateUnitByName("npc_dota_visage_familiar" + math.min(this.GetLevel(), 3), spawn_location, this.GetCasterPlus().GetTeamNumber(), true, this.GetCasterPlus(), this.GetCasterPlus());
+            familiar = BaseNpc_Plus.CreateUnitByName("npc_dota_visage_familiar" + math.min(this.GetLevel(), 3), spawn_location, this.GetCasterPlus(), true);
             summon_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_visage/visage_summon_familiars.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, familiar);
             ParticleManager.ReleaseParticleIndex(summon_particle);
             familiar.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_visage_summon_familiars", {});
@@ -668,7 +668,7 @@ export class imba_visage_summon_familiars extends BaseAbility_Plus {
             }
             familiar.SetOwner(this.GetCasterPlus());
             familiar.SetTeam(this.GetCasterPlus().GetTeam());
-            familiar.SetControllableByPlayer(this.GetCasterPlus().GetPlayerID(), false);
+            familiar.SetControllableByPlayer(this.GetCasterPlus().GetPlayerOwnerID(), false);
             familiar.SetBaseMaxHealth(this.GetSpecialValueFor("familiar_hp"));
             familiar.SetMaxHealth(this.GetSpecialValueFor("familiar_hp"));
             familiar.SetHealth(this.GetSpecialValueFor("familiar_hp"));

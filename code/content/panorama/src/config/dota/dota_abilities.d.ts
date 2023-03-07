@@ -655,6 +655,7 @@ declare namespace dota_abilities {
 "AbilityDamage" :string ,
 "AbilityDuration" :string ,
 "AbilitySpecial" :OBJ_3_1 ,
+"AbilityChannelTime" :string ,
 "RequiredLevel" :string ,
 "LevelsBetweenUpgrades" :string ,
 [k:string] : string | OBJ_3_1 }

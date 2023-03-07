@@ -28,7 +28,7 @@ export class imba_abyssal_underlord_firestorm extends BaseAbility_Plus {
         this.StopEffects();
         let caster = this.GetCasterPlus();
         let point = this.GetCursorPosition();
-        CreateModifierThinker(caster, this, "modifier_imba_abyssal_underlord_firestorm_thinker", {}, point, caster.GetTeamNumber(), false);
+        BaseModifier_Plus.CreateBuffThinker(caster, this, "modifier_imba_abyssal_underlord_firestorm_thinker", {}, point, caster.GetTeamNumber(), false);
     }
     PlayEffects(point: Vector) {
         let particle_cast = "particles/units/heroes/heroes_underlord/underlord_firestorm_pre.vpcf";
@@ -95,7 +95,7 @@ export class modifier_imba_abyssal_underlord_firestorm_thinker extends BaseModif
         if (!IsServer()) {
             return;
         }
-        UTIL_Remove(this.GetParentPlus());
+        GFuncEntity.SafeDestroyUnit(this.GetParentPlus());
     }
     OnIntervalThink(): void {
         if (!this.delayed) {
@@ -274,7 +274,7 @@ export class imba_abyssal_underlord_pit_of_malice extends BaseAbility_Plus {
         let caster = this.GetCasterPlus();
         let point = this.GetCursorPosition();
         let duration = this.GetSpecialValueFor("pit_duration");
-        CreateModifierThinker(caster, this, "modifier_imba_abyssal_underlord_pit_of_malice_thinker", {
+        BaseModifier_Plus.CreateBuffThinker(caster, this, "modifier_imba_abyssal_underlord_pit_of_malice_thinker", {
             duration: duration
         }, point, caster.GetTeamNumber(), false);
     }
@@ -351,7 +351,7 @@ export class modifier_imba_abyssal_underlord_pit_of_malice_thinker extends BaseM
         if (!IsServer()) {
             return;
         }
-        UTIL_Remove(this.GetParentPlus());
+        GFuncEntity.SafeDestroyUnit(this.GetParentPlus());
     }
     OnIntervalThink(): void {
         let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.parent.GetOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, 0, 0, false);
@@ -512,7 +512,7 @@ export class imba_abyssal_underlord_atrophy_aura extends BaseAbility_Plus {
             return true;
         }
         print("CRITICAL ERROR: Missing stack modifier.");
-        EventHelper.ErrorMessage("Not enough stacks!", this.GetCasterPlus().GetPlayerID());
+        EventHelper.ErrorMessage("Not enough stacks!", this.GetCasterPlus().GetPlayerOwnerID());
         return false;
     }
     OnSpellStart(): void {

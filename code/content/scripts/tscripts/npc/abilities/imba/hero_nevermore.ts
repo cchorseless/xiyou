@@ -35,7 +35,7 @@ function UpgradeShadowRazes(caster: IBaseNpc_Plus, ability: IBaseAbility_Plus) {
     }
 }
 function CastShadowRazeOnPoint(caster: IBaseNpc_Plus, ability: IBaseAbility_Plus & { enemies_hit: IBaseNpc_Plus[] }, point: Vector, radius: number) {
-    let particle_raze = "particles/hero/nevermore/nevermore_shadowraze.vpcf";
+    let particle_raze = "particles/units/heroes/hero_nevermore/nevermore_shadowraze.vpcf";
     let modifier_harvest = "modifier_imba_reqiuem_harvest";
     let requiem_debuff = "modifier_imba_reqiuem_debuff";
     let pool_modifier = "modifier_imba_shadow_raze_pool";
@@ -90,7 +90,7 @@ function CastShadowRazeOnPoint(caster: IBaseNpc_Plus, ability: IBaseAbility_Plus
         }
     }
     if (caster.HasTalent("special_bonus_imba_nevermore_1")) {
-        CreateModifierThinker(caster, ability, pool_modifier, {
+        BaseModifier_Plus.CreateBuffThinker(caster, ability, pool_modifier, {
             duration: pool_duration,
             radius: pool_radius
         }, point, caster.GetTeamNumber(), false);
@@ -488,7 +488,7 @@ export class imba_nevermore_shadowraze_far extends BaseAbility_Plus {
 export class modifier_shadow_raze_combo extends BaseModifier_Plus {
     public caster: IBaseNpc_Plus;
     public ability: IBaseAbility_Plus;
-    public razes: any;
+    public razes: string[];
     public modifier_prevention: any;
     public combo_prevention_duration: number;
     public combo_threshold: any;
@@ -497,10 +497,10 @@ export class modifier_shadow_raze_combo extends BaseModifier_Plus {
         if (IsServer()) {
             this.caster = this.GetCasterPlus();
             this.ability = this.GetAbilityPlus();
-            this.razes = {}
-            this.razes[0] = "imba_nevermore_shadowraze_close";
-            this.razes[1] = "imba_nevermore_shadowraze_medium";
-            this.razes[2] = "imba_nevermore_shadowraze_far";
+            this.razes = ["imba_nevermore_shadowraze_close",
+                "imba_nevermore_shadowraze_close",
+                "imba_nevermore_shadowraze_far",
+            ]
             this.modifier_prevention = "modifier_shadow_raze_prevention";
             this.combo_prevention_duration = this.ability.GetSpecialValueFor("combo_prevention_duration");
             this.combo_threshold = this.ability.GetSpecialValueFor("combo_threshold");
@@ -996,7 +996,7 @@ export class modifier_imba_necromastery_souls extends BaseModifier_Plus {
             "2": "lina",
             "3": "windrunner"
         }
-        let unit_name = unit.GetName();
+        let unit_name = unit.GetUnitName();
         for (const [_, name] of GameFunc.Pair(ginger_hero_names)) {
             if (unit_name.includes(name)) {
                 return true;
@@ -1389,7 +1389,7 @@ export class modifier_imba_reqiuem_debuff extends BaseModifier_Plus {
         if (IsServer()) {
             this.scepter = this.caster.HasScepter();
             if (this.scepter && this.parent.IsRealUnit()) {
-                let requiem_screen_particle = ParticleManager.CreateParticleForPlayer(this.particle_black_screen, ParticleAttachment_t.PATTACH_EYES_FOLLOW, this.parent, PlayerResource.GetPlayer(this.parent.GetPlayerID()));
+                let requiem_screen_particle = ParticleManager.CreateParticleForPlayer(this.particle_black_screen, ParticleAttachment_t.PATTACH_EYES_FOLLOW, this.parent, PlayerResource.GetPlayer(this.parent.GetPlayerOwnerID()));
                 this.AddParticle(requiem_screen_particle, false, false, -1, false, false);
             }
         }

@@ -77,7 +77,7 @@ export class modifier_imba_stalker_in_the_night extends BaseModifier_Plus {
     CC_OnAbilityFullyCast(keys: ModifierAbilityEvent): void {
         if (IsServer()) {
             let ability = keys.ability;
-            let name_ability = ability.GetName();
+            let name_ability = ability.GetAbilityName();
             let night_inducing_spells = {
                 "1": "imba_night_stalker_darkness",
                 "2": "luna_eclipse"
@@ -978,7 +978,7 @@ export class imba_night_stalker_crippling_fear_720 extends BaseAbility_Plus {
                 duration: this.duration_night
             });
         }
-        if (this.caster.GetName().includes("night_stalker") && RollPercentage(75)) {
+        if (this.caster.GetUnitName().includes("night_stalker") && RollPercentage(75)) {
             this.caster.EmitSound("night_stalker_nstalk_ability_cripfear_0" + RandomInt(1, 3));
         }
         this.target.EmitSound("Hero_Nightstalker.Trickling_Fear");

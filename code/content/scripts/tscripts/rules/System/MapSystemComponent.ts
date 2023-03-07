@@ -1,5 +1,5 @@
-import { unit_base_baoxiang } from "../../npc/units/common/unit_base_baoxiang";
-import { unit_portal } from "../../npc/units/common/unit_portal";
+import { BaseNpc_Plus } from "../../npc/entityPlus/BaseNpc_Plus";
+import { modifier_portal } from "../../npc/modifier/modifier_portal";
 import { GameServiceConfig } from "../../shared/GameServiceConfig";
 import { ET } from "../../shared/lib/Entity";
 
@@ -91,11 +91,23 @@ export class MapSystemComponent extends ET.SingletonComponent {
             let f_v = this.PlayerTpDoorPoint[i];
             let t_v = this.BaseTpDoorPoint[i];
             let forvard = this.BaseVForwardPoint[i];
-            unit_portal.CreatePortal(f_v, t_v, Vector(0, -1, 0), "player_" + i);
-            unit_portal.CreatePortal(t_v, f_v, this.BaseVForwardPoint[i], "base_" + i, DOTATeam_t.DOTA_TEAM_BADGUYS);
-            let baoxiang = unit_base_baoxiang.CreateOne(this.BaseBaoXiangPoint[i], DOTATeam_t.DOTA_TEAM_GOODGUYS, true, null, null);
+            this.CreatePortal(f_v, t_v, Vector(0, -1, 0), "player_" + i);
+            this.CreatePortal(t_v, f_v, this.BaseVForwardPoint[i], "base_" + i, DOTATeam_t.DOTA_TEAM_BADGUYS);
+            let baoxiang = BaseNpc_Plus.CreateUnitByName("unit_base_baoxiang", this.BaseBaoXiangPoint[i], null, true, DOTATeam_t.DOTA_TEAM_GOODGUYS);
             baoxiang.SetForwardVector(forvard);
         }
+    }
+    CreatePortal(vPortalPosition: Vector, vTargetPosition: Vector, vForward: Vector, sPortalName: string, team: DOTATeam_t = DOTATeam_t.DOTA_TEAM_GOODGUYS, bHasArrow: boolean = false) {
+        let hPortal = BaseNpc_Plus.CreateUnitByName("unit_portal", vPortalPosition, null, true, team);
+        hPortal.TempData().sPortalName = sPortalName;
+        hPortal.SetForwardVector(vForward);
+        hPortal.addSpawnedHandler(
+            GHandler.create(this, () => {
+                let sPosition = vTargetPosition.x + " " + vTargetPosition.y + " " + vTargetPosition.z;
+                modifier_portal.applyOnly(hPortal, hPortal, null, { vPosition: sPosition });
+            })
+        );
+        return hPortal;
     }
 }
 declare global {

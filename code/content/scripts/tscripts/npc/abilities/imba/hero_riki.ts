@@ -30,7 +30,7 @@ export class imba_riki_smoke_screen extends BaseAbility_Plus {
             let smoke_handler = "modifier_imba_smoke_screen_handler";
             let smoke_sound = "Hero_Riki.Smoke_Screen";
             EmitSoundOnLocationWithCaster(target_point, smoke_sound, caster);
-            let thinker = CreateModifierThinker(caster, this, smoke_handler, {
+            let thinker = BaseModifier_Plus.CreateBuffThinker(caster, this, smoke_handler, {
                 duration: duration,
                 target_point_x: target_point.x,
                 target_point_y: target_point.y
@@ -322,13 +322,13 @@ export class imba_riki_smoke_screen_723 extends BaseAbility_Plus {
         return this.GetSpecialValueFor("radius");
     }
     OnUpgrade(): void {
-        if (this.GetCasterPlus().HasAbility("imba_riki_blink_strike_723") && this.GetCasterPlus().findAbliityPlus<imba_riki_blink_strike_723>("imba_riki_blink_strike_723").GetLevel() == 1 && !this.bUpgradeResponse && this.GetCasterPlus().GetName().includes("riki")) {
+        if (this.GetCasterPlus().HasAbility("imba_riki_blink_strike_723") && this.GetCasterPlus().findAbliityPlus<imba_riki_blink_strike_723>("imba_riki_blink_strike_723").GetLevel() == 1 && !this.bUpgradeResponse && this.GetCasterPlus().GetUnitName().includes("riki")) {
             this.GetCasterPlus().EmitSound("riki_riki_ability_invis_04");
             this.bUpgradeResponse = true;
         }
     }
     GetCooldown(level: number): number {
-        if (this.GetName() == "imba_riki_smoke_screen_723") {
+        if (this.GetAbilityName() == "imba_riki_smoke_screen_723") {
             return super.GetCooldown(level) - this.GetCasterPlus().GetTalentValue("special_bonus_imba_riki_smokescreen_cooldown");
         } else {
             return super.GetCooldown(level);
@@ -336,7 +336,7 @@ export class imba_riki_smoke_screen_723 extends BaseAbility_Plus {
     }
     OnSpellStart(): void {
         this.GetCasterPlus().EmitSound("Hero_Riki.Smoke_Screen");
-        if (this.GetCasterPlus().GetName().includes("riki")) {
+        if (this.GetCasterPlus().GetUnitName().includes("riki")) {
             if (RollPercentage(15)) {
                 if (!this.uncommon_responses) {
                     this.uncommon_responses = {
@@ -356,7 +356,7 @@ export class imba_riki_smoke_screen_723 extends BaseAbility_Plus {
                 this.GetCasterPlus().EmitSound(GFuncRandom.RandomValue(this.responses));
             }
         }
-        CreateModifierThinker(this.GetCasterPlus(), this, "modifier_imba_riki_smoke_screen_723_aura", {
+        BaseModifier_Plus.CreateBuffThinker(this.GetCasterPlus(), this, "modifier_imba_riki_smoke_screen_723_aura", {
             duration: this.GetSpecialValueFor("duration")
         }, this.GetCursorPosition(), this.GetCasterPlus().GetTeamNumber(), false);
     }
@@ -719,7 +719,7 @@ export class imba_riki_blink_strike extends BaseAbility_Plus {
                         let smoke_handler = "modifier_imba_smoke_screen_handler";
                         let smoke_sound = "Hero_Riki.Smoke_Screen";
                         EmitSoundOnLocationWithCaster(target_point, smoke_sound, this.hCaster);
-                        let thinker = CreateModifierThinker(this.hCaster, smokescreen_ability, smoke_handler, {
+                        let thinker = BaseModifier_Plus.CreateBuffThinker(this.hCaster, smokescreen_ability, smoke_handler, {
                             duration: duration,
                             target_point_x: target_point.x,
                             target_point_y: target_point.y
@@ -756,7 +756,7 @@ export class imba_riki_blink_strike extends BaseAbility_Plus {
                 let smoke_handler = "modifier_imba_smoke_screen_handler";
                 let smoke_sound = "Hero_Riki.Smoke_Screen";
                 EmitSoundOnLocationWithCaster(target_point, smoke_sound, this.hCaster);
-                let thinker = CreateModifierThinker(this.hCaster, smokescreen_ability, smoke_handler, {
+                let thinker = BaseModifier_Plus.CreateBuffThinker(this.hCaster, smokescreen_ability, smoke_handler, {
                     duration: duration,
                     target_point_x: target_point.x,
                     target_point_y: target_point.y
@@ -858,7 +858,7 @@ export class modifier_imba_blink_strike_thinker extends BaseModifier_Plus {
             if (params.unit == this.GetCasterPlus() && this.created_flag) {
                 let activity = params.unit.GetCurrentActiveAbility();
                 if (activity) {
-                    if (!(activity.GetName() == "imba_riki_blink_strike")) {
+                    if (!(activity.GetAbilityName() == "imba_riki_blink_strike")) {
                         this.hAbility.tStoredTargets = undefined;
                         this.hAbility.tMarkedTargets = undefined;
                         this.hAbility.hTarget = undefined;
@@ -1023,7 +1023,7 @@ export class modifier_imba_blink_strike_cmd extends BaseModifier_Plus {
     } */
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TRANSLATE_ACTIVITY_MODIFIERS)
     CC_GetActivityTranslationModifiers(): string {
-        // if (this.GetParentPlus().GetName() .includes("riki")) {
+        // if (this.GetParentPlus().GetUnitName() .includes("riki")) {
         //     return "backstab";
         // }
         // return 0;
@@ -1239,7 +1239,7 @@ export class modifier_imba_riki_cloak_and_dagger extends BaseModifier_Plus {
                                 let smoke_handler = "modifier_imba_smoke_screen_handler";
                                 let smoke_sound = "Hero_Riki.Smoke_Screen";
                                 EmitSoundOnLocationWithCaster(target_point, smoke_sound, parent);
-                                let thinker = CreateModifierThinker(parent, smokescreen_ability, smoke_handler, {
+                                let thinker = BaseModifier_Plus.CreateBuffThinker(parent, smokescreen_ability, smoke_handler, {
                                     duration: duration,
                                     target_point_x: target_point.x,
                                     target_point_y: target_point.y
@@ -1403,7 +1403,7 @@ export class modifier_imba_riki_backstab_translation extends BaseModifier_Plus {
     } */
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TRANSLATE_ACTIVITY_MODIFIERS)
     CC_GetActivityTranslationModifiers(): string {
-        // if (this.GetParentPlus().GetName() .includes("riki")) {
+        // if (this.GetParentPlus().GetUnitName() .includes("riki")) {
         //     return "backstab";
         // }
         return "backstab";
@@ -1480,13 +1480,13 @@ export class imba_riki_tricks_of_the_trade extends BaseAbility_Plus {
         return "riki_tricks_of_the_trade";
     }
     GetBehavior(): DOTA_ABILITY_BEHAVIOR | Uint64 {
-        if (this.GetName() == "imba_riki_tricks_of_the_trade") {
+        if (this.GetAbilityName() == "imba_riki_tricks_of_the_trade") {
             if (this.GetCasterPlus().HasScepter()) {
                 return DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_UNIT_TARGET + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_AOE + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_CHANNELLED + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_DONT_RESUME_MOVEMENT + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES;
             } else {
                 return DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_NO_TARGET + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_CHANNELLED + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_DONT_RESUME_MOVEMENT + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES;
             }
-        } else if (this.GetName() == "imba_riki_tricks_of_the_trade_723") {
+        } else if (this.GetAbilityName() == "imba_riki_tricks_of_the_trade_723") {
             if (this.GetCasterPlus().HasScepter()) {
                 return DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_POINT + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_UNIT_TARGET + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_AOE + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_CHANNELLED + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES;
             } else {
@@ -1523,7 +1523,7 @@ export class imba_riki_tricks_of_the_trade extends BaseAbility_Plus {
             this.GetCasterPlus().SetCursorCastTarget(this.GetCasterPlus());
         } else if (this.GetCursorTarget() && this.GetCursorTarget() == this.GetCasterPlus()) {
             this.GetCasterPlus().SetCursorCastTarget(undefined);
-            this.GetCasterPlus().CastAbilityOnPosition(this.GetCasterPlus().GetAbsOrigin(), this, this.GetCasterPlus().GetPlayerID());
+            this.GetCasterPlus().CastAbilityOnPosition(this.GetCasterPlus().GetAbsOrigin(), this, this.GetCasterPlus().GetPlayerOwnerID());
         }
         return true;
     }
@@ -1533,7 +1533,7 @@ export class imba_riki_tricks_of_the_trade extends BaseAbility_Plus {
     OnSpellStart(): void {
         let caster = this.GetCasterPlus();
         let origin = caster.GetAbsOrigin();
-        if (this.GetName() == "imba_riki_tricks_of_the_trade_723") {
+        if (this.GetAbilityName() == "imba_riki_tricks_of_the_trade_723") {
             origin = this.GetCursorPosition();
             this.GetCasterPlus().SetAbsOrigin(origin);
         }
@@ -1551,7 +1551,7 @@ export class imba_riki_tricks_of_the_trade extends BaseAbility_Plus {
         let continous_sound = "Hero_Riki.TricksOfTheTrade";
         let buttsecks_sound = "Imba.RikiSurpriseButtsex";
         let heroes = FindUnitsInRadius(caster.GetTeamNumber(), origin, undefined, aoe, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_ANY_ORDER, false);
-        if (GameFunc.GetCount(heroes) >= PlayerResource.GetPlayerCount() * 0.35 && this.GetName() == "imba_riki_tricks_of_the_trade") {
+        if (GameFunc.GetCount(heroes) >= PlayerResource.GetPlayerCount() * 0.35 && this.GetAbilityName() == "imba_riki_tricks_of_the_trade") {
             EmitSoundOn(buttsecks_sound, caster);
         }
         EmitSoundOnLocationWithCaster(origin, cast_sound, caster);
@@ -1586,7 +1586,7 @@ export class imba_riki_tricks_of_the_trade extends BaseAbility_Plus {
                 backstab_ability.EndCooldown();
             }
             StopSoundEvent("Hero_Riki.TricksOfTheTrade", caster);
-            if (this.GetName() == "imba_riki_tricks_of_the_trade") {
+            if (this.GetAbilityName() == "imba_riki_tricks_of_the_trade") {
                 StopSoundEvent("Imba.RikiSurpriseButtsex", caster);
             }
             ParticleManager.DestroyParticle(this.TricksParticle, false);
@@ -1658,7 +1658,7 @@ export class modifier_imba_riki_tricks_of_the_trade_primary extends BaseModifier
         if (IsServer()) {
             let ability = this.GetAbilityPlus();
             let interval = ability.GetSpecialValueFor("attack_interval");
-            if (this.GetAbilityPlus().GetName() == "imba_riki_tricks_of_the_trade_723") {
+            if (this.GetAbilityPlus().GetAbilityName() == "imba_riki_tricks_of_the_trade_723") {
                 if (!this.GetCasterPlus().HasScepter()) {
                     interval = this.GetAbilityPlus().GetChannelTime() / ability.GetSpecialValueFor("attack_count");
                 } else {
@@ -1684,12 +1684,12 @@ export class modifier_imba_riki_tricks_of_the_trade_primary extends BaseModifier
             let backstab_particle = "particles/units/heroes/hero_riki/riki_backstab.vpcf";
             let backstab_sound = "Hero_Riki.Backstab";
             let targets = FindUnitsInRadius(caster.GetTeamNumber(), origin, undefined, aoe, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS, FindOrder.FIND_ANY_ORDER, false);
-            if (GameFunc.GetCount(targets) == 0 || this.GetAbilityPlus().GetName() == "imba_riki_tricks_of_the_trade_723") {
+            if (GameFunc.GetCount(targets) == 0 || this.GetAbilityPlus().GetAbilityName() == "imba_riki_tricks_of_the_trade_723") {
                 targets = FindUnitsInRadius(caster.GetTeamNumber(), origin, undefined, aoe, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_ANY_ORDER, false);
             }
             for (const [_, unit] of GameFunc.iPair(targets)) {
                 if (unit.IsAlive() && !unit.IsAttackImmune()) {
-                    if (this.GetAbilityPlus().GetName() == "imba_riki_tricks_of_the_trade_723") {
+                    if (this.GetAbilityPlus().GetAbilityName() == "imba_riki_tricks_of_the_trade_723") {
                         caster.AddNewModifier(caster, this.GetAbilityPlus(), "modifier_imba_riki_tricks_of_the_trade_723_damage_reduction", {});
                         caster.SetForwardVector(unit.GetForwardVector());
                         caster.PerformAttack(unit, true, true, true, false, false, false, false);
@@ -1760,7 +1760,7 @@ export class modifier_imba_riki_tricks_of_the_trade_secondary extends BaseModifi
             let backstab_particle = "particles/units/heroes/hero_riki/riki_backstab.vpcf";
             let backstab_sound = "Hero_Riki.Backstab";
             let targets = FindUnitsInRadius(caster.GetTeamNumber(), origin, undefined, aoe, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS, FindOrder.FIND_ANY_ORDER, false);
-            if (GameFunc.GetCount(targets) == 0 || this.GetAbilityPlus().GetName() == "imba_riki_tricks_of_the_trade_723") {
+            if (GameFunc.GetCount(targets) == 0 || this.GetAbilityPlus().GetAbilityName() == "imba_riki_tricks_of_the_trade_723") {
                 targets = FindUnitsInRadius(caster.GetTeamNumber(), origin, undefined, aoe, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_ANY_ORDER, false);
             }
             let martyrs_mark_targets: IBaseNpc_Plus[];
@@ -1833,7 +1833,7 @@ export class modifier_imba_riki_tricks_of_the_trade_secondary extends BaseModifi
                 }) as modifier_imba_martyrs_mark;
             }
         }
-        if (this.GetAbilityPlus().GetName() == "imba_riki_tricks_of_the_trade_723") {
+        if (this.GetAbilityPlus().GetAbilityName() == "imba_riki_tricks_of_the_trade_723") {
             caster.AddNewModifier(caster, this.GetAbilityPlus(), "modifier_imba_riki_tricks_of_the_trade_723_damage_reduction", {});
             caster.PerformAttack(target, true, true, true, false, false, false, false);
             caster.RemoveModifierByName("modifier_imba_riki_tricks_of_the_trade_723_damage_reduction");

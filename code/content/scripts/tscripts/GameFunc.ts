@@ -245,7 +245,7 @@ export module FuncEntity {
     }
     export function IsHeroDamage(unit: IBaseNpc_Plus, damage: number) {
         if (damage > 0) {
-            if (unit.GetName() == "npc_dota_roshan" || unit.IsControllableByAnyPlayer() || unit.GetName() == "npc_dota_shadowshaman_serpentward") {
+            if (unit.GetUnitName() == "npc_dota_roshan" || unit.IsControllableByAnyPlayer() || unit.GetUnitName() == "npc_dota_shadowshaman_serpentward") {
                 return true;
             }
         }
@@ -430,8 +430,11 @@ export module FuncEntity {
             }
             ability.__safedestroyed__ = true;
             GTimerHelper.ClearAll(ability);
+            if (ability.OnDestroy) {
+                ability.OnDestroy();
+            }
             ability.Destroy();
-            UTIL_Remove(ability);
+            // UTIL_Remove(ability);
         }
     }
 
@@ -447,8 +450,11 @@ export module FuncEntity {
             }
             item.__safedestroyed__ = true;
             GTimerHelper.ClearAll(item);
+            if (item.OnDestroy) {
+                item.OnDestroy();
+            }
             item.Destroy();
-            UTIL_Remove(item);
+            // UTIL_Remove(item);
         }
     }
 
@@ -463,14 +469,26 @@ export module FuncEntity {
                 return;
             }
             unit.__safedestroyed__ = true;
+            unit.RegOwnerSelf(false);
             if (IsServer()) {
                 let allm = unit.FindAllModifiers();
                 for (let m of allm) {
                     m.Destroy();
                 }
+                let lenability = unit.GetAbilityCount()
+                for (let i = 0; i < lenability; i++) {
+                    unit.GetAbilityByIndex(i) && SafeDestroyAbility(unit.GetAbilityByIndex(i) as any);
+                }
+                for (let i = 0; i < DOTAScriptInventorySlot_t.DOTA_ITEM_SLOT_9; i++) {
+                    unit.GetItemInSlot(i) && SafeDestroyItem(unit.GetItemInSlot(i) as any);
+                }
             }
             GTimerHelper.ClearAll(unit);
-            UTIL_Remove(unit);
+            if (unit.OnDestroy) {
+                unit.OnDestroy();
+            }
+            unit.Destroy();
+            // UTIL_Remove(unit);
         }
     }
     export function AsAttribute(obj: string) {

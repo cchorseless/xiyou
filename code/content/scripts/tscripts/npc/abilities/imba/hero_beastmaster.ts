@@ -47,12 +47,12 @@ export class imba_beastmaster_summon_hawk extends BaseAbility_Plus {
             caster.EmitSound("Hero_Beastmaster.Call.Hawk");
             let spawn_particle_fx = ResHelper.CreateParticleEx(spawn_particle, ParticleAttachment_t.PATTACH_ABSORIGIN, caster);
             ParticleManager.SetParticleControl(spawn_particle_fx, 0, spawn_point);
-            this.hawk = BaseNpc_Plus.CreateUnitByName(hawk_name + hawk_level, spawn_point, caster.GetTeamNumber(), false, caster, caster);
+            this.hawk = BaseNpc_Plus.CreateUnitByName(hawk_name + hawk_level, spawn_point, caster, false);
             this.hawk.AddNewModifier(caster, this, "modifier_imba_beastmaster_hawk", {});
             this.hawk.AddNewModifier(caster, this, "modifier_kill", {
                 duration: hawk_duration
             });
-            this.hawk.SetControllableByPlayer(caster.GetPlayerID(), true);
+            this.hawk.SetControllableByPlayer(caster.GetPlayerOwnerID(), true);
         }
         let hawk_speed = this.GetSpecialValueFor("hawk_speed_tooltip");
         this.hawk.SetBaseMoveSpeed(hawk_speed);
@@ -212,12 +212,12 @@ export class imba_beastmaster_summon_boar extends BaseAbility_Plus {
                 }
             }
             for (let i = 0; i < boar_count; i++) {
-                let boar = BaseNpc_Plus.CreateUnitByName(boar_name + boar_level, spawn_point, caster.GetTeamNumber(), true, caster, caster);
+                let boar = BaseNpc_Plus.CreateUnitByName(boar_name + boar_level, spawn_point, caster, true);
                 boar.AddNewModifier(caster, this, "modifier_imba_beastmaster_boar", {});
                 boar.AddNewModifier(caster, this, "modifier_kill", {
                     duration: boar_duration
                 });
-                boar.SetControllableByPlayer(caster.GetPlayerID(), true);
+                boar.SetControllableByPlayer(caster.GetPlayerOwnerID(), true);
             }
         }
     }

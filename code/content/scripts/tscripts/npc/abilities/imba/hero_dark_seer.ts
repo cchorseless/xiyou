@@ -238,7 +238,7 @@ export class imba_dark_seer_wormhole extends BaseAbility_Plus {
         if (!IsServer()) {
             return;
         }
-        if (!this.GetCasterPlus().GetName().includes("dark_seer")) {
+        if (!this.GetCasterPlus().GetUnitName().includes("dark_seer")) {
             this.SetHidden(true);
         }
     }
@@ -273,10 +273,10 @@ export class imba_dark_seer_wormhole extends BaseAbility_Plus {
         ParticleManager.SetParticleControl(particle, 1, Vector(this.GetSpecialValueFor("radius"), 1, 1));
         ParticleManager.ReleaseParticleIndex(particle);
         GridNav.DestroyTreesAroundPoint(this.GetCursorPosition(), this.GetSpecialValueFor("radius_tree"), true);
-        let exit_portal = CreateModifierThinker(this.GetCasterPlus(), this, "modifier_imba_dark_seer_vacuum_exit_portal", {
+        let exit_portal = BaseModifier_Plus.CreateBuffThinker(this.GetCasterPlus(), this, "modifier_imba_dark_seer_vacuum_exit_portal", {
             duration: vacuum_ability.GetSpecialValueFor("teleport_duration")
         }, this.GetCursorPosition(), this.GetCasterPlus().GetTeamNumber(), false);
-        let entry_portal = CreateModifierThinker(this.GetCasterPlus(), vacuum_ability, "modifier_imba_dark_seer_vacuum_entry_portal", {
+        let entry_portal = BaseModifier_Plus.CreateBuffThinker(this.GetCasterPlus(), vacuum_ability, "modifier_imba_dark_seer_vacuum_entry_portal", {
             duration: vacuum_ability.GetSpecialValueFor("teleport_duration"),
             exit_portal_entindex: exit_portal.entindex(),
             enemy_tracker: this.enemy_tracker
@@ -414,8 +414,8 @@ export class modifier_imba_dark_seer_vacuum_entry_portal extends BaseModifier_Pl
                     EmitSoundOnLocationWithCaster(unit.GetAbsOrigin(), "Wormhole.CreepDisappear", this.GetCasterPlus());
                 }
                 FindClearSpaceForUnit(unit, this.exit_portal.GetAbsOrigin(), true);
-                if (unit.GetPlayerID) {
-                    PlayerResource.SetCameraTarget(unit.GetPlayerID(), unit);
+                if (unit.GetPlayerOwnerID) {
+                    PlayerResource.SetCameraTarget(unit.GetPlayerOwnerID(), unit);
                     unit.AddNewModifier(unit, this.GetAbilityPlus(), "modifier_imba_dark_seer_vacuum_camera_track", {
                         duration: FrameTime()
                     });
@@ -467,7 +467,7 @@ export class modifier_imba_dark_seer_vacuum_camera_track extends BaseModifier_Pl
         if (!IsServer()) {
             return;
         }
-        PlayerResource.SetCameraTarget(this.GetParentPlus().GetPlayerID(), undefined);
+        PlayerResource.SetCameraTarget(this.GetParentPlus().GetPlayerOwnerID(), undefined);
     }
 }
 @registerAbility()
@@ -477,7 +477,7 @@ export class imba_dark_seer_ion_shell extends BaseAbility_Plus {
             return;
         }
         this.GetCursorTarget().EmitSound("Hero_Dark_Seer.Ion_Shield_Start");
-        if (this.GetCasterPlus().GetName().includes("dark_seer") && RollPercentage(50)) {
+        if (this.GetCasterPlus().GetUnitName().includes("dark_seer") && RollPercentage(50)) {
             this.GetCasterPlus().EmitSound("dark_seer_dkseer_ability_surge_0" + math.random(1, 2));
         }
         if (this.GetAutoCastState() && this.GetCursorTarget().GetTeamNumber() != this.GetCasterPlus().GetTeamNumber()) {
@@ -888,13 +888,13 @@ export class imba_dark_seer_wall_of_replica extends BaseAbility_Plus {
         }
         let duration = this.GetSpecialValueFor("duration");
         EmitSoundOnLocationWithCaster(this.GetCursorPosition(), "Hero_Dark_Seer.Wall_of_Replica_Start", this.GetCasterPlus());
-        CreateModifierThinker(this.GetCasterPlus(), this, "modifier_imba_dark_seer_wall_of_replica", {
+        BaseModifier_Plus.CreateBuffThinker(this.GetCasterPlus(), this, "modifier_imba_dark_seer_wall_of_replica", {
             duration: duration,
             x: this.GetCursorPosition().x,
             y: this.GetCursorPosition().y,
             rotation: 45
         }, this.GetCasterPlus().GetAbsOrigin(), this.GetCasterPlus().GetTeamNumber(), false);
-        CreateModifierThinker(this.GetCasterPlus(), this, "modifier_imba_dark_seer_wall_of_replica", {
+        BaseModifier_Plus.CreateBuffThinker(this.GetCasterPlus(), this, "modifier_imba_dark_seer_wall_of_replica", {
             duration: duration,
             x: this.GetCursorPosition().x,
             y: this.GetCursorPosition().y,

@@ -162,10 +162,9 @@ export class imba_faceless_void_time_walk extends BaseAbility_Plus {
         });
         if (caster.HasShard()) {
             caster.SwapAbilities(this.GetAbilityName(), "imba_faceless_void_time_walk_reverse", false, true);
-            caster.SetContextThink(DoUniqueString("time_walk_reverse"), () => {
+            this.AddTimer(this.GetSpecialValueFor("time_walk_reverse_timer"), () => {
                 caster.SwapAbilities(this.GetAbilityName(), "imba_faceless_void_time_walk_reverse", true, false);
-                return undefined;
-            }, this.GetSpecialValueFor("time_walk_reverse_timer"));
+            });
         }
         if (caster.TempData().time_walk_damage_taken) {
             caster.Heal(caster.TempData().time_walk_damage_taken, this);
@@ -973,7 +972,7 @@ export class imba_faceless_void_chronosphere extends BaseAbility_Plus {
             }
         }
         this.mini_chrono = mini_chrono;
-        let mod = CreateModifierThinker(caster, ability, "modifier_imba_faceless_void_chronosphere_aura", {
+        let mod = BaseModifier_Plus.CreateBuffThinker(caster, ability, "modifier_imba_faceless_void_chronosphere_aura", {
             duration: duration
         }, chrono_center, caster.GetTeamNumber(), false);
     }
@@ -1027,7 +1026,7 @@ export class modifier_imba_faceless_void_chronosphere_aura extends BaseModifier_
         return this.total_radius;
     }
     GetAuraEntityReject(target: CDOTA_BaseNPC): boolean {
-        if (target != this.GetCasterPlus() && target.GetName().includes("faceless_void")) {
+        if (target != this.GetCasterPlus() && target.GetUnitName().includes("faceless_void")) {
             return true;
         }
     }

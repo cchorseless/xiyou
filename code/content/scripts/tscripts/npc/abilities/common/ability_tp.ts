@@ -1,4 +1,5 @@
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
+import { BaseModifier_Plus } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility } from "../../entityPlus/Base_Plus";
 
 @registerAbility()
@@ -38,9 +39,7 @@ export class ability_tp extends BaseAbility_Plus {
         if (!this.ValidPosition(vPosition)) {
             return false;
         }
-
-        CreateModifierThinker(hCaster, this, "modifier_tp_thinker", { duration: this.GetTPDuration() }, vPosition, hCaster.GetTeamNumber(), false);
-
+        BaseModifier_Plus.CreateBuffThinker(hCaster, this, "modifier_tp_thinker", { duration: this.GetTPDuration() }, vPosition, hCaster.GetTeamNumber(), false);
         return true;
     }
     GetTPDuration() {

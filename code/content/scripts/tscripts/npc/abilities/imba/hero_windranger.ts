@@ -23,8 +23,8 @@ export class imba_windranger_shackleshot extends BaseAbility_Plus {
     OnSpellStart(): void {
         let target = this.GetCursorTarget();
         this.GetCasterPlus().EmitSound("Hero_Windrunner.ShackleshotCast");
-        if (target.GetName() == "") {
-            let temp_thinker = CreateModifierThinker(this.GetCasterPlus(), this, undefined, {
+        if (target.GetUnitName() == "") {
+            let temp_thinker = BaseModifier_Plus.CreateBuffThinker(this.GetCasterPlus(), this, undefined, {
                 duration: 0.1
             }, target.GetAbsOrigin(), this.GetCasterPlus().GetTeamNumber(), false);
             ProjectileManager.CreateTrackingProjectile({
@@ -84,7 +84,7 @@ export class imba_windranger_shackleshot extends BaseAbility_Plus {
                 return;
             }
         }
-        if (!shackleTarget && target.GetName() != "npc_dota_thinker") {
+        if (!shackleTarget && target.GetUnitName() != "npc_dota_thinker") {
             let trees = GridNav.GetAllTreesAroundPoint(target.GetAbsOrigin(), this.GetSpecialValueFor("shackle_distance"), false);
             for (const [_, tree] of GameFunc.iPair(trees)) {
                 if (!ignore_list.includes(tree as any) && math.abs(AngleDiff(target_angle, VectorToAngles(tree.GetAbsOrigin() - target.GetAbsOrigin() as Vector).y)) <= this.GetSpecialValueFor("shackle_angle")) {
@@ -124,7 +124,7 @@ export class imba_windranger_shackleshot extends BaseAbility_Plus {
                     next_target = this.SearchForShackleTarget(next_target, VectorToAngles(next_target.GetAbsOrigin() - Vector(ExtraData.location_x, ExtraData.location_y, ExtraData.location_z) as Vector).y, shackled_targets, targets);
                     if (next_target) {
                         shackled_targets.push(next_target);
-                        if (targets == 0 && this.GetCasterPlus().GetName().includes("windrunner") && RollPercentage(35)) {
+                        if (targets == 0 && this.GetCasterPlus().GetUnitName().includes("windrunner") && RollPercentage(35)) {
                             if (!this.responses) {
                                 this.responses = {
                                     "1": "windrunner_wind_ability_shackleshot_05",
@@ -260,7 +260,7 @@ export class imba_windranger_powershot extends BaseAbility_Plus {
     }
 
     FirePowershot(channel_pct: number, overstretch_bonus = 0) {
-        let powershot_dummy = CreateModifierThinker(this.GetCasterPlus(), this, undefined, {}, this.GetCasterPlus().GetAbsOrigin(), this.GetCasterPlus().GetTeamNumber(), false);
+        let powershot_dummy = BaseModifier_Plus.CreateBuffThinker(this.GetCasterPlus(), this, undefined, {}, this.GetCasterPlus().GetAbsOrigin(), this.GetCasterPlus().GetTeamNumber(), false);
         powershot_dummy.EmitSound("Ability.Powershot");
         powershot_dummy.TempData().units_hit = 0;
         let powershot_particle = "particles/units/heroes/hero_windrunner/windrunner_spell_powershot.vpcf";
@@ -464,7 +464,7 @@ export class imba_windranger_windrun extends BaseAbility_Plus {
 
     OnSpellStart(): void {
         this.GetCasterPlus().EmitSound("Ability.Windrun");
-        if (this.GetCasterPlus().GetName().includes("windrunner") && RollPercentage(75)) {
+        if (this.GetCasterPlus().GetUnitName().includes("windrunner") && RollPercentage(75)) {
             if (!this.responses) {
                 this.responses = {
                     "1": "windrunner_wind_spawn_04",
@@ -666,7 +666,7 @@ export class modifier_imba_windranger_windrun_invis extends BaseModifier_Plus {
 
     @registerEvent(Enum_MODIFIER_EVENT.ON_ABILITY_FULLY_CAST)
     CC_OnAbilityFullyCast(keys: ModifierAbilityEvent): void {
-        if (keys.unit == this.GetParentPlus() && keys.ability != this.GetAbilityPlus() && keys.ability.GetName() != "imba_windranger_advancement") {
+        if (keys.unit == this.GetParentPlus() && keys.ability != this.GetAbilityPlus() && keys.ability.GetAbilityName() != "imba_windranger_advancement") {
             this.Destroy();
         }
     }
@@ -727,7 +727,7 @@ export class modifier_imba_windranger_focusfire_vanilla_enhancer extends BaseMod
     } */
     @registerEvent(Enum_MODIFIER_EVENT.ON_ABILITY_FULLY_CAST)
     CC_OnAbilityFullyCast(keys: ModifierAbilityEvent): void {
-        if (keys.unit == this.GetParentPlus() && keys.ability.GetName() == "windrunner_focusfire") {
+        if (keys.unit == this.GetParentPlus() && keys.ability.GetAbilityName() == "windrunner_focusfire") {
             this.ability = keys.ability as IBaseAbility_Plus;
             this.target = keys.ability.GetCursorTarget();
         }

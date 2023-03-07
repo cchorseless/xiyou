@@ -14,7 +14,7 @@ export class imba_weaver_the_swarm extends BaseAbility_Plus {
             this.GetCasterPlus().SetCursorPosition(this.GetCursorPosition() + this.GetCasterPlus().GetForwardVector() as Vector);
         }
         this.GetCasterPlus().EmitSound("Hero_Weaver.Swarm.Cast");
-        if (this.GetCasterPlus().GetName().includes("weaver") && RollPercentage(75)) {
+        if (this.GetCasterPlus().GetUnitName().includes("weaver") && RollPercentage(75)) {
             this.GetCasterPlus().EmitSound("weaver_weav_ability_swarm_0" + RandomInt(1, 6));
         }
         let start_pos: Vector = undefined;
@@ -23,7 +23,7 @@ export class imba_weaver_the_swarm extends BaseAbility_Plus {
         let projectileID = undefined;
         for (let beetles = 1; beetles <= this.GetSpecialValueFor("count"); beetles++) {
             start_pos = this.GetCasterPlus().GetAbsOrigin() + RandomVector(RandomInt(0, this.GetSpecialValueFor("spawn_radius"))) as Vector;
-            beetle_dummy = CreateModifierThinker(this.GetCasterPlus(), this, undefined, {}, this.GetCasterPlus().GetAbsOrigin(), this.GetCasterPlus().GetTeamNumber(), false);
+            beetle_dummy = BaseModifier_Plus.CreateBuffThinker(this.GetCasterPlus(), this, undefined, {}, this.GetCasterPlus().GetAbsOrigin(), this.GetCasterPlus().GetTeamNumber(), false);
             if (beetles == 1) {
                 beetle_dummy.EmitSound("Hero_Weaver.Swarm.Projectile");
             }
@@ -62,7 +62,7 @@ export class imba_weaver_the_swarm extends BaseAbility_Plus {
     OnProjectileHit_ExtraData(target: CDOTA_BaseNPC | undefined, location: Vector, data: any): boolean | void {
         if (target && !target.HasModifier("modifier_imba_weaver_the_swarm_debuff") && data.beetle_entindex && EntIndexToHScript(data.beetle_entindex) && !EntIndexToHScript(data.beetle_entindex).IsNull()) {
             target.EmitSound("Hero_Weaver.SwarmAttach");
-            let beetle = BaseNpc_Plus.CreateUnitByName("npc_dota_weaver_swarm", this.GetCasterPlus().GetAbsOrigin() + this.GetCasterPlus().GetForwardVector() * 64 as Vector, this.GetCasterPlus().GetTeamNumber(), false, this.GetCasterPlus(), this.GetCasterPlus());
+            let beetle = BaseNpc_Plus.CreateUnitByName("npc_dota_weaver_swarm", this.GetCasterPlus().GetAbsOrigin() + this.GetCasterPlus().GetForwardVector() * 64 as Vector, this.GetCasterPlus(), false);
             beetle.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_weaver_the_swarm_unit", {
                 destroy_attacks: this.GetTalentSpecialValueFor("destroy_attacks"),
                 target_entindex: target.entindex()

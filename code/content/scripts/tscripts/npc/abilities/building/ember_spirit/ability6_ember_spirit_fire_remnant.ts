@@ -99,7 +99,7 @@ export class ability6_ember_spirit_fire_remnant extends BaseAbility_Plus {
         let hCaster = this.GetCasterPlus()
         let vStartPosition = hCaster.GetAbsOrigin()
         let hHero = PlayerResource.GetSelectedHeroEntity(hCaster.GetPlayerOwnerID())
-        let hRemnant = BaseNpc_Plus.CreateUnitByName(hCaster.GetUnitName(), vStartPosition, hCaster.GetTeamNumber(), false, hHero, hHero)
+        let hRemnant = BaseNpc_Plus.CreateUnitByName(hCaster.GetUnitName(), vStartPosition, hCaster, false)
         // hRemnant.bIsUse = true
         // Attributes.Register(hRemnant)
         modifier_ember_spirit_6_remnant.apply(hRemnant, hCaster, this, null)

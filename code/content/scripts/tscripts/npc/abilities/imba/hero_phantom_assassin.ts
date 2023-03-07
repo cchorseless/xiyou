@@ -971,7 +971,7 @@ export class modifier_phantom_assassin_arcana extends BaseModifier_Plus {
         }
         if (params.attacker == this.GetParentPlus() && params.target.IsRealUnit() && params.attacker.GetTeam() != params.target.GetTeam()) {
             this.IncrementStackCount();
-            let gravestone = BaseNpc_Plus.CreateUnitByName("npc_dota_phantom_assassin_gravestone", params.target.GetAbsOrigin(), DOTATeam_t.DOTA_TEAM_NEUTRALS, true, this.GetParentPlus(), this.GetParentPlus());
+            let gravestone = BaseNpc_Plus.CreateUnitByName("npc_dota_phantom_assassin_gravestone", params.target.GetAbsOrigin(), this.GetParentPlus(), true, DOTATeam_t.DOTA_TEAM_NEUTRALS);
             gravestone.SetOwner(this.GetParentPlus());
             this.AddTimer(FrameTime(), () => {
                 gravestone.AddNewModifier(gravestone, undefined,
@@ -980,27 +980,27 @@ export class modifier_phantom_assassin_arcana extends BaseModifier_Plus {
                 }).SetStackCount(params.target.entindex());
             });
             gravestone.TempData().epitaph_number = RandomInt(1, 13);
-            gravestone.TempData().victim_id = (params.target as IBaseNpc_Plus).GetPlayerID();
+            gravestone.TempData().victim_id = (params.target as IBaseNpc_Plus).GetPlayerOwnerID();
             for (let i = 0; i <= PlayerResource.GetPlayerCount() - 1; i++) {
                 gravestone.SetControllableByPlayer(i as PlayerID, false);
             }
             if (this.GetStackCount() == 400) {
                 // Wearable._WearProp(this.GetParentPlus(), "7247", "weapon", 1);
-                // Notifications.Bottom(this.GetParentPlus().GetPlayerID(), {
+                // Notifications.Bottom(this.GetParentPlus().GetPlayerOwnerID(), {
                 //     image: "file://{images}/econ/items/phantom_assassin/manifold_paradox/arcana_pa_style1.png",
                 //     duration: 5.0
                 // });
-                // Notifications.Bottom(this.GetParentPlus().GetPlayerID(), {
+                // Notifications.Bottom(this.GetParentPlus().GetPlayerOwnerID(), {
                 //     text: "Style 1 unlocked!",
                 //     duration: 10.0
                 // });
             } else if (this.GetStackCount() == 1000) {
                 // Wearable._WearProp(this.GetParentPlus(), "7247", "weapon", 2);
-                // Notifications.Bottom(this.GetParentPlus().GetPlayerID(), {
+                // Notifications.Bottom(this.GetParentPlus().GetPlayerOwnerID(), {
                 //     image: "file://{images}/econ/items/phantom_assassin/manifold_paradox/arcana_pa_style2.png",
                 //     duration: 5.0
                 // });
-                // Notifications.Bottom(this.GetParentPlus().GetPlayerID(), {
+                // Notifications.Bottom(this.GetParentPlus().GetPlayerOwnerID(), {
                 //     text: "Style 2 unlocked!",
                 //     duration: 10.0
                 // });

@@ -413,10 +413,10 @@ export class imba_warlock_upheaval extends BaseAbility_Plus {
         if (!caster.HasTalent("special_bonus_imba_warlock_6")) {
             EmitSoundOn(cast_response, caster);
             EmitSoundOn(sound_loop, caster);
-            CreateModifierThinker(caster, this, modifier_upheaval, {}, target_point, caster.GetTeamNumber(), false);
+            BaseModifier_Plus.CreateBuffThinker(caster, this, modifier_upheaval, {}, target_point, caster.GetTeamNumber(), false);
         } else {
-            let playerID = caster.GetPlayerID();
-            let demon = BaseNpc_Plus.CreateUnitByName("npc_imba_warlock_upheaval_demon", target_point, caster.GetTeamNumber(), true, caster, caster);
+            let playerID = caster.GetPlayerOwnerID();
+            let demon = BaseNpc_Plus.CreateUnitByName("npc_imba_warlock_upheaval_demon", target_point, caster, true);
             demon.SetControllableByPlayer(playerID, true);
             demon.AddNewModifier(demon, this, "modifier_kill", {
                 duration: 20
@@ -660,14 +660,14 @@ export class imba_warlock_rain_of_chaos extends BaseAbility_Plus {
             }
             let golem = undefined;
             if (!bScepter || bDeath) {
-                golem = BaseNpc_Plus.CreateUnitByName("npc_dota_warlock_golem_" + this.GetLevel(), target_point, this.GetCasterPlus().GetTeamNumber(), true, this.GetCasterPlus(), this.GetCasterPlus());
+                golem = BaseNpc_Plus.CreateUnitByName("npc_dota_warlock_golem_" + this.GetLevel(), target_point, this.GetCasterPlus(), true);
             } else {
-                golem = BaseNpc_Plus.CreateUnitByName("npc_dota_warlock_golem_scepter_" + this.GetLevel(), target_point, this.GetCasterPlus().GetTeamNumber(), true, this.GetCasterPlus(), this.GetCasterPlus());
+                golem = BaseNpc_Plus.CreateUnitByName("npc_dota_warlock_golem_scepter_" + this.GetLevel(), target_point, this.GetCasterPlus(), true);
             }
             golem.AddNewModifier(this.GetCasterPlus(), this, "modifier_kill", {
                 duration: this.GetSpecialValueFor("duration")
             });
-            golem.SetControllableByPlayer(this.GetCasterPlus().GetPlayerID(), true);
+            golem.SetControllableByPlayer(this.GetCasterPlus().GetPlayerOwnerID(), true);
             let bonus_hp = this.GetCasterPlus().GetStrength() * this.GetSpecialValueFor("bonus_hp_per_str");
             let bonus_damage = this.GetCasterPlus().GetIntellect() * this.GetSpecialValueFor("bonus_damage_per_int");
             let bonus_armor = this.GetCasterPlus().GetAgility() * this.GetSpecialValueFor("bonus_armor_per_agi");

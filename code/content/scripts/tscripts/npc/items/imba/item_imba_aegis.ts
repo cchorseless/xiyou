@@ -72,10 +72,10 @@ export class modifier_item_imba_aegis extends BaseModifier_Plus {
             this.GetParentPlus().RemoveModifierByName("modifier_item_imba_aegis_pfx");
         }
         if (item) {
-            if (item.GetContainer) {
-                UTIL_Remove(item.GetContainer());
-            }
-            UTIL_Remove(item);
+            // if (item.GetContainer) {
+            //     UTIL_Remove(item.GetContainer());
+            // }
+            GFuncEntity.SafeDestroyItem(item);
         }
     }
 }

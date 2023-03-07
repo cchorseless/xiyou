@@ -163,7 +163,7 @@ export class modifier_imba_juggernaut_blade_fury extends BaseModifier_Plus {
                     this.GetParentPlus().EmitSound("Hero_Juggernaut.BladeDance");
                     this.GetParentPlus().EmitSound("Hero_Juggernaut.PreAttack");
                     damage = damage * crit;
-                    let player = PlayerResource.GetPlayer(this.GetCasterPlus().GetPlayerID());
+                    let player = PlayerResource.GetPlayer(this.GetCasterPlus().GetPlayerOwnerID());
                     SendOverheadEventMessage(player, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_CRITICAL, enemy, damage, player);
                 } else {
                     this.prng = this.prng + 1;
@@ -457,17 +457,18 @@ export class imba_juggernaut_healing_ward extends BaseAbility_Plus {
         let caster = this.GetCasterPlus();
         let targetPoint = this.GetCursorPosition();
         caster.EmitSound("Hero_Juggernaut.HealingWard.Cast");
-        let healing_ward = BaseNpc_Plus.CreateUnitByName("npc_dota_juggernaut_healing_ward", targetPoint, caster.GetTeamNumber(), true, caster, caster);
+        let healing_ward = BaseNpc_Plus.CreateUnitByName("npc_dota_juggernaut_healing_ward", targetPoint, caster, true);
         // SetCreatureHealth(healing_ward, this.GetTalentSpecialValueFor("health"), true);
+        healing_ward.ModifyMaxHealth(this.GetTalentSpecialValueFor("health"))
+        healing_ward.SetHealth(this.GetTalentSpecialValueFor("health"));
         healing_ward.AddNewModifier(caster, this, "modifier_kill", {
             duration: this.GetDuration()
         });
         healing_ward.AddAbility("imba_juggernaut_healing_ward_passive").SetLevel(this.GetLevel());
-        healing_ward.SetControllableByPlayer(caster.GetPlayerID(), true);
-        healing_ward.SetContextThink(DoUniqueString(this.GetName()), () => {
+        healing_ward.SetControllableByPlayer(caster.GetPlayerOwnerID(), true);
+        this.AddTimer(FrameTime(), () => {
             healing_ward.MoveToNPC(caster);
-            return undefined;
-        }, FrameTime());
+        });
     }
 }
 @registerAbility()
@@ -1320,7 +1321,7 @@ export class imba_juggernaut_omni_slash extends BaseAbility_Plus {
         let rand = math.random;
         let im_the_juggernaut_lich = 10;
         let ryujinnokenwokurae = 10;
-        if (caster.GetName().includes("juggernaut")) {
+        if (caster.GetUnitName().includes("juggernaut")) {
             if (RollPercentage(im_the_juggernaut_lich)) {
                 caster.EmitSound("juggernaut_jug_rare_17");
             } else if (RollPercentage(im_the_juggernaut_lich)) {
@@ -1340,7 +1341,7 @@ export class imba_juggernaut_omni_slash extends BaseAbility_Plus {
         this.previous_position = this.caster.GetAbsOrigin();
         this.caster.Purge(false, true, false, false, false);
         if (this.caster.HasTalent("special_bonus_imba_juggernaut_7") && !this.IsStolen()) {
-            let omnislash_image = BaseNpc_Plus.CreateUnitByName(this.caster.GetUnitName(), this.caster.GetAbsOrigin(), this.caster.GetTeamNumber(), true, this.caster, this.caster.GetOwnerPlus());
+            let omnislash_image = BaseNpc_Plus.CreateUnitByName(this.caster.GetUnitName(), this.caster.GetAbsOrigin(), this.caster, true);
             let caster_level = this.caster.GetLevel();
             for (let i = 2; i <= caster_level; i++) {
                 // omnislash_image.HeroLevelUp(false);
@@ -1357,9 +1358,9 @@ export class imba_juggernaut_omni_slash extends BaseAbility_Plus {
             for (let item_id = 0; item_id <= 5; item_id++) {
                 let item_in_caster = this.caster.GetItemInSlot(item_id);
                 if (item_in_caster != undefined) {
-                    let item_name = item_in_caster.GetName();
+                    let item_name = item_in_caster.GetAbilityName();
                     if (!(item_name == "item_smoke_of_deceit" || item_name == "item_ward_observer" || item_name == "item_ward_sentry" || item_name == "item_imba_ironleaf_boots")) {
-                        let item_created = BaseItem_Plus.CreateOneOnUnit(omnislash_image, item_in_caster.GetName());
+                        let item_created = BaseItem_Plus.CreateOneOnUnit(omnislash_image, item_in_caster.GetAbilityName());
                         omnislash_image.AddItem(item_created);
                         item_created.SetCurrentCharges(item_in_caster.GetCurrentCharges());
                     }
@@ -1605,7 +1606,7 @@ export class modifier_imba_omni_slash_caster extends BaseModifier_Plus {
         }
         this.nearby_enemies = FindUnitsInRadius(this.parent.GetTeamNumber(), this.parent.GetAbsOrigin(), undefined, this.bounce_range, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE, order, false);
         for (let count = GameFunc.GetCount(this.nearby_enemies) - 1; count >= 0; count--) {
-            if (this.nearby_enemies[count] && (this.nearby_enemies[count].GetName() == "npc_dota_unit_undying_zombie" || this.nearby_enemies[count].GetName() == "npc_dota_elder_titan_ancestral_spirit")) {
+            if (this.nearby_enemies[count] && (this.nearby_enemies[count].GetUnitName().includes("undying_zombie") || this.nearby_enemies[count].GetUnitName().includes("elder_titan_ancestral_spirit"))) {
                 this.nearby_enemies.splice(count, 1);
             }
         }
@@ -1715,7 +1716,7 @@ export class modifier_imba_omni_slash_caster extends BaseModifier_Plus {
                     this.original_caster.RemoveModifierByName("modifier_imba_omni_slash_talent");
                 }
                 if (this.previous_pos) {
-                    CreateModifierThinker(this.original_caster, this.GetAbilityPlus(), "modifier_omnislash_image_afterimage_fade", {
+                    BaseModifier_Plus.CreateBuffThinker(this.original_caster, this.GetAbilityPlus(), "modifier_omnislash_image_afterimage_fade", {
                         duration: 1.0,
                         previous_position_x: this.previous_pos.x,
                         previous_position_y: this.previous_pos.y,

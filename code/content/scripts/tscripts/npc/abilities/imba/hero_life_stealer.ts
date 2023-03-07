@@ -249,7 +249,7 @@ export class imba_life_stealer_feast extends BaseAbility_Plus {
     }
     OnSpellStart(): void {
         this.GetCasterPlus().StartGesture(GameActivity_t.ACT_DOTA_LIFESTEALER_RAGE);
-        let banquet = BaseNpc_Plus.CreateUnitByName("npc_dota_life_stealer_banquet", this.GetCursorPosition(), this.GetCasterPlus().GetTeamNumber(), true, this.GetCasterPlus(), this.GetCasterPlus());
+        let banquet = BaseNpc_Plus.CreateUnitByName("npc_dota_life_stealer_banquet", this.GetCursorPosition(), this.GetCasterPlus(), true);
         if (banquet) {
             let banquet_modifier = banquet.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_life_stealer_feast_banquet", {});
             banquet.AddNewModifier(this.GetCasterPlus(), this, "modifier_kill", {
@@ -293,7 +293,7 @@ export class modifier_imba_life_stealer_feast extends BaseModifier_Plus {
                 }
             }
             this.GetParentPlus().Heal(heal_amount, this.GetAbilityPlus());
-            if (this.GetAbilityPlus() && this.GetAbilityPlus().GetName() == "imba_life_stealer_feast") {
+            if (this.GetAbilityPlus() && this.GetAbilityPlus().GetAbilityName() == "imba_life_stealer_feast") {
                 return heal_amount;
             }
         }
@@ -454,7 +454,7 @@ export class imba_life_stealer_open_wounds extends BaseAbility_Plus {
         }
         this.GetCasterPlus().EmitSound("Hero_LifeStealer.OpenWounds.Cast");
         target.EmitSound("Hero_LifeStealer.OpenWounds");
-        if (this.GetCasterPlus().GetName().includes("life_stealer") && RollPercentage(75)) {
+        if (this.GetCasterPlus().GetUnitName().includes("life_stealer") && RollPercentage(75)) {
             if (!this.responses) {
                 this.responses = {
                     ["life_stealer_lifest_ability_openwound_01"]: 0,
@@ -600,14 +600,14 @@ export class imba_life_stealer_infest extends BaseAbility_Plus {
         }
     }
     GetCastRange(location: Vector, target: CDOTA_BaseNPC | undefined): number {
-        if (!this.GetCasterPlus().HasScepter() || this.GetName() != "imba_life_stealer_infest_723") {
+        if (!this.GetCasterPlus().HasScepter() || this.GetAbilityName() != "imba_life_stealer_infest_723") {
             return super.GetCastRange(location, target);
         } else {
             return this.GetSpecialValueFor("cast_range_scepter");
         }
     }
     GetCooldown(level: number): number {
-        if (!this.GetCasterPlus().HasScepter() || this.GetName() != "imba_life_stealer_infest_723") {
+        if (!this.GetCasterPlus().HasScepter() || this.GetAbilityName() != "imba_life_stealer_infest_723") {
             return super.GetCooldown(level);
         } else {
             return this.GetSpecialValueFor("cooldown_scepter");
@@ -621,7 +621,7 @@ export class imba_life_stealer_infest extends BaseAbility_Plus {
             return;
         }
         this.GetCasterPlus().EmitSound("Hero_LifeStealer.Infest");
-        if (this.GetCasterPlus().GetName().includes("life_stealer") && RollPercentage(75)) {
+        if (this.GetCasterPlus().GetUnitName().includes("life_stealer") && RollPercentage(75)) {
             if (!this.responses) {
                 this.responses = {
                     ["life_stealer_lifest_ability_infest_cast_01"]: 0,
@@ -661,12 +661,12 @@ export class imba_life_stealer_infest extends BaseAbility_Plus {
             infest_modifier.infest_effect_modifier = infest_effect_modifier;
             infest_effect_modifier.infest_modifier = infest_modifier;
         }
-        if (this.GetName() == "imba_life_stealer_infest_723" && (!target.IsRealUnit() || (target.IsRealUnit() && target.GetTeamNumber() == this.GetCasterPlus().GetTeamNumber())) && !target.IsBuilding() && !target.IsOther() && !target.IsRoshan()) {
+        if (this.GetAbilityName() == "imba_life_stealer_infest_723" && (!target.IsRealUnit() || (target.IsRealUnit() && target.GetTeamNumber() == this.GetCasterPlus().GetTeamNumber())) && !target.IsBuilding() && !target.IsOther() && !target.IsRoshan()) {
             target.Heal(this.GetSpecialValueFor("bonus_health"), this);
             SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, this.GetCasterPlus(), this.GetSpecialValueFor("bonus_health"), undefined);
         }
         if (this.GetCasterPlus().GetTeamNumber() == target.GetTeamNumber() && target.IsConsideredHero()) {
-            // PlayerResource.NewSelection(this.GetCasterPlus().GetPlayerID(), target);
+            // PlayerResource.NewSelection(this.GetCasterPlus().GetPlayerOwnerID(), target);
         }
         let rage_ability = this.GetCasterPlus().findAbliityPlus<imba_life_stealer_rage>("imba_life_stealer_rage") || this.GetCasterPlus().FindAbilityByName("imba_life_stealer_rage_723");
         let feast_ability = this.GetCasterPlus().findAbliityPlus<imba_life_stealer_feast>("imba_life_stealer_feast") || this.GetCasterPlus().FindAbilityByName("imba_life_stealer_feast_723");
@@ -695,19 +695,19 @@ export class imba_life_stealer_infest extends BaseAbility_Plus {
             } else {
                 control_ability.SetActivated(false);
             }
-            this.GetCasterPlus().SwapAbilities(ability_to_swap.GetName(), control_ability.GetName(), false, true);
+            this.GetCasterPlus().SwapAbilities(ability_to_swap.GetAbilityName(), control_ability.GetAbilityName(), false, true);
             if (infest_modifier) {
                 infest_modifier.ability_to_swap = ability_to_swap;
             }
-            if (control_ability.IsActivated() && this.GetName() == "imba_life_stealer_infest_723") {
+            if (control_ability.IsActivated() && this.GetAbilityName() == "imba_life_stealer_infest_723") {
                 control_ability.OnSpellStart();
             }
         }
         let consume_ability = this.GetCasterPlus().findAbliityPlus<imba_life_stealer_consume>("imba_life_stealer_consume");
         if (consume_ability) {
-            this.GetCasterPlus().SwapAbilities(this.GetName(), consume_ability.GetName(), false, true);
+            this.GetCasterPlus().SwapAbilities(this.GetAbilityName(), consume_ability.GetAbilityName(), false, true);
         }
-        if (this.GetCasterPlus().HasAbility("imba_life_stealer_rage_723") && this.GetCasterPlus().HasScepter() && this.GetName() == "imba_life_stealer_infest_723" && (!target.IsRealUnit() || (target.IsRealUnit() && target.GetTeamNumber() == this.GetCasterPlus().GetTeamNumber())) && !target.IsBuilding() && !target.IsOther() && !target.IsRoshan()) {
+        if (this.GetCasterPlus().HasAbility("imba_life_stealer_rage_723") && this.GetCasterPlus().HasScepter() && this.GetAbilityName() == "imba_life_stealer_infest_723" && (!target.IsRealUnit() || (target.IsRealUnit() && target.GetTeamNumber() == this.GetCasterPlus().GetTeamNumber())) && !target.IsBuilding() && !target.IsOther() && !target.IsRoshan()) {
             let rage_ability = this.GetCasterPlus().findAbliityPlus("imba_life_stealer_rage_723");
             target.EmitSound("Hero_LifeStealer.Rage");
             target.Purge(false, true, false, false, false);
@@ -753,7 +753,7 @@ export class modifier_imba_life_stealer_infest extends BaseModifier_Plus {
             return;
         }
         if (!this.null_destroy) {
-            // PlayerResource.NewSelection(this.GetCasterPlus().GetPlayerID(), this.GetCasterPlus());
+            // PlayerResource.NewSelection(this.GetCasterPlus().GetPlayerOwnerID(), this.GetCasterPlus());
             this.GetParentPlus().EmitSound("Hero_LifeStealer.Consume");
             let infest_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_life_stealer/life_stealer_infest_emerge_bloody.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetCasterPlus(), this.GetCasterPlus());
             ParticleManager.ReleaseParticleIndex(infest_particle);
@@ -796,14 +796,14 @@ export class modifier_imba_life_stealer_infest extends BaseModifier_Plus {
         }
         let control_ability = this.GetCasterPlus().findAbliityPlus<imba_life_stealer_control>("imba_life_stealer_control");
         if (control_ability && this.ability_to_swap) {
-            this.GetCasterPlus().SwapAbilities(this.ability_to_swap.GetName(), control_ability.GetName(), true, false);
+            this.GetCasterPlus().SwapAbilities(this.ability_to_swap.GetAbilityName(), control_ability.GetAbilityName(), true, false);
             control_ability.SetActivated(false);
         }
         let consume_ability = this.GetCasterPlus().findAbliityPlus<imba_life_stealer_consume>("imba_life_stealer_consume");
         if (consume_ability && this.GetAbilityPlus()) {
-            this.GetCasterPlus().SwapAbilities(this.GetAbilityPlus().GetName(), consume_ability.GetName(), true, false);
+            this.GetCasterPlus().SwapAbilities(this.GetAbilityPlus().GetAbilityName(), consume_ability.GetAbilityName(), true, false);
         }
-        if (this.GetAbilityPlus().GetName() == "imba_life_stealer_infest_723") {
+        if (this.GetAbilityPlus().GetAbilityName() == "imba_life_stealer_infest_723") {
             this.GetAbilityPlus().UseResources(false, false, true);
         }
     }
@@ -1045,7 +1045,7 @@ export class imba_life_stealer_control extends BaseAbility_Plus {
             if (string.find(target.GetUnitName(), "guys_")) {
                 infest_modifier.null_destroy = true;
                 let lane_creep_name = target.GetUnitName();
-                let new_lane_creep = BaseNpc_Plus.CreateUnitByName(target.GetUnitName(), target.GetAbsOrigin(), this.GetCasterPlus().GetTeamNumber(), false, this.GetCasterPlus(), this.GetCasterPlus());
+                let new_lane_creep = BaseNpc_Plus.CreateUnitByName(target.GetUnitName(), target.GetAbsOrigin(), this.GetCasterPlus(), false);
                 new_lane_creep.SetBaseMaxHealth(target.GetMaxHealth());
                 new_lane_creep.SetHealth(target.GetHealth());
                 new_lane_creep.SetBaseDamageMin(target.GetBaseDamageMin());
@@ -1061,7 +1061,7 @@ export class imba_life_stealer_control extends BaseAbility_Plus {
                 }
             }
             target.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_life_stealer_control", {});
-            // PlayerResource.NewSelection(this.GetCasterPlus().GetPlayerID(), target);
+            // PlayerResource.NewSelection(this.GetCasterPlus().GetPlayerOwnerID(), target);
             for (let slot = 0; slot <= 2; slot++) {
                 if (!target.GetAbilityByIndex(slot)) {
                     let empty_ability = target.AddAbility("life_stealer_empty_" + (slot + 1));
@@ -1104,7 +1104,7 @@ export class modifier_imba_life_stealer_control extends BaseModifier_Plus {
         }
         this.GetParentPlus().SetOwner(this.GetCasterPlus());
         this.GetParentPlus().SetTeam(this.GetCasterPlus().GetTeam());
-        this.GetParentPlus().SetControllableByPlayer(this.GetCasterPlus().GetPlayerID(), false);
+        this.GetParentPlus().SetControllableByPlayer(this.GetCasterPlus().GetPlayerOwnerID(), false);
         this.acquisition_range = this.GetParentPlus().GetAcquisitionRange();
         this.acquisition_null_orders = {
             [dotaunitorder_t.DOTA_UNIT_ORDER_MOVE_TO_POSITION]: true,
@@ -1169,7 +1169,7 @@ export class imba_life_stealer_consume extends BaseAbility_Plus {
         }
     }
     OnSpellStart(): void {
-        if (this.GetCasterPlus().GetName().includes("life_stealer")) {
+        if (this.GetCasterPlus().GetUnitName().includes("life_stealer")) {
             this.GetCasterPlus().EmitSound("life_stealer_lifest_ability_infest_burst_01");
         }
         let infest_modifier = this.GetCasterPlus().FindModifierByNameAndCaster("modifier_imba_life_stealer_infest", this.GetCasterPlus()) as modifier_imba_life_stealer_infest;
@@ -1183,12 +1183,12 @@ export class imba_life_stealer_consume extends BaseAbility_Plus {
             if (infest_modifier.infest_effect_modifier) {
                 let infest_effect_modifier_parent = infest_modifier.infest_effect_modifier.GetParentPlus();
                 if (infest_effect_modifier_parent && infest_effect_modifier_parent.IsCreep() && !infest_effect_modifier_parent.IsRoshan() && (infest_effect_modifier_parent.GetTeamNumber() != caster.GetTeamNumber() || infest_effect_modifier_parent.FindModifierByNameAndCaster("modifier_imba_life_stealer_control", caster) || infest_effect_modifier_parent.FindModifierByNameAndCaster("modifier_imba_life_stealer_control", caster.GetOwnerPlus()))) {
-                    if (infest_modifier.GetAbility().GetName() == "imba_life_stealer_infest") {
+                    if (infest_modifier.GetAbility().GetAbilityName() == "imba_life_stealer_infest") {
                         caster.Heal(infest_effect_modifier_parent.GetHealth(), this);
                         SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, caster, infest_effect_modifier_parent.GetHealth(), undefined);
                     }
                     infest_effect_modifier_parent.Kill(this, caster);
-                    if (caster.GetName().includes("life_stealer")) {
+                    if (caster.GetUnitName().includes("life_stealer")) {
                         if (RollPercentage(5)) {
                             let rare_responses = {
                                 "1": "life_stealer_lifest_ability_infest_burst_06",

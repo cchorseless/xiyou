@@ -12,7 +12,7 @@ function ConsumeCheese(parent: IBaseNpc_Plus, item: IBaseItem_Plus) {
         if (!parent.IsClone()) {
             parent.RemoveItem(item);
         } else {
-            if (parent.GetCloneSource && parent.GetCloneSource() && parent.GetCloneSource().HasItemInInventory(item.GetName())) {
+            if (parent.GetCloneSource && parent.GetCloneSource() && parent.GetCloneSource().HasItemInInventory(item.GetAbilityName())) {
                 parent.GetCloneSource().RemoveItem(item);
             }
         }

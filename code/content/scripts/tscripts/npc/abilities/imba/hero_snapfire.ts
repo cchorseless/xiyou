@@ -649,7 +649,7 @@ export class imba_snapfire_mortimer_kisses extends BaseAbility_Plus {
                 let blob_pos = RotatePosition(location, QAngle(0, angle_diff * i, 0), location + (forward * rings_distance) as Vector);
                 let target_pos = GetGroundPosition(blob_pos, undefined);
                 let travel_time = this.GetSpecialValueFor("rings_delay");
-                let thinker = CreateModifierThinker(this.GetCasterPlus(), this, "modifier_imba_snapfire_mortimer_kisses_thinker", {
+                let thinker = BaseModifier_Plus.CreateBuffThinker(this.GetCasterPlus(), this, "modifier_imba_snapfire_mortimer_kisses_thinker", {
                     travel_time: travel_time
                 }, target_pos, this.GetCasterPlus().GetTeamNumber(), false);
                 thinker.TempData().secondary = true;
@@ -805,7 +805,7 @@ export class modifier_imba_snapfire_mortimer_kisses extends BaseModifier_Plus {
         if (kv.travel_time) {
             travel_time = kv.travel_time;
         }
-        let thinker = CreateModifierThinker(this.GetParentPlus(), this.GetAbilityPlus(), "modifier_imba_snapfire_mortimer_kisses_thinker", {
+        let thinker = BaseModifier_Plus.CreateBuffThinker(this.GetParentPlus(), this.GetAbilityPlus(), "modifier_imba_snapfire_mortimer_kisses_thinker", {
             travel_time: travel_time
         }, target_pos, this.GetParentPlus().GetTeamNumber(), false);
         this.blob_count = this.blob_count + 1;
@@ -937,7 +937,7 @@ export class modifier_imba_snapfire_mortimer_kisses_thinker extends BaseModifier
         if (!IsServer()) {
             return;
         }
-        UTIL_Remove(this.GetParentPlus());
+        GFuncEntity.SafeDestroyUnit(this.GetParentPlus());
     }
     IsAura(): boolean {
         return this.start;

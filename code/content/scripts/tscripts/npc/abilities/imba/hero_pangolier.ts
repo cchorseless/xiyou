@@ -1266,15 +1266,13 @@ export class imba_pangolier_gyroshell extends BaseAbility_Plus {
             duration: ability_duration
         });
         EmitSoundOn(loop_sound, caster);
-        caster.SetContextThink("Loop_sound_replay", () => {
+        this.AddTimer(8.6, () => {
             if (caster.HasModifier("modifier_pangolier_gyroshell")) {
                 StopSoundOn(loop_sound, caster);
                 EmitSoundOn(loop_sound, caster);
                 return 8.6;
-            } else {
-                return undefined;
             }
-        }, 8.6);
+        });
         caster.SwapAbilities("imba_pangolier_gyroshell", "imba_pangolier_gyroshell_stop", false, true);
     }
 }

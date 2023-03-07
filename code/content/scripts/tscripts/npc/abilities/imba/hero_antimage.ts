@@ -255,7 +255,7 @@ export class imba_antimage_blink extends BaseAbility_Plus {
                     //  英雄选取
                     // this.AddTimer(FrameTime(),
                     //     () => {
-                    //     PlayerResource.RemoveFromSelection(this.GetCasterPlus().GetPlayerID(), illusion);
+                    //     PlayerResource.RemoveFromSelection(this.GetCasterPlus().GetPlayerOwnerID(), illusion);
                     // });
                 }
             }
@@ -317,7 +317,7 @@ export class modifier_imba_antimage_blink_charges extends BaseModifier_Plus {
     public modifier_charge: any;
     public max_charge_count: number;
     public charge_replenish_rate: any;
-    // public modifier_charge_handler: any;
+    public modifier_charge_handler: modifier_imba_antimage_blink_charges;
     public turned_on: any;
     IsHidden(): boolean {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_antimage_1")) {
@@ -348,18 +348,16 @@ export class modifier_imba_antimage_blink_charges extends BaseModifier_Plus {
             this.SetStackCount(this.max_charge_count);
 
             if (this.caster.IsRealUnit()) {
-                // this.SetStackCount(this.max_charge_count);
+                this.SetStackCount(this.max_charge_count);
             }
             else {
-                // let playerid = this.caster.GetPlayerID();
-                // let real_hero = playerid.GetAssignedHero();
-                // if (hero.HasModifier(this.modifier_charge)) {
-                //     this.modifier_charge_handler = hero.findBuff<modifier_imba_antimage_blink_charges>(this.modifier_charge);
-                //     if (this.modifier_charge_handler) {
-                //         this.SetStackCount(this.modifier_charge_handler.GetStackCount());
-                //         this.SetDuration(this.modifier_charge_handler.GetRemainingTime(), true);
-                //     }
-                // }
+                if (this.caster.HasModifier(this.modifier_charge)) {
+                    this.modifier_charge_handler = this.caster.findBuff<modifier_imba_antimage_blink_charges>(this.modifier_charge);
+                    if (this.modifier_charge_handler) {
+                        this.SetStackCount(this.modifier_charge_handler.GetStackCount());
+                        this.SetDuration(this.modifier_charge_handler.GetRemainingTime(), true);
+                    }
+                }
             }
             this.StartIntervalThink(0.1);
         }
@@ -431,7 +429,7 @@ export class modifier_imba_antimage_blink_charges extends BaseModifier_Plus {
         if (IsServer()) {
             let ability = keys.ability;
             let unit = keys.unit;
-            if (unit == this.caster && ability.GetName() == "item_refresher") {
+            if (unit == this.caster && ability.GetAbilityName() == "item_refresher") {
                 this.SetStackCount(this.max_charge_count);
             }
         }

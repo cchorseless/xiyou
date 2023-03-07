@@ -263,7 +263,7 @@ export class imba_zuus_lightning_bolt extends BaseAbility_Plus {
                 ParticleManager.SetParticleControl(particle, 1, Vector(target_point.x, target_point.y, z_pos));
                 ParticleManager.SetParticleControl(particle, 2, Vector(target_point.x, target_point.y, target_point.z));
             }
-            let dummy_unit = BaseNpc_Plus.CreateUnitByName("npc_dummy_unit", Vector(target_point.x, target_point.y, 0), caster.GetTeam(), false, undefined, undefined);
+            let dummy_unit = BaseNpc_Plus.CreateUnitByName("npc_dummy_unit", Vector(target_point.x, target_point.y, 0), caster, false);
             let true_sight = dummy_unit.AddNewModifier(caster, ability, "modifier_imba_zuus_lightning_true_sight", {
                 duration: sight_duration
             });
@@ -354,7 +354,7 @@ export class modifier_imba_zuus_lightning_true_sight extends BaseModifier_Plus {
         return false;
     }
     GetAuraRadius(): number {
-        if (this.GetParentPlus().GetName() == "npc_dota_creep_neutral") {
+        if (this.GetParentPlus().GetUnitName() == "npc_dota_creep_neutral") {
             return this.GetStackCount();
         } else {
             return 1;
@@ -364,7 +364,7 @@ export class modifier_imba_zuus_lightning_true_sight extends BaseModifier_Plus {
         return "modifier_truesight";
     }
     GetAuraSearchTeam(): DOTA_UNIT_TARGET_TEAM {
-        if (this.GetParentPlus().GetName() == "npc_dota_creep_neutral") {
+        if (this.GetParentPlus().GetUnitName() == "npc_dota_creep_neutral") {
             return DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY;
         } else {
             return DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY;
@@ -570,8 +570,8 @@ export class imba_zuus_cloud extends BaseAbility_Plus {
             let cloud_radius = this.GetSpecialValueFor("cloud_radius");
             EmitSoundOnLocationWithCaster(this.target_point, "Hero_Zuus.Cloud.Cast", caster);
             caster.RemoveModifierByName("modifier_imba_zuus_on_nimbus");
-            this.zuus_nimbus_unit = BaseNpc_Plus.CreateUnitByName("npc_dota_zeus_cloud", Vector(this.target_point.x, this.target_point.y, 450), caster.GetTeam(), false, caster, undefined);
-            this.zuus_nimbus_unit.SetControllableByPlayer(caster.GetPlayerID(), true);
+            this.zuus_nimbus_unit = BaseNpc_Plus.CreateUnitByName("npc_dota_zeus_cloud", Vector(this.target_point.x, this.target_point.y, 450), caster, false);
+            this.zuus_nimbus_unit.SetControllableByPlayer(caster.GetPlayerOwnerID(), true);
             this.zuus_nimbus_unit.SetModelScale(0.7);
             this.zuus_nimbus_unit.AddNewModifier(this.zuus_nimbus_unit, this, "modifier_phased", {});
             this.zuus_nimbus_unit.AddNewModifier(caster, this, "modifier_zuus_nimbus_storm", {
@@ -681,10 +681,10 @@ export class modifier_zuus_nimbus_storm extends BaseModifier_Plus {
                 caster.RemoveModifierByName("modifier_imba_zuus_nimbus_z");
                 FindClearSpaceForUnit(caster, this.GetCasterPlus().GetAbsOrigin(), false);
             }
-            for (const [_, nimbus] of GameFunc.iPair(Entities.FindAllByName("npc_dota_zeus_cloud"))) {
+            for (const [_, nimbus] of GameFunc.iPair(caster.FindChildByName("npc_dota_zeus_cloud"))) {
                 if (nimbus.IsAlive()) {
                     nimbusRemaining = true;
-                    return;
+                    break;
                 }
             }
             if (!nimbusRemaining) {
@@ -743,7 +743,7 @@ export class imba_zuus_nimbus_zap extends BaseAbility_Plus {
             }
             let nimbus_ability = this.GetCasterPlus().findAbliityPlus<imba_zuus_cloud>("imba_zuus_cloud");
             this.nimbus = nimbus_ability.zuus_nimbus_unit;
-            for (const [_, nimbus] of GameFunc.iPair(Entities.FindAllByName("npc_dota_zeus_cloud"))) {
+            for (const [_, nimbus] of GameFunc.iPair(this.GetCasterPlus().FindChildByName("npc_dota_zeus_cloud"))) {
                 if (nimbus.IsAlive() && (target_point - nimbus.GetAbsOrigin() as Vector).Length2D() < distance) {
                     distance = (target_point - nimbus.GetAbsOrigin() as Vector).Length2D();
                     target_loc = nimbus.GetAbsOrigin();

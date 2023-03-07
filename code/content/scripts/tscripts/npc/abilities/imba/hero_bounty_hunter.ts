@@ -107,15 +107,15 @@ export class imba_bounty_hunter_shuriken_toss extends BaseAbility_Plus {
                 let jinada_ability = this.GetCasterPlus().findAbliityPlus<imba_bounty_hunter_jinada>("imba_bounty_hunter_jinada");
                 damage = damage + jinada_ability.GetSpecialValueFor("bonus_damage");
                 this.GetCasterPlus().EmitSound("Hero_BountyHunter.Jinada");
-                if (target.IsRealUnit() && target.GetPlayerID()) {
-                    let actual_gold_to_steal = math.min(jinada_ability.GetTalentSpecialValueFor("bonus_gold"), PlayerResource.GetUnreliableGold(target.GetPlayerID()));
+                if (target.IsRealUnit() && target.GetPlayerOwnerID()) {
+                    let actual_gold_to_steal = math.min(jinada_ability.GetTalentSpecialValueFor("bonus_gold"), PlayerResource.GetUnreliableGold(target.GetPlayerOwnerID()));
                     if (actual_gold_to_steal > 0) {
                         this.money_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_bounty_hunter/bounty_hunter_jinada.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, target);
                         ParticleManager.SetParticleControlEnt(this.money_particle, 1, this.GetCasterPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", this.GetCasterPlus().GetAbsOrigin(), true);
                         ParticleManager.ReleaseParticleIndex(this.money_particle);
                     }
                     // target.ModifyGold(-actual_gold_to_steal, false, EDOTA_ModifyGold_Reason.DOTA_ModifyGold_Unspecified);
-                    let playerid = this.GetCasterPlus().GetPlayerID()
+                    let playerid = this.GetCasterPlus().GetPlayerOwnerID()
                     let playerroot = GGameScene.GetPlayer(playerid);
                     playerroot.PlayerDataComp().ModifyGold(actual_gold_to_steal, false, EDOTA_ModifyGold_Reason.DOTA_ModifyGold_Unspecified);
                     SendOverheadEventMessage(PlayerResource.GetPlayer(playerid), DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_GOLD, this.GetCasterPlus(), actual_gold_to_steal, undefined);
@@ -493,15 +493,15 @@ export class modifier_imba_jinada_buff_crit extends BaseModifier_Plus {
                 if (this.ability.IsCooldownReady()) {
                     this.ability.UseResources(false, false, true);
                 }
-                if (target.IsRealUnit() && target.GetPlayerID()) {
-                    let actual_gold_to_steal = math.min(this.GetAbilityPlus().GetTalentSpecialValueFor("bonus_gold"), PlayerResource.GetUnreliableGold(target.GetPlayerID()));
+                if (target.IsRealUnit() && target.GetPlayerOwnerID()) {
+                    let actual_gold_to_steal = math.min(this.GetAbilityPlus().GetTalentSpecialValueFor("bonus_gold"), PlayerResource.GetUnreliableGold(target.GetPlayerOwnerID()));
                     if (actual_gold_to_steal > 0) {
                         this.money_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_bounty_hunter/bounty_hunter_jinada.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, target);
                         ParticleManager.SetParticleControlEnt(this.money_particle, 1, this.parent, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", this.parent.GetAbsOrigin(), true);
                         ParticleManager.ReleaseParticleIndex(this.money_particle);
                     }
                     // target.ModifyGold(-actual_gold_to_steal, false, EDOTA_ModifyGold_Reason.DOTA_ModifyGold_Unspecified);
-                    let playerroot = GGameScene.GetPlayer(attacker.GetPlayerID());
+                    let playerroot = GGameScene.GetPlayer(attacker.GetPlayerOwnerID());
                     playerroot.PlayerDataComp().ModifyGold(actual_gold_to_steal, false, EDOTA_ModifyGold_Reason.DOTA_ModifyGold_Unspecified);
                     SendOverheadEventMessage(PlayerResource.GetPlayer(playerroot.BelongPlayerid), DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_GOLD, attacker, actual_gold_to_steal, undefined);
                     if (this.GetCasterPlus().HasModifier("modifier_imba_jinada_gold_tracker")) {
@@ -678,7 +678,7 @@ export class modifier_imba_shadow_walk_buff_invis extends BaseModifier_Plus {
             let ability = keys.ability;
             let caster = keys.unit;
             if (caster == this.caster) {
-                if (ability.GetName() == "imba_bounty_hunter_jinada" || ability.GetName() == "imba_bounty_hunter_track") {
+                if (ability.GetAbilityName() == "imba_bounty_hunter_jinada" || ability.GetAbilityName() == "imba_bounty_hunter_track") {
                     return undefined;
                 }
                 this.Destroy();
@@ -933,7 +933,7 @@ export class modifier_imba_track_debuff_mark extends BaseModifier_Plus {
                 //     this.Destroy();
                 //     return undefined;
                 // }
-                let playerroot = GGameScene.GetPlayer(this.caster.GetPlayerID());
+                let playerroot = GGameScene.GetPlayer(this.caster.GetPlayerOwnerID());
                 playerroot.PlayerDataComp().ModifyGold(this.bonus_gold_self, true, EDOTA_ModifyGold_Reason.DOTA_ModifyGold_Unspecified);
                 SendOverheadEventMessage(PlayerResource.GetPlayer(playerroot.BelongPlayerid), DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_GOLD, this.caster, this.bonus_gold_self, undefined);
                 let allies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.parent.GetAbsOrigin(), undefined, this.haste_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FindOrder.FIND_ANY_ORDER, false);
@@ -1160,7 +1160,7 @@ export class modifier_imba_headhunter_debuff_handler extends BaseModifier_Plus {
             }
             let heroes = FindUnitsInRadius(this.parent.GetTeamNumber(), this.parent.GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_ANY_ORDER, false);
             for (const [_, hero] of GameFunc.iPair(heroes)) {
-                if (this.parent.GetPlayerID() == hero.GetPlayerOwnerID() && this.parent.GetUnitName() == hero.GetUnitName() && hero.IsIllusion()) {
+                if (this.parent.GetPlayerOwnerID() == hero.GetPlayerOwnerID() && this.parent.GetUnitName() == hero.GetUnitName() && hero.IsIllusion()) {
                     hero.AddNewModifier(this.caster, this.ability, this.modifier_dummy, {
                         duration: this.GetRemainingTime()
                     });
@@ -1206,7 +1206,7 @@ export class modifier_imba_headhunter_debuff_handler extends BaseModifier_Plus {
                         this.contract_gold = this.gold_minimum;
                     }
                     this.contract_gold = this.contract_gold * this.contract_gold_mult;
-                    let playerroot = GGameScene.GetPlayer(this.caster.GetPlayerID());
+                    let playerroot = GGameScene.GetPlayer(this.caster.GetPlayerOwnerID());
                     playerroot.PlayerDataComp().ModifyGold(this.contract_gold, true, EDOTA_ModifyGold_Reason.DOTA_ModifyGold_Unspecified);
                     SendOverheadEventMessage(PlayerResource.GetPlayer(playerroot.BelongPlayerid), DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_GOLD, this.caster, this.contract_gold, undefined);
                     if (this.caster.HasModifier(this.modifier_contract_buff)) {

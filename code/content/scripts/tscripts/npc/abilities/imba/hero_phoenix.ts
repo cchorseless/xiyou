@@ -91,7 +91,7 @@ export class imba_phoenix_icarus_dive extends BaseAbility_Plus {
         let ellipseCenter = casterOrigin + forwardDir * (dashLength / 2);
         let startTime = GameRules.GetGameTime();
         let pfx = ResHelper.CreateParticleEx("particles/units/heroes/hero_phoenix/phoenix_icarus_dive.vpcf", ParticleAttachment_t.PATTACH_WORLDORIGIN, undefined);
-        caster.SetContextThink(DoUniqueString("updateIcarusDive"), () => {
+        this.AddTimer(0, () => {
             ParticleManager.SetParticleControl(pfx, 0, caster.GetAbsOrigin() + caster.GetRightVector() * 32 as Vector);
             let elapsedTime = GameRules.GetGameTime() - startTime;
             let progress = elapsedTime / dashDuration;
@@ -135,7 +135,7 @@ export class imba_phoenix_icarus_dive extends BaseAbility_Plus {
                 }
             }
             return 0.03;
-        }, 0);
+        });
         this.healthCost = caster.GetHealth() * hpCost / 100;
         if (caster.HasModifier("modifier_imba_phoenix_burning_wings_buff")) {
             caster.Heal(this.healthCost, this);
@@ -259,13 +259,13 @@ export class modifier_imba_phoenix_icarus_dive_dash_dummy extends BaseModifier_P
         StopSoundOn("Hero_Phoenix.IcarusDive.Cast", caster);
         EmitSoundOn("Hero_Phoenix.IcarusDive.Stop", caster);
         caster.RemoveGesture(GameActivity_t.ACT_DOTA_OVERRIDE_ABILITY_1);
-        caster.SetContextThink(DoUniqueString("waitToFindClearSpace"), () => {
+        this.AddTimer(0, () => {
             if (!caster.HasModifier("modifier_naga_siren_song_of_the_siren")) {
                 FindClearSpaceForUnit(caster, point, false);
-                return undefined;
+                return;
             }
             return 0.1;
-        }, 0);
+        });
     }
 }
 @registerModifier()
@@ -690,7 +690,7 @@ export class imba_phoenix_launch_fire_spirit extends BaseAbility_Plus {
             }
         }
         let direction = (point - caster.GetAbsOrigin() as Vector).Normalized();
-        let DummyUnit = BaseNpc_Plus.CreateUnitByName("npc_dummy_unit", point, caster.GetTeamNumber(), false, caster, caster.GetOwnerPlus());
+        let DummyUnit = BaseNpc_Plus.CreateUnitByName("npc_dummy_unit", point, caster, false);
         DummyUnit.AddNewModifier(caster, this, "modifier_kill", {
             duration: 0.1
         });
@@ -743,7 +743,7 @@ export class imba_phoenix_launch_fire_spirit extends BaseAbility_Plus {
         if (hTarget) {
             location = hTarget.GetAbsOrigin();
         }
-        let DummyUnit = BaseNpc_Plus.CreateUnitByName("npc_dummy_unit", location, caster.GetTeamNumber(), false, caster, caster.GetOwnerPlus());
+        let DummyUnit = BaseNpc_Plus.CreateUnitByName("npc_dummy_unit", location, caster, false);
         DummyUnit.AddNewModifier(caster, this, "modifier_kill", {
             duration: 0.1
         });
@@ -976,7 +976,7 @@ export class imba_phoenix_sun_ray extends BaseAbility_Plus {
     OnUnStolen(): void {
         if (this.GetCasterPlus().HasAbility("imba_phoenix_sun_ray_stop")) {
             if (!this.GetCasterPlus().findAbliityPlus<imba_phoenix_sun_ray_stop>("imba_phoenix_sun_ray_stop").IsHidden()) {
-                this.GetCasterPlus().SwapAbilities(this.GetName(), "imba_phoenix_sun_ray_stop", true, false);
+                this.GetCasterPlus().SwapAbilities(this.GetAbilityName(), "imba_phoenix_sun_ray_stop", true, false);
             }
             this.GetCasterPlus().RemoveAbility("imba_phoenix_sun_ray_stop");
             this.GetCasterPlus().RemoveModifierByName("modifier_imba_phoenix_sun_ray_caster_dummy");
@@ -1024,7 +1024,7 @@ export class imba_phoenix_sun_ray extends BaseAbility_Plus {
         let lastAngles = caster.GetAngles();
         let isInitialTurn = true;
         let elapsedTime = 0.0;
-        caster.SetContextThink(DoUniqueString("updateSunRay"), () => {
+        this.AddTimer(0, () => {
             if (this.GetCasterPlus().HasModifier("modifier_mars_arena_of_blood_leash") && this.GetCasterPlus().findBuff("modifier_mars_arena_of_blood_leash").GetAuraOwner() && (this.GetCasterPlus().GetAbsOrigin() - this.GetCasterPlus().FindModifierByName("modifier_mars_arena_of_blood_leash").GetAuraOwner().GetAbsOrigin() as Vector).Length2D() >= this.GetCasterPlus().FindModifierByName("modifier_mars_arena_of_blood_leash").GetSpecialValueFor("radius") - this.GetCasterPlus().FindModifierByName("modifier_mars_arena_of_blood_leash").GetSpecialValueFor("width")) {
                 this.GetCasterPlus().RemoveModifierByName("modifier_imba_phoenix_sun_ray_caster_dummy");
             }
@@ -1086,7 +1086,7 @@ export class imba_phoenix_sun_ray extends BaseAbility_Plus {
                 AddFOWViewer(caster.GetTeamNumber(), (casterOrigin + casterForward * (vision_radius * 2 * (i - 1)) as Vector), vision_radius, deltaTime, false);
             }
             return deltaTime;
-        }, 0.0);
+        });
     }
     OnUpgrade(): void {
         if (!IsServer()) {
@@ -1224,13 +1224,13 @@ export class modifier_imba_phoenix_sun_ray_caster_dummy extends BaseModifier_Plu
         let main_ability_name = "imba_phoenix_sun_ray_stop";
         let sub_ability_name = "imba_phoenix_sun_ray";
         caster.SwapAbilities(main_ability_name, sub_ability_name, false, true);
-        caster.SetContextThink(DoUniqueString("waitToFindClearSpace"), () => {
+        this.AddTimer(0, () => {
             if (!caster.HasModifier("modifier_naga_siren_song_of_the_siren")) {
                 FindClearSpaceForUnit(caster, caster.GetAbsOrigin(), false);
-                return undefined;
+                return;
             }
             return 0.1;
-        }, 0);
+        });
     }
 }
 @registerModifier()
@@ -1632,7 +1632,7 @@ export class imba_phoenix_supernova extends BaseAbility_Plus {
             duration: egg_duration
         });
         caster.AddNoDraw();
-        let egg = BaseNpc_Plus.CreateUnitByName("npc_dota_phoenix_sun", ground_location, caster.GetTeamNumber(), false, caster, caster.GetOwnerPlus());
+        let egg = BaseNpc_Plus.CreateUnitByName("npc_dota_phoenix_sun", ground_location, caster, false);
         egg.AddNewModifier(caster, ability, "modifier_kill", {
             duration: egg_duration
         });
@@ -1771,7 +1771,7 @@ export class modifier_imba_phoenix_supernova_caster_dummy extends BaseModifier_P
         if (this.GetCasterPlus() == this.GetParentPlus()) {
             for (let slot = 0; slot <= 10; slot++) {
                 let ability = this.GetParentPlus().GetAbilityByIndex(slot);
-                if (ability && ability.IsActivated() && (!this.GetParentPlus().HasScepter() || (this.GetParentPlus().HasScepter() && ability.GetName() != "imba_phoenix_sun_ray"))) {
+                if (ability && ability.IsActivated() && (!this.GetParentPlus().HasScepter() || (this.GetParentPlus().HasScepter() && ability.GetAbilityName() != "imba_phoenix_sun_ray"))) {
                     ability.SetActivated(false);
                     this.abilities.push(ability as IBaseAbility_Plus);
                 }
@@ -1901,7 +1901,7 @@ export class modifier_imba_phoenix_supernova_bird_thinker extends BaseModifier_P
         if (hTarget) {
             location = hTarget.GetAbsOrigin();
         }
-        let DummyUnit = BaseNpc_Plus.CreateUnitByName("npc_dummy_unit", location, caster.GetTeamNumber(), false, caster, caster.GetOwnerPlus());
+        let DummyUnit = BaseNpc_Plus.CreateUnitByName("npc_dummy_unit", location, caster, false);
         DummyUnit.AddNewModifier(caster, ability, "modifier_kill", {
             duration: 0.1
         });
@@ -2328,7 +2328,7 @@ export class modifier_imba_phoenix_supernova_scepter_passive extends BaseModifie
                 duration: egg_duration + extend_duration
             });
             caster.AddNoDraw();
-            let egg = BaseNpc_Plus.CreateUnitByName("npc_dota_phoenix_sun", location, caster.GetTeamNumber(), false, caster, caster.GetOwnerPlus());
+            let egg = BaseNpc_Plus.CreateUnitByName("npc_dota_phoenix_sun", location, caster, false);
             egg.AddNewModifier(caster, ability, "modifier_kill", {
                 duration: egg_duration + extend_duration
             });
@@ -2344,7 +2344,7 @@ export class modifier_imba_phoenix_supernova_scepter_passive extends BaseModifie
             for (let i = 0; i <= 5; i++) {
                 let aghs = caster.GetItemInSlot(i);
                 if (aghs != undefined) {
-                    if (aghs.GetName() == 'item_ultimate_scepter') {
+                    if (aghs.GetAbilityName() == 'item_ultimate_scepter') {
                         aghs.StartCooldown(scepter_cooldown + egg_duration + extend_duration);
                     }
                 }

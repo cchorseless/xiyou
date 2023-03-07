@@ -4,7 +4,6 @@
 #base  "building/building_unit_tower.kv"
 #base  "building/building_unit_summoned.kv"
 #base  "units/common_units.kv"
-#base  "units/imba_units.kv"
 "DOTAUnits" {
 
 }

@@ -21,7 +21,7 @@ export class item_imba_aether_specs extends BaseItem_Plus {
         return this.GetSpecialValueFor("radius");
     }
     OnSpellStart(): void {
-        let ward = BaseNpc_Plus.CreateUnitByName("npc_dota_aether_spec_ward", this.GetCursorPosition(), this.GetCasterPlus().GetTeamNumber(), false, this.GetCasterPlus(), this.GetCasterPlus());
+        let ward = BaseNpc_Plus.CreateUnitByName("npc_dota_aether_spec_ward", this.GetCursorPosition(), this.GetCasterPlus(), false);
         ward.AddNewModifier(this.GetCasterPlus(), this, "modifier_item_buff_ward", {
             duration: this.GetSpecialValueFor("ward_duration")
         });

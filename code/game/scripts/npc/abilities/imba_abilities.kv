@@ -2147,6 +2147,7 @@
 		"AbilityCastPoint" "0.4"
 		"AbilityCastRange" "625"
 		"AbilityCooldown" "120 110 100"
+		"AbilityChannelTime" "6.0 6.0 6.0"
 		"AbilityManaCost" "200 300 400"
 		"AbilitySpecial" {
 			"01" {
@@ -3707,6 +3708,7 @@
 		"SpellDispellableType" "SPELL_DISPELLABLE_NO"
 		"AbilityCastPoint" "0.3"
 		"AbilityCooldown" "8"
+		"AbilityChannelTime" "3.0"
 		"AbilityManaCost" "0"
 
 	}
@@ -9680,6 +9682,7 @@
 		"AbilityCastPoint" "0.3 0.3 0.3 0.3"
 		"AbilityCastRange" "1800 1800 1800 1800"
 		"AbilityCooldown" "11"
+		"AbilityChannelTime" "2.0 2.7 3.4 4.1"
 		"AbilityManaCost" "150 160 170 180"
 		"AbilitySpecial" {
 			"10" {
@@ -14045,6 +14048,7 @@
 		"AbilityCastPoint" "0"
 		"AbilityCastRange" "850"
 		"AbilityCooldown" "15 12 9 6"
+		"AbilityChannelTime" "2.5"
 		"AbilityManaCost" "100"
 		"AbilitySpecial" {
 			"10" {
@@ -15940,6 +15944,7 @@
 		"AbilityCastPoint" "0.3"
 		"AbilityCastRange" "400"
 		"AbilityCooldown" "21 18 15 12"
+		"AbilityChannelTime" "2.0"
 		"AbilityManaCost" "50"
 		"AbilitySpecial" {
 			"10" {
@@ -18084,6 +18089,7 @@
 		"AbilityCastPoint" "0.3 0.3 0.3 0.3"
 		"AbilityCastRange" "400 400 400 400"
 		"AbilityCooldown" "16 14 12 10"
+		"AbilityChannelTime" "2.75 3.5 4.25 5.0"
 		"AbilityManaCost" "140 150 160 170"
 		"AbilitySpecial" {
 			"10" {
@@ -18389,6 +18395,7 @@
 		"AbilityCastRange" "800"
 		"AbilityDuration" "0.0"
 		"AbilityCooldown" "13.0 12.0 11.0 10.0"
+		"AbilityChannelTime" "0"
 		"AbilityManaCost" "80 90 100 110"
 		"AbilitySpecial" {
 			"10" {
@@ -18563,6 +18570,7 @@
 		"AbilityCastRange" "800"
 		"AbilityDuration" "8"
 		"AbilityCooldown" "24 20 16 12"
+		"AbilityChannelTime" "0"
 		"AbilityManaCost" "90"
 		"AbilitySpecial" {
 			"10" {
@@ -20696,6 +20704,7 @@
 		"AbilityCastAnimation" "ACT_DOTA_CAST_ABILITY_2"
 		"AbilityCastPoint" "0.2"
 		"AbilityCooldown" "15"
+		"AbilityChannelTime" "1.0"
 		"AbilityManaCost" "100"
 		"AbilitySpecial" {
 			"10" {
@@ -22056,6 +22065,7 @@
 		"FightRecapLevel" "1"
 		"AbilityCastPoint" "0.53"
 		"AbilityCooldown" "0"
+		"AbilityChannelTime" "3.0 1.5 0.75"
 		"AbilityManaCost" "100 200 300"
 		"AbilitySpecial" {
 			"10" {
@@ -24302,6 +24312,7 @@
 		"AbilityType" "DOTA_ABILITY_TYPE_ULTIMATE"
 		"AbilityCastPoint" "0.2"
 		"AbilityCastRange" "960 1200 1440"
+		"AbilityChannelTime" "0.8"
 		"AbilityManaCost" "100"
 		"AbilitySpecial" {
 			"01" {
@@ -24362,6 +24373,7 @@
 		"AbilityCastPoint" "0.0"
 		"AbilityCastRange" "1100"
 		"AbilityCooldown" "100"
+		"AbilityChannelTime" "1.5"
 		"AbilityManaCost" "700"
 		"AbilitySpecial" {
 			"01" {
@@ -24870,6 +24882,7 @@
 		"AbilityCastPoint" "0.0"
 		"AbilityCastRange" "2600 2600 2600 2600"
 		"AbilityCooldown" "12 11.0 10.0 9.0"
+		"AbilityChannelTime" "1.0 1.0 1.0 1.0"
 		"AbilityManaCost" "90 100 110 120"
 		"AbilitySpecial" {
 			"10" {
@@ -27969,8 +27982,11 @@
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AURA"
 		"AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
 		"AbilitySpecial" {
+			"10" {
+				"var_type" "FIELD_INTEGER"
+				"proximity_bonus_radius" "1200"
 
-		
+			}
 			"01" {
 				"var_type" "FIELD_FLOAT"
 				"mana_regen" "0.5 1.0 1.5 2.0"
@@ -28016,11 +28032,7 @@
 				"proximity_bonus_factor" "2"
 
 			}
-			"10" {
-				"var_type" "FIELD_INTEGER"
-				"proximity_bonus_radius" "1200"
 
-			}
 		}
 
 	}
@@ -28039,6 +28051,7 @@
 		"AbilityCastRange" "810"
 		"AbilityDuration" "10.0"
 		"AbilityCooldown" "110.0 100.0 90.0"
+		"AbilityChannelTime" "10.0"
 		"AbilityManaCost" "200 400 600"
 		"AbilitySpecial" {
 			"10" {
@@ -30280,6 +30293,7 @@
 		"SpellImmunityType" "SPELL_IMMUNITY_ENEMIES_YES"
 		"FightRecapLevel" "2"
 		"AbilityCastAnimation" "ACT_DOTA_CAST_ABILITY_4"
+		"AbilityChannelTime" "4.0"
 		"AbilitySpecial" {
 			"10" {
 				"var_type" "FIELD_FLOAT"
@@ -33299,6 +33313,7 @@
 		"AbilityCastPoint" "0.3"
 		"AbilityCastRange" "850"
 		"AbilityCooldown" "16 12 8 4"
+		"AbilityChannelTime" "5"
 		"AbilityManaCost" "10"
 		"AbilitySpecial" {
 			"10" {
@@ -39079,6 +39094,7 @@
 		"FightRecapLevel" "1"
 		"AbilityCastRange" "525 560 595 630"
 		"AbilityCooldown" "36 18 10 6"
+		"AbilityChannelTime" "50"
 		"AbilityManaCost" "60 40 20 0"
 		"AbilitySpecial" {
 			"10" {
@@ -41929,6 +41945,7 @@
 		"AbilityCastPoint" "0.5"
 		"AbilityCastRange" "1200"
 		"AbilityCooldown" "50 46 42 38"
+		"AbilityChannelTime" "16"
 		"AbilityManaCost" "70 90 110 130"
 		"AbilitySpecial" {
 			"10" {
@@ -42589,6 +42606,7 @@
 		"AbilityCastPoint" "0.35"
 		"AbilityCastRange" "600"
 		"AbilityCooldown" "80"
+		"AbilityChannelTime" "8"
 		"AbilityManaCost" "200"
 		"AbilitySpecial" {
 			"10" {
@@ -45506,6 +45524,7 @@
 		"AbilityCastAnimation" "ACT_DOTA_CHANNEL_ABILITY_3"
 		"AbilityCastPoint" "0.0"
 		"AbilityCooldown" "26 24 22 20"
+		"AbilityChannelTime" "1.75"
 		"AbilityManaCost" "50 60 70 80"
 		"AbilitySpecial" {
 			"10" {
@@ -53018,6 +53037,7 @@
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
 		"AbilityCastPoint" "0.0"
 		"AbilityCooldown" "0"
+		"AbilityChannelTime" "3.0"
 		"AbilityManaCost" "0"
 		"AbilitySpecial" {
 			"01" {
@@ -53037,6 +53057,7 @@
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
 		"AbilityCastPoint" "0.0"
 		"AbilityCooldown" "0"
+		"AbilityChannelTime" "3.0"
 		"AbilityManaCost" "0"
 		"AbilitySpecial" {
 			"01" {
@@ -53056,6 +53077,7 @@
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
 		"AbilityCastPoint" "0.0"
 		"AbilityCooldown" "0"
+		"AbilityChannelTime" "3.0"
 		"AbilityManaCost" "0"
 		"AbilitySpecial" {
 			"01" {
@@ -53075,6 +53097,7 @@
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
 		"AbilityCastPoint" "0.0"
 		"AbilityCooldown" "0"
+		"AbilityChannelTime" "3.0"
 		"AbilityManaCost" "0"
 		"AbilitySpecial" {
 			"01" {
@@ -53094,6 +53117,7 @@
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
 		"AbilityCastPoint" "0.0"
 		"AbilityCooldown" "0"
+		"AbilityChannelTime" "3.0"
 		"AbilityManaCost" "0"
 		"AbilitySpecial" {
 			"01" {
@@ -53113,6 +53137,7 @@
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
 		"AbilityCastPoint" "0.0"
 		"AbilityCooldown" "0"
+		"AbilityChannelTime" "3.0"
 		"AbilityManaCost" "0"
 		"AbilitySpecial" {
 			"01" {

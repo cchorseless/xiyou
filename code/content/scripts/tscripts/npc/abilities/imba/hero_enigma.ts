@@ -39,15 +39,15 @@ function SearchForEngimaThinker(caster: IBaseNpc_Plus, victim: IBaseNpc_Plus, le
         for (const [_, thinker] of GameFunc.iPair(Thinkers)) {
             if (thinker.FindModifierByNameAndCaster("modifier_imba_enigma_malefice", caster) && thinker != victim) {
                 hThinker = thinker;
-                return;
+                break;
             }
         }
     }
-    let allthinker = Entities.FindAllByName("npc_dota_thinker") as IBaseNpc_Plus[];
+    let allthinker = caster.FindChildByBuffName("modifier_imba_enigma_midnight_pulse_thinker") as IBaseNpc_Plus[];
     for (const [_, ent] of GameFunc.iPair(allthinker)) {
         if (ent.TempData().midnight) {
             hThinker = ent;
-            return;
+            break;
         }
     }
     if (Black_Hole.thinker && !Black_Hole.thinker.IsNull()) {
@@ -172,7 +172,7 @@ export class modifier_special_bonus_imba_enigma_7 extends BaseModifier_Plus {
     } */
     @registerEvent(Enum_MODIFIER_EVENT.ON_ABILITY_FULLY_CAST)
     CC_OnAbilityFullyCast(keys: ModifierAbilityEvent): void {
-        if (keys.unit == this.GetParentPlus() && !keys.ability.IsItem() && !keys.ability.IsToggle() && keys.ability.GetName() != "ability_capture") {
+        if (keys.unit == this.GetParentPlus() && !keys.ability.IsItem() && !keys.ability.IsToggle() && keys.ability.GetAbilityName() != "ability_capture") {
             this.SetTalentSpellImmunity(this.GetParentPlus());
         }
     }
@@ -343,12 +343,12 @@ export class imba_enigma_demonic_conversion extends BaseAbility_Plus {
     CreateEidolon(hParent: IBaseNpc_Plus, vLocation: Vector, iWave: number, fDuration: number) {
         let caster = this.GetCasterPlus();
         hParent = hParent || caster;
-        let eidolon = BaseNpc_Plus.CreateUnitByName("npc_imba_enigma_eidolon_" + math.min(4, this.GetLevel()), vLocation, caster.GetTeamNumber(), true, caster, caster);
+        let eidolon = BaseNpc_Plus.CreateUnitByName("npc_imba_enigma_eidolon_" + math.min(4, this.GetLevel()), vLocation, caster, true);
         eidolon.AddNewModifier(caster, this, "modifier_kill", {
             duration: fDuration
         });
         eidolon.SetOwner(caster);
-        eidolon.SetControllableByPlayer(caster.GetPlayerID(), true);
+        eidolon.SetControllableByPlayer(caster.GetPlayerOwnerID(), true);
         eidolon.SetUnitOnClearGround();
         let attacks_needed = this.GetSpecialValueFor("split_attack_count") + this.GetSpecialValueFor("additional_attacks_split") * (iWave - 1);
         eidolon.AddNewModifier(caster, this, "modifier_imba_enigma_eidolon", {
@@ -558,7 +558,7 @@ export class imba_enigma_midnight_pulse extends BaseAbility_Plus {
         let radius = this.GetSpecialValueFor("radius");
         EmitSoundOnLocationWithCaster(point, "Hero_Enigma.Midnight_Pulse", caster);
         GridNav.DestroyTreesAroundPoint(point, radius, false);
-        CreateModifierThinker(caster, this, "modifier_imba_enigma_midnight_pulse_thinker", {
+        BaseModifier_Plus.CreateBuffThinker(caster, this, "modifier_imba_enigma_midnight_pulse_thinker", {
             duration: duration
         }, point, caster.GetTeamNumber(), false);
     }
@@ -707,7 +707,7 @@ export class imba_enigma_black_hole extends BaseAbility_Plus {
         this.radius = base_radius + extra_radius * caster.findBuff<modifier_imba_singularity>("modifier_imba_singularity").GetStackCount();
         this.pull_radius = base_pull_radius + extra_pull_radius * caster.findBuff<modifier_imba_singularity>("modifier_imba_singularity").GetStackCount();
         let duration = this.GetSpecialValueFor("duration");
-        this.thinker = CreateModifierThinker(caster, this, "modifier_imba_enigma_black_hole_thinker", {
+        this.thinker = BaseModifier_Plus.CreateBuffThinker(caster, this, "modifier_imba_enigma_black_hole_thinker", {
             duration: duration
         }, pos, caster.GetTeamNumber(), false);
     }
@@ -791,11 +791,10 @@ export class modifier_imba_enigma_black_hole_thinker extends BaseModifier_Plus {
         EmitSoundOn("Hero_Enigma.Black_Hole", this.GetParentPlus());
         EmitSoundOn("Hero_Enigma.BlackHole.Cast", this.GetParentPlus());
         let dummy = this.GetParentPlus();
-        this.GetParentPlus().SetContextThink(DoUniqueString("StopBHsound"), () => {
+        GTimerHelper.AddTimer(4.0, GHandler.create({}, () => {
             StopSoundOn("Hero_Enigma.Black_Hole", dummy);
             StopSoundOn("Hero_Enigma.BlackHole.Cast", dummy);
-            return undefined;
-        }, 4.0);
+        }));
         let actual_vision = this.radius;
         if (this.GetCasterPlus().HasShard()) {
             actual_vision = this.pull_radius;
@@ -1100,7 +1099,7 @@ export class modifier_imba_singularity extends BaseModifier_Plus {
             ability.radius = base_radius + extra_radius * keys.unit.findBuff<modifier_imba_singularity>("modifier_imba_singularity").GetStackCount();
             ability.pull_radius = base_pull_radius + extra_pull_radius * keys.unit.findBuff<modifier_imba_singularity>("modifier_imba_singularity").GetStackCount();
             this.AddTimer(FrameTime(), () => {
-                ability.thinker = CreateModifierThinker(keys.unit, ability, "modifier_imba_enigma_black_hole_thinker", {
+                ability.thinker = BaseModifier_Plus.CreateBuffThinker(keys.unit, ability, "modifier_imba_enigma_black_hole_thinker", {
                     duration: duration,
                     talent: 1
                 }, keys.unit.GetAbsOrigin(), keys.unit.GetTeamNumber(), false);

@@ -36,7 +36,7 @@ export class imba_spirit_breaker_charge_of_darkness extends BaseAbility_Plus {
         }
         this.GetCasterPlus().Interrupt();
         this.GetCasterPlus().EmitSound("Hero_Spirit_Breaker.ChargeOfDarkness");
-        if (this.GetCasterPlus().GetName().includes("spirit_breaker") && RollPercentage(10)) {
+        if (this.GetCasterPlus().GetUnitName().includes("spirit_breaker") && RollPercentage(10)) {
             let responses = {
                 "1": "spirit_breaker_spir_ability_charge_02",
                 "2": "spirit_breaker_spir_ability_charge_14",
@@ -550,7 +550,7 @@ export class imba_spirit_breaker_bulldoze extends BaseAbility_Plus {
     }
     OnSpellStart(): void {
         this.GetCasterPlus().EmitSound("Hero_Spirit_Breaker.Bulldoze.Cast");
-        if (this.GetCasterPlus().GetName().includes("spirit_breaker") && RollPercentage(50)) {
+        if (this.GetCasterPlus().GetUnitName().includes("spirit_breaker") && RollPercentage(50)) {
             let responses = {
                 "1": "spirit_breaker_spir_ability_charge_03",
                 "2": "spirit_breaker_spir_ability_charge_05",

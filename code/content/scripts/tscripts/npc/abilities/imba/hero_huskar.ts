@@ -42,7 +42,7 @@ export class imba_huskar_inner_fire extends BaseAbility_Plus {
                 duration: disarm_duration * (1 - enemy.GetStatusResistance())
             });
         }
-        CreateModifierThinker(this.GetCasterPlus(), this, "modifier_imba_huskar_inner_fire_raze_land_aura", {
+        BaseModifier_Plus.CreateBuffThinker(this.GetCasterPlus(), this, "modifier_imba_huskar_inner_fire_raze_land_aura", {
             duration: raze_land_duration
         }, this.GetCasterPlus().GetAbsOrigin(), this.GetCasterPlus().GetTeamNumber(), false);
     }
@@ -677,7 +677,7 @@ export class modifier_imba_huskar_life_break extends BaseModifierMotionHorizonta
             if (this.target.TriggerSpellAbsorb(this.ability)) {
                 return undefined;
             }
-            if (this.parent.GetName().includes("huskar")) {
+            if (this.parent.GetUnitName().includes("huskar")) {
                 this.parent.StartGesture(GameActivity_t.ACT_DOTA_CAST_LIFE_BREAK_END);
             }
             this.target.EmitSound("Hero_Huskar.Life_Break.Impact");
@@ -723,7 +723,7 @@ export class modifier_imba_huskar_life_break extends BaseModifierMotionHorizonta
                 }
             }
             let random_angle = RandomInt(0, 359);
-            CreateModifierThinker(this.parent, this.ability, "modifier_imba_huskar_life_break_sac_dagger", {
+            BaseModifier_Plus.CreateBuffThinker(this.parent, this.ability, "modifier_imba_huskar_life_break_sac_dagger", {
                 duration: this.sac_dagger_duration,
                 random_angle: random_angle,
                 distance: this.sac_dagger_distance,
@@ -777,7 +777,7 @@ export class modifier_imba_huskar_life_break_charge extends BaseModifier_Plus {
     }
     BeCreated(p_0: any,): void {
         if (IsServer()) {
-            // if (BATTLEPASS_HUSKAR && Battlepass.GetRewardUnlocked(this.GetParentPlus().GetPlayerID()) >= BATTLEPASS_HUSKAR["huskar_immortal"]) {
+            // if (BATTLEPASS_HUSKAR && Battlepass.GetRewardUnlocked(this.GetParentPlus().GetPlayerOwnerID()) >= BATTLEPASS_HUSKAR["huskar_immortal"]) {
             this.SetStackCount(1);
             this.pfx = ResHelper.CreateParticleEx("particles/units/heroes/hero_huskar/huskar_life_break_cast.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetCasterPlus(), this.GetCasterPlus());
             // }

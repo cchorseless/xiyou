@@ -96,10 +96,10 @@ export class imba_arc_warden_magnetic_field extends BaseAbility_Plus {
         let cast_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_arc_warden/arc_warden_magnetic_cast.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetCasterPlus());
         ParticleManager.SetParticleControlEnt(cast_particle, 0, this.GetCasterPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_attack1", this.GetCasterPlus().GetAbsOrigin(), true);
         ParticleManager.ReleaseParticleIndex(cast_particle);
-        CreateModifierThinker(this.GetCasterPlus(), this, "modifier_imba_arc_warden_magnetic_field_thinker_attack_speed", {
+        BaseModifier_Plus.CreateBuffThinker(this.GetCasterPlus(), this, "modifier_imba_arc_warden_magnetic_field_thinker_attack_speed", {
             duration: this.GetSpecialValueFor("duration")
         }, this.GetCursorPosition(), this.GetCasterPlus().GetTeamNumber(), false);
-        CreateModifierThinker(this.GetCasterPlus(), this, "modifier_imba_arc_warden_magnetic_field_thinker_evasion", {
+        BaseModifier_Plus.CreateBuffThinker(this.GetCasterPlus(), this, "modifier_imba_arc_warden_magnetic_field_thinker_evasion", {
             duration: this.GetSpecialValueFor("duration")
         }, this.GetCursorPosition(), this.GetCasterPlus().GetTeamNumber(), false);
     }
@@ -253,7 +253,7 @@ export class imba_arc_warden_spark_wraith extends BaseAbility_Plus {
         this.GetCasterPlus().EmitSound("Hero_ArcWarden.SparkWraith.Cast");
         EmitSoundOnLocationWithCaster(recastLocation || this.GetCursorPosition(), "Hero_ArcWarden.SparkWraith.Appear", this.GetCasterPlus());
         if (!this.GetAutoCastState()) {
-            CreateModifierThinker(this.GetCasterPlus(), this, "modifier_imba_arc_warden_spark_wraith_thinker", {
+            BaseModifier_Plus.CreateBuffThinker(this.GetCasterPlus(), this, "modifier_imba_arc_warden_spark_wraith_thinker", {
                 duration: recastDuration || this.GetSpecialValueFor("duration")
             }, recastLocation || this.GetCursorPosition(), this.GetCasterPlus().GetTeamNumber(), false);
         } else {
@@ -354,10 +354,10 @@ export class modifier_imba_arc_warden_spark_wraith_thinker extends BaseModifier_
         this.wraith_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_arc_warden/arc_warden_wraith.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetParentPlus());
         ParticleManager.SetParticleControl(this.wraith_particle, 1, Vector(this.radius, 1, 1));
         this.AddParticle(this.wraith_particle, false, false, -1, false, false);
-        this.GetCasterPlus().SetContextThink(DoUniqueString(this.GetName()), () => {
+        this.AddTimer(this.activation_delay - this.think_interval, () => {
             this.StartIntervalThink(this.think_interval);
-            return undefined;
-        }, this.activation_delay - this.think_interval);
+            return;
+        });
     }
     OnIntervalThink(): void {
         for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false))) {

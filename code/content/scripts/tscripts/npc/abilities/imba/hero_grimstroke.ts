@@ -47,7 +47,7 @@ export class imba_grimstroke_dark_artistry extends BaseAbility_Plus {
         this.GetCasterPlus().StopSound("Hero_Grimstroke.DarkArtistry.PreCastPoint");
         this.GetCasterPlus().EmitSound("Hero_Grimstroke.DarkArtistry.Cast");
         this.GetCasterPlus().EmitSound("Hero_Grimstroke.DarkArtistry.Cast.Layer");
-        if (this.GetCasterPlus().GetName().includes("grimstroke") && RollPercentage(50)) {
+        if (this.GetCasterPlus().GetUnitName().includes("grimstroke") && RollPercentage(50)) {
             if (!this.responses) {
                 this.responses = {
                     "grimstroke_grimstroke_attack_12_02": 0,
@@ -91,7 +91,7 @@ export class imba_grimstroke_dark_artistry extends BaseAbility_Plus {
         if (start_location == end_position) {
             end_position = end_position + this.GetCasterPlus().GetForwardVector() as Vector;
         }
-        let stroke_dummy = CreateModifierThinker(this.GetCasterPlus(), this, undefined, {}, this.GetCasterPlus().GetAbsOrigin(), this.GetCasterPlus().GetTeamNumber(), false);
+        let stroke_dummy = BaseModifier_Plus.CreateBuffThinker(this.GetCasterPlus(), this, undefined, {}, this.GetCasterPlus().GetAbsOrigin(), this.GetCasterPlus().GetTeamNumber(), false);
         stroke_dummy.EmitSound("Hero_Grimstroke.DarkArtistry.Projectile");
         stroke_dummy.TempData().hit_units = 0;
         let velocity = (end_position - start_location as Vector).Normalized() * this.GetSpecialValueFor("projectile_speed") as Vector;
@@ -275,7 +275,7 @@ export class imba_grimstroke_ink_creature extends BaseAbility_Plus {
             return;
         }
         let vision_modifier = target.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_grimstroke_ink_creature_vision", {});
-        if (this.GetCasterPlus().GetName().includes("grimstroke") && RollPercentage(50)) {
+        if (this.GetCasterPlus().GetUnitName().includes("grimstroke") && RollPercentage(50)) {
             if (!this.responses) {
                 this.responses = {
                     ["grimstroke_grimstroke_ability1_01"]: 0,
@@ -308,7 +308,7 @@ export class imba_grimstroke_ink_creature extends BaseAbility_Plus {
         let latch_unit_offset_short = this.GetSpecialValueFor("latched_unit_offset_short");
         this.AddTimer(this.GetSpecialValueFor("spawn_time"), () => {
             caster.EmitSound("Hero_Grimstroke.InkCreature.Cast");
-            let ink_unit = BaseNpc_Plus.CreateUnitByName("npc_dota_grimstroke_ink_creature", this.GetCasterPlus().GetAbsOrigin() + this.GetCasterPlus().GetForwardVector() * this.GetSpecialValueFor("latched_unit_offset_short") as Vector, this.GetCasterPlus().GetTeamNumber(), false, this.GetCasterPlus(), this.GetCasterPlus());
+            let ink_unit = BaseNpc_Plus.CreateUnitByName("npc_dota_grimstroke_ink_creature", this.GetCasterPlus().GetAbsOrigin() + this.GetCasterPlus().GetForwardVector() * this.GetSpecialValueFor("latched_unit_offset_short") as Vector, this.GetCasterPlus(), false);
             ink_unit.EmitSound("Hero_Grimstroke.InkCreature.Cast");
             ink_unit.AddNewModifier(caster, ability, "modifier_imba_grimstroke_ink_creature_thinker", {
                 destroy_attacks: this.GetTalentSpecialValueFor("destroy_attacks"),
@@ -432,7 +432,7 @@ export class modifier_imba_grimstroke_ink_creature_thinker extends BaseModifier_
         this.hero_attack_multiplier = params.hero_attack_multiplier;
         this.target = EntIndexToHScript(params.target_entindex) as IBaseNpc_Plus;
         this.health_increments = this.GetParentPlus().GetMaxHealth() / this.destroy_attacks;
-        if (this.GetAbilityPlus() && this.GetCasterPlus().FindAbilityByName(this.GetAbilityPlus().GetName()).GetAutoCastState()) {
+        if (this.GetAbilityPlus() && this.GetCasterPlus().FindAbilityByName(this.GetAbilityPlus().GetAbilityName()).GetAutoCastState()) {
             this.SetStackCount(2);
         } else {
             this.SetStackCount(1);
@@ -712,7 +712,7 @@ export class imba_grimstroke_spirit_walk extends BaseAbility_Plus {
         let ink_swell_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_grimstroke/grimstroke_cast_ink_swell.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, this.GetCasterPlus());
         ParticleManager.SetParticleControlEnt(ink_swell_particle, 0, this.GetCasterPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_attack2", this.GetCasterPlus().GetAbsOrigin(), true);
         ParticleManager.ReleaseParticleIndex(ink_swell_particle);
-        if (this.GetCasterPlus().GetName().includes("grimstroke") && RollPercentage(50)) {
+        if (this.GetCasterPlus().GetUnitName().includes("grimstroke") && RollPercentage(50)) {
             if (!this.responses_target || !this.responses_self) {
                 this.responses_target = {
                     ["grimstroke_grimstroke_ability2_01"]: 0,

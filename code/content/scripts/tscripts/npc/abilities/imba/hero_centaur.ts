@@ -49,7 +49,7 @@ export class imba_centaur_hoof_stomp extends BaseAbility_Plus {
     }
     OnSpellStart(): void {
         this.GetCasterPlus().EmitSound("Hero_Centaur.HoofStomp");
-        if (this.GetCasterPlus().GetName().includes("centaur") && RandomInt(1, 100) <= 50) {
+        if (this.GetCasterPlus().GetUnitName().includes("centaur") && RandomInt(1, 100) <= 50) {
             EmitSoundOn("centaur_cent_hoof_stomp_0" + RandomInt(1, 2), this.GetCasterPlus());
         }
         let particle_stomp_fx = ResHelper.CreateParticleEx("particles/units/heroes/hero_centaur/centaur_warstomp.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, this.GetCasterPlus());
@@ -72,15 +72,15 @@ export class imba_centaur_hoof_stomp extends BaseAbility_Plus {
                     attacker: this.GetCasterPlus(),
                     ability: this
                 });
-                if (enemy.IsRealUnit() && !enemy.IsAlive() && this.GetCasterPlus().GetName().includes("centaur") && RollPercentage(25)) {
+                if (enemy.IsRealUnit() && !enemy.IsAlive() && this.GetCasterPlus().GetUnitName().includes("centaur") && RollPercentage(25)) {
                     EmitSoundOn("centaur_cent_hoof_stomp_0" + RandomInt(4, 5), this.GetCasterPlus());
                 }
             }
         }
-        let buff_thinker = CreateModifierThinker(this.GetCasterPlus(), this, "modifier_imba_hoof_stomp_arena_thinker_buff", {
+        let buff_thinker = BaseModifier_Plus.CreateBuffThinker(this.GetCasterPlus(), this, "modifier_imba_hoof_stomp_arena_thinker_buff", {
             duration: this.GetSpecialValueFor("pit_duration")
         }, this.GetCasterPlus().GetAbsOrigin(), this.GetCasterPlus().GetTeamNumber(), false);
-        let debuff_thinker = CreateModifierThinker(this.GetCasterPlus(), this, "modifier_imba_hoof_stomp_arena_thinker_debuff", {
+        let debuff_thinker = BaseModifier_Plus.CreateBuffThinker(this.GetCasterPlus(), this, "modifier_imba_hoof_stomp_arena_thinker_debuff", {
             duration: this.GetSpecialValueFor("pit_duration")
         }, this.GetCasterPlus().GetAbsOrigin(), this.GetCasterPlus().GetTeamNumber(), false);
     }
@@ -419,7 +419,7 @@ export class modifier_imba_return_passive extends BaseModifier_Plus {
             if (parent.PassivesDisabled()) {
                 return undefined;
             }
-            if (attacker.GetTeamNumber() != parent.GetTeamNumber() && parent == target && !attacker.IsOther() && attacker.GetName() != "npc_dota_unit_undying_zombie") {
+            if (attacker.GetTeamNumber() != parent.GetTeamNumber() && parent == target && !attacker.IsOther() && !attacker.GetUnitName().includes("undying_zombie")) {
                 if (!caster.HasTalent("special_bonus_imba_centaur_7")) {
                     if (keys.inflictor) {
                         return;

@@ -67,7 +67,7 @@ export class imba_tidehunter_gush extends BaseAbility_Plus {
             ProjectileManager.CreateTrackingProjectile(projectile);
         }
         if (this.GetCasterPlus().HasScepter()) {
-            let gush_dummy = CreateModifierThinker(this.GetCasterPlus(), this, undefined, {}, this.GetCasterPlus().GetAbsOrigin(), this.GetCasterPlus().GetTeamNumber(), false);
+            let gush_dummy = BaseModifier_Plus.CreateBuffThinker(this.GetCasterPlus(), this, undefined, {}, this.GetCasterPlus().GetAbsOrigin(), this.GetCasterPlus().GetTeamNumber(), false);
             gush_dummy.EmitSound("Hero_Tidehunter.Gush.AghsProjectile");
             if (this.GetCursorPosition() == this.GetCasterPlus().GetAbsOrigin()) {
                 this.GetCasterPlus().SetCursorPosition(this.GetCursorPosition() + this.GetCasterPlus().GetForwardVector() as Vector);
@@ -149,7 +149,7 @@ export class imba_tidehunter_gush extends BaseAbility_Plus {
                         ability: this
                     }
                     ApplyDamage(damageTable);
-                    if (this.GetCasterPlus().GetName().includes("tidehunter") && target.IsRealUnit() && !target.IsAlive() && RollPercentage(25)) {
+                    if (this.GetCasterPlus().GetUnitName().includes("tidehunter") && target.IsRealUnit() && !target.IsAlive() && RollPercentage(25)) {
                         this.GetCasterPlus().EmitSound("tidehunter_tide_ability_gush_0" + RandomInt(1, 2));
                     }
                 }
@@ -461,7 +461,7 @@ export class imba_tidehunter_anchor_smash extends BaseAbility_Plus {
                 this.GetCasterPlus().SetCursorPosition(this.GetCursorPosition() + this.GetCasterPlus().GetForwardVector() as Vector);
             }
             this.GetCasterPlus().EmitSound("Hero_ChaosKnight.idle_throw");
-            let anchor_dummy = CreateModifierThinker(this.GetCasterPlus(), this, "modifier_imba_tidehunter_anchor_smash_throw", {
+            let anchor_dummy = BaseModifier_Plus.CreateBuffThinker(this.GetCasterPlus(), this, "modifier_imba_tidehunter_anchor_smash_throw", {
                 x: this.GetCursorPosition().x,
                 y: this.GetCursorPosition().y,
                 z: this.GetCursorPosition().z
@@ -752,7 +752,7 @@ export class modifier_imba_tidehunter_ravage_creeping_wave extends BaseModifier_
                     ability: ability
                 }
                 ApplyDamage(damageTable);
-                if (caster.GetName().includes("tidehunter") && !enemy.IsAlive() && enemy.IsRealUnit() && RollPercentage(25)) {
+                if (caster.GetUnitName().includes("tidehunter") && !enemy.IsAlive() && enemy.IsRealUnit() && RollPercentage(25)) {
                     caster.EmitSound("tidehunter_tide_ability_ravage_0" + RandomInt(1, 2));
                 }
             });
@@ -869,7 +869,7 @@ export class imba_tidehunter_ravage extends BaseAbility_Plus {
                                 ability: this
                             }
                             ApplyDamage(damageTable);
-                            if (!enemy.IsAlive() && enemy.IsRealUnit() && RollPercentage(25) && caster.GetName().includes("tidehunter")) {
+                            if (!enemy.IsAlive() && enemy.IsRealUnit() && RollPercentage(25) && caster.GetUnitName().includes("tidehunter")) {
                                 caster.EmitSound(kill_responses + RandomInt(1, 2));
                             }
                             enemy.RemoveGesture(GameActivity_t.ACT_DOTA_FLAIL);
@@ -892,7 +892,7 @@ export class imba_tidehunter_ravage extends BaseAbility_Plus {
             let caster_pos = this.GetCasterPlus().GetAbsOrigin();
             let forward_vec = (this.GetCursorPosition() - caster_pos as Vector).Normalized();
             this.AddTimer(0, () => {
-                CreateModifierThinker(this.GetCasterPlus(), this, "modifier_imba_tidehunter_ravage_creeping_wave", {
+                BaseModifier_Plus.CreateBuffThinker(this.GetCasterPlus(), this, "modifier_imba_tidehunter_ravage_creeping_wave", {
                     duration: 0.3,
                     damage: this.GetAbilityDamage(),
                     stun_duration: stun_duration,

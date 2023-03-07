@@ -153,7 +153,7 @@ export class item_imba_diffusal_blade_2 extends BaseItem_Plus {
         ParticleManager.ReleaseParticleIndex(particle_target_fx);
         let initial_modifiers = target.GetModifierCount();
         target.Purge(true, false, false, false, false);
-        this.GetCasterPlus().SetContextThink(DoUniqueString(this.GetName()), () => {
+        this.AddTimer(FrameTime(), () => {
             if (initial_modifiers - target.GetModifierCount() > 0) {
                 let mana_burn = (initial_modifiers - target.GetModifierCount()) * this.GetSpecialValueFor("dispel_burn");
                 let target_mana = target.GetMana();
@@ -177,8 +177,8 @@ export class item_imba_diffusal_blade_2 extends BaseItem_Plus {
                     duration: this.GetSpecialValueFor("purge_root_duration") * (1 - target.GetStatusResistance())
                 });
             }
-            return undefined;
-        }, FrameTime());
+            return;
+        });
     }
 }
 @registerModifier()

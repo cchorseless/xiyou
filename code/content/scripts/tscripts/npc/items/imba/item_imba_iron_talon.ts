@@ -12,9 +12,9 @@ export class item_imba_iron_talon extends BaseItem_Plus {
             return;
         }
         if (hTarget.GetTeamNumber() != this.GetCasterPlus().GetTeamNumber()) {
-            if ((hTarget.IsCreep() || (hTarget.IsOther() && (string.find(hTarget.GetName(), "npc_dota_ward_base") || string.find(hTarget.GetName(), "npc_dota_techies_mines")))) && !hTarget.IsRoshan()) {
+            if ((hTarget.IsCreep() || (hTarget.IsOther() && (string.find(hTarget.GetUnitName(), "npc_dota_ward_base") || string.find(hTarget.GetUnitName(), "npc_dota_techies_mines")))) && !hTarget.IsRoshan()) {
                 return UnitFilterResult.UF_SUCCESS;
-            } else if (hTarget.IsOther() && !(string.find(hTarget.GetName(), "npc_dota_ward_base") || string.find(hTarget.GetName(), "npc_dota_techies_mines"))) {
+            } else if (hTarget.IsOther() && !(string.find(hTarget.GetUnitName(), "ward_base") || string.find(hTarget.GetUnitName(), "npc_dota_techies_mines"))) {
                 return UnitFilterResult.UF_FAIL_CUSTOM;
             }
         }
@@ -26,7 +26,7 @@ export class item_imba_iron_talon extends BaseItem_Plus {
             return;
         }
         if (hTarget.GetTeamNumber() != this.GetCasterPlus().GetTeamNumber()) {
-            if (hTarget.IsOther() && !(string.find(hTarget.GetName(), "npc_dota_ward_base") || string.find(hTarget.GetName(), "npc_dota_techies_mines"))) {
+            if (hTarget.IsOther() && !(string.find(hTarget.GetUnitName(), "npc_dota_ward_base") || string.find(hTarget.GetUnitName(), "npc_dota_techies_mines"))) {
                 return "Ability Can't Target This Ward-Type Unit";
             }
         }

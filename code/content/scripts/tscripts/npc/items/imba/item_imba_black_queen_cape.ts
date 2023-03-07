@@ -138,7 +138,7 @@ export class modifier_imba_black_queen_cape_passive extends BaseModifier_Plus {
                     for (let i = 0; i <= 5; i++) {
                         let item = ally.GetItemInSlot(i);
                         if (item) {
-                            if ((item.GetName() == cape_item_name) && (item.GetPurchaser() == ally)) {
+                            if ((item.GetAbilityName() == cape_item_name) && (item.GetPurchaser() == ally)) {
                                 if ((ally.GetAbsOrigin() - target.GetAbsOrigin() as Vector).Length2D() < our_distance) {
                                     return undefined;
                                 }
@@ -151,7 +151,7 @@ export class modifier_imba_black_queen_cape_passive extends BaseModifier_Plus {
         for (let i = 0; i <= 5; i++) {
             let item = this.parent.GetItemInSlot(i);
             if (item) {
-                if (item.GetName() == cape_item_name) {
+                if (item.GetAbilityName() == cape_item_name) {
                     if (item != this.item) {
                         return undefined;
                     }

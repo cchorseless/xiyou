@@ -35,7 +35,7 @@ export class imba_luna_lucent_beam extends BaseAbility_Plus {
         }
         this.GetCasterPlus().EmitSound("Hero_Luna.LucentBeam.Cast");
         this.GetCursorTarget().EmitSound("Hero_Luna.LucentBeam.Target");
-        if (this.GetCasterPlus().GetName().includes("luna") && RollPercentage(50)) {
+        if (this.GetCasterPlus().GetUnitName().includes("luna") && RollPercentage(50)) {
             let responses = {
                 "1": "luna_luna_ability_lucentbeam_01",
                 "2": "luna_luna_ability_lucentbeam_02",
@@ -427,7 +427,7 @@ export class modifier_imba_luna_lunar_blessing_aura_723 extends BaseModifier_Plu
     }
     GetAuraEntityReject(hEntity: IBaseNpc_Plus): boolean {
         let ability = this.GetAbilityPlus<imba_luna_lunar_blessing>();
-        return (!hEntity.GetPlayerID && !hEntity.GetOwnerEntity()) || (!hEntity.IsRangedAttacker() && !((ability.full_moon && GameRules.GetDOTATime(true, true) - ability.full_moon <= this.GetSpecialValueFor("full_moon_duration"))));
+        return (!hEntity.GetOwnerEntity()) || (!hEntity.IsRangedAttacker() && !((ability.full_moon && GameRules.GetDOTATime(true, true) - ability.full_moon <= this.GetSpecialValueFor("full_moon_duration"))));
     }
 }
 @registerModifier()
@@ -526,7 +526,7 @@ export class imba_luna_eclipse extends BaseAbility_Plus {
         } else {
             this.GetCasterPlus().EmitSound("Hero_Luna.Eclipse.Cast");
         }
-        if (this.GetCasterPlus().GetName().includes("luna")) {
+        if (this.GetCasterPlus().GetUnitName().includes("luna")) {
             let responses = {
                 "1": "luna_luna_ability_eclipse_01",
                 "2": "luna_luna_ability_eclipse_02",

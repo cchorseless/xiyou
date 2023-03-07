@@ -38,7 +38,7 @@ export class ability6_juggernaut_omni_slash extends BaseAbility_Plus {
             return
         }
         let duration = this.GetSpecialValueFor("duration") + caster.GetTalentValue('special_bonus_unique_juggernaut_custom_3')
-        let dummy = BaseNpc_Plus.CreateUnitByName(caster.GetUnitName(), caster.GetAbsOrigin(), caster.GetTeamNumber(), false, caster, caster)
+        let dummy = BaseNpc_Plus.CreateUnitByName(caster.GetUnitName(), caster.GetAbsOrigin(), caster, false)
         let abilitycount = dummy.GetAbilityCount()
         for (let i = abilitycount - 1; i >= 0; i--) {
             let ability = dummy.GetAbilityByIndex(i)
@@ -61,7 +61,7 @@ export class ability6_juggernaut_omni_slash extends BaseAbility_Plus {
                 if (!GFuncEntity.IsValid(target)) {
                     return
                 }
-                let dummy = BaseNpc_Plus.CreateUnitByName(caster.GetUnitName(), caster.GetAbsOrigin(), caster.GetTeamNumber(), false, caster, caster)
+                let dummy = BaseNpc_Plus.CreateUnitByName(caster.GetUnitName(), caster.GetAbsOrigin(), caster, false)
                 let abilitycount = dummy.GetAbilityCount()
                 for (let i = abilitycount - 1; i >= 0; i--) {
                     let ability = dummy.GetAbilityByIndex(i)

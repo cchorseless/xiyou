@@ -234,7 +234,7 @@ export class base_modifier_dot_debuff extends BaseModifier_Plus {
         if (IsServer()) {
             let ability = this.ability;
             let damage = ability.GetSpecialValueFor("damage");
-            if (ability.GetName() == "imba_jakiro_macropyre" && this.GetCasterPlus().HasScepter()) {
+            if (ability.GetAbilityName() == "imba_jakiro_macropyre" && this.GetCasterPlus().HasScepter()) {
                 damage = ability.GetSpecialValueFor("damage_scepter");
             }
             this.tick_damage = damage * this.damage_interval;
@@ -260,7 +260,7 @@ export class base_modifier_dot_debuff extends BaseModifier_Plus {
         this._UpdateDebuffLevelValues();
         if (IsServer()) {
             this.OnIntervalThink();
-            if (ability.GetName() == "imba_jakiro_macropyre") {
+            if (ability.GetAbilityName() == "imba_jakiro_macropyre") {
                 this.StartIntervalThink(this.damage_interval);
             } else {
                 this.StartIntervalThink(this.damage_interval * (1 - this.parent.GetStatusResistance()));
@@ -429,7 +429,7 @@ export class imba_jakiro_dual_breath extends BaseAbility_Plus {
         this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_jakiro_dual_breath_self_disable_turning", {
             duration: 0.1
         });
-        this.GetCasterPlus().SetContextThink(DoUniqueString("dual_breath"), () => {
+        this.AddTimer(this.GetSpecialValueFor("fire_delay"), () => {
             this.GetCasterPlus().EmitSound("Hero_Jakiro.DualBreath.Cast");
             let fire_breath_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_jakiro/jakiro_taunt_icemelt_fire.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, this.GetCasterPlus());
             ParticleManager.SetParticleControlEnt(fire_breath_particle, 0, this.GetCasterPlus(), ParticleAttachment_t.PATTACH_POINT, "attach_attack2", this.GetCasterPlus().GetAbsOrigin(), true);
@@ -464,8 +464,7 @@ export class imba_jakiro_dual_breath extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_jakiro_dual_breath_self_disable_turning", {
                 duration: 0.1
             });
-            return undefined;
-        }, this.GetSpecialValueFor("fire_delay"));
+        });
         if (this.GetCasterPlus().HasAbility("imba_jakiro_fire_breath")) {
             this.GetCasterPlus().findAbliityPlus<imba_jakiro_fire_breath>("imba_jakiro_fire_breath").UseResources(false, false, true);
         }
@@ -655,7 +654,7 @@ export class imba_jakiro_ice_path extends base_ability_dual_breath {
                 this.GetCasterPlus().SetCursorPosition(this.GetCursorPosition() + this.GetCasterPlus().GetForwardVector() as Vector);
             }
             let caster = this.GetCasterPlus();
-            CreateModifierThinker(caster, this, "modifier_imba_ice_path_thinker", {
+            BaseModifier_Plus.CreateBuffThinker(caster, this, "modifier_imba_ice_path_thinker", {
                 duration: this.GetSpecialValueFor("path_delay") + this.GetTalentSpecialValueFor("path_duration")
             }, caster.GetAbsOrigin(), caster.GetTeamNumber(), false);
         }
@@ -1129,7 +1128,7 @@ export class imba_jakiro_macropyre extends BaseAbility_Plus {
                 this.GetCasterPlus().SetCursorPosition(this.GetCursorPosition() + this.GetCasterPlus().GetForwardVector() as Vector);
             }
             let caster = this.GetCasterPlus();
-            CreateModifierThinker(caster, this, "modifier_imba_macropyre_thinker", {}, caster.GetAbsOrigin(), caster.GetTeamNumber(), false);
+            BaseModifier_Plus.CreateBuffThinker(caster, this, "modifier_imba_macropyre_thinker", {}, caster.GetAbsOrigin(), caster.GetTeamNumber(), false);
         }
     }
 }
@@ -1209,7 +1208,7 @@ export class modifier_imba_macropyre_thinker extends BaseModifier_Plus {
         if (IsServer()) {
             if (GameRules.GetGameTime() > this.macropyre_end_time) {
                 this.GetParentPlus().StopSound(this.sound_fire_loop);
-                UTIL_Remove(this.GetParentPlus());
+                GFuncEntity.SafeDestroyUnit(this.GetParentPlus());
             } else {
                 let caster = this.GetCasterPlus();
                 let ability = this.GetAbilityPlus();
