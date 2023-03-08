@@ -800,8 +800,7 @@ export class imba_axe_culling_blade extends BaseAbility_Plus {
 
     checkCanKill(target: IBaseNpc_Plus) {
         let r = (target.GetHealth() <= this.kill_threshold || (target.GetHealth() / target.GetMaxHealth() <= this.kill_threshold_max_hp_pct)) && !target.HasModifier("modifier_imba_reincarnation_scepter_wraith");
-        GLogHelper.print(r, "checkCanKill");
-        return true;
+        return r;
     }
 
     Init(): void {

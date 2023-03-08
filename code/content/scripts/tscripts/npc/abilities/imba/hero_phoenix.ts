@@ -668,7 +668,7 @@ export class imba_phoenix_launch_fire_spirit extends BaseAbility_Plus {
         let point = this.GetCursorPosition();
         point.z = point.z + 70;
         let modifierName = "modifier_imba_phoenix_fire_spirits_count";
-        let iModifier = caster.FindModifierByName(modifierName);
+        let iModifier = caster.FindModifierByName(modifierName) as modifier_imba_phoenix_fire_spirits_count;
         caster.StartGesture(GameActivity_t.ACT_DOTA_OVERRIDE_ABILITY_2);
         EmitSoundOn("Hero_Phoenix.FireSpirits.Launch", caster);
         if (!caster.HasTalent("special_bonus_imba_phoenix_7")) {
@@ -681,7 +681,7 @@ export class imba_phoenix_launch_fire_spirit extends BaseAbility_Plus {
             }
             let pfx = caster.TempData().fire_spirits_pfx;
             ParticleManager.SetParticleControl(pfx, 1, Vector(currentStack, 0, 0));
-            for (let i = 0; i < caster.TempData().fire_spirits_numSpirits; i++) {
+            for (let i = 1; i <= caster.TempData().fire_spirits_numSpirits; i++) {
                 let radius = 0;
                 if (i <= currentStack) {
                     radius = 1;
@@ -1024,7 +1024,7 @@ export class imba_phoenix_sun_ray extends BaseAbility_Plus {
         let lastAngles = caster.GetAngles();
         let isInitialTurn = true;
         let elapsedTime = 0.0;
-        this.AddTimer(0, () => {
+        this.AddTimer(deltaTime, () => {
             if (this.GetCasterPlus().HasModifier("modifier_mars_arena_of_blood_leash") && this.GetCasterPlus().findBuff("modifier_mars_arena_of_blood_leash").GetAuraOwner() && (this.GetCasterPlus().GetAbsOrigin() - this.GetCasterPlus().FindModifierByName("modifier_mars_arena_of_blood_leash").GetAuraOwner().GetAbsOrigin() as Vector).Length2D() >= this.GetCasterPlus().FindModifierByName("modifier_mars_arena_of_blood_leash").GetSpecialValueFor("radius") - this.GetCasterPlus().FindModifierByName("modifier_mars_arena_of_blood_leash").GetSpecialValueFor("width")) {
                 this.GetCasterPlus().RemoveModifierByName("modifier_imba_phoenix_sun_ray_caster_dummy");
             }
@@ -1664,7 +1664,7 @@ export class imba_phoenix_supernova extends BaseAbility_Plus {
                 let _direction = (ally.GetAbsOrigin() - caster.GetAbsOrigin() as Vector).Normalized();
                 caster.SetForwardVector(_direction);
                 let loaction = caster.GetForwardVector() * 192 + caster.GetAbsOrigin() as Vector;
-                let egg2 = BaseNpc_Plus.CreateUnitByName("npc_dota_phoenix_sun", loaction, ally.GetTeamNumber(), false, ally, ally.GetOwnerPlus());
+                let egg2 = BaseNpc_Plus.CreateUnitByName("npc_dota_phoenix_sun", loaction, ally, false);
                 egg2.AddNewModifier(ally, ability, "modifier_kill", {
                     duration: egg_duration
                 });

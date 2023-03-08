@@ -241,7 +241,7 @@ export class imba_rattletrap_power_cogs extends BaseAbility_Plus {
         let cog_vector = GetGroundPosition(caster_pos + Vector(0, cogs_radius, 0) as Vector, undefined);
         let second_cog_vector = GetGroundPosition(caster_pos + Vector(0, cogs_radius * 2, 0) as Vector, undefined);
         this.GetCasterPlus().StartGesture(GameActivity_t.ACT_DOTA_RATTLETRAP_POWERCOGS);
-        for (let cog = 0; cog < num_of_cogs; cog++) {
+        for (let i = 0; i < num_of_cogs; i++) {
             let cog = BaseNpc_Plus.CreateUnitByName("npc_dota_rattletrap_cog", cog_vector, this.GetCasterPlus(), false);
             cog.EmitSound("Hero_Rattletrap.Power_Cogs");
             cog.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_rattletrap_power_cogs", {

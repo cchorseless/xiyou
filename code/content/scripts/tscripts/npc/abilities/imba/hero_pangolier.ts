@@ -435,21 +435,20 @@ export class imba_pangolier_shield_crash extends BaseAbility_Plus {
     }
     OnSpellStart(): void {
         let caster = this.GetCasterPlus();
-        let ability = this;
         let sound_cast = "Hero_Pangolier.TailThump.Cast";
         let gyroshell_ability = caster.findAbliityPlus<imba_pangolier_gyroshell>("imba_pangolier_gyroshell");
         let modifier_movement = "modifier_imba_shield_crash_jump";
-        let dust_particle = "particles/units/heroes/hero_pangolier/pangolier_tailthump_cast.vpcf";
-        let jump_duration = ability.GetSpecialValueFor("jump_duration");
-        let jump_duration_gyroshell = ability.GetSpecialValueFor("jump_duration_gyroshell");
-        let jump_height = ability.GetSpecialValueFor("jump_height");
-        let jump_height_gyroshell = ability.GetSpecialValueFor("jump_height_gyroshell");
-        let jump_horizontal_distance = ability.GetSpecialValueFor("jump_horizontal_distance");
+        let dust_particle_path = "particles/units/heroes/hero_pangolier/pangolier_tailthump_cast.vpcf";
+        let jump_duration = this.GetSpecialValueFor("jump_duration");
+        let jump_duration_gyroshell = this.GetSpecialValueFor("jump_duration_gyroshell");
+        let jump_height = this.GetSpecialValueFor("jump_height");
+        let jump_height_gyroshell = this.GetSpecialValueFor("jump_height_gyroshell");
+        let jump_horizontal_distance = this.GetSpecialValueFor("jump_horizontal_distance");
         caster.StartGesture(GameActivity_t.ACT_DOTA_CAST_ABILITY_2);
-        let dust = ResHelper.CreateParticleEx(dust_particle, ParticleAttachment_t.PATTACH_WORLDORIGIN, undefined);
+        let dust = ResHelper.CreateParticleEx(dust_particle_path, ParticleAttachment_t.PATTACH_WORLDORIGIN, undefined);
         ParticleManager.SetParticleControl(dust, 0, caster.GetAbsOrigin());
         EmitSoundOnLocationWithCaster(caster.GetAbsOrigin(), sound_cast, caster);
-        let modifier_movement_handler = caster.AddNewModifier(caster, ability, modifier_movement, {}) as modifier_imba_shield_crash_jump;
+        let modifier_movement_handler = caster.AddNewModifier(caster, this, modifier_movement, {}) as modifier_imba_shield_crash_jump;
         if (this.GetCasterPlus().HasScepter() && this.GetCasterPlus().findAbliityPlus<imba_pangolier_swashbuckle>("imba_pangolier_swashbuckle") && this.GetCasterPlus().FindAbilityByName("imba_pangolier_swashbuckle").IsTrained()) {
             let swashbuckle_ability = this.GetCasterPlus().findAbliityPlus<imba_pangolier_swashbuckle>("imba_pangolier_swashbuckle");
             let swashbuckle_radius = swashbuckle_ability.GetSpecialValueFor("end_radius") || swashbuckle_ability.GetSpecialValueFor("start_radius");
@@ -594,7 +593,7 @@ export class modifier_imba_shield_crash_jump extends BaseModifierMotionBoth_Plus
     public buff_modifier: any;
     public smash_particle: any;
     public smash_sound: any;
-    public gyroshell: any;
+    public gyroshell: string;
     public damage: number;
     public buff_duration: number;
     public radius: number;
@@ -607,7 +606,7 @@ export class modifier_imba_shield_crash_jump extends BaseModifierMotionBoth_Plus
     public vertical_velocity: any;
     public vertical_acceleration: any;
 
-    dust_particle: any;
+    dust_particle: ParticleID;
     target_point: Vector;
     jump_height: number;
     jump_duration: number;
@@ -638,13 +637,13 @@ export class modifier_imba_shield_crash_jump extends BaseModifierMotionBoth_Plus
             this.vertical_velocity = 4 * this.height / this.duration;
             this.vertical_acceleration = -(8 * this.height) / (this.duration * this.duration);
             this.GetParentPlus().RemoveHorizontalMotionController(this);
-            if (!this.BeginMotionOrDestroy()) { return };
             if (this.GetParentPlus().IsRooted()) {
                 return;
             }
             if (!this.GetParentPlus().HasModifier("modifier_pangolier_gyroshell")) {
                 this.Destroy();
             }
+            if (!this.BeginMotionOrDestroy()) { return };
         }
     }
     BeDestroy(): void {
@@ -705,9 +704,12 @@ export class modifier_imba_shield_crash_jump extends BaseModifierMotionBoth_Plus
                 });
             }
         }
-        ParticleManager.DestroyParticle(this.dust_particle, false);
-        ParticleManager.ReleaseParticleIndex(this.dust_particle);
         ParticleManager.ReleaseParticleIndex(smash);
+        if (this.dust_particle != null) {
+            ParticleManager.DestroyParticle(this.dust_particle, false);
+            ParticleManager.ReleaseParticleIndex(this.dust_particle);
+        }
+
     }
     UpdateHorizontalMotion(me: CDOTA_BaseNPC, dt: number): void {
         me.SetOrigin(me.GetOrigin() + this.velocity * dt as Vector);
@@ -1234,28 +1236,27 @@ export class imba_pangolier_gyroshell extends BaseAbility_Plus {
     }
     OnSpellStart(): void {
         let caster = this.GetCasterPlus();
-        let ability = this;
         let loop_sound = "Hero_Pangolier.Gyroshell.Loop";
         let roll_modifier = "modifier_pangolier_gyroshell";
-        let tick_interval = ability.GetSpecialValueFor("tick_interval");
-        let forward_move_speed = ability.GetSpecialValueFor("forward_move_speed");
-        let turn_rate_boosted = ability.GetSpecialValueFor("turn_rate_boosted");
-        let turn_rate = ability.GetSpecialValueFor("turn_rate");
-        let radius = ability.GetSpecialValueFor("radius");
-        let hit_radius = ability.GetSpecialValueFor("hit_radius");
-        let bounce_duration = ability.GetSpecialValueFor("bounce_duration");
-        let stun_duration = ability.GetSpecialValueFor("stun_duration");
-        let knockback_radius = ability.GetSpecialValueFor("knockback_radius");
-        let ability_duration = ability.GetSpecialValueFor("duration");
-        let jump_recover_time = ability.GetSpecialValueFor("jump_recover_time");
+        let tick_interval = this.GetSpecialValueFor("tick_interval");
+        let forward_move_speed = this.GetSpecialValueFor("forward_move_speed");
+        let turn_rate_boosted = this.GetSpecialValueFor("turn_rate_boosted");
+        let turn_rate = this.GetSpecialValueFor("turn_rate");
+        let radius = this.GetSpecialValueFor("radius");
+        let hit_radius = this.GetSpecialValueFor("hit_radius");
+        let bounce_duration = this.GetSpecialValueFor("bounce_duration");
+        let stun_duration = this.GetSpecialValueFor("stun_duration");
+        let knockback_radius = this.GetSpecialValueFor("knockback_radius");
+        let ability_duration = this.GetSpecialValueFor("duration");
+        let jump_recover_time = this.GetSpecialValueFor("jump_recover_time");
         caster.StartGesture(GameActivity_t.ACT_DOTA_CAST_ABILITY_4);
         ParticleManager.DestroyParticle(this.cast_effect, false);
         ParticleManager.ReleaseParticleIndex(this.cast_effect);
         caster.Purge(false, true, false, false, false);
-        caster.AddNewModifier(caster, ability, roll_modifier, {
+        caster.AddNewModifier(caster, this, roll_modifier, {
             duration: ability_duration
         });
-        caster.AddNewModifier(caster, ability, "modifier_imba_gyroshell_impact_check", {
+        caster.AddNewModifier(caster, this, "modifier_imba_gyroshell_impact_check", {
             duration: ability_duration
         });
         EmitSoundOn(loop_sound, caster);
@@ -1271,7 +1272,7 @@ export class imba_pangolier_gyroshell extends BaseAbility_Plus {
 }
 @registerModifier()
 export class modifier_imba_gyroshell_impact_check extends BaseModifier_Plus {
-    public gyroshell: any;
+    public gyroshell: CDOTA_Buff;
     public targets: IBaseNpc_Plus[];
     public duration_extend: number;
     public hit_radius: number;
@@ -1288,7 +1289,7 @@ export class modifier_imba_gyroshell_impact_check extends BaseModifier_Plus {
     BeCreated(p_0: any,): void {
         if (IsServer()) {
             // todo modifier_pangolier_gyroshell
-            this.gyroshell = this.GetCasterPlus().findBuff("modifier_pangolier_gyroshell");
+            this.gyroshell = this.GetCasterPlus().FindModifierByName("modifier_pangolier_gyroshell");
             this.targets = this.targets || []
             this.duration_extend = this.GetSpecialValueFor("duration_extend");
             this.hit_radius = this.GetSpecialValueFor("hit_radius");
@@ -1298,8 +1299,10 @@ export class modifier_imba_gyroshell_impact_check extends BaseModifier_Plus {
     }
     OnIntervalThink(): void {
         if (IsServer()) {
-            if (!this.GetCasterPlus().HasModifier("modifier_pangolier_gyroshell")) {
+            this.gyroshell = this.GetCasterPlus().FindModifierByName("modifier_pangolier_gyroshell");
+            if (this.gyroshell == null) {
                 this.Destroy();
+                return;
             }
             let enemies_hit = 0;
             let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.hit_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
@@ -1312,6 +1315,7 @@ export class modifier_imba_gyroshell_impact_check extends BaseModifier_Plus {
                             for (const v of (this.targets)) {
                                 if (v == enemy) {
                                     found = true;
+                                    break;
                                 }
                             }
                             if (found) {

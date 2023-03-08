@@ -377,7 +377,7 @@ export class imba_pugna_nether_ward extends BaseAbility_Plus {
         EmitSoundOn(sound_cast, caster);
         for (let i = 0; i < 1 + caster.GetTalentValue("special_bonus_imba_pugna_8"); i++) {
             let nether_ward = undefined;
-            if (i != 1 || !this.GetCursorTarget() || this.GetCursorTarget() != this.GetCasterPlus()) {
+            if (i != 0 || !this.GetCursorTarget() || this.GetCursorTarget() != this.GetCasterPlus()) {
                 nether_ward = BaseNpc_Plus.CreateUnitByName("npc_imba_pugna_nether_ward_" + (ability_level), point[i], caster, true);
             } else {
                 nether_ward = BaseNpc_Plus.CreateUnitByName("npc_imba_pugna_nether_ward_" + (ability_level), this.GetCasterPlus().GetAbsOrigin() + (this.GetCasterPlus().GetForwardVector() * 150) as Vector, caster, true);
@@ -1028,9 +1028,13 @@ export class modifier_imba_life_drain extends BaseModifier_Plus {
     }
     OnIntervalThink(): void {
         if (IsServer()) {
+            if (!GFuncEntity.IsValid(this.caster)) {
+                this.Destroy();
+                return;
+            }
             if (this.parent.IsIllusion() && this.parent.GetTeamNumber() != this.caster.GetTeamNumber() && !GFuncEntity.Custom_bIsStrongIllusion(this.parent)) {
                 this.parent.Kill(this.ability, this.caster);
-                return undefined;
+                return;
             }
             if (this.caster.IsStunned() || this.caster.IsSilenced()) {
                 this.Destroy();

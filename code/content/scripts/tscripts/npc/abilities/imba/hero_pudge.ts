@@ -33,6 +33,8 @@ export class imba_pudge_meat_hook extends BaseAbility_Plus {
     public launched: any;
     public hook_go: any;
     public RuptureFX: any;
+    public hooked_loc: Vector;
+
     IsHiddenWhenStolen(): boolean {
         return false;
     }
@@ -205,12 +207,12 @@ export class imba_pudge_meat_hook extends BaseAbility_Plus {
                 }
             }
         }
-        let hooked_loc: Vector;
         if (ExtraData.goorback != "back") {
-            hooked_loc = vLocation;
-        } else if (ExtraData.goorback == "back") {
-            if (EntIndexToHScript(ExtraData.rune)) {
-                let rune = EntIndexToHScript(ExtraData.rune);
+            this.hooked_loc = vLocation;
+        }
+        else if (ExtraData.goorback == "back") {
+            let rune = EntIndexToHScript(ExtraData.rune);
+            if (GFuncEntity.IsValid(rune)) {
                 ParticleManager.SetParticleControlEnt(ExtraData.pfx_index, 1, rune, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", rune.GetAbsOrigin() + Vector(0, 0, 96) as Vector, true);
                 rune.SetAbsOrigin(GetGroundPosition(vLocation, this.GetCasterPlus()));
             } else {
@@ -223,7 +225,7 @@ export class imba_pudge_meat_hook extends BaseAbility_Plus {
                 if (this.GetCasterPlus().GetTeamNumber() != target.GetTeamNumber() /**&& !target.IsRune()*/ && this.GetCasterPlus().HasTalent("special_bonus_imba_pudge_7")) {
                     let damage_cap = this.GetCasterPlus().GetTalentValue("special_bonus_imba_pudge_7", "damage_cap");
                     let rupture_damage = this.GetCasterPlus().GetTalentValue("special_bonus_imba_pudge_7", "movement_damage_pct");
-                    let distance_diff = (hooked_loc - target.GetAbsOrigin() as Vector).Length2D();
+                    let distance_diff = (this.hooked_loc - target.GetAbsOrigin() as Vector).Length2D();
                     if (distance_diff < damage_cap) {
                         let move_damage = distance_diff * rupture_damage;
                         if (move_damage > 0) {

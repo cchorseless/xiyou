@@ -898,9 +898,9 @@ export class modifier_imba_skeleton_walk_invis extends BaseModifier_Plus {
             if (this.GetCasterPlus().HasScepter() && this.GetCasterPlus().findAbliityPlus("clinkz_burning_army") && this.GetCasterPlus().FindAbilityByName("clinkz_burning_army").IsTrained()) {
                 for (let i = 0; i < this.GetSpecialValueFor("scepter_skeleton_count"); i++) {
                     let pos = this.GetCasterPlus().GetAbsOrigin() + RandomVector(250) as Vector;
-                    if (i == 1) {
+                    if (i == 0) {
                         pos = this.GetCasterPlus().GetAbsOrigin() + (this.GetCasterPlus().GetRightVector() * 250 * (-1)) as Vector;
-                    } else if (i == 2) {
+                    } else if (i == 1) {
                         pos = this.GetCasterPlus().GetAbsOrigin() + (this.GetCasterPlus().GetRightVector() * 250) as Vector;
                     }
                     let archer = BaseNpc_Plus.CreateUnitByName("npc_dota_clinkz_skeleton_archer", pos, this.GetCasterPlus(), true);

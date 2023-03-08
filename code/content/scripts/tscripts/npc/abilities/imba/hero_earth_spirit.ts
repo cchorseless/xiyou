@@ -1023,7 +1023,7 @@ export class modifier_imba_rolling_boulder extends BaseModifier_Plus {
                         hero.AddNewModifier(this.caster, this.ability, "modifier_stunned", {
                             duration: this.stunDuration * (1 - hero.GetStatusResistance())
                         });
-                        if (i == 1) {
+                        if (i == 0) {
                             EmitSoundOn("Hero_EarthSpirit.RollingBoulder.Target", hero);
                             FindClearSpaceForUnit(this.caster, hero.GetAbsOrigin() + this.direction * this.distanceOppositeToTarget as Vector, false);
                         }
