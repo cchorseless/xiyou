@@ -149,7 +149,6 @@ export class modifier_imba_telekinesis extends BaseModifierMotionBoth_Plus {
     public lift_animation: any;
     public fall_animation: any;
     public current_time: number;
-    public frametime: number;
     public transition_end_commenced: any;
     public distance: number;
     public changed_target: any;
@@ -190,29 +189,10 @@ export class modifier_imba_telekinesis extends BaseModifierMotionBoth_Plus {
             this.lift_animation = ability.GetSpecialValueFor("lift_animation");
             this.fall_animation = ability.GetSpecialValueFor("fall_animation");
             this.current_time = 0;
-            this.frametime = FrameTime();
-            this.StartIntervalThink(FrameTime());
+            this.BeginMotionOrDestroy();
         }
-    }
-    ApplyHorizontalMotionController() {
-        if (IsServer()) {
-            if (!this.CheckMotionControllers()) {
-                this.Destroy();
-                return false;
-            }
-        }
-        return true;
     }
 
-    ApplyVerticalMotionController(): boolean {
-        if (IsServer()) {
-            if (!this.CheckMotionControllers()) {
-                this.Destroy();
-                return false;
-            }
-        }
-        return true;
-    }
     EndTransition() {
         if (IsServer()) {
             if (this.transition_end_commenced) {

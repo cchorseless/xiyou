@@ -427,8 +427,8 @@ export class modifier_imba_timbersaw_timber_chain extends BaseModifierMotionHori
         this.direction = Vector(params.direction_x, params.direction_y, params.direction_z).Normalized();
         this.velocity = this.direction * params.speed;
         this.damaged_targets = []
-        if (this.ApplyHorizontalMotionController() == false) {
-            this.Destroy();
+        if (this.BeginMotionOrDestroy() == false) {
+            return;
         }
     }
     BeDestroy(): void {
@@ -547,8 +547,8 @@ export class modifier_imba_timbersaw_timber_chain_side_hooks extends BaseModifie
         this.distance = (Vector(params.direction_x, params.direction_y, params.direction_z) - this.GetParentPlus().GetAbsOrigin() as Vector).Length2D();
         this.direction = Vector(params.direction_x, params.direction_y, params.direction_z).Normalized();
         this.velocity = this.direction * this.speed;
-        if (this.ApplyHorizontalMotionController() == false) {
-            this.Destroy();
+        if (this.BeginMotionOrDestroy() == false) {
+            return;
         }
     }
     BeDestroy(): void {

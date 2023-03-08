@@ -9,10 +9,10 @@ import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 
 function FindActiveRemnants(caster: IBaseNpc_Plus) {
-    let remnants = Entities.FindAllByModel("models/heroes/ember_spirit/ember_spirit.vmdl") as IBaseNpc_Plus[];
-    remnants = remnants.filter((npc) => {
-        return npc.IsAlive() && !npc.IsRealUnit() && npc.GetOwner() == caster && npc.HasModifier("modifier_imba_fire_remnant_state");
-    });
+    let remnants = caster.FindChildByFilter((npc) => {
+        return npc.GetUnitName().includes("ember_spirit_remnant") && npc.IsAlive() && !npc.IsRealUnit() && npc.HasModifier("modifier_imba_fire_remnant_state");
+    }
+    )
     return remnants;
 }
 function ApplySearingChains(caster: IBaseNpc_Plus, source: IBaseNpc_Plus, target: IBaseNpc_Plus, ability: IBaseAbility_Plus, duration: number) {
@@ -458,7 +458,7 @@ export class modifier_imba_fire_remnant_state extends BaseModifier_Plus {
         return ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW;
     }
     StatusEffectPriority(): modifierpriority {
-        return 20;
+        return 2;
     }
     GetStatusEffectName(): string {
         return "particles/status_fx/status_effect_burn.vpcf";
@@ -478,7 +478,8 @@ export class modifier_imba_fire_remnant_state extends BaseModifier_Plus {
     }
     BeCreated(keys: any): void {
         if (IsServer()) {
-            this.GetParentPlus().AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_kill", {
+            this.GetParentPlus().AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(),
+                "modifier_kill", {
                 duration: this.GetDuration()
             });
         }
@@ -863,7 +864,7 @@ export class imba_ember_spirit_activate_fire_remnant extends BaseAbility_Plus {
             let caster = this.GetCasterPlus();
             let target_loc = this.GetCursorPosition();
             let active_remnants = FindActiveRemnants(caster);
-            if (active_remnants) {
+            if (active_remnants.length > 0) {
                 let closest_remnant_position = active_remnants[0].GetAbsOrigin();
                 let closest_distance = (closest_remnant_position - target_loc as Vector).Length2D();
                 for (const [_, remnant] of GameFunc.iPair(active_remnants)) {

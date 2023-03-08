@@ -450,6 +450,26 @@ export class BaseNpc implements ET.IEntityRoot {
         return unit as IBaseNpc_Plus;
     }
 
+    static CreateUnitByNameAsync(
+        unitname: string,
+        v: Vector,
+        entityOwner: IBaseNpc_Plus,
+        hander: IGHandler,
+        findClearSpace: boolean = true,
+        team: DOTATeam_t = null,
+        npcOwner: CBaseEntity | undefined = null,
+    ) {
+        npcOwner = npcOwner || entityOwner;;
+        team = team || entityOwner.GetTeam();
+        CreateUnitByNameAsync(unitname, v, findClearSpace, npcOwner, entityOwner, team, (unit) => {
+            unit.RegOwnerSelf(true);
+            if (hander) {
+                hander.runWith([unit]);
+            }
+        });
+        // GameFunc.BindInstanceToCls(unit, GGetRegClass(unitname) || BaseNpc);
+    }
+
     /**缓存 */
     Precache?(context: CScriptPrecacheContext) { }
     /**出生 不知道为啥，客户端不执行
@@ -511,7 +531,7 @@ export class BaseModifierMotion extends BaseModifier {
     }
     CheckMotionControllers?(): boolean {
         let parent = this.GetParent();
-        let modifier_priority = this.GetPriority();
+        let modifier_priority = this.GetPriority() || modifierpriority.MODIFIER_PRIORITY_LOW;
         let is_motion_controller = false;
         let motion_controller_priority = -100;
         let found_modifier_handler: IBaseModifier_Plus;
@@ -533,7 +553,7 @@ export class BaseModifierMotion extends BaseModifier {
         ]
         let modifiers = parent.FindAllModifiers() as IBaseModifier_Plus[];
         for (const modifier of (modifiers)) {
-            if (this != modifier && modifier instanceof BaseModifierMotion) {
+            if (this != modifier && modifier.IsMotionBuff()) {
                 is_motion_controller = true;
                 let _p = modifier.GetPriority();
                 if (non_imba_motion_controllers.includes(modifier.GetName())) {
@@ -569,7 +589,7 @@ export class BaseModifierMotion extends BaseModifier {
         let modifiers = parent.FindAllModifiers() as IBaseModifier_Plus[];
         let motion_buffs = [];
         for (const modifier of (modifiers)) {
-            if (modifier instanceof BaseModifierMotion) {
+            if (modifier.IsMotionBuff()) {
                 motion_buffs.push(modifier);
             }
         }
@@ -582,13 +602,47 @@ export class BaseModifierMotion extends BaseModifier {
 }
 
 export interface BaseModifierMotionHorizontal extends CDOTA_Modifier_Lua_Horizontal_Motion { }
-export class BaseModifierMotionHorizontal extends BaseModifierMotion { }
+export class BaseModifierMotionHorizontal extends BaseModifierMotion {
+    BeginMotionOrDestroy?(b = true) {
+        let r1 = this.ApplyHorizontalMotionController();
+        let r = r1 /**&&&& this.CheckMotionControllers() */;
+        if (!r && b) {
+            this.Destroy();
+        }
+        return r;
+    }
+    GetMotionPriority() {
+        return this.GetPriority() || modifierpriority.MODIFIER_PRIORITY_LOW;
+    }
+}
 
 export interface BaseModifierMotionVertical extends CDOTA_Modifier_Lua_Vertical_Motion { }
-export class BaseModifierMotionVertical extends BaseModifierMotion { }
+export class BaseModifierMotionVertical extends BaseModifierMotion {
+    BeginMotionOrDestroy?(b = true) {
+        let r1 = this.ApplyVerticalMotionController();
+        let r = r1 /**&&&& this.CheckMotionControllers() */;
+        if (!r && b) {
+            this.Destroy();
+        }
+        return r;
+    }
+    GetMotionPriority() {
+        return this.GetPriority() || modifierpriority.MODIFIER_PRIORITY_LOW;
+    }
+}
 
 export interface BaseModifierMotionBoth extends CDOTA_Modifier_Lua_Motion_Both { }
-export class BaseModifierMotionBoth extends BaseModifierMotion { }
+export class BaseModifierMotionBoth extends BaseModifierMotion {
+    BeginMotionOrDestroy?(b = true) {
+        let r1 = this.ApplyVerticalMotionController();
+        let r2 = this.ApplyHorizontalMotionController();
+        let r = r1 && r2 /**&& this.CheckMotionControllers()*/;
+        if (!r && b) {
+            this.Destroy();
+        }
+        return r;
+    }
+}
 
 LogHelper.print(`-------------------setmetatable IsServer: ${IsServer()}------------------------------`);
 // Add standard base classes to prototype chain to make `super.*` work as `self.BaseClass.*`

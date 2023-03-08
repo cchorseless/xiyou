@@ -645,11 +645,9 @@ export class modifier_imba_boulder_smash_push extends BaseModifier_Plus {
     IgnoreTenacity() {
         return true;
     }
-    IsMotionController() {
-        return true;
-    }
-    GetMotionControllerPriority() {
-        return DOTA_MOTION_CONTROLLER_PRIORITY.DOTA_MOTION_CONTROLLER_PRIORITY_MEDIUM;
+
+    GetPriority() {
+        return modifierpriority.MODIFIER_PRIORITY_HIGH;
     }
     GetAttributes(): DOTAModifierAttribute_t {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_PERMANENT;
@@ -883,11 +881,9 @@ export class modifier_imba_rolling_boulder extends BaseModifier_Plus {
     IsHidden(): boolean {
         return true;
     }
-    IsMotionController() {
-        return true;
-    }
-    GetMotionControllerPriority() {
-        return DOTA_MOTION_CONTROLLER_PRIORITY.DOTA_MOTION_CONTROLLER_PRIORITY_MEDIUM;
+
+    GetPriority() {
+        return modifierpriority.MODIFIER_PRIORITY_HIGH;
     }
     GetEffectName(): string {
         return "particles/units/heroes/hero_earth_spirit/espirit_rollingboulder.vpcf";
@@ -1206,11 +1202,9 @@ export class modifier_imba_geomagnetic_grip_pull extends BaseModifier_Plus {
     IgnoreTenacity() {
         return true;
     }
-    IsMotionController() {
-        return true;
-    }
-    GetMotionControllerPriority() {
-        return DOTA_MOTION_CONTROLLER_PRIORITY.DOTA_MOTION_CONTROLLER_PRIORITY_MEDIUM;
+
+    GetPriority() {
+        return modifierpriority.MODIFIER_PRIORITY_HIGH;
     }
     GetAttributes(): DOTAModifierAttribute_t {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_PERMANENT;

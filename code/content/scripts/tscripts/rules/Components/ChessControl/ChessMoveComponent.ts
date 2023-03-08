@@ -1,7 +1,7 @@
 
 import { modifier_jiaoxie_wudi } from "../../../npc/modifier/battle/modifier_jiaoxie_wudi";
-import { modifier_jump } from "../../../npc/modifier/modifier_jump";
-import { modifier_run } from "../../../npc/modifier/modifier_run";
+import { modifier_jump } from "../../../npc/modifier/move/modifier_jump";
+import { modifier_run } from "../../../npc/modifier/move/modifier_run";
 import { ChessControlConfig } from "../../../shared/ChessControlConfig";
 import { ET } from "../../../shared/lib/Entity";
 import { GEventHelper } from "../../../shared/lib/GEventHelper";
@@ -101,13 +101,17 @@ export class ChessMoveComponent extends ET.Component {
             modifier_jump.applyOnly(domain, domain, null, {
                 vx: v.x,
                 vy: v.y,
-            });
+            }).DestroyHandler = GHandler.create(this, () => {
+                this.OnblinkChessFinish();
+            })
         } else {
             // todo
             domain.MoveToPositionAggressive(v)
             // modifier_run.applyOnly(domain, domain, null, {
             //     vx: v.x,
             //     vy: v.y,
+            // }).DestroyHandler = GHandler.create(this, () => {
+            //     this.OnblinkChessFinish();
             // });
 
         }

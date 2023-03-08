@@ -1034,14 +1034,13 @@ export class modifier_imba_culling_blade_motion extends BaseModifierMotionBoth_P
     IgnoreTenacity() {
         return true;
     }
-    IsMotionController() {
-        return true;
-    }
-    GetMotionControllerPriority() {
-        return DOTA_MOTION_CONTROLLER_PRIORITY.DOTA_MOTION_CONTROLLER_PRIORITY_HIGH;
+
+    GetPriority() {
+        return 3;
     }
     BeCreated(kv: any): void {
         if (IsServer()) {
+            if (!this.BeginMotionOrDestroy()) { return; }
             this.axe_minimum_height_above_lowest = 500;
             this.axe_minimum_height_above_highest = 100;
             this.axe_acceleration_z = 4000;
@@ -1065,14 +1064,6 @@ export class modifier_imba_culling_blade_motion extends BaseModifierMotionBoth_P
             this.vHorizontalVelocity.z = 0.0;
 
         }
-    }
-
-    ApplyHorizontalMotionController() {
-        return true;
-    }
-
-    ApplyVerticalMotionController() {
-        return true;
     }
 
     UpdateHorizontalMotion(me: IBaseNpc_Plus, dt: number) {

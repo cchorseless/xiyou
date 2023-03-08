@@ -300,11 +300,9 @@ export class modifier_imba_faceless_void_time_walk_cast extends BaseModifierMoti
     IgnoreTenacity() {
         return true;
     }
-    IsMotionController() {
-        return true;
-    }
-    GetMotionControllerPriority() {
-        return DOTA_MOTION_CONTROLLER_PRIORITY.DOTA_MOTION_CONTROLLER_PRIORITY_MEDIUM;
+
+    GetPriority() {
+        return modifierpriority.MODIFIER_PRIORITY_HIGH;
     }
     GetEffectName(): string {
         return "particles/units/heroes/hero_faceless_void/faceless_void_time_walk.vpcf";
@@ -344,12 +342,13 @@ export class modifier_imba_faceless_void_time_walk_cast extends BaseModifierMoti
             ParticleManager.ReleaseParticleIndex(particle);
             this.as_stolen = 0;
             this.ms_stolen = 0;
+            this.BeginMotionOrDestroy();
         }
     }
-    ApplyHorizontalMotionController(): boolean {
+    CheckSelf(): boolean {
         if (!this.CheckMotionControllers()) {
             this.Destroy();
-            return false;
+            return;
         }
         let ability = this.GetAbilityPlus();
         if (ability.GetAbilityName() == "imba_faceless_void_time_walk") {
@@ -381,7 +380,7 @@ export class modifier_imba_faceless_void_time_walk_cast extends BaseModifierMoti
                 this.GetParentPlus().findBuff<modifier_imba_faceless_void_chronocharges>("modifier_imba_faceless_void_chronocharges").SetStackCount(this.GetParentPlus().FindModifierByName("modifier_imba_faceless_void_chronocharges").GetStackCount() + chronocharges);
             }
         }
-        return true;
+        return;
     }
     OnRemoved(): void {
         if (IsServer()) {
@@ -421,6 +420,7 @@ export class modifier_imba_faceless_void_time_walk_cast extends BaseModifierMoti
         } else {
             this.Destroy();
         }
+        this.CheckSelf();
     }
 }
 @registerModifier()

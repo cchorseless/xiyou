@@ -1462,17 +1462,10 @@ export class modifier_imba_skewer_motion_controller extends BaseModifierMotionHo
                     enemy.EmitSound("Hero_Magnataur.ReversePolarity.Stun");
                 }
             }
+            this.BeginMotionOrDestroy();
         }
     }
-    ApplyHorizontalMotionController(): boolean {
-        if (IsServer()) {
-            if (!this.CheckMotionControllers()) {
-                this.Destroy();
-                return false;
-            }
-        }
-        return true;
-    }
+
     BeDestroy(): void {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
@@ -1650,22 +1643,14 @@ export class modifier_imba_skewer_motion_controller extends BaseModifierMotionHo
 export class modifier_imba_skewer_motion_controller_target extends BaseModifierMotionHorizontal_Plus {
     public direction: any;
     public speed: number;
-    public frametime: number;
     BeCreated(params: any): void {
         if (IsServer()) {
             this.direction = Vector(params.direction_x, params.direction_y, params.direction_z);
             this.speed = params.speed;
-            this.frametime = FrameTime();
-            this.StartIntervalThink(this.frametime);
+            this.BeginMotionOrDestroy();
         }
     }
-    ApplyHorizontalMotionController(): boolean {
-        if (!this.CheckMotionControllers()) {
-            this.Destroy();
-            return false;
-        }
-        return true;
-    }
+
     BeDestroy(): void {
         if (IsServer()) {
             let caster = this.GetCasterPlus();

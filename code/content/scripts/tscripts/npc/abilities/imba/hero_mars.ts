@@ -3,6 +3,7 @@ import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifierMotionBoth_Plus, BaseModifierMotionHorizontal_Plus, BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
+import { BaseNpc_Plus } from "../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 @registerAbility()
@@ -414,27 +415,25 @@ export class modifier_imba_mars_spear extends BaseModifierMotionHorizontal_Plus 
     IsPurgable(): boolean {
         return true;
     }
-    BeCreated(kv: any): void {
+    Init(kv: any): void {
         if (IsServer()) {
             this.projectile = kv.projectile;
             let ability = this.GetAbilityPlus<imba_mars_spear>();
             this.GetParentPlus().SetForwardVector(-ability.projectiles[kv.projectile].direction as Vector);
             this.GetParentPlus().FaceTowards(ability.projectiles[this.projectile].init_pos);
-            if (this.ApplyHorizontalMotionController() == false) {
-                this.Destroy();
+            if (!this.BeginMotionOrDestroy()) {
+                return;
             }
         }
     }
-    BeRefresh(kv: any): void {
-    }
+
     OnRemoved(): void {
         if (!IsServer()) {
             return;
         }
         this.GetParentPlus().InterruptMotionControllers(false);
     }
-    BeDestroy(): void {
-    }
+
     /** DeclareFunctions():modifierfunction[] {
         let funcs = {
             1: GPropertyConfig.EMODIFIER_PROPERTY.OVERRIDE_ANIMATION
@@ -1528,14 +1527,15 @@ export class modifier_imba_mars_arena_of_blood_thinker extends BaseModifier_Plus
         for (let i = 0; i <= count - 1; i++) {
             let location = RotatePosition(origin, QAngle(0, angle_diff * i, 0), vector);
             let facing = RotatePosition(zero, QAngle(0, 200 + angle_diff * i, 0), one);
-            CreateUnitByNameAsync("npc_dota_imba_mars_arena_of_blood_soldier", location, false, caster, undefined, caster.GetTeamNumber(), (unit: IBaseNpc_Plus) => {
-                unit.SetForwardVector(facing);
-                unit.SetNeverMoveToClearSpace(true);
-                unit.AddNewModifier(caster, this.GetAbilityPlus(), "modifier_imba_mars_arena_of_blood_blocker", {
-                    duration: this.duration,
-                    model: i % 2 == 0
-                });
-            });
+            BaseNpc_Plus.CreateUnitByNameAsync("npc_dota_imba_mars_arena_of_blood_soldier", location, caster,
+                GHandler.create(this, (unit: IBaseNpc_Plus) => {
+                    unit.SetForwardVector(facing);
+                    unit.SetNeverMoveToClearSpace(true);
+                    unit.AddNewModifier(caster, this.GetAbilityPlus(), "modifier_imba_mars_arena_of_blood_blocker", {
+                        duration: this.duration,
+                        model: i % 2 == 0
+                    })
+                }), false,);
         }
     }
     PlayEffects() {
@@ -1713,11 +1713,9 @@ export class modifier_imba_mars_arena_of_blood_scepter extends BaseModifierMotio
     IgnoreTenacity() {
         return true;
     }
-    IsMotionController() {
-        return true;
-    }
-    GetMotionControllerPriority() {
-        return DOTA_MOTION_CONTROLLER_PRIORITY.DOTA_MOTION_CONTROLLER_PRIORITY_MEDIUM;
+
+    GetPriority() {
+        return 2;
     }
     BeCreated(keys: any): void {
         if (!IsServer()) {
@@ -1737,23 +1735,10 @@ export class modifier_imba_mars_arena_of_blood_scepter extends BaseModifierMotio
             this.distance = (this.GetParentPlus().GetAbsOrigin() - this.target_point as Vector).Length2D();
             this.jump_time = this.distance / this.jump_speed;
             this.direction = (this.target_point - this.GetParentPlus().GetAbsOrigin() as Vector).Normalized();
-            this.StartIntervalThink(FrameTime());
+            if (!this.BeginMotionOrDestroy()) { return; }
         });
     }
-    ApplyHorizontalMotionController(): boolean {
-        if (!this.CheckMotionControllers()) {
-            this.Destroy();
-            return false;
-        }
-        return true;
-    }
-    ApplyVerticalMotionController(): boolean {
-        if (!this.CheckMotionControllers()) {
-            this.Destroy();
-            return false;
-        }
-        return true;
-    }
+
     UpdateVerticalMotion(me: IBaseNpc_Plus, dt: number) {
         if (IsServer()) {
             if (this.time_elapsed < this.jump_time) {

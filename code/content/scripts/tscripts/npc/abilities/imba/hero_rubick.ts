@@ -201,31 +201,13 @@ export class modifier_imba_telekinesis extends BaseModifierMotionBoth_Plus {
             this.fall_animation = ability.GetSpecialValueFor("fall_animation");
             this.current_time = 0;
             this.frametime = FrameTime();
-            this.StartIntervalThink(FrameTime());
+            if (!this.BeginMotionOrDestroy()) { return };
             this.AddTimer(FrameTime(), () => {
                 this.duration = this.GetRemainingTime();
             });
         }
     }
-    ApplyHorizontalMotionController() {
-        if (IsServer()) {
-            if (!this.CheckMotionControllers()) {
-                this.Destroy();
-                return false;
-            }
-        }
-        return true;
-    }
 
-    ApplyVerticalMotionController(): boolean {
-        if (IsServer()) {
-            if (!this.CheckMotionControllers()) {
-                this.Destroy();
-                return false;
-            }
-        }
-        return true;
-    }
     EndTransition() {
         if (IsServer()) {
             if (this.transition_end_commenced) {

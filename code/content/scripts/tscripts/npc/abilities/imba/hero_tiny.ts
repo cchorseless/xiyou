@@ -515,19 +515,21 @@ export class modifier_imba_tiny_rolling_stone extends BaseModifier_Plus {
     public bonus_damage: number;
     public attackspeed: number;
     public movespeed: number;
-    public modelscale: any;
-    public gain: any;
-    public talent8: any;
-    public talent2: any;
-    public internalTimer: any;
-    public modelcap: any;
-    public growscale: any;
+    public modelscale: number;
+    public gain: number;
+    public talent8: boolean;
+    public talent2: boolean;
+    public internalTimer: number;
+    public modelcap: number;
+    public growscale: number;
     BeCreated(p_0: any,): void {
         this.bonus_damage = this.GetSpecialValueFor("bonus_damage");
         this.attackspeed = this.GetSpecialValueFor("attackspeed_reduction");
         this.movespeed = this.GetSpecialValueFor("bonus_movespeed");
         this.modelscale = this.GetSpecialValueFor("bonus_model_scale");
+        this.modelcap = this.GetSpecialValueFor("max_model_scale");
         this.gain = this.GetSpecialValueFor("stack_per_min");
+        this.growscale = 0;
         this.talent8 = false;
         this.talent2 = false;
         this.internalTimer = 0;
@@ -914,7 +916,6 @@ export class modifier_tiny_toss_movement extends BaseModifierMotionBoth_Plus {
     public flInitialVelocityZ: any;
     public flPredictedTotalTime: any;
     public vHorizontalVelocity: any;
-    public frametime: number;
     public toss_land_commenced: any;
     IsDebuff(): boolean {
         return true;
@@ -965,28 +966,12 @@ export class modifier_tiny_toss_movement extends BaseModifierMotionBoth_Plus {
             this.flPredictedTotalTime = math.max((this.flInitialVelocityZ + flSqrtDet) / this.toss_acceleration_z, (this.flInitialVelocityZ - flSqrtDet) / this.toss_acceleration_z);
             this.vHorizontalVelocity = (this.vLastKnownTargetPos - this.vStartPosition) / this.flPredictedTotalTime;
             this.vHorizontalVelocity.z = 0.0;
-            this.frametime = FrameTime();
-            this.StartIntervalThink(FrameTime());
+            if (!this.BeginMotionOrDestroy()) { return; }
+
+
         }
     }
-    ApplyHorizontalMotionController() {
-        if (IsServer()) {
-            if (!this.CheckMotionControllers()) {
-                this.Destroy();
-                return false;
-            }
-            return true;
-        }
-    }
-    ApplyVerticalMotionController() {
-        if (IsServer()) {
-            if (!this.CheckMotionControllers()) {
-                this.Destroy();
-                return false;
-            }
-            return true;
-        }
-    }
+
     TossLand() {
         if (IsServer()) {
             if (this.toss_land_commenced) {
@@ -1127,7 +1112,6 @@ export class modifier_tiny_toss_scepter_bounce extends BaseModifierMotionVertica
     public bounce_duration: number;
     public time: number;
     public toss_z: any;
-    public frametime: number;
     IsDebuff(): boolean {
         return true;
     }
@@ -1140,19 +1124,17 @@ export class modifier_tiny_toss_scepter_bounce extends BaseModifierMotionVertica
     IsHidden(): boolean {
         return true;
     }
-    IsMotionController() {
-        return true;
-    }
-    GetMotionControllerPriority() {
-        return DOTA_MOTION_CONTROLLER_PRIORITY.DOTA_MOTION_CONTROLLER_PRIORITY_MEDIUM;
+
+    GetPriority() {
+        return modifierpriority.MODIFIER_PRIORITY_HIGH;
     }
     IsPurgable(): boolean {
         return false;
     }
     BeCreated(kv: any): void {
         if (IsServer()) {
-            if (this.ApplyVerticalMotionController() == false) {
-                this.Destroy();
+            if (!this.BeginMotionOrDestroy()) {
+                return;
             }
             this.caster = this.GetCasterPlus();
             this.ability = this.GetAbilityPlus();
@@ -1163,8 +1145,6 @@ export class modifier_tiny_toss_scepter_bounce extends BaseModifierMotionVertica
             this.bounce_duration = this.GetSpecialValueFor("scepter_bounce_duration");
             this.time = 0;
             this.toss_z = 0;
-            this.frametime = FrameTime();
-            this.StartIntervalThink(FrameTime());
         }
     }
     /** DeclareFunctions():modifierfunction[] {
@@ -1199,16 +1179,8 @@ export class modifier_tiny_toss_scepter_bounce extends BaseModifierMotionVertica
         let state = {}
         return state;
     }
-    OnIntervalThink(): void {
-        if (IsServer()) {
-            if (!this.CheckMotionControllers()) {
-                this.Destroy();
-                return undefined;
-            }
-            this.VerticalMotion(this.parent, this.frametime);
-        }
-    }
-    VerticalMotion(me: IBaseNpc_Plus, dt: number) {
+
+    UpdateVerticalMotion(me: IBaseNpc_Plus, dt: number) {
         if (IsServer()) {
             if (this.time < this.bounce_duration) {
                 this.time = this.time + dt;
@@ -1382,9 +1354,6 @@ export class imba_tiny_grow extends BaseAbility_Plus {
     public larm: any;
     public body: any;
     GetAbilityTextureName(): string {
-        if (!IsClient()) {
-            return;
-        }
         if (!this.GetCasterPlus().TempData().arcana_style) {
             return "tiny_grow";
         }
@@ -1400,6 +1369,7 @@ export class imba_tiny_grow extends BaseAbility_Plus {
         if (!IsServer()) {
             return;
         }
+        ResHelper.LoadUnitRes(this.GetCasterPlus());
         let reapply_craggy = false;
         let rolling_stone = this.GetCasterPlus().findBuff<modifier_imba_tiny_rolling_stone>("modifier_imba_tiny_rolling_stone");
         rolling_stone.growscale = this.GetSpecialValueFor("rolling_stone_scale_reduction");
@@ -1413,7 +1383,7 @@ export class imba_tiny_grow extends BaseAbility_Plus {
         this.SetupModel(level);
         this.GetCasterPlus().StartGesture(GameActivity_t.ACT_TINY_GROWL);
         EmitSoundOn("Tiny.Grow", this.GetCasterPlus());
-        let grow_pfx_name = string.gsub(this.GetCasterPlus().TempData().grow_effect, "lvl1", "lvl" + level);
+        // let grow_pfx_name = this.GetCasterPlus().TempData<string>().grow_effect.replace("lvl1", "lvl" + level);
         let grow = ResHelper.CreateParticleEx(this.GetCasterPlus().TempData().grow_effect, ParticleAttachment_t.PATTACH_POINT_FOLLOW, this.GetCasterPlus());
         ParticleManager.SetParticleControl(grow, 0, this.GetCasterPlus().GetAbsOrigin());
         ParticleManager.ReleaseParticleIndex(grow);

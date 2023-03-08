@@ -1690,18 +1690,10 @@ export class modifier_imba_ghostship_drag extends BaseModifierMotionHorizontal_P
         if (IsServer()) {
             this.caster = this.GetCasterPlus();
             this.ability = this.GetAbilityPlus();
+            this.BeginMotionOrDestroy()
         }
     }
-    ApplyHorizontalMotionController(): boolean {
-        if (this.CheckMotionControllers()) {
-            return true;
-        }
-        else {
-            this.Destroy();
-            return false;;
-        }
 
-    }
     UpdateHorizontalMotion(me: IBaseNpc_Plus, dt: number) {
         if (IsServer()) {
             this.current_loc = this.caster.GetAbsOrigin();

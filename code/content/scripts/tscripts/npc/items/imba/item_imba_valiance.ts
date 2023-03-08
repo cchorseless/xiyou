@@ -288,9 +288,8 @@ export class modifier_item_imba_valiance_dash extends BaseModifierMotionHorizont
         this.velocity = (this.cursor_position - this.GetParentPlus().GetAbsOrigin() as Vector).Normalized() * this.counter_dash_speed;
         this.SetStackCount(this.damage_counter);
         this.GetParentPlus().SetForwardVector((this.cursor_position - this.GetParentPlus().GetAbsOrigin() as Vector).Normalized());
-        if (this.ApplyHorizontalMotionController() == false) {
-            this.Destroy();
-        }
+        if (this.BeginMotionOrDestroy()) { return; }
+
     }
     UpdateHorizontalMotion(me: CDOTA_BaseNPC, dt: number): void {
         if (!IsServer()) {

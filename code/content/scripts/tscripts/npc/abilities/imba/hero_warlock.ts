@@ -343,6 +343,10 @@ export class modifier_imba_shadow_word extends BaseModifier_Plus {
         return true;
     }
     OnIntervalThink(): void {
+        if (!GFuncEntity.IsValid(this.caster)) {
+            this.Destroy();
+            return;
+        }
         if (this.good_guy) {
             let spell_power = this.caster.GetSpellAmplification(false);
             let heal = this.tick_value * (1 + spell_power * 0.01);

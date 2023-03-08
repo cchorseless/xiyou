@@ -219,9 +219,7 @@ export class modifier_item_imba_gungnir_force_ally extends BaseModifierMotionHor
     IsStunDebuff(): boolean {
         return false;
     }
-    IsMotionController() {
-        return true;
-    }
+
     GetPriority() {
         return 2;
     }
@@ -241,6 +239,8 @@ export class modifier_item_imba_gungnir_force_ally extends BaseModifierMotionHor
         this.distance = this.GetItemPlus().GetSpecialValueFor("push_length") / (this.GetDuration() / FrameTime());
         this.attacked_target = {}
         this.god_piercing_radius = this.GetItemPlus().GetSpecialValueFor("god_piercing_radius");
+        this.BeginMotionOrDestroy()
+
     }
     BeDestroy(): void {
         if (!IsServer()) {
@@ -251,10 +251,10 @@ export class modifier_item_imba_gungnir_force_ally extends BaseModifierMotionHor
         this.GetParentPlus().FadeGesture(GameActivity_t.ACT_DOTA_FLAIL);
         ResolveNPCPositions(this.GetParentPlus().GetAbsOrigin(), 128);
     }
-    ApplyHorizontalMotionController() {
+    CheckSelf() {
         if (!this.CheckMotionControllers()) {
             this.Destroy();
-            return false;
+            return;
         }
         let attacker = this.GetParentPlus();
         let enemies = FindUnitsInRadius(attacker.GetTeamNumber(), attacker.GetAbsOrigin(), undefined, this.god_piercing_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
@@ -265,7 +265,7 @@ export class modifier_item_imba_gungnir_force_ally extends BaseModifierMotionHor
             }
         }
         ProjectileHelper.ProjectileDodgePlus(this.GetParentPlus());
-        return true;
+        return;
     }
     HorizontalMotion(unit: IBaseNpc_Plus, time: number) {
         if (!IsServer()) {
@@ -276,6 +276,7 @@ export class modifier_item_imba_gungnir_force_ally extends BaseModifierMotionHor
         let pos_p = this.angle * this.distance;
         let next_pos = GetGroundPosition(pos + pos_p as Vector, unit);
         unit.SetAbsOrigin(next_pos);
+        this.CheckSelf()
     }
     CheckState(): Partial<Record<modifierstate, boolean>> {
         let state = {
@@ -318,6 +319,7 @@ export class modifier_item_imba_gungnir_force_enemy_ranged extends BaseModifierM
         if (!IsServer()) {
             return;
         }
+        this.BeginMotionOrDestroy()
         this.effect = this.GetCasterPlus().TempData().force_staff_effect || "particles/items_fx/force_staff.vpcf";
         this.pfx = ResHelper.CreateParticleEx(this.effect, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetParentPlus());
         this.GetParentPlus().StartGesture(GameActivity_t.ACT_DOTA_FLAIL);
@@ -334,13 +336,7 @@ export class modifier_item_imba_gungnir_force_enemy_ranged extends BaseModifierM
         this.GetParentPlus().FadeGesture(GameActivity_t.ACT_DOTA_FLAIL);
         ResolveNPCPositions(this.GetParentPlus().GetAbsOrigin(), 128);
     }
-    ApplyHorizontalMotionController() {
-        if (!this.CheckMotionControllers()) {
-            this.Destroy();
-            return false;
-        }
-        return true;
-    }
+
     UpdateHorizontalMotion(unit: IBaseNpc_Plus, time: number) {
         if (!IsServer()) {
             return;
@@ -382,6 +378,7 @@ export class modifier_item_imba_gungnir_force_self_ranged extends BaseModifierMo
         if (!IsServer()) {
             return;
         }
+        this.BeginMotionOrDestroy()
         this.effect = this.GetCasterPlus().TempData().force_staff_effect || "particles/items_fx/force_staff.vpcf";
         this.pfx = ResHelper.CreateParticleEx(this.effect, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetParentPlus());
         this.GetParentPlus().StartGesture(GameActivity_t.ACT_DOTA_FLAIL);
@@ -398,13 +395,7 @@ export class modifier_item_imba_gungnir_force_self_ranged extends BaseModifierMo
         this.GetParentPlus().FadeGesture(GameActivity_t.ACT_DOTA_FLAIL);
         ResolveNPCPositions(this.GetParentPlus().GetAbsOrigin(), 128);
     }
-    ApplyHorizontalMotionController() {
-        if (!this.CheckMotionControllers()) {
-            this.Destroy();
-            return false;;
-        }
-        return true;
-    }
+
     UpdateHorizontalMotion(unit: IBaseNpc_Plus, time: number) {
         if (!IsServer()) {
             return;
@@ -446,6 +437,7 @@ export class modifier_item_imba_gungnir_force_enemy_melee extends BaseModifierMo
         if (!IsServer()) {
             return;
         }
+        this.BeginMotionOrDestroy()
         this.effect = this.GetCasterPlus().TempData().force_staff_effect || "particles/items_fx/force_staff.vpcf";
         this.pfx = ResHelper.CreateParticleEx(this.effect, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetParentPlus());
         this.GetParentPlus().StartGesture(GameActivity_t.ACT_DOTA_FLAIL);
@@ -462,13 +454,7 @@ export class modifier_item_imba_gungnir_force_enemy_melee extends BaseModifierMo
         this.GetParentPlus().FadeGesture(GameActivity_t.ACT_DOTA_FLAIL);
         ResolveNPCPositions(this.GetParentPlus().GetAbsOrigin(), 128);
     }
-    ApplyHorizontalMotionController() {
-        if (!this.CheckMotionControllers()) {
-            this.Destroy();
-            return false;
-        }
-        return true;
-    }
+
     UpdateHorizontalMotion(unit: IBaseNpc_Plus, time: number) {
         if (!IsServer()) {
             return;
@@ -510,6 +496,7 @@ export class modifier_item_imba_gungnir_force_self_melee extends BaseModifierMot
         if (!IsServer()) {
             return;
         }
+        this.BeginMotionOrDestroy()
         this.effect = this.GetCasterPlus().TempData().force_staff_effect || "particles/items_fx/force_staff.vpcf";
         this.pfx = ResHelper.CreateParticleEx(this.effect, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetParentPlus());
         this.GetParentPlus().StartGesture(GameActivity_t.ACT_DOTA_FLAIL);
@@ -526,13 +513,7 @@ export class modifier_item_imba_gungnir_force_self_melee extends BaseModifierMot
         this.GetParentPlus().FadeGesture(GameActivity_t.ACT_DOTA_FLAIL);
         ResolveNPCPositions(this.GetParentPlus().GetAbsOrigin(), 128);
     }
-    ApplyHorizontalMotionController() {
-        if (!this.CheckMotionControllers()) {
-            this.Destroy();
-            return false;;
-        }
-        return true;
-    }
+
     UpdateHorizontalMotion(unit: IBaseNpc_Plus, time: number) {
         if (!IsServer()) {
             return;

@@ -271,6 +271,7 @@ export class modifier_imba_nian_crushing_leap_movement extends BaseModifierMotio
         if (!IsServer()) {
             return;
         }
+        if (!this.BeginMotionOrDestroy()) { return };
         this.damage_type = this.GetAbilityPlus().GetAbilityDamageType();
         this.distance = params.distance;
         this.direction = Vector(params.direction_x, params.direction_y, params.direction_z).Normalized();
@@ -290,13 +291,9 @@ export class modifier_imba_nian_crushing_leap_movement extends BaseModifierMotio
             this.vertical_velocity = 4 * this.height / this.duration;
             this.vertical_acceleration = -(8 * this.height) / (this.duration * this.duration);
         }
-        if (this.ApplyVerticalMotionController() == false) {
-            this.Destroy();
-        }
-        if (this.ApplyHorizontalMotionController() == false) {
-            this.Destroy();
-        }
+
     }
+
     BeDestroy(): void {
         if (!IsServer()) {
             return;

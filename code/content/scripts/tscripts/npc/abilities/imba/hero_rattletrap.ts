@@ -483,8 +483,7 @@ export class modifier_imba_rattletrap_cog_push extends BaseModifierMotionHorizon
         }
         this.knockback_speed = this.push_length / this.duration;
         this.position = this.GetCasterPlus().GetAbsOrigin();
-        if (this.ApplyHorizontalMotionController() == false) {
-            this.Destroy();
+        if (!this.BeginMotionOrDestroy()) {
             return;
         }
     }
@@ -637,8 +636,7 @@ export class modifier_imba_rattletrap_power_cogs_rotational extends BaseModifier
         }
         this.center_loc = Vector(params.center_loc_x, params.center_loc_y, params.center_loc_z);
         this.rotational_speed = params.rotational_speed;
-        if (this.ApplyHorizontalMotionController() == false) {
-            this.Destroy();
+        if (!this.BeginMotionOrDestroy()) {
             return;
         }
     }
@@ -1044,9 +1042,9 @@ export class modifier_imba_rattletrap_hookshot extends BaseModifierMotionHorizon
         this.target = EntIndexToHScript(params.ent_index) as IBaseNpc_Plus;
         this.distance = (this.target.GetAbsOrigin() - this.GetCasterPlus().GetAbsOrigin() as Vector).Normalized();
         this.enemies_hit = {}
-        if (this.ApplyHorizontalMotionController() == false || (this.GetCasterPlus().GetAbsOrigin() - this.target.GetAbsOrigin() as Vector).Length2D() <= this.latch_radius) {
-            this.Destroy();
+        if (!this.BeginMotionOrDestroy()) {
             return;
+
         } else if (this.GetCasterPlus().GetUnitName().includes("rattletrap")) {
             let responses = {
                 "1": "rattletrap_ratt_ability_batt_06",

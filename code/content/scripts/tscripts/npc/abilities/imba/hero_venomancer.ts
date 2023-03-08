@@ -564,6 +564,10 @@ export class modifier_imba_venomous_gale extends BaseModifier_Plus {
     }
 
     OnIntervalThink(): void {
+        if (!GFuncEntity.IsValid(this.ability)) {
+            this.Destroy();
+            return;
+        }
         this.counter = this.counter + 1;
         let parent = this.GetParentPlus();
         if (this.counter >= (this.tick_interval / 0.3)) {
@@ -1234,6 +1238,10 @@ export class modifier_imba_poison_nova extends BaseModifier_Plus {
         }
     }
     OnIntervalThink(): void {
+        if (!GFuncEntity.IsValid(this.GetParentPlus())) {
+            this.Destroy();
+            return;
+        }
         if (IsServer()) {
             this.DealDamage(false);
         }

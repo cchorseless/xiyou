@@ -2,7 +2,7 @@
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
-import { BaseModifierMotionBoth_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
+import { BaseModifierMotionBoth_Plus, BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 const OGRE_MINIMUM_HEIGHT_ABOVE_LOWEST = 150;
 const OGRE_MINIMUM_HEIGHT_ABOVE_HIGHEST = 33;
@@ -122,10 +122,9 @@ export class modifier_ogreseal_flop extends BaseModifierMotionBoth_Plus {
     }
     BeCreated(kv: any): void {
         if (IsServer()) {
-            if (!this.GetItemPlus()) {
-                this.Destroy();
-            }
+            if (!this.BeginMotionOrDestroy()) { return };
         }
+
         if (IsServer()) {
             if (this.nHopCount == undefined) {
                 this.nHopCount = 1;
@@ -151,10 +150,6 @@ export class modifier_ogreseal_flop extends BaseModifierMotionBoth_Plus {
             this.bHorizontalMotionInterrupted = false;
             this.bDamageApplied = false;
             this.bTargetTeleported = false;
-            if (this.ApplyHorizontalMotionController() == false || this.ApplyVerticalMotionController() == false) {
-                this.Destroy();
-                return;
-            }
             this.flTimer = 0.0;
             this.vStartPosition = GetGroundPosition(this.GetParentPlus().GetOrigin(), this.GetParentPlus());
             this.flCurrentTimeHoriz = 0.0;
@@ -175,6 +170,7 @@ export class modifier_ogreseal_flop extends BaseModifierMotionBoth_Plus {
             this.vHorizontalVelocity.z = 0.0;
         }
     }
+
     BeDestroy(): void {
         if (IsServer()) {
             this.GetParentPlus().RemoveHorizontalMotionController(this);
@@ -274,7 +270,7 @@ export class modifier_ogreseal_flop extends BaseModifierMotionBoth_Plus {
     }
 }
 @registerModifier()
-export class modifier_item_imba_ogre_seal_totem extends BaseModifierMotionBoth_Plus {
+export class modifier_item_imba_ogre_seal_totem extends BaseModifier_Plus {
     public bonus_strength: number;
     public bonus_hp: number;
     IsHidden(): boolean {
@@ -290,11 +286,6 @@ export class modifier_item_imba_ogre_seal_totem extends BaseModifierMotionBoth_P
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE;
     }
     BeCreated(kv: any): void {
-        if (IsServer()) {
-            if (!this.GetItemPlus()) {
-                this.Destroy();
-            }
-        }
         this.bonus_strength = this.GetItemPlus().GetSpecialValueFor("bonus_strength");
         this.bonus_hp = this.GetItemPlus().GetSpecialValueFor("bonus_hp");
     }

@@ -76,11 +76,9 @@ export class modifier_imba_enigma_generic_pull extends BaseModifierMotionHorizon
     IsStunDebuff(): boolean {
         return false;
     }
-    IsMotionController() {
-        return true;
-    }
-    GetMotionControllerPriority() {
-        return DOTA_MOTION_CONTROLLER_PRIORITY.DOTA_MOTION_CONTROLLER_PRIORITY_LOWEST;
+
+    GetPriority() {
+        return 0;
     }
     Init(keys: any): void {
         if (!IsServer()) {
@@ -91,16 +89,10 @@ export class modifier_imba_enigma_generic_pull extends BaseModifierMotionHorizon
         }
         this.target = this.target || this.GetCasterPlus();
         this.length = keys.length;
-        this.StartIntervalThink(FrameTime());
+        this.BeginMotionOrDestroy()
     }
 
-    ApplyHorizontalMotionController(): boolean {
-        if (!this.CheckMotionControllers()) {
-            this.Destroy();
-            return false;
-        }
-        return true;
-    }
+
     UpdateHorizontalMotion(unit: IBaseNpc_Plus, dt: number) {
         let length = this.length / (1.0 / FrameTime());
         if (!this.target || this.target.IsNull()) {
@@ -953,22 +945,22 @@ export class modifier_imba_enigma_black_hole extends BaseModifierMotionHorizonta
         let ability = this.GetAbilityPlus<imba_enigma_black_hole>();
         this.radius = ability.radius;
         this.GetParentPlus().StartGesture(GameActivity_t.ACT_DOTA_FLAIL);
+        this.BeginMotionOrDestroy()
     }
-    ApplyHorizontalMotionController() {
+    CheckSelf() {
         let enigma = this.GetCasterPlus();
         let ability = this.GetAbilityPlus<imba_enigma_black_hole>();
         if (!ability.IsChanneling()) {
             this.Destroy();
-            return false;
+            return;
         }
         if (ability.thinker) {
             let distance = CalcDistanceBetweenEntityOBB(ability.thinker, this.GetParentPlus());
             if (distance > this.radius) {
                 this.Destroy();
-                return false;
+                return;
             }
         }
-        return true;
     }
     UpdateHorizontalMotion(unit: IBaseNpc_Plus, dt: number) {
         let ability = this.GetAbilityPlus<imba_enigma_black_hole>();
@@ -983,6 +975,7 @@ export class modifier_imba_enigma_black_hole extends BaseModifierMotionHorizonta
             }
             unit.SetAbsOrigin(next_pos);
         }
+        this.CheckSelf();
     }
     BeDestroy(): void {
         if (!IsServer()) {
@@ -1026,26 +1019,25 @@ export class modifier_imba_enigma_black_hole_pull extends BaseModifierMotionHori
         if (this.GetParentPlus().IsRoshan()) {
             this.Destroy();
         }
-        this.StartIntervalThink(FrameTime());
         let ability = this.GetAbilityPlus();
         this.pull_radius = this.GetAbilityPlus<imba_enigma_black_hole>().pull_radius;
         this.base_pull_distance = ability.GetSpecialValueFor("scepter_drag_speed");
+        this.BeginMotionOrDestroy()
     }
-    ApplyHorizontalMotionController(): boolean {
+    CheckSelf(): boolean {
         let enigma = this.GetCasterPlus();
         let ability = this.GetAbilityPlus<imba_enigma_black_hole>();
         if (!ability.IsChanneling()) {
             this.Destroy();
-            return false;
+            return;
         }
         if (ability.thinker) {
             let distance = CalcDistanceBetweenEntityOBB(ability.thinker, this.GetParentPlus());
             if (distance > this.pull_radius) {
                 this.Destroy();
-                return false;
+                return;
             }
         }
-        return true;
     }
     UpdateHorizontalMotion(unit: IBaseNpc_Plus, time: number) {
         let ability = this.GetAbilityPlus<imba_enigma_black_hole>();
@@ -1057,6 +1049,7 @@ export class modifier_imba_enigma_black_hole_pull extends BaseModifierMotionHori
             let next_pos = GetGroundPosition((pos + (thinker_pos - pos as Vector).Normalized() * this.pull_distance as Vector), unit);
             unit.SetAbsOrigin(next_pos);
         }
+        this.CheckSelf();
     }
     BeDestroy(): void {
         if (!IsServer()) {

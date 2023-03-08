@@ -73,7 +73,8 @@ export class imba_techies_land_mines extends BaseAbility_Plus {
     }
     GetManaCost(level: number): number {
         let caster = this.GetCasterPlus();
-        let initial_mana_cost = this.GetSpecialValueFor("AbilityManaCost");
+        // let initial_mana_cost = this.GetSpecialValueFor("AbilityManaCost");
+        let initial_mana_cost = 0;
         let modifier_charges = "modifier_generic_charges";
         let mana_increase_per_stack = this.GetSpecialValueFor("mana_increase_per_stack");
         let stacks = caster.findBuffStack(modifier_charges, caster);
@@ -276,25 +277,17 @@ export class modifier_imba_proximity_mine extends BaseModifier_Plus {
                 this.triggered = false;
                 this.trigger_time = 0;
                 this.hidden_by_sign = true;
-                return undefined;
+                return;
             }
             let enemies = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, this.trigger_range, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BUILDING, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false);
-            let enemy_found;
+            let enemy_found = false;
             if (GameFunc.GetCount(enemies) > 0) {
-                let non_flying_enemies = false;
                 for (const [_, enemy] of GameFunc.iPair(enemies)) {
                     if (!enemy.HasFlyMovementCapability()) {
-                        non_flying_enemies = true;
-                        return;
+                        enemy_found = true;
+                        break;
                     }
                 }
-                if (non_flying_enemies) {
-                    enemy_found = true;
-                } else {
-                    enemy_found = false;
-                }
-            } else {
-                enemy_found = false;
             }
             if (!this.triggered) {
                 if (enemy_found) {
@@ -643,11 +636,11 @@ export class modifier_imba_statis_trap extends BaseModifier_Plus {
         return false;
     }
     CheckState(): Partial<Record<modifierstate, boolean>> {
+        let state: Partial<Record<modifierstate, boolean>> = {};
         if (IsServer()) {
-            if (this.caster.IsCreep()) {
-                return undefined;
+            if (GFuncEntity.IsValid(this.caster) && this.caster.IsCreep()) {
+                return state;
             }
-            let state;
             if (this.active) {
                 state = {
                     [modifierstate.MODIFIER_STATE_INVISIBLE]: true,
@@ -863,7 +856,7 @@ export class imba_techies_suicide extends BaseAbility_Plus {
         let sound_cast = "Hero_Techies.BlastOff.Cast";
         let modifier_blast = "modifier_imba_blast_off";
         EmitSoundOn(sound_cast, caster);
-        let pig;
+        let pig: IBaseNpc_Plus;
         let modifierParam = {
             target_point_x: target_point.x,
             target_point_y: target_point.y,
@@ -1023,6 +1016,7 @@ export class modifier_imba_blast_off_movement extends BaseModifierMotionBoth_Plu
             this.caster = this.GetCasterPlus();
             this.ability = this.GetAbilityPlus();
             this.parent = this.GetParentPlus();
+            if (!this.BeginMotionOrDestroy()) { return };
             let particle_trail = "particles/units/heroes/hero_techies/techies_blast_off_trail.vpcf";
             this.damage = this.ability.GetSpecialValueFor("damage");
             this.radius = this.ability.GetSpecialValueFor("radius");
@@ -1043,21 +1037,7 @@ export class modifier_imba_blast_off_movement extends BaseModifierMotionBoth_Plu
             this.current_height = 0;
         }
     }
-    ApplyHorizontalMotionController(): boolean {
-        if (!this.CheckMotionControllers()) {
-            this.Destroy();
-            return false;
-        }
-        return true;
-    }
 
-    ApplyVerticalMotionController(): boolean {
-        if (!this.CheckMotionControllers()) {
-            this.Destroy();
-            return false;
-        }
-        return true;
-    }
     IsHidden(): boolean {
         return true;
     }
@@ -1257,7 +1237,6 @@ export class imba_techies_remote_mines extends BaseAbility_Plus {
     }
     OnAbilityPhaseStart(): boolean {
         let caster = this.GetCasterPlus();
-        let ability = this;
         let target_point = this.GetCursorPosition();
         let sound_toss = "Hero_Techies.RemoteMine.Toss";
         let particle_plant = "particles/hero/techies/techies_remote_mine_plant.vpcf";
@@ -1271,7 +1250,6 @@ export class imba_techies_remote_mines extends BaseAbility_Plus {
     }
     OnSpellStart(): void {
         let caster = this.GetCasterPlus();
-        let ability = this;
         let target_point = this.GetCursorPosition();
         let cast_response = {
             "1": "techies_tech_remotemines_03",
@@ -1304,9 +1282,9 @@ export class imba_techies_remote_mines extends BaseAbility_Plus {
         let rare_cast_response = "techies_tech_remotemines_01";
         let sound_cast = "Hero_Techies.RemoteMine.Plant";
         let mine_ability = "imba_techies_remote_mines_pinpoint_detonation";
-        let mine_duration = ability.GetSpecialValueFor("duration");
+        let mine_duration = this.GetSpecialValueFor("duration");
         let sound;
-        if (RollPercentage(1)) {
+        if (RollPercentage(50)) {
             sound = rare_cast_response;
         } else {
             sound = GFuncRandom.RandomValue(cast_response);
@@ -1318,10 +1296,10 @@ export class imba_techies_remote_mines extends BaseAbility_Plus {
         mine.SetControllableByPlayer(playerID, true);
         let mine_ability_handler = mine.FindAbilityByName(mine_ability);
         if (mine_ability_handler) {
-            mine_ability_handler.SetLevel(ability.GetLevel());
+            mine_ability_handler.SetLevel(this.GetLevel());
         }
         mine.SetOwner(caster);
-        mine.AddNewModifier(caster, ability, "modifier_kill", {
+        mine.AddNewModifier(caster, this, "modifier_kill", {
             duration: mine_duration
         });
     }
@@ -1490,8 +1468,9 @@ export class imba_techies_focused_detonate extends BaseAbility_Plus {
         let detonate_ability = "imba_techies_remote_mines_pinpoint_detonation";
         let radius = ability.GetSpecialValueFor("radius");
         let remote_mines = FindUnitsInRadius(caster.GetTeamNumber(), target_point, undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_OTHER, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
+
         for (let i = 0; i < GameFunc.GetCount(remote_mines); i++) {
-            this.AddTimer(FrameTime() * (i - 1), () => {
+            this.AddTimer(FrameTime() * (i + 1), () => {
                 let detonate_ability_handler = remote_mines[i].FindAbilityByName(detonate_ability);
                 if (detonate_ability_handler) {
                     detonate_ability_handler.OnSpellStart();
@@ -1567,7 +1546,6 @@ export class imba_techies_minefield_sign extends BaseAbility_Plus {
     }
     OnSpellStart(): void {
         let caster = this.GetCasterPlus();
-        let ability = this;
         let target_point = this.GetCursorPosition();
         let sound_cast = "Hero_Techies.Sign";
         let modifier_sign = "modifier_imba_minefield_sign_aura";
@@ -1576,9 +1554,9 @@ export class imba_techies_minefield_sign extends BaseAbility_Plus {
             this.assigned_sign.Destroy();
         }
         let sign = BaseNpc_Plus.CreateUnitByName("npc_imba_techies_minefield_sign", target_point, caster, false);
-        GFuncEntity.AddRangeIndicator(sign, caster, ability, "radius", undefined, 255, 40, 40, true);
+        GFuncEntity.AddRangeIndicator(sign, caster, this, "radius", undefined, 255, 40, 40, true);
         this.assigned_sign = sign;
-        sign.AddNewModifier(caster, ability, modifier_sign, {});
+        sign.AddNewModifier(caster, this, modifier_sign, {});
     }
 }
 @registerModifier()

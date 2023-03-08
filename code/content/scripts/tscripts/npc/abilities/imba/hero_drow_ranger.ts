@@ -724,16 +724,11 @@ export class modifier_imba_gust_movement extends BaseModifierMotionHorizontal_Pl
                 this.direction = (this.target_point - this.caster.GetAbsOrigin() as Vector).Normalized();
                 this.distance = (this.caster.GetAbsOrigin() - this.target_point as Vector).Length2D();
                 this.jump_time = this.distance / this.jump_speed;
+                this.BeginMotionOrDestroy();
             });
         }
     }
-    ApplyHorizontalMotionController(): boolean {
-        if (!this.CheckMotionControllers()) {
-            this.Destroy();
-            return false;
-        }
-        return true;
-    }
+
     IsHidden(): boolean {
         return true;
     }
@@ -747,8 +742,8 @@ export class modifier_imba_gust_movement extends BaseModifierMotionHorizontal_Pl
         return true;
     }
 
-    GetMotionControllerPriority() {
-        return DOTA_MOTION_CONTROLLER_PRIORITY.DOTA_MOTION_CONTROLLER_PRIORITY_MEDIUM;
+    GetPriority() {
+        return 2;
     }
     UpdateHorizontalMotion(me: IBaseNpc_Plus, dt: number) {
         if (IsServer()) {

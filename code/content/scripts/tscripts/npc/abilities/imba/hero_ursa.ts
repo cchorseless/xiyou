@@ -11,7 +11,7 @@ export class imba_ursa_earthshock extends BaseAbility_Plus {
         return "ursa_earthshock";
     }
     GetCastRange(location: Vector, target: CDOTA_BaseNPC | undefined): number {
-        return this.GetSpecialValueFor("radius") - this.GetCasterPlus().GetCastRangeBonus();
+        return this.GetSpecialValueFor("radius") + this.GetCasterPlus().GetCastRangeBonus();
     }
     OnSpellStart(): void {
         if (!this.GetCasterPlus().HasModifier("modifier_imba_earthshock_movement")) {
@@ -22,7 +22,7 @@ export class imba_ursa_earthshock extends BaseAbility_Plus {
                 distance: this.GetSpecialValueFor("hop_distance"),
                 direction_x: direction_vector.x,
                 direction_y: direction_vector.y,
-                diretion_z: direction_vector.z,
+                direction_z: direction_vector.z,
                 height: this.GetSpecialValueFor("hop_height")
             });
         }
@@ -72,7 +72,7 @@ export class imba_ursa_earthshock extends BaseAbility_Plus {
                 if (!enemy.IsMagicImmune()) {
                     let distance = (enemy.GetAbsOrigin() - caster.GetAbsOrigin() as Vector).Length2D();
                     let edge_distance = radius - distance;
-                    let earthshock_debuff_slow_pct;
+                    let earthshock_debuff_slow_pct: number;
                     let damage;
                     if (distance <= bonus_effects_radius) {
                         damage = base_damage * (1 + (bonus_damage_pct * 0.01));
@@ -174,48 +174,51 @@ export class modifier_imba_earthshock_movement extends BaseModifierMotionBoth_Pl
     public direction: any;
     public duration: number;
     public height: any;
-    public velocity: any;
+    public velocity: Vector;
     public vertical_velocity: any;
     public vertical_acceleration: any;
+    public ability: imba_ursa_earthshock;
     IsHidden(): boolean {
         return true;
     }
     IsPurgable(): boolean {
         return false;
     }
+
+    GetPriority(): modifierpriority {
+        return modifierpriority.MODIFIER_PRIORITY_NORMAL;
+    }
     BeCreated(params: any): void {
         if (!IsServer()) {
             return;
         }
+        this.ability = this.GetAbilityPlus<imba_ursa_earthshock>();
         this.distance = params.distance;
         this.direction = Vector(params.direction_x, params.direction_y, params.direction_z as Vector).Normalized();
         this.duration = params.duration;
         this.height = params.height;
-        this.velocity = this.direction * this.distance / this.duration;
+        this.velocity = this.direction * this.distance / this.duration as Vector;
         this.vertical_velocity = 4 * this.height / this.duration;
         this.vertical_acceleration = -(8 * this.height) / (this.duration * this.duration);
         if (this.GetParentPlus().IsRooted()) {
             return;
         }
-        if (this.ApplyVerticalMotionController() == false) {
-            this.Destroy();
-        }
-        if (this.ApplyHorizontalMotionController() == false) {
-            this.Destroy();
-        }
+        this.BeginMotionOrDestroy();
     }
+
+
     BeDestroy(): void {
         if (!IsServer()) {
             return;
         }
         this.GetParentPlus().RemoveHorizontalMotionController(this);
         this.GetParentPlus().RemoveVerticalMotionController(this);
-        let ability = this.GetAbilityPlus<imba_ursa_earthshock>();
-        if (ability && ability.ApplyEarthShock && this.GetRemainingTime() <= 0) {
-            ability.ApplyEarthShock();
+        if (GFuncEntity.IsValid(this.ability) && this.GetRemainingTime() <= 0) {
+            this.ability.ApplyEarthShock();
         }
     }
     UpdateHorizontalMotion(me: CDOTA_BaseNPC, dt: number): void {
+        GLogHelper.print("UpdateHorizontalMotion")
         if (!IsServer()) {
             return;
         }
@@ -225,6 +228,7 @@ export class modifier_imba_earthshock_movement extends BaseModifierMotionBoth_Pl
         this.Destroy();
     }
     UpdateVerticalMotion(me: CDOTA_BaseNPC, dt: number): void {
+        GLogHelper.print("UpdateVerticalMotion")
         if (!IsServer()) {
             return;
         }
@@ -390,12 +394,12 @@ export class imba_ursa_overpower extends BaseAbility_Plus {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_ursa_8")) {
             return "modifier_imba_overpower_talent_fangs";
         } else {
-            return undefined;
+            return;
         }
     }
     GetManaCost(level: number): number {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_ursa_8")) {
-            return undefined;
+            return 0;
         } else {
             return super.GetManaCost(level);
         }
@@ -969,7 +973,7 @@ export class modifier_special_bonus_imba_ursa_1 extends BaseModifier_Plus {
 @registerModifier()
 export class modifier_imba_talent_enrage_damage extends BaseModifier_Plus {
     public caster: IBaseNpc_Plus;
-    public ability: IBaseAbility_Plus;
+    public ability: imba_ursa_enrage;
     public prevent_modifier: any;
     public damage_threshold: number;
     public damage_reset: number;

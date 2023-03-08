@@ -112,8 +112,7 @@ export class modifier_imba_swashbuckle_dash extends BaseModifierMotionHorizontal
                 let dash = ResHelper.CreateParticleEx(this.dash_particle, ParticleAttachment_t.PATTACH_WORLDORIGIN, this.GetCasterPlus());
                 ParticleManager.SetParticleControl(dash, 0, this.GetCasterPlus().GetAbsOrigin());
                 this.AddParticle(dash, false, false, -1, true, false);
-                this.frametime = FrameTime();
-                this.StartIntervalThink(this.frametime);
+                this.BeginMotionOrDestroy()
             });
         }
     }
@@ -147,15 +146,10 @@ export class modifier_imba_swashbuckle_dash extends BaseModifierMotionHorizontal
     IgnoreTenacity() {
         return true;
     }
-
     GetPriority() {
         return modifierpriority.MODIFIER_PRIORITY_HIGH;
     }
-    ApplyHorizontalMotionController() {
-        if (!this.CheckMotionControllers()) {
-            this.Destroy();
-            return false;
-        }
+    CheckSelf() {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_pangolier_1")) {
             this.enemies_hit = this.enemies_hit || [];
             let direction = this.GetCasterPlus().GetForwardVector();
@@ -167,7 +161,7 @@ export class modifier_imba_swashbuckle_dash extends BaseModifierMotionHorizontal
                 for (const [k, v] of GameFunc.iPair(this.enemies_hit)) {
                     if (v == enemy) {
                         already_hit = true;
-                        return;
+                        break;
                     }
                 }
                 if (!already_hit) {
@@ -179,9 +173,9 @@ export class modifier_imba_swashbuckle_dash extends BaseModifierMotionHorizontal
                 }
             }
         }
-        return true;
+        return;
     }
-    HorizontalMotion(me: IBaseNpc_Plus, dt: number) {
+    UpdateHorizontalMotion(me: IBaseNpc_Plus, dt: number) {
         if (IsServer()) {
             this.time_elapsed = this.time_elapsed + dt;
             if (this.time_elapsed < this.dash_time) {
@@ -190,6 +184,7 @@ export class modifier_imba_swashbuckle_dash extends BaseModifierMotionHorizontal
             } else {
                 this.Destroy();
             }
+            this.CheckSelf()
         }
     }
     OnRemoved(): void {
@@ -643,13 +638,11 @@ export class modifier_imba_shield_crash_jump extends BaseModifierMotionBoth_Plus
             this.vertical_velocity = 4 * this.height / this.duration;
             this.vertical_acceleration = -(8 * this.height) / (this.duration * this.duration);
             this.GetParentPlus().RemoveHorizontalMotionController(this);
-            if (this.ApplyVerticalMotionController() == false) {
-                this.Destroy();
-            }
+            if (!this.BeginMotionOrDestroy()) { return };
             if (this.GetParentPlus().IsRooted()) {
                 return;
             }
-            if (!this.GetParentPlus().HasModifier("modifier_pangolier_gyroshell") && this.ApplyHorizontalMotionController() == false) {
+            if (!this.GetParentPlus().HasModifier("modifier_pangolier_gyroshell")) {
                 this.Destroy();
             }
         }

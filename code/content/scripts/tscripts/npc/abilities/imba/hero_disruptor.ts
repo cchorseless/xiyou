@@ -1080,6 +1080,7 @@ export class modifier_imba_kinetic_field_knockback extends BaseModifierMotionHor
         if (IsServer()) {
             this.target_point = Vector(keys.target_point_x, keys.target_point_y, keys.target_point_z);
             this.parent = this.GetParentPlus();
+            this.BeginMotionOrDestroy();
         }
     }
     /** DeclareFunctions():modifierfunction[] {
@@ -1108,13 +1109,7 @@ export class modifier_imba_kinetic_field_knockback extends BaseModifierMotionHor
         return state;
     }
 
-    ApplyHorizontalMotionController(): boolean {
-        if (!this.CheckMotionControllers()) {
-            this.Destroy();
-            return false;
-        }
-        return true;
-    }
+
     UpdateHorizontalMotion(me: IBaseNpc_Plus, dt: number) {
         if (IsServer()) {
             let knock_distance = 25;
@@ -1146,6 +1141,8 @@ export class modifier_imba_kinetic_field_pull extends BaseModifierMotionHorizont
             this.parent = this.GetParentPlus();
             this.caster = this.GetCasterPlus();
             this.ability = this.GetAbilityPlus();
+            this.BeginMotionOrDestroy();
+
         }
     }
     /** DeclareFunctions():modifierfunction[] {
@@ -1167,13 +1164,7 @@ export class modifier_imba_kinetic_field_pull extends BaseModifierMotionHorizont
     GetEffectAttachType(): ParticleAttachment_t {
         return ParticleAttachment_t.PATTACH_ABSORIGIN;
     }
-    ApplyHorizontalMotionController(): boolean {
-        if (!this.CheckMotionControllers()) {
-            this.Destroy();
-            return false;
-        }
-        return true;
-    }
+
     UpdateHorizontalMotion(me: IBaseNpc_Plus, dt: number) {
         if (IsServer()) {
             let pull_distance = 15;

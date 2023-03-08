@@ -23,8 +23,7 @@ export class modifier_spawn_breaksoil extends BaseModifierMotionVertical_Plus {
     vTargetPosition: Vector;
     Init(kv: IModifierTable) {
         if (IsServer()) {
-            if (this.ApplyVerticalMotionController() == false) {
-                this.Destroy();
+            if (!this.BeginMotionOrDestroy()) {
                 return;
             }
             // 初始化高度
@@ -47,7 +46,6 @@ export class modifier_spawn_breaksoil extends BaseModifierMotionVertical_Plus {
     }
 
     BeDestroy() {
-
         if (IsServer()) {
             this.GetParentPlus().RemoveHorizontalMotionController(this);
             this.GetParentPlus().RemoveVerticalMotionController(this);

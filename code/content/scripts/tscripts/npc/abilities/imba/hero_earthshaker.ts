@@ -320,11 +320,9 @@ export class modifier_earthshaker_enchant_totem_lua_movement extends BaseModifie
     IgnoreTenacity() {
         return true;
     }
-    IsMotionController() {
-        return true;
-    }
-    GetMotionControllerPriority() {
-        return DOTA_MOTION_CONTROLLER_PRIORITY.DOTA_MOTION_CONTROLLER_PRIORITY_MEDIUM;
+
+    GetPriority() {
+        return 2;
     }
     RemoveOnDeath(): boolean {
         return false;
@@ -342,24 +340,11 @@ export class modifier_earthshaker_enchant_totem_lua_movement extends BaseModifie
                 this.direction = (this.target_point - this.caster.GetAbsOrigin() as Vector).Normalized();
                 let distance = (this.caster.GetAbsOrigin() - this.target_point as Vector).Length2D();
                 this.jump_speed = distance / this.jump_time;
+                if (!this.BeginMotionOrDestroy()) { return; }
             });
         }
     }
-    ApplyHorizontalMotionController(): boolean {
-        if (!this.CheckMotionControllers()) {
-            this.Destroy();
-            return false;
-        }
-        return true;
-    }
 
-    ApplyVerticalMotionController(): boolean {
-        if (!this.CheckMotionControllers()) {
-            this.Destroy();
-            return false;
-        }
-        return true;
-    }
     EnchantTotemLand() {
         if (IsServer()) {
             if (this.enchant_totem_land_commenced) {
@@ -443,7 +428,6 @@ export class modifier_earthshaker_enchant_totem_lua_leap extends BaseModifierMot
     public vector: any;
     public direction: any;
     public speed: number;
-    public interval: number;
     public aftershock_interrupt: any;
     public target_point: Vector;
     IsHidden(): boolean {
@@ -453,23 +437,14 @@ export class modifier_earthshaker_enchant_totem_lua_leap extends BaseModifierMot
         if (!IsServer()) {
             return;
         }
+        if (!this.BeginMotionOrDestroy()) { return; }
         this.destination = Vector(params.x, params.y, params.z);
         this.vector = (this.destination - this.GetParentPlus().GetAbsOrigin());
         this.direction = this.vector.Normalized();
         this.speed = this.vector.Length2D() / this.GetDuration();
-        if (this.ApplyVerticalMotionController() == false) {
-            this.Destroy();
-        }
-        if (this.ApplyHorizontalMotionController() == false) {
-            this.Destroy();
-        }
-        this.interval = FrameTime();
-        this.StartIntervalThink(this.interval);
     }
-    OnIntervalThink(): void {
-        let z_axis = (-1) * this.GetElapsedTime() * (this.GetElapsedTime() - this.GetDuration()) * 562 * 4;
-        this.GetParentPlus().SetOrigin((this.GetParentPlus().GetOrigin() * Vector(1, 1, 0)) + (((this.direction * this.speed * this.interval) * Vector(1, 1, 0)) + (Vector(0, 0, GetGroundHeight(this.GetParentPlus().GetOrigin(), undefined)) + Vector(0, 0, z_axis))) as Vector);
-    }
+
+
     BeDestroy( /** kv */): void {
         if (!IsServer()) {
             return;
@@ -498,8 +473,12 @@ export class modifier_earthshaker_enchant_totem_lua_leap extends BaseModifierMot
         }
     }
     UpdateHorizontalMotion(me: CDOTA_BaseNPC, dt: number): void {
+        let z_axis = (-1) * this.GetElapsedTime() * (this.GetElapsedTime() - this.GetDuration()) * 562 * 4;
+        this.GetParentPlus().SetOrigin((this.GetParentPlus().GetOrigin() * Vector(1, 1, 0)) + (((this.direction * this.speed * dt) * Vector(1, 1, 0)) + (Vector(0, 0, GetGroundHeight(this.GetParentPlus().GetOrigin(), undefined)) + Vector(0, 0, z_axis))) as Vector);
     }
     UpdateVerticalMotion(me: CDOTA_BaseNPC, dt: number): void {
+        let z_axis = (-1) * this.GetElapsedTime() * (this.GetElapsedTime() - this.GetDuration()) * 562 * 4;
+        this.GetParentPlus().SetOrigin((this.GetParentPlus().GetOrigin() * Vector(1, 1, 0)) + (((this.direction * this.speed * dt) * Vector(1, 1, 0)) + (Vector(0, 0, GetGroundHeight(this.GetParentPlus().GetOrigin(), undefined)) + Vector(0, 0, z_axis))) as Vector);
     }
 
     /** DeclareFunctions():modifierfunction[] {

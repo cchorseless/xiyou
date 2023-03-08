@@ -71,10 +71,11 @@ export class modifier_imba_huskar_inner_fire_knockback extends BaseModifierMotio
         this.knockback_speed = this.knockback_distance / this.knockback_duration;
         this.position = GetGroundPosition(Vector(params.x, params.y, 0), undefined);
 
+        if (!this.BeginMotionOrDestroy()) {
+            return;
+        }
     }
-    ApplyHorizontalMotionController() {
-        return true;
-    }
+
     UpdateHorizontalMotion(me: CDOTA_BaseNPC, dt: number): void {
         if (!IsServer()) {
             return;
@@ -647,11 +648,12 @@ export class modifier_imba_huskar_life_break extends BaseModifierMotionHorizonta
         }
         this.target = EntIndexToHScript(params.ent_index) as IBaseNpc_Plus;
         this.break_range = 1450;
+        if (!this.BeginMotionOrDestroy()) {
+            return;
+        }
 
     }
-    ApplyHorizontalMotionController() {
-        return true
-    }
+
     UpdateHorizontalMotion(me: CDOTA_BaseNPC, dt: number): void {
         if (!IsServer()) {
             return;

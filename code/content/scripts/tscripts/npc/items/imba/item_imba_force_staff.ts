@@ -98,14 +98,11 @@ export class modifier_item_imba_force_staff_active extends BaseModifierMotionHor
         return true;
     }
     BeCreated(p_0: any,): void {
-        if (IsServer()) {
-            if (!this.GetItemPlus()) {
-                this.Destroy();
-            }
-        }
+
         if (!IsServer()) {
             return;
         }
+        this.BeginMotionOrDestroy();
         if (this.GetParentPlus().HasModifier("modifier_legion_commander_duel") || this.GetParentPlus().HasModifier("modifier_imba_enigma_black_hole") || this.GetParentPlus().HasModifier("modifier_imba_faceless_void_chronosphere_handler")) {
             this.Destroy();
             return;
@@ -125,13 +122,7 @@ export class modifier_item_imba_force_staff_active extends BaseModifierMotionHor
         this.GetParentPlus().FadeGesture(GameActivity_t.ACT_DOTA_FLAIL);
         ResolveNPCPositions(this.GetParentPlus().GetAbsOrigin(), 128);
     }
-    ApplyHorizontalMotionController() {
-        if (!this.CheckMotionControllers()) {
-            this.Destroy();
-            return false;
-        }
-        return true;
-    }
+
     UpdateHorizontalMotion(unit: IBaseNpc_Plus, time: number) {
         if (!IsServer()) {
             return;
@@ -313,21 +304,15 @@ export class modifier_item_imba_hurricane_pike_force_ally extends BaseModifierMo
     IsStunDebuff(): boolean {
         return false;
     }
-    IsMotionController() {
-        return true;
-    }
-    GetMotionControllerPriority() {
-        return DOTA_MOTION_CONTROLLER_PRIORITY.DOTA_MOTION_CONTROLLER_PRIORITY_MEDIUM;
+
+    GetPriority() {
+        return modifierpriority.MODIFIER_PRIORITY_HIGH;
     }
     BeCreated(p_0: any,): void {
-        if (IsServer()) {
-            if (!this.GetItemPlus()) {
-                this.Destroy();
-            }
-        }
         if (!IsServer()) {
             return;
         }
+        this.BeginMotionOrDestroy()
         if (this.GetParentPlus().HasModifier("modifier_legion_commander_duel") || this.GetParentPlus().HasModifier("modifier_imba_enigma_black_hole") || this.GetParentPlus().HasModifier("modifier_imba_faceless_void_chronosphere_handler")) {
             this.Destroy();
             return;
@@ -347,13 +332,7 @@ export class modifier_item_imba_hurricane_pike_force_ally extends BaseModifierMo
         this.GetParentPlus().FadeGesture(GameActivity_t.ACT_DOTA_FLAIL);
         ResolveNPCPositions(this.GetParentPlus().GetAbsOrigin(), 128);
     }
-    ApplyHorizontalMotionController() {
-        if (!this.CheckMotionControllers()) {
-            this.Destroy();
-            return false;
-        }
-        return true;
-    }
+
     UpdateHorizontalMotion(unit: IBaseNpc_Plus, time: number) {
         if (!IsServer()) {
             return;
@@ -384,11 +363,9 @@ export class modifier_item_imba_hurricane_pike_force_enemy extends BaseModifierM
     IsStunDebuff(): boolean {
         return false;
     }
-    IsMotionController() {
-        return true;
-    }
-    GetMotionControllerPriority() {
-        return DOTA_MOTION_CONTROLLER_PRIORITY.DOTA_MOTION_CONTROLLER_PRIORITY_MEDIUM;
+
+    GetPriority() {
+        return modifierpriority.MODIFIER_PRIORITY_HIGH;
     }
     IgnoreTenacity() {
         return true;
@@ -402,6 +379,7 @@ export class modifier_item_imba_hurricane_pike_force_enemy extends BaseModifierM
         if (!IsServer()) {
             return;
         }
+        this.BeginMotionOrDestroy()
         this.pfx = ResHelper.CreateParticleEx("particles/items_fx/force_staff.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetParentPlus(), this.GetCasterPlus());
         this.GetParentPlus().StartGesture(GameActivity_t.ACT_DOTA_FLAIL);
         this.StartIntervalThink(FrameTime());
@@ -417,13 +395,7 @@ export class modifier_item_imba_hurricane_pike_force_enemy extends BaseModifierM
         this.GetParentPlus().FadeGesture(GameActivity_t.ACT_DOTA_FLAIL);
         ResolveNPCPositions(this.GetParentPlus().GetAbsOrigin(), 128);
     }
-    ApplyHorizontalMotionController() {
-        if (!this.CheckMotionControllers()) {
-            this.Destroy();
-            return false;
-        }
-        return true;
-    }
+
     UpdateHorizontalMotion(unit: IBaseNpc_Plus, time: number) {
         if (!IsServer()) {
             return;
@@ -456,11 +428,9 @@ export class modifier_item_imba_hurricane_pike_force_self extends BaseModifierMo
     IgnoreTenacity() {
         return true;
     }
-    IsMotionController() {
-        return true;
-    }
-    GetMotionControllerPriority() {
-        return DOTA_MOTION_CONTROLLER_PRIORITY.DOTA_MOTION_CONTROLLER_PRIORITY_MEDIUM;
+
+    GetPriority() {
+        return modifierpriority.MODIFIER_PRIORITY_HIGH;
     }
     BeCreated(p_0: any,): void {
         if (IsServer()) {

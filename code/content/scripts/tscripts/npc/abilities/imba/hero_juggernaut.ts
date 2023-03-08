@@ -336,11 +336,11 @@ export class modifier_imba_juggernaut_blade_fury_succ extends BaseModifierMotion
         this.caster = this.GetCasterPlus();
         this.target = this.GetParentPlus();
         this.succ_tick = FrameTime();
+        if (!this.BeginMotionOrDestroy()) {
+            return;
+        }
+    }
 
-    }
-    ApplyHorizontalMotionController(): boolean {
-        return true;
-    }
     UpdateHorizontalMotion(me: IBaseNpc_Plus, dt: number): void {
         if (IsServer()) {
             if (!this.caster.HasModifier("modifier_imba_juggernaut_blade_fury")) {
@@ -763,11 +763,9 @@ export class modifier_imba_juggernaut_blade_dance_empowered_slice extends BaseMo
     RemoveOnDeath(): boolean {
         return true;
     }
-    IsMotionController() {
-        return true;
-    }
-    GetMotionControllerPriority() {
-        return DOTA_MOTION_CONTROLLER_PRIORITY.DOTA_MOTION_CONTROLLER_PRIORITY_MEDIUM;
+
+    GetPriority() {
+        return modifierpriority.MODIFIER_PRIORITY_HIGH;
     }
     BeCreated(p_0: any,): void {
         if (IsServer()) {
@@ -810,16 +808,12 @@ export class modifier_imba_juggernaut_blade_dance_empowered_slice extends BaseMo
                 this.max_attack_count = this.max_attack_count + secret_blade_extra_hits;
                 this.wind_dance.Destroy();
             }
-            this.StartIntervalThink(FrameTime());
+            if (!this.BeginMotionOrDestroy()) {
+                return;
+            }
         }
     }
-    ApplyHorizontalMotionController(): boolean {
-        if (!this.CheckMotionControllers()) {
-            this.Destroy();
-            return false;
-        }
-        return true;
-    }
+
     SeekAndDestroy() {
         if (IsServer()) {
             let sliceEnemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.caster.GetAbsOrigin(), undefined, 150, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ATTACK_IMMUNE, FindOrder.FIND_ANY_ORDER, false);

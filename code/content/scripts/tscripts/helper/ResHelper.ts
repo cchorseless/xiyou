@@ -8,6 +8,33 @@ export module ResHelper {
         FLAG_GLOBAL = 4,
     }
 
+    export function LoadUnitRes(unit: IBaseNpc_Plus): void {
+        let name = unit.GetUnitName();
+        let TempData = unit.TempData();
+        if (name.includes("tiny")) {
+            TempData.ambient_pfx_effect = "particles/units/heroes/hero_tiny/tiny_ambient.vpcf"
+            TempData.death_pfx = "particles/units/heroes/hero_tiny/tiny01_death.vpcf"
+            TempData.avalanche_effect = "particles/units/heroes/hero_tiny/tiny_avalanche.vpcf"
+            TempData.avalance_projectile_effect = "particles/units/heroes/hero_tiny/tiny_avalanche_projectile.vpcf"
+            TempData.tree_model = "models/heroes/tiny_01/tiny_01_tree.vmdl"
+            TempData.tree_linear_effect = "particles/units/heroes/hero_tiny/tiny_tree_linear_proj.vpcf"
+            TempData.tree_tracking_effect = "particles/units/heroes/hero_tiny/tiny_tree_proj.vpcf"
+            TempData.tree_ambient_effect = ""
+            TempData.tree_grab_sound = "Hero_Tiny.Tree.Grab"
+            TempData.tree_throw_sound = "Hero_Tiny.Tree.Throw"
+            TempData.tree_throw_target_sound = "Hero_Tiny.Tree.Target"
+            TempData.tree_channel_target_sound = "Hero_Tiny.TreeChannel.Target"
+            TempData.grow_effect = "particles/units/heroes/hero_tiny/tiny_transform.vpcf"
+            TempData.tree_cleave_effect = "particles/units/heroes/hero_tiny/tiny_craggy_cleave.vpcf"
+        }
+        else if (name.includes("drow_ranger")) {
+            TempData.base_attack_projectile = "particles/units/heroes/hero_drow/drow_base_attack.vpcf"
+            TempData.frost_arrows_debuff_pfx = "particles/units/heroes/hero_drow/drow_frost_arrow_debuff.vpcf"
+            TempData.marksmanship_arrow_pfx = "particles/units/heroes/hero_drow/drow_marksmanship_attack.vpcf"
+            TempData.marksmanship_frost_arrow_pfx = "particles/units/heroes/hero_drow/drow_marksmanship_frost_arrow.vpcf"
+        }
+    }
+
     export function GetAbilityTextureReplacement(res: string, npc: IBaseNpc_Plus): string {
         if (npc && npc.ETRoot) {
             let wearComp = npc.ETRoot.GetComponentByName<IWearableComponent>("WearableComponent");

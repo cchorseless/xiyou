@@ -79,8 +79,7 @@ export class modifier_sohei_dash_movement extends BaseModifierMotionHorizontal_P
         this.distance = event.distance;
         this.speed = event.speed;
         this.tree_radius = event.tree_radius;
-        if (this.ApplyHorizontalMotionController() == false) {
-            this.Destroy();
+        if (this.BeginMotionOrDestroy() == false) {
             return;
         }
         let trail_pfx = ResHelper.CreateParticleEx("particles/econ/items/juggernaut/bladekeeper_omnislash/_dc_juggernaut_omni_slash_trail.vpcf", ParticleAttachment_t.PATTACH_CUSTOMORIGIN, parent);
@@ -655,8 +654,7 @@ export class modifier_sohei_momentum_knockback extends BaseModifierMotionHorizon
         this.collision_radius = event.collision_radius;
         this.slow_duration = this.GetAbilityPlus().GetTalentSpecialValueFor("slow_duration");
         this.stun_duration = this.GetAbilityPlus().GetTalentSpecialValueFor("stun_duration");
-        if (this.ApplyHorizontalMotionController() == false) {
-            this.Destroy();
+        if (this.BeginMotionOrDestroy() == false) {
             return;
         }
     }
@@ -827,8 +825,7 @@ export class modifier_sohei_palm_of_life_movement extends BaseModifierMotionHori
         this.tree_radius = event.tree_radius;
         this.endDistance = event.endDistance;
         this.doHeal = event.doHeal > 0;
-        if (this.ApplyHorizontalMotionController() == false) {
-            this.Destroy();
+        if (this.BeginMotionOrDestroy() == false) {
             return;
         }
         let trail_pfx = ResHelper.CreateParticleEx("particles/econ/items/juggernaut/bladekeeper_omnislash/_dc_juggernaut_omni_slash_trail.vpcf", ParticleAttachment_t.PATTACH_CUSTOMORIGIN, parent);

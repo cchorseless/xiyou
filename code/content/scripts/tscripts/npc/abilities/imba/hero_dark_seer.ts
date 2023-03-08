@@ -137,8 +137,8 @@ export class modifier_imba_dark_seer_vacuum extends BaseModifierMotionHorizontal
         this.vacuum_pos = GetGroundPosition(Vector(this.x, this.y, 0), undefined);
         this.distance = this.GetParentPlus().GetAbsOrigin() - this.vacuum_pos as Vector;
         this.speed = this.distance.Length2D() / this.duration;
-        if (this.ApplyHorizontalMotionController() == false) {
-            this.Destroy();
+        if (this.BeginMotionOrDestroy() == false) {
+            return;
         }
     }
 
@@ -325,9 +325,8 @@ export class modifier_imba_dark_seer_wormhole extends BaseModifierMotionHorizont
         this.GetParentPlus().SetAbsOrigin(this.vacuum_pos);
         this.distance = this.GetParentPlus().GetAbsOrigin() + RandomVector(this.GetSpecialValueFor("radius"));
         this.speed = this.GetSpecialValueFor("radius") / this.duration;
-        if (this.ApplyHorizontalMotionController() == false) {
-            this.Destroy();
-        }
+        this.BeginMotionOrDestroy();
+
     }
 
     UpdateHorizontalMotion(me: CDOTA_BaseNPC, dt: number): void {

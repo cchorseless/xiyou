@@ -15,6 +15,7 @@ const old_ability_out_path = "excels/dota/dota_abilities.xlsx";
 const old_item_out_path = "excels/dota/dota_items.xlsx";
 const old_shipin_out_path = "excels/dota/dota_shipin.xlsx";
 const old_sound_out_path = "excels/sounds/custom_sounds.xlsx";
+const old_unit_path = "game/scripts/dota2_old_npc_units.txt";
 
 let shiPinData = null;
 const ability_name_new_old = {};
@@ -743,7 +744,7 @@ function createImbaNpc() {
 const imbaunitpath = imbabasepath + "npc_units_custom.txt";
 const imbaunitexcelPath = "excels/units/imba_units.xlsx";
 function createImbaUnit() {
-    const abilitystr = fs.readFileSync(imbaunitpath, "utf8");
+    const abilitystr = fs.readFileSync(old_unit_path, "utf8");
     const lines = abilitystr.split("\n");
     let npcs = [];
     for (let i = 0; i < lines.length; i++) {

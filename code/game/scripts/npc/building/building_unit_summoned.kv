@@ -636,6 +636,7 @@
 
 	}
 	"npc_imba_ember_spirit_remnant" {
+		"UnitLabel" "remnant"
 		"vscripts" "npc/units/building/npc_unit_building"
 		"BaseClass" "npc_dota_creature"
 		"Model" "models/heroes/ember_spirit/ember_spirit.vmdl"
@@ -666,6 +667,33 @@
 		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_HERO"
 		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_HERO"
 		"Creature" {
+			"AttachWearables" {
+				"1" {
+					"ItemDef" "474"
+
+				}
+				"2" {
+					"ItemDef" "473"
+
+				}
+				"3" {
+					"ItemDef" "462"
+
+				}
+				"4" {
+					"ItemDef" "472"
+
+				}
+				"5" {
+					"ItemDef" "471"
+
+				}
+				"6" {
+					"ItemDef" "469"
+
+				}
+
+			}
 
 		}
 
@@ -3745,6 +3773,7 @@
 
 	}
 	"npc_dota_imba_mars_arena_of_blood_soldier" {
+		"vscripts" "npc/units/building/npc_unit_building"
 		"BaseClass" "npc_dota_phantomassassin_gravestone"
 		"Model" "models/development/invisiblebox.vmdl"
 		"ModelScale" "1.0"
@@ -3777,6 +3806,7 @@
 
 	}
 	"npc_dota_undying_imba_tombstone" {
+		"vscripts" "npc/units/building/npc_unit_building"
 		"BaseClass" "npc_dota_unit_undying_tombstone"
 		"Model" "models/heroes/undying/undying_tower.vmdl"
 		"ModelScale" ".8"
@@ -3805,6 +3835,7 @@
 
 	}
 	"npc_dota_undying_imba_zombie" {
+		"vscripts" "npc/units/building/npc_unit_building"
 		"BaseClass" "npc_dota_unit_undying_zombie"
 		"Model" "models/heroes/undying/undying_minion.vmdl"
 		"ModelScale" "1.05"
@@ -3842,6 +3873,7 @@
 
 	}
 	"npc_dota_undying_imba_zombie_torso" {
+		"vscripts" "npc/units/building/npc_unit_building"
 		"BaseClass" "npc_dota_unit_undying_zombie"
 		"Model" "models/heroes/undying/undying_minion_torso.vmdl"
 		"ModelScale" "1.05"
@@ -3879,6 +3911,7 @@
 
 	}
 	"npc_dota_hero_hell_empress" {
+		"vscripts" "npc/units/building/npc_unit_building"
 		"BaseClass" "npc_dota_hero_abyssal_underlord"
 		"Model" "models/heroes/abyssal_underlord/abyssal_underlord_v2.vmdl"
 		"ModelScale" "1.080000"
@@ -3935,6 +3968,7 @@
 
 	}
 	"npc_dota_hero_malfurion" {
+		"vscripts" "npc/units/building/npc_unit_building"
 		"BaseClass" "npc_dota_hero_ursa"
 		"Model" "models/items/lone_druid/true_form/form_of_the_atniw/form_of_the_atniw.vmdl"
 		"ModelScale" "0.87"
@@ -3989,6 +4023,7 @@
 
 	}
 	"npc_dota_hero_nian" {
+		"vscripts" "npc/units/building/npc_unit_building"
 		"BaseClass" "npc_dota_hero_mirana"
 		"Model" "models/creeps/nian/nian_creep.vmdl"
 		"ModelScale" "0.4"
@@ -4042,6 +4077,7 @@
 
 	}
 	"npc_dota_hero_sohei" {
+		"vscripts" "npc/units/building/npc_unit_building"
 		"BaseClass" "npc_dota_hero_juggernaut"
 		"Model" "models/heroes/sohei/sohei.vmdl"
 		"SoundSet" "Sohei"
@@ -4093,6 +4129,7 @@
 
 	}
 	"npc_dota_hero_vardor" {
+		"vscripts" "npc/units/building/npc_unit_building"
 		"BaseClass" "npc_dota_hero_phantom_lancer"
 		"Model" "models/heroes/phantom_lancer/phantom_lancer.vmdl"
 		"ModelScale" "0.840000"
@@ -4148,6 +4185,7 @@
 
 	}
 	"npc_dota_vardor_spear_dummy" {
+		"vscripts" "npc/units/building/npc_unit_building"
 		"BaseClass" "npc_dota_creature"
 		"Model" "models/spear.vmdl"
 		"BoundsHullName" "DOTA_HULL_SIZE_REGULAR"
@@ -4188,6 +4226,7 @@
 
 	}
 	"npc_spearholder_unit" {
+		"vscripts" "npc/units/building/npc_unit_building"
 		"BaseClass" "npc_dota_creature"
 		"Model" "models/dummy.vmdl"
 		"BoundsHullName" "DOTA_HULL_SIZE_REGULAR"
@@ -6238,6 +6277,7 @@
 	}
 	"npc_dummy_unit" {
 		"UnitLabel" "healing_ward"
+		"vscripts" "npc/units/building/npc_unit_building"
 		"BaseClass" "npc_dota_creep_neutral"
 		"Model" "models/development/invisiblebox.vmdl"
 		"SoundSet" "Creep_Good_Range"
@@ -6280,6 +6320,7 @@
 	}
 	"npc_dummy_unit_perma" {
 		"UnitLabel" "healing_ward"
+		"vscripts" "npc/units/building/npc_unit_building"
 		"BaseClass" "npc_dota_creep_neutral"
 		"Model" "models/development/invisiblebox.vmdl"
 		"SoundSet" "Creep_Good_Range"
@@ -6321,48 +6362,234 @@
 
 	}
 	"npc_dota_warlock_golem_1" {
+		"UnitLabel" "golem"
+		"vscripts" "npc/units/building/npc_unit_building"
+		"BaseClass" "npc_dota_warlock_golem"
+		"Model" "models/heroes/warlock/warlock_demon.vmdl"
+		"ModelScale" "1"
+		"SoundSet" "Hero_WarlockGolem"
+		"VisionDaytimeRange" "1800"
+		"VisionNighttimeRange" "1800"
+		"VoiceFile" "soundevents/voscripts/game_sounds_vo_warlock_golem.vsndevts"
 		"Ability1" "imba_warlock_flaming_fists"
 		"Ability2" "imba_warlock_permanent_immolation"
+		"HealthBarOffset" "240"
+		"MovementSpeed" "320"
+		"MovementCapabilities" "DOTA_UNIT_CAP_MOVE_GROUND"
+		"ArmorPhysical" "0"
+		"MagicalResistance" "33"
+		"StatusHealth" "1400"
+		"StatusHealthRegen" "25"
+		"StatusMana" "0"
+		"StatusManaRegen" "0"
+		"AttackCapabilities" "DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageMin" "90"
+		"AttackDamageMax" "110"
+		"AttackRate" "1.2"
+		"AttackAnimationPoint" "0.26"
+		"AttackRange" "225"
+		"AttackAcquisitionRange" "500"
+		"ProjectileModel" ""
+		"ProjectileSpeed" "0"
+		"HasInventory" "0"
+		"ConsideredHero" "1"
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_HERO"
+		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_HERO"
 		"Creature" {
 
 		}
 
 	}
 	"npc_dota_warlock_golem_2" {
+		"UnitLabel" "golem"
+		"vscripts" "npc/units/building/npc_unit_building"
+		"BaseClass" "npc_dota_warlock_golem"
+		"Model" "models/heroes/warlock/warlock_demon.vmdl"
+		"ModelScale" "1"
+		"SoundSet" "Hero_WarlockGolem"
+		"VisionDaytimeRange" "1800"
+		"VisionNighttimeRange" "1800"
+		"VoiceFile" "soundevents/voscripts/game_sounds_vo_warlock_golem.vsndevts"
 		"Ability1" "imba_warlock_flaming_fists"
 		"Ability2" "imba_warlock_permanent_immolation"
+		"HealthBarOffset" "240"
+		"MovementSpeed" "320"
+		"MovementCapabilities" "DOTA_UNIT_CAP_MOVE_GROUND"
+		"ArmorPhysical" "0"
+		"MagicalResistance" "33"
+		"StatusHealth" "1400"
+		"StatusHealthRegen" "25"
+		"StatusMana" "0"
+		"StatusManaRegen" "0"
+		"AttackCapabilities" "DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageMin" "90"
+		"AttackDamageMax" "110"
+		"AttackRate" "1.2"
+		"AttackAnimationPoint" "0.26"
+		"AttackRange" "225"
+		"AttackAcquisitionRange" "500"
+		"ProjectileModel" ""
+		"ProjectileSpeed" "0"
+		"HasInventory" "0"
+		"ConsideredHero" "1"
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_HERO"
+		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_HERO"
 		"Creature" {
 
 		}
 
 	}
 	"npc_dota_warlock_golem_3" {
+		"UnitLabel" "golem"
+		"vscripts" "npc/units/building/npc_unit_building"
+		"BaseClass" "npc_dota_warlock_golem"
+		"Model" "models/heroes/warlock/warlock_demon.vmdl"
+		"ModelScale" "1"
+		"SoundSet" "Hero_WarlockGolem"
+		"VisionDaytimeRange" "1800"
+		"VisionNighttimeRange" "1800"
+		"VoiceFile" "soundevents/voscripts/game_sounds_vo_warlock_golem.vsndevts"
 		"Ability1" "imba_warlock_flaming_fists"
 		"Ability2" "imba_warlock_permanent_immolation"
+		"HealthBarOffset" "240"
+		"MovementSpeed" "320"
+		"MovementCapabilities" "DOTA_UNIT_CAP_MOVE_GROUND"
+		"ArmorPhysical" "0"
+		"MagicalResistance" "33"
+		"StatusHealth" "1400"
+		"StatusHealthRegen" "25"
+		"StatusMana" "0"
+		"StatusManaRegen" "0"
+		"AttackCapabilities" "DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageMin" "90"
+		"AttackDamageMax" "110"
+		"AttackRate" "1.2"
+		"AttackAnimationPoint" "0.26"
+		"AttackRange" "225"
+		"AttackAcquisitionRange" "500"
+		"ProjectileModel" ""
+		"ProjectileSpeed" "0"
+		"HasInventory" "0"
+		"ConsideredHero" "1"
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_HERO"
+		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_HERO"
 		"Creature" {
 
 		}
 
 	}
 	"npc_dota_warlock_golem_scepter_1" {
+		"UnitLabel" "golem"
+		"vscripts" "npc/units/building/npc_unit_building"
+		"BaseClass" "npc_dota_warlock_golem"
+		"Model" "models/heroes/warlock/warlock_demon.vmdl"
+		"ModelScale" "1"
+		"SoundSet" "Hero_WarlockGolem"
+		"VisionDaytimeRange" "1800"
+		"VisionNighttimeRange" "1800"
+		"VoiceFile" "soundevents/voscripts/game_sounds_vo_warlock_golem.vsndevts"
 		"Ability1" "imba_warlock_flaming_fists"
 		"Ability2" "imba_warlock_permanent_immolation"
+		"HealthBarOffset" "240"
+		"MovementSpeed" "320"
+		"MovementCapabilities" "DOTA_UNIT_CAP_MOVE_GROUND"
+		"ArmorPhysical" "0"
+		"MagicalResistance" "33"
+		"StatusHealth" "1400"
+		"StatusHealthRegen" "25"
+		"StatusMana" "0"
+		"StatusManaRegen" "0"
+		"AttackCapabilities" "DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageMin" "90"
+		"AttackDamageMax" "110"
+		"AttackRate" "1.2"
+		"AttackAnimationPoint" "0.26"
+		"AttackRange" "225"
+		"AttackAcquisitionRange" "500"
+		"ProjectileModel" ""
+		"ProjectileSpeed" "0"
+		"HasInventory" "0"
+		"ConsideredHero" "1"
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_HERO"
+		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_HERO"
 		"Creature" {
 
 		}
 
 	}
 	"npc_dota_warlock_golem_scepter_2" {
+		"UnitLabel" "golem"
+		"vscripts" "npc/units/building/npc_unit_building"
+		"BaseClass" "npc_dota_warlock_golem"
+		"Model" "models/heroes/warlock/warlock_demon.vmdl"
+		"ModelScale" "1"
+		"SoundSet" "Hero_WarlockGolem"
+		"VisionDaytimeRange" "1800"
+		"VisionNighttimeRange" "1800"
+		"VoiceFile" "soundevents/voscripts/game_sounds_vo_warlock_golem.vsndevts"
 		"Ability1" "imba_warlock_flaming_fists"
 		"Ability2" "imba_warlock_permanent_immolation"
+		"HealthBarOffset" "240"
+		"MovementSpeed" "320"
+		"MovementCapabilities" "DOTA_UNIT_CAP_MOVE_GROUND"
+		"ArmorPhysical" "0"
+		"MagicalResistance" "33"
+		"StatusHealth" "1400"
+		"StatusHealthRegen" "25"
+		"StatusMana" "0"
+		"StatusManaRegen" "0"
+		"AttackCapabilities" "DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageMin" "90"
+		"AttackDamageMax" "110"
+		"AttackRate" "1.2"
+		"AttackAnimationPoint" "0.26"
+		"AttackRange" "225"
+		"AttackAcquisitionRange" "500"
+		"ProjectileModel" ""
+		"ProjectileSpeed" "0"
+		"HasInventory" "0"
+		"ConsideredHero" "1"
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_HERO"
+		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_HERO"
 		"Creature" {
 
 		}
 
 	}
 	"npc_dota_warlock_golem_scepter_3" {
+		"UnitLabel" "golem"
+		"vscripts" "npc/units/building/npc_unit_building"
+		"BaseClass" "npc_dota_warlock_golem"
+		"Model" "models/heroes/warlock/warlock_demon.vmdl"
+		"ModelScale" "1"
+		"SoundSet" "Hero_WarlockGolem"
+		"VisionDaytimeRange" "1800"
+		"VisionNighttimeRange" "1800"
+		"VoiceFile" "soundevents/voscripts/game_sounds_vo_warlock_golem.vsndevts"
 		"Ability1" "imba_warlock_flaming_fists"
 		"Ability2" "imba_warlock_permanent_immolation"
+		"HealthBarOffset" "240"
+		"MovementSpeed" "320"
+		"MovementCapabilities" "DOTA_UNIT_CAP_MOVE_GROUND"
+		"ArmorPhysical" "0"
+		"MagicalResistance" "33"
+		"StatusHealth" "1400"
+		"StatusHealthRegen" "25"
+		"StatusMana" "0"
+		"StatusManaRegen" "0"
+		"AttackCapabilities" "DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageMin" "90"
+		"AttackDamageMax" "110"
+		"AttackRate" "1.2"
+		"AttackAnimationPoint" "0.26"
+		"AttackRange" "225"
+		"AttackAcquisitionRange" "500"
+		"ProjectileModel" ""
+		"ProjectileSpeed" "0"
+		"HasInventory" "0"
+		"ConsideredHero" "1"
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_HERO"
+		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_HERO"
 		"Creature" {
 
 		}
@@ -6370,6 +6597,7 @@
 	}
 	"npc_dota_tusk_frozen_sigil1" {
 		"UnitLabel" "frozen_sigil"
+		"vscripts" "npc/units/building/npc_unit_building"
 		"BaseClass" "npc_dota_tusk_frozen_sigil"
 		"Model" "models/heroes/tuskarr/tuskarr_sigil.vmdl"
 		"SoundSet" "Creep_Good_Range"
@@ -6411,6 +6639,7 @@
 	}
 	"npc_dota_tusk_frozen_sigil2" {
 		"UnitLabel" "frozen_sigil"
+		"vscripts" "npc/units/building/npc_unit_building"
 		"BaseClass" "npc_dota_tusk_frozen_sigil"
 		"Model" "models/heroes/tuskarr/tuskarr_sigil.vmdl"
 		"SoundSet" "Creep_Good_Range"
@@ -6452,6 +6681,7 @@
 	}
 	"npc_dota_tusk_frozen_sigil3" {
 		"UnitLabel" "frozen_sigil"
+		"vscripts" "npc/units/building/npc_unit_building"
 		"BaseClass" "npc_dota_tusk_frozen_sigil"
 		"Model" "models/heroes/tuskarr/tuskarr_sigil.vmdl"
 		"SoundSet" "Creep_Good_Range"
@@ -6493,6 +6723,7 @@
 	}
 	"npc_dota_tusk_frozen_sigil4" {
 		"UnitLabel" "frozen_sigil"
+		"vscripts" "npc/units/building/npc_unit_building"
 		"BaseClass" "npc_dota_tusk_frozen_sigil"
 		"Model" "models/heroes/tuskarr/tuskarr_sigil.vmdl"
 		"SoundSet" "Creep_Good_Range"
@@ -6534,6 +6765,7 @@
 	}
 	"npc_dota_tusk_frozen_sigil5" {
 		"UnitLabel" "frozen_sigil"
+		"vscripts" "npc/units/building/npc_unit_building"
 		"BaseClass" "npc_dota_tusk_frozen_sigil"
 		"Model" "models/heroes/tuskarr/tuskarr_sigil.vmdl"
 		"SoundSet" "Creep_Good_Range"
@@ -6575,6 +6807,7 @@
 	}
 	"npc_dota_tusk_frozen_sigil6" {
 		"UnitLabel" "frozen_sigil"
+		"vscripts" "npc/units/building/npc_unit_building"
 		"BaseClass" "npc_dota_tusk_frozen_sigil"
 		"Model" "models/heroes/tuskarr/tuskarr_sigil.vmdl"
 		"SoundSet" "Creep_Good_Range"
@@ -6616,6 +6849,7 @@
 	}
 	"npc_dota_tusk_frozen_sigil7" {
 		"UnitLabel" "frozen_sigil"
+		"vscripts" "npc/units/building/npc_unit_building"
 		"BaseClass" "npc_dota_tusk_frozen_sigil"
 		"Model" "models/heroes/tuskarr/tuskarr_sigil.vmdl"
 		"SoundSet" "Creep_Good_Range"
@@ -6656,6 +6890,7 @@
 
 	}
 	"npc_imba_witch_doctor_death_ward" {
+		"vscripts" "npc/units/building/npc_unit_building"
 		"BaseClass" "npc_dota_witch_doctor_death_ward"
 		"Model" "models/heroes/witchdoctor/witchdoctor_ward.vmdl"
 		"ModelScale" "1.0"
@@ -6977,33 +7212,441 @@
 
 	}
 	"npc_dota_brewmaster_earth_1" {
+		"UnitLabel" "brewmaster_earth"
+		"vscripts" "npc/units/building/npc_unit_building"
+		"BaseClass" "npc_dota_brewmaster_earth"
+		"Model" "models/heroes/brewmaster/brewmaster_earthspirit.vmdl"
+		"ModelScale" "0.85"
+		"SoundSet" "Brewmaster_Earth"
+		"BoundsHullName" "DOTA_HULL_SIZE_SMALL"
+		"VisionDaytimeRange" "1800"
+		"VisionNighttimeRange" "800"
+		"Ability1" "brewmaster_earth_hurl_boulder"
+		"Ability2" "brewmaster_earth_spell_immunity"
+		"Ability3" "brewmaster_earth_pulverize"
+		"Ability6" "brewmaster_primal_split_cancel"
+		"HealthBarOffset" "160"
+		"MovementSpeed" "330"
+		"MovementCapabilities" "DOTA_UNIT_CAP_MOVE_GROUND"
 		"ArmorPhysical" "3"
 		"StatusHealth" "1400"
+		"StatusHealthRegen" "2"
+		"StatusMana" "400"
+		"StatusManaRegen" "2"
 		"AttackCapabilities" "DOTA_UNIT_CAP_MELEE_ATTACK"
 		"AttackDamageMin" "25"
 		"AttackDamageMax" "35"
+		"AttackAnimationPoint" "0.3"
+		"AttackRange" "150"
+		"AttackAcquisitionRange" "600"
+		"ConsideredHero" "1"
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_HERO"
+		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_HERO"
 		"Creature" {
 
 		}
 
 	}
 	"npc_dota_brewmaster_earth_2" {
+		"UnitLabel" "brewmaster_earth"
+		"vscripts" "npc/units/building/npc_unit_building"
+		"BaseClass" "npc_dota_brewmaster_earth"
+		"Model" "models/heroes/brewmaster/brewmaster_earthspirit.vmdl"
+		"ModelScale" "0.9"
+		"SoundSet" "Brewmaster_Earth"
+		"BoundsHullName" "DOTA_HULL_SIZE_SMALL"
+		"VisionDaytimeRange" "1800"
+		"VisionNighttimeRange" "800"
+		"Ability1" "brewmaster_earth_hurl_boulder"
+		"Ability2" "brewmaster_earth_spell_immunity"
+		"Ability3" "brewmaster_earth_pulverize"
+		"Ability6" "brewmaster_primal_split_cancel"
+		"HealthBarOffset" "165"
+		"MovementSpeed" "350"
+		"MovementCapabilities" "DOTA_UNIT_CAP_MOVE_GROUND"
 		"ArmorPhysical" "5"
-		"StatusHealth" "2200"
+		"StatusHealth" "2300"
+		"StatusHealthRegen" "4"
+		"StatusMana" "500"
+		"StatusManaRegen" "2"
 		"AttackCapabilities" "DOTA_UNIT_CAP_MELEE_ATTACK"
 		"AttackDamageMin" "55"
 		"AttackDamageMax" "65"
+		"AttackAnimationPoint" "0.3"
+		"AttackRange" "150"
+		"AttackAcquisitionRange" "600"
+		"ConsideredHero" "1"
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_HERO"
+		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_HERO"
 		"Creature" {
 
 		}
 
 	}
 	"npc_dota_brewmaster_earth_3" {
+		"UnitLabel" "brewmaster_earth"
+		"vscripts" "npc/units/building/npc_unit_building"
+		"BaseClass" "npc_dota_brewmaster_earth"
+		"Model" "models/heroes/brewmaster/brewmaster_earthspirit.vmdl"
+		"ModelScale" ".95"
+		"SoundSet" "Brewmaster_Earth"
+		"BoundsHullName" "DOTA_HULL_SIZE_SMALL"
+		"VisionDaytimeRange" "1800"
+		"VisionNighttimeRange" "800"
+		"Ability1" "brewmaster_earth_hurl_boulder"
+		"Ability2" "brewmaster_earth_spell_immunity"
+		"Ability3" "brewmaster_earth_pulverize"
+		"Ability6" "brewmaster_primal_split_cancel"
+		"HealthBarOffset" "175"
+		"MovementSpeed" "370"
+		"MovementCapabilities" "DOTA_UNIT_CAP_MOVE_GROUND"
 		"ArmorPhysical" "7"
-		"StatusHealth" "3000"
+		"StatusHealth" "3200"
+		"StatusHealthRegen" "6"
+		"StatusMana" "600"
+		"StatusManaRegen" "2"
 		"AttackCapabilities" "DOTA_UNIT_CAP_MELEE_ATTACK"
 		"AttackDamageMin" "85"
 		"AttackDamageMax" "95"
+		"AttackAnimationPoint" "0.3"
+		"AttackRange" "150"
+		"AttackAcquisitionRange" "600"
+		"ConsideredHero" "1"
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_HERO"
+		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_HERO"
+		"Creature" {
+
+		}
+
+	}
+	"npc_dota_brewmaster_storm_1" {
+		"UnitLabel" "brewmaster_storm"
+		"vscripts" "npc/units/building/npc_unit_building"
+		"BaseClass" "npc_dota_brewmaster_storm"
+		"Model" "models/heroes/brewmaster/brewmaster_windspirit.vmdl"
+		"ModelScale" "0.85"
+		"SoundSet" "Brewmaster_Storm"
+		"BoundsHullName" "DOTA_HULL_SIZE_SMALL"
+		"VisionDaytimeRange" "1800"
+		"VisionNighttimeRange" "800"
+		"Ability1" "brewmaster_storm_dispel_magic"
+		"Ability2" "brewmaster_storm_cyclone"
+		"Ability3" "brewmaster_storm_wind_walk"
+		"Ability6" "brewmaster_primal_split_cancel"
+		"HealthBarOffset" "160"
+		"MovementSpeed" "350"
+		"MovementCapabilities" "DOTA_UNIT_CAP_MOVE_GROUND"
+		"ArmorPhysical" "2"
+		"MagicalResistance" "25"
+		"StatusHealth" "1000"
+		"StatusHealthRegen" "2"
+		"StatusMana" "900"
+		"StatusManaRegen" "1.5"
+		"AttackCapabilities" "DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageMin" "25"
+		"AttackDamageMax" "35"
+		"AttackAnimationPoint" "0.4"
+		"AttackRange" "600"
+		"AttackAcquisitionRange" "600"
+		"ProjectileModel" "particles/units/heroes/hero_brewmaster/brewmaster_storm_attack.vpcf"
+		"ProjectileSpeed" "1200"
+		"ConsideredHero" "1"
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_HERO"
+		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_HERO"
+		"Creature" {
+
+		}
+
+	}
+	"npc_dota_brewmaster_storm_2" {
+		"UnitLabel" "brewmaster_storm"
+		"vscripts" "npc/units/building/npc_unit_building"
+		"BaseClass" "npc_dota_brewmaster_storm"
+		"Model" "models/heroes/brewmaster/brewmaster_windspirit.vmdl"
+		"ModelScale" "0.9"
+		"SoundSet" "Brewmaster_Storm"
+		"BoundsHullName" "DOTA_HULL_SIZE_SMALL"
+		"VisionDaytimeRange" "1800"
+		"VisionNighttimeRange" "800"
+		"Ability1" "brewmaster_storm_dispel_magic"
+		"Ability2" "brewmaster_storm_cyclone"
+		"Ability3" "brewmaster_storm_wind_walk"
+		"Ability6" "brewmaster_primal_split_cancel"
+		"HealthBarOffset" "165"
+		"MovementSpeed" "350"
+		"MovementCapabilities" "DOTA_UNIT_CAP_MOVE_GROUND"
+		"ArmorPhysical" "2"
+		"MagicalResistance" "25"
+		"StatusHealth" "1500"
+		"StatusHealthRegen" "4"
+		"StatusMana" "900"
+		"StatusManaRegen" "1.5"
+		"AttackCapabilities" "DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageMin" "45"
+		"AttackDamageMax" "55"
+		"AttackAnimationPoint" "0.4"
+		"AttackRange" "600"
+		"AttackAcquisitionRange" "600"
+		"ProjectileModel" "particles/units/heroes/hero_brewmaster/brewmaster_storm_attack.vpcf"
+		"ProjectileSpeed" "1200"
+		"ConsideredHero" "1"
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_HERO"
+		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_HERO"
+		"Creature" {
+
+		}
+
+	}
+	"npc_dota_brewmaster_storm_3" {
+		"UnitLabel" "brewmaster_storm"
+		"vscripts" "npc/units/building/npc_unit_building"
+		"BaseClass" "npc_dota_brewmaster_storm"
+		"Model" "models/heroes/brewmaster/brewmaster_windspirit.vmdl"
+		"ModelScale" ".95"
+		"SoundSet" "Brewmaster_Storm"
+		"BoundsHullName" "DOTA_HULL_SIZE_SMALL"
+		"VisionDaytimeRange" "1800"
+		"VisionNighttimeRange" "800"
+		"Ability1" "brewmaster_storm_dispel_magic"
+		"Ability2" "brewmaster_storm_cyclone"
+		"Ability3" "brewmaster_storm_wind_walk"
+		"Ability6" "brewmaster_primal_split_cancel"
+		"HealthBarOffset" "175"
+		"MovementSpeed" "350"
+		"MovementCapabilities" "DOTA_UNIT_CAP_MOVE_GROUND"
+		"ArmorPhysical" "2"
+		"MagicalResistance" "25"
+		"StatusHealth" "2000"
+		"StatusHealthRegen" "6"
+		"StatusMana" "900"
+		"StatusManaRegen" "1.5"
+		"AttackCapabilities" "DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageMin" "70"
+		"AttackDamageMax" "80"
+		"AttackAnimationPoint" "0.4"
+		"AttackRange" "600"
+		"AttackAcquisitionRange" "600"
+		"ProjectileModel" "particles/units/heroes/hero_brewmaster/brewmaster_storm_attack.vpcf"
+		"ProjectileSpeed" "1200"
+		"ConsideredHero" "1"
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_HERO"
+		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_HERO"
+		"Creature" {
+
+		}
+
+	}
+	"npc_dota_brewmaster_fire_1" {
+		"UnitLabel" "brewmaster_fire"
+		"vscripts" "npc/units/building/npc_unit_building"
+		"BaseClass" "npc_dota_brewmaster_fire"
+		"Model" "models/heroes/brewmaster/brewmaster_firespirit.vmdl"
+		"ModelScale" "0.85"
+		"SoundSet" "Brewmaster_Fire"
+		"BoundsHullName" "DOTA_HULL_SIZE_SMALL"
+		"VisionDaytimeRange" "1800"
+		"VisionNighttimeRange" "800"
+		"Ability1" "brewmaster_fire_permanent_immolation"
+		"Ability2" "brewmaster_fire_phase"
+		"Ability6" "brewmaster_primal_split_cancel"
+		"HealthBarOffset" "160"
+		"MovementSpeed" "550"
+		"MovementCapabilities" "DOTA_UNIT_CAP_MOVE_GROUND"
+		"ArmorPhysical" "0"
+		"StatusHealth" "1300"
+		"StatusHealthRegen" "2"
+		"StatusMana" "750"
+		"StatusManaRegen" "1.5"
+		"AttackCapabilities" "DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageMin" "75"
+		"AttackDamageMax" "85"
+		"AttackRate" "1.35"
+		"AttackAnimationPoint" "0.3"
+		"AttackRange" "150"
+		"AttackAcquisitionRange" "600"
+		"ConsideredHero" "1"
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_HERO"
+		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_HERO"
+		"Creature" {
+
+		}
+
+	}
+	"npc_dota_brewmaster_fire_2" {
+		"UnitLabel" "brewmaster_fire"
+		"vscripts" "npc/units/building/npc_unit_building"
+		"BaseClass" "npc_dota_brewmaster_fire"
+		"Model" "models/heroes/brewmaster/brewmaster_firespirit.vmdl"
+		"ModelScale" "0.9"
+		"SoundSet" "Brewmaster_Fire"
+		"BoundsHullName" "DOTA_HULL_SIZE_SMALL"
+		"VisionDaytimeRange" "1800"
+		"VisionNighttimeRange" "800"
+		"Ability1" "brewmaster_fire_permanent_immolation"
+		"Ability2" "brewmaster_fire_phase"
+		"Ability6" "brewmaster_primal_split_cancel"
+		"HealthBarOffset" "165"
+		"MovementSpeed" "550"
+		"MovementCapabilities" "DOTA_UNIT_CAP_MOVE_GROUND"
+		"ArmorPhysical" "4"
+		"StatusHealth" "1450"
+		"StatusHealthRegen" "4"
+		"StatusMana" "750"
+		"StatusManaRegen" "1.5"
+		"AttackCapabilities" "DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageMin" "125"
+		"AttackDamageMax" "135"
+		"AttackRate" "1.35"
+		"AttackAnimationPoint" "0.3"
+		"AttackRange" "150"
+		"AttackAcquisitionRange" "600"
+		"ConsideredHero" "1"
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_HERO"
+		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_HERO"
+		"Creature" {
+
+		}
+
+	}
+	"npc_dota_brewmaster_fire_3" {
+		"UnitLabel" "brewmaster_fire"
+		"vscripts" "npc/units/building/npc_unit_building"
+		"BaseClass" "npc_dota_brewmaster_fire"
+		"Model" "models/heroes/brewmaster/brewmaster_firespirit.vmdl"
+		"ModelScale" ".95"
+		"SoundSet" "Brewmaster_Fire"
+		"BoundsHullName" "DOTA_HULL_SIZE_SMALL"
+		"VisionDaytimeRange" "1800"
+		"VisionNighttimeRange" "800"
+		"Ability1" "brewmaster_fire_permanent_immolation"
+		"Ability2" "brewmaster_fire_phase"
+		"Ability6" "brewmaster_primal_split_cancel"
+		"HealthBarOffset" "175"
+		"MovementSpeed" "550"
+		"MovementCapabilities" "DOTA_UNIT_CAP_MOVE_GROUND"
+		"ArmorPhysical" "8"
+		"StatusHealth" "1600"
+		"StatusHealthRegen" "6"
+		"StatusMana" "750"
+		"StatusManaRegen" "1.5"
+		"AttackCapabilities" "DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageMin" "175"
+		"AttackDamageMax" "185"
+		"AttackRate" "1.35"
+		"AttackAnimationPoint" "0.3"
+		"AttackRange" "150"
+		"AttackAcquisitionRange" "600"
+		"ConsideredHero" "1"
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_HERO"
+		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_HERO"
+		"Creature" {
+
+		}
+
+	}
+	"npc_dota_brewmaster_void_1" {
+		"UnitLabel" "brewmaster_void"
+		"vscripts" "npc/units/building/npc_unit_building"
+		"BaseClass" "npc_dota_brewmaster_void"
+		"Model" "models/heroes/brewmaster/brewmaster_voidspirit.vmdl"
+		"ModelScale" "0.85"
+		"SoundSet" "Brewmaster_Earth"
+		"BoundsHullName" "DOTA_HULL_SIZE_SMALL"
+		"VisionDaytimeRange" "1800"
+		"VisionNighttimeRange" "800"
+		"Ability1" "brewmaster_void_astral_pulse"
+		"Ability6" "brewmaster_primal_split_cancel"
+		"HealthBarOffset" "160"
+		"MovementSpeed" "450"
+		"MovementCapabilities" "DOTA_UNIT_CAP_MOVE_GROUND"
+		"ArmorPhysical" "3"
+		"MagicalResistance" "20"
+		"StatusHealth" "1200"
+		"StatusHealthRegen" "2"
+		"StatusMana" "750"
+		"StatusManaRegen" "1.5"
+		"AttackCapabilities" "DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageMin" "45"
+		"AttackDamageMax" "55"
+		"AttackRate" "1.2"
+		"AttackAnimationPoint" "0.3"
+		"AttackRange" "150"
+		"AttackAcquisitionRange" "600"
+		"ConsideredHero" "1"
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_HERO"
+		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_HERO"
+		"Creature" {
+
+		}
+
+	}
+	"npc_dota_brewmaster_void_2" {
+		"UnitLabel" "brewmaster_void"
+		"vscripts" "npc/units/building/npc_unit_building"
+		"BaseClass" "npc_dota_brewmaster_void"
+		"Model" "models/heroes/brewmaster/brewmaster_voidspirit.vmdl"
+		"ModelScale" "0.9"
+		"SoundSet" "Brewmaster_Earth"
+		"BoundsHullName" "DOTA_HULL_SIZE_SMALL"
+		"VisionDaytimeRange" "1800"
+		"VisionNighttimeRange" "800"
+		"Ability1" "brewmaster_void_astral_pulse"
+		"Ability6" "brewmaster_primal_split_cancel"
+		"HealthBarOffset" "165"
+		"MovementSpeed" "450"
+		"MovementCapabilities" "DOTA_UNIT_CAP_MOVE_GROUND"
+		"ArmorPhysical" "4"
+		"MagicalResistance" "20"
+		"StatusHealth" "1500"
+		"StatusHealthRegen" "4"
+		"StatusMana" "750"
+		"StatusManaRegen" "1.5"
+		"AttackCapabilities" "DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageMin" "55"
+		"AttackDamageMax" "65"
+		"AttackRate" "1.0"
+		"AttackAnimationPoint" "0.3"
+		"AttackRange" "150"
+		"AttackAcquisitionRange" "600"
+		"ConsideredHero" "1"
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_HERO"
+		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_HERO"
+		"Creature" {
+
+		}
+
+	}
+	"npc_dota_brewmaster_void_3" {
+		"UnitLabel" "brewmaster_void"
+		"vscripts" "npc/units/building/npc_unit_building"
+		"BaseClass" "npc_dota_brewmaster_void"
+		"Model" "models/heroes/brewmaster/brewmaster_voidspirit.vmdl"
+		"ModelScale" ".95"
+		"SoundSet" "Brewmaster_Earth"
+		"BoundsHullName" "DOTA_HULL_SIZE_SMALL"
+		"VisionDaytimeRange" "1800"
+		"VisionNighttimeRange" "800"
+		"Ability1" "brewmaster_void_astral_pulse"
+		"Ability6" "brewmaster_primal_split_cancel"
+		"HealthBarOffset" "175"
+		"MovementSpeed" "450"
+		"MovementCapabilities" "DOTA_UNIT_CAP_MOVE_GROUND"
+		"ArmorPhysical" "5"
+		"MagicalResistance" "20"
+		"StatusHealth" "1800"
+		"StatusHealthRegen" "6"
+		"StatusMana" "750"
+		"StatusManaRegen" "1.5"
+		"AttackCapabilities" "DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageMin" "65"
+		"AttackDamageMax" "75"
+		"AttackRate" "0.8"
+		"AttackAnimationPoint" "0.3"
+		"AttackRange" "150"
+		"AttackAcquisitionRange" "600"
+		"ConsideredHero" "1"
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_HERO"
+		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_HERO"
 		"Creature" {
 
 		}
@@ -7011,6 +7654,7 @@
 	}
 	"npc_dota_brewmaster_earth_4" {
 		"UnitLabel" "brewmaster_earth"
+		"vscripts" "npc/units/building/npc_unit_building"
 		"BaseClass" "npc_dota_brewmaster_earth"
 		"Model" "models/heroes/brewmaster/brewmaster_earthspirit.vmdl"
 		"ModelScale" ".98"
@@ -7047,6 +7691,7 @@
 	}
 	"npc_dota_brewmaster_earth_5" {
 		"UnitLabel" "brewmaster_earth"
+		"vscripts" "npc/units/building/npc_unit_building"
 		"BaseClass" "npc_dota_brewmaster_earth"
 		"Model" "models/heroes/brewmaster/brewmaster_earthspirit.vmdl"
 		"ModelScale" "1.05"
@@ -7083,6 +7728,7 @@
 	}
 	"npc_dota_brewmaster_earth_6" {
 		"UnitLabel" "brewmaster_earth"
+		"vscripts" "npc/units/building/npc_unit_building"
 		"BaseClass" "npc_dota_brewmaster_earth"
 		"Model" "models/heroes/brewmaster/brewmaster_earthspirit.vmdl"
 		"ModelScale" "1.1"
@@ -7117,44 +7763,9 @@
 		}
 
 	}
-	"npc_dota_brewmaster_storm_1" {
-		"VisionDaytimeRange" "1800"
-		"VisionNighttimeRange" "800"
-		"StatusHealth" "1000"
-		"AttackCapabilities" "DOTA_UNIT_CAP_MELEE_ATTACK"
-		"AttackDamageMin" "25"
-		"AttackDamageMax" "35"
-		"Creature" {
-
-		}
-
-	}
-	"npc_dota_brewmaster_storm_2" {
-		"VisionDaytimeRange" "1800"
-		"VisionNighttimeRange" "800"
-		"StatusHealth" "1800"
-		"AttackCapabilities" "DOTA_UNIT_CAP_MELEE_ATTACK"
-		"AttackDamageMin" "45"
-		"AttackDamageMax" "55"
-		"Creature" {
-
-		}
-
-	}
-	"npc_dota_brewmaster_storm_3" {
-		"VisionDaytimeRange" "1800"
-		"VisionNighttimeRange" "800"
-		"StatusHealth" "2375"
-		"AttackCapabilities" "DOTA_UNIT_CAP_MELEE_ATTACK"
-		"AttackDamageMin" "70"
-		"AttackDamageMax" "80"
-		"Creature" {
-
-		}
-
-	}
 	"npc_dota_brewmaster_storm_4" {
 		"UnitLabel" "brewmaster_storm"
+		"vscripts" "npc/units/building/npc_unit_building"
 		"BaseClass" "npc_dota_brewmaster_storm"
 		"Model" "models/heroes/brewmaster/brewmaster_windspirit.vmdl"
 		"ModelScale" ".98"
@@ -7193,6 +7804,7 @@
 	}
 	"npc_dota_brewmaster_storm_5" {
 		"UnitLabel" "brewmaster_storm"
+		"vscripts" "npc/units/building/npc_unit_building"
 		"BaseClass" "npc_dota_brewmaster_storm"
 		"Model" "models/heroes/brewmaster/brewmaster_windspirit.vmdl"
 		"ModelScale" "1.05"
@@ -7231,6 +7843,7 @@
 	}
 	"npc_dota_brewmaster_storm_6" {
 		"UnitLabel" "brewmaster_storm"
+		"vscripts" "npc/units/building/npc_unit_building"
 		"BaseClass" "npc_dota_brewmaster_storm"
 		"Model" "models/heroes/brewmaster/brewmaster_windspirit.vmdl"
 		"ModelScale" "1.1"
@@ -7267,41 +7880,9 @@
 		}
 
 	}
-	"npc_dota_brewmaster_fire_1" {
-		"StatusHealth" "1300"
-		"AttackCapabilities" "DOTA_UNIT_CAP_MELEE_ATTACK"
-		"AttackDamageMin" "75"
-		"AttackDamageMax" "85"
-		"AttackRate" "1.35"
-		"Creature" {
-
-		}
-
-	}
-	"npc_dota_brewmaster_fire_2" {
-		"StatusHealth" "1300"
-		"AttackCapabilities" "DOTA_UNIT_CAP_MELEE_ATTACK"
-		"AttackDamageMin" "125"
-		"AttackDamageMax" "135"
-		"AttackRate" "1.35"
-		"Creature" {
-
-		}
-
-	}
-	"npc_dota_brewmaster_fire_3" {
-		"StatusHealth" "1625"
-		"AttackCapabilities" "DOTA_UNIT_CAP_MELEE_ATTACK"
-		"AttackDamageMin" "175"
-		"AttackDamageMax" "185"
-		"AttackRate" "1.35"
-		"Creature" {
-
-		}
-
-	}
 	"npc_dota_brewmaster_fire_4" {
 		"UnitLabel" "brewmaster_fire"
+		"vscripts" "npc/units/building/npc_unit_building"
 		"BaseClass" "npc_dota_brewmaster_fire"
 		"Model" "models/heroes/brewmaster/brewmaster_firespirit.vmdl"
 		"ModelScale" ".98"
@@ -7334,6 +7915,7 @@
 	}
 	"npc_dota_brewmaster_fire_5" {
 		"UnitLabel" "brewmaster_fire"
+		"vscripts" "npc/units/building/npc_unit_building"
 		"BaseClass" "npc_dota_brewmaster_fire"
 		"Model" "models/heroes/brewmaster/brewmaster_firespirit.vmdl"
 		"ModelScale" "1.05"
@@ -7366,6 +7948,7 @@
 	}
 	"npc_dota_brewmaster_fire_6" {
 		"UnitLabel" "brewmaster_fire"
+		"vscripts" "npc/units/building/npc_unit_building"
 		"BaseClass" "npc_dota_brewmaster_fire"
 		"Model" "models/heroes/brewmaster/brewmaster_firespirit.vmdl"
 		"ModelScale" "1.1"
@@ -7397,59 +7980,182 @@
 
 	}
 	"npc_dota_unit_tombstone1" {
-		"StatusHealth" "16"
+		"vscripts" "npc/units/building/npc_unit_building"
+		"BaseClass" "npc_dota_unit_undying_tombstone"
+		"Model" "models/heroes/undying/undying_tower.vmdl"
+		"ModelScale" ".8"
+		"SoundSet" "Undying_Tombstone"
+		"BoundsHullName" "DOTA_HULL_SIZE_REGULAR"
+		"VisionDaytimeRange" "1800"
+		"VisionNighttimeRange" "1800"
+		"Ability1" "neutral_spell_immunity"
+		"HealthBarOffset" "250"
+		"MovementSpeed" "0"
+		"MovementCapabilities" "DOTA_UNIT_CAP_MOVE_NONE"
+		"MovementTurnRate" "0.0"
+		"ArmorPhysical" "5"
+		"MagicalResistance" "33"
+		"StatusHealth" "20"
+		"StatusHealthRegen" "0"
+		"StatusMana" "0"
+		"StatusManaRegen" "0"
+		"AttackCapabilities" "DOTA_UNIT_CAP_NO_ATTACK"
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_HERO"
+		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_HERO"
 		"Creature" {
 
 		}
 
 	}
 	"npc_dota_unit_tombstone2" {
-		"StatusHealth" "20"
+		"vscripts" "npc/units/building/npc_unit_building"
+		"BaseClass" "npc_dota_unit_undying_tombstone"
+		"Model" "models/heroes/undying/undying_tower.vmdl"
+		"ModelScale" ".8"
+		"SoundSet" "Undying_Tombstone"
+		"BoundsHullName" "DOTA_HULL_SIZE_REGULAR"
+		"VisionDaytimeRange" "1800"
+		"VisionNighttimeRange" "1800"
+		"Ability1" "neutral_spell_immunity"
+		"HealthBarOffset" "250"
+		"MovementSpeed" "0"
+		"MovementCapabilities" "DOTA_UNIT_CAP_MOVE_NONE"
+		"MovementTurnRate" "0.0"
+		"ArmorPhysical" "5"
+		"MagicalResistance" "33"
+		"StatusHealth" "24"
+		"StatusHealthRegen" "0"
+		"StatusMana" "0"
+		"StatusManaRegen" "0"
+		"AttackCapabilities" "DOTA_UNIT_CAP_NO_ATTACK"
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_HERO"
+		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_HERO"
 		"Creature" {
 
 		}
 
 	}
 	"npc_dota_unit_tombstone3" {
-		"StatusHealth" "24"
+		"vscripts" "npc/units/building/npc_unit_building"
+		"BaseClass" "npc_dota_unit_undying_tombstone"
+		"Model" "models/heroes/undying/undying_tower.vmdl"
+		"ModelScale" ".8"
+		"SoundSet" "Undying_Tombstone"
+		"BoundsHullName" "DOTA_HULL_SIZE_REGULAR"
+		"VisionDaytimeRange" "1800"
+		"VisionNighttimeRange" "1800"
+		"Ability1" "neutral_spell_immunity"
+		"HealthBarOffset" "250"
+		"MovementSpeed" "0"
+		"MovementCapabilities" "DOTA_UNIT_CAP_MOVE_NONE"
+		"MovementTurnRate" "0.0"
+		"ArmorPhysical" "5"
+		"MagicalResistance" "33"
+		"StatusHealth" "28"
+		"StatusHealthRegen" "0"
+		"StatusMana" "0"
+		"StatusManaRegen" "0"
+		"AttackCapabilities" "DOTA_UNIT_CAP_NO_ATTACK"
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_HERO"
+		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_HERO"
 		"Creature" {
 
 		}
 
 	}
 	"npc_dota_unit_tombstone4" {
-		"StatusHealth" "28"
+		"vscripts" "npc/units/building/npc_unit_building"
+		"BaseClass" "npc_dota_unit_undying_tombstone"
+		"Model" "models/heroes/undying/undying_tower.vmdl"
+		"ModelScale" ".8"
+		"SoundSet" "Undying_Tombstone"
+		"BoundsHullName" "DOTA_HULL_SIZE_REGULAR"
+		"VisionDaytimeRange" "1800"
+		"VisionNighttimeRange" "1800"
+		"Ability1" "neutral_spell_immunity"
+		"HealthBarOffset" "250"
+		"MovementSpeed" "0"
+		"MovementCapabilities" "DOTA_UNIT_CAP_MOVE_NONE"
+		"MovementTurnRate" "0.0"
+		"ArmorPhysical" "5"
+		"MagicalResistance" "33"
+		"StatusHealth" "32"
+		"StatusHealthRegen" "0"
+		"StatusMana" "0"
+		"StatusManaRegen" "0"
+		"AttackCapabilities" "DOTA_UNIT_CAP_NO_ATTACK"
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_HERO"
+		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_HERO"
 		"Creature" {
 
 		}
 
 	}
 	"npc_dota_visage_familiar1" {
+		"UnitLabel" "visage_familiars"
+		"vscripts" "npc/units/building/npc_unit_building"
+		"BaseClass" "npc_dota_visage_familiar"
+		"Model" "models/heroes/visage/visage_familiar.vmdl"
+		"ModelScale" "0.66"
+		"SoundSet" "Visage_Familiar"
+		"BoundsHullName" "DOTA_HULL_SIZE_REGULAR"
+		"VisionDaytimeRange" "400"
+		"VisionNighttimeRange" "400"
 		"Ability1" "imba_visage_summon_familiars_stone_form"
+		"HealthBarOffset" "130"
+		"MovementSpeed" "430"
+		"MovementCapabilities" "DOTA_UNIT_CAP_MOVE_GROUND"
+		"MovementTurnRate" "0.9"
 		"ArmorPhysical" "0"
+		"MagicalResistance" "35"
 		"StatusHealth" "500"
+		"StatusHealthRegen" "0.0"
+		"StatusMana" "0"
+		"StatusManaRegen" "0.0"
+		"AttackCapabilities" "DOTA_UNIT_CAP_RANGED_ATTACK"
 		"AttackDamageMin" "25"
 		"AttackDamageMax" "25"
+		"AttackRate" "0.5"
+		"AttackDamageType" "DAMAGE_TYPE_ArmorPhysical"
+		"AttackAnimationPoint" "0.33"
+		"AttackRange" "180"
+		"AttackAcquisitionRange" "400"
+		"ProjectileModel" "particles/units/heroes/hero_visage/visage_familiar_base_attack.vpcf"
+		"ProjectileSpeed" "900"
+		"ConsideredHero" "1"
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_HERO"
+		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_HERO"
 		"Creature" {
 
 		}
 
 	}
 	"npc_dota_visage_familiar2" {
+		"vscripts" "npc/units/building/npc_unit_building"
 		"Ability1" "imba_visage_summon_familiars_stone_form"
-		"ArmorPhysical" "1"
+		"ArmorPhysical" "2"
 		"StatusHealth" "600"
+		"AttackCapabilities" "DOTA_UNIT_CAP_RANGED_ATTACK"
 		"AttackDamageMin" "50"
 		"AttackDamageMax" "50"
+		"AttackRate" "0.5"
+		"AttackDamageType" "DAMAGE_TYPE_ArmorPhysical"
+		"AttackAnimationPoint" "0.33"
+		"AttackRange" "180"
+		"AttackAcquisitionRange" "400"
+		"ProjectileModel" "particles/units/heroes/hero_visage/visage_familiar_base_attack.vpcf"
+		"ProjectileSpeed" "900"
 		"Creature" {
 
 		}
 
 	}
 	"npc_dota_visage_familiar3" {
+		"vscripts" "npc/units/building/npc_unit_building"
 		"Ability1" "imba_visage_summon_familiars_stone_form"
-		"ArmorPhysical" "2"
+		"ArmorPhysical" "4"
 		"StatusHealth" "700"
+		"AttackCapabilities" "DOTA_UNIT_CAP_RANGED_ATTACK"
 		"AttackDamageMin" "75"
 		"AttackDamageMax" "75"
 		"Creature" {
@@ -7458,89 +8164,270 @@
 
 	}
 	"npc_dota_beastmaster_hawk_1" {
-		"VisionDaytimeRange" "600"
-		"VisionNighttimeRange" "600"
+		"UnitLabel" "hawk"
+		"vscripts" "npc/units/building/npc_unit_building"
+		"BaseClass" "npc_dota_beastmaster_hawk"
+		"Model" "models/heroes/beastmaster/beastmaster_bird.vmdl"
+		"ModelScale" "1.2"
+		"SoundSet" "0"
+		"VisionDaytimeRange" "750"
+		"VisionNighttimeRange" "750"
+		"Ability1" "beastmaster_hawk_dive"
+		"HealthBarOffset" "165"
 		"MovementSpeed" "300"
+		"MovementCapabilities" "DOTA_UNIT_CAP_MOVE_FLY"
+		"MovementTurnRate" "0.6"
+		"ArmorPhysical" "5"
 		"StatusHealth" "150"
+		"StatusHealthRegen" "1.5"
+		"AttackCapabilities" "DOTA_UNIT_CAP_NO_ATTACK"
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_HERO"
+		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_HERO"
 		"Creature" {
 
 		}
 
 	}
 	"npc_dota_beastmaster_hawk_2" {
-		"VisionDaytimeRange" "700"
-		"VisionNighttimeRange" "700"
+		"UnitLabel" "hawk"
+		"vscripts" "npc/units/building/npc_unit_building"
+		"BaseClass" "npc_dota_beastmaster_hawk"
+		"Model" "models/heroes/beastmaster/beastmaster_bird.vmdl"
+		"ModelScale" "1.2"
+		"SoundSet" "0"
+		"VisionDaytimeRange" "800"
+		"VisionNighttimeRange" "800"
+		"Ability1" "beastmaster_hawk_dive"
+		"HealthBarOffset" "165"
 		"MovementSpeed" "340"
+		"MovementCapabilities" "DOTA_UNIT_CAP_MOVE_FLY"
+		"MovementTurnRate" "0.6"
+		"ArmorPhysical" "5"
 		"StatusHealth" "200"
+		"StatusHealthRegen" "1.5"
+		"AttackCapabilities" "DOTA_UNIT_CAP_NO_ATTACK"
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_HERO"
+		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_HERO"
 		"Creature" {
 
 		}
 
 	}
 	"npc_dota_beastmaster_hawk_3" {
-		"VisionDaytimeRange" "800"
-		"VisionNighttimeRange" "800"
+		"UnitLabel" "hawk"
+		"vscripts" "npc/units/building/npc_unit_building"
+		"BaseClass" "npc_dota_beastmaster_hawk"
+		"Model" "models/heroes/beastmaster/beastmaster_bird.vmdl"
+		"ModelScale" "1.2"
+		"SoundSet" "0"
+		"VisionDaytimeRange" "850"
+		"VisionNighttimeRange" "850"
+		"Ability1" "beastmaster_hawk_dive"
+		"HealthBarOffset" "165"
 		"MovementSpeed" "380"
+		"MovementCapabilities" "DOTA_UNIT_CAP_MOVE_FLY"
+		"MovementTurnRate" "0.6"
+		"ArmorPhysical" "5"
 		"StatusHealth" "250"
+		"StatusHealthRegen" "1.5"
+		"AttackCapabilities" "DOTA_UNIT_CAP_NO_ATTACK"
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_HERO"
+		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_HERO"
 		"Creature" {
 
 		}
 
 	}
 	"npc_dota_beastmaster_hawk_4" {
+		"UnitLabel" "hawk"
+		"vscripts" "npc/units/building/npc_unit_building"
+		"BaseClass" "npc_dota_beastmaster_hawk"
+		"Model" "models/heroes/beastmaster/beastmaster_bird.vmdl"
+		"ModelScale" "1.2"
+		"SoundSet" "0"
 		"VisionDaytimeRange" "900"
 		"VisionNighttimeRange" "900"
+		"Ability1" "beastmaster_hawk_dive"
+		"HealthBarOffset" "165"
 		"MovementSpeed" "420"
+		"MovementCapabilities" "DOTA_UNIT_CAP_MOVE_FLY"
+		"MovementTurnRate" "0.6"
+		"ArmorPhysical" "5"
 		"StatusHealth" "300"
+		"StatusHealthRegen" "1.5"
+		"AttackCapabilities" "DOTA_UNIT_CAP_NO_ATTACK"
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_HERO"
+		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_HERO"
 		"Creature" {
 
 		}
 
 	}
 	"npc_dota_beastmaster_boar_1" {
+		"UnitLabel" "boar"
+		"vscripts" "npc/units/building/npc_unit_building"
+		"BaseClass" "npc_dota_beastmaster_boar"
+		"Model" "models/heroes/beastmaster/beastmaster_beast.vmdl"
+		"ModelScale" "0.65"
+		"SoundSet" "Beastmaster_Boar"
+		"VisionDaytimeRange" "1400"
+		"VisionNighttimeRange" "800"
+		"Ability1" "beastmaster_boar_poison"
+		"HealthBarOffset" "125"
+		"MovementSpeed" "320"
+		"MovementCapabilities" "DOTA_UNIT_CAP_MOVE_GROUND"
+		"MovementTurnRate" "0.6"
+		"ArmorPhysical" "0"
 		"StatusHealth" "300"
+		"StatusHealthRegen" "1.5"
+		"AttackCapabilities" "DOTA_UNIT_CAP_RANGED_ATTACK"
 		"AttackDamageMin" "16"
 		"AttackDamageMax" "16"
+		"AttackRate" "1.25"
+		"AttackAnimationPoint" "0.5"
+		"AttackRange" "550"
+		"AttackAcquisitionRange" "600"
+		"ProjectileModel" "particles/units/heroes/hero_beastmaster/beastmaster_boar_attack.vpcf"
+		"ProjectileSpeed" "1500"
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_HERO"
+		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_HERO"
 		"Creature" {
 
 		}
 
 	}
 	"npc_dota_beastmaster_boar_2" {
+		"UnitLabel" "boar"
+		"vscripts" "npc/units/building/npc_unit_building"
+		"BaseClass" "npc_dota_beastmaster_boar"
+		"Model" "models/heroes/beastmaster/beastmaster_beast.vmdl"
+		"ModelScale" "0.65"
+		"SoundSet" "Beastmaster_Boar"
+		"VisionDaytimeRange" "1400"
+		"VisionNighttimeRange" "800"
+		"Ability1" "beastmaster_boar_poison"
+		"HealthBarOffset" "125"
+		"MovementSpeed" "320"
+		"MovementCapabilities" "DOTA_UNIT_CAP_MOVE_GROUND"
+		"MovementTurnRate" "0.6"
+		"ArmorPhysical" "0"
 		"StatusHealth" "450"
+		"StatusHealthRegen" "1.5"
+		"AttackCapabilities" "DOTA_UNIT_CAP_RANGED_ATTACK"
 		"AttackDamageMin" "32"
 		"AttackDamageMax" "32"
+		"AttackRate" "1.25"
+		"AttackAnimationPoint" "0.5"
+		"AttackRange" "550"
+		"AttackAcquisitionRange" "600"
+		"ProjectileModel" "particles/units/heroes/hero_beastmaster/beastmaster_boar_attack.vpcf"
+		"ProjectileSpeed" "1500"
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_HERO"
+		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_HERO"
 		"Creature" {
 
 		}
 
 	}
 	"npc_dota_beastmaster_boar_3" {
+		"UnitLabel" "boar"
+		"vscripts" "npc/units/building/npc_unit_building"
+		"BaseClass" "npc_dota_beastmaster_boar"
+		"Model" "models/heroes/beastmaster/beastmaster_beast.vmdl"
+		"ModelScale" "0.65"
+		"SoundSet" "Beastmaster_Boar"
+		"VisionDaytimeRange" "1400"
+		"VisionNighttimeRange" "800"
+		"Ability1" "beastmaster_boar_poison"
+		"HealthBarOffset" "125"
+		"MovementSpeed" "320"
+		"MovementCapabilities" "DOTA_UNIT_CAP_MOVE_GROUND"
+		"MovementTurnRate" "0.6"
+		"ArmorPhysical" "0"
 		"StatusHealth" "600"
+		"StatusHealthRegen" "1.5"
+		"AttackCapabilities" "DOTA_UNIT_CAP_RANGED_ATTACK"
 		"AttackDamageMin" "48"
 		"AttackDamageMax" "48"
+		"AttackRate" "1.25"
+		"AttackAnimationPoint" "0.5"
+		"AttackRange" "550"
+		"AttackAcquisitionRange" "600"
+		"ProjectileModel" "particles/units/heroes/hero_beastmaster/beastmaster_boar_attack.vpcf"
+		"ProjectileSpeed" "1500"
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_HERO"
+		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_HERO"
 		"Creature" {
 
 		}
 
 	}
 	"npc_dota_beastmaster_boar_4" {
+		"UnitLabel" "boar"
+		"vscripts" "npc/units/building/npc_unit_building"
+		"BaseClass" "npc_dota_beastmaster_boar"
+		"Model" "models/heroes/beastmaster/beastmaster_beast.vmdl"
+		"ModelScale" "0.65"
+		"SoundSet" "Beastmaster_Boar"
+		"VisionDaytimeRange" "1400"
+		"VisionNighttimeRange" "800"
+		"Ability1" "beastmaster_boar_poison"
+		"HealthBarOffset" "125"
+		"MovementSpeed" "320"
+		"MovementCapabilities" "DOTA_UNIT_CAP_MOVE_GROUND"
+		"MovementTurnRate" "0.6"
+		"ArmorPhysical" "0"
 		"StatusHealth" "750"
+		"StatusHealthRegen" "1.5"
+		"AttackCapabilities" "DOTA_UNIT_CAP_RANGED_ATTACK"
 		"AttackDamageMin" "64"
 		"AttackDamageMax" "64"
+		"AttackRate" "1.25"
+		"AttackAnimationPoint" "0.5"
+		"AttackRange" "550"
+		"AttackAcquisitionRange" "600"
+		"ProjectileModel" "particles/units/heroes/hero_beastmaster/beastmaster_boar_attack.vpcf"
+		"ProjectileSpeed" "1500"
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_HERO"
+		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_HERO"
 		"Creature" {
 
 		}
 
 	}
 	"npc_dota_rattletrap_cog" {
+		"vscripts" "npc/units/building/npc_unit_building"
+		"BaseClass" "npc_dota_rattletrap_cog"
+		"Model" "models/heroes/rattletrap/rattletrap_cog.vmdl"
+		"ModelScale" "1.7"
+		"SoundSet" "0"
+		"BoundsHullName" "DOTA_HULL_SIZE_HUGE"
+		"VisionDaytimeRange" "1600"
+		"VisionNighttimeRange" "600"
+		"HealthBarOffset" "120"
+		"MovementSpeed" "0"
 		"MovementCapabilities" "DOTA_UNIT_CAP_MOVE_GROUND"
+		"ArmorPhysical" "0"
+		"StatusHealth" "100"
+		"StatusHealthRegen" "0.5"
+		"AttackCapabilities" "DOTA_UNIT_CAP_NO_ATTACK"
+		"AttackDamageMin" "0"
+		"AttackDamageMax" "0"
+		"AttackRate" "1.0"
+		"AttackAnimationPoint" "0.0"
+		"AttackRange" "0"
+		"AttackAcquisitionRange" "0"
+		"ProjectileModel" ""
+		"ProjectileSpeed" "0"
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_HERO"
+		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_HERO"
 		"Creature" {
 
 		}
 
 	}
 	"npc_dota_hero_sly_king" {
+		"vscripts" "npc/units/building/npc_unit_building"
 		"BaseClass" "npc_dota_hero_weaver"
 		"Model" "models/heroes/slyli/model_weaver.vmdl"
 		"ModelScale" "0.940000"
@@ -7596,6 +8483,7 @@
 
 	}
 	"npc_dota_elder_titan_ancestral_spirit" {
+		"vscripts" "npc/units/building/npc_unit_building"
 		"BaseClass" "npc_dota_elder_titan_ancestral_spirit"
 		"Model" "models/heroes/elder_titan/ancestral_spirit.vmdl"
 		"ModelScale" "1.0"
@@ -7630,6 +8518,7 @@
 
 	}
 	"npc_dota_hero_scaldris" {
+		"vscripts" "npc/units/building/npc_unit_building"
 		"BaseClass" "npc_dota_hero_invoker"
 		"Model" "models/heroes/invoker/invoker.vmdl"
 		"ModelScale" "0.810000"
@@ -7688,6 +8577,7 @@
 
 	}
 	"npc_dota_hero_storegga" {
+		"vscripts" "npc/units/building/npc_unit_building"
 		"BaseClass" "npc_dota_hero_tiny"
 		"Model" "models/creeps/ice_biome/storegga/storegga.vmdl"
 		"ModelScale" "0.8"
@@ -7745,6 +8635,7 @@
 
 	}
 	"npc_dota_mutation_spiderling_super_big" {
+		"vscripts" "npc/units/building/npc_unit_building"
 		"BaseClass" "npc_dota_broodmother_spiderling"
 		"Model" "models/heroes/broodmother/spiderling.vmdl"
 		"ModelScale" ".8"
@@ -7780,6 +8671,7 @@
 
 	}
 	"npc_dota_mutation_spiderling_big" {
+		"vscripts" "npc/units/building/npc_unit_building"
 		"BaseClass" "npc_dota_broodmother_spiderling"
 		"Model" "models/heroes/broodmother/spiderling.vmdl"
 		"ModelScale" ".5"
@@ -7815,6 +8707,7 @@
 
 	}
 	"npc_dota_mutation_spiderling" {
+		"vscripts" "npc/units/building/npc_unit_building"
 		"BaseClass" "npc_dota_broodmother_spiderling"
 		"Model" "models/heroes/broodmother/spiderling.vmdl"
 		"ModelScale" ".3"
@@ -7850,6 +8743,7 @@
 
 	}
 	"npc_dota_mutation_spiderite" {
+		"vscripts" "npc/units/building/npc_unit_building"
 		"BaseClass" "npc_dota_broodmother_spiderling"
 		"Model" "models/heroes/broodmother/spiderling.vmdl"
 		"ModelScale" ".2"
@@ -7886,6 +8780,7 @@
 	}
 	"npc_dota_mutation_golem" {
 		"UnitLabel" "mutation_golem"
+		"vscripts" "npc/units/building/npc_unit_building"
 		"BaseClass" "npc_dota_warlock_golem"
 		"Model" "models/items/warlock/golem/ti_8_warlock_darkness_apostate_golem/ti_8_warlock_darkness_apostate_golem.vmdl"
 		"ModelScale" "0.7"
@@ -8670,9 +9565,35 @@
 
 	}
 	"npc_dota_wraith_king_skeleton_warrior" {
+		"BaseClass" "npc_dota_creep_neutral"
+		"Model" "models/creeps/neutral_creeps/n_creep_troll_skeleton/n_creep_skeleton_melee.vmdl"
+		"ModelScale" "1.1"
+		"SoundSet" "Creep_Good_Melee"
+		"BoundsHullName" "DOTA_HULL_SIZE_SMALLEST"
+		"VisionDaytimeRange" "800"
+		"VisionNighttimeRange" "600"
+		"HealthBarOffset" "140"
+		"MovementSpeed" "350"
+		"MovementCapabilities" "DOTA_UNIT_CAP_MOVE_GROUND"
+		"MovementTurnRate" "0.5"
+		"ArmorPhysical" "1"
+		"MagicalResistance" "50"
 		"StatusHealth" "175"
+		"StatusHealthRegen" "0.0"
+		"StatusMana" "0"
+		"StatusManaRegen" "0"
+		"AttackCapabilities" "DOTA_UNIT_CAP_MELEE_ATTACK"
 		"AttackDamageMin" "35"
 		"AttackDamageMax" "40"
+		"AttackRate" "1.2"
+		"AttackDamageType" "DAMAGE_TYPE_ArmorPhysical"
+		"AttackAnimationPoint" "0.56"
+		"AttackRange" "115"
+		"AttackAcquisitionRange" "300"
+		"ProjectileModel" ""
+		"ProjectileSpeed" ""
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_HERO"
+		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_HERO"
 		"Creature" {
 
 		}
@@ -8733,7 +9654,30 @@
 
 	}
 	"npc_dota_templar_assassin_psionic_trap" {
+		"BaseClass" "npc_dota_base_additive"
+		"Model" "models/heroes/lanaya/lanaya_trap_crystal_invis.vmdl"
+		"ModelScale" "1.0"
+		"SoundSet" "0"
+		"VisionDaytimeRange" "400"
+		"VisionNighttimeRange" "400"
 		"Ability1" "imba_templar_assassin_self_trap"
+		"HealthBarOffset" "140"
+		"MovementSpeed" "0"
+		"MovementCapabilities" "DOTA_UNIT_CAP_MOVE_NONE"
+		"ArmorPhysical" "0"
+		"StatusHealth" "100"
+		"StatusHealthRegen" "0.5"
+		"AttackCapabilities" "DOTA_UNIT_CAP_NO_ATTACK"
+		"AttackDamageMin" "0"
+		"AttackDamageMax" "0"
+		"AttackRate" "1.0"
+		"AttackAnimationPoint" "0.0"
+		"AttackRange" "0"
+		"AttackAcquisitionRange" "0"
+		"ProjectileModel" ""
+		"ProjectileSpeed" "0"
+		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_HERO"
+		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_HERO"
 		"Creature" {
 
 		}

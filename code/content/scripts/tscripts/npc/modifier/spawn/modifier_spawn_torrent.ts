@@ -27,10 +27,7 @@ export class modifier_spawn_torrent extends BaseModifierMotionBoth_Plus {
     height: number;
     Init(kv: IModifierTable) {
         if (IsServer()) {
-            if (this.ApplyHorizontalMotionController() == false || this.ApplyVerticalMotionController() == false) {
-                this.Destroy();
-                return;
-            }
+            if (!this.BeginMotionOrDestroy()) { return };
             this.vStartPosition = GetGroundPosition(this.GetParentPlus().GetOrigin(), this.GetParentPlus());
             this.vTargetPosition = Vector(kv.vx, kv.vy, 128);
             this.vDirection = GFuncVector.AsVector(this.vTargetPosition - this.vStartPosition).Normalized();
@@ -48,9 +45,7 @@ export class modifier_spawn_torrent extends BaseModifierMotionBoth_Plus {
             ParticleManager.SetParticleControl(ppp, 0, this.GetParentPlus().GetOrigin());
         }
     }
-
     BeDestroy() {
-
         if (IsServer()) {
             this.GetParentPlus().RemoveHorizontalMotionController(this);
             this.GetParentPlus().RemoveVerticalMotionController(this);
@@ -61,7 +56,13 @@ export class modifier_spawn_torrent extends BaseModifierMotionBoth_Plus {
 
         }
     }
+    OnVerticalMotionInterrupted(): void {
+        this.Destroy()
+    }
 
+    OnHorizontalMotionInterrupted(): void {
+        this.Destroy()
+    }
     CheckState() {
         let state = {
             [modifierstate.MODIFIER_STATE_STUNNED]: true,
@@ -87,7 +88,6 @@ export class modifier_spawn_torrent extends BaseModifierMotionBoth_Plus {
                 // 到终点了
                 me.SetAbsOrigin(this.vTargetPosition);
                 me.InterruptMotionControllers(true);
-                this.Destroy();
             }
         }
     }

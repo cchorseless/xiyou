@@ -255,17 +255,18 @@ export class imba_broodmother_spin_web extends BaseAbility_Plus {
             return;
         }
         let caster = this.GetCasterPlus();
-        let ability = this;
-        let target_point = ability.GetCursorPosition();
+        let target_point = this.GetCursorPosition();
         let modifier_aura_friendly = "modifier_imba_broodmother_spin_web_aura";
         let modifier_aura_enemy = "modifier_imba_broodmother_spin_web_aura_enemy";
-        let count = ability.GetSpecialValueFor("count");
-        let count_scepter = ability.GetSpecialValueFor("count_scepter");
+        let count = this.GetSpecialValueFor("count");
+        let count_scepter = this.GetSpecialValueFor("count_scepter");
         let web_count = count;
         if (caster.HasScepter()) {
             web_count = count_scepter;
         }
-        let webs = Entities.FindAllByClassname("npc_dota_broodmother_web") as IBaseNpc_Plus[];
+        let webs = caster.FindChildByFilter((v) => {
+            return v.GetUnitName().includes("broodmother_web");
+        });
         if (GameFunc.GetCount(webs) >= web_count) {
             let table_position = undefined;
             let oldest_web: IBaseNpc_Plus = undefined;
@@ -286,8 +287,8 @@ export class imba_broodmother_spin_web extends BaseAbility_Plus {
             }
         }
         let web = BaseNpc_Plus.CreateUnitByName("npc_dota_broodmother_web", target_point, caster, false);
-        web.AddNewModifier(caster, ability, modifier_aura_friendly, {});
-        web.AddNewModifier(caster, ability, modifier_aura_enemy, {});
+        web.AddNewModifier(caster, this, modifier_aura_friendly, {});
+        web.AddNewModifier(caster, this, modifier_aura_enemy, {});
         web.SetOwner(caster);
         web.SetControllableByPlayer(caster.GetPlayerOwnerID(), false);
         web.TempData().spawn_time = math.floor(GameRules.GetDOTATime(false, false));

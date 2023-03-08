@@ -1,7 +1,7 @@
 
-import { ResHelper } from "../../helper/ResHelper";
-import { BaseModifierMotionBoth_Plus, registerProp } from "../entityPlus/BaseModifier_Plus";
-import { registerModifier } from "../entityPlus/Base_Plus";
+import { ResHelper } from "../../../helper/ResHelper";
+import { BaseModifierMotionBoth_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
+import { registerModifier } from "../../entityPlus/Base_Plus";
 
 @registerModifier()
 export class modifier_jump extends BaseModifierMotionBoth_Plus {
@@ -29,11 +29,9 @@ export class modifier_jump extends BaseModifierMotionBoth_Plus {
     sound: string;
     animation: GameActivity_t;
     Init(kv: IModifierTable) {
+        this.animation = GameActivity_t.ACT_DOTA_FLAIL;
         if (IsServer()) {
-            if (this.ApplyHorizontalMotionController() == false || this.ApplyVerticalMotionController() == false) {
-                this.Destroy();
-                return;
-            }
+            if (!this.BeginMotionOrDestroy()) { return };
             this.vStartPosition = GetGroundPosition(this.GetParentPlus().GetOrigin(), this.GetParentPlus());
             this.vTargetPosition = Vector(kv.vx, kv.vy, 128);
             this.vDirection = ((this.vTargetPosition - this.vStartPosition) as Vector).Normalized();
@@ -44,12 +42,10 @@ export class modifier_jump extends BaseModifierMotionBoth_Plus {
             this.sound = "Ability.TossThrow";
             //  创建开始的特效和音效
             EmitSoundOn(this.sound, this.GetParentPlus());
-            this.animation = GameActivity_t.ACT_DOTA_FLAIL;
         }
     }
-
+    DestroyHandler: IGHandler;
     BeDestroy() {
-
         if (IsServer()) {
             let npc = this.GetParentPlus();
             npc.RemoveHorizontalMotionController(this);
@@ -58,6 +54,11 @@ export class modifier_jump extends BaseModifierMotionBoth_Plus {
                 npc.SetForwardVector(Vector(0, 1, 0));
             } else if (npc.GetTeamNumber() == DOTATeam_t.DOTA_TEAM_BADGUYS) {
                 npc.SetForwardVector(Vector(0, -1, 0));
+            }
+            npc.RemoveGesture(this.animation);
+            if (this.DestroyHandler) {
+                this.DestroyHandler.run();
+                this.DestroyHandler = null;
             }
         }
     }
@@ -76,7 +77,7 @@ export class modifier_jump extends BaseModifierMotionBoth_Plus {
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OVERRIDE_ANIMATION)
     CC_OverrideAnimation() {
-        return this.animation || GameActivity_t.ACT_DOTA_FLAIL;
+        return this.animation;
     }
 
     UpdateHorizontalMotion(me: IBaseNpc_Plus, dt: number) {
@@ -89,7 +90,6 @@ export class modifier_jump extends BaseModifierMotionBoth_Plus {
             } else {
                 // 到终点了
                 me.SetAbsOrigin(this.vTargetPosition);
-                let chessComp = me.ETRoot.As<IBuildingEntityRoot>().ChessComp();
                 // RemoveAbilityAndModifier(me, "jiaoxie");
                 me.InterruptMotionControllers(true);
                 ResHelper.CreateParticle(
@@ -101,7 +101,6 @@ export class modifier_jump extends BaseModifierMotionBoth_Plus {
                 );
                 EmitSoundOn("Hero_OgreMagi.Idle.Headbutt", me);
                 this.Destroy();
-                chessComp.OnblinkChessFinish();
             }
         }
     }

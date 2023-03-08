@@ -1,6 +1,6 @@
 
-import { BaseModifierMotionHorizontal_Plus, registerProp } from "../entityPlus/BaseModifier_Plus";
-import { registerModifier } from "../entityPlus/Base_Plus";
+import { BaseModifierMotionHorizontal_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
+import { registerModifier } from "../../entityPlus/Base_Plus";
 
 @registerModifier()
 export class modifier_run extends BaseModifierMotionHorizontal_Plus {
@@ -29,10 +29,7 @@ export class modifier_run extends BaseModifierMotionHorizontal_Plus {
     animation: GameActivity_t;
     Init(kv: IModifierTable) {
         if (IsServer()) {
-            if (this.ApplyHorizontalMotionController() == false) {
-                this.Destroy();
-                return;
-            }
+            if (this.BeginMotionOrDestroy()) { return; }
             let speed = 500;
             if (this.GetParentPlus() != null && this.GetParentPlus().GetIdealSpeed() != null) {
                 speed = this.GetParentPlus().GetIdealSpeed();
@@ -61,13 +58,17 @@ export class modifier_run extends BaseModifierMotionHorizontal_Plus {
             this.GetParentPlus().StartGesture(GameActivity_t.ACT_DOTA_RUN);
         }
     }
-
+    DestroyHandler: IGHandler;
     BeDestroy() {
-
         if (IsServer()) {
-            this.GetParentPlus().StartGesture(GameActivity_t.ACT_DOTA_IDLE);
-            this.GetParentPlus().RemoveHorizontalMotionController(this);
+            let npc = this.GetParentPlus();
+            npc.RemoveHorizontalMotionController(this);
+            npc.StartGesture(GameActivity_t.ACT_DOTA_IDLE);
             // this.GetParentPlus().RemoveVerticalMotionController(this);
+            if (this.DestroyHandler) {
+                this.DestroyHandler.run();
+                this.DestroyHandler = null;
+            }
         }
     }
 
@@ -114,12 +115,10 @@ export class modifier_run extends BaseModifierMotionHorizontal_Plus {
             } else {
                 // 到终点了
                 me.SetAbsOrigin(GetGroundPosition(this.vTargetPosition, me));
-                let chessComp = me.ETRoot.As<IBuildingEntityRoot>().ChessComp();
                 me.InterruptMotionControllers(true);
                 //  play_particle("particles/dev/library/base_dust_hit_shockwave.vpcf",ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW,me,3)
                 //  EmitSoundOn("Hero_OgreMagi.Idle.Headbutt",me)
                 this.Destroy();
-                chessComp.OnblinkChessFinish();
             }
         }
     }

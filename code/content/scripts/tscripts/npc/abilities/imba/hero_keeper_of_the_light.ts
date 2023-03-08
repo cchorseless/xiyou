@@ -488,8 +488,7 @@ export class modifier_imba_blinding_light_knockback extends BaseModifierMotionHo
         this.knockback_speed = this.knockback_distance / this.knockback_duration;
         this.position = Vector(params.x, params.y, params.z);
         this.parent.StartGesture(GameActivity_t.ACT_DOTA_FLAIL);
-        if (this.ApplyHorizontalMotionController() == false) {
-            this.Destroy();
+        if (!this.BeginMotionOrDestroy()) {
             return;
         }
     }
@@ -1113,8 +1112,7 @@ export class modifier_imba_keeper_of_the_light_will_o_wisp_aura extends BaseModi
         if (!IsServer()) {
             return;
         }
-        if (this.ApplyHorizontalMotionController() == false) {
-            this.Destroy();
+        if (!this.BeginMotionOrDestroy()) {
             return;
         }
         this.parent.FaceTowards(this.caster.GetAbsOrigin());

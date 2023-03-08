@@ -582,13 +582,10 @@ export class modifier_storegga_grabbed_debuff extends BaseModifierMotionBoth_Plu
     }
     BeCreated(kv: any): void {
         if (IsServer()) {
-            if (this.ApplyHorizontalMotionController() == false || this.ApplyVerticalMotionController() == false) {
-                this.Destroy();
-                return;
-            }
             this.nProjHandle = -1;
             this.flTime = 0.0;
             this.flHeight = 0.0;
+            if (!this.BeginMotionOrDestroy()) { return };
         }
     }
     /** DeclareFunctions():modifierfunction[] {
@@ -612,6 +609,8 @@ export class modifier_storegga_grabbed_debuff extends BaseModifierMotionBoth_Plu
             this.GetParentPlus().RemoveVerticalMotionController(this);
         }
     }
+
+
     UpdateHorizontalMotion(me: CDOTA_BaseNPC, dt: number): void {
         if (IsServer()) {
             let vLocation = undefined;

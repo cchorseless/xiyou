@@ -694,24 +694,11 @@ export class modifier_imba_leap_movement extends BaseModifierMotionBoth_Plus {
                 this.jump_time = this.distance / this.jump_speed;
                 this.direction = (this.target_point - this.caster.GetAbsOrigin() as Vector).Normalized();
                 this.frametime = FrameTime();
-                this.StartIntervalThink(this.frametime);
+                if (!this.BeginMotionOrDestroy()) { return };
             });
         }
     }
-    ApplyHorizontalMotionController(): boolean {
-        if (!this.CheckMotionControllers()) {
-            this.Destroy();
-            return false;
-        }
-        return true;
-    }
-    ApplyVerticalMotionController(): boolean {
-        if (!this.CheckMotionControllers()) {
-            this.Destroy();
-            return false;
-        }
-        return true;
-    }
+
     IsHidden(): boolean {
         return true;
     }
@@ -724,9 +711,7 @@ export class modifier_imba_leap_movement extends BaseModifierMotionBoth_Plus {
     IgnoreTenacity() {
         return true;
     }
-    IsMotionController() {
-        return true;
-    }
+
     GetPriority() {
         return modifierpriority.MODIFIER_PRIORITY_HIGH;
     }

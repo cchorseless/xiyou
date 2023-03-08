@@ -201,11 +201,9 @@ export class modifier_item_imba_lance_of_longinus_force_ally extends BaseModifie
     IsStunDebuff(): boolean {
         return false;
     }
-    IsMotionController() {
-        return true;
-    }
-    GetMotionControllerPriority() {
-        return DOTA_MOTION_CONTROLLER_PRIORITY.DOTA_MOTION_CONTROLLER_PRIORITY_MEDIUM;
+
+    GetPriority() {
+        return modifierpriority.MODIFIER_PRIORITY_HIGH;
     }
     BeCreated(p_0: any,): void {
         if (IsServer()) {
@@ -228,6 +226,9 @@ export class modifier_item_imba_lance_of_longinus_force_ally extends BaseModifie
         this.attacked_target = {}
         this.god_piercing_radius = this.GetItemPlus().GetSpecialValueFor("god_piercing_radius");
         this.average_attack_damage = this.GetParentPlus().GetAverageTrueAttackDamage(this.GetParentPlus()) * this.GetItemPlus().GetSpecialValueFor("god_piercing_pure_pct") * 0.01;
+        if (this.BeginMotionOrDestroy()) {
+            this.CheckDodgeSelf()
+        }
     }
     BeDestroy(): void {
         if (!IsServer()) {
@@ -238,11 +239,7 @@ export class modifier_item_imba_lance_of_longinus_force_ally extends BaseModifie
         this.GetParentPlus().FadeGesture(GameActivity_t.ACT_DOTA_FLAIL);
         ResolveNPCPositions(this.GetParentPlus().GetAbsOrigin(), 128);
     }
-    ApplyHorizontalMotionController() {
-        if (!this.CheckMotionControllers()) {
-            this.Destroy();
-            return false;
-        }
+    CheckDodgeSelf() {
         let attacker = this.GetParentPlus();
         let enemies = FindUnitsInRadius(attacker.GetTeamNumber(), attacker.GetAbsOrigin(), undefined, this.god_piercing_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
         for (const [_, enemy] of GameFunc.iPair(enemies)) {
@@ -267,7 +264,6 @@ export class modifier_item_imba_lance_of_longinus_force_ally extends BaseModifie
             }
         }
         ProjectileHelper.ProjectileDodgePlus(this.GetParentPlus());
-        return true;
     }
     UpdateHorizontalMotion(unit: IBaseNpc_Plus, time: number) {
         if (!IsServer()) {
@@ -314,11 +310,9 @@ export class modifier_item_imba_lance_of_longinus_force_enemy_ranged extends Bas
     IsStunDebuff(): boolean {
         return false;
     }
-    IsMotionController() {
-        return true;
-    }
-    GetMotionControllerPriority() {
-        return DOTA_MOTION_CONTROLLER_PRIORITY.DOTA_MOTION_CONTROLLER_PRIORITY_MEDIUM;
+
+    GetPriority() {
+        return modifierpriority.MODIFIER_PRIORITY_HIGH;
     }
     IgnoreTenacity() {
         return true;
@@ -332,6 +326,7 @@ export class modifier_item_imba_lance_of_longinus_force_enemy_ranged extends Bas
         if (!IsServer()) {
             return;
         }
+        this.BeginMotionOrDestroy()
         this.pfx = ResHelper.CreateParticleEx("particles/items_fx/force_staff.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetParentPlus(), this.GetCasterPlus());
         this.GetParentPlus().StartGesture(GameActivity_t.ACT_DOTA_FLAIL);
         this.StartIntervalThink(FrameTime());
@@ -347,13 +342,7 @@ export class modifier_item_imba_lance_of_longinus_force_enemy_ranged extends Bas
         this.GetParentPlus().FadeGesture(GameActivity_t.ACT_DOTA_FLAIL);
         ResolveNPCPositions(this.GetParentPlus().GetAbsOrigin(), 128);
     }
-    ApplyHorizontalMotionController() {
-        if (!this.CheckMotionControllers()) {
-            this.Destroy();
-            return false;
-        }
-        return true;
-    }
+
     UpdateHorizontalMotion(unit: IBaseNpc_Plus, time: number) {
         if (!IsServer()) {
             return;
@@ -386,11 +375,9 @@ export class modifier_item_imba_lance_of_longinus_force_self_ranged extends Base
     IgnoreTenacity() {
         return true;
     }
-    IsMotionController() {
-        return true;
-    }
-    GetMotionControllerPriority() {
-        return DOTA_MOTION_CONTROLLER_PRIORITY.DOTA_MOTION_CONTROLLER_PRIORITY_MEDIUM;
+
+    GetPriority() {
+        return modifierpriority.MODIFIER_PRIORITY_HIGH;
     }
     BeCreated(p_0: any,): void {
         if (IsServer()) {
@@ -401,6 +388,7 @@ export class modifier_item_imba_lance_of_longinus_force_self_ranged extends Base
         if (!IsServer()) {
             return;
         }
+        this.BeginMotionOrDestroy()
         this.pfx = ResHelper.CreateParticleEx("particles/items_fx/force_staff.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetParentPlus(), this.GetCasterPlus());
         this.GetParentPlus().StartGesture(GameActivity_t.ACT_DOTA_FLAIL);
         this.StartIntervalThink(FrameTime());
@@ -416,13 +404,7 @@ export class modifier_item_imba_lance_of_longinus_force_self_ranged extends Base
         this.GetParentPlus().FadeGesture(GameActivity_t.ACT_DOTA_FLAIL);
         ResolveNPCPositions(this.GetParentPlus().GetAbsOrigin(), 128);
     }
-    ApplyHorizontalMotionController(): boolean {
-        if (!this.CheckMotionControllers()) {
-            this.Destroy();
-            return false;
-        }
-        return true;
-    }
+
     UpdateHorizontalMotion(unit: IBaseNpc_Plus, time: number) {
         if (!IsServer()) {
             return;
@@ -452,11 +434,9 @@ export class modifier_item_imba_lance_of_longinus_force_enemy_melee extends Base
     IsStunDebuff(): boolean {
         return false;
     }
-    IsMotionController() {
-        return true;
-    }
-    GetMotionControllerPriority() {
-        return DOTA_MOTION_CONTROLLER_PRIORITY.DOTA_MOTION_CONTROLLER_PRIORITY_MEDIUM;
+
+    GetPriority() {
+        return modifierpriority.MODIFIER_PRIORITY_HIGH;
     }
     IgnoreTenacity() {
         return true;
@@ -524,11 +504,9 @@ export class modifier_item_imba_lance_of_longinus_force_self_melee extends BaseM
     IgnoreTenacity() {
         return true;
     }
-    IsMotionController() {
-        return true;
-    }
-    GetMotionControllerPriority() {
-        return DOTA_MOTION_CONTROLLER_PRIORITY.DOTA_MOTION_CONTROLLER_PRIORITY_MEDIUM;
+
+    GetPriority() {
+        return 2;
     }
     BeCreated(p_0: any,): void {
         if (IsServer()) {
@@ -541,9 +519,9 @@ export class modifier_item_imba_lance_of_longinus_force_self_melee extends BaseM
         }
         this.pfx = ResHelper.CreateParticleEx("particles/items_fx/force_staff.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetParentPlus(), this.GetCasterPlus());
         this.GetParentPlus().StartGesture(GameActivity_t.ACT_DOTA_FLAIL);
-        this.StartIntervalThink(FrameTime());
         this.angle = (this.GetCasterPlus().GetAbsOrigin() - this.GetParentPlus().GetAbsOrigin() as Vector).Normalized();
         this.distance = this.GetItemPlus().GetSpecialValueFor("enemy_distance_melee") / (this.GetDuration() / FrameTime());
+        if (this.BeginMotionOrDestroy()) { return; }
     }
     BeDestroy(): void {
         if (!IsServer()) {
@@ -554,13 +532,7 @@ export class modifier_item_imba_lance_of_longinus_force_self_melee extends BaseM
         this.GetParentPlus().FadeGesture(GameActivity_t.ACT_DOTA_FLAIL);
         ResolveNPCPositions(this.GetParentPlus().GetAbsOrigin(), 128);
     }
-    ApplyHorizontalMotionController() {
-        if (!this.CheckMotionControllers()) {
-            this.Destroy();
-            return false;;
-        }
-        return true;;
-    }
+
     UpdateHorizontalMotion(unit: IBaseNpc_Plus, time: number) {
         if (!IsServer()) {
             return;

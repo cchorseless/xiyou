@@ -4,7 +4,7 @@ import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
-import { BaseModifierMotionVertical_Plus, BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
+import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
@@ -620,7 +620,7 @@ export class modifier_imba_blur_blur extends BaseModifier_Plus {
     }
 }
 @registerModifier()
-export class modifier_imba_blur_smoke extends BaseModifierMotionVertical_Plus {
+export class modifier_imba_blur_smoke extends BaseModifier_Plus {
     public vanish_radius: number;
     public fade_duration: number;
     public linger: any;

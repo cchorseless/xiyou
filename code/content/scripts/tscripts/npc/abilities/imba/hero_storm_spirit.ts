@@ -257,9 +257,7 @@ export class modifier_imba_vortex_pull extends BaseModifierMotionHorizontal_Plus
     IsStunDebuff(): boolean {
         return true;
     }
-    IsMotionController() {
-        return true;
-    }
+
 
     BeCreated(params: any): void {
         if (IsServer()) {
@@ -271,7 +269,9 @@ export class modifier_imba_vortex_pull extends BaseModifierMotionHorizontal_Plus
             this.speed = params.speed * FrameTime();
             this.electric_vortex_pull_distance = params.electric_vortex_pull_distance;
             this.speed = (this.electric_vortex_pull_distance / this.GetDuration()) * FrameTime();
-            this.StartIntervalThink(FrameTime());
+            if (this.BeginMotionOrDestroy() == false) {
+                return;
+            }
         }
     }
     BeRefresh(p_0: any,): void {
@@ -280,12 +280,7 @@ export class modifier_imba_vortex_pull extends BaseModifierMotionHorizontal_Plus
         }
         this.SetDuration(this.GetDuration() * (1 - this.GetParentPlus().GetStatusResistance()), true);
     }
-    ApplyHorizontalMotionController() {
-        if (!this.CheckMotionControllers()) {
-            return false;;
-        }
-        return true;
-    }
+
 
     GetPriority() {
         return modifierpriority.MODIFIER_PRIORITY_HIGH;
@@ -343,9 +338,7 @@ export class modifier_imba_vortex_root extends BaseModifierMotionHorizontal_Plus
     IsStunDebuff(): boolean {
         return true;
     }
-    IsMotionController() {
-        return true;
-    }
+
 
     BeCreated(params: any): void {
         if (IsServer()) {
@@ -356,7 +349,9 @@ export class modifier_imba_vortex_root extends BaseModifierMotionHorizontal_Plus
             this.speed = params.speed * FrameTime();
             this.electric_vortex_pull_distance = params.electric_vortex_pull_distance;
             this.speed = (this.electric_vortex_pull_distance / this.GetDuration()) * FrameTime();
-            this.StartIntervalThink(FrameTime());
+            if (this.BeginMotionOrDestroy() == false) {
+                return;
+            }
         }
     }
     BeRefresh(p_0: any,): void {
@@ -365,12 +360,7 @@ export class modifier_imba_vortex_root extends BaseModifierMotionHorizontal_Plus
         }
         this.SetDuration(this.GetDuration() * (1 - this.GetParentPlus().GetStatusResistance()), true);
     }
-    ApplyHorizontalMotionController() {
-        if (!this.CheckMotionControllers()) {
-            return false;
-        }
-        return true;
-    }
+
 
     GetPriority() {
         return modifierpriority.MODIFIER_PRIORITY_NORMAL;

@@ -338,6 +338,10 @@ declare global {
 const CBaseAbility = IsServer() ? CDOTABaseAbility : C_DOTABaseAbility;
 
 CBaseAbility.AddTimer = function (fInterval: number, fCallback: () => number | void, _isIgnorePauseTime = false) {
+    if (fInterval < 0) {
+        fInterval = 0;
+        GLogHelper.error("AddTimer", "fInterval < 0", fInterval);
+    }
     GTimerHelper.AddTimer(fInterval, GHandler.create(this,
         () => {
             return fCallback();
@@ -819,6 +823,10 @@ CDOTA_Buff.IsNull = function () {
     return this.__safedestroyed__;
 }
 CDOTA_Buff.AddTimer = function (fInterval: number, fCallback: () => number | void, _isIgnorePauseTime = false) {
+    if (fInterval < 0) {
+        fInterval = 0;
+        GLogHelper.error("CDOTA_Buff AddTimer", "fInterval < 0", fInterval);
+    }
     GTimerHelper.AddTimer(fInterval, GHandler.create(this, () => { return fCallback() }), _isIgnorePauseTime);
 }
 CDOTA_Buff.GetAbilityPlus = function () {

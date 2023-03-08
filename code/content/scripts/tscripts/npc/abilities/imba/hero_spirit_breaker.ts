@@ -105,8 +105,7 @@ export class modifier_imba_spirit_breaker_charge_of_darkness extends BaseModifie
             return;
         }
         this.GetParentPlus().EmitSound("Hero_Spirit_Breaker.ChargeOfDarkness.FP");
-        if (this.ApplyHorizontalMotionController() == false) {
-            this.Destroy();
+        if (this.BeginMotionOrDestroy() == false) {
             return;
         }
         this.target = EntIndexToHScript(params.ent_index) as IBaseNpc_Plus;
@@ -361,8 +360,7 @@ export class modifier_imba_spirit_breaker_charge_of_darkness_clothesline extends
         if (!IsServer()) {
             return;
         }
-        if (this.ApplyHorizontalMotionController() == false) {
-            this.Destroy();
+        if (this.BeginMotionOrDestroy() == false) {
             return;
         }
     }
@@ -426,8 +424,7 @@ export class modifier_imba_spirit_breaker_charge_of_darkness_taxi extends BaseMo
         this.passenger_num = params.passenger_num;
         this.taxi_distance = params.taxi_distance;
         this.GetParentPlus().EmitSound("Hero_Spirit_Breaker.ChargeOfDarkness.FP");
-        if (this.ApplyHorizontalMotionController() == false) {
-            this.Destroy();
+        if (this.BeginMotionOrDestroy() == false) {
             return;
         }
     }

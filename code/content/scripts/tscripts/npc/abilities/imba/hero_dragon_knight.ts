@@ -498,6 +498,7 @@ export class modifier_imba_elder_dragon_charge extends BaseModifierMotionHorizon
         if (IsServer()) {
             this.direction = this.GetParentPlus().GetForwardVector();
             this.movement_tick = this.direction * keys.distance / (this.GetDuration() / FrameTime());
+            this.BeginMotionOrDestroy();
         }
     }
     GetEffectName(): string {
@@ -508,13 +509,7 @@ export class modifier_imba_elder_dragon_charge extends BaseModifierMotionHorizon
             ResolveNPCPositions(this.GetParentPlus().GetAbsOrigin(), 128);
         }
     }
-    ApplyHorizontalMotionController() {
-        if (!this.CheckMotionControllers()) {
-            this.Destroy();
-            return false;
-        }
-        return true;
-    }
+
     UpdateHorizontalMotion(me: CDOTA_BaseNPC, dt: number): void {
         let position = me.GetAbsOrigin();
         GridNav.DestroyTreesAroundPoint(position, 100, false);

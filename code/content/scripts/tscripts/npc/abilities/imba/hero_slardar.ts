@@ -256,15 +256,12 @@ export class modifier_imba_rip_current_movement extends BaseModifierMotionHorizo
             this.direction = this.caster.GetForwardVector();
             // this.frametime = FrameTime();
             // this.StartIntervalThink(this.frametime);
+            if (!this.BeginMotionOrDestroy()) {
+                return;
+            }
         }
     }
-    ApplyHorizontalMotionController() {
-        if (!this.CheckMotionControllers()) {
-            this.Destroy();
-            return false;;
-        }
-        return true;;
-    }
+
     CheckState(): Partial<Record<modifierstate, boolean>> {
         let state = {
             [modifierstate.MODIFIER_STATE_STUNNED]: true
@@ -333,11 +330,9 @@ export class modifier_imba_rip_current_movement extends BaseModifierMotionHorizo
     RemoveOnDeath(): boolean {
         return false;
     }
-    IsMotionController() {
-        return true;
-    }
-    GetMotionControllerPriority() {
-        return DOTA_MOTION_CONTROLLER_PRIORITY.DOTA_MOTION_CONTROLLER_PRIORITY_HIGH;
+
+    GetPriority() {
+        return modifierpriority.MODIFIER_PRIORITY_ULTRA;
     }
     GetEffectName(): string {
         return "particles/hero/slardar/slardar_foward_propel.vpcf";
@@ -971,13 +966,14 @@ export class imba_slardar_corrosive_haze extends BaseAbility_Plus {
     }
 }
 @registerModifier()
-export class modifier_imba_corrosive_haze_debuff extends BaseModifierMotionHorizontal_Plus {
+export class modifier_imba_corrosive_haze_debuff extends BaseModifier_Plus {
     public caster_buff: any;
     public particle_haze_fx: any;
     BeCreated(p_0: any,): void {
         if (!IsServer()) {
             return;
         }
+
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_slardar_11") && this.GetParentPlus().IsRealUnit()) {
             this.caster_buff = this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_corrosive_haze_talent_buff", {
                 duration: this.GetDuration()
@@ -1105,7 +1101,7 @@ export class modifier_imba_corrosive_haze_debuff extends BaseModifierMotionHoriz
     }
 }
 @registerModifier()
-export class modifier_imba_corrosive_haze_debuff_secondary extends BaseModifierMotionHorizontal_Plus {
+export class modifier_imba_corrosive_haze_debuff_secondary extends BaseModifier_Plus {
     CheckState(): Partial<Record<modifierstate, boolean>> {
         let state = {
             [modifierstate.MODIFIER_STATE_PROVIDES_VISION]: true,
@@ -1183,7 +1179,7 @@ export class modifier_imba_corrosive_haze_debuff_secondary extends BaseModifierM
     }
 }
 @registerModifier()
-export class modifier_imba_corrosive_haze_slip_debuff extends BaseModifierMotionHorizontal_Plus {
+export class modifier_imba_corrosive_haze_slip_debuff extends BaseModifier_Plus {
     GetEffectName(): string {
         return "particles/hero/slardar/slardar_slip_up.vpcf";
     }
@@ -1339,8 +1335,7 @@ export class modifier_imba_rain_cloud_dummy extends BaseModifierMotionHorizontal
     BeCreated(p_0: any,): void {
         if (IsServer()) {
             let dummy = this.GetParentPlus();
-            if (!this.ApplyHorizontalMotionController()) {
-                this.Destroy();
+            if (!this.BeginMotionOrDestroy()) {
             }
         }
     }

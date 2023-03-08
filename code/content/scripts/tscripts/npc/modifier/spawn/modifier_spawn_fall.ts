@@ -23,11 +23,9 @@ export class modifier_spawn_fall extends BaseModifierMotionVertical_Plus {
     vTargetPosition: Vector;
     Init(kv: IModifierTable) {
         if (IsServer()) {
-            if (this.ApplyVerticalMotionController() == false) {
-                this.Destroy();
+            if (!this.BeginMotionOrDestroy()) {
                 return;
             }
-
             // 初始化高度
             this.vStartPosition = GFuncVector.AsVector(GetGroundPosition(this.GetParentPlus().GetAbsOrigin(), this.GetParentPlus()) + Vector(0, 0, 1000));
             this.GetParentPlus().SetOrigin(this.vStartPosition);
@@ -49,6 +47,9 @@ export class modifier_spawn_fall extends BaseModifierMotionVertical_Plus {
         }
     }
 
+    OnVerticalMotionInterrupted(): void {
+        this.Destroy()
+    }
     BeDestroy() {
         if (IsServer()) {
             this.GetParentPlus().RemoveHorizontalMotionController(this);
@@ -83,7 +84,6 @@ export class modifier_spawn_fall extends BaseModifierMotionVertical_Plus {
                         .set_owner(me)
                 );
                 EmitSoundOn("Hero_OgreMagi.Idle.Headbutt", me);
-                this.Destroy();
             }
         }
     }

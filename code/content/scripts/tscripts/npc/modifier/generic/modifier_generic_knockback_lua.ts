@@ -27,8 +27,9 @@ export class modifier_generic_knockback_lua extends BaseModifierMotionBoth_Plus 
     GetAttributes(): DOTAModifierAttribute_t {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE;
     }
-    BeCreated(kv: any): void {
+    Init(kv: any): void {
         if (IsServer()) {
+            if (!this.BeginMotionOrDestroy()) { return };
             this.distance = kv.distance || 0;
             this.height = kv.height || -1;
             this.duration = kv.duration || 0;
@@ -58,18 +59,7 @@ export class modifier_generic_knockback_lua extends BaseModifierMotionBoth_Plus 
             let half_duration = this.duration / 2;
             this.gravity = 2 * this.height / (half_duration * half_duration);
             this.vVelocity = this.gravity * half_duration;
-            if (this.distance > 0) {
-                if (this.ApplyHorizontalMotionController() == false) {
-                    this.Destroy();
-                    return;
-                }
-            }
-            if (this.height >= 0) {
-                if (this.ApplyVerticalMotionController() == false) {
-                    this.Destroy();
-                    return;
-                }
-            }
+
             if (this.flail) {
                 this.SetStackCount(1);
             } else if (this.stun) {
@@ -80,11 +70,7 @@ export class modifier_generic_knockback_lua extends BaseModifierMotionBoth_Plus 
             this.SetStackCount(0);
         }
     }
-    BeRefresh(kv: any): void {
-        if (!IsServer()) {
-            return;
-        }
-    }
+
     BeDestroy( /** kv */): void {
         if (!IsServer()) {
             return;

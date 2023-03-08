@@ -389,13 +389,9 @@ export class modifier_imba_slark_pounce extends BaseModifierMotionBoth_Plus {
         }
         this.vertical_velocity = 4 * 125 / this.duration;
         this.vertical_acceleration = -(8 * 125) / (this.duration * this.duration);
-        if (this.ApplyVerticalMotionController() == false) {
-            this.Destroy();
-        }
-        if (this.ApplyHorizontalMotionController() == false) {
-            this.Destroy();
-        }
+        this.BeginMotionOrDestroy()
     }
+
     OnRemoved(): void {
         if (!IsServer()) {
             return;

@@ -705,11 +705,9 @@ export class modifier_imba_hook_target_enemy extends BaseModifier_Plus {
     RemoveOnDeath(): boolean {
         return false;
     }
-    IsMotionController() {
-        return true;
-    }
-    GetMotionControllerPriority() {
-        return DOTA_MOTION_CONTROLLER_PRIORITY.DOTA_MOTION_CONTROLLER_PRIORITY_HIGHEST;
+
+    GetPriority() {
+        return modifierpriority.MODIFIER_PRIORITY_SUPER_ULTRA;
     }
     BeCreated(p_0: any,): void {
         this.StartIntervalThink(1);
@@ -754,11 +752,9 @@ export class modifier_imba_hook_target_ally extends BaseModifier_Plus {
     RemoveOnDeath(): boolean {
         return false;
     }
-    IsMotionController() {
-        return true;
-    }
-    GetMotionControllerPriority() {
-        return DOTA_MOTION_CONTROLLER_PRIORITY.DOTA_MOTION_CONTROLLER_PRIORITY_HIGHEST;
+
+    GetPriority() {
+        return modifierpriority.MODIFIER_PRIORITY_SUPER_ULTRA;
     }
     CheckState(): Partial<Record<modifierstate, boolean>> {
         let state_ally = {
@@ -1297,8 +1293,7 @@ export class modifier_imba_pudge_dismember_pull extends BaseModifierMotionHorizo
         this.parent = this.GetParentPlus();
         this.pull_units_per_second = this.ability.GetSpecialValueFor("pull_units_per_second");
         this.pull_distance_limit = this.ability.GetSpecialValueFor("pull_distance_limit");
-        if (this.ApplyHorizontalMotionController() == false) {
-            this.Destroy();
+        if (!this.BeginMotionOrDestroy()) {
             return;
         }
     }
@@ -1349,9 +1344,11 @@ export class modifier_imba_dismember_scepter extends BaseModifierMotionHorizonta
         this.pfx = ParticleManager.CreateParticleForTeam("particles/units/heroes/hero_pudge/pudge_swallow.vpcf", ParticleAttachment_t.PATTACH_OVERHEAD_FOLLOW, this.GetCasterPlus(), this.GetCasterPlus().GetTeamNumber());
         this.AddParticle(this.pfx, false, false, -1, true, true);
         this.GetParentPlus().AddNoDraw();
-        this.StartIntervalThink(FrameTime());
+        if (!this.BeginMotionOrDestroy()) {
+            return;
+        }
     }
-    OnIntervalThink(): void {
+    UpdateHorizontalMotion(unit: IBaseNpc_Plus, dt: number): void {
         this.GetParentPlus().SetAbsOrigin(this.GetCasterPlus().GetAbsOrigin());
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ORDER)

@@ -1059,6 +1059,9 @@ export class modifier_imba_jet_blaze_rush extends BaseModifierMotionHorizontal_P
             this.StartIntervalThink(0.03);
             this.direction = this.GetParentPlus().GetForwardVector();
             this.movement_tick = this.direction * keys.distance / (this.GetDuration() / 0.03);
+            if (!this.BeginMotionOrDestroy()) {
+                return;
+            }
         }
     }
     GetEffectName(): string {
@@ -1069,16 +1072,7 @@ export class modifier_imba_jet_blaze_rush extends BaseModifierMotionHorizontal_P
             ResolveNPCPositions(this.GetParentPlus().GetAbsOrigin(), 128);
         }
     }
-    ApplyHorizontalMotionController() {
-        if (IsServer()) {
-            if (!this.CheckMotionControllers()) {
-                this.Destroy();
-                return false;
-            }
 
-        }
-        return true;
-    }
 
     UpdateHorizontalMotion(me: CDOTA_BaseNPC, dt: number): void {
         let unit = this.GetParentPlus();

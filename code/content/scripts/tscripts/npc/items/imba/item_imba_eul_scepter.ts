@@ -91,19 +91,17 @@ export class modifier_item_imba_cyclone_active extends BaseModifierMotionHorizon
     IsStunDebuff(): boolean {
         return true;
     }
-    IsMotionController() {
-        return true;
-    }
-    GetMotionControllerPriority() {
-        return DOTA_MOTION_CONTROLLER_PRIORITY.DOTA_MOTION_CONTROLLER_PRIORITY_HIGH;
+
+    GetPriority() {
+        return modifierpriority.MODIFIER_PRIORITY_ULTRA;
     }
     BeCreated(p_0: any,): void {
         if (IsServer()) {
-            if (!this.GetItemPlus()) {
-                this.Destroy();
+            if (!this.BeginMotionOrDestroy()) {
+                return
             }
         }
-        this.StartIntervalThink(FrameTime());
+
         EmitSoundOn("DOTA_Item.Cyclone.Activate", this.GetParentPlus());
         if (IsServer()) {
             this.GetParentPlus().StartGesture(GameActivity_t.ACT_DOTA_FLAIL);
@@ -115,13 +113,7 @@ export class modifier_item_imba_cyclone_active extends BaseModifierMotionHorizon
             ParticleManager.SetParticleControl(this.pfx, 0, this.abs);
         }
     }
-    ApplyHorizontalMotionController() {
-        if (!this.CheckMotionControllers()) {
-            this.Destroy();
-            return false;
-        }
-        return true;
-    }
+
     UpdateHorizontalMotion(unit: IBaseNpc_Plus, time: number) {
         if (!IsServer()) {
             return;
@@ -191,11 +183,10 @@ export class modifier_item_imba_cyclone_active_debuff extends BaseModifierMotion
     }
     BeCreated(p_0: any,): void {
         if (IsServer()) {
-            if (!this.GetItemPlus()) {
-                this.Destroy();
+            if (!this.BeginMotionOrDestroy()) {
+                return
             }
         }
-        this.StartIntervalThink(FrameTime());
         EmitSoundOn("DOTA_Item.Cyclone.Activate", this.GetParentPlus());
         if (IsServer()) {
             this.GetParentPlus().StartGesture(GameActivity_t.ACT_DOTA_FLAIL);
@@ -207,13 +198,7 @@ export class modifier_item_imba_cyclone_active_debuff extends BaseModifierMotion
             ParticleManager.SetParticleControl(this.pfx, 0, this.abs);
         }
     }
-    ApplyHorizontalMotionController() {
-        if (!this.CheckMotionControllers()) {
-            this.Destroy();
-            return false;;
-        }
-        return true;;
-    }
+
     UpdateHorizontalMotion(unit: IBaseNpc_Plus, time: number) {
         if (!IsServer()) {
             return;

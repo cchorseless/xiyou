@@ -61,11 +61,9 @@ export class base_modifier_dual_breath_caster extends BaseModifierMotionHorizont
     IsDebuff() {
         return false;
     }
-    IsMotionController() {
-        return true;
-    }
-    GetMotionControllerPriority() {
-        return DOTA_MOTION_CONTROLLER_PRIORITY.DOTA_MOTION_CONTROLLER_PRIORITY_MEDIUM;
+
+    GetPriority() {
+        return modifierpriority.MODIFIER_PRIORITY_HIGH;
     }
     AllowIllusionDuplicate() {
         return false;
@@ -132,15 +130,10 @@ export class base_modifier_dual_breath_caster extends BaseModifierMotionHorizont
             ParticleManager.SetParticleControl(breath_pfx, 3, Vector(0, 0, 0));
             ParticleManager.SetParticleControl(breath_pfx, 9, caster_pos);
             this.existing_breath_particle = breath_pfx;
+            this.BeginMotionOrDestroy()
         }
     }
-    ApplyHorizontalMotionController(): boolean {
-        if (!this.CheckMotionControllers()) {
-            this.Destroy();
-            return false;
-        }
-        return true;
-    }
+
     _DualBreathApplyModifierToEnemies(enemies: IBaseNpc_Plus[]) {
         let caster = this.caster;
         let ability = this.ability;
