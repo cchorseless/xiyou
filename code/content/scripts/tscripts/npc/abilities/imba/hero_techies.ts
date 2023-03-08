@@ -1457,23 +1457,22 @@ export class imba_techies_focused_detonate extends BaseAbility_Plus {
         return false;
     }
     GetAOERadius(): number {
-        let ability = this;
-        let radius = ability.GetSpecialValueFor("radius");
-        return radius;
+        return this.GetSpecialValueFor("radius");;
     }
     OnSpellStart(): void {
         let caster = this.GetCasterPlus();
-        let ability = this;
         let target_point = this.GetCursorPosition();
         let detonate_ability = "imba_techies_remote_mines_pinpoint_detonation";
-        let radius = ability.GetSpecialValueFor("radius");
-        let remote_mines = FindUnitsInRadius(caster.GetTeamNumber(), target_point, undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_OTHER, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-
+        let radius = this.GetSpecialValueFor("radius");
+        let remote_mines = FindUnitsInRadius(caster.GetTeamNumber(), target_point, undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_OTHER + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
         for (let i = 0; i < GameFunc.GetCount(remote_mines); i++) {
+            let unit = remote_mines[i];
             this.AddTimer(FrameTime() * (i + 1), () => {
-                let detonate_ability_handler = remote_mines[i].FindAbilityByName(detonate_ability);
-                if (detonate_ability_handler) {
-                    detonate_ability_handler.OnSpellStart();
+                if (GFuncEntity.IsValid(unit)) {
+                    let detonate_ability_handler = unit.FindAbilityByName(detonate_ability);
+                    if (detonate_ability_handler) {
+                        detonate_ability_handler.OnSpellStart();
+                    }
                 }
             });
         }

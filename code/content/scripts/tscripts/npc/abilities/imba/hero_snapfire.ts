@@ -4,7 +4,7 @@ import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
-import { modifier_generic_knockback_lua } from "../../modifier/generic/modifier_generic_knockback_lua";
+import { modifier_generic_knockback } from "../../modifier/move/modifier_generic_knockback";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 @registerAbility()
 export class imba_snapfire_scatterblast extends BaseAbility_Plus {
@@ -294,14 +294,14 @@ export class imba_snapfire_firesnap_cookie extends BaseAbility_Plus {
             distance = distance + distance * this.GetSpecialValueFor("auto_cast_range_increase") / 100;
         }
         let effect_cast = this.PlayEffects2(target);
-        let knockback = target.AddNewModifier(this.GetCasterPlus(), this, "modifier_generic_knockback_lua", {
+        let knockback = target.AddNewModifier(this.GetCasterPlus(), this, "modifier_generic_knockback", {
             distance: distance,
             height: height,
             duration: duration,
             direction_x: target.GetForwardVector().x,
             direction_y: target.GetForwardVector().y,
             IsStun: true
-        }) as modifier_generic_knockback_lua;
+        }) as modifier_generic_knockback;
 
         knockback.SetEndCallback(GHandler.create(this, () => {
             let damageTable: ApplyDamageOptions = {

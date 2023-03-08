@@ -14,47 +14,44 @@ export class imba_shadow_shaman_ether_shock extends BaseAbility_Plus {
     }
     OnSpellStart(): void {
         let target = this.GetCursorTarget();
+        let caster = this.GetCasterPlus();
         if (target.TriggerSpellAbsorb(this)) {
             return;
         }
-        this.GetCasterPlus().EmitSound("Hero_ShadowShaman.EtherShock");
-        if (this.GetCasterPlus().GetUnitName().includes("shadow_shaman") && RollPercentage(75)) {
-            this.GetCasterPlus().EmitSound("shadowshaman_shad_ability_ether_0" + RandomInt(1, 4));
+        caster.EmitSound("Hero_ShadowShaman.EtherShock");
+        if (caster.GetUnitName().includes("shadow_shaman") && RollPercentage(75)) {
+            caster.EmitSound("shadowshaman_shad_ability_ether_0" + RandomInt(1, 4));
         }
-        let enemies = AoiHelper.FindUnitsInBicycleChain(this.GetCasterPlus().GetTeamNumber(), target.GetAbsOrigin(), this.GetCasterPlus().GetAbsOrigin(), this.GetCasterPlus().GetAbsOrigin() + ((target.GetAbsOrigin() - this.GetCasterPlus().GetAbsOrigin() as Vector).Normalized() * (this.GetSpecialValueFor("end_distance") + GPropertyCalculate.GetCastRangeBonus(this.GetCasterPlus())) as Vector) as Vector, this.GetSpecialValueFor("start_radius"), this.GetSpecialValueFor("end_radius"), undefined, this.GetAbilityTargetTeam(), this.GetAbilityTargetType(), this.GetAbilityTargetFlags(), FindOrder.FIND_CLOSEST, false);
+        let enemies = AoiHelper.FindUnitsInBicycleChain(caster.GetTeamNumber(), target.GetAbsOrigin(), caster.GetAbsOrigin(), caster.GetAbsOrigin() + ((target.GetAbsOrigin() - caster.GetAbsOrigin() as Vector).Normalized() * (this.GetSpecialValueFor("end_distance") + GPropertyCalculate.GetCastRangeBonus(caster)) as Vector) as Vector, this.GetSpecialValueFor("start_radius"), this.GetSpecialValueFor("end_radius"), undefined, this.GetAbilityTargetTeam(), this.GetAbilityTargetType(), this.GetAbilityTargetFlags(), FindOrder.FIND_CLOSEST, false);
         let enemies_hit = 0;
-        let attachment;
-        let dramatic_passive_modifier = this.GetCasterPlus().FindModifierByNameAndCaster("modifier_imba_shadow_shaman_ether_shock_handler", this.GetCasterPlus()) as modifier_imba_shadow_shaman_ether_shock_handler;
+        let dramatic_passive_modifier = caster.FindModifierByNameAndCaster("modifier_imba_shadow_shaman_ether_shock_handler", caster) as modifier_imba_shadow_shaman_ether_shock_handler;
+        let targets = this.GetSpecialValueFor("targets")
         for (const enemy of (enemies)) {
-            if (enemies_hit < this.GetSpecialValueFor("targets")) {
-                enemy.EmitSound("Hero_ShadowShaman.EtherShock.Target");
-                let ether_shock_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_shadowshaman/shadowshaman_ether_shock.vpcf", ParticleAttachment_t.PATTACH_POINT_FOLLOW, this.GetCasterPlus());
-                if (enemies_hit % 2 == 1) {
-                    attachment = "attach_attack1";
-                } else {
-                    attachment = "attach_attack2";
-                }
-                ParticleManager.SetParticleControlEnt(ether_shock_particle, 0, this.GetCasterPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, attachment, this.GetCasterPlus().GetAbsOrigin(), true);
-                ParticleManager.SetParticleControl(ether_shock_particle, 1, enemy.GetAbsOrigin());
-                ParticleManager.ReleaseParticleIndex(ether_shock_particle);
-                let damageTable: ApplyDamageOptions = {
-                    victim: enemy,
-                    damage: this.GetTalentSpecialValueFor("damage"),
-                    damage_type: this.GetAbilityDamageType(),
-                    damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NONE,
-                    attacker: this.GetCasterPlus(),
-                    ability: this
-                }
-                ApplyDamage(damageTable);
-                let joy_buzzer_modifier = enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_shadow_shaman_ether_shock_joy_buzzer", {
-                    duration: ((this.GetSpecialValueFor("joy_buzzer_stun_duration") + this.GetSpecialValueFor("joy_buzzer_off_duration")) * this.GetSpecialValueFor("joy_buzzer_instances") - this.GetSpecialValueFor("joy_buzzer_stun_duration")) * (1 - enemy.GetStatusResistance())
+            if (enemies_hit >= targets) {
+                break;
+            }
+            let lightningBolt = ResHelper.CreateParticleEx("particles/units/heroes/hero_shadowshaman/shadowshaman_ether_shock.vpcf", ParticleAttachment_t.PATTACH_CUSTOMORIGIN, caster)
+            ParticleManager.SetParticleControlEnt(lightningBolt, 0, caster, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_attack1", caster.GetAbsOrigin() + Vector(0, 0, 96) as Vector, true)
+            ParticleManager.SetParticleControlEnt(lightningBolt, 1, enemy, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", enemy.GetAbsOrigin(), true)
+            enemy.EmitSound("Hero_ShadowShaman.EtherShock.Target");
+            ParticleManager.ReleaseParticleIndex(lightningBolt);
+            enemies_hit++;
+            let damageTable: ApplyDamageOptions = {
+                victim: enemy,
+                damage: this.GetTalentSpecialValueFor("damage"),
+                damage_type: this.GetAbilityDamageType(),
+                damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NONE,
+                attacker: caster,
+                ability: this
+            }
+            ApplyDamage(damageTable);
+            enemy.AddNewModifier(caster, this, "modifier_imba_shadow_shaman_ether_shock_joy_buzzer", {
+                duration: ((this.GetSpecialValueFor("joy_buzzer_stun_duration") + this.GetSpecialValueFor("joy_buzzer_off_duration")) * this.GetSpecialValueFor("joy_buzzer_instances") - this.GetSpecialValueFor("joy_buzzer_stun_duration")) * (1 - enemy.GetStatusResistance())
+            });
+            if (dramatic_passive_modifier && dramatic_passive_modifier.dramatic) {
+                enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_shadow_shaman_ether_shock_mute", {
+                    duration: this.GetSpecialValueFor("dramatic_mute_duration") * (1 - enemy.GetStatusResistance())
                 });
-                if (this == this.GetCasterPlus().FindAbilityByName(this.GetAbilityName()) && dramatic_passive_modifier && dramatic_passive_modifier.dramatic && dramatic_passive_modifier.dramatic == true) {
-                    enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_shadow_shaman_ether_shock_mute", {
-                        duration: this.GetSpecialValueFor("dramatic_mute_duration") * (1 - enemy.GetStatusResistance())
-                    });
-                }
-                enemies_hit = enemies_hit + 1;
             }
         }
     }
@@ -64,7 +61,7 @@ export class modifier_imba_shadow_shaman_ether_shock_handler extends BaseModifie
     public interval: number;
     public enemy_team: any;
     public counter: number;
-    public dramatic: any;
+    public dramatic: boolean;
     IsHidden(): boolean {
         return true;
     }
@@ -475,11 +472,11 @@ export class imba_shadow_shaman_shackles extends BaseAbility_Plus {
                     let responses = {
                         "1": "shadowshaman_shad_ability_shackle_01",
                         "2": "shadowshaman_shad_ability_shackle_02",
-                        "3": "shadowshaman_shad_ability_shackle_03",
+                        // "3": "shadowshaman_shad_ability_shackle_03",
                         "4": "shadowshaman_shad_ability_shackle_04",
                         "5": "shadowshaman_shad_ability_shackle_05",
                         "6": "shadowshaman_shad_ability_shackle_06",
-                        "7": "shadowshaman_shad_ability_shackle_08",
+                        // "7": "shadowshaman_shad_ability_shackle_08",
                         "8": "shadowshaman_shad_ability_entrap_02",
                         "9": "shadowshaman_shad_ability_entrap_03"
                     }
@@ -759,9 +756,6 @@ export class imba_shadow_shaman_mass_serpent_ward extends BaseAbility_Plus {
         for (let i = 0; i < ward_count; i++) {
             formation_vectors.push(Vector(math.cos(math.rad(((360 / ward_count) * i))), math.sin(math.rad(((360 / ward_count) * i))), 0) * 150 as Vector);
         }
-        let find_clear_space = true;
-        let npc_owner = caster;
-        let unit_owner = caster;
         for (let i = 0; i < ward_count; i++) {
             this.SummonWard(target_point + formation_vectors[i] as Vector);
         }

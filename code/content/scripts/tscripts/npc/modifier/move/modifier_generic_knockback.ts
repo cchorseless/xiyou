@@ -2,7 +2,7 @@
 import { BaseModifierMotionBoth_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerModifier } from "../../entityPlus/Base_Plus";
 @registerModifier()
-export class modifier_generic_knockback_lua extends BaseModifierMotionBoth_Plus {
+export class modifier_generic_knockback extends BaseModifierMotionBoth_Plus {
     public distance: number;
     public height: any;
     public duration: number;
@@ -82,6 +82,7 @@ export class modifier_generic_knockback_lua extends BaseModifierMotionBoth_Plus 
         }
         if (this.EndCallback) {
             this.EndCallback.runWith([this.interrupted]);
+            this.EndCallback = null;
         }
         this.GetParentPlus().InterruptMotionControllers(true);
         this.GetParentPlus().FadeGesture(GameActivity_t.ACT_DOTA_FLAIL);

@@ -1013,7 +1013,7 @@ export class modifier_imba_grimstroke_soul_chain_vanilla_enhancer extends BaseMo
         }
         return Object.values(decFuncs);
     } */
-    @registerEvent(Enum_MODIFIER_EVENT.ON_MODIFIER_ADDED)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_MODIFIER_ADDED, false, true)
     CC_OnModifierAdded(keys: ModifierAddedEvent): void {
         if (keys.unit.FindModifierByNameAndCaster("modifier_grimstroke_soul_chain", this.GetCasterPlus()) && !keys.unit.FindModifierByNameAndCaster("modifier_imba_grimstroke_soul_chain_vanilla_enhancer_slow", this.GetCasterPlus()) && keys.unit.FindModifierByNameAndCaster("modifier_grimstroke_soul_chain", this.GetCasterPlus()).GetElapsedTime() <= FrameTime()) {
             let soulbind_modifier = keys.unit.FindModifierByNameAndCaster("modifier_grimstroke_soul_chain", this.GetCasterPlus());

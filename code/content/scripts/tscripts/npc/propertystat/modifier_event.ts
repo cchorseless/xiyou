@@ -375,6 +375,7 @@ export class modifier_event extends BaseModifier_Plus {
      *
      */
     OnBuildingKilled(event: ModifierInstanceEvent): void {
+        (event as IBuffEventData).eventType = EventDataType.unitIsSelf;
         modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_BUILDING_KILLED);
     }
     /**
@@ -403,6 +404,7 @@ export class modifier_event extends BaseModifier_Plus {
      *
      */
     OnDominated(event: ModifierUnitEvent): void {
+        (event as IBuffEventData).eventType = EventDataType.unitIsSelf;
         modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_DOMINATED);
     }
     /**
@@ -410,13 +412,15 @@ export class modifier_event extends BaseModifier_Plus {
      *
      */
     OnHealReceived(event: ModifierUnitEvent): void {
-        // modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_HEAL_RECEIVED)
+        (event as IBuffEventData).eventType = EventDataType.unitIsSelf;
+        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_HEAL_RECEIVED)
     }
     /**
      *
      *
      */
     OnHealthGained(event: ModifierUnitEvent): void {
+        (event as IBuffEventData).eventType = EventDataType.unitIsSelf;
         modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_HEALTH_GAINED);
     }
     /**
@@ -431,6 +435,7 @@ export class modifier_event extends BaseModifier_Plus {
      *
      */
     OnManaGained(event: ModifierUnitEvent): void {
+        (event as IBuffEventData).eventType = EventDataType.unitIsSelf;
         modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_MANA_GAINED);
     }
     /**
@@ -438,20 +443,23 @@ export class modifier_event extends BaseModifier_Plus {
      *
      */
     OnModelChanged(event: ModifierUnitEvent): void {
+        (event as IBuffEventData).eventType = EventDataType.unitIsSelf;
         modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_MODEL_CHANGED);
     }
     /**
      *
      *
      */
-    OnModifierAdded(): void {
-        modifier_event.FireEvent(null, Enum_MODIFIER_EVENT.ON_MODIFIER_ADDED);
+    OnModifierAdded(event: ModifierAddedEvent): void {
+        (event as IBuffEventData).eventType = EventDataType.unitIsSelf;
+        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_MODIFIER_ADDED);
     }
     /**
      *
      *
      */
     OnOrder(event: ModifierUnitEvent): void {
+        (event as IBuffEventData).eventType = EventDataType.unitIsSelf;
         modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ORDER);
     }
     /**

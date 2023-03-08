@@ -416,7 +416,7 @@ export class imba_rubick_fade_bolt extends BaseAbility_Plus {
                             });
                         }
                     }
-                    return undefined;
+                    return;
                 }
                 ApplyDamage({
                     attacker: this.GetCasterPlus(),
@@ -443,7 +443,7 @@ export class imba_rubick_fade_bolt extends BaseAbility_Plus {
                 for (const [_, unit] of GameFunc.iPair(units)) {
                     if (unit != previous_unit && unit.TempData().damaged_by_fade_bolt != true) {
                         current_target = unit;
-                        return;
+                        break;
                     }
                 }
                 if (previous_unit != current_target) {
@@ -456,7 +456,6 @@ export class imba_rubick_fade_bolt extends BaseAbility_Plus {
                         kaboom = true;
                         return FrameTime();
                     }
-                    return undefined;
                 }
             });
         }
@@ -746,13 +745,13 @@ export class modifier_imba_rubick_arcane_supremacy extends BaseModifier_Plus {
             return this.GetSpecialValueFor("status_resistance") || 0;
         }
     }
-    @registerEvent(Enum_MODIFIER_EVENT.ON_MODIFIER_ADDED)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_MODIFIER_ADDED, false, true)
     CC_OnModifierAdded(keys: ModifierAddedEvent): void {
-        if (this.GetAbilityPlus() && !this.GetCasterPlus().HasModifier("modifier_imba_rubick_arcane_supremacy_flip_aura")  /**&& keys.issuer_player_index == this.GetCasterPlus().GetPlayerOwnerID()*/ && keys.unit && keys.unit.GetTeamNumber() != this.GetCasterPlus().GetTeamNumber() && keys.unit.FindAllModifiers) {
+        if (this.GetAbilityPlus() && !this.GetCasterPlus().HasModifier("modifier_imba_rubick_arcane_supremacy_flip_aura") && keys.unit && keys.unit.GetTeamNumber() != this.GetCasterPlus().GetTeamNumber()) {
             for (const modifier of (keys.unit.FindAllModifiers() as IBaseModifier_Plus[])) {
-                if (modifier.IsDebuff && modifier.IsDebuff() && modifier.GetDuration() > 0 /**&& (!modifier.IgnoreTenacity || !modifier.IgnoreTenacity())*/ && ((modifier.GetCaster && modifier.GetCasterPlus() == this.GetCasterPlus()) || (modifier.GetAbility && modifier.GetAbilityPlus().GetCaster && modifier.GetAbilityPlus().GetCasterPlus() == this.GetCasterPlus())) && GameRules.GetGameTime() - modifier.GetCreationTime() <= FrameTime()) {
+                if (modifier.IsDebuff() && modifier.GetDuration() > 0 && ((modifier.GetCasterPlus() == this.GetCasterPlus()) || (modifier.GetAbilityPlus().GetCasterPlus() == this.GetCasterPlus())) && GameRules.GetGameTime() - modifier.GetCreationTime() <= FrameTime()) {
                     this.AddTimer(FrameTime() * 2, () => {
-                        if (modifier && this && !this.IsNull() && this.GetAbilityPlus()) {
+                        if (modifier && !this.IsNull() && this.GetAbilityPlus()) {
                             modifier.SetDuration((modifier.GetRemainingTime() * (100 + this.GetSpecialValueFor("status_resistance")) * 0.01) - (FrameTime() * 2), true);
                         }
                     });

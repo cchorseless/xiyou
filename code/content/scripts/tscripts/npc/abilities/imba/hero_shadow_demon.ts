@@ -689,9 +689,10 @@ export class imba_shadow_demon_shadow_poison extends BaseAbility_Plus {
             isGrudge: grudges
         }
     }
-    OnProjectileHitHandle(target: IBaseNpc_Plus, location: Vector, projectileID: ProjectileID) {
+    OnProjectileHitHandle(target: IBaseNpc_Plus, location: Vector, _projectileID: ProjectileID) {
+        let projectileID = _projectileID + "";
         if (!target) {
-            delete this.shadow_poison_projectileID[projectileID + ""];
+            delete this.shadow_poison_projectileID[projectileID];
             return;
         }
         if (target.IsInvulnerable() && !target.HasModifier("modifier_imba_disruption_hidden")) {
@@ -703,18 +704,17 @@ export class imba_shadow_demon_shadow_poison extends BaseAbility_Plus {
         if (target.GetTeamNumber() == this.GetCasterPlus().GetTeamNumber() && !target.HasModifier("modifier_imba_disruption_soul_illusion")) {
             return;
         }
-        if (this.shadow_poison_projectileID[projectileID + ""]) {
-            this.shadow_poison_projectileID[projectileID + ""].targets = this.shadow_poison_projectileID[projectileID + ""].targets + 1;
+        if (this.shadow_poison_projectileID[projectileID]) {
+            this.shadow_poison_projectileID[projectileID].targets += 1;
         }
         let caster = this.GetCasterPlus();
-        let ability = this;
         let particle_impact = "particles/units/heroes/hero_shadow_demon/shadow_demon_shadow_poison_impact.vpcf";
         let hit_sound = "Hero_ShadowDemon.ShadowPoison.Impact";
         let soul_catcher_ability = "imba_shadow_demon_soul_catcher";
         let modifier_shadow_poison = "modifier_shadow_poison_debuff";
         let modifier_elated_buff = "modifier_imba_demonic_purge_elated_demon_buff";
-        let hit_damage = ability.GetSpecialValueFor("hit_damage") * (1 + (caster.GetTalentValue("special_bonus_imba_shadow_demon_shadow_poison_damage") * 0.01));
-        let stack_duration = ability.GetSpecialValueFor("stack_duration");
+        let hit_damage = this.GetSpecialValueFor("hit_damage") * (1 + (caster.GetTalentValue("special_bonus_imba_shadow_demon_shadow_poison_damage") * 0.01));
+        let stack_duration = this.GetSpecialValueFor("stack_duration");
         if (this.shadow_poison_projectileID[projectileID].isGrudge && caster.HasAbility(soul_catcher_ability)) {
             let soul_catcher_ability_handle = caster.FindAbilityByName(soul_catcher_ability);
             if (soul_catcher_ability_handle && soul_catcher_ability_handle.GetLevel() >= 1) {
@@ -726,7 +726,7 @@ export class imba_shadow_demon_shadow_poison extends BaseAbility_Plus {
                         attacker: caster,
                         damage: unleashed_hit_damage,
                         damage_type: DAMAGE_TYPES.DAMAGE_TYPE_MAGICAL,
-                        ability: ability
+                        ability: this
                     }
                     ApplyDamage(damageTable);
                 }
@@ -737,7 +737,7 @@ export class imba_shadow_demon_shadow_poison extends BaseAbility_Plus {
         ParticleManager.SetParticleControl(particle_impact_fx, 0, target.GetAbsOrigin());
         ParticleManager.ReleaseParticleIndex(particle_impact_fx);
         if (!target.HasModifier(modifier_shadow_poison)) {
-            target.AddNewModifier(target, ability, modifier_shadow_poison, {
+            target.AddNewModifier(target, this, modifier_shadow_poison, {
                 duration: stack_duration * (1 - target.GetStatusResistance())
             });
         }
@@ -761,7 +761,7 @@ export class imba_shadow_demon_shadow_poison extends BaseAbility_Plus {
             attacker: caster,
             damage: hit_damage,
             damage_type: DAMAGE_TYPES.DAMAGE_TYPE_MAGICAL,
-            ability: ability
+            ability: this
         }
         ApplyDamage(damageTable);
     }

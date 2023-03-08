@@ -223,25 +223,25 @@ export class BaseNpc_Plus extends BaseNpc {
         for (let i = 0; i < nNumIllusions; i++) {
             let illusion = BaseNpc_Plus.CreateUnitByName(copyunit.GetUnitName(), vLocation, this, bFindClearSpace) as IBaseNpc_Plus;
             illusion.MakeIllusion()
-            illusion.SetForwardVector(this.GetForwardVector())
             illusion.SetControllableByPlayer(this.GetPlayerOwnerID(), !bFindClearSpace)
-            illusion.SetBaseDamageMin(this.GetBaseDamageMin())
-            illusion.SetBaseDamageMax(this.GetBaseDamageMax())
-            illusion.SetAttackCapability(this.GetAttackCapability())
-            illusion.SetRangedProjectileName(this.GetRangedProjectileName())
-            illusion.SetModel(this.GetModelName())
-            illusion.SetOriginalModel(this.GetModelName())
-            illusion.SetModelScale(this.GetModelScale());
+            illusion.SetForwardVector(copyunit.GetForwardVector())
+            illusion.SetBaseDamageMin(copyunit.GetBaseDamageMin())
+            illusion.SetBaseDamageMax(copyunit.GetBaseDamageMax())
+            illusion.SetAttackCapability(copyunit.GetAttackCapability())
+            illusion.SetRangedProjectileName(copyunit.GetRangedProjectileName())
+            illusion.SetModel(copyunit.GetModelName())
+            illusion.SetOriginalModel(copyunit.GetModelName())
+            illusion.SetModelScale(copyunit.GetModelScale());
             // buff
-            let modifiers = this.FindAllModifiers() as IBaseModifier_Plus[];
+            let modifiers = copyunit.FindAllModifiers() as IBaseModifier_Plus[];
             for (let modifier of (modifiers)) {
                 if (modifier.AllowIllusionDuplicate && modifier.AllowIllusionDuplicate()) {
                     let buff = illusion.addBuff(modifier.GetName(), modifier.GetCasterPlus(), modifier.GetAbilityPlus())
                     buff.SetStackCount(modifier.GetStackCount())
                 }
             }
-            for (let i = 0; i <= this.GetAbilityCount() - 1; i++) {
-                let ability = this.GetAbilityByIndex(i)
+            for (let i = 0; i <= copyunit.GetAbilityCount() - 1; i++) {
+                let ability = copyunit.GetAbilityByIndex(i)
                 if (ability != null) {
                     let illusion_ability = illusion.FindAbilityByName(ability.GetAbilityName())
                     if (illusion_ability == null) {
@@ -275,7 +275,7 @@ export class BaseNpc_Plus extends BaseNpc {
                 }
             }
             for (let i = DOTAScriptInventorySlot_t.DOTA_ITEM_SLOT_1; i <= DOTAScriptInventorySlot_t.DOTA_ITEM_SLOT_9; i++) {
-                let item = this.GetItemInSlot(i)
+                let item = copyunit.GetItemInSlot(i)
                 if (item != null) {
                     let illusion_item = BaseItem_Plus.CreateItem(item.GetAbilityName(), illusion as any, illusion as any)
                     if (GFuncEntity.IsValid(illusion_item)) {
@@ -305,8 +305,8 @@ export class BaseNpc_Plus extends BaseNpc {
                 }
             }
             illusion.addBuff("modifier_illusion", this, null, hModifierKeys)
-            illusion.SetHealth(this.GetHealth())
-            illusion.SetMana(this.GetMana())
+            illusion.SetHealth(copyunit.GetHealth())
+            illusion.SetMana(copyunit.GetMana())
             let particleID = ParticleManager.CreateParticle("particles/generic_gameplay/illusion_created.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, illusion)
             ParticleManager.ReleaseParticleIndex(particleID);
             r.push(illusion);

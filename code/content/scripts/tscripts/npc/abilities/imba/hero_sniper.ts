@@ -822,7 +822,7 @@ export class modifier_imba_take_aim_range extends BaseModifier_Plus {
         if (this.caster.PassivesDisabled()) {
             range = 0;
         }
-        let aim_bonus_range = this.aim_bonus_range + this.caster.GetTalentValue("special_bonus_imba_sniper_7");
+        let aim_bonus_range = this.aim_bonus_range + this.caster.GetTalentValue("special_bonus_imba_sniper_7", "bonus_range");
         if (this.GetStackCount() == 0) {
             range = range + aim_bonus_range;
         }

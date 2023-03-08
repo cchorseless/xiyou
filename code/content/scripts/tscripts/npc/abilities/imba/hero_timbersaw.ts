@@ -923,7 +923,7 @@ export class imba_timbersaw_chakram extends BaseAbility_Plus {
                 GridNav.DestroyTreesAroundPoint(location, this.GetSpecialValueFor("radius"), false);
             }
             for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), location, undefined, this.GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
-                if (this.projectiles[data.id + ""] && !this.projectiles[data.id].returning_enemies) {
+                if (this.projectiles[data.id + ""] && !this.projectiles[data.id + ""].returning_enemies) {
                     this.projectiles[data.id + ""].returning_enemies = []
                 }
                 let returning_enemies: IBaseNpc_Plus[] = this.projectiles[data.id + ""].returning_enemies;

@@ -132,7 +132,7 @@ export class imba_mars_spear extends BaseAbility_Plus {
             }
             let knockback_duration = this.GetSpecialValueFor("knockback_duration");
             let knockback_distance = this.GetSpecialValueFor("knockback_distance");
-            target.AddNewModifier(this.GetCasterPlus(), this, "modifier_generic_knockback_lua", {
+            target.AddNewModifier(this.GetCasterPlus(), this, "modifier_generic_knockback", {
                 duration: knockback_duration,
                 distance: knockback_distance,
                 direction_x: direction.x,
@@ -292,7 +292,7 @@ export class modifier_imba_mars_spear_heaven_spear extends BaseModifier_Plus {
                 } else {
                     let enemy_direction = (v.GetOrigin() - this.origin as Vector).Normalized();
                     if (!v.HasModifier("modifier_imba_mars_spear_debuff")) {
-                        v.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_generic_knockback_lua", {
+                        v.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_generic_knockback", {
                             duration: this.knockback_duration,
                             distance: this.knockback_radius,
                             height: 50,
@@ -566,7 +566,7 @@ export class imba_mars_gods_rebuke extends BaseAbility_Plus {
             if (angle_diff <= angle || this.GetCasterPlus().HasTalent("special_bonus_imba_mars_1")) {
                 caster.PerformAttack(enemy, true, true, true, true, true, false, true);
                 if (!enemy.HasModifier("modifier_imba_mars_spear_debuff")) {
-                    enemy.AddNewModifier(caster, this, "modifier_generic_knockback_lua", {
+                    enemy.AddNewModifier(caster, this, "modifier_generic_knockback", {
                         duration: duration,
                         distance: distance,
                         height: 30,
@@ -1392,7 +1392,7 @@ export class modifier_imba_mars_arena_of_blood_spear_aura extends BaseModifier_P
             if (this.GetParentPlus().HasModifier("modifier_imba_mars_spear_debuff")) {
                 return;
             }
-            this.GetParentPlus().AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_generic_knockback_lua", {
+            this.GetParentPlus().AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_generic_knockback", {
                 duration: this.knockback_duration,
                 distance: this.width,
                 height: 30,
