@@ -102,7 +102,13 @@ export class EnemyManagerComponent extends ET.Component {
         this.tAllEnemy.push(enemy.ETRoot.Id);
         enemy.addSpawnedHandler(
             GHandler.create(this, () => {
-                if (spawnEffect != null) {
+                let hander = GHandler.create(this, () => {
+                    enemy.ETRoot.SyncClient();
+                })
+                if (spawnEffect == null) {
+                    hander.run();
+                }
+                else {
                     if (spawnEffect.tp_sound != null) {
                         EmitSoundOn(spawnEffect.tp_sound, enemy);
                     }
@@ -112,24 +118,23 @@ export class EnemyManagerComponent extends ET.Component {
                                 modifier_spawn_breaksoil.applyOnly(enemy, enemy, null, {
                                     vx: pos.x,
                                     vy: pos.y,
-                                });
+                                }).DestroyHandler = hander;
                                 return;
                             case SpawnEffectModifier.spawn_fall:
                                 modifier_spawn_fall.applyOnly(enemy, enemy, null, {
                                     vx: pos.x,
                                     vy: pos.y,
-                                });
+                                }).DestroyHandler = hander;
                                 return;
                             case SpawnEffectModifier.spawn_torrent:
                                 modifier_spawn_torrent.applyOnly(enemy, enemy, null, {
                                     vx: pos.x,
                                     vy: pos.y,
-                                });
+                                }).DestroyHandler = hander;
                                 return;
                         }
                     }
                 };
-                enemy.ETRoot.As<IEnemyUnitEntityRoot>().OnSpawnAnimalFinish();
             })
         );
         return enemy;

@@ -45,15 +45,16 @@ export class modifier_spawn_torrent extends BaseModifierMotionBoth_Plus {
             ParticleManager.SetParticleControl(ppp, 0, this.GetParentPlus().GetOrigin());
         }
     }
+    DestroyHandler: IGHandler;
     BeDestroy() {
         if (IsServer()) {
             this.GetParentPlus().RemoveHorizontalMotionController(this);
             this.GetParentPlus().RemoveVerticalMotionController(this);
-            let enemyroot = this.GetParentPlus().ETRoot;
-            if (enemyroot.AsValid<IEnemyUnitEntityRoot>("EnemyUnitEntityRoot")) {
-                enemyroot.As<IEnemyUnitEntityRoot>().OnSpawnAnimalFinish();
+            this.GetParentPlus().RemoveGesture(GameActivity_t.ACT_DOTA_FLAIL);
+            if (this.DestroyHandler) {
+                this.DestroyHandler.run();
+                this.DestroyHandler = null;
             }
-
         }
     }
     OnVerticalMotionInterrupted(): void {

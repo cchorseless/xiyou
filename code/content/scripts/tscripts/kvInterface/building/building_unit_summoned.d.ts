@@ -1,7 +1,7 @@
 
 declare namespace building_unit_summoned { 
  interface OBJ_0_1 {
-"DOTAUnits" :OBJ_1_1 ,
+"building_unit_summoned" :OBJ_1_1 ,
 }
  interface OBJ_1_1 {
 "npc_dota_lycan_wolf_custom" :OBJ_2_1 ,
@@ -600,6 +600,7 @@ declare namespace building_unit_summoned {
 "StatusManaRegen" :string ,
 "Ability2" :string ,
 "ConsideredHero" :string ,
+"wearable" :string ,
 "GameSoundsFile" :string ,
 "VoiceFile" :string ,
 "AttributePrimary" :string ,
@@ -617,7 +618,6 @@ declare namespace building_unit_summoned {
 "Ability6" :string ,
 "Ability10" :string ,
 "AttackDamageType" :string ,
-"wearable" :string ,
 "Ability11" :string ,
 "Ability12" :string ,
 "Ability13" :string ,

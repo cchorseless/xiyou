@@ -50,14 +50,16 @@ export class modifier_spawn_fall extends BaseModifierMotionVertical_Plus {
     OnVerticalMotionInterrupted(): void {
         this.Destroy()
     }
+    DestroyHandler: IGHandler;
     BeDestroy() {
         if (IsServer()) {
             this.GetParentPlus().RemoveHorizontalMotionController(this);
             this.GetParentPlus().RemoveVerticalMotionController(this);
+            this.GetParentPlus().RemoveGesture(GameActivity_t.ACT_DOTA_FLAIL);
             //  this.GetParentPlus().SetForwardVector(Vector(0,-1,0))
-            let enemyroot = this.GetParentPlus().ETRoot;
-            if (enemyroot && enemyroot.AsValid<IEnemyUnitEntityRoot>("EnemyUnitEntityRoot")) {
-                enemyroot.As<IEnemyUnitEntityRoot>().OnSpawnAnimalFinish();
+            if (this.DestroyHandler) {
+                this.DestroyHandler.run();
+                this.DestroyHandler = null;
             }
         }
     }

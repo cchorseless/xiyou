@@ -19,13 +19,13 @@ export class CCCourierCard extends CCPanel<ICCCourierCard> {
 
     defaultClass() {
         const sCourierName = this.props.sCourierName;
-        const tCourierData = KVHelper.KVData().CourierUnits[sCourierName];
+        const tCourierData = KVHelper.KVData().courier_units[sCourierName];
         const sRarity = tCourierData.Rarity || "R";
         return CSSHelper.ClassMaker("CourierCard", sRarity)
     }
     render() {
         const sCourierName = this.props.sCourierName;
-        const tCourierData = KVHelper.KVData().CourierUnits[sCourierName];
+        const tCourierData = KVHelper.KVData().courier_units[sCourierName];
         const showmodel = this.props.showmodel;
         const allowrotation = this.props.allowrotation;
         return (

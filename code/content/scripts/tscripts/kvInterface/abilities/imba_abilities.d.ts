@@ -1,7 +1,7 @@
 
 declare namespace imba_abilities { 
  interface OBJ_0_1 {
-"imbaAbility" :OBJ_1_1 ,
+"imba_abilities" :OBJ_1_1 ,
 }
  interface OBJ_1_1 {
 "imba_abaddon_death_coil" :OBJ_2_1 ,
@@ -1456,6 +1456,8 @@ declare namespace imba_abilities {
 "AbilityUnitDamageType" :string ,
 "SpellImmunityType" :string ,
 "FightRecapLevel" :string ,
+"CombinationLabel" :string ,
+"CombinationCondition" :string ,
 "AbilitySpecial" :OBJ_3_1 ,
 "AbilityCooldown" :string ,
 "AbilityType" :string ,

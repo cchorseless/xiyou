@@ -6,7 +6,7 @@ import { registerModifier } from "../../entityPlus/Base_Plus";
 export class modifier_jiaoxie_wudi extends BaseModifier_Plus {
 
     IsHidden() {
-        return false;
+        return true;
     }
 
     CheckState() {

@@ -7728,7 +7728,7 @@
     "acitve_common_effect": "modifier_sect_archer_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_ancient_apparition",
-    "Abilityid": "ability3_ancient_apparition_chilling_touch"
+    "Abilityid": "imba_ancient_apparition_chilling_touch"
   },
   {
     "id": "sect_archer_6_ancient_apparition_1",
@@ -7740,7 +7740,7 @@
     "acitve_common_effect": "modifier_sect_archer_base_6",
     "acitve_special_effect": "modifier_sect_archer_ancient_apparition_6",
     "heroid": "building_hero_ancient_apparition",
-    "Abilityid": "ability3_ancient_apparition_chilling_touch"
+    "Abilityid": "imba_ancient_apparition_chilling_touch"
   },
   {
     "id": "sect_archer_9_ancient_apparition_1",
@@ -7752,7 +7752,7 @@
     "acitve_common_effect": "modifier_sect_archer_base_9",
     "acitve_special_effect": "modifier_sect_archer_ancient_apparition_9",
     "heroid": "building_hero_ancient_apparition",
-    "Abilityid": "ability3_ancient_apparition_chilling_touch"
+    "Abilityid": "imba_ancient_apparition_chilling_touch"
   },
   {
     "id": "sect_archer_3_clinkz_2",
@@ -7764,7 +7764,7 @@
     "acitve_common_effect": "modifier_sect_archer_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_clinkz",
-    "Abilityid": "ability2_clinkz_searing_arrows"
+    "Abilityid": "imba_clinkz_searing_arrows"
   },
   {
     "id": "sect_archer_6_clinkz_2",
@@ -7776,7 +7776,7 @@
     "acitve_common_effect": "modifier_sect_archer_base_6",
     "acitve_special_effect": "modifier_sect_archer_clinkz_6",
     "heroid": "building_hero_clinkz",
-    "Abilityid": "ability2_clinkz_searing_arrows"
+    "Abilityid": "imba_clinkz_searing_arrows"
   },
   {
     "id": "sect_archer_9_clinkz_2",
@@ -7788,7 +7788,7 @@
     "acitve_common_effect": "modifier_sect_archer_base_9",
     "acitve_special_effect": "modifier_sect_archer_clinkz_9",
     "heroid": "building_hero_clinkz",
-    "Abilityid": "ability2_clinkz_searing_arrows"
+    "Abilityid": "imba_clinkz_searing_arrows"
   },
   {
     "id": "sect_archer_3_dark_willow_3",
@@ -7800,7 +7800,7 @@
     "acitve_common_effect": "modifier_sect_archer_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_dark_willow",
-    "Abilityid": "ability2_dark_willow_shadow_realm"
+    "Abilityid": "imba_dark_willow_shadow_realm"
   },
   {
     "id": "sect_archer_6_dark_willow_3",
@@ -7812,7 +7812,7 @@
     "acitve_common_effect": "modifier_sect_archer_base_6",
     "acitve_special_effect": "modifier_sect_archer_dark_willow_6",
     "heroid": "building_hero_dark_willow",
-    "Abilityid": "ability2_dark_willow_shadow_realm"
+    "Abilityid": "imba_dark_willow_shadow_realm"
   },
   {
     "id": "sect_archer_9_dark_willow_3",
@@ -7824,7 +7824,7 @@
     "acitve_common_effect": "modifier_sect_archer_base_9",
     "acitve_special_effect": "modifier_sect_archer_dark_willow_9",
     "heroid": "building_hero_dark_willow",
-    "Abilityid": "ability2_dark_willow_shadow_realm"
+    "Abilityid": "imba_dark_willow_shadow_realm"
   },
   {
     "id": "sect_archer_3_drow_ranger_4",
@@ -7836,7 +7836,7 @@
     "acitve_common_effect": "modifier_sect_archer_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_drow_ranger_marksmanship"
+    "Abilityid": "imba_drow_ranger_marksmanship"
   },
   {
     "id": "sect_archer_6_drow_ranger_4",
@@ -7848,7 +7848,7 @@
     "acitve_common_effect": "modifier_sect_archer_base_6",
     "acitve_special_effect": "modifier_sect_archer_drow_ranger_6",
     "heroid": "",
-    "Abilityid": "ability6_drow_ranger_marksmanship"
+    "Abilityid": "imba_drow_ranger_marksmanship"
   },
   {
     "id": "sect_archer_9_drow_ranger_4",
@@ -7860,7 +7860,7 @@
     "acitve_common_effect": "modifier_sect_archer_base_9",
     "acitve_special_effect": "modifier_sect_archer_drow_ranger_9",
     "heroid": "",
-    "Abilityid": "ability6_drow_ranger_marksmanship"
+    "Abilityid": "imba_drow_ranger_marksmanship"
   },
   {
     "id": "sect_archer_3_enchantress_5",
@@ -7872,7 +7872,7 @@
     "acitve_common_effect": "modifier_sect_archer_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability1_enchantress_impetus"
+    "Abilityid": "imba_enchantress_impetus"
   },
   {
     "id": "sect_archer_6_enchantress_5",
@@ -7884,7 +7884,7 @@
     "acitve_common_effect": "modifier_sect_archer_base_6",
     "acitve_special_effect": "modifier_sect_archer_enchantress_6",
     "heroid": "",
-    "Abilityid": "ability1_enchantress_impetus"
+    "Abilityid": "imba_enchantress_impetus"
   },
   {
     "id": "sect_archer_9_enchantress_5",
@@ -7896,7 +7896,7 @@
     "acitve_common_effect": "modifier_sect_archer_base_9",
     "acitve_special_effect": "modifier_sect_archer_enchantress_9",
     "heroid": "",
-    "Abilityid": "ability1_enchantress_impetus"
+    "Abilityid": "imba_enchantress_impetus"
   },
   {
     "id": "sect_archer_3_furion_6",
@@ -7908,7 +7908,7 @@
     "acitve_common_effect": "modifier_sect_archer_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_furion_wrath_of_nature"
+    "Abilityid": "imba_furion_wrath_of_nature"
   },
   {
     "id": "sect_archer_6_furion_6",
@@ -7920,7 +7920,7 @@
     "acitve_common_effect": "modifier_sect_archer_base_6",
     "acitve_special_effect": "modifier_sect_archer_furion_6",
     "heroid": "",
-    "Abilityid": "ability6_furion_wrath_of_nature"
+    "Abilityid": "imba_furion_wrath_of_nature"
   },
   {
     "id": "sect_archer_9_furion_6",
@@ -7932,7 +7932,7 @@
     "acitve_common_effect": "modifier_sect_archer_base_9",
     "acitve_special_effect": "modifier_sect_archer_furion_9",
     "heroid": "",
-    "Abilityid": "ability6_furion_wrath_of_nature"
+    "Abilityid": "imba_furion_wrath_of_nature"
   },
   {
     "id": "sect_archer_3_gyrocopter_7",
@@ -7944,7 +7944,7 @@
     "acitve_common_effect": "modifier_sect_archer_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_gyrocopter",
-    "Abilityid": "ability3_gyrocopter_flak_cannon"
+    "Abilityid": "imba_gyrocopter_flak_cannon"
   },
   {
     "id": "sect_archer_6_gyrocopter_7",
@@ -7956,7 +7956,7 @@
     "acitve_common_effect": "modifier_sect_archer_base_6",
     "acitve_special_effect": "modifier_sect_archer_gyrocopter_6",
     "heroid": "building_hero_gyrocopter",
-    "Abilityid": "ability3_gyrocopter_flak_cannon"
+    "Abilityid": "imba_gyrocopter_flak_cannon"
   },
   {
     "id": "sect_archer_9_gyrocopter_7",
@@ -7968,7 +7968,7 @@
     "acitve_common_effect": "modifier_sect_archer_base_9",
     "acitve_special_effect": "modifier_sect_archer_gyrocopter_9",
     "heroid": "building_hero_gyrocopter",
-    "Abilityid": "ability3_gyrocopter_flak_cannon"
+    "Abilityid": "imba_gyrocopter_flak_cannon"
   },
   {
     "id": "sect_archer_3_hoodwink_8",
@@ -7980,7 +7980,7 @@
     "acitve_common_effect": "modifier_sect_archer_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_hoodwink_sharpshooter"
+    "Abilityid": "imba_hoodwink_sharpshooter"
   },
   {
     "id": "sect_archer_6_hoodwink_8",
@@ -7992,7 +7992,7 @@
     "acitve_common_effect": "modifier_sect_archer_base_6",
     "acitve_special_effect": "modifier_sect_archer_hoodwink_6",
     "heroid": "",
-    "Abilityid": "ability6_hoodwink_sharpshooter"
+    "Abilityid": "imba_hoodwink_sharpshooter"
   },
   {
     "id": "sect_archer_9_hoodwink_8",
@@ -8004,7 +8004,7 @@
     "acitve_common_effect": "modifier_sect_archer_base_9",
     "acitve_special_effect": "modifier_sect_archer_hoodwink_9",
     "heroid": "",
-    "Abilityid": "ability6_hoodwink_sharpshooter"
+    "Abilityid": "imba_hoodwink_sharpshooter"
   },
   {
     "id": "sect_archer_3_medusa_9",
@@ -8016,7 +8016,7 @@
     "acitve_common_effect": "modifier_sect_archer_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_medusa_stone_gaze"
+    "Abilityid": "imba_medusa_stone_gaze"
   },
   {
     "id": "sect_archer_6_medusa_9",
@@ -8028,7 +8028,7 @@
     "acitve_common_effect": "modifier_sect_archer_base_6",
     "acitve_special_effect": "modifier_sect_archer_medusa_6",
     "heroid": "",
-    "Abilityid": "ability6_medusa_stone_gaze"
+    "Abilityid": "imba_medusa_stone_gaze"
   },
   {
     "id": "sect_archer_9_medusa_9",
@@ -8040,7 +8040,7 @@
     "acitve_common_effect": "modifier_sect_archer_base_9",
     "acitve_special_effect": "modifier_sect_archer_medusa_9",
     "heroid": "",
-    "Abilityid": "ability6_medusa_stone_gaze"
+    "Abilityid": "imba_medusa_stone_gaze"
   },
   {
     "id": "sect_archer_3_mirana_10",
@@ -8052,7 +8052,7 @@
     "acitve_common_effect": "modifier_sect_archer_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_mirana",
-    "Abilityid": "ability1_mirana_starfall"
+    "Abilityid": "imba_mirana_starfall"
   },
   {
     "id": "sect_archer_6_mirana_10",
@@ -8064,7 +8064,7 @@
     "acitve_common_effect": "modifier_sect_archer_base_6",
     "acitve_special_effect": "modifier_sect_archer_mirana_6",
     "heroid": "building_hero_mirana",
-    "Abilityid": "ability1_mirana_starfall"
+    "Abilityid": "imba_mirana_starfall"
   },
   {
     "id": "sect_archer_9_mirana_10",
@@ -8076,7 +8076,7 @@
     "acitve_common_effect": "modifier_sect_archer_base_9",
     "acitve_special_effect": "modifier_sect_archer_mirana_9",
     "heroid": "building_hero_mirana",
-    "Abilityid": "ability1_mirana_starfall"
+    "Abilityid": "imba_mirana_starfall"
   },
   {
     "id": "sect_archer_3_morphling_11",
@@ -8088,7 +8088,7 @@
     "acitve_common_effect": "modifier_sect_archer_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_morphling",
-    "Abilityid": "ability4_morphling_morph_agi"
+    "Abilityid": "imba_morphling_morph_agi"
   },
   {
     "id": "sect_archer_6_morphling_11",
@@ -8100,7 +8100,7 @@
     "acitve_common_effect": "modifier_sect_archer_base_6",
     "acitve_special_effect": "modifier_sect_archer_morphling_6",
     "heroid": "building_hero_morphling",
-    "Abilityid": "ability4_morphling_morph_agi"
+    "Abilityid": "imba_morphling_morph_agi"
   },
   {
     "id": "sect_archer_9_morphling_11",
@@ -8112,7 +8112,7 @@
     "acitve_common_effect": "modifier_sect_archer_base_9",
     "acitve_special_effect": "modifier_sect_archer_morphling_9",
     "heroid": "building_hero_morphling",
-    "Abilityid": "ability4_morphling_morph_agi"
+    "Abilityid": "imba_morphling_morph_agi"
   },
   {
     "id": "sect_archer_3_snapfire_12",
@@ -8124,7 +8124,7 @@
     "acitve_common_effect": "modifier_sect_archer_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_snapfire",
-    "Abilityid": "ability1_snapfire_scatterblast"
+    "Abilityid": "imba_snapfire_scatterblast"
   },
   {
     "id": "sect_archer_6_snapfire_12",
@@ -8136,7 +8136,7 @@
     "acitve_common_effect": "modifier_sect_archer_base_6",
     "acitve_special_effect": "modifier_sect_archer_snapfire_6",
     "heroid": "building_hero_snapfire",
-    "Abilityid": "ability1_snapfire_scatterblast"
+    "Abilityid": "imba_snapfire_scatterblast"
   },
   {
     "id": "sect_archer_9_snapfire_12",
@@ -8148,7 +8148,7 @@
     "acitve_common_effect": "modifier_sect_archer_base_9",
     "acitve_special_effect": "modifier_sect_archer_snapfire_9",
     "heroid": "building_hero_snapfire",
-    "Abilityid": "ability1_snapfire_scatterblast"
+    "Abilityid": "imba_snapfire_scatterblast"
   },
   {
     "id": "sect_archer_3_sniper_13",
@@ -8160,7 +8160,7 @@
     "acitve_common_effect": "modifier_sect_archer_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_sniper",
-    "Abilityid": "ability3_sniper_take_aim"
+    "Abilityid": "imba_sniper_take_aim"
   },
   {
     "id": "sect_archer_6_sniper_13",
@@ -8172,7 +8172,7 @@
     "acitve_common_effect": "modifier_sect_archer_base_6",
     "acitve_special_effect": "modifier_sect_archer_sniper_6",
     "heroid": "building_hero_sniper",
-    "Abilityid": "ability3_sniper_take_aim"
+    "Abilityid": "imba_sniper_take_aim"
   },
   {
     "id": "sect_archer_9_sniper_13",
@@ -8184,7 +8184,7 @@
     "acitve_common_effect": "modifier_sect_archer_base_9",
     "acitve_special_effect": "modifier_sect_archer_sniper_9",
     "heroid": "building_hero_sniper",
-    "Abilityid": "ability3_sniper_take_aim"
+    "Abilityid": "imba_sniper_take_aim"
   },
   {
     "id": "sect_archer_3_windrunner_14",
@@ -8196,7 +8196,7 @@
     "acitve_common_effect": "modifier_sect_archer_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_windrunner",
-    "Abilityid": "ability2_windrunner_powershot"
+    "Abilityid": "imba_windrunner_powershot"
   },
   {
     "id": "sect_archer_6_windrunner_14",
@@ -8208,7 +8208,7 @@
     "acitve_common_effect": "modifier_sect_archer_base_6",
     "acitve_special_effect": "modifier_sect_archer_windrunner_6",
     "heroid": "building_hero_windrunner",
-    "Abilityid": "ability2_windrunner_powershot"
+    "Abilityid": "imba_windrunner_powershot"
   },
   {
     "id": "sect_archer_9_windrunner_14",
@@ -8220,7 +8220,7 @@
     "acitve_common_effect": "modifier_sect_archer_base_9",
     "acitve_special_effect": "modifier_sect_archer_windrunner_9",
     "heroid": "building_hero_windrunner",
-    "Abilityid": "ability2_windrunner_powershot"
+    "Abilityid": "imba_windrunner_powershot"
   },
   {
     "id": "sect_assault_3_centaur_1",
@@ -8232,7 +8232,7 @@
     "acitve_common_effect": "modifier_sect_assault_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_centaur_stampede"
+    "Abilityid": "imba_centaur_stampede"
   },
   {
     "id": "sect_assault_6_centaur_1",
@@ -8244,7 +8244,7 @@
     "acitve_common_effect": "modifier_sect_assault_base_6",
     "acitve_special_effect": "modifier_sect_assault_centaur_6",
     "heroid": "",
-    "Abilityid": "ability6_centaur_stampede"
+    "Abilityid": "imba_centaur_stampede"
   },
   {
     "id": "sect_assault_9_centaur_1",
@@ -8256,7 +8256,7 @@
     "acitve_common_effect": "modifier_sect_assault_base_9",
     "acitve_special_effect": "modifier_sect_assault_centaur_9",
     "heroid": "",
-    "Abilityid": "ability6_centaur_stampede"
+    "Abilityid": "imba_centaur_stampede"
   },
   {
     "id": "sect_assault_3_earth_spirit_2",
@@ -8268,7 +8268,7 @@
     "acitve_common_effect": "modifier_sect_assault_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_earth_spirit",
-    "Abilityid": "ability2_earth_spirit_rolling_boulder"
+    "Abilityid": "imba_earth_spirit_rolling_boulder"
   },
   {
     "id": "sect_assault_6_earth_spirit_2",
@@ -8280,7 +8280,7 @@
     "acitve_common_effect": "modifier_sect_assault_base_6",
     "acitve_special_effect": "modifier_sect_assault_earth_spirit_6",
     "heroid": "building_hero_earth_spirit",
-    "Abilityid": "ability2_earth_spirit_rolling_boulder"
+    "Abilityid": "imba_earth_spirit_rolling_boulder"
   },
   {
     "id": "sect_assault_9_earth_spirit_2",
@@ -8292,7 +8292,7 @@
     "acitve_common_effect": "modifier_sect_assault_base_9",
     "acitve_special_effect": "modifier_sect_assault_earth_spirit_9",
     "heroid": "building_hero_earth_spirit",
-    "Abilityid": "ability2_earth_spirit_rolling_boulder"
+    "Abilityid": "imba_earth_spirit_rolling_boulder"
   },
   {
     "id": "sect_assault_3_magnataur_3",
@@ -8304,7 +8304,7 @@
     "acitve_common_effect": "modifier_sect_assault_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_magnataur",
-    "Abilityid": "ability3_magnataur_skewer"
+    "Abilityid": "imba_magnataur_skewer"
   },
   {
     "id": "sect_assault_6_magnataur_3",
@@ -8316,7 +8316,7 @@
     "acitve_common_effect": "modifier_sect_assault_base_6",
     "acitve_special_effect": "modifier_sect_assault_magnataur_6",
     "heroid": "building_hero_magnataur",
-    "Abilityid": "ability3_magnataur_skewer"
+    "Abilityid": "imba_magnataur_skewer"
   },
   {
     "id": "sect_assault_9_magnataur_3",
@@ -8328,7 +8328,7 @@
     "acitve_common_effect": "modifier_sect_assault_base_9",
     "acitve_special_effect": "modifier_sect_assault_magnataur_9",
     "heroid": "building_hero_magnataur",
-    "Abilityid": "ability3_magnataur_skewer"
+    "Abilityid": "imba_magnataur_skewer"
   },
   {
     "id": "sect_assault_3_marci_4",
@@ -8340,7 +8340,7 @@
     "acitve_common_effect": "modifier_sect_assault_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_marci",
-    "Abilityid": "ability2_marci_companion_run"
+    "Abilityid": "imba_marci_companion_run"
   },
   {
     "id": "sect_assault_6_marci_4",
@@ -8352,7 +8352,7 @@
     "acitve_common_effect": "modifier_sect_assault_base_6",
     "acitve_special_effect": "modifier_sect_assault_marci_6",
     "heroid": "building_hero_marci",
-    "Abilityid": "ability2_marci_companion_run"
+    "Abilityid": "imba_marci_companion_run"
   },
   {
     "id": "sect_assault_9_marci_4",
@@ -8364,7 +8364,7 @@
     "acitve_common_effect": "modifier_sect_assault_base_9",
     "acitve_special_effect": "modifier_sect_assault_marci_9",
     "heroid": "building_hero_marci",
-    "Abilityid": "ability2_marci_companion_run"
+    "Abilityid": "imba_marci_companion_run"
   },
   {
     "id": "sect_assault_3_phantom_lancer_5",
@@ -8376,7 +8376,7 @@
     "acitve_common_effect": "modifier_sect_assault_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_phantom_lancer",
-    "Abilityid": "ability3_phantom_lancer_phantom_edge"
+    "Abilityid": "imba_phantom_lancer_phantom_edge"
   },
   {
     "id": "sect_assault_6_phantom_lancer_5",
@@ -8388,7 +8388,7 @@
     "acitve_common_effect": "modifier_sect_assault_base_6",
     "acitve_special_effect": "modifier_sect_assault_phantom_lancer_6",
     "heroid": "building_hero_phantom_lancer",
-    "Abilityid": "ability3_phantom_lancer_phantom_edge"
+    "Abilityid": "imba_phantom_lancer_phantom_edge"
   },
   {
     "id": "sect_assault_9_phantom_lancer_5",
@@ -8400,7 +8400,7 @@
     "acitve_common_effect": "modifier_sect_assault_base_9",
     "acitve_special_effect": "modifier_sect_assault_phantom_lancer_9",
     "heroid": "building_hero_phantom_lancer",
-    "Abilityid": "ability3_phantom_lancer_phantom_edge"
+    "Abilityid": "imba_phantom_lancer_phantom_edge"
   },
   {
     "id": "sect_assault_3_primal_beast_6",
@@ -8412,7 +8412,7 @@
     "acitve_common_effect": "modifier_sect_assault_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_primal_beast",
-    "Abilityid": "ability1_primal_beast_onslaught"
+    "Abilityid": "imba_primal_beast_onslaught"
   },
   {
     "id": "sect_assault_6_primal_beast_6",
@@ -8424,7 +8424,7 @@
     "acitve_common_effect": "modifier_sect_assault_base_6",
     "acitve_special_effect": "modifier_sect_assault_primal_beast_6",
     "heroid": "building_hero_primal_beast",
-    "Abilityid": "ability1_primal_beast_onslaught"
+    "Abilityid": "imba_primal_beast_onslaught"
   },
   {
     "id": "sect_assault_9_primal_beast_6",
@@ -8436,7 +8436,7 @@
     "acitve_common_effect": "modifier_sect_assault_base_9",
     "acitve_special_effect": "modifier_sect_assault_primal_beast_9",
     "heroid": "building_hero_primal_beast",
-    "Abilityid": "ability1_primal_beast_onslaught"
+    "Abilityid": "imba_primal_beast_onslaught"
   },
   {
     "id": "sect_assault_3_slark_7",
@@ -8448,7 +8448,7 @@
     "acitve_common_effect": "modifier_sect_assault_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability2_slark_pounce"
+    "Abilityid": "imba_slark_pounce"
   },
   {
     "id": "sect_assault_6_slark_7",
@@ -8460,7 +8460,7 @@
     "acitve_common_effect": "modifier_sect_assault_base_6",
     "acitve_special_effect": "modifier_sect_assault_slark_6",
     "heroid": "",
-    "Abilityid": "ability2_slark_pounce"
+    "Abilityid": "imba_slark_pounce"
   },
   {
     "id": "sect_assault_9_slark_7",
@@ -8472,7 +8472,7 @@
     "acitve_common_effect": "modifier_sect_assault_base_9",
     "acitve_special_effect": "modifier_sect_assault_slark_9",
     "heroid": "",
-    "Abilityid": "ability2_slark_pounce"
+    "Abilityid": "imba_slark_pounce"
   },
   {
     "id": "sect_assault_3_snapfire_8",
@@ -8484,7 +8484,7 @@
     "acitve_common_effect": "modifier_sect_assault_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability2_snapfire_firesnap_cookie"
+    "Abilityid": "imba_snapfire_firesnap_cookie"
   },
   {
     "id": "sect_assault_6_snapfire_8",
@@ -8496,7 +8496,7 @@
     "acitve_common_effect": "modifier_sect_assault_base_6",
     "acitve_special_effect": "modifier_sect_assault_snapfire_6",
     "heroid": "",
-    "Abilityid": "ability2_snapfire_firesnap_cookie"
+    "Abilityid": "imba_snapfire_firesnap_cookie"
   },
   {
     "id": "sect_assault_9_snapfire_8",
@@ -8508,7 +8508,7 @@
     "acitve_common_effect": "modifier_sect_assault_base_9",
     "acitve_special_effect": "modifier_sect_assault_snapfire_9",
     "heroid": "",
-    "Abilityid": "ability2_snapfire_firesnap_cookie"
+    "Abilityid": "imba_snapfire_firesnap_cookie"
   },
   {
     "id": "sect_assault_3_spirit_breaker_9",
@@ -8520,7 +8520,7 @@
     "acitve_common_effect": "modifier_sect_assault_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_spirit_breaker",
-    "Abilityid": "ability1_spirit_breaker_charge_of_darkness"
+    "Abilityid": "imba_spirit_breaker_charge_of_darkness"
   },
   {
     "id": "sect_assault_6_spirit_breaker_9",
@@ -8532,7 +8532,7 @@
     "acitve_common_effect": "modifier_sect_assault_base_6",
     "acitve_special_effect": "modifier_sect_assault_spirit_breaker_6",
     "heroid": "building_hero_spirit_breaker",
-    "Abilityid": "ability1_spirit_breaker_charge_of_darkness"
+    "Abilityid": "imba_spirit_breaker_charge_of_darkness"
   },
   {
     "id": "sect_assault_9_spirit_breaker_9",
@@ -8544,7 +8544,7 @@
     "acitve_common_effect": "modifier_sect_assault_base_9",
     "acitve_special_effect": "modifier_sect_assault_spirit_breaker_9",
     "heroid": "building_hero_spirit_breaker",
-    "Abilityid": "ability1_spirit_breaker_charge_of_darkness"
+    "Abilityid": "imba_spirit_breaker_charge_of_darkness"
   },
   {
     "id": "sect_assault_3_tusk_10",
@@ -8556,7 +8556,7 @@
     "acitve_common_effect": "modifier_sect_assault_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_tusk",
-    "Abilityid": "ability2_tusk_snowball"
+    "Abilityid": "imba_tusk_snowball"
   },
   {
     "id": "sect_assault_6_tusk_10",
@@ -8568,7 +8568,7 @@
     "acitve_common_effect": "modifier_sect_assault_base_6",
     "acitve_special_effect": "modifier_sect_assault_tusk_6",
     "heroid": "building_hero_tusk",
-    "Abilityid": "ability2_tusk_snowball"
+    "Abilityid": "imba_tusk_snowball"
   },
   {
     "id": "sect_assault_9_tusk_10",
@@ -8580,7 +8580,7 @@
     "acitve_common_effect": "modifier_sect_assault_base_9",
     "acitve_special_effect": "modifier_sect_assault_tusk_9",
     "heroid": "building_hero_tusk",
-    "Abilityid": "ability2_tusk_snowball"
+    "Abilityid": "imba_tusk_snowball"
   },
   {
     "id": "sect_assault_3_ursa_11",
@@ -8592,7 +8592,7 @@
     "acitve_common_effect": "modifier_sect_assault_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability1_ursa_earthshock"
+    "Abilityid": "imba_ursa_earthshock"
   },
   {
     "id": "sect_assault_6_ursa_11",
@@ -8604,7 +8604,7 @@
     "acitve_common_effect": "modifier_sect_assault_base_6",
     "acitve_special_effect": "modifier_sect_assault_ursa_6",
     "heroid": "",
-    "Abilityid": "ability1_ursa_earthshock"
+    "Abilityid": "imba_ursa_earthshock"
   },
   {
     "id": "sect_assault_9_ursa_11",
@@ -8616,7 +8616,7 @@
     "acitve_common_effect": "modifier_sect_assault_base_9",
     "acitve_special_effect": "modifier_sect_assault_ursa_9",
     "heroid": "",
-    "Abilityid": "ability1_ursa_earthshock"
+    "Abilityid": "imba_ursa_earthshock"
   },
   {
     "id": "sect_atkspeed_3_beastmaster_1",
@@ -8628,7 +8628,7 @@
     "acitve_common_effect": "modifier_sect_atkspeed_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_beastmaster",
-    "Abilityid": "ability4_beastmaster_inner_beast"
+    "Abilityid": "imba_beastmaster_inner_beast"
   },
   {
     "id": "sect_atkspeed_6_beastmaster_1",
@@ -8640,7 +8640,7 @@
     "acitve_common_effect": "modifier_sect_atkspeed_base_6",
     "acitve_special_effect": "modifier_sect_atkspeed_beastmaster_6",
     "heroid": "building_hero_beastmaster",
-    "Abilityid": "ability4_beastmaster_inner_beast"
+    "Abilityid": "imba_beastmaster_inner_beast"
   },
   {
     "id": "sect_atkspeed_9_beastmaster_1",
@@ -8652,7 +8652,7 @@
     "acitve_common_effect": "modifier_sect_atkspeed_base_9",
     "acitve_special_effect": "modifier_sect_atkspeed_beastmaster_9",
     "heroid": "building_hero_beastmaster",
-    "Abilityid": "ability4_beastmaster_inner_beast"
+    "Abilityid": "imba_beastmaster_inner_beast"
   },
   {
     "id": "sect_atkspeed_3_bloodseeker_2",
@@ -8664,7 +8664,7 @@
     "acitve_common_effect": "modifier_sect_atkspeed_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_bloodseeker",
-    "Abilityid": "ability1_bloodseeker_bloodrage"
+    "Abilityid": "imba_bloodseeker_bloodrage"
   },
   {
     "id": "sect_atkspeed_6_bloodseeker_2",
@@ -8676,7 +8676,7 @@
     "acitve_common_effect": "modifier_sect_atkspeed_base_6",
     "acitve_special_effect": "modifier_sect_atkspeed_bloodseeker_6",
     "heroid": "building_hero_bloodseeker",
-    "Abilityid": "ability1_bloodseeker_bloodrage"
+    "Abilityid": "imba_bloodseeker_bloodrage"
   },
   {
     "id": "sect_atkspeed_9_bloodseeker_2",
@@ -8688,7 +8688,7 @@
     "acitve_common_effect": "modifier_sect_atkspeed_base_9",
     "acitve_special_effect": "modifier_sect_atkspeed_bloodseeker_9",
     "heroid": "building_hero_bloodseeker",
-    "Abilityid": "ability1_bloodseeker_bloodrage"
+    "Abilityid": "imba_bloodseeker_bloodrage"
   },
   {
     "id": "sect_atkspeed_3_dark_willow_3",
@@ -8700,7 +8700,7 @@
     "acitve_common_effect": "modifier_sect_atkspeed_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability4_dark_willow_bedlam"
+    "Abilityid": "imba_dark_willow_bedlam"
   },
   {
     "id": "sect_atkspeed_6_dark_willow_3",
@@ -8712,7 +8712,7 @@
     "acitve_common_effect": "modifier_sect_atkspeed_base_6",
     "acitve_special_effect": "modifier_sect_atkspeed_dark_willow_6",
     "heroid": "",
-    "Abilityid": "ability4_dark_willow_bedlam"
+    "Abilityid": "imba_dark_willow_bedlam"
   },
   {
     "id": "sect_atkspeed_9_dark_willow_3",
@@ -8724,7 +8724,7 @@
     "acitve_common_effect": "modifier_sect_atkspeed_base_9",
     "acitve_special_effect": "modifier_sect_atkspeed_dark_willow_9",
     "heroid": "",
-    "Abilityid": "ability4_dark_willow_bedlam"
+    "Abilityid": "imba_dark_willow_bedlam"
   },
   {
     "id": "sect_atkspeed_3_enchantress_4",
@@ -8736,7 +8736,7 @@
     "acitve_common_effect": "modifier_sect_atkspeed_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_enchantress_untouchable"
+    "Abilityid": "imba_enchantress_untouchable"
   },
   {
     "id": "sect_atkspeed_6_enchantress_4",
@@ -8748,7 +8748,7 @@
     "acitve_common_effect": "modifier_sect_atkspeed_base_6",
     "acitve_special_effect": "modifier_sect_atkspeed_enchantress_6",
     "heroid": "",
-    "Abilityid": "ability6_enchantress_untouchable"
+    "Abilityid": "imba_enchantress_untouchable"
   },
   {
     "id": "sect_atkspeed_9_enchantress_4",
@@ -8760,7 +8760,7 @@
     "acitve_common_effect": "modifier_sect_atkspeed_base_9",
     "acitve_special_effect": "modifier_sect_atkspeed_enchantress_9",
     "heroid": "",
-    "Abilityid": "ability6_enchantress_untouchable"
+    "Abilityid": "imba_enchantress_untouchable"
   },
   {
     "id": "sect_atkspeed_3_huskar_5",
@@ -8772,7 +8772,7 @@
     "acitve_common_effect": "modifier_sect_atkspeed_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_huskar",
-    "Abilityid": "ability3_huskar_berserkers_blood"
+    "Abilityid": "imba_huskar_berserkers_blood"
   },
   {
     "id": "sect_atkspeed_6_huskar_5",
@@ -8784,7 +8784,7 @@
     "acitve_common_effect": "modifier_sect_atkspeed_base_6",
     "acitve_special_effect": "modifier_sect_atkspeed_huskar_6",
     "heroid": "building_hero_huskar",
-    "Abilityid": "ability3_huskar_berserkers_blood"
+    "Abilityid": "imba_huskar_berserkers_blood"
   },
   {
     "id": "sect_atkspeed_9_huskar_5",
@@ -8796,7 +8796,7 @@
     "acitve_common_effect": "modifier_sect_atkspeed_base_9",
     "acitve_special_effect": "modifier_sect_atkspeed_huskar_9",
     "heroid": "building_hero_huskar",
-    "Abilityid": "ability3_huskar_berserkers_blood"
+    "Abilityid": "imba_huskar_berserkers_blood"
   },
   {
     "id": "sect_atkspeed_3_invoker_6",
@@ -8844,7 +8844,7 @@
     "acitve_common_effect": "modifier_sect_atkspeed_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_legion_commander",
-    "Abilityid": "ability2_legion_commander_press_the_attack"
+    "Abilityid": "imba_legion_commander_press_the_attack"
   },
   {
     "id": "sect_atkspeed_6_legion_commander_7",
@@ -8856,7 +8856,7 @@
     "acitve_common_effect": "modifier_sect_atkspeed_base_6",
     "acitve_special_effect": "modifier_sect_atkspeed_legion_commander_6",
     "heroid": "building_hero_legion_commander",
-    "Abilityid": "ability2_legion_commander_press_the_attack"
+    "Abilityid": "imba_legion_commander_press_the_attack"
   },
   {
     "id": "sect_atkspeed_9_legion_commander_7",
@@ -8868,7 +8868,7 @@
     "acitve_common_effect": "modifier_sect_atkspeed_base_9",
     "acitve_special_effect": "modifier_sect_atkspeed_legion_commander_9",
     "heroid": "building_hero_legion_commander",
-    "Abilityid": "ability2_legion_commander_press_the_attack"
+    "Abilityid": "imba_legion_commander_press_the_attack"
   },
   {
     "id": "sect_atkspeed_3_life_stealer_8",
@@ -8880,7 +8880,7 @@
     "acitve_common_effect": "modifier_sect_atkspeed_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_life_stealer",
-    "Abilityid": "ability3_life_stealer_ghoul_frenzy"
+    "Abilityid": "imba_life_stealer_ghoul_frenzy"
   },
   {
     "id": "sect_atkspeed_6_life_stealer_8",
@@ -8892,7 +8892,7 @@
     "acitve_common_effect": "modifier_sect_atkspeed_base_6",
     "acitve_special_effect": "modifier_sect_atkspeed_life_stealer_6",
     "heroid": "building_hero_life_stealer",
-    "Abilityid": "ability3_life_stealer_ghoul_frenzy"
+    "Abilityid": "imba_life_stealer_ghoul_frenzy"
   },
   {
     "id": "sect_atkspeed_9_life_stealer_8",
@@ -8904,7 +8904,7 @@
     "acitve_common_effect": "modifier_sect_atkspeed_base_9",
     "acitve_special_effect": "modifier_sect_atkspeed_life_stealer_9",
     "heroid": "building_hero_life_stealer",
-    "Abilityid": "ability3_life_stealer_ghoul_frenzy"
+    "Abilityid": "imba_life_stealer_ghoul_frenzy"
   },
   {
     "id": "sect_atkspeed_3_lina_9",
@@ -8916,7 +8916,7 @@
     "acitve_common_effect": "modifier_sect_atkspeed_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_lina",
-    "Abilityid": "ability3_lina_fiery_soul"
+    "Abilityid": "imba_lina_fiery_soul"
   },
   {
     "id": "sect_atkspeed_6_lina_9",
@@ -8928,7 +8928,7 @@
     "acitve_common_effect": "modifier_sect_atkspeed_base_6",
     "acitve_special_effect": "modifier_sect_atkspeed_lina_6",
     "heroid": "building_hero_lina",
-    "Abilityid": "ability3_lina_fiery_soul"
+    "Abilityid": "imba_lina_fiery_soul"
   },
   {
     "id": "sect_atkspeed_9_lina_9",
@@ -8940,7 +8940,7 @@
     "acitve_common_effect": "modifier_sect_atkspeed_base_9",
     "acitve_special_effect": "modifier_sect_atkspeed_lina_9",
     "heroid": "building_hero_lina",
-    "Abilityid": "ability3_lina_fiery_soul"
+    "Abilityid": "imba_lina_fiery_soul"
   },
   {
     "id": "sect_atkspeed_3_lone_druid_10",
@@ -8952,7 +8952,7 @@
     "acitve_common_effect": "modifier_sect_atkspeed_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_lone_druid",
-    "Abilityid": "ability2_lone_druid_spirit_link"
+    "Abilityid": "imba_lone_druid_spirit_link"
   },
   {
     "id": "sect_atkspeed_6_lone_druid_10",
@@ -8964,7 +8964,7 @@
     "acitve_common_effect": "modifier_sect_atkspeed_base_6",
     "acitve_special_effect": "modifier_sect_atkspeed_lone_druid_6",
     "heroid": "building_hero_lone_druid",
-    "Abilityid": "ability2_lone_druid_spirit_link"
+    "Abilityid": "imba_lone_druid_spirit_link"
   },
   {
     "id": "sect_atkspeed_9_lone_druid_10",
@@ -8976,7 +8976,7 @@
     "acitve_common_effect": "modifier_sect_atkspeed_base_9",
     "acitve_special_effect": "modifier_sect_atkspeed_lone_druid_9",
     "heroid": "building_hero_lone_druid",
-    "Abilityid": "ability2_lone_druid_spirit_link"
+    "Abilityid": "imba_lone_druid_spirit_link"
   },
   {
     "id": "sect_atkspeed_3_ogre_magi_11",
@@ -8988,7 +8988,7 @@
     "acitve_common_effect": "modifier_sect_atkspeed_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability3_ogre_magi_bloodlust"
+    "Abilityid": "imba_ogre_magi_bloodlust"
   },
   {
     "id": "sect_atkspeed_6_ogre_magi_11",
@@ -9000,7 +9000,7 @@
     "acitve_common_effect": "modifier_sect_atkspeed_base_6",
     "acitve_special_effect": "modifier_sect_atkspeed_ogre_magi_6",
     "heroid": "",
-    "Abilityid": "ability3_ogre_magi_bloodlust"
+    "Abilityid": "imba_ogre_magi_bloodlust"
   },
   {
     "id": "sect_atkspeed_9_ogre_magi_11",
@@ -9012,7 +9012,7 @@
     "acitve_common_effect": "modifier_sect_atkspeed_base_9",
     "acitve_special_effect": "modifier_sect_atkspeed_ogre_magi_9",
     "heroid": "",
-    "Abilityid": "ability3_ogre_magi_bloodlust"
+    "Abilityid": "imba_ogre_magi_bloodlust"
   },
   {
     "id": "sect_atkspeed_3_troll_warlord_12",
@@ -9024,7 +9024,7 @@
     "acitve_common_effect": "modifier_sect_atkspeed_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_troll_warlord",
-    "Abilityid": "ability4_troll_warlord_fervor"
+    "Abilityid": "imba_troll_warlord_fervor"
   },
   {
     "id": "sect_atkspeed_6_troll_warlord_12",
@@ -9036,7 +9036,7 @@
     "acitve_common_effect": "modifier_sect_atkspeed_base_6",
     "acitve_special_effect": "modifier_sect_atkspeed_troll_warlord_6",
     "heroid": "building_hero_troll_warlord",
-    "Abilityid": "ability4_troll_warlord_fervor"
+    "Abilityid": "imba_troll_warlord_fervor"
   },
   {
     "id": "sect_atkspeed_9_troll_warlord_12",
@@ -9048,7 +9048,7 @@
     "acitve_common_effect": "modifier_sect_atkspeed_base_9",
     "acitve_special_effect": "modifier_sect_atkspeed_troll_warlord_9",
     "heroid": "building_hero_troll_warlord",
-    "Abilityid": "ability4_troll_warlord_fervor"
+    "Abilityid": "imba_troll_warlord_fervor"
   },
   {
     "id": "sect_atkspeed_3_visage_13",
@@ -9060,7 +9060,7 @@
     "acitve_common_effect": "modifier_sect_atkspeed_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability1_visage_grave_chill"
+    "Abilityid": "imba_visage_grave_chill"
   },
   {
     "id": "sect_atkspeed_6_visage_13",
@@ -9072,7 +9072,7 @@
     "acitve_common_effect": "modifier_sect_atkspeed_base_6",
     "acitve_special_effect": "modifier_sect_atkspeed_visage_6",
     "heroid": "",
-    "Abilityid": "ability1_visage_grave_chill"
+    "Abilityid": "imba_visage_grave_chill"
   },
   {
     "id": "sect_atkspeed_9_visage_13",
@@ -9084,7 +9084,7 @@
     "acitve_common_effect": "modifier_sect_atkspeed_base_9",
     "acitve_special_effect": "modifier_sect_atkspeed_visage_9",
     "heroid": "",
-    "Abilityid": "ability1_visage_grave_chill"
+    "Abilityid": "imba_visage_grave_chill"
   },
   {
     "id": "sect_atkspeed_3_wisp_14",
@@ -9096,7 +9096,7 @@
     "acitve_common_effect": "modifier_sect_atkspeed_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability3_wisp_overcharge"
+    "Abilityid": "imba_wisp_overcharge"
   },
   {
     "id": "sect_atkspeed_6_wisp_14",
@@ -9108,7 +9108,7 @@
     "acitve_common_effect": "modifier_sect_atkspeed_base_6",
     "acitve_special_effect": "modifier_sect_atkspeed_wisp_6",
     "heroid": "",
-    "Abilityid": "ability3_wisp_overcharge"
+    "Abilityid": "imba_wisp_overcharge"
   },
   {
     "id": "sect_atkspeed_9_wisp_14",
@@ -9120,7 +9120,7 @@
     "acitve_common_effect": "modifier_sect_atkspeed_base_9",
     "acitve_special_effect": "modifier_sect_atkspeed_wisp_9",
     "heroid": "",
-    "Abilityid": "ability3_wisp_overcharge"
+    "Abilityid": "imba_wisp_overcharge"
   },
   {
     "id": "sect_black_art_3_chen_1",
@@ -9132,7 +9132,7 @@
     "acitve_common_effect": "modifier_sect_black_art_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_chen",
-    "Abilityid": "ability2_chen_holy_persuasion"
+    "Abilityid": "imba_chen_holy_persuasion"
   },
   {
     "id": "sect_black_art_6_chen_1",
@@ -9144,7 +9144,7 @@
     "acitve_common_effect": "modifier_sect_black_art_base_6",
     "acitve_special_effect": "modifier_sect_black_art_chen_6",
     "heroid": "building_hero_chen",
-    "Abilityid": "ability2_chen_holy_persuasion"
+    "Abilityid": "imba_chen_holy_persuasion"
   },
   {
     "id": "sect_black_art_9_chen_1",
@@ -9156,7 +9156,7 @@
     "acitve_common_effect": "modifier_sect_black_art_base_9",
     "acitve_special_effect": "modifier_sect_black_art_chen_9",
     "heroid": "building_hero_chen",
-    "Abilityid": "ability2_chen_holy_persuasion"
+    "Abilityid": "imba_chen_holy_persuasion"
   },
   {
     "id": "sect_black_art_3_enchantress_2",
@@ -9168,7 +9168,7 @@
     "acitve_common_effect": "modifier_sect_black_art_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_enchantress",
-    "Abilityid": "ability2_enchantress_enchant"
+    "Abilityid": "imba_enchantress_enchant"
   },
   {
     "id": "sect_black_art_6_enchantress_2",
@@ -9180,7 +9180,7 @@
     "acitve_common_effect": "modifier_sect_black_art_base_6",
     "acitve_special_effect": "modifier_sect_black_art_enchantress_6",
     "heroid": "building_hero_enchantress",
-    "Abilityid": "ability2_enchantress_enchant"
+    "Abilityid": "imba_enchantress_enchant"
   },
   {
     "id": "sect_black_art_9_enchantress_2",
@@ -9192,7 +9192,7 @@
     "acitve_common_effect": "modifier_sect_black_art_base_9",
     "acitve_special_effect": "modifier_sect_black_art_enchantress_9",
     "heroid": "building_hero_enchantress",
-    "Abilityid": "ability2_enchantress_enchant"
+    "Abilityid": "imba_enchantress_enchant"
   },
   {
     "id": "sect_black_art_3_medusa_3",
@@ -9204,7 +9204,7 @@
     "acitve_common_effect": "modifier_sect_black_art_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_medusa",
-    "Abilityid": "ability2_medusa_mystic_snake"
+    "Abilityid": "imba_medusa_mystic_snake"
   },
   {
     "id": "sect_black_art_6_medusa_3",
@@ -9216,7 +9216,7 @@
     "acitve_common_effect": "modifier_sect_black_art_base_6",
     "acitve_special_effect": "modifier_sect_black_art_medusa_6",
     "heroid": "building_hero_medusa",
-    "Abilityid": "ability2_medusa_mystic_snake"
+    "Abilityid": "imba_medusa_mystic_snake"
   },
   {
     "id": "sect_black_art_9_medusa_3",
@@ -9228,7 +9228,7 @@
     "acitve_common_effect": "modifier_sect_black_art_base_9",
     "acitve_special_effect": "modifier_sect_black_art_medusa_9",
     "heroid": "building_hero_medusa",
-    "Abilityid": "ability2_medusa_mystic_snake"
+    "Abilityid": "imba_medusa_mystic_snake"
   },
   {
     "id": "sect_black_art_3_naga_siren_4",
@@ -9240,7 +9240,7 @@
     "acitve_common_effect": "modifier_sect_black_art_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_naga_siren_song_of_the_siren"
+    "Abilityid": "imba_naga_siren_song_of_the_siren"
   },
   {
     "id": "sect_black_art_6_naga_siren_4",
@@ -9252,7 +9252,7 @@
     "acitve_common_effect": "modifier_sect_black_art_base_6",
     "acitve_special_effect": "modifier_sect_black_art_naga_siren_6",
     "heroid": "",
-    "Abilityid": "ability6_naga_siren_song_of_the_siren"
+    "Abilityid": "imba_naga_siren_song_of_the_siren"
   },
   {
     "id": "sect_black_art_9_naga_siren_4",
@@ -9264,7 +9264,7 @@
     "acitve_common_effect": "modifier_sect_black_art_base_9",
     "acitve_special_effect": "modifier_sect_black_art_naga_siren_9",
     "heroid": "",
-    "Abilityid": "ability6_naga_siren_song_of_the_siren"
+    "Abilityid": "imba_naga_siren_song_of_the_siren"
   },
   {
     "id": "sect_black_art_3_pugna_5",
@@ -9276,7 +9276,7 @@
     "acitve_common_effect": "modifier_sect_black_art_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability2_pugna_decrepify"
+    "Abilityid": "imba_pugna_decrepify"
   },
   {
     "id": "sect_black_art_6_pugna_5",
@@ -9288,7 +9288,7 @@
     "acitve_common_effect": "modifier_sect_black_art_base_6",
     "acitve_special_effect": "modifier_sect_black_art_pugna_6",
     "heroid": "",
-    "Abilityid": "ability2_pugna_decrepify"
+    "Abilityid": "imba_pugna_decrepify"
   },
   {
     "id": "sect_black_art_9_pugna_5",
@@ -9300,7 +9300,7 @@
     "acitve_common_effect": "modifier_sect_black_art_base_9",
     "acitve_special_effect": "modifier_sect_black_art_pugna_9",
     "heroid": "",
-    "Abilityid": "ability2_pugna_decrepify"
+    "Abilityid": "imba_pugna_decrepify"
   },
   {
     "id": "sect_black_art_3_rubick_6",
@@ -9312,7 +9312,7 @@
     "acitve_common_effect": "modifier_sect_black_art_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_rubick",
-    "Abilityid": "ability1_rubick_telekinesis"
+    "Abilityid": "imba_rubick_telekinesis"
   },
   {
     "id": "sect_black_art_6_rubick_6",
@@ -9324,7 +9324,7 @@
     "acitve_common_effect": "modifier_sect_black_art_base_6",
     "acitve_special_effect": "modifier_sect_black_art_rubick_6",
     "heroid": "building_hero_rubick",
-    "Abilityid": "ability1_rubick_telekinesis"
+    "Abilityid": "imba_rubick_telekinesis"
   },
   {
     "id": "sect_black_art_9_rubick_6",
@@ -9336,7 +9336,7 @@
     "acitve_common_effect": "modifier_sect_black_art_base_9",
     "acitve_special_effect": "modifier_sect_black_art_rubick_9",
     "heroid": "building_hero_rubick",
-    "Abilityid": "ability1_rubick_telekinesis"
+    "Abilityid": "imba_rubick_telekinesis"
   },
   {
     "id": "sect_black_art_3_shadow_shaman_7",
@@ -9348,7 +9348,7 @@
     "acitve_common_effect": "modifier_sect_black_art_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_shadow_shaman",
-    "Abilityid": "ability2_shadow_shaman_voodoo"
+    "Abilityid": "imba_shadow_shaman_voodoo"
   },
   {
     "id": "sect_black_art_6_shadow_shaman_7",
@@ -9360,7 +9360,7 @@
     "acitve_common_effect": "modifier_sect_black_art_base_6",
     "acitve_special_effect": "modifier_sect_black_art_shadow_shaman_6",
     "heroid": "building_hero_shadow_shaman",
-    "Abilityid": "ability2_shadow_shaman_voodoo"
+    "Abilityid": "imba_shadow_shaman_voodoo"
   },
   {
     "id": "sect_black_art_9_shadow_shaman_7",
@@ -9372,7 +9372,7 @@
     "acitve_common_effect": "modifier_sect_black_art_base_9",
     "acitve_special_effect": "modifier_sect_black_art_shadow_shaman_9",
     "heroid": "building_hero_shadow_shaman",
-    "Abilityid": "ability2_shadow_shaman_voodoo"
+    "Abilityid": "imba_shadow_shaman_voodoo"
   },
   {
     "id": "sect_black_art_3_shadow_shaman_8",
@@ -9384,7 +9384,7 @@
     "acitve_common_effect": "modifier_sect_black_art_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_shadow_shaman",
-    "Abilityid": "ability2_shadow_shaman_voodoo"
+    "Abilityid": "imba_shadow_shaman_voodoo"
   },
   {
     "id": "sect_black_art_6_shadow_shaman_8",
@@ -9396,7 +9396,7 @@
     "acitve_common_effect": "modifier_sect_black_art_base_6",
     "acitve_special_effect": "modifier_sect_black_art_shadow_shaman_6",
     "heroid": "building_hero_shadow_shaman",
-    "Abilityid": "ability2_shadow_shaman_voodoo"
+    "Abilityid": "imba_shadow_shaman_voodoo"
   },
   {
     "id": "sect_black_art_9_shadow_shaman_8",
@@ -9408,7 +9408,7 @@
     "acitve_common_effect": "modifier_sect_black_art_base_9",
     "acitve_special_effect": "modifier_sect_black_art_shadow_shaman_9",
     "heroid": "building_hero_shadow_shaman",
-    "Abilityid": "ability2_shadow_shaman_voodoo"
+    "Abilityid": "imba_shadow_shaman_voodoo"
   },
   {
     "id": "sect_black_art_3_warlock_9",
@@ -9420,7 +9420,7 @@
     "acitve_common_effect": "modifier_sect_black_art_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_warlock",
-    "Abilityid": "ability1_warlock_fatal_bonds"
+    "Abilityid": "imba_warlock_fatal_bonds"
   },
   {
     "id": "sect_black_art_6_warlock_9",
@@ -9432,7 +9432,7 @@
     "acitve_common_effect": "modifier_sect_black_art_base_6",
     "acitve_special_effect": "modifier_sect_black_art_warlock_6",
     "heroid": "building_hero_warlock",
-    "Abilityid": "ability1_warlock_fatal_bonds"
+    "Abilityid": "imba_warlock_fatal_bonds"
   },
   {
     "id": "sect_black_art_9_warlock_9",
@@ -9444,7 +9444,7 @@
     "acitve_common_effect": "modifier_sect_black_art_base_9",
     "acitve_special_effect": "modifier_sect_black_art_warlock_9",
     "heroid": "building_hero_warlock",
-    "Abilityid": "ability1_warlock_fatal_bonds"
+    "Abilityid": "imba_warlock_fatal_bonds"
   },
   {
     "id": "sect_blink_3_antimage_1",
@@ -9456,7 +9456,7 @@
     "acitve_common_effect": "modifier_sect_blink_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability2_antimage_blink"
+    "Abilityid": "imba_antimage_blink"
   },
   {
     "id": "sect_blink_6_antimage_1",
@@ -9468,7 +9468,7 @@
     "acitve_common_effect": "modifier_sect_blink_base_6",
     "acitve_special_effect": "modifier_sect_blink_antimage_6",
     "heroid": "",
-    "Abilityid": "ability2_antimage_blink"
+    "Abilityid": "imba_antimage_blink"
   },
   {
     "id": "sect_blink_9_antimage_1",
@@ -9480,7 +9480,7 @@
     "acitve_common_effect": "modifier_sect_blink_base_9",
     "acitve_special_effect": "modifier_sect_blink_antimage_9",
     "heroid": "",
-    "Abilityid": "ability2_antimage_blink"
+    "Abilityid": "imba_antimage_blink"
   },
   {
     "id": "sect_blink_3_antimage_2",
@@ -9492,7 +9492,7 @@
     "acitve_common_effect": "modifier_sect_blink_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability2_antimage_blink"
+    "Abilityid": "imba_antimage_blink"
   },
   {
     "id": "sect_blink_6_antimage_2",
@@ -9504,7 +9504,7 @@
     "acitve_common_effect": "modifier_sect_blink_base_6",
     "acitve_special_effect": "modifier_sect_blink_antimage_6",
     "heroid": "",
-    "Abilityid": "ability2_antimage_blink"
+    "Abilityid": "imba_antimage_blink"
   },
   {
     "id": "sect_blink_9_antimage_2",
@@ -9516,7 +9516,7 @@
     "acitve_common_effect": "modifier_sect_blink_base_9",
     "acitve_special_effect": "modifier_sect_blink_antimage_9",
     "heroid": "",
-    "Abilityid": "ability2_antimage_blink"
+    "Abilityid": "imba_antimage_blink"
   },
   {
     "id": "sect_blink_3_dawnbreaker_3",
@@ -9528,7 +9528,7 @@
     "acitve_common_effect": "modifier_sect_blink_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_dawnbreaker_solar_guardian"
+    "Abilityid": "imba_dawnbreaker_solar_guardian"
   },
   {
     "id": "sect_blink_6_dawnbreaker_3",
@@ -9540,7 +9540,7 @@
     "acitve_common_effect": "modifier_sect_blink_base_6",
     "acitve_special_effect": "modifier_sect_blink_dawnbreaker_6",
     "heroid": "",
-    "Abilityid": "ability6_dawnbreaker_solar_guardian"
+    "Abilityid": "imba_dawnbreaker_solar_guardian"
   },
   {
     "id": "sect_blink_9_dawnbreaker_3",
@@ -9552,7 +9552,7 @@
     "acitve_common_effect": "modifier_sect_blink_base_9",
     "acitve_special_effect": "modifier_sect_blink_dawnbreaker_9",
     "heroid": "",
-    "Abilityid": "ability6_dawnbreaker_solar_guardian"
+    "Abilityid": "imba_dawnbreaker_solar_guardian"
   },
   {
     "id": "sect_blink_3_faceless_void_4",
@@ -9564,7 +9564,7 @@
     "acitve_common_effect": "modifier_sect_blink_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_faceless_void",
-    "Abilityid": "ability1_faceless_void_time_walk"
+    "Abilityid": "imba_faceless_void_time_walk"
   },
   {
     "id": "sect_blink_6_faceless_void_4",
@@ -9576,7 +9576,7 @@
     "acitve_common_effect": "modifier_sect_blink_base_6",
     "acitve_special_effect": "modifier_sect_blink_faceless_void_6",
     "heroid": "building_hero_faceless_void",
-    "Abilityid": "ability1_faceless_void_time_walk"
+    "Abilityid": "imba_faceless_void_time_walk"
   },
   {
     "id": "sect_blink_9_faceless_void_4",
@@ -9588,7 +9588,7 @@
     "acitve_common_effect": "modifier_sect_blink_base_9",
     "acitve_special_effect": "modifier_sect_blink_faceless_void_9",
     "heroid": "building_hero_faceless_void",
-    "Abilityid": "ability1_faceless_void_time_walk"
+    "Abilityid": "imba_faceless_void_time_walk"
   },
   {
     "id": "sect_blink_3_furion_5",
@@ -9600,7 +9600,7 @@
     "acitve_common_effect": "modifier_sect_blink_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability2_furion_teleportation"
+    "Abilityid": "imba_furion_teleportation"
   },
   {
     "id": "sect_blink_6_furion_5",
@@ -9612,7 +9612,7 @@
     "acitve_common_effect": "modifier_sect_blink_base_6",
     "acitve_special_effect": "modifier_sect_blink_furion_6",
     "heroid": "",
-    "Abilityid": "ability2_furion_teleportation"
+    "Abilityid": "imba_furion_teleportation"
   },
   {
     "id": "sect_blink_9_furion_5",
@@ -9624,7 +9624,7 @@
     "acitve_common_effect": "modifier_sect_blink_base_9",
     "acitve_special_effect": "modifier_sect_blink_furion_9",
     "heroid": "",
-    "Abilityid": "ability2_furion_teleportation"
+    "Abilityid": "imba_furion_teleportation"
   },
   {
     "id": "sect_blink_3_mirana_6",
@@ -9636,7 +9636,7 @@
     "acitve_common_effect": "modifier_sect_blink_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability3_mirana_leap"
+    "Abilityid": "imba_mirana_leap"
   },
   {
     "id": "sect_blink_6_mirana_6",
@@ -9648,7 +9648,7 @@
     "acitve_common_effect": "modifier_sect_blink_base_6",
     "acitve_special_effect": "modifier_sect_blink_mirana_6",
     "heroid": "",
-    "Abilityid": "ability3_mirana_leap"
+    "Abilityid": "imba_mirana_leap"
   },
   {
     "id": "sect_blink_9_mirana_6",
@@ -9660,7 +9660,7 @@
     "acitve_common_effect": "modifier_sect_blink_base_9",
     "acitve_special_effect": "modifier_sect_blink_mirana_9",
     "heroid": "",
-    "Abilityid": "ability3_mirana_leap"
+    "Abilityid": "imba_mirana_leap"
   },
   {
     "id": "sect_blink_3_morphling_7",
@@ -9672,7 +9672,7 @@
     "acitve_common_effect": "modifier_sect_blink_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_morphling",
-    "Abilityid": "ability1_morphling_waveform"
+    "Abilityid": "imba_morphling_waveform"
   },
   {
     "id": "sect_blink_6_morphling_7",
@@ -9684,7 +9684,7 @@
     "acitve_common_effect": "modifier_sect_blink_base_6",
     "acitve_special_effect": "modifier_sect_blink_morphling_6",
     "heroid": "building_hero_morphling",
-    "Abilityid": "ability1_morphling_waveform"
+    "Abilityid": "imba_morphling_waveform"
   },
   {
     "id": "sect_blink_9_morphling_7",
@@ -9696,7 +9696,7 @@
     "acitve_common_effect": "modifier_sect_blink_base_9",
     "acitve_special_effect": "modifier_sect_blink_morphling_9",
     "heroid": "building_hero_morphling",
-    "Abilityid": "ability1_morphling_waveform"
+    "Abilityid": "imba_morphling_waveform"
   },
   {
     "id": "sect_blink_3_phantom_assassin_8",
@@ -9708,7 +9708,7 @@
     "acitve_common_effect": "modifier_sect_blink_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_phantom_assassin",
-    "Abilityid": "ability2_phantom_assassin_phantom_strike"
+    "Abilityid": "imba_phantom_assassin_phantom_strike"
   },
   {
     "id": "sect_blink_6_phantom_assassin_8",
@@ -9720,7 +9720,7 @@
     "acitve_common_effect": "modifier_sect_blink_base_6",
     "acitve_special_effect": "modifier_sect_blink_phantom_assassin_6",
     "heroid": "building_hero_phantom_assassin",
-    "Abilityid": "ability2_phantom_assassin_phantom_strike"
+    "Abilityid": "imba_phantom_assassin_phantom_strike"
   },
   {
     "id": "sect_blink_9_phantom_assassin_8",
@@ -9732,7 +9732,7 @@
     "acitve_common_effect": "modifier_sect_blink_base_9",
     "acitve_special_effect": "modifier_sect_blink_phantom_assassin_9",
     "heroid": "building_hero_phantom_assassin",
-    "Abilityid": "ability2_phantom_assassin_phantom_strike"
+    "Abilityid": "imba_phantom_assassin_phantom_strike"
   },
   {
     "id": "sect_blink_3_phoenix_9",
@@ -9744,7 +9744,7 @@
     "acitve_common_effect": "modifier_sect_blink_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability1_phoenix_icarus_dive"
+    "Abilityid": "imba_phoenix_icarus_dive"
   },
   {
     "id": "sect_blink_6_phoenix_9",
@@ -9756,7 +9756,7 @@
     "acitve_common_effect": "modifier_sect_blink_base_6",
     "acitve_special_effect": "modifier_sect_blink_phoenix_6",
     "heroid": "",
-    "Abilityid": "ability1_phoenix_icarus_dive"
+    "Abilityid": "imba_phoenix_icarus_dive"
   },
   {
     "id": "sect_blink_9_phoenix_9",
@@ -9768,7 +9768,7 @@
     "acitve_common_effect": "modifier_sect_blink_base_9",
     "acitve_special_effect": "modifier_sect_blink_phoenix_9",
     "heroid": "",
-    "Abilityid": "ability1_phoenix_icarus_dive"
+    "Abilityid": "imba_phoenix_icarus_dive"
   },
   {
     "id": "sect_blink_3_rattletrap_10",
@@ -9780,7 +9780,7 @@
     "acitve_common_effect": "modifier_sect_blink_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_rattletrap_hookshot"
+    "Abilityid": "imba_rattletrap_hookshot"
   },
   {
     "id": "sect_blink_6_rattletrap_10",
@@ -9792,7 +9792,7 @@
     "acitve_common_effect": "modifier_sect_blink_base_6",
     "acitve_special_effect": "modifier_sect_blink_rattletrap_6",
     "heroid": "",
-    "Abilityid": "ability6_rattletrap_hookshot"
+    "Abilityid": "imba_rattletrap_hookshot"
   },
   {
     "id": "sect_blink_9_rattletrap_10",
@@ -9804,7 +9804,7 @@
     "acitve_common_effect": "modifier_sect_blink_base_9",
     "acitve_special_effect": "modifier_sect_blink_rattletrap_9",
     "heroid": "",
-    "Abilityid": "ability6_rattletrap_hookshot"
+    "Abilityid": "imba_rattletrap_hookshot"
   },
   {
     "id": "sect_blink_3_riki_11",
@@ -9816,7 +9816,7 @@
     "acitve_common_effect": "modifier_sect_blink_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_riki",
-    "Abilityid": "ability2_riki_blink_strike"
+    "Abilityid": "imba_riki_blink_strike"
   },
   {
     "id": "sect_blink_6_riki_11",
@@ -9828,7 +9828,7 @@
     "acitve_common_effect": "modifier_sect_blink_base_6",
     "acitve_special_effect": "modifier_sect_blink_riki_6",
     "heroid": "building_hero_riki",
-    "Abilityid": "ability2_riki_blink_strike"
+    "Abilityid": "imba_riki_blink_strike"
   },
   {
     "id": "sect_blink_9_riki_11",
@@ -9840,7 +9840,7 @@
     "acitve_common_effect": "modifier_sect_blink_base_9",
     "acitve_special_effect": "modifier_sect_blink_riki_9",
     "heroid": "building_hero_riki",
-    "Abilityid": "ability2_riki_blink_strike"
+    "Abilityid": "imba_riki_blink_strike"
   },
   {
     "id": "sect_blink_3_shredder_12",
@@ -9852,7 +9852,7 @@
     "acitve_common_effect": "modifier_sect_blink_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability2_shredder_timber_chain"
+    "Abilityid": "imba_shredder_timber_chain"
   },
   {
     "id": "sect_blink_6_shredder_12",
@@ -9864,7 +9864,7 @@
     "acitve_common_effect": "modifier_sect_blink_base_6",
     "acitve_special_effect": "modifier_sect_blink_shredder_6",
     "heroid": "",
-    "Abilityid": "ability2_shredder_timber_chain"
+    "Abilityid": "imba_shredder_timber_chain"
   },
   {
     "id": "sect_blink_9_shredder_12",
@@ -9876,7 +9876,7 @@
     "acitve_common_effect": "modifier_sect_blink_base_9",
     "acitve_special_effect": "modifier_sect_blink_shredder_9",
     "heroid": "",
-    "Abilityid": "ability2_shredder_timber_chain"
+    "Abilityid": "imba_shredder_timber_chain"
   },
   {
     "id": "sect_blink_3_vengefulspirit_13",
@@ -9888,7 +9888,7 @@
     "acitve_common_effect": "modifier_sect_blink_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_vengefulspirit_nether_swap"
+    "Abilityid": "imba_vengefulspirit_nether_swap"
   },
   {
     "id": "sect_blink_6_vengefulspirit_13",
@@ -9900,7 +9900,7 @@
     "acitve_common_effect": "modifier_sect_blink_base_6",
     "acitve_special_effect": "modifier_sect_blink_vengefulspirit_6",
     "heroid": "",
-    "Abilityid": "ability6_vengefulspirit_nether_swap"
+    "Abilityid": "imba_vengefulspirit_nether_swap"
   },
   {
     "id": "sect_blink_9_vengefulspirit_13",
@@ -9912,7 +9912,7 @@
     "acitve_common_effect": "modifier_sect_blink_base_9",
     "acitve_special_effect": "modifier_sect_blink_vengefulspirit_9",
     "heroid": "",
-    "Abilityid": "ability6_vengefulspirit_nether_swap"
+    "Abilityid": "imba_vengefulspirit_nether_swap"
   },
   {
     "id": "sect_cabala_3_antimage_1",
@@ -9924,7 +9924,7 @@
     "acitve_common_effect": "modifier_sect_cabala_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_antimage",
-    "Abilityid": "ability1_antimage_mana_break"
+    "Abilityid": "imba_antimage_mana_break"
   },
   {
     "id": "sect_cabala_6_antimage_1",
@@ -9936,7 +9936,7 @@
     "acitve_common_effect": "modifier_sect_cabala_base_6",
     "acitve_special_effect": "modifier_sect_cabala_antimage_6",
     "heroid": "building_hero_antimage",
-    "Abilityid": "ability1_antimage_mana_break"
+    "Abilityid": "imba_antimage_mana_break"
   },
   {
     "id": "sect_cabala_9_antimage_1",
@@ -9948,7 +9948,7 @@
     "acitve_common_effect": "modifier_sect_cabala_base_9",
     "acitve_special_effect": "modifier_sect_cabala_antimage_9",
     "heroid": "building_hero_antimage",
-    "Abilityid": "ability1_antimage_mana_break"
+    "Abilityid": "imba_antimage_mana_break"
   },
   {
     "id": "sect_cabala_3_bane_2",
@@ -9960,7 +9960,7 @@
     "acitve_common_effect": "modifier_sect_cabala_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_bane_fiends_grip"
+    "Abilityid": "imba_bane_fiends_grip"
   },
   {
     "id": "sect_cabala_6_bane_2",
@@ -9972,7 +9972,7 @@
     "acitve_common_effect": "modifier_sect_cabala_base_6",
     "acitve_special_effect": "modifier_sect_cabala_bane_6",
     "heroid": "",
-    "Abilityid": "ability6_bane_fiends_grip"
+    "Abilityid": "imba_bane_fiends_grip"
   },
   {
     "id": "sect_cabala_9_bane_2",
@@ -9984,7 +9984,7 @@
     "acitve_common_effect": "modifier_sect_cabala_base_9",
     "acitve_special_effect": "modifier_sect_cabala_bane_9",
     "heroid": "",
-    "Abilityid": "ability6_bane_fiends_grip"
+    "Abilityid": "imba_bane_fiends_grip"
   },
   {
     "id": "sect_cabala_3_crystal_maiden_3",
@@ -9996,7 +9996,7 @@
     "acitve_common_effect": "modifier_sect_cabala_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_crystal_maiden",
-    "Abilityid": "ability3_crystal_maiden_brilliance_aura"
+    "Abilityid": "imba_crystal_maiden_brilliance_aura"
   },
   {
     "id": "sect_cabala_6_crystal_maiden_3",
@@ -10008,7 +10008,7 @@
     "acitve_common_effect": "modifier_sect_cabala_base_6",
     "acitve_special_effect": "modifier_sect_cabala_crystal_maiden_6",
     "heroid": "building_hero_crystal_maiden",
-    "Abilityid": "ability3_crystal_maiden_brilliance_aura"
+    "Abilityid": "imba_crystal_maiden_brilliance_aura"
   },
   {
     "id": "sect_cabala_9_crystal_maiden_3",
@@ -10020,7 +10020,7 @@
     "acitve_common_effect": "modifier_sect_cabala_base_9",
     "acitve_special_effect": "modifier_sect_cabala_crystal_maiden_9",
     "heroid": "building_hero_crystal_maiden",
-    "Abilityid": "ability3_crystal_maiden_brilliance_aura"
+    "Abilityid": "imba_crystal_maiden_brilliance_aura"
   },
   {
     "id": "sect_cabala_3_invoker_4",
@@ -10068,7 +10068,7 @@
     "acitve_common_effect": "modifier_sect_cabala_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_keeper_of_the_light",
-    "Abilityid": "ability3_keeper_of_the_light_chakra_magic"
+    "Abilityid": "imba_keeper_of_the_light_chakra_magic"
   },
   {
     "id": "sect_cabala_6_keeper_of_the_light_5",
@@ -10080,7 +10080,7 @@
     "acitve_common_effect": "modifier_sect_cabala_base_6",
     "acitve_special_effect": "modifier_sect_cabala_keeper_of_the_light_6",
     "heroid": "building_hero_keeper_of_the_light",
-    "Abilityid": "ability3_keeper_of_the_light_chakra_magic"
+    "Abilityid": "imba_keeper_of_the_light_chakra_magic"
   },
   {
     "id": "sect_cabala_9_keeper_of_the_light_5",
@@ -10092,7 +10092,7 @@
     "acitve_common_effect": "modifier_sect_cabala_base_9",
     "acitve_special_effect": "modifier_sect_cabala_keeper_of_the_light_9",
     "heroid": "building_hero_keeper_of_the_light",
-    "Abilityid": "ability3_keeper_of_the_light_chakra_magic"
+    "Abilityid": "imba_keeper_of_the_light_chakra_magic"
   },
   {
     "id": "sect_cabala_3_lich_6",
@@ -10104,7 +10104,7 @@
     "acitve_common_effect": "modifier_sect_cabala_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability3_lich_sinister_gaze"
+    "Abilityid": "imba_lich_sinister_gaze"
   },
   {
     "id": "sect_cabala_6_lich_6",
@@ -10116,7 +10116,7 @@
     "acitve_common_effect": "modifier_sect_cabala_base_6",
     "acitve_special_effect": "modifier_sect_cabala_lich_6",
     "heroid": "",
-    "Abilityid": "ability3_lich_sinister_gaze"
+    "Abilityid": "imba_lich_sinister_gaze"
   },
   {
     "id": "sect_cabala_9_lich_6",
@@ -10128,7 +10128,7 @@
     "acitve_common_effect": "modifier_sect_cabala_base_9",
     "acitve_special_effect": "modifier_sect_cabala_lich_9",
     "heroid": "",
-    "Abilityid": "ability3_lich_sinister_gaze"
+    "Abilityid": "imba_lich_sinister_gaze"
   },
   {
     "id": "sect_cabala_3_lion_7",
@@ -10140,7 +10140,7 @@
     "acitve_common_effect": "modifier_sect_cabala_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability3_lion_mana_drain"
+    "Abilityid": "imba_lion_mana_drain"
   },
   {
     "id": "sect_cabala_6_lion_7",
@@ -10152,7 +10152,7 @@
     "acitve_common_effect": "modifier_sect_cabala_base_6",
     "acitve_special_effect": "modifier_sect_cabala_lion_6",
     "heroid": "",
-    "Abilityid": "ability3_lion_mana_drain"
+    "Abilityid": "imba_lion_mana_drain"
   },
   {
     "id": "sect_cabala_9_lion_7",
@@ -10164,7 +10164,7 @@
     "acitve_common_effect": "modifier_sect_cabala_base_9",
     "acitve_special_effect": "modifier_sect_cabala_lion_9",
     "heroid": "",
-    "Abilityid": "ability3_lion_mana_drain"
+    "Abilityid": "imba_lion_mana_drain"
   },
   {
     "id": "sect_cabala_3_nyx_assassin_8",
@@ -10176,7 +10176,7 @@
     "acitve_common_effect": "modifier_sect_cabala_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_nyx_assassin",
-    "Abilityid": "ability2_nyx_assassin_mana_burn"
+    "Abilityid": "imba_nyx_assassin_mana_burn"
   },
   {
     "id": "sect_cabala_6_nyx_assassin_8",
@@ -10188,7 +10188,7 @@
     "acitve_common_effect": "modifier_sect_cabala_base_6",
     "acitve_special_effect": "modifier_sect_cabala_nyx_assassin_6",
     "heroid": "building_hero_nyx_assassin",
-    "Abilityid": "ability2_nyx_assassin_mana_burn"
+    "Abilityid": "imba_nyx_assassin_mana_burn"
   },
   {
     "id": "sect_cabala_9_nyx_assassin_8",
@@ -10200,7 +10200,7 @@
     "acitve_common_effect": "modifier_sect_cabala_base_9",
     "acitve_special_effect": "modifier_sect_cabala_nyx_assassin_9",
     "heroid": "building_hero_nyx_assassin",
-    "Abilityid": "ability2_nyx_assassin_mana_burn"
+    "Abilityid": "imba_nyx_assassin_mana_burn"
   },
   {
     "id": "sect_cabala_3_obsidian_destroyer_9",
@@ -10212,7 +10212,7 @@
     "acitve_common_effect": "modifier_sect_cabala_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_obsidian_destroyer",
-    "Abilityid": "ability3_obsidian_destroyer_equilibrium"
+    "Abilityid": "imba_obsidian_destroyer_equilibrium"
   },
   {
     "id": "sect_cabala_6_obsidian_destroyer_9",
@@ -10224,7 +10224,7 @@
     "acitve_common_effect": "modifier_sect_cabala_base_6",
     "acitve_special_effect": "modifier_sect_cabala_obsidian_destroyer_6",
     "heroid": "building_hero_obsidian_destroyer",
-    "Abilityid": "ability3_obsidian_destroyer_equilibrium"
+    "Abilityid": "imba_obsidian_destroyer_equilibrium"
   },
   {
     "id": "sect_cabala_9_obsidian_destroyer_9",
@@ -10236,7 +10236,7 @@
     "acitve_common_effect": "modifier_sect_cabala_base_9",
     "acitve_special_effect": "modifier_sect_cabala_obsidian_destroyer_9",
     "heroid": "building_hero_obsidian_destroyer",
-    "Abilityid": "ability3_obsidian_destroyer_equilibrium"
+    "Abilityid": "imba_obsidian_destroyer_equilibrium"
   },
   {
     "id": "sect_cannibalism_1_clinkz_1",
@@ -10248,7 +10248,7 @@
     "acitve_common_effect": "modifier_sect_cannibalism_base_1",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_clinkz_death_pact"
+    "Abilityid": "imba_clinkz_death_pact"
   },
   {
     "id": "sect_cannibalism_2_clinkz_1",
@@ -10260,7 +10260,7 @@
     "acitve_common_effect": "modifier_sect_cannibalism_base_2",
     "acitve_special_effect": "modifier_sect_cannibalism_clinkz_2",
     "heroid": "",
-    "Abilityid": "ability6_clinkz_death_pact"
+    "Abilityid": "imba_clinkz_death_pact"
   },
   {
     "id": "sect_cannibalism_4_clinkz_1",
@@ -10272,7 +10272,7 @@
     "acitve_common_effect": "modifier_sect_cannibalism_base_4",
     "acitve_special_effect": "modifier_sect_cannibalism_clinkz_4",
     "heroid": "",
-    "Abilityid": "ability6_clinkz_death_pact"
+    "Abilityid": "imba_clinkz_death_pact"
   },
   {
     "id": "sect_cannibalism_1_doom_bringer_2",
@@ -10284,7 +10284,7 @@
     "acitve_common_effect": "modifier_sect_cannibalism_base_1",
     "acitve_special_effect": "",
     "heroid": "building_hero_doom_bringer",
-    "Abilityid": "ability1_doom_bringer_devour"
+    "Abilityid": "imba_doom_bringer_devour"
   },
   {
     "id": "sect_cannibalism_2_doom_bringer_2",
@@ -10296,7 +10296,7 @@
     "acitve_common_effect": "modifier_sect_cannibalism_base_2",
     "acitve_special_effect": "modifier_sect_cannibalism_doom_bringer_2",
     "heroid": "building_hero_doom_bringer",
-    "Abilityid": "ability1_doom_bringer_devour"
+    "Abilityid": "imba_doom_bringer_devour"
   },
   {
     "id": "sect_cannibalism_4_doom_bringer_2",
@@ -10308,7 +10308,7 @@
     "acitve_common_effect": "modifier_sect_cannibalism_base_4",
     "acitve_special_effect": "modifier_sect_cannibalism_doom_bringer_4",
     "heroid": "building_hero_doom_bringer",
-    "Abilityid": "ability1_doom_bringer_devour"
+    "Abilityid": "imba_doom_bringer_devour"
   },
   {
     "id": "sect_cannibalism_1_life_stealer_3",
@@ -10320,7 +10320,7 @@
     "acitve_common_effect": "modifier_sect_cannibalism_base_1",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_life_stealer_infest"
+    "Abilityid": "imba_life_stealer_infest"
   },
   {
     "id": "sect_cannibalism_2_life_stealer_3",
@@ -10332,7 +10332,7 @@
     "acitve_common_effect": "modifier_sect_cannibalism_base_2",
     "acitve_special_effect": "modifier_sect_cannibalism_life_stealer_2",
     "heroid": "",
-    "Abilityid": "ability6_life_stealer_infest"
+    "Abilityid": "imba_life_stealer_infest"
   },
   {
     "id": "sect_cannibalism_4_life_stealer_3",
@@ -10344,7 +10344,7 @@
     "acitve_common_effect": "modifier_sect_cannibalism_base_4",
     "acitve_special_effect": "modifier_sect_cannibalism_life_stealer_4",
     "heroid": "",
-    "Abilityid": "ability6_life_stealer_infest"
+    "Abilityid": "imba_life_stealer_infest"
   },
   {
     "id": "sect_cannibalism_1_pudge_4",
@@ -10356,7 +10356,7 @@
     "acitve_common_effect": "modifier_sect_cannibalism_base_1",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_pudge_dismember"
+    "Abilityid": "imba_pudge_dismember"
   },
   {
     "id": "sect_cannibalism_2_pudge_4",
@@ -10368,7 +10368,7 @@
     "acitve_common_effect": "modifier_sect_cannibalism_base_2",
     "acitve_special_effect": "modifier_sect_cannibalism_pudge_2",
     "heroid": "",
-    "Abilityid": "ability6_pudge_dismember"
+    "Abilityid": "imba_pudge_dismember"
   },
   {
     "id": "sect_cannibalism_4_pudge_4",
@@ -10380,7 +10380,7 @@
     "acitve_common_effect": "modifier_sect_cannibalism_base_4",
     "acitve_special_effect": "modifier_sect_cannibalism_pudge_4",
     "heroid": "",
-    "Abilityid": "ability6_pudge_dismember"
+    "Abilityid": "imba_pudge_dismember"
   },
   {
     "id": "sect_cannibalism_1_snapfire_5",
@@ -10392,7 +10392,7 @@
     "acitve_common_effect": "modifier_sect_cannibalism_base_1",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability4_snapfire_gobble_up"
+    "Abilityid": "imba_snapfire_gobble_up"
   },
   {
     "id": "sect_cannibalism_2_snapfire_5",
@@ -10404,7 +10404,7 @@
     "acitve_common_effect": "modifier_sect_cannibalism_base_2",
     "acitve_special_effect": "modifier_sect_cannibalism_snapfire_2",
     "heroid": "",
-    "Abilityid": "ability4_snapfire_gobble_up"
+    "Abilityid": "imba_snapfire_gobble_up"
   },
   {
     "id": "sect_cannibalism_4_snapfire_5",
@@ -10416,7 +10416,7 @@
     "acitve_common_effect": "modifier_sect_cannibalism_base_4",
     "acitve_special_effect": "modifier_sect_cannibalism_snapfire_4",
     "heroid": "",
-    "Abilityid": "ability4_snapfire_gobble_up"
+    "Abilityid": "imba_snapfire_gobble_up"
   },
   {
     "id": "sect_cd_down_3_dazzle_1",
@@ -10428,7 +10428,7 @@
     "acitve_common_effect": "modifier_sect_cd_down_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": ""
+    "Abilityid": "imba_dazzle_bad_juju"
   },
   {
     "id": "sect_cd_down_6_dazzle_1",
@@ -10440,7 +10440,7 @@
     "acitve_common_effect": "modifier_sect_cd_down_base_6",
     "acitve_special_effect": "modifier_sect_cd_down_dazzle_6",
     "heroid": "",
-    "Abilityid": ""
+    "Abilityid": "imba_dazzle_bad_juju"
   },
   {
     "id": "sect_cd_down_9_dazzle_1",
@@ -10452,7 +10452,7 @@
     "acitve_common_effect": "modifier_sect_cd_down_base_9",
     "acitve_special_effect": "modifier_sect_cd_down_dazzle_9",
     "heroid": "",
-    "Abilityid": ""
+    "Abilityid": "imba_dazzle_bad_juju"
   },
   {
     "id": "sect_cd_down_3_elder_titan_2",
@@ -10464,7 +10464,7 @@
     "acitve_common_effect": "modifier_sect_cd_down_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_elder_titan",
-    "Abilityid": "ability1_elder_titan_echo_stomp"
+    "Abilityid": "imba_elder_titan_echo_stomp"
   },
   {
     "id": "sect_cd_down_6_elder_titan_2",
@@ -10476,7 +10476,7 @@
     "acitve_common_effect": "modifier_sect_cd_down_base_6",
     "acitve_special_effect": "modifier_sect_cd_down_elder_titan_6",
     "heroid": "building_hero_elder_titan",
-    "Abilityid": "ability1_elder_titan_echo_stomp"
+    "Abilityid": "imba_elder_titan_echo_stomp"
   },
   {
     "id": "sect_cd_down_9_elder_titan_2",
@@ -10488,7 +10488,7 @@
     "acitve_common_effect": "modifier_sect_cd_down_base_9",
     "acitve_special_effect": "modifier_sect_cd_down_elder_titan_9",
     "heroid": "building_hero_elder_titan",
-    "Abilityid": "ability1_elder_titan_echo_stomp"
+    "Abilityid": "imba_elder_titan_echo_stomp"
   },
   {
     "id": "sect_cd_down_3_mars_3",
@@ -10500,7 +10500,7 @@
     "acitve_common_effect": "modifier_sect_cd_down_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_mars",
-    "Abilityid": "ability1_mars_spear"
+    "Abilityid": "imba_mars_spear"
   },
   {
     "id": "sect_cd_down_6_mars_3",
@@ -10512,7 +10512,7 @@
     "acitve_common_effect": "modifier_sect_cd_down_base_6",
     "acitve_special_effect": "modifier_sect_cd_down_mars_6",
     "heroid": "building_hero_mars",
-    "Abilityid": "ability1_mars_spear"
+    "Abilityid": "imba_mars_spear"
   },
   {
     "id": "sect_cd_down_9_mars_3",
@@ -10524,7 +10524,7 @@
     "acitve_common_effect": "modifier_sect_cd_down_base_9",
     "acitve_special_effect": "modifier_sect_cd_down_mars_9",
     "heroid": "building_hero_mars",
-    "Abilityid": "ability1_mars_spear"
+    "Abilityid": "imba_mars_spear"
   },
   {
     "id": "sect_cd_down_3_mirana_4",
@@ -10536,7 +10536,7 @@
     "acitve_common_effect": "modifier_sect_cd_down_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_mirana",
-    "Abilityid": "ability2_mirana_arrow"
+    "Abilityid": "imba_mirana_arrow"
   },
   {
     "id": "sect_cd_down_6_mirana_4",
@@ -10548,7 +10548,7 @@
     "acitve_common_effect": "modifier_sect_cd_down_base_6",
     "acitve_special_effect": "modifier_sect_cd_down_mirana_6",
     "heroid": "building_hero_mirana",
-    "Abilityid": "ability2_mirana_arrow"
+    "Abilityid": "imba_mirana_arrow"
   },
   {
     "id": "sect_cd_down_9_mirana_4",
@@ -10560,7 +10560,7 @@
     "acitve_common_effect": "modifier_sect_cd_down_base_9",
     "acitve_special_effect": "modifier_sect_cd_down_mirana_9",
     "heroid": "building_hero_mirana",
-    "Abilityid": "ability2_mirana_arrow"
+    "Abilityid": "imba_mirana_arrow"
   },
   {
     "id": "sect_cd_down_3_necrolyte_5",
@@ -10572,7 +10572,7 @@
     "acitve_common_effect": "modifier_sect_cd_down_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_necrolyte_reapers_scythe"
+    "Abilityid": "imba_necrolyte_reapers_scythe"
   },
   {
     "id": "sect_cd_down_6_necrolyte_5",
@@ -10584,7 +10584,7 @@
     "acitve_common_effect": "modifier_sect_cd_down_base_6",
     "acitve_special_effect": "modifier_sect_cd_down_necrolyte_6",
     "heroid": "",
-    "Abilityid": "ability6_necrolyte_reapers_scythe"
+    "Abilityid": "imba_necrolyte_reapers_scythe"
   },
   {
     "id": "sect_cd_down_9_necrolyte_5",
@@ -10596,7 +10596,7 @@
     "acitve_common_effect": "modifier_sect_cd_down_base_9",
     "acitve_special_effect": "modifier_sect_cd_down_necrolyte_9",
     "heroid": "",
-    "Abilityid": "ability6_necrolyte_reapers_scythe"
+    "Abilityid": "imba_necrolyte_reapers_scythe"
   },
   {
     "id": "sect_cd_down_3_obsidian_destroyer_6",
@@ -10608,7 +10608,7 @@
     "acitve_common_effect": "modifier_sect_cd_down_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_obsidian_destroyer_sanity_eclipse"
+    "Abilityid": "imba_obsidian_destroyer_sanity_eclipse"
   },
   {
     "id": "sect_cd_down_6_obsidian_destroyer_6",
@@ -10620,7 +10620,7 @@
     "acitve_common_effect": "modifier_sect_cd_down_base_6",
     "acitve_special_effect": "modifier_sect_cd_down_obsidian_destroyer_6",
     "heroid": "",
-    "Abilityid": "ability6_obsidian_destroyer_sanity_eclipse"
+    "Abilityid": "imba_obsidian_destroyer_sanity_eclipse"
   },
   {
     "id": "sect_cd_down_9_obsidian_destroyer_6",
@@ -10632,7 +10632,7 @@
     "acitve_common_effect": "modifier_sect_cd_down_base_9",
     "acitve_special_effect": "modifier_sect_cd_down_obsidian_destroyer_9",
     "heroid": "",
-    "Abilityid": "ability6_obsidian_destroyer_sanity_eclipse"
+    "Abilityid": "imba_obsidian_destroyer_sanity_eclipse"
   },
   {
     "id": "sect_cd_down_3_oracle_7",
@@ -10644,7 +10644,7 @@
     "acitve_common_effect": "modifier_sect_cd_down_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_oracle",
-    "Abilityid": "ability1_oracle_fortunes_end"
+    "Abilityid": "imba_oracle_fortunes_end"
   },
   {
     "id": "sect_cd_down_6_oracle_7",
@@ -10656,7 +10656,7 @@
     "acitve_common_effect": "modifier_sect_cd_down_base_6",
     "acitve_special_effect": "modifier_sect_cd_down_oracle_6",
     "heroid": "building_hero_oracle",
-    "Abilityid": "ability1_oracle_fortunes_end"
+    "Abilityid": "imba_oracle_fortunes_end"
   },
   {
     "id": "sect_cd_down_9_oracle_7",
@@ -10668,7 +10668,7 @@
     "acitve_common_effect": "modifier_sect_cd_down_base_9",
     "acitve_special_effect": "modifier_sect_cd_down_oracle_9",
     "heroid": "building_hero_oracle",
-    "Abilityid": "ability1_oracle_fortunes_end"
+    "Abilityid": "imba_oracle_fortunes_end"
   },
   {
     "id": "sect_cd_down_3_tinker_8",
@@ -10680,7 +10680,7 @@
     "acitve_common_effect": "modifier_sect_cd_down_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_tinker_rearm"
+    "Abilityid": "imba_tinker_rearm"
   },
   {
     "id": "sect_cd_down_6_tinker_8",
@@ -10692,7 +10692,7 @@
     "acitve_common_effect": "modifier_sect_cd_down_base_6",
     "acitve_special_effect": "modifier_sect_cd_down_tinker_6",
     "heroid": "",
-    "Abilityid": "ability6_tinker_rearm"
+    "Abilityid": "imba_tinker_rearm"
   },
   {
     "id": "sect_cd_down_9_tinker_8",
@@ -10704,7 +10704,7 @@
     "acitve_common_effect": "modifier_sect_cd_down_base_9",
     "acitve_special_effect": "modifier_sect_cd_down_tinker_9",
     "heroid": "",
-    "Abilityid": "ability6_tinker_rearm"
+    "Abilityid": "imba_tinker_rearm"
   },
   {
     "id": "sect_cd_down_3_zeus_9",
@@ -10716,7 +10716,7 @@
     "acitve_common_effect": "modifier_sect_cd_down_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_zuus_thundergods_wrath"
+    "Abilityid": "imba_zuus_thundergods_wrath"
   },
   {
     "id": "sect_cd_down_6_zeus_9",
@@ -10728,7 +10728,7 @@
     "acitve_common_effect": "modifier_sect_cd_down_base_6",
     "acitve_special_effect": "modifier_sect_cd_down_zeus_6",
     "heroid": "",
-    "Abilityid": "ability6_zuus_thundergods_wrath"
+    "Abilityid": "imba_zuus_thundergods_wrath"
   },
   {
     "id": "sect_cd_down_9_zeus_9",
@@ -10740,7 +10740,7 @@
     "acitve_common_effect": "modifier_sect_cd_down_base_9",
     "acitve_special_effect": "modifier_sect_cd_down_zeus_9",
     "heroid": "",
-    "Abilityid": "ability6_zuus_thundergods_wrath"
+    "Abilityid": "imba_zuus_thundergods_wrath"
   },
   {
     "id": "sect_cleave_3_faceless_void_1",
@@ -10752,7 +10752,7 @@
     "acitve_common_effect": "modifier_sect_cleave_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_faceless_void",
-    "Abilityid": "ability3_faceless_void_time_lock"
+    "Abilityid": "imba_faceless_void_time_lock"
   },
   {
     "id": "sect_cleave_6_faceless_void_1",
@@ -10764,7 +10764,7 @@
     "acitve_common_effect": "modifier_sect_cleave_base_6",
     "acitve_special_effect": "modifier_sect_cleave_faceless_void_6",
     "heroid": "building_hero_faceless_void",
-    "Abilityid": "ability3_faceless_void_time_lock"
+    "Abilityid": "imba_faceless_void_time_lock"
   },
   {
     "id": "sect_cleave_9_faceless_void_1",
@@ -10776,7 +10776,7 @@
     "acitve_common_effect": "modifier_sect_cleave_base_9",
     "acitve_special_effect": "modifier_sect_cleave_faceless_void_9",
     "heroid": "building_hero_faceless_void",
-    "Abilityid": "ability3_faceless_void_time_lock"
+    "Abilityid": "imba_faceless_void_time_lock"
   },
   {
     "id": "sect_cleave_3_kunkka_2",
@@ -10788,7 +10788,7 @@
     "acitve_common_effect": "modifier_sect_cleave_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_kunkka",
-    "Abilityid": "ability2_kunkka_tidebringer"
+    "Abilityid": "imba_kunkka_tidebringer"
   },
   {
     "id": "sect_cleave_6_kunkka_2",
@@ -10800,7 +10800,7 @@
     "acitve_common_effect": "modifier_sect_cleave_base_6",
     "acitve_special_effect": "modifier_sect_cleave_kunkka_6",
     "heroid": "building_hero_kunkka",
-    "Abilityid": "ability2_kunkka_tidebringer"
+    "Abilityid": "imba_kunkka_tidebringer"
   },
   {
     "id": "sect_cleave_9_kunkka_2",
@@ -10812,7 +10812,7 @@
     "acitve_common_effect": "modifier_sect_cleave_base_9",
     "acitve_special_effect": "modifier_sect_cleave_kunkka_9",
     "heroid": "building_hero_kunkka",
-    "Abilityid": "ability2_kunkka_tidebringer"
+    "Abilityid": "imba_kunkka_tidebringer"
   },
   {
     "id": "sect_cleave_3_luna_3",
@@ -10824,7 +10824,7 @@
     "acitve_common_effect": "modifier_sect_cleave_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_luna",
-    "Abilityid": "ability2_luna_moon_glaive"
+    "Abilityid": "imba_luna_moon_glaive"
   },
   {
     "id": "sect_cleave_6_luna_3",
@@ -10836,7 +10836,7 @@
     "acitve_common_effect": "modifier_sect_cleave_base_6",
     "acitve_special_effect": "modifier_sect_cleave_luna_6",
     "heroid": "building_hero_luna",
-    "Abilityid": "ability2_luna_moon_glaive"
+    "Abilityid": "imba_luna_moon_glaive"
   },
   {
     "id": "sect_cleave_9_luna_3",
@@ -10848,7 +10848,7 @@
     "acitve_common_effect": "modifier_sect_cleave_base_9",
     "acitve_special_effect": "modifier_sect_cleave_luna_9",
     "heroid": "building_hero_luna",
-    "Abilityid": "ability2_luna_moon_glaive"
+    "Abilityid": "imba_luna_moon_glaive"
   },
   {
     "id": "sect_cleave_3_magnataur_4",
@@ -10860,7 +10860,7 @@
     "acitve_common_effect": "modifier_sect_cleave_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_magnataur",
-    "Abilityid": "ability2_magnataur_empower"
+    "Abilityid": "imba_magnataur_empower"
   },
   {
     "id": "sect_cleave_6_magnataur_4",
@@ -10872,7 +10872,7 @@
     "acitve_common_effect": "modifier_sect_cleave_base_6",
     "acitve_special_effect": "modifier_sect_cleave_magnataur_6",
     "heroid": "building_hero_magnataur",
-    "Abilityid": "ability2_magnataur_empower"
+    "Abilityid": "imba_magnataur_empower"
   },
   {
     "id": "sect_cleave_9_magnataur_4",
@@ -10884,7 +10884,7 @@
     "acitve_common_effect": "modifier_sect_cleave_base_9",
     "acitve_special_effect": "modifier_sect_cleave_magnataur_9",
     "heroid": "building_hero_magnataur",
-    "Abilityid": "ability2_magnataur_empower"
+    "Abilityid": "imba_magnataur_empower"
   },
   {
     "id": "sect_cleave_3_medusa_5",
@@ -10896,7 +10896,7 @@
     "acitve_common_effect": "modifier_sect_cleave_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_medusa",
-    "Abilityid": "ability1_medusa_split_shot"
+    "Abilityid": "imba_medusa_split_shot"
   },
   {
     "id": "sect_cleave_6_medusa_5",
@@ -10908,7 +10908,7 @@
     "acitve_common_effect": "modifier_sect_cleave_base_6",
     "acitve_special_effect": "modifier_sect_cleave_medusa_6",
     "heroid": "building_hero_medusa",
-    "Abilityid": "ability1_medusa_split_shot"
+    "Abilityid": "imba_medusa_split_shot"
   },
   {
     "id": "sect_cleave_9_medusa_5",
@@ -10920,7 +10920,7 @@
     "acitve_common_effect": "modifier_sect_cleave_base_9",
     "acitve_special_effect": "modifier_sect_cleave_medusa_9",
     "heroid": "building_hero_medusa",
-    "Abilityid": "ability1_medusa_split_shot"
+    "Abilityid": "imba_medusa_split_shot"
   },
   {
     "id": "sect_cleave_3_sven_6",
@@ -10932,7 +10932,7 @@
     "acitve_common_effect": "modifier_sect_cleave_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_sven",
-    "Abilityid": "ability2_sven_great_cleave"
+    "Abilityid": "imba_sven_great_cleave"
   },
   {
     "id": "sect_cleave_6_sven_6",
@@ -10944,7 +10944,7 @@
     "acitve_common_effect": "modifier_sect_cleave_base_6",
     "acitve_special_effect": "modifier_sect_cleave_sven_6",
     "heroid": "building_hero_sven",
-    "Abilityid": "ability2_sven_great_cleave"
+    "Abilityid": "imba_sven_great_cleave"
   },
   {
     "id": "sect_cleave_9_sven_6",
@@ -10956,7 +10956,7 @@
     "acitve_common_effect": "modifier_sect_cleave_base_9",
     "acitve_special_effect": "modifier_sect_cleave_sven_9",
     "heroid": "building_hero_sven",
-    "Abilityid": "ability2_sven_great_cleave"
+    "Abilityid": "imba_sven_great_cleave"
   },
   {
     "id": "sect_cleave_3_templar_assassin_7",
@@ -10968,7 +10968,7 @@
     "acitve_common_effect": "modifier_sect_cleave_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_templar_assassin",
-    "Abilityid": "ability3_templar_assassin_psi_blades"
+    "Abilityid": "imba_templar_assassin_psi_blades"
   },
   {
     "id": "sect_cleave_6_templar_assassin_7",
@@ -10980,7 +10980,7 @@
     "acitve_common_effect": "modifier_sect_cleave_base_6",
     "acitve_special_effect": "modifier_sect_cleave_templar_assassin_6",
     "heroid": "building_hero_templar_assassin",
-    "Abilityid": "ability3_templar_assassin_psi_blades"
+    "Abilityid": "imba_templar_assassin_psi_blades"
   },
   {
     "id": "sect_cleave_9_templar_assassin_7",
@@ -10992,7 +10992,7 @@
     "acitve_common_effect": "modifier_sect_cleave_base_9",
     "acitve_special_effect": "modifier_sect_cleave_templar_assassin_9",
     "heroid": "building_hero_templar_assassin",
-    "Abilityid": "ability3_templar_assassin_psi_blades"
+    "Abilityid": "imba_templar_assassin_psi_blades"
   },
   {
     "id": "sect_cleave_3_void_spirit_8",
@@ -11004,7 +11004,7 @@
     "acitve_common_effect": "modifier_sect_cleave_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_void_spirit_astral_step"
+    "Abilityid": "imba_void_spirit_astral_step"
   },
   {
     "id": "sect_cleave_6_void_spirit_8",
@@ -11016,7 +11016,7 @@
     "acitve_common_effect": "modifier_sect_cleave_base_6",
     "acitve_special_effect": "modifier_sect_cleave_void_spirit_6",
     "heroid": "",
-    "Abilityid": "ability6_void_spirit_astral_step"
+    "Abilityid": "imba_void_spirit_astral_step"
   },
   {
     "id": "sect_cleave_9_void_spirit_8",
@@ -11028,7 +11028,7 @@
     "acitve_common_effect": "modifier_sect_cleave_base_9",
     "acitve_special_effect": "modifier_sect_cleave_void_spirit_9",
     "heroid": "",
-    "Abilityid": "ability6_void_spirit_astral_step"
+    "Abilityid": "imba_void_spirit_astral_step"
   },
   {
     "id": "sect_cleave_3_weaver_9",
@@ -11040,7 +11040,7 @@
     "acitve_common_effect": "modifier_sect_cleave_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_weaver",
-    "Abilityid": "ability3_weaver_geminate_attack"
+    "Abilityid": "imba_weaver_geminate_attack"
   },
   {
     "id": "sect_cleave_6_weaver_9",
@@ -11052,7 +11052,7 @@
     "acitve_common_effect": "modifier_sect_cleave_base_6",
     "acitve_special_effect": "modifier_sect_cleave_weaver_6",
     "heroid": "building_hero_weaver",
-    "Abilityid": "ability3_weaver_geminate_attack"
+    "Abilityid": "imba_weaver_geminate_attack"
   },
   {
     "id": "sect_cleave_9_weaver_9",
@@ -11064,7 +11064,7 @@
     "acitve_common_effect": "modifier_sect_cleave_base_9",
     "acitve_special_effect": "modifier_sect_cleave_weaver_9",
     "heroid": "building_hero_weaver",
-    "Abilityid": "ability3_weaver_geminate_attack"
+    "Abilityid": "imba_weaver_geminate_attack"
   },
   {
     "id": "sect_control_4_beastmaster_1",
@@ -11076,7 +11076,7 @@
     "acitve_common_effect": "modifier_sect_control_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_beastmaster_primal_roar"
+    "Abilityid": "imba_beastmaster_primal_roar"
   },
   {
     "id": "sect_control_8_beastmaster_1",
@@ -11088,7 +11088,7 @@
     "acitve_common_effect": "modifier_sect_control_base_8",
     "acitve_special_effect": "modifier_sect_control_beastmaster_8",
     "heroid": "",
-    "Abilityid": "ability6_beastmaster_primal_roar"
+    "Abilityid": "imba_beastmaster_primal_roar"
   },
   {
     "id": "sect_control_12_beastmaster_1",
@@ -11100,7 +11100,7 @@
     "acitve_common_effect": "modifier_sect_control_base_12",
     "acitve_special_effect": "modifier_sect_control_beastmaster_12",
     "heroid": "",
-    "Abilityid": "ability6_beastmaster_primal_roar"
+    "Abilityid": "imba_beastmaster_primal_roar"
   },
   {
     "id": "sect_control_4_centaur_2",
@@ -11112,7 +11112,7 @@
     "acitve_common_effect": "modifier_sect_control_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability1_centaur_hoof_stomp"
+    "Abilityid": "imba_centaur_hoof_stomp"
   },
   {
     "id": "sect_control_8_centaur_2",
@@ -11124,7 +11124,7 @@
     "acitve_common_effect": "modifier_sect_control_base_8",
     "acitve_special_effect": "modifier_sect_control_centaur_8",
     "heroid": "",
-    "Abilityid": "ability1_centaur_hoof_stomp"
+    "Abilityid": "imba_centaur_hoof_stomp"
   },
   {
     "id": "sect_control_12_centaur_2",
@@ -11136,7 +11136,7 @@
     "acitve_common_effect": "modifier_sect_control_base_12",
     "acitve_special_effect": "modifier_sect_control_centaur_12",
     "heroid": "",
-    "Abilityid": "ability1_centaur_hoof_stomp"
+    "Abilityid": "imba_centaur_hoof_stomp"
   },
   {
     "id": "sect_control_4_earthshaker_3",
@@ -11148,7 +11148,7 @@
     "acitve_common_effect": "modifier_sect_control_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_earthshaker",
-    "Abilityid": "ability3_earthshaker_aftershock"
+    "Abilityid": "imba_earthshaker_aftershock"
   },
   {
     "id": "sect_control_8_earthshaker_3",
@@ -11160,7 +11160,7 @@
     "acitve_common_effect": "modifier_sect_control_base_8",
     "acitve_special_effect": "modifier_sect_control_earthshaker_8",
     "heroid": "building_hero_earthshaker",
-    "Abilityid": "ability3_earthshaker_aftershock"
+    "Abilityid": "imba_earthshaker_aftershock"
   },
   {
     "id": "sect_control_12_earthshaker_3",
@@ -11172,7 +11172,7 @@
     "acitve_common_effect": "modifier_sect_control_base_12",
     "acitve_special_effect": "modifier_sect_control_earthshaker_12",
     "heroid": "building_hero_earthshaker",
-    "Abilityid": "ability3_earthshaker_aftershock"
+    "Abilityid": "imba_earthshaker_aftershock"
   },
   {
     "id": "sect_control_4_grimstroke_4",
@@ -11184,7 +11184,7 @@
     "acitve_common_effect": "modifier_sect_control_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability3_grimstroke_spirit_walk"
+    "Abilityid": "imba_grimstroke_spirit_walk"
   },
   {
     "id": "sect_control_8_grimstroke_4",
@@ -11196,7 +11196,7 @@
     "acitve_common_effect": "modifier_sect_control_base_8",
     "acitve_special_effect": "modifier_sect_control_grimstroke_8",
     "heroid": "",
-    "Abilityid": "ability3_grimstroke_spirit_walk"
+    "Abilityid": "imba_grimstroke_spirit_walk"
   },
   {
     "id": "sect_control_12_grimstroke_4",
@@ -11208,7 +11208,7 @@
     "acitve_common_effect": "modifier_sect_control_base_12",
     "acitve_special_effect": "modifier_sect_control_grimstroke_12",
     "heroid": "",
-    "Abilityid": "ability3_grimstroke_spirit_walk"
+    "Abilityid": "imba_grimstroke_spirit_walk"
   },
   {
     "id": "sect_control_4_invoker_5",
@@ -11220,7 +11220,7 @@
     "acitve_common_effect": "modifier_sect_control_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": ""
+    "Abilityid": "imba_invoker_deafening_blast"
   },
   {
     "id": "sect_control_8_invoker_5",
@@ -11232,7 +11232,7 @@
     "acitve_common_effect": "modifier_sect_control_base_8",
     "acitve_special_effect": "modifier_sect_control_invoker_8",
     "heroid": "",
-    "Abilityid": ""
+    "Abilityid": "imba_invoker_deafening_blast"
   },
   {
     "id": "sect_control_12_invoker_5",
@@ -11244,7 +11244,7 @@
     "acitve_common_effect": "modifier_sect_control_base_12",
     "acitve_special_effect": "modifier_sect_control_invoker_12",
     "heroid": "",
-    "Abilityid": ""
+    "Abilityid": "imba_invoker_deafening_blast"
   },
   {
     "id": "sect_control_4_kunkka_6",
@@ -11256,7 +11256,7 @@
     "acitve_common_effect": "modifier_sect_control_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_kunkka_ghostship"
+    "Abilityid": "imba_kunkka_ghostship"
   },
   {
     "id": "sect_control_8_kunkka_6",
@@ -11268,7 +11268,7 @@
     "acitve_common_effect": "modifier_sect_control_base_8",
     "acitve_special_effect": "modifier_sect_control_kunkka_8",
     "heroid": "",
-    "Abilityid": "ability6_kunkka_ghostship"
+    "Abilityid": "imba_kunkka_ghostship"
   },
   {
     "id": "sect_control_12_kunkka_6",
@@ -11280,7 +11280,7 @@
     "acitve_common_effect": "modifier_sect_control_base_12",
     "acitve_special_effect": "modifier_sect_control_kunkka_12",
     "heroid": "",
-    "Abilityid": "ability6_kunkka_ghostship"
+    "Abilityid": "imba_kunkka_ghostship"
   },
   {
     "id": "sect_control_4_magnataur_7",
@@ -11292,7 +11292,7 @@
     "acitve_common_effect": "modifier_sect_control_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_magnataur_reverse_polarity"
+    "Abilityid": "imba_magnataur_reverse_polarity"
   },
   {
     "id": "sect_control_8_magnataur_7",
@@ -11304,7 +11304,7 @@
     "acitve_common_effect": "modifier_sect_control_base_8",
     "acitve_special_effect": "modifier_sect_control_magnataur_8",
     "heroid": "",
-    "Abilityid": "ability6_magnataur_reverse_polarity"
+    "Abilityid": "imba_magnataur_reverse_polarity"
   },
   {
     "id": "sect_control_12_magnataur_7",
@@ -11316,7 +11316,7 @@
     "acitve_common_effect": "modifier_sect_control_base_12",
     "acitve_special_effect": "modifier_sect_control_magnataur_12",
     "heroid": "",
-    "Abilityid": "ability6_magnataur_reverse_polarity"
+    "Abilityid": "imba_magnataur_reverse_polarity"
   },
   {
     "id": "sect_control_4_nyx_assassin_8",
@@ -11328,7 +11328,7 @@
     "acitve_common_effect": "modifier_sect_control_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability1_nyx_assassin_impale"
+    "Abilityid": "imba_nyx_assassin_impale"
   },
   {
     "id": "sect_control_8_nyx_assassin_8",
@@ -11340,7 +11340,7 @@
     "acitve_common_effect": "modifier_sect_control_base_8",
     "acitve_special_effect": "modifier_sect_control_nyx_assassin_8",
     "heroid": "",
-    "Abilityid": "ability1_nyx_assassin_impale"
+    "Abilityid": "imba_nyx_assassin_impale"
   },
   {
     "id": "sect_control_12_nyx_assassin_8",
@@ -11352,7 +11352,7 @@
     "acitve_common_effect": "modifier_sect_control_base_12",
     "acitve_special_effect": "modifier_sect_control_nyx_assassin_12",
     "heroid": "",
-    "Abilityid": "ability1_nyx_assassin_impale"
+    "Abilityid": "imba_nyx_assassin_impale"
   },
   {
     "id": "sect_control_4_primal_beast_9",
@@ -11364,7 +11364,7 @@
     "acitve_common_effect": "modifier_sect_control_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_primal_beast_pulverize"
+    "Abilityid": "imba_primal_beast_pulverize"
   },
   {
     "id": "sect_control_8_primal_beast_9",
@@ -11376,7 +11376,7 @@
     "acitve_common_effect": "modifier_sect_control_base_8",
     "acitve_special_effect": "modifier_sect_control_primal_beast_8",
     "heroid": "",
-    "Abilityid": "ability6_primal_beast_pulverize"
+    "Abilityid": "imba_primal_beast_pulverize"
   },
   {
     "id": "sect_control_12_primal_beast_9",
@@ -11388,7 +11388,7 @@
     "acitve_common_effect": "modifier_sect_control_base_12",
     "acitve_special_effect": "modifier_sect_control_primal_beast_12",
     "heroid": "",
-    "Abilityid": "ability6_primal_beast_pulverize"
+    "Abilityid": "imba_primal_beast_pulverize"
   },
   {
     "id": "sect_control_4_sandking_10",
@@ -11400,7 +11400,7 @@
     "acitve_common_effect": "modifier_sect_control_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_sandking",
-    "Abilityid": "ability1_sandking_burrowstrike"
+    "Abilityid": "imba_sandking_burrowstrike"
   },
   {
     "id": "sect_control_8_sandking_10",
@@ -11412,7 +11412,7 @@
     "acitve_common_effect": "modifier_sect_control_base_8",
     "acitve_special_effect": "modifier_sect_control_sandking_8",
     "heroid": "building_hero_sandking",
-    "Abilityid": "ability1_sandking_burrowstrike"
+    "Abilityid": "imba_sandking_burrowstrike"
   },
   {
     "id": "sect_control_12_sandking_10",
@@ -11424,7 +11424,7 @@
     "acitve_common_effect": "modifier_sect_control_base_12",
     "acitve_special_effect": "modifier_sect_control_sandking_12",
     "heroid": "building_hero_sandking",
-    "Abilityid": "ability1_sandking_burrowstrike"
+    "Abilityid": "imba_sandking_burrowstrike"
   },
   {
     "id": "sect_control_4_slardar_11",
@@ -11436,7 +11436,7 @@
     "acitve_common_effect": "modifier_sect_control_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_slardar",
-    "Abilityid": "ability2_slardar_slithereen_crush"
+    "Abilityid": "imba_slardar_slithereen_crush"
   },
   {
     "id": "sect_control_8_slardar_11",
@@ -11448,7 +11448,7 @@
     "acitve_common_effect": "modifier_sect_control_base_8",
     "acitve_special_effect": "modifier_sect_control_slardar_8",
     "heroid": "building_hero_slardar",
-    "Abilityid": "ability2_slardar_slithereen_crush"
+    "Abilityid": "imba_slardar_slithereen_crush"
   },
   {
     "id": "sect_control_12_slardar_11",
@@ -11460,7 +11460,7 @@
     "acitve_common_effect": "modifier_sect_control_base_12",
     "acitve_special_effect": "modifier_sect_control_slardar_12",
     "heroid": "building_hero_slardar",
-    "Abilityid": "ability2_slardar_slithereen_crush"
+    "Abilityid": "imba_slardar_slithereen_crush"
   },
   {
     "id": "sect_control_4_sven_12",
@@ -11472,7 +11472,7 @@
     "acitve_common_effect": "modifier_sect_control_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability1_sven_storm_bolt"
+    "Abilityid": "imba_sven_storm_bolt"
   },
   {
     "id": "sect_control_8_sven_12",
@@ -11484,7 +11484,7 @@
     "acitve_common_effect": "modifier_sect_control_base_8",
     "acitve_special_effect": "modifier_sect_control_sven_8",
     "heroid": "",
-    "Abilityid": "ability1_sven_storm_bolt"
+    "Abilityid": "imba_sven_storm_bolt"
   },
   {
     "id": "sect_control_12_sven_12",
@@ -11496,7 +11496,7 @@
     "acitve_common_effect": "modifier_sect_control_base_12",
     "acitve_special_effect": "modifier_sect_control_sven_12",
     "heroid": "",
-    "Abilityid": "ability1_sven_storm_bolt"
+    "Abilityid": "imba_sven_storm_bolt"
   },
   {
     "id": "sect_control_4_tidehunter_13",
@@ -11508,7 +11508,7 @@
     "acitve_common_effect": "modifier_sect_control_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_tidehunter_ravage"
+    "Abilityid": "imba_tidehunter_ravage"
   },
   {
     "id": "sect_control_8_tidehunter_13",
@@ -11520,7 +11520,7 @@
     "acitve_common_effect": "modifier_sect_control_base_8",
     "acitve_special_effect": "modifier_sect_control_tidehunter_8",
     "heroid": "",
-    "Abilityid": "ability6_tidehunter_ravage"
+    "Abilityid": "imba_tidehunter_ravage"
   },
   {
     "id": "sect_control_12_tidehunter_13",
@@ -11532,7 +11532,7 @@
     "acitve_common_effect": "modifier_sect_control_base_12",
     "acitve_special_effect": "modifier_sect_control_tidehunter_12",
     "heroid": "",
-    "Abilityid": "ability6_tidehunter_ravage"
+    "Abilityid": "imba_tidehunter_ravage"
   },
   {
     "id": "sect_control_4_tiny_14",
@@ -11544,7 +11544,7 @@
     "acitve_common_effect": "modifier_sect_control_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_tiny",
-    "Abilityid": "ability1_tiny_avalanche"
+    "Abilityid": "imba_tiny_avalanche"
   },
   {
     "id": "sect_control_8_tiny_14",
@@ -11556,7 +11556,7 @@
     "acitve_common_effect": "modifier_sect_control_base_8",
     "acitve_special_effect": "modifier_sect_control_tiny_8",
     "heroid": "building_hero_tiny",
-    "Abilityid": "ability1_tiny_avalanche"
+    "Abilityid": "imba_tiny_avalanche"
   },
   {
     "id": "sect_control_12_tiny_14",
@@ -11568,7 +11568,7 @@
     "acitve_common_effect": "modifier_sect_control_base_12",
     "acitve_special_effect": "modifier_sect_control_tiny_12",
     "heroid": "building_hero_tiny",
-    "Abilityid": "ability1_tiny_avalanche"
+    "Abilityid": "imba_tiny_avalanche"
   },
   {
     "id": "sect_control_4_windrunner_15",
@@ -11580,7 +11580,7 @@
     "acitve_common_effect": "modifier_sect_control_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability1_windrunner_shackleshot"
+    "Abilityid": "imba_windrunner_shackleshot"
   },
   {
     "id": "sect_control_8_windrunner_15",
@@ -11592,7 +11592,7 @@
     "acitve_common_effect": "modifier_sect_control_base_8",
     "acitve_special_effect": "modifier_sect_control_windrunner_8",
     "heroid": "",
-    "Abilityid": "ability1_windrunner_shackleshot"
+    "Abilityid": "imba_windrunner_shackleshot"
   },
   {
     "id": "sect_control_12_windrunner_15",
@@ -11604,7 +11604,7 @@
     "acitve_common_effect": "modifier_sect_control_base_12",
     "acitve_special_effect": "modifier_sect_control_windrunner_12",
     "heroid": "",
-    "Abilityid": "ability1_windrunner_shackleshot"
+    "Abilityid": "imba_windrunner_shackleshot"
   },
   {
     "id": "sect_control_4_witch_doctor_16",
@@ -11616,7 +11616,7 @@
     "acitve_common_effect": "modifier_sect_control_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_witch_doctor",
-    "Abilityid": "ability1_witch_doctor_paralyzing_cask"
+    "Abilityid": "imba_witch_doctor_paralyzing_cask"
   },
   {
     "id": "sect_control_8_witch_doctor_16",
@@ -11628,7 +11628,7 @@
     "acitve_common_effect": "modifier_sect_control_base_8",
     "acitve_special_effect": "modifier_sect_control_witch_doctor_8",
     "heroid": "building_hero_witch_doctor",
-    "Abilityid": "ability1_witch_doctor_paralyzing_cask"
+    "Abilityid": "imba_witch_doctor_paralyzing_cask"
   },
   {
     "id": "sect_control_12_witch_doctor_16",
@@ -11640,7 +11640,7 @@
     "acitve_common_effect": "modifier_sect_control_base_12",
     "acitve_special_effect": "modifier_sect_control_witch_doctor_12",
     "heroid": "building_hero_witch_doctor",
-    "Abilityid": "ability1_witch_doctor_paralyzing_cask"
+    "Abilityid": "imba_witch_doctor_paralyzing_cask"
   },
   {
     "id": "sect_copy_3_antimage_1",
@@ -11652,7 +11652,7 @@
     "acitve_common_effect": "modifier_sect_copy_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": ""
+    "Abilityid": "imba_antimage_blink_fragment"
   },
   {
     "id": "sect_copy_6_antimage_1",
@@ -11664,7 +11664,7 @@
     "acitve_common_effect": "modifier_sect_copy_base_6",
     "acitve_special_effect": "modifier_sect_copy_antimage_6",
     "heroid": "",
-    "Abilityid": ""
+    "Abilityid": "imba_antimage_blink_fragment"
   },
   {
     "id": "sect_copy_9_antimage_1",
@@ -11676,7 +11676,7 @@
     "acitve_common_effect": "modifier_sect_copy_base_9",
     "acitve_special_effect": "modifier_sect_copy_antimage_9",
     "heroid": "",
-    "Abilityid": ""
+    "Abilityid": "imba_antimage_blink_fragment"
   },
   {
     "id": "sect_copy_3_arc_warden_2",
@@ -11688,7 +11688,7 @@
     "acitve_common_effect": "modifier_sect_copy_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_arc_warden_tempest_double"
+    "Abilityid": "imba_arc_warden_tempest_double"
   },
   {
     "id": "sect_copy_6_arc_warden_2",
@@ -11700,7 +11700,7 @@
     "acitve_common_effect": "modifier_sect_copy_base_6",
     "acitve_special_effect": "modifier_sect_copy_arc_warden_6",
     "heroid": "",
-    "Abilityid": "ability6_arc_warden_tempest_double"
+    "Abilityid": "imba_arc_warden_tempest_double"
   },
   {
     "id": "sect_copy_9_arc_warden_2",
@@ -11712,7 +11712,7 @@
     "acitve_common_effect": "modifier_sect_copy_base_9",
     "acitve_special_effect": "modifier_sect_copy_arc_warden_9",
     "heroid": "",
-    "Abilityid": "ability6_arc_warden_tempest_double"
+    "Abilityid": "imba_arc_warden_tempest_double"
   },
   {
     "id": "sect_copy_3_chaos_knight_3",
@@ -11724,7 +11724,7 @@
     "acitve_common_effect": "modifier_sect_copy_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_chaos_knight_phantasm"
+    "Abilityid": "imba_chaos_knight_phantasm"
   },
   {
     "id": "sect_copy_6_chaos_knight_3",
@@ -11736,7 +11736,7 @@
     "acitve_common_effect": "modifier_sect_copy_base_6",
     "acitve_special_effect": "modifier_sect_copy_chaos_knight_6",
     "heroid": "",
-    "Abilityid": "ability6_chaos_knight_phantasm"
+    "Abilityid": "imba_chaos_knight_phantasm"
   },
   {
     "id": "sect_copy_9_chaos_knight_3",
@@ -11748,7 +11748,7 @@
     "acitve_common_effect": "modifier_sect_copy_base_9",
     "acitve_special_effect": "modifier_sect_copy_chaos_knight_9",
     "heroid": "",
-    "Abilityid": "ability6_chaos_knight_phantasm"
+    "Abilityid": "imba_chaos_knight_phantasm"
   },
   {
     "id": "sect_copy_3_dark_seer_4",
@@ -11760,7 +11760,7 @@
     "acitve_common_effect": "modifier_sect_copy_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_dark_seer_wall_of_replica"
+    "Abilityid": "imba_dark_seer_wall_of_replica"
   },
   {
     "id": "sect_copy_6_dark_seer_4",
@@ -11772,7 +11772,7 @@
     "acitve_common_effect": "modifier_sect_copy_base_6",
     "acitve_special_effect": "modifier_sect_copy_dark_seer_6",
     "heroid": "",
-    "Abilityid": "ability6_dark_seer_wall_of_replica"
+    "Abilityid": "imba_dark_seer_wall_of_replica"
   },
   {
     "id": "sect_copy_9_dark_seer_4",
@@ -11784,7 +11784,7 @@
     "acitve_common_effect": "modifier_sect_copy_base_9",
     "acitve_special_effect": "modifier_sect_copy_dark_seer_9",
     "heroid": "",
-    "Abilityid": "ability6_dark_seer_wall_of_replica"
+    "Abilityid": "imba_dark_seer_wall_of_replica"
   },
   {
     "id": "sect_copy_3_meepo_5",
@@ -11796,7 +11796,7 @@
     "acitve_common_effect": "modifier_sect_copy_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_meepo_divided_we_stand"
+    "Abilityid": "imba_meepo_divided_we_stand"
   },
   {
     "id": "sect_copy_6_meepo_5",
@@ -11808,7 +11808,7 @@
     "acitve_common_effect": "modifier_sect_copy_base_6",
     "acitve_special_effect": "modifier_sect_copy_meepo_6",
     "heroid": "",
-    "Abilityid": "ability6_meepo_divided_we_stand"
+    "Abilityid": "imba_meepo_divided_we_stand"
   },
   {
     "id": "sect_copy_9_meepo_5",
@@ -11820,7 +11820,7 @@
     "acitve_common_effect": "modifier_sect_copy_base_9",
     "acitve_special_effect": "modifier_sect_copy_meepo_9",
     "heroid": "",
-    "Abilityid": "ability6_meepo_divided_we_stand"
+    "Abilityid": "imba_meepo_divided_we_stand"
   },
   {
     "id": "sect_copy_3_naga_siren_6",
@@ -11832,7 +11832,7 @@
     "acitve_common_effect": "modifier_sect_copy_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_naga_siren",
-    "Abilityid": "ability1_naga_siren_mirror_image"
+    "Abilityid": "imba_naga_siren_mirror_image"
   },
   {
     "id": "sect_copy_6_naga_siren_6",
@@ -11844,7 +11844,7 @@
     "acitve_common_effect": "modifier_sect_copy_base_6",
     "acitve_special_effect": "modifier_sect_copy_naga_siren_6",
     "heroid": "building_hero_naga_siren",
-    "Abilityid": "ability1_naga_siren_mirror_image"
+    "Abilityid": "imba_naga_siren_mirror_image"
   },
   {
     "id": "sect_copy_9_naga_siren_6",
@@ -11856,7 +11856,7 @@
     "acitve_common_effect": "modifier_sect_copy_base_9",
     "acitve_special_effect": "modifier_sect_copy_naga_siren_9",
     "heroid": "building_hero_naga_siren",
-    "Abilityid": "ability1_naga_siren_mirror_image"
+    "Abilityid": "imba_naga_siren_mirror_image"
   },
   {
     "id": "sect_copy_3_phantom_lancer_7",
@@ -11868,7 +11868,7 @@
     "acitve_common_effect": "modifier_sect_copy_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability2_phantom_lancer_doppelwalk"
+    "Abilityid": "imba_phantom_lancer_doppelwalk"
   },
   {
     "id": "sect_copy_6_phantom_lancer_7",
@@ -11880,7 +11880,7 @@
     "acitve_common_effect": "modifier_sect_copy_base_6",
     "acitve_special_effect": "modifier_sect_copy_phantom_lancer_6",
     "heroid": "",
-    "Abilityid": "ability2_phantom_lancer_doppelwalk"
+    "Abilityid": "imba_phantom_lancer_doppelwalk"
   },
   {
     "id": "sect_copy_9_phantom_lancer_7",
@@ -11892,7 +11892,7 @@
     "acitve_common_effect": "modifier_sect_copy_base_9",
     "acitve_special_effect": "modifier_sect_copy_phantom_lancer_9",
     "heroid": "",
-    "Abilityid": "ability2_phantom_lancer_doppelwalk"
+    "Abilityid": "imba_phantom_lancer_doppelwalk"
   },
   {
     "id": "sect_copy_3_phantom_lancer_8",
@@ -11904,7 +11904,7 @@
     "acitve_common_effect": "modifier_sect_copy_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_phantom_lancer_juxtapose"
+    "Abilityid": "imba_phantom_lancer_juxtapose"
   },
   {
     "id": "sect_copy_6_phantom_lancer_8",
@@ -11916,7 +11916,7 @@
     "acitve_common_effect": "modifier_sect_copy_base_6",
     "acitve_special_effect": "modifier_sect_copy_phantom_lancer_6",
     "heroid": "",
-    "Abilityid": "ability6_phantom_lancer_juxtapose"
+    "Abilityid": "imba_phantom_lancer_juxtapose"
   },
   {
     "id": "sect_copy_9_phantom_lancer_8",
@@ -11928,7 +11928,7 @@
     "acitve_common_effect": "modifier_sect_copy_base_9",
     "acitve_special_effect": "modifier_sect_copy_phantom_lancer_9",
     "heroid": "",
-    "Abilityid": "ability6_phantom_lancer_juxtapose"
+    "Abilityid": "imba_phantom_lancer_juxtapose"
   },
   {
     "id": "sect_copy_3_phantom_lancer_9",
@@ -11940,7 +11940,7 @@
     "acitve_common_effect": "modifier_sect_copy_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_phantom_lancer",
-    "Abilityid": "ability1_phantom_lancer_spirit_lance"
+    "Abilityid": "imba_phantom_lancer_spirit_lance"
   },
   {
     "id": "sect_copy_6_phantom_lancer_9",
@@ -11952,7 +11952,7 @@
     "acitve_common_effect": "modifier_sect_copy_base_6",
     "acitve_special_effect": "modifier_sect_copy_phantom_lancer_6",
     "heroid": "building_hero_phantom_lancer",
-    "Abilityid": "ability1_phantom_lancer_spirit_lance"
+    "Abilityid": "imba_phantom_lancer_spirit_lance"
   },
   {
     "id": "sect_copy_9_phantom_lancer_9",
@@ -11964,7 +11964,7 @@
     "acitve_common_effect": "modifier_sect_copy_base_9",
     "acitve_special_effect": "modifier_sect_copy_phantom_lancer_9",
     "heroid": "building_hero_phantom_lancer",
-    "Abilityid": "ability1_phantom_lancer_spirit_lance"
+    "Abilityid": "imba_phantom_lancer_spirit_lance"
   },
   {
     "id": "sect_copy_3_shadow_demon_10",
@@ -11976,7 +11976,7 @@
     "acitve_common_effect": "modifier_sect_copy_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_shadow_demon",
-    "Abilityid": "ability1_shadow_demon_disruption"
+    "Abilityid": "imba_shadow_demon_disruption"
   },
   {
     "id": "sect_copy_6_shadow_demon_10",
@@ -11988,7 +11988,7 @@
     "acitve_common_effect": "modifier_sect_copy_base_6",
     "acitve_special_effect": "modifier_sect_copy_shadow_demon_6",
     "heroid": "building_hero_shadow_demon",
-    "Abilityid": "ability1_shadow_demon_disruption"
+    "Abilityid": "imba_shadow_demon_disruption"
   },
   {
     "id": "sect_copy_9_shadow_demon_10",
@@ -12000,7 +12000,7 @@
     "acitve_common_effect": "modifier_sect_copy_base_9",
     "acitve_special_effect": "modifier_sect_copy_shadow_demon_9",
     "heroid": "building_hero_shadow_demon",
-    "Abilityid": "ability1_shadow_demon_disruption"
+    "Abilityid": "imba_shadow_demon_disruption"
   },
   {
     "id": "sect_copy_3_spectre_11",
@@ -12012,7 +12012,7 @@
     "acitve_common_effect": "modifier_sect_copy_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_spectre_haunt"
+    "Abilityid": "imba_spectre_haunt"
   },
   {
     "id": "sect_copy_6_spectre_11",
@@ -12024,7 +12024,7 @@
     "acitve_common_effect": "modifier_sect_copy_base_6",
     "acitve_special_effect": "modifier_sect_copy_spectre_6",
     "heroid": "",
-    "Abilityid": "ability6_spectre_haunt"
+    "Abilityid": "imba_spectre_haunt"
   },
   {
     "id": "sect_copy_9_spectre_11",
@@ -12036,7 +12036,7 @@
     "acitve_common_effect": "modifier_sect_copy_base_9",
     "acitve_special_effect": "modifier_sect_copy_spectre_9",
     "heroid": "",
-    "Abilityid": "ability6_spectre_haunt"
+    "Abilityid": "imba_spectre_haunt"
   },
   {
     "id": "sect_copy_3_terrorblade_12",
@@ -12048,7 +12048,7 @@
     "acitve_common_effect": "modifier_sect_copy_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_terrorblade",
-    "Abilityid": "ability2_terrorblade_conjure_image"
+    "Abilityid": "imba_terrorblade_conjure_image"
   },
   {
     "id": "sect_copy_6_terrorblade_12",
@@ -12060,7 +12060,7 @@
     "acitve_common_effect": "modifier_sect_copy_base_6",
     "acitve_special_effect": "modifier_sect_copy_terrorblade_6",
     "heroid": "building_hero_terrorblade",
-    "Abilityid": "ability2_terrorblade_conjure_image"
+    "Abilityid": "imba_terrorblade_conjure_image"
   },
   {
     "id": "sect_copy_9_terrorblade_12",
@@ -12072,7 +12072,7 @@
     "acitve_common_effect": "modifier_sect_copy_base_9",
     "acitve_special_effect": "modifier_sect_copy_terrorblade_9",
     "heroid": "building_hero_terrorblade",
-    "Abilityid": "ability2_terrorblade_conjure_image"
+    "Abilityid": "imba_terrorblade_conjure_image"
   },
   {
     "id": "sect_copy_3_terrorblade_13",
@@ -12084,7 +12084,7 @@
     "acitve_common_effect": "modifier_sect_copy_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability1_terrorblade_reflection"
+    "Abilityid": "imba_terrorblade_reflection"
   },
   {
     "id": "sect_copy_6_terrorblade_13",
@@ -12096,7 +12096,7 @@
     "acitve_common_effect": "modifier_sect_copy_base_6",
     "acitve_special_effect": "modifier_sect_copy_terrorblade_6",
     "heroid": "",
-    "Abilityid": "ability1_terrorblade_reflection"
+    "Abilityid": "imba_terrorblade_reflection"
   },
   {
     "id": "sect_copy_9_terrorblade_13",
@@ -12108,7 +12108,7 @@
     "acitve_common_effect": "modifier_sect_copy_base_9",
     "acitve_special_effect": "modifier_sect_copy_terrorblade_9",
     "heroid": "",
-    "Abilityid": "ability1_terrorblade_reflection"
+    "Abilityid": "imba_terrorblade_reflection"
   },
   {
     "id": "sect_demon_3_abyssal_underlord_1",
@@ -12120,7 +12120,7 @@
     "acitve_common_effect": "modifier_sect_demon_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_abyssal_underlord_dark_rift"
+    "Abilityid": "imba_abyssal_underlord_dark_rift"
   },
   {
     "id": "sect_demon_6_abyssal_underlord_1",
@@ -12132,7 +12132,7 @@
     "acitve_common_effect": "modifier_sect_demon_base_6",
     "acitve_special_effect": "modifier_sect_demon_abyssal_underlord_6",
     "heroid": "",
-    "Abilityid": "ability6_abyssal_underlord_dark_rift"
+    "Abilityid": "imba_abyssal_underlord_dark_rift"
   },
   {
     "id": "sect_demon_9_abyssal_underlord_1",
@@ -12144,7 +12144,7 @@
     "acitve_common_effect": "modifier_sect_demon_base_9",
     "acitve_special_effect": "modifier_sect_demon_abyssal_underlord_9",
     "heroid": "",
-    "Abilityid": "ability6_abyssal_underlord_dark_rift"
+    "Abilityid": "imba_abyssal_underlord_dark_rift"
   },
   {
     "id": "sect_demon_3_bloodseeker_2",
@@ -12156,7 +12156,7 @@
     "acitve_common_effect": "modifier_sect_demon_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_bloodseeker_rupture"
+    "Abilityid": "imba_bloodseeker_rupture"
   },
   {
     "id": "sect_demon_6_bloodseeker_2",
@@ -12168,7 +12168,7 @@
     "acitve_common_effect": "modifier_sect_demon_base_6",
     "acitve_special_effect": "modifier_sect_demon_bloodseeker_6",
     "heroid": "",
-    "Abilityid": "ability6_bloodseeker_rupture"
+    "Abilityid": "imba_bloodseeker_rupture"
   },
   {
     "id": "sect_demon_9_bloodseeker_2",
@@ -12180,7 +12180,7 @@
     "acitve_common_effect": "modifier_sect_demon_base_9",
     "acitve_special_effect": "modifier_sect_demon_bloodseeker_9",
     "heroid": "",
-    "Abilityid": "ability6_bloodseeker_rupture"
+    "Abilityid": "imba_bloodseeker_rupture"
   },
   {
     "id": "sect_demon_3_chaos_knight_3",
@@ -12192,7 +12192,7 @@
     "acitve_common_effect": "modifier_sect_demon_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_chaos_knight",
-    "Abilityid": "ability1_chaos_knight_chaos_bolt"
+    "Abilityid": "imba_chaos_knight_chaos_bolt"
   },
   {
     "id": "sect_demon_6_chaos_knight_3",
@@ -12204,7 +12204,7 @@
     "acitve_common_effect": "modifier_sect_demon_base_6",
     "acitve_special_effect": "modifier_sect_demon_chaos_knight_6",
     "heroid": "building_hero_chaos_knight",
-    "Abilityid": "ability1_chaos_knight_chaos_bolt"
+    "Abilityid": "imba_chaos_knight_chaos_bolt"
   },
   {
     "id": "sect_demon_9_chaos_knight_3",
@@ -12216,7 +12216,7 @@
     "acitve_common_effect": "modifier_sect_demon_base_9",
     "acitve_special_effect": "modifier_sect_demon_chaos_knight_9",
     "heroid": "building_hero_chaos_knight",
-    "Abilityid": "ability1_chaos_knight_chaos_bolt"
+    "Abilityid": "imba_chaos_knight_chaos_bolt"
   },
   {
     "id": "sect_demon_3_doom_bringer_4",
@@ -12228,7 +12228,7 @@
     "acitve_common_effect": "modifier_sect_demon_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_doom_bringer",
-    "Abilityid": "ability2_doom_bringer_scorched_earth"
+    "Abilityid": "imba_doom_bringer_scorched_earth"
   },
   {
     "id": "sect_demon_6_doom_bringer_4",
@@ -12240,7 +12240,7 @@
     "acitve_common_effect": "modifier_sect_demon_base_6",
     "acitve_special_effect": "modifier_sect_demon_doom_bringer_6",
     "heroid": "building_hero_doom_bringer",
-    "Abilityid": "ability2_doom_bringer_scorched_earth"
+    "Abilityid": "imba_doom_bringer_scorched_earth"
   },
   {
     "id": "sect_demon_9_doom_bringer_4",
@@ -12252,7 +12252,7 @@
     "acitve_common_effect": "modifier_sect_demon_base_9",
     "acitve_special_effect": "modifier_sect_demon_doom_bringer_9",
     "heroid": "building_hero_doom_bringer",
-    "Abilityid": "ability2_doom_bringer_scorched_earth"
+    "Abilityid": "imba_doom_bringer_scorched_earth"
   },
   {
     "id": "sect_demon_3_enigma_5",
@@ -12264,7 +12264,7 @@
     "acitve_common_effect": "modifier_sect_demon_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_enigma",
-    "Abilityid": "ability2_enigma_demonic_conversion"
+    "Abilityid": "imba_enigma_demonic_conversion"
   },
   {
     "id": "sect_demon_6_enigma_5",
@@ -12276,7 +12276,7 @@
     "acitve_common_effect": "modifier_sect_demon_base_6",
     "acitve_special_effect": "modifier_sect_demon_enigma_6",
     "heroid": "building_hero_enigma",
-    "Abilityid": "ability2_enigma_demonic_conversion"
+    "Abilityid": "imba_enigma_demonic_conversion"
   },
   {
     "id": "sect_demon_9_enigma_5",
@@ -12288,7 +12288,7 @@
     "acitve_common_effect": "modifier_sect_demon_base_9",
     "acitve_special_effect": "modifier_sect_demon_enigma_9",
     "heroid": "building_hero_enigma",
-    "Abilityid": "ability2_enigma_demonic_conversion"
+    "Abilityid": "imba_enigma_demonic_conversion"
   },
   {
     "id": "sect_demon_3_leshrac_6",
@@ -12300,7 +12300,7 @@
     "acitve_common_effect": "modifier_sect_demon_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_leshrac",
-    "Abilityid": "ability2_leshrac_diabolic_edict"
+    "Abilityid": "imba_leshrac_diabolic_edict"
   },
   {
     "id": "sect_demon_6_leshrac_6",
@@ -12312,7 +12312,7 @@
     "acitve_common_effect": "modifier_sect_demon_base_6",
     "acitve_special_effect": "modifier_sect_demon_leshrac_6",
     "heroid": "building_hero_leshrac",
-    "Abilityid": "ability2_leshrac_diabolic_edict"
+    "Abilityid": "imba_leshrac_diabolic_edict"
   },
   {
     "id": "sect_demon_9_leshrac_6",
@@ -12324,7 +12324,7 @@
     "acitve_common_effect": "modifier_sect_demon_base_9",
     "acitve_special_effect": "modifier_sect_demon_leshrac_9",
     "heroid": "building_hero_leshrac",
-    "Abilityid": "ability2_leshrac_diabolic_edict"
+    "Abilityid": "imba_leshrac_diabolic_edict"
   },
   {
     "id": "sect_demon_3_lion_7",
@@ -12336,7 +12336,7 @@
     "acitve_common_effect": "modifier_sect_demon_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_lion",
-    "Abilityid": "ability1_lion_impale"
+    "Abilityid": "imba_lion_impale"
   },
   {
     "id": "sect_demon_6_lion_7",
@@ -12348,7 +12348,7 @@
     "acitve_common_effect": "modifier_sect_demon_base_6",
     "acitve_special_effect": "modifier_sect_demon_lion_6",
     "heroid": "building_hero_lion",
-    "Abilityid": "ability1_lion_impale"
+    "Abilityid": "imba_lion_impale"
   },
   {
     "id": "sect_demon_9_lion_7",
@@ -12360,7 +12360,7 @@
     "acitve_common_effect": "modifier_sect_demon_base_9",
     "acitve_special_effect": "modifier_sect_demon_lion_9",
     "heroid": "building_hero_lion",
-    "Abilityid": "ability1_lion_impale"
+    "Abilityid": "imba_lion_impale"
   },
   {
     "id": "sect_demon_3_nevermore_8",
@@ -12372,7 +12372,7 @@
     "acitve_common_effect": "modifier_sect_demon_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_nevermore",
-    "Abilityid": "ability4_nevermore_necromastery"
+    "Abilityid": "imba_nevermore_necromastery"
   },
   {
     "id": "sect_demon_6_nevermore_8",
@@ -12384,7 +12384,7 @@
     "acitve_common_effect": "modifier_sect_demon_base_6",
     "acitve_special_effect": "modifier_sect_demon_nevermore_6",
     "heroid": "building_hero_nevermore",
-    "Abilityid": "ability4_nevermore_necromastery"
+    "Abilityid": "imba_nevermore_necromastery"
   },
   {
     "id": "sect_demon_9_nevermore_8",
@@ -12396,7 +12396,7 @@
     "acitve_common_effect": "modifier_sect_demon_base_9",
     "acitve_special_effect": "modifier_sect_demon_nevermore_9",
     "heroid": "building_hero_nevermore",
-    "Abilityid": "ability4_nevermore_necromastery"
+    "Abilityid": "imba_nevermore_necromastery"
   },
   {
     "id": "sect_demon_3_night_stalker_9",
@@ -12408,7 +12408,7 @@
     "acitve_common_effect": "modifier_sect_demon_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_night_stalker",
-    "Abilityid": "ability3_night_stalker_hunter_in_the_night"
+    "Abilityid": "imba_night_stalker_hunter_in_the_night"
   },
   {
     "id": "sect_demon_6_night_stalker_9",
@@ -12420,7 +12420,7 @@
     "acitve_common_effect": "modifier_sect_demon_base_6",
     "acitve_special_effect": "modifier_sect_demon_night_stalker_6",
     "heroid": "building_hero_night_stalker",
-    "Abilityid": "ability3_night_stalker_hunter_in_the_night"
+    "Abilityid": "imba_night_stalker_hunter_in_the_night"
   },
   {
     "id": "sect_demon_9_night_stalker_9",
@@ -12432,7 +12432,7 @@
     "acitve_common_effect": "modifier_sect_demon_base_9",
     "acitve_special_effect": "modifier_sect_demon_night_stalker_9",
     "heroid": "building_hero_night_stalker",
-    "Abilityid": "ability3_night_stalker_hunter_in_the_night"
+    "Abilityid": "imba_night_stalker_hunter_in_the_night"
   },
   {
     "id": "sect_demon_3_obsidian_destroyer_10",
@@ -12444,7 +12444,7 @@
     "acitve_common_effect": "modifier_sect_demon_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_obsidian_destroyer",
-    "Abilityid": "ability1_obsidian_destroyer_arcane_orb"
+    "Abilityid": "imba_obsidian_destroyer_arcane_orb"
   },
   {
     "id": "sect_demon_6_obsidian_destroyer_10",
@@ -12456,7 +12456,7 @@
     "acitve_common_effect": "modifier_sect_demon_base_6",
     "acitve_special_effect": "modifier_sect_demon_obsidian_destroyer_6",
     "heroid": "building_hero_obsidian_destroyer",
-    "Abilityid": "ability1_obsidian_destroyer_arcane_orb"
+    "Abilityid": "imba_obsidian_destroyer_arcane_orb"
   },
   {
     "id": "sect_demon_9_obsidian_destroyer_10",
@@ -12468,7 +12468,7 @@
     "acitve_common_effect": "modifier_sect_demon_base_9",
     "acitve_special_effect": "modifier_sect_demon_obsidian_destroyer_9",
     "heroid": "building_hero_obsidian_destroyer",
-    "Abilityid": "ability1_obsidian_destroyer_arcane_orb"
+    "Abilityid": "imba_obsidian_destroyer_arcane_orb"
   },
   {
     "id": "sect_demon_3_queenofpain_11",
@@ -12480,7 +12480,7 @@
     "acitve_common_effect": "modifier_sect_demon_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_queenofpain_sonic_wave"
+    "Abilityid": "imba_queenofpain_sonic_wave"
   },
   {
     "id": "sect_demon_6_queenofpain_11",
@@ -12492,7 +12492,7 @@
     "acitve_common_effect": "modifier_sect_demon_base_6",
     "acitve_special_effect": "modifier_sect_demon_queenofpain_6",
     "heroid": "",
-    "Abilityid": "ability6_queenofpain_sonic_wave"
+    "Abilityid": "imba_queenofpain_sonic_wave"
   },
   {
     "id": "sect_demon_9_queenofpain_11",
@@ -12504,7 +12504,7 @@
     "acitve_common_effect": "modifier_sect_demon_base_9",
     "acitve_special_effect": "modifier_sect_demon_queenofpain_9",
     "heroid": "",
-    "Abilityid": "ability6_queenofpain_sonic_wave"
+    "Abilityid": "imba_queenofpain_sonic_wave"
   },
   {
     "id": "sect_demon_3_shadow_demon_12",
@@ -12516,7 +12516,7 @@
     "acitve_common_effect": "modifier_sect_demon_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_shadow_demon",
-    "Abilityid": "ability2_shadow_demon_soul_catcher"
+    "Abilityid": "imba_shadow_demon_soul_catcher"
   },
   {
     "id": "sect_demon_6_shadow_demon_12",
@@ -12528,7 +12528,7 @@
     "acitve_common_effect": "modifier_sect_demon_base_6",
     "acitve_special_effect": "modifier_sect_demon_shadow_demon_6",
     "heroid": "building_hero_shadow_demon",
-    "Abilityid": "ability2_shadow_demon_soul_catcher"
+    "Abilityid": "imba_shadow_demon_soul_catcher"
   },
   {
     "id": "sect_demon_9_shadow_demon_12",
@@ -12540,7 +12540,7 @@
     "acitve_common_effect": "modifier_sect_demon_base_9",
     "acitve_special_effect": "modifier_sect_demon_shadow_demon_9",
     "heroid": "building_hero_shadow_demon",
-    "Abilityid": "ability2_shadow_demon_soul_catcher"
+    "Abilityid": "imba_shadow_demon_soul_catcher"
   },
   {
     "id": "sect_demon_3_terrorblade_13",
@@ -12552,7 +12552,7 @@
     "acitve_common_effect": "modifier_sect_demon_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability4_terrorblade_demon_zeal"
+    "Abilityid": "imba_terrorblade_demon_zeal"
   },
   {
     "id": "sect_demon_6_terrorblade_13",
@@ -12564,7 +12564,7 @@
     "acitve_common_effect": "modifier_sect_demon_base_6",
     "acitve_special_effect": "modifier_sect_demon_terrorblade_6",
     "heroid": "",
-    "Abilityid": "ability4_terrorblade_demon_zeal"
+    "Abilityid": "imba_terrorblade_demon_zeal"
   },
   {
     "id": "sect_demon_9_terrorblade_13",
@@ -12576,7 +12576,7 @@
     "acitve_common_effect": "modifier_sect_demon_base_9",
     "acitve_special_effect": "modifier_sect_demon_terrorblade_9",
     "heroid": "",
-    "Abilityid": "ability4_terrorblade_demon_zeal"
+    "Abilityid": "imba_terrorblade_demon_zeal"
   },
   {
     "id": "sect_disarm_3_bane_1",
@@ -12588,7 +12588,7 @@
     "acitve_common_effect": "modifier_sect_disarm_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_bane",
-    "Abilityid": "ability3_bane_nightmare"
+    "Abilityid": "imba_bane_nightmare"
   },
   {
     "id": "sect_disarm_6_bane_1",
@@ -12600,7 +12600,7 @@
     "acitve_common_effect": "modifier_sect_disarm_base_6",
     "acitve_special_effect": "modifier_sect_disarm_bane_6",
     "heroid": "building_hero_bane",
-    "Abilityid": "ability3_bane_nightmare"
+    "Abilityid": "imba_bane_nightmare"
   },
   {
     "id": "sect_disarm_9_bane_1",
@@ -12612,7 +12612,7 @@
     "acitve_common_effect": "modifier_sect_disarm_base_9",
     "acitve_special_effect": "modifier_sect_disarm_bane_9",
     "heroid": "building_hero_bane",
-    "Abilityid": "ability3_bane_nightmare"
+    "Abilityid": "imba_bane_nightmare"
   },
   {
     "id": "sect_disarm_3_dark_willow_2",
@@ -12624,7 +12624,7 @@
     "acitve_common_effect": "modifier_sect_disarm_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_dark_willow_terrorize"
+    "Abilityid": "imba_dark_willow_terrorize"
   },
   {
     "id": "sect_disarm_6_dark_willow_2",
@@ -12636,7 +12636,7 @@
     "acitve_common_effect": "modifier_sect_disarm_base_6",
     "acitve_special_effect": "modifier_sect_disarm_dark_willow_6",
     "heroid": "",
-    "Abilityid": "ability6_dark_willow_terrorize"
+    "Abilityid": "imba_dark_willow_terrorize"
   },
   {
     "id": "sect_disarm_9_dark_willow_2",
@@ -12648,7 +12648,7 @@
     "acitve_common_effect": "modifier_sect_disarm_base_9",
     "acitve_special_effect": "modifier_sect_disarm_dark_willow_9",
     "heroid": "",
-    "Abilityid": "ability6_dark_willow_terrorize"
+    "Abilityid": "imba_dark_willow_terrorize"
   },
   {
     "id": "sect_disarm_3_huskar_3",
@@ -12660,7 +12660,7 @@
     "acitve_common_effect": "modifier_sect_disarm_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability1_huskar_inner_fire"
+    "Abilityid": "imba_huskar_inner_fire"
   },
   {
     "id": "sect_disarm_6_huskar_3",
@@ -12672,7 +12672,7 @@
     "acitve_common_effect": "modifier_sect_disarm_base_6",
     "acitve_special_effect": "modifier_sect_disarm_huskar_6",
     "heroid": "",
-    "Abilityid": "ability1_huskar_inner_fire"
+    "Abilityid": "imba_huskar_inner_fire"
   },
   {
     "id": "sect_disarm_9_huskar_3",
@@ -12684,7 +12684,7 @@
     "acitve_common_effect": "modifier_sect_disarm_base_9",
     "acitve_special_effect": "modifier_sect_disarm_huskar_9",
     "heroid": "",
-    "Abilityid": "ability1_huskar_inner_fire"
+    "Abilityid": "imba_huskar_inner_fire"
   },
   {
     "id": "sect_disarm_3_kunkka_4",
@@ -12696,7 +12696,7 @@
     "acitve_common_effect": "modifier_sect_disarm_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_kunkka",
-    "Abilityid": "ability1_kunkka_torrent"
+    "Abilityid": "imba_kunkka_torrent"
   },
   {
     "id": "sect_disarm_6_kunkka_4",
@@ -12708,7 +12708,7 @@
     "acitve_common_effect": "modifier_sect_disarm_base_6",
     "acitve_special_effect": "modifier_sect_disarm_kunkka_6",
     "heroid": "building_hero_kunkka",
-    "Abilityid": "ability1_kunkka_torrent"
+    "Abilityid": "imba_kunkka_torrent"
   },
   {
     "id": "sect_disarm_9_kunkka_4",
@@ -12720,7 +12720,7 @@
     "acitve_common_effect": "modifier_sect_disarm_base_9",
     "acitve_special_effect": "modifier_sect_disarm_kunkka_9",
     "heroid": "building_hero_kunkka",
-    "Abilityid": "ability1_kunkka_torrent"
+    "Abilityid": "imba_kunkka_torrent"
   },
   {
     "id": "sect_disarm_3_lone_druid_5",
@@ -12732,7 +12732,7 @@
     "acitve_common_effect": "modifier_sect_disarm_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability3_lone_druid_savage_roar"
+    "Abilityid": "imba_lone_druid_savage_roar"
   },
   {
     "id": "sect_disarm_6_lone_druid_5",
@@ -12744,7 +12744,7 @@
     "acitve_common_effect": "modifier_sect_disarm_base_6",
     "acitve_special_effect": "modifier_sect_disarm_lone_druid_6",
     "heroid": "",
-    "Abilityid": "ability3_lone_druid_savage_roar"
+    "Abilityid": "imba_lone_druid_savage_roar"
   },
   {
     "id": "sect_disarm_9_lone_druid_5",
@@ -12756,7 +12756,7 @@
     "acitve_common_effect": "modifier_sect_disarm_base_9",
     "acitve_special_effect": "modifier_sect_disarm_lone_druid_9",
     "heroid": "",
-    "Abilityid": "ability3_lone_druid_savage_roar"
+    "Abilityid": "imba_lone_druid_savage_roar"
   },
   {
     "id": "sect_disarm_3_nevermore_6",
@@ -12768,7 +12768,7 @@
     "acitve_common_effect": "modifier_sect_disarm_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_nevermore_requiem"
+    "Abilityid": "imba_nevermore_requiem"
   },
   {
     "id": "sect_disarm_6_nevermore_6",
@@ -12780,7 +12780,7 @@
     "acitve_common_effect": "modifier_sect_disarm_base_6",
     "acitve_special_effect": "modifier_sect_disarm_nevermore_6",
     "heroid": "",
-    "Abilityid": "ability6_nevermore_requiem"
+    "Abilityid": "imba_nevermore_requiem"
   },
   {
     "id": "sect_disarm_9_nevermore_6",
@@ -12792,7 +12792,7 @@
     "acitve_common_effect": "modifier_sect_disarm_base_9",
     "acitve_special_effect": "modifier_sect_disarm_nevermore_9",
     "heroid": "",
-    "Abilityid": "ability6_nevermore_requiem"
+    "Abilityid": "imba_nevermore_requiem"
   },
   {
     "id": "sect_disarm_3_night_stalker_7",
@@ -12804,7 +12804,7 @@
     "acitve_common_effect": "modifier_sect_disarm_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability2_night_stalker_crippling_fear"
+    "Abilityid": "imba_night_stalker_crippling_fear"
   },
   {
     "id": "sect_disarm_6_night_stalker_7",
@@ -12816,7 +12816,7 @@
     "acitve_common_effect": "modifier_sect_disarm_base_6",
     "acitve_special_effect": "modifier_sect_disarm_night_stalker_6",
     "heroid": "",
-    "Abilityid": "ability2_night_stalker_crippling_fear"
+    "Abilityid": "imba_night_stalker_crippling_fear"
   },
   {
     "id": "sect_disarm_9_night_stalker_7",
@@ -12828,7 +12828,7 @@
     "acitve_common_effect": "modifier_sect_disarm_base_9",
     "acitve_special_effect": "modifier_sect_disarm_night_stalker_9",
     "heroid": "",
-    "Abilityid": "ability2_night_stalker_crippling_fear"
+    "Abilityid": "imba_night_stalker_crippling_fear"
   },
   {
     "id": "sect_disarm_3_pangolier_8",
@@ -12840,7 +12840,7 @@
     "acitve_common_effect": "modifier_sect_disarm_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_pangolier",
-    "Abilityid": "ability3_pangolier_lucky_shot"
+    "Abilityid": "imba_pangolier_lucky_shot"
   },
   {
     "id": "sect_disarm_6_pangolier_8",
@@ -12852,7 +12852,7 @@
     "acitve_common_effect": "modifier_sect_disarm_base_6",
     "acitve_special_effect": "modifier_sect_disarm_pangolier_6",
     "heroid": "building_hero_pangolier",
-    "Abilityid": "ability3_pangolier_lucky_shot"
+    "Abilityid": "imba_pangolier_lucky_shot"
   },
   {
     "id": "sect_disarm_9_pangolier_8",
@@ -12864,7 +12864,7 @@
     "acitve_common_effect": "modifier_sect_disarm_base_9",
     "acitve_special_effect": "modifier_sect_disarm_pangolier_9",
     "heroid": "building_hero_pangolier",
-    "Abilityid": "ability3_pangolier_lucky_shot"
+    "Abilityid": "imba_pangolier_lucky_shot"
   },
   {
     "id": "sect_disarm_3_sniper_9",
@@ -12876,7 +12876,7 @@
     "acitve_common_effect": "modifier_sect_disarm_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability4_sniper_concussive_grenade"
+    "Abilityid": "imba_sniper_concussive_grenade"
   },
   {
     "id": "sect_disarm_6_sniper_9",
@@ -12888,7 +12888,7 @@
     "acitve_common_effect": "modifier_sect_disarm_base_6",
     "acitve_special_effect": "modifier_sect_disarm_sniper_6",
     "heroid": "",
-    "Abilityid": "ability4_sniper_concussive_grenade"
+    "Abilityid": "imba_sniper_concussive_grenade"
   },
   {
     "id": "sect_disarm_9_sniper_9",
@@ -12900,7 +12900,7 @@
     "acitve_common_effect": "modifier_sect_disarm_base_9",
     "acitve_special_effect": "modifier_sect_disarm_sniper_9",
     "heroid": "",
-    "Abilityid": "ability4_sniper_concussive_grenade"
+    "Abilityid": "imba_sniper_concussive_grenade"
   },
   {
     "id": "sect_disarm_3_techies_10",
@@ -12948,7 +12948,7 @@
     "acitve_common_effect": "modifier_sect_disarm_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability5_terrorblade_terror_wave"
+    "Abilityid": "imba_terrorblade_terror_wave"
   },
   {
     "id": "sect_disarm_6_terrorblade_11",
@@ -12960,7 +12960,7 @@
     "acitve_common_effect": "modifier_sect_disarm_base_6",
     "acitve_special_effect": "modifier_sect_disarm_terrorblade_6",
     "heroid": "",
-    "Abilityid": "ability5_terrorblade_terror_wave"
+    "Abilityid": "imba_terrorblade_terror_wave"
   },
   {
     "id": "sect_disarm_9_terrorblade_11",
@@ -12972,7 +12972,7 @@
     "acitve_common_effect": "modifier_sect_disarm_base_9",
     "acitve_special_effect": "modifier_sect_disarm_terrorblade_9",
     "heroid": "",
-    "Abilityid": "ability5_terrorblade_terror_wave"
+    "Abilityid": "imba_terrorblade_terror_wave"
   },
   {
     "id": "sect_disarm_3_tiny_12",
@@ -12984,7 +12984,7 @@
     "acitve_common_effect": "modifier_sect_disarm_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_tiny",
-    "Abilityid": "ability2_tiny_toss"
+    "Abilityid": "imba_tiny_toss"
   },
   {
     "id": "sect_disarm_6_tiny_12",
@@ -12996,7 +12996,7 @@
     "acitve_common_effect": "modifier_sect_disarm_base_6",
     "acitve_special_effect": "modifier_sect_disarm_tiny_6",
     "heroid": "building_hero_tiny",
-    "Abilityid": "ability2_tiny_toss"
+    "Abilityid": "imba_tiny_toss"
   },
   {
     "id": "sect_disarm_9_tiny_12",
@@ -13008,7 +13008,7 @@
     "acitve_common_effect": "modifier_sect_disarm_base_9",
     "acitve_special_effect": "modifier_sect_disarm_tiny_9",
     "heroid": "building_hero_tiny",
-    "Abilityid": "ability2_tiny_toss"
+    "Abilityid": "imba_tiny_toss"
   },
   {
     "id": "sect_disarm_3_viper_13",
@@ -13020,7 +13020,7 @@
     "acitve_common_effect": "modifier_sect_disarm_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": ""
+    "Abilityid": "imba_viper_viper_nodedive"
   },
   {
     "id": "sect_disarm_6_viper_13",
@@ -13032,7 +13032,7 @@
     "acitve_common_effect": "modifier_sect_disarm_base_6",
     "acitve_special_effect": "modifier_sect_disarm_viper_6",
     "heroid": "",
-    "Abilityid": ""
+    "Abilityid": "imba_viper_viper_nodedive"
   },
   {
     "id": "sect_disarm_9_viper_13",
@@ -13044,7 +13044,7 @@
     "acitve_common_effect": "modifier_sect_disarm_base_9",
     "acitve_special_effect": "modifier_sect_disarm_viper_9",
     "heroid": "",
-    "Abilityid": ""
+    "Abilityid": "imba_viper_viper_nodedive"
   },
   {
     "id": "sect_double_head_1_alchemist_1",
@@ -13056,7 +13056,7 @@
     "acitve_common_effect": "modifier_sect_double_head_base_1",
     "acitve_special_effect": "",
     "heroid": "building_hero_alchemist",
-    "Abilityid": "ability2_alchemist_unstable_concoction"
+    "Abilityid": "imba_alchemist_unstable_concoction"
   },
   {
     "id": "sect_double_head_2_alchemist_1",
@@ -13068,7 +13068,7 @@
     "acitve_common_effect": "modifier_sect_double_head_base_2",
     "acitve_special_effect": "modifier_sect_double_head_alchemist_2",
     "heroid": "building_hero_alchemist",
-    "Abilityid": "ability2_alchemist_unstable_concoction"
+    "Abilityid": "imba_alchemist_unstable_concoction"
   },
   {
     "id": "sect_double_head_4_alchemist_1",
@@ -13080,7 +13080,7 @@
     "acitve_common_effect": "modifier_sect_double_head_base_4",
     "acitve_special_effect": "modifier_sect_double_head_alchemist_4",
     "heroid": "building_hero_alchemist",
-    "Abilityid": "ability2_alchemist_unstable_concoction"
+    "Abilityid": "imba_alchemist_unstable_concoction"
   },
   {
     "id": "sect_double_head_1_jakiro_2",
@@ -13092,7 +13092,7 @@
     "acitve_common_effect": "modifier_sect_double_head_base_1",
     "acitve_special_effect": "",
     "heroid": "building_hero_jakiro",
-    "Abilityid": "ability1_jakiro_dual_breath"
+    "Abilityid": "imba_jakiro_dual_breath"
   },
   {
     "id": "sect_double_head_2_jakiro_2",
@@ -13104,7 +13104,7 @@
     "acitve_common_effect": "modifier_sect_double_head_base_2",
     "acitve_special_effect": "modifier_sect_double_head_jakiro_2",
     "heroid": "building_hero_jakiro",
-    "Abilityid": "ability1_jakiro_dual_breath"
+    "Abilityid": "imba_jakiro_dual_breath"
   },
   {
     "id": "sect_double_head_4_jakiro_2",
@@ -13116,7 +13116,7 @@
     "acitve_common_effect": "modifier_sect_double_head_base_4",
     "acitve_special_effect": "modifier_sect_double_head_jakiro_4",
     "heroid": "building_hero_jakiro",
-    "Abilityid": "ability1_jakiro_dual_breath"
+    "Abilityid": "imba_jakiro_dual_breath"
   },
   {
     "id": "sect_double_head_1_ogre_magi_3",
@@ -13128,7 +13128,7 @@
     "acitve_common_effect": "modifier_sect_double_head_base_1",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_ogre_magi_multicast"
+    "Abilityid": "imba_ogre_magi_multicast"
   },
   {
     "id": "sect_double_head_2_ogre_magi_3",
@@ -13140,7 +13140,7 @@
     "acitve_common_effect": "modifier_sect_double_head_base_2",
     "acitve_special_effect": "modifier_sect_double_head_ogre_magi_2",
     "heroid": "",
-    "Abilityid": "ability6_ogre_magi_multicast"
+    "Abilityid": "imba_ogre_magi_multicast"
   },
   {
     "id": "sect_double_head_4_ogre_magi_3",
@@ -13152,7 +13152,7 @@
     "acitve_common_effect": "modifier_sect_double_head_base_4",
     "acitve_special_effect": "modifier_sect_double_head_ogre_magi_4",
     "heroid": "",
-    "Abilityid": "ability6_ogre_magi_multicast"
+    "Abilityid": "imba_ogre_magi_multicast"
   },
   {
     "id": "sect_double_head_1_techies_4",
@@ -13200,7 +13200,7 @@
     "acitve_common_effect": "modifier_sect_fish_chess_base_1",
     "acitve_special_effect": "",
     "heroid": "building_hero_brewmaster",
-    "Abilityid": "ability1_brewmaster_thunder_clap"
+    "Abilityid": "imba_brewmaster_thunder_clap"
   },
   {
     "id": "sect_fish_chess_2_brewmaster_1",
@@ -13212,7 +13212,7 @@
     "acitve_common_effect": "modifier_sect_fish_chess_base_2",
     "acitve_special_effect": "modifier_sect_fish_chess_brewmaster_2",
     "heroid": "building_hero_brewmaster",
-    "Abilityid": "ability1_brewmaster_thunder_clap"
+    "Abilityid": "imba_brewmaster_thunder_clap"
   },
   {
     "id": "sect_fish_chess_4_brewmaster_1",
@@ -13224,7 +13224,7 @@
     "acitve_common_effect": "modifier_sect_fish_chess_base_4",
     "acitve_special_effect": "modifier_sect_fish_chess_brewmaster_4",
     "heroid": "building_hero_brewmaster",
-    "Abilityid": "ability1_brewmaster_thunder_clap"
+    "Abilityid": "imba_brewmaster_thunder_clap"
   },
   {
     "id": "sect_fish_chess_1_earth_spirit_2",
@@ -13236,7 +13236,7 @@
     "acitve_common_effect": "modifier_sect_fish_chess_base_1",
     "acitve_special_effect": "",
     "heroid": "building_hero_earth_spirit",
-    "Abilityid": "ability1_earth_spirit_boulder_smash"
+    "Abilityid": "imba_earth_spirit_boulder_smash"
   },
   {
     "id": "sect_fish_chess_2_earth_spirit_2",
@@ -13248,7 +13248,7 @@
     "acitve_common_effect": "modifier_sect_fish_chess_base_2",
     "acitve_special_effect": "modifier_sect_fish_chess_earth_spirit_2",
     "heroid": "building_hero_earth_spirit",
-    "Abilityid": "ability1_earth_spirit_boulder_smash"
+    "Abilityid": "imba_earth_spirit_boulder_smash"
   },
   {
     "id": "sect_fish_chess_4_earth_spirit_2",
@@ -13260,7 +13260,7 @@
     "acitve_common_effect": "modifier_sect_fish_chess_base_4",
     "acitve_special_effect": "modifier_sect_fish_chess_earth_spirit_4",
     "heroid": "building_hero_earth_spirit",
-    "Abilityid": "ability1_earth_spirit_boulder_smash"
+    "Abilityid": "imba_earth_spirit_boulder_smash"
   },
   {
     "id": "sect_fish_chess_1_ember_spirit_3",
@@ -13272,7 +13272,7 @@
     "acitve_common_effect": "modifier_sect_fish_chess_base_1",
     "acitve_special_effect": "",
     "heroid": "building_hero_ember_spirit",
-    "Abilityid": "ability2_ember_spirit_sleight_of_fist"
+    "Abilityid": "imba_ember_spirit_sleight_of_fist"
   },
   {
     "id": "sect_fish_chess_2_ember_spirit_3",
@@ -13284,7 +13284,7 @@
     "acitve_common_effect": "modifier_sect_fish_chess_base_2",
     "acitve_special_effect": "modifier_sect_fish_chess_ember_spirit_2",
     "heroid": "building_hero_ember_spirit",
-    "Abilityid": "ability2_ember_spirit_sleight_of_fist"
+    "Abilityid": "imba_ember_spirit_sleight_of_fist"
   },
   {
     "id": "sect_fish_chess_4_ember_spirit_3",
@@ -13296,7 +13296,7 @@
     "acitve_common_effect": "modifier_sect_fish_chess_base_4",
     "acitve_special_effect": "modifier_sect_fish_chess_ember_spirit_4",
     "heroid": "building_hero_ember_spirit",
-    "Abilityid": "ability2_ember_spirit_sleight_of_fist"
+    "Abilityid": "imba_ember_spirit_sleight_of_fist"
   },
   {
     "id": "sect_fish_chess_1_storm_spirit_4",
@@ -13308,7 +13308,7 @@
     "acitve_common_effect": "modifier_sect_fish_chess_base_1",
     "acitve_special_effect": "",
     "heroid": "building_hero_storm_spirit",
-    "Abilityid": "ability3_storm_spirit_overload"
+    "Abilityid": "imba_storm_spirit_overload"
   },
   {
     "id": "sect_fish_chess_2_storm_spirit_4",
@@ -13320,7 +13320,7 @@
     "acitve_common_effect": "modifier_sect_fish_chess_base_2",
     "acitve_special_effect": "modifier_sect_fish_chess_storm_spirit_2",
     "heroid": "building_hero_storm_spirit",
-    "Abilityid": "ability3_storm_spirit_overload"
+    "Abilityid": "imba_storm_spirit_overload"
   },
   {
     "id": "sect_fish_chess_4_storm_spirit_4",
@@ -13332,7 +13332,7 @@
     "acitve_common_effect": "modifier_sect_fish_chess_base_4",
     "acitve_special_effect": "modifier_sect_fish_chess_storm_spirit_4",
     "heroid": "building_hero_storm_spirit",
-    "Abilityid": "ability3_storm_spirit_overload"
+    "Abilityid": "imba_storm_spirit_overload"
   },
   {
     "id": "sect_fish_chess_1_void_spirit_5",
@@ -13344,7 +13344,7 @@
     "acitve_common_effect": "modifier_sect_fish_chess_base_1",
     "acitve_special_effect": "",
     "heroid": "building_hero_void_spirit",
-    "Abilityid": "ability1_void_spirit_aether_remnant"
+    "Abilityid": "imba_void_spirit_aether_remnant"
   },
   {
     "id": "sect_fish_chess_2_void_spirit_5",
@@ -13356,7 +13356,7 @@
     "acitve_common_effect": "modifier_sect_fish_chess_base_2",
     "acitve_special_effect": "modifier_sect_fish_chess_void_spirit_2",
     "heroid": "building_hero_void_spirit",
-    "Abilityid": "ability1_void_spirit_aether_remnant"
+    "Abilityid": "imba_void_spirit_aether_remnant"
   },
   {
     "id": "sect_fish_chess_4_void_spirit_5",
@@ -13368,7 +13368,7 @@
     "acitve_common_effect": "modifier_sect_fish_chess_base_4",
     "acitve_special_effect": "modifier_sect_fish_chess_void_spirit_4",
     "heroid": "building_hero_void_spirit",
-    "Abilityid": "ability1_void_spirit_aether_remnant"
+    "Abilityid": "imba_void_spirit_aether_remnant"
   },
   {
     "id": "sect_flame_3_abyssal_underlord_1",
@@ -13380,7 +13380,7 @@
     "acitve_common_effect": "modifier_sect_flame_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_abyssal_underlord",
-    "Abilityid": "ability1_abyssal_underlord_firestorm"
+    "Abilityid": "imba_abyssal_underlord_firestorm"
   },
   {
     "id": "sect_flame_6_abyssal_underlord_1",
@@ -13392,7 +13392,7 @@
     "acitve_common_effect": "modifier_sect_flame_base_6",
     "acitve_special_effect": "modifier_sect_flame_abyssal_underlord_6",
     "heroid": "building_hero_abyssal_underlord",
-    "Abilityid": "ability1_abyssal_underlord_firestorm"
+    "Abilityid": "imba_abyssal_underlord_firestorm"
   },
   {
     "id": "sect_flame_9_abyssal_underlord_1",
@@ -13404,7 +13404,7 @@
     "acitve_common_effect": "modifier_sect_flame_base_9",
     "acitve_special_effect": "modifier_sect_flame_abyssal_underlord_9",
     "heroid": "building_hero_abyssal_underlord",
-    "Abilityid": "ability1_abyssal_underlord_firestorm"
+    "Abilityid": "imba_abyssal_underlord_firestorm"
   },
   {
     "id": "sect_flame_3_brewmaster_2",
@@ -13416,7 +13416,7 @@
     "acitve_common_effect": "modifier_sect_flame_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability2_brewmaster_cinder_brew"
+    "Abilityid": "imba_brewmaster_cinder_brew"
   },
   {
     "id": "sect_flame_6_brewmaster_2",
@@ -13428,7 +13428,7 @@
     "acitve_common_effect": "modifier_sect_flame_base_6",
     "acitve_special_effect": "modifier_sect_flame_brewmaster_6",
     "heroid": "",
-    "Abilityid": "ability2_brewmaster_cinder_brew"
+    "Abilityid": "imba_brewmaster_cinder_brew"
   },
   {
     "id": "sect_flame_9_brewmaster_2",
@@ -13440,7 +13440,7 @@
     "acitve_common_effect": "modifier_sect_flame_base_9",
     "acitve_special_effect": "modifier_sect_flame_brewmaster_9",
     "heroid": "",
-    "Abilityid": "ability2_brewmaster_cinder_brew"
+    "Abilityid": "imba_brewmaster_cinder_brew"
   },
   {
     "id": "sect_flame_3_dragon_knight_3",
@@ -13452,7 +13452,7 @@
     "acitve_common_effect": "modifier_sect_flame_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_dragon_knight",
-    "Abilityid": "ability1_dragon_knight_breathe_fire"
+    "Abilityid": "imba_dragon_knight_breathe_fire"
   },
   {
     "id": "sect_flame_6_dragon_knight_3",
@@ -13464,7 +13464,7 @@
     "acitve_common_effect": "modifier_sect_flame_base_6",
     "acitve_special_effect": "modifier_sect_flame_dragon_knight_6",
     "heroid": "building_hero_dragon_knight",
-    "Abilityid": "ability1_dragon_knight_breathe_fire"
+    "Abilityid": "imba_dragon_knight_breathe_fire"
   },
   {
     "id": "sect_flame_9_dragon_knight_3",
@@ -13476,7 +13476,7 @@
     "acitve_common_effect": "modifier_sect_flame_base_9",
     "acitve_special_effect": "modifier_sect_flame_dragon_knight_9",
     "heroid": "building_hero_dragon_knight",
-    "Abilityid": "ability1_dragon_knight_breathe_fire"
+    "Abilityid": "imba_dragon_knight_breathe_fire"
   },
   {
     "id": "sect_flame_3_ember_spirit_4",
@@ -13488,7 +13488,7 @@
     "acitve_common_effect": "modifier_sect_flame_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_ember_spirit_fire_remnant"
+    "Abilityid": "imba_ember_spirit_fire_remnant"
   },
   {
     "id": "sect_flame_6_ember_spirit_4",
@@ -13500,7 +13500,7 @@
     "acitve_common_effect": "modifier_sect_flame_base_6",
     "acitve_special_effect": "modifier_sect_flame_ember_spirit_6",
     "heroid": "",
-    "Abilityid": "ability6_ember_spirit_fire_remnant"
+    "Abilityid": "imba_ember_spirit_fire_remnant"
   },
   {
     "id": "sect_flame_9_ember_spirit_4",
@@ -13512,7 +13512,7 @@
     "acitve_common_effect": "modifier_sect_flame_base_9",
     "acitve_special_effect": "modifier_sect_flame_ember_spirit_9",
     "heroid": "",
-    "Abilityid": "ability6_ember_spirit_fire_remnant"
+    "Abilityid": "imba_ember_spirit_fire_remnant"
   },
   {
     "id": "sect_flame_3_invoker_5",
@@ -13524,7 +13524,7 @@
     "acitve_common_effect": "modifier_sect_flame_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": ""
+    "Abilityid": "imba_invoker_sun_strike"
   },
   {
     "id": "sect_flame_6_invoker_5",
@@ -13536,7 +13536,7 @@
     "acitve_common_effect": "modifier_sect_flame_base_6",
     "acitve_special_effect": "modifier_sect_flame_invoker_6",
     "heroid": "",
-    "Abilityid": ""
+    "Abilityid": "imba_invoker_sun_strike"
   },
   {
     "id": "sect_flame_9_invoker_5",
@@ -13548,7 +13548,7 @@
     "acitve_common_effect": "modifier_sect_flame_base_9",
     "acitve_special_effect": "modifier_sect_flame_invoker_9",
     "heroid": "",
-    "Abilityid": ""
+    "Abilityid": "imba_invoker_sun_strike"
   },
   {
     "id": "sect_flame_3_jakiro_6",
@@ -13560,7 +13560,7 @@
     "acitve_common_effect": "modifier_sect_flame_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability3_jakiro_liquid_fire"
+    "Abilityid": "imba_jakiro_liquid_fire"
   },
   {
     "id": "sect_flame_6_jakiro_6",
@@ -13572,7 +13572,7 @@
     "acitve_common_effect": "modifier_sect_flame_base_6",
     "acitve_special_effect": "modifier_sect_flame_jakiro_6",
     "heroid": "",
-    "Abilityid": "ability3_jakiro_liquid_fire"
+    "Abilityid": "imba_jakiro_liquid_fire"
   },
   {
     "id": "sect_flame_9_jakiro_6",
@@ -13584,7 +13584,7 @@
     "acitve_common_effect": "modifier_sect_flame_base_9",
     "acitve_special_effect": "modifier_sect_flame_jakiro_9",
     "heroid": "",
-    "Abilityid": "ability3_jakiro_liquid_fire"
+    "Abilityid": "imba_jakiro_liquid_fire"
   },
   {
     "id": "sect_flame_3_jakiro_7",
@@ -13596,7 +13596,7 @@
     "acitve_common_effect": "modifier_sect_flame_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_jakiro_macropyre"
+    "Abilityid": "imba_jakiro_macropyre"
   },
   {
     "id": "sect_flame_6_jakiro_7",
@@ -13608,7 +13608,7 @@
     "acitve_common_effect": "modifier_sect_flame_base_6",
     "acitve_special_effect": "modifier_sect_flame_jakiro_6",
     "heroid": "",
-    "Abilityid": "ability6_jakiro_macropyre"
+    "Abilityid": "imba_jakiro_macropyre"
   },
   {
     "id": "sect_flame_9_jakiro_7",
@@ -13620,7 +13620,7 @@
     "acitve_common_effect": "modifier_sect_flame_base_9",
     "acitve_special_effect": "modifier_sect_flame_jakiro_9",
     "heroid": "",
-    "Abilityid": "ability6_jakiro_macropyre"
+    "Abilityid": "imba_jakiro_macropyre"
   },
   {
     "id": "sect_flame_3_lina_8",
@@ -13632,7 +13632,7 @@
     "acitve_common_effect": "modifier_sect_flame_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_lina",
-    "Abilityid": "ability1_lina_dragon_slave"
+    "Abilityid": "imba_lina_dragon_slave"
   },
   {
     "id": "sect_flame_6_lina_8",
@@ -13644,7 +13644,7 @@
     "acitve_common_effect": "modifier_sect_flame_base_6",
     "acitve_special_effect": "modifier_sect_flame_lina_6",
     "heroid": "building_hero_lina",
-    "Abilityid": "ability1_lina_dragon_slave"
+    "Abilityid": "imba_lina_dragon_slave"
   },
   {
     "id": "sect_flame_9_lina_8",
@@ -13656,7 +13656,7 @@
     "acitve_common_effect": "modifier_sect_flame_base_9",
     "acitve_special_effect": "modifier_sect_flame_lina_9",
     "heroid": "building_hero_lina",
-    "Abilityid": "ability1_lina_dragon_slave"
+    "Abilityid": "imba_lina_dragon_slave"
   },
   {
     "id": "sect_flame_3_ogre_magi_9",
@@ -13668,7 +13668,7 @@
     "acitve_common_effect": "modifier_sect_flame_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_ogre_magi",
-    "Abilityid": "ability2_ogre_magi_ignite"
+    "Abilityid": "imba_ogre_magi_ignite"
   },
   {
     "id": "sect_flame_6_ogre_magi_9",
@@ -13680,7 +13680,7 @@
     "acitve_common_effect": "modifier_sect_flame_base_6",
     "acitve_special_effect": "modifier_sect_flame_ogre_magi_6",
     "heroid": "building_hero_ogre_magi",
-    "Abilityid": "ability2_ogre_magi_ignite"
+    "Abilityid": "imba_ogre_magi_ignite"
   },
   {
     "id": "sect_flame_9_ogre_magi_9",
@@ -13692,7 +13692,7 @@
     "acitve_common_effect": "modifier_sect_flame_base_9",
     "acitve_special_effect": "modifier_sect_flame_ogre_magi_9",
     "heroid": "building_hero_ogre_magi",
-    "Abilityid": "ability2_ogre_magi_ignite"
+    "Abilityid": "imba_ogre_magi_ignite"
   },
   {
     "id": "sect_flame_3_phoenix_10",
@@ -13704,7 +13704,7 @@
     "acitve_common_effect": "modifier_sect_flame_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_phoenix",
-    "Abilityid": "ability2_phoenix_fire_spirits"
+    "Abilityid": "imba_phoenix_fire_spirits"
   },
   {
     "id": "sect_flame_6_phoenix_10",
@@ -13716,7 +13716,7 @@
     "acitve_common_effect": "modifier_sect_flame_base_6",
     "acitve_special_effect": "modifier_sect_flame_phoenix_6",
     "heroid": "building_hero_phoenix",
-    "Abilityid": "ability2_phoenix_fire_spirits"
+    "Abilityid": "imba_phoenix_fire_spirits"
   },
   {
     "id": "sect_flame_9_phoenix_10",
@@ -13728,7 +13728,7 @@
     "acitve_common_effect": "modifier_sect_flame_base_9",
     "acitve_special_effect": "modifier_sect_flame_phoenix_9",
     "heroid": "building_hero_phoenix",
-    "Abilityid": "ability2_phoenix_fire_spirits"
+    "Abilityid": "imba_phoenix_fire_spirits"
   },
   {
     "id": "sect_flame_3_shredder_11",
@@ -13740,7 +13740,7 @@
     "acitve_common_effect": "modifier_sect_flame_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability5_shredder_flamethrower"
+    "Abilityid": "imba_shredder_flamethrower"
   },
   {
     "id": "sect_flame_6_shredder_11",
@@ -13752,7 +13752,7 @@
     "acitve_common_effect": "modifier_sect_flame_base_6",
     "acitve_special_effect": "modifier_sect_flame_shredder_6",
     "heroid": "",
-    "Abilityid": "ability5_shredder_flamethrower"
+    "Abilityid": "imba_shredder_flamethrower"
   },
   {
     "id": "sect_flame_9_shredder_11",
@@ -13764,7 +13764,7 @@
     "acitve_common_effect": "modifier_sect_flame_base_9",
     "acitve_special_effect": "modifier_sect_flame_shredder_9",
     "heroid": "",
-    "Abilityid": "ability5_shredder_flamethrower"
+    "Abilityid": "imba_shredder_flamethrower"
   },
   {
     "id": "sect_flame_3_skeleton_king_12",
@@ -13776,7 +13776,7 @@
     "acitve_common_effect": "modifier_sect_flame_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability1_skeleton_king_hellfire_blast"
+    "Abilityid": "imba_skeleton_king_hellfire_blast"
   },
   {
     "id": "sect_flame_6_skeleton_king_12",
@@ -13788,7 +13788,7 @@
     "acitve_common_effect": "modifier_sect_flame_base_6",
     "acitve_special_effect": "modifier_sect_flame_skeleton_king_6",
     "heroid": "",
-    "Abilityid": "ability1_skeleton_king_hellfire_blast"
+    "Abilityid": "imba_skeleton_king_hellfire_blast"
   },
   {
     "id": "sect_flame_9_skeleton_king_12",
@@ -13800,7 +13800,7 @@
     "acitve_common_effect": "modifier_sect_flame_base_9",
     "acitve_special_effect": "modifier_sect_flame_skeleton_king_9",
     "heroid": "",
-    "Abilityid": "ability1_skeleton_king_hellfire_blast"
+    "Abilityid": "imba_skeleton_king_hellfire_blast"
   },
   {
     "id": "sect_ghost_3_abaddon_1",
@@ -13812,7 +13812,7 @@
     "acitve_common_effect": "modifier_sect_ghost_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_abaddon",
-    "Abilityid": "ability3_abaddon_frostmourne"
+    "Abilityid": "imba_abaddon_frostmourne"
   },
   {
     "id": "sect_ghost_6_abaddon_1",
@@ -13824,7 +13824,7 @@
     "acitve_common_effect": "modifier_sect_ghost_base_6",
     "acitve_special_effect": "modifier_sect_ghost_abaddon_6",
     "heroid": "building_hero_abaddon",
-    "Abilityid": "ability3_abaddon_frostmourne"
+    "Abilityid": "imba_abaddon_frostmourne"
   },
   {
     "id": "sect_ghost_9_abaddon_1",
@@ -13836,7 +13836,7 @@
     "acitve_common_effect": "modifier_sect_ghost_base_9",
     "acitve_special_effect": "modifier_sect_ghost_abaddon_9",
     "heroid": "building_hero_abaddon",
-    "Abilityid": "ability3_abaddon_frostmourne"
+    "Abilityid": "imba_abaddon_frostmourne"
   },
   {
     "id": "sect_ghost_3_clinkz_2",
@@ -13848,7 +13848,7 @@
     "acitve_common_effect": "modifier_sect_ghost_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability4_clinkz_burning_army"
+    "Abilityid": "imba_clinkz_burning_army"
   },
   {
     "id": "sect_ghost_6_clinkz_2",
@@ -13860,7 +13860,7 @@
     "acitve_common_effect": "modifier_sect_ghost_base_6",
     "acitve_special_effect": "modifier_sect_ghost_clinkz_6",
     "heroid": "",
-    "Abilityid": "ability4_clinkz_burning_army"
+    "Abilityid": "imba_clinkz_burning_army"
   },
   {
     "id": "sect_ghost_9_clinkz_2",
@@ -13872,7 +13872,7 @@
     "acitve_common_effect": "modifier_sect_ghost_base_9",
     "acitve_special_effect": "modifier_sect_ghost_clinkz_9",
     "heroid": "",
-    "Abilityid": "ability4_clinkz_burning_army"
+    "Abilityid": "imba_clinkz_burning_army"
   },
   {
     "id": "sect_ghost_3_death_prophet_3",
@@ -13884,7 +13884,7 @@
     "acitve_common_effect": "modifier_sect_ghost_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_death_prophet_exorcism"
+    "Abilityid": "imba_death_prophet_exorcism"
   },
   {
     "id": "sect_ghost_6_death_prophet_3",
@@ -13896,7 +13896,7 @@
     "acitve_common_effect": "modifier_sect_ghost_base_6",
     "acitve_special_effect": "modifier_sect_ghost_death_prophet_6",
     "heroid": "",
-    "Abilityid": "ability6_death_prophet_exorcism"
+    "Abilityid": "imba_death_prophet_exorcism"
   },
   {
     "id": "sect_ghost_9_death_prophet_3",
@@ -13908,7 +13908,7 @@
     "acitve_common_effect": "modifier_sect_ghost_base_9",
     "acitve_special_effect": "modifier_sect_ghost_death_prophet_9",
     "heroid": "",
-    "Abilityid": "ability6_death_prophet_exorcism"
+    "Abilityid": "imba_death_prophet_exorcism"
   },
   {
     "id": "sect_ghost_3_lich_4",
@@ -13920,7 +13920,7 @@
     "acitve_common_effect": "modifier_sect_ghost_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_lich",
-    "Abilityid": "ability1_lich_frost_nova"
+    "Abilityid": "imba_lich_frost_nova"
   },
   {
     "id": "sect_ghost_6_lich_4",
@@ -13932,7 +13932,7 @@
     "acitve_common_effect": "modifier_sect_ghost_base_6",
     "acitve_special_effect": "modifier_sect_ghost_lich_6",
     "heroid": "building_hero_lich",
-    "Abilityid": "ability1_lich_frost_nova"
+    "Abilityid": "imba_lich_frost_nova"
   },
   {
     "id": "sect_ghost_9_lich_4",
@@ -13944,7 +13944,7 @@
     "acitve_common_effect": "modifier_sect_ghost_base_9",
     "acitve_special_effect": "modifier_sect_ghost_lich_9",
     "heroid": "building_hero_lich",
-    "Abilityid": "ability1_lich_frost_nova"
+    "Abilityid": "imba_lich_frost_nova"
   },
   {
     "id": "sect_ghost_3_necrolyte_5",
@@ -13956,7 +13956,7 @@
     "acitve_common_effect": "modifier_sect_ghost_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_necrolyte",
-    "Abilityid": "ability3_necrolyte_heartstopper_aura"
+    "Abilityid": "imba_necrolyte_heartstopper_aura"
   },
   {
     "id": "sect_ghost_6_necrolyte_5",
@@ -13968,7 +13968,7 @@
     "acitve_common_effect": "modifier_sect_ghost_base_6",
     "acitve_special_effect": "modifier_sect_ghost_necrolyte_6",
     "heroid": "building_hero_necrolyte",
-    "Abilityid": "ability3_necrolyte_heartstopper_aura"
+    "Abilityid": "imba_necrolyte_heartstopper_aura"
   },
   {
     "id": "sect_ghost_9_necrolyte_5",
@@ -13980,7 +13980,7 @@
     "acitve_common_effect": "modifier_sect_ghost_base_9",
     "acitve_special_effect": "modifier_sect_ghost_necrolyte_9",
     "heroid": "building_hero_necrolyte",
-    "Abilityid": "ability3_necrolyte_heartstopper_aura"
+    "Abilityid": "imba_necrolyte_heartstopper_aura"
   },
   {
     "id": "sect_ghost_3_pugna_6",
@@ -13992,7 +13992,7 @@
     "acitve_common_effect": "modifier_sect_ghost_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_pugna",
-    "Abilityid": "ability3_pugna_nether_ward"
+    "Abilityid": "imba_pugna_nether_ward"
   },
   {
     "id": "sect_ghost_6_pugna_6",
@@ -14004,7 +14004,7 @@
     "acitve_common_effect": "modifier_sect_ghost_base_6",
     "acitve_special_effect": "modifier_sect_ghost_pugna_6",
     "heroid": "building_hero_pugna",
-    "Abilityid": "ability3_pugna_nether_ward"
+    "Abilityid": "imba_pugna_nether_ward"
   },
   {
     "id": "sect_ghost_9_pugna_6",
@@ -14016,7 +14016,7 @@
     "acitve_common_effect": "modifier_sect_ghost_base_9",
     "acitve_special_effect": "modifier_sect_ghost_pugna_9",
     "heroid": "building_hero_pugna",
-    "Abilityid": "ability3_pugna_nether_ward"
+    "Abilityid": "imba_pugna_nether_ward"
   },
   {
     "id": "sect_ghost_3_skeleton_king_7",
@@ -14028,7 +14028,7 @@
     "acitve_common_effect": "modifier_sect_ghost_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_skeleton_king_reincarnation"
+    "Abilityid": "imba_skeleton_king_reincarnation"
   },
   {
     "id": "sect_ghost_6_skeleton_king_7",
@@ -14040,7 +14040,7 @@
     "acitve_common_effect": "modifier_sect_ghost_base_6",
     "acitve_special_effect": "modifier_sect_ghost_skeleton_king_6",
     "heroid": "",
-    "Abilityid": "ability6_skeleton_king_reincarnation"
+    "Abilityid": "imba_skeleton_king_reincarnation"
   },
   {
     "id": "sect_ghost_9_skeleton_king_7",
@@ -14052,7 +14052,7 @@
     "acitve_common_effect": "modifier_sect_ghost_base_9",
     "acitve_special_effect": "modifier_sect_ghost_skeleton_king_9",
     "heroid": "",
-    "Abilityid": "ability6_skeleton_king_reincarnation"
+    "Abilityid": "imba_skeleton_king_reincarnation"
   },
   {
     "id": "sect_ghost_3_undying_8",
@@ -14064,7 +14064,7 @@
     "acitve_common_effect": "modifier_sect_ghost_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_undying",
-    "Abilityid": "ability3_undying_tombstone"
+    "Abilityid": "imba_undying_tombstone"
   },
   {
     "id": "sect_ghost_6_undying_8",
@@ -14076,7 +14076,7 @@
     "acitve_common_effect": "modifier_sect_ghost_base_6",
     "acitve_special_effect": "modifier_sect_ghost_undying_6",
     "heroid": "building_hero_undying",
-    "Abilityid": "ability3_undying_tombstone"
+    "Abilityid": "imba_undying_tombstone"
   },
   {
     "id": "sect_ghost_9_undying_8",
@@ -14088,7 +14088,7 @@
     "acitve_common_effect": "modifier_sect_ghost_base_9",
     "acitve_special_effect": "modifier_sect_ghost_undying_9",
     "heroid": "building_hero_undying",
-    "Abilityid": "ability3_undying_tombstone"
+    "Abilityid": "imba_undying_tombstone"
   },
   {
     "id": "sect_ghost_3_vengefulspirit_9",
@@ -14100,7 +14100,7 @@
     "acitve_common_effect": "modifier_sect_ghost_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_vengefulspirit",
-    "Abilityid": "ability1_vengefulspirit_magic_missile"
+    "Abilityid": "imba_vengefulspirit_magic_missile"
   },
   {
     "id": "sect_ghost_6_vengefulspirit_9",
@@ -14112,7 +14112,7 @@
     "acitve_common_effect": "modifier_sect_ghost_base_6",
     "acitve_special_effect": "modifier_sect_ghost_vengefulspirit_6",
     "heroid": "building_hero_vengefulspirit",
-    "Abilityid": "ability1_vengefulspirit_magic_missile"
+    "Abilityid": "imba_vengefulspirit_magic_missile"
   },
   {
     "id": "sect_ghost_9_vengefulspirit_9",
@@ -14124,7 +14124,7 @@
     "acitve_common_effect": "modifier_sect_ghost_base_9",
     "acitve_special_effect": "modifier_sect_ghost_vengefulspirit_9",
     "heroid": "building_hero_vengefulspirit",
-    "Abilityid": "ability1_vengefulspirit_magic_missile"
+    "Abilityid": "imba_vengefulspirit_magic_missile"
   },
   {
     "id": "sect_ghost_3_visage_10",
@@ -14136,7 +14136,7 @@
     "acitve_common_effect": "modifier_sect_ghost_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_visage_summon_familiars"
+    "Abilityid": "imba_visage_summon_familiars"
   },
   {
     "id": "sect_ghost_6_visage_10",
@@ -14148,7 +14148,7 @@
     "acitve_common_effect": "modifier_sect_ghost_base_6",
     "acitve_special_effect": "modifier_sect_ghost_visage_6",
     "heroid": "",
-    "Abilityid": "ability6_visage_summon_familiars"
+    "Abilityid": "imba_visage_summon_familiars"
   },
   {
     "id": "sect_ghost_9_visage_10",
@@ -14160,7 +14160,7 @@
     "acitve_common_effect": "modifier_sect_ghost_base_9",
     "acitve_special_effect": "modifier_sect_ghost_visage_9",
     "heroid": "",
-    "Abilityid": "ability6_visage_summon_familiars"
+    "Abilityid": "imba_visage_summon_familiars"
   },
   {
     "id": "sect_health_3_abaddon_1",
@@ -14172,7 +14172,7 @@
     "acitve_common_effect": "modifier_sect_health_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability1_abaddon_death_coil"
+    "Abilityid": "imba_abaddon_death_coil"
   },
   {
     "id": "sect_health_6_abaddon_1",
@@ -14184,7 +14184,7 @@
     "acitve_common_effect": "modifier_sect_health_base_6",
     "acitve_special_effect": "modifier_sect_health_abaddon_6",
     "heroid": "",
-    "Abilityid": "ability1_abaddon_death_coil"
+    "Abilityid": "imba_abaddon_death_coil"
   },
   {
     "id": "sect_health_9_abaddon_1",
@@ -14196,7 +14196,7 @@
     "acitve_common_effect": "modifier_sect_health_base_9",
     "acitve_special_effect": "modifier_sect_health_abaddon_9",
     "heroid": "",
-    "Abilityid": "ability1_abaddon_death_coil"
+    "Abilityid": "imba_abaddon_death_coil"
   },
   {
     "id": "sect_health_3_bloodseeker_2",
@@ -14208,7 +14208,7 @@
     "acitve_common_effect": "modifier_sect_health_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_bloodseeker",
-    "Abilityid": "ability3_bloodseeker_thirst"
+    "Abilityid": "imba_bloodseeker_thirst"
   },
   {
     "id": "sect_health_6_bloodseeker_2",
@@ -14220,7 +14220,7 @@
     "acitve_common_effect": "modifier_sect_health_base_6",
     "acitve_special_effect": "modifier_sect_health_bloodseeker_6",
     "heroid": "building_hero_bloodseeker",
-    "Abilityid": "ability3_bloodseeker_thirst"
+    "Abilityid": "imba_bloodseeker_thirst"
   },
   {
     "id": "sect_health_9_bloodseeker_2",
@@ -14232,7 +14232,7 @@
     "acitve_common_effect": "modifier_sect_health_base_9",
     "acitve_special_effect": "modifier_sect_health_bloodseeker_9",
     "heroid": "building_hero_bloodseeker",
-    "Abilityid": "ability3_bloodseeker_thirst"
+    "Abilityid": "imba_bloodseeker_thirst"
   },
   {
     "id": "sect_health_3_centaur_3",
@@ -14244,7 +14244,7 @@
     "acitve_common_effect": "modifier_sect_health_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_centaur",
-    "Abilityid": "ability2_centaur_double_edge"
+    "Abilityid": "imba_centaur_double_edge"
   },
   {
     "id": "sect_health_6_centaur_3",
@@ -14256,7 +14256,7 @@
     "acitve_common_effect": "modifier_sect_health_base_6",
     "acitve_special_effect": "modifier_sect_health_centaur_6",
     "heroid": "building_hero_centaur",
-    "Abilityid": "ability2_centaur_double_edge"
+    "Abilityid": "imba_centaur_double_edge"
   },
   {
     "id": "sect_health_9_centaur_3",
@@ -14268,7 +14268,7 @@
     "acitve_common_effect": "modifier_sect_health_base_9",
     "acitve_special_effect": "modifier_sect_health_centaur_9",
     "heroid": "building_hero_centaur",
-    "Abilityid": "ability2_centaur_double_edge"
+    "Abilityid": "imba_centaur_double_edge"
   },
   {
     "id": "sect_health_3_dazzle_4",
@@ -14280,7 +14280,7 @@
     "acitve_common_effect": "modifier_sect_health_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_dazzle",
-    "Abilityid": "ability2_dazzle_shallow_grave"
+    "Abilityid": "imba_dazzle_shallow_grave"
   },
   {
     "id": "sect_health_6_dazzle_4",
@@ -14292,7 +14292,7 @@
     "acitve_common_effect": "modifier_sect_health_base_6",
     "acitve_special_effect": "modifier_sect_health_dazzle_6",
     "heroid": "building_hero_dazzle",
-    "Abilityid": "ability2_dazzle_shallow_grave"
+    "Abilityid": "imba_dazzle_shallow_grave"
   },
   {
     "id": "sect_health_9_dazzle_4",
@@ -14304,7 +14304,7 @@
     "acitve_common_effect": "modifier_sect_health_base_9",
     "acitve_special_effect": "modifier_sect_health_dazzle_9",
     "heroid": "building_hero_dazzle",
-    "Abilityid": "ability2_dazzle_shallow_grave"
+    "Abilityid": "imba_dazzle_shallow_grave"
   },
   {
     "id": "sect_health_3_huskar_5",
@@ -14316,7 +14316,7 @@
     "acitve_common_effect": "modifier_sect_health_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_huskar",
-    "Abilityid": "ability2_huskar_burning_spear"
+    "Abilityid": "imba_huskar_burning_spear"
   },
   {
     "id": "sect_health_6_huskar_5",
@@ -14328,7 +14328,7 @@
     "acitve_common_effect": "modifier_sect_health_base_6",
     "acitve_special_effect": "modifier_sect_health_huskar_6",
     "heroid": "building_hero_huskar",
-    "Abilityid": "ability2_huskar_burning_spear"
+    "Abilityid": "imba_huskar_burning_spear"
   },
   {
     "id": "sect_health_9_huskar_5",
@@ -14340,7 +14340,7 @@
     "acitve_common_effect": "modifier_sect_health_base_9",
     "acitve_special_effect": "modifier_sect_health_huskar_9",
     "heroid": "building_hero_huskar",
-    "Abilityid": "ability2_huskar_burning_spear"
+    "Abilityid": "imba_huskar_burning_spear"
   },
   {
     "id": "sect_health_3_huskar_6",
@@ -14352,7 +14352,7 @@
     "acitve_common_effect": "modifier_sect_health_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_huskar_life_break"
+    "Abilityid": "imba_huskar_life_break"
   },
   {
     "id": "sect_health_6_huskar_6",
@@ -14364,7 +14364,7 @@
     "acitve_common_effect": "modifier_sect_health_base_6",
     "acitve_special_effect": "modifier_sect_health_huskar_6",
     "heroid": "",
-    "Abilityid": "ability6_huskar_life_break"
+    "Abilityid": "imba_huskar_life_break"
   },
   {
     "id": "sect_health_9_huskar_6",
@@ -14376,7 +14376,7 @@
     "acitve_common_effect": "modifier_sect_health_base_9",
     "acitve_special_effect": "modifier_sect_health_huskar_9",
     "heroid": "",
-    "Abilityid": "ability6_huskar_life_break"
+    "Abilityid": "imba_huskar_life_break"
   },
   {
     "id": "sect_health_3_necrolyte_7",
@@ -14388,7 +14388,7 @@
     "acitve_common_effect": "modifier_sect_health_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability2_necrolyte_sadist"
+    "Abilityid": "imba_necrolyte_sadist"
   },
   {
     "id": "sect_health_6_necrolyte_7",
@@ -14400,7 +14400,7 @@
     "acitve_common_effect": "modifier_sect_health_base_6",
     "acitve_special_effect": "modifier_sect_health_necrolyte_6",
     "heroid": "",
-    "Abilityid": "ability2_necrolyte_sadist"
+    "Abilityid": "imba_necrolyte_sadist"
   },
   {
     "id": "sect_health_9_necrolyte_7",
@@ -14412,7 +14412,7 @@
     "acitve_common_effect": "modifier_sect_health_base_9",
     "acitve_special_effect": "modifier_sect_health_necrolyte_9",
     "heroid": "",
-    "Abilityid": "ability2_necrolyte_sadist"
+    "Abilityid": "imba_necrolyte_sadist"
   },
   {
     "id": "sect_health_3_pudge_8",
@@ -14424,7 +14424,7 @@
     "acitve_common_effect": "modifier_sect_health_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability3_pudge_flesh_heap"
+    "Abilityid": "imba_pudge_flesh_heap"
   },
   {
     "id": "sect_health_6_pudge_8",
@@ -14436,7 +14436,7 @@
     "acitve_common_effect": "modifier_sect_health_base_6",
     "acitve_special_effect": "modifier_sect_health_pudge_6",
     "heroid": "",
-    "Abilityid": "ability3_pudge_flesh_heap"
+    "Abilityid": "imba_pudge_flesh_heap"
   },
   {
     "id": "sect_health_9_pudge_8",
@@ -14448,7 +14448,7 @@
     "acitve_common_effect": "modifier_sect_health_base_9",
     "acitve_special_effect": "modifier_sect_health_pudge_9",
     "heroid": "",
-    "Abilityid": "ability3_pudge_flesh_heap"
+    "Abilityid": "imba_pudge_flesh_heap"
   },
   {
     "id": "sect_health_3_slark_9",
@@ -14460,7 +14460,7 @@
     "acitve_common_effect": "modifier_sect_health_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_slark",
-    "Abilityid": "ability1_slark_dark_pact"
+    "Abilityid": "imba_slark_dark_pact"
   },
   {
     "id": "sect_health_6_slark_9",
@@ -14472,7 +14472,7 @@
     "acitve_common_effect": "modifier_sect_health_base_6",
     "acitve_special_effect": "modifier_sect_health_slark_6",
     "heroid": "building_hero_slark",
-    "Abilityid": "ability1_slark_dark_pact"
+    "Abilityid": "imba_slark_dark_pact"
   },
   {
     "id": "sect_health_9_slark_9",
@@ -14484,7 +14484,7 @@
     "acitve_common_effect": "modifier_sect_health_base_9",
     "acitve_special_effect": "modifier_sect_health_slark_9",
     "heroid": "building_hero_slark",
-    "Abilityid": "ability1_slark_dark_pact"
+    "Abilityid": "imba_slark_dark_pact"
   },
   {
     "id": "sect_health_3_terrorblade_10",
@@ -14496,7 +14496,7 @@
     "acitve_common_effect": "modifier_sect_health_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_terrorblade_sunder"
+    "Abilityid": "imba_terrorblade_sunder"
   },
   {
     "id": "sect_health_6_terrorblade_10",
@@ -14508,7 +14508,7 @@
     "acitve_common_effect": "modifier_sect_health_base_6",
     "acitve_special_effect": "modifier_sect_health_terrorblade_6",
     "heroid": "",
-    "Abilityid": "ability6_terrorblade_sunder"
+    "Abilityid": "imba_terrorblade_sunder"
   },
   {
     "id": "sect_health_9_terrorblade_10",
@@ -14520,7 +14520,7 @@
     "acitve_common_effect": "modifier_sect_health_base_9",
     "acitve_special_effect": "modifier_sect_health_terrorblade_9",
     "heroid": "",
-    "Abilityid": "ability6_terrorblade_sunder"
+    "Abilityid": "imba_terrorblade_sunder"
   },
   {
     "id": "sect_ice_4_ancient_apparition_1",
@@ -14532,7 +14532,7 @@
     "acitve_common_effect": "modifier_sect_ice_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_ancient_apparition",
-    "Abilityid": "ability1_ancient_apparition_cold_feet"
+    "Abilityid": "imba_ancient_apparition_cold_feet"
   },
   {
     "id": "sect_ice_8_ancient_apparition_1",
@@ -14544,7 +14544,7 @@
     "acitve_common_effect": "modifier_sect_ice_base_8",
     "acitve_special_effect": "modifier_sect_ice_ancient_apparition_8",
     "heroid": "building_hero_ancient_apparition",
-    "Abilityid": "ability1_ancient_apparition_cold_feet"
+    "Abilityid": "imba_ancient_apparition_cold_feet"
   },
   {
     "id": "sect_ice_12_ancient_apparition_1",
@@ -14556,7 +14556,7 @@
     "acitve_common_effect": "modifier_sect_ice_base_12",
     "acitve_special_effect": "modifier_sect_ice_ancient_apparition_12",
     "heroid": "building_hero_ancient_apparition",
-    "Abilityid": "ability1_ancient_apparition_cold_feet"
+    "Abilityid": "imba_ancient_apparition_cold_feet"
   },
   {
     "id": "sect_ice_4_ancient_apparition_2",
@@ -14568,7 +14568,7 @@
     "acitve_common_effect": "modifier_sect_ice_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_ancient_apparition_ice_blast"
+    "Abilityid": "imba_ancient_apparition_ice_blast"
   },
   {
     "id": "sect_ice_8_ancient_apparition_2",
@@ -14580,7 +14580,7 @@
     "acitve_common_effect": "modifier_sect_ice_base_8",
     "acitve_special_effect": "modifier_sect_ice_ancient_apparition_8",
     "heroid": "",
-    "Abilityid": "ability6_ancient_apparition_ice_blast"
+    "Abilityid": "imba_ancient_apparition_ice_blast"
   },
   {
     "id": "sect_ice_12_ancient_apparition_2",
@@ -14592,7 +14592,7 @@
     "acitve_common_effect": "modifier_sect_ice_base_12",
     "acitve_special_effect": "modifier_sect_ice_ancient_apparition_12",
     "heroid": "",
-    "Abilityid": "ability6_ancient_apparition_ice_blast"
+    "Abilityid": "imba_ancient_apparition_ice_blast"
   },
   {
     "id": "sect_ice_4_ancient_apparition_3",
@@ -14604,7 +14604,7 @@
     "acitve_common_effect": "modifier_sect_ice_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability2_ancient_apparition_ice_vortex"
+    "Abilityid": "imba_ancient_apparition_ice_vortex"
   },
   {
     "id": "sect_ice_8_ancient_apparition_3",
@@ -14616,7 +14616,7 @@
     "acitve_common_effect": "modifier_sect_ice_base_8",
     "acitve_special_effect": "modifier_sect_ice_ancient_apparition_8",
     "heroid": "",
-    "Abilityid": "ability2_ancient_apparition_ice_vortex"
+    "Abilityid": "imba_ancient_apparition_ice_vortex"
   },
   {
     "id": "sect_ice_12_ancient_apparition_3",
@@ -14628,7 +14628,7 @@
     "acitve_common_effect": "modifier_sect_ice_base_12",
     "acitve_special_effect": "modifier_sect_ice_ancient_apparition_12",
     "heroid": "",
-    "Abilityid": "ability2_ancient_apparition_ice_vortex"
+    "Abilityid": "imba_ancient_apparition_ice_vortex"
   },
   {
     "id": "sect_ice_4_crystal_maiden_4",
@@ -14640,7 +14640,7 @@
     "acitve_common_effect": "modifier_sect_ice_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_crystal_maiden",
-    "Abilityid": "ability1_crystal_maiden_crystal_nova"
+    "Abilityid": "imba_crystal_maiden_crystal_nova"
   },
   {
     "id": "sect_ice_8_crystal_maiden_4",
@@ -14652,7 +14652,7 @@
     "acitve_common_effect": "modifier_sect_ice_base_8",
     "acitve_special_effect": "modifier_sect_ice_crystal_maiden_8",
     "heroid": "building_hero_crystal_maiden",
-    "Abilityid": "ability1_crystal_maiden_crystal_nova"
+    "Abilityid": "imba_crystal_maiden_crystal_nova"
   },
   {
     "id": "sect_ice_12_crystal_maiden_4",
@@ -14664,7 +14664,7 @@
     "acitve_common_effect": "modifier_sect_ice_base_12",
     "acitve_special_effect": "modifier_sect_ice_crystal_maiden_12",
     "heroid": "building_hero_crystal_maiden",
-    "Abilityid": "ability1_crystal_maiden_crystal_nova"
+    "Abilityid": "imba_crystal_maiden_crystal_nova"
   },
   {
     "id": "sect_ice_4_crystal_maiden_5",
@@ -14676,7 +14676,7 @@
     "acitve_common_effect": "modifier_sect_ice_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_crystal_maiden_freezing_field"
+    "Abilityid": "imba_crystal_maiden_freezing_field"
   },
   {
     "id": "sect_ice_8_crystal_maiden_5",
@@ -14688,7 +14688,7 @@
     "acitve_common_effect": "modifier_sect_ice_base_8",
     "acitve_special_effect": "modifier_sect_ice_crystal_maiden_8",
     "heroid": "",
-    "Abilityid": "ability6_crystal_maiden_freezing_field"
+    "Abilityid": "imba_crystal_maiden_freezing_field"
   },
   {
     "id": "sect_ice_12_crystal_maiden_5",
@@ -14700,7 +14700,7 @@
     "acitve_common_effect": "modifier_sect_ice_base_12",
     "acitve_special_effect": "modifier_sect_ice_crystal_maiden_12",
     "heroid": "",
-    "Abilityid": "ability6_crystal_maiden_freezing_field"
+    "Abilityid": "imba_crystal_maiden_freezing_field"
   },
   {
     "id": "sect_ice_4_crystal_maiden_6",
@@ -14712,7 +14712,7 @@
     "acitve_common_effect": "modifier_sect_ice_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability2_crystal_maiden_frostbite"
+    "Abilityid": "imba_crystal_maiden_frostbite"
   },
   {
     "id": "sect_ice_8_crystal_maiden_6",
@@ -14724,7 +14724,7 @@
     "acitve_common_effect": "modifier_sect_ice_base_8",
     "acitve_special_effect": "modifier_sect_ice_crystal_maiden_8",
     "heroid": "",
-    "Abilityid": "ability2_crystal_maiden_frostbite"
+    "Abilityid": "imba_crystal_maiden_frostbite"
   },
   {
     "id": "sect_ice_12_crystal_maiden_6",
@@ -14736,7 +14736,7 @@
     "acitve_common_effect": "modifier_sect_ice_base_12",
     "acitve_special_effect": "modifier_sect_ice_crystal_maiden_12",
     "heroid": "",
-    "Abilityid": "ability2_crystal_maiden_frostbite"
+    "Abilityid": "imba_crystal_maiden_frostbite"
   },
   {
     "id": "sect_ice_4_drow_ranger_7",
@@ -14748,7 +14748,7 @@
     "acitve_common_effect": "modifier_sect_ice_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_drow_ranger",
-    "Abilityid": "ability1_drow_ranger_frost_arrows"
+    "Abilityid": "imba_drow_ranger_frost_arrows"
   },
   {
     "id": "sect_ice_8_drow_ranger_7",
@@ -14760,7 +14760,7 @@
     "acitve_common_effect": "modifier_sect_ice_base_8",
     "acitve_special_effect": "modifier_sect_ice_drow_ranger_8",
     "heroid": "building_hero_drow_ranger",
-    "Abilityid": "ability1_drow_ranger_frost_arrows"
+    "Abilityid": "imba_drow_ranger_frost_arrows"
   },
   {
     "id": "sect_ice_12_drow_ranger_7",
@@ -14772,7 +14772,7 @@
     "acitve_common_effect": "modifier_sect_ice_base_12",
     "acitve_special_effect": "modifier_sect_ice_drow_ranger_12",
     "heroid": "building_hero_drow_ranger",
-    "Abilityid": "ability1_drow_ranger_frost_arrows"
+    "Abilityid": "imba_drow_ranger_frost_arrows"
   },
   {
     "id": "sect_ice_4_invoker_8",
@@ -14784,7 +14784,7 @@
     "acitve_common_effect": "modifier_sect_ice_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability7_invoker_cold_snap"
+    "Abilityid": "imba_invoker_cold_snap"
   },
   {
     "id": "sect_ice_8_invoker_8",
@@ -14796,7 +14796,7 @@
     "acitve_common_effect": "modifier_sect_ice_base_8",
     "acitve_special_effect": "modifier_sect_ice_invoker_8",
     "heroid": "",
-    "Abilityid": "ability7_invoker_cold_snap"
+    "Abilityid": "imba_invoker_cold_snap"
   },
   {
     "id": "sect_ice_12_invoker_8",
@@ -14808,7 +14808,7 @@
     "acitve_common_effect": "modifier_sect_ice_base_12",
     "acitve_special_effect": "modifier_sect_ice_invoker_12",
     "heroid": "",
-    "Abilityid": "ability7_invoker_cold_snap"
+    "Abilityid": "imba_invoker_cold_snap"
   },
   {
     "id": "sect_ice_4_invoker_9",
@@ -14820,7 +14820,7 @@
     "acitve_common_effect": "modifier_sect_ice_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": ""
+    "Abilityid": "imba_invoker_ice_wall"
   },
   {
     "id": "sect_ice_8_invoker_9",
@@ -14832,7 +14832,7 @@
     "acitve_common_effect": "modifier_sect_ice_base_8",
     "acitve_special_effect": "modifier_sect_ice_invoker_8",
     "heroid": "",
-    "Abilityid": ""
+    "Abilityid": "imba_invoker_ice_wall"
   },
   {
     "id": "sect_ice_12_invoker_9",
@@ -14844,7 +14844,7 @@
     "acitve_common_effect": "modifier_sect_ice_base_12",
     "acitve_special_effect": "modifier_sect_ice_invoker_12",
     "heroid": "",
-    "Abilityid": ""
+    "Abilityid": "imba_invoker_ice_wall"
   },
   {
     "id": "sect_ice_4_jakiro_10",
@@ -14856,7 +14856,7 @@
     "acitve_common_effect": "modifier_sect_ice_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_jakiro",
-    "Abilityid": "ability2_jakiro_ice_path"
+    "Abilityid": "imba_jakiro_ice_path"
   },
   {
     "id": "sect_ice_8_jakiro_10",
@@ -14868,7 +14868,7 @@
     "acitve_common_effect": "modifier_sect_ice_base_8",
     "acitve_special_effect": "modifier_sect_ice_jakiro_8",
     "heroid": "building_hero_jakiro",
-    "Abilityid": "ability2_jakiro_ice_path"
+    "Abilityid": "imba_jakiro_ice_path"
   },
   {
     "id": "sect_ice_12_jakiro_10",
@@ -14880,7 +14880,7 @@
     "acitve_common_effect": "modifier_sect_ice_base_12",
     "acitve_special_effect": "modifier_sect_ice_jakiro_12",
     "heroid": "building_hero_jakiro",
-    "Abilityid": "ability2_jakiro_ice_path"
+    "Abilityid": "imba_jakiro_ice_path"
   },
   {
     "id": "sect_ice_4_lich_11",
@@ -14892,7 +14892,7 @@
     "acitve_common_effect": "modifier_sect_ice_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_lich_chain_frost"
+    "Abilityid": "imba_lich_chain_frost"
   },
   {
     "id": "sect_ice_8_lich_11",
@@ -14904,7 +14904,7 @@
     "acitve_common_effect": "modifier_sect_ice_base_8",
     "acitve_special_effect": "modifier_sect_ice_lich_8",
     "heroid": "",
-    "Abilityid": "ability6_lich_chain_frost"
+    "Abilityid": "imba_lich_chain_frost"
   },
   {
     "id": "sect_ice_12_lich_11",
@@ -14916,7 +14916,7 @@
     "acitve_common_effect": "modifier_sect_ice_base_12",
     "acitve_special_effect": "modifier_sect_ice_lich_12",
     "heroid": "",
-    "Abilityid": "ability6_lich_chain_frost"
+    "Abilityid": "imba_lich_chain_frost"
   },
   {
     "id": "sect_ice_4_lich_12",
@@ -14928,7 +14928,7 @@
     "acitve_common_effect": "modifier_sect_ice_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability4_lich_ice_spire"
+    "Abilityid": "imba_lich_ice_spire"
   },
   {
     "id": "sect_ice_8_lich_12",
@@ -14940,7 +14940,7 @@
     "acitve_common_effect": "modifier_sect_ice_base_8",
     "acitve_special_effect": "modifier_sect_ice_lich_8",
     "heroid": "",
-    "Abilityid": "ability4_lich_ice_spire"
+    "Abilityid": "imba_lich_ice_spire"
   },
   {
     "id": "sect_ice_12_lich_12",
@@ -14952,7 +14952,7 @@
     "acitve_common_effect": "modifier_sect_ice_base_12",
     "acitve_special_effect": "modifier_sect_ice_lich_12",
     "heroid": "",
-    "Abilityid": "ability4_lich_ice_spire"
+    "Abilityid": "imba_lich_ice_spire"
   },
   {
     "id": "sect_ice_4_tusk_13",
@@ -14964,7 +14964,7 @@
     "acitve_common_effect": "modifier_sect_ice_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_tusk",
-    "Abilityid": "ability1_tusk_ice_shards"
+    "Abilityid": "imba_tusk_ice_shards"
   },
   {
     "id": "sect_ice_8_tusk_13",
@@ -14976,7 +14976,7 @@
     "acitve_common_effect": "modifier_sect_ice_base_8",
     "acitve_special_effect": "modifier_sect_ice_tusk_8",
     "heroid": "building_hero_tusk",
-    "Abilityid": "ability1_tusk_ice_shards"
+    "Abilityid": "imba_tusk_ice_shards"
   },
   {
     "id": "sect_ice_12_tusk_13",
@@ -14988,7 +14988,7 @@
     "acitve_common_effect": "modifier_sect_ice_base_12",
     "acitve_special_effect": "modifier_sect_ice_tusk_12",
     "heroid": "building_hero_tusk",
-    "Abilityid": "ability1_tusk_ice_shards"
+    "Abilityid": "imba_tusk_ice_shards"
   },
   {
     "id": "sect_ice_4_winter_wyvern_14",
@@ -15000,7 +15000,7 @@
     "acitve_common_effect": "modifier_sect_ice_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_winter_wyvern",
-    "Abilityid": "ability1_winter_wyvern_arctic_burn"
+    "Abilityid": "imba_winter_wyvern_arctic_burn"
   },
   {
     "id": "sect_ice_8_winter_wyvern_14",
@@ -15012,7 +15012,7 @@
     "acitve_common_effect": "modifier_sect_ice_base_8",
     "acitve_special_effect": "modifier_sect_ice_winter_wyvern_8",
     "heroid": "building_hero_winter_wyvern",
-    "Abilityid": "ability1_winter_wyvern_arctic_burn"
+    "Abilityid": "imba_winter_wyvern_arctic_burn"
   },
   {
     "id": "sect_ice_12_winter_wyvern_14",
@@ -15024,7 +15024,7 @@
     "acitve_common_effect": "modifier_sect_ice_base_12",
     "acitve_special_effect": "modifier_sect_ice_winter_wyvern_12",
     "heroid": "building_hero_winter_wyvern",
-    "Abilityid": "ability1_winter_wyvern_arctic_burn"
+    "Abilityid": "imba_winter_wyvern_arctic_burn"
   },
   {
     "id": "sect_ice_4_winter_wyvern_15",
@@ -15036,7 +15036,7 @@
     "acitve_common_effect": "modifier_sect_ice_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability2_winter_wyvern_splinter_blast"
+    "Abilityid": "imba_winter_wyvern_splinter_blast"
   },
   {
     "id": "sect_ice_8_winter_wyvern_15",
@@ -15048,7 +15048,7 @@
     "acitve_common_effect": "modifier_sect_ice_base_8",
     "acitve_special_effect": "modifier_sect_ice_winter_wyvern_8",
     "heroid": "",
-    "Abilityid": "ability2_winter_wyvern_splinter_blast"
+    "Abilityid": "imba_winter_wyvern_splinter_blast"
   },
   {
     "id": "sect_ice_12_winter_wyvern_15",
@@ -15060,7 +15060,7 @@
     "acitve_common_effect": "modifier_sect_ice_base_12",
     "acitve_special_effect": "modifier_sect_ice_winter_wyvern_12",
     "heroid": "",
-    "Abilityid": "ability2_winter_wyvern_splinter_blast"
+    "Abilityid": "imba_winter_wyvern_splinter_blast"
   },
   {
     "id": "sect_ice_4_winter_wyvern_16",
@@ -15072,7 +15072,7 @@
     "acitve_common_effect": "modifier_sect_ice_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_winter_wyvern_winters_curse"
+    "Abilityid": "imba_winter_wyvern_winters_curse"
   },
   {
     "id": "sect_ice_8_winter_wyvern_16",
@@ -15084,7 +15084,7 @@
     "acitve_common_effect": "modifier_sect_ice_base_8",
     "acitve_special_effect": "modifier_sect_ice_winter_wyvern_8",
     "heroid": "",
-    "Abilityid": "ability6_winter_wyvern_winters_curse"
+    "Abilityid": "imba_winter_wyvern_winters_curse"
   },
   {
     "id": "sect_ice_12_winter_wyvern_16",
@@ -15096,7 +15096,7 @@
     "acitve_common_effect": "modifier_sect_ice_base_12",
     "acitve_special_effect": "modifier_sect_ice_winter_wyvern_12",
     "heroid": "",
-    "Abilityid": "ability6_winter_wyvern_winters_curse"
+    "Abilityid": "imba_winter_wyvern_winters_curse"
   },
   {
     "id": "sect_invent_2_gyrocopter_1",
@@ -15108,7 +15108,7 @@
     "acitve_common_effect": "modifier_sect_invent_base_2",
     "acitve_special_effect": "",
     "heroid": "building_hero_gyrocopter",
-    "Abilityid": "ability1_gyrocopter_rocket_barrage"
+    "Abilityid": "imba_gyrocopter_rocket_barrage"
   },
   {
     "id": "sect_invent_4_gyrocopter_1",
@@ -15120,7 +15120,7 @@
     "acitve_common_effect": "modifier_sect_invent_base_4",
     "acitve_special_effect": "modifier_sect_invent_gyrocopter_4",
     "heroid": "building_hero_gyrocopter",
-    "Abilityid": "ability1_gyrocopter_rocket_barrage"
+    "Abilityid": "imba_gyrocopter_rocket_barrage"
   },
   {
     "id": "sect_invent_6_gyrocopter_1",
@@ -15132,7 +15132,7 @@
     "acitve_common_effect": "modifier_sect_invent_base_6",
     "acitve_special_effect": "modifier_sect_invent_gyrocopter_6",
     "heroid": "building_hero_gyrocopter",
-    "Abilityid": "ability1_gyrocopter_rocket_barrage"
+    "Abilityid": "imba_gyrocopter_rocket_barrage"
   },
   {
     "id": "sect_invent_2_rattletrap_2",
@@ -15144,7 +15144,7 @@
     "acitve_common_effect": "modifier_sect_invent_base_2",
     "acitve_special_effect": "",
     "heroid": "building_hero_rattletrap",
-    "Abilityid": "ability3_rattletrap_rocket_flare"
+    "Abilityid": "imba_rattletrap_rocket_flare"
   },
   {
     "id": "sect_invent_4_rattletrap_2",
@@ -15156,7 +15156,7 @@
     "acitve_common_effect": "modifier_sect_invent_base_4",
     "acitve_special_effect": "modifier_sect_invent_rattletrap_4",
     "heroid": "building_hero_rattletrap",
-    "Abilityid": "ability3_rattletrap_rocket_flare"
+    "Abilityid": "imba_rattletrap_rocket_flare"
   },
   {
     "id": "sect_invent_6_rattletrap_2",
@@ -15168,7 +15168,7 @@
     "acitve_common_effect": "modifier_sect_invent_base_6",
     "acitve_special_effect": "modifier_sect_invent_rattletrap_6",
     "heroid": "building_hero_rattletrap",
-    "Abilityid": "ability3_rattletrap_rocket_flare"
+    "Abilityid": "imba_rattletrap_rocket_flare"
   },
   {
     "id": "sect_invent_2_shredder_3",
@@ -15180,7 +15180,7 @@
     "acitve_common_effect": "modifier_sect_invent_base_2",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_shredder_chakram"
+    "Abilityid": "imba_shredder_chakram"
   },
   {
     "id": "sect_invent_4_shredder_3",
@@ -15192,7 +15192,7 @@
     "acitve_common_effect": "modifier_sect_invent_base_4",
     "acitve_special_effect": "modifier_sect_invent_shredder_4",
     "heroid": "",
-    "Abilityid": "ability6_shredder_chakram"
+    "Abilityid": "imba_shredder_chakram"
   },
   {
     "id": "sect_invent_6_shredder_3",
@@ -15204,7 +15204,7 @@
     "acitve_common_effect": "modifier_sect_invent_base_6",
     "acitve_special_effect": "modifier_sect_invent_shredder_6",
     "heroid": "",
-    "Abilityid": "ability6_shredder_chakram"
+    "Abilityid": "imba_shredder_chakram"
   },
   {
     "id": "sect_invent_2_sniper_4",
@@ -15216,7 +15216,7 @@
     "acitve_common_effect": "modifier_sect_invent_base_2",
     "acitve_special_effect": "",
     "heroid": "building_hero_sniper",
-    "Abilityid": "ability1_sniper_shrapnel"
+    "Abilityid": "imba_sniper_shrapnel"
   },
   {
     "id": "sect_invent_4_sniper_4",
@@ -15228,7 +15228,7 @@
     "acitve_common_effect": "modifier_sect_invent_base_4",
     "acitve_special_effect": "modifier_sect_invent_sniper_4",
     "heroid": "building_hero_sniper",
-    "Abilityid": "ability1_sniper_shrapnel"
+    "Abilityid": "imba_sniper_shrapnel"
   },
   {
     "id": "sect_invent_6_sniper_4",
@@ -15240,7 +15240,7 @@
     "acitve_common_effect": "modifier_sect_invent_base_6",
     "acitve_special_effect": "modifier_sect_invent_sniper_6",
     "heroid": "building_hero_sniper",
-    "Abilityid": "ability1_sniper_shrapnel"
+    "Abilityid": "imba_sniper_shrapnel"
   },
   {
     "id": "sect_invent_2_techies_5",
@@ -15288,7 +15288,7 @@
     "acitve_common_effect": "modifier_sect_invent_base_2",
     "acitve_special_effect": "",
     "heroid": "building_hero_tinker",
-    "Abilityid": "ability2_tinker_heat_seeking_missile"
+    "Abilityid": "imba_tinker_heat_seeking_missile"
   },
   {
     "id": "sect_invent_4_tinker_6",
@@ -15300,7 +15300,7 @@
     "acitve_common_effect": "modifier_sect_invent_base_4",
     "acitve_special_effect": "modifier_sect_invent_tinker_4",
     "heroid": "building_hero_tinker",
-    "Abilityid": "ability2_tinker_heat_seeking_missile"
+    "Abilityid": "imba_tinker_heat_seeking_missile"
   },
   {
     "id": "sect_invent_6_tinker_6",
@@ -15312,7 +15312,7 @@
     "acitve_common_effect": "modifier_sect_invent_base_6",
     "acitve_special_effect": "modifier_sect_invent_tinker_6",
     "heroid": "building_hero_tinker",
-    "Abilityid": "ability2_tinker_heat_seeking_missile"
+    "Abilityid": "imba_tinker_heat_seeking_missile"
   },
   {
     "id": "sect_light_2_dawnbreaker_1",
@@ -15324,7 +15324,7 @@
     "acitve_common_effect": "modifier_sect_light_base_2",
     "acitve_special_effect": "",
     "heroid": "building_hero_dawnbreaker",
-    "Abilityid": "ability1_dawnbreaker_fire_wreath"
+    "Abilityid": "imba_dawnbreaker_fire_wreath"
   },
   {
     "id": "sect_light_4_dawnbreaker_1",
@@ -15336,7 +15336,7 @@
     "acitve_common_effect": "modifier_sect_light_base_4",
     "acitve_special_effect": "modifier_sect_light_dawnbreaker_4",
     "heroid": "building_hero_dawnbreaker",
-    "Abilityid": "ability1_dawnbreaker_fire_wreath"
+    "Abilityid": "imba_dawnbreaker_fire_wreath"
   },
   {
     "id": "sect_light_6_dawnbreaker_1",
@@ -15348,7 +15348,7 @@
     "acitve_common_effect": "modifier_sect_light_base_6",
     "acitve_special_effect": "modifier_sect_light_dawnbreaker_6",
     "heroid": "building_hero_dawnbreaker",
-    "Abilityid": "ability1_dawnbreaker_fire_wreath"
+    "Abilityid": "imba_dawnbreaker_fire_wreath"
   },
   {
     "id": "sect_light_2_keeper_of_the_light_2",
@@ -15360,7 +15360,7 @@
     "acitve_common_effect": "modifier_sect_light_base_2",
     "acitve_special_effect": "",
     "heroid": "building_hero_keeper_of_the_light",
-    "Abilityid": "ability1_keeper_of_the_light_illuminate"
+    "Abilityid": "imba_keeper_of_the_light_illuminate"
   },
   {
     "id": "sect_light_4_keeper_of_the_light_2",
@@ -15372,7 +15372,7 @@
     "acitve_common_effect": "modifier_sect_light_base_4",
     "acitve_special_effect": "modifier_sect_light_keeper_of_the_light_4",
     "heroid": "building_hero_keeper_of_the_light",
-    "Abilityid": "ability1_keeper_of_the_light_illuminate"
+    "Abilityid": "imba_keeper_of_the_light_illuminate"
   },
   {
     "id": "sect_light_6_keeper_of_the_light_2",
@@ -15384,7 +15384,7 @@
     "acitve_common_effect": "modifier_sect_light_base_6",
     "acitve_special_effect": "modifier_sect_light_keeper_of_the_light_6",
     "heroid": "building_hero_keeper_of_the_light",
-    "Abilityid": "ability1_keeper_of_the_light_illuminate"
+    "Abilityid": "imba_keeper_of_the_light_illuminate"
   },
   {
     "id": "sect_light_2_lina_3",
@@ -15396,7 +15396,7 @@
     "acitve_common_effect": "modifier_sect_light_base_2",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability2_lina_light_strike_array"
+    "Abilityid": "imba_lina_light_strike_array"
   },
   {
     "id": "sect_light_4_lina_3",
@@ -15408,7 +15408,7 @@
     "acitve_common_effect": "modifier_sect_light_base_4",
     "acitve_special_effect": "modifier_sect_light_lina_4",
     "heroid": "",
-    "Abilityid": "ability2_lina_light_strike_array"
+    "Abilityid": "imba_lina_light_strike_array"
   },
   {
     "id": "sect_light_6_lina_3",
@@ -15420,7 +15420,7 @@
     "acitve_common_effect": "modifier_sect_light_base_6",
     "acitve_special_effect": "modifier_sect_light_lina_6",
     "heroid": "",
-    "Abilityid": "ability2_lina_light_strike_array"
+    "Abilityid": "imba_lina_light_strike_array"
   },
   {
     "id": "sect_light_2_luna_4",
@@ -15432,7 +15432,7 @@
     "acitve_common_effect": "modifier_sect_light_base_2",
     "acitve_special_effect": "",
     "heroid": "building_hero_luna",
-    "Abilityid": "ability1_luna_lucent_beam"
+    "Abilityid": "imba_luna_lucent_beam"
   },
   {
     "id": "sect_light_4_luna_4",
@@ -15444,7 +15444,7 @@
     "acitve_common_effect": "modifier_sect_light_base_4",
     "acitve_special_effect": "modifier_sect_light_luna_4",
     "heroid": "building_hero_luna",
-    "Abilityid": "ability1_luna_lucent_beam"
+    "Abilityid": "imba_luna_lucent_beam"
   },
   {
     "id": "sect_light_6_luna_4",
@@ -15456,7 +15456,7 @@
     "acitve_common_effect": "modifier_sect_light_base_6",
     "acitve_special_effect": "modifier_sect_light_luna_6",
     "heroid": "building_hero_luna",
-    "Abilityid": "ability1_luna_lucent_beam"
+    "Abilityid": "imba_luna_lucent_beam"
   },
   {
     "id": "sect_light_2_omniknight_5",
@@ -15468,7 +15468,7 @@
     "acitve_common_effect": "modifier_sect_light_base_2",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability3_omniknight_degen_aura"
+    "Abilityid": "imba_omniknight_degen_aura"
   },
   {
     "id": "sect_light_4_omniknight_5",
@@ -15480,7 +15480,7 @@
     "acitve_common_effect": "modifier_sect_light_base_4",
     "acitve_special_effect": "modifier_sect_light_omniknight_4",
     "heroid": "",
-    "Abilityid": "ability3_omniknight_degen_aura"
+    "Abilityid": "imba_omniknight_degen_aura"
   },
   {
     "id": "sect_light_6_omniknight_5",
@@ -15492,7 +15492,7 @@
     "acitve_common_effect": "modifier_sect_light_base_6",
     "acitve_special_effect": "modifier_sect_light_omniknight_6",
     "heroid": "",
-    "Abilityid": "ability3_omniknight_degen_aura"
+    "Abilityid": "imba_omniknight_degen_aura"
   },
   {
     "id": "sect_light_2_skywrath_mage_6",
@@ -15504,7 +15504,7 @@
     "acitve_common_effect": "modifier_sect_light_base_2",
     "acitve_special_effect": "",
     "heroid": "building_hero_skywrath_mage",
-    "Abilityid": "ability2_skywrath_mage_concussive_shot"
+    "Abilityid": "imba_skywrath_mage_concussive_shot"
   },
   {
     "id": "sect_light_4_skywrath_mage_6",
@@ -15516,7 +15516,7 @@
     "acitve_common_effect": "modifier_sect_light_base_4",
     "acitve_special_effect": "modifier_sect_light_skywrath_mage_4",
     "heroid": "building_hero_skywrath_mage",
-    "Abilityid": "ability2_skywrath_mage_concussive_shot"
+    "Abilityid": "imba_skywrath_mage_concussive_shot"
   },
   {
     "id": "sect_light_6_skywrath_mage_6",
@@ -15528,7 +15528,7 @@
     "acitve_common_effect": "modifier_sect_light_base_6",
     "acitve_special_effect": "modifier_sect_light_skywrath_mage_6",
     "heroid": "building_hero_skywrath_mage",
-    "Abilityid": "ability2_skywrath_mage_concussive_shot"
+    "Abilityid": "imba_skywrath_mage_concussive_shot"
   },
   {
     "id": "sect_light_2_zeus_7",
@@ -15540,7 +15540,7 @@
     "acitve_common_effect": "modifier_sect_light_base_2",
     "acitve_special_effect": "",
     "heroid": "building_hero_zeus",
-    "Abilityid": "ability1_zuus_arc_lightning"
+    "Abilityid": "imba_zuus_arc_lightning"
   },
   {
     "id": "sect_light_4_zeus_7",
@@ -15552,7 +15552,7 @@
     "acitve_common_effect": "modifier_sect_light_base_4",
     "acitve_special_effect": "modifier_sect_light_zeus_4",
     "heroid": "building_hero_zeus",
-    "Abilityid": "ability1_zuus_arc_lightning"
+    "Abilityid": "imba_zuus_arc_lightning"
   },
   {
     "id": "sect_light_6_zeus_7",
@@ -15564,7 +15564,7 @@
     "acitve_common_effect": "modifier_sect_light_base_6",
     "acitve_special_effect": "modifier_sect_light_zeus_6",
     "heroid": "building_hero_zeus",
-    "Abilityid": "ability1_zuus_arc_lightning"
+    "Abilityid": "imba_zuus_arc_lightning"
   },
   {
     "id": "sect_magarm_up_2_antimage_1",
@@ -15576,7 +15576,7 @@
     "acitve_common_effect": "modifier_sect_magarm_up_base_2",
     "acitve_special_effect": "",
     "heroid": "building_hero_antimage",
-    "Abilityid": "ability3_antimage_counterspell"
+    "Abilityid": "imba_antimage_counterspell"
   },
   {
     "id": "sect_magarm_up_4_antimage_1",
@@ -15588,7 +15588,7 @@
     "acitve_common_effect": "modifier_sect_magarm_up_base_4",
     "acitve_special_effect": "modifier_sect_magarm_up_antimage_4",
     "heroid": "building_hero_antimage",
-    "Abilityid": "ability3_antimage_counterspell"
+    "Abilityid": "imba_antimage_counterspell"
   },
   {
     "id": "sect_magarm_up_6_antimage_1",
@@ -15600,7 +15600,7 @@
     "acitve_common_effect": "modifier_sect_magarm_up_base_6",
     "acitve_special_effect": "modifier_sect_magarm_up_antimage_6",
     "heroid": "building_hero_antimage",
-    "Abilityid": "ability3_antimage_counterspell"
+    "Abilityid": "imba_antimage_counterspell"
   },
   {
     "id": "sect_magarm_up_2_omniknight_2",
@@ -15612,7 +15612,7 @@
     "acitve_common_effect": "modifier_sect_magarm_up_base_2",
     "acitve_special_effect": "",
     "heroid": "building_hero_omniknight",
-    "Abilityid": "ability2_omniknight_repel"
+    "Abilityid": "imba_omniknight_repel"
   },
   {
     "id": "sect_magarm_up_4_omniknight_2",
@@ -15624,7 +15624,7 @@
     "acitve_common_effect": "modifier_sect_magarm_up_base_4",
     "acitve_special_effect": "modifier_sect_magarm_up_omniknight_4",
     "heroid": "building_hero_omniknight",
-    "Abilityid": "ability2_omniknight_repel"
+    "Abilityid": "imba_omniknight_repel"
   },
   {
     "id": "sect_magarm_up_6_omniknight_2",
@@ -15636,7 +15636,7 @@
     "acitve_common_effect": "modifier_sect_magarm_up_base_6",
     "acitve_special_effect": "modifier_sect_magarm_up_omniknight_6",
     "heroid": "building_hero_omniknight",
-    "Abilityid": "ability2_omniknight_repel"
+    "Abilityid": "imba_omniknight_repel"
   },
   {
     "id": "sect_magarm_up_2_oracle_3",
@@ -15648,7 +15648,7 @@
     "acitve_common_effect": "modifier_sect_magarm_up_base_2",
     "acitve_special_effect": "",
     "heroid": "building_hero_oracle",
-    "Abilityid": "ability2_oracle_fates_edict"
+    "Abilityid": "imba_oracle_fates_edict"
   },
   {
     "id": "sect_magarm_up_4_oracle_3",
@@ -15660,7 +15660,7 @@
     "acitve_common_effect": "modifier_sect_magarm_up_base_4",
     "acitve_special_effect": "modifier_sect_magarm_up_oracle_4",
     "heroid": "building_hero_oracle",
-    "Abilityid": "ability2_oracle_fates_edict"
+    "Abilityid": "imba_oracle_fates_edict"
   },
   {
     "id": "sect_magarm_up_6_oracle_3",
@@ -15672,7 +15672,7 @@
     "acitve_common_effect": "modifier_sect_magarm_up_base_6",
     "acitve_special_effect": "modifier_sect_magarm_up_oracle_6",
     "heroid": "building_hero_oracle",
-    "Abilityid": "ability2_oracle_fates_edict"
+    "Abilityid": "imba_oracle_fates_edict"
   },
   {
     "id": "sect_magarm_up_2_razor_4",
@@ -15684,7 +15684,7 @@
     "acitve_common_effect": "modifier_sect_magarm_up_base_2",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability3_razor_unstable_current"
+    "Abilityid": "imba_razor_unstable_current"
   },
   {
     "id": "sect_magarm_up_4_razor_4",
@@ -15696,7 +15696,7 @@
     "acitve_common_effect": "modifier_sect_magarm_up_base_4",
     "acitve_special_effect": "modifier_sect_magarm_up_razor_4",
     "heroid": "",
-    "Abilityid": "ability3_razor_unstable_current"
+    "Abilityid": "imba_razor_unstable_current"
   },
   {
     "id": "sect_magarm_up_6_razor_4",
@@ -15708,7 +15708,7 @@
     "acitve_common_effect": "modifier_sect_magarm_up_base_6",
     "acitve_special_effect": "modifier_sect_magarm_up_razor_6",
     "heroid": "",
-    "Abilityid": "ability3_razor_unstable_current"
+    "Abilityid": "imba_razor_unstable_current"
   },
   {
     "id": "sect_magarm_up_2_spirit_breaker_5",
@@ -15720,7 +15720,7 @@
     "acitve_common_effect": "modifier_sect_magarm_up_base_2",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability2_spirit_breaker_bulldoze"
+    "Abilityid": "imba_spirit_breaker_bulldoze"
   },
   {
     "id": "sect_magarm_up_4_spirit_breaker_5",
@@ -15732,7 +15732,7 @@
     "acitve_common_effect": "modifier_sect_magarm_up_base_4",
     "acitve_special_effect": "modifier_sect_magarm_up_spirit_breaker_4",
     "heroid": "",
-    "Abilityid": "ability2_spirit_breaker_bulldoze"
+    "Abilityid": "imba_spirit_breaker_bulldoze"
   },
   {
     "id": "sect_magarm_up_6_spirit_breaker_5",
@@ -15744,7 +15744,7 @@
     "acitve_common_effect": "modifier_sect_magarm_up_base_6",
     "acitve_special_effect": "modifier_sect_magarm_up_spirit_breaker_6",
     "heroid": "",
-    "Abilityid": "ability2_spirit_breaker_bulldoze"
+    "Abilityid": "imba_spirit_breaker_bulldoze"
   },
   {
     "id": "sect_magarm_up_2_viper_6",
@@ -15756,7 +15756,7 @@
     "acitve_common_effect": "modifier_sect_magarm_up_base_2",
     "acitve_special_effect": "",
     "heroid": "building_hero_viper",
-    "Abilityid": "ability3_viper_corrosive_skin"
+    "Abilityid": "imba_viper_corrosive_skin"
   },
   {
     "id": "sect_magarm_up_4_viper_6",
@@ -15768,7 +15768,7 @@
     "acitve_common_effect": "modifier_sect_magarm_up_base_4",
     "acitve_special_effect": "modifier_sect_magarm_up_viper_4",
     "heroid": "building_hero_viper",
-    "Abilityid": "ability3_viper_corrosive_skin"
+    "Abilityid": "imba_viper_corrosive_skin"
   },
   {
     "id": "sect_magarm_up_6_viper_6",
@@ -15780,7 +15780,7 @@
     "acitve_common_effect": "modifier_sect_magarm_up_base_6",
     "acitve_special_effect": "modifier_sect_magarm_up_viper_6",
     "heroid": "building_hero_viper",
-    "Abilityid": "ability3_viper_corrosive_skin"
+    "Abilityid": "imba_viper_corrosive_skin"
   },
   {
     "id": "sect_magic_4_disruptor_1",
@@ -15792,7 +15792,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_disruptor",
-    "Abilityid": "ability1_disruptor_thunder_strike"
+    "Abilityid": "imba_disruptor_thunder_strike"
   },
   {
     "id": "sect_magic_8_disruptor_1",
@@ -15804,7 +15804,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_8",
     "acitve_special_effect": "modifier_sect_magic_disruptor_8",
     "heroid": "building_hero_disruptor",
-    "Abilityid": "ability1_disruptor_thunder_strike"
+    "Abilityid": "imba_disruptor_thunder_strike"
   },
   {
     "id": "sect_magic_12_disruptor_1",
@@ -15816,7 +15816,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_12",
     "acitve_special_effect": "modifier_sect_magic_disruptor_12",
     "heroid": "building_hero_disruptor",
-    "Abilityid": "ability1_disruptor_thunder_strike"
+    "Abilityid": "imba_disruptor_thunder_strike"
   },
   {
     "id": "sect_magic_4_grimstroke_2",
@@ -15828,7 +15828,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_grimstroke",
-    "Abilityid": "ability1_grimstroke_dark_artistry"
+    "Abilityid": "imba_grimstroke_dark_artistry"
   },
   {
     "id": "sect_magic_8_grimstroke_2",
@@ -15840,7 +15840,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_8",
     "acitve_special_effect": "modifier_sect_magic_grimstroke_8",
     "heroid": "building_hero_grimstroke",
-    "Abilityid": "ability1_grimstroke_dark_artistry"
+    "Abilityid": "imba_grimstroke_dark_artistry"
   },
   {
     "id": "sect_magic_12_grimstroke_2",
@@ -15852,7 +15852,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_12",
     "acitve_special_effect": "modifier_sect_magic_grimstroke_12",
     "heroid": "building_hero_grimstroke",
-    "Abilityid": "ability1_grimstroke_dark_artistry"
+    "Abilityid": "imba_grimstroke_dark_artistry"
   },
   {
     "id": "sect_magic_4_invoker_3",
@@ -15864,7 +15864,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": ""
+    "Abilityid": "imba_invoker_chaos_meteor"
   },
   {
     "id": "sect_magic_8_invoker_3",
@@ -15876,7 +15876,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_8",
     "acitve_special_effect": "modifier_sect_magic_invoker_8",
     "heroid": "",
-    "Abilityid": ""
+    "Abilityid": "imba_invoker_chaos_meteor"
   },
   {
     "id": "sect_magic_12_invoker_3",
@@ -15888,7 +15888,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_12",
     "acitve_special_effect": "modifier_sect_magic_invoker_12",
     "heroid": "",
-    "Abilityid": ""
+    "Abilityid": "imba_invoker_chaos_meteor"
   },
   {
     "id": "sect_magic_4_keeper_of_the_light_4",
@@ -15900,7 +15900,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability2_keeper_of_the_light_radiant_bind"
+    "Abilityid": "imba_keeper_of_the_light_radiant_bind"
   },
   {
     "id": "sect_magic_8_keeper_of_the_light_4",
@@ -15912,7 +15912,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_8",
     "acitve_special_effect": "modifier_sect_magic_keeper_of_the_light_8",
     "heroid": "",
-    "Abilityid": "ability2_keeper_of_the_light_radiant_bind"
+    "Abilityid": "imba_keeper_of_the_light_radiant_bind"
   },
   {
     "id": "sect_magic_12_keeper_of_the_light_4",
@@ -15924,7 +15924,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_12",
     "acitve_special_effect": "modifier_sect_magic_keeper_of_the_light_12",
     "heroid": "",
-    "Abilityid": "ability2_keeper_of_the_light_radiant_bind"
+    "Abilityid": "imba_keeper_of_the_light_radiant_bind"
   },
   {
     "id": "sect_magic_4_leshrac_5",
@@ -15936,7 +15936,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability4_leshrac_greater_lightning_storm"
+    "Abilityid": "imba_leshrac_greater_lightning_storm"
   },
   {
     "id": "sect_magic_8_leshrac_5",
@@ -15948,7 +15948,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_8",
     "acitve_special_effect": "modifier_sect_magic_leshrac_8",
     "heroid": "",
-    "Abilityid": "ability4_leshrac_greater_lightning_storm"
+    "Abilityid": "imba_leshrac_greater_lightning_storm"
   },
   {
     "id": "sect_magic_12_leshrac_5",
@@ -15960,7 +15960,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_12",
     "acitve_special_effect": "modifier_sect_magic_leshrac_12",
     "heroid": "",
-    "Abilityid": "ability4_leshrac_greater_lightning_storm"
+    "Abilityid": "imba_leshrac_greater_lightning_storm"
   },
   {
     "id": "sect_magic_4_leshrac_6",
@@ -15972,7 +15972,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_leshrac",
-    "Abilityid": "ability3_leshrac_lightning_storm"
+    "Abilityid": "imba_leshrac_lightning_storm"
   },
   {
     "id": "sect_magic_8_leshrac_6",
@@ -15984,7 +15984,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_8",
     "acitve_special_effect": "modifier_sect_magic_leshrac_8",
     "heroid": "building_hero_leshrac",
-    "Abilityid": "ability3_leshrac_lightning_storm"
+    "Abilityid": "imba_leshrac_lightning_storm"
   },
   {
     "id": "sect_magic_12_leshrac_6",
@@ -15996,7 +15996,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_12",
     "acitve_special_effect": "modifier_sect_magic_leshrac_12",
     "heroid": "building_hero_leshrac",
-    "Abilityid": "ability3_leshrac_lightning_storm"
+    "Abilityid": "imba_leshrac_lightning_storm"
   },
   {
     "id": "sect_magic_4_lina_7",
@@ -16008,7 +16008,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_lina_laguna_blade"
+    "Abilityid": "imba_lina_laguna_blade"
   },
   {
     "id": "sect_magic_8_lina_7",
@@ -16020,7 +16020,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_8",
     "acitve_special_effect": "modifier_sect_magic_lina_8",
     "heroid": "",
-    "Abilityid": "ability6_lina_laguna_blade"
+    "Abilityid": "imba_lina_laguna_blade"
   },
   {
     "id": "sect_magic_12_lina_7",
@@ -16032,7 +16032,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_12",
     "acitve_special_effect": "modifier_sect_magic_lina_12",
     "heroid": "",
-    "Abilityid": "ability6_lina_laguna_blade"
+    "Abilityid": "imba_lina_laguna_blade"
   },
   {
     "id": "sect_magic_4_lion_8",
@@ -16044,7 +16044,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_lion_finger_of_death"
+    "Abilityid": "imba_lion_finger_of_death"
   },
   {
     "id": "sect_magic_8_lion_8",
@@ -16056,7 +16056,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_8",
     "acitve_special_effect": "modifier_sect_magic_lion_8",
     "heroid": "",
-    "Abilityid": "ability6_lion_finger_of_death"
+    "Abilityid": "imba_lion_finger_of_death"
   },
   {
     "id": "sect_magic_12_lion_8",
@@ -16068,7 +16068,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_12",
     "acitve_special_effect": "modifier_sect_magic_lion_12",
     "heroid": "",
-    "Abilityid": "ability6_lion_finger_of_death"
+    "Abilityid": "imba_lion_finger_of_death"
   },
   {
     "id": "sect_magic_4_ogre_magi_9",
@@ -16080,7 +16080,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_ogre_magi",
-    "Abilityid": "ability1_ogre_magi_fireblast"
+    "Abilityid": "imba_ogre_magi_fireblast"
   },
   {
     "id": "sect_magic_8_ogre_magi_9",
@@ -16092,7 +16092,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_8",
     "acitve_special_effect": "modifier_sect_magic_ogre_magi_8",
     "heroid": "building_hero_ogre_magi",
-    "Abilityid": "ability1_ogre_magi_fireblast"
+    "Abilityid": "imba_ogre_magi_fireblast"
   },
   {
     "id": "sect_magic_12_ogre_magi_9",
@@ -16104,7 +16104,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_12",
     "acitve_special_effect": "modifier_sect_magic_ogre_magi_12",
     "heroid": "building_hero_ogre_magi",
-    "Abilityid": "ability1_ogre_magi_fireblast"
+    "Abilityid": "imba_ogre_magi_fireblast"
   },
   {
     "id": "sect_magic_4_puck_10",
@@ -16116,7 +16116,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_puck_dream_coil"
+    "Abilityid": "imba_puck_dream_coil"
   },
   {
     "id": "sect_magic_8_puck_10",
@@ -16128,7 +16128,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_8",
     "acitve_special_effect": "modifier_sect_magic_puck_8",
     "heroid": "",
-    "Abilityid": "ability6_puck_dream_coil"
+    "Abilityid": "imba_puck_dream_coil"
   },
   {
     "id": "sect_magic_12_puck_10",
@@ -16140,7 +16140,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_12",
     "acitve_special_effect": "modifier_sect_magic_puck_12",
     "heroid": "",
-    "Abilityid": "ability6_puck_dream_coil"
+    "Abilityid": "imba_puck_dream_coil"
   },
   {
     "id": "sect_magic_4_puck_11",
@@ -16152,7 +16152,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_puck",
-    "Abilityid": "ability1_puck_illusory_orb"
+    "Abilityid": "imba_puck_illusory_orb"
   },
   {
     "id": "sect_magic_8_puck_11",
@@ -16164,7 +16164,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_8",
     "acitve_special_effect": "modifier_sect_magic_puck_8",
     "heroid": "building_hero_puck",
-    "Abilityid": "ability1_puck_illusory_orb"
+    "Abilityid": "imba_puck_illusory_orb"
   },
   {
     "id": "sect_magic_12_puck_11",
@@ -16176,7 +16176,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_12",
     "acitve_special_effect": "modifier_sect_magic_puck_12",
     "heroid": "building_hero_puck",
-    "Abilityid": "ability1_puck_illusory_orb"
+    "Abilityid": "imba_puck_illusory_orb"
   },
   {
     "id": "sect_magic_4_pugna_12",
@@ -16188,7 +16188,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_pugna",
-    "Abilityid": "ability1_pugna_nether_blast"
+    "Abilityid": "imba_pugna_nether_blast"
   },
   {
     "id": "sect_magic_8_pugna_12",
@@ -16200,7 +16200,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_8",
     "acitve_special_effect": "modifier_sect_magic_pugna_8",
     "heroid": "building_hero_pugna",
-    "Abilityid": "ability1_pugna_nether_blast"
+    "Abilityid": "imba_pugna_nether_blast"
   },
   {
     "id": "sect_magic_12_pugna_12",
@@ -16212,7 +16212,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_12",
     "acitve_special_effect": "modifier_sect_magic_pugna_12",
     "heroid": "building_hero_pugna",
-    "Abilityid": "ability1_pugna_nether_blast"
+    "Abilityid": "imba_pugna_nether_blast"
   },
   {
     "id": "sect_magic_4_queenofpain_13",
@@ -16224,7 +16224,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_queenofpain",
-    "Abilityid": "ability3_queenofpain_scream_of_pain"
+    "Abilityid": "imba_queenofpain_scream_of_pain"
   },
   {
     "id": "sect_magic_8_queenofpain_13",
@@ -16236,7 +16236,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_8",
     "acitve_special_effect": "modifier_sect_magic_queenofpain_8",
     "heroid": "building_hero_queenofpain",
-    "Abilityid": "ability3_queenofpain_scream_of_pain"
+    "Abilityid": "imba_queenofpain_scream_of_pain"
   },
   {
     "id": "sect_magic_12_queenofpain_13",
@@ -16248,7 +16248,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_12",
     "acitve_special_effect": "modifier_sect_magic_queenofpain_12",
     "heroid": "building_hero_queenofpain",
-    "Abilityid": "ability3_queenofpain_scream_of_pain"
+    "Abilityid": "imba_queenofpain_scream_of_pain"
   },
   {
     "id": "sect_magic_4_razor_14",
@@ -16260,7 +16260,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_razor",
-    "Abilityid": "ability1_razor_plasma_field"
+    "Abilityid": "imba_razor_plasma_field"
   },
   {
     "id": "sect_magic_8_razor_14",
@@ -16272,7 +16272,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_8",
     "acitve_special_effect": "modifier_sect_magic_razor_8",
     "heroid": "building_hero_razor",
-    "Abilityid": "ability1_razor_plasma_field"
+    "Abilityid": "imba_razor_plasma_field"
   },
   {
     "id": "sect_magic_12_razor_14",
@@ -16284,7 +16284,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_12",
     "acitve_special_effect": "modifier_sect_magic_razor_12",
     "heroid": "building_hero_razor",
-    "Abilityid": "ability1_razor_plasma_field"
+    "Abilityid": "imba_razor_plasma_field"
   },
   {
     "id": "sect_magic_4_rubick_15",
@@ -16296,7 +16296,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_rubick",
-    "Abilityid": "ability2_rubick_fade_bolt"
+    "Abilityid": "imba_rubick_fade_bolt"
   },
   {
     "id": "sect_magic_8_rubick_15",
@@ -16308,7 +16308,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_8",
     "acitve_special_effect": "modifier_sect_magic_rubick_8",
     "heroid": "building_hero_rubick",
-    "Abilityid": "ability2_rubick_fade_bolt"
+    "Abilityid": "imba_rubick_fade_bolt"
   },
   {
     "id": "sect_magic_12_rubick_15",
@@ -16320,7 +16320,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_12",
     "acitve_special_effect": "modifier_sect_magic_rubick_12",
     "heroid": "building_hero_rubick",
-    "Abilityid": "ability2_rubick_fade_bolt"
+    "Abilityid": "imba_rubick_fade_bolt"
   },
   {
     "id": "sect_magic_4_shadow_shaman_16",
@@ -16332,7 +16332,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_shadow_shaman",
-    "Abilityid": "ability1_shadow_shaman_ether_shock"
+    "Abilityid": "imba_shadow_shaman_ether_shock"
   },
   {
     "id": "sect_magic_8_shadow_shaman_16",
@@ -16344,7 +16344,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_8",
     "acitve_special_effect": "modifier_sect_magic_shadow_shaman_8",
     "heroid": "building_hero_shadow_shaman",
-    "Abilityid": "ability1_shadow_shaman_ether_shock"
+    "Abilityid": "imba_shadow_shaman_ether_shock"
   },
   {
     "id": "sect_magic_12_shadow_shaman_16",
@@ -16356,7 +16356,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_12",
     "acitve_special_effect": "modifier_sect_magic_shadow_shaman_12",
     "heroid": "building_hero_shadow_shaman",
-    "Abilityid": "ability1_shadow_shaman_ether_shock"
+    "Abilityid": "imba_shadow_shaman_ether_shock"
   },
   {
     "id": "sect_magic_4_skywrath_mage_17",
@@ -16368,7 +16368,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability1_skywrath_mage_arcane_bolt"
+    "Abilityid": "imba_skywrath_mage_arcane_bolt"
   },
   {
     "id": "sect_magic_8_skywrath_mage_17",
@@ -16380,7 +16380,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_8",
     "acitve_special_effect": "modifier_sect_magic_skywrath_mage_8",
     "heroid": "",
-    "Abilityid": "ability1_skywrath_mage_arcane_bolt"
+    "Abilityid": "imba_skywrath_mage_arcane_bolt"
   },
   {
     "id": "sect_magic_12_skywrath_mage_17",
@@ -16392,7 +16392,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_12",
     "acitve_special_effect": "modifier_sect_magic_skywrath_mage_12",
     "heroid": "",
-    "Abilityid": "ability1_skywrath_mage_arcane_bolt"
+    "Abilityid": "imba_skywrath_mage_arcane_bolt"
   },
   {
     "id": "sect_magic_4_skywrath_mage_18",
@@ -16404,7 +16404,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_skywrath_mage_mystic_flare"
+    "Abilityid": "imba_skywrath_mage_mystic_flare"
   },
   {
     "id": "sect_magic_8_skywrath_mage_18",
@@ -16416,7 +16416,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_8",
     "acitve_special_effect": "modifier_sect_magic_skywrath_mage_8",
     "heroid": "",
-    "Abilityid": "ability6_skywrath_mage_mystic_flare"
+    "Abilityid": "imba_skywrath_mage_mystic_flare"
   },
   {
     "id": "sect_magic_12_skywrath_mage_18",
@@ -16428,7 +16428,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_12",
     "acitve_special_effect": "modifier_sect_magic_skywrath_mage_12",
     "heroid": "",
-    "Abilityid": "ability6_skywrath_mage_mystic_flare"
+    "Abilityid": "imba_skywrath_mage_mystic_flare"
   },
   {
     "id": "sect_magic_4_storm_spirit_19",
@@ -16440,7 +16440,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_storm_spirit_ball_lightning"
+    "Abilityid": "imba_storm_spirit_ball_lightning"
   },
   {
     "id": "sect_magic_8_storm_spirit_19",
@@ -16452,7 +16452,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_8",
     "acitve_special_effect": "modifier_sect_magic_storm_spirit_8",
     "heroid": "",
-    "Abilityid": "ability6_storm_spirit_ball_lightning"
+    "Abilityid": "imba_storm_spirit_ball_lightning"
   },
   {
     "id": "sect_magic_12_storm_spirit_19",
@@ -16464,7 +16464,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_12",
     "acitve_special_effect": "modifier_sect_magic_storm_spirit_12",
     "heroid": "",
-    "Abilityid": "ability6_storm_spirit_ball_lightning"
+    "Abilityid": "imba_storm_spirit_ball_lightning"
   },
   {
     "id": "sect_magic_4_storm_spirit_20",
@@ -16476,7 +16476,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_storm_spirit",
-    "Abilityid": "ability1_storm_spirit_static_remnant"
+    "Abilityid": "imba_storm_spirit_static_remnant"
   },
   {
     "id": "sect_magic_8_storm_spirit_20",
@@ -16488,7 +16488,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_8",
     "acitve_special_effect": "modifier_sect_magic_storm_spirit_8",
     "heroid": "building_hero_storm_spirit",
-    "Abilityid": "ability1_storm_spirit_static_remnant"
+    "Abilityid": "imba_storm_spirit_static_remnant"
   },
   {
     "id": "sect_magic_12_storm_spirit_20",
@@ -16500,7 +16500,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_12",
     "acitve_special_effect": "modifier_sect_magic_storm_spirit_12",
     "heroid": "building_hero_storm_spirit",
-    "Abilityid": "ability1_storm_spirit_static_remnant"
+    "Abilityid": "imba_storm_spirit_static_remnant"
   },
   {
     "id": "sect_magic_4_zeus_21",
@@ -16512,7 +16512,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_zeus",
-    "Abilityid": "ability2_zuus_lightning_bolt"
+    "Abilityid": "imba_zuus_lightning_bolt"
   },
   {
     "id": "sect_magic_8_zeus_21",
@@ -16524,7 +16524,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_8",
     "acitve_special_effect": "modifier_sect_magic_zeus_8",
     "heroid": "building_hero_zeus",
-    "Abilityid": "ability2_zuus_lightning_bolt"
+    "Abilityid": "imba_zuus_lightning_bolt"
   },
   {
     "id": "sect_magic_12_zeus_21",
@@ -16536,7 +16536,7 @@
     "acitve_common_effect": "modifier_sect_magic_base_12",
     "acitve_special_effect": "modifier_sect_magic_zeus_12",
     "heroid": "building_hero_zeus",
-    "Abilityid": "ability2_zuus_lightning_bolt"
+    "Abilityid": "imba_zuus_lightning_bolt"
   },
   {
     "id": "sect_miss_3_arc_warden_1",
@@ -16548,7 +16548,7 @@
     "acitve_common_effect": "modifier_sect_miss_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_arc_warden",
-    "Abilityid": "ability2_arc_warden_magnetic_field"
+    "Abilityid": "imba_arc_warden_magnetic_field"
   },
   {
     "id": "sect_miss_6_arc_warden_1",
@@ -16560,7 +16560,7 @@
     "acitve_common_effect": "modifier_sect_miss_base_6",
     "acitve_special_effect": "modifier_sect_miss_arc_warden_6",
     "heroid": "building_hero_arc_warden",
-    "Abilityid": "ability2_arc_warden_magnetic_field"
+    "Abilityid": "imba_arc_warden_magnetic_field"
   },
   {
     "id": "sect_miss_9_arc_warden_1",
@@ -16572,7 +16572,7 @@
     "acitve_common_effect": "modifier_sect_miss_base_9",
     "acitve_special_effect": "modifier_sect_miss_arc_warden_9",
     "heroid": "building_hero_arc_warden",
-    "Abilityid": "ability2_arc_warden_magnetic_field"
+    "Abilityid": "imba_arc_warden_magnetic_field"
   },
   {
     "id": "sect_miss_3_brewmaster_2",
@@ -16584,7 +16584,7 @@
     "acitve_common_effect": "modifier_sect_miss_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_brewmaster",
-    "Abilityid": "ability3_brewmaster_drunken_brawler"
+    "Abilityid": "imba_brewmaster_drunken_brawler"
   },
   {
     "id": "sect_miss_6_brewmaster_2",
@@ -16596,7 +16596,7 @@
     "acitve_common_effect": "modifier_sect_miss_base_6",
     "acitve_special_effect": "modifier_sect_miss_brewmaster_6",
     "heroid": "building_hero_brewmaster",
-    "Abilityid": "ability3_brewmaster_drunken_brawler"
+    "Abilityid": "imba_brewmaster_drunken_brawler"
   },
   {
     "id": "sect_miss_9_brewmaster_2",
@@ -16608,7 +16608,7 @@
     "acitve_common_effect": "modifier_sect_miss_base_9",
     "acitve_special_effect": "modifier_sect_miss_brewmaster_9",
     "heroid": "building_hero_brewmaster",
-    "Abilityid": "ability3_brewmaster_drunken_brawler"
+    "Abilityid": "imba_brewmaster_drunken_brawler"
   },
   {
     "id": "sect_miss_3_broodmother_3",
@@ -16620,7 +16620,7 @@
     "acitve_common_effect": "modifier_sect_miss_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_broodmother",
-    "Abilityid": "ability3_broodmother_silken_bola"
+    "Abilityid": "imba_broodmother_silken_bola"
   },
   {
     "id": "sect_miss_6_broodmother_3",
@@ -16632,7 +16632,7 @@
     "acitve_common_effect": "modifier_sect_miss_base_6",
     "acitve_special_effect": "modifier_sect_miss_broodmother_6",
     "heroid": "building_hero_broodmother",
-    "Abilityid": "ability3_broodmother_silken_bola"
+    "Abilityid": "imba_broodmother_silken_bola"
   },
   {
     "id": "sect_miss_9_broodmother_3",
@@ -16644,7 +16644,7 @@
     "acitve_common_effect": "modifier_sect_miss_base_9",
     "acitve_special_effect": "modifier_sect_miss_broodmother_9",
     "heroid": "building_hero_broodmother",
-    "Abilityid": "ability3_broodmother_silken_bola"
+    "Abilityid": "imba_broodmother_silken_bola"
   },
   {
     "id": "sect_miss_3_hoodwink_4",
@@ -16656,7 +16656,7 @@
     "acitve_common_effect": "modifier_sect_miss_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability3_hoodwink_scurry"
+    "Abilityid": "imba_hoodwink_scurry"
   },
   {
     "id": "sect_miss_6_hoodwink_4",
@@ -16668,7 +16668,7 @@
     "acitve_common_effect": "modifier_sect_miss_base_6",
     "acitve_special_effect": "modifier_sect_miss_hoodwink_6",
     "heroid": "",
-    "Abilityid": "ability3_hoodwink_scurry"
+    "Abilityid": "imba_hoodwink_scurry"
   },
   {
     "id": "sect_miss_9_hoodwink_4",
@@ -16680,7 +16680,7 @@
     "acitve_common_effect": "modifier_sect_miss_base_9",
     "acitve_special_effect": "modifier_sect_miss_hoodwink_9",
     "heroid": "",
-    "Abilityid": "ability3_hoodwink_scurry"
+    "Abilityid": "imba_hoodwink_scurry"
   },
   {
     "id": "sect_miss_3_keeper_of_the_light_5",
@@ -16692,7 +16692,7 @@
     "acitve_common_effect": "modifier_sect_miss_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability4_keeper_of_the_light_blinding_light"
+    "Abilityid": "imba_keeper_of_the_light_blinding_light"
   },
   {
     "id": "sect_miss_6_keeper_of_the_light_5",
@@ -16704,7 +16704,7 @@
     "acitve_common_effect": "modifier_sect_miss_base_6",
     "acitve_special_effect": "modifier_sect_miss_keeper_of_the_light_6",
     "heroid": "",
-    "Abilityid": "ability4_keeper_of_the_light_blinding_light"
+    "Abilityid": "imba_keeper_of_the_light_blinding_light"
   },
   {
     "id": "sect_miss_9_keeper_of_the_light_5",
@@ -16716,7 +16716,7 @@
     "acitve_common_effect": "modifier_sect_miss_base_9",
     "acitve_special_effect": "modifier_sect_miss_keeper_of_the_light_9",
     "heroid": "",
-    "Abilityid": "ability4_keeper_of_the_light_blinding_light"
+    "Abilityid": "imba_keeper_of_the_light_blinding_light"
   },
   {
     "id": "sect_miss_3_phantom_assassin_6",
@@ -16728,7 +16728,7 @@
     "acitve_common_effect": "modifier_sect_miss_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_phantom_assassin",
-    "Abilityid": "ability3_phantom_assassin_blur"
+    "Abilityid": "imba_phantom_assassin_blur"
   },
   {
     "id": "sect_miss_6_phantom_assassin_6",
@@ -16740,7 +16740,7 @@
     "acitve_common_effect": "modifier_sect_miss_base_6",
     "acitve_special_effect": "modifier_sect_miss_phantom_assassin_6",
     "heroid": "building_hero_phantom_assassin",
-    "Abilityid": "ability3_phantom_assassin_blur"
+    "Abilityid": "imba_phantom_assassin_blur"
   },
   {
     "id": "sect_miss_9_phantom_assassin_6",
@@ -16752,7 +16752,7 @@
     "acitve_common_effect": "modifier_sect_miss_base_9",
     "acitve_special_effect": "modifier_sect_miss_phantom_assassin_9",
     "heroid": "building_hero_phantom_assassin",
-    "Abilityid": "ability3_phantom_assassin_blur"
+    "Abilityid": "imba_phantom_assassin_blur"
   },
   {
     "id": "sect_miss_3_riki_7",
@@ -16764,7 +16764,7 @@
     "acitve_common_effect": "modifier_sect_miss_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_riki",
-    "Abilityid": "ability1_riki_smoke_screen"
+    "Abilityid": "imba_riki_smoke_screen"
   },
   {
     "id": "sect_miss_6_riki_7",
@@ -16776,7 +16776,7 @@
     "acitve_common_effect": "modifier_sect_miss_base_6",
     "acitve_special_effect": "modifier_sect_miss_riki_6",
     "heroid": "building_hero_riki",
-    "Abilityid": "ability1_riki_smoke_screen"
+    "Abilityid": "imba_riki_smoke_screen"
   },
   {
     "id": "sect_miss_9_riki_7",
@@ -16788,7 +16788,7 @@
     "acitve_common_effect": "modifier_sect_miss_base_9",
     "acitve_special_effect": "modifier_sect_miss_riki_9",
     "heroid": "building_hero_riki",
-    "Abilityid": "ability1_riki_smoke_screen"
+    "Abilityid": "imba_riki_smoke_screen"
   },
   {
     "id": "sect_miss_3_tinker_8",
@@ -16800,7 +16800,7 @@
     "acitve_common_effect": "modifier_sect_miss_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_tinker",
-    "Abilityid": "ability1_tinker_laser"
+    "Abilityid": "imba_tinker_laser"
   },
   {
     "id": "sect_miss_6_tinker_8",
@@ -16812,7 +16812,7 @@
     "acitve_common_effect": "modifier_sect_miss_base_6",
     "acitve_special_effect": "modifier_sect_miss_tinker_6",
     "heroid": "building_hero_tinker",
-    "Abilityid": "ability1_tinker_laser"
+    "Abilityid": "imba_tinker_laser"
   },
   {
     "id": "sect_miss_9_tinker_8",
@@ -16824,7 +16824,7 @@
     "acitve_common_effect": "modifier_sect_miss_base_9",
     "acitve_special_effect": "modifier_sect_miss_tinker_9",
     "heroid": "building_hero_tinker",
-    "Abilityid": "ability1_tinker_laser"
+    "Abilityid": "imba_tinker_laser"
   },
   {
     "id": "sect_miss_3_windrunner_9",
@@ -16836,7 +16836,7 @@
     "acitve_common_effect": "modifier_sect_miss_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_windrunner",
-    "Abilityid": "ability3_windrunner_windrun"
+    "Abilityid": "imba_windrunner_windrun"
   },
   {
     "id": "sect_miss_6_windrunner_9",
@@ -16848,7 +16848,7 @@
     "acitve_common_effect": "modifier_sect_miss_base_6",
     "acitve_special_effect": "modifier_sect_miss_windrunner_6",
     "heroid": "building_hero_windrunner",
-    "Abilityid": "ability3_windrunner_windrun"
+    "Abilityid": "imba_windrunner_windrun"
   },
   {
     "id": "sect_miss_9_windrunner_9",
@@ -16860,7 +16860,7 @@
     "acitve_common_effect": "modifier_sect_miss_base_9",
     "acitve_special_effect": "modifier_sect_miss_windrunner_9",
     "heroid": "building_hero_windrunner",
-    "Abilityid": "ability3_windrunner_windrun"
+    "Abilityid": "imba_windrunner_windrun"
   },
   {
     "id": "sect_phyarm_down_3_alchemist_1",
@@ -16872,7 +16872,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_down_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_alchemist",
-    "Abilityid": "ability1_alchemist_acid_spray"
+    "Abilityid": "imba_alchemist_acid_spray"
   },
   {
     "id": "sect_phyarm_down_6_alchemist_1",
@@ -16884,7 +16884,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_down_base_6",
     "acitve_special_effect": "modifier_sect_phyarm_down_alchemist_6",
     "heroid": "building_hero_alchemist",
-    "Abilityid": "ability1_alchemist_acid_spray"
+    "Abilityid": "imba_alchemist_acid_spray"
   },
   {
     "id": "sect_phyarm_down_9_alchemist_1",
@@ -16896,7 +16896,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_down_base_9",
     "acitve_special_effect": "modifier_sect_phyarm_down_alchemist_9",
     "heroid": "building_hero_alchemist",
-    "Abilityid": "ability1_alchemist_acid_spray"
+    "Abilityid": "imba_alchemist_acid_spray"
   },
   {
     "id": "sect_phyarm_down_3_bristleback_2",
@@ -16908,7 +16908,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_down_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability1_bristleback_viscous_nasal_goo"
+    "Abilityid": "imba_bristleback_viscous_nasal_goo"
   },
   {
     "id": "sect_phyarm_down_6_bristleback_2",
@@ -16920,7 +16920,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_down_base_6",
     "acitve_special_effect": "modifier_sect_phyarm_down_bristleback_6",
     "heroid": "",
-    "Abilityid": "ability1_bristleback_viscous_nasal_goo"
+    "Abilityid": "imba_bristleback_viscous_nasal_goo"
   },
   {
     "id": "sect_phyarm_down_9_bristleback_2",
@@ -16932,7 +16932,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_down_base_9",
     "acitve_special_effect": "modifier_sect_phyarm_down_bristleback_9",
     "heroid": "",
-    "Abilityid": "ability1_bristleback_viscous_nasal_goo"
+    "Abilityid": "imba_bristleback_viscous_nasal_goo"
   },
   {
     "id": "sect_phyarm_down_3_chaos_knight_3",
@@ -16944,7 +16944,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_down_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability2_chaos_knight_reality_rift"
+    "Abilityid": "imba_chaos_knight_reality_rift"
   },
   {
     "id": "sect_phyarm_down_6_chaos_knight_3",
@@ -16956,7 +16956,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_down_base_6",
     "acitve_special_effect": "modifier_sect_phyarm_down_chaos_knight_6",
     "heroid": "",
-    "Abilityid": "ability2_chaos_knight_reality_rift"
+    "Abilityid": "imba_chaos_knight_reality_rift"
   },
   {
     "id": "sect_phyarm_down_9_chaos_knight_3",
@@ -16968,7 +16968,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_down_base_9",
     "acitve_special_effect": "modifier_sect_phyarm_down_chaos_knight_9",
     "heroid": "",
-    "Abilityid": "ability2_chaos_knight_reality_rift"
+    "Abilityid": "imba_chaos_knight_reality_rift"
   },
   {
     "id": "sect_phyarm_down_3_dazzle_4",
@@ -16980,7 +16980,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_down_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_dazzle_bad_juju"
+    "Abilityid": "imba_dazzle_bad_juju"
   },
   {
     "id": "sect_phyarm_down_6_dazzle_4",
@@ -16992,7 +16992,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_down_base_6",
     "acitve_special_effect": "modifier_sect_phyarm_down_dazzle_6",
     "heroid": "",
-    "Abilityid": "ability6_dazzle_bad_juju"
+    "Abilityid": "imba_dazzle_bad_juju"
   },
   {
     "id": "sect_phyarm_down_9_dazzle_4",
@@ -17004,7 +17004,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_down_base_9",
     "acitve_special_effect": "modifier_sect_phyarm_down_dazzle_9",
     "heroid": "",
-    "Abilityid": "ability6_dazzle_bad_juju"
+    "Abilityid": "imba_dazzle_bad_juju"
   },
   {
     "id": "sect_phyarm_down_3_elder_titan_5",
@@ -17016,7 +17016,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_down_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_elder_titan",
-    "Abilityid": "ability3_elder_titan_natural_order"
+    "Abilityid": "imba_elder_titan_natural_order"
   },
   {
     "id": "sect_phyarm_down_6_elder_titan_5",
@@ -17028,7 +17028,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_down_base_6",
     "acitve_special_effect": "modifier_sect_phyarm_down_elder_titan_6",
     "heroid": "building_hero_elder_titan",
-    "Abilityid": "ability3_elder_titan_natural_order"
+    "Abilityid": "imba_elder_titan_natural_order"
   },
   {
     "id": "sect_phyarm_down_9_elder_titan_5",
@@ -17040,7 +17040,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_down_base_9",
     "acitve_special_effect": "modifier_sect_phyarm_down_elder_titan_9",
     "heroid": "building_hero_elder_titan",
-    "Abilityid": "ability3_elder_titan_natural_order"
+    "Abilityid": "imba_elder_titan_natural_order"
   },
   {
     "id": "sect_phyarm_down_3_lycan_6",
@@ -17052,7 +17052,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_down_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability2_lycan_howl"
+    "Abilityid": "imba_lycan_howl"
   },
   {
     "id": "sect_phyarm_down_6_lycan_6",
@@ -17064,7 +17064,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_down_base_6",
     "acitve_special_effect": "modifier_sect_phyarm_down_lycan_6",
     "heroid": "",
-    "Abilityid": "ability2_lycan_howl"
+    "Abilityid": "imba_lycan_howl"
   },
   {
     "id": "sect_phyarm_down_9_lycan_6",
@@ -17076,7 +17076,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_down_base_9",
     "acitve_special_effect": "modifier_sect_phyarm_down_lycan_9",
     "heroid": "",
-    "Abilityid": "ability2_lycan_howl"
+    "Abilityid": "imba_lycan_howl"
   },
   {
     "id": "sect_phyarm_down_3_naga_siren_7",
@@ -17088,7 +17088,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_down_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_naga_siren",
-    "Abilityid": "ability3_naga_siren_rip_tide"
+    "Abilityid": "imba_naga_siren_rip_tide"
   },
   {
     "id": "sect_phyarm_down_6_naga_siren_7",
@@ -17100,7 +17100,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_down_base_6",
     "acitve_special_effect": "modifier_sect_phyarm_down_naga_siren_6",
     "heroid": "building_hero_naga_siren",
-    "Abilityid": "ability3_naga_siren_rip_tide"
+    "Abilityid": "imba_naga_siren_rip_tide"
   },
   {
     "id": "sect_phyarm_down_9_naga_siren_7",
@@ -17112,7 +17112,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_down_base_9",
     "acitve_special_effect": "modifier_sect_phyarm_down_naga_siren_9",
     "heroid": "building_hero_naga_siren",
-    "Abilityid": "ability3_naga_siren_rip_tide"
+    "Abilityid": "imba_naga_siren_rip_tide"
   },
   {
     "id": "sect_phyarm_down_3_nevermore_8",
@@ -17124,7 +17124,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_down_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_nevermore",
-    "Abilityid": "ability5_nevermore_dark_lord"
+    "Abilityid": "imba_nevermore_dark_lord"
   },
   {
     "id": "sect_phyarm_down_6_nevermore_8",
@@ -17136,7 +17136,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_down_base_6",
     "acitve_special_effect": "modifier_sect_phyarm_down_nevermore_6",
     "heroid": "building_hero_nevermore",
-    "Abilityid": "ability5_nevermore_dark_lord"
+    "Abilityid": "imba_nevermore_dark_lord"
   },
   {
     "id": "sect_phyarm_down_9_nevermore_8",
@@ -17148,7 +17148,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_down_base_9",
     "acitve_special_effect": "modifier_sect_phyarm_down_nevermore_9",
     "heroid": "building_hero_nevermore",
-    "Abilityid": "ability5_nevermore_dark_lord"
+    "Abilityid": "imba_nevermore_dark_lord"
   },
   {
     "id": "sect_phyarm_down_3_razor_9",
@@ -17160,7 +17160,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_down_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_razor_eye_of_the_storm"
+    "Abilityid": "imba_razor_eye_of_the_storm"
   },
   {
     "id": "sect_phyarm_down_6_razor_9",
@@ -17172,7 +17172,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_down_base_6",
     "acitve_special_effect": "modifier_sect_phyarm_down_razor_6",
     "heroid": "",
-    "Abilityid": "ability6_razor_eye_of_the_storm"
+    "Abilityid": "imba_razor_eye_of_the_storm"
   },
   {
     "id": "sect_phyarm_down_9_razor_9",
@@ -17184,7 +17184,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_down_base_9",
     "acitve_special_effect": "modifier_sect_phyarm_down_razor_9",
     "heroid": "",
-    "Abilityid": "ability6_razor_eye_of_the_storm"
+    "Abilityid": "imba_razor_eye_of_the_storm"
   },
   {
     "id": "sect_phyarm_down_3_slardar_10",
@@ -17196,7 +17196,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_down_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_slardar_amplify_damage"
+    "Abilityid": "imba_slardar_amplify_damage"
   },
   {
     "id": "sect_phyarm_down_6_slardar_10",
@@ -17208,7 +17208,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_down_base_6",
     "acitve_special_effect": "modifier_sect_phyarm_down_slardar_6",
     "heroid": "",
-    "Abilityid": "ability6_slardar_amplify_damage"
+    "Abilityid": "imba_slardar_amplify_damage"
   },
   {
     "id": "sect_phyarm_down_9_slardar_10",
@@ -17220,7 +17220,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_down_base_9",
     "acitve_special_effect": "modifier_sect_phyarm_down_slardar_9",
     "heroid": "",
-    "Abilityid": "ability6_slardar_amplify_damage"
+    "Abilityid": "imba_slardar_amplify_damage"
   },
   {
     "id": "sect_phyarm_down_3_snapfire_11",
@@ -17232,7 +17232,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_down_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_snapfire",
-    "Abilityid": "ability3_snapfire_lil_shredder"
+    "Abilityid": "imba_snapfire_lil_shredder"
   },
   {
     "id": "sect_phyarm_down_6_snapfire_11",
@@ -17244,7 +17244,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_down_base_6",
     "acitve_special_effect": "modifier_sect_phyarm_down_snapfire_6",
     "heroid": "building_hero_snapfire",
-    "Abilityid": "ability3_snapfire_lil_shredder"
+    "Abilityid": "imba_snapfire_lil_shredder"
   },
   {
     "id": "sect_phyarm_down_9_snapfire_11",
@@ -17256,7 +17256,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_down_base_9",
     "acitve_special_effect": "modifier_sect_phyarm_down_snapfire_9",
     "heroid": "building_hero_snapfire",
-    "Abilityid": "ability3_snapfire_lil_shredder"
+    "Abilityid": "imba_snapfire_lil_shredder"
   },
   {
     "id": "sect_phyarm_down_3_tidehunter_12",
@@ -17268,7 +17268,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_down_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_tidehunter",
-    "Abilityid": "ability1_tidehunter_gush"
+    "Abilityid": "imba_tidehunter_gush"
   },
   {
     "id": "sect_phyarm_down_6_tidehunter_12",
@@ -17280,7 +17280,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_down_base_6",
     "acitve_special_effect": "modifier_sect_phyarm_down_tidehunter_6",
     "heroid": "building_hero_tidehunter",
-    "Abilityid": "ability1_tidehunter_gush"
+    "Abilityid": "imba_tidehunter_gush"
   },
   {
     "id": "sect_phyarm_down_9_tidehunter_12",
@@ -17292,7 +17292,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_down_base_9",
     "acitve_special_effect": "modifier_sect_phyarm_down_tidehunter_9",
     "heroid": "building_hero_tidehunter",
-    "Abilityid": "ability1_tidehunter_gush"
+    "Abilityid": "imba_tidehunter_gush"
   },
   {
     "id": "sect_phyarm_down_3_vengefulspirit_13",
@@ -17304,7 +17304,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_down_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_vengefulspirit",
-    "Abilityid": "ability2_vengefulspirit_wave_of_terror"
+    "Abilityid": "imba_vengefulspirit_wave_of_terror"
   },
   {
     "id": "sect_phyarm_down_6_vengefulspirit_13",
@@ -17316,7 +17316,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_down_base_6",
     "acitve_special_effect": "modifier_sect_phyarm_down_vengefulspirit_6",
     "heroid": "building_hero_vengefulspirit",
-    "Abilityid": "ability2_vengefulspirit_wave_of_terror"
+    "Abilityid": "imba_vengefulspirit_wave_of_terror"
   },
   {
     "id": "sect_phyarm_down_9_vengefulspirit_13",
@@ -17328,7 +17328,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_down_base_9",
     "acitve_special_effect": "modifier_sect_phyarm_down_vengefulspirit_9",
     "heroid": "building_hero_vengefulspirit",
-    "Abilityid": "ability2_vengefulspirit_wave_of_terror"
+    "Abilityid": "imba_vengefulspirit_wave_of_terror"
   },
   {
     "id": "sect_phyarm_down_3_weaver_14",
@@ -17340,7 +17340,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_down_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_weaver",
-    "Abilityid": "ability1_weaver_the_swarm"
+    "Abilityid": "imba_weaver_the_swarm"
   },
   {
     "id": "sect_phyarm_down_6_weaver_14",
@@ -17352,7 +17352,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_down_base_6",
     "acitve_special_effect": "modifier_sect_phyarm_down_weaver_6",
     "heroid": "building_hero_weaver",
-    "Abilityid": "ability1_weaver_the_swarm"
+    "Abilityid": "imba_weaver_the_swarm"
   },
   {
     "id": "sect_phyarm_down_9_weaver_14",
@@ -17364,7 +17364,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_down_base_9",
     "acitve_special_effect": "modifier_sect_phyarm_down_weaver_9",
     "heroid": "building_hero_weaver",
-    "Abilityid": "ability1_weaver_the_swarm"
+    "Abilityid": "imba_weaver_the_swarm"
   },
   {
     "id": "sect_phyarm_up_3_axe_1",
@@ -17376,7 +17376,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_up_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_axe",
-    "Abilityid": "ability1_axe_berserkers_call"
+    "Abilityid": "imba_axe_berserkers_call"
   },
   {
     "id": "sect_phyarm_up_6_axe_1",
@@ -17388,7 +17388,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_up_base_6",
     "acitve_special_effect": "modifier_sect_phyarm_up_axe_6",
     "heroid": "building_hero_axe",
-    "Abilityid": "ability1_axe_berserkers_call"
+    "Abilityid": "imba_axe_berserkers_call"
   },
   {
     "id": "sect_phyarm_up_9_axe_1",
@@ -17400,7 +17400,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_up_base_9",
     "acitve_special_effect": "modifier_sect_phyarm_up_axe_9",
     "heroid": "building_hero_axe",
-    "Abilityid": "ability1_axe_berserkers_call"
+    "Abilityid": "imba_axe_berserkers_call"
   },
   {
     "id": "sect_phyarm_up_3_chen_2",
@@ -17412,7 +17412,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_up_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_chen",
-    "Abilityid": "ability3_chen_divine_favor"
+    "Abilityid": "imba_chen_divine_favor"
   },
   {
     "id": "sect_phyarm_up_6_chen_2",
@@ -17424,7 +17424,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_up_base_6",
     "acitve_special_effect": "modifier_sect_phyarm_up_chen_6",
     "heroid": "building_hero_chen",
-    "Abilityid": "ability3_chen_divine_favor"
+    "Abilityid": "imba_chen_divine_favor"
   },
   {
     "id": "sect_phyarm_up_9_chen_2",
@@ -17436,7 +17436,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_up_base_9",
     "acitve_special_effect": "modifier_sect_phyarm_up_chen_9",
     "heroid": "building_hero_chen",
-    "Abilityid": "ability3_chen_divine_favor"
+    "Abilityid": "imba_chen_divine_favor"
   },
   {
     "id": "sect_phyarm_up_3_dragon_knight_3",
@@ -17448,7 +17448,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_up_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_dragon_knight",
-    "Abilityid": "ability3_dragon_knight_dragon_blood"
+    "Abilityid": "imba_dragon_knight_dragon_blood"
   },
   {
     "id": "sect_phyarm_up_6_dragon_knight_3",
@@ -17460,7 +17460,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_up_base_6",
     "acitve_special_effect": "modifier_sect_phyarm_up_dragon_knight_6",
     "heroid": "building_hero_dragon_knight",
-    "Abilityid": "ability3_dragon_knight_dragon_blood"
+    "Abilityid": "imba_dragon_knight_dragon_blood"
   },
   {
     "id": "sect_phyarm_up_9_dragon_knight_3",
@@ -17472,7 +17472,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_up_base_9",
     "acitve_special_effect": "modifier_sect_phyarm_up_dragon_knight_9",
     "heroid": "building_hero_dragon_knight",
-    "Abilityid": "ability3_dragon_knight_dragon_blood"
+    "Abilityid": "imba_dragon_knight_dragon_blood"
   },
   {
     "id": "sect_phyarm_up_3_elder_titan_4",
@@ -17484,7 +17484,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_up_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability2_elder_titan_ancestral_spirit"
+    "Abilityid": "imba_elder_titan_ancestral_spirit"
   },
   {
     "id": "sect_phyarm_up_6_elder_titan_4",
@@ -17496,7 +17496,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_up_base_6",
     "acitve_special_effect": "modifier_sect_phyarm_up_elder_titan_6",
     "heroid": "",
-    "Abilityid": "ability2_elder_titan_ancestral_spirit"
+    "Abilityid": "imba_elder_titan_ancestral_spirit"
   },
   {
     "id": "sect_phyarm_up_9_elder_titan_4",
@@ -17508,7 +17508,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_up_base_9",
     "acitve_special_effect": "modifier_sect_phyarm_up_elder_titan_9",
     "heroid": "",
-    "Abilityid": "ability2_elder_titan_ancestral_spirit"
+    "Abilityid": "imba_elder_titan_ancestral_spirit"
   },
   {
     "id": "sect_phyarm_up_3_monkey_king_5",
@@ -17520,7 +17520,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_up_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_monkey_king_wukongs_command"
+    "Abilityid": "imba_monkey_king_wukongs_command"
   },
   {
     "id": "sect_phyarm_up_6_monkey_king_5",
@@ -17532,7 +17532,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_up_base_6",
     "acitve_special_effect": "modifier_sect_phyarm_up_monkey_king_6",
     "heroid": "",
-    "Abilityid": "ability6_monkey_king_wukongs_command"
+    "Abilityid": "imba_monkey_king_wukongs_command"
   },
   {
     "id": "sect_phyarm_up_9_monkey_king_5",
@@ -17544,7 +17544,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_up_base_9",
     "acitve_special_effect": "modifier_sect_phyarm_up_monkey_king_9",
     "heroid": "",
-    "Abilityid": "ability6_monkey_king_wukongs_command"
+    "Abilityid": "imba_monkey_king_wukongs_command"
   },
   {
     "id": "sect_phyarm_up_3_primal_beast_6",
@@ -17556,7 +17556,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_up_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_primal_beast",
-    "Abilityid": "ability3_primal_beast_uproar"
+    "Abilityid": "imba_primal_beast_uproar"
   },
   {
     "id": "sect_phyarm_up_6_primal_beast_6",
@@ -17568,7 +17568,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_up_base_6",
     "acitve_special_effect": "modifier_sect_phyarm_up_primal_beast_6",
     "heroid": "building_hero_primal_beast",
-    "Abilityid": "ability3_primal_beast_uproar"
+    "Abilityid": "imba_primal_beast_uproar"
   },
   {
     "id": "sect_phyarm_up_9_primal_beast_6",
@@ -17580,7 +17580,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_up_base_9",
     "acitve_special_effect": "modifier_sect_phyarm_up_primal_beast_9",
     "heroid": "building_hero_primal_beast",
-    "Abilityid": "ability3_primal_beast_uproar"
+    "Abilityid": "imba_primal_beast_uproar"
   },
   {
     "id": "sect_phyarm_up_3_shredder_7",
@@ -17592,7 +17592,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_up_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_shredder",
-    "Abilityid": "ability3_shredder_reactive_armor"
+    "Abilityid": "imba_shredder_reactive_armor"
   },
   {
     "id": "sect_phyarm_up_6_shredder_7",
@@ -17604,7 +17604,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_up_base_6",
     "acitve_special_effect": "modifier_sect_phyarm_up_shredder_6",
     "heroid": "building_hero_shredder",
-    "Abilityid": "ability3_shredder_reactive_armor"
+    "Abilityid": "imba_shredder_reactive_armor"
   },
   {
     "id": "sect_phyarm_up_9_shredder_7",
@@ -17616,7 +17616,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_up_base_9",
     "acitve_special_effect": "modifier_sect_phyarm_up_shredder_9",
     "heroid": "building_hero_shredder",
-    "Abilityid": "ability3_shredder_reactive_armor"
+    "Abilityid": "imba_shredder_reactive_armor"
   },
   {
     "id": "sect_phyarm_up_3_slardar_8",
@@ -17628,7 +17628,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_up_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability1_slardar_sprint"
+    "Abilityid": "imba_slardar_sprint"
   },
   {
     "id": "sect_phyarm_up_6_slardar_8",
@@ -17640,7 +17640,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_up_base_6",
     "acitve_special_effect": "modifier_sect_phyarm_up_slardar_6",
     "heroid": "",
-    "Abilityid": "ability1_slardar_sprint"
+    "Abilityid": "imba_slardar_sprint"
   },
   {
     "id": "sect_phyarm_up_9_slardar_8",
@@ -17652,7 +17652,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_up_base_9",
     "acitve_special_effect": "modifier_sect_phyarm_up_slardar_9",
     "heroid": "",
-    "Abilityid": "ability1_slardar_sprint"
+    "Abilityid": "imba_slardar_sprint"
   },
   {
     "id": "sect_phyarm_up_3_sven_9",
@@ -17664,7 +17664,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_up_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_sven",
-    "Abilityid": "ability3_sven_warcry"
+    "Abilityid": "imba_sven_warcry"
   },
   {
     "id": "sect_phyarm_up_6_sven_9",
@@ -17676,7 +17676,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_up_base_6",
     "acitve_special_effect": "modifier_sect_phyarm_up_sven_6",
     "heroid": "building_hero_sven",
-    "Abilityid": "ability3_sven_warcry"
+    "Abilityid": "imba_sven_warcry"
   },
   {
     "id": "sect_phyarm_up_9_sven_9",
@@ -17688,7 +17688,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_up_base_9",
     "acitve_special_effect": "modifier_sect_phyarm_up_sven_9",
     "heroid": "building_hero_sven",
-    "Abilityid": "ability3_sven_warcry"
+    "Abilityid": "imba_sven_warcry"
   },
   {
     "id": "sect_phyarm_up_3_tiny_10",
@@ -17700,7 +17700,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_up_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_tiny_grow"
+    "Abilityid": "imba_tiny_grow"
   },
   {
     "id": "sect_phyarm_up_6_tiny_10",
@@ -17712,7 +17712,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_up_base_6",
     "acitve_special_effect": "modifier_sect_phyarm_up_tiny_6",
     "heroid": "",
-    "Abilityid": "ability6_tiny_grow"
+    "Abilityid": "imba_tiny_grow"
   },
   {
     "id": "sect_phyarm_up_9_tiny_10",
@@ -17724,7 +17724,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_up_base_9",
     "acitve_special_effect": "modifier_sect_phyarm_up_tiny_9",
     "heroid": "",
-    "Abilityid": "ability6_tiny_grow"
+    "Abilityid": "imba_tiny_grow"
   },
   {
     "id": "sect_phyarm_up_3_treant_11",
@@ -17736,7 +17736,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_up_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_treant",
-    "Abilityid": "ability3_treant_living_armor"
+    "Abilityid": "imba_treant_living_armor"
   },
   {
     "id": "sect_phyarm_up_6_treant_11",
@@ -17748,7 +17748,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_up_base_6",
     "acitve_special_effect": "modifier_sect_phyarm_up_treant_6",
     "heroid": "building_hero_treant",
-    "Abilityid": "ability3_treant_living_armor"
+    "Abilityid": "imba_treant_living_armor"
   },
   {
     "id": "sect_phyarm_up_9_treant_11",
@@ -17760,7 +17760,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_up_base_9",
     "acitve_special_effect": "modifier_sect_phyarm_up_treant_9",
     "heroid": "building_hero_treant",
-    "Abilityid": "ability3_treant_living_armor"
+    "Abilityid": "imba_treant_living_armor"
   },
   {
     "id": "sect_phyarm_up_3_troll_warlord_12",
@@ -17772,7 +17772,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_up_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability1_troll_warlord_berserkers_rage"
+    "Abilityid": "imba_troll_warlord_berserkers_rage"
   },
   {
     "id": "sect_phyarm_up_6_troll_warlord_12",
@@ -17784,7 +17784,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_up_base_6",
     "acitve_special_effect": "modifier_sect_phyarm_up_troll_warlord_6",
     "heroid": "",
-    "Abilityid": "ability1_troll_warlord_berserkers_rage"
+    "Abilityid": "imba_troll_warlord_berserkers_rage"
   },
   {
     "id": "sect_phyarm_up_9_troll_warlord_12",
@@ -17796,7 +17796,7 @@
     "acitve_common_effect": "modifier_sect_phyarm_up_base_9",
     "acitve_special_effect": "modifier_sect_phyarm_up_troll_warlord_9",
     "heroid": "",
-    "Abilityid": "ability1_troll_warlord_berserkers_rage"
+    "Abilityid": "imba_troll_warlord_berserkers_rage"
   },
   {
     "id": "sect_phycrit_3_chaos_knight_1",
@@ -17808,7 +17808,7 @@
     "acitve_common_effect": "modifier_sect_phycrit_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_chaos_knight",
-    "Abilityid": "ability3_chaos_knight_chaos_strike"
+    "Abilityid": "imba_chaos_knight_chaos_strike"
   },
   {
     "id": "sect_phycrit_6_chaos_knight_1",
@@ -17820,7 +17820,7 @@
     "acitve_common_effect": "modifier_sect_phycrit_base_6",
     "acitve_special_effect": "modifier_sect_phycrit_chaos_knight_6",
     "heroid": "building_hero_chaos_knight",
-    "Abilityid": "ability3_chaos_knight_chaos_strike"
+    "Abilityid": "imba_chaos_knight_chaos_strike"
   },
   {
     "id": "sect_phycrit_9_chaos_knight_1",
@@ -17832,7 +17832,7 @@
     "acitve_common_effect": "modifier_sect_phycrit_base_9",
     "acitve_special_effect": "modifier_sect_phycrit_chaos_knight_9",
     "heroid": "building_hero_chaos_knight",
-    "Abilityid": "ability3_chaos_knight_chaos_strike"
+    "Abilityid": "imba_chaos_knight_chaos_strike"
   },
   {
     "id": "sect_phycrit_3_dawnbreaker_2",
@@ -17844,7 +17844,7 @@
     "acitve_common_effect": "modifier_sect_phycrit_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_dawnbreaker",
-    "Abilityid": "ability3_dawnbreaker_luminosity"
+    "Abilityid": "imba_dawnbreaker_luminosity"
   },
   {
     "id": "sect_phycrit_6_dawnbreaker_2",
@@ -17856,7 +17856,7 @@
     "acitve_common_effect": "modifier_sect_phycrit_base_6",
     "acitve_special_effect": "modifier_sect_phycrit_dawnbreaker_6",
     "heroid": "building_hero_dawnbreaker",
-    "Abilityid": "ability3_dawnbreaker_luminosity"
+    "Abilityid": "imba_dawnbreaker_luminosity"
   },
   {
     "id": "sect_phycrit_9_dawnbreaker_2",
@@ -17868,7 +17868,7 @@
     "acitve_common_effect": "modifier_sect_phycrit_base_9",
     "acitve_special_effect": "modifier_sect_phycrit_dawnbreaker_9",
     "heroid": "building_hero_dawnbreaker",
-    "Abilityid": "ability3_dawnbreaker_luminosity"
+    "Abilityid": "imba_dawnbreaker_luminosity"
   },
   {
     "id": "sect_phycrit_3_juggernaut_3",
@@ -17880,7 +17880,7 @@
     "acitve_common_effect": "modifier_sect_phycrit_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_juggernaut",
-    "Abilityid": "ability3_juggernaut_blade_dance"
+    "Abilityid": "imba_juggernaut_blade_dance"
   },
   {
     "id": "sect_phycrit_6_juggernaut_3",
@@ -17892,7 +17892,7 @@
     "acitve_common_effect": "modifier_sect_phycrit_base_6",
     "acitve_special_effect": "modifier_sect_phycrit_juggernaut_6",
     "heroid": "building_hero_juggernaut",
-    "Abilityid": "ability3_juggernaut_blade_dance"
+    "Abilityid": "imba_juggernaut_blade_dance"
   },
   {
     "id": "sect_phycrit_9_juggernaut_3",
@@ -17904,7 +17904,7 @@
     "acitve_common_effect": "modifier_sect_phycrit_base_9",
     "acitve_special_effect": "modifier_sect_phycrit_juggernaut_9",
     "heroid": "building_hero_juggernaut",
-    "Abilityid": "ability3_juggernaut_blade_dance"
+    "Abilityid": "imba_juggernaut_blade_dance"
   },
   {
     "id": "sect_phycrit_3_mars_4",
@@ -17916,7 +17916,7 @@
     "acitve_common_effect": "modifier_sect_phycrit_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_mars",
-    "Abilityid": "ability2_mars_gods_rebuke"
+    "Abilityid": "imba_mars_gods_rebuke"
   },
   {
     "id": "sect_phycrit_6_mars_4",
@@ -17928,7 +17928,7 @@
     "acitve_common_effect": "modifier_sect_phycrit_base_6",
     "acitve_special_effect": "modifier_sect_phycrit_mars_6",
     "heroid": "building_hero_mars",
-    "Abilityid": "ability2_mars_gods_rebuke"
+    "Abilityid": "imba_mars_gods_rebuke"
   },
   {
     "id": "sect_phycrit_9_mars_4",
@@ -17940,7 +17940,7 @@
     "acitve_common_effect": "modifier_sect_phycrit_base_9",
     "acitve_special_effect": "modifier_sect_phycrit_mars_9",
     "heroid": "building_hero_mars",
-    "Abilityid": "ability2_mars_gods_rebuke"
+    "Abilityid": "imba_mars_gods_rebuke"
   },
   {
     "id": "sect_phycrit_3_monkey_king_5",
@@ -17952,7 +17952,7 @@
     "acitve_common_effect": "modifier_sect_phycrit_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_monkey_king",
-    "Abilityid": "ability1_monkey_king_boundless_strike"
+    "Abilityid": "imba_monkey_king_boundless_strike"
   },
   {
     "id": "sect_phycrit_6_monkey_king_5",
@@ -17964,7 +17964,7 @@
     "acitve_common_effect": "modifier_sect_phycrit_base_6",
     "acitve_special_effect": "modifier_sect_phycrit_monkey_king_6",
     "heroid": "building_hero_monkey_king",
-    "Abilityid": "ability1_monkey_king_boundless_strike"
+    "Abilityid": "imba_monkey_king_boundless_strike"
   },
   {
     "id": "sect_phycrit_9_monkey_king_5",
@@ -17976,7 +17976,7 @@
     "acitve_common_effect": "modifier_sect_phycrit_base_9",
     "acitve_special_effect": "modifier_sect_phycrit_monkey_king_9",
     "heroid": "building_hero_monkey_king",
-    "Abilityid": "ability1_monkey_king_boundless_strike"
+    "Abilityid": "imba_monkey_king_boundless_strike"
   },
   {
     "id": "sect_phycrit_3_nyx_assassin_6",
@@ -17988,7 +17988,7 @@
     "acitve_common_effect": "modifier_sect_phycrit_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_nyx_assassin_vendetta"
+    "Abilityid": "imba_nyx_assassin_vendetta"
   },
   {
     "id": "sect_phycrit_6_nyx_assassin_6",
@@ -18000,7 +18000,7 @@
     "acitve_common_effect": "modifier_sect_phycrit_base_6",
     "acitve_special_effect": "modifier_sect_phycrit_nyx_assassin_6",
     "heroid": "",
-    "Abilityid": "ability6_nyx_assassin_vendetta"
+    "Abilityid": "imba_nyx_assassin_vendetta"
   },
   {
     "id": "sect_phycrit_9_nyx_assassin_6",
@@ -18012,7 +18012,7 @@
     "acitve_common_effect": "modifier_sect_phycrit_base_9",
     "acitve_special_effect": "modifier_sect_phycrit_nyx_assassin_9",
     "heroid": "",
-    "Abilityid": "ability6_nyx_assassin_vendetta"
+    "Abilityid": "imba_nyx_assassin_vendetta"
   },
   {
     "id": "sect_phycrit_3_pangolier_7",
@@ -18024,7 +18024,7 @@
     "acitve_common_effect": "modifier_sect_phycrit_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_pangolier",
-    "Abilityid": "ability1_pangolier_swashbuckle"
+    "Abilityid": "imba_pangolier_swashbuckle"
   },
   {
     "id": "sect_phycrit_6_pangolier_7",
@@ -18036,7 +18036,7 @@
     "acitve_common_effect": "modifier_sect_phycrit_base_6",
     "acitve_special_effect": "modifier_sect_phycrit_pangolier_6",
     "heroid": "building_hero_pangolier",
-    "Abilityid": "ability1_pangolier_swashbuckle"
+    "Abilityid": "imba_pangolier_swashbuckle"
   },
   {
     "id": "sect_phycrit_9_pangolier_7",
@@ -18048,7 +18048,7 @@
     "acitve_common_effect": "modifier_sect_phycrit_base_9",
     "acitve_special_effect": "modifier_sect_phycrit_pangolier_9",
     "heroid": "building_hero_pangolier",
-    "Abilityid": "ability1_pangolier_swashbuckle"
+    "Abilityid": "imba_pangolier_swashbuckle"
   },
   {
     "id": "sect_phycrit_3_phantom_assassin_8",
@@ -18060,7 +18060,7 @@
     "acitve_common_effect": "modifier_sect_phycrit_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_phantom_assassin_coup_de_grace"
+    "Abilityid": "imba_phantom_assassin_coup_de_grace"
   },
   {
     "id": "sect_phycrit_6_phantom_assassin_8",
@@ -18072,7 +18072,7 @@
     "acitve_common_effect": "modifier_sect_phycrit_base_6",
     "acitve_special_effect": "modifier_sect_phycrit_phantom_assassin_6",
     "heroid": "",
-    "Abilityid": "ability6_phantom_assassin_coup_de_grace"
+    "Abilityid": "imba_phantom_assassin_coup_de_grace"
   },
   {
     "id": "sect_phycrit_9_phantom_assassin_8",
@@ -18084,7 +18084,7 @@
     "acitve_common_effect": "modifier_sect_phycrit_base_9",
     "acitve_special_effect": "modifier_sect_phycrit_phantom_assassin_9",
     "heroid": "",
-    "Abilityid": "ability6_phantom_assassin_coup_de_grace"
+    "Abilityid": "imba_phantom_assassin_coup_de_grace"
   },
   {
     "id": "sect_phycrit_3_skeleton_king_9",
@@ -18096,7 +18096,7 @@
     "acitve_common_effect": "modifier_sect_phycrit_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_skeleton_king",
-    "Abilityid": "ability3_skeleton_king_mortal_strike"
+    "Abilityid": "imba_skeleton_king_mortal_strike"
   },
   {
     "id": "sect_phycrit_6_skeleton_king_9",
@@ -18108,7 +18108,7 @@
     "acitve_common_effect": "modifier_sect_phycrit_base_6",
     "acitve_special_effect": "modifier_sect_phycrit_skeleton_king_6",
     "heroid": "building_hero_skeleton_king",
-    "Abilityid": "ability3_skeleton_king_mortal_strike"
+    "Abilityid": "imba_skeleton_king_mortal_strike"
   },
   {
     "id": "sect_phycrit_9_skeleton_king_9",
@@ -18120,7 +18120,7 @@
     "acitve_common_effect": "modifier_sect_phycrit_base_9",
     "acitve_special_effect": "modifier_sect_phycrit_skeleton_king_9",
     "heroid": "building_hero_skeleton_king",
-    "Abilityid": "ability3_skeleton_king_mortal_strike"
+    "Abilityid": "imba_skeleton_king_mortal_strike"
   },
   {
     "id": "sect_phycrit_3_slardar_10",
@@ -18132,7 +18132,7 @@
     "acitve_common_effect": "modifier_sect_phycrit_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_slardar",
-    "Abilityid": "ability3_slardar_bash"
+    "Abilityid": "imba_slardar_bash"
   },
   {
     "id": "sect_phycrit_6_slardar_10",
@@ -18144,7 +18144,7 @@
     "acitve_common_effect": "modifier_sect_phycrit_base_6",
     "acitve_special_effect": "modifier_sect_phycrit_slardar_6",
     "heroid": "building_hero_slardar",
-    "Abilityid": "ability3_slardar_bash"
+    "Abilityid": "imba_slardar_bash"
   },
   {
     "id": "sect_phycrit_9_slardar_10",
@@ -18156,7 +18156,7 @@
     "acitve_common_effect": "modifier_sect_phycrit_base_9",
     "acitve_special_effect": "modifier_sect_phycrit_slardar_9",
     "heroid": "building_hero_slardar",
-    "Abilityid": "ability3_slardar_bash"
+    "Abilityid": "imba_slardar_bash"
   },
   {
     "id": "sect_phycrit_3_sniper_11",
@@ -18168,7 +18168,7 @@
     "acitve_common_effect": "modifier_sect_phycrit_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability2_sniper_headshot"
+    "Abilityid": "imba_sniper_headshot"
   },
   {
     "id": "sect_phycrit_6_sniper_11",
@@ -18180,7 +18180,7 @@
     "acitve_common_effect": "modifier_sect_phycrit_base_6",
     "acitve_special_effect": "modifier_sect_phycrit_sniper_6",
     "heroid": "",
-    "Abilityid": "ability2_sniper_headshot"
+    "Abilityid": "imba_sniper_headshot"
   },
   {
     "id": "sect_phycrit_9_sniper_11",
@@ -18192,7 +18192,7 @@
     "acitve_common_effect": "modifier_sect_phycrit_base_9",
     "acitve_special_effect": "modifier_sect_phycrit_sniper_9",
     "heroid": "",
-    "Abilityid": "ability2_sniper_headshot"
+    "Abilityid": "imba_sniper_headshot"
   },
   {
     "id": "sect_phycrit_3_spirit_breaker_12",
@@ -18204,7 +18204,7 @@
     "acitve_common_effect": "modifier_sect_phycrit_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_spirit_breaker",
-    "Abilityid": "ability3_spirit_breaker_greater_bash"
+    "Abilityid": "imba_spirit_breaker_greater_bash"
   },
   {
     "id": "sect_phycrit_6_spirit_breaker_12",
@@ -18216,7 +18216,7 @@
     "acitve_common_effect": "modifier_sect_phycrit_base_6",
     "acitve_special_effect": "modifier_sect_phycrit_spirit_breaker_6",
     "heroid": "building_hero_spirit_breaker",
-    "Abilityid": "ability3_spirit_breaker_greater_bash"
+    "Abilityid": "imba_spirit_breaker_greater_bash"
   },
   {
     "id": "sect_phycrit_9_spirit_breaker_12",
@@ -18228,7 +18228,7 @@
     "acitve_common_effect": "modifier_sect_phycrit_base_9",
     "acitve_special_effect": "modifier_sect_phycrit_spirit_breaker_9",
     "heroid": "building_hero_spirit_breaker",
-    "Abilityid": "ability3_spirit_breaker_greater_bash"
+    "Abilityid": "imba_spirit_breaker_greater_bash"
   },
   {
     "id": "sect_phycrit_3_tusk_13",
@@ -18240,7 +18240,7 @@
     "acitve_common_effect": "modifier_sect_phycrit_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_tusk_walrus_punch"
+    "Abilityid": "imba_tusk_walrus_punch"
   },
   {
     "id": "sect_phycrit_6_tusk_13",
@@ -18252,7 +18252,7 @@
     "acitve_common_effect": "modifier_sect_phycrit_base_6",
     "acitve_special_effect": "modifier_sect_phycrit_tusk_6",
     "heroid": "",
-    "Abilityid": "ability6_tusk_walrus_punch"
+    "Abilityid": "imba_tusk_walrus_punch"
   },
   {
     "id": "sect_phycrit_9_tusk_13",
@@ -18264,7 +18264,7 @@
     "acitve_common_effect": "modifier_sect_phycrit_base_9",
     "acitve_special_effect": "modifier_sect_phycrit_tusk_9",
     "heroid": "",
-    "Abilityid": "ability6_tusk_walrus_punch"
+    "Abilityid": "imba_tusk_walrus_punch"
   },
   {
     "id": "sect_poision_3_dazzle_1",
@@ -18276,7 +18276,7 @@
     "acitve_common_effect": "modifier_sect_poision_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability1_dazzle_poison_touch"
+    "Abilityid": "imba_dazzle_poison_touch"
   },
   {
     "id": "sect_poision_6_dazzle_1",
@@ -18288,7 +18288,7 @@
     "acitve_common_effect": "modifier_sect_poision_base_6",
     "acitve_special_effect": "modifier_sect_poision_dazzle_6",
     "heroid": "",
-    "Abilityid": "ability1_dazzle_poison_touch"
+    "Abilityid": "imba_dazzle_poison_touch"
   },
   {
     "id": "sect_poision_9_dazzle_1",
@@ -18300,7 +18300,7 @@
     "acitve_common_effect": "modifier_sect_poision_base_9",
     "acitve_special_effect": "modifier_sect_poision_dazzle_9",
     "heroid": "",
-    "Abilityid": "ability1_dazzle_poison_touch"
+    "Abilityid": "imba_dazzle_poison_touch"
   },
   {
     "id": "sect_poision_3_pudge_2",
@@ -18312,7 +18312,7 @@
     "acitve_common_effect": "modifier_sect_poision_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_pudge",
-    "Abilityid": "ability2_pudge_rot"
+    "Abilityid": "imba_pudge_rot"
   },
   {
     "id": "sect_poision_6_pudge_2",
@@ -18324,7 +18324,7 @@
     "acitve_common_effect": "modifier_sect_poision_base_6",
     "acitve_special_effect": "modifier_sect_poision_pudge_6",
     "heroid": "building_hero_pudge",
-    "Abilityid": "ability2_pudge_rot"
+    "Abilityid": "imba_pudge_rot"
   },
   {
     "id": "sect_poision_9_pudge_2",
@@ -18336,7 +18336,7 @@
     "acitve_common_effect": "modifier_sect_poision_base_9",
     "acitve_special_effect": "modifier_sect_poision_pudge_9",
     "heroid": "building_hero_pudge",
-    "Abilityid": "ability2_pudge_rot"
+    "Abilityid": "imba_pudge_rot"
   },
   {
     "id": "sect_poision_3_queenofpain_3",
@@ -18348,7 +18348,7 @@
     "acitve_common_effect": "modifier_sect_poision_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability1_queenofpain_shadow_strike"
+    "Abilityid": "imba_queenofpain_shadow_strike"
   },
   {
     "id": "sect_poision_6_queenofpain_3",
@@ -18360,7 +18360,7 @@
     "acitve_common_effect": "modifier_sect_poision_base_6",
     "acitve_special_effect": "modifier_sect_poision_queenofpain_6",
     "heroid": "",
-    "Abilityid": "ability1_queenofpain_shadow_strike"
+    "Abilityid": "imba_queenofpain_shadow_strike"
   },
   {
     "id": "sect_poision_9_queenofpain_3",
@@ -18372,7 +18372,7 @@
     "acitve_common_effect": "modifier_sect_poision_base_9",
     "acitve_special_effect": "modifier_sect_poision_queenofpain_9",
     "heroid": "",
-    "Abilityid": "ability1_queenofpain_shadow_strike"
+    "Abilityid": "imba_queenofpain_shadow_strike"
   },
   {
     "id": "sect_poision_3_sandking_4",
@@ -18384,7 +18384,7 @@
     "acitve_common_effect": "modifier_sect_poision_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_sandking",
-    "Abilityid": "ability3_sandking_caustic_finale"
+    "Abilityid": "imba_sandking_caustic_finale"
   },
   {
     "id": "sect_poision_6_sandking_4",
@@ -18396,7 +18396,7 @@
     "acitve_common_effect": "modifier_sect_poision_base_6",
     "acitve_special_effect": "modifier_sect_poision_sandking_6",
     "heroid": "building_hero_sandking",
-    "Abilityid": "ability3_sandking_caustic_finale"
+    "Abilityid": "imba_sandking_caustic_finale"
   },
   {
     "id": "sect_poision_9_sandking_4",
@@ -18408,7 +18408,7 @@
     "acitve_common_effect": "modifier_sect_poision_base_9",
     "acitve_special_effect": "modifier_sect_poision_sandking_9",
     "heroid": "building_hero_sandking",
-    "Abilityid": "ability3_sandking_caustic_finale"
+    "Abilityid": "imba_sandking_caustic_finale"
   },
   {
     "id": "sect_poision_3_shadow_demon_5",
@@ -18420,7 +18420,7 @@
     "acitve_common_effect": "modifier_sect_poision_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability3_shadow_demon_shadow_poison"
+    "Abilityid": "imba_shadow_demon_shadow_poison"
   },
   {
     "id": "sect_poision_6_shadow_demon_5",
@@ -18432,7 +18432,7 @@
     "acitve_common_effect": "modifier_sect_poision_base_6",
     "acitve_special_effect": "modifier_sect_poision_shadow_demon_6",
     "heroid": "",
-    "Abilityid": "ability3_shadow_demon_shadow_poison"
+    "Abilityid": "imba_shadow_demon_shadow_poison"
   },
   {
     "id": "sect_poision_9_shadow_demon_5",
@@ -18444,7 +18444,7 @@
     "acitve_common_effect": "modifier_sect_poision_base_9",
     "acitve_special_effect": "modifier_sect_poision_shadow_demon_9",
     "heroid": "",
-    "Abilityid": "ability3_shadow_demon_shadow_poison"
+    "Abilityid": "imba_shadow_demon_shadow_poison"
   },
   {
     "id": "sect_poision_3_venomancer_6",
@@ -18456,7 +18456,7 @@
     "acitve_common_effect": "modifier_sect_poision_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": ""
+    "Abilityid": "imba_venomancer_latent_toxicity"
   },
   {
     "id": "sect_poision_6_venomancer_6",
@@ -18468,7 +18468,7 @@
     "acitve_common_effect": "modifier_sect_poision_base_6",
     "acitve_special_effect": "modifier_sect_poision_venomancer_6",
     "heroid": "",
-    "Abilityid": ""
+    "Abilityid": "imba_venomancer_latent_toxicity"
   },
   {
     "id": "sect_poision_9_venomancer_6",
@@ -18480,7 +18480,7 @@
     "acitve_common_effect": "modifier_sect_poision_base_9",
     "acitve_special_effect": "modifier_sect_poision_venomancer_9",
     "heroid": "",
-    "Abilityid": ""
+    "Abilityid": "imba_venomancer_latent_toxicity"
   },
   {
     "id": "sect_poision_3_venomancer_7",
@@ -18492,7 +18492,7 @@
     "acitve_common_effect": "modifier_sect_poision_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_venomancer_poison_nova"
+    "Abilityid": "imba_venomancer_poison_nova"
   },
   {
     "id": "sect_poision_6_venomancer_7",
@@ -18504,7 +18504,7 @@
     "acitve_common_effect": "modifier_sect_poision_base_6",
     "acitve_special_effect": "modifier_sect_poision_venomancer_6",
     "heroid": "",
-    "Abilityid": "ability6_venomancer_poison_nova"
+    "Abilityid": "imba_venomancer_poison_nova"
   },
   {
     "id": "sect_poision_9_venomancer_7",
@@ -18516,7 +18516,7 @@
     "acitve_common_effect": "modifier_sect_poision_base_9",
     "acitve_special_effect": "modifier_sect_poision_venomancer_9",
     "heroid": "",
-    "Abilityid": "ability6_venomancer_poison_nova"
+    "Abilityid": "imba_venomancer_poison_nova"
   },
   {
     "id": "sect_poision_3_venomancer_8",
@@ -18528,7 +18528,7 @@
     "acitve_common_effect": "modifier_sect_poision_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_venomancer",
-    "Abilityid": "ability2_venomancer_poison_sting"
+    "Abilityid": "imba_venomancer_poison_sting"
   },
   {
     "id": "sect_poision_6_venomancer_8",
@@ -18540,7 +18540,7 @@
     "acitve_common_effect": "modifier_sect_poision_base_6",
     "acitve_special_effect": "modifier_sect_poision_venomancer_6",
     "heroid": "building_hero_venomancer",
-    "Abilityid": "ability2_venomancer_poison_sting"
+    "Abilityid": "imba_venomancer_poison_sting"
   },
   {
     "id": "sect_poision_9_venomancer_8",
@@ -18552,7 +18552,7 @@
     "acitve_common_effect": "modifier_sect_poision_base_9",
     "acitve_special_effect": "modifier_sect_poision_venomancer_9",
     "heroid": "building_hero_venomancer",
-    "Abilityid": "ability2_venomancer_poison_sting"
+    "Abilityid": "imba_venomancer_poison_sting"
   },
   {
     "id": "sect_poision_3_venomancer_9",
@@ -18564,7 +18564,7 @@
     "acitve_common_effect": "modifier_sect_poision_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability1_venomancer_venomous_gale"
+    "Abilityid": "imba_venomancer_venomous_gale"
   },
   {
     "id": "sect_poision_6_venomancer_9",
@@ -18576,7 +18576,7 @@
     "acitve_common_effect": "modifier_sect_poision_base_6",
     "acitve_special_effect": "modifier_sect_poision_venomancer_6",
     "heroid": "",
-    "Abilityid": "ability1_venomancer_venomous_gale"
+    "Abilityid": "imba_venomancer_venomous_gale"
   },
   {
     "id": "sect_poision_9_venomancer_9",
@@ -18588,7 +18588,7 @@
     "acitve_common_effect": "modifier_sect_poision_base_9",
     "acitve_special_effect": "modifier_sect_poision_venomancer_9",
     "heroid": "",
-    "Abilityid": "ability1_venomancer_venomous_gale"
+    "Abilityid": "imba_venomancer_venomous_gale"
   },
   {
     "id": "sect_poision_3_viper_10",
@@ -18600,7 +18600,7 @@
     "acitve_common_effect": "modifier_sect_poision_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_viper",
-    "Abilityid": "ability2_viper_nethertoxin"
+    "Abilityid": "imba_viper_nethertoxin"
   },
   {
     "id": "sect_poision_6_viper_10",
@@ -18612,7 +18612,7 @@
     "acitve_common_effect": "modifier_sect_poision_base_6",
     "acitve_special_effect": "modifier_sect_poision_viper_6",
     "heroid": "building_hero_viper",
-    "Abilityid": "ability2_viper_nethertoxin"
+    "Abilityid": "imba_viper_nethertoxin"
   },
   {
     "id": "sect_poision_9_viper_10",
@@ -18624,7 +18624,7 @@
     "acitve_common_effect": "modifier_sect_poision_base_9",
     "acitve_special_effect": "modifier_sect_poision_viper_9",
     "heroid": "building_hero_viper",
-    "Abilityid": "ability2_viper_nethertoxin"
+    "Abilityid": "imba_viper_nethertoxin"
   },
   {
     "id": "sect_poision_3_viper_11",
@@ -18636,7 +18636,7 @@
     "acitve_common_effect": "modifier_sect_poision_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability1_viper_poison_attack"
+    "Abilityid": "imba_viper_poison_attack"
   },
   {
     "id": "sect_poision_6_viper_11",
@@ -18648,7 +18648,7 @@
     "acitve_common_effect": "modifier_sect_poision_base_6",
     "acitve_special_effect": "modifier_sect_poision_viper_6",
     "heroid": "",
-    "Abilityid": "ability1_viper_poison_attack"
+    "Abilityid": "imba_viper_poison_attack"
   },
   {
     "id": "sect_poision_9_viper_11",
@@ -18660,7 +18660,7 @@
     "acitve_common_effect": "modifier_sect_poision_base_9",
     "acitve_special_effect": "modifier_sect_poision_viper_9",
     "heroid": "",
-    "Abilityid": "ability1_viper_poison_attack"
+    "Abilityid": "imba_viper_poison_attack"
   },
   {
     "id": "sect_poision_3_viper_12",
@@ -18672,7 +18672,7 @@
     "acitve_common_effect": "modifier_sect_poision_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_viper_viper_strike"
+    "Abilityid": "imba_viper_viper_strike"
   },
   {
     "id": "sect_poision_6_viper_12",
@@ -18684,7 +18684,7 @@
     "acitve_common_effect": "modifier_sect_poision_base_6",
     "acitve_special_effect": "modifier_sect_poision_viper_6",
     "heroid": "",
-    "Abilityid": "ability6_viper_viper_strike"
+    "Abilityid": "imba_viper_viper_strike"
   },
   {
     "id": "sect_poision_9_viper_12",
@@ -18696,7 +18696,7 @@
     "acitve_common_effect": "modifier_sect_poision_base_9",
     "acitve_special_effect": "modifier_sect_poision_viper_9",
     "heroid": "",
-    "Abilityid": "ability6_viper_viper_strike"
+    "Abilityid": "imba_viper_viper_strike"
   },
   {
     "id": "sect_poision_3_witch_doctor_13",
@@ -18708,7 +18708,7 @@
     "acitve_common_effect": "modifier_sect_poision_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability3_witch_doctor_maledict"
+    "Abilityid": "imba_witch_doctor_maledict"
   },
   {
     "id": "sect_poision_6_witch_doctor_13",
@@ -18720,7 +18720,7 @@
     "acitve_common_effect": "modifier_sect_poision_base_6",
     "acitve_special_effect": "modifier_sect_poision_witch_doctor_6",
     "heroid": "",
-    "Abilityid": "ability3_witch_doctor_maledict"
+    "Abilityid": "imba_witch_doctor_maledict"
   },
   {
     "id": "sect_poision_9_witch_doctor_13",
@@ -18732,7 +18732,7 @@
     "acitve_common_effect": "modifier_sect_poision_base_9",
     "acitve_special_effect": "modifier_sect_poision_witch_doctor_9",
     "heroid": "",
-    "Abilityid": "ability3_witch_doctor_maledict"
+    "Abilityid": "imba_witch_doctor_maledict"
   },
   {
     "id": "sect_scilence_3_bloodseeker_1",
@@ -18744,7 +18744,7 @@
     "acitve_common_effect": "modifier_sect_scilence_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability2_bloodseeker_blood_bath"
+    "Abilityid": "imba_bloodseeker_blood_bath"
   },
   {
     "id": "sect_scilence_6_bloodseeker_1",
@@ -18756,7 +18756,7 @@
     "acitve_common_effect": "modifier_sect_scilence_base_6",
     "acitve_special_effect": "modifier_sect_scilence_bloodseeker_6",
     "heroid": "",
-    "Abilityid": "ability2_bloodseeker_blood_bath"
+    "Abilityid": "imba_bloodseeker_blood_bath"
   },
   {
     "id": "sect_scilence_9_bloodseeker_1",
@@ -18768,7 +18768,7 @@
     "acitve_common_effect": "modifier_sect_scilence_base_9",
     "acitve_special_effect": "modifier_sect_scilence_bloodseeker_9",
     "heroid": "",
-    "Abilityid": "ability2_bloodseeker_blood_bath"
+    "Abilityid": "imba_bloodseeker_blood_bath"
   },
   {
     "id": "sect_scilence_3_death_prophet_2",
@@ -18780,7 +18780,7 @@
     "acitve_common_effect": "modifier_sect_scilence_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_death_prophet",
-    "Abilityid": "ability2_death_prophet_silence"
+    "Abilityid": "imba_death_prophet_silence"
   },
   {
     "id": "sect_scilence_6_death_prophet_2",
@@ -18792,7 +18792,7 @@
     "acitve_common_effect": "modifier_sect_scilence_base_6",
     "acitve_special_effect": "modifier_sect_scilence_death_prophet_6",
     "heroid": "building_hero_death_prophet",
-    "Abilityid": "ability2_death_prophet_silence"
+    "Abilityid": "imba_death_prophet_silence"
   },
   {
     "id": "sect_scilence_9_death_prophet_2",
@@ -18804,7 +18804,7 @@
     "acitve_common_effect": "modifier_sect_scilence_base_9",
     "acitve_special_effect": "modifier_sect_scilence_death_prophet_9",
     "heroid": "building_hero_death_prophet",
-    "Abilityid": "ability2_death_prophet_silence"
+    "Abilityid": "imba_death_prophet_silence"
   },
   {
     "id": "sect_scilence_3_disruptor_3",
@@ -18816,7 +18816,7 @@
     "acitve_common_effect": "modifier_sect_scilence_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_disruptor_static_storm"
+    "Abilityid": "imba_disruptor_static_storm"
   },
   {
     "id": "sect_scilence_6_disruptor_3",
@@ -18828,7 +18828,7 @@
     "acitve_common_effect": "modifier_sect_scilence_base_6",
     "acitve_special_effect": "modifier_sect_scilence_disruptor_6",
     "heroid": "",
-    "Abilityid": "ability6_disruptor_static_storm"
+    "Abilityid": "imba_disruptor_static_storm"
   },
   {
     "id": "sect_scilence_9_disruptor_3",
@@ -18840,7 +18840,7 @@
     "acitve_common_effect": "modifier_sect_scilence_base_9",
     "acitve_special_effect": "modifier_sect_scilence_disruptor_9",
     "heroid": "",
-    "Abilityid": "ability6_disruptor_static_storm"
+    "Abilityid": "imba_disruptor_static_storm"
   },
   {
     "id": "sect_scilence_3_doom_bringer_4",
@@ -18852,7 +18852,7 @@
     "acitve_common_effect": "modifier_sect_scilence_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_doom_bringer_doom"
+    "Abilityid": "imba_doom_bringer_doom"
   },
   {
     "id": "sect_scilence_6_doom_bringer_4",
@@ -18864,7 +18864,7 @@
     "acitve_common_effect": "modifier_sect_scilence_base_6",
     "acitve_special_effect": "modifier_sect_scilence_doom_bringer_6",
     "heroid": "",
-    "Abilityid": "ability6_doom_bringer_doom"
+    "Abilityid": "imba_doom_bringer_doom"
   },
   {
     "id": "sect_scilence_9_doom_bringer_4",
@@ -18876,7 +18876,7 @@
     "acitve_common_effect": "modifier_sect_scilence_base_9",
     "acitve_special_effect": "modifier_sect_scilence_doom_bringer_9",
     "heroid": "",
-    "Abilityid": "ability6_doom_bringer_doom"
+    "Abilityid": "imba_doom_bringer_doom"
   },
   {
     "id": "sect_scilence_3_drow_ranger_5",
@@ -18888,7 +18888,7 @@
     "acitve_common_effect": "modifier_sect_scilence_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability2_drow_ranger_wave_of_silence"
+    "Abilityid": "imba_drow_ranger_wave_of_silence"
   },
   {
     "id": "sect_scilence_6_drow_ranger_5",
@@ -18900,7 +18900,7 @@
     "acitve_common_effect": "modifier_sect_scilence_base_6",
     "acitve_special_effect": "modifier_sect_scilence_drow_ranger_6",
     "heroid": "",
-    "Abilityid": "ability2_drow_ranger_wave_of_silence"
+    "Abilityid": "imba_drow_ranger_wave_of_silence"
   },
   {
     "id": "sect_scilence_9_drow_ranger_5",
@@ -18912,7 +18912,7 @@
     "acitve_common_effect": "modifier_sect_scilence_base_9",
     "acitve_special_effect": "modifier_sect_scilence_drow_ranger_9",
     "heroid": "",
-    "Abilityid": "ability2_drow_ranger_wave_of_silence"
+    "Abilityid": "imba_drow_ranger_wave_of_silence"
   },
   {
     "id": "sect_scilence_3_earth_spirit_6",
@@ -18924,7 +18924,7 @@
     "acitve_common_effect": "modifier_sect_scilence_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability3_earth_spirit_geomagnetic_grip"
+    "Abilityid": "imba_earth_spirit_geomagnetic_grip"
   },
   {
     "id": "sect_scilence_6_earth_spirit_6",
@@ -18936,7 +18936,7 @@
     "acitve_common_effect": "modifier_sect_scilence_base_6",
     "acitve_special_effect": "modifier_sect_scilence_earth_spirit_6",
     "heroid": "",
-    "Abilityid": "ability3_earth_spirit_geomagnetic_grip"
+    "Abilityid": "imba_earth_spirit_geomagnetic_grip"
   },
   {
     "id": "sect_scilence_9_earth_spirit_6",
@@ -18948,7 +18948,7 @@
     "acitve_common_effect": "modifier_sect_scilence_base_9",
     "acitve_special_effect": "modifier_sect_scilence_earth_spirit_9",
     "heroid": "",
-    "Abilityid": "ability3_earth_spirit_geomagnetic_grip"
+    "Abilityid": "imba_earth_spirit_geomagnetic_grip"
   },
   {
     "id": "sect_scilence_3_puck_7",
@@ -18960,7 +18960,7 @@
     "acitve_common_effect": "modifier_sect_scilence_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_puck",
-    "Abilityid": "ability2_puck_waning_rift"
+    "Abilityid": "imba_puck_waning_rift"
   },
   {
     "id": "sect_scilence_6_puck_7",
@@ -18972,7 +18972,7 @@
     "acitve_common_effect": "modifier_sect_scilence_base_6",
     "acitve_special_effect": "modifier_sect_scilence_puck_6",
     "heroid": "building_hero_puck",
-    "Abilityid": "ability2_puck_waning_rift"
+    "Abilityid": "imba_puck_waning_rift"
   },
   {
     "id": "sect_scilence_9_puck_7",
@@ -18984,7 +18984,7 @@
     "acitve_common_effect": "modifier_sect_scilence_base_9",
     "acitve_special_effect": "modifier_sect_scilence_puck_9",
     "heroid": "building_hero_puck",
-    "Abilityid": "ability2_puck_waning_rift"
+    "Abilityid": "imba_puck_waning_rift"
   },
   {
     "id": "sect_scilence_3_silencer_8",
@@ -18996,7 +18996,7 @@
     "acitve_common_effect": "modifier_sect_scilence_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_silencer",
-    "Abilityid": "ability1_silencer_curse_of_the_silent"
+    "Abilityid": "imba_silencer_curse_of_the_silent"
   },
   {
     "id": "sect_scilence_6_silencer_8",
@@ -19008,7 +19008,7 @@
     "acitve_common_effect": "modifier_sect_scilence_base_6",
     "acitve_special_effect": "modifier_sect_scilence_silencer_6",
     "heroid": "building_hero_silencer",
-    "Abilityid": "ability1_silencer_curse_of_the_silent"
+    "Abilityid": "imba_silencer_curse_of_the_silent"
   },
   {
     "id": "sect_scilence_9_silencer_8",
@@ -19020,7 +19020,7 @@
     "acitve_common_effect": "modifier_sect_scilence_base_9",
     "acitve_special_effect": "modifier_sect_scilence_silencer_9",
     "heroid": "building_hero_silencer",
-    "Abilityid": "ability1_silencer_curse_of_the_silent"
+    "Abilityid": "imba_silencer_curse_of_the_silent"
   },
   {
     "id": "sect_scilence_3_silencer_9",
@@ -19032,7 +19032,7 @@
     "acitve_common_effect": "modifier_sect_scilence_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_silencer_global_silence"
+    "Abilityid": "imba_silencer_global_silence"
   },
   {
     "id": "sect_scilence_6_silencer_9",
@@ -19044,7 +19044,7 @@
     "acitve_common_effect": "modifier_sect_scilence_base_6",
     "acitve_special_effect": "modifier_sect_scilence_silencer_6",
     "heroid": "",
-    "Abilityid": "ability6_silencer_global_silence"
+    "Abilityid": "imba_silencer_global_silence"
   },
   {
     "id": "sect_scilence_9_silencer_9",
@@ -19056,7 +19056,7 @@
     "acitve_common_effect": "modifier_sect_scilence_base_9",
     "acitve_special_effect": "modifier_sect_scilence_silencer_9",
     "heroid": "",
-    "Abilityid": "ability6_silencer_global_silence"
+    "Abilityid": "imba_silencer_global_silence"
   },
   {
     "id": "sect_scilence_3_silencer_10",
@@ -19068,7 +19068,7 @@
     "acitve_common_effect": "modifier_sect_scilence_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability3_silencer_last_word"
+    "Abilityid": "imba_silencer_last_word"
   },
   {
     "id": "sect_scilence_6_silencer_10",
@@ -19080,7 +19080,7 @@
     "acitve_common_effect": "modifier_sect_scilence_base_6",
     "acitve_special_effect": "modifier_sect_scilence_silencer_6",
     "heroid": "",
-    "Abilityid": "ability3_silencer_last_word"
+    "Abilityid": "imba_silencer_last_word"
   },
   {
     "id": "sect_scilence_9_silencer_10",
@@ -19092,7 +19092,7 @@
     "acitve_common_effect": "modifier_sect_scilence_base_9",
     "acitve_special_effect": "modifier_sect_scilence_silencer_9",
     "heroid": "",
-    "Abilityid": "ability3_silencer_last_word"
+    "Abilityid": "imba_silencer_last_word"
   },
   {
     "id": "sect_scilence_3_skywrath_mage_11",
@@ -19104,7 +19104,7 @@
     "acitve_common_effect": "modifier_sect_scilence_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_skywrath_mage",
-    "Abilityid": "ability3_skywrath_mage_ancient_seal"
+    "Abilityid": "imba_skywrath_mage_ancient_seal"
   },
   {
     "id": "sect_scilence_6_skywrath_mage_11",
@@ -19116,7 +19116,7 @@
     "acitve_common_effect": "modifier_sect_scilence_base_6",
     "acitve_special_effect": "modifier_sect_scilence_skywrath_mage_6",
     "heroid": "building_hero_skywrath_mage",
-    "Abilityid": "ability3_skywrath_mage_ancient_seal"
+    "Abilityid": "imba_skywrath_mage_ancient_seal"
   },
   {
     "id": "sect_scilence_9_skywrath_mage_11",
@@ -19128,7 +19128,7 @@
     "acitve_common_effect": "modifier_sect_scilence_base_9",
     "acitve_special_effect": "modifier_sect_scilence_skywrath_mage_9",
     "heroid": "building_hero_skywrath_mage",
-    "Abilityid": "ability3_skywrath_mage_ancient_seal"
+    "Abilityid": "imba_skywrath_mage_ancient_seal"
   },
   {
     "id": "sect_seckill_3_clinkz_1",
@@ -19140,7 +19140,7 @@
     "acitve_common_effect": "modifier_sect_seckill_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_clinkz",
-    "Abilityid": "ability1_clinkz_strafe"
+    "Abilityid": "imba_clinkz_strafe"
   },
   {
     "id": "sect_seckill_6_clinkz_1",
@@ -19152,7 +19152,7 @@
     "acitve_common_effect": "modifier_sect_seckill_base_6",
     "acitve_special_effect": "modifier_sect_seckill_clinkz_6",
     "heroid": "building_hero_clinkz",
-    "Abilityid": "ability1_clinkz_strafe"
+    "Abilityid": "imba_clinkz_strafe"
   },
   {
     "id": "sect_seckill_9_clinkz_1",
@@ -19164,7 +19164,7 @@
     "acitve_common_effect": "modifier_sect_seckill_base_9",
     "acitve_special_effect": "modifier_sect_seckill_clinkz_9",
     "heroid": "building_hero_clinkz",
-    "Abilityid": "ability1_clinkz_strafe"
+    "Abilityid": "imba_clinkz_strafe"
   },
   {
     "id": "sect_seckill_3_drow_ranger_2",
@@ -19176,7 +19176,7 @@
     "acitve_common_effect": "modifier_sect_seckill_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_drow_ranger",
-    "Abilityid": "ability3_drow_ranger_multishot"
+    "Abilityid": "imba_drow_ranger_multishot"
   },
   {
     "id": "sect_seckill_6_drow_ranger_2",
@@ -19188,7 +19188,7 @@
     "acitve_common_effect": "modifier_sect_seckill_base_6",
     "acitve_special_effect": "modifier_sect_seckill_drow_ranger_6",
     "heroid": "building_hero_drow_ranger",
-    "Abilityid": "ability3_drow_ranger_multishot"
+    "Abilityid": "imba_drow_ranger_multishot"
   },
   {
     "id": "sect_seckill_9_drow_ranger_2",
@@ -19200,7 +19200,7 @@
     "acitve_common_effect": "modifier_sect_seckill_base_9",
     "acitve_special_effect": "modifier_sect_seckill_drow_ranger_9",
     "heroid": "building_hero_drow_ranger",
-    "Abilityid": "ability3_drow_ranger_multishot"
+    "Abilityid": "imba_drow_ranger_multishot"
   },
   {
     "id": "sect_seckill_3_juggernaut_3",
@@ -19212,7 +19212,7 @@
     "acitve_common_effect": "modifier_sect_seckill_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_juggernaut_omni_slash"
+    "Abilityid": "imba_juggernaut_omni_slash"
   },
   {
     "id": "sect_seckill_6_juggernaut_3",
@@ -19224,7 +19224,7 @@
     "acitve_common_effect": "modifier_sect_seckill_base_6",
     "acitve_special_effect": "modifier_sect_seckill_juggernaut_6",
     "heroid": "",
-    "Abilityid": "ability6_juggernaut_omni_slash"
+    "Abilityid": "imba_juggernaut_omni_slash"
   },
   {
     "id": "sect_seckill_9_juggernaut_3",
@@ -19236,7 +19236,7 @@
     "acitve_common_effect": "modifier_sect_seckill_base_9",
     "acitve_special_effect": "modifier_sect_seckill_juggernaut_9",
     "heroid": "",
-    "Abilityid": "ability6_juggernaut_omni_slash"
+    "Abilityid": "imba_juggernaut_omni_slash"
   },
   {
     "id": "sect_seckill_3_juggernaut_4",
@@ -19248,7 +19248,7 @@
     "acitve_common_effect": "modifier_sect_seckill_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability4_juggernaut_swift_slash"
+    "Abilityid": "imba_juggernaut_swift_slash"
   },
   {
     "id": "sect_seckill_6_juggernaut_4",
@@ -19260,7 +19260,7 @@
     "acitve_common_effect": "modifier_sect_seckill_base_6",
     "acitve_special_effect": "modifier_sect_seckill_juggernaut_6",
     "heroid": "",
-    "Abilityid": "ability4_juggernaut_swift_slash"
+    "Abilityid": "imba_juggernaut_swift_slash"
   },
   {
     "id": "sect_seckill_9_juggernaut_4",
@@ -19272,7 +19272,7 @@
     "acitve_common_effect": "modifier_sect_seckill_base_9",
     "acitve_special_effect": "modifier_sect_seckill_juggernaut_9",
     "heroid": "",
-    "Abilityid": "ability4_juggernaut_swift_slash"
+    "Abilityid": "imba_juggernaut_swift_slash"
   },
   {
     "id": "sect_seckill_3_marci_5",
@@ -19284,7 +19284,7 @@
     "acitve_common_effect": "modifier_sect_seckill_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_marci_unleash"
+    "Abilityid": "imba_marci_unleash"
   },
   {
     "id": "sect_seckill_6_marci_5",
@@ -19296,7 +19296,7 @@
     "acitve_common_effect": "modifier_sect_seckill_base_6",
     "acitve_special_effect": "modifier_sect_seckill_marci_6",
     "heroid": "",
-    "Abilityid": "ability6_marci_unleash"
+    "Abilityid": "imba_marci_unleash"
   },
   {
     "id": "sect_seckill_9_marci_5",
@@ -19308,7 +19308,7 @@
     "acitve_common_effect": "modifier_sect_seckill_base_9",
     "acitve_special_effect": "modifier_sect_seckill_marci_9",
     "heroid": "",
-    "Abilityid": "ability6_marci_unleash"
+    "Abilityid": "imba_marci_unleash"
   },
   {
     "id": "sect_seckill_3_snapfire_6",
@@ -19320,7 +19320,7 @@
     "acitve_common_effect": "modifier_sect_seckill_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_snapfire_mortimer_kisses"
+    "Abilityid": "imba_snapfire_mortimer_kisses"
   },
   {
     "id": "sect_seckill_6_snapfire_6",
@@ -19332,7 +19332,7 @@
     "acitve_common_effect": "modifier_sect_seckill_base_6",
     "acitve_special_effect": "modifier_sect_seckill_snapfire_6",
     "heroid": "",
-    "Abilityid": "ability6_snapfire_mortimer_kisses"
+    "Abilityid": "imba_snapfire_mortimer_kisses"
   },
   {
     "id": "sect_seckill_9_snapfire_6",
@@ -19344,7 +19344,7 @@
     "acitve_common_effect": "modifier_sect_seckill_base_9",
     "acitve_special_effect": "modifier_sect_seckill_snapfire_9",
     "heroid": "",
-    "Abilityid": "ability6_snapfire_mortimer_kisses"
+    "Abilityid": "imba_snapfire_mortimer_kisses"
   },
   {
     "id": "sect_seckill_3_ursa_7",
@@ -19356,7 +19356,7 @@
     "acitve_common_effect": "modifier_sect_seckill_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_ursa",
-    "Abilityid": "ability2_ursa_overpower"
+    "Abilityid": "imba_ursa_overpower"
   },
   {
     "id": "sect_seckill_6_ursa_7",
@@ -19368,7 +19368,7 @@
     "acitve_common_effect": "modifier_sect_seckill_base_6",
     "acitve_special_effect": "modifier_sect_seckill_ursa_6",
     "heroid": "building_hero_ursa",
-    "Abilityid": "ability2_ursa_overpower"
+    "Abilityid": "imba_ursa_overpower"
   },
   {
     "id": "sect_seckill_9_ursa_7",
@@ -19380,7 +19380,7 @@
     "acitve_common_effect": "modifier_sect_seckill_base_9",
     "acitve_special_effect": "modifier_sect_seckill_ursa_9",
     "heroid": "building_hero_ursa",
-    "Abilityid": "ability2_ursa_overpower"
+    "Abilityid": "imba_ursa_overpower"
   },
   {
     "id": "sect_seckill_3_windrunner_8",
@@ -19392,7 +19392,7 @@
     "acitve_common_effect": "modifier_sect_seckill_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_windrunner_focusfire"
+    "Abilityid": "imba_windrunner_focusfire"
   },
   {
     "id": "sect_seckill_6_windrunner_8",
@@ -19404,7 +19404,7 @@
     "acitve_common_effect": "modifier_sect_seckill_base_6",
     "acitve_special_effect": "modifier_sect_seckill_windrunner_6",
     "heroid": "",
-    "Abilityid": "ability6_windrunner_focusfire"
+    "Abilityid": "imba_windrunner_focusfire"
   },
   {
     "id": "sect_seckill_9_windrunner_8",
@@ -19416,7 +19416,7 @@
     "acitve_common_effect": "modifier_sect_seckill_base_9",
     "acitve_special_effect": "modifier_sect_seckill_windrunner_9",
     "heroid": "",
-    "Abilityid": "ability6_windrunner_focusfire"
+    "Abilityid": "imba_windrunner_focusfire"
   },
   {
     "id": "sect_shield_4_bristleback_1",
@@ -19428,7 +19428,7 @@
     "acitve_common_effect": "modifier_sect_shield_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_bristleback",
-    "Abilityid": "ability3_bristleback_bristleback"
+    "Abilityid": "imba_bristleback_bristleback"
   },
   {
     "id": "sect_shield_8_bristleback_1",
@@ -19440,7 +19440,7 @@
     "acitve_common_effect": "modifier_sect_shield_base_8",
     "acitve_special_effect": "modifier_sect_shield_bristleback_8",
     "heroid": "building_hero_bristleback",
-    "Abilityid": "ability3_bristleback_bristleback"
+    "Abilityid": "imba_bristleback_bristleback"
   },
   {
     "id": "sect_shield_12_bristleback_1",
@@ -19452,7 +19452,7 @@
     "acitve_common_effect": "modifier_sect_shield_base_12",
     "acitve_special_effect": "modifier_sect_shield_bristleback_12",
     "heroid": "building_hero_bristleback",
-    "Abilityid": "ability3_bristleback_bristleback"
+    "Abilityid": "imba_bristleback_bristleback"
   },
   {
     "id": "sect_shield_4_dark_seer_2",
@@ -19464,7 +19464,7 @@
     "acitve_common_effect": "modifier_sect_shield_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_dark_seer",
-    "Abilityid": "ability2_dark_seer_ion_shell"
+    "Abilityid": "imba_dark_seer_ion_shell"
   },
   {
     "id": "sect_shield_8_dark_seer_2",
@@ -19476,7 +19476,7 @@
     "acitve_common_effect": "modifier_sect_shield_base_8",
     "acitve_special_effect": "modifier_sect_shield_dark_seer_8",
     "heroid": "building_hero_dark_seer",
-    "Abilityid": "ability2_dark_seer_ion_shell"
+    "Abilityid": "imba_dark_seer_ion_shell"
   },
   {
     "id": "sect_shield_12_dark_seer_2",
@@ -19488,7 +19488,7 @@
     "acitve_common_effect": "modifier_sect_shield_base_12",
     "acitve_special_effect": "modifier_sect_shield_dark_seer_12",
     "heroid": "building_hero_dark_seer",
-    "Abilityid": "ability2_dark_seer_ion_shell"
+    "Abilityid": "imba_dark_seer_ion_shell"
   },
   {
     "id": "sect_shield_4_ember_spirit_3",
@@ -19500,7 +19500,7 @@
     "acitve_common_effect": "modifier_sect_shield_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_ember_spirit",
-    "Abilityid": "ability3_ember_spirit_flame_guard"
+    "Abilityid": "imba_ember_spirit_flame_guard"
   },
   {
     "id": "sect_shield_8_ember_spirit_3",
@@ -19512,7 +19512,7 @@
     "acitve_common_effect": "modifier_sect_shield_base_8",
     "acitve_special_effect": "modifier_sect_shield_ember_spirit_8",
     "heroid": "building_hero_ember_spirit",
-    "Abilityid": "ability3_ember_spirit_flame_guard"
+    "Abilityid": "imba_ember_spirit_flame_guard"
   },
   {
     "id": "sect_shield_12_ember_spirit_3",
@@ -19524,7 +19524,7 @@
     "acitve_common_effect": "modifier_sect_shield_base_12",
     "acitve_special_effect": "modifier_sect_shield_ember_spirit_12",
     "heroid": "building_hero_ember_spirit",
-    "Abilityid": "ability3_ember_spirit_flame_guard"
+    "Abilityid": "imba_ember_spirit_flame_guard"
   },
   {
     "id": "sect_shield_4_lich_4",
@@ -19536,7 +19536,7 @@
     "acitve_common_effect": "modifier_sect_shield_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_lich",
-    "Abilityid": "ability2_lich_frost_shield"
+    "Abilityid": "imba_lich_frost_shield"
   },
   {
     "id": "sect_shield_8_lich_4",
@@ -19548,7 +19548,7 @@
     "acitve_common_effect": "modifier_sect_shield_base_8",
     "acitve_special_effect": "modifier_sect_shield_lich_8",
     "heroid": "building_hero_lich",
-    "Abilityid": "ability2_lich_frost_shield"
+    "Abilityid": "imba_lich_frost_shield"
   },
   {
     "id": "sect_shield_12_lich_4",
@@ -19560,7 +19560,7 @@
     "acitve_common_effect": "modifier_sect_shield_base_12",
     "acitve_special_effect": "modifier_sect_shield_lich_12",
     "heroid": "building_hero_lich",
-    "Abilityid": "ability2_lich_frost_shield"
+    "Abilityid": "imba_lich_frost_shield"
   },
   {
     "id": "sect_shield_4_mars_5",
@@ -19572,7 +19572,7 @@
     "acitve_common_effect": "modifier_sect_shield_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability3_mars_bulwark"
+    "Abilityid": "imba_mars_bulwark"
   },
   {
     "id": "sect_shield_8_mars_5",
@@ -19584,7 +19584,7 @@
     "acitve_common_effect": "modifier_sect_shield_base_8",
     "acitve_special_effect": "modifier_sect_shield_mars_8",
     "heroid": "",
-    "Abilityid": "ability3_mars_bulwark"
+    "Abilityid": "imba_mars_bulwark"
   },
   {
     "id": "sect_shield_12_mars_5",
@@ -19596,7 +19596,7 @@
     "acitve_common_effect": "modifier_sect_shield_base_12",
     "acitve_special_effect": "modifier_sect_shield_mars_12",
     "heroid": "",
-    "Abilityid": "ability3_mars_bulwark"
+    "Abilityid": "imba_mars_bulwark"
   },
   {
     "id": "sect_shield_4_medusa_6",
@@ -19608,7 +19608,7 @@
     "acitve_common_effect": "modifier_sect_shield_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability3_medusa_mana_shield"
+    "Abilityid": "imba_medusa_mana_shield"
   },
   {
     "id": "sect_shield_8_medusa_6",
@@ -19620,7 +19620,7 @@
     "acitve_common_effect": "modifier_sect_shield_base_8",
     "acitve_special_effect": "modifier_sect_shield_medusa_8",
     "heroid": "",
-    "Abilityid": "ability3_medusa_mana_shield"
+    "Abilityid": "imba_medusa_mana_shield"
   },
   {
     "id": "sect_shield_12_medusa_6",
@@ -19632,7 +19632,7 @@
     "acitve_common_effect": "modifier_sect_shield_base_12",
     "acitve_special_effect": "modifier_sect_shield_medusa_12",
     "heroid": "",
-    "Abilityid": "ability3_medusa_mana_shield"
+    "Abilityid": "imba_medusa_mana_shield"
   },
   {
     "id": "sect_shield_4_ogre_magi_7",
@@ -19644,7 +19644,7 @@
     "acitve_common_effect": "modifier_sect_shield_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability5_ogre_magi_smash"
+    "Abilityid": "imba_ogre_magi_smash"
   },
   {
     "id": "sect_shield_8_ogre_magi_7",
@@ -19656,7 +19656,7 @@
     "acitve_common_effect": "modifier_sect_shield_base_8",
     "acitve_special_effect": "modifier_sect_shield_ogre_magi_8",
     "heroid": "",
-    "Abilityid": "ability5_ogre_magi_smash"
+    "Abilityid": "imba_ogre_magi_smash"
   },
   {
     "id": "sect_shield_12_ogre_magi_7",
@@ -19668,7 +19668,7 @@
     "acitve_common_effect": "modifier_sect_shield_base_12",
     "acitve_special_effect": "modifier_sect_shield_ogre_magi_12",
     "heroid": "",
-    "Abilityid": "ability5_ogre_magi_smash"
+    "Abilityid": "imba_ogre_magi_smash"
   },
   {
     "id": "sect_shield_4_omniknight_8",
@@ -19680,7 +19680,7 @@
     "acitve_common_effect": "modifier_sect_shield_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_omniknight_guardian_angel"
+    "Abilityid": "imba_omniknight_guardian_angel"
   },
   {
     "id": "sect_shield_8_omniknight_8",
@@ -19692,7 +19692,7 @@
     "acitve_common_effect": "modifier_sect_shield_base_8",
     "acitve_special_effect": "modifier_sect_shield_omniknight_8",
     "heroid": "",
-    "Abilityid": "ability6_omniknight_guardian_angel"
+    "Abilityid": "imba_omniknight_guardian_angel"
   },
   {
     "id": "sect_shield_12_omniknight_8",
@@ -19704,7 +19704,7 @@
     "acitve_common_effect": "modifier_sect_shield_base_12",
     "acitve_special_effect": "modifier_sect_shield_omniknight_12",
     "heroid": "",
-    "Abilityid": "ability6_omniknight_guardian_angel"
+    "Abilityid": "imba_omniknight_guardian_angel"
   },
   {
     "id": "sect_shield_4_pangolier_9",
@@ -19716,7 +19716,7 @@
     "acitve_common_effect": "modifier_sect_shield_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability2_pangolier_shield_crash"
+    "Abilityid": "imba_pangolier_shield_crash"
   },
   {
     "id": "sect_shield_8_pangolier_9",
@@ -19728,7 +19728,7 @@
     "acitve_common_effect": "modifier_sect_shield_base_8",
     "acitve_special_effect": "modifier_sect_shield_pangolier_8",
     "heroid": "",
-    "Abilityid": "ability2_pangolier_shield_crash"
+    "Abilityid": "imba_pangolier_shield_crash"
   },
   {
     "id": "sect_shield_12_pangolier_9",
@@ -19740,7 +19740,7 @@
     "acitve_common_effect": "modifier_sect_shield_base_12",
     "acitve_special_effect": "modifier_sect_shield_pangolier_12",
     "heroid": "",
-    "Abilityid": "ability2_pangolier_shield_crash"
+    "Abilityid": "imba_pangolier_shield_crash"
   },
   {
     "id": "sect_shield_4_skywrath_mage_10",
@@ -19752,7 +19752,7 @@
     "acitve_common_effect": "modifier_sect_shield_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": ""
+    "Abilityid": "imba_skywrath_mage_shield_of_the_scion"
   },
   {
     "id": "sect_shield_8_skywrath_mage_10",
@@ -19764,7 +19764,7 @@
     "acitve_common_effect": "modifier_sect_shield_base_8",
     "acitve_special_effect": "modifier_sect_shield_skywrath_mage_8",
     "heroid": "",
-    "Abilityid": ""
+    "Abilityid": "imba_skywrath_mage_shield_of_the_scion"
   },
   {
     "id": "sect_shield_12_skywrath_mage_10",
@@ -19776,7 +19776,7 @@
     "acitve_common_effect": "modifier_sect_shield_base_12",
     "acitve_special_effect": "modifier_sect_shield_skywrath_mage_12",
     "heroid": "",
-    "Abilityid": ""
+    "Abilityid": "imba_skywrath_mage_shield_of_the_scion"
   },
   {
     "id": "sect_shield_4_templar_assassin_11",
@@ -19788,7 +19788,7 @@
     "acitve_common_effect": "modifier_sect_shield_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_templar_assassin",
-    "Abilityid": "ability1_templar_assassin_refraction"
+    "Abilityid": "imba_templar_assassin_refraction"
   },
   {
     "id": "sect_shield_8_templar_assassin_11",
@@ -19800,7 +19800,7 @@
     "acitve_common_effect": "modifier_sect_shield_base_8",
     "acitve_special_effect": "modifier_sect_shield_templar_assassin_8",
     "heroid": "building_hero_templar_assassin",
-    "Abilityid": "ability1_templar_assassin_refraction"
+    "Abilityid": "imba_templar_assassin_refraction"
   },
   {
     "id": "sect_shield_12_templar_assassin_11",
@@ -19812,7 +19812,7 @@
     "acitve_common_effect": "modifier_sect_shield_base_12",
     "acitve_special_effect": "modifier_sect_shield_templar_assassin_12",
     "heroid": "building_hero_templar_assassin",
-    "Abilityid": "ability1_templar_assassin_refraction"
+    "Abilityid": "imba_templar_assassin_refraction"
   },
   {
     "id": "sect_shield_4_tidehunter_12",
@@ -19824,7 +19824,7 @@
     "acitve_common_effect": "modifier_sect_shield_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_tidehunter",
-    "Abilityid": "ability2_tidehunter_kraken_shell"
+    "Abilityid": "imba_tidehunter_kraken_shell"
   },
   {
     "id": "sect_shield_8_tidehunter_12",
@@ -19836,7 +19836,7 @@
     "acitve_common_effect": "modifier_sect_shield_base_8",
     "acitve_special_effect": "modifier_sect_shield_tidehunter_8",
     "heroid": "building_hero_tidehunter",
-    "Abilityid": "ability2_tidehunter_kraken_shell"
+    "Abilityid": "imba_tidehunter_kraken_shell"
   },
   {
     "id": "sect_shield_12_tidehunter_12",
@@ -19848,7 +19848,7 @@
     "acitve_common_effect": "modifier_sect_shield_base_12",
     "acitve_special_effect": "modifier_sect_shield_tidehunter_12",
     "heroid": "building_hero_tidehunter",
-    "Abilityid": "ability2_tidehunter_kraken_shell"
+    "Abilityid": "imba_tidehunter_kraken_shell"
   },
   {
     "id": "sect_shield_4_tinker_13",
@@ -19860,7 +19860,7 @@
     "acitve_common_effect": "modifier_sect_shield_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability4_tinker_defense_matrix"
+    "Abilityid": "imba_tinker_defense_matrix"
   },
   {
     "id": "sect_shield_8_tinker_13",
@@ -19872,7 +19872,7 @@
     "acitve_common_effect": "modifier_sect_shield_base_8",
     "acitve_special_effect": "modifier_sect_shield_tinker_8",
     "heroid": "",
-    "Abilityid": "ability4_tinker_defense_matrix"
+    "Abilityid": "imba_tinker_defense_matrix"
   },
   {
     "id": "sect_shield_12_tinker_13",
@@ -19884,7 +19884,7 @@
     "acitve_common_effect": "modifier_sect_shield_base_12",
     "acitve_special_effect": "modifier_sect_shield_tinker_12",
     "heroid": "",
-    "Abilityid": "ability4_tinker_defense_matrix"
+    "Abilityid": "imba_tinker_defense_matrix"
   },
   {
     "id": "sect_shield_4_visage_14",
@@ -19896,7 +19896,7 @@
     "acitve_common_effect": "modifier_sect_shield_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_visage",
-    "Abilityid": "ability3_visage_gravekeepers_cloak"
+    "Abilityid": "imba_visage_gravekeepers_cloak"
   },
   {
     "id": "sect_shield_8_visage_14",
@@ -19908,7 +19908,7 @@
     "acitve_common_effect": "modifier_sect_shield_base_8",
     "acitve_special_effect": "modifier_sect_shield_visage_8",
     "heroid": "building_hero_visage",
-    "Abilityid": "ability3_visage_gravekeepers_cloak"
+    "Abilityid": "imba_visage_gravekeepers_cloak"
   },
   {
     "id": "sect_shield_12_visage_14",
@@ -19920,7 +19920,7 @@
     "acitve_common_effect": "modifier_sect_shield_base_12",
     "acitve_special_effect": "modifier_sect_shield_visage_12",
     "heroid": "building_hero_visage",
-    "Abilityid": "ability3_visage_gravekeepers_cloak"
+    "Abilityid": "imba_visage_gravekeepers_cloak"
   },
   {
     "id": "sect_shield_4_void_spirit_15",
@@ -19932,7 +19932,7 @@
     "acitve_common_effect": "modifier_sect_shield_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability3_void_spirit_resonant_pulse"
+    "Abilityid": "imba_void_spirit_resonant_pulse"
   },
   {
     "id": "sect_shield_8_void_spirit_15",
@@ -19944,7 +19944,7 @@
     "acitve_common_effect": "modifier_sect_shield_base_8",
     "acitve_special_effect": "modifier_sect_shield_void_spirit_8",
     "heroid": "",
-    "Abilityid": "ability3_void_spirit_resonant_pulse"
+    "Abilityid": "imba_void_spirit_resonant_pulse"
   },
   {
     "id": "sect_shield_12_void_spirit_15",
@@ -19956,7 +19956,7 @@
     "acitve_common_effect": "modifier_sect_shield_base_12",
     "acitve_special_effect": "modifier_sect_shield_void_spirit_12",
     "heroid": "",
-    "Abilityid": "ability3_void_spirit_resonant_pulse"
+    "Abilityid": "imba_void_spirit_resonant_pulse"
   },
   {
     "id": "sect_steal_3_alchemist_1",
@@ -19968,7 +19968,7 @@
     "acitve_common_effect": "modifier_sect_steal_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability3_alchemist_goblins_greed"
+    "Abilityid": "imba_alchemist_goblins_greed"
   },
   {
     "id": "sect_steal_6_alchemist_1",
@@ -19980,7 +19980,7 @@
     "acitve_common_effect": "modifier_sect_steal_base_6",
     "acitve_special_effect": "modifier_sect_steal_alchemist_6",
     "heroid": "",
-    "Abilityid": "ability3_alchemist_goblins_greed"
+    "Abilityid": "imba_alchemist_goblins_greed"
   },
   {
     "id": "sect_steal_9_alchemist_1",
@@ -19992,7 +19992,7 @@
     "acitve_common_effect": "modifier_sect_steal_base_9",
     "acitve_special_effect": "modifier_sect_steal_alchemist_9",
     "heroid": "",
-    "Abilityid": "ability3_alchemist_goblins_greed"
+    "Abilityid": "imba_alchemist_goblins_greed"
   },
   {
     "id": "sect_steal_3_bounty_hunter_2",
@@ -20004,7 +20004,7 @@
     "acitve_common_effect": "modifier_sect_steal_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_bounty_hunter",
-    "Abilityid": "ability2_bounty_hunter_jinada"
+    "Abilityid": "imba_bounty_hunter_jinada"
   },
   {
     "id": "sect_steal_6_bounty_hunter_2",
@@ -20016,7 +20016,7 @@
     "acitve_common_effect": "modifier_sect_steal_base_6",
     "acitve_special_effect": "modifier_sect_steal_bounty_hunter_6",
     "heroid": "building_hero_bounty_hunter",
-    "Abilityid": "ability2_bounty_hunter_jinada"
+    "Abilityid": "imba_bounty_hunter_jinada"
   },
   {
     "id": "sect_steal_9_bounty_hunter_2",
@@ -20028,7 +20028,7 @@
     "acitve_common_effect": "modifier_sect_steal_base_9",
     "acitve_special_effect": "modifier_sect_steal_bounty_hunter_9",
     "heroid": "building_hero_bounty_hunter",
-    "Abilityid": "ability2_bounty_hunter_jinada"
+    "Abilityid": "imba_bounty_hunter_jinada"
   },
   {
     "id": "sect_steal_3_bounty_hunter_3",
@@ -20040,7 +20040,7 @@
     "acitve_common_effect": "modifier_sect_steal_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_bounty_hunter_track"
+    "Abilityid": "imba_bounty_hunter_track"
   },
   {
     "id": "sect_steal_6_bounty_hunter_3",
@@ -20052,7 +20052,7 @@
     "acitve_common_effect": "modifier_sect_steal_base_6",
     "acitve_special_effect": "modifier_sect_steal_bounty_hunter_6",
     "heroid": "",
-    "Abilityid": "ability6_bounty_hunter_track"
+    "Abilityid": "imba_bounty_hunter_track"
   },
   {
     "id": "sect_steal_9_bounty_hunter_3",
@@ -20064,7 +20064,7 @@
     "acitve_common_effect": "modifier_sect_steal_base_9",
     "acitve_special_effect": "modifier_sect_steal_bounty_hunter_9",
     "heroid": "",
-    "Abilityid": "ability6_bounty_hunter_track"
+    "Abilityid": "imba_bounty_hunter_track"
   },
   {
     "id": "sect_steal_3_obsidian_destroyer_4",
@@ -20076,7 +20076,7 @@
     "acitve_common_effect": "modifier_sect_steal_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability2_obsidian_destroyer_astral_imprisonment"
+    "Abilityid": "imba_obsidian_destroyer_astral_imprisonment"
   },
   {
     "id": "sect_steal_6_obsidian_destroyer_4",
@@ -20088,7 +20088,7 @@
     "acitve_common_effect": "modifier_sect_steal_base_6",
     "acitve_special_effect": "modifier_sect_steal_obsidian_destroyer_6",
     "heroid": "",
-    "Abilityid": "ability2_obsidian_destroyer_astral_imprisonment"
+    "Abilityid": "imba_obsidian_destroyer_astral_imprisonment"
   },
   {
     "id": "sect_steal_9_obsidian_destroyer_4",
@@ -20100,7 +20100,7 @@
     "acitve_common_effect": "modifier_sect_steal_base_9",
     "acitve_special_effect": "modifier_sect_steal_obsidian_destroyer_9",
     "heroid": "",
-    "Abilityid": "ability2_obsidian_destroyer_astral_imprisonment"
+    "Abilityid": "imba_obsidian_destroyer_astral_imprisonment"
   },
   {
     "id": "sect_steal_3_razor_5",
@@ -20112,7 +20112,7 @@
     "acitve_common_effect": "modifier_sect_steal_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_razor",
-    "Abilityid": "ability2_razor_static_link"
+    "Abilityid": "imba_razor_static_link"
   },
   {
     "id": "sect_steal_6_razor_5",
@@ -20124,7 +20124,7 @@
     "acitve_common_effect": "modifier_sect_steal_base_6",
     "acitve_special_effect": "modifier_sect_steal_razor_6",
     "heroid": "building_hero_razor",
-    "Abilityid": "ability2_razor_static_link"
+    "Abilityid": "imba_razor_static_link"
   },
   {
     "id": "sect_steal_9_razor_5",
@@ -20136,7 +20136,7 @@
     "acitve_common_effect": "modifier_sect_steal_base_9",
     "acitve_special_effect": "modifier_sect_steal_razor_9",
     "heroid": "building_hero_razor",
-    "Abilityid": "ability2_razor_static_link"
+    "Abilityid": "imba_razor_static_link"
   },
   {
     "id": "sect_steal_3_rubick_6",
@@ -20148,7 +20148,7 @@
     "acitve_common_effect": "modifier_sect_steal_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_rubick_spell_steal"
+    "Abilityid": "imba_rubick_spell_steal"
   },
   {
     "id": "sect_steal_6_rubick_6",
@@ -20160,7 +20160,7 @@
     "acitve_common_effect": "modifier_sect_steal_base_6",
     "acitve_special_effect": "modifier_sect_steal_rubick_6",
     "heroid": "",
-    "Abilityid": "ability6_rubick_spell_steal"
+    "Abilityid": "imba_rubick_spell_steal"
   },
   {
     "id": "sect_steal_9_rubick_6",
@@ -20172,7 +20172,7 @@
     "acitve_common_effect": "modifier_sect_steal_base_9",
     "acitve_special_effect": "modifier_sect_steal_rubick_9",
     "heroid": "",
-    "Abilityid": "ability6_rubick_spell_steal"
+    "Abilityid": "imba_rubick_spell_steal"
   },
   {
     "id": "sect_steal_3_silencer_7",
@@ -20184,7 +20184,7 @@
     "acitve_common_effect": "modifier_sect_steal_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_silencer",
-    "Abilityid": "ability2_silencer_glaives_of_wisdom"
+    "Abilityid": "imba_silencer_glaives_of_wisdom"
   },
   {
     "id": "sect_steal_6_silencer_7",
@@ -20196,7 +20196,7 @@
     "acitve_common_effect": "modifier_sect_steal_base_6",
     "acitve_special_effect": "modifier_sect_steal_silencer_6",
     "heroid": "building_hero_silencer",
-    "Abilityid": "ability2_silencer_glaives_of_wisdom"
+    "Abilityid": "imba_silencer_glaives_of_wisdom"
   },
   {
     "id": "sect_steal_9_silencer_7",
@@ -20208,7 +20208,7 @@
     "acitve_common_effect": "modifier_sect_steal_base_9",
     "acitve_special_effect": "modifier_sect_steal_silencer_9",
     "heroid": "building_hero_silencer",
-    "Abilityid": "ability2_silencer_glaives_of_wisdom"
+    "Abilityid": "imba_silencer_glaives_of_wisdom"
   },
   {
     "id": "sect_steal_3_slark_8",
@@ -20220,7 +20220,7 @@
     "acitve_common_effect": "modifier_sect_steal_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_slark",
-    "Abilityid": "ability3_slark_essence_shift"
+    "Abilityid": "imba_slark_essence_shift"
   },
   {
     "id": "sect_steal_6_slark_8",
@@ -20232,7 +20232,7 @@
     "acitve_common_effect": "modifier_sect_steal_base_6",
     "acitve_special_effect": "modifier_sect_steal_slark_6",
     "heroid": "building_hero_slark",
-    "Abilityid": "ability3_slark_essence_shift"
+    "Abilityid": "imba_slark_essence_shift"
   },
   {
     "id": "sect_steal_9_slark_8",
@@ -20244,7 +20244,7 @@
     "acitve_common_effect": "modifier_sect_steal_base_9",
     "acitve_special_effect": "modifier_sect_steal_slark_9",
     "heroid": "building_hero_slark",
-    "Abilityid": "ability3_slark_essence_shift"
+    "Abilityid": "imba_slark_essence_shift"
   },
   {
     "id": "sect_steal_3_undying_9",
@@ -20256,7 +20256,7 @@
     "acitve_common_effect": "modifier_sect_steal_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_undying",
-    "Abilityid": "ability1_undying_decay"
+    "Abilityid": "imba_undying_decay"
   },
   {
     "id": "sect_steal_6_undying_9",
@@ -20268,7 +20268,7 @@
     "acitve_common_effect": "modifier_sect_steal_base_6",
     "acitve_special_effect": "modifier_sect_steal_undying_6",
     "heroid": "building_hero_undying",
-    "Abilityid": "ability1_undying_decay"
+    "Abilityid": "imba_undying_decay"
   },
   {
     "id": "sect_steal_9_undying_9",
@@ -20280,7 +20280,7 @@
     "acitve_common_effect": "modifier_sect_steal_base_9",
     "acitve_special_effect": "modifier_sect_steal_undying_9",
     "heroid": "building_hero_undying",
-    "Abilityid": "ability1_undying_decay"
+    "Abilityid": "imba_undying_decay"
   },
   {
     "id": "sect_suck_blood_3_bane_1",
@@ -20292,7 +20292,7 @@
     "acitve_common_effect": "modifier_sect_suck_blood_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_bane",
-    "Abilityid": "ability2_bane_brain_sap"
+    "Abilityid": "imba_bane_brain_sap"
   },
   {
     "id": "sect_suck_blood_6_bane_1",
@@ -20304,7 +20304,7 @@
     "acitve_common_effect": "modifier_sect_suck_blood_base_6",
     "acitve_special_effect": "modifier_sect_suck_blood_bane_6",
     "heroid": "building_hero_bane",
-    "Abilityid": "ability2_bane_brain_sap"
+    "Abilityid": "imba_bane_brain_sap"
   },
   {
     "id": "sect_suck_blood_9_bane_1",
@@ -20316,7 +20316,7 @@
     "acitve_common_effect": "modifier_sect_suck_blood_base_9",
     "acitve_special_effect": "modifier_sect_suck_blood_bane_9",
     "heroid": "building_hero_bane",
-    "Abilityid": "ability2_bane_brain_sap"
+    "Abilityid": "imba_bane_brain_sap"
   },
   {
     "id": "sect_suck_blood_3_broodmother_2",
@@ -20328,7 +20328,7 @@
     "acitve_common_effect": "modifier_sect_suck_blood_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_broodmother",
-    "Abilityid": "ability1_broodmother_insatiable_hunger"
+    "Abilityid": "imba_broodmother_insatiable_hunger"
   },
   {
     "id": "sect_suck_blood_6_broodmother_2",
@@ -20340,7 +20340,7 @@
     "acitve_common_effect": "modifier_sect_suck_blood_base_6",
     "acitve_special_effect": "modifier_sect_suck_blood_broodmother_6",
     "heroid": "building_hero_broodmother",
-    "Abilityid": "ability1_broodmother_insatiable_hunger"
+    "Abilityid": "imba_broodmother_insatiable_hunger"
   },
   {
     "id": "sect_suck_blood_9_broodmother_2",
@@ -20352,7 +20352,7 @@
     "acitve_common_effect": "modifier_sect_suck_blood_base_9",
     "acitve_special_effect": "modifier_sect_suck_blood_broodmother_9",
     "heroid": "building_hero_broodmother",
-    "Abilityid": "ability1_broodmother_insatiable_hunger"
+    "Abilityid": "imba_broodmother_insatiable_hunger"
   },
   {
     "id": "sect_suck_blood_3_chaos_knight_3",
@@ -20364,7 +20364,7 @@
     "acitve_common_effect": "modifier_sect_suck_blood_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_chaos_knight",
-    "Abilityid": "ability3_chaos_knight_chaos_strike"
+    "Abilityid": "imba_chaos_knight_chaos_strike"
   },
   {
     "id": "sect_suck_blood_9_chaos_knight_3",
@@ -20376,7 +20376,7 @@
     "acitve_common_effect": "modifier_sect_suck_blood_base_9",
     "acitve_special_effect": "modifier_sect_suck_blood_chaos_knight_9",
     "heroid": "building_hero_chaos_knight",
-    "Abilityid": "ability3_chaos_knight_chaos_strike"
+    "Abilityid": "imba_chaos_knight_chaos_strike"
   },
   {
     "id": "sect_suck_blood_6_chaos_knight_3",
@@ -20388,7 +20388,7 @@
     "acitve_common_effect": "modifier_sect_suck_blood_base_6",
     "acitve_special_effect": "modifier_sect_suck_blood_chaos_knight_6",
     "heroid": "building_hero_chaos_knight",
-    "Abilityid": "ability3_chaos_knight_chaos_strike"
+    "Abilityid": "imba_chaos_knight_chaos_strike"
   },
   {
     "id": "sect_suck_blood_3_death_prophet_4",
@@ -20400,7 +20400,7 @@
     "acitve_common_effect": "modifier_sect_suck_blood_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_death_prophet",
-    "Abilityid": "ability3_death_prophet_spirit_siphon"
+    "Abilityid": "imba_death_prophet_spirit_siphon"
   },
   {
     "id": "sect_suck_blood_6_death_prophet_4",
@@ -20412,7 +20412,7 @@
     "acitve_common_effect": "modifier_sect_suck_blood_base_6",
     "acitve_special_effect": "modifier_sect_suck_blood_death_prophet_6",
     "heroid": "building_hero_death_prophet",
-    "Abilityid": "ability3_death_prophet_spirit_siphon"
+    "Abilityid": "imba_death_prophet_spirit_siphon"
   },
   {
     "id": "sect_suck_blood_9_death_prophet_4",
@@ -20424,7 +20424,7 @@
     "acitve_common_effect": "modifier_sect_suck_blood_base_9",
     "acitve_special_effect": "modifier_sect_suck_blood_death_prophet_9",
     "heroid": "building_hero_death_prophet",
-    "Abilityid": "ability3_death_prophet_spirit_siphon"
+    "Abilityid": "imba_death_prophet_spirit_siphon"
   },
   {
     "id": "sect_suck_blood_3_legion_commander_5",
@@ -20436,7 +20436,7 @@
     "acitve_common_effect": "modifier_sect_suck_blood_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_legion_commander",
-    "Abilityid": "ability3_legion_commander_moment_of_courage"
+    "Abilityid": "imba_legion_commander_moment_of_courage"
   },
   {
     "id": "sect_suck_blood_6_legion_commander_5",
@@ -20448,7 +20448,7 @@
     "acitve_common_effect": "modifier_sect_suck_blood_base_6",
     "acitve_special_effect": "modifier_sect_suck_blood_legion_commander_6",
     "heroid": "building_hero_legion_commander",
-    "Abilityid": "ability3_legion_commander_moment_of_courage"
+    "Abilityid": "imba_legion_commander_moment_of_courage"
   },
   {
     "id": "sect_suck_blood_9_legion_commander_5",
@@ -20460,7 +20460,7 @@
     "acitve_common_effect": "modifier_sect_suck_blood_base_9",
     "acitve_special_effect": "modifier_sect_suck_blood_legion_commander_9",
     "heroid": "building_hero_legion_commander",
-    "Abilityid": "ability3_legion_commander_moment_of_courage"
+    "Abilityid": "imba_legion_commander_moment_of_courage"
   },
   {
     "id": "sect_suck_blood_3_life_stealer_6",
@@ -20472,7 +20472,7 @@
     "acitve_common_effect": "modifier_sect_suck_blood_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_life_stealer",
-    "Abilityid": "ability2_life_stealer_feast"
+    "Abilityid": "imba_life_stealer_feast"
   },
   {
     "id": "sect_suck_blood_6_life_stealer_6",
@@ -20484,7 +20484,7 @@
     "acitve_common_effect": "modifier_sect_suck_blood_base_6",
     "acitve_special_effect": "modifier_sect_suck_blood_life_stealer_6",
     "heroid": "building_hero_life_stealer",
-    "Abilityid": "ability2_life_stealer_feast"
+    "Abilityid": "imba_life_stealer_feast"
   },
   {
     "id": "sect_suck_blood_9_life_stealer_6",
@@ -20496,7 +20496,7 @@
     "acitve_common_effect": "modifier_sect_suck_blood_base_9",
     "acitve_special_effect": "modifier_sect_suck_blood_life_stealer_9",
     "heroid": "building_hero_life_stealer",
-    "Abilityid": "ability2_life_stealer_feast"
+    "Abilityid": "imba_life_stealer_feast"
   },
   {
     "id": "sect_suck_blood_3_marci_7",
@@ -20508,7 +20508,7 @@
     "acitve_common_effect": "modifier_sect_suck_blood_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_marci",
-    "Abilityid": "ability3_marci_guardian"
+    "Abilityid": "imba_marci_guardian"
   },
   {
     "id": "sect_suck_blood_6_marci_7",
@@ -20520,7 +20520,7 @@
     "acitve_common_effect": "modifier_sect_suck_blood_base_6",
     "acitve_special_effect": "modifier_sect_suck_blood_marci_6",
     "heroid": "building_hero_marci",
-    "Abilityid": "ability3_marci_guardian"
+    "Abilityid": "imba_marci_guardian"
   },
   {
     "id": "sect_suck_blood_9_marci_7",
@@ -20532,7 +20532,7 @@
     "acitve_common_effect": "modifier_sect_suck_blood_base_9",
     "acitve_special_effect": "modifier_sect_suck_blood_marci_9",
     "heroid": "building_hero_marci",
-    "Abilityid": "ability3_marci_guardian"
+    "Abilityid": "imba_marci_guardian"
   },
   {
     "id": "sect_suck_blood_3_meepo_8",
@@ -20544,7 +20544,7 @@
     "acitve_common_effect": "modifier_sect_suck_blood_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_meepo",
-    "Abilityid": "ability3_meepo_ransack"
+    "Abilityid": "imba_meepo_ransack"
   },
   {
     "id": "sect_suck_blood_6_meepo_8",
@@ -20556,7 +20556,7 @@
     "acitve_common_effect": "modifier_sect_suck_blood_base_6",
     "acitve_special_effect": "modifier_sect_suck_blood_meepo_6",
     "heroid": "building_hero_meepo",
-    "Abilityid": "ability3_meepo_ransack"
+    "Abilityid": "imba_meepo_ransack"
   },
   {
     "id": "sect_suck_blood_9_meepo_8",
@@ -20568,7 +20568,7 @@
     "acitve_common_effect": "modifier_sect_suck_blood_base_9",
     "acitve_special_effect": "modifier_sect_suck_blood_meepo_9",
     "heroid": "building_hero_meepo",
-    "Abilityid": "ability3_meepo_ransack"
+    "Abilityid": "imba_meepo_ransack"
   },
   {
     "id": "sect_suck_blood_3_monkey_king_9",
@@ -20580,7 +20580,7 @@
     "acitve_common_effect": "modifier_sect_suck_blood_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_monkey_king",
-    "Abilityid": "ability4_monkey_king_jingu_mastery"
+    "Abilityid": "imba_monkey_king_jingu_mastery"
   },
   {
     "id": "sect_suck_blood_6_monkey_king_9",
@@ -20592,7 +20592,7 @@
     "acitve_common_effect": "modifier_sect_suck_blood_base_6",
     "acitve_special_effect": "modifier_sect_suck_blood_monkey_king_6",
     "heroid": "building_hero_monkey_king",
-    "Abilityid": "ability4_monkey_king_jingu_mastery"
+    "Abilityid": "imba_monkey_king_jingu_mastery"
   },
   {
     "id": "sect_suck_blood_9_monkey_king_9",
@@ -20604,7 +20604,7 @@
     "acitve_common_effect": "modifier_sect_suck_blood_base_9",
     "acitve_special_effect": "modifier_sect_suck_blood_monkey_king_9",
     "heroid": "building_hero_monkey_king",
-    "Abilityid": "ability4_monkey_king_jingu_mastery"
+    "Abilityid": "imba_monkey_king_jingu_mastery"
   },
   {
     "id": "sect_suck_blood_3_pugna_10",
@@ -20616,7 +20616,7 @@
     "acitve_common_effect": "modifier_sect_suck_blood_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_pugna_life_drain"
+    "Abilityid": "imba_pugna_life_drain"
   },
   {
     "id": "sect_suck_blood_6_pugna_10",
@@ -20628,7 +20628,7 @@
     "acitve_common_effect": "modifier_sect_suck_blood_base_6",
     "acitve_special_effect": "modifier_sect_suck_blood_pugna_6",
     "heroid": "",
-    "Abilityid": "ability6_pugna_life_drain"
+    "Abilityid": "imba_pugna_life_drain"
   },
   {
     "id": "sect_suck_blood_9_pugna_10",
@@ -20640,7 +20640,7 @@
     "acitve_common_effect": "modifier_sect_suck_blood_base_9",
     "acitve_special_effect": "modifier_sect_suck_blood_pugna_9",
     "heroid": "",
-    "Abilityid": "ability6_pugna_life_drain"
+    "Abilityid": "imba_pugna_life_drain"
   },
   {
     "id": "sect_suck_blood_3_shadow_shaman_11",
@@ -20652,7 +20652,7 @@
     "acitve_common_effect": "modifier_sect_suck_blood_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability3_shadow_shaman_shackles"
+    "Abilityid": "imba_shadow_shaman_shackles"
   },
   {
     "id": "sect_suck_blood_6_shadow_shaman_11",
@@ -20664,7 +20664,7 @@
     "acitve_common_effect": "modifier_sect_suck_blood_base_6",
     "acitve_special_effect": "modifier_sect_suck_blood_shadow_shaman_6",
     "heroid": "",
-    "Abilityid": "ability3_shadow_shaman_shackles"
+    "Abilityid": "imba_shadow_shaman_shackles"
   },
   {
     "id": "sect_suck_blood_9_shadow_shaman_11",
@@ -20676,7 +20676,7 @@
     "acitve_common_effect": "modifier_sect_suck_blood_base_9",
     "acitve_special_effect": "modifier_sect_suck_blood_shadow_shaman_9",
     "heroid": "",
-    "Abilityid": "ability3_shadow_shaman_shackles"
+    "Abilityid": "imba_shadow_shaman_shackles"
   },
   {
     "id": "sect_suck_blood_3_skeleton_king_12",
@@ -20688,7 +20688,7 @@
     "acitve_common_effect": "modifier_sect_suck_blood_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_skeleton_king",
-    "Abilityid": "ability2_skeleton_king_vampiric_aura"
+    "Abilityid": "imba_skeleton_king_vampiric_aura"
   },
   {
     "id": "sect_suck_blood_6_skeleton_king_12",
@@ -20700,7 +20700,7 @@
     "acitve_common_effect": "modifier_sect_suck_blood_base_6",
     "acitve_special_effect": "modifier_sect_suck_blood_skeleton_king_6",
     "heroid": "building_hero_skeleton_king",
-    "Abilityid": "ability2_skeleton_king_vampiric_aura"
+    "Abilityid": "imba_skeleton_king_vampiric_aura"
   },
   {
     "id": "sect_suck_blood_9_skeleton_king_12",
@@ -20712,7 +20712,7 @@
     "acitve_common_effect": "modifier_sect_suck_blood_base_9",
     "acitve_special_effect": "modifier_sect_suck_blood_skeleton_king_9",
     "heroid": "building_hero_skeleton_king",
-    "Abilityid": "ability2_skeleton_king_vampiric_aura"
+    "Abilityid": "imba_skeleton_king_vampiric_aura"
   },
   {
     "id": "sect_suck_blood_3_troll_warlord_13",
@@ -20724,7 +20724,7 @@
     "acitve_common_effect": "modifier_sect_suck_blood_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_troll_warlord_battle_trance"
+    "Abilityid": "imba_troll_warlord_battle_trance"
   },
   {
     "id": "sect_suck_blood_6_troll_warlord_13",
@@ -20736,7 +20736,7 @@
     "acitve_common_effect": "modifier_sect_suck_blood_base_6",
     "acitve_special_effect": "modifier_sect_suck_blood_troll_warlord_6",
     "heroid": "",
-    "Abilityid": "ability6_troll_warlord_battle_trance"
+    "Abilityid": "imba_troll_warlord_battle_trance"
   },
   {
     "id": "sect_suck_blood_9_troll_warlord_13",
@@ -20748,7 +20748,7 @@
     "acitve_common_effect": "modifier_sect_suck_blood_base_9",
     "acitve_special_effect": "modifier_sect_suck_blood_troll_warlord_9",
     "heroid": "",
-    "Abilityid": "ability6_troll_warlord_battle_trance"
+    "Abilityid": "imba_troll_warlord_battle_trance"
   },
   {
     "id": "sect_summon_4_arc_warden_1",
@@ -20760,7 +20760,7 @@
     "acitve_common_effect": "modifier_sect_summon_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_arc_warden",
-    "Abilityid": "ability3_arc_warden_spark_wraith"
+    "Abilityid": "imba_arc_warden_spark_wraith"
   },
   {
     "id": "sect_summon_8_arc_warden_1",
@@ -20772,7 +20772,7 @@
     "acitve_common_effect": "modifier_sect_summon_base_8",
     "acitve_special_effect": "modifier_sect_summon_arc_warden_8",
     "heroid": "building_hero_arc_warden",
-    "Abilityid": "ability3_arc_warden_spark_wraith"
+    "Abilityid": "imba_arc_warden_spark_wraith"
   },
   {
     "id": "sect_summon_12_arc_warden_1",
@@ -20784,7 +20784,7 @@
     "acitve_common_effect": "modifier_sect_summon_base_12",
     "acitve_special_effect": "modifier_sect_summon_arc_warden_12",
     "heroid": "building_hero_arc_warden",
-    "Abilityid": "ability3_arc_warden_spark_wraith"
+    "Abilityid": "imba_arc_warden_spark_wraith"
   },
   {
     "id": "sect_summon_4_beastmaster_2",
@@ -20796,7 +20796,7 @@
     "acitve_common_effect": "modifier_sect_summon_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_beastmaster",
-    "Abilityid": "ability2_beastmaster_call_of_the_wild_boar"
+    "Abilityid": "imba_beastmaster_call_of_the_wild_boar"
   },
   {
     "id": "sect_summon_8_beastmaster_2",
@@ -20808,7 +20808,7 @@
     "acitve_common_effect": "modifier_sect_summon_base_8",
     "acitve_special_effect": "modifier_sect_summon_beastmaster_8",
     "heroid": "building_hero_beastmaster",
-    "Abilityid": "ability2_beastmaster_call_of_the_wild_boar"
+    "Abilityid": "imba_beastmaster_call_of_the_wild_boar"
   },
   {
     "id": "sect_summon_12_beastmaster_2",
@@ -20820,7 +20820,7 @@
     "acitve_common_effect": "modifier_sect_summon_base_12",
     "acitve_special_effect": "modifier_sect_summon_beastmaster_12",
     "heroid": "building_hero_beastmaster",
-    "Abilityid": "ability2_beastmaster_call_of_the_wild_boar"
+    "Abilityid": "imba_beastmaster_call_of_the_wild_boar"
   },
   {
     "id": "sect_summon_4_broodmother_3",
@@ -20832,7 +20832,7 @@
     "acitve_common_effect": "modifier_sect_summon_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_broodmother_spawn_spiderlings"
+    "Abilityid": "imba_broodmother_spawn_spiderlings"
   },
   {
     "id": "sect_summon_8_broodmother_3",
@@ -20844,7 +20844,7 @@
     "acitve_common_effect": "modifier_sect_summon_base_8",
     "acitve_special_effect": "modifier_sect_summon_broodmother_8",
     "heroid": "",
-    "Abilityid": "ability6_broodmother_spawn_spiderlings"
+    "Abilityid": "imba_broodmother_spawn_spiderlings"
   },
   {
     "id": "sect_summon_12_broodmother_3",
@@ -20856,7 +20856,7 @@
     "acitve_common_effect": "modifier_sect_summon_base_12",
     "acitve_special_effect": "modifier_sect_summon_broodmother_12",
     "heroid": "",
-    "Abilityid": "ability6_broodmother_spawn_spiderlings"
+    "Abilityid": "imba_broodmother_spawn_spiderlings"
   },
   {
     "id": "sect_summon_4_earth_spirit_4",
@@ -20868,7 +20868,7 @@
     "acitve_common_effect": "modifier_sect_summon_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability4_earth_spirit_stone_caller"
+    "Abilityid": "imba_earth_spirit_stone_caller"
   },
   {
     "id": "sect_summon_8_earth_spirit_4",
@@ -20880,7 +20880,7 @@
     "acitve_common_effect": "modifier_sect_summon_base_8",
     "acitve_special_effect": "modifier_sect_summon_earth_spirit_8",
     "heroid": "",
-    "Abilityid": "ability4_earth_spirit_stone_caller"
+    "Abilityid": "imba_earth_spirit_stone_caller"
   },
   {
     "id": "sect_summon_12_earth_spirit_4",
@@ -20892,7 +20892,7 @@
     "acitve_common_effect": "modifier_sect_summon_base_12",
     "acitve_special_effect": "modifier_sect_summon_earth_spirit_12",
     "heroid": "",
-    "Abilityid": "ability4_earth_spirit_stone_caller"
+    "Abilityid": "imba_earth_spirit_stone_caller"
   },
   {
     "id": "sect_summon_4_furion_5",
@@ -20904,7 +20904,7 @@
     "acitve_common_effect": "modifier_sect_summon_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_furion",
-    "Abilityid": "ability3_furion_force_of_nature"
+    "Abilityid": "imba_furion_force_of_nature"
   },
   {
     "id": "sect_summon_8_furion_5",
@@ -20916,7 +20916,7 @@
     "acitve_common_effect": "modifier_sect_summon_base_8",
     "acitve_special_effect": "modifier_sect_summon_furion_8",
     "heroid": "building_hero_furion",
-    "Abilityid": "ability3_furion_force_of_nature"
+    "Abilityid": "imba_furion_force_of_nature"
   },
   {
     "id": "sect_summon_12_furion_5",
@@ -20928,7 +20928,7 @@
     "acitve_common_effect": "modifier_sect_summon_base_12",
     "acitve_special_effect": "modifier_sect_summon_furion_12",
     "heroid": "building_hero_furion",
-    "Abilityid": "ability3_furion_force_of_nature"
+    "Abilityid": "imba_furion_force_of_nature"
   },
   {
     "id": "sect_summon_4_grimstroke_6",
@@ -20940,7 +20940,7 @@
     "acitve_common_effect": "modifier_sect_summon_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_grimstroke",
-    "Abilityid": "ability2_grimstroke_ink_creature"
+    "Abilityid": "imba_grimstroke_ink_creature"
   },
   {
     "id": "sect_summon_8_grimstroke_6",
@@ -20952,7 +20952,7 @@
     "acitve_common_effect": "modifier_sect_summon_base_8",
     "acitve_special_effect": "modifier_sect_summon_grimstroke_8",
     "heroid": "building_hero_grimstroke",
-    "Abilityid": "ability2_grimstroke_ink_creature"
+    "Abilityid": "imba_grimstroke_ink_creature"
   },
   {
     "id": "sect_summon_12_grimstroke_6",
@@ -20964,7 +20964,7 @@
     "acitve_common_effect": "modifier_sect_summon_base_12",
     "acitve_special_effect": "modifier_sect_summon_grimstroke_12",
     "heroid": "building_hero_grimstroke",
-    "Abilityid": "ability2_grimstroke_ink_creature"
+    "Abilityid": "imba_grimstroke_ink_creature"
   },
   {
     "id": "sect_summon_4_gyrocopter_7",
@@ -20976,7 +20976,7 @@
     "acitve_common_effect": "modifier_sect_summon_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability2_gyrocopter_homing_missile"
+    "Abilityid": "imba_gyrocopter_homing_missile"
   },
   {
     "id": "sect_summon_8_gyrocopter_7",
@@ -20988,7 +20988,7 @@
     "acitve_common_effect": "modifier_sect_summon_base_8",
     "acitve_special_effect": "modifier_sect_summon_gyrocopter_8",
     "heroid": "",
-    "Abilityid": "ability2_gyrocopter_homing_missile"
+    "Abilityid": "imba_gyrocopter_homing_missile"
   },
   {
     "id": "sect_summon_12_gyrocopter_7",
@@ -21000,7 +21000,7 @@
     "acitve_common_effect": "modifier_sect_summon_base_12",
     "acitve_special_effect": "modifier_sect_summon_gyrocopter_12",
     "heroid": "",
-    "Abilityid": "ability2_gyrocopter_homing_missile"
+    "Abilityid": "imba_gyrocopter_homing_missile"
   },
   {
     "id": "sect_summon_4_invoker_8",
@@ -21012,7 +21012,7 @@
     "acitve_common_effect": "modifier_sect_summon_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": ""
+    "Abilityid": "imba_invoker_forge_spirit"
   },
   {
     "id": "sect_summon_8_invoker_8",
@@ -21024,7 +21024,7 @@
     "acitve_common_effect": "modifier_sect_summon_base_8",
     "acitve_special_effect": "modifier_sect_summon_invoker_8",
     "heroid": "",
-    "Abilityid": ""
+    "Abilityid": "imba_invoker_forge_spirit"
   },
   {
     "id": "sect_summon_12_invoker_8",
@@ -21036,7 +21036,7 @@
     "acitve_common_effect": "modifier_sect_summon_base_12",
     "acitve_special_effect": "modifier_sect_summon_invoker_12",
     "heroid": "",
-    "Abilityid": ""
+    "Abilityid": "imba_invoker_forge_spirit"
   },
   {
     "id": "sect_summon_4_keeper_of_the_light_9",
@@ -21048,7 +21048,7 @@
     "acitve_common_effect": "modifier_sect_summon_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": ""
+    "Abilityid": "imba_keeper_of_the_light_will_o_wisp"
   },
   {
     "id": "sect_summon_8_keeper_of_the_light_9",
@@ -21060,7 +21060,7 @@
     "acitve_common_effect": "modifier_sect_summon_base_8",
     "acitve_special_effect": "modifier_sect_summon_keeper_of_the_light_8",
     "heroid": "",
-    "Abilityid": ""
+    "Abilityid": "imba_keeper_of_the_light_will_o_wisp"
   },
   {
     "id": "sect_summon_12_keeper_of_the_light_9",
@@ -21072,7 +21072,7 @@
     "acitve_common_effect": "modifier_sect_summon_base_12",
     "acitve_special_effect": "modifier_sect_summon_keeper_of_the_light_12",
     "heroid": "",
-    "Abilityid": ""
+    "Abilityid": "imba_keeper_of_the_light_will_o_wisp"
   },
   {
     "id": "sect_summon_4_lone_druid_10",
@@ -21084,7 +21084,7 @@
     "acitve_common_effect": "modifier_sect_summon_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_lone_druid",
-    "Abilityid": "ability1_lone_druid_spirit_bear"
+    "Abilityid": "imba_lone_druid_spirit_bear"
   },
   {
     "id": "sect_summon_8_lone_druid_10",
@@ -21096,7 +21096,7 @@
     "acitve_common_effect": "modifier_sect_summon_base_8",
     "acitve_special_effect": "modifier_sect_summon_lone_druid_8",
     "heroid": "building_hero_lone_druid",
-    "Abilityid": "ability1_lone_druid_spirit_bear"
+    "Abilityid": "imba_lone_druid_spirit_bear"
   },
   {
     "id": "sect_summon_12_lone_druid_10",
@@ -21108,7 +21108,7 @@
     "acitve_common_effect": "modifier_sect_summon_base_12",
     "acitve_special_effect": "modifier_sect_summon_lone_druid_12",
     "heroid": "building_hero_lone_druid",
-    "Abilityid": "ability1_lone_druid_spirit_bear"
+    "Abilityid": "imba_lone_druid_spirit_bear"
   },
   {
     "id": "sect_summon_4_lycan_11",
@@ -21120,7 +21120,7 @@
     "acitve_common_effect": "modifier_sect_summon_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_lycan",
-    "Abilityid": "ability1_lycan_summon_wolves"
+    "Abilityid": "imba_lycan_summon_wolves"
   },
   {
     "id": "sect_summon_8_lycan_11",
@@ -21132,7 +21132,7 @@
     "acitve_common_effect": "modifier_sect_summon_base_8",
     "acitve_special_effect": "modifier_sect_summon_lycan_8",
     "heroid": "building_hero_lycan",
-    "Abilityid": "ability1_lycan_summon_wolves"
+    "Abilityid": "imba_lycan_summon_wolves"
   },
   {
     "id": "sect_summon_12_lycan_11",
@@ -21144,7 +21144,7 @@
     "acitve_common_effect": "modifier_sect_summon_base_12",
     "acitve_special_effect": "modifier_sect_summon_lycan_12",
     "heroid": "building_hero_lycan",
-    "Abilityid": "ability1_lycan_summon_wolves"
+    "Abilityid": "imba_lycan_summon_wolves"
   },
   {
     "id": "sect_summon_4_shadow_shaman_12",
@@ -21156,7 +21156,7 @@
     "acitve_common_effect": "modifier_sect_summon_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_shadow_shaman_mass_serpent_ward"
+    "Abilityid": "imba_shadow_shaman_mass_serpent_ward"
   },
   {
     "id": "sect_summon_8_shadow_shaman_12",
@@ -21168,7 +21168,7 @@
     "acitve_common_effect": "modifier_sect_summon_base_8",
     "acitve_special_effect": "modifier_sect_summon_shadow_shaman_8",
     "heroid": "",
-    "Abilityid": "ability6_shadow_shaman_mass_serpent_ward"
+    "Abilityid": "imba_shadow_shaman_mass_serpent_ward"
   },
   {
     "id": "sect_summon_12_shadow_shaman_12",
@@ -21180,7 +21180,7 @@
     "acitve_common_effect": "modifier_sect_summon_base_12",
     "acitve_special_effect": "modifier_sect_summon_shadow_shaman_12",
     "heroid": "",
-    "Abilityid": "ability6_shadow_shaman_mass_serpent_ward"
+    "Abilityid": "imba_shadow_shaman_mass_serpent_ward"
   },
   {
     "id": "sect_summon_4_tusk_13",
@@ -21192,7 +21192,7 @@
     "acitve_common_effect": "modifier_sect_summon_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_tusk",
-    "Abilityid": "ability5_tusk_frozen_sigil"
+    "Abilityid": "imba_tusk_frozen_sigil"
   },
   {
     "id": "sect_summon_8_tusk_13",
@@ -21204,7 +21204,7 @@
     "acitve_common_effect": "modifier_sect_summon_base_8",
     "acitve_special_effect": "modifier_sect_summon_tusk_8",
     "heroid": "building_hero_tusk",
-    "Abilityid": "ability5_tusk_frozen_sigil"
+    "Abilityid": "imba_tusk_frozen_sigil"
   },
   {
     "id": "sect_summon_12_tusk_13",
@@ -21216,7 +21216,7 @@
     "acitve_common_effect": "modifier_sect_summon_base_12",
     "acitve_special_effect": "modifier_sect_summon_tusk_12",
     "heroid": "building_hero_tusk",
-    "Abilityid": "ability5_tusk_frozen_sigil"
+    "Abilityid": "imba_tusk_frozen_sigil"
   },
   {
     "id": "sect_summon_4_venomancer_14",
@@ -21228,7 +21228,7 @@
     "acitve_common_effect": "modifier_sect_summon_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_venomancer",
-    "Abilityid": "ability3_venomancer_plague_ward"
+    "Abilityid": "imba_venomancer_plague_ward"
   },
   {
     "id": "sect_summon_8_venomancer_14",
@@ -21240,7 +21240,7 @@
     "acitve_common_effect": "modifier_sect_summon_base_8",
     "acitve_special_effect": "modifier_sect_summon_venomancer_8",
     "heroid": "building_hero_venomancer",
-    "Abilityid": "ability3_venomancer_plague_ward"
+    "Abilityid": "imba_venomancer_plague_ward"
   },
   {
     "id": "sect_summon_12_venomancer_14",
@@ -21252,7 +21252,7 @@
     "acitve_common_effect": "modifier_sect_summon_base_12",
     "acitve_special_effect": "modifier_sect_summon_venomancer_12",
     "heroid": "building_hero_venomancer",
-    "Abilityid": "ability3_venomancer_plague_ward"
+    "Abilityid": "imba_venomancer_plague_ward"
   },
   {
     "id": "sect_summon_4_warlock_15",
@@ -21264,7 +21264,7 @@
     "acitve_common_effect": "modifier_sect_summon_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_warlock_rain_of_chaos"
+    "Abilityid": "imba_warlock_rain_of_chaos"
   },
   {
     "id": "sect_summon_8_warlock_15",
@@ -21276,7 +21276,7 @@
     "acitve_common_effect": "modifier_sect_summon_base_8",
     "acitve_special_effect": "modifier_sect_summon_warlock_8",
     "heroid": "",
-    "Abilityid": "ability6_warlock_rain_of_chaos"
+    "Abilityid": "imba_warlock_rain_of_chaos"
   },
   {
     "id": "sect_summon_12_warlock_15",
@@ -21288,7 +21288,7 @@
     "acitve_common_effect": "modifier_sect_summon_base_12",
     "acitve_special_effect": "modifier_sect_summon_warlock_12",
     "heroid": "",
-    "Abilityid": "ability6_warlock_rain_of_chaos"
+    "Abilityid": "imba_warlock_rain_of_chaos"
   },
   {
     "id": "sect_summon_4_witch_doctor_16",
@@ -21300,7 +21300,7 @@
     "acitve_common_effect": "modifier_sect_summon_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_witch_doctor_death_ward"
+    "Abilityid": "imba_witch_doctor_death_ward"
   },
   {
     "id": "sect_summon_8_witch_doctor_16",
@@ -21312,7 +21312,7 @@
     "acitve_common_effect": "modifier_sect_summon_base_8",
     "acitve_special_effect": "modifier_sect_summon_witch_doctor_8",
     "heroid": "",
-    "Abilityid": "ability6_witch_doctor_death_ward"
+    "Abilityid": "imba_witch_doctor_death_ward"
   },
   {
     "id": "sect_summon_12_witch_doctor_16",
@@ -21324,7 +21324,7 @@
     "acitve_common_effect": "modifier_sect_summon_base_12",
     "acitve_special_effect": "modifier_sect_summon_witch_doctor_12",
     "heroid": "",
-    "Abilityid": "ability6_witch_doctor_death_ward"
+    "Abilityid": "imba_witch_doctor_death_ward"
   },
   {
     "id": "sect_summon_4_zeus_17",
@@ -21336,7 +21336,7 @@
     "acitve_common_effect": "modifier_sect_summon_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability4_zuus_cloud"
+    "Abilityid": "imba_zuus_cloud"
   },
   {
     "id": "sect_summon_8_zeus_17",
@@ -21348,7 +21348,7 @@
     "acitve_common_effect": "modifier_sect_summon_base_8",
     "acitve_special_effect": "modifier_sect_summon_zeus_8",
     "heroid": "",
-    "Abilityid": "ability4_zuus_cloud"
+    "Abilityid": "imba_zuus_cloud"
   },
   {
     "id": "sect_summon_12_zeus_17",
@@ -21360,7 +21360,7 @@
     "acitve_common_effect": "modifier_sect_summon_base_12",
     "acitve_special_effect": "modifier_sect_summon_zeus_12",
     "heroid": "",
-    "Abilityid": "ability4_zuus_cloud"
+    "Abilityid": "imba_zuus_cloud"
   },
   {
     "id": "sect_territory_4_abyssal_underlord_1",
@@ -21372,7 +21372,7 @@
     "acitve_common_effect": "modifier_sect_territory_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_abyssal_underlord",
-    "Abilityid": "ability2_abyssal_underlord_pit_of_malice"
+    "Abilityid": "imba_abyssal_underlord_pit_of_malice"
   },
   {
     "id": "sect_territory_8_abyssal_underlord_1",
@@ -21384,7 +21384,7 @@
     "acitve_common_effect": "modifier_sect_territory_base_8",
     "acitve_special_effect": "modifier_sect_territory_abyssal_underlord_8",
     "heroid": "building_hero_abyssal_underlord",
-    "Abilityid": "ability2_abyssal_underlord_pit_of_malice"
+    "Abilityid": "imba_abyssal_underlord_pit_of_malice"
   },
   {
     "id": "sect_territory_12_abyssal_underlord_1",
@@ -21396,7 +21396,7 @@
     "acitve_common_effect": "modifier_sect_territory_base_12",
     "acitve_special_effect": "modifier_sect_territory_abyssal_underlord_12",
     "heroid": "building_hero_abyssal_underlord",
-    "Abilityid": "ability2_abyssal_underlord_pit_of_malice"
+    "Abilityid": "imba_abyssal_underlord_pit_of_malice"
   },
   {
     "id": "sect_territory_4_broodmother_2",
@@ -21408,7 +21408,7 @@
     "acitve_common_effect": "modifier_sect_territory_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability2_broodmother_spin_web"
+    "Abilityid": "imba_broodmother_spin_web"
   },
   {
     "id": "sect_territory_8_broodmother_2",
@@ -21420,7 +21420,7 @@
     "acitve_common_effect": "modifier_sect_territory_base_8",
     "acitve_special_effect": "modifier_sect_territory_broodmother_8",
     "heroid": "",
-    "Abilityid": "ability2_broodmother_spin_web"
+    "Abilityid": "imba_broodmother_spin_web"
   },
   {
     "id": "sect_territory_12_broodmother_2",
@@ -21432,7 +21432,7 @@
     "acitve_common_effect": "modifier_sect_territory_base_12",
     "acitve_special_effect": "modifier_sect_territory_broodmother_12",
     "heroid": "",
-    "Abilityid": "ability2_broodmother_spin_web"
+    "Abilityid": "imba_broodmother_spin_web"
   },
   {
     "id": "sect_territory_4_dark_willow_3",
@@ -21444,7 +21444,7 @@
     "acitve_common_effect": "modifier_sect_territory_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_dark_willow",
-    "Abilityid": "ability1_dark_willow_bramble_maze"
+    "Abilityid": "imba_dark_willow_bramble_maze"
   },
   {
     "id": "sect_territory_8_dark_willow_3",
@@ -21456,7 +21456,7 @@
     "acitve_common_effect": "modifier_sect_territory_base_8",
     "acitve_special_effect": "modifier_sect_territory_dark_willow_8",
     "heroid": "building_hero_dark_willow",
-    "Abilityid": "ability1_dark_willow_bramble_maze"
+    "Abilityid": "imba_dark_willow_bramble_maze"
   },
   {
     "id": "sect_territory_12_dark_willow_3",
@@ -21468,7 +21468,7 @@
     "acitve_common_effect": "modifier_sect_territory_base_12",
     "acitve_special_effect": "modifier_sect_territory_dark_willow_12",
     "heroid": "building_hero_dark_willow",
-    "Abilityid": "ability1_dark_willow_bramble_maze"
+    "Abilityid": "imba_dark_willow_bramble_maze"
   },
   {
     "id": "sect_territory_4_disruptor_4",
@@ -21480,7 +21480,7 @@
     "acitve_common_effect": "modifier_sect_territory_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_disruptor",
-    "Abilityid": "ability3_disruptor_kinetic_field"
+    "Abilityid": "imba_disruptor_kinetic_field"
   },
   {
     "id": "sect_territory_8_disruptor_4",
@@ -21492,7 +21492,7 @@
     "acitve_common_effect": "modifier_sect_territory_base_8",
     "acitve_special_effect": "modifier_sect_territory_disruptor_8",
     "heroid": "building_hero_disruptor",
-    "Abilityid": "ability3_disruptor_kinetic_field"
+    "Abilityid": "imba_disruptor_kinetic_field"
   },
   {
     "id": "sect_territory_12_disruptor_4",
@@ -21504,7 +21504,7 @@
     "acitve_common_effect": "modifier_sect_territory_base_12",
     "acitve_special_effect": "modifier_sect_territory_disruptor_12",
     "heroid": "building_hero_disruptor",
-    "Abilityid": "ability3_disruptor_kinetic_field"
+    "Abilityid": "imba_disruptor_kinetic_field"
   },
   {
     "id": "sect_territory_4_earthshaker_5",
@@ -21516,7 +21516,7 @@
     "acitve_common_effect": "modifier_sect_territory_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_earthshaker",
-    "Abilityid": "ability1_earthshaker_fissure"
+    "Abilityid": "imba_earthshaker_fissure"
   },
   {
     "id": "sect_territory_8_earthshaker_5",
@@ -21528,7 +21528,7 @@
     "acitve_common_effect": "modifier_sect_territory_base_8",
     "acitve_special_effect": "modifier_sect_territory_earthshaker_8",
     "heroid": "building_hero_earthshaker",
-    "Abilityid": "ability1_earthshaker_fissure"
+    "Abilityid": "imba_earthshaker_fissure"
   },
   {
     "id": "sect_territory_12_earthshaker_5",
@@ -21540,7 +21540,7 @@
     "acitve_common_effect": "modifier_sect_territory_base_12",
     "acitve_special_effect": "modifier_sect_territory_earthshaker_12",
     "heroid": "building_hero_earthshaker",
-    "Abilityid": "ability1_earthshaker_fissure"
+    "Abilityid": "imba_earthshaker_fissure"
   },
   {
     "id": "sect_territory_4_elder_titan_6",
@@ -21552,7 +21552,7 @@
     "acitve_common_effect": "modifier_sect_territory_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_elder_titan_earth_splitter"
+    "Abilityid": "imba_elder_titan_earth_splitter"
   },
   {
     "id": "sect_territory_8_elder_titan_6",
@@ -21564,7 +21564,7 @@
     "acitve_common_effect": "modifier_sect_territory_base_8",
     "acitve_special_effect": "modifier_sect_territory_elder_titan_8",
     "heroid": "",
-    "Abilityid": "ability6_elder_titan_earth_splitter"
+    "Abilityid": "imba_elder_titan_earth_splitter"
   },
   {
     "id": "sect_territory_12_elder_titan_6",
@@ -21576,7 +21576,7 @@
     "acitve_common_effect": "modifier_sect_territory_base_12",
     "acitve_special_effect": "modifier_sect_territory_elder_titan_12",
     "heroid": "",
-    "Abilityid": "ability6_elder_titan_earth_splitter"
+    "Abilityid": "imba_elder_titan_earth_splitter"
   },
   {
     "id": "sect_territory_4_enigma_7",
@@ -21588,7 +21588,7 @@
     "acitve_common_effect": "modifier_sect_territory_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_enigma",
-    "Abilityid": "ability3_enigma_midnight_pulse"
+    "Abilityid": "imba_enigma_midnight_pulse"
   },
   {
     "id": "sect_territory_8_enigma_7",
@@ -21600,7 +21600,7 @@
     "acitve_common_effect": "modifier_sect_territory_base_8",
     "acitve_special_effect": "modifier_sect_territory_enigma_8",
     "heroid": "building_hero_enigma",
-    "Abilityid": "ability3_enigma_midnight_pulse"
+    "Abilityid": "imba_enigma_midnight_pulse"
   },
   {
     "id": "sect_territory_12_enigma_7",
@@ -21612,7 +21612,7 @@
     "acitve_common_effect": "modifier_sect_territory_base_12",
     "acitve_special_effect": "modifier_sect_territory_enigma_12",
     "heroid": "building_hero_enigma",
-    "Abilityid": "ability3_enigma_midnight_pulse"
+    "Abilityid": "imba_enigma_midnight_pulse"
   },
   {
     "id": "sect_territory_4_furion_8",
@@ -21624,7 +21624,7 @@
     "acitve_common_effect": "modifier_sect_territory_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_furion",
-    "Abilityid": "ability1_furion_sprout"
+    "Abilityid": "imba_furion_sprout"
   },
   {
     "id": "sect_territory_8_furion_8",
@@ -21636,7 +21636,7 @@
     "acitve_common_effect": "modifier_sect_territory_base_8",
     "acitve_special_effect": "modifier_sect_territory_furion_8",
     "heroid": "building_hero_furion",
-    "Abilityid": "ability1_furion_sprout"
+    "Abilityid": "imba_furion_sprout"
   },
   {
     "id": "sect_territory_12_furion_8",
@@ -21648,7 +21648,7 @@
     "acitve_common_effect": "modifier_sect_territory_base_12",
     "acitve_special_effect": "modifier_sect_territory_furion_12",
     "heroid": "building_hero_furion",
-    "Abilityid": "ability1_furion_sprout"
+    "Abilityid": "imba_furion_sprout"
   },
   {
     "id": "sect_territory_4_leshrac_9",
@@ -21660,7 +21660,7 @@
     "acitve_common_effect": "modifier_sect_territory_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability1_leshrac_split_earth"
+    "Abilityid": "imba_leshrac_split_earth"
   },
   {
     "id": "sect_territory_8_leshrac_9",
@@ -21672,7 +21672,7 @@
     "acitve_common_effect": "modifier_sect_territory_base_8",
     "acitve_special_effect": "modifier_sect_territory_leshrac_8",
     "heroid": "",
-    "Abilityid": "ability1_leshrac_split_earth"
+    "Abilityid": "imba_leshrac_split_earth"
   },
   {
     "id": "sect_territory_12_leshrac_9",
@@ -21684,7 +21684,7 @@
     "acitve_common_effect": "modifier_sect_territory_base_12",
     "acitve_special_effect": "modifier_sect_territory_leshrac_12",
     "heroid": "",
-    "Abilityid": "ability1_leshrac_split_earth"
+    "Abilityid": "imba_leshrac_split_earth"
   },
   {
     "id": "sect_territory_4_mars_10",
@@ -21696,7 +21696,7 @@
     "acitve_common_effect": "modifier_sect_territory_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_mars_arena_of_blood"
+    "Abilityid": "imba_mars_arena_of_blood"
   },
   {
     "id": "sect_territory_8_mars_10",
@@ -21708,7 +21708,7 @@
     "acitve_common_effect": "modifier_sect_territory_base_8",
     "acitve_special_effect": "modifier_sect_territory_mars_8",
     "heroid": "",
-    "Abilityid": "ability6_mars_arena_of_blood"
+    "Abilityid": "imba_mars_arena_of_blood"
   },
   {
     "id": "sect_territory_12_mars_10",
@@ -21720,7 +21720,7 @@
     "acitve_common_effect": "modifier_sect_territory_base_12",
     "acitve_special_effect": "modifier_sect_territory_mars_12",
     "heroid": "",
-    "Abilityid": "ability6_mars_arena_of_blood"
+    "Abilityid": "imba_mars_arena_of_blood"
   },
   {
     "id": "sect_territory_4_nyx_assassin_11",
@@ -21732,7 +21732,7 @@
     "acitve_common_effect": "modifier_sect_territory_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability4_nyx_assassin_burrow"
+    "Abilityid": "imba_nyx_assassin_burrow"
   },
   {
     "id": "sect_territory_8_nyx_assassin_11",
@@ -21744,7 +21744,7 @@
     "acitve_common_effect": "modifier_sect_territory_base_8",
     "acitve_special_effect": "modifier_sect_territory_nyx_assassin_8",
     "heroid": "",
-    "Abilityid": "ability4_nyx_assassin_burrow"
+    "Abilityid": "imba_nyx_assassin_burrow"
   },
   {
     "id": "sect_territory_12_nyx_assassin_11",
@@ -21756,7 +21756,7 @@
     "acitve_common_effect": "modifier_sect_territory_base_12",
     "acitve_special_effect": "modifier_sect_territory_nyx_assassin_12",
     "heroid": "",
-    "Abilityid": "ability4_nyx_assassin_burrow"
+    "Abilityid": "imba_nyx_assassin_burrow"
   },
   {
     "id": "sect_territory_4_rattletrap_12",
@@ -21768,7 +21768,7 @@
     "acitve_common_effect": "modifier_sect_territory_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability2_rattletrap_power_cogs"
+    "Abilityid": "imba_rattletrap_power_cogs"
   },
   {
     "id": "sect_territory_8_rattletrap_12",
@@ -21780,7 +21780,7 @@
     "acitve_common_effect": "modifier_sect_territory_base_8",
     "acitve_special_effect": "modifier_sect_territory_rattletrap_8",
     "heroid": "",
-    "Abilityid": "ability2_rattletrap_power_cogs"
+    "Abilityid": "imba_rattletrap_power_cogs"
   },
   {
     "id": "sect_territory_12_rattletrap_12",
@@ -21792,7 +21792,7 @@
     "acitve_common_effect": "modifier_sect_territory_base_12",
     "acitve_special_effect": "modifier_sect_territory_rattletrap_12",
     "heroid": "",
-    "Abilityid": "ability2_rattletrap_power_cogs"
+    "Abilityid": "imba_rattletrap_power_cogs"
   },
   {
     "id": "sect_territory_4_sandking_13",
@@ -21804,7 +21804,7 @@
     "acitve_common_effect": "modifier_sect_territory_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_sandking_epicenter"
+    "Abilityid": "imba_sandking_epicenter"
   },
   {
     "id": "sect_territory_8_sandking_13",
@@ -21816,7 +21816,7 @@
     "acitve_common_effect": "modifier_sect_territory_base_8",
     "acitve_special_effect": "modifier_sect_territory_sandking_8",
     "heroid": "",
-    "Abilityid": "ability6_sandking_epicenter"
+    "Abilityid": "imba_sandking_epicenter"
   },
   {
     "id": "sect_territory_12_sandking_13",
@@ -21828,7 +21828,7 @@
     "acitve_common_effect": "modifier_sect_territory_base_12",
     "acitve_special_effect": "modifier_sect_territory_sandking_12",
     "heroid": "",
-    "Abilityid": "ability6_sandking_epicenter"
+    "Abilityid": "imba_sandking_epicenter"
   },
   {
     "id": "sect_territory_4_sandking_14",
@@ -21840,7 +21840,7 @@
     "acitve_common_effect": "modifier_sect_territory_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability2_sandking_sand_storm"
+    "Abilityid": "imba_sandking_sand_storm"
   },
   {
     "id": "sect_territory_8_sandking_14",
@@ -21852,7 +21852,7 @@
     "acitve_common_effect": "modifier_sect_territory_base_8",
     "acitve_special_effect": "modifier_sect_territory_sandking_8",
     "heroid": "",
-    "Abilityid": "ability2_sandking_sand_storm"
+    "Abilityid": "imba_sandking_sand_storm"
   },
   {
     "id": "sect_territory_12_sandking_14",
@@ -21864,7 +21864,7 @@
     "acitve_common_effect": "modifier_sect_territory_base_12",
     "acitve_special_effect": "modifier_sect_territory_sandking_12",
     "heroid": "",
-    "Abilityid": "ability2_sandking_sand_storm"
+    "Abilityid": "imba_sandking_sand_storm"
   },
   {
     "id": "sect_territory_4_templar_assassin_15",
@@ -21876,7 +21876,7 @@
     "acitve_common_effect": "modifier_sect_territory_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability4_templar_assassin_trap"
+    "Abilityid": "imba_templar_assassin_trap"
   },
   {
     "id": "sect_territory_8_templar_assassin_15",
@@ -21888,7 +21888,7 @@
     "acitve_common_effect": "modifier_sect_territory_base_8",
     "acitve_special_effect": "modifier_sect_territory_templar_assassin_8",
     "heroid": "",
-    "Abilityid": "ability4_templar_assassin_trap"
+    "Abilityid": "imba_templar_assassin_trap"
   },
   {
     "id": "sect_territory_12_templar_assassin_15",
@@ -21900,7 +21900,7 @@
     "acitve_common_effect": "modifier_sect_territory_base_12",
     "acitve_special_effect": "modifier_sect_territory_templar_assassin_12",
     "heroid": "",
-    "Abilityid": "ability4_templar_assassin_trap"
+    "Abilityid": "imba_templar_assassin_trap"
   },
   {
     "id": "sect_territory_4_treant_16",
@@ -21912,7 +21912,7 @@
     "acitve_common_effect": "modifier_sect_territory_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability1_treant_natures_grasp"
+    "Abilityid": "imba_treant_natures_grasp"
   },
   {
     "id": "sect_territory_8_treant_16",
@@ -21924,7 +21924,7 @@
     "acitve_common_effect": "modifier_sect_territory_base_8",
     "acitve_special_effect": "modifier_sect_territory_treant_8",
     "heroid": "",
-    "Abilityid": "ability1_treant_natures_grasp"
+    "Abilityid": "imba_treant_natures_grasp"
   },
   {
     "id": "sect_territory_12_treant_16",
@@ -21936,7 +21936,7 @@
     "acitve_common_effect": "modifier_sect_territory_base_12",
     "acitve_special_effect": "modifier_sect_territory_treant_12",
     "heroid": "",
-    "Abilityid": "ability1_treant_natures_grasp"
+    "Abilityid": "imba_treant_natures_grasp"
   },
   {
     "id": "sect_territory_4_warlock_17",
@@ -21948,7 +21948,7 @@
     "acitve_common_effect": "modifier_sect_territory_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability3_warlock_upheaval"
+    "Abilityid": "imba_warlock_upheaval"
   },
   {
     "id": "sect_territory_8_warlock_17",
@@ -21960,7 +21960,7 @@
     "acitve_common_effect": "modifier_sect_territory_base_8",
     "acitve_special_effect": "modifier_sect_territory_warlock_8",
     "heroid": "",
-    "Abilityid": "ability3_warlock_upheaval"
+    "Abilityid": "imba_warlock_upheaval"
   },
   {
     "id": "sect_territory_12_warlock_17",
@@ -21972,7 +21972,7 @@
     "acitve_common_effect": "modifier_sect_territory_base_12",
     "acitve_special_effect": "modifier_sect_territory_warlock_12",
     "heroid": "",
-    "Abilityid": "ability3_warlock_upheaval"
+    "Abilityid": "imba_warlock_upheaval"
   },
   {
     "id": "sect_thorns_2_abaddon_1",
@@ -21984,7 +21984,7 @@
     "acitve_common_effect": "modifier_sect_thorns_base_2",
     "acitve_special_effect": "",
     "heroid": "building_hero_abaddon",
-    "Abilityid": "ability2_abaddon_aphotic_shield"
+    "Abilityid": "imba_abaddon_aphotic_shield"
   },
   {
     "id": "sect_thorns_4_abaddon_1",
@@ -21996,7 +21996,7 @@
     "acitve_common_effect": "modifier_sect_thorns_base_4",
     "acitve_special_effect": "modifier_sect_thorns_abaddon_4",
     "heroid": "building_hero_abaddon",
-    "Abilityid": "ability2_abaddon_aphotic_shield"
+    "Abilityid": "imba_abaddon_aphotic_shield"
   },
   {
     "id": "sect_thorns_8_abaddon_1",
@@ -22008,7 +22008,7 @@
     "acitve_common_effect": "modifier_sect_thorns_base_8",
     "acitve_special_effect": "modifier_sect_thorns_abaddon_8",
     "heroid": "building_hero_abaddon",
-    "Abilityid": "ability2_abaddon_aphotic_shield"
+    "Abilityid": "imba_abaddon_aphotic_shield"
   },
   {
     "id": "sect_thorns_2_axe_2",
@@ -22020,7 +22020,7 @@
     "acitve_common_effect": "modifier_sect_thorns_base_2",
     "acitve_special_effect": "",
     "heroid": "building_hero_axe",
-    "Abilityid": "ability3_axe_counter_helix"
+    "Abilityid": "imba_axe_counter_helix"
   },
   {
     "id": "sect_thorns_4_axe_2",
@@ -22032,7 +22032,7 @@
     "acitve_common_effect": "modifier_sect_thorns_base_4",
     "acitve_special_effect": "modifier_sect_thorns_axe_4",
     "heroid": "building_hero_axe",
-    "Abilityid": "ability3_axe_counter_helix"
+    "Abilityid": "imba_axe_counter_helix"
   },
   {
     "id": "sect_thorns_8_axe_2",
@@ -22044,7 +22044,7 @@
     "acitve_common_effect": "modifier_sect_thorns_base_8",
     "acitve_special_effect": "modifier_sect_thorns_axe_8",
     "heroid": "building_hero_axe",
-    "Abilityid": "ability3_axe_counter_helix"
+    "Abilityid": "imba_axe_counter_helix"
   },
   {
     "id": "sect_thorns_2_bristleback_3",
@@ -22056,7 +22056,7 @@
     "acitve_common_effect": "modifier_sect_thorns_base_2",
     "acitve_special_effect": "",
     "heroid": "building_hero_bristleback",
-    "Abilityid": "ability2_bristleback_quill_spray"
+    "Abilityid": "imba_bristleback_quill_spray"
   },
   {
     "id": "sect_thorns_4_bristleback_3",
@@ -22068,7 +22068,7 @@
     "acitve_common_effect": "modifier_sect_thorns_base_4",
     "acitve_special_effect": "modifier_sect_thorns_bristleback_4",
     "heroid": "building_hero_bristleback",
-    "Abilityid": "ability2_bristleback_quill_spray"
+    "Abilityid": "imba_bristleback_quill_spray"
   },
   {
     "id": "sect_thorns_8_bristleback_3",
@@ -22080,7 +22080,7 @@
     "acitve_common_effect": "modifier_sect_thorns_base_8",
     "acitve_special_effect": "modifier_sect_thorns_bristleback_8",
     "heroid": "building_hero_bristleback",
-    "Abilityid": "ability2_bristleback_quill_spray"
+    "Abilityid": "imba_bristleback_quill_spray"
   },
   {
     "id": "sect_thorns_2_centaur_4",
@@ -22092,7 +22092,7 @@
     "acitve_common_effect": "modifier_sect_thorns_base_2",
     "acitve_special_effect": "",
     "heroid": "building_hero_centaur",
-    "Abilityid": "ability3_centaur_return"
+    "Abilityid": "imba_centaur_return"
   },
   {
     "id": "sect_thorns_4_centaur_4",
@@ -22104,7 +22104,7 @@
     "acitve_common_effect": "modifier_sect_thorns_base_4",
     "acitve_special_effect": "modifier_sect_thorns_centaur_4",
     "heroid": "building_hero_centaur",
-    "Abilityid": "ability3_centaur_return"
+    "Abilityid": "imba_centaur_return"
   },
   {
     "id": "sect_thorns_8_centaur_4",
@@ -22116,7 +22116,7 @@
     "acitve_common_effect": "modifier_sect_thorns_base_8",
     "acitve_special_effect": "modifier_sect_thorns_centaur_8",
     "heroid": "building_hero_centaur",
-    "Abilityid": "ability3_centaur_return"
+    "Abilityid": "imba_centaur_return"
   },
   {
     "id": "sect_thorns_2_nyx_assassin_5",
@@ -22128,7 +22128,7 @@
     "acitve_common_effect": "modifier_sect_thorns_base_2",
     "acitve_special_effect": "",
     "heroid": "building_hero_nyx_assassin",
-    "Abilityid": "ability3_nyx_assassin_spiked_carapace"
+    "Abilityid": "imba_nyx_assassin_spiked_carapace"
   },
   {
     "id": "sect_thorns_4_nyx_assassin_5",
@@ -22140,7 +22140,7 @@
     "acitve_common_effect": "modifier_sect_thorns_base_4",
     "acitve_special_effect": "modifier_sect_thorns_nyx_assassin_4",
     "heroid": "building_hero_nyx_assassin",
-    "Abilityid": "ability3_nyx_assassin_spiked_carapace"
+    "Abilityid": "imba_nyx_assassin_spiked_carapace"
   },
   {
     "id": "sect_thorns_8_nyx_assassin_5",
@@ -22152,7 +22152,7 @@
     "acitve_common_effect": "modifier_sect_thorns_base_8",
     "acitve_special_effect": "modifier_sect_thorns_nyx_assassin_8",
     "heroid": "building_hero_nyx_assassin",
-    "Abilityid": "ability3_nyx_assassin_spiked_carapace"
+    "Abilityid": "imba_nyx_assassin_spiked_carapace"
   },
   {
     "id": "sect_thorns_2_rattletrap_6",
@@ -22164,7 +22164,7 @@
     "acitve_common_effect": "modifier_sect_thorns_base_2",
     "acitve_special_effect": "",
     "heroid": "building_hero_rattletrap",
-    "Abilityid": "ability1_rattletrap_battery_assault"
+    "Abilityid": "imba_rattletrap_battery_assault"
   },
   {
     "id": "sect_thorns_4_rattletrap_6",
@@ -22176,7 +22176,7 @@
     "acitve_common_effect": "modifier_sect_thorns_base_4",
     "acitve_special_effect": "modifier_sect_thorns_rattletrap_4",
     "heroid": "building_hero_rattletrap",
-    "Abilityid": "ability1_rattletrap_battery_assault"
+    "Abilityid": "imba_rattletrap_battery_assault"
   },
   {
     "id": "sect_thorns_8_rattletrap_6",
@@ -22188,7 +22188,7 @@
     "acitve_common_effect": "modifier_sect_thorns_base_8",
     "acitve_special_effect": "modifier_sect_thorns_rattletrap_8",
     "heroid": "building_hero_rattletrap",
-    "Abilityid": "ability1_rattletrap_battery_assault"
+    "Abilityid": "imba_rattletrap_battery_assault"
   },
   {
     "id": "sect_thorns_2_spectre_7",
@@ -22200,7 +22200,7 @@
     "acitve_common_effect": "modifier_sect_thorns_base_2",
     "acitve_special_effect": "",
     "heroid": "building_hero_spectre",
-    "Abilityid": "ability3_spectre_dispersion"
+    "Abilityid": "imba_spectre_dispersion"
   },
   {
     "id": "sect_thorns_4_spectre_7",
@@ -22212,7 +22212,7 @@
     "acitve_common_effect": "modifier_sect_thorns_base_4",
     "acitve_special_effect": "modifier_sect_thorns_spectre_4",
     "heroid": "building_hero_spectre",
-    "Abilityid": "ability3_spectre_dispersion"
+    "Abilityid": "imba_spectre_dispersion"
   },
   {
     "id": "sect_thorns_8_spectre_7",
@@ -22224,7 +22224,7 @@
     "acitve_common_effect": "modifier_sect_thorns_base_8",
     "acitve_special_effect": "modifier_sect_thorns_spectre_8",
     "heroid": "building_hero_spectre",
-    "Abilityid": "ability3_spectre_dispersion"
+    "Abilityid": "imba_spectre_dispersion"
   },
   {
     "id": "sect_thorns_2_visage_8",
@@ -22236,7 +22236,7 @@
     "acitve_common_effect": "modifier_sect_thorns_base_2",
     "acitve_special_effect": "",
     "heroid": "building_hero_visage",
-    "Abilityid": "ability2_visage_soul_assumption"
+    "Abilityid": "imba_visage_soul_assumption"
   },
   {
     "id": "sect_thorns_4_visage_8",
@@ -22248,7 +22248,7 @@
     "acitve_common_effect": "modifier_sect_thorns_base_4",
     "acitve_special_effect": "modifier_sect_thorns_visage_4",
     "heroid": "building_hero_visage",
-    "Abilityid": "ability2_visage_soul_assumption"
+    "Abilityid": "imba_visage_soul_assumption"
   },
   {
     "id": "sect_thorns_8_visage_8",
@@ -22260,7 +22260,7 @@
     "acitve_common_effect": "modifier_sect_thorns_base_8",
     "acitve_special_effect": "modifier_sect_thorns_visage_8",
     "heroid": "building_hero_visage",
-    "Abilityid": "ability2_visage_soul_assumption"
+    "Abilityid": "imba_visage_soul_assumption"
   },
   {
     "id": "sect_transform_3_alchemist_1",
@@ -22272,7 +22272,7 @@
     "acitve_common_effect": "modifier_sect_transform_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_alchemist_chemical_rage"
+    "Abilityid": "imba_alchemist_chemical_rage"
   },
   {
     "id": "sect_transform_6_alchemist_1",
@@ -22284,7 +22284,7 @@
     "acitve_common_effect": "modifier_sect_transform_base_6",
     "acitve_special_effect": "modifier_sect_transform_alchemist_6",
     "heroid": "",
-    "Abilityid": "ability6_alchemist_chemical_rage"
+    "Abilityid": "imba_alchemist_chemical_rage"
   },
   {
     "id": "sect_transform_9_alchemist_1",
@@ -22296,7 +22296,7 @@
     "acitve_common_effect": "modifier_sect_transform_base_9",
     "acitve_special_effect": "modifier_sect_transform_alchemist_9",
     "heroid": "",
-    "Abilityid": "ability6_alchemist_chemical_rage"
+    "Abilityid": "imba_alchemist_chemical_rage"
   },
   {
     "id": "sect_transform_3_brewmaster_2",
@@ -22308,7 +22308,7 @@
     "acitve_common_effect": "modifier_sect_transform_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_brewmaster_primal_split"
+    "Abilityid": "imba_brewmaster_primal_split"
   },
   {
     "id": "sect_transform_6_brewmaster_2",
@@ -22320,7 +22320,7 @@
     "acitve_common_effect": "modifier_sect_transform_base_6",
     "acitve_special_effect": "modifier_sect_transform_brewmaster_6",
     "heroid": "",
-    "Abilityid": "ability6_brewmaster_primal_split"
+    "Abilityid": "imba_brewmaster_primal_split"
   },
   {
     "id": "sect_transform_9_brewmaster_2",
@@ -22332,7 +22332,7 @@
     "acitve_common_effect": "modifier_sect_transform_base_9",
     "acitve_special_effect": "modifier_sect_transform_brewmaster_9",
     "heroid": "",
-    "Abilityid": "ability6_brewmaster_primal_split"
+    "Abilityid": "imba_brewmaster_primal_split"
   },
   {
     "id": "sect_transform_3_dragon_knight_3",
@@ -22344,7 +22344,7 @@
     "acitve_common_effect": "modifier_sect_transform_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_dragon_knight_elder_dragon_form"
+    "Abilityid": "imba_dragon_knight_elder_dragon_form"
   },
   {
     "id": "sect_transform_6_dragon_knight_3",
@@ -22356,7 +22356,7 @@
     "acitve_common_effect": "modifier_sect_transform_base_6",
     "acitve_special_effect": "modifier_sect_transform_dragon_knight_6",
     "heroid": "",
-    "Abilityid": "ability6_dragon_knight_elder_dragon_form"
+    "Abilityid": "imba_dragon_knight_elder_dragon_form"
   },
   {
     "id": "sect_transform_9_dragon_knight_3",
@@ -22368,7 +22368,7 @@
     "acitve_common_effect": "modifier_sect_transform_base_9",
     "acitve_special_effect": "modifier_sect_transform_dragon_knight_9",
     "heroid": "",
-    "Abilityid": "ability6_dragon_knight_elder_dragon_form"
+    "Abilityid": "imba_dragon_knight_elder_dragon_form"
   },
   {
     "id": "sect_transform_3_keeper_of_the_light_4",
@@ -22380,7 +22380,7 @@
     "acitve_common_effect": "modifier_sect_transform_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_keeper_of_the_light_spirit_form"
+    "Abilityid": "imba_keeper_of_the_light_spirit_form"
   },
   {
     "id": "sect_transform_6_keeper_of_the_light_4",
@@ -22392,7 +22392,7 @@
     "acitve_common_effect": "modifier_sect_transform_base_6",
     "acitve_special_effect": "modifier_sect_transform_keeper_of_the_light_6",
     "heroid": "",
-    "Abilityid": "ability6_keeper_of_the_light_spirit_form"
+    "Abilityid": "imba_keeper_of_the_light_spirit_form"
   },
   {
     "id": "sect_transform_9_keeper_of_the_light_4",
@@ -22404,7 +22404,7 @@
     "acitve_common_effect": "modifier_sect_transform_base_9",
     "acitve_special_effect": "modifier_sect_transform_keeper_of_the_light_9",
     "heroid": "",
-    "Abilityid": "ability6_keeper_of_the_light_spirit_form"
+    "Abilityid": "imba_keeper_of_the_light_spirit_form"
   },
   {
     "id": "sect_transform_3_lone_druid_5",
@@ -22416,7 +22416,7 @@
     "acitve_common_effect": "modifier_sect_transform_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_lone_druid_true_form"
+    "Abilityid": "imba_lone_druid_true_form"
   },
   {
     "id": "sect_transform_6_lone_druid_5",
@@ -22428,7 +22428,7 @@
     "acitve_common_effect": "modifier_sect_transform_base_6",
     "acitve_special_effect": "modifier_sect_transform_lone_druid_6",
     "heroid": "",
-    "Abilityid": "ability6_lone_druid_true_form"
+    "Abilityid": "imba_lone_druid_true_form"
   },
   {
     "id": "sect_transform_9_lone_druid_5",
@@ -22440,7 +22440,7 @@
     "acitve_common_effect": "modifier_sect_transform_base_9",
     "acitve_special_effect": "modifier_sect_transform_lone_druid_9",
     "heroid": "",
-    "Abilityid": "ability6_lone_druid_true_form"
+    "Abilityid": "imba_lone_druid_true_form"
   },
   {
     "id": "sect_transform_3_lycan_6",
@@ -22452,7 +22452,7 @@
     "acitve_common_effect": "modifier_sect_transform_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_lycan_shapeshift"
+    "Abilityid": "imba_lycan_shapeshift"
   },
   {
     "id": "sect_transform_6_lycan_6",
@@ -22464,7 +22464,7 @@
     "acitve_common_effect": "modifier_sect_transform_base_6",
     "acitve_special_effect": "modifier_sect_transform_lycan_6",
     "heroid": "",
-    "Abilityid": "ability6_lycan_shapeshift"
+    "Abilityid": "imba_lycan_shapeshift"
   },
   {
     "id": "sect_transform_9_lycan_6",
@@ -22476,7 +22476,7 @@
     "acitve_common_effect": "modifier_sect_transform_base_9",
     "acitve_special_effect": "modifier_sect_transform_lycan_9",
     "heroid": "",
-    "Abilityid": "ability6_lycan_shapeshift"
+    "Abilityid": "imba_lycan_shapeshift"
   },
   {
     "id": "sect_transform_3_night_stalker_7",
@@ -22488,7 +22488,7 @@
     "acitve_common_effect": "modifier_sect_transform_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_night_stalker_darkness"
+    "Abilityid": "imba_night_stalker_darkness"
   },
   {
     "id": "sect_transform_6_night_stalker_7",
@@ -22500,7 +22500,7 @@
     "acitve_common_effect": "modifier_sect_transform_base_6",
     "acitve_special_effect": "modifier_sect_transform_night_stalker_6",
     "heroid": "",
-    "Abilityid": "ability6_night_stalker_darkness"
+    "Abilityid": "imba_night_stalker_darkness"
   },
   {
     "id": "sect_transform_9_night_stalker_7",
@@ -22512,7 +22512,7 @@
     "acitve_common_effect": "modifier_sect_transform_base_9",
     "acitve_special_effect": "modifier_sect_transform_night_stalker_9",
     "heroid": "",
-    "Abilityid": "ability6_night_stalker_darkness"
+    "Abilityid": "imba_night_stalker_darkness"
   },
   {
     "id": "sect_transform_3_pangolier_8",
@@ -22524,7 +22524,7 @@
     "acitve_common_effect": "modifier_sect_transform_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability4_pangolier_rollup"
+    "Abilityid": "imba_pangolier_rollup"
   },
   {
     "id": "sect_transform_6_pangolier_8",
@@ -22536,7 +22536,7 @@
     "acitve_common_effect": "modifier_sect_transform_base_6",
     "acitve_special_effect": "modifier_sect_transform_pangolier_6",
     "heroid": "",
-    "Abilityid": "ability4_pangolier_rollup"
+    "Abilityid": "imba_pangolier_rollup"
   },
   {
     "id": "sect_transform_9_pangolier_8",
@@ -22548,7 +22548,7 @@
     "acitve_common_effect": "modifier_sect_transform_base_9",
     "acitve_special_effect": "modifier_sect_transform_pangolier_9",
     "heroid": "",
-    "Abilityid": "ability4_pangolier_rollup"
+    "Abilityid": "imba_pangolier_rollup"
   },
   {
     "id": "sect_transform_3_phoenix_9",
@@ -22560,7 +22560,7 @@
     "acitve_common_effect": "modifier_sect_transform_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_phoenix_supernova"
+    "Abilityid": "imba_phoenix_supernova"
   },
   {
     "id": "sect_transform_6_phoenix_9",
@@ -22572,7 +22572,7 @@
     "acitve_common_effect": "modifier_sect_transform_base_6",
     "acitve_special_effect": "modifier_sect_transform_phoenix_6",
     "heroid": "",
-    "Abilityid": "ability6_phoenix_supernova"
+    "Abilityid": "imba_phoenix_supernova"
   },
   {
     "id": "sect_transform_9_phoenix_9",
@@ -22584,7 +22584,7 @@
     "acitve_common_effect": "modifier_sect_transform_base_9",
     "acitve_special_effect": "modifier_sect_transform_phoenix_9",
     "heroid": "",
-    "Abilityid": "ability6_phoenix_supernova"
+    "Abilityid": "imba_phoenix_supernova"
   },
   {
     "id": "sect_transform_3_sven_10",
@@ -22596,7 +22596,7 @@
     "acitve_common_effect": "modifier_sect_transform_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_sven_gods_strength"
+    "Abilityid": "imba_sven_gods_strength"
   },
   {
     "id": "sect_transform_6_sven_10",
@@ -22608,7 +22608,7 @@
     "acitve_common_effect": "modifier_sect_transform_base_6",
     "acitve_special_effect": "modifier_sect_transform_sven_6",
     "heroid": "",
-    "Abilityid": "ability6_sven_gods_strength"
+    "Abilityid": "imba_sven_gods_strength"
   },
   {
     "id": "sect_transform_9_sven_10",
@@ -22620,7 +22620,7 @@
     "acitve_common_effect": "modifier_sect_transform_base_9",
     "acitve_special_effect": "modifier_sect_transform_sven_9",
     "heroid": "",
-    "Abilityid": "ability6_sven_gods_strength"
+    "Abilityid": "imba_sven_gods_strength"
   },
   {
     "id": "sect_transform_3_terrorblade_11",
@@ -22632,7 +22632,7 @@
     "acitve_common_effect": "modifier_sect_transform_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_terrorblade",
-    "Abilityid": "ability3_terrorblade_metamorphosis"
+    "Abilityid": "imba_terrorblade_metamorphosis"
   },
   {
     "id": "sect_transform_6_terrorblade_11",
@@ -22644,7 +22644,7 @@
     "acitve_common_effect": "modifier_sect_transform_base_6",
     "acitve_special_effect": "modifier_sect_transform_terrorblade_6",
     "heroid": "building_hero_terrorblade",
-    "Abilityid": "ability3_terrorblade_metamorphosis"
+    "Abilityid": "imba_terrorblade_metamorphosis"
   },
   {
     "id": "sect_transform_9_terrorblade_11",
@@ -22656,7 +22656,7 @@
     "acitve_common_effect": "modifier_sect_transform_base_9",
     "acitve_special_effect": "modifier_sect_transform_terrorblade_9",
     "heroid": "building_hero_terrorblade",
-    "Abilityid": "ability3_terrorblade_metamorphosis"
+    "Abilityid": "imba_terrorblade_metamorphosis"
   },
   {
     "id": "sect_transform_3_undying_12",
@@ -22668,7 +22668,7 @@
     "acitve_common_effect": "modifier_sect_transform_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_undying_flesh_golem"
+    "Abilityid": "imba_undying_flesh_golem"
   },
   {
     "id": "sect_transform_6_undying_12",
@@ -22680,7 +22680,7 @@
     "acitve_common_effect": "modifier_sect_transform_base_6",
     "acitve_special_effect": "modifier_sect_transform_undying_6",
     "heroid": "",
-    "Abilityid": "ability6_undying_flesh_golem"
+    "Abilityid": "imba_undying_flesh_golem"
   },
   {
     "id": "sect_transform_9_undying_12",
@@ -22692,7 +22692,7 @@
     "acitve_common_effect": "modifier_sect_transform_base_9",
     "acitve_special_effect": "modifier_sect_transform_undying_9",
     "heroid": "",
-    "Abilityid": "ability6_undying_flesh_golem"
+    "Abilityid": "imba_undying_flesh_golem"
   },
   {
     "id": "sect_transform_3_ursa_13",
@@ -22704,7 +22704,7 @@
     "acitve_common_effect": "modifier_sect_transform_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_ursa_enrage"
+    "Abilityid": "imba_ursa_enrage"
   },
   {
     "id": "sect_transform_6_ursa_13",
@@ -22716,7 +22716,7 @@
     "acitve_common_effect": "modifier_sect_transform_base_6",
     "acitve_special_effect": "modifier_sect_transform_ursa_6",
     "heroid": "",
-    "Abilityid": "ability6_ursa_enrage"
+    "Abilityid": "imba_ursa_enrage"
   },
   {
     "id": "sect_transform_9_ursa_13",
@@ -22728,7 +22728,7 @@
     "acitve_common_effect": "modifier_sect_transform_base_9",
     "acitve_special_effect": "modifier_sect_transform_ursa_9",
     "heroid": "",
-    "Abilityid": "ability6_ursa_enrage"
+    "Abilityid": "imba_ursa_enrage"
   },
   {
     "id": "sect_transform_3_witch_doctor_14",
@@ -22740,7 +22740,7 @@
     "acitve_common_effect": "modifier_sect_transform_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability4_witch_doctor_voodoo_switcheroo"
+    "Abilityid": "imba_witch_doctor_voodoo_switcheroo"
   },
   {
     "id": "sect_transform_6_witch_doctor_14",
@@ -22752,7 +22752,7 @@
     "acitve_common_effect": "modifier_sect_transform_base_6",
     "acitve_special_effect": "modifier_sect_transform_witch_doctor_6",
     "heroid": "",
-    "Abilityid": "ability4_witch_doctor_voodoo_switcheroo"
+    "Abilityid": "imba_witch_doctor_voodoo_switcheroo"
   },
   {
     "id": "sect_transform_9_witch_doctor_14",
@@ -22764,7 +22764,7 @@
     "acitve_common_effect": "modifier_sect_transform_base_9",
     "acitve_special_effect": "modifier_sect_transform_witch_doctor_9",
     "heroid": "",
-    "Abilityid": "ability4_witch_doctor_voodoo_switcheroo"
+    "Abilityid": "imba_witch_doctor_voodoo_switcheroo"
   },
   {
     "id": "sect_treatment_4_abaddon_1",
@@ -22776,7 +22776,7 @@
     "acitve_common_effect": "modifier_sect_treatment_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_abaddon_borrowed_time"
+    "Abilityid": "imba_abaddon_borrowed_time"
   },
   {
     "id": "sect_treatment_8_abaddon_1",
@@ -22788,7 +22788,7 @@
     "acitve_common_effect": "modifier_sect_treatment_base_8",
     "acitve_special_effect": "modifier_sect_treatment_abaddon_8",
     "heroid": "",
-    "Abilityid": "ability6_abaddon_borrowed_time"
+    "Abilityid": "imba_abaddon_borrowed_time"
   },
   {
     "id": "sect_treatment_12_abaddon_1",
@@ -22800,7 +22800,7 @@
     "acitve_common_effect": "modifier_sect_treatment_base_12",
     "acitve_special_effect": "modifier_sect_treatment_abaddon_12",
     "heroid": "",
-    "Abilityid": "ability6_abaddon_borrowed_time"
+    "Abilityid": "imba_abaddon_borrowed_time"
   },
   {
     "id": "sect_treatment_4_chen_2",
@@ -22812,7 +22812,7 @@
     "acitve_common_effect": "modifier_sect_treatment_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_chen_hand_of_god"
+    "Abilityid": "imba_chen_hand_of_god"
   },
   {
     "id": "sect_treatment_8_chen_2",
@@ -22824,7 +22824,7 @@
     "acitve_common_effect": "modifier_sect_treatment_base_8",
     "acitve_special_effect": "modifier_sect_treatment_chen_8",
     "heroid": "",
-    "Abilityid": "ability6_chen_hand_of_god"
+    "Abilityid": "imba_chen_hand_of_god"
   },
   {
     "id": "sect_treatment_12_chen_2",
@@ -22836,7 +22836,7 @@
     "acitve_common_effect": "modifier_sect_treatment_base_12",
     "acitve_special_effect": "modifier_sect_treatment_chen_12",
     "heroid": "",
-    "Abilityid": "ability6_chen_hand_of_god"
+    "Abilityid": "imba_chen_hand_of_god"
   },
   {
     "id": "sect_treatment_4_dazzle_3",
@@ -22848,7 +22848,7 @@
     "acitve_common_effect": "modifier_sect_treatment_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_dazzle",
-    "Abilityid": "ability3_dazzle_shadow_wave"
+    "Abilityid": "imba_dazzle_shadow_wave"
   },
   {
     "id": "sect_treatment_8_dazzle_3",
@@ -22860,7 +22860,7 @@
     "acitve_common_effect": "modifier_sect_treatment_base_8",
     "acitve_special_effect": "modifier_sect_treatment_dazzle_8",
     "heroid": "building_hero_dazzle",
-    "Abilityid": "ability3_dazzle_shadow_wave"
+    "Abilityid": "imba_dazzle_shadow_wave"
   },
   {
     "id": "sect_treatment_12_dazzle_3",
@@ -22872,7 +22872,7 @@
     "acitve_common_effect": "modifier_sect_treatment_base_12",
     "acitve_special_effect": "modifier_sect_treatment_dazzle_12",
     "heroid": "building_hero_dazzle",
-    "Abilityid": "ability3_dazzle_shadow_wave"
+    "Abilityid": "imba_dazzle_shadow_wave"
   },
   {
     "id": "sect_treatment_4_enchantress_4",
@@ -22884,7 +22884,7 @@
     "acitve_common_effect": "modifier_sect_treatment_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_enchantress",
-    "Abilityid": "ability3_enchantress_natures_attendants"
+    "Abilityid": "imba_enchantress_natures_attendants"
   },
   {
     "id": "sect_treatment_8_enchantress_4",
@@ -22896,7 +22896,7 @@
     "acitve_common_effect": "modifier_sect_treatment_base_8",
     "acitve_special_effect": "modifier_sect_treatment_enchantress_8",
     "heroid": "building_hero_enchantress",
-    "Abilityid": "ability3_enchantress_natures_attendants"
+    "Abilityid": "imba_enchantress_natures_attendants"
   },
   {
     "id": "sect_treatment_12_enchantress_4",
@@ -22908,7 +22908,7 @@
     "acitve_common_effect": "modifier_sect_treatment_base_12",
     "acitve_special_effect": "modifier_sect_treatment_enchantress_12",
     "heroid": "building_hero_enchantress",
-    "Abilityid": "ability3_enchantress_natures_attendants"
+    "Abilityid": "imba_enchantress_natures_attendants"
   },
   {
     "id": "sect_treatment_4_juggernaut_5",
@@ -22920,7 +22920,7 @@
     "acitve_common_effect": "modifier_sect_treatment_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability2_juggernaut_healing_ward"
+    "Abilityid": "imba_juggernaut_healing_ward"
   },
   {
     "id": "sect_treatment_8_juggernaut_5",
@@ -22932,7 +22932,7 @@
     "acitve_common_effect": "modifier_sect_treatment_base_8",
     "acitve_special_effect": "modifier_sect_treatment_juggernaut_8",
     "heroid": "",
-    "Abilityid": "ability2_juggernaut_healing_ward"
+    "Abilityid": "imba_juggernaut_healing_ward"
   },
   {
     "id": "sect_treatment_12_juggernaut_5",
@@ -22944,7 +22944,7 @@
     "acitve_common_effect": "modifier_sect_treatment_base_12",
     "acitve_special_effect": "modifier_sect_treatment_juggernaut_12",
     "heroid": "",
-    "Abilityid": "ability2_juggernaut_healing_ward"
+    "Abilityid": "imba_juggernaut_healing_ward"
   },
   {
     "id": "sect_treatment_4_necrolyte_6",
@@ -22956,7 +22956,7 @@
     "acitve_common_effect": "modifier_sect_treatment_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_necrolyte",
-    "Abilityid": "ability1_necrolyte_death_pulse"
+    "Abilityid": "imba_necrolyte_death_pulse"
   },
   {
     "id": "sect_treatment_8_necrolyte_6",
@@ -22968,7 +22968,7 @@
     "acitve_common_effect": "modifier_sect_treatment_base_8",
     "acitve_special_effect": "modifier_sect_treatment_necrolyte_8",
     "heroid": "building_hero_necrolyte",
-    "Abilityid": "ability1_necrolyte_death_pulse"
+    "Abilityid": "imba_necrolyte_death_pulse"
   },
   {
     "id": "sect_treatment_12_necrolyte_6",
@@ -22980,7 +22980,7 @@
     "acitve_common_effect": "modifier_sect_treatment_base_12",
     "acitve_special_effect": "modifier_sect_treatment_necrolyte_12",
     "heroid": "building_hero_necrolyte",
-    "Abilityid": "ability1_necrolyte_death_pulse"
+    "Abilityid": "imba_necrolyte_death_pulse"
   },
   {
     "id": "sect_treatment_4_omniknight_7",
@@ -22992,7 +22992,7 @@
     "acitve_common_effect": "modifier_sect_treatment_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_omniknight",
-    "Abilityid": "ability1_omniknight_purification"
+    "Abilityid": "imba_omniknight_purification"
   },
   {
     "id": "sect_treatment_8_omniknight_7",
@@ -23004,7 +23004,7 @@
     "acitve_common_effect": "modifier_sect_treatment_base_8",
     "acitve_special_effect": "modifier_sect_treatment_omniknight_8",
     "heroid": "building_hero_omniknight",
-    "Abilityid": "ability1_omniknight_purification"
+    "Abilityid": "imba_omniknight_purification"
   },
   {
     "id": "sect_treatment_12_omniknight_7",
@@ -23016,7 +23016,7 @@
     "acitve_common_effect": "modifier_sect_treatment_base_12",
     "acitve_special_effect": "modifier_sect_treatment_omniknight_12",
     "heroid": "building_hero_omniknight",
-    "Abilityid": "ability1_omniknight_purification"
+    "Abilityid": "imba_omniknight_purification"
   },
   {
     "id": "sect_treatment_4_oracle_8",
@@ -23028,7 +23028,7 @@
     "acitve_common_effect": "modifier_sect_treatment_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_oracle_false_promise"
+    "Abilityid": "imba_oracle_false_promise"
   },
   {
     "id": "sect_treatment_8_oracle_8",
@@ -23040,7 +23040,7 @@
     "acitve_common_effect": "modifier_sect_treatment_base_8",
     "acitve_special_effect": "modifier_sect_treatment_oracle_8",
     "heroid": "",
-    "Abilityid": "ability6_oracle_false_promise"
+    "Abilityid": "imba_oracle_false_promise"
   },
   {
     "id": "sect_treatment_12_oracle_8",
@@ -23052,7 +23052,7 @@
     "acitve_common_effect": "modifier_sect_treatment_base_12",
     "acitve_special_effect": "modifier_sect_treatment_oracle_12",
     "heroid": "",
-    "Abilityid": "ability6_oracle_false_promise"
+    "Abilityid": "imba_oracle_false_promise"
   },
   {
     "id": "sect_treatment_4_oracle_9",
@@ -23064,7 +23064,7 @@
     "acitve_common_effect": "modifier_sect_treatment_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability3_oracle_purifying_flames"
+    "Abilityid": "imba_oracle_purifying_flames"
   },
   {
     "id": "sect_treatment_8_oracle_9",
@@ -23076,7 +23076,7 @@
     "acitve_common_effect": "modifier_sect_treatment_base_8",
     "acitve_special_effect": "modifier_sect_treatment_oracle_8",
     "heroid": "",
-    "Abilityid": "ability3_oracle_purifying_flames"
+    "Abilityid": "imba_oracle_purifying_flames"
   },
   {
     "id": "sect_treatment_12_oracle_9",
@@ -23088,7 +23088,7 @@
     "acitve_common_effect": "modifier_sect_treatment_base_12",
     "acitve_special_effect": "modifier_sect_treatment_oracle_12",
     "heroid": "",
-    "Abilityid": "ability3_oracle_purifying_flames"
+    "Abilityid": "imba_oracle_purifying_flames"
   },
   {
     "id": "sect_treatment_4_phoenix_10",
@@ -23100,7 +23100,7 @@
     "acitve_common_effect": "modifier_sect_treatment_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_phoenix",
-    "Abilityid": "ability3_phoenix_sun_ray"
+    "Abilityid": "imba_phoenix_sun_ray"
   },
   {
     "id": "sect_treatment_8_phoenix_10",
@@ -23112,7 +23112,7 @@
     "acitve_common_effect": "modifier_sect_treatment_base_8",
     "acitve_special_effect": "modifier_sect_treatment_phoenix_8",
     "heroid": "building_hero_phoenix",
-    "Abilityid": "ability3_phoenix_sun_ray"
+    "Abilityid": "imba_phoenix_sun_ray"
   },
   {
     "id": "sect_treatment_12_phoenix_10",
@@ -23124,7 +23124,7 @@
     "acitve_common_effect": "modifier_sect_treatment_base_12",
     "acitve_special_effect": "modifier_sect_treatment_phoenix_12",
     "heroid": "building_hero_phoenix",
-    "Abilityid": "ability3_phoenix_sun_ray"
+    "Abilityid": "imba_phoenix_sun_ray"
   },
   {
     "id": "sect_treatment_4_treant_11",
@@ -23136,7 +23136,7 @@
     "acitve_common_effect": "modifier_sect_treatment_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_treant",
-    "Abilityid": "ability2_treant_leech_seed"
+    "Abilityid": "imba_treant_leech_seed"
   },
   {
     "id": "sect_treatment_8_treant_11",
@@ -23148,7 +23148,7 @@
     "acitve_common_effect": "modifier_sect_treatment_base_8",
     "acitve_special_effect": "modifier_sect_treatment_treant_8",
     "heroid": "building_hero_treant",
-    "Abilityid": "ability2_treant_leech_seed"
+    "Abilityid": "imba_treant_leech_seed"
   },
   {
     "id": "sect_treatment_12_treant_11",
@@ -23160,7 +23160,7 @@
     "acitve_common_effect": "modifier_sect_treatment_base_12",
     "acitve_special_effect": "modifier_sect_treatment_treant_12",
     "heroid": "building_hero_treant",
-    "Abilityid": "ability2_treant_leech_seed"
+    "Abilityid": "imba_treant_leech_seed"
   },
   {
     "id": "sect_treatment_4_undying_12",
@@ -23172,7 +23172,7 @@
     "acitve_common_effect": "modifier_sect_treatment_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability2_undying_soul_rip"
+    "Abilityid": "imba_undying_soul_rip"
   },
   {
     "id": "sect_treatment_8_undying_12",
@@ -23184,7 +23184,7 @@
     "acitve_common_effect": "modifier_sect_treatment_base_8",
     "acitve_special_effect": "modifier_sect_treatment_undying_8",
     "heroid": "",
-    "Abilityid": "ability2_undying_soul_rip"
+    "Abilityid": "imba_undying_soul_rip"
   },
   {
     "id": "sect_treatment_12_undying_12",
@@ -23196,7 +23196,7 @@
     "acitve_common_effect": "modifier_sect_treatment_base_12",
     "acitve_special_effect": "modifier_sect_treatment_undying_12",
     "heroid": "",
-    "Abilityid": "ability2_undying_soul_rip"
+    "Abilityid": "imba_undying_soul_rip"
   },
   {
     "id": "sect_treatment_4_warlock_13",
@@ -23208,7 +23208,7 @@
     "acitve_common_effect": "modifier_sect_treatment_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_warlock",
-    "Abilityid": "ability2_warlock_shadow_word"
+    "Abilityid": "imba_warlock_shadow_word"
   },
   {
     "id": "sect_treatment_8_warlock_13",
@@ -23220,7 +23220,7 @@
     "acitve_common_effect": "modifier_sect_treatment_base_8",
     "acitve_special_effect": "modifier_sect_treatment_warlock_8",
     "heroid": "building_hero_warlock",
-    "Abilityid": "ability2_warlock_shadow_word"
+    "Abilityid": "imba_warlock_shadow_word"
   },
   {
     "id": "sect_treatment_12_warlock_13",
@@ -23232,7 +23232,7 @@
     "acitve_common_effect": "modifier_sect_treatment_base_12",
     "acitve_special_effect": "modifier_sect_treatment_warlock_12",
     "heroid": "building_hero_warlock",
-    "Abilityid": "ability2_warlock_shadow_word"
+    "Abilityid": "imba_warlock_shadow_word"
   },
   {
     "id": "sect_treatment_4_winter_wyvern_14",
@@ -23244,7 +23244,7 @@
     "acitve_common_effect": "modifier_sect_treatment_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_winter_wyvern",
-    "Abilityid": "ability3_winter_wyvern_cold_embrace"
+    "Abilityid": "imba_winter_wyvern_cold_embrace"
   },
   {
     "id": "sect_treatment_8_winter_wyvern_14",
@@ -23256,7 +23256,7 @@
     "acitve_common_effect": "modifier_sect_treatment_base_8",
     "acitve_special_effect": "modifier_sect_treatment_winter_wyvern_8",
     "heroid": "building_hero_winter_wyvern",
-    "Abilityid": "ability3_winter_wyvern_cold_embrace"
+    "Abilityid": "imba_winter_wyvern_cold_embrace"
   },
   {
     "id": "sect_treatment_12_winter_wyvern_14",
@@ -23268,7 +23268,7 @@
     "acitve_common_effect": "modifier_sect_treatment_base_12",
     "acitve_special_effect": "modifier_sect_treatment_winter_wyvern_12",
     "heroid": "building_hero_winter_wyvern",
-    "Abilityid": "ability3_winter_wyvern_cold_embrace"
+    "Abilityid": "imba_winter_wyvern_cold_embrace"
   },
   {
     "id": "sect_treatment_4_witch_doctor_15",
@@ -23280,7 +23280,7 @@
     "acitve_common_effect": "modifier_sect_treatment_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_witch_doctor",
-    "Abilityid": "ability2_witch_doctor_voodoo_restoration"
+    "Abilityid": "imba_witch_doctor_voodoo_restoration"
   },
   {
     "id": "sect_treatment_8_witch_doctor_15",
@@ -23292,7 +23292,7 @@
     "acitve_common_effect": "modifier_sect_treatment_base_8",
     "acitve_special_effect": "modifier_sect_treatment_witch_doctor_8",
     "heroid": "building_hero_witch_doctor",
-    "Abilityid": "ability2_witch_doctor_voodoo_restoration"
+    "Abilityid": "imba_witch_doctor_voodoo_restoration"
   },
   {
     "id": "sect_treatment_12_witch_doctor_15",
@@ -23304,7 +23304,7 @@
     "acitve_common_effect": "modifier_sect_treatment_base_12",
     "acitve_special_effect": "modifier_sect_treatment_witch_doctor_12",
     "heroid": "building_hero_witch_doctor",
-    "Abilityid": "ability2_witch_doctor_voodoo_restoration"
+    "Abilityid": "imba_witch_doctor_voodoo_restoration"
   },
   {
     "id": "sect_vanity_2_antimage_1",
@@ -23316,7 +23316,7 @@
     "acitve_common_effect": "modifier_sect_vanity_base_2",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_antimage_mana_void"
+    "Abilityid": "imba_antimage_mana_void"
   },
   {
     "id": "sect_vanity_4_antimage_1",
@@ -23328,7 +23328,7 @@
     "acitve_common_effect": "modifier_sect_vanity_base_4",
     "acitve_special_effect": "modifier_sect_vanity_antimage_4",
     "heroid": "",
-    "Abilityid": "ability6_antimage_mana_void"
+    "Abilityid": "imba_antimage_mana_void"
   },
   {
     "id": "sect_vanity_6_antimage_1",
@@ -23340,7 +23340,7 @@
     "acitve_common_effect": "modifier_sect_vanity_base_6",
     "acitve_special_effect": "modifier_sect_vanity_antimage_6",
     "heroid": "",
-    "Abilityid": "ability6_antimage_mana_void"
+    "Abilityid": "imba_antimage_mana_void"
   },
   {
     "id": "sect_vanity_2_dark_seer_2",
@@ -23352,7 +23352,7 @@
     "acitve_common_effect": "modifier_sect_vanity_base_2",
     "acitve_special_effect": "",
     "heroid": "building_hero_dark_seer",
-    "Abilityid": "ability1_dark_seer_vacuum"
+    "Abilityid": "imba_dark_seer_vacuum"
   },
   {
     "id": "sect_vanity_4_dark_seer_2",
@@ -23364,7 +23364,7 @@
     "acitve_common_effect": "modifier_sect_vanity_base_4",
     "acitve_special_effect": "modifier_sect_vanity_dark_seer_4",
     "heroid": "building_hero_dark_seer",
-    "Abilityid": "ability1_dark_seer_vacuum"
+    "Abilityid": "imba_dark_seer_vacuum"
   },
   {
     "id": "sect_vanity_6_dark_seer_2",
@@ -23376,7 +23376,7 @@
     "acitve_common_effect": "modifier_sect_vanity_base_6",
     "acitve_special_effect": "modifier_sect_vanity_dark_seer_6",
     "heroid": "building_hero_dark_seer",
-    "Abilityid": "ability1_dark_seer_vacuum"
+    "Abilityid": "imba_dark_seer_vacuum"
   },
   {
     "id": "sect_vanity_2_enigma_3",
@@ -23388,7 +23388,7 @@
     "acitve_common_effect": "modifier_sect_vanity_base_2",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_enigma_black_hole"
+    "Abilityid": "imba_enigma_black_hole"
   },
   {
     "id": "sect_vanity_4_enigma_3",
@@ -23400,7 +23400,7 @@
     "acitve_common_effect": "modifier_sect_vanity_base_4",
     "acitve_special_effect": "modifier_sect_vanity_enigma_4",
     "heroid": "",
-    "Abilityid": "ability6_enigma_black_hole"
+    "Abilityid": "imba_enigma_black_hole"
   },
   {
     "id": "sect_vanity_6_enigma_3",
@@ -23412,7 +23412,7 @@
     "acitve_common_effect": "modifier_sect_vanity_base_6",
     "acitve_special_effect": "modifier_sect_vanity_enigma_6",
     "heroid": "",
-    "Abilityid": "ability6_enigma_black_hole"
+    "Abilityid": "imba_enigma_black_hole"
   },
   {
     "id": "sect_vanity_2_faceless_void_4",
@@ -23424,7 +23424,7 @@
     "acitve_common_effect": "modifier_sect_vanity_base_2",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_faceless_void_chronosphere"
+    "Abilityid": "imba_faceless_void_chronosphere"
   },
   {
     "id": "sect_vanity_4_faceless_void_4",
@@ -23436,7 +23436,7 @@
     "acitve_common_effect": "modifier_sect_vanity_base_4",
     "acitve_special_effect": "modifier_sect_vanity_faceless_void_4",
     "heroid": "",
-    "Abilityid": "ability6_faceless_void_chronosphere"
+    "Abilityid": "imba_faceless_void_chronosphere"
   },
   {
     "id": "sect_vanity_6_faceless_void_4",
@@ -23448,7 +23448,7 @@
     "acitve_common_effect": "modifier_sect_vanity_base_6",
     "acitve_special_effect": "modifier_sect_vanity_faceless_void_6",
     "heroid": "",
-    "Abilityid": "ability6_faceless_void_chronosphere"
+    "Abilityid": "imba_faceless_void_chronosphere"
   },
   {
     "id": "sect_vanity_2_night_stalker_5",
@@ -23460,7 +23460,7 @@
     "acitve_common_effect": "modifier_sect_vanity_base_2",
     "acitve_special_effect": "",
     "heroid": "building_hero_night_stalker",
-    "Abilityid": "ability1_night_stalker_void"
+    "Abilityid": "imba_night_stalker_void"
   },
   {
     "id": "sect_vanity_4_night_stalker_5",
@@ -23472,7 +23472,7 @@
     "acitve_common_effect": "modifier_sect_vanity_base_4",
     "acitve_special_effect": "modifier_sect_vanity_night_stalker_4",
     "heroid": "building_hero_night_stalker",
-    "Abilityid": "ability1_night_stalker_void"
+    "Abilityid": "imba_night_stalker_void"
   },
   {
     "id": "sect_vanity_6_night_stalker_5",
@@ -23484,7 +23484,7 @@
     "acitve_common_effect": "modifier_sect_vanity_base_6",
     "acitve_special_effect": "modifier_sect_vanity_night_stalker_6",
     "heroid": "building_hero_night_stalker",
-    "Abilityid": "ability1_night_stalker_void"
+    "Abilityid": "imba_night_stalker_void"
   },
   {
     "id": "sect_vanity_2_void_spirit_6",
@@ -23496,7 +23496,7 @@
     "acitve_common_effect": "modifier_sect_vanity_base_2",
     "acitve_special_effect": "",
     "heroid": "building_hero_void_spirit",
-    "Abilityid": "ability2_void_spirit_dissimilate"
+    "Abilityid": "imba_void_spirit_dissimilate"
   },
   {
     "id": "sect_vanity_4_void_spirit_6",
@@ -23508,7 +23508,7 @@
     "acitve_common_effect": "modifier_sect_vanity_base_4",
     "acitve_special_effect": "modifier_sect_vanity_void_spirit_4",
     "heroid": "building_hero_void_spirit",
-    "Abilityid": "ability2_void_spirit_dissimilate"
+    "Abilityid": "imba_void_spirit_dissimilate"
   },
   {
     "id": "sect_vanity_6_void_spirit_6",
@@ -23520,7 +23520,7 @@
     "acitve_common_effect": "modifier_sect_vanity_base_6",
     "acitve_special_effect": "modifier_sect_vanity_void_spirit_6",
     "heroid": "building_hero_void_spirit",
-    "Abilityid": "ability2_void_spirit_dissimilate"
+    "Abilityid": "imba_void_spirit_dissimilate"
   },
   {
     "id": "sect_warpath_3_abyssal_underlord_1",
@@ -23532,7 +23532,7 @@
     "acitve_common_effect": "modifier_sect_warpath_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability3_abyssal_underlord_atrophy_aura"
+    "Abilityid": "imba_abyssal_underlord_atrophy_aura"
   },
   {
     "id": "sect_warpath_6_abyssal_underlord_1",
@@ -23544,7 +23544,7 @@
     "acitve_common_effect": "modifier_sect_warpath_base_6",
     "acitve_special_effect": "modifier_sect_warpath_abyssal_underlord_6",
     "heroid": "",
-    "Abilityid": "ability3_abyssal_underlord_atrophy_aura"
+    "Abilityid": "imba_abyssal_underlord_atrophy_aura"
   },
   {
     "id": "sect_warpath_9_abyssal_underlord_1",
@@ -23556,7 +23556,7 @@
     "acitve_common_effect": "modifier_sect_warpath_base_9",
     "acitve_special_effect": "modifier_sect_warpath_abyssal_underlord_9",
     "heroid": "",
-    "Abilityid": "ability3_abyssal_underlord_atrophy_aura"
+    "Abilityid": "imba_abyssal_underlord_atrophy_aura"
   },
   {
     "id": "sect_warpath_3_bristleback_2",
@@ -23568,7 +23568,7 @@
     "acitve_common_effect": "modifier_sect_warpath_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_bristleback_warpath"
+    "Abilityid": "imba_bristleback_warpath"
   },
   {
     "id": "sect_warpath_6_bristleback_2",
@@ -23580,7 +23580,7 @@
     "acitve_common_effect": "modifier_sect_warpath_base_6",
     "acitve_special_effect": "modifier_sect_warpath_bristleback_6",
     "heroid": "",
-    "Abilityid": "ability6_bristleback_warpath"
+    "Abilityid": "imba_bristleback_warpath"
   },
   {
     "id": "sect_warpath_9_bristleback_2",
@@ -23592,7 +23592,7 @@
     "acitve_common_effect": "modifier_sect_warpath_base_9",
     "acitve_special_effect": "modifier_sect_warpath_bristleback_9",
     "heroid": "",
-    "Abilityid": "ability6_bristleback_warpath"
+    "Abilityid": "imba_bristleback_warpath"
   },
   {
     "id": "sect_warpath_3_earthshaker_3",
@@ -23604,7 +23604,7 @@
     "acitve_common_effect": "modifier_sect_warpath_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability2_earthshaker_enchant_totem"
+    "Abilityid": "imba_earthshaker_enchant_totem"
   },
   {
     "id": "sect_warpath_6_earthshaker_3",
@@ -23616,7 +23616,7 @@
     "acitve_common_effect": "modifier_sect_warpath_base_6",
     "acitve_special_effect": "modifier_sect_warpath_earthshaker_6",
     "heroid": "",
-    "Abilityid": "ability2_earthshaker_enchant_totem"
+    "Abilityid": "imba_earthshaker_enchant_totem"
   },
   {
     "id": "sect_warpath_9_earthshaker_3",
@@ -23628,7 +23628,7 @@
     "acitve_common_effect": "modifier_sect_warpath_base_9",
     "acitve_special_effect": "modifier_sect_warpath_earthshaker_9",
     "heroid": "",
-    "Abilityid": "ability2_earthshaker_enchant_totem"
+    "Abilityid": "imba_earthshaker_enchant_totem"
   },
   {
     "id": "sect_warpath_3_legion_commander_4",
@@ -23640,7 +23640,7 @@
     "acitve_common_effect": "modifier_sect_warpath_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_legion_commander_duel"
+    "Abilityid": "imba_legion_commander_duel"
   },
   {
     "id": "sect_warpath_6_legion_commander_4",
@@ -23652,7 +23652,7 @@
     "acitve_common_effect": "modifier_sect_warpath_base_6",
     "acitve_special_effect": "modifier_sect_warpath_legion_commander_6",
     "heroid": "",
-    "Abilityid": "ability6_legion_commander_duel"
+    "Abilityid": "imba_legion_commander_duel"
   },
   {
     "id": "sect_warpath_9_legion_commander_4",
@@ -23664,7 +23664,7 @@
     "acitve_common_effect": "modifier_sect_warpath_base_9",
     "acitve_special_effect": "modifier_sect_warpath_legion_commander_9",
     "heroid": "",
-    "Abilityid": "ability6_legion_commander_duel"
+    "Abilityid": "imba_legion_commander_duel"
   },
   {
     "id": "sect_warpath_3_life_stealer_5",
@@ -23676,7 +23676,7 @@
     "acitve_common_effect": "modifier_sect_warpath_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability1_life_stealer_rage"
+    "Abilityid": "imba_life_stealer_rage"
   },
   {
     "id": "sect_warpath_6_life_stealer_5",
@@ -23688,7 +23688,7 @@
     "acitve_common_effect": "modifier_sect_warpath_base_6",
     "acitve_special_effect": "modifier_sect_warpath_life_stealer_6",
     "heroid": "",
-    "Abilityid": "ability1_life_stealer_rage"
+    "Abilityid": "imba_life_stealer_rage"
   },
   {
     "id": "sect_warpath_9_life_stealer_5",
@@ -23700,7 +23700,7 @@
     "acitve_common_effect": "modifier_sect_warpath_base_9",
     "acitve_special_effect": "modifier_sect_warpath_life_stealer_9",
     "heroid": "",
-    "Abilityid": "ability1_life_stealer_rage"
+    "Abilityid": "imba_life_stealer_rage"
   },
   {
     "id": "sect_warpath_3_luna_6",
@@ -23712,7 +23712,7 @@
     "acitve_common_effect": "modifier_sect_warpath_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability3_luna_lunar_blessing"
+    "Abilityid": "imba_luna_lunar_blessing"
   },
   {
     "id": "sect_warpath_6_luna_6",
@@ -23724,7 +23724,7 @@
     "acitve_common_effect": "modifier_sect_warpath_base_6",
     "acitve_special_effect": "modifier_sect_warpath_luna_6",
     "heroid": "",
-    "Abilityid": "ability3_luna_lunar_blessing"
+    "Abilityid": "imba_luna_lunar_blessing"
   },
   {
     "id": "sect_warpath_9_luna_6",
@@ -23736,7 +23736,7 @@
     "acitve_common_effect": "modifier_sect_warpath_base_9",
     "acitve_special_effect": "modifier_sect_warpath_luna_9",
     "heroid": "",
-    "Abilityid": "ability3_luna_lunar_blessing"
+    "Abilityid": "imba_luna_lunar_blessing"
   },
   {
     "id": "sect_warpath_3_lycan_7",
@@ -23748,7 +23748,7 @@
     "acitve_common_effect": "modifier_sect_warpath_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_lycan",
-    "Abilityid": "ability3_lycan_feral_impulse"
+    "Abilityid": "imba_lycan_feral_impulse"
   },
   {
     "id": "sect_warpath_6_lycan_7",
@@ -23760,7 +23760,7 @@
     "acitve_common_effect": "modifier_sect_warpath_base_6",
     "acitve_special_effect": "modifier_sect_warpath_lycan_6",
     "heroid": "building_hero_lycan",
-    "Abilityid": "ability3_lycan_feral_impulse"
+    "Abilityid": "imba_lycan_feral_impulse"
   },
   {
     "id": "sect_warpath_9_lycan_7",
@@ -23772,7 +23772,7 @@
     "acitve_common_effect": "modifier_sect_warpath_base_9",
     "acitve_special_effect": "modifier_sect_warpath_lycan_9",
     "heroid": "building_hero_lycan",
-    "Abilityid": "ability3_lycan_feral_impulse"
+    "Abilityid": "imba_lycan_feral_impulse"
   },
   {
     "id": "sect_warpath_3_omniknight_8",
@@ -23784,7 +23784,7 @@
     "acitve_common_effect": "modifier_sect_warpath_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability4_omniknight_hammer_of_purity"
+    "Abilityid": "imba_omniknight_hammer_of_purity"
   },
   {
     "id": "sect_warpath_6_omniknight_8",
@@ -23796,7 +23796,7 @@
     "acitve_common_effect": "modifier_sect_warpath_base_6",
     "acitve_special_effect": "modifier_sect_warpath_omniknight_6",
     "heroid": "",
-    "Abilityid": "ability4_omniknight_hammer_of_purity"
+    "Abilityid": "imba_omniknight_hammer_of_purity"
   },
   {
     "id": "sect_warpath_9_omniknight_8",
@@ -23808,7 +23808,7 @@
     "acitve_common_effect": "modifier_sect_warpath_base_9",
     "acitve_special_effect": "modifier_sect_warpath_omniknight_9",
     "heroid": "",
-    "Abilityid": "ability4_omniknight_hammer_of_purity"
+    "Abilityid": "imba_omniknight_hammer_of_purity"
   },
   {
     "id": "sect_warpath_3_spectre_9",
@@ -23820,7 +23820,7 @@
     "acitve_common_effect": "modifier_sect_warpath_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability2_spectre_desolate"
+    "Abilityid": "imba_spectre_desolate"
   },
   {
     "id": "sect_warpath_6_spectre_9",
@@ -23832,7 +23832,7 @@
     "acitve_common_effect": "modifier_sect_warpath_base_6",
     "acitve_special_effect": "modifier_sect_warpath_spectre_6",
     "heroid": "",
-    "Abilityid": "ability2_spectre_desolate"
+    "Abilityid": "imba_spectre_desolate"
   },
   {
     "id": "sect_warpath_9_spectre_9",
@@ -23844,7 +23844,7 @@
     "acitve_common_effect": "modifier_sect_warpath_base_9",
     "acitve_special_effect": "modifier_sect_warpath_spectre_9",
     "heroid": "",
-    "Abilityid": "ability2_spectre_desolate"
+    "Abilityid": "imba_spectre_desolate"
   },
   {
     "id": "sect_warpath_3_tidehunter_10",
@@ -23856,7 +23856,7 @@
     "acitve_common_effect": "modifier_sect_warpath_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability3_tidehunter_anchor_smash"
+    "Abilityid": "imba_tidehunter_anchor_smash"
   },
   {
     "id": "sect_warpath_6_tidehunter_10",
@@ -23868,7 +23868,7 @@
     "acitve_common_effect": "modifier_sect_warpath_base_6",
     "acitve_special_effect": "modifier_sect_warpath_tidehunter_6",
     "heroid": "",
-    "Abilityid": "ability3_tidehunter_anchor_smash"
+    "Abilityid": "imba_tidehunter_anchor_smash"
   },
   {
     "id": "sect_warpath_9_tidehunter_10",
@@ -23880,7 +23880,7 @@
     "acitve_common_effect": "modifier_sect_warpath_base_9",
     "acitve_special_effect": "modifier_sect_warpath_tidehunter_9",
     "heroid": "",
-    "Abilityid": "ability3_tidehunter_anchor_smash"
+    "Abilityid": "imba_tidehunter_anchor_smash"
   },
   {
     "id": "sect_warpath_3_ursa_11",
@@ -23892,7 +23892,7 @@
     "acitve_common_effect": "modifier_sect_warpath_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_ursa",
-    "Abilityid": "ability3_ursa_fury_swipes"
+    "Abilityid": "imba_ursa_fury_swipes"
   },
   {
     "id": "sect_warpath_6_ursa_11",
@@ -23904,7 +23904,7 @@
     "acitve_common_effect": "modifier_sect_warpath_base_6",
     "acitve_special_effect": "modifier_sect_warpath_ursa_6",
     "heroid": "building_hero_ursa",
-    "Abilityid": "ability3_ursa_fury_swipes"
+    "Abilityid": "imba_ursa_fury_swipes"
   },
   {
     "id": "sect_warpath_9_ursa_11",
@@ -23916,7 +23916,7 @@
     "acitve_common_effect": "modifier_sect_warpath_base_9",
     "acitve_special_effect": "modifier_sect_warpath_ursa_9",
     "heroid": "building_hero_ursa",
-    "Abilityid": "ability3_ursa_fury_swipes"
+    "Abilityid": "imba_ursa_fury_swipes"
   },
   {
     "id": "sect_warpath_3_vengefulspirit_12",
@@ -23928,7 +23928,7 @@
     "acitve_common_effect": "modifier_sect_warpath_base_3",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability3_vengefulspirit_command_aura"
+    "Abilityid": "imba_vengefulspirit_command_aura"
   },
   {
     "id": "sect_warpath_6_vengefulspirit_12",
@@ -23940,7 +23940,7 @@
     "acitve_common_effect": "modifier_sect_warpath_base_6",
     "acitve_special_effect": "modifier_sect_warpath_vengefulspirit_6",
     "heroid": "",
-    "Abilityid": "ability3_vengefulspirit_command_aura"
+    "Abilityid": "imba_vengefulspirit_command_aura"
   },
   {
     "id": "sect_warpath_9_vengefulspirit_12",
@@ -23952,7 +23952,7 @@
     "acitve_common_effect": "modifier_sect_warpath_base_9",
     "acitve_special_effect": "modifier_sect_warpath_vengefulspirit_9",
     "heroid": "",
-    "Abilityid": "ability3_vengefulspirit_command_aura"
+    "Abilityid": "imba_vengefulspirit_command_aura"
   },
   {
     "id": "sect_weapon_4_axe_1",
@@ -23964,7 +23964,7 @@
     "acitve_common_effect": "modifier_sect_weapon_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_axe_culling_blade"
+    "Abilityid": "imba_axe_culling_blade"
   },
   {
     "id": "sect_weapon_8_axe_1",
@@ -23976,7 +23976,7 @@
     "acitve_common_effect": "modifier_sect_weapon_base_8",
     "acitve_special_effect": "modifier_sect_weapon_axe_8",
     "heroid": "",
-    "Abilityid": "ability6_axe_culling_blade"
+    "Abilityid": "imba_axe_culling_blade"
   },
   {
     "id": "sect_weapon_12_axe_1",
@@ -23988,7 +23988,7 @@
     "acitve_common_effect": "modifier_sect_weapon_base_12",
     "acitve_special_effect": "modifier_sect_weapon_axe_12",
     "heroid": "",
-    "Abilityid": "ability6_axe_culling_blade"
+    "Abilityid": "imba_axe_culling_blade"
   },
   {
     "id": "sect_weapon_4_beastmaster_2",
@@ -24000,7 +24000,7 @@
     "acitve_common_effect": "modifier_sect_weapon_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability1_beastmaster_wild_axes"
+    "Abilityid": "imba_beastmaster_wild_axes"
   },
   {
     "id": "sect_weapon_8_beastmaster_2",
@@ -24012,7 +24012,7 @@
     "acitve_common_effect": "modifier_sect_weapon_base_8",
     "acitve_special_effect": "modifier_sect_weapon_beastmaster_8",
     "heroid": "",
-    "Abilityid": "ability1_beastmaster_wild_axes"
+    "Abilityid": "imba_beastmaster_wild_axes"
   },
   {
     "id": "sect_weapon_12_beastmaster_2",
@@ -24024,7 +24024,7 @@
     "acitve_common_effect": "modifier_sect_weapon_base_12",
     "acitve_special_effect": "modifier_sect_weapon_beastmaster_12",
     "heroid": "",
-    "Abilityid": "ability1_beastmaster_wild_axes"
+    "Abilityid": "imba_beastmaster_wild_axes"
   },
   {
     "id": "sect_weapon_4_bounty_hunter_3",
@@ -24036,7 +24036,7 @@
     "acitve_common_effect": "modifier_sect_weapon_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_bounty_hunter",
-    "Abilityid": "ability1_bounty_hunter_shuriken_toss"
+    "Abilityid": "imba_bounty_hunter_shuriken_toss"
   },
   {
     "id": "sect_weapon_8_bounty_hunter_3",
@@ -24048,7 +24048,7 @@
     "acitve_common_effect": "modifier_sect_weapon_base_8",
     "acitve_special_effect": "modifier_sect_weapon_bounty_hunter_8",
     "heroid": "building_hero_bounty_hunter",
-    "Abilityid": "ability1_bounty_hunter_shuriken_toss"
+    "Abilityid": "imba_bounty_hunter_shuriken_toss"
   },
   {
     "id": "sect_weapon_12_bounty_hunter_3",
@@ -24060,7 +24060,7 @@
     "acitve_common_effect": "modifier_sect_weapon_base_12",
     "acitve_special_effect": "modifier_sect_weapon_bounty_hunter_12",
     "heroid": "building_hero_bounty_hunter",
-    "Abilityid": "ability1_bounty_hunter_shuriken_toss"
+    "Abilityid": "imba_bounty_hunter_shuriken_toss"
   },
   {
     "id": "sect_weapon_4_dawnbreaker_4",
@@ -24072,7 +24072,7 @@
     "acitve_common_effect": "modifier_sect_weapon_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability2_dawnbreaker_celestial_hammer"
+    "Abilityid": "imba_dawnbreaker_celestial_hammer"
   },
   {
     "id": "sect_weapon_8_dawnbreaker_4",
@@ -24084,7 +24084,7 @@
     "acitve_common_effect": "modifier_sect_weapon_base_8",
     "acitve_special_effect": "modifier_sect_weapon_dawnbreaker_8",
     "heroid": "",
-    "Abilityid": "ability2_dawnbreaker_celestial_hammer"
+    "Abilityid": "imba_dawnbreaker_celestial_hammer"
   },
   {
     "id": "sect_weapon_12_dawnbreaker_4",
@@ -24096,7 +24096,7 @@
     "acitve_common_effect": "modifier_sect_weapon_base_12",
     "acitve_special_effect": "modifier_sect_weapon_dawnbreaker_12",
     "heroid": "",
-    "Abilityid": "ability2_dawnbreaker_celestial_hammer"
+    "Abilityid": "imba_dawnbreaker_celestial_hammer"
   },
   {
     "id": "sect_weapon_4_doom_bringer_5",
@@ -24108,7 +24108,7 @@
     "acitve_common_effect": "modifier_sect_weapon_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability3_doom_bringer_infernal_blade"
+    "Abilityid": "imba_doom_bringer_infernal_blade"
   },
   {
     "id": "sect_weapon_8_doom_bringer_5",
@@ -24120,7 +24120,7 @@
     "acitve_common_effect": "modifier_sect_weapon_base_8",
     "acitve_special_effect": "modifier_sect_weapon_doom_bringer_8",
     "heroid": "",
-    "Abilityid": "ability3_doom_bringer_infernal_blade"
+    "Abilityid": "imba_doom_bringer_infernal_blade"
   },
   {
     "id": "sect_weapon_12_doom_bringer_5",
@@ -24132,7 +24132,7 @@
     "acitve_common_effect": "modifier_sect_weapon_base_12",
     "acitve_special_effect": "modifier_sect_weapon_doom_bringer_12",
     "heroid": "",
-    "Abilityid": "ability3_doom_bringer_infernal_blade"
+    "Abilityid": "imba_doom_bringer_infernal_blade"
   },
   {
     "id": "sect_weapon_4_juggernaut_6",
@@ -24144,7 +24144,7 @@
     "acitve_common_effect": "modifier_sect_weapon_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_juggernaut",
-    "Abilityid": "ability1_juggernaut_blade_fury"
+    "Abilityid": "imba_juggernaut_blade_fury"
   },
   {
     "id": "sect_weapon_8_juggernaut_6",
@@ -24156,7 +24156,7 @@
     "acitve_common_effect": "modifier_sect_weapon_base_8",
     "acitve_special_effect": "modifier_sect_weapon_juggernaut_8",
     "heroid": "building_hero_juggernaut",
-    "Abilityid": "ability1_juggernaut_blade_fury"
+    "Abilityid": "imba_juggernaut_blade_fury"
   },
   {
     "id": "sect_weapon_12_juggernaut_6",
@@ -24168,7 +24168,7 @@
     "acitve_common_effect": "modifier_sect_weapon_base_12",
     "acitve_special_effect": "modifier_sect_weapon_juggernaut_12",
     "heroid": "building_hero_juggernaut",
-    "Abilityid": "ability1_juggernaut_blade_fury"
+    "Abilityid": "imba_juggernaut_blade_fury"
   },
   {
     "id": "sect_weapon_4_legion_commander_7",
@@ -24180,7 +24180,7 @@
     "acitve_common_effect": "modifier_sect_weapon_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability1_legion_commander_overwhelming_odds"
+    "Abilityid": "imba_legion_commander_overwhelming_odds"
   },
   {
     "id": "sect_weapon_8_legion_commander_7",
@@ -24192,7 +24192,7 @@
     "acitve_common_effect": "modifier_sect_weapon_base_8",
     "acitve_special_effect": "modifier_sect_weapon_legion_commander_8",
     "heroid": "",
-    "Abilityid": "ability1_legion_commander_overwhelming_odds"
+    "Abilityid": "imba_legion_commander_overwhelming_odds"
   },
   {
     "id": "sect_weapon_12_legion_commander_7",
@@ -24204,7 +24204,7 @@
     "acitve_common_effect": "modifier_sect_weapon_base_12",
     "acitve_special_effect": "modifier_sect_weapon_legion_commander_12",
     "heroid": "",
-    "Abilityid": "ability1_legion_commander_overwhelming_odds"
+    "Abilityid": "imba_legion_commander_overwhelming_odds"
   },
   {
     "id": "sect_weapon_4_phantom_assassin_8",
@@ -24216,7 +24216,7 @@
     "acitve_common_effect": "modifier_sect_weapon_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability4_phantom_assassin_fan_of_knives"
+    "Abilityid": "imba_phantom_assassin_fan_of_knives"
   },
   {
     "id": "sect_weapon_8_phantom_assassin_8",
@@ -24228,7 +24228,7 @@
     "acitve_common_effect": "modifier_sect_weapon_base_8",
     "acitve_special_effect": "modifier_sect_weapon_phantom_assassin_8",
     "heroid": "",
-    "Abilityid": "ability4_phantom_assassin_fan_of_knives"
+    "Abilityid": "imba_phantom_assassin_fan_of_knives"
   },
   {
     "id": "sect_weapon_12_phantom_assassin_8",
@@ -24240,7 +24240,7 @@
     "acitve_common_effect": "modifier_sect_weapon_base_12",
     "acitve_special_effect": "modifier_sect_weapon_phantom_assassin_12",
     "heroid": "",
-    "Abilityid": "ability4_phantom_assassin_fan_of_knives"
+    "Abilityid": "imba_phantom_assassin_fan_of_knives"
   },
   {
     "id": "sect_weapon_4_phantom_assassin_9",
@@ -24252,7 +24252,7 @@
     "acitve_common_effect": "modifier_sect_weapon_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability1_phantom_assassin_stifling_dagger"
+    "Abilityid": "imba_phantom_assassin_stifling_dagger"
   },
   {
     "id": "sect_weapon_8_phantom_assassin_9",
@@ -24264,7 +24264,7 @@
     "acitve_common_effect": "modifier_sect_weapon_base_8",
     "acitve_special_effect": "modifier_sect_weapon_phantom_assassin_8",
     "heroid": "",
-    "Abilityid": "ability1_phantom_assassin_stifling_dagger"
+    "Abilityid": "imba_phantom_assassin_stifling_dagger"
   },
   {
     "id": "sect_weapon_12_phantom_assassin_9",
@@ -24276,7 +24276,7 @@
     "acitve_common_effect": "modifier_sect_weapon_base_12",
     "acitve_special_effect": "modifier_sect_weapon_phantom_assassin_12",
     "heroid": "",
-    "Abilityid": "ability1_phantom_assassin_stifling_dagger"
+    "Abilityid": "imba_phantom_assassin_stifling_dagger"
   },
   {
     "id": "sect_weapon_4_pudge_10",
@@ -24288,7 +24288,7 @@
     "acitve_common_effect": "modifier_sect_weapon_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_pudge",
-    "Abilityid": "ability1_pudge_meat_hook"
+    "Abilityid": "imba_pudge_meat_hook"
   },
   {
     "id": "sect_weapon_8_pudge_10",
@@ -24300,7 +24300,7 @@
     "acitve_common_effect": "modifier_sect_weapon_base_8",
     "acitve_special_effect": "modifier_sect_weapon_pudge_8",
     "heroid": "building_hero_pudge",
-    "Abilityid": "ability1_pudge_meat_hook"
+    "Abilityid": "imba_pudge_meat_hook"
   },
   {
     "id": "sect_weapon_12_pudge_10",
@@ -24312,7 +24312,7 @@
     "acitve_common_effect": "modifier_sect_weapon_base_12",
     "acitve_special_effect": "modifier_sect_weapon_pudge_12",
     "heroid": "building_hero_pudge",
-    "Abilityid": "ability1_pudge_meat_hook"
+    "Abilityid": "imba_pudge_meat_hook"
   },
   {
     "id": "sect_weapon_4_riki_11",
@@ -24324,7 +24324,7 @@
     "acitve_common_effect": "modifier_sect_weapon_base_4",
     "acitve_special_effect": "",
     "heroid": "",
-    "Abilityid": "ability6_riki_backstab"
+    "Abilityid": "imba_riki_backstab"
   },
   {
     "id": "sect_weapon_8_riki_11",
@@ -24336,7 +24336,7 @@
     "acitve_common_effect": "modifier_sect_weapon_base_8",
     "acitve_special_effect": "modifier_sect_weapon_riki_8",
     "heroid": "",
-    "Abilityid": "ability6_riki_backstab"
+    "Abilityid": "imba_riki_backstab"
   },
   {
     "id": "sect_weapon_12_riki_11",
@@ -24348,7 +24348,7 @@
     "acitve_common_effect": "modifier_sect_weapon_base_12",
     "acitve_special_effect": "modifier_sect_weapon_riki_12",
     "heroid": "",
-    "Abilityid": "ability6_riki_backstab"
+    "Abilityid": "imba_riki_backstab"
   },
   {
     "id": "sect_weapon_4_shredder_12",
@@ -24360,7 +24360,7 @@
     "acitve_common_effect": "modifier_sect_weapon_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_shredder",
-    "Abilityid": "ability1_shredder_whirling_death"
+    "Abilityid": "imba_shredder_whirling_death"
   },
   {
     "id": "sect_weapon_8_shredder_12",
@@ -24372,7 +24372,7 @@
     "acitve_common_effect": "modifier_sect_weapon_base_8",
     "acitve_special_effect": "modifier_sect_weapon_shredder_8",
     "heroid": "building_hero_shredder",
-    "Abilityid": "ability1_shredder_whirling_death"
+    "Abilityid": "imba_shredder_whirling_death"
   },
   {
     "id": "sect_weapon_12_shredder_12",
@@ -24384,7 +24384,7 @@
     "acitve_common_effect": "modifier_sect_weapon_base_12",
     "acitve_special_effect": "modifier_sect_weapon_shredder_12",
     "heroid": "building_hero_shredder",
-    "Abilityid": "ability1_shredder_whirling_death"
+    "Abilityid": "imba_shredder_whirling_death"
   },
   {
     "id": "sect_weapon_4_spectre_13",
@@ -24396,7 +24396,7 @@
     "acitve_common_effect": "modifier_sect_weapon_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_spectre",
-    "Abilityid": "ability1_spectre_spectral_dagger"
+    "Abilityid": "imba_spectre_spectral_dagger"
   },
   {
     "id": "sect_weapon_8_spectre_13",
@@ -24408,7 +24408,7 @@
     "acitve_common_effect": "modifier_sect_weapon_base_8",
     "acitve_special_effect": "modifier_sect_weapon_spectre_8",
     "heroid": "building_hero_spectre",
-    "Abilityid": "ability1_spectre_spectral_dagger"
+    "Abilityid": "imba_spectre_spectral_dagger"
   },
   {
     "id": "sect_weapon_12_spectre_13",
@@ -24420,7 +24420,7 @@
     "acitve_common_effect": "modifier_sect_weapon_base_12",
     "acitve_special_effect": "modifier_sect_weapon_spectre_12",
     "heroid": "building_hero_spectre",
-    "Abilityid": "ability1_spectre_spectral_dagger"
+    "Abilityid": "imba_spectre_spectral_dagger"
   },
   {
     "id": "sect_weapon_4_troll_warlord_14",
@@ -24432,7 +24432,7 @@
     "acitve_common_effect": "modifier_sect_weapon_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_troll_warlord",
-    "Abilityid": "ability3_troll_warlord_whirling_axes_melee"
+    "Abilityid": "imba_troll_warlord_whirling_axes_melee"
   },
   {
     "id": "sect_weapon_8_troll_warlord_14",
@@ -24444,7 +24444,7 @@
     "acitve_common_effect": "modifier_sect_weapon_base_8",
     "acitve_special_effect": "modifier_sect_weapon_troll_warlord_8",
     "heroid": "building_hero_troll_warlord",
-    "Abilityid": "ability3_troll_warlord_whirling_axes_melee"
+    "Abilityid": "imba_troll_warlord_whirling_axes_melee"
   },
   {
     "id": "sect_weapon_12_troll_warlord_14",
@@ -24456,7 +24456,7 @@
     "acitve_common_effect": "modifier_sect_weapon_base_12",
     "acitve_special_effect": "modifier_sect_weapon_troll_warlord_12",
     "heroid": "building_hero_troll_warlord",
-    "Abilityid": "ability3_troll_warlord_whirling_axes_melee"
+    "Abilityid": "imba_troll_warlord_whirling_axes_melee"
   },
   {
     "id": "sect_weapon_4_troll_warlord_15",
@@ -24468,7 +24468,7 @@
     "acitve_common_effect": "modifier_sect_weapon_base_4",
     "acitve_special_effect": "",
     "heroid": "building_hero_troll_warlord",
-    "Abilityid": "ability2_troll_warlord_whirling_axes_ranged"
+    "Abilityid": "imba_troll_warlord_whirling_axes_ranged"
   },
   {
     "id": "sect_weapon_8_troll_warlord_15",
@@ -24480,7 +24480,7 @@
     "acitve_common_effect": "modifier_sect_weapon_base_8",
     "acitve_special_effect": "modifier_sect_weapon_troll_warlord_8",
     "heroid": "building_hero_troll_warlord",
-    "Abilityid": "ability2_troll_warlord_whirling_axes_ranged"
+    "Abilityid": "imba_troll_warlord_whirling_axes_ranged"
   },
   {
     "id": "sect_weapon_12_troll_warlord_15",
@@ -24492,7 +24492,7 @@
     "acitve_common_effect": "modifier_sect_weapon_base_12",
     "acitve_special_effect": "modifier_sect_weapon_troll_warlord_12",
     "heroid": "building_hero_troll_warlord",
-    "Abilityid": "ability2_troll_warlord_whirling_axes_ranged"
+    "Abilityid": "imba_troll_warlord_whirling_axes_ranged"
   }
 ] ,
 "dota_poolconfig":[
@@ -28589,7 +28589,7 @@
   },
   {
     "id": 10001,
-    "isVaild": false,
+    "isVaild": true,
     "ItemName": "测试宝箱",
     "ItemIcon": "320001",
     "ItemQuality": 5,
@@ -28607,7 +28607,7 @@
   },
   {
     "id": 10002,
-    "isVaild": false,
+    "isVaild": true,
     "ItemName": "宝箱",
     "ItemIcon": "330001",
     "ItemQuality": 5,
@@ -28622,7 +28622,7 @@
   },
   {
     "id": 10003,
-    "isVaild": false,
+    "isVaild": true,
     "ItemName": "宝箱",
     "ItemIcon": "500001",
     "ItemQuality": 10,
@@ -28637,7 +28637,7 @@
   },
   {
     "id": 10004,
-    "isVaild": false,
+    "isVaild": true,
     "ItemName": "史莱姆装备1",
     "ItemIcon": "320002",
     "ItemQuality": 10,
@@ -28657,7 +28657,7 @@
   },
   {
     "id": 10005,
-    "isVaild": false,
+    "isVaild": true,
     "ItemName": "",
     "ItemIcon": "410001",
     "ItemQuality": 10,
@@ -28672,7 +28672,7 @@
   },
   {
     "id": 10006,
-    "isVaild": false,
+    "isVaild": true,
     "ItemName": "英雄经验",
     "ItemIcon": "410002",
     "ItemQuality": 10,
@@ -28695,7 +28695,7 @@
   },
   {
     "id": 10007,
-    "isVaild": false,
+    "isVaild": true,
     "ItemName": "",
     "ItemIcon": "410003",
     "ItemQuality": 10,
@@ -28710,7 +28710,7 @@
   },
   {
     "id": 10008,
-    "isVaild": false,
+    "isVaild": true,
     "ItemName": "",
     "ItemIcon": "410004",
     "ItemQuality": 10,
@@ -28725,7 +28725,7 @@
   },
   {
     "id": 10009,
-    "isVaild": false,
+    "isVaild": true,
     "ItemName": "祝福1",
     "ItemIcon": "410005",
     "ItemQuality": 5,
@@ -28742,7 +28742,7 @@
   },
   {
     "id": 10010,
-    "isVaild": false,
+    "isVaild": true,
     "ItemName": "称号1",
     "ItemIcon": "410008",
     "ItemQuality": 5,
@@ -28764,7 +28764,7 @@
   },
   {
     "id": 10011,
-    "isVaild": false,
+    "isVaild": true,
     "ItemName": "测试宝箱2",
     "ItemIcon": "300001",
     "ItemQuality": 4,
@@ -28779,7 +28779,7 @@
   },
   {
     "id": 10012,
-    "isVaild": false,
+    "isVaild": true,
     "ItemName": "测试宝箱3",
     "ItemIcon": "300001",
     "ItemQuality": 4,
@@ -28794,7 +28794,7 @@
   },
   {
     "id": 10013,
-    "isVaild": false,
+    "isVaild": true,
     "ItemName": "测试宝箱4",
     "ItemIcon": "110001",
     "ItemQuality": 4,
@@ -28809,7 +28809,7 @@
   },
   {
     "id": 10014,
-    "isVaild": false,
+    "isVaild": true,
     "ItemName": "测试宝箱5",
     "ItemIcon": "202001",
     "ItemQuality": 4,
@@ -28824,7 +28824,7 @@
   },
   {
     "id": 10015,
-    "isVaild": false,
+    "isVaild": true,
     "ItemName": "测试宝箱6",
     "ItemIcon": "204001",
     "ItemQuality": 5,
@@ -28839,7 +28839,7 @@
   },
   {
     "id": 10016,
-    "isVaild": false,
+    "isVaild": true,
     "ItemName": "测试宝箱7",
     "ItemIcon": "201001",
     "ItemQuality": 5,

@@ -322,7 +322,6 @@ export module DotaUIHelper {
         let CustomTooltipPanel: Panel;
         const customPanelid = "CustomTooltipPanel";
         const abilityShowTooltipHandler = GHandler.create(EventObj, (abilitypanel: Panel, ability_name: string | AbilityEntityIndex, c, d) => {
-            GLogHelper.print(ability_name, 111111);
             if (typeof ability_name == "number") {
                 ability_name = Abilities.GetAbilityName(ability_name as AbilityEntityIndex);
             }
@@ -336,6 +335,7 @@ export module DotaUIHelper {
             }
             DOTAAbilityToolTip_Contents.style.width = "fit-children";
             let config = KVHelper.KVAbilitys()[ability_name] || KVHelper.KVItems()[ability_name];
+            GLogHelper.print(Object.keys(KVHelper.KVAbilitys()).includes(ability_name), ability_name);
             let CombinationLabel: string | null = null;
             if (config) {
                 let _CombinationLabel = config.CombinationLabel;

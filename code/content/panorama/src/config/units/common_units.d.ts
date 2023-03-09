@@ -1,7 +1,7 @@
 
 declare namespace common_units { 
  interface OBJ_0_1 {
-"DOTAUnits" :OBJ_1_1 ,
+"common_units" :OBJ_1_1 ,
 }
  interface OBJ_1_1 {
 "unit_ward_observer" :OBJ_2_1 ,

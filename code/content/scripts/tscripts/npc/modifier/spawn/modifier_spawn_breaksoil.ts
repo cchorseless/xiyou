@@ -44,15 +44,16 @@ export class modifier_spawn_breaksoil extends BaseModifierMotionVertical_Plus {
             this.vTargetPosition = GetGroundPosition(this.GetParentPlus().GetAbsOrigin(), this.GetParentPlus());
         }
     }
-
+    DestroyHandler: IGHandler;
     BeDestroy() {
         if (IsServer()) {
             this.GetParentPlus().RemoveHorizontalMotionController(this);
             this.GetParentPlus().RemoveVerticalMotionController(this);
             //  this.GetParentPlus().SetForwardVector(Vector(0,-1,0))
-            let enemyroot = this.GetParentPlus().ETRoot
-            if (enemyroot.AsValid<IEnemyUnitEntityRoot>("EnemyUnitEntityRoot")) {
-                enemyroot.As<IEnemyUnitEntityRoot>().OnSpawnAnimalFinish();
+            this.GetParentPlus().RemoveGesture(GameActivity_t.ACT_DOTA_FLAIL);
+            if (this.DestroyHandler) {
+                this.DestroyHandler.run();
+                this.DestroyHandler = null;
             }
         }
     }

@@ -40,7 +40,7 @@ export class ChessControlComponent extends ET.Component {
         const RIGHT_BUTTON = 1;
         GameUI.SetMouseCallback((eventName, mouseButton) => {
             if (Game.IsGamePaused()) { return CONSUME_EVENT; }
-            if (this.IsDisposed()) { return CONTINUE_EVENT; }
+            if (this.IsDisposed()) { return CONSUME_EVENT; }
             if (GameUI.GetClickBehaviors() !== CLICK_BEHAVIORS.DOTA_CLICK_BEHAVIOR_NONE) return CONTINUE_EVENT;
             if (eventName === "pressed") {
                 if (mouseButton === LEFT_BUTTON) {
@@ -59,7 +59,6 @@ export class ChessControlComponent extends ET.Component {
                     return CONTINUE_EVENT;
                 }
                 if (mouseButton === RIGHT_BUTTON && this.IS_CURSOR_HERO_ICON_SHOWING) {
-                    GLogHelper.print("");
                     // 右键点击，隐藏当前英雄小图标
                     this.OnShowCursorHeroIcon(false);
                     return CONSUME_EVENT;

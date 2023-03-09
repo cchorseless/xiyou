@@ -51,9 +51,6 @@ export class EnemyUnitEntityRoot extends BattleUnitEntityRoot {
         }
     }
 
-    OnSpawnAnimalFinish() {
-        this.SyncClient()
-    }
 
     onKilled(events: EntityKilledEvent): void {
         super.onKilled(events);

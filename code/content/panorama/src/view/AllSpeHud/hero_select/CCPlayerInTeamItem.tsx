@@ -32,7 +32,7 @@ export class CCPlayerInTeamItem extends CCPanel<ICCPlayerInTeamItem> {
         const GamseStateSys = this.GetStateEntity(GGameScene.GameServiceSystem)!;
         const tGameSelection = GamseStateSys.getPlayerGameSelection(iPlayerID);
         const sCourierName = tGameSelection.Courier;
-        const tCourierData = KVHelper.KVData().CourierUnits[sCourierName];
+        const tCourierData = KVHelper.KVData().courier_units[sCourierName];
         const tPlayerTitle = tGameSelection.Title;
         const iDifficulty = tGameSelection.Difficulty.MaxChapter;
         return (

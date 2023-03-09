@@ -43,6 +43,10 @@ export class imba_abaddon_death_coil extends BaseAbility_Plus {
     GetManaCost(level: number): number {
         return 0;
     }
+
+    GetCooldown(level: number): number {
+        return 20;
+    }
     AutoSpellSelf() {
         let range = 200;
         return AI_ability.TARGET_if_enemy(this, range);
@@ -57,10 +61,8 @@ export class imba_abaddon_death_coil extends BaseAbility_Plus {
     IsHiddenWhenStolen(): boolean {
         return false;
     }
-    OnSpellStart() {
-        this._OnSpellStart(null, false);
-    }
-    _OnSpellStart(unit: IBaseNpc_Plus, special_cast: boolean): void {
+
+    OnSpellStart(unit?: IBaseNpc_Plus, special_cast: boolean = false): void {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
             let target = unit || this.GetCursorTarget();
@@ -198,7 +200,7 @@ export class imba_abaddon_death_coil extends BaseAbility_Plus {
             let units = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.GetCastRange(this.GetCasterPlus().GetAbsOrigin(), this.GetCasterPlus()), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, this.GetAbilityTargetType(), this.GetAbilityTargetFlags(), FindOrder.FIND_ANY_ORDER, false);
             for (const unit of (units)) {
                 if (unit != this.GetCasterPlus()) {
-                    this._OnSpellStart(unit, true);
+                    this.OnSpellStart(unit, true);
                 }
             }
         }
@@ -233,7 +235,7 @@ export class modifier_imba_mist_coil_passive extends BaseModifier_Plus {
         }
         return Object.values(decFuns);
     } */
-    @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH, false, true)
     CC_OnDeath(keys: ModifierInstanceEvent): void {
         if (this.applied_damage) {
             if (keys.attacker == this.GetParentPlus()) {
@@ -308,6 +310,11 @@ export class imba_abaddon_aphotic_shield extends BaseAbility_Plus {
     GetManaCost(level: number): number {
         return 0;
     }
+
+    GetCooldown(level: number): number {
+        return 20;
+    }
+
     AutoSpellSelf() {
         let range = 200;
         return AI_ability.TARGET_if_friend(this, range);
@@ -1004,6 +1011,13 @@ export class modifier_over_channel_reduction extends BaseModifier_Plus {
 }
 @registerAbility()
 export class imba_abaddon_borrowed_time extends BaseAbility_Plus {
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    GetCooldown(level: number): number {
+        return 30;
+    }
+
     GetIntrinsicModifierName(): string {
         if (this.GetCasterPlus().IsRealUnit()) {
             return "modifier_imba_borrowed_time_handler";
@@ -1222,7 +1236,7 @@ export class modifier_imba_borrowed_time_buff_hot_caster extends BaseModifier_Pl
                 if (kv.unit.TempData().borrowed_time_damage_taken / this.GetSpecialValueFor("ally_threshold_scepter") >= 1) {
                     for (let i = 0; i < kv.unit.TempData().borrowed_time_damage_taken / this.GetSpecialValueFor("ally_threshold_scepter"); i++) {
                         kv.unit.TempData().borrowed_time_damage_taken = kv.unit.TempData().borrowed_time_damage_taken - this.GetSpecialValueFor("ally_threshold_scepter");
-                        this.GetCasterPlus().findAbliityPlus<imba_abaddon_death_coil>("imba_abaddon_death_coil")._OnSpellStart(kv.unit, true);
+                        this.GetCasterPlus().findAbliityPlus<imba_abaddon_death_coil>("imba_abaddon_death_coil").OnSpellStart(kv.unit, true);
                     }
                 }
             }

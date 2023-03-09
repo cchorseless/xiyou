@@ -32,7 +32,7 @@ export class CCDebugPanel extends CCPanel<ICCDebugPanel> {
 
     render() {
         const itemsNames: string[] = Object.keys(KVHelper.KVItems()).filter((s) => { return KVHelper.KVData().dota_items[s] == null });;
-        const abilitiesNames: string[] = Object.keys(KVHelper.KVAbilitys()).filter((s) => { return KVHelper.KVData().dota_abilities[s] == null });;
+        const abilitiesNames: string[] = Object.keys(KVHelper.KVAbilitys()).filter((s) => { return KVHelper.KVData().dota_abilities[s] == null && !s.includes("special_bonus") });;
         const dotaitemsNames: string[] = Object.keys(KVHelper.KVData().dota_items);
         const dotaabilitiesNames: string[] = Object.keys(KVHelper.KVData().dota_abilities);
         const heroList: string[] = Object.keys(KVHelper.KVData().building_unit_tower);

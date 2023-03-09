@@ -1,7 +1,7 @@
 
 declare namespace courier_units { 
  interface OBJ_0_1 {
-"CourierUnits" :OBJ_1_1 ,
+"courier_units" :OBJ_1_1 ,
 }
  interface OBJ_1_1 {
 "courier_1" :OBJ_2_1 ,
