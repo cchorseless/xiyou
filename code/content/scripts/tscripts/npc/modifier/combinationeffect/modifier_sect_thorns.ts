@@ -2,59 +2,59 @@ import { registerModifier } from "../../entityPlus/Base_Plus";
 import { modifier_combination_effect } from "./modifier_combination_effect";
 
 @registerModifier()
-export class modifier_sect_thorns_abaddon_4 extends modifier_combination_effect {
+export class modifier_sect_thorns_abaddon_aphotic_shield_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_thorns_abaddon_8 extends modifier_combination_effect {
+export class modifier_sect_thorns_abaddon_aphotic_shield_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_thorns_axe_4 extends modifier_combination_effect {
+export class modifier_sect_thorns_axe_counter_helix_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_thorns_axe_8 extends modifier_combination_effect {
+export class modifier_sect_thorns_axe_counter_helix_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_thorns_base_2 extends modifier_combination_effect {
+export class modifier_sect_thorns_base_a extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_thorns_base_4 extends modifier_combination_effect {
+export class modifier_sect_thorns_base_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_thorns_base_8 extends modifier_combination_effect {
+export class modifier_sect_thorns_base_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_thorns_bristleback_4 extends modifier_combination_effect {
+export class modifier_sect_thorns_bristleback_quill_spray_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_thorns_bristleback_8 extends modifier_combination_effect {
+export class modifier_sect_thorns_bristleback_quill_spray_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_thorns_centaur_4 extends modifier_combination_effect {
+export class modifier_sect_thorns_centaur_return_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_thorns_centaur_8 extends modifier_combination_effect {
+export class modifier_sect_thorns_centaur_return_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_thorns_nyx_assassin_4 extends modifier_combination_effect {
+export class modifier_sect_thorns_nyx_assassin_spiked_carapace_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_thorns_nyx_assassin_8 extends modifier_combination_effect {
+export class modifier_sect_thorns_nyx_assassin_spiked_carapace_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_thorns_rattletrap_4 extends modifier_combination_effect {
+export class modifier_sect_thorns_rattletrap_battery_assault_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_thorns_rattletrap_8 extends modifier_combination_effect {
+export class modifier_sect_thorns_rattletrap_battery_assault_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_thorns_spectre_4 extends modifier_combination_effect {
+export class modifier_sect_thorns_spectre_dispersion_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_thorns_spectre_8 extends modifier_combination_effect {
+export class modifier_sect_thorns_spectre_dispersion_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_thorns_visage_4 extends modifier_combination_effect {
+export class modifier_sect_thorns_visage_soul_assumption_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_thorns_visage_8 extends modifier_combination_effect {
+export class modifier_sect_thorns_visage_soul_assumption_c extends modifier_combination_effect {
 }

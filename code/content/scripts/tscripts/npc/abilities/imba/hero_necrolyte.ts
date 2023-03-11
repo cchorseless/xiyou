@@ -818,7 +818,7 @@ export class modifier_imba_reapers_scythe extends BaseModifier_Plus {
     CC_GetOverrideAnimation(): GameActivity_t {
         return GameActivity_t.ACT_DOTA_DISABLED;
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
             let target = this.GetParentPlus();

@@ -222,7 +222,7 @@ export class modifier_item_imba_lotus_orb_active extends BaseModifier_Plus {
         }
         return 0;
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (!IsServer()) {
             return;
         }

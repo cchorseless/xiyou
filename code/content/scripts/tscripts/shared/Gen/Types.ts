@@ -3233,6 +3233,8 @@ export class CombinationConfigRecord {
         this.relationid = _json_.relationid
         if (_json_.index === undefined) { GLogHelper.error(1); }
         this.index = _json_.index
+        if (_json_.relation_level === undefined) { GLogHelper.error(1); }
+        this.relationLevel = _json_.relation_level
         if (_json_.active_count === undefined) { GLogHelper.error(1); }
         this.activeCount = _json_.active_count
         if (_json_.acitve_common_effect === undefined) { GLogHelper.error(1); }
@@ -3265,6 +3267,10 @@ export class CombinationConfigRecord {
      * 羁绊索引
      */
     readonly index: number
+    /**
+     * 羁绊等级
+     */
+    readonly relationLevel: string
     /**
      * 羁绊激活数量
      */
@@ -3478,6 +3484,263 @@ export class PoolGroupBean {
 
 }
 
+export namespace Dota {
+export class WearableConfig{
+    private _dataMap: Map<string, Dota.WearableConfigRecord>
+    private _dataList: Dota.WearableConfigRecord[]
+    constructor(_json_: any[]) {
+ this._dataMap  = new Map<string, Dota.WearableConfigRecord>()
+        this._dataList = []
+        for(let _json2_ of _json_) {
+            let _v: Dota.WearableConfigRecord
+            _v = new Dota.WearableConfigRecord(_json2_)
+            this._dataList.push(_v)
+            this._dataMap.set(_v.id, _v)
+        }
+    }
+
+    getDataMap(): Map<string, Dota.WearableConfigRecord> { return this._dataMap; }
+    getDataList(): Dota.WearableConfigRecord[] { return this._dataList; }
+
+    get(key: string): Dota.WearableConfigRecord | undefined { return this._dataMap.get(key); }
+
+    resolve(_tables: Map<string, any>) {
+        for(let v of this._dataList) {
+            v.resolve(_tables)
+        }
+    }
+
+}
+}
+
+
+
+export namespace Dota {
+export class WearableConfigRecord {
+
+    constructor(_json_: any) {
+        if (_json_.id === undefined) { GLogHelper.error(1); }
+        this.id = _json_.id
+        if (_json_.name === undefined) { GLogHelper.error(1); }
+        this.name = _json_.name
+        if (_json_.prefab === undefined) { GLogHelper.error(1); }
+        this.prefab = _json_.prefab
+        if (_json_.image_inventory === undefined) { GLogHelper.error(1); }
+        this.imageInventory = _json_.image_inventory
+        if (_json_.item_description === undefined) { GLogHelper.error(1); }
+        this.itemDescription = _json_.item_description
+        if (_json_.item_name === undefined) { GLogHelper.error(1); }
+        this.itemName = _json_.item_name
+        if (_json_.item_rarity === undefined) { GLogHelper.error(1); }
+        this.itemRarity = _json_.item_rarity
+        if (_json_.item_slot === undefined) { GLogHelper.error(1); }
+        this.itemSlot = _json_.item_slot
+        if (_json_.item_type_name === undefined) { GLogHelper.error(1); }
+        this.itemTypeName = _json_.item_type_name
+        if (_json_.model_player === undefined) { GLogHelper.error(1); }
+        this.modelPlayer = _json_.model_player
+        if (_json_.used_by_heroes === undefined) { GLogHelper.error(1); }
+        this.usedByHeroes = _json_.used_by_heroes
+        if (_json_.bundle === undefined) { GLogHelper.error(1); }
+        this.bundle = _json_.bundle
+        if (_json_.skin === undefined) { GLogHelper.error(1); }
+        this.skin = _json_.skin
+        if (_json_.skip_model_combine === undefined) { GLogHelper.error(1); }
+        this.skipModelCombine = _json_.skip_model_combine
+        if (_json_.asset_modifier === undefined) { GLogHelper.error(1); }
+        this.assetModifier = _json_.asset_modifier
+        if (_json_.control_point === undefined) { GLogHelper.error(1); }
+        this.controlPoint = _json_.control_point
+        if (_json_.styles === undefined) { GLogHelper.error(1); }
+        this.styles = _json_.styles
+    }
+
+    /**
+     * 主键
+     */
+    readonly id: string
+    /**
+     * 名称
+     */
+    readonly name: string
+    /**
+     * 类型
+     */
+    readonly prefab: string
+    /**
+     * icon
+     */
+    readonly imageInventory: string
+    /**
+     * 描述
+     */
+    readonly itemDescription: string
+    /**
+     * 饰品名称
+     */
+    readonly itemName: string
+    /**
+     * 饰品稀有度
+     */
+    readonly itemRarity: string
+    /**
+     * 饰品槽位
+     */
+    readonly itemSlot: string
+    /**
+     * 饰品类型名称
+     */
+    readonly itemTypeName: string
+    /**
+     * 饰品模型
+     */
+    readonly modelPlayer: string
+    /**
+     * 使用英雄
+     */
+    readonly usedByHeroes: string
+    /**
+     * 礼包内道具
+     */
+    readonly bundle: string[]
+    /**
+     * 皮肤
+     */
+    readonly skin: number
+    /**
+     * 跳过模型融合
+     */
+    readonly skipModelCombine: boolean
+    /**
+     * 特殊效果修改
+     */
+    readonly assetModifier: string[]
+    /**
+     * 创建特效数据
+     */
+    readonly controlPoint: string[]
+    /**
+     * 样式
+     */
+    readonly styles: string
+
+    resolve(_tables: Map<string, any>) {
+    }
+}
+
+}
+
+export namespace Dota {
+export class BuildingLevelUpConfig{
+    private _dataMap: Map<string, Dota.BuildingLevelUpConfigRecord>
+    private _dataList: Dota.BuildingLevelUpConfigRecord[]
+    constructor(_json_: any[]) {
+ this._dataMap  = new Map<string, Dota.BuildingLevelUpConfigRecord>()
+        this._dataList = []
+        for(let _json2_ of _json_) {
+            let _v: Dota.BuildingLevelUpConfigRecord
+            _v = new Dota.BuildingLevelUpConfigRecord(_json2_)
+            this._dataList.push(_v)
+            this._dataMap.set(_v.id, _v)
+        }
+    }
+
+    getDataMap(): Map<string, Dota.BuildingLevelUpConfigRecord> { return this._dataMap; }
+    getDataList(): Dota.BuildingLevelUpConfigRecord[] { return this._dataList; }
+
+    get(key: string): Dota.BuildingLevelUpConfigRecord | undefined { return this._dataMap.get(key); }
+
+    resolve(_tables: Map<string, any>) {
+        for(let v of this._dataList) {
+            v.resolve(_tables)
+        }
+    }
+
+}
+}
+
+
+
+export namespace Dota {
+export class BuildingLevelUpConfigRecord {
+
+    constructor(_json_: any) {
+        if (_json_.id === undefined) { GLogHelper.error(1); }
+        this.id = _json_.id
+        if (_json_.name === undefined) { GLogHelper.error(1); }
+        this.name = _json_.name
+        if (_json_.prefab === undefined) { GLogHelper.error(1); }
+        this.prefab = _json_.prefab
+        if (_json_.LevelUpInfo === undefined) { GLogHelper.error(1); }
+        { this.LevelUpInfo = []; for(let _ele of _json_.LevelUpInfo) { let _e : Dota.UnitLevelUpConfigBean; _e = new Dota.UnitLevelUpConfigBean(_ele); this.LevelUpInfo.push(_e);}}
+    }
+
+    /**
+     * 主键
+     */
+    readonly id: string
+    /**
+     * 名称
+     */
+    readonly name: string
+    /**
+     * 类型
+     */
+    readonly prefab: string
+    readonly LevelUpInfo: Dota.UnitLevelUpConfigBean[]
+
+    resolve(_tables: Map<string, any>) {
+        for(let _e of this.LevelUpInfo) { if (_e != null ) {_e.resolve(_tables);} }
+    }
+}
+
+}
+
+
+
+export namespace Dota {
+export class UnitLevelUpConfigBean {
+
+    constructor(_json_: any) {
+        if (_json_.Level === undefined) { GLogHelper.error(1); }
+        this.Level = _json_.Level
+        if (_json_.AttributeBaseStrength === undefined) { GLogHelper.error(1); }
+        this.AttributeBaseStrength = _json_.AttributeBaseStrength
+        if (_json_.AttributeBaseAgility === undefined) { GLogHelper.error(1); }
+        this.AttributeBaseAgility = _json_.AttributeBaseAgility
+        if (_json_.AttributeBaseIntelligence === undefined) { GLogHelper.error(1); }
+        this.AttributeBaseIntelligence = _json_.AttributeBaseIntelligence
+        if (_json_.AttachWearables === undefined) { GLogHelper.error(1); }
+        this.AttachWearables = _json_.AttachWearables
+    }
+
+    /**
+     * 等级
+     */
+    readonly Level: number
+    /**
+     * 基础力量
+     */
+    readonly AttributeBaseStrength: number
+    /**
+     * 基础敏捷
+     */
+    readonly AttributeBaseAgility: number
+    /**
+     * 基础智力
+     */
+    readonly AttributeBaseIntelligence: number
+    /**
+     * 饰品
+     */
+    readonly AttachWearables: string[]
+
+    resolve(_tables: Map<string, any>) {
+    }
+}
+
+}
+
 
 type JsonLoader = (file: string) => any
 
@@ -3554,6 +3817,10 @@ export class Tables {
     get PoolConfig(): Dota.PoolConfig  { return this._PoolConfig;}
     private _PoolGroupConfig: Dota.PoolGroupConfig
     get PoolGroupConfig(): Dota.PoolGroupConfig  { return this._PoolGroupConfig;}
+    private _WearableConfig: Dota.WearableConfig
+    get WearableConfig(): Dota.WearableConfig  { return this._WearableConfig;}
+    private _BuildingLevelUpConfig: Dota.BuildingLevelUpConfig
+    get BuildingLevelUpConfig(): Dota.BuildingLevelUpConfig  { return this._BuildingLevelUpConfig;}
 
     constructor(loader: JsonLoader) {
         let tables = new Map<string, any>()
@@ -3629,6 +3896,10 @@ export class Tables {
         tables.set('Dota.PoolConfig', this._PoolConfig)
         this._PoolGroupConfig = new Dota.PoolGroupConfig(loader('dota_poolgroupconfig'))
         tables.set('Dota.PoolGroupConfig', this._PoolGroupConfig)
+        this._WearableConfig = new Dota.WearableConfig(loader('dota_wearableconfig'))
+        tables.set('Dota.WearableConfig', this._WearableConfig)
+        this._BuildingLevelUpConfig = new Dota.BuildingLevelUpConfig(loader('dota_buildinglevelupconfig'))
+        tables.set('Dota.BuildingLevelUpConfig', this._BuildingLevelUpConfig)
 
         this._ItemConfig.resolve(tables)
         this._ItemEquipConfig.resolve(tables)
@@ -3666,5 +3937,7 @@ export class Tables {
         this._CombinationConfig.resolve(tables)
         this._PoolConfig.resolve(tables)
         this._PoolGroupConfig.resolve(tables)
+        this._WearableConfig.resolve(tables)
+        this._BuildingLevelUpConfig.resolve(tables)
     }
 }

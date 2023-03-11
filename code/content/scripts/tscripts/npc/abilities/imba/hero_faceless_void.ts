@@ -382,7 +382,7 @@ export class modifier_imba_faceless_void_time_walk_cast extends BaseModifierMoti
         }
         return;
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
             let ability = this.GetAbilityPlus();
@@ -1063,7 +1063,7 @@ export class modifier_imba_faceless_void_chronosphere_aura extends BaseModifier_
             });
         }
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (IsServer()) {
             if (this.modifiers) {
                 for (const [_, mod] of GameFunc.Pair(this.modifiers)) {

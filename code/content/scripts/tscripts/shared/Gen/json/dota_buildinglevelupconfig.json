@@ -1,0 +1,5117 @@
+[
+  {
+    "id": "building_hero_abaddon",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "13264",
+          "13263"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "13262"
+        ]
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "13236"
+        ]
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "13235",
+          "13533"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "building_hero_abyssal_underlord",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "14200"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "14199"
+        ]
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "14197"
+        ]
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "14198"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "building_hero_alchemist",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "14194",
+          "14193"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "14192",
+          "14171"
+        ]
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "14170"
+        ]
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "14169",
+          "14168"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "building_hero_ancient_apparition",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "14165"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "14164"
+        ]
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "14163"
+        ]
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "14162"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "building_hero_antimage",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "9766",
+          "9763"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "9765",
+          "9768"
+        ]
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "9770",
+          "9769"
+        ]
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "9764",
+          "11656"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "building_hero_arc_warden",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "7294",
+          "7295"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "7296"
+        ]
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "11569"
+        ]
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "9672"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "building_hero_axe",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "12305",
+          "12304"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "12303"
+        ]
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "12302"
+        ]
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "12301",
+          "12300"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "building_hero_bane",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "11907",
+          "8549"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "8547"
+        ]
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "8548"
+        ]
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "8550"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "building_hero_batrider",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "17925",
+          "17924"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "17923"
+        ]
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "17922"
+        ]
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "17921"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "building_hero_beastmaster",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "6250",
+          "6254"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "6253",
+          "6255"
+        ]
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "6251"
+        ]
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "6252",
+          "6300"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "building_hero_bloodseeker",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "22806",
+          "22807"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "22808",
+          "22809"
+        ]
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "22810"
+        ]
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "22811",
+          "22812"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "building_hero_bounty_hunter",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "14286",
+          "14285"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "14284"
+        ]
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "14282"
+        ]
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "14272",
+          "14283"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "building_hero_brewmaster",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "12210",
+          "9949",
+          "9948",
+          "9947",
+          "9946",
+          "9945",
+          "9944"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_bristleback",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "18505",
+          "18504",
+          "18503",
+          "18502",
+          "18501",
+          "18500"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_broodmother",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "19780",
+          "19779",
+          "19778",
+          "19777",
+          "19776",
+          "19775"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_centaur",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "12610",
+          "12609",
+          "12608",
+          "12607",
+          "12606",
+          "9754",
+          "9753"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_chaos_knight",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "19531",
+          "19530",
+          "19529",
+          "19528",
+          "19527",
+          "19526"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_chen",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "19351",
+          "19350",
+          "19349",
+          "19348",
+          "19347"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_clinkz",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "22139",
+          "22138",
+          "22141",
+          "22140",
+          "22137"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_crystal_maiden",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "18114",
+          "18115",
+          "18116",
+          "18159",
+          "18160"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_dark_seer",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "14527",
+          "14526",
+          "14505",
+          "14504",
+          "14503"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_dark_willow",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "13700",
+          "13699",
+          "13698",
+          "13697",
+          "13696"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_dawnbreaker",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "19614",
+          "19613",
+          "19612",
+          "19611"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_dazzle",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "22201",
+          "22200",
+          "22198",
+          "22197",
+          "22199"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_death_prophet",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "22782",
+          "22783",
+          "22784",
+          "22785",
+          "22786",
+          "22787"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_disruptor",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "18712",
+          "18711",
+          "18614",
+          "18613",
+          "18612",
+          "18605",
+          "18604"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_doom_bringer",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "17990",
+          "17989",
+          "17988",
+          "17987",
+          "17986",
+          "17984",
+          "17985"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_dragon_knight",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "22856",
+          "22857",
+          "22858",
+          "22859",
+          "22860",
+          "22861",
+          "22855"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_drow_ranger",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "22359",
+          "22358",
+          "22355",
+          "22354",
+          "22353",
+          "22352",
+          "22351"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_earth_spirit",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "6004",
+          "6005",
+          "6002",
+          "6006",
+          "6008",
+          "10418",
+          "6003"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_earthshaker",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "9730",
+          "9735",
+          "9737",
+          "9738",
+          "12182"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_elder_titan",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "6382",
+          "6384",
+          "6385",
+          "6386",
+          "6381",
+          "10533"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_ember_spirit",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "6013",
+          "6014",
+          "6015",
+          "6016",
+          "6017",
+          "6018",
+          "10410"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_enchantress",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "12690",
+          "12689",
+          "12688",
+          "12687",
+          "12686"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_enigma",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "9288",
+          "9289",
+          "9290",
+          "9352",
+          "12019"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_faceless_void",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "14489",
+          "14488",
+          "14487",
+          "14486",
+          "14485"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_furion",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "5803",
+          "5797",
+          "5798",
+          "5799",
+          "5800",
+          "5802",
+          "5806"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_grimstroke",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "13064",
+          "13063",
+          "13062",
+          "13061",
+          "13060"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_gyrocopter",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "6898",
+          "6903",
+          "7121",
+          "6899",
+          "10499",
+          "6897"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_hoodwink",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "23249",
+          "23248",
+          "23247",
+          "23246"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_huskar",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "9291",
+          "9292",
+          "9293",
+          "9294",
+          "9295",
+          "12020"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_invoker",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "5785",
+          "5867",
+          "5865",
+          "5869",
+          "5866"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_jakiro",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "14126",
+          "14125",
+          "14124",
+          "14123"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_juggernaut",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "6056",
+          "6058",
+          "6057",
+          "6055",
+          "6059"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_keeper_of_the_light",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "4868",
+          "4866",
+          "4865",
+          "9119"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_kunkka",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "5385",
+          "5669",
+          "5671",
+          "5670",
+          "5661",
+          "4500",
+          "5374",
+          "5373"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_legion_commander",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "5885",
+          "5886",
+          "5890",
+          "5887",
+          "5889",
+          "10391"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_leshrac",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "7734",
+          "7731",
+          "7732",
+          "7730",
+          "7733",
+          "11661"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_lich",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "6218",
+          "6216",
+          "6217",
+          "6214",
+          "10451"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_life_stealer",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "11979",
+          "9108",
+          "9107",
+          "9106",
+          "9105"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_lina",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "5941",
+          "5942",
+          "10401",
+          "5940",
+          "5969"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_lion",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "9042",
+          "9043",
+          "9044",
+          "9046",
+          "11944",
+          "9045"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_lone_druid",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "4660",
+          "4661",
+          "4662",
+          "4663",
+          "4764"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_luna",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "5822",
+          "5823",
+          "5824",
+          "5826",
+          "5825"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_lycan",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "4859",
+          "4862",
+          "4860",
+          "4861",
+          "4863"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_magnataur",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "11625",
+          "7959",
+          "7958",
+          "7957",
+          "7956",
+          "7955"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_marci",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_mars",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "14429",
+          "14428",
+          "14427",
+          "14426"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_medusa",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "8191",
+          "8195",
+          "8196",
+          "11283",
+          "8194",
+          "8193",
+          "16417"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_meepo",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "7669",
+          "7670",
+          "7683",
+          "7684",
+          "7685",
+          "7686",
+          "11309"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_mirana",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "4387",
+          "4694",
+          "4645",
+          "4693",
+          "4690",
+          "4691",
+          "4692"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_monkey_king",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "9399",
+          "9400",
+          "9401",
+          "12032",
+          "9675"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_morphling",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "7560",
+          "7559",
+          "7561",
+          "7558",
+          "7562",
+          "11152"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_naga_siren",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "6427",
+          "6423",
+          "6426",
+          "6424",
+          "6425",
+          "10384"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_necrolyte",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "10886",
+          "6291",
+          "7083",
+          "7124",
+          "7132",
+          "10892"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_nevermore",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "11558",
+          "7193",
+          "7188",
+          "7279"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_night_stalker",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "11923",
+          "8889",
+          "8888",
+          "8887",
+          "8886",
+          "8885"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_nyx_assassin",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "5926",
+          "5927",
+          "5928",
+          "5929"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_obsidian_destroyer",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "9367",
+          "9368",
+          "9369",
+          "9370",
+          "11443"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_ogre_magi",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "11149",
+          "7845",
+          "7839",
+          "7846",
+          "7847",
+          "7848"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_omniknight",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "8955",
+          "8956",
+          "8954",
+          "8958",
+          "8957",
+          "11932"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_oracle",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "13426",
+          "13425",
+          "13424",
+          "13423",
+          "13422"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_pangolier",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "12207",
+          "9850",
+          "9849",
+          "9848"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_phantom_assassin",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "11636",
+          "7297",
+          "7307",
+          "7308",
+          "7310",
+          "7309"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_phantom_lancer",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "12909",
+          "12033",
+          "9302",
+          "9301",
+          "9300",
+          "9299"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_phoenix",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "11955",
+          "7837",
+          "7836",
+          "7835"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_primal_beast",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_puck",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "11924",
+          "6290",
+          "6292",
+          "6618"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_pudge",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "5051",
+          "5050",
+          "5049",
+          "5048",
+          "5047",
+          "5046"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_pugna",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "5992",
+          "5996",
+          "5994",
+          "5997",
+          "6000",
+          "6001"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_queenofpain",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "7530",
+          "7528",
+          "7529",
+          "7527"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_rattletrap",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "6809",
+          "6805",
+          "6810",
+          "6811",
+          "10695"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_razor",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "9353",
+          "9354",
+          "9355",
+          "9356",
+          "9357",
+          "11441"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_riki",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "9434",
+          "9435",
+          "9436",
+          "9437",
+          "9438",
+          "9439",
+          "12039"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_rubick",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "4836",
+          "4837",
+          "4839",
+          "4838"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_sand_king",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "6612",
+          "6613",
+          "6611",
+          "6614",
+          "6610",
+          "10581"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_shadow_demon",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "14371",
+          "14370",
+          "14369",
+          "14368"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_shadow_shaman",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "6817",
+          "6819",
+          "6818",
+          "6815",
+          "6816",
+          "6814",
+          "10700"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_shredder",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "6519",
+          "6524",
+          "6520",
+          "6521",
+          "6522",
+          "6523",
+          "10659"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_silencer",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "6387",
+          "6393",
+          "6394",
+          "6389",
+          "6390",
+          "6391",
+          "10535"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_skeleton_king",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "11746",
+          "8422",
+          "8420",
+          "8418",
+          "8416",
+          "8414",
+          "8411"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_skywrath_mage",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "11435",
+          "6974",
+          "6973",
+          "6975",
+          "6972",
+          "6734",
+          "6733"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_slardar",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "8789",
+          "8790",
+          "8791",
+          "8792",
+          "11752"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_slark",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "11915",
+          "8688",
+          "8683",
+          "8682",
+          "8681",
+          "8689"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_snapfire",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_sniper",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "8161",
+          "8163",
+          "8164",
+          "8165",
+          "8197",
+          "10915"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_spectre",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "7521",
+          "7518",
+          "7520",
+          "7517",
+          "7519"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_spirit_breaker",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "5627",
+          "5621",
+          "5620",
+          "5619",
+          "5618",
+          "5617"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_storm_spirit",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "6023",
+          "6022",
+          "10411",
+          "6019"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_sven",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "5650",
+          "5648",
+          "5652",
+          "5653",
+          "5645",
+          "5647"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_techies",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "10835",
+          "6289",
+          "6288",
+          "6046",
+          "6045",
+          "6044",
+          "6043",
+          "6042"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_templar_assassin",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "6900",
+          "6901",
+          "6902",
+          "10710"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_terrorblade",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "12160",
+          "9501",
+          "9500",
+          "9499",
+          "9498",
+          "9497"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_tidehunter",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "7773",
+          "7775",
+          "7774",
+          "7776",
+          "11659",
+          "7777",
+          "7778"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_tinker",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "11631",
+          "7968",
+          "7970",
+          "7969",
+          "7967",
+          "7972"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_tiny",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "12533",
+          "12532",
+          "12531",
+          "12530",
+          "12534"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_treant",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "11926",
+          "8902",
+          "8901",
+          "8900",
+          "8899"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_troll_warlord",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "11957",
+          "7875",
+          "7867",
+          "7873",
+          "9677"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_tusk",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "9006",
+          "9007",
+          "9008",
+          "9009",
+          "9010",
+          "9011",
+          "9012",
+          "11416"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_undying",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "7960",
+          "7973",
+          "7961",
+          "11632"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_ursa",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "7653",
+          "7652",
+          "7650",
+          "7651",
+          "7654",
+          "11645"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_vengefulspirit",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "8919",
+          "8918",
+          "8920",
+          "10923",
+          "8994"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_venomancer",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "6643",
+          "6642",
+          "6644",
+          "6645",
+          "6682",
+          "10580"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_viper",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "9230",
+          "9233",
+          "9670"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_visage",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "11964",
+          "9051",
+          "7998",
+          "7997"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_void_spirit",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_warlock",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "4477",
+          "4472",
+          "4478",
+          "4475",
+          "4474",
+          "4468",
+          "4470",
+          "4640"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_weaver",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "11093",
+          "9070",
+          "9069",
+          "9068",
+          "9067",
+          "9066"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_windrunner",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "4835",
+          "4834",
+          "4833",
+          "4831",
+          "4832"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_winter_wyvern",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "11568",
+          "7292",
+          "7291"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_wisp",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_witch_doctor",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": [
+          "7553",
+          "7554",
+          "7550",
+          "7551",
+          "7552",
+          "11630"
+        ]
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  },
+  {
+    "id": "building_hero_zeus",
+    "name": "",
+    "prefab": "",
+    "LevelUpInfo": [
+      {
+        "Level": 2,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 3,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 4,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      },
+      {
+        "Level": 5,
+        "AttributeBaseStrength": 30,
+        "AttributeBaseAgility": 30,
+        "AttributeBaseIntelligence": 30,
+        "AttachWearables": []
+      }
+    ]
+  }
+]

@@ -335,9 +335,9 @@ export class modifier_imba_antimage_blink_charges extends BaseModifier_Plus {
         return false;
     }
     BeCreated(p_0: any,): void {
+        this.caster = this.GetCasterPlus();
         this.max_charge_count = this.caster.GetTalentValue("special_bonus_imba_antimage_1");
         if (IsServer()) {
-            this.caster = this.GetCasterPlus();
             if (this.caster.IsIllusion()) {
                 return;
             }

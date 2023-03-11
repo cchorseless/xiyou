@@ -7,7 +7,7 @@ const xlsx = require('node-xlsx');
 const { read_all_files, read_sub_directories } = require('./utils');
 
 // 需要读取的excel路径
-const excel_path = 'E:/project/et_project/et6_onlyserver/Doc/ExcelConfig/Datas';
+const excel_path = 'E:/project/et_project/ET7/Doc/ExcelConfig/Datas';
 
 
 // 本地化语言
@@ -20,8 +20,8 @@ function createLanguageTXT(file) {
     let sheet = sheets[0];
     let rows = sheet.data;
     let typeindex = 0;
-    for (let i = 0; i < 6; i++){
-        if (rows[i]&&rows[i][0] == '##type' && rows[i + 1][0] == "##") {
+    for (let i = 0; i < 6; i++) {
+        if (rows[i] && rows[i][0] == '##type' && rows[i + 1][0] == "##") {
             typeindex = i;
             break;
         }
@@ -29,7 +29,7 @@ function createLanguageTXT(file) {
     if (typeindex == 0) { return }
     // 语言类型标识写在上一层
     let row_1 = rows[typeindex];
-    let row_0 = rows[typeindex+1];
+    let row_0 = rows[typeindex + 1];
     let langestart = ['schinese', 'english', 'russian'];
     let outpath = [
         'localization/SChinese',
@@ -73,9 +73,9 @@ function createLanguageTXT(file) {
     for (let k in result_txt_obj) {
         let _param = result_txt_obj[k].temp_param
         if (_param.length > 0) {
-            let outfile = (`./${outpath[langestart.indexOf(k)]}/lubandoc/${path.basename(file).replace(path.extname(file),".txt" )}` );
+            let outfile = (`./${outpath[langestart.indexOf(k)]}/lubandoc/${path.basename(file).replace(path.extname(file), ".txt")}`);
             let f_str = '';
-            for (let i = typeindex+2; i < rows.length; i++) {
+            for (let i = typeindex + 2; i < rows.length; i++) {
                 for (let jj = 0; jj < _param.length; jj++) {
                     let __arr = _param[jj]
                     let _kk = ''
@@ -93,8 +93,8 @@ function createLanguageTXT(file) {
                             }
                         }
                     }
-                    let _vv=rows[i][result_txt_obj[k].temp_value[jj]]
-                    if (_kk != null && _vv!=null) {
+                    let _vv = rows[i][result_txt_obj[k].temp_value[jj]]
+                    if (_kk != null && _vv != null) {
                         f_str += `"${_kk}"`;
                         f_str += "       ";
                         f_str += `"${_vv}"`;

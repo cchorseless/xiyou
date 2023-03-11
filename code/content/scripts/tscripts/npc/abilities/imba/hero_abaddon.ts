@@ -715,7 +715,7 @@ export class modifier_imba_curse_of_avernus_debuff_counter extends BaseModifier_
         }
         ParticleManager.SetParticleControl(this.pfx, 1, Vector(0, this.GetStackCount(), 0));
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (!IsServer()) {
             return;
         }
@@ -1296,7 +1296,7 @@ export class modifier_imba_borrowed_time_buff_hot_ally extends BaseModifier_Plus
             this.AddParticle(particle, false, false, -1, false, false);
         }
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
             let buff_list: IBaseNpc_Plus[] = caster.TempData()._borrowed_time_buffed_allies;

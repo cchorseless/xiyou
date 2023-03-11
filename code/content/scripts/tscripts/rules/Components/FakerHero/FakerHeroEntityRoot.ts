@@ -37,13 +37,13 @@ export class FakerHeroEntityRoot extends BaseEntityRoot {
             b.RoundStateComp().OnBoardRound_Battle();
         })
         this.FHeroCombinationManager().getAllActiveCombination().forEach(comb => {
-            comb.CombEffectComp().OnRoundStartBattle();
+            comb.OnRoundStartBattle();
         })
     }
     OnRoundStartPrize(round: ERoundBoard) {
         this.FHeroCombinationManager().getAllActiveCombination().forEach(comb => {
-            if (comb.CombEffectComp()) {
-                comb.CombEffectComp().OnRoundStartPrize(round);
+            if (comb) {
+                comb.OnRoundStartPrize(round);
             }
         })
         let player = this.GetPlayer();

@@ -1,67 +1,66 @@
 import { registerModifier } from "../../entityPlus/Base_Plus";
 import { modifier_combination_effect } from "./modifier_combination_effect";
 
-
 @registerModifier()
-export class modifier_sect_cleave_base_3 extends modifier_combination_effect {
+export class modifier_sect_cleave_base_a extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_cleave_base_6 extends modifier_combination_effect {
+export class modifier_sect_cleave_base_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_cleave_base_9 extends modifier_combination_effect {
+export class modifier_sect_cleave_base_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_cleave_faceless_void_6 extends modifier_combination_effect {
+export class modifier_sect_cleave_faceless_void_time_lock_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_cleave_faceless_void_9 extends modifier_combination_effect {
+export class modifier_sect_cleave_faceless_void_time_lock_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_cleave_kunkka_6 extends modifier_combination_effect {
+export class modifier_sect_cleave_kunkka_tidebringer_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_cleave_kunkka_9 extends modifier_combination_effect {
+export class modifier_sect_cleave_kunkka_tidebringer_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_cleave_luna_6 extends modifier_combination_effect {
+export class modifier_sect_cleave_luna_moon_glaive_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_cleave_luna_9 extends modifier_combination_effect {
+export class modifier_sect_cleave_luna_moon_glaive_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_cleave_magnataur_6 extends modifier_combination_effect {
+export class modifier_sect_cleave_magnataur_empower_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_cleave_magnataur_9 extends modifier_combination_effect {
+export class modifier_sect_cleave_magnataur_empower_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_cleave_medusa_6 extends modifier_combination_effect {
+export class modifier_sect_cleave_medusa_split_shot_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_cleave_medusa_9 extends modifier_combination_effect {
+export class modifier_sect_cleave_medusa_split_shot_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_cleave_sven_6 extends modifier_combination_effect {
+export class modifier_sect_cleave_sven_great_cleave_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_cleave_sven_9 extends modifier_combination_effect {
+export class modifier_sect_cleave_sven_great_cleave_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_cleave_templar_assassin_6 extends modifier_combination_effect {
+export class modifier_sect_cleave_templar_assassin_psi_blades_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_cleave_templar_assassin_9 extends modifier_combination_effect {
+export class modifier_sect_cleave_templar_assassin_psi_blades_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_cleave_void_spirit_6 extends modifier_combination_effect {
+export class modifier_sect_cleave_void_spirit_astral_step_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_cleave_void_spirit_9 extends modifier_combination_effect {
+export class modifier_sect_cleave_void_spirit_astral_step_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_cleave_weaver_6 extends modifier_combination_effect {
+export class modifier_sect_cleave_weaver_geminate_attack_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_cleave_weaver_9 extends modifier_combination_effect {
+export class modifier_sect_cleave_weaver_geminate_attack_c extends modifier_combination_effect {
 }

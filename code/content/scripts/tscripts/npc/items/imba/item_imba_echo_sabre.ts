@@ -80,7 +80,7 @@ export class modifier_imba_echo_sabre extends BaseModifier_Plus {
             }
         }
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (!IsServer()) {
             return;
         }
@@ -159,7 +159,7 @@ export class modifier_imba_echo_sabre_passive extends BaseModifier_Plus {
     CC_GetModifierConstantManaRegen(): number {
         return this.bonus_mana_regen;
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (!IsServer()) {
             return;
         }
@@ -270,7 +270,7 @@ export class modifier_imba_reverb_rapier_passive extends BaseModifier_Plus {
             }
         }
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (!IsServer()) {
             return;
         }

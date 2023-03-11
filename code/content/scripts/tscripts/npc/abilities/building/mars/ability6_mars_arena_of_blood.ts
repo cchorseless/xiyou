@@ -195,7 +195,7 @@ export class modifier_mars_6_thinker extends BaseModifier_Plus {
 
         }
     }
-    OnRemoved() {
+    BeRemoved(): void {
         if (IsServer()) {
             EmitSoundOn("Hero_Mars.ArenaOfBlood.End", this.GetParentPlus())
             StopSoundOn("Hero_Mars.ArenaOfBlood", this.GetParentPlus())

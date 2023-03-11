@@ -3,89 +3,89 @@ import { modifier_combination_effect } from "./modifier_combination_effect";
 
 
 @registerModifier()
-export class modifier_sect_disarm_bane_6 extends modifier_combination_effect {
+export class modifier_sect_disarm_bane_nightmare_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_disarm_bane_9 extends modifier_combination_effect {
+export class modifier_sect_disarm_bane_nightmare_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_disarm_base_3 extends modifier_combination_effect {
+export class modifier_sect_disarm_base_a extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_disarm_base_6 extends modifier_combination_effect {
+export class modifier_sect_disarm_base_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_disarm_base_9 extends modifier_combination_effect {
+export class modifier_sect_disarm_base_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_disarm_dark_willow_6 extends modifier_combination_effect {
+export class modifier_sect_disarm_dark_willow_terrorize_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_disarm_dark_willow_9 extends modifier_combination_effect {
+export class modifier_sect_disarm_dark_willow_terrorize_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_disarm_huskar_6 extends modifier_combination_effect {
+export class modifier_sect_disarm_huskar_inner_fire_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_disarm_huskar_9 extends modifier_combination_effect {
+export class modifier_sect_disarm_huskar_inner_fire_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_disarm_kunkka_6 extends modifier_combination_effect {
+export class modifier_sect_disarm_kunkka_torrent_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_disarm_kunkka_9 extends modifier_combination_effect {
+export class modifier_sect_disarm_kunkka_torrent_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_disarm_lone_druid_6 extends modifier_combination_effect {
+export class modifier_sect_disarm_lone_druid_savage_roar_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_disarm_lone_druid_9 extends modifier_combination_effect {
+export class modifier_sect_disarm_lone_druid_savage_roar_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_disarm_nevermore_6 extends modifier_combination_effect {
+export class modifier_sect_disarm_nevermore_requiem_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_disarm_nevermore_9 extends modifier_combination_effect {
+export class modifier_sect_disarm_nevermore_requiem_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_disarm_night_stalker_6 extends modifier_combination_effect {
+export class modifier_sect_disarm_night_stalker_crippling_fear_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_disarm_night_stalker_9 extends modifier_combination_effect {
+export class modifier_sect_disarm_night_stalker_crippling_fear_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_disarm_pangolier_6 extends modifier_combination_effect {
+export class modifier_sect_disarm_pangolier_lucky_shot_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_disarm_pangolier_9 extends modifier_combination_effect {
+export class modifier_sect_disarm_pangolier_lucky_shot_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_disarm_sniper_6 extends modifier_combination_effect {
+export class modifier_sect_disarm_sniper_concussive_grenade_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_disarm_sniper_9 extends modifier_combination_effect {
+export class modifier_sect_disarm_sniper_concussive_grenade_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_disarm_techies_6 extends modifier_combination_effect {
+export class modifier_sect_disarm_techies_stasis_trap_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_disarm_techies_9 extends modifier_combination_effect {
+export class modifier_sect_disarm_techies_stasis_trap_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_disarm_terrorblade_6 extends modifier_combination_effect {
+export class modifier_sect_disarm_terrorblade_terror_wave_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_disarm_terrorblade_9 extends modifier_combination_effect {
+export class modifier_sect_disarm_terrorblade_terror_wave_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_disarm_tiny_6 extends modifier_combination_effect {
+export class modifier_sect_disarm_tiny_toss_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_disarm_tiny_9 extends modifier_combination_effect {
+export class modifier_sect_disarm_tiny_toss_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_disarm_viper_6 extends modifier_combination_effect {
+export class modifier_sect_disarm_viper_viper_nodedive_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_disarm_viper_9 extends modifier_combination_effect {
+export class modifier_sect_disarm_viper_viper_nodedive_c extends modifier_combination_effect {
 }

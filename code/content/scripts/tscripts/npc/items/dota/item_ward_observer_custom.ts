@@ -44,7 +44,7 @@ export class modifier_vision extends BaseModifier_Plus {
         }
     }
 
-    OnRemoved() {
+    BeRemoved(): void {
         // this.GetParentPlus()?.SafeDestroy();
     }
     /**

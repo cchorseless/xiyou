@@ -293,7 +293,7 @@ export module AbilityHelper {
         let sTempPS = "";
         if (iLevel != -1 && bOnlyNowLevelValue && aValues.length > 0) {
             let value = aValues[FuncHelper.Clamp(iLevel, 0, aValues.length - 1)];
-            let sValue = FuncHelper.BigNumber.FormatNumber((Math.abs(value)));
+            let sValue = (value > 0 ? "+" : "-") + FuncHelper.BigNumber.FormatNumber((Math.abs(value)));
             let sValuePS = sValue + "%";
             sTemp = "<span class='GameplayVariable GameplayVariable'>" + sValue + "</span>";
             sTempPS = "<span class='GameplayVariable GameplayVariable'>" + sValuePS + "</span>";
@@ -305,7 +305,7 @@ export module AbilityHelper {
                     sTemp = sTemp + " / ";
                     sTempPS = sTempPS + " / ";
                 }
-                let sValue = FuncHelper.BigNumber.FormatNumber((Math.abs(value)));
+                let sValue = (value > 0 ? "+" : "-") + FuncHelper.BigNumber.FormatNumber((Math.abs(value)));
                 let sValuePS = sValue + "%";
                 if (iLevel != -1 && (level + 1 == Math.min(iLevel, aValues.length))) {
                     sValue = "<span class='GameplayVariable'>" + sValue + "</span>";
@@ -356,6 +356,7 @@ export module AbilityHelper {
         }
         return sStr;
     }
+
     export function GetAbilityDescriptionByName(sAbilityName: string) {
         const str = $.Localize("#DOTA_Tooltip_ability_" + sAbilityName + "_description");
         return GetAbilityDescription({

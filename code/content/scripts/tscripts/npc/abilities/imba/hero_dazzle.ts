@@ -762,7 +762,7 @@ export class modifier_imba_dazzle_nothl_protection extends BaseModifier_Plus {
             }
         }
     }
-    // OnRemoved(): void {
+    // BeRemoved(): void {
     //     if (IsServer() && this.nothl_protection_particle) {
     //         ParticleManager.DestroyParticle(this.nothl_protection_particle, true);
     //     }
@@ -864,7 +864,7 @@ export class modifier_imba_dazzle_nothl_protection_particle extends BaseModifier
             this.particles = ResHelper.CreateParticleEx("particles/hero/dazzle/dazzle_shallow_grave_self.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetParentPlus());
         }
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (IsServer()) {
             ParticleManager.DestroyParticle(this.particles, true);
         }
@@ -904,7 +904,7 @@ export class modifier_imba_dazzle_post_shallow_grave_buff extends BaseModifier_P
             this.post_shallow_grave_particle = ResHelper.CreateParticleEx("particles/hero/dazzle/dazzle_post_grave.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetParentPlus());
         }
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (IsServer()) {
             ParticleManager.DestroyParticle(this.post_shallow_grave_particle, true);
         }

@@ -531,6 +531,12 @@ const select_excel_to_kv = async (fileNames) => {
 };
 
 const all_excel_to_kv = async (path) => {
+    const oldkv = read_all_files(kv_path);
+    oldkv.forEach((file) => {
+        console.log(file);
+        if (file.indexOf('.kv') > -1)
+            fs.removeSync(file);
+    })
     const files = read_all_files(excel_path);
     files.forEach((file) => {
         single_excel_to_kv(file);

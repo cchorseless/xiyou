@@ -2,109 +2,108 @@ import { registerModifier } from "../../entityPlus/Base_Plus";
 import { modifier_combination_effect } from "./modifier_combination_effect";
 
 
-
 @registerModifier()
-export class modifier_sect_territory_treant_12 extends modifier_combination_effect {
+export class modifier_sect_territory_treant_natures_grasp_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_territory_treant_8 extends modifier_combination_effect {
+export class modifier_sect_territory_treant_natures_grasp_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_territory_abyssal_underlord_12 extends modifier_combination_effect {
+export class modifier_sect_territory_abyssal_underlord_pit_of_malice_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_territory_abyssal_underlord_8 extends modifier_combination_effect {
+export class modifier_sect_territory_abyssal_underlord_pit_of_malice_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_territory_base_12 extends modifier_combination_effect {
+export class modifier_sect_territory_base_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_territory_base_4 extends modifier_combination_effect {
+export class modifier_sect_territory_base_a extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_territory_base_8 extends modifier_combination_effect {
+export class modifier_sect_territory_base_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_territory_broodmother_12 extends modifier_combination_effect {
+export class modifier_sect_territory_broodmother_spin_web_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_territory_broodmother_8 extends modifier_combination_effect {
+export class modifier_sect_territory_broodmother_spin_web_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_territory_dark_willow_12 extends modifier_combination_effect {
+export class modifier_sect_territory_dark_willow_bramble_maze_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_territory_dark_willow_8 extends modifier_combination_effect {
+export class modifier_sect_territory_dark_willow_bramble_maze_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_territory_disruptor_12 extends modifier_combination_effect {
+export class modifier_sect_territory_disruptor_kinetic_field_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_territory_disruptor_8 extends modifier_combination_effect {
+export class modifier_sect_territory_disruptor_kinetic_field_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_territory_earthshaker_12 extends modifier_combination_effect {
+export class modifier_sect_territory_earthshaker_fissure_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_territory_earthshaker_8 extends modifier_combination_effect {
+export class modifier_sect_territory_earthshaker_fissure_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_territory_elder_titan_12 extends modifier_combination_effect {
+export class modifier_sect_territory_elder_titan_earth_splitter_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_territory_elder_titan_8 extends modifier_combination_effect {
+export class modifier_sect_territory_elder_titan_earth_splitter_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_territory_enigma_12 extends modifier_combination_effect {
+export class modifier_sect_territory_enigma_midnight_pulse_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_territory_enigma_8 extends modifier_combination_effect {
+export class modifier_sect_territory_enigma_midnight_pulse_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_territory_furion_12 extends modifier_combination_effect {
+export class modifier_sect_territory_furion_sprout_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_territory_furion_8 extends modifier_combination_effect {
+export class modifier_sect_territory_furion_sprout_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_territory_leshrac_12 extends modifier_combination_effect {
+export class modifier_sect_territory_leshrac_split_earth_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_territory_leshrac_8 extends modifier_combination_effect {
+export class modifier_sect_territory_leshrac_split_earth_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_territory_mars_12 extends modifier_combination_effect {
+export class modifier_sect_territory_mars_arena_of_blood_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_territory_mars_8 extends modifier_combination_effect {
+export class modifier_sect_territory_mars_arena_of_blood_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_territory_nyx_assassin_12 extends modifier_combination_effect {
+export class modifier_sect_territory_nyx_assassin_burrow_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_territory_nyx_assassin_8 extends modifier_combination_effect {
+export class modifier_sect_territory_nyx_assassin_burrow_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_territory_rattletrap_12 extends modifier_combination_effect {
+export class modifier_sect_territory_rattletrap_power_cogs_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_territory_rattletrap_8 extends modifier_combination_effect {
+export class modifier_sect_territory_rattletrap_power_cogs_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_territory_sandking_12 extends modifier_combination_effect {
+export class modifier_sect_territory_sandking_epicenter_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_territory_sandking_8 extends modifier_combination_effect {
+export class modifier_sect_territory_sandking_epicenter_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_territory_templar_assassin_12 extends modifier_combination_effect {
+export class modifier_sect_territory_templar_assassin_trap_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_territory_templar_assassin_8 extends modifier_combination_effect {
+export class modifier_sect_territory_templar_assassin_trap_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_territory_warlock_12 extends modifier_combination_effect {
+export class modifier_sect_territory_warlock_upheaval_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_territory_warlock_8 extends modifier_combination_effect {
+export class modifier_sect_territory_warlock_upheaval_b extends modifier_combination_effect {
 }

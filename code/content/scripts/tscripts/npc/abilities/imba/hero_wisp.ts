@@ -248,7 +248,7 @@ export class modifier_imba_wisp_tether extends BaseModifier_Plus {
     CC_GetModifierIgnoreMovespeedLimit(): 0 | 1 {
         return 1;
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (IsServer()) {
             if (this.GetParentPlus().HasModifier("modifier_imba_wisp_tether_latch")) {
                 this.GetParentPlus().RemoveModifierByName("modifier_imba_wisp_tether_latch");
@@ -322,7 +322,7 @@ export class modifier_imba_wisp_tether_ally extends BaseModifier_Plus {
             ProjectileManager.CreateLinearProjectile(projectile);
         }
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (IsServer()) {
             this.GetParentPlus().StopSound("Hero_Wisp.Tether.Target");
             ParticleManager.DestroyParticle(this.pfx, false);
@@ -798,7 +798,7 @@ export class modifier_imba_wisp_spirits extends BaseModifier_Plus {
             delete ability.spirits_spiritsSpawned[spirit.TempData().spirit_index];
         }
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (IsServer()) {
             this.GetCasterPlus().SwapAbilities("imba_wisp_spirits_toggle", "imba_wisp_spirits", false, true);
             let ability = this.GetAbilityPlus<imba_wisp_spirits>();
@@ -855,7 +855,7 @@ export class modifier_imba_wisp_spirits_creep_hit extends BaseModifier_Plus {
             this.pfx = ResHelper.CreateParticleEx("particles/units/heroes/hero_wisp/wisp_guardian_explosion_small.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, target, this.GetCasterPlus());
         }
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (IsServer()) {
             ParticleManager.DestroyParticle(this.pfx, false);
         }
@@ -1003,7 +1003,7 @@ export class modifier_imba_wisp_spirit_handler extends BaseModifier_Plus {
             spirit.RemoveModifierByName("modifier_imba_wisp_spirit_handler");
         }
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (IsServer()) {
             let spirit = this.GetParentPlus();
             modifier_imba_wisp_spirits.Explode(this.caster, spirit, this.explosion_radius, this.explosion_damage, this.ability);
@@ -1308,7 +1308,7 @@ export class modifier_imba_wisp_overcharge extends BaseModifier_Plus {
             this.bonus_attack_range = net_table.overcharge_bonus_attack_range || 0;
         }
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (IsServer()) {
             ParticleManager.DestroyParticle(this.overcharge_pfx, false);
             if (!this.GetCasterPlus().HasModifier("modifier_imba_wisp_overcharge")) {
@@ -1542,7 +1542,7 @@ export class modifier_imba_wisp_relocate extends BaseModifier_Plus {
         let timerCP1_y = this.return_time % 10;
         ParticleManager.SetParticleControl(this.relocate_timerPfx, 1, Vector(timerCP1_x, timerCP1_y, 0));
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (IsServer()) {
             EmitSoundOn("Hero_Wisp.TeleportOut", this.GetCasterPlus());
             StopSoundOn("Hero_Wisp.ReturnCounter", this.GetCasterPlus());

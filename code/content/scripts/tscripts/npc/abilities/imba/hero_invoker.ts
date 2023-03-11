@@ -996,7 +996,7 @@ export class modifier_imba_invoker_sun_strike extends BaseModifier_Plus {
             }
         }
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (IsServer()) {
             let search_area = this.area_of_effect + (this.mini_beam_radius / 2);
             let nearby_enemy_units = FindUnitsInRadius(this.caster.GetTeam(), this.target_point, undefined, search_area, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS, FindOrder.FIND_ANY_ORDER, false);
@@ -1048,7 +1048,7 @@ export class modifier_imba_invoker_sun_strike_cataclysm extends BaseModifier_Plu
             ParticleManager.SetParticleControl(sun_strike_beam, 1, Vector(this.area_of_effect, 0, 0));
         }
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (IsServer()) {
             let sun_strike_crater = ParticleManager.CreateParticleForPlayer(this.ability.ability_team_particle_effect, ParticleAttachment_t.PATTACH_POINT, this.target, PlayerResource.GetPlayer(this.target.GetPlayerOwnerID()));
             ParticleManager.SetParticleControl(sun_strike_crater, 0, this.target_point);
@@ -1132,7 +1132,7 @@ export class modifier_imba_invoker_sun_strike_beam_only extends BaseModifier_Plu
             }
         }
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (IsServer()) {
             if (this.show_crater != undefined) {
                 let sun_strike_crater = ParticleManager.CreateParticleForPlayer(this.ability.ability_particle_effect, ParticleAttachment_t.PATTACH_POINT, this.target, PlayerResource.GetPlayer(this.target.GetPlayerOwnerID()));
@@ -1285,7 +1285,7 @@ export class modifier_imba_invoker_cold_snap_stun_duration extends BaseModifier_
         }
         return state;
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (IsServer()) {
             if (this.stun_effect != undefined) {
                 ParticleManager.DestroyParticle(this.stun_effect, false);
@@ -1580,7 +1580,7 @@ export class modifier_imba_invoker_ghost_walk_aura extends BaseModifier_Plus {
             this.SetStackCount(this.enemy_slow);
         }
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (IsServer()) {
             if (this.ghost_walk_effect_frost != undefined) {
                 ParticleManager.DestroyParticle(this.ghost_walk_effect_frost, false);
@@ -1813,7 +1813,7 @@ export class modifier_imba_invoker_alacrity extends BaseModifier_Plus {
             }
         }
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (IsServer()) {
             if (this.alacrity_effect != undefined) {
                 ParticleManager.DestroyParticle(this.alacrity_effect, false);
@@ -1993,7 +1993,7 @@ export class modifier_imba_invoker_forge_spirit extends BaseModifier_Plus {
     CC_GetModifierAttackRangeBonus(): number {
         return this.GetStackCount();
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (IsServer()) {
             let pfxName = "particles/units/heroes/hero_phoenix/phoenix_supernova_death.vpcf";
             let pfx = ResHelper.CreateParticleEx(pfxName, ParticleAttachment_t.PATTACH_WORLDORIGIN, undefined);
@@ -2362,7 +2362,7 @@ export class modifier_imba_invoker_tornado_cyclone extends BaseModifier_Plus {
     }
     BeCreated(kv: any): void {
     }
-    OnRemoved( /** kv */): void {
+    BeRemoved(): void {
         this.SetStackCount(0);
     }
 }
@@ -2466,7 +2466,7 @@ export class modifier_imba_invoker_emp extends BaseModifier_Plus {
             ParticleManager.SetParticleControl(this.emp_effect, 1, Vector(this.area_of_effect, 0, 0));
         }
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (IsServer()) {
             ParticleManager.DestroyParticle(this.emp_effect, false);
             let emp_explosion_effect = ResHelper.CreateParticleEx("particles/units/heroes/hero_invoker/invoker_emp_explode.vpcf", ParticleAttachment_t.PATTACH_CUSTOMORIGIN, undefined);
@@ -2703,7 +2703,7 @@ export class modifier_imba_invoker_ice_wall extends BaseModifier_Plus {
             }
         }
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (this.ice_wall_particle_effect != undefined) {
             for (const [effect] of string.gmatch(this.ice_wall_particle_effect, "([^ ]+)")) {
                 ParticleManager.DestroyParticle(tonumber(effect) as ParticleID, false);
@@ -2776,7 +2776,7 @@ export class modifier_imba_invoker_ice_wall_slow extends BaseModifier_Plus {
             this.SetStackCount(kv.enemy_slow);
         }
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (IsServer()) {
             if (this.ice_wall_effect_aura != undefined) {
             }
@@ -2949,7 +2949,7 @@ export class modifier_imba_invoker_chaos_meteor extends BaseModifier_Plus {
             ParticleManager.SetParticleControl(this.chaos_meteor_fly_particle_effect, 2, Vector(this.chaos_meteor_land_time, 0, 0));
         }
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (IsServer()) {
             this.meteor_dummy.EmitSound("Hero_Invoker.ChaosMeteor.Impact");
             this.meteor_dummy.AddNewModifier(this.caster, this.ability, "modifier_imba_invoker_chaos_meteor_aura", {
@@ -3369,7 +3369,7 @@ export class modifier_imba_invoker_deafening_blast extends BaseModifier_Plus {
             }
         }
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (IsServer()) {
             imba_invoker_deafening_blast.RadialDeafeningBlast(this.caster, this.ability, this.target_point, this.num_deafening_blasts);
         }
@@ -3434,7 +3434,7 @@ export class modifier_imba_invoker_deafening_blast_knockback extends BaseModifie
             this.GetParentPlus().SetAbsOrigin(GetGroundPosition(new_location, this.GetParentPlus()));
         }
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (IsServer()) {
             ParticleManager.DestroyParticle(this.knockback_effect, false);
             FindClearSpaceForUnit(this.GetParentPlus(), this.GetParentPlus().GetAbsOrigin(), true);

@@ -8,56 +8,6 @@ export module PropertyCalculate {
     export let call_unit: EntityIndex;
     export let call_func: string;
 
-    /**
-    * 获取所有装饰器注册的buff
-    * @Both
-    * @param hCaster
-    * @returns
-    */
-    export function GetAllModifiersInfo<T extends IBaseModifier_Plus>(hCaster: IBaseNpc_Plus): { [v: string]: Array<T> } {
-        if (hCaster == null) {
-            return;
-        }
-        if (hCaster.__allModifiersInfo__ == null) {
-            hCaster.__allModifiersInfo__ = {};
-        }
-        return hCaster.__allModifiersInfo__;
-    }
-    /**
-     * 
-     * @param hCaster 
-     * @returns 
-     */
-    export function RegModifiersInfo<T extends IBaseModifier_Plus>(buff: T, isReg: boolean) {
-        if (buff.__AllRegisterProperty == null && buff.__AllRegisterFunction == null) {
-            return;
-        }
-        let info = GetAllModifiersInfo(buff.GetParentPlus());
-        let buffname = buff.GetName();
-        if (isReg) {
-            if (info[buffname] == null) {
-                info[buffname] = [];
-            }
-            info[buffname].push(buff);
-        }
-        else {
-            // 删除数据
-            if (info && info[buffname]) {
-                let len = info[buffname].length;
-                for (let i = 0; i < len; i++) {
-                    if (buff.UUID == info[buffname][i].UUID) {
-                        // 删除元素
-                        info[buffname].splice(i, 1);
-                        break;
-                    }
-                }
-                if (info[buffname].length == 0) {
-                    delete info[buffname];
-                }
-            }
-        }
-    }
-
     export function RunModifierFunc<T extends IBaseModifier_Plus>(buff: T, params: modifierfunction, event: any) {
         if (buff.__safedestroyed__) { return }
         let _r = 0;
@@ -125,16 +75,16 @@ export module PropertyCalculate {
         if (!GFuncEntity.IsValid(target)) {
             return _r
         }
-        let info = GetAllModifiersInfo(target)
+        let info = target.__AllModifiersInfo__;
         if (info == null) return 0;
         for (let ModifierName in info) {
-            let allM: Array<IModifier_Plus> = info[ModifierName];
+            let allM = info[ModifierName];
             for (let m of allM) {
                 if (m.__safedestroyed__) { continue; }
-                let _Property = m.__AllRegisterProperty
-                let _Function = m.__AllRegisterFunction
-                while (k.length > 0) {
-                    let p = k.shift();
+                let _Property = m.__AllRegisterProperty;
+                let _Function = m.__AllRegisterFunction;
+                if (_Property == null && _Function == null) { continue; }
+                for (let p of k) {
                     let _sum = (PropertyConfig.UNIQUE_PROPERTY.indexOf(p) == -1);
                     const _k = p + "";
                     if (_Property && _Property[_k]) {

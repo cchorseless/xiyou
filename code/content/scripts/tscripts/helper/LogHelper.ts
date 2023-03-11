@@ -119,9 +119,9 @@ if (!IsInToolsMode()) {
                 else {
                     errmsg = luatrace
                 }
-                GGameCache.allErrorInfo[luatrace] = pcall(() => {
-                    GGameServiceSystem.GetInstance().SendErrorLog(errmsg);
-                })
+                // GGameCache.allErrorInfo[luatrace] = pcall(() => {
+                //     GGameServiceSystem.GetInstance().SendErrorLog(errmsg);
+                // })
             }
         }
         return trace as any

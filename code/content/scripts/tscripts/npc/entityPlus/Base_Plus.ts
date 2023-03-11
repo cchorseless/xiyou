@@ -300,11 +300,14 @@ export class BaseModifier {
     public AllowIllusionDuplicate() {
         return false;
     }
-    /**初始化自己，OnCreated和OnRefresh都会调用 */
-    public Init(params?: IModifierTable) {
-    }
+    /**
+     * @Both
+     * 初始化自己，OnCreated和OnRefresh都会调用 
+     * */
+    public Init?(params?: IModifierTable): void;
     public BeCreated?(params?: IModifierTable): void;
     public BeRefresh?(params?: IModifierTable): void;
+    public BeRemoved?(): void;
     public BeDestroy?(): void;
     /**
      * modifier_property 注册方法的补充
@@ -359,9 +362,9 @@ export class BaseModifier {
         }
         (params as IModifierTable).IsOnCreated = true;
         (params as IModifierTable).IsOnRefresh = false;
-        this.Init(params);
+        this.Init && this.Init(params);
         this.BeCreated && this.BeCreated(params);
-        PropertyCalculate.RegModifiersInfo(this, true);
+        this.GetParentPlus().RegModifiersInfo(this, true);
         GGameCache.RegBuff(this, true);
     }
 
@@ -372,14 +375,13 @@ export class BaseModifier {
         this.__safedestroyed__ = false;
         (params as IModifierTable).IsOnCreated = false;
         (params as IModifierTable).IsOnRefresh = true;
-        this.Init(params);
+        this.Init && this.Init(params);
         this.BeRefresh && this.BeRefresh(params);
     }
-    public OnDestroy() {
-        if (this.__safedestroyed__) { return; }
-        this.__safedestroyed__ = true;
-        this.BeDestroy && this.BeDestroy();
-        PropertyCalculate.RegModifiersInfo(this, false);
+
+    public OnRemoved() {
+        this.BeRemoved && this.BeRemoved();
+        this.GetParentPlus().RegModifiersInfo(this, false);
         GGameCache.RegBuff(this, false);
         this.__AllRegisterFunction = null;
         this.__AllRegisterProperty = null;
@@ -387,6 +389,11 @@ export class BaseModifier {
         // 计时器处理
         GTimerHelper.ClearAll(this);
         this.StartIntervalThink(-1);
+    }
+    public OnDestroy() {
+        if (this.__safedestroyed__) { return; }
+        this.__safedestroyed__ = true;
+        this.BeDestroy && this.BeDestroy();
     }
     /**重载 
      * @Both
@@ -404,8 +411,6 @@ export class BaseNpc implements ET.IEntityRoot {
     __IN_DOTA_NAME__?: string;
     /**对应dota内的数据 */
     __IN_DOTA_DATA__?: any;
-    /**所有的BUFF信息 */
-    __allModifiersInfo__?: { [v: string]: Array<any> };
     private __SpawnedHandler__?: Array<IGHandler>;
 
     /**
@@ -649,7 +654,7 @@ LogHelper.print(`-------------------setmetatable IsServer: ${IsServer()}--------
 setmetatable(BaseDataDriven.prototype, { __index: IsServer() ? CDOTA_Ability_DataDriven : CDOTA_Ability_DataDriven });
 setmetatable(BaseAbility.prototype, { __index: IsServer() ? CDOTA_Ability_Lua : C_DOTA_Ability_Lua });
 setmetatable(BaseItem.prototype, { __index: IsServer() ? CDOTA_Item_Lua : C_DOTA_Item_Lua });
-setmetatable(BaseModifier.prototype, { __index: IsServer() ? CDOTA_Modifier_Lua : C_DOTA_Modifier_Lua });
+setmetatable(BaseModifier.prototype, { __index: IsServer() ? CDOTA_Modifier_Lua : CDOTA_Modifier_Lua });
 setmetatable(BaseNpc.prototype, { __index: IsServer() ? CDOTA_BaseNPC : C_DOTA_BaseNPC });
 setmetatable(BaseNpc_Hero.prototype, { __index: IsServer() ? CDOTA_BaseNPC_Hero : C_DOTA_BaseNPC_Hero });
 
@@ -671,7 +676,8 @@ export const registerAbility = (name?: string) => (ability: new () => CDOTA_Abil
     env[name].Spawn = function () {
         this.____constructor();
         if (originalSpawn) {
-            pcall(originalSpawn, this);
+            GHandler.create(this, originalSpawn).run();
+            // pcall(originalSpawn, this);
         }
     };
     CCShare.Reloadable(ability);
@@ -695,7 +701,8 @@ export const registerModifier = (modifierName?: string, modifierDescription?: st
     env[name].OnCreated = function (parameters: any) {
         this.____constructor();
         if (originalOnCreated) {
-            pcall(originalOnCreated, this, parameters);
+            GHandler.create(this, originalOnCreated).runWith([parameters]);
+            // pcall(originalOnCreated, this, parameters);
         }
     };
     let type = LuaModifierType.LUA_MODIFIER_MOTION_NONE;

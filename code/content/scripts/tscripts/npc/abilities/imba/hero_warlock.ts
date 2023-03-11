@@ -942,7 +942,7 @@ export class modifier_imba_rain_of_chaos_demon_link extends BaseModifier_Plus {
             }
         }
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         for (let i = 0; i < GameFunc.GetCount(this.demon_table); i++) {
             if (this.particle_table[i]) {
                 this.demon_table[i].Kill(this.ability, this.caster);

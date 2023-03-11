@@ -273,7 +273,7 @@ export class modifier_imba_mars_spear_heaven_spear extends BaseModifier_Plus {
         ParticleManager.SetParticleControl(pre_spear, 2, this.origin);
         this.AddParticle(pre_spear, false, false, -1, false, false);
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (!IsServer()) {
             return;
         }
@@ -427,7 +427,7 @@ export class modifier_imba_mars_spear extends BaseModifierMotionHorizontal_Plus 
         }
     }
 
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (!IsServer()) {
             return;
         }
@@ -494,7 +494,7 @@ export class modifier_imba_mars_spear_debuff extends BaseModifier_Plus {
     }
     BeRefresh(kv: any): void {
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (!IsServer()) {
             return;
         }
@@ -650,7 +650,7 @@ export class modifier_imba_mars_gods_rebuke extends BaseModifier_Plus {
     }
     BeRefresh(kv: any): void {
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
     }
     BeDestroy(): void {
     }
@@ -741,7 +741,7 @@ export class modifier_imba_mars_bulwark extends BaseModifier_Plus {
         this.angle_front = this.GetSpecialValueFor("forward_angle") / 2;
         this.angle_side = this.GetSpecialValueFor("side_angle") / 2;
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
     }
     BeDestroy(): void {
     }
@@ -975,7 +975,7 @@ export class modifier_imba_mars_arena_of_blood extends BaseModifier_Plus {
     }
     BeRefresh(kv: any): void {
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
     }
     BeDestroy(): void {
     }
@@ -1076,7 +1076,7 @@ export class modifier_imba_mars_arena_of_blood_blocker extends BaseModifier_Plus
     }
     BeRefresh(kv: any): void {
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
     }
     BeDestroy(): void {
         if (!IsServer()) {
@@ -1403,7 +1403,7 @@ export class modifier_imba_mars_arena_of_blood_spear_aura extends BaseModifier_P
     }
     BeRefresh(kv: any): void {
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
     }
     BeDestroy(): void {
     }
@@ -1482,7 +1482,7 @@ export class modifier_imba_mars_arena_of_blood_thinker extends BaseModifier_Plus
             this.PlayEffects();
         }
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (!IsServer()) {
             return;
         }
@@ -1611,7 +1611,7 @@ export class modifier_imba_mars_arena_of_blood_wall_aura extends BaseModifier_Pl
     }
     BeRefresh(kv: any): void {
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
     }
     BeDestroy(): void {
     }
@@ -1730,7 +1730,8 @@ export class modifier_imba_mars_arena_of_blood_scepter extends BaseModifierMotio
         this.time_elapsed = 0;
         this.leap_z = 0;
         this.jump_speed = this.GetSpecialValueFor("scepter_jump_speed");
-        this.GetParentPlus().StartGesture(GameActivity_t.ACT_DOTA_CAST1_STATUE);
+        // this.GetParentPlus().StartGesture(GameActivity_t.ACT_DOTA_CAST1_STATUE);
+
         this.AddTimer(FrameTime(), () => {
             this.distance = (this.GetParentPlus().GetAbsOrigin() - this.target_point as Vector).Length2D();
             this.jump_time = this.distance / this.jump_speed;
@@ -1771,6 +1772,6 @@ export class modifier_imba_mars_arena_of_blood_scepter extends BaseModifierMotio
         }
         BaseModifier_Plus.CreateBuffThinker(this.GetParentPlus(), this.GetAbilityPlus(), "modifier_imba_mars_arena_of_blood_thinker", {}, this.target_point, this.GetCasterPlus().GetTeamNumber(), false);
         this.GetParentPlus().SetUnitOnClearGround();
-        this.GetParentPlus().FadeGesture(GameActivity_t.ACT_DOTA_CAST1_STATUE);
+        // this.GetParentPlus().FadeGesture(GameActivity_t.ACT_DOTA_CAST1_STATUE);
     }
 }

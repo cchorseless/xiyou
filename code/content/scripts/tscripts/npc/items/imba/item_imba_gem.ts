@@ -109,7 +109,7 @@ export class modifier_item_imba_gem_of_true_sight extends BaseModifier_Plus {
             this.DropGem();
         }
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (!IsServer()) {
             return;
         }
@@ -156,7 +156,7 @@ export class modifier_item_imba_gem_of_true_sight_dropped extends BaseModifier_P
             }
         }
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (!IsServer()) {
             return;
         }

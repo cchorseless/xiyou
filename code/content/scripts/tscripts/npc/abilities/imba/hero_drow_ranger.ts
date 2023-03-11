@@ -280,7 +280,7 @@ export class modifier_imba_frost_arrows_slow extends BaseModifier_Plus {
         this.stacks_to_freeze = this.ability.GetSpecialValueFor("stacks_to_freeze");
         this.freeze_duration = this.ability.GetSpecialValueFor("freeze_duration");
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (IsServer()) {
             let target_stacks = this.GetStackCount();
             let stack_count = this.caster.findBuffStack(this.caster_modifier, this.caster);
@@ -756,7 +756,7 @@ export class modifier_imba_gust_movement extends BaseModifierMotionHorizontal_Pl
             }
         }
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (IsServer()) {
             this.caster.SetUnitOnClearGround();
         }

@@ -26,7 +26,7 @@
 // }
 // BeRefresh(kv:any):void {
 // }
-// OnRemoved():void {
+// BeRemoved():void {
 // }
 // BeDestroy():void {
 // }

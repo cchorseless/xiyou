@@ -744,7 +744,7 @@ export class modifier_imba_silencer_glaives_talent_effect_procced extends BaseMo
         let particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_silencer/silencer_last_word_dmg.vpcf", ParticleAttachment_t.PATTACH_POINT_FOLLOW, this.GetParentPlus());
         ParticleManager.ReleaseParticleIndex(particle);
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (IsServer()) {
             this.GetParentPlus().RemoveModifierByName("modifier_imba_silencer_glaives_int_damage");
         }

@@ -672,7 +672,7 @@ export class modifier_zuus_nimbus_storm extends BaseModifier_Plus {
     CC_GetAbsoluteNoDamagePure(p_0: ModifierAttackEvent,): 0 | 1 {
         return 1;
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (IsServer()) {
             ParticleManager.DestroyParticle(this.zuus_nimbus_particle, false);
             let caster = this.GetCasterPlus();
@@ -884,7 +884,7 @@ export class modifier_imba_ball_lightning extends BaseModifier_Plus {
     CC_GetAbsoluteNoDamagePure(p_0: ModifierAttackEvent,): 0 | 1 {
         return 1;
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (IsServer()) {
             this.GetCasterPlus().AddNewModifier(undefined, undefined, "modifier_imba_zuus_on_nimbus", {});
         }
@@ -1160,7 +1160,7 @@ export class modifier_imba_zuus_thundergods_awakening extends BaseModifier_Plus 
             }
         }
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (IsServer()) {
             ParticleManager.DestroyParticle(this.static_field, true);
         }

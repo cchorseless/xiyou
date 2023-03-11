@@ -198,7 +198,7 @@ export class modifier_imba_juggernaut_blade_fury extends BaseModifier_Plus {
             }
         }
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (IsServer()) {
             this.GetCasterPlus().StopSound("Hero_Juggernaut.BladeFuryStart");
             this.GetCasterPlus().EmitSound("Hero_Juggernaut.BladeFuryStop");
@@ -1232,7 +1232,7 @@ export class modifier_imba_juggernaut_blade_dance_secret_blade extends BaseModif
             this.GetAbilityPlus().GetCooldown(this.GetAbilityPlus().GetLevel());
         }
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         this.GetAbilityPlus().GetBehavior = () => {
             return DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_PASSIVE;
         }

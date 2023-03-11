@@ -392,7 +392,7 @@ export class modifier_imba_slark_pounce extends BaseModifierMotionBoth_Plus {
         this.BeginMotionOrDestroy()
     }
 
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (!IsServer()) {
             return;
         }

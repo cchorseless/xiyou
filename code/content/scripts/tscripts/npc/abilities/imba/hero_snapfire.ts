@@ -161,7 +161,7 @@ export class modifier_imba_snapfire_scatterblast_slow extends BaseModifier_Plus 
     BeRefresh(kv: any): void {
         this.slow = -this.GetSpecialValueFor("movement_slow_pct");
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
     }
     BeDestroy(): void {
     }
@@ -426,7 +426,7 @@ export class modifier_imba_snapfire_lil_shredder extends BaseModifier_Plus {
         let sound_cast = "Hero_Snapfire.ExplosiveShells.Cast";
         EmitSoundOn(sound_cast, this.GetParentPlus());
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
     }
     BeDestroy(): void {
         if (!IsServer()) {
@@ -571,7 +571,7 @@ export class modifier_imba_snapfire_lil_shredder_debuff extends BaseModifier_Plu
         }
         this.IncrementStackCount();
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
     }
     BeDestroy(): void {
     }
@@ -874,7 +874,7 @@ export class modifier_imba_snapfire_magma_burn_slow extends BaseModifier_Plus {
     }
     BeRefresh(kv: any): void {
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
     }
     BeDestroy(): void {
     }
@@ -931,7 +931,7 @@ export class modifier_imba_snapfire_mortimer_kisses_thinker extends BaseModifier
         this.start = true;
         this.StopEffects();
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
     }
     BeDestroy(): void {
         if (!IsServer()) {

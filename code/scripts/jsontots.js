@@ -34,7 +34,9 @@ function jsontots() {
     import { Tables } from "./Types";
     const JSONData : {[k:string]:any[]} = { ${filestr} };
     function JsonDataLoader(filename:string){
-        return JSONData[filename];
+      const d = JSONData[filename];
+      delete JSONData[filename];
+      return d;
     };
     export function RefreshConfig(data: { [k: string]: any }) {
       for (let k in data) {

@@ -195,7 +195,7 @@ export class modifier_mirana_1_thinker extends modifier_particle_thinker {
             }
         }
     }
-    OnRemoved() {
+    BeRemoved(): void {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()

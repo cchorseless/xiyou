@@ -114,12 +114,7 @@ export class BaseNpc_Plus extends BaseNpc {
         return false;
     }
 
-    /**
-     * 是否恐惧
-     */
-    IsFeared?() {
-        return false;
-    }
+
     /**是否沉睡 */
     IsHypnotized?() {
         return false;

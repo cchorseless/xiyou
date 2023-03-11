@@ -127,7 +127,7 @@ export class modifier_imba_tiny_tree_animation extends BaseModifier_Plus {
             });
         }
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
             AnimationHelper.EndAnimation(caster);
@@ -238,7 +238,7 @@ export class modifier_imba_tiny_tree extends BaseModifier_Plus {
             }
         }
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
             let ability_slot3 = caster.findAbliityPlus<imba_tiny_tree_throw>("imba_tiny_tree_throw");
@@ -1197,7 +1197,7 @@ export class modifier_tiny_toss_scepter_bounce extends BaseModifierMotionVertica
             }
         }
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (IsServer()) {
             let damage = this.toss_damage * this.scepter_bounce_damage_pct * 0.01;
             let radius = this.GetSpecialValueFor("radius") + this.caster.findBuff<modifier_imba_tiny_rolling_stone>("modifier_imba_tiny_rolling_stone").GetStackCount() * this.caster.findAbliityPlus<imba_tiny_grow>("imba_tiny_grow").GetSpecialValueFor("rolling_stones_aoe");

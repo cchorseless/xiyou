@@ -1,8 +1,10 @@
 
 import { LogHelper } from "../../../helper/LogHelper";
+import { BaseModifier_Plus } from "../../../npc/entityPlus/BaseModifier_Plus";
+import { CombinationConfig } from "../../../shared/CombinationConfig";
 import { Dota } from "../../../shared/Gen/Types";
 import { ET, serializeETProps } from "../../../shared/lib/Entity";
-import { CombEffectComponent } from "./CombEffectComponent";
+import { ERoundBoard } from "../Round/ERoundBoard";
 import { ECombinationLabelItem } from "./ECombinationLabelItem";
 
 
@@ -24,12 +26,8 @@ export class ECombination extends ET.Entity {
 
     onAwake(CombinationId: string): void {
         this.combinationId = CombinationId;
-        this.AddComponent(GGetRegClass<typeof CombEffectComponent>("CombEffectComponent"));
     }
 
-    CombEffectComp() {
-        return this.GetComponent(GGetRegClass<typeof CombEffectComponent>("CombEffectComponent"));
-    }
 
     addConfig(c: Dota.CombinationConfigRecord) {
         this.config[c.index] = c;
@@ -121,5 +119,111 @@ export class ECombination extends ET.Entity {
             // this.CancelEffect();
         }
     }
+    ApplyBuffEffect(isActive: boolean = false) {
+        let configMap = this.config;
+        if (configMap) {
+            let bufflist = new Map<string, string>();
+            for (let key in configMap) {
+                let config = configMap[key];
+                let combuff = config.acitveCommonEffect;
+                let spebuff = config.acitveSpecialEffect;
+                if (combuff && combuff.length > 0) {
+                    combuff.split("|").forEach(buff => {
+                        buff && bufflist.set(buff, config.Abilityid);
+                    })
+                }
+                if (spebuff && spebuff.length > 0) {
+                    spebuff.split("|").forEach(buff => {
+                        buff && bufflist.set(buff, config.Abilityid);
+                    })
+                }
+            }
+            bufflist.forEach((abilityname, buff) => {
+                if (buff && buff.length > 0) {
+                    let buffconfig = GJSONConfig.BuffEffectConfig.get(buff);
+                    let type = GGetRegClass<typeof BaseModifier_Plus>(buff);
+                    if (buffconfig && type) {
+                        let battleunits: IBattleUnitEntityRoot[];
+                        switch (buffconfig.target) {
+                            case CombinationConfig.EEffectTargetType.self:
+                                battleunits = this.getAllBuilding().filter(unit => {
+                                    let root = unit.GetDomain<IBaseNpc_Plus>();
+                                    if (root) {
+                                        if (root.FindAbilityByName(abilityname)) {
+                                            return true;
+                                        }
+                                        if (root.FindItemInInventory(abilityname)) {
+                                            return true;
+                                        }
+                                    }
+                                    return false;
+                                });
+                                break;
+                            case CombinationConfig.EEffectTargetType.hero:
+                                battleunits = this.getAllBuilding();
+                                break;
+                            case CombinationConfig.EEffectTargetType.team:
+                                battleunits = GPlayerEntityRoot.GetOneInstance(this.BelongPlayerid).BuildingManager().getAllBattleBuilding(true, false)
+                                break;
+                            case CombinationConfig.EEffectTargetType.enemyteam:
+                                battleunits = GPlayerEntityRoot.GetOneInstance(this.BelongPlayerid).EnemyManagerComp().getAllAliveEnemy()
+                                break;
+                        };
+                        if (battleunits) {
+                            if (isActive) {
+                                battleunits.forEach(unit => {
+                                    let entity: IBaseNpc_Plus;
+                                    if (unit.IsBuilding()) {
+                                        let RuntimeBuilding = unit.As<IBuildingEntityRoot>().RuntimeBuilding;
+                                        if (RuntimeBuilding) {
+                                            entity = RuntimeBuilding.GetDomain<IBaseNpc_Plus>();
+                                        }
+                                    }
+                                    else {
+                                        entity = unit.GetDomain<IBaseNpc_Plus>();
+                                    }
+                                    if (entity) {
+                                        type.applyOnly(entity, entity)
+                                    }
+                                })
+                            }
+                            else {
+                                battleunits.forEach(unit => {
+                                    let entity: IBaseNpc_Plus;
+                                    if (unit.IsBuilding()) {
+                                        let RuntimeBuilding = unit.As<IBuildingEntityRoot>().RuntimeBuilding;
+                                        if (RuntimeBuilding) {
+                                            entity = RuntimeBuilding.GetDomain<IBaseNpc_Plus>();
+                                        }
+                                    }
+                                    else {
+                                        entity = unit.GetDomain<IBaseNpc_Plus>();
+                                    }
+                                    if (entity) {
+                                        type.remove(entity)
+                                    }
+                                })
+                            }
+                        }
+                    }
+                }
+            })
+        }
+    }
 
+    OnRoundStartBattle() {
+        LogHelper.print("OnRoundStartBattle", this.combinationId);
+        this.ApplyBuffEffect(true);
+    }
+
+    OnRoundStartPrize(round: ERoundBoard) {
+        let combinationName = this.combinationName;
+        let combinationId = this.combinationId;
+        if (combinationName === CombinationConfig.ECombinationLabel.sect_suck_blood) {
+
+        }
+        else if (combinationName === CombinationConfig.ECombinationLabel.sect_suck_blood) {
+
+        }
+    }
 }

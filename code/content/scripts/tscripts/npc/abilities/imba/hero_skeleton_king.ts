@@ -706,7 +706,7 @@ export class modifier_imba_mortal_strike_skeleton extends BaseModifier_Plus {
         }));
         this.StartIntervalThink(-1);
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (!IsServer()) {
             return;
         }

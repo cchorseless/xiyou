@@ -8,6 +8,7 @@ export class EWearableItem extends ET.Entity {
     bundleId: string;
     readonly isDressUp: boolean = false;
     readonly itemDef: string;
+    readonly wearLabel: string;
     readonly replaceParticles: { [k: string]: string } = {};
     readonly replaceSounds: { [k: string]: string } = {};
     readonly replaceAbilityIcon: { [k: string]: string } = {};
@@ -25,14 +26,15 @@ export class EWearableItem extends ET.Entity {
     model?: CBaseModelEntity;
     additional_wearable?: CBaseModelEntity[];
     addBuff?: CDOTA_Buff[];
-    onAwake(itemDef: string) {
+    onAwake(itemDef: string, wearLabel: string) {
         (this.itemDef as any) = itemDef;
+        (this.wearLabel as any) = wearLabel;
     }
     getSlot() {
         let comp = this.GetParent<WearableComponent>();
         let config = comp.GetWearConfig(this.itemDef);
-        if (config.item_slot && config.item_slot.length > 0) {
-            return config.item_slot;
+        if (config.itemSlot && config.itemSlot.length > 0) {
+            return config.itemSlot;
         }
         return WearableConfig.EWearableType.weapon;
     }
@@ -215,9 +217,9 @@ export class EWearableItem extends ET.Entity {
             attach_entity = this.model;
         }
         let pointinfo: any;
-        if (config.control_point) {
+        if (config.controlPoint.length > 0) {
             let control_point: any[] = [];
-            config.control_point.split("|").forEach(key => {
+            config.controlPoint.forEach(key => {
                 if (key) {
                     control_point.push(json.decode(key)[0])
                 }
@@ -244,7 +246,7 @@ export class EWearableItem extends ET.Entity {
             let cps: { [K: string]: any } = pointinfo["control_points"];
             for (let cp_table of Object.values(cps)) {
                 if (!cp_table.style || tostring(cp_table.style) == sStyle) {
-                    let control_point_index = cp_table.control_point_index;
+                    let control_point_index = GToNumber(cp_table.control_point_index);
                     if (cp_table.attach_type == "vector") {
                         //  控制点设置向量
                         let vPosition = GFuncVector.StringToVector(cp_table.cp_position);
@@ -266,6 +268,7 @@ export class EWearableItem extends ET.Entity {
                         attach_type = WearableConfig.EWearableAttach[cp_table.attach_type] as any;
                         //  绑定饰品模型，且attachment为空饰品没attachment会让特效消失
                         if (cp_table.attach_entity != "this" || attachment) {
+                            GLogHelper.print(control_point_index, attach_type, attachment, position)
                             ParticleManager.SetParticleControlEnt(p, control_point_index, inner_attach_entity, attach_type, attachment, position, true);
                         }
                     }
@@ -380,7 +383,7 @@ export class EWearableItem extends ET.Entity {
         let slot = this.getSlot();
         comp.TakeOffSlot(slot);
         (this.isDressUp as any) = true;
-        let sModel_player = config.model_player;
+        let sModel_player = config.modelPlayer;
         this.style = sStyle;
         //  生成饰品模型
         if (sModel_player && this.model == null) {
@@ -409,26 +412,32 @@ export class EWearableItem extends ET.Entity {
             this.model.RemoveEffects(EntityEffects.EF_NODRAW);
         }
         // 款式
-        if (config.styles) {
+        if (config.styles && config.styles != "") {
             let styleinfo = json.decode(config.styles)[0];
-            //  不同款式设置模型皮肤
-            let style_table = styleinfo[sStyle];
-            if (style_table) {
-                if (style_table.model_player && style_table.model_player != sModel_player) {
-                    this.model.SetModel(style_table.model_player);
-                }
-                if (style_table.skin && this.model) {
-                    this.model.SetSkin(tonumber(style_table.skin));
-                }
-                if (style_table.skin && !this.model) {
-                    //  召唤物款式， 目前仅发现德鲁伊熊灵
-                    // this.summon_skin = style_table.skin;
+            if (styleinfo == null) {
+                GLogHelper.print(config.styles)
+            }
+            if (styleinfo) {
+                //  不同款式设置模型皮肤
+                let style_table = styleinfo[sStyle];
+                if (style_table) {
+                    if (style_table.model_player && style_table.model_player != sModel_player) {
+                        this.model.SetModel(style_table.model_player);
+                    }
+                    if (style_table.skin && this.model) {
+                        this.model.SetSkin(tonumber(style_table.skin));
+                    }
+                    if (style_table.skin && !this.model) {
+                        //  召唤物款式， 目前仅发现德鲁伊熊灵
+                        // this.summon_skin = style_table.skin;
+                    }
                 }
             }
+
         }
-        if (config.asset_modifier) {
+        if (config.assetModifier.length > 0) {
             let asset_modifiers: any[] = [];
-            config.asset_modifier.split("|").forEach(key => {
+            config.assetModifier.forEach(key => {
                 if (key) {
                     asset_modifiers.push(json.decode(key)[0])
                 }
@@ -627,4 +636,5 @@ export class EWearableItem extends ET.Entity {
             this.addBuff = null;
         }
     }
+
 }

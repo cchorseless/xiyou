@@ -1041,6 +1041,8 @@ declare global {
         __bIsFirstSpawn: boolean;
         /**创建的实体 */
         __CreateChildren__: IBaseNpc_Plus[];
+        /**所有的BUFF信息 */
+        __AllModifiersInfo__: { [v: string]: Array<IBaseModifier_Plus> };
         __TempData: { [k: string]: any };
         /**
          * @Server 删除时回调
@@ -1106,6 +1108,14 @@ declare global {
          * @Both
          */
         RegOwnerSelf(b: boolean): void;
+
+        /**
+         * 注册BUFF
+         * @Both
+         * @param buff 
+         * @param isReg 
+         */
+        RegModifiersInfo<T extends IBaseModifier_Plus>(buff: T, isReg: boolean): void;
         /**
          * 通过名字找子节点
          * @Both
@@ -1220,7 +1230,7 @@ declare global {
         removeBuff<T extends CDOTA_Buff>(buffname: string, caster?: CDOTA_BaseNPC): void;
 
         /**
-         * @Server
+         * @Both
          * @param buffname 
          * @param caster 
          * @returns 
@@ -1334,6 +1344,61 @@ BaseNPC.FindChildByFilter = function (func: (unit: IBaseNpc_Plus, index: number)
         }
     }
     return r;
+}
+
+BaseNPC.RegModifiersInfo = function (buff: IBaseModifier_Plus, isReg: boolean) {
+    this.__AllModifiersInfo__ = this.__AllModifiersInfo__ || {};
+    let buffname = buff.GetName();
+    if (isReg) {
+        if (this.__AllModifiersInfo__[buffname] == null) {
+            this.__AllModifiersInfo__[buffname] = [];
+        }
+        this.__AllModifiersInfo__[buffname].push(buff);
+    }
+    else {
+        // 删除数据
+        if (this.__AllModifiersInfo__[buffname]) {
+            let len = this.__AllModifiersInfo__[buffname].length;
+            for (let i = 0; i < len; i++) {
+                if (buff.UUID == this.__AllModifiersInfo__[buffname][i].UUID) {
+                    // 删除元素
+                    this.__AllModifiersInfo__[buffname].splice(i, 1);
+                    break;
+                }
+            }
+            if (this.__AllModifiersInfo__[buffname].length == 0) {
+                delete this.__AllModifiersInfo__[buffname];
+            }
+        }
+    }
+}
+
+BaseNPC.findBuff = function (buffname: string, caster: CDOTA_BaseNPC = null) {
+    if (buffname && this.HasModifier(buffname)) {
+        if (IsServer()) {
+            if (caster) {
+                return this.FindModifierByNameAndCaster(buffname, caster);
+            }
+            return this.FindModifierByName(buffname);
+        }
+        else {
+            let modifiers = this.__AllModifiersInfo__ || {};
+            if (modifiers[buffname]) {
+                let len = modifiers[buffname].length;
+                for (let i = 0; i < len; i++) {
+                    const buff = modifiers[buffname][i];
+                    if (caster) {
+                        if (buff.GetCaster() == caster) {
+                            return buff;
+                        }
+                    }
+                    else {
+                        return buff;
+                    }
+                }
+            }
+        }
+    }
 }
 
 BaseNPC.InitActivityModifier = function () {
@@ -1508,7 +1573,14 @@ BaseNPC.findBuffStack = function (buffname: string, caster: CDOTA_BaseNPC = null
     return this.GetModifierStackCount(buffname, caster)
 }
 if (IsServer()) {
-
+    BaseNPC.UpdateOnRemove = function () {
+        if (this.__TempData) {
+            for (let k in this.__TempData) {
+                delete this.__TempData[k];
+            }
+            this.__TempData = null;
+        }
+    }
     BaseNPC.GetOwnerPlus = function () {
         return this.GetOwner() as IBaseNpc_Plus;
     }
@@ -1586,14 +1658,7 @@ if (IsServer()) {
             }
         }
     }
-    BaseNPC.findBuff = function (buffname: string, caster: CDOTA_BaseNPC = null) {
-        if (buffname && this.HasModifier(buffname)) {
-            if (caster) {
-                return this.FindModifierByNameAndCaster(buffname, caster);
-            }
-            return this.FindModifierByName(buffname);
-        }
-    }
+
 
     BaseNPC.SetUnitOnClearGround = function () {
         GTimerHelper.AddTimer(1, GHandler.create(this, () => {

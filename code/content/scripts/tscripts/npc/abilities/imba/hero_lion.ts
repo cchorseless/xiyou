@@ -1058,7 +1058,7 @@ export class modifier_imba_finger_of_death_delay extends BaseModifier_Plus {
     IsPurgable(): boolean {
         return false;
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (!IsServer()) {
             return;
         }

@@ -153,7 +153,7 @@ export class modifier_leshrac_1_thinker extends BaseModifier_Plus {
             this.damage_type = this.GetAbilityPlus().GetAbilityDamageType()
         }
     }
-    OnRemoved() {
+    BeRemoved(): void {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()

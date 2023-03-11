@@ -1019,7 +1019,7 @@ export class modifier_imba_keeper_of_the_light_will_o_wisp extends BaseModifier_
             }
         }
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (!IsServer()) {
             return;
         }

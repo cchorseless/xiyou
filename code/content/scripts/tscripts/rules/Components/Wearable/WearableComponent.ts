@@ -17,41 +17,16 @@ export class WearableComponent extends ET.Component {
     onAwake(dotaHeroName: string): void {
         (this.sHeroName as any) = dotaHeroName;
         this.WearDefaults();
-        // TimerHelper.addTimer(5, () => {
-        //     this.Wear(21182);
-        //     // this.Wear(4336);
-        //     // this.Wear(4337);
-        //     // this.Wear(4338);
-        // let domain = this.GetDomain<IBaseNpc_Plus>();
-        // domain.NotifyWearablesOfModelChange(true)
-        // }, this)
-        // TimerHelper.addTimer(10, () => {
-        //     this.SwitchPersona(true);
-        //     // this.Wear(4336);
-        //     // this.Wear(4337);
-        //     // this.Wear(4338);
-        // let domain = this.GetDomain<IBaseNpc_Plus>();
-        // domain.NotifyWearablesOfModelChange(true)
-        // },this)
     }
 
     WearDefaults() {
-        if (this.sHeroName == null || this.sHeroName.length == 0) {
-            return
-        }
-        let wearConfig;
-        let etroot = this.Domain.ETRoot;
-        if (etroot.AsValid<IBuildingEntityRoot>("BuildingEntityRoot")) {
-            wearConfig = etroot.As<IBuildingEntityRoot>().Config().Creature?.AttachWearables;
-        }
-        else if (etroot.AsValid<IEnemyUnitEntityRoot>("EnemyUnitEntityRoot")) {
-            wearConfig = etroot.As<IEnemyUnitEntityRoot>().Config().Creature?.AttachWearables;
-        }
+        let Creature = KVHelper.GetUnitData(this.GetDomain<IBaseNpc_Plus>().GetUnitName(), "Creature") || {} as any;
+        let wearConfig = Creature.AttachWearables;
         if (wearConfig) {
             for (let k in wearConfig) {
                 let v = wearConfig[k];
                 if (v.ItemDef) {
-                    this.Wear(v.ItemDef);
+                    this.Wear(v.ItemDef, "default");
                 }
             }
         }
@@ -77,26 +52,25 @@ export class WearableComponent extends ET.Component {
     }
     SlotWears: { [slot: string]: string[] } = {}
     public GetWearConfig(sItemDef: string) {
-        return KVHelper.KvServerConfig.shipin_config[sItemDef];
+        return GJSONConfig.WearableConfig.get(sItemDef);
     }
-    public Wear(sItemDef: string | number, sStyle: string = "0") {
+    public Wear(sItemDef: string | number, wearlabel: string, sStyle: string = "0") {
         sItemDef = sItemDef + "";
         let config = this.GetWearConfig(sItemDef);
         if (!config) {
             return;
         }
-        let sSlotName = config.item_slot;
+        let sSlotName = config.itemSlot;
         // if (!this.IsPersona(sSlotName) && sSlotName != "persona_selector") {
         //     return;
         // }
         if (config.prefab == WearableConfig.EWearableType.bundle && config.bundle) {
-            let bundles = config.bundle.split("|");
-            for (let sSubItemDef of bundles) {
-                this.WearOneItem(sSubItemDef, sStyle);
+            for (let sSubItemDef of config.bundle) {
+                this.WearOneItem(sSubItemDef, sStyle, wearlabel);
             }
             return;
         }
-        this.WearOneItem(sItemDef, sStyle);
+        this.WearOneItem(sItemDef, sStyle, wearlabel);
     }
     public GetDressWearItem(sSlotName: string) {
         if (!this.SlotWears[sSlotName]) {
@@ -123,7 +97,7 @@ export class WearableComponent extends ET.Component {
         }
         return r;
     }
-    private WearOneItem(sItemDef: string, sStyle: string = "0") {
+    private WearOneItem(sItemDef: string, sStyle: string = "0", wearlabel = "") {
         if (!sItemDef) {
             return;
         }
@@ -134,7 +108,7 @@ export class WearableComponent extends ET.Component {
         let wearitem = this.FindWearItemByItemDef(sItemDef);
         if (wearitem == null) {
             let type = GGetRegClass<typeof EWearableItem>("EWearableItem");
-            wearitem = this.AddChild(type, sItemDef);
+            wearitem = this.AddChild(type, sItemDef, wearlabel);
         }
         let slot = wearitem.getSlot();
         if (this.SlotWears[slot] == null) {
@@ -190,7 +164,18 @@ export class WearableComponent extends ET.Component {
         for (let slotname of Object.keys(hUnitOrigin.SlotWears)) {
             let entity = hUnitOrigin.GetDressWearItem(slotname);
             if (entity) {
-                this.Wear(entity.itemDef, entity.style);
+                this.Wear(entity.itemDef, entity.wearLabel, entity.style);
+            }
+        }
+    }
+
+    public AddDrawEffect(show = true) {
+        let all = this.GetAllDressWearItem().filter((entity) => { return entity.wearLabel != "default" });
+        for (let entity of all) {
+            if (show) {
+                entity.model.RemoveEffects(EntityEffects.EF_NODRAW);
+            } else {
+                entity.model.AddEffects(EntityEffects.EF_NODRAW);
             }
         }
     }

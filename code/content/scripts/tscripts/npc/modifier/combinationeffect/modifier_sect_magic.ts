@@ -2,113 +2,113 @@ import { registerModifier } from "../../entityPlus/Base_Plus";
 import { modifier_combination_effect } from "./modifier_combination_effect";
 
 @registerModifier()
-export class modifier_sect_magic_base_12 extends modifier_combination_effect {
+export class modifier_sect_magic_base_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_magic_base_4 extends modifier_combination_effect {
+export class modifier_sect_magic_base_a extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_magic_base_8 extends modifier_combination_effect {
+export class modifier_sect_magic_base_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_magic_disruptor_12 extends modifier_combination_effect {
+export class modifier_sect_magic_disruptor_thunder_strike_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_magic_disruptor_8 extends modifier_combination_effect {
+export class modifier_sect_magic_disruptor_thunder_strike_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_magic_grimstroke_12 extends modifier_combination_effect {
+export class modifier_sect_magic_grimstroke_dark_artistry_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_magic_grimstroke_8 extends modifier_combination_effect {
+export class modifier_sect_magic_grimstroke_dark_artistry_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_magic_invoker_12 extends modifier_combination_effect {
+export class modifier_sect_magic_invoker_chaos_meteor_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_magic_invoker_8 extends modifier_combination_effect {
+export class modifier_sect_magic_invoker_chaos_meteor_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_magic_keeper_of_the_light_12 extends modifier_combination_effect {
+export class modifier_sect_magic_keeper_of_the_light_radiant_bind_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_magic_keeper_of_the_light_8 extends modifier_combination_effect {
+export class modifier_sect_magic_keeper_of_the_light_radiant_bind_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_magic_leshrac_12 extends modifier_combination_effect {
+export class modifier_sect_magic_leshrac_greater_lightning_storm_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_magic_leshrac_8 extends modifier_combination_effect {
+export class modifier_sect_magic_leshrac_greater_lightning_storm_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_magic_lina_12 extends modifier_combination_effect {
+export class modifier_sect_magic_lina_laguna_blade_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_magic_lina_8 extends modifier_combination_effect {
+export class modifier_sect_magic_lina_laguna_blade_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_magic_lion_12 extends modifier_combination_effect {
+export class modifier_sect_magic_lion_finger_of_death_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_magic_lion_8 extends modifier_combination_effect {
+export class modifier_sect_magic_lion_finger_of_death_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_magic_ogre_magi_12 extends modifier_combination_effect {
+export class modifier_sect_magic_ogre_magi_fireblast_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_magic_ogre_magi_8 extends modifier_combination_effect {
+export class modifier_sect_magic_ogre_magi_fireblast_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_magic_puck_12 extends modifier_combination_effect {
+export class modifier_sect_magic_puck_dream_coil_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_magic_puck_8 extends modifier_combination_effect {
+export class modifier_sect_magic_puck_dream_coil_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_magic_pugna_12 extends modifier_combination_effect {
+export class modifier_sect_magic_pugna_nether_blast_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_magic_pugna_8 extends modifier_combination_effect {
+export class modifier_sect_magic_pugna_nether_blast_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_magic_queenofpain_12 extends modifier_combination_effect {
+export class modifier_sect_magic_queenofpain_scream_of_pain_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_magic_queenofpain_8 extends modifier_combination_effect {
+export class modifier_sect_magic_queenofpain_scream_of_pain_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_magic_razor_12 extends modifier_combination_effect {
+export class modifier_sect_magic_razor_plasma_field_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_magic_razor_8 extends modifier_combination_effect {
+export class modifier_sect_magic_razor_plasma_field_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_magic_rubick_12 extends modifier_combination_effect {
+export class modifier_sect_magic_rubick_fade_bolt_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_magic_rubick_8 extends modifier_combination_effect {
+export class modifier_sect_magic_rubick_fade_bolt_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_magic_shadow_shaman_12 extends modifier_combination_effect {
+export class modifier_sect_magic_shadow_shaman_ether_shock_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_magic_shadow_shaman_8 extends modifier_combination_effect {
+export class modifier_sect_magic_shadow_shaman_ether_shock_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_magic_skywrath_mage_12 extends modifier_combination_effect {
+export class modifier_sect_magic_skywrath_mage_arcane_bolt_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_magic_skywrath_mage_8 extends modifier_combination_effect {
+export class modifier_sect_magic_skywrath_mage_arcane_bolt_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_magic_storm_spirit_12 extends modifier_combination_effect {
+export class modifier_sect_magic_storm_spirit_ball_lightning_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_magic_storm_spirit_8 extends modifier_combination_effect {
+export class modifier_sect_magic_storm_spirit_ball_lightning_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_magic_zeus_12 extends modifier_combination_effect {
+export class modifier_sect_magic_zuus_lightning_bolt_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_magic_zeus_8 extends modifier_combination_effect {
+export class modifier_sect_magic_zuus_lightning_bolt_b extends modifier_combination_effect {
 }

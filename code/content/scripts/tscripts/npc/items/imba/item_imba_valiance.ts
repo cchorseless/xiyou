@@ -227,7 +227,7 @@ export class modifier_item_imba_valiance_counter extends BaseModifier_Plus {
         this.damage_counter = params.damage_counter;
         this.SetStackCount(this.damage_counter);
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (!IsServer() || !this.GetItemPlus()) {
             return;
         }

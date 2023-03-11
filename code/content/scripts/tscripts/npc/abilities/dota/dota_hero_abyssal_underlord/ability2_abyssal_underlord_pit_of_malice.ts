@@ -211,7 +211,7 @@ export class modifier_abyssal_underlord_2_thinker extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, false, -1, false, false)
         }
     }
-    OnRemoved() {
+    BeRemoved(): void {
         if (IsServer()) {
             this.GetParentPlus().StopSound(this.sSoundName)
             UTIL_Remove(this.GetParentPlus())

@@ -40,14 +40,14 @@ export class CombinationManagerComponent extends ET.Component {
 
     public OnRoundStartBattle() {
         this.getAllActiveCombination().forEach(comb => {
-            comb.CombEffectComp().OnRoundStartBattle();
+            comb.OnRoundStartBattle();
         })
     }
 
     public OnRoundStartPrize(round: ERoundBoard) {
         this.getAllActiveCombination().forEach(comb => {
-            if (comb.CombEffectComp()) {
-                comb.CombEffectComp().OnRoundStartPrize(round);
+            if (comb) {
+                comb.OnRoundStartPrize(round);
             }
         })
     }

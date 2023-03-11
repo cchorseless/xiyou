@@ -671,7 +671,7 @@ export class modifier_imba_glimpse_storm_aura extends BaseModifier_Plus {
     GetModifierAura(): string {
         return "modifier_imba_glimpse_storm_debuff";
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (IsServer()) {
             StopSoundOn(this.sound_storm, this.parent);
             EmitSoundOnLocationWithCaster(this.parent_pos, this.sound_storm_end, this.parent);

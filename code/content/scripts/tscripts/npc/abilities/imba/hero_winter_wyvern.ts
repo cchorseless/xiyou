@@ -189,7 +189,7 @@ export class modifier_imba_winter_wyvern_arctic_burn_damage extends BaseModifier
         ApplyDamage(damage_table);
         SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_BONUS_SPELL_DAMAGE, parent, damage, undefined);
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (IsServer()) {
             ParticleManager.DestroyParticle(this.slow_hit_particle, false);
         }
@@ -379,7 +379,7 @@ export class modifier_imba_winter_wyvern_splinter_blast_slow extends BaseModifie
             ParticleManager.SetParticleControl(this.slow_hit_particle, 0, this.GetParentPlus().GetAbsOrigin());
         }
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (IsServer()) {
             ParticleManager.DestroyParticle(this.slow_hit_particle, false);
             ParticleManager.ReleaseParticleIndex(this.slow_hit_particle);

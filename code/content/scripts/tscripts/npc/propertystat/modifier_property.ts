@@ -53,7 +53,6 @@ export class modifier_property extends BaseModifier_Plus {
     }
 
     BeCreated(params: object) {
-
         this.SetHasCustomTransmitterData(true)
         if (IsServer()) {
             this.Calculate_Hp();
@@ -83,7 +82,11 @@ export class modifier_property extends BaseModifier_Plus {
 
 
     DeclareFunctions(): modifierfunction[] {
-        return Array.from(PropertyConfig.CustomDeclarePropertyEvent);
+        let r: modifierfunction[] = [];
+        PropertyConfig.CustomDeclarePropertyEvent.forEach((value) => {
+            r.push(value)
+        });
+        return r;
     }
     /**
      * 额外基础攻击力

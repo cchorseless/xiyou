@@ -9,6 +9,7 @@ import "./CCCombinationUnitIconGroup.less";
 
 interface ICCCombinationUnitIconGroup {
     sectName: string;
+    unitentityindex?: EntityIndex,
     castentityindex?: AbilityEntityIndex,
     playerid?: PlayerID
 }
@@ -19,12 +20,16 @@ export class CCCombinationUnitIconGroup extends CCPanel<ICCCombinationUnitIconGr
     static defaultProps = {
         playerid: -1,
         castentityindex: -1,
+        unitentityindex: -1,
     }
 
     render() {
-        let { sectName, castentityindex, playerid } = this.props;
+        let { sectName, castentityindex, playerid, unitentityindex } = this.props;
         if (playerid == -1) {
-            if (castentityindex != -1) {
+            if (unitentityindex != -1) {
+                playerid = BaseEntityRoot.GetEntityBelongPlayerId(unitentityindex!);
+            }
+            else if (castentityindex != -1) {
                 let unit_entindex = Abilities.GetCaster(castentityindex!)
                 playerid = BaseEntityRoot.GetEntityBelongPlayerId(unit_entindex!);
             }

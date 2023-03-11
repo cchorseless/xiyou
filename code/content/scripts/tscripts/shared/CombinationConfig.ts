@@ -2,12 +2,15 @@ export module CombinationConfig {
 
     export enum EEffectTargetType {
         // 自己
-        selfunit = "selfunit",
+        self = "self",
         // 激活羁绊的英雄
         hero = "hero",
         // 全队
         team = "team",
-        enemy = "enemy",
+        // 敌方
+        enemyteam = "enemyteam",
+        // 特殊敌人
+        enemyspe = "enemyspe",
     }
 
     export enum ECombinationLabel {

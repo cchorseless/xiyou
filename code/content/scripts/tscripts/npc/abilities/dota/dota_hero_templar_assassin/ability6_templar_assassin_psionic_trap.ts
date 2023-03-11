@@ -232,7 +232,7 @@ export class modifier_templar_assassin_6_thinker extends modifier_particle_think
             this.AddParticle(iParticleID, false, false, -1, false, false)
         }
     }
-    OnRemoved() {
+    BeRemoved(): void {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()

@@ -43,7 +43,7 @@ export class modifier_tp extends BaseModifier_Plus {
             }
         }
     }
-    OnRemoved() {
+    BeRemoved() {
         let hCaster = this.GetCasterPlus();
         let hParent = this.GetParentPlus();
         let vPosition = hCaster.GetAbsOrigin();

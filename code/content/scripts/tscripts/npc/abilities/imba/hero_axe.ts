@@ -11,6 +11,8 @@ import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_
 
 @registerAbility()
 export class imba_axe_berserkers_call extends BaseAbility_Plus {
+
+
     public called_targets: { [k: string]: IBaseNpc_Plus };
     OnAbilityPhaseStart(): boolean {
         if (IsServer()) {
@@ -50,11 +52,12 @@ export class imba_axe_berserkers_call extends BaseAbility_Plus {
                 ExecuteOrderFromTable(newOrder);
             }
             this.AddCalledTarget(target);
-            modifier_imba_berserkers_call_debuff_cmd.applyOnly(target, caster, this, {
+            let buff = target.AddNewModifier(caster, this, "modifier_imba_berserkers_call_debuff_cmd", {
                 duration: this.GetSpecialValueFor("duration") * (1 - target.GetStatusResistance())
             });
-
         }
+
+
         if (next(enemies_in_radius) == undefined) {
             this.GetCasterPlus().EmitSound(responses_zero_enemy);
         } else {
@@ -166,15 +169,16 @@ export class modifier_imba_berserkers_call_talent extends BaseModifier_Plus {
         return false;
     }
 }
+
 @registerModifier()
 export class modifier_imba_berserkers_call_debuff_cmd extends BaseModifier_Plus {
-    public bonus_as: number = 0;
-    BeCreated(p_0: any,): void {
-        this.bonus_as = this.GetSpecialValueFor("bonus_as");
-        if (!this.GetAbilityPlus()) {
-            this.Destroy();
-            return;
-        }
+    public atk_speed: number = 0;
+    public atk_bonus: number = 0;
+
+    Init(p_0: any,): void {
+        // this.bonus_as = this.GetSpecialValueFor("bonus_as");
+        this.atk_speed = this.GetAbilityPlus().GetSectSpeEffectValue("b", "atk_speed");
+        this.atk_bonus = this.GetAbilityPlus().GetSectSpeEffectValue("c", "atk_bonus");
     }
     CheckState(): Partial<Record<modifierstate, boolean>> {
         return {
@@ -189,8 +193,22 @@ export class modifier_imba_berserkers_call_debuff_cmd extends BaseModifier_Plus 
     } */
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
     CC_GetModifierAttackSpeedBonus_Constant(): number {
-        return this.bonus_as + this.GetCasterPlus().GetTalentValue("special_bonus_imba_axe_5");
+        if (!this.GetAbilityPlus().IsSectSpeEffectActive("b")) {
+            return 0
+        }
+        return this.atk_speed + this.GetCasterPlus().GetTalentValue("special_bonus_imba_axe_5");
     }
+
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASEATTACK_BONUSDAMAGE)
+    CC_GetModifierBASEATTACK_BONUSDAMAGE(): number {
+        if (!this.GetAbilityPlus().IsSectSpeEffectActive("c")) {
+            return 0
+        }
+        return this.atk_bonus;
+    }
+
+
+
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH, false, true)
     CC_OnDeath(event: ModifierInstanceEvent): void {
         if (IsServer()) {
@@ -216,7 +234,7 @@ export class modifier_imba_berserkers_call_debuff_cmd extends BaseModifier_Plus 
         return "particles/status_fx/status_effect_beserkers_call.vpcf";
     }
     StatusEffectPriority(): modifierpriority {
-        return 10;
+        return modifierpriority.MODIFIER_PRIORITY_SUPER_ULTRA;
     }
     IsHidden(): boolean {
         return false;
@@ -228,6 +246,7 @@ export class modifier_imba_berserkers_call_debuff_cmd extends BaseModifier_Plus 
         return false;
     }
 }
+
 @registerAbility()
 export class imba_axe_battle_hunger extends BaseAbility_Plus {
     GetManaCost(level: number): number {
@@ -593,6 +612,14 @@ export class modifier_imba_battle_hunger_debuff_deny extends BaseModifier_Plus {
 }
 @registerAbility()
 export class imba_axe_counter_helix extends BaseAbility_Plus {
+
+    GetCooldown(level: number): number {
+        if (this.IsSectSpeEffectActive("b")) {
+            return 0;
+        }
+        return 0.3;
+    }
+
     GetCastRange(p_0: Vector, p_1: CDOTA_BaseNPC | undefined,): number {
         return this.GetSpecialValueFor("radius");
     }
@@ -651,7 +678,11 @@ export class modifier_imba_counter_helix_passive extends BaseModifier_Plus {
     } */
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED, false, true)
     CC_OnAttackLanded(keys: ModifierAttackEvent): void {
-        if (this.GetAbilityPlus() && !this.GetCasterPlus().PassivesDisabled() && ((keys.target == this.GetParentPlus() && !keys.attacker.IsBuilding() && !keys.attacker.IsOther() && keys.attacker.GetTeamNumber() != keys.target.GetTeamNumber()) || (keys.attacker == this.GetCasterPlus() && this.GetCasterPlus().HasTalent("special_bonus_imba_axe_9")))) {
+        if (this.GetAbilityPlus() && !this.GetCasterPlus().PassivesDisabled() &&
+            ((keys.target == this.GetParentPlus() && !keys.attacker.IsBuilding() && !keys.attacker.IsOther() && keys.attacker.GetTeamNumber() != keys.target.GetTeamNumber()) || (keys.attacker == this.GetCasterPlus() && this.GetCasterPlus().HasTalent("special_bonus_imba_axe_9")))) {
+            if (!this.ability.IsCooldownReady()) {
+                return
+            }
             if (this.caster.HasTalent("special_bonus_imba_axe_5")) {
                 this.proc_chance = this.proc_chance * this.caster.GetTalentValue("special_bonus_imba_axe_5", "proc_chance_multiplier");
                 this.base_damage = this.base_damage * this.caster.GetTalentValue("special_bonus_imba_axe_5", "damage_multiplier") * 0.01;
@@ -673,6 +704,7 @@ export class modifier_imba_counter_helix_passive extends BaseModifier_Plus {
         }
     }
     Spin(repeat_allowed: boolean = true) {
+        this.ability.UseResources(false, false, true);
         this.helix_pfx_1 = ResHelper.CreateParticleEx("particles/units/heroes/hero_axe/axe_attack_blur_counterhelix.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.caster, this.caster);
         ParticleManager.SetParticleControl(this.helix_pfx_1, 0, this.caster.GetAbsOrigin());
         // if (Battlepass && Battlepass.HasArcana(this.caster.GetPlayerOwnerID(), "axe")) {
@@ -703,15 +735,17 @@ export class modifier_imba_counter_helix_passive extends BaseModifier_Plus {
                 damage_type: DAMAGE_TYPES.DAMAGE_TYPE_PURE
             });
         }
-        if (spin_to_win) {
-            spin_to_win.ForceRefresh();
-            spin_to_win.IncrementStackCount();
-        } else {
-            spin_to_win = this.caster.AddNewModifier(this.caster, this.ability, this.spin_to_win_modifier, {
-                duration: this.stack_duration
-            });
+        if (this.ability.IsSectSpeEffectActive("c")) {
             if (spin_to_win) {
+                spin_to_win.ForceRefresh();
                 spin_to_win.IncrementStackCount();
+            } else {
+                spin_to_win = this.caster.AddNewModifier(this.caster, this.ability, this.spin_to_win_modifier, {
+                    duration: this.stack_duration
+                });
+                if (spin_to_win) {
+                    spin_to_win.IncrementStackCount();
+                }
             }
         }
         if (repeat_allowed && RollPercentage(this.repeat_chance_pct)) {

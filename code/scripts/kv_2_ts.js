@@ -527,20 +527,20 @@ const all_kv_to_ts = async (singleFile = null) => {
     let allAbilitys = (clientkvbundle[0] || []).filter((_i, index) => {
         if (KvAllInterface_s.includes(_i)) return _i;
     })
-    KvAllInterface_s += `export const allAbilitys = ${JSON.stringify(allAbilitys ) };\n`;
-    KvAllInterface_s += `export type KV_Abilitys = ${(allAbilitys).map((_i,index)=>{return _i+".OBJ_1_1"}).join("|") || "any" };\n`;
+    KvAllInterface_s += `export const allAbilitys = ${JSON.stringify(allAbilitys)};\n`;
+    KvAllInterface_s += `export type KV_Abilitys = ${(allAbilitys).map((_i, index) => { return _i + ".OBJ_1_1" }).join("|") || "any"};\n`;
     // 道具
     let allItems = (clientkvbundle[1] || []).filter((_i, index) => {
         if (KvAllInterface_s.includes(_i)) return _i;
     })
-    KvAllInterface_s += `export const allItems = ${JSON.stringify(allItems) };\n`
-    KvAllInterface_s += `export type KV_Items = ${(allItems).map((_i,index)=>{return _i+".OBJ_1_1"}).join("|") || "any" };\n`;
+    KvAllInterface_s += `export const allItems = ${JSON.stringify(allItems)};\n`
+    KvAllInterface_s += `export type KV_Items = ${(allItems).map((_i, index) => { return _i + ".OBJ_1_1" }).join("|") || "any"};\n`;
     // 单位
     let allUnits = (clientkvbundle[2] || []).filter((_i, index) => {
         if (KvAllInterface_s.includes(_i)) return _i;
     })
-    KvAllInterface_s += `export const allUnits = ${JSON.stringify(allUnits) };\n`
-    KvAllInterface_s += `export type KV_Units = ${(allUnits).map((_i,index)=>{return _i+".OBJ_1_1"}).join("|") || "any" };\n`;
+    KvAllInterface_s += `export const allUnits = ${JSON.stringify(allUnits)};\n`
+    KvAllInterface_s += `export type KV_Units = ${(allUnits).map((_i, index) => { return _i + ".OBJ_1_1" }).join("|") || "any"};\n`;
 
     // KvAllPath
     if (!fs.existsSync(interface_path)) fs.mkdirSync(interface_path);
@@ -576,9 +576,22 @@ const client_kv_bundle = () => {
     })
 }
 
+function clear_old_d_ts() {
+    const oldkv1 = read_all_files(interface_path);
+    oldkv1.forEach((file) => {
+        if (file.indexOf('.d.ts') > -1)
+            fs.removeSync(file);
+    });
+    const oldkv2 = read_all_files(uiInterface_path);
+    oldkv2.forEach((file) => {
+        if (file.indexOf('.d.ts') > -1)
+            fs.removeSync(file);
+    });
+}
 
 (async () => {
     var args = process.argv.splice(2);
+    clear_old_d_ts();
     client_kv_bundle();
     await all_kv_to_ts();
     program.option("-w, --watch", "Watch Mode").parse(process.argv);

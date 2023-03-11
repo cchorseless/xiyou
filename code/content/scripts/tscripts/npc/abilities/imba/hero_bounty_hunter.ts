@@ -245,7 +245,7 @@ export class modifier_imba_shuriken_toss_debuff_pull extends BaseModifier_Plus {
             ResolveNPCPositions(this.parent.GetAbsOrigin(), 128);
         }
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (IsServer()) {
             ParticleManager.DestroyParticle(this.particle_leash_fx, false);
             ParticleManager.ReleaseParticleIndex(this.particle_leash_fx);

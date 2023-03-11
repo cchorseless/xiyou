@@ -9,7 +9,6 @@ import { EventHelper } from "./helper/EventHelper";
 import { LogHelper } from "./helper/LogHelper";
 import { NetTablesHelper } from "./helper/NetTablesHelper";
 import { Enum_MODIFIER_EVENT, EventDataType, IBuffEventData, modifier_event } from "./npc/propertystat/modifier_event";
-import { modifier_property } from "./npc/propertystat/modifier_property";
 import { BattleSystemComponent } from "./rules/System/BattleSystemComponent";
 import { BuildingSystemComponent } from "./rules/System/BuildingSystemComponent";
 import { ChessControlSystemComponent } from "./rules/System/ChessControlSystemComponent";
@@ -324,7 +323,7 @@ export class GameScene {
             return;
         }
         if (GFuncEntity.checkIsFirstSpawn(spawnedUnit)) {
-            modifier_property.applyOnly(spawnedUnit, spawnedUnit);
+            spawnedUnit.AddNewModifier(spawnedUnit, null, "modifier_property", {});
             // spawnedUnit.SetMaximumGoldBounty(0);
             // spawnedUnit.SetMinimumGoldBounty(0);
             // spawnedUnit.SetDeathXP(0);

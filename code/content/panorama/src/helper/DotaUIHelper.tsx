@@ -346,7 +346,7 @@ export module DotaUIHelper {
             CustomTooltipPanel = CustomTooltipPanel || DOTAAbilityToolTip_Contents.FindChild(customPanelid);
             if (CustomTooltipPanel) {
                 if (CombinationLabel) {
-                    render(<CCCombinationInfoDialog key={Math.random() * 1000 + ""} sectName={CombinationLabel} abilityitemname={ability_name as string} />, CustomTooltipPanel);
+                    render(<CCCombinationInfoDialog key={Math.random() * 1000 + ""} unitentityindex={c} sectName={CombinationLabel} abilityitemname={ability_name as string} />, CustomTooltipPanel);
                 }
                 else {
                     render(< ></>, CustomTooltipPanel);

@@ -300,7 +300,7 @@ export class modifier_imba_strafe_mount extends BaseModifier_Plus {
             }
         }
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (IsServer()) {
             if (this.GetAbilityPlus().IsCooldownReady()) {
                 this.GetAbilityPlus<imba_clinkz_strafe>().time_remaining = this.GetRemainingTime();
@@ -326,7 +326,7 @@ export class modifier_imba_strafe_self_root extends BaseModifier_Plus {
         }
         return state;
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (IsServer()) {
             if (this.GetAbilityPlus().IsCooldownReady()) {
                 this.GetAbilityPlus<imba_clinkz_strafe>().time_remaining = this.GetRemainingTime();
@@ -892,7 +892,7 @@ export class modifier_imba_skeleton_walk_invis extends BaseModifier_Plus {
             }
         }
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (IsServer()) {
             // todo 需要重写 clinkz_burning_army
             if (this.GetCasterPlus().HasScepter() && this.GetCasterPlus().findAbliityPlus("clinkz_burning_army") && this.GetCasterPlus().FindAbilityByName("clinkz_burning_army").IsTrained()) {
@@ -1434,7 +1434,7 @@ export class modifier_imba_death_pact_spirit_aura extends BaseModifier_Plus {
             }
         }
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (IsServer()) {
             this.GetParentPlus().SetOriginalModel("models/creeps/neutral_creeps/n_creep_ghost_b/n_creep_ghost_frost.vmdl");
             this.GetCasterPlus().RemoveModifierByName("modifier_imba_death_pact_bonus_spirited");

@@ -2,6 +2,7 @@ import React from "react";
 import { Dota } from "../../../../scripts/tscripts/shared/Gen/Types";
 import { ECombination } from "../../game/components/Combination/ECombination";
 import { CSSHelper } from "../../helper/CSSHelper";
+import { AbilityHelper } from "../../helper/DotaEntityHelper";
 import { BaseEntityRoot } from "../../libs/BaseEntityRoot";
 import { CCLabel } from "../AllUIElement/CCLabel/CCLabel";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
@@ -15,6 +16,7 @@ import { CCCombinationUnitIconGroup } from "./CCCombinationUnitIconGroup";
 interface ICCCombinationInfoDialog {
     sectName: string,
     playerid?: PlayerID,
+    unitentityindex?: EntityIndex,
     castentityindex?: AbilityEntityIndex,
     abilityitemname?: string,
 }
@@ -23,19 +25,43 @@ export class CCCombinationInfoDialog extends CCPanel<ICCCombinationInfoDialog> {
 
     static defaultProps = {
         castentityindex: -1,
+        unitentityindex: -1,
         playerid: -1,
     }
 
 
+    GetSectBuffDescriptionByName(sAbilityName: string) {
+        let sStr = $.Localize("#DOTA_Tooltip_" + sAbilityName + "_description");
+        let config = GJSONConfig.BuffEffectConfig.get(sAbilityName);
+        if (config) {
+            config.propinfo.forEach((v, k) => {
+                let block = new RegExp("%" + k + "%", "g");
+                let blockPS = new RegExp("%" + k + "%%", "g");
+                let iResult = sStr.search(block);
+                let iResultPS = sStr.search(blockPS);
+                if (iResult == -1 && iResultPS == -1) return;
+                let aValues = (v + "").split(" ").map((value: string) => { return Number(value); });;
+                let [sValues, sValuesPS] = AbilityHelper.AbilityDescriptionCompose(aValues);
+                sStr = sStr.replace(blockPS, sValuesPS);
+                sStr = sStr.replace(block, sValues);
+            })
+
+        }
+        return sStr;
+    }
+
 
     render() {
-        let { sectName, castentityindex, playerid, abilityitemname } = this.props;
+        let { sectName, castentityindex, playerid, abilityitemname, unitentityindex } = this.props;
         if (abilityitemname == null && castentityindex != -1) {
             abilityitemname = Abilities.GetAbilityName(castentityindex!);
         }
         if (playerid == -1) {
-            if (castentityindex != -1) {
-                let unitentityindex = Abilities.GetCaster(castentityindex!);
+            if (unitentityindex != -1) {
+                playerid = BaseEntityRoot.GetEntityBelongPlayerId(unitentityindex!);
+            }
+            else if (castentityindex != -1) {
+                unitentityindex = Abilities.GetCaster(castentityindex!);
                 playerid = BaseEntityRoot.GetEntityBelongPlayerId(unitentityindex);
             }
         }
@@ -100,18 +126,18 @@ export class CCCombinationInfoDialog extends CCPanel<ICCCombinationInfoDialog> {
                                     <CCPanel key={"" + index} marginLeft="5px" flowChildren="down" minHeight={"30px"}>
                                         {
                                             commoneffect.length > 0 && <Label key={commoneffect} html={true} className={CSSHelper.ClassMaker('InfoDes', { 'Active': isactive })}
-                                                text={`[${$.Localize("#DOTA_Tooltip_" + commoneffect)}]: ${$.Localize("#DOTA_Tooltip_" + commoneffect + "_description")}`} />
+                                                text={`[${$.Localize("#DOTA_Tooltip_" + commoneffect)}]: ${this.GetSectBuffDescriptionByName(commoneffect)}`} />
                                         }
                                         {
                                             abilityitemname && Specialeffect.length > 0 && <Label key={Specialeffect} html={true} className={CSSHelper.ClassMaker('InfoDes', { 'Active': isactive })}
-                                                text={`[${$.Localize("#DOTA_Tooltip_" + Specialeffect)}]: ${$.Localize("#DOTA_Tooltip_" + Specialeffect + "_description")}`} />
+                                                text={`[${$.Localize("#DOTA_Tooltip_" + Specialeffect)}]: ${this.GetSectBuffDescriptionByName(Specialeffect)}`} />
                                         }
                                     </CCPanel>
                                 </CCPanel>)
 
                         })}
                     </CCPanel>
-                    <CCCombinationUnitIconGroup marginTop={"10px"} sectName={sectName} playerid={this.props.playerid} castentityindex={this.props.castentityindex} />
+                    <CCCombinationUnitIconGroup marginTop={"10px"} sectName={sectName} playerid={playerid} castentityindex={castentityindex} />
                 </CCPanelBG>
             </Panel>
         )

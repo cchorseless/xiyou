@@ -233,7 +233,7 @@ export class modifier_kunkka_1_thinker extends BaseModifier_Plus {
             this.AddParticle(particleID, false, false, -1, false, false)
         }
     }
-    OnRemoved() {
+    BeRemoved(): void {
         let caster = this.GetCasterPlus()
         let position = this.GetParentPlus().GetAbsOrigin()
         let ability = this.GetAbilityPlus()

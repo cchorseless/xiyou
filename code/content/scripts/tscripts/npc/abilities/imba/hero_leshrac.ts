@@ -1587,7 +1587,7 @@ export class modifier_imba_tormented_soul_form extends BaseModifier_Plus {
             this.caster.GiveMana(replenish);
         }
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (!IsServer()) {
             return;
         }

@@ -89,7 +89,7 @@ export class modifier_imba_abyssal_underlord_firestorm_thinker extends BaseModif
     }
     BeRefresh(kv: any): void {
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
     }
     BeDestroy(): void {
         if (!IsServer()) {
@@ -175,7 +175,7 @@ export class modifier_imba_abyssal_underlord_firestorm extends BaseModifier_Plus
         }
         this.damage_pct = (this.GetSpecialValueFor("burn_damage") + (this.GetSpecialValueFor("burn_damage_stack") * this.GetStackCount())) / 100;
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
     }
     BeDestroy(): void {
     }
@@ -235,7 +235,7 @@ export class modifier_imba_abyssal_underlord_blizzard extends BaseModifier_Plus 
         this.damage_pct = this.GetSpecialValueFor("burn_damage") / 100;
         this.slow = this.GetSpecialValueFor("blizzard_slow_percentage") + (this.GetSpecialValueFor("blizzard_slow_percentage_stack") * this.GetStackCount());
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
     }
     BeDestroy(): void {
     }
@@ -338,7 +338,7 @@ export class modifier_imba_abyssal_underlord_pit_of_malice_thinker extends BaseM
     }
     BeRefresh(kv: any): void {
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (!IsServer()) {
             return;
         }
@@ -426,7 +426,7 @@ export class modifier_imba_abyssal_underlord_pit_of_malice_cooldown extends Base
     }
     BeRefresh(kv: any): void {
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
     }
     BeDestroy(): void {
     }
@@ -477,7 +477,7 @@ export class modifier_imba_abyssal_underlord_pit_of_malice extends BaseModifier_
     }
     BeRefresh(kv: any): void {
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
     }
     BeDestroy(): void {
     }
@@ -589,7 +589,7 @@ export class modifier_imba_abyssal_underlord_atrophy_aura_active extends BaseMod
     CC_OnTooltip2(): number {
         return this.attack_count;
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (!IsServer()) {
             return;
         }
@@ -653,7 +653,7 @@ export class modifier_imba_abyssal_underlord_atrophy_aura extends BaseModifier_P
         }
         this.scepter_aura.ForceRefresh();
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
     }
     BeDestroy(): void {
     }
@@ -772,7 +772,7 @@ export class modifier_imba_abyssal_underlord_atrophy_aura_debuff extends BaseMod
     BeRefresh(kv: any): void {
         this.reduction = this.GetSpecialValueFor("damage_reduction_pct");
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
     }
     BeDestroy(): void {
     }
@@ -816,7 +816,7 @@ export class modifier_imba_abyssal_underlord_atrophy_aura_permanent_stack extend
         }
         this.SetStackCount(this.GetStackCount() + kv.bonus);
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
     }
     BeDestroy(): void {
     }
@@ -862,7 +862,7 @@ export class modifier_imba_abyssal_underlord_atrophy_aura_scepter extends BaseMo
     BeRefresh(kv: any): void {
         this.OnCreated(kv);
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
     }
     BeDestroy(): void {
     }
@@ -942,7 +942,7 @@ export class modifier_imba_abyssal_underlord_atrophy_aura_stack extends BaseModi
     }
     BeRefresh(kv: any): void {
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
     }
     BeDestroy(): void {
         if (!IsServer()) {
@@ -1022,7 +1022,7 @@ export class modifier_imba_abyssal_underlord_dark_rift extends BaseModifier_Plus
     }
     BeRefresh(kv: any): void {
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (!IsServer()) {
             return;
         }

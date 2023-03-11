@@ -187,7 +187,7 @@ export class modifier_imba_swashbuckle_dash extends BaseModifierMotionHorizontal
             this.CheckSelf()
         }
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (IsServer()) {
             this.GetCasterPlus().SetUnitOnClearGround();
             let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.range, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE, FindOrder.FIND_CLOSEST, false);
@@ -296,7 +296,7 @@ export class modifier_imba_swashbuckle_slashes extends BaseModifier_Plus {
             this.executed_strikes = this.executed_strikes + 1;
         }
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (IsServer()) {
             for (const v of (this.slash_particle)) {
                 ParticleManager.DestroyParticle(v, false);
@@ -1044,7 +1044,7 @@ export class modifier_imba_heartpiercer_delay extends BaseModifier_Plus {
         let icon_particle = ResHelper.CreateParticleEx(this.icon, ParticleAttachment_t.PATTACH_OVERHEAD_FOLLOW, this.GetParentPlus());
         this.AddParticle(icon_particle, false, false, -1, true, true);
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (IsServer()) {
             let modifier_handler = this.GetParentPlus().AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_heartpiercer_debuff", {
                 duration: this.duration * (1 - this.GetParentPlus().GetStatusResistance())
@@ -1119,7 +1119,7 @@ export class modifier_imba_heartpiercer_debuff extends BaseModifier_Plus {
             }
         }
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (IsServer()) {
             if (this.GetCasterPlus().HasTalent("special_bonus_imba_pangolier_5")) {
                 this.GetParentPlus().RemoveModifierByName("modifier_imba_heartpiercer_talent_debuff");
@@ -1357,7 +1357,7 @@ export class modifier_imba_gyroshell_impact_check extends BaseModifier_Plus {
             }
         }
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (IsServer()) {
             if (this.GetCasterPlus().HasTalent("special_bonus_imba_pangolier_4")) {
                 this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_gyroshell_linger", {

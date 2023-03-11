@@ -29,6 +29,40 @@ export class BaseAbility_Plus extends BaseAbility {
             return PlayerResource.GetSelectedHeroEntity(iPlayerID)
         }
     }
+    /**
+     * @both
+     * 流派特殊BUFF名称
+     * @param level 
+     * @returns 
+     */
+    public GetSectSpeEffectName(level: ISectLevel) {
+        return GJsonConfigHelper.GetAbilitySectSpeEffectName(this.GetAbilityName(), level);
+    }
+
+    /**
+     * @both
+     * 流派特殊BUFF名称
+     * @param level 
+     * @returns 
+     */
+    public GetSectSpeEffectValue(level: ISectLevel, key: string) {
+        let buffname = this.GetSectSpeEffectName(level);
+        if (buffname) {
+            return GJSONConfig.BuffEffectConfig.get(buffname).propinfo.get(key);
+        }
+        GLogHelper.warn("GetSectSpeEffectValue Miss", this.GetAbilityName(), buffname, key)
+    }
+
+    /**
+     * @both
+     * 流派特殊BUFF是否存在
+     * @param level 
+     * @returns 
+     */
+    public IsSectSpeEffectActive(level: ISectLevel) {
+        let buffname = this.GetSectSpeEffectName(level);
+        return this.GetCasterPlus().HasModifier(buffname);
+    }
 
 
     /**自动释放技能计时器 */

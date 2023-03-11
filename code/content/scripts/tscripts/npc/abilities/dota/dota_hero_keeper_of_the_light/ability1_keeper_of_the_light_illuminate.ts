@@ -319,7 +319,7 @@ export class modifier_keeper_of_the_light_1_thinker extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, true, 10, false, false)
         }
     }
-    OnRemoved() {
+    BeRemoved(): void {
         if (IsServer()) {
             if (GFuncEntity.IsValid(this.GetCasterPlus())) {
                 // let hAbility  = keeper_of_the_light_3.findIn(  this.GetCasterPlus() )

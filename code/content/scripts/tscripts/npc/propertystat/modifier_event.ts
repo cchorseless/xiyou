@@ -50,8 +50,8 @@ export class modifier_event extends BaseModifier_Plus {
             }
             [a, b, c] = GameFunc.IncludeArgs(event.eventType, EventDataType.attackerIsSelf, EventDataType.unitIsSelf, EventDataType.OtherCanBeAnyOne);
         }
-        while (k.length > 0) {
-            let _k = "" + k.shift();
+        for (let p of k) {
+            let _k = "" + p;
             let allM = GGameCache.allBuffRegisterEvent[_k];
             if (allM == null || allM.size == 0) return;
             for (let m of allM) {

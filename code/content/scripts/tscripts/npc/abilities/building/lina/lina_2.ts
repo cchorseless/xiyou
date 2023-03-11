@@ -235,7 +235,7 @@ export class modifier_lina_2_thinker extends modifier_particle_thinker {
             ParticleManager.ReleaseParticleIndex(iParticleID);
         }
     }
-    OnRemoved() {
+    BeRemoved(): void {
         let hCaster = this.GetCasterPlus();
         let hParent = this.GetParentPlus();
         let hAbility = this.GetAbilityPlus();

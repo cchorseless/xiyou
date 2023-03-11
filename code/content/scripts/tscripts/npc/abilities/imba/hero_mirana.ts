@@ -775,7 +775,7 @@ export class modifier_imba_leap_movement extends BaseModifierMotionBoth_Plus {
         }
         return state;
     }
-    OnRemoved(): void {
+    BeRemoved(): void {
         if (IsServer()) {
             this.caster.SetUnitOnClearGround();
             this.caster.AddNewModifier(this.caster, this.ability, this.modifier_aura, {
