@@ -19,9 +19,23 @@ function jsontots() {
   typestr = typestr.replace(/constructor\(_json_: any\) {\s+if \(_json_.length/g, "constructor(_json_: any[]) {\n if (_json_.length ")
   typestr = typestr.replace(/let _entry_ of _json_\.\S*\)/g, (s) => {
     let cc = s.substring(0, s.length - 1) + " as any[][])";
-    console.log(cc)
     return cc;
   })
+
+  let consTr = typestr.match(/constructor\(loader: JsonLoader\) {[^}]*}/g)[0];
+  let lines = consTr.split("\n");
+  let addstr = "reloadConfig(k: string , loader: JsonLoader) {\n switch(k) { \n";
+  for (let line of lines) {
+    if (line.indexOf("(loader(") > -1) {
+      let loadstr = line.match(/loader\([^\)]*\)/)[0];
+      loadstr = loadstr.replace("loader", "case ");
+      addstr += loadstr + ":\n";
+      addstr += line + ";break;\n";
+    }
+  }
+  addstr += "}\n};\n"
+  typestr = typestr.replace(consTr, consTr + "\n" + addstr);
+
   fs.writeFileSync(typepath, typestr);
   let filestr = "";
   const files = read_all_files(jsonpath);
@@ -38,10 +52,14 @@ function jsontots() {
       delete JSONData[filename];
       return d;
     };
-    export function RefreshConfig(data: { [k: string]: any }) {
+    export function RefreshConfig(data: { [k: string]: any }|null = null) {
+      if ( _G.GJSONConfig&&data) {
       for (let k in data) {
         JSONData[k] = data[k];
+      _G.GJSONConfig.reloadConfig(k, JsonDataLoader);
       }
+      return;
+    }
       let tabledata: Tables = null as any;
       try {
         tabledata = new Tables(JsonDataLoader);

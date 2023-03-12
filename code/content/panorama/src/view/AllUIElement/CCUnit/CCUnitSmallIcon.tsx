@@ -20,14 +20,20 @@ export class CCUnitSmallIcon extends CCPanel<ICCUnitSmallIcon> {
     }
 
     render() {
+        let SmallIconRes = "";
         let unit_name = this.props.itemname;
         let rarity = UnitHelper.GetUnitRarety(unit_name);
         let unitobj = KVHelper.KVUnits()[unit_name];
-        unit_name = unitobj.SmallIconRes as string;
+        if (unitobj) {
+            SmallIconRes = (unitobj.SmallIconRes) as string;
+        }
+        else {
+            GLogHelper.warn("CCUnitSmallIcon", "unitobj is null", unit_name)
+        }
         return (
             this.__root___isValid &&
             <Panel id="CC_UnitSmallIcon" className={rarity} ref={this.__root__}    {...this.initRootAttrs()}>
-                <CCPanel id="UnitIcon" backgroundImage={PathHelper.getCustomImageUrl(`hero/hero_icon/${unit_name}.png`)} />
+                <CCPanel id="UnitIcon" backgroundImage={PathHelper.getCustomImageUrl(`hero/hero_icon/${SmallIconRes}.png`)} />
                 {this.props.children}
                 {this.__root___childs}
             </Panel>

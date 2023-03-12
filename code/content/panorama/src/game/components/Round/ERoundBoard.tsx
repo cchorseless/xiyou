@@ -1,3 +1,4 @@
+import { Dota } from "../../../../../scripts/tscripts/shared/Gen/Types";
 import { GEventHelper } from "../../../../../scripts/tscripts/shared/lib/GEventHelper";
 import { RoundConfig } from "../../../../../scripts/tscripts/shared/RoundConfig";
 import { KVHelper } from "../../../helper/KVHelper";
@@ -8,7 +9,7 @@ export class ERoundBoard extends ERound {
     roundLeftTime: number = -1;
     configID: string;
     unitSpawned: number = 0;
-    config: building_round_board.OBJ_2_1;
+    config: Dota.RoundBoardConfigRecord;
     unitDamageInfo: { [k: string]: BuildingConfig.IBuildingDamageInfo } = {};
 
     private _roundState: RoundConfig.ERoundBoardState;
@@ -24,8 +25,7 @@ export class ERoundBoard extends ERound {
     }
 
     onSerializeToEntity() {
-        let KV_DATA = KVHelper.KVData();
-        this.config = KV_DATA.building_round_board["" + this.configID];
+        this.config = GJSONConfig.RoundBoardConfig.get("" + this.configID)!;
         GGameScene.Local.RoundManagerComp.addRound(this);
         this.onReload();
     }

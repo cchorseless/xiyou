@@ -8,7 +8,7 @@ export class EnemyKillPrizeComponent extends ET.Component {
         let domainroot = this.Domain.ETRoot.As<IEnemyUnitEntityRoot>();
         let round = domainroot.GetRound<ERoundBoard>();
         let Roundconfig = domainroot.GetRoundBasicUnitConfig();
-        this.killGold = RandomInt(tonumber(Roundconfig.gold_min), tonumber(Roundconfig.gold_max));
+        this.killGold = RandomInt(Roundconfig.goldMin, Roundconfig.goldMax);
         // if (round.IsBasic) {
         //     if (RandomInt(1, 100) < tonumber(KVHelper.KvServerConfig.building_config.DROP_WOOD_CHANCE.configValue)) {
         //         this.killWood = tonumber(KVHelper.KvServerConfig.building_config.DROP_WOOD_NUM.configValue);

@@ -69,7 +69,7 @@ export class EnemyUnitEntityRoot extends BattleUnitEntityRoot {
 
     GetRoundBasicUnitConfig() {
         if (this.OnlyKey != null) {
-            return this.GetRound<ERoundBoard>().config.unitinfo[this.OnlyKey];
+            return this.GetRound<ERoundBoard>().config.enemyinfo.find(v => { return v.id == this.OnlyKey })
         }
     }
 

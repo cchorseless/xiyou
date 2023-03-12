@@ -53,7 +53,7 @@ export class FakerHeroEntityRoot extends BaseEntityRoot {
             let aliveEnemy = player.EnemyManagerComp().getAllAliveEnemy();
             aliveEnemy.forEach((b) => {
                 b.RoundStateComp().OnBoardRound_Prize_Enemy(round);
-                damage += Number(b.GetRoundBasicUnitConfig().failure_count || "0");
+                damage += Number(b.GetRoundBasicUnitConfig().failureCount || "0");
                 delay_time = math.min(delay_time, b.GetDistance2Player() / 1000);
             });
             GTimerHelper.AddTimer(delay_time, GHandler.create(this, () => {

@@ -1,22 +1,22 @@
 import { Assert_SpawnEffect, ISpawnEffectInfo } from "../../../assert/Assert_SpawnEffect";
+import { Dota } from "../../../shared/Gen/Types";
 
-import { KVHelper } from "../../../helper/KVHelper";
 import { ERound } from "./ERound";
 
 @GReloadable
 export class ERoundBoardChallenge extends ERound {
-    config: building_round_board_challenge.OBJ_2_1 = null;
+    config: Dota.RoundBoardChallengeConfigRecord = null;
     onAwake(configid: string): void {
         this.configID = configid;
-        this.config = KVHelper.KvServerConfig.building_round_board_challenge["" + configid];
+        this.config = GJSONConfig.RoundBoardChallengeConfig.get("" + configid);
     }
     OnStart(): void {
-        let unitcount = tonumber(this.config.round_unitcount);
+        let unitcount = this.config.roundUnitcount;
         let unitinfoid: string[] = [];
         let unitWeight: number[] = [];
-        for (let k in this.config.unitinfo) {
-            unitinfoid.push(k);
-            unitWeight.push(tonumber(this.config.unitinfo[k].unit_weight));
+        for (let info of this.config.enemyinfo) {
+            unitinfoid.push(info.id);
+            unitWeight.push(info.unitWeight);
         }
         for (let i = 0; i < unitcount; i++) {
             let enemy = GFuncRandom.RandomArrayByWeight(unitinfoid, unitWeight);
@@ -26,12 +26,12 @@ export class ERoundBoardChallenge extends ERound {
 
     CreateChallengeEnemy(unit_index: string, spawnEffect: ISpawnEffectInfo = null) {
         let playerid = this.BelongPlayerid;
-        let allenemy = this.config.unitinfo;
+        let info = this.config.enemyinfo.find((v) => { return v.id == unit_index });
         let _boardVec = GChessControlSystem.GetInstance().GetBoardEmptyGirdRandom(playerid, true, true);
         // let _boardVec = new ChessControlConfig.ChessVector(Number(allenemy[unit_index].position_x), Number(allenemy[unit_index].position_y), playerid);
         let pos = _boardVec.getVector3();
-        let angle = Vector(Number(allenemy[unit_index].angles_x), Number(allenemy[unit_index].angles_y), Number(allenemy[unit_index].angles_z));
-        let enemyName = allenemy[unit_index].unit;
+        let angle = Vector(info.anglesX, info.anglesY, info.anglesZ);
+        let enemyName = info.unitname;
         let delay = 0;
         if (spawnEffect != null && spawnEffect.tp_effect != null) {
             delay = RandomFloat(0.1, 2.1);

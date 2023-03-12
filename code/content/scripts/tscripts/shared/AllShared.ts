@@ -13,7 +13,7 @@ import { AllServiceEntity } from "./service/AllServiceEntity";
 
 export class AllShared {
     static Init() {
-        RefreshConfig({});
+        RefreshConfig();
         JsonConfigHelper.Init();
         AllServiceEntity.init();
         GLogHelper.print(`-------------------------------CODE ON LUA ${_CODE_IN_LUA_}---------------------------------`);

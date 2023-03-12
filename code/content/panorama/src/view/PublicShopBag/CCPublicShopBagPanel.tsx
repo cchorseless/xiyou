@@ -251,7 +251,7 @@ export class CCRandomShop extends CCPanel<{}> {
         const courierShop = this.GetStateEntity(GGameScene.Local.CourierShopComp)!;
         const PlayerDataComp = this.GetStateEntity(GGameScene.Local.PlayerDataComp)!;
         const RandomItems = courierShop.getSellItem(PublicBagConfig.EPublicShopType.RandomShop);
-        const currentround = Number(ERoundBoard.CurRoundBoard.config.round_show)
+        const currentround = Number(ERoundBoard.CurRoundBoard.config.roundShow)
         const Unlock = courierShop.randomLockRound >= currentround;
 
         return (

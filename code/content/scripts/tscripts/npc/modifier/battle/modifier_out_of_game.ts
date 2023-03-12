@@ -22,7 +22,7 @@ export class modifier_out_of_game extends BaseModifier_Plus {
             [modifierstate.MODIFIER_STATE_NO_HEALTH_BAR]: true,
             [modifierstate.MODIFIER_STATE_INVULNERABLE]: true,
             [modifierstate.MODIFIER_STATE_NO_UNIT_COLLISION]: true,
-            [modifierstate.MODIFIER_STATE_OUT_OF_GAME]: this.isMoveFinished,
+            // [modifierstate.MODIFIER_STATE_OUT_OF_GAME]: this.isMoveFinished,
             [modifierstate.MODIFIER_STATE_UNSELECTABLE]: true,
             // [modifierstate.MODIFIER_STATE_FROZEN]: true,
         };
@@ -36,9 +36,9 @@ export class modifier_out_of_game extends BaseModifier_Plus {
         if (IsServer()) {
             this.GetParent().SetAbsOrigin(this.old_pos - Vector(0, 0, 2000) as Vector);
             this.GetParent().AddNoDraw();
-            this.AddTimer(0.1, () => {
-                this.isMoveFinished = true;
-            });
+            // this.AddTimer(0.1, () => {
+            //     this.isMoveFinished = true;
+            // });
         }
     }
 

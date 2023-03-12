@@ -1,5 +1,4 @@
 import { EventHelper } from "../../helper/EventHelper";
-import { KVHelper } from "../../helper/KVHelper";
 import { BaseNpc_Plus } from "../../npc/entityPlus/BaseNpc_Plus";
 import { GameEnum } from "../../shared/GameEnum";
 import { GameProtocol } from "../../shared/GameProtocol";
@@ -11,7 +10,7 @@ export class RoundSystemComponent extends ET.SingletonComponent {
     iRound: string;
 
     GetCurrentRoundType() {
-        return KVHelper.KvServerConfig.building_round[this.iRound].round_type;
+        return GJSONConfig.RoundBoardConfig.get(this.iRound).roundType;
     }
     // - 判断是否是无尽
     IsEndlessRound() {
@@ -24,7 +23,7 @@ export class RoundSystemComponent extends ET.SingletonComponent {
     }
 
     GetNextBoardRoundid() {
-        return KVHelper.KvServerConfig.building_round_board[this.iRound].round_nextid;
+        return GJSONConfig.RoundBoardConfig.get(this.iRound).roundNextid;
     }
 
     public onAwake() {

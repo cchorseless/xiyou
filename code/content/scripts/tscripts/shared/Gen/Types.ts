@@ -3741,6 +3741,516 @@ export class UnitLevelUpConfigBean {
 
 }
 
+export namespace Dota {
+export class RoundBoardConfig{
+    private _dataMap: Map<string, Dota.RoundBoardConfigRecord>
+    private _dataList: Dota.RoundBoardConfigRecord[]
+    constructor(_json_: any[]) {
+ this._dataMap  = new Map<string, Dota.RoundBoardConfigRecord>()
+        this._dataList = []
+        for(let _json2_ of _json_) {
+            let _v: Dota.RoundBoardConfigRecord
+            _v = new Dota.RoundBoardConfigRecord(_json2_)
+            this._dataList.push(_v)
+            this._dataMap.set(_v.id, _v)
+        }
+    }
+
+    getDataMap(): Map<string, Dota.RoundBoardConfigRecord> { return this._dataMap; }
+    getDataList(): Dota.RoundBoardConfigRecord[] { return this._dataList; }
+
+    get(key: string): Dota.RoundBoardConfigRecord | undefined { return this._dataMap.get(key); }
+
+    resolve(_tables: Map<string, any>) {
+        for(let v of this._dataList) {
+            v.resolve(_tables)
+        }
+    }
+
+}
+}
+
+
+
+export namespace Dota {
+export class RoundBoardConfigRecord {
+
+    constructor(_json_: any) {
+        if (_json_.id === undefined) { GLogHelper.error(1); }
+        this.id = _json_.id
+        if (_json_.round_show === undefined) { GLogHelper.error(1); }
+        this.roundShow = _json_.round_show
+        if (_json_.round_nextid === undefined) { GLogHelper.error(1); }
+        this.roundNextid = _json_.round_nextid
+        if (_json_.round_type === undefined) { GLogHelper.error(1); }
+        this.roundType = _json_.round_type
+        if (_json_.round_label === undefined) { GLogHelper.error(1); }
+        this.roundLabel = _json_.round_label
+        if (_json_.roundprize_gold === undefined) { GLogHelper.error(1); }
+        this.roundprizeGold = _json_.roundprize_gold
+        if (_json_.roundprize_wood === undefined) { GLogHelper.error(1); }
+        this.roundprizeWood = _json_.roundprize_wood
+        if (_json_.round_readytime === undefined) { GLogHelper.error(1); }
+        this.roundReadytime = _json_.round_readytime
+        if (_json_.round_time === undefined) { GLogHelper.error(1); }
+        this.roundTime = _json_.round_time
+        if (_json_.enemyinfo === undefined) { GLogHelper.error(1); }
+        { this.enemyinfo = []; for(let _ele of _json_.enemyinfo) { let _e : Dota.RoundEnemyConfigBean; _e = new Dota.RoundEnemyConfigBean(_ele); this.enemyinfo.push(_e);}}
+    }
+
+    /**
+     * 回合编号
+     */
+    readonly id: string
+    /**
+     * 回合显示数
+     */
+    readonly roundShow: string
+    /**
+     * 下一回合编号
+     */
+    readonly roundNextid: string
+    /**
+     * 回合类型
+     */
+    readonly roundType: string
+    /**
+     * 回合标签
+     */
+    readonly roundLabel: string
+    /**
+     * 奖励金币
+     */
+    readonly roundprizeGold: number
+    /**
+     * 奖励木材
+     */
+    readonly roundprizeWood: number
+    /**
+     * 回合准备时间
+     */
+    readonly roundReadytime: number
+    /**
+     * 回合持续时间
+     */
+    readonly roundTime: number
+    readonly enemyinfo: Dota.RoundEnemyConfigBean[]
+
+    resolve(_tables: Map<string, any>) {
+        for(let _e of this.enemyinfo) { if (_e != null ) {_e.resolve(_tables);} }
+    }
+}
+
+}
+
+
+
+export namespace Dota {
+export class RoundEnemyConfigBean {
+
+    constructor(_json_: any) {
+        if (_json_.id === undefined) { GLogHelper.error(1); }
+        this.id = _json_.id
+        if (_json_.unitname === undefined) { GLogHelper.error(1); }
+        this.unitname = _json_.unitname
+        if (_json_.position_x === undefined) { GLogHelper.error(1); }
+        this.positionX = _json_.position_x
+        if (_json_.position_y === undefined) { GLogHelper.error(1); }
+        this.positionY = _json_.position_y
+        if (_json_.angles_x === undefined) { GLogHelper.error(1); }
+        this.anglesX = _json_.angles_x
+        if (_json_.angles_y === undefined) { GLogHelper.error(1); }
+        this.anglesY = _json_.angles_y
+        if (_json_.angles_z === undefined) { GLogHelper.error(1); }
+        this.anglesZ = _json_.angles_z
+        if (_json_.israndompos === undefined) { GLogHelper.error(1); }
+        this.israndompos = _json_.israndompos
+        if (_json_.isground === undefined) { GLogHelper.error(1); }
+        this.isground = _json_.isground
+        if (_json_.atk === undefined) { GLogHelper.error(1); }
+        this.atk = _json_.atk
+        if (_json_.hp === undefined) { GLogHelper.error(1); }
+        this.hp = _json_.hp
+        if (_json_.mp === undefined) { GLogHelper.error(1); }
+        this.mp = _json_.mp
+        if (_json_.armorp === undefined) { GLogHelper.error(1); }
+        this.armorp = _json_.armorp
+        if (_json_.armorm === undefined) { GLogHelper.error(1); }
+        this.armorm = _json_.armorm
+        if (_json_.gold_min === undefined) { GLogHelper.error(1); }
+        this.goldMin = _json_.gold_min
+        if (_json_.gold_max === undefined) { GLogHelper.error(1); }
+        this.goldMax = _json_.gold_max
+        if (_json_.failure_count === undefined) { GLogHelper.error(1); }
+        this.failureCount = _json_.failure_count
+        if (_json_.elite_drop_index === undefined) { GLogHelper.error(1); }
+        this.eliteDropIndex = _json_.elite_drop_index
+        if (_json_.spawn_buff === undefined) { GLogHelper.error(1); }
+        this.spawnBuff = _json_.spawn_buff
+        if (_json_.gold_wave_duration === undefined) { GLogHelper.error(1); }
+        this.goldWaveDuration = _json_.gold_wave_duration
+        if (_json_.damage_per === undefined) { GLogHelper.error(1); }
+        this.damagePer = _json_.damage_per
+        if (_json_.gold_per === undefined) { GLogHelper.error(1); }
+        this.goldPer = _json_.gold_per
+        if (_json_.gold_total_x === undefined) { GLogHelper.error(1); }
+        this.goldTotalX = _json_.gold_total_x
+        if (_json_.gold_total_y === undefined) { GLogHelper.error(1); }
+        this.goldTotalY = _json_.gold_total_y
+        if (_json_.gold_total_z === undefined) { GLogHelper.error(1); }
+        this.goldTotalZ = _json_.gold_total_z
+    }
+
+    /**
+     * 索引
+     */
+    readonly id: string
+    /**
+     * 回合单位名
+     */
+    readonly unitname: string
+    /**
+     * 位置x[0-7]
+     */
+    readonly positionX: number
+    /**
+     * 位置y[1-9]
+     */
+    readonly positionY: number
+    /**
+     * 朝向x
+     */
+    readonly anglesX: number
+    /**
+     * 朝向y
+     */
+    readonly anglesY: number
+    /**
+     * 朝向z
+     */
+    readonly anglesZ: number
+    /**
+     * 是否随机坐标
+     */
+    readonly israndompos: number
+    /**
+     * 是否在地面上
+     */
+    readonly isground: number
+    /**
+     * 回合攻击系数
+     */
+    readonly atk: number
+    /**
+     * 回合血量系数
+     */
+    readonly hp: number
+    /**
+     * 回合蓝量系数
+     */
+    readonly mp: number
+    /**
+     * 物理护甲系数
+     */
+    readonly armorp: number
+    /**
+     * 魔法护甲系数
+     */
+    readonly armorm: number
+    /**
+     * 单个怪物击杀金币min
+     */
+    readonly goldMin: number
+    /**
+     * 单个怪物击杀金币max
+     */
+    readonly goldMax: number
+    /**
+     * 失败统计基数
+     */
+    readonly failureCount: number
+    /**
+     * 精英怪掉落池编号
+     */
+    readonly eliteDropIndex: string
+    /**
+     * 单位自带buff
+     */
+    readonly spawnBuff: string
+    /**
+     * 打金箱子存活多久
+     */
+    readonly goldWaveDuration: number
+    /**
+     * 打金-每多少伤害给金币
+     */
+    readonly damagePer: number
+    /**
+     * 打金-每次给金币
+     */
+    readonly goldPer: number
+    /**
+     * 打金系数x
+     */
+    readonly goldTotalX: number
+    /**
+     * 打金系数y
+     */
+    readonly goldTotalY: number
+    /**
+     * 打金系数z
+     */
+    readonly goldTotalZ: number
+
+    resolve(_tables: Map<string, any>) {
+    }
+}
+
+}
+
+export namespace Dota {
+export class RoundBoardChallengeConfig{
+    private _dataMap: Map<string, Dota.RoundBoardChallengeConfigRecord>
+    private _dataList: Dota.RoundBoardChallengeConfigRecord[]
+    constructor(_json_: any[]) {
+ this._dataMap  = new Map<string, Dota.RoundBoardChallengeConfigRecord>()
+        this._dataList = []
+        for(let _json2_ of _json_) {
+            let _v: Dota.RoundBoardChallengeConfigRecord
+            _v = new Dota.RoundBoardChallengeConfigRecord(_json2_)
+            this._dataList.push(_v)
+            this._dataMap.set(_v.id, _v)
+        }
+    }
+
+    getDataMap(): Map<string, Dota.RoundBoardChallengeConfigRecord> { return this._dataMap; }
+    getDataList(): Dota.RoundBoardChallengeConfigRecord[] { return this._dataList; }
+
+    get(key: string): Dota.RoundBoardChallengeConfigRecord | undefined { return this._dataMap.get(key); }
+
+    resolve(_tables: Map<string, any>) {
+        for(let v of this._dataList) {
+            v.resolve(_tables)
+        }
+    }
+
+}
+}
+
+
+
+export namespace Dota {
+export class RoundBoardChallengeConfigRecord {
+
+    constructor(_json_: any) {
+        if (_json_.id === undefined) { GLogHelper.error(1); }
+        this.id = _json_.id
+        if (_json_.round_type === undefined) { GLogHelper.error(1); }
+        this.roundType = _json_.round_type
+        if (_json_.round_label === undefined) { GLogHelper.error(1); }
+        this.roundLabel = _json_.round_label
+        if (_json_.round_unitcount === undefined) { GLogHelper.error(1); }
+        this.roundUnitcount = _json_.round_unitcount
+        if (_json_.enemyinfo === undefined) { GLogHelper.error(1); }
+        { this.enemyinfo = []; for(let _ele of _json_.enemyinfo) { let _e : Dota.RoundChallengeEnemyConfigBean; _e = new Dota.RoundChallengeEnemyConfigBean(_ele); this.enemyinfo.push(_e);}}
+    }
+
+    /**
+     * 回合编号
+     */
+    readonly id: string
+    /**
+     * 回合类型
+     */
+    readonly roundType: string
+    /**
+     * 回合标签
+     */
+    readonly roundLabel: string
+    /**
+     * 怪物数量
+     */
+    readonly roundUnitcount: number
+    readonly enemyinfo: Dota.RoundChallengeEnemyConfigBean[]
+
+    resolve(_tables: Map<string, any>) {
+        for(let _e of this.enemyinfo) { if (_e != null ) {_e.resolve(_tables);} }
+    }
+}
+
+}
+
+
+
+export namespace Dota {
+export class RoundChallengeEnemyConfigBean {
+
+    constructor(_json_: any) {
+        if (_json_.id === undefined) { GLogHelper.error(1); }
+        this.id = _json_.id
+        if (_json_.unitname === undefined) { GLogHelper.error(1); }
+        this.unitname = _json_.unitname
+        if (_json_.unit_weight === undefined) { GLogHelper.error(1); }
+        this.unitWeight = _json_.unit_weight
+        if (_json_.position_x === undefined) { GLogHelper.error(1); }
+        this.positionX = _json_.position_x
+        if (_json_.position_y === undefined) { GLogHelper.error(1); }
+        this.positionY = _json_.position_y
+        if (_json_.angles_x === undefined) { GLogHelper.error(1); }
+        this.anglesX = _json_.angles_x
+        if (_json_.angles_y === undefined) { GLogHelper.error(1); }
+        this.anglesY = _json_.angles_y
+        if (_json_.angles_z === undefined) { GLogHelper.error(1); }
+        this.anglesZ = _json_.angles_z
+        if (_json_.israndompos === undefined) { GLogHelper.error(1); }
+        this.israndompos = _json_.israndompos
+        if (_json_.isground === undefined) { GLogHelper.error(1); }
+        this.isground = _json_.isground
+        if (_json_.atk === undefined) { GLogHelper.error(1); }
+        this.atk = _json_.atk
+        if (_json_.hp === undefined) { GLogHelper.error(1); }
+        this.hp = _json_.hp
+        if (_json_.mp === undefined) { GLogHelper.error(1); }
+        this.mp = _json_.mp
+        if (_json_.armorp === undefined) { GLogHelper.error(1); }
+        this.armorp = _json_.armorp
+        if (_json_.armorm === undefined) { GLogHelper.error(1); }
+        this.armorm = _json_.armorm
+        if (_json_.gold_min === undefined) { GLogHelper.error(1); }
+        this.goldMin = _json_.gold_min
+        if (_json_.gold_max === undefined) { GLogHelper.error(1); }
+        this.goldMax = _json_.gold_max
+        if (_json_.failure_count === undefined) { GLogHelper.error(1); }
+        this.failureCount = _json_.failure_count
+        if (_json_.elite_drop_index === undefined) { GLogHelper.error(1); }
+        this.eliteDropIndex = _json_.elite_drop_index
+        if (_json_.spawn_buff === undefined) { GLogHelper.error(1); }
+        this.spawnBuff = _json_.spawn_buff
+        if (_json_.gold_wave_duration === undefined) { GLogHelper.error(1); }
+        this.goldWaveDuration = _json_.gold_wave_duration
+        if (_json_.damage_per === undefined) { GLogHelper.error(1); }
+        this.damagePer = _json_.damage_per
+        if (_json_.gold_per === undefined) { GLogHelper.error(1); }
+        this.goldPer = _json_.gold_per
+        if (_json_.gold_total_x === undefined) { GLogHelper.error(1); }
+        this.goldTotalX = _json_.gold_total_x
+        if (_json_.gold_total_y === undefined) { GLogHelper.error(1); }
+        this.goldTotalY = _json_.gold_total_y
+        if (_json_.gold_total_z === undefined) { GLogHelper.error(1); }
+        this.goldTotalZ = _json_.gold_total_z
+    }
+
+    /**
+     * 种怪索引
+     */
+    readonly id: string
+    /**
+     * 回合单位名
+     */
+    readonly unitname: string
+    /**
+     * 随机权重
+     */
+    readonly unitWeight: number
+    /**
+     * 位置x[0-7]
+     */
+    readonly positionX: number
+    /**
+     * 位置y[1-9]
+     */
+    readonly positionY: number
+    /**
+     * 朝向x
+     */
+    readonly anglesX: number
+    /**
+     * 朝向y
+     */
+    readonly anglesY: number
+    /**
+     * 朝向z
+     */
+    readonly anglesZ: number
+    /**
+     * 是否随机坐标
+     */
+    readonly israndompos: boolean
+    /**
+     * 是否在地面上
+     */
+    readonly isground: boolean
+    /**
+     * 回合攻击系数
+     */
+    readonly atk: number
+    /**
+     * 回合血量系数
+     */
+    readonly hp: number
+    /**
+     * 回合蓝量系数
+     */
+    readonly mp: number
+    /**
+     * 物理护甲系数
+     */
+    readonly armorp: number
+    /**
+     * 魔法护甲系数
+     */
+    readonly armorm: number
+    /**
+     * 单个怪物击杀金币min
+     */
+    readonly goldMin: number
+    /**
+     * 单个怪物击杀金币max
+     */
+    readonly goldMax: number
+    /**
+     * 失败统计基数
+     */
+    readonly failureCount: number
+    /**
+     * 精英怪掉落池编号
+     */
+    readonly eliteDropIndex: string
+    /**
+     * 单位自带buff
+     */
+    readonly spawnBuff: string
+    /**
+     * 打金箱子存活多久
+     */
+    readonly goldWaveDuration: number
+    /**
+     * 打金-每多少伤害给金币
+     */
+    readonly damagePer: number
+    /**
+     * 打金-每次给金币
+     */
+    readonly goldPer: number
+    /**
+     * 打金系数x
+     */
+    readonly goldTotalX: number
+    /**
+     * 打金系数y
+     */
+    readonly goldTotalY: number
+    /**
+     * 打金系数z
+     */
+    readonly goldTotalZ: number
+
+    resolve(_tables: Map<string, any>) {
+    }
+}
+
+}
+
 
 type JsonLoader = (file: string) => any
 
@@ -3821,6 +4331,10 @@ export class Tables {
     get WearableConfig(): Dota.WearableConfig  { return this._WearableConfig;}
     private _BuildingLevelUpConfig: Dota.BuildingLevelUpConfig
     get BuildingLevelUpConfig(): Dota.BuildingLevelUpConfig  { return this._BuildingLevelUpConfig;}
+    private _RoundBoardConfig: Dota.RoundBoardConfig
+    get RoundBoardConfig(): Dota.RoundBoardConfig  { return this._RoundBoardConfig;}
+    private _RoundBoardChallengeConfig: Dota.RoundBoardChallengeConfig
+    get RoundBoardChallengeConfig(): Dota.RoundBoardChallengeConfig  { return this._RoundBoardChallengeConfig;}
 
     constructor(loader: JsonLoader) {
         let tables = new Map<string, any>()
@@ -3900,6 +4414,10 @@ export class Tables {
         tables.set('Dota.WearableConfig', this._WearableConfig)
         this._BuildingLevelUpConfig = new Dota.BuildingLevelUpConfig(loader('dota_buildinglevelupconfig'))
         tables.set('Dota.BuildingLevelUpConfig', this._BuildingLevelUpConfig)
+        this._RoundBoardConfig = new Dota.RoundBoardConfig(loader('dota_roundboardconfig'))
+        tables.set('Dota.RoundBoardConfig', this._RoundBoardConfig)
+        this._RoundBoardChallengeConfig = new Dota.RoundBoardChallengeConfig(loader('dota_roundboardchallengeconfig'))
+        tables.set('Dota.RoundBoardChallengeConfig', this._RoundBoardChallengeConfig)
 
         this._ItemConfig.resolve(tables)
         this._ItemEquipConfig.resolve(tables)
@@ -3939,5 +4457,92 @@ export class Tables {
         this._PoolGroupConfig.resolve(tables)
         this._WearableConfig.resolve(tables)
         this._BuildingLevelUpConfig.resolve(tables)
+        this._RoundBoardConfig.resolve(tables)
+        this._RoundBoardChallengeConfig.resolve(tables)
     }
+reloadConfig(k: string , loader: JsonLoader) {
+ switch(k) { 
+case ('item_itemconfig'):
+        this._ItemConfig = new Item.ItemConfig(loader('item_itemconfig'));break;
+case ('item_itemequipconfig'):
+        this._ItemEquipConfig = new Item.ItemEquipConfig(loader('item_itemequipconfig'));break;
+case ('item_itembuffconfig'):
+        this._ItemBuffConfig = new Item.ItemBuffConfig(loader('item_itembuffconfig'));break;
+case ('item_itemprizepoolconfig'):
+        this._ItemPrizePoolConfig = new Item.ItemPrizePoolConfig(loader('item_itemprizepoolconfig'));break;
+case ('item_itemprizepoolgroupconfig'):
+        this._ItemPrizePoolGroupConfig = new Item.ItemPrizePoolGroupConfig(loader('item_itemprizepoolgroupconfig'));break;
+case ('shop_shopconfig'):
+        this._ShopConfig = new Shop.ShopConfig(loader('shop_shopconfig'));break;
+case ('prop_propconfig'):
+        this._PropConfig = new Prop.PropConfig(loader('prop_propconfig'));break;
+case ('prop_randompropconfig'):
+        this._RandomPropConfig = new Prop.RandomPropConfig(loader('prop_randompropconfig'));break;
+case ('activity_activityconfig'):
+        this._ActivityConfig = new Activity.ActivityConfig(loader('activity_activityconfig'));break;
+case ('activity_tactivitymonthlogin'):
+        this._TActivityMonthLogin = new Activity.TActivityMonthLogin(loader('activity_tactivitymonthlogin'));break;
+case ('activity_tactivitysevendaylogin'):
+        this._TActivitySevenDayLogin = new Activity.TActivitySevenDayLogin(loader('activity_tactivitysevendaylogin'));break;
+case ('activity_tactivitybattlepass'):
+        this._TActivityBattlePass = new Activity.TActivityBattlePass(loader('activity_tactivitybattlepass'));break;
+case ('activity_tactivityherorecordlevel'):
+        this._TActivityHeroRecordLevel = new Activity.TActivityHeroRecordLevel(loader('activity_tactivityherorecordlevel'));break;
+case ('activity_tactivitydailyonlineprize'):
+        this._TActivityDailyOnlinePrize = new Activity.TActivityDailyOnlinePrize(loader('activity_tactivitydailyonlineprize'));break;
+case ('activity_tactivityinvestmetastone'):
+        this._TActivityInvestMetaStone = new Activity.TActivityInvestMetaStone(loader('activity_tactivityinvestmetastone'));break;
+case ('activity_tactivitytotalgainmetastone'):
+        this._TActivityTotalGainMetaStone = new Activity.TActivityTotalGainMetaStone(loader('activity_tactivitytotalgainmetastone'));break;
+case ('activity_tactivitytotalonlinetime'):
+        this._TActivityTotalOnlineTime = new Activity.TActivityTotalOnlineTime(loader('activity_tactivitytotalonlinetime'));break;
+case ('activity_tactivitytotalspendmetastone'):
+        this._TActivityTotalSpendMetaStone = new Activity.TActivityTotalSpendMetaStone(loader('activity_tactivitytotalspendmetastone'));break;
+case ('activity_tactivitygiftcommond'):
+        this._TActivityGiftCommond = new Activity.TActivityGiftCommond(loader('activity_tactivitygiftcommond'));break;
+case ('activity_tactivitymentorshiptree'):
+        this._TActivityMentorshipTree = new Activity.TActivityMentorshipTree(loader('activity_tactivitymentorshiptree'));break;
+case ('hero_herolevelupconfig'):
+        this._HeroLevelUpConfig = new Hero.HeroLevelUpConfig(loader('hero_herolevelupconfig'));break;
+case ('hero_heroconfig'):
+        this._HeroConfig = new Hero.HeroConfig(loader('hero_heroconfig'));break;
+case ('hero_herotalentconfig'):
+        this._HeroTalentConfig = new Hero.HeroTalentConfig(loader('hero_herotalentconfig'));break;
+case ('season_seasonconfig'):
+        this._SeasonConfig = new Season.SeasonConfig(loader('season_seasonconfig'));break;
+case ('rank_rankprizeconfig'):
+        this._RankPrizeConfig = new Rank.RankPrizeConfig(loader('rank_rankprizeconfig'));break;
+case ('draw_drawtreasureconfig'):
+        this._DrawTreasureConfig = new Draw.DrawTreasureConfig(loader('draw_drawtreasureconfig'));break;
+case ('task_taskconfig'):
+        this._TaskConfig = new Task.TaskConfig(loader('task_taskconfig'));break;
+case ('achievement_achievementconfig'):
+        this._AchievementConfig = new Achievement.AchievementConfig(loader('achievement_achievementconfig'));break;
+case ('title_titleconfig'):
+        this._TitleConfig = new Title.TitleConfig(loader('title_titleconfig'));break;
+case ('glob_globalsetting'):
+        this._GlobalSetting = new Glob.GlobalSetting(loader('glob_globalsetting'));break;
+case ('dota_buffeffectconfig'):
+        this._BuffEffectConfig = new Dota.BuffEffectConfig(loader('dota_buffeffectconfig'));break;
+case ('dota_populationconfig'):
+        this._PopulationConfig = new Dota.PopulationConfig(loader('dota_populationconfig'));break;
+case ('dota_techconfig'):
+        this._TechConfig = new Dota.TechConfig(loader('dota_techconfig'));break;
+case ('dota_combinationconfig'):
+        this._CombinationConfig = new Dota.CombinationConfig(loader('dota_combinationconfig'));break;
+case ('dota_poolconfig'):
+        this._PoolConfig = new Dota.PoolConfig(loader('dota_poolconfig'));break;
+case ('dota_poolgroupconfig'):
+        this._PoolGroupConfig = new Dota.PoolGroupConfig(loader('dota_poolgroupconfig'));break;
+case ('dota_wearableconfig'):
+        this._WearableConfig = new Dota.WearableConfig(loader('dota_wearableconfig'));break;
+case ('dota_buildinglevelupconfig'):
+        this._BuildingLevelUpConfig = new Dota.BuildingLevelUpConfig(loader('dota_buildinglevelupconfig'));break;
+case ('dota_roundboardconfig'):
+        this._RoundBoardConfig = new Dota.RoundBoardConfig(loader('dota_roundboardconfig'));break;
+case ('dota_roundboardchallengeconfig'):
+        this._RoundBoardChallengeConfig = new Dota.RoundBoardChallengeConfig(loader('dota_roundboardchallengeconfig'));break;
+}
+};
+
 }

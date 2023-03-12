@@ -1,5 +1,5 @@
 import { Assert_SpawnEffect, ISpawnEffectInfo } from "../../../assert/Assert_SpawnEffect";
-import { KVHelper } from "../../../helper/KVHelper";
+import { Dota } from "../../../shared/Gen/Types";
 import { serializeETProps } from "../../../shared/lib/Entity";
 import { RoundConfig } from "../../../shared/RoundConfig";
 import { ChessVector } from "../ChessControl/ChessVector";
@@ -17,13 +17,13 @@ export class ERoundBoard extends ERound {
 
     _debug_StageStopped: boolean = false;
 
-    config: building_round_board.OBJ_2_1 = null;
+    config: Dota.RoundBoardConfigRecord;
     onAwake(configid: string): void {
         this.configID = configid;
-        this.config = KVHelper.KvServerConfig.building_round_board["" + configid];
+        this.config = GJSONConfig.RoundBoardConfig.get("" + configid);
     }
     OnStart() {
-        let delaytime = Number(this.config.round_readytime || 10);
+        let delaytime = (this.config.roundReadytime || 10);
         this.unitSpawned = 0;
         this.bRunning = true;
         this.roundState = RoundConfig.ERoundBoardState.start;
@@ -42,7 +42,7 @@ export class ERoundBoard extends ERound {
     }
 
     OnBattle() {
-        let delaytime = Number(this.config.round_time || 30);
+        let delaytime = (this.config.roundTime || 30);
         let player = GPlayerEntityRoot.GetOneInstance(this.BelongPlayerid);
         this.roundState = RoundConfig.ERoundBoardState.battle;
         this.roundLeftTime = GameRules.GetGameTime() + delaytime;
@@ -137,19 +137,18 @@ export class ERoundBoard extends ERound {
         return (this.BelongPlayerid == playerid)
     }
     CreateAllRoundBasicEnemy(SpawnEffect: ISpawnEffectInfo) {
-        let allenemy = this.config.unitinfo;
-        for (let unit_index in allenemy) {
-            this.CreateRoundBasicEnemy(unit_index, SpawnEffect);
+        for (let enemyinfo of this.config.enemyinfo) {
+            this.CreateRoundBasicEnemy(enemyinfo.id, SpawnEffect);
         }
     }
     CreateRoundBasicEnemy(unit_index: string, spawnEffect: ISpawnEffectInfo = null) {
         let player = GPlayerEntityRoot.GetOneInstance(this.BelongPlayerid);
         let playerid = this.BelongPlayerid;
-        let allenemy = this.config.unitinfo;
-        let _boardVec = new ChessVector(Number(allenemy[unit_index].position_x), Number(allenemy[unit_index].position_y), playerid);
+        let enemyinfo = this.config.enemyinfo.find((value) => { return value.id == unit_index });
+        let _boardVec = new ChessVector((enemyinfo.positionX), (enemyinfo.positionY), playerid);
         let pos = _boardVec.getVector3();
-        let angle = Vector(Number(allenemy[unit_index].angles_x), Number(allenemy[unit_index].angles_y), Number(allenemy[unit_index].angles_z));
-        let enemyName = allenemy[unit_index].unit;
+        let angle = Vector(enemyinfo.anglesX, enemyinfo.anglesY, enemyinfo.anglesZ);
+        let enemyName = enemyinfo.unitname;
         let delay = 0;
         if (spawnEffect != null && spawnEffect.tp_effect != null) {
             delay = RandomFloat(0.1, 2.1);

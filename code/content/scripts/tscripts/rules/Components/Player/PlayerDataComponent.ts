@@ -146,7 +146,7 @@ export class PlayerDataComponent extends PlayerData {
 
     OnRoundStartBegin(round: ERoundBoard) {
         if (round.BelongPlayerid == (this.BelongPlayerid)) {
-            this.addMoneyRoundStart(tonumber(round.config.roundprize_gold), tonumber(round.config.roundprize_wood));
+            this.addMoneyRoundStart(round.config.roundprizeGold, round.config.roundprizeWood);
         }
     }
 

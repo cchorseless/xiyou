@@ -29,6 +29,7 @@
 "DOTA_Tooltip_Ability_item_building_hero_primal_beast"       "獸"
 "DOTA_Tooltip_Ability_item_building_hero_pudge"       "屠夫"
 "DOTA_Tooltip_Ability_item_building_hero_pugna"       "帕格纳"
+"DOTA_Tooltip_Ability_item_building_hero_sandking"       "沙王"
 "DOTA_Tooltip_Ability_item_building_hero_shredder"       "伐木机"
 "DOTA_Tooltip_Ability_item_building_hero_skeleton_king"       "骷髅王"
 "DOTA_Tooltip_Ability_item_building_hero_slardar"       "斯拉达"

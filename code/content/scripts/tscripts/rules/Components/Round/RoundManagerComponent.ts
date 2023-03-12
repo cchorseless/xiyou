@@ -1,5 +1,4 @@
 
-import { KVHelper } from "../../../helper/KVHelper";
 import { ET, serializeETProps } from "../../../shared/lib/Entity";
 import { ERound } from "./ERound";
 import { ERoundBoard } from "./ERoundBoard";
@@ -17,14 +16,15 @@ export class RoundManagerComponent extends ET.Component {
     curRoundBoard: string;
 
     private initChallengeRound() {
-        for (let k in KVHelper.KvServerConfig.building_round_board_challenge) {
-            if (KVHelper.KvServerConfig.building_round_board_challenge[k].round_label == GGameServiceSystem.GetInstance().getDifficultyChapterDes()) {
-                this.RoundInfo[k] = this.AddChild(ERoundBoardChallenge, k);
+        let data = GJSONConfig.RoundBoardChallengeConfig.getDataList();
+        for (let info of data) {
+            if (info.roundLabel == GGameServiceSystem.GetInstance().getDifficultyChapterDes()) {
+                this.RoundInfo[info.id] = this.AddChild(ERoundBoardChallenge, info.id);
             }
         }
     }
 
-    runChallengeRound(roundid: keyof building_round_board_challenge.OBJ_1_1) {
+    runChallengeRound(roundid: string) {
         if (this.RoundInfo[roundid] == null) {
             this.RoundInfo[roundid] = this.AddChild(ERoundBoardChallenge, roundid);
         }
@@ -32,12 +32,12 @@ export class RoundManagerComponent extends ET.Component {
     }
 
     private initBoardRound() {
-        let keys = Object.keys(KVHelper.KvServerConfig.building_round_board);
-        for (let configid of keys) {
-            this.RoundInfo[configid] = this.AddChild(ERoundBoard, configid);
+        let data = GJSONConfig.RoundBoardChallengeConfig.getDataList();
+        for (let info of data) {
+            this.RoundInfo[info.id] = this.AddChild(ERoundBoard, info.id);
         }
     }
-    public runBoardRound(roundid: keyof building_round_board.OBJ_1_1) {
+    public runBoardRound(roundid: string) {
         if (this.RoundInfo[roundid] == null) {
             this.RoundInfo[roundid] = this.AddChild(ERoundBoard, roundid);
         }

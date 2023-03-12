@@ -83,7 +83,7 @@
 "building_hero_razor"       "电棍"
 "building_hero_riki"       "力丸"
 "building_hero_rubick"       "拉比克"
-"building_hero_sand_king"       "沙王"
+"building_hero_sandking"       "沙王"
 "building_hero_shadow_demon"       "暗影恶魔"
 "building_hero_shadow_shaman"       "小Y"
 "building_hero_shredder"       "伐木机"
