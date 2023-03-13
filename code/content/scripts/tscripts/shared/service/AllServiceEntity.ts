@@ -54,7 +54,6 @@ import { TGameRecordItem } from "./gamerecord/TGameRecordItem";
 import { HeroManageComponent } from "./hero/HeroManageComponent";
 import { HeroTalentComponent } from "./hero/HeroTalentComponent";
 import { THeroBanDesign } from "./hero/THeroBanDesign";
-import { THeroTalentItem } from "./hero/THeroTalentItem";
 import { THeroUnit } from "./hero/THeroUnit";
 import { CharacterMailComponent } from "./mail/CharacterMailComponent";
 import { TMail } from "./mail/TMail";
@@ -147,7 +146,6 @@ import { CharacterTitleItem } from "./title/CharacterTitleItem";
     HeroManageComponent,
     HeroTalentComponent,
     THeroBanDesign,
-    THeroTalentItem,
     THeroUnit,
 
     CharacterMailComponent,

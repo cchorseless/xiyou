@@ -67,7 +67,7 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
                         <CCPlayerListPanel />
                         <CCMiniMap />
                         <CCChallengeShopPanel />
-                        <CCDacBoard BShowBuffList={BShowBuffList} />
+                        <CCDacBoard BShowBuffList={BShowBuffList} CurSelectUnit={curunit} />
                         <CCUnitDamageInfo />
                         <CCCombinationBottomPanel CurSelectUnit={curunit} />
                         <CCArtifactListPanel />

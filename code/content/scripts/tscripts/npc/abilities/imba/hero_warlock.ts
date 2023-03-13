@@ -605,6 +605,12 @@ export class modifier_imba_upheaval_buff extends BaseModifier_Plus {
 }
 @registerAbility()
 export class imba_warlock_rain_of_chaos extends BaseAbility_Plus {
+
+
+    GetManaCost(level: number): number {
+        return 100
+    }
+
     IsHiddenWhenStolen(): boolean {
         return false;
     }

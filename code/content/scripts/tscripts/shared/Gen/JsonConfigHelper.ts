@@ -5,6 +5,15 @@ export module JsonConfigHelper {
         return GJSONConfig.ItemConfig.get(itemid);
     }
 
+    const HeroIdNameMap = new Map<number, string>();
+
+    export function GetHeroName(heroConfigId: number): string {
+        if (HeroIdNameMap.size == 0) {
+            GJSONConfig.BuildingLevelUpConfig.getDataList().forEach(record => { HeroIdNameMap.set(record.BindHeroId, record.Id); });
+        }
+
+        return HeroIdNameMap.get(heroConfigId)!;
+    }
     const AbilitySectInfo: { [key: string]: string[] } = {};
     export function Init() {
         if (_G.GJsonConfigHelper == null) {

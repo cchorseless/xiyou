@@ -28,6 +28,6 @@ export class CharacterShopComponent extends ET.Component {
         this.onReload();
     }
     onReload() {
-        this.SyncClient();
+        this.SyncClient(true);
     }
 }

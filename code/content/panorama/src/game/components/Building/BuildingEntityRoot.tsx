@@ -7,6 +7,10 @@ export class BuildingEntityRoot extends BattleUnitEntityRoot {
     Config() {
         return (KVHelper.KVData()).building_unit_tower[this.ConfigID];
     }
+
+    GetHeroUnit() {
+        return this.GetPlayer().TCharacter!.HeroManageComp!.GetHeroUnit(this.ConfigID);
+    }
 }
 declare global {
     type IBuildingEntityRoot = BuildingEntityRoot;

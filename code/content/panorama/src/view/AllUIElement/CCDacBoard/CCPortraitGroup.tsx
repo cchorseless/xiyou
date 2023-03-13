@@ -8,7 +8,9 @@ import { CCUnitStats } from "./CCUnitStats";
 import "./CCPortraitGroup.less";
 
 interface ICCPortraitGroup {
-    particleAttrs: NodePropsData
+    particleAttrs: NodePropsData;
+    CurSelectUnit: EntityIndex;
+
 }
 
 export class CCPortraitGroup extends CCPanel<ICCPortraitGroup> {
@@ -36,7 +38,7 @@ export class CCPortraitGroup extends CCPanel<ICCPortraitGroup> {
                         </CCPanel>
                         <GenericPanel type="DOTAHUDDeathPanel" id="death_panel_buyback" align="right center" />
                         <CCUnitStats align="right center" />
-                        <CCDOTAXP align="left bottom" marginLeft={"-20px"} />
+                        <CCDOTAXP align="right bottom" marginRight={"140px"} CurSelectUnit={this.props.CurSelectUnit} />
                     </CCPanel>
                     {this.props.children}
                     {this.__root___childs}

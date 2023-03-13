@@ -38,9 +38,11 @@ export class TShopUnit extends ET.Entity {
         items.sort((a, b) => { return a.ConfigId - b.ConfigId })
         return items;
     }
-
+    onSerializeToEntity() {
+        this.onReload();
+    }
     onReload(): void {
-        this.SyncClient()
+        this.SyncClient(true)
     }
 }
 

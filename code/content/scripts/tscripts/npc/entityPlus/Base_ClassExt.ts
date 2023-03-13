@@ -1108,6 +1108,12 @@ declare global {
          * @Both
          */
         RegOwnerSelf(b: boolean): void;
+        /**
+         * @Both
+         * 设置自己等级
+         * @param n 
+         */
+        CreatureLevelUp(n: number): void;
 
         /**
          * 注册BUFF
@@ -1572,6 +1578,8 @@ BaseNPC.GetStatusResistanceFactor = function (hCaster: CDOTA_BaseNPC) {
 BaseNPC.findBuffStack = function (buffname: string, caster: CDOTA_BaseNPC = null) {
     return this.GetModifierStackCount(buffname, caster)
 }
+
+
 if (IsServer()) {
     BaseNPC.UpdateOnRemove = function () {
         if (this.__TempData) {

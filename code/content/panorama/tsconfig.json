@@ -1,8 +1,9 @@
 {
     "include": [
         "src",
-        "../scripts/tscripts/shared"
-, "src/libs/zlib.min.js"    ],
+        "../scripts/tscripts/shared",
+        "src/libs/zlib.min.js"
+    ],
     "compilerOptions": {
         "target": "es2017",
         "lib": [

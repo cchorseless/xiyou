@@ -4,6 +4,7 @@ import { ECombination } from "../../game/components/Combination/ECombination";
 import { CSSHelper } from "../../helper/CSSHelper";
 import { AbilityHelper } from "../../helper/DotaEntityHelper";
 import { BaseEntityRoot } from "../../libs/BaseEntityRoot";
+import { CCIcon_Scepter } from "../AllUIElement/CCIcons/CCIcon_Scepter";
 import { CCLabel } from "../AllUIElement/CCLabel/CCLabel";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCPanelBG, CCPanelHeader } from "../AllUIElement/CCPanel/CCPanelPart";
@@ -90,9 +91,9 @@ export class CCCombinationInfoDialog extends CCPanel<ICCCombinationInfoDialog> {
                 <CCPanelBG width="380px" flowChildren="down" type="ToolTip">
                     <CCPanelHeader flowChildren="right">
                         <CCCombinationIcon id="SectIcon" sectName={sectName} />
-                        <CCPanel className="SectDes" flowChildren="down" marginLeft="8px" >
+                        <CCPanel className="SectDes" flowChildren="down" width="250px" marginLeft="8px" >
                             <Label id="SectNameHeader" html={true} text={SectNameHeader} />
-                            <Label html={true} text={$.Localize("#lang_" + sectName + "_Des")} />
+                            <Label id="SectNameHeaderDes" html={true} text={$.Localize("#lang_" + sectName + "_Des")} />
                             {/* <Label id="SectNameDescription" html={true} text={replaceValues({
                             sStr: $.Localize("#DOTA_Tooltip_ability_" + sectName + "_description"),
                             sAbilityName: sectName,
@@ -101,6 +102,7 @@ export class CCCombinationInfoDialog extends CCPanel<ICCCombinationInfoDialog> {
                             // bOnlyNowLevelValue: true
                         })} /> */}
                         </CCPanel>
+                        <CCIcon_Scepter />
                     </CCPanelHeader>
                     <CCProgressBar id="RemainProgress" width="100%" max={100} value={50} >
                         <CCLabel align="center center" localizedText={"剩余:{d:value}%"} dialogVariables={{ value: 50 }} />

@@ -1,6 +1,7 @@
 
 import { ET, serializeETProps } from "../../lib/Entity";
 import { TCharacter } from "../account/TCharacter";
+import { THeroUnit } from "./THeroUnit";
 
 
 @GReloadable
@@ -33,6 +34,15 @@ export class HeroManageComponent extends ET.Component {
         this.onReload();
     }
     onReload() {
-        this.SyncClient();
+        this.SyncClient(true);
+    }
+
+
+    GetHeroUnit(id: string) {
+        let config = GJSONConfig.BuildingLevelUpConfig.get(id);
+        if (config !== null) {
+            let heroUnits = THeroUnit.GetGroupInstance(this.BelongPlayerid);
+            return heroUnits.find((hero) => { return hero.BindHeroName() == id })
+        }
     }
 }

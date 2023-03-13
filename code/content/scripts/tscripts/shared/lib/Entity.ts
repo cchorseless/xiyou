@@ -87,8 +87,12 @@ export module ET {
             // 数据只绑定在EntityRoot上，其他组件不需要重复同步
             return this.SerializeETProps != null || (this.Domain.SerializeDomainProps != null && (this.Domain.ETRoot as any) == this);
         }
-        public get updateEventName() {
+        public get updateEventSelfName() {
             return "updateEntity_" + this.InstanceId;
+        }
+
+        public static updateEventClassName() {
+            return "updateEntity_" + this.name;
         }
         onSerializeToEntity?(): void;
         /**初始化 */
@@ -124,7 +128,7 @@ export module ET {
         public RegRef(content: any & { UpdateState: (o: any) => void }) {
             const entity = this;
             content.UpdateState(entity.Ref());
-            GEventHelper.AddEvent(this.updateEventName,
+            GEventHelper.AddEvent(this.updateEventSelfName,
                 GHandler.create(content, () => {
                     content && content.setState(entity.Ref(true));
                 })
@@ -359,15 +363,19 @@ export module ET {
         }
         static FromJson(json: IEntityJson, belongPlayerid = -1) {
             let entity = ETEntitySystem.GetEntity(json._id + json._t);
+            let type: typeof Entity = GGetRegClass(json._t);
             if (entity != null) {
                 entity.updateFromJson(json);
                 if (entity.onReload) {
                     entity.onReload();
                 }
-                GEventHelper.FireEvent(entity.updateEventName, null, null, this);
+                GEventHelper.FireEvent(entity.updateEventSelfName, null, null, entity);
+                if (type) {
+                    let playerid = (entity.BelongPlayerid >= 0 ? entity.BelongPlayerid : null) as PlayerID;
+                    GEventHelper.FireEvent(type.updateEventClassName(), null, playerid, entity);
+                }
                 return entity;
             }
-            let type: typeof Entity = GGetRegClass(json._t);
             if (type == null) {
                 GLogHelper.error("cant find class" + json._t);
             }
@@ -975,7 +983,7 @@ export class ETEntitySystem {
             }
         }
         if (typeList.length == 0) {
-            GLogHelper.error(typename + " is not a Muti instance");
+            GLogHelper.warn(typename + " is not a Muti instance");
         }
         return typeList as InstanceType<T>[];
     }

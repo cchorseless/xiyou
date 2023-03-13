@@ -14,6 +14,7 @@ import { CCPortraitGroup } from "./CCPortraitGroup";
 interface ICCDacBoard {
     type?: "Tui3" | "Style1";
     BShowBuffList: boolean;
+    CurSelectUnit: EntityIndex;
 }
 export class CCDacBoard extends CCPanel<ICCDacBoard> {
 
@@ -37,11 +38,11 @@ export class CCDacBoard extends CCPanel<ICCDacBoard> {
                 <CCPanel id="DacBoardBG" className={CSSHelper.ClassMaker(this.props.type)} />
                 <CCPanel id="DacBoardDiv">
                     <Panel id="DacBoardLeft" hittest={false}>
-                        <CCPortraitGroup particleAttrs={{}} align="right bottom" dialogTooltip={{ cls: CCUnitStatsDialog, posRight: false }} />
+                        <CCPortraitGroup CurSelectUnit={this.props.CurSelectUnit} particleAttrs={{}} align="right bottom" dialogTooltip={{ cls: CCUnitStatsDialog, posRight: false }} />
                     </Panel>
                     <CCPanel id="DacBoardCenter" hittest={false}>
                         <CCPanel flowChildren="right" hittest={false} verticalAlign="bottom" marginBottom={"60px"} >
-                            <CCTalentDisplayItem />
+                            <CCTalentDisplayItem CurSelectUnit={this.props.CurSelectUnit} />
                             <CCAbilityList2 horizontalAlign={"center"} verticalAlign="center" />
                             <CCDOTAAghsStatusDisplay />
                         </CCPanel>

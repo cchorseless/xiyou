@@ -3,7 +3,7 @@ import { CCPanel } from "../CCPanel/CCPanel";
 import { CCTalentBranch } from "./CCTalentBranch";
 import "./CCTalentDisplayItem.less";
 export interface ICCTalentDisplayItem {
-
+    CurSelectUnit: EntityIndex;
 }
 
 export class CCTalentDisplayItem extends CCPanel<ICCTalentDisplayItem> {
@@ -43,7 +43,7 @@ export class CCTalentDisplayItem extends CCPanel<ICCTalentDisplayItem> {
     }
 
     render() {
-        const iLocalPortraitUnit = Players.GetLocalPlayerPortraitUnit();
+        const iLocalPortraitUnit = this.props.CurSelectUnit;
         return (
             <Panel className="CCTalentDisplayItem" ref={this.__root__}      {...this.initRootAttrs()}>
                 <CCPanel dialogTooltip={{

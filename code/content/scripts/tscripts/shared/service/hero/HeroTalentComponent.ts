@@ -12,35 +12,17 @@ export class HeroTalentComponent extends ET.Component {
     @serializeETProps()
     TotalTalentPoint: number;
 
-
-    private _Talents = new GDictionary<
-        number,
-        string
-    >();
     @serializeETProps()
-    public get Talents() {
-        return this._Talents;
-    }
-    public set Talents(data) {
-        this._Talents.copy(data);
-
-    }
-
-    private _TalentLearn: IGDictionary<number, number[]> = new GDictionary<
-        number,
-        number[]
-    >();
-    @serializeETProps()
-    public get TalentLearn() {
-        return this._TalentLearn;
-    }
-    public set TalentLearn(data: IGDictionary<number, number[]>) {
-        this._TalentLearn.copy(data);
-
-    }
+    public TalentLearn: number[] = [];
 
 
     public get HeroUnit(): THeroUnit { return this.GetParent<THeroUnit>(); }
+
+
+    GetTalentLearn(level: number, isleft: boolean) {
+        let index = level * 100 + (isleft ? 0 : 1);
+        return this.TalentLearn.includes(index);
+    }
 
     onSerializeToEntity() {
     }

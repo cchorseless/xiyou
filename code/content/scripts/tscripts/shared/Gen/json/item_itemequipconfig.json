@@ -1,44 +1,39 @@
 [
   {
-    "id": 10004,
-    "BindHeroId": 0,
-    "EquipSlot": 0,
+    "id": 20004,
+    "EquipSlot": 1,
     "EquipRandomProp": [],
     "SuitId": 0,
     "SuitName": "",
     "SuitInfo": []
   },
   {
-    "id": 10005,
-    "BindHeroId": 0,
-    "EquipSlot": 0,
+    "id": 20005,
+    "EquipSlot": 1,
     "EquipRandomProp": [],
     "SuitId": 0,
     "SuitName": "",
     "SuitInfo": []
   },
   {
-    "id": 10006,
-    "BindHeroId": 0,
-    "EquipSlot": 0,
+    "id": 20006,
+    "EquipSlot": 1,
     "EquipRandomProp": [],
     "SuitId": 0,
     "SuitName": "",
     "SuitInfo": []
   },
   {
-    "id": 10007,
-    "BindHeroId": 0,
-    "EquipSlot": 0,
+    "id": 20007,
+    "EquipSlot": 1,
     "EquipRandomProp": [],
     "SuitId": 0,
     "SuitName": "",
     "SuitInfo": []
   },
   {
-    "id": 10008,
-    "BindHeroId": 0,
-    "EquipSlot": 0,
+    "id": 20008,
+    "EquipSlot": 1,
     "EquipRandomProp": [
       5001001,
       22
@@ -48,85 +43,944 @@
     "SuitInfo": []
   },
   {
-    "id": 10009,
-    "BindHeroId": 0,
-    "EquipSlot": 0,
+    "id": 20009,
+    "EquipSlot": 1,
     "EquipRandomProp": [],
     "SuitId": 0,
     "SuitName": "",
     "SuitInfo": []
   },
   {
-    "id": 10010,
-    "BindHeroId": 0,
-    "EquipSlot": 0,
+    "id": 20010,
+    "EquipSlot": 1,
     "EquipRandomProp": [],
     "SuitId": 0,
     "SuitName": "",
     "SuitInfo": []
   },
   {
-    "id": 10011,
-    "BindHeroId": 0,
-    "EquipSlot": 0,
-    "EquipRandomProp": [],
-    "SuitId": 0,
-    "SuitName": "",
-    "SuitInfo": [
-      {
-        "SuitCount": 2,
-        "SuitBuffs": [
-          10001
-        ]
-      },
-      {
-        "SuitCount": 3,
-        "SuitBuffs": [
-          1002
-        ]
-      }
-    ]
-  },
-  {
-    "id": 10013,
-    "BindHeroId": 0,
-    "EquipSlot": 0,
+    "id": 20011,
+    "EquipSlot": 1,
     "EquipRandomProp": [],
     "SuitId": 0,
     "SuitName": "",
     "SuitInfo": []
   },
   {
-    "id": 10014,
-    "BindHeroId": 0,
-    "EquipSlot": 0,
+    "id": 20012,
+    "EquipSlot": 1,
     "EquipRandomProp": [],
     "SuitId": 0,
     "SuitName": "",
     "SuitInfo": []
   },
   {
-    "id": 10015,
-    "BindHeroId": 0,
-    "EquipSlot": 0,
+    "id": 20013,
+    "EquipSlot": 1,
     "EquipRandomProp": [],
     "SuitId": 0,
     "SuitName": "",
     "SuitInfo": []
   },
   {
-    "id": 10016,
-    "BindHeroId": 0,
-    "EquipSlot": 0,
+    "id": 20014,
+    "EquipSlot": 1,
     "EquipRandomProp": [],
     "SuitId": 0,
     "SuitName": "",
     "SuitInfo": []
   },
   {
-    "id": 10017,
-    "BindHeroId": 0,
-    "EquipSlot": 0,
+    "id": 20015,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20016,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20017,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20018,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20019,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20020,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20021,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20022,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20023,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20024,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20025,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20026,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20027,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20028,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20029,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20030,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20031,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20032,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20033,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20034,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20035,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20036,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20037,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20038,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20039,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20040,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20041,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20042,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20043,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20044,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20045,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20046,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20047,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20048,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20049,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20050,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20051,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20052,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20053,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20054,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20055,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20056,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20057,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20058,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20059,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20060,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20061,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20062,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20063,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20064,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20065,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20066,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20067,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20068,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20069,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20070,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20071,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20072,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20073,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20074,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20075,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20076,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20077,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20078,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20079,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20080,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20081,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20082,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20083,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20084,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20085,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20086,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20087,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20088,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20089,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20090,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20091,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20092,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20093,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20094,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20095,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20096,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20097,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20098,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20099,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20100,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20101,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20102,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20103,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20104,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20105,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20106,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20107,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20108,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20109,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20110,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20111,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20112,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20113,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20114,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20115,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20116,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20117,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20118,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20119,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20120,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20121,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20122,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20123,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20124,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20125,
+    "EquipSlot": 1,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 20126,
+    "EquipSlot": 1,
     "EquipRandomProp": [],
     "SuitId": 0,
     "SuitName": "",

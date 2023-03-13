@@ -5,6 +5,8 @@ import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { modifier_mana_control } from "../../../npc/modifier/battle/modifier_mana_control";
 import { modifier_out_of_game } from "../../../npc/modifier/battle/modifier_out_of_game";
 import { BuildingConfig } from "../../../shared/BuildingConfig";
+import { GEventHelper } from "../../../shared/lib/GEventHelper";
+import { THeroUnit } from "../../../shared/service/hero/THeroUnit";
 import { BattleUnitEntityRoot } from "../BattleUnit/BattleUnitEntityRoot";
 import { CombinationComponent } from "../Combination/CombinationComponent";
 import { BuildingRuntimeEntityRoot } from "./BuildingRuntimeEntityRoot";
@@ -19,8 +21,40 @@ export class BuildingEntityRoot extends BattleUnitEntityRoot {
         (this.EntityId as any) = this.GetDomain<IBaseNpc_Plus>().GetEntityIndex();
         this.AddComponent(GGetRegClass<typeof CombinationComponent>("CombinationComponent"));
         this.addBattleComp();
+        let herounit = GTCharacter.GetOneInstance(this.BelongPlayerid).HeroManageComp.GetHeroUnit(conf);
+        this.LoadServerData(herounit, true);
+        GEventHelper.AddEvent(THeroUnit.updateEventClassName(), GHandler.create(this, (_hero: THeroUnit) => {
+            this.LoadServerData(_hero);
+        }), this.BelongPlayerid);
         this.onInit()
     }
+
+    LoadServerData(herounit: THeroUnit, isinit = false) {
+        if (!herounit || herounit.IsDisposed()) { return }
+        let npc = this.GetDomain<IBaseNpc_Plus>();
+        if (herounit.BindHeroName() != npc.GetUnitName()) { return }
+        // 设置等级
+        if (herounit && herounit.Level > npc.GetLevel()) {
+            let iLevel = herounit.Level - npc.GetLevel();
+            npc.CreatureLevelUp(iLevel);
+            if (!isinit) {
+                for (let i = 0; i < iLevel; i++) {
+                    GTimerHelper.AddTimer(0.5 * i, GHandler.create(this, () => {
+                        ResHelper.CreateParticle(
+                            new ResHelper.ParticleInfo()
+                                .set_resPath("particles/generic_hero_status/hero_levelup.vpcf")
+                                .set_iAttachment(ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW)
+                                .set_owner(npc)
+                                .set_validtime(3)
+                        );
+                        EmitSoundOn("lvl_up", npc);
+                    }));
+                }
+            }
+        }
+    }
+
+
     /**金币价格 */
     GetGoldCost() {
         return this.iGoldCost || 0;
@@ -38,7 +72,7 @@ export class BuildingEntityRoot extends BattleUnitEntityRoot {
         let domain = this.GetDomain<IBaseNpc_Plus>();
         let levelupconfig = GJSONConfig.BuildingLevelUpConfig.get(domain.GetUnitName());
         if (levelupconfig) {
-            let levelup = levelupconfig.LevelUpInfo.find(v => v.Level == this.iStar);
+            let levelup = levelupconfig.StarUpInfo.find(v => v.Star == this.iStar);
             if (levelup) {
                 if (levelup.AttachWearables.length > 0) {
                     levelup.AttachWearables.forEach(v => {
@@ -114,6 +148,7 @@ export class BuildingEntityRoot extends BattleUnitEntityRoot {
         if (GFuncEntity.IsValid(npc)) {
             GFuncEntity.SafeDestroyUnit(npc);
         }
+        // npc.HasScepter
     }
 
     onKilled(events: EntityKilledEvent): void {

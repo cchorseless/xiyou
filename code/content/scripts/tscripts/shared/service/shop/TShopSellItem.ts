@@ -26,7 +26,9 @@ export class TShopSellItem extends ET.Entity {
     //     this.SellConfig = GFromJson(s);
     //     this._ConfigJson = s;
     // }
-
+    onSerializeToEntity() {
+        this.onReload();
+    }
     onReload(): void {
         this.SyncClient()
     }
