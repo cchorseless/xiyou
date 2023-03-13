@@ -1,3 +1,17 @@
+@keyframes LevelUpPulse {
+    0% {
+        opacity: 0.5;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.5;
+    }
+}
+
 .CCTalentBranch {
     width: 400px;
     flow-children: down;
@@ -22,16 +36,17 @@
         text-shadow: 0px 0px 3px 3.0 #000000;
         margin: 2px 0px;
     }
-
 }
 
 .CCTalentRow {
-    width: fill-parent-flow(1);
+    width: 170px;
     height: 40px;
 
     .TalentLeft {
         vertical-align: center;
-        background-color: gradient(linear, 70% 0%, 100% 0%, from(#10233a), to(#10233a00));
+        background-color: gradient(linear, 0% 0%, 30% 0%, from(#10233a00), to(#10233a));
+        width: 100%;
+        height: 100%;
 
         &.Selected {
             .CCTalentDescription {
@@ -43,7 +58,7 @@
             // background-color: gradient(linear, 70% 0%, 100% 0%, from(#3a2610), to(#10233a00));
         }
 
-        &.active {
+        &.Actived {
             .CCTalentDescription {
                 saturation: 1;
                 brightness: 1;
@@ -60,7 +75,9 @@
 
     .TalentRight {
         vertical-align: center;
-        background-color: gradient(linear, 0% 0%, 30% 0%, from(#10233a00), to(#10233a));
+        background-color: gradient(linear, 70% 0%, 100% 0%, from(#10233a), to(#10233a00));
+        width: 100%;
+        height: 100%;
 
         &.Selected {
             .CCTalentDescription {
@@ -73,7 +90,7 @@
         }
 
 
-        &.active {
+        &.Actived {
             .CCTalentDescription {
                 saturation: 1;
                 brightness: 1;
@@ -118,18 +135,4 @@
         }
     }
 
-}
-
-@keyframes LevelUpPulse {
-    0% {
-        opacity: 0.5;
-    }
-
-    50% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: 0.5;
-    }
 }

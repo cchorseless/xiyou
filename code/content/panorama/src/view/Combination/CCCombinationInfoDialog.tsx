@@ -1,14 +1,13 @@
 import React from "react";
 import { Dota } from "../../../../scripts/tscripts/shared/Gen/Types";
+import { HeroEquipComponent } from "../../../../scripts/tscripts/shared/service/equip/HeroEquipComponent";
 import { ECombination } from "../../game/components/Combination/ECombination";
 import { CSSHelper } from "../../helper/CSSHelper";
 import { AbilityHelper } from "../../helper/DotaEntityHelper";
 import { BaseEntityRoot } from "../../libs/BaseEntityRoot";
 import { CCIcon_Scepter } from "../AllUIElement/CCIcons/CCIcon_Scepter";
-import { CCLabel } from "../AllUIElement/CCLabel/CCLabel";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCPanelBG, CCPanelHeader } from "../AllUIElement/CCPanel/CCPanelPart";
-import { CCProgressBar } from "../AllUIElement/CCProgressBar/CCProgressBar";
 import { CCCombinationIcon } from "./CCCombinationIcon";
 
 import "./CCCombinationInfoDialog.less";
@@ -72,26 +71,45 @@ export class CCCombinationInfoDialog extends CCPanel<ICCCombinationInfoDialog> {
         }
         let data = GJSONConfig.CombinationConfig.getDataList();
         let configs: { [k: string]: Dota.CombinationConfigRecord } = {};
+        let bindEquipid = 0;
+        let isConditionActive = false;
         for (let info of data) {
             if (info.relation == sectName && (info.Abilityid == abilityitemname || abilityitemname == null)) {
                 if (configs[info.relationid] == null) {
                     configs[info.relationid] = info;
+                    if (info.Equipid) {
+                        bindEquipid = info.Equipid;
+                    }
                 }
             }
         }
+        if (bindEquipid != 0 && playerid !== -1) {
+            let allheroEquip = HeroEquipComponent.GetGroupInstance(playerid!);
+            for (let heroEquip of allheroEquip) {
+                if (heroEquip.IsScepter(bindEquipid)) {
+                    isConditionActive = true;
+                    break;
+                }
+            }
+        }
+        const sectlock = bindEquipid > 0 && isConditionActive == false;
         let configlist = Object.values(configs);
         configlist.sort((a, b) => { return a.activeCount - b.activeCount });
         let SectNameHeader = $.Localize("#lang_" + sectName);
-        if (allcombs.length > 0) {
+        if (sectlock) {
+            SectNameHeader += "(需符石激活)"
+        }
+        else if (allcombs.length > 0) {
             let lastcomb = allcombs[0]
             SectNameHeader += `(${lastcomb.uniqueConfigList.length}/${lastcomb.activeNeedCount})`
         }
+
         return (
             <Panel ref={this.__root__} className="CCCombinationInfoDialog"  {...this.initRootAttrs()}>
                 <CCPanelBG width="380px" flowChildren="down" type="ToolTip">
                     <CCPanelHeader flowChildren="right">
-                        <CCCombinationIcon id="SectIcon" sectName={sectName} />
-                        <CCPanel className="SectDes" flowChildren="down" width="250px" marginLeft="8px" >
+                        <CCCombinationIcon id="SectIcon" sectName={sectName} lock={sectlock} />
+                        <CCPanel className={CSSHelper.ClassMaker("SectDes", { Disable: sectlock })} flowChildren="down" width="250px" marginLeft="8px"  >
                             <Label id="SectNameHeader" html={true} text={SectNameHeader} />
                             <Label id="SectNameHeaderDes" html={true} text={$.Localize("#lang_" + sectName + "_Des")} />
                             {/* <Label id="SectNameDescription" html={true} text={replaceValues({
@@ -102,11 +120,11 @@ export class CCCombinationInfoDialog extends CCPanel<ICCCombinationInfoDialog> {
                             // bOnlyNowLevelValue: true
                         })} /> */}
                         </CCPanel>
-                        <CCIcon_Scepter />
+                        {bindEquipid > 0 && <CCIcon_Scepter on={isConditionActive} />}
                     </CCPanelHeader>
-                    <CCProgressBar id="RemainProgress" width="100%" max={100} value={50} >
+                    {/* <CCProgressBar id="RemainProgress" width="100%" max={100} value={50} >
                         <CCLabel align="center center" localizedText={"剩余:{d:value}%"} dialogVariables={{ value: 50 }} />
-                    </CCProgressBar>
+                    </CCProgressBar> */}
                     <CCPanel id="ECombContainer" flowChildren="down">
                         {configlist.map((_config, index) => {
                             let isactive = false;

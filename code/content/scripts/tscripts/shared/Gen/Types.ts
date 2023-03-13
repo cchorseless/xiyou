@@ -2271,6 +2271,8 @@ export class HeroLevelUpConfigRecord {
         this.id = _json_.id
         if (_json_.Exp === undefined) { GLogHelper.error(1); }
         this.Exp = _json_.Exp
+        if (_json_.TotalTalentPoint === undefined) { GLogHelper.error(1); }
+        this.TotalTalentPoint = _json_.TotalTalentPoint
     }
 
     /**
@@ -2281,6 +2283,10 @@ export class HeroLevelUpConfigRecord {
      * 所需经验
      */
     readonly Exp: number
+    /**
+     * 天赋总点数
+     */
+    readonly TotalTalentPoint: number
 
     resolve(_tables: Map<string, any>) {
     }
@@ -3249,8 +3255,8 @@ export class CombinationConfigRecord {
         this.heroid = _json_.heroid
         if (_json_.Abilityid === undefined) { GLogHelper.error(1); }
         this.Abilityid = _json_.Abilityid
-        if (_json_.ActiveCondition === undefined) { GLogHelper.error(1); }
-        this.ActiveCondition = _json_.ActiveCondition
+        if (_json_.Equipid === undefined) { GLogHelper.error(1); }
+        this.Equipid = _json_.Equipid
     }
 
     /**
@@ -3298,9 +3304,9 @@ export class CombinationConfigRecord {
      */
     readonly Abilityid: string
     /**
-     * 激活条件
+     * 激活所需符石id
      */
-    readonly ActiveCondition: string
+    readonly Equipid: number
 
     resolve(_tables: Map<string, any>) {
     }

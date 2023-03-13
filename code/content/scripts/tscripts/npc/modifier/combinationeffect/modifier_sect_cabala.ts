@@ -30,10 +30,10 @@ export class modifier_sect_cabala_crystal_maiden_brilliance_aura_b extends modif
 export class modifier_sect_cabala_crystal_maiden_brilliance_aura_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_cabala_ability10_invoker_emp_b extends modifier_combination_effect {
+export class modifier_sect_cabala_invoker_emp_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_cabala_ability10_invoker_emp_c extends modifier_combination_effect {
+export class modifier_sect_cabala_invoker_emp_c extends modifier_combination_effect {
 }
 @registerModifier()
 export class modifier_sect_cabala_keeper_of_the_light_chakra_magic_b extends modifier_combination_effect {

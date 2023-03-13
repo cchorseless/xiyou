@@ -1,102 +1,127 @@
 [
   {
     "id": 1,
-    "Exp": 100
+    "Exp": 100,
+    "TotalTalentPoint": 0
   },
   {
     "id": 2,
-    "Exp": 200
+    "Exp": 200,
+    "TotalTalentPoint": 0
   },
   {
     "id": 3,
-    "Exp": 300
+    "Exp": 300,
+    "TotalTalentPoint": 0
   },
   {
     "id": 4,
-    "Exp": 400
+    "Exp": 400,
+    "TotalTalentPoint": 1
   },
   {
     "id": 5,
-    "Exp": 500
+    "Exp": 500,
+    "TotalTalentPoint": 1
   },
   {
     "id": 6,
-    "Exp": 600
+    "Exp": 600,
+    "TotalTalentPoint": 1
   },
   {
     "id": 7,
-    "Exp": 700
+    "Exp": 700,
+    "TotalTalentPoint": 2
   },
   {
     "id": 8,
-    "Exp": 800
+    "Exp": 800,
+    "TotalTalentPoint": 2
   },
   {
     "id": 9,
-    "Exp": 900
+    "Exp": 900,
+    "TotalTalentPoint": 2
   },
   {
     "id": 10,
-    "Exp": 1000
+    "Exp": 1000,
+    "TotalTalentPoint": 3
   },
   {
     "id": 11,
-    "Exp": 1100
+    "Exp": 1100,
+    "TotalTalentPoint": 3
   },
   {
     "id": 12,
-    "Exp": 1200
+    "Exp": 1200,
+    "TotalTalentPoint": 3
   },
   {
     "id": 13,
-    "Exp": 1300
+    "Exp": 1300,
+    "TotalTalentPoint": 4
   },
   {
     "id": 14,
-    "Exp": 1400
+    "Exp": 1400,
+    "TotalTalentPoint": 4
   },
   {
     "id": 15,
-    "Exp": 1500
+    "Exp": 1500,
+    "TotalTalentPoint": 4
   },
   {
     "id": 16,
-    "Exp": 1600
+    "Exp": 1600,
+    "TotalTalentPoint": 5
   },
   {
     "id": 17,
-    "Exp": 1700
+    "Exp": 1700,
+    "TotalTalentPoint": 5
   },
   {
     "id": 18,
-    "Exp": 1800
+    "Exp": 1800,
+    "TotalTalentPoint": 5
   },
   {
     "id": 19,
-    "Exp": 1900
+    "Exp": 1900,
+    "TotalTalentPoint": 6
   },
   {
     "id": 20,
-    "Exp": 2000
+    "Exp": 2000,
+    "TotalTalentPoint": 6
   },
   {
     "id": 21,
-    "Exp": 2100
+    "Exp": 2100,
+    "TotalTalentPoint": 6
   },
   {
     "id": 22,
-    "Exp": 2200
+    "Exp": 2200,
+    "TotalTalentPoint": 7
   },
   {
     "id": 23,
-    "Exp": 2300
+    "Exp": 2300,
+    "TotalTalentPoint": 7
   },
   {
     "id": 24,
-    "Exp": 2400
+    "Exp": 2400,
+    "TotalTalentPoint": 7
   },
   {
     "id": 25,
-    "Exp": 0
+    "Exp": 0,
+    "TotalTalentPoint": 8
   }
 ]

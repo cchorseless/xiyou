@@ -414,12 +414,12 @@
     "propinfo": []
   },
   {
-    "effectid": "modifier_sect_atkspeed_ability11_invoker_alacrity_b",
+    "effectid": "modifier_sect_atkspeed_invoker_alacrity_b",
     "target": "",
     "propinfo": []
   },
   {
-    "effectid": "modifier_sect_atkspeed_ability11_invoker_alacrity_c",
+    "effectid": "modifier_sect_atkspeed_invoker_alacrity_c",
     "target": "",
     "propinfo": []
   },
@@ -836,12 +836,12 @@
     "propinfo": []
   },
   {
-    "effectid": "modifier_sect_cabala_ability10_invoker_emp_b",
+    "effectid": "modifier_sect_cabala_invoker_emp_b",
     "target": "",
     "propinfo": []
   },
   {
-    "effectid": "modifier_sect_cabala_ability10_invoker_emp_c",
+    "effectid": "modifier_sect_cabala_invoker_emp_c",
     "target": "",
     "propinfo": []
   },

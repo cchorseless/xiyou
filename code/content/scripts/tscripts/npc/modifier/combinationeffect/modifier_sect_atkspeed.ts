@@ -43,10 +43,10 @@ export class modifier_sect_atkspeed_huskar_berserkers_blood_b extends modifier_c
 export class modifier_sect_atkspeed_huskar_berserkers_blood_c extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_atkspeed_ability11_invoker_alacrity_b extends modifier_combination_effect {
+export class modifier_sect_atkspeed_invoker_alacrity_b extends modifier_combination_effect {
 }
 @registerModifier()
-export class modifier_sect_atkspeed_ability11_invoker_alacrity_c extends modifier_combination_effect {
+export class modifier_sect_atkspeed_invoker_alacrity_c extends modifier_combination_effect {
 }
 @registerModifier()
 export class modifier_sect_atkspeed_legion_commander_press_the_attack_b extends modifier_combination_effect {

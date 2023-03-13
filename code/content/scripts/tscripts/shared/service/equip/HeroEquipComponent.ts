@@ -1,43 +1,31 @@
+import { EEnum } from "../../Gen/Types";
 import { ET, serializeETProps } from "../../lib/Entity";
 import { THeroUnit } from "../hero/THeroUnit";
+import { TEquipItem } from "./TEquipItem";
 
 
-export enum EEquipSolt {
 
-    Weapon = 0,
-
-    Helm = 1,
-
-    Necklace = 2,
-
-    Medal = 3,
-
-    Armor = 4,
-
-    BraceletL = 5,
-
-    BraceletR = 6,
-
-    RingL = 7,
-
-    RingR = 8,
-
-    Belt = 9,
-
-    Amulet = 10,
-
-    Shoes = 11,
-
-    SlotMax = 12
-}
 
 @GReloadable
 export class HeroEquipComponent extends ET.Component {
 
 
     @serializeETProps()
-    Equips: string[];
+    Equips: string[] = [];
     public get HeroUnit(): THeroUnit { return this.GetParent<THeroUnit>(); }
+
+
+    GetEntityBySlot(slot: EEnum.EEquipSolt): TEquipItem {
+        let instance = this.Equips[slot];
+        if (instance) {
+            return TEquipItem.GetOneInstanceById(instance);
+        }
+    }
+
+    IsScepter(itemid: number): boolean {
+        let Scepter = this.GetEntityBySlot(EEnum.EEquipSolt.Scepter);
+        return Scepter && Scepter.ConfigId === itemid;
+    }
 
     onSerializeToEntity() {
     }

@@ -1,6 +1,5 @@
 import React from "react";
 import { CSSHelper } from "../../../helper/CSSHelper";
-import { AbilityHelper } from "../../../helper/DotaEntityHelper";
 import { CCLevelxp } from "../CCLevelxp/CCLevelxp";
 import { CCPanel } from "../CCPanel/CCPanel";
 import "./CCTalentBranch.less";
@@ -124,13 +123,15 @@ export class CCTalentRow extends CCPanel<ICCTalentRow> {
     render() {
         return (
             <Panel className="CCTalentRow" hittest={true} ref={this.__root__} {...this.initRootAttrs()}>
-                <CCPanel onactivate={self => { }} className={CSSHelper.ClassMaker(this.props.direction, { Selected: this.props.Selected, active: this.props.active })}>
+                <CCPanel onactivate={self => { }} className={CSSHelper.ClassMaker(this.props.direction,
+                    { Selected: this.props.Selected, Actived: this.props.active })}>
                     <Label className="CCTalentDescription" html={true} text={
-                        AbilityHelper.GetAbilityDescription({
-                            sStr: $.Localize("#DOTA_Tooltip_ability_" + this.props.abilityName),
-                            abilityName: this.props.abilityName,
-                            iLevel: 1,
-                        })
+                        this.props.abilityName
+                        // AbilityHelper.GetAbilityDescription({
+                        //     sStr: $.Localize("#DOTA_Tooltip_ability_" + this.props.abilityName),
+                        //     abilityName: this.props.abilityName,
+                        //     iLevel: 1,
+                        // })
                     } />
                 </CCPanel>
 
