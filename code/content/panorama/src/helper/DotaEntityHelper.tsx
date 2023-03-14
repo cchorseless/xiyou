@@ -26,6 +26,10 @@ export module AbilityHelper {
     }
 
     export enum AbilitySpecialValueTag {
+        var_type = "var_type",
+        LinkedSpecialBonus = "LinkedSpecialBonus",
+        LinkedSpecialBonusField = "LinkedSpecialBonusField",
+        LinkedSpecialBonusOperation = "LinkedSpecialBonusOperation",
         /**神杖升级 */
         RequiresScepter = "RequiresScepter",
         /**最小值 */
@@ -288,6 +292,13 @@ export module AbilityHelper {
         return fValue;
         // return FuncHelper.ToFloat((fValue + GetSpecialValueUpgrade(iEntityIndex, sAbilityName, sSpecialValueName, AbilityUpgradeOperator.ABILITY_UPGRADES_OP_ADD)) * (1 + GetSpecialValueUpgrade(iEntityIndex, sAbilityName, sSpecialValueName, AbilityUpgradeOperator.ABILITY_UPGRADES_OP_MUL) * 0.01));
     }
+    /**
+     * 优化显示能力描述
+     * @param aValues 
+     * @param iLevel 
+     * @param bOnlyNowLevelValue 是否只显示当前等级的值
+     * @returns 
+     */
     export function AbilityDescriptionCompose(aValues: number[], iLevel: number = -1, bOnlyNowLevelValue: boolean = false) {
         let sTemp = "";
         let sTempPS = "";
@@ -325,6 +336,11 @@ export module AbilityHelper {
         return [sTemp, sTempPS];
     }
 
+    /**
+     * 特殊值处理
+     * @param aValues 
+     * @returns 
+     */
     export function SimplifyValuesArray(aValues: number[]) {
         if (aValues && aValues.length > 1) {
             let a = aValues[0];
@@ -338,10 +354,20 @@ export module AbilityHelper {
         }
         return aValues;
     }
-    export function GetAbilityDescription({ sStr, abilityName, iLevel, bOnlyNowLevelValue = false }: { sStr: string, abilityName: string, iLevel: number, bOnlyNowLevelValue?: boolean }) {
+    /**
+     * 
+     * @param sStr 技能或者Buff描述文本
+     * @param abilityName 技能名称
+     * @param iLevel 
+     * @param bOnlyNowLevelValue 只显示当前等级的值
+     * @returns 
+     */
+    export function GetAbilityOrBuffDescription(sStr: string, abilityName: string, iLevel = -1, bOnlyNowLevelValue: boolean = false) {
         let [isitem, tData] = KVHelper.GetAbilityOrItemData(abilityName);
+        GLogHelper.print(abilityName, sStr, 1111)
         if (!tData) { return sStr; }
-        let aValueNames = Object.keys(tData?.AbilityValues ?? {});
+        let SpecialValues = GetAllSpecialValues(abilityName);
+        let aValueNames = Object.keys(SpecialValues);
         for (let index = 0; index < aValueNames.length; index++) {
             const sValueName = aValueNames[index];
             let block = new RegExp("%" + sValueName + "%", "g");
@@ -349,7 +375,7 @@ export module AbilityHelper {
             let iResult = sStr.search(block);
             let iResultPS = sStr.search(blockPS);
             if (iResult == -1 && iResultPS == -1) continue;
-            let aValues = tData.AbilityValues[sValueName].toString().split(" ").map((value: string) => { return Number(value); });
+            let aValues = SpecialValues[sValueName];
             let [sValues, sValuesPS] = AbilityDescriptionCompose(aValues, iLevel, bOnlyNowLevelValue);
             sStr = sStr.replace(blockPS, sValuesPS);
             sStr = sStr.replace(block, sValues);
@@ -357,13 +383,14 @@ export module AbilityHelper {
         return sStr;
     }
 
+    /**
+     * 获取技能的描述文本
+     * @param sAbilityName 
+     * @returns 
+     */
     export function GetAbilityDescriptionByName(sAbilityName: string) {
-        const str = $.Localize("#DOTA_Tooltip_ability_" + sAbilityName + "_description");
-        return GetAbilityDescription({
-            sStr: str,
-            abilityName: sAbilityName,
-            iLevel: 1
-        })
+        const str = $.Localize("#DOTA_Tooltip_ability_" + sAbilityName + "_Description");
+        return GetAbilityOrBuffDescription(str, sAbilityName);
     }
 
     export function StringToValues(sValues: string) {
@@ -377,37 +404,53 @@ export module AbilityHelper {
         }
         return SimplifyValuesArray(aValues);
     }
-    export function GetSpecialValues(sAbilityName: string, sName: string, iEntityIndex = -1) {
+    /**
+     * 获取技能的所有特殊值
+     * @param sAbilityName 
+     * @returns 
+     */
+    export function GetAllSpecialValues(sAbilityName: string) {
         let [isitem, tKeyValues] = KVHelper.GetAbilityOrItemData(sAbilityName);
-        // if (iEntityIndex != -1) {
-        //     let aValues = GetAbilityMechanicsUpgradeSpecialValues(iEntityIndex, sAbilityName, sName);
-        //     if (aValues != undefined) {
-        //         return aValues;
-        //     }
-        // }
+        let r: { [k: string]: number[] } = {};
         if (tKeyValues) {
             let tSpecials = tKeyValues.AbilitySpecial;
             if (tSpecials) {
                 for (let sIndex in tSpecials) {
                     let tData = tSpecials[sIndex];
-                    if (tData[sName] != undefined && tData[sName] != null) {
-                        let sType = tData.var_type;
-                        let sValues = tData[sName].toString();
-                        let aValues = sValues.split(" ");
-                        for (let i = 0; i < aValues.length; i++) {
-                            let value = Number(aValues[i]);
-                            if (sType == "FIELD_INTEGER") {
-                                aValues[i] = parseInt(value + "");
-                            } else if (sType == "FIELD_FLOAT") {
-                                aValues[i] = parseFloat(value.toFixed(6));
+                    let sType = tData.var_type;
+                    for (let sName in tData) {
+                        if (sName[0] != "_" && tData[sName] != null && (AbilitySpecialValueTag as any)[sName] == null) {
+                            let sValues = tData[sName] + "";
+                            let aValues = sValues.split(" ").map((v) => GToNumber(v));
+                            for (let i = 0; i < aValues.length; i++) {
+                                let value = aValues[i];
+                                if (sType == "FIELD_INTEGER") {
+                                    aValues[i] = parseInt(value + "");
+                                } else if (sType == "FIELD_FLOAT") {
+                                    aValues[i] = parseFloat(value.toFixed(6));
+                                }
                             }
+                            r[sName] = SimplifyValuesArray(aValues);
                         }
-                        return SimplifyValuesArray(aValues);
                     }
+
                 }
             }
         }
+        return r;
+    }
 
+    /**
+     * 获取技能的特殊值
+     * @param sAbilityName 
+     * @param sName 
+     * @returns 
+     */
+    export function GetSpecialValues(sAbilityName: string, sName: string, EntityIndex = -1) {
+        let r = GetAllSpecialValues(sAbilityName);
+        if (r[sName]) {
+            return r[sName];
+        }
         return [];
     }
     const tAddedProperties = {
@@ -425,56 +468,18 @@ export module AbilityHelper {
         _ulti: "GetUltiPower",
     };
 
-    const aPropertyNames = [
-        "var_type",
-        "abilitycastrange",
-        "abilitycastpoint",
-        "abilityduration",
-        "abilitychanneltime",
-        "LinkedSpecialBonus",
-        "LinkedSpecialBonusField",
-        "LinkedSpecialBonusOperation",
-        "CalculateSpellDamageTooltip",
-        "RequiresScepter",
-        "levelkey",
-        "_str",
-        "_int",
-        "_agi",
-        "_all",
-        "_attack_damage",
-        "_attack_speed",
-        "_health",
-        "_armor",
-        "_magical_armor",
-        "_mana",
-        "_max",
-        "_min",
-        "_move_speed",
-    ];
-
-
-
+    /**
+     * 获取技能的特殊值Key
+     */
     export function GetSpecialNames(sAbilityName: string, iEntityIndex = -1) {
-        let aSpecials: string[] = [];
-        let [isitem, tKeyValues] = KVHelper.GetAbilityOrItemData(sAbilityName);
-        if (tKeyValues) {
-            let tSpecials = tKeyValues.AbilitySpecial;
-            if (tSpecials) {
-                let sKey = Object.keys(tSpecials);
-                sKey.sort((a, b) => { return Number(a) - Number(b) });
-                for (let index = 0; index < sKey.length; index++) {
-                    const sIndex = sKey[index];
-                    let tData = tSpecials[sIndex];
-                    for (let sName in tData) {
-                        if (!aPropertyNames.includes(sName)) {
-                            aSpecials.push(sName);
-                            break;
-                        }
-                    }
-                }
-            }
-            aSpecials = aSpecials.concat("abilitycastrange", "abilitycastpoint", "abilityduration", "abilitychanneltime", "abilitydamage", "abilitycooldown");
-        }
+        let aSpecials: string[] = Object.keys(GetAllSpecialValues(sAbilityName));
+        aSpecials = aSpecials.concat(
+            "abilitycastrange",
+            "abilitycastpoint",
+            "abilityduration",
+            "abilitychanneltime",
+            "abilitydamage",
+            "abilitycooldown");
         if (iEntityIndex != -1) {
             // let a = GetAbilityMechanicsUpgradeSpecialNames(iEntityIndex, sAbilityName);
             // for (let index = 0; index < a.length; index++) {
@@ -486,22 +491,41 @@ export module AbilityHelper {
         }
         return aSpecials;
     }
-
-    export function GetSpecialVarType(sAbilityName: string, sName: string) {
+    /**
+     * 获取技能的特殊值Data
+     * @param sAbilityName 
+     * @param sName 
+     * @returns 
+     */
+    export function GetSpecialNameData(sAbilityName: string, sName: string) {
         let [isitem, tKeyValues] = KVHelper.GetAbilityOrItemData(sAbilityName);
         if (tKeyValues) {
             let tSpecials = tKeyValues.AbilitySpecial;
             if (tSpecials) {
                 for (let sIndex in tSpecials) {
                     let tData = tSpecials[sIndex];
-                    if (tData[sName] != undefined && tData[sName] != null) {
-                        return tData.var_type;
+                    if (tData[sName] != null) {
+                        return tData as { var_type: "FIELD_INTEGER" | "FIELD_FLOAT", [k: string]: string };
                     }
                 }
             }
         }
-        return [];
     }
+
+    /**
+     * 获取技能的特殊值数值类型
+     * @param sAbilityName 
+     * @param sName 
+     * @returns 
+     */
+    export function GetSpecialVarType(sAbilityName: string, sName: string): "FIELD_INTEGER" | "FIELD_FLOAT" {
+        let tData = GetSpecialNameData(sAbilityName, sName);
+        if (tData && tData[sName] != null && tData.var_type != null) {
+            return tData.var_type;
+        }
+        return "FIELD_INTEGER";
+    }
+
 
     /**
      * 获取特殊值
@@ -512,23 +536,9 @@ export module AbilityHelper {
      * @returns
      */
     export function GetSpecialValueWithTag(sAbilityName: string, sName: string, tagname: AbilitySpecialValueTag | string, iEntityIndex = -1): string {
-        let [isitem, tKeyValues] = KVHelper.GetAbilityOrItemData(sAbilityName);
-        if (iEntityIndex != -1) {
-            // let sPropertyValue = GetAbilityMechanicsUpgradeLevelSpecialValueProperty(iEntityIndex:EntityIndex, sAbilityName, sName, sPropertyName);
-            // if (sPropertyValue != undefined) {
-            //     return sPropertyValue.toString();
-            // }
-        }
-        if (tKeyValues) {
-            let tSpecials = tKeyValues.AbilitySpecial;
-            if (tSpecials) {
-                for (let sIndex in tSpecials) {
-                    let tData = tSpecials[sIndex];
-                    if (tData[sName] != null && tData[tagname] != null) {
-                        return tData[tagname].toString();
-                    }
-                }
-            }
+        let tData = GetSpecialNameData(sAbilityName, sName);
+        if (tData && tData[sName] != null && tData[tagname] != null) {
+            return tData[tagname].toString();
         }
         return "";
     }
@@ -652,6 +662,11 @@ export module AbilityHelper {
             tAddedValues: tAddedValues,
         };
     }
+    /**
+     * @deprecated
+     * @param param0 
+     * @returns 
+     */
     export function ReplaceAbilityValues({ sStr, bShowExtra, sAbilityName, iLevel, iEntityIndex = -1 as EntityIndex, bIsDescription = false, bOnlyNowLevelValue = false }: { sStr: string, bShowExtra: boolean, sAbilityName: string, iLevel: number, iEntityIndex?: EntityIndex, bIsDescription?: boolean, bOnlyNowLevelValue?: boolean; }) {
         let [isitem, tData] = KVHelper.GetAbilityOrItemData(sAbilityName);
         if (!tData) { return sStr }
@@ -806,7 +821,11 @@ export module AbilityHelper {
         return sStr;
     }
 
-
+    /**
+     * @deprecated
+     * @param param0 
+     * @returns 
+     */
     export function ReplaceAbilityValuesDes({ sStr, sAbilityName, iLevel, iEntityIndex = -1 as EntityIndex }: { sStr: string, sAbilityName: string, iLevel: number, iEntityIndex?: EntityIndex }) {
         let [isitem, tData] = KVHelper.GetAbilityOrItemData(sAbilityName);
         if (!tData) { return sStr }
@@ -868,6 +887,7 @@ export module AbilityHelper {
         let r: string[] = [];
         if (!tData) { return r }
         let aValueNames = GetSpecialNames(sAbilityName, iEntityIndex);
+        let allspecval = GetAllSpecialValues(sAbilityName);
         for (let index = 0; index < aValueNames.length; index++) {
             const sValueName = aValueNames[index];
             // let tResult = GetSpecialValuesWithCalculated(sAbilityName, sValueName, iEntityIndex);
@@ -892,9 +912,7 @@ export module AbilityHelper {
                     aValues = StringToValues(tData.AbilityCooldown || "");
                     break;
                 default:
-                    if (GPropertyConfig.EMODIFIER_PROPERTY[sValueName.toUpperCase() as any] != null) {
-                        aValues = GetSpecialValues(sAbilityName, sValueName, iEntityIndex);
-                    }
+                    aValues = allspecval[sValueName];
                     break;
             }
             if (aValues == null || aValues.length == 1 && aValues[0] == 0) {

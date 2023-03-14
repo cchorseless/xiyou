@@ -13,11 +13,11 @@ export class FHeroCombinationManagerComponent extends ET.Component {
         let config = GJSONConfig.CombinationConfig.getDataList();
         let type = GGetRegClass<typeof FHeroCombination>("FHeroCombination");
         for (let info of config) {
-            this.allCombination[info.relation] = this.allCombination[info.relation] || {};
-            let combina = this.allCombination[info.relation][info.relationid];
+            this.allCombination[info.SectName] = this.allCombination[info.SectName] || {};
+            let combina = this.allCombination[info.SectName][info.SectId];
             if (combina == null) {
-                combina = this.AddChild(type, info.relationid);
-                this.allCombination[info.relation][info.relationid] = combina;
+                combina = this.AddChild(type, info.SectId);
+                this.allCombination[info.SectName][info.SectId] = combina;
             }
             combina.addConfig(info);
         }
@@ -53,8 +53,8 @@ export class FHeroCombinationManagerComponent extends ET.Component {
     }
 
     public addCombination(info: ECombinationLabelItem) {
-        if (info.IsActive && info.CombinationName.length > 0) {
-            let ecombs = this.allCombination[info.CombinationName];
+        if (info.IsActive && info.SectName.length > 0) {
+            let ecombs = this.allCombination[info.SectName];
             if (ecombs) {
                 for (let ecombId in ecombs) {
                     let ecomb = ecombs[ecombId];
@@ -76,8 +76,8 @@ export class FHeroCombinationManagerComponent extends ET.Component {
     }
 
     public removeCombination(info: ECombinationLabelItem) {
-        if (info.IsActive && info.CombinationName.length > 0) {
-            let ecombs = this.allCombination[info.CombinationName];
+        if (info.IsActive && info.SectName.length > 0) {
+            let ecombs = this.allCombination[info.SectName];
             if (ecombs) {
                 for (let ecombId in ecombs) {
                     let ecomb = ecombs[ecombId];

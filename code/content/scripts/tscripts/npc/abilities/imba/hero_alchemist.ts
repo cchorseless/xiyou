@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { EventHelper } from "../../../helper/EventHelper";
 import { NetTablesHelper } from "../../../helper/NetTablesHelper";
@@ -9,6 +10,16 @@ import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 @registerAbility()
 export class imba_alchemist_acid_spray extends BaseAbility_Plus {
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    GetCooldown(level: number): number {
+        return 20;
+    }
+    AutoSpellSelf() {
+        let range = 400;
+        return AI_ability.POSITION_most_enemy(this, range, 200);
+    }
     GetAbilityTextureName(): string {
         return "alchemist_acid_spray";
     }
@@ -337,21 +348,29 @@ export class imba_alchemist_unstable_concoction extends BaseAbility_Plus {
     public radius_increase: number;
     public radius: number;
 
+
+
+    // GetCooldown(level: number): number {
+    //     if (this.GetCasterPlus().HasModifier("modifier_imba_unstable_concoction_handler")) {
+    //         if (IsServer()) {
+    //             return super.GetCooldown(level) - (GameRules.GetGameTime() - this.brew_start);
+    //         }
+    //         return 0;
+    //     }
+    //     if (IsServer() || this.GetLevel() == 0) {
+    //         return 0;
+    //     }
+    //     return super.GetCooldown(level);
+    // }
     GetManaCost(level: number): number {
         return 0;
     }
-
     GetCooldown(level: number): number {
-        if (this.GetCasterPlus().HasModifier("modifier_imba_unstable_concoction_handler")) {
-            if (IsServer()) {
-                return super.GetCooldown(level) - (GameRules.GetGameTime() - this.brew_start);
-            }
-            return 0;
-        }
-        if (IsServer() || this.GetLevel() == 0) {
-            return 0;
-        }
-        return super.GetCooldown(level);
+        return 20;
+    }
+    AutoSpellSelf() {
+        let range = 400;
+        return AI_ability.POSITION_most_enemy(this, range, 200);
     }
     IsHiddenWhenStolen(): boolean {
         return false;

@@ -17,7 +17,7 @@ interface ICCCombinationIcon {
 export class CCCombinationIcon extends CCPanel<ICCCombinationIcon> {
     defaultClass = () => { return CSSHelper.ClassMaker("CC_CombinationIcon", this.props.sectName); };
     getIndex() {
-        let index = CombinationConfig.ECombinationLabelList.indexOf(this.props.sectName) + 1;
+        let index = CombinationConfig.ESectNameList.indexOf(this.props.sectName) + 1;
         if (index < 10) {
             return "0" + index;
         }
@@ -29,8 +29,8 @@ export class CCCombinationIcon extends CCPanel<ICCCombinationIcon> {
         }
     }
     getColor() {
-        let em = CombinationConfig.ECombinationLabel;
-        let index = CombinationConfig.ECombinationLabelList.indexOf(this.props.sectName) + 1;
+        let em = CombinationConfig.ESectName;
+        let index = CombinationConfig.ESectNameList.indexOf(this.props.sectName) + 1;
         let colorname = CSSHelper.EColorList[index];
         return (CSSHelper.EColor as any)[colorname];
     }

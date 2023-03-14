@@ -204,7 +204,7 @@ export class modifier_imba_spectre_haunt_reduce extends BaseModifier_Plus {
         if (!keys.no_attack_cooldown && keys.damage_category == DamageCategory_t.DOTA_DAMAGE_CATEGORY_SPELL && keys.damage_flags == DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION) {
             return -100;
         } else {
-            return this.illusion_damage_outgoing + this.GetCasterPlus().GetTalentValue("special_bonus_unique_spectre_4");
+            return this.illusion_damage_outgoing + this.GetCasterPlus().GetTalentValue("special_bonus_imba_unique_spectre_4");
         }
     }
 }

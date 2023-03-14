@@ -61,7 +61,7 @@ export class CCAbilityInfoDialog extends CCPanel<ICCAbilityInfoDialog> {
                 }
                 sDescription = sDescription.replace(regexp, "");
                 sDescription = sDescription.replace(/%%/g, "%");
-                sDescription = AbilityHelper.ReplaceAbilityValuesDes({ sStr: sDescription, sAbilityName: sAbilityName, iLevel: level, iEntityIndex: castentityindex });
+                sDescription = AbilityHelper.GetAbilityOrBuffDescription(sDescription, sAbilityName, level, true);
                 list.push(
                     <Label key={list.length} className={CSSHelper.ClassMaker('AbilityMechanics', { 'Active': true, })} text={sDescription} html={true} />
                 );
@@ -86,7 +86,7 @@ export class CCAbilityInfoDialog extends CCPanel<ICCAbilityInfoDialog> {
                 }
                 sExtraEffect = sExtraEffect.replace(regexp, "");
                 sExtraEffect = sExtraEffect.replace(/%%/g, "%");
-                sExtraEffect = AbilityHelper.ReplaceAbilityValuesDes({ sStr: sExtraEffect, sAbilityName: sAbilityName, iLevel: level, iEntityIndex: castentityindex });
+                sExtraEffect = AbilityHelper.GetAbilityOrBuffDescription(sExtraEffect, sAbilityName, level, true);
                 list.push(
                     <Label key={list.length} className={CSSHelper.ClassMaker('ExtraEffect', { 'Active': true, })} text={sExtraEffect} html={true} />
                 );
@@ -116,7 +116,7 @@ export class CCAbilityInfoDialog extends CCPanel<ICCAbilityInfoDialog> {
         const castentityindex = this.props.castentityindex!;
         const tData = KVHelper.KVAbilitys()[abilityname] || {};
         const iLevel = this.props.level || -1;
-        const combinationLabel = tData.CombinationLabel! as string;
+        const sectname = GJsonConfigHelper.GetAbilitySectLabel(abilityname) as string;
         // const mode = this.props.mode;
         // const showextradescription = this.props.showextradescription!;
         // const onlynowlevelvalue = this.props.onlynowlevelvalue!;
@@ -359,7 +359,7 @@ export class CCAbilityInfoDialog extends CCPanel<ICCAbilityInfoDialog> {
                         {/* <Label id="AbilityUpgradeLevel" className={CSSHelper.ClassMaker({ 'Hidden': iAbilityLearnResult != AbilityLearnResult_t.ABILITY_CANNOT_BE_UPGRADED_REQUIRES_LEVEL })} localizedText="#DOTA_AbilityTooltip_UpgradeLevel" html={true} /> */}
                     </Panel>
                     {
-                        combinationLabel && <CCCombinationUnitIconGroup marginTop={"10px"} sectName={combinationLabel} playerid={this.props.playerid} castentityindex={castentityindex} />
+                        sectname && <CCCombinationUnitIconGroup marginTop={"10px"} sectName={sectname} playerid={this.props.playerid} castentityindex={castentityindex} />
                     }
                     {this.props.children}
                     {this.__root___childs}

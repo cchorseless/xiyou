@@ -109,8 +109,8 @@ export class imba_mars_spear extends BaseAbility_Plus {
             delete this.projectiles[iProjectileHandle];
             return;
         }
-        let stun = this.GetSpecialValueFor("stun_duration") + this.GetCasterPlus().GetTalentValue("special_bonus_unique_mars_spear_stun_duration");
-        let damage = this.GetSpecialValueFor("damage") + this.GetCasterPlus().GetTalentValue("special_bonus_unique_mars_spear_bonus_damage");
+        let stun = this.GetSpecialValueFor("stun_duration") + this.GetCasterPlus().GetTalentValue("special_bonus_imba_unique_mars_spear_stun_duration");
+        let damage = this.GetSpecialValueFor("damage") + this.GetCasterPlus().GetTalentValue("special_bonus_imba_unique_mars_spear_bonus_damage");
         let damageTable = {
             victim: target,
             attacker: this.GetCasterPlus(),
@@ -638,7 +638,7 @@ export class modifier_imba_mars_gods_rebuke extends BaseModifier_Plus {
     }
     BeCreated(kv: any): void {
         this.bonus_damage = this.GetSpecialValueFor("bonus_damage_vs_heroes");
-        this.bonus_crit = this.GetSpecialValueFor("crit_mult") + this.GetCasterPlus().GetTalentValue("special_bonus_unique_mars_gods_rebuke_extra_crit");
+        this.bonus_crit = this.GetSpecialValueFor("crit_mult") + this.GetCasterPlus().GetTalentValue("special_bonus_imba_unique_mars_gods_rebuke_extra_crit");
         let mod = this.GetParentPlus().findBuff<modifier_imba_mars_bulwark_jupiters_strength>("modifier_imba_mars_bulwark_jupiters_strength");
         if (mod) {
             this.bonus_damage = this.bonus_damage + mod.GetStackCount();
@@ -1177,7 +1177,7 @@ export class modifier_imba_mars_arena_of_blood_coliseum extends BaseModifier_Plu
         if (!IsServer()) {
             return;
         }
-        this.health_regen = this.GetCasterPlus().GetOwnerPlus().GetTalentValue("special_bonus_unique_mars_arena_of_blood_hp_regen") || 0;
+        this.health_regen = this.GetCasterPlus().GetOwnerPlus().GetTalentValue("special_bonus_imba_unique_mars_arena_of_blood_hp_regen") || 0;
         this.SetHasCustomTransmitterData(true);
         this.StartIntervalThink(0.2);
     }

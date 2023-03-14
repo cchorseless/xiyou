@@ -194,7 +194,7 @@ export class imba_batrider_flamebreak extends BaseAbility_Plus {
         return this.GetSpecialValueFor("explosion_radius");
     }
     GetCooldown(level: number): number {
-        return super.GetCooldown(level) - this.GetCasterPlus().GetTalentValue("special_bonus_unique_imba_batrider_flamebreak_cooldown");
+        return super.GetCooldown(level) - this.GetCasterPlus().GetTalentValue("special_bonus_imba_unique_batrider_flamebreak_cooldown");
     }
     OnSpellStart(): void {
         if (this.GetCursorPosition() == this.GetCasterPlus().GetAbsOrigin()) {
@@ -295,8 +295,8 @@ export class imba_batrider_flamebreak extends BaseAbility_Plus {
         if (!IsServer()) {
             return;
         }
-        if (this.GetCasterPlus().HasTalent("special_bonus_unique_imba_batrider_flamebreak_cooldown") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_unique_imba_batrider_flamebreak_cooldown")) {
-            this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_unique_imba_batrider_flamebreak_cooldown"), "modifier_special_bonus_unique_imba_batrider_flamebreak_cooldown", {});
+        if (this.GetCasterPlus().HasTalent("special_bonus_imba_unique_batrider_flamebreak_cooldown") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_unique_batrider_flamebreak_cooldown")) {
+            this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_unique_batrider_flamebreak_cooldown"), "modifier_special_bonus_imba_unique_batrider_flamebreak_cooldown", {});
         }
     }
 }
@@ -460,7 +460,7 @@ export class modifier_imba_batrider_firefly extends BaseModifier_Plus {
         this.counter = 0;
         this.time_to_tick = 0.1;
         this.firefly_debuff_particle = undefined;
-        if (this.GetCasterPlus().HasTalent("special_bonus_unique_imba_batrider_firefly_truesight")) {
+        if (this.GetCasterPlus().HasTalent("special_bonus_imba_unique_batrider_firefly_truesight")) {
             this.truesight_modifier = this.GetParentPlus().AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_item_imba_gem_of_true_sight", {
                 duration: this.GetRemainingTime()
             });
@@ -825,7 +825,7 @@ export class modifier_imba_batrider_flaming_lasso_self extends BaseModifier_Plus
     }
 }
 @registerModifier()
-export class modifier_special_bonus_unique_imba_batrider_flamebreak_cooldown extends BaseModifier_Plus {
+export class modifier_special_bonus_imba_unique_batrider_flamebreak_cooldown extends BaseModifier_Plus {
     IsHidden(): boolean {
         return true;
     }

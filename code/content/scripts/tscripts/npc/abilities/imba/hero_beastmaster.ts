@@ -202,8 +202,8 @@ export class imba_beastmaster_summon_boar extends BaseAbility_Plus {
             let spawn_particle_fx = ResHelper.CreateParticleEx(spawn_particle, ParticleAttachment_t.PATTACH_ABSORIGIN, caster);
             ParticleManager.SetParticleControl(spawn_particle_fx, 0, spawn_point);
             let boar_count = 1;
-            if (caster.HasAbility("special_bonus_unique_beastmaster_2")) {
-                let talent_handler = caster.findAbliityPlus("special_bonus_unique_beastmaster_2");
+            if (caster.HasAbility("special_bonus_imba_unique_beastmaster_2")) {
+                let talent_handler = caster.findAbliityPlus("special_bonus_imba_unique_beastmaster_2");
                 if (talent_handler && talent_handler.GetLevel() > 0) {
                     let additional_boars = talent_handler.GetSpecialValueFor("value");
                     if (additional_boars) {

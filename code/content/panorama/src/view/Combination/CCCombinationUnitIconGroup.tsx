@@ -38,13 +38,13 @@ export class CCCombinationUnitIconGroup extends CCPanel<ICCCombinationUnitIconGr
         const itemlist: string[] = [];
         let uniqueConfigList: string[] = [];
         if (playerid !== -1) {
-            const allcombs = ECombination.GetCombinationByCombinationName(playerid!, sectName) || [];
+            const allcombs = ECombination.GetCombinationBySectName(playerid!, sectName) || [];
             if (allcombs.length > 0) {
                 uniqueConfigList = allcombs[0].uniqueConfigList;
             }
         }
         for (let data of GJSONConfig.CombinationConfig.getDataList()) {
-            if (data.relation == sectName) {
+            if (data.SectName == sectName) {
                 if (data.heroid.length > 0) {
                     (!herolist.includes(data.heroid)) && herolist.push(data.heroid);
                 }

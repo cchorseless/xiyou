@@ -4956,7 +4956,7 @@
     "BagSlotType": 1,
     "AutoUse": false,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_sandking",
+    "BindHeroName": "building_hero_sand_king",
     "UseScript": 2,
     "UseArgs": [],
     "AwakeScript": [
@@ -5733,7 +5733,7 @@
     "BagSlotType": 1,
     "AutoUse": false,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_zeus",
+    "BindHeroName": "building_hero_zuus",
     "UseScript": 2,
     "UseArgs": [],
     "AwakeScript": [

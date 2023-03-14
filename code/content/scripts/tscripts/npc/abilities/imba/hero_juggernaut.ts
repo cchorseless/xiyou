@@ -94,7 +94,7 @@ export class modifier_imba_juggernaut_blade_fury extends BaseModifier_Plus {
     }
     BeCreated(p_0: any,): void {
         this.original_caster = this.GetCasterPlus();
-        this.dps = this.GetSpecialValueFor("blade_fury_damage") + this.GetCasterPlus().GetTalentValue("special_bonus_unique_juggernaut_3");
+        this.dps = this.GetSpecialValueFor("blade_fury_damage") + this.GetCasterPlus().GetTalentValue("special_bonus_imba_unique_juggernaut_3");
         this.radius = this.GetSpecialValueFor("blade_fury_radius");
         this.tick = this.GetSpecialValueFor("blade_fury_damage_tick");
         this.deflect_chance = this.GetAbilityPlus().GetTalentSpecialValueFor("deflect_chance");

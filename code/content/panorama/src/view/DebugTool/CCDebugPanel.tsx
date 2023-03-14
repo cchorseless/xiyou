@@ -38,7 +38,7 @@ export class CCDebugPanel extends CCPanel<ICCDebugPanel> {
         const heroList: string[] = Object.keys(KVHelper.KVData().building_unit_tower);
         const enemylist: string[] = [];
         const stateList: string[] = [];
-        const sectList: string[] = [...CombinationConfig.ECombinationLabelList];
+        const sectList: string[] = [...CombinationConfig.ESectNameList];
         const sectToggleList: { [k: string]: any } = {};
         const sectFilterFunc = (...args: any[]) => { return true };
         const positionList: string[] = [];

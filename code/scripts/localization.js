@@ -3,8 +3,8 @@ const keyvalues = require('keyvalues-node');
 const program = require('commander');
 const chokidar = require('chokidar');
 const { read_all_files, read_sub_directories } = require('./utils');
-const {all_excel_to_locatlization} = require('./excel_2_kv');
-const {all_lubanexcel_to_locatlization} = require('./lubanlocalization');
+const { all_excel_to_locatlization } = require('./excel_2_kv');
+const { all_lubanexcel_to_locatlization } = require('./lubanlocalization');
 const localization_path = 'localization';
 
 function combine_localization_files() {
@@ -17,9 +17,12 @@ function combine_localization_files() {
 
         let all_files = read_all_files(dir);
         all_files.forEach((file) => {
-            let tokens = keyvalues.decode(fs.readFileSync(file, 'utf-8').replace(/\\n/g, '___x___combine____n___'));
+            let filecontent = fs.readFileSync(file, 'utf-8').replace(/\\n/g, '___x___combine____n___');
+            if (filecontent.length == 0) return;
+            console.log('read file =>', file);
+            let tokens = keyvalues.decode(filecontent);
             for (let token in tokens) {
-                lang_file.Tokens[token] = tokens[token];
+                token && tokens[token] && (lang_file.Tokens[token] = tokens[token]);
             }
         });
 
@@ -31,10 +34,15 @@ function combine_localization_files() {
 }
 
 (async () => {
-    all_lubanexcel_to_locatlization().then(() => {
-    all_excel_to_locatlization().then(() => {
-    combine_localization_files();
+    const oldkv = read_all_files(localization_path);
+    oldkv.forEach((file) => {
+        if (file.indexOf('.txt') > -1)
+            fs.removeSync(file);
     })
+    all_lubanexcel_to_locatlization().then(() => {
+        all_excel_to_locatlization().then(() => {
+            combine_localization_files();
+        })
     })
     program.option('-w, --watch', 'Watch Mode').parse(process.argv);
     if (program.watch) {

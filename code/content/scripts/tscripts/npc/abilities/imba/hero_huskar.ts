@@ -260,7 +260,7 @@ export class modifier_imba_huskar_burning_spear_counter extends BaseModifier_Plu
             return;
         }
         this.IncrementStackCount();
-        this.burn_damage = this.GetSpecialValueFor("burn_damage") + this.GetCasterPlus().GetTalentValue("special_bonus_unique_huskar_2");
+        this.burn_damage = this.GetSpecialValueFor("burn_damage") + this.GetCasterPlus().GetTalentValue("special_bonus_imba_unique_huskar_2");
         this.pain_reflection_per_stack = this.GetSpecialValueFor("pain_reflection_per_stack");
         this.damage_type = DAMAGE_TYPES.DAMAGE_TYPE_MAGICAL;
         if (this.GetCasterPlus() && this.GetCasterPlus().HasTalent("special_bonus_imba_huskar_pure_burning_spears")) {
@@ -284,7 +284,7 @@ export class modifier_imba_huskar_burning_spear_counter extends BaseModifier_Plu
             return;
         }
         if (this.GetAbilityPlus() && this.GetCasterPlus()) {
-            this.burn_damage = this.GetSpecialValueFor("burn_damage") + this.GetCasterPlus().GetTalentValue("special_bonus_unique_huskar_2");
+            this.burn_damage = this.GetSpecialValueFor("burn_damage") + this.GetCasterPlus().GetTalentValue("special_bonus_imba_unique_huskar_2");
             this.damage_type = DAMAGE_TYPES.DAMAGE_TYPE_MAGICAL;
             if (this.GetCasterPlus() && this.GetCasterPlus().HasTalent("special_bonus_imba_huskar_pure_burning_spears")) {
                 this.damage_type = DAMAGE_TYPES.DAMAGE_TYPE_PURE;

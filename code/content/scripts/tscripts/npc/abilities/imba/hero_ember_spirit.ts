@@ -53,7 +53,7 @@ export class modifier_imba_flame_guard_talent extends BaseModifier_Plus {
     OnIntervalThink(): void {
         if (IsServer()) {
             if (!this.learned_guard_talent) {
-                if (this.GetParentPlus().IsAlive() && this.GetParentPlus().HasTalent("special_bonus_ember_permanent_guard")) {
+                if (this.GetParentPlus().IsAlive() && this.GetParentPlus().HasTalent("special_bonus_imba_ember_permanent_guard")) {
                     this.GetParentPlus().RemoveModifierByName("modifier_imba_flame_guard_aura");
                     this.GetParentPlus().AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_flame_guard_passive", {});
                     this.GetParentPlus().EmitSound("Hero_EmberSpirit.FlameGuard.Loop");
@@ -91,8 +91,8 @@ export class modifier_imba_flame_guard_passive extends BaseModifier_Plus {
             let caster = this.GetCasterPlus();
             let ability = this.GetAbilityPlus();
             let damage = ability.GetSpecialValueFor("damage_per_second");
-            if (caster.findAbliityPlus("special_bonus_ember_guard_damage") && caster.FindAbilityByName("special_bonus_ember_guard_damage").GetLevel() > 0) {
-                damage = damage + caster.findAbliityPlus("special_bonus_ember_guard_damage").GetSpecialValueFor("value");
+            if (caster.findAbliityPlus("special_bonus_imba_ember_guard_damage") && caster.FindAbilityByName("special_bonus_imba_ember_guard_damage").GetLevel() > 0) {
+                damage = damage + caster.findAbliityPlus("special_bonus_imba_ember_guard_damage").GetSpecialValueFor("value");
             }
             damage = damage * ability.GetSpecialValueFor("tick_interval");
             let nearby_enemies = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, ability.GetSpecialValueFor("effect_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
@@ -114,8 +114,8 @@ export class modifier_imba_flame_guard_passive extends BaseModifier_Plus {
     } */
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_RESISTANCE_BONUS)
     CC_GetModifierMagicalResistanceBonus(p_0: ModifierAttackEvent,): number {
-        if (this.GetCasterPlus().HasTalent("special_bonus_ember_permanent_guard")) {
-            return this.GetCasterPlus().GetTalentValue("special_bonus_ember_permanent_guard");
+        if (this.GetCasterPlus().HasTalent("special_bonus_imba_ember_permanent_guard")) {
+            return this.GetCasterPlus().GetTalentValue("special_bonus_imba_ember_permanent_guard");
         }
     }
 }
@@ -292,8 +292,8 @@ export class modifier_imba_searing_chains_attack extends BaseModifier_Plus {
         if (IsServer()) {
             if (keys.attacker == this.GetParentPlus() && !this.GetParentPlus().IsIllusion()) {
                 let attacker = this.GetParentPlus();
-                if (attacker.findAbliityPlus("special_bonus_ember_chains_on_attack") && attacker.FindAbilityByName("special_bonus_ember_chains_on_attack").GetLevel() > 0) {
-                    let talent_ability = attacker.findAbliityPlus("special_bonus_ember_chains_on_attack");
+                if (attacker.findAbliityPlus("special_bonus_imba_ember_chains_on_attack") && attacker.FindAbilityByName("special_bonus_imba_ember_chains_on_attack").GetLevel() > 0) {
+                    let talent_ability = attacker.findAbliityPlus("special_bonus_imba_ember_chains_on_attack");
                     let target = keys.target;
                     if (!(target.IsBuilding() || target.IsMagicImmune()) && GFuncRandom.PRD(talent_ability.GetSpecialValueFor("chance"), this)) {
                         ApplySearingChains(attacker, attacker, target, this.GetAbilityPlus(), talent_ability.GetSpecialValueFor("duration"));
@@ -395,7 +395,7 @@ export class modifier_imba_fire_remnant_charges extends BaseModifier_Plus {
     OnIntervalThink(): void {
         if (IsServer()) {
             if (!this.learned_charges_talent) {
-                let talent = this.GetParentPlus().findAbliityPlus("special_bonus_ember_remnant_charges");
+                let talent = this.GetParentPlus().findAbliityPlus("special_bonus_imba_ember_remnant_charges");
                 if (talent && talent.GetLevel() > 0) {
                     this.SetStackCount(this.GetStackCount() + talent.GetSpecialValueFor("value"));
                     this.max_charges = this.GetStackCount();
@@ -560,8 +560,8 @@ export class imba_ember_spirit_searing_chains extends BaseAbility_Plus {
             if (caster.findBuff<modifier_imba_fire_remnant_charges>("modifier_imba_fire_remnant_charges")) {
                 main_targets = max_targets * (1 + caster.findBuff<modifier_imba_fire_remnant_charges>("modifier_imba_fire_remnant_charges").GetStackCount());
             }
-            if (caster.findAbliityPlus("special_bonus_ember_chains_duration") && caster.FindAbilityByName("special_bonus_ember_chains_duration").GetLevel() > 0) {
-                duration = duration + caster.findAbliityPlus("special_bonus_ember_chains_duration").GetSpecialValueFor("value");
+            if (caster.findAbliityPlus("special_bonus_imba_ember_chains_duration") && caster.FindAbilityByName("special_bonus_imba_ember_chains_duration").GetLevel() > 0) {
+                duration = duration + caster.findAbliityPlus("special_bonus_imba_ember_chains_duration").GetSpecialValueFor("value");
             }
             caster.StartGesture(GameActivity_t.ACT_DOTA_CAST_ABILITY_1);
             caster.EmitSound("Hero_EmberSpirit.SearingChains.Cast");
@@ -639,8 +639,8 @@ export class imba_ember_spirit_sleight_of_fist extends BaseAbility_Plus {
                     ParticleManager.ReleaseParticleIndex(remnant_pfx);
                 }
             }
-            if (caster.findAbliityPlus("special_bonus_ember_sleight_extra_targets") && caster.FindAbilityByName("special_bonus_ember_sleight_extra_targets").GetLevel() > 0) {
-                let bonus_targets = caster.findAbliityPlus("special_bonus_ember_sleight_extra_targets").GetSpecialValueFor("bonus_targets");
+            if (caster.findAbliityPlus("special_bonus_imba_ember_sleight_extra_targets") && caster.FindAbilityByName("special_bonus_imba_ember_sleight_extra_targets").GetLevel() > 0) {
+                let bonus_targets = caster.findAbliityPlus("special_bonus_imba_ember_sleight_extra_targets").GetSpecialValueFor("bonus_targets");
                 for (let i = 0; i < bonus_targets; i++) {
                     if (sleight_targets[i]) {
                         sleight_targets.push(sleight_targets[i]);
@@ -770,8 +770,8 @@ export class imba_ember_spirit_fire_remnant extends BaseAbility_Plus {
                 let effect_radius = ability_flame_guard.GetSpecialValueFor("effect_radius");
                 let damage = ability_flame_guard.GetSpecialValueFor("damage_per_second");
                 let tick_interval = ability_flame_guard.GetSpecialValueFor("tick_interval");
-                if (this.GetCasterPlus().findAbliityPlus("special_bonus_ember_guard_damage") && this.GetCasterPlus().FindAbilityByName("special_bonus_ember_guard_damage").GetLevel() > 0) {
-                    damage = damage + this.GetCasterPlus().findAbliityPlus("special_bonus_ember_guard_damage").GetSpecialValueFor("value");
+                if (this.GetCasterPlus().findAbliityPlus("special_bonus_imba_ember_guard_damage") && this.GetCasterPlus().FindAbilityByName("special_bonus_imba_ember_guard_damage").GetLevel() > 0) {
+                    damage = damage + this.GetCasterPlus().findAbliityPlus("special_bonus_imba_ember_guard_damage").GetSpecialValueFor("value");
                 }
                 if (this.GetCasterPlus().HasModifier("modifier_imba_flame_guard_aura")) {
                     remnant.EmitSound("Hero_EmberSpirit.FlameGuard.Loop");
@@ -782,7 +782,7 @@ export class imba_ember_spirit_fire_remnant extends BaseAbility_Plus {
                         remaining_health: 1000,
                         duration: this.GetCasterPlus().findBuff<modifier_imba_flame_guard_aura>("modifier_imba_flame_guard_aura").GetRemainingTime()
                     });
-                } else if (this.GetCasterPlus().findAbliityPlus("special_bonus_ember_permanent_guard") && this.GetCasterPlus().FindAbilityByName("special_bonus_ember_permanent_guard").GetLevel() > 0) {
+                } else if (this.GetCasterPlus().findAbliityPlus("special_bonus_imba_ember_permanent_guard") && this.GetCasterPlus().FindAbilityByName("special_bonus_imba_ember_permanent_guard").GetLevel() > 0) {
                     remnant.EmitSound("Hero_EmberSpirit.FlameGuard.Loop");
                     remnant.AddNewModifier(this.GetCasterPlus(), ability_flame_guard, "modifier_imba_flame_guard_aura", {
                         damage: damage * 0.5,
@@ -808,8 +808,8 @@ export class imba_ember_spirit_flame_guard extends BaseAbility_Plus {
             let damage = this.GetSpecialValueFor("damage_per_second");
             let tick_interval = this.GetSpecialValueFor("tick_interval");
             let absorb_amount = this.GetSpecialValueFor("absorb_amount") * caster.GetMaxHealth() * 0.01;
-            if (caster.findAbliityPlus("special_bonus_ember_guard_damage") && caster.FindAbilityByName("special_bonus_ember_guard_damage").GetLevel() > 0) {
-                damage = damage + caster.findAbliityPlus("special_bonus_ember_guard_damage").GetSpecialValueFor("value");
+            if (caster.findAbliityPlus("special_bonus_imba_ember_guard_damage") && caster.FindAbilityByName("special_bonus_imba_ember_guard_damage").GetLevel() > 0) {
+                damage = damage + caster.findAbliityPlus("special_bonus_imba_ember_guard_damage").GetSpecialValueFor("value");
             }
             caster.StartGesture(GameActivity_t.ACT_DOTA_CAST_ABILITY_3);
             let active_remnants = FindActiveRemnants(caster);

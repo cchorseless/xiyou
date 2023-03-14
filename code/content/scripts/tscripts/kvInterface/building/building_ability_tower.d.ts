@@ -647,8 +647,6 @@ declare namespace building_ability_tower {
 "AbilityCooldown" :string ,
 "AbilityManaCost" :string ,
 "AbilitySpecial" :OBJ_3_1 ,
-"CombinationLabel" :string ,
-"CombinationCondition" :string ,
 "SpellDispellableType" :string ,
 "HasShardUpgrade" :string ,
 "AbilityType" :string ,
@@ -656,7 +654,6 @@ declare namespace building_ability_tower {
 "AbilityCastGestureSlot" :string ,
 "AbilityDuration" :string ,
 "AbilityDamage" :string ,
-"AbilityActiveMana" :string ,
 [k:string] : string | OBJ_3_1 }
  interface OBJ_3_1 {
 "10" :OBJ_4_1 ,

@@ -1610,7 +1610,7 @@ export class imba_invoker_alacrity extends BaseAbility_Plus {
             let bonus_attack_speed = ability.GetLevelSpecialValueFor("bonus_attack_speed", wex_level);
             let bonus_damage = ability.GetLevelSpecialValueFor("bonus_damage", exort_level);
             EmitSoundOn("Hero_Invoker.Alacrity", caster);
-            if (caster.HasTalent("imba_special_bonus_unique_invoker_6") && target == caster) {
+            if (caster.HasTalent("special_bonus_imba_unique_invoker_6") && target == caster) {
                 for (const [_, hero] of GameFunc.iPair(HeroList.GetAllHeroes())) {
                     if (hero == caster) {
                         hero.AddNewModifier(caster, ability, "modifier_imba_invoker_alacrity", {
@@ -1626,7 +1626,7 @@ export class imba_invoker_alacrity extends BaseAbility_Plus {
                         });
                     }
                 }
-                let cooldown = caster.GetTalentValue("imba_special_bonus_unique_invoker_6", "alacrity_cooldown");
+                let cooldown = caster.GetTalentValue("special_bonus_imba_unique_invoker_6", "alacrity_cooldown");
                 let current_cooldown = ability.GetCooldownTime();
                 let unaltered_cooldown = ability.GetCooldown(1);
                 let cooldown_reduction_pct = current_cooldown / unaltered_cooldown;
@@ -1870,10 +1870,10 @@ export class imba_invoker_forge_spirit extends BaseAbility_Plus {
             } else {
                 spirit_count = spirit_count_exort;
             }
-            if (caster.HasTalent("imba_special_bonus_unique_invoker_3")) {
-                let additional_spirits = caster.GetTalentValue("imba_special_bonus_unique_invoker_3", "additional_spirits");
+            if (caster.HasTalent("special_bonus_imba_unique_invoker_3")) {
+                let additional_spirits = caster.GetTalentValue("special_bonus_imba_unique_invoker_3", "additional_spirits");
                 spirit_count = spirit_count + additional_spirits;
-                let reduced_duration = caster.GetTalentValue("imba_special_bonus_unique_invoker_3", "reduced_duration");
+                let reduced_duration = caster.GetTalentValue("special_bonus_imba_unique_invoker_3", "reduced_duration");
                 spirit_duration = spirit_duration - reduced_duration;
             }
             let updated_spirit_array: IBaseNpc_Plus[] = []
@@ -2078,8 +2078,8 @@ export class imba_invoker_tornado extends BaseAbility_Plus {
     static ability_effect_cyclone_path = "particles/units/heroes/hero_invoker/invoker_tornado_child.vpcf"
     // static ability_effect_cyclone_path = "particles/econ/items/invoker/invoker_ti6/invoker_tornado_child_ti6.vpcf"
     GetCooldown(invoke_level: number): number {
-        if (this.GetCasterPlus().HasTalent("imba_special_bonus_unique_invoker_8")) {
-            let cooldown = super.GetCooldown(invoke_level) - this.GetCasterPlus().GetTalentValue("imba_special_bonus_unique_invoker_8", "cooldown_reduction");
+        if (this.GetCasterPlus().HasTalent("special_bonus_imba_unique_invoker_8")) {
+            let cooldown = super.GetCooldown(invoke_level) - this.GetCasterPlus().GetTalentValue("special_bonus_imba_unique_invoker_8", "cooldown_reduction");
             return cooldown;
         } else {
             return super.GetCooldown(invoke_level);
@@ -2108,12 +2108,12 @@ export class imba_invoker_tornado extends BaseAbility_Plus {
             let cyclone_max_height = ability.GetSpecialValueFor("cyclone_max_height");
             let tornado_duration = tornado_travel_distance / travel_speed;
             let daze_duration = 0;
-            if (caster.HasTalent("imba_special_bonus_unique_invoker_8")) {
+            if (caster.HasTalent("special_bonus_imba_unique_invoker_8")) {
                 let current_cooldown = ability.GetCooldownTime();
                 let unaltered_cooldown = ability.GetCooldown(1);
                 let cooldown_reduction_pct = current_cooldown / unaltered_cooldown;
                 ability.StartCooldown(unaltered_cooldown * cooldown_reduction_pct);
-                daze_duration = caster.GetTalentValue("imba_special_bonus_unique_invoker_8", "daze_duration");
+                daze_duration = caster.GetTalentValue("special_bonus_imba_unique_invoker_8", "daze_duration");
             }
             let tornado_dummy_unit = BaseModifier_Plus.CreateBuffThinker(caster, this, undefined, {}, caster_location, caster.GetTeamNumber(), false);
             tornado_dummy_unit.EmitSound("Hero_Invoker.Tornado");
@@ -2454,10 +2454,10 @@ export class modifier_imba_invoker_emp extends BaseModifier_Plus {
             this.emp_recharge_threshold = 0;
             this.emp_effect_reduction = 0;
             this.emp_total_charges = 0;
-            if (this.caster.HasTalent("imba_special_bonus_unique_invoker_1")) {
-                this.emp_recharge_threshold = this.caster.GetTalentValue("imba_special_bonus_unique_invoker_1", "threshold");
-                this.emp_effect_reduction = this.caster.GetTalentValue("imba_special_bonus_unique_invoker_1", "effect_reduction");
-                this.emp_total_charges = this.caster.GetTalentValue("imba_special_bonus_unique_invoker_1", "charges");
+            if (this.caster.HasTalent("special_bonus_imba_unique_invoker_1")) {
+                this.emp_recharge_threshold = this.caster.GetTalentValue("special_bonus_imba_unique_invoker_1", "threshold");
+                this.emp_effect_reduction = this.caster.GetTalentValue("special_bonus_imba_unique_invoker_1", "effect_reduction");
+                this.emp_total_charges = this.caster.GetTalentValue("special_bonus_imba_unique_invoker_1", "charges");
             }
             EmitSoundOnLocationWithCaster(this.caster.GetAbsOrigin(), "Hero_Invoker.EMP.Cast", this.caster);
             EmitSoundOnLocationWithCaster(this.target_point, "Hero_Invoker.EMP.Charge", this.caster);
@@ -2586,9 +2586,9 @@ export class imba_invoker_ice_wall extends BaseAbility_Plus {
             let ice_walls = 1;
             let ice_wall_offset = 0;
             let z_offset = 0;
-            if (caster.HasTalent("imba_special_bonus_unique_invoker_4")) {
-                ice_walls = caster.GetTalentValue("imba_special_bonus_unique_invoker_4", "ice_walls");
-                ice_wall_offset = caster.GetTalentValue("imba_special_bonus_unique_invoker_4", "ice_wall_offset");
+            if (caster.HasTalent("special_bonus_imba_unique_invoker_4")) {
+                ice_walls = caster.GetTalentValue("special_bonus_imba_unique_invoker_4", "ice_walls");
+                ice_wall_offset = caster.GetTalentValue("special_bonus_imba_unique_invoker_4", "ice_wall_offset");
                 z_offset = 75;
                 this.ice_wall_effect = "particles/hero/invoker/icewall/imba_invoker_ice_wall.vpcf";
             }
@@ -2844,8 +2844,8 @@ export class imba_invoker_chaos_meteor extends BaseAbility_Plus {
             let ability = this;
             let target_point = this.GetCursorPosition();
             let number_of_meteors = 1;
-            if (caster.HasTalent("imba_special_bonus_unique_invoker_2")) {
-                number_of_meteors = caster.GetTalentValue("imba_special_bonus_unique_invoker_2", "number_of_meteors");
+            if (caster.HasTalent("special_bonus_imba_unique_invoker_2")) {
+                number_of_meteors = caster.GetTalentValue("special_bonus_imba_unique_invoker_2", "number_of_meteors");
             }
             this.GetCasterPlus().StartGesture(GameActivity_t.ACT_DOTA_CAST_CHAOS_METEOR);
             this.CastMeteor(caster, ability, target_point, number_of_meteors);
@@ -3021,8 +3021,8 @@ export class modifier_imba_invoker_chaos_meteor_aura extends BaseModifier_Plus {
             this.burn_dps = kv.burn_dps;
             this.burn_dps_inverval = kv.burn_dps_inverval;
             this.area_of_effect = kv.area_of_effect;
-            if (this.caster.HasTalent("imba_special_bonus_unique_invoker_2")) {
-                let number_of_meteors = this.caster.GetTalentValue("imba_special_bonus_unique_invoker_2", "number_of_meteors");
+            if (this.caster.HasTalent("special_bonus_imba_unique_invoker_2")) {
+                let number_of_meteors = this.caster.GetTalentValue("special_bonus_imba_unique_invoker_2", "number_of_meteors");
                 this.burn_dps = this.burn_dps / number_of_meteors;
                 this.main_dmg = this.main_dmg / number_of_meteors;
             }
@@ -3150,8 +3150,8 @@ export class imba_invoker_deafening_blast extends BaseAbility_Plus {
             this.GetCasterPlus().StartGesture(GameActivity_t.ACT_DOTA_CAST_DEAFENING_BLAST);
             EmitSoundOnLocationWithCaster(caster_location, "Hero_Invoker.DeafeningBlast", caster);
             this.hit_table = [];
-            if (caster.HasTalent("imba_special_bonus_unique_invoker_7")) {
-                let num_deafening_blasts = caster.GetTalentValue("imba_special_bonus_unique_invoker_7", "number_of_blasts");
+            if (caster.HasTalent("special_bonus_imba_unique_invoker_7")) {
+                let num_deafening_blasts = caster.GetTalentValue("special_bonus_imba_unique_invoker_7", "number_of_blasts");
                 BaseModifier_Plus.CreateBuffThinker(caster, this, "modifier_imba_invoker_deafening_blast", {
                     num_deafening_blasts: num_deafening_blasts
                 }, target_point, caster.GetTeamNumber(), false);
@@ -3217,8 +3217,8 @@ export class imba_invoker_deafening_blast extends BaseAbility_Plus {
             let deafening_blast_travel_speed = ability.GetSpecialValueFor("travel_speed");
             let deafening_blast_radius_start = ability.GetSpecialValueFor("radius_start");
             let deafening_blast_radius_end = ability.GetSpecialValueFor("radius_end");
-            if (caster.HasTalent("imba_special_bonus_unique_invoker_7")) {
-                let damage_reduction = caster.GetTalentValue("imba_special_bonus_unique_invoker_7", "damage_reduction");
+            if (caster.HasTalent("special_bonus_imba_unique_invoker_7")) {
+                let damage_reduction = caster.GetTalentValue("special_bonus_imba_unique_invoker_7", "damage_reduction");
                 deafening_blast_damage = deafening_blast_damage * ((100 - damage_reduction) / 100);
             }
             let direction = (target_point - caster_location as Vector).Normalized();

@@ -43,7 +43,6 @@ export class imba_abaddon_death_coil extends BaseAbility_Plus {
     GetManaCost(level: number): number {
         return 0;
     }
-
     GetCooldown(level: number): number {
         return 20;
     }

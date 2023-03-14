@@ -67,16 +67,16 @@ export class CCCombinationInfoDialog extends CCPanel<ICCCombinationInfoDialog> {
         }
         let allcombs: ECombination[] = [];
         if (playerid !== -1) {
-            allcombs = ECombination.GetCombinationByCombinationName(playerid!, sectName) || [];
+            allcombs = ECombination.GetCombinationBySectName(playerid!, sectName) || [];
         }
         let data = GJSONConfig.CombinationConfig.getDataList();
         let configs: { [k: string]: Dota.CombinationConfigRecord } = {};
         let bindEquipid = 0;
         let isConditionActive = false;
         for (let info of data) {
-            if (info.relation == sectName && (info.Abilityid == abilityitemname || abilityitemname == null)) {
-                if (configs[info.relationid] == null) {
-                    configs[info.relationid] = info;
+            if (info.SectName == sectName && (info.Abilityid == abilityitemname || abilityitemname == null)) {
+                if (configs[info.SectId] == null) {
+                    configs[info.SectId] = info;
                     if (info.Equipid) {
                         bindEquipid = info.Equipid;
                     }
@@ -84,13 +84,7 @@ export class CCCombinationInfoDialog extends CCPanel<ICCCombinationInfoDialog> {
             }
         }
         if (bindEquipid != 0 && playerid !== -1) {
-            let allheroEquip = HeroEquipComponent.GetGroupInstance(playerid!);
-            for (let heroEquip of allheroEquip) {
-                if (heroEquip.IsScepter(bindEquipid)) {
-                    isConditionActive = true;
-                    break;
-                }
-            }
+            isConditionActive = HeroEquipComponent.CheckPlayerIsScepter(playerid!, bindEquipid);
         }
         const sectlock = bindEquipid > 0 && isConditionActive == false;
         let configlist = Object.values(configs);
@@ -129,7 +123,7 @@ export class CCCombinationInfoDialog extends CCPanel<ICCCombinationInfoDialog> {
                         {configlist.map((_config, index) => {
                             let isactive = false;
                             allcombs.forEach((entity) => {
-                                if (entity.IsActive() && entity.combinationId === _config.relationid) {
+                                if (entity.IsActive() && entity.SectId === _config.SectId) {
                                     isactive = true;
                                 }
                             })

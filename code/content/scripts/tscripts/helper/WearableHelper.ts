@@ -1,4 +1,3 @@
-import { LogHelper } from "./LogHelper";
 
 export module WearableHelper {
     export enum EAttach_map {
@@ -49,7 +48,7 @@ export module WearableHelper {
         SlotIndex2Name?: { [k: string]: string };
     }
 
-  
+
     // export function RequestParticles(response) {
     //     Http.RequestParticles((sBody) => {
     //         if (!sBody) {
@@ -267,11 +266,11 @@ export module WearableHelper {
     //     )
     // }
 
-   
 
-  
 
-  
+
+
+
 
     //  RefreshSpectreArcana(hUnit, sStyle) {
     //     if ( hUnit.GetModelName() == "models/items/spectre/spectre_arcana/spectre_arcana_base.vmdl" ) {
@@ -305,9 +304,9 @@ export module WearableHelper {
     //     }
     // }
 
- 
 
-    
+
+
 
     //  WearCourier(hUnit, sItemDef, sStyle, bFlying, bDire) {
     //     print("WearCourier", hUnit, sItemDef, sStyle, type(sItemDef), type(sStyle), bFlying, bDire)
@@ -458,7 +457,7 @@ export module WearableHelper {
     //     }
     // }
 
-   
+
 
     //  CanPrismatic(sParticle, sPrismatic) {
     //     if ( sParticle == "particles/econ/courier/courier_trail_lava/courier_trail_lava.vpcf" && sPrismatic == "unusual_red") {
@@ -643,17 +642,17 @@ export module WearableHelper {
 
 
 
-   
 
-   
+
+
 
     // //  换装搭配
-    //  WearCombination(hUnit, sCombinationID) {
+    //  WearCombination(hUnit, sSectId) {
     //     let sHeroName = hUnit.sHeroName
-    //     if ( !type(sCombinationID) == "string" ) {
-    //         sCombinationID = tostring(sCombinationID)
+    //     if ( !type(sSectId) == "string" ) {
+    //         sSectId = tostring(sSectId)
     //     }
-    //     let hCombination = Wearable.combination[sCombinationID]
+    //     let hCombination = Wearable.combination[sSectId]
     //     let nHeroID = DOTAGameManager.GetHeroIDByName(hUnit.sHeroName)
     //     if ( nHeroID != tonumber(hCombination.heroID) ) {
     //         return
@@ -686,8 +685,8 @@ export module WearableHelper {
 
     // //  缓存搭配
     //  CacheCombination(hCombination) {
-    //     hCombination.combinationID = tostring(hCombination.combinationID)
-    //     Wearable.combination[hCombination.combinationID] = hCombination
+    //     hCombination.SectId = tostring(hCombination.SectId)
+    //     Wearable.combination[hCombination.SectId] = hCombination
     // }
 
     //  CacheCombinationPage(hPage) {
@@ -697,13 +696,13 @@ export module WearableHelper {
     //     }
     // }
 
-   
 
-   
 
-   
 
-   
+
+
+
+
 
 
 

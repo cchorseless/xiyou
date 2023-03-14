@@ -4,8 +4,8 @@ import { GEventHelper } from "../../../../../scripts/tscripts/shared/lib/GEventH
 
 @GReloadable
 export class ECombination extends ET.Entity {
-    public combinationName: string;
-    public combinationId: string;
+    public SectName: string;
+    public SectId: string;
     public activeNeedCount: number;
     public uniqueConfigList: string[] = [];
 
@@ -26,16 +26,16 @@ export class ECombination extends ET.Entity {
         GEventHelper.FireEvent(ECombination.name, null, null, this)
     }
 
-    static GetCombinationByCombinationId(BelongPlayerid: PlayerID, _combid: string) {
+    static GetCombinationBySectId(BelongPlayerid: PlayerID, _combid: string) {
         if (_combid == null) return;
         const allcomb = ECombination.GetGroupInstance(BelongPlayerid)
         for (let entity of allcomb) {
-            if (entity && entity.combinationId == _combid) {
+            if (entity && entity.SectId == _combid) {
                 return entity
             }
         }
     }
-    static GetCombinationByCombinationName(BelongPlayerid: PlayerID, _combname: string) {
+    static GetCombinationBySectName(BelongPlayerid: PlayerID, _combname: string) {
         if (_combname == null) return;
         return this.GetAllCombination(BelongPlayerid)[_combname]
     }
@@ -44,8 +44,8 @@ export class ECombination extends ET.Entity {
         const allcomb = ECombination.GetGroupInstance(BelongPlayerid)
         allcomb.forEach(entity => {
             if (entity && !entity.IsEmpty()) {
-                r[entity.combinationName] = r[entity.combinationName] || [];
-                r[entity.combinationName].push(entity);
+                r[entity.SectName] = r[entity.SectName] || [];
+                r[entity.SectName].push(entity);
             }
         })
         for (let k in r) {

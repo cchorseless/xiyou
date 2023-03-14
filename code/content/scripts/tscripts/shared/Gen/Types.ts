@@ -3235,16 +3235,16 @@ export class CombinationConfigRecord {
     constructor(_json_: any) {
         if (_json_.id === undefined) { GLogHelper.error(1); }
         this.id = _json_.id
-        if (_json_.relation === undefined) { GLogHelper.error(1); }
-        this.relation = _json_.relation
-        if (_json_.relationicon === undefined) { GLogHelper.error(1); }
-        this.relationicon = _json_.relationicon
-        if (_json_.relationid === undefined) { GLogHelper.error(1); }
-        this.relationid = _json_.relationid
+        if (_json_.SectName === undefined) { GLogHelper.error(1); }
+        this.SectName = _json_.SectName
+        if (_json_.SectIcon === undefined) { GLogHelper.error(1); }
+        this.SectIcon = _json_.SectIcon
+        if (_json_.SectId === undefined) { GLogHelper.error(1); }
+        this.SectId = _json_.SectId
         if (_json_.index === undefined) { GLogHelper.error(1); }
         this.index = _json_.index
-        if (_json_.relation_level === undefined) { GLogHelper.error(1); }
-        this.relationLevel = _json_.relation_level
+        if (_json_.SectLevel === undefined) { GLogHelper.error(1); }
+        this.SectLevel = _json_.SectLevel
         if (_json_.active_count === undefined) { GLogHelper.error(1); }
         this.activeCount = _json_.active_count
         if (_json_.acitve_common_effect === undefined) { GLogHelper.error(1); }
@@ -3266,15 +3266,15 @@ export class CombinationConfigRecord {
     /**
      * 羁绊名称
      */
-    readonly relation: string
+    readonly SectName: string
     /**
      * 羁绊icon
      */
-    readonly relationicon: string
+    readonly SectIcon: string
     /**
      * 羁绊id
      */
-    readonly relationid: string
+    readonly SectId: string
     /**
      * 羁绊索引
      */
@@ -3282,7 +3282,7 @@ export class CombinationConfigRecord {
     /**
      * 羁绊等级
      */
-    readonly relationLevel: string
+    readonly SectLevel: string
     /**
      * 羁绊激活数量
      */

@@ -112,8 +112,8 @@ export class sohei_flurry_of_blows extends BaseAbility_Plus {
         if (!IsServer()) {
             return;
         }
-        if (this.GetCasterPlus().HasAbility("special_bonus_sohei_fob_radius") && this.GetCasterPlus().findAbliityPlus("special_bonus_sohei_fob_radius").IsTrained() && !this.GetCasterPlus().HasModifier("modifier_special_bonus_sohei_fob_radius")) {
-            this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_special_bonus_sohei_fob_radius", {});
+        if (this.GetCasterPlus().HasAbility("special_bonus_imba_sohei_fob_radius") && this.GetCasterPlus().findAbliityPlus("special_bonus_imba_sohei_fob_radius").IsTrained() && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_sohei_fob_radius")) {
+            this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_special_bonus_imba_sohei_fob_radius", {});
         }
     }
     GetAssociatedSecondaryAbilities(): string {
@@ -170,14 +170,14 @@ export class sohei_flurry_of_blows extends BaseAbility_Plus {
     GetAOERadius(): number {
         let caster = this.GetCasterPlus();
         let additionalRadius = 0;
-        if (this.GetCasterPlus().HasTalent("special_bonus_sohei_fob_radius")) {
-            additionalRadius = this.GetCasterPlus().GetTalentValue("special_bonus_sohei_fob_radius");
+        if (this.GetCasterPlus().HasTalent("special_bonus_imba_sohei_fob_radius")) {
+            additionalRadius = this.GetCasterPlus().GetTalentValue("special_bonus_imba_sohei_fob_radius");
         }
         return this.GetSpecialValueFor("flurry_radius") + additionalRadius;
     }
 }
 @registerModifier()
-export class modifier_special_bonus_sohei_fob_radius extends BaseModifier_Plus {
+export class modifier_special_bonus_imba_sohei_fob_radius extends BaseModifier_Plus {
     IsHidden(): boolean {
         return true;
     }
@@ -578,7 +578,7 @@ export class modifier_sohei_momentum_passive extends BaseModifier_Plus {
             ParticleManager.SetParticleControl(momentum_pfx, 0, target.GetAbsOrigin());
             ParticleManager.ReleaseParticleIndex(momentum_pfx);
             let guard = attacker.findAbliityPlus("sohei_guard");
-            let talent = attacker.findAbliityPlus("special_bonus_sohei_momentum_guard_cooldown");
+            let talent = attacker.findAbliityPlus("special_bonus_imba_sohei_momentum_guard_cooldown");
             if (talent && talent.GetLevel() > 0) {
                 let cooldown_reduction = talent.GetSpecialValueFor("value");
                 if (!guard.IsCooldownReady()) {

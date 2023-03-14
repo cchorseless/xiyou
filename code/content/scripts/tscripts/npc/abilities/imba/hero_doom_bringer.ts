@@ -49,14 +49,14 @@ export class imba_doom_bringer_doom extends BaseAbility_Plus {
         let caster = this.GetCasterPlus();
         if (this.GetAutoCastState()) {
             caster.AddNewModifier(caster, this, "modifier_imba_doom_bringer_doom", {
-                duration: this.GetSpecialValueFor("self_duration") + this.GetCasterPlus().GetTalentValue("special_bonus_unique_doom_7")
+                duration: this.GetSpecialValueFor("self_duration") + this.GetCasterPlus().GetTalentValue("special_bonus_imba_unique_doom_7")
             });
         } else {
             if (!this.GetCursorTarget().TriggerSpellAbsorb(this)) {
                 let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCursorPosition(), undefined, this.GetSpecialValueFor("aoe_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ANCIENTS, FindOrder.FIND_ANY_ORDER, false);
                 for (const [_, enemy] of GameFunc.iPair(enemies)) {
                     enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_doom_bringer_doom_enemies", {
-                        duration: (this.GetSpecialValueFor("duration") + this.GetCasterPlus().GetTalentValue("special_bonus_unique_doom_7")) * (1 - enemy.GetStatusResistance())
+                        duration: (this.GetSpecialValueFor("duration") + this.GetCasterPlus().GetTalentValue("special_bonus_imba_unique_doom_7")) * (1 - enemy.GetStatusResistance())
                     });
                 }
             }
@@ -195,8 +195,8 @@ export class modifier_imba_doom_bringer_doom_enemies extends BaseModifier_Plus {
     Init(p_0: any,): void {
         if (this.GetAbilityPlus()) {
             this.deniable_pct = this.GetSpecialValueFor("deniable_pct");
-            this.duration = this.GetSpecialValueFor("duration") + this.GetCasterPlus().GetTalentValue("special_bonus_unique_doom_7");
-            this.damage = this.GetSpecialValueFor("damage") + this.GetCasterPlus().GetTalentValue("special_bonus_unique_doom_5");
+            this.duration = this.GetSpecialValueFor("duration") + this.GetCasterPlus().GetTalentValue("special_bonus_imba_unique_doom_7");
+            this.damage = this.GetSpecialValueFor("damage") + this.GetCasterPlus().GetTalentValue("special_bonus_imba_unique_doom_5");
         } else {
             this.deniable_pct = 25;
             this.duration = this.GetSpecialValueFor("duration");

@@ -13,7 +13,7 @@ export class imba_chaos_knight_reality_rift extends BaseAbility_Plus {
     CastFilterResultTarget(target: CDOTA_BaseNPC): UnitFilterResult {
         let caster = this.GetCasterPlus();
         if (target.IsMagicImmune()) {
-            let ability = caster.findAbliityPlus("special_bonus_unique_chaos_knight");
+            let ability = caster.findAbliityPlus("special_bonus_imba_unique_chaos_knight");
             if (ability && ability.GetLevel() > 0) {
                 return UnitFilterResult.UF_SUCCESS;
             } else {
@@ -139,7 +139,7 @@ export class modifier_reality_rift_armor_reduction_debuff extends BaseModifier_P
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS)
     CC_GetModifierPhysicalArmorBonus(p_0: ModifierAttackEvent,): number {
-        return this.GetSpecialValueFor("armor_reduction") + this.GetCasterPlus().GetTalentValue("special_bonus_unique_chaos_knight_2");
+        return this.GetSpecialValueFor("armor_reduction") + this.GetCasterPlus().GetTalentValue("special_bonus_imba_unique_chaos_knight_2");
     }
     IsDebuff(): boolean {
         return true;

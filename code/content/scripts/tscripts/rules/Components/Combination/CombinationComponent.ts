@@ -12,7 +12,7 @@ export class CombinationComponent extends ET.Component {
     ItemCombination: string[] = [];
     addAbilityRoot(abilityroot: IAbilityEntityRoot) {
         let type = GGetRegClass<typeof ECombinationLabelItem>("ECombinationLabelItem");
-        abilityroot.CombinationLabels.forEach((item) => {
+        abilityroot.SectLabels.forEach((item) => {
             if (item && item.length > 0) {
                 let entity = this.AddChild(type, "Ability", abilityroot.Id, item);
                 this.AbilityCombination.push(entity.Id);
@@ -48,7 +48,7 @@ export class CombinationComponent extends ET.Component {
 
     addItemRoot(itemroot: IItemEntityRoot) {
         let type = GGetRegClass<typeof ECombinationLabelItem>("ECombinationLabelItem");
-        itemroot.CombinationLabels.forEach((item) => {
+        itemroot.SectLabels.forEach((item) => {
             if (item && item.length > 0) {
                 let entity = this.AddChild(type, "Item", itemroot.Id, item);
                 this.ItemCombination.push(entity.Id);

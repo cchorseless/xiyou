@@ -89,7 +89,7 @@ declare namespace building_item_card {
 "item_building_hero_razor" :OBJ_2_1 ,
 "item_building_hero_riki" :OBJ_2_1 ,
 "item_building_hero_rubick" :OBJ_2_1 ,
-"item_building_hero_sandking" :OBJ_2_1 ,
+"item_building_hero_sand_king" :OBJ_2_1 ,
 "item_building_hero_shadow_demon" :OBJ_2_1 ,
 "item_building_hero_shadow_shaman" :OBJ_2_1 ,
 "item_building_hero_shredder" :OBJ_2_1 ,

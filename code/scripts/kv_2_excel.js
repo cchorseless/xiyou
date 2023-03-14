@@ -1173,6 +1173,110 @@ function makeOnePropExcel(prop = "AbilityChannelTime") {
 
 }
 
+const lang_path = "game/scripts/dota2_abilities_schinese.txt";
+const imba_lang_path = "game/scripts/imba_addon_schinese.txt";
+function createabilityLang() {
+    let sheets = xlsx.parse(imbakvtmpPath);
+    let sheet = sheets[0];
+    let rows = sheet.data;
+    let nrows = rows.length;
+    rows.push([]);
+    const lanstr = fs.readFileSync(imba_lang_path, "utf8");
+    // let obj = keyvalues.decode(lanstr);
+    // let Tokens = obj.Tokens;
+    let lines = lanstr.split("\n");
+    for (let i = 0; i < lines.length; i++) {
+        if (lines[i].includes("Tokens")) {
+            lines = lines.slice(i, lines.length - 1);
+            break;
+        }
+    }
+    let outkeys = {}
+    for (let i = 0; i < lines.length - 1; i++) {
+        let line = lines[i];
+        // line = line.replace("dota_tooltip_", "DOTA_Tooltip_")
+        if (!line.includes('DOTA_Tooltip_') && !line.includes('dota_tooltip_')) { continue; }
+        let strlist = line.split('"');
+        let key = line.split('"')[1].replace("_Ability_", "_ability_").replace("_description", "_Description").replace("_lore", "_Lore").replace("_note0", "_Note0").replace("_note1", "_Note1");
+        key = key.replace("_note2", "_Note2").replace("_note3", "_Note3").replace("_note4", "_Note4").replace("_note5", "_Note5").replace("_note6", "_Note6");;
+        // let isbasekey = lines[i + 1].includes("key");
+        let value = ""
+        if (strlist.length > 4) {
+            value = strlist[3];
+        }
+        else {
+            value = lines[i + 1].split('"')[1];
+        }
+        outkeys[key] = value;
+    }
+    let allbasekey = {};
+    let keys = Object.keys(outkeys);
+    for (let k of keys) {
+        if (keys.includes(k + "_Description") || keys.includes(k + "_Lore") || keys.includes(k + "_Note0")
+            || keys.includes(k + "_imbafication_1")
+        ) {
+            allbasekey[k] = {};
+        }
+    }
+    for (let k in allbasekey) {
+        for (let i = 0, len = keys.length; i < len; i++) {
+            let kk = keys[i];
+            if (kk == k) {
+                keys.splice(i, 1);
+                i--;
+                len--;
+                continue;
+            }
+            if (kk.includes(k)) {
+                allbasekey[k][kk.replace(k + "_", "")] = outkeys[kk];
+                keys.splice(i, 1);
+                i--;
+                len--;
+            }
+        }
+    }
+    const extrakeylist = ["Description",
+        "Lore",
+        "scepter_description",
+        "abilitydraft_note",
+        "Note0",
+        "Note1",
+        "Note2",
+        "Note3",
+        "Note4",
+        "Note5",
+        "Note6",
+    ]
+    for (let k in allbasekey) {
+        let lineinfo = allbasekey[k];
+        let newRow = [k,
+            outkeys[k],
+        ];
+        for (let extrak of extrakeylist) {
+            newRow.push(lineinfo[extrak])
+            delete lineinfo[extrak];
+        }
+        for (let kk in lineinfo) {
+            if (kk.includes("imbafication")) {
+                let des = newRow[2] || "";
+                des += "\n\n" + lineinfo[kk];
+            }
+            else {
+                newRow.push(kk);
+                newRow.push(lineinfo[kk]);
+            }
+
+        }
+        rows.push(newRow);
+    }
+    rows.push([]);
+    rows.push([]);
+    for (let k of keys) {
+        rows.push([k, outkeys[k]]);
+    }
+    fs.writeFileSync(imbakvtmpPath, xlsx.build(sheets));
+}
+
 (async () => {
     // var args = process.argv.splice(2);
     // readDATA();
@@ -1182,6 +1286,7 @@ function makeOnePropExcel(prop = "AbilityChannelTime") {
     // createSound();
     // createImbaUnit();
     // makeOnePropExcel();
+    createabilityLang();
 })().catch((error) => {
     console.error(error);
     process.exit(1);

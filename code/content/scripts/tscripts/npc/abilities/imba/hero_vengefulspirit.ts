@@ -979,21 +979,21 @@ export class modifier_imba_vengefulspirit_command_aura_effect_723 extends BaseMo
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BONUS)
     CC_GetModifierBonusStats_Strength(): number {
         if (this.GetAbilityPlus() && this.hero_primary_attribute == Attributes.DOTA_ATTRIBUTE_STRENGTH) {
-            return this.GetSpecialValueFor("bonus_attributes") + this.GetAbilityPlus().GetTalentValue("special_bonus_unique_vengeful_spirit_2");
+            return this.GetSpecialValueFor("bonus_attributes") + this.GetAbilityPlus().GetTalentValue("special_bonus_imba_unique_vengeful_spirit_2");
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_BONUS)
     CC_GetModifierBonusStats_Agility(): number {
         print(this.hero_primary_attribute, Attributes.DOTA_ATTRIBUTE_AGILITY);
         if (this.GetAbilityPlus() && this.hero_primary_attribute == Attributes.DOTA_ATTRIBUTE_AGILITY) {
-            print(this.GetSpecialValueFor("bonus_attributes"), this.GetAbilityPlus().GetTalentValue("special_bonus_unique_vengeful_spirit_2"));
-            return this.GetSpecialValueFor("bonus_attributes") + this.GetAbilityPlus().GetTalentValue("special_bonus_unique_vengeful_spirit_2");
+            print(this.GetSpecialValueFor("bonus_attributes"), this.GetAbilityPlus().GetTalentValue("special_bonus_imba_unique_vengeful_spirit_2"));
+            return this.GetSpecialValueFor("bonus_attributes") + this.GetAbilityPlus().GetTalentValue("special_bonus_imba_unique_vengeful_spirit_2");
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BONUS)
     CC_GetModifierBonusStats_Intellect(): number {
         if (this.GetAbilityPlus() && this.hero_primary_attribute == Attributes.DOTA_ATTRIBUTE_INTELLECT) {
-            return this.GetSpecialValueFor("bonus_attributes") + this.GetAbilityPlus().GetTalentValue("special_bonus_unique_vengeful_spirit_2");
+            return this.GetSpecialValueFor("bonus_attributes") + this.GetAbilityPlus().GetTalentValue("special_bonus_imba_unique_vengeful_spirit_2");
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_RANGE_BONUS)
@@ -1005,7 +1005,7 @@ export class modifier_imba_vengefulspirit_command_aura_effect_723 extends BaseMo
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     CC_OnTooltip(): number {
         if (this.GetAbilityPlus()) {
-            return this.GetSpecialValueFor("bonus_attributes") + this.GetAbilityPlus().GetTalentValue("special_bonus_unique_vengeful_spirit_2");
+            return this.GetSpecialValueFor("bonus_attributes") + this.GetAbilityPlus().GetTalentValue("special_bonus_imba_unique_vengeful_spirit_2");
         }
     }
 }

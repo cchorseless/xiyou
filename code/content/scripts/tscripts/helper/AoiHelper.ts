@@ -290,6 +290,82 @@ export module AoiHelper {
         }
         //  DebugDrawCircle(position, Vector(0, 255, 255), 32, 64, true, 0.5)
     }
+
+
+    export function GetAOEMostTargetsPosition2(
+        search_position: Vector,
+        search_radius: number,
+        team_number: DOTATeam_t,
+        radius: number,
+        exclude: IBaseNpc_Plus[] | null,
+        team_filter: DOTA_UNIT_TARGET_TEAM,
+        type_filter: DOTA_UNIT_TARGET_TYPE,
+        flag_filter: DOTA_UNIT_TARGET_FLAGS,
+        order: FindOrder = FindOrder.FIND_ANY_ORDER
+    ) {
+        let targets = FindUnitsInRadius(team_number, search_position, undefined, search_radius + radius, team_filter, type_filter, flag_filter, order, false);
+        let position = vec3_invalid;
+        if (targets.length == 1) {
+            let vDirection = targets[0].GetAbsOrigin() - search_position as Vector;
+            vDirection.z = 0;
+            position = GetGroundPosition(search_position + vDirection.Normalized() * math.min(search_radius - 1, vDirection.Length2D()) as Vector, undefined);
+        }
+        else if (targets.length > 1) {
+            let tPoints: Vector[] = []
+            for (let i = 0; i < targets.length; i++) {
+                let first_target = targets[i];
+                for (let j = i + 1; j < targets.length; j++) {
+                    let second_target = targets[j];
+                    let vDirection = second_target.GetAbsOrigin() - first_target.GetAbsOrigin() as Vector;
+                    vDirection.z = 0;
+                    let fDistance = vDirection.Length2D();
+                    if (fDistance <= radius * 2 && fDistance > 0) {
+                        let vMid = (second_target.GetAbsOrigin() + first_target.GetAbsOrigin()) / 2 as Vector;
+                        if ((vMid - search_position as Vector).Length2D() <= search_radius) {
+                            tPoints.push(vMid);
+                        } else {
+                            let fHalfLength = math.sqrt(radius ^ 2 - (fDistance / 2) ^ 2);
+                            let v = GFuncVector.Rotation2D(vDirection.Normalized(), math.rad(90));
+                            let p = [
+                                vMid - v * fHalfLength,
+                                vMid + v * fHalfLength
+                            ];
+
+                            for (const vPoint of (p as Vector[])) {
+                                if ((vPoint - search_position as Vector).Length2D() <= search_radius) {
+                                    tPoints.push(vPoint);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            let iMax = 0;
+            for (let i = 0; i < tPoints.length; i++) {
+                let vPoint = tPoints[i];
+                let n = 0;
+                for (let j = 0; j < targets.length; j++) {
+                    let target = targets[j];
+                    if (target.IsPositionInRange(vPoint, radius + target.GetHullRadius())) {
+                        n = n + 1;
+                    }
+                }
+                if (n > iMax) {
+                    position = vPoint;
+                    iMax = n;
+                }
+            }
+            if (position == vec3_invalid) {
+                let vDirection = targets[1].GetAbsOrigin() - search_position as Vector;
+                vDirection.z = 0;
+                position = GetGroundPosition(search_position + vDirection.Normalized() * math.min(search_radius - 1, vDirection.Length2D()) as Vector, undefined);
+            }
+        }
+        if (position != vec3_invalid) {
+            position = GetGroundPosition(position, undefined);
+        }
+        return position;
+    }
     //  获取一条线上单位最多的施法点
     //  搜索点，搜索范围，队伍，开始宽度，结束宽度，队伍过滤，类型过滤，特殊过滤
     export function GetLinearMostTargetsPosition(

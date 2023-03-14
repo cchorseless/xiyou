@@ -3,7 +3,6 @@ import React from "react";
 import { CCCombinationInfoDialog } from "../view/Combination/CCCombinationInfoDialog";
 import { CCMainPanel } from "../view/MainPanel/CCMainPanel";
 import { EventHelper } from "./EventHelper";
-import { KVHelper } from "./KVHelper";
 import { LogHelper } from "./LogHelper";
 import { TipsHelper } from "./TipsHelper";
 
@@ -334,19 +333,11 @@ export module DotaUIHelper {
                 AbilityDetails.style.width = "340px";
             }
             DOTAAbilityToolTip_Contents.style.width = "fit-children";
-            let config = KVHelper.KVAbilitys()[ability_name] || KVHelper.KVItems()[ability_name];
-            GLogHelper.print(Object.keys(KVHelper.KVAbilitys()).includes(ability_name), ability_name);
-            let CombinationLabel: string | null = null;
-            if (config) {
-                let _CombinationLabel = config.CombinationLabel;
-                if (_CombinationLabel && typeof _CombinationLabel == "string" && _CombinationLabel.length > 0) {
-                    CombinationLabel = _CombinationLabel;
-                }
-            }
+            let sectname = GJsonConfigHelper.GetAbilitySectLabel(ability_name)
             CustomTooltipPanel = CustomTooltipPanel || DOTAAbilityToolTip_Contents.FindChild(customPanelid);
             if (CustomTooltipPanel) {
-                if (CombinationLabel) {
-                    render(<CCCombinationInfoDialog key={Math.random() * 1000 + ""} unitentityindex={c} sectName={CombinationLabel} abilityitemname={ability_name as string} />, CustomTooltipPanel);
+                if (sectname) {
+                    render(<CCCombinationInfoDialog key={Math.random() * 1000 + ""} unitentityindex={c} sectName={sectname} abilityitemname={ability_name as string} />, CustomTooltipPanel);
                 }
                 else {
                     render(< ></>, CustomTooltipPanel);

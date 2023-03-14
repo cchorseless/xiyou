@@ -336,8 +336,8 @@ export class imba_winter_wyvern_splinter_blast extends BaseAbility_Plus {
                 slow: ExtraData.slow,
                 attack_slow: ExtraData.attack_slow
             });
-            if (caster.HasTalent("special_bonus_unique_winter_wyvern_4")) {
-                let stun_duration = caster.GetTalentValue("special_bonus_unique_winter_wyvern_4", "value");
+            if (caster.HasTalent("special_bonus_imba_unique_winter_wyvern_4")) {
+                let stun_duration = caster.GetTalentValue("special_bonus_imba_unique_winter_wyvern_4", "value");
                 target.AddNewModifier(caster, this, "modifier_stunned", {
                     duration: stun_duration * (1 - target.GetStatusResistance())
                 });

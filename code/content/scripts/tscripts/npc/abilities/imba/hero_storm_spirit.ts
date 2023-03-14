@@ -516,7 +516,7 @@ export class modifier_imba_overload_buff extends BaseModifier_Plus {
                     let damage = ability.GetSpecialValueFor("damage") + (ability.GetSpecialValueFor("bonus_dmg_stack") * this.GetStackCount());
                     let slow_duration = ability.GetSpecialValueFor("slow_duration");
                     let target_flag = ability.GetAbilityTargetFlags();
-                    if (this.GetParentPlus().HasTalent("special_bonus_unique_storm_spirit_3")) {
+                    if (this.GetParentPlus().HasTalent("special_bonus_imba_unique_storm_spirit_3")) {
                         target_flag = target_flag + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES;
                     }
                     let particle_fx = ResHelper.CreateParticleEx(particle, ParticleAttachment_t.PATTACH_ABSORIGIN, parent);
@@ -606,7 +606,7 @@ export class imba_storm_spirit_ball_lightning extends BaseAbility_Plus {
                 this.RefundManaCost();
                 return;
             }
-            if (this.GetCasterPlus().HasTalent("special_bonus_unique_storm_spirit_4")) {
+            if (this.GetCasterPlus().HasTalent("special_bonus_imba_unique_storm_spirit_4")) {
                 this.remnant = this.GetCasterPlus().findAbliityPlus<imba_storm_spirit_static_remnant>("imba_storm_spirit_static_remnant");
                 this.traveled_remnant = 0;
             }
@@ -675,7 +675,7 @@ export class imba_storm_spirit_ball_lightning extends BaseAbility_Plus {
             caster.ReduceMana(((ExtraData.pct_mana_cost * 0.01) + ExtraData.base_mana_cost) * this.units_traveled_in_last_tick * 0.01);
             if (this.traveled_remnant != undefined && this.remnant) {
                 this.traveled_remnant = this.traveled_remnant + ExtraData.speed;
-                let remant_interval = caster.GetTalentValue("special_bonus_unique_storm_spirit_4");
+                let remant_interval = caster.GetTalentValue("special_bonus_imba_unique_storm_spirit_4");
                 if (this.traveled_remnant - remant_interval >= 0) {
                     this.traveled_remnant = this.traveled_remnant - remant_interval;
                     let cast_sound = "Hero_StormSpirit.StaticRemnantPlant";

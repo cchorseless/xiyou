@@ -494,7 +494,7 @@ function single_excel_to_kv(file) {
     r_s = dealAbilitySpecial(r_s)
     fs.writeFileSync(outpath, r_s);
     console.log('success xlsx->kv', outpath);
-    createLanguageTXT(file, rows)
+    // createLanguageTXT(file, rows)
 }
 
 

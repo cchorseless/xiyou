@@ -12,8 +12,7 @@ export module CombinationConfig {
         // 特殊敌人
         enemyspe = "enemyspe",
     }
-
-    export enum ECombinationLabel {
+    export enum ESectName {
         /**加甲流 */
         sect_phyarm_up = "sect_phyarm_up",
         /**减甲流 */
@@ -100,7 +99,7 @@ export module CombinationConfig {
         sect_betrayal = "sect_betrayal",
     }
 
-    export const ECombinationLabelList = Object.keys(ECombinationLabel);
+    export const ESectNameList = Object.keys(ESectName);
     // 1加甲流
     // 2减抗流
     // 3暴击流

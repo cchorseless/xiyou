@@ -57,8 +57,8 @@ export class imba_leshrac_split_earth extends BaseAbility_Plus {
         let splitter_blast_projectile_speed = ability.GetSpecialValueFor("splitter_blast_projectile_speed");
         let splitter_blast_delay = ability.GetSpecialValueFor("splitter_blast_delay");
         let tormented_form_trusight_duration = ability.GetSpecialValueFor("tormented_form_trusight_duration");
-        if (caster.HasTalent("special_bonus_unique_imba_leshrac_empowered_split_earth_duration")) {
-            empowered_split_duration = empowered_split_duration + caster.GetTalentValue("special_bonus_unique_imba_leshrac_empowered_split_earth_duration");
+        if (caster.HasTalent("special_bonus_imba_unique_leshrac_empowered_split_earth_duration")) {
+            empowered_split_duration = empowered_split_duration + caster.GetTalentValue("special_bonus_imba_unique_leshrac_empowered_split_earth_duration");
         }
         if (caster.HasModifier(modifier_empowered)) {
             let modifier_empowered_handle = caster.FindModifierByName(modifier_empowered);
@@ -238,8 +238,8 @@ export class modifier_imba_split_earth_empowered_split extends BaseModifier_Plus
         this.caster = this.GetCasterPlus();
         this.ability = this.GetAbilityPlus();
         this.empowered_split_duration = this.ability.GetSpecialValueFor("empowered_split_duration");
-        if (this.caster.HasTalent("special_bonus_unique_imba_leshrac_empowered_split_earth_duration")) {
-            this.empowered_split_duration = this.empowered_split_duration + this.caster.GetTalentValue("special_bonus_unique_imba_leshrac_empowered_split_earth_duration");
+        if (this.caster.HasTalent("special_bonus_imba_unique_leshrac_empowered_split_earth_duration")) {
+            this.empowered_split_duration = this.empowered_split_duration + this.caster.GetTalentValue("special_bonus_imba_unique_leshrac_empowered_split_earth_duration");
         }
         this.stack_table = []
         if (IsServer()) {
@@ -387,7 +387,7 @@ export class modifier_imba_leshrac_diabolic_edict extends BaseModifier_Plus {
         this.particle_hit = "particles/hero/leshrac/leshrac_purity_casing_hit.vpcf";
         this.modifier_tormented = "modifier_imba_tormented_soul_form";
         this.modifier_weakening = "modifier_imba_leshrac_diabolic_edict_weakening_torment";
-        this.num_explosions = this.ability.GetSpecialValueFor("num_explosions") + this.caster.GetTalentValue("special_bonus_unique_leshrac_1");
+        this.num_explosions = this.ability.GetSpecialValueFor("num_explosions") + this.caster.GetTalentValue("special_bonus_imba_unique_leshrac_1");
         this.radius = this.ability.GetSpecialValueFor("radius");
         this.tower_bonus = this.ability.GetSpecialValueFor("tower_bonus");
         this.damage = this.ability.GetSpecialValueFor("damage");
@@ -398,8 +398,8 @@ export class modifier_imba_leshrac_diabolic_edict extends BaseModifier_Plus {
         this.purity_casing_fixed_dmg = this.ability.GetSpecialValueFor("purity_casing_fixed_dmg");
         this.purity_casing_dmg_per_stack = this.ability.GetSpecialValueFor("purity_casing_dmg_per_stack");
         this.purity_casing_ring_duration = this.ability.GetSpecialValueFor("purity_casing_ring_duration");
-        if (this.caster.HasTalent("special_bonus_unique_imba_leshrac_diabolic_edict_explosions")) {
-            this.num_explosions = this.num_explosions + this.caster.GetTalentValue("special_bonus_unique_imba_leshrac_diabolic_edict_explosions");
+        if (this.caster.HasTalent("special_bonus_imba_unique_leshrac_diabolic_edict_explosions")) {
+            this.num_explosions = this.num_explosions + this.caster.GetTalentValue("special_bonus_imba_unique_leshrac_diabolic_edict_explosions");
         }
         if (keys.ese_explosion_count && keys.ese_target) {
             this.num_explosions = keys.ese_explosion_count;
@@ -634,8 +634,8 @@ export class imba_leshrac_lightning_storm extends BaseAbility_Plus {
         let modifier_rider = "modifier_imba_leshrac_lightning_storm_lightning_rider";
         let slow_duration = ability.GetSpecialValueFor("slow_duration");
         let rider_stack_duration = ability.GetSpecialValueFor("rider_stack_duration");
-        if (caster.HasTalent("special_bonus_unique_imba_leshrac_lightning_storm_duration")) {
-            slow_duration = slow_duration + caster.GetTalentValue("special_bonus_unique_imba_leshrac_lightning_storm_duration");
+        if (caster.HasTalent("special_bonus_imba_unique_leshrac_lightning_storm_duration")) {
+            slow_duration = slow_duration + caster.GetTalentValue("special_bonus_imba_unique_leshrac_lightning_storm_duration");
         }
         EmitSoundOn(hit_sound, target);
         let particle_bolt_fx = ResHelper.CreateParticleEx(particle_bolt, ParticleAttachment_t.PATTACH_ABSORIGIN, target, caster);
@@ -1034,7 +1034,7 @@ export class modifier_imba_leshrac_lightning_storm_tormented_mark extends BaseMo
 @registerAbility()
 export class imba_leshrac_pulse_nova extends BaseAbility_Plus {
     GetCastRange(location: Vector, target: CDOTA_BaseNPC | undefined): number {
-        return this.GetSpecialValueFor("radius") + this.GetCasterPlus().GetTalentValue("special_bonus_unique_imba_leshrac_pulse_nova_radius");
+        return this.GetSpecialValueFor("radius") + this.GetCasterPlus().GetTalentValue("special_bonus_imba_unique_leshrac_pulse_nova_radius");
     }
     OnUpgrade(): void {
         let caster = this.GetCasterPlus();
@@ -1060,8 +1060,8 @@ export class imba_leshrac_pulse_nova extends BaseAbility_Plus {
         }
     }
     OnOwnerSpawned(): void {
-        if (this.GetCasterPlus().HasTalent("special_bonus_unique_imba_leshrac_pulse_nova_radius") && !this.GetCasterPlus().HasModifier("modifier_modifier_special_bonus_unique_imba_leshrac_pulse_nova_radius")) {
-            this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_unique_imba_leshrac_pulse_nova_radius"), "modifier_special_bonus_unique_imba_leshrac_pulse_nova_radius", {});
+        if (this.GetCasterPlus().HasTalent("special_bonus_imba_unique_leshrac_pulse_nova_radius") && !this.GetCasterPlus().HasModifier("modifier_modifier_special_bonus_imba_unique_leshrac_pulse_nova_radius")) {
+            this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_unique_leshrac_pulse_nova_radius"), "modifier_special_bonus_imba_unique_leshrac_pulse_nova_radius", {});
         }
     }
 }
@@ -1117,8 +1117,8 @@ export class modifier_imba_leshrac_pulse_nova extends BaseModifier_Plus {
         this.nova_circulation_max_radius = this.ability.GetSpecialValueFor("nova_circulation_max_radius");
         this.ese_debuff_duration = this.ability.GetSpecialValueFor("ese_debuff_duration");
         this.tormented_soul_interval_rdct_pct = this.ability.GetSpecialValueFor("tormented_soul_interval_rdct_pct");
-        if (this.caster.HasTalent("special_bonus_unique_imba_leshrac_pulse_nova_radius")) {
-            this.radius = this.radius + this.caster.GetTalentValue("special_bonus_unique_imba_leshrac_pulse_nova_radius");
+        if (this.caster.HasTalent("special_bonus_imba_unique_leshrac_pulse_nova_radius")) {
+            this.radius = this.radius + this.caster.GetTalentValue("special_bonus_imba_unique_leshrac_pulse_nova_radius");
         }
         this.mana_cost_per_interval = this.mana_cost_per_second * this.interval;
         if (IsServer()) {
@@ -1153,8 +1153,8 @@ export class modifier_imba_leshrac_pulse_nova extends BaseModifier_Plus {
         }
         let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.caster.GetAbsOrigin(), undefined, actual_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
         let damage = this.damage;
-        if (this.caster.HasTalent("special_bonus_unique_imba_leshrac_pulse_nova_damage")) {
-            damage = damage + this.caster.GetTalentValue("special_bonus_unique_imba_leshrac_pulse_nova_damage") * GameFunc.GetCount(enemies);
+        if (this.caster.HasTalent("special_bonus_imba_unique_leshrac_pulse_nova_damage")) {
+            damage = damage + this.caster.GetTalentValue("special_bonus_imba_unique_leshrac_pulse_nova_damage") * GameFunc.GetCount(enemies);
         }
         for (const [_, enemy] of GameFunc.iPair(enemies)) {
             EmitSoundOn(this.sound_hit, enemy);
@@ -1261,8 +1261,8 @@ export class modifier_imba_leshrac_pulse_nova_earth_edict_storm_debuff extends B
         this.ese_edict_exp_count = this.ability.GetSpecialValueFor("ese_edict_exp_count");
         this.ese_storm_proc_chance = this.ability.GetSpecialValueFor("ese_storm_proc_chance");
         this.ese_storm_jumps = this.ability.GetSpecialValueFor("ese_storm_jumps");
-        if (this.caster.HasTalent("special_bonus_unique_imba_leshrac_pulse_nova_ese_threshold")) {
-            this.ese_stacks_threshold = this.caster.GetTalentValue("special_bonus_unique_imba_leshrac_pulse_nova_ese_threshold");
+        if (this.caster.HasTalent("special_bonus_imba_unique_leshrac_pulse_nova_ese_threshold")) {
+            this.ese_stacks_threshold = this.caster.GetTalentValue("special_bonus_imba_unique_leshrac_pulse_nova_ese_threshold");
         }
         this.ese_earth_current_proc = this.ese_earth_proc_chance;
         this.ese_edict_current_proc = this.ese_edict_proc_chance;
@@ -1386,8 +1386,8 @@ export class imba_leshrac_tormented_soul_form extends BaseAbility_Plus {
         let modifier_buff = "modifier_imba_tormented_soul_form";
         let max_hp_mp_cost_pct = ability.GetSpecialValueFor("max_hp_mp_cost_pct");
         let duration = ability.GetSpecialValueFor("duration");
-        if (caster.HasTalent("special_bonus_unique_imba_leshrac_tormented_soul_form_duration")) {
-            duration = duration + caster.GetTalentValue("special_bonus_unique_imba_leshrac_tormented_soul_form_duration");
+        if (caster.HasTalent("special_bonus_imba_unique_leshrac_tormented_soul_form_duration")) {
+            duration = duration + caster.GetTalentValue("special_bonus_imba_unique_leshrac_tormented_soul_form_duration");
         }
         EmitSoundOn(cast_sound, caster);
         let damage = caster.GetMaxHealth() * max_hp_mp_cost_pct * 0.01;
@@ -1531,8 +1531,8 @@ export class modifier_imba_tormented_soul_form extends BaseModifier_Plus {
         this.particle_totalsteal = "particles/hero/leshrac/totalsteal_lifesteal.vpcf";
         this.totalsteal_convertion_pct = this.ability.GetSpecialValueFor("totalsteal_convertion_pct");
         this.max_hp_mp_cost_pct = this.ability.GetSpecialValueFor("max_hp_mp_cost_pct");
-        if (this.caster.HasTalent("special_bonus_unique_imba_leshrac_tormented_soul_form_totalsteal")) {
-            this.totalsteal_convertion_pct = this.totalsteal_convertion_pct + this.caster.GetTalentValue("special_bonus_unique_imba_leshrac_tormented_soul_form_totalsteal");
+        if (this.caster.HasTalent("special_bonus_imba_unique_leshrac_tormented_soul_form_totalsteal")) {
+            this.totalsteal_convertion_pct = this.totalsteal_convertion_pct + this.caster.GetTalentValue("special_bonus_imba_unique_leshrac_tormented_soul_form_totalsteal");
         }
         if (IsServer()) {
             this.particle_buff_fx = ResHelper.CreateParticleEx(this.particle_buff, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.caster, this.caster);
@@ -1605,7 +1605,7 @@ export class modifier_imba_tormented_soul_form extends BaseModifier_Plus {
     }
 }
 @registerModifier()
-export class modifier_special_bonus_unique_imba_leshrac_empowered_split_earth_duration extends BaseModifier_Plus {
+export class modifier_special_bonus_imba_unique_leshrac_empowered_split_earth_duration extends BaseModifier_Plus {
     IsHidden(): boolean {
         return true;
     }
@@ -1617,7 +1617,7 @@ export class modifier_special_bonus_unique_imba_leshrac_empowered_split_earth_du
     }
 }
 @registerModifier()
-export class modifier_special_bonus_unique_imba_leshrac_pulse_nova_damage extends BaseModifier_Plus {
+export class modifier_special_bonus_imba_unique_leshrac_pulse_nova_damage extends BaseModifier_Plus {
     IsHidden(): boolean {
         return true;
     }
@@ -1629,7 +1629,7 @@ export class modifier_special_bonus_unique_imba_leshrac_pulse_nova_damage extend
     }
 }
 @registerModifier()
-export class modifier_special_bonus_unique_imba_leshrac_lightning_storm_duration extends BaseModifier_Plus {
+export class modifier_special_bonus_imba_unique_leshrac_lightning_storm_duration extends BaseModifier_Plus {
     IsHidden(): boolean {
         return true;
     }
@@ -1641,7 +1641,7 @@ export class modifier_special_bonus_unique_imba_leshrac_lightning_storm_duration
     }
 }
 @registerModifier()
-export class modifier_special_bonus_unique_imba_leshrac_tormented_soul_form_duration extends BaseModifier_Plus {
+export class modifier_special_bonus_imba_unique_leshrac_tormented_soul_form_duration extends BaseModifier_Plus {
     IsHidden(): boolean {
         return true;
     }
@@ -1653,7 +1653,7 @@ export class modifier_special_bonus_unique_imba_leshrac_tormented_soul_form_dura
     }
 }
 @registerModifier()
-export class modifier_special_bonus_unique_imba_leshrac_pulse_nova_radius extends BaseModifier_Plus {
+export class modifier_special_bonus_imba_unique_leshrac_pulse_nova_radius extends BaseModifier_Plus {
     IsHidden(): boolean {
         return true;
     }
@@ -1665,7 +1665,7 @@ export class modifier_special_bonus_unique_imba_leshrac_pulse_nova_radius extend
     }
 }
 @registerModifier()
-export class modifier_special_bonus_unique_imba_leshrac_diabolic_edict_explosions extends BaseModifier_Plus {
+export class modifier_special_bonus_imba_unique_leshrac_diabolic_edict_explosions extends BaseModifier_Plus {
     IsHidden(): boolean {
         return true;
     }
@@ -1677,7 +1677,7 @@ export class modifier_special_bonus_unique_imba_leshrac_diabolic_edict_explosion
     }
 }
 @registerModifier()
-export class modifier_special_bonus_unique_imba_leshrac_tormented_soul_form_totalsteal extends BaseModifier_Plus {
+export class modifier_special_bonus_imba_unique_leshrac_tormented_soul_form_totalsteal extends BaseModifier_Plus {
     IsHidden(): boolean {
         return true;
     }
@@ -1689,7 +1689,7 @@ export class modifier_special_bonus_unique_imba_leshrac_tormented_soul_form_tota
     }
 }
 @registerModifier()
-export class modifier_special_bonus_unique_imba_leshrac_pulse_nova_ese_threshold extends BaseModifier_Plus {
+export class modifier_special_bonus_imba_unique_leshrac_pulse_nova_ese_threshold extends BaseModifier_Plus {
     IsHidden(): boolean {
         return true;
     }

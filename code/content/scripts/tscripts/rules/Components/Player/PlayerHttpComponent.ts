@@ -38,6 +38,7 @@ export class PlayerHttpComponent extends ET.Component {
     public async PlayerLogin(playerid: PlayerID) {
         let accountid = GPlayerEntityRoot.GetAccountID(playerid);
         let loginUrl = GameProtocol.LoginUrl();
+        LogHelper.print(`Login begin => steamid:${accountid}  playerid:${playerid}`);
         let cbmsg: H2C_GetAccountLoginKey = await this.PostAsync(GameProtocol.Protocol.AccountLoginKey, { Account: accountid }, loginUrl);
         let password = "";
         if (cbmsg.Error == 0) {

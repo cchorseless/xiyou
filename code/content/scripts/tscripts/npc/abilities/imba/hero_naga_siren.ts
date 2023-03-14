@@ -24,8 +24,8 @@ export class imba_naga_siren_mirror_image extends BaseAbility_Plus {
         if (!IsServer()) {
             return;
         }
-        let image_count = this.GetSpecialValueFor("images_count") + this.GetCasterPlus().GetTalentValue("special_bonus_unique_naga_siren");
-        let image_out_dmg = this.GetSpecialValueFor("outgoing_damage") + this.GetCasterPlus().GetTalentValue("special_bonus_unique_naga_siren_4");
+        let image_count = this.GetSpecialValueFor("images_count") + this.GetCasterPlus().GetTalentValue("special_bonus_imba_unique_naga_siren");
+        let image_out_dmg = this.GetSpecialValueFor("outgoing_damage") + this.GetCasterPlus().GetTalentValue("special_bonus_imba_unique_naga_siren_4");
         let vRandomSpawnPos = [
             Vector(108, 0, 0),
             Vector(108, 108, 0),
@@ -150,7 +150,7 @@ export class modifier_imba_naga_siren_mirror_image_perfect_image extends BaseMod
 export class imba_naga_siren_ensnare extends BaseAbility_Plus {
     public naga_sirens: IBaseNpc_Plus[];
     GetCooldown(iLevel: number): number {
-        return super.GetCooldown(iLevel) - this.GetCasterPlus().GetTalentValue("special_bonus_unique_naga_siren_2");
+        return super.GetCooldown(iLevel) - this.GetCasterPlus().GetTalentValue("special_bonus_imba_unique_naga_siren_2");
     }
     OnAbilityPhaseInterrupted(): void {
         if (!IsServer()) {

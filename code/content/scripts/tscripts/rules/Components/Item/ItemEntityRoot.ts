@@ -5,8 +5,7 @@ import { BaseEntityRoot } from "../../Entity/BaseEntityRoot";
 
 @GReloadable
 export class ItemEntityRoot extends BaseEntityRoot {
-
-    public readonly CombinationLabels: string[] = [];
+    public readonly SectLabels: string[] = [];
     public ItemType: number = PublicBagConfig.EBagItemType.COMMON;
     onAwake() {
         let item = this.GetDomain<IBaseItem_Plus>();
@@ -20,15 +19,10 @@ export class ItemEntityRoot extends BaseEntityRoot {
     }
 
     private regSelfToInventory() {
-        let config = this.config();
-        if (config) {
-            let CombinationLabel = config.CombinationLabel as string;
-            if (CombinationLabel && CombinationLabel.length > 0) {
-                config.CombinationLabel.split("|").forEach((labels) => {
-                    if (labels && labels.length > 0 && !this.CombinationLabels.includes(labels)) {
-                        this.CombinationLabels.push(labels);
-                    }
-                });
+        let sectname = GJsonConfigHelper.GetAbilitySectLabel(this.ConfigID);
+        if (sectname && sectname.length > 0) {
+            if (!this.SectLabels.includes(sectname)) {
+                this.SectLabels.push(sectname);
             }
             let item = this.GetDomain<IBaseItem_Plus>();
             let owner = item.GetOwnerPlus();

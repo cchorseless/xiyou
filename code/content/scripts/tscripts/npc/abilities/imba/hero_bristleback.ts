@@ -163,7 +163,7 @@ export class modifier_imba_bristleback_viscous_nasal_goo extends BaseModifier_Pl
         this.armor_per_stack = this.ability.GetSpecialValueFor("armor_per_stack");
         this.base_move_slow = this.ability.GetSpecialValueFor("base_move_slow");
         this.move_slow_per_stack = this.ability.GetSpecialValueFor("move_slow_per_stack");
-        this.stack_limit = this.ability.GetSpecialValueFor("stack_limit") + this.caster.GetTalentValue("special_bonus_unique_bristleback");
+        this.stack_limit = this.ability.GetSpecialValueFor("stack_limit") + this.caster.GetTalentValue("special_bonus_imba_unique_bristleback");
         this.goo_duration_creep = this.ability.GetSpecialValueFor("goo_duration_creep");
         this.radius_scepter = this.ability.GetSpecialValueFor("radius_scepter");
         if (!IsServer()) {
@@ -281,7 +281,7 @@ export class modifier_imba_bristleback_quillspray_thinker extends BaseModifier_P
         this.parent = this.GetParentPlus();
         this.radius = this.ability.GetSpecialValueFor("radius");
         this.quill_base_damage = this.ability.GetSpecialValueFor("quill_base_damage");
-        this.quill_stack_damage = this.ability.GetSpecialValueFor("quill_stack_damage") + this.caster.GetTalentValue("special_bonus_unique_bristleback_2");
+        this.quill_stack_damage = this.ability.GetSpecialValueFor("quill_stack_damage") + this.caster.GetTalentValue("special_bonus_imba_unique_bristleback_2");
         this.quill_stack_duration = this.ability.GetSpecialValueFor("quill_stack_duration");
         this.max_damage = this.ability.GetSpecialValueFor("max_damage");
         if (!IsServer()) {

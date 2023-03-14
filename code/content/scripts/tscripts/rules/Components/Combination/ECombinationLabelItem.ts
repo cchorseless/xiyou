@@ -1,30 +1,28 @@
 
 import { ET } from "../../../shared/lib/Entity";
+import { HeroEquipComponent } from "../../../shared/service/equip/HeroEquipComponent";
 
 @GReloadable
 export class ECombinationLabelItem extends ET.Entity {
     public IsActive: boolean = true;
-    public CombinationName: string = "";
+    public SectName: string = "";
     public SourceEntityConfigId: string = "";
     public SourceEntityId: string = "";
     public SourceType: string = "";
 
-    onAwake(SourceType: string, SourceEntityId: string, CombinationName: string) {
+    onAwake(SourceType: string, SourceEntityId: string, SectName: string) {
         this.SourceType = SourceType;
         this.SourceEntityId = SourceEntityId;
-        this.CombinationName = CombinationName;
+        this.SectName = SectName;
         this.SourceEntityConfigId = this.getSourceEntity().ConfigID;
         this.checkActive();
         this.addSelfToManager();
     }
-    // todo 套装检查
     checkActive() {
-        let entity = this.getSourceEntity()
-        let CombinationCondition = entity.config().CombinationCondition;
-        let condition = GToNumber(CombinationCondition);
-        // 11标记的是大招，需要套装检查
-        if (condition == 11) {
-            this.IsActive = false;
+        let equipid = GJsonConfigHelper.GetAbilitySectUnlockEquipid(this.SourceEntityConfigId)
+        // 解锁装备检查
+        if (equipid > 0) {
+            this.IsActive = HeroEquipComponent.CheckPlayerIsScepter(this.BelongPlayerid, equipid)
         }
     }
 

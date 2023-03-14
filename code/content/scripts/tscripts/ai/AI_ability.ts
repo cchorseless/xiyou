@@ -60,7 +60,9 @@ export module AI_ability {
      */
     export function POSITION_most_enemy(ability: IBaseAbility_Plus, range: number, radius: number) {
         let caster = ability.GetCasterPlus()
-        let position = AoiHelper.GetAOEMostTargetsPosition(caster.GetAbsOrigin(), range, caster.GetTeamNumber(), radius, null, ability.GetAbilityTargetTeam(), ability.GetAbilityTargetType(), ability.GetAbilityTargetFlags() + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_CLOSEST)
+        let team = caster.GetTeamNumber() == DOTATeam_t.DOTA_TEAM_GOODGUYS ? DOTATeam_t.DOTA_TEAM_BADGUYS : DOTATeam_t.DOTA_TEAM_GOODGUYS;
+        let position = AoiHelper.GetAOEMostTargetsPosition2(caster.GetAbsOrigin(), range, team, radius, null, ability.GetAbilityTargetTeam(), ability.GetAbilityTargetType(), ability.GetAbilityTargetFlags() + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_CLOSEST)
+        GLogHelper.print("POSITION_most_enemy", position)
         //  施法命令
         if (position && position != vec3_invalid && caster.IsPositionInRange(position, range)) {
             ExecuteOrderFromTable(
@@ -71,7 +73,9 @@ export module AI_ability {
                     Position: position
                 }
             )
+            return true;
         }
+        return false;
     }
 
     /**

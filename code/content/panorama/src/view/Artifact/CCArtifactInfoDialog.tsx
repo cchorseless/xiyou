@@ -25,12 +25,7 @@ export class CCArtifactInfoDialog extends CCPanel<ICCArtifactInfoDialog> {
                         </CCPanel>
                     </CCPanelHeader>
                     <CCPanel className="SectRow" flowChildren="right">
-                        <Label className="SectDescription" html={true} text={AbilityHelper.GetAbilityDescription(
-                            {
-                                sStr: $.Localize("#DOTA_Tooltip_ability_" + itemname + "_description"),
-                                abilityName: itemname,
-                                iLevel: 1
-                            })} />
+                        <Label className="SectDescription" html={true} text={AbilityHelper.GetAbilityDescriptionByName(itemname)} />
                     </CCPanel>
                     {lore != "#DOTA_Tooltip_ability_" + itemname + "_Lore" &&
                         <CCPanel id="LoreContainer">

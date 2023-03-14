@@ -23,7 +23,7 @@
 //         }
 //         let uniqueConfigList: string[] = [];
 //         if (playerid !== -1) {
-//             const allcombs = ECombination.GetCombinationByCombinationName(playerid!, sectName) || [];
+//             const allcombs = ECombination.GetCombinationBySectName(playerid!, sectName) || [];
 //             if (allcombs.length > 0) {
 //                 uniqueConfigList = allcombs[0].uniqueConfigList;
 //             }

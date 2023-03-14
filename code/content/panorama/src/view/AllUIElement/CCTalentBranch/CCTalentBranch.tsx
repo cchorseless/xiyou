@@ -22,7 +22,7 @@ export class CCTalentBranch extends CCPanel<ICCTalentBranch> {
         };
         if (config !== null) {
             config?.TalentInfo.forEach((v, k) => {
-                abilityNames[k + ""] = [v.TalentLeft, v.TalentRight];
+                abilityNames[v.TalentLevel + ""] = [v.TalentLeft, v.TalentRight];
             });
         }
         let _talent_1 = abilityNames[1 + ""][0];
@@ -53,7 +53,6 @@ export class CCTalentBranch extends CCPanel<ICCTalentBranch> {
         const entityIndex = this.props.entityIndex!;
 
         let buildingroot = GBuildingEntityRoot.GetEntity(entityIndex);
-        GLogHelper.print("天赋树", entityIndex, buildingroot == null)
         if (buildingroot) {
             let herounit = buildingroot.GetHeroUnit();
             if (herounit && herounit.HeroTalentComp) {
@@ -121,18 +120,19 @@ interface ICCTalentRow {
 export class CCTalentRow extends CCPanel<ICCTalentRow> {
 
     render() {
+        let str = this.props.abilityName || "";
+        if (str.length > 0) {
+            GLogHelper.print("天赋树 1", str)
+            // const sStr = $.Localize("#DOTA_Tooltip_ability_" + str);
+            // str = AbilityHelper.GetAbilityOrBuffDescription(sStr, this.props.abilityName)
+            // GLogHelper.print("天赋树 2", sStr)
+
+        }
         return (
             <Panel className="CCTalentRow" hittest={true} ref={this.__root__} {...this.initRootAttrs()}>
                 <CCPanel onactivate={self => { }} className={CSSHelper.ClassMaker(this.props.direction,
                     { Selected: this.props.Selected, Actived: this.props.active })}>
-                    <Label className="CCTalentDescription" html={true} text={
-                        this.props.abilityName
-                        // AbilityHelper.GetAbilityDescription({
-                        //     sStr: $.Localize("#DOTA_Tooltip_ability_" + this.props.abilityName),
-                        //     abilityName: this.props.abilityName,
-                        //     iLevel: 1,
-                        // })
-                    } />
+                    <Label className="CCTalentDescription" html={true} text={str} />
                 </CCPanel>
 
             </Panel>

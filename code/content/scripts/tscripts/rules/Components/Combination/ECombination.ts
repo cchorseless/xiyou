@@ -14,9 +14,9 @@ export class ECombination extends ET.Entity {
     public config: { [k: string]: Dota.CombinationConfigRecord } = {};
     private combination: { [k: string]: ECombinationLabelItem[] } = {};
     @serializeETProps()
-    public combinationName: string;
+    public SectName: string;
     @serializeETProps()
-    public combinationId: string;
+    public SectId: string;
     @serializeETProps()
     public activeNeedCount: number;
     @serializeETProps()
@@ -24,15 +24,15 @@ export class ECombination extends ET.Entity {
 
 
 
-    onAwake(CombinationId: string): void {
-        this.combinationId = CombinationId;
+    onAwake(SectId: string): void {
+        this.SectId = SectId;
     }
 
 
     addConfig(c: Dota.CombinationConfigRecord) {
         this.config[c.index] = c;
         this.activeNeedCount = tonumber(c.activeCount);
-        this.combinationName = c.relation;
+        this.SectName = c.SectName;
     }
 
     isInCombination(c: number | string) {
@@ -212,17 +212,17 @@ export class ECombination extends ET.Entity {
     }
 
     OnRoundStartBattle() {
-        LogHelper.print("OnRoundStartBattle", this.combinationId);
+        LogHelper.print("OnRoundStartBattle", this.SectId);
         this.ApplyBuffEffect(true);
     }
 
     OnRoundStartPrize(round: ERoundBoard) {
-        let combinationName = this.combinationName;
-        let combinationId = this.combinationId;
-        if (combinationName === CombinationConfig.ECombinationLabel.sect_suck_blood) {
+        let SectName = this.SectName;
+        let SectId = this.SectId;
+        if (SectName === CombinationConfig.ESectName.sect_suck_blood) {
 
         }
-        else if (combinationName === CombinationConfig.ECombinationLabel.sect_suck_blood) {
+        else if (SectName === CombinationConfig.ESectName.sect_suck_blood) {
 
         }
     }

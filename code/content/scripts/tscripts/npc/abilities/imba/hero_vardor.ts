@@ -35,14 +35,14 @@ export class modifier_vardor_yari_unit extends BaseModifier_Plus {
             return;
         }
         this.is_charge_yari = params.is_charge_yari;
-        if (this.caster.HasTalent("special_bonus_vardor_ground_yaris_mind_bleed")) {
-            this.mind_bleed_stacks = this.caster.GetTalentValue("special_bonus_vardor_ground_yaris_mind_bleed");
-            this.radius = this.caster.GetTalentValue("special_bonus_vardor_ground_yaris_mind_bleed", "radius");
+        if (this.caster.HasTalent("special_bonus_imba_vardor_ground_yaris_mind_bleed")) {
+            this.mind_bleed_stacks = this.caster.GetTalentValue("special_bonus_imba_vardor_ground_yaris_mind_bleed");
+            this.radius = this.caster.GetTalentValue("special_bonus_imba_vardor_ground_yaris_mind_bleed", "radius");
             if (this.caster.HasAbility(this.mental_ability_name)) {
                 this.mental_ability = this.caster.FindAbilityByName(this.mental_ability_name);
                 if (this.mental_ability) {
                     this.duration = this.mental_ability.GetSpecialValueFor("duration");
-                    this.StartIntervalThink(this.caster.GetTalentValue("special_bonus_vardor_ground_yaris_mind_bleed", "interval"));
+                    this.StartIntervalThink(this.caster.GetTalentValue("special_bonus_imba_vardor_ground_yaris_mind_bleed", "interval"));
                 }
             }
         }
@@ -782,8 +782,8 @@ export class vardor_graceful_jump extends BaseAbility_Plus {
                 ability: ability
             }
             ApplyDamage(damageTable);
-            if (caster.HasTalent("special_bonus_vardor_graceful_jump_root")) {
-                let root_duration = caster.GetTalentValue("special_bonus_vardor_graceful_jump_root");
+            if (caster.HasTalent("special_bonus_imba_vardor_graceful_jump_root")) {
+                let root_duration = caster.GetTalentValue("special_bonus_imba_vardor_graceful_jump_root");
                 if (root_duration != 0) {
                     enemy.AddNewModifier(caster, ability, modifier_root, {
                         duration: root_duration
@@ -989,8 +989,8 @@ export class modifier_vardor_mental_thrusts_debuff extends BaseModifier_Plus {
         this.main_att_rdct_stack = this.ability.GetSpecialValueFor("main_att_rdct_stack");
         this.incoming_dmg_inc_stack = this.ability.GetSpecialValueFor("incoming_dmg_inc_stack");
         this.duration = this.ability.GetSpecialValueFor("duration");
-        if (this.caster.HasTalent("special_bonus_vardor_mental_thrusts_bonus")) {
-            let talent_multiplier = this.caster.GetTalentValue("special_bonus_vardor_mental_thrusts_bonus");
+        if (this.caster.HasTalent("special_bonus_imba_vardor_mental_thrusts_bonus")) {
+            let talent_multiplier = this.caster.GetTalentValue("special_bonus_imba_vardor_mental_thrusts_bonus");
             if (talent_multiplier != 0) {
                 this.aspd_rdct_stack = this.aspd_rdct_stack * talent_multiplier;
                 this.cast_point_inc_stack = this.cast_point_inc_stack * talent_multiplier;
@@ -1157,7 +1157,7 @@ export class vardor_celestial_rain_of_yari extends BaseAbility_Plus {
     }
 }
 @registerModifier()
-export class modifier_special_bonus_vardor_bonus_yari extends BaseModifier_Plus {
+export class modifier_special_bonus_imba_vardor_bonus_yari extends BaseModifier_Plus {
     IsHidden(): boolean {
         return true;
     }
@@ -1195,7 +1195,7 @@ export class modifier_special_bonus_vardor_bonus_yari extends BaseModifier_Plus 
     }
 }
 @registerModifier()
-export class modifier_special_bonus_vardor_ground_yaris_mind_bleed extends BaseModifier_Plus {
+export class modifier_special_bonus_imba_vardor_ground_yaris_mind_bleed extends BaseModifier_Plus {
     IsHidden(): boolean {
         return true;
     }
@@ -1207,7 +1207,7 @@ export class modifier_special_bonus_vardor_ground_yaris_mind_bleed extends BaseM
     }
 }
 @registerModifier()
-export class modifier_special_bonus_vardor_graceful_jump_root extends BaseModifier_Plus {
+export class modifier_special_bonus_imba_vardor_graceful_jump_root extends BaseModifier_Plus {
     IsHidden(): boolean {
         return true;
     }
@@ -1219,7 +1219,7 @@ export class modifier_special_bonus_vardor_graceful_jump_root extends BaseModifi
     }
 }
 @registerModifier()
-export class modifier_special_bonus_vardor_mental_thrusts_bonus extends BaseModifier_Plus {
+export class modifier_special_bonus_imba_vardor_mental_thrusts_bonus extends BaseModifier_Plus {
     IsHidden(): boolean {
         return true;
     }

@@ -89,7 +89,7 @@ export class imba_snapfire_scatterblast extends BaseAbility_Plus {
         let location = target.GetOrigin();
         let point_blank_range = this.GetSpecialValueFor("point_blank_range");
         let point_blank_mult = this.GetSpecialValueFor("point_blank_dmg_bonus_pct") / 100;
-        let damage = this.GetSpecialValueFor("damage") + this.GetCasterPlus().GetTalentValue("special_bonus_unique_snapfire_7");
+        let damage = this.GetSpecialValueFor("damage") + this.GetCasterPlus().GetTalentValue("special_bonus_imba_unique_snapfire_7");
         let slow = this.GetSpecialValueFor("slow_duration");
         let modifier_name = "modifier_imba_snapfire_scatterblast_slow";
         let origin = Vector(extraData.pos_x, extraData.pos_y, 0);
@@ -278,10 +278,10 @@ export class imba_snapfire_firesnap_cookie extends BaseAbility_Plus {
                 return undefined;
             }
         }
-        if (this.GetCasterPlus().HasTalent("special_bonus_unique_snapfire_5")) {
+        if (this.GetCasterPlus().HasTalent("special_bonus_imba_unique_snapfire_5")) {
             if (target.GetTeam() == this.GetCasterPlus().GetTeam()) {
-                target.Heal(this.GetCasterPlus().GetTalentValue("special_bonus_unique_snapfire_5"), this);
-                SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, target, this.GetCasterPlus().GetTalentValue("special_bonus_unique_snapfire_5"), undefined);
+                target.Heal(this.GetCasterPlus().GetTalentValue("special_bonus_imba_unique_snapfire_5"), this);
+                SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, target, this.GetCasterPlus().GetTalentValue("special_bonus_imba_unique_snapfire_5"), undefined);
             }
         }
         let duration = this.GetSpecialValueFor("jump_duration");
@@ -393,7 +393,7 @@ export class modifier_imba_snapfire_lil_shredder extends BaseModifier_Plus {
         this.bat = this.GetSpecialValueFor("base_attack_time");
         this.slow = this.GetSpecialValueFor("slow_duration");
         this.damage_per_stack = this.GetSpecialValueFor("damage_per_stack");
-        if (this.GetCasterPlus().HasTalent("special_bonus_unique_snapfire_6")) {
+        if (this.GetCasterPlus().HasTalent("special_bonus_imba_unique_snapfire_6")) {
             this.damage = this.GetCasterPlus().GetAverageTrueAttackDamage(undefined);
         }
         if (!IsServer()) {
@@ -731,7 +731,7 @@ export class modifier_imba_snapfire_mortimer_kisses extends BaseModifier_Plus {
             return;
         }
         let projectile_speed = this.GetSpecialValueFor("projectile_speed") + this.GetCasterPlus().GetTalentValue("special_bonus_imba_snapfire_1");
-        let projectile_count = this.GetSpecialValueFor("projectile_count") + this.GetCasterPlus().GetTalentValue("special_bonus_unique_snapfire_1");
+        let projectile_count = this.GetSpecialValueFor("projectile_count") + this.GetCasterPlus().GetTalentValue("special_bonus_imba_unique_snapfire_1");
         let interval = this.GetAbilityPlus().GetDuration() / projectile_count + 0.01;
         this.SetValidTarget(Vector(kv.pos_x, kv.pos_y, 0));
         let projectile_start_radius = 0;
@@ -859,8 +859,8 @@ export class modifier_imba_snapfire_magma_burn_slow extends BaseModifier_Plus {
         }
         let distance = (this.GetCasterPlus().GetAbsOrigin() - this.GetParentPlus().GetAbsOrigin() as Vector).Length2D();
         let distance_travel = math.min(distance / 3000, 1);
-        let min_slow = this.GetSpecialValueFor("min_slow_pct") + this.GetCasterPlus().GetTalentValue("special_bonus_unique_snapfire_4");
-        let max_slow = this.GetSpecialValueFor("max_slow_pct") + this.GetCasterPlus().GetTalentValue("special_bonus_unique_snapfire_4");
+        let min_slow = this.GetSpecialValueFor("min_slow_pct") + this.GetCasterPlus().GetTalentValue("special_bonus_imba_unique_snapfire_4");
+        let max_slow = this.GetSpecialValueFor("max_slow_pct") + this.GetCasterPlus().GetTalentValue("special_bonus_imba_unique_snapfire_4");
         this.SetStackCount(math.max(max_slow * distance_travel, min_slow));
         this.damageTable = {
             victim: this.GetParentPlus(),

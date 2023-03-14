@@ -7,7 +7,7 @@ import { CCCombinationIcon } from "./CCCombinationIcon";
 import { CCCombinationInfoDialog } from "./CCCombinationInfoDialog";
 import "./CCCombinationSingleBottomItem.less";
 export interface ICCCombinationSingleBottomItem {
-    combinationName: string;
+    SectName: string;
     InstanceIdList: string[];
 
 }
@@ -35,12 +35,12 @@ export class CCCombinationSingleBottomItem extends CCPanel<ICCCombinationSingleB
     }
 
     getIcon() {
-        const combinationName = this.props.combinationName;
-        if (combinationName == null) { return; };
+        const SectName = this.props.SectName;
+        if (SectName == null) { return; };
         let data = GJSONConfig.CombinationConfig.getDataList()
         for (let info of data) {
-            if (info.relation == combinationName) {
-                return info.relationicon;
+            if (info.SectName == SectName) {
+                return info.SectIcon;
             }
         }
         return ""
@@ -55,7 +55,7 @@ export class CCCombinationSingleBottomItem extends CCPanel<ICCCombinationSingleB
         if (lastentity.IsEmpty()) {
             return this.defaultRender("CC_CombinationSingleBottomItem");
         }
-        const sectName = this.props.combinationName;
+        const sectName = this.props.SectName;
         return (
             <Panel ref={this.__root__} id="CC_CombinationSingleBottomItem"  {...this.initRootAttrs()}>
                 <CCPanel flowChildren="down" brightness={lastentity.IsActive() ? "1" : "0.3"} dialogTooltip={

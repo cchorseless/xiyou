@@ -4,7 +4,7 @@ import { CombinationConfig } from "../../../shared/CombinationConfig";
 import { BaseEntityRoot } from "../../Entity/BaseEntityRoot";
 
 export class AbilityEntityRoot extends BaseEntityRoot {
-    public readonly CombinationLabels: string[] = [];
+    public readonly SectLabels: string[] = [];
 
     static TryToActive(ability: IBaseAbility_Plus) {
         if (IsServer()) {
@@ -29,15 +29,10 @@ export class AbilityEntityRoot extends BaseEntityRoot {
     private regSelfToM() {
         let item = this.GetDomain<IBaseAbility_Plus>();
         let owner = item.GetOwnerPlus();
-        let config = this.config();
-        if (config) {
-            let CombinationLabel = config.CombinationLabel as string;
-            if (CombinationLabel && CombinationLabel.length > 0) {
-                CombinationLabel.split("|").forEach((labels) => {
-                    if (labels && labels.length > 0 && !this.CombinationLabels.includes(labels)) {
-                        this.CombinationLabels.push(labels);
-                    }
-                });
+        let sectname = GJsonConfigHelper.GetAbilitySectLabel(this.ConfigID);
+        if (sectname && sectname.length > 0) {
+            if (!this.SectLabels.includes(sectname)) {
+                this.SectLabels.push(sectname);
             }
             if (owner != null && owner.ETRoot &&
                 owner.ETRoot.As<IBattleUnitEntityRoot>().AbilityManagerComp()
@@ -59,8 +54,8 @@ export class AbilityEntityRoot extends BaseEntityRoot {
         return KVHelper.KvAbilitys["" + this.ConfigID];
     }
 
-    isCombinationLabel(label: string): boolean {
-        return this.CombinationLabels.includes(label);
+    isSectLabels(label: string): boolean {
+        return this.SectLabels.includes(label);
     }
 
     isManaEnoughForActive() {
@@ -81,7 +76,7 @@ export class AbilityEntityRoot extends BaseEntityRoot {
     OnRoundStartBattle() {
         let ability = this.GetDomain<IBaseAbility_Plus>();
         let npc = ability.GetOwnerPlus();
-        if (this.isCombinationLabel(CombinationConfig.ECombinationLabel.sect_suck_blood)) {
+        if (this.isSectLabels(CombinationConfig.ESectName.sect_suck_blood)) {
             EmitSoundOn("dac.warlock.soul_ring", npc);
             ResHelper.CreateParticle(new ResHelper.ParticleInfo().set_iAttachment(ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW)
                 .set_owner(npc)

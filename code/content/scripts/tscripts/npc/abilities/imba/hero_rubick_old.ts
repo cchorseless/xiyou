@@ -29,9 +29,9 @@ export class imba_rubick_telekinesis extends BaseAbility_Plus {
             let target_loc = this.GetCursorPosition();
             let maximum_distance;
             if (this.target.GetTeam() == caster.GetTeam()) {
-                maximum_distance = this.GetSpecialValueFor("ally_range") + GPropertyCalculate.GetCastRangeBonus(caster) + caster.GetTalentValue("special_bonus_unique_rubick");
+                maximum_distance = this.GetSpecialValueFor("ally_range") + GPropertyCalculate.GetCastRangeBonus(caster) + caster.GetTalentValue("special_bonus_imba_unique_rubick");
             } else {
-                maximum_distance = this.GetSpecialValueFor("enemy_range") + GPropertyCalculate.GetCastRangeBonus(caster) + caster.GetTalentValue("special_bonus_unique_rubick");
+                maximum_distance = this.GetSpecialValueFor("enemy_range") + GPropertyCalculate.GetCastRangeBonus(caster) + caster.GetTalentValue("special_bonus_imba_unique_rubick");
             }
             if (this.telekinesis_marker_pfx) {
                 ParticleManager.DestroyParticle(this.telekinesis_marker_pfx, false);
@@ -216,7 +216,7 @@ export class modifier_imba_telekinesis extends BaseModifierMotionBoth_Plus {
             } else {
                 cooldown = ability.GetCooldown(ability.GetLevel());
             }
-            cooldown = (cooldown - caster.GetTalentValue("special_bonus_unique_rubick_4")) - this.GetDuration();
+            cooldown = (cooldown - caster.GetTalentValue("special_bonus_imba_unique_rubick_4")) - this.GetDuration();
             parent.StopSound("Hero_Rubick.Telekinesis.Target");
             parent.EmitSound("Hero_Rubick.Telekinesis.Target.Land");
             ParticleManager.ReleaseParticleIndex(this.tele_pfx);

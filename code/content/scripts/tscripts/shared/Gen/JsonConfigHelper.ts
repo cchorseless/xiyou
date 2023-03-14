@@ -30,16 +30,23 @@ export module JsonConfigHelper {
     export function GetAbilitySectLabel(abilityid: string) {
         let list = AbilitySectInfo[abilityid];
         if (list && list.length > 0) {
-            return GJSONConfig.CombinationConfig.get(list[0])!.relation;
+            return GJSONConfig.CombinationConfig.get(list[0])!.SectName;
         }
     }
+    export function GetAbilitySectUnlockEquipid(abilityid: string) {
+        let list = AbilitySectInfo[abilityid];
+        if (list && list.length > 0) {
+            return GJSONConfig.CombinationConfig.get(list[0])!.Equipid;
+        }
+    }
+
 
     export function GetAbilitySectSpeEffectName(abilityid: string, level: ISectLevel = "b") {
         let list = AbilitySectInfo[abilityid];
         if (list && list.length > 0) {
             for (let i = 0; i < list.length; i++) {
                 let v = GJSONConfig.CombinationConfig.get(list[i])!;
-                if (v.relationLevel == level) {
+                if (v.SectLevel == level) {
                     return v.acitveSpecialEffect;
                 }
             }

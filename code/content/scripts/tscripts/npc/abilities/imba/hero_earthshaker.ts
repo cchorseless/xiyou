@@ -35,8 +35,8 @@ export class earthshaker_fissure_lua extends BaseAbility_Plus {
         let stun_duration = this.GetSpecialValueFor("stun_duration");
         let block_width = 24;
         let block_delta = 8.25;
-        if (caster.HasTalent("special_bonus_unique_earthshaker_3")) {
-            distance = distance + caster.GetTalentValue("special_bonus_unique_earthshaker_3");
+        if (caster.HasTalent("special_bonus_imba_unique_earthshaker_3")) {
+            distance = distance + caster.GetTalentValue("special_bonus_imba_unique_earthshaker_3");
         }
         let direction = point - caster.GetOrigin() as Vector;
         direction.z = 0;
@@ -152,7 +152,7 @@ export class earthshaker_enchant_totem_lua extends BaseAbility_Plus {
         return super.GetCastRange(vLocation, hTarget);
     }
     GetCooldown(nLevel: number): number {
-        return super.GetCooldown(nLevel) - this.GetCasterPlus().GetTalentValue("special_bonus_unique_earthshaker");
+        return super.GetCooldown(nLevel) - this.GetCasterPlus().GetTalentValue("special_bonus_imba_unique_earthshaker");
     }
     CastFilterResultLocation(vLocation: Vector): UnitFilterResult {
         if (this.GetCasterPlus().HasScepter() && this.GetCasterPlus().IsRooted()) {
@@ -208,8 +208,8 @@ export class earthshaker_enchant_totem_lua extends BaseAbility_Plus {
         if (!IsServer()) {
             return;
         }
-        if (this.GetCasterPlus().HasTalent("special_bonus_unique_earthshaker") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_unique_earthshaker")) {
-            this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_unique_earthshaker"), "modifier_special_bonus_unique_earthshaker", {});
+        if (this.GetCasterPlus().HasTalent("special_bonus_imba_unique_earthshaker") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_unique_earthshaker")) {
+            this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_unique_earthshaker"), "modifier_special_bonus_imba_unique_earthshaker", {});
         }
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_earthshaker_bonus_magic_resistance") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_earthshaker_bonus_magic_resistance")) {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_earthshaker_bonus_magic_resistance"), "modifier_special_bonus_imba_earthshaker_bonus_magic_resistance", {});
@@ -693,7 +693,7 @@ export class modifier_earthshaker_arcana extends BaseModifier_Plus {
     }
 }
 @registerModifier()
-export class modifier_special_bonus_unique_earthshaker extends BaseModifier_Plus {
+export class modifier_special_bonus_imba_unique_earthshaker extends BaseModifier_Plus {
     IsHidden(): boolean {
         return true;
     }
