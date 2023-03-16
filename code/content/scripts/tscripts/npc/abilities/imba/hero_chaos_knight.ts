@@ -6,6 +6,12 @@ import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
+
+
+@registerAbility()
+export class imba_chaos_knight_chaos_bolt extends BaseAbility_Plus { }
+
+
 @registerAbility()
 export class imba_chaos_knight_reality_rift extends BaseAbility_Plus {
     random_point: Vector;
@@ -148,6 +154,10 @@ export class modifier_reality_rift_armor_reduction_debuff extends BaseModifier_P
         return true;
     }
 }
+
+@registerAbility()
+export class imba_chaos_knight_chaos_strike extends BaseAbility_Plus { }
+
 @registerAbility()
 export class imba_chaos_knight_phantasm extends BaseAbility_Plus {
 

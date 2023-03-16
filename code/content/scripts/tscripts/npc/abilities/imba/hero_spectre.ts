@@ -5,6 +5,13 @@ import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
+
+@registerAbility()
+export class imba_spectre_spectral_dagger extends BaseAbility_Plus { }
+@registerAbility()
+export class imba_spectre_desolate extends BaseAbility_Plus { }
+@registerAbility()
+export class imba_spectre_dispersion extends BaseAbility_Plus { }
 @registerAbility()
 export class imba_spectre_reality extends BaseAbility_Plus {
     GetAssociatedSecondaryAbilities(): string {

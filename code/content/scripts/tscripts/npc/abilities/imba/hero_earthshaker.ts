@@ -5,23 +5,9 @@ import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifierMotionBoth_Plus, BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
+
 @registerAbility()
 export class imba_earthshaker_fissure extends BaseAbility_Plus {
-}
-@registerModifier()
-export class modifier_imba_earthshaker_fissure_thinker extends BaseModifier_Plus {
-}
-@registerAbility()
-export class imba_earthshaker_enchant_totem extends BaseAbility_Plus {
-}
-@registerModifier()
-export class modifier_imba_earthshaker_enchant_totem extends BaseModifier_Plus {
-}
-@registerModifier()
-export class modifier_imba_earthshaker_enchant_totem_leap extends BaseModifier_Plus {
-}
-@registerAbility()
-export class earthshaker_fissure_lua extends BaseAbility_Plus {
     OnSpellStart(): void {
         if (this.GetCursorPosition() == this.GetCasterPlus().GetAbsOrigin()) {
             this.GetCasterPlus().SetCursorPosition(this.GetCursorPosition() + this.GetCasterPlus().GetForwardVector() as Vector);
@@ -48,7 +34,7 @@ export class earthshaker_fissure_lua extends BaseAbility_Plus {
         let start_pos = caster.GetOrigin() + direction * block_pos as Vector;
         for (let i = 0; i < blocks; i++) {
             let block_vec = caster.GetOrigin() + direction * block_pos as Vector;
-            let blocker = BaseModifier_Plus.CreateBuffThinker(caster, this, "modifier_earthshaker_fissure_lua_thinker", {
+            let blocker = BaseModifier_Plus.CreateBuffThinker(caster, this, "modifier_imba_earthshaker_fissure_thinker", {
                 duration: duration
             }, block_vec, caster.GetTeamNumber(), true);
             blocker.SetHullRadius(block_width);
@@ -86,7 +72,7 @@ export class earthshaker_fissure_lua extends BaseAbility_Plus {
     }
 }
 @registerModifier()
-export class modifier_earthshaker_fissure_lua_thinker extends BaseModifier_Plus {
+export class modifier_imba_earthshaker_fissure_thinker extends BaseModifier_Plus {
     IsHidden(): boolean {
         return true;
     }
@@ -110,7 +96,7 @@ export class modifier_earthshaker_fissure_lua_thinker extends BaseModifier_Plus 
     }
 }
 @registerModifier()
-export class modifier_earthshaker_fissure_lua_prevent_movement extends BaseModifier_Plus {
+export class modifier_imba_earthshaker_fissure_prevent_movement extends BaseModifier_Plus {
     public movement_capability: any;
     IsHidden(): boolean {
         return true;
@@ -138,7 +124,7 @@ export class modifier_earthshaker_fissure_lua_prevent_movement extends BaseModif
     }
 }
 @registerAbility()
-export class earthshaker_enchant_totem_lua extends BaseAbility_Plus {
+export class imba_earthshaker_enchant_totem extends BaseAbility_Plus {
     GetBehavior(): DOTA_ABILITY_BEHAVIOR | Uint64 {
         if (this.GetCasterPlus().HasScepter()) {
             return DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_UNIT_TARGET + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_POINT;
@@ -183,23 +169,23 @@ export class earthshaker_enchant_totem_lua extends BaseAbility_Plus {
         if (this.GetCasterPlus().HasScepter() && this.GetCasterPlus() != this.GetCursorTarget()) {
             this.GetCasterPlus().FaceTowards(this.GetCursorPosition());
             let modifier_movement_handler = this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this,
-                "modifier_earthshaker_enchant_totem_lua_leap", {
+                "modifier_imba_earthshaker_enchant_totem_leap", {
                 duration: 1,
                 x: this.GetCursorPosition().x,
                 y: this.GetCursorPosition().y,
                 z: this.GetCursorPosition().z
-            }) as modifier_earthshaker_enchant_totem_lua_leap;
+            }) as modifier_imba_earthshaker_enchant_totem_leap;
             if (modifier_movement_handler) {
                 modifier_movement_handler.target_point = this.GetCursorPosition();
             }
         } else {
             EmitSoundOn("Hero_EarthShaker.Totem", this.GetCasterPlus());
-            this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_earthshaker_enchant_totem_lua", {
+            this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_earthshaker_enchant_totem", {
                 duration: this.GetDuration()
             });
             if (this.GetCasterPlus().HasScepter()) {
-                if (this.GetCasterPlus().HasModifier("modifier_earthshaker_aftershock_lua")) {
-                    this.GetCasterPlus().findBuff<modifier_earthshaker_aftershock_lua>("modifier_earthshaker_aftershock_lua").CastAftershock();
+                if (this.GetCasterPlus().HasModifier("modifier_imba_earthshaker_aftershock")) {
+                    this.GetCasterPlus().findBuff<modifier_imba_earthshaker_aftershock>("modifier_imba_earthshaker_aftershock").CastAftershock();
                 }
             }
         }
@@ -217,7 +203,7 @@ export class earthshaker_enchant_totem_lua extends BaseAbility_Plus {
     }
 }
 @registerModifier()
-export class modifier_earthshaker_enchant_totem_lua extends BaseModifier_Plus {
+export class modifier_imba_earthshaker_enchant_totem extends BaseModifier_Plus {
     public bonus: number;
     public bonus_attack_range: number;
     IsHidden(): boolean {
@@ -295,7 +281,7 @@ export class modifier_earthshaker_enchant_totem_lua extends BaseModifier_Plus {
     }
 }
 @registerModifier()
-export class modifier_earthshaker_enchant_totem_lua_movement extends BaseModifierMotionBoth_Plus {
+export class modifier_imba_earthshaker_enchant_totem_movement extends BaseModifierMotionBoth_Plus {
     public caster: IBaseNpc_Plus;
     public ability: IBaseAbility_Plus;
     public scepter_height: any;
@@ -355,14 +341,14 @@ export class modifier_earthshaker_enchant_totem_lua_movement extends BaseModifie
                 ParticleManager.ReleaseParticleIndex(this.blur_effect);
             }
             this.enchant_totem_land_commenced = true;
-            this.GetParentPlus().AddNewModifier(this.GetParentPlus(), this.GetAbilityPlus(), "modifier_earthshaker_enchant_totem_lua", {
+            this.GetParentPlus().AddNewModifier(this.GetParentPlus(), this.GetAbilityPlus(), "modifier_imba_earthshaker_enchant_totem", {
                 duration: this.GetAbilityPlus().GetDuration()
             });
             EmitSoundOn("Hero_EarthShaker.Totem", this.GetParentPlus());
             this.GetParentPlus().SetUnitOnClearGround();
             ResolveNPCPositions(this.GetParentPlus().GetAbsOrigin(), 150);
-            if (this.GetParentPlus().HasModifier("modifier_earthshaker_aftershock_lua")) {
-                this.GetParentPlus().findBuff<modifier_earthshaker_aftershock_lua>("modifier_earthshaker_aftershock_lua").CastAftershock();
+            if (this.GetParentPlus().HasModifier("modifier_imba_earthshaker_aftershock")) {
+                this.GetParentPlus().findBuff<modifier_imba_earthshaker_aftershock>("modifier_imba_earthshaker_aftershock").CastAftershock();
             }
         }
     }
@@ -423,7 +409,7 @@ export class modifier_earthshaker_enchant_totem_lua_movement extends BaseModifie
     }
 }
 @registerModifier()
-export class modifier_earthshaker_enchant_totem_lua_leap extends BaseModifierMotionBoth_Plus {
+export class modifier_imba_earthshaker_enchant_totem_leap extends BaseModifierMotionBoth_Plus {
     public destination: any;
     public vector: any;
     public direction: any;
@@ -452,11 +438,11 @@ export class modifier_earthshaker_enchant_totem_lua_leap extends BaseModifierMot
         this.GetParentPlus().InterruptMotionControllers(true);
         if (!this.aftershock_interrupt) {
             EmitSoundOn("Hero_EarthShaker.Totem", this.GetCasterPlus());
-            this.GetParentPlus().AddNewModifier(this.GetParentPlus(), this.GetAbilityPlus(), "modifier_earthshaker_enchant_totem_lua", {
+            this.GetParentPlus().AddNewModifier(this.GetParentPlus(), this.GetAbilityPlus(), "modifier_imba_earthshaker_enchant_totem", {
                 duration: this.GetAbilityPlus().GetDuration()
             });
-            if (this.GetParentPlus().HasModifier("modifier_earthshaker_aftershock_lua")) {
-                this.GetParentPlus().findBuff<modifier_earthshaker_aftershock_lua>("modifier_earthshaker_aftershock_lua").CastAftershock();
+            if (this.GetParentPlus().HasModifier("modifier_imba_earthshaker_aftershock")) {
+                this.GetParentPlus().findBuff<modifier_imba_earthshaker_aftershock>("modifier_imba_earthshaker_aftershock").CastAftershock();
             }
         }
     }
@@ -506,13 +492,13 @@ export class modifier_earthshaker_enchant_totem_lua_leap extends BaseModifierMot
     }
 }
 @registerAbility()
-export class earthshaker_aftershock_lua extends BaseAbility_Plus {
+export class imba_earthshaker_aftershock extends BaseAbility_Plus {
     GetIntrinsicModifierName(): string {
-        return "modifier_earthshaker_aftershock_lua";
+        return "modifier_imba_earthshaker_aftershock";
     }
 }
 @registerModifier()
-export class modifier_earthshaker_aftershock_lua extends BaseModifier_Plus {
+export class modifier_imba_earthshaker_aftershock extends BaseModifier_Plus {
     public radius: number;
     public duration: number;
     public damageTable: ApplyDamageOptions;
@@ -559,7 +545,7 @@ export class modifier_earthshaker_aftershock_lua extends BaseModifier_Plus {
                 return;
             }
             print(params.ability.GetAbilityName());
-            if (this.GetParentPlus().HasScepter() && params.ability.GetAbilityName() == "earthshaker_enchant_totem_lua" || params.ability.GetAbilityName() == "ability_capture") {
+            if (this.GetParentPlus().HasScepter() && params.ability.GetAbilityName() == "imba_earthshaker_enchant_totem" || params.ability.GetAbilityName() == "ability_capture") {
                 return;
             }
             this.CastAftershock();

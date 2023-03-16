@@ -22,3 +22,15 @@ export class modifier_imba_monkey_king_true_strike extends BaseModifier_Plus {
         };
     }
 }
+@registerAbility()
+export class imba_monkey_king_boundless_strike extends BaseAbility_Plus { }
+
+@registerAbility()
+export class imba_monkey_king_jingu_mastery extends BaseAbility_Plus { }
+
+@registerAbility()
+export class imba_monkey_king_primal_spring extends BaseAbility_Plus { }
+
+@registerAbility()
+export class imba_monkey_king_wukongs_command extends BaseAbility_Plus { }
+

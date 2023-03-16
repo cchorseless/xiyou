@@ -6,327 +6,31 @@ import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
+
+
 @registerAbility()
-export class imba_tinker_rearm extends BaseAbility_Plus {
+export class imba_tinker_technomancy extends BaseAbility_Plus {
     GetAbilityTextureName(): string {
-        return "tinker_rearm";
+        return "tinker_tinkermaster";
+    }
+    OnUpgrade(): void {
+        let caster = this.GetCasterPlus();
+        if (caster.HasAbility("imba_tinker_rearm")) {
+            let ability = caster.findAbliityPlus<imba_tinker_rearm>("imba_tinker_rearm");
+            ability.SetLevel((this.GetLevel() + 1));
+        }
     }
     IsNetherWardStealable() {
         return false;
-    }
-    GetAssociatedSecondaryAbilities(): string {
-        return "imba_tinker_technomancy";
     }
     IsStealable(): boolean {
         return true;
     }
     IsHiddenWhenStolen(): boolean {
-        return false;
-    }
-    GetIntrinsicModifierName(): string {
-        return "modifier_imba_rearm_overdrive";
-    }
-    GetChannelAnimation(): GameActivity_t {
-        return undefined;
-    }
-    GetChannelTime(): number {
-        if (this.GetCasterPlus().HasTalent("special_bonus_imba_tinker_8")) {
-            return 0;
-        }
-        return super.GetChannelTime();
-    }
-    GetCooldown(nLevel: number): number {
-        if (this.GetCasterPlus().HasTalent("special_bonus_imba_tinker_8")) {
-            return super.GetChannelTime();
-        }
-        return 0;
-    }
-    GetManaCost(p_0: number,): number {
-        let extra_cost = (this.GetLevel() - 1) * this.GetSpecialValueFor("rearm_mana_per_lvl");
-        return (this.GetSpecialValueFor("base_manacost") + extra_cost - this.GetCasterPlus().GetTalentValue("special_bonus_imba_tinker_1"));
-    }
-    GetCastAnimation(): GameActivity_t {
-        return GameActivity_t.ACT_DOTA_TINKER_REARM1;
-    }
-    OnSpellStart(): void {
-        if (IsServer()) {
-            let caster = this.GetCasterPlus();
-            if (caster.GetUnitName().includes("tinker")) {
-                caster.EmitSound("tinker_tink_ability_rearm_0" + math.random(1, 9));
-            }
-            if (caster.HasTalent("special_bonus_imba_tinker_8")) {
-                caster.AddNewModifier(caster, this, "modifier_imba_rearm_animation", {
-                    duration: 0.1
-                });
-            } else {
-                caster.AddNewModifier(caster, this, "modifier_imba_rearm_animation", {
-                    duration: this.GetChannelTime()
-                });
-            }
-            if (caster.HasTalent("special_bonus_imba_tinker_8")) {
-                this.OnChannelFinish(false);
-            }
-            if (caster.HasTalent("special_bonus_imba_tinker_6")) {
-                caster.AddNewModifier(caster, this, "modifier_imba_rearm_shield", {
-                    duration: 3.5
-                });
-            }
-        }
-    }
-    OnChannelFinish(bInterrupted: boolean): void {
-        if (IsServer()) {
-            let caster = this.GetCasterPlus();
-            if (!bInterrupted) {
-                let forbidden_items = {
-                    "1": "item_aeon_disk",
-                    "2": "item_imba_aeon_disk",
-                    "3": "item_imba_aether_specs",
-                    "4": "item_imba_arcane_boots",
-                    "5": "item_imba_black_king_bar",
-                    "6": "item_imba_bloodstone",
-                    "7": "item_imba_guardian_greaves",
-                    "8": "item_imba_hand_of_midas",
-                    "9": "item_imba_mekansm",
-                    "10": "item_meteor_hammer",
-                    "11": "item_imba_necronomicon",
-                    "12": "item_imba_necronomicon_2",
-                    "13": "item_imba_necronomicon_3",
-                    "14": "item_imba_necronomicon_4",
-                    "15": "item_imba_necronomicon_5",
-                    "16": "item_imba_pipe",
-                    "17": "item_refresher",
-                    "18": "item_refresher_shard",
-                    "19": "item_imba_skadi",
-                    "20": "item_imba_sphere",
-                    "21": "item_imba_plancks_artifact",
-                    "22": "item_minotaur_horn",
-                    "23": "item_imba_white_queen_cape",
-                    "24": "item_imba_black_queen_cape",
-                    "25": "item_helm_of_the_dominator",
-                    "26": "item_imba_sange",
-                    "27": "item_imba_heavens_halberd",
-                    "28": "item_imba_yasha",
-                    "29": "item_imba_kaya",
-                    "30": "item_imba_sange_yasha",
-                    "31": "item_imba_kaya_and_sange",
-                    "32": "item_imba_yasha_and_kaya",
-                    "33": "item_imba_arcane_nexus",
-                    "34": "item_imba_manta",
-                    "35": "item_imba_meteor_hammer",
-                    "36": "item_imba_meteor_hammer_2",
-                    "37": "item_imba_meteor_hammer_3",
-                    "38": "item_imba_meteor_hammer_4",
-                    "39": "item_imba_the_triumvirate_v2",
-                    "40": "item_tome_of_knowledge"
-                }
-                for (let i = 0; i <= 8; i++) {
-                    let current_ability = caster.GetAbilityByIndex(i);
-                    if (current_ability) {
-                        current_ability.EndCooldown();
-                    }
-                }
-                for (let i = 0; i <= 8; i++) {
-                    let current_item = caster.GetItemInSlot(i);
-                    let should_refresh = true;
-                    for (const [_, forbidden_item] of GameFunc.Pair(forbidden_items)) {
-                        if (current_item && (current_item.GetAbilityName() == forbidden_item || current_item.GetPurchaser() != caster)) {
-                            should_refresh = false;
-                        }
-                    }
-                    if (current_item && should_refresh) {
-                        if (current_item.GetAbilityName() == "item_imba_rod_of_atos_2") {
-                            current_item.SpendCharge();
-                        }
-                        current_item.EndCooldown();
-                    }
-                }
-                let teleport_scroll = caster.GetItemInSlot(15);
-                if (teleport_scroll) {
-                    teleport_scroll.EndCooldown();
-                }
-            }
-            caster.FadeGesture(GameActivity_t.ACT_DOTA_TINKER_REARM1);
-            caster.FadeGesture(GameActivity_t.ACT_DOTA_TINKER_REARM3);
-            caster.RemoveModifierByName("modifier_imba_rearm_animation");
-        }
-    }
-}
-@registerModifier()
-export class modifier_imba_rearm_animation extends BaseModifier_Plus {
-    BeCreated(p_0: any,): void {
-        if (IsServer()) {
-            let caster = this.GetCasterPlus();
-            let level = this.GetAbilityPlus().GetLevel();
-            caster.EmitSound("Hero_Tinker.Rearm");
-            let cast_main_pfx = ResHelper.CreateParticleEx("particles/units/heroes/hero_tinker/tinker_rearm.vpcf", ParticleAttachment_t.PATTACH_POINT_FOLLOW, caster);
-            ParticleManager.SetParticleControlEnt(cast_main_pfx, 0, caster, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", caster.GetAbsOrigin(), true);
-            ParticleManager.SetParticleControlEnt(cast_main_pfx, 1, caster, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_attack1", caster.GetAbsOrigin(), true);
-            let cast_pfx1 = ResHelper.CreateParticleEx("particles/units/heroes/hero_tinker/tinker_rearm_b.vpcf", ParticleAttachment_t.PATTACH_POINT_FOLLOW, caster);
-            ParticleManager.SetParticleControlEnt(cast_pfx1, 1, caster, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_attack2", caster.GetAbsOrigin(), true);
-            let cast_pfx2 = ResHelper.CreateParticleEx("particles/units/heroes/hero_tinker/tinker_rearm_b.vpcf", ParticleAttachment_t.PATTACH_POINT_FOLLOW, caster);
-            ParticleManager.SetParticleControlEnt(cast_pfx2, 1, caster, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_attack3", caster.GetAbsOrigin(), true);
-            let cast_sparkle_pfx1 = ResHelper.CreateParticleEx("particles/units/heroes/hero_tinker/tinker_rearm_c.vpcf", ParticleAttachment_t.PATTACH_POINT_FOLLOW, caster);
-            ParticleManager.SetParticleControlEnt(cast_sparkle_pfx1, 1, caster, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_attack2", caster.GetAbsOrigin(), true);
-            let cast_sparkle_pfx2 = ResHelper.CreateParticleEx("particles/units/heroes/hero_tinker/tinker_rearm_c.vpcf", ParticleAttachment_t.PATTACH_POINT_FOLLOW, caster);
-            ParticleManager.SetParticleControlEnt(cast_sparkle_pfx2, 1, caster, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_attack3", caster.GetAbsOrigin(), true);
-            let animation_reset = 0;
-            if (!caster.HasTalent("special_bonus_imba_tinker_8")) {
-                if (level == 1 || level == 2) {
-                    caster.StartGesture(GameActivity_t.ACT_DOTA_TINKER_REARM1);
-                } else if (level == 3 || level == 4) {
-                    caster.StartGesture(GameActivity_t.ACT_DOTA_TINKER_REARM2);
-                } else if (level == 5) {
-                    caster.StartGestureWithPlaybackRate(GameActivity_t.ACT_DOTA_TINKER_REARM3, 0.9);
-                } else if (level == 6) {
-                    caster.StartGestureWithPlaybackRate(GameActivity_t.ACT_DOTA_TINKER_REARM3, 1.2);
-                } else if (level == 7) {
-                    caster.StartGestureWithPlaybackRate(GameActivity_t.ACT_DOTA_TINKER_REARM3, 1.9);
-                }
-            }
-            this.AddTimer(FrameTime(), () => {
-                if (caster.HasModifier("modifier_imba_rearm_animation") && !caster.HasTalent("special_bonus_imba_tinker_8")) {
-                    animation_reset = animation_reset + 1;
-                    if ((level == 1 && animation_reset == 60)) {
-                        caster.FadeGesture(GameActivity_t.ACT_DOTA_TINKER_REARM1);
-                        caster.StartGesture(GameActivity_t.ACT_DOTA_TINKER_REARM3);
-                    } else if ((level == 2 && animation_reset == 45)) {
-                        caster.FadeGesture(GameActivity_t.ACT_DOTA_TINKER_REARM1);
-                        caster.StartGesture(GameActivity_t.ACT_DOTA_TINKER_REARM3);
-                    } else if ((level == 3 && animation_reset == 23)) {
-                        caster.FadeGesture(GameActivity_t.ACT_DOTA_TINKER_REARM2);
-                        caster.StartGestureWithPlaybackRate(GameActivity_t.ACT_DOTA_TINKER_REARM3, 0.9);
-                    } else if ((level == 4 && animation_reset == 20)) {
-                        caster.FadeGesture(GameActivity_t.ACT_DOTA_TINKER_REARM2);
-                        caster.StartGesture(GameActivity_t.ACT_DOTA_TINKER_REARM3);
-                    }
-                    return FrameTime();
-                } else {
-                    ParticleManager.DestroyParticle(cast_main_pfx, false);
-                    ParticleManager.DestroyParticle(cast_pfx1, false);
-                    ParticleManager.DestroyParticle(cast_pfx2, false);
-                    ParticleManager.DestroyParticle(cast_sparkle_pfx1, false);
-                    ParticleManager.DestroyParticle(cast_sparkle_pfx2, false);
-                    ParticleManager.ReleaseParticleIndex(cast_main_pfx);
-                    ParticleManager.ReleaseParticleIndex(cast_pfx1);
-                    ParticleManager.ReleaseParticleIndex(cast_pfx2);
-                    ParticleManager.ReleaseParticleIndex(cast_sparkle_pfx1);
-                    ParticleManager.ReleaseParticleIndex(cast_sparkle_pfx2);
-                    return undefined;
-                }
-            });
-        }
-    }
-    GetEffectName(): string {
-        return "particles/units/heroes/hero_tinker/tinker_rearm.vpcf";
-    }
-    GetEffectAttachType(): ParticleAttachment_t {
-        return ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW;
-    }
-}
-@registerModifier()
-export class modifier_imba_rearm_overdrive extends BaseModifier_Plus {
-    public aghs_spellpower: any;
-    public aghs_interval_pct: number;
-    IsHidden(): boolean {
-        if (this.GetParentPlus().HasScepter()) {
-            return false;
-        }
         return true;
     }
-    IsDebuff(): boolean {
-        return false;
-    }
-    IsPurgable(): boolean {
-        return false;
-    }
-    BeCreated(p_0: any,): void {
-        let ability = this.GetAbilityPlus();
-        this.aghs_spellpower = ability.GetSpecialValueFor("aghs_spellpower");
-        this.aghs_interval_pct = ability.GetSpecialValueFor("aghs_interval_pct");
-        this.StartIntervalThink(0.2);
-    }
-    OnIntervalThink(): void {
-        let parent = this.GetParentPlus();
-        this.IsHidden();
-        if (parent.HasScepter()) {
-            this.SetStackCount(math.ceil((1 - (parent.GetMana() / parent.GetMaxMana())) * (100 / this.aghs_interval_pct)));
-        } else {
-            this.SetStackCount(0);
-        }
-    }
-    /** DeclareFunctions():modifierfunction[] {
-        let funcs = {
-            1: GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_PERCENTAGE
-        }
-        return Object.values(funcs);
-    } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_PERCENTAGE)
-    CC_GetModifierSpellAmplify_Percentage(p_0: ModifierAttackEvent,): number {
-        return (this.aghs_spellpower * this.GetStackCount());
-    }
 }
-@registerModifier()
-export class modifier_imba_rearm_shield extends BaseModifier_Plus {
-    public current_health: any;
-    public shield_hp: any;
-    /** DeclareFunctions():modifierfunction[] {
-        let decFuncs = {
-            1: Enum_MODIFIER_EVENT.ON_TAKEDAMAGE
-        }
-        return Object.values(decFuncs);
-    } */
-    IsHidden(): boolean {
-        return false;
-    }
-    IsDebuff(): boolean {
-        return false;
-    }
-    IsPurgable(): boolean {
-        return true;
-    }
-    GetEffectName(): string {
-        return "particles/hero/tinker/rearmshield_shield.vpcf";
-    }
-    GetEffectAttachType(): ParticleAttachment_t {
-        return ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW;
-    }
-    BeCreated(p_0: any,): void {
-        if (IsServer()) {
-            let caster = this.GetCasterPlus();
-            this.current_health = this.GetParentPlus().GetHealth();
-            this.shield_hp = caster.GetMaxHealth() * (caster.GetTalentValue("special_bonus_imba_tinker_6") / 100);
-            this.StartIntervalThink(FrameTime());
-        }
-    }
-    BeRefresh(p_0: any,): void {
-        if (IsServer()) {
-            let caster = this.GetCasterPlus();
-            this.shield_hp = caster.GetMaxHealth() * (caster.GetTalentValue("special_bonus_imba_tinker_6") / 100);
-        }
-    }
-    OnIntervalThink(): void {
-        this.current_health = this.GetParentPlus().GetHealth();
-    }
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
-    CC_OnTakeDamage(params: ModifierInstanceEvent): void {
-        if (IsServer()) {
-            let parent = this.GetParentPlus();
-            if (parent == params.unit) {
-                if (params.damage > 0) {
-                    if (params.damage >= this.shield_hp) {
-                        this.Destroy();
-                        SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_BLOCK, parent, this.shield_hp, undefined);
-                        parent.SetHealth(this.current_health - params.damage + this.shield_hp);
-                    } else {
-                        this.shield_hp = this.shield_hp - params.damage;
-                        SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_BLOCK, parent, params.damage, undefined);
-                        parent.SetHealth(this.current_health);
-                    }
-                }
-            }
-        }
-    }
-}
+
 @registerAbility()
 export class imba_tinker_laser extends BaseAbility_Plus {
     public cast_table: IBaseNpc_Plus[];
@@ -758,6 +462,7 @@ export class modifier_imba_heat_seeking_missile_break extends BaseModifier_Plus 
         return ParticleAttachment_t.PATTACH_OVERHEAD_FOLLOW;
     }
 }
+
 @registerAbility()
 export class imba_tinker_march_of_the_machines extends BaseAbility_Plus {
     tempdata: { [k: string]: any } = {};
@@ -1445,25 +1150,325 @@ export class modifier_imba_march_drone extends BaseModifier_Plus {
         return state;
     }
 }
+
 @registerAbility()
-export class imba_tinker_technomancy extends BaseAbility_Plus {
+export class imba_tinker_rearm extends BaseAbility_Plus {
     GetAbilityTextureName(): string {
-        return "tinker_tinkermaster";
-    }
-    OnUpgrade(): void {
-        let caster = this.GetCasterPlus();
-        if (caster.HasAbility("imba_tinker_rearm")) {
-            let ability = caster.findAbliityPlus<imba_tinker_rearm>("imba_tinker_rearm");
-            ability.SetLevel((this.GetLevel() + 1));
-        }
+        return "tinker_rearm";
     }
     IsNetherWardStealable() {
         return false;
+    }
+    GetAssociatedSecondaryAbilities(): string {
+        return "imba_tinker_technomancy";
     }
     IsStealable(): boolean {
         return true;
     }
     IsHiddenWhenStolen(): boolean {
+        return false;
+    }
+    GetIntrinsicModifierName(): string {
+        return "modifier_imba_rearm_overdrive";
+    }
+    GetChannelAnimation(): GameActivity_t {
+        return undefined;
+    }
+    GetChannelTime(): number {
+        if (this.GetCasterPlus().HasTalent("special_bonus_imba_tinker_8")) {
+            return 0;
+        }
+        return super.GetChannelTime();
+    }
+    GetCooldown(nLevel: number): number {
+        if (this.GetCasterPlus().HasTalent("special_bonus_imba_tinker_8")) {
+            return super.GetChannelTime();
+        }
+        return 0;
+    }
+    GetManaCost(p_0: number,): number {
+        let extra_cost = (this.GetLevel() - 1) * this.GetSpecialValueFor("rearm_mana_per_lvl");
+        return (this.GetSpecialValueFor("base_manacost") + extra_cost - this.GetCasterPlus().GetTalentValue("special_bonus_imba_tinker_1"));
+    }
+    GetCastAnimation(): GameActivity_t {
+        return GameActivity_t.ACT_DOTA_TINKER_REARM1;
+    }
+    OnSpellStart(): void {
+        if (IsServer()) {
+            let caster = this.GetCasterPlus();
+            if (caster.GetUnitName().includes("tinker")) {
+                caster.EmitSound("tinker_tink_ability_rearm_0" + math.random(1, 9));
+            }
+            if (caster.HasTalent("special_bonus_imba_tinker_8")) {
+                caster.AddNewModifier(caster, this, "modifier_imba_rearm_animation", {
+                    duration: 0.1
+                });
+            } else {
+                caster.AddNewModifier(caster, this, "modifier_imba_rearm_animation", {
+                    duration: this.GetChannelTime()
+                });
+            }
+            if (caster.HasTalent("special_bonus_imba_tinker_8")) {
+                this.OnChannelFinish(false);
+            }
+            if (caster.HasTalent("special_bonus_imba_tinker_6")) {
+                caster.AddNewModifier(caster, this, "modifier_imba_rearm_shield", {
+                    duration: 3.5
+                });
+            }
+        }
+    }
+    OnChannelFinish(bInterrupted: boolean): void {
+        if (IsServer()) {
+            let caster = this.GetCasterPlus();
+            if (!bInterrupted) {
+                let forbidden_items = {
+                    "1": "item_aeon_disk",
+                    "2": "item_imba_aeon_disk",
+                    "3": "item_imba_aether_specs",
+                    "4": "item_imba_arcane_boots",
+                    "5": "item_imba_black_king_bar",
+                    "6": "item_imba_bloodstone",
+                    "7": "item_imba_guardian_greaves",
+                    "8": "item_imba_hand_of_midas",
+                    "9": "item_imba_mekansm",
+                    "10": "item_meteor_hammer",
+                    "11": "item_imba_necronomicon",
+                    "12": "item_imba_necronomicon_2",
+                    "13": "item_imba_necronomicon_3",
+                    "14": "item_imba_necronomicon_4",
+                    "15": "item_imba_necronomicon_5",
+                    "16": "item_imba_pipe",
+                    "17": "item_refresher",
+                    "18": "item_refresher_shard",
+                    "19": "item_imba_skadi",
+                    "20": "item_imba_sphere",
+                    "21": "item_imba_plancks_artifact",
+                    "22": "item_minotaur_horn",
+                    "23": "item_imba_white_queen_cape",
+                    "24": "item_imba_black_queen_cape",
+                    "25": "item_helm_of_the_dominator",
+                    "26": "item_imba_sange",
+                    "27": "item_imba_heavens_halberd",
+                    "28": "item_imba_yasha",
+                    "29": "item_imba_kaya",
+                    "30": "item_imba_sange_yasha",
+                    "31": "item_imba_kaya_and_sange",
+                    "32": "item_imba_yasha_and_kaya",
+                    "33": "item_imba_arcane_nexus",
+                    "34": "item_imba_manta",
+                    "35": "item_imba_meteor_hammer",
+                    "36": "item_imba_meteor_hammer_2",
+                    "37": "item_imba_meteor_hammer_3",
+                    "38": "item_imba_meteor_hammer_4",
+                    "39": "item_imba_the_triumvirate_v2",
+                    "40": "item_tome_of_knowledge"
+                }
+                for (let i = 0; i <= 8; i++) {
+                    let current_ability = caster.GetAbilityByIndex(i);
+                    if (current_ability) {
+                        current_ability.EndCooldown();
+                    }
+                }
+                for (let i = 0; i <= 8; i++) {
+                    let current_item = caster.GetItemInSlot(i);
+                    let should_refresh = true;
+                    for (const [_, forbidden_item] of GameFunc.Pair(forbidden_items)) {
+                        if (current_item && (current_item.GetAbilityName() == forbidden_item || current_item.GetPurchaser() != caster)) {
+                            should_refresh = false;
+                        }
+                    }
+                    if (current_item && should_refresh) {
+                        if (current_item.GetAbilityName() == "item_imba_rod_of_atos_2") {
+                            current_item.SpendCharge();
+                        }
+                        current_item.EndCooldown();
+                    }
+                }
+                let teleport_scroll = caster.GetItemInSlot(15);
+                if (teleport_scroll) {
+                    teleport_scroll.EndCooldown();
+                }
+            }
+            caster.FadeGesture(GameActivity_t.ACT_DOTA_TINKER_REARM1);
+            caster.FadeGesture(GameActivity_t.ACT_DOTA_TINKER_REARM3);
+            caster.RemoveModifierByName("modifier_imba_rearm_animation");
+        }
+    }
+}
+@registerModifier()
+export class modifier_imba_rearm_animation extends BaseModifier_Plus {
+    BeCreated(p_0: any,): void {
+        if (IsServer()) {
+            let caster = this.GetCasterPlus();
+            let level = this.GetAbilityPlus().GetLevel();
+            caster.EmitSound("Hero_Tinker.Rearm");
+            let cast_main_pfx = ResHelper.CreateParticleEx("particles/units/heroes/hero_tinker/tinker_rearm.vpcf", ParticleAttachment_t.PATTACH_POINT_FOLLOW, caster);
+            ParticleManager.SetParticleControlEnt(cast_main_pfx, 0, caster, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", caster.GetAbsOrigin(), true);
+            ParticleManager.SetParticleControlEnt(cast_main_pfx, 1, caster, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_attack1", caster.GetAbsOrigin(), true);
+            let cast_pfx1 = ResHelper.CreateParticleEx("particles/units/heroes/hero_tinker/tinker_rearm_b.vpcf", ParticleAttachment_t.PATTACH_POINT_FOLLOW, caster);
+            ParticleManager.SetParticleControlEnt(cast_pfx1, 1, caster, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_attack2", caster.GetAbsOrigin(), true);
+            let cast_pfx2 = ResHelper.CreateParticleEx("particles/units/heroes/hero_tinker/tinker_rearm_b.vpcf", ParticleAttachment_t.PATTACH_POINT_FOLLOW, caster);
+            ParticleManager.SetParticleControlEnt(cast_pfx2, 1, caster, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_attack3", caster.GetAbsOrigin(), true);
+            let cast_sparkle_pfx1 = ResHelper.CreateParticleEx("particles/units/heroes/hero_tinker/tinker_rearm_c.vpcf", ParticleAttachment_t.PATTACH_POINT_FOLLOW, caster);
+            ParticleManager.SetParticleControlEnt(cast_sparkle_pfx1, 1, caster, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_attack2", caster.GetAbsOrigin(), true);
+            let cast_sparkle_pfx2 = ResHelper.CreateParticleEx("particles/units/heroes/hero_tinker/tinker_rearm_c.vpcf", ParticleAttachment_t.PATTACH_POINT_FOLLOW, caster);
+            ParticleManager.SetParticleControlEnt(cast_sparkle_pfx2, 1, caster, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_attack3", caster.GetAbsOrigin(), true);
+            let animation_reset = 0;
+            if (!caster.HasTalent("special_bonus_imba_tinker_8")) {
+                if (level == 1 || level == 2) {
+                    caster.StartGesture(GameActivity_t.ACT_DOTA_TINKER_REARM1);
+                } else if (level == 3 || level == 4) {
+                    caster.StartGesture(GameActivity_t.ACT_DOTA_TINKER_REARM2);
+                } else if (level == 5) {
+                    caster.StartGestureWithPlaybackRate(GameActivity_t.ACT_DOTA_TINKER_REARM3, 0.9);
+                } else if (level == 6) {
+                    caster.StartGestureWithPlaybackRate(GameActivity_t.ACT_DOTA_TINKER_REARM3, 1.2);
+                } else if (level == 7) {
+                    caster.StartGestureWithPlaybackRate(GameActivity_t.ACT_DOTA_TINKER_REARM3, 1.9);
+                }
+            }
+            this.AddTimer(FrameTime(), () => {
+                if (caster.HasModifier("modifier_imba_rearm_animation") && !caster.HasTalent("special_bonus_imba_tinker_8")) {
+                    animation_reset = animation_reset + 1;
+                    if ((level == 1 && animation_reset == 60)) {
+                        caster.FadeGesture(GameActivity_t.ACT_DOTA_TINKER_REARM1);
+                        caster.StartGesture(GameActivity_t.ACT_DOTA_TINKER_REARM3);
+                    } else if ((level == 2 && animation_reset == 45)) {
+                        caster.FadeGesture(GameActivity_t.ACT_DOTA_TINKER_REARM1);
+                        caster.StartGesture(GameActivity_t.ACT_DOTA_TINKER_REARM3);
+                    } else if ((level == 3 && animation_reset == 23)) {
+                        caster.FadeGesture(GameActivity_t.ACT_DOTA_TINKER_REARM2);
+                        caster.StartGestureWithPlaybackRate(GameActivity_t.ACT_DOTA_TINKER_REARM3, 0.9);
+                    } else if ((level == 4 && animation_reset == 20)) {
+                        caster.FadeGesture(GameActivity_t.ACT_DOTA_TINKER_REARM2);
+                        caster.StartGesture(GameActivity_t.ACT_DOTA_TINKER_REARM3);
+                    }
+                    return FrameTime();
+                } else {
+                    ParticleManager.DestroyParticle(cast_main_pfx, false);
+                    ParticleManager.DestroyParticle(cast_pfx1, false);
+                    ParticleManager.DestroyParticle(cast_pfx2, false);
+                    ParticleManager.DestroyParticle(cast_sparkle_pfx1, false);
+                    ParticleManager.DestroyParticle(cast_sparkle_pfx2, false);
+                    ParticleManager.ReleaseParticleIndex(cast_main_pfx);
+                    ParticleManager.ReleaseParticleIndex(cast_pfx1);
+                    ParticleManager.ReleaseParticleIndex(cast_pfx2);
+                    ParticleManager.ReleaseParticleIndex(cast_sparkle_pfx1);
+                    ParticleManager.ReleaseParticleIndex(cast_sparkle_pfx2);
+                    return undefined;
+                }
+            });
+        }
+    }
+    GetEffectName(): string {
+        return "particles/units/heroes/hero_tinker/tinker_rearm.vpcf";
+    }
+    GetEffectAttachType(): ParticleAttachment_t {
+        return ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW;
+    }
+}
+@registerModifier()
+export class modifier_imba_rearm_overdrive extends BaseModifier_Plus {
+    public aghs_spellpower: any;
+    public aghs_interval_pct: number;
+    IsHidden(): boolean {
+        if (this.GetParentPlus().HasScepter()) {
+            return false;
+        }
         return true;
+    }
+    IsDebuff(): boolean {
+        return false;
+    }
+    IsPurgable(): boolean {
+        return false;
+    }
+    BeCreated(p_0: any,): void {
+        let ability = this.GetAbilityPlus();
+        this.aghs_spellpower = ability.GetSpecialValueFor("aghs_spellpower");
+        this.aghs_interval_pct = ability.GetSpecialValueFor("aghs_interval_pct");
+        this.StartIntervalThink(0.2);
+    }
+    OnIntervalThink(): void {
+        let parent = this.GetParentPlus();
+        this.IsHidden();
+        if (parent.HasScepter()) {
+            this.SetStackCount(math.ceil((1 - (parent.GetMana() / parent.GetMaxMana())) * (100 / this.aghs_interval_pct)));
+        } else {
+            this.SetStackCount(0);
+        }
+    }
+    /** DeclareFunctions():modifierfunction[] {
+        let funcs = {
+            1: GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_PERCENTAGE
+        }
+        return Object.values(funcs);
+    } */
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_PERCENTAGE)
+    CC_GetModifierSpellAmplify_Percentage(p_0: ModifierAttackEvent,): number {
+        return (this.aghs_spellpower * this.GetStackCount());
+    }
+}
+@registerModifier()
+export class modifier_imba_rearm_shield extends BaseModifier_Plus {
+    public current_health: any;
+    public shield_hp: any;
+    /** DeclareFunctions():modifierfunction[] {
+        let decFuncs = {
+            1: Enum_MODIFIER_EVENT.ON_TAKEDAMAGE
+        }
+        return Object.values(decFuncs);
+    } */
+    IsHidden(): boolean {
+        return false;
+    }
+    IsDebuff(): boolean {
+        return false;
+    }
+    IsPurgable(): boolean {
+        return true;
+    }
+    GetEffectName(): string {
+        return "particles/hero/tinker/rearmshield_shield.vpcf";
+    }
+    GetEffectAttachType(): ParticleAttachment_t {
+        return ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW;
+    }
+    BeCreated(p_0: any,): void {
+        if (IsServer()) {
+            let caster = this.GetCasterPlus();
+            this.current_health = this.GetParentPlus().GetHealth();
+            this.shield_hp = caster.GetMaxHealth() * (caster.GetTalentValue("special_bonus_imba_tinker_6") / 100);
+            this.StartIntervalThink(FrameTime());
+        }
+    }
+    BeRefresh(p_0: any,): void {
+        if (IsServer()) {
+            let caster = this.GetCasterPlus();
+            this.shield_hp = caster.GetMaxHealth() * (caster.GetTalentValue("special_bonus_imba_tinker_6") / 100);
+        }
+    }
+    OnIntervalThink(): void {
+        this.current_health = this.GetParentPlus().GetHealth();
+    }
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    CC_OnTakeDamage(params: ModifierInstanceEvent): void {
+        if (IsServer()) {
+            let parent = this.GetParentPlus();
+            if (parent == params.unit) {
+                if (params.damage > 0) {
+                    if (params.damage >= this.shield_hp) {
+                        this.Destroy();
+                        SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_BLOCK, parent, this.shield_hp, undefined);
+                        parent.SetHealth(this.current_health - params.damage + this.shield_hp);
+                    } else {
+                        this.shield_hp = this.shield_hp - params.damage;
+                        SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_BLOCK, parent, params.damage, undefined);
+                        parent.SetHealth(this.current_health);
+                    }
+                }
+            }
+        }
     }
 }

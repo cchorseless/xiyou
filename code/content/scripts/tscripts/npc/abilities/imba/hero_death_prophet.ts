@@ -4,6 +4,11 @@ import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
+
+@registerAbility()
+export class death_prophet_carrion_swarm extends BaseAbility_Plus { }
+
+
 @registerAbility()
 export class imba_death_prophet_silence extends BaseAbility_Plus {
     GetAOERadius(): number {
@@ -61,3 +66,7 @@ export class modifier_imba_death_prophet_silence extends BaseModifier_Plus {
         }
     }
 }
+@registerAbility()
+export class death_prophet_spirit_siphon extends BaseAbility_Plus { }
+@registerAbility()
+export class death_prophet_exorcism extends BaseAbility_Plus { }

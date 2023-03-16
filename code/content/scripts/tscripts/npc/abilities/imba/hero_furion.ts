@@ -5,6 +5,13 @@ import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
+
+@registerAbility()
+export class imba_furion_sprout extends BaseAbility_Plus { }
+@registerAbility()
+export class imba_furion_teleportation extends BaseAbility_Plus { }
+@registerAbility()
+export class imba_furion_force_of_nature extends BaseAbility_Plus { }
 @registerAbility()
 export class imba_furion_wrath_of_nature extends BaseAbility_Plus {
     GetIntrinsicModifierName(): string {
