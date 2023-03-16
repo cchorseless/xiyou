@@ -668,7 +668,7 @@ export class imba_visage_summon_familiars extends BaseAbility_Plus {
             }
             familiar.SetOwner(this.GetCasterPlus());
             familiar.SetTeam(this.GetCasterPlus().GetTeam());
-            familiar.SetControllableByPlayer(this.GetCasterPlus().GetPlayerOwnerID(), false);
+            familiar.SetControllableByPlayer(this.GetCasterPlus().GetPlayerID(), false);
             familiar.SetBaseMaxHealth(this.GetSpecialValueFor("familiar_hp"));
             familiar.SetMaxHealth(this.GetSpecialValueFor("familiar_hp"));
             familiar.SetHealth(this.GetSpecialValueFor("familiar_hp"));

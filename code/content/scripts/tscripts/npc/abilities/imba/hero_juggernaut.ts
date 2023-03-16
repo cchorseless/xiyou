@@ -163,7 +163,7 @@ export class modifier_imba_juggernaut_blade_fury extends BaseModifier_Plus {
                     this.GetParentPlus().EmitSound("Hero_Juggernaut.BladeDance");
                     this.GetParentPlus().EmitSound("Hero_Juggernaut.PreAttack");
                     damage = damage * crit;
-                    let player = PlayerResource.GetPlayer(this.GetCasterPlus().GetPlayerOwnerID());
+                    let player = PlayerResource.GetPlayer(this.GetCasterPlus().GetPlayerID());
                     SendOverheadEventMessage(player, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_CRITICAL, enemy, damage, player);
                 } else {
                     this.prng = this.prng + 1;
@@ -465,7 +465,7 @@ export class imba_juggernaut_healing_ward extends BaseAbility_Plus {
             duration: this.GetDuration()
         });
         healing_ward.AddAbility("imba_juggernaut_healing_ward_passive").SetLevel(this.GetLevel());
-        healing_ward.SetControllableByPlayer(caster.GetPlayerOwnerID(), true);
+        healing_ward.SetControllableByPlayer(caster.GetPlayerID(), true);
         this.AddTimer(FrameTime(), () => {
             healing_ward.MoveToNPC(caster);
         });

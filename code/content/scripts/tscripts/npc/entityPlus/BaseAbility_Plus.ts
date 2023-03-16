@@ -1,7 +1,7 @@
-import { GameFunc } from "../../GameFunc";
-import { KVHelper } from "../../helper/KVHelper";
-import { ResHelper } from "../../helper/ResHelper";
-import { BaseAbility } from "./Base_Plus";
+import {GameFunc} from "../../GameFunc";
+import {KVHelper} from "../../helper/KVHelper";
+import {ResHelper} from "../../helper/ResHelper";
+import {BaseAbility} from "./Base_Plus";
 
 export class BaseAbility_Plus extends BaseAbility {
     /**对应dota内的名字 */
@@ -12,6 +12,7 @@ export class BaseAbility_Plus extends BaseAbility {
     public errorStr: string;
     /**是否自动施法 */
     public IsAutoCast: boolean = false;
+
     public GetCustomCastError() {
         return this.errorStr
     }
@@ -25,15 +26,29 @@ export class BaseAbility_Plus extends BaseAbility {
     public GetPlayer() {
         let caster = this.GetCaster()
         if (caster) {
-            let iPlayerID = caster.GetPlayerOwnerID();
+            let iPlayerID = caster.GetPlayerID();
             return PlayerResource.GetSelectedHeroEntity(iPlayerID)
         }
     }
+
+    public GetCastRangePlus() {
+        let caster = this.GetCaster()
+        let r = 0;
+        if (caster) {
+            r = this.GetCastRange(caster.GetAbsOrigin(), null);
+        }
+        if (r <= 0) {
+            r = 200;
+        }
+        return r;
+    }
+
+
     /**
      * @both
      * 流派特殊BUFF名称
-     * @param level 
-     * @returns 
+     * @param level
+     * @returns
      */
     public GetSectSpeEffectName(level: ISectLevel) {
         return GJsonConfigHelper.GetAbilitySectSpeEffectName(this.GetAbilityName(), level);
@@ -42,8 +57,8 @@ export class BaseAbility_Plus extends BaseAbility {
     /**
      * @both
      * 流派特殊BUFF名称
-     * @param level 
-     * @returns 
+     * @param level
+     * @returns
      */
     public GetSectSpeEffectValue(level: ISectLevel, key: string) {
         let buffname = this.GetSectSpeEffectName(level);
@@ -56,8 +71,8 @@ export class BaseAbility_Plus extends BaseAbility {
     /**
      * @both
      * 流派特殊BUFF是否存在
-     * @param level 
-     * @returns 
+     * @param level
+     * @returns
      */
     public IsSectSpeEffectActive(level: ISectLevel) {
         let buffname = this.GetSectSpeEffectName(level);
@@ -67,6 +82,7 @@ export class BaseAbility_Plus extends BaseAbility {
 
     /**自动释放技能计时器 */
     private __autoSpellTimer: ITimerTask;
+
     public GetSoundReplacement(s: string): string {
         let _s = ResHelper.GetSoundReplacement(s, this.GetCaster());
         if (_s == null) {
@@ -78,7 +94,9 @@ export class BaseAbility_Plus extends BaseAbility {
     /**技能ICON */
     public GetAbilityTextureName(): string {
         let abilityname = this.GetAbilityName();
-        if (abilityname == null) { return "" }
+        if (abilityname == null) {
+            return ""
+        }
         let config = KVHelper.KvAbilitys[this.GetAbilityName()];
         let iconpath = "";
         if (config && config.AbilityTextureName) {
@@ -183,11 +201,9 @@ export class BaseAbility_Plus extends BaseAbility {
             DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_UNIT_TARGET)
         if (info[0]) {
             // GFuncEntity.ExecuteOrder(this.GetCaster(), dotaunitorder_t.DOTA_UNIT_ORDER_CAST_NO_TARGET, null, this)
-        }
-        else if (info[0]) {
+        } else if (info[0]) {
             // GFuncEntity.ExecuteOrder(this.GetCaster(), dotaunitorder_t.DOTA_UNIT_ORDER_CAST_POSITION, null, this)
-        }
-        else if (info[2]) {
+        } else if (info[2]) {
             // GFuncEntity.ExecuteOrder(this.GetCaster(), dotaunitorder_t.DOTA_UNIT_ORDER_CAST_TARGET, null, this)
         }
     }
@@ -203,12 +219,18 @@ export class BaseOrbAbility_Plus extends BaseAbility_Plus {
      * 获取法球名称
      */
     public GetProjectileName?(): string;
+
     public OnOrbRecord?(params: ModifierAttackEvent): void;
+
     public OnOrbFire?(params: ModifierAttackEvent): void;
+
     public OnOrbImpact?(params: ModifierAttackEvent): number;
+
     public OnOrbFail?(params: ModifierAttackEvent): void;
+
     public OnOrbRecordDestroy?(params: ModifierAttackEvent): void;
 }
+
 declare global {
     type IBaseAbility_Plus = BaseAbility_Plus;
     type IBaseOrbAbility_Plus = BaseOrbAbility_Plus;

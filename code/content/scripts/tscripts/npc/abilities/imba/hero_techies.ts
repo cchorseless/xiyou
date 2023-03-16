@@ -17,7 +17,7 @@ function PlantProximityMine(caster: IBaseNpc_Plus, ability: IBaseAbility_Plus, s
     }
     let mine = BaseNpc_Plus.CreateUnitByName(mine_name, spawn_point, caster, true);
     GFuncEntity.AddRangeIndicator(mine, caster, undefined, undefined, ability.GetAOERadius(), 150, 22, 22);
-    let playerID = caster.GetPlayerOwnerID();
+    let playerID = caster.GetPlayerID();
     mine.SetControllableByPlayer(playerID, true);
     mine.SetOwner(caster);
     mine.AddNewModifier(caster, ability, "modifier_imba_proximity_mine", {});
@@ -607,7 +607,7 @@ export class imba_techies_stasis_trap extends BaseAbility_Plus {
             });
         } else {
             let trap = BaseNpc_Plus.CreateUnitByName("npc_imba_techies_stasis_trap", target_point, caster, true);
-            let playerID = caster.GetPlayerOwnerID();
+            let playerID = caster.GetPlayerID();
             trap.SetControllableByPlayer(playerID, true);
             trap.SetOwner(caster);
             trap.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_statis_trap", {});
@@ -864,7 +864,7 @@ export class imba_techies_suicide extends BaseAbility_Plus {
         }
         if (caster.HasTalent("special_bonus_imba_techies_8")) {
             pig = BaseNpc_Plus.CreateUnitByName("npc_imba_techies_suicide_piggy", caster.GetAbsOrigin(), caster, false);
-            let playerID = caster.GetPlayerOwnerID();
+            let playerID = caster.GetPlayerID();
             pig.SetControllableByPlayer(playerID, true);
             pig.SetForwardVector(caster.GetForwardVector());
             if (GameServiceConfig.USE_MEME_SOUNDS && RollPercentage(GameServiceConfig.MEME_SOUNDS_CHANCE)) {
@@ -1292,7 +1292,7 @@ export class imba_techies_remote_mines extends BaseAbility_Plus {
         EmitSoundOn(sound, caster);
         EmitSoundOn(sound_cast, caster);
         let mine = BaseNpc_Plus.CreateUnitByName("npc_imba_techies_remote_mines", target_point, caster, false);
-        let playerID = caster.GetPlayerOwnerID();
+        let playerID = caster.GetPlayerID();
         mine.SetControllableByPlayer(playerID, true);
         let mine_ability_handler = mine.FindAbilityByName(mine_ability);
         if (mine_ability_handler) {

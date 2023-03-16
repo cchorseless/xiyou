@@ -933,7 +933,7 @@ export class modifier_imba_trueshot extends BaseModifier_Plus {
             if (this.parent.IsRealUnit()) {
                 // this.parent.CalculateStatBonus(true);
             }
-            // CustomNetTables.SetTableValue("player_table", "precision_aura_drow_agility" + tostring(this.parent.GetPlayerOwnerID()), {
+            // CustomNetTables.SetTableValue("player_table", "precision_aura_drow_agility" + tostring(this.parent.GetPlayerID()), {
             //     precision_aura_drow_agility: drow_agility
             // });
         }

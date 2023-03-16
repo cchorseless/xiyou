@@ -340,7 +340,7 @@ export class imba_enigma_demonic_conversion extends BaseAbility_Plus {
             duration: fDuration
         });
         eidolon.SetOwner(caster);
-        eidolon.SetControllableByPlayer(caster.GetPlayerOwnerID(), true);
+        eidolon.SetControllableByPlayer(caster.GetPlayerID(), true);
         eidolon.SetUnitOnClearGround();
         let attacks_needed = this.GetSpecialValueFor("split_attack_count") + this.GetSpecialValueFor("additional_attacks_split") * (iWave - 1);
         eidolon.AddNewModifier(caster, this, "modifier_imba_enigma_eidolon", {

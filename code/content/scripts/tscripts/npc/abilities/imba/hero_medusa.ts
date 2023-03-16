@@ -27,7 +27,7 @@ export class imba_medusa_split_shot extends BaseAbility_Plus {
     }
     OnAbilityPhaseStart(): boolean {
         if (GameFunc.GetCount(this.GetCasterPlus().FindAllModifiersByName("modifier_imba_medusa_enchanted_aim")) >= this.GetSpecialValueFor("enchanted_aim_stack_limit")) {
-            EventHelper.ErrorMessage("Cannot exceed " + this.GetSpecialValueFor("enchanted_aim_stack_limit") + " stacks of Enchanted Aim.", this.GetCasterPlus().GetPlayerOwnerID(),);
+            EventHelper.ErrorMessage("Cannot exceed " + this.GetSpecialValueFor("enchanted_aim_stack_limit") + " stacks of Enchanted Aim.", this.GetCasterPlus().GetPlayerID(),);
             return false;
         } else {
             return true;

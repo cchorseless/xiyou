@@ -83,7 +83,7 @@ export class item_imba_hand_of_midas extends BaseItem_Plus {
         // bonus_gold = bonus_gold * (custom_gold_bonus / 100);
         bonus_gold = bonus_gold * (100 / 100);
         target.EmitSound(sound_cast);
-        SendOverheadEventMessage(PlayerResource.GetPlayer(caster.GetPlayerOwnerID()), DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_GOLD, target, bonus_gold, undefined);
+        SendOverheadEventMessage(PlayerResource.GetPlayer(caster.GetPlayerID()), DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_GOLD, target, bonus_gold, undefined);
         let midas_particle = ResHelper.CreateParticleEx("particles/items2_fx/hand_of_midas.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, target);
         ParticleManager.SetParticleControlEnt(midas_particle, 1, caster, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", caster.GetAbsOrigin(), false);
         target.SetDeathXP(0);

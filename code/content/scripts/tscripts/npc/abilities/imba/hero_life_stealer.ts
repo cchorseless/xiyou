@@ -666,7 +666,7 @@ export class imba_life_stealer_infest extends BaseAbility_Plus {
             SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, this.GetCasterPlus(), this.GetSpecialValueFor("bonus_health"), undefined);
         }
         if (this.GetCasterPlus().GetTeamNumber() == target.GetTeamNumber() && target.IsConsideredHero()) {
-            // PlayerResource.NewSelection(this.GetCasterPlus().GetPlayerOwnerID(), target);
+            // PlayerResource.NewSelection(this.GetCasterPlus().GetPlayerID(), target);
         }
         let rage_ability = this.GetCasterPlus().findAbliityPlus<imba_life_stealer_rage>("imba_life_stealer_rage") || this.GetCasterPlus().FindAbilityByName("imba_life_stealer_rage_723");
         let feast_ability = this.GetCasterPlus().findAbliityPlus<imba_life_stealer_feast>("imba_life_stealer_feast") || this.GetCasterPlus().FindAbilityByName("imba_life_stealer_feast_723");
@@ -753,7 +753,7 @@ export class modifier_imba_life_stealer_infest extends BaseModifier_Plus {
             return;
         }
         if (!this.null_destroy) {
-            // PlayerResource.NewSelection(this.GetCasterPlus().GetPlayerOwnerID(), this.GetCasterPlus());
+            // PlayerResource.NewSelection(this.GetCasterPlus().GetPlayerID(), this.GetCasterPlus());
             this.GetParentPlus().EmitSound("Hero_LifeStealer.Consume");
             let infest_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_life_stealer/life_stealer_infest_emerge_bloody.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetCasterPlus(), this.GetCasterPlus());
             ParticleManager.ReleaseParticleIndex(infest_particle);
@@ -1061,7 +1061,7 @@ export class imba_life_stealer_control extends BaseAbility_Plus {
                 }
             }
             target.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_life_stealer_control", {});
-            // PlayerResource.NewSelection(this.GetCasterPlus().GetPlayerOwnerID(), target);
+            // PlayerResource.NewSelection(this.GetCasterPlus().GetPlayerID(), target);
             for (let slot = 0; slot <= 2; slot++) {
                 if (!target.GetAbilityByIndex(slot)) {
                     let empty_ability = target.AddAbility("life_stealer_empty_" + (slot + 1));
@@ -1104,7 +1104,7 @@ export class modifier_imba_life_stealer_control extends BaseModifier_Plus {
         }
         this.GetParentPlus().SetOwner(this.GetCasterPlus());
         this.GetParentPlus().SetTeam(this.GetCasterPlus().GetTeam());
-        this.GetParentPlus().SetControllableByPlayer(this.GetCasterPlus().GetPlayerOwnerID(), false);
+        this.GetParentPlus().SetControllableByPlayer(this.GetCasterPlus().GetPlayerID(), false);
         this.acquisition_range = this.GetParentPlus().GetAcquisitionRange();
         this.acquisition_null_orders = {
             [dotaunitorder_t.DOTA_UNIT_ORDER_MOVE_TO_POSITION]: true,
@@ -1249,7 +1249,7 @@ export class imba_life_stealer_assimilate extends BaseAbility_Plus {
             this.consume_radius = this.GetSpecialValueFor("consume_radius");
         }
         for (const [_, target] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCursorTarget().GetAbsOrigin(), undefined, this.consume_radius, this.GetAbilityTargetTeam(), this.GetAbilityTargetType(), this.GetAbilityTargetFlags(), FindOrder.FIND_ANY_ORDER, false))) {
-            if (target != this.GetCasterPlus() && !PlayerResource.IsDisableHelpSetForPlayerID(target.GetPlayerOwnerID(), this.GetCasterPlus().GetPlayerOwnerID())) {
+            if (target != this.GetCasterPlus() && !PlayerResource.IsDisableHelpSetForPlayerID(target.GetPlayerID(), this.GetCasterPlus().GetPlayerID())) {
                 let infest_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_life_stealer/life_stealer_infest_cast.vpcf", ParticleAttachment_t.PATTACH_POINT, this.GetCasterPlus());
                 ParticleManager.SetParticleControl(infest_particle, 0, target.GetAbsOrigin());
                 ParticleManager.SetParticleControlEnt(infest_particle, 1, this.GetCasterPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", this.GetCasterPlus().GetAbsOrigin(), true);

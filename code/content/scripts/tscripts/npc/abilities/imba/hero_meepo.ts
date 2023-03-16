@@ -242,7 +242,7 @@ export class modifier_meepo_divided_we_stand_lua extends BaseModifier_Plus {
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
     CC_OnDeath(keys: ModifierInstanceEvent): void {
-        if (keys.unit.GetPlayerOwnerID() == this.GetParentPlus().GetPlayerOwnerID() && keys.unit.GetUnitName() == this.GetParentPlus().GetUnitName() && !keys.unit.IsIllusion()) {
+        if (keys.unit.GetPlayerID() == this.GetParentPlus().GetPlayerID() && keys.unit.GetUnitName() == this.GetParentPlus().GetUnitName() && !keys.unit.IsIllusion()) {
             let cloned = this.GetParentPlus().GetCloneSource() as IBaseNpc_Plus;
             if (this.GetParentPlus().IsAlive()) {
                 this.GetParentPlus().TrueKilled(this.GetParentPlus(), this.GetAbilityPlus());

@@ -649,7 +649,7 @@ export class imba_vengefulspirit_command_aura extends BaseAbility_Plus {
                 illusion.SetHealth(illusion.GetMaxHealth());
                 illusion.AddNewModifier(this.GetCasterPlus(), this, "modifier_vengefulspirit_hybrid_special", {});
                 FindClearSpaceForUnit(illusion, this.GetCasterPlus().GetAbsOrigin() + Vector(RandomInt(0, 1), RandomInt(0, 1), 0) * 108 as Vector, true);
-                // PlayerResource.NewSelection(this.GetCasterPlus().GetPlayerOwnerID(), super_illusions);
+                // PlayerResource.NewSelection(this.GetCasterPlus().GetPlayerID(), super_illusions);
             }
         }
     }

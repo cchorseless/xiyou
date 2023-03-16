@@ -38,6 +38,12 @@ export class RoundSystemComponent extends ET.SingletonComponent {
                     player.RoundManagerComp().debugPauseBoardRound(ispause)
                 });
         }));
+        EventHelper.addProtocolEvent(GameProtocol.Protocol.NextRoundStage, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
+            GPlayerEntityRoot.GetAllInstance()
+                .forEach((player) => {
+                    player.RoundManagerComp().debugNextBoardRound()
+                });
+        }));
     }
 
 

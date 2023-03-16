@@ -16,7 +16,7 @@ export class courier_base extends BaseNpc_Hero_Plus {
         if (!this.IsValidHero()) {
             return;
         }
-        LogHelper.print("ADD PLAYER => PLAYERID :" + this.GetPlayerOwnerID());
+        LogHelper.print("ADD PLAYER => PLAYERID :" + this.GetPlayerID());
         // 设置技能点数
         this.SetAbilityPoints(0);
         let len = this.GetAbilityCount();

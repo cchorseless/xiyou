@@ -153,7 +153,7 @@ export class BaseNpc_Plus extends BaseNpc {
      * @returns 
      */
     GetPlayerRoot?() {
-        return GGameScene.GetPlayer(this.GetPlayerOwnerID());
+        return GGameScene.GetPlayer(this.GetPlayerID());
     }
 
     TrueKilled?(caster: IBaseNpc_Plus, ability: CDOTABaseAbility) {
@@ -218,7 +218,7 @@ export class BaseNpc_Plus extends BaseNpc {
         for (let i = 0; i < nNumIllusions; i++) {
             let illusion = BaseNpc_Plus.CreateUnitByName(copyunit.GetUnitName(), vLocation, this, bFindClearSpace) as IBaseNpc_Plus;
             illusion.MakeIllusion()
-            illusion.SetControllableByPlayer(this.GetPlayerOwnerID(), !bFindClearSpace)
+            illusion.SetControllableByPlayer(this.GetPlayerID(), !bFindClearSpace)
             illusion.SetForwardVector(copyunit.GetForwardVector())
             illusion.SetBaseDamageMin(copyunit.GetBaseDamageMin())
             illusion.SetBaseDamageMax(copyunit.GetBaseDamageMax())

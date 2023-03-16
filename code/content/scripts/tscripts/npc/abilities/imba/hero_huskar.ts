@@ -779,7 +779,7 @@ export class modifier_imba_huskar_life_break_charge extends BaseModifier_Plus {
     }
     BeCreated(p_0: any,): void {
         if (IsServer()) {
-            // if (BATTLEPASS_HUSKAR && Battlepass.GetRewardUnlocked(this.GetParentPlus().GetPlayerOwnerID()) >= BATTLEPASS_HUSKAR["huskar_immortal"]) {
+            // if (BATTLEPASS_HUSKAR && Battlepass.GetRewardUnlocked(this.GetParentPlus().GetPlayerID()) >= BATTLEPASS_HUSKAR["huskar_immortal"]) {
             this.SetStackCount(1);
             this.pfx = ResHelper.CreateParticleEx("particles/units/heroes/hero_huskar/huskar_life_break_cast.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetCasterPlus(), this.GetCasterPlus());
             // }

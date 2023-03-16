@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 import { ResHelper } from "../../../helper/ResHelper";
@@ -200,16 +201,9 @@ export class imba_antimage_blink extends BaseAbility_Plus {
             return true;
         }
     }
-    GetCooldown(nLevel: number): number {
-        if (this.GetCasterPlus().HasTalent("special_bonus_imba_antimage_1")) {
-            return 0;
-        }
-        return super.GetCooldown(nLevel) - this.GetCasterPlus().GetTalentValue("special_bonus_imba_antimage_10");
-    }
+
     GetCastRange(location: Vector, target: CDOTA_BaseNPC | undefined): number {
-        if (IsClient()) {
-            return this.GetTalentSpecialValueFor("blink_range") + this.GetCasterPlus().GetCastRangeBonus();
-        }
+        return super.GetCastRange(location, target) + this.GetCasterPlus().GetCastRangeBonus();
     }
     OnSpellStart(): void {
         if (IsServer()) {
@@ -218,7 +212,7 @@ export class imba_antimage_blink extends BaseAbility_Plus {
             let target_point = this.GetCursorPosition();
             let modifier_spell_immunity = "modifier_imba_antimage_blink_spell_immunity";
             let distance = target_point - caster_position as Vector;
-            this.blink_range = this.GetTalentSpecialValueFor("blink_range");
+            this.blink_range = this.GetSpecialValueFor("blink_range");
             this.percent_mana_burn = this.GetSpecialValueFor("percent_mana_burn");
             this.percent_damage = this.GetSpecialValueFor("percent_damage");
             this.radius = this.GetSpecialValueFor("radius");
@@ -255,11 +249,11 @@ export class imba_antimage_blink extends BaseAbility_Plus {
                     //  英雄选取
                     // this.AddTimer(FrameTime(),
                     //     () => {
-                    //     PlayerResource.RemoveFromSelection(this.GetCasterPlus().GetPlayerOwnerID(), illusion);
+                    //     PlayerResource.RemoveFromSelection(this.GetCasterPlus().GetPlayerID(), illusion);
                     // });
                 }
             }
-            this.AddTimer(0.01, () => {
+            this.AddTimer(0, () => {
                 caster.SetAbsOrigin(target_point);
                 FindClearSpaceForUnit(caster, target_point, true);
                 let blink_end_pfx = ResHelper.CreateParticleEx("particles/units/heroes/hero_antimage/antimage_blink_end.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, caster);
@@ -307,6 +301,25 @@ export class imba_antimage_blink extends BaseAbility_Plus {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_antimage_blink_range") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_antimage_blink_range")) {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_antimage_blink_range"), "modifier_special_bonus_imba_antimage_blink_range", {});
         }
+    }
+    GetCooldown(nLevel: number): number {
+        if (this.GetCasterPlus().HasTalent("special_bonus_imba_antimage_1")) {
+            return 0;
+        }
+        return 20 - this.GetCasterPlus().GetTalentValue("special_bonus_imba_antimage_10");
+    }
+
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this, null, (enemy, index, count) => {
+            if (enemy.IsRangedAttacker() || enemy.GetHealthLosePect() > 80) {
+                return true
+            }
+            return false;
+        }, FindOrder.FIND_FARTHEST);
     }
 }
 @registerModifier()
@@ -486,7 +499,7 @@ export class imba_antimage_spell_shield extends BaseAbility_Plus {
         return "antimage_spell_shield";
     }
     GetBehavior(): DOTA_ABILITY_BEHAVIOR | Uint64 {
-        if (this.GetCasterPlus().HasTalent("special_bonus_imba_antimage_2")) {
+        if (this.IsSpeTalentActive()) {
             return DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_IMMEDIATE + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_NO_TARGET + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_IGNORE_PSEUDO_QUEUE;
         }
         return DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_IMMEDIATE + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_NO_TARGET + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_AUTOCAST;
@@ -509,7 +522,7 @@ export class imba_antimage_spell_shield extends BaseAbility_Plus {
             caster.StartGesture(GameActivity_t.ACT_DOTA_CAST_ABILITY_3);
             if (this.GetCasterPlus().IsRealUnit() && this.GetCasterPlus().HasScepter()) {
                 for (const [_, unit] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_ANY_ORDER, false))) {
-                    if (unit.GetPlayerOwnerID() == this.GetCasterPlus().GetPlayerOwnerID() && unit.IsIllusion() && unit.HasAbility("imba_antimage_spell_shield") && unit.HasModifier("modifier_imba_antimage_blink_command_restricted")) {
+                    if (unit.GetPlayerID() == this.GetCasterPlus().GetPlayerID() && unit.IsIllusion() && unit.HasAbility("imba_antimage_spell_shield") && unit.HasModifier("modifier_imba_antimage_blink_command_restricted")) {
                         unit.findAbliityPlus<imba_antimage_spell_shield>("imba_antimage_spell_shield").OnSpellStart();
                     }
                 }
@@ -526,6 +539,27 @@ export class imba_antimage_spell_shield extends BaseAbility_Plus {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_antimage_11") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_antimage_11")) {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_antimage_11"), "modifier_special_bonus_imba_antimage_11", {});
         }
+    }
+
+    IsSpeTalentActive() {
+        return this.GetCasterPlus().HasTalent("special_bonus_imba_antimage_2")
+    }
+    GetCooldown(nLevel: number): number {
+        if (this.IsSpeTalentActive()) {
+            return 20;
+        }
+        return 0
+    }
+
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        if (this.IsSpeTalentActive()) {
+            return AI_ability.NO_TARGET_if_enemy(this);
+        }
+        return false;
     }
 }
 @registerModifier()
@@ -626,11 +660,7 @@ export class imba_antimage_mana_void extends BaseAbility_Plus {
             return true;
         }
     }
-    GetCooldown(nLevel: number): number {
-        let cooldown = super.GetCooldown(nLevel);
-        let caster = this.GetCasterPlus();
-        return cooldown;
-    }
+
     GetAOERadius(): number {
         return this.GetSpecialValueFor("mana_void_aoe_radius");
     }
@@ -711,6 +741,19 @@ export class imba_antimage_mana_void extends BaseAbility_Plus {
                 target.EmitSound("Hero_Antimage.ManaVoid");
             });
         }
+    }
+    GetCooldown(nLevel: number): number {
+        return 20;
+    }
+
+    GetManaCost(level: number): number {
+        return 100;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this, null, (enemy) => {
+            return enemy.GetMana() / enemy.GetMaxMana() < 0.2;
+        });
     }
 }
 @registerModifier()

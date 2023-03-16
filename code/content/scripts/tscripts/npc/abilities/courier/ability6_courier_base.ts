@@ -82,7 +82,7 @@ export class modifier_biaoji extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, false, -1, false, false)
         }
         else {
-            MiniMapHelper.updatePlayerOnMiniForPlayer(this.GetParentPlus().GetPlayerOwnerID(), this.GetCasterPlus().GetPlayerOwnerID())
+            MiniMapHelper.updatePlayerOnMiniForPlayer(this.GetParentPlus().GetPlayerID(), this.GetCasterPlus().GetPlayerID())
         }
     }
 
@@ -94,7 +94,7 @@ export class modifier_biaoji extends BaseModifier_Plus {
 
     BeDestroy() {
 
-        MiniMapHelper.noshowPlayerOnMiniForPlayer(this.GetParentPlus().GetPlayerOwnerID(), this.GetCasterPlus().GetPlayerOwnerID())
+        MiniMapHelper.noshowPlayerOnMiniForPlayer(this.GetParentPlus().GetPlayerID(), this.GetCasterPlus().GetPlayerID())
     }
 }
 

@@ -872,7 +872,7 @@ export class imba_tiny_toss extends BaseAbility_Plus {
         }
         let tossVictims = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, this.GetSpecialValueFor("grab_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ANCIENTS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_CHECK_DISABLE_HELP, 1, false);
         for (const [_, victim] of GameFunc.iPair(tossVictims)) {
-            if ((PlayerResource.IsDisableHelpSetForPlayerID(victim.GetPlayerOwnerID(), this.GetCasterPlus().GetPlayerOwnerID()))) {
+            if ((PlayerResource.IsDisableHelpSetForPlayerID(victim.GetPlayerID(), this.GetCasterPlus().GetPlayerID()))) {
                 tossVictims.splice(_, 1);
             }
         }

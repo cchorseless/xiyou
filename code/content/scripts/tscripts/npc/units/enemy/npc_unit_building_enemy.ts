@@ -5,7 +5,6 @@ import { registerUnit } from "../../entityPlus/Base_Plus";
 export class npc_unit_building_enemy extends BaseNpc_Plus {
     FindEnemyToAttack?(): IBaseNpc_Plus;
     onSpawned(event: NpcSpawnedEvent): void {
-        GLogHelper.print(this.GetUnitName(), 11111);
     }
 }
 

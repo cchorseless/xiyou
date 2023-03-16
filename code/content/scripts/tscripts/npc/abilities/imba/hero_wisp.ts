@@ -44,8 +44,8 @@ export class imba_wisp_tether extends BaseAbility_Plus {
     CastFilterResultTarget(target: CDOTA_BaseNPC): UnitFilterResult {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
-            let casterID = caster.GetPlayerOwnerID();
-            let targetID = target.GetPlayerOwnerID();
+            let casterID = caster.GetPlayerID();
+            let targetID = target.GetPlayerID();
             if (target == caster) {
                 return UnitFilterResult.UF_FAIL_CUSTOM;
             }

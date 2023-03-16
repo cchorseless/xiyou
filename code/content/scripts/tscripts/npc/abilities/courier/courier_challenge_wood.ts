@@ -10,7 +10,7 @@ export class courier_challenge_wood extends ActiveRootAbility implements IAbilit
     CastFilterResult(): UnitFilterResult {
         let caster = this.GetCasterPlus();
         if (IsServer()) {
-            let playerid = caster.GetPlayerOwnerID()
+            let playerid = caster.GetPlayerID()
             let playerroot = GPlayerEntityRoot.GetOneInstance(playerid);
             let round = playerroot.RoundManagerComp().getCurrentBoardRound();
             if (round.IsBattle()) {
@@ -39,7 +39,7 @@ export class courier_challenge_wood extends ActiveRootAbility implements IAbilit
     OnSpellStart() {
         let caster = this.GetCasterPlus();
         if (IsServer()) {
-            let playerid = caster.GetPlayerOwnerID()
+            let playerid = caster.GetPlayerID()
             let root = GPlayerEntityRoot.GetOneInstance(playerid);
             let round = root.RoundManagerComp().getCurrentBoardRound();
             if (round.IsBattle()) {

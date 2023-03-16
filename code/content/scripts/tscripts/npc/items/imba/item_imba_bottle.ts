@@ -36,7 +36,7 @@ export class item_imba_bottle extends BaseItem_Plus {
         //     CustomGameEventManager.Send_ServerToTeam(this.GetCasterPlus().GetTeam(), "create_custom_toast", {
         //         type: "generic",
         //         text: "#custom_toast_BottledRune",
-        //         player: this.GetCasterPlus().GetPlayerOwnerID(),
+        //         player: this.GetCasterPlus().GetPlayerID(),
         //         runeType: type
         //     });
         // }

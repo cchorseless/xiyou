@@ -631,8 +631,8 @@ export class modifier_imba_shadow_shaman_shackles extends BaseModifier_Plus {
                 ability: this.GetAbilityPlus()
             }
             ApplyDamage(damageTable);
-            if (this.GetParentPlus().IsRealUnit() && this.GetParentPlus().GetPlayerOwnerID() /**&& this.GetParentPlus().ModifyGold && this.GetCasterPlus().ModifyGold*/) {
-                let actual_gold_to_steal = math.min(this.swindle_gold_per_tick, PlayerResource.GetUnreliableGold(this.GetParentPlus().GetPlayerOwnerID()));
+            if (this.GetParentPlus().IsRealUnit() && this.GetParentPlus().GetPlayerID() /**&& this.GetParentPlus().ModifyGold && this.GetCasterPlus().ModifyGold*/) {
+                let actual_gold_to_steal = math.min(this.swindle_gold_per_tick, PlayerResource.GetUnreliableGold(this.GetParentPlus().GetPlayerID()));
                 // this.GetParentPlus().ModifyGold(-actual_gold_to_steal, false, 0);
                 // this.GetCasterPlus().ModifyGold(actual_gold_to_steal, false, 0);
                 SendOverheadEventMessage(this.GetCasterPlus().GetPlayerOwner(), DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_XP, this.GetCasterPlus(), actual_gold_to_steal, undefined);
@@ -776,11 +776,8 @@ export class imba_shadow_shaman_mass_serpent_ward extends BaseAbility_Plus {
         ward.AddNewModifier(this.GetCasterPlus(), this, "modifier_kill", {
             duration: duration
         });
-        if (this.GetCasterPlus().GetPlayerOwnerID) {
-            ward.SetControllableByPlayer(this.GetCasterPlus().GetPlayerOwnerID(), true);
-        } else if (this.GetCasterPlus().GetOwnerPlus() && this.GetCasterPlus().GetOwnerPlus().GetPlayerOwnerID) {
-            ward.SetControllableByPlayer(this.GetCasterPlus().GetOwnerPlus().GetPlayerOwnerID(), true);
-        }
+        ward.SetControllableByPlayer(this.GetCasterPlus().GetPlayerID(), true);
+
         ward.SetBaseMaxHealth(new_hp);
         ward.SetMaxHealth(new_hp);
         ward.SetHealth(new_hp);

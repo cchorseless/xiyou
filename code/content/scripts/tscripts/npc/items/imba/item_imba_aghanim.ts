@@ -17,7 +17,7 @@
 //         return undefined;
 //     }
 //     if (caster.HasModifier("modifier_arc_warden_tempest_double")) {
-//         DisplayError(caster.GetPlayerOwnerID(), "Tempest Doubles cannot create a divergent synth modifier.");
+//         DisplayError(caster.GetPlayerID(), "Tempest Doubles cannot create a divergent synth modifier.");
 //         return undefined;
 //     }
 //     caster.AddNewModifier(caster, undefined, modifier_synth, {});

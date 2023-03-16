@@ -253,11 +253,6 @@ declare namespace building_unit_tower {
 "8" :OBJ_5_1 ,
 "9" :OBJ_5_1 ,
 "10" :OBJ_5_1 ,
-"11" :OBJ_5_1 ,
-"12" :OBJ_5_1 ,
-"13" :OBJ_5_1 ,
-"14" :OBJ_5_1 ,
-"15" :OBJ_5_1 ,
 [k:string] : OBJ_5_1 }
  interface OBJ_5_1 {
 "ItemDef" :string ,

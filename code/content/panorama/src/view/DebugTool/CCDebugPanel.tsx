@@ -61,7 +61,7 @@ export class CCDebugPanel extends CCPanel<ICCDebugPanel> {
                         <CCDebugTool_DemoToggle eventName={GameProtocol.Protocol.req_DebugChangeServerPing} localtext="暂停Ping" selected={stop_ping} />
                         {/* <CCDebugTool_DemoToggle eventName="LockCameraPauseButtonPressed" localtext="锁定镜头" selected={lock_camera} /> */}
                         <CCDebugTool_DemoToggle eventName={GameProtocol.Protocol.PauseRoundStage} localtext="暂停阶段" selected={is_pause} />
-                        <CCDebugTool_DemoSelectionButton eventName="SelectStateButtonPressed" localtext="选择阶段" />
+                        <CCDebugTool_DemoButton eventName={GameProtocol.Protocol.NextRoundStage} localtext="下一阶段" />
                         <CCDebugTool_DemoButton eventName="ReturnMenuButtonPressed" btncolor="RedButton" localtext="回到菜单" />
                         <CCDebugTool_DemoSelectionButton eventName="TeleportButtonPressed" localtext="跳转到特定区域" />
                         <CCDebugTool_DemoButton eventName="StandbyButtonPressed" localtext="备用按钮" />

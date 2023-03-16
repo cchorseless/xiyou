@@ -1389,7 +1389,7 @@ export class modifier_imba_reqiuem_debuff extends BaseModifier_Plus {
         if (IsServer()) {
             this.scepter = this.caster.HasScepter();
             if (this.scepter && this.parent.IsRealUnit()) {
-                let requiem_screen_particle = ParticleManager.CreateParticleForPlayer(this.particle_black_screen, ParticleAttachment_t.PATTACH_EYES_FOLLOW, this.parent, PlayerResource.GetPlayer(this.parent.GetPlayerOwnerID()));
+                let requiem_screen_particle = ParticleManager.CreateParticleForPlayer(this.particle_black_screen, ParticleAttachment_t.PATTACH_EYES_FOLLOW, this.parent, PlayerResource.GetPlayer(this.parent.GetPlayerID()));
                 this.AddParticle(requiem_screen_particle, false, false, -1, false, false);
             }
         }

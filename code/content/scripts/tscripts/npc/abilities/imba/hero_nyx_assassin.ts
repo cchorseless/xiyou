@@ -875,7 +875,7 @@ export class modifier_imba_spiked_carapace extends BaseModifier_Plus {
             this.modifier_stun = "modifier_imba_spiked_carapace_stun";
             this.modifier_vendetta = "modifier_imba_vendetta_charge";
             this.modifier_burrowed = "modifier_nyx_assassin_burrow";
-            // if (Battlepass && BATTLEPASS_NYX_ASSASSIN && Battlepass.GetRewardUnlocked(this.caster.GetPlayerOwnerID()) >= BATTLEPASS_NYX_ASSASSIN["nyx_assassin_immortal"]) {
+            // if (Battlepass && BATTLEPASS_NYX_ASSASSIN && Battlepass.GetRewardUnlocked(this.caster.GetPlayerID()) >= BATTLEPASS_NYX_ASSASSIN["nyx_assassin_immortal"]) {
             this.SetStackCount(1);
             // }
             this.stun_duration = this.ability.GetSpecialValueFor("stun_duration");

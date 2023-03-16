@@ -250,8 +250,8 @@ export class imba_phantom_assassin_phantom_strike extends BaseAbility_Plus {
     CastFilterResultTarget(target: CDOTA_BaseNPC): UnitFilterResult {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
-            let casterID = caster.GetPlayerOwnerID();
-            let targetID = target.GetPlayerOwnerID();
+            let casterID = caster.GetPlayerID();
+            let targetID = target.GetPlayerID();
             if (target == caster) {
                 return UnitFilterResult.UF_FAIL_CUSTOM;
             }
@@ -980,27 +980,27 @@ export class modifier_phantom_assassin_arcana extends BaseModifier_Plus {
                 }).SetStackCount(params.target.entindex());
             });
             gravestone.TempData().epitaph_number = RandomInt(1, 13);
-            gravestone.TempData().victim_id = (params.target as IBaseNpc_Plus).GetPlayerOwnerID();
+            gravestone.TempData().victim_id = (params.target as IBaseNpc_Plus).GetPlayerID();
             for (let i = 0; i <= PlayerResource.GetPlayerCount() - 1; i++) {
                 gravestone.SetControllableByPlayer(i as PlayerID, false);
             }
             if (this.GetStackCount() == 400) {
                 // Wearable._WearProp(this.GetParentPlus(), "7247", "weapon", 1);
-                // Notifications.Bottom(this.GetParentPlus().GetPlayerOwnerID(), {
+                // Notifications.Bottom(this.GetParentPlus().GetPlayerID(), {
                 //     image: "file://{images}/econ/items/phantom_assassin/manifold_paradox/arcana_pa_style1.png",
                 //     duration: 5.0
                 // });
-                // Notifications.Bottom(this.GetParentPlus().GetPlayerOwnerID(), {
+                // Notifications.Bottom(this.GetParentPlus().GetPlayerID(), {
                 //     text: "Style 1 unlocked!",
                 //     duration: 10.0
                 // });
             } else if (this.GetStackCount() == 1000) {
                 // Wearable._WearProp(this.GetParentPlus(), "7247", "weapon", 2);
-                // Notifications.Bottom(this.GetParentPlus().GetPlayerOwnerID(), {
+                // Notifications.Bottom(this.GetParentPlus().GetPlayerID(), {
                 //     image: "file://{images}/econ/items/phantom_assassin/manifold_paradox/arcana_pa_style2.png",
                 //     duration: 5.0
                 // });
-                // Notifications.Bottom(this.GetParentPlus().GetPlayerOwnerID(), {
+                // Notifications.Bottom(this.GetParentPlus().GetPlayerID(), {
                 //     text: "Style 2 unlocked!",
                 //     duration: 10.0
                 // });

@@ -28,12 +28,12 @@ export class item_imba_necronomicon extends BaseItem_Plus {
         let melee_summon = BaseNpc_Plus.CreateUnitByName(melee_summon_name, melee_loc, this.GetCasterPlus(), true);
         let ranged_summon = BaseNpc_Plus.CreateUnitByName(ranged_summon_name, ranged_loc, this.GetCasterPlus(), true);
         print("and this");
-        melee_summon.SetControllableByPlayer(this.GetCasterPlus().GetPlayerOwnerID(), true);
+        melee_summon.SetControllableByPlayer(this.GetCasterPlus().GetPlayerID(), true);
         melee_summon.AddNewModifier(this.GetCasterPlus(), this, "modifier_kill", {
             duration: summon_duration
         });
         melee_summon.AddNewModifier(this.GetCasterPlus(), this, "modifier_item_imba_necronomicon_summon", {});
-        ranged_summon.SetControllableByPlayer(this.GetCasterPlus().GetPlayerOwnerID(), true);
+        ranged_summon.SetControllableByPlayer(this.GetCasterPlus().GetPlayerID(), true);
         ranged_summon.AddNewModifier(this.GetCasterPlus(), this, "modifier_kill", {
             duration: summon_duration
         });

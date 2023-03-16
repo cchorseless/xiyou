@@ -27,7 +27,16 @@ function UpgradeBeastsSummons(caster: IBaseNpc_Plus, ability: IBaseAbility_Plus)
         boar_ability_handler.SetLevel(leveled_ability_level);
     }
 }
-
+@registerAbility()
+export class imba_beastmaster_wild_axes extends BaseAbility_Plus { }
+@registerAbility()
+export class imba_beastmaster_call_of_the_wild extends BaseAbility_Plus { }
+@registerAbility()
+export class imba_beastmaster_inner_beast extends BaseAbility_Plus { }
+@registerAbility()
+export class imba_beastmaster_primal_roar extends BaseAbility_Plus { }
+@registerAbility()
+export class imba_beastmaster_hawk_dive extends BaseAbility_Plus { }
 @registerAbility()
 export class imba_beastmaster_summon_hawk extends BaseAbility_Plus {
     public hawk: any;
@@ -52,7 +61,7 @@ export class imba_beastmaster_summon_hawk extends BaseAbility_Plus {
             this.hawk.AddNewModifier(caster, this, "modifier_kill", {
                 duration: hawk_duration
             });
-            this.hawk.SetControllableByPlayer(caster.GetPlayerOwnerID(), true);
+            this.hawk.SetControllableByPlayer(caster.GetPlayerID(), true);
         }
         let hawk_speed = this.GetSpecialValueFor("hawk_speed_tooltip");
         this.hawk.SetBaseMoveSpeed(hawk_speed);
@@ -217,7 +226,7 @@ export class imba_beastmaster_summon_boar extends BaseAbility_Plus {
                 boar.AddNewModifier(caster, this, "modifier_kill", {
                     duration: boar_duration
                 });
-                boar.SetControllableByPlayer(caster.GetPlayerOwnerID(), true);
+                boar.SetControllableByPlayer(caster.GetPlayerID(), true);
             }
         }
     }

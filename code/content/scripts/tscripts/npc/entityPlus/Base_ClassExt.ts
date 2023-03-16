@@ -6,17 +6,16 @@ import { KVHelper } from "../../helper/KVHelper";
 import { PropertyCalculate } from "../propertystat/PropertyCalculate";
 
 
-
-
 //----------------------------------------------------------------------------------------------------
 function IsValid(h: CEntityInstance | CDOTA_Buff | undefined): h is CEntityInstance | CDOTA_Buff {
     return h != null && !h.IsNull();
 }
+
 /**
  * 判断是否为有效数字，如不是则缺省值，缺省值默认为0
- * @param i 
- * @param defaultVar 
- * @returns 
+ * @param i
+ * @param defaultVar
+ * @returns
  */
 function finiteNumber(i: number, defaultVar = 0) {
     return isFinite(i) ? i : defaultVar;
@@ -31,10 +30,12 @@ function finiteNumber(i: number, defaultVar = 0) {
 function toFiniteNumber(i: any, defaultVar = 0) {
     return finiteNumber(Number(i), defaultVar);
 }
+
 /**
  * 记录表系统，可以记录一个表并且返回索引，用于做一些需要记录数据的技能
  */
 const tRecordTable = new Map<number, any>();
+
 /**
  * 创建一个记录表，返回记录表及其索引。可以传入一个表来作为记录表使用
  * @param t 可不填，缺省值为一个空表
@@ -48,6 +49,7 @@ function CreateRecordTable<T extends object | Array<T>>(t: T = {} as T): LuaMult
     tRecordTable.set(index, t);
     return $multi(tRecordTable.get(index), index);
 }
+
 /**
  * 删除一个记录表，抹去该表的索引信息。可以传入索引或表本身
  * @param t_or_index 表或者索引
@@ -66,6 +68,7 @@ function RemoveRecordTable<T extends object | Array<T>>(t_or_index: T | number) 
     }
     return false;
 }
+
 /**
  * 获取记录表的索引
  * @param t 记录表
@@ -79,6 +82,7 @@ function GetRecordTableIndex<T extends object | Array<T>>(t: T) {
     }
     return;
 }
+
 /**
  * 通过index获取记录表
  * @param index 索引
@@ -87,6 +91,7 @@ function GetRecordTableIndex<T extends object | Array<T>>(t: T) {
 function GetRecordTableByIndex<T extends object | Array<T>>(index: number): T | undefined {
     return tRecordTable.get(index);
 }
+
 /**
  * 获取所有记录表数量
  * @returns 返回记录表数量
@@ -190,7 +195,7 @@ function RecordTableCount() {
  * @param fStartHeight 开始高度
  * @param fMaxHeight 最大高度
  * @param fEndHeight 最终高度
- * @returns 
+ * @returns
  */
 function KnockBackFunction(fPercent: number, fStartHeight: number, fMaxHeight: number, fEndHeight: number) {
     fPercent = GFuncMath.Clamp(fPercent, 0, 1);
@@ -237,24 +242,29 @@ declare global {
 
         /**
          * @both
-         * @param fInterval 
-         * @param fCallback 
+         * @param fInterval
+         * @param fCallback
          * @param _isIgnorePauseTime true 忽视游戏暂停.default false
          */
         AddTimer(fInterval: number, fCallback: () => number | void, _isIgnorePauseTime?: boolean): void;
+
         /**
          * @both
-         * @returns 
+         * @returns
          */
         GetCasterPlus<T extends IBaseNpc_Plus>(): T;
+
         /**
          * @Server
-         * @returns 
+         * @returns
          */
         GetOwnerPlus<T extends IBaseNpc_Plus>(): T;
+
         GetLevelSpecialValueFor_Engine: typeof CDOTABaseAbility.GetLevelSpecialValueFor;
         GetSpecialValueFor_Engine: typeof CDOTABaseAbility.GetSpecialValueFor;
+
         GetSpecialValueFor(sKey: string, default_V?: number): number;
+
         /**
          * @Both
          * 获取技能和天赋值
@@ -263,6 +273,7 @@ declare global {
          * @returns 值
          */
         GetTalentSpecialValueFor(sKey: string, default_V?: number): number;
+
         /**
          * 获取技能等级键值
          * @param sKey 键名
@@ -281,15 +292,17 @@ declare global {
          * @param bAbilityUpgrade 是否为计算技能升级，不填默认为true
          * @returns 值
          */
+
         // GetLevelSpecialAddedValue(sKey: string, iLevel: number, sAddedKey: string, bAbilityUpgrade?: boolean): string | number | undefined;
 
         /**
          * @Both
          * 设置技能默认值
-         * @param sKey 
-         * @param v 
+         * @param sKey
+         * @param v
          */
         SetDefaultSpecialValue(sKey: string, v: any): void;
+
         // /**
         //  * 获取技能当前等级键值
         //  * @param sKey 键名
@@ -307,16 +320,18 @@ declare global {
          */
         IsAbilityReady(): boolean;
 
-        /**尝试智能施法,AI会调用 
+        /**尝试智能施法,AI会调用
          * @serverOnly
-        */
+         */
         AutoSpellSelf(): boolean;
+
         /**
          * 是否拥有天赋
          * @param sTalent 天赋名
          * @returns 值
          */
         HasTalent(sTalent: string): IBaseAbility_Plus | null;
+
         /**
          * @Both
          * 获取天赋数值
@@ -324,12 +339,14 @@ declare global {
          * @returns 值
          */
         GetTalentValue(sTalent: string, sKey?: string): number;
+
         /**
          * 获取自定义技能类型
          * @returns 值
          */
         // GetCustomAbilityType(): CUSTOM_ABILITY_TYPE;
         SpeakTrigger(): number;
+
         /** 获取伤害类型 */
         // GetDamageType(): CC_DAMAGE_TYPES;
     }
@@ -374,24 +391,40 @@ CBaseAbility.GetSpecialValueFor = function (s: string, default_V = 0): number {
     let r = this.GetSpecialValueFor_Engine(s);
     if (r && r != 0) {
         return r
-    }
-    else if (this.__DefaultSpecialValue__ && this.__DefaultSpecialValue__[s] && this.__DefaultSpecialValue__[s] != null) {
+    } else if (this.__DefaultSpecialValue__ && this.__DefaultSpecialValue__[s] && this.__DefaultSpecialValue__[s] != null) {
         let data = this.__DefaultSpecialValue__[s];
         if (type(data) == 'number') {
             return data as number
-        }
-        else {
+        } else {
             let level = this.GetLevel();
             return (data as number[])[level - 1] as number
         }
     }
     let data = KVHelper.KvAbilitys[this.GetAbilityName()] || KVHelper.KvItems[this.GetAbilityName()];
-    if (data && data[s] != null && data[s] != "") {
-        let dataV = data[s] as string;
-        if (type(dataV) == 'string') {
-            let datalist = dataV.split(' ').map((v) => { return GToNumber(v) });
-            let index = math.min(this.GetLevel(), datalist.length);
-            return (datalist)[index - 1] as number
+    if (data) {
+        let dataV = data[s] as any;
+        if (dataV == null) {
+            let spedata = data.AbilitySpecial as { [k: string]: any };
+            if (spedata != null) {
+                for (let k in spedata) {
+                    let v = spedata[k];
+                    if (v[s]) {
+                        dataV = v[s];
+                        break;
+                    }
+                }
+            }
+        }
+        if (dataV) {
+            if (type(dataV) == 'number') {
+                return dataV as number;
+            } else if (type(dataV) == 'string') {
+                let datalist = (dataV as string).split(' ').map((v) => {
+                    return GToNumber(v)
+                });
+                let index = math.min(this.GetLevel(), datalist.length);
+                return datalist[index - 1] as number
+            }
         }
     }
     GLogHelper.warn("GetSpecialValueFor Miss ", this.GetAbilityName(), s);
@@ -411,8 +444,7 @@ CBaseAbility.GetTalentSpecialValueFor = function (s: string, default_V = 0): num
                     break;
                 }
             }
-        }
-        else if (k == "AbilityValues") {
+        } else if (k == "AbilityValues") {
             for (const [l, m] of GameFunc.Pair(v)) {
                 if (type(m) == "table") {
                     if (m[s] && m[link]) {
@@ -649,7 +681,7 @@ if (IsServer()) {
             return false;
         }
 
-        if (!this.IsOwnersGoldEnough(hCaster.GetPlayerOwnerID())) {
+        if (!this.IsOwnersGoldEnough(hCaster.GetPlayerID())) {
             return false;
         }
 
@@ -683,7 +715,9 @@ if (IsServer()) {
 
         return true;
     };
-    CBaseAbility.AutoSpellSelf = function () { return false; }
+    CBaseAbility.AutoSpellSelf = function () {
+        return false;
+    }
 }
 
 if (IsClient()) {
@@ -703,41 +737,49 @@ if (IsClient()) {
 declare global {
     interface CDOTA_Buff {
         __safedestroyed__: boolean;
+
         /**
          * @both
-         * @param fInterval 
-         * @param fCallback 
+         * @param fInterval
+         * @param fCallback
          * @param _isIgnorePauseTime true 忽视游戏暂停.default false
          */
         AddTimer(fInterval: number, fCallback: () => number | void): void;
+
         /**是否被销毁
          * @Both
          */
         IsNull(): boolean;
-        /**获取施法技能 
+
+        /**获取施法技能
          * @Both
-         * 
-        */
+         *
+         */
         GetAbilityPlus<T extends IBaseAbility_Plus>(): T;
-        /**获取施法技能 
+
+        /**获取施法技能
          * @Both
-         * 
-        */
+         *
+         */
         GetItemPlus<T extends IBaseItem_Plus>(): T;
-        /**获取施法来源NPC，谁施法的 
+
+        /**获取施法来源NPC，谁施法的
          * @Both
-         * 
+         *
          */
         GetCasterPlus<T extends IBaseNpc_Plus>(): T;
-        /**获取作用归属NPC，在谁身上 
+
+        /**获取作用归属NPC，在谁身上
          * @Both
-         * 
+         *
          */
         GetParentPlus<T extends IBaseNpc_Plus>(): T;
-        /**自己给自己施法的 
+
+        /**自己给自己施法的
          * @Both
          */
         IsCastBySelf(): boolean;
+
         /**
          * 獲取當前等級對應技能屬性
          * @Both
@@ -746,6 +788,7 @@ declare global {
          * @returns
          */
         GetSpecialValueFor(sKey: string, default_V?: number): number;
+
         /**
          * @Both
          * 获取技能当前等级键附加值
@@ -754,6 +797,7 @@ declare global {
          * @returns 值
          */
         GetTalentSpecialValueFor(sKey: string, default_V?: number): number;
+
         /**
          * 获取buff来源技能等级键值，如获取不到则会返回0
          * @Both
@@ -765,7 +809,7 @@ declare global {
 
         /**
          * @Both
-         * @returns 
+         * @returns
          */
         GetAbilityLevel(): number;
 
@@ -777,12 +821,14 @@ declare global {
          * @returns
          */
         FindEnemyInRadius(radius: number, p?: Vector): IBaseNpc_Plus[]
+
         /**
          * 获取天赋数值
          * @param sKey 键名
          * @returns 值
          */
         GetAbilityTalentValue(sTalent: string, sKey: string): number;
+
         /**
          * 是否拥有天赋
          * @param sTalent 天赋名
@@ -793,14 +839,16 @@ declare global {
         /** 获取流派数值 */
         GetSectSpecialValueFor(id: string, sKey: string): number;
 
-        /** 增加层数 
+        /** 增加层数
          * @Both
-        */
+         */
         IncrementStackCount(iStackCount?: number): void;
-        /** 减少层数 
+
+        /** 减少层数
          * @Both
-        */
+         */
         DecrementStackCount(iStackCount?: number): void;
+
         /**
          * 更改BUFF层数
          * @Both
@@ -808,11 +856,13 @@ declare global {
          * @returns
          */
         ChangeStackCount(iStackCount?: number): number;
+
         /**
          * 获取自定义技能键值
          * @returns 值
          */
         GetCustomAbilityValueFor(id: string, sKey: string): number;
+
         /** 触发自定义技能效果 */
         customAbilityEffect(): void;
 
@@ -827,23 +877,37 @@ CDOTA_Buff.AddTimer = function (fInterval: number, fCallback: () => number | voi
         fInterval = 0;
         GLogHelper.error("CDOTA_Buff AddTimer", "fInterval < 0", fInterval);
     }
-    GTimerHelper.AddTimer(fInterval, GHandler.create(this, () => { return fCallback() }), _isIgnorePauseTime);
+    GTimerHelper.AddTimer(fInterval, GHandler.create(this, () => {
+        return fCallback()
+    }), _isIgnorePauseTime);
 }
 CDOTA_Buff.GetAbilityPlus = function () {
-    if (!IsValid(this)) { return };
+    if (!IsValid(this)) {
+        return
+    }
+    ;
     return this.GetAbility() as IBaseAbility_Plus;
 }
 CDOTA_Buff.GetItemPlus = function () {
-    if (!IsValid(this)) { return };
+    if (!IsValid(this)) {
+        return
+    }
+    ;
     return this.GetAbility() as IBaseItem_Plus;
 }
 CDOTA_Buff.GetCasterPlus = function () {
-    if (!IsValid(this)) { return };
+    if (!IsValid(this)) {
+        return
+    }
+    ;
     return this.GetCaster() as IBaseNpc_Plus;
 }
 
 CDOTA_Buff.GetParentPlus = function () {
-    if (!IsValid(this)) { return };
+    if (!IsValid(this)) {
+        return
+    }
+    ;
     return this.GetParent() as IBaseNpc_Plus;
 }
 
@@ -894,7 +958,6 @@ CDOTA_Buff.GetAbilityLevel = function () {
     }
     return this.GetAbility().GetLevel();
 }
-
 
 
 CDOTA_Buff.GetAbilityTalentValue = function (sTalent: string, sKey: string) {
@@ -1044,42 +1107,61 @@ declare global {
         /**所有的BUFF信息 */
         __AllModifiersInfo__: { [v: string]: Array<IBaseModifier_Plus> };
         __TempData: { [k: string]: any };
+        /**绑定的实体
+         * @Server
+         */
+        ETRoot: IETEntityRoot;
+
         /**
          * @Server 删除时回调
          */
         UpdateOnRemove(): void;
+
         /**
          * @Both 找到本体
          */
         GetSource(): IBaseNpc_Plus;
+
         /**
          * @Both
          * 是否拥有魔晶
          * @param hCaster
          */
         HasShard(): boolean;
+
         /**
          * @Both
          */
         TempData<T = any>(): { [k: string]: T };
+
+        /**
+         * @Both
+         * 获取损失的生命值百分比
+         */
+        GetHealthLosePect(): number;
+
         /**
          * @Server
          */
         InitActivityModifier(): void;
+
         /**
          * @Both
          */
         IsInvisiblePlus(): boolean;
+
         /**
          * @Server
-         * @param sItemName 
-         * @param bStash 
+         * @param sItemName
+         * @param bStash
          */
         RemoveItemByName(sItemName: string, bStash?: boolean): void;
+
         /**
          * @Both
          */
         IsFriendly(hTarget: CDOTA_BaseNPC): boolean;
+
         /**
          * @Both
          * 是否有天赋
@@ -1087,6 +1169,7 @@ declare global {
          * @returns
          */
         HasTalent(sTalentName: string): IBaseAbility_Plus | null;
+
         /**
          * @Both
          * 获取天赋的值
@@ -1094,49 +1177,57 @@ declare global {
          * @returns
          */
         GetTalentValue(TalentName: string, sSpecialName?: string, default_V?: number): number;
+
         /**
          * @Server
          */
         GetOwnerPlus<T extends IBaseNpc_Plus>(): T;
+
         /**
          * kv数据
          * @Both
          */
         GetKVData<T>(key: string, defaultv?: T): T;
+
         /**
          * 父节点注册自己
          * @Both
          */
         RegOwnerSelf(b: boolean): void;
+
         /**
          * @Both
          * 设置自己等级
-         * @param n 
+         * @param n
          */
         CreatureLevelUp(n: number): void;
 
         /**
          * 注册BUFF
          * @Both
-         * @param buff 
-         * @param isReg 
+         * @param buff
+         * @param isReg
          */
         RegModifiersInfo<T extends IBaseModifier_Plus>(buff: T, isReg: boolean): void;
+
         /**
          * 通过名字找子节点
          * @Both
          */
         FindChildByName<T extends IBaseNpc_Plus>(name: string): T[];
+
         /**
          * 通过Buff名字找子节点
          * @Both
          */
         FindChildByBuffName<T extends IBaseNpc_Plus>(name: string): T[];
+
         /**
          * 通过filter找子节点
          * @Both
          */
         FindChildByFilter<T extends IBaseNpc_Plus>(func: (v: IBaseNpc_Plus, i: number) => boolean): T[];
+
         /**
          * 是否是真实单位
          * @Both
@@ -1144,33 +1235,45 @@ declare global {
         IsRealUnit(): boolean;
 
         /**
+         * 获取玩家ID
+         * @Both
+         */
+        GetPlayerID(): PlayerID;
+
+        /**
          * @Both
          */
         GetIntellect(): number;
+
         /**
          * @Both
          */
         GetStrength(): number;
+
         /**
          * @Both
          */
         GetAgility(): number;
+
         /**
          * @Both
          */
         GetAllStats(): number;
+
         /**
          * 获取主属性值
          * @Server
          * @returns
          */
         GetPrimaryStatValue(): number;
+
         /**
          * 获取主属性
          * @Both
          * @returns
          */
         GetPrimaryAttribute(): Attributes;
+
         /**
          * 设置主属性值
          * @Server
@@ -1187,66 +1290,70 @@ declare global {
         GetStatusResistanceFactor(hCaster: CDOTA_BaseNPC): number;
 
         /**
-         * @Server 
-         * @param fChanged 
+         * @Server
+         * @param fChanged
          */
         ModifyMaxHealth(fChanged: number): void;
+
         /**
          * @Server
-         * @param abilityname 
-         * @param level 
-         * @returns 
+         * @param abilityname
+         * @param level
+         * @returns
          */
         addAbilityPlus<T extends IBaseAbility_Plus>(abilityname: string, level?: number): T;
 
         /**
          * @BOTH
-         * @param abilityname 
+         * @param abilityname
          */
         findAbliityPlus<T extends IBaseAbility_Plus>(abilityname: string): T | null;
+
         /**
          * @Server
-         * @param abilityname 
+         * @param abilityname
          */
         removeAbilityPlus(abilityname: string): void;
+
         /**
          * @Server
-         * @param buffname 
-         * @param caster 
-         * @param ability 
-         * @param modifierTable 
-         * @returns 
+         * @param buffname
+         * @param caster
+         * @param ability
+         * @param modifierTable
+         * @returns
          */
         addBuff<T extends CDOTA_Buff>(buffname: string, caster?: IBaseNpc_Plus, ability?: IBaseAbility_Plus, modifierTable?: IModifierTable): T;
+
         /**
          * @Server
-         * @param buffname 
-         * @param caster 
-         * @param ability 
-         * @param modifierTable 
-         * @returns 
+         * @param buffname
+         * @param caster
+         * @param ability
+         * @param modifierTable
+         * @returns
          */
         addOnlyBuff<T extends CDOTA_Buff>(buffname: string, caster?: IBaseNpc_Plus, ability?: IBaseAbility_Plus, modifierTable?: IModifierTable): T;
 
         /**
          * @Server
-         * @param buffname 
-         * @param caster 
+         * @param buffname
+         * @param caster
          */
         removeBuff<T extends CDOTA_Buff>(buffname: string, caster?: CDOTA_BaseNPC): void;
 
         /**
          * @Both
-         * @param buffname 
-         * @param caster 
-         * @returns 
+         * @param buffname
+         * @param caster
+         * @returns
          */
         findBuff<T extends CDOTA_Buff>(buffname: string, caster?: CDOTA_BaseNPC): T;
 
         /**
          * @Both
-         * @param buffname 
-         * @param caster 
+         * @param buffname
+         * @param caster
          */
         findBuffStack(buffname: string, caster?: CDOTA_BaseNPC): number;
 
@@ -1261,6 +1368,9 @@ declare global {
 const BaseNPC = IsServer() ? CDOTA_BaseNPC : C_DOTA_BaseNPC;
 
 
+BaseNPC.GetHealthLosePect = function () {
+    return (1 - this.GetHealth() / this.GetMaxHealth()) * 100;
+}
 BaseNPC.HasShard = function () {
     return this.HasModifier("modifier_item_aghanims_shard")
 }
@@ -1283,6 +1393,9 @@ BaseNPC.RegOwnerSelf = function (b: boolean) {
             owner.__CreateChildren__ = owner.__CreateChildren__ || [];
             owner.__CreateChildren__.push(this);
         } else {
+            if (!owner.__CreateChildren__) {
+                return;
+            }
             let index = owner.__CreateChildren__.indexOf(this);
             if (index >= 0) {
                 owner.__CreateChildren__.splice(owner.__CreateChildren__.indexOf(this), 1);
@@ -1360,8 +1473,7 @@ BaseNPC.RegModifiersInfo = function (buff: IBaseModifier_Plus, isReg: boolean) {
             this.__AllModifiersInfo__[buffname] = [];
         }
         this.__AllModifiersInfo__[buffname].push(buff);
-    }
-    else {
+    } else {
         // 删除数据
         if (this.__AllModifiersInfo__[buffname]) {
             let len = this.__AllModifiersInfo__[buffname].length;
@@ -1386,8 +1498,7 @@ BaseNPC.findBuff = function (buffname: string, caster: CDOTA_BaseNPC = null) {
                 return this.FindModifierByNameAndCaster(buffname, caster);
             }
             return this.FindModifierByName(buffname);
-        }
-        else {
+        } else {
             let modifiers = this.__AllModifiersInfo__ || {};
             if (modifiers[buffname]) {
                 let len = modifiers[buffname].length;
@@ -1397,8 +1508,7 @@ BaseNPC.findBuff = function (buffname: string, caster: CDOTA_BaseNPC = null) {
                         if (buff.GetCaster() == caster) {
                             return buff;
                         }
-                    }
-                    else {
+                    } else {
                         return buff;
                     }
                 }
@@ -1409,7 +1519,10 @@ BaseNPC.findBuff = function (buffname: string, caster: CDOTA_BaseNPC = null) {
 
 BaseNPC.InitActivityModifier = function () {
     let name = this.GetUnitName();
-    if (name == null || name.length == 0) { return };
+    if (name == null || name.length == 0) {
+        return
+    }
+    ;
     let entityKeyValues = KVHelper.KvUnits[name];
     if (entityKeyValues == null) return;
     let move = entityKeyValues.MovementSpeedActivityModifiers;
@@ -1426,7 +1539,7 @@ BaseNPC.InitActivityModifier = function () {
         obj = Object.assign(obj, attackrange)
     }
     if (Object.keys(obj).length > 0) {
-        Gmodifier_activity.apply(this, this, null, obj)
+        Gmodifier_spawn_activity.apply(this, this, null, obj)
     }
 }
 
@@ -1519,6 +1632,11 @@ BaseNPC.GetTalentValue = function (sTalentName: string, sSpecialName: string = "
     }
     return default_V;
 }
+BaseNPC.GetPlayerID = function () {
+    if (!IsValid(this)) return -1;
+    if (this.ETRoot && IsServer()) return this.ETRoot.BelongPlayerid;
+    return this.GetPlayerOwnerID();
+}
 
 BaseNPC.IsRealUnit = function () {
     if (!IsValid(this)) return false;
@@ -1550,11 +1668,9 @@ BaseNPC.GetPrimaryStatValue = function () {
     const Primary = this.GetPrimaryAttribute();
     if (Primary == Attributes.DOTA_ATTRIBUTE_AGILITY) {
         return this.GetAgility()
-    }
-    else if (Primary == Attributes.DOTA_ATTRIBUTE_STRENGTH) {
+    } else if (Primary == Attributes.DOTA_ATTRIBUTE_STRENGTH) {
         return this.GetStrength()
-    }
-    else if (Primary == Attributes.DOTA_ATTRIBUTE_INTELLECT) {
+    } else if (Primary == Attributes.DOTA_ATTRIBUTE_INTELLECT) {
         return this.GetIntellect()
     }
     return 0;
@@ -1616,8 +1732,7 @@ if (IsServer()) {
         if (ability) {
             ability.SetActivated(true);
             ability.SetLevel(level);
-        }
-        else {
+        } else {
             GLogHelper.error("addAbilityPlus ERROR ", abilityname, level)
         }
         return ability as IBaseAbility_Plus;
@@ -1631,8 +1746,7 @@ if (IsServer()) {
         if (ability) {
             GFuncEntity.SafeDestroyAbility(ability);
             this.RemoveAbility(abilityname);
-        }
-        else {
+        } else {
             GLogHelper.error("removeAbilityPlus ERROR ", abilityname)
         }
     }

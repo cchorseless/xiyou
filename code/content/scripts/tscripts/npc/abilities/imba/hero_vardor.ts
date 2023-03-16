@@ -731,7 +731,7 @@ export class vardor_graceful_jump extends BaseAbility_Plus {
                     }
                 }
             }
-            EventHelper.ErrorMessage("#dota_hud_error_vardor_no_yaris_in_range", this.GetCasterPlus().GetPlayerOwnerID());
+            EventHelper.ErrorMessage("#dota_hud_error_vardor_no_yaris_in_range", this.GetCasterPlus().GetPlayerID());
             return;
         }
         EmitSoundOnLocationWithCaster(this.GetCursorPosition(), "Hero_SkywrathMage.ConcussiveShot.Cast", caster);

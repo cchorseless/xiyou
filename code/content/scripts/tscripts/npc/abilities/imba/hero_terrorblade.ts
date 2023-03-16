@@ -278,18 +278,10 @@ export class modifier_imba_terrorblade_conjure_image_autocast extends BaseModifi
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_terrorblade_conjure_image_autocast_cooldown", {
                 duration: 1
             });
-            if (this.GetCasterPlus().GetPlayerOwnerID) {
-                if (this.GetCasterPlus().GetAggroTarget()) {
-                    this.GetCasterPlus().CastAbilityImmediately(this.GetAbilityPlus(), this.GetCasterPlus().GetPlayerOwnerID());
-                } else {
-                    this.GetCasterPlus().CastAbilityNoTarget(this.GetAbilityPlus(), this.GetCasterPlus().GetPlayerOwnerID());
-                }
-            } else if (this.GetCasterPlus().GetPlayerOwner) {
-                if (this.GetCasterPlus().GetAggroTarget()) {
-                    this.GetCasterPlus().CastAbilityImmediately(this.GetAbilityPlus(), this.GetCasterPlus().GetPlayerOwnerID());
-                } else {
-                    this.GetCasterPlus().CastAbilityNoTarget(this.GetAbilityPlus(), this.GetCasterPlus().GetPlayerOwnerID());
-                }
+            if (this.GetCasterPlus().GetAggroTarget()) {
+                this.GetCasterPlus().CastAbilityImmediately(this.GetAbilityPlus(), this.GetCasterPlus().GetPlayerID());
+            } else {
+                this.GetCasterPlus().CastAbilityNoTarget(this.GetAbilityPlus(), this.GetCasterPlus().GetPlayerID());
             }
         }
     }
@@ -345,7 +337,7 @@ export class imba_terrorblade_metamorphosis extends BaseAbility_Plus {
             duration: this.GetSpecialValueFor("transformation_time")
         });
         for (const [_, unit] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.GetSpecialValueFor("metamorph_aura_tooltip"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_CREEP_HERO + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FindOrder.FIND_ANY_ORDER, false))) {
-            if (unit != this.GetCasterPlus() && unit.IsIllusion() && unit.GetPlayerOwnerID() == this.GetCasterPlus().GetPlayerOwnerID() && unit.GetUnitName() == this.GetCasterPlus().GetUnitName()) {
+            if (unit != this.GetCasterPlus() && unit.IsIllusion() && unit.GetPlayerID() == this.GetCasterPlus().GetPlayerID() && unit.GetUnitName() == this.GetCasterPlus().GetUnitName()) {
                 unit.RemoveModifierByName("modifier_imba_terrorblade_metamorphosis");
                 unit.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_terrorblade_metamorphosis_transform", {
                     duration: this.GetSpecialValueFor("transformation_time")
@@ -554,7 +546,7 @@ export class modifier_imba_terrorblade_metamorphosis_transform_aura_applier exte
         return "modifier_imba_terrorblade_metamorphosis_transform_aura";
     }
     GetAuraEntityReject(hTarget: CDOTA_BaseNPC): boolean {
-        return hTarget == this.GetParentPlus() || this.GetParentPlus().IsIllusion() || !hTarget.IsIllusion() || hTarget.GetPlayerOwnerID() != this.GetCasterPlus().GetPlayerOwnerID() || hTarget.HasModifier("modifier_terrorblade_reflection_invulnerability");
+        return hTarget == this.GetParentPlus() || this.GetParentPlus().IsIllusion() || !hTarget.IsIllusion() || hTarget.GetPlayerID() != this.GetCasterPlus().GetPlayerID() || hTarget.HasModifier("modifier_terrorblade_reflection_invulnerability");
     }
 }
 @registerAbility()

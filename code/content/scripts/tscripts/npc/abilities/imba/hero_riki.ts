@@ -1523,7 +1523,7 @@ export class imba_riki_tricks_of_the_trade extends BaseAbility_Plus {
             this.GetCasterPlus().SetCursorCastTarget(this.GetCasterPlus());
         } else if (this.GetCursorTarget() && this.GetCursorTarget() == this.GetCasterPlus()) {
             this.GetCasterPlus().SetCursorCastTarget(undefined);
-            this.GetCasterPlus().CastAbilityOnPosition(this.GetCasterPlus().GetAbsOrigin(), this, this.GetCasterPlus().GetPlayerOwnerID());
+            this.GetCasterPlus().CastAbilityOnPosition(this.GetCasterPlus().GetAbsOrigin(), this, this.GetCasterPlus().GetPlayerID());
         }
         return true;
     }

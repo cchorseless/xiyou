@@ -48,7 +48,6 @@ export class AiAttackComponent extends ET.Component {
     }
 
     onDestroy(): void {
-        GLogHelper.print("onDestroy", "AiAttackComponent")
         this.endFindToAttack();
     }
     castAbilityAndItem() {

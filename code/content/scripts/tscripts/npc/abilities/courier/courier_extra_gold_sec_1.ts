@@ -57,7 +57,7 @@ export class modifier_courier_gold_sec_1 extends BaseModifier_Plus {
         //     this.StartIntervalThink(-1)
         //     return
         // }
-        let iPlayerID = hParent.GetPlayerOwnerID()
+        let iPlayerID = hParent.GetPlayerID()
         let random = RandomInt(this.gold_sec_min, this.gold_sec_max);
         GPlayerEntityRoot.GetOneInstance(iPlayerID).PlayerDataComp().changeItem(EEnum.EMoneyType.Gold, random);
         // PlayerData.ModifyGold(iPlayerID, random, true)

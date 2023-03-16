@@ -419,7 +419,7 @@ export class imba_warlock_upheaval extends BaseAbility_Plus {
             EmitSoundOn(sound_loop, caster);
             BaseModifier_Plus.CreateBuffThinker(caster, this, modifier_upheaval, {}, target_point, caster.GetTeamNumber(), false);
         } else {
-            let playerID = caster.GetPlayerOwnerID();
+            let playerID = caster.GetPlayerID();
             let demon = BaseNpc_Plus.CreateUnitByName("npc_imba_warlock_upheaval_demon", target_point, caster, true);
             demon.SetControllableByPlayer(playerID, true);
             demon.AddNewModifier(demon, this, "modifier_kill", {
@@ -677,7 +677,7 @@ export class imba_warlock_rain_of_chaos extends BaseAbility_Plus {
             golem.AddNewModifier(this.GetCasterPlus(), this, "modifier_kill", {
                 duration: this.GetSpecialValueFor("duration")
             });
-            golem.SetControllableByPlayer(this.GetCasterPlus().GetPlayerOwnerID(), true);
+            golem.SetControllableByPlayer(this.GetCasterPlus().GetPlayerID(), true);
             let bonus_hp = this.GetCasterPlus().GetStrength() * this.GetSpecialValueFor("bonus_hp_per_str");
             let bonus_damage = this.GetCasterPlus().GetIntellect() * this.GetSpecialValueFor("bonus_damage_per_int");
             let bonus_armor = this.GetCasterPlus().GetAgility() * this.GetSpecialValueFor("bonus_armor_per_agi");

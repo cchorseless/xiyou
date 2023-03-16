@@ -4,7 +4,7 @@ const program = require('commander');
 const chokidar = require('chokidar');
 const path = require('path');
 const xlsx = require('node-xlsx');
-const { read_all_files, read_sub_directories } = require('./utils');
+const {read_all_files, read_sub_directories} = require('./utils');
 
 // 需要读取的excel路径
 const excel_path = 'excels';
@@ -115,8 +115,7 @@ function typeIsK(file, s) {
     for (let k of kArray) {
         if (k == 'K' || k == "K+" || k == "K&") {
             return [true, k];
-        }
-        else if (k == 'V' || k == "V+" || k == "V&") {
+        } else if (k == 'V' || k == "V+" || k == "V&") {
             return [false, k];
         }
     }
@@ -124,7 +123,9 @@ function typeIsK(file, s) {
 }
 
 function findFirstRowDataBeginAt(file, sheet_data, startRow, endRow, col) {
-    if (col == null) { return }
+    if (col == null) {
+        return
+    }
     let data = sheet_data.data;
     for (let i = startRow; i < endRow; i++) {
         if (data[i][col] != null) {
@@ -189,8 +190,7 @@ function dealChild(file, sheet_data, needParse, obj, parentObj, startRow, endRow
                             if (sheet_data.data[i][vobj.col]) {
                                 _parentObj[trueKey] = '' + sheet_data.data[i][vobj.col];
                             }
-                        }
-                        else if (objChild._childs.length > 0) {
+                        } else if (objChild._childs.length > 0) {
                             _parentObj[trueKey] = {};
                             needParse.push({
                                 obj: objChild,
@@ -203,8 +203,7 @@ function dealChild(file, sheet_data, needParse, obj, parentObj, startRow, endRow
                         i = _endRow - 1;
                     }
                 }
-            }
-            else if (objChild.ktype == "K&") {
+            } else if (objChild.ktype == "K&") {
                 // 考虑  01>K+ 的情况 确保有K值
                 let _parentObj = parentObj;
                 if (len_karray > 0) {
@@ -223,12 +222,14 @@ function dealChild(file, sheet_data, needParse, obj, parentObj, startRow, endRow
                             break;
                         }
                     }
-                };
+                }
+                ;
                 let trueKey = sheet_data.data[startRow][objChild.col];
                 let truevalue;
                 let vobj = objChild.vobj;
                 if (vobj) {
-                    truevalue = '' + sheet_data.data[startRow][vobj.col];;
+                    truevalue = '' + sheet_data.data[startRow][vobj.col];
+                    ;
                 }
                 if (trueKey != null && truevalue != null) {
                     let trueKeyList = trueKey.split('\n');
@@ -241,8 +242,7 @@ function dealChild(file, sheet_data, needParse, obj, parentObj, startRow, endRow
                     }
                 }
             }
-        }
-        else {
+        } else {
             if (objChild.ktype == 'V') {
                 let value = findFirstRowDataBeginAt(file, sheet_data, startRow, endRow, objChild.col);
                 if (value == null) {
@@ -250,8 +250,7 @@ function dealChild(file, sheet_data, needParse, obj, parentObj, startRow, endRow
                 }
                 if (len_karray == 1) {
                     parentObj[objChild.arg] = value;
-                }
-                else {
+                } else {
                     parentObj[objChild.arg] = parentObj[objChild.arg] || {};
                     let _parentObj = parentObj[objChild.arg];
                     for (let _k = 0; _k < len_karray; _k++) {
@@ -259,8 +258,7 @@ function dealChild(file, sheet_data, needParse, obj, parentObj, startRow, endRow
                         if (_k < len_karray - 2) {
                             _parentObj[_kk] = {};
                             _parentObj = _parentObj[_kk];
-                        }
-                        else if (_k == len_karray - 2) {
+                        } else if (_k == len_karray - 2) {
                             // 有值才添加
                             _parentObj[_kk] = value;
                             break
@@ -297,8 +295,7 @@ function parse_dataSheet(file, sheet_data, typeObj) {
                     startRow: 2,
                     endRow: maxSheetRow
                 });
-            }
-            else {
+            } else {
                 // 有值才添加
                 let value = findFirstRowDataBeginAt(file, sheet_data, 2, maxSheetRow, obj.col);
                 if (value != null) {
@@ -337,10 +334,13 @@ function createLanguageTXT(file, rows) {
         }
     }
     for (let i = 0; i < row_1.length; i++) {
-        if (row_1[i] == null) { continue; }
+        if (row_1[i] == null) {
+            continue;
+        }
         k = row_1[i].toLowerCase().replace(/ /g, '');
         if (langestart.indexOf(k) > -1) {
-            let param_str = row_0[i].replace(/ /g, '');;
+            let param_str = row_0[i].replace(/ /g, '');
+            ;
             if (param_str.indexOf('{') > -1 && param_str.indexOf('}') > -1) {
                 let temp1 = param_str.split('{');
                 let temp_str = [];
@@ -352,8 +352,7 @@ function createLanguageTXT(file, rows) {
                             temp_str.push(indexKey)
                         }
                         temp_str.push(temp2[1])
-                    }
-                    else {
+                    } else {
                         temp_str.push(s)
                     }
                 });
@@ -362,7 +361,8 @@ function createLanguageTXT(file, rows) {
             }
         }
 
-    };
+    }
+    ;
     for (let k in result_txt_obj) {
         let _param = result_txt_obj[k].temp_param
         if (_param.length > 0) {
@@ -375,12 +375,10 @@ function createLanguageTXT(file, rows) {
                     for (let __k of __arr) {
                         if (typeof __k == 'string') {
                             _kk += __k
-                        }
-                        else if (typeof __k == 'number') {
+                        } else if (typeof __k == 'number') {
                             if (rows[i][__k] != null) {
                                 _kk += rows[i][__k]
-                            }
-                            else {
+                            } else {
                                 _kk = null
                                 break;
                             }
@@ -395,7 +393,8 @@ function createLanguageTXT(file, rows) {
                     }
 
                 }
-            };
+            }
+            ;
             let _outfile_ = outfile.split('/');
             let dirpath = '';
             while (_outfile_.length > 1) {
@@ -410,8 +409,9 @@ function createLanguageTXT(file, rows) {
     }
 
 }
+
 // excel 不用填写技能特殊值类型
-function dealAbilitySpecial(s) {
+function dealAbilitySpecial(s, fileName) {
     let str = "" + s;
     const floattxt = `\t\t\t\t"var_type" "FIELD_FLOAT"\n`;
     const inttxt = `\t\t\t\t"var_type" "FIELD_INTEGER"\n`;
@@ -428,14 +428,48 @@ function dealAbilitySpecial(s) {
                     let rr = "";
                     if (g.includes(".")) {
                         rr = g.replace("{\n", `{\n${floattxt}`);
-                    }
-                    else {
+                    } else {
                         rr = g.replace("{\n", `{\n${inttxt}`);
                     }
                     str = str.replace(g, rr);
                 }
             }
         }
+    }
+
+    // 处理顺序不对的
+    let group = str.search(/"AbilitySpecial" {(\s*)"10"/g);
+    if (group > 0) {
+        let lines = str.split("\n");
+        for (let i = 0; i < lines.length; i++) {
+            let line = lines[i];
+            if (line.includes(`"AbilitySpecial" {`)) {
+                let temp = lines[i + 1];
+                if (temp.includes(`"10" {`)) {
+                    let line_begin = 0;
+                    let line_end = 0;
+                    for (let k = 2; k < 300; k++) {
+                        let temp2 = lines[i + k];
+                        if (temp2.includes(`"01" {`)) {
+                            line_begin = i + k;
+                        } else if (temp2.includes(`"09" {`)) {
+                            line_end = i + k + 5;
+                        }
+                        if (line_begin > 0 && line_end > 0) {
+                            let moveline = lines.splice(line_begin, line_end - line_begin);
+                            lines.splice(i + 1, 0, ...moveline);
+                            i = line_end;
+                            break;
+                        }
+                        if (k >= 299) {
+                            console.error("数据处理的有问题 KV LINE:", i, fileName)
+                            return str;
+                        }
+                    }
+                }
+            }
+        }
+        str = lines.join("\n");
     }
     return str;
 }
@@ -491,7 +525,7 @@ function single_excel_to_kv(file) {
     if (!fs.existsSync(out_dir)) fs.mkdirSync(out_dir);
     let r_s = "// generate with  kv generator \n\n" + parse_paramSheetBaseData(sheet_param);
     r_s += keyvalues.encode(result).replace(/\\\"/g, "'");
-    r_s = dealAbilitySpecial(r_s)
+    r_s = dealAbilitySpecial(r_s, fileName)
     fs.writeFileSync(outpath, r_s);
     console.log('success xlsx->kv', outpath);
     // createLanguageTXT(file, rows)
@@ -558,8 +592,7 @@ module.exports.all_excel_to_locatlization = all_excel_to_locatlization;
     // 單個文件
     if (args.length > 0 && args.indexOf('--watch') == -1) {
         select_excel_to_kv(args);
-    }
-    else {
+    } else {
         all_excel_to_kv();
     }
     program.option('-w, --watch', 'Watch Mode').parse(process.argv);

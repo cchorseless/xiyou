@@ -1,34 +1,39 @@
+import {AI_ability} from "../../../ai/AI_ability";
+import {GameFunc} from "../../../GameFunc";
+import {EventHelper} from "../../../helper/EventHelper";
+import {NetTablesHelper} from "../../../helper/NetTablesHelper";
+import {ResHelper} from "../../../helper/ResHelper";
+import {BaseAbility_Plus} from "../../entityPlus/BaseAbility_Plus";
+import {BaseModifier_Plus, registerProp} from "../../entityPlus/BaseModifier_Plus";
+import {registerAbility, registerModifier} from "../../entityPlus/Base_Plus";
+import {Enum_MODIFIER_EVENT, registerEvent} from "../../propertystat/modifier_event";
 
-import { AI_ability } from "../../../ai/AI_ability";
-import { GameFunc } from "../../../GameFunc";
-import { EventHelper } from "../../../helper/EventHelper";
-import { NetTablesHelper } from "../../../helper/NetTablesHelper";
-import { ResHelper } from "../../../helper/ResHelper";
-import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
-import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
-import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 @registerAbility()
 export class imba_alchemist_acid_spray extends BaseAbility_Plus {
     GetManaCost(level: number): number {
         return 0;
     }
+
     GetCooldown(level: number): number {
         return 20;
     }
+
     AutoSpellSelf() {
-        let range = 400;
-        return AI_ability.POSITION_most_enemy(this, range, 200);
+        return AI_ability.POSITION_most_enemy(this);
     }
+
     GetAbilityTextureName(): string {
         return "alchemist_acid_spray";
     }
+
     IsHiddenWhenStolen(): boolean {
         return false;
     }
+
     GetAOERadius(): number {
         return this.GetSpecialValueFor("radius");
     }
+
     OnSpellStart(): void {
         let caster = this.GetCasterPlus();
         let point = this.GetCursorPosition();
@@ -54,16 +59,18 @@ export class imba_alchemist_acid_spray extends BaseAbility_Plus {
             duration: this.GetSpecialValueFor("duration")
         }, point, team_id);
     }
+
     OnOwnerSpawned(): void {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_alchemist_1") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_alchemist_1")) {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_alchemist_1"), "modifier_special_bonus_imba_alchemist_1", {});
         }
     }
 }
+
 @registerModifier()
 export class modifier_imba_acid_spray_thinker extends BaseModifier_Plus {
     public caster: IBaseNpc_Plus;
-    public thinker: any;
+    public thinker: IBaseNpc_Plus;
     public ability: IBaseAbility_Plus;
     public ability_target_team: any;
     public ability_target_type: any;
@@ -76,9 +83,11 @@ export class modifier_imba_acid_spray_thinker extends BaseModifier_Plus {
     public stack_damage: number;
     public ability_damage_type: number;
     public particle: any;
+
     IsAura(): boolean {
         return true;
     }
+
     BeCreated(keys: any): void {
         if (IsServer()) {
             this.caster = this.GetCasterPlus();
@@ -112,6 +121,7 @@ export class modifier_imba_acid_spray_thinker extends BaseModifier_Plus {
             this.StartIntervalThink(this.tick_rate);
         }
     }
+
     OnIntervalThink(): void {
         let units = FindUnitsInRadius(this.thinker.GetTeamNumber(), this.thinker_loc, undefined, this.radius, this.ability_target_team, this.ability_target_type, this.ability_target_flags, FindOrder.FIND_ANY_ORDER, false);
         let damage = undefined;
@@ -136,21 +146,27 @@ export class modifier_imba_acid_spray_thinker extends BaseModifier_Plus {
             }
         }
     }
+
     GetAuraRadius(): number {
         return this.radius;
     }
+
     GetAuraSearchTeam(): DOTA_UNIT_TARGET_TEAM {
         return this.ability_target_team;
     }
+
     GetAuraSearchType(): DOTA_UNIT_TARGET_TYPE {
         return this.ability_target_type;
     }
+
     GetAuraSearchFlags(): DOTA_UNIT_TARGET_FLAGS {
         return this.ability_target_flags;
     }
+
     GetModifierAura(): string {
         return "modifier_imba_acid_spray_handler";
     }
+
     BeDestroy( /** keys */): void {
         if (IsServer()) {
             let thinker = this.GetParentPlus();
@@ -160,23 +176,24 @@ export class modifier_imba_acid_spray_thinker extends BaseModifier_Plus {
         }
     }
 }
+
 @registerModifier()
 export class modifier_imba_acid_spray_handler extends BaseModifier_Plus {
-    public modifier: any;
+    public modifier: modifier_imba_acid_spray_debuff_dot;
     public tick_rate: any;
     public center: Vector;
-
 
 
     IsHidden(): boolean {
         return true;
     }
+
     BeCreated(p_0: any,): void {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
             let ability = this.GetAbilityPlus();
             let unit = this.GetParentPlus();
-            this.modifier = unit.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_acid_spray_debuff_dot", {});
+            this.modifier = unit.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_acid_spray_debuff_dot", {}) as modifier_imba_acid_spray_debuff_dot;
             if (this.GetAbilityPlus()) {
                 this.modifier.damage = ability.GetSpecialValueFor("damage");
                 this.modifier.stack_damage = ability.GetSpecialValueFor("stack_damage");
@@ -194,14 +211,17 @@ export class modifier_imba_acid_spray_handler extends BaseModifier_Plus {
             this.StartIntervalThink(this.tick_rate);
         }
     }
+
     OnIntervalThink(): void {
         if (IsServer()) {
             if (this.modifier.IsNull()) {
+                this.StartIntervalThink(-1);
                 return;
             }
             this.modifier.OnIntervalThink(true, false);
         }
     }
+
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
             1: Enum_MODIFIER_EVENT.ON_DEATH
@@ -242,6 +262,7 @@ export class modifier_imba_acid_spray_handler extends BaseModifier_Plus {
         }
     }
 }
+
 @registerModifier()
 export class modifier_imba_acid_spray_debuff_dot extends BaseModifier_Plus {
     public armor_reduction: any;
@@ -249,12 +270,17 @@ export class modifier_imba_acid_spray_debuff_dot extends BaseModifier_Plus {
     public max_stacks: number;
     public tick_rate: any;
     public movespeed_slow: number;
+    damage: number;
+    stack_damage: number;
+
     IsDebuff(): boolean {
         return true;
     }
+
     IsPurgable(): boolean {
         return true;
     }
+
     BeCreated(p_0: any,): void {
         if (this.GetAbilityPlus()) {
             this.armor_reduction = this.GetSpecialValueFor("armor_reduction");
@@ -273,17 +299,17 @@ export class modifier_imba_acid_spray_debuff_dot extends BaseModifier_Plus {
             this.StartIntervalThink(this.tick_rate);
         }
     }
+
     OnIntervalThink(aura_tick = false, consume_stacks = false): void {
         if (IsServer()) {
             if (aura_tick) {
                 this.IncrementStackCount();
             }
             let unit = this.GetParentPlus();
-            if (unit.IsCourier()) {
-                this.Destroy();
-                return;
-            }
-            if (aura_tick || consume_stacks || (!unit.HasModifier("modifier_imba_acid_spray_handler") && !unit.HasModifier("modifier_imba_chemical_rage_aura"))) {
+            if (aura_tick ||
+                consume_stacks ||
+                (!unit.HasModifier("modifier_imba_acid_spray_handler") &&
+                    !unit.HasModifier("modifier_imba_chemical_rage_aura"))) {
                 if (!aura_tick) {
                     this.DecrementStackCount();
                 }
@@ -291,7 +317,7 @@ export class modifier_imba_acid_spray_debuff_dot extends BaseModifier_Plus {
                     if (consume_stacks) {
                         return;
                     }
-                    unit.RemoveModifierByName("modifier_imba_acid_spray_debuff_dot");
+                    this.Destroy();
                     return;
                 }
                 if (consume_stacks) {
@@ -300,8 +326,6 @@ export class modifier_imba_acid_spray_debuff_dot extends BaseModifier_Plus {
             }
         }
     }
-
-
 
 
     OnStackCountChanged(old_stack_count: number): void {
@@ -315,9 +339,11 @@ export class modifier_imba_acid_spray_debuff_dot extends BaseModifier_Plus {
             this.SetStackCount(this.max_stacks);
         }
     }
+
     GetTexture(): string {
         return "alchemist_acid_spray";
     }
+
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
             1: GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS,
@@ -330,6 +356,7 @@ export class modifier_imba_acid_spray_debuff_dot extends BaseModifier_Plus {
             return (this.armor_reduction + this.stack_armor_reduction * this.GetStackCount()) * (-1);
         }
     }
+
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
     CC_GetModifierMoveSpeedBonus_Percentage(): number {
         if (this.movespeed_slow) {
@@ -337,58 +364,65 @@ export class modifier_imba_acid_spray_debuff_dot extends BaseModifier_Plus {
         }
     }
 }
+
 @registerAbility()
 export class imba_alchemist_unstable_concoction extends BaseAbility_Plus {
-    public vanilla_ability: any;
-    public time_charged: any;
-    public brew_start: any;
-    public brew_time: any;
+    public time_charged: number;
+    public brew_start: number = 0;
+    public brew_time: number;
     public stun: any;
     public damage: number;
     public radius_increase: number;
     public radius: number;
 
+    GetCooldown(level: number): number {
+        let cooddown = 20;
+        if (this.IsUnstableConcoction()) {
+            if (IsServer()) {
+                return cooddown - (GameRules.GetGameTime() - this.brew_start);
+            }
+            return 0;
+        }
+        if (IsServer() || this.GetLevel() == 0) {
+            return 0;
+        }
+        return cooddown;
+    }
 
-
-    // GetCooldown(level: number): number {
-    //     if (this.GetCasterPlus().HasModifier("modifier_imba_unstable_concoction_handler")) {
-    //         if (IsServer()) {
-    //             return super.GetCooldown(level) - (GameRules.GetGameTime() - this.brew_start);
-    //         }
-    //         return 0;
-    //     }
-    //     if (IsServer() || this.GetLevel() == 0) {
-    //         return 0;
-    //     }
-    //     return super.GetCooldown(level);
-    // }
     GetManaCost(level: number): number {
         return 0;
     }
-    GetCooldown(level: number): number {
-        return 20;
-    }
+
     AutoSpellSelf() {
-        let range = 400;
-        return AI_ability.POSITION_most_enemy(this, range, 200);
+        if (this.IsUnstableConcoction()) {
+            if ((GameRules.GetGameTime() - this.brew_start) > 4 ||
+                this.GetCasterPlus().GetHealthLosePect() > 80
+            ) {
+                return AI_ability.TARGET_if_enemy(this);
+            }
+            return false;
+        } else {
+            return AI_ability.NO_TARGET_if_enemy(this);
+        }
     }
+
     IsHiddenWhenStolen(): boolean {
         return false;
     }
+
     OnUpgrade(): void {
-        if (!this.vanilla_ability) {
-            let bindability = "alchemist_unstable_concoction_throw";
-            let a = this.GetCasterPlus().findAbliityPlus(bindability);
-            if (a == null) {
-                this.vanilla_ability = this.GetCasterPlus().addAbilityPlus(bindability);
-            }
-        }
-        this.vanilla_ability.SetLevel(this.GetLevel());
+
     }
+
     OnUnStolen(): void {
         let caster = this.GetCasterPlus();
         caster.RemoveModifierByName("modifier_imba_unstable_concoction_handler");
     }
+
+    IsUnstableConcoction() {
+        return this.GetCasterPlus().HasModifier("modifier_imba_unstable_concoction_handler");
+    }
+
     OnSpellStart(): void {
         let cast_response = {
             "1": "alchemist_alch_ability_concoc_01",
@@ -405,7 +439,7 @@ export class imba_alchemist_unstable_concoction extends BaseAbility_Plus {
             "1": "alchemist_alch_ability_concoc_16",
             "2": "alchemist_alch_ability_concoc_17"
         }
-        if (this.GetCasterPlus().HasModifier("modifier_imba_unstable_concoction_handler")) {
+        if (this.IsUnstableConcoction()) {
             let target = this.GetCursorTarget();
             this.GetCasterPlus().StopSound("Hero_Alchemist.UnstableConcoction.Fuse");
             this.GetCasterPlus().EmitSound("Hero_Alchemist.UnstableConcoction.Throw");
@@ -420,9 +454,8 @@ export class imba_alchemist_unstable_concoction extends BaseAbility_Plus {
             this.GetCasterPlus().StartGesture(GameActivity_t.ACT_DOTA_ALCHEMIST_CONCOCTION_THROW);
             this.GetCasterPlus().FadeGesture(GameActivity_t.ACT_DOTA_ALCHEMIST_CONCOCTION);
             this.time_charged = GameRules.GetGameTime() - this.brew_start;
-            this.GetCasterPlus().RemoveModifierByName("modifier_imba_unstable_concoction_handler");
             this.AddTimer(0.3, () => {
-                let projectile_speed = this.vanilla_ability.GetSpecialValueFor("projectile_speed", 900);
+                let projectile_speed = this.GetSpecialValueFor("projectile_speed", 900);
                 let info = {
                     Target: target,
                     Source: this.GetCasterPlus(),
@@ -438,11 +471,11 @@ export class imba_alchemist_unstable_concoction extends BaseAbility_Plus {
         EmitSoundOn(GFuncRandom.RandomOne(Object.values(cast_response)), this.GetCasterPlus());
         this.GetCasterPlus().StartGesture(GameActivity_t.ACT_DOTA_ALCHEMIST_CONCOCTION);
         this.brew_start = GameRules.GetGameTime();
-        this.brew_time = this.vanilla_ability.GetSpecialValueFor("brew_time");
+        this.brew_time = this.GetSpecialValueFor("brew_time");
         let extra_brew_time = this.GetSpecialValueFor("brew_explosion");
         let duration = extra_brew_time;
-        this.stun = this.vanilla_ability.GetSpecialValueFor("max_stun");
-        this.damage = this.vanilla_ability.GetSpecialValueFor("max_damage");
+        this.stun = this.GetSpecialValueFor("max_stun");
+        this.damage = this.GetSpecialValueFor("max_damage");
         this.radius_increase = this.GetSpecialValueFor("radius_increase") / this.brew_time;
         let greed_modifier = this.GetCasterPlus().findBuff<modifier_imba_goblins_greed_passive>("modifier_imba_goblins_greed_passive");
         if (greed_modifier) {
@@ -469,6 +502,7 @@ export class imba_alchemist_unstable_concoction extends BaseAbility_Plus {
         this.radius = this.GetSpecialValueFor("radius");
         this.GetCasterPlus().EmitSound("Hero_Alchemist.UnstableConcoction.Fuse");
     }
+
     OnProjectileHit(target: CDOTA_BaseNPC | undefined, location: Vector): boolean | void {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
@@ -488,7 +522,7 @@ export class imba_alchemist_unstable_concoction extends BaseAbility_Plus {
                 if (target) {
                     location = target.GetAbsOrigin();
                 }
-                let units = FindUnitsInRadius(caster.GetTeam(), location, undefined, radius, this.GetAbilityTargetTeam(), this.GetAbilityTargetType(), this.GetAbilityTargetFlags() - DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_CREEP_HERO, FindOrder.FIND_ANY_ORDER, false);
+                let units = FindUnitsInRadius(caster.GetTeam(), location, undefined, radius, this.GetAbilityTargetTeam(), this.GetAbilityTargetType(), this.GetAbilityTargetFlags(), FindOrder.FIND_ANY_ORDER, false);
                 let brew_percentage = brew_duration / this.brew_time;
                 let speed_multiplier;
                 if (caster.HasTalent("special_bonus_imba_alchemist_6") && caster.findBuff<modifier_imba_chemical_rage_buff_haste>("modifier_imba_chemical_rage_buff_haste")) {
@@ -504,20 +538,16 @@ export class imba_alchemist_unstable_concoction extends BaseAbility_Plus {
                 }
                 if (target) {
                     if (target == caster) {
-                        if (!target.IsMagicImmune()) {
-                            if (!target.IsInvulnerable()) {
-                                if (!target.IsOutOfGame()) {
-                                    ApplyDamage({
-                                        victim: target,
-                                        attacker: caster,
-                                        damage: damage,
-                                        damage_type: damage_type
-                                    });
-                                    target.AddNewModifier(caster, this, "modifier_imba_unstable_concoction_stunned", {
-                                        duration: stun_duration * (1 - target.GetStatusResistance())
-                                    });
-                                }
-                            }
+                        if (!target.IsMagicImmune() && !target.IsInvulnerable() && !target.IsOutOfGame()) {
+                            ApplyDamage({
+                                victim: target,
+                                attacker: caster,
+                                damage: damage,
+                                damage_type: damage_type
+                            });
+                            target.AddNewModifier(caster, this, "modifier_imba_unstable_concoction_stunned", {
+                                duration: stun_duration * (1 - target.GetStatusResistance())
+                            });
                         }
                     } else {
                         if (target.TriggerSpellAbsorb(this)) {
@@ -525,9 +555,8 @@ export class imba_alchemist_unstable_concoction extends BaseAbility_Plus {
                         }
                     }
                 }
-                let enemy_killed = false;
                 for (const [_, unit] of GameFunc.iPair(units)) {
-                    if (unit.GetTeam() != caster.GetTeam()) {
+                    if (GFuncEntity.IsValid(unit) && unit.GetTeam() != caster.GetTeam()) {
                         ApplyDamage({
                             victim: unit,
                             attacker: caster,
@@ -542,7 +571,8 @@ export class imba_alchemist_unstable_concoction extends BaseAbility_Plus {
                                 EmitSoundOn(GFuncRandom.RandomOne(Object.values(kill_response)), caster);
                             }
                         });
-                        if (unit.HasModifier("modifier_imba_acid_spray_handler")) {
+
+                        /**     if (unit.HasModifier("modifier_imba_acid_spray_handler")) {
                             let acid_spray_modifier = unit.findBuff<modifier_imba_acid_spray_handler>("modifier_imba_acid_spray_handler");
                             let acid_spray_ability = acid_spray_modifier.GetAbility();
                             let acid_spray_radius = acid_spray_ability.GetAOERadius();
@@ -572,7 +602,7 @@ export class imba_alchemist_unstable_concoction extends BaseAbility_Plus {
                             if (modifier) {
                                 modifier.OnIntervalThink(false, true);
                             }
-                        }
+                        }*/
                     }
                 }
             } else {
@@ -584,8 +614,9 @@ export class imba_alchemist_unstable_concoction extends BaseAbility_Plus {
             }
         }
     }
+
     GetAbilityTextureName(): string {
-        if (this.GetCasterPlus().HasModifier("modifier_imba_unstable_concoction_handler")) {
+        if (this.IsUnstableConcoction()) {
             return "alchemist_unstable_concoction_throw";
         }
         return super.GetAbilityTextureName();
@@ -593,24 +624,24 @@ export class imba_alchemist_unstable_concoction extends BaseAbility_Plus {
 
 
     GetCastPoint() {
-        let caster = this.GetCasterPlus();
-        if (caster.HasModifier("modifier_imba_unstable_concoction_handler")) {
+        if (this.IsUnstableConcoction()) {
             return super.GetCastPoint();
         }
         return 0;
     }
+
     GetBehavior(): DOTA_ABILITY_BEHAVIOR | Uint64 {
-        let caster = this.GetCasterPlus();
-        if (caster.HasModifier("modifier_imba_unstable_concoction_handler")) {
+        if (this.IsUnstableConcoction()) {
             return DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_AOE + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_UNIT_TARGET;
         }
         return DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_NO_TARGET + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_IMMEDIATE;
     }
+
     CastFilterResultTarget(target: CDOTA_BaseNPC): UnitFilterResult {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
             let hasTalent = caster.HasTalent("special_bonus_imba_alchemist_2");
-            if (target != undefined) {
+            if (target) {
                 if (target.GetTeam() == caster.GetTeam() && !hasTalent) {
                     return UnitFilterResult.UF_FAIL_FRIENDLY;
                 }
@@ -622,16 +653,19 @@ export class imba_alchemist_unstable_concoction extends BaseAbility_Plus {
             return nResult;
         }
     }
+
     GetCustomCastErrorTarget(target: CDOTA_BaseNPC): string {
         return "dota_hud_error_cant_cast_on_self";
     }
+
     ProcsMagicStick(): boolean {
         let caster = this.GetCasterPlus();
-        if (caster.HasModifier("modifier_imba_unstable_concoction_handler")) {
+        if (this.IsUnstableConcoction()) {
             return false;
         }
         return true;
     }
+
     GetAOERadius(): number {
         let caster = this.GetCasterPlus();
         let brew_start = 0;
@@ -648,15 +682,19 @@ export class imba_alchemist_unstable_concoction extends BaseAbility_Plus {
         return radius;
     }
 }
+
 @registerModifier()
 export class modifier_imba_unstable_concoction_handler extends BaseModifier_Plus {
-    public last_second_responded: any;
+    public last_second_responded: boolean;
+
     IsPurgable(): boolean {
         return false;
     }
+
     IsHidden(): boolean {
         return true;
     }
+
     BeDestroy(): void {
         let caster = this.GetCasterPlus();
         let ability = this.GetAbilityPlus<imba_alchemist_unstable_concoction>();
@@ -669,13 +707,19 @@ export class modifier_imba_unstable_concoction_handler extends BaseModifier_Plus
             }
         }
     }
+
     BeCreated(p_0: any,): void {
         this.StartIntervalThink(FrameTime());
     }
+
     OnIntervalThink(): void {
         if (IsServer()) {
             let caster = this.GetParentPlus();
             let ability = this.GetAbilityPlus<imba_alchemist_unstable_concoction>();
+            if (!GFuncEntity.IsValid(ability)) {
+                this.Destroy();
+                return;
+            }
             let last_second_response = {
                 "1": "alchemist_alch_ability_concoc_11",
                 "2": "alchemist_alch_ability_concoc_12",
@@ -693,9 +737,9 @@ export class modifier_imba_unstable_concoction_handler extends BaseModifier_Plus
                 "5": "alchemist_alch_ability_concoc_25"
             }
             let brew_time_passed = this.GetDuration();
-            let allHeroes = HeroList.GetAllHeroes();
+            let brew_start = ability.brew_start || 0;
             let particleName = "particles/units/heroes/hero_alchemist/alchemist_unstable_concoction_timer.vpcf";
-            let number = math.abs(GameRules.GetGameTime() - ability.brew_start - brew_time_passed);
+            let number = math.abs(GameRules.GetGameTime() - brew_start - brew_time_passed);
             if (caster.HasTalent("special_bonus_imba_alchemist_6") && caster.HasModifier("modifier_imba_chemical_rage_buff_haste")) {
                 number = number * caster.GetTalentValue("special_bonus_imba_alchemist_6");
             }
@@ -714,8 +758,9 @@ export class modifier_imba_unstable_concoction_handler extends BaseModifier_Plus
                 return;
             }
             if (!(integer == 0 && decimal <= 1)) {
+                let allHeroes = caster.GetPlayerRoot().BuildingManager().getAllBattleUnitAliveNpc();
                 for (const [k, v] of GameFunc.iPair(allHeroes)) {
-                    if (v.GetPlayerOwnerID() && v.GetTeam() == caster.GetTeam()) {
+                    if (v.GetTeam() == caster.GetTeam()) {
                         let particle = ResHelper.CreateParticleEx(particleName, ParticleAttachment_t.PATTACH_OVERHEAD_FOLLOW, caster);
                         ParticleManager.SetParticleControl(particle, 0, caster.GetAbsOrigin());
                         ParticleManager.SetParticleControl(particle, 1, Vector(0, integer, decimal));
@@ -739,7 +784,7 @@ export class modifier_imba_unstable_concoction_handler extends BaseModifier_Plus
                     Ability: ability,
                     bDodgeable: false,
                     EffectName: "particles/units/heroes/hero_alchemist/alchemist_unstable_concoction_projectile.vpcf",
-                    iMoveSpeed: ability.vanilla_ability.GetSpecialValueFor("projectile_speed", 900)
+                    iMoveSpeed: ability.GetSpecialValueFor("projectile_speed", 900)
                 }
                 ProjectileManager.CreateTrackingProjectile(info);
                 ability.StartCooldown(ability.GetCooldown(ability.GetLevel()));
@@ -748,6 +793,7 @@ export class modifier_imba_unstable_concoction_handler extends BaseModifier_Plus
         }
     }
 }
+
 @registerModifier()
 export class modifier_imba_unstable_concoction_stunned extends BaseModifier_Plus {
     CheckState(): Partial<Record<modifierstate, boolean>> {
@@ -756,6 +802,7 @@ export class modifier_imba_unstable_concoction_stunned extends BaseModifier_Plus
         }
         return state;
     }
+
     /** DeclareFunctions():modifierfunction[] {
         let decFuncs = {
             1: GPropertyConfig.EMODIFIER_PROPERTY.OVERRIDE_ANIMATION
@@ -766,36 +813,54 @@ export class modifier_imba_unstable_concoction_stunned extends BaseModifier_Plus
     CC_GetOverrideAnimation(): GameActivity_t {
         return GameActivity_t.ACT_DOTA_DISABLED;
     }
+
+    BeRemoved() {
+        let parent = this.GetParentPlus();
+        if (GFuncEntity.IsValid(parent) && IsServer()) {
+            parent.RemoveGesture(GameActivity_t.ACT_DOTA_DISABLED);
+
+        }
+    }
+
     IsPurgable(): boolean {
         return false;
     }
+
     IsPurgeException(): boolean {
         return true;
     }
+
     IsStunDebuff(): boolean {
         return true;
     }
+
     IsHidden(): boolean {
         return false;
     }
+
     GetEffectName(): string {
         return "particles/generic_gameplay/generic_stunned.vpcf";
     }
+
     GetEffectAttachType(): ParticleAttachment_t {
         return ParticleAttachment_t.PATTACH_OVERHEAD_FOLLOW;
     }
 }
+
 @registerAbility()
 export class imba_alchemist_goblins_greed extends BaseAbility_Plus {
     public greevil_active: any;
     public greevil: IBaseNpc_Plus;
     public greevil_ability: any;
+
     GetAbilityTextureName(): string {
         return "alchemist_goblins_greed";
     }
+
     IsStealable(): boolean {
         return false;
     }
+
     OnInventoryContentsChanged(): void {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
@@ -816,12 +881,15 @@ export class imba_alchemist_goblins_greed extends BaseAbility_Plus {
             }
         }
     }
+
     GetCastRange(location: Vector, target: CDOTA_BaseNPC | undefined): number {
         return super.GetCastRange(location, target);
     }
+
     GetIntrinsicModifierName(): string {
         return "modifier_imba_goblins_greed_passive";
     }
+
     OnUpgrade(): void {
         let caster = this.GetCasterPlus();
         let modifier = caster.FindModifierByName(this.GetIntrinsicModifierName());
@@ -833,11 +901,12 @@ export class imba_alchemist_goblins_greed extends BaseAbility_Plus {
         }
         modifier.SetStackCount(stacks + (base_gold - base_gold_1));
     }
+
     OnSpellStart(): void {
         if (IsServer()) {
             if (this.greevil_active) {
                 this.EndCooldown();
-                EventHelper.ErrorMessage("#dota_hud_error_active_greevil", this.GetCasterPlus().GetPlayerOwnerID());
+                EventHelper.ErrorMessage("#dota_hud_error_active_greevil", this.GetCasterPlus().GetPlayerID());
                 return;
             }
             let caster = this.GetCasterPlus();
@@ -859,7 +928,7 @@ export class imba_alchemist_goblins_greed extends BaseAbility_Plus {
             target.SetMinimumGoldBounty(0);
             target.SetMaximumGoldBounty(0);
             target.Kill(this, caster);
-            const playerroot = GGameScene.GetPlayer(caster.GetPlayerOwnerID());
+            const playerroot = GGameScene.GetPlayer(caster.GetPlayerID());
             // caster.AddExperience(total_exp, false, false);
             playerroot.PlayerDataComp().ModifyGold(total_gold, true, EDOTA_ModifyGold_Reason.DOTA_ModifyGold_Unspecified);
             modifier.SetStackCount(modifier.GetStackCount() + bonus_stacks);
@@ -880,6 +949,7 @@ export class imba_alchemist_goblins_greed extends BaseAbility_Plus {
         }
     }
 }
+
 @registerModifier()
 export class modifier_imba_greevil_gold extends BaseModifier_Plus {
     BeCreated(p_0: any,): void {
@@ -887,12 +957,13 @@ export class modifier_imba_greevil_gold extends BaseModifier_Plus {
             this.StartIntervalThink(2);
         }
     }
+
     OnIntervalThink(): void {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
             let ability = this.GetAbilityPlus();
             let gold_particle = "particles/units/heroes/hero_alchemist/alchemist_lasthit_coins.vpcf";
-            let player = PlayerResource.GetPlayer(caster.GetPlayerOwnerID());
+            let player = PlayerResource.GetPlayer(caster.GetPlayerID());
             let greed_modifier = caster.findBuff<modifier_imba_goblins_greed_passive>("modifier_imba_goblins_greed_passive");
             let stacks;
             if (greed_modifier) {
@@ -908,30 +979,37 @@ export class modifier_imba_greevil_gold extends BaseModifier_Plus {
             ParticleManager.SetParticleControl(msg_particle_fx, 1, Vector(0, total_gold, 0));
             ParticleManager.SetParticleControl(msg_particle_fx, 2, Vector(2, string.len(total_gold + "") + 1, 0));
             ParticleManager.SetParticleControl(msg_particle_fx, 3, Vector(255, 200, 33));
-            let playerroot = GGameScene.GetPlayer(caster.GetPlayerOwnerID());
+            let playerroot = GGameScene.GetPlayer(caster.GetPlayerID());
             let PlayerData = playerroot.PlayerDataComp();
             PlayerData.ModifyGold(total_gold, false, EDOTA_ModifyGold_Reason.DOTA_ModifyGold_Unspecified);
         }
     }
+
     IsHidden(): boolean {
         return true;
     }
+
     IsPurgable(): boolean {
         return true;
     }
+
     IsDebuff(): boolean {
         return false;
     }
 }
+
 @registerModifier()
 export class modifier_imba_goblins_greed_passive extends BaseModifier_Plus {
     public greed_stacks: number;
+
     RemoveOnDeath(): boolean {
         return false;
     }
+
     GetAttributes(): DOTAModifierAttribute_t {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_PERMANENT + DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE;
     }
+
     BeCreated(p_0: any,): void {
         if (IsServer()) {
             this.greed_stacks = this.GetStackCount();
@@ -941,6 +1019,7 @@ export class modifier_imba_goblins_greed_passive extends BaseModifier_Plus {
             }
         }
     }
+
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
             1: Enum_MODIFIER_EVENT.ON_DEATH
@@ -961,10 +1040,10 @@ export class modifier_imba_goblins_greed_passive extends BaseModifier_Plus {
             if (unit.IsRealUnit()) {
                 hero_multiplier = ability.GetSpecialValueFor("hero_multiplier");
             }
-            let playerroot = GGameScene.GetPlayer(caster.GetPlayerOwnerID());
+            let playerroot = GGameScene.GetPlayer(caster.GetPlayerID());
             let PlayerData = playerroot.PlayerDataComp();
             PlayerData.ModifyGold(stacks * hero_multiplier, false, EDOTA_ModifyGold_Reason.DOTA_ModifyGold_Unspecified);
-            let player = PlayerResource.GetPlayer(caster.GetPlayerOwnerID());
+            let player = PlayerResource.GetPlayer(caster.GetPlayerID());
             let particleName = "particles/units/heroes/hero_alchemist/alchemist_lasthit_coins.vpcf";
             let particle1 = ParticleManager.CreateParticleForPlayer(particleName, ParticleAttachment_t.PATTACH_ABSORIGIN, unit, player);
             ParticleManager.SetParticleControl(particle1, 0, unit.GetAbsOrigin());
@@ -990,16 +1069,20 @@ export class modifier_imba_goblins_greed_passive extends BaseModifier_Plus {
         }
     }
 }
+
 @registerAbility()
 export class imba_alchemist_greevils_greed extends BaseAbility_Plus {
 
     target: IBaseNpc_Plus;
+
     GetAbilityTextureName(): string {
         return "alchemist_goblins_greed";
     }
+
     GetCastRange(p_0: Vector, p_1: CDOTA_BaseNPC | undefined,): number {
         return 1;
     }
+
     OnSpellStart(): void {
         let caster = this.GetCasterPlus();
         let target = this.GetCursorTarget();
@@ -1014,15 +1097,18 @@ export class imba_alchemist_greevils_greed extends BaseAbility_Plus {
         this.target = target;
         caster.MoveToNPC(owner as IBaseNpc_Plus);
     }
+
     GetIntrinsicModifierName(): string {
         return "modifier_imba_greevils_greed_handler";
     }
 }
+
 @registerModifier()
 export class modifier_imba_greevils_greed_handler extends BaseModifier_Plus {
     public caster: IBaseNpc_Plus;
     public ability: imba_alchemist_greevils_greed;
     public owner: IBaseNpc_Plus;
+
     BeCreated(p_0: any,): void {
         if (IsServer()) {
             this.caster = this.GetCasterPlus();
@@ -1031,6 +1117,7 @@ export class modifier_imba_greevils_greed_handler extends BaseModifier_Plus {
             this.StartIntervalThink(0.5);
         }
     }
+
     OnIntervalThink(): void {
         if (IsServer()) {
             // if (this.owner.IsImbaInvisible()) {
@@ -1051,6 +1138,7 @@ export class modifier_imba_greevils_greed_handler extends BaseModifier_Plus {
             }
         }
     }
+
     CheckState(): Partial<Record<modifierstate, boolean>> {
         if (IsServer()) {
             let state = {
@@ -1064,17 +1152,34 @@ export class modifier_imba_greevils_greed_handler extends BaseModifier_Plus {
         }
     }
 }
+
 @registerAbility()
 export class imba_alchemist_chemical_rage extends BaseAbility_Plus {
+
+    GetCooldown(level: number): number {
+        return 20;
+    }
+
+    GetManaCost(level: number): number {
+        return 100;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_if_enemy(this);
+    }
+
     GetAbilityTextureName(): string {
         return "alchemist_chemical_rage";
     }
+
     IsHiddenWhenStolen(): boolean {
         return false;
     }
+
     GetAssociatedSecondaryAbilities(): string {
         return "imba_alchemist_acid_spray";
     }
+
     OnSpellStart(): void {
         let caster = this.GetCasterPlus();
         let cast_response = {
@@ -1116,12 +1221,15 @@ export class imba_alchemist_chemical_rage extends BaseAbility_Plus {
         caster.EmitSound("Hero_Alchemist.ChemicalRage.Cast");
     }
 }
+
 @registerModifier()
 export class modifier_imba_chemical_rage_handler extends BaseModifier_Plus {
     public transformation_time: number;
+
     IsHidden(): boolean {
         return true;
     }
+
     BeCreated(p_0: any,): void {
         if (!this.GetAbilityPlus()) {
             this.Destroy();
@@ -1136,11 +1244,13 @@ export class modifier_imba_chemical_rage_handler extends BaseModifier_Plus {
             this.SetDuration(this.transformation_time, false);
         }
     }
+
     CheckState(): Partial<Record<modifierstate, boolean>> {
         return {
             [modifierstate.MODIFIER_STATE_INVULNERABLE]: true
         };
     }
+
     BeDestroy(): void {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
@@ -1163,6 +1273,7 @@ export class modifier_imba_chemical_rage_handler extends BaseModifier_Plus {
         }
     }
 }
+
 @registerModifier()
 export class modifier_imba_chemical_rage_buff_haste extends BaseModifier_Plus {
     public bonus_mana_regen: number;
@@ -1171,9 +1282,11 @@ export class modifier_imba_chemical_rage_buff_haste extends BaseModifier_Plus {
     public base_attack_time: number;
     public ability: IBaseAbility_Plus;
     public radius: number;
+
     AllowIllusionDuplicate(): boolean {
         return true;
     }
+
     BeCreated(p_0: any,): void {
         this.bonus_mana_regen = this.GetSpecialValueFor("bonus_mana_regen");
         this.bonus_health_regen = this.GetSpecialValueFor("bonus_health_regen");
@@ -1196,6 +1309,7 @@ export class modifier_imba_chemical_rage_buff_haste extends BaseModifier_Plus {
             this.AddParticle(particle_acid_aura_fx, false, false, -1, false, false);
         }
     }
+
     BeDestroy(): void {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
@@ -1205,24 +1319,31 @@ export class modifier_imba_chemical_rage_buff_haste extends BaseModifier_Plus {
             }
         }
     }
+
     IsAura(): boolean {
         return true;
     }
+
     GetAuraRadius(): number {
         return this.radius;
     }
+
     GetAuraSearchTeam(): DOTA_UNIT_TARGET_TEAM {
         return DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY;
     }
+
     GetAuraSearchType(): DOTA_UNIT_TARGET_TYPE {
         return DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC;
     }
+
     GetAuraSearchFlags(): DOTA_UNIT_TARGET_FLAGS {
         return DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES;
     }
+
     GetModifierAura(): string {
         return "modifier_imba_chemical_rage_aura";
     }
+
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
             1: GPropertyConfig.EMODIFIER_PROPERTY.MANA_REGEN_CONSTANT,
@@ -1237,55 +1358,70 @@ export class modifier_imba_chemical_rage_buff_haste extends BaseModifier_Plus {
     CC_GetActivityTranslationModifiers(): string {
         return "chemical_rage";
     }
+
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TRANSLATE_ATTACK_SOUND)
     CC_GetAttackSound(): string {
         return "Hero_Alchemist.ChemicalRage.Attack";
     }
+
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MANA_REGEN_CONSTANT)
     CC_GetModifierConstantManaRegen(): number {
         return this.bonus_mana_regen;
     }
+
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_REGEN_CONSTANT)
     CC_GetModifierConstantHealthRegen(): number {
         return this.bonus_health_regen;
     }
+
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_CONSTANT)
     CC_GetModifierMoveSpeedBonus_Constant(): number {
         return this.bonus_movespeed;
     }
+
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASE_ATTACK_TIME_CONSTANT)
     CC_GetModifierBaseAttackTimeConstant(): number {
         return this.base_attack_time;
     }
+
     GetEffectName(): string {
         return "particles/units/heroes/hero_alchemist/alchemist_chemical_rage.vpcf";
     }
+
     GetEffectAttachType(): ParticleAttachment_t {
         return ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW;
     }
+
     GetStatusEffectName(): string {
         return "particles/status_fx/status_effect_chemical_rage.vpcf";
     }
+
     StatusEffectPriority(): modifierpriority {
         return 10;
     }
+
     GetHeroEffectName(): string {
         return "particles/units/heroes/hero_alchemist/alchemist_chemical_rage_hero_effect.vpcf";
     }
+
     HeroEffectPriority(): modifierpriority {
         return 10;
     }
 }
+
 @registerModifier()
 export class modifier_imba_chemical_rage_aura extends BaseModifier_Plus {
     public ability: IBaseAbility_Plus;
     public modifier: any;
+
     IsDebuff(): boolean {
         return true;
     }
+
     IsHidden(): boolean {
         return true;
     }
+
     Init(p_0: any,): void {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
@@ -1310,30 +1446,38 @@ export class modifier_imba_chemical_rage_aura extends BaseModifier_Plus {
         }
     }
 }
+
 @registerModifier()
 export class modifier_imba_chemical_rage_aura_talent extends BaseModifier_Plus {
     IsHidden(): boolean {
         return true;
     }
+
     IsAura(): boolean {
         return true;
     }
+
     GetAuraRadius(): number {
         return this.GetCasterPlus().GetTalentValue("special_bonus_imba_alchemist_8");
     }
+
     GetAuraSearchTeam(): DOTA_UNIT_TARGET_TEAM {
         return DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY;
     }
+
     GetAuraSearchType(): DOTA_UNIT_TARGET_TYPE {
         return DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO;
     }
+
     GetAuraSearchFlags(): DOTA_UNIT_TARGET_FLAGS {
         return DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_CREEP_HERO;
     }
+
     GetModifierAura(): string {
         return "modifier_imba_chemical_rage_aura_buff";
     }
 }
+
 @registerModifier()
 export class modifier_imba_chemical_rage_aura_buff extends BaseModifier_Plus {
     BeCreated(p_0: any,): void {
@@ -1345,11 +1489,13 @@ export class modifier_imba_chemical_rage_aura_buff extends BaseModifier_Plus {
         }
         this.StartIntervalThink(0.5);
     }
+
     OnIntervalThink(): void {
         if (this.GetCasterPlus().HasModifier("modifier_imba_goblins_greed_passive")) {
             this.SetStackCount(this.GetCasterPlus().findBuff<modifier_imba_goblins_greed_passive>("modifier_imba_goblins_greed_passive").GetStackCount());
         }
     }
+
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
             1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE
@@ -1359,45 +1505,57 @@ export class modifier_imba_chemical_rage_aura_buff extends BaseModifier_Plus {
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.GetStackCount();
     }
+
     IsDebuff(): boolean {
         return false;
     }
+
     IsHidden(): boolean {
         return false;
     }
 }
+
 @registerAbility()
 export class imba_alchemist_mammonite extends BaseAbility_Plus {
     GetAbilityTextureName(): string {
         return "alchemist_mammonite";
     }
+
     IsStealable(): boolean {
         return false;
     }
+
     OnToggle(): void {
         return;
     }
+
     GetIntrinsicModifierName(): string {
         return "modifier_mammonite_passive";
     }
 }
+
 @registerModifier()
 export class modifier_mammonite_passive extends BaseModifier_Plus {
     public caster: IBaseNpc_Plus;
     public ability: IBaseAbility_Plus;
     public gold_damage: number;
+
     IsHidden(): boolean {
         return true;
     }
+
     IsPurgable(): boolean {
         return false;
     }
+
     IsDebuff(): boolean {
         return false;
     }
+
     RemoveOnDeath(): boolean {
         return false;
     }
+
     Init(p_0: any,): void {
         this.caster = this.GetCasterPlus();
         this.ability = this.GetAbilityPlus();
@@ -1416,12 +1574,13 @@ export class modifier_mammonite_passive extends BaseModifier_Plus {
     CC_GetModifierAbilityLayout(): number {
         return 5;
     }
+
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         if (IsServer()) {
             if (this.caster.HasScepter()) {
                 if (this.ability.GetToggleState()) {
-                    let player = GGameScene.GetPlayer(this.caster.GetPlayerOwnerID());
+                    let player = GGameScene.GetPlayer(this.caster.GetPlayerID());
                     let PlayerData = player.PlayerDataComp();
                     let gold = PlayerData.GetGold();
                     let gold_percent = this.gold_damage * 0.01;
@@ -1431,6 +1590,7 @@ export class modifier_mammonite_passive extends BaseModifier_Plus {
             }
         }
     }
+
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_FINISHED)
     CC_OnAttackFinished(keys: ModifierAttackEvent): void {
         if (IsServer()) {
@@ -1438,7 +1598,7 @@ export class modifier_mammonite_passive extends BaseModifier_Plus {
             if (this.caster == attacker) {
                 if (this.caster.HasScepter()) {
                     if (this.ability.GetToggleState()) {
-                        let player = GGameScene.GetPlayer(this.caster.GetPlayerOwnerID());
+                        let player = GGameScene.GetPlayer(this.caster.GetPlayerID());
                         let PlayerData = player.PlayerDataComp();
                         let gold = PlayerData.GetGold();
                         let gold_percent = this.gold_damage * 0.01;
@@ -1450,98 +1610,122 @@ export class modifier_mammonite_passive extends BaseModifier_Plus {
         }
     }
 }
+
 @registerModifier()
 export class modifier_special_bonus_imba_alchemist_1 extends BaseModifier_Plus {
     IsHidden(): boolean {
         return true;
     }
+
     IsPurgable(): boolean {
         return false;
     }
+
     RemoveOnDeath(): boolean {
         return false;
     }
 }
+
 @registerModifier()
 export class modifier_special_bonus_imba_alchemist_2 extends BaseModifier_Plus {
     IsHidden(): boolean {
         return true;
     }
+
     IsPurgable(): boolean {
         return false;
     }
+
     RemoveOnDeath(): boolean {
         return false;
     }
 }
+
 @registerModifier()
 export class modifier_special_bonus_imba_alchemist_3 extends BaseModifier_Plus {
     IsHidden(): boolean {
         return true;
     }
+
     IsPurgable(): boolean {
         return false;
     }
+
     RemoveOnDeath(): boolean {
         return false;
     }
 }
+
 @registerModifier()
 export class modifier_special_bonus_imba_alchemist_4 extends BaseModifier_Plus {
     IsHidden(): boolean {
         return true;
     }
+
     IsPurgable(): boolean {
         return false;
     }
+
     RemoveOnDeath(): boolean {
         return false;
     }
 }
+
 @registerModifier()
 export class modifier_special_bonus_imba_alchemist_5 extends BaseModifier_Plus {
     IsHidden(): boolean {
         return true;
     }
+
     IsPurgable(): boolean {
         return false;
     }
+
     RemoveOnDeath(): boolean {
         return false;
     }
 }
+
 @registerModifier()
 export class modifier_special_bonus_imba_alchemist_6 extends BaseModifier_Plus {
     IsHidden(): boolean {
         return true;
     }
+
     IsPurgable(): boolean {
         return false;
     }
+
     RemoveOnDeath(): boolean {
         return false;
     }
 }
+
 @registerModifier()
 export class modifier_special_bonus_imba_alchemist_7 extends BaseModifier_Plus {
     IsHidden(): boolean {
         return true;
     }
+
     IsPurgable(): boolean {
         return false;
     }
+
     RemoveOnDeath(): boolean {
         return false;
     }
 }
+
 @registerModifier()
 export class modifier_special_bonus_imba_alchemist_8 extends BaseModifier_Plus {
     IsHidden(): boolean {
         return true;
     }
+
     IsPurgable(): boolean {
         return false;
     }
+
     RemoveOnDeath(): boolean {
         return false;
     }

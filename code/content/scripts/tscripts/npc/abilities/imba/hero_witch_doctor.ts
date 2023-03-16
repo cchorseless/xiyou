@@ -750,7 +750,7 @@ export class imba_witch_doctor_death_ward extends BaseAbility_Plus {
         this.AddTimer(FrameTime(), () => {
             ResolveNPCPositions(vPosition, 128);
         });
-        death_ward.SetControllableByPlayer(this.GetCasterPlus().GetPlayerOwnerID(), true);
+        death_ward.SetControllableByPlayer(this.GetCasterPlus().GetPlayerID(), true);
         death_ward.SetOwner(this.GetCasterPlus());
         death_ward.SetCanSellItems(false);
         death_ward.SetBaseAttackTime(this.GetSpecialValueFor("base_attack_time"));

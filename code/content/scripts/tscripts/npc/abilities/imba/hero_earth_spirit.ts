@@ -793,9 +793,9 @@ export class modifier_imba_boulder_smash_cast_thinker extends BaseModifier_Plus 
                     if (CalcDistanceBetweenEntityOBB(this.caster, this.target) <= this.castRange) {
                         this.caster.Interrupt();
                         if (this.target.HasModifier("modifier_imba_stone_remnant")) {
-                            this.caster.CastAbilityOnPosition(this.caster.GetAbsOrigin() + this.caster.GetForwardVector() * 10 as Vector, this.GetAbilityPlus(), this.caster.GetPlayerOwnerID());
+                            this.caster.CastAbilityOnPosition(this.caster.GetAbsOrigin() + this.caster.GetForwardVector() * 10 as Vector, this.GetAbilityPlus(), this.caster.GetPlayerID());
                         } else {
-                            this.caster.CastAbilityOnTarget(this.target, this.GetAbilityPlus(), this.caster.GetPlayerOwnerID());
+                            this.caster.CastAbilityOnTarget(this.target, this.GetAbilityPlus(), this.caster.GetPlayerID());
                         }
                         this.Destroy();
                     }
@@ -803,9 +803,9 @@ export class modifier_imba_boulder_smash_cast_thinker extends BaseModifier_Plus 
                     if (CalcDistanceBetweenEntityOBB(this.caster, this.target) <= this.castRange) {
                         this.caster.Interrupt();
                         if (this.target.HasModifier("modifier_imba_stone_remnant")) {
-                            this.caster.CastAbilityOnPosition(this.caster.GetAbsOrigin() + this.caster.GetForwardVector() * 10 as Vector, this.GetAbilityPlus(), this.caster.GetPlayerOwnerID());
+                            this.caster.CastAbilityOnPosition(this.caster.GetAbsOrigin() + this.caster.GetForwardVector() * 10 as Vector, this.GetAbilityPlus(), this.caster.GetPlayerID());
                         } else {
-                            this.caster.CastAbilityOnTarget(this.target, this.GetAbilityPlus(), this.caster.GetPlayerOwnerID());
+                            this.caster.CastAbilityOnTarget(this.target, this.GetAbilityPlus(), this.caster.GetPlayerID());
                         }
                         this.Destroy();
                     }

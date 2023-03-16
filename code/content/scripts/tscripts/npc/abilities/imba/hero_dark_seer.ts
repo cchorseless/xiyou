@@ -413,12 +413,10 @@ export class modifier_imba_dark_seer_vacuum_entry_portal extends BaseModifier_Pl
                     EmitSoundOnLocationWithCaster(unit.GetAbsOrigin(), "Wormhole.CreepDisappear", this.GetCasterPlus());
                 }
                 FindClearSpaceForUnit(unit, this.exit_portal.GetAbsOrigin(), true);
-                if (unit.GetPlayerOwnerID) {
-                    PlayerResource.SetCameraTarget(unit.GetPlayerOwnerID(), unit);
-                    unit.AddNewModifier(unit, this.GetAbilityPlus(), "modifier_imba_dark_seer_vacuum_camera_track", {
-                        duration: FrameTime()
-                    });
-                }
+                PlayerResource.SetCameraTarget(unit.GetPlayerID(), unit);
+                unit.AddNewModifier(unit, this.GetAbilityPlus(), "modifier_imba_dark_seer_vacuum_camera_track", {
+                    duration: FrameTime()
+                });
                 if (unit.IsRealUnit()) {
                     EmitSoundOnLocationWithCaster(unit.GetAbsOrigin(), "Wormhole.Appear", this.GetCasterPlus());
                 } else {
@@ -466,7 +464,7 @@ export class modifier_imba_dark_seer_vacuum_camera_track extends BaseModifier_Pl
         if (!IsServer()) {
             return;
         }
-        PlayerResource.SetCameraTarget(this.GetParentPlus().GetPlayerOwnerID(), undefined);
+        PlayerResource.SetCameraTarget(this.GetParentPlus().GetPlayerID(), undefined);
     }
 }
 @registerAbility()

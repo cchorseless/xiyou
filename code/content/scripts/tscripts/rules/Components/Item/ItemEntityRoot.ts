@@ -13,7 +13,7 @@ export class ItemEntityRoot extends BaseEntityRoot {
         (this.EntityId as any) = item.GetEntityIndex();
         let hPurchaser = item.GetPurchaser();
         if (hPurchaser) {
-            (this.BelongPlayerid as any) = hPurchaser.GetPlayerOwnerID();
+            (this.BelongPlayerid as any) = hPurchaser.GetPlayerID();
         }
         this.regSelfToInventory();
     }

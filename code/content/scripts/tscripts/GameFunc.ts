@@ -487,6 +487,12 @@ export module FuncEntity {
             if (unit.OnDestroy) {
                 unit.OnDestroy();
             }
+            if (unit.__TempData) {
+                for (let k in unit.__TempData) {
+                    delete unit.__TempData[k];
+                }
+                unit.__TempData = null;
+            }
             unit.Destroy();
             // UTIL_Remove(unit);
         }

@@ -148,7 +148,7 @@ export class ControlComponent extends ET.Component {
         if (!IsServer()) { return };
         let domain = this.GetDomain<BaseNpc>();
         // 摄像机跟随
-        PlayerResource.SetCameraTarget(domain.GetPlayerOwnerID(), domain);
+        PlayerResource.SetCameraTarget(domain.GetPlayerID(), domain);
         // 键盘输入
         EventHelper.addProtocolEvent(GameProtocol.Protocol.req_KEY_DOWN, GHandler.create(this, this.onKey_Down));
         EventHelper.addProtocolEvent(GameProtocol.Protocol.req_KEY_UP, GHandler.create(this, this.onKey_Up));
@@ -169,7 +169,7 @@ export class ControlComponent extends ET.Component {
         if (tData == null || tData.tKeyDown == null || tData.tKeyDown.length == 0) { return }
         let hUnit = domain;
         if (hUnit == null || hUnit.IsCommandRestricted() || hUnit.IsStunned()) { return }
-        let iPlayerID = hUnit.GetPlayerOwnerID()
+        let iPlayerID = hUnit.GetPlayerID()
         let tKeySetting = this.tDefaultKeySetting
         let vDirection = vec3_zero
         let bDodge = false

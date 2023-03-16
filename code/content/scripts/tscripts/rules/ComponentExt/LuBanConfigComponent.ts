@@ -2,7 +2,6 @@ import { NetTablesHelper } from "../../helper/NetTablesHelper";
 import { ToBase64 } from "../../lib/Base64";
 import { CompressZlib } from "../../lib/zlib";
 import { GameServiceConfig } from "../../shared/GameServiceConfig";
-import { RefreshConfig } from "../../shared/Gen/JsonConfig";
 import { ET, serializeETProps } from "../../shared/lib/Entity";
 
 
@@ -35,7 +34,7 @@ export class LuBanConfigComponent extends ET.Component {
             NetTablesHelper.SetData(GameServiceConfig.ENetTables.sheetconfig, k, { _: _str2 })
             this.ClientSyncConfig.add(k, "");
         })
-        RefreshConfig(obj);
+        // RefreshConfig(obj);
         this.SyncClient();
     }
 

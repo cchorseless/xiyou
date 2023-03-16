@@ -1362,7 +1362,7 @@ export class modifier_rubick_spellsteal_hidden extends BaseModifier_Plus {
             if (!params.ability.IsStealable()) {
                 return;
             }
-            if (string.find(params.ability.GetAbilityName(), "item")) {
+            if (string.find(params.ability.GetAbilityName(), "item_")) {
                 return;
             }
             this.GetAbilityPlus<imba_rubick_spellsteal>().SetLastSpell(params.unit, params.ability as IBaseAbility_Plus);

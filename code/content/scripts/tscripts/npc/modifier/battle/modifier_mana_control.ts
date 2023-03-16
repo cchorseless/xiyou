@@ -21,7 +21,7 @@ export class modifier_mana_control extends BaseModifier_Plus {
             this.caster.SetMana(0);
         }
     }
-    baseMana = 10;
+    baseMana = 3;
     takedamageCount = 0;
     @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
     public CC_OnTakeDamage(params: ModifierInstanceEvent): void {

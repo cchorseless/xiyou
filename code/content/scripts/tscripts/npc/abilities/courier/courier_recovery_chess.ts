@@ -10,7 +10,7 @@ export class courier_recovery_chess extends BaseAbility_Plus {
         //     return UnitFilterResult.UF_FAIL_CUSTOM;
         // }
         let caster = this.GetCasterPlus();
-        if (caster.GetPlayerOwnerID() != target.GetPlayerOwnerID()) {
+        if (caster.GetPlayerID() != target.GetPlayerID()) {
             return UnitFilterResult.UF_FAIL_NOT_PLAYER_CONTROLLED;
         }
         return UnitFilter(
@@ -36,7 +36,7 @@ export class courier_recovery_chess extends BaseAbility_Plus {
         }
         let caster = this.GetCasterPlus();
         //  断线不能卖塔（这应该是队友操作的）
-        let iPlayerID = caster.GetPlayerOwnerID();
+        let iPlayerID = caster.GetPlayerID();
         if (PlayerResource.GetConnectionState(iPlayerID) == DOTAConnectionState_t.DOTA_CONNECTION_STATE_DISCONNECTED) {
             return;
         }

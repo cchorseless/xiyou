@@ -121,7 +121,7 @@ export class GameSetting {
                 let fDamage = event.damage;
                 let iDamageType = event.damagetype_const;
                 [hAttacker, hVictim].forEach(unit => {
-                    let iPlayerID = unit.GetPlayerOwnerID();
+                    let iPlayerID = unit.GetPlayerID();
                     if (PlayerResource.IsValidPlayerID(iPlayerID)) {
                         let hHero = PlayerResource.GetSelectedHeroEntity(iPlayerID)
                         if (hHero != unit) {

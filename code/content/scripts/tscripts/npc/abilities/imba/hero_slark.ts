@@ -198,9 +198,7 @@ export class modifier_imba_slark_dark_pact_pulses extends BaseModifier_Plus {
                 this.bStoreHealth = true;
             } else if (this.GetAbilityPlus() && this.GetAbilityPlus().GetAutoCastState()) {
                 let spawn_unit = BaseNpc_Plus.CreateUnitByName("npc_dota_slark_spawn", this.GetParentPlus().GetAbsOrigin() + RandomVector(128) as Vector, this.GetParentPlus(), true);
-                if (this.GetParentPlus().GetPlayerOwnerID) {
-                    spawn_unit.SetControllableByPlayer(this.GetParentPlus().GetPlayerOwnerID(), false);
-                }
+                spawn_unit.SetControllableByPlayer(this.GetParentPlus().GetPlayerID(), false);
                 spawn_unit.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_kill", {
                     duration: this.premature_spawn_duration
                 });

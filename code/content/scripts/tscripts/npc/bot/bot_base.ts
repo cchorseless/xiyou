@@ -7,7 +7,7 @@ export class bot_base extends BaseNpc_Hero_Plus {
         this.GetPlayerOwner().SetAssignedHeroEntity(this);
         let startPoint = GPlayerEntityRoot.HeroSpawnPoint[this.GetPlayerID() as number] || Vector(0, 0, 284);
         let a = GetGroundPosition(startPoint, this);
-        LogHelper.print("ADD BOT => PLAYERID :" + this.GetPlayerOwnerID(), this.GetPlayerOwner().GetModelName(), a);
+        LogHelper.print("ADD BOT => PLAYERID :" + this.GetPlayerID(), this.GetPlayerOwner().GetModelName(), a);
         this.SetAbsOrigin(a);
     }
 

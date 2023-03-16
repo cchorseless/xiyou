@@ -645,7 +645,7 @@ export class imba_void_spirit_astral_step_helper_2 extends BaseAbility_Plus {
             this.GetCasterPlus().StartGestureWithPlaybackRate(GameActivity_t.ACT_DOTA_CAST_ABILITY_2_END, 0.2);
             return true;
         } else {
-            EventHelper.ErrorMessage("#dota_hud_error_astral_step_no_charges", this.GetCasterPlus().GetPlayerOwnerID());
+            EventHelper.ErrorMessage("#dota_hud_error_astral_step_no_charges", this.GetCasterPlus().GetPlayerID());
             return false;
         }
     }

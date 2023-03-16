@@ -260,7 +260,7 @@ export class imba_enchantress_enchant extends BaseAbility_Plus {
             }
             this.target.SetOwner(this.caster);
             this.target.SetTeam(this.caster.GetTeam());
-            this.target.SetControllableByPlayer(this.caster.GetPlayerOwnerID(), false);
+            this.target.SetControllableByPlayer(this.caster.GetPlayerID(), false);
             this.target.AddNewModifier(this.caster, this, "modifier_imba_enchantress_enchant_controlled", {
                 duration: this.dominate_duration
             });

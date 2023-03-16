@@ -54,7 +54,7 @@ export class imba_chaos_knight_reality_rift extends BaseAbility_Plus {
             ParticleManager.ReleaseParticleIndex(particle);
             let units = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_CLOSEST, false);
             for (const [_, unit] of GameFunc.iPair(units)) {
-                if (unit.GetPlayerOwnerID() == caster.GetPlayerOwnerID()) {
+                if (unit.GetPlayerID() == caster.GetPlayerID()) {
                     AnimationHelper.StartAnimation(unit, {
                         duration: 0.4,
                         activity: GameActivity_t.ACT_DOTA_OVERRIDE_ABILITY_2,
@@ -97,7 +97,7 @@ export class imba_chaos_knight_reality_rift extends BaseAbility_Plus {
                 ExecuteOrderFromTable(order);
                 let units = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_CLOSEST, false);
                 for (const [_, unit] of GameFunc.iPair(units)) {
-                    if (unit.GetPlayerOwnerID() == caster.GetPlayerOwnerID()) {
+                    if (unit.GetPlayerID() == caster.GetPlayerID()) {
                         FindClearSpaceForUnit(unit, this.random_point, true);
                         unit.Stop();
                         unit.SetForwardVector(this.fw * -1 as Vector);

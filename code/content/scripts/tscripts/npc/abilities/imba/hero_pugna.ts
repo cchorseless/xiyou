@@ -367,7 +367,7 @@ export class imba_pugna_nether_ward extends BaseAbility_Plus {
         let ability_level = ability.GetLevel();
         let sound_cast = "Hero_Pugna.NetherWard";
         let ability_ward = "imba_pugna_nether_ward_aura";
-        let player_id = caster.GetPlayerOwnerID();
+        let player_id = caster.GetPlayerID();
         let duration = ability.GetSpecialValueFor("duration");
         let point: Vector[] = [
             target_point,
@@ -708,7 +708,7 @@ export class modifier_imba_nether_ward_degen extends BaseModifier_Plus {
                 "85": "imba_alchemist_unstable_concoction",
                 "86": "imba_alchemist_chemical_rage"
             }
-            if (string.find(cast_ability_name, "item")) {
+            if (string.find(cast_ability_name, "item_")) {
                 return;
             }
             if (target.IsMagicImmune()) {

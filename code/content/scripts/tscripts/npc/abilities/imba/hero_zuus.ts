@@ -571,7 +571,7 @@ export class imba_zuus_cloud extends BaseAbility_Plus {
             EmitSoundOnLocationWithCaster(this.target_point, "Hero_Zuus.Cloud.Cast", caster);
             caster.RemoveModifierByName("modifier_imba_zuus_on_nimbus");
             this.zuus_nimbus_unit = BaseNpc_Plus.CreateUnitByName("npc_dota_zeus_cloud", Vector(this.target_point.x, this.target_point.y, 450), caster, false);
-            this.zuus_nimbus_unit.SetControllableByPlayer(caster.GetPlayerOwnerID(), true);
+            this.zuus_nimbus_unit.SetControllableByPlayer(caster.GetPlayerID(), true);
             this.zuus_nimbus_unit.SetModelScale(0.7);
             this.zuus_nimbus_unit.AddNewModifier(this.zuus_nimbus_unit, this, "modifier_phased", {});
             this.zuus_nimbus_unit.AddNewModifier(caster, this, "modifier_zuus_nimbus_storm", {

@@ -27,7 +27,7 @@ export class CourierEntityRoot extends BaseEntityRoot {
     itemSlotData: EntityIndex[] = [];
     onAwake() {
         let hero = this.GetDomain<IBaseNpc_Hero_Plus>();
-        (this.BelongPlayerid as any) = hero.GetPlayerOwnerID();
+        (this.BelongPlayerid as any) = hero.GetPlayerID();
         (this.ConfigID as any) = hero.GetUnitName();
         (this.EntityId as any) = hero.GetEntityIndex();
         this.AddComponent(GGetRegClass<typeof AbilityManagerComponent>("AbilityManagerComponent"));

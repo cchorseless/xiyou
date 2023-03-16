@@ -31163,7 +31163,7 @@
     "acitve_special_effect": "",
     "heroid": "building_hero_arc_warden",
     "Abilityid": "imba_arc_warden_spark_wraith",
-    "Equipid": 20009
+    "Equipid": 0
   },
   {
     "id": "sect_summon_b_arc_warden_spark_wraith_1",
@@ -31177,7 +31177,7 @@
     "acitve_special_effect": "modifier_sect_summon_arc_warden_spark_wraith_b",
     "heroid": "building_hero_arc_warden",
     "Abilityid": "imba_arc_warden_spark_wraith",
-    "Equipid": 20009
+    "Equipid": 0
   },
   {
     "id": "sect_summon_c_arc_warden_spark_wraith_1",
@@ -31191,7 +31191,7 @@
     "acitve_special_effect": "modifier_sect_summon_arc_warden_spark_wraith_c",
     "heroid": "building_hero_arc_warden",
     "Abilityid": "imba_arc_warden_spark_wraith",
-    "Equipid": 20009
+    "Equipid": 0
   },
   {
     "id": "sect_summon_a_beastmaster_call_of_the_wild_boar_2",

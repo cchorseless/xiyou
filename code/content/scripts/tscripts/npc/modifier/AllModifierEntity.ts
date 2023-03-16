@@ -78,7 +78,7 @@ import { modifier_courier_fx_ambient_7 } from "./courier_ambient_effect/modifier
 import { modifier_courier_fx_ambient_8 } from "./courier_ambient_effect/modifier_courier_fx_ambient_8";
 import { modifier_courier_fx_ambient_9 } from "./courier_ambient_effect/modifier_courier_fx_ambient_9";
 import { modifier_generic_orb_effect_lua } from "./generic/modifier_generic_orb_effect_lua";
-import { modifier_activity } from "./modifier_activity";
+import { modifier_spawn_activity } from "./spawn/modifier_spawn_activity";
 import { modifier_generic_knockback } from "./move/modifier_generic_knockback";
 
 
@@ -94,7 +94,7 @@ import { modifier_generic_knockback } from "./move/modifier_generic_knockback";
     modifier_generic_knockback,
     modifier_illusion,
     modifier_summon,
-    modifier_activity,
+    modifier_spawn_activity,
 ];
 
 [

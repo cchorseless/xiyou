@@ -716,7 +716,7 @@ export class modifier_imba_treant_natures_guise extends BaseModifier_Plus {
     } */
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
     CC_OnAttackLanded(keys: ModifierAttackEvent): void {
-        if (this.GetAbilityPlus() && keys.target == this.GetParentPlus() && keys.damage > 0 && (keys.attacker.GetPlayerOwnerID() || (keys.attacker as IBaseNpc_Plus).IsRoshan())) {
+        if (this.GetAbilityPlus() && keys.target == this.GetParentPlus() && keys.damage > 0 && (keys.attacker.GetPlayerID() || (keys.attacker as IBaseNpc_Plus).IsRoshan())) {
             if (this.GetParentPlus().HasModifier("modifier_imba_treant_natures_guise_tree_walking") && !GridNav.IsNearbyTree(this.GetParentPlus().GetAbsOrigin(), this.GetSpecialValueFor("radius"), false)) {
                 if (this.GetAbilityPlus().IsCooldownReady()) {
                     this.GetParentPlus().EmitSound("Hero_Treant.NaturesGuise.Off");

@@ -825,11 +825,11 @@ export class modifier_imba_brewmaster_primal_split_split_delay extends BaseModif
                     panda.SetHealth(panda.GetHealth() + this.GetCasterPlus().GetTalentValue("special_bonus_imba_brewmaster_primal_split_health"));
                 }
                 if (panda.GetUnitName().includes("brewmaster_earth")) {
-                    panda.SetControllableByPlayer(this.GetParentPlus().GetPlayerOwnerID(), true);
+                    panda.SetControllableByPlayer(this.GetParentPlus().GetPlayerID(), true);
                 } else {
-                    panda.SetControllableByPlayer(this.GetCasterPlus().GetPlayerOwnerID(), true);
+                    panda.SetControllableByPlayer(this.GetCasterPlus().GetPlayerID(), true);
                 }
-                // PlayerResource.AddToSelection(this.GetParentPlus().GetPlayerOwnerID(), panda);
+                // PlayerResource.AddToSelection(this.GetParentPlus().GetPlayerID(), panda);
                 for (const [_, ability] of GameFunc.Pair(this.standard_abilities)) {
                     if (panda.HasAbility(ability)) {
                         panda.FindAbilityByName(ability).SetLevel(this.GetAbilityPlus().GetLevel());
@@ -853,8 +853,8 @@ export class modifier_imba_brewmaster_primal_split_split_delay extends BaseModif
                 unison_ability.SetLevel(1);
                 earth_panda.SwapAbilities("imba_brewmaster_primal_unison", "generic_hidden", true, false);
             }
-            // PlayerResource.RemoveFromSelection(this.GetParentPlus().GetPlayerOwnerID(), this.GetParentPlus());
-            // PlayerResource.SetDefaultSelectionEntities(this.GetParentPlus().GetPlayerOwnerID(), this.pandas_entindexes);
+            // PlayerResource.RemoveFromSelection(this.GetParentPlus().GetPlayerID(), this.GetParentPlus());
+            // PlayerResource.SetDefaultSelectionEntities(this.GetParentPlus().GetPlayerID(), this.pandas_entindexes);
             this.GetParentPlus().AddNoDraw();
         }
     }
@@ -910,7 +910,7 @@ export class modifier_imba_brewmaster_primal_split_duration extends BaseModifier
             }
             this.GetParentPlus().FollowEntity(undefined, false);
             this.GetParentPlus().RemoveNoDraw();
-            // PlayerResource.SetDefaultSelectionEntity(this.GetParentPlus().GetPlayerOwnerID(), -1);
+            // PlayerResource.SetDefaultSelectionEntity(this.GetParentPlus().GetPlayerID(), -1);
         }
     }
     CheckState(): Partial<Record<modifierstate, boolean>> {
@@ -972,12 +972,12 @@ export class modifier_imba_brewmaster_primal_split_duration extends BaseModifier
                             if (this.parent != this.GetCasterPlus()) {
                                 this.parent.findBuff<modifier_imba_brewmaster_primal_split_duration>("modifier_imba_brewmaster_primal_split_duration").pandas_entindexes.push(panda.entindex());
                                 panda.SetOwner(this.parent);
-                                panda.SetControllableByPlayer(this.parent.GetPlayerOwnerID(), true);
+                                panda.SetControllableByPlayer(this.parent.GetPlayerID(), true);
                             }
                             break;
                         }
                     }
-                    // PlayerResource.SetDefaultSelectionEntities(this.parent.GetPlayerOwnerID(), this.parent.findBuff<modifier_imba_brewmaster_primal_split_duration>("modifier_imba_brewmaster_primal_split_duration").pandas_entindexes);
+                    // PlayerResource.SetDefaultSelectionEntities(this.parent.GetPlayerID(), this.parent.findBuff<modifier_imba_brewmaster_primal_split_duration>("modifier_imba_brewmaster_primal_split_duration").pandas_entindexes);
                     if (bNoneAlive) {
                         this.parent.RemoveModifierByName("modifier_imba_brewmaster_primal_split_duration");
                         if (keys.attacker != this.GetParentPlus()) {

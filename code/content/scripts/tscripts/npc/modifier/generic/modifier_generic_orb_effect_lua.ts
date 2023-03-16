@@ -5,10 +5,10 @@ import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_
 @registerModifier()
 export class modifier_generic_orb_effect_lua extends BaseModifier_Plus {
     public ability: IBaseOrbAbility_Plus;
-    public cast: any;
+    public cast: boolean;
     public records: { [k: string]: boolean };
     public target: IBaseNpc_Plus;
-    public bPrimed: any;
+    public bPrimed: boolean;
     IsHidden(): boolean {
         return true;
     }

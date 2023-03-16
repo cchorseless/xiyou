@@ -211,11 +211,8 @@ export class imba_malfurion_living_tower extends BaseAbility_Plus {
                 });
             }
             this.living_tower.AddNewModifier(this.living_tower, this, "modifier_imba_malfurion_living_tower", {});
-            if (this.GetCasterPlus().GetPlayerOwnerID) {
-                this.living_tower.SetControllableByPlayer(this.GetCasterPlus().GetPlayerOwnerID(), false);
-            } else if (this.GetCasterPlus().GetOwner && this.GetCasterPlus().GetOwnerPlus().GetPlayerOwnerID) {
-                this.living_tower.SetControllableByPlayer(this.GetCasterPlus().GetOwnerPlus().GetPlayerOwnerID(), false);
-            }
+            this.living_tower.SetControllableByPlayer(this.GetCasterPlus().GetPlayerID(), false);
+
             if (!this.GetCasterPlus().HasScepter()) {
                 this.living_tower.SetMaxHealth(this.GetSpecialValueFor("health"));
                 this.living_tower.SetHealth(this.GetSpecialValueFor("health"));

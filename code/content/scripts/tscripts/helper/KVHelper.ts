@@ -38,6 +38,17 @@ export module KVHelper {
             return null;
         }
     }
+    export function GetAbilityData(abilityname: string, k: string, bnumber = false) {
+        if (KvAbilitys[abilityname]) {
+            if (bnumber) {
+                return GToNumber(KvAbilitys[abilityname][k]);
+            }
+            return KvAbilitys[abilityname][k];
+        }
+        else {
+            return null;
+        }
+    }
     export function GetItemData(itemname: string, k: string, bnumber = false) {
         if (KvItems[itemname]) {
             if (bnumber) {

@@ -225,11 +225,11 @@ export class modifier_imba_bristleback_viscous_nasal_goo_autocaster extends Base
         }
         if (this.ability.GetAutoCastState() && this.ability.IsFullyCastable() && !this.ability.IsInAbilityPhase() && !this.caster.IsHexed() && !this.caster.IsNightmared() && !this.caster.IsOutOfGame() && !this.caster.IsSilenced() && !this.caster.IsStunned() && !this.caster.IsChanneling()) {
             if (this.caster.HasScepter()) {
-                this.caster.CastAbilityNoTarget(this.ability, this.caster.GetPlayerOwnerID());
+                this.caster.CastAbilityNoTarget(this.ability, this.caster.GetPlayerID());
             } else {
                 let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.caster.GetAbsOrigin(), undefined, this.ability.GetCastRange(this.caster.GetAbsOrigin(), this.caster) + this.caster.GetCastRangeBonus(), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_CLOSEST, false);
                 if (GameFunc.GetCount(enemies) > 0) {
-                    this.caster.CastAbilityOnTarget(enemies[0], this.ability, this.caster.GetPlayerOwnerID());
+                    this.caster.CastAbilityOnTarget(enemies[0], this.ability, this.caster.GetPlayerID());
                     this.AddTimer(this.ability.GetBackswingTime(), () => {
                         if (!this.ability.IsNull() && this.ability.GetCooldownTimeRemaining() > this.ability.GetBackswingTime()) {
                             this.caster.MoveToPositionAggressive(this.caster.GetAbsOrigin());
@@ -420,7 +420,7 @@ export class modifier_imba_bristleback_quill_spray_autocaster extends BaseModifi
             return;
         }
         if (this.ability.GetAutoCastState() && this.ability.IsFullyCastable() && !this.caster.IsHexed() && !this.caster.IsNightmared() && !this.caster.IsOutOfGame() && !this.caster.IsSilenced() && !this.caster.IsStunned() && !this.caster.IsChanneling()) {
-            this.caster.CastAbilityImmediately(this.ability, this.caster.GetPlayerOwnerID());
+            this.caster.CastAbilityImmediately(this.ability, this.caster.GetPlayerID());
         }
         if (this.ability.GetAutoCastState() && !this.caster.IsOutOfGame() && !this.caster.IsInvulnerable()) {
             this.distance = this.distance + GFuncVector.AsVector(this.caster.GetAbsOrigin() - this.last_position).Length();

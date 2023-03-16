@@ -73,7 +73,11 @@ function readDATA() {
             shiPinData[heroname] = shiPinData[heroname] || {};
             if (_shipininfo.prefab) {
                 shiPinData[heroname][_shipininfo.prefab] = shiPinData[heroname][_shipininfo.prefab] || [];
-                shiPinData[heroname][_shipininfo.prefab].push(k);
+                let kkk = _shipininfo.prefab
+                if (_shipininfo.item_slot && _shipininfo.item_slot.includes("persona")) {
+                    kkk += "_persona";
+                }
+                shiPinData[heroname][kkk].push(k);
             }
         }
     }
@@ -590,6 +594,7 @@ function createShiPin() {
 const imbabasepath = "E:/project/dota_project/dota_imba-master/game/scripts/npc/";
 const imbaabilitypath = imbabasepath + "npc_abilities_custom.txt";
 const imbaabilityOutPath = "excels/abilities/imba_abilities.xlsx";
+
 function createImbaAbility() {
     const abilitystr = fs.readFileSync(imbaabilitypath, "utf8");
     const lines = abilitystr.split("\n");
@@ -631,7 +636,9 @@ function createImbaAbility() {
     for (let str of abilitys) {
         let obj = keyvalues.decode(str);
         let info_ability = obj.DOTAAbilities;
-        if (!info_ability) { continue; }
+        if (!info_ability) {
+            continue;
+        }
         for (let abilityname in info_ability) {
             if (abilityname.includes(_str_start) && excludehero.indexOf(abilityname) == -1) {
                 let abilityinfo = info_ability[abilityname];
@@ -692,9 +699,9 @@ function createImbaAbility() {
 }
 
 
-
 const imbanpcpath = imbabasepath + "npc_heroes_custom.txt";
 const imbanpcexcelPath = "excels/abilities/npcability.xlsx";
+
 function createImbaNpc() {
     const abilitystr = fs.readFileSync(imbanpcpath, "utf8");
     const lines = abilitystr.split("\n");
@@ -723,7 +730,9 @@ function createImbaNpc() {
     for (let str of npcs) {
         let obj = keyvalues.decode(str);
         let info_ability = obj.DOTAHeroes;
-        if (!info_ability) { continue; }
+        if (!info_ability) {
+            continue;
+        }
         for (let abilityname in info_ability) {
             if (abilityname.includes(_str_start) && excludehero.indexOf(abilityname) == -1) {
                 let abilityinfo = info_ability[abilityname];
@@ -743,6 +752,7 @@ function createImbaNpc() {
 
 const imbaunitpath = imbabasepath + "npc_units_custom.txt";
 const imbaunitexcelPath = "excels/units/imba_units.xlsx";
+
 function createImbaUnit() {
     const abilitystr = fs.readFileSync(old_unit_path, "utf8");
     const lines = abilitystr.split("\n");
@@ -784,7 +794,9 @@ function createImbaUnit() {
     for (let str of npcs) {
         let obj = keyvalues.decode(str);
         let info = obj.DOTAUnits || obj.DOTAHeroes;
-        if (!info) { continue; }
+        if (!info) {
+            continue;
+        }
         for (let k in info) {
             if (k.indexOf(_str_start) == -1 && excludehero.indexOf(k) == -1) {
                 let npcinfo = info[k];
@@ -876,7 +888,9 @@ function createImbaUnit() {
     }
     fs.writeFileSync(imbaunitexcelPath, xlsx.build(sheets));
 }
+
 const imbakvtmpPath = "excels/abilities/1.xlsx";
+
 function addkvvaluetoexcel() {
     const checkreg = /[A-Z]/g;
     const exkey = ["LinkedSpecialBonus", "var_type", "CalculateSpellDamageTooltip"]
@@ -950,7 +964,8 @@ function addkvvaluetoexcel() {
 
 }
 
-const imba_itemkv_path = imbabasepath + "npc_items_custom.txt";;
+const imba_itemkv_path = imbabasepath + "npc_items_custom.txt";
+;
 const imba_itemexcel_Path = "excels/items/imba_items.xlsx";
 
 function createImbaItem() {
@@ -1055,6 +1070,7 @@ function createImbaItem() {
     }
     fs.writeFileSync(imba_itemexcel_Path, xlsx.build(sheets));
 }
+
 function createImbaAbility2() {
     const exkey = ["LinkedSpecialBonus", "RequiresScepter", "var_type", "CalculateSpellDamageTooltip"]
     const imbastr = fs.readFileSync("game/scripts/npc/abilities/imba_abilities.kv", "utf8");
@@ -1104,10 +1120,14 @@ function createImbaAbility2() {
     for (let str of abilitys) {
         let obj = keyvalues.decode(str);
         let info_ability = obj.DOTAAbilities;
-        if (!info_ability) { continue; }
+        if (!info_ability) {
+            continue;
+        }
         for (let abilityname in info_ability) {
             if (abilityname.includes(_str_start) && excludehero.indexOf(abilityname) == -1) {
-                if (oldSpecial[abilityname] == null) { continue; }
+                if (oldSpecial[abilityname] == null) {
+                    continue;
+                }
                 let abilityinfo = info_ability[abilityname];
                 if (abilityinfo.AbilitySpecial) {
                     for (let kk in abilityinfo.AbilitySpecial) {
@@ -1135,12 +1155,40 @@ function createImbaAbility2() {
     fs.writeFileSync(imbakvtmpPath, xlsx.build(sheets));
 }
 
-function makeOnePropExcel(prop = "AbilityChannelTime") {
-    let sheets = xlsx.parse(imbakvtmpPath);
+function makeOnePropExcel(props = [
+    "AbilityBehavior",
+    "AbilityType",
+    "AbilityUnitTargetTeam",
+    "AbilityUnitTargetType",
+    "AbilityDamage",
+    "AbilityUnitDamageType",
+    "SpellImmunityType",
+    "SpellDispellableType",
+    "FightRecapLevel",
+    "AbilitySound",
+    "AbilityCastAnimation",
+    "AbilityCastGestureSlot",
+    "AbilityCastPoint",
+    "AbilityCastRange",
+    "AbilityDuration",
+    "AbilityCooldown",
+    "AbilityChannelTime",
+    "AbilityManaCost"]) {
+    let sheets = xlsx.parse(imbaabilityOutPath);
     let sheet = sheets[0];
     let rows = sheet.data;
     let nrows = rows.length;
-    rows.push([]);
+    let kv = {};
+    let sp_k_index = {}
+    for (let prop of props) {
+        sp_k_index[prop] = rows[1].indexOf(prop)
+    }
+    console.log(sp_k_index);
+    for (let i = 2; i < nrows; i++) {
+        let row = rows[i];
+        let abilityname = row[0];
+        kv[abilityname] = row;
+    }
     const abilitystr = fs.readFileSync(old_ability_path, "utf8");
     const lines = abilitystr.split("\n");
     let abilitys = [];
@@ -1160,21 +1208,43 @@ function makeOnePropExcel(prop = "AbilityChannelTime") {
     for (let str of abilitys) {
         let obj = keyvalues.decode(str);
         let info_ability = obj.DOTAAbilities;
-        if (!info_ability) { continue; }
+        if (!info_ability) {
+            continue;
+        }
         for (let abilityname in info_ability) {
-            let abilityinfo = info_ability[abilityname];
-            if (abilityinfo[prop] != null && abilityinfo[prop] != "") {
-                let newRow = [abilityname, abilityinfo[prop]];
-                rows.push(newRow);
+            let imbaname = "imba_" + abilityname;
+            if (kv[imbaname] == null) {
+                continue;
             }
+            let abilityinfo = info_ability[abilityname];
+            let excel_abilityinfo = kv[imbaname];
+            for (let prop of props) {
+                let propindex = sp_k_index[prop];
+                if (excel_abilityinfo[propindex] == null && abilityinfo[prop] != null && abilityinfo[prop] != "") {
+                    excel_abilityinfo[propindex] = abilityinfo[prop];
+                }
+            }
+            let imbaname2 = "imba_" + abilityname + '_723';
+            if (kv[imbaname2] == null) {
+                continue;
+            }
+            let excel_abilityinfo2 = kv[imbaname2];
+            for (let prop of props) {
+                let propindex = sp_k_index[prop];
+                if (excel_abilityinfo2[propindex] == null && abilityinfo[prop] != null && abilityinfo[prop] != "") {
+                    excel_abilityinfo2[propindex] = abilityinfo[prop];
+                }
+            }
+
         }
     }
-    fs.writeFileSync(imbakvtmpPath, xlsx.build(sheets));
+    fs.writeFileSync(imbaabilityOutPath, xlsx.build(sheets));
 
 }
 
 const lang_path = "game/scripts/dota2_abilities_schinese.txt";
 const imba_lang_path = "game/scripts/imba_addon_schinese.txt";
+
 function createabilityLang() {
     let sheets = xlsx.parse(imbakvtmpPath);
     let sheet = sheets[0];
@@ -1195,16 +1265,18 @@ function createabilityLang() {
     for (let i = 0; i < lines.length - 1; i++) {
         let line = lines[i];
         // line = line.replace("dota_tooltip_", "DOTA_Tooltip_")
-        if (!line.includes('DOTA_Tooltip_') && !line.includes('dota_tooltip_')) { continue; }
+        if (!line.includes('DOTA_Tooltip_') && !line.includes('dota_tooltip_')) {
+            continue;
+        }
         let strlist = line.split('"');
         let key = line.split('"')[1].replace("_Ability_", "_ability_").replace("_description", "_Description").replace("_lore", "_Lore").replace("_note0", "_Note0").replace("_note1", "_Note1");
-        key = key.replace("_note2", "_Note2").replace("_note3", "_Note3").replace("_note4", "_Note4").replace("_note5", "_Note5").replace("_note6", "_Note6");;
+        key = key.replace("_note2", "_Note2").replace("_note3", "_Note3").replace("_note4", "_Note4").replace("_note5", "_Note5").replace("_note6", "_Note6");
+        ;
         // let isbasekey = lines[i + 1].includes("key");
         let value = ""
         if (strlist.length > 4) {
             value = strlist[3];
-        }
-        else {
+        } else {
             value = lines[i + 1].split('"')[1];
         }
         outkeys[key] = value;
@@ -1260,8 +1332,7 @@ function createabilityLang() {
             if (kk.includes("imbafication")) {
                 let des = newRow[2] || "";
                 des += "\n\n" + lineinfo[kk];
-            }
-            else {
+            } else {
                 newRow.push(kk);
                 newRow.push(lineinfo[kk]);
             }
@@ -1277,6 +1348,81 @@ function createabilityLang() {
     fs.writeFileSync(imbakvtmpPath, xlsx.build(sheets));
 }
 
+
+function clearAbilitySameSpecial() {
+    let sheets = xlsx.parse(imbaabilityOutPath);
+    if (sheets.length < 2) {
+        console.error("缺少参数表:", imba_itemexcel_Path);
+        return;
+    }
+    let sheet = sheets[0];
+    let rows = sheet.data;
+    let nrows = rows.length;
+    let startindex = 0;
+    for (let i = 0; i < nrows; i++) {
+        let row = rows[i];
+        if (i < 2) {
+            if (row.includes("AbilitySpecial")) {
+                startindex = row.indexOf("AbilitySpecial");
+                console.log("startindex", startindex);
+            }
+            continue;
+        }
+        let allkeys = {};
+        for (let i = startindex; i < row.length; i += 2) {
+            if (row[i] == null || allkeys[row[i]]) {
+                row.splice(i, 2);
+                i -= 2;
+                continue;
+            }
+            allkeys[row[i]] = true;
+        }
+
+    }
+    fs.writeFileSync(imbaabilityOutPath, xlsx.build(sheets));
+}
+
+function clearUnitPersonItemSlot() {
+    const imbakvtmpPath2 = "excels/abilities/2.xlsx";
+    let sheets = xlsx.parse(imbakvtmpPath2);
+    let sheet = sheets[0];
+    let rows = sheet.data;
+    let nrows = rows.length;
+    const shipin_config = "excels/kvConfig/shipin_config.xlsx";
+    let sheets2 = xlsx.parse(shipin_config);
+    let sheet2 = sheets2[2];
+    let rows2 = sheet2.data;
+    let nrows2 = rows2.length;
+    let kv = {}
+    let item_slot_index = rows2[1].indexOf("item_slot");
+    if (item_slot_index == -1) {
+        throw new Error("缺少item_slot字段")
+    }
+    for (let i = 2; i < nrows2; i++) {
+        let row = rows2[i];
+        kv[row[0]] = row;
+    }
+    console.log( nrows2)
+    for (let i = 2; i < nrows; i++) {
+        let len = rows[i].length;
+        for (let j = 0; j < len; j++) {
+            if (rows[i][j] != null) {
+                let findinfo = kv[rows[i][j] + ""];
+                if (findinfo) {
+                    if (findinfo[item_slot_index] && findinfo[item_slot_index].includes("person")) {
+                        rows[i].splice(j, 1);
+                        j--;
+                        len--;
+                    }
+                } else {
+                    console.log("找不到", rows[i][j]);
+                }
+            }
+        }
+    }
+    fs.writeFileSync(imbakvtmpPath2, xlsx.build(sheets));
+}
+
 (async () => {
     // var args = process.argv.splice(2);
     // readDATA();
@@ -1286,7 +1432,7 @@ function createabilityLang() {
     // createSound();
     // createImbaUnit();
     // makeOnePropExcel();
-    createabilityLang();
+    // clearUnitPersonItemSlot();
 })().catch((error) => {
     console.error(error);
     process.exit(1);

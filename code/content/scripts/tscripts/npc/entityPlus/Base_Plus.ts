@@ -406,7 +406,6 @@ export class BaseModifier {
 export interface BaseNpc extends CDOTA_BaseNPC {
 }
 export class BaseNpc implements ET.IEntityRoot {
-    ETRoot?: ET.EntityRoot;
     /**对应dota内的名字 */
     __IN_DOTA_NAME__?: string;
     /**对应dota内的数据 */
@@ -433,7 +432,10 @@ export class BaseNpc implements ET.IEntityRoot {
     ): InstanceType<T> {
         return BaseNpc.CreateUnitByName(this.name, v, entityOwner, findClearSpace, team, npcOwner) as InstanceType<T>;
     }
-
+    /**
+     * 创建单位
+     * @Server
+     */
     static CreateUnitByName(
         unitname: string,
         v: Vector,

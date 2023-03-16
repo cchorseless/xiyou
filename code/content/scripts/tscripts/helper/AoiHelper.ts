@@ -212,81 +212,9 @@ export module AoiHelper {
         type_filter: DOTA_UNIT_TARGET_TYPE,
         flag_filter: DOTA_UNIT_TARGET_FLAGS,
         order: FindOrder = FindOrder.FIND_ANY_ORDER): Vector | void {
-        let targets;
-        if (IsInToolsMode()) {
-            targets = FindUnitsInRadius(team_number, search_position, null, search_radius + radius, team_filter, type_filter, flag_filter, order, false)
-        }
-        else {
-            targets = AoiHelper.FindEntityInRadius(team_number, search_position, search_radius + radius, exclude, team_filter, type_filter, flag_filter, order)
-        }
-        let position = Vector();
-        //  let N = 0
-        if (targets.length == 1) {
-            let vDirection = (targets[0].GetAbsOrigin() - search_position) as Vector;
-            vDirection.z = 0
-            position = GetGroundPosition((search_position + vDirection.Normalized() * math.min(search_radius - 1, vDirection.Length2D())) as Vector, null)
-        }
-        else if (targets.length > 1) {
-            let tPoints: Vector[] = [];
-            //  取圆中点或交点
-            for (let i = 0; i < targets.length; i++) {
-                let first_target = targets[i]
-                //  DebugDrawCircle(first_target.GetAbsOrigin(), Vector(0, 255, 0), 32, radius, false, 0.5)
-                for (let j = i + 1; i < targets.length; j++) {
-                    //  N = N + 1
-                    let second_target = targets[j]
-                    let vDirection = (second_target.GetAbsOrigin() - first_target.GetAbsOrigin()) as Vector;
-                    vDirection.z = 0
-                    let fDistance = vDirection.Length2D()
-                    if (fDistance <= radius * 2 && fDistance > 0) {
-                        let vMid = (second_target.GetAbsOrigin() + first_target.GetAbsOrigin()) / 2 as Vector;
-                        if (((vMid - search_position) as Vector).Length2D() <= search_radius) {
-                            tPoints.push(vMid);
-                        }
-                        else {
-                            let fHalfLength = math.sqrt(radius ^ 2 - (fDistance / 2) ^ 2)
-                            let v = GFuncVector.Rotation2D(vDirection.Normalized(), math.rad(90))
-                            let p = [
-                                vMid - v * fHalfLength,
-                                vMid + v * fHalfLength
-                            ] as Vector[];
-                            for (let vPoint of p) {
-                                if (((vPoint - search_position) as Vector).Length2D() <= search_radius) {
-                                    tPoints.push(vPoint);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            //  print("O(n):"+N)
-            let iMax = 0
-            for (let i = 0; i < tPoints.length; i++) {
-                let vPoint = tPoints[i]
-                let n = 0
-                for (let j = 0; j < targets.length; j++) {
-                    //  N = N + 1
-                    let target = targets[j]
-                    if (target.IsPositionInRange(vPoint, radius + target.GetHullRadius())) {
-                        n = n + 1
-                    }
-                }
-                if (n > iMax) {
-                    position = vPoint
-                    iMax = n
-                }
-            }
-            //  如果
-            if (GFuncVector.VectorIsZero(position)) {
-                let vDirection = (targets[1].GetAbsOrigin() - search_position) as Vector;
-                vDirection.z = 0
-                position = GetGroundPosition((search_position + vDirection.Normalized() * math.min(search_radius - 1, vDirection.Length2D())) as Vector, null)
-            }
-        }
-        //  获取地面坐标
-        if (!GFuncVector.VectorIsZero(position)) {
-            position = GetGroundPosition(position, null)
-            return position
+        let targets = FindUnitsInRadius(team_number, search_position, null, search_radius, team_filter, type_filter, flag_filter, order, false)
+        if (targets.length > 0) {
+            return GetGroundPosition(targets[0].GetAbsOrigin(), undefined);
         }
         //  DebugDrawCircle(position, Vector(0, 255, 255), 32, 64, true, 0.5)
     }
@@ -356,7 +284,7 @@ export module AoiHelper {
                 }
             }
             if (position == vec3_invalid) {
-                let vDirection = targets[1].GetAbsOrigin() - search_position as Vector;
+                let vDirection = targets[0].GetAbsOrigin() - search_position as Vector;
                 vDirection.z = 0;
                 position = GetGroundPosition(search_position + vDirection.Normalized() * math.min(search_radius - 1, vDirection.Length2D()) as Vector, undefined);
             }

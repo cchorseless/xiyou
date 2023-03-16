@@ -638,7 +638,7 @@ export class imba_templar_assassin_trap extends BaseAbility_Plus {
                 this.counter_modifier.trap_table[index].Explode(this.trap_ability, this.GetSpecialValueFor("trap_radius"), this.GetSpecialValueFor("trap_duration"));
             }
         } else {
-            EventHelper.ErrorMessage("No traps", this.GetCasterPlus().GetPlayerOwnerID());
+            EventHelper.ErrorMessage("No traps", this.GetCasterPlus().GetPlayerID());
         }
     }
 }
@@ -1011,7 +1011,7 @@ export class imba_templar_assassin_psionic_trap extends BaseAbility_Plus {
             let trap = BaseNpc_Plus.CreateUnitByName("npc_dota_templar_assassin_psionic_trap", this.GetCursorPosition(), this.GetCasterPlus(), false);
             FindClearSpaceForUnit(trap, trap.GetAbsOrigin(), false);
             let trap_modifier = trap.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_templar_assassin_psionic_trap", {});
-            trap.SetControllableByPlayer(this.GetCasterPlus().GetPlayerOwnerID(), true);
+            trap.SetControllableByPlayer(this.GetCasterPlus().GetPlayerID(), true);
             if (trap.HasAbility("imba_templar_assassin_self_trap")) {
                 trap.findAbliityPlus<imba_templar_assassin_self_trap>("imba_templar_assassin_self_trap").SetHidden(false);
                 trap.findAbliityPlus<imba_templar_assassin_self_trap>("imba_templar_assassin_self_trap").SetLevel(this.GetLevel());
@@ -1249,7 +1249,7 @@ export class imba_templar_assassin_self_trap extends BaseAbility_Plus {
             this.trap_counter_modifier = this.GetCasterPlus().GetOwnerPlus().findBuff<modifier_imba_templar_assassin_psionic_trap_counter>("modifier_imba_templar_assassin_psionic_trap_counter");
             if (this.GetCasterPlus().HasModifier("modifier_imba_templar_assassin_psionic_trap")) {
                 this.GetCasterPlus().findBuff<modifier_imba_templar_assassin_psionic_trap>("modifier_imba_templar_assassin_psionic_trap").Explode(this, this.GetSpecialValueFor("trap_radius"), this.GetSpecialValueFor("trap_duration"), true);
-                // PlayerResource.NewSelection(this.GetCasterPlus().GetOwnerPlus().GetPlayerOwnerID(), this.GetCasterPlus().GetOwnerPlus());
+                // PlayerResource.NewSelection(this.GetCasterPlus().GetOwnerPlus().GetPlayerID(), this.GetCasterPlus().GetOwnerPlus());
             }
         }
     }

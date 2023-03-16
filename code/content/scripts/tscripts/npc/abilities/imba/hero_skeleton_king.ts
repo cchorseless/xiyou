@@ -175,7 +175,7 @@ export class imba_wraith_king_wraithfire_blast extends BaseAbility_Plus {
             let distance = (target.GetAbsOrigin() - caster.GetAbsOrigin() as Vector).Length2D();
             let summon_point = caster.GetAbsOrigin() + direction * distance - 100 as Vector;
             let wraith = BaseNpc_Plus.CreateUnitByName("npc_imba_wraith_king_wraith", summon_point, caster, true);
-            let playerid = caster.GetPlayerOwnerID();
+            let playerid = caster.GetPlayerID();
             if (playerid) {
                 wraith.SetControllableByPlayer(playerid, true);
             }
@@ -623,7 +623,7 @@ export class imba_wraith_king_mortal_strike extends BaseAbility_Plus {
                         skeleton.AddNewModifier(this.caster, this, "modifier_imba_mortal_strike_skeleton", {
                             duration: this.skeleton_duration - FrameTime()
                         });
-                        skeleton.SetControllableByPlayer(this.caster.GetPlayerOwnerID(), true);
+                        skeleton.SetControllableByPlayer(this.caster.GetPlayerID(), true);
                         skeleton.SetOwner(this.caster);
                         ResolveNPCPositions(skeleton.GetAbsOrigin(), skeleton.GetHullRadius());
                         skeleton.SetMaximumGoldBounty(0);
@@ -693,7 +693,7 @@ export class modifier_imba_mortal_strike_skeleton extends BaseModifier_Plus {
         this.skeleton.AddNewModifier(this.caster, this.ability, "modifier_imba_mortal_strike_skeleton", {
             duration: this.remaining_time - FrameTime()
         });
-        this.skeleton.SetControllableByPlayer(this.caster.GetPlayerOwnerID(), true);
+        this.skeleton.SetControllableByPlayer(this.caster.GetPlayerID(), true);
         this.skeleton.SetOwner(this.caster);
         this.skeleton.TempData().fresh = false;
         GTimerHelper.AddFrameTimer(1, GHandler.create(this, () => {
@@ -1615,7 +1615,7 @@ export class modifier_imba_kingdom_come_slow extends BaseModifier_Plus {
                 let distance = (this.parent.GetAbsOrigin() - this.caster.GetAbsOrigin() as Vector).Length2D();
                 let summon_point = this.caster.GetAbsOrigin() + direction * distance - 100 as Vector;
                 let wraith = BaseNpc_Plus.CreateUnitByName("npc_imba_wraith_king_wraith", summon_point, this.caster, true);
-                let playerid = this.caster.GetPlayerOwnerID();
+                let playerid = this.caster.GetPlayerID();
                 if (playerid) {
                     wraith.SetControllableByPlayer(playerid, true);
                 }

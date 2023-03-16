@@ -16,9 +16,10 @@ export class item_diretide_candy extends BaseItem_Plus {
                 if (caster.GetTeamNumber() == 3) {
                     return;
                 }
-                for (const [_, hero] of GameFunc.iPair(HeroList.GetAllHeroes())) {
+                let allHeroes =caster.GetPlayerRoot().BuildingManager().getAllBattleUnitAliveNpc();
+                for (const [_, hero] of GameFunc.iPair(allHeroes)) {
                     // hero.AddExperience(75, false, false);
-                    hero.ModifyGold(50, true, 0);
+                    // hero.ModifyGold(50, true, 0);
                 }
                 AnimationHelper.StartAnimation(target, {
                     duration: 1.0,

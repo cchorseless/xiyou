@@ -1028,3 +1028,7 @@ export class ETGameSceneRoot extends ET.EntityRoot {
         (ETGameSceneRoot.Instance as any) = null
     }
 }
+
+declare global {
+    type IETEntityRoot = ET.EntityRoot;
+}

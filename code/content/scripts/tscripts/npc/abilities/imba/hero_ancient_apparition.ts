@@ -1,15 +1,29 @@
-
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus, BaseOrbAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
+
 @registerAbility()
 export class imba_ancient_apparition_cold_feet extends BaseAbility_Plus {
+    GetCooldown(level: number): number {
+        return 20;
+    }
+
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
+    }
+
     GetAOERadius(): number {
         return this.GetCasterPlus().GetTalentValue("special_bonus_imba_ancient_apparition_cold_feet_aoe");
     }
+
     GetBehavior(): DOTA_ABILITY_BEHAVIOR | Uint64 {
         if (!this.GetCasterPlus().HasTalent("special_bonus_imba_ancient_apparition_cold_feet_aoe")) {
             return super.GetBehavior();
@@ -17,6 +31,7 @@ export class imba_ancient_apparition_cold_feet extends BaseAbility_Plus {
             return DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_POINT + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_AOE + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING;
         }
     }
+
     OnSpellStart(): void {
         if (!this.GetCasterPlus().HasTalent("special_bonus_imba_ancient_apparition_cold_feet_aoe")) {
             let target = this.GetCursorTarget();
@@ -35,6 +50,7 @@ export class imba_ancient_apparition_cold_feet extends BaseAbility_Plus {
             }
         }
     }
+
     OnOwnerSpawned(): void {
         if (!IsServer()) {
             return;
@@ -44,6 +60,7 @@ export class imba_ancient_apparition_cold_feet extends BaseAbility_Plus {
         }
     }
 }
+
 @registerModifier()
 export class modifier_imba_ancient_apparition_cold_feet extends BaseModifier_Plus {
     public duration: number;
@@ -55,9 +72,11 @@ export class modifier_imba_ancient_apparition_cold_feet extends BaseModifier_Plu
     public counter: number;
     public ticks: any;
     public interval: number;
+
     IgnoreTenacity() {
         return true;
     }
+
     BeCreated(p_0: any,): void {
         this.duration = this.GetSpecialValueFor("AbilityDuration");
         this.damage = this.GetSpecialValueFor("damage");
@@ -86,6 +105,7 @@ export class modifier_imba_ancient_apparition_cold_feet extends BaseModifier_Plu
         this.OnIntervalThink();
         this.StartIntervalThink(this.interval);
     }
+
     OnIntervalThink(): void {
         if (GFuncVector.AsVector(this.GetParentPlus().GetAbsOrigin() - this.original_position).Length2D() < this.break_distance) {
             this.counter = this.counter + this.interval;
@@ -107,6 +127,7 @@ export class modifier_imba_ancient_apparition_cold_feet extends BaseModifier_Plu
             this.Destroy();
         }
     }
+
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
             1: Enum_MODIFIER_EVENT.ON_ORDER
@@ -123,14 +144,17 @@ export class modifier_imba_ancient_apparition_cold_feet extends BaseModifier_Plu
         }
     }
 }
+
 @registerModifier()
 export class modifier_imba_ancient_apparition_cold_feet_freeze extends BaseModifier_Plus {
     GetEffectName(): string {
         return "particles/units/heroes/hero_ancient_apparition/ancient_apparition_cold_feet_frozen.vpcf";
     }
+
     GetEffectAttachType(): ParticleAttachment_t {
         return ParticleAttachment_t.PATTACH_OVERHEAD_FOLLOW;
     }
+
     BeCreated(p_0: any,): void {
         if (!IsServer()) {
             return;
@@ -140,6 +164,7 @@ export class modifier_imba_ancient_apparition_cold_feet_freeze extends BaseModif
             this.GetCasterPlus().EmitSound("ancient_apparition_appa_ability_coldfeet_0" + RandomInt(2, 4));
         }
     }
+
     CheckState(): Partial<Record<modifierstate, boolean>> {
         let state = {
             [modifierstate.MODIFIER_STATE_STUNNED]: true,
@@ -147,6 +172,7 @@ export class modifier_imba_ancient_apparition_cold_feet_freeze extends BaseModif
         }
         return state;
     }
+
     /** DeclareFunctions():modifierfunction[] {
         let decFuncs = {
             1: GPropertyConfig.EMODIFIER_PROPERTY.DISABLE_HEALING,
@@ -158,6 +184,7 @@ export class modifier_imba_ancient_apparition_cold_feet_freeze extends BaseModif
     CC_GetDisableHealing(): 0 | 1 {
         return 1;
     }
+
     @registerEvent(Enum_MODIFIER_EVENT.ON_ORDER)
     CC_OnOrder(keys: ModifierAbilityEvent): void {
         if (keys.unit.GetTeamNumber() == this.GetParentPlus().GetTeamNumber() && keys.target == this.GetParentPlus() && keys.unit != this.GetParentPlus() && !keys.unit.IsMagicImmune()) {
@@ -169,13 +196,29 @@ export class modifier_imba_ancient_apparition_cold_feet_freeze extends BaseModif
         }
     }
 }
+
 @registerAbility()
 export class imba_ancient_apparition_ice_vortex extends BaseAbility_Plus {
-    public anti_abrasion_ability: any;
+    public anti_abrasion_ability: imba_ancient_apparition_anti_abrasion;
     public responses: { [k: string]: number };
+
+    GetCooldown(level: number): number {
+        return 20;
+    }
+
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        let r = AI_ability.POSITION_if_enemy(this);
+        return r;
+    }
+
     GetAOERadius(): number {
         return this.GetSpecialValueFor("radius");
     }
+
     OnUpgrade(): void {
         if (!this.anti_abrasion_ability) {
             this.anti_abrasion_ability = this.GetCasterPlus().findAbliityPlus<imba_ancient_apparition_anti_abrasion>("imba_ancient_apparition_anti_abrasion");
@@ -184,6 +227,7 @@ export class imba_ancient_apparition_ice_vortex extends BaseAbility_Plus {
             this.anti_abrasion_ability.SetLevel(this.GetLevel());
         }
     }
+
     OnSpellStart(): void {
         this.GetCasterPlus().EmitSound("Hero_Ancient_Apparition.IceVortexCast");
         if (this.GetCasterPlus().GetUnitName().includes("ancient_apparition")) {
@@ -202,14 +246,14 @@ export class imba_ancient_apparition_ice_vortex extends BaseAbility_Plus {
                 if (GameRules.GetDOTATime(true, true) - timer >= 60) {
                     this.GetCasterPlus().EmitSound(response);
                     this.responses[response] = GameRules.GetDOTATime(true, true);
-                    return;
                 }
             }
         }
-        let vortex_thinker = BaseModifier_Plus.CreateBuffThinker(this.GetCasterPlus(), this, "modifier_imba_ancient_apparition_ice_vortex_thinker", {
+        BaseModifier_Plus.CreateBuffThinker(this.GetCasterPlus(), this, "modifier_imba_ancient_apparition_ice_vortex_thinker", {
             duration: this.GetSpecialValueFor("vortex_duration")
         }, this.GetCursorPosition(), this.GetCasterPlus().GetTeamNumber(), false);
     }
+
     OnOwnerSpawned(): void {
         if (!IsServer()) {
             return;
@@ -222,11 +266,13 @@ export class imba_ancient_apparition_ice_vortex extends BaseAbility_Plus {
         }
     }
 }
+
 @registerModifier()
 export class modifier_imba_ancient_apparition_ice_vortex_thinker extends BaseModifier_Plus {
     public radius: number;
-    public vision_aoe: any;
+    public vision_aoe: number;
     public vortex_duration: number;
+
     BeCreated(p_0: any,): void {
         this.radius = this.GetSpecialValueFor("radius");
         this.vision_aoe = this.GetSpecialValueFor("vision_aoe");
@@ -242,6 +288,7 @@ export class modifier_imba_ancient_apparition_ice_vortex_thinker extends BaseMod
         this.AddParticle(vortex_particle, false, false, -1, false, false);
         AddFOWViewer(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), this.vision_aoe, this.vortex_duration, false);
     }
+
     BeDestroy(): void {
         if (!IsServer()) {
             return;
@@ -249,39 +296,50 @@ export class modifier_imba_ancient_apparition_ice_vortex_thinker extends BaseMod
         this.GetParentPlus().StopSound("Hero_Ancient_Apparition.IceVortex.lp");
         this.GetParentPlus().RemoveSelf();
     }
+
     IsHidden(): boolean {
         return true;
     }
+
     IsAura(): boolean {
         return true;
     }
+
     IsAuraActiveOnDeath(): boolean {
         return false;
     }
+
     GetAuraRadius(): number {
         return this.radius;
     }
+
     GetAuraSearchFlags(): DOTA_UNIT_TARGET_FLAGS {
         return DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE;
     }
+
     GetAuraSearchTeam(): DOTA_UNIT_TARGET_TEAM {
         return DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH;
     }
+
     GetAuraSearchType(): DOTA_UNIT_TARGET_TYPE {
         return DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC;
     }
+
     GetModifierAura(): string {
         return "modifier_imba_ancient_apparition_ice_vortex";
     }
 }
+
 @registerModifier()
 export class modifier_imba_ancient_apparition_ice_vortex extends BaseModifier_Plus {
     public radius: number;
     public movement_speed_pct: number;
     public spell_resist_pct: number;
+
     GetStatusEffectName(): string {
         return "particles/status_fx/status_effect_frost.vpcf";
     }
+
     BeCreated(p_0: any,): void {
         if (this.GetAbilityPlus()) {
             this.radius = this.GetSpecialValueFor("radius");
@@ -293,6 +351,7 @@ export class modifier_imba_ancient_apparition_ice_vortex extends BaseModifier_Pl
             this.spell_resist_pct = 0;
         }
     }
+
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
             1: GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE,
@@ -307,6 +366,7 @@ export class modifier_imba_ancient_apparition_ice_vortex extends BaseModifier_Pl
             return this.movement_speed_pct * (-1);
         }
     }
+
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_RESISTANCE_BONUS)
     CC_GetModifierMagicalResistanceBonus(p_0: ModifierAttackEvent,): number {
         if (this.GetParentPlus().GetTeamNumber() != this.GetCasterPlus().GetTeamNumber()) {
@@ -316,9 +376,11 @@ export class modifier_imba_ancient_apparition_ice_vortex extends BaseModifier_Pl
         }
     }
 }
+
 @registerAbility()
 export class imba_ancient_apparition_chilling_touch extends BaseOrbAbility_Plus {
-    public imbued_ice_ability: any;
+    public imbued_ice_ability: imba_ancient_apparition_imbued_ice;
+
     OnUpgrade(): void {
         if (!this.imbued_ice_ability) {
             this.imbued_ice_ability = this.GetCasterPlus().findAbliityPlus<imba_ancient_apparition_imbued_ice>("imba_ancient_apparition_imbued_ice");
@@ -326,22 +388,29 @@ export class imba_ancient_apparition_chilling_touch extends BaseOrbAbility_Plus 
         if (this.imbued_ice_ability) {
             this.imbued_ice_ability.SetLevel(this.GetLevel());
         }
+        this.ToggleAutoCast()
     }
+
     ProcsMagicStick(): boolean {
         return false;
     }
+
     GetIntrinsicModifierName(): string {
         return "modifier_generic_orb_effect_lua";
     }
+
     GetProjectileName() {
         return "particles/units/heroes/hero_ancient_apparition/ancient_apparition_chilling_touch_projectile.vpcf";
     }
+
     GetCastRange(p_0: Vector, p_1: CDOTA_BaseNPC | undefined,): number {
         return this.GetCasterPlus().Script_GetAttackRange() + this.GetSpecialValueFor("attack_range_bonus") + this.GetCasterPlus().GetTalentValue("special_bonus_imba_ancient_apparition_chilling_touch_range");
     }
+
     OnOrbFire() {
         this.GetCasterPlus().EmitSound("Hero_Ancient_Apparition.ChillingTouch.Cast");
     }
+
     OnOrbImpact(keys: ModifierAttackEvent) {
         if (keys.target.IsMagicImmune()) {
             return 0;
@@ -365,6 +434,7 @@ export class imba_ancient_apparition_chilling_touch extends BaseOrbAbility_Plus 
         SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_BONUS_SPELL_DAMAGE, keys.target, damage, undefined);
         return 1;
     }
+
     OnOwnerSpawned(): void {
         if (!IsServer()) {
             return;
@@ -376,11 +446,26 @@ export class imba_ancient_apparition_chilling_touch extends BaseOrbAbility_Plus 
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_ancient_apparition_chilling_touch_damage"), "modifier_special_bonus_imba_ancient_apparition_chilling_touch_damage", {});
         }
     }
+
+    GetCooldown(level: number): number {
+        return 0.3;
+    }
+
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        let r = AI_ability.TARGET_if_enemy(this);
+        return r;
+    }
 }
+
 @registerModifier()
 export class modifier_imba_ancient_apparition_chilling_touch_slow extends BaseModifier_Plus {
     public slow: any;
     public packed_ice_duration: number;
+
     BeCreated(p_0: any,): void {
         if (this.GetAbilityPlus()) {
             this.slow = this.GetSpecialValueFor("slow");
@@ -390,6 +475,7 @@ export class modifier_imba_ancient_apparition_chilling_touch_slow extends BaseMo
             this.packed_ice_duration = 0;
         }
     }
+
     CheckState(): Partial<Record<modifierstate, boolean>> {
         if (!IsServer()) {
             return;
@@ -398,6 +484,7 @@ export class modifier_imba_ancient_apparition_chilling_touch_slow extends BaseMo
             [modifierstate.MODIFIER_STATE_FROZEN]: this.GetElapsedTime() <= this.packed_ice_duration * (1 - this.GetParentPlus().GetStatusResistance())
         };
     }
+
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
             1: GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE
@@ -410,11 +497,13 @@ export class modifier_imba_ancient_apparition_chilling_touch_slow extends BaseMo
         }
     }
 }
+
 @registerAbility()
 export class imba_ancient_apparition_imbued_ice extends BaseAbility_Plus {
     GetAOERadius(): number {
         return this.GetSpecialValueFor("radius");
     }
+
     OnSpellStart(): void {
         let position = this.GetCursorPosition();
         this.GetCasterPlus().EmitSound("Hero_Ancient_Apparition.Imbued_Ice_Cast");
@@ -435,6 +524,7 @@ export class imba_ancient_apparition_imbued_ice extends BaseAbility_Plus {
         }
     }
 }
+
 @registerModifier()
 export class modifier_imba_ancient_apparition_imbued_ice extends BaseModifier_Plus {
     public number_of_attacks: any;
@@ -442,6 +532,7 @@ export class modifier_imba_ancient_apparition_imbued_ice extends BaseModifier_Pl
     public move_speed_slow: number;
     public move_speed_duration: number;
     public damage_table: ApplyDamageOptions;
+
     Init(p_0: any,): void {
         if (!IsServer()) {
             return;
@@ -486,15 +577,19 @@ export class modifier_imba_ancient_apparition_imbued_ice extends BaseModifier_Pl
         }
     }
 }
+
 @registerModifier()
 export class modifier_imba_ancient_apparition_imbued_ice_slow extends BaseModifier_Plus {
     public move_speed_slow: number;
+
     GetAttributes(): DOTAModifierAttribute_t {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE;
     }
+
     GetStatusEffectName(): string {
         return "particles/status_fx/status_effect_frost.vpcf";
     }
+
     BeCreated(p_0: any,): void {
         if (this.GetAbilityPlus()) {
             this.move_speed_slow = this.GetSpecialValueFor("move_speed_slow");
@@ -502,6 +597,7 @@ export class modifier_imba_ancient_apparition_imbued_ice_slow extends BaseModifi
             this.move_speed_slow = 0;
         }
     }
+
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
             1: GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE,
@@ -512,16 +608,19 @@ export class modifier_imba_ancient_apparition_imbued_ice_slow extends BaseModifi
     CC_GetModifierMoveSpeedBonus_Percentage(): number {
         return this.move_speed_slow;
     }
+
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.DISABLE_HEALING)
     CC_GetDisableHealing(): 0 | 1 {
         return 1;
     }
 }
+
 @registerAbility()
 export class imba_ancient_apparition_anti_abrasion extends BaseAbility_Plus {
     GetAOERadius(): number {
         return this.GetSpecialValueFor("radius");
     }
+
     OnSpellStart(): void {
         this.GetCasterPlus().EmitSound("Hero_Ancient_Apparition.IceVortexCast");
         let vortex_thinker = BaseModifier_Plus.CreateBuffThinker(this.GetCasterPlus(), this, "modifier_imba_ancient_apparition_anti_abrasion_thinker", {
@@ -529,11 +628,13 @@ export class imba_ancient_apparition_anti_abrasion extends BaseAbility_Plus {
         }, this.GetCursorPosition(), this.GetCasterPlus().GetTeamNumber(), false);
     }
 }
+
 @registerModifier()
 export class modifier_imba_ancient_apparition_anti_abrasion_thinker extends BaseModifier_Plus {
     public radius: number;
     public vision_aoe: any;
     public vortex_duration: number;
+
     BeCreated(p_0: any,): void {
         this.radius = this.GetSpecialValueFor("radius");
         this.vision_aoe = this.GetSpecialValueFor("vision_aoe");
@@ -549,6 +650,7 @@ export class modifier_imba_ancient_apparition_anti_abrasion_thinker extends Base
         this.AddParticle(vortex_particle, false, false, -1, false, false);
         AddFOWViewer(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), this.vision_aoe, this.vortex_duration, false);
     }
+
     BeDestroy(): void {
         if (!IsServer()) {
             return;
@@ -556,42 +658,54 @@ export class modifier_imba_ancient_apparition_anti_abrasion_thinker extends Base
         this.GetParentPlus().StopSound("Hero_Ancient_Apparition.IceVortex.lp");
         this.GetParentPlus().RemoveSelf();
     }
+
     IsHidden(): boolean {
         return true;
     }
+
     IsAura(): boolean {
         return true;
     }
+
     IsAuraActiveOnDeath(): boolean {
         return false;
     }
+
     GetAuraRadius(): number {
         return this.radius;
     }
+
     GetAuraSearchFlags(): DOTA_UNIT_TARGET_FLAGS {
         return DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE;
     }
+
     GetAuraSearchTeam(): DOTA_UNIT_TARGET_TEAM {
         return DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY;
     }
+
     GetAuraSearchType(): DOTA_UNIT_TARGET_TYPE {
         return DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC;
     }
+
     GetModifierAura(): string {
         return "modifier_ice_slide";
     }
+
     GetAuraDuration(): number {
         return 0.25;
     }
 }
+
 @registerAbility()
 export class imba_ancient_apparition_ice_blast extends BaseAbility_Plus {
     public release_ability: imba_ancient_apparition_ice_blast_release;
     public ice_blast_dummy: any;
     public initial_projectile: any;
+
     GetAssociatedSecondaryAbilities(): string {
         return "imba_ancient_apparition_ice_blast_release";
     }
+
     OnUpgrade(): void {
         if (!this.release_ability) {
             this.release_ability = this.GetCasterPlus().findAbliityPlus<imba_ancient_apparition_ice_blast_release>("imba_ancient_apparition_ice_blast_release");
@@ -603,6 +717,7 @@ export class imba_ancient_apparition_ice_blast extends BaseAbility_Plus {
             this.release_ability.SetLevel(1);
         }
     }
+
     OnSpellStart(): void {
         if (this.GetCursorPosition() == this.GetCasterPlus().GetAbsOrigin()) {
             this.GetCasterPlus().SetCursorPosition((this.GetCursorPosition() + this.GetCasterPlus().GetForwardVector()) as Vector);
@@ -650,6 +765,31 @@ export class imba_ancient_apparition_ice_blast extends BaseAbility_Plus {
             this.GetCasterPlus().SwapAbilities(this.GetAbilityName(), this.release_ability.GetAbilityName(), false, true);
         }
     }
+
+    GetCooldown(level: number): number {
+        return 20;
+    }
+
+    GetManaCost(level: number): number {
+        return 100;
+    }
+
+    AutoSpellSelf() {
+        let r = AI_ability.POSITION_if_enemy(this, 1000);
+        if (r) {
+            this.AddTimer(1, () => {
+                if (GFuncEntity.IsValid(this.release_ability)) {
+                    ExecuteOrderFromTable({
+                        UnitIndex: this.GetCasterPlus().entindex(),
+                        OrderType: dotaunitorder_t.DOTA_UNIT_ORDER_CAST_NO_TARGET,
+                        AbilityIndex: this.release_ability.entindex(),
+                    });
+                }
+            })
+        }
+        return r;
+    }
+
     OnProjectileThink_ExtraData(location: Vector, data: any): void {
         if (data.ice_blast_dummy) {
             EntIndexToHScript(data.ice_blast_dummy).SetAbsOrigin(location);
@@ -658,6 +798,7 @@ export class imba_ancient_apparition_ice_blast extends BaseAbility_Plus {
             this.release_ability.OnSpellStart();
         }
     }
+
     OnProjectileHit_ExtraData(target: CDOTA_BaseNPC | undefined, location: Vector, data: any): boolean | void {
         if (!target && data.ice_blast_dummy) {
             let npc = EntIndexToHScript(data.ice_blast_dummy) as IBaseNpc_Plus;
@@ -668,12 +809,15 @@ export class imba_ancient_apparition_ice_blast extends BaseAbility_Plus {
         }
     }
 }
+
 @registerModifier()
 export class modifier_imba_ancient_apparition_ice_blast_thinker extends BaseModifier_Plus {
     public release_ability: any;
+
     IsPurgable(): boolean {
         return false;
     }
+
     BeCreated(params: any): void {
         if (!IsServer()) {
             return;
@@ -682,6 +826,7 @@ export class modifier_imba_ancient_apparition_ice_blast_thinker extends BaseModi
         ParticleManager.SetParticleControl(ice_blast_particle, 1, Vector(params.x, params.y, 0));
         this.AddParticle(ice_blast_particle, false, false, -1, false, false);
     }
+
     BeDestroy(): void {
         if (!IsServer()) {
             return;
@@ -693,24 +838,30 @@ export class modifier_imba_ancient_apparition_ice_blast_thinker extends BaseModi
         // this.GetParentPlus().RemoveSelf();
     }
 }
+
 @registerModifier()
 export class modifier_imba_ancient_apparition_ice_blast extends BaseModifier_Plus {
     public dot_damage: number;
     public kill_pct: number;
     public caster: IBaseNpc_Plus;
     public damage_table: ApplyDamageOptions;
+
     IsDebuff(): boolean {
         return true;
     }
+
     IsPurgable(): boolean {
         return false;
     }
+
     GetEffectName(): string {
         return "particles/units/heroes/hero_ancient_apparition/ancient_apparition_ice_blast_debuff.vpcf";
     }
+
     GetStatusEffectName(): string {
         return "particles/status_fx/status_effect_frost.vpcf";
     }
+
     BeCreated(params: any): void {
         if (!IsServer()) {
             return;
@@ -732,14 +883,17 @@ export class modifier_imba_ancient_apparition_ice_blast extends BaseModifier_Plu
         }
         this.StartIntervalThink(1 - this.GetParentPlus().GetStatusResistance());
     }
+
     BeRefresh(params: any): void {
         this.OnCreated(params);
     }
+
     OnIntervalThink(): void {
         this.GetParentPlus().EmitSound("Hero_Ancient_Apparition.IceBlastRelease.Tick");
         ApplyDamage(this.damage_table);
         SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_BONUS_SPELL_DAMAGE, this.GetParentPlus(), this.dot_damage, undefined);
     }
+
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
             1: GPropertyConfig.EMODIFIER_PROPERTY.DISABLE_HEALING,
@@ -750,6 +904,7 @@ export class modifier_imba_ancient_apparition_ice_blast extends BaseModifier_Plu
     CC_GetDisableHealing(): 0 | 1 {
         return 1;
     }
+
     @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE_KILLCREDIT)
     CC_OnTakeDamageKillCredit(keys: ModifierAttackEvent): void {
         if (keys.target == this.GetParentPlus() && (this.GetParentPlus().GetHealth() / this.GetParentPlus().GetMaxHealth()) * 100 <= this.kill_pct) {
@@ -765,21 +920,27 @@ export class modifier_imba_ancient_apparition_ice_blast extends BaseModifier_Plu
         }
     }
 }
+
 @registerModifier()
 export class modifier_imba_ancient_apparition_ice_blast_global_cooling extends BaseModifier_Plus {
     public global_cooling_move_speed_reduction: number;
+
     IsPurgable(): boolean {
         return false;
     }
+
     RemoveOnDeath(): boolean {
         return false;
     }
+
     GetStatusEffectName(): string {
         return "particles/status_fx/status_effect_frost.vpcf";
     }
+
     BeCreated(p_0: any,): void {
         this.global_cooling_move_speed_reduction = this.GetSpecialValueFor("global_cooling_move_speed_reduction");
     }
+
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
             1: GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE
@@ -790,9 +951,11 @@ export class modifier_imba_ancient_apparition_ice_blast_global_cooling extends B
         return this.global_cooling_move_speed_reduction * (-1);
     }
 }
+
 @registerModifier()
 export class modifier_imba_ancient_apparition_ice_blast_cold_hearted extends BaseModifier_Plus {
     public cold_hearted_pct: number;
+
     BeCreated(params: any): void {
         if (!IsServer()) {
             return;
@@ -804,9 +967,11 @@ export class modifier_imba_ancient_apparition_ice_blast_cold_hearted extends Bas
         }
         this.SetStackCount(this.GetStackCount() + (params.regen * this.cold_hearted_pct));
     }
+
     BeRefresh(params: any): void {
         this.OnCreated(params);
     }
+
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
             1: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_REGEN_CONSTANT
@@ -817,19 +982,24 @@ export class modifier_imba_ancient_apparition_ice_blast_cold_hearted extends Bas
         return this.GetStackCount();
     }
 }
+
 @registerAbility()
 export class imba_ancient_apparition_ice_blast_release extends BaseAbility_Plus {
     public ice_blast_ability: imba_ancient_apparition_ice_blast;
     public initial_projectile: any;
+
     IsStealable(): boolean {
         return false;
     }
+
     GetAssociatedPrimaryAbilities(): string {
         return "imba_ancient_apparition_ice_blast";
     }
+
     ProcsMagicStick(): boolean {
         return false;
     }
+
     OnSpellStart(): void {
         if (!this.ice_blast_ability) {
             this.ice_blast_ability = this.GetCasterPlus().findAbliityPlus<imba_ancient_apparition_ice_blast>("imba_ancient_apparition_ice_blast");
@@ -881,6 +1051,7 @@ export class imba_ancient_apparition_ice_blast_release extends BaseAbility_Plus 
             this.GetCasterPlus().SwapAbilities(this.GetAbilityName(), this.ice_blast_ability.GetAbilityName(), false, true);
         }
     }
+
     OnProjectileThink_ExtraData(location: Vector, data: any): void {
         if (this.ice_blast_ability) {
             AddFOWViewer(this.GetCasterPlus().GetTeamNumber(), location, this.ice_blast_ability.GetSpecialValueFor("target_sight_radius"), 3, false);
@@ -907,6 +1078,7 @@ export class imba_ancient_apparition_ice_blast_release extends BaseAbility_Plus 
             }
         }
     }
+
     OnProjectileHit_ExtraData(target: CDOTA_BaseNPC | undefined, location: Vector, data: any): boolean | void {
         if (!target && this.ice_blast_ability) {
             EmitSoundOnLocationWithCaster(location, "Hero_Ancient_Apparition.IceBlast.Target", this.GetCasterPlus());
@@ -955,43 +1127,54 @@ export class imba_ancient_apparition_ice_blast_release extends BaseAbility_Plus 
         }
     }
 }
+
 @registerModifier()
 export class modifier_special_bonus_imba_ancient_apparition_chilling_touch_range extends BaseModifier_Plus {
     IsHidden(): boolean {
         return true;
     }
+
     IsPurgable(): boolean {
         return false;
     }
+
     RemoveOnDeath(): boolean {
         return false;
     }
 }
+
 @registerModifier()
 export class modifier_special_bonus_imba_ancient_apparition_ice_vortex_cooldown extends BaseModifier_Plus {
     IsHidden(): boolean {
         return true;
     }
+
     IsPurgable(): boolean {
         return false;
     }
+
     RemoveOnDeath(): boolean {
         return false;
     }
 }
+
 @registerModifier()
 export class modifier_special_bonus_imba_ancient_apparition_chilling_touch_damage extends BaseModifier_Plus {
     public chilling_touch_ability: any;
     public imbued_ice_ability: any;
+
     IsHidden(): boolean {
         return true;
     }
+
     IsPurgable(): boolean {
         return false;
     }
+
     RemoveOnDeath(): boolean {
         return false;
     }
+
     BeCreated(p_0: any,): void {
         if (!IsServer()) {
             return;
@@ -1003,6 +1186,7 @@ export class modifier_special_bonus_imba_ancient_apparition_chilling_touch_damag
             this.imbued_ice_ability.SetLevel(this.chilling_touch_ability.GetLevel());
         }
     }
+
     BeDestroy(): void {
         if (!IsServer()) {
             return;
@@ -1012,19 +1196,24 @@ export class modifier_special_bonus_imba_ancient_apparition_chilling_touch_damag
         }
     }
 }
+
 @registerModifier()
 export class modifier_special_bonus_imba_ancient_apparition_ice_vortex_boost extends BaseModifier_Plus {
     public ice_vortex_ability: any;
     public anti_abrasion_ability: any;
+
     IsHidden(): boolean {
         return true;
     }
+
     IsPurgable(): boolean {
         return false;
     }
+
     RemoveOnDeath(): boolean {
         return false;
     }
+
     BeCreated(p_0: any,): void {
         if (!IsServer()) {
             return;
@@ -1036,6 +1225,7 @@ export class modifier_special_bonus_imba_ancient_apparition_ice_vortex_boost ext
             this.anti_abrasion_ability.SetLevel(this.ice_vortex_ability.GetLevel());
         }
     }
+
     BeDestroy(): void {
         if (!IsServer()) {
             return;
@@ -1045,26 +1235,32 @@ export class modifier_special_bonus_imba_ancient_apparition_ice_vortex_boost ext
         }
     }
 }
+
 @registerModifier()
 export class modifier_special_bonus_imba_ancient_apparition_ice_blast_kill_threshold extends BaseModifier_Plus {
     IsHidden(): boolean {
         return true;
     }
+
     IsPurgable(): boolean {
         return false;
     }
+
     RemoveOnDeath(): boolean {
         return false;
     }
 }
+
 @registerModifier()
 export class modifier_special_bonus_imba_ancient_apparition_cold_feet_aoe extends BaseModifier_Plus {
     IsHidden(): boolean {
         return true;
     }
+
     IsPurgable(): boolean {
         return false;
     }
+
     RemoveOnDeath(): boolean {
         return false;
     }

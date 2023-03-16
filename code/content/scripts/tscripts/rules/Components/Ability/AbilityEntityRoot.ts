@@ -19,7 +19,7 @@ export class AbilityEntityRoot extends BaseEntityRoot {
 
     onAwake() {
         let ability = this.GetDomain<IBaseAbility_Plus>();
-        (this.BelongPlayerid as any) = ability.GetOwnerPlus().GetPlayerOwnerID();
+        (this.BelongPlayerid as any) = ability.GetOwnerPlus().GetPlayerID();
         (this.ConfigID as any) = ability.GetAbilityName();
         (this.EntityId as any) = ability.GetEntityIndex();
         ability.SetActivated(true);

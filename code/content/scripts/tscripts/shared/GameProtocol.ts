@@ -18,6 +18,7 @@ export module GameProtocol {
         //#region DEBUG
         static readonly ChangeHostTimescale = "/ChangeHostTimescale";
         static readonly PauseRoundStage = "/PauseRoundStage";
+        static readonly NextRoundStage = "/NextRoundStage";
         static readonly req_DebugGameOver = "/req_DebugGameOver";
         static readonly req_DebugReload = "/req_DebugReload";
         static readonly req_DebugRestart = "/req_DebugRestart";

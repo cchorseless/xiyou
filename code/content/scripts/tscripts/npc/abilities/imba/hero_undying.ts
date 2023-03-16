@@ -828,7 +828,7 @@ export class modifier_imba_undying_tombstone_aura extends BaseModifier_Plus {
             for (const zombie of (zombies)) {
                 if (zombie.GetOwnerPlus() == this.owner) {
                     if (expired) {
-                        zombie.SetControllableByPlayer(this.owner.GetPlayerOwnerID(), true);
+                        zombie.SetControllableByPlayer(this.owner.GetPlayerID(), true);
                         zombie.AddNewModifier(this.owner, this.GetAbilityPlus(), this.modifier_no_home, {
                             duration: this.no_home_duration
                         });

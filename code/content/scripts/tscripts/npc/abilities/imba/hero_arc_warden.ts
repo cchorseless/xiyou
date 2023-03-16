@@ -2,7 +2,9 @@
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
+import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
+import { BaseNpc_Plus } from "../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 @registerAbility()
 export class imba_arc_warden_flux extends BaseAbility_Plus {
@@ -464,5 +466,112 @@ export class modifier_special_bonus_imba_arc_warden_spark_wraith_damage extends 
     }
     RemoveOnDeath(): boolean {
         return false;
+    }
+}
+
+
+@registerAbility()
+export class imba_arc_warden_tempest_double extends BaseAbility_Plus {
+    OnSpellStart(): void {
+        let caster = this.GetCasterPlus();
+        let spawn_location = caster.GetOrigin();
+        let health_cost = 1 - (this.GetSpecialValueFor("health_cost") / 100);
+        let mana_cost = 1 - (this.GetSpecialValueFor("mana_cost") / 100);
+        let duration = this.GetSpecialValueFor("duration");
+        let health_after_cast = caster.GetHealth() * mana_cost;
+        let mana_after_cast = caster.GetMana() * health_cost;
+        caster.SetHealth(health_after_cast);
+        caster.SetMana(mana_after_cast);
+        let double = BaseNpc_Plus.CreateUnitByName(caster.GetUnitName(), spawn_location, caster);
+        double.MakeIllusion()
+        double.SetControllableByPlayer(caster.GetPlayerID(), true)
+        double.SetForwardVector(caster.GetForwardVector())
+        double.SetBaseDamageMin(caster.GetBaseDamageMin())
+        double.SetBaseDamageMax(caster.GetBaseDamageMax())
+        double.SetAttackCapability(caster.GetAttackCapability())
+        double.SetRangedProjectileName(caster.GetRangedProjectileName())
+        double.SetModel(caster.GetModelName())
+        double.SetOriginalModel(caster.GetModelName())
+        double.SetModelScale(caster.GetModelScale());
+        for (let ability_id = 0; ability_id <= 15; ability_id += 1) {
+            let ability = double.GetAbilityByIndex(ability_id);
+            if (ability) {
+                ability.SetLevel(caster.GetAbilityByIndex(ability_id).GetLevel());
+                if (ability.GetAbilityName() == this.GetAbilityName()) {
+                    ability.SetActivated(false);
+                }
+            }
+        }
+        for (let item_id = 0; item_id <= 5; item_id += 1) {
+            let item_in_caster = caster.GetItemInSlot(item_id);
+            if (item_in_caster != undefined) {
+                let item_name = item_in_caster.GetName();
+                if (!(item_name == "item_imba_aegis" || item_name == "item_imba_smoke_of_deceit" || item_name == "item_imba_recipe_refresher" || item_name == "item_imba_refresher" || item_name == "item_imba_ward_observer" || item_name == "item_imba_ward_sentry")) {
+                    let item_created = BaseItem_Plus.CreateItem(item_in_caster.GetAbilityName(), double as any, double as any);
+                    if (GFuncEntity.IsValid(item_created)) {
+                        item_created.EndCooldown()
+                        item_created.SetPurchaser(null)
+                        item_created.SetShareability(EShareAbility.ITEM_FULLY_SHAREABLE)
+                        item_created.SetPurchaseTime(item_in_caster.GetPurchaseTime())
+                        item_created.SetCurrentCharges(item_in_caster.GetCurrentCharges())
+                        item_created.SetItemState(item_in_caster.GetItemState())
+                        if (item_created.GetToggleState() != item_in_caster.GetToggleState()) {
+                            item_created.ToggleAbility()
+                        }
+                        if (item_created.GetAutoCastState() != item_in_caster.GetAutoCastState()) {
+                            item_created.ToggleAutoCast()
+                        }
+                        double.AddItem(item_created)
+                        item_created.SetCurrentCharges(item_in_caster.GetCurrentCharges());
+                    }
+                }
+            }
+        }
+        double.SetHealth(health_after_cast);
+        double.SetMana(mana_after_cast);
+        double.SetHasInventory(false);
+        double.SetCanSellItems(false);
+        double.AddNewModifier(caster, this, "modifier_imba_arc_warden_tempest_double", {});
+        double.AddNewModifier(caster, this, "modifier_kill", {
+            duration: duration
+        });
+    }
+}
+@registerModifier()
+export class modifier_imba_arc_warden_tempest_double extends BaseModifier_Plus {
+    /** DeclareFunctions():modifierfunction[] {
+        return Object.values({
+            1: GPropertyConfig.EMODIFIER_PROPERTY.SUPER_ILLUSION,
+            2: GPropertyConfig.EMODIFIER_PROPERTY.ILLUSION_LABEL,
+            3: GPropertyConfig.EMODIFIER_PROPERTY.IS_ILLUSION,
+            4: Enum_MODIFIER_EVENT.ON_TAKEDAMAGE
+        });
+    } */
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.IS_ILLUSION)
+    CC_GetIsIllusion(): 0 | 1 {
+        return 1;
+    }
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SUPER_ILLUSION)
+    CC_GetModifierSuperIllusion(): 0 | 1 {
+        return 1;
+    }
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ILLUSION_LABEL)
+    CC_GetModifierIllusionLabel(): 0 | 1 {
+        return 1;
+    }
+    // @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
+    // CC_OnTakeDamage(event: ModifierInstanceEvent): void {
+    //     if (!event.unit.IsAlive()!) {
+    //         event.unit.MakeIllusion();
+    //     }
+    // }
+    GetStatusEffectName(): string {
+        return "particles/status_fx/status_effect_ancestral_spirit.vpcf";
+    }
+    IsHidden(): boolean {
+        return true;
+    }
+    GetAttributes(): DOTAModifierAttribute_t {
+        return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_PERMANENT;
     }
 }

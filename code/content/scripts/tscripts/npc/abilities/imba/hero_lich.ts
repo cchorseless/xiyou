@@ -901,7 +901,7 @@ export class modifier_imba_frost_armor_auto_cast extends BaseModifier_Plus {
         if (!this.ability.IsCooldownReady()) {
             return undefined;
         }
-        this.caster.CastAbilityOnTarget(target, this.ability, this.caster.GetPlayerOwnerID());
+        this.caster.CastAbilityOnTarget(target, this.ability, this.caster.GetPlayerID());
     }
     IsHidden(): boolean {
         return true;

@@ -47,8 +47,7 @@ export class imba_abaddon_death_coil extends BaseAbility_Plus {
         return 20;
     }
     AutoSpellSelf() {
-        let range = 200;
-        return AI_ability.TARGET_if_enemy(this, range);
+        return AI_ability.TARGET_if_enemy(this);
     }
 
     public overchannel_damage_increase: number;
@@ -315,7 +314,7 @@ export class imba_abaddon_aphotic_shield extends BaseAbility_Plus {
     }
 
     AutoSpellSelf() {
-        let range = 200;
+        let range = this.GetCastRangePlus();
         return AI_ability.TARGET_if_friend(this, range);
     }
 
@@ -353,7 +352,6 @@ export class imba_abaddon_aphotic_shield extends BaseAbility_Plus {
             let modifier_name_aphotic_shield = "modifier_imba_aphotic_shield_buff_block";
             target.RemoveModifierByName(modifier_name_aphotic_shield);
             let duration = this.GetSpecialValueFor("duration", 2);
-            GLogHelper.print(duration, "duration");
             target.AddNewModifier(caster, this, modifier_name_aphotic_shield, {
                 duration: duration
             });
@@ -1094,7 +1092,7 @@ export class modifier_imba_borrowed_time_handler extends BaseModifier_Plus {
             let hp_threshold = this.hp_threshold;
             let current_hp = target.GetHealth();
             if (current_hp <= hp_threshold) {
-                target.CastAbilityImmediately(ability, target.GetPlayerOwnerID());
+                target.CastAbilityImmediately(ability, target.GetPlayerID());
             }
         }
     }

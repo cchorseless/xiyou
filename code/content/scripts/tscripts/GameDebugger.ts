@@ -13,6 +13,7 @@ import { SingletonClass } from "./shared/lib/SingletonClass";
 @GReloadable
 export class GameDebugger extends SingletonClass {
     public init(): void {
+
         if (GameSetting.GAME_ISDEBUG) {
             // this.debugger_LuaMemory(5);
             // this.debuger_globalcache(5);
@@ -21,6 +22,7 @@ export class GameDebugger extends SingletonClass {
             // Todo 数据埋点上报
         }
         this.checkCheatMode();
+        this.CollectGarbage();
     }
     private checkCheatMode() {
         GTimerHelper.AddTimer(1, GHandler.create(this, () => {
@@ -30,7 +32,12 @@ export class GameDebugger extends SingletonClass {
             return 5;
         }), true);
     }
-
+    /**清理内存 */
+    public CollectGarbage() {
+        GLogHelper.print(`[Lua Memory]before collect:  ${collectgarbage("count") / 1024} MB `)
+        collectgarbage("collect");
+        GLogHelper.print(`[Lua Memory]after collect:  ${collectgarbage("count") / 1024} MB `)
+    }
     /**打印游戏时间顺序 */
     private printGameEvent() {
         for (let k in GameEnum.GameEvent) {

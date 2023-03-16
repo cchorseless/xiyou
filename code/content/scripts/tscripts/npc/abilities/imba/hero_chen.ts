@@ -322,7 +322,7 @@ export class imba_chen_holy_persuasion extends BaseAbility_Plus {
         if (!IsServer()) {
             return;
         }
-        if (hTarget == this.GetCasterPlus() || (hTarget.GetTeamNumber() != this.GetCasterPlus().GetTeamNumber() && hTarget.IsCreep() && !hTarget.IsRoshan()) && hTarget.GetLevel() <= this.GetSpecialValueFor("level_req") && (!hTarget.IsAncient() || (hTarget.IsAncient() && this.GetCasterPlus().HasAbility("imba_chen_hand_of_god") && this.GetCasterPlus().findAbliityPlus<imba_chen_hand_of_god>("imba_chen_hand_of_god").IsTrained() && this.GetCasterPlus().HasScepter())) || (hTarget.GetTeamNumber() == this.GetCasterPlus().GetTeamNumber() && (hTarget.IsRealUnit() || hTarget.IsClone() || hTarget.GetOwnerEntity() == this.GetCasterPlus() || (hTarget.GetPlayerOwnerID() == this.GetCasterPlus().GetPlayerOwnerID()) || hTarget.IsOther()))) {
+        if (hTarget == this.GetCasterPlus() || (hTarget.GetTeamNumber() != this.GetCasterPlus().GetTeamNumber() && hTarget.IsCreep() && !hTarget.IsRoshan()) && hTarget.GetLevel() <= this.GetSpecialValueFor("level_req") && (!hTarget.IsAncient() || (hTarget.IsAncient() && this.GetCasterPlus().HasAbility("imba_chen_hand_of_god") && this.GetCasterPlus().findAbliityPlus<imba_chen_hand_of_god>("imba_chen_hand_of_god").IsTrained() && this.GetCasterPlus().HasScepter())) || (hTarget.GetTeamNumber() == this.GetCasterPlus().GetTeamNumber() && (hTarget.IsRealUnit() || hTarget.IsClone() || hTarget.GetOwnerEntity() == this.GetCasterPlus() || (hTarget.GetPlayerID() == this.GetCasterPlus().GetPlayerID()) || hTarget.IsOther()))) {
             return UnitFilterResult.UF_SUCCESS;
         } else if (hTarget.GetTeamNumber() != this.GetCasterPlus().GetTeamNumber() && hTarget.IsCreep() && !hTarget.IsRoshan() && hTarget.GetLevel() > this.GetSpecialValueFor("level_req")) {
             return UnitFilterResult.UF_FAIL_CUSTOM;
@@ -395,7 +395,7 @@ export class imba_chen_holy_persuasion extends BaseAbility_Plus {
             }
             target.SetOwner(this.GetCasterPlus());
             target.SetTeam(this.GetCasterPlus().GetTeam());
-            target.SetControllableByPlayer(this.GetCasterPlus().GetPlayerOwnerID(), false);
+            target.SetControllableByPlayer(this.GetCasterPlus().GetPlayerID(), false);
             if (!this.GetAutoCastState()) {
                 target.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_chen_holy_persuasion", {});
                 let persuasion_tracker_modifier = this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_chen_holy_persuasion_tracker", {}) as modifier_imba_chen_holy_persuasion_tracker;
@@ -497,7 +497,7 @@ export class imba_chen_holy_persuasion extends BaseAbility_Plus {
             if (target == this.GetCasterPlus()) {
                 let owned_units = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_ANY_ORDER, false) as IBaseNpc_Plus[];
                 for (const [_, owned_unit] of GameFunc.iPair(owned_units)) {
-                    if (owned_unit != this.GetCasterPlus() && !owned_unit.IsIllusion() && (owned_unit.GetOwnerEntity() == this.GetCasterPlus() || (owned_unit.GetPlayerOwnerID() == this.GetCasterPlus().GetPlayerOwnerID())) && !owned_unit.HasModifier("modifier_imba_chen_holy_persuasion_teleport")) {
+                    if (owned_unit != this.GetCasterPlus() && !owned_unit.IsIllusion() && (owned_unit.GetOwnerEntity() == this.GetCasterPlus() || (owned_unit.GetPlayerID() == this.GetCasterPlus().GetPlayerID())) && !owned_unit.HasModifier("modifier_imba_chen_holy_persuasion_teleport")) {
                         owned_unit.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_chen_holy_persuasion_teleport", {
                             duration: this.GetSpecialValueFor("teleport_delay")
                         });
@@ -872,15 +872,15 @@ export class imba_chen_test_of_faith extends BaseAbility_Plus {
             if (target != this.GetCasterPlus()) {
                 heal_value = RandomInt(this.GetSpecialValueFor("heal_min"), this.GetSpecialValueFor("heal_max"));
             }
-            heal_value = heal_value + (PlayerResource.GetAssists(target.GetPlayerOwnerID()) * this.GetSpecialValueFor("faithful_assist_mult"));
+            heal_value = heal_value + (PlayerResource.GetAssists(target.GetPlayerID()) * this.GetSpecialValueFor("faithful_assist_mult"));
             target.Heal(heal_value, this);
             SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, target, heal_value, undefined);
         } else {
             let damage_min = this.GetSpecialValueFor("damage_min");
             let damage_max = this.GetSpecialValueFor("damage_max");
-            if (this.GetCasterPlus().GetPlayerOwnerID() && target.GetPlayerOwnerID()) {
-                let caster_assists = PlayerResource.GetAssists(this.GetCasterPlus().GetPlayerOwnerID());
-                let target_assists = PlayerResource.GetAssists(target.GetPlayerOwnerID());
+            if (this.GetCasterPlus().GetPlayerID() && target.GetPlayerID()) {
+                let caster_assists = PlayerResource.GetAssists(this.GetCasterPlus().GetPlayerID());
+                let target_assists = PlayerResource.GetAssists(target.GetPlayerID());
                 damage_max = damage_max + math.max((caster_assists - target_assists) * this.GetSpecialValueFor("unfaithful_assist_mult"), 0);
             }
             let damage_value = RandomInt(damage_min, damage_max);
@@ -920,7 +920,7 @@ export class imba_chen_hand_of_god extends BaseAbility_Plus {
             voiceline = "chen_chen_ability_handgod_0" + RandomInt(1, 3);
         }
         for (const [_, ally] of GameFunc.iPair(allies)) {
-            if (ally.IsRealUnit() || ally.IsClone() || ally.GetOwnerEntity() == this.GetCasterPlus() || (ally.GetPlayerOwnerID() == this.GetCasterPlus().GetPlayerOwnerID())) {
+            if (ally.IsRealUnit() || ally.IsClone() || ally.GetOwnerEntity() == this.GetCasterPlus() || (ally.GetPlayerID() == this.GetCasterPlus().GetPlayerID())) {
                 if (voiceline && ally.IsRealUnit()) {
                     ally.EmitSound(voiceline);
                 }

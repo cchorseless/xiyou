@@ -33,6 +33,7 @@ export class BattleUnitEntityRoot extends BaseEntityRoot {
             this.SyncClient(true);
         }, null, false);
         this.SetUIOverHead(true, false);
+        this.SetStar(1);
     }
 
     SetUIOverHead(isshowCustom: boolean, isshowdota: boolean) {

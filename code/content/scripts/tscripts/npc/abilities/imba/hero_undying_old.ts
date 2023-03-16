@@ -668,7 +668,7 @@ export class modifier_imba_undying_tombstone_zombie_aura extends BaseModifier_Pl
                         ent.findBuff<modifier_imba_undying_tombstone_zombie_modifier>("modifier_imba_undying_tombstone_zombie_modifier").aggro_target = undefined;
                     }
                     ent.SetOwner(this.GetCasterPlus());
-                    ent.SetControllableByPlayer(this.GetCasterPlus().GetPlayerOwnerID(), true);
+                    ent.SetControllableByPlayer(this.GetCasterPlus().GetPlayerID(), true);
                     ent.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_undying_tombstone_zombie_modifier_no_home", {
                         duration: this.duration
                     });

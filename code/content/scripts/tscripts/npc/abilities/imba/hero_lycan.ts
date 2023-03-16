@@ -17,17 +17,10 @@ export class imba_lycan_summon_wolves extends BaseAbility_Plus {
         }
     }
     OnSpellStart(): void {
-        let player_id = undefined;
-        if (this.GetCasterPlus().GetPlayerOwnerID) {
-            player_id = this.GetCasterPlus().GetPlayerOwnerID();
-        } else if (this.GetCasterPlus().GetOwner()) {
-            player_id = (this.GetCasterPlus().GetOwner() as IBaseNpc_Plus).GetPlayerOwnerID();
-        } else {
-            return;
-        }
+        let player_id = this.GetCasterPlus().GetPlayerID();
         for (const [_, unit] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_ANY_ORDER, false))) {
             for (let i = 0; i < 6; i++) {
-                if (unit.GetUnitName() == "npc_lycan_wolf" + i || unit.GetUnitName() == "npc_lycan_summoned_wolf_talent" && unit.GetPlayerOwnerID() == player_id) {
+                if (unit.GetUnitName() == "npc_lycan_wolf" + i || unit.GetUnitName() == "npc_lycan_summoned_wolf_talent" && unit.GetPlayerID() == player_id) {
                     unit.ForceKill(false);
                 }
             }
@@ -127,14 +120,8 @@ export class modifier_imba_lycan_summon_wolves_charges extends BaseModifier_Plus
     CC_OnDeath(keys: ModifierInstanceEvent): void {
         if (keys.unit != keys.attacker && keys.unit.TempData().imba_lycan_summon_wolves && keys.unit.GetOwner() == this.GetCasterPlus() && this.GetStackCount() > 0) {
             this.DecrementStackCount();
-            let player_id = undefined;
-            if (this.GetCasterPlus().GetPlayerOwnerID) {
-                player_id = this.GetCasterPlus().GetPlayerOwnerID();
-            } else if (this.GetCasterPlus().GetOwner()) {
-                player_id = (this.GetCasterPlus().GetOwner() as IBaseNpc_Plus).GetPlayerOwnerID();
-            } else {
-                return;
-            }
+            let player_id = this.GetCasterPlus().GetPlayerID();
+
             let wolf = BaseNpc_Plus.CreateUnitByName("npc_lycan_wolf" + (this.GetSpecialValueFor("wolf_type") + this.GetCasterPlus().GetTalentValue("special_bonus_imba_lycan_1")), this.GetCasterPlus().GetAbsOrigin() + (this.GetCasterPlus().GetForwardVector() * 200) as Vector, this.GetCasterPlus(), true);
             let wolves_spawn_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_lycan/lycan_summon_wolves_spawn.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, wolf);
             ParticleManager.ReleaseParticleIndex(wolves_spawn_particle);

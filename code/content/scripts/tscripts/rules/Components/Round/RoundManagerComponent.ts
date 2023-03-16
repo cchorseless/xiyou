@@ -53,6 +53,9 @@ export class RoundManagerComponent extends ET.Component {
         (this.RoundInfo[this.curRoundBoard] as ERoundBoard)._debug_StageStopped = isPaused;
     }
 
+    public debugNextBoardRound() {
+        (this.RoundInfo[this.curRoundBoard] as ERoundBoard)._debug_nextStage();
+    }
     public getCurrentBoardRound() {
         return this.RoundInfo[this.curRoundBoard] as ERoundBoard;
     }

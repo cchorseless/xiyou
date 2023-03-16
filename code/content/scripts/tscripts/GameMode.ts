@@ -43,6 +43,7 @@ export class GameMode {
         let state = GameRules.State_Get();
         if (state <= DOTA_GameState.DOTA_GAMERULES_STATE_WAIT_FOR_PLAYERS_TO_LOAD) return;
         LogHelper.print("Script reloaded start!");
+        GameDebugger.GetInstance().CollectGarbage();
         // Do some stuff here
         /**更新KV */
         KVHelper.initKVFile();
@@ -52,6 +53,7 @@ export class GameMode {
         GGameCache.DebugReload();
         // 更新全局NPC
         // this.InitGlobalBaseNPC();
+        GameDebugger.GetInstance().CollectGarbage();
         LogHelper.print("Script reloaded end!");
     }
 }
