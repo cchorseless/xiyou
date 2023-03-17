@@ -5,7 +5,7 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_stunned } from "../../../modifier/effect/modifier_stunned";
+import { modifier_generic_stunned } from "../../../modifier/effect/modifier_generic_stunned";
 import { modifier_particle_thinker } from "../../../modifier/modifier_particle";
 import { ability6_keeper_of_the_light_spirit_form } from "./ability6_keeper_of_the_light_spirit_form";
 
@@ -286,7 +286,7 @@ export class modifier_special_bonus_unique_keeper_of_the_light_custom_1_buff ext
 
         if (IsServer()) {
             let flStunDuration = math.min((100 - this.GetParentPlus().GetManaPercent()) * 0.01 * this.max_stun, this.max_stun)
-            modifier_stunned.apply(this.GetParentPlus(), this.GetCasterPlus(), this.GetAbilityPlus(), { duration: flStunDuration * this.GetParentPlus().GetStatusResistanceFactor(this.GetCasterPlus()) })
+            modifier_generic_stunned.apply(this.GetParentPlus(), this.GetCasterPlus(), this.GetAbilityPlus(), { duration: flStunDuration * this.GetParentPlus().GetStatusResistanceFactor(this.GetCasterPlus()) })
         }
     }
     OnIntervalThink() {

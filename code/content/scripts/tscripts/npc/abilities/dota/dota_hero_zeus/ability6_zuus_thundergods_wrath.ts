@@ -6,7 +6,7 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_shock } from "../../../modifier/effect/modifier_shock";
+import { modifier_generic_shock } from "../../../modifier/effect/modifier_generic_shock";
 import { modifier_particle, modifier_particle_thinker } from "../../../modifier/modifier_particle";
 
 /** dota原技能数据 */
@@ -66,7 +66,7 @@ export class ability6_zuus_thundergods_wrath extends BaseAbility_Plus {
                     damage_type: this.GetAbilityDamageType()
                 }
             }
-            modifier_shock.Shock(hTarget, hCaster, this, this.GetSpecialValueFor("shock_bonus_int") * hCaster.GetIntellect())
+            modifier_generic_shock.Shock(hTarget, hCaster, this, this.GetSpecialValueFor("shock_bonus_int") * hCaster.GetIntellect())
         }
 
         EmitSoundOnLocationWithCaster(hCaster.GetAbsOrigin(), ResHelper.GetSoundReplacement("Hero_Zuus.GodsWrath.Target", hCaster), hCaster)

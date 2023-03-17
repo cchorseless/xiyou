@@ -299,8 +299,7 @@ export class imba_treant_leech_seed extends BaseAbility_Plus {
         ParticleManager.ReleaseParticleIndex(seed_particle);
     }
     OnProjectileHit_ExtraData(target: CDOTA_BaseNPC | undefined, location: Vector, ExtraData: any): boolean | void {
-        target.Heal(this.GetTalentSpecialValueFor("leech_damage") * this.GetSpecialValueFor("damage_interval"), this);
-        SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, target, this.GetTalentSpecialValueFor("leech_damage") * this.GetSpecialValueFor("damage_interval"), undefined);
+        target.ApplyHeal(this.GetTalentSpecialValueFor("leech_damage") * this.GetSpecialValueFor("damage_interval"), this);
     }
     OnOwnerSpawned(): void {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_treant_leech_seed_heal") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_treant_leech_seed_heal")) {
@@ -604,8 +603,7 @@ export class modifier_imba_treant_living_armor extends BaseModifier_Plus {
     }
 
     OnIntervalThink(): void {
-        this.GetParentPlus().Heal(this.heal_per_tick, this.GetAbilityPlus());
-        SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, this.GetParentPlus(), this.heal_per_tick, undefined);
+        this.GetParentPlus().ApplyHeal(this.heal_per_tick, this.GetAbilityPlus());
     }
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({

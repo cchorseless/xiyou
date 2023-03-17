@@ -147,7 +147,7 @@ export class modifier_imba_lifesteal_boots_buff extends BaseModifier_Plus {
                     ParticleManager.SetParticleControl(particle_drain_fx, 1, enemy.GetAbsOrigin());
                     ParticleManager.ReleaseParticleIndex(particle_drain_fx);
                     if (actual_damage > 0) {
-                        this.caster.Heal(actual_damage, this.GetItemPlus());
+                        this.caster.ApplyHeal(actual_damage, this.GetItemPlus());
                     }
                     this.drained_units[enemy.entindex() + ""] = enemy.entindex();
                 }

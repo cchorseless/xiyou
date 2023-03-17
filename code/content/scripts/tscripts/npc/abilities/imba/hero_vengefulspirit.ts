@@ -407,7 +407,7 @@ export class imba_vengefulspirit_magic_missile extends BaseAbility_Plus {
                     damage_type: this.GetAbilityDamageType()
                 });
                 if ((!target.IsMagicImmune()) || caster.HasTalent("special_bonus_imba_vengefulspirit_5")) {
-                    target.AddNewModifier(caster, this, "modifier_stunned", {
+                    target.AddNewModifier(caster, this, "modifier_generic_stunned", {
                         duration: ExtraData.stun_duration * (1 - target.GetStatusResistance())
                     });
                 }
@@ -1189,7 +1189,7 @@ export class imba_vengefulspirit_nether_swap extends BaseAbility_Plus {
                 }
             }
             if (target.GetTeamNumber() != caster.GetTeamNumber()) {
-                target.AddNewModifier(caster, this, "modifier_stunned", {
+                target.AddNewModifier(caster, this, "modifier_generic_stunned", {
                     duration: 0.1
                 });
             }
@@ -1270,7 +1270,7 @@ export class imba_vengefulspirit_nether_swap extends BaseAbility_Plus {
                 damage_type: this.GetAbilityDamageType()
             });
             if (!target.IsMagicImmune()) {
-                target.AddNewModifier(caster, this, "modifier_stunned", {
+                target.AddNewModifier(caster, this, "modifier_generic_stunned", {
                     duration: stun_duration * (1 - target.GetStatusResistance())
                 });
             }

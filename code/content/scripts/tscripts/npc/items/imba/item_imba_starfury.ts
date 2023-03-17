@@ -183,7 +183,7 @@ export class modifier_imba_shotgun_passive extends BaseModifier_Plus {
                                 }
                                 hits = hits + 1;
                                 if (hits == 3) {
-                                    unit.AddNewModifier(hero, this.item, "modifier_stunned", {
+                                    unit.AddNewModifier(hero, this.item, "modifier_generic_stunned", {
                                         duration: stun_duration
                                     });
                                 }

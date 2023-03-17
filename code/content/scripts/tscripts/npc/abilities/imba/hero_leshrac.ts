@@ -1583,7 +1583,7 @@ export class modifier_imba_tormented_soul_form extends BaseModifier_Plus {
             let particle_totalsteal_fx = ResHelper.CreateParticleEx(this.particle_totalsteal, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.caster, this.caster);
             ParticleManager.SetParticleControl(particle_totalsteal_fx, 0, this.caster.GetAbsOrigin());
             ParticleManager.ReleaseParticleIndex(particle_totalsteal_fx);
-            this.caster.Heal(replenish, this.GetAbilityPlus());
+            this.caster.ApplyHeal(replenish, this.GetAbilityPlus());
             this.caster.GiveMana(replenish);
         }
     }

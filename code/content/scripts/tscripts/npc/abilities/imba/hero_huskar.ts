@@ -198,7 +198,7 @@ export class modifier_imba_huskar_inner_fire_raze_land_aura extends BaseModifier
 @registerAbility()
 export class imba_huskar_burning_spear extends BaseOrbAbility_Plus {
     GetIntrinsicModifierName(): string {
-        return "modifier_generic_orb_effect_lua";
+        return "modifier_generic_orb_effect";
     }
     GetProjectileName() {
         return "particles/units/heroes/hero_huskar/huskar_burning_spear.vpcf";

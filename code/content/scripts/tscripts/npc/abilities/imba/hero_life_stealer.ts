@@ -292,7 +292,7 @@ export class modifier_imba_life_stealer_feast extends BaseModifier_Plus {
                     // this.GetParentPlus().CalculateStatBonus(true);
                 }
             }
-            this.GetParentPlus().Heal(heal_amount, this.GetAbilityPlus());
+            this.GetParentPlus().ApplyHeal(heal_amount, this.GetAbilityPlus());
             if (this.GetAbilityPlus() && this.GetAbilityPlus().GetAbilityName() == "imba_life_stealer_feast") {
                 return heal_amount;
             }
@@ -415,10 +415,9 @@ export class modifier_imba_life_stealer_feast_banquet extends BaseModifier_Plus 
             }
             this.GetParentPlus().SetHealth(this.GetParentPlus().GetHealth() - damage_amount);
             if (keys.attacker.GetTeamNumber() == this.GetCasterPlus().GetTeamNumber()) {
-                keys.attacker.Heal(damage_amount, this.GetAbilityPlus());
+                keys.attacker.ApplyHeal(damage_amount, this.GetAbilityPlus());
                 let lifesteal_particle = ResHelper.CreateParticleEx("particles/generic_gameplay/generic_lifesteal.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, keys.attacker);
                 ParticleManager.ReleaseParticleIndex(lifesteal_particle);
-                SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, keys.attacker, damage_amount, undefined);
             }
             if (this.GetParentPlus().GetHealthPercent() > 75) {
                 this.GetParentPlus().SetModel("models/props_gameplay/cheese_04.vmdl");
@@ -535,10 +534,9 @@ export class modifier_imba_life_stealer_open_wounds extends BaseModifier_Plus {
         }
         if (this.GetParentPlus() == keys.unit && keys.attacker.GetTeamNumber() != this.GetParentPlus().GetTeamNumber() && !keys.attacker.IsBuilding() && !keys.attacker.IsOther()) {
             let heal_amount = keys.damage * this.heal_percent * 0.01;
-            keys.attacker.Heal(heal_amount, this.GetAbilityPlus());
+            keys.attacker.ApplyHeal(heal_amount, this.GetAbilityPlus());
             let lifesteal_particle = ResHelper.CreateParticleEx("particles/generic_gameplay/generic_lifesteal.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, keys.attacker);
             ParticleManager.ReleaseParticleIndex(lifesteal_particle);
-            SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, keys.attacker, heal_amount, undefined);
             let cross_contamination_modifier = keys.unit.FindModifierByNameAndCaster("modifier_imba_life_stealer_open_wounds_cross_contamination", this.GetCasterPlus()) as modifier_imba_life_stealer_open_wounds_cross_contamination;
             if (cross_contamination_modifier && cross_contamination_modifier.attacking_units && !cross_contamination_modifier.attacking_units.includes(keys.attacker)) {
                 cross_contamination_modifier.attacking_units.push(keys.attacker);
@@ -662,8 +660,7 @@ export class imba_life_stealer_infest extends BaseAbility_Plus {
             infest_effect_modifier.infest_modifier = infest_modifier;
         }
         if (this.GetAbilityName() == "imba_life_stealer_infest_723" && (!target.IsRealUnit() || (target.IsRealUnit() && target.GetTeamNumber() == this.GetCasterPlus().GetTeamNumber())) && !target.IsBuilding() && !target.IsOther() && !target.IsRoshan()) {
-            target.Heal(this.GetSpecialValueFor("bonus_health"), this);
-            SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, this.GetCasterPlus(), this.GetSpecialValueFor("bonus_health"), undefined);
+            target.ApplyHeal(this.GetSpecialValueFor("bonus_health"), this);
         }
         if (this.GetCasterPlus().GetTeamNumber() == target.GetTeamNumber() && target.IsConsideredHero()) {
             // PlayerResource.NewSelection(this.GetCasterPlus().GetPlayerID(), target);
@@ -934,8 +931,7 @@ export class modifier_imba_life_stealer_infest_effect extends BaseModifier_Plus 
                 this.infest_modifier.SetStackCount(this.GetStackCount());
             }
             if (this.GetStackCount() >= this.chestburster_success_stacks) {
-                this.GetCasterPlus().Heal(this.GetParentPlus().GetHealth(), this.GetAbilityPlus());
-                SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, this.GetCasterPlus(), this.GetParentPlus().GetHealth(), undefined);
+                this.GetCasterPlus().ApplyHeal(this.GetParentPlus().GetHealth(), this.GetAbilityPlus());
                 this.GetParentPlus().Kill(this.GetAbilityPlus(), this.GetCasterPlus());
                 this.Destroy();
             } else if (this.GetStackCount() <= this.chestburster_failure_stacks && this.GetElapsedTime() > 2) {
@@ -952,7 +948,7 @@ export class modifier_imba_life_stealer_infest_effect extends BaseModifier_Plus 
                     bInterruptible: false,
                     bIgnoreTenacity: true
                 });
-                this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_stunned", {
+                this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_generic_stunned", {
                     duration: this.chestburster_fail_stun_duration * (1 - this.GetCasterPlus().GetStatusResistance())
                 });
                 this.Destroy();
@@ -1184,8 +1180,7 @@ export class imba_life_stealer_consume extends BaseAbility_Plus {
                 let infest_effect_modifier_parent = infest_modifier.infest_effect_modifier.GetParentPlus();
                 if (infest_effect_modifier_parent && infest_effect_modifier_parent.IsCreep() && !infest_effect_modifier_parent.IsRoshan() && (infest_effect_modifier_parent.GetTeamNumber() != caster.GetTeamNumber() || infest_effect_modifier_parent.FindModifierByNameAndCaster("modifier_imba_life_stealer_control", caster) || infest_effect_modifier_parent.FindModifierByNameAndCaster("modifier_imba_life_stealer_control", caster.GetOwnerPlus()))) {
                     if (infest_modifier.GetAbility().GetAbilityName() == "imba_life_stealer_infest") {
-                        caster.Heal(infest_effect_modifier_parent.GetHealth(), this);
-                        SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, caster, infest_effect_modifier_parent.GetHealth(), undefined);
+                        caster.ApplyHeal(infest_effect_modifier_parent.GetHealth(), this);
                     }
                     infest_effect_modifier_parent.Kill(this, caster);
                     if (caster.GetUnitName().includes("life_stealer")) {
@@ -1456,7 +1451,7 @@ export class modifier_imba_life_stealer_assimilate_effect extends BaseModifier_P
     @registerEvent(Enum_MODIFIER_EVENT.ON_HEALTH_GAINED)
     CC_OnHealthGained(keys: ModifierHealEvent): void {
         if (keys.unit == this.GetCasterPlus() && this.assimilate_modifier && this.assimilate_modifier.GetParent() && this.assimilate_modifier.GetParent().IsAlive()) {
-            this.assimilate_modifier.GetParent().Heal(keys.gain, this.GetAbilityPlus());
+            this.assimilate_modifier.GetParent().ApplyHeal(keys.gain, this.GetAbilityPlus());
         }
     }
 }

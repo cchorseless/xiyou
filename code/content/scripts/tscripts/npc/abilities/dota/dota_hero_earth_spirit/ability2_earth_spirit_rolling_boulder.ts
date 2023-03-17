@@ -5,7 +5,7 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_stunned } from "../../../modifier/effect/modifier_stunned";
+import { modifier_generic_stunned } from "../../../modifier/effect/modifier_generic_stunned";
 import { modifier_earth_spirit_3 } from "./ability3_earth_spirit_geomagnetic_grip";
 import { modifier_earth_spirit_6_magnetized } from "./ability6_earth_spirit_magnetize";
 
@@ -130,7 +130,7 @@ export class ability2_earth_spirit_rolling_boulder extends BaseAbility_Plus {
                 })
 
                 let duration = (ExtraData.enhanced == 1) && stun_duration || stun_duration_enhanced
-                modifier_stunned.apply(v, hCaster, this, { duration: duration * v.GetStatusResistanceFactor(hCaster) })
+                modifier_generic_stunned.apply(v, hCaster, this, { duration: duration * v.GetStatusResistanceFactor(hCaster) })
             }
 
             //  todo: 链接特效

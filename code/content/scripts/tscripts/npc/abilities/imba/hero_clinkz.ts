@@ -1313,7 +1313,7 @@ export class modifier_imba_death_pact_stack_creep extends BaseModifier_Plus {
         if (IsServer()) {
             this.AddTimer(FrameTime(), () => {
                 let stacks = this.GetStackCount();
-                this.GetCasterPlus().Heal(this.creep_bonus_hp_pct * 0.01 * stacks, this.GetAbilityPlus());
+                this.GetCasterPlus().ApplyHeal(this.creep_bonus_hp_pct * 0.01 * stacks, this.GetAbilityPlus());
             });
         }
     }
@@ -1603,7 +1603,7 @@ export class modifier_imba_death_pact_stack_hero extends BaseModifier_Plus {
         if (IsServer()) {
             this.AddTimer(FrameTime(), () => {
                 let stacks = this.GetStackCount();
-                this.GetCasterPlus().Heal(this.hero_bonus_hp_dmg_mult * stacks, this.GetAbilityPlus());
+                this.GetCasterPlus().ApplyHeal(this.hero_bonus_hp_dmg_mult * stacks, this.GetAbilityPlus());
             });
         }
     }

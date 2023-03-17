@@ -3,6 +3,7 @@
 import { GameFunc } from "../../GameFunc";
 import { AoiHelper } from "../../helper/AoiHelper";
 import { KVHelper } from "../../helper/KVHelper";
+import { ResHelper } from "../../helper/ResHelper";
 import { PropertyCalculate } from "../propertystat/PropertyCalculate";
 
 
@@ -1362,6 +1363,138 @@ declare global {
          * 单位放到地面上
          */
         SetUnitOnClearGround(): void;
+
+        /**
+         * @Server
+         * @param hAbility
+         * @param hCaster
+         * @param fDuration
+         */
+        ApplyCharm(hAbility: IBaseAbility_Plus, hCaster: CDOTA_BaseNPC, fDuration: number): void;
+
+        /**
+         * @Server
+         * 治疗
+         * @param amount
+         * @param inflictor
+         */
+        ApplyHeal(amount: number, inflictor: CDOTABaseAbility | undefined): void;
+
+        /**
+         * @Server
+         * 吸血
+         * @param source
+         * @param lifestealPct
+         * @param damage
+         * @param target
+         * @param damage_type
+         * @param iSource
+         * @param bParticle
+         */
+        Lifesteal(source: IBaseAbility_Plus, lifestealPct: number, damage: number, target: IBaseNpc_Plus, damage_type?: DAMAGE_TYPES, iSource?: DamageCategory_t, bParticle?: boolean): void;
+
+
+        /**
+         * @Server
+         * 恐惧
+         * @param hAbility
+         * @param hCaster
+         * @param duraiton
+         */
+        ApplyFear(hAbility: IBaseAbility_Plus, hCaster: IBaseNpc_Plus, duraiton: number): IBaseModifier_Plus;
+
+        /**
+         * @Server
+         * 击退
+         * @param hAbility
+         * @param hCaster
+         * @param kv
+         */
+        ApplyKnockBack(hAbility: IBaseAbility_Plus, hCaster: IBaseNpc_Plus, kv: {
+            distance?: number,
+            height?: number,
+            duration?: number,
+            direction_x?: number,
+            direction_y?: number,
+            tree_destroy_radius?: number,
+            IsStun?: boolean,
+            IsFlail?: boolean,
+        }): IBaseModifier_Plus;
+
+        /**
+         * @Server
+         * 眩晕
+         * @param hAbility
+         * @param hCaster
+         * @param duraiton
+         */
+        ApplyStunned(hAbility: IBaseAbility_Plus, hCaster: IBaseNpc_Plus, duraiton: number): IBaseModifier_Plus;
+
+
+        /**
+         * @Server
+         * 混乱
+         * @param hAbility
+         * @param hCaster
+         * @param duraiton
+         */
+        ApplyDaze(hAbility: IBaseAbility_Plus, hCaster: IBaseNpc_Plus, duraiton: number): IBaseModifier_Plus;
+
+        /**
+         * @Server
+         * 冰冻
+         * @param hAbility
+         * @param hCaster
+         * @param duraiton
+         */
+        ApplyFreeze(hAbility: IBaseAbility_Plus, hCaster: IBaseNpc_Plus, duraiton: number): IBaseModifier_Plus;
+
+        /**
+         * @Server
+         * 寒冷层数
+         * @param hAbility
+         * @param hCaster
+         * @param duraiton
+         */
+        ApplyChilled(hAbility: IBaseAbility_Plus, hCaster: IBaseNpc_Plus, duraiton: number): IBaseModifier_Plus;
+
+        /**
+         * @Server
+         * 移除寒冷效果
+         */
+        RemoveChilled(): void;
+
+        /**
+         * @Both
+         * 寒冷效果
+         */
+        IsChilled(): boolean;
+
+        /**
+         * @Both
+         * 冰冻
+         */
+        IsFreeze(): boolean;
+
+        /**
+         * @Both
+         * 混乱
+         */
+        IsDazed(): boolean;
+
+        /**
+         * @Both
+         * 沉睡，受到攻击会被唤醒
+         */
+        IsSleeped(): boolean;
+
+        /**
+         * @Both
+         * 获取攻击距离
+         */
+        GetAttackRangePlus(): number;
+
+
     }
 }
 
@@ -1569,7 +1702,7 @@ BaseNPC.IsInvisiblePlus = function () {
         "modifier_imba_templar_assassin_meld",
         "modifier_imba_skeleton_walk_dummy",
         "modifier_invoker_ghost_walk_self",
-        "modifier_rune_invis",
+        "modifier_chess_rune_invis",
         "modifier_imba_skeleton_walk_invis",
         "modifier_imba_riki_invisibility",
         "modifier_imba_riki_cloak_and_dagger_723",
@@ -1695,6 +1828,26 @@ BaseNPC.findBuffStack = function (buffname: string, caster: CDOTA_BaseNPC = null
     return this.GetModifierStackCount(buffname, caster)
 }
 
+BaseNPC.IsChilled = function () {
+    return this.HasModifier("modifier_generic_chill");
+}
+
+BaseNPC.IsFreeze = function () {
+    return this.HasModifier("modifier_generic_frozen");
+}
+
+BaseNPC.IsDazed = function () {
+    return this.HasModifier("modifier_generic_daze");
+}
+
+BaseNPC.IsSleeped = function () {
+    return this.HasModifier("modifier_generic_sleep");
+}
+
+BaseNPC.GetAttackRangePlus = function () {
+    return this.Script_GetAttackRange();
+}
+
 
 if (IsServer()) {
     BaseNPC.UpdateOnRemove = function () {
@@ -1789,6 +1942,98 @@ if (IsServer()) {
             FindClearSpaceForUnit(this, this.GetAbsOrigin(), true);
             ResolveNPCPositions(this.GetAbsOrigin(), 64);
         }));
+    }
+    BaseNPC.ApplyCharm = function (hAbility: IBaseAbility_Plus, hCaster: IBaseNpc_Plus, duration: number) {
+        return this.AddNewModifier(hCaster, hAbility, "modifier_generic_charm", { duration: duration });
+    }
+    BaseNPC.ApplyHeal = function (amount: number, inflictor: CDOTABaseAbility) {
+        this.Heal(amount, inflictor);
+        let healer = null;
+        if (inflictor) {
+            healer = inflictor.GetCasterPlus();
+        }
+        SendOverheadEventMessage(this.GetPlayerOwner(), DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, this, amount, healer as any);
+        Gmodifier_event.FireEvent({
+            attacker: this,
+            abiity: inflictor,
+            target: healer,
+            eventType: 1 + 4,
+        }, GEMODIFIER_EVENT.ON_HEAL_TYPE_LIFESTEAL)
+    }
+    BaseNPC.Lifesteal = function (source: IBaseAbility_Plus, lifestealPct: number, damage: number, target: IBaseNpc_Plus, damage_type: DAMAGE_TYPES = null, iSource = DamageCategory_t.DOTA_DAMAGE_CATEGORY_ATTACK, bParticles = true) {
+        let damageDealt = damage || 0;
+        let sourceType = iSource;
+        let particles = true;
+        if (bParticles == false) {
+            particles = false;
+        }
+        if (sourceType == DamageCategory_t.DOTA_DAMAGE_CATEGORY_SPELL && source) {
+            damageDealt = source.DealDamage(this, target, damage, {
+                damage_type: damage_type
+            });
+        } else if (sourceType == DamageCategory_t.DOTA_DAMAGE_CATEGORY_ATTACK) {
+            let oldHP = target.GetHealth();
+            this.PerformAttack(target, true, true, true, true, false, false, false);
+            damageDealt = math.abs(oldHP - target.GetHealth());
+        }
+        if (particles) {
+            if (sourceType == DamageCategory_t.DOTA_DAMAGE_CATEGORY_SPELL) {
+                let p = ResHelper.CreateParticleEx("particles/items3_fx/octarine_core_lifesteal.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this);
+                ParticleManager.ReleaseParticleIndex(p);
+            } else {
+                let lifesteal = ResHelper.CreateParticleEx("particles/units/heroes/hero_skeletonking/wraith_king_vampiric_aura_lifesteal.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this);
+                ParticleManager.SetParticleControlEnt(lifesteal, 0, this, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", this.GetAbsOrigin(), true);
+                ParticleManager.SetParticleControlEnt(lifesteal, 1, this, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", this.GetAbsOrigin(), true);
+                ParticleManager.ReleaseParticleIndex(lifesteal);
+            }
+        }
+        let flHeal = damageDealt * lifestealPct / 100;
+        this.ApplyHeal(flHeal, source);
+        return flHeal;
+    }
+    BaseNPC.ApplyFear = function (hAbility: IBaseAbility_Plus, hCaster: IBaseNpc_Plus, duraiton: number) {
+        return this.AddNewModifier(hCaster, hAbility, "modifier_generic_fear", {
+            duration: duraiton
+        }) as IBaseModifier_Plus;
+    }
+    BaseNPC.ApplyKnockBack = function (hAbility: IBaseAbility_Plus, hCaster: IBaseNpc_Plus, kv: {
+        distance?: number,
+        height?: number,
+        duration?: number,
+        direction_x?: number,
+        direction_y?: number,
+        tree_destroy_radius?: number,
+        IsStun?: boolean,
+        IsFlail?: boolean,
+    }) {
+        return this.AddNewModifier(hCaster, hAbility, "modifier_generic_knockback", kv) as IBaseModifier_Plus;
+        ;
+    }
+    BaseNPC.ApplyStunned = function (hAbility: IBaseAbility_Plus, hCaster: IBaseNpc_Plus, stunDuration: number) {
+        return this.AddNewModifier(hCaster, hAbility, "modifier_generic_stunned", {
+            duration: stunDuration
+        }) as IBaseModifier_Plus;
+        ;
+    }
+    BaseNPC.ApplyDaze = function (hAbility: IBaseAbility_Plus, hCaster: IBaseNpc_Plus, dazeDuration: number) {
+        return this.AddNewModifier(hCaster, hAbility, "modifier_generic_daze", {
+            duration: dazeDuration
+        }) as IBaseModifier_Plus;
+        ;
+    }
+    BaseNPC.ApplyFreeze = function (hAbility: IBaseAbility_Plus, hCaster: IBaseNpc_Plus, duration: number) {
+        this.RemoveModifierByName("modifier_generic_chill")
+        return this.AddNewModifier(hCaster, hAbility, "modifier_generic_frozen", { duration: duration }) as IBaseModifier_Plus;
+    }
+    BaseNPC.ApplyChilled = function (hAbility: IBaseAbility_Plus, hCaster: IBaseNpc_Plus, duration: number) {
+        return this.AddNewModifier(hCaster, hAbility, "modifier_generic_chill", { duration: duration }) as IBaseModifier_Plus;
+        ;
+    }
+
+    BaseNPC.RemoveChilled = function () {
+        if (this.IsChilled()) {
+            return this.RemoveModifierByName("modifier_generic_chill");
+        }
     }
 }
 

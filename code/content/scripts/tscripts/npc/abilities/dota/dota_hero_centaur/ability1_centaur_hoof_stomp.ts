@@ -6,7 +6,7 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_stunned } from "../../../modifier/effect/modifier_stunned";
+import { modifier_generic_stunned } from "../../../modifier/effect/modifier_generic_stunned";
 import { modifier_particle } from "../../../modifier/modifier_particle";
 
 /** dota原技能数据 */
@@ -54,7 +54,7 @@ export class ability1_centaur_hoof_stomp extends BaseAbility_Plus {
                 damage_type: this.GetAbilityDamageType()
             }
             BattleHelper.GoApplyDamage(damage_table)
-            modifier_stunned.apply(target, caster, this, { duration: stun_duration * target.GetStatusResistanceFactor(caster) })
+            modifier_generic_stunned.apply(target, caster, this, { duration: stun_duration * target.GetStatusResistanceFactor(caster) })
         }
     }
 

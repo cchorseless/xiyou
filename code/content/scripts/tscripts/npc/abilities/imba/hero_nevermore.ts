@@ -679,11 +679,9 @@ export class imba_nevermore_necromastery extends BaseAbility_Plus {
             }
             if (soul_stacks < souls_needed) {
                 caster.SetHealth(current_health + (soul_stacks * heal_per_soul));
-                SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, caster, soul_stacks * heal_per_soul, undefined);
                 caster.SetModifierStackCount(souls_modifier, caster, 0);
             } else {
                 caster.SetHealth(max_health);
-                SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, caster, souls_needed * heal_per_soul, undefined);
                 caster.SetModifierStackCount(souls_modifier, caster, soul_stacks - souls_needed);
             }
         }
@@ -868,7 +866,7 @@ export class modifier_imba_necromastery_souls extends BaseModifier_Plus {
                             let lifesteal_per_soul = this.caster.GetTalentValue("special_bonus_imba_nevermore_4");
                             let lifesteal = lifesteal_per_soul * stacks;
                             let heal_amount = damage * lifesteal * 0.01;
-                            this.caster.Heal(heal_amount, this.GetAbilityPlus());
+                            this.caster.ApplyHeal(heal_amount, this.GetAbilityPlus());
                             let particle_lifesteal_fx = ResHelper.CreateParticleEx(particle_lifesteal, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.caster);
                             ParticleManager.SetParticleControl(particle_lifesteal_fx, 0, this.caster.GetAbsOrigin());
                         } else {
@@ -1337,7 +1335,7 @@ export class imba_nevermore_requiem extends BaseAbility_Plus {
         }
         let damage_dealt = ApplyDamage(damageTable);
         if (scepter_line) {
-            caster.Heal(damage_dealt, this);
+            caster.ApplyHeal(damage_dealt, this);
         }
         if (!death_cast) {
             if (!target.HasModifier("modifier_nevermore_requiem_fear")) {

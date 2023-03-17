@@ -8,7 +8,7 @@ import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseModifierMotionHorizontal_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
 import { item_towerchange_custom } from "../../../items/avalon/item_towerchange_custom";
-import { modifier_bleeding } from "../../../modifier/effect/modifier_bleeding";
+import { modifier_generic_bleeding } from "../../../modifier/effect/modifier_generic_bleeding";
 import { ActiveRootAbility } from "../../ActiveRootAbility";
 
 /** dota原技能数据 */
@@ -215,7 +215,7 @@ export class ability1_pudge_meat_hook extends ActiveRootAbility {
                 modifier_pudge_1_buff.apply(hTarget, tHashtable.hCaster, this, { hashtableUUid: HashTableHelper.GetHashtableIndex(tHashtable) });
                 // 流血
                 let fDamage = tHashtable.bleed_damage + tHashtable.bleed_damage_str * tHashtable.hCaster.GetStrength();
-                modifier_bleeding.Bleeding(hTarget, tHashtable.hCaster, this, tHashtable.bleed_duration, (tDamageTable: BattleHelper.DamageOptions) => {
+                modifier_generic_bleeding.Bleeding(hTarget, tHashtable.hCaster, this, tHashtable.bleed_duration, (tDamageTable: BattleHelper.DamageOptions) => {
                     LogHelper.print(fDamage, 111)
                     return fDamage
                 }, true)

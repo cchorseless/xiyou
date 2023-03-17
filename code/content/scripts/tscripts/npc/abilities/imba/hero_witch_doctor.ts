@@ -81,7 +81,7 @@ export class imba_witch_doctor_paralyzing_cask extends BaseAbility_Plus {
                                 });
                             }
                         }
-                        hTarget.AddNewModifier(hTarget, this, "modifier_stunned", {
+                        hTarget.AddNewModifier(hTarget, this, "modifier_generic_stunned", {
                             duration: ExtraData.hero_duration * (1 - hTarget.GetStatusResistance())
                         });
                         ApplyDamage({
@@ -93,13 +93,12 @@ export class imba_witch_doctor_paralyzing_cask extends BaseAbility_Plus {
                     }
                 } else {
                     let heal = ExtraData.hero_damage;
-                    hTarget.Heal(heal, this);
-                    SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, hTarget, heal, undefined);
+                    hTarget.ApplyHeal(heal, this);
                 }
             } else {
                 if (hTarget.GetTeamNumber() != this.GetCasterPlus().GetTeamNumber()) {
                     if (!hTarget.IsMagicImmune() && (ExtraData.bFirstCast == 0 || !hTarget.TriggerSpellAbsorb(this))) {
-                        hTarget.AddNewModifier(hTarget, this, "modifier_stunned", {
+                        hTarget.AddNewModifier(hTarget, this, "modifier_generic_stunned", {
                             duration: ExtraData.creep_duration * (1 - hTarget.GetStatusResistance())
                         });
                         ApplyDamage({
@@ -111,8 +110,7 @@ export class imba_witch_doctor_paralyzing_cask extends BaseAbility_Plus {
                     }
                 } else {
                     let heal = ExtraData.creep_damage;
-                    hTarget.Heal(heal, this);
-                    SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, hTarget, heal, undefined);
+                    hTarget.ApplyHeal(heal, this);
                 }
             }
         } else {
@@ -441,8 +439,7 @@ export class modifier_imba_voodoo_restoration_heal extends BaseModifier_Plus {
         let hParent = this.GetParentPlus();
         let heal_amp = 1 + (this.GetCasterPlus().GetSpellAmplification(false) * this.heal_spell_amp_pct * 0.01);
         let heal = (this.heal + (this.GetCasterPlus().GetIntellect() * this.int_to_heal * 0.01)) * heal_amp * this.interval;
-        hParent.Heal(heal, this.GetAbilityPlus());
-        SendOverheadEventMessage(hParent.GetPlayerOwner(), DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, hParent, heal, hParent.GetPlayerOwner());
+        hParent.ApplyHeal(heal, this.GetAbilityPlus());
     }
 }
 @registerAbility()

@@ -5,7 +5,7 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_bleeding } from "../../../modifier/effect/modifier_bleeding";
+import { modifier_generic_bleeding } from "../../../modifier/effect/modifier_generic_bleeding";
 import { modifier_particle } from "../../../modifier/modifier_particle";
 
 /** dota原技能数据 */
@@ -139,7 +139,7 @@ export class modifier_centaur_3 extends BaseModifier_Plus {
             if (iCurHealth > iConsumeHealth) {
                 hParent.ModifyHealth(iCurHealth - iConsumeHealth, hAbility, false, 0)
                 // 流血
-                modifier_bleeding.Bleeding(params.target, hParent, hAbility, this.blood_duration, (tDamageTable) => {
+                modifier_generic_bleeding.Bleeding(params.target, hParent, hAbility, this.blood_duration, (tDamageTable) => {
                     return iConsumeHealth
                 }, true)
                 modifier_centaur_3_particle.apply(hParent, params.target, hAbility, { duration: BaseModifier_Plus.LOCAL_PARTICLE_MODIFIER_DURATION })

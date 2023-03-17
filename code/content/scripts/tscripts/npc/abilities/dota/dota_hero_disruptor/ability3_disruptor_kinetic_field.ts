@@ -4,8 +4,8 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_shock } from "../../../modifier/effect/modifier_shock";
-import { modifier_stunned } from "../../../modifier/effect/modifier_stunned";
+import { modifier_generic_shock } from "../../../modifier/effect/modifier_generic_shock";
+import { modifier_generic_stunned } from "../../../modifier/effect/modifier_generic_stunned";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 
 /** dota原技能数据 */
@@ -197,8 +197,8 @@ export class modifier_disruptor_2_field_aura extends BaseModifier_Plus {
             let hParent = this.GetParentPlus()
             let fStunDuration = this.GetSpecialValueFor("stun_duration")
             let iShockPercent = this.GetSpecialValueFor("shock_active_pct")
-            modifier_shock.ShockActive(hParent, hCaster, this.GetAbilityPlus(), iShockPercent, false)
-            modifier_stunned.apply(hParent, hCaster, this.GetAbilityPlus(), {
+            modifier_generic_shock.ShockActive(hParent, hCaster, this.GetAbilityPlus(), iShockPercent, false)
+            modifier_generic_stunned.apply(hParent, hCaster, this.GetAbilityPlus(), {
                 duration: fStunDuration * (100 - hParent.GetStatusResistance()) * 0.01
             })
         }
@@ -210,8 +210,8 @@ export class modifier_disruptor_2_field_aura extends BaseModifier_Plus {
             let hParent = this.GetParentPlus()
             let fStunDuration = this.GetSpecialValueFor("stun_duration")
             let iShockPercent = this.GetSpecialValueFor("shock_active_pct")
-            modifier_shock.ShockActive(hParent, hCaster, this.GetAbilityPlus(), iShockPercent, false)
-            modifier_stunned.apply(hParent, hCaster, this.GetAbilityPlus(), {
+            modifier_generic_shock.ShockActive(hParent, hCaster, this.GetAbilityPlus(), iShockPercent, false)
+            modifier_generic_stunned.apply(hParent, hCaster, this.GetAbilityPlus(), {
                 duration: fStunDuration * (100 - hParent.GetStatusResistance()) * 0.01
             })
         }

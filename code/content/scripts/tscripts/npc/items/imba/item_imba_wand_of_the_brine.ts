@@ -43,8 +43,7 @@ export class modifier_item_imba_wand_of_the_brine_bubble extends BaseModifier_Pl
     }
     OnIntervalThink(): void {
         if (IsServer()) {
-            this.GetParentPlus().Heal(this.bubble_heal_per_tick, this.GetItemPlus());
-            SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, this.GetParentPlus(), this.bubble_heal_per_tick, undefined);
+            this.GetParentPlus().ApplyHeal(this.bubble_heal_per_tick, this.GetItemPlus());
         }
     }
     CheckState(): Partial<Record<modifierstate, boolean>> {

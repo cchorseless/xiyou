@@ -6,7 +6,7 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_poison } from "../../../modifier/effect/modifier_poison";
+import { modifier_generic_poison } from "../../../modifier/effect/modifier_generic_poison";
 import { ability2_venomancer_poison_sting } from "./ability2_venomancer_poison_sting";
 
 /** dota原技能数据 */
@@ -94,7 +94,7 @@ export class ability1_venomancer_venomous_gale extends BaseAbility_Plus {
 
         EmitSoundOnLocationWithCaster(vLocation, ResHelper.GetSoundReplacement("Hero_Venomancer.VenomousGaleImpact", hCaster), hCaster)
 
-        modifier_poison.Poison(hTarget, hCaster, this, poison_count)
+        modifier_generic_poison.Poison(hTarget, hCaster, this, poison_count)
         modifier_venomancer_1_projectile_debuff.apply(hTarget, hCaster, this, { duration: duration * hTarget.GetStatusResistanceFactor(hCaster) })
     }
     GetIntrinsicModifierName() {

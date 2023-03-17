@@ -715,7 +715,7 @@ export class imba_tiny_avalanche extends BaseAbility_Plus {
                     ability: this
                 });
                 if (enemy.IsAlive()) {
-                    enemy.AddNewModifier(caster, this, "modifier_stunned", {
+                    enemy.AddNewModifier(caster, this, "modifier_generic_stunned", {
                         duration: duration
                     });
                 }
@@ -1288,7 +1288,7 @@ export class modifier_imba_tiny_craggy_exterior_passive extends BaseModifier_Plu
                                 damage_type: this.GetAbilityPlus().GetAbilityDamageType(),
                                 ability: this.GetAbilityPlus()
                             });
-                            target.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_stunned", {
+                            target.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_generic_stunned", {
                                 duration: this.duration * (1 - target.GetStatusResistance())
                             });
                             EmitSoundOn("Hero_Tiny.CraggyExterior.Stun", params.attacker);
@@ -1301,7 +1301,7 @@ export class modifier_imba_tiny_craggy_exterior_passive extends BaseModifier_Plu
                             damage_type: this.GetAbilityPlus().GetAbilityDamageType(),
                             ability: this.GetAbilityPlus()
                         });
-                        params.attacker.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_stunned", {
+                        params.attacker.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_generic_stunned", {
                             duration: this.duration * (1 - params.attacker.GetStatusResistance())
                         });
                         let craggy = ResHelper.CreateParticleEx("particles/units/heroes/hero_tiny/tiny_craggy_hit.vpcf", ParticleAttachment_t.PATTACH_POINT_FOLLOW, this.GetCasterPlus());

@@ -1,18 +1,11 @@
-/*
- * @Author: Jaxh
- * @Date: 2021-05-11 16:57:41
- * @LastEditors: your name
- * @LastEditTime: 2021-06-16 11:05:02
- * @Description: 眩晕BUFF
- */
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerModifier } from "../../entityPlus/Base_Plus";
 
 @registerModifier()
-export class modifier_stunned extends BaseModifier_Plus {
+export class modifier_generic_stunned extends BaseModifier_Plus {
     IsHidden() { return false }
     IsDebuff() { return true }
-    IsPurgable() { return false }
+    IsPurgable() { return true }
     IsPurgeException() { return true }
     IsStunDebuff() { return true }
     AllowIllusionDuplicate() { return false }
@@ -22,6 +15,7 @@ export class modifier_stunned extends BaseModifier_Plus {
     CheckState() {
         return {
             [modifierstate.MODIFIER_STATE_STUNNED]: true,
+            [modifierstate.MODIFIER_STATE_PASSIVES_DISABLED]: true,
         }
     }
 
@@ -29,5 +23,22 @@ export class modifier_stunned extends BaseModifier_Plus {
     CC_OverrideAnimation(): GameActivity_t {
         return GameActivity_t.ACT_DOTA_DISABLED;
     }
+    public BeCreated(params?: IModifierTable): void {
+        if (IsServer()) {
+            this.GetParent().Interrupt()
+            this.GetParent().Stop()
+        }
+    }
+
+    public BeRemoved(): void {
+        if (IsServer()) {
+            this.GetParent().RemoveGesture(GameActivity_t.ACT_DOTA_DISABLED)
+        }
+    }
+
+    GetAttributes() {
+        return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE
+    }
+
 }
 

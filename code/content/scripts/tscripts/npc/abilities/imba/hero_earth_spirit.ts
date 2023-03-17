@@ -1020,7 +1020,7 @@ export class modifier_imba_rolling_boulder extends BaseModifier_Plus {
                                 }
                             }
                         }
-                        hero.AddNewModifier(this.caster, this.ability, "modifier_stunned", {
+                        hero.AddNewModifier(this.caster, this.ability, "modifier_generic_stunned", {
                             duration: this.stunDuration * (1 - hero.GetStatusResistance())
                         });
                         if (i == 0) {
@@ -1448,8 +1448,7 @@ export class modifier_imba_magnetize extends BaseModifier_Plus {
                 damage = damage + this.markTickDamagePerSecPerStack * mark.GetStackCount();
                 if (this.caster.HasTalent("special_bonus_imba_earth_spirit_3")) {
                     let heal = this.caster.GetTalentValue("special_bonus_imba_earth_spirit_3") * mark.GetStackCount();
-                    this.caster.Heal(heal, this.GetAbilityPlus());
-                    SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, this.caster, heal, undefined);
+                    this.caster.ApplyHeal(heal, this.GetAbilityPlus());
                 }
             }
             ApplyDamage({

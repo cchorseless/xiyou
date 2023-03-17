@@ -2,7 +2,7 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_bleeding } from "../../../modifier/effect/modifier_bleeding";
+import { modifier_generic_bleeding } from "../../../modifier/effect/modifier_generic_bleeding";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 
 
@@ -17,7 +17,7 @@ export class t13_maim extends BaseAbility_Plus {
         let damage = this.GetSpecialValueFor("damage")
         let blood_duration = this.GetSpecialValueFor("blood_duration")
 
-        modifier_bleeding.Bleeding(hTarget, hCaster, this, blood_duration, (tDamageTable) => {
+        modifier_generic_bleeding.Bleeding(hTarget, hCaster, this, blood_duration, (tDamageTable) => {
             return damage
         }, true)
     }

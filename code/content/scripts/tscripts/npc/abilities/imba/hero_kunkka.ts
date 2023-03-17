@@ -1562,7 +1562,7 @@ export class imba_kunkka_ghostship extends BaseAbility_Plus {
                                 duration: stun_duration + this.GetSpecialValueFor("tide_red_slow_duration") * (1 - enemy.GetStatusResistance())
                             });
                         }
-                        enemy.AddNewModifier(caster, this, "modifier_stunned", {
+                        enemy.AddNewModifier(caster, this, "modifier_generic_stunned", {
                             duration: stun_duration * (1 - enemy.GetStatusResistance())
                         });
                     }

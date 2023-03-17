@@ -138,7 +138,7 @@ export class modifier_imba_souldrain extends BaseModifier_Plus {
                         damage_type: DAMAGE_TYPES.DAMAGE_TYPE_PURE,
                         damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_HPLOSS + DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION,
                     });
-                    caster.Heal(actual_damage, item);
+                    caster.ApplyHeal(actual_damage, item);
                     valid_enemies = valid_enemies + 1;
                 }
             }
@@ -300,7 +300,7 @@ export class modifier_item_imba_curseblade_debuff extends BaseModifier_Plus {
                 damage_type: DAMAGE_TYPES.DAMAGE_TYPE_MAGICAL
             }
             ApplyDamage(damageTable);
-            this.caster.Heal(lifedrain, this.ability);
+            this.caster.ApplyHeal(lifedrain, this.ability);
             this.parent.ReduceMana(manadrain);
             this.caster.GiveMana(manadrain);
         }

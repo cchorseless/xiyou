@@ -6,7 +6,7 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_stunned } from "../../../modifier/effect/modifier_stunned";
+import { modifier_generic_stunned } from "../../../modifier/effect/modifier_generic_stunned";
 
 /** dota原技能数据 */
 export const Data_luna_lucent_beam = { "ID": "5222", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET", "AbilityUnitTargetTeam": "DOTA_UNIT_TARGET_TEAM_ENEMY", "AbilityUnitTargetType": "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC", "AbilityUnitDamageType": "DAMAGE_TYPE_MAGICAL", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_NO", "SpellDispellableType": "SPELL_DISPELLABLE_YES_STRONG", "FightRecapLevel": "1", "AbilitySound": "Hero_Luna.LucentBeam.Target", "HasShardUpgrade": "1", "AbilityCastRange": "800", "AbilityCastPoint": "0.4", "AbilityCooldown": "6.0 6.0 6.0 6.0", "AbilityManaCost": "90 100 110 120", "AbilityModifierSupportValue": "0.5", "AbilitySpecial": { "01": { "var_type": "FIELD_FLOAT", "stun_duration": "0.8" }, "02": { "var_type": "FIELD_INTEGER", "beam_damage": "75 150 225 300", "LinkedSpecialBonus": "special_bonus_unique_luna_1" } }, "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_1" };
@@ -76,7 +76,7 @@ export class ability1_luna_lucent_beam extends BaseAbility_Plus {
         ParticleManager.SetParticleControlEnt(iParticleID, 5, hTarget, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", hTarget.GetAbsOrigin(), true)
         ParticleManager.SetParticleControlEnt(iParticleID, 6, hCaster, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_attack1", hCaster.GetAbsOrigin(), true)
         ParticleManager.ReleaseParticleIndex(iParticleID)
-        modifier_stunned.apply(hTarget, hCaster, this, { duration: stun_duration * hTarget.GetStatusResistanceFactor(hCaster) })
+        modifier_generic_stunned.apply(hTarget, hCaster, this, { duration: stun_duration * hTarget.GetStatusResistanceFactor(hCaster) })
     }
     OnSpellStart() {
         let hCaster = this.GetCasterPlus()

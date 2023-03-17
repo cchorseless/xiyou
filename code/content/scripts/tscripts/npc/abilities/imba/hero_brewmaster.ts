@@ -78,7 +78,7 @@ export class imba_brewmaster_thunder_clap extends BaseAbility_Plus {
     OnProjectileHit_ExtraData(target: CDOTA_BaseNPC | undefined, location: Vector, ExtraData: any): boolean | void {
         if (target && !target.IsMagicImmune()) {
             target.EmitSound("Brewmaster_Earth.Boulder.Target");
-            target.AddNewModifier(this.GetCasterPlus(), this, "modifier_stunned", {
+            target.AddNewModifier(this.GetCasterPlus(), this, "modifier_generic_stunned", {
                 duration: this.GetSpecialValueFor("debris_stun_duration") * (1 - target.GetStatusResistance())
             });
             ApplyDamage({

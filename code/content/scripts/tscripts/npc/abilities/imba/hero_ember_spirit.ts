@@ -333,7 +333,7 @@ export class modifier_imba_searing_chains_debuff extends BaseModifier_Plus {
             this.tick_interval = keys.tick_interval;
             this.damage = keys.damage;
             this.StartIntervalThink(this.tick_interval);
-            this.GetParentPlus().AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_stunned", {
+            this.GetParentPlus().AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_generic_stunned", {
                 duration: 0.1 * (1 - this.GetParentPlus().GetStatusResistance())
             });
         }

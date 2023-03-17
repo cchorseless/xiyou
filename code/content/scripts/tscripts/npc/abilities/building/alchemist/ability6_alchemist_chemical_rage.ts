@@ -64,7 +64,7 @@ export class ability6_alchemist_chemical_rage extends BaseAbility_Plus {
             damage_type: this.GetAbilityDamageType(),
         });
         let stun_duration = this.GetSpecialValueFor("stun_duration");
-        hTarget.AddNewModifier(hCaster, this, "modifier_stunned", { duration: stun_duration });
+        hTarget.AddNewModifier(hCaster, this, "modifier_generic_stunned", { duration: stun_duration });
 
         return true;
     }

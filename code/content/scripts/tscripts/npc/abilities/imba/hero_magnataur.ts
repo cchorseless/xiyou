@@ -1456,7 +1456,7 @@ export class modifier_imba_skewer_motion_controller extends BaseModifierMotionHo
                     BaseModifierMotionHorizontal_Plus.RemoveAllMotionBuff(enemy);
                     enemy.SetAbsOrigin(pulled_loc);
                     FindClearSpaceForUnit(enemy, pulled_loc, true);
-                    enemy.AddNewModifier(caster, ability, "modifier_stunned", {
+                    enemy.AddNewModifier(caster, ability, "modifier_generic_stunned", {
                         duration: 0.1 * (1 - enemy.GetStatusResistance())
                     });
                     enemy.EmitSound("Hero_Magnataur.ReversePolarity.Stun");
@@ -1828,7 +1828,7 @@ export class imba_magnataur_reverse_polarity extends BaseAbility_Plus {
             for (const [_, creep] of GameFunc.iPair(creeps)) {
                 creep.SetAbsOrigin(final_loc);
                 FindClearSpaceForUnit(creep, final_loc, true);
-                creep.AddNewModifier(caster, this, "modifier_stunned", {
+                creep.AddNewModifier(caster, this, "modifier_generic_stunned", {
                     duration: creep_stun_duration * (1 - creep.GetStatusResistance())
                 });
                 ApplyDamage({
@@ -1866,7 +1866,7 @@ export class imba_magnataur_reverse_polarity extends BaseAbility_Plus {
                     BaseModifierMotionHorizontal_Plus.RemoveAllMotionBuff(enemy);
                     enemy.SetAbsOrigin(final_loc);
                     FindClearSpaceForUnit(enemy, final_loc, true);
-                    enemy.AddNewModifier(caster, this, "modifier_stunned", {
+                    enemy.AddNewModifier(caster, this, "modifier_generic_stunned", {
                         duration: hero_stun_duration * (1 - enemy.GetStatusResistance())
                     });
                     enemy.AddNewModifier(caster, undefined, "modifier_imba_polarize_debuff_stack", {

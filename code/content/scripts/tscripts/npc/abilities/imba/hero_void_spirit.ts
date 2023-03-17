@@ -153,7 +153,7 @@ export class modifier_imba_void_spirit_dissimilate extends BaseModifier_Plus {
                 ability: this.GetAbilityPlus()
             });
             if (this.GetCasterPlus().HasTalent("special_bonus_imba_void_spirit_dissimilate_stun")) {
-                enemy.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_stunned", {
+                enemy.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_generic_stunned", {
                     duration: this.GetCasterPlus().GetTalentValue("special_bonus_imba_void_spirit_dissimilate_stun") * (1 - enemy.GetStatusResistance())
                 });
             }

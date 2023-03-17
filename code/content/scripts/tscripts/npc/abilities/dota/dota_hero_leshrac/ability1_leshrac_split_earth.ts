@@ -5,7 +5,7 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_stunned } from "../../../modifier/effect/modifier_stunned";
+import { modifier_generic_stunned } from "../../../modifier/effect/modifier_generic_stunned";
 import { unit_dummy } from "../../../units/common/unit_dummy";
 
 /** dota原技能数据 */
@@ -165,7 +165,7 @@ export class modifier_leshrac_1_thinker extends BaseModifier_Plus {
             }
             let targets = AoiHelper.FindEntityInRadius(hCaster.GetTeamNumber(), vPosition, this.radius, null, hAbility.GetAbilityTargetTeam(), hAbility.GetAbilityTargetType(), hAbility.GetAbilityTargetFlags(), 0)
             for (let target of (targets)) {
-                modifier_stunned.apply(target, hCaster, hAbility, { duration: this.duration * target.GetStatusResistanceFactor(hCaster) })
+                modifier_generic_stunned.apply(target, hCaster, hAbility, { duration: this.duration * target.GetStatusResistanceFactor(hCaster) })
                 if (hCaster.HasTalent("special_bonus_unique_leshrac_custom_3")) {
                     modifier_leshrac_1_debuff.apply(target, hCaster, hAbility, { duration: this.duration * target.GetStatusResistanceFactor(hCaster) })
                 }

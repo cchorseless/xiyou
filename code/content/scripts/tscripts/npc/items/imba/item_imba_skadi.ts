@@ -63,7 +63,7 @@ export class item_imba_skadi extends BaseItem_Plus {
                 enemy.AddNewModifier(caster, this, "modifier_item_imba_skadi_freeze", {
                     duration: duration * (1 - enemy.GetStatusResistance())
                 });
-                enemy.AddNewModifier(caster, this, "modifier_stunned", {
+                enemy.AddNewModifier(caster, this, "modifier_generic_stunned", {
                     duration: 0.01
                 });
             }

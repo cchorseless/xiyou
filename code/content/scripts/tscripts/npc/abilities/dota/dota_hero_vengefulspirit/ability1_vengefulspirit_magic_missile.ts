@@ -7,7 +7,7 @@ import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus } from "../../../entityPlus/BaseModifier_Plus";
 import { BaseNpc_Hero_Plus } from "../../../entityPlus/BaseNpc_Hero_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_stunned } from "../../../modifier/effect/modifier_stunned";
+import { modifier_generic_stunned } from "../../../modifier/effect/modifier_generic_stunned";
 
 /** dota原技能数据 */
 export const Data_vengefulspirit_magic_missile = { "ID": "5122", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET", "AbilityUnitTargetTeam": "DOTA_UNIT_TARGET_TEAM_ENEMY", "AbilityUnitTargetType": "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC", "AbilityUnitDamageType": "DAMAGE_TYPE_MAGICAL", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_NO", "SpellDispellableType": "SPELL_DISPELLABLE_YES_STRONG", "FightRecapLevel": "1", "AbilitySound": "Hero_VengefulSpirit.MagicMissile", "AbilityCastRange": "575 600 625 650", "AbilityCastPoint": "0.3 0.3 0.3 0.3", "AbilityCooldown": "12 11 10 9", "AbilityManaCost": "100 110 120 130", "AbilitySpecial": { "01": { "var_type": "FIELD_INTEGER", "magic_missile_speed": "1350" }, "02": { "var_type": "FIELD_FLOAT", "magic_missile_stun": "1.4 1.5 1.6 1.7" }, "03": { "var_type": "FIELD_INTEGER", "magic_missile_damage": "90 180 270 360", "LinkedSpecialBonus": "special_bonus_unique_vengeful_spirit_1" } }, "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_1" };
@@ -88,7 +88,7 @@ export class ability1_vengefulspirit_magic_missile extends BaseAbility_Plus {
             }
             BattleHelper.GoApplyDamage(tDamageTable)
             EmitSoundOnLocationWithCaster(hTarget.GetAbsOrigin(), ResHelper.GetSoundReplacement("Hero_VengefulSpirit.MagicMissileImpact", hCaster), hCaster)
-            modifier_stunned.apply(hTarget, hCaster, this, { duration: magic_missile_stun_duration * hTarget.GetStatusResistanceFactor(hCaster) })
+            modifier_generic_stunned.apply(hTarget, hCaster, this, { duration: magic_missile_stun_duration * hTarget.GetStatusResistanceFactor(hCaster) })
         }
     }
 

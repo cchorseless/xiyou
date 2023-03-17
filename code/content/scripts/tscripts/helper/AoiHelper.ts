@@ -126,6 +126,19 @@ export module AoiHelper {
         return find as IBaseNpc_Plus[]
     }
 
+
+    export function FindAllUnitsInLine(
+        teamNumber: DOTATeam_t,
+        startPos: Vector,
+        endPos: Vector,
+        width: number,
+        cacheUnit: IBaseNpc_Plus = null,
+        teamFilter: DOTA_UNIT_TARGET_TEAM = DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY,
+        typeFilter: DOTA_UNIT_TARGET_TYPE = DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_ALL,
+        flagFilter: DOTA_UNIT_TARGET_FLAGS = DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE,
+    ) {
+        return FindUnitsInLine(teamNumber, startPos, endPos, cacheUnit, width, teamFilter, typeFilter, flagFilter) as IBaseNpc_Plus[];
+    }
     /**
      * 找到范围内一个距离最近的单位
      * @param team

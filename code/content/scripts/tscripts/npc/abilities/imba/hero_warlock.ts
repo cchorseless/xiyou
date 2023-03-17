@@ -350,8 +350,7 @@ export class modifier_imba_shadow_word extends BaseModifier_Plus {
         if (this.good_guy) {
             let spell_power = this.caster.GetSpellAmplification(false);
             let heal = this.tick_value * (1 + spell_power * 0.01);
-            this.parent.Heal(heal, this.ability);
-            SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, this.parent, heal, undefined);
+            this.parent.ApplyHeal(heal, this.ability);
         } else {
             let damageTable = {
                 victim: this.parent,

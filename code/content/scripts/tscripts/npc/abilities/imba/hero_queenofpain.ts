@@ -881,9 +881,9 @@ export class modifier_imba_sonic_wave extends BaseModifier_Plus {
                     let self_lifesteal_pfx = ResHelper.CreateParticleEx("particles/hero/queenofpain/self_lifesteal.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, parent);
                     ParticleManager.SetParticleControlEnt(self_lifesteal_pfx, 0, parent, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", parent.GetAbsOrigin(), true);
                     if (params.unit.IsRealUnit()) {
-                        parent.Heal(params.damage * lifesteal_amount * 0.01, ability);
+                        parent.ApplyHeal(params.damage * lifesteal_amount * 0.01, ability);
                     } else {
-                        parent.Heal(params.damage * lifesteal_amount * 0.005, ability);
+                        parent.ApplyHeal(params.damage * lifesteal_amount * 0.005, ability);
                     }
                 }
             }

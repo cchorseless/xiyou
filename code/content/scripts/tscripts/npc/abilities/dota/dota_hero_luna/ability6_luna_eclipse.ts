@@ -6,7 +6,7 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_stunned } from "../../../modifier/effect/modifier_stunned";
+import { modifier_generic_stunned } from "../../../modifier/effect/modifier_generic_stunned";
 import { ability1_luna_lucent_beam } from "./ability1_luna_lucent_beam";
 
 /** dota原技能数据 */
@@ -300,7 +300,7 @@ export class modifier_luna_6_thinker extends BaseModifier_Plus {
             }
             if (hCaster.HasTalent("special_bonus_unique_luna_custom_6")) {
                 let duration = hCaster.GetTalentValue("special_bonus_unique_luna_custom_6")
-                modifier_stunned.apply(hTarget, hCaster, hAbility, { duration: duration * hTarget.GetStatusResistanceFactor(hCaster) })
+                modifier_generic_stunned.apply(hTarget, hCaster, hAbility, { duration: duration * hTarget.GetStatusResistanceFactor(hCaster) })
             }
         }
     }

@@ -5,7 +5,7 @@ import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus, BaseOrbAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifierMotionHorizontal_Plus, BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
-import { modifier_generic_orb_effect_lua } from "../../modifier/generic/modifier_generic_orb_effect_lua";
+import { modifier_generic_orb_effect } from "../../modifier/effect/modifier_generic_orb_effect";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 @registerAbility()
 export class imba_drow_ranger_frost_arrows extends BaseAbility_Plus {
@@ -405,7 +405,7 @@ export class modifier_imba_frost_arrows_buff extends BaseModifier_Plus {
 @registerAbility()
 export class imba_drow_ranger_frost_arrows_723 extends BaseOrbAbility_Plus {
     GetIntrinsicModifierName(): string {
-        return "modifier_generic_orb_effect_lua";
+        return "modifier_generic_orb_effect";
     }
     GetProjectileName() {
         return "particles/units/heroes/hero_drow/drow_frost_arrow.vpcf";
@@ -1585,7 +1585,7 @@ export class modifier_imba_drow_ranger_marksmanship_723 extends BaseModifier_Plu
     public procs: any;
     public marksmanship_particle: any;
     public start_particle: any;
-    public frost_arrow_modifier: modifier_generic_orb_effect_lua;
+    public frost_arrow_modifier: modifier_generic_orb_effect;
     public projectile_name: any;
     public bFrost: any;
     public splinter_projectile_name: any;
@@ -1638,9 +1638,9 @@ export class modifier_imba_drow_ranger_marksmanship_723 extends BaseModifier_Plu
         if (keys.attacker == this.GetParentPlus() && this.procs[keys.record]) {
             this.GetParentPlus().RemoveModifierByName("modifier_imba_drow_ranger_marksmanship_723_proc_damage");
             if (this.GetParentPlus().HasAbility("imba_drow_ranger_frost_arrows_723") && !this.frost_arrow_modifier) {
-                for (const [_, mod] of GameFunc.iPair(this.GetParentPlus().FindAllModifiersByName("modifier_generic_orb_effect_lua"))) {
+                for (const [_, mod] of GameFunc.iPair(this.GetParentPlus().FindAllModifiersByName("modifier_generic_orb_effect"))) {
                     if (mod.GetAbilityPlus().GetAbilityName() == "imba_drow_ranger_frost_arrows_723") {
-                        this.frost_arrow_modifier = mod as modifier_generic_orb_effect_lua;
+                        this.frost_arrow_modifier = mod as modifier_generic_orb_effect;
                         return;
                     }
                 }

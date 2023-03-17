@@ -135,7 +135,7 @@ export class imba_windranger_shackleshot extends BaseAbility_Plus {
                             this.GetCasterPlus().EmitSound(GFuncRandom.RandomValue(this.responses));
                         }
                     } else if (targets == 0) {
-                        let stun_modifier = target.AddNewModifier(this.GetCasterPlus(), this, "modifier_stunned", {
+                        let stun_modifier = target.AddNewModifier(this.GetCasterPlus(), this, "modifier_generic_stunned", {
                             duration: this.GetSpecialValueFor("fail_stun_duration") * (1 - target.GetStatusResistance())
                         });
                         if (stun_modifier) {
@@ -310,7 +310,7 @@ export class imba_windranger_powershot extends BaseAbility_Plus {
             if (data.channel_pct >= this.GetSpecialValueFor("godshot_min") && data.channel_pct <= this.GetSpecialValueFor("godshot_max")) {
                 damage = this.GetTalentSpecialValueFor("powershot_damage") * this.GetSpecialValueFor("godshot_damage_pct") * 0.01;
                 damage_type = DAMAGE_TYPES.DAMAGE_TYPE_PURE;
-                target.AddNewModifier(this.GetCasterPlus(), this, "modifier_stunned", {
+                target.AddNewModifier(this.GetCasterPlus(), this, "modifier_generic_stunned", {
                     duration: this.GetSpecialValueFor("godshot_stun_duration") * (1 - target.GetStatusResistance())
                 });
             } else if (data.channel_pct >= this.GetSpecialValueFor("scattershot_min") && data.channel_pct <= this.GetSpecialValueFor("scattershot_max")) {
@@ -737,7 +737,7 @@ export class modifier_imba_windranger_focusfire_vanilla_enhancer extends BaseMod
     CC_OnAttackLanded(keys: ModifierAttackEvent): void {
         if (keys.attacker == this.GetParentPlus() && this.GetParentPlus().HasModifier("modifier_windrunner_focusfire") && this.target && !this.target.IsNull() && this.target.IsAlive() && this.target == keys.target && GFuncRandom.PRD(this.ability.GetSpecialValueFor("ministun_chance"), this)) {
             keys.target.EmitSound("DOTA_Item.MKB.Minibash");
-            keys.target.AddNewModifier(this.GetParentPlus(), this.GetAbilityPlus(), "modifier_stunned", {
+            keys.target.AddNewModifier(this.GetParentPlus(), this.GetAbilityPlus(), "modifier_generic_stunned", {
                 duration: 0.1 * (1 - keys.target.GetStatusResistance())
             });
         }

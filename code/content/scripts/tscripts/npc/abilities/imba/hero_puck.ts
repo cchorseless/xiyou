@@ -442,7 +442,7 @@ export class imba_puck_dream_coil extends BaseAbility_Plus {
                 attacker: this.GetCasterPlus(),
                 ability: this
             });
-            enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_stunned", {
+            enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_generic_stunned", {
                 duration: this.GetSpecialValueFor("stun_duration") * (1 - enemy.GetStatusResistance())
             });
             let coil_modifier = enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_puck_dream_coil", {
@@ -562,7 +562,7 @@ export class modifier_imba_puck_dream_coil extends BaseModifier_Plus {
                 this.GetCasterPlus().SetCursorPosition(this.GetParentPlus().GetAbsOrigin());
                 this.GetAbilityPlus<imba_puck_dream_coil>().OnSpellStart(this.GetRemainingTime() + (stun_duration * (1 - this.GetParentPlus().GetStatusResistance())));
             }
-            let stun_modifier = this.GetParentPlus().AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_stunned", {
+            let stun_modifier = this.GetParentPlus().AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_generic_stunned", {
                 duration: stun_duration * (1 - this.GetParentPlus().GetStatusResistance())
             });
             this.Destroy();

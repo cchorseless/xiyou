@@ -290,7 +290,7 @@ export class modifier_imba_enigma_malefice extends BaseModifier_Plus {
             ability: ability
         }
         ApplyDamage(damageTable);
-        target.AddNewModifier(caster, ability, "modifier_stunned", {
+        target.AddNewModifier(caster, ability, "modifier_generic_stunned", {
             duration: this.stun_duration * (1 - target.GetStatusResistance())
         });
         EmitSoundOn("Hero_Enigma.MaleficeTick", target);
@@ -616,8 +616,7 @@ export class modifier_imba_enigma_midnight_pulse_thinker extends BaseModifier_Pl
         let eidolons = FindUnitsInRadius(caster.GetTeamNumber(), parent.GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
         for (const [_, eidolon] of GameFunc.iPair(eidolons)) {
             if (eidolon.HasModifier("modifier_imba_enigma_eidolon")) {
-                eidolon.Heal(ability.GetSpecialValueFor("eidolon_hp_regen"), undefined);
-                SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, eidolon, ability.GetSpecialValueFor("eidolon_hp_regen"), undefined);
+                eidolon.ApplyHeal(ability.GetSpecialValueFor("eidolon_hp_regen"), undefined);
             }
         }
         if (caster.HasTalent("special_bonus_imba_enigma_3")) {
@@ -871,7 +870,7 @@ export class modifier_imba_enigma_black_hole_thinker extends BaseModifier_Plus {
                         damage_type: DAMAGE_TYPES.DAMAGE_TYPE_PURE,
                         ability: this.GetAbilityPlus()
                     });
-                    building.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_stunned", {
+                    building.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_generic_stunned", {
                         duration: 1.0 * (1 - building.GetStatusResistance())
                     });
                 }

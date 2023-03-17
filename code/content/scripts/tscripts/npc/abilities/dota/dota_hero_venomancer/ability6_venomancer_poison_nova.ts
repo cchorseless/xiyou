@@ -5,7 +5,7 @@ import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { BaseNpc_Hero_Plus } from "../../../entityPlus/BaseNpc_Hero_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_poison } from "../../../modifier/effect/modifier_poison";
+import { modifier_generic_poison } from "../../../modifier/effect/modifier_generic_poison";
 import { modifier_particle } from "../../../modifier/modifier_particle";
 
 /** dota原技能数据 */
@@ -89,7 +89,7 @@ export class ability6_venomancer_poison_nova extends BaseAbility_Plus {
             for (let hTarget of (tTargets)) {
                 if (this.tTargetsRecord.indexOf(hTarget) == -1) {
                     table.insert(this.tTargetsRecord, hTarget)
-                    modifier_poison.Poison(hTarget, hCaster, this, modifier_poison.GetPoisonStackCount(hTarget) * hCaster.GetTalentValue("special_bonus_unique_venomancer_custom_7") * 0.01)
+                    modifier_generic_poison.Poison(hTarget, hCaster, this, modifier_generic_poison.GetPoisonStackCount(hTarget) * hCaster.GetTalentValue("special_bonus_unique_venomancer_custom_7") * 0.01)
                     EmitSoundOnLocationWithCaster(hTarget.GetAbsOrigin(), ResHelper.GetSoundReplacement("Hero_Venomancer.PoisonNovaImpact", hCaster), hCaster)
                     modifier_venomancer_6_debuff.apply(hTarget, hCaster, this, { duration: duration })
                 }
@@ -203,7 +203,7 @@ export class modifier_venomancer_6_debuff extends BaseModifier_Plus {
     BeCreated(params: IModifierTable) {
 
         if (IsServer()) {
-            modifier_poison.Poison(this.GetParentPlus(), this.GetCasterPlus(), this.GetAbilityPlus(), this.poison_count_per * 1) // 在一开始就毒一次
+            modifier_generic_poison.Poison(this.GetParentPlus(), this.GetCasterPlus(), this.GetAbilityPlus(), this.poison_count_per * 1) // 在一开始就毒一次
             this.StartIntervalThink(1)
         }
     }
@@ -255,7 +255,7 @@ export class modifier_venomancer_6_debuff extends BaseModifier_Plus {
             this.Destroy()
             return
         }
-        modifier_poison.Poison(hParent, hCaster, hAbility, this.poison_count_per * 1)
+        modifier_generic_poison.Poison(hParent, hCaster, hAbility, this.poison_count_per * 1)
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     Tooltip() {

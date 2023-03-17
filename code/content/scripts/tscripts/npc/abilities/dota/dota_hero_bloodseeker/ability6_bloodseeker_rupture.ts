@@ -4,7 +4,7 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_bleeding } from "../../../modifier/effect/modifier_bleeding";
+import { modifier_generic_bleeding } from "../../../modifier/effect/modifier_generic_bleeding";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 /** dota原技能数据 */
 export const Data_bloodseeker_rupture = { "ID": "5018", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET", "AbilityUnitTargetTeam": "DOTA_UNIT_TARGET_TEAM_ENEMY", "AbilityUnitTargetType": "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC", "AbilityType": "DOTA_ABILITY_TYPE_ULTIMATE", "AbilityUnitTargetFlags": "DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_YES", "SpellDispellableType": "SPELL_DISPELLABLE_NO", "AbilityUnitDamageType": "DAMAGE_TYPE_PURE", "FightRecapLevel": "2", "AbilitySound": "hero_bloodseeker.rupture", "HasScepterUpgrade": "1", "AbilityCastPoint": "0.4", "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_4", "AbilityCooldown": "70", "AbilityManaCost": "100 150 200", "AbilityCastRange": "800", "AbilityModifierSupportValue": "0.0", "AbilitySpecial": { "01": { "var_type": "FIELD_FLOAT", "duration": "10 11 12" }, "02": { "var_type": "FIELD_INTEGER", "movement_damage_pct": "33 44 55", "CalculateSpellDamageTooltip": "0" }, "03": { "var_type": "FIELD_FLOAT", "hp_pct": "10", "CalculateSpellDamageTooltip": "0" }, "04": { "var_type": "FIELD_INTEGER", "damage_cap_amount": "200", "CalculateSpellDamageTooltip": "0" }, "05": { "var_type": "FIELD_INTEGER", "abilitycastrange": "", "LinkedSpecialBonus": "special_bonus_unique_bloodseeker_3" }, "06": { "var_type": "FIELD_INTEGER", "max_charges_scepter": "2", "RequiresScepter": "1" }, "07": { "var_type": "FIELD_INTEGER", "charge_restore_time_scepter": "40", "RequiresScepter": "1" } } };
@@ -50,7 +50,7 @@ export class ability6_bloodseeker_rupture extends BaseAbility_Plus {
 
             if (GFuncEntity.IsValid(hTarget) && hTarget.IsAlive()) {
                 // 添加流血层数
-                modifier_bleeding.Bleeding(hTarget, hCaster, this, duration, (tDamageTable) => {
+                modifier_generic_bleeding.Bleeding(hTarget, hCaster, this, duration, (tDamageTable) => {
                     return fDamage
                 }, true)
                 if (hCaster.HasTalent("special_bonus_unique_bloodseeker_custom_5")) {
@@ -68,7 +68,7 @@ export class ability6_bloodseeker_rupture extends BaseAbility_Plus {
         let fDamage = bleed_damage + (hCaster.GetStrength() + hCaster.GetAgility() + hCaster.GetIntellect()) * all_stats_bleed_damage
         if (GFuncEntity.IsValid(hTarget) && hTarget.IsAlive()) {
             // 添加流血层数
-            modifier_bleeding.Bleeding(hTarget, hCaster, this, duration, (tDamageTable) => {
+            modifier_generic_bleeding.Bleeding(hTarget, hCaster, this, duration, (tDamageTable) => {
                 return fDamage
             }, true)
             if (hCaster.HasTalent("special_bonus_unique_bloodseeker_custom_5")) {

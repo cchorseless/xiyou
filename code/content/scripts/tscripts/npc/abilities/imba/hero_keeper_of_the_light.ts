@@ -256,9 +256,8 @@ export class modifier_imba_keeper_of_the_light_illuminate extends BaseModifier_P
                         spotlight_modifier.Spotlight(target.GetAbsOrigin(), this.radius, spotlight_modifier.GetSpecialValueFor("attack_duration"));
                     }
                 } else if (GameRules.IsDaytime() && this.caster.HasScepter()) {
-                    target.Heal(damage, this.ability);
+                    target.ApplyHeal(damage, this.ability);
                     if (target.IsRealUnit()) {
-                        SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, target, damage, undefined);
                     }
                 }
                 target.EmitSound("Hero_KeeperOfTheLight.Illuminate.Target");
@@ -644,7 +643,7 @@ export class modifier_imba_keeper_of_the_light_mana_leak extends BaseModifier_Pl
         }
         this.starting_position = this.parent.GetAbsOrigin();
         if (this.parent.GetMaxMana() <= 0) {
-            this.parent.AddNewModifier(this.caster, this.ability, "modifier_stunned", {
+            this.parent.AddNewModifier(this.caster, this.ability, "modifier_generic_stunned", {
                 duration: this.stun_duration * (1 - this.parent.GetStatusResistance())
             });
             this.Destroy();
@@ -668,7 +667,7 @@ export class modifier_imba_keeper_of_the_light_mana_leak extends BaseModifier_Pl
             ParticleManager.ReleaseParticleIndex(particle);
         }
         if (this.parent.GetMana() <= 0) {
-            this.parent.AddNewModifier(this.caster, this.ability, "modifier_stunned", {
+            this.parent.AddNewModifier(this.caster, this.ability, "modifier_generic_stunned", {
                 duration: this.stun_duration * (1 - this.parent.GetStatusResistance())
             });
             this.Destroy();

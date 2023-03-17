@@ -72,7 +72,7 @@ export class imba_elder_titan_echo_stomp extends BaseAbility_Plus {
                         ability: this
                     }
                     ApplyDamage(damageTable);
-                    enemy.AddNewModifier(caster, this, "modifier_stunned", {
+                    enemy.AddNewModifier(caster, this, "modifier_generic_stunned", {
                         duration: stun_duration * (1 - enemy.GetStatusResistance())
                     });
                 }
@@ -138,7 +138,7 @@ export class imba_elder_titan_echo_stomp extends BaseAbility_Plus {
                                 ability: ability
                             });
                         }
-                        enemy.AddNewModifier(caster, ability, "modifier_stunned", {
+                        enemy.AddNewModifier(caster, ability, "modifier_generic_stunned", {
                             duration: stun_duration * (1 - enemy.GetStatusResistance())
                         });
                         if (enemy.IsRealUnit()) {
@@ -719,7 +719,7 @@ export class imba_elder_titan_echo_stomp_spirit extends BaseAbility_Plus {
                         ability: ability
                     }
                     ApplyDamage(damageTable);
-                    enemy.AddNewModifier(caster, ability, "modifier_stunned", {
+                    enemy.AddNewModifier(caster, ability, "modifier_generic_stunned", {
                         duration: stun_duration * (1 - enemy.GetStatusResistance())
                     });
                 }

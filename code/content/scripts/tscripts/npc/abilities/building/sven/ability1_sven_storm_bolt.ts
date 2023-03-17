@@ -5,7 +5,7 @@ import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseModifier_Plus } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_stunned } from "../../../modifier/effect/modifier_stunned";
+import { modifier_generic_stunned } from "../../../modifier/effect/modifier_generic_stunned";
 import { modifier_particle } from "../../../modifier/modifier_particle";
 import { ActiveRootAbility } from "../../ActiveRootAbility";
 import { modifier_sven_6_buff } from "./ability6_sven_gods_strength";
@@ -113,7 +113,7 @@ export class ability1_sven_storm_bolt extends ActiveRootAbility {
                     damage_type: DAMAGE_TYPES.DAMAGE_TYPE_PURE
                 }
                 BattleHelper.GoApplyDamage(damage_table)
-                modifier_stunned.apply(target, hCaster, this, { duration: bolt_stun_duration })
+                modifier_generic_stunned.apply(target, hCaster, this, { duration: bolt_stun_duration })
             } else {
                 let damage_table = {
                     ability: this,
@@ -123,7 +123,7 @@ export class ability1_sven_storm_bolt extends ActiveRootAbility {
                     damage_type: this.GetAbilityDamageType()
                 }
                 BattleHelper.GoApplyDamage(damage_table)
-                modifier_stunned.apply(target, hCaster, this, { duration: bolt_stun_duration * target.GetStatusResistanceFactor(hCaster) })
+                modifier_generic_stunned.apply(target, hCaster, this, { duration: bolt_stun_duration * target.GetStatusResistanceFactor(hCaster) })
             }
         }
 

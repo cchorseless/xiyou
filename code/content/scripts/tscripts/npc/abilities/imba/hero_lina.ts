@@ -399,7 +399,7 @@ export class imba_lina_light_strike_array extends BaseAbility_Plus {
         }
         target.RemoveModifierByName("modifier_imba_blazing_fire");
         if (target.IsAlive()) {
-            target.AddNewModifier(caster, this, "modifier_stunned", {
+            target.AddNewModifier(caster, this, "modifier_generic_stunned", {
                 duration: stun_duration * (1 - target.GetStatusResistance())
             });
         }
@@ -529,7 +529,7 @@ export class modifier_imba_lina_light_strike_array_v2_thinker_single extends Bas
         ParticleManager.ReleaseParticleIndex(array_particle);
         GridNav.DestroyTreesAroundPoint(this.GetParentPlus().GetAbsOrigin(), this.light_strike_array_aoe, false);
         for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.light_strike_array_aoe, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
-            enemy.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_stunned", {
+            enemy.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_generic_stunned", {
                 duration: this.light_strike_array_stun_duration * (1 - enemy.GetStatusResistance())
             });
             ApplyDamage({
@@ -911,7 +911,7 @@ export class imba_lina_laguna_blade extends BaseAbility_Plus {
                 }
                 target.RemoveModifierByName("modifier_imba_blazing_fire");
                 if (caster.HasTalent("special_bonus_imba_lina_6")) {
-                    target.AddNewModifier(caster, this, "modifier_stunned", {
+                    target.AddNewModifier(caster, this, "modifier_generic_stunned", {
                         duration: caster.GetTalentValue("special_bonus_imba_lina_6") * (1 - target.GetStatusResistance())
                     });
                 }
@@ -950,7 +950,7 @@ export class imba_lina_laguna_blade extends BaseAbility_Plus {
                             }
                             enemies[i].RemoveModifierByName("modifier_imba_blazing_fire");
                             if (caster.HasTalent("special_bonus_imba_lina_6")) {
-                                enemies[i].AddNewModifier(caster, this, "modifier_stunned", {
+                                enemies[i].AddNewModifier(caster, this, "modifier_generic_stunned", {
                                     duration: caster.GetTalentValue("special_bonus_imba_lina_6") * (1 - enemies[i].GetStatusResistance())
                                 });
                             }

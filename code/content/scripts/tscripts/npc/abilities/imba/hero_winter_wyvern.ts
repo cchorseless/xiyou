@@ -338,7 +338,7 @@ export class imba_winter_wyvern_splinter_blast extends BaseAbility_Plus {
             });
             if (caster.HasTalent("special_bonus_imba_unique_winter_wyvern_4")) {
                 let stun_duration = caster.GetTalentValue("special_bonus_imba_unique_winter_wyvern_4", "value");
-                target.AddNewModifier(caster, this, "modifier_stunned", {
+                target.AddNewModifier(caster, this, "modifier_generic_stunned", {
                     duration: stun_duration * (1 - target.GetStatusResistance())
                 });
             }
@@ -473,7 +473,7 @@ export class modifier_imba_winter_wyvern_cold_embrace extends BaseModifier_Plus 
                             duration: this.freeze_duration * (1 - keys.attacker.GetStatusResistance())
                         });
                     }
-                    parent.Heal(this.damage_treshold, this.GetAbilityPlus());
+                    parent.ApplyHeal(this.damage_treshold, this.GetAbilityPlus());
                     let curse_blast = ResHelper.CreateParticleEx("particles/units/heroes/hero_winter_wyvern/wyvern_winters_curse_blast.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, parent);
                     ParticleManager.SetParticleControl(curse_blast, 2, Vector(1, 1, 1000));
                     ParticleManager.ReleaseParticleIndex(curse_blast);

@@ -4,7 +4,7 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_stunned } from "../../../modifier/effect/modifier_stunned";
+import { modifier_generic_stunned } from "../../../modifier/effect/modifier_generic_stunned";
 import { modifier_particle } from "../../../modifier/modifier_particle";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 import { modifier_earthshaker_1_root } from "./ability1_earthshaker_fissure";
@@ -58,7 +58,7 @@ export class ability3_earthshaker_aftershock extends BaseAbility_Plus {
 
         for (let hTarget of (tTargets as IBaseNpc_Plus[])) {
 
-            modifier_stunned.apply(hTarget, hCaster, this, { duration: hCaster.HasTalent("special_bonus_unique_earthshaker_custom_7") && duration || duration * hTarget.GetStatusResistanceFactor(hCaster) })
+            modifier_generic_stunned.apply(hTarget, hCaster, this, { duration: hCaster.HasTalent("special_bonus_unique_earthshaker_custom_7") && duration || duration * hTarget.GetStatusResistanceFactor(hCaster) })
 
             BattleHelper.GoApplyDamage({
                 ability: this,
@@ -94,7 +94,7 @@ export class ability3_earthshaker_aftershock extends BaseAbility_Plus {
         }
 
         for (let hTarget of (tTargets)) {
-            modifier_stunned.apply(hTarget, hCaster, this, { duration: hCaster.HasTalent("special_bonus_unique_earthshaker_custom_7") && duration || duration * hTarget.GetStatusResistanceFactor(hCaster) })
+            modifier_generic_stunned.apply(hTarget, hCaster, this, { duration: hCaster.HasTalent("special_bonus_unique_earthshaker_custom_7") && duration || duration * hTarget.GetStatusResistanceFactor(hCaster) })
             BattleHelper.GoApplyDamage({
                 ability: this,
                 attacker: hCaster,

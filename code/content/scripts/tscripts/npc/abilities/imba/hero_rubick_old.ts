@@ -227,7 +227,7 @@ export class modifier_imba_telekinesis extends BaseModifierMotionBoth_Plus {
             let enemies = FindUnitsInRadius(caster.GetTeamNumber(), parent_pos, undefined, impact_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
             for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 if (enemy != parent) {
-                    enemy.AddNewModifier(caster, ability, "modifier_stunned", {
+                    enemy.AddNewModifier(caster, ability, "modifier_generic_stunned", {
                         duration: impact_stun_duration * (1 - enemy.GetStatusResistance())
                     });
                 }

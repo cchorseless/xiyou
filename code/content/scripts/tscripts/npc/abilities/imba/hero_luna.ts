@@ -58,7 +58,7 @@ export class imba_luna_lucent_beam extends BaseAbility_Plus {
             ability: this
         }
         ApplyDamage(damageTable);
-        this.GetCursorTarget().AddNewModifier(this.GetCasterPlus(), this, "modifier_stunned", {
+        this.GetCursorTarget().AddNewModifier(this.GetCasterPlus(), this, "modifier_generic_stunned", {
             duration: this.GetSpecialValueFor("stun_duration") * (1 - this.GetCursorTarget().GetStatusResistance())
         });
         if (this.GetAutoCastState()) {
@@ -659,7 +659,7 @@ export class modifier_imba_luna_eclipse extends BaseModifier_Plus {
                     }
                     ApplyDamage(damageTable);
                     if (this.GetCasterPlus().HasTalent("special_bonus_imba_unique_luna_5")) {
-                        enemy.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_stunned", {
+                        enemy.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_generic_stunned", {
                             duration: this.GetCasterPlus().GetTalentValue("special_bonus_imba_unique_luna_5") * (1 - enemy.GetStatusResistance())
                         });
                     }

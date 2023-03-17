@@ -2,7 +2,7 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_invisible } from "../../../modifier/modifier_invisible";
+import { modifier_generic_invisible } from "../../../modifier/modifier_generic_invisible";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 
 /** dota原技能数据 */
@@ -81,7 +81,7 @@ export class ability2_void_spirit_dissimilate extends BaseAbility_Plus {
                 for (let i = 1; i <= iActiveCount - active_count; i++) {
                     let hIll = tActiveCount[i]
                     if (GFuncEntity.IsValid(hIll)) {
-                        modifier_invisible.apply(hIll, hCaster, this, null)
+                        modifier_generic_invisible.apply(hIll, hCaster, this, null)
                         hIll.bActive = false
                     }
                 }
@@ -89,7 +89,7 @@ export class ability2_void_spirit_dissimilate extends BaseAbility_Plus {
                 for (let i = 1; i <= active_count - iActiveCount; i++) {
                     let hIll = GFuncRandom.RandomArray(tInvi)
                     if (GFuncEntity.IsValid(hIll as any)) {
-                        //  modifier_invisible.remove( hIll );
+                        //  modifier_generic_invisible.remove( hIll );
                         // hIll.bActive = true
                     }
                 }
@@ -298,7 +298,7 @@ export class modifier_void_spirit_3_create_ill extends BaseModifier_Plus {
                         hIll.bActive = false
                         hIll.vOffset = vPos - vOrigin
                         modifier_void_spirit_3_ill.apply(hIll, hCaster, hAbility, {})
-                        modifier_invisible.apply(hIll, hCaster, hAbility, {})
+                        modifier_generic_invisible.apply(hIll, hCaster, hAbility, {})
                         let vIllPos = vPos
                         hIll.SetAbsOrigin(GetGroundPosition(vIllPos, null))
                         hIll.StartGesture(GameActivity_t.ACT_DOTA_CAST_ABILITY_3_END)

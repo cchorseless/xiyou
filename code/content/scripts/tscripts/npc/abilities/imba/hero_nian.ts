@@ -489,7 +489,7 @@ export class imba_nian_tail_spin extends BaseAbility_Plus {
                 ability: this
             }
             ApplyDamage(damageTable);
-            enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_stunned", {
+            enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_generic_stunned", {
                 duration: this.GetSpecialValueFor("stun_duration") * (1 - enemy.GetStatusResistance())
             });
             let direction_vector = Vector(0, 0, 0);

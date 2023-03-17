@@ -122,7 +122,7 @@ export class imba_abaddon_death_coil extends BaseAbility_Plus {
     OnProjectileHit_ExtraData(hTarget: CDOTA_BaseNPC | undefined, vLocation: Vector, ExtraData: any): boolean | void {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
-            let target = hTarget;
+            let target = hTarget as IBaseNpc_Plus;
             let ability_level = this.GetLevel() - 1;
             let special_cast = ExtraData.special_cast || false;
             target.EmitSound("Hero_Abaddon.DeathCoil.Target");
@@ -159,11 +159,10 @@ export class imba_abaddon_death_coil extends BaseAbility_Plus {
                 }
             } else {
                 let heal = (this.GetSpecialValueFor("heal_amount") + this.overchannel_damage_increase);
-                target.Heal(heal, this);
+                target.ApplyHeal(heal, this);
                 target.AddNewModifier(caster, this, "modifier_imba_mist_coil_mist_ally", {
                     duration: mist_duration
                 });
-                SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, target, heal, undefined);
                 let shield_modifier = target.findBuff<modifier_imba_aphotic_shield_buff_block>("modifier_imba_aphotic_shield_buff_block");
                 if (shield_modifier && shield_modifier.ResetAndExtendBy) {
                     shield_modifier.ResetAndExtendBy(this.GetSpecialValueFor("shield_duration_extend"));
@@ -287,8 +286,7 @@ export class modifier_imba_mist_coil_mist_ally extends BaseModifier_Plus {
             return;
         }
         if (IsServer() && this.GetParentPlus().IsAlive()) {
-            this.GetParentPlus().Heal(this.GetStackCount(), this.GetAbilityPlus());
-            SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, this.GetParentPlus(), this.GetStackCount(), undefined);
+            this.GetParentPlus().ApplyHeal(this.GetStackCount(), this.GetAbilityPlus());
         }
     }
     /** DeclareFunctions():modifierfunction[] {
@@ -835,15 +833,14 @@ export class modifier_imba_curse_of_avernus_debuff_slow extends BaseModifier_Plu
                     let life_steal_particle_name = "particles/generic_gameplay/generic_lifesteal.vpcf";
                     let healFX = ResHelper.CreateParticleEx("particles/generic_gameplay/generic_lifesteal.vpcf", ParticleAttachment_t.PATTACH_POINT_FOLLOW, caster);
                     ParticleManager.ReleaseParticleIndex(healFX);
-                    caster.Heal(heal_amount, this.GetAbilityPlus());
+                    caster.ApplyHeal(heal_amount, this.GetAbilityPlus());
                     if (caster.HasModifier("modifier_imba_borrowed_time_buff_hot_caster")) {
                         let buffed_allies: IBaseNpc_Plus[] = caster.TempData()._borrowed_time_buffed_allies;
                         if (buffed_allies && caster.HasScepter()) {
                             for (const [_, k] of GameFunc.iPair(buffed_allies)) {
                                 healFX = ResHelper.CreateParticleEx("particles/generic_gameplay/generic_lifesteal.vpcf", ParticleAttachment_t.PATTACH_POINT_FOLLOW, k);
                                 ParticleManager.ReleaseParticleIndex(healFX);
-                                SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, k, heal_amount, undefined);
-                                k.Heal(heal_amount, this.GetAbilityPlus());
+                                k.ApplyHeal(heal_amount, this.GetAbilityPlus());
                             }
                         }
                     }
@@ -1253,7 +1250,7 @@ export class modifier_imba_borrowed_time_buff_hot_caster extends BaseModifier_Pl
                 let max_health = target.GetMaxHealth();
                 this.SetStackCount(this.GetStackCount() + math.floor(kv.damage / this.ratio));
             }
-            target.Heal(kv.damage, this.GetAbilityPlus());
+            target.ApplyHeal(kv.damage, this.GetAbilityPlus());
             return -9999999;
         }
     }

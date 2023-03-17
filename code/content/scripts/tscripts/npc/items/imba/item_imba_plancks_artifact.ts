@@ -148,7 +148,7 @@ export class modifier_imba_plancks_artifact_unique extends BaseModifier_Plus {
             let allies = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, this.GetItemPlus().GetSpecialValueFor("heal_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, 0, 0, false);
             let heal_amount = this.GetItemPlus().GetSpecialValueFor("heal_on_death_base") + stacks * this.GetItemPlus().GetSpecialValueFor("heal_on_death_per_charge");
             for (const unit of (allies)) {
-                unit.Heal(heal_amount, this.GetItemPlus());
+                unit.ApplyHeal(heal_amount, this.GetItemPlus());
             }
             let new_stacks = math.floor(stacks * this.GetItemPlus().GetSpecialValueFor("on_death_loss"));
             this.GetItemPlus().SetCurrentCharges(new_stacks);

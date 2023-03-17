@@ -1037,7 +1037,7 @@ export class imba_axe_culling_blade extends BaseAbility_Plus {
     KillUnit(target: IBaseNpc_Plus) {
         target.TrueKilled(this.caster, this);
         this.heal_amount = (this.caster.GetMaxHealth() / 100) * this.max_health_kill_heal_pct;
-        this.caster.Heal(this.heal_amount, this);
+        this.caster.ApplyHeal(this.heal_amount, this);
         this.culling_kill_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_axe/axe_culling_blade_kill.vpcf", ParticleAttachment_t.PATTACH_CUSTOMORIGIN, this.caster, this.caster);
         ParticleManager.SetParticleControl(this.culling_kill_particle, 4, this.target_location);
         ParticleManager.ReleaseParticleIndex(this.culling_kill_particle);

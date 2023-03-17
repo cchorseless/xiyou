@@ -6,7 +6,7 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_stunned } from "../../../modifier/effect/modifier_stunned";
+import { modifier_generic_stunned } from "../../../modifier/effect/modifier_generic_stunned";
 import { modifier_particle } from "../../../modifier/modifier_particle";
 
 /** dota原技能数据 */
@@ -62,7 +62,7 @@ export class ability6_antimage_mana_void extends BaseAbility_Plus {
             let fMaxMana = hTarget.GetMaxMana()
             let fReduce = fMaxMana - hTarget.GetMana()
             let fDamage = fMaxMana * damage_max_mana * (1 + (fReduce * damage_bonus_per_mana) / (fMaxMana * damage_per_reduce_mana))
-            modifier_stunned.apply(hTarget, hCaster, this, { duration: mana_void_ministun * hTarget.GetStatusResistanceFactor(hCaster) })
+            modifier_generic_stunned.apply(hTarget, hCaster, this, { duration: mana_void_ministun * hTarget.GetStatusResistanceFactor(hCaster) })
             let fMainDamage = hCaster.GetAgility() * main_damage_per_agi
 
             let tDamageTable = {

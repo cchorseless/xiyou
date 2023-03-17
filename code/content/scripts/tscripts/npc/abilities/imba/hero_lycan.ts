@@ -1526,7 +1526,7 @@ export class modifier_imba_summoned_wolf_invisibility_fade extends BaseModifier_
     BeDestroy(): void {
         if (IsServer()) {
             this.caster.AddNewModifier(this.caster, this.ability, this.invis_buff, {});
-            this.caster.AddNewModifier(this.caster, this.ability, "modifier_invisible", {});
+            this.caster.AddNewModifier(this.caster, this.ability, "modifier_generic_invisible", {});
         }
     }
     /** DeclareFunctions():modifierfunction[] {
@@ -1573,7 +1573,7 @@ export class modifier_imba_summoned_wolf_invisibility extends BaseModifier_Plus 
     CC_OnAttackFinished(keys: ModifierAttackEvent): void {
         if (IsServer()) {
             if (this.caster == keys.attacker) {
-                this.caster.RemoveModifierByName("modifier_invisible");
+                this.caster.RemoveModifierByName("modifier_generic_invisible");
                 this.caster.AddNewModifier(this.caster, this.ability, this.invis_fade, {
                     duration: this.fade_time
                 });

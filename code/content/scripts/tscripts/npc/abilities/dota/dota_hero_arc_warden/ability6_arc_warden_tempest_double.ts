@@ -5,7 +5,7 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_shock } from "../../../modifier/effect/modifier_shock";
+import { modifier_generic_shock } from "../../../modifier/effect/modifier_generic_shock";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 
 /** dota原技能数据 */
@@ -87,11 +87,11 @@ export class ability6_arc_warden_tempest_double extends BaseAbility_Plus {
             damage_type: DAMAGE_TYPES.DAMAGE_TYPE_MAGICAL,
             ability: this
         }
-        modifier_shock.Shock(hTarget, hCaster, this, iShockCount)
+        modifier_generic_shock.Shock(hTarget, hCaster, this, iShockCount)
         BattleHelper.GoApplyDamage(tDamageTable)
         EmitSoundOn(ResHelper.GetSoundReplacement("Hero_ArcWarden.SparkWraith.Damage", hCaster), hTarget)
         if (iTalent > 0) {
-            modifier_shock.ShockActive(hTarget, hCaster, this, iTalent, true)
+            modifier_generic_shock.ShockActive(hTarget, hCaster, this, iTalent, true)
         }
         if (iFireCount > 0) {
             let units = FindUnitsInRadius(hCaster.GetTeam(), vLocation, null, this.GetSpecialValueFor("damage_radius") * 2, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, 0, 0, false)

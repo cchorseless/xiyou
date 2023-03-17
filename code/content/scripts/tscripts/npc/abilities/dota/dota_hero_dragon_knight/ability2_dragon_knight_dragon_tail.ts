@@ -5,8 +5,8 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_poison } from "../../../modifier/effect/modifier_poison";
-import { modifier_stunned } from "../../../modifier/effect/modifier_stunned";
+import { modifier_generic_poison } from "../../../modifier/effect/modifier_generic_poison";
+import { modifier_generic_stunned } from "../../../modifier/effect/modifier_generic_stunned";
 import { modifier_particle } from "../../../modifier/modifier_particle";
 import { modifier_dragon_knight_6_form } from "./ability6_dragon_knight_elder_dragon_form";
 
@@ -62,7 +62,7 @@ export class ability2_dragon_knight_dragon_tail extends BaseAbility_Plus {
         let fDamage = hCaster.GetMaxHealth() * health_damage * 0.01
 
         if (iDragonLevel >= 1) {
-            modifier_poison.PoisonActive(hTarget, hCaster, this, poison_damage)
+            modifier_generic_poison.PoisonActive(hTarget, hCaster, this, poison_damage)
         }
         if (iDragonLevel >= 5) {
             stun_duration = stun_duration + extra_stun_duration
@@ -78,7 +78,7 @@ export class ability2_dragon_knight_dragon_tail extends BaseAbility_Plus {
         }
         BattleHelper.GoApplyDamage(tDamageTable)
 
-        modifier_stunned.apply(hTarget, hCaster, this, { duration: stun_duration * hTarget.GetStatusResistanceFactor(hCaster) })
+        modifier_generic_stunned.apply(hTarget, hCaster, this, { duration: stun_duration * hTarget.GetStatusResistanceFactor(hCaster) })
 
         hCaster.EmitSound(ResHelper.GetSoundReplacement("Hero_DragonKnight.DragonTail.Cast", hCaster))
 

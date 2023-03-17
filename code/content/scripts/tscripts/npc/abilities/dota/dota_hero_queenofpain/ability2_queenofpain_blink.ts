@@ -5,7 +5,7 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_feared } from "../../../modifier/effect/modifier_feared";
+import { modifier_generic_feared } from "../../../modifier/effect/modifier_generic_feared";
 import { modifier_particle } from "../../../modifier/modifier_particle";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 
@@ -78,7 +78,7 @@ export class ability2_queenofpain_blink extends BaseAbility_Plus {
 
             if (hCaster.HasTalent("special_bonus_unique_queenofpain_custom_1")) {
                 let duration = hCaster.GetTalentValue("special_bonus_unique_queenofpain_custom_1")
-                modifier_feared.apply(hTarget, hCaster, this, { duration: duration * hTarget.GetStatusResistanceFactor(hCaster) })
+                modifier_generic_feared.apply(hTarget, hCaster, this, { duration: duration * hTarget.GetStatusResistanceFactor(hCaster) })
             }
 
             let iInt = 0

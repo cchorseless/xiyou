@@ -114,11 +114,6 @@ export class BaseNpc_Plus extends BaseNpc {
         return false;
     }
 
-
-    /**是否沉睡 */
-    IsHypnotized?() {
-        return false;
-    }
     EmitCasterSound?(tSoundNames: string[], fChancePct: number, flags: number, fCooldown: number = 0, sCooldownindex: string = "") {
         flags = flags || 0;
         if (fCooldown > 0 && sCooldownindex) {

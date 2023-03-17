@@ -5,7 +5,7 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_feared } from "../../../modifier/effect/modifier_feared";
+import { modifier_generic_feared } from "../../../modifier/effect/modifier_generic_feared";
 import { modifier_particle, modifier_particle_thinker } from "../../../modifier/modifier_particle";
 import { ability1_nevermore_shadowraze1, modifier_nevermore_1_debuff } from "./ability1_nevermore_shadowraze1";
 import { modifier_nevermore_2 } from "./ability2_nevermore_shadowraze2";
@@ -254,7 +254,7 @@ export class ability6_nevermore_requiem extends BaseAbility_Plus {
             BattleHelper.GoApplyDamage(tDamageTable)
 
             modifier_nevermore_6_debuff.apply(hTarget, hCaster, this, { duration: requiem_slow_duration * hTarget.GetStatusResistanceFactor(hCaster) })
-            modifier_feared.apply(hTarget, hCaster, this, { duration: fear_duration * hTarget.GetStatusResistanceFactor(hCaster) })
+            modifier_generic_feared.apply(hTarget, hCaster, this, { duration: fear_duration * hTarget.GetStatusResistanceFactor(hCaster) })
         }
     }
 

@@ -1,3 +1,5 @@
+import { GameFunc } from "../GameFunc";
+import { AoiHelper } from "./AoiHelper";
 import { ResHelper } from "./ResHelper";
 
 declare global {
@@ -86,6 +88,8 @@ declare global {
         ControlPointEntityAttaches?: { controlPoint: number, unit: IBaseNpc_Plus, pattach: ParticleAttachment_t, attachPoint: string, origin: Vector }[];
     }
     type GLineProjectile = ProjectileHelper.LineProjectiles.LineProjectile;
+
+    type ISimpleLineProjectile = ProjectileHelper.LineProjectiles.SimpleLineProjectile;
 }
 export module ProjectileHelper {
 
@@ -709,6 +713,148 @@ export module ProjectileHelper {
                 return curTime;
             }
 
+        }
+
+
+
+
+
+        export class SimpleLineProjectile {
+            OnThink: IGHandler;
+            OnHit: IGHandler<boolean>;
+            aliveTime: number;
+            duration: number;
+            distanceTraveled: number;
+            distance: number;
+            static CreateOne(data: {
+                caster: IBaseNpc_Plus,
+                ability: IBaseAbility_Plus,
+                FX: string,
+                position?: Vector,
+                radius?: number,
+                speed?: number,
+                velocity?: Vector,
+                aliveTime?: number,
+                duration?: number,
+                distanceTraveled?: number,
+                distance?: number,
+                OnThink?: IGHandler;
+                OnHit?: IGHandler<boolean>;
+            }) {
+                let projectile = new SimpleLineProjectile();
+                projectile.originalCaster = data.caster;
+                projectile.currentCaster = data.caster;
+                projectile.abilitySource = data.ability;
+                projectile.position = data.position || projectile.currentCaster.GetAbsOrigin();
+                projectile.radius = data.radius || 0;
+                projectile.speed = data.speed || 0;
+                projectile.velocity = data.velocity;
+                projectile.aliveTime = data.aliveTime || 0;
+                projectile.duration = data.duration;
+                projectile.distanceTraveled = data.distanceTraveled || 0;
+                projectile.distance = data.distance;
+                projectile.FX = ParticleManager.CreateParticle(data.FX, ParticleAttachment_t.PATTACH_POINT, projectile.currentCaster);
+                ParticleManager.SetParticleControl(projectile.FX, 0, projectile.position);
+                ParticleManager.SetParticleControl(projectile.FX, 1, projectile.position);
+                ParticleManager.SetParticleControl(projectile.FX, 2, Vector(projectile.speed, 0, 0));
+                ParticleManager.SetParticleControl(projectile.FX, 3, projectile.position);
+                ParticleManager.SetParticleControl(projectile.FX, 4, Vector(projectile.duration, 0, 0));
+                projectile.OnThink = data.OnThink;
+                projectile.OnHit = data.OnHit;
+                if (projectile.OnThink) {
+                    projectile.OnThink.once = false;
+                }
+                if (projectile.OnHit) {
+                    projectile.OnHit.once = false;
+                }
+                projectile.Start();
+            }
+
+            Start() {
+                GTimerHelper.AddFrameTimer(1, GHandler.create(this, () => {
+                    this.ProjectileThink();
+                    return 1;
+                }))
+            }
+
+            ProjectileThink() {
+                if (this.OnThink) {
+                    this.OnThink.runWith([this]);
+                }
+                let position = this.GetPosition();
+                let radius = this.GetRadius();
+                let caster = this.GetCaster();
+                let enemies = AoiHelper.FindEntityInRadius(caster.GetTeam(), position, radius);
+                if (this.OnHit) {
+                    for (const [_, enemy] of GameFunc.iPair(enemies)) {
+                        let status = this.OnHit.runWith([this, enemy, position]);
+                        if (status) {
+                            this.Remove();
+                            return;
+                        }
+                    }
+                }
+            }
+            originalCaster: IBaseNpc_Plus;
+            GetOriginalCaster() {
+                return this.originalCaster;
+            }
+            currentCaster: IBaseNpc_Plus;
+            GetCaster() {
+                return this.currentCaster;
+            }
+            SetCaster(unit: IBaseNpc_Plus) {
+                this.currentCaster = unit;
+            }
+            abilitySource: IBaseAbility_Plus;
+            GetAbility() {
+                return this.abilitySource;
+            }
+            Remove() {
+                ParticleManager.DestroyParticle(this.FX, false);
+                ParticleManager.ReleaseParticleIndex(this.FX);
+                GTimerHelper.ClearAll(this);
+            }
+            Deflect(unit: IBaseNpc_Plus) {
+                let velocity = this.GetVelocity();
+                let newVel = Vector(-velocity.x, -velocity.y);
+                this.SetVelocity(newVel);
+                return false;
+            }
+            GetPosition() {
+                return this.position;
+            }
+            position: Vector
+            SetPosition(pos: Vector) {
+                this.position = pos;
+                ParticleManager.SetParticleControl(this.FX, 1, pos + (this.GetVelocity() * FrameTime()) as Vector);
+                ParticleManager.SetParticleControl(this.FX, 0, pos);
+            }
+            GetVelocity() {
+                return this.velocity;
+            }
+            velocity: Vector;
+            SetVelocity(vel: Vector) {
+                this.velocity = vel;
+            }
+            GetSpeed() {
+                return this.speed;
+            }
+            speed: number;
+            FX: ParticleID;
+            SetSpeed(speed: number) {
+                this.speed = speed;
+                if (this.FX) {
+                    ParticleManager.SetParticleControl(this.FX, 2, Vector(speed, 0, 0));
+                }
+            }
+            GetRadius() {
+                return this.radius;
+            }
+            radius: number;
+            SetRadius(radius: number) {
+                this.radius = radius;
+            }
         }
     }
 

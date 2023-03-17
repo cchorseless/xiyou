@@ -5,7 +5,7 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_shock } from "../../../modifier/effect/modifier_shock";
+import { modifier_generic_shock } from "../../../modifier/effect/modifier_generic_shock";
 
 /** dota原技能数据 */
 export const Data_razor_plasma_field = { "ID": "5082", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE", "AbilityUnitDamageType": "DAMAGE_TYPE_MAGICAL", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_NO", "SpellDispellableType": "SPELL_DISPELLABLE_YES", "FightRecapLevel": "1", "AbilitySound": "Ability.PlasmaField", "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_1", "AbilityCastGestureSlot": "DEFAULT", "AbilityCastRange": "0", "AbilityCastPoint": "0 0 0 0", "AbilityCooldown": "13 12 11 10", "AbilityManaCost": "125 125 125 125", "AbilitySpecial": { "01": { "var_type": "FIELD_INTEGER", "damage_min": "35 40 45 50" }, "02": { "var_type": "FIELD_INTEGER", "damage_max": "80 115 150 185" }, "03": { "var_type": "FIELD_INTEGER", "radius": "700" }, "04": { "var_type": "FIELD_INTEGER", "speed": "636" }, "05": { "var_type": "FIELD_INTEGER", "slow_min": "5" }, "06": { "var_type": "FIELD_INTEGER", "slow_max": "25 30 35 40" }, "07": { "var_type": "FIELD_FLOAT", "slow_duration": "1.5" } } };
@@ -195,7 +195,7 @@ export class modifier_razor_1_thinker extends BaseModifier_Plus {
                             damage: this.fDamage,
                             damage_type: DAMAGE_TYPES.DAMAGE_TYPE_MAGICAL
                         })
-                        modifier_shock.Shock(u, hCaster, this.GetAbilityPlus(), this.fDamage * (this.iShockCount * 0.01))
+                        modifier_generic_shock.Shock(u, hCaster, this.GetAbilityPlus(), this.fDamage * (this.iShockCount * 0.01))
                         EmitSoundOn("Ability.PlasmaFieldImpact", this.GetParentPlus())
                         this.group1[u.entindex()] = 1
                     }
@@ -212,7 +212,7 @@ export class modifier_razor_1_thinker extends BaseModifier_Plus {
                             damage: this.fDamage,
                             damage_type: DAMAGE_TYPES.DAMAGE_TYPE_MAGICAL
                         })
-                        modifier_shock.Shock(u, hCaster, this.GetAbilityPlus(), this.fDamage * (this.iShockCount * 0.01))
+                        modifier_generic_shock.Shock(u, hCaster, this.GetAbilityPlus(), this.fDamage * (this.iShockCount * 0.01))
                         EmitSoundOn("Ability.PlasmaFieldImpact", this.GetParentPlus())
                         this.group2[u.entindex()] = 1
                     }

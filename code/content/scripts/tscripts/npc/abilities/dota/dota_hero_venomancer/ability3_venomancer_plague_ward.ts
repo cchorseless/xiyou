@@ -5,7 +5,7 @@ import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { BaseNpc_Hero_Plus } from "../../../entityPlus/BaseNpc_Hero_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_poison } from "../../../modifier/effect/modifier_poison";
+import { modifier_generic_poison } from "../../../modifier/effect/modifier_generic_poison";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 import { ability1_venomancer_venomous_gale } from "./ability1_venomancer_venomous_gale";
 
@@ -87,12 +87,12 @@ export class modifier_venomancer_3 extends BaseModifier_Plus {
         if (!GFuncEntity.IsValid(hTarget) || hTarget.GetClassname() == "dota_item_drop" || params.attacker != hParent || BattleHelper.AttackFilter(params.record, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NOT_USECASTATTACKORB, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NOT_PROCESSPROCS, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_FAKEATTACK) || !GFuncEntity.IsValid(hAbility)) {
             return
         }
-        modifier_poison.Poison(hTarget, hParent, hAbility, this.sting_poison_count)
+        modifier_generic_poison.Poison(hTarget, hParent, hAbility, this.sting_poison_count)
         modifier_venomancer_3_attack_debuff.apply(hTarget, hParent, hAbility, { duration: this.sting_duration * hTarget.GetStatusResistanceFactor(hParent) })
         if (UnitFilter(hTarget, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, params.attacker.GetTeamNumber()) == UnitFilterResult.UF_SUCCESS) {
             this.count = this.count + 1
             if (this.count >= this.active_poison_count) {
-                modifier_poison.PoisonActive(hTarget, hParent, hAbility, this.active_poison_percent * 0.01)
+                modifier_generic_poison.PoisonActive(hTarget, hParent, hAbility, this.active_poison_percent * 0.01)
                 this.count = 0
             }
         }

@@ -101,8 +101,7 @@ export class modifier_imba_rejuvenation extends BaseModifier_Plus {
         }
     }
     OnIntervalThink(): void {
-        this.GetParentPlus().Heal(this.heal_per_sec, this.GetAbilityPlus());
-        SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, this.GetParentPlus(), this.heal_per_sec, undefined);
+        this.GetParentPlus().ApplyHeal(this.heal_per_sec, this.GetAbilityPlus());
     }
     GetEffectName(): string {
         return "particles/econ/events/ti6/bottle_ti6.vpcf";

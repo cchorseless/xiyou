@@ -9,7 +9,7 @@ import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifierMotionHorizontal_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
 import { item_towerchange_custom } from "../../../items/avalon/item_towerchange_custom";
-import { modifier_bleeding } from "../../../modifier/effect/modifier_bleeding";
+import { modifier_generic_bleeding } from "../../../modifier/effect/modifier_generic_bleeding";
 
 /** dota原技能数据 */
 export const Data_pudge_meat_hook = { "ID": "5075", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING", "AbilityUnitDamageType": "DAMAGE_TYPE_PURE", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_YES", "FightRecapLevel": "1", "AbilitySound": "Hero_Pudge.AttackHookExtend", "AbilityCastRange": "1300", "AbilityCastPoint": "0.3 0.3 0.3 0.3", "AbilityCooldown": "18 16 14 12", "AbilityManaCost": "125 130 135 140", "AbilitySpecial": { "01": { "var_type": "FIELD_INTEGER", "damage": "150 220 290 360", "LinkedSpecialBonus": "special_bonus_unique_pudge_7" }, "02": { "var_type": "FIELD_FLOAT", "hook_speed": "1450.0" }, "03": { "var_type": "FIELD_INTEGER", "hook_width": "100" }, "04": { "var_type": "FIELD_INTEGER", "hook_distance": "1300" }, "05": { "var_type": "FIELD_INTEGER", "vision_radius": "500 500 500 500" }, "06": { "var_type": "FIELD_FLOAT", "vision_duration": "4.0 4.0 4.0 4.0" } }, "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_1" };
@@ -213,7 +213,7 @@ export class ability1_pudge_meat_hook extends BaseAbility_Plus {
                 modifier_pudge_1_buff.apply(hTarget, tHashtable.hCaster, this, { hashtableUUid: HashTableHelper.GetHashtableIndex(tHashtable) });
                 // 流血
                 let fDamage = tHashtable.bleed_damage + tHashtable.bleed_damage_str * tHashtable.hCaster.GetStrength();
-                modifier_bleeding.Bleeding(hTarget, tHashtable.hCaster, this, tHashtable.bleed_duration, (tDamageTable: BattleHelper.DamageOptions) => {
+                modifier_generic_bleeding.Bleeding(hTarget, tHashtable.hCaster, this, tHashtable.bleed_duration, (tDamageTable: BattleHelper.DamageOptions) => {
                     LogHelper.print(fDamage, 111)
                     return fDamage
                 }, true)

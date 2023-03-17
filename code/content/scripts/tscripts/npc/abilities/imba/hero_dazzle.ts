@@ -98,7 +98,7 @@ export class modifier_imba_dazzle_poison_touch_setin extends BaseModifier_Plus {
             let remaining = this.GetRemainingTime();
             if (remaining <= 1) {
                 let ability = this.GetAbilityPlus();
-                this.GetParentPlus().AddNewModifier(ability.GetCaster(), ability, "modifier_stunned", {
+                this.GetParentPlus().AddNewModifier(ability.GetCaster(), ability, "modifier_generic_stunned", {
                     duration: 1 * (1 - this.GetParentPlus().GetStatusResistance())
                 });
                 this.StartIntervalThink(-1);
@@ -557,8 +557,7 @@ export class modifier_imba_dazzle_shallow_grave extends BaseModifier_Plus {
     }
     ShadowWave(ability: IBaseAbility_Plus, caster: IBaseNpc_Plus, oldTarget: IBaseNpc_Plus, heal: number) {
         let bounceDistance = ability.GetSpecialValueFor("talent_wave_bounce_distance");
-        oldTarget.Heal(heal, ability);
-        SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, oldTarget, heal, undefined);
+        oldTarget.ApplyHeal(heal, ability);
         let heroTable = FindUnitsInRadius(caster.GetTeamNumber(), oldTarget.GetAbsOrigin(), undefined, bounceDistance, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false);
         let creepTable = FindUnitsInRadius(caster.GetTeamNumber(), oldTarget.GetAbsOrigin(), undefined, bounceDistance, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false);
         let newTarget: IBaseNpc_Plus;
@@ -768,8 +767,7 @@ export class modifier_imba_dazzle_nothl_protection extends BaseModifier_Plus {
     //     }
     // }
     ShadowWave(ability: IBaseAbility_Plus, caster: IBaseNpc_Plus, oldTarget: IBaseNpc_Plus, heal: number) {
-        oldTarget.Heal(heal, ability);
-        SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, oldTarget, heal, undefined);
+        oldTarget.ApplyHeal(heal, ability);
         let bounceDistance = ability.GetSpecialValueFor("talent_wave_bounce_distance");
         let heroTable = FindUnitsInRadius(caster.GetTeamNumber(), oldTarget.GetAbsOrigin(), undefined, bounceDistance, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false);
         let creepTable = FindUnitsInRadius(caster.GetTeamNumber(), oldTarget.GetAbsOrigin(), undefined, bounceDistance, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false);
@@ -967,7 +965,6 @@ export class modifier_imba_dazzle_nothl_protection_aura_talent extends BaseModif
                 this.GetAbilityPlus().GetCaster().findBuff<modifier_imba_dazzle_nothl_protection>("modifier_imba_dazzle_nothl_protection").TalentAuraTimeUpdater(parent.GetEntityIndex());
                 let ability = this.GetAbilityPlus();
                 let caster = ability.GetCaster();
-                SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, parent, this.shallowDamage, undefined);
                 if (this.shallowDamageInstances > 0) {
                     let modifier = parent.AddNewModifier(ability.GetCaster(), ability, "modifier_imba_dazzle_post_shallow_grave_buff", {
                         duration: ability.GetSpecialValueFor("post_grave_duration")
@@ -1041,8 +1038,7 @@ export class modifier_imba_dazzle_nothl_protection_aura_talent extends BaseModif
     }
     ShadowWave(ability: IBaseAbility_Plus, caster: IBaseNpc_Plus, oldTarget: IBaseNpc_Plus, heal: number) {
         let bounceDistance = caster.GetTalentValue("special_bonus_imba_dazzle_3", "talent_wave_bounce_distance");
-        oldTarget.Heal(heal, ability);
-        SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, oldTarget, heal, undefined);
+        oldTarget.ApplyHeal(heal, ability);
         let heroTable = FindUnitsInRadius(caster.GetTeamNumber(), oldTarget.GetAbsOrigin(), undefined, bounceDistance, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false);
         let creepTable = FindUnitsInRadius(caster.GetTeamNumber(), oldTarget.GetAbsOrigin(), undefined, bounceDistance, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false);
         let newTarget: IBaseNpc_Plus;
@@ -1249,8 +1245,7 @@ export class imba_dazzle_shadow_wave extends BaseAbility_Plus {
             let totalHeal = damage;
             let targetTeam = DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY;
             if (isAlly) {
-                unit.Heal(totalHeal, this);
-                SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, unit, totalHeal, undefined);
+                unit.ApplyHeal(totalHeal, this);
                 if (caster.HasTalent("special_bonus_imba_dazzle_8")) {
                     unit.Purge(false, true, false, false, false);
                 }
@@ -1291,8 +1286,7 @@ export class imba_dazzle_shadow_wave extends BaseAbility_Plus {
                             damage_type: DAMAGE_TYPES.DAMAGE_TYPE_PHYSICAL
                         });
                     } else {
-                        target.Heal(totalHeal, this);
-                        SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, target, totalHeal, undefined);
+                        target.ApplyHeal(totalHeal, this);
                     }
                 }
             }

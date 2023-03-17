@@ -26,8 +26,7 @@ function Purification(caster: IBaseNpc_Plus, ability: IBaseAbility_Plus, target:
     let spell_power = caster.GetSpellAmplification(false);
     let heal = heal_amount;
     let damage = heal;
-    target.Heal(heal, ability);
-    SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, target, heal, undefined);
+    target.ApplyHeal(heal, ability);
     let enemies = FindUnitsInRadius(caster.GetTeamNumber(), target.GetAbsOrigin(), undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
     for (const [_, enemy] of GameFunc.iPair(enemies)) {
         if (!enemy.IsMagicImmune()) {
@@ -664,8 +663,7 @@ export class modifier_imba_hammer_of_virtue extends BaseModifier_Plus {
                 let allies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.caster.GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FindOrder.FIND_ANY_ORDER, false);
                 let heal = damage * this.damage_as_heal_pct * 0.01;
                 for (const [_, ally] of GameFunc.iPair(allies)) {
-                    ally.Heal(heal, this.ability);
-                    SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, ally, heal, undefined);
+                    ally.ApplyHeal(heal, this.ability);
                     this.particle_heal_fx = ResHelper.CreateParticleEx(this.particle_heal, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, ally);
                     ParticleManager.SetParticleControl(this.particle_heal_fx, 0, ally.GetAbsOrigin());
                 }

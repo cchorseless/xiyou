@@ -146,14 +146,12 @@ export class modifier_imba_bloodrage_buff_stats extends BaseModifier_Plus {
         if (!params.unit.IsIllusion() && !params.unit.IsTempestDouble() && !params.unit.IsOther() && !params.unit.IsBuilding()) {
             if ((params.attacker == this.GetParentPlus() || params.unit == this.GetParentPlus()) && params.attacker != params.unit && !params.attacker.IsOther() && !params.attacker.IsBuilding()) {
                 let heal = params.unit.GetMaxHealth() * this.health_bonus_pct / 100;
-                SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, params.attacker, heal, undefined);
-                params.attacker.Heal(heal, this.GetAbilityPlus());
+                this.GetParentPlus().ApplyHeal(heal, this.GetAbilityPlus());
                 let healFX = ResHelper.CreateParticleEx("particles/generic_gameplay/generic_lifesteal.vpcf", ParticleAttachment_t.PATTACH_POINT_FOLLOW, this.GetParentPlus());
                 ParticleManager.ReleaseParticleIndex(healFX);
             } else if (params.unit.IsRealUnit() && GFuncVector.AsVector(this.GetParentPlus().GetAbsOrigin() - params.unit.GetAbsOrigin()).Length2D() <= this.health_bonus_aoe) {
                 let heal = params.unit.GetMaxHealth() * (this.health_bonus_pct / 100) * (this.health_bonus_share_percent * 0.01);
-                SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, this.GetParentPlus(), heal, undefined);
-                this.GetParentPlus().Heal(heal, this.GetAbilityPlus());
+                this.GetParentPlus().ApplyHeal(heal, this.GetAbilityPlus());
                 let healFX = ResHelper.CreateParticleEx("particles/generic_gameplay/generic_lifesteal.vpcf", ParticleAttachment_t.PATTACH_POINT_FOLLOW, this.GetParentPlus());
                 ParticleManager.ReleaseParticleIndex(healFX);
             }
@@ -404,7 +402,7 @@ export class modifier_imba_blood_bath_buff_stats extends BaseModifier_Plus {
             let bonusHP = params.damage * this.overheal;
             this.SetStackCount(this.GetStackCount() + bonusHP);
             // this.GetParentPlus().CalculateStatBonus(true);
-            this.GetParentPlus().Heal(bonusHP, this.GetAbilityPlus());
+            this.GetParentPlus().ApplyHeal(bonusHP, this.GetAbilityPlus());
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.EXTRA_HEALTH_BONUS)
@@ -812,7 +810,7 @@ export class imba_bloodseeker_rupture extends BaseAbility_Plus {
             }
             ApplyDamage(damage_table);
             if (this.GetCasterPlus().HasTalent("special_bonus_imba_bloodseeker_3")) {
-                caster.Heal(damage, this);
+                caster.ApplyHeal(damage, this);
                 let healFX = ResHelper.CreateParticleEx("particles/generic_gameplay/generic_lifesteal.vpcf", ParticleAttachment_t.PATTACH_POINT_FOLLOW, caster);
                 ParticleManager.ReleaseParticleIndex(healFX);
             }
@@ -879,7 +877,7 @@ export class modifier_imba_rupture_debuff_dot extends BaseModifier_Plus {
                     ability: this.ability
                 });
                 if (this.caster.HasTalent("special_bonus_imba_bloodseeker_3")) {
-                    this.caster.Heal(move_damage, this.ability);
+                    this.caster.ApplyHeal(move_damage, this.ability);
                     let healFX = ResHelper.CreateParticleEx("particles/generic_gameplay/generic_lifesteal.vpcf", ParticleAttachment_t.PATTACH_POINT_FOLLOW, this.caster);
                     ParticleManager.ReleaseParticleIndex(healFX);
                 }
@@ -905,7 +903,7 @@ export class modifier_imba_rupture_debuff_dot extends BaseModifier_Plus {
                 ability: this.ability
             });
             if (this.caster.HasTalent("special_bonus_imba_bloodseeker_3")) {
-                this.caster.Heal(this.castdamage, this.ability);
+                this.caster.ApplyHeal(this.castdamage, this.ability);
                 let healFX = ResHelper.CreateParticleEx("particles/generic_gameplay/generic_lifesteal.vpcf", ParticleAttachment_t.PATTACH_POINT_FOLLOW, this.caster);
                 ParticleManager.ReleaseParticleIndex(healFX);
             }
@@ -923,7 +921,7 @@ export class modifier_imba_rupture_debuff_dot extends BaseModifier_Plus {
                 ability: this.ability
             });
             if (this.caster.HasTalent("special_bonus_imba_bloodseeker_3")) {
-                this.caster.Heal(this.castdamage, this.ability);
+                this.caster.ApplyHeal(this.castdamage, this.ability);
                 let healFX = ResHelper.CreateParticleEx("particles/generic_gameplay/generic_lifesteal.vpcf", ParticleAttachment_t.PATTACH_POINT_FOLLOW, this.caster);
                 ParticleManager.ReleaseParticleIndex(healFX);
             }

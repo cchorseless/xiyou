@@ -5,7 +5,7 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifierMotionHorizontal_Plus, BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_shock } from "../../../modifier/effect/modifier_shock";
+import { modifier_generic_shock } from "../../../modifier/effect/modifier_generic_shock";
 import { modifier_no_health_bar } from "../../../modifier/modifier_no_health_bar";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 import { ability1_storm_spirit_static_remnant } from "./ability1_storm_spirit_static_remnant";
@@ -319,7 +319,7 @@ export class modifier_storm_spirit_6_buff extends BaseModifierMotionHorizontal_P
                             damage: fDamage,
                             damage_type: this.GetAbilityPlus().GetAbilityDamageType()
                         })
-                        modifier_shock.Shock(hTarget, hParent, this.GetAbilityPlus(), iShockCount)
+                        modifier_generic_shock.Shock(hTarget, hParent, this.GetAbilityPlus(), iShockCount)
                     }
                 }
 

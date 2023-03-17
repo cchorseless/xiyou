@@ -16,7 +16,7 @@ export class item_imba_faerie_fire extends BaseItem_Plus {
         let hp_restore = ability.GetSpecialValueFor("hp_restore");
         let fire_within_duration = ability.GetSpecialValueFor("fire_within_duration");
         EmitSoundOn(cast_sound, caster);
-        caster.Heal(hp_restore, this);
+        caster.ApplyHeal(hp_restore, this);
         caster.AddNewModifier(caster, ability, modifier_fire_within, {
             duration: fire_within_duration
         });

@@ -5,7 +5,7 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifierMotionBoth_Plus, BaseModifier_Plus } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_stunned } from "../../../modifier/effect/modifier_stunned";
+import { modifier_generic_stunned } from "../../../modifier/effect/modifier_generic_stunned";
 import { modifier_dummy } from "../../../modifier/modifier_dummy";
 import { ability6_snapfire_mortimer_kisses } from "./ability6_snapfire_mortimer_kisses";
 
@@ -307,7 +307,7 @@ export class modifier_snapfire_2_jump extends BaseModifierMotionBoth_Plus {
                 damage_type: hAbility.GetAbilityDamageType()
             }
             BattleHelper.GoApplyDamage(damage_table)
-            modifier_stunned.apply(hTarget, hCaster, this.GetAbilityPlus(), { duration: this.impact_stun_duration * hTarget.GetStatusResistanceFactor(hCaster) })
+            modifier_generic_stunned.apply(hTarget, hCaster, this.GetAbilityPlus(), { duration: this.impact_stun_duration * hTarget.GetStatusResistanceFactor(hCaster) })
         }
         // 天赋
         if (hCaster.HasTalent("special_bonus_unique_snapfire_custom_7")) {

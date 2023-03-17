@@ -1,8 +1,9 @@
 
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
+import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus } from "../../entityPlus/BaseModifier_Plus";
-import { registerModifier } from "../../entityPlus/Base_Plus";
+import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 @registerModifier()
 export class modifier_meepo_divided_we_stand_lua extends BaseModifier_Plus {
@@ -253,3 +254,19 @@ export class modifier_meepo_divided_we_stand_lua extends BaseModifier_Plus {
         }
     }
 }
+@registerAbility()
+export class imba_meepo_earthbind extends BaseAbility_Plus { }
+
+@registerAbility()
+export class imba_meepo_poof extends BaseAbility_Plus { }
+
+@registerAbility()
+export class imba_meepo_ransack extends BaseAbility_Plus { }
+
+@registerAbility()
+export class imba_meepo_petrify extends BaseAbility_Plus { }
+
+
+@registerAbility()
+export class imba_meepo_divided_we_stand extends BaseAbility_Plus { }
+

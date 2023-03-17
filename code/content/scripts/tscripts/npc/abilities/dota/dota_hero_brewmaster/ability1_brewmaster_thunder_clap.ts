@@ -64,7 +64,7 @@ export class ability1_brewmaster_thunder_clap extends BaseAbility_Plus {
                 // 侍从技为土元素，
                 // let hAbility_t28  = qualification_build_t28.findIn(  hCaster )
                 // if (GFuncEntity.IsValid(hAbility_t28) && hAbility_t28.GetLevel() >= 1) {
-                //     modifier_stunned.apply(hTarget, hCaster, this, { duration: hCaster.HasTalent("special_bonus_unique_brewmaster_custom_6") && duration || duration * hTarget.GetStatusResistanceFactor(hCaster) })
+                //     modifier_generic_stunned.apply(hTarget, hCaster, this, { duration: hCaster.HasTalent("special_bonus_unique_brewmaster_custom_6") && duration || duration * hTarget.GetStatusResistanceFactor(hCaster) })
                 // } else {
                 //     modifier_brewmaster_1_debuff.apply(hTarget, hCaster, this, { duration: hCaster.HasTalent("special_bonus_unique_brewmaster_custom_6") && duration || duration * hTarget.GetStatusResistanceFactor(hCaster) })
                 // }

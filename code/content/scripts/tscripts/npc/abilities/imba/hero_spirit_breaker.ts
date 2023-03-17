@@ -209,7 +209,7 @@ export class modifier_imba_spirit_breaker_charge_of_darkness extends BaseModifie
                 }
             }
             if (!this.target.IsMagicImmune() && this.GetAbilityPlus()) {
-                this.target.AddNewModifier(me, this.GetAbilityPlus(), "modifier_stunned", {
+                this.target.AddNewModifier(me, this.GetAbilityPlus(), "modifier_generic_stunned", {
                     duration: this.stun_duration * (1 - this.target.GetStatusResistance())
                 });
             }

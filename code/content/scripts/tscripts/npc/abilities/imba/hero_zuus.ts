@@ -288,7 +288,7 @@ export class imba_zuus_lightning_bolt extends BaseAbility_Plus {
                         static_charge_modifier.SetStackCount(static_charge_modifier.GetStackCount() + ability.GetSpecialValueFor("static_charge_stacks"));
                     }
                 }
-                target.AddNewModifier(caster, ability, "modifier_stunned", {
+                target.AddNewModifier(caster, ability, "modifier_generic_stunned", {
                     duration: stun_duration * (1 - target.GetStatusResistance())
                 });
                 if (caster.HasTalent("special_bonus_imba_zuus_5")) {

@@ -5,7 +5,7 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_shock } from "../../../modifier/effect/modifier_shock";
+import { modifier_generic_shock } from "../../../modifier/effect/modifier_generic_shock";
 
 /** dota原技能数据 */
 export const Data_disruptor_static_storm = { "ID": "5461", "AbilityType": "DOTA_ABILITY_TYPE_ULTIMATE", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING", "AbilityUnitDamageType": "DAMAGE_TYPE_MAGICAL", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_NO", "SpellDispellableType": "SPELL_DISPELLABLE_NO", "FightRecapLevel": "2", "AbilitySound": "Hero_Disruptor.StaticStorm.Cast", "HasScepterUpgrade": "1", "AbilityCastAnimation": "ACT_DOTA_STATIC_STORM", "AbilityCastGestureSlot": "DEFAULT", "AbilityCastPoint": "0.05 0.05 0.05 0.05", "AbilityCooldown": "90 80 70", "AbilityManaCost": "125 175 225", "AbilityCastRange": "800 800 800 800", "AbilitySpecial": { "01": { "var_type": "FIELD_INTEGER", "radius": "500" }, "02": { "var_type": "FIELD_INTEGER", "pulses": "20", "LinkedSpecialBonus": "special_bonus_unique_disruptor_7", "LinkedSpecialBonusField": "value2" }, "03": { "var_type": "FIELD_INTEGER", "damage_max": "200 275 350" }, "04": { "var_type": "FIELD_FLOAT", "duration": "5.0", "LinkedSpecialBonus": "special_bonus_unique_disruptor_7" } } };
@@ -260,7 +260,7 @@ export class modifier_disruptor_6_thinker extends BaseModifier_Plus {
         for (let hTarget of (units)) {
             tDamageTable.victim = hTarget
             BattleHelper.GoApplyDamage(tDamageTable)
-            modifier_shock.Shock(hTarget, hCaster, this.GetAbilityPlus(), this.iShockCount * this.fDamageTick)
+            modifier_generic_shock.Shock(hTarget, hCaster, this.GetAbilityPlus(), this.iShockCount * this.fDamageTick)
         }
     }
     CheckState() {

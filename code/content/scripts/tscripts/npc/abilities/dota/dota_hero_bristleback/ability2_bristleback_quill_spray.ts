@@ -6,7 +6,7 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_bleeding } from "../../../modifier/effect/modifier_bleeding";
+import { modifier_generic_bleeding } from "../../../modifier/effect/modifier_generic_bleeding";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 import { ability6_bristleback_warpath } from "./ability6_bristleback_warpath";
 
@@ -86,7 +86,7 @@ export class ability2_bristleback_quill_spray extends BaseAbility_Plus {
             }
             BattleHelper.GoApplyDamage(damage_table)
             let fBloodDamage = bleed_damage + hCaster.GetStrength() * bleed_damage_str_factor * iStock;
-            modifier_bleeding.Bleeding(hTarget,
+            modifier_generic_bleeding.Bleeding(hTarget,
                 hCaster, this, duration, (tDamageTable) => {
                     return fBloodDamage
                 }, true)

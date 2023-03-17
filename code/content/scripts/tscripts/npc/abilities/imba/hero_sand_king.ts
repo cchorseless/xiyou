@@ -88,7 +88,7 @@ export class imba_sandking_burrowstrike extends BaseAbility_Plus {
         let ability = this;
         let target_point = this.target_point;
         let modifier_stun = "modifier_imba_burrowstrike_stun";
-        let modifier_poison = "modifier_imba_caustic_finale_poison";
+        let modifier_generic_poison = "modifier_imba_caustic_finale_poison";
         let knockback_duration = ability.GetSpecialValueFor("knockback_duration");
         let stun_duration = ability.GetSpecialValueFor("stun_duration");
         let damage = ability.GetSpecialValueFor("damage");
@@ -128,8 +128,8 @@ export class imba_sandking_burrowstrike extends BaseAbility_Plus {
         target.AddNewModifier(caster, ability, modifier_stun, {
             duration: stun_duration * (1 - target.GetStatusResistance())
         });
-        if (target.IsRealUnit() && !target.IsIllusion() && poison_duration && poison_duration > 0 && !target.HasModifier(modifier_poison)) {
-            target.AddNewModifier(caster, caustic_ability, modifier_poison, {
+        if (target.IsRealUnit() && !target.IsIllusion() && poison_duration && poison_duration > 0 && !target.HasModifier(modifier_generic_poison)) {
+            target.AddNewModifier(caster, caustic_ability, modifier_generic_poison, {
                 duration: poison_duration
             });
         }
@@ -524,12 +524,12 @@ export class imba_sandking_caustic_finale extends BaseAbility_Plus {
 export class modifier_imba_caustic_finale_trigger extends BaseModifier_Plus {
     public caster: IBaseNpc_Plus;
     public ability: IBaseAbility_Plus;
-    public modifier_poison: any;
+    public modifier_generic_poison: any;
     public poison_duration: number;
     Init(p_0: any,): void {
         this.caster = this.GetCasterPlus();
         this.ability = this.GetAbilityPlus();
-        this.modifier_poison = "modifier_imba_caustic_finale_poison";
+        this.modifier_generic_poison = "modifier_imba_caustic_finale_poison";
         this.poison_duration = this.ability.GetSpecialValueFor("poison_duration");
     }
 
@@ -579,7 +579,7 @@ export class modifier_imba_caustic_finale_trigger extends BaseModifier_Plus {
         if (attacker.IsIllusion()) {
             return;
         }
-        if (target.HasModifier(this.modifier_poison)) {
+        if (target.HasModifier(this.modifier_generic_poison)) {
             return;
         }
         if (target.IsBuilding() || target.IsOther()) {
@@ -588,7 +588,7 @@ export class modifier_imba_caustic_finale_trigger extends BaseModifier_Plus {
         if (target.GetTeamNumber() == this.caster.GetTeamNumber()) {
             return;
         }
-        target.AddNewModifier(this.caster, this.ability, this.modifier_poison, {
+        target.AddNewModifier(this.caster, this.ability, this.modifier_generic_poison, {
             duration: this.poison_duration
         });
     }
@@ -601,7 +601,7 @@ export class modifier_imba_caustic_finale_poison extends BaseModifier_Plus {
     public sound_explode: any;
     public particle_explode: any;
     public particle_debuff: any;
-    public modifier_poison: any;
+    public modifier_generic_poison: any;
     public modifier_slow: any;
     public damage: number;
     public radius: number;
@@ -615,7 +615,7 @@ export class modifier_imba_caustic_finale_poison extends BaseModifier_Plus {
         this.sound_explode = "Ability.SandKing_CausticFinale";
         this.particle_explode = "particles/units/heroes/hero_sandking/sandking_caustic_finale_explode.vpcf";
         this.particle_debuff = "particles/units/heroes/hero_sandking/sandking_caustic_finale_debuff.vpcf";
-        this.modifier_poison = "modifier_imba_caustic_finale_poison";
+        this.modifier_generic_poison = "modifier_imba_caustic_finale_poison";
         this.modifier_slow = "modifier_imba_caustic_finale_debuff";
         this.damage = this.ability.GetSpecialValueFor("damage");
         this.radius = this.ability.GetSpecialValueFor("radius");
@@ -657,10 +657,10 @@ export class modifier_imba_caustic_finale_poison extends BaseModifier_Plus {
                     ability: this.ability
                 }
                 ApplyDamage(damageTable);
-                if (enemy.HasModifier(this.modifier_poison)) {
-                    let modifier_poison_handler = enemy.FindModifierByName(this.modifier_poison);
-                    if (modifier_poison_handler) {
-                        modifier_poison_handler.Destroy();
+                if (enemy.HasModifier(this.modifier_generic_poison)) {
+                    let modifier_generic_poison_handler = enemy.FindModifierByName(this.modifier_generic_poison);
+                    if (modifier_generic_poison_handler) {
+                        modifier_generic_poison_handler.Destroy();
                     }
                 }
                 slow_modifier = enemy.AddNewModifier(this.caster, this.ability, this.modifier_slow, {
@@ -989,7 +989,7 @@ export class modifier_imba_sandking_sand_storm_720_thinker extends BaseModifier_
         ParticleManager.SetParticleControl(this.particle, 0, this.caster.GetAbsOrigin());
         ParticleManager.SetParticleControl(this.particle, 1, Vector(this.sand_storm_radius, this.sand_storm_radius, 0));
         this.AddParticle(this.particle, false, false, -1, false, false);
-        this.caster.AddNewModifier(this.caster, this.ability, "modifier_invisible", {
+        this.caster.AddNewModifier(this.caster, this.ability, "modifier_generic_invisible", {
             duration: this.AbilityDuration
         });
         this.StartIntervalThink(FrameTime());
@@ -1021,10 +1021,10 @@ export class modifier_imba_sandking_sand_storm_720_thinker extends BaseModifier_
             this.damage_counter = 0;
         }
         if ((this.caster.GetAbsOrigin() - this.parent.GetAbsOrigin() as Vector).Length() <= this.sand_storm_radius) {
-            if (!this.caster.HasModifier("modifier_invisible")) {
+            if (!this.caster.HasModifier("modifier_generic_invisible")) {
                 this.invis_counter = this.invis_counter + FrameTime();
                 if (this.invis_counter >= this.fade_delay) {
-                    this.caster.AddNewModifier(this.caster, this.ability, "modifier_invisible", {
+                    this.caster.AddNewModifier(this.caster, this.ability, "modifier_generic_invisible", {
                         duration: this.GetRemainingTime(),
                         cancelattack: false
                     });
@@ -1032,7 +1032,7 @@ export class modifier_imba_sandking_sand_storm_720_thinker extends BaseModifier_
                 }
             }
         } else {
-            this.caster.RemoveModifierByName("modifier_invisible");
+            this.caster.RemoveModifierByName("modifier_generic_invisible");
             this.caster.StopSound("Ability.SandKing_SandStorm.loop");
             this.caster.StopSound("Imba.SandKingSandStorm");
             this.ability.sand_storm = undefined;

@@ -61,7 +61,7 @@ export class imba_centaur_hoof_stomp extends BaseAbility_Plus {
         for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false))) {
             this.enemy_entindex_table[enemy.entindex() + ""] = true;
             if (!enemy.IsMagicImmune()) {
-                enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_stunned", {
+                enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_generic_stunned", {
                     duration: this.GetSpecialValueFor("stun_duration") * (1 - enemy.GetStatusResistance())
                 });
                 ApplyDamage({
@@ -639,7 +639,7 @@ export class modifier_imba_stampede_haste extends BaseModifier_Plus {
                         ability: this.ability
                     }
                     ApplyDamage(damageTable);
-                    enemy.AddNewModifier(this.caster, this.ability, "modifier_stunned", {
+                    enemy.AddNewModifier(this.caster, this.ability, "modifier_generic_stunned", {
                         duration: this.stun_duration * (1 - enemy.GetStatusResistance())
                     });
                     enemy.AddNewModifier(this.caster, this.ability, this.modifier_trample_slow, {

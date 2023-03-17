@@ -236,7 +236,7 @@ export class modifier_pudge_6_buff extends BaseModifierMotionHorizontal_Plus {
             }
             let fDamage = (this.per_damage + hCaster.GetStrength() * this.per_damage_str) * this.interval
             let fRegenHealth = fDamage * this.damage_regen_health_pct * 0.01
-            hCaster.Heal(fRegenHealth, hAbility)
+            hCaster.ApplyHeal(fRegenHealth, hAbility)
             if (hCaster.HasScepter()) {
                 // 恢复300范围内所有友方英雄生命值溢出生命值转换临时血量上限
                 let tTarget = FindUnitsInRadius(hCaster.GetTeamNumber(), hCaster.GetAbsOrigin(), null, this.scepter_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false)
@@ -247,7 +247,7 @@ export class modifier_pudge_6_buff extends BaseModifierMotionHorizontal_Plus {
                         let fLossHealth = fMaxHealth - fCurHealth
                         let fOverflowHealth = fRegenHealth > fLossHealth && fRegenHealth - fLossHealth || 0
                         let fGainHealth = fRegenHealth - fOverflowHealth
-                        hTarget.Heal(fGainHealth, hAbility)
+                        hTarget.ApplyHeal(fGainHealth, hAbility)
                         if (fOverflowHealth > 0) {
                             modifier_pudge_6_buff_health_limit.apply(hTarget, hCaster, hAbility, { duration: this.scepter_duration, fOverflowHealth: fOverflowHealth })
                         }

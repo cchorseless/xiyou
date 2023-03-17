@@ -6,7 +6,7 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_poison } from "../../../modifier/effect/modifier_poison";
+import { modifier_generic_poison } from "../../../modifier/effect/modifier_generic_poison";
 import { modifier_particle } from "../../../modifier/modifier_particle";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 
@@ -121,7 +121,7 @@ export class ability1_queenofpain_shadow_strike extends BaseAbility_Plus {
             if (hCaster.GetIntellect != null) {
                 iInt = hCaster.GetIntellect()
             }
-            modifier_poison.PoisonActive(hTarget, hCaster, this, poison_active_percnet * 0.01 * (1 + fExtarPercent))
+            modifier_generic_poison.PoisonActive(hTarget, hCaster, this, poison_active_percnet * 0.01 * (1 + fExtarPercent))
             BattleHelper.GoApplyDamage({
                 ability: this,
                 victim: hTarget,

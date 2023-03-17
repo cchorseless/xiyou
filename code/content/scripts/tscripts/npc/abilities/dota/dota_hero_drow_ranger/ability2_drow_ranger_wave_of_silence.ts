@@ -6,7 +6,7 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_feared } from "../../../modifier/effect/modifier_feared";
+import { modifier_generic_feared } from "../../../modifier/effect/modifier_generic_feared";
 import { ability1_drow_ranger_frost_arrows, modifier_drow_ranger_1_debuff } from "./ability1_drow_ranger_frost_arrows";
 
 /** dota原技能数据 */
@@ -175,7 +175,7 @@ export class ability2_drow_ranger_wave_of_silence extends BaseAbility_Plus {
         else {
             if (hTarget != null) {
                 let fear_duration = this.GetSpecialValueFor("fear_duration")
-                modifier_feared.apply(hTarget, hCaster, this, { duration: fear_duration * hTarget.GetStatusResistanceFactor(hCaster) })
+                modifier_generic_feared.apply(hTarget, hCaster, this, { duration: fear_duration * hTarget.GetStatusResistanceFactor(hCaster) })
             }
         }
 

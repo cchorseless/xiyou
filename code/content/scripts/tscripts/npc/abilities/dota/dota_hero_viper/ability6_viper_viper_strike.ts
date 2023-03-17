@@ -5,7 +5,7 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_poison } from "../../../modifier/effect/modifier_poison";
+import { modifier_generic_poison } from "../../../modifier/effect/modifier_generic_poison";
 
 /** dota原技能数据 */
 export const Data_viper_viper_strike = { "ID": "5221", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET", "AbilityUnitTargetTeam": "DOTA_UNIT_TARGET_TEAM_ENEMY", "AbilityUnitTargetType": "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC", "AbilityType": "DOTA_ABILITY_TYPE_ULTIMATE", "AbilityUnitTargetFlags": "DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_YES", "SpellDispellableType": "SPELL_DISPELLABLE_NO", "AbilityUnitDamageType": "DAMAGE_TYPE_MAGICAL", "FightRecapLevel": "2", "AbilitySound": "hero_viper.viperStrike", "HasScepterUpgrade": "1", "AbilityCastRange": "500", "AbilityCastPoint": "0.3 0.3 0.3", "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_4", "AbilityCooldown": "50 40 30", "AbilityManaCost": "100 150 200", "AbilitySpecial": { "10": { "var_type": "FIELD_FLOAT", "charge_restore_time": "30.0" }, "01": { "var_type": "FIELD_FLOAT", "duration": "5" }, "02": { "var_type": "FIELD_INTEGER", "damage": "80 120 160", "LinkedSpecialBonus": "special_bonus_unique_viper_2" }, "03": { "var_type": "FIELD_INTEGER", "bonus_movement_speed": "-40 -60 -80" }, "04": { "var_type": "FIELD_INTEGER", "bonus_attack_speed": "-40 -60 -80" }, "05": { "var_type": "FIELD_INTEGER", "mana_cost_scepter": "125 125 125", "RequiresScepter": "1" }, "06": { "var_type": "FIELD_FLOAT", "cooldown_scepter": "10", "RequiresScepter": "1" }, "07": { "var_type": "FIELD_INTEGER", "cast_range_scepter": "900", "RequiresScepter": "1" }, "08": { "var_type": "FIELD_INTEGER", "projectile_speed": "1200" }, "09": { "var_type": "FIELD_INTEGER", "max_charges": "2" } } };
@@ -263,7 +263,7 @@ export class modifier_viper_6_debuff extends BaseModifier_Plus {
         this.poison_count = this.GetSpecialValueFor("poison_count")
         this.movespeed_reduce = this.GetSpecialValueFor("movespeed_reduce")
         if (IsServer()) {
-            modifier_poison.Poison(this.GetParentPlus(), this.GetCasterPlus(), this.GetAbilityPlus(), this.poison_count)
+            modifier_generic_poison.Poison(this.GetParentPlus(), this.GetCasterPlus(), this.GetAbilityPlus(), this.poison_count)
         }
         else {
             if (IsClient()) {
@@ -291,7 +291,7 @@ export class modifier_viper_6_debuff extends BaseModifier_Plus {
         this.poison_count = this.GetSpecialValueFor("poison_count")
         this.movespeed_reduce = this.GetSpecialValueFor("movespeed_reduce")
         if (IsServer()) {
-            modifier_poison.Poison(this.GetParentPlus(), this.GetCasterPlus(), this.GetAbilityPlus(), this.poison_count)
+            modifier_generic_poison.Poison(this.GetParentPlus(), this.GetCasterPlus(), this.GetAbilityPlus(), this.poison_count)
         }
     }
 

@@ -1675,8 +1675,7 @@ export class imba_lich_sinister_gaze extends BaseAbility_Plus {
             this.caster.GiveMana(mana_gained);
             SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_MANA_ADD, this.caster, mana_gained, undefined);
             if (this.target.GetTeam() == this.caster.GetTeam()) {
-                this.caster.Heal(health_gained, this);
-                SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, this.caster, health_gained, undefined);
+                this.caster.ApplyHeal(health_gained, this);
             }
             this.target.Kill(this, this.caster);
         } else {
@@ -1688,8 +1687,7 @@ export class imba_lich_sinister_gaze extends BaseAbility_Plus {
                             duration: this.soul_consumption_duration
                         }).SetStackCount(consumption_health);
                         // this.caster.CalculateStatBonus(true);
-                        this.caster.Heal(consumption_health, this);
-                        SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, this.caster, consumption_health, undefined);
+                        this.caster.ApplyHeal(consumption_health, this);
                     } else if (!this.caster.IsAlive() && !this.target.IsReincarnating()) {
                         let retaliation_damage = this.caster.GetMaxHealth() * (this.retaliatory_chains_dmg_pct / 100);
                         let damageTable = {

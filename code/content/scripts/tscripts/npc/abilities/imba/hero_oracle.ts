@@ -557,8 +557,7 @@ export class imba_oracle_purifying_flames extends BaseAbility_Plus {
                 ability: this
             });
         } else {
-            this.target.Heal(this.GetSpecialValueFor("damage"), this);
-            SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, this.target, this.GetSpecialValueFor("damage"), undefined);
+            this.target.ApplyHeal(this.GetSpecialValueFor("damage"), this);
         }
         this.target.AddNewModifier(this.GetCasterPlus(), this, this.modifier_name, {
             duration: this.GetSpecialValueFor("duration")
@@ -601,8 +600,7 @@ export class modifier_imba_oracle_purifying_flames extends BaseModifier_Plus {
         this.StartIntervalThink(this.tick_rate);
     }
     OnIntervalThink(): void {
-        this.GetParentPlus().Heal(this.heal_per_second, this.GetAbilityPlus());
-        SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, this.GetParentPlus(), this.heal_per_second, undefined);
+        this.GetParentPlus().ApplyHeal(this.heal_per_second, this.GetAbilityPlus());
     }
 }
 @registerModifier()
@@ -890,7 +888,7 @@ export class modifier_imba_oracle_false_promise_timer extends BaseModifier_Plus 
         }
     }
     OnIntervalThink(): void {
-        this.invis_modifier = this.GetParentPlus().AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_invisible", {});
+        this.invis_modifier = this.GetParentPlus().AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_generic_invisible", {});
         if (this.GetParentPlus().GetAggroTarget()) {
             this.GetParentPlus().MoveToTargetToAttack(this.GetParentPlus().GetAggroTarget());
         }
@@ -914,8 +912,7 @@ export class modifier_imba_oracle_false_promise_timer extends BaseModifier_Plus 
             }
             this.end_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_oracle/oracle_false_promise_heal.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetParentPlus());
             ParticleManager.ReleaseParticleIndex(this.end_particle);
-            this.GetParentPlus().Heal(this.heal_counter - this.damage_counter, this.GetAbilityPlus());
-            SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, this.GetParentPlus(), this.heal_counter - this.damage_counter, undefined);
+            this.GetParentPlus().ApplyHeal(this.heal_counter - this.damage_counter, this.GetAbilityPlus());
         } else {
             this.GetParentPlus().EmitSound("Hero_Oracle.FalsePromise.Damaged");
             this.end_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_oracle/oracle_false_promise_dmg.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetParentPlus());

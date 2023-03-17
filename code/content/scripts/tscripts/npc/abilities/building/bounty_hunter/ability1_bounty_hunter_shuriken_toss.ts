@@ -8,7 +8,7 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_stunned } from "../../../modifier/effect/modifier_stunned";
+import { modifier_generic_stunned } from "../../../modifier/effect/modifier_generic_stunned";
 
 /** dota原技能数据 */
 export const Data_bounty_hunter_shuriken_toss = { "ID": "5285", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET", "FightRecapLevel": "1", "AbilitySound": "Hero_BountyHunter.Shuriken", "AbilityUnitTargetTeam": "DOTA_UNIT_TARGET_TEAM_ENEMY", "AbilityUnitTargetType": "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC", "AbilityUnitDamageType": "DAMAGE_TYPE_MAGICAL", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_NO", "AbilityCastRange": "400", "AbilityCastPoint": "0.3 0.3 0.3 0.3", "AbilityCooldown": "8", "AbilityManaCost": "120 125 130 135", "AbilityModifierSupportValue": "0.1", "HasScepterUpgrade": "1", "AbilitySpecial": { "01": { "var_type": "FIELD_INTEGER", "bonus_damage": "150 225 300 375", "LinkedSpecialBonus": "special_bonus_unique_bounty_hunter_2" }, "02": { "var_type": "FIELD_INTEGER", "speed": "1000 1000 1000 1000" }, "03": { "var_type": "FIELD_INTEGER", "bounce_aoe": "1200" }, "04": { "var_type": "FIELD_FLOAT", "ministun": "0.1" }, "05": { "var_type": "FIELD_INTEGER", "scepter_cast_range": "650", "RequiresScepter": "1" }, "06": { "var_type": "FIELD_FLOAT", "scepter_cooldown": "6", "RequiresScepter": "1" } }, "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_1" };
@@ -60,7 +60,7 @@ export class ability1_bounty_hunter_shuriken_toss extends BaseAbility_Plus {
         tHashtable.count = tHashtable.count + 1
 
         if (GFuncEntity.IsValid(hTarget)) {
-            modifier_stunned.apply(hTarget, hCaster, this, { duration: ministun * hTarget.GetStatusResistanceFactor(hCaster) })
+            modifier_generic_stunned.apply(hTarget, hCaster, this, { duration: ministun * hTarget.GetStatusResistanceFactor(hCaster) })
 
             let vPosition = hCaster.GetAbsOrigin()
             let vDirection = (vPosition - hTarget.GetAbsOrigin()) as Vector

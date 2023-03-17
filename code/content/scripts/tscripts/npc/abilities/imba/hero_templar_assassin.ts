@@ -267,7 +267,7 @@ export class imba_templar_assassin_meld extends BaseAbility_Plus {
         });
         SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_CRITICAL, target, this.GetSpecialValueFor("bonus_damage"), undefined);
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_templar_assassin_meld_bash")) {
-            target.AddNewModifier(attacker, this, "modifier_stunned", {
+            target.AddNewModifier(attacker, this, "modifier_generic_stunned", {
                 duration: this.GetCasterPlus().GetTalentValue("special_bonus_imba_templar_assassin_meld_bash") * (1 - target.GetStatusResistance())
             });
         }
@@ -821,7 +821,7 @@ export class modifier_imba_templar_assassin_trap_nerves extends BaseModifier_Plu
     @registerEvent(Enum_MODIFIER_EVENT.ON_ORDER)
     CC_OnOrder(keys: ModifierUnitEvent): void {
         if (keys.unit == this.GetParentPlus() && this.stun_orders[keys.order_type]) {
-            this.GetParentPlus().AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_stunned", {
+            this.GetParentPlus().AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_generic_stunned", {
                 duration: this.inhibit_nerves_ministun_duration * (1 - this.GetParentPlus().GetStatusResistance())
             });
         }

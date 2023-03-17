@@ -54,7 +54,7 @@ export class imba_earthshaker_fissure extends BaseAbility_Plus {
             if (unit.GetTeamNumber() != caster.GetTeamNumber() && !unit.IsMagicImmune()) {
                 damageTable.victim = unit;
                 ApplyDamage(damageTable);
-                unit.AddNewModifier(caster, this, "modifier_stunned", {
+                unit.AddNewModifier(caster, this, "modifier_generic_stunned", {
                     duration: stun_duration * (1 - unit.GetStatusResistance())
                 });
             }
@@ -554,7 +554,7 @@ export class modifier_imba_earthshaker_aftershock extends BaseModifier_Plus {
     CastAftershock() {
         let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, 0, 0, false);
         for (const [_, enemy] of GameFunc.iPair(enemies)) {
-            enemy.AddNewModifier(this.GetParentPlus(), this.GetAbilityPlus(), "modifier_stunned", {
+            enemy.AddNewModifier(this.GetParentPlus(), this.GetAbilityPlus(), "modifier_generic_stunned", {
                 duration: this.duration * (1 - enemy.GetStatusResistance())
             });
             this.damageTable.victim = enemy;

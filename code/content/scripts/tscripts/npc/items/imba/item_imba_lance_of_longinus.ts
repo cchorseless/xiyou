@@ -676,7 +676,6 @@ export class modifier_item_imba_lance_of_longinus_god_piercing_ally extends Base
         if (!IsServer()) {
             return;
         }
-        SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, this.GetParentPlus(), this.total_gained_health, undefined);
         this.total_gained_health = 0;
     }
     /** DeclareFunctions():modifierfunction[] {
@@ -690,7 +689,7 @@ export class modifier_item_imba_lance_of_longinus_god_piercing_ally extends Base
             return;
         }
         if (keys.unit == this.enemy && !keys.unit.HasModifier("modifier_item_imba_lance_of_longinus_god_piercing_ally")) {
-            this.GetParentPlus().Heal(keys.gain, this.GetItemPlus());
+            this.GetParentPlus().ApplyHeal(keys.gain, this.GetItemPlus());
             this.total_gained_health = this.total_gained_health + keys.gain;
         }
     }

@@ -255,7 +255,7 @@ export class storegga_grab_throw extends BaseAbility_Plus {
                         ParticleManager.ReleaseParticleIndex(nFXIndex);
                         EmitSoundOn("Hero_PhantomAssassin.Spatter", this.hThrowTarget);
                     } else {
-                        this.hThrowTarget.AddNewModifier(this.GetCasterPlus(), this, "modifier_stunned", {
+                        this.hThrowTarget.AddNewModifier(this.GetCasterPlus(), this, "modifier_generic_stunned", {
                             duration: this.stun_duration * (1 - this.hThrowTarget.GetStatusResistance())
                         });
                     }
@@ -294,7 +294,7 @@ export class storegga_grab_throw extends BaseAbility_Plus {
                                 knockback_distance: this.knockback_distance,
                                 knockback_height: this.knockback_height
                             }
-                            enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_stunned", {
+                            enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_generic_stunned", {
                                 duration: this.knockback_duration * (1 - enemy.GetStatusResistance())
                             });
                         }
@@ -376,7 +376,7 @@ export class modifier_storegga_arm_slam extends BaseModifier_Plus {
                             EmitSoundOn("Dungeon.BloodSplatterImpact", enemy);
                             EmitSoundOn("Hero_PhantomAssassin.Spatter", enemy);
                         } else {
-                            enemy.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_stunned", {
+                            enemy.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_generic_stunned", {
                                 duration: this.stun_duration
                             });
                         }

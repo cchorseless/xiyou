@@ -5,7 +5,7 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_stunned } from "../../../modifier/effect/modifier_stunned";
+import { modifier_generic_stunned } from "../../../modifier/effect/modifier_generic_stunned";
 import { modifier_particle } from "../../../modifier/modifier_particle";
 
 /** dota原技能数据 */
@@ -111,7 +111,7 @@ export class ability2_tinker_heat_seeking_missile extends BaseAbility_Plus {
                     BattleHelper.GoApplyDamage(tDamageTable)
                     let sTalentName = "special_bonus_unique_tinker_custom_4"
                     if (hCaster.HasTalent(sTalentName)) {
-                        modifier_stunned.apply(hTarget, hCaster, this, { duration: hCaster.GetTalentValue(sTalentName) })
+                        modifier_generic_stunned.apply(hTarget, hCaster, this, { duration: hCaster.GetTalentValue(sTalentName) })
                     }
                 }
             } else {

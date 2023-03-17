@@ -1,7 +1,7 @@
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_feared } from "../../../modifier/effect/modifier_feared";
+import { modifier_generic_feared } from "../../../modifier/effect/modifier_generic_feared";
 
 /** dota原技能数据 */
 export const Data_nevermore_dark_lord = { "ID": "5063", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AURA", "AbilityUnitTargetTeam": "DOTA_UNIT_TARGET_TEAM_ENEMY", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_YES", "OnCastbar": "0", "HasShardUpgrade": "1", "AbilityCastRange": "900", "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_5", "AbilitySpecial": { "01": { "var_type": "FIELD_INTEGER", "presence_armor_reduction": "-4 -5 -6 -7", "LinkedSpecialBonus": "special_bonus_unique_nevermore_5" }, "02": { "var_type": "FIELD_INTEGER", "presence_radius": "1200" } } };
@@ -133,7 +133,7 @@ export class modifier_nevermore_4_presence extends BaseModifier_Plus {
     CC_GetModifierIncomingDamagePercentage(params: IModifierTable) {
         let hParent = this.GetParentPlus()
         let hCaster = this.GetCasterPlus()
-        if (params.target == hParent && modifier_feared.exist(hParent) && GFuncEntity.IsValid(hCaster) && !hCaster.PassivesDisabled()) {
+        if (params.target == hParent && modifier_generic_feared.exist(hParent) && GFuncEntity.IsValid(hCaster) && !hCaster.PassivesDisabled()) {
             return this.fear_incoming_damage_ptg
         }
     }

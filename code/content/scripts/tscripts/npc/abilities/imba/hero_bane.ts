@@ -166,7 +166,7 @@ export class imba_bane_brain_sap_723 extends BaseAbility_Plus {
                 damage_type: this.GetAbilityDamageType(),
                 ability: this
             });
-            this.GetCasterPlus().Heal(damage_heal, this);
+            this.GetCasterPlus().ApplyHeal(damage_heal, this);
             target.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_brain_sap_mana", {
                 duration: this.GetSpecialValueFor("addlebrain_duration") * (1 - target.GetStatusResistance())
             });
@@ -330,7 +330,7 @@ export class modifier_imba_bane_fiends_grip_723 extends BaseModifier_Plus {
             this.GetCasterPlus().IsSilenced() || this.GetCasterPlus().IsHexed() ||
             this.GetCasterPlus().IsOutOfGame() ||
             (this.GetCasterPlus().IsFeared && this.GetCasterPlus().IsFeared()) ||
-            (this.GetCasterPlus().IsHypnotized && this.GetCasterPlus().IsHypnotized())) ||
+            this.GetCasterPlus().IsSleeped()) ||
             (this.GetParentPlus().IsInvulnerable() || this.GetParentPlus().IsOutOfGame())) {
             this.Destroy();
         }
@@ -626,7 +626,7 @@ export class imba_bane_brain_sap extends BaseAbility_Plus {
                 ability: this
             }
             ApplyDamage(damage_table);
-            caster.Heal(sapdamage, this);
+            caster.ApplyHeal(sapdamage, this);
             target.AddNewModifier(caster, this, "modifier_imba_brain_sap_mana", {
                 duration: sapduration * (1 - target.GetStatusResistance())
             });

@@ -4,7 +4,7 @@ import { BaseModifier_Plus } from "../../entityPlus/BaseModifier_Plus";
 import { registerModifier } from "../../entityPlus/Base_Plus";
 /**流血BUFF */
 @registerModifier()
-export class modifier_bleeding extends BaseModifier_Plus {
+export class modifier_generic_bleeding extends BaseModifier_Plus {
     IsHidden() { return false }
     IsDebuff() { return true }
     IsPurgable() { return false }
@@ -72,7 +72,7 @@ export class modifier_bleeding extends BaseModifier_Plus {
 
             let vPosition = hParent.GetAbsOrigin()
             this.fDistance += ((vPosition - this.vLastPosition) as Vector).Length2D();
-            let fDamageFactor = math.floor(this.fDistance / modifier_bleeding.fTriggerDistance)
+            let fDamageFactor = math.floor(this.fDistance / modifier_generic_bleeding.fTriggerDistance)
             if (fDamageFactor > 0) {
                 let tDamageTable: BattleHelper.DamageOptions = {
                     ability: hAbility,
@@ -108,7 +108,7 @@ export class modifier_bleeding extends BaseModifier_Plus {
                 }
 
             };
-            this.fDistance -= fDamageFactor * modifier_bleeding.fTriggerDistance;
+            this.fDistance -= fDamageFactor * modifier_generic_bleeding.fTriggerDistance;
             this.vLastPosition = vPosition;
         }
     }
@@ -131,7 +131,7 @@ export class modifier_bleeding extends BaseModifier_Plus {
         bMultiple: boolean = false) {
         if (!IsServer()) { return };
         if (!GFuncEntity.IsValid(hTarget)) return;
-        let tModifiers = hTarget.FindAllModifiersByName(modifier_bleeding.name) as modifier_bleeding[];
+        let tModifiers = hTarget.FindAllModifiersByName(modifier_generic_bleeding.name) as modifier_generic_bleeding[];
         let vLastPosition;
         let fDistance;
         let hModifier;
@@ -155,7 +155,7 @@ export class modifier_bleeding extends BaseModifier_Plus {
         }
 
         if (!GFuncEntity.IsValid(hModifier)) {
-            hModifier = modifier_bleeding.apply(hTarget, hCaster, hAbility, {
+            hModifier = modifier_generic_bleeding.apply(hTarget, hCaster, hAbility, {
                 vLastPosition: vLastPosition,
                 fDistance: fDistance,
                 duration: fDuration

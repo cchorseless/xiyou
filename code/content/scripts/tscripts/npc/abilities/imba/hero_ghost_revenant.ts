@@ -280,7 +280,7 @@ export class modifier_ghost_revenant_miasma extends BaseModifier_Plus {
             return 0;
         }
         let invisModifiers = {
-            "1": "modifier_invisible",
+            "1": "modifier_generic_invisible",
             "2": "modifier_mirana_moonlight_shadow",
             "3": "modifier_item_imba_shadow_blade_invis",
             "4": "modifier_item_shadow_amulet_fade",
@@ -293,7 +293,7 @@ export class modifier_ghost_revenant_miasma extends BaseModifier_Plus {
             "11": "modifier_templar_assassin_meld",
             "12": "modifier_imba_skeleton_walk_dummy",
             "13": "modifier_invoker_ghost_walk_self",
-            "14": "modifier_rune_invis",
+            "14": "modifier_chess_rune_invis",
             "15": "modifier_item_imba_silver_edge_invis"
         }
         for (const [_, v] of GameFunc.Pair(invisModifiers)) {
@@ -309,7 +309,7 @@ export class modifier_ghost_revenant_miasma extends BaseModifier_Plus {
         let ability = this.GetAbilityPlus();
         let slow = 0;
         let invisModifiers = {
-            "1": "modifier_invisible",
+            "1": "modifier_generic_invisible",
             "2": "modifier_mirana_moonlight_shadow",
             "3": "modifier_item_imba_shadow_blade_invis",
             "4": "modifier_item_shadow_amulet_fade",
@@ -322,7 +322,7 @@ export class modifier_ghost_revenant_miasma extends BaseModifier_Plus {
             "11": "modifier_templar_assassin_meld",
             "12": "modifier_imba_skeleton_walk_dummy",
             "13": "modifier_invoker_ghost_walk_self",
-            "14": "modifier_rune_invis",
+            "14": "modifier_chess_rune_invis",
             "15": "modifier_item_imba_silver_edge_invis"
         }
         for (const [_, v] of GameFunc.Pair(invisModifiers)) {

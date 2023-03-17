@@ -18,9 +18,8 @@ function GreavesActivate(caster: IBaseNpc_Plus, ability: IBaseItem_Plus,
         DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE,
         FindOrder.FIND_ANY_ORDER, false);
     for (const ally of (nearby_allies)) {
-        ally.Heal(heal_amount, ability);
+        ally.ApplyHeal(heal_amount, ability);
         ally.GiveMana(mana_amount);
-        SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, ally, heal_amount, undefined);
         SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_MANA_ADD, ally, mana_amount, undefined);
         ally.EmitSound("Item.GuardianGreaves.Target");
         let particle_name = "particles/items3_fx/warmage_mana_nonhero.vpcf";
@@ -68,8 +67,7 @@ export class item_imba_mekansm extends BaseItem_Plus {
             let caster_loc = this.GetCasterPlus().GetAbsOrigin();
             let nearby_allies = FindUnitsInRadius(this.GetCasterPlus().GetTeam(), caster_loc, undefined, heal_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
             for (const [_, ally] of GameFunc.iPair(nearby_allies)) {
-                ally.Heal(heal_amount, this);
-                SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, ally, heal_amount, undefined);
+                ally.ApplyHeal(heal_amount, this);
                 ally.EmitSound("DOTA_Item.Mekansm.Target");
                 let mekansm_target_pfx = ResHelper.CreateParticleEx("particles/items2_fx/mekanism_recipient.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, ally, this.GetCasterPlus());
                 ParticleManager.SetParticleControl(mekansm_target_pfx, 0, caster_loc);

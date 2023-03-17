@@ -4,7 +4,7 @@ import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
-import { modifier_generic_knockback } from "../../modifier/move/modifier_generic_knockback";
+import { modifier_generic_knockback } from "../../modifier/effect/modifier_generic_knockback";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 @registerAbility()
 export class imba_snapfire_scatterblast extends BaseAbility_Plus {
@@ -97,7 +97,7 @@ export class imba_snapfire_scatterblast extends BaseAbility_Plus {
         let point_blank = (length <= point_blank_range);
         if (point_blank) {
             damage = damage + point_blank_mult * damage;
-            modifier_name = "modifier_stunned";
+            modifier_name = "modifier_generic_stunned";
         }
         let damageTable = {
             victim: target,
@@ -280,8 +280,7 @@ export class imba_snapfire_firesnap_cookie extends BaseAbility_Plus {
         }
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_unique_snapfire_5")) {
             if (target.GetTeam() == this.GetCasterPlus().GetTeam()) {
-                target.Heal(this.GetCasterPlus().GetTalentValue("special_bonus_imba_unique_snapfire_5"), this);
-                SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, target, this.GetCasterPlus().GetTalentValue("special_bonus_imba_unique_snapfire_5"), undefined);
+                target.ApplyHeal(this.GetCasterPlus().GetTalentValue("special_bonus_imba_unique_snapfire_5"), this);
             }
         }
         let duration = this.GetSpecialValueFor("jump_duration");
@@ -316,7 +315,7 @@ export class imba_snapfire_firesnap_cookie extends BaseAbility_Plus {
                 damageTable.victim = enemy;
                 ApplyDamage(damageTable);
                 if (!this.toggle_state) {
-                    enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_stunned", {
+                    enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_generic_stunned", {
                         duration: stun
                     });
                 }

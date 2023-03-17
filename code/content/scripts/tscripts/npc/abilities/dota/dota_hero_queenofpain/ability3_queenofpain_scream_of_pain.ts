@@ -2,8 +2,8 @@ import { BattleHelper } from "../../../../helper/BattleHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_bleeding } from "../../../modifier/effect/modifier_bleeding";
-import { modifier_poison } from "../../../modifier/effect/modifier_poison";
+import { modifier_generic_bleeding } from "../../../modifier/effect/modifier_generic_bleeding";
+import { modifier_generic_poison } from "../../../modifier/effect/modifier_generic_poison";
 
 /** dota原技能数据 */
 export const Data_queenofpain_scream_of_pain = { "ID": "5175", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_NO_TARGET", "AbilityUnitDamageType": "DAMAGE_TYPE_MAGICAL", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_NO", "AbilitySound": "Hero_QueenOfPain.ScreamOfPain", "AbilityCastRange": "0", "AbilityCastPoint": "0.0 0.0 0.0 0.0", "AbilityCooldown": "7", "AbilityDamage": "75 150 225 300", "AbilityManaCost": "85 100 115 130", "AbilitySpecial": { "01": { "var_type": "FIELD_INTEGER", "area_of_effect": "550" }, "02": { "var_type": "FIELD_INTEGER", "projectile_speed": "900" } }, "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_3", "AbilityCastGestureSlot": "DEFAULT" };
@@ -39,12 +39,12 @@ export class ability3_queenofpain_scream_of_pain extends BaseAbility_Plus {
         let bleeding_duration = this.GetSpecialValueFor("bleeding_duration")
         let bleeding_damage_int_factor = this.GetSpecialValueFor("bleeding_damage_int_factor") + hCaster.GetTalentValue("special_bonus_unique_queenofpain_custom_6")
 
-        modifier_bleeding.Bleeding(hTarget, hCaster, this, bleeding_duration, (tDamageTable) => {
+        modifier_generic_bleeding.Bleeding(hTarget, hCaster, this, bleeding_duration, (tDamageTable) => {
             tDamageTable.eom_flags = tDamageTable.eom_flags + BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_DAMAGE_AMPLIFY
             return hCaster.GetIntellect() * bleeding_damage_int_factor * 0.01
         }, true)
 
-        modifier_poison.Poison(hTarget, hCaster, this, poisons + hCaster.GetIntellect() * poisons_per_int)
+        modifier_generic_poison.Poison(hTarget, hCaster, this, poisons + hCaster.GetIntellect() * poisons_per_int)
     }
     GetIntrinsicModifierName() {
         return "modifier_queenofpain_3"

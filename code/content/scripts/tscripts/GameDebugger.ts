@@ -278,6 +278,7 @@ export class GameDebugger extends SingletonClass {
         SendToConsole("script_reload");
     }
     onDebugRestart(event: JS_TO_LUA_DATA) {
+        this.CollectGarbage();
         SendToConsole("clearall");
         SendToConsole("restart");
     }

@@ -559,7 +559,7 @@ export class modifier_imba_gyrocopter_homing_missile extends BaseModifier_Plus {
             this.target.EmitSound("Hero_Gyrocopter.HomingMissile.Target");
             this.target.EmitSound("Hero_Gyrocopter.HomingMissile.Destroy");
             if (!this.target.IsMagicImmune()) {
-                this.target.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_stunned", {
+                this.target.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_generic_stunned", {
                     duration: this.stun_duration * (1 - this.target.GetStatusResistance())
                 });
                 ApplyDamage({
@@ -594,7 +594,7 @@ export class modifier_imba_gyrocopter_homing_missile extends BaseModifier_Plus {
             ParticleManager.ReleaseParticleIndex(blast_particle);
             for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.target.GetAbsOrigin(), undefined, (this.GetParentPlus().GetIdealSpeed() * this.propulsion_speed_pct * 0.01) + (math.max(this.GetElapsedTime() - this.pre_flight_time, 0) * this.propulsion_duration_pct * 0.01), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
                 if (enemy != this.target) {
-                    enemy.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_stunned", {
+                    enemy.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_generic_stunned", {
                         duration: this.stun_duration * (1 - enemy.GetStatusResistance())
                     });
                     ApplyDamage({

@@ -7,7 +7,7 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_shock } from "../../../modifier/effect/modifier_shock";
+import { modifier_generic_shock } from "../../../modifier/effect/modifier_generic_shock";
 import { modifier_particle } from "../../../modifier/modifier_particle";
 import { ability1_zuus_arc_lightning } from "./ability1_zuus_arc_lightning";
 import { ability2_zuus_lightning_bolt } from "./ability2_zuus_lightning_bolt";
@@ -89,10 +89,10 @@ export class ability3_zuus_static_field extends BaseAbility_Plus {
             }
         }
         BattleHelper.GoApplyDamage(tDamageTable)
-        let buff = modifier_shock.findIn(hTarget)
+        let buff = modifier_generic_shock.findIn(hTarget)
         if (buff) {
             let stack = math.min(buff.GetStackCount() * (this.GetSpecialValueFor("shock_bonus_increase") * 0.01), hCaster.GetMaxMana() * this.GetSpecialValueFor("shock_bonus_limit"))
-            modifier_shock.Shock(hTarget, hCaster, this, stack)
+            modifier_generic_shock.Shock(hTarget, hCaster, this, stack)
         }
     }
     OnSpellStart() {

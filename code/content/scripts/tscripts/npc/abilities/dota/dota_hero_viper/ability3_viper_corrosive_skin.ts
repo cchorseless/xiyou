@@ -6,7 +6,7 @@ import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { BaseNpc_Hero_Plus } from "../../../entityPlus/BaseNpc_Hero_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_poison } from "../../../modifier/effect/modifier_poison";
+import { modifier_generic_poison } from "../../../modifier/effect/modifier_generic_poison";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 
 /** dota原技能数据 */
@@ -200,7 +200,7 @@ export class modifier_viper_3_attack extends BaseModifier_Plus {
         if (!GFuncEntity.IsValid(hTarget) || !GFuncEntity.IsValid(hAbility) || hParent != this.GetParentPlus() || this.records.indexOf(params.record) == -1) {
             return
         }
-        modifier_poison.Poison(hTarget, hParent, hAbility, this.CalPoisonCount())
+        modifier_generic_poison.Poison(hTarget, hParent, hAbility, this.CalPoisonCount())
         modifier_viper_3_debuff.apply(hTarget, hParent, hAbility, { duration: this.duration * hTarget.GetStatusResistanceFactor(hParent) })
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_RECORD_DESTROY)

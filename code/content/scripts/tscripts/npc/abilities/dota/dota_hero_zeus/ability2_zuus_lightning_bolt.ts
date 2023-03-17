@@ -4,8 +4,8 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_shock } from "../../../modifier/effect/modifier_shock";
-import { modifier_stunned } from "../../../modifier/effect/modifier_stunned";
+import { modifier_generic_shock } from "../../../modifier/effect/modifier_generic_shock";
+import { modifier_generic_stunned } from "../../../modifier/effect/modifier_generic_stunned";
 import { modifier_particle, modifier_particle_thinker } from "../../../modifier/modifier_particle";
 
 /** dota原技能数据 */
@@ -79,8 +79,8 @@ export class ability2_zuus_lightning_bolt extends BaseAbility_Plus {
         if (hTarget != null && !hTarget.TriggerSpellAbsorb(this)) {
             let damageBuff = modifier_zuus_2_particle_damage.apply(hTarget, hCaster, this, { duration: 0.1, })
             damageBuff && (damageBuff.damageInfo = tDamageTable)
-            modifier_shock.Shock(hTarget, hCaster, hAbility, hAbility.GetSpecialValueFor("shock_bonus", 100))
-            modifier_stunned.apply(hTarget, hCaster, hAbility, { duration: stun_duration })
+            modifier_generic_shock.Shock(hTarget, hCaster, hAbility, hAbility.GetSpecialValueFor("shock_bonus", 100))
+            modifier_generic_stunned.apply(hTarget, hCaster, hAbility, { duration: stun_duration })
         }
         else {
             modifier_zuus_2_particle_damage_thinker.applyThinker(vPosition, hCaster, hAbility,
@@ -105,8 +105,8 @@ export class ability2_zuus_lightning_bolt extends BaseAbility_Plus {
                         if (!hUnit.TriggerSpellAbsorb(this)) {
                             let damageBuff = modifier_zuus_2_particle_damage.apply(hTarget, hCaster, this, { duration: 0.1, })
                             damageBuff && (damageBuff.damageInfo = tDamageTable)
-                            modifier_shock.Shock(hTarget, hCaster, hAbility, hAbility.GetSpecialValueFor("shock_bonus"))
-                            modifier_stunned.apply(hTarget, hCaster, hAbility, { duration: stun_duration })
+                            modifier_generic_shock.Shock(hTarget, hCaster, hAbility, hAbility.GetSpecialValueFor("shock_bonus"))
+                            modifier_generic_stunned.apply(hTarget, hCaster, hAbility, { duration: stun_duration })
                         }
                     })
                     interval_add = interval_add + interval

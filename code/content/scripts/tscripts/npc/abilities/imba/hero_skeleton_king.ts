@@ -301,7 +301,7 @@ export class modifier_imba_wraithfire_blast_debuff extends BaseModifier_Plus {
                 return undefined;
             }
             let heal_amount = damage * this.attacker_lifesteal_pct * 0.01;
-            attacker.Heal(heal_amount, this.GetAbilityPlus());
+            attacker.ApplyHeal(heal_amount, this.GetAbilityPlus());
         }
     }
 }
@@ -520,7 +520,7 @@ export class modifier_imba_vampiric_aura_buff extends BaseModifier_Plus {
                     if (this.parent == this.caster) {
                         heal_amount = heal_amount * this.self_bonus;
                     }
-                    this.parent.Heal(heal_amount, this.GetAbilityPlus());
+                    this.parent.ApplyHeal(heal_amount, this.GetAbilityPlus());
                 } else {
                     if (!this.delay_particle_time || (GameRules.GetGameTime() - this.delay_particle_time > 1)) {
                         let particle_spellsteal_fx = ResHelper.CreateParticleEx(this.particle_spellsteal, ParticleAttachment_t.PATTACH_CUSTOMORIGIN_FOLLOW, attacker, this.caster);
@@ -536,7 +536,7 @@ export class modifier_imba_vampiric_aura_buff extends BaseModifier_Plus {
                     if (this.parent == this.caster) {
                         heal_amount = heal_amount * this.self_bonus;
                     }
-                    this.parent.Heal(heal_amount, this.GetAbilityPlus());
+                    this.parent.ApplyHeal(heal_amount, this.GetAbilityPlus());
                 }
                 this.AddTimer(this.heal_delay, () => {
                     let casters = FindUnitsInRadius(this.parent.GetTeamNumber(), this.parent.GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FindOrder.FIND_ANY_ORDER, false);
@@ -549,7 +549,7 @@ export class modifier_imba_vampiric_aura_buff extends BaseModifier_Plus {
                                 ParticleManager.ReleaseParticleIndex(particle_lifesteal_fx);
                                 if (caster.IsRealUnit()) {
                                     let caster_heal = heal_amount * this.caster_heal * 0.01;
-                                    caster.Heal(caster_heal, this.GetAbilityPlus());
+                                    caster.ApplyHeal(caster_heal, this.GetAbilityPlus());
                                 }
                             }
                         }
@@ -582,7 +582,7 @@ export class modifier_imba_vampiric_aura_buff extends BaseModifier_Plus {
                                 ParticleManager.ReleaseParticleIndex(particle_lifesteal_fx);
                                 if (caster.IsRealUnit()) {
                                     let caster_heal = heal_amount * this.caster.GetTalentValue("special_bonus_imba_skeleton_king_1") * 0.01;
-                                    caster.Heal(caster_heal, this.GetAbilityPlus());
+                                    caster.ApplyHeal(caster_heal, this.GetAbilityPlus());
                                 }
                             }
                         }

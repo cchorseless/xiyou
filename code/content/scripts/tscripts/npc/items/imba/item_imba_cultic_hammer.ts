@@ -201,7 +201,7 @@ export class modifier_item_imba_cultic_hammer_aura extends BaseModifier_Plus {
         });
         this.heal_particle = ResHelper.CreateParticleEx("particles/items3_fx/octarine_core_lifesteal.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetCasterPlus());
         ParticleManager.ReleaseParticleIndex(this.heal_particle);
-        this.GetCasterPlus().Heal(this.soul_drain_health_actual, this.GetItemPlus());
+        this.GetCasterPlus().ApplyHeal(this.soul_drain_health_actual, this.GetItemPlus());
         if (this.GetParentPlus().GetMaxMana && this.GetParentPlus().GetMaxMana() > 0) {
             this.GetParentPlus().ReduceMana(this.soul_drain_mana_actual);
             this.GetCasterPlus().GiveMana(this.soul_drain_mana_actual);

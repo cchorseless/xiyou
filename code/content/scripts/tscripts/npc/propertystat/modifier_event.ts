@@ -785,6 +785,8 @@ export enum Enum_MODIFIER_EVENT {
     ON_SPAWN_SUMMONNED,
     /**幻象出生 */
     ON_SPAWN_ILLUSION,
+    /**吸血 */
+    ON_HEAL_TYPE_LIFESTEAL,
     /**TODO */
     ON_QUALIFICATION_CHANGED,
     /**TODO */
@@ -803,4 +805,14 @@ export enum Enum_MODIFIER_EVENT {
     ON_ITEM_USE_FINISH,
 
     //#endregion
+}
+
+declare global {
+    var Gmodifier_event: typeof modifier_event;
+    var GEMODIFIER_EVENT: typeof Enum_MODIFIER_EVENT;
+}
+
+if (_G.Gmodifier_event == null) {
+    Gmodifier_event = modifier_event;
+    GEMODIFIER_EVENT = Enum_MODIFIER_EVENT;
 }

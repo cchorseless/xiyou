@@ -916,6 +916,7 @@ export module PropertyConfig {
         IGNORE_MAGICAL_ARMOR_PERCENTAGE_UNIQUE,
         CRITICALSTRIKE,
         CRITICALSTRIKE_CHANCE,
+        // 普攻暴击伤害
         CRITICALSTRIKE_DAMAGE,
         SPELL_AMPLIFY_BASE,
         SPELL_AMPLIFY_BONUS,

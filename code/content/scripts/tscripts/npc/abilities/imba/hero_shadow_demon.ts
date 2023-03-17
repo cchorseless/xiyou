@@ -496,7 +496,7 @@ export class modifier_imba_soul_catcher_buff extends BaseModifier_Plus {
             return;
         }
         this.AddTimer(FrameTime(), () => {
-            this.parent.Heal(this.allied_heal, this.GetAbilityPlus());
+            this.parent.ApplyHeal(this.allied_heal, this.GetAbilityPlus());
         });
     }
     /** DeclareFunctions():modifierfunction[] {
@@ -625,7 +625,7 @@ export class modifier_imba_soul_catcher_debuff extends BaseModifier_Plus {
         }
         if (!this.soul_taken) {
             let health_restore = this.health_stolen * this.health_returned_pct * 0.01;
-            this.parent.Heal(health_restore, this.GetAbilityPlus());
+            this.parent.ApplyHeal(health_restore, this.GetAbilityPlus());
         }
     }
 }
@@ -965,19 +965,19 @@ export class imba_shadow_demon_shadow_poison_release extends BaseAbility_Plus {
         let ability = this;
         let sound_cast = "Hero_ShadowDemon.ShadowPoison.Release";
         let ability_shadow_poison = "imba_shadow_demon_shadow_poison";
-        let modifier_poison = "modifier_shadow_poison_debuff";
+        let modifier_generic_poison = "modifier_shadow_poison_debuff";
         EmitSoundOn(sound_cast, caster);
         let enemies = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false);
         let debuffed_enemies: IBaseNpc_Plus[] = []
         let highest_stack = 0;
-        let modifier_poison_handle;
+        let modifier_generic_poison_handle;
         let stacks;
         for (const [_, enemy] of GameFunc.iPair(enemies)) {
-            if (enemy.HasModifier(modifier_poison)) {
-                modifier_poison_handle = enemy.FindModifierByName(modifier_poison);
-                if (modifier_poison_handle) {
+            if (enemy.HasModifier(modifier_generic_poison)) {
+                modifier_generic_poison_handle = enemy.FindModifierByName(modifier_generic_poison);
+                if (modifier_generic_poison_handle) {
                     debuffed_enemies.push(enemy);
-                    stacks = modifier_poison_handle.GetStackCount();
+                    stacks = modifier_generic_poison_handle.GetStackCount();
                     if (stacks > highest_stack) {
                         highest_stack = stacks;
                     }
@@ -985,18 +985,18 @@ export class imba_shadow_demon_shadow_poison_release extends BaseAbility_Plus {
             }
         }
         for (const [_, enemy] of GameFunc.iPair(debuffed_enemies)) {
-            modifier_poison_handle = enemy.FindModifierByName(modifier_poison) as modifier_shadow_poison_debuff;
-            if (modifier_poison_handle) {
-                modifier_poison_handle.highest_stack = highest_stack;
-                modifier_poison_handle.Destroy();
+            modifier_generic_poison_handle = enemy.FindModifierByName(modifier_generic_poison) as modifier_shadow_poison_debuff;
+            if (modifier_generic_poison_handle) {
+                modifier_generic_poison_handle.highest_stack = highest_stack;
+                modifier_generic_poison_handle.Destroy();
             }
         }
         let illusions = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
         for (const [_, illusion] of GameFunc.iPair(illusions)) {
-            if (illusion.IsIllusion() && illusion.HasModifier("modifier_imba_disruption_soul_illusion") && illusion.HasModifier(modifier_poison)) {
-                let modifier_poison_handle = illusion.FindModifierByName(modifier_poison);
-                if (modifier_poison_handle) {
-                    modifier_poison_handle.Destroy();
+            if (illusion.IsIllusion() && illusion.HasModifier("modifier_imba_disruption_soul_illusion") && illusion.HasModifier(modifier_generic_poison)) {
+                let modifier_generic_poison_handle = illusion.FindModifierByName(modifier_generic_poison);
+                if (modifier_generic_poison_handle) {
+                    modifier_generic_poison_handle.Destroy();
                 }
             }
         }
@@ -1096,7 +1096,7 @@ export class modifier_imba_demonic_purge_debuff extends BaseModifier_Plus {
     public particle_modifier: any;
     public particle_break: any;
     public modifier_slow_freeze: any;
-    public modifier_poison: any;
+    public modifier_generic_poison: any;
     public modifier_soul_catcher: any;
     public purge_damage: number;
     public max_slow: any;
@@ -1137,7 +1137,7 @@ export class modifier_imba_demonic_purge_debuff extends BaseModifier_Plus {
         this.particle_modifier = "particles/hero/shadow_demon/shadow_demon_demonic_purge.vpcf";
         this.particle_break = "particles/generic_gameplay/generic_break.vpcf";
         this.modifier_slow_freeze = "modifier_imba_demonic_purge_slow_freeze";
-        this.modifier_poison = "modifier_shadow_poison_debuff";
+        this.modifier_generic_poison = "modifier_shadow_poison_debuff";
         this.modifier_soul_catcher = "modifier_imba_soul_catcher_debuff";
         this.purge_damage = this.ability.GetSpecialValueFor("purge_damage") + this.caster.GetTalentValue("special_bonus_imba_shadow_demon_demonic_purge_damage");
         this.max_slow = this.ability.GetSpecialValueFor("max_slow");
@@ -1181,8 +1181,8 @@ export class modifier_imba_demonic_purge_debuff extends BaseModifier_Plus {
         if (IsServer()) {
             this.parent.Purge(true, false, false, false, false);
             if (!this.modifier_shadow_poison_handle) {
-                if (this.parent.HasModifier(this.modifier_poison)) {
-                    this.modifier_shadow_poison_handle = this.parent.FindModifierByName(this.modifier_poison);
+                if (this.parent.HasModifier(this.modifier_generic_poison)) {
+                    this.modifier_shadow_poison_handle = this.parent.FindModifierByName(this.modifier_generic_poison);
                 }
             }
             if (this.modifier_shadow_poison_handle && this.modifier_shadow_poison_handle.GetRemainingTime() > 0) {

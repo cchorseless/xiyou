@@ -4,7 +4,7 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_stunned } from "../../../modifier/effect/modifier_stunned";
+import { modifier_generic_stunned } from "../../../modifier/effect/modifier_generic_stunned";
 import { modifier_particle } from "../../../modifier/modifier_particle";
 
 
@@ -37,7 +37,7 @@ export class t10_stomp extends BaseAbility_Plus {
             // if (has_combination_t10_barbaric_stomp) {
             //     combination_t10_barbaric_stomp.BarbaricStomp(target)
             // }
-            modifier_stunned.apply(target, caster, this, { duration: stun_duration * target.GetStatusResistanceFactor(caster) })
+            modifier_generic_stunned.apply(target, caster, this, { duration: stun_duration * target.GetStatusResistanceFactor(caster) })
         }
     }
 

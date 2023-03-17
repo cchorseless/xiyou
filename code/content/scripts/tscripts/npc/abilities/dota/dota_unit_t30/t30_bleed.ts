@@ -2,7 +2,7 @@ import { BattleHelper } from "../../../../helper/BattleHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_bleeding } from "../../../modifier/effect/modifier_bleeding";
+import { modifier_generic_bleeding } from "../../../modifier/effect/modifier_generic_bleeding";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 
 
@@ -52,7 +52,7 @@ export class modifier_t30_bleed extends BaseModifier_Plus {
                 if (GFuncMath.PRD(this.bleed_chance, params.attacker, "t30_bleed")) {
                     let hCaster = params.attacker as IBaseNpc_Plus
                     let hTarget = params.target
-                    modifier_bleeding.Bleeding(hTarget, hCaster, this.GetAbilityPlus(), this.bleed_duration, (tDamageTable) => {
+                    modifier_generic_bleeding.Bleeding(hTarget, hCaster, this.GetAbilityPlus(), this.bleed_duration, (tDamageTable) => {
                         return hCaster.GetStrength() * this.bleed_damage_per_str
                     })
                 }

@@ -908,14 +908,12 @@ export class modifier_imba_mass_serpent_ward extends BaseModifier_Plus {
         if (keys.attacker == this.GetParentPlus() && keys.attacker != keys.unit && this.GetAbilityPlus() && !keys.unit.IsOther() && keys.unit.GetUnitName() != "npc_dota_unit_undying_zombie") {
             if (!keys.unit.IsRealUnit() && !keys.unit.IsBuilding()) {
                 this.GetParentPlus().SetMaxHealth(this.GetParentPlus().GetMaxHealth() + this.snake_charmer_creep_count);
-                this.GetParentPlus().Heal(this.snake_charmer_creep_count, this.GetAbilityPlus());
+                this.GetParentPlus().ApplyHeal(this.snake_charmer_creep_count, this.GetAbilityPlus());
                 this.GetParentPlus().SetBaseAttackTime(this.GetParentPlus().GetBaseAttackTime() * (1 - (this.snake_charmer_creep_bat_reduction_pct * 0.01)));
-                SendOverheadEventMessage(this.GetParentPlus().GetPlayerOwner(), DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, this.GetParentPlus(), this.snake_charmer_creep_count, undefined);
             } else {
                 this.GetParentPlus().SetMaxHealth(this.GetParentPlus().GetMaxHealth() + this.snake_charmer_hero_count);
-                this.GetParentPlus().Heal(this.snake_charmer_hero_count, this.GetAbilityPlus());
+                this.GetParentPlus().ApplyHeal(this.snake_charmer_hero_count, this.GetAbilityPlus());
                 this.GetParentPlus().SetBaseAttackTime(this.GetParentPlus().GetBaseAttackTime() * (1 - (this.snake_charmer_hero_bat_reduction_pct * 0.01)));
-                SendOverheadEventMessage(this.GetParentPlus().GetPlayerOwner(), DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, this.GetParentPlus(), this.snake_charmer_hero_count, undefined);
             }
             this.GetParentPlus().SetModel("models/items/shadowshaman/serpent_ward/dotapit_s3_wild_tempest_wards/dotapit_s3_wild_tempest_wards.vmdl");
             this.GetParentPlus().SetModelScale(1.3);

@@ -114,9 +114,9 @@ export class modifier_imba_octarine_core_basic extends BaseModifier_Plus {
                     }
                 }
                 if (keys.unit.IsCreep()) {
-                    keys.attacker.Heal(math.max(keys.damage, 0) * this.GetItemPlus().GetSpecialValueFor("creep_lifesteal") * 0.01, keys.inflictor);
+                    keys.attacker.ApplyHeal(math.max(keys.damage, 0) * this.GetItemPlus().GetSpecialValueFor("creep_lifesteal") * 0.01, keys.inflictor);
                 } else {
-                    keys.attacker.Heal(math.max(keys.damage, 0) * this.GetItemPlus().GetSpecialValueFor("hero_lifesteal") * 0.01, keys.inflictor);
+                    keys.attacker.ApplyHeal(math.max(keys.damage, 0) * this.GetItemPlus().GetSpecialValueFor("hero_lifesteal") * 0.01, keys.inflictor);
                 }
             }
         }

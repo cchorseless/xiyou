@@ -239,7 +239,7 @@ export class modifier_imba_undying_decay_buff extends BaseModifier_Plus {
             } else {
                 this.strength_gain = this.str_steal;
             }
-            this.GetCasterPlus().Heal(this.strength_gain * this.hp_gain_per_str, this.GetAbilityPlus());
+            this.GetCasterPlus().ApplyHeal(this.strength_gain * this.hp_gain_per_str, this.GetAbilityPlus());
             this.ForceRefresh();
             // this.GetParentPlus().CalculateStatBonus(true);
         }
@@ -472,8 +472,7 @@ export class imba_undying_soul_rip extends BaseAbility_Plus {
                 // }
             } else if (target.GetTeamNumber() == caster.GetTeamNumber() && !IsUndyingTombstone(target)) {
                 target.EmitSound("Hero_Undying.SoulRip.Ally");
-                target.Heal(damage_per_unit * units_ripped, this);
-                SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, target, damage_per_unit * units_ripped, undefined);
+                target.ApplyHeal(damage_per_unit * units_ripped, this);
                 if (!target.HasModifier(modifier_injection_buff)) {
                     let injection_modifier = target.AddNewModifier(caster, ability, modifier_injection_buff, {
                         duration: soul_injection_duration
@@ -490,8 +489,7 @@ export class imba_undying_soul_rip extends BaseAbility_Plus {
                 // }
             } else if (target.GetTeamNumber() == caster.GetTeamNumber() && IsUndyingTombstone(target)) {
                 target.EmitSound("Hero_Undying.SoulRip.Ally");
-                target.Heal(tombstone_heal, this);
-                SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, target, tombstone_heal, undefined);
+                target.ApplyHeal(tombstone_heal, this);
             }
         }
     }
@@ -1549,11 +1547,9 @@ export class modifier_imba_undying_flesh_golem_plague_aura extends BaseModifier_
             ParticleManager.SetParticleControlEnt(heal_particle, 1, keys.unit, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", keys.unit.GetAbsOrigin(), true);
             ParticleManager.ReleaseParticleIndex(heal_particle);
             if (keys.unit.IsRealUnit()) {
-                this.GetCasterPlus().Heal(this.GetCasterPlus().GetMaxHealth() * this.remnants_max_health_heal_pct_hero * 0.01, this.GetAbilityPlus());
-                SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, this.GetCasterPlus(), this.GetCasterPlus().GetMaxHealth() * this.remnants_max_health_heal_pct_hero * 0.01, undefined);
+                this.GetCasterPlus().ApplyHeal(this.GetCasterPlus().GetMaxHealth() * this.remnants_max_health_heal_pct_hero * 0.01, this.GetAbilityPlus());
             } else {
-                this.GetCasterPlus().Heal(this.GetCasterPlus().GetMaxHealth() * this.remnants_max_health_heal_pct_non_hero * 0.01, this.GetAbilityPlus());
-                SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, this.GetCasterPlus(), this.GetCasterPlus().GetMaxHealth() * this.remnants_max_health_heal_pct_non_hero * 0.01, undefined);
+                this.GetCasterPlus().ApplyHeal(this.GetCasterPlus().GetMaxHealth() * this.remnants_max_health_heal_pct_non_hero * 0.01, this.GetAbilityPlus());
             }
         }
     }

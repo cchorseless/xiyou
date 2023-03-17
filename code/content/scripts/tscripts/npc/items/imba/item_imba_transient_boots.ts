@@ -159,7 +159,7 @@ export class modifier_item_imba_transient_boots_invis extends BaseModifier_Plus 
             return;
         }
         let present_mod = false;
-        for (const [_, modifier] of GameFunc.iPair(this.parent.FindAllModifiersByName("modifier_invisible"))) {
+        for (const [_, modifier] of GameFunc.iPair(this.parent.FindAllModifiersByName("modifier_generic_invisible"))) {
             if (modifier.GetItemPlus() == this.ability) {
                 present_mod = true;
                 return;
@@ -168,7 +168,7 @@ export class modifier_item_imba_transient_boots_invis extends BaseModifier_Plus 
         if (!present_mod) {
             this.counter = this.counter + FrameTime();
             if (this.counter >= this.fade_delay) {
-                this.parent.AddNewModifier(this.caster, this.ability, "modifier_invisible", {
+                this.parent.AddNewModifier(this.caster, this.ability, "modifier_generic_invisible", {
                     duration: this.GetRemainingTime(),
                     cancelattack: false
                 });
@@ -189,19 +189,19 @@ export class modifier_item_imba_transient_boots_invis extends BaseModifier_Plus 
     } */
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_RESISTANCE_BONUS)
     CC_GetModifierMagicalResistanceBonus(p_0: ModifierAttackEvent,): number {
-        if (this.parent.HasModifier("modifier_invisible")) {
+        if (this.parent.HasModifier("modifier_generic_invisible")) {
             return this.active_magical_armor;
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_UNIQUE)
     CC_GetModifierMoveSpeedBonus_Special_Boots(): number {
-        if (!this.caster.HasModifier("modifier_item_imba_transient_boots_break") && this.caster != this.parent && this.parent.HasModifier("modifier_invisible")) {
+        if (!this.caster.HasModifier("modifier_item_imba_transient_boots_break") && this.caster != this.parent && this.parent.HasModifier("modifier_generic_invisible")) {
             return this.bonus_movement_speed;
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_REGEN_CONSTANT)
     CC_GetModifierConstantHealthRegen(): number {
-        if (!this.caster.HasModifier("modifier_item_imba_transient_boots_break") && this.caster != this.parent && this.parent.HasModifier("modifier_invisible")) {
+        if (!this.caster.HasModifier("modifier_item_imba_transient_boots_break") && this.caster != this.parent && this.parent.HasModifier("modifier_generic_invisible")) {
             return this.bonus_health_regen;
         }
     }

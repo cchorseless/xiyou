@@ -21,7 +21,7 @@
 //     let stick_pfx = ResHelper.CreateParticleEx(particle_cast, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, caster);
 //     ParticleManager.SetParticleControl(stick_pfx, 0, caster.GetAbsOrigin());
 //     ParticleManager.SetParticleControl(stick_pfx, 1, Vector(10, 0, 0));
-//     caster.Heal(current_charges * restore_per_charge, ability);
+//     caster.ApplyHeal(current_charges * restore_per_charge, ability);
 //     caster.GiveMana(current_charges * restore_per_charge);
 //     ability.SetCurrentCharges(0);
 // }

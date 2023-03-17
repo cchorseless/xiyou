@@ -7,7 +7,7 @@ import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_
 
 /**触电 */
 @registerModifier()
-export class modifier_shock extends BaseModifier_Plus {
+export class modifier_generic_shock extends BaseModifier_Plus {
     GetTexture() {
         return "harpy_storm_chain_lightning"
     }
@@ -60,7 +60,7 @@ export class modifier_shock extends BaseModifier_Plus {
     Init(params: IModifierTable) {
         if (IsServer()) {
             let iShockStack = params.iShockStack;
-            let duration = params.duration || modifier_shock.SHOCK_DURATION;
+            let duration = params.duration || modifier_generic_shock.SHOCK_DURATION;
             GTimerHelper.AddTimer(duration, GHandler.create(this, () => {
                 this.ChangeStackCount(-iShockStack);
             }))
@@ -82,7 +82,7 @@ export class modifier_shock extends BaseModifier_Plus {
         let hAttacker = params.attacker
         let hAbility = params.inflictor as IBaseAbility_Plus;
         if (GFuncEntity.IsValid(hAttacker) && !this.IsCooldown) {
-            modifier_shock.ShockActive(this.GetParentPlus(), hAttacker, hAbility, 100, false)
+            modifier_generic_shock.ShockActive(this.GetParentPlus(), hAttacker, hAbility, 100, false)
         }
     }
     /**
@@ -98,16 +98,16 @@ export class modifier_shock extends BaseModifier_Plus {
             let inpect = GPropertyCalculate.SumProps(target, null, GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_SHOCK_COUNT_PERCENTAGE);
             iCount = math.floor(iCount * (1 + outpect * 0.01) * (1 + inpect * 0.01))
         }
-        let iShockStack = math.min(iCount, modifier_shock.MAX_SHOCK_STACK)	//  触电层数
-        let hShockModifier = modifier_shock.findIn(target);
+        let iShockStack = math.min(iCount, modifier_generic_shock.MAX_SHOCK_STACK)	//  触电层数
+        let hShockModifier = modifier_generic_shock.findIn(target);
         if (GFuncEntity.IsValid(hShockModifier)) {
             let iStack = hShockModifier.GetStackCount()
-            let iTargetStack = modifier_shock.MAX_SHOCK_STACK - iStack
+            let iTargetStack = modifier_generic_shock.MAX_SHOCK_STACK - iStack
             iShockStack = iTargetStack > iShockStack && iShockStack || iTargetStack
         }
         if (iShockStack <= 1) { iShockStack = 1 }
-        modifier_shock.apply(target, hCaster, hAbility, {
-            duration: modifier_shock.SHOCK_DURATION,
+        modifier_generic_shock.apply(target, hCaster, hAbility, {
+            duration: modifier_generic_shock.SHOCK_DURATION,
             iShockStack: iShockStack
         })
     }
@@ -119,7 +119,7 @@ export class modifier_shock extends BaseModifier_Plus {
         if (!GFuncEntity.IsValid(hCaster)) {
             return
         }
-        let m_shock = modifier_shock.findIn(target);
+        let m_shock = modifier_generic_shock.findIn(target);
         if (!GFuncEntity.IsValid(m_shock)) {
             return
         }
@@ -149,7 +149,7 @@ export class modifier_shock extends BaseModifier_Plus {
         }
     }
 
-    StartCooldown(fCooldown: number = modifier_shock.SHOCK_COOLDOWN) {
+    StartCooldown(fCooldown: number = modifier_generic_shock.SHOCK_COOLDOWN) {
         this.IsCooldown = true;
         GTimerHelper.AddTimer(fCooldown, GHandler.create(this, () => {
             this.IsCooldown = false;

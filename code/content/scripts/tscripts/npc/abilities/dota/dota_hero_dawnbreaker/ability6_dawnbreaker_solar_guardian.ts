@@ -5,7 +5,7 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_stunned } from "../../../modifier/effect/modifier_stunned";
+import { modifier_generic_stunned } from "../../../modifier/effect/modifier_generic_stunned";
 
 /** dota原技能数据 */
 export const Data_dawnbreaker_solar_guardian = { "ID": "7906", "AbilityType": "DOTA_ABILITY_TYPE_ULTIMATE", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_CHANNELLED", "AbilityUnitTargetTeam": "DOTA_UNIT_TARGET_TEAM_FRIENDLY", "AbilityUnitTargetType": "DOTA_UNIT_TARGET_HERO", "AbilityUnitDamageType": "DAMAGE_TYPE_MAGICAL", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_NO", "FightRecapLevel": "1", "AbilityCastRange": "0", "AbilityCastPoint": "0.1 0.1 0.1 0.1", "AbilityChannelTime": "1.7", "AbilityCooldown": "120 110 100", "AbilityManaCost": "150 200 250", "AbilityModifierSupportValue": "0.25", "AbilitySpecial": { "01": { "var_type": "FIELD_FLOAT", "airtime_duration": "0.8" }, "02": { "var_type": "FIELD_INTEGER", "radius": "500" }, "03": { "var_type": "FIELD_INTEGER", "base_damage": "30 50 70" }, "04": { "var_type": "FIELD_INTEGER", "base_heal": "45 70 95" }, "05": { "var_type": "FIELD_FLOAT", "pulse_interval": "0.5" }, "06": { "var_type": "FIELD_INTEGER", "land_damage": "130 160 190" }, "07": { "var_type": "FIELD_FLOAT", "land_stun_duration": "1.5 1.75 2" }, "08": { "var_type": "FIELD_INTEGER", "max_offset_distance": "350" } }, "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_4" };
@@ -269,7 +269,7 @@ export class modifier_dawnbreaker_6_buff extends BaseModifier_Plus {
             let damage = hParent.GetMaxHealth() * this.boom_damage_pct * 0.01
             for (let hTarget of (tTargets)) {
                 //  造成眩晕
-                modifier_stunned.apply(hTarget, hParent, hAbility, { duration: this.dizziness_time * hTarget.GetStatusResistanceFactor(hParent) })
+                modifier_generic_stunned.apply(hTarget, hParent, hAbility, { duration: this.dizziness_time * hTarget.GetStatusResistanceFactor(hParent) })
                 //  造成伤害
                 let tDamageTable = {
                     ability: hAbility,

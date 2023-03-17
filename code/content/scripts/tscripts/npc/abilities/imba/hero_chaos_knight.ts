@@ -1,15 +1,125 @@
 
 import { GameFunc } from "../../../GameFunc";
 import { AnimationHelper } from "../../../helper/AnimationHelper";
+import { AoiHelper } from "../../../helper/AoiHelper";
 import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 
 
 @registerAbility()
-export class imba_chaos_knight_chaos_bolt extends BaseAbility_Plus { }
+export class imba_chaos_knight_chaos_bolt extends BaseAbility_Plus {
+    IsStealable(): boolean {
+        return true;
+    }
+    IsHiddenWhenStolen(): boolean {
+        return false;
+    }
+    OnSpellStart(): void {
+        let target = this.GetCursorTarget();
+        let caster = this.GetCasterPlus();
+        this.ThrowChaosBolt(target);
+        if (caster.HasTalent("special_bonus_imba_unique_chaos_knight_chaos_bolt_2") && GFuncRandom.PRD(this.GetSpecialValueFor("special_bonus_unique_chaos_knight_chaos_bolt_2"), this)) {
+            let randomTarget = AoiHelper.FindOneUnitsInRadius(caster.GetTeam(), caster.GetAbsOrigin(), this.GetCastRangePlus()) || target;
+            this.AddTimer(this.GetCastPoint(), () => {
+                this.ThrowChaosBolt(randomTarget);
+            });
+        }
+    }
+    ThrowChaosBolt(target: IBaseNpc_Plus, origin: IBaseNpc_Plus = null) {
+        let source = origin || this.GetCasterPlus();
+        let projectile = {
+            Target: target || this.GetCursorTarget(),
+            Source: source,
+            Ability: this,
+            vSourceLoc: source.GetAbsOrigin(),
+            EffectName: "particles/units/heroes/hero_chaos_knight/chaos_knight_chaos_bolt.vpcf",
+            bDodgable: true,
+            bProvidesVision: false,
+            iMoveSpeed: this.GetSpecialValueFor("chaos_bolt_speed"),
+            iSourceAttachment: DOTAProjectileAttachment_t.DOTA_PROJECTILE_ATTACHMENT_ATTACK_1
+        }
+        ProjectileManager.CreateTrackingProjectile(projectile);
+        EmitSoundOn("Hero_ChaosKnight.ChaosBolt.Cast", this.GetCasterPlus());
+    }
+    OnProjectileHit(target: IBaseNpc_Plus, position: Vector) {
+        let caster = this.GetCasterPlus();
+        if (target.TriggerSpellAbsorb(this)) {
+            return;
+        }
+        let target_location = target.GetAbsOrigin();
+        EmitSoundOn("Hero_ChaosKnight.ChaosBolt.Impact", target);
+        let stun_min = this.GetSpecialValueFor("stun_min");
+        let stun_max = this.GetSpecialValueFor("stun_max");
+        let damage_min = this.GetSpecialValueFor("damage_min");
+        let damage_max = this.GetSpecialValueFor("damage_max");
+        let chaos_bolt_particle = "particles/units/heroes/hero_chaos_knight/chaos_knight_bolt_msg.vpcf";
+        let random = RandomFloat(0, 1);
+        let stun = stun_min + (stun_max - stun_min) * random;
+        let damage = damage_min + (damage_max - damage_min) * (1 - random);
+        let stun_digits = string.len(tostring(math.floor(stun))) + 1;
+        let damage_digits = string.len(tostring(math.floor(damage))) + 1;
+        let particle = ResHelper.CreateParticleEx(chaos_bolt_particle, ParticleAttachment_t.PATTACH_OVERHEAD_FOLLOW, target);
+        ParticleManager.SetParticleControl(particle, 0, target_location);
+        ParticleManager.SetParticleControl(particle, 1, Vector(9, math.floor(damage + 0.5), 4));
+        ParticleManager.SetParticleControl(particle, 2, Vector(2, damage_digits, 0));
+        ParticleManager.SetParticleControl(particle, 3, Vector(8, math.floor(stun + 0.5), 0));
+        ParticleManager.SetParticleControl(particle, 4, Vector(2, 1, 0));
+        ParticleManager.ReleaseParticleIndex(particle);
+        target.AddNewModifier(caster, this, "modifier_generic_stunned", {
+            duration: stun
+        });
+        damage = ApplyDamage({
+            victim: target,
+            attacker: caster,
+            damage: damage,
+            damage_type: this.GetAbilityDamageType(),
+            ability: this
+        });
+        if (caster.HasTalent("special_bonus_imba_unique_chaos_knight_chaos_bolt_1")) {
+            let buff = caster.AddNewModifier(caster, this, "modifier_chaos_knight_chaos_bolt_talent", {
+                duration: caster.GetTalentValue("special_bonus_imba_unique_chaos_knight_chaos_bolt_1", "duration")
+            });
+            buff.IncrementStackCount(math.floor(damage * caster.GetTalentValue("special_bonus_imba_unique_chaos_knight_chaos_bolt_1") / 100));
+        }
+        if (GFuncRandom.PRD(this.GetSpecialValueFor("bounce_chance"), this)) {
+            this.AddTimer(0.25, () => {
+                let units = FindUnitsInRadius(caster.GetTeamNumber(), target.GetAbsOrigin(), undefined, this.GetCastRange(target.GetAbsOrigin(), target), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, 0, 0, false);
+                if (GameFunc.GetCount(units) > 0) {
+                    for (const [_, unit] of ipairs(units)) {
+                        let projectile = {
+                            Target: unit,
+                            Source: target,
+                            Ability: this,
+                            EffectName: "particles/units/heroes/hero_chaos_knight/chaos_knight_chaos_bolt.vpcf",
+                            bDodgable: true,
+                            bProvidesVision: false,
+                            iMoveSpeed: this.GetSpecialValueFor("chaos_bolt_speed"),
+                            iSourceAttachment: DOTAProjectileAttachment_t.DOTA_PROJECTILE_ATTACHMENT_ATTACK_1
+                        }
+                        ProjectileManager.CreateTrackingProjectile(projectile);
+                        return;
+                    }
+                }
+            });
+        }
+    }
+}
+@registerModifier()
+export class modifier_chaos_knight_chaos_bolt_talent extends BaseModifier_Plus {
+    /** DeclareFunctions():modifierfunction[] {
+        return Object.values({
+            1: GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BONUS
+        });
+    } */
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BONUS)
+    CC_GetModifierBonusStats_Strength(): number {
+        return this.GetStackCount();
+    }
+}
 
 
 @registerAbility()
@@ -156,7 +266,119 @@ export class modifier_reality_rift_armor_reduction_debuff extends BaseModifier_P
 }
 
 @registerAbility()
-export class imba_chaos_knight_chaos_strike extends BaseAbility_Plus { }
+export class imba_chaos_knight_chaos_strike extends BaseAbility_Plus {
+    GetIntrinsicModifierName(): string {
+        return "modifier_imba_chaos_knight_chaos_strike";
+    }
+    GetAbilityTextureName(): string {
+        if (this.GetCasterPlus().HasModifier("modifier_imba_chaos_knight_chaos_strike_actCrit")) {
+            return "custom/chaos_knight_chaos_strike_active";
+        } else {
+            return "chaos_knight_chaos_strike";
+        }
+    }
+}
+@registerModifier()
+export class modifier_imba_chaos_knight_chaos_strike_actCrit extends BaseModifier_Plus {
+    public crit: boolean;
+    /** DeclareFunctions():modifierfunction[] {
+        return Object.values({
+            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_CRITICALSTRIKE,
+            2: Enum_MODIFIER_EVENT.ON_TAKEDAMAGE,
+            3: Enum_MODIFIER_EVENT.ON_ATTACK_LANDED
+        });
+    } */
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_CRITICALSTRIKE)
+    CC_GetModifierPreAttack_CriticalStrike(params: ModifierAttackEvent): number {
+        let parent = this.GetParentPlus();
+        EmitSoundOn("Hero_ChaosKnight.ChaosStrike", parent);
+        let p = ResHelper.CreateParticleEx("particles/units/heroes/hero_chaos_knight/chaos_knight_weapon_blur_critical.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, parent);
+        ParticleManager.ReleaseParticleIndex(p);
+        this.crit = true;
+        return this.GetSpecialValueFor("crit_damage");
+    }
+    @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
+    CC_OnAttackLanded(params: ModifierAttackEvent): void {
+        if (params.attacker == this.GetParentPlus() && this.crit) {
+            if (params.attacker.HasTalent("special_bonus_unique_chaos_knight_chaos_strike_1") && !params.attacker.PassivesDisabled()) {
+                let damage = params.original_damage * params.attacker.GetTalentValue("special_bonus_unique_chaos_knight_chaos_strike_1") / 100;
+                DoCleaveAttack(params.attacker, params.target, this.GetAbilityPlus(), damage, 150, 330, 625, "particles/items_fx/battlefury_cleave.vpcf");
+            }
+        }
+    }
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    CC_OnTakeDamage(params: ModifierInstanceEvent): void {
+        if (params.attacker == this.GetParentPlus() && !params.inflictor) {
+            this.GetParentPlus().Lifesteal(this.GetAbilityPlus(), this.GetSpecialValueFor("lifesteal"), params.damage, params.unit);
+            this.Destroy();
+        }
+    }
+}
+@registerModifier()
+export class modifier_imba_chaos_knight_chaos_strike extends BaseModifier_Plus {
+    public crit_min: number;
+    public crit_max: number;
+    public crit_chance: number;
+    public talent: boolean;
+    public on_crit: boolean;
+
+    Init(p_0: any,): void {
+        this.crit_min = this.GetSpecialValueFor("crit_min");
+        this.crit_max = this.GetSpecialValueFor("crit_max");
+        this.crit_chance = this.GetSpecialValueFor("crit_chance");
+        this.talent = this.GetParentPlus().HasTalent("special_bonus_unique_chaos_knight_chaos_strike_1") == null;
+    }
+
+    /** DeclareFunctions():modifierfunction[] {
+        return Object.values({
+            1: Enum_MODIFIER_EVENT.ON_TAKEDAMAGE,
+            2: Enum_MODIFIER_EVENT.ON_ATTACK_LANDED
+        });
+    } */
+
+
+    @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
+    CC_OnAttackLanded(params: ModifierAttackEvent): void {
+        let parent = this.GetParentPlus();
+        let ability = this.GetAbilityPlus();
+        if (!params.attacker.PassivesDisabled() && ability.IsCooldownReady() && GFuncRandom.PRD(this.crit_chance, this) && !this.GetParentPlus().HasModifier("modifier_imba_chaos_knight_chaos_strike_actCrit")) {
+            this.on_crit = true;
+            EmitSoundOn("Hero_ChaosKnight.ChaosStrike", parent);
+            let p = ResHelper.CreateParticleEx("particles/units/heroes/hero_chaos_knight/chaos_knight_weapon_blur_critical.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, parent);
+            ParticleManager.ReleaseParticleIndex(p);
+        } else {
+            this.on_crit = false;
+        }
+        if (this.on_crit) {
+            let crit = RandomInt(this.crit_min, this.crit_max);
+            ability.UseResources(true, false, true)
+            // 造成伤害
+            let damage = crit / 100 * parent.GetAttackDamage()
+            let tDamageTable = {
+                ability: ability,
+                victim: params.target,
+                attacker: parent,
+                damage: damage,
+                damage_type: DAMAGE_TYPES.DAMAGE_TYPE_PHYSICAL,
+            }
+            ApplyDamage(tDamageTable)
+            if (this.talent) {
+                let damage = params.original_damage * params.attacker.GetTalentValue("special_bonus_unique_chaos_knight_chaos_strike_1") / 100;
+                DoCleaveAttack(params.attacker, params.target, this.GetAbilityPlus(), damage, 150, 330, 625, "particles/items_fx/battlefury_cleave.vpcf");
+            }
+        }
+    }
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    CC_OnTakeDamage(params: ModifierInstanceEvent): void {
+        if (this.on_crit && params.attacker == this.GetParentPlus() && !params.inflictor) {
+            this.GetParentPlus().Lifesteal(this.GetAbilityPlus(), this.GetSpecialValueFor("lifesteal"), params.damage, params.unit);
+            this.on_crit = false;
+        }
+    }
+    IsHidden(): boolean {
+        return true;
+    }
+}
 
 @registerAbility()
 export class imba_chaos_knight_phantasm extends BaseAbility_Plus {
@@ -277,3 +499,4 @@ export class modifier_imba_chaos_knight_phantasm_illusion extends BaseModifier_P
         return this.magic_resistance;
     }
 }
+

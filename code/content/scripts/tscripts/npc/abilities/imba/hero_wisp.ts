@@ -185,7 +185,6 @@ export class modifier_imba_wisp_tether extends BaseModifier_Plus {
         }
         this.update_timer = this.update_timer + FrameTime();
         if (this.update_timer > this.time_to_send) {
-            SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, this.target, this.total_gained_health * this.tether_heal_amp, undefined);
             SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_MANA_ADD, this.target, this.total_gained_mana * this.tether_heal_amp, undefined);
             this.total_gained_mana = 0;
             this.total_gained_health = 0;
@@ -217,7 +216,7 @@ export class modifier_imba_wisp_tether extends BaseModifier_Plus {
     @registerEvent(Enum_MODIFIER_EVENT.ON_HEAL_RECEIVED)
     CC_OnHealReceived(keys: ModifierHealEvent): void {
         if (keys.unit == this.GetParentPlus()) {
-            this.target.Heal(keys.gain * this.tether_heal_amp, this.GetAbilityPlus());
+            this.target.ApplyHeal(keys.gain * this.tether_heal_amp, this.GetAbilityPlus());
             this.total_gained_health = this.total_gained_health + keys.gain;
         }
     }
@@ -413,7 +412,7 @@ export class modifier_imba_wisp_tether_latch extends BaseModifier_Plus {
     }
     OnIntervalThink(): void {
         if (IsServer()) {
-            if (this.GetParentPlus().IsStunned() || this.GetParentPlus().IsHexed() || this.GetParentPlus().IsOutOfGame() || (this.GetParentPlus().IsFeared && this.GetParentPlus().IsFeared()) || (this.GetParentPlus().IsHypnotized && this.GetParentPlus().IsHypnotized()) || this.GetParentPlus().IsRooted()) {
+            if (this.GetParentPlus().IsStunned() || this.GetParentPlus().IsHexed() || this.GetParentPlus().IsOutOfGame() || (this.GetParentPlus().IsFeared && this.GetParentPlus().IsFeared()) || this.GetParentPlus().IsSleeped() || this.GetParentPlus().IsRooted()) {
                 this.StartIntervalThink(-1);
                 this.Destroy();
                 return;

@@ -3,7 +3,7 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_stunned } from "../../../modifier/effect/modifier_stunned";
+import { modifier_generic_stunned } from "../../../modifier/effect/modifier_generic_stunned";
 
 /** dota原技能数据 */
 export const Data_dawnbreaker_fire_wreath = { "ID": "7902", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_CAN_SELF_CAST | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_MOVEMENT | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES", "AbilityUnitTargetTeam": "DOTA_UNIT_TARGET_TEAM_ENEMY", "AbilityUnitTargetType": "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC", "AbilityUnitDamageType": "DAMAGE_TYPE_PHYSICAL", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_YES", "FightRecapLevel": "1", "AbilityCastPoint": "0.2", "AbilityCooldown": "17 15 13 11", "AbilityManaCost": "80", "AbilitySpecial": { "10": { "var_type": "FIELD_FLOAT", "sweep_stun_duration": "0.12" }, "11": { "var_type": "FIELD_FLOAT", "self_stun_duration": "0.2" }, "12": { "var_type": "FIELD_INTEGER", "swipe_slow": "-100" }, "13": { "var_type": "FIELD_INTEGER", "smash_distance_from_hero": "120" }, "14": { "var_type": "FIELD_FLOAT", "animation_rate": "0" }, "15": { "var_type": "FIELD_FLOAT", "turn_rate": "90" }, "01": { "var_type": "FIELD_FLOAT", "duration": "1.1" }, "02": { "var_type": "FIELD_INTEGER", "swipe_radius": "360" }, "03": { "var_type": "FIELD_INTEGER", "swipe_damage": "25 35 45 55" }, "04": { "var_type": "FIELD_INTEGER", "smash_radius": "250" }, "05": { "var_type": "FIELD_INTEGER", "smash_damage": "40 65 90 115" }, "07": { "var_type": "FIELD_INTEGER", "movement_speed": "215" }, "08": { "var_type": "FIELD_INTEGER", "total_attacks": "3" }, "09": { "var_type": "FIELD_FLOAT", "smash_stun_duration": "0.8 1.0 1.2 1.4" } } };
@@ -142,7 +142,7 @@ export class modifier_dawnbreaker_1 extends BaseModifier_Plus {
                             for (let i = 0; i < len; i++) {
                                 let hTarget = _tTargets[i];
                                 // { duration = this.smash_stun_duration * hTarget.GetStatusResistanceFactor(caster) }
-                                modifier_stunned.apply(hTarget, this.GetCasterPlus(), this.GetAbilityPlus(), { duration: this.smash_stun_duration });
+                                modifier_generic_stunned.apply(hTarget, this.GetCasterPlus(), this.GetAbilityPlus(), { duration: this.smash_stun_duration });
                                 if (i == 0) {
                                     // 进行一次普攻
                                     iAttackState = BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_SKIPCOOLDOWN;

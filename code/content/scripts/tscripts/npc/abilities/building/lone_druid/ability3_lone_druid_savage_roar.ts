@@ -4,7 +4,7 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_feared } from "../../../modifier/effect/modifier_feared";
+import { modifier_generic_feared } from "../../../modifier/effect/modifier_generic_feared";
 import { modifier_particle } from "../../../modifier/modifier_particle";
 /** dota原技能数据 */
 export const Data_lone_druid_savage_roar = { "ID": "5414", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_NO_TARGET", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_NO", "SpellDispellableType": "SPELL_DISPELLABLE_YES", "AbilitySound": "Hero_LoneDruid.SavageRoar.Cast", "HasShardUpgrade": "1", "AbilityCastPoint": "0.1", "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_3", "AbilityCooldown": "38 32 26 20", "AbilityManaCost": "50", "AbilitySpecial": { "01": { "var_type": "FIELD_INTEGER", "radius": "375" }, "02": { "var_type": "FIELD_INTEGER", "bonus_speed": "20" }, "03": { "var_type": "FIELD_FLOAT", "duration": "1.4 1.8 2.2 2.6" }, "04": { "var_type": "FIELD_INTEGER", "only_affects_player_units": "1" } } };
@@ -58,7 +58,7 @@ export class ability3_lone_druid_savage_roar extends BaseAbility_Plus {
         for (let hTarget of (tTarget)) {
 
             if (GFuncEntity.IsValid(hTarget) && hTarget.IsAlive()) {
-                modifier_feared.apply(hTarget, hCaster, this, { duration: duration * hTarget.GetStatusResistanceFactor(hCaster) })
+                modifier_generic_feared.apply(hTarget, hCaster, this, { duration: duration * hTarget.GetStatusResistanceFactor(hCaster) })
                 modifier_lone_druid_3_debuff.apply(hTarget, hCaster, this, { duration: duration * hTarget.GetStatusResistanceFactor(hCaster) })
             }
         }

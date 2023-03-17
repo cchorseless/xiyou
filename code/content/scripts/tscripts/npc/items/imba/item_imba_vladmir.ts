@@ -149,12 +149,12 @@ export class modifier_item_imba_vladmir_aura extends BaseModifier_Plus {
                 this.lifesteal_pfx = ResHelper.CreateParticleEx("particles/items3_fx/octarine_core_lifesteal.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, keys.attacker);
                 ParticleManager.SetParticleControl(this.lifesteal_pfx, 0, keys.attacker.GetAbsOrigin());
                 ParticleManager.ReleaseParticleIndex(this.lifesteal_pfx);
-                keys.attacker.Heal(math.max(keys.damage, 0) * this.vampiric_aura * 0.01, this.GetItemPlus());
+                keys.attacker.ApplyHeal(math.max(keys.damage, 0) * this.vampiric_aura * 0.01, this.GetItemPlus());
             } else if (keys.damage_category == DamageCategory_t.DOTA_DAMAGE_CATEGORY_ATTACK && GPropertyCalculate.GetLifesteal(this.GetParentPlus()) > 0) {
                 this.lifesteal_pfx = ResHelper.CreateParticleEx("particles/item/vladmir/vladmir_blood_lifesteal.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, keys.attacker);
                 ParticleManager.SetParticleControl(this.lifesteal_pfx, 0, keys.attacker.GetAbsOrigin());
                 ParticleManager.ReleaseParticleIndex(this.lifesteal_pfx);
-                keys.attacker.Heal(keys.damage * this.vampiric_aura * 0.01, this.GetItemPlus());
+                keys.attacker.ApplyHeal(keys.damage * this.vampiric_aura * 0.01, this.GetItemPlus());
             }
         }
     }
@@ -282,12 +282,12 @@ export class modifier_item_imba_vladmir_blood_aura extends BaseModifier_Plus {
                 this.lifesteal_pfx = ResHelper.CreateParticleEx("particles/items3_fx/octarine_core_lifesteal.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, keys.attacker);
                 ParticleManager.SetParticleControl(this.lifesteal_pfx, 0, keys.attacker.GetAbsOrigin());
                 ParticleManager.ReleaseParticleIndex(this.lifesteal_pfx);
-                keys.attacker.Heal(math.max(keys.damage, 0) * this.vampiric_aura * 0.01, this.GetItemPlus());
+                keys.attacker.ApplyHeal(math.max(keys.damage, 0) * this.vampiric_aura * 0.01, this.GetItemPlus());
             } else if (keys.damage_category == DamageCategory_t.DOTA_DAMAGE_CATEGORY_ATTACK && GPropertyCalculate.GetLifesteal(this.GetParentPlus()) > 0) {
                 this.lifesteal_pfx = ResHelper.CreateParticleEx("particles/item/vladmir/vladmir_blood_lifesteal.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, keys.attacker);
                 ParticleManager.SetParticleControl(this.lifesteal_pfx, 0, keys.attacker.GetAbsOrigin());
                 ParticleManager.ReleaseParticleIndex(this.lifesteal_pfx);
-                keys.attacker.Heal(keys.damage * this.vampiric_aura * 0.01, this.GetItemPlus());
+                keys.attacker.ApplyHeal(keys.damage * this.vampiric_aura * 0.01, this.GetItemPlus());
             }
         }
     }

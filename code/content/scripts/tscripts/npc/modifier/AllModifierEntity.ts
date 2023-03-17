@@ -77,9 +77,8 @@ import { modifier_courier_fx_ambient_6 } from "./courier_ambient_effect/modifier
 import { modifier_courier_fx_ambient_7 } from "./courier_ambient_effect/modifier_courier_fx_ambient_7";
 import { modifier_courier_fx_ambient_8 } from "./courier_ambient_effect/modifier_courier_fx_ambient_8";
 import { modifier_courier_fx_ambient_9 } from "./courier_ambient_effect/modifier_courier_fx_ambient_9";
-import { modifier_generic_orb_effect_lua } from "./generic/modifier_generic_orb_effect_lua";
+import { AllGenericEffect } from "./effect/AllGenericEffect";
 import { modifier_spawn_activity } from "./spawn/modifier_spawn_activity";
-import { modifier_generic_knockback } from "./move/modifier_generic_knockback";
 
 
 [
@@ -91,7 +90,6 @@ import { modifier_generic_knockback } from "./move/modifier_generic_knockback";
 
 [
     modifier_property,
-    modifier_generic_knockback,
     modifier_illusion,
     modifier_summon,
     modifier_spawn_activity,
@@ -142,9 +140,7 @@ import { modifier_generic_knockback } from "./move/modifier_generic_knockback";
 
 ];
 
-[
-    modifier_generic_orb_effect_lua,
-];
+
 
 [
     modifier_courier_fx_ambient_1,
@@ -179,5 +175,6 @@ import { modifier_generic_knockback } from "./move/modifier_generic_knockback";
 export class AllModifierEntity {
     static init() {
         GLogHelper.print("register all AllModifierEntity");
+        AllGenericEffect.init();
     }
 }

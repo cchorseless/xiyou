@@ -1,5 +1,5 @@
 
-import { modifier_taunt } from "../../../npc/modifier/effect/modifier_taunt";
+import { modifier_generic_taunt } from "../../../npc/modifier/effect/modifier_generic_taunt";
 import { ET } from "../../../shared/lib/Entity";
 
 @GReloadable
@@ -100,7 +100,7 @@ export class AiAttackComponent extends ET.Component {
                 return
             }
             // 优先1：嘲讽
-            let _taunt = modifier_taunt.findIn(u);
+            let _taunt = modifier_generic_taunt.findIn(u);
             if (_taunt && GFuncEntity.IsValid(_taunt.TauntUnit)) {
                 // 有嘲讽目标，优先打嘲讽目标
                 new_target = _taunt.TauntUnit;

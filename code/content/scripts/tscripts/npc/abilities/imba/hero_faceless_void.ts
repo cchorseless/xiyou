@@ -167,7 +167,7 @@ export class imba_faceless_void_time_walk extends BaseAbility_Plus {
             });
         }
         if (caster.TempData().time_walk_damage_taken) {
-            caster.Heal(caster.TempData().time_walk_damage_taken, this);
+            caster.ApplyHeal(caster.TempData().time_walk_damage_taken, this);
         }
         let aoe_pfx = ResHelper.CreateParticleEx("particles/units/heroes/hero_faceless_void/faceless_void_time_walk_slow.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, caster);
         ParticleManager.SetParticleControl(aoe_pfx, 1, Vector(slow_radius, 0, 0));
@@ -1146,7 +1146,7 @@ export class modifier_imba_faceless_void_chronosphere_handler extends BaseModifi
             this.projectile_speed = 0;
             this.projectile_speed = this.GetParentPlus().GetProjectileSpeed();
             if (this.GetStackCount() == 0) {
-                this.parent.AddNewModifier(this.caster, this.GetAbilityPlus(), "modifier_stunned", {
+                this.parent.AddNewModifier(this.caster, this.GetAbilityPlus(), "modifier_generic_stunned", {
                     duration: FrameTime()
                 });
                 this.parent.InterruptMotionControllers(true);

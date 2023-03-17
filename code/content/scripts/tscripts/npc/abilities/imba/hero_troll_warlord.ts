@@ -190,7 +190,7 @@ export class modifier_imba_berserkers_rage_melee extends BaseModifier_Plus {
                             damage: bash_damage,
                             damage_type: DAMAGE_TYPES.DAMAGE_TYPE_MAGICAL
                         });
-                        params.target.AddNewModifier(parent, ability, "modifier_stunned", {
+                        params.target.AddNewModifier(parent, ability, "modifier_generic_stunned", {
                             duration: ensnare_duration * (1 - params.target.GetStatusResistance())
                         });
                         params.target.EmitSound("DOTA_Item.SkullBasher");

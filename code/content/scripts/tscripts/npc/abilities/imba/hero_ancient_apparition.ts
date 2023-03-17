@@ -396,7 +396,7 @@ export class imba_ancient_apparition_chilling_touch extends BaseOrbAbility_Plus 
     }
 
     GetIntrinsicModifierName(): string {
-        return "modifier_generic_orb_effect_lua";
+        return "modifier_generic_orb_effect";
     }
 
     GetProjectileName() {
@@ -419,7 +419,7 @@ export class imba_ancient_apparition_chilling_touch extends BaseOrbAbility_Plus 
         keys.target.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_ancient_apparition_chilling_touch_slow", {
             duration: this.GetSpecialValueFor("duration") * (1 - keys.target.GetStatusResistance())
         });
-        keys.target.AddNewModifier(this.GetCasterPlus(), this, "modifier_stunned", {
+        keys.target.AddNewModifier(this.GetCasterPlus(), this, "modifier_generic_stunned", {
             duration: this.GetSpecialValueFor("packed_ice_duration") * (1 - keys.target.GetStatusResistance())
         });
         let damage = this.GetSpecialValueFor("damage") + this.GetCasterPlus().GetTalentValue("special_bonus_imba_ancient_apparition_chilling_touch_damage");

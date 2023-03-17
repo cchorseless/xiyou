@@ -267,7 +267,7 @@ export class imba_enchantress_enchant extends BaseAbility_Plus {
             this.target.AddNewModifier(this.caster, this, "modifier_kill", {
                 duration: this.dominate_duration
             });
-            this.target.Heal(this.target.GetMaxHealth(), this);
+            this.target.ApplyHeal(this.target.GetMaxHealth(), this);
             if (this.GetCasterPlus().HasAbility("imba_enchantress_untouchable") && this.GetCasterPlus().findAbliityPlus<imba_enchantress_untouchable>("imba_enchantress_untouchable").IsTrained()) {
                 this.target.AddNewModifier(this.caster, this.GetCasterPlus().findAbliityPlus<imba_enchantress_untouchable>("imba_enchantress_untouchable"), "modifier_imba_enchantress_untouchable", {});
             }
@@ -569,7 +569,7 @@ export class modifier_imba_enchantress_natures_attendants extends BaseModifier_P
             for (let wisp = 0; wisp < this.wisp_count; wisp++) {
                 let selected_unit = RandomInt(0, GameFunc.GetCount(hurt_allies) - 1);
                 ParticleManager.SetParticleControlEnt(this.particle, math.min(wisp + 2, 3 + (this.level * 2)), hurt_allies[selected_unit], ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", hurt_allies[selected_unit].GetAbsOrigin(), true);
-                hurt_allies[selected_unit].Heal(this.heal, this.ability);
+                hurt_allies[selected_unit].ApplyHeal(this.heal, this.ability);
                 if (this.GetStackCount() == 2) {
                     hurt_allies[selected_unit].GiveMana(this.cyan_mana_restore);
                 }
@@ -682,7 +682,7 @@ export class modifier_imba_enchantress_natures_attendants_mini extends BaseModif
             return;
         }
         for (let wisp = 0; wisp < this.wisp_count_mini; wisp++) {
-            this.parent.Heal(this.heal, this.ability);
+            this.parent.ApplyHeal(this.heal, this.ability);
         }
     }
     BeDestroy(): void {
@@ -993,7 +993,7 @@ export class imba_enchantress_impetus_723 extends BaseOrbAbility_Plus {
         }
     }
     GetIntrinsicModifierName(): string {
-        return "modifier_generic_orb_effect_lua";
+        return "modifier_generic_orb_effect";
     }
     GetProjectileName() {
         return "particles/units/heroes/hero_enchantress/enchantress_impetus.vpcf";

@@ -4,6 +4,13 @@ import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
+
+@registerAbility()
+export class imba_doom_bringer_devour extends BaseAbility_Plus { }
+@registerAbility()
+export class imba_doom_bringer_scorched_earth extends BaseAbility_Plus { }
+@registerAbility()
+export class imba_doom_bringer_infernal_blade extends BaseAbility_Plus { }
 @registerAbility()
 export class imba_doom_bringer_doom extends BaseAbility_Plus {
     IsHiddenWhenStolen(): boolean {
@@ -253,3 +260,6 @@ export class modifier_imba_doom_bringer_doom_enemies extends BaseModifier_Plus {
         }
     }
 }
+
+
+

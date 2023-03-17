@@ -70,7 +70,7 @@ export class imba_sly_king_burrow_blast extends BaseAbility_Plus {
         let caster = this.GetCasterPlus();
         let ability = this;
         let target_point = this.target_point;
-        let modifier_stun = "modifier_stunned";
+        let modifier_stun = "modifier_generic_stunned";
         let knockback_duration = ability.GetSpecialValueFor("knockback_duration");
         let stun_duration = ability.GetSpecialValueFor("stun_duration");
         let damage = ability.GetSpecialValueFor("damage");
@@ -411,7 +411,7 @@ export class modifier_imba_frozen_skin_passive extends BaseModifier_Plus {
                     return;
                 }
                 if (GFuncRandom.PRD(this.chance, this)) {
-                    params.attacker.AddNewModifier(this.GetParentPlus(), this.GetAbilityPlus(), "modifier_stunned", {
+                    params.attacker.AddNewModifier(this.GetParentPlus(), this.GetAbilityPlus(), "modifier_generic_stunned", {
                         duration: this.stun_duration
                     });
                     params.attacker.AddNewModifier(this.GetParentPlus(), this.GetAbilityPlus(), this.frostbite_modifier, {

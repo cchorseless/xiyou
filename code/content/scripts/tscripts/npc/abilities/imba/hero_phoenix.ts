@@ -127,7 +127,7 @@ export class imba_phoenix_icarus_dive extends BaseAbility_Plus {
                     }
                     if (caster.HasTalent("special_bonus_imba_phoenix_2") && caster.GetTeamNumber() != enemy.GetTeamNumber()) {
                         let item = BaseDataDriven.CreateItem("item_imba_dummy", caster);
-                        item.ApplyDataDrivenModifier(caster, enemy, "modifier_stunned", {
+                        item.ApplyDataDrivenModifier(caster, enemy, "modifier_generic_stunned", {
                             duration: caster.GetTalentValue("special_bonus_imba_phoenix_2", "stun_duration")
                         });
                         UTIL_Remove(item);
@@ -138,8 +138,7 @@ export class imba_phoenix_icarus_dive extends BaseAbility_Plus {
         });
         this.healthCost = caster.GetHealth() * hpCost / 100;
         if (caster.HasModifier("modifier_imba_phoenix_burning_wings_buff")) {
-            caster.Heal(this.healthCost, this);
-            SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, caster, this.healthCost, undefined);
+            caster.ApplyHeal(this.healthCost, this);
         } else {
             let AfterCastHealth = caster.GetHealth() - this.healthCost;
             if (AfterCastHealth <= 1) {
@@ -232,8 +231,7 @@ export class modifier_imba_phoenix_icarus_dive_dash_dummy extends BaseModifier_P
             if (unit.GetTeamNumber() == caster.GetTeamNumber() && unit != caster) {
                 let heal_amp = 1 + (caster.GetSpellAmplification(false) * 0.01);
                 stop_dmg_heal = stop_dmg_heal * heal_amp;
-                unit.Heal(stop_dmg_heal, this.GetAbilityPlus());
-                SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, unit, stop_dmg_heal, undefined);
+                unit.ApplyHeal(stop_dmg_heal, this.GetAbilityPlus());
             } else if (unit.GetTeamNumber() != caster.GetTeamNumber() && unit != caster) {
                 let damageTable = {
                     victim: unit,
@@ -513,8 +511,7 @@ export class imba_phoenix_fire_spirits extends BaseAbility_Plus {
         let numSpirits = this.GetTalentSpecialValueFor("spirit_count");
         let AfterCastHealth = caster.GetHealth() - (caster.GetHealth() * hpCost / 100);
         if (caster.HasModifier("modifier_imba_phoenix_burning_wings_buff")) {
-            caster.Heal((caster.GetHealth() * hpCost / 100), this);
-            SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, caster, (caster.GetHealth() * hpCost / 100), undefined);
+            caster.ApplyHeal((caster.GetHealth() * hpCost / 100), this);
         } else {
             if (AfterCastHealth <= 1) {
                 caster.SetHealth(1);
@@ -943,8 +940,7 @@ export class modifier_imba_phoenix_fire_spirits_buff extends BaseModifier_Plus {
         let dmg = ability.GetSpecialValueFor("damage_per_second") * (tick / 1.0);
         let heal_amp = 1 + (caster.GetSpellAmplification(false) * 0.01);
         dmg = dmg * heal_amp;
-        this.GetParentPlus().Heal(dmg * this.GetStackCount(), ability);
-        SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, this.GetParentPlus(), dmg * this.GetStackCount(), undefined);
+        this.GetParentPlus().ApplyHeal(dmg * this.GetStackCount(), ability);
     }
 }
 @registerAbility()
@@ -1483,8 +1479,7 @@ export class modifier_imba_phoenix_sun_ray_buff extends BaseModifier_Plus {
         let total_heal = base_heal + taker_health * pct_base_heal;
         total_heal = total_heal * (1 + (caster.GetSpellAmplification(false) * 0.01));
         if (taker != this.GetCasterPlus()) {
-            taker.Heal(total_heal, ability);
-            SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, taker, total_heal, undefined);
+            taker.ApplyHeal(total_heal, ability);
             let pfx = ResHelper.CreateParticleEx("particles/units/heroes/hero_phoenix/phoenix_sunray_beam_friend.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, taker);
             ParticleManager.SetParticleControlEnt(pfx, 1, taker, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", taker.GetAbsOrigin(), true);
             ParticleManager.ReleaseParticleIndex(pfx);
@@ -1513,8 +1508,7 @@ export class modifier_imba_phoenix_sun_ray_buff extends BaseModifier_Plus {
             let heal_cost_per_tick = heal_cost_pct / tick_per_sec;
             let heal_cost_this_time = caster.GetHealth() * heal_cost_per_tick;
             if (caster.HasModifier("modifier_imba_phoenix_burning_wings_buff")) {
-                caster.Heal(heal_cost_this_time, ability);
-                SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, caster, heal_cost_this_time, undefined);
+                caster.ApplyHeal(heal_cost_this_time, ability);
             } else {
                 if ((caster.GetHealth() - heal_cost_this_time) <= 1) {
                     caster.SetHealth(1);
@@ -2114,7 +2108,7 @@ export class modifier_imba_phoenix_supernova_egg_thinker extends BaseModifier_Pl
             let enemies = FindUnitsInRadius(caster.GetTeamNumber(), egg.GetAbsOrigin(), undefined, ability.GetSpecialValueFor("aura_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false);
             for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 let item = BaseDataDriven.CreateItem("item_imba_dummy", caster);
-                item.ApplyDataDrivenModifier(caster, enemy, "modifier_stunned", {
+                item.ApplyDataDrivenModifier(caster, enemy, "modifier_generic_stunned", {
                     duration: ability.GetSpecialValueFor("stun_duration")
                 });
                 UTIL_Remove(item);
@@ -2548,8 +2542,7 @@ export class modifier_imba_phoenix_burning_wings_buff extends BaseModifier_Plus 
         for (const [_, abi] of GameFunc.Pair(abi_table)) {
             if (keys.inflictor == abi) {
                 let damage = keys.damage;
-                caster.Heal(damage, this.GetAbilityPlus());
-                SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, caster, damage, undefined);
+                caster.ApplyHeal(damage, this.GetAbilityPlus());
             }
         }
     }
@@ -2595,8 +2588,7 @@ export class modifier_imba_phoenix_burning_wings_ally_buff extends BaseModifier_
             return;
         }
         let num_heal = ability.GetSpecialValueFor("hit_ally_heal") + ability.GetSpecialValueFor("hit_ally_heal") * (caster.GetSpellAmplification(false) / 100);
-        caster.Heal(num_heal, ability);
-        SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, caster, num_heal, undefined);
+        caster.ApplyHeal(num_heal, ability);
     }
 }
 @registerModifier()

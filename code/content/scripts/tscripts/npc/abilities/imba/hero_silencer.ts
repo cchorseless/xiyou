@@ -127,7 +127,7 @@ export class modifier_imba_arcane_curse_debuff extends BaseModifier_Plus {
                     let actual_Damage = ApplyDamage(damage_table);
                     if (this.talent_learned) {
                         let heal_amount = actual_Damage * this.caster.GetTalentValue("special_bonus_imba_silencer_1") * 0.01;
-                        this.caster.Heal(heal_amount, this.GetAbilityPlus());
+                        this.caster.ApplyHeal(heal_amount, this.GetAbilityPlus());
                         let particle_lifesteal = "particles/generic_gameplay/generic_lifesteal.vpcf";
                         let particle_lifesteal_fx = ResHelper.CreateParticleEx(particle_lifesteal, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.caster);
                         ParticleManager.SetParticleControl(particle_lifesteal_fx, 0, this.caster.GetAbsOrigin());

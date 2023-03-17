@@ -87,9 +87,9 @@ export class ability2_undying_soul_rip extends BaseAbility_Plus {
         let bIsTombstone = hTarget.IsOther() && string.find(hTarget.GetUnitName(), "npc_dota_unit_tombstone") != null
         if (hTarget.GetTeamNumber() == hCaster.GetTeamNumber()) {
             if (bIsTombstone) {
-                hTarget.Heal(fTombstoneHeal, this)
+                hTarget.ApplyHeal(fTombstoneHeal, this)
             } else {
-                hTarget.Heal(fAmount, this)
+                hTarget.ApplyHeal(fAmount, this)
                 SendOverheadEventMessage(hTarget.GetPlayerOwner(), DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, hTarget, fAmount, hCaster.GetPlayerOwner())
             }
         } else {

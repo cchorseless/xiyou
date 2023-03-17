@@ -81,7 +81,7 @@ export class item_imba_meteor_hammer extends BaseItem_Plus {
                     let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.position, undefined, this.impact_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BUILDING + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, this.targetFlag, FindOrder.FIND_ANY_ORDER, false);
                     for (const [_, enemy] of GameFunc.iPair(enemies)) {
                         enemy.EmitSound("DOTA_Item.MeteorHammer.Damage");
-                        enemy.AddNewModifier(this.caster, this, "modifier_stunned", {
+                        enemy.AddNewModifier(this.caster, this, "modifier_generic_stunned", {
                             duration: this.stun_duration * (1 - enemy.GetStatusResistance())
                         });
                         enemy.AddNewModifier(this.caster, this, "modifier_item_imba_meteor_hammer_burn", {

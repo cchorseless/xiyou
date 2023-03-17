@@ -5,7 +5,7 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_stunned } from "../../../modifier/effect/modifier_stunned";
+import { modifier_generic_stunned } from "../../../modifier/effect/modifier_generic_stunned";
 /** dota原技能数据 */
 export const Data_puck_dream_coil = { "ID": "5073", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_POINT", "AbilityType": "DOTA_ABILITY_TYPE_ULTIMATE", "AbilityUnitDamageType": "DAMAGE_TYPE_MAGICAL", "AbilityUnitTargetType": "DOTA_UNIT_TARGET_HERO", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_NO", "SpellDispellableType": "SPELL_DISPELLABLE_NO", "FightRecapLevel": "2", "HasScepterUpgrade": "1", "AbilitySound": "Hero_Puck.Dream_Coil", "AbilityCastRange": "750", "AbilityCastPoint": "0.1 0.1 0.1", "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_5", "AbilityCooldown": "80", "AbilityManaCost": "100 150 200", "AbilityModifierSupportValue": "0.5", "AbilitySpecial": { "10": { "var_type": "FIELD_FLOAT", "coil_stun_duration_scepter": "2 3 4", "RequiresScepter": "1" }, "01": { "var_type": "FIELD_FLOAT", "coil_duration": "6.0 6.0 6.0" }, "02": { "var_type": "FIELD_INTEGER", "coil_break_radius": "600 600 600" }, "03": { "var_type": "FIELD_FLOAT", "stun_duration": "0.5" }, "04": { "var_type": "FIELD_INTEGER", "coil_initial_damage": "125 200 275" }, "05": { "var_type": "FIELD_FLOAT", "coil_stun_duration": "1.8 2.4 3.0" }, "06": { "var_type": "FIELD_INTEGER", "coil_break_damage": "200 300 400" }, "07": { "var_type": "FIELD_INTEGER", "coil_radius": "375 375 375" }, "08": { "var_type": "FIELD_FLOAT", "coil_duration_scepter": "8", "RequiresScepter": "1" }, "09": { "var_type": "FIELD_INTEGER", "coil_break_damage_scepter": "300 450 600", "RequiresScepter": "1" } } };
 
@@ -53,7 +53,7 @@ export class ability6_puck_dream_coil extends BaseAbility_Plus {
 
             modifier_puck_6_coiled.apply(hTarget, hCaster, this, { duration: coil_duration, position: vPosition })
 
-            modifier_stunned.apply(hTarget, hCaster, this, { duration: stun_duration * hTarget.GetStatusResistanceFactor(hCaster) })
+            modifier_generic_stunned.apply(hTarget, hCaster, this, { duration: stun_duration * hTarget.GetStatusResistanceFactor(hCaster) })
 
             if (fDamage > 0) {
                 BattleHelper.GoApplyDamage({

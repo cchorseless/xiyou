@@ -11,7 +11,7 @@ export class imba_outworld_devourer_arcane_orb extends BaseOrbAbility_Plus {
     public particle_explosion_fx: any;
     public particle_explosion_scatter_fx: any;
     GetIntrinsicModifierName(): string {
-        return "modifier_generic_orb_effect_lua";
+        return "modifier_generic_orb_effect";
     }
     GetProjectileName() {
         return "particles/units/heroes/hero_obsidian_destroyer/obsidian_destroyer_arcane_orb.vpcf";

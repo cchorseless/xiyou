@@ -2,7 +2,7 @@
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_shock } from "../../../modifier/effect/modifier_shock";
+import { modifier_generic_shock } from "../../../modifier/effect/modifier_generic_shock";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 
 /** dota原技能数据 */
@@ -62,9 +62,9 @@ export class modifier_razor_3 extends BaseModifier_Plus {
             let iShockDamagePct = this.GetSpecialValueFor("attack_shock_damage_pct")
             let sTalentName = "special_bonus_unique_razor_custom_7"
             let iShockTimes = hAttacker.HasTalent(sTalentName) && this.GetSpecialValueFor("count") + hAttacker.GetTalentValue(sTalentName) || this.GetSpecialValueFor("count")
-            modifier_shock.Shock(hTarget, hAttacker, this.GetAbilityPlus(), iAttackDamage * (iShockCount * 0.01))
+            modifier_generic_shock.Shock(hTarget, hAttacker, this.GetAbilityPlus(), iAttackDamage * (iShockCount * 0.01))
             for (let i = 1; i <= iShockTimes; i++) {
-                modifier_shock.ShockActive(hTarget, hAttacker, this.GetAbilityPlus(), iShockDamagePct, true)
+                modifier_generic_shock.ShockActive(hTarget, hAttacker, this.GetAbilityPlus(), iShockDamagePct, true)
             }
         }
     }

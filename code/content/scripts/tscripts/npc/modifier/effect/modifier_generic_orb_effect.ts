@@ -3,7 +3,7 @@ import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_P
 import { registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 @registerModifier()
-export class modifier_generic_orb_effect_lua extends BaseModifier_Plus {
+export class modifier_generic_orb_effect extends BaseModifier_Plus {
     public ability: IBaseOrbAbility_Plus;
     public cast: boolean;
     public records: { [k: string]: boolean };

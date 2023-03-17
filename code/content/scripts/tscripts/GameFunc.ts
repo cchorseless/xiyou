@@ -4,6 +4,16 @@ import { GameServiceConfig } from "./shared/GameServiceConfig";
 
 export module GameFunc {
 
+
+    export function ToRadians(degrees: number) {
+        return degrees * math.pi / 180
+
+    }
+
+    export function ToDegrees(radians: number) {
+        return radians * 180 / math.pi
+    }
+
     export function Pair<T>(obj: { [k: string]: T }): [string, T][] {
         let arr: [string, T][] = [];
         let keys = Object.keys(obj);
@@ -30,6 +40,9 @@ export module GameFunc {
     }
 
 
+    export function HasBit(n: number, a: number): boolean {
+        return IncludeArgs(n, a)[0]
+    }
     /**
      * 位运算判断参数是否包含
      * @param n
@@ -681,12 +694,17 @@ export module FuncMath {
 
 /**向量 */
 export module FuncVector {
-
+    export function GetPerpendicularVector(vector: Vector) {
+        return Vector(vector.y, -vector.x);
+    }
     export function GetRandomPosition2D(v: Vector, dis: number): Vector {
         let v2 = RandomVector(dis);
         return v + v2 as Vector;
     }
-
+    export function ActualRandomVector(maxLength: number, flMinLength: number = 0) {
+        let minLength = flMinLength
+        return RandomVector(RandomInt(minLength, maxLength))
+    }
 
     export function CalculateDistance(ent1: Vector | IBaseNpc_Plus, ent2: Vector | IBaseNpc_Plus): number {
         let pos1 = ent1 as Vector;

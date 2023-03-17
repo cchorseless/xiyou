@@ -5,7 +5,7 @@ import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifierMotionHorizontal_Plus, BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
-import { modifier_stunned } from "../../modifier/effect/modifier_stunned";
+import { modifier_generic_stunned } from "../../modifier/effect/modifier_generic_stunned";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 @registerAbility()
 export class imba_slardar_guardian_sprint extends BaseAbility_Plus {
@@ -744,7 +744,7 @@ export class modifier_imba_bash_of_the_deep_attack extends BaseModifier_Plus {
                     return undefined;
                 }
                 if (target.IsStunned()) {
-                    modifiers = target.FindAllModifiersByName("modifier_stunned") as modifier_stunned[];
+                    modifiers = target.FindAllModifiersByName("modifier_generic_stunned") as modifier_generic_stunned[];
                     if (GameFunc.GetCount(modifiers) > 0) {
                         for (const modifier of (modifiers)) {
                             if (!(modifier as any).extended_by_deep_bash) {
@@ -853,7 +853,7 @@ export class modifier_imba_slardar_bash_720 extends BaseModifier_Plus {
                 this.IncrementStackCount();
             } else {
                 keys.target.EmitSound("Hero_Slardar.Bash");
-                keys.target.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_stunned", {
+                keys.target.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_generic_stunned", {
                     duration: this.GetSpecialValueFor("duration") * (1 - keys.target.GetStatusResistance())
                 });
                 this.SetStackCount(0);

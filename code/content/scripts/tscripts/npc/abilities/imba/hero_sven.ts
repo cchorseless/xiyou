@@ -194,7 +194,7 @@ export class imba_sven_storm_bolt extends BaseAbility_Plus {
                             damage: ExtraData.damage,
                             damage_type: this.GetAbilityDamageType()
                         });
-                        enemy.AddNewModifier(caster, this, "modifier_stunned", {
+                        enemy.AddNewModifier(caster, this, "modifier_generic_stunned", {
                             duration: ExtraData.stun_duration * (1 - enemy.GetStatusResistance())
                         });
                         if (caster.HasShard()) {

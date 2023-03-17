@@ -3,7 +3,7 @@ import { registerModifier } from "../../entityPlus/Base_Plus";
 
 /**嘲讽 */
 @registerModifier()
-export class modifier_taunt extends BaseModifier_Plus {
+export class modifier_generic_taunt extends BaseModifier_Plus {
     GetTexture() {
         return "harpy_storm_chain_lightning";
     }
@@ -34,11 +34,21 @@ export class modifier_taunt extends BaseModifier_Plus {
     public Init(params?: object): void {
         if (IsServer()) {
             this.TauntUnit = this.GetCasterPlus();
+            this.GetParentPlus().Stop();
+            this.GetParentPlus().Interrupt();
         }
+    }
+    GetEffectName(): string {
+        return "particles/generic/brd_taunt/brd_taunt_mark_base.vpcf";
+    }
+    GetEffectAttachType(): ParticleAttachment_t {
+        return ParticleAttachment_t.PATTACH_OVERHEAD_FOLLOW;
+    }
+    GetStatusEffectName(): string {
+        return "particles/status_fx/status_effect_beserkers_call.vpcf";
     }
 
     public BeDestroy(): void {
-
         this.TauntUnit = null;
     }
 
@@ -52,7 +62,7 @@ export class modifier_taunt extends BaseModifier_Plus {
         if (!IsServer()) {
             return;
         }
-        modifier_taunt.apply(target, hCaster, hAbility, {
+        modifier_generic_taunt.apply(target, hCaster, hAbility, {
             duration: duration,
         });
     }

@@ -373,8 +373,7 @@ export class modifier_sohei_wholeness_of_body_status extends BaseModifier_Plus {
     }
     BeDestroy(): void {
         if (IsServer()) {
-            this.GetParentPlus().Heal(this.endHeal + this.GetAbilityPlus().GetTalentSpecialValueFor("post_heal"), this.GetAbilityPlus());
-            SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, this.GetParentPlus(), this.endHeal + this.GetAbilityPlus().GetTalentSpecialValueFor("post_heal"), undefined);
+            this.GetParentPlus().ApplyHeal(this.endHeal + this.GetAbilityPlus().GetTalentSpecialValueFor("post_heal"), this.GetAbilityPlus());
         }
     }
     /** DeclareFunctions():modifierfunction[] {
@@ -692,7 +691,7 @@ export class modifier_sohei_momentum_knockback extends BaseModifierMotionHorizon
         unit.AddNewModifier(caster, ability, "modifier_sohei_momentum_slow", {
             duration: this.slow_duration * (1 - unit.GetStatusResistance())
         });
-        unit.AddNewModifier(caster, ability, "modifier_stunned", {
+        unit.AddNewModifier(caster, ability, "modifier_generic_stunned", {
             duration: this.stun_duration * (1 - unit.GetStatusResistance())
         });
     }
@@ -858,7 +857,7 @@ export class modifier_sohei_palm_of_life_movement extends BaseModifierMotionHori
             if (this.doHeal) {
                 let spell = this.GetAbilityPlus();
                 let healAmount = parent.GetHealth() * (spell.GetSpecialValueFor("hp_as_heal") / 100);
-                this.target.Heal(healAmount, this.GetAbilityPlus());
+                this.target.ApplyHeal(healAmount, this.GetAbilityPlus());
                 this.target.EmitSound("Sohei.PalmOfLife.Heal");
                 let part = ResHelper.CreateParticleEx("particles/units/heroes/hero_omniknight/omniknight_purification.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.target);
                 ParticleManager.SetParticleControl(part, 1, Vector(this.target.GetModelRadius(), 1, 1));

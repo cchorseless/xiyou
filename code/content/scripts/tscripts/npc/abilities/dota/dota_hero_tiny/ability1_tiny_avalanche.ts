@@ -7,7 +7,7 @@ import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus } from "../../../entityPlus/BaseModifier_Plus";
 import { BaseNpc_Hero_Plus } from "../../../entityPlus/BaseNpc_Hero_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_stunned } from "../../../modifier/effect/modifier_stunned";
+import { modifier_generic_stunned } from "../../../modifier/effect/modifier_generic_stunned";
 
 /** dota原技能数据 */
 export const Data_tiny_avalanche = { "ID": "5106", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_POINT", "AbilityUnitDamageType": "DAMAGE_TYPE_MAGICAL", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_NO", "SpellDispellableType": "SPELL_DISPELLABLE_YES_STRONG", "FightRecapLevel": "1", "AbilitySound": "Ability.Avalanche", "AbilityCastRange": "600", "AbilityCastPoint": "0.0 0.0 0.0 0.0", "AbilityCooldown": "26 22 18 14", "AbilityManaCost": "120 120 120 120", "AbilitySpecial": { "01": { "var_type": "FIELD_INTEGER", "radius": "325 350 375 400" }, "02": { "var_type": "FIELD_FLOAT", "tick_interval": "0.3" }, "03": { "var_type": "FIELD_FLOAT", "total_duration": "1.4" }, "04": { "var_type": "FIELD_INTEGER", "tick_count": "5" }, "05": { "var_type": "FIELD_FLOAT", "stun_duration": "0.2" }, "06": { "var_type": "FIELD_INTEGER", "projectile_speed": "1200" }, "07": { "var_type": "FIELD_INTEGER", "avalanche_damage": "75 150 225 300", "LinkedSpecialBonus": "special_bonus_unique_tiny" } }, "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_1" };
@@ -106,7 +106,7 @@ export class ability1_tiny_avalanche extends BaseAbility_Plus {
                     damage_type: this.GetAbilityDamageType(),
                 }
                 BattleHelper.GoApplyDamage(tDamageTable)
-                modifier_stunned.apply(hTarget, hCaster, this, { duration: stun_duration })
+                modifier_generic_stunned.apply(hTarget, hCaster, this, { duration: stun_duration })
             }
         }
 

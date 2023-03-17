@@ -873,8 +873,7 @@ export class imba_chen_test_of_faith extends BaseAbility_Plus {
                 heal_value = RandomInt(this.GetSpecialValueFor("heal_min"), this.GetSpecialValueFor("heal_max"));
             }
             heal_value = heal_value + (PlayerResource.GetAssists(target.GetPlayerID()) * this.GetSpecialValueFor("faithful_assist_mult"));
-            target.Heal(heal_value, this);
-            SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, target, heal_value, undefined);
+            target.ApplyHeal(heal_value, this);
         } else {
             let damage_min = this.GetSpecialValueFor("damage_min");
             let damage_max = this.GetSpecialValueFor("damage_max");
@@ -942,10 +941,7 @@ export class imba_chen_hand_of_god extends BaseAbility_Plus {
                         overheal_amount: overheal_amount
                     });
                 }
-                if (ally.IsRealUnit()) {
-                    SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, ally, this.GetTalentSpecialValueFor("heal_amount"), undefined);
-                }
-                ally.Heal(this.GetTalentSpecialValueFor("heal_amount"), this);
+                ally.ApplyHeal(this.GetTalentSpecialValueFor("heal_amount"), this);
             }
         }
     }

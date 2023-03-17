@@ -76,7 +76,7 @@ export class item_imba_ogre_seal_totem extends BaseItem_Plus {
                             ParticleManager.ReleaseParticleIndex(nFXIndex);
                             EmitSoundOn("Dungeon.BloodSplatterImpact", enemy);
                         } else {
-                            enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_stunned", {
+                            enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_generic_stunned", {
                                 duration: this.stun_duration * (1 - enemy.GetStatusResistance())
                             });
                         }

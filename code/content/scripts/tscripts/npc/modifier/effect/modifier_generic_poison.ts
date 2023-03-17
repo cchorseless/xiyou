@@ -6,7 +6,7 @@ import { registerModifier } from "../../entityPlus/Base_Plus";
 
 /**中毒BUFF */
 @registerModifier()
-export class modifier_poison extends BaseModifier_Plus {
+export class modifier_generic_poison extends BaseModifier_Plus {
     GetTexture() {
         return "poison_main"
     }
@@ -48,7 +48,7 @@ export class modifier_poison extends BaseModifier_Plus {
             this.tPoisonerInfos = this.tPoisonerInfos || [];
             let tPoisonInfo = HashTableHelper.GetHashtableByIndex(params.hashtableUUid) as any;
             if (tPoisonInfo != null) {
-                GTimerHelper.AddTimer(params.duration || modifier_poison.POISON_DURATION, GHandler.create(this, () => {
+                GTimerHelper.AddTimer(params.duration || modifier_generic_poison.POISON_DURATION, GHandler.create(this, () => {
                     this.ChangeStackCount(-tPoisonInfo.stack_count);
                 }))
                 this.ChangeStackCount(tPoisonInfo.stack_count);
@@ -109,7 +109,7 @@ export class modifier_poison extends BaseModifier_Plus {
      * @param iCount 中毒层数
      * @param duration 持续时间
      */
-    static Poison(htarget: IBaseNpc_Plus, hCaster: IBaseNpc_Plus, hAbility: IBaseAbility_Plus, iCount: number, duration: number = modifier_poison.POISON_DURATION) {
+    static Poison(htarget: IBaseNpc_Plus, hCaster: IBaseNpc_Plus, hAbility: IBaseAbility_Plus, iCount: number, duration: number = modifier_generic_poison.POISON_DURATION) {
         if (!IsServer()) { return };
         if (!GFuncEntity.IsValid(htarget)) return;
         if (iCount > 0) {
@@ -117,11 +117,11 @@ export class modifier_poison extends BaseModifier_Plus {
             let _incom = GPropertyCalculate.SumProps(htarget, null, GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_POISON_COUNT_PERCENTAGE);
             iCount = iCount * (1 + _out * 0.01) * (1 + _incom * 0.01)
         }
-        let iPoisonStack = math.min(iCount, modifier_poison.MAX_POISON_STACK)   //  毒层数
-        let hPoisonModifier = modifier_poison.findIn(htarget);
+        let iPoisonStack = math.min(iCount, modifier_generic_poison.MAX_POISON_STACK)   //  毒层数
+        let hPoisonModifier = modifier_generic_poison.findIn(htarget);
         if (GFuncEntity.IsValid(hPoisonModifier)) {
             let iStack = hPoisonModifier.GetStackCount()
-            let iTargetStack = modifier_poison.MAX_POISON_STACK - iStack
+            let iTargetStack = modifier_generic_poison.MAX_POISON_STACK - iStack
             iPoisonStack = iTargetStack > iPoisonStack && iPoisonStack || iTargetStack
         }
         let poisonInfo = HashTableHelper.CreateHashtable({
@@ -129,7 +129,7 @@ export class modifier_poison extends BaseModifier_Plus {
             ability: hAbility, //  技能
             stack_count: iPoisonStack
         });
-        modifier_poison.apply(htarget, hCaster, hAbility, { duration: duration, hashtableUUid: poisonInfo.__hashuuid__ })
+        modifier_generic_poison.apply(htarget, hCaster, hAbility, { duration: duration, hashtableUUid: poisonInfo.__hashuuid__ })
     }
     /**
      * 激发毒伤害，造成当前毒层数xfPercent的毒伤害
@@ -139,7 +139,7 @@ export class modifier_poison extends BaseModifier_Plus {
      * @param fPercent
      */
     static PoisonActive(htarget: IBaseNpc_Plus, hCaster: IBaseNpc_Plus, hAbility: IBaseAbility_Plus, fPercent: number) {
-        let iDamage = fPercent * modifier_poison.GetPoisonStackCount(htarget);
+        let iDamage = fPercent * modifier_generic_poison.GetPoisonStackCount(htarget);
         if (iDamage > 0) {
             BattleHelper.GoApplyDamage({
                 ability: hAbility,
@@ -167,7 +167,7 @@ export class modifier_poison extends BaseModifier_Plus {
      * @returns
      */
     static GetPoisonStackCount(htarget: IBaseNpc_Plus) {
-        let modifier = htarget.FindModifierByName(modifier_poison.name) as modifier_poison;
+        let modifier = htarget.FindModifierByName(modifier_generic_poison.name) as modifier_generic_poison;
         if (GFuncEntity.IsValid(modifier)) {
             return modifier.GetStackCount()
         }

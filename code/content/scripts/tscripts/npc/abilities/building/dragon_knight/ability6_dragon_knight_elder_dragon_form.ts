@@ -6,7 +6,7 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_poison } from "../../../modifier/effect/modifier_poison";
+import { modifier_generic_poison } from "../../../modifier/effect/modifier_generic_poison";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 
 /** dota原技能数据 */
@@ -49,7 +49,7 @@ export class ability6_dragon_knight_elder_dragon_form extends BaseAbility_Plus {
         let corrosive_breath_damage = this.GetLevelSpecialValueFor("corrosive_breath_damage", iLevel - 1)
         let poison_str_factor = this.GetSpecialValueFor("poison_str_factor")
         if (!hCaster.IsIllusion()) {
-            modifier_poison.Poison(hTarget, hCaster, this, corrosive_breath_damage + hCaster.GetStrength() * poison_str_factor)
+            modifier_generic_poison.Poison(hTarget, hCaster, this, corrosive_breath_damage + hCaster.GetStrength() * poison_str_factor)
         }
     }
     Frost(hTarget: IBaseNpc_Plus) {

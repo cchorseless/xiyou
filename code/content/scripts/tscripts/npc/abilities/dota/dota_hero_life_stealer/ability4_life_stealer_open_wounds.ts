@@ -5,7 +5,7 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_bleeding } from "../../../modifier/effect/modifier_bleeding";
+import { modifier_generic_bleeding } from "../../../modifier/effect/modifier_generic_bleeding";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 
 /** dota原技能数据 */
@@ -209,7 +209,7 @@ export class modifier_life_stealer_4_buff extends BaseModifier_Plus {
                 modifier_life_stealer_4_max_health.apply(params.attacker, hCaster, hAbility, { duration: this.duration, fOverflowHealth: fOverflowHealth })
             }
             if (fRegenHealth > 0) {
-                params.attacker.Heal(fRegenHealth, hAbility)
+                params.attacker.ApplyHeal(fRegenHealth, hAbility)
                 SendOverheadEventMessage(null, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, params.attacker, fRegenHealth, null)
             }
             let particleID = ResHelper.CreateParticle({
@@ -230,7 +230,7 @@ export class modifier_life_stealer_4_buff extends BaseModifier_Plus {
                 let iTransforPct = hCaster.GetTalentValue("special_bonus_unique_life_stealer_custom_6")
                 let blood_duration = hCaster.GetTalentValue("special_bonus_unique_life_stealer_custom_6", "duration")
                 let fBloodDamage = params.damage * iTransforPct * 0.01
-                modifier_bleeding.Bleeding(params.unit, hCaster, hAbility, blood_duration, (tDamageTable) => {
+                modifier_generic_bleeding.Bleeding(params.unit, hCaster, hAbility, blood_duration, (tDamageTable) => {
                     return fBloodDamage
                 }, true)
             }

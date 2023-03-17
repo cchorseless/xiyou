@@ -4,7 +4,7 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_shock } from "../../../modifier/effect/modifier_shock";
+import { modifier_generic_shock } from "../../../modifier/effect/modifier_generic_shock";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 
 /** dota原技能数据 */
@@ -283,7 +283,7 @@ export class modifier_arc_warden_2_aura extends BaseModifier_Plus {
             let iShockCount = this.GetSpecialValueFor("shock_bonus_all") * hCaster.GetAllStats()
             for (let hUnit of (tUnits)) {
                 if (hUnit.GetTeam() != hCaster.GetTeam()) {
-                    modifier_shock.Shock(hUnit, hCaster, this.GetAbilityPlus(), iShockCount)
+                    modifier_generic_shock.Shock(hUnit, hCaster, this.GetAbilityPlus(), iShockCount)
                 } else {
                     modifier_arc_warden_2_buff_extra.apply(hUnit, hCaster, this.GetAbilityPlus(), {
                         iRadius: this.iRadius,

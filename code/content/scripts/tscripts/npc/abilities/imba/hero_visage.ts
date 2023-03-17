@@ -862,7 +862,7 @@ export class modifier_imba_visage_summon_familiars_stone_form_buff extends BaseM
             this.GetParentPlus().EmitSound("Visage_Familar.StoneForm.Stun");
         }
         for (const [_, enemy] of GameFunc.iPair(enemies)) {
-            enemy.AddNewModifier(this.GetParentPlus(), this.GetAbilityPlus(), "modifier_stunned", {
+            enemy.AddNewModifier(this.GetParentPlus(), this.GetAbilityPlus(), "modifier_generic_stunned", {
                 duration: this.stun_duration * (1 - enemy.GetStatusResistance())
             });
             damageTable.victim = enemy;

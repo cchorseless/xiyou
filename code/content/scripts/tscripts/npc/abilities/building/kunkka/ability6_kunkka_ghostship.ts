@@ -5,8 +5,8 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_feared } from "../../../modifier/effect/modifier_feared";
-import { modifier_stunned } from "../../../modifier/effect/modifier_stunned";
+import { modifier_generic_feared } from "../../../modifier/effect/modifier_generic_feared";
+import { modifier_generic_stunned } from "../../../modifier/effect/modifier_generic_stunned";
 import { modifier_dummy } from "../../../modifier/modifier_dummy";
 import { modifier_particle_thinker } from "../../../modifier/modifier_particle";
 import { unit_dummy } from "../../../units/common/unit_dummy";
@@ -154,9 +154,9 @@ export class ability6_kunkka_ghostship extends BaseAbility_Plus {
             }
             BattleHelper.GoApplyDamage(damage_table)
 
-            modifier_stunned.apply(hTarget, hCaster, this, { duration: stun_duration * hTarget.GetStatusResistanceFactor(hCaster) })
+            modifier_generic_stunned.apply(hTarget, hCaster, this, { duration: stun_duration * hTarget.GetStatusResistanceFactor(hCaster) })
             if (modifier_kunkka_3_tide.exist(hCaster)) {
-                modifier_feared.apply(hTarget, hCaster, this, { duration: (tide_fear_duration + stun_duration) * hTarget.GetStatusResistanceFactor(hCaster) })
+                modifier_generic_feared.apply(hTarget, hCaster, this, { duration: (tide_fear_duration + stun_duration) * hTarget.GetStatusResistanceFactor(hCaster) })
             } else if (modifier_kunkka_3_ebb.exist(hCaster)) {
                 damage_table.damage = hCaster.GetAverageTrueAttackDamage(hTarget)
                 damage_table.damage_type = DAMAGE_TYPES.DAMAGE_TYPE_PHYSICAL

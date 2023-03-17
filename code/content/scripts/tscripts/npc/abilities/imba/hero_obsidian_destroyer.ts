@@ -1030,7 +1030,7 @@ export class modifier_imba_essence_aura_buff extends BaseModifier_Plus {
                     let mana_restore = max_mana * (this.restore_mana_pct * 0.01);
                     if (this.caster.HasTalent("special_bonus_imba_obsidian_destroyer_5")) {
                         let heal_amount = this.caster.GetIntellect();
-                        this.parent.Heal(heal_amount, this.GetAbilityPlus());
+                        this.parent.ApplyHeal(heal_amount, this.GetAbilityPlus());
                     }
                     if (this.caster.HasTalent("special_bonus_imba_obsidian_destroyer_8") && this.caster == this.parent) {
                         let current_mana = this.caster.GetMana();

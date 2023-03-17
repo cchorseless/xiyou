@@ -124,7 +124,7 @@ export class imba_tidehunter_gush extends BaseAbility_Plus {
         if (target) {
             if (target.GetTeamNumber() != this.GetCasterPlus().GetTeamNumber()) {
                 if (data.bTargeted == 1 && target.TriggerSpellAbsorb(this)) {
-                    target.AddNewModifier(this.GetCasterPlus(), this, "modifier_stunned", {
+                    target.AddNewModifier(this.GetCasterPlus(), this, "modifier_generic_stunned", {
                         duration: this.GetSpecialValueFor("shieldbreaker_stun") * (1 - target.GetStatusResistance())
                     });
                     return undefined;
@@ -728,7 +728,7 @@ export class modifier_imba_tidehunter_ravage_creeping_wave extends BaseModifier_
             let hit_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_tidehunter/tidehunter_spell_ravage_hit.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, enemy);
             ParticleManager.SetParticleControl(hit_particle, 0, GetGroundPosition(enemy.GetAbsOrigin(), undefined));
             ParticleManager.ReleaseParticleIndex(hit_particle);
-            enemy.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_stunned", {
+            enemy.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_generic_stunned", {
                 duration: this.stun_duration * (1 - enemy.GetStatusResistance())
             });
             let knockback = {
@@ -846,7 +846,7 @@ export class imba_tidehunter_ravage extends BaseAbility_Plus {
                 for (const [_, enemy] of GameFunc.iPair(enemies)) {
                     if (!hit_units.includes(enemy)) {
                         enemy.EmitSound(hit_sound);
-                        enemy.AddNewModifier(caster, this, "modifier_stunned", {
+                        enemy.AddNewModifier(caster, this, "modifier_generic_stunned", {
                             duration: stun_duration * (1 - enemy.GetStatusResistance())
                         });
                         let knockback = {

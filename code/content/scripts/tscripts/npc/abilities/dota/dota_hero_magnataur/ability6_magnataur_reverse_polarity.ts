@@ -5,7 +5,7 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_stunned } from "../../../modifier/effect/modifier_stunned";
+import { modifier_generic_stunned } from "../../../modifier/effect/modifier_generic_stunned";
 
 /** dota原技能数据 */
 export const Data_magnataur_reverse_polarity = { "ID": "5521", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_NO_TARGET", "AbilityUnitDamageType": "DAMAGE_TYPE_MAGICAL", "AbilityType": "DOTA_ABILITY_TYPE_ULTIMATE", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_YES", "SpellDispellableType": "SPELL_DISPELLABLE_YES_STRONG", "FightRecapLevel": "2", "AbilitySound": "Hero_Magnataur.ReversePolarity.Cast", "AbilityDraftUltShardAbility": "magnataur_horn_toss", "AbilityCastPoint": "0.3 0.3 0.3", "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_4", "AbilityCooldown": "130", "AbilityManaCost": "150 225 300", "AbilityCastRange": "410 410 410", "AbilityModifierSupportValue": "0.5", "AbilitySpecial": { "01": { "var_type": "FIELD_INTEGER", "pull_radius": "410" }, "02": { "var_type": "FIELD_INTEGER", "polarity_damage": "75 150 225" }, "03": { "var_type": "FIELD_FLOAT", "hero_stun_duration": "2.75 3.25 3.75", "LinkedSpecialBonus": "special_bonus_unique_magnus_5" }, "04": { "var_type": "FIELD_FLOAT", "pull_duration": "0.0 0.0 0.0" } } };
@@ -72,7 +72,7 @@ export class ability6_magnataur_reverse_polarity extends BaseAbility_Plus {
         for (let hTarget of (tTargets)) {
             FindClearSpaceForUnit(hTarget, vPosition, true)
             EmitSoundOnLocationWithCaster(hTarget.GetAbsOrigin(), ResHelper.GetSoundReplacement("Hero_Magnataur.ReversePolarity.Stun", hCaster), hCaster)
-            modifier_stunned.apply(hTarget, hCaster, this, { duration: stun_duration * hTarget.GetStatusResistanceFactor(hCaster) })
+            modifier_generic_stunned.apply(hTarget, hCaster, this, { duration: stun_duration * hTarget.GetStatusResistanceFactor(hCaster) })
             let tDamageTable = {
                 ability: this,
                 victim: hTarget,

@@ -17,7 +17,22 @@ export class modifier_generic_knockback extends BaseModifierMotionBoth_Plus {
     public vVelocity: any;
     public anim: any;
     public EndCallback: IGHandler;
-    public interrupted: any;
+    public interrupted: boolean;
+
+
+    static ApplyKnockBack(target: IBaseNpc_Plus, caster: IBaseNpc_Plus, abiity: IBaseAbility_Plus, kv: {
+        distance?: number,
+        height?: number,
+        duration?: number,
+        direction_x?: number,
+        direction_y?: number,
+        tree_destroy_radius?: number,
+        IsStun?: boolean,
+        IsFlail?: boolean,
+    }) {
+        return target.AddNewModifier(caster, abiity, "modifier_generic_knockback", kv) as modifier_generic_knockback;
+    }
+
     IsHidden(): boolean {
         return true;
     }

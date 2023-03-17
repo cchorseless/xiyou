@@ -5,7 +5,7 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_stunned } from "../../../modifier/effect/modifier_stunned";
+import { modifier_generic_stunned } from "../../../modifier/effect/modifier_generic_stunned";
 import { modifier_particle_thinker } from "../../../modifier/modifier_particle";
 import { lina_1 } from "./lina_1";
 import { lina_3, modifier_lina_3_fiery_soul } from "./lina_3";
@@ -273,7 +273,7 @@ export class modifier_lina_2_thinker extends modifier_particle_thinker {
                 };
                 BattleHelper.GoApplyDamage(damage_table);
 
-                modifier_stunned.apply(target, hCaster, hAbility, { duration: this.light_strike_array_stun_duration * target.GetStatusResistanceFactor(hCaster) });
+                modifier_generic_stunned.apply(target, hCaster, hAbility, { duration: this.light_strike_array_stun_duration * target.GetStatusResistanceFactor(hCaster) });
                 if (bValidTalent3) {
                     modifier_lina_2_talent_3_debuff.apply(target, hCaster, hAbility, { duration: talent3_duration });
                 }

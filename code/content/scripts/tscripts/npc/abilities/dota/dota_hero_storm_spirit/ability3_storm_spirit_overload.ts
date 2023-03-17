@@ -4,7 +4,7 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_shock } from "../../../modifier/effect/modifier_shock";
+import { modifier_generic_shock } from "../../../modifier/effect/modifier_generic_shock";
 import { modifier_particle } from "../../../modifier/modifier_particle";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 
@@ -108,7 +108,7 @@ export class ability3_storm_spirit_overload extends BaseAbility_Plus {
                         damage: true_damage,
                         damage_type: this.GetAbilityDamageType()
                     })
-                    modifier_shock.Shock(hTarget, hCaster, this, true_damage * shock_bonus_pct)
+                    modifier_generic_shock.Shock(hTarget, hCaster, this, true_damage * shock_bonus_pct)
                 }
             }
             let targets = AoiHelper.FindEntityInRadius(hAttacker.GetTeamNumber(), hTarget.GetAbsOrigin(), shard_radius, null, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, 0)
@@ -275,7 +275,7 @@ export class modifier_storm_spirit_3_buff extends BaseModifier_Plus {
                         damage: true_damage,
                         damage_type: hAbility.GetAbilityDamageType()
                     })
-                    modifier_shock.Shock(hTarget, hParent, hAbility, true_damage * shock_bonus_pct)
+                    modifier_generic_shock.Shock(hTarget, hParent, hAbility, true_damage * shock_bonus_pct)
                 }
 
                 this.DecrementStackCount()

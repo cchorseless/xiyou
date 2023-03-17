@@ -256,15 +256,13 @@ export class imba_necrolyte_death_pulse extends BaseAbility_Plus {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
             if (extraData.base_heal) {
-                target.Heal(extraData.base_heal, this);
-                SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, target, extraData.base_heal, undefined);
+                target.ApplyHeal(extraData.base_heal, this);
                 return;
             }
             let caster_loc = caster.GetAbsOrigin();
             if (!extraData.radius) {
                 let heal = target.GetMaxHealth() * (extraData.sec_heal_pct / 100);
-                target.Heal(heal, this);
-                SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, target, heal, undefined);
+                target.ApplyHeal(heal, this);
             }
             if (extraData.radius) {
                 let allies = FindUnitsInRadius(caster.GetTeamNumber(), caster_loc, undefined, extraData.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
@@ -822,7 +820,7 @@ export class modifier_imba_reapers_scythe extends BaseModifier_Plus {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
             let target = this.GetParentPlus();
-            target.AddNewModifier(caster, this.GetAbilityPlus(), "modifier_stunned", {
+            target.AddNewModifier(caster, this.GetAbilityPlus(), "modifier_generic_stunned", {
                 duration: FrameTime()
             });
             if (target.IsAlive() && this.ability) {

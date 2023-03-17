@@ -4,7 +4,7 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_feared } from "../../../modifier/effect/modifier_feared";
+import { modifier_generic_feared } from "../../../modifier/effect/modifier_generic_feared";
 import { modifier_particle } from "../../../modifier/modifier_particle";
 
 
@@ -29,7 +29,7 @@ export class t23_howl extends BaseAbility_Plus {
 
         let tTargets = AoiHelper.FindEntityInRadius(hCaster.GetTeamNumber(), hCaster.GetAbsOrigin(), radius, null, this.GetAbilityTargetTeam(), this.GetAbilityTargetType(), this.GetAbilityTargetFlags(), FindOrder.FIND_CLOSEST)
         for (let target of (tTargets)) {
-            let hModifier = modifier_feared.apply(target, hCaster, this, { duration: duration * target.GetStatusResistanceFactor(hCaster) })
+            let hModifier = modifier_generic_feared.apply(target, hCaster, this, { duration: duration * target.GetStatusResistanceFactor(hCaster) })
         }
     }
 

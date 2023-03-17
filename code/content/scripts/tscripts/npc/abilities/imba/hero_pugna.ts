@@ -315,8 +315,7 @@ export class modifier_imba_decrepify extends BaseModifier_Plus {
                 let units = FindUnitsInRadius(this.caster.GetTeamNumber(), this.parent.GetAbsOrigin(), undefined, total_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
                 for (const [_, unit] of GameFunc.iPair(units)) {
                     if (unit.GetTeamNumber() == this.caster.GetTeamNumber()) {
-                        unit.Heal(heal, this.ability);
-                        SendOverheadEventMessage(unit.GetPlayerOwner(), DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, unit, heal, unit.GetPlayerOwner());
+                        unit.ApplyHeal(heal, this.ability);
                     } else {
                         ApplyDamage({
                             victim: unit,
@@ -1072,7 +1071,7 @@ export class modifier_imba_life_drain extends BaseModifier_Plus {
                 }
                 let actual_damage = ApplyDamage(damageTable);
                 let missing_health = this.parent.GetMaxHealth() - this.parent.GetHealth();
-                this.parent.Heal(actual_damage, this.ability);
+                this.parent.ApplyHeal(actual_damage, this.ability);
                 if (missing_health < actual_damage) {
                     let recover_mana = actual_damage - missing_health;
                     this.parent.GiveMana(recover_mana);
@@ -1090,7 +1089,7 @@ export class modifier_imba_life_drain extends BaseModifier_Plus {
                 }
                 let actual_damage = ApplyDamage(damageTable);
                 let missing_health = this.caster.GetMaxHealth() - this.caster.GetHealth();
-                this.caster.Heal(actual_damage, this.ability);
+                this.caster.ApplyHeal(actual_damage, this.ability);
                 if (missing_health < actual_damage) {
                     let recover_mana = actual_damage - missing_health;
                     this.caster.GiveMana(recover_mana);

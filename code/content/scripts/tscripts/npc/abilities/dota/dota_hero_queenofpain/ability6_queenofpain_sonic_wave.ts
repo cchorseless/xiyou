@@ -5,7 +5,7 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_poison } from "../../../modifier/effect/modifier_poison";
+import { modifier_generic_poison } from "../../../modifier/effect/modifier_generic_poison";
 import { modifier_knockback } from "../../../modifier/modifier_knockback";
 import { modifier_particle } from "../../../modifier/modifier_particle";
 /** dota原技能数据 */
@@ -178,10 +178,10 @@ export class ability6_queenofpain_sonic_wave extends BaseAbility_Plus {
 
             if (GFuncEntity.IsValid(hTarget) && hTarget.IsAlive()) {
                 if (hCaster.HasTalent("special_bonus_unique_queenofpain_custom_5")) {
-                    let iStackCount = modifier_poison.GetPoisonStackCount(hTarget)
+                    let iStackCount = modifier_generic_poison.GetPoisonStackCount(hTarget)
                     if (iStackCount > 0) {
                         let damage_per_stack = hCaster.GetTalentValue("special_bonus_unique_queenofpain_custom_5")
-                        modifier_poison.RemovePoison(hTarget)
+                        modifier_generic_poison.RemovePoison(hTarget)
                         let iParticleID = ResHelper.CreateParticle({
                             resPath: "particles/units/heroes/hero_queenofpain/queen_sonic_wave_poison_explode.vpcf",
                             resNpc: hCaster,

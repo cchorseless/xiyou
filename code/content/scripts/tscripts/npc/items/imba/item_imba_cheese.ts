@@ -5,7 +5,7 @@ import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 function ConsumeCheese(parent: IBaseNpc_Plus, item: IBaseItem_Plus) {
     parent.EmitSound("DOTA_Item.Cheese.Activate");
-    parent.Heal(parent.GetMaxHealth(), item);
+    parent.ApplyHeal(parent.GetMaxHealth(), item);
     parent.GiveMana(parent.GetMaxMana());
     item.SetCurrentCharges(item.GetCurrentCharges() - 1);
     if (item.GetCurrentCharges() <= 0) {

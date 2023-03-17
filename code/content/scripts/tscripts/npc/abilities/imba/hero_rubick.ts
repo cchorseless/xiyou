@@ -237,7 +237,7 @@ export class modifier_imba_telekinesis extends BaseModifierMotionBoth_Plus {
             let enemies = FindUnitsInRadius(caster.GetTeamNumber(), parent_pos, undefined, impact_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
             for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 if (enemy != parent) {
-                    enemy.AddNewModifier(caster, ability, "modifier_stunned", {
+                    enemy.AddNewModifier(caster, ability, "modifier_generic_stunned", {
                         duration: impact_stun_duration * (1 - enemy.GetStatusResistance())
                     });
                 }
@@ -881,11 +881,11 @@ class TRubick_animations_reference {
         ["imba_bane_brain_sap", false, GameActivity_t.ACT_DOTA_CAST_ABILITY_5, "brain_sap"],
         ["imba_bane_fiends_grip", false, GameActivity_t.ACT_DOTA_CHANNEL_ABILITY_5, "fiends_grip"],
 
-        ["bristleback_viscous_nasal_goo", false, GameActivity_t.ACT_DOTA_ATTACK, "", 2.0],
+        ["imba_bristleback_viscous_nasal_goo", false, GameActivity_t.ACT_DOTA_ATTACK, "", 2.0],
 
-        ["chaos_knight_chaos_bolt", false, GameActivity_t.ACT_DOTA_ATTACK, "", 2.0],
-        ["chaos_knight_reality_rift", true, GameActivity_t.ACT_DOTA_CAST_ABILITY_5, "strike", 2.0],
-        ["chaos_knight_phantasm", true, GameActivity_t.ACT_DOTA_CAST_ABILITY_5, "remnant"],
+        ["imba_chaos_knight_chaos_bolt", false, GameActivity_t.ACT_DOTA_ATTACK, "", 2.0],
+        ["imba_chaos_knight_reality_rift", true, GameActivity_t.ACT_DOTA_CAST_ABILITY_5, "strike", 2.0],
+        ["imba_chaos_knight_phantasm", true, GameActivity_t.ACT_DOTA_CAST_ABILITY_5, "remnant"],
 
         ["imba_centaur_warrunner_hoof_stomp", false, GameActivity_t.ACT_DOTA_CAST_ABILITY_5, "slam", 2.0],
         ["imba_centaur_warrunner_double_edge", false, GameActivity_t.ACT_DOTA_ATTACK, "", 2.0],
@@ -899,16 +899,16 @@ class TRubick_animations_reference {
         ["imba_dazzle_shadow_wave", false, GameActivity_t.ACT_DOTA_CAST_ABILITY_3, ""],
         ["imba_dazzle_weave", false, GameActivity_t.ACT_DOTA_CAST_ABILITY_5, "crystal_nova"],
 
-        ["furion_sprout", false, GameActivity_t.ACT_DOTA_CAST_ABILITY_5, "sprout"],
-        ["furion_teleportation", true, GameActivity_t.ACT_DOTA_CAST_ABILITY_5, "teleport"],
-        ["furion_force_of_nature", false, GameActivity_t.ACT_DOTA_CAST_ABILITY_5, "summon"],
-        ["furion_wrath_of_nature", false, GameActivity_t.ACT_DOTA_CAST_ABILITY_5, "wrath"],
+        ["imba_furion_sprout", false, GameActivity_t.ACT_DOTA_CAST_ABILITY_5, "sprout"],
+        ["imba_furion_teleportation", true, GameActivity_t.ACT_DOTA_CAST_ABILITY_5, "teleport"],
+        ["imba_furion_force_of_nature", false, GameActivity_t.ACT_DOTA_CAST_ABILITY_5, "summon"],
+        ["imba_furion_wrath_of_nature", false, GameActivity_t.ACT_DOTA_CAST_ABILITY_5, "wrath"],
 
         ["imba_lina_dragon_slave", false, 0, "wave"],
         ["imba_lina_light_strike_array", false, 0, "lsa"],
         ["imba_lina_laguna_blade", false, 0, "laguna"],
 
-        ["ogre_magi_fireblast", false, 0, "frostbite"],
+        ["imba_ogre_magi_fireblast", false, 0, "frostbite"],
 
         ["imba_omniknight_purification", true, 0, "purification", 1.4],
         ["imba_omniknight_repel", false, 0, "repel"],

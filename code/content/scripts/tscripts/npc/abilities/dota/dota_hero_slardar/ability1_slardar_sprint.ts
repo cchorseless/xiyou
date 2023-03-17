@@ -6,7 +6,7 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_stunned } from "../../../modifier/effect/modifier_stunned";
+import { modifier_generic_stunned } from "../../../modifier/effect/modifier_generic_stunned";
 import { modifier_particle } from "../../../modifier/modifier_particle";
 
 /** dota原技能数据 */
@@ -97,7 +97,7 @@ export class ability1_slardar_sprint extends BaseAbility_Plus {
                 damage_type: this.GetAbilityDamageType(),
             }
             BattleHelper.GoApplyDamage(tDamageTable)
-            modifier_stunned.apply(hTarget, hCaster, this, { duration: crush_stun_duration * hTarget.GetStatusResistanceFactor(hCaster) * this.GetIncreasedStunDuration(hTarget) })
+            modifier_generic_stunned.apply(hTarget, hCaster, this, { duration: crush_stun_duration * hTarget.GetStatusResistanceFactor(hCaster) * this.GetIncreasedStunDuration(hTarget) })
             modifier_slardar_1_slow.apply(hTarget, hCaster, this, { duration: (crush_stun_duration + crush_extra_slow_duration) * hTarget.GetStatusResistanceFactor(hCaster) })
         }
     }

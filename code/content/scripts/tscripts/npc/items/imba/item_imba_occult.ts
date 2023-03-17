@@ -115,7 +115,7 @@ export class modifier_imba_occult_mask_unique extends BaseModifier_Plus {
                     }
                     let actual_damage = ApplyDamage(damageTable);
                     if (actual_damage > 0) {
-                        this.caster.Heal(actual_damage, this.ability);
+                        this.caster.ApplyHeal(actual_damage, this.ability);
                     }
                 }
             }

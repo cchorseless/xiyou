@@ -5,7 +5,7 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_shock } from "../../../modifier/effect/modifier_shock";
+import { modifier_generic_shock } from "../../../modifier/effect/modifier_generic_shock";
 
 /** dota原技能数据 */
 export const Data_storm_spirit_static_remnant = { "ID": "5098", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_NO_TARGET", "AbilityUnitDamageType": "DAMAGE_TYPE_MAGICAL", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_NO", "FightRecapLevel": "1", "AbilitySound": "Hero_StormSpirit.StaticRemnantPlant", "AbilityCastPoint": "0 0 0 0", "AbilityCooldown": "3.5", "AbilityDuration": "12.0", "AbilityManaCost": "70 80 90 100", "AbilitySpecial": { "01": { "var_type": "FIELD_INTEGER", "static_remnant_radius": "235" }, "02": { "var_type": "FIELD_INTEGER", "static_remnant_damage_radius": "260" }, "03": { "var_type": "FIELD_FLOAT", "static_remnant_delay": "1.0" }, "04": { "var_type": "FIELD_INTEGER", "static_remnant_damage": "120 175 230 285", "LinkedSpecialBonus": "special_bonus_unique_storm_spirit_5" } }, "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_1" };
@@ -249,7 +249,7 @@ export class modifier_storm_spirit_1_thinker extends BaseModifier_Plus {
                         damage: fDamage,
                         damage_type: hAbility.GetAbilityDamageType()
                     })
-                    modifier_shock.Shock(hTarget, hCaster, hAbility, iShockCount)
+                    modifier_generic_shock.Shock(hTarget, hCaster, hAbility, iShockCount)
                 }
 
                 EmitSoundOnLocationWithCaster(vPosition, ResHelper.GetSoundReplacement("Hero_StormSpirit.StaticRemnantExplode", hCaster), hCaster)

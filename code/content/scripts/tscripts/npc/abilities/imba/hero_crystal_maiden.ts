@@ -619,9 +619,8 @@ export class modifier_imba_crystal_maiden_frostbite_ally extends BaseModifier_Pl
         }
     }
     OnIntervalThink(): void {
-        this.GetParentPlus().Heal(this.heal_per_tick, this.GetAbilityPlus());
+        this.GetParentPlus().ApplyHeal(this.heal_per_tick, this.GetAbilityPlus());
         this.GetParentPlus().GiveMana(this.mana_per_tick);
-        SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, this.GetParentPlus(), this.heal_per_tick, undefined);
         SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_MANA_ADD, this.GetParentPlus(), this.mana_per_tick, undefined);
     }
     CheckState(): Partial<Record<modifierstate, boolean>> {

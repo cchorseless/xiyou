@@ -82,7 +82,7 @@ export class modifier_imba_rattletrap_battery_assault extends BaseModifier_Plus 
                     ability: this.GetAbilityPlus()
                 }
                 ApplyDamage(damageTable);
-                enemies[0].AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_stunned", {
+                enemies[0].AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_generic_stunned", {
                     duration: 0.1 * (1 - enemies[0].GetStatusResistance())
                 });
             } else {
@@ -935,7 +935,7 @@ export class imba_rattletrap_hookshot extends BaseAbility_Plus {
         for (const [_, enemy] of GameFunc.iPair(enemies)) {
             let distance_vector = enemy.GetAbsOrigin() - vLocation as Vector;
             if (distance_vector.Length2D() > this.GetSpecialValueFor("latch_radius") && math.abs(math.abs(AngleDiff(VectorToAngles(distance_vector).y, VectorToAngles(this.direction).y)) - 90) <= 30 && !this.razor_wind[enemy.GetEntityIndex()]) {
-                enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_stunned", {
+                enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_generic_stunned", {
                     duration: 0.1 * (1 - enemy.GetStatusResistance())
                 });
                 let damageTable = {
@@ -982,7 +982,7 @@ export class imba_rattletrap_hookshot extends BaseAbility_Plus {
                     ParticleManager.SetParticleControlEnt(ExtraData.hookshot_particle, 1, hTarget, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, "attach_hitloc", hTarget.GetAbsOrigin(), true);
                 }
                 if (hTarget.GetTeamNumber() != this.GetCasterPlus().GetTeamNumber()) {
-                    hTarget.AddNewModifier(this.GetCasterPlus(), this, "modifier_stunned", {
+                    hTarget.AddNewModifier(this.GetCasterPlus(), this, "modifier_generic_stunned", {
                         duration: this.GetSpecialValueFor("duration") * (1 - hTarget.GetStatusResistance())
                     });
                 }
@@ -1064,7 +1064,7 @@ export class modifier_imba_rattletrap_hookshot extends BaseModifierMotionHorizon
         if (this.GetCasterPlus() == this.GetParentPlus()) {
             for (const [_, unit] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.stun_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false))) {
                 if (unit.GetTeamNumber() != this.GetCasterPlus().GetTeamNumber() && !this.enemies_hit[unit.GetEntityIndex()]) {
-                    unit.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_stunned", {
+                    unit.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_generic_stunned", {
                         duration: this.stun_duration * (1 - unit.GetStatusResistance())
                     });
                     ApplyDamage({
@@ -1132,7 +1132,7 @@ export class modifier_imba_rattletrap_hookshot extends BaseModifierMotionHorizon
         if (this.GetCasterPlus() == this.GetParentPlus()) {
             for (const [_, unit] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.stun_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false))) {
                 if (!this.enemies_hit[unit.GetEntityIndex()]) {
-                    unit.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_stunned", {
+                    unit.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_generic_stunned", {
                         duration: this.stun_duration * (1 - unit.GetStatusResistance())
                     });
                     ApplyDamage({

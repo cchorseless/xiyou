@@ -5,7 +5,7 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifierMotionVertical_Plus, BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_stunned } from "../../../modifier/effect/modifier_stunned";
+import { modifier_generic_stunned } from "../../../modifier/effect/modifier_generic_stunned";
 import { modifier_kunkka_3_ebb, modifier_kunkka_3_talent, modifier_kunkka_3_tide } from "./ability3_kunkka_x_marks_the_spot";
 import { ability6_kunkka_ghostship } from "./ability6_kunkka_ghostship";
 
@@ -399,7 +399,7 @@ export class modifier_kunkka_1_torrent extends BaseModifierMotionVertical_Plus {
                 if (GFuncEntity.IsValid(hCaster) && modifier_kunkka_3_tide.exist(hCaster)) {
                     let tTargets = AoiHelper.FindEntityInRadius(hCaster.GetTeamNumber(), hParent.GetAbsOrigin(), this.radius, null, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, 0, FindOrder.FIND_CLOSEST)
                     for (let hUnit of (tTargets)) {
-                        modifier_stunned.apply(hUnit, hCaster, hAbility, { duration: this.stun_duration * this.tide_pct * 0.01 * hUnit.GetStatusResistanceFactor(hCaster) })
+                        modifier_generic_stunned.apply(hUnit, hCaster, hAbility, { duration: this.stun_duration * this.tide_pct * 0.01 * hUnit.GetStatusResistanceFactor(hCaster) })
                         let damage_table = {
                             ability: hAbility,
                             victim: hUnit,

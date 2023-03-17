@@ -4,7 +4,7 @@ import { BaseModifierMotionBoth_Plus, registerProp } from "../../entityPlus/Base
 import { registerModifier } from "../../entityPlus/Base_Plus";
 
 @registerModifier()
-export class modifier_jump extends BaseModifierMotionBoth_Plus {
+export class modifier_chess_jump extends BaseModifierMotionBoth_Plus {
     IsStunDebuff() {
         return false;
     }

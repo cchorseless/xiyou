@@ -5,7 +5,7 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_feared } from "../../../modifier/effect/modifier_feared";
+import { modifier_generic_feared } from "../../../modifier/effect/modifier_generic_feared";
 
 /** dota原技能数据 */
 export const Data_necrolyte_death_pulse = { "ID": "5158", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_NO_TARGET", "AbilityUnitDamageType": "DAMAGE_TYPE_MAGICAL", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_NO", "FightRecapLevel": "1", "AbilitySound": "Hero_Necrolyte.DeathPulse", "AbilityCastRange": "0", "AbilityCastPoint": "0.0 0.0 0.0 0.0", "AbilityCooldown": "8 7 6 5", "AbilityDamage": "100 150 200 250", "AbilityManaCost": "100 130 160 190", "AbilitySpecial": { "01": { "var_type": "FIELD_INTEGER", "area_of_effect": "500" }, "02": { "var_type": "FIELD_INTEGER", "heal": "60 80 100 120", "LinkedSpecialBonus": "special_bonus_unique_necrophos_4" }, "03": { "var_type": "FIELD_INTEGER", "projectile_speed": "400" } }, "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_1" };
@@ -82,7 +82,7 @@ export class ability1_necrolyte_death_pulse extends BaseAbility_Plus {
             }
             sTalentName = "special_bonus_unique_necrolyte_custom_5"
             if (hCaster.HasTalent(sTalentName) && !hTarget.IsAncient()) {
-                modifier_feared.apply(hTarget, hCaster, this, { duration: hCaster.GetTalentValue(sTalentName) })
+                modifier_generic_feared.apply(hTarget, hCaster, this, { duration: hCaster.GetTalentValue(sTalentName) })
             }
 
         }

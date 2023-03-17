@@ -3,7 +3,7 @@ import { BaseModifierMotionHorizontal_Plus, registerProp } from "../../entityPlu
 import { registerModifier } from "../../entityPlus/Base_Plus";
 
 @registerModifier()
-export class modifier_run extends BaseModifierMotionHorizontal_Plus {
+export class modifier_chess_run extends BaseModifierMotionHorizontal_Plus {
     IsStunDebuff() {
         return false;
     }

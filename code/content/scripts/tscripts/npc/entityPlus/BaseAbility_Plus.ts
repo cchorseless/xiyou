@@ -1,7 +1,7 @@
-import {GameFunc} from "../../GameFunc";
-import {KVHelper} from "../../helper/KVHelper";
-import {ResHelper} from "../../helper/ResHelper";
-import {BaseAbility} from "./Base_Plus";
+import { GameFunc } from "../../GameFunc";
+import { KVHelper } from "../../helper/KVHelper";
+import { ResHelper } from "../../helper/ResHelper";
+import { BaseAbility } from "./Base_Plus";
 
 export class BaseAbility_Plus extends BaseAbility {
     /**对应dota内的名字 */
@@ -30,7 +30,60 @@ export class BaseAbility_Plus extends BaseAbility {
             return PlayerResource.GetSelectedHeroEntity(iPlayerID)
         }
     }
+    SetCooldown(fCD: number = -1) {
+        this.EndCooldown();
+        if (fCD > 0) {
+            this.StartCooldown(fCD);
+        } else {
+            this.UseResources(false, false, true);
+        }
+    }
 
+    FireTrackingProjectile(FX: string,
+        target: IBaseNpc_Plus,
+        speed: number,
+        data?: { origin?: Vector, source?: IBaseNpc_Plus, duration?: number, extraData?: any },
+        iAttach: DOTAProjectileAttachment_t = DOTAProjectileAttachment_t.DOTA_PROJECTILE_ATTACHMENT_HITLOCATION,
+        bDodge = true,
+        bVision = true,
+        vision = 100
+    ) {
+        let internalData = data || {}
+        let dodgable = true;
+        if (bDodge != undefined) {
+            dodgable = bDodge;
+        }
+        let provideVision = false;
+        if (bVision != undefined) {
+            provideVision = bVision;
+        }
+        let origin = this.GetCaster().GetAbsOrigin();
+        if (internalData.origin) {
+            origin = internalData.origin;
+        } else if (internalData.source) {
+            origin = internalData.source.GetAbsOrigin();
+        }
+        let projectile = {
+            Target: target,
+            Source: internalData.source || this.GetCaster(),
+            Ability: this,
+            EffectName: FX,
+            iMoveSpeed: speed,
+            vSourceLoc: origin || this.GetCaster().GetAbsOrigin(),
+            bDrawsOnMinimap: false,
+            bDodgeable: dodgable,
+            bIsAttack: false,
+            bVisibleToEnemies: true,
+            bReplaceExisting: false,
+            flExpireTime: internalData.duration,
+            bProvidesVision: provideVision,
+            iVisionRadius: vision || 100,
+            iVisionTeamNumber: this.GetCaster().GetTeamNumber(),
+            iSourceAttachment: iAttach || 3,
+            ExtraData: internalData.extraData
+        }
+        return ProjectileManager.CreateTrackingProjectile(projectile);
+    }
     public GetCastRangePlus() {
         let caster = this.GetCaster()
         let r = 0;
@@ -41,6 +94,45 @@ export class BaseAbility_Plus extends BaseAbility {
             r = 200;
         }
         return r;
+    }
+
+    public DealDamage(attacker: IBaseNpc_Plus, target: IBaseNpc_Plus, damage: number, data?: Partial<ApplyDamageOptions>, spellText?: DOTA_OVERHEAD_ALERT) {
+        if (!this || !target || !attacker) {
+            return 0;
+        }
+        if (this.IsNull() || target.IsNull() || attacker.IsNull()) {
+            return 0;
+        }
+        if (!target.IsAlive()) {
+            return 0;
+        }
+        let internalData = data || {};
+        let damageType = internalData.damage_type || this.GetAbilityDamageType();
+        if (damageType == undefined || damageType == 0) {
+            damageType = DAMAGE_TYPES.DAMAGE_TYPE_MAGICAL;
+        }
+        let damageFlags = internalData.damage_flags || DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NONE;
+        let localdamage = damage || this.GetAbilityDamage() || 0;
+        spellText = spellText || 0;
+        let ability = this || internalData.ability;
+        let oldHealth = target.GetHealth();
+        ApplyDamage({
+            victim: target,
+            attacker: attacker,
+            ability: ability,
+            damage_type: damageType,
+            damage: localdamage,
+            damage_flags: damageFlags
+        });
+        if (target.IsNull()) {
+            return oldHealth;
+        }
+        let newHealth = target.GetHealth();
+        let returnDamage = oldHealth - newHealth;
+        if (spellText > 0) {
+            SendOverheadEventMessage(attacker.GetPlayerOwner(), spellText, target, returnDamage, attacker.GetPlayerOwner());
+        }
+        return returnDamage;
     }
 
 

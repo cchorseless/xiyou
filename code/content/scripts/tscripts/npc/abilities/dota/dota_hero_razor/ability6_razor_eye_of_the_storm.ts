@@ -4,7 +4,7 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_shock } from "../../../modifier/effect/modifier_shock";
+import { modifier_generic_shock } from "../../../modifier/effect/modifier_generic_shock";
 
 /** dota原技能数据 */
 export const Data_razor_eye_of_the_storm = { "ID": "5085", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE", "AbilityType": "DOTA_ABILITY_TYPE_ULTIMATE", "AbilityUnitDamageType": "DAMAGE_TYPE_PHYSICAL", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_YES", "SpellDispellableType": "SPELL_DISPELLABLE_NO", "FightRecapLevel": "1", "HasScepterUpgrade": "1", "AbilitySound": "Hero_Razor.Storm.Cast", "AbilityCastAnimation": "ACT_DOTA_OVERRIDE_ABILITY_4", "AbilityCastGestureSlot": "DEFAULT", "AbilityCastPoint": "0", "AbilityCooldown": "80 70 60", "AbilityManaCost": "100 150 200", "AbilityModifierSupportValue": "0.1", "AbilitySpecial": { "01": { "var_type": "FIELD_INTEGER", "radius": "500" }, "02": { "var_type": "FIELD_FLOAT", "duration": "30.0" }, "03": { "var_type": "FIELD_FLOAT", "strike_interval": "0.7 0.6 0.5", "LinkedSpecialBonus": "special_bonus_unique_razor_2" }, "04": { "var_type": "FIELD_INTEGER", "armor_reduction": "1 1 1" }, "05": { "var_type": "FIELD_INTEGER", "damage": "60 75 90" } } };
@@ -190,7 +190,7 @@ export class modifier_razor_6_buff extends BaseModifier_Plus {
             damage_type: DAMAGE_TYPES.DAMAGE_TYPE_MAGICAL
         }
         BattleHelper.GoApplyDamage(damageInfo)
-        modifier_shock.Shock(hTarget, hCaster, this.GetAbilityPlus(), this.fDamage * (this.iShockCount * 0.01))
+        modifier_generic_shock.Shock(hTarget, hCaster, this.GetAbilityPlus(), this.fDamage * (this.iShockCount * 0.01))
         let iParticleID = ResHelper.CreateParticle({
             resPath: "particles/units/heroes/hero_razor/razor_storm_lightning_strike.vpcf",
             resNpc: null,

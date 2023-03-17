@@ -68,7 +68,7 @@ export class modifier_imba_dust_of_appearance extends BaseModifier_Plus {
         }
         this.invisible_slow = this.GetItemPlus().GetSpecialValueFor("invisible_slow");
         this.invisModifiers = {
-            "1": "modifier_invisible",
+            "1": "modifier_generic_invisible",
             "2": "modifier_mirana_moonlight_shadow",
             "3": "modifier_item_imba_shadow_blade_invis",
             "4": "modifier_item_shadow_amulet_fade",
@@ -81,7 +81,7 @@ export class modifier_imba_dust_of_appearance extends BaseModifier_Plus {
             "11": "modifier_templar_assassin_meld",
             "12": "modifier_imba_skeleton_walk_dummy",
             "13": "modifier_invoker_ghost_walk_self",
-            "14": "modifier_rune_invis"
+            "14": "modifier_chess_rune_invis"
         }
     }
     /** DeclareFunctions():modifierfunction[] {
