@@ -89,15 +89,15 @@ export class imba_bounty_hunter_shuriken_toss extends BaseAbility_Plus {
             let pull_duration = ability.GetSpecialValueFor("pull_duration");
             bounce_radius = bounce_radius + caster.GetTalentValue("special_bonus_imba_bounty_hunter_5");
             if (!target) {
-                return undefined;
+                return;
             }
             target.EmitSound("Hero_BountyHunter.Shuriken.Impact");
             if (target.IsMagicImmune()) {
-                return undefined;
+                return;
             }
             if (caster.GetTeamNumber() != target.GetTeamNumber()) {
                 if (target.TriggerSpellAbsorb(ability)) {
-                    return undefined;
+                    return;
                 }
             }
             target.AddNewModifier(caster, ability, "modifier_imba_shuriken_toss_stunned", {
@@ -141,7 +141,7 @@ export class imba_bounty_hunter_shuriken_toss extends BaseAbility_Plus {
                 for (const [_, enemy_in_table] of GameFunc.iPair(enemy_table)) {
                     if (enemy.GetEntityIndex() == enemy_in_table) {
                         enemy_found = true;
-                        return;
+                        break;
                     }
                 }
                 if (enemy.HasModifier("modifier_imba_track_debuff_mark") && !enemy_found) {
@@ -480,10 +480,10 @@ export class modifier_imba_jinada_buff_crit extends BaseModifier_Plus {
             let attacker = keys.attacker as IBaseNpc_Plus;
             let target = keys.target as IBaseNpc_Plus;
             if (!attacker.IsRealUnit()) {
-                return undefined;
+                return;
             }
             if (attacker.PassivesDisabled()) {
-                return undefined;
+                return;
             }
             if (this.parent == attacker && target.GetTeamNumber() != this.parent.GetTeamNumber()) {
                 this.parent.EmitSound("Hero_BountyHunter.Jinada");

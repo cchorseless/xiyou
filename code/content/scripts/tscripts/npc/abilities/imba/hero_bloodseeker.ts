@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -33,6 +34,29 @@ export class imba_bloodseeker_bloodrage extends BaseAbility_Plus {
         }
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_bloodseeker_7") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_bloodseeker_7")) {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_bloodseeker_7"), "modifier_special_bonus_imba_bloodseeker_7", {});
+        }
+    }
+
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        if (RollPercentage(50)) {
+            return AI_ability.TARGET_if_friend(this, null, (target) => {
+                if (target.HasModifier("modifier_imba_bloodrage_buff_stats")) {
+                    return false;
+                }
+                return true;
+            });
+        }
+        else {
+            return AI_ability.TARGET_if_enemy(this, null, (target) => {
+                if (target.HasModifier("modifier_imba_bloodrage_buff_stats")) {
+                    return false;
+                }
+                return true;
+            });
         }
     }
 }
@@ -318,6 +342,15 @@ export class imba_bloodseeker_blood_bath extends BaseAbility_Plus {
             vector = vector * (-1) as Vector;
         }
         return vector;
+    }
+
+
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.POSITION_most_enemy(this);
     }
 }
 @registerModifier()
@@ -831,6 +864,13 @@ export class imba_bloodseeker_rupture extends BaseAbility_Plus {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_bloodseeker_rupture_cast_range") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_bloodseeker_rupture_cast_range")) {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_bloodseeker_rupture_cast_range"), "modifier_special_bonus_imba_bloodseeker_rupture_cast_range", {});
         }
+    }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
     }
 }
 @registerModifier()

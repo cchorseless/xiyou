@@ -36,6 +36,7 @@
         "launch": "node scripts/launch.js --m bigmap01",
         "updateApp": "node scripts/updateApp.js 2598019781",
         "lua2ts": "node scripts/lua2ts/lua2ts.js",
+        "luamini": "node scripts/luamini.js",
         "kv2excel": "node scripts/kv_2_excel.js",
         "preprod": "node scripts/prepublish.js",
         "prod": "run-s prod:*",
