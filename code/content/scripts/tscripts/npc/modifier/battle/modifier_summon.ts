@@ -4,11 +4,11 @@ import { Enum_MODIFIER_EVENT, EventDataType, modifier_event } from "../../proper
 
 @registerModifier()
 export class modifier_summon extends BaseModifier_Plus {
-    IsHidden() { return false }
-    IsDebuff() { return true }
+    IsHidden() { return true }
+    IsDebuff() { return false }
     IsPurgable() { return false }
-    IsPurgeException() { return true }
-    IsStunDebuff() { return true }
+    IsPurgeException() { return false }
+    IsStunDebuff() { return false }
     AllowIllusionDuplicate() { return false }
 
     public BeCreated(params?: IModifierTable): void {

@@ -1,12 +1,12 @@
-import {AI_ability} from "../../../ai/AI_ability";
-import {GameFunc} from "../../../GameFunc";
-import {EventHelper} from "../../../helper/EventHelper";
-import {NetTablesHelper} from "../../../helper/NetTablesHelper";
-import {ResHelper} from "../../../helper/ResHelper";
-import {BaseAbility_Plus} from "../../entityPlus/BaseAbility_Plus";
-import {BaseModifier_Plus, registerProp} from "../../entityPlus/BaseModifier_Plus";
-import {registerAbility, registerModifier} from "../../entityPlus/Base_Plus";
-import {Enum_MODIFIER_EVENT, registerEvent} from "../../propertystat/modifier_event";
+import { AI_ability } from "../../../ai/AI_ability";
+import { GameFunc } from "../../../GameFunc";
+import { EventHelper } from "../../../helper/EventHelper";
+import { NetTablesHelper } from "../../../helper/NetTablesHelper";
+import { ResHelper } from "../../../helper/ResHelper";
+import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
+import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
+import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 
 @registerAbility()
 export class imba_alchemist_acid_spray extends BaseAbility_Plus {
@@ -758,7 +758,7 @@ export class modifier_imba_unstable_concoction_handler extends BaseModifier_Plus
                 return;
             }
             if (!(integer == 0 && decimal <= 1)) {
-                let allHeroes = caster.GetPlayerRoot().BuildingManager().getAllBattleUnitAliveNpc();
+                let allHeroes = caster.GetPlayerRoot().BattleUnitManagerComp().GetAllBattleUnitAliveNpc(caster.GetTeam());
                 for (const [k, v] of GameFunc.iPair(allHeroes)) {
                     if (v.GetTeam() == caster.GetTeam()) {
                         let particle = ResHelper.CreateParticleEx(particleName, ParticleAttachment_t.PATTACH_OVERHEAD_FOLLOW, caster);
@@ -849,9 +849,8 @@ export class modifier_imba_unstable_concoction_stunned extends BaseModifier_Plus
 
 @registerAbility()
 export class imba_alchemist_goblins_greed extends BaseAbility_Plus {
-    public greevil_active: any;
     public greevil: IBaseNpc_Plus;
-    public greevil_ability: any;
+    public greevil_ability: imba_alchemist_greevils_greed;
 
     GetAbilityTextureName(): string {
         return "alchemist_goblins_greed";
@@ -904,7 +903,7 @@ export class imba_alchemist_goblins_greed extends BaseAbility_Plus {
 
     OnSpellStart(): void {
         if (IsServer()) {
-            if (this.greevil_active) {
+            if (GFuncEntity.IsValid(this.greevil)) {
                 this.EndCooldown();
                 EventHelper.ErrorMessage("#dota_hud_error_active_greevil", this.GetCasterPlus().GetPlayerID());
                 return;
@@ -919,7 +918,6 @@ export class imba_alchemist_goblins_greed extends BaseAbility_Plus {
             let total_exp = target.GetDeathXP() * exp_multiplier;
             let bonus_stacks = this.GetSpecialValueFor("bonus_stacks");
             let greevil_duration = this.GetSpecialValueFor("greevil_duration");
-            this.greevil_active = true;
             target.EmitSound(cast_sound);
             SendOverheadEventMessage(caster.GetPlayerOwner(), DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_GOLD, target, total_gold, undefined);
             let particle_fx = ResHelper.CreateParticleEx("particles/items2_fx/hand_of_midas.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, target);
@@ -932,14 +930,9 @@ export class imba_alchemist_goblins_greed extends BaseAbility_Plus {
             // caster.AddExperience(total_exp, false, false);
             playerroot.PlayerDataComp().ModifyGold(total_gold, true, EDOTA_ModifyGold_Reason.DOTA_ModifyGold_Unspecified);
             modifier.SetStackCount(modifier.GetStackCount() + bonus_stacks);
-            this.greevil = caster.CreateSummon("npc_imba_alchemist_greevil", target.GetAbsOrigin());
-            this.greevil.SetOwner(caster);
+            this.greevil = caster.CreateSummon("npc_imba_alchemist_greevil", target.GetAbsOrigin(), greevil_duration);
             this.greevil_ability = this.greevil.findAbliityPlus<imba_alchemist_greevils_greed>("imba_alchemist_greevils_greed");
             this.greevil_ability.SetLevel(1);
-            this.AddTimer(greevil_duration, () => {
-                this.greevil.Destroy();
-                this.greevil_active = false;
-            });
             this.AddTimer(0.1, () => {
                 this.greevil.MoveToNPC(caster);
             });
@@ -1165,7 +1158,7 @@ export class imba_alchemist_chemical_rage extends BaseAbility_Plus {
     }
 
     AutoSpellSelf() {
-        return AI_ability.NO_TARGET_if_enemy(this);
+        return AI_ability.NO_TARGET_cast(this);
     }
 
     GetAbilityTextureName(): string {

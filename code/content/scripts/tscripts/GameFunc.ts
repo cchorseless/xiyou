@@ -482,7 +482,6 @@ export module FuncEntity {
                 return;
             }
             unit.__safedestroyed__ = true;
-            unit.RegOwnerSelf(false);
             if (IsServer()) {
                 let allm = unit.FindAllModifiers();
                 for (let m of allm) {
@@ -496,16 +495,10 @@ export module FuncEntity {
                     unit.GetItemInSlot(i) && SafeDestroyItem(unit.GetItemInSlot(i) as any);
                 }
             }
-            GTimerHelper.ClearAll(unit);
             if (unit.OnDestroy) {
                 unit.OnDestroy();
             }
-            if (unit.__TempData) {
-                for (let k in unit.__TempData) {
-                    delete unit.__TempData[k];
-                }
-                unit.__TempData = null;
-            }
+            unit.ClearSelf();
             unit.Destroy();
             // UTIL_Remove(unit);
         }

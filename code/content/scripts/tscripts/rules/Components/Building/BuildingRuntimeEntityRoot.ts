@@ -1,9 +1,10 @@
 
 import { KVHelper } from "../../../helper/KVHelper";
 import { building_auto_findtreasure } from "../../../npc/abilities/common/building_auto_findtreasure";
+import { modifier_jiaoxie_wudi } from "../../../npc/modifier/battle/modifier_jiaoxie_wudi";
 import { modifier_wait_portal } from "../../../npc/modifier/modifier_portal";
 import { BattleUnitEntityRoot } from "../BattleUnit/BattleUnitEntityRoot";
-import { BattleUnitManagerComponent } from "../BattleUnit/BattleUnitManagerComponent";
+import { ERoundBoard } from "../Round/ERoundBoard";
 
 export class BuildingRuntimeEntityRoot extends BattleUnitEntityRoot {
     public IsRuntimeBuilding(): boolean {
@@ -13,9 +14,32 @@ export class BuildingRuntimeEntityRoot extends BattleUnitEntityRoot {
         (this.BelongPlayerid as any) = playerid;
         (this.ConfigID as any) = conf;
         (this.EntityId as any) = this.GetDomain<IBaseNpc_Plus>().GetEntityIndex();
-        this.AddComponent(GGetRegClass<typeof BattleUnitManagerComponent>("BattleUnitManagerComponent"));
         this.addBattleComp();
+        this.JoinInRound();
     }
+
+
+    OnRound_Battle() {
+        let npc = this.GetDomain<IBaseNpc_Plus>();
+        modifier_jiaoxie_wudi.remove(npc);
+        this.AbilityManagerComp().OnRound_Battle();
+        this.InventoryComp().OnRound_Battle();
+        GTimerHelper.AddTimer(1, GHandler.create(this, () => {
+            this.AiAttackComp().startFindEnemyAttack();
+        }))
+    }
+    OnRound_Prize(round: ERoundBoard) {
+        this.AiAttackComp().endFindToAttack();
+        this.AbilityManagerComp().OnRound_Prize(round);
+        this.InventoryComp().OnRound_Prize(round);
+        if (round.isWin) {
+            // this.StartFindTreasure();
+        }
+    }
+    OnRound_WaitingEnd() {
+        this.StopFindTreasure();
+    }
+
     onDestroy(): void {
         let npc = this.GetDomain<IBaseNpc_Plus>();
         if (GFuncEntity.IsValid(npc) && !npc.__safedestroyed__) {
@@ -24,8 +48,10 @@ export class BuildingRuntimeEntityRoot extends BattleUnitEntityRoot {
     }
 
     onKilled(events: EntityKilledEvent): void {
-        super.onKilled(events);
-
+        this.changeAliveState(false);
+        this.AiAttackComp().endFindToAttack();
+        let npc = this.GetDomain<IBaseNpc_Plus>();
+        npc.StartGesture(GameActivity_t.ACT_DOTA_DIE);
     }
 
     Config() {
@@ -59,10 +85,5 @@ export class BuildingRuntimeEntityRoot extends BattleUnitEntityRoot {
     GetDotaHeroName() {
         return this.Config().DotaHeroName;
     }
-    BattleUnitManager() {
-        return this.GetComponentByName<BattleUnitManagerComponent>("BattleUnitManagerComponent");
-    }
-
-
 
 }

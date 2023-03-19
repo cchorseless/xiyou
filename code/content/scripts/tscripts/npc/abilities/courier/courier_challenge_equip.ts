@@ -45,7 +45,7 @@ export class courier_challenge_equip extends ActiveRootAbility implements IAbili
                 let configid = GGameServiceSystem.GetInstance().getDifficultyChapterDes() + "_equip";
                 let challengeround = root.RoundManagerComp().getBoardChallengeRound(configid);
                 if (challengeround) {
-                    challengeround.OnStart();
+                    challengeround.OnRound_Start();
                     root.PlayerDataComp().changeItem(this.costType, -this.costCount);
                     root.PlayerDataComp().SyncClient();
                     let level = this.GetLevel();

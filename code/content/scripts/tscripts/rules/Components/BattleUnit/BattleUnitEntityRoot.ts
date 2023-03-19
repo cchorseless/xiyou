@@ -3,6 +3,7 @@ import { modifier_no_health_bar } from "../../../npc/modifier/modifier_no_health
 import { modifier_hero_property } from "../../../npc/propertystat/modifier_hero_property";
 import { BuildingConfig } from "../../../shared/BuildingConfig";
 import { serializeETProps } from "../../../shared/lib/Entity";
+import { RoundConfig } from "../../../shared/RoundConfig";
 import { BaseEntityRoot } from "../../Entity/BaseEntityRoot";
 import { AbilityManagerComponent } from "../Ability/AbilityManagerComponent";
 import { AiAttackComponent } from "../AI/AiAttackComponent";
@@ -10,10 +11,10 @@ import { BuffManagerComponent } from "../Buff/BuffManagerComponent";
 import { ChessMoveComponent } from "../ChessControl/ChessMoveComponent";
 import { CombinationComponent } from "../Combination/CombinationComponent";
 import { InventoryComponent } from "../Inventory/InventoryComponent";
-import { RoundStateComponent } from "../Round/RoundStateComponent";
+import { ERoundBoard } from "../Round/ERoundBoard";
 import { WearableComponent } from "../Wearable/WearableComponent";
 
-export class BattleUnitEntityRoot extends BaseEntityRoot {
+export class BattleUnitEntityRoot extends BaseEntityRoot implements IRoundStateCallback {
     public iScale: number = 1;
     @serializeETProps()
     public iLevel: number = 1;
@@ -24,7 +25,27 @@ export class BattleUnitEntityRoot extends BaseEntityRoot {
     @serializeETProps()
     public PrimaryAttribute: number = 1;
 
-    onInit() {
+    readonly isAlive: boolean = true;
+    JoinInRound(): void {
+        let domain = this.GetDomain<IBaseNpc_Plus>();
+        let currentround = domain.ETRoot.As<IBattleUnitEntityRoot>().GetPlayer().RoundManagerComp().getCurrentBoardRound();
+        switch (currentround.roundState) {
+            case RoundConfig.ERoundBoardState.start:
+                this.OnRound_Start();
+                break;
+            case RoundConfig.ERoundBoardState.battle:
+                this.OnRound_Battle();
+                break;
+            case RoundConfig.ERoundBoardState.prize:
+                this.OnRound_Prize(currentround);
+                break;
+            case RoundConfig.ERoundBoardState.waiting_next:
+                this.OnRound_WaitingEnd();
+                break;
+        }
+    }
+
+    InitSyncClientInfo() {
         this.iScale = this.GetDomain<IBaseNpc_Plus>().GetAbsScale();
         let domain = this.GetDomain<IBaseNpc_Plus>();
         const m = modifier_hero_property.applyOnly(domain, domain);
@@ -52,7 +73,9 @@ export class BattleUnitEntityRoot extends BaseEntityRoot {
     checkCanStarUp() {
         return this.iStar < BuildingConfig.MAX_STAR;
     }
-
+    changeAliveState(state: boolean) {
+        (this.isAlive as any) = state;
+    }
     SetStar(n: number) {
         this.iStar = n;
         let domain = this.GetDomain<IBaseNpc_Plus>();
@@ -75,12 +98,15 @@ export class BattleUnitEntityRoot extends BaseEntityRoot {
 
 
     onKilled(events: EntityKilledEvent): void {
-        this.ChessComp()?.changeAliveState(false);
-        this.AiAttackComp()?.endFindToAttack();
-        let npc = this.GetDomain<IBaseNpc_Plus>();
-        npc.StartGesture(GameActivity_t.ACT_DOTA_DIE);
+        this.changeAliveState(false);
+        this.Dispose();
     }
 
+
+    OnRound_Start(round?: ERoundBoard): void { }
+    OnRound_Battle(): void { }
+    OnRound_Prize(round?: ERoundBoard): void { }
+    OnRound_WaitingEnd(): void { }
 
     IsFriendly() {
         let domain = this.GetDomain<IBaseNpc_Plus>();
@@ -111,7 +137,6 @@ export class BattleUnitEntityRoot extends BaseEntityRoot {
         this.AddComponent(GGetRegClass<typeof AbilityManagerComponent>("AbilityManagerComponent"));
         this.AddComponent(GGetRegClass<typeof InventoryComponent>("InventoryComponent"));
         this.AddComponent(GGetRegClass<typeof BuffManagerComponent>("BuffManagerComponent"));
-        this.AddComponent(GGetRegClass<typeof RoundStateComponent>("RoundStateComponent"));
     }
 
     GetDotaHeroName() {
@@ -137,9 +162,6 @@ export class BattleUnitEntityRoot extends BaseEntityRoot {
     }
     CombinationComp() {
         return this.GetComponentByName<CombinationComponent>("CombinationComponent");
-    }
-    RoundStateComp() {
-        return this.GetComponentByName<RoundStateComponent>("RoundStateComponent");
     }
 }
 

@@ -5,7 +5,7 @@ import { BaseEntityRoot } from "../../Entity/BaseEntityRoot";
 import { ERoundBoard } from "../Round/ERoundBoard";
 import { FHeroCombinationManagerComponent } from "./FHeroCombinationManagerComponent";
 
-export class FakerHeroEntityRoot extends BaseEntityRoot {
+export class FakerHeroEntityRoot extends BaseEntityRoot implements IRoundStateCallback {
     ProjectileInfo: IProjectileEffectInfo = Assert_ProjectileEffect.p000;
     SpawnEffect: ISpawnEffectInfo = Assert_SpawnEffect.Effect.Spawn_fall;
 
@@ -21,8 +21,7 @@ export class FakerHeroEntityRoot extends BaseEntityRoot {
     public RefreshFakerHero() {
 
     }
-
-    OnRoundStartBegin(round: ERoundBoard) {
+    OnRound_Start(round: ERoundBoard) {
         let player = this.GetPlayer();
         player.EnemyManagerComp().removeAllEnemy();
         this.FHeroCombinationManager().getAllActiveCombination().forEach(comb => {
@@ -31,29 +30,34 @@ export class FakerHeroEntityRoot extends BaseEntityRoot {
         this.RefreshFakerHero();
         round.CreateAllRoundBasicEnemy(this.SpawnEffect);
     }
-    OnRoundStartBattle() {
+    OnRound_Battle() {
         let player = this.GetPlayer();
-        player.EnemyManagerComp().getAllBattleUnitAlive().forEach(b => {
-            b.RoundStateComp().OnBoardRound_Battle();
+        player.BattleUnitManagerComp().GetAllBattleUnitAlive(DOTATeam_t.DOTA_TEAM_BADGUYS).forEach(b => {
+            b.OnRound_Battle();
         })
         this.FHeroCombinationManager().getAllActiveCombination().forEach(comb => {
-            comb.OnRoundStartBattle();
+            comb.OnRound_Battle();
         })
     }
-    OnRoundStartPrize(round: ERoundBoard) {
+    OnRound_Prize(round: ERoundBoard) {
         this.FHeroCombinationManager().getAllActiveCombination().forEach(comb => {
             if (comb) {
-                comb.OnRoundStartPrize(round);
+                comb.OnRound_Prize(round);
             }
         })
         let player = this.GetPlayer();
         if (!round.isWin) {
             let damage = 0;
             let delay_time = 0.5;
-            let aliveEnemy = player.EnemyManagerComp().getAllAliveEnemy();
+            let aliveEnemy = player.BattleUnitManagerComp().GetAllBattleUnitAlive(DOTATeam_t.DOTA_TEAM_BADGUYS);
             aliveEnemy.forEach((b) => {
-                b.RoundStateComp().OnBoardRound_Prize_Enemy(round);
-                damage += Number(b.GetRoundBasicUnitConfig().failureCount || "0");
+                b.OnRound_Prize(round);
+                if (b.IsEnemy()) {
+                    damage += GToNumber((b as IEnemyUnitEntityRoot).GetRoundBasicUnitConfig().failureCount || "1");
+                }
+                else if (b.IsIllusion() || b.IsSummon()) {
+                    damage += 1;
+                }
                 delay_time = math.min(delay_time, b.GetDistance2Player() / 1000);
             });
             GTimerHelper.AddTimer(delay_time, GHandler.create(this, () => {
@@ -62,11 +66,11 @@ export class FakerHeroEntityRoot extends BaseEntityRoot {
         }
     }
 
-    OnRoundWaitingEnd(round: ERoundBoard) {
+    OnRound_WaitingEnd() {
         let player = this.GetPlayer();
-        player.EnemyManagerComp().getAllAliveEnemy()
+        player.BattleUnitManagerComp().GetAllBattleUnitAlive(DOTATeam_t.DOTA_TEAM_BADGUYS)
             .forEach((b) => {
-                b.RoundStateComp().OnBoardRound_WaitingEnd();
+                b.OnRound_WaitingEnd();
             });
     }
     FHeroCombinationManager() {

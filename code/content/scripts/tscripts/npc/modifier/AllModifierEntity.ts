@@ -4,6 +4,7 @@ import { modifier_animation_freeze } from "./animation/modifier_animation_freeze
 import { modifier_animation_translate } from "./animation/modifier_animation_translate";
 import { modifier_animation_translate_permanent } from "./animation/modifier_animation_translate_permanent";
 import { modifier_illusion } from "./battle/modifier_illusion";
+import { modifier_jiaoxie_wudi } from "./battle/modifier_jiaoxie_wudi";
 import { modifier_summon } from "./battle/modifier_summon";
 
 import { modifier_sect_archer_base_a } from "./combinationeffect/modifier_sect_archer";
@@ -78,6 +79,7 @@ import { modifier_courier_fx_ambient_7 } from "./courier_ambient_effect/modifier
 import { modifier_courier_fx_ambient_8 } from "./courier_ambient_effect/modifier_courier_fx_ambient_8";
 import { modifier_courier_fx_ambient_9 } from "./courier_ambient_effect/modifier_courier_fx_ambient_9";
 import { AllGenericEffect } from "./effect/AllGenericEffect";
+import { modifier_generic_motion_controller } from "./generic/modifier_generic_motion_controller";
 import { modifier_spawn_activity } from "./spawn/modifier_spawn_activity";
 
 
@@ -93,6 +95,8 @@ import { modifier_spawn_activity } from "./spawn/modifier_spawn_activity";
     modifier_illusion,
     modifier_summon,
     modifier_spawn_activity,
+    modifier_jiaoxie_wudi,
+    modifier_generic_motion_controller,
 ];
 
 [

@@ -3,13 +3,16 @@ import { ChessControlConfig } from "../../../shared/ChessControlConfig";
 import { ET } from "../../../shared/lib/Entity";
 import { RoundConfig } from "../../../shared/RoundConfig";
 import { PlayerScene } from "../Player/PlayerScene";
+import { ERoundBoard } from "../Round/ERoundBoard";
 import { ChessVector } from "./ChessVector";
 
 @GReloadable
-export class ChessControlComponent extends ET.Component {
+export class ChessControlComponent extends ET.Component implements IRoundStateCallback {
 
-    OnRoundStartBattle() {
-    }
+    OnRound_Start(round?: ERoundBoard): void { };
+    OnRound_Battle(): void { }
+    OnRound_Prize(round?: ERoundBoard): void { }
+    OnRound_WaitingEnd(): void { }
 
     public moveChess(target: IBuildingEntityRoot, v: Vector): [boolean, string] {
         let r: [boolean, string] = [true, ""];

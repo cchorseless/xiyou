@@ -6,6 +6,35 @@ import { BaseNpc } from "./Base_Plus";
 /**普通NPC单位基类 */
 export class BaseNpc_Plus extends BaseNpc {
 
+    GetAllCanCastAbility?() {
+        let r: IBaseAbility_Plus[] = [];
+        if (!GFuncEntity.IsValid(this) || this.IsIllusion()) {
+            return r;
+        }
+        let len = this.GetAbilityCount();
+        for (let ability_id = 0; ability_id < len; ability_id++) {
+            let ability = this.GetAbilityByIndex(ability_id) as IBaseAbility_Plus;
+            if (GFuncEntity.IsValid(ability) && ability.IsAbilityReady()) {
+                r.push(ability)
+            }
+        }
+
+        return r;
+    }
+    GetAllCanCastItem?() {
+        let r: IBaseItem_Plus[] = [];
+        if (!GFuncEntity.IsValid(this) || this.IsIllusion()) {
+            return r;
+        }
+        for (let item_id = 0; item_id <= 5; item_id++) {
+            let item_in_caster = this.GetItemInSlot(item_id) as IBaseItem_Plus;
+            if (GFuncEntity.IsValid(item_in_caster) && item_in_caster.IsAbilityReady()) {
+                r.push(item_in_caster)
+            }
+        }
+        return r;
+    }
+
     DropItem?(hItem: IBaseItem_Plus, bLaunchLoot = false, sNewItemName = "") {
         // let vLocation = GetGroundPosition(this.GetAbsOrigin(), this);
         // let sName: string;
@@ -213,7 +242,7 @@ export class BaseNpc_Plus extends BaseNpc {
         for (let i = 0; i < nNumIllusions; i++) {
             let illusion = BaseNpc_Plus.CreateUnitByName(copyunit.GetUnitName(), vLocation, this, bFindClearSpace) as IBaseNpc_Plus;
             illusion.MakeIllusion()
-            illusion.SetControllableByPlayer(this.GetPlayerID(), !bFindClearSpace)
+            // illusion.SetControllableByPlayer(this.GetPlayerID(), !bFindClearSpace)
             illusion.SetForwardVector(copyunit.GetForwardVector())
             illusion.SetBaseDamageMin(copyunit.GetBaseDamageMin())
             illusion.SetBaseDamageMax(copyunit.GetBaseDamageMax())
@@ -301,6 +330,15 @@ export class BaseNpc_Plus extends BaseNpc {
             ParticleManager.ReleaseParticleIndex(particleID);
             r.push(illusion);
         }
+        let BattleUnitManager: IBattleUnitManagerComponent;
+        if (this.ETRoot && this.ETRoot.BelongPlayerid >= 0) {
+            BattleUnitManager = GGameScene.GetPlayer(this.ETRoot.BelongPlayerid).BattleUnitManagerComp();
+        }
+        if (BattleUnitManager) {
+            r.forEach(unit => {
+                BattleUnitManager.RegIllusion(unit);
+            })
+        }
         return r;
     }
 
@@ -316,12 +354,22 @@ export class BaseNpc_Plus extends BaseNpc {
      * @param iTeamNumber
      * @returns
      */
-    CreateSummon?(sUnitName: string, vLocation: Vector, fDuration: number = null, bFindClearSpace: boolean = true, iTeamNumber: DOTATeam_t = null) {
+    CreateSummon?(sUnitName: string, vLocation: Vector, fDuration: number, bFindClearSpace: boolean = true, iTeamNumber: DOTATeam_t = null) {
         if (!IsServer()) { return };
         iTeamNumber = iTeamNumber || this.GetTeamNumber()
         let hSummon = BaseNpc_Plus.CreateUnitByName(sUnitName, vLocation, this, bFindClearSpace, iTeamNumber)
         fDuration = fDuration + GPropertyCalculate.SumProps(this, null, GPropertyConfig.EMODIFIER_PROPERTY.SUMMON_DURATION_BONUS);
-        this.addBuff("modifier_summon", this, null, { duration: fDuration })
+        hSummon.addBuff("modifier_summon", this, null, { duration: fDuration < 0 ? null : fDuration });
+        if (fDuration > 0) {
+            hSummon.addBuff("modifier_kill", this, null, { duration: fDuration });
+        }
+        let BattleUnitManager: IBattleUnitManagerComponent;
+        if (this.ETRoot && this.ETRoot.BelongPlayerid >= 0) {
+            BattleUnitManager = GGameScene.GetPlayer(this.ETRoot.BelongPlayerid).BattleUnitManagerComp();
+        }
+        if (BattleUnitManager) {
+            BattleUnitManager.RegIllusion(hSummon);
+        }
         return hSummon as IBaseNpc_Plus;
     }
 

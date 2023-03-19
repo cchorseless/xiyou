@@ -101,7 +101,7 @@ export class imba_venomancer_plague_ward_v2 extends BaseAbility_Plus {
         plague_ward.SetHealth(this.GetSpecialValueFor("ward_hp_tooltip") * math.max(this.GetCasterPlus().GetTalentValue("special_bonus_imba_venomancer_plague_ward_upgrade"), 1));
         plague_ward.SetBaseDamageMin((this.GetSpecialValueFor("ward_damage_tooltip") * math.max(this.GetCasterPlus().GetTalentValue("special_bonus_imba_venomancer_plague_ward_upgrade"), 1)) - 1);
         plague_ward.SetBaseDamageMax((this.GetSpecialValueFor("ward_damage_tooltip") * math.max(this.GetCasterPlus().GetTalentValue("special_bonus_imba_venomancer_plague_ward_upgrade"), 1)) + 1);
-        plague_ward.SetControllableByPlayer(this.GetCasterPlus().GetPlayerID(), true);
+        // plague_ward.SetControllableByPlayer(this.GetCasterPlus().GetPlayerID(), true);
         if (!talent_spawn_location && this.GetCasterPlus().GetUnitName().includes("venomancer") && RollPercentage(25)) {
             if (!this.responses) {
                 this.responses = {
@@ -912,7 +912,7 @@ export class imba_venomancer_plague_ward extends BaseAbility_Plus {
             if (ability_gale) {
                 GFuncEntity.AddRangeIndicator(scourge_ward, caster, ability_gale, "ward_range", undefined, 183, 247, 33, false, false, true);
             }
-            scourge_ward.SetControllableByPlayer(caster.GetPlayerID(), true);
+            // scourge_ward.SetControllableByPlayer(caster.GetPlayerID(), true);
             scourge_ward.SetForwardVector(direction);
             scourge_ward.AddNewModifier(caster, this, "modifier_kill", {
                 duration: duration
@@ -939,7 +939,7 @@ export class imba_venomancer_plague_ward extends BaseAbility_Plus {
                 for (let i = 0; i < plague_count; i++) {
                     let plague_loc = target_loc + GFuncVector.RotateVector2D(direction, start_angle + (angle * i), true) * plague_radius as Vector;
                     let plague_ward = BaseNpc_Plus.CreateUnitByName("npc_imba_venomancer_plague_ward", plague_loc, caster, true);
-                    plague_ward.SetControllableByPlayer(caster.GetPlayerID(), true);
+                    // plague_ward.SetControllableByPlayer(caster.GetPlayerID(), true);
                     plague_ward.SetForwardVector(direction);
                     let mod_kill = plague_ward.AddNewModifier(caster, this, "modifier_kill", {
                         duration: duration

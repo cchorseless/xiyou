@@ -4,7 +4,6 @@ import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
-import { BaseNpc_Plus } from "../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 
@@ -476,14 +475,7 @@ export class modifier_imba_fire_remnant_state extends BaseModifier_Plus {
             return state;
         }
     }
-    BeCreated(keys: any): void {
-        if (IsServer()) {
-            this.GetParentPlus().AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(),
-                "modifier_kill", {
-                duration: this.GetDuration()
-            });
-        }
-    }
+
     BeDestroy(): void {
         if (IsServer()) {
             GFuncEntity.SafeDestroyUnit(this.GetParentPlus());
@@ -751,7 +743,7 @@ export class imba_ember_spirit_fire_remnant extends BaseAbility_Plus {
         if (charges_modifier.GetStackCount() > 0) {
             charges_modifier.SetStackCount(charges_modifier.GetStackCount() - 1);
             this.GetCasterPlus().EmitSound("Hero_EmberSpirit.FireRemnant.Cast");
-            let remnant = BaseNpc_Plus.CreateUnitByName("npc_imba_ember_spirit_remnant", target_loc, this.GetCasterPlus(), true);
+            let remnant = this.GetCasterPlus().CreateSummon("npc_imba_ember_spirit_remnant", target_loc, this.GetSpecialValueFor("duration"), true);
             remnant.SetOwner(this.GetCasterPlus());
             remnant.EmitSound("Hero_EmberSpirit.FireRemnant.Activate");
             remnant.SetRenderColor(255, 0, 0);

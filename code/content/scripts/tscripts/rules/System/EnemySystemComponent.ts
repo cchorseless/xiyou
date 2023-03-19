@@ -28,7 +28,7 @@ export class EnemySystemComponent extends ET.SingletonComponent {
         let index = 0;
         GPlayerEntityRoot.GetAllInstance()
             .forEach((player) => {
-                index += player.EnemyManagerComp().tAllEnemy.length;
+                index += player.BattleUnitManagerComp().GetAllBattleUnitAlive(DOTATeam_t.DOTA_TEAM_BADGUYS).length;
             });
         return index;
     }

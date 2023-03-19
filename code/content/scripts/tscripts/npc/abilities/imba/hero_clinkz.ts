@@ -4,7 +4,6 @@ import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
-import { BaseNpc_Plus } from "../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 
@@ -903,11 +902,9 @@ export class modifier_imba_skeleton_walk_invis extends BaseModifier_Plus {
                     } else if (i == 1) {
                         pos = this.GetCasterPlus().GetAbsOrigin() + (this.GetCasterPlus().GetRightVector() * 250) as Vector;
                     }
-                    let archer = BaseNpc_Plus.CreateUnitByName("npc_dota_clinkz_skeleton_archer", pos, this.GetCasterPlus(), true);
+                    let duration = this.GetCasterPlus().findAbliityPlus("clinkz_burning_army").GetSpecialValueFor("duration");
+                    let archer = this.GetCasterPlus().CreateSummon("npc_dota_clinkz_skeleton_archer", pos, duration, true);
                     archer.AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("clinkz_burning_army"), "modifier_imba_clinkz_burning_army_skeleton_custom", {});
-                    archer.AddNewModifier(this.GetCasterPlus(), undefined, "modifier_kill", {
-                        duration: this.GetCasterPlus().findAbliityPlus("clinkz_burning_army").GetSpecialValueFor("duration")
-                    });
                     archer.SetForwardVector(this.GetCasterPlus().GetForwardVector());
                 }
                 if (this.GetParentPlus().HasModifier("modifier_bloodseeker_thirst")) {
@@ -1231,14 +1228,11 @@ export class imba_clinkz_death_pact extends BaseAbility_Plus {
             let direction = (target.GetAbsOrigin() - caster.GetAbsOrigin() as Vector).Normalized();
             let distance = (target.GetAbsOrigin() - caster.GetAbsOrigin() as Vector).Length2D();
             let summon_point = caster.GetAbsOrigin() + direction * distance - 100 as Vector;
-            let spirit = BaseNpc_Plus.CreateUnitByName("npc_imba_clinkz_spirits", summon_point, caster, true);
+            let spirit = caster.CreateSummon("npc_imba_clinkz_spirits", summon_point, duration, true);
             spirit.SetOwner(caster);
             spirit.SetOriginalModel(spirit_model);
             spirit.SetModelScale(spirit_scale);
             spirit.SetRenderColor(12, 55, 74);
-            spirit.AddNewModifier(caster, ability, "modifier_kill", {
-                duration: duration
-            });
             spirit.AddNewModifier(caster, ability, modifier_spirited_aura, {
                 duration: duration
             });
@@ -1712,15 +1706,12 @@ export class modifier_imba_death_pact_hero_debuff extends BaseModifier_Plus {
                 let direction = (this.GetParentPlus().GetAbsOrigin() - this.GetCasterPlus().GetAbsOrigin() as Vector).Normalized();
                 let distance = (this.GetParentPlus().GetAbsOrigin() - this.GetCasterPlus().GetAbsOrigin() as Vector).Length2D();
                 let summon_point = this.GetCasterPlus().GetAbsOrigin() + direction * distance - 100 as Vector;
-                let spirit = BaseNpc_Plus.CreateUnitByName("npc_imba_clinkz_spirits", summon_point, this.GetCasterPlus(), true);
+                let spirit = this.GetCasterPlus().CreateSummon("npc_imba_clinkz_spirits", summon_point, duration, true);
                 spirit.SetOwner(this.GetCasterPlus());
                 spirit.SetOriginalModel(spirit_model);
                 spirit.SetModelScale(spirit_scale);
                 spirit.NotifyWearablesOfModelChange(true);
                 spirit.ManageModelChanges();
-                spirit.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_kill", {
-                    duration: duration
-                });
                 spirit.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), modifier_spirited_aura, {
                     duration: duration
                 });

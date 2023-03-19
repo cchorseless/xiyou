@@ -10,7 +10,7 @@ export class ERoundBoardChallenge extends ERound {
         this.configID = configid;
         this.config = GJSONConfig.RoundBoardChallengeConfig.get("" + configid);
     }
-    OnStart(): void {
+    OnRound_Start(): void {
         let unitcount = this.config.roundUnitcount;
         let unitinfoid: string[] = [];
         let unitWeight: number[] = [];

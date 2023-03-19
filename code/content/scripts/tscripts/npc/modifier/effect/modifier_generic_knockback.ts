@@ -54,16 +54,8 @@ export class modifier_generic_knockback extends BaseModifierMotionBoth_Plus {
                 this.direction = -(this.GetParentPlus().GetForwardVector());
             }
             this.tree = kv.tree_destroy_radius || this.GetParentPlus().GetHullRadius();
-            if (kv.IsStun) {
-                this.stun = kv.IsStun == 1;
-            } else {
-                this.stun = false;
-            }
-            if (kv.IsFlail) {
-                this.flail = kv.IsFlail == 1;
-            } else {
-                this.flail = true;
-            }
+            this.stun = GToBoolean(kv.IsStun);
+            this.flail = GToBoolean(kv.IsFlail);
             if (this.duration == 0) {
                 this.Destroy();
                 return;
@@ -74,7 +66,18 @@ export class modifier_generic_knockback extends BaseModifierMotionBoth_Plus {
             let half_duration = this.duration / 2;
             this.gravity = 2 * this.height / (half_duration * half_duration);
             this.vVelocity = this.gravity * half_duration;
-
+            if (this.distance > 0) {
+                if (this.ApplyHorizontalMotionController() == false) {
+                    this.Destroy();
+                    return;
+                }
+            }
+            if (this.height >= 0) {
+                if (this.ApplyVerticalMotionController() == false) {
+                    this.Destroy();
+                    return;
+                }
+            }
             if (this.flail) {
                 this.SetStackCount(1);
             } else if (this.stun) {
@@ -82,7 +85,6 @@ export class modifier_generic_knockback extends BaseModifierMotionBoth_Plus {
             }
         } else {
             this.anim = this.GetStackCount();
-            this.SetStackCount(0);
         }
     }
 
@@ -137,7 +139,6 @@ export class modifier_generic_knockback extends BaseModifierMotionBoth_Plus {
         }
     }
     UpdateVerticalMotion(me: CDOTA_BaseNPC, dt: number): void {
-        let time = dt / this.duration;
         this.parent.SetOrigin(this.parent.GetOrigin() + Vector(0, 0, this.vVelocity * dt) as Vector);
         this.vVelocity = this.vVelocity - this.gravity * dt;
     }

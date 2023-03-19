@@ -4,7 +4,7 @@ import { ET } from "../../../shared/lib/Entity";
 import { ERoundBoard } from "../Round/ERoundBoard";
 
 @GReloadable
-export class InventoryComponent extends ET.Component {
+export class InventoryComponent extends ET.Component implements IRoundStateCallback {
     public allItemRoot: string[] = [];
     onAwake(...args: any[]): void {
         let npc = this.GetDomain<IBaseNpc_Plus>();
@@ -17,8 +17,10 @@ export class InventoryComponent extends ET.Component {
             }
         }
     }
+    OnRound_Start(round?: ERoundBoard): void { }
+    OnRound_WaitingEnd(): void { };
     // 战吼
-    OnBoardRound_Battle() {
+    OnRound_Battle() {
         let allItem = this.getAllBaseItem();
         allItem.forEach(item => {
             if (item.OnRoundStartBattle) {
@@ -27,7 +29,7 @@ export class InventoryComponent extends ET.Component {
         })
     }
 
-    OnBoardRound_Prize(round: ERoundBoard) {
+    OnRound_Prize(round: ERoundBoard) {
         let allItem = this.getAllBaseItem();
         allItem.forEach(item => {
             if (item.OnRoundStartPrize) {

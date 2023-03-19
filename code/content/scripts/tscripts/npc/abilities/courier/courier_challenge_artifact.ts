@@ -45,7 +45,7 @@ export class courier_challenge_artifact extends ActiveRootAbility implements IAb
                 let configid = GGameServiceSystem.GetInstance().getDifficultyChapterDes() + "_artifact";
                 let challengeround = root.RoundManagerComp().getBoardChallengeRound(configid);
                 if (challengeround) {
-                    challengeround.OnStart();
+                    challengeround.OnRound_Start();
                     root.PlayerDataComp().changeItem(this.costType, -this.costCount);
                     root.PlayerDataComp().SyncClient();
                     let level = this.GetLevel();

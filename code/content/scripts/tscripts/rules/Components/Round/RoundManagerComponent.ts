@@ -28,7 +28,7 @@ export class RoundManagerComponent extends ET.Component {
         if (this.RoundInfo[roundid] == null) {
             this.RoundInfo[roundid] = this.AddChild(ERoundBoardChallenge, roundid);
         }
-        this.RoundInfo[roundid].OnStart();
+        this.RoundInfo[roundid].OnRound_Start();
     }
 
     private initBoardRound() {
@@ -42,7 +42,7 @@ export class RoundManagerComponent extends ET.Component {
             this.RoundInfo[roundid] = this.AddChild(ERoundBoard, roundid);
         }
         this.curRoundBoard = roundid as string;
-        (this.RoundInfo[roundid] as ERoundBoard).OnStart();
+        (this.RoundInfo[roundid] as ERoundBoard).OnRound_Start();
         this.SyncClient(true);
     }
     /**

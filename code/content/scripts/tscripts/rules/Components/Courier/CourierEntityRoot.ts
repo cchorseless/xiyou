@@ -12,7 +12,7 @@ import { ERoundBoard } from "../Round/ERoundBoard";
 import { CourierBagComponent } from "./CourierBagComponent";
 import { CourierShopComponent } from "./CourierShopComponent";
 
-export class CourierEntityRoot extends BaseEntityRoot {
+export class CourierEntityRoot extends BaseEntityRoot implements IRoundStateCallback {
     @serializeETProps()
     health: number = 100;
     @serializeETProps()
@@ -162,7 +162,11 @@ export class CourierEntityRoot extends BaseEntityRoot {
     CourierShopComp() {
         return this.GetComponentByName<CourierShopComponent>("CourierShopComponent");
     }
-    OnRoundStartPrize(round: ERoundBoard) {
+
+    OnRound_Start(round?: ERoundBoard): void { };
+    OnRound_Battle(): void { }
+
+    OnRound_Prize(round: ERoundBoard) {
         let hero = this.GetDomain<IBaseNpc_Hero_Plus>();
         if (round.isWin) {
             this.onVictory();
@@ -181,8 +185,7 @@ export class CourierEntityRoot extends BaseEntityRoot {
             )
         }
     }
-
-    OnRoundWaitingEnd(round: ERoundBoard) { }
+    OnRound_WaitingEnd() { }
 }
 
 declare global {

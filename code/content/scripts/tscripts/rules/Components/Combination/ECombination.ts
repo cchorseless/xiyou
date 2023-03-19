@@ -163,10 +163,10 @@ export class ECombination extends ET.Entity {
                                 battleunits = this.getAllBuilding();
                                 break;
                             case CombinationConfig.EEffectTargetType.team:
-                                battleunits = GPlayerEntityRoot.GetOneInstance(this.BelongPlayerid).BuildingManager().getAllBattleBuilding(true, false)
+                                battleunits = GPlayerEntityRoot.GetOneInstance(this.BelongPlayerid).BuildingManager().getAllBattleBuilding(true, false);
                                 break;
                             case CombinationConfig.EEffectTargetType.enemyteam:
-                                battleunits = GPlayerEntityRoot.GetOneInstance(this.BelongPlayerid).EnemyManagerComp().getAllAliveEnemy()
+                                battleunits = GPlayerEntityRoot.GetOneInstance(this.BelongPlayerid).BattleUnitManagerComp().GetAllBattleUnitAlive(DOTATeam_t.DOTA_TEAM_BADGUYS);
                                 break;
                         };
                         if (battleunits) {
@@ -211,12 +211,12 @@ export class ECombination extends ET.Entity {
         }
     }
 
-    OnRoundStartBattle() {
+    OnRound_Battle() {
         LogHelper.print("OnRoundStartBattle", this.SectId);
         this.ApplyBuffEffect(true);
     }
 
-    OnRoundStartPrize(round: ERoundBoard) {
+    OnRound_Prize(round: ERoundBoard) {
         let SectName = this.SectName;
         let SectId = this.SectId;
         if (SectName === CombinationConfig.ESectName.sect_suck_blood) {

@@ -8,7 +8,7 @@ import { PlayerData } from "../../../shared/rules/Player/PlayerData";
 import { ERoundBoard } from "../Round/ERoundBoard";
 
 @GReloadable
-export class PlayerDataComponent extends PlayerData {
+export class PlayerDataComponent extends PlayerData implements IRoundStateCallback {
 
     onAwake(...args: any[]): void {
         this.addEvent();
@@ -144,11 +144,14 @@ export class PlayerDataComponent extends PlayerData {
         this.techLevelUpCostGold += config.goldcost;
     }
 
-    OnRoundStartBegin(round: ERoundBoard) {
+    OnRound_Start(round: ERoundBoard) {
         if (round.BelongPlayerid == (this.BelongPlayerid)) {
             this.addMoneyRoundStart(round.config.roundprizeGold, round.config.roundprizeWood);
         }
     }
+    OnRound_Battle(): void { }
+    OnRound_Prize(round?: ERoundBoard): void { }
+    OnRound_WaitingEnd(): void { }
 
     SpendGold(gold: number, reason: EDOTA_ModifyGold_Reason = 0) {
         this.gold -= gold;

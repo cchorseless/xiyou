@@ -3,7 +3,6 @@ import { Assert_MsgEffect } from "../../../assert/Assert_MsgEffect";
 import { IProjectileEffectInfo } from "../../../assert/Assert_ProjectileEffect";
 import { ISpawnEffectInfo, SpawnEffectModifier } from "../../../assert/Assert_SpawnEffect";
 
-import { LogHelper } from "../../../helper/LogHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { modifier_spawn_breaksoil } from "../../../npc/modifier/spawn/modifier_spawn_breaksoil";
 import { modifier_spawn_fall } from "../../../npc/modifier/spawn/modifier_spawn_fall";
@@ -16,19 +15,13 @@ import { EnemyUnitEntityRoot } from "./EnemyUnitEntityRoot";
 export class EnemyManagerComponent extends ET.Component {
     tPlayerKills: number = 0;
     tPlayerMissing: number = 0;
-    tAllEnemy: string[] = [];
+    tAllEnemyNameList: string[] = [];
 
     iMaxEnemyBonus: number = 0;
     iMaxEnemyBonusEach: number = 0;
 
-    onAwake(...args: any[]): void {
-        this.addEvent();
-    }
     GetEnemySpawnPos() {
         return GEnemySystem.GetInstance().SpawnEnemyPoint[this.BelongPlayerid];
-    }
-    addEvent() {
-
     }
 
     ApplyDamageHero(damage: number, projectileInfo: IProjectileEffectInfo) {
@@ -39,49 +32,6 @@ export class EnemyManagerComponent extends ET.Component {
             EmitSoundOn(projectileInfo.sound, hero);
             heroroot.ApplyDamageByEnemy(damage);
         }
-    }
-
-    getAllEnemy() {
-        let player = GPlayerEntityRoot.GetOneInstance(this.BelongPlayerid);
-        let r: IEnemyUnitEntityRoot[] = [];
-        this.tAllEnemy.forEach((entityid) => {
-            let entity = player.GetDomainChild<IEnemyUnitEntityRoot>(entityid);
-            if (entity) {
-                r.push(entity);
-            }
-        })
-        return r;
-    }
-    public getAllBattleUnitAlive() {
-        let allenemy = this.getAllEnemy();
-        let r: IBattleUnitEntityRoot[] = [];
-        allenemy.forEach(b => {
-            r = r.concat(b.BattleUnitManager().GetAllBattleUnitAlive())
-        })
-        return r
-    }
-
-    getAllAliveEnemy() {
-        let player = GPlayerEntityRoot.GetOneInstance(this.BelongPlayerid);
-        let r: IEnemyUnitEntityRoot[] = [];
-        this.tAllEnemy.forEach((entityid) => {
-            let entity = player.GetDomainChild<IEnemyUnitEntityRoot>(entityid);
-            if (entity && entity.ChessComp().isAlive) {
-                r.push(entity);
-            }
-        })
-        return r;
-    }
-    getAllDeathEnemy() {
-        let player = GPlayerEntityRoot.GetOneInstance(this.BelongPlayerid);
-        let r: IEnemyUnitEntityRoot[] = [];
-        this.tAllEnemy.forEach((entityid) => {
-            let entity = player.GetDomainChild<IEnemyUnitEntityRoot>(entityid);
-            if (entity && entity.ChessComp().isAlive == false) {
-                r.push(entity);
-            }
-        })
-        return r;
     }
 
     addEnemy(enemyName: string, roundid: string, onlykey: string = null, pos: Vector = null, spawnEffect: ISpawnEffectInfo = null) {
@@ -97,9 +47,9 @@ export class EnemyManagerComponent extends ET.Component {
         let enemy = BaseNpc_Plus.CreateUnitByName(enemyName, pos, null, true, DOTATeam_t.DOTA_TEAM_BADGUYS);
         enemy.SetNeverMoveToClearSpace(false);
         EnemyUnitEntityRoot.Active(enemy, this.BelongPlayerid, enemyName, roundid, onlykey);
-        let domain = this.GetDomain<PlayerScene>();
-        domain.ETRoot.AddDomainChild(enemy.ETRoot);
-        this.tAllEnemy.push(enemy.ETRoot.Id);
+        let domain = GGameScene.GetPlayer(this.BelongPlayerid)
+        domain.AddDomainChild(enemy.ETRoot);
+        this.tAllEnemyNameList.push(enemyName);
         enemy.addSpawnedHandler(
             GHandler.create(this, () => {
                 let hander = GHandler.create(this, () => {
@@ -141,27 +91,16 @@ export class EnemyManagerComponent extends ET.Component {
     }
 
     killEnemy(etroot: IEnemyUnitEntityRoot) {
-        if (!this.tAllEnemy.includes(etroot.Id)) {
-            LogHelper.error("killEnemy error")
-            return;
-        }
         this.tPlayerKills += 1;
     }
+
     removeAllEnemy() {
-        let player = GPlayerEntityRoot.GetOneInstance(this.BelongPlayerid);
-        this.tAllEnemy.forEach((entityid) => {
-            let entity = player.GetDomainChild<IEnemyUnitEntityRoot>(entityid);
-            if (entity) {
-                entity.Dispose();
-            }
+        let domain = GGameScene.GetPlayer(this.BelongPlayerid);
+        domain.BattleUnitManagerComp().GetAllEnemyUnitEntityRoot().forEach((entity) => {
+            entity.Dispose();
         });
-        this.tAllEnemy = [];
+        domain.BattleUnitManagerComp().ClearSummonIllusion(DOTATeam_t.DOTA_TEAM_BADGUYS)
+        this.tAllEnemyNameList = [];
     }
-    removeEnemy(etroot: IEnemyUnitEntityRoot) {
-        if (this.tAllEnemy.includes(etroot.Id)) {
-            let index = this.tAllEnemy.indexOf(etroot.Id);
-            this.tAllEnemy.splice(index, 1);
-        }
-        etroot.Dispose();
-    }
+
 }

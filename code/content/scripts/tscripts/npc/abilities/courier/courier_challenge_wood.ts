@@ -46,7 +46,7 @@ export class courier_challenge_wood extends ActiveRootAbility implements IAbilit
                 let configid = GGameServiceSystem.GetInstance().getDifficultyChapterDes() + "_wood";
                 let challengeround = root.RoundManagerComp().getBoardChallengeRound(configid);
                 if (challengeround) {
-                    challengeround.OnStart();
+                    challengeround.OnRound_Start();
                     root.PlayerDataComp().changeItem(this.costType, -this.costCount);
                     root.PlayerDataComp().SyncClient();
                     let level = this.GetLevel();

@@ -3,7 +3,6 @@ import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
-import { BaseNpc_Plus } from "../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 @registerAbility()
@@ -199,16 +198,11 @@ export class imba_malfurion_living_tower extends BaseAbility_Plus {
     OnSpellStart(): void {
         if (IsServer()) {
             let tower_name = ["", "radiant", "dire"]
-            this.living_tower = BaseNpc_Plus.CreateUnitByName("npc_imba_malfurion_living_tower_" + tower_name[this.GetCasterPlus().GetTeamNumber() - 1], this.GetCursorPosition(), this.GetCasterPlus(), true);
+            let duration = this.GetSpecialValueFor("duration");
             if (!this.GetCasterPlus().HasScepter()) {
-                this.living_tower.AddNewModifier(this.living_tower, this, "modifier_kill", {
-                    duration: this.GetSpecialValueFor("duration")
-                });
-            } else {
-                this.living_tower.AddNewModifier(this.living_tower, this, "modifier_kill", {
-                    duration: this.GetSpecialValueFor("scepter_duration")
-                });
+                duration = this.GetSpecialValueFor("scepter_duration")
             }
+            this.living_tower = this.GetCasterPlus().CreateSummon("npc_imba_malfurion_living_tower_" + tower_name[this.GetCasterPlus().GetTeamNumber() - 1], this.GetCursorPosition(), duration, true);
             this.living_tower.AddNewModifier(this.living_tower, this, "modifier_imba_malfurion_living_tower", {});
             this.living_tower.SetControllableByPlayer(this.GetCasterPlus().GetPlayerID(), false);
 

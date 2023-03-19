@@ -1,12 +1,12 @@
-import {Assert_SpawnEffect, ISpawnEffectInfo} from "../../../assert/Assert_SpawnEffect";
-import {Dota} from "../../../shared/Gen/Types";
-import {serializeETProps} from "../../../shared/lib/Entity";
-import {RoundConfig} from "../../../shared/RoundConfig";
-import {ChessVector} from "../ChessControl/ChessVector";
-import {ERound} from "./ERound";
+import { Assert_SpawnEffect, ISpawnEffectInfo } from "../../../assert/Assert_SpawnEffect";
+import { Dota } from "../../../shared/Gen/Types";
+import { serializeETProps } from "../../../shared/lib/Entity";
+import { RoundConfig } from "../../../shared/RoundConfig";
+import { ChessVector } from "../ChessControl/ChessVector";
+import { ERound } from "./ERound";
 
 @GReloadable
-export class ERoundBoard extends ERound {
+export class ERoundBoard extends ERound implements IRoundStateCallback {
     @serializeETProps()
     unitDamageInfo: { [k: string]: BuildingConfig.IBuildingDamageInfo } = {};
     @serializeETProps()
@@ -21,13 +21,13 @@ export class ERoundBoard extends ERound {
 
     _debug_nextStage() {
         if (this.roundState == RoundConfig.ERoundBoardState.start) {
-            this.OnBattle();
+            this.OnRound_Battle();
         } else if (this.roundState == RoundConfig.ERoundBoardState.battle) {
-            this.OnPrize();
+            this.OnRound_Prize();
         } else if (this.roundState == RoundConfig.ERoundBoardState.prize) {
-            this.OnWaitingEnd();
+            this.OnRound_WaitingEnd();
         } else if (this.roundState == RoundConfig.ERoundBoardState.waiting_next) {
-            this.OnEnd();
+            this.OnRound_End();
         }
     }
 
@@ -38,7 +38,7 @@ export class ERoundBoard extends ERound {
         this.config = GJSONConfig.RoundBoardConfig.get("" + configid);
     }
 
-    OnStart() {
+    OnRound_Start() {
         if (this.prizeTimer != null) {
             this.prizeTimer.Clear()
             this.prizeTimer = null;
@@ -53,18 +53,18 @@ export class ERoundBoard extends ERound {
         this.roundLeftTime = GameRules.GetGameTime() + delaytime;
         let playerroot = GPlayerEntityRoot.GetOneInstance(this.BelongPlayerid);
         this.SyncClient(false);
-        playerroot.PlayerDataComp().OnRoundStartBegin(this);
-        playerroot.BuildingManager().OnRoundStartBegin(this);
-        playerroot.FakerHeroRoot().OnRoundStartBegin(this);
+        playerroot.PlayerDataComp().OnRound_Start(this);
+        playerroot.BuildingManager().OnRound_Start(this);
+        playerroot.FakerHeroRoot().OnRound_Start(this);
         this.prizeTimer = GTimerHelper.AddTimer(delaytime, GHandler.create(this, () => {
             if (this._debug_StageStopped) {
                 return 1;
             }
-            this.OnBattle();
+            this.OnRound_Battle();
         }));
     }
 
-    OnBattle() {
+    OnRound_Battle() {
         if (this.prizeTimer != null) {
             this.prizeTimer.Clear()
             this.prizeTimer = null;
@@ -77,18 +77,18 @@ export class ERoundBoard extends ERound {
         this.roundState = RoundConfig.ERoundBoardState.battle;
         this.roundLeftTime = GameRules.GetGameTime() + delaytime;
         this.SyncClient();
-        player.ChessControlComp().OnRoundStartBattle();
-        player.BuildingManager().OnRoundStartBattle();
-        player.FakerHeroRoot().OnRoundStartBattle();
-        let buildingCount = player.BuildingManager().getAllBattleUnitAlive().length;
-        let enemyCount = player.EnemyManagerComp().getAllBattleUnitAlive().length;
+        player.ChessControlComp().OnRound_Battle();
+        player.BuildingManager().OnRound_Battle();
+        player.FakerHeroRoot().OnRound_Battle();
+        let buildingCount = player.BattleUnitManagerComp().GetAllBattleUnitAlive(DOTATeam_t.DOTA_TEAM_GOODGUYS).length;
+        let enemyCount = player.BattleUnitManagerComp().GetAllBattleUnitAlive(DOTATeam_t.DOTA_TEAM_BADGUYS).length;
         if (buildingCount == 0 || enemyCount == 0) {
             delaytime = 1;
         }
         this.prizeTimer = GTimerHelper.AddTimer(1, GHandler.create(this, () => {
             delaytime--;
-            let buildingCount = player.BuildingManager().getAllBattleUnitAlive().length;
-            let enemyCount = player.EnemyManagerComp().getAllBattleUnitAlive().length;
+            buildingCount = player.BattleUnitManagerComp().GetAllBattleUnitAlive(DOTATeam_t.DOTA_TEAM_GOODGUYS).length;
+            enemyCount = player.BattleUnitManagerComp().GetAllBattleUnitAlive(DOTATeam_t.DOTA_TEAM_BADGUYS).length;
             if (delaytime > 0) {
                 if (buildingCount > 0 && enemyCount > 0) {
                     return 1;
@@ -97,13 +97,13 @@ export class ERoundBoard extends ERound {
                     return 1;
                 }
             }
-            this.OnPrize();
+            this.OnRound_Prize();
         }));
     }
 
     prizeTimer: ITimerTask;
 
-    OnPrize() {
+    OnRound_Prize() {
         if (this.prizeTimer != null) {
             this.prizeTimer.Clear()
             this.prizeTimer = null;
@@ -115,26 +115,22 @@ export class ERoundBoard extends ERound {
         this.roundState = RoundConfig.ERoundBoardState.prize;
         this.roundLeftTime = GameRules.GetGameTime() + delaytime;
         let playerroot = GPlayerEntityRoot.GetOneInstance(this.BelongPlayerid);
-        let aliveEnemy = playerroot.EnemyManagerComp().getAllBattleUnitAlive();
-        this.isWin = aliveEnemy.length == 0;
+        let enemyCount = playerroot.BattleUnitManagerComp().GetAllBattleUnitAlive(DOTATeam_t.DOTA_TEAM_BADGUYS).length;
+        this.isWin = enemyCount == 0;
         this.SyncClient();
-        playerroot.CourierRoot().OnRoundStartPrize(this);
-        playerroot.BuildingManager().OnRoundStartPrize(this);
-        playerroot.FakerHeroRoot().OnRoundStartPrize(this);
+        playerroot.CourierRoot().OnRound_Prize(this);
+        playerroot.BuildingManager().OnRound_Prize(this);
+        playerroot.FakerHeroRoot().OnRound_Prize(this);
         this.prizeTimer = GTimerHelper.AddTimer(delaytime, GHandler.create(this, () => {
             if (this._debug_StageStopped) {
                 return 1;
             }
-            this.OnWaitingEnd();
+            this.OnRound_WaitingEnd();
         }));
 
     }
 
-    onDestroy(): void {
-        GLogHelper.print("onDestroy ERoundBoard");
-    }
-
-    OnWaitingEnd() {
+    OnRound_WaitingEnd() {
         if (this.prizeTimer != null) {
             this.prizeTimer.Clear()
             this.prizeTimer = null;
@@ -146,19 +142,19 @@ export class ERoundBoard extends ERound {
         this.roundLeftTime = -1;
         this.SyncClient();
         let playerroot = GPlayerEntityRoot.GetOneInstance(this.BelongPlayerid);
-        playerroot.CourierRoot().OnRoundWaitingEnd(this);
-        playerroot.BuildingManager().OnRoundWaitingEnd(this);
-        playerroot.FakerHeroRoot().OnRoundWaitingEnd(this);
+        playerroot.CourierRoot().OnRound_WaitingEnd();
+        playerroot.BuildingManager().OnRound_WaitingEnd();
+        playerroot.FakerHeroRoot().OnRound_WaitingEnd();
         this.prizeTimer = GTimerHelper.AddTimer(0.1,
             GHandler.create(this, () => {
                 if (this._debug_StageStopped) {
                     return 1;
                 }
-                this.OnEnd();
+                this.OnRound_End();
             }));
     }
 
-    OnEnd() {
+    OnRound_End() {
         if (this.prizeTimer != null) {
             this.prizeTimer.Clear()
             this.prizeTimer = null;
@@ -214,7 +210,7 @@ export class ERoundBoard extends ERound {
 
     AddRoundDamage(attack: string, name: string, isattack: boolean, damagetype: DAMAGE_TYPES, damage: number) {
         if (this.unitDamageInfo[attack] == null) {
-            this.unitDamageInfo[attack] = {name: name, phyD: 0, magD: 0, pureD: 0, byphyD: 0, bymagD: 0, bypureD: 0};
+            this.unitDamageInfo[attack] = { name: name, phyD: 0, magD: 0, pureD: 0, byphyD: 0, bymagD: 0, bypureD: 0 };
         }
         damage = Math.floor(damage);
         if (damagetype == DAMAGE_TYPES.DAMAGE_TYPE_PHYSICAL) {
@@ -251,5 +247,15 @@ export class ERoundBoard extends ERound {
         GTimerHelper.AddTimer(1, GHandler.create(this, () => {
             this.isSynced = false;
         }));
+    }
+}
+
+declare global {
+    interface IRoundStateCallback {
+        OnRound_Start(round?: ERoundBoard): void;
+        OnRound_Battle(): void;
+        OnRound_Prize(round?: ERoundBoard): void;
+        OnRound_WaitingEnd(): void;
+        OnRound_End?(): void;
     }
 }

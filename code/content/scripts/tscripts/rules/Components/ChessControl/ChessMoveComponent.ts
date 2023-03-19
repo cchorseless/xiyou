@@ -10,7 +10,6 @@ import { ChessVector } from "./ChessVector";
 @GReloadable
 export class ChessMoveComponent extends ET.Component {
     public ChessVector: ChessVector;
-    readonly isAlive: boolean = true;
     readonly isInBattle: boolean = false;
     readonly isMoving: boolean = false;
     onAwake(): void {
@@ -44,16 +43,9 @@ export class ChessMoveComponent extends ET.Component {
         domain.SetForwardVector(((position - domain.GetAbsOrigin()) as Vector).Normalized());
         domain.MoveToPosition(position);
     }
-    changeAliveState(state: boolean) {
-        (this.isAlive as any) = state;
-    }
 
     isInBoardAndBattle() {
         return this.isInBattle && this.isInBoard();
-    }
-
-    isInBattleAlive() {
-        return this.isInBattle && this.isAlive;
     }
 
     isPosInBattle() {

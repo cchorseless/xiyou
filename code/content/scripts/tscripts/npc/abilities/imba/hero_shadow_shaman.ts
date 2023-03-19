@@ -776,7 +776,7 @@ export class imba_shadow_shaman_mass_serpent_ward extends BaseAbility_Plus {
         ward.AddNewModifier(this.GetCasterPlus(), this, "modifier_kill", {
             duration: duration
         });
-        ward.SetControllableByPlayer(this.GetCasterPlus().GetPlayerID(), true);
+        // ward.SetControllableByPlayer(this.GetCasterPlus().GetPlayerID(), true);
 
         ward.SetBaseMaxHealth(new_hp);
         ward.SetMaxHealth(new_hp);

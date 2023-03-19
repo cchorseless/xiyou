@@ -19,7 +19,6 @@ import { PlayerDataComponent } from "./Components/Player/PlayerDataComponent";
 import { PlayerHttpComponent } from "./Components/Player/PlayerHttpComponent";
 import { RoundManagerComponent } from "./Components/Round/RoundManagerComponent";
 import { RoundPrizeUnitKillPrizeComponent } from "./Components/Round/RoundPrizeUnitKillPrizeComponent";
-import { RoundStateComponent } from "./Components/Round/RoundStateComponent";
 import { EWearableItem } from "./Components/Wearable/EWearableItem";
 import { WearableComponent } from "./Components/Wearable/WearableComponent";
 
@@ -44,7 +43,6 @@ import { WearableSystemComponent } from "./System/WearableSystemComponent";
 
     DrawComponent,
     RoundManagerComponent,
-    RoundStateComponent,
     RoundPrizeUnitKillPrizeComponent,
     CombinationManagerComponent,
     CombinationComponent,

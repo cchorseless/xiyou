@@ -277,7 +277,7 @@ export class imba_gyrocopter_homing_missile extends BaseAbility_Plus {
             missile.SetForwardVector((this.GetCursorTarget().GetAbsOrigin() - this.GetCasterPlus().GetAbsOrigin() as Vector).Normalized());
         } else {
             missile.SetForwardVector((this.GetCursorPosition() - this.GetCasterPlus().GetAbsOrigin() as Vector).Normalized());
-            missile.SetControllableByPlayer(this.GetCasterPlus().GetPlayerID(), true);
+            // missile.SetControllableByPlayer(this.GetCasterPlus().GetPlayerID(), true);
         }
         let fuse_particle = ResHelper.CreateParticleEx("particles/econ/items/gyrocopter/hero_gyrocopter_gyrotechnics/gyro_homing_missile_fuse.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, missile);
         ParticleManager.SetParticleControlForward(fuse_particle, 0, missile.GetForwardVector() * (-1) as Vector);
@@ -378,7 +378,7 @@ export class modifier_imba_gyrocopter_homing_missile_pre_flight extends BaseModi
         }
         this.GetParentPlus().StopSound("Hero_Gyrocopter.HomingMissile.Enemy");
         if (this.GetParentPlus().HasModifier("modifier_imba_gyrocopter_homing_missile")) {
-            this.GetParentPlus().SetControllableByPlayer(this.GetCasterPlus().GetPlayerID(), true);
+            // this.GetParentPlus().SetControllableByPlayer(this.GetCasterPlus().GetPlayerID(), true);
             if (this.target && !this.target.IsNull() && this.target.IsAlive()) {
                 this.GetParentPlus().MoveToNPC(this.target);
             } else if (this.bAutoCast == 0) {

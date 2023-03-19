@@ -73,7 +73,7 @@ export class AbilityEntityRoot extends BaseEntityRoot {
         }
         return true;
     }
-    OnRoundStartBattle() {
+    OnRound_Battle() {
         let ability = this.GetDomain<IBaseAbility_Plus>();
         let npc = ability.GetOwnerPlus();
         if (this.isSectLabels(CombinationConfig.ESectName.sect_suck_blood)) {

@@ -47,7 +47,7 @@ export class courier_challenge_gold extends ActiveRootAbility implements IAbilit
                 let configid = GGameServiceSystem.GetInstance().getDifficultyChapterDes() + "_gold";
                 let challengeround = root.RoundManagerComp().getBoardChallengeRound(configid);
                 if (challengeround) {
-                    challengeround.OnStart();
+                    challengeround.OnRound_Start();
                     root.PlayerDataComp().changeItem(this.costType, -this.costCount);
                     root.PlayerDataComp().SyncClient();
                     let level = this.GetLevel();

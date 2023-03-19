@@ -1011,7 +1011,7 @@ export class imba_templar_assassin_psionic_trap extends BaseAbility_Plus {
             let trap = BaseNpc_Plus.CreateUnitByName("npc_dota_templar_assassin_psionic_trap", this.GetCursorPosition(), this.GetCasterPlus(), false);
             FindClearSpaceForUnit(trap, trap.GetAbsOrigin(), false);
             let trap_modifier = trap.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_templar_assassin_psionic_trap", {});
-            trap.SetControllableByPlayer(this.GetCasterPlus().GetPlayerID(), true);
+            // trap.SetControllableByPlayer(this.GetCasterPlus().GetPlayerID(), true);
             if (trap.HasAbility("imba_templar_assassin_self_trap")) {
                 trap.findAbliityPlus<imba_templar_assassin_self_trap>("imba_templar_assassin_self_trap").SetHidden(false);
                 trap.findAbliityPlus<imba_templar_assassin_self_trap>("imba_templar_assassin_self_trap").SetLevel(this.GetLevel());

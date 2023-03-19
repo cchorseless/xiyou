@@ -3,7 +3,6 @@ import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
-import { BaseNpc_Plus } from "../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 @registerAbility()
@@ -775,9 +774,9 @@ export class modifier_imba_brewmaster_primal_split_split_delay extends BaseModif
             let ability = this.GetAbilityPlus();
             let parent = this.GetParentPlus();
             let caster = this.GetCasterPlus();
-            let earth_panda = BaseNpc_Plus.CreateUnitByName("npc_dota_brewmaster_earth_" + ability.GetLevel(), parent.GetAbsOrigin() + parent.GetForwardVector() * 100 as Vector, caster);
-            let storm_panda = BaseNpc_Plus.CreateUnitByName("npc_dota_brewmaster_storm_" + ability.GetLevel(), RotatePosition(parent.GetAbsOrigin(), QAngle(0, 120, 0), parent.GetAbsOrigin() + parent.GetForwardVector() * 100 as Vector), caster);
-            let fire_panda = BaseNpc_Plus.CreateUnitByName("npc_dota_brewmaster_fire_" + ability.GetLevel(), RotatePosition(parent.GetAbsOrigin(), QAngle(0, -120, 0), parent.GetAbsOrigin() + parent.GetForwardVector() * 100 as Vector), caster);
+            let earth_panda = caster.CreateSummon("npc_dota_brewmaster_earth_" + ability.GetLevel(), parent.GetAbsOrigin() + parent.GetForwardVector() * 100 as Vector, this.duration);
+            let storm_panda = caster.CreateSummon("npc_dota_brewmaster_storm_" + ability.GetLevel(), RotatePosition(parent.GetAbsOrigin(), QAngle(0, 120, 0), parent.GetAbsOrigin() + parent.GetForwardVector() * 100 as Vector), this.duration);
+            let fire_panda = caster.CreateSummon("npc_dota_brewmaster_fire_" + ability.GetLevel(), RotatePosition(parent.GetAbsOrigin(), QAngle(0, -120, 0), parent.GetAbsOrigin() + parent.GetForwardVector() * 100 as Vector), this.duration);
             this.standard_abilities = {
                 "1": "brewmaster_earth_hurl_boulder",
                 "2": "brewmaster_earth_spell_immunity",
@@ -816,18 +815,15 @@ export class modifier_imba_brewmaster_primal_split_split_delay extends BaseModif
                     duration: this.duration,
                     parent_entindex: this.GetParentPlus().entindex()
                 });
-                panda.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_kill", {
-                    duration: this.duration
-                });
                 if (this.GetCasterPlus().HasTalent("special_bonus_imba_brewmaster_primal_split_health")) {
                     panda.SetBaseMaxHealth(panda.GetBaseMaxHealth() + this.GetCasterPlus().GetTalentValue("special_bonus_imba_brewmaster_primal_split_health"));
                     panda.SetMaxHealth(panda.GetMaxHealth() + this.GetCasterPlus().GetTalentValue("special_bonus_imba_brewmaster_primal_split_health"));
                     panda.SetHealth(panda.GetHealth() + this.GetCasterPlus().GetTalentValue("special_bonus_imba_brewmaster_primal_split_health"));
                 }
                 if (panda.GetUnitName().includes("brewmaster_earth")) {
-                    panda.SetControllableByPlayer(this.GetParentPlus().GetPlayerID(), true);
+                    // panda.SetControllableByPlayer(this.GetParentPlus().GetPlayerID(), true);
                 } else {
-                    panda.SetControllableByPlayer(this.GetCasterPlus().GetPlayerID(), true);
+                    // panda.SetControllableByPlayer(this.GetCasterPlus().GetPlayerID(), true);
                 }
                 // PlayerResource.AddToSelection(this.GetParentPlus().GetPlayerID(), panda);
                 for (const [_, ability] of GameFunc.Pair(this.standard_abilities)) {
@@ -972,7 +968,7 @@ export class modifier_imba_brewmaster_primal_split_duration extends BaseModifier
                             if (this.parent != this.GetCasterPlus()) {
                                 this.parent.findBuff<modifier_imba_brewmaster_primal_split_duration>("modifier_imba_brewmaster_primal_split_duration").pandas_entindexes.push(panda.entindex());
                                 panda.SetOwner(this.parent);
-                                panda.SetControllableByPlayer(this.parent.GetPlayerID(), true);
+                                // panda.SetControllableByPlayer(this.parent.GetPlayerID(), true);
                             }
                             break;
                         }

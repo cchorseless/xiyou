@@ -192,7 +192,7 @@ export class imba_elder_titan_ancestral_spirit extends BaseAbility_Plus {
         ParticleManager.ReleaseParticleIndex(particle);
         let astral_spirit = BaseNpc_Plus.CreateUnitByName("npc_dota_elder_titan_ancestral_spirit", target_point, caster, true);
         caster.TempData().astral_spirit = astral_spirit;
-        astral_spirit.SetControllableByPlayer(caster.GetPlayerID(), true);
+        // astral_spirit.SetControllableByPlayer(caster.GetPlayerID(), true);
         astral_spirit.AddNewModifier(astral_spirit, this, "modifier_imba_elder_titan_ancestral_spirit_self", {});
         astral_spirit.TempData().basemovespeed = spirit_movespeed;
         if (!astral_spirit.IsNull()) {

@@ -6554,54 +6554,6 @@
 		}
 
 	}
-	"imba_enchantress_impetus_723" {
-		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/imba/hero_enchantress"
-		"AbilityTextureName" "enchantress_impetus"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AUTOCAST | DOTA_ABILITY_BEHAVIOR_ATTACK"
-		"AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_ENEMY"
-		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-		"AbilityUnitDamageType" "DAMAGE_TYPE_PURE"
-		"SpellImmunityType" "SPELL_IMMUNITY_ENEMIES_NO"
-		"FightRecapLevel" "1"
-		"AbilitySound" "Hero_Enchantress.Impetus"
-		"AbilityCastAnimation" "ACT_DOTA_CAST_ABILITY_4"
-		"AbilityCastPoint" "0.0 0.0 0.0"
-		"AbilityCastRange" "575"
-		"AbilityDuration" "1.5 1.5 1.5"
-		"AbilityCooldown" "6 4 2 0"
-		"AbilityManaCost" "65"
-		"AbilitySpecial" {
-			"01" {
-				"var_type" "FIELD_INTEGER"
-				"distance_damage_pct" "8 12 16 20"
-
-			}
-			"02" {
-				"var_type" "FIELD_INTEGER"
-				"distance_cap" "1750"
-
-			}
-			"03" {
-				"var_type" "FIELD_INTEGER"
-				"bonus_attack_range_scepter" "150 150 150"
-				"RequiresScepter" "1"
-
-			}
-			"04" {
-				"var_type" "FIELD_INTEGER"
-				"attack_cast_stack" "16"
-
-			}
-			"05" {
-				"var_type" "FIELD_FLOAT"
-				"huntmastery_grace_period" "2.0"
-
-			}
-
-		}
-
-	}
 	"imba_enchantress_enchant" {
 		"BaseClass" "ability_lua"
 		"ScriptFile" "npc/abilities/imba/hero_enchantress"
@@ -6828,6 +6780,54 @@
 			"06" {
 				"var_type" "FIELD_INTEGER"
 				"creep_multiplier" "2"
+
+			}
+
+		}
+
+	}
+	"imba_enchantress_impetus_723" {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/imba/hero_enchantress"
+		"AbilityTextureName" "enchantress_impetus"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AUTOCAST | DOTA_ABILITY_BEHAVIOR_ATTACK"
+		"AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_PURE"
+		"SpellImmunityType" "SPELL_IMMUNITY_ENEMIES_NO"
+		"FightRecapLevel" "1"
+		"AbilitySound" "Hero_Enchantress.Impetus"
+		"AbilityCastAnimation" "ACT_DOTA_CAST_ABILITY_4"
+		"AbilityCastPoint" "0.0 0.0 0.0"
+		"AbilityCastRange" "575"
+		"AbilityDuration" "1.5 1.5 1.5"
+		"AbilityCooldown" "6 4 2 0"
+		"AbilityManaCost" "65"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"distance_damage_pct" "8 12 16 20"
+
+			}
+			"02" {
+				"var_type" "FIELD_INTEGER"
+				"distance_cap" "1750"
+
+			}
+			"03" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_attack_range_scepter" "150 150 150"
+				"RequiresScepter" "1"
+
+			}
+			"04" {
+				"var_type" "FIELD_INTEGER"
+				"attack_cast_stack" "16"
+
+			}
+			"05" {
+				"var_type" "FIELD_FLOAT"
+				"huntmastery_grace_period" "2.0"
 
 			}
 

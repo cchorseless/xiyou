@@ -687,10 +687,7 @@ export class imba_phoenix_launch_fire_spirit extends BaseAbility_Plus {
             }
         }
         let direction = (point - caster.GetAbsOrigin() as Vector).Normalized();
-        let DummyUnit = BaseNpc_Plus.CreateUnitByName("npc_dummy_unit", point, caster, false);
-        DummyUnit.AddNewModifier(caster, this, "modifier_kill", {
-            duration: 0.1
-        });
+        let DummyUnit = caster.CreateSummon("npc_dummy_unit", point, 0.1, false);
         let cast_target = DummyUnit;
         let info = {
             Target: cast_target,
@@ -740,10 +737,7 @@ export class imba_phoenix_launch_fire_spirit extends BaseAbility_Plus {
         if (hTarget) {
             location = hTarget.GetAbsOrigin();
         }
-        let DummyUnit = BaseNpc_Plus.CreateUnitByName("npc_dummy_unit", location, caster, false);
-        DummyUnit.AddNewModifier(caster, this, "modifier_kill", {
-            duration: 0.1
-        });
+        let DummyUnit = caster.CreateSummon("npc_dummy_unit", location, 0.1, false);
         let pfx_explosion = ResHelper.CreateParticleEx("particles/units/heroes/hero_phoenix/phoenix_fire_spirit_ground.vpcf", ParticleAttachment_t.PATTACH_WORLDORIGIN, undefined);
         ParticleManager.SetParticleControl(pfx_explosion, 0, location);
         ParticleManager.ReleaseParticleIndex(pfx_explosion);
@@ -1626,10 +1620,7 @@ export class imba_phoenix_supernova extends BaseAbility_Plus {
             duration: egg_duration
         });
         caster.AddNoDraw();
-        let egg = BaseNpc_Plus.CreateUnitByName("npc_dota_phoenix_sun", ground_location, caster, false);
-        egg.AddNewModifier(caster, ability, "modifier_kill", {
-            duration: egg_duration
-        });
+        let egg = caster.CreateSummon("npc_dota_phoenix_sun", ground_location, egg_duration, false);
         egg.AddNewModifier(caster, ability, "modifier_imba_phoenix_supernova_egg_thinker", {
             duration: egg_duration + 0.3
         });

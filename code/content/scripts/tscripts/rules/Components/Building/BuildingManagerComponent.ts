@@ -1,17 +1,17 @@
-import {EventHelper} from "../../../helper/EventHelper";
-import {ResHelper} from "../../../helper/ResHelper";
-import {BaseNpc_Plus} from "../../../npc/entityPlus/BaseNpc_Plus";
-import {BuildingConfig} from "../../../shared/BuildingConfig";
-import {ChessControlConfig} from "../../../shared/ChessControlConfig";
-import {ET} from "../../../shared/lib/Entity";
-import {GEventHelper} from "../../../shared/lib/GEventHelper";
-import {PlayerScene} from "../Player/PlayerScene";
-import {ERoundBoard} from "../Round/ERoundBoard";
-import {BuildingEntityRoot} from "./BuildingEntityRoot";
+import { EventHelper } from "../../../helper/EventHelper";
+import { ResHelper } from "../../../helper/ResHelper";
+import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
+import { BuildingConfig } from "../../../shared/BuildingConfig";
+import { ChessControlConfig } from "../../../shared/ChessControlConfig";
+import { ET } from "../../../shared/lib/Entity";
+import { GEventHelper } from "../../../shared/lib/GEventHelper";
+import { PlayerScene } from "../Player/PlayerScene";
+import { ERoundBoard } from "../Round/ERoundBoard";
+import { BuildingEntityRoot } from "./BuildingEntityRoot";
 
 /**塔防组件 */
 @GReloadable
-export class BuildingManagerComponent extends ET.Component {
+export class BuildingManagerComponent extends ET.Component implements IRoundStateCallback {
 
     allBuilding: string[] = [];
     allBuildingHelper: IBuildingEntityRoot[] = [];
@@ -196,62 +196,42 @@ export class BuildingManagerComponent extends ET.Component {
         return r;
     }
 
-    public getAllBattleUnitAlive() {
-        let allbuilding = this.getAllBattleBuilding();
-        let r: IBattleUnitEntityRoot[] = [];
-        allbuilding.forEach(b => {
-            if (b.RuntimeBuilding) {
-                r = r.concat(b.RuntimeBuilding.BattleUnitManager().GetAllBattleUnitAlive())
-            }
-        })
-        return r
-    }
+    OnRound_Start(round: ERoundBoard) {
 
-    public getAllBattleUnitAliveNpc() {
-        let r = this.getAllBattleUnitAlive().map((b) => {
-            return b.GetDomain<IBaseNpc_Plus>();
+        this.getAllBattleBuilding().forEach((b) => {
+            b.OnRound_Start();
         });
-        return r;
     }
 
-    OnRoundStartBegin(round: ERoundBoard) {
-        this.getAllBattleBuilding()
-            .forEach((b) => {
-                b.RoundStateComp().OnBoardRound_Start();
-            });
-    }
-
-    OnRoundStartBattle() {
-        this.getAllBattleBuilding()
-            .forEach((b) => {
-                //创建会逐个调用roundstate组件onawake
-                b.CreateCloneRuntimeBuilding();
-            });
+    OnRound_Battle() {
+        this.getAllBattleBuilding().forEach((b) => {
+            b.OnRound_Battle();
+        });
         // 先战吼技能再激活羁绊
         let player = this.GetDomain<PlayerScene>().ETRoot;
-        player.CombinationManager().OnRoundStartBattle();
+        player.CombinationManager().OnRound_Battle();
 
     }
 
-    OnRoundStartPrize(round: ERoundBoard) {
+    OnRound_Prize(round: ERoundBoard) {
+        let player = this.GetDomain<PlayerScene>().ETRoot;
+        player.BattleUnitManagerComp().ClearSummonIllusion(DOTATeam_t.DOTA_TEAM_GOODGUYS);
         this.getAllBattleBuilding().forEach((b) => {
-            if (b.RuntimeBuilding) {
-                b.RuntimeBuilding.BattleUnitManager().ClearRuntimeBattleUnit();
-                if (b.RuntimeBuilding.ChessComp().isInBattleAlive()) {
-                    b.RuntimeBuilding.RoundStateComp().OnBoardRound_Prize_RuntimeBuilding(round);
+            if (b.RuntimeBuilding && b.RuntimeBuilding.isAlive && !b.RuntimeBuilding.IsDisposed()) {
+                if (b.RuntimeBuilding.ChessComp().isInBattle) {
+                    b.RuntimeBuilding.OnRound_Prize(round);
                 }
             }
         });
-        let player = this.GetDomain<PlayerScene>().ETRoot;
-        player.CombinationManager().OnRoundStartPrize(round);
+        player.CombinationManager().OnRound_Prize(round);
 
     }
 
-    OnRoundWaitingEnd(round: ERoundBoard) {
-        this.getAllBattleBuilding()
-            .forEach((b) => {
-                b.RoundStateComp().OnBoardRound_WaitingEnd();
-            });
+    OnRound_WaitingEnd() {
+        this.getAllBattleBuilding().forEach((b) => {
+            b.OnRound_WaitingEnd();
+        });
     }
 
 }
+

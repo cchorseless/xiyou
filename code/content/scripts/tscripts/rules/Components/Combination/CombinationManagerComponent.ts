@@ -7,7 +7,7 @@ import { ECombination } from "./ECombination";
 import { ECombinationLabelItem } from "./ECombinationLabelItem";
 
 @GReloadable
-export class CombinationManagerComponent extends ET.Component {
+export class CombinationManagerComponent extends ET.Component implements IRoundStateCallback {
 
     onAwake(): void {
         this.addEvent();
@@ -37,17 +37,18 @@ export class CombinationManagerComponent extends ET.Component {
             }),
             this.BelongPlayerid)
     }
-
-    public OnRoundStartBattle() {
+    OnRound_Start(round?: ERoundBoard): void { }
+    OnRound_WaitingEnd(): void { };
+    public OnRound_Battle() {
         this.getAllActiveCombination().forEach(comb => {
-            comb.OnRoundStartBattle();
+            comb.OnRound_Battle();
         })
     }
 
-    public OnRoundStartPrize(round: ERoundBoard) {
+    public OnRound_Prize(round: ERoundBoard) {
         this.getAllActiveCombination().forEach(comb => {
             if (comb) {
-                comb.OnRoundStartPrize(round);
+                comb.OnRound_Prize(round);
             }
         })
     }

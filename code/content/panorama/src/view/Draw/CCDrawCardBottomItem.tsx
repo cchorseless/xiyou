@@ -22,6 +22,9 @@ export class CCDrawCardBottomItem extends CCPanel<ICCDrawCardBottomItem> {
         const unitname = this.props.unitname;
         let KV_DATA = KVHelper.KVData();
         let cardinfo = KV_DATA.building_unit_tower[unitname];
+        if (cardinfo == null) {
+            GLogHelper.warn(`${unitname} cant find unitinfo`)
+        }
         let iteminfo = KV_DATA.building_item_card[cardinfo!.CardName];
         const Rarity = cardinfo?.Rarity || "A";
         return (

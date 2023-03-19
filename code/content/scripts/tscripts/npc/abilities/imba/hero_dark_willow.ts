@@ -29,8 +29,8 @@ export class imba_dark_willow_bramble_maze extends BaseAbility_Plus {
         let caster = this.GetCasterPlus();
         let point = vLocation;
         let duration = this.GetSpecialValueFor("duration");
-        let bush = CreateModifierThinker(caster, this, "modifier_imba_dark_willow_bramble_maze", {
-            Duration: duration
+        let bush = BaseModifier_Plus.CreateBuffThinker(caster, this, "modifier_imba_dark_willow_bramble_maze", {
+            duration: duration
         }, point, caster.GetTeam(), false);
     }
     GrowMaze(vLocation: Vector) {
@@ -103,7 +103,7 @@ export class modifier_imba_dark_willow_bramble_maze extends BaseModifier_Plus {
                     //     duration = duration * 3;
                     // }
                     enemy.AddNewModifier(caster, ability, "modifier_imba_dark_willow_bramble_maze_damage", {
-                        Duration: duration
+                        duration: duration
                     });
                 }
                 this.Destroy();
@@ -226,7 +226,7 @@ export class imba_dark_willow_shadow_realm extends BaseAbility_Plus {
     OnSpellStart(): void {
         let caster = this.GetCasterPlus();
         caster.AddNewModifier(caster, this, "modifier_imba_dark_willow_shadow_realm", {
-            Duration: this.GetSpecialValueFor("duration")
+            duration: this.GetSpecialValueFor("duration")
         });
     }
     OnProjectileHitHandle(hTarget: IBaseNpc_Plus, vLocation: Vector, iProjectile: ProjectileID) {
@@ -339,7 +339,7 @@ export class modifier_imba_dark_willow_shadow_realm extends BaseModifier_Plus {
             });
             if (caster.HasTalent("special_bonus_unique_imba_dark_willow_shadow_realm_2")) {
                 parent.AddNewModifier(caster, ability, "modifier_imba_dark_willow_shadow_realm_bonus_as", {
-                    Duration: caster.GetTalentValue("special_bonus_unique_imba_dark_willow_shadow_realm_2", "duration"),
+                    duration: caster.GetTalentValue("special_bonus_unique_imba_dark_willow_shadow_realm_2", "duration"),
                     attackspeed: this.bonus_as
                 });
             }
@@ -505,7 +505,7 @@ export class imba_dark_willow_cursed_crown extends BaseAbility_Plus {
         ParticleManager.SetParticleControlEnt(nfx, 1, target, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", target.GetAbsOrigin(), true);
         ParticleManager.ReleaseParticleIndex(nfx);
         target.AddNewModifier(caster, this, "modifier_imba_dark_willow_cursed_crown", {
-            Duration: delay
+            duration: delay
         });
     }
 }
@@ -615,7 +615,7 @@ export class imba_dark_willow_bedlam extends BaseAbility_Plus {
         let caster = this.GetCasterPlus();
         if (!caster.HasScepter()) {
             caster.AddNewModifier(caster, this, "modifier_imba_dark_willow_bedlam", {
-                Duration: this.GetSpecialValueFor("duration")
+                duration: this.GetSpecialValueFor("duration")
             });
         }
     }
@@ -854,7 +854,7 @@ export class modifier_imba_dark_willow_terrorize extends BaseModifier_Plus {
                         enemy.ApplyFear(this.GetAbilityPlus(), caster, duration);
                         if (caster.HasTalent("special_bonus_unique_imba_dark_willow_terrorize_1")) {
                             enemy.AddNewModifier(caster, this.GetAbilityPlus(), "modifier_imba_dark_willow_terrorize_damage", {
-                                Duration: duration
+                                duration: duration
                             });
                         }
                         if (caster.HasTalent("special_bonus_unique_imba_dark_willow_terrorize_2")) {

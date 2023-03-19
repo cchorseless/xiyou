@@ -6,7 +6,7 @@ import { ERoundBoard } from "../Round/ERoundBoard";
 import { AbilityEntityRoot } from "./AbilityEntityRoot";
 
 @GReloadable
-export class AbilityManagerComponent extends ET.Component {
+export class AbilityManagerComponent extends ET.Component implements IRoundStateCallback {
     public allAbilityRoot: string[] = [];
     onAwake(...args: any[]): void {
         let npc = this.GetDomain<IBaseNpc_Plus>();
@@ -21,21 +21,23 @@ export class AbilityManagerComponent extends ET.Component {
             }
         }
     }
+    OnRound_Start(round?: ERoundBoard): void { }
+    OnRound_WaitingEnd(): void { };
     // 战吼
-    OnBoardRound_Battle() {
+    OnRound_Battle() {
         let allability = this.getAllBaseAbility();
         allability.forEach(ability => {
-            if (ability.OnRoundStartBattle) {
-                ability.OnRoundStartBattle()
+            if (ability.OnRound_Battle) {
+                ability.OnRound_Battle()
             }
         })
     }
 
-    OnBoardRound_Prize(round: ERoundBoard) {
+    OnRound_Prize(round: ERoundBoard) {
         let allability = this.getAllBaseAbility();
         allability.forEach(ability => {
-            if (ability.OnRoundStartPrize) {
-                ability.OnRoundStartPrize(round)
+            if (ability.OnRound_Prize) {
+                ability.OnRound_Prize(round)
             }
         })
     }

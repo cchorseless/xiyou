@@ -245,8 +245,8 @@ export class imba_enchantress_enchant extends BaseAbility_Plus {
         this.caster.EmitSound("Hero_Enchantress.EnchantCast");
         if ((!this.target.IsConsideredHero() || this.target.IsIllusion()) && !this.target.IsRoshan()) {
             this.target.Purge(true, true, false, false, false);
-            if (string.find(this.target.GetUnitName(), "guys_")) {
-                let lane_creep_name = this.target.GetUnitName();
+            let lane_creep_name = this.target.GetUnitName();
+            if (lane_creep_name.includes("guys_")) {
                 let new_lane_creep = BaseNpc_Plus.CreateUnitByName(this.target.GetUnitName(), this.target.GetAbsOrigin(), this.caster, false);
                 new_lane_creep.SetBaseMaxHealth(this.target.GetMaxHealth());
                 new_lane_creep.SetHealth(this.target.GetHealth());
@@ -260,7 +260,7 @@ export class imba_enchantress_enchant extends BaseAbility_Plus {
             }
             this.target.SetOwner(this.caster);
             this.target.SetTeam(this.caster.GetTeam());
-            this.target.SetControllableByPlayer(this.caster.GetPlayerID(), false);
+            // this.target.SetControllableByPlayer(this.caster.GetPlayerID(), false);
             this.target.AddNewModifier(this.caster, this, "modifier_imba_enchantress_enchant_controlled", {
                 duration: this.dominate_duration
             });

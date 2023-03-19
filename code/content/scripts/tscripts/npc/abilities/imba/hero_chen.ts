@@ -395,7 +395,7 @@ export class imba_chen_holy_persuasion extends BaseAbility_Plus {
             }
             target.SetOwner(this.GetCasterPlus());
             target.SetTeam(this.GetCasterPlus().GetTeam());
-            target.SetControllableByPlayer(this.GetCasterPlus().GetPlayerID(), false);
+            // target.SetControllableByPlayer(this.GetCasterPlus().GetPlayerID(), false);
             if (!this.GetAutoCastState()) {
                 target.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_chen_holy_persuasion", {});
                 let persuasion_tracker_modifier = this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_chen_holy_persuasion_tracker", {}) as modifier_imba_chen_holy_persuasion_tracker;

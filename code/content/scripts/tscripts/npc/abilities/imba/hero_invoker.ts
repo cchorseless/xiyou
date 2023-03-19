@@ -4,7 +4,6 @@ import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
-import { BaseNpc_Plus } from "../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 export class imba_invoker {
@@ -1611,7 +1610,7 @@ export class imba_invoker_alacrity extends BaseAbility_Plus {
             let bonus_damage = ability.GetLevelSpecialValueFor("bonus_damage", exort_level);
             EmitSoundOn("Hero_Invoker.Alacrity", caster);
             if (caster.HasTalent("special_bonus_imba_unique_invoker_6") && target == caster) {
-                let allHeroes =caster.GetPlayerRoot().BuildingManager().getAllBattleUnitAliveNpc();
+                let allHeroes = caster.GetPlayerRoot().BattleUnitManagerComp().GetAllBattleUnitAliveNpc(caster.GetTeam());
                 for (const [_, hero] of GameFunc.iPair(allHeroes)) {
                     if (hero == caster) {
                         hero.AddNewModifier(caster, ability, "modifier_imba_invoker_alacrity", {
@@ -1885,7 +1884,7 @@ export class imba_invoker_forge_spirit extends BaseAbility_Plus {
             }
             this.forged_spirits = updated_spirit_array;
             for (let i = 0; i < spirit_count; i++) {
-                let forged_spirit = BaseNpc_Plus.CreateUnitByName(spirit_name, caster.GetAbsOrigin() + RandomVector(100) as Vector, caster, true);
+                let forged_spirit = caster.CreateSummon(spirit_name, caster.GetAbsOrigin() + RandomVector(100) as Vector, spirit_duration, true);
                 if (caster.TempData().bPersona) {
                     forged_spirit.SetOriginalModel("models/heroes/invoker_kid/invoker_kid_trainer_dragon.vmdl");
                     forged_spirit.SetModel("models/heroes/invoker_kid/invoker_kid_trainer_dragon.vmdl");
@@ -1906,9 +1905,6 @@ export class imba_invoker_forge_spirit extends BaseAbility_Plus {
                     melt_strike_mana_cost: melt_strike_mana_cost,
                     max_armor_removed: max_armor_removed
                 });
-                forged_spirit.AddNewModifier(caster, this, "modifier_kill", {
-                    duration: spirit_duration
-                });
                 forged_spirit.AddNewModifier(caster, this, "modifier_phased", {
                     duration: 0.03
                 });
@@ -1919,7 +1915,7 @@ export class imba_invoker_forge_spirit extends BaseAbility_Plus {
                 forged_spirit.SetBaseDamageMax(spirit_damage);
                 forged_spirit.SetBaseMaxHealth(spirit_hp);
                 forged_spirit.SetPhysicalArmorBaseValue(spirit_armor);
-                forged_spirit.SetControllableByPlayer(caster.GetPlayerID(), true);
+                // forged_spirit.SetControllableByPlayer(caster.GetPlayerID(), true);
                 this.forged_spirits.push(forged_spirit);
             }
         }

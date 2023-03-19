@@ -864,7 +864,7 @@
         "IsVaild": true
       },
       {
-        "ItemConfigId": "building_hero_zeus",
+        "ItemConfigId": "building_hero_zuus",
         "ItemName": "宙斯",
         "ItemCount": 1,
         "ItemWeight": 1,
@@ -1737,7 +1737,7 @@
         "IsVaild": true
       },
       {
-        "ItemConfigId": "building_hero_zeus",
+        "ItemConfigId": "building_hero_zuus",
         "ItemName": "宙斯",
         "ItemCount": 1,
         "ItemWeight": 1,
@@ -2610,7 +2610,7 @@
         "IsVaild": true
       },
       {
-        "ItemConfigId": "building_hero_zeus",
+        "ItemConfigId": "building_hero_zuus",
         "ItemName": "宙斯",
         "ItemCount": 1,
         "ItemWeight": 1,

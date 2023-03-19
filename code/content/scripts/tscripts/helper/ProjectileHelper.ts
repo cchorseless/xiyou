@@ -722,7 +722,7 @@ export module ProjectileHelper {
         export class SimpleLineProjectile {
             OnThink: IGHandler;
             OnHit: IGHandler<boolean>;
-            aliveTime: number;
+            aliveTime: number = 0;
             duration: number;
             distanceTraveled: number;
             distance: number;
@@ -730,35 +730,36 @@ export module ProjectileHelper {
                 caster: IBaseNpc_Plus,
                 ability: IBaseAbility_Plus,
                 FX: string,
+                duration: number,
+                speed: number,
+                distance: number,
+                velocity: Vector,
                 position?: Vector,
                 radius?: number,
-                speed?: number,
-                velocity?: Vector,
-                aliveTime?: number,
-                duration?: number,
                 distanceTraveled?: number,
-                distance?: number,
                 OnThink?: IGHandler;
                 OnHit?: IGHandler<boolean>;
             }) {
                 let projectile = new SimpleLineProjectile();
+                for (let key in data) {
+                    (projectile as any)[key] = (data as any)[key];
+                }
                 projectile.originalCaster = data.caster;
                 projectile.currentCaster = data.caster;
                 projectile.abilitySource = data.ability;
-                projectile.position = data.position || projectile.currentCaster.GetAbsOrigin();
-                projectile.radius = data.radius || 0;
-                projectile.speed = data.speed || 0;
+                projectile.speed = data.speed;
                 projectile.velocity = data.velocity;
-                projectile.aliveTime = data.aliveTime || 0;
                 projectile.duration = data.duration;
-                projectile.distanceTraveled = data.distanceTraveled || 0;
                 projectile.distance = data.distance;
-                projectile.FX = ParticleManager.CreateParticle(data.FX, ParticleAttachment_t.PATTACH_POINT, projectile.currentCaster);
-                ParticleManager.SetParticleControl(projectile.FX, 0, projectile.position);
-                ParticleManager.SetParticleControl(projectile.FX, 1, projectile.position);
-                ParticleManager.SetParticleControl(projectile.FX, 2, Vector(projectile.speed, 0, 0));
-                ParticleManager.SetParticleControl(projectile.FX, 3, projectile.position);
-                ParticleManager.SetParticleControl(projectile.FX, 4, Vector(projectile.duration, 0, 0));
+                projectile.radius = data.radius || 0;
+                projectile.position = data.position || projectile.currentCaster.GetAbsOrigin();
+                projectile.distanceTraveled = data.distanceTraveled || 0;
+                projectile.FXid = ParticleManager.CreateParticle(data.FX, ParticleAttachment_t.PATTACH_POINT, projectile.currentCaster);
+                ParticleManager.SetParticleControl(projectile.FXid, 0, projectile.position);
+                ParticleManager.SetParticleControl(projectile.FXid, 1, projectile.position);
+                ParticleManager.SetParticleControl(projectile.FXid, 2, Vector(projectile.speed, 0, 0));
+                ParticleManager.SetParticleControl(projectile.FXid, 3, projectile.position);
+                ParticleManager.SetParticleControl(projectile.FXid, 4, Vector(projectile.duration, 0, 0));
                 projectile.OnThink = data.OnThink;
                 projectile.OnHit = data.OnHit;
                 if (projectile.OnThink) {
@@ -772,6 +773,11 @@ export module ProjectileHelper {
 
             Start() {
                 GTimerHelper.AddFrameTimer(1, GHandler.create(this, () => {
+                    this.aliveTime += GTimerHelper.GetUpdateInterval();
+                    if (this.aliveTime >= this.duration || !GFuncEntity.IsValid(this.GetCaster())) {
+                        this.Remove();
+                        return;
+                    }
                     this.ProjectileThink();
                     return 1;
                 }))
@@ -779,7 +785,11 @@ export module ProjectileHelper {
 
             ProjectileThink() {
                 if (this.OnThink) {
-                    this.OnThink.runWith([this]);
+                    let status = this.OnThink.runWith([this]);
+                    if (status) {
+                        this.Remove();
+                        return;
+                    }
                 }
                 let position = this.GetPosition();
                 let radius = this.GetRadius();
@@ -811,8 +821,8 @@ export module ProjectileHelper {
                 return this.abilitySource;
             }
             Remove() {
-                ParticleManager.DestroyParticle(this.FX, false);
-                ParticleManager.ReleaseParticleIndex(this.FX);
+                ParticleManager.DestroyParticle(this.FXid, true);
+                ParticleManager.ReleaseParticleIndex(this.FXid);
                 GTimerHelper.ClearAll(this);
             }
             Deflect(unit: IBaseNpc_Plus) {
@@ -827,8 +837,8 @@ export module ProjectileHelper {
             position: Vector
             SetPosition(pos: Vector) {
                 this.position = pos;
-                ParticleManager.SetParticleControl(this.FX, 1, pos + (this.GetVelocity() * FrameTime()) as Vector);
-                ParticleManager.SetParticleControl(this.FX, 0, pos);
+                ParticleManager.SetParticleControl(this.FXid, 1, pos + (this.GetVelocity() * FrameTime()) as Vector);
+                ParticleManager.SetParticleControl(this.FXid, 0, pos);
             }
             GetVelocity() {
                 return this.velocity;
@@ -841,11 +851,11 @@ export module ProjectileHelper {
                 return this.speed;
             }
             speed: number;
-            FX: ParticleID;
+            FXid: ParticleID;
             SetSpeed(speed: number) {
                 this.speed = speed;
-                if (this.FX) {
-                    ParticleManager.SetParticleControl(this.FX, 2, Vector(speed, 0, 0));
+                if (this.FXid) {
+                    ParticleManager.SetParticleControl(this.FXid, 2, Vector(speed, 0, 0));
                 }
             }
             GetRadius() {

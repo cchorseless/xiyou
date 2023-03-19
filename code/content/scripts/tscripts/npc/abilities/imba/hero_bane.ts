@@ -1,9 +1,9 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
-import { BaseNpc_Plus } from "../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 
@@ -42,6 +42,13 @@ export class imba_bane_enfeeble_723 extends BaseAbility_Plus {
                 duration: this.GetSpecialValueFor("duration") * (1 - target.GetStatusResistance())
             });
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
     }
 }
 @registerModifier()
@@ -172,6 +179,13 @@ export class imba_bane_brain_sap_723 extends BaseAbility_Plus {
             });
         }
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
+    }
 }
 @registerAbility()
 export class imba_bane_fiends_grip_723 extends BaseAbility_Plus {
@@ -216,6 +230,13 @@ export class imba_bane_fiends_grip_723 extends BaseAbility_Plus {
         if (this.target && !this.target.IsNull() && this.target.FindModifierByNameAndCaster("modifier_imba_bane_fiends_grip_723", this.GetCasterPlus())) {
             this.target.FindModifierByNameAndCaster("modifier_imba_bane_fiends_grip_723", this.GetCasterPlus()).Destroy();
         }
+    }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
     }
 }
 @registerModifier()
@@ -392,6 +413,14 @@ export class imba_bane_enfeeble extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_bane_2"), "modifier_special_bonus_imba_bane_2", {});
         }
     }
+
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
+    }
 }
 @registerModifier()
 export class modifier_imba_enfeeble_debuff extends BaseModifier_Plus {
@@ -426,16 +455,16 @@ export class modifier_imba_enfeeble_debuff extends BaseModifier_Plus {
     }
     OnIntervalThink(): void {
         if (IsServer()) {
-            if (GameFunc.GetCount(this.stacks_table) > 0) {
-                for (let i = GameFunc.GetCount(this.stacks_table) - 1; i >= 0; i--) {
+            if (this.stacks_table.length > 0) {
+                for (let i = this.stacks_table.length - 1; i >= 0; i--) {
                     if (this.stacks_table[i] + this.duration < GameRules.GetGameTime()) {
                         this.stacks_table.splice(i, 1);
                     }
                 }
-                if (GameFunc.GetCount(this.stacks_table) == 0) {
+                if (this.stacks_table.length == 0) {
                     this.Destroy();
                 } else {
-                    this.SetStackCount(GameFunc.GetCount(this.stacks_table));
+                    this.SetStackCount(this.stacks_table.length);
                 }
                 // this.GetParentPlus().CalculateStatBonus(true);
             }
@@ -597,7 +626,7 @@ export class imba_bane_brain_sap extends BaseAbility_Plus {
             if (caster.HasTalent("special_bonus_imba_bane_5")) {
                 let baby_fiends_grip_duration = caster.GetTalentValue("special_bonus_imba_bane_5", "duration");
                 let baby_duration = baby_fiends_grip_duration + 1;
-                let baby_bane = BaseNpc_Plus.CreateUnitByName("npc_imba_brain_sap_baby_bane", caster.GetAbsOrigin() + RandomVector(100) as Vector, caster);
+                let baby_bane = caster.CreateSummon("npc_imba_brain_sap_baby_bane", caster.GetAbsOrigin() + RandomVector(100) as Vector, baby_duration);
                 baby_bane.AddNewModifier(caster, undefined, "modifier_imba_brain_sap_baby_bane", {
                     duration: baby_duration
                 });
@@ -612,9 +641,7 @@ export class imba_bane_brain_sap extends BaseAbility_Plus {
             }
             if (enfeeble_debuff) {
                 enfeeble_charges = target.findBuffStack("modifier_imba_enfeeble_debuff", caster);
-                for (const [k, v] of GameFunc.iPair(enfeeble_debuff.stacks_table)) {
-                    enfeeble_debuff.stacks_table[k] = undefined;
-                }
+                enfeeble_debuff.stacks_table = [];
                 enfeeble_debuff.SetStackCount(0);
             }
             let enfeeble_bonus_damage = enfeeble_stack_to_damage * enfeeble_charges;
@@ -659,6 +686,13 @@ export class imba_bane_brain_sap extends BaseAbility_Plus {
     }
     IsHiddenWhenStolen(): boolean {
         return false;
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
     }
 }
 @registerModifier()
@@ -788,6 +822,13 @@ export class imba_bane_nightmare extends BaseAbility_Plus {
     }
     IsHiddenWhenStolen(): boolean {
         return false;
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
     }
 }
 @registerAbility()
@@ -1110,10 +1151,17 @@ export class imba_bane_fiends_grip extends BaseAbility_Plus {
     IsHiddenWhenStolen(): boolean {
         return false;
     }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
+    }
 }
 @registerModifier()
 export class modifier_imba_fiends_grip_handler extends BaseModifier_Plus {
-    public baby: any;
+    public baby: boolean = false;
     public propogated: any;
     public original_target: any;
     public total_demon_damage: number;
@@ -1153,7 +1201,7 @@ export class modifier_imba_fiends_grip_handler extends BaseModifier_Plus {
             if (p_0.propogated == 0) {
                 parent.TempData().grip_link_particle_table = [];
             }
-            this.baby = p_0.baby;
+            this.baby = GToBoolean(p_0.baby);
             this.OnIntervalThink();
             this.StartIntervalThink(1);
             this.propogated = p_0.propogated;
@@ -1162,7 +1210,7 @@ export class modifier_imba_fiends_grip_handler extends BaseModifier_Plus {
     }
     BeRefresh(p_0: any): void {
         if (IsServer()) {
-            this.baby = p_0.baby;
+            this.baby = GToBoolean(p_0.baby);
             this.GetParentPlus().Interrupt();
             this.OnIntervalThink();
             this.StartIntervalThink(1);
@@ -1188,10 +1236,10 @@ export class modifier_imba_fiends_grip_handler extends BaseModifier_Plus {
             if (enfeeble_debuff && !this.baby) {
                 let stacks_table = enfeeble_debuff.stacks_table;
                 let particle_table = parent.TempData<any[]>().grip_link_particle_table;
-                if (GameFunc.GetCount(stacks_table) > 0) {
-                    stacks_table[GameFunc.GetCount(stacks_table)] = undefined;
+                if (stacks_table.length > 0) {
+                    stacks_table.pop();
                     enfeeble_debuff.DecrementStackCount();
-                    let demon = BaseNpc_Plus.CreateUnitByName("npc_imba_fiends_grip_demon", caster.GetAbsOrigin() + RandomVector(100) as Vector, caster);
+                    let demon = caster.CreateSummon("npc_imba_fiends_grip_demon", caster.GetAbsOrigin() + RandomVector(100) as Vector, -1);
                     demon.AddNewModifier(caster, undefined, "modifier_imba_fiends_grip_demon", {});
                     demon.SetRenderColor(75, 0, 130);
                     let particle = ResHelper.CreateParticleEx(drain_particle, ParticleAttachment_t.PATTACH_ABSORIGIN, demon);

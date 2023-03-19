@@ -4,7 +4,6 @@ import { AoiHelper } from "../../../helper/AoiHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifierMotionHorizontal_Plus, BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
-import { BaseNpc_Plus } from "../../entityPlus/BaseNpc_Plus";
 import { BaseModifierMotionHorizontal, registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 
@@ -335,12 +334,9 @@ export class imba_enigma_demonic_conversion extends BaseAbility_Plus {
     CreateEidolon(hParent: IBaseNpc_Plus, vLocation: Vector, iWave: number, fDuration: number) {
         let caster = this.GetCasterPlus();
         hParent = hParent || caster;
-        let eidolon = BaseNpc_Plus.CreateUnitByName("npc_imba_enigma_eidolon_" + math.min(4, this.GetLevel()), vLocation, caster, true);
-        eidolon.AddNewModifier(caster, this, "modifier_kill", {
-            duration: fDuration
-        });
+        let eidolon = caster.CreateSummon("npc_imba_enigma_eidolon_" + math.min(4, this.GetLevel()), vLocation, fDuration, true);
         eidolon.SetOwner(caster);
-        eidolon.SetControllableByPlayer(caster.GetPlayerID(), true);
+        // eidolon.SetControllableByPlayer(caster.GetPlayerID(), true);
         eidolon.SetUnitOnClearGround();
         let attacks_needed = this.GetSpecialValueFor("split_attack_count") + this.GetSpecialValueFor("additional_attacks_split") * (iWave - 1);
         eidolon.AddNewModifier(caster, this, "modifier_imba_enigma_eidolon", {

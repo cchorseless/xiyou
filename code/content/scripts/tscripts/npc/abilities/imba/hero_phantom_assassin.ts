@@ -982,7 +982,7 @@ export class modifier_phantom_assassin_arcana extends BaseModifier_Plus {
             gravestone.TempData().epitaph_number = RandomInt(1, 13);
             gravestone.TempData().victim_id = (params.target as IBaseNpc_Plus).GetPlayerID();
             for (let i = 0; i <= PlayerResource.GetPlayerCount() - 1; i++) {
-                gravestone.SetControllableByPlayer(i as PlayerID, false);
+                // gravestone.SetControllableByPlayer(i as PlayerID, false);
             }
             if (this.GetStackCount() == 400) {
                 // Wearable._WearProp(this.GetParentPlus(), "7247", "weapon", 1);

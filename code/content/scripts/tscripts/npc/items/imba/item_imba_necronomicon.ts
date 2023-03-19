@@ -22,18 +22,14 @@ export class item_imba_necronomicon extends BaseItem_Plus {
         let melee_loc = RotatePosition(caster_loc, QAngle(0, 30, 0), caster_loc + caster_direction * 180 as Vector);
         let ranged_loc = RotatePosition(caster_loc, QAngle(0, -30, 0), caster_loc + caster_direction * 180 as Vector);
         GridNav.DestroyTreesAroundPoint(caster_loc + caster_direction * 180 as Vector, 180, false);
-        print(melee_summon_name, melee_loc);
-        print(ranged_summon_name, ranged_loc);
-        print("Crash happens between this");
         let melee_summon = BaseNpc_Plus.CreateUnitByName(melee_summon_name, melee_loc, this.GetCasterPlus(), true);
         let ranged_summon = BaseNpc_Plus.CreateUnitByName(ranged_summon_name, ranged_loc, this.GetCasterPlus(), true);
-        print("and this");
-        melee_summon.SetControllableByPlayer(this.GetCasterPlus().GetPlayerID(), true);
+        // melee_summon.SetControllableByPlayer(this.GetCasterPlus().GetPlayerID(), true);
         melee_summon.AddNewModifier(this.GetCasterPlus(), this, "modifier_kill", {
             duration: summon_duration
         });
         melee_summon.AddNewModifier(this.GetCasterPlus(), this, "modifier_item_imba_necronomicon_summon", {});
-        ranged_summon.SetControllableByPlayer(this.GetCasterPlus().GetPlayerID(), true);
+        // ranged_summon.SetControllableByPlayer(this.GetCasterPlus().GetPlayerID(), true);
         ranged_summon.AddNewModifier(this.GetCasterPlus(), this, "modifier_kill", {
             duration: summon_duration
         });

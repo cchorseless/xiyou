@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -34,6 +35,16 @@ export class imba_batrider_sticky_napalm extends BaseAbility_Plus {
         this.napalm_impact_particle = undefined;
         this.enemies = undefined;
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.POSITION_most_enemy(this);
+    }
+
+
+
 }
 @registerModifier()
 export class modifier_imba_batrider_sticky_napalm_handler extends BaseModifier_Plus {
@@ -299,6 +310,13 @@ export class imba_batrider_flamebreak extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_unique_batrider_flamebreak_cooldown"), "modifier_special_bonus_imba_unique_batrider_flamebreak_cooldown", {});
         }
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.POSITION_most_enemy(this);
+    }
 }
 @registerModifier()
 export class modifier_imba_batrider_flamebreak_damage extends BaseModifier_Plus {
@@ -401,6 +419,14 @@ export class imba_batrider_firefly extends BaseAbility_Plus {
         this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_batrider_firefly", {
             duration: this.GetTalentSpecialValueFor("duration")
         });
+    }
+
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_cast(this);
     }
 }
 @registerModifier()
@@ -682,6 +708,13 @@ export class imba_batrider_flaming_lasso extends BaseAbility_Plus {
         this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_batrider_flaming_lasso_self", {
             duration: this.GetSpecialValueFor("duration") * (1 - target.GetStatusResistance())
         });
+    }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
     }
 }
 @registerModifier()

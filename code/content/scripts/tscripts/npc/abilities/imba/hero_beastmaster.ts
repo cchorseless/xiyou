@@ -1,10 +1,11 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { AoiHelper } from "../../../helper/AoiHelper";
+import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
-import { BaseNpc_Plus } from "../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 
@@ -37,118 +38,106 @@ export class imba_beastmaster_wild_axes extends BaseAbility_Plus {
         let target = this.GetCursorPosition();
         let distance = GFuncVector.CalculateDistance(caster, target);
         let direction = GFuncVector.CalculateDirection(target, caster);
-        let amp = this.GetTalentSpecialValueFor("duration");
-        let radius = this.GetTalentSpecialValueFor("radius");
-        let damage = this.GetTalentSpecialValueFor("axe_damage");
+        let amp = this.GetSpecialValueFor("duration");
+        let radius = this.GetSpecialValueFor("radius");
+        let damage = this.GetSpecialValueFor("axe_damage");
         let speed = math.max(1200, distance);
         this.hitUnits = [];
         caster.EmitSound("Hero_Beastmaster.Wild_Axes");
-        // let ProjectileHit = GHandler.create(this, (pj: ISimpleLineProjectile, enemy: IBaseNpc_Plus) => {
-        //     if (!enemy) {
-        //         return;
-        //     }
-        //     if ((!enemy.IsMagicImmune()) &&
-        //         (!enemy.IsInvulnerable()) && enemy.GetTeam() != this.GetCasterPlus().GetTeam()) {
-        //         if (!this.hitUnits.includes(enemy.entindex())) {
-        //             if (!enemy.TriggerSpellAbsorb(this)) {
-        //                 if (this.GetCasterPlus().HasScepter()) {
-        //                     this.GetCasterPlus().PerformAbilityAttack(enemy, true, this, damage, undefined, true);
-        //                 } else {
-        //                     this.DealDamage(this.GetCasterPlus(), enemy, damage);
-        //                 }
-        //                 enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_beastmaster_wild_axes", {
-        //                     duration: amp
-        //                 });
-        //                 EmitSoundOn("Hero_Beastmaster.Wild_Axes_Damage", enemy);
-        //             }
-        //             this.hitUnits.push(enemy.entindex());
-        //         }
-        //     }
-        // });
-        // let length = distance;
+        let ProjectileHit = GHandler.create(this, (pj: ISimpleLineProjectile, enemy: IBaseNpc_Plus) => {
+            if (!enemy) {
+                return;
+            }
+            if ((!enemy.IsMagicImmune()) &&
+                (!enemy.IsInvulnerable()) && enemy.GetTeam() != this.GetCasterPlus().GetTeam()) {
+                if (!this.hitUnits.includes(enemy.entindex())) {
+                    if (!enemy.TriggerSpellAbsorb(this)) {
+                        this.DealDamage(this.GetCasterPlus(), enemy, damage);
+                        enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_beastmaster_wild_axes", {
+                            duration: amp
+                        });
+                        EmitSoundOn("Hero_Beastmaster.Wild_Axes_Damage", enemy);
+                    }
+                    this.hitUnits.push(enemy.entindex());
+                }
+            }
+        });
+        let length = distance;
+        let ProjectileThink = GHandler.create(this, (pj: ISimpleLineProjectile & { [k: string]: any }) => {
+            let offset = 150 * (length / 656) * math.sin(2 * math.pi * pj.lifetime * (656 / length));
+            pj.distanceTraveled = pj.distanceTraveled + speed * FrameTime();
+            let position;
+            let nextPos;
+            if (pj.distanceTraveled > length) {
+                position = pj.end_position + GFuncVector.CalculateDirection(this.GetCasterPlus().GetAbsOrigin(), pj.end_position) * (pj.distanceTraveled - length);
+                pj.lifetime = pj.lifetime - FrameTime();
+                nextPos = pj.end_position + GFuncVector.CalculateDirection(this.GetCasterPlus().GetAbsOrigin(), pj.end_position) * ((pj.distanceTraveled + pj.GetSpeed() * FrameTime()) - length);
+            } else {
+                position = pj.original_position + pj.direction * pj.distanceTraveled;
+                pj.lifetime = pj.lifetime + FrameTime();
+                nextPos = pj.original_position + pj.direction * (pj.distanceTraveled + pj.GetSpeed() * FrameTime());
+            }
+            let offsetVect = pj.state * GFuncVector.GetPerpendicularVector(pj.direction) * offset;
+            let offsetVect2 = pj.state * GFuncVector.GetPerpendicularVector(pj.direction) * offset;
+            let calcPos = position + offsetVect;
+            let calcNexPos = nextPos + offsetVect2;
+            pj.SetVelocity(GFuncVector.CalculateDirection(calcNexPos, calcPos) * pj.GetSpeed() as Vector);
+            GridNav.DestroyTreesAroundPoint(calcPos, 175, true);
+            pj.SetPosition(calcPos);
+        })
+        let position = caster.GetAbsOrigin();
+        let pinfo = {
+            FX: "particles/units/heroes/hero_beastmaster/beastmaster_wildaxe.vpcf",
+            position: position,
+            caster: this.GetCasterPlus(),
+            OnThink: ProjectileThink,
+            OnHit: ProjectileHit,
+            ability: this,
+            original_position: position,
+            speed: speed,
+            duration: distance * 2 / speed,
+            radius: radius,
+            direction: direction,
+            velocity: -direction * speed as Vector,
+            distance: distance * 2,
+            range: radius,
+            damage: damage,
+            distanceTraveled: 0,
+            lifetime: 0,
+            end_position: target
+        }
+        let obj1 = Object.assign({ state: -1 }, pinfo);
+        let obj2 = Object.assign({ state: 1 }, pinfo);
+        ProjectileHelper.LineProjectiles.SimpleLineProjectile.CreateOne(obj1);
+        ProjectileHelper.LineProjectiles.SimpleLineProjectile.CreateOne(obj2);
 
-        // let ProjectileThink = GHandler.create(this, (pj: ISimpleLineProjectile) => {
-        //     let velocity = pj.GetVelocity();
-        //     let offset = 150 * (length / 656) * math.sin(2 * math.pi * pj.extraData.lifetime * (656 / length));
-        //     pj.distanceTraveled = pj.distanceTraveled + speed * FrameTime();
-        //     let position;
-        //     let nextPos;
-        //     if (pj.distanceTraveled > length) {
-        //         position = pj.extraData.end_position + GFuncVector.CalculateDirection(this.GetCasterPlus().GetAbsOrigin(), pj.extraData.end_position) * (pj.distanceTraveled - length);
-        //         pj.extraData.lifetime = pj.extraData.lifetime - FrameTime();
-        //         nextPos = pj.extraData.end_position + GFuncVector.CalculateDirection(this.GetCasterPlus().GetAbsOrigin(), pj.extraData.end_position) * ((pj.distanceTraveled + pj.GetSpeed() * FrameTime()) - length);
-        //     } else {
-        //         position = pj.extraData.original_position + pj.extraData.direction * pj.distanceTraveled;
-        //         pj.extraData.lifetime = pj.extraData.lifetime + FrameTime();
-        //         nextPos = pj.extraData.original_position + pj.extraData.direction * (pj.distanceTraveled + pj.GetSpeed() * FrameTime());
-        //     }
-        //     let offset2 = 150 * (length / 656) * math.sin(2 * math.pi * pj.extraData.lifetime * (656 / length));
-        //     let offsetVect = pj.extraData.state * GetPerpendicularVector(pj.extraData.direction) * offset;
-        //     let offsetVect2 = pj.extraData.state * GetPerpendicularVector(pj.extraData.direction) * offset;
-        //     let calcPos = position + offsetVect;
-        //     let calcNexPos = nextPos + offsetVect2;
-        //     pj.SetVelocity(GFuncVector.CalculateDirection(calcNexPos, calcPos) * pj.GetSpeed() as Vector);
-        //     GridNav.DestroyTreesAroundPoint(calcPos, 175, true);
-        //     pj.SetPosition(calcPos);
-        // })
-        // let position = caster.GetAbsOrigin();
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
 
-        // let pinfo = {
-        //     FX: "particles/units/heroes/hero_beastmaster/beastmaster_wildaxe.vpcf",
-        //     position: position,
-        //     caster: this.GetCasterPlus(),
-        //     ability: this,
-        //     original_position: position,
-        //     speed: speed,
-        //     radius: radius,
-        //     direction: direction,
-        //     velocity: -direction * speed as Vector,
-        //     distance: distance * 2,
-        //     range: radius,
-        //     damage: damage,
-        //     distanceTraveled: 0,
-        //     lifetime: 0,
-        //     state: -1,
-        //     end_position: target
-        // }
-        // ProjectileHelper.LineProjectiles.SimpleLineProjectile.CreateOne(pinfo);
-        // ProjectileHandler.CreateProjectile(ProjectileThink, ProjectileHit, {
-        //     FX: "particles/units/heroes/hero_beastmaster/beastmaster_wildaxe.vpcf",
-        //     position: position,
-        //     caster: this.GetCasterPlus(),
-        //     original_position: position,
-        //     end_position: target,
-        //     ability: this,
-        //     speed: speed,
-        //     radius: radius,
-        //     direction: direction,
-        //     velocity: -direction * speed,
-        //     length: distance,
-        //     distance: distance * 2,
-        //     hitUnits: {},
-        //     range: radius,
-        //     damage: damage,
-        //     lifetime: 0,
-        //     distanceTraveled: 0,
-        //     state: 1,
-        //     amp: amp
-        // });
+    GetCooldown(level: number): number {
+        return 20;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this, null, null, FindOrder.FIND_FARTHEST);
     }
 }
 @registerModifier()
 export class modifier_imba_beastmaster_wild_axes extends BaseModifier_Plus {
     public amp: any;
-    public talent: any;
-    public talent_ally: any;
+    public talent: boolean;
+    public talent_ally: number;
     BeCreated(p_0: any,): void {
-        this.amp = this.GetTalentSpecialValueFor("damage_amp");
-        this.talent = this.GetCasterPlus().HasTalent("special_bonus_unique_imba_beastmaster_wild_axes_2");
+        this.amp = this.GetSpecialValueFor("damage_amp");
+        this.talent = this.GetCasterPlus().HasTalent("special_bonus_unique_imba_beastmaster_wild_axes_2") != null;
         this.talent_ally = this.GetCasterPlus().GetTalentValue("special_bonus_unique_imba_beastmaster_wild_axes_2");
         this.SetStackCount(1);
     }
     BeRefresh(p_0: any,): void {
-        this.amp = this.GetTalentSpecialValueFor("damage_amp");
-        this.talent = this.GetCasterPlus().HasTalent("special_bonus_unique_imba_beastmaster_wild_axes_2");
+        this.amp = this.GetSpecialValueFor("damage_amp");
+        this.talent = this.GetCasterPlus().HasTalent("special_bonus_unique_imba_beastmaster_wild_axes_2") != null;
         this.talent_ally = this.GetCasterPlus().GetTalentValue("special_bonus_unique_imba_beastmaster_wild_axes_2") / 100;
         this.IncrementStackCount();
     }
@@ -205,7 +194,74 @@ export class modifier_imba_beastmaster_wild_axes_hawk extends BaseModifier_Plus 
     }
 }
 @registerAbility()
-export class imba_beastmaster_call_of_the_wild extends BaseAbility_Plus { }
+export class imba_beastmaster_call_of_the_wild extends BaseAbility_Plus {
+    OnSpellStart(): void {
+        this.summonBoar();
+        // this.summonHawk();
+    }
+    summonBoar(): void {
+        if (IsServer()) {
+            let caster = this.GetCasterPlus();
+            let boar_name = "npc_imba_dota_beastmaster_boar_";
+            let boar_level = this.GetLevel();
+            let spawn_point = caster.GetAbsOrigin();
+            let spawn_particle = "particles/units/heroes/hero_beastmaster/beastmaster_call_boar.vpcf";
+            let response = "beastmaster_beas_ability_summonsboar_0";
+            let boar_duration = this.GetSpecialValueFor("boar_duration");
+            caster.EmitSound(response + RandomInt(1, 5));
+            caster.EmitSound("Hero_Beastmaster.Call.Boar");
+            let spawn_particle_fx = ResHelper.CreateParticleEx(spawn_particle, ParticleAttachment_t.PATTACH_ABSORIGIN, caster);
+            ParticleManager.SetParticleControl(spawn_particle_fx, 0, spawn_point);
+            let boar_count = 1;
+            if (caster.HasAbility("special_bonus_imba_unique_beastmaster_2")) {
+                let talent_handler = caster.findAbliityPlus("special_bonus_imba_unique_beastmaster_2");
+                if (talent_handler && talent_handler.GetLevel() > 0) {
+                    let additional_boars = talent_handler.GetSpecialValueFor("value");
+                    if (additional_boars) {
+                        boar_count = boar_count + additional_boars;
+                    }
+                }
+            }
+            for (let i = 0; i < boar_count; i++) {
+                let boar = caster.CreateSummon(boar_name + boar_level, spawn_point, boar_duration, true);
+                boar.AddNewModifier(caster, this, "modifier_imba_beastmaster_boar", {});
+                // boar.SetControllableByPlayer(caster.GetPlayerID(), true);
+            }
+        }
+    }
+    summonHawk(): void {
+        if (IsServer()) {
+            let caster = this.GetCasterPlus();
+            let hawk_name = "npc_imba_dota_beastmaster_hawk_";
+            let hawk_level = this.GetLevel();
+            let spawn_point = caster.GetAbsOrigin();
+            let spawn_particle = "particles/units/heroes/hero_beastmaster/beastmaster_call_bird.vpcf";
+            let response = "beastmaster_beas_ability_summonsbird_0";
+            let hawk_duration = this.GetSpecialValueFor("hawk_duration");
+            caster.EmitSound(response + RandomInt(1, 5));
+            caster.EmitSound("Hero_Beastmaster.Call.Hawk");
+            let spawn_particle_fx = ResHelper.CreateParticleEx(spawn_particle, ParticleAttachment_t.PATTACH_ABSORIGIN, caster);
+            ParticleManager.SetParticleControl(spawn_particle_fx, 0, spawn_point);
+            let hawk = caster.CreateSummon(hawk_name + hawk_level, spawn_point, hawk_duration, false);
+            hawk.AddNewModifier(caster, this, "modifier_imba_beastmaster_hawk", {});
+            // hawk.SetControllableByPlayer(caster.GetPlayerID(), true);
+            let hawk_speed = this.GetSpecialValueFor("hawk_speed_tooltip");
+            hawk.SetBaseMoveSpeed(hawk_speed);
+        }
+
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    GetCooldown(level: number): number {
+        return 20;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_cast(this);
+    }
+}
 
 @registerAbility()
 export class imba_beastmaster_hawk_dive extends BaseAbility_Plus { }
@@ -222,7 +278,7 @@ export class modifier_imba_beastmaster_inner_beast extends BaseModifier_Plus {
         return 1.0;
     }
     GetAuraRadius(): number {
-        return this.GetSpecialValueFor("radius");
+        return this.radius
     }
     GetAuraSearchFlags(): DOTA_UNIT_TARGET_FLAGS {
         return DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE;
@@ -242,26 +298,28 @@ export class modifier_imba_beastmaster_inner_beast extends BaseModifier_Plus {
     IsHidden(): boolean {
         return true;
     }
+    radius = 0;
+    Init(p_0: any,): void {
+        this.radius = this.GetSpecialValueFor("radius");
+
+    }
 }
 @registerModifier()
 export class modifier_imba_beastmaster_inner_beast_allies extends BaseModifier_Plus {
-    public cdr: any;
-    public amp: any;
-    public as: any;
-    public hp: any;
-    public hpr: any;
-    public ms: any;
-    public vis: any;
+    public amp: number;
+    public as: number;
+    public hp: number;
+    public hpr: number;
+    public ms: number;
     Init(p_0: any,): void {
-        this.cdr = this.GetTalentSpecialValueFor("bonus_cdr");
-        if (this.GetCasterPlus().HasTalent("special_bonus_unique_imba_beastmaster_inner_beast_1")) {
-            this.amp = this.GetTalentSpecialValueFor("bonus_cdr");
-        }
-        this.as = this.GetTalentSpecialValueFor("bonus_attackspeed");
-        this.hp = this.GetTalentSpecialValueFor("boar_bonus_health");
-        this.hpr = this.GetTalentSpecialValueFor("boar_bonus_regen");
-        this.ms = this.GetTalentSpecialValueFor("hawk_bonus_ms");
-        this.vis = this.GetTalentSpecialValueFor("hawk_bonus_vision");
+        // this.amp = 0;
+        // if (this.GetCasterPlus().HasTalent("special_bonus_unique_imba_beastmaster_inner_beast_1")) {
+        //     this.amp = this.GetSpecialValueFor("bonus_cdr");
+        // }
+        this.as = this.GetSpecialValueFor("bonus_attack_speed");
+        // this.hp = this.GetSpecialValueFor("boar_bonus_health");
+        // this.hpr = this.GetSpecialValueFor("boar_bonus_regen");
+        // this.ms = this.GetSpecialValueFor("hawk_bonus_ms");
     }
 
 
@@ -277,49 +335,36 @@ export class modifier_imba_beastmaster_inner_beast_allies extends BaseModifier_P
         }
         return Object.values(funcs);
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.COOLDOWN_PERCENTAGE)
-    CC_GetModifierPercentageCooldown(p_0: ModifierAbilityEvent,): number {
-        return this.cdr;
-    }
+
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
     CC_GetModifierAttackSpeedBonus_Constant(): number {
         return this.as;
     }
 
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS_PERCENTAGE)
-    CC_GetModifierExtraHealthBonusPercentage() {
-        if (this.GetCasterPlus().HasModifier("modifier_cotw_boar_spirit")) {
-            return this.hp;
-        }
-    }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_REGEN_CONSTANT)
-    CC_GetModifierConstantHealthRegen(): number {
-        if (this.GetCasterPlus().HasModifier("modifier_cotw_boar_spirit")) {
-            return this.hpr;
-        }
-    }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
-    CC_GetModifierMoveSpeedBonus_Percentage(): number {
-        if (this.GetCasterPlus().HasModifier("modifier_cotw_hawk_spirit")) {
-            return this.ms;
-        }
-    }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BONUS_DAY_VISION)
-    CC_GetBonusDayVision(): number {
-        if (this.GetCasterPlus().HasModifier("modifier_cotw_hawk_spirit")) {
-            return this.vis;
-        }
-    }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BONUS_NIGHT_VISION)
-    CC_GetBonusNightVision(): number {
-        if (this.GetCasterPlus().HasModifier("modifier_cotw_hawk_spirit")) {
-            return this.vis;
-        }
-    }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_PERCENTAGE)
-    CC_GetModifierSpellAmplify_Percentage(p_0: ModifierAttackEvent,): number {
-        return this.amp;
-    }
+    // @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS_PERCENTAGE)
+    // CC_GetModifierExtraHealthBonusPercentage() {
+    //     if (this.GetCasterPlus().HasModifier("modifier_cotw_boar_spirit")) {
+    //         return this.hp;
+    //     }
+    // }
+    // @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_REGEN_CONSTANT)
+    // CC_GetModifierConstantHealthRegen(): number {
+    //     if (this.GetCasterPlus().HasModifier("modifier_cotw_boar_spirit")) {
+    //         return this.hpr;
+    //     }
+    // }
+    // @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
+    // CC_GetModifierMoveSpeedBonus_Percentage(): number {
+    //     if (this.GetCasterPlus().HasModifier("modifier_cotw_hawk_spirit")) {
+    //         return this.ms;
+    //     }
+    // }
+
+
+    // @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_PERCENTAGE)
+    // CC_GetModifierSpellAmplify_Percentage(p_0: ModifierAttackEvent,): number {
+    //     return this.amp;
+    // }
     IsDebuff(): boolean {
         return false;
     }
@@ -334,25 +379,26 @@ export class imba_beastmaster_primal_roar extends BaseAbility_Plus {
     }
     OnSpellStart(): void {
         let caster = this.GetCasterPlus();
-        let point = this.GetCursorPosition();
+        let point = this.GetCursorTarget().GetAbsOrigin();
         let nfx = ResHelper.CreateParticleEx("particles/units/heroes/hero_beastmaster/beastmaster_primal_roar.vpcf", ParticleAttachment_t.PATTACH_POINT, caster);
         ParticleManager.SetParticleControlEnt(nfx, 0, caster, ParticleAttachment_t.PATTACH_POINT, "attach_hitloc", caster.GetAbsOrigin(), true);
         ParticleManager.SetParticleControl(nfx, 1, point);
         ParticleManager.ReleaseParticleIndex(nfx);
         EmitSoundOn("Hero_Beastmaster.Primal_Roar", caster);
-        let damage = this.GetTalentSpecialValueFor("damage");
-        let pushDur = this.GetTalentSpecialValueFor("push_duration");
-        let pushDist = this.GetTalentSpecialValueFor("push_distance");
-        let stunDur = this.GetTalentSpecialValueFor("stun_duration");
-        let totDur = stunDur + this.GetTalentSpecialValueFor("slow_duration");
-        let units = AoiHelper.FindAllUnitsInLine(caster.GetTeam(), caster.GetAbsOrigin(), point, this.GetTalentSpecialValueFor("width"));
+        let damage = this.GetSpecialValueFor("damage");
+        let pushDur = this.GetSpecialValueFor("push_duration");
+        let pushDist = this.GetSpecialValueFor("push_distance");
+        let stunDur = this.GetSpecialValueFor("duration");
+        let totDur = stunDur + this.GetSpecialValueFor("slow_duration");
+        let units = AoiHelper.FindAllUnitsInLine(caster.GetTeam(), caster.GetAbsOrigin(), point, this.GetSpecialValueFor("damage_radius"));
         for (const [_, unit] of GameFunc.iPair(units)) {
-            if (unit.GetTeam() != (caster.GetTeam())) {
-                if (unit.TriggerSpellAbsorb(this)) {
+            if (unit.GetTeam() != caster.GetTeam()) {
+                if (!unit.TriggerSpellAbsorb(this)) {
                     this.DealDamage(caster, unit, damage, {}, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_BONUS_SPELL_DAMAGE);
+                    let direction = unit.GetAbsOrigin() - caster.GetAbsOrigin() as Vector;
                     unit.ApplyKnockBack(this, caster, {
-                        direction_x: caster.GetAbsOrigin().x - unit.GetAbsOrigin().x,
-                        direction_y: caster.GetAbsOrigin().y - unit.GetAbsOrigin().y,
+                        direction_x: direction.x,
+                        direction_y: direction.y,
                         duration: pushDur,
                         IsStun: true,
                         distance: pushDist,
@@ -361,7 +407,7 @@ export class imba_beastmaster_primal_roar extends BaseAbility_Plus {
                         unit.ApplyStunned(this, caster, stunDur)
                     });
                     unit.AddNewModifier(caster, this, "modifier_imba_beastmaster_primal_roar_slow", {
-                        Duration: totDur
+                        duration: totDur
                     });
                     if (caster.HasTalent("special_bonus_unique_imba_beastmaster_primal_roar_2")) {
                         unit.ApplyDaze(this, caster, totDur);
@@ -373,20 +419,30 @@ export class imba_beastmaster_primal_roar extends BaseAbility_Plus {
             }
         }
     }
+
+    GetManaCost(level: number): number {
+        return 100;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this, null, null, FindOrder.FIND_FARTHEST);
+    }
 }
 @registerModifier()
 export class modifier_imba_beastmaster_primal_roar_slow extends BaseModifier_Plus {
-    public slow: number;
+    public moveslow: number;
+    public atkspeedslow: number;
     public mr: number;
     public armor: number;
     Init(p_0: any,): void {
-        this.slow = this.GetTalentSpecialValueFor("slow");
+        this.moveslow = this.GetSpecialValueFor("slow_movement_speed_pct");
+        this.atkspeedslow = this.GetSpecialValueFor("slow_attack_speed_pct");
         this.mr = undefined;
         this.armor = undefined;
-        if (this.GetCasterPlus().HasModifier("modifier_cotw_hawk_spirit")) {
-            this.mr = this.GetTalentSpecialValueFor("hawk_mr");
-            this.armor = this.GetTalentSpecialValueFor("hawk_armor");
-        }
+        // if (this.GetCasterPlus().HasModifier("modifier_cotw_hawk_spirit")) {
+        //     this.mr = this.GetSpecialValueFor("hawk_mr");
+        //     this.armor = this.GetSpecialValueFor("hawk_armor");
+        // }
     }
     /** DeclareFunctions():modifierfunction[] {
         let funcs = {
@@ -399,30 +455,26 @@ export class modifier_imba_beastmaster_primal_roar_slow extends BaseModifier_Plu
     } */
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
     CC_GetModifierMoveSpeedBonus_Percentage(): number {
-        return this.slow;
+        return this.moveslow;
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
     CC_GetModifierAttackSpeedBonus_Constant(): number {
-        return this.slow;
+        return this.atkspeedslow;
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS)
-    CC_GetModifierPhysicalArmorBonus(p_0: ModifierAttackEvent,): number {
-        return this.armor;
-    }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_RESISTANCE_BONUS)
-    CC_GetModifierMagicalResistanceBonus(p_0: ModifierAttackEvent,): number {
-        return this.mr;
-    }
+    // @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS)
+    // CC_GetModifierPhysicalArmorBonus(p_0: ModifierAttackEvent,): number {
+    //     return this.armor;
+    // }
+    // @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_RESISTANCE_BONUS)
+    // CC_GetModifierMagicalResistanceBonus(p_0: ModifierAttackEvent,): number {
+    //     return this.mr;
+    // }
 }
-
-
-
 
 
 
 @registerAbility()
 export class imba_beastmaster_summon_hawk extends BaseAbility_Plus {
-    public hawk: any;
     OnUpgrade(): void {
         UpgradeBeastsSummons(this.GetCasterPlus(), this);
     }
@@ -439,15 +491,20 @@ export class imba_beastmaster_summon_hawk extends BaseAbility_Plus {
             caster.EmitSound("Hero_Beastmaster.Call.Hawk");
             let spawn_particle_fx = ResHelper.CreateParticleEx(spawn_particle, ParticleAttachment_t.PATTACH_ABSORIGIN, caster);
             ParticleManager.SetParticleControl(spawn_particle_fx, 0, spawn_point);
-            this.hawk = BaseNpc_Plus.CreateUnitByName(hawk_name + hawk_level, spawn_point, caster, false);
-            this.hawk.AddNewModifier(caster, this, "modifier_imba_beastmaster_hawk", {});
-            this.hawk.AddNewModifier(caster, this, "modifier_kill", {
-                duration: hawk_duration
-            });
-            this.hawk.SetControllableByPlayer(caster.GetPlayerID(), true);
+            let hawk = caster.CreateSummon(hawk_name + hawk_level, spawn_point, hawk_duration, false);
+            hawk.AddNewModifier(caster, this, "modifier_imba_beastmaster_hawk", {});
+            // hawk.SetControllableByPlayer(caster.GetPlayerID(), true);
+            let hawk_speed = this.GetSpecialValueFor("hawk_speed_tooltip");
+            hawk.SetBaseMoveSpeed(hawk_speed);
         }
-        let hawk_speed = this.GetSpecialValueFor("hawk_speed_tooltip");
-        this.hawk.SetBaseMoveSpeed(hawk_speed);
+
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    GetCooldown(level: number): number {
+        return 0;
     }
 }
 @registerModifier()
@@ -604,14 +661,18 @@ export class imba_beastmaster_summon_boar extends BaseAbility_Plus {
                 }
             }
             for (let i = 0; i < boar_count; i++) {
-                let boar = BaseNpc_Plus.CreateUnitByName(boar_name + boar_level, spawn_point, caster, true);
+                let boar = caster.CreateSummon(boar_name + boar_level, spawn_point, boar_duration, true);
                 boar.AddNewModifier(caster, this, "modifier_imba_beastmaster_boar", {});
-                boar.AddNewModifier(caster, this, "modifier_kill", {
-                    duration: boar_duration
-                });
-                boar.SetControllableByPlayer(caster.GetPlayerID(), true);
+                // boar.SetControllableByPlayer(caster.GetPlayerID(), true);
             }
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    GetCooldown(level: number): number {
+        return 0;
     }
 }
 @registerModifier()

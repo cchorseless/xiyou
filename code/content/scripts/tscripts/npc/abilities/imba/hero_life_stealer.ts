@@ -249,12 +249,9 @@ export class imba_life_stealer_feast extends BaseAbility_Plus {
     }
     OnSpellStart(): void {
         this.GetCasterPlus().StartGesture(GameActivity_t.ACT_DOTA_LIFESTEALER_RAGE);
-        let banquet = BaseNpc_Plus.CreateUnitByName("npc_dota_life_stealer_banquet", this.GetCursorPosition(), this.GetCasterPlus(), true);
+        let banquet = this.GetCasterPlus().CreateSummon("npc_dota_life_stealer_banquet", this.GetCursorPosition(), this.GetSpecialValueFor("engorge_duration"), true);
         if (banquet) {
-            let banquet_modifier = banquet.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_life_stealer_feast_banquet", {});
-            banquet.AddNewModifier(this.GetCasterPlus(), this, "modifier_kill", {
-                duration: this.GetSpecialValueFor("engorge_duration")
-            });
+            banquet.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_life_stealer_feast_banquet", {});
             FindClearSpaceForUnit(banquet, banquet.GetAbsOrigin(), false);
         }
     }
@@ -1100,7 +1097,7 @@ export class modifier_imba_life_stealer_control extends BaseModifier_Plus {
         }
         this.GetParentPlus().SetOwner(this.GetCasterPlus());
         this.GetParentPlus().SetTeam(this.GetCasterPlus().GetTeam());
-        this.GetParentPlus().SetControllableByPlayer(this.GetCasterPlus().GetPlayerID(), false);
+        // this.GetParentPlus().SetControllableByPlayer(this.GetCasterPlus().GetPlayerID(), false);
         this.acquisition_range = this.GetParentPlus().GetAcquisitionRange();
         this.acquisition_null_orders = {
             [dotaunitorder_t.DOTA_UNIT_ORDER_MOVE_TO_POSITION]: true,

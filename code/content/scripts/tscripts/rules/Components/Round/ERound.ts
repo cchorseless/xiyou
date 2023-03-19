@@ -17,7 +17,7 @@ export class ERound extends ET.Entity {
     //     this.configID = configid;
     // }
 
-    OnStart() {
+    OnRound_Start() {
         // this.unitSpawned = 0;
         // this.bRunning = true;
         // let domain = this.GetDomain<IBaseNpc_Plus>();
@@ -34,7 +34,7 @@ export class ERound extends ET.Entity {
         // }));
     }
 
-    OnEnd() {
+    OnRound_End() {
         this.bRunning = false;
         GRoundSystem.GetInstance().endBoardRound();
     }
@@ -45,23 +45,4 @@ export class ERound extends ET.Entity {
         this.tTowerDamage[entindex] += damage;
         this.tTotalDamage += damage;
     }
-
-    // get IsBasic() {
-    //     return this.config.round_type == RoundConfig.EERoundType.basic;
-    // }
-    // get IsGold() {
-    //     return this.config.round_type == RoundConfig.EERoundType.gold;
-    // }
-    // get IsBoss() {
-    //     return this.config.round_type == RoundConfig.EERoundType.boss;
-    // }
-    // get IsCandyBoss() {
-    //     return this.config.round_type == RoundConfig.EERoundType.candy_boss;
-    // }
-    // get IsEndless() {
-    //     return this.config.round_type == RoundConfig.EERoundType.endless;
-    // }
-    // get IsChallenge() {
-    //     return this.config.round_type == RoundConfig.EERoundType.challenge;
-    // }
 }

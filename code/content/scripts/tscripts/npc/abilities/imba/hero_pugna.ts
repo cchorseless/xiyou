@@ -381,7 +381,7 @@ export class imba_pugna_nether_ward extends BaseAbility_Plus {
             } else {
                 nether_ward = BaseNpc_Plus.CreateUnitByName("npc_imba_pugna_nether_ward_" + (ability_level), this.GetCasterPlus().GetAbsOrigin() + (this.GetCasterPlus().GetForwardVector() * 150) as Vector, caster, true);
             }
-            nether_ward.SetControllableByPlayer(player_id, true);
+            // nether_ward.SetControllableByPlayer(player_id, true);
             nether_ward.AddNewModifier(caster, ability, "modifier_kill", {
                 duration: duration - duration * caster.GetTalentValue("special_bonus_imba_pugna_8", "duration_reduce_pct") * 0.01
             });

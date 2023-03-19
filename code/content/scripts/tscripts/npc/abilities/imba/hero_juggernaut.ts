@@ -457,15 +457,12 @@ export class imba_juggernaut_healing_ward extends BaseAbility_Plus {
         let caster = this.GetCasterPlus();
         let targetPoint = this.GetCursorPosition();
         caster.EmitSound("Hero_Juggernaut.HealingWard.Cast");
-        let healing_ward = BaseNpc_Plus.CreateUnitByName("npc_dota_juggernaut_healing_ward", targetPoint, caster, true);
+        let healing_ward = caster.CreateSummon("npc_dota_juggernaut_healing_ward", targetPoint, this.GetDuration(), true);
         // SetCreatureHealth(healing_ward, this.GetTalentSpecialValueFor("health"), true);
         healing_ward.ModifyMaxHealth(this.GetTalentSpecialValueFor("health"))
         healing_ward.SetHealth(this.GetTalentSpecialValueFor("health"));
-        healing_ward.AddNewModifier(caster, this, "modifier_kill", {
-            duration: this.GetDuration()
-        });
         healing_ward.AddAbility("imba_juggernaut_healing_ward_passive").SetLevel(this.GetLevel());
-        healing_ward.SetControllableByPlayer(caster.GetPlayerID(), true);
+        // healing_ward.SetControllableByPlayer(caster.GetPlayerID(), true);
         this.AddTimer(FrameTime(), () => {
             healing_ward.MoveToNPC(caster);
         });

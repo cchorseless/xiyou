@@ -39,7 +39,7 @@ export class imba_lycan_summon_wolves extends BaseAbility_Plus {
             wolves_spawn_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_lycan/lycan_summon_wolves_spawn.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, wolf);
             ParticleManager.ReleaseParticleIndex(wolves_spawn_particle);
             if (player_id) {
-                wolf.SetControllableByPlayer(player_id, true);
+                // wolf.SetControllableByPlayer(player_id, true);
             }
             wolf.TempData().imba_lycan_summon_wolves = true;
             wolf.SetForwardVector(this.GetCasterPlus().GetForwardVector());
@@ -56,7 +56,7 @@ export class imba_lycan_summon_wolves extends BaseAbility_Plus {
             wolves_spawn_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_lycan/lycan_summon_wolves_spawn.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, wolf);
             ParticleManager.ReleaseParticleIndex(wolves_spawn_particle);
             if (player_id) {
-                wolf.SetControllableByPlayer(player_id, true);
+                // wolf.SetControllableByPlayer(player_id, true);
             }
             wolf.SetForwardVector(this.GetCasterPlus().GetForwardVector());
             wolf.SetBaseMaxHealth(wolf.GetBaseMaxHealth() + this.GetSpecialValueFor("HP_bonus_per_lycan_level") * this.GetCasterPlus().GetLevel());
@@ -126,7 +126,7 @@ export class modifier_imba_lycan_summon_wolves_charges extends BaseModifier_Plus
             let wolves_spawn_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_lycan/lycan_summon_wolves_spawn.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, wolf);
             ParticleManager.ReleaseParticleIndex(wolves_spawn_particle);
             if (player_id) {
-                wolf.SetControllableByPlayer(player_id, true);
+                // wolf.SetControllableByPlayer(player_id, true);
             }
             wolf.TempData().imba_lycan_summon_wolves = true;
             wolf.SetForwardVector(this.GetCasterPlus().GetForwardVector());

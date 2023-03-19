@@ -1117,7 +1117,10 @@ declare global {
          * @Server 删除时回调
          */
         UpdateOnRemove(): void;
-
+        /**
+         * @Both 清除数据
+         */
+        ClearSelf(): void;
         /**
          * @Both 找到本体
          */
@@ -1196,6 +1199,11 @@ declare global {
          */
         RegOwnerSelf(b: boolean): void;
 
+        /**
+         * @Both
+         * 删除所有子节点
+         */
+        RemoveAllChildrenNpc(): void;
         /**
          * @Both
          * 设置自己等级
@@ -1411,9 +1419,9 @@ declare global {
          * @param kv
          */
         ApplyKnockBack(hAbility: IBaseAbility_Plus, hCaster: IBaseNpc_Plus, kv: {
-            distance?: number,
+            distance: number,
+            duration: number,
             height?: number,
-            duration?: number,
             direction_x?: number,
             direction_y?: number,
             tree_destroy_radius?: number,
@@ -1499,7 +1507,29 @@ declare global {
 }
 
 const BaseNPC = IsServer() ? CDOTA_BaseNPC : C_DOTA_BaseNPC;
-
+BaseNPC.ClearSelf = function () {
+    if (this.__safedestroyed__) { return }
+    if (IsValid(this)) {
+        if (this.__TempData) {
+            for (let k in this.__TempData) {
+                delete this.__TempData[k];
+            }
+        }
+        this.__TempData = null;
+        if (this.__CreateChildren__) {
+            let thinkers = this.FindChildByName("npc_dota_thinker");
+            thinkers.forEach((v) => { GFuncEntity.SafeDestroyUnit(v) });
+        }
+        this.__CreateChildren__ = null;
+        this.__AllModifiersInfo__ = null;
+        if (this.ETRoot) {
+            this.ETRoot.Dispose();
+            this.ETRoot = null;
+        }
+        this.RegOwnerSelf(false);
+        GTimerHelper.ClearAll(this);
+    }
+}
 
 BaseNPC.GetHealthLosePect = function () {
     return (1 - this.GetHealth() / this.GetMaxHealth()) * 100;
@@ -1536,6 +1566,18 @@ BaseNPC.RegOwnerSelf = function (b: boolean) {
         }
     }
 }
+BaseNPC.RemoveAllChildrenNpc = function () {
+    if (!IsValid(this)) { return }
+    if (!this.__CreateChildren__) { return }
+    let children = [...this.__CreateChildren__];
+    let len = children.length;
+    for (let i = 0; i < len; i++) {
+        const child = children[i];
+        GFuncEntity.SafeDestroyUnit(child);
+    }
+    this.__CreateChildren__ = null;
+}
+
 BaseNPC.FindChildByName = function (name: string) {
     let r: IBaseNpc_Plus[] = [];
     if (IsValid(this)) {
@@ -1850,13 +1892,9 @@ BaseNPC.GetAttackRangePlus = function () {
 
 
 if (IsServer()) {
+
     BaseNPC.UpdateOnRemove = function () {
-        if (this.__TempData) {
-            for (let k in this.__TempData) {
-                delete this.__TempData[k];
-            }
-            this.__TempData = null;
-        }
+        this.ClearSelf();
     }
     BaseNPC.GetOwnerPlus = function () {
         return this.GetOwner() as IBaseNpc_Plus;

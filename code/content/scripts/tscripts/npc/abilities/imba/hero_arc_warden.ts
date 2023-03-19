@@ -1,10 +1,10 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
-import { BaseNpc_Plus } from "../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 @registerAbility()
 export class imba_arc_warden_flux extends BaseAbility_Plus {
@@ -24,6 +24,13 @@ export class imba_arc_warden_flux extends BaseAbility_Plus {
                 duration: this.GetTalentSpecialValueFor("duration")
             });
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
     }
 }
 @registerModifier()
@@ -87,6 +94,7 @@ export class modifier_imba_arc_warden_flux extends BaseModifier_Plus {
     CC_GetModifierMoveSpeedBonus_Percentage(): number {
         return this.GetStackCount();
     }
+
 }
 @registerAbility()
 export class imba_arc_warden_magnetic_field extends BaseAbility_Plus {
@@ -104,6 +112,18 @@ export class imba_arc_warden_magnetic_field extends BaseAbility_Plus {
         BaseModifier_Plus.CreateBuffThinker(this.GetCasterPlus(), this, "modifier_imba_arc_warden_magnetic_field_thinker_evasion", {
             duration: this.GetSpecialValueFor("duration")
         }, this.GetCursorPosition(), this.GetCasterPlus().GetTeamNumber(), false);
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_friend(this, null, (unit, index, count) => {
+            if (count == 1) {
+                return true
+            }
+            return unit != this.GetCasterPlus() && !unit.IsHero();
+        }, FindOrder.FIND_FARTHEST);
     }
 }
 @registerModifier()
@@ -328,6 +348,13 @@ export class imba_arc_warden_spark_wraith extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_arc_warden_spark_wraith_damage"), "modifier_special_bonus_imba_arc_warden_spark_wraith_damage", {});
         }
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this);
+    }
 }
 @registerModifier()
 export class modifier_imba_arc_warden_spark_wraith_thinker extends BaseModifier_Plus {
@@ -339,10 +366,6 @@ export class modifier_imba_arc_warden_spark_wraith_thinker extends BaseModifier_
     public wraith_vision_radius: number;
     public wraith_particle: any;
     BeCreated(p_0: any,): void {
-        if (!this.GetAbilityPlus()) {
-            this.Destroy();
-            return;
-        }
         this.radius = this.GetSpecialValueFor("radius");
         this.activation_delay = this.GetSpecialValueFor("activation_delay");
         this.wraith_speed = this.GetSpecialValueFor("wraith_speed");
@@ -362,6 +385,11 @@ export class modifier_imba_arc_warden_spark_wraith_thinker extends BaseModifier_
         });
     }
     OnIntervalThink(): void {
+        let caster = this.GetCasterPlus();
+        if (!GFuncEntity.IsValid(caster)) {
+            this.Destroy();
+            return;
+        }
         for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false))) {
             this.GetParentPlus().EmitSound("Hero_ArcWarden.SparkWraith.Activate");
             ProjectileManager.CreateTrackingProjectile({
@@ -472,6 +500,13 @@ export class modifier_special_bonus_imba_arc_warden_spark_wraith_damage extends 
 
 @registerAbility()
 export class imba_arc_warden_tempest_double extends BaseAbility_Plus {
+    GetManaCost(level: number): number {
+        return 100;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_cast(this);
+    }
     OnSpellStart(): void {
         let caster = this.GetCasterPlus();
         let spawn_location = caster.GetOrigin();
@@ -482,9 +517,8 @@ export class imba_arc_warden_tempest_double extends BaseAbility_Plus {
         let mana_after_cast = caster.GetMana() * health_cost;
         caster.SetHealth(health_after_cast);
         caster.SetMana(mana_after_cast);
-        let double = BaseNpc_Plus.CreateUnitByName(caster.GetUnitName(), spawn_location, caster);
-        double.MakeIllusion()
-        double.SetControllableByPlayer(caster.GetPlayerID(), true)
+        let double = caster.CreateSummon(caster.GetUnitName(), spawn_location, duration);
+        // double.SetControllableByPlayer(caster.GetPlayerID(), true)
         double.SetForwardVector(caster.GetForwardVector())
         double.SetBaseDamageMin(caster.GetBaseDamageMin())
         double.SetBaseDamageMax(caster.GetBaseDamageMax())
@@ -505,7 +539,7 @@ export class imba_arc_warden_tempest_double extends BaseAbility_Plus {
         for (let item_id = 0; item_id <= 5; item_id += 1) {
             let item_in_caster = caster.GetItemInSlot(item_id);
             if (item_in_caster != undefined) {
-                let item_name = item_in_caster.GetName();
+                let item_name = item_in_caster.GetAbilityName();
                 if (!(item_name == "item_imba_aegis" || item_name == "item_imba_smoke_of_deceit" || item_name == "item_imba_recipe_refresher" || item_name == "item_imba_refresher" || item_name == "item_imba_ward_observer" || item_name == "item_imba_ward_sentry")) {
                     let item_created = BaseItem_Plus.CreateItem(item_in_caster.GetAbilityName(), double as any, double as any);
                     if (GFuncEntity.IsValid(item_created)) {
@@ -532,9 +566,6 @@ export class imba_arc_warden_tempest_double extends BaseAbility_Plus {
         double.SetHasInventory(false);
         double.SetCanSellItems(false);
         double.AddNewModifier(caster, this, "modifier_imba_arc_warden_tempest_double", {});
-        double.AddNewModifier(caster, this, "modifier_kill", {
-            duration: duration
-        });
     }
 }
 @registerModifier()
