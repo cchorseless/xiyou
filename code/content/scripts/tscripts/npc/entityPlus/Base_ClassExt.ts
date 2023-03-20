@@ -1132,7 +1132,11 @@ declare global {
          * @param hCaster
          */
         HasShard(): boolean;
-
+        /**
+         * 是否NPC thinker
+         * @Both
+         */
+        IsThinker(): boolean;
         /**
          * @Both
          */
@@ -1507,8 +1511,10 @@ declare global {
 }
 
 const BaseNPC = IsServer() ? CDOTA_BaseNPC : C_DOTA_BaseNPC;
+BaseNPC.IsThinker = function () {
+    return this.GetUnitName() == "npc_dota_thinker";
+}
 BaseNPC.ClearSelf = function () {
-    if (this.__safedestroyed__) { return }
     if (IsValid(this)) {
         if (this.__TempData) {
             for (let k in this.__TempData) {
@@ -1517,8 +1523,10 @@ BaseNPC.ClearSelf = function () {
         }
         this.__TempData = null;
         if (this.__CreateChildren__) {
-            let thinkers = this.FindChildByName("npc_dota_thinker");
-            thinkers.forEach((v) => { GFuncEntity.SafeDestroyUnit(v) });
+            let thinkers = this.FindChildByFilter((v) => v.IsThinker());
+            thinkers.forEach((v) => {
+                v.Destroy();
+            });
         }
         this.__CreateChildren__ = null;
         this.__AllModifiersInfo__ = null;
@@ -1561,7 +1569,7 @@ BaseNPC.RegOwnerSelf = function (b: boolean) {
             }
             let index = owner.__CreateChildren__.indexOf(this);
             if (index >= 0) {
-                owner.__CreateChildren__.splice(owner.__CreateChildren__.indexOf(this), 1);
+                owner.__CreateChildren__.splice(index, 1);
             }
         }
     }
@@ -1894,6 +1902,7 @@ BaseNPC.GetAttackRangePlus = function () {
 if (IsServer()) {
 
     BaseNPC.UpdateOnRemove = function () {
+        if (this.__safedestroyed__) { return }
         this.ClearSelf();
     }
     BaseNPC.GetOwnerPlus = function () {

@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -77,9 +78,7 @@ export class imba_brewmaster_thunder_clap extends BaseAbility_Plus {
     OnProjectileHit_ExtraData(target: CDOTA_BaseNPC | undefined, location: Vector, ExtraData: any): boolean | void {
         if (target && !target.IsMagicImmune()) {
             target.EmitSound("Brewmaster_Earth.Boulder.Target");
-            target.AddNewModifier(this.GetCasterPlus(), this, "modifier_generic_stunned", {
-                duration: this.GetSpecialValueFor("debris_stun_duration") * (1 - target.GetStatusResistance())
-            });
+            target.ApplyStunned(this, this.GetCasterPlus(), this.GetSpecialValueFor("debris_stun_duration") * (1 - target.GetStatusResistance()));
             ApplyDamage({
                 victim: target,
                 damage: this.GetSpecialValueFor("debris_damage"),
@@ -90,6 +89,14 @@ export class imba_brewmaster_thunder_clap extends BaseAbility_Plus {
             });
         }
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_if_enemy(this);
+    }
+
 }
 @registerModifier()
 export class modifier_imba_brewmaster_thunder_clap extends BaseModifier_Plus {
@@ -313,6 +320,13 @@ export class imba_brewmaster_cinder_brew extends BaseAbility_Plus {
             this.brew_modifier = undefined;
         }
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.POSITION_most_enemy(this);
+    }
 }
 @registerModifier()
 export class modifier_imba_brewmaster_cinder_brew extends BaseModifier_Plus {
@@ -439,6 +453,14 @@ export class imba_brewmaster_drunken_brawler extends BaseAbility_Plus {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_brewmaster_druken_brawler_damage") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_brewmaster_druken_brawler_damage")) {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_brewmaster_druken_brawler_damage"), "modifier_special_bonus_imba_brewmaster_druken_brawler_damage", {});
         }
+    }
+
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_cast(this);
     }
 }
 @registerModifier()
@@ -650,18 +672,19 @@ export class imba_brewmaster_primal_split extends BaseAbility_Plus {
         this.GetCasterPlus().RemoveGesture(GameActivity_t.ACT_DOTA_CAST_ABILITY_4);
     }
     OnSpellStart(): void {
+        let caster = this.GetCasterPlus();
         if (!this.GetAutoCastState()) {
-            this.GetCasterPlus().EmitSound("Hero_Brewmaster.PrimalSplit.Cast");
-            this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_brewmaster_primal_split_split_delay", {
+            caster.EmitSound("Hero_Brewmaster.PrimalSplit.Cast");
+            caster.AddNewModifier(caster, this, "modifier_imba_brewmaster_primal_split_split_delay", {
                 duration: this.GetSpecialValueFor("split_duration")
             });
         } else {
-            this.GetCasterPlus().EmitSound("Hero_Brewmaster.Primal_Split_Projectile_Cast");
+            caster.EmitSound("Hero_Brewmaster.Primal_Split_Projectile_Cast");
             ProjectileManager.CreateTrackingProjectile({
                 EffectName: "particles/hero/brewmaster/primal_split_co-pilot.vpcf",
                 Ability: this,
-                Source: this.GetCasterPlus(),
-                vSourceLoc: this.GetCasterPlus().GetAbsOrigin(),
+                Source: caster,
+                vSourceLoc: caster.GetAbsOrigin(),
                 Target: this.GetCursorTarget(),
                 iMoveSpeed: this.GetSpecialValueFor("co-pilot_projectile_speed"),
                 bDodgeable: false,
@@ -694,6 +717,13 @@ export class imba_brewmaster_primal_split extends BaseAbility_Plus {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_brewmaster_primal_split_cooldown") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_brewmaster_primal_split_cooldown")) {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_brewmaster_primal_split_cooldown"), "modifier_special_bonus_imba_brewmaster_primal_split_cooldown", {});
         }
+    }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_cast(this);
     }
 }
 @registerModifier()
@@ -728,11 +758,27 @@ export class modifier_imba_brewmaster_primal_split extends BaseModifier_Plus {
 export class modifier_imba_brewmaster_primal_split_split_delay extends BaseModifier_Plus {
     public duration: number;
     public scepter_movementspeed: number;
-    public pandas: IBaseNpc_Plus[];
-    public pandas_entindexes: EntityIndex[];
-    public standard_abilities: { [k: string]: string };
-    public brewmaster_vanilla_abilities: { [k: string]: string };
-    public brewmaster_abilities: { [k: string]: string };
+    // public pandas: IBaseNpc_Plus[];
+    // public pandas_entindexes: EntityIndex[];
+    standard_abilities = {
+        "1": "brewmaster_earth_hurl_boulder",
+        "2": "brewmaster_earth_spell_immunity",
+        "3": "brewmaster_earth_pulverize",
+        "4": "brewmaster_storm_dispel_magic",
+        "5": "brewmaster_storm_cyclone",
+        "6": "brewmaster_storm_wind_walk",
+        "7": "brewmaster_fire_permanent_immolation"
+    }
+    brewmaster_vanilla_abilities = {
+        "1": "brewmaster_thunder_clap",
+        "2": "brewmaster_cinder_brew",
+        "3": "brewmaster_drunken_brawler"
+    }
+    brewmaster_abilities: { [k: string]: string } = {
+        "1": "imba_brewmaster_thunder_clap",
+        "2": "imba_brewmaster_cinder_brew",
+        "3": "imba_brewmaster_drunken_brawler"
+    }
     IsHidden(): boolean {
         return true;
     }
@@ -763,13 +809,10 @@ export class modifier_imba_brewmaster_primal_split_split_delay extends BaseModif
         if (!IsServer()) {
             return;
         }
-        this.pandas = []
-        this.pandas_entindexes = []
         if (this.GetParentPlus().IsAlive() && this.GetAbilityPlus()) {
             this.GetParentPlus().EmitSound("Hero_Brewmaster.PrimalSplit.Spawn");
-            let split_modifier = this.GetParentPlus().AddNewModifier(this.GetCasterPlus(),
-                this.GetAbilityPlus(), "modifier_imba_brewmaster_primal_split_duration", {
-                duration: this.duration
+            this.GetParentPlus().AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_brewmaster_primal_split_duration", {
+                duration: this.duration,
             }) as modifier_imba_brewmaster_primal_split_duration;
             let ability = this.GetAbilityPlus();
             let parent = this.GetParentPlus();
@@ -777,39 +820,9 @@ export class modifier_imba_brewmaster_primal_split_split_delay extends BaseModif
             let earth_panda = caster.CreateSummon("npc_dota_brewmaster_earth_" + ability.GetLevel(), parent.GetAbsOrigin() + parent.GetForwardVector() * 100 as Vector, this.duration);
             let storm_panda = caster.CreateSummon("npc_dota_brewmaster_storm_" + ability.GetLevel(), RotatePosition(parent.GetAbsOrigin(), QAngle(0, 120, 0), parent.GetAbsOrigin() + parent.GetForwardVector() * 100 as Vector), this.duration);
             let fire_panda = caster.CreateSummon("npc_dota_brewmaster_fire_" + ability.GetLevel(), RotatePosition(parent.GetAbsOrigin(), QAngle(0, -120, 0), parent.GetAbsOrigin() + parent.GetForwardVector() * 100 as Vector), this.duration);
-            this.standard_abilities = {
-                "1": "brewmaster_earth_hurl_boulder",
-                "2": "brewmaster_earth_spell_immunity",
-                "3": "brewmaster_earth_pulverize",
-                "4": "brewmaster_storm_dispel_magic",
-                "5": "brewmaster_storm_cyclone",
-                "6": "brewmaster_storm_wind_walk",
-                "7": "brewmaster_fire_permanent_immolation"
-            }
-            this.brewmaster_vanilla_abilities = {
-                "1": "brewmaster_thunder_clap",
-                "2": "brewmaster_cinder_brew",
-                "3": "brewmaster_drunken_brawler"
-            }
-            this.brewmaster_abilities = {
-                "1": "imba_brewmaster_thunder_clap",
-                "2": "imba_brewmaster_cinder_brew",
-                "3": "imba_brewmaster_drunken_brawler"
-            }
-            this.pandas.push(earth_panda);
-            this.pandas.push(storm_panda);
-            this.pandas.push(fire_panda);
-            this.pandas_entindexes.push(earth_panda.entindex());
-            if (this.GetCasterPlus() == this.GetParentPlus()) {
-                this.pandas_entindexes.push(storm_panda.entindex());
-                this.pandas_entindexes.push(fire_panda.entindex());
-            }
-            this.GetParentPlus().FollowEntity(earth_panda, false);
-            if (split_modifier) {
-                split_modifier.pandas = this.pandas;
-                split_modifier.pandas_entindexes = this.pandas_entindexes;
-            }
-            for (const panda of this.pandas) {
+            let pandas = [earth_panda, storm_panda, fire_panda];
+            // this.GetParentPlus().FollowEntity(earth_panda, false);
+            for (const panda of pandas) {
                 panda.SetForwardVector(this.GetParentPlus().GetForwardVector());
                 panda.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_brewmaster_primal_split_duration", {
                     duration: this.duration,
@@ -820,11 +833,11 @@ export class modifier_imba_brewmaster_primal_split_split_delay extends BaseModif
                     panda.SetMaxHealth(panda.GetMaxHealth() + this.GetCasterPlus().GetTalentValue("special_bonus_imba_brewmaster_primal_split_health"));
                     panda.SetHealth(panda.GetHealth() + this.GetCasterPlus().GetTalentValue("special_bonus_imba_brewmaster_primal_split_health"));
                 }
-                if (panda.GetUnitName().includes("brewmaster_earth")) {
-                    // panda.SetControllableByPlayer(this.GetParentPlus().GetPlayerID(), true);
-                } else {
-                    // panda.SetControllableByPlayer(this.GetCasterPlus().GetPlayerID(), true);
-                }
+                // if (panda.GetUnitName().includes("brewmaster_earth")) {
+                // panda.SetControllableByPlayer(this.GetParentPlus().GetPlayerID(), true);
+                // } else {
+                // panda.SetControllableByPlayer(this.GetCasterPlus().GetPlayerID(), true);
+                // }
                 // PlayerResource.AddToSelection(this.GetParentPlus().GetPlayerID(), panda);
                 for (const [_, ability] of GameFunc.Pair(this.standard_abilities)) {
                     if (panda.HasAbility(ability)) {
@@ -844,11 +857,11 @@ export class modifier_imba_brewmaster_primal_split_split_delay extends BaseModif
                     }
                 }
             }
-            let unison_ability = earth_panda.AddAbility("imba_brewmaster_primal_unison");
-            if (unison_ability) {
-                unison_ability.SetLevel(1);
-                earth_panda.SwapAbilities("imba_brewmaster_primal_unison", "generic_hidden", true, false);
-            }
+            // let unison_ability = earth_panda.FindAbilityByName("imba_brewmaster_primal_unison");
+            // if (unison_ability) {
+            //     unison_ability.SetLevel(1);
+            //     earth_panda.SwapAbilities("imba_brewmaster_primal_unison", "generic_hidden", true, false);
+            // }
             // PlayerResource.RemoveFromSelection(this.GetParentPlus().GetPlayerID(), this.GetParentPlus());
             // PlayerResource.SetDefaultSelectionEntities(this.GetParentPlus().GetPlayerID(), this.pandas_entindexes);
             this.GetParentPlus().AddNoDraw();
@@ -863,8 +876,6 @@ export class modifier_imba_brewmaster_primal_split_duration extends BaseModifier
     public parent: IBaseNpc_Plus;
     public responses: string[];
     public death_particle: any;
-    public pandas: IBaseNpc_Plus[];
-    public pandas_entindexes: EntityIndex[];
     IsPurgable(): boolean {
         return false;
     }
@@ -885,13 +896,18 @@ export class modifier_imba_brewmaster_primal_split_duration extends BaseModifier
             this.parent = EntIndexToHScript(keys.parent_entindex) as IBaseNpc_Plus;
         }
     }
+
+    Isbrewmaster(): boolean {
+        return this.GetParentPlus() == this.GetCasterPlus()
+    }
+
     BeDestroy(): void {
         if (!IsServer()) {
             return;
         }
-        if (this.GetParentPlus().IsRealUnit()) {
+        if (this.Isbrewmaster()) {
             this.GetParentPlus().EmitSound("Hero_Brewmaster.PrimalSplit.Return");
-            if (this.GetRemainingTime() <= 0 && this.GetCasterPlus().GetUnitName().includes("brewmaster")) {
+            if (this.GetRemainingTime() <= 0) {
                 if (!this.responses) {
                     this.responses = [
                         "brewmaster_brew_ability_primalsplit_10",
@@ -904,19 +920,20 @@ export class modifier_imba_brewmaster_primal_split_duration extends BaseModifier
                 }
                 this.GetCasterPlus().EmitSound(GFuncRandom.RandomOne(this.responses));
             }
-            this.GetParentPlus().FollowEntity(undefined, false);
+            this.GetParentPlus().SetAbsOrigin(GetGroundPosition(this.GetParentPlus().GetAbsOrigin(), this.GetParentPlus()))
             this.GetParentPlus().RemoveNoDraw();
             // PlayerResource.SetDefaultSelectionEntity(this.GetParentPlus().GetPlayerID(), -1);
         }
     }
     CheckState(): Partial<Record<modifierstate, boolean>> {
+        let isreal = this.Isbrewmaster();
         return {
-            [modifierstate.MODIFIER_STATE_INVULNERABLE]: this.GetParentPlus().IsRealUnit(),
-            [modifierstate.MODIFIER_STATE_OUT_OF_GAME]: this.GetParentPlus().IsRealUnit(),
-            [modifierstate.MODIFIER_STATE_STUNNED]: this.GetParentPlus().IsRealUnit(),
-            [modifierstate.MODIFIER_STATE_NOT_ON_MINIMAP]: this.GetParentPlus().IsRealUnit(),
-            [modifierstate.MODIFIER_STATE_NO_UNIT_COLLISION]: this.GetParentPlus().IsRealUnit() || this.GetCasterPlus().HasScepter() || this.GetParentPlus().GetUnitName().includes("brewmaster_fire"),
-            [modifierstate.MODIFIER_STATE_UNSELECTABLE]: this.GetParentPlus().IsRealUnit()
+            [modifierstate.MODIFIER_STATE_INVULNERABLE]: isreal,
+            [modifierstate.MODIFIER_STATE_OUT_OF_GAME]: isreal,
+            [modifierstate.MODIFIER_STATE_STUNNED]: isreal,
+            [modifierstate.MODIFIER_STATE_NOT_ON_MINIMAP]: isreal,
+            [modifierstate.MODIFIER_STATE_NO_UNIT_COLLISION]: isreal || this.GetCasterPlus().HasScepter() || this.GetParentPlus().GetUnitName().includes("brewmaster_fire"),
+            [modifierstate.MODIFIER_STATE_UNSELECTABLE]: isreal
         };
     }
     /** DeclareFunctions():modifierfunction[] {
@@ -930,7 +947,7 @@ export class modifier_imba_brewmaster_primal_split_duration extends BaseModifier
     } */
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
     CC_OnDeath(keys: ModifierInstanceEvent): void {
-        if (keys.unit == this.GetParentPlus() && !this.GetParentPlus().IsRealUnit()) {
+        if (keys.unit == this.GetParentPlus() && !this.Isbrewmaster()) {
             if (this.GetParentPlus().GetUnitName().includes("brewmaster_earth")) {
                 this.death_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_brewmaster/brewmaster_earth_death.vpcf", ParticleAttachment_t.PATTACH_WORLDORIGIN, this.GetParentPlus());
             } else if (this.GetParentPlus().GetUnitName().includes("brewmaster_storm")) {
@@ -946,30 +963,13 @@ export class modifier_imba_brewmaster_primal_split_duration extends BaseModifier
                 ParticleManager.ReleaseParticleIndex(this.death_particle);
             }
             if (this.GetRemainingTime() > 0) {
-                if (this.parent && !this.parent.IsNull() && this.parent.HasModifier("modifier_imba_brewmaster_primal_split_duration") && this.parent.findBuff<modifier_imba_brewmaster_primal_split_duration>("modifier_imba_brewmaster_primal_split_duration").pandas_entindexes) {
-                    let pandas_entindexes = this.parent.findBuff<modifier_imba_brewmaster_primal_split_duration>("modifier_imba_brewmaster_primal_split_duration").pandas_entindexes;
-                    for (let i = 0, len = pandas_entindexes.length; i < len; i++) {
-                        let npc = EntIndexToHScript(pandas_entindexes[i]);
-                        if (npc && npc.IsAlive()) {
-                            continue;
-                        }
-                        else {
-                            pandas_entindexes.splice(i, 1)
-                            i--;
-                            len--;
-                        }
-                    }
+                if (this.parent && !this.parent.IsNull() && this.parent.HasModifier("modifier_imba_brewmaster_primal_split_duration")) {
+                    let pandas = this.parent.FindChildByBuffName("modifier_imba_brewmaster_primal_split_duration");
                     let bNoneAlive = true;
-                    let pandas = this.parent.findBuff<modifier_imba_brewmaster_primal_split_duration>("modifier_imba_brewmaster_primal_split_duration").pandas;
-                    for (const panda of pandas) {
-                        if (!panda.IsNull() && panda.IsAlive()) {
+                    for (let i = 0, len = pandas.length; i < len; i++) {
+                        let npc = pandas[i];
+                        if (npc && npc.IsAlive()) {
                             bNoneAlive = false;
-                            this.parent.FollowEntity(panda, false);
-                            if (this.parent != this.GetCasterPlus()) {
-                                this.parent.findBuff<modifier_imba_brewmaster_primal_split_duration>("modifier_imba_brewmaster_primal_split_duration").pandas_entindexes.push(panda.entindex());
-                                panda.SetOwner(this.parent);
-                                // panda.SetControllableByPlayer(this.parent.GetPlayerID(), true);
-                            }
                             break;
                         }
                     }
@@ -986,29 +986,32 @@ export class modifier_imba_brewmaster_primal_split_duration extends BaseModifier
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_CONSTANT)
     CC_GetModifierMoveSpeedBonus_Constant(): number {
-        if (this.GetCasterPlus() && this.GetCasterPlus().HasScepter() && this.GetCasterPlus() != this.GetParentPlus()) {
+        if (this.GetCasterPlus() && this.GetCasterPlus().HasScepter() && !this.Isbrewmaster()) {
             return this.scepter_movementspeed;
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.IGNORE_MOVESPEED_LIMIT)
     CC_GetModifierIgnoreMovespeedLimit(): 0 | 1 {
-        if (this.GetCasterPlus() && this.GetCasterPlus().HasScepter() && this.GetCasterPlus() != this.GetParentPlus()) {
+        if (this.GetCasterPlus() && this.GetCasterPlus().HasScepter() && !this.Isbrewmaster()) {
             return 1;
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
     CC_GetModifierAttackSpeedBonus_Constant(): number {
-        if (this.GetCasterPlus() && this.GetCasterPlus().HasScepter() && this.GetCasterPlus() != this.GetParentPlus()) {
+        if (this.GetCasterPlus() && this.GetCasterPlus().HasScepter() && !this.Isbrewmaster()) {
             return this.scepter_attack_speed;
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_RESISTANCE_BONUS)
     CC_GetModifierMagicalResistanceBonus(p_0: ModifierAttackEvent,): number {
-        if (this.GetCasterPlus() && this.GetCasterPlus().HasScepter() && this.GetCasterPlus() != this.GetParentPlus()) {
+        if (this.GetCasterPlus() && this.GetCasterPlus().HasScepter() && !this.Isbrewmaster()) {
             return this.scepter_magic_resistance;
         }
     }
 }
+
+
+
 @registerAbility()
 export class imba_brewmaster_primal_unison extends BaseAbility_Plus {
     public particle: any;
@@ -1029,7 +1032,7 @@ export class imba_brewmaster_primal_unison extends BaseAbility_Plus {
             let owner = this.GetCasterPlus().GetOwner() as IBaseNpc_Plus;
             if (owner) {
                 let buff = owner.findBuff<modifier_imba_brewmaster_primal_split_duration>("modifier_imba_brewmaster_primal_split_duration");
-                let pandas = buff.pandas;
+                let pandas = owner.FindChildByBuffName("modifier_imba_brewmaster_primal_split_duration")
                 let pos = owner.GetAbsOrigin();
                 for (let i = 0; i < pandas.length; i++) {
                     let ent = pandas[i];

@@ -2960,12 +2960,12 @@
 			}
 			"07" {
 				"var_type" "FIELD_INTEGER"
-				"push_distance" "450"
+				"push_distance" "250"
 
 			}
 			"08" {
-				"var_type" "FIELD_INTEGER"
-				"push_duration" "1"
+				"var_type" "FIELD_FLOAT"
+				"push_duration" "0.5"
 
 			}
 			"09" {
@@ -3766,37 +3766,47 @@
 			}
 			"09" {
 				"var_type" "FIELD_INTEGER"
-				"debris_stun_duration" "2"
+				"debris_projectile_speed" "800"
 
 			}
 			"10" {
-				"var_type" "FIELD_FLOAT"
-				"debris_expiry_time" "1.5"
+				"var_type" "FIELD_INTEGER"
+				"debris_damage" "50 75 100 125"
 
 			}
 			"11" {
 				"var_type" "FIELD_INTEGER"
-				"conduction_chance" "25 30 35 40"
+				"debris_stun_duration" "2"
 
 			}
 			"12" {
-				"var_type" "FIELD_INTEGER"
-				"conduction_max_targets" "3"
+				"var_type" "FIELD_FLOAT"
+				"debris_expiry_time" "1.5"
 
 			}
 			"13" {
 				"var_type" "FIELD_INTEGER"
-				"conduction_damage" "150"
+				"conduction_chance" "25 30 35 40"
 
 			}
 			"14" {
 				"var_type" "FIELD_INTEGER"
-				"conduction_distance" "900"
+				"conduction_max_targets" "3"
 
 			}
 			"15" {
 				"var_type" "FIELD_INTEGER"
-				"conduction_interval" "undefined"
+				"conduction_damage" "150"
+
+			}
+			"16" {
+				"var_type" "FIELD_INTEGER"
+				"conduction_distance" "900"
+
+			}
+			"17" {
+				"var_type" "FIELD_FLOAT"
+				"conduction_interval" "0.15"
 
 			}
 
@@ -4158,6 +4168,7 @@
 				"radius_scepter" "825"
 				"RequiresScepter" "1"
 
+			}
 			"10" {
 				"var_type" "FIELD_INTEGER"
 				"disgust_knockback" "20"
@@ -4182,7 +4193,6 @@
 				"var_type" "FIELD_INTEGER"
 				"disgust_radius" "250"
 
-			}
 			}
 
 		}
@@ -4346,9 +4356,473 @@
 		}
 
 	}
+	"imba_broodmother_spawn_spiderlings" {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/imba/hero_broodmother"
+		"AbilityTextureName" "broodmother_spawn_spiderlings"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType" "SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellDispellableType" "SPELL_DISPELLABLE_YES"
+		"FightRecapLevel" "1"
+		"AbilitySound" "Hero_Broodmother.SpawnSpiderlingsImpact"
+		"AbilityCastAnimation" "ACT_DOTA_CAST_ABILITY_1"
+		"AbilityCastPoint" "0.2"
+		"AbilityCastRange" "700"
+		"AbilityCooldown" "11 10 9 8"
+		"AbilityManaCost" "100"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"buff_duration" "2"
+
+			}
+			"02" {
+				"var_type" "FIELD_INTEGER"
+				"spiderling_duration" "40"
+
+			}
+			"03" {
+				"var_type" "FIELD_INTEGER"
+				"damage" "70 140 210 280"
+
+			}
+			"04" {
+				"var_type" "FIELD_INTEGER"
+				"count" "1 2 3 4"
+
+			}
+			"05" {
+				"var_type" "FIELD_INTEGER"
+				"projectile_speed" "1200"
+
+			}
+			"06" {
+				"var_type" "FIELD_INTEGER"
+				"avenger_radius" "900"
+
+			}
+			"07" {
+				"var_type" "FIELD_INTEGER"
+				"avenger_damage_pct" "5"
+
+			}
+			"08" {
+				"var_type" "FIELD_INTEGER"
+				"avenger_duration" "8"
+
+			}
+
+		}
+
+	}
+	"imba_broodmother_spin_web" {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/imba/hero_broodmother"
+		"AbilityTextureName" "broodmother_spin_web"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"HasScepterUpgrade" "1"
+		"SpellDispellableType" "SPELL_DISPELLABLE_NO"
+		"AbilitySound" "Hero_Broodmother.SpinWebCast"
+		"AbilityCastAnimation" "ACT_DOTA_CAST_ABILITY_2"
+		"AbilityCastPoint" "0.4"
+		"AbilityCastRange" "1000"
+		"AbilityCooldown" "0"
+		"AbilityManaCost" "50"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"radius" "900"
+
+			}
+			"02" {
+				"var_type" "FIELD_INTEGER"
+				"count" "2 4 6 8"
+
+			}
+			"03" {
+				"var_type" "FIELD_INTEGER"
+				"health_regen" "3 5 7 9"
+
+			}
+			"04" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_movespeed" "25 40 55 70"
+
+			}
+			"05" {
+				"var_type" "FIELD_INTEGER"
+				"max_charges" "2 4 6 8"
+
+			}
+			"06" {
+				"var_type" "FIELD_INTEGER"
+				"charge_restore_time" "45"
+
+			}
+			"07" {
+				"var_type" "FIELD_INTEGER"
+				"max_charges_scepter" "6 10 14 18"
+
+			}
+			"08" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_movespeed_scepter" "30 50 70 90"
+
+			}
+			"09" {
+				"var_type" "FIELD_INTEGER"
+				"count_scepter" "6 10 14 18"
+
+			}
+			"10" {
+				"var_type" "FIELD_INTEGER"
+				"web_menuever_dmg_pct" "30"
+
+			}
+			"11" {
+				"var_type" "FIELD_INTEGER"
+				"web_sense_duration" "5"
+
+			}
+
+		}
+
+	}
+	"imba_broodmother_incapacitating_bite" {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/imba/hero_broodmother"
+		"AbilityTextureName" "broodmother_incapacitating_bite"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"SpellImmunityType" "SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellDispellableType" "SPELL_DISPELLABLE_YES"
+		"AbilityCastAnimation" "ACT_DOTA_CAST_ABILITY_3"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"miss_chance" "30 40 50 60"
+
+			}
+			"02" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_movespeed" "16 26 36 46"
+
+			}
+			"03" {
+				"var_type" "FIELD_INTEGER"
+				"duration" "2"
+
+			}
+			"04" {
+				"var_type" "FIELD_INTEGER"
+				"web_up_stacks_threshold" "12"
+
+			}
+			"05" {
+				"var_type" "FIELD_INTEGER"
+				"web_up_stacks_hero" "2"
+
+			}
+			"06" {
+				"var_type" "FIELD_INTEGER"
+				"web_up_stacks_spider" "1"
+
+			}
+			"07" {
+				"var_type" "FIELD_INTEGER"
+				"web_up_miss_chance_pct" "100"
+
+			}
+			"08" {
+				"var_type" "FIELD_INTEGER"
+				"web_up_duration" "1"
+
+			}
+			"09" {
+				"var_type" "FIELD_INTEGER"
+				"cast_speed_slow_pct" "10 15 20 25"
+
+			}
+			"10" {
+				"var_type" "FIELD_INTEGER"
+				"web_up_counter_duration" "12"
+
+			}
+
+		}
+
+	}
+	"imba_broodmother_spawn_spiderking" {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/imba/hero_broodmother"
+		"AbilityTextureName" "broodmother_spawn_spiderking"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"SpellDispellableType" "SPELL_DISPELLABLE_NO"
+		"AbilityCastAnimation" "ACT_DOTA_CAST_ABILITY_2"
+		"AbilityCastPoint" "0.4"
+		"AbilityCastRange" "150"
+		"AbilityCooldown" "60"
+		"AbilityManaCost" "120"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"cocoon_time" "15"
+
+			}
+			"02" {
+				"var_type" "FIELD_INTEGER"
+				"max_spiderkings" "1"
+
+			}
+
+		}
+
+	}
+	"imba_broodmother_insatiable_hunger" {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/imba/hero_broodmother"
+		"AbilityTextureName" "broodmother_insatiable_hunger"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityType" "DOTA_ABILITY_TYPE_ULTIMATE"
+		"SpellDispellableType" "SPELL_DISPELLABLE_NO"
+		"FightRecapLevel" "2"
+		"AbilityCastAnimation" "ACT_DOTA_CAST_ABILITY_4"
+		"AbilityCastPoint" "0.2"
+		"AbilityCooldown" "45"
+		"AbilityManaCost" "100"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_damage" "60 100 140"
+
+			}
+			"02" {
+				"var_type" "FIELD_INTEGER"
+				"lifesteal_pct" "60 100 140"
+
+			}
+			"03" {
+				"var_type" "FIELD_INTEGER"
+				"duration" "14"
+
+			}
+			"04" {
+				"var_type" "FIELD_INTEGER"
+				"queen_brood_aura_radius" "1200"
+
+			}
+			"05" {
+				"var_type" "FIELD_INTEGER"
+				"queen_brood_damage_bonus" "15 20 25"
+
+			}
+			"06" {
+				"var_type" "FIELD_INTEGER"
+				"queen_brood_hp_regen" "2 4 6"
+
+			}
+			"07" {
+				"var_type" "FIELD_INTEGER"
+				"satisfied_status_resist_pct" "100"
+
+			}
+			"08" {
+				"var_type" "FIELD_INTEGER"
+				"satisfied_movespeed_pct" "20"
+
+			}
+			"09" {
+				"var_type" "FIELD_INTEGER"
+				"satisfied_duration" "5"
+
+			}
+			"10" {
+				"var_type" "FIELD_INTEGER"
+				"queen_brood_aura_radius" "1200"
+
+			}
+			"11" {
+				"var_type" "FIELD_INTEGER"
+				"satisfy_trigger_duration_increase" "5"
+
+			}
+
+		}
+
+	}
+	"imba_broodmother_spiderking_poison_sting" {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/imba/hero_broodmother"
+		"AbilityTextureName" "broodmother_spiderking_poison_sting"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType" "SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellDispellableType" "SPELL_DISPELLABLE_YES"
+		"AbilityCastAnimation" "ACT_DOTA_CAST_ABILITY_1"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"damage_per_second" "11 14 17 20"
+
+			}
+			"02" {
+				"var_type" "FIELD_INTEGER"
+				"movement_speed" "-11 -14 -17 -20"
+
+			}
+			"03" {
+				"var_type" "FIELD_FLOAT"
+				"duration_hero" "2.5"
+
+			}
+			"04" {
+				"var_type" "FIELD_FLOAT"
+				"duration" "6.0"
+
+			}
+			"05" {
+				"var_type" "FIELD_INTEGER"
+				"cleave_starting_width" "80"
+
+			}
+			"06" {
+				"var_type" "FIELD_INTEGER"
+				"cleave_ending_width" "200"
+
+			}
+			"07" {
+				"var_type" "FIELD_INTEGER"
+				"cleave_distance" "250"
+
+			}
+			"08" {
+				"var_type" "FIELD_INTEGER"
+				"cleave_damage" "30"
+
+			}
+			"09" {
+				"var_type" "FIELD_INTEGER"
+				"scale" "2"
+
+			}
+			"10" {
+				"var_type" "FIELD_INTEGER"
+				"hero_scale" "10"
+
+			}
+
+		}
+
+	}
+	"imba_broodmother_spiderling_volatile" {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/imba/hero_broodmother"
+		"AbilityTextureName" "broodmother_spawn_spiderite"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType" "SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellDispellableType" "SPELL_DISPELLABLE_YES"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"explosion_damage" "20 40 60 80"
+
+			}
+			"02" {
+				"var_type" "FIELD_INTEGER"
+				"radius" "350"
+
+			}
+			"03" {
+				"var_type" "FIELD_INTEGER"
+				"damage_per_stack" "10 12 14 16"
+
+			}
+			"04" {
+				"var_type" "FIELD_INTEGER"
+				"slow_per_stack_pct" "2 3 4 5"
+
+			}
+			"05" {
+				"var_type" "FIELD_FLOAT"
+				"damage_interval" "0.5"
+
+			}
+			"06" {
+				"var_type" "FIELD_INTEGER"
+				"duration" "35"
+
+			}
+
+		}
+
+	}
+	"imba_broodmother_spiderking_volatile" {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/imba/hero_broodmother"
+		"AbilityTextureName" "broodmother_spawn_spiderite"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType" "SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellDispellableType" "SPELL_DISPELLABLE_YES"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"explosion_damage" "20 40 60 80"
+
+			}
+			"02" {
+				"var_type" "FIELD_INTEGER"
+				"radius" "350"
+
+			}
+			"03" {
+				"var_type" "FIELD_INTEGER"
+				"damage_per_stack" "10 12 14 16"
+
+			}
+			"04" {
+				"var_type" "FIELD_INTEGER"
+				"slow_per_stack_pct" "2 3 4 5"
+
+			}
+			"05" {
+				"var_type" "FIELD_FLOAT"
+				"damage_interval" "0.5"
+
+			}
+			"06" {
+				"var_type" "FIELD_INTEGER"
+				"duration" "35"
+
+			}
+
+		}
+
+	}
+	"imba_broodmother_spiderking_hardened_brood_aura" {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/imba/hero_broodmother"
+		"AbilityTextureName" "broodmother_poison_sting"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"SpellImmunityType" "SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellDispellableType" "SPELL_DISPELLABLE_YES"
+		"AbilityCastAnimation" "ACT_DOTA_CAST_ABILITY_1"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"radius" "1200"
+
+			}
+
+		}
+
+	}
 	"imba_chaos_knight_chaos_bolt" {
-		"BaseClass" "special_bonus_undefined"
-		"ScriptFile" "npc/abilities/imba/hero_bristleback"
+		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/imba/hero_chaos_knight"
 		"AbilityTextureName" "chaos_knight_chaos_bolt"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
 		"AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_ENEMY"
@@ -4403,13 +4877,18 @@
 				"shard_illusion_duration" "6"
 
 			}
+			"09" {
+				"var_type" "FIELD_INTEGER"
+				"bounce_chance" "30"
+
+			}
 
 		}
 
 	}
 	"imba_chaos_knight_reality_rift" {
-		"BaseClass" "special_bonus_undefined"
-		"ScriptFile" "npc/abilities/imba/hero_bristleback"
+		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/imba/hero_chaos_knight"
 		"AbilityTextureName" "chaos_knight_reality_rift"
 		"MaxLevel" "4"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES"
@@ -4456,8 +4935,8 @@
 
 	}
 	"imba_chaos_knight_chaos_strike" {
-		"BaseClass" "special_bonus_undefined"
-		"ScriptFile" "npc/abilities/imba/hero_bristleback"
+		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/imba/hero_chaos_knight"
 		"AbilityTextureName" "chaos_knight_chaos_strike"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"SpellImmunityType" "SPELL_IMMUNITY_ENEMIES_YES"
@@ -5404,6 +5883,355 @@
 		}
 
 	}
+	"imba_dark_willow_bramble_maze" {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/imba/hero_dark_willow"
+		"AbilityTextureName" "dark_willow_bramble_maze"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType" "SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityCastAnimation" "ACT_DOTA_CAST_ABILITY_1"
+		"AbilityCastPoint" "0.3"
+		"AbilityCastRange" "1200"
+		"AbilityCooldown" "20"
+		"AbilityManaCost" "140 150 160 170 180"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"damage" "125"
+
+			}
+			"02" {
+				"var_type" "FIELD_FLOAT"
+				"delay" "0.5"
+
+			}
+			"03" {
+				"var_type" "FIELD_INTEGER"
+				"duration" "15"
+
+			}
+			"04" {
+				"var_type" "FIELD_FLOAT"
+				"debuff_duration" "1 1.5 2 2.5 2.5"
+
+			}
+			"05" {
+				"var_type" "FIELD_INTEGER"
+				"latch_range" "90"
+
+			}
+			"06" {
+				"var_type" "FIELD_INTEGER"
+				"max_count" "8 8 8 8 10"
+
+			}
+			"07" {
+				"var_type" "FIELD_INTEGER"
+				"radius" "500"
+
+			}
+			"08" {
+				"var_type" "FIELD_INTEGER"
+				"placement_range" "500"
+
+			}
+			"09" {
+				"var_type" "FIELD_INTEGER"
+				"placement_count" "8"
+
+			}
+			"10" {
+				"var_type" "FIELD_INTEGER"
+				"placement_duration" "15"
+
+			}
+			"11" {
+				"var_type" "FIELD_FLOAT"
+				"latch_duration" "1.0 1.5 2.0 2.5"
+
+			}
+			"12" {
+				"var_type" "FIELD_INTEGER"
+				"damage_per_tick" "50"
+
+			}
+			"13" {
+				"var_type" "FIELD_FLOAT"
+				"latch_creation_interval" "0.075"
+
+			}
+			"14" {
+				"var_type" "FIELD_FLOAT"
+				"latch_creation_delay" "0.1"
+
+			}
+			"15" {
+				"var_type" "FIELD_FLOAT"
+				"initial_creation_delay" "0.3"
+
+			}
+
+		}
+
+	}
+	"imba_dark_willow_shadow_realm" {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/imba/hero_dark_willow"
+		"AbilityTextureName" "dark_willow_shadow_realm"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
+		"AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType" "SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityCastAnimation" "ACT_DOTA_CAST_ABILITY_2"
+		"AbilityCastGestureSlot" "ABSOLUTE"
+		"AbilityCastPoint" "0"
+		"AbilityCastRange" "0"
+		"AbilityCooldown" "16"
+		"AbilityManaCost" "32 26 20 14"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"attack_range_bonus" "600"
+
+			}
+			"02" {
+				"var_type" "FIELD_INTEGER"
+				"max_damage" "90 180 270 360 450"
+
+			}
+			"03" {
+				"var_type" "FIELD_INTEGER"
+				"duration" "5"
+
+			}
+			"04" {
+				"var_type" "FIELD_FLOAT"
+				"max_delay" "3.5 3.5 3.5 3.5"
+
+			}
+			"05" {
+				"var_type" "FIELD_FLOAT"
+				"linger_duration" "3.5"
+
+			}
+			"06" {
+				"var_type" "FIELD_FLOAT"
+				"max_damage_duration" "3.5"
+
+			}
+			"07" {
+				"var_type" "FIELD_INTEGER"
+				"scepter_radius" "900"
+
+			}
+
+		}
+
+	}
+	"imba_dark_willow_cursed_crown" {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/imba/hero_dark_willow"
+		"AbilityTextureName" "dark_willow_cursed_crown"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType" "SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityCastAnimation" "ACT_DOTA_CAST_ABILITY_3"
+		"AbilityCastPoint" "0.2"
+		"AbilityCastRange" "600"
+		"AbilityCooldown" "18 18 18 18 16"
+		"AbilityManaCost" "80 100 120 140 140"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"delay" "4"
+
+			}
+			"02" {
+				"var_type" "FIELD_FLOAT"
+				"duration" "1.75 2.25 2.75 3.25"
+
+			}
+			"03" {
+				"var_type" "FIELD_INTEGER"
+				"status_resist" "0 0 0 0 -10"
+
+			}
+			"04" {
+				"var_type" "FIELD_INTEGER"
+				"radius" "360"
+
+			}
+			"05" {
+				"var_type" "FIELD_FLOAT"
+				"stun_duration" "1.5 2.0 2.5 3.0"
+
+			}
+			"06" {
+				"var_type" "FIELD_INTEGER"
+				"stun_radius" "360"
+
+			}
+
+		}
+
+	}
+	"imba_dark_willow_bedlam" {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/imba/hero_dark_willow"
+		"AbilityTextureName" "dark_willow_bedlam"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType" "SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityCastAnimation" "ACT_DOTA_CAST_ABILITY_4"
+		"AbilityCooldown" "30"
+		"AbilityManaCost" "150"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"duration" "5"
+
+			}
+			"02" {
+				"var_type" "FIELD_FLOAT"
+				"attack_rate" "0.25"
+
+			}
+			"03" {
+				"var_type" "FIELD_INTEGER"
+				"radius" "200"
+
+			}
+			"04" {
+				"var_type" "FIELD_INTEGER"
+				"scepter_mana_cost" "30"
+
+			}
+			"05" {
+				"var_type" "FIELD_INTEGER"
+				"attack_damage" "70 120 170"
+
+			}
+			"06" {
+				"var_type" "FIELD_FLOAT"
+				"attack_interval" "0.25"
+
+			}
+			"07" {
+				"var_type" "FIELD_INTEGER"
+				"attack_radius" "300"
+
+			}
+			"08" {
+				"var_type" "FIELD_INTEGER"
+				"attack_targets" "1"
+
+			}
+			"09" {
+				"var_type" "FIELD_INTEGER"
+				"roaming_radius" "200"
+
+			}
+			"10" {
+				"var_type" "FIELD_FLOAT"
+				"roaming_seconds_per_rotation" "1.5"
+
+			}
+			"11" {
+				"var_type" "FIELD_FLOAT"
+				"roaming_duration" "5.0"
+
+			}
+			"12" {
+				"var_type" "FIELD_INTEGER"
+				"pierces_magic_immunity" "0"
+
+			}
+
+		}
+
+	}
+	"imba_dark_willow_terrorize" {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/imba/hero_dark_willow"
+		"AbilityTextureName" "dark_willow_terrorize"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_NORMAL_WHEN_STOLEN"
+		"AbilityType" "DOTA_ABILITY_TYPE_ULTIMATE"
+		"AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType" "SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityCastAnimation" "ACT_DOTA_CAST_ABILITY_5"
+		"AbilityCastPoint" "1"
+		"AbilityCastRange" "1500"
+		"AbilityCooldown" "120 100 80 60 40"
+		"AbilityManaCost" "150"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"speed" "2000"
+
+			}
+			"02" {
+				"var_type" "FIELD_INTEGER"
+				"radius" "400"
+
+			}
+			"03" {
+				"var_type" "FIELD_INTEGER"
+				"duration" "4"
+
+			}
+			"04" {
+				"var_type" "FIELD_INTEGER"
+				"return_speed" "500"
+
+			}
+			"05" {
+				"var_type" "FIELD_INTEGER"
+				"starting_height" "300"
+
+			}
+			"06" {
+				"var_type" "FIELD_INTEGER"
+				"destination_travel_speed" "2000"
+
+			}
+			"07" {
+				"var_type" "FIELD_INTEGER"
+				"destination_radius" "400"
+
+			}
+			"08" {
+				"var_type" "FIELD_FLOAT"
+				"destination_status_duration" "3.5 3.75 4"
+
+			}
+			"09" {
+				"var_type" "FIELD_INTEGER"
+				"return_travel_speed" "600"
+
+			}
+			"10" {
+				"var_type" "FIELD_INTEGER"
+				"starting_height" "300"
+
+			}
+			"11" {
+				"var_type" "FIELD_INTEGER"
+				"telegraph_to_enemies" "0"
+
+			}
+
+		}
+
+	}
 	"imba_death_prophet_silence" {
 		"BaseClass" "ability_lua"
 		"ScriptFile" "npc/abilities/imba/hero_death_prophet"
@@ -5508,6 +6336,176 @@
 		}
 
 	}
+	"imba_earthshaker_fissure" {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/imba/hero_earthshaker"
+		"AbilityTextureName" "earthshaker_fissure"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+		"AbilityType" "DOTA_ABILITY_TYPE_BASIC"
+		"AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityDamage" "110 160 210 260"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType" "SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellDispellableType" "SPELL_DISPELLABLE_YES_STRONG"
+		"AbilitySound" "Hero_EarthShaker.Fissure"
+		"AbilityCastAnimation" "ACT_DOTA_CAST_ABILITY_1"
+		"AbilityCastPoint" "0.69"
+		"AbilityCastRange" "1400"
+		"AbilityCooldown" "21 19 17 15"
+		"AbilityManaCost" "110 130 150 170"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"fissure_range" "1400"
+
+			}
+			"02" {
+				"var_type" "FIELD_FLOAT"
+				"fissure_duration" "6.5 7 7.5 8.0"
+
+			}
+			"03" {
+				"var_type" "FIELD_INTEGER"
+				"fissure_radius" "225"
+
+			}
+			"04" {
+				"var_type" "FIELD_FLOAT"
+				"stun_duration" "1.0 1.25 1.5 1.75"
+
+			}
+			"05" {
+				"var_type" "FIELD_INTEGER"
+				"fissure_damage" "110 160 210 260"
+
+			}
+			"06" {
+				"var_type" "FIELD_FLOAT"
+				"shard_cooldown_reduction" "2.0"
+
+			}
+			"07" {
+				"var_type" "FIELD_INTEGER"
+				"shard_aftershock_stun_duration_pct" "50"
+
+			}
+			"08" {
+				"var_type" "FIELD_FLOAT"
+				"shard_free_pathing_linger_duration" "1.0"
+
+			}
+
+		}
+
+	}
+	"imba_earthshaker_enchant_totem" {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/imba/hero_earthshaker"
+		"AbilityTextureName" "earthshaker_enchant_totem"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityType" "DOTA_ABILITY_TYPE_BASIC"
+		"AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"SpellDispellableType" "SPELL_DISPELLABLE_YES"
+		"AbilitySound" "Hero_EarthShaker.Totem"
+		"AbilityCastAnimation" "ACT_DOTA_CAST_ABILITY_2"
+		"AbilityCastPoint" "0.69"
+		"AbilityDuration" "14"
+		"AbilityCooldown" "5.0"
+		"AbilityManaCost" "35 40 45 50"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"totem_damage_percentage" "100 200 300 400"
+
+			}
+			"02" {
+				"var_type" "FIELD_INTEGER"
+				"tooltip_duration" "14"
+
+			}
+			"03" {
+				"var_type" "FIELD_INTEGER"
+				"distance_scepter" "1100"
+
+			}
+			"04" {
+				"var_type" "FIELD_FLOAT"
+				"duration" "1.0"
+
+			}
+			"05" {
+				"var_type" "FIELD_INTEGER"
+				"aftershock_range" "300"
+
+			}
+			"06" {
+				"var_type" "FIELD_INTEGER"
+				"scepter_height" "950"
+
+			}
+			"07" {
+				"var_type" "FIELD_INTEGER"
+				"scepter_height_arcbuffer" "100"
+
+			}
+			"08" {
+				"var_type" "FIELD_INTEGER"
+				"scepter_acceleration_z" "4000"
+
+			}
+			"09" {
+				"var_type" "FIELD_INTEGER"
+				"scepter_acceleration_horizontal" "3000"
+
+			}
+			"10" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_attack_range" "75"
+
+			}
+			"11" {
+				"var_type" "FIELD_INTEGER"
+				"scepter_cleave_pct" "40"
+
+			}
+			"12" {
+				"var_type" "FIELD_INTEGER"
+				"scepter_cleave_starting_width" "150"
+
+			}
+
+		}
+
+	}
+	"imba_earthshaker_aftershock" {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/imba/hero_earthshaker"
+		"AbilityTextureName" "earthshaker_aftershock"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityType" "DOTA_ABILITY_TYPE_BASIC"
+		"AbilityDamage" "75 100 125 150"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType" "SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellDispellableType" "SPELL_DISPELLABLE_YES_STRONG"
+		"AbilityCastAnimation" "ACT_DOTA_CAST_ABILITY_3"
+		"AbilityDuration" "0.9 1.1 1.3 1.5"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"aftershock_range" "300"
+
+			}
+			"02" {
+				"var_type" "FIELD_FLOAT"
+				"tooltip_duration" "0.6 0.9 1.2 1.5"
+
+			}
+
+		}
+
+	}
 	"imba_earthshaker_echo_slam" {
 		"BaseClass" "ability_lua"
 		"ScriptFile" "npc/abilities/imba/hero_earthshaker"
@@ -5516,6 +6514,7 @@
 		"AbilityType" "DOTA_ABILITY_TYPE_ULTIMATE"
 		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
 		"SpellImmunityType" "SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellDispellableType" "SPELL_DISPELLABLE_YES_STRONG"
 		"FightRecapLevel" "2"
 		"AbilitySound" "Hero_EarthShaker.EchoSlam"
 		"AbilityCastAnimation" "ACT_DOTA_CAST_ABILITY_4"
@@ -6685,6 +7684,7 @@
 				"green_heal_amp" "20"
 				"LinkedSpecialBonusOperation" ""
 
+			}
 			"10" {
 				"var_type" "FIELD_INTEGER"
 				"orange_day_vision" "250"
@@ -6702,7 +7702,6 @@
 				"pink_movespeed_pct" "5"
 				"LinkedSpecialBonusOperation" ""
 
-			}
 			}
 
 		}
@@ -7774,6 +8773,7 @@
 				"treant_large_hp_bonus_tooltip" "1650"
 				"RequiresScepter" "1"
 
+			}
 			"10" {
 				"var_type" "FIELD_INTEGER"
 				"treant_large_damage_bonus_tooltip" "72 84 96 108"
@@ -7816,7 +8816,6 @@
 				"var_type" "FIELD_FLOAT"
 				"treant_health_per_stack" "0.75"
 
-			}
 			}
 
 		}
@@ -9050,6 +10049,7 @@
 				"tooltip_health_damage_scepter" "65"
 				"RequiresScepter" "1"
 
+			}
 			"10" {
 				"var_type" "FIELD_INTEGER"
 				"cooldown_scepter" "4"
@@ -9090,7 +10090,6 @@
 				"var_type" "FIELD_INTEGER"
 				"sac_dagger_dmg_pct" "30"
 
-			}
 			}
 
 		}
@@ -12194,6 +13193,7 @@
 				"duration_tooltip_scepter" "1.8 3.6 5.4"
 				"RequiresScepter" "1"
 
+			}
 			"10" {
 				"var_type" "FIELD_INTEGER"
 				"cast_range_tooltip_scepter" "2500"
@@ -12224,7 +13224,6 @@
 				"var_type" "FIELD_INTEGER"
 				"moonscraper_radius" "75"
 
-			}
 			}
 
 		}
@@ -14665,11 +15664,11 @@
 				"scepter_stun_percentage" "50"
 				"RequiresScepter" "1"
 
+			}
 			"10" {
 				"var_type" "FIELD_FLOAT"
 				"channel_time" "2.5"
 
-			}
 			}
 
 		}
@@ -15288,6 +16287,7 @@
 				"tooltip_illusion_total_damage_in_pct" "400 400 400 400"
 				"CalculateSpellDamageTooltip" "0"
 
+			}
 			"10" {
 				"var_type" "FIELD_INTEGER"
 				"fake_lance_distance" "800"
@@ -15322,7 +16322,6 @@
 				"var_type" "FIELD_INTEGER"
 				"sun_catcher_lance_speed" "3000"
 
-			}
 			}
 
 		}
@@ -17931,6 +18930,7 @@
 				"pounce_distance_scepter" "1200"
 				"RequiresScepter" "1"
 
+			}
 			"10" {
 				"var_type" "FIELD_INTEGER"
 				"pounce_damage" "0"
@@ -17940,7 +18940,6 @@
 				"var_type" "FIELD_INTEGER"
 				"essence_stacks" "0 1 2 3"
 
-			}
 			}
 
 		}
@@ -22575,6 +23574,7 @@
 				"pass_slow_duration" "1.0"
 				"RequiresScepter" "1"
 
+			}
 			"10" {
 				"var_type" "FIELD_INTEGER"
 				"slow_health_percentage" "5"
@@ -22590,7 +23590,6 @@
 				"var_type" "FIELD_INTEGER"
 				"observe_max_scale" "40"
 
-			}
 			}
 
 		}
@@ -24926,6 +25925,7 @@
 				"charge_restore_time" "16"
 				"RequiresScepter" "1"
 
+			}
 			"10" {
 				"var_type" "FIELD_FLOAT"
 				"silence_duration_scepter" "2.0"
@@ -24946,7 +25946,6 @@
 				"var_type" "FIELD_INTEGER"
 				"max_charges" "2"
 
-			}
 			}
 
 		}
@@ -26548,6 +27547,7 @@
 				"scepter_radius" "900"
 				"RequiresScepter" "1"
 
+			}
 			"10" {
 				"var_type" "FIELD_FLOAT"
 				"scepter_efficiency" "0.25"
@@ -26578,7 +27578,6 @@
 				"var_type" "FIELD_INTEGER"
 				"shard_bonus_spell_lifesteal" "10"
 
-			}
 			}
 
 		}
@@ -28657,6 +29656,7 @@
 				"ally_damage_reduction" "-50"
 				"CalculateSpellDamageTooltip" "0"
 
+			}
 			"10" {
 				"var_type" "FIELD_INTEGER"
 				"heal_per_tick" "50"
@@ -28691,7 +29691,6 @@
 				"var_type" "FIELD_FLOAT"
 				"tick_interval" "0.25"
 
-			}
 			}
 
 		}
@@ -30404,7 +31403,7 @@
 	"imba_elder_titan_echo_stomp" {
 		"BaseClass" "ability_lua"
 		"ScriptFile" "npc/abilities/imba/hero_elder_titan"
-		"AbilityTextureName" "imba_elder_titan_echo_stomp"
+		"AbilityTextureName" "elder_titan_echo_stomp"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
 		"AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
@@ -30462,7 +31461,7 @@
 	"imba_elder_titan_echo_stomp_spirit" {
 		"BaseClass" "ability_lua"
 		"ScriptFile" "npc/abilities/imba/hero_elder_titan"
-		"AbilityTextureName" "imba_elder_titan_echo_stomp"
+		"AbilityTextureName" "elder_titan_echo_stomp"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
@@ -30574,6 +31573,7 @@
 				"damage_heroes" "20 40 60 80"
 				"CalculateSpellDamageTooltip" "0"
 
+			}
 			"10" {
 				"var_type" "FIELD_FLOAT"
 				"armor_creeps" "0.5"
@@ -30594,7 +31594,6 @@
 				"var_type" "FIELD_INTEGER"
 				"move_pct_cap" "40"
 
-			}
 			}
 
 		}
@@ -38508,6 +39507,7 @@
 				"scepter_healing_pct" "4"
 				"RequiresScepter" "1"
 
+			}
 			"10" {
 				"var_type" "FIELD_INTEGER"
 				"order_lock_duration" "3"
@@ -38549,7 +39549,6 @@
 				"var_type" "FIELD_FLOAT"
 				"shard_cooldown_reduction" "5.0"
 
-			}
 			}
 
 		}
@@ -40890,6 +41889,7 @@
 				"scepter_search_radius" "700"
 				"RequiresScepter" "1"
 
+			}
 			"10" {
 				"var_type" "FIELD_INTEGER"
 				"bolt_speed" "500"
@@ -40919,7 +41919,6 @@
 				"var_type" "FIELD_INTEGER"
 				"scepter_radius" "700"
 
-			}
 			}
 
 		}
@@ -41432,6 +42431,7 @@
 				"radius" "180"
 				"LinkedSpecialBonusOperation" ""
 
+			}
 			"10" {
 				"var_type" "FIELD_INTEGER"
 				"damage" "50 75 100 125"
@@ -41482,7 +42482,6 @@
 				"var_type" "FIELD_INTEGER"
 				"river_speed_tooltip" "7 19 31 43"
 
-			}
 			}
 
 		}
@@ -45604,6 +46603,64 @@
 		"BaseClass" "ability_lua"
 		"ScriptFile" "npc/abilities/imba/hero_clinkz"
 		"AbilityTextureName" "clinkz_strafe"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
+		"AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_PHYSICAL"
+		"SpellImmunityType" "SPELL_IMMUNITY_ENEMIES_YES"
+		"SpellDispellableType" "SPELL_DISPELLABLE_YES"
+		"FightRecapLevel" "1"
+		"AbilityCastAnimation" "ACT_DOTA_CAST_ABILITY_1"
+		"AbilityCastGestureSlot" "DEFAULT"
+		"AbilityCastPoint" "0.2"
+		"AbilityCastRange" "300"
+		"AbilityCooldown" "34 30 26 22"
+		"AbilityChannelTime" "2.0"
+		"AbilityManaCost" "40 50 60 70"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"as_bonus" "90 120 150 180"
+
+			}
+			"02" {
+				"var_type" "FIELD_FLOAT"
+				"duration" "3.0 4.0 5.0 6..0"
+
+			}
+			"03" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_attack_range" "50 75 100 125"
+
+			}
+			"04" {
+				"var_type" "FIELD_INTEGER"
+				"wave_count" "6"
+
+			}
+			"05" {
+				"var_type" "FIELD_INTEGER"
+				"range" "750 800 850 900"
+
+			}
+			"06" {
+				"var_type" "FIELD_INTEGER"
+				"damage_pct" "50 55 60 65"
+
+			}
+			"07" {
+				"var_type" "FIELD_FLOAT"
+				"dodge_rate" "0.5"
+
+			}
+
+		}
+
+	}
+	"imba_clinkz_strafe_723" {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/imba/hero_clinkz"
+		"AbilityTextureName" "clinkz_strafe"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
 		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
@@ -45885,6 +46942,7 @@
 				"scepter_skeleton_count" "2"
 				"RequiresScepter" "1"
 
+			}
 			"10" {
 				"var_type" "FIELD_INTEGER"
 				"attack_speed_duration" "4"
@@ -45894,7 +46952,6 @@
 				"var_type" "FIELD_INTEGER"
 				"attack_speed_bonus_pct" "20 40 60 80"
 
-			}
 			}
 
 		}
@@ -47041,6 +48098,11 @@
 				"disable_range" "400"
 
 			}
+			"14" {
+				"var_type" "FIELD_INTEGER"
+				"splinter_radius_scepter" "375"
+
+			}
 
 		}
 
@@ -47643,6 +48705,7 @@
 				"attack_rate_multiplier" "1.6"
 				"LinkedSpecialBonusOperation" ""
 
+			}
 			"10" {
 				"var_type" "FIELD_INTEGER"
 				"bonus_damage" "30 40 50"
@@ -47677,7 +48740,6 @@
 				"var_type" "FIELD_INTEGER"
 				"cooldown_scepter" "70"
 
-			}
 			}
 
 		}
@@ -48032,6 +49094,7 @@
 				"on_prow_crit_damage_pct" "140 160 180 200"
 				"CalculateSpellDamageTooltip" "0"
 
+			}
 			"10" {
 				"var_type" "FIELD_INTEGER"
 				"arrow_radius" "96"
@@ -48111,7 +49174,6 @@
 				"var_type" "FIELD_INTEGER"
 				"distance_bonus_cap_tooltip" "1500"
 
-			}
 			}
 
 		}
@@ -50283,6 +51345,7 @@
 				"scepter_knives_interval" "0"
 				"RequiresScepter" "1"
 
+			}
 			"10" {
 				"var_type" "FIELD_INTEGER"
 				"cast_range" "525 750 975 1200"
@@ -50307,7 +51370,6 @@
 				"var_type" "FIELD_INTEGER"
 				"attack_factor" "-75 -60 -45 -30"
 
-			}
 			}
 
 		}
@@ -50920,6 +51982,7 @@
 				"scepter_cast_time" "0.5"
 				"RequiresScepter" "1"
 
+			}
 			"10" {
 				"var_type" "FIELD_FLOAT"
 				"scepter_stun_duration" "1.0 1.25 1.5"
@@ -50955,7 +52018,6 @@
 				"var_type" "FIELD_INTEGER"
 				"scatter_damage_pct" "0"
 
-			}
 			}
 
 		}
@@ -53125,6 +54187,7 @@
 				"main_damage_scepter" "75 100 125"
 				"RequiresScepter" "1"
 
+			}
 			"10" {
 				"var_type" "FIELD_INTEGER"
 				"cooldown_scepter" "120 90 60"
@@ -53160,7 +54223,6 @@
 				"var_type" "FIELD_INTEGER"
 				"aspd_slow" "0"
 
-			}
 			}
 
 		}

@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { AoiHelper } from "../../../helper/AoiHelper";
 import { ResHelper } from "../../../helper/ResHelper";
@@ -65,16 +66,24 @@ export class imba_dark_willow_bramble_maze extends BaseAbility_Plus {
             ParticleManager.ReleaseParticleIndex(nfx);
         });
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.POSITION_most_enemy(this);
+    }
+
 }
 @registerModifier()
 export class modifier_imba_dark_willow_bramble_maze extends BaseModifier_Plus {
-    public talent2: any;
-    public talent2Radius: any;
+    public talent2: boolean;
+    public talent2Radius: number;
     public radius: number;
     public duration: number;
     BeCreated(table: any): void {
         let caster = this.GetCasterPlus();
-        this.talent2 = caster.HasTalent("special_bonus_unique_imba_dark_willow_bramble_maze_2");
+        this.talent2 = caster.HasTalent("special_bonus_unique_imba_dark_willow_bramble_maze_2") != null;
         this.talent2Radius = caster.GetTalentValue("special_bonus_unique_imba_dark_willow_bramble_maze_2", "radius");
         if (IsServer()) {
             let point = this.GetParentPlus().GetAbsOrigin();
@@ -220,9 +229,9 @@ export class imba_dark_willow_shadow_realm extends BaseAbility_Plus {
     IsHiddenWhenStolen(): boolean {
         return false;
     }
-    GetManaCost(iLvl: number): number {
-        return super.GetManaCost(iLvl);
-    }
+    // GetManaCost(iLvl: number): number {
+    //     return super.GetManaCost(iLvl);
+    // }
     OnSpellStart(): void {
         let caster = this.GetCasterPlus();
         caster.AddNewModifier(caster, this, "modifier_imba_dark_willow_shadow_realm", {
@@ -236,6 +245,13 @@ export class imba_dark_willow_shadow_realm extends BaseAbility_Plus {
             EmitSoundOn("Hero_DarkWillow.Shadow_Realm.Damage", caster);
             this.DealDamage(caster, hTarget, damage, {}, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_BONUS_SPELL_DAMAGE);
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_cast(this);
     }
 }
 @registerModifier()
@@ -508,6 +524,13 @@ export class imba_dark_willow_cursed_crown extends BaseAbility_Plus {
             duration: delay
         });
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
+    }
 }
 @registerModifier()
 export class modifier_imba_dark_willow_cursed_crown extends BaseModifier_Plus {
@@ -605,12 +628,12 @@ export class imba_dark_willow_bedlam extends BaseAbility_Plus {
         }
         return DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_NO_TARGET + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_IMMEDIATE;
     }
-    GetManaCost(iLevel: number): number {
-        if (this.GetCasterPlus().HasScepter()) {
-            return this.GetSpecialValueFor("scepter_mana_cost");
-        }
-        return super.GetManaCost(iLevel);
-    }
+    // GetManaCost(iLevel: number): number {
+    //     if (this.GetCasterPlus().HasScepter()) {
+    //         return this.GetSpecialValueFor("scepter_mana_cost");
+    //     }
+    //     return super.GetManaCost(iLevel);
+    // }
     OnSpellStart(): void {
         let caster = this.GetCasterPlus();
         if (!caster.HasScepter()) {
@@ -638,6 +661,13 @@ export class imba_dark_willow_bedlam extends BaseAbility_Plus {
             }, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_DAMAGE);
         }
     }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_cast(this);
+    }
 }
 @registerModifier()
 export class modifier_imba_dark_willow_bedlam extends BaseModifier_Plus {
@@ -646,7 +676,7 @@ export class modifier_imba_dark_willow_bedlam extends BaseModifier_Plus {
     public scepter_cost: any;
     public i: any;
     public point: any;
-    public bug: any;
+    public bug: IBaseNpc_Plus;
     BeCreated(table: any): void {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
@@ -664,6 +694,10 @@ export class modifier_imba_dark_willow_bedlam extends BaseModifier_Plus {
         }
     }
     OnIntervalThink(): void {
+        if (!GFuncEntity.IsValid(this.bug)) {
+            this.Destroy();
+            return
+        }
         let qAngle = QAngle(0, this.i, 0);
         let parent = this.GetParentPlus();
         let parentPos = parent.GetAbsOrigin() + Vector(0, 0, 100) as Vector;
@@ -790,6 +824,14 @@ export class imba_dark_willow_terrorize extends BaseAbility_Plus {
     OnSpellStart(): void {
         this.fear.StartIntervalThink(0.03);
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this);
+    }
+
 }
 @registerModifier()
 export class modifier_imba_dark_willow_terrorize extends BaseModifier_Plus {

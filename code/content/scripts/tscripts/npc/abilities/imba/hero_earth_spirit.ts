@@ -1,10 +1,10 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
-import { BaseNpc_Plus } from "../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 @registerAbility()
@@ -59,7 +59,7 @@ export class imba_earth_spirit_stone_caller extends BaseAbility_Plus {
             if (unit == caster) {
                 target = caster.GetAbsOrigin() + caster.GetForwardVector() * 100 as Vector;
             }
-            let dummy = BaseNpc_Plus.CreateUnitByName("npc_imba_dota_earth_spirit_stone", target, caster, false);
+            let dummy = caster.CreateSummon("npc_imba_dota_earth_spirit_stone", target, remnantDuration, false);
             dummy.AddNewModifier(caster, this, "modifier_imba_stone_remnant", {
                 duration: remnantDuration
             });
@@ -514,7 +514,7 @@ export class imba_earth_spirit_boulder_smash extends BaseAbility_Plus {
             if (target) {
                 if (target.GetTeam() != caster.GetTeam()) {
                     if (target.TriggerSpellAbsorb(this)) {
-                        return undefined;
+                        return;
                     }
                 }
                 if (CalcDistanceBetweenEntityOBB(caster, target) <= searchRadius) {
@@ -614,6 +614,7 @@ export class imba_earth_spirit_boulder_smash extends BaseAbility_Plus {
         }
         return false;
     }
+
 }
 @registerModifier()
 export class modifier_imba_boulder_smash_push extends BaseModifier_Plus {
@@ -857,6 +858,13 @@ export class imba_earth_spirit_rolling_boulder extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_rolling_boulder", {});
         }
     }
+
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
+    }
 }
 @registerModifier()
 export class modifier_imba_rolling_boulder extends BaseModifier_Plus {
@@ -1020,9 +1028,7 @@ export class modifier_imba_rolling_boulder extends BaseModifier_Plus {
                                 }
                             }
                         }
-                        hero.AddNewModifier(this.caster, this.ability, "modifier_generic_stunned", {
-                            duration: this.stunDuration * (1 - hero.GetStatusResistance())
-                        });
+                        hero.ApplyStunned(this.ability, this.caster, this.stunDuration);
                         if (i == 0) {
                             EmitSoundOn("Hero_EarthSpirit.RollingBoulder.Target", hero);
                             FindClearSpaceForUnit(this.caster, hero.GetAbsOrigin() + this.direction * this.distanceOppositeToTarget as Vector, false);
@@ -1169,6 +1175,13 @@ export class imba_earth_spirit_geomagnetic_grip extends BaseAbility_Plus {
             }
         }
         return false;
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
     }
 }
 @registerModifier()
@@ -1387,6 +1400,13 @@ export class imba_earth_spirit_magnetize extends BaseAbility_Plus {
                 }
             }
         }
+    }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_cast(this);
     }
 }
 @registerModifier()

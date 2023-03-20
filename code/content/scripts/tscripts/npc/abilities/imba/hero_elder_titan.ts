@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -149,6 +150,14 @@ export class imba_elder_titan_echo_stomp extends BaseAbility_Plus {
             }
         }
     }
+
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_cast(this);
+    }
 }
 @registerModifier()
 export class modifier_imba_elder_titan_magic_immune extends BaseModifier_Plus {
@@ -215,6 +224,13 @@ export class imba_elder_titan_ancestral_spirit extends BaseAbility_Plus {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_elder_titan_2") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_elder_titan_2")) {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_elder_titan_2"), "modifier_special_bonus_imba_elder_titan_2", {});
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.POSITION_most_enemy(this);
     }
 }
 @registerModifier()
@@ -726,6 +742,13 @@ export class imba_elder_titan_echo_stomp_spirit extends BaseAbility_Plus {
             }
             this.GetCasterPlus().FadeGesture(GameActivity_t.ACT_DOTA_CAST_ABILITY_1);
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this, null, null, FindOrder.FIND_CLOSEST);
     }
 }
 @registerAbility()

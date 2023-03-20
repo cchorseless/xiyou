@@ -447,6 +447,8 @@ declare namespace building_unit_summoned {
 "npc_dota_furion_treant_4" :OBJ_2_1 ,
 "npc_dota_furion_treant_large" :OBJ_2_1 ,
 "npc_dota_broodmother_spiderling" :OBJ_2_1 ,
+"npc_dota_broodmother_cocoon" :OBJ_2_1 ,
+"npc_dota_broodmother_spiderking" :OBJ_2_1 ,
 "npc_dota_broodmother_spiderite" :OBJ_2_1 ,
 "npc_dota_dark_troll_warlord_skeleton_warrior" :OBJ_2_1 ,
 "npc_dota_enraged_wildkin_tornado" :OBJ_2_1 ,

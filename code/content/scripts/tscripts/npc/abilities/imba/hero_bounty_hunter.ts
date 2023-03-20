@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { GameServiceConfig } from "../../../shared/GameServiceConfig";
@@ -173,6 +174,15 @@ export class imba_bounty_hunter_shuriken_toss extends BaseAbility_Plus {
     IsHiddenWhenStolen(): boolean {
         return false;
     }
+
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
+    }
+
 }
 @registerModifier()
 export class modifier_imba_shuriken_toss_stunned extends BaseModifier_Plus {
@@ -312,15 +322,14 @@ export class imba_bounty_hunter_jinada extends BaseAbility_Plus {
     OnSpellStart(): void {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
-            let ability = this;
             let target = this.GetCursorTarget();
             if (target.GetTeamNumber() != caster.GetTeamNumber()) {
-                this.ShadowJaunt(caster, ability, target);
+                this.ShadowJaunt(caster, this, target);
             } else {
                 caster.StartGesture(GameActivity_t.ACT_DOTA_CAST_ABILITY_4);
                 EmitSoundOnLocationWithCaster(target.GetAbsOrigin(), "Hero_Enchantress.EnchantCast", caster);
                 let duration = caster.GetTalentValue("special_bonus_imba_bounty_hunter_3", "jinada_buff_duration");
-                target.AddNewModifier(caster, ability, "modifier_imba_jinada_buff_crit", {
+                target.AddNewModifier(caster, this, "modifier_imba_jinada_buff_crit", {
                     duration: duration
                 });
                 if (caster.HasModifier("modifier_imba_jinada_buff_crit")) {
@@ -351,6 +360,14 @@ export class imba_bounty_hunter_jinada extends BaseAbility_Plus {
     }
     IsStealable(): boolean {
         return false;
+    }
+
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
     }
 }
 @registerModifier()
@@ -760,14 +777,13 @@ export class imba_bounty_hunter_track extends BaseAbility_Plus {
     OnSpellStart(): void {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
-            let ability = this;
             let target = this.GetCursorTarget();
             let particle_projectile = "particles/units/heroes/hero_bounty_hunter/bounty_hunter_track_cast.vpcf";
             let cast_response = "bounty_hunter_bount_ability_track_0" + RandomInt(2, 3);
             let sound_cast = "Hero_BountyHunter.Target";
             let modifier_track = "modifier_imba_track_debuff_mark";
-            let projectile_speed = ability.GetSpecialValueFor("projectile_speed");
-            let duration = ability.GetSpecialValueFor("duration");
+            let projectile_speed = this.GetSpecialValueFor("projectile_speed");
+            let duration = this.GetSpecialValueFor("duration");
             let cast_response_chance = 10;
             let cast_response_roll = RandomInt(1, 100);
             if (cast_response_roll <= cast_response_chance) {
@@ -785,17 +801,24 @@ export class imba_bounty_hunter_track extends BaseAbility_Plus {
             ParticleManager.SetParticleControlEnt(particle_projectile_fx, 1, target, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", target.GetAbsOrigin(), true);
             ParticleManager.ReleaseParticleIndex(particle_projectile_fx);
             if (caster.GetTeamNumber() != target.GetTeamNumber()) {
-                if (target.TriggerSpellAbsorb(ability)) {
-                    return undefined;
+                if (target.TriggerSpellAbsorb(this)) {
+                    return;
                 }
             }
-            target.AddNewModifier(caster, ability, modifier_track, {
+            target.AddNewModifier(caster, this, modifier_track, {
                 duration: duration * (1 - target.GetStatusResistance())
             });
         }
     }
     IsHiddenWhenStolen(): boolean {
         return false;
+    }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
     }
 }
 @registerModifier()
@@ -846,6 +869,10 @@ export class modifier_imba_track_debuff_mark extends BaseModifier_Plus {
     }
 
     OnIntervalThink(): void {
+        if (!GFuncEntity.IsValid(this.caster)) {
+            this.Destroy();
+            return;
+        }
         this.SetStackCount(this.parent.GetPlayerRoot().PlayerDataComp().GetGold());
         if (this.has_talent_2) {
             AddFOWViewer(this.caster.GetTeamNumber(), this.parent.GetAbsOrigin(), this.talent_2_vision_radius, FrameTime(), false);

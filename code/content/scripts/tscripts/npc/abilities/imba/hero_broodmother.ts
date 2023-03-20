@@ -1,10 +1,10 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { AoiHelper } from "../../../helper/AoiHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
-import { BaseNpc_Plus } from "../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 
@@ -68,6 +68,13 @@ export class imba_broodmother_spawn_spiderlings extends BaseAbility_Plus {
             // damage_flags: this.GetAbilityTargetFlags()
         });
         hTarget.EmitSound("Hero_Broodmother.SpawnSpiderlingsImpact");
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
     }
 }
 @registerModifier()
@@ -283,7 +290,7 @@ export class imba_broodmother_spin_web extends BaseAbility_Plus {
                 oldest_web.ForceKill(false);
             }
         }
-        let web = BaseNpc_Plus.CreateUnitByName("npc_dota_broodmother_web", target_point, caster, false);
+        let web = caster.CreateSummon("npc_dota_broodmother_web", target_point, 60, false);
         web.AddNewModifier(caster, this, modifier_aura_friendly, {});
         web.AddNewModifier(caster, this, modifier_aura_enemy, {});
         web.SetOwner(caster);
@@ -296,6 +303,13 @@ export class imba_broodmother_spin_web extends BaseAbility_Plus {
             }
         }
         caster.EmitSound("Hero_Broodmother.SpinWebCast");
+    }
+
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_most_enemy(this);
     }
 }
 @registerModifier()
@@ -815,6 +829,12 @@ export class imba_broodmother_insatiable_hunger extends BaseAbility_Plus {
         });
         caster.EmitSound("Hero_Broodmother.InsatiableHunger");
     }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_cast(this);
+    }
 }
 @registerModifier()
 export class modifier_imba_broodmother_insatiable_hunger extends BaseModifier_Plus {
@@ -1012,15 +1032,14 @@ export class imba_broodmother_spawn_spiderking extends BaseAbility_Plus {
     }
     OnSpellStart(): void {
         let caster = this.GetCasterPlus();
-        let ability = this;
         let target_point = this.GetCursorPosition();
         let modifier_hatch = "modifier_imba_broodmother_spawn_spiderking_hatch";
-        let cocoon_time = ability.GetSpecialValueFor("cocoon_time");
-        let cocoon = BaseNpc_Plus.CreateUnitByName("npc_dota_broodmother_cocoon", target_point, caster, false);
+        let cocoon_time = this.GetSpecialValueFor("cocoon_time");
+        let cocoon = caster.CreateSummon("npc_dota_broodmother_cocoon", target_point, cocoon_time, false);
         cocoon.SetOwner(caster);
         // cocoon.SetControllableByPlayer(caster.GetPlayerID(), false);
         cocoon.SetUnitOnClearGround();
-        cocoon.AddNewModifier(caster, ability, modifier_hatch, {
+        cocoon.AddNewModifier(caster, this, modifier_hatch, {
             duration: cocoon_time
         });
     }
@@ -1062,7 +1081,7 @@ export class modifier_imba_broodmother_spawn_spiderking_hatch extends BaseModifi
         }
         EmitSoundOn(this.sound, this.parent);
         this.parent.ForceKill(false);
-        let spiderking = BaseNpc_Plus.CreateUnitByName("npc_dota_broodmother_spiderking", this.parent.GetAbsOrigin(), this.caster, false);
+        let spiderking = this.caster.CreateSummon("npc_dota_broodmother_spiderking", this.parent.GetAbsOrigin(), 40, false);
         spiderking.SetOwner(this.caster);
         // spiderking.SetControllableByPlayer(this.caster.GetPlayerID(), false);
         spiderking.SetUnitOnClearGround();

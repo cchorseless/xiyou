@@ -1,9 +1,9 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
-import { BaseNpc_Plus } from "../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 @registerAbility()
@@ -60,6 +60,13 @@ export class imba_chen_penitence extends BaseAbility_Plus {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_chen_remnants_of_penitence") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_chen_remnants_of_penitence")) {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_chen_remnants_of_penitence"), "modifier_special_bonus_imba_chen_remnants_of_penitence", {});
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
     }
 }
 @registerModifier()
@@ -182,6 +189,13 @@ export class imba_chen_divine_favor extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_chen_divine_favor_cd_reduction"), "modifier_special_bonus_imba_chen_divine_favor_cd_reduction", {});
         }
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_friend(this, null, (unit) => { return unit != this.GetCasterPlus() && !unit.HasModifier("modifier_imba_chen_divine_favor") });
+    }
 }
 @registerModifier()
 export class modifier_imba_chen_divine_favor extends BaseModifier_Plus {
@@ -206,6 +220,7 @@ export class modifier_imba_chen_divine_favor extends BaseModifier_Plus {
         4: GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP
     });
     } */
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEAL_AMPLIFY_PERCENTAGE_SOURCE)
     Custom_AllHealAmplify_Percentage() {
         return this.heal_amp;
     }
@@ -369,19 +384,18 @@ export class imba_chen_holy_persuasion extends BaseAbility_Plus {
             this.GetCasterPlus().EmitSound("Hero_Chen.HolyPersuasionCast");
             target.EmitSound("Hero_Chen.HolyPersuasionEnemy");
             target.Purge(true, true, false, false, false);
-            if (string.find(target.GetUnitName(), "guys_")) {
-                let lane_creep_name = target.GetUnitName();
-                let new_lane_creep = BaseNpc_Plus.CreateUnitByName(target.GetUnitName(), target.GetAbsOrigin(), this.GetCasterPlus(), false);
-                new_lane_creep.SetBaseMaxHealth(target.GetMaxHealth());
-                new_lane_creep.SetHealth(target.GetHealth());
-                new_lane_creep.SetBaseDamageMin(target.GetBaseDamageMin());
-                new_lane_creep.SetBaseDamageMax(target.GetBaseDamageMax());
-                new_lane_creep.SetMinimumGoldBounty(target.GetGoldBounty());
-                new_lane_creep.SetMaximumGoldBounty(target.GetGoldBounty());
-                target.AddNoDraw();
-                target.ForceKill(false);
-                target = new_lane_creep;
-            }
+            // if (string.find(target.GetUnitName(), "guys_")) {
+            let new_lane_creep = this.GetCasterPlus().CreateSummon(target.GetUnitName(), target.GetAbsOrigin(), 60, false);
+            new_lane_creep.SetBaseMaxHealth(target.GetMaxHealth());
+            new_lane_creep.SetHealth(target.GetHealth());
+            new_lane_creep.SetBaseDamageMin(target.GetBaseDamageMin());
+            new_lane_creep.SetBaseDamageMax(target.GetBaseDamageMax());
+            new_lane_creep.SetMinimumGoldBounty(target.GetGoldBounty());
+            new_lane_creep.SetMaximumGoldBounty(target.GetGoldBounty());
+            target.AddNoDraw();
+            target.ForceKill(false);
+            target = new_lane_creep;
+            // }
             let particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_chen/chen_holy_persuasion_a.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, target);
             ParticleManager.SetParticleControl(particle, 1, target.GetAbsOrigin());
             ParticleManager.ReleaseParticleIndex(particle);
@@ -465,34 +479,34 @@ export class imba_chen_holy_persuasion extends BaseAbility_Plus {
                     immortalized_creeps_modifiers[0].Destroy();
                 }
             }
-            let target_xp = target.GetDeathXP();
-            let target_gold_min = target.GetMinimumGoldBounty();
-            let target_gold_max = target.GetMaximumGoldBounty();
-            let commonwealth_xp = target_xp * this.GetSpecialValueFor("commonwealth_pct") * 0.01;
-            let commonwealth_gold = RandomInt(target_gold_min, target_gold_max) * this.GetSpecialValueFor("commonwealth_pct") * 0.01;
-            let commonwealth_xp_self = commonwealth_xp * this.GetSpecialValueFor("commonwealth_caster_pct") * 0.01;
-            let commonwealth_gold_self = commonwealth_gold * this.GetSpecialValueFor("commonwealth_caster_pct") * 0.01;
-            let commonwealth_xp_others_total = commonwealth_xp - commonwealth_xp_self;
-            let commonwealth_gold_others_total = commonwealth_gold - commonwealth_gold_self;
-            target.SetDeathXP(math.max(target_xp - commonwealth_xp, 0));
-            target.SetMinimumGoldBounty(math.max(target_gold_min - commonwealth_gold, 0));
-            target.SetMaximumGoldBounty(math.max(target_gold_max - commonwealth_gold, 0));
+            // let target_xp = target.GetDeathXP();
+            // let target_gold_min = target.GetMinimumGoldBounty();
+            // let target_gold_max = target.GetMaximumGoldBounty();
+            // let commonwealth_xp = target_xp * this.GetSpecialValueFor("commonwealth_pct") * 0.01;
+            // let commonwealth_gold = RandomInt(target_gold_min, target_gold_max) * this.GetSpecialValueFor("commonwealth_pct") * 0.01;
+            // let commonwealth_xp_self = commonwealth_xp * this.GetSpecialValueFor("commonwealth_caster_pct") * 0.01;
+            // let commonwealth_gold_self = commonwealth_gold * this.GetSpecialValueFor("commonwealth_caster_pct") * 0.01;
+            // let commonwealth_xp_others_total = commonwealth_xp - commonwealth_xp_self;
+            // let commonwealth_gold_others_total = commonwealth_gold - commonwealth_gold_self;
+            // target.SetDeathXP(math.max(target_xp - commonwealth_xp, 0));
+            // target.SetMinimumGoldBounty(math.max(target_gold_min - commonwealth_gold, 0));
+            // target.SetMaximumGoldBounty(math.max(target_gold_max - commonwealth_gold, 0));
             // this.GetCasterPlus().AddExperience(commonwealth_xp_self, EDOTA_ModifyXP_Reason.DOTA_ModifyXP_CreepKill, true, true);
             // this.GetCasterPlus().ModifyGold(commonwealth_gold_self, false, EDOTA_ModifyGold_Reason.DOTA_ModifyGold_CreepKill);
-            SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_XP, this.GetCasterPlus(), commonwealth_xp_self, undefined);
-            SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_GOLD, this.GetCasterPlus(), commonwealth_gold_self, undefined);
-            let ally_num = PlayerResource.GetPlayerCountForTeam(this.GetCasterPlus().GetTeamNumber());
-            let commonwealth_xp_others = math.max(commonwealth_xp_others_total / math.max(ally_num - 1, 1), 0);
-            let commonwealth_gold_others = math.max(commonwealth_gold_others_total / math.max(ally_num - 1, 1), 0);
-            for (let ally = 0; ally < ally_num; ally++) {
-                // let hero = PlayerResource.GetPlayer(PlayerResource.GetNthPlayerIDOnTeam(this.GetCasterPlus().GetTeamNumber(), ally)).GetAssignedHero();
-                // if (hero != this.GetCasterPlus()) {
-                // hero.AddExperience(commonwealth_xp_others, EDOTA_ModifyXP_Reason.DOTA_ModifyXP_CreepKill, true, true);
-                // hero.ModifyGold(commonwealth_gold_others, false, EDOTA_ModifyGold_Reason.DOTA_ModifyGold_CreepKill);
-                SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_XP, this.GetCasterPlus(), commonwealth_xp_self, undefined);
-                SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_GOLD, this.GetCasterPlus(), commonwealth_gold_self, undefined);
-                // }
-            }
+            // SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_XP, this.GetCasterPlus(), commonwealth_xp_self, undefined);
+            // SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_GOLD, this.GetCasterPlus(), commonwealth_gold_self, undefined);
+            // let ally_num = PlayerResource.GetPlayerCountForTeam(this.GetCasterPlus().GetTeamNumber());
+            // let commonwealth_xp_others = math.max(commonwealth_xp_others_total / math.max(ally_num - 1, 1), 0);
+            // let commonwealth_gold_others = math.max(commonwealth_gold_others_total / math.max(ally_num - 1, 1), 0);
+            // for (let ally = 0; ally < ally_num; ally++) {
+            // let hero = PlayerResource.GetPlayer(PlayerResource.GetNthPlayerIDOnTeam(this.GetCasterPlus().GetTeamNumber(), ally)).GetAssignedHero();
+            // if (hero != this.GetCasterPlus()) {
+            // hero.AddExperience(commonwealth_xp_others, EDOTA_ModifyXP_Reason.DOTA_ModifyXP_CreepKill, true, true);
+            // hero.ModifyGold(commonwealth_gold_others, false, EDOTA_ModifyGold_Reason.DOTA_ModifyGold_CreepKill);
+            // SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_XP, this.GetCasterPlus(), commonwealth_xp_self, undefined);
+            // SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_GOLD, this.GetCasterPlus(), commonwealth_gold_self, undefined);
+            // }
+            // }
         } else {
             if (target == this.GetCasterPlus()) {
                 let owned_units = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_ANY_ORDER, false) as IBaseNpc_Plus[];
@@ -509,6 +523,13 @@ export class imba_chen_holy_persuasion extends BaseAbility_Plus {
                 });
             }
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
     }
 }
 @registerModifier()
@@ -903,6 +924,16 @@ export class imba_chen_test_of_faith extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_chen_test_of_faith_cd_reduction"), "modifier_special_bonus_imba_chen_test_of_faith_cd_reduction", {});
         }
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        if (RollPercentage(50)) {
+            return AI_ability.TARGET_if_enemy(this);
+        }
+        return AI_ability.TARGET_if_friend(this);
+    }
 }
 @registerAbility()
 export class imba_chen_hand_of_god extends BaseAbility_Plus {
@@ -913,7 +944,7 @@ export class imba_chen_hand_of_god extends BaseAbility_Plus {
         if (!IsServer()) {
             return;
         }
-        let allies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_ANY_ORDER, false) as IBaseNpc_Plus[];
+        let allies = this.GetCasterPlus().GetPlayerRoot().BattleUnitManagerComp().GetAllBattleUnitAliveNpc(this.GetCasterPlus().GetTeam())
         let voiceline = undefined;
         if (this.GetCasterPlus().GetUnitName().includes("chen")) {
             voiceline = "chen_chen_ability_handgod_0" + RandomInt(1, 3);
@@ -952,6 +983,14 @@ export class imba_chen_hand_of_god extends BaseAbility_Plus {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_chen_hand_of_god_cooldown") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_chen_hand_of_god_cooldown")) {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_chen_hand_of_god_cooldown"), "modifier_special_bonus_imba_chen_hand_of_god_cooldown", {});
         }
+    }
+
+    GetManaCost(level: number): number {
+        return 100;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_cast(this);
     }
 }
 @registerModifier()

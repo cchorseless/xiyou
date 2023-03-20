@@ -32,10 +32,12 @@ export class modifier_generic_fear extends BaseModifier_Plus {
         return false
     }
 
-    public oldPos: any;
+    public oldPos: Vector;
     BeCreated(p_0: any,): void {
-        this.OnIntervalThink();
-        this.StartIntervalThink(0.5);
+        if (IsServer()) {
+            this.OnIntervalThink();
+            this.StartIntervalThink(0.5);
+        }
     }
     OnIntervalThink() {
         let caster = this.GetCasterPlus();

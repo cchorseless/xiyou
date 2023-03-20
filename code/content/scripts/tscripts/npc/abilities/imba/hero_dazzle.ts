@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { AoiHelper } from "../../../helper/AoiHelper";
 import { ResHelper } from "../../../helper/ResHelper";
@@ -40,6 +41,13 @@ export class imba_dazzle_poison_touch extends BaseAbility_Plus {
         target.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_dazzle_poison_touch_setin", {
             duration: this.GetSpecialValueFor("set_in_time") * (1 - target.GetStatusResistance())
         });
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
     }
 }
 @registerModifier()
@@ -98,9 +106,7 @@ export class modifier_imba_dazzle_poison_touch_setin extends BaseModifier_Plus {
             let remaining = this.GetRemainingTime();
             if (remaining <= 1) {
                 let ability = this.GetAbilityPlus();
-                this.GetParentPlus().AddNewModifier(ability.GetCaster(), ability, "modifier_generic_stunned", {
-                    duration: 1 * (1 - this.GetParentPlus().GetStatusResistance())
-                });
+                this.GetParentPlus().ApplyStunned(ability, ability.GetCaster(), 1 * (1 - this.GetParentPlus().GetStatusResistance()));
                 this.StartIntervalThink(-1);
             }
         }
@@ -324,6 +330,13 @@ export class imba_dazzle_poison_touch_707 extends BaseAbility_Plus {
             });
         }
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
+    }
 }
 @registerModifier()
 export class modifier_imba_dazzle_poison_touch_707 extends BaseModifier_Plus {
@@ -410,9 +423,9 @@ export class imba_dazzle_shallow_grave extends BaseAbility_Plus {
     GetCastRange(p_0: Vector, p_1: CDOTA_BaseNPC | undefined,): number {
         return this.GetSpecialValueFor("cast_range");
     }
-    GetManaCost(p_0: number,): number {
-        return this.GetSpecialValueFor("mana_cost");
-    }
+    // GetManaCost(p_0: number,): number {
+    //     return this.GetSpecialValueFor("mana_cost");
+    // }
     GetCastAnimation(): GameActivity_t {
         return GameActivity_t.ACT_DOTA_SHALLOW_GRAVE;
     }
@@ -446,6 +459,13 @@ export class imba_dazzle_shallow_grave extends BaseAbility_Plus {
         if (!caster.HasAbility("imba_pugna_nether_ward_aura") && !caster.IsIllusion()) {
             return "modifier_imba_dazzle_nothl_protection";
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_friend(this, null, (unit) => { return unit.GetHealthLosePect() > 80 });
     }
 }
 @registerModifier()
@@ -484,8 +504,9 @@ export class modifier_imba_dazzle_shallow_grave extends BaseModifier_Plus {
             this.shallowDamageInstances = 0;
             this.shallow_grave_particle = ResHelper.CreateParticleEx("particles/econ/items/dazzle/dazzle_dark_light_weapon/dazzle_dark_shallow_grave.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetParentPlus());
             this.gravely = true;
+            this.targetsHit = [];
             if (params.bGravely) {
-                this.gravely = params.bGravely;
+                this.gravely = GToBoolean(params.bGravely);
             }
         }
     }
@@ -512,7 +533,7 @@ export class modifier_imba_dazzle_shallow_grave extends BaseModifier_Plus {
             }
         }
     }
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
         if (IsServer()) {
             let parent = this.GetParentPlus();
@@ -565,7 +586,7 @@ export class modifier_imba_dazzle_shallow_grave extends BaseModifier_Plus {
             if (hero.GetHealth() < hero.GetMaxHealth() && !this.targetsHit.includes(hero.entindex())) {
                 this.targetsHit.push(hero.entindex());
                 newTarget = hero;
-                return;
+                break;
             }
         }
         if (!newTarget) {
@@ -573,7 +594,7 @@ export class modifier_imba_dazzle_shallow_grave extends BaseModifier_Plus {
                 if (!this.targetsHit.includes(hero.entindex())) {
                     this.targetsHit.push(hero.entindex());
                     newTarget = hero;
-                    return;
+                    break;
                 }
             }
         }
@@ -582,7 +603,7 @@ export class modifier_imba_dazzle_shallow_grave extends BaseModifier_Plus {
                 if (creep.GetHealth() < creep.GetMaxHealth() && !this.targetsHit.includes(creep.entindex())) {
                     this.targetsHit.push(creep.entindex());
                     newTarget = creep;
-                    return;
+                    break;
                 }
             }
         }
@@ -591,7 +612,7 @@ export class modifier_imba_dazzle_shallow_grave extends BaseModifier_Plus {
                 if (!this.targetsHit.includes(creep.entindex())) {
                     this.targetsHit.push(creep.entindex());
                     newTarget = creep;
-                    return;
+                    break;
                 }
             }
         }
@@ -661,7 +682,7 @@ export class modifier_imba_dazzle_nothl_protection extends BaseModifier_Plus {
             this.StartIntervalThink(1);
         }
     }
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
         if (IsServer()) {
             if (this.GetStackCount() < 1) {
@@ -776,7 +797,7 @@ export class modifier_imba_dazzle_nothl_protection extends BaseModifier_Plus {
             if (hero.GetHealth() < hero.GetMaxHealth() && !this.targetsHit.includes(hero.entindex())) {
                 this.targetsHit.push(hero.entindex())
                 newTarget = hero;
-                return;
+                break;
             }
         }
         if (!newTarget) {
@@ -784,7 +805,7 @@ export class modifier_imba_dazzle_nothl_protection extends BaseModifier_Plus {
                 if (!this.targetsHit.includes(hero.entindex())) {
                     this.targetsHit.push(hero.entindex())
                     newTarget = hero;
-                    return;
+                    break;
                 }
             }
         }
@@ -793,7 +814,7 @@ export class modifier_imba_dazzle_nothl_protection extends BaseModifier_Plus {
                 if (creep.GetHealth() < creep.GetMaxHealth() && !this.targetsHit.includes(creep.entindex())) {
                     this.targetsHit.push(creep.entindex())
                     newTarget = creep;
-                    return;
+                    break;
                 }
             }
         }
@@ -802,7 +823,7 @@ export class modifier_imba_dazzle_nothl_protection extends BaseModifier_Plus {
                 if (!this.targetsHit.includes(creep.entindex())) {
                     this.targetsHit.push(creep.entindex())
                     newTarget = creep;
-                    return;
+                    break;
                 }
             }
         }
@@ -956,6 +977,8 @@ export class modifier_imba_dazzle_nothl_protection_aura_talent extends BaseModif
             this.shallowDamage = 0;
             this.shallowDamageInstances = 0;
             this.triggered = false;
+            this.targetsHit = [];
+
         }
     }
     BeDestroy(): void {
@@ -973,7 +996,6 @@ export class modifier_imba_dazzle_nothl_protection_aura_talent extends BaseModif
                 }
                 if (caster.HasTalent("special_bonus_imba_dazzle_3")) {
                     this.shallow_wave_damage_pct = caster.GetTalentValue("special_bonus_imba_dazzle_3", "shallow_wave_damage_pct");
-                    this.targetsHit = []
                     this.targetsHit.push(parent.entindex());
                     EmitSoundOn("Hero_Dazzle.Shadow_Wave", this.GetCasterPlus());
                     this.ShadowWave(ability, caster, parent, this.shallowDamage / this.shallow_wave_damage_pct);
@@ -981,7 +1003,7 @@ export class modifier_imba_dazzle_nothl_protection_aura_talent extends BaseModif
             }
         }
     }
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
         if (IsServer()) {
             let parent = this.GetParentPlus();
@@ -1046,7 +1068,7 @@ export class modifier_imba_dazzle_nothl_protection_aura_talent extends BaseModif
             if (hero.GetHealth() < hero.GetMaxHealth() && !this.targetsHit.includes(hero.entindex())) {
                 this.targetsHit.push(hero.entindex());
                 newTarget = hero;
-                return;
+                break
             }
         }
         if (!newTarget) {
@@ -1054,7 +1076,7 @@ export class modifier_imba_dazzle_nothl_protection_aura_talent extends BaseModif
                 if (!this.targetsHit.includes(hero.entindex())) {
                     this.targetsHit.push(hero.entindex());
                     newTarget = hero;
-                    return;
+                    break;
                 }
             }
         }
@@ -1063,7 +1085,7 @@ export class modifier_imba_dazzle_nothl_protection_aura_talent extends BaseModif
                 if (creep.GetHealth() < creep.GetMaxHealth() && !this.targetsHit.includes(creep.entindex())) {
                     this.targetsHit.push(creep.entindex());
                     newTarget = creep;
-                    return;
+                    break;
                 }
             }
         }
@@ -1072,7 +1094,7 @@ export class modifier_imba_dazzle_nothl_protection_aura_talent extends BaseModif
                 if (!this.targetsHit.includes(creep.entindex())) {
                     this.targetsHit.push(creep.entindex());
                     newTarget = creep;
-                    return;
+                    break;
                 }
             }
         }
@@ -1297,6 +1319,13 @@ export class imba_dazzle_shadow_wave extends BaseAbility_Plus {
     }
     SetDelayedWaveData(location: number, data: any) {
         this.talentWaveDelayed[location] = data;
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_friend(this, null, (unit) => { return unit.GetHealthLosePect() > 10 });
     }
 }
 @registerModifier()

@@ -1,7 +1,7 @@
 import { AoiHelper } from "../helper/AoiHelper";
 
 export module AI_ability {
-    export function NO_TARGET_cast(ability: IBaseAbility_Plus) {
+    export function NO_TARGET_cast(ability: IBaseAbility_Plus): boolean {
         let caster = ability.GetCasterPlus();
         ExecuteOrderFromTable({
             UnitIndex: caster.entindex(),
@@ -205,7 +205,7 @@ export module AI_ability {
             return false;
         }
         let teamFilter = DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY
-        let typeFilter = DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC
+        let typeFilter = DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC
         let flagFilter = DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE
         let order = FindOrder.FIND_CLOSEST
         let targets = AoiHelper.FindEntityInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), range, null, teamFilter, typeFilter, flagFilter, order)

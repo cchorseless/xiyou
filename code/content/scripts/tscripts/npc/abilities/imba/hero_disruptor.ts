@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -6,7 +7,7 @@ import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_P
 import { BaseModifierMotionHorizontal, registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 
 function IncrementStormbearerStacks(caster: IBaseNpc_Plus, stacks: number = 1) {
-    let modifier_stormbearer = "modifier_imba_stormbearer";
+    let modifier_stormbearer = "modifier_imba_disruptor_stormbearer";
     if (caster.HasModifier(modifier_stormbearer) && !caster.PassivesDisabled()) {
         let modifier_stormbearer_handler = caster.FindModifierByName(modifier_stormbearer);
         if (modifier_stormbearer_handler) {
@@ -19,7 +20,7 @@ function IncrementStormbearerStacks(caster: IBaseNpc_Plus, stacks: number = 1) {
 @registerAbility()
 export class imba_disruptor_stormbearer extends BaseAbility_Plus {
     GetIntrinsicModifierName(): string {
-        return "modifier_imba_stormbearer";
+        return "modifier_imba_disruptor_stormbearer";
     }
     IsInnateAbility() {
         return true;
@@ -29,7 +30,7 @@ export class imba_disruptor_stormbearer extends BaseAbility_Plus {
     }
 }
 @registerModifier()
-export class modifier_imba_stormbearer extends BaseModifier_Plus {
+export class modifier_imba_disruptor_stormbearer extends BaseModifier_Plus {
     public caster: IBaseNpc_Plus;
     public ability: IBaseAbility_Plus;
     public ms_per_stack: number;
@@ -118,6 +119,13 @@ export class imba_disruptor_thunder_strike extends BaseAbility_Plus {
                 duration: duration
             });
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
     }
 }
 @registerModifier()
@@ -265,7 +273,7 @@ export class modifier_imba_thunder_strike_debuff extends BaseModifier_Plus {
         let sound_impact = "Hero_Disruptor.ThunderStrike.Target";
         let strike_particle = "particles/units/heroes/hero_disruptor/disruptor_thunder_strike_bolt.vpcf";
         let aoe_particle = "particles/units/heroes/hero_disruptor/disruptor_thunder_strike_aoe.vpcf";
-        let stormbearer_buff = "modifier_imba_stormbearer";
+        let stormbearer_buff = "modifier_imba_disruptor_stormbearer";
         let scepter = this.caster.HasScepter();
         EmitSoundOn(sound_impact, this.target);
         if (this.caster.HasTalent("special_bonus_imba_disruptor_3")) {
@@ -409,6 +417,13 @@ export class imba_disruptor_glimpse extends BaseAbility_Plus {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_disruptor_9") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_disruptor_9")) {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_special_bonus_imba_disruptor_9", {});
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
     }
 }
 @registerModifier()
@@ -704,7 +719,7 @@ export class modifier_imba_glimpse_storm_debuff extends BaseModifier_Plus {
         this.ability = this.GetAbilityPlus();
         this.storm_damage = this.ability.GetSpecialValueFor("storm_damage");
         this.storm_interval = this.ability.GetSpecialValueFor("storm_interval");
-        this.stormbearer_buff = "modifier_imba_stormbearer";
+        this.stormbearer_buff = "modifier_imba_disruptor_stormbearer";
         this.StartIntervalThink(this.storm_interval);
     }
     IsDebuff(): boolean {
@@ -799,6 +814,13 @@ export class imba_disruptor_kinetic_field extends BaseAbility_Plus {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_disruptor_kinetic_field_true_sight") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_disruptor_kinetic_field_true_sight")) {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_disruptor_kinetic_field_true_sight"), "modifier_special_bonus_imba_disruptor_kinetic_field_true_sight", {});
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.POSITION_most_enemy(this);
     }
 }
 @registerModifier()
@@ -1216,6 +1238,13 @@ export class imba_disruptor_static_storm extends BaseAbility_Plus {
             }, target_point, caster.GetTeamNumber(), false);
         }
     }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.POSITION_most_enemy(this);
+    }
 }
 @registerModifier()
 export class modifier_imba_static_storm extends BaseModifier_Plus {
@@ -1258,7 +1287,7 @@ export class modifier_imba_static_storm extends BaseModifier_Plus {
             this.radius = this.ability.GetSpecialValueFor("radius");
             this.interval = this.ability.GetSpecialValueFor("interval");
             this.sound_cast = "Hero_Disruptor.StaticStorm";
-            this.stormbearer_buff = "modifier_imba_stormbearer";
+            this.stormbearer_buff = "modifier_imba_disruptor_stormbearer";
             let scepter = this.caster.HasScepter();
             this.sound_end = "Hero_Disruptor.StaticStorm.End";
             this.debuff_aura = "modifier_imba_static_storm_debuff_aura";

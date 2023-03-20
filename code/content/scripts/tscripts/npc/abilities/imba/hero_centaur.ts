@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -8,14 +9,14 @@ import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_
 @registerAbility()
 export class imba_centaur_thick_hide extends BaseAbility_Plus {
     GetIntrinsicModifierName(): string {
-        return "modifier_imba_thick_hide";
+        return "modifier_imba_centaur_thick_hide";
     }
     IsInnateAbility() {
         return true;
     }
 }
 @registerModifier()
-export class modifier_imba_thick_hide extends BaseModifier_Plus {
+export class modifier_imba_centaur_thick_hide extends BaseModifier_Plus {
     IsHidden(): boolean {
         return true;
     }
@@ -61,9 +62,7 @@ export class imba_centaur_hoof_stomp extends BaseAbility_Plus {
         for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false))) {
             this.enemy_entindex_table[enemy.entindex() + ""] = true;
             if (!enemy.IsMagicImmune()) {
-                enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_generic_stunned", {
-                    duration: this.GetSpecialValueFor("stun_duration") * (1 - enemy.GetStatusResistance())
-                });
+                enemy.ApplyStunned(this, this.GetCasterPlus(), this.GetSpecialValueFor("stun_duration") * (1 - enemy.GetStatusResistance()));
                 ApplyDamage({
                     victim: enemy,
                     damage: this.GetSpecialValueFor("stomp_damage"),
@@ -83,6 +82,14 @@ export class imba_centaur_hoof_stomp extends BaseAbility_Plus {
         let debuff_thinker = BaseModifier_Plus.CreateBuffThinker(this.GetCasterPlus(), this, "modifier_imba_hoof_stomp_arena_thinker_debuff", {
             duration: this.GetSpecialValueFor("pit_duration")
         }, this.GetCasterPlus().GetAbsOrigin(), this.GetCasterPlus().GetTeamNumber(), false);
+    }
+
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_if_enemy(this);
     }
 }
 @registerModifier()
@@ -203,7 +210,7 @@ export class modifier_imba_hoof_stomp_arena_buff extends BaseModifier_Plus {
 export class modifier_imba_hoof_stomp_arena_debuff extends BaseModifier_Plus {
     public radius: number;
     public maximum_distance: number;
-    public position: any;
+    public position: Vector;
     GetAttributes(): DOTAModifierAttribute_t {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE;
     }
@@ -216,8 +223,10 @@ export class modifier_imba_hoof_stomp_arena_debuff extends BaseModifier_Plus {
             this.maximum_distance = 400;
         }
         this.position = this.GetParentPlus().GetAbsOrigin();
-        this.OnIntervalThink();
-        this.StartIntervalThink(FrameTime());
+        if (IsServer()) {
+            this.OnIntervalThink();
+            this.StartIntervalThink(FrameTime());
+        }
     }
     OnIntervalThink(): void {
         if (this.GetAuraOwner()) {
@@ -324,6 +333,14 @@ export class imba_centaur_double_edge extends BaseAbility_Plus {
             });
         }
     }
+
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
+    }
 }
 @registerAbility()
 export class imba_centaur_return extends BaseAbility_Plus {
@@ -338,13 +355,21 @@ export class imba_centaur_return extends BaseAbility_Plus {
     }
     OnSpellStart(): void {
         if (IsServer()) {
-            this.GetCasterPlus().AddNewModifier(
-                this.GetCasterPlus(), this, "modifier_imba_return_bonus_damage", {
+            let buff = this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_return_bonus_damage", {
                 duration: this.GetSpecialValueFor("duration")
-            }).SetStackCount(this.GetCasterPlus().findBuff<modifier_imba_return_passive>("modifier_imba_return_passive").GetStackCount());
+            });
+            buff.SetStackCount(this.GetCasterPlus().findBuff<modifier_imba_return_passive>("modifier_imba_return_passive").GetStackCount());
             this.GetCasterPlus().findBuff<modifier_imba_return_passive>("modifier_imba_return_passive").SetStackCount(0);
             this.GetCasterPlus().EmitSound("Hero_Centaur.Retaliate.Cast");
         }
+    }
+
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_cast(this);
     }
 }
 @registerModifier()
@@ -531,6 +556,7 @@ export class modifier_imba_return_bonus_damage extends BaseModifier_Plus {
     }
     BeCreated(p_0: any,): void {
         this.bonus_damage = this.GetSpecialValueFor("bonus_damage");
+        if (!IsServer()) { return }
         this.attach_attack1 = this.GetParentPlus().ScriptLookupAttachment("attach_attack1")
     }
     /** DeclareFunctions():modifierfunction[] {
@@ -551,24 +577,24 @@ export class imba_centaur_stampede extends BaseAbility_Plus {
     OnSpellStart(): void {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
-            let ability = this;
             let sound_cast = "Hero_Centaur.Stampede.Cast";
             let cast_animation = GameActivity_t.ACT_DOTA_CENTAUR_STAMPEDE;
             let modifier_haste = "modifier_imba_stampede_haste";
-            let duration = ability.GetSpecialValueFor("duration");
+            let duration = this.GetSpecialValueFor("duration");
             EmitSoundOn(sound_cast, caster);
             caster.StartGesture(cast_animation);
             let bitch_be_gone = 15;
             if (RollPercentage(bitch_be_gone)) {
                 EmitSoundOn("Imba.CentaurMoveBitch", caster);
             }
-            let enemies = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
+            let enemyteam = caster.GetTeam() == DOTATeam_t.DOTA_TEAM_GOODGUYS ? DOTATeam_t.DOTA_TEAM_BADGUYS : DOTATeam_t.DOTA_TEAM_GOODGUYS;
+            let enemies = caster.GetPlayerRoot().BattleUnitManagerComp().GetAllBattleUnitAliveNpc(enemyteam);
             for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 enemy.TempData().trampled_in_stampede = undefined;
             }
-            let allies = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_ANY_ORDER, false);
+            let allies = caster.GetPlayerRoot().BattleUnitManagerComp().GetAllBattleUnitAliveNpc(caster.GetTeam());
             for (const [_, ally] of GameFunc.iPair(allies)) {
-                ally.AddNewModifier(caster, ability, modifier_haste, {
+                ally.AddNewModifier(caster, this, modifier_haste, {
                     duration: duration
                 });
                 if (this.GetCasterPlus().HasScepter()) {
@@ -578,6 +604,13 @@ export class imba_centaur_stampede extends BaseAbility_Plus {
                 }
             }
         }
+    }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_cast(this);
     }
 }
 @registerModifier()
@@ -639,9 +672,7 @@ export class modifier_imba_stampede_haste extends BaseModifier_Plus {
                         ability: this.ability
                     }
                     ApplyDamage(damageTable);
-                    enemy.AddNewModifier(this.caster, this.ability, "modifier_generic_stunned", {
-                        duration: this.stun_duration * (1 - enemy.GetStatusResistance())
-                    });
+                    enemy.ApplyStunned(this.ability, this.caster, this.stun_duration * (1 - enemy.GetStatusResistance()));
                     enemy.AddNewModifier(this.caster, this.ability, this.modifier_trample_slow, {
                         duration: (this.stun_duration + this.slow_duration) * (1 - enemy.GetStatusResistance())
                     });

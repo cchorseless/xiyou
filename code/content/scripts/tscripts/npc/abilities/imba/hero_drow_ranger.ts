@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 import { ResHelper } from "../../../helper/ResHelper";
@@ -29,6 +30,13 @@ export class imba_drow_ranger_frost_arrows extends BaseAbility_Plus {
             caster.MoveToTargetToAttack(target);
             ability.RefundManaCost();
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
     }
 }
 @registerModifier()
@@ -431,6 +439,13 @@ export class imba_drow_ranger_frost_arrows_723 extends BaseOrbAbility_Plus {
     OnOrbRecordDestroy() {
         this.GetCasterPlus().RemoveModifierByName("modifier_imba_drow_ranger_frost_arrows_723_bonus_damage");
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
+    }
 }
 @registerModifier()
 export class modifier_imba_drow_ranger_frost_arrows_723_bonus_damage extends BaseModifier_Plus {
@@ -576,7 +591,6 @@ export class imba_drow_ranger_gust extends BaseAbility_Plus {
     }
     OnSpellStart(): void {
         let caster = this.GetCasterPlus();
-        let ability = this;
         let target = this.GetCursorTarget();
         let target_point = this.GetCursorPosition();
         if (target_point == this.GetCasterPlus().GetAbsOrigin()) {
@@ -585,20 +599,18 @@ export class imba_drow_ranger_gust extends BaseAbility_Plus {
         let modifier_movement = "modifier_imba_gust_movement";
         let sound_cast = "Hero_DrowRanger.Silence";
         let particle_gust = "particles/units/heroes/hero_drow/drow_silence_wave.vpcf";
-        let wave_speed = ability.GetSpecialValueFor("wave_speed");
-        let wave_distance = ability.GetSpecialValueFor("wave_distance") + caster.GetTalentValue("special_bonus_imba_drow_ranger_9");
-        let wave_width = ability.GetSpecialValueFor("wave_width");
-        let jump_speed = ability.GetSpecialValueFor("jump_speed");
-        let leap_range = ability.GetSpecialValueFor("leap_range");
+        let wave_speed = this.GetSpecialValueFor("wave_speed");
+        let wave_distance = this.GetSpecialValueFor("wave_distance") + caster.GetTalentValue("special_bonus_imba_drow_ranger_9");
+        let wave_width = this.GetSpecialValueFor("wave_width");
         EmitSoundOn(sound_cast, caster);
         if (caster.HasTalent("special_bonus_imba_drow_ranger_3")) {
             let buff_duration = caster.GetTalentValue("special_bonus_imba_drow_ranger_3", "buff_duration");
-            caster.AddNewModifier(caster, ability, "modifier_imba_gust_buff", {
+            caster.AddNewModifier(caster, this, "modifier_imba_gust_buff", {
                 duration: buff_duration
             });
         }
         if (caster == target && caster.HasTalent("special_bonus_imba_drow_ranger_1")) {
-            let modifier_movement_handler = caster.AddNewModifier(caster, ability, modifier_movement, {}) as modifier_imba_gust_movement;
+            let modifier_movement_handler = caster.AddNewModifier(caster, this, modifier_movement, {}) as modifier_imba_gust_movement;
             if (modifier_movement_handler) {
                 modifier_movement_handler.target_point = caster.GetAbsOrigin() + (caster.GetForwardVector() * wave_distance) as Vector;
             }
@@ -608,7 +620,7 @@ export class imba_drow_ranger_gust extends BaseAbility_Plus {
         }
         this.AddTimer(FrameTime(), () => {
             let gust_projectile: CreateLinearProjectileOptions = {
-                Ability: ability,
+                Ability: this,
                 EffectName: particle_gust,
                 vSpawnOrigin: caster.GetAbsOrigin(),
                 fDistance: wave_distance,
@@ -691,6 +703,13 @@ export class imba_drow_ranger_gust extends BaseAbility_Plus {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_drow_ranger_9") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_drow_ranger_9")) {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_drow_ranger_9"), "modifier_special_bonus_imba_drow_ranger_9", {});
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this, 1000);
     }
 }
 @registerModifier()
@@ -1080,6 +1099,13 @@ export class imba_drow_ranger_multishot extends BaseAbility_Plus {
             this.targets_hit[ExtraData.volley_index][target.entindex() + ""] = true;
             return true;
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this, 1000);
     }
 }
 @registerModifier()

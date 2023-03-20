@@ -158,6 +158,8 @@ export module GameFunc {
 
 export module FuncEntity {
 
+
+
     export function Custom_HasAnyAvailableInventorySpace(unit: IBaseNpc_Plus) {
         if (unit.IsHero()) {
             return unit.HasAnyAvailableInventorySpace();
@@ -487,13 +489,16 @@ export module FuncEntity {
                 for (let m of allm) {
                     m.Destroy();
                 }
-                let lenability = unit.GetAbilityCount()
-                for (let i = 0; i < lenability; i++) {
-                    unit.GetAbilityByIndex(i) && SafeDestroyAbility(unit.GetAbilityByIndex(i) as any);
+                if (!unit.IsThinker()) {
+                    let lenability = unit.GetAbilityCount()
+                    for (let i = 0; i < lenability; i++) {
+                        unit.GetAbilityByIndex(i) && SafeDestroyAbility(unit.GetAbilityByIndex(i) as any);
+                    }
+                    for (let i = 0; i < DOTAScriptInventorySlot_t.DOTA_ITEM_SLOT_9; i++) {
+                        unit.GetItemInSlot(i) && SafeDestroyItem(unit.GetItemInSlot(i) as any);
+                    }
                 }
-                for (let i = 0; i < DOTAScriptInventorySlot_t.DOTA_ITEM_SLOT_9; i++) {
-                    unit.GetItemInSlot(i) && SafeDestroyItem(unit.GetItemInSlot(i) as any);
-                }
+
             }
             if (unit.OnDestroy) {
                 unit.OnDestroy();

@@ -441,6 +441,8 @@
 "npc_dota_furion_treant_4"       "111"
 "npc_dota_furion_treant_large"       "111"
 "npc_dota_broodmother_spiderling"       "111"
+"npc_dota_broodmother_cocoon"       "111"
+"npc_dota_broodmother_spiderking"       "111"
 "npc_dota_broodmother_spiderite"       "111"
 "npc_dota_dark_troll_warlord_skeleton_warrior"       "111"
 "npc_dota_enraged_wildkin_tornado"       "111"

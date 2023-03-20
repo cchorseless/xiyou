@@ -1,12 +1,12 @@
-import {GameFunc} from "../../../GameFunc";
-import {EventHelper} from "../../../helper/EventHelper";
-import {ProjectileHelper} from "../../../helper/ProjectileHelper";
-import {ResHelper} from "../../../helper/ResHelper";
-import {BaseAbility_Plus} from "../../entityPlus/BaseAbility_Plus";
-import {BaseModifier_Plus, registerProp} from "../../entityPlus/BaseModifier_Plus";
-import {registerAbility, registerModifier} from "../../entityPlus/Base_Plus";
-import {Enum_MODIFIER_EVENT, registerEvent} from "../../propertystat/modifier_event";
-import {AI_ability} from "../../../ai/AI_ability";
+import { AI_ability } from "../../../ai/AI_ability";
+import { GameFunc } from "../../../GameFunc";
+import { EventHelper } from "../../../helper/EventHelper";
+import { ProjectileHelper } from "../../../helper/ProjectileHelper";
+import { ResHelper } from "../../../helper/ResHelper";
+import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
+import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
+import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 
 @registerAbility()
 export class imba_abyssal_underlord_firestorm extends BaseAbility_Plus {
@@ -1194,7 +1194,7 @@ export class imba_abyssal_underlord_dark_rift extends BaseAbility_Plus {
         let target = this.GetCursorTarget();
         let point = this.GetCursorPosition();
         if (!target) {
-            let targets = FindUnitsInRadius(caster.GetTeamNumber(), point, undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BUILDING + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FindOrder.FIND_CLOSEST, false);
+            let targets = caster.GetPlayerRoot().BattleUnitManagerComp().GetAllBattleUnitAliveNpc(caster.GetTeam())
             if (GameFunc.GetCount(targets) > 0) {
                 target = targets[0];
             }

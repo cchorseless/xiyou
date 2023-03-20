@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -131,6 +132,17 @@ export class imba_bristleback_viscous_nasal_goo extends BaseAbility_Plus {
             }
         }
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        if (this.GetCasterPlus().HasScepter()) {
+            return AI_ability.NO_TARGET_if_enemy(this);
+        } else {
+            return AI_ability.TARGET_if_enemy(this);
+        }
+    }
 }
 @registerModifier()
 export class modifier_imba_bristleback_viscous_nasal_goo extends BaseModifier_Plus {
@@ -261,6 +273,13 @@ export class imba_bristleback_quill_spray extends BaseAbility_Plus {
             duration: this.duration
         }, this.caster.GetAbsOrigin(), this.caster.GetTeamNumber(), false);
         this.caster.EmitSound("Hero_Bristleback.QuillSpray.Cast");
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_if_enemy(this);
     }
 }
 @registerModifier()
@@ -452,6 +471,16 @@ export class imba_bristleback_bristleback extends BaseAbility_Plus {
             this.caster.RemoveModifierByName("modifier_imba_bristleback_bristleback_has");
         }
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        if (!this.GetToggleState()) {
+            this.ToggleAbility();
+        }
+        return false
+    }
 }
 @registerModifier()
 export class modifier_imba_bristleback_bristleback extends BaseModifier_Plus {
@@ -565,12 +594,12 @@ export class modifier_imba_bristleback_bristleback_has extends BaseModifier_Plus
         this.AddParticle(this.particle, false, false, -1, false, false);
         this.parent.EmitSound("Imba.BristlebackHASStart");
     }
-    CheckState( /** keys */): Partial<Record<modifierstate, boolean>> {
-        return {
-            [modifierstate.MODIFIER_STATE_ROOTED]: true,
-            [modifierstate.MODIFIER_STATE_DISARMED]: true
-        };
-    }
+    // CheckState( /** keys */): Partial<Record<modifierstate, boolean>> {
+    //     return {
+    //         [modifierstate.MODIFIER_STATE_ROOTED]: true,
+    //         [modifierstate.MODIFIER_STATE_DISARMED]: true
+    //     };
+    // }
 }
 @registerAbility()
 export class imba_bristleback_warpath extends BaseAbility_Plus {

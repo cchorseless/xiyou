@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { AoiHelper } from "../../../helper/AoiHelper";
 import { ResHelper } from "../../../helper/ResHelper";
@@ -68,6 +69,13 @@ export class imba_dragon_knight_breathe_fire extends BaseAbility_Plus {
                 duration: debuff_duration * (1 - target.GetStatusResistance())
             });
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this);
     }
 }
 @registerModifier()
@@ -208,6 +216,13 @@ export class imba_dragon_knight_dragon_tail extends BaseAbility_Plus {
                 });
             }
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
     }
 }
 @registerModifier()
@@ -533,12 +548,12 @@ export class imba_dragon_knight_elder_dragon_form extends BaseAbility_Plus {
         }
         return super.GetCooldown(level);
     }
-    GetManaCost(level: number): number {
-        if (this.GetCasterPlus().HasScepter()) {
-            return 0;
-        }
-        return super.GetManaCost(level);
-    }
+    // GetManaCost(level: number): number {
+    //     if (this.GetCasterPlus().HasScepter()) {
+    //         return 0;
+    //     }
+    //     return super.GetManaCost(level);
+    // }
     OnSpellStart(): void {
         let buff = this.GetCasterPlus().findBuff<modifier_imba_elder_dragon_form>("modifier_imba_elder_dragon_form")
         buff.AddElderForm(this.GetCasterPlus(), this, this.GetLevel(), this.GetSpecialValueFor("duration"));
@@ -567,6 +582,13 @@ export class imba_dragon_knight_elder_dragon_form extends BaseAbility_Plus {
                 this.GetCasterPlus().RemoveModifierByName("modifier_dragon_knight_frost_breath");
             }
         }
+    }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_cast(this);
     }
 }
 @registerModifier()

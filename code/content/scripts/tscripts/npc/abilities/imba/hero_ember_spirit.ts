@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 import { ResHelper } from "../../../helper/ResHelper";
@@ -8,10 +9,7 @@ import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 
 function FindActiveRemnants(caster: IBaseNpc_Plus) {
-    let remnants = caster.FindChildByFilter((npc) => {
-        return npc.GetUnitName().includes("ember_spirit_remnant") && npc.IsAlive() && !npc.IsRealUnit() && npc.HasModifier("modifier_imba_fire_remnant_state");
-    }
-    )
+    let remnants = caster.FindChildByName("npc_imba_ember_spirit_remnant")
     return remnants;
 }
 function ApplySearingChains(caster: IBaseNpc_Plus, source: IBaseNpc_Plus, target: IBaseNpc_Plus, ability: IBaseAbility_Plus, duration: number) {
@@ -450,6 +448,9 @@ export class modifier_imba_fire_remnant_state extends BaseModifier_Plus {
     IsPurgable(): boolean {
         return false;
     }
+    IsPermanent(): boolean {
+        return true;
+    }
     GetEffectName(): string {
         return "particles/units/heroes/hero_ember_spirit/ember_spirit_fire_remnant.vpcf";
     }
@@ -457,29 +458,35 @@ export class modifier_imba_fire_remnant_state extends BaseModifier_Plus {
         return ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW;
     }
     StatusEffectPriority(): modifierpriority {
-        return 2;
+        return 10;
     }
     GetStatusEffectName(): string {
         return "particles/status_fx/status_effect_burn.vpcf";
     }
     CheckState(): Partial<Record<modifierstate, boolean>> {
-        if (IsServer()) {
-            let state = {
-                [modifierstate.MODIFIER_STATE_NO_UNIT_COLLISION]: true,
-                [modifierstate.MODIFIER_STATE_INVULNERABLE]: true,
-                [modifierstate.MODIFIER_STATE_NO_HEALTH_BAR]: true,
-                [modifierstate.MODIFIER_STATE_MAGIC_IMMUNE]: true,
-                [modifierstate.MODIFIER_STATE_ROOTED]: true,
-                [modifierstate.MODIFIER_STATE_UNSELECTABLE]: true
-            }
-            return state;
+        let state = {
+            [modifierstate.MODIFIER_STATE_NO_UNIT_COLLISION]: true,
+            [modifierstate.MODIFIER_STATE_FLYING_FOR_PATHING_PURPOSES_ONLY]: true,
+            [modifierstate.MODIFIER_STATE_INVULNERABLE]: true,
+            [modifierstate.MODIFIER_STATE_OUT_OF_GAME]: true,
+            [modifierstate.MODIFIER_STATE_NO_HEALTH_BAR]: true,
+            [modifierstate.MODIFIER_STATE_UNSELECTABLE]: true,
+            [modifierstate.MODIFIER_STATE_NOT_ON_MINIMAP]: true,
+            [modifierstate.MODIFIER_STATE_NO_TEAM_SELECT]: true,
+            [modifierstate.MODIFIER_STATE_NO_TEAM_MOVE_TO]: true,
+            [modifierstate.MODIFIER_STATE_UNTARGETABLE]: true,
+            [modifierstate.MODIFIER_STATE_MAGIC_IMMUNE]: true,
+            [modifierstate.MODIFIER_STATE_DISARMED]: true,
+            [modifierstate.MODIFIER_STATE_SILENCED]: true,
         }
+        return state;
     }
 
     BeDestroy(): void {
         if (IsServer()) {
-            GFuncEntity.SafeDestroyUnit(this.GetParentPlus());
+            GLogHelper.print(1111111111)
             this.GetAbilityPlus<imba_ember_spirit_fire_remnant>().CollectRemnant();
+            GFuncEntity.SafeDestroyUnit(this.GetParentPlus());
         }
     }
 }
@@ -581,6 +588,14 @@ export class imba_ember_spirit_searing_chains extends BaseAbility_Plus {
             }
         }
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_if_enemy(this);
+    }
+
 }
 @registerAbility()
 export class imba_ember_spirit_sleight_of_fist extends BaseAbility_Plus {
@@ -683,6 +698,65 @@ export class imba_ember_spirit_sleight_of_fist extends BaseAbility_Plus {
             }
         }
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this);
+    }
+
+}
+@registerAbility()
+export class imba_ember_spirit_flame_guard extends BaseAbility_Plus {
+    GetIntrinsicModifierName(): string {
+        return "modifier_imba_flame_guard_talent";
+    }
+    OnSpellStart(): void {
+        if (IsServer()) {
+            let caster = this.GetCasterPlus();
+            let effect_radius = this.GetSpecialValueFor("effect_radius");
+            let duration = this.GetSpecialValueFor("duration");
+            let damage = this.GetSpecialValueFor("damage_per_second");
+            let tick_interval = this.GetSpecialValueFor("tick_interval");
+            let absorb_amount = this.GetSpecialValueFor("absorb_amount") * caster.GetMaxHealth() * 0.01;
+            if (caster.findAbliityPlus("special_bonus_imba_ember_guard_damage") && caster.FindAbilityByName("special_bonus_imba_ember_guard_damage").GetLevel() > 0) {
+                damage = damage + caster.findAbliityPlus("special_bonus_imba_ember_guard_damage").GetSpecialValueFor("value");
+            }
+            caster.StartGesture(GameActivity_t.ACT_DOTA_CAST_ABILITY_3);
+            let active_remnants = FindActiveRemnants(caster);
+            if (active_remnants) {
+                for (const [_, remnant] of GameFunc.iPair(active_remnants)) {
+                    remnant.StartGesture(GameActivity_t.ACT_DOTA_CAST_ABILITY_3);
+                    remnant.EmitSound("Hero_EmberSpirit.FlameGuard.Cast");
+                    remnant.EmitSound("Hero_EmberSpirit.FlameGuard.Loop");
+                    remnant.AddNewModifier(caster, this, "modifier_imba_flame_guard_aura", {
+                        damage: damage * 0.5,
+                        tick_interval: tick_interval,
+                        effect_radius: effect_radius,
+                        remaining_health: absorb_amount,
+                        duration: duration
+                    });
+                }
+            }
+            caster.EmitSound("Hero_EmberSpirit.FlameGuard.Cast");
+            caster.EmitSound("Hero_EmberSpirit.FlameGuard.Loop");
+            caster.RemoveModifierByName("modifier_imba_flame_guard_aura");
+            caster.AddNewModifier(caster, this, "modifier_imba_flame_guard_aura", {
+                damage: damage,
+                tick_interval: tick_interval,
+                effect_radius: effect_radius,
+                remaining_health: absorb_amount,
+                duration: duration
+            });
+        }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_cast(this);
+    }
 }
 @registerAbility()
 export class imba_ember_spirit_fire_remnant extends BaseAbility_Plus {
@@ -743,19 +817,21 @@ export class imba_ember_spirit_fire_remnant extends BaseAbility_Plus {
         if (charges_modifier.GetStackCount() > 0) {
             charges_modifier.SetStackCount(charges_modifier.GetStackCount() - 1);
             this.GetCasterPlus().EmitSound("Hero_EmberSpirit.FireRemnant.Cast");
-            let remnant = this.GetCasterPlus().CreateSummon("npc_imba_ember_spirit_remnant", target_loc, this.GetSpecialValueFor("duration"), true);
-            remnant.SetOwner(this.GetCasterPlus());
+            let duration = this.GetSpecialValueFor("duration");
+            let remnant = this.GetCasterPlus().CreateSummon("npc_imba_ember_spirit_remnant", target_loc, -1, true);
             remnant.EmitSound("Hero_EmberSpirit.FireRemnant.Activate");
             remnant.SetRenderColor(255, 0, 0);
+            remnant.SetForwardVector((target_loc - this.GetCasterPlus().GetAbsOrigin() as Vector).Normalized())
+            remnant.StartGesture(GameActivity_t.ACT_DOTA_RUN)
             remnant.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_fire_remnant_state", {
-                duration: this.GetSpecialValueFor("duration")
+                duration: duration
             });
             this.GetCasterPlus().findAbliityPlus<imba_ember_spirit_activate_fire_remnant>("imba_ember_spirit_activate_fire_remnant").SetActivated(true);
             if (charges_modifier.GetStackCount() <= 0) {
                 this.SetActivated(false);
             }
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_fire_remnant_timer", {
-                duration: this.GetSpecialValueFor("duration")
+                duration: duration
             });
             let ability_flame_guard = this.GetCasterPlus().findAbliityPlus<imba_ember_spirit_flame_guard>("imba_ember_spirit_flame_guard");
             if (ability_flame_guard) {
@@ -787,51 +863,7 @@ export class imba_ember_spirit_fire_remnant extends BaseAbility_Plus {
         }
     }
 }
-@registerAbility()
-export class imba_ember_spirit_flame_guard extends BaseAbility_Plus {
-    GetIntrinsicModifierName(): string {
-        return "modifier_imba_flame_guard_talent";
-    }
-    OnSpellStart(): void {
-        if (IsServer()) {
-            let caster = this.GetCasterPlus();
-            let effect_radius = this.GetSpecialValueFor("effect_radius");
-            let duration = this.GetSpecialValueFor("duration");
-            let damage = this.GetSpecialValueFor("damage_per_second");
-            let tick_interval = this.GetSpecialValueFor("tick_interval");
-            let absorb_amount = this.GetSpecialValueFor("absorb_amount") * caster.GetMaxHealth() * 0.01;
-            if (caster.findAbliityPlus("special_bonus_imba_ember_guard_damage") && caster.FindAbilityByName("special_bonus_imba_ember_guard_damage").GetLevel() > 0) {
-                damage = damage + caster.findAbliityPlus("special_bonus_imba_ember_guard_damage").GetSpecialValueFor("value");
-            }
-            caster.StartGesture(GameActivity_t.ACT_DOTA_CAST_ABILITY_3);
-            let active_remnants = FindActiveRemnants(caster);
-            if (active_remnants) {
-                for (const [_, remnant] of GameFunc.iPair(active_remnants)) {
-                    remnant.StartGesture(GameActivity_t.ACT_DOTA_CAST_ABILITY_3);
-                    remnant.EmitSound("Hero_EmberSpirit.FlameGuard.Cast");
-                    remnant.EmitSound("Hero_EmberSpirit.FlameGuard.Loop");
-                    remnant.AddNewModifier(caster, this, "modifier_imba_flame_guard_aura", {
-                        damage: damage * 0.5,
-                        tick_interval: tick_interval,
-                        effect_radius: effect_radius,
-                        remaining_health: absorb_amount,
-                        duration: duration
-                    });
-                }
-            }
-            caster.EmitSound("Hero_EmberSpirit.FlameGuard.Cast");
-            caster.EmitSound("Hero_EmberSpirit.FlameGuard.Loop");
-            caster.RemoveModifierByName("modifier_imba_flame_guard_aura");
-            caster.AddNewModifier(caster, this, "modifier_imba_flame_guard_aura", {
-                damage: damage,
-                tick_interval: tick_interval,
-                effect_radius: effect_radius,
-                remaining_health: absorb_amount,
-                duration: duration
-            });
-        }
-    }
-}
+
 @registerAbility()
 export class imba_ember_spirit_activate_fire_remnant extends BaseAbility_Plus {
     GetAssociatedSecondaryAbilities(): string {

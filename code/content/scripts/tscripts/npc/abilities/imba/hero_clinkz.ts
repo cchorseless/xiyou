@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 import { ResHelper } from "../../../helper/ResHelper";
@@ -86,102 +87,191 @@ function SetArrowAttackProjectile(caster: IBaseNpc_Plus, searing_arrows: boolean
         }
     }
 }
-
 @registerAbility()
 export class imba_clinkz_strafe extends BaseAbility_Plus {
-    public time_remaining: number;
-    GetAbilityTextureName(): string {
-        return "clinkz_strafe";
+    time_remaining: number;
+    IsStealable(): boolean {
+        return true;
     }
     IsHiddenWhenStolen(): boolean {
         return false;
     }
-    IsNetherWardStealable() {
-        return false;
-    }
-    GetCooldown(level: number): number {
-        if (IsServer()) {
-            let caster = this.GetCasterPlus();
-            let duration = this.GetSpecialValueFor("duration") + caster.GetTalentValue("special_bonus_imba_clinkz_9");
-            let modifier_mount = "modifier_imba_strafe_mount";
-            if (this.time_remaining != undefined) {
-                let time_remaining = this.time_remaining;
-                this.time_remaining = undefined;
-                return super.GetCooldown(level) - (duration - math.max(time_remaining, 0));
-            }
-        }
-        return super.GetCooldown(level);
-    }
-    GetBehavior(): DOTA_ABILITY_BEHAVIOR | Uint64 {
+    OnSpellStart(): void {
         let caster = this.GetCasterPlus();
-        let modifier_mount = "modifier_imba_strafe_mount";
-        let modifier_self_root = "modifier_imba_strafe_self_root";
-        if (caster.HasModifier(modifier_mount) || caster.HasModifier(modifier_self_root)) {
-            return DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_NO_TARGET;
-        } else {
-            return DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_UNIT_TARGET;
+        EmitSoundOn("Hero_Clinkz.Strafe", caster);
+        caster.AddNewModifier(caster, this, "modifier_imba_clinkz_strafe", {
+            duration: this.GetSpecialValueFor("duration")
+        });
+        let units = caster.FindChildByName("npc_dota_clinkz_skeleton_archer")
+        for (const [_, skeleton] of GameFunc.iPair(units)) {
+            skeleton.AddNewModifier(caster, this, "modifier_imba_clinkz_strafe", {
+                duration: this.GetSpecialValueFor("duration")
+            });
         }
     }
     GetManaCost(level: number): number {
-        let caster = this.GetCasterPlus();
-        if (caster.HasModifier("modifier_imba_strafe_mount") || caster.HasModifier("modifier_imba_strafe_self_root")) {
-            return 0;
-        }
-        return super.GetManaCost(level);
+        return 0;
     }
-    OnSpellStart(): void {
-        if (IsServer()) {
-            let caster = this.GetCasterPlus();
-            let ability = this;
-            let target = this.GetCursorTarget();
-            let sound_cast = "Hero_Clinkz.Strafe";
-            let modifier_aspd = "modifier_imba_strafe_aspd";
-            let modifier_mount = "modifier_imba_strafe_mount";
-            let duration = ability.GetSpecialValueFor("duration") + caster.GetTalentValue("special_bonus_imba_clinkz_9");
-            if (caster.HasModifier("modifier_imba_strafe_self_root")) {
-                ability.time_remaining = caster.findBuff<modifier_imba_strafe_self_root>("modifier_imba_strafe_self_root").GetRemainingTime();
-                caster.RemoveModifierByName("modifier_imba_strafe_self_root");
-                ability.EndCooldown();
-                ability.UseResources(false, false, true);
-            }
-            if (!caster.HasModifier(modifier_mount)) {
-                EmitSoundOn(sound_cast, caster);
-                caster.AddNewModifier(caster, ability, modifier_aspd, {
-                    duration: duration
-                });
-                if (caster != target) {
-                    ability.EndCooldown();
-                    let modifier = caster.AddNewModifier(caster, ability, modifier_mount, {
-                        duration: duration
-                    }) as modifier_imba_strafe_mount;
-                    if (modifier) {
-                        modifier.target = target;
-                    }
-                }
-                if (caster.HasTalent("special_bonus_imba_clinkz_5")) {
-                    if (target == caster) {
-                        ability.EndCooldown();
-                        let modifier_self_root = "modifier_imba_strafe_self_root";
-                        caster.AddNewModifier(caster, ability, modifier_self_root, {
-                            duration: duration
-                        });
-                    }
-                }
-            } else {
-                let modifier_mount_handler = caster.FindModifierByName(modifier_mount);
-                ability.time_remaining = modifier_mount_handler.GetRemainingTime();
-                caster.RemoveModifierByName(modifier_mount);
-                ability.EndCooldown();
-                ability.UseResources(false, false, true);
-            }
-        }
-    }
-    OnOwnerSpawned(): void {
-        if (this.GetCasterPlus().HasTalent("special_bonus_imba_clinkz_5") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_clinkz_5")) {
-            this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_special_bonus_imba_clinkz_5", {});
-        }
+
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_cast(this);
     }
 }
+@registerModifier()
+export class modifier_imba_clinkz_strafe extends BaseModifier_Plus {
+    public as: any;
+    public rate: any;
+    public cost: any;
+    IsDebuff(): boolean {
+        return false;
+    }
+    IsPurgable(): boolean {
+        return true;
+    }
+    Init(table: any): void {
+        this.as = this.GetSpecialValueFor("as_bonus");
+        this.rate = this.GetSpecialValueFor("dodge_rate");
+        this.cost = this.GetCasterPlus().GetTalentValue("special_bonus_unique_imba_clinkz_strafe_2");
+        if (IsServer()) {
+            this.StartIntervalThink(this.rate);
+            this.OnIntervalThink();
+        }
+    }
+    OnIntervalThink(): void {
+        ProjectileManager.ProjectileDodge(this.GetParentPlus());
+        this.GetParentPlus().StartGesture(GameActivity_t.ACT_DUCK_DODGE);
+        let FX = ParticleManager.CreateParticle("particles/units/heroes/hero_clinkz/clinkz_strafe_dodge.vpcf", ParticleAttachment_t.PATTACH_POINT, this.GetParentPlus());
+        ParticleManager.ReleaseParticleIndex(FX);
+    }
+    /** DeclareFunctions():modifierfunction[] {
+        let funcs = {
+            1: GPropertyConfig.EMODIFIER_PROPERTY.MANACOST_PERCENTAGE_STACKING,
+            2: GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT
+        }
+        return Object.values(funcs);
+    } */
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
+    CC_GetModifierAttackSpeedBonus_Constant(): number {
+        return this.as;
+    }
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MANACOST_PERCENTAGE_STACKING)
+    CC_GetModifierPercentageManacostStacking(): number {
+        return this.cost * (-1);
+    }
+    GetEffectName(): string {
+        return "particles/units/heroes/hero_clinkz/clinkz_strafe.vpcf";
+    }
+}
+
+// @registerAbility()
+// export class imba_clinkz_strafe_723 extends BaseAbility_Plus {
+//     public time_remaining: number;
+//     GetAbilityTextureName(): string {
+//         return "clinkz_strafe";
+//     }
+//     IsHiddenWhenStolen(): boolean {
+//         return false;
+//     }
+//     IsNetherWardStealable() {
+//         return false;
+//     }
+//     GetCooldown(level: number): number {
+//         if (IsServer()) {
+//             let caster = this.GetCasterPlus();
+//             let duration = this.GetSpecialValueFor("duration") + caster.GetTalentValue("special_bonus_imba_clinkz_9");
+//             let modifier_mount = "modifier_imba_strafe_mount";
+//             if (this.time_remaining != undefined) {
+//                 let time_remaining = this.time_remaining;
+//                 this.time_remaining = undefined;
+//                 return super.GetCooldown(level) - (duration - math.max(time_remaining, 0));
+//             }
+//         }
+//         return super.GetCooldown(level);
+//     }
+//     GetBehavior(): DOTA_ABILITY_BEHAVIOR | Uint64 {
+//         let caster = this.GetCasterPlus();
+//         let modifier_mount = "modifier_imba_strafe_mount";
+//         let modifier_self_root = "modifier_imba_strafe_self_root";
+//         if (caster.HasModifier(modifier_mount) || caster.HasModifier(modifier_self_root)) {
+//             return DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_NO_TARGET;
+//         } else {
+//             return DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_UNIT_TARGET;
+//         }
+//     }
+//     // GetManaCost(level: number): number {
+//     //     let caster = this.GetCasterPlus();
+//     //     if (caster.HasModifier("modifier_imba_strafe_mount") || caster.HasModifier("modifier_imba_strafe_self_root")) {
+//     //         return 0;
+//     //     }
+//     //     return super.GetManaCost(level);
+//     // }
+//     OnSpellStart(): void {
+//         if (IsServer()) {
+//             let caster = this.GetCasterPlus();
+//             let target = this.GetCursorTarget() || caster;
+//             let sound_cast = "Hero_Clinkz.Strafe";
+//             let modifier_aspd = "modifier_imba_strafe_aspd";
+//             let modifier_mount = "modifier_imba_strafe_mount";
+//             let duration = this.GetSpecialValueFor("duration") + caster.GetTalentValue("special_bonus_imba_clinkz_9");
+//             if (caster.HasModifier("modifier_imba_strafe_self_root")) {
+//                 this.time_remaining = caster.findBuff<modifier_imba_strafe_self_root>("modifier_imba_strafe_self_root").GetRemainingTime();
+//                 caster.RemoveModifierByName("modifier_imba_strafe_self_root");
+//                 this.EndCooldown();
+//                 this.UseResources(false, false, true);
+//             }
+//             if (!caster.HasModifier(modifier_mount)) {
+//                 EmitSoundOn(sound_cast, caster);
+//                 caster.AddNewModifier(caster, this, modifier_aspd, {
+//                     duration: duration
+//                 });
+//                 if (caster != target) {
+//                     this.EndCooldown();
+//                     let modifier = caster.AddNewModifier(caster, this, modifier_mount, {
+//                         duration: duration
+//                     }) as modifier_imba_strafe_mount;
+//                     if (modifier) {
+//                         modifier.target = target;
+//                     }
+//                 }
+//                 if (caster.HasTalent("special_bonus_imba_clinkz_5")) {
+//                     if (target == caster) {
+//                         this.EndCooldown();
+//                         let modifier_self_root = "modifier_imba_strafe_self_root";
+//                         caster.AddNewModifier(caster, this, modifier_self_root, {
+//                             duration: duration
+//                         });
+//                     }
+//                 }
+//             } else {
+//                 let modifier_mount_handler = caster.FindModifierByName(modifier_mount);
+//                 this.time_remaining = modifier_mount_handler.GetRemainingTime();
+//                 caster.RemoveModifierByName(modifier_mount);
+//                 this.EndCooldown();
+//                 this.UseResources(false, false, true);
+//             }
+//         }
+//     }
+//     OnOwnerSpawned(): void {
+//         if (this.GetCasterPlus().HasTalent("special_bonus_imba_clinkz_5") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_clinkz_5")) {
+//             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_special_bonus_imba_clinkz_5", {});
+//         }
+//     }
+//     GetManaCost(level: number): number {
+//         return 0;
+//     }
+
+//     AutoSpellSelf() {
+//         let caster = this.GetCasterPlus();
+//         let modifier_mount = "modifier_imba_strafe_mount";
+//         let modifier_self_root = "modifier_imba_strafe_self_root";
+//         if (caster.HasModifier(modifier_mount) || caster.HasModifier(modifier_self_root)) {
+//             return AI_ability.NO_TARGET_cast(this);
+//         } else {
+//             return AI_ability.TARGET_if_friend(this, null, (u) => { return u != this.GetCasterPlus() });
+//         }
+//     }
+
+// }
 @registerModifier()
 export class modifier_imba_strafe_aspd extends BaseModifier_Plus {
     public modifier_mount: any;
@@ -228,7 +318,6 @@ export class modifier_imba_strafe_aspd extends BaseModifier_Plus {
         } else {
             return this.as_bonus;
         }
-        return undefined;
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_RANGE_BONUS)
     CC_GetModifierAttackRangeBonus(): number {
@@ -334,174 +423,7 @@ export class modifier_imba_strafe_self_root extends BaseModifier_Plus {
         }
     }
 }
-@registerAbility()
-export class imba_clinkz_death_pact_723 extends BaseAbility_Plus {
-    GetIntrinsicModifierName(): string {
-        return "modifier_imba_clinkz_death_pact_723_permanent_buff";
-    }
-    CastFilterResultTarget(hTarget: CDOTA_BaseNPC): UnitFilterResult {
-        if (hTarget.GetTeamNumber() != this.GetCasterPlus().GetTeamNumber() && hTarget.IsCreep() && !hTarget.IsAncient() || hTarget.GetClassname() == "npc_dota_clinkz_skeleton_archer" && hTarget.findBuffStack("modifier_imba_burning_army", this.GetCasterPlus()) == 0) {
-            return UnitFilterResult.UF_SUCCESS;
-        } else if (hTarget.GetTeamNumber() != this.GetCasterPlus().GetTeamNumber() && hTarget.IsConsideredHero()) {
-            return UnitFilterResult.UF_SUCCESS;
-        } else if (hTarget.GetTeamNumber() != this.GetCasterPlus().GetTeamNumber() && hTarget.IsCreep() && !hTarget.IsAncient() && hTarget.GetLevel() > this.GetSpecialValueFor("neutral_level")) {
-            return UnitFilterResult.UF_FAIL_CUSTOM;
-        } else {
-            return UnitFilter(hTarget, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ANCIENTS, this.GetCasterPlus().GetTeamNumber());
-        }
-    }
-    GetCustomCastErrorTarget(hTarget: CDOTA_BaseNPC): string {
-        if (hTarget.GetTeamNumber() != this.GetCasterPlus().GetTeamNumber()) {
-            if (hTarget.IsCreep() && !hTarget.IsAncient() && hTarget.GetLevel() > this.GetSpecialValueFor("neutral_level")) {
-                return "#dota_hud_error_cant_cast_creep_level";
-            } else if (hTarget.IsConsideredHero() && hTarget.GetLevel() > this.GetCasterPlus().GetLevel()) {
-                return "#dota_hud_error_cant_cast_hero_level";
-            }
-        }
-    }
-    OnSpellStart(): void {
-        let target = this.GetCursorTarget();
-        this.GetCasterPlus().EmitSound("Hero_Clinkz.DeathPact.Cast");
-        target.EmitSound("Hero_Clinkz.DeathPact");
-        let pact_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_clinkz/clinkz_death_pact.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, target);
-        ParticleManager.SetParticleControl(pact_particle, 1, this.GetCasterPlus().GetAbsOrigin());
-        ParticleManager.ReleaseParticleIndex(pact_particle);
-        if (!target.IsConsideredHero()) {
-            this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_clinkz_death_pact_723", {
-                duration: this.GetSpecialValueFor("duration")
-            });
-            target.Kill(this, this.GetCasterPlus());
-        } else {
-            let health_to_convert = target.GetMaxHealth() * this.GetSpecialValueFor("soul_high_hp_damage") * 0.01;
-            if (this.GetCasterPlus().HasModifier("modifier_imba_clinkz_death_pact_723")) {
-                this.GetCasterPlus().RemoveModifierByName("modifier_imba_clinkz_death_pact_723");
-            }
-            this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_clinkz_death_pact_723", {
-                duration: this.GetSpecialValueFor("soul_high_duration"),
-                bonus_attack: health_to_convert * this.GetSpecialValueFor("soul_high_hp_to_attack") * 0.01
-            });
-            ApplyDamage({
-                victim: target,
-                damage: health_to_convert,
-                damage_type: DAMAGE_TYPES.DAMAGE_TYPE_PURE,
-                damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_REFLECTION + DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION + DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NO_SPELL_LIFESTEAL,
-                attacker: this.GetCasterPlus(),
-                ability: this
-            });
-        }
-    }
-}
-@registerModifier()
-export class modifier_imba_clinkz_death_pact_723 extends BaseModifier_Plus {
-    public health_gain: any;
-    public permanent_bonus: number;
-    public debuff_duration: number;
-    public armor_reduction: any;
-    GetEffectName(): string {
-        return "particles/units/heroes/hero_clinkz/clinkz_death_pact_buff.vpcf";
-    }
-    BeCreated(params: any): void {
-        this.health_gain = this.GetAbilityPlus().GetTalentSpecialValueFor("health_gain");
-        this.permanent_bonus = this.GetSpecialValueFor("permanent_bonus");
-        this.debuff_duration = this.GetSpecialValueFor("debuff_duration");
-        this.armor_reduction = this.GetSpecialValueFor("armor_reduction");
-        if (!IsServer() || !params.bonus_attack) {
-            return;
-        }
-        this.SetStackCount(params.bonus_attack);
-    }
-    /** DeclareFunctions():modifierfunction[] {
-    return Object.values({
-        1: GPropertyConfig.EMODIFIER_PROPERTY.EXTRA_HEALTH_BONUS,
-        2: Enum_MODIFIER_EVENT.ON_ATTACK_LANDED,
-        3: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE
-    });
-    } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.EXTRA_HEALTH_BONUS)
-    CC_GetModifierExtraHealthBonus(): number {
-        return this.health_gain;
-    }
-    @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
-    CC_OnAttackLanded(keys: ModifierAttackEvent): void {
-        if (keys.attacker == this.GetParentPlus() && keys.target.IsRealUnit()) {
-            keys.target.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_clinkz_death_pact_723_enemy", {
-                duration: this.debuff_duration * (1 - keys.target.GetStatusResistance()),
-                armor_reduction: this.armor_reduction,
-                permanent_bonus: this.permanent_bonus
-            });
-        }
-    }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
-    CC_GetModifierPreAttack_BonusDamage(): number {
-        return this.GetStackCount();
-    }
-}
-@registerModifier()
-export class modifier_imba_clinkz_death_pact_723_enemy extends BaseModifier_Plus {
-    public armor_reduction: any;
-    public permanent_bonus: number;
-    RemoveOnDeath(): boolean {
-        return false;
-    }
-    BeCreated(params: any): void {
-        if (this.GetAbilityPlus()) {
-            this.armor_reduction = this.GetSpecialValueFor("armor_reduction") * (-1);
-            this.permanent_bonus = this.GetSpecialValueFor("permanent_bonus");
-        } else if (params) {
-            this.armor_reduction = params.armor_reduction * (-1);
-            this.permanent_bonus = params.permanent_bonus;
-        } else {
-            this.armor_reduction = -2;
-            this.permanent_bonus = 5;
-        }
-    }
-    /** DeclareFunctions():modifierfunction[] {
-    return Object.values({
-        1: GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS,
-        2: Enum_MODIFIER_EVENT.ON_DEATH
-    });
-    } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS)
-    CC_GetModifierPhysicalArmorBonus(p_0: ModifierAttackEvent,): number {
-        return this.armor_reduction;
-    }
-    @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
-    CC_OnDeath(keys: ModifierInstanceEvent): void {
-        if (keys.unit == this.GetParentPlus() && keys.unit.IsRealUnit() && (!keys.unit.IsReincarnating || (keys.unit.IsReincarnating && !keys.unit.IsReincarnating()))) {
-            let pact_modifier = this.GetCasterPlus().findBuff<modifier_imba_clinkz_death_pact_723_permanent_buff>("modifier_imba_clinkz_death_pact_723_permanent_buff");
-            if (pact_modifier) {
-                pact_modifier.SetStackCount(pact_modifier.GetStackCount() + this.permanent_bonus);
-                if (pact_modifier.GetAbility()) {
-                    pact_modifier.GetAbility().EndCooldown();
-                }
-            }
-            this.Destroy();
-        }
-    }
-}
-@registerModifier()
-export class modifier_imba_clinkz_death_pact_723_permanent_buff extends BaseModifier_Plus {
-    IsHidden(): boolean {
-        return this.GetStackCount() <= 0;
-    }
-    IsPurgable(): boolean {
-        return false;
-    }
-    RemoveOnDeath(): boolean {
-        return false;
-    }
-    BeCreated(p_0: any,): void {
-    }
-    /** DeclareFunctions():modifierfunction[] {
-    return Object.values({
-        1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE
-    });
-    } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
-    CC_GetModifierPreAttack_BonusDamage(): number {
-        return this.GetStackCount();
-    }
-}
+
 @registerAbility()
 export class imba_clinkz_searing_arrows extends BaseAbility_Plus {
     GetAbilityTextureName(): string {
@@ -593,6 +515,15 @@ export class imba_clinkz_searing_arrows extends BaseAbility_Plus {
             caster.RemoveModifierByName("modifier_imba_searing_arrows_passive");
             caster.AddNewModifier(caster, this, "modifier_imba_searing_arrows_passive", {});
         }
+    }
+    GetManaCost(level: number): number {
+        return 1;
+    }
+    GetCooldown(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
     }
 }
 @registerModifier()
@@ -945,7 +876,7 @@ export class modifier_imba_skeleton_walk_invis extends BaseModifier_Plus {
         }
         if (this.GetAbilityPlus() && this.GetAbilityPlus().GetAbilityName() == "imba_clinkz_skeleton_walk_723") {
             this.GetParentPlus().AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_clinkz_skeleton_walk_723_strafe", {
-                duration: this.GetAbilityPlus().GetTalentSpecialValueFor("attack_speed_duration")
+                duration: this.GetAbilityPlus().GetSpecialValueFor("attack_speed_duration")
             });
         }
     }
@@ -1266,6 +1197,14 @@ export class imba_clinkz_death_pact extends BaseAbility_Plus {
                 duration: mark_duration * (1 - target.GetStatusResistance())
             });
         }
+    }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+
+    AutoSpellSelf() {
+
+        return AI_ability.TARGET_if_enemy(this);
     }
 }
 @registerModifier()
@@ -1763,6 +1702,176 @@ export class modifier_imba_death_pact_talent_buff extends BaseModifier_Plus {
         return bonus_hp;
     }
 }
+
+@registerAbility()
+export class imba_clinkz_death_pact_723 extends BaseAbility_Plus {
+    GetIntrinsicModifierName(): string {
+        return "modifier_imba_clinkz_death_pact_723_permanent_buff";
+    }
+    CastFilterResultTarget(hTarget: CDOTA_BaseNPC): UnitFilterResult {
+        if (hTarget.GetTeamNumber() != this.GetCasterPlus().GetTeamNumber() && hTarget.IsCreep() && !hTarget.IsAncient() || hTarget.GetClassname() == "npc_dota_clinkz_skeleton_archer" && hTarget.findBuffStack("modifier_imba_burning_army", this.GetCasterPlus()) == 0) {
+            return UnitFilterResult.UF_SUCCESS;
+        } else if (hTarget.GetTeamNumber() != this.GetCasterPlus().GetTeamNumber() && hTarget.IsConsideredHero()) {
+            return UnitFilterResult.UF_SUCCESS;
+        } else if (hTarget.GetTeamNumber() != this.GetCasterPlus().GetTeamNumber() && hTarget.IsCreep() && !hTarget.IsAncient() && hTarget.GetLevel() > this.GetSpecialValueFor("neutral_level")) {
+            return UnitFilterResult.UF_FAIL_CUSTOM;
+        } else {
+            return UnitFilter(hTarget, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ANCIENTS, this.GetCasterPlus().GetTeamNumber());
+        }
+    }
+    GetCustomCastErrorTarget(hTarget: CDOTA_BaseNPC): string {
+        if (hTarget.GetTeamNumber() != this.GetCasterPlus().GetTeamNumber()) {
+            if (hTarget.IsCreep() && !hTarget.IsAncient() && hTarget.GetLevel() > this.GetSpecialValueFor("neutral_level")) {
+                return "#dota_hud_error_cant_cast_creep_level";
+            } else if (hTarget.IsConsideredHero() && hTarget.GetLevel() > this.GetCasterPlus().GetLevel()) {
+                return "#dota_hud_error_cant_cast_hero_level";
+            }
+        }
+    }
+    OnSpellStart(): void {
+        let target = this.GetCursorTarget();
+        this.GetCasterPlus().EmitSound("Hero_Clinkz.DeathPact.Cast");
+        target.EmitSound("Hero_Clinkz.DeathPact");
+        let pact_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_clinkz/clinkz_death_pact.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, target);
+        ParticleManager.SetParticleControl(pact_particle, 1, this.GetCasterPlus().GetAbsOrigin());
+        ParticleManager.ReleaseParticleIndex(pact_particle);
+        if (!target.IsConsideredHero()) {
+            this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_clinkz_death_pact_723", {
+                duration: this.GetSpecialValueFor("duration")
+            });
+            target.Kill(this, this.GetCasterPlus());
+        } else {
+            let health_to_convert = target.GetMaxHealth() * this.GetSpecialValueFor("soul_high_hp_damage") * 0.01;
+            if (this.GetCasterPlus().HasModifier("modifier_imba_clinkz_death_pact_723")) {
+                this.GetCasterPlus().RemoveModifierByName("modifier_imba_clinkz_death_pact_723");
+            }
+            this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_clinkz_death_pact_723", {
+                duration: this.GetSpecialValueFor("soul_high_duration"),
+                bonus_attack: health_to_convert * this.GetSpecialValueFor("soul_high_hp_to_attack") * 0.01
+            });
+            ApplyDamage({
+                victim: target,
+                damage: health_to_convert,
+                damage_type: DAMAGE_TYPES.DAMAGE_TYPE_PURE,
+                damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_REFLECTION + DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION + DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NO_SPELL_LIFESTEAL,
+                attacker: this.GetCasterPlus(),
+                ability: this
+            });
+        }
+    }
+}
+@registerModifier()
+export class modifier_imba_clinkz_death_pact_723 extends BaseModifier_Plus {
+    public health_gain: any;
+    public permanent_bonus: number;
+    public debuff_duration: number;
+    public armor_reduction: any;
+    GetEffectName(): string {
+        return "particles/units/heroes/hero_clinkz/clinkz_death_pact_buff.vpcf";
+    }
+    BeCreated(params: any): void {
+        this.health_gain = this.GetAbilityPlus().GetSpecialValueFor("health_gain");
+        this.permanent_bonus = this.GetSpecialValueFor("permanent_bonus");
+        this.debuff_duration = this.GetSpecialValueFor("debuff_duration");
+        this.armor_reduction = this.GetSpecialValueFor("armor_reduction");
+        if (!IsServer() || !params.bonus_attack) {
+            return;
+        }
+        this.SetStackCount(params.bonus_attack);
+    }
+    /** DeclareFunctions():modifierfunction[] {
+    return Object.values({
+        1: GPropertyConfig.EMODIFIER_PROPERTY.EXTRA_HEALTH_BONUS,
+        2: Enum_MODIFIER_EVENT.ON_ATTACK_LANDED,
+        3: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE
+    });
+    } */
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.EXTRA_HEALTH_BONUS)
+    CC_GetModifierExtraHealthBonus(): number {
+        return this.health_gain;
+    }
+    @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
+    CC_OnAttackLanded(keys: ModifierAttackEvent): void {
+        if (keys.attacker == this.GetParentPlus() && keys.target.IsRealUnit()) {
+            keys.target.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_clinkz_death_pact_723_enemy", {
+                duration: this.debuff_duration * (1 - keys.target.GetStatusResistance()),
+                armor_reduction: this.armor_reduction,
+                permanent_bonus: this.permanent_bonus
+            });
+        }
+    }
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    CC_GetModifierPreAttack_BonusDamage(): number {
+        return this.GetStackCount();
+    }
+}
+@registerModifier()
+export class modifier_imba_clinkz_death_pact_723_enemy extends BaseModifier_Plus {
+    public armor_reduction: any;
+    public permanent_bonus: number;
+    RemoveOnDeath(): boolean {
+        return false;
+    }
+    BeCreated(params: any): void {
+        if (this.GetAbilityPlus()) {
+            this.armor_reduction = this.GetSpecialValueFor("armor_reduction") * (-1);
+            this.permanent_bonus = this.GetSpecialValueFor("permanent_bonus");
+        } else if (params) {
+            this.armor_reduction = params.armor_reduction * (-1);
+            this.permanent_bonus = params.permanent_bonus;
+        } else {
+            this.armor_reduction = -2;
+            this.permanent_bonus = 5;
+        }
+    }
+    /** DeclareFunctions():modifierfunction[] {
+    return Object.values({
+        1: GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS,
+        2: Enum_MODIFIER_EVENT.ON_DEATH
+    });
+    } */
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS)
+    CC_GetModifierPhysicalArmorBonus(p_0: ModifierAttackEvent,): number {
+        return this.armor_reduction;
+    }
+    @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
+    CC_OnDeath(keys: ModifierInstanceEvent): void {
+        if (keys.unit == this.GetParentPlus() && keys.unit.IsRealUnit() && (!keys.unit.IsReincarnating || (keys.unit.IsReincarnating && !keys.unit.IsReincarnating()))) {
+            let pact_modifier = this.GetCasterPlus().findBuff<modifier_imba_clinkz_death_pact_723_permanent_buff>("modifier_imba_clinkz_death_pact_723_permanent_buff");
+            if (pact_modifier) {
+                pact_modifier.SetStackCount(pact_modifier.GetStackCount() + this.permanent_bonus);
+                if (pact_modifier.GetAbility()) {
+                    pact_modifier.GetAbility().EndCooldown();
+                }
+            }
+            this.Destroy();
+        }
+    }
+}
+@registerModifier()
+export class modifier_imba_clinkz_death_pact_723_permanent_buff extends BaseModifier_Plus {
+    IsHidden(): boolean {
+        return this.GetStackCount() <= 0;
+    }
+    IsPurgable(): boolean {
+        return false;
+    }
+    RemoveOnDeath(): boolean {
+        return false;
+    }
+    BeCreated(p_0: any,): void {
+    }
+    /** DeclareFunctions():modifierfunction[] {
+    return Object.values({
+        1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE
+    });
+    } */
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    CC_GetModifierPreAttack_BonusDamage(): number {
+        return this.GetStackCount();
+    }
+}
+
 @registerModifier()
 export class modifier_special_bonus_imba_clinkz_8 extends BaseModifier_Plus {
     IsHidden(): boolean {

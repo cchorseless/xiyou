@@ -4,7 +4,7 @@ const program = require('commander');
 const chokidar = require('chokidar');
 const path = require('path');
 const xlsx = require('node-xlsx');
-const {read_all_files, read_sub_directories} = require('./utils');
+const { read_all_files, read_sub_directories } = require('./utils');
 
 // 需要读取的excel路径
 const excel_path = 'excels';
@@ -453,7 +453,11 @@ function dealAbilitySpecial(s, fileName) {
                         if (temp2.includes(`"01" {`)) {
                             line_begin = i + k;
                         } else if (temp2.includes(`"09" {`)) {
-                            line_end = i + k + 5;
+                            let tem_k = 1;
+                            while (!lines[i + k + tem_k].includes("}")) {
+                                tem_k++;
+                            }
+                            line_end = i + k + tem_k + 1;
                         }
                         if (line_begin > 0 && line_end > 0) {
                             let moveline = lines.splice(line_begin, line_end - line_begin);

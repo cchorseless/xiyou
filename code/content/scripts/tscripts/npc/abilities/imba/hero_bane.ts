@@ -1301,11 +1301,9 @@ export class modifier_imba_fiends_grip_handler extends BaseModifier_Plus {
                         ParticleManager.ReleaseParticleIndex(particle_table[i]);
                     }
                     parent.TempData<any[]>().grip_link_particle_table = [];
-                    let creatures = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FindOrder.FIND_ANY_ORDER, false);
+                    let creatures = caster.FindChildByName("npc_imba_fiends_grip_demon");
                     for (const [_, creature] of GameFunc.iPair(creatures)) {
-                        if (creature.GetUnitName() == "npc_imba_fiends_grip_demon" && creature.GetPlayerID() == caster.GetPlayerID()) {
-                            creature.ForceKill(false);
-                        }
+                        creature.ForceKill(false);
                     }
                 }
             }

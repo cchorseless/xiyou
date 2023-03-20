@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { AnimationHelper } from "../../../helper/AnimationHelper";
 import { AoiHelper } from "../../../helper/AoiHelper";
@@ -17,6 +18,13 @@ export class imba_chaos_knight_chaos_bolt extends BaseAbility_Plus {
     }
     IsHiddenWhenStolen(): boolean {
         return false;
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
     }
     OnSpellStart(): void {
         let target = this.GetCursorTarget();
@@ -69,9 +77,7 @@ export class imba_chaos_knight_chaos_bolt extends BaseAbility_Plus {
         ParticleManager.SetParticleControl(particle, 3, Vector(8, math.floor(stun + 0.5), 0));
         ParticleManager.SetParticleControl(particle, 4, Vector(2, 1, 0));
         ParticleManager.ReleaseParticleIndex(particle);
-        target.AddNewModifier(caster, this, "modifier_generic_stunned", {
-            duration: stun
-        });
+        target.ApplyStunned(this, caster, stun);
         damage = ApplyDamage({
             victim: target,
             attacker: caster,
@@ -168,22 +174,22 @@ export class imba_chaos_knight_reality_rift extends BaseAbility_Plus {
             ParticleManager.SetParticleControl(particle, 2, target_point_vector);
             ParticleManager.SetParticleControlOrientation(particle, 2, direction, Vector(0, 1, 0), Vector(1, 0, 0));
             ParticleManager.ReleaseParticleIndex(particle);
-            let units = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_CLOSEST, false);
-            for (const [_, unit] of GameFunc.iPair(units)) {
-                if (unit.GetPlayerID() == caster.GetPlayerID()) {
-                    AnimationHelper.StartAnimation(unit, {
-                        duration: 0.4,
-                        activity: GameActivity_t.ACT_DOTA_OVERRIDE_ABILITY_2,
-                        rate: 1.0
-                    });
-                    let particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_chaos_knight/chaos_knight_reality_rift.vpcf", ParticleAttachment_t.PATTACH_CUSTOMORIGIN, target);
-                    ParticleManager.SetParticleControlEnt(particle, 0, unit, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", unit.GetAbsOrigin(), true);
-                    ParticleManager.SetParticleControlEnt(particle, 1, target, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", target_location, true);
-                    ParticleManager.SetParticleControl(particle, 2, target_point_vector);
-                    ParticleManager.SetParticleControlOrientation(particle, 2, direction, Vector(0, 1, 0), Vector(1, 0, 0));
-                    ParticleManager.ReleaseParticleIndex(particle);
-                }
-            }
+            // let units = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_CLOSEST, false);
+            // for (const [_, unit] of GameFunc.iPair(units)) {
+            //     if (unit.GetPlayerID() == caster.GetPlayerID()) {
+            //         AnimationHelper.StartAnimation(unit, {
+            //             duration: 0.4,
+            //             activity: GameActivity_t.ACT_DOTA_OVERRIDE_ABILITY_2,
+            //             rate: 1.0
+            //         });
+            //         let particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_chaos_knight/chaos_knight_reality_rift.vpcf", ParticleAttachment_t.PATTACH_CUSTOMORIGIN, target);
+            //         ParticleManager.SetParticleControlEnt(particle, 0, unit, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", unit.GetAbsOrigin(), true);
+            //         ParticleManager.SetParticleControlEnt(particle, 1, target, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", target_location, true);
+            //         ParticleManager.SetParticleControl(particle, 2, target_point_vector);
+            //         ParticleManager.SetParticleControlOrientation(particle, 2, direction, Vector(0, 1, 0), Vector(1, 0, 0));
+            //         ParticleManager.ReleaseParticleIndex(particle);
+            //     }
+            // }
             EmitSoundOn("Hero_ChaosKnight.RealityRift", caster);
         }
         return true;
@@ -211,23 +217,31 @@ export class imba_chaos_knight_reality_rift extends BaseAbility_Plus {
                     Queue: true
                 }
                 ExecuteOrderFromTable(order);
-                let units = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_CLOSEST, false);
-                for (const [_, unit] of GameFunc.iPair(units)) {
-                    if (unit.GetPlayerID() == caster.GetPlayerID()) {
-                        FindClearSpaceForUnit(unit, this.random_point, true);
-                        unit.Stop();
-                        unit.SetForwardVector(this.fw * -1 as Vector);
-                        let order = {
-                            UnitIndex: unit.entindex(),
-                            OrderType: dotaunitorder_t.DOTA_UNIT_ORDER_ATTACK_TARGET,
-                            TargetIndex: hTarget.entindex(),
-                            Queue: true
-                        }
-                        ExecuteOrderFromTable(order);
-                    }
-                }
+                // let units = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_CLOSEST, false);
+                // for (const [_, unit] of GameFunc.iPair(units)) {
+                //     if (unit.GetPlayerID() == caster.GetPlayerID()) {
+                //         FindClearSpaceForUnit(unit, this.random_point, true);
+                //         unit.Stop();
+                //         unit.SetForwardVector(this.fw * -1 as Vector);
+                //         let order = {
+                //             UnitIndex: unit.entindex(),
+                //             OrderType: dotaunitorder_t.DOTA_UNIT_ORDER_ATTACK_TARGET,
+                //             TargetIndex: hTarget.entindex(),
+                //             Queue: true
+                //         }
+                //         ExecuteOrderFromTable(order);
+                //     }
+                // }
             }
         }
+    }
+
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
     }
     /** DeclareFunctions():modifierfunction[] {
         let decFuncs = {
@@ -325,7 +339,7 @@ export class modifier_imba_chaos_knight_chaos_strike extends BaseModifier_Plus {
     Init(p_0: any,): void {
         this.crit_min = this.GetSpecialValueFor("crit_min");
         this.crit_max = this.GetSpecialValueFor("crit_max");
-        this.crit_chance = this.GetSpecialValueFor("crit_chance");
+        this.crit_chance = this.GetSpecialValueFor("chance");
         this.talent = this.GetParentPlus().HasTalent("special_bonus_unique_chaos_knight_chaos_strike_1") == null;
     }
 
@@ -382,7 +396,13 @@ export class modifier_imba_chaos_knight_chaos_strike extends BaseModifier_Plus {
 
 @registerAbility()
 export class imba_chaos_knight_phantasm extends BaseAbility_Plus {
+    GetManaCost(level: number): number {
+        return 100;
+    }
 
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_cast(this);
+    }
     phantasm_illusions: IBaseNpc_Plus[];
     OnSpellStart(): void {
         let extra_illusion_sound = "Hero_ChaosKnight.Phantasm.Plus";
@@ -450,7 +470,7 @@ export class modifier_imba_chaos_knight_phantasm_cast extends BaseModifier_Plus 
             }
         }
         ability.phantasm_illusions = [];
-        this.phantasm_illusions = this.GetParentPlus().CreateIllusion(this.GetParentPlus(), {
+        this.phantasm_illusions = this.GetCasterPlus().CreateIllusion(this.GetParentPlus(), {
             outgoing_damage: this.outgoing_damage,
             incoming_damage: this.incoming_damage,
             bounty_base: this.GetParentPlus().GetLevel() * 2,

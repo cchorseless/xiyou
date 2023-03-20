@@ -1055,7 +1055,7 @@ export class imba_abaddon_borrowed_time extends BaseAbility_Plus {
             if (caster.HasTalent("special_bonus_imba_abaddon_7")) {
                 let target_team = DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY;
                 let target_type = DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO;
-                let allies = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, target_team, target_type, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
+                let allies = caster.GetPlayerRoot().BattleUnitManagerComp().GetAllBattleUnitAliveNpc(caster.GetTeam())
                 for (const [_, unit] of GameFunc.iPair(allies)) {
                     let over_channel_particle = ResHelper.CreateParticleEx("particles/dev/library/base_dust_hit_detail.vpcf", ParticleAttachment_t.PATTACH_POINT, unit);
                     ParticleManager.ReleaseParticleIndex(over_channel_particle);

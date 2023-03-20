@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -70,6 +71,14 @@ export class imba_earthshaker_fissure extends BaseAbility_Plus {
         EmitSoundOnLocationWithCaster(start_pos, "Hero_EarthShaker.Fissure", this.GetCasterPlus());
         EmitSoundOnLocationWithCaster(end_pos, "Hero_EarthShaker.Fissure", this.GetCasterPlus());
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this, 1000);
+    }
+
 }
 @registerModifier()
 export class modifier_imba_earthshaker_fissure_thinker extends BaseModifier_Plus {
@@ -199,6 +208,19 @@ export class imba_earthshaker_enchant_totem extends BaseAbility_Plus {
         }
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_earthshaker_bonus_magic_resistance") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_earthshaker_bonus_magic_resistance")) {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_earthshaker_bonus_magic_resistance"), "modifier_special_bonus_imba_earthshaker_bonus_magic_resistance", {});
+        }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        if (this.GetCasterPlus().HasScepter()) {
+            return AI_ability.POSITION_if_enemy(this, 1000);
+        }
+        else {
+            return AI_ability.NO_TARGET_cast(this);
+
         }
     }
 }
@@ -663,6 +685,13 @@ export class imba_earthshaker_echo_slam extends BaseAbility_Plus {
             }
             ApplyDamage(damageTable);
         }
+    }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_cast(this);
     }
 }
 @registerModifier()

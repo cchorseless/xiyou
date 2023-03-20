@@ -18,7 +18,7 @@ export class BaseNpc_Plus extends BaseNpc {
                 r.push(ability)
             }
         }
-
+        r.sort((a, b) => { return b.GetCooldown(b.GetLevel()) - a.GetCooldown(a.GetLevel()) });
         return r;
     }
     GetAllCanCastItem?() {
@@ -32,6 +32,7 @@ export class BaseNpc_Plus extends BaseNpc {
                 r.push(item_in_caster)
             }
         }
+        r.sort((a, b) => { return b.GetCooldown(b.GetLevel()) - a.GetCooldown(a.GetLevel()) });
         return r;
     }
 
@@ -238,6 +239,9 @@ export class BaseNpc_Plus extends BaseNpc {
         bFindClearSpace = true,
     ) {
         let r: IBaseNpc_Plus[] = [];
+        if (!GFuncEntity.IsValid(copyunit) || IsClient()) {
+            return r;
+        }
         vLocation = vLocation || copyunit.GetAbsOrigin();
         for (let i = 0; i < nNumIllusions; i++) {
             let illusion = BaseNpc_Plus.CreateUnitByName(copyunit.GetUnitName(), vLocation, this, bFindClearSpace) as IBaseNpc_Plus;

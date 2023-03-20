@@ -769,6 +769,7 @@ export module ProjectileHelper {
                     projectile.OnHit.once = false;
                 }
                 projectile.Start();
+                return projectile;
             }
 
             Start() {

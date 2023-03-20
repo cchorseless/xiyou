@@ -6,6 +6,7 @@ import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
+// todo
 @registerAbility()
 export class imba_batrider_sticky_napalm extends BaseAbility_Plus {
     public napalm_impact_particle: any;

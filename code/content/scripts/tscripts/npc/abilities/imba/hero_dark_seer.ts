@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { AoiHelper } from "../../../helper/AoiHelper";
 import { ResHelper } from "../../../helper/ResHelper";
@@ -56,7 +57,7 @@ export class imba_dark_seer_vacuum extends BaseAbility_Plus {
         ParticleManager.ReleaseParticleIndex(particle);
         let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCursorPosition(), undefined, this.GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FindOrder.FIND_ANY_ORDER, false);
         for (const [_, enemy] of GameFunc.iPair(enemies)) {
-            if (!enemy.IsCourier || !enemy.IsCourier()) {
+            if (!enemy.IsCourier()) {
                 if (enemy.IsInvulnerable() && !enemy.HasModifier("modifier_eul_cyclone")) {
                     enemy.AddNewModifier(enemy, this, "modifier_imba_dark_seer_vacuum", {
                         duration: this.GetTalentSpecialValueFor("duration"),
@@ -103,6 +104,14 @@ export class imba_dark_seer_vacuum extends BaseAbility_Plus {
                     this.swap_timer = undefined;
                 }));
         }
+    }
+
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.POSITION_most_enemy(this);
     }
 }
 @registerModifier()
@@ -158,6 +167,7 @@ export class modifier_imba_dark_seer_vacuum extends BaseModifierMotionHorizontal
         }
         // this.GetParentPlus().RemoveHorizontalMotionController();
         this.GetParentPlus().SetAbsOrigin(this.vacuum_pos);
+        this.GetParentPlus().RemoveGesture(GameActivity_t.ACT_DOTA_FLAIL);
         ResolveNPCPositions(this.vacuum_pos, 128);
         let damageTable = {
             victim: this.GetParentPlus(),
@@ -487,6 +497,13 @@ export class imba_dark_seer_ion_shell extends BaseAbility_Plus {
             });
         }
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_friend(this, null, (unit) => { return !unit.HasModifier("modifier_imba_dark_seer_ion_shell") });
+    }
 }
 @registerModifier()
 export class modifier_imba_dark_seer_ion_shell extends BaseModifier_Plus {
@@ -527,6 +544,10 @@ export class modifier_imba_dark_seer_ion_shell extends BaseModifier_Plus {
     }
     OnIntervalThink(): void {
         if (!IsServer()) {
+            return;
+        }
+        if (!GFuncEntity.IsValid(this.GetCasterPlus())) {
+            this.Destroy();
             return;
         }
         let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
@@ -768,6 +789,13 @@ export class imba_dark_seer_surge extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_dark_seer_surge_cast_range"), "modifier_special_bonus_imba_dark_seer_surge_cast_range", {});
         }
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_friend(this);
+    }
 }
 @registerModifier()
 export class modifier_imba_dark_seer_surge extends BaseModifier_Plus {
@@ -898,6 +926,12 @@ export class imba_dark_seer_wall_of_replica extends BaseAbility_Plus {
             rotation: -45
         }, this.GetCasterPlus().GetAbsOrigin(), this.GetCasterPlus().GetTeamNumber(), false);
     }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this);
+    }
 }
 @registerModifier()
 export class modifier_imba_dark_seer_wall_of_replica extends BaseModifier_Plus {
@@ -921,11 +955,10 @@ export class modifier_imba_dark_seer_wall_of_replica extends BaseModifier_Plus {
     public scale_1: any;
     public scale_2: any;
     public scale_3: any;
-    public wall_slow_modifier: any;
     BeCreated(params: any): void {
         this.width = this.GetSpecialValueFor("width");
         this.thickness = 50;
-        this.slow_duration = this.GetAbilityPlus().GetTalentSpecialValueFor("slow_duration");
+        this.slow_duration = this.GetSpecialValueFor("slow_duration");
         this.movement_slow = this.GetSpecialValueFor("movement_slow");
         this.scepter_rotation_speed = this.GetSpecialValueFor("scepter_rotation_speed");
         this.minimum_interval = this.GetSpecialValueFor("minimum_interval");
@@ -961,18 +994,26 @@ export class modifier_imba_dark_seer_wall_of_replica extends BaseModifier_Plus {
         if (!IsServer()) {
             return;
         }
-        if (this.GetAbilityPlus()) {
-            this.slow_duration = this.GetAbilityPlus().GetTalentSpecialValueFor("slow_duration");
-        }
-        for (const [_, enemy] of GameFunc.iPair(FindUnitsInLine(this.GetCasterPlus().GetTeamNumber(), this.wall_start, this.wall_end, undefined, this.thickness, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES))) {
-            this.wall_slow_modifier = enemy.FindModifierByNameAndCaster("modifier_imba_dark_seer_wall_of_replica_slow", this.GetParentPlus());
-            if (this.wall_slow_modifier) {
-                this.wall_slow_modifier.SetDuration(this.slow_duration * (1 - enemy.GetStatusResistance()), true);
+        let enemys = FindUnitsInLine(this.GetCasterPlus().GetTeamNumber(),
+            this.wall_start, this.wall_end, undefined, this.thickness,
+            DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY,
+            DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC,
+            DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES);
+        for (const [_, enemy] of GameFunc.iPair(enemys)) {
+            let wall_slow_modifier = enemy.FindModifierByNameAndCaster("modifier_imba_dark_seer_wall_of_replica_slow", this.GetParentPlus());
+            if (wall_slow_modifier) {
+                wall_slow_modifier.SetDuration(this.slow_duration * (1 - enemy.GetStatusResistance()), true);
             } else {
                 enemy.AddNewModifier(this.GetParentPlus(), this.GetAbilityPlus(), "modifier_imba_dark_seer_wall_of_replica_slow", {
                     duration: this.slow_duration * (1 - enemy.GetStatusResistance()),
                     movement_slow: this.movement_slow,
                     minimum_interval: this.minimum_interval
+                });
+            }
+            let wall_illusion_modifier = enemy.FindModifierByNameAndCaster("modifier_imba_dark_seer_wall_of_replica_illusion", this.GetCasterPlus());
+            if (!wall_illusion_modifier) {
+                enemy.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_dark_seer_wall_of_replica_illusion", {
+                    duration: this.GetRemainingTime(),
                 });
             }
         }
@@ -1032,6 +1073,20 @@ export class modifier_imba_dark_seer_wall_of_replica_slow extends BaseModifier_P
         }
     }
 }
+
+@registerModifier()
+export class modifier_imba_dark_seer_wall_of_replica_illusion extends BaseModifier_Plus {
+    public BeCreated(params?: IModifierTable): void {
+        if (!IsServer()) { return }
+        this.GetCasterPlus().CreateIllusion(this.GetParentPlus(), {
+            duration: this.GetDuration(),
+        }, 1)
+    }
+
+}
+
+
+
 @registerModifier()
 export class modifier_special_bonus_imba_dark_seer_ion_shell_radius extends BaseModifier_Plus {
     IsHidden(): boolean {

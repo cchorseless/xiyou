@@ -521,8 +521,8 @@ export class imba_antimage_spell_shield extends BaseAbility_Plus {
             ParticleManager.ReleaseParticleIndex(shield_pfx);
             caster.StartGesture(GameActivity_t.ACT_DOTA_CAST_ABILITY_3);
             if (this.GetCasterPlus().IsRealUnit() && this.GetCasterPlus().HasScepter()) {
-                for (const [_, unit] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_ANY_ORDER, false))) {
-                    if (unit.GetPlayerID() == this.GetCasterPlus().GetPlayerID() && unit.IsIllusion() && unit.HasAbility("imba_antimage_spell_shield") && unit.HasModifier("modifier_imba_antimage_blink_command_restricted")) {
+                for (const [_, unit] of GameFunc.iPair(this.GetCasterPlus().FindChildByFilter((u) => u.IsIllusion()))) {
+                    if (unit.GetPlayerID() == this.GetCasterPlus().GetPlayerID() && unit.HasAbility("imba_antimage_spell_shield") && unit.HasModifier("modifier_imba_antimage_blink_command_restricted")) {
                         unit.findAbliityPlus<imba_antimage_spell_shield>("imba_antimage_spell_shield").OnSpellStart();
                     }
                 }

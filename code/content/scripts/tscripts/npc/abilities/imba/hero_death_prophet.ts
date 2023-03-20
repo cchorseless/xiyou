@@ -1,6 +1,7 @@
 
 // import { GameFunc } from "../../../GameFunc";
 // import { AoiHelper } from "../../../helper/AoiHelper";
+// import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 // import { ResHelper } from "../../../helper/ResHelper";
 // import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 // import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -219,7 +220,7 @@
 //             let caster = this.GetCasterPlus();
 //             let parent = this.GetParentPlus();
 //             let ability = this.GetAbilityPlus();
-//             this.range = this.GetAbilityPlus().GetTrueCastRange() + this.GetSpecialValueFor("siphon_buffer");
+//             this.range = this.GetAbilityPlus().GetCastRangePlus() + this.GetSpecialValueFor("siphon_buffer");
 //             this.nFX = ResHelper.CreateParticleEx("particles/units/heroes/hero_death_prophet/death_prophet_spiritsiphon.vpcf", ParticleAttachment_t.PATTACH_CUSTOMORIGIN, this.GetCasterPlus());
 //             ParticleManager.SetParticleControlEnt(this.nFX, 0, this.GetCasterPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", this.GetCasterPlus().GetAbsOrigin(), true);
 //             ParticleManager.SetParticleControlEnt(this.nFX, 1, this.GetParentPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", this.GetParentPlus().GetAbsOrigin(), true);
@@ -245,7 +246,7 @@
 //             let caster = this.GetCasterPlus();
 //             let parent = this.GetParentPlus();
 //             let ability = this.GetAbilityPlus();
-//             this.range = this.GetAbilityPlus().GetTrueCastRange() + this.GetSpecialValueFor("siphon_buffer");
+//             this.range = this.GetAbilityPlus().GetCastRangePlus() + this.GetSpecialValueFor("siphon_buffer");
 //             if (this.talent1) {
 //                 let damage = this.damage * this.GetRemainingTime();
 //                 let heal = ability.DealDamage(caster, parent, damage, {
@@ -397,9 +398,9 @@
 //         caster.EmitSound("Hero_DeathProphet.Exorcism.Cast");
 //         ParticleManager.FireParticle("particles/units/heroes/hero_death_prophet/death_prophet_spawn.vpcf", ParticleAttachment_t.PATTACH_POINT_FOLLOW, caster);
 //     }
-//     CreateGhost(position: Vector, duration: number) {
+//     CreateGhost(_position: Vector, duration: number) {
 //         let caster = this.GetCasterPlus();
-//         let vPos = position || caster.GetAbsOrigin();
+//         let vPos = _position || caster.GetAbsOrigin();
 //         let speed = this.GetSpecialValueFor("spirit_speed");
 //         let radius = this.GetSpecialValueFor("radius");
 //         let give_up_distance = this.GetSpecialValueFor("give_up_distance");
@@ -413,22 +414,23 @@
 //             RETURNING: 3
 //         }
 //         let direction = TernaryOperator(caster.GetRightVector(), RollPercentage(50), caster.GetRightVector() * (-1));
-//         let position = caster.GetAbsOrigin() + direction * 180;
+//         let position = caster.GetAbsOrigin() + direction * 180 as Vector;
 //         caster.nearbyEnemies = caster.FindEnemyUnitsInRadius(caster.GetAbsOrigin(), radius);
-//         let ProjectileThink = function (self) {
-//             let position = this.GetPosition();
-//             let velocity = this.GetVelocity();
-//             let speed = this.GetSpeed();
-//             let caster = this.GetCasterPlus();
-//             let casterDistance = CalculateDistance(caster, position);
+
+//         let ProjectileThink = GHandler.create(this, (pj: ISimpleLineProjectile) => {
+//             let position = pj.GetPosition();
+//             let velocity = pj.GetVelocity();
+//             let speed = pj.GetSpeed();
+//             let caster = pj.GetCaster();
+//             let casterDistance = GFuncVector.CalculateDistance(caster, position);
 //             if (velocity.z > 0) {
 //                 velocity.z = 0;
 //             }
 //             if (this.state == stateList.ORBITING) {
-//                 let distance = this.orbitRadius - casterDistance;
+//                 let distance = pj.orbitRadius - casterDistance;
 //                 let direction = GFuncVector.CalculateDirection(position, caster);
-//                 this.SetVelocity(GetPerpendicularVector(direction) * speed * (-1) ^ this.orientation + direction * distance);
-//                 this.SetPosition(GetGroundPosition(position + (this.GetVelocity() * ProjectileManager.FrameTime()), undefined));
+//                 pj.SetVelocity(GetPerpendicularVector(direction) * speed * (-1) ^ this.orientation + direction * distance);
+//                 pj.SetPosition(GetGroundPosition(position + (this.GetVelocity() * ProjectileManager.FrameTime()), undefined));
 //                 let newTarget = caster.GetAttackTarget() || caster.nearbyEnemies[RandomInt(1, GameFunc.GetCount(caster.nearbyEnemies))];
 //                 if (newTarget) {
 //                     this.seekTarget = newTarget;
@@ -484,39 +486,37 @@
 //             if (casterDistance > this.maxRadius) {
 //                 this.Remove();
 //             }
-//         }
-//         let ProjectileHit = function (self, target, position) {
-//             let caster = this.GetCasterPlus();
-//             let ability = this.GetAbilityPlus();
+//         });
+//         let ProjectileHit = GHandler.create(this, (pj: ISimpleLineProjectile, enemy: IBaseNpc_Plus, position) => {
 //             if (this.seekTarget) {
 //                 this.state = stateList.RETURNING;
-//                 this.damageDealt = this.damageDealt + ability.DealDamage(caster, target, this.damage, {
-//                     damage_type: this.damageType
+//                 this.damageDealt = this.damageDealt + this.DealDamage(caster, enemy, damage, {
+//                     damage_type: damageType
 //                 });
 //                 this.seekTarget = undefined;
 //             }
 //             return true;
-//         }
-//         let projectile = ProjectileHandler.CreateProjectile(ProjectileThink, ProjectileHit, {
+//         })
+//         let projectile = ProjectileHelper.LineProjectiles.SimpleLineProjectile.CreateOne({
 //             FX: "particles/units/heroes/hero_death_prophet/death_prophet_exorcism_ghost.vpcf",
 //             position: position,
 //             caster: caster,
 //             ability: this,
+//             OnHit: ProjectileHit,
+//             OnThink: ProjectileThink,
 //             speed: speed,
 //             radius: 24,
-//             velocity: speed * caster.GetForwardVector(),
+//             velocity: speed * caster.GetForwardVector() as Vector,
 //             turn_speed: turnSpeed,
 //             state: stateList.ORBITING,
 //             orbitRadius: math.random() * radius + 50,
 //             maxRadius: max_distance,
-//             damage: damage,
-//             damageType: damageType,
 //             giveUpDistance: give_up_distance,
 //             orientation: RandomInt(1, 10),
 //             damageDealt: 0,
 //             duration: duration,
 //             isUniqueProjectile: true
-//         });
+//         })
 //         return projectile;
 //     }
 // }

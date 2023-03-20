@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { AnimationHelper } from "../../../helper/AnimationHelper";
 import { ResHelper } from "../../../helper/ResHelper";
@@ -150,6 +151,14 @@ export class imba_crystal_maiden_crystal_nova extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_special_bonus_imba_crystal_maiden_3", {});
         }
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.POSITION_most_enemy(this);
+    }
+
     OnSpellStart(): void {
         let caster = this.GetCasterPlus();
         let ability = this;
@@ -457,6 +466,13 @@ export class imba_crystal_maiden_frostbite extends BaseAbility_Plus {
                 });
             }
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
     }
 }
 @registerModifier()
@@ -1079,6 +1095,13 @@ export class imba_crystal_maiden_freezing_field extends BaseAbility_Plus {
                 damage_type: this.GetAbilityDamageType()
             });
         }
+    }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_cast(this);
     }
 }
 @registerModifier()
