@@ -436,27 +436,30 @@ CBaseAbility.GetTalentSpecialValueFor = function (s: string, default_V = 0): num
     let talentName;
     const link = "LinkedSpecialBonus";
     let data: { [k: string]: any } = KVHelper.KvAbilitys[this.GetAbilityName()] || KVHelper.KvItems[this.GetAbilityName()];
-    for (const k in data) {
-        const v: { [k: string]: any } = data[k];
-        if (k == "AbilitySpecial") {
-            for (const [l, m] of GameFunc.Pair(v)) {
-                if (m[s] && m[link]) {
-                    talentName = m[link];
-                    break;
-                }
-            }
-        } else if (k == "AbilityValues") {
-            for (const [l, m] of GameFunc.Pair(v)) {
-                if (type(m) == "table") {
+    if (data) {
+        for (const k in data) {
+            const v: { [k: string]: any } = data[k];
+            if (k == "AbilitySpecial") {
+                for (const [l, m] of GameFunc.Pair(v)) {
                     if (m[s] && m[link]) {
                         talentName = m[link];
                         break;
                     }
                 }
+            } else if (k == "AbilityValues") {
+                for (const [l, m] of GameFunc.Pair(v)) {
+                    if (type(m) == "table") {
+                        if (m[s] && m[link]) {
+                            talentName = m[link];
+                            break;
+                        }
+                    }
+                }
             }
+            if (talentName) break;
         }
-        if (talentName) break;
     }
+
     if (talentName) {
         let talent = this.GetCasterPlus().FindAbilityByName(talentName);
         if (talent && talent.GetLevel() > 0) {
@@ -929,6 +932,7 @@ CDOTA_Buff.GetSpecialValueFor = function (s: string, default_V = 0) {
         return default_V;
     }
 };
+
 CDOTA_Buff.GetTalentSpecialValueFor = function (s: string, default_V = 0) {
     if (!IsValid(this)) return 0;
     let r = 0;
@@ -1137,6 +1141,11 @@ declare global {
          * @Both
          */
         IsThinker(): boolean;
+        /**
+         * 是否NPC thinker
+         * @Both
+         */
+        IsDummyUnit(): boolean;
         /**
          * @Both
          */
@@ -1514,6 +1523,10 @@ const BaseNPC = IsServer() ? CDOTA_BaseNPC : C_DOTA_BaseNPC;
 BaseNPC.IsThinker = function () {
     return this.GetUnitName() == "npc_dota_thinker";
 }
+BaseNPC.IsDummyUnit = function () {
+    return this.GetUnitName() == "npc_imba_dummy_unit" || this.GetUnitName() == "npc_imba_dummy_unit_perma";
+}
+
 BaseNPC.ClearSelf = function () {
     if (IsValid(this)) {
         if (this.__TempData) {
@@ -1523,7 +1536,7 @@ BaseNPC.ClearSelf = function () {
         }
         this.__TempData = null;
         if (this.__CreateChildren__) {
-            let thinkers = this.FindChildByFilter((v) => v.IsThinker());
+            let thinkers = this.FindChildByFilter((v) => v.IsThinker() || v.IsDummyUnit());
             thinkers.forEach((v) => {
                 v.Destroy();
             });

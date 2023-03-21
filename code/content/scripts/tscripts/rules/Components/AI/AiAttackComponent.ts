@@ -14,12 +14,13 @@ export class AiAttackComponent extends ET.Component {
         this.timerBattle = GTimerHelper.AddTimer(0.1, GHandler.create(this, () => {
             if (this.IsDisposed()) { return }
             let u = this.GetDomain<IBaseNpc_Plus>();
-            if (u.IsCommandRestricted()) {
+            if (u.IsCommandRestricted() || u.IsStunned() || u.IsFeared() || u.IsFreeze()) {
                 return 0.5;
             }
             if (u.IsChanneling()) {
                 return 0.5;
             }
+
             if (this.castAbilityAndItem()) {
                 return 1;
             }
@@ -69,10 +70,18 @@ export class AiAttackComponent extends ET.Component {
         let u = this.GetDomain<IBaseNpc_Plus>();
         let abilitys = u.GetAllCanCastAbility();
         // GLogHelper.print(abilitys.length)
+
         while (abilitys.length > 0) {
             let ability = abilitys.shift();
-            // GLogHelper.print(ability.GetAbilityName())
             if (ability && ability.AutoSpellSelf()) {
+                if (IsInToolsMode()) {
+                    GTimerHelper.AddFrameTimer(1, GHandler.create(this, () => {
+                        if (!ability.IsInAbilityPhase()) {
+                            GLogHelper.warn(`${ability.GetAbilityName()} AutoSpellSelf Error`)
+                        }
+                    }))
+
+                }
                 return true;
             }
         }
@@ -112,5 +121,9 @@ export class AiAttackComponent extends ET.Component {
             return true;
         }
         return false;
+    }
+
+    onAwake(...args: any[]): void {
+        GLogHelper.print("AiAttackComponent onAwake" + this.GetDomain<IBaseNpc_Plus>().GetClassname())
     }
 }

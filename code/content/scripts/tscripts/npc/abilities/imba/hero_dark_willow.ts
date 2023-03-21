@@ -388,16 +388,14 @@ export class modifier_imba_dark_willow_shadow_realm_talent extends BaseModifier_
     public tick: any;
     public max_damage: number;
     public max_slow: any;
-    BeCreated(kv: any): void {
+    Init(kv: any): void {
         let caster = this.GetCasterPlus();
         this.tick = caster.GetTalentValue("special_bonus_unique_imba_dark_willow_shadow_realm_1", "tick");
         this.max_damage = this.GetSpecialValueFor("max_damage") * caster.GetTalentValue("special_bonus_unique_imba_dark_willow_shadow_realm_1", "damage") / 100;
         this.max_slow = caster.GetTalentValue("special_bonus_unique_imba_dark_willow_shadow_realm_1") * (-1);
         this.StartIntervalThink(this.tick);
     }
-    BeRefresh(kv: any): void {
-        this.OnCreated(kv);
-    }
+
     OnIntervalThink(): void {
         let caster = this.GetCasterPlus();
         let parent = this.GetParentPlus();
@@ -687,7 +685,7 @@ export class modifier_imba_dark_willow_bedlam extends BaseModifier_Plus {
             this.i = 0;
             this.point = caster.GetAbsOrigin() + this.direction * this.distance + Vector(0, 0, 100);
             EmitSoundOn("Hero_DarkWillow.WispStrike.Cast", caster);
-            this.bug = caster.CreateSummon("npc_dota_dark_willow_creature", this.point, this.GetDuration());
+            this.bug = caster.CreateSummon("npc_imba_dark_willow_creature", this.point, this.GetDuration());
             this.bug.SetAbsOrigin(this.point);
             this.bug.AddNewModifier(caster, this.GetAbilityPlus(), "modifier_imba_dark_willow_bedlam_bug", {});
             this.StartIntervalThink(FrameTime());
@@ -803,7 +801,7 @@ export class imba_dark_willow_terrorize extends BaseAbility_Plus {
         this.nfx = ResHelper.CreateParticleEx("particles/units/heroes/hero_dark_willow/dark_willow_wisp_spell_marker.vpcf", ParticleAttachment_t.PATTACH_POINT, caster);
         ParticleManager.SetParticleControl(this.nfx, 0, point);
         ParticleManager.SetParticleControl(this.nfx, 1, Vector(radius, 2, 1000));
-        this.bug = caster.CreateSummon("npc_dota_dark_willow_creature", caster.GetAbsOrigin(), 10);
+        this.bug = caster.CreateSummon("npc_imba_dark_willow_creature", caster.GetAbsOrigin(), 10);
         this.fear = this.bug.AddNewModifier(caster, this, "modifier_imba_dark_willow_terrorize", {}) as modifier_imba_dark_willow_terrorize;
         EmitSoundOn("Hero_DarkWillow.Fear.Cast", caster);
         let pos = GetGroundPosition(caster.GetAbsOrigin(), caster);

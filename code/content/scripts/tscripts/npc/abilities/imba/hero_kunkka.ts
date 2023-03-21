@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { AoiHelper } from "../../../helper/AoiHelper";
 import { ResHelper } from "../../../helper/ResHelper";
@@ -444,6 +445,12 @@ export class imba_kunkka_torrent extends BaseAbility_Plus {
         }
         return range;
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this)
+    }
 }
 @registerModifier()
 export class modifier_imba_torrent_handler extends BaseModifier_Plus {
@@ -765,6 +772,15 @@ export class imba_kunkka_tidebringer extends BaseAbility_Plus {
             cooldown = 0;
         }
         return cooldown;
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        if (!this.GetAutoCastState()) {
+            this.ToggleAutoCast();
+        }
+        return false
     }
 }
 @registerModifier()
@@ -1646,6 +1662,12 @@ export class imba_kunkka_ghostship extends BaseAbility_Plus {
             }
         }
         return false;
+    }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_most_enemy(this)
     }
 }
 @registerModifier()

@@ -93,7 +93,7 @@ export class modifier_imba_life_stealer_rage_insanity extends BaseModifier_Plus 
     IsPurgable(): boolean {
         return false;
     }
-    BeCreated(params: any): void {
+    Init(params: any): void {
         if (this.GetAbilityPlus()) {
             this.stack_activation = this.GetSpecialValueFor("insanity_stack_activation");
         }
@@ -108,12 +108,7 @@ export class modifier_imba_life_stealer_rage_insanity extends BaseModifier_Plus 
             this.SetStackCount(this.GetStackCount() + params.stacks);
         }
     }
-    BeRefresh(params: any): void {
-        if (!IsServer()) {
-            return;
-        }
-        this.OnCreated(params);
-    }
+
     OnStackCountChanged(stackCount: number): void {
         if (!IsServer()) {
             return;
@@ -333,18 +328,13 @@ export class modifier_imba_life_stealer_feast_engorge extends BaseModifier_Plus 
 }
 @registerModifier()
 export class modifier_imba_life_stealer_feast_engorge_counter extends BaseModifier_Plus {
-    BeCreated(params: any): void {
+    Init(params: any): void {
         if (!IsServer()) {
             return;
         }
         this.SetStackCount(this.GetStackCount() + params.stacks);
     }
-    BeRefresh(params: any): void {
-        if (!IsServer()) {
-            return;
-        }
-        this.OnCreated(params);
-    }
+
 }
 @registerModifier()
 export class modifier_imba_life_stealer_feast_banquet extends BaseModifier_Plus {
@@ -573,7 +563,7 @@ export class imba_life_stealer_infest extends BaseAbility_Plus {
         if (!IsServer()) {
             return;
         }
-        if (target == this.GetCasterPlus() || target.GetClassname() == "npc_dota_rattletrap_cog") {
+        if (target == this.GetCasterPlus() || target.GetClassname() == "npc_imba_rattletrap_cog") {
             return UnitFilterResult.UF_FAIL_OTHER;
         } else {
             return UnitFilterResult.UF_SUCCESS;
@@ -1035,7 +1025,7 @@ export class imba_life_stealer_control extends BaseAbility_Plus {
         let infest_modifier = this.GetCasterPlus().FindModifierByNameAndCaster("modifier_imba_life_stealer_infest", this.GetCasterPlus()) as modifier_imba_life_stealer_infest;
         if (infest_modifier && infest_modifier.infest_effect_modifier && infest_modifier.infest_effect_modifier.GetParent() && !infest_modifier.infest_effect_modifier.GetParent().FindModifierByNameAndCaster("modifier_imba_life_stealer_control", this.GetCasterPlus())) {
             let target = infest_modifier.infest_effect_modifier.GetParent();
-            if (string.find(target.GetUnitName(), "guys_")) {
+            if (target.GetUnitName().includes("guys_")) {
                 infest_modifier.null_destroy = true;
                 let lane_creep_name = target.GetUnitName();
                 let new_lane_creep = BaseNpc_Plus.CreateUnitByName(target.GetUnitName(), target.GetAbsOrigin(), this.GetCasterPlus(), false);

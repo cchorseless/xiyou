@@ -432,7 +432,7 @@ export class imba_outworld_devourer_sanity_eclipse extends BaseAbility_Plus {
 @registerModifier()
 export class modifier_imba_outworld_devourer_sanity_eclipse_charge extends BaseModifier_Plus {
     public stack_mana: number;
-    BeCreated(keys: any): void {
+    Init(keys: any): void {
         if (keys && keys.charges) {
             this.SetStackCount(this.GetStackCount() + keys.charges);
         }
@@ -442,9 +442,7 @@ export class modifier_imba_outworld_devourer_sanity_eclipse_charge extends BaseM
         }
         // this.GetParentPlus().CalculateStatBonus(true);
     }
-    BeRefresh(keys: any): void {
-        this.OnCreated(keys);
-    }
+
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
             1: GPropertyConfig.EMODIFIER_PROPERTY.MANA_BONUS

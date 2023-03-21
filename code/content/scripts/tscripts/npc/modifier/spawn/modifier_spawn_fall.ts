@@ -55,7 +55,6 @@ export class modifier_spawn_fall extends BaseModifierMotionVertical_Plus {
         if (IsServer()) {
             this.GetParentPlus().RemoveHorizontalMotionController(this);
             this.GetParentPlus().RemoveVerticalMotionController(this);
-            this.GetParentPlus().RemoveGesture(GameActivity_t.ACT_DOTA_FLAIL);
             //  this.GetParentPlus().SetForwardVector(Vector(0,-1,0))
             if (this.DestroyHandler) {
                 this.DestroyHandler.run();

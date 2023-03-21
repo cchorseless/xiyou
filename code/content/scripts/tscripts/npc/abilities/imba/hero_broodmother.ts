@@ -9,7 +9,7 @@ import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 
 function IsSpiderling(unit: IBaseNpc_Plus) {
-    if (unit.GetUnitName() == "npc_dota_broodmother_spiderking" || unit.GetUnitName() == "npc_dota_broodmother_spiderling") {
+    if (unit.GetUnitName() == "npc_imba_broodmother_spiderking" || unit.GetUnitName() == "npc_imba_broodmother_spiderling") {
         return true;
     } else {
         return false;
@@ -118,7 +118,7 @@ export class modifier_imba_broodmother_spawn_spiderlings extends BaseModifier_Pl
             ParticleManager.ReleaseParticleIndex(pfx);
             this.parent.EmitSound("Hero_Broodmother.SpawnSpiderlings");
             for (let i = 0; i < this.count; i++) {
-                let spiderling = this.caster.CreateSummon("npc_dota_broodmother_spiderling", this.parent.GetAbsOrigin(), this.spiderling_duration, false);
+                let spiderling = this.caster.CreateSummon("npc_imba_broodmother_spiderling", this.parent.GetAbsOrigin(), this.spiderling_duration, false);
                 spiderling.SetOwner(this.caster);
                 spiderling.SetControllableByPlayer(this.caster.GetPlayerID(), false);
                 spiderling.SetUnitOnClearGround();
@@ -230,7 +230,7 @@ export class modifier_imba_broodmother_spawn_spiderlings_avenger_buff extends Ba
 export class imba_broodmother_spin_web extends BaseAbility_Plus {
     GetCastRange(location: Vector, target: CDOTA_BaseNPC | undefined): number {
         if (IsServer()) {
-            if (AoiHelper.IsNearEntity("npc_dota_broodmother_web", location, this.GetSpecialValueFor("radius") * 2, this.GetCasterPlus())) {
+            if (AoiHelper.IsNearEntity("npc_imba_broodmother_web", location, this.GetSpecialValueFor("radius") * 2, this.GetCasterPlus())) {
                 return 25000;
             }
         }
@@ -290,7 +290,7 @@ export class imba_broodmother_spin_web extends BaseAbility_Plus {
                 oldest_web.ForceKill(false);
             }
         }
-        let web = caster.CreateSummon("npc_dota_broodmother_web", target_point, 60, false);
+        let web = caster.CreateSummon("npc_imba_broodmother_web", target_point, 60, false);
         web.AddNewModifier(caster, this, modifier_aura_friendly, {});
         web.AddNewModifier(caster, this, modifier_aura_enemy, {});
         web.SetOwner(caster);
@@ -1035,7 +1035,7 @@ export class imba_broodmother_spawn_spiderking extends BaseAbility_Plus {
         let target_point = this.GetCursorPosition();
         let modifier_hatch = "modifier_imba_broodmother_spawn_spiderking_hatch";
         let cocoon_time = this.GetSpecialValueFor("cocoon_time");
-        let cocoon = caster.CreateSummon("npc_dota_broodmother_cocoon", target_point, cocoon_time, false);
+        let cocoon = caster.CreateSummon("npc_imba_broodmother_cocoon", target_point, cocoon_time, false);
         cocoon.SetOwner(caster);
         // cocoon.SetControllableByPlayer(caster.GetPlayerID(), false);
         cocoon.SetUnitOnClearGround();
@@ -1081,7 +1081,7 @@ export class modifier_imba_broodmother_spawn_spiderking_hatch extends BaseModifi
         }
         EmitSoundOn(this.sound, this.parent);
         this.parent.ForceKill(false);
-        let spiderking = this.caster.CreateSummon("npc_dota_broodmother_spiderking", this.parent.GetAbsOrigin(), 40, false);
+        let spiderking = this.caster.CreateSummon("npc_imba_broodmother_spiderking", this.parent.GetAbsOrigin(), 40, false);
         spiderking.SetOwner(this.caster);
         // spiderking.SetControllableByPlayer(this.caster.GetPlayerID(), false);
         spiderking.SetUnitOnClearGround();

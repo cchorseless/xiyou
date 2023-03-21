@@ -37,7 +37,7 @@ export class imba_puck_illusory_orb extends BaseAbility_Plus {
         this.talent_cast_range_increases = 0;
         for (let ability = 0; ability <= 23; ability++) {
             let found_ability = this.GetCasterPlus().GetAbilityByIndex(ability);
-            if (found_ability && string.find(found_ability.GetAbilityName(), "cast_range") && this.GetCasterPlus().HasTalent(found_ability.GetAbilityName())) {
+            if (found_ability && found_ability.GetAbilityName().includes("cast_range") && this.GetCasterPlus().HasTalent(found_ability.GetAbilityName())) {
                 this.talent_cast_range_increases = this.talent_cast_range_increases + this.GetCasterPlus().GetTalentValue(found_ability.GetAbilityName());
             }
         }

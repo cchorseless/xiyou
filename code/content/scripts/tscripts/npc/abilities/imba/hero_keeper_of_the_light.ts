@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -34,8 +35,17 @@ export class imba_keeper_of_the_light_illuminate extends BaseAbility_Plus {
         });
     }
     OnChannelThink(p_0: number,): void {
+
     }
     OnChannelFinish(bInterrupted: boolean): void {
+
+    }
+
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this)
     }
 }
 @registerModifier()
@@ -438,6 +448,12 @@ export class imba_keeper_of_the_light_blinding_light extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_keeper_of_the_light_luminous_burster"), "modifier_special_bonus_imba_keeper_of_the_light_luminous_burster", {});
         }
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this)
+    }
 }
 @registerModifier()
 export class modifier_imba_keeper_of_the_light_blinding_light extends BaseModifier_Plus {
@@ -616,6 +632,16 @@ export class imba_keeper_of_the_light_chakra_magic extends BaseAbility_Plus {
                 }
             }
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_friend(this, null, (unit) => {
+            if (unit.GetMana() < 80) {
+                return true;
+            }
+        })
     }
 }
 @registerModifier()
@@ -909,7 +935,7 @@ export class imba_keeper_of_the_light_will_o_wisp extends BaseAbility_Plus {
         if (!IsServer()) {
             return;
         }
-        let ignis_fatuus = BaseNpc_Plus.CreateUnitByName("npc_dota_ignis_fatuus", this.position, this.caster, true);
+        let ignis_fatuus = BaseNpc_Plus.CreateUnitByName("npc_imba_ignis_fatuus", this.position, this.caster, true);
         ignis_fatuus.AddNewModifier(this.caster, this, "modifier_imba_keeper_of_the_light_will_o_wisp", {
             duration: this.duration
         });
@@ -922,6 +948,13 @@ export class imba_keeper_of_the_light_will_o_wisp extends BaseAbility_Plus {
             }
             this.caster.EmitSound("keeper_of_the_light_keep_spiritform_0" + response);
         }
+    }
+
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_most_enemy(this)
     }
 }
 @registerModifier()

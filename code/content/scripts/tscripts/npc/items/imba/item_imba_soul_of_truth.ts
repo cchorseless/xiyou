@@ -2,7 +2,6 @@
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus } from "../../entityPlus/BaseModifier_Plus";
-import { BaseNpc_Plus } from "../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 import { item_imba_gem } from "./item_imba_gem";
@@ -107,7 +106,7 @@ export class modifier_imba_soul_of_truth_buff extends BaseModifier_Plus {
             let gem = BaseItem_Plus.CreateItem("item_imba_gem", undefined, undefined) as item_imba_gem;
             gem.SetOwner(undefined);
             CreateItemOnPositionSync(this.GetParentPlus().GetAbsOrigin(), gem);
-            gem.dummy_unit = BaseNpc_Plus.CreateUnitByName("npc_dummy_unit_perma", this.GetParentPlus().GetAbsOrigin(), this.GetCasterPlus(), true);
+            gem.dummy_unit = this.GetParentPlus().CreateDummyUnit(this.GetParentPlus().GetAbsOrigin(), -1, true);
             gem.dummy_unit.AddNewModifier(this.GetCasterPlus(), gem, "modifier_item_imba_gem_of_true_sight_dropped", {});
         }
     }

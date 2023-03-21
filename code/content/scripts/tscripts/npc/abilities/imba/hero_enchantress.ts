@@ -1,11 +1,541 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus, BaseOrbAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
-import { BaseNpc_Plus } from "../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
+
+@registerAbility()
+export class imba_enchantress_impetus extends BaseAbility_Plus {
+    IsStealable(): boolean {
+        return false;
+    }
+    GetIntrinsicModifierName(): string {
+        return "modifier_imba_enchantress_impetus";
+    }
+    OnOwnerSpawned(): void {
+        if (this.GetCasterPlus().HasTalent("special_bonus_imba_enchantress_7") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_enchantress_7")) {
+            this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_enchantress_7"), "modifier_special_bonus_imba_enchantress_7", {});
+        }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        if (!this.GetAutoCastState()) {
+            this.ToggleAutoCast()
+        }
+        return false
+    }
+
+}
+@registerModifier()
+export class modifier_imba_enchantress_impetus extends BaseModifier_Plus {
+    public ability: IBaseAbility_Plus;
+    public caster: IBaseNpc_Plus;
+    public parent: IBaseNpc_Plus;
+    public impetus_orb: any;
+    public base_attack: any;
+    public impetus_attack: any;
+    public attack_queue: boolean[];
+    public impetus_start: any;
+    public impetus_damage: string;
+    public distance_damage_pct: number;
+    public bonus_attack_range_scepter: number;
+    public attack_cast_stack: number;
+    public huntmastery_grace_period: any;
+    public armament_spell_amp_pct: number;
+    public armament_attack_dmg_pct: number;
+    BeCreated(p_0: any,): void {
+        this.ability = this.GetAbilityPlus();
+        this.caster = this.GetCasterPlus();
+        this.parent = this.GetParentPlus();
+        this.impetus_orb = false;
+        this.base_attack = "particles/units/heroes/hero_enchantress/enchantress_base_attack.vpcf";
+        this.impetus_attack = "particles/units/heroes/hero_enchantress/enchantress_impetus.vpcf";
+        this.attack_queue = [];
+        this.impetus_start = "Hero_Enchantress.Impetus";
+        this.impetus_damage = "Hero_Enchantress.ImpetusDamage";
+        this.distance_damage_pct = this.ability.GetSpecialValueFor("distance_damage_pct");
+        this.bonus_attack_range_scepter = this.ability.GetSpecialValueFor("bonus_attack_range_scepter");
+        this.attack_cast_stack = this.ability.GetSpecialValueFor("attack_cast_stack");
+        this.huntmastery_grace_period = this.ability.GetSpecialValueFor("huntmastery_grace_period");
+    }
+    BeRefresh(p_0: any,): void {
+        this.distance_damage_pct = this.ability.GetSpecialValueFor("distance_damage_pct");
+        this.bonus_attack_range_scepter = this.ability.GetSpecialValueFor("bonus_attack_range_scepter");
+        this.attack_cast_stack = this.ability.GetSpecialValueFor("attack_cast_stack");
+        this.huntmastery_grace_period = this.ability.GetSpecialValueFor("huntmastery_grace_period");
+    }
+    /** DeclareFunctions():modifierfunction[] {
+        let decFuncs = {
+            1: GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS_STACKING,
+            2: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_RANGE_BONUS,
+            3: Enum_MODIFIER_EVENT.ON_ATTACK_START,
+            4: Enum_MODIFIER_EVENT.ON_ATTACK,
+            5: Enum_MODIFIER_EVENT.ON_ATTACK_LANDED,
+            6: Enum_MODIFIER_EVENT.ON_ATTACK_FAIL,
+            7: Enum_MODIFIER_EVENT.ON_ORDER
+        }
+        return Object.values(decFuncs);
+    } */
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS_STACKING)
+    CC_GetModifierCastRangeBonusStacking(p_0: ModifierAbilityEvent,): number {
+        let cast_range = this.GetStackCount() * this.attack_cast_stack;
+        if (this.parent.HasScepter()) {
+            cast_range = cast_range + this.bonus_attack_range_scepter;
+        }
+        return cast_range;
+    }
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_RANGE_BONUS)
+    CC_GetModifierAttackRangeBonus(): number {
+        let attack_range = this.GetStackCount() * this.attack_cast_stack;
+        if (this.parent.HasScepter()) {
+            attack_range = attack_range + this.bonus_attack_range_scepter;
+        }
+        return attack_range;
+    }
+    @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_START)
+    CC_OnAttackStart(keys: ModifierAttackEvent): void {
+        if (!IsServer()) {
+            return;
+        }
+        if (keys.attacker == this.caster && this.ability.IsFullyCastable() && !this.caster.IsSilenced() && !keys.target.IsBuilding() && !keys.target.IsOther() && (this.ability.GetAutoCastState() || this.impetus_orb)) {
+            this.parent.SetRangedProjectileName(this.impetus_attack);
+        } else {
+            this.parent.SetRangedProjectileName(this.base_attack);
+        }
+    }
+    @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK)
+    CC_OnAttack(keys: ModifierAttackEvent): void {
+        if (!IsServer()) {
+            return;
+        }
+        if (keys.attacker == this.caster) {
+            if (!this.caster.IsIllusion() && this.ability.IsFullyCastable() && !this.caster.IsSilenced() && !keys.target.IsBuilding() && !keys.target.IsOther() && (this.ability.GetAutoCastState() || this.impetus_orb)) {
+                this.attack_queue.push(true);
+                this.ability.UseResources(true, false, false);
+                this.caster.EmitSound(this.impetus_start);
+                this.impetus_orb = false;
+            } else {
+                this.attack_queue.push(false);
+            }
+        }
+    }
+    @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
+    CC_OnAttackLanded(keys: ModifierAttackEvent): void {
+        if (!IsServer()) {
+            return;
+        }
+        if (keys.attacker == this.caster && GameFunc.GetCount(this.attack_queue) > 0) {
+            if (this.attack_queue[0] && !keys.target.IsBuilding() && keys.target.IsAlive()) {
+                keys.target.AddNewModifier(this.caster, this.ability, "modifier_imba_enchantress_impetus_huntmastery_timer", {
+                    duration: this.huntmastery_grace_period
+                });
+                let distance = (this.caster.GetAbsOrigin() - keys.target.GetAbsOrigin() as Vector).Length();
+                let impetus_damage = distance * ((this.distance_damage_pct + this.caster.GetTalentValue("special_bonus_imba_enchantress_9")) / 100);
+                let damageTable = {
+                    victim: keys.target,
+                    damage: impetus_damage,
+                    damage_type: DAMAGE_TYPES.DAMAGE_TYPE_PURE,
+                    damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NONE,
+                    attacker: this.caster,
+                    ability: this.ability
+                }
+                ApplyDamage(damageTable);
+                SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_BONUS_SPELL_DAMAGE, keys.target, impetus_damage, undefined);
+                keys.target.EmitSound(this.impetus_damage);
+                if (this.caster.HasTalent("special_bonus_imba_enchantress_7")) {
+                    if (!this.armament_spell_amp_pct || !this.armament_attack_dmg_pct) {
+                        this.armament_spell_amp_pct = this.caster.GetTalentValue("special_bonus_imba_enchantress_7", "spell_amp_pct") / 100;
+                        this.armament_attack_dmg_pct = this.caster.GetTalentValue("special_bonus_imba_enchantress_7", "attack_dmg_pct") / 100;
+                    }
+                    let phys_damage = impetus_damage * keys.target.GetSpellAmplification(false) * this.armament_spell_amp_pct;
+                    let magic_damage = impetus_damage * (keys.target.GetAverageTrueAttackDamage(this.caster) / 100) * this.armament_attack_dmg_pct;
+                    damageTable.damage = phys_damage;
+                    damageTable.damage_type = DAMAGE_TYPES.DAMAGE_TYPE_PHYSICAL;
+                    ApplyDamage(damageTable);
+                    this.AddTimer(0.2, () => {
+                        SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_BONUS_SPELL_DAMAGE, keys.target, phys_damage, undefined);
+                    });
+                    damageTable.damage = magic_damage;
+                    damageTable.damage_type = DAMAGE_TYPES.DAMAGE_TYPE_MAGICAL;
+                    ApplyDamage(damageTable);
+                    this.AddTimer(0.4, () => {
+                        SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_BONUS_SPELL_DAMAGE, keys.target, magic_damage, undefined);
+                    });
+                }
+            }
+            this.attack_queue.shift();
+        }
+    }
+    @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_FAIL)
+    CC_OnAttackFail(keys: ModifierAttackEvent): void {
+        if (!IsServer()) {
+            return;
+        }
+        if (keys.attacker == this.caster && GameFunc.GetCount(this.attack_queue) > 0) {
+            this.attack_queue.shift();
+        }
+    }
+    @registerEvent(Enum_MODIFIER_EVENT.ON_ORDER)
+    CC_OnOrder(keys: ModifierAbilityEvent): void {
+        if (keys.unit == this.caster) {
+            if (keys.order_type == dotaunitorder_t.DOTA_UNIT_ORDER_CAST_TARGET && keys.ability.GetAbilityName() == this.ability.GetAbilityName()) {
+                this.impetus_orb = true;
+            } else {
+                this.impetus_orb = false;
+            }
+        }
+    }
+}
+@registerModifier()
+export class modifier_imba_enchantress_impetus_huntmastery_timer extends BaseModifier_Plus {
+    public caster: IBaseNpc_Plus;
+    IgnoreTenacity() {
+        return true;
+    }
+    IsHidden(): boolean {
+        return true;
+    }
+    IsPurgable(): boolean {
+        return false;
+    }
+    RemoveOnDeath(): boolean {
+        return false;
+    }
+    /** DeclareFunctions():modifierfunction[] {
+        return Object.values({
+            1: Enum_MODIFIER_EVENT.ON_DEATH
+        });
+    } */
+    @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
+    CC_OnDeath(keys: ModifierInstanceEvent): void {
+        if (keys.unit == this.GetParentPlus() && keys.unit.IsRealUnit() && (keys.unit.IsReincarnating && !keys.unit.IsReincarnating())) {
+            if (this.GetAbilityPlus().GetAbilityName() == "imba_enchantress_impetus_723") {
+                if (!this.GetCasterPlus().HasModifier("modifier_imba_enchantress_impetus_723")) {
+                    let impetus_modifier = this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_enchantress_impetus_723", {});
+                    if (impetus_modifier) {
+                        impetus_modifier.IncrementStackCount();
+                    }
+                } else {
+                    this.GetCasterPlus().findBuff<modifier_imba_enchantress_impetus_723>("modifier_imba_enchantress_impetus_723").IncrementStackCount();
+                }
+            } else {
+                this.caster = this.GetCasterPlus();
+                let impetus_modifier = this.caster.findBuff<modifier_imba_enchantress_impetus>("modifier_imba_enchantress_impetus");
+                if (impetus_modifier) {
+                    impetus_modifier.IncrementStackCount();
+                }
+            }
+            if (this.GetCasterPlus().GetUnitName().includes("enchantress")) {
+                this.GetCasterPlus().EmitSound("enchantress_ench_ability_impetus_0" + math.random(1, 7));
+            }
+        }
+    }
+}
+@registerAbility()
+export class imba_enchantress_impetus_723 extends BaseOrbAbility_Plus {
+    IsStealable(): boolean {
+        return false;
+    }
+    OnUpgrade(): void {
+        if (!this.GetCasterPlus().HasModifier("modifier_imba_enchantress_impetus_723")) {
+            this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_enchantress_impetus_723", {});
+        }
+    }
+    GetIntrinsicModifierName(): string {
+        return "modifier_generic_orb_effect";
+    }
+    GetProjectileName() {
+        return "particles/units/heroes/hero_enchantress/enchantress_impetus.vpcf";
+    }
+    OnOrbFire() {
+        this.GetCasterPlus().EmitSound("Hero_Enchantress.Impetus");
+    }
+    OnOrbImpact(keys: ModifierAttackEvent) {
+        if (!keys.target.IsMagicImmune() && keys.target.IsAlive()) {
+            keys.target.EmitSound("Hero_Enchantress.ImpetusDamage");
+            keys.target.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_enchantress_impetus_huntmastery_timer", {
+                duration: this.GetSpecialValueFor("huntmastery_grace_period")
+            });
+            let distance = (this.GetCasterPlus().GetAbsOrigin() - keys.target.GetAbsOrigin() as Vector).Length();
+            let impetus_damage = distance * this.GetTalentSpecialValueFor("distance_damage_pct") / 100;
+            ApplyDamage({
+                victim: keys.target,
+                damage: impetus_damage,
+                damage_type: DAMAGE_TYPES.DAMAGE_TYPE_PURE,
+                damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NONE,
+                attacker: this.GetCasterPlus(),
+                ability: this
+            });
+            SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_BONUS_SPELL_DAMAGE, keys.target, impetus_damage, undefined);
+            return 1
+        }
+        return 0
+    }
+}
+@registerModifier()
+export class modifier_imba_enchantress_impetus_723 extends BaseModifier_Plus {
+    IsHidden(): boolean {
+        return this.GetStackCount() <= 0;
+    }
+    IsPurgable(): boolean {
+        return false;
+    }
+    RemoveOnDeath(): boolean {
+        return false;
+    }
+    /** DeclareFunctions():modifierfunction[] {
+        return Object.values({
+            1: GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS_STACKING,
+            2: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_RANGE_BONUS
+        });
+    } */
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS_STACKING)
+    CC_GetModifierCastRangeBonusStacking(p_0: ModifierAbilityEvent,): number {
+        if (this.GetAbilityPlus()) {
+            let cast_range = this.GetStackCount() * this.GetSpecialValueFor("attack_cast_stack");
+            return cast_range;
+        } else {
+            this.Destroy();
+        }
+    }
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_RANGE_BONUS)
+    CC_GetModifierAttackRangeBonus(): number {
+        if (this.GetAbilityPlus()) {
+            let attack_range = this.GetStackCount() * this.GetSpecialValueFor("attack_cast_stack");
+            return attack_range;
+        } else {
+            this.Destroy();
+        }
+    }
+}
+@registerAbility()
+export class imba_enchantress_enchant extends BaseAbility_Plus {
+    public caster: IBaseNpc_Plus;
+    public target: IBaseNpc_Plus;
+    public dominate_duration: number;
+    public slow_movement_speed: number;
+    public tooltip_duration: number;
+    GetAbilityTargetTeam(): DOTA_UNIT_TARGET_TEAM {
+        return DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH;
+    }
+    CastFilterResultTarget(target: CDOTA_BaseNPC): UnitFilterResult {
+        if (!IsServer()) {
+            return;
+        }
+        let caster = this.GetCasterPlus();
+        if (target.IsAncient() && caster.GetLevel() < 20) {
+            return UnitFilterResult.UF_FAIL_CUSTOM;
+        }
+        if (target.GetTeam() == caster.GetTeam() && !target.HasModifier("modifier_imba_enchantress_enchant_controlled")) {
+            return UnitFilterResult.UF_FAIL_FRIENDLY;
+        }
+        let nResult = UnitFilter(target, this.GetAbilityTargetTeam(), this.GetAbilityTargetType(), this.GetAbilityTargetFlags(), this.GetCasterPlus().GetTeamNumber());
+        return nResult;
+    }
+    GetCustomCastErrorTarget(target: CDOTA_BaseNPC): string {
+        return "Ability Can't Target Ancients Until Level 20";
+    }
+    OnSpellStart(): void {
+        this.caster = this.GetCasterPlus();
+        this.target = this.GetCursorTarget();
+        this.dominate_duration = this.GetSpecialValueFor("dominate_duration");
+        this.slow_movement_speed = this.GetSpecialValueFor("slow_movement_speed");
+        this.tooltip_duration = this.GetSpecialValueFor("tooltip_duration") + this.caster.GetTalentValue("special_bonus_imba_enchantress_6");
+        if (this.caster.HasTalent("special_bonus_imba_enchantress_6")) {
+            this.dominate_duration = this.dominate_duration * this.caster.GetTalentValue("special_bonus_imba_enchantress_6");
+        }
+        if (this.target.TriggerSpellAbsorb(this)) {
+            return undefined;
+        }
+        this.caster.EmitSound("Hero_Enchantress.EnchantCast");
+        if ((!this.target.IsConsideredHero() || this.target.IsIllusion()) && !this.target.IsRoshan()) {
+            this.target.Purge(true, true, false, false, false);
+            let new_lane_creep = this.caster.CreateSummon(this.target.GetUnitName(), this.target.GetAbsOrigin(), this.dominate_duration, false);
+            new_lane_creep.SetBaseMaxHealth(this.target.GetMaxHealth());
+            new_lane_creep.SetHealth(this.target.GetHealth());
+            new_lane_creep.SetBaseDamageMin(this.target.GetBaseDamageMin());
+            new_lane_creep.SetBaseDamageMax(this.target.GetBaseDamageMax());
+            new_lane_creep.SetMinimumGoldBounty(this.target.GetGoldBounty());
+            new_lane_creep.SetMaximumGoldBounty(this.target.GetGoldBounty());
+            this.target.AddNoDraw();
+            this.target.ForceKill(false);
+            this.target = new_lane_creep;
+            this.target.SetOwner(this.caster);
+            this.target.SetTeam(this.caster.GetTeam());
+            // this.target.SetControllableByPlayer(this.caster.GetPlayerID(), false);
+            this.target.AddNewModifier(this.caster, this, "modifier_imba_enchantress_enchant_controlled", {
+                duration: this.dominate_duration
+            });
+            this.target.ApplyHeal(this.target.GetMaxHealth(), this);
+            if (this.GetCasterPlus().HasAbility("imba_enchantress_untouchable") && this.GetCasterPlus().findAbliityPlus<imba_enchantress_untouchable>("imba_enchantress_untouchable").IsTrained()) {
+                this.target.AddNewModifier(this.caster, this.GetCasterPlus().findAbliityPlus<imba_enchantress_untouchable>("imba_enchantress_untouchable"), "modifier_imba_enchantress_untouchable", {});
+            }
+            if (this.caster.GetUnitName().includes("enchantress")) {
+                this.caster.EmitSound("enchantress_ench_ability_enchant_0" + math.random(1, 3));
+            }
+        } else {
+            this.target.Purge(true, false, false, false, false);
+            this.target.AddNewModifier(this.caster, this, "modifier_imba_enchantress_enchant_slow", {
+                duration: this.tooltip_duration * (1 - this.target.GetStatusResistance())
+            });
+            if (this.caster.GetUnitName().includes("enchantress")) {
+                this.caster.EmitSound("enchantress_ench_ability_enchant_0" + math.random(4, 6));
+            }
+        }
+    }
+    OnOwnerSpawned(): void {
+        if (this.GetCasterPlus().HasTalent("special_bonus_imba_enchantress_4") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_enchantress_4")) {
+            this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_enchantress_4"), "modifier_special_bonus_imba_enchantress_4", {});
+        }
+        if (this.GetCasterPlus().HasTalent("special_bonus_imba_enchantress_6") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_enchantress_6")) {
+            this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_enchantress_6"), "modifier_special_bonus_imba_enchantress_6", {});
+        }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
+    }
+
+}
+@registerModifier()
+export class modifier_imba_enchantress_enchant_controlled extends BaseModifier_Plus {
+    public ability: IBaseAbility_Plus;
+    public caster: IBaseNpc_Plus;
+    public parent: IBaseNpc_Plus;
+    public enchant_health: any;
+    public enchant_damage: number;
+    public enchant_armor: any;
+    public remaining_hp: any;
+    public particle: any;
+    IsHidden(): boolean {
+        return true;
+    }
+    IsPurgable(): boolean {
+        return false;
+    }
+    BeCreated(p_0: any,): void {
+        this.ability = this.GetAbilityPlus();
+        this.caster = this.GetCasterPlus();
+        this.parent = this.GetParentPlus();
+        this.enchant_health = this.ability.GetSpecialValueFor("enchant_health");
+        this.enchant_damage = this.ability.GetSpecialValueFor("enchant_damage");
+        this.enchant_armor = this.ability.GetSpecialValueFor("enchant_armor");
+        if (!IsServer()) {
+            return;
+        }
+        this.remaining_hp = this.parent.GetHealth();
+        this.particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_enchantress/enchantress_enchant.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.parent);
+        ParticleManager.SetParticleControl(this.particle, 0, this.parent.GetAbsOrigin());
+        this.AddParticle(this.particle, false, false, -1, false, false);
+        this.parent.EmitSound("Hero_Enchantress.EnchantCreep");
+    }
+    CheckState(): Partial<Record<modifierstate, boolean>> {
+        return {
+            [modifierstate.MODIFIER_STATE_DOMINATED]: true
+        };
+    }
+    /** DeclareFunctions():modifierfunction[] {
+        return Object.values({
+            1: GPropertyConfig.EMODIFIER_PROPERTY.EXTRA_HEALTH_BONUS,
+            2: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
+            3: GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS,
+            4: GPropertyConfig.EMODIFIER_PROPERTY.BONUS_VISION_PERCENTAGE,
+            5: Enum_MODIFIER_EVENT.ON_TAKEDAMAGE
+        });
+    } */
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.EXTRA_HEALTH_BONUS)
+    CC_GetModifierExtraHealthBonus(): number {
+        return this.enchant_health;
+    }
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    CC_GetModifierPreAttack_BonusDamage(): number {
+        return this.enchant_damage;
+    }
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS)
+    CC_GetModifierPhysicalArmorBonus(p_0: ModifierAttackEvent,): number {
+        return this.enchant_armor;
+    }
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BONUS_VISION_PERCENTAGE)
+    CC_GetBonusVisionPercentage( /** keys */): number {
+        return this.GetCasterPlus().GetTalentValue("special_bonus_imba_enchantress_4");
+    }
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
+        if (!IsServer()) {
+            return;
+        }
+        if (keys.unit == this.GetParentPlus()) {
+            if (keys.unit.IsAlive()) {
+                this.remaining_hp = keys.unit.GetHealth();
+            } else {
+                let overkill_damage = keys.damage - this.remaining_hp;
+                if (keys.attacker.IsBuilding()) {
+                    return;
+                }
+                let damageTable = {
+                    victim: keys.attacker,
+                    damage: overkill_damage,
+                    damage_type: DAMAGE_TYPES.DAMAGE_TYPE_PURE,
+                    damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION + DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NO_SPELL_LIFESTEAL,
+                    attacker: this.caster,
+                    ability: this.ability
+                }
+                ApplyDamage(damageTable);
+                SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_DAMAGE, keys.attacker, overkill_damage, undefined);
+            }
+        }
+    }
+}
+@registerModifier()
+export class modifier_imba_enchantress_enchant_slow extends BaseModifier_Plus {
+    public ability: IBaseAbility_Plus;
+    public parent: IBaseNpc_Plus;
+    public slow_movement_speed: number;
+    public particle: any;
+    GetStatusEffectName(): string {
+        return "particles/status_fx/status_effect_enchantress_enchant_slow.vpcf";
+    }
+    BeCreated(p_0: any,): void {
+        this.ability = this.GetAbilityPlus();
+        this.parent = this.GetParentPlus();
+        this.slow_movement_speed = this.ability.GetSpecialValueFor("slow_movement_speed");
+        if (!IsServer()) {
+            return;
+        }
+        this.particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_enchantress/enchantress_enchant_slow.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.parent);
+        ParticleManager.SetParticleControl(this.particle, 0, this.parent.GetAbsOrigin());
+        this.AddParticle(this.particle, false, false, -1, false, false);
+        this.parent.EmitSound("Hero_Enchantress.EnchantHero");
+    }
+    BeDestroy(): void {
+        if (!IsServer()) {
+            return;
+        }
+        this.parent.StopSound("Hero_Enchantress.EnchantHero");
+    }
+    /** DeclareFunctions():modifierfunction[] {
+        let decFuncs = {
+            1: GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE,
+            2: GPropertyConfig.EMODIFIER_PROPERTY.PROVIDES_FOW_POSITION
+        }
+        return Object.values(decFuncs);
+    } */
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
+    CC_GetModifierMoveSpeedBonus_Percentage(): number {
+        return this.slow_movement_speed;
+    }
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PROVIDES_FOW_POSITION)
+    CC_GetModifierProvidesFOWVision(): 0 | 1 {
+        return 1;
+    }
+}
 @registerAbility()
 export class imba_enchantress_untouchable extends BaseAbility_Plus {
     GetCastAnimation(): GameActivity_t {
@@ -203,228 +733,7 @@ export class modifier_imba_enchantress_untouchable_peace_on_earth extends BaseMo
         return state;
     }
 }
-@registerAbility()
-export class imba_enchantress_enchant extends BaseAbility_Plus {
-    public caster: IBaseNpc_Plus;
-    public target: IBaseNpc_Plus;
-    public dominate_duration: number;
-    public slow_movement_speed: number;
-    public tooltip_duration: number;
-    GetAbilityTargetTeam(): DOTA_UNIT_TARGET_TEAM {
-        return DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH;
-    }
-    CastFilterResultTarget(target: CDOTA_BaseNPC): UnitFilterResult {
-        if (!IsServer()) {
-            return;
-        }
-        let caster = this.GetCasterPlus();
-        if (target.IsAncient() && caster.GetLevel() < 20) {
-            return UnitFilterResult.UF_FAIL_CUSTOM;
-        }
-        if (target.GetTeam() == caster.GetTeam() && !target.HasModifier("modifier_imba_enchantress_enchant_controlled")) {
-            return UnitFilterResult.UF_FAIL_FRIENDLY;
-        }
-        let nResult = UnitFilter(target, this.GetAbilityTargetTeam(), this.GetAbilityTargetType(), this.GetAbilityTargetFlags(), this.GetCasterPlus().GetTeamNumber());
-        return nResult;
-    }
-    GetCustomCastErrorTarget(target: CDOTA_BaseNPC): string {
-        return "Ability Can't Target Ancients Until Level 20";
-    }
-    OnSpellStart(): void {
-        this.caster = this.GetCasterPlus();
-        this.target = this.GetCursorTarget();
-        this.dominate_duration = this.GetSpecialValueFor("dominate_duration");
-        this.slow_movement_speed = this.GetSpecialValueFor("slow_movement_speed");
-        this.tooltip_duration = this.GetSpecialValueFor("tooltip_duration") + this.caster.GetTalentValue("special_bonus_imba_enchantress_6");
-        if (this.caster.HasTalent("special_bonus_imba_enchantress_6")) {
-            this.dominate_duration = this.dominate_duration * this.caster.GetTalentValue("special_bonus_imba_enchantress_6");
-        }
-        if (this.target.TriggerSpellAbsorb(this)) {
-            return undefined;
-        }
-        this.caster.EmitSound("Hero_Enchantress.EnchantCast");
-        if ((!this.target.IsConsideredHero() || this.target.IsIllusion()) && !this.target.IsRoshan()) {
-            this.target.Purge(true, true, false, false, false);
-            let lane_creep_name = this.target.GetUnitName();
-            if (lane_creep_name.includes("guys_")) {
-                let new_lane_creep = BaseNpc_Plus.CreateUnitByName(this.target.GetUnitName(), this.target.GetAbsOrigin(), this.caster, false);
-                new_lane_creep.SetBaseMaxHealth(this.target.GetMaxHealth());
-                new_lane_creep.SetHealth(this.target.GetHealth());
-                new_lane_creep.SetBaseDamageMin(this.target.GetBaseDamageMin());
-                new_lane_creep.SetBaseDamageMax(this.target.GetBaseDamageMax());
-                new_lane_creep.SetMinimumGoldBounty(this.target.GetGoldBounty());
-                new_lane_creep.SetMaximumGoldBounty(this.target.GetGoldBounty());
-                this.target.AddNoDraw();
-                this.target.ForceKill(false);
-                this.target = new_lane_creep;
-            }
-            this.target.SetOwner(this.caster);
-            this.target.SetTeam(this.caster.GetTeam());
-            // this.target.SetControllableByPlayer(this.caster.GetPlayerID(), false);
-            this.target.AddNewModifier(this.caster, this, "modifier_imba_enchantress_enchant_controlled", {
-                duration: this.dominate_duration
-            });
-            this.target.AddNewModifier(this.caster, this, "modifier_kill", {
-                duration: this.dominate_duration
-            });
-            this.target.ApplyHeal(this.target.GetMaxHealth(), this);
-            if (this.GetCasterPlus().HasAbility("imba_enchantress_untouchable") && this.GetCasterPlus().findAbliityPlus<imba_enchantress_untouchable>("imba_enchantress_untouchable").IsTrained()) {
-                this.target.AddNewModifier(this.caster, this.GetCasterPlus().findAbliityPlus<imba_enchantress_untouchable>("imba_enchantress_untouchable"), "modifier_imba_enchantress_untouchable", {});
-            }
-            if (this.caster.GetUnitName().includes("enchantress")) {
-                this.caster.EmitSound("enchantress_ench_ability_enchant_0" + math.random(1, 3));
-            }
-        } else {
-            this.target.Purge(true, false, false, false, false);
-            this.target.AddNewModifier(this.caster, this, "modifier_imba_enchantress_enchant_slow", {
-                duration: this.tooltip_duration * (1 - this.target.GetStatusResistance())
-            });
-            if (this.caster.GetUnitName().includes("enchantress")) {
-                this.caster.EmitSound("enchantress_ench_ability_enchant_0" + math.random(4, 6));
-            }
-        }
-    }
-    OnOwnerSpawned(): void {
-        if (this.GetCasterPlus().HasTalent("special_bonus_imba_enchantress_4") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_enchantress_4")) {
-            this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_enchantress_4"), "modifier_special_bonus_imba_enchantress_4", {});
-        }
-        if (this.GetCasterPlus().HasTalent("special_bonus_imba_enchantress_6") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_enchantress_6")) {
-            this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_enchantress_6"), "modifier_special_bonus_imba_enchantress_6", {});
-        }
-    }
-}
-@registerModifier()
-export class modifier_imba_enchantress_enchant_controlled extends BaseModifier_Plus {
-    public ability: IBaseAbility_Plus;
-    public caster: IBaseNpc_Plus;
-    public parent: IBaseNpc_Plus;
-    public enchant_health: any;
-    public enchant_damage: number;
-    public enchant_armor: any;
-    public remaining_hp: any;
-    public particle: any;
-    IsHidden(): boolean {
-        return true;
-    }
-    IsPurgable(): boolean {
-        return false;
-    }
-    BeCreated(p_0: any,): void {
-        this.ability = this.GetAbilityPlus();
-        this.caster = this.GetCasterPlus();
-        this.parent = this.GetParentPlus();
-        this.enchant_health = this.ability.GetSpecialValueFor("enchant_health");
-        this.enchant_damage = this.ability.GetSpecialValueFor("enchant_damage");
-        this.enchant_armor = this.ability.GetSpecialValueFor("enchant_armor");
-        if (!IsServer()) {
-            return;
-        }
-        this.remaining_hp = this.parent.GetHealth();
-        this.particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_enchantress/enchantress_enchant.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.parent);
-        ParticleManager.SetParticleControl(this.particle, 0, this.parent.GetAbsOrigin());
-        this.AddParticle(this.particle, false, false, -1, false, false);
-        this.parent.EmitSound("Hero_Enchantress.EnchantCreep");
-    }
-    CheckState(): Partial<Record<modifierstate, boolean>> {
-        return {
-            [modifierstate.MODIFIER_STATE_DOMINATED]: true
-        };
-    }
-    /** DeclareFunctions():modifierfunction[] {
-        return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.EXTRA_HEALTH_BONUS,
-            2: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
-            3: GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS,
-            4: GPropertyConfig.EMODIFIER_PROPERTY.BONUS_VISION_PERCENTAGE,
-            5: Enum_MODIFIER_EVENT.ON_TAKEDAMAGE
-        });
-    } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.EXTRA_HEALTH_BONUS)
-    CC_GetModifierExtraHealthBonus(): number {
-        return this.enchant_health;
-    }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
-    CC_GetModifierPreAttack_BonusDamage(): number {
-        return this.enchant_damage;
-    }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS)
-    CC_GetModifierPhysicalArmorBonus(p_0: ModifierAttackEvent,): number {
-        return this.enchant_armor;
-    }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BONUS_VISION_PERCENTAGE)
-    CC_GetBonusVisionPercentage( /** keys */): number {
-        return this.GetCasterPlus().GetTalentValue("special_bonus_imba_enchantress_4");
-    }
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
-    CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
-        if (!IsServer()) {
-            return;
-        }
-        if (keys.unit == this.GetParentPlus()) {
-            if (keys.unit.IsAlive()) {
-                this.remaining_hp = keys.unit.GetHealth();
-            } else {
-                let overkill_damage = keys.damage - this.remaining_hp;
-                if (keys.attacker.IsBuilding()) {
-                    return;
-                }
-                let damageTable = {
-                    victim: keys.attacker,
-                    damage: overkill_damage,
-                    damage_type: DAMAGE_TYPES.DAMAGE_TYPE_PURE,
-                    damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION + DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NO_SPELL_LIFESTEAL,
-                    attacker: this.caster,
-                    ability: this.ability
-                }
-                ApplyDamage(damageTable);
-                SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_DAMAGE, keys.attacker, overkill_damage, undefined);
-            }
-        }
-    }
-}
-@registerModifier()
-export class modifier_imba_enchantress_enchant_slow extends BaseModifier_Plus {
-    public ability: IBaseAbility_Plus;
-    public parent: IBaseNpc_Plus;
-    public slow_movement_speed: number;
-    public particle: any;
-    GetStatusEffectName(): string {
-        return "particles/status_fx/status_effect_enchantress_enchant_slow.vpcf";
-    }
-    BeCreated(p_0: any,): void {
-        this.ability = this.GetAbilityPlus();
-        this.parent = this.GetParentPlus();
-        this.slow_movement_speed = this.ability.GetSpecialValueFor("slow_movement_speed");
-        if (!IsServer()) {
-            return;
-        }
-        this.particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_enchantress/enchantress_enchant_slow.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.parent);
-        ParticleManager.SetParticleControl(this.particle, 0, this.parent.GetAbsOrigin());
-        this.AddParticle(this.particle, false, false, -1, false, false);
-        this.parent.EmitSound("Hero_Enchantress.EnchantHero");
-    }
-    BeDestroy(): void {
-        if (!IsServer()) {
-            return;
-        }
-        this.parent.StopSound("Hero_Enchantress.EnchantHero");
-    }
-    /** DeclareFunctions():modifierfunction[] {
-        let decFuncs = {
-            1: GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE,
-            2: GPropertyConfig.EMODIFIER_PROPERTY.PROVIDES_FOW_POSITION
-        }
-        return Object.values(decFuncs);
-    } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
-    CC_GetModifierMoveSpeedBonus_Percentage(): number {
-        return this.slow_movement_speed;
-    }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PROVIDES_FOW_POSITION)
-    CC_GetModifierProvidesFOWVision(): 0 | 1 {
-        return 1;
-    }
-}
+
 @registerAbility()
 export class imba_enchantress_natures_attendants extends BaseAbility_Plus {
     public caster: IBaseNpc_Plus;
@@ -457,6 +766,12 @@ export class imba_enchantress_natures_attendants extends BaseAbility_Plus {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_enchantress_8") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_enchantress_8")) {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_enchantress_8"), "modifier_special_bonus_imba_enchantress_8", {});
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_cast(this);
     }
 }
 @registerModifier()
@@ -763,302 +1078,7 @@ export class modifier_imba_enchantress_natura_shift extends BaseModifier_Plus {
         }
     }
 }
-@registerAbility()
-export class imba_enchantress_impetus extends BaseAbility_Plus {
-    IsStealable(): boolean {
-        return false;
-    }
-    GetIntrinsicModifierName(): string {
-        return "modifier_imba_enchantress_impetus";
-    }
-    OnOwnerSpawned(): void {
-        if (this.GetCasterPlus().HasTalent("special_bonus_imba_enchantress_7") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_enchantress_7")) {
-            this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_enchantress_7"), "modifier_special_bonus_imba_enchantress_7", {});
-        }
-    }
-}
-@registerModifier()
-export class modifier_imba_enchantress_impetus extends BaseModifier_Plus {
-    public ability: IBaseAbility_Plus;
-    public caster: IBaseNpc_Plus;
-    public parent: IBaseNpc_Plus;
-    public impetus_orb: any;
-    public base_attack: any;
-    public impetus_attack: any;
-    public attack_queue: boolean[];
-    public impetus_start: any;
-    public impetus_damage: string;
-    public distance_damage_pct: number;
-    public bonus_attack_range_scepter: number;
-    public attack_cast_stack: number;
-    public huntmastery_grace_period: any;
-    public armament_spell_amp_pct: number;
-    public armament_attack_dmg_pct: number;
-    BeCreated(p_0: any,): void {
-        this.ability = this.GetAbilityPlus();
-        this.caster = this.GetCasterPlus();
-        this.parent = this.GetParentPlus();
-        this.impetus_orb = false;
-        this.base_attack = "particles/units/heroes/hero_enchantress/enchantress_base_attack.vpcf";
-        this.impetus_attack = "particles/units/heroes/hero_enchantress/enchantress_impetus.vpcf";
-        this.attack_queue = [];
-        this.impetus_start = "Hero_Enchantress.Impetus";
-        this.impetus_damage = "Hero_Enchantress.ImpetusDamage";
-        this.distance_damage_pct = this.ability.GetSpecialValueFor("distance_damage_pct");
-        this.bonus_attack_range_scepter = this.ability.GetSpecialValueFor("bonus_attack_range_scepter");
-        this.attack_cast_stack = this.ability.GetSpecialValueFor("attack_cast_stack");
-        this.huntmastery_grace_period = this.ability.GetSpecialValueFor("huntmastery_grace_period");
-    }
-    BeRefresh(p_0: any,): void {
-        this.distance_damage_pct = this.ability.GetSpecialValueFor("distance_damage_pct");
-        this.bonus_attack_range_scepter = this.ability.GetSpecialValueFor("bonus_attack_range_scepter");
-        this.attack_cast_stack = this.ability.GetSpecialValueFor("attack_cast_stack");
-        this.huntmastery_grace_period = this.ability.GetSpecialValueFor("huntmastery_grace_period");
-    }
-    /** DeclareFunctions():modifierfunction[] {
-        let decFuncs = {
-            1: GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS_STACKING,
-            2: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_RANGE_BONUS,
-            3: Enum_MODIFIER_EVENT.ON_ATTACK_START,
-            4: Enum_MODIFIER_EVENT.ON_ATTACK,
-            5: Enum_MODIFIER_EVENT.ON_ATTACK_LANDED,
-            6: Enum_MODIFIER_EVENT.ON_ATTACK_FAIL,
-            7: Enum_MODIFIER_EVENT.ON_ORDER
-        }
-        return Object.values(decFuncs);
-    } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS_STACKING)
-    CC_GetModifierCastRangeBonusStacking(p_0: ModifierAbilityEvent,): number {
-        let cast_range = this.GetStackCount() * this.attack_cast_stack;
-        if (this.parent.HasScepter()) {
-            cast_range = cast_range + this.bonus_attack_range_scepter;
-        }
-        return cast_range;
-    }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_RANGE_BONUS)
-    CC_GetModifierAttackRangeBonus(): number {
-        let attack_range = this.GetStackCount() * this.attack_cast_stack;
-        if (this.parent.HasScepter()) {
-            attack_range = attack_range + this.bonus_attack_range_scepter;
-        }
-        return attack_range;
-    }
-    @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_START)
-    CC_OnAttackStart(keys: ModifierAttackEvent): void {
-        if (!IsServer()) {
-            return;
-        }
-        if (keys.attacker == this.caster && this.ability.IsFullyCastable() && !this.caster.IsSilenced() && !keys.target.IsBuilding() && !keys.target.IsOther() && (this.ability.GetAutoCastState() || this.impetus_orb)) {
-            this.parent.SetRangedProjectileName(this.impetus_attack);
-        } else {
-            this.parent.SetRangedProjectileName(this.base_attack);
-        }
-    }
-    @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK)
-    CC_OnAttack(keys: ModifierAttackEvent): void {
-        if (!IsServer()) {
-            return;
-        }
-        if (keys.attacker == this.caster) {
-            if (!this.caster.IsIllusion() && this.ability.IsFullyCastable() && !this.caster.IsSilenced() && !keys.target.IsBuilding() && !keys.target.IsOther() && (this.ability.GetAutoCastState() || this.impetus_orb)) {
-                this.attack_queue.push(true);
-                this.ability.UseResources(true, false, false);
-                this.caster.EmitSound(this.impetus_start);
-                this.impetus_orb = false;
-            } else {
-                this.attack_queue.push(false);
-            }
-        }
-    }
-    @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
-    CC_OnAttackLanded(keys: ModifierAttackEvent): void {
-        if (!IsServer()) {
-            return;
-        }
-        if (keys.attacker == this.caster && GameFunc.GetCount(this.attack_queue) > 0) {
-            if (this.attack_queue[0] && !keys.target.IsBuilding() && keys.target.IsAlive()) {
-                keys.target.AddNewModifier(this.caster, this.ability, "modifier_imba_enchantress_impetus_huntmastery_timer", {
-                    duration: this.huntmastery_grace_period
-                });
-                let distance = (this.caster.GetAbsOrigin() - keys.target.GetAbsOrigin() as Vector).Length();
-                let impetus_damage = distance * ((this.distance_damage_pct + this.caster.GetTalentValue("special_bonus_imba_enchantress_9")) / 100);
-                let damageTable = {
-                    victim: keys.target,
-                    damage: impetus_damage,
-                    damage_type: DAMAGE_TYPES.DAMAGE_TYPE_PURE,
-                    damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NONE,
-                    attacker: this.caster,
-                    ability: this.ability
-                }
-                ApplyDamage(damageTable);
-                SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_BONUS_SPELL_DAMAGE, keys.target, impetus_damage, undefined);
-                keys.target.EmitSound(this.impetus_damage);
-                if (this.caster.HasTalent("special_bonus_imba_enchantress_7")) {
-                    if (!this.armament_spell_amp_pct || !this.armament_attack_dmg_pct) {
-                        this.armament_spell_amp_pct = this.caster.GetTalentValue("special_bonus_imba_enchantress_7", "spell_amp_pct") / 100;
-                        this.armament_attack_dmg_pct = this.caster.GetTalentValue("special_bonus_imba_enchantress_7", "attack_dmg_pct") / 100;
-                    }
-                    let phys_damage = impetus_damage * keys.target.GetSpellAmplification(false) * this.armament_spell_amp_pct;
-                    let magic_damage = impetus_damage * (keys.target.GetAverageTrueAttackDamage(this.caster) / 100) * this.armament_attack_dmg_pct;
-                    damageTable.damage = phys_damage;
-                    damageTable.damage_type = DAMAGE_TYPES.DAMAGE_TYPE_PHYSICAL;
-                    ApplyDamage(damageTable);
-                    this.AddTimer(0.2, () => {
-                        SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_BONUS_SPELL_DAMAGE, keys.target, phys_damage, undefined);
-                    });
-                    damageTable.damage = magic_damage;
-                    damageTable.damage_type = DAMAGE_TYPES.DAMAGE_TYPE_MAGICAL;
-                    ApplyDamage(damageTable);
-                    this.AddTimer(0.4, () => {
-                        SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_BONUS_SPELL_DAMAGE, keys.target, magic_damage, undefined);
-                    });
-                }
-            }
-            this.attack_queue.shift();
-        }
-    }
-    @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_FAIL)
-    CC_OnAttackFail(keys: ModifierAttackEvent): void {
-        if (!IsServer()) {
-            return;
-        }
-        if (keys.attacker == this.caster && GameFunc.GetCount(this.attack_queue) > 0) {
-            this.attack_queue.shift();
-        }
-    }
-    @registerEvent(Enum_MODIFIER_EVENT.ON_ORDER)
-    CC_OnOrder(keys: ModifierAbilityEvent): void {
-        if (keys.unit == this.caster) {
-            if (keys.order_type == dotaunitorder_t.DOTA_UNIT_ORDER_CAST_TARGET && keys.ability.GetAbilityName() == this.ability.GetAbilityName()) {
-                this.impetus_orb = true;
-            } else {
-                this.impetus_orb = false;
-            }
-        }
-    }
-}
-@registerModifier()
-export class modifier_imba_enchantress_impetus_huntmastery_timer extends BaseModifier_Plus {
-    public caster: IBaseNpc_Plus;
-    IgnoreTenacity() {
-        return true;
-    }
-    IsHidden(): boolean {
-        return true;
-    }
-    IsPurgable(): boolean {
-        return false;
-    }
-    RemoveOnDeath(): boolean {
-        return false;
-    }
-    /** DeclareFunctions():modifierfunction[] {
-        return Object.values({
-            1: Enum_MODIFIER_EVENT.ON_DEATH
-        });
-    } */
-    @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
-    CC_OnDeath(keys: ModifierInstanceEvent): void {
-        if (keys.unit == this.GetParentPlus() && keys.unit.IsRealUnit() && (keys.unit.IsReincarnating && !keys.unit.IsReincarnating())) {
-            if (this.GetAbilityPlus().GetAbilityName() == "imba_enchantress_impetus_723") {
-                if (!this.GetCasterPlus().HasModifier("modifier_imba_enchantress_impetus_723")) {
-                    let impetus_modifier = this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_enchantress_impetus_723", {});
-                    if (impetus_modifier) {
-                        impetus_modifier.IncrementStackCount();
-                    }
-                } else {
-                    this.GetCasterPlus().findBuff<modifier_imba_enchantress_impetus_723>("modifier_imba_enchantress_impetus_723").IncrementStackCount();
-                }
-            } else {
-                this.caster = this.GetCasterPlus();
-                let impetus_modifier = this.caster.findBuff<modifier_imba_enchantress_impetus>("modifier_imba_enchantress_impetus");
-                if (impetus_modifier) {
-                    impetus_modifier.IncrementStackCount();
-                }
-            }
-            if (this.GetCasterPlus().GetUnitName().includes("enchantress")) {
-                this.GetCasterPlus().EmitSound("enchantress_ench_ability_impetus_0" + math.random(1, 7));
-            }
-        }
-    }
-}
-@registerAbility()
-export class imba_enchantress_impetus_723 extends BaseOrbAbility_Plus {
-    IsStealable(): boolean {
-        return false;
-    }
-    OnUpgrade(): void {
-        if (!this.GetCasterPlus().HasModifier("modifier_imba_enchantress_impetus_723")) {
-            this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_enchantress_impetus_723", {});
-        }
-    }
-    GetIntrinsicModifierName(): string {
-        return "modifier_generic_orb_effect";
-    }
-    GetProjectileName() {
-        return "particles/units/heroes/hero_enchantress/enchantress_impetus.vpcf";
-    }
-    OnOrbFire() {
-        this.GetCasterPlus().EmitSound("Hero_Enchantress.Impetus");
-    }
-    OnOrbImpact(keys: ModifierAttackEvent) {
-        if (!keys.target.IsMagicImmune() && keys.target.IsAlive()) {
-            keys.target.EmitSound("Hero_Enchantress.ImpetusDamage");
-            keys.target.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_enchantress_impetus_huntmastery_timer", {
-                duration: this.GetSpecialValueFor("huntmastery_grace_period")
-            });
-            let distance = (this.GetCasterPlus().GetAbsOrigin() - keys.target.GetAbsOrigin() as Vector).Length();
-            let impetus_damage = distance * this.GetTalentSpecialValueFor("distance_damage_pct") / 100;
-            ApplyDamage({
-                victim: keys.target,
-                damage: impetus_damage,
-                damage_type: DAMAGE_TYPES.DAMAGE_TYPE_PURE,
-                damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NONE,
-                attacker: this.GetCasterPlus(),
-                ability: this
-            });
-            SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_BONUS_SPELL_DAMAGE, keys.target, impetus_damage, undefined);
-            return 1
-        }
-        return 0
-    }
-}
-@registerModifier()
-export class modifier_imba_enchantress_impetus_723 extends BaseModifier_Plus {
-    IsHidden(): boolean {
-        return this.GetStackCount() <= 0;
-    }
-    IsPurgable(): boolean {
-        return false;
-    }
-    RemoveOnDeath(): boolean {
-        return false;
-    }
-    /** DeclareFunctions():modifierfunction[] {
-        return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS_STACKING,
-            2: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_RANGE_BONUS
-        });
-    } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS_STACKING)
-    CC_GetModifierCastRangeBonusStacking(p_0: ModifierAbilityEvent,): number {
-        if (this.GetAbilityPlus()) {
-            let cast_range = this.GetStackCount() * this.GetSpecialValueFor("attack_cast_stack");
-            return cast_range;
-        } else {
-            this.Destroy();
-        }
-    }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_RANGE_BONUS)
-    CC_GetModifierAttackRangeBonus(): number {
-        if (this.GetAbilityPlus()) {
-            let attack_range = this.GetStackCount() * this.GetSpecialValueFor("attack_cast_stack");
-            return attack_range;
-        } else {
-            this.Destroy();
-        }
-    }
-}
+
 
 @registerModifier()
 export class modifier_special_bonus_imba_enchantress_3 extends BaseModifier_Plus {

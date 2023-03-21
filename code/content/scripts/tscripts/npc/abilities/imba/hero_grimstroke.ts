@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -194,6 +195,13 @@ export class imba_grimstroke_dark_artistry extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_grimstroke_stroke_of_fate_cast_range"), "modifier_special_bonus_imba_grimstroke_stroke_of_fate_cast_range", {});
         }
     }
+
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this);
+    }
 }
 @registerModifier()
 export class modifier_imba_grimstroke_dark_artistry_extend extends BaseModifier_Plus {
@@ -308,7 +316,7 @@ export class imba_grimstroke_ink_creature extends BaseAbility_Plus {
         let latch_unit_offset_short = this.GetSpecialValueFor("latched_unit_offset_short");
         this.AddTimer(this.GetSpecialValueFor("spawn_time"), () => {
             caster.EmitSound("Hero_Grimstroke.InkCreature.Cast");
-            let ink_unit = BaseNpc_Plus.CreateUnitByName("npc_dota_grimstroke_ink_creature", this.GetCasterPlus().GetAbsOrigin() + this.GetCasterPlus().GetForwardVector() * this.GetSpecialValueFor("latched_unit_offset_short") as Vector, this.GetCasterPlus(), false);
+            let ink_unit = BaseNpc_Plus.CreateUnitByName("npc_imba_grimstroke_ink_creature", this.GetCasterPlus().GetAbsOrigin() + this.GetCasterPlus().GetForwardVector() * this.GetSpecialValueFor("latched_unit_offset_short") as Vector, this.GetCasterPlus(), false);
             ink_unit.EmitSound("Hero_Grimstroke.InkCreature.Cast");
             ink_unit.AddNewModifier(caster, ability, "modifier_imba_grimstroke_ink_creature_thinker", {
                 destroy_attacks: this.GetTalentSpecialValueFor("destroy_attacks"),
@@ -342,7 +350,7 @@ export class imba_grimstroke_ink_creature extends BaseAbility_Plus {
         });
     }
     OnProjectileThink_ExtraData(location: Vector, data: any): void {
-        if (!IsServer()) {
+        if (!IsServer() || data == null || data.target_entindex == null) {
             return;
         }
         let target = EntIndexToHScript(data.target_entindex) as IBaseNpc_Plus;
@@ -364,7 +372,7 @@ export class imba_grimstroke_ink_creature extends BaseAbility_Plus {
             ParticleManager.DestroyParticle(data.phantoms_embrace_particle, false);
             ParticleManager.ReleaseParticleIndex(data.phantoms_embrace_particle);
         }
-        if (_target) {
+        if (_target && data.ink_unit_entindex) {
             let unit = EntIndexToHScript(data.ink_unit_entindex) as IBaseNpc_Plus;
             if (_target != this.GetCasterPlus() && data.ink_unit_entindex && unit && unit.IsAlive()) {
                 if (_target.IsInvulnerable() || _target.IsOutOfGame() || !_target.IsAlive()) {
@@ -408,8 +416,13 @@ export class imba_grimstroke_ink_creature extends BaseAbility_Plus {
                 this.GetCasterPlus().EmitSound("Hero_Grimstroke.InkCreature.Returned");
                 this.EndCooldown();
             }
-        } else {
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
     }
 }
 @registerModifier()
@@ -761,6 +774,12 @@ export class imba_grimstroke_spirit_walk extends BaseAbility_Plus {
             duration: this.GetSpecialValueFor("buff_duration")
         });
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
+    }
 }
 @registerModifier()
 export class modifier_imba_grimstroke_spirit_walk_buff extends BaseModifier_Plus {
@@ -937,6 +956,12 @@ export class imba_grimstroke_ink_gods_incarnation extends BaseAbility_Plus {
         this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_grimstroke_ink_gods_incarnation", {
             duration: this.GetSpecialValueFor("duration")
         });
+    }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_cast(this);
     }
 }
 @registerModifier()

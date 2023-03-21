@@ -1060,7 +1060,7 @@ export class modifier_imba_abyssal_underlord_atrophy_aura_scepter extends BaseMo
         return false;
     }
 
-    BeCreated(kv: any): void {
+    Init(kv: any): void {
         this.radius = this.GetSpecialValueFor("radius");
         this.bonus_pct = 50;
         if (!IsServer()) {
@@ -1069,9 +1069,6 @@ export class modifier_imba_abyssal_underlord_atrophy_aura_scepter extends BaseMo
         this.modifier = this.GetCasterPlus().FindModifierByNameAndCaster("modifier_imba_abyssal_underlord_atrophy_aura", this.GetCasterPlus());
     }
 
-    BeRefresh(kv: any): void {
-        this.OnCreated(kv);
-    }
 
     BeRemoved(): void {
     }

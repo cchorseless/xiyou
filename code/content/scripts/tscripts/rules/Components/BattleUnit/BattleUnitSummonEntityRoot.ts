@@ -28,7 +28,7 @@ export class BattleUnitSummonEntityRoot extends BattleUnitEntityRoot {
     }
     onKilled(events: EntityKilledEvent): void {
         this.changeAliveState(false);
-        this.AiAttackComp().endFindToAttack();
+        this.AiAttackComp()?.endFindToAttack();
         let npc = this.GetDomain<IBaseNpc_Plus>();
         npc.StartGesture(GameActivity_t.ACT_DOTA_DIE);
     }

@@ -372,10 +372,23 @@ export class BaseNpc_Plus extends BaseNpc {
             BattleUnitManager = GGameScene.GetPlayer(this.ETRoot.BelongPlayerid).BattleUnitManagerComp();
         }
         if (BattleUnitManager) {
-            BattleUnitManager.RegIllusion(hSummon);
+            BattleUnitManager.RegSummon(hSummon);
         }
         return hSummon as IBaseNpc_Plus;
     }
+
+    CreateDummyUnit?(vLocation: Vector, fDuration: number, isPerma = false) {
+        if (!IsServer()) { return };
+        let sUnitName = isPerma ? "npc_imba_dummy_unit_perma" : "npc_imba_dummy_unit";
+        let iTeamNumber = this.GetTeamNumber()
+        let hDummy = BaseNpc_Plus.CreateUnitByName(sUnitName, vLocation, this, false, iTeamNumber)
+        hDummy.AddNewModifier(this, null, "modifier_dummy_unit", { duration: fDuration < 0 ? null : fDuration })
+        if (fDuration > 0) {
+            hDummy.addBuff("modifier_kill", this, null, { duration: fDuration });
+        }
+        return hDummy as IBaseNpc_Plus;
+    }
+
 
     FindAbilityWithHighestCooldown?() {
         let highest_cd_ability: CDOTABaseAbility;

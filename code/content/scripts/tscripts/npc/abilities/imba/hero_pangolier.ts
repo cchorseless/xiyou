@@ -755,7 +755,7 @@ export class modifier_imba_shield_crash_block extends BaseModifier_Plus {
     public counter_damage: number;
     public start_radius: number;
     public end_radius: number;
-    BeCreated(keys: any): void {
+    Init(keys: any): void {
         if (IsServer()) {
             this.swashbuckle = this.GetCasterPlus().findAbliityPlus<imba_pangolier_swashbuckle>("imba_pangolier_swashbuckle");
             this.particle = "particles/units/heroes/hero_pangolier/pangolier_swashbuckler.vpcf";
@@ -773,9 +773,7 @@ export class modifier_imba_shield_crash_block extends BaseModifier_Plus {
             this.SetStackCount(this.GetStackCount() + keys.stacks);
         }
     }
-    BeRefresh(keys: any): void {
-        this.OnCreated(keys);
-    }
+
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
             1: Enum_MODIFIER_EVENT.ON_ATTACK_START,

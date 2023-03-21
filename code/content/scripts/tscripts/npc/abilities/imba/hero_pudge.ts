@@ -5,7 +5,6 @@ import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifierMotionHorizontal_Plus, BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
-import { BaseNpc_Plus } from "../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 
@@ -271,7 +270,7 @@ export class imba_pudge_meat_hook extends BaseAbility_Plus {
             let target = hTarget;
             let bVision = false;
             if (!target) {
-                target = BaseNpc_Plus.CreateUnitByName("npc_dummy_unit", vLocation, this.GetCasterPlus(), false);
+                target = this.GetCasterPlus().CreateDummyUnit(vLocation, 10);
             }
             ParticleManager.SetParticleControlEnt(ExtraData.pfx_index, 1, target, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", target.GetAbsOrigin() + Vector(0, 0, 96) as Vector, true);
             if (hTarget) {
@@ -383,7 +382,7 @@ export class imba_pudge_meat_hook extends BaseAbility_Plus {
             target.SetUnitOnClearGround();
             EmitSoundOnLocationWithCaster(target.GetAbsOrigin(), "Hero_Pudge.AttackHookRetractStop", target);
             this.GetCasterPlus().StopSound("Hero_Pudge.AttackHookExtend");
-            if (target.GetUnitName() == "npc_dummy_unit") {
+            if (target.IsDummyUnit()) {
                 target.ForceKill(false);
             } else {
                 target.StopSound("Hero_Pudge.AttackHookImpact");

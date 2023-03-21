@@ -3,7 +3,6 @@ import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifierMotionHorizontal_Plus, BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
-import { BaseNpc_Plus } from "../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 @registerAbility()
@@ -242,7 +241,7 @@ export class imba_rattletrap_power_cogs extends BaseAbility_Plus {
         let second_cog_vector = GetGroundPosition(caster_pos + Vector(0, cogs_radius * 2, 0) as Vector, undefined);
         this.GetCasterPlus().StartGesture(GameActivity_t.ACT_DOTA_RATTLETRAP_POWERCOGS);
         for (let i = 0; i < num_of_cogs; i++) {
-            let cog = BaseNpc_Plus.CreateUnitByName("npc_dota_rattletrap_cog", cog_vector, this.GetCasterPlus(), false);
+            let cog = this.GetCasterPlus().CreateSummon("npc_imba_rattletrap_cog", cog_vector, this.GetSpecialValueFor("duration"), false);
             cog.EmitSound("Hero_Rattletrap.Power_Cogs");
             cog.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_rattletrap_power_cogs", {
                 duration: this.GetSpecialValueFor("duration"),
@@ -253,7 +252,7 @@ export class imba_rattletrap_power_cogs extends BaseAbility_Plus {
                 center_z: caster_pos.z
             });
             if (this.GetCasterPlus().HasTalent("special_bonus_imba_rattletrap_second_gear")) {
-                let second_cog = BaseNpc_Plus.CreateUnitByName("npc_dota_rattletrap_cog", second_cog_vector, this.GetCasterPlus(), false);
+                let second_cog = this.GetCasterPlus().CreateSummon("npc_imba_rattletrap_cog", second_cog_vector, this.GetSpecialValueFor("duration"), false);
                 second_cog.EmitSound("Hero_Rattletrap.Power_Cogs");
                 second_cog.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_rattletrap_power_cogs", {
                     duration: this.GetSpecialValueFor("duration"),
@@ -476,7 +475,7 @@ export class modifier_imba_rattletrap_cog_push extends BaseModifierMotionHorizon
         this.owner = this.GetCasterPlus().GetOwnerPlus() || this.GetCasterPlus();
         this.GetCasterPlus().EmitSound("Hero_Rattletrap.Power_Cogs_Impact");
         let attack_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_rattletrap/rattletrap_cog_attack.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetCasterPlus());
-        if (this.GetCasterPlus().GetUnitName() == "npc_dota_rattletrap_cog") {
+        if (this.GetCasterPlus().GetUnitName() == "npc_imba_rattletrap_cog") {
             ParticleManager.SetParticleControlEnt(attack_particle, 1, this.GetParentPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", this.GetParentPlus().GetAbsOrigin(), true);
         } else {
             ParticleManager.SetParticleControlEnt(attack_particle, 1, this.GetParentPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_attack1", this.GetParentPlus().GetAbsOrigin(), true);
@@ -600,7 +599,7 @@ export class modifier_imba_rattletrap_power_cogs_charge_coil_counter extends Bas
         if (!IsServer()) {
             return;
         }
-        if (keys.attacker.IsRangedAttacker() && keys.attacker == this.GetParentPlus() && !keys.target.IsBuilding() && !keys.target.IsMagicImmune() && !keys.target.IsOther() && keys.target.GetUnitName() != "npc_dota_rattletrap_cog" && !keys.target.HasModifier("modifier_imba_rattletrap_cog_push")) {
+        if (keys.attacker.IsRangedAttacker() && keys.attacker == this.GetParentPlus() && !keys.target.IsBuilding() && !keys.target.IsMagicImmune() && !keys.target.IsOther() && keys.target.GetUnitName() != "npc_imba_rattletrap_cog" && !keys.target.HasModifier("modifier_imba_rattletrap_cog_push")) {
             let charge_coil_instances = this.GetParentPlus().FindAllModifiersByName("modifier_imba_rattletrap_power_cogs_charge_coil_instance");
             if (GameFunc.GetCount(charge_coil_instances) >= 1) {
                 charge_coil_instances[0].Destroy();

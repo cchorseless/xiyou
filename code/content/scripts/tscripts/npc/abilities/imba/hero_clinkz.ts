@@ -102,7 +102,7 @@ export class imba_clinkz_strafe extends BaseAbility_Plus {
         caster.AddNewModifier(caster, this, "modifier_imba_clinkz_strafe", {
             duration: this.GetSpecialValueFor("duration")
         });
-        let units = caster.FindChildByName("npc_dota_clinkz_skeleton_archer")
+        let units = caster.FindChildByName("npc_imba_clinkz_skeleton_archer")
         for (const [_, skeleton] of GameFunc.iPair(units)) {
             skeleton.AddNewModifier(caster, this, "modifier_imba_clinkz_strafe", {
                 duration: this.GetSpecialValueFor("duration")
@@ -834,7 +834,7 @@ export class modifier_imba_skeleton_walk_invis extends BaseModifier_Plus {
                         pos = this.GetCasterPlus().GetAbsOrigin() + (this.GetCasterPlus().GetRightVector() * 250) as Vector;
                     }
                     let duration = this.GetCasterPlus().findAbliityPlus("clinkz_burning_army").GetSpecialValueFor("duration");
-                    let archer = this.GetCasterPlus().CreateSummon("npc_dota_clinkz_skeleton_archer", pos, duration, true);
+                    let archer = this.GetCasterPlus().CreateSummon("npc_imba_clinkz_skeleton_archer", pos, duration, true);
                     archer.AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("clinkz_burning_army"), "modifier_imba_clinkz_burning_army_skeleton_custom", {});
                     archer.SetForwardVector(this.GetCasterPlus().GetForwardVector());
                 }
@@ -1709,7 +1709,7 @@ export class imba_clinkz_death_pact_723 extends BaseAbility_Plus {
         return "modifier_imba_clinkz_death_pact_723_permanent_buff";
     }
     CastFilterResultTarget(hTarget: CDOTA_BaseNPC): UnitFilterResult {
-        if (hTarget.GetTeamNumber() != this.GetCasterPlus().GetTeamNumber() && hTarget.IsCreep() && !hTarget.IsAncient() || hTarget.GetClassname() == "npc_dota_clinkz_skeleton_archer" && hTarget.findBuffStack("modifier_imba_burning_army", this.GetCasterPlus()) == 0) {
+        if (hTarget.GetTeamNumber() != this.GetCasterPlus().GetTeamNumber() && hTarget.IsCreep() && !hTarget.IsAncient() || hTarget.GetClassname() == "npc_imba_clinkz_skeleton_archer" && hTarget.findBuffStack("modifier_imba_burning_army", this.GetCasterPlus()) == 0) {
             return UnitFilterResult.UF_SUCCESS;
         } else if (hTarget.GetTeamNumber() != this.GetCasterPlus().GetTeamNumber() && hTarget.IsConsideredHero()) {
             return UnitFilterResult.UF_SUCCESS;

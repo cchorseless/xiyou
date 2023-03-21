@@ -1,11 +1,18 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 @registerAbility()
-export class imba_lion_earth_spike extends BaseAbility_Plus {
+export class imba_lion_impale extends BaseAbility_Plus {
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this)
+    }
     tempdata: { [k: string]: IBaseNpc_Plus[] } = {};
     GetAbilityTextureName(): string {
         return "lion_impale";
@@ -82,8 +89,8 @@ export class imba_lion_earth_spike extends BaseAbility_Plus {
         let particle_hit = "particles/units/heroes/hero_lion/lion_spell_impale_hit_spikes.vpcf";
         let sound_cast = "Hero_Lion.Impale";
         let particle_projectile = "particles/units/heroes/hero_lion/lion_spell_impale.vpcf";
-        let modifier_stun = "modifier_imba_earthspike_stun";
-        let modifier_death_spike = "modifier_imba_earthspike_death_spike";
+        let modifier_stun = "modifier_imba_lion_impale_stun";
+        let modifier_death_spike = "modifier_imba_lion_impale_death_spike";
         let hit_targets_index = extra_data.hit_targets_index;
         let incoming_targets_index = extra_data.incoming_targets_index;
         let bounces_left = extra_data.bounces_left;
@@ -208,7 +215,7 @@ export class imba_lion_earth_spike extends BaseAbility_Plus {
     }
 }
 @registerModifier()
-export class modifier_imba_earthspike_stun extends BaseModifier_Plus {
+export class modifier_imba_lion_impale_stun extends BaseModifier_Plus {
     IsHidden(): boolean {
         return false;
     }
@@ -232,7 +239,7 @@ export class modifier_imba_earthspike_stun extends BaseModifier_Plus {
     }
 }
 @registerModifier()
-export class modifier_imba_earthspike_death_spike extends BaseModifier_Plus {
+export class modifier_imba_lion_impale_death_spike extends BaseModifier_Plus {
     IsHidden(): boolean {
         return false;
     }
@@ -251,7 +258,7 @@ export class modifier_imba_earthspike_death_spike extends BaseModifier_Plus {
     }
 }
 @registerAbility()
-export class imba_lion_hex extends BaseAbility_Plus {
+export class imba_lion_voodoo extends BaseAbility_Plus {
     GetAbilityTextureName(): string {
         return "lion_voodoo";
     }
@@ -288,7 +295,7 @@ export class imba_lion_hex extends BaseAbility_Plus {
         }
         let sound_cast = "Hero_Lion.Voodoo";
         let particle_hex = "particles/units/heroes/hero_lion/lion_spell_voodoo.vpcf";
-        let modifier_hex = "modifier_imba_lion_hex";
+        let modifier_hex = "modifier_imba_lion_voodoo";
         let duration = ability.GetSpecialValueFor("duration");
         if (RollPercentage(75)) {
             EmitSoundOn(GFuncRandom.RandomOne(Object.values(cast_response)), caster);
@@ -327,9 +334,15 @@ export class imba_lion_hex extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_lion_10"), "modifier_special_bonus_imba_lion_10", {});
         }
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this)
+    }
 }
 @registerModifier()
-export class modifier_imba_lion_hex extends BaseModifier_Plus {
+export class modifier_imba_lion_voodoo extends BaseModifier_Plus {
     public caster: IBaseNpc_Plus;
     public ability: IBaseAbility_Plus;
     public parent: IBaseNpc_Plus;
@@ -355,7 +368,7 @@ export class modifier_imba_lion_hex extends BaseModifier_Plus {
         this.sound_meme_firetoad = "Imba.LionHexREEE";
         this.particle_hex = "particles/units/heroes/hero_lion/lion_spell_voodoo.vpcf";
         this.particle_flaming_frog = "particles/hero/lion/firetoad.vpcf";
-        this.modifier_hex = "modifier_imba_lion_hex";
+        this.modifier_hex = "modifier_imba_lion_voodoo";
         this.caster_team = this.caster.GetTeamNumber();
         this.firetoad_chance = 10;
         this.duration = this.ability.GetSpecialValueFor("duration");
@@ -386,7 +399,7 @@ export class modifier_imba_lion_hex extends BaseModifier_Plus {
             let hexed_enemies = 0;
             let enemies = FindUnitsInRadius(this.caster_team, this.parent.GetAbsOrigin(), undefined, this.hex_bounce_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ANCIENTS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_ANY_ORDER, false);
             for (const [_, enemy] of GameFunc.iPair(enemies)) {
-                if (this.parent != enemy && !enemy.HasModifier(this.modifier_hex) && !enemy.HasModifier("modifier_imba_lion_hex_chain_cooldown")) {
+                if (this.parent != enemy && !enemy.HasModifier(this.modifier_hex) && !enemy.HasModifier("modifier_imba_lion_voodoo_chain_cooldown")) {
                     EmitSoundOn(this.sound_cast, enemy);
                     if (enemy.GetTeam() != this.caster_team) {
                         if (enemy.TriggerSpellAbsorb(this.ability)) {
@@ -457,14 +470,14 @@ export class modifier_imba_lion_hex extends BaseModifier_Plus {
             } else {
                 this.parent.SetRenderColor(255, 255, 255);
             }
-            this.parent.AddNewModifier(this.caster, this.ability, "modifier_imba_lion_hex_chain_cooldown", {
+            this.parent.AddNewModifier(this.caster, this.ability, "modifier_imba_lion_voodoo_chain_cooldown", {
                 duration: this.ability.GetSpecialValueFor("chain_hex_cooldown")
             });
         }
     }
 }
 @registerModifier()
-export class modifier_imba_lion_hex_chain_cooldown extends BaseModifier_Plus {
+export class modifier_imba_lion_voodoo_chain_cooldown extends BaseModifier_Plus {
     IgnoreTenacity() {
         return true;
     }
@@ -583,6 +596,12 @@ export class imba_lion_mana_drain extends BaseAbility_Plus {
                 return interval;
             });
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this)
     }
 }
 @registerModifier()
@@ -842,19 +861,19 @@ export class imba_lion_finger_of_death extends BaseAbility_Plus {
             return this.GetSpecialValueFor("enemies_frog_radius");
         }
     }
-    GetManaCost(level: number): number {
-        let caster = this.GetCasterPlus();
-        let ability = this;
-        let modifier_finger = "modifier_imba_trigger_finger_debuff";
-        let base_mana_cost = super.GetManaCost(level);
-        let triggerfinger_mana_inc_pct = ability.GetSpecialValueFor("triggerfinger_mana_inc_pct");
-        let stacks = 0;
-        if (caster.HasModifier(modifier_finger)) {
-            stacks = caster.findBuffStack(modifier_finger, caster);
-        }
-        let mana_cost = base_mana_cost * (1 + (stacks * triggerfinger_mana_inc_pct * 0.01));
-        return mana_cost;
-    }
+    // GetManaCost(level: number): number {
+    //     let caster = this.GetCasterPlus();
+    //     let ability = this;
+    //     let modifier_finger = "modifier_imba_trigger_finger_debuff";
+    //     let base_mana_cost = super.GetManaCost(level);
+    //     let triggerfinger_mana_inc_pct = ability.GetSpecialValueFor("triggerfinger_mana_inc_pct");
+    //     let stacks = 0;
+    //     if (caster.HasModifier(modifier_finger)) {
+    //         stacks = caster.findBuffStack(modifier_finger, caster);
+    //     }
+    //     let mana_cost = base_mana_cost * (1 + (stacks * triggerfinger_mana_inc_pct * 0.01));
+    //     return mana_cost;
+    // }
     GetCooldown(level: number): number {
         let caster = this.GetCasterPlus();
         let ability = this;
@@ -883,7 +902,6 @@ export class imba_lion_finger_of_death extends BaseAbility_Plus {
         let scepter_damage = this.GetSpecialValueFor("scepter_damage");
         let scepter_radius = this.GetSpecialValueFor("scepter_radius");
         let triggerfinger_duration = this.GetSpecialValueFor("triggerfinger_duration");
-        let projectile_speed = this.GetSpecialValueFor("projectile_speed");
         let enemies_frog_radius = this.GetSpecialValueFor("enemies_frog_radius");
         this.enemy_killed = false;
         EmitSoundOn(sound_cast, caster);
@@ -982,7 +1000,7 @@ export class imba_lion_finger_of_death extends BaseAbility_Plus {
                 duration: kill_grace_duration * (1 - target.GetStatusResistance())
             });
             EmitSoundOn(sound_impact, target);
-            if (target.HasModifier("modifier_imba_earthspike_death_spike")) {
+            if (target.HasModifier("modifier_imba_lion_impale_death_spike")) {
                 damage = damage * (1 + (caster.GetTalentValue("special_bonus_imba_lion_7", "bonus_damage") * 0.01));
             }
             if (caster.HasModifier("modifier_imba_finger_of_death_counter")) {
@@ -1002,6 +1020,12 @@ export class imba_lion_finger_of_death extends BaseAbility_Plus {
                 }
             });
         });
+    }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this)
     }
 }
 @registerModifier()

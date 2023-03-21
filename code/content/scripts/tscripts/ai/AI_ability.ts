@@ -136,7 +136,7 @@ export module AI_ability {
      * @param range
      * @param radius
      */
-    export function POSITION_most_enemy(ability: IBaseAbility_Plus, range: number = 0, radius: number = 0) {
+    export function POSITION_most_enemy(ability: IBaseAbility_Plus, range: number = 0, radius: number = 0): boolean {
         let caster = ability.GetCasterPlus();
         if (range == 0 || range == null) range = ability.GetCastRangePlus();
         if (radius == 0 || radius == null) radius = ability.GetAOERadius();
@@ -164,7 +164,7 @@ export module AI_ability {
         return false;
     }
 
-    export function POSITION_most_friend(ability: IBaseAbility_Plus, range: number = 0, radius: number = 0) {
+    export function POSITION_most_friend(ability: IBaseAbility_Plus, range: number = 0, radius: number = 0): boolean {
         let caster = ability.GetCasterPlus();
         if (range == 0 || range == null) range = ability.GetCastRangePlus();
         if (radius == 0 || radius == null) radius = ability.GetAOERadius();

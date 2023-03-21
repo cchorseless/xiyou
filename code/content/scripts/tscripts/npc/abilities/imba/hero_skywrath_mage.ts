@@ -763,7 +763,7 @@ export class modifier_imba_mystic_flare extends BaseModifier_Plus {
             ParticleManager.SetParticleControl(this.core_particle_fx, 1, Vector(this.damage_radius, this.damage_duration, 0));
             ParticleManager.ReleaseParticleIndex(this.core_particle_fx);
             this.StartIntervalThink(this.damage_interval);
-            if (string.find(this.caster.GetUnitName(), "npc_imba_pugna_nether_ward")) {
+            if (this.caster.GetUnitName().includes("npc_imba_pugna_nether_ward")) {
                 return undefined;
             }
             this.AddTimer(this.damage_duration, () => {

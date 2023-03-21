@@ -817,9 +817,9 @@ export class modifier_imba_brewmaster_primal_split_split_delay extends BaseModif
             let ability = this.GetAbilityPlus();
             let parent = this.GetParentPlus();
             let caster = this.GetCasterPlus();
-            let earth_panda = caster.CreateSummon("npc_dota_brewmaster_earth_" + ability.GetLevel(), parent.GetAbsOrigin() + parent.GetForwardVector() * 100 as Vector, this.duration);
-            let storm_panda = caster.CreateSummon("npc_dota_brewmaster_storm_" + ability.GetLevel(), RotatePosition(parent.GetAbsOrigin(), QAngle(0, 120, 0), parent.GetAbsOrigin() + parent.GetForwardVector() * 100 as Vector), this.duration);
-            let fire_panda = caster.CreateSummon("npc_dota_brewmaster_fire_" + ability.GetLevel(), RotatePosition(parent.GetAbsOrigin(), QAngle(0, -120, 0), parent.GetAbsOrigin() + parent.GetForwardVector() * 100 as Vector), this.duration);
+            let earth_panda = caster.CreateSummon("npc_imba_brewmaster_earth_" + ability.GetLevel(), parent.GetAbsOrigin() + parent.GetForwardVector() * 100 as Vector, this.duration);
+            let storm_panda = caster.CreateSummon("npc_imba_brewmaster_storm_" + ability.GetLevel(), RotatePosition(parent.GetAbsOrigin(), QAngle(0, 120, 0), parent.GetAbsOrigin() + parent.GetForwardVector() * 100 as Vector), this.duration);
+            let fire_panda = caster.CreateSummon("npc_imba_brewmaster_fire_" + ability.GetLevel(), RotatePosition(parent.GetAbsOrigin(), QAngle(0, -120, 0), parent.GetAbsOrigin() + parent.GetForwardVector() * 100 as Vector), this.duration);
             let pandas = [earth_panda, storm_panda, fire_panda];
             // this.GetParentPlus().FollowEntity(earth_panda, false);
             for (const panda of pandas) {

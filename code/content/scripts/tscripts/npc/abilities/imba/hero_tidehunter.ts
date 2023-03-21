@@ -232,7 +232,7 @@ export class modifier_imba_tidehunter_gush_surf extends BaseModifier_Plus {
     public speed: number;
     public direction: any;
     public surf_speed_pct: number;
-    BeCreated(params: any): void {
+    Init(params: any): void {
         if (!IsServer()) {
             return;
         }
@@ -245,12 +245,7 @@ export class modifier_imba_tidehunter_gush_surf extends BaseModifier_Plus {
             this.Destroy();
         }
     }
-    BeRefresh(params: any): void {
-        if (!IsServer()) {
-            return;
-        }
-        this.OnCreated(params);
-    }
+
     OnIntervalThink(): void {
         if (!IsServer()) {
             return;

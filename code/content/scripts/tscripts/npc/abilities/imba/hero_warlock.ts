@@ -3,7 +3,6 @@ import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
-import { BaseNpc_Plus } from "../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 @registerAbility()
@@ -180,7 +179,7 @@ export class modifier_imba_fatal_bonds extends BaseModifier_Plus {
                         }
                     }
                 }
-            } else if (keys.attacker == this.GetParentPlus() && string.find(keys.unit.GetUnitName(), "warlock_golem") && keys.unit.GetTeamNumber() != this.GetParentPlus().GetTeamNumber()) {
+            } else if (keys.attacker == this.GetParentPlus() && keys.unit.GetUnitName().includes("warlock_golem") && keys.unit.GetTeamNumber() != this.GetParentPlus().GetTeamNumber()) {
                 if ((keys.unit.GetAbsOrigin() - this.GetParentPlus().GetAbsOrigin() as Vector).Length2D() <= this.golem_link_radius) {
                     let damageTable = {
                         victim: this.GetParentPlus(),
@@ -304,7 +303,7 @@ export class modifier_imba_shadow_word extends BaseModifier_Plus {
         } else {
             this.good_guy = false;
         }
-        if (this.good_guy && string.find(this.parent.GetUnitName(), "warlock_golem")) {
+        if (this.good_guy && this.parent.GetUnitName().includes("warlock_golem")) {
             this.is_golem = true;
         }
         if (IsServer()) {
@@ -419,11 +418,8 @@ export class imba_warlock_upheaval extends BaseAbility_Plus {
             BaseModifier_Plus.CreateBuffThinker(caster, this, modifier_upheaval, {}, target_point, caster.GetTeamNumber(), false);
         } else {
             let playerID = caster.GetPlayerID();
-            let demon = BaseNpc_Plus.CreateUnitByName("npc_imba_warlock_upheaval_demon", target_point, caster, true);
+            let demon = caster.CreateSummon("npc_imba_warlock_upheaval_demon", target_point, 20, true);
             // demon.SetControllableByPlayer(playerID, true);
-            demon.AddNewModifier(demon, this, "modifier_kill", {
-                duration: 20
-            });
             this.AddTimer(FrameTime(), () => {
                 ResolveNPCPositions(target_point, 64);
                 demon.SetBaseMaxHealth(caster.GetBaseMaxHealth());
@@ -450,7 +446,7 @@ export class imba_warlock_upheaval extends BaseAbility_Plus {
         let sound_end = "Hero_Warlock.Upheaval.Stop";
         StopSoundOn(sound_loop, caster);
         EmitSoundOn(sound_end, caster);
-        if (string.find(caster.GetUnitName(), "npc_imba_warlock_upheaval_demon")) {
+        if (caster.GetUnitName().includes("npc_imba_warlock_upheaval_demon")) {
             this.AddTimer(2, () => {
                 caster.Kill(this, caster);
             });
@@ -513,7 +509,7 @@ export class modifier_imba_upheaval extends BaseModifier_Plus {
         }
         let units = FindUnitsInRadius(this.caster.GetTeamNumber(), this.parent.GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_ANY_ORDER, false);
         for (const [_, unit] of GameFunc.iPair(units)) {
-            if (string.find(unit.GetUnitName(), "warlock_golem")) {
+            if (unit.GetUnitName().includes("warlock_golem")) {
                 let modifier_golem_buff_handler = unit.AddNewModifier(this.caster, this.ability, this.modifier_golem_buff, {
                     duration: (this.tick_interval * 2)
                 }) as modifier_imba_upheaval_buff;
@@ -669,13 +665,10 @@ export class imba_warlock_rain_of_chaos extends BaseAbility_Plus {
             }
             let golem = undefined;
             if (!bScepter || bDeath) {
-                golem = BaseNpc_Plus.CreateUnitByName("npc_dota_warlock_golem_" + this.GetLevel(), target_point, this.GetCasterPlus(), true);
+                golem = this.GetCasterPlus().CreateSummon("npc_imba_warlock_golem_" + this.GetLevel(), target_point, this.GetSpecialValueFor("duration"), true);
             } else {
-                golem = BaseNpc_Plus.CreateUnitByName("npc_dota_warlock_golem_scepter_" + this.GetLevel(), target_point, this.GetCasterPlus(), true);
+                golem = this.GetCasterPlus().CreateSummon("npc_imba_warlock_golem_scepter_" + this.GetLevel(), target_point, this.GetSpecialValueFor("duration"), true);
             }
-            golem.AddNewModifier(this.GetCasterPlus(), this, "modifier_kill", {
-                duration: this.GetSpecialValueFor("duration")
-            });
             // golem.SetControllableByPlayer(this.GetCasterPlus().GetPlayerID(), true);
             let bonus_hp = this.GetCasterPlus().GetStrength() * this.GetSpecialValueFor("bonus_hp_per_str");
             let bonus_damage = this.GetCasterPlus().GetIntellect() * this.GetSpecialValueFor("bonus_damage_per_int");

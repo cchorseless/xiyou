@@ -128,8 +128,8 @@ export class GameSetting {
                             if (iDamageType == DAMAGE_TYPES.DAMAGE_TYPE_NONE) {
                                 iDamageType = DAMAGE_TYPES.DAMAGE_TYPE_PURE
                             }
-                            let building = unit.ETRoot as IBuildingEntityRoot;
-                            if (building && building.IsBattleUnit()) {
+                            let building = unit.ETRoot as IBattleUnitEntityRoot;
+                            if (building && building.IsBattleUnit && building.IsBattleUnit()) {
                                 let round = building.GetPlayer().RoundManagerComp().getCurrentBoardRound();
                                 if (building.IsIllusion()) {
 

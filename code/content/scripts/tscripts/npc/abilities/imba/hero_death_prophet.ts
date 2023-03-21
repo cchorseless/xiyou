@@ -352,7 +352,7 @@
 //                 this.DecrementStackCount();
 //                 ability.EndCooldown();
 //                 this.Update();
-//             } else if (string.find(params.ability.GetName(), "orb_of_renewal") && this.GetStackCount() < this.kv.max_count) {
+//             } else if (params.ability.GetName().includes( "orb_of_renewal") && this.GetStackCount() < this.kv.max_count) {
 //                 this.IncrementStackCount();
 //                 this.Update();
 //             }

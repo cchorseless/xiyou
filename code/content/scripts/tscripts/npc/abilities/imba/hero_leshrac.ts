@@ -1,9 +1,9 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
-import { BaseNpc_Plus } from "../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 @registerAbility()
@@ -30,6 +30,13 @@ export class imba_leshrac_split_earth extends BaseAbility_Plus {
         }
         return radius;
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_most_enemy(this)
+    }
+
     OnSpellStart(ese_location?: Vector, ese_radius?: number): void {
         if (IsClient()) {
             return;
@@ -121,21 +128,21 @@ export class imba_leshrac_split_earth extends BaseAbility_Plus {
             }
             let splitter_enemies = FindUnitsInRadius(caster.GetTeamNumber(), target_point, undefined, splitter_blast_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_ANY_ORDER, false);
             if (GameFunc.GetCount(splitter_enemies) > 0) {
-                let dummy = BaseNpc_Plus.CreateUnitByName("npc_dummy_unit", target_point, caster, false);
+                let dummy = caster.CreateDummyUnit(target_point, splitter_blast_delay * energy_orb_count);
                 let orbs_fired = 0;
                 this.AddTimer(splitter_blast_delay, () => {
                     let chosen_enemy;
                     let valid_chosen_enemy = false;
                     let tries = 0;
                     while (!valid_chosen_enemy) {
-                        let picked_enemy_num = RandomInt(1, GameFunc.GetCount(splitter_enemies));
+                        let picked_enemy_num = RandomInt(0, GameFunc.GetCount(splitter_enemies));
                         chosen_enemy = splitter_enemies[picked_enemy_num];
                         if (chosen_enemy && !chosen_enemy.IsMagicImmune() && chosen_enemy.IsAlive()) {
                             valid_chosen_enemy = true;
                         } else {
                             tries = tries + 1;
                             if (tries >= 5) {
-                                return;
+                                break;
                             }
                         }
                     }
@@ -159,7 +166,8 @@ export class imba_leshrac_split_earth extends BaseAbility_Plus {
                     orbs_fired = orbs_fired + 1;
                     if (orbs_fired < energy_orb_count) {
                         return splitter_blast_delay;
-                    } else {
+                    }
+                    else {
                         GFuncEntity.SafeDestroyUnit(dummy);
                         return;
                     }
@@ -328,6 +336,12 @@ export class imba_leshrac_diabolic_edict extends BaseAbility_Plus {
             });
         }
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_if_enemy(this)
+    }
 }
 @registerModifier()
 export class modifier_imba_leshrac_diabolic_edict extends BaseModifier_Plus {
@@ -390,7 +404,7 @@ export class modifier_imba_leshrac_diabolic_edict extends BaseModifier_Plus {
         this.num_explosions = this.ability.GetSpecialValueFor("num_explosions") + this.caster.GetTalentValue("special_bonus_imba_unique_leshrac_1");
         this.radius = this.ability.GetSpecialValueFor("radius");
         this.tower_bonus = this.ability.GetSpecialValueFor("tower_bonus");
-        this.damage = this.ability.GetSpecialValueFor("damage");
+        this.damage = this.ability.GetSpecialValueFor("AbilityDamage");
         this.tormented_soul_weakening_duration = this.ability.GetSpecialValueFor("tormented_soul_weakening_duration");
         this.diabolic_adapt_radius_inc = this.ability.GetSpecialValueFor("diabolic_adapt_radius_inc");
         this.diabolic_adapt_duration_inc = this.ability.GetSpecialValueFor("diabolic_adapt_duration_inc");
@@ -678,6 +692,12 @@ export class imba_leshrac_lightning_storm extends BaseAbility_Plus {
                 this.GetCasterPlus().RemoveModifierByName(modifier_thinker);
             }
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this)
     }
 }
 @registerModifier()
@@ -1064,6 +1084,20 @@ export class imba_leshrac_pulse_nova extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_unique_leshrac_pulse_nova_radius"), "modifier_special_bonus_imba_unique_leshrac_pulse_nova_radius", {});
         }
     }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+
+    OnSpellStart(): void {
+        let caster = this.GetCasterPlus();
+        let ability = this;
+        let cast_sound = "Hero_Leshrac.Pulse_Nova";
+        let modifier_nova = "modifier_imba_leshrac_pulse_nova";
+        caster.AddNewModifier(caster, ability, modifier_nova, { duration: 10 });
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_cast(this)
+    }
 }
 @registerModifier()
 export class modifier_imba_leshrac_pulse_nova extends BaseModifier_Plus {
@@ -1109,7 +1143,8 @@ export class modifier_imba_leshrac_pulse_nova extends BaseModifier_Plus {
         this.particle_hit = "particles/units/heroes/hero_leshrac/leshrac_pulse_nova.vpcf";
         this.modifier_ese = "modifier_imba_leshrac_pulse_nova_earth_edict_storm_debuff";
         this.modifier_tormented = "modifier_imba_tormented_soul_form";
-        this.mana_cost_per_second = this.ability.GetSpecialValueFor("mana_cost_per_second");
+        // this.mana_cost_per_second = this.ability.GetSpecialValueFor("mana_cost_per_second");
+        this.mana_cost_per_second = 0;
         this.radius = this.ability.GetSpecialValueFor("radius");
         this.damage = this.ability.GetSpecialValueFor("damage");
         this.interval = this.ability.GetSpecialValueFor("interval");
@@ -1369,13 +1404,13 @@ export class imba_leshrac_tormented_soul_form extends BaseAbility_Plus {
     IsNetherWardStealable() {
         return false;
     }
-    GetManaCost(level: number): number {
-        let caster = this.GetCasterPlus();
-        let ability = this;
-        let max_hp_mp_cost_pct = ability.GetSpecialValueFor("max_hp_mp_cost_pct");
-        let mana_cost = caster.GetMaxMana() * max_hp_mp_cost_pct * 0.01;
-        return mana_cost;
-    }
+    // GetManaCost(level: number): number {
+    //     let caster = this.GetCasterPlus();
+    //     let ability = this;
+    //     let max_hp_mp_cost_pct = ability.GetSpecialValueFor("max_hp_mp_cost_pct");
+    //     let mana_cost = caster.GetMaxMana() * max_hp_mp_cost_pct * 0.01;
+    //     return mana_cost;
+    // }
     OnSpellStart(): void {
         if (IsClient()) {
             return;
@@ -1495,6 +1530,12 @@ export class imba_leshrac_tormented_soul_form extends BaseAbility_Plus {
                 modifier_nova_handle.OnIntervalThink(tormented_soul_cast_range_mult);
             }
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_cast(this)
     }
 }
 @registerModifier()

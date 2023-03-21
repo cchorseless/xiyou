@@ -120,7 +120,7 @@ export class imba_invoker {
         let quas = 0;
         let wex = 0;
         let exort = 0;
-        if ((!string.find(caster.GetRangedProjectileName(), 'invoker', 1, true))) {
+        if ((!caster.GetRangedProjectileName().includes('invoker', 0))) {
             return;
         }
         let invoked_orbs = caster.TempData<IBaseAbility_Plus[]>().invoked_orbs;
@@ -439,10 +439,10 @@ export class imba_invoker_invoke extends BaseAbility_Plus {
         }
     }
     GetCooldown(iLevel: number): number {
-        let owner = this.GetOwnerPlus();
-        let quas_level = owner.findAbliityPlus<imba_invoker_quas>("imba_invoker_quas").GetLevel();
-        let wex_level = owner.findAbliityPlus<imba_invoker_wex>("imba_invoker_wex").GetLevel();
-        let exort_level = owner.findAbliityPlus<imba_invoker_exort>("imba_invoker_exort").GetLevel();
+        let caster = this.GetCasterPlus();
+        let quas_level = caster.findAbliityPlus<imba_invoker_quas>("imba_invoker_quas").GetLevel();
+        let wex_level = caster.findAbliityPlus<imba_invoker_wex>("imba_invoker_wex").GetLevel();
+        let exort_level = caster.findAbliityPlus<imba_invoker_exort>("imba_invoker_exort").GetLevel();
         let orb_levels = math.min(quas_level, 7) + math.min(wex_level, 7) + math.min(exort_level, 7);
         let cdr = this.GetSpecialValueFor("cooldown_reduction_per_orb");
         return super.GetCooldown(iLevel) - (cdr * orb_levels);
@@ -1850,7 +1850,7 @@ export class imba_invoker_forge_spirit extends BaseAbility_Plus {
             let caster = this.GetCasterPlus();
             let quas_level = caster.findAbliityPlus<imba_invoker_quas>("imba_invoker_quas").GetLevel() - 1;
             let exort_level = caster.findAbliityPlus<imba_invoker_exort>("imba_invoker_exort").GetLevel() - 1;
-            let spirit_name = "npc_dota_invoker_forged_spirit";
+            let spirit_name = "npc_imba_invoker_forged_spirit";
             let spirit_level = 3;
             let spirit_damage = this.GetLevelSpecialValueFor("spirit_damage", exort_level);
             let spirit_hp = this.GetLevelSpecialValueFor("spirit_hp", quas_level);

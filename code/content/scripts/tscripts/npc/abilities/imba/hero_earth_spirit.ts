@@ -22,9 +22,9 @@ export class imba_earth_spirit_stone_caller extends BaseAbility_Plus {
     ProcsMagicStick(): boolean {
         return false;
     }
-    GetManaCost(p_0: number,): number {
-        return this.GetSpecialValueFor("overdraw_base_cost") * ((this.GetCasterPlus().findBuffStack("modifier_imba_earth_spirit_remnant_handler", this.GetCasterPlus()) - 1) ^ this.GetSpecialValueFor("overdraw_cost_multiplier"));
-    }
+    // GetManaCost(p_0: number,): number {
+    //     return this.GetSpecialValueFor("overdraw_base_cost") * ((this.GetCasterPlus().findBuffStack("modifier_imba_earth_spirit_remnant_handler", this.GetCasterPlus()) - 1) ^ this.GetSpecialValueFor("overdraw_cost_multiplier"));
+    // }
     GetBehavior(): DOTA_ABILITY_BEHAVIOR | Uint64 {
         if (IsServer()) {
             return DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_UNIT_TARGET + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_OPTIONAL_POINT;
@@ -54,12 +54,12 @@ export class imba_earth_spirit_stone_caller extends BaseAbility_Plus {
                 this.handler = caster.findBuff<modifier_imba_earth_spirit_remnant_handler>("modifier_imba_earth_spirit_remnant_handler");
             }
             let remnantDuration = this.GetSpecialValueFor("duration");
-            let effectRadius = this.GetSpecialValueFor("radius");
+            let effectRadius = this.GetSpecialValueFor("effect_radius");
             let visionDuration = this.GetSpecialValueFor("vision_duration");
             if (unit == caster) {
                 target = caster.GetAbsOrigin() + caster.GetForwardVector() * 100 as Vector;
             }
-            let dummy = caster.CreateSummon("npc_imba_dota_earth_spirit_stone", target, remnantDuration, false);
+            let dummy = caster.CreateSummon("npc_imba_earth_spirit_stone", target, remnantDuration, false);
             dummy.AddNewModifier(caster, this, "modifier_imba_stone_remnant", {
                 duration: remnantDuration
             });
@@ -114,6 +114,12 @@ export class imba_earth_spirit_stone_caller extends BaseAbility_Plus {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_earth_spirit_4") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_earth_spirit_4")) {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_earth_spirit_4"), "modifier_special_bonus_imba_earth_spirit_4", {});
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this);
     }
 }
 @registerModifier()
@@ -238,7 +244,7 @@ export class modifier_imba_stone_remnant extends BaseModifier_Plus {
     }
     BeCreated(p_0: any,): void {
         if (IsServer()) {
-            if (this.GetParentPlus().GetUnitName() == "npc_imba_dota_earth_spirit_stone") {
+            if (this.GetParentPlus().GetUnitName() == "npc_imba_earth_spirit_stone") {
                 let particle = "particles/units/heroes/hero_earth_spirit/espirit_stoneremnant.vpcf";
                 this.remnantParticle = ResHelper.CreateParticleEx(particle, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetParentPlus());
                 ParticleManager.SetParticleControl(this.remnantParticle, 1, this.GetParentPlus().GetAbsOrigin());
@@ -271,7 +277,7 @@ export class modifier_imba_stone_remnant extends BaseModifier_Plus {
                 ParticleManager.ReleaseParticleIndex(this.explodedParticle);
             }
             EmitSoundOn("Hero_EarthSpirit.StoneRemnant.Destroy", this.GetParentPlus());
-            if (this.GetParentPlus().GetUnitName() == "npc_imba_dota_earth_spirit_stone") {
+            if (this.GetParentPlus().GetUnitName() == "npc_imba_earth_spirit_stone") {
                 ParticleManager.DestroyParticle(this.remnantParticle, false);
                 ParticleManager.ReleaseParticleIndex(this.remnantParticle);
                 GFuncEntity.SafeDestroyUnit(this.GetParentPlus());
@@ -280,7 +286,7 @@ export class modifier_imba_stone_remnant extends BaseModifier_Plus {
                 }
             } else {
                 FindClearSpaceForUnit(this.GetParentPlus(), this.GetParentPlus().GetAbsOrigin(), false);
-                if (this.PetrifyHandler) {
+                if (GFuncEntity.IsValid(this.PetrifyHandler)) {
                     let damage = this.PetrifyHandler.GetSpecialValueFor("damage");
                     let damageRadius = this.PetrifyHandler.GetSpecialValueFor("aoe");
                     let units = FindUnitsInRadius(this.PetrifyHandler.GetCaster().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, damageRadius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false);
@@ -344,7 +350,7 @@ export class modifier_imba_earth_spirit_stone_caller_charge_counter extends Base
 @registerModifier()
 export class modifier_imba_earths_mark extends BaseModifier_Plus {
     public caster: IBaseNpc_Plus;
-    public duration: number;
+    public duration: number = 5;
     IsHidden(): boolean {
         return false;
     }
@@ -385,8 +391,6 @@ export class modifier_imba_earths_mark extends BaseModifier_Plus {
     } */
     BeCreated(p_0: any,): void {
         this.caster = this.GetCasterPlus();
-        let stone_caller = this.caster.findAbliityPlus<imba_earth_spirit_stone_caller>("imba_earth_spirit_stone_caller");
-        this.duration = stone_caller.GetSpecialValueFor("earths_mark_duration") * (1 - this.GetParentPlus().GetStatusResistance());
         this.SetDuration(this.duration, true);
         this.SetStackCount(1);
         if (IsServer()) {
@@ -424,8 +428,7 @@ export class modifier_imba_earths_mark extends BaseModifier_Plus {
             }
             if (this.GetStackCount() > oldStacks) {
                 this.RefreshDuration();
-                let max_stacks = this.caster.findAbliityPlus<imba_earth_spirit_stone_caller>("imba_earth_spirit_stone_caller").GetSpecialValueFor("max_stacks");
-                this.SetStackCount(math.min(this.GetStackCount(), max_stacks));
+                this.SetStackCount(math.min(this.GetStackCount(), 10));
             }
         }
     }
@@ -615,6 +618,12 @@ export class imba_earth_spirit_boulder_smash extends BaseAbility_Plus {
         return false;
     }
 
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
+    }
 }
 @registerModifier()
 export class modifier_imba_boulder_smash_push extends BaseModifier_Plus {
@@ -863,7 +872,7 @@ export class imba_earth_spirit_rolling_boulder extends BaseAbility_Plus {
         return 0;
     }
     AutoSpellSelf() {
-        return AI_ability.TARGET_if_enemy(this);
+        return AI_ability.POSITION_if_enemy(this);
     }
 }
 @registerModifier()
@@ -1181,7 +1190,7 @@ export class imba_earth_spirit_geomagnetic_grip extends BaseAbility_Plus {
     }
 
     AutoSpellSelf() {
-        return AI_ability.TARGET_if_enemy(this);
+        return AI_ability.TARGET_if_friend(this, null, (unit) => { return unit != this.GetCasterPlus() });
     }
 }
 @registerModifier()

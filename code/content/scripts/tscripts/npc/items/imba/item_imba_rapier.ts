@@ -76,7 +76,7 @@ export class modifier_imba_divine_rapier extends modifier_rapier_base_class {
         };
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
-    CC_GetModifierPreAttack_BonusDamage(keys?: any /** keys */): number {
+    CC_GetModifierPreAttack_BonusDamage(keys?: { target: IBaseNpc_Plus } /** keys */): number {
         if (!keys.target || (IsServer() && (keys.target.GetAbsOrigin() - this.GetParentPlus().GetAbsOrigin() as Vector).Length2D() <= GameServiceConfig.IMBA_DAMAGE_EFFECTS_DISTANCE_CUTOFF)) {
             return this.bonus_damage;
         }
@@ -126,7 +126,7 @@ export class modifier_imba_divine_rapier_2 extends modifier_rapier_base_class {
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
-    CC_GetModifierPreAttack_BonusDamage(keys?: any /** keys */): number {
+    CC_GetModifierPreAttack_BonusDamage(keys?: { target: IBaseNpc_Plus } /** keys */): number {
         if (!keys.target || (IsServer() && (keys.target.GetAbsOrigin() - this.GetParentPlus().GetAbsOrigin() as Vector).Length2D() <= GameServiceConfig.IMBA_DAMAGE_EFFECTS_DISTANCE_CUTOFF)) {
             return this.bonus_damage;
         }
@@ -303,7 +303,7 @@ export class modifier_imba_rapier_cursed extends modifier_rapier_base_class {
         return this.spell_power;
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
-    CC_GetModifierPreAttack_BonusDamage(keys?: any /** keys */): number {
+    CC_GetModifierPreAttack_BonusDamage(keys?: { target: IBaseNpc_Plus } /** keys */): number {
         if (!keys.target || (IsServer() && (keys.target.GetAbsOrigin() - this.GetParentPlus().GetAbsOrigin() as Vector).Length2D() <= GameServiceConfig.IMBA_DAMAGE_EFFECTS_DISTANCE_CUTOFF)) {
             return this.bonus_damage;
         }

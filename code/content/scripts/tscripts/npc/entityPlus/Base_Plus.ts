@@ -380,6 +380,12 @@ export class BaseModifier {
     }
 
     public OnRemoved() {
+        if (IsServer() && this.GetOverrideAnimation) {
+            let curani = this.GetOverrideAnimation();
+            if (curani != null) {
+                this.GetParentPlus().RemoveGesture(curani);
+            }
+        }
         this.BeRemoved && this.BeRemoved();
         this.GetParentPlus().RegModifiersInfo(this, false);
         GGameCache.RegBuff(this, false);

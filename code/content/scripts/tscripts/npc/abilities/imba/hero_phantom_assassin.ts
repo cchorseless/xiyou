@@ -971,7 +971,7 @@ export class modifier_phantom_assassin_arcana extends BaseModifier_Plus {
         }
         if (params.attacker == this.GetParentPlus() && params.target.IsRealUnit() && params.attacker.GetTeam() != params.target.GetTeam()) {
             this.IncrementStackCount();
-            let gravestone = BaseNpc_Plus.CreateUnitByName("npc_dota_phantom_assassin_gravestone", params.target.GetAbsOrigin(), this.GetParentPlus(), true, DOTATeam_t.DOTA_TEAM_NEUTRALS);
+            let gravestone = BaseNpc_Plus.CreateUnitByName("npc_imba_phantom_assassin_gravestone", params.target.GetAbsOrigin(), this.GetParentPlus(), true, DOTATeam_t.DOTA_TEAM_NEUTRALS);
             gravestone.SetOwner(this.GetParentPlus());
             this.AddTimer(FrameTime(), () => {
                 gravestone.AddNewModifier(gravestone, undefined,

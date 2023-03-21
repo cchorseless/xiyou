@@ -860,7 +860,7 @@ export class modifier_imba_ancient_apparition_ice_blast extends BaseModifier_Plu
         return "particles/status_fx/status_effect_frost.vpcf";
     }
 
-    BeCreated(params: any): void {
+    Init(params: any): void {
         if (!IsServer()) {
             return;
         }
@@ -882,9 +882,6 @@ export class modifier_imba_ancient_apparition_ice_blast extends BaseModifier_Plu
         this.StartIntervalThink(1 - this.GetParentPlus().GetStatusResistance());
     }
 
-    BeRefresh(params: any): void {
-        this.OnCreated(params);
-    }
 
     OnIntervalThink(): void {
         this.GetParentPlus().EmitSound("Hero_Ancient_Apparition.IceBlastRelease.Tick");
@@ -954,7 +951,7 @@ export class modifier_imba_ancient_apparition_ice_blast_global_cooling extends B
 export class modifier_imba_ancient_apparition_ice_blast_cold_hearted extends BaseModifier_Plus {
     public cold_hearted_pct: number;
 
-    BeCreated(params: any): void {
+    Init(params: any): void {
         if (!IsServer()) {
             return;
         }
@@ -966,9 +963,7 @@ export class modifier_imba_ancient_apparition_ice_blast_cold_hearted extends Bas
         this.SetStackCount(this.GetStackCount() + (params.regen * this.cold_hearted_pct));
     }
 
-    BeRefresh(params: any): void {
-        this.OnCreated(params);
-    }
+
 
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({

@@ -1,9 +1,9 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
-import { BaseNpc_Plus } from "../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 @registerAbility()
@@ -37,6 +37,13 @@ export class imba_gyrocopter_rocket_barrage extends BaseAbility_Plus {
             });
             return true;
         }
+    }
+
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_if_enemy(this);
     }
 }
 @registerModifier()
@@ -265,7 +272,7 @@ export class imba_gyrocopter_homing_missile extends BaseAbility_Plus {
             }
             missile_starting_position = this.GetCasterPlus().GetAbsOrigin() + (this.GetCasterPlus().GetForwardVector() * 150) as Vector;
         }
-        let missile = BaseNpc_Plus.CreateUnitByName("npc_dota_gyrocopter_homing_missile", missile_starting_position, this.GetCasterPlus(), true);
+        let missile = this.GetCasterPlus().CreateSummon("npc_imba_gyrocopter_homing_missile", missile_starting_position, -1, true);
         missile.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_gyrocopter_homing_missile_pre_flight", {
             duration: pre_flight_time,
             bAutoCast: this.GetAutoCastState()
@@ -290,6 +297,12 @@ export class imba_gyrocopter_homing_missile extends BaseAbility_Plus {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_gyrocopter_homing_missile_charges") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_gyrocopter_homing_missile_charges")) {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_gyrocopter_homing_missile_charges"), "modifier_special_bonus_imba_gyrocopter_homing_missile_charges", {});
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
     }
 }
 @registerModifier()
@@ -779,6 +792,12 @@ export class imba_gyrocopter_flak_cannon extends BaseAbility_Plus {
             duration: this.GetDuration()
         });
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_if_enemy(this);
+    }
 }
 @registerModifier()
 export class modifier_imba_gyrocopter_flak_cannon extends BaseModifier_Plus {
@@ -1188,6 +1207,12 @@ export class imba_gyrocopter_call_down extends BaseAbility_Plus {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_gyrocopter_call_down_cooldown") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_gyrocopter_call_down_cooldown")) {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_gyrocopter_call_down_cooldown"), "modifier_special_bonus_imba_gyrocopter_call_down_cooldown", {});
         }
+    }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_most_enemy(this);
     }
 }
 @registerModifier()

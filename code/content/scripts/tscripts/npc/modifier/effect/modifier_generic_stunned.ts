@@ -20,7 +20,7 @@ export class modifier_generic_stunned extends BaseModifier_Plus {
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OVERRIDE_ANIMATION)
-    CC_OverrideAnimation(): GameActivity_t {
+    public CC_OverrideAnimation(): GameActivity_t {
         return GameActivity_t.ACT_DOTA_DISABLED;
     }
     public BeCreated(params?: IModifierTable): void {
@@ -30,11 +30,7 @@ export class modifier_generic_stunned extends BaseModifier_Plus {
         }
     }
 
-    public BeRemoved(): void {
-        if (IsServer()) {
-            this.GetParent().RemoveGesture(GameActivity_t.ACT_DOTA_DISABLED)
-        }
-    }
+
 
     GetAttributes() {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE

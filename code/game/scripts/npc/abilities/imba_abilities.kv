@@ -6771,26 +6771,31 @@
 
 			}
 			"08" {
-				"var_type" "FIELD_FLOAT"
-				"rock_distance_multiplier" "2.0"
+				"var_type" "FIELD_INTEGER"
+				"rock_distance" "100"
 
 			}
 			"09" {
 				"var_type" "FIELD_FLOAT"
-				"delay" "0.5"
+				"rock_distance_multiplier" "2.0"
 
 			}
 			"10" {
+				"var_type" "FIELD_FLOAT"
+				"delay" "0.5"
+
+			}
+			"11" {
 				"var_type" "FIELD_INTEGER"
 				"damage" "30"
 
 			}
-			"11" {
+			"12" {
 				"var_type" "FIELD_FLOAT"
 				"stun_duration" "0.4 0.6 0.8 1.0"
 
 			}
-			"12" {
+			"13" {
 				"var_type" "FIELD_FLOAT"
 				"rock_bonus_duration" "0.4 0.6 0.8 1.0"
 
@@ -7664,7 +7669,7 @@
 			"06" {
 				"var_type" "FIELD_INTEGER"
 				"wisp_count_mini" "2 3 4 5"
-				"LinkedSpecialBonusOperation" ""
+				"LinkedSpecialBonusOperation" "SPECIAL_BONUS_MULTIPLY"
 
 			}
 			"07" {
@@ -7676,31 +7681,36 @@
 			"08" {
 				"var_type" "FIELD_INTEGER"
 				"cyan_mana_restore" "5 6 7 8"
-				"LinkedSpecialBonusOperation" ""
+				"LinkedSpecialBonusOperation" "SPECIAL_BONUS_MULTIPLY"
 
 			}
 			"09" {
 				"var_type" "FIELD_INTEGER"
 				"green_heal_amp" "20"
-				"LinkedSpecialBonusOperation" ""
+				"LinkedSpecialBonusOperation" "SPECIAL_BONUS_MULTIPLY"
 
 			}
 			"10" {
 				"var_type" "FIELD_INTEGER"
 				"orange_day_vision" "250"
-				"LinkedSpecialBonusOperation" ""
+				"LinkedSpecialBonusOperation" "SPECIAL_BONUS_MULTIPLY"
 
 			}
 			"11" {
 				"var_type" "FIELD_INTEGER"
 				"orange_night_vision" "750"
-				"LinkedSpecialBonusOperation" ""
+				"LinkedSpecialBonusOperation" "SPECIAL_BONUS_MULTIPLY"
 
 			}
 			"12" {
 				"var_type" "FIELD_INTEGER"
 				"pink_movespeed_pct" "5"
-				"LinkedSpecialBonusOperation" ""
+				"LinkedSpecialBonusOperation" "SPECIAL_BONUS_MULTIPLY"
+
+			}
+			"13" {
+				"var_type" "FIELD_INTEGER"
+				"critical_health_pct" "40"
 
 			}
 
@@ -8038,6 +8048,11 @@
 			"09" {
 				"var_type" "FIELD_INTEGER"
 				"shard_bonus_range" "300"
+
+			}
+			"10" {
+				"var_type" "FIELD_INTEGER"
+				"radius_scepter" "350"
 
 			}
 
@@ -9115,7 +9130,7 @@
 	"imba_grimstroke_ink_gods_incarnation" {
 		"BaseClass" "ability_lua"
 		"ScriptFile" "npc/abilities/imba/hero_grimstroke"
-		"AbilityTextureName" "grimstroke_ink_gods_incarnation"
+		"AbilityTextureName" "grimstroke_soul_chain"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
 		"AbilityType" "DOTA_ABILITY_TYPE_ULTIMATE"
 		"SpellDispellableType" "SPELL_DISPELLABLE_NO"
@@ -9934,6 +9949,11 @@
 			"04" {
 				"var_type" "FIELD_INTEGER"
 				"duration" "8"
+
+			}
+			"05" {
+				"var_type" "FIELD_INTEGER"
+				"attack_range_bonus" "10"
 
 			}
 
@@ -11838,6 +11858,11 @@
 				"purity_casing_ring_duration" "0.3"
 
 			}
+			"15" {
+				"var_type" "FIELD_INTEGER"
+				"tormented_soul_weakening_duration" "8"
+
+			}
 
 		}
 
@@ -12387,6 +12412,11 @@
 			"09" {
 				"var_type" "FIELD_FLOAT"
 				"hp_damage_percent" "0.8 1.1 1.4 1.7"
+
+			}
+			"10" {
+				"var_type" "FIELD_INTEGER"
+				"attack_speed_bonus" "15 30 45 60"
 
 			}
 
@@ -31934,6 +31964,11 @@
 				"eidolon_spawns_per_tick" "0"
 
 			}
+			"10" {
+				"var_type" "FIELD_INTEGER"
+				"duration" "8"
+
+			}
 
 		}
 
@@ -33729,6 +33764,7 @@
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK | DOTA_ABILITY_BEHAVIOR_AUTOCAST"
 		"AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
 		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_BUILDING"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
 		"SpellImmunityType" "SPELL_IMMUNITY_ALLIES_YES"
 		"SpellDispellableType" "SPELL_DISPELLABLE_YES"
 		"AbilitySound" "Hero_Lich.FrostArmor"
@@ -35032,7 +35068,7 @@
 		}
 
 	}
-	"imba_lion_earth_spike" {
+	"imba_lion_impale" {
 		"BaseClass" "ability_lua"
 		"ScriptFile" "npc/abilities/imba/hero_lion"
 		"AbilityTextureName" "lion_impale"
@@ -35103,7 +35139,7 @@
 		}
 
 	}
-	"imba_lion_hex" {
+	"imba_lion_voodoo" {
 		"BaseClass" "ability_lua"
 		"ScriptFile" "npc/abilities/imba/hero_lion"
 		"AbilityTextureName" "lion_voodoo"

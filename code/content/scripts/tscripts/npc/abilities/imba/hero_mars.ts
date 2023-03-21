@@ -1527,7 +1527,7 @@ export class modifier_imba_mars_arena_of_blood_thinker extends BaseModifier_Plus
         for (let i = 0; i <= count - 1; i++) {
             let location = RotatePosition(origin, QAngle(0, angle_diff * i, 0), vector);
             let facing = RotatePosition(zero, QAngle(0, 200 + angle_diff * i, 0), one);
-            BaseNpc_Plus.CreateUnitByNameAsync("npc_dota_imba_mars_arena_of_blood_soldier", location, caster,
+            BaseNpc_Plus.CreateUnitByNameAsync("npc_imba_mars_arena_of_blood_soldier", location, caster,
                 GHandler.create(this, (unit: IBaseNpc_Plus) => {
                     unit.SetForwardVector(facing);
                     unit.SetNeverMoveToClearSpace(true);

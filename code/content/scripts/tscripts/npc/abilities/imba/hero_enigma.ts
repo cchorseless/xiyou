@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { AoiHelper } from "../../../helper/AoiHelper";
 import { ResHelper } from "../../../helper/ResHelper";
@@ -214,10 +215,9 @@ export class imba_enigma_malefice extends BaseAbility_Plus {
         if (target.TriggerSpellAbsorb(this)) {
             return;
         }
-        let ability = this;
-        let base_duration = ability.GetSpecialValueFor("duration");
-        let hp_extra_duration = ability.GetSpecialValueFor("health_bonus_duration");
-        let pct_per_extra = ability.GetSpecialValueFor("health_bonus_duration_percent");
+        let base_duration = this.GetSpecialValueFor("duration");
+        let hp_extra_duration = this.GetSpecialValueFor("health_bonus_duration");
+        let pct_per_extra = this.GetSpecialValueFor("health_bonus_duration_percent");
         let CalculateDuration = (unit: IBaseNpc_Plus) => {
             let hp_pct = unit.GetHealthPercent();
             let total_duration = base_duration;
@@ -226,7 +226,7 @@ export class imba_enigma_malefice extends BaseAbility_Plus {
         }
         if (!caster.HasTalent("special_bonus_imba_enigma_2")) {
             let final_duration = CalculateDuration(target);
-            target.AddNewModifier(caster, ability, "modifier_imba_enigma_malefice", {
+            target.AddNewModifier(caster, this, "modifier_imba_enigma_malefice", {
                 duration: final_duration
             });
         } else {
@@ -234,11 +234,18 @@ export class imba_enigma_malefice extends BaseAbility_Plus {
             let enemies = FindUnitsInRadius(caster.GetTeamNumber(), target.GetAbsOrigin(), undefined, talent_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
             for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 let final_duration = CalculateDuration(enemy);
-                enemy.AddNewModifier(caster, ability, "modifier_imba_enigma_malefice", {
+                enemy.AddNewModifier(caster, this, "modifier_imba_enigma_malefice", {
                     duration: final_duration
                 });
             }
         }
+    }
+
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
     }
 }
 @registerModifier()
@@ -320,20 +327,20 @@ export class imba_enigma_demonic_conversion extends BaseAbility_Plus {
         }
         let location = target.GetAbsOrigin();
         EmitSoundOn("Hero_Enigma.Demonic_Conversion", target);
-        if (!target.IsRealUnit()) {
-            target.Kill(this, caster);
-            target = undefined;
-        }
+        target.Kill(this, caster);
+        target = undefined;
         let eidolon_count = this.GetSpecialValueFor("spawn_count") + caster.GetTalentValue("special_bonus_imba_enigma_6");
         if (eidolon_count > 0) {
             for (let i = 0; i < eidolon_count; i++) {
-                this.CreateEidolon(target, location, 1, this.GetSpecialValueFor("AbilityDuration"));
+                this.CreateEidolon(caster, location, 1, this.GetSpecialValueFor("AbilityDuration"));
             }
         }
     }
     CreateEidolon(hParent: IBaseNpc_Plus, vLocation: Vector, iWave: number, fDuration: number) {
         let caster = this.GetCasterPlus();
-        hParent = hParent || caster;
+        if (!GFuncEntity.IsValid(hParent)) {
+            hParent = caster;
+        }
         let eidolon = caster.CreateSummon("npc_imba_enigma_eidolon_" + math.min(4, this.GetLevel()), vLocation, fDuration, true);
         eidolon.SetOwner(caster);
         // eidolon.SetControllableByPlayer(caster.GetPlayerID(), true);
@@ -342,7 +349,7 @@ export class imba_enigma_demonic_conversion extends BaseAbility_Plus {
         eidolon.AddNewModifier(caster, this, "modifier_imba_enigma_eidolon", {
             duration: fDuration,
             wave: iWave,
-            parent: hParent.entindex(),
+            parent: caster.entindex(),
             stack: attacks_needed
         });
     }
@@ -350,6 +357,12 @@ export class imba_enigma_demonic_conversion extends BaseAbility_Plus {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_enigma_demonic_conversion_attack_range") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_enigma_demonic_conversion_attack_range")) {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_enigma_demonic_conversion_attack_range"), "modifier_special_bonus_imba_enigma_demonic_conversion_attack_range", {});
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
     }
 }
 @registerModifier()
@@ -468,8 +481,10 @@ export class modifier_imba_enigma_eidolon extends BaseModifier_Plus {
             if (this.attacks > 1) {
                 this.attacks = this.attacks - 1;
             } else {
-                this.GetAbilityPlus<imba_enigma_demonic_conversion>().CreateEidolon(this.parent, this.GetParentPlus().GetAbsOrigin(), this.wave + 1, this.GetRemainingTime() + this.GetSpecialValueFor("life_extension"));
-                this.GetAbilityPlus<imba_enigma_demonic_conversion>().CreateEidolon(this.parent, this.GetParentPlus().GetAbsOrigin(), this.wave + 1, this.GetRemainingTime() + this.GetSpecialValueFor("life_extension"));
+                if (GFuncEntity.IsValid(this.GetCasterPlus())) {
+                    this.GetAbilityPlus<imba_enigma_demonic_conversion>().CreateEidolon(this.parent, this.GetParentPlus().GetAbsOrigin(), this.wave + 1, this.GetRemainingTime() + this.GetSpecialValueFor("life_extension"));
+                    this.GetAbilityPlus<imba_enigma_demonic_conversion>().CreateEidolon(this.parent, this.GetParentPlus().GetAbsOrigin(), this.wave + 1, this.GetRemainingTime() + this.GetSpecialValueFor("life_extension"));
+                }
                 this.GetParentPlus().ForceKill(false);
             }
         }
@@ -549,6 +564,12 @@ export class imba_enigma_midnight_pulse extends BaseAbility_Plus {
         BaseModifier_Plus.CreateBuffThinker(caster, this, "modifier_imba_enigma_midnight_pulse_thinker", {
             duration: duration
         }, point, caster.GetTeamNumber(), false);
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_most_enemy(this);
     }
 }
 @registerModifier()
@@ -725,6 +746,12 @@ export class imba_enigma_black_hole extends BaseAbility_Plus {
             singularity.SetStackCount(math.floor(singularity.GetStackCount() * (100 - this.GetSpecialValueFor("death_loss_pct")) * 0.01));
         }
     }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_most_enemy(this);
+    }
 }
 @registerModifier()
 export class modifier_imba_enigma_black_hole_thinker extends BaseModifier_Plus {
@@ -767,7 +794,7 @@ export class modifier_imba_enigma_black_hole_thinker extends BaseModifier_Plus {
         ParticleManager.SetParticleControl(this.pfx_ulti, 3, this.GetParentPlus().GetAbsOrigin());
         // }
         let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS, FindOrder.FIND_ANY_ORDER, false);
-        if (GameFunc.GetCount(enemies) >= PlayerResource.GetPlayerCountForTeam(this.GetParentPlus().GetOpposingTeamNumber())) {
+        if (GameFunc.GetCount(enemies) >= 5) {
             EmitSoundOn("Imba.EnigmaBlackHoleTobi0" + math.random(1, 5), this.GetParentPlus());
         }
         let buff = this.GetCasterPlus().findBuff<modifier_imba_singularity>("modifier_imba_singularity");

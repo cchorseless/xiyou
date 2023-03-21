@@ -50,7 +50,6 @@ export class modifier_spawn_breaksoil extends BaseModifierMotionVertical_Plus {
             this.GetParentPlus().RemoveHorizontalMotionController(this);
             this.GetParentPlus().RemoveVerticalMotionController(this);
             //  this.GetParentPlus().SetForwardVector(Vector(0,-1,0))
-            this.GetParentPlus().RemoveGesture(GameActivity_t.ACT_DOTA_FLAIL);
             if (this.DestroyHandler) {
                 this.DestroyHandler.run();
                 this.DestroyHandler = null;

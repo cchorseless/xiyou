@@ -1242,7 +1242,7 @@ export class modifier_imba_silencer_global_silence extends BaseModifier_Plus {
             if (this.tickInterval > 0) {
                 this.StartIntervalThink(this.tickInterval);
             }
-            if (this.parent.GetCurrentActiveAbility() && !this.parent.GetCurrentActiveAbility().IsItem() && this.parent.GetCurrentActiveAbility().GetAbilityName() != "item_tpscroll" && !string.find(this.parent.GetCurrentActiveAbility().GetAbilityName(), "item_travel_boots")) {
+            if (this.parent.GetCurrentActiveAbility() && !this.parent.GetCurrentActiveAbility().IsItem() && this.parent.GetCurrentActiveAbility().GetAbilityName() != "item_tpscroll" && !this.parent.GetCurrentActiveAbility().GetAbilityName().includes("item_travel_boots")) {
                 this.particle = ResHelper.CreateParticleEx(this.silenceParticle, ParticleAttachment_t.PATTACH_OVERHEAD_FOLLOW, this.parent);
                 this.particleState = 1;
                 this.spellCast = true;

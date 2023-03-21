@@ -1137,7 +1137,8 @@ export class imba_rubick_spellsteal extends BaseAbility_Plus {
         let secondary: IBaseAbility_Plus = undefined;
         let primary: IBaseAbility_Plus = undefined;
         let linked_talents: string[] = []
-        let hero_name = (string.gsub(hHero.GetUnitName(), "npc_dota_hero_", ""));
+        // todo 有问题
+        let hero_name = (hHero.GetUnitName().replace("npc_dota_hero_", ""));
         primary_ability = hSpell.GetAssociatedPrimaryAbilities();
         secondary_ability = hSpell.GetAssociatedSecondaryAbilities();
         if (primary_ability != undefined) {
@@ -1284,7 +1285,7 @@ export class imba_rubick_spellsteal extends BaseAbility_Plus {
     ForgetSpell() {
         if (this.CurrentSpellOwner != undefined) {
             for (let i = 0; i <= this.GetCasterPlus().GetModifierCount() - 1; i++) {
-                if (string.find(this.GetCasterPlus().GetModifierNameByIndex(i), this.CurrentSpellOwner.replace("npc_dota_hero_", ""))) {
+                if (this.GetCasterPlus().GetModifierNameByIndex(i).includes(this.CurrentSpellOwner.replace("npc_dota_hero_", ""))) {
                     this.GetCasterPlus().RemoveModifierByName(this.GetCasterPlus().GetModifierNameByIndex(i));
                 }
             }
@@ -1362,7 +1363,7 @@ export class modifier_rubick_spellsteal_hidden extends BaseModifier_Plus {
             if (!params.ability.IsStealable()) {
                 return;
             }
-            if (string.find(params.ability.GetAbilityName(), "item_")) {
+            if (params.ability.GetAbilityName().includes("item_")) {
                 return;
             }
             this.GetAbilityPlus<imba_rubick_spellsteal>().SetLastSpell(params.unit, params.ability as IBaseAbility_Plus);

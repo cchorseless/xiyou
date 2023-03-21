@@ -668,16 +668,14 @@ export class modifier_imba_whirling_axes_melee extends BaseModifier_Plus {
         }
         return Object.values(decFuns);
     } */
-    BeCreated(params: any): void {
+    Init(params: any): void {
         this.miss_chance = this.GetSpecialValueFor("blind_pct");
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MISS_PERCENTAGE)
     CC_GetModifierMiss_Percentage(): number {
         return this.miss_chance;
     }
-    BeRefresh(params: any): void {
-        this.OnCreated(params);
-    }
+
 }
 @registerAbility()
 export class imba_troll_warlord_fervor extends BaseAbility_Plus {

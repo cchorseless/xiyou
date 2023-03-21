@@ -91,7 +91,7 @@ export class modifier_imba_rejuvenation extends BaseModifier_Plus {
     BeCreated(p_0: any,): void {
         if (IsServer()) {
             this.heal_per_sec = this.GetSpecialValueFor("heal_per_sec") + this.GetCasterPlus().GetTalentValue("special_bonus_imba_malfurion_5");
-            if (this.GetParentPlus().IsBuilding() || string.find(this.GetParentPlus().GetUnitName(), "living_tower")) {
+            if (this.GetParentPlus().IsBuilding() || this.GetParentPlus().GetUnitName().includes("living_tower")) {
                 this.heal_per_sec = this.heal_per_sec / 100 * this.GetSpecialValueFor("heal_per_sec_building_pct");
             } else if (!this.GetParentPlus().IsRealUnit()) {
                 this.heal_per_sec = this.heal_per_sec / 100 * this.GetSpecialValueFor("heal_per_sec_creep_pct");

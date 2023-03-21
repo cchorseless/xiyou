@@ -814,13 +814,6 @@ export class modifier_imba_unstable_concoction_stunned extends BaseModifier_Plus
         return GameActivity_t.ACT_DOTA_DISABLED;
     }
 
-    BeRemoved() {
-        let parent = this.GetParentPlus();
-        if (GFuncEntity.IsValid(parent) && IsServer()) {
-            parent.RemoveGesture(GameActivity_t.ACT_DOTA_DISABLED);
-
-        }
-    }
 
     IsPurgable(): boolean {
         return false;

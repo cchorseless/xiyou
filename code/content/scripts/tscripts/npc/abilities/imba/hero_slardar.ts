@@ -3,7 +3,6 @@ import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifierMotionHorizontal_Plus, BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
-import { BaseNpc_Plus } from "../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { modifier_generic_stunned } from "../../modifier/effect/modifier_generic_stunned";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
@@ -1239,7 +1238,7 @@ export class modifier_imba_corrosive_haze_talent_buff extends BaseModifier_Plus 
 }
 @registerAbility()
 export class imba_slardar_rain_cloud extends BaseAbility_Plus {
-    public dummy: any;
+    public dummy: IBaseNpc_Plus;
     particle_rain_fx: ParticleID;
     GetAbilityTextureName(): string {
         return "slardar_rain_cloud";
@@ -1309,7 +1308,7 @@ export class modifier_imba_rain_cloud_slardar extends BaseModifier_Plus {
                 ability.dummy.Destroy();
                 ability.dummy = undefined;
             }
-            ability.dummy = BaseNpc_Plus.CreateUnitByName("npc_dummy_unit_perma", caster.GetAbsOrigin(), caster, false);
+            ability.dummy = caster.CreateDummyUnit(caster.GetAbsOrigin(), -1, true);
             ability.dummy.AddNewModifier(caster, ability, modifier_dummy, {});
             ability.particle_rain_fx = ResHelper.CreateParticleEx(particle_rain, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, ability.dummy);
             ParticleManager.SetParticleControl(ability.particle_rain_fx, 0, ability.dummy.GetAbsOrigin());

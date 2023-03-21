@@ -70,7 +70,7 @@ export class modifier_imba_furion_wrath_of_nature extends BaseModifier_Plus {
         return "modifier_imba_furion_wrath_of_nature_aura";
     }
     GetAuraEntityReject(hTarget: CDOTA_BaseNPC): boolean {
-        return (!this.GetCasterPlus().HasScepter() && !this.GetCasterPlus().HasTalent("special_bonus_imba_furion_wrath_of_nature_boost")) || !this.GetAbilityPlus().IsTrained() || this.GetParentPlus() != hTarget.GetOwner() || !string.find(hTarget.GetModelName(), "furion") || !string.find(hTarget.GetModelName(), "treant");
+        return (!this.GetCasterPlus().HasScepter() && !this.GetCasterPlus().HasTalent("special_bonus_imba_furion_wrath_of_nature_boost")) || !this.GetAbilityPlus().IsTrained() || this.GetParentPlus() != hTarget.GetOwner() || !hTarget.GetModelName().includes("furion") || !hTarget.GetModelName().includes("treant");
     }
 }
 @registerModifier()
@@ -277,16 +277,14 @@ export class modifier_imba_furion_wrath_of_nature_spawn extends BaseModifier_Plu
     RemoveOnDeath(): boolean {
         return false;
     }
-    BeCreated(keys: any): void {
+    Init(keys: any): void {
         if (!IsServer()) {
             return;
         }
         this.treant_bonus_damage = keys.treant_bonus_damage;
         this.treant_bonus_damage_hero = keys.treant_bonus_damage_hero;
     }
-    BeRefresh(keys: any): void {
-        this.OnCreated(keys);
-    }
+
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
             1: Enum_MODIFIER_EVENT.ON_DEATH

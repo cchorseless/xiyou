@@ -106,7 +106,7 @@ export class modifier_generic_orb_effect extends BaseModifier_Plus {
         }
         if (this.GetAbilityPlus().GetAutoCastState() && this.GetParentPlus().GetAggroTarget()
             && UnitFilter(this.GetParentPlus().GetAggroTarget(), this.ability.GetAbilityTargetTeam(), this.ability.GetAbilityTargetType(), this.ability.GetAbilityTargetFlags(), this.GetCasterPlus().GetTeamNumber()) == UnitFilterResult.UF_SUCCESS) {
-            return this.GetTalentSpecialValueFor("attack_range_bonus");
+            return this.GetSpecialValueFor("attack_range_bonus");
         }
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ORDER)

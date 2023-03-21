@@ -692,7 +692,7 @@ export class modifier_imba_wisp_spirits extends BaseModifier_Plus {
             ability.update_timer = ability.update_timer + FrameTime();
             idealNumSpiritsSpawned = math.min(idealNumSpiritsSpawned, this.max_spirits);
             if (ability.spirits_num_spirits < idealNumSpiritsSpawned) {
-                let newSpirit = BaseNpc_Plus.CreateUnitByName("npc_dota_wisp_spirit", caster_position, caster, false);
+                let newSpirit = BaseNpc_Plus.CreateUnitByName("npc_imba_wisp_spirit", caster_position, caster, false);
                 // let pfx = ResHelper.CreateParticleEx(particle, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, newSpirit);
                 if (caster.HasModifier("modifier_imba_wisp_swap_spirits_disarm")) {
                     let pfx = ResHelper.CreateParticleEx("particles/units/heroes/hero_wisp/wisp_guardian_disarm_a.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, newSpirit);

@@ -120,12 +120,9 @@ export class modifier_ogreseal_flop extends BaseModifierMotionBoth_Plus {
     RemoveOnDeath(): boolean {
         return false;
     }
-    BeCreated(kv: any): void {
+    Init(kv: any): void {
         if (IsServer()) {
             if (!this.BeginMotionOrDestroy()) { return };
-        }
-
-        if (IsServer()) {
             if (this.nHopCount == undefined) {
                 this.nHopCount = 1;
                 this.flop_distances = {
@@ -249,7 +246,7 @@ export class modifier_ogreseal_flop extends BaseModifierMotionBoth_Plus {
                         vLocY: this.vLoc.y,
                         vLocZ: this.vLoc.z
                     }
-                    this.OnCreated(kv);
+                    this.Init(kv);
                 }
             }
         }

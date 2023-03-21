@@ -84,7 +84,7 @@ export class imba_windranger_shackleshot extends BaseAbility_Plus {
                 return;
             }
         }
-        if (!shackleTarget && target.GetUnitName() != "npc_dota_thinker") {
+        if (!shackleTarget && !target.IsThinker()) {
             let trees = GridNav.GetAllTreesAroundPoint(target.GetAbsOrigin(), this.GetSpecialValueFor("shackle_distance"), false);
             for (const [_, tree] of GameFunc.iPair(trees)) {
                 if (!ignore_list.includes(tree as any) && math.abs(AngleDiff(target_angle, VectorToAngles(tree.GetAbsOrigin() - target.GetAbsOrigin() as Vector).y)) <= this.GetSpecialValueFor("shackle_angle")) {

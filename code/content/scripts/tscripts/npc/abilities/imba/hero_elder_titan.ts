@@ -9,9 +9,6 @@ import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 @registerAbility()
 export class imba_elder_titan_echo_stomp extends BaseAbility_Plus {
     public combined_particle: any;
-    GetAbilityTextureName(): string {
-        return "imba_elder_titan_echo_stomp";
-    }
     IsHiddenWhenStolen(): boolean {
         return false;
     }
@@ -156,7 +153,7 @@ export class imba_elder_titan_echo_stomp extends BaseAbility_Plus {
     }
 
     AutoSpellSelf() {
-        return AI_ability.NO_TARGET_cast(this);
+        return AI_ability.NO_TARGET_if_enemy(this);
     }
 }
 @registerModifier()
@@ -199,7 +196,7 @@ export class imba_elder_titan_ancestral_spirit extends BaseAbility_Plus {
         let particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_elder_titan/elder_titan_ancestral_spirit_cast.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, caster);
         ParticleManager.SetParticleControl(particle, 0, target_point);
         ParticleManager.ReleaseParticleIndex(particle);
-        let astral_spirit = BaseNpc_Plus.CreateUnitByName("npc_dota_elder_titan_ancestral_spirit", target_point, caster, true);
+        let astral_spirit = BaseNpc_Plus.CreateUnitByName("npc_imba_elder_titan_ancestral_spirit", target_point, caster, true);
         caster.TempData().astral_spirit = astral_spirit;
         // astral_spirit.SetControllableByPlayer(caster.GetPlayerID(), true);
         astral_spirit.AddNewModifier(astral_spirit, this, "modifier_imba_elder_titan_ancestral_spirit_self", {});
@@ -230,7 +227,7 @@ export class imba_elder_titan_ancestral_spirit extends BaseAbility_Plus {
     }
 
     AutoSpellSelf() {
-        return AI_ability.POSITION_most_enemy(this);
+        return AI_ability.POSITION_if_enemy(this, null, null, FindOrder.FIND_FARTHEST);
     }
 }
 @registerModifier()
@@ -445,10 +442,13 @@ export class modifier_imba_elder_titan_ancestral_spirit_self extends BaseModifie
         }
     }
     BeDestroy( /** keys */): void {
-        let owner = this.GetParentPlus().GetOwner() as IBaseNpc_Plus;
-        if (owner) {
-            owner.SwapAbilities("imba_elder_titan_ancestral_spirit", "imba_elder_titan_return_spirit", true, false);
+        if (this.GetParentPlus()) {
+            let owner = this.GetParentPlus().GetOwnerPlus()
+            if (owner) {
+                owner.SwapAbilities("imba_elder_titan_ancestral_spirit", "imba_elder_titan_return_spirit", true, false);
+            }
         }
+
     }
 }
 @registerModifier()
@@ -551,7 +551,7 @@ export class imba_elder_titan_return_spirit extends BaseAbility_Plus {
 @registerAbility()
 export class imba_elder_titan_natural_order extends BaseAbility_Plus {
     GetAbilityTextureName(): string {
-        if (this.GetCasterPlus().GetUnitName() == "npc_dota_elder_titan_ancestral_spirit") {
+        if (this.GetCasterPlus().GetUnitName() == "npc_imba_elder_titan_ancestral_spirit") {
             return "elder_titan_natural_order_spirit";
         }
         return "elder_titan_natural_order";
@@ -748,7 +748,7 @@ export class imba_elder_titan_echo_stomp_spirit extends BaseAbility_Plus {
     }
 
     AutoSpellSelf() {
-        return AI_ability.POSITION_if_enemy(this, null, null, FindOrder.FIND_CLOSEST);
+        return AI_ability.POSITION_if_enemy(this, null, null, FindOrder.FIND_FARTHEST);
     }
 }
 @registerAbility()
@@ -783,15 +783,11 @@ export class imba_elder_titan_earth_splitter extends BaseAbility_Plus {
         let caster = this.GetCasterPlus();
         let caster_position = caster.GetAbsOrigin();
         let target_point = this.GetCursorPosition();
-        let playerID = caster.GetPlayerID();
         let scepter = caster.HasScepter();
-        let radius = this.GetSpecialValueFor("radius");
-        let duration = this.GetSpecialValueFor("duration");
         let slow_duration = this.GetSpecialValueFor("slow_duration");
         if (scepter) {
             slow_duration = this.GetSpecialValueFor("slow_duration_scepter");
         }
-        let bonus_hp_per_str = this.GetSpecialValueFor("bonus_hp_per_str");
         let effect_delay = this.GetSpecialValueFor("crack_time");
         let crack_width = this.GetSpecialValueFor("crack_width");
         let crack_distance = this.GetSpecialValueFor("crack_distance");
@@ -806,7 +802,7 @@ export class imba_elder_titan_earth_splitter extends BaseAbility_Plus {
         ParticleManager.SetParticleControl(particle_start_fx, 0, caster_position);
         ParticleManager.SetParticleControl(particle_start_fx, 1, crack_ending);
         ParticleManager.SetParticleControl(particle_start_fx, 3, Vector(0, effect_delay, 0));
-        GridNav.DestroyTreesAroundPoint(target_point, radius, false);
+        GridNav.DestroyTreesAroundPoint(target_point, crack_width, false);
         this.AddTimer(effect_delay, () => {
             EmitSoundOn("Hero_ElderTitan.EarthSplitter.Destroy", caster);
             let enemies = FindUnitsInLine(caster.GetTeamNumber(), caster_position, crack_ending, undefined, crack_width, this.GetAbilityTargetTeam(), this.GetAbilityTargetType(), this.GetAbilityTargetFlags());
@@ -853,6 +849,13 @@ export class imba_elder_titan_earth_splitter extends BaseAbility_Plus {
         let len = castertoaffected.Dot(dir);
         let ntgt = Vector(dir.x * len, dir.y * len, caster.z);
         return caster + ntgt as Vector;
+    }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this, null, null, FindOrder.FIND_FARTHEST);
     }
 }
 @registerModifier()

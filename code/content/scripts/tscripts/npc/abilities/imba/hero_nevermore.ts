@@ -903,7 +903,7 @@ export class modifier_imba_necromastery_souls extends BaseModifier_Plus {
             if (this.ability.IsStolen()) {
                 return undefined;
             }
-            if (string.find(this.caster.GetUnitName(), "npc_imba_pugna_nether_ward")) {
+            if (this.caster.GetUnitName().includes("npc_imba_pugna_nether_ward")) {
                 return;
             }
             if (this.caster == attacker && this.caster != target) {

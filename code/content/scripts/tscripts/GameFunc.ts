@@ -485,11 +485,12 @@ export module FuncEntity {
             }
             unit.__safedestroyed__ = true;
             if (IsServer()) {
+                let bthinker = unit.IsThinker();
                 let allm = unit.FindAllModifiers();
                 for (let m of allm) {
                     m.Destroy();
                 }
-                if (!unit.IsThinker()) {
+                if (!bthinker) {
                     let lenability = unit.GetAbilityCount()
                     for (let i = 0; i < lenability; i++) {
                         unit.GetAbilityByIndex(i) && SafeDestroyAbility(unit.GetAbilityByIndex(i) as any);
@@ -500,11 +501,13 @@ export module FuncEntity {
                 }
 
             }
-            if (unit.OnDestroy) {
-                unit.OnDestroy();
+            if (IsValid(unit)) {
+                if (unit.OnDestroy) {
+                    unit.OnDestroy();
+                }
+                unit.ClearSelf();
+                unit.Destroy();
             }
-            unit.ClearSelf();
-            unit.Destroy();
             // UTIL_Remove(unit);
         }
     }

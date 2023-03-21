@@ -2,7 +2,6 @@
 import { GameFunc } from "../../../GameFunc";
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
-import { BaseNpc_Plus } from "../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 @registerAbility()
 export class item_imba_necronomicon extends BaseItem_Plus {
@@ -22,17 +21,11 @@ export class item_imba_necronomicon extends BaseItem_Plus {
         let melee_loc = RotatePosition(caster_loc, QAngle(0, 30, 0), caster_loc + caster_direction * 180 as Vector);
         let ranged_loc = RotatePosition(caster_loc, QAngle(0, -30, 0), caster_loc + caster_direction * 180 as Vector);
         GridNav.DestroyTreesAroundPoint(caster_loc + caster_direction * 180 as Vector, 180, false);
-        let melee_summon = BaseNpc_Plus.CreateUnitByName(melee_summon_name, melee_loc, this.GetCasterPlus(), true);
-        let ranged_summon = BaseNpc_Plus.CreateUnitByName(ranged_summon_name, ranged_loc, this.GetCasterPlus(), true);
+        let melee_summon = this.GetCasterPlus().CreateSummon(melee_summon_name, melee_loc, summon_duration, true);
+        let ranged_summon = this.GetCasterPlus().CreateSummon(ranged_summon_name, ranged_loc, summon_duration, true);
         // melee_summon.SetControllableByPlayer(this.GetCasterPlus().GetPlayerID(), true);
-        melee_summon.AddNewModifier(this.GetCasterPlus(), this, "modifier_kill", {
-            duration: summon_duration
-        });
         melee_summon.AddNewModifier(this.GetCasterPlus(), this, "modifier_item_imba_necronomicon_summon", {});
         // ranged_summon.SetControllableByPlayer(this.GetCasterPlus().GetPlayerID(), true);
-        ranged_summon.AddNewModifier(this.GetCasterPlus(), this, "modifier_kill", {
-            duration: summon_duration
-        });
         ranged_summon.AddNewModifier(this.GetCasterPlus(), this, "modifier_item_imba_necronomicon_summon", {});
         let melee_abilities = {
             "1": "necronomicon_warrior_mana_burn",

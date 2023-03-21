@@ -4,7 +4,6 @@ import { ResHelper } from "../../../helper/ResHelper";
 import { GameServiceConfig } from "../../../shared/GameServiceConfig";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
-import { BaseNpc_Plus } from "../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 
@@ -174,16 +173,12 @@ export class imba_wraith_king_wraithfire_blast extends BaseAbility_Plus {
             let direction = (target.GetAbsOrigin() - caster.GetAbsOrigin() as Vector).Normalized();
             let distance = (target.GetAbsOrigin() - caster.GetAbsOrigin() as Vector).Length2D();
             let summon_point = caster.GetAbsOrigin() + direction * distance - 100 as Vector;
-            let wraith = BaseNpc_Plus.CreateUnitByName("npc_imba_wraith_king_wraith", summon_point, caster, true);
+            let duration = caster.findAbliityPlus<imba_wraith_king_kingdom_come>("imba_wraith_king_kingdom_come").GetSpecialValueFor("wraith_duration");
+            let wraith = caster.CreateSummon("npc_imba_wraith_king_wraith", summon_point, duration, true);
             let playerid = caster.GetPlayerID();
             if (playerid) {
                 // wraith.SetControllableByPlayer(playerid, true);
             }
-            wraith.SetOwner(caster);
-            let duration = caster.findAbliityPlus<imba_wraith_king_kingdom_come>("imba_wraith_king_kingdom_come").GetSpecialValueFor("wraith_duration");
-            wraith.AddNewModifier(wraith, undefined, "modifier_kill", {
-                duration: duration
-            });
             wraith.SetBaseMaxHealth(target.GetBaseMaxHealth());
             wraith.SetMaxHealth(target.GetMaxHealth());
             wraith.SetHealth(wraith.GetMaxHealth());
@@ -616,10 +611,7 @@ export class imba_wraith_king_mortal_strike extends BaseAbility_Plus {
             for (let unit = 0; unit <= skeleton_modifier.GetStackCount() - 1; unit++) {
                 this.AddTimer(unit * this.spawn_interval, () => {
                     for (let units_per_charge = 1; units_per_charge <= this.skeletons_per_charge; units_per_charge++) {
-                        skeleton = BaseNpc_Plus.CreateUnitByName("npc_dota_wraith_king_skeleton_warrior", this.caster.GetAbsOrigin() + RandomVector(100) as Vector, this.caster, true);
-                        skeleton.AddNewModifier(this.caster, this, "modifier_kill", {
-                            duration: this.skeleton_duration
-                        });
+                        skeleton = this.caster.CreateSummon("npc_imba_wraith_king_skeleton_warrior", this.caster.GetAbsOrigin() + RandomVector(100) as Vector, this.skeleton_duration, true);
                         skeleton.AddNewModifier(this.caster, this, "modifier_imba_mortal_strike_skeleton", {
                             duration: this.skeleton_duration - FrameTime()
                         });
@@ -686,10 +678,7 @@ export class modifier_imba_mortal_strike_skeleton extends BaseModifier_Plus {
         }
     }
     OnIntervalThink(): void {
-        this.skeleton = BaseNpc_Plus.CreateUnitByName("npc_dota_wraith_king_skeleton_warrior", this.parent.GetOrigin(), this.caster, true);
-        this.skeleton.AddNewModifier(this.caster, this.ability, "modifier_kill", {
-            duration: this.remaining_time
-        });
+        this.skeleton = this.caster.CreateSummon("npc_imba_wraith_king_skeleton_warrior", this.parent.GetOrigin(), this.remaining_time, true);
         this.skeleton.AddNewModifier(this.caster, this.ability, "modifier_imba_mortal_strike_skeleton", {
             duration: this.remaining_time - FrameTime()
         });
@@ -1614,7 +1603,7 @@ export class modifier_imba_kingdom_come_slow extends BaseModifier_Plus {
                 let direction = (this.parent.GetAbsOrigin() - this.caster.GetAbsOrigin() as Vector).Normalized();
                 let distance = (this.parent.GetAbsOrigin() - this.caster.GetAbsOrigin() as Vector).Length2D();
                 let summon_point = this.caster.GetAbsOrigin() + direction * distance - 100 as Vector;
-                let wraith = BaseNpc_Plus.CreateUnitByName("npc_imba_wraith_king_wraith", summon_point, this.caster, true);
+                let wraith = this.caster.CreateSummon("npc_imba_wraith_king_wraith", summon_point, this.wraith_duration, true);
                 let playerid = this.caster.GetPlayerID();
                 if (playerid) {
                     // wraith.SetControllableByPlayer(playerid, true);
@@ -1623,9 +1612,6 @@ export class modifier_imba_kingdom_come_slow extends BaseModifier_Plus {
                 wraith.SetBaseMaxHealth(this.parent.GetBaseMaxHealth());
                 wraith.SetMaxHealth(this.parent.GetMaxHealth());
                 wraith.SetHealth(wraith.GetMaxHealth());
-                wraith.AddNewModifier(wraith, undefined, "modifier_kill", {
-                    duration: this.wraith_duration
-                });
                 ResolveNPCPositions(this.parent.GetAbsOrigin(), 164);
             } else {
                 if ((this.parent.IsCreep() && !this.parent.IsAncient())) {

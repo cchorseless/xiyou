@@ -3,7 +3,6 @@ import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifierMotionBoth_Plus, BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
-import { BaseNpc_Plus } from "../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 @registerAbility()
@@ -181,11 +180,8 @@ export class modifier_imba_slark_dark_pact_pulses extends BaseModifier_Plus {
             ability: this.GetAbilityPlus()
         }
         this.GetParentPlus().EmitSound("Hero_Slark.DarkPact.Cast");
-        let visual_unit = BaseNpc_Plus.CreateUnitByName("npc_dota_slark_visual", this.GetParentPlus().GetAbsOrigin(), this.GetParentPlus(), true);
+        let visual_unit = this.GetParentPlus().CreateSummon("npc_imba_slark_visual", this.GetParentPlus().GetAbsOrigin(), this.GetDuration(), true);
         visual_unit.AddNewModifier(this.GetParentPlus(), this.GetAbilityPlus(), "modifier_imba_slark_visual", {});
-        visual_unit.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_kill", {
-            duration: this.GetDuration()
-        });
         this.pulses_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_slark/slark_dark_pact_pulses.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, visual_unit);
         ParticleManager.SetParticleControlEnt(this.pulses_particle, 0, this.GetParentPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", this.GetParentPlus().GetAbsOrigin(), true);
         ParticleManager.SetParticleControlEnt(this.pulses_particle, 1, this.GetParentPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", this.GetParentPlus().GetAbsOrigin(), true);
@@ -197,11 +193,8 @@ export class modifier_imba_slark_dark_pact_pulses extends BaseModifier_Plus {
                 this.premature_modifier.IncrementStackCount();
                 this.bStoreHealth = true;
             } else if (this.GetAbilityPlus() && this.GetAbilityPlus().GetAutoCastState()) {
-                let spawn_unit = BaseNpc_Plus.CreateUnitByName("npc_dota_slark_spawn", this.GetParentPlus().GetAbsOrigin() + RandomVector(128) as Vector, this.GetParentPlus(), true);
+                let spawn_unit = this.GetParentPlus().CreateSummon("npc_imba_slark_spawn", this.GetParentPlus().GetAbsOrigin() + RandomVector(128) as Vector, this.premature_spawn_duration, true);
                 // spawn_unit.SetControllableByPlayer(this.GetParentPlus().GetPlayerID(), false);
-                spawn_unit.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_kill", {
-                    duration: this.premature_spawn_duration
-                });
                 if (spawn_unit.HasAbility("imba_slark_dark_pact") && this.GetCasterPlus().HasAbility("imba_slark_dark_pact")) {
                     spawn_unit.findAbliityPlus<imba_slark_dark_pact>("imba_slark_dark_pact").SetLevel(this.GetCasterPlus().FindAbilityByName("imba_slark_dark_pact").GetLevel());
                 }
@@ -1034,11 +1027,8 @@ export class modifier_imba_slark_shadow_dance_aura extends BaseModifier_Plus {
         this.AddParticle(this.shadow_particle, false, false, -1, false, false);
         if ((!params || params && params.bAutoCast != 1)) {
             ParticleManager.SetParticleControlEnt(this.shadow_particle, 1, this.GetCasterPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", this.GetCasterPlus().GetAbsOrigin(), true);
-            let visual_unit = BaseNpc_Plus.CreateUnitByName("npc_dota_slark_visual", this.GetCasterPlus().GetAbsOrigin(), this.GetCasterPlus(), true);
+            let visual_unit = this.GetCasterPlus().CreateSummon("npc_imba_slark_visual", this.GetCasterPlus().GetAbsOrigin(), this.GetAbilityPlus().GetTalentSpecialValueFor("duration") + 0.5, true);
             visual_unit.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_slark_visual", {});
-            visual_unit.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_kill", {
-                duration: this.GetAbilityPlus().GetTalentSpecialValueFor("duration") + 0.5
-            });
             let shadow_particle_name = "particles/units/heroes/hero_slark/slark_shadow_dance_dummy.vpcf";
             this.aoe = 0;
             this.shadow_dummy_particle = ResHelper.CreateParticleEx(shadow_particle_name, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, visual_unit);
@@ -1072,7 +1062,7 @@ export class modifier_imba_slark_shadow_dance_aura extends BaseModifier_Plus {
         return DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES;
     }
     GetAuraSearchTeam(): DOTA_UNIT_TARGET_TEAM {
-        if (this.GetParentPlus().GetUnitName() !== "npc_dota_thinker") {
+        if (!this.GetParentPlus().IsThinker()) {
             return DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY;
         } else {
             return DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH;

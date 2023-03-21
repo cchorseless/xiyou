@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus, BaseOrbAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -46,6 +47,13 @@ export class imba_huskar_inner_fire extends BaseAbility_Plus {
             duration: raze_land_duration
         }, this.GetCasterPlus().GetAbsOrigin(), this.GetCasterPlus().GetTeamNumber(), false);
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_if_enemy(this);
+    }
+
 }
 @registerModifier()
 export class modifier_imba_huskar_inner_fire_knockback extends BaseModifierMotionHorizontal_Plus {
@@ -152,7 +160,7 @@ export class modifier_imba_huskar_inner_fire_raze_land extends BaseModifier_Plus
 export class modifier_imba_huskar_inner_fire_raze_land_aura extends BaseModifier_Plus {
     public radius: number;
     public raze_land_damage_interval: number;
-    public particle: any;
+    public particle: ParticleID;
     IsAura(): boolean {
         return true;
     }
@@ -238,6 +246,16 @@ export class imba_huskar_burning_spear extends BaseOrbAbility_Plus {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_huskar_pure_burning_spears") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_huskar_pure_burning_spears")) {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_huskar_pure_burning_spears"), "modifier_special_bonus_imba_huskar_pure_burning_spears", {});
         }
+    }
+
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        if (!this.GetAutoCastState()) {
+            this.ToggleAutoCast();
+        }
+        return false
     }
 }
 @registerModifier()
@@ -604,6 +622,12 @@ export class imba_huskar_life_break extends BaseAbility_Plus {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_huskar_life_break_cast_range") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_huskar_life_break_cast_range")) {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_huskar_life_break_cast_range"), "modifier_special_bonus_imba_huskar_life_break_cast_range", {});
         }
+    }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this)
     }
 }
 @registerModifier()

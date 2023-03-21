@@ -3,6 +3,7 @@ import { modifier_animation } from "./animation/modifier_animation";
 import { modifier_animation_freeze } from "./animation/modifier_animation_freeze";
 import { modifier_animation_translate } from "./animation/modifier_animation_translate";
 import { modifier_animation_translate_permanent } from "./animation/modifier_animation_translate_permanent";
+import { modifier_dummy_unit } from "./battle/modifier_dummy_unit";
 import { modifier_illusion } from "./battle/modifier_illusion";
 import { modifier_jiaoxie_wudi } from "./battle/modifier_jiaoxie_wudi";
 import { modifier_summon } from "./battle/modifier_summon";
@@ -94,6 +95,7 @@ import { modifier_spawn_activity } from "./spawn/modifier_spawn_activity";
     modifier_property,
     modifier_illusion,
     modifier_summon,
+    modifier_dummy_unit,
     modifier_spawn_activity,
     modifier_jiaoxie_wudi,
     modifier_generic_motion_controller,

@@ -1291,7 +1291,7 @@ export class imba_techies_remote_mines extends BaseAbility_Plus {
         }
         EmitSoundOn(sound, caster);
         EmitSoundOn(sound_cast, caster);
-        let mine = BaseNpc_Plus.CreateUnitByName("npc_imba_techies_remote_mines", target_point, caster, false);
+        let mine = caster.CreateSummon("npc_imba_techies_remote_mines", target_point, mine_duration, false);
         let playerID = caster.GetPlayerID();
         // mine.SetControllableByPlayer(playerID, true);
         let mine_ability_handler = mine.FindAbilityByName(mine_ability);
@@ -1299,9 +1299,6 @@ export class imba_techies_remote_mines extends BaseAbility_Plus {
             mine_ability_handler.SetLevel(this.GetLevel());
         }
         mine.SetOwner(caster);
-        mine.AddNewModifier(caster, this, "modifier_kill", {
-            duration: mine_duration
-        });
     }
 }
 @registerAbility()

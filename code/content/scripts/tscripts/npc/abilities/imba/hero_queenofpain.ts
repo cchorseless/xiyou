@@ -277,7 +277,7 @@ export class modifier_imba_shadow_strike_debuff extends BaseModifier_Plus {
     IgnoreTenacity() {
         return true;
     }
-    BeCreated(params: any): void {
+    Init(params: any): void {
         let parent = this.GetParentPlus();
         let ability = this.GetAbilityPlus();
         let slow_decay_pct = ability.GetSpecialValueFor("slow_decay_pct");
@@ -303,9 +303,7 @@ export class modifier_imba_shadow_strike_debuff extends BaseModifier_Plus {
             this.StartIntervalThink(0.5);
         }
     }
-    BeRefresh(params: any): void {
-        this.OnCreated(params);
-    }
+
     OnIntervalThink(): void {
         this.counter = this.counter + 1;
         if ((this.counter % 2) == 0) {
@@ -628,18 +626,14 @@ export class modifier_imba_scream_of_pain_reflect extends BaseModifier_Plus {
     IsPurgable(): boolean {
         return true;
     }
-    BeCreated(params: any): void {
+    Init(params: any): void {
         if (IsServer()) {
             this.damage_threshold = params.damage_threshold;
             this.pain_reflect_pct = params.pain_reflect_pct;
             this.damage_counter = 0;
         }
     }
-    BeRefresh(params: any): void {
-        if (IsServer()) {
-            this.OnCreated(params);
-        }
-    }
+
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
             1: Enum_MODIFIER_EVENT.ON_TAKEDAMAGE
@@ -904,16 +898,12 @@ export class modifier_imba_sonic_wave_daze extends BaseModifier_Plus {
     IsStunDebuff(): boolean {
         return false;
     }
-    BeCreated(params: any): void {
+    Init(params: any): void {
         if (IsServer()) {
             this.SetStackCount(params.stacks);
         }
     }
-    BeRefresh(params: any): void {
-        if (IsServer()) {
-            this.OnCreated(params);
-        }
-    }
+
     GetEffectName(): string {
         return "particles/hero/queenofpain/sonic_wave_daze.vpcf";
     }

@@ -4,7 +4,6 @@ import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
-import { BaseNpc_Plus } from "../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 @registerAbility()
@@ -263,7 +262,7 @@ export class imba_zuus_lightning_bolt extends BaseAbility_Plus {
                 ParticleManager.SetParticleControl(particle, 1, Vector(target_point.x, target_point.y, z_pos));
                 ParticleManager.SetParticleControl(particle, 2, Vector(target_point.x, target_point.y, target_point.z));
             }
-            let dummy_unit = BaseNpc_Plus.CreateUnitByName("npc_dummy_unit", Vector(target_point.x, target_point.y, 0), caster, false);
+            let dummy_unit = caster.CreateDummyUnit(Vector(target_point.x, target_point.y, 0), sight_duration + 1);
             let true_sight = dummy_unit.AddNewModifier(caster, ability, "modifier_imba_zuus_lightning_true_sight", {
                 duration: sight_duration
             });
@@ -271,9 +270,6 @@ export class imba_zuus_lightning_bolt extends BaseAbility_Plus {
             dummy_unit.SetDayTimeVisionRange(sight_radius_day);
             dummy_unit.SetNightTimeVisionRange(sight_radius_night);
             dummy_unit.AddNewModifier(caster, ability, "modifier_imba_zuus_lightning_dummy", {});
-            dummy_unit.AddNewModifier(caster, undefined, "modifier_kill", {
-                duration: sight_duration + 1
-            });
             if (target == caster) {
                 let thundergods_focus_modifier = caster.AddNewModifier(caster, ability, "modifier_imba_zuus_thundergods_focus", {
                     duration: ability.GetSpecialValueFor("thundergods_focus_duration")
@@ -354,7 +350,7 @@ export class modifier_imba_zuus_lightning_true_sight extends BaseModifier_Plus {
         return false;
     }
     GetAuraRadius(): number {
-        if (this.GetParentPlus().GetUnitName() == "npc_dota_creep_neutral") {
+        if (this.GetParentPlus().GetClassname() == "npc_dota_creep_neutral") {
             return this.GetStackCount();
         } else {
             return 1;
@@ -364,7 +360,7 @@ export class modifier_imba_zuus_lightning_true_sight extends BaseModifier_Plus {
         return "modifier_truesight";
     }
     GetAuraSearchTeam(): DOTA_UNIT_TARGET_TEAM {
-        if (this.GetParentPlus().GetUnitName() == "npc_dota_creep_neutral") {
+        if (this.GetParentPlus().GetClassname() == "npc_dota_creep_neutral") {
             return DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY;
         } else {
             return DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY;
@@ -570,7 +566,7 @@ export class imba_zuus_cloud extends BaseAbility_Plus {
             let cloud_radius = this.GetSpecialValueFor("cloud_radius");
             EmitSoundOnLocationWithCaster(this.target_point, "Hero_Zuus.Cloud.Cast", caster);
             caster.RemoveModifierByName("modifier_imba_zuus_on_nimbus");
-            this.zuus_nimbus_unit = BaseNpc_Plus.CreateUnitByName("npc_dota_zeus_cloud", Vector(this.target_point.x, this.target_point.y, 450), caster, false);
+            this.zuus_nimbus_unit = caster.CreateSummon("npc_imba_zeus_cloud", Vector(this.target_point.x, this.target_point.y, 450), cloud_duration, false);
             this.zuus_nimbus_unit.SetControllableByPlayer(caster.GetPlayerID(), true);
             this.zuus_nimbus_unit.SetModelScale(0.7);
             this.zuus_nimbus_unit.AddNewModifier(this.zuus_nimbus_unit, this, "modifier_phased", {});
@@ -578,9 +574,6 @@ export class imba_zuus_cloud extends BaseAbility_Plus {
                 duration: cloud_duration,
                 cloud_bolt_interval: cloud_bolt_interval,
                 cloud_radius: cloud_radius
-            });
-            this.zuus_nimbus_unit.AddNewModifier(caster, undefined, "modifier_kill", {
-                duration: cloud_duration
             });
             if (caster.HasAbility("imba_zuus_nimbus_zap")) {
                 caster.findAbliityPlus<imba_zuus_nimbus_zap>("imba_zuus_nimbus_zap").SetActivated(true);
@@ -681,7 +674,7 @@ export class modifier_zuus_nimbus_storm extends BaseModifier_Plus {
                 caster.RemoveModifierByName("modifier_imba_zuus_nimbus_z");
                 FindClearSpaceForUnit(caster, this.GetCasterPlus().GetAbsOrigin(), false);
             }
-            for (const [_, nimbus] of GameFunc.iPair(caster.FindChildByName("npc_dota_zeus_cloud"))) {
+            for (const [_, nimbus] of GameFunc.iPair(caster.FindChildByName("npc_imba_zeus_cloud"))) {
                 if (nimbus.IsAlive()) {
                     nimbusRemaining = true;
                     break;
@@ -743,7 +736,7 @@ export class imba_zuus_nimbus_zap extends BaseAbility_Plus {
             }
             let nimbus_ability = this.GetCasterPlus().findAbliityPlus<imba_zuus_cloud>("imba_zuus_cloud");
             this.nimbus = nimbus_ability.zuus_nimbus_unit;
-            for (const [_, nimbus] of GameFunc.iPair(this.GetCasterPlus().FindChildByName("npc_dota_zeus_cloud"))) {
+            for (const [_, nimbus] of GameFunc.iPair(this.GetCasterPlus().FindChildByName("npc_imba_zeus_cloud"))) {
                 if (nimbus.IsAlive() && (target_point - nimbus.GetAbsOrigin() as Vector).Length2D() < distance) {
                     distance = (target_point - nimbus.GetAbsOrigin() as Vector).Length2D();
                     target_loc = nimbus.GetAbsOrigin();

@@ -12,9 +12,9 @@ export class item_imba_iron_talon extends BaseItem_Plus {
             return;
         }
         if (hTarget.GetTeamNumber() != this.GetCasterPlus().GetTeamNumber()) {
-            if ((hTarget.IsCreep() || (hTarget.IsOther() && (string.find(hTarget.GetUnitName(), "npc_dota_ward_base") || string.find(hTarget.GetUnitName(), "npc_dota_techies_mines")))) && !hTarget.IsRoshan()) {
+            if ((hTarget.IsCreep() || (hTarget.IsOther() && (hTarget.GetClassname() == ("npc_dota_ward_base") || hTarget.GetClassname() == ("npc_dota_techies_mines")))) && !hTarget.IsRoshan()) {
                 return UnitFilterResult.UF_SUCCESS;
-            } else if (hTarget.IsOther() && !(string.find(hTarget.GetUnitName(), "ward_base") || string.find(hTarget.GetUnitName(), "npc_dota_techies_mines"))) {
+            } else if (hTarget.IsOther() && !(hTarget.GetClassname().includes("ward_base") || hTarget.GetClassname() == ("npc_dota_techies_mines"))) {
                 return UnitFilterResult.UF_FAIL_CUSTOM;
             }
         }
@@ -26,7 +26,7 @@ export class item_imba_iron_talon extends BaseItem_Plus {
             return;
         }
         if (hTarget.GetTeamNumber() != this.GetCasterPlus().GetTeamNumber()) {
-            if (hTarget.IsOther() && !(string.find(hTarget.GetUnitName(), "npc_dota_ward_base") || string.find(hTarget.GetUnitName(), "npc_dota_techies_mines"))) {
+            if (hTarget.IsOther() && !(hTarget.GetClassname().includes("npc_dota_ward_base") || hTarget.GetClassname().includes("npc_dota_techies_mines"))) {
                 return "Ability Can't Target This Ward-Type Unit";
             }
         }
@@ -128,11 +128,11 @@ export class modifier_item_imba_iron_talon extends BaseModifier_Plus {
         return Object.values(funcs);
     } */
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
-    CC_GetModifierPreAttack_BonusDamage(keys?: any /** keys */): number {
+    CC_GetModifierPreAttack_BonusDamage(keys?: { target: IBaseNpc_Plus } /** keys */): number {
         if (!IsServer()) {
             return;
         }
-        if ((this.GetParentPlus().FindAllModifiersByName("modifier_item_imba_iron_talon")[0] == this) && keys.target && !keys.target.IsRealUnit() && !keys.target.IsOther() && !keys.target.IsBuilding() && !string.find(keys.target.GetUnitName(), "npc_dota_lone_druid_bear") && keys.target.GetTeamNumber() != this.GetParentPlus().GetTeamNumber()) {
+        if ((this.GetParentPlus().FindAllModifiersByName("modifier_item_imba_iron_talon")[0] == this) && keys.target && !keys.target.IsRealUnit() && !keys.target.IsOther() && !keys.target.IsBuilding() && keys.target.GetClassname() != "npc_dota_lone_druid_bear" && keys.target.GetTeamNumber() != this.GetParentPlus().GetTeamNumber()) {
             if (this.GetParentPlus().HasItemInInventory("item_quelling_blade")) {
                 return this.GetStackCount();
             } else if (!this.GetParentPlus().IsRangedAttacker()) {

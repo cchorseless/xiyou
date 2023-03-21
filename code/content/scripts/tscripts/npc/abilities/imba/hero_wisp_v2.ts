@@ -1,7 +1,6 @@
 
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus } from "../../entityPlus/BaseModifier_Plus";
-import { BaseNpc_Plus } from "../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 @registerAbility()
 export class imba_wisp_spirits_v2 extends BaseAbility_Plus {
@@ -53,11 +52,8 @@ export class modifier_imba_wisp_spirits_v2 extends BaseModifier_Plus {
         this.StartIntervalThink(this.spawn_interval);
     }
     OnIntervalThink(): void {
-        let spirit = BaseNpc_Plus.CreateUnitByName("npc_dota_wisp_spirit", this.GetCasterPlus().GetAbsOrigin() + Vector(0, this.max_range, 0) as Vector, this.GetCasterPlus(), false);
+        let spirit = this.GetCasterPlus().CreateSummon("npc_imba_wisp_spirit", this.GetCasterPlus().GetAbsOrigin() + Vector(0, this.max_range, 0) as Vector, this.ability_duration, false);
         spirit.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_wisp_spirit_v2_invulnerable", {});
-        spirit.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_kill", {
-            duration: this.ability_duration
-        });
         this.spirits_spawned = this.spirits_spawned + 1;
         if (this.spirits_spawned >= this.number_of_spirits) {
         }

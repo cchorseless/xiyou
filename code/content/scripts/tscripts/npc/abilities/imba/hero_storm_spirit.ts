@@ -28,13 +28,13 @@ export class imba_storm_spirit_static_remnant extends BaseAbility_Plus {
 
             if (remnant_count > 1) {
                 for (let i = 0; i < remnant_count; i++) {
-                    let dummy = BaseNpc_Plus.CreateUnitByName("npc_imba_dota_stormspirit_remnant", caster.GetAbsOrigin() + remnant_pos[i] as Vector, caster, false);
+                    let dummy = BaseNpc_Plus.CreateUnitByName("npc_imba_stormspirit_remnant", caster.GetAbsOrigin() + remnant_pos[i] as Vector, caster, false);
                     dummy.AddNewModifier(caster, this, "modifier_imba_static_remnant", {
                         duration: remnant_duration
                     });
                 }
             } else {
-                let dummy = BaseNpc_Plus.CreateUnitByName("npc_imba_dota_stormspirit_remnant", caster.GetAbsOrigin(), caster, false);
+                let dummy = BaseNpc_Plus.CreateUnitByName("npc_imba_stormspirit_remnant", caster.GetAbsOrigin(), caster, false);
                 dummy.AddNewModifier(caster, this, "modifier_imba_static_remnant", {
                     duration: remnant_duration
                 });
@@ -680,7 +680,7 @@ export class imba_storm_spirit_ball_lightning extends BaseAbility_Plus {
                     this.traveled_remnant = this.traveled_remnant - remant_interval;
                     let cast_sound = "Hero_StormSpirit.StaticRemnantPlant";
                     EmitSoundOn(cast_sound, caster);
-                    let dummy = BaseNpc_Plus.CreateUnitByName("npc_imba_dota_stormspirit_remnant", caster.GetAbsOrigin(), caster, false);
+                    let dummy = BaseNpc_Plus.CreateUnitByName("npc_imba_stormspirit_remnant", caster.GetAbsOrigin(), caster, false);
                     dummy.AddNewModifier(caster, this.remnant, "modifier_imba_static_remnant", {
                         duration: this.remnant.GetSpecialValueFor("big_remnant_duration"),
                         ballLightning: true

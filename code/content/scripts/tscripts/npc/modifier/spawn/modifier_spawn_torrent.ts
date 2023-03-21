@@ -50,7 +50,6 @@ export class modifier_spawn_torrent extends BaseModifierMotionBoth_Plus {
         if (IsServer()) {
             this.GetParentPlus().RemoveHorizontalMotionController(this);
             this.GetParentPlus().RemoveVerticalMotionController(this);
-            this.GetParentPlus().RemoveGesture(GameActivity_t.ACT_DOTA_FLAIL);
             if (this.DestroyHandler) {
                 this.DestroyHandler.run();
                 this.DestroyHandler = null;

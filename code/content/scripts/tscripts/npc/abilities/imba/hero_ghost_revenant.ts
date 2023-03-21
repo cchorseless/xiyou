@@ -26,11 +26,11 @@ export class ghost_revenant_wraith extends BaseAbility_Plus {
 }
 @registerModifier()
 export class modifier_ghost_revenant_wraith extends BaseModifier_Plus {
-    BeRefresh(p_0: any,): void {
-        if (IsServer()) {
-            this.OnDestroy();
-        }
-    }
+    // BeRefresh(p_0: any,): void {
+    //     if (IsServer()) {
+    //         this.BeDestroy();
+    //     }
+    // }
     IsHidden(): boolean {
         return false;
     }

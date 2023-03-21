@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 import { ResHelper } from "../../../helper/ResHelper";
@@ -38,6 +39,7 @@ export class imba_faceless_void_timelord extends BaseAbility_Plus {
     GetIntrinsicModifierName(): string {
         return "modifier_imba_faceless_void_timelord";
     }
+
 }
 @registerModifier()
 export class modifier_imba_faceless_void_timelord extends BaseModifier_Plus {
@@ -182,6 +184,15 @@ export class imba_faceless_void_time_walk extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_faceless_void_11"), "modifier_special_bonus_imba_faceless_void_11", {});
         }
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this, null, (unit) => {
+            return unit.IsRangedAttacker() || unit.GetHealthLosePect() > 80;
+        }, FindOrder.FIND_FARTHEST);
+    }
+
 }
 @registerModifier()
 export class modifier_imba_faceless_void_time_walk_damage_counter extends BaseModifier_Plus {
@@ -597,6 +608,12 @@ export class imba_faceless_void_time_dilation extends BaseAbility_Plus {
         ParticleManager.SetParticleControl(cast_pfx_2, 0, caster.GetAbsOrigin());
         ParticleManager.ReleaseParticleIndex(cast_pfx_2);
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_if_enemy(this);
+    }
 }
 @registerModifier()
 export class modifier_imba_faceless_void_time_dilation_buff extends BaseModifier_Plus {
@@ -957,11 +974,7 @@ export class imba_faceless_void_chronosphere extends BaseAbility_Plus {
         if (!mini_chrono) {
             let enemies = FindUnitsInRadius(caster.GetTeamNumber(), chrono_center, undefined, total_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS, FindOrder.FIND_ANY_ORDER, false);
             enemies_count = GameFunc.GetCount(enemies);
-            let enemy_team = DOTATeam_t.DOTA_TEAM_BADGUYS;
-            if (caster.GetTeam() == DOTATeam_t.DOTA_TEAM_BADGUYS) {
-                enemy_team = DOTATeam_t.DOTA_TEAM_GOODGUYS;
-            }
-            if (enemies_count >= math.max(PlayerResource.GetPlayerCountForTeam(enemy_team) * 0.5, 1)) {
+            if (enemies_count >= 5) {
                 if (this.IsStolen()) {
                     caster.EmitSound("Imba.StolenZaWarudo");
                 } else {
@@ -983,6 +996,13 @@ export class imba_faceless_void_chronosphere extends BaseAbility_Plus {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_faceless_void_10") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_faceless_void_10")) {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_faceless_void_10"), "modifier_special_bonus_imba_faceless_void_10", {});
         }
+    }
+
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_most_enemy(this);
     }
 }
 @registerModifier()
@@ -1080,10 +1100,10 @@ export class modifier_imba_faceless_void_chronosphere_aura extends BaseModifier_
         let units = FindUnitsInRadius(caster.GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FindOrder.FIND_ANY_ORDER, false);
         for (const [_, unit] of GameFunc.iPair(units)) {
             if (unit == caster || unit.GetPlayerOwner() == caster.GetPlayerOwner()) {
-                if (!this.modifiers[unit.GetEntityIndex()]) {
+                if (!this.modifiers[unit.GetEntityIndex() + ""]) {
                     let mod = unit.AddNewModifier(caster, this.GetAbilityPlus(), "modifier_imba_faceless_void_chronosphere_caster_buff", {});
                     mod.SetStackCount(this.GetStackCount());
-                    this.modifiers[unit.GetEntityIndex()] = mod as IBaseModifier_Plus;
+                    this.modifiers[unit.GetEntityIndex() + ""] = mod as IBaseModifier_Plus;
                 }
             }
         }
@@ -1160,25 +1180,20 @@ export class modifier_imba_faceless_void_chronosphere_handler extends BaseModifi
         }
     }
     CheckState(): Partial<Record<modifierstate, boolean>> {
-        let stacks = this.GetStackCount();
-        let state = {}
-        if (stacks == 0) {
-            if (this.GetParentPlus().HasModifier("modifier_slark_shadow_dance")) {
-                state = {
-                    [modifierstate.MODIFIER_STATE_STUNNED]: true,
-                    [modifierstate.MODIFIER_STATE_FROZEN]: true
-                }
+        this.parent = this.GetParentPlus();
+        this.caster = this.GetCasterPlus();
+        let state: Partial<Record<modifierstate, boolean>> = {}
+        if (this.parent == this.caster) {
+            state = {
+                [modifierstate.MODIFIER_STATE_NO_UNIT_COLLISION]: true
             }
+        } else {
             state = {
                 [modifierstate.MODIFIER_STATE_FROZEN]: true,
                 [modifierstate.MODIFIER_STATE_ROOTED]: true,
                 [modifierstate.MODIFIER_STATE_STUNNED]: true,
                 [modifierstate.MODIFIER_STATE_SILENCED]: true,
                 [modifierstate.MODIFIER_STATE_INVISIBLE]: false
-            }
-        } else if (stacks == 1 || stacks == 4) {
-            state = {
-                [modifierstate.MODIFIER_STATE_NO_UNIT_COLLISION]: true
             }
         }
         return state;

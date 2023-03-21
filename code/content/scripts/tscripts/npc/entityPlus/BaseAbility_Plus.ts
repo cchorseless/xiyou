@@ -88,7 +88,7 @@ export class BaseAbility_Plus extends BaseAbility {
         let caster = this.GetCaster()
         let r = 0;
         if (caster) {
-            r = this.GetCastRange(caster.GetAbsOrigin(), null);
+            r = this.GetCastRange(caster.GetAbsOrigin(), null) || 0;
         }
         if (r <= 0) {
             r = 200;

@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -342,9 +343,7 @@ export class modifier_imba_cold_front_freeze extends BaseModifier_Plus {
 }
 @registerAbility()
 export class imba_lich_frost_nova extends BaseAbility_Plus {
-    GetAbilityTextureName(): string {
-        return "lich_frost_nova";
-    }
+
     IsHiddenWhenStolen(): boolean {
         return false;
     }
@@ -370,13 +369,12 @@ export class imba_lich_frost_nova extends BaseAbility_Plus {
     }
     OnSpellStart(): void {
         let caster = this.GetCasterPlus();
-        let ability = this;
         let target = this.GetCursorTarget();
         let cast_response = "lich_lich_ability_chain_1" + math.random(1, 4);
         let kill_response = "lich_lich_ability_nova_0" + math.random(1, 5);
         let cm_kill_response = "lich_lich_ability_nova_06";
-        let radius = ability.GetSpecialValueFor("radius");
-        FrostNova(caster, ability, target, false);
+        let radius = this.GetSpecialValueFor("radius");
+        FrostNova(caster, this, target, false);
         if (RollPercentage(15)) {
             EmitSoundOn(cast_response, caster);
         }
@@ -403,6 +401,12 @@ export class imba_lich_frost_nova extends BaseAbility_Plus {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_lich_11") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_lich_11")) {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_lich_11"), "modifier_special_bonus_imba_lich_11", {});
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);;
     }
 }
 @registerModifier()
@@ -490,16 +494,16 @@ export class imba_lich_frost_armor extends BaseAbility_Plus {
     GetAbilityTextureName(): string {
         return "lich_frost_armor";
     }
-    CastFilterResultTarget(target: CDOTA_BaseNPC): UnitFilterResult {
-        if (IsServer()) {
-            let caster = this.GetCasterPlus();
-            if (caster == target) {
-                return UnitFilterResult.UF_FAIL_CUSTOM;
-            }
-            let nResult = UnitFilter(target, this.GetAbilityTargetTeam(), this.GetAbilityTargetType(), this.GetAbilityTargetFlags(), this.GetCasterPlus().GetTeamNumber());
-            return nResult;
-        }
-    }
+    // CastFilterResultTarget(target: CDOTA_BaseNPC): UnitFilterResult {
+    //     if (IsServer()) {
+    //         let caster = this.GetCasterPlus();
+    //         if (caster == target) {
+    //             return UnitFilterResult.UF_FAIL_CUSTOM;
+    //         }
+    //         let nResult = UnitFilter(target, this.GetAbilityTargetTeam(), this.GetAbilityTargetType(), this.GetAbilityTargetFlags(), this.GetCasterPlus().GetTeamNumber());
+    //         return nResult;
+    //     }
+    // }
     GetCustomCastErrorTarget(target: CDOTA_BaseNPC): string {
         return "dota_hud_error_lich_self_ice_armor";
     }
@@ -534,19 +538,26 @@ export class imba_lich_frost_armor extends BaseAbility_Plus {
     }
     OnSpellStart(): void {
         let caster = this.GetCasterPlus();
-        let ability = this;
         let target = this.GetCursorTarget();
         let cast_response = "lich_lich_ability_armor_0" + math.random(1, 5);
         let sound_cast = "Hero_Lich.FrostArmor";
         let modifier_armor = "modifier_imba_frost_armor_buff";
-        let armor_duration = ability.GetSpecialValueFor("armor_duration");
+        let armor_duration = this.GetSpecialValueFor("armor_duration");
         if (RollPercentage(75)) {
             EmitSoundOn(cast_response, caster);
         }
         EmitSoundOn(sound_cast, target);
-        target.AddNewModifier(caster, ability, modifier_armor, {
+        target.AddNewModifier(caster, this, modifier_armor, {
             duration: armor_duration
         });
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_friend(this, null, (unit) => {
+            return !unit.HasModifier("modifier_imba_frost_armor_buff")
+        })
     }
 }
 @registerModifier()
@@ -918,15 +929,15 @@ export class imba_lich_dark_ritual extends BaseAbility_Plus {
     GetAbilityTextureName(): string {
         return "lich_dark_ritual";
     }
-    CastFilterResultTarget(target: CDOTA_BaseNPC): UnitFilterResult {
-        if (IsServer()) {
-            if (this.GetCasterPlus() == target && this.GetCasterPlus().HasTalent("special_bonus_imba_lich_2")) {
-                return UnitFilterResult.UF_SUCCESS;
-            }
-            let nResult = UnitFilter(target, this.GetAbilityTargetTeam(), this.GetAbilityTargetType(), this.GetAbilityTargetFlags(), this.GetCasterPlus().GetTeamNumber());
-            return nResult;
-        }
-    }
+    // CastFilterResultTarget(target: CDOTA_BaseNPC): UnitFilterResult {
+    //     if (IsServer()) {
+    //         if (this.GetCasterPlus() == target && this.GetCasterPlus().HasTalent("special_bonus_imba_lich_2")) {
+    //             return UnitFilterResult.UF_SUCCESS;
+    //         }
+    //         let nResult = UnitFilter(target, this.GetAbilityTargetTeam(), this.GetAbilityTargetType(), this.GetAbilityTargetFlags(), this.GetCasterPlus().GetTeamNumber());
+    //         return nResult;
+    //     }
+    // }
     OnSpellStart(): void {
         let caster = this.GetCasterPlus();
         let ability = this;
@@ -1014,6 +1025,12 @@ export class imba_lich_dark_ritual extends BaseAbility_Plus {
                 ParticleManager.ReleaseParticleIndex(particle_sacrifice_enemy_fx);
             }
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this)
     }
 }
 @registerModifier()
@@ -1317,6 +1334,12 @@ export class imba_lich_chain_frost extends BaseAbility_Plus {
         });
         IncreaseStacksColdFront(caster, target, cold_front_stacks);
     }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this)
+    }
 }
 @registerModifier()
 export class modifier_imba_chain_frost_slow extends BaseModifier_Plus {
@@ -1430,6 +1453,14 @@ export class imba_lich_frost_shield extends BaseAbility_Plus {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_lich_9") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_lich_9")) {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_special_bonus_imba_lich_9", {});
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_friend(this, null, (unit) => {
+            return !unit.HasModifier("modifier_imba_lich_frost_shield")
+        })
     }
 }
 @registerModifier()
@@ -1726,6 +1757,12 @@ export class imba_lich_sinister_gaze extends BaseAbility_Plus {
                 this.target.RemoveModifierByName("modifier_imba_lich_sinister_gaze");
             }
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this)
     }
 }
 @registerModifier()

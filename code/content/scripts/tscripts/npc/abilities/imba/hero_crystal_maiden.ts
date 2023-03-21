@@ -573,7 +573,7 @@ export class modifier_imba_crystal_maiden_frostbite_enemy_talent extends BaseMod
     public initial_slow_pct: number;
     public move_slow_pct: number;
     public move_slow_change_per_update: any;
-    BeCreated(kv: any): void {
+    Init(kv: any): void {
         this.caster = this.GetCasterPlus();
         this.ability = this.GetAbilityPlus();
         this.parent = this.GetParentPlus();
@@ -583,9 +583,7 @@ export class modifier_imba_crystal_maiden_frostbite_enemy_talent extends BaseMod
         this.move_slow_change_per_update = this.initial_slow_pct * this.speed_update_rate / this.GetDuration();
         this.StartIntervalThink(this.speed_update_rate);
     }
-    BeRefresh(kv: any): void {
-        this.OnCreated(kv);
-    }
+
     OnIntervalThink(): void {
         this.move_slow_pct = this.move_slow_pct - this.move_slow_change_per_update;
     }

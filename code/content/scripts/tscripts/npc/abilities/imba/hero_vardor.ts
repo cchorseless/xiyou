@@ -219,10 +219,7 @@ export class vardor_piercing_shot extends BaseAbility_Plus {
         let root_duration = ability.GetSpecialValueFor("root_duration");
         let spawn_delay = ability.GetSpecialValueFor("spawn_delay");
         let spear_duration = ability.GetSpecialValueFor("spear_duration");
-        let dummy = BaseNpc_Plus.CreateUnitByName("npc_dota_vardor_spear_dummy", target_point, caster, false);
-        dummy.AddNewModifier(caster, this, "modifier_kill", {
-            duration: spear_duration
-        });
+        let dummy = caster.CreateSummon("npc_imba_vardor_spear_dummy", target_point, spear_duration, false);
         dummy.AddNewModifier(caster, ability, modifier_yari_properties, {
             is_charge_yari: is_charge_yari
         });
@@ -299,13 +296,11 @@ export class modifier_vardor_piercing_shot_charges extends BaseModifier_Plus {
     OnIntervalThink(): void {
         let expected_charges = this.ability.GetTalentSpecialValueFor("initial_yari_count");
         let yaris = 0;
-        let units = FindUnitsInRadius(this.caster.GetTeamNumber(), this.caster.GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FindOrder.FIND_ANY_ORDER, false);
+        let units = this.caster.FindChildByName("npc_imba_vardor_spear_dummy");
         for (const [_, unit] of GameFunc.iPair(units)) {
-            if (unit.GetUnitName() == "npc_dota_vardor_spear_dummy") {
-                let modifier = unit.findBuff<modifier_vardor_yari_unit>("modifier_vardor_yari_unit");
-                if (modifier.is_charge_yari == 1) {
-                    yaris = yaris + 1;
-                }
+            let modifier = unit.findBuff<modifier_vardor_yari_unit>("modifier_vardor_yari_unit");
+            if (modifier.is_charge_yari == 1) {
+                yaris = yaris + 1;
             }
         }
         let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.caster.GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
@@ -691,8 +686,9 @@ export class vardor_graceful_jump extends BaseAbility_Plus {
         let yari_search_radius = this.GetSpecialValueFor("yari_search_radius");
         yari_search_radius = yari_search_radius + cast_range;
         let units = FindUnitsInRadius(caster.GetTeamNumber(), location, undefined, yari_search_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FindOrder.FIND_CLOSEST, false);
+
         for (const [_, unit] of GameFunc.iPair(units)) {
-            if (unit.GetUnitName() == "npc_dota_vardor_spear_dummy") {
+            if (unit.GetUnitName() == "npc_imba_vardor_spear_dummy") {
                 return UnitFilterResult.UF_SUCCESS;
             }
         }
@@ -713,7 +709,7 @@ export class vardor_graceful_jump extends BaseAbility_Plus {
             yari_search_radius = yari_search_radius + cast_range;
             let units = FindUnitsInRadius(caster.GetTeamNumber(), this.GetCursorPosition(), undefined, yari_search_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FindOrder.FIND_CLOSEST, false);
             for (const [_, unit] of GameFunc.iPair(units)) {
-                if (unit.GetUnitName() == "npc_dota_vardor_spear_dummy") {
+                if (unit.GetUnitName() == "npc_imba_vardor_spear_dummy") {
                     target = unit;
                     return;
                 }
@@ -794,7 +790,7 @@ export class vardor_graceful_jump extends BaseAbility_Plus {
         if (!target) {
             return;
         }
-        if (target.GetUnitName() == "npc_dota_vardor_spear_dummy") {
+        if (target.GetUnitName() == "npc_imba_vardor_spear_dummy") {
             target.ForceKill(false);
             target.RemoveSelf();
         } else {

@@ -384,7 +384,7 @@ export class imba_chen_holy_persuasion extends BaseAbility_Plus {
             this.GetCasterPlus().EmitSound("Hero_Chen.HolyPersuasionCast");
             target.EmitSound("Hero_Chen.HolyPersuasionEnemy");
             target.Purge(true, true, false, false, false);
-            // if (string.find(target.GetUnitName(), "guys_")) {
+            // if (target.GetUnitName().includes("guys_")) {
             let new_lane_creep = this.GetCasterPlus().CreateSummon(target.GetUnitName(), target.GetAbsOrigin(), 60, false);
             new_lane_creep.SetBaseMaxHealth(target.GetMaxHealth());
             new_lane_creep.SetHealth(target.GetHealth());

@@ -19,7 +19,7 @@ export class item_imba_hand_of_midas extends BaseItem_Plus {
             if (target.IsOther()) {
                 return UnitFilterResult.UF_FAIL_CUSTOM;
             }
-            if (string.find(target.GetUnitName(), "necronomicon")) {
+            if (target.GetUnitName().includes("necronomicon")) {
                 return UnitFilterResult.UF_FAIL_CUSTOM;
             }
             if (target.IsConsideredHero()) {
@@ -37,7 +37,7 @@ export class item_imba_hand_of_midas extends BaseItem_Plus {
             if (target.IsOther()) {
                 return "#dota_hud_error_cant_use_on_wards";
             }
-            if (string.find(target.GetUnitName(), "necronomicon")) {
+            if (target.GetUnitName().includes("necronomicon")) {
                 return "#dota_hud_error_cant_use_on_necrobook";
             }
         }

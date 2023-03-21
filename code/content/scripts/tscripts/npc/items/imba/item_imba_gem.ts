@@ -1,7 +1,6 @@
 
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus } from "../../entityPlus/BaseModifier_Plus";
-import { BaseNpc_Plus } from "../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 @registerAbility()
@@ -90,13 +89,13 @@ export class modifier_item_imba_gem_of_true_sight extends BaseModifier_Plus {
         let item = this.GetItemPlus<item_imba_gem>();
         if (!this.GetParentPlus().IsRealUnit()) {
             this.GetParentPlus().DropItem(item, true);
-            item.dummy_unit = BaseNpc_Plus.CreateUnitByName("npc_dummy_unit_perma", pos, this.GetCasterPlus(), true);
+            item.dummy_unit = this.GetCasterPlus().CreateDummyUnit(pos, -1, true);
             item.dummy_unit.AddNewModifier(this.GetCasterPlus(), item, "modifier_item_imba_gem_of_true_sight_dropped", {});
             return;
         }
         if (!this.GetParentPlus().IsReincarnating()) {
             this.GetParentPlus().DropItem(this.GetItemPlus(), true);
-            item.dummy_unit = BaseNpc_Plus.CreateUnitByName("npc_dummy_unit_perma", pos, this.GetCasterPlus(), true);
+            item.dummy_unit = this.GetCasterPlus().CreateDummyUnit(pos, -1, true);
             item.dummy_unit.AddNewModifier(this.GetCasterPlus(), item, "modifier_item_imba_gem_of_true_sight_dropped", {});
         }
     }

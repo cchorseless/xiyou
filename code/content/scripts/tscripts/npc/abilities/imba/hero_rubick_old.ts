@@ -418,7 +418,7 @@ export class modifier_imba_rubick_spell_steal_controller extends BaseModifier_Pl
             let talent = target.GetAbilityByIndex(i);
             if (talent != undefined) {
                 let name = talent.GetAbilityName();
-                if (string.find(name, "special_bonus_")) {
+                if (name.includes("special_bonus_")) {
                     if (talent.GetLevel() > 0) {
                         rubick.AddAbility(name);
                         this.talent_ability.push(rubick.FindAbilityByName(name) as IBaseAbility_Plus);
@@ -430,7 +430,7 @@ export class modifier_imba_rubick_spell_steal_controller extends BaseModifier_Pl
             let talent = rubick.GetAbilityByIndex(i);
             if (talent != undefined) {
                 let name = talent.GetAbilityName();
-                if (string.find(name, "special_bonus_")) {
+                if (name.includes("special_bonus_")) {
                     for (const [_, ex_talent] of GameFunc.iPair(this.talent_ability)) {
                         if (!ex_talent.IsNull() && talent == ex_talent) {
                             ex_talent.SetLevel(1);

@@ -3,13 +3,12 @@ import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
-import { BaseNpc_Plus } from "../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 
 function IsUndyingZombie(unit: IBaseNpc_Plus) {
     if (unit.GetClassname) {
-        if (unit.GetClassname() == "npc_dota_unit_undying_zombie") {
+        if (unit.GetClassname() == "npc_imba_unit_undying_zombie") {
             return true;
         }
     }
@@ -17,7 +16,7 @@ function IsUndyingZombie(unit: IBaseNpc_Plus) {
 }
 function IsUndyingTombstone(unit: IBaseNpc_Plus) {
     if (unit.GetClassname) {
-        if (unit.GetClassname() == "npc_dota_unit_undying_tombstone") {
+        if (unit.GetClassname() == "npc_imba_unit_undying_tombstone") {
             return true;
         }
     }
@@ -25,8 +24,8 @@ function IsUndyingTombstone(unit: IBaseNpc_Plus) {
 }
 function GenerateZombieType() {
     let zombie_types = {
-        "1": "npc_dota_undying_imba_zombie_torso",
-        "2": "npc_dota_undying_imba_zombie"
+        "1": "npc_imba_undying_imba_zombie_torso",
+        "2": "npc_imba_undying_imba_zombie"
     }
     let chosen_zombie = GFuncRandom.RandomValue(zombie_types);
     return chosen_zombie;
@@ -708,14 +707,11 @@ export class imba_undying_tombstone extends BaseAbility_Plus {
         let duration = ability.GetSpecialValueFor("duration");
         let trees_destroy_radius = ability.GetSpecialValueFor("trees_destroy_radius");
         EmitSoundOnLocationWithCaster(target_point, cast_sound, caster);
-        let tombstone = BaseNpc_Plus.CreateUnitByName("npc_dota_undying_imba_tombstone", target_point, caster, true);
+        let tombstone = caster.CreateSummon("npc_imba_undying_imba_tombstone", target_point, duration, true);
         tombstone.SetOwner(caster);
         tombstone.SetBaseMaxHealth(tombstone_health);
         tombstone.SetMaxHealth(tombstone_health);
         tombstone.SetHealth(tombstone_health);
-        tombstone.AddNewModifier(this.GetCasterPlus(), this, "modifier_kill", {
-            duration: duration
-        });
         let tombstone_aura_ability_handle = tombstone.FindAbilityByName(tombstone_aura_ability);
         let tombstone_spell_immunity_ability_handle = tombstone.FindAbilityByName(tombstone_spell_immunity_ability);
         if (tombstone_aura_ability_handle && tombstone_spell_immunity_ability_handle) {
@@ -784,7 +780,7 @@ export class modifier_imba_undying_tombstone_aura extends BaseModifier_Plus {
         let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.caster.GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE, FindOrder.FIND_ANY_ORDER, false);
         for (const [_, enemy] of GameFunc.iPair(enemies)) {
             if (!enemy.IsCourier() && !IsUndyingZombie(enemy)) {
-                let zombie = BaseNpc_Plus.CreateUnitByName(GenerateZombieType(), enemy.GetAbsOrigin(), this.caster, true);
+                let zombie = this.caster.CreateSummon(GenerateZombieType(), enemy.GetAbsOrigin(), -1, true);
                 zombie.EmitSound("Undying_Zombie.Spawn");
                 zombie.SetBaseDamageMin(zombie.GetBaseDamageMin() + this.owner.GetTalentValue("special_bonus_imba_undying_tombstone_zombie_damage"));
                 zombie.SetBaseDamageMax(zombie.GetBaseDamageMax() + this.owner.GetTalentValue("special_bonus_imba_undying_tombstone_zombie_damage"));
@@ -822,7 +818,7 @@ export class modifier_imba_undying_tombstone_aura extends BaseModifier_Plus {
             if (unit == attacker) {
                 expired = true;
             }
-            let zombies = Entities.FindAllByClassname("npc_dota_unit_undying_zombie") as IBaseNpc_Plus[];
+            let zombies = this.caster.FindChildByName("npc_imba_unit_undying_zombie");
             for (const zombie of (zombies)) {
                 if (zombie.GetOwnerPlus() == this.owner) {
                     if (expired) {

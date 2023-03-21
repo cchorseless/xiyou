@@ -1397,7 +1397,7 @@ export class imba_tiny_grow extends BaseAbility_Plus {
     SetupModel(level: number) {
         let model_path = "models/heroes/tiny_0" + level + "/tiny_0" + level;
         if (level < 5) {
-            if (string.find(this.GetCasterPlus().GetModelName(), "tiny_prestige")) {
+            if (this.GetCasterPlus().GetModelName().includes("tiny_prestige")) {
                 this.GetCasterPlus().SetOriginalModel("models/items/tiny/tiny_prestige/tiny_prestige_lvl_0" + level + ".vmdl");
                 this.GetCasterPlus().SetModel("models/items/tiny/tiny_prestige/tiny_prestige_lvl_0" + level + ".vmdl");
             } else {

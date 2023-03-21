@@ -314,7 +314,8 @@ export class imba_timbersaw_timber_chain extends BaseAbility_Plus {
                 }
             }
         } else {
-            for (const ent of (Entities.FindAllByClassname("npc_dota_thinker") as IBaseNpc_Plus[])) {
+            let thinkers = this.GetCasterPlus().FindChildByFilter(u => u.IsThinker());
+            for (const ent of thinkers) {
                 if (ent.TempData().bTimberChainTarget && (ProjectileManager.GetLinearProjectileLocation(projectileHandle) - ent.GetAbsOrigin() as Vector).Length2D() <= this.GetSpecialValueFor("chain_radius")) {
                     EmitSoundOnLocationWithCaster(ent.GetAbsOrigin(), "Hero_Shredder.TimberChain.Impact", this.GetCasterPlus());
                     this.GetCasterPlus().EmitSound("Hero_Shredder.TimberChain.Retract");

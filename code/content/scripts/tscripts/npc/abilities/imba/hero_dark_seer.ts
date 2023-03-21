@@ -167,7 +167,6 @@ export class modifier_imba_dark_seer_vacuum extends BaseModifierMotionHorizontal
         }
         // this.GetParentPlus().RemoveHorizontalMotionController();
         this.GetParentPlus().SetAbsOrigin(this.vacuum_pos);
-        this.GetParentPlus().RemoveGesture(GameActivity_t.ACT_DOTA_FLAIL);
         ResolveNPCPositions(this.vacuum_pos, 128);
         let damageTable = {
             victim: this.GetParentPlus(),

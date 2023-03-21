@@ -172,10 +172,10 @@ export class modifier_imba_shotgun_passive extends BaseModifier_Plus {
                                 [15, Vector(128, 24, 24)],
                                 [16, Vector(255, 0, 0)],
                             ],
-                            UnitTest: GHandler.create(this, (self, unit) => {
-                                return unit.GetUnitName() != "npc_dummy_unit" && unit.GetTeamNumber() != hero.GetTeamNumber();
+                            UnitTest: GHandler.create(this, (pj, unit) => {
+                                return !unit.IsDummyUnit() && unit.GetTeamNumber() != hero.GetTeamNumber();
                             }),
-                            OnUnitHit: GHandler.create(this, (self, unit) => {
+                            OnUnitHit: GHandler.create(this, (pj, unit) => {
                                 if (last_target == undefined) {
                                     last_target = unit;
                                 } else if (last_target != unit) {

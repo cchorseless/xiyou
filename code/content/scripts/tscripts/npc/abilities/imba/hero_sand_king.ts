@@ -243,7 +243,7 @@ export class imba_sandking_sand_storm extends BaseAbility_Plus {
         let channel_time = super.GetChannelTime();
         caster.AddNewModifier(caster, ability, modifier_sandstorm, {});
         caster.AddNewModifier(caster, ability, modifier_invis, {});
-        if (string.find(caster.GetUnitName(), "npc_imba_pugna_nether_ward")) {
+        if (caster.GetUnitName().includes("npc_imba_pugna_nether_ward")) {
             this.AddTimer(0.5, () => {
                 if (!caster.IsAlive()) {
                     ability.OnChannelFinish(true);
@@ -747,7 +747,7 @@ export class imba_sandking_epicenter extends BaseAbility_Plus {
         ParticleManager.SetParticleControlEnt(this.particle_sandblast_fx, 0, caster, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_tail", caster.GetAbsOrigin(), true);
         ParticleManager.SetParticleControlEnt(this.particle_sandblast_fx, 1, caster, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_tail", caster.GetAbsOrigin(), true);
         ParticleManager.SetParticleControlEnt(this.particle_sandblast_fx, 2, caster, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_tail", caster.GetAbsOrigin(), true);
-        if (string.find(caster.GetUnitName(), "npc_imba_pugna_nether_ward")) {
+        if (caster.GetUnitName().includes("npc_imba_pugna_nether_ward")) {
             this.AddTimer(channel_time, () => {
                 ParticleManager.DestroyParticle(this.particle_sandblast_fx, false);
                 ParticleManager.ReleaseParticleIndex(this.particle_sandblast_fx);

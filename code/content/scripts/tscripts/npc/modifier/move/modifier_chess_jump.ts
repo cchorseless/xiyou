@@ -55,7 +55,6 @@ export class modifier_chess_jump extends BaseModifierMotionBoth_Plus {
             } else if (npc.GetTeamNumber() == DOTATeam_t.DOTA_TEAM_BADGUYS) {
                 npc.SetForwardVector(Vector(0, -1, 0));
             }
-            npc.RemoveGesture(this.animation);
             if (this.DestroyHandler) {
                 this.DestroyHandler.run();
                 this.DestroyHandler = null;

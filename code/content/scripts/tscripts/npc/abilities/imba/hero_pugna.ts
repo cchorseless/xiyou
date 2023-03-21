@@ -3,7 +3,6 @@ import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
-import { BaseNpc_Plus } from "../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 @registerAbility()
@@ -158,7 +157,7 @@ export class imba_pugna_decrepify extends BaseAbility_Plus {
     }
     CastFilterResultTarget(target: CDOTA_BaseNPC): UnitFilterResult {
         if (IsServer()) {
-            if (string.find(target.GetUnitName(), "npc_dota_unit_tombstone") || string.find(target.GetUnitName(), "npc_imba_pugna_nether_ward")) {
+            if (target.GetUnitName().includes("npc_imba_unit_tombstone") || target.GetUnitName().includes("npc_imba_pugna_nether_ward")) {
                 return UnitFilterResult.UF_SUCCESS;
             }
             let nResult = UnitFilter(target, this.GetAbilityTargetTeam(), this.GetAbilityTargetType(), this.GetAbilityTargetFlags(), this.GetCasterPlus().GetTeamNumber());
@@ -236,7 +235,7 @@ export class modifier_imba_decrepify extends BaseModifier_Plus {
     }
     BeRefresh(p_0: any,): void {
         if (IsServer()) {
-            this.OnDestroy();
+            this.BeDestroy();
             this.damage_stored = 0;
         }
     }
@@ -376,15 +375,14 @@ export class imba_pugna_nether_ward extends BaseAbility_Plus {
         EmitSoundOn(sound_cast, caster);
         for (let i = 0; i < 1 + caster.GetTalentValue("special_bonus_imba_pugna_8"); i++) {
             let nether_ward = undefined;
+            let time = duration - duration * caster.GetTalentValue("special_bonus_imba_pugna_8", "duration_reduce_pct") * 0.01;
             if (i != 0 || !this.GetCursorTarget() || this.GetCursorTarget() != this.GetCasterPlus()) {
-                nether_ward = BaseNpc_Plus.CreateUnitByName("npc_imba_pugna_nether_ward_" + (ability_level), point[i], caster, true);
+                nether_ward = caster.CreateSummon("npc_imba_pugna_nether_ward_" + (ability_level), point[i], time, true);
             } else {
-                nether_ward = BaseNpc_Plus.CreateUnitByName("npc_imba_pugna_nether_ward_" + (ability_level), this.GetCasterPlus().GetAbsOrigin() + (this.GetCasterPlus().GetForwardVector() * 150) as Vector, caster, true);
+                nether_ward = caster.CreateSummon("npc_imba_pugna_nether_ward_" + (ability_level), this.GetCasterPlus().GetAbsOrigin() + (this.GetCasterPlus().GetForwardVector() * 150) as Vector, time, true);
             }
             // nether_ward.SetControllableByPlayer(player_id, true);
-            nether_ward.AddNewModifier(caster, ability, "modifier_kill", {
-                duration: duration - duration * caster.GetTalentValue("special_bonus_imba_pugna_8", "duration_reduce_pct") * 0.01
-            });
+
             nether_ward.AddNewModifier(caster, ability, "modifier_rooted", {});
             let aura_ability = nether_ward.FindAbilityByName(ability_ward);
             aura_ability.SetLevel(ability_level);
@@ -574,7 +572,7 @@ export class modifier_imba_nether_ward_degen extends BaseModifier_Plus {
             if (target != this.parent) {
                 return;
             }
-            if (string.find(target.GetUnitName(), "npc_imba_pugna_nether_ward")) {
+            if (target.GetUnitName().includes("npc_imba_pugna_nether_ward")) {
                 return;
             }
             if (cast_ability.IsNetherWardStealable) {
@@ -707,7 +705,7 @@ export class modifier_imba_nether_ward_degen extends BaseModifier_Plus {
                 "85": "imba_alchemist_unstable_concoction",
                 "86": "imba_alchemist_chemical_rage"
             }
-            if (string.find(cast_ability_name, "item_")) {
+            if (cast_ability_name.includes("item_")) {
                 return;
             }
             if (target.IsMagicImmune()) {
@@ -1076,7 +1074,7 @@ export class modifier_imba_life_drain extends BaseModifier_Plus {
                     let recover_mana = actual_damage - missing_health;
                     this.parent.GiveMana(recover_mana);
                 }
-                if (string.find(this.parent.GetUnitName(), this.nether_ward)) {
+                if (this.parent.GetUnitName().includes(this.nether_ward)) {
                     this.parent.SetHealth(this.parent.GetHealth() + 1);
                 }
             } else {
@@ -1094,7 +1092,7 @@ export class modifier_imba_life_drain extends BaseModifier_Plus {
                     let recover_mana = actual_damage - missing_health;
                     this.caster.GiveMana(recover_mana);
                 }
-                if (string.find(this.caster.GetUnitName(), this.nether_ward)) {
+                if (this.caster.GetUnitName().includes(this.nether_ward)) {
                     this.caster.SetHealth(this.caster.GetHealth() + 1);
                 }
             }

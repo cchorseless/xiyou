@@ -188,17 +188,17 @@ export class storegga_grab_throw extends BaseAbility_Plus {
             this.knockback_distance = this.GetSpecialValueFor("knockback_distance");
             this.knockback_damage = this.GetSpecialValueFor("knockback_damage");
             this.knockback_height = this.GetSpecialValueFor("knockback_height");
-            if (this.hThrowTarget.GetUnitName() == "npc_dota_storegga_rock") {
+            if (this.hThrowTarget.GetUnitName() == "npc_imba_storegga_rock") {
                 this.throw_speed = this.throw_speed * 1.5;
                 this.impact_radius = this.impact_radius * 0.75;
                 this.knockback_damage = this.knockback_damage * 0.75;
             }
-            if (this.hThrowTarget.GetUnitName() == "npc_dota_storegga_rock2") {
+            if (this.hThrowTarget.GetUnitName() == "npc_imba_storegga_rock2") {
                 this.throw_speed = this.throw_speed * 1;
                 this.impact_radius = this.impact_radius * 1.25;
                 this.knockback_damage = this.knockback_damage * 1.5;
             }
-            if (this.hThrowTarget.GetUnitName() == "npc_dota_storegga_rock3") {
+            if (this.hThrowTarget.GetUnitName() == "npc_imba_storegga_rock3") {
                 this.throw_speed = this.throw_speed * 0.5;
                 this.impact_radius = this.impact_radius * 1.5;
                 this.knockback_damage = this.knockback_damage * 3;

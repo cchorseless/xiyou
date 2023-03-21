@@ -4,7 +4,6 @@ import { AoiHelper } from "../../../helper/AoiHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
-import { BaseNpc_Plus } from "../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 @registerAbility()
@@ -734,7 +733,6 @@ export class imba_shadow_shaman_mass_serpent_ward extends BaseAbility_Plus {
         let caster = this.GetCasterPlus();
         let target_point = this.GetCursorPosition();
         let ward_level = this.GetLevel();
-        let ward_name = "npc_dota_shadow_shaman_ward_";
         let response = "shadowshaman_shad_ability_ward_";
         let spawn_particle = "particles/units/heroes/hero_shadowshaman/shadowshaman_ward_spawn.vpcf";
         let ward_count = this.GetSpecialValueFor("ward_count");
@@ -770,12 +768,9 @@ export class imba_shadow_shaman_mass_serpent_ward extends BaseAbility_Plus {
             new_hp = this.GetSpecialValueFor("snake_charmer_health");
             duration = math.max(this.GetSpecialValueFor("duration") - elapsedTime + this.GetSpecialValueFor("snake_charmer_bonus_duration"), this.GetSpecialValueFor("snake_charmer_bonus_duration"));
         }
-        let ward = BaseNpc_Plus.CreateUnitByName("npc_dota_shadow_shaman_ward_" + math.min(this.GetLevel(), 3), position, this.GetCasterPlus(), true);
+        let ward = this.GetCasterPlus().CreateSummon("npc_imba_shadow_shaman_ward_" + math.min(this.GetLevel(), 3), position, duration, true);
         ward.SetForwardVector(this.GetCasterPlus().GetForwardVector());
         ward.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_mass_serpent_ward", {});
-        ward.AddNewModifier(this.GetCasterPlus(), this, "modifier_kill", {
-            duration: duration
-        });
         // ward.SetControllableByPlayer(this.GetCasterPlus().GetPlayerID(), true);
 
         ward.SetBaseMaxHealth(new_hp);
@@ -905,7 +900,7 @@ export class modifier_imba_mass_serpent_ward extends BaseModifier_Plus {
         if (!IsServer()) {
             return;
         }
-        if (keys.attacker == this.GetParentPlus() && keys.attacker != keys.unit && this.GetAbilityPlus() && !keys.unit.IsOther() && keys.unit.GetUnitName() != "npc_dota_unit_undying_zombie") {
+        if (keys.attacker == this.GetParentPlus() && keys.attacker != keys.unit && this.GetAbilityPlus() && !keys.unit.IsOther() && keys.unit.GetUnitName() != "npc_imba_unit_undying_zombie") {
             if (!keys.unit.IsRealUnit() && !keys.unit.IsBuilding()) {
                 this.GetParentPlus().SetMaxHealth(this.GetParentPlus().GetMaxHealth() + this.snake_charmer_creep_count);
                 this.GetParentPlus().ApplyHeal(this.snake_charmer_creep_count, this.GetAbilityPlus());

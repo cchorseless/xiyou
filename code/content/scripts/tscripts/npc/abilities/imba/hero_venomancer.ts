@@ -3,7 +3,6 @@ import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
-import { BaseNpc_Plus } from "../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 @registerModifier()
@@ -83,16 +82,13 @@ export class imba_venomancer_plague_ward_v2 extends BaseAbility_Plus {
         ParticleManager.SetParticleControlEnt(spawn_fx, 0, this.GetCasterPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_attack1", this.GetCasterPlus().GetAbsOrigin(), true);
         ParticleManager.SetParticleControlEnt(spawn_fx, 1, this.GetCasterPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_attack2", this.GetCasterPlus().GetAbsOrigin(), true);
         ParticleManager.ReleaseParticleIndex(spawn_fx);
-        let plague_ward = BaseNpc_Plus.CreateUnitByName("npc_dota_venomancer_plague_ward_" + math.min(this.GetLevel(), 4), talent_spawn_location || this.GetCursorPosition(), this.GetCasterPlus(), true);
+        let plague_ward = this.GetCasterPlus().CreateSummon("npc_imba_venomancer_plague_ward_" + math.min(this.GetLevel(), 4), talent_spawn_location || this.GetCursorPosition(), this.GetSpecialValueFor("duration"), true);
         plague_ward.EmitSound("Hero_Venomancer.Plague_Ward");
         if (this.GetCasterPlus().HasAbility("imba_venomancer_venomous_gale")) {
             GFuncEntity.AddRangeIndicator(plague_ward, this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus<imba_venomancer_venomous_gale>("imba_venomancer_venomous_gale"), "ward_range", undefined, 183, 247, 33, false, false, true);
         }
         plague_ward.SetForwardVector(this.GetCasterPlus().GetForwardVector());
         plague_ward.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_venomancer_plague_ward_v2", {});
-        plague_ward.AddNewModifier(this.GetCasterPlus(), this, "modifier_kill", {
-            duration: this.GetSpecialValueFor("duration")
-        });
         plague_ward.AddNewModifier(this.GetCasterPlus(), this, "modifier_neutral_spell_immunity_visible", {
             duration: this.GetSpecialValueFor("duration")
         });
@@ -813,7 +809,7 @@ export class modifier_imba_poison_sting_debuff_ward extends BaseModifier_Plus {
             1: GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE
         });
     } */
-    BeCreated(params: any): void {
+    Init(params: any): void {
         let ability = this.GetAbilityPlus();
         this.damage = ability.GetSpecialValueFor("damage");
         this.movement_speed_pct = ability.GetSpecialValueFor("movement_speed_pct");
@@ -821,9 +817,7 @@ export class modifier_imba_poison_sting_debuff_ward extends BaseModifier_Plus {
         this.StartIntervalThink(1);
         this.DamageTick(true);
     }
-    BeRefresh(params: any): void {
-        this.OnCreated(params);
-    }
+
     DamageTick(bFirstHit = false) {
         let damage;
         if (bFirstHit) {
@@ -899,7 +893,7 @@ export class imba_venomancer_plague_ward extends BaseAbility_Plus {
             scourge_damage = scourge_damage + (scourge_damage * caster.GetTalentValue("special_bonus_imba_venomancer_5") / 100);
             plague_hp = plague_hp + (plague_hp * caster.GetTalentValue("special_bonus_imba_venomancer_5") / 100);
             plague_damage = plague_damage + (plague_damage * caster.GetTalentValue("special_bonus_imba_venomancer_5") / 100);
-            let scourge_ward = BaseNpc_Plus.CreateUnitByName("npc_imba_venomancer_scourge_ward", target_loc, caster, true);
+            let scourge_ward = caster.CreateSummon("npc_imba_venomancer_scourge_ward", target_loc, duration, true);
             scourge_ward.EmitSound("Hero_Venomancer.Plague_Ward");
             let spawn_fx = ResHelper.CreateParticleEx("particles/units/heroes/hero_venomancer/venomancer_ward_cast.vpcf", ParticleAttachment_t.PATTACH_POINT_FOLLOW, caster);
             ParticleManager.SetParticleControlEnt(spawn_fx, 0, caster, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_attack1", caster.GetAbsOrigin(), true);
@@ -914,9 +908,6 @@ export class imba_venomancer_plague_ward extends BaseAbility_Plus {
             }
             // scourge_ward.SetControllableByPlayer(caster.GetPlayerID(), true);
             scourge_ward.SetForwardVector(direction);
-            scourge_ward.AddNewModifier(caster, this, "modifier_kill", {
-                duration: duration
-            });
             scourge_ward.AddNewModifier(caster, this, "modifier_magic_immune", {
                 duration: duration
             });
@@ -938,12 +929,9 @@ export class imba_venomancer_plague_ward extends BaseAbility_Plus {
                 mod_ward.ward_list = []
                 for (let i = 0; i < plague_count; i++) {
                     let plague_loc = target_loc + GFuncVector.RotateVector2D(direction, start_angle + (angle * i), true) * plague_radius as Vector;
-                    let plague_ward = BaseNpc_Plus.CreateUnitByName("npc_imba_venomancer_plague_ward", plague_loc, caster, true);
+                    let plague_ward = caster.CreateSummon("npc_imba_venomancer_plague_ward", plague_loc, duration, true);
                     // plague_ward.SetControllableByPlayer(caster.GetPlayerID(), true);
                     plague_ward.SetForwardVector(direction);
-                    let mod_kill = plague_ward.AddNewModifier(caster, this, "modifier_kill", {
-                        duration: duration
-                    });
                     plague_ward.AddNewModifier(caster, this, "modifier_magic_immune", {
                         duration: duration
                     });

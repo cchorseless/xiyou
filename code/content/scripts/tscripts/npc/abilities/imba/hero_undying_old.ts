@@ -3,7 +3,6 @@ import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
-import { BaseNpc_Plus } from "../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 @registerAbility()
@@ -574,7 +573,7 @@ export class imba_undying_tombstone extends BaseAbility_Plus {
                 EmitSoundOnClient(GFuncRandom.RandomValue(this.responses), this.GetCasterPlus().GetPlayerOwner());
             }
         }
-        let tombstone = BaseNpc_Plus.CreateUnitByName("npc_dota_unit_tombstone" + this.GetLevel(), position, this.GetCasterPlus(), true);
+        let tombstone = this.GetCasterPlus().CreateSummon("npc_imba_unit_tombstone" + this.GetLevel(), position, this.GetSpecialValueFor("duration"), true);
         tombstone.SetBaseMaxHealth(this.GetTalentSpecialValueFor("hits_to_destroy_tooltip") * 4);
         tombstone.SetMaxHealth(this.GetTalentSpecialValueFor("hits_to_destroy_tooltip") * 4);
         tombstone.SetHealth(this.GetTalentSpecialValueFor("hits_to_destroy_tooltip") * 4);
@@ -582,9 +581,6 @@ export class imba_undying_tombstone extends BaseAbility_Plus {
             duration: this.GetSpecialValueFor("duration")
         });
         tombstone.AddNewModifier(this.GetCasterPlus(), this, "modifier_magic_immune", {
-            duration: this.GetSpecialValueFor("duration")
-        });
-        tombstone.AddNewModifier(this.GetCasterPlus(), this, "modifier_kill", {
             duration: this.GetSpecialValueFor("duration")
         });
         GridNav.DestroyTreesAroundPoint(position, 300, true);
@@ -621,8 +617,8 @@ export class modifier_imba_undying_tombstone_zombie_aura extends BaseModifier_Pl
             return;
         }
         this.zombie_types = {
-            "1": "npc_dota_unit_undying_zombie",
-            "2": "npc_dota_unit_undying_zombie_torso"
+            "1": "npc_imba_unit_undying_zombie",
+            "2": "npc_imba_unit_undying_zombie_torso"
         }
         this.OnIntervalThink();
         this.StartIntervalThink(this.zombie_interval);
@@ -632,7 +628,7 @@ export class modifier_imba_undying_tombstone_zombie_aura extends BaseModifier_Pl
         let deathstrike_ability = undefined;
         for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.caster.GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE, FindOrder.FIND_ANY_ORDER, false))) {
             if (!enemy.IsCourier() && !enemy.GetUnitName().includes("undying_zombie")) {
-                zombie = BaseNpc_Plus.CreateUnitByName(GFuncRandom.RandomValue(this.zombie_types), enemy.GetAbsOrigin(), this.caster, true);
+                zombie = this.caster.CreateSummon(GFuncRandom.RandomValue(this.zombie_types), enemy.GetAbsOrigin(), -1, true);
                 zombie.EmitSound("Undying_Zombie.Spawn");
                 zombie.SetBaseDamageMin(zombie.GetBaseDamageMin() + this.caster.GetTalentValue("special_bonus_imba_undying_tombstone_zombie_damage"));
                 zombie.SetBaseDamageMax(zombie.GetBaseDamageMax() + this.caster.GetTalentValue("special_bonus_imba_undying_tombstone_zombie_damage"));
@@ -655,7 +651,7 @@ export class modifier_imba_undying_tombstone_zombie_aura extends BaseModifier_Pl
         if (!IsServer()) {
             return;
         }
-        for (const ent of (this.caster.FindChildByName("npc_dota_unit_undying_zombie"))) {
+        for (const ent of (this.caster.FindChildByName("npc_imba_unit_undying_zombie"))) {
             if (ent.GetOwnerPlus() == this.GetParentPlus()) {
                 if (this.GetRemainingTime() > 0) {
                     ent.ForceKill(false);

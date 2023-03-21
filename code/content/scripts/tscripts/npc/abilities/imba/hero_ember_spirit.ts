@@ -465,23 +465,21 @@ export class modifier_imba_fire_remnant_state extends BaseModifier_Plus {
     }
     CheckState(): Partial<Record<modifierstate, boolean>> {
         let state = {
-            [modifierstate.MODIFIER_STATE_NO_UNIT_COLLISION]: true,
-            [modifierstate.MODIFIER_STATE_FLYING_FOR_PATHING_PURPOSES_ONLY]: true,
-            [modifierstate.MODIFIER_STATE_INVULNERABLE]: true,
-            [modifierstate.MODIFIER_STATE_OUT_OF_GAME]: true,
-            [modifierstate.MODIFIER_STATE_NO_HEALTH_BAR]: true,
-            [modifierstate.MODIFIER_STATE_UNSELECTABLE]: true,
-            [modifierstate.MODIFIER_STATE_NOT_ON_MINIMAP]: true,
-            [modifierstate.MODIFIER_STATE_NO_TEAM_SELECT]: true,
-            [modifierstate.MODIFIER_STATE_NO_TEAM_MOVE_TO]: true,
-            [modifierstate.MODIFIER_STATE_UNTARGETABLE]: true,
-            [modifierstate.MODIFIER_STATE_MAGIC_IMMUNE]: true,
             [modifierstate.MODIFIER_STATE_DISARMED]: true,
-            [modifierstate.MODIFIER_STATE_SILENCED]: true,
+            [modifierstate.MODIFIER_STATE_FLYING_FOR_PATHING_PURPOSES_ONLY]: true,
+            [modifierstate.MODIFIER_STATE_NO_HEALTH_BAR]: true,
+            [modifierstate.MODIFIER_STATE_INVULNERABLE]: true,
+            [modifierstate.MODIFIER_STATE_NO_UNIT_COLLISION]: true,
+            [modifierstate.MODIFIER_STATE_OUT_OF_GAME]: true,
+            [modifierstate.MODIFIER_STATE_UNSELECTABLE]: true,
+            [modifierstate.MODIFIER_STATE_FROZEN]: true,
         }
         return state;
     }
 
+    public BeCreated(params?: IModifierTable): void {
+
+    }
     BeDestroy(): void {
         if (IsServer()) {
             GLogHelper.print(1111111111)
@@ -818,11 +816,11 @@ export class imba_ember_spirit_fire_remnant extends BaseAbility_Plus {
             charges_modifier.SetStackCount(charges_modifier.GetStackCount() - 1);
             this.GetCasterPlus().EmitSound("Hero_EmberSpirit.FireRemnant.Cast");
             let duration = this.GetSpecialValueFor("duration");
-            let remnant = this.GetCasterPlus().CreateSummon("npc_imba_ember_spirit_remnant", target_loc, -1, true);
+            let remnant = this.GetCasterPlus().CreateSummon("npc_imba_ember_spirit_remnant", target_loc, duration, true);
             remnant.EmitSound("Hero_EmberSpirit.FireRemnant.Activate");
             remnant.SetRenderColor(255, 0, 0);
             remnant.SetForwardVector((target_loc - this.GetCasterPlus().GetAbsOrigin() as Vector).Normalized())
-            remnant.StartGesture(GameActivity_t.ACT_DOTA_RUN)
+            // remnant.StartGesture(GameActivity_t.ACT_DOTA_RUN)
             remnant.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_fire_remnant_state", {
                 duration: duration
             });

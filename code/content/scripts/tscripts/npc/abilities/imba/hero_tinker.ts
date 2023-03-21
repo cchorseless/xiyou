@@ -581,7 +581,7 @@ export class imba_tinker_march_of_the_machines extends BaseAbility_Plus {
                                 });
                             }),
                             UnitTest: GHandler.create(this, (pinfo: GLineProjectile, unit) => {
-                                return unit.GetUnitName() != "npc_dummy_unit" && unit.GetTeamNumber() != caster.GetTeamNumber();
+                                return !unit.IsDummyUnit() && unit.GetTeamNumber() != caster.GetTeamNumber();
                             }),
                             OnUnitHit: GHandler.create(this, (pinfo: GLineProjectile, unit) => {
                                 ability.OnProjectileHit_ExtraData(unit, pinfo.GetPosition(), {
@@ -626,7 +626,7 @@ export class imba_tinker_march_of_the_machines extends BaseAbility_Plus {
                                 });
                             }),
                             UnitTest: GHandler.create(this, (pinfo: GLineProjectile, unit: IBaseNpc_Plus) => {
-                                return unit.GetUnitName() != "npc_dummy_unit" && unit.GetTeamNumber() != caster.GetTeamNumber();
+                                return !unit.IsDummyUnit() && unit.GetTeamNumber() != caster.GetTeamNumber();
                             }),
                             OnUnitHit: GHandler.create(this, (pinfo: GLineProjectile, unit: IBaseNpc_Plus) => {
                                 ability.OnProjectileHit_ExtraData(unit, pinfo.GetPosition(), {
@@ -671,7 +671,7 @@ export class imba_tinker_march_of_the_machines extends BaseAbility_Plus {
                                 });
                             }),
                             UnitTest: GHandler.create(this, (pinfo: GLineProjectile, unit: IBaseNpc_Plus) => {
-                                return unit.GetUnitName() != "npc_dummy_unit" && unit.GetTeamNumber() != caster.GetTeamNumber();
+                                return !unit.IsDummyUnit() && unit.GetTeamNumber() != caster.GetTeamNumber();
                             }),
                             OnUnitHit: GHandler.create(this, (pinfo: GLineProjectile, unit: IBaseNpc_Plus) => {
                                 ability.OnProjectileHit_ExtraData(unit, pinfo.GetPosition(), {
@@ -714,7 +714,7 @@ export class imba_tinker_march_of_the_machines extends BaseAbility_Plus {
                                 });
                             }),
                             UnitTest: GHandler.create(this, (pinfo: GLineProjectile, unit: IBaseNpc_Plus) => {
-                                return unit.GetUnitName() != "npc_dummy_unit" && unit.GetTeamNumber() != caster.GetTeamNumber();
+                                return !unit.IsDummyUnit() && unit.GetTeamNumber() != caster.GetTeamNumber();
                             }),
                             OnUnitHit: GHandler.create(this, (pinfo: GLineProjectile, unit: IBaseNpc_Plus) => {
                                 ability.OnProjectileHit_ExtraData(unit, pinfo.GetPosition(), {
@@ -757,7 +757,7 @@ export class imba_tinker_march_of_the_machines extends BaseAbility_Plus {
                                 });
                             }),
                             UnitTest: GHandler.create(this, (pinfo: GLineProjectile, unit: IBaseNpc_Plus) => {
-                                return unit.GetUnitName() != "npc_dummy_unit" && unit.GetTeamNumber() != caster.GetTeamNumber();
+                                return !unit.IsDummyUnit() && unit.GetTeamNumber() != caster.GetTeamNumber();
                             }),
                             OnUnitHit: GHandler.create(this, (pinfo: GLineProjectile, unit: IBaseNpc_Plus) => {
                                 ability.OnProjectileHit_ExtraData(unit, pinfo.GetPosition(), {
@@ -807,7 +807,7 @@ export class imba_tinker_march_of_the_machines extends BaseAbility_Plus {
                                 });
                             }),
                             UnitTest: GHandler.create(this, (pinfo: GLineProjectile, unit: IBaseNpc_Plus) => {
-                                return unit.GetUnitName() != "npc_dummy_unit" && unit.GetTeamNumber() != caster.GetTeamNumber();
+                                return !unit.IsDummyUnit() && unit.GetTeamNumber() != caster.GetTeamNumber();
                             }),
                             OnUnitHit: GHandler.create(this, (pinfo: GLineProjectile, unit: IBaseNpc_Plus) => {
                                 ability.OnProjectileHit_ExtraData(unit, pinfo.GetPosition(), {
@@ -849,7 +849,7 @@ export class imba_tinker_march_of_the_machines extends BaseAbility_Plus {
                             bProvidesVision: false,
 
                             UnitTest: GHandler.create(this, (pinfo: GLineProjectile, unit: IBaseNpc_Plus) => {
-                                return unit.GetUnitName() != "npc_dummy_unit" && unit.GetTeamNumber() != caster.GetTeamNumber();
+                                return !unit.IsDummyUnit() && unit.GetTeamNumber() != caster.GetTeamNumber();
                             }),
                             OnUnitHit: GHandler.create(this, (pinfo: GLineProjectile, unit: IBaseNpc_Plus) => {
                                 ability.OnProjectileHit_ExtraData(unit, pinfo.GetPosition(), {

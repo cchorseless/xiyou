@@ -60,7 +60,7 @@ function parse_paramSheet(file, sheet_data, sheet_param) {
         }
         typeObj.push(_obj);
         if (_obj.col == null && _obj.parent != 'root') {
-            console.warn('请注意：' + file + "中，字段: " + _obj.arg + '无对应数据列。')
+            // console.warn('请注意：' + file + "中，字段: " + _obj.arg + '无对应数据列。')
         }
     }
     // 找到子节点
@@ -523,6 +523,7 @@ function single_excel_to_kv(file) {
     if (toTxtFileArray.indexOf(fileName) > -1) {
         _outFileext = '.txt'
     }
+    console.log(new Date().toLocaleTimeString() + ' 开始处理：', file);
     let outpath = file.replace(excel_path, kv_path).replace('.xlsx', _outFileext);
     let parent_i = outpath.lastIndexOf('/');
     let out_dir = outpath.substr(0, parent_i);
@@ -531,7 +532,7 @@ function single_excel_to_kv(file) {
     r_s += keyvalues.encode(result).replace(/\\\"/g, "'");
     r_s = dealAbilitySpecial(r_s, fileName)
     fs.writeFileSync(outpath, r_s);
-    console.log('success xlsx->kv', outpath);
+    console.log(new Date().toLocaleTimeString() + ' 处理完成： xlsx->kv', outpath);
     // createLanguageTXT(file, rows)
 }
 

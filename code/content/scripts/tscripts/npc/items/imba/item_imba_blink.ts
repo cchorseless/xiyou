@@ -106,7 +106,7 @@ export class item_imba_blink_boots extends BaseItem_Plus {
     OnAbilityPhaseStart(): boolean {
         if (this.GetCursorTarget() && this.GetCursorTarget() == this.GetCasterPlus()) {
             for (const [_, building] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BUILDING, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FindOrder.FIND_ANY_ORDER, false))) {
-                if (string.find(building.GetUnitName(), "ent_dota_fountain")) {
+                if (building.GetUnitName().includes("ent_dota_fountain")) {
                     this.GetCasterPlus().SetCursorTargetingNothing(true);
                     this.GetCasterPlus().CastAbilityOnPosition(building.GetAbsOrigin(), this, this.GetCasterPlus().GetPlayerID());
                     return;

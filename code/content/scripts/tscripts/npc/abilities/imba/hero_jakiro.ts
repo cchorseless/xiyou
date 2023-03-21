@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -101,7 +102,7 @@ export class base_modifier_dual_breath_caster extends BaseModifierMotionHorizont
             this.caster = caster;
             this.ability = ability;
             this.path_radius = ability.GetSpecialValueFor("path_radius");
-            this.spill_distance = ability.GetSpecialValueFor("spill_distance");
+            this.spill_distance = ability.GetSpecialValueFor("spill_radius");
             this.debuff_duration = ability.GetSpecialValueFor("duration");
             this.ability_target_team = ability.GetAbilityTargetTeam();
             this.ability_target_type = ability.GetAbilityTargetType();
@@ -378,14 +379,14 @@ export class imba_jakiro_dual_breath extends BaseAbility_Plus {
     GetCastRange(location: Vector, target: CDOTA_BaseNPC | undefined): number {
         return super.GetCastRange(location, target) + this.GetCasterPlus().GetTalentValue("special_bonus_imba_jakiro_1");
     }
-    OnUpgrade(): void {
-        if (this.GetCasterPlus().HasAbility("imba_jakiro_fire_breath")) {
-            this.GetCasterPlus().findAbliityPlus<imba_jakiro_fire_breath>("imba_jakiro_fire_breath").SetLevel(this.GetLevel());
-        }
-        if (this.GetCasterPlus().HasAbility("imba_jakiro_ice_breath")) {
-            this.GetCasterPlus().findAbliityPlus<imba_jakiro_ice_breath>("imba_jakiro_ice_breath").SetLevel(this.GetLevel());
-        }
-    }
+    // OnUpgrade(): void {
+    //     if (this.GetCasterPlus().HasAbility("imba_jakiro_fire_breath")) {
+    //         this.GetCasterPlus().findAbliityPlus<imba_jakiro_fire_breath>("imba_jakiro_fire_breath").SetLevel(this.GetLevel());
+    //     }
+    //     if (this.GetCasterPlus().HasAbility("imba_jakiro_ice_breath")) {
+    //         this.GetCasterPlus().findAbliityPlus<imba_jakiro_ice_breath>("imba_jakiro_ice_breath").SetLevel(this.GetLevel());
+    //     }
+    // }
     OnSpellStart(): void {
         if (this.GetCursorPosition() == this.GetCasterPlus().GetAbsOrigin()) {
             this.GetCasterPlus().SetCursorPosition(this.GetCursorPosition() + this.GetCasterPlus().GetForwardVector() as Vector);
@@ -478,6 +479,13 @@ export class imba_jakiro_dual_breath extends BaseAbility_Plus {
                 });
             }
         }
+    }
+
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this)
     }
 }
 @registerModifier()
@@ -651,6 +659,12 @@ export class imba_jakiro_ice_path extends base_ability_dual_breath {
                 duration: this.GetSpecialValueFor("path_delay") + this.GetTalentSpecialValueFor("path_duration")
             }, caster.GetAbsOrigin(), caster.GetTeamNumber(), false);
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this)
     }
 }
 @registerModifier()
@@ -873,6 +887,12 @@ export class imba_jakiro_liquid_fire extends BaseAbility_Plus {
             caster.SetRangedProjectileName("particles/units/heroes/hero_jakiro/jakiro_base_attack_fire.vpcf");
             caster.PerformAttack(target, true, true, true, true, true, false, false);
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this)
     }
 }
 
@@ -1123,6 +1143,12 @@ export class imba_jakiro_macropyre extends BaseAbility_Plus {
             let caster = this.GetCasterPlus();
             BaseModifier_Plus.CreateBuffThinker(caster, this, "modifier_imba_macropyre_thinker", {}, caster.GetAbsOrigin(), caster.GetTeamNumber(), false);
         }
+    }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this)
     }
 }
 @registerModifier()

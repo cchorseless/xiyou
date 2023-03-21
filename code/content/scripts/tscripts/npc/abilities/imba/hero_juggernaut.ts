@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { AnimationHelper } from "../../../helper/AnimationHelper";
 import { ProjectileHelper } from "../../../helper/ProjectileHelper";
@@ -54,6 +55,12 @@ export class imba_juggernaut_blade_fury extends BaseAbility_Plus {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_juggernaut_blade_fury_movement_speed") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_juggernaut_blade_fury_movement_speed")) {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_juggernaut_blade_fury_movement_speed"), "modifier_special_bonus_imba_juggernaut_blade_fury_movement_speed", {});
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_if_enemy(this)
     }
 }
 @registerModifier()
@@ -457,15 +464,20 @@ export class imba_juggernaut_healing_ward extends BaseAbility_Plus {
         let caster = this.GetCasterPlus();
         let targetPoint = this.GetCursorPosition();
         caster.EmitSound("Hero_Juggernaut.HealingWard.Cast");
-        let healing_ward = caster.CreateSummon("npc_dota_juggernaut_healing_ward", targetPoint, this.GetDuration(), true);
+        let healing_ward = caster.CreateSummon("npc_imba_juggernaut_healing_ward", targetPoint, this.GetDuration(), true);
         // SetCreatureHealth(healing_ward, this.GetTalentSpecialValueFor("health"), true);
         healing_ward.ModifyMaxHealth(this.GetTalentSpecialValueFor("health"))
         healing_ward.SetHealth(this.GetTalentSpecialValueFor("health"));
-        healing_ward.AddAbility("imba_juggernaut_healing_ward_passive").SetLevel(this.GetLevel());
         // healing_ward.SetControllableByPlayer(caster.GetPlayerID(), true);
         this.AddTimer(FrameTime(), () => {
             healing_ward.MoveToNPC(caster);
         });
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_friend(this)
     }
 }
 @registerAbility()
@@ -1441,6 +1453,13 @@ export class imba_juggernaut_omni_slash extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_juggernaut_7"), "modifier_special_bonus_imba_juggernaut_7", {});
         }
     }
+
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this)
+    }
 }
 @registerModifier()
 export class modifier_imba_omni_slash_image extends BaseModifier_Plus {
@@ -1617,7 +1636,7 @@ export class modifier_imba_omni_slash_caster extends BaseModifier_Plus {
                 } else {
                     this.parent.PerformAttack(enemy, true, true, true, true, true, false, false);
                 }
-                if (enemy.IsConsideredHero() || enemy.IsRoshan() || enemy.GetUnitName() == "npc_dota_mutation_golem") {
+                if (enemy.IsConsideredHero() || enemy.IsRoshan() || enemy.GetUnitName() == "npc_imba_mutation_golem") {
                     if (!enemy.IsAlive() && ability.omnislash_kill_count) {
                         ability.omnislash_kill_count = ability.omnislash_kill_count + 1;
                     }

@@ -1990,7 +1990,7 @@ export class modifier_imba_riki_cloak_and_dagger_723 extends BaseModifier_Plus {
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
-    CC_GetModifierPreAttack_BonusDamage(keys?: any): number {
+    CC_GetModifierPreAttack_BonusDamage(keys?: { attacker: IBaseNpc_Plus, target: IBaseNpc_Plus }): number {
         if (keys.attacker == this.GetParentPlus() && keys.target) {
             if (!this.GetParentPlus().PassivesDisabled() && !keys.target.IsBuilding() && !keys.target.IsOther() && math.abs(AngleDiff(VectorToAngles(keys.target.GetForwardVector()).y, VectorToAngles(this.GetParentPlus().GetForwardVector()).y)) <= this.GetSpecialValueFor("backstab_angle")) {
                 this.bBackstab = true;
