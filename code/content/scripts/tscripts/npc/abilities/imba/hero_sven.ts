@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -38,6 +39,12 @@ export class imba_sven_warcry_723 extends BaseAbility_Plus {
                 duration: immunity_duration
             });
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
     }
 }
 @registerModifier()
@@ -219,6 +226,12 @@ export class imba_sven_storm_bolt extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_sven_5"), "modifier_special_bonus_imba_sven_5", {});
         }
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
+    }
 }
 @registerModifier()
 export class modifier_imba_storm_bolt_caster extends BaseModifier_Plus {
@@ -331,6 +344,12 @@ export class imba_sven_great_cleave extends BaseAbility_Plus {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_sven_6") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_sven_6")) {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_sven_6"), "modifier_special_bonus_imba_sven_6", {});
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_if_enemy(this);
     }
 }
 @registerModifier()
@@ -522,6 +541,12 @@ export class imba_sven_warcry extends BaseAbility_Plus {
     }
     GetCastRange(location: Vector, target: CDOTA_BaseNPC | undefined): number {
         return this.GetSpecialValueFor("radius");
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_cast(this);
     }
 }
 @registerModifier()
@@ -715,9 +740,11 @@ export class imba_sven_gods_strength extends BaseAbility_Plus {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
             let ability_slash = caster.FindAbilityByName(this.GetAssociatedPrimaryAbilities());
-            ability_slash.SetLevel(this.GetLevel());
-            if (!caster.HasModifier("modifier_imba_god_strength")) {
-                ability_slash.SetActivated(false);
+            if (ability_slash) {
+                ability_slash.SetLevel(this.GetLevel());
+                if (!caster.HasModifier("modifier_imba_god_strength")) {
+                    ability_slash.SetActivated(false);
+                }
             }
         }
     }
@@ -748,6 +775,12 @@ export class imba_sven_gods_strength extends BaseAbility_Plus {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_sven_8") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_sven_8")) {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_sven_8"), "modifier_special_bonus_imba_sven_8", {});
         }
+    }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_cast(this);
     }
 }
 @registerModifier()

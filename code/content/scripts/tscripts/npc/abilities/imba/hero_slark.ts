@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -43,6 +44,12 @@ export class imba_slark_dark_pact extends BaseAbility_Plus {
             ParticleManager.SetParticleControl(start_particle, 61, Vector(0, 0, 0));
             delay_modifier.AddParticle(start_particle, false, false, -1, false, false);
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_if_enemy(this)
     }
 }
 @registerModifier()
@@ -298,13 +305,13 @@ export class imba_slark_pounce extends BaseAbility_Plus {
             return 0;
         }
     }
-    GetManaCost(level: number): number {
-        if (!this.GetCasterPlus().HasModifier("modifier_imba_slark_pounce")) {
-            return super.GetManaCost(level);
-        } else {
-            return 0;
-        }
-    }
+    // GetManaCost(level: number): number {
+    //     if (!this.GetCasterPlus().HasModifier("modifier_imba_slark_pounce")) {
+    //         return super.GetManaCost(level);
+    //     } else {
+    //         return 0;
+    //     }
+    // }
     OnSpellStart(): void {
         this.GetCasterPlus().EmitSound("Hero_Slark.Pounce.Cast");
         let pounce_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_slark/slark_pounce_start.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetCasterPlus());
@@ -332,6 +339,12 @@ export class imba_slark_pounce extends BaseAbility_Plus {
             }
             this.UseResources(false, false, true);
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_if_enemy(this)
     }
 }
 @registerModifier()
@@ -647,8 +660,8 @@ export class modifier_imba_slark_essence_shift extends BaseModifier_Plus {
         this.StartIntervalThink(FrameTime());
     }
     OnIntervalThink(): void {
-        this.stack_table = this.stack_table.filter(i => {
-            return this.stack_table[i].apply_game_time && this.stack_table[i].duration && GameRules.GetDOTATime(true, true) - this.stack_table[i].apply_game_time <= this.stack_table[i].duration;
+        this.stack_table = this.stack_table.filter(info => {
+            return info.apply_game_time && info.duration && GameRules.GetDOTATime(true, true) - info.apply_game_time <= info.duration;
         })
 
         if (GameFunc.GetCount(this.stack_table) != this.GetStackCount()) {
@@ -730,8 +743,8 @@ export class modifier_imba_slark_essence_shift_debuff_counter extends BaseModifi
     }
 
     OnIntervalThink(): void {
-        this.stack_table = this.stack_table.filter((i) => {
-            return this.stack_table[i].apply_game_time && this.stack_table[i].duration && GameRules.GetDOTATime(true, true) - this.stack_table[i].apply_game_time <= this.stack_table[i].duration;
+        this.stack_table = this.stack_table.filter(info => {
+            return info.apply_game_time && info.duration && GameRules.GetDOTATime(true, true) - info.apply_game_time <= info.duration;
         })
 
         if (GameFunc.GetCount(this.stack_table) != this.GetStackCount()) {
@@ -897,6 +910,12 @@ export class imba_slark_shadow_dance extends BaseAbility_Plus {
                 bAutoCast: 1
             }, this.GetCasterPlus().GetAbsOrigin(), this.GetCasterPlus().GetTeamNumber(), false);
         }
+    }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_cast(this)
     }
 }
 @registerModifier()

@@ -5,7 +5,9 @@ import { ActiveRootAbility } from "../ActiveRootAbility";
 
 @registerAbility()
 export class courier_challenge_gold extends ActiveRootAbility implements IAbilityChallenge {
-
+    IsHidden() {
+        return true;
+    }
 
     @serializeDomainProps()
     costType: number = EEnum.EMoneyType.Gold;

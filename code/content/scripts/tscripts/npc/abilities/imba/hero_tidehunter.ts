@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { AoiHelper } from "../../../helper/AoiHelper";
 import { ResHelper } from "../../../helper/ResHelper";
@@ -179,6 +180,12 @@ export class imba_tidehunter_gush extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_tidehunter_gush_armor"), "modifier_special_bonus_imba_tidehunter_gush_armor", {});
         }
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
+    }
 }
 @registerModifier()
 export class modifier_imba_tidehunter_gush extends BaseModifier_Plus {
@@ -281,6 +288,12 @@ export class imba_tidehunter_kraken_shell extends BaseAbility_Plus {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_tidehunter_greater_hardening") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_tidehunter_greater_hardening")) {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_tidehunter_greater_hardening"), "modifier_special_bonus_imba_tidehunter_greater_hardening", {});
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_if_enemy(this);
     }
 }
 @registerModifier()
@@ -534,6 +547,12 @@ export class imba_tidehunter_anchor_smash extends BaseAbility_Plus {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_tidehunter_anchor_smash_damage_reduction") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_tidehunter_anchor_smash_damage_reduction")) {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_tidehunter_anchor_smash_damage_reduction"), "modifier_special_bonus_imba_tidehunter_anchor_smash_damage_reduction", {});
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_if_enemy(this);
     }
 }
 @registerModifier()
@@ -900,6 +919,12 @@ export class imba_tidehunter_ravage extends BaseAbility_Plus {
                 }
             });
         }
+    }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_cast(this);
     }
 }
 @registerModifier()

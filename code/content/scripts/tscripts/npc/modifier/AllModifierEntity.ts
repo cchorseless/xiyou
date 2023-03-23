@@ -6,6 +6,7 @@ import { modifier_animation_translate_permanent } from "./animation/modifier_ani
 import { modifier_dummy_unit } from "./battle/modifier_dummy_unit";
 import { modifier_illusion } from "./battle/modifier_illusion";
 import { modifier_jiaoxie_wudi } from "./battle/modifier_jiaoxie_wudi";
+import { modifier_mana_control } from "./battle/modifier_mana_control";
 import { modifier_summon } from "./battle/modifier_summon";
 
 import { modifier_sect_archer_base_a } from "./combinationeffect/modifier_sect_archer";
@@ -99,6 +100,7 @@ import { modifier_spawn_activity } from "./spawn/modifier_spawn_activity";
     modifier_spawn_activity,
     modifier_jiaoxie_wudi,
     modifier_generic_motion_controller,
+    modifier_mana_control,
 ];
 
 [

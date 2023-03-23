@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -7,11 +8,17 @@ import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { modifier_generic_stunned } from "../../modifier/effect/modifier_generic_stunned";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 @registerAbility()
-export class imba_slardar_guardian_sprint extends BaseAbility_Plus {
+export class imba_slardar_sprint extends BaseAbility_Plus {
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_if_enemy(this)
+    }
     GetAbilityTextureName(): string {
         let caster = this.GetCasterPlus();
         let ability = this;
-        let sprint_buff = "modifier_imba_guardian_sprint_buff";
+        let sprint_buff = "modifier_imba_slardar_sprint_buff";
         if (caster.HasModifier(sprint_buff)) {
             return "slardar_forward_propel";
         } else {
@@ -19,12 +26,12 @@ export class imba_slardar_guardian_sprint extends BaseAbility_Plus {
         }
     }
     GetIntrinsicModifierName(): string {
-        return "modifier_imba_guardian_sprint_river";
+        return "modifier_imba_slardar_sprint_river";
     }
     GetCooldown(p_0: number,): number {
         let caster = this.GetCasterPlus();
         let ability = this;
-        let sprint_buff = "modifier_imba_guardian_sprint_buff";
+        let sprint_buff = "modifier_imba_slardar_sprint_buff";
         let rip_current_cd = ability.GetSpecialValueFor("rip_current_cd");
         let sprint_cd = ability.GetSpecialValueFor("sprint_cd");
         let duration = ability.GetSpecialValueFor("duration");
@@ -37,7 +44,7 @@ export class imba_slardar_guardian_sprint extends BaseAbility_Plus {
     OnSpellStart(): void {
         let caster = this.GetCasterPlus();
         let ability = this;
-        let sprint_buff = "modifier_imba_guardian_sprint_buff";
+        let sprint_buff = "modifier_imba_slardar_sprint_buff";
         let sound_cast = "Hero_Slardar.Sprint";
         let motion_modifier = "modifier_imba_rip_current_movement";
         let modifier_stun = "modifier_imba_rip_current_stun";
@@ -47,7 +54,7 @@ export class imba_slardar_guardian_sprint extends BaseAbility_Plus {
             EmitSoundOn(sound_cast, caster);
             let sprint = caster.AddNewModifier(caster, ability, sprint_buff, {
                 duration: duration
-            }) as modifier_imba_guardian_sprint_buff;
+            }) as modifier_imba_slardar_sprint_buff;
             sprint.cooldown_cdr = this.GetCooldownTime();
             ability.EndCooldown();
         } else {
@@ -58,7 +65,7 @@ export class imba_slardar_guardian_sprint extends BaseAbility_Plus {
     }
 }
 @registerModifier()
-export class modifier_imba_guardian_sprint_buff extends BaseModifier_Plus {
+export class modifier_imba_slardar_sprint_buff extends BaseModifier_Plus {
     public caster: IBaseNpc_Plus;
     public ability: IBaseAbility_Plus;
     public modifier_talent_slow: any;
@@ -80,7 +87,7 @@ export class modifier_imba_guardian_sprint_buff extends BaseModifier_Plus {
     BeCreated(p_0: any,): void {
         this.caster = this.GetCasterPlus();
         this.ability = this.GetAbilityPlus();
-        this.modifier_talent_slow = "modifier_imba_guardian_sprint_aspd_slow";
+        this.modifier_talent_slow = "modifier_imba_slardar_sprint_aspd_slow";
         this.modifier_rain = "modifier_imba_rain_cloud_buff";
         this.search_radius = this.ability.GetSpecialValueFor("search_radius");
         this.sprint_cd = this.ability.GetSpecialValueFor("sprint_cd");
@@ -159,7 +166,7 @@ export class modifier_imba_guardian_sprint_buff extends BaseModifier_Plus {
     }
 }
 @registerModifier()
-export class modifier_imba_guardian_sprint_river extends BaseModifier_Plus {
+export class modifier_imba_slardar_sprint_river extends BaseModifier_Plus {
     IsHidden(): boolean {
         return !(this.GetParentPlus().GetAbsOrigin().z < 160 && (this.GetParentPlus().HasGroundMovementCapability() || this.GetParentPlus().HasModifier("modifier_item_imba_shadow_blade_invis") || this.GetParentPlus().HasModifier("modifier_item_imba_silver_edge_invis")) || this.GetParentPlus().HasModifier("modifier_imba_slithereen_crush_puddle"));
     }
@@ -408,7 +415,7 @@ export class modifier_imba_rip_current_slow extends BaseModifier_Plus {
     }
 }
 @registerModifier()
-export class modifier_imba_guardian_sprint_aspd_slow extends BaseModifier_Plus {
+export class modifier_imba_slardar_sprint_aspd_slow extends BaseModifier_Plus {
     public caster: IBaseNpc_Plus;
     IsHidden(): boolean {
         return false;
@@ -529,6 +536,12 @@ export class imba_slardar_slithereen_crush extends BaseAbility_Plus {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_slardar_6") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_slardar_6")) {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_slardar_6"), "modifier_special_bonus_imba_slardar_6", {});
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_if_enemy(this)
     }
 }
 @registerModifier()
@@ -824,15 +837,15 @@ export class modifier_imba_bash_of_the_deep_stun extends BaseModifier_Plus {
     }
 }
 @registerAbility()
-export class imba_slardar_bash_720 extends BaseAbility_Plus {
+export class imba_slardar_bash extends BaseAbility_Plus {
     GetIntrinsicModifierName(): string {
         if (!this.GetCasterPlus().IsIllusion()) {
-            return "modifier_imba_slardar_bash_720";
+            return "modifier_imba_slardar_bash";
         }
     }
 }
 @registerModifier()
-export class modifier_imba_slardar_bash_720 extends BaseModifier_Plus {
+export class modifier_imba_slardar_bash extends BaseModifier_Plus {
     IsHidden(): boolean {
         return this.GetStackCount() == 0;
     }
@@ -866,7 +879,7 @@ export class modifier_imba_slardar_bash_720 extends BaseModifier_Plus {
     }
 }
 @registerAbility()
-export class imba_slardar_corrosive_haze extends BaseAbility_Plus {
+export class imba_slardar_amplify_damage extends BaseAbility_Plus {
     GetAbilityTextureName(): string {
         return "slardar_amplify_damage";
     }
@@ -909,8 +922,8 @@ export class imba_slardar_corrosive_haze extends BaseAbility_Plus {
         let sound_cast = "Hero_Slardar.Amplify_Damage";
         let cast_response_string = "slardar_slar_ability_ampdam_";
         let particle_haze = "particles/units/heroes/hero_slardar/slardar_amp_damage.vpcf";
-        let modifier_debuff = "modifier_imba_corrosive_haze_debuff";
-        let modifier_secondary_debuff = "modifier_imba_corrosive_haze_debuff_secondary";
+        let modifier_debuff = "modifier_imba_slardar_amplify_damage_debuff";
+        let modifier_secondary_debuff = "modifier_imba_slardar_amplify_damage_debuff_secondary";
         let duration = ability.GetSpecialValueFor("duration");
         if (target.GetTeam() != caster.GetTeam()) {
             if (target.TriggerSpellAbsorb(ability)) {
@@ -941,7 +954,7 @@ export class imba_slardar_corrosive_haze extends BaseAbility_Plus {
             }
         }
         EmitSoundOn(sound_cast, caster);
-        let corrosive_haze_modifier = target.AddNewModifier(caster, ability, modifier_debuff, {
+        let slardar_amplify_damage_modifier = target.AddNewModifier(caster, ability, modifier_debuff, {
             duration: duration * (1 - target.GetStatusResistance())
         });
         if (caster.HasTalent("special_bonus_imba_slardar_7")) {
@@ -958,14 +971,20 @@ export class imba_slardar_corrosive_haze extends BaseAbility_Plus {
                     ParticleManager.SetParticleControl(particle_haze_fx, 2, enemy.GetAbsOrigin());
                     ParticleManager.SetParticleControlEnt(particle_haze_fx, 1, enemy, ParticleAttachment_t.PATTACH_OVERHEAD_FOLLOW, "attach_overhead", enemy.GetAbsOrigin(), true);
                     ParticleManager.SetParticleControlEnt(particle_haze_fx, 2, enemy, ParticleAttachment_t.PATTACH_OVERHEAD_FOLLOW, "attach_hitloc", enemy.GetAbsOrigin(), true);
-                    corrosive_haze_modifier.AddParticle(particle_haze_fx, false, true, -1, false, true);
+                    slardar_amplify_damage_modifier.AddParticle(particle_haze_fx, false, true, -1, false, true);
                 }
             }
         }
     }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this)
+    }
 }
 @registerModifier()
-export class modifier_imba_corrosive_haze_debuff extends BaseModifier_Plus {
+export class modifier_imba_slardar_amplify_damage_debuff extends BaseModifier_Plus {
     public caster_buff: any;
     public particle_haze_fx: any;
     BeCreated(p_0: any,): void {
@@ -974,7 +993,7 @@ export class modifier_imba_corrosive_haze_debuff extends BaseModifier_Plus {
         }
 
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_slardar_11") && this.GetParentPlus().IsRealUnit()) {
-            this.caster_buff = this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_corrosive_haze_talent_buff", {
+            this.caster_buff = this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_slardar_amplify_damage_talent_buff", {
                 duration: this.GetDuration()
             });
         }
@@ -993,7 +1012,7 @@ export class modifier_imba_corrosive_haze_debuff extends BaseModifier_Plus {
         if (this.caster_buff && !this.caster_buff.IsNull()) {
             this.caster_buff.SetDuration(this.GetDuration(), true);
         } else {
-            this.caster_buff = this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_corrosive_haze_talent_buff", {
+            this.caster_buff = this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_slardar_amplify_damage_talent_buff", {
                 duration: this.GetDuration()
             });
         }
@@ -1025,9 +1044,12 @@ export class modifier_imba_corrosive_haze_debuff extends BaseModifier_Plus {
         }
         let caster = this.GetCasterPlus();
         let parent = this.GetParentPlus();
+        if (!GFuncEntity.IsValid(caster)) {
+            return;
+        }
         let victim = keys.unit;
         let damage_type = keys.damage_type;
-        if (!caster.HasTalent("special_bonus_imba_slardar_11")) {
+        if (!GFuncEntity.IsValid(caster) || !caster.HasTalent("special_bonus_imba_slardar_11")) {
             return;
         }
         if (damage_type !== DAMAGE_TYPES.DAMAGE_TYPE_PHYSICAL) {
@@ -1051,6 +1073,9 @@ export class modifier_imba_corrosive_haze_debuff extends BaseModifier_Plus {
         let caster = this.GetCasterPlus();
         let ability = this.GetAbilityPlus();
         let parent = this.GetParentPlus();
+        if (!GFuncEntity.IsValid(caster)) {
+            return;
+        }
         let modifier_rain = "modifier_imba_rain_cloud_buff";
         let rain_cloud_stunned_amp_pct = ability.GetSpecialValueFor("rain_cloud_stunned_amp_pct");
         if (caster.HasModifier(modifier_rain) && parent.IsStunned()) {
@@ -1064,9 +1089,12 @@ export class modifier_imba_corrosive_haze_debuff extends BaseModifier_Plus {
         let caster = this.GetCasterPlus();
         let ability = this.GetAbilityPlus();
         let parent = this.GetParentPlus();
+        if (!GFuncEntity.IsValid(caster)) {
+            return;
+        }
         let attacker = keys.attacker;
         let inflictor = keys.inflictor;
-        let modifier_slip = "modifier_imba_corrosive_haze_slip_debuff";
+        let modifier_slip = "modifier_imba_slardar_amplify_damage_slip_debuff";
         let slip_up_chance_pct = ability.GetSpecialValueFor("slip_up_chance_pct");
         let slip_up_duration = ability.GetSpecialValueFor("slip_up_duration");
         let slip_up_damage_negation = ability.GetSpecialValueFor("slip_up_damage_negation");
@@ -1100,7 +1128,7 @@ export class modifier_imba_corrosive_haze_debuff extends BaseModifier_Plus {
     }
 }
 @registerModifier()
-export class modifier_imba_corrosive_haze_debuff_secondary extends BaseModifier_Plus {
+export class modifier_imba_slardar_amplify_damage_debuff_secondary extends BaseModifier_Plus {
     CheckState(): Partial<Record<modifierstate, boolean>> {
         let state = {
             [modifierstate.MODIFIER_STATE_PROVIDES_VISION]: true,
@@ -1148,7 +1176,7 @@ export class modifier_imba_corrosive_haze_debuff_secondary extends BaseModifier_
         let parent = this.GetParentPlus();
         let attacker = keys.attacker;
         let inflictor = keys.inflictor;
-        let modifier_slip = "modifier_imba_corrosive_haze_slip_debuff";
+        let modifier_slip = "modifier_imba_slardar_amplify_damage_slip_debuff";
         let slip_up_chance_pct = ability.GetSpecialValueFor("slip_up_chance_pct");
         let slip_up_duration = ability.GetSpecialValueFor("slip_up_duration");
         let slip_up_damage_negation = ability.GetSpecialValueFor("slip_up_damage_negation");
@@ -1178,7 +1206,7 @@ export class modifier_imba_corrosive_haze_debuff_secondary extends BaseModifier_
     }
 }
 @registerModifier()
-export class modifier_imba_corrosive_haze_slip_debuff extends BaseModifier_Plus {
+export class modifier_imba_slardar_amplify_damage_slip_debuff extends BaseModifier_Plus {
     GetEffectName(): string {
         return "particles/hero/slardar/slardar_slip_up.vpcf";
     }
@@ -1208,7 +1236,7 @@ export class modifier_imba_corrosive_haze_slip_debuff extends BaseModifier_Plus 
     }
 }
 @registerModifier()
-export class modifier_imba_corrosive_haze_talent_buff extends BaseModifier_Plus {
+export class modifier_imba_slardar_amplify_damage_talent_buff extends BaseModifier_Plus {
     IsHidden(): boolean {
         return false;
     }
@@ -1363,13 +1391,13 @@ export class modifier_imba_rain_cloud_dummy extends BaseModifierMotionHorizontal
             let speed_up_2_multiplier = ability.GetSpecialValueFor("speed_up_2_multiplier");
             if (caster.HasTalent("special_bonus_imba_slardar_10")) {
                 velocity_pct = velocity_pct * caster.GetTalentValue("special_bonus_imba_slardar_10");
-                if (this.GetCasterPlus().HasAbility("imba_slardar_slithereen_crush") && this.GetCasterPlus().HasAbility("imba_slardar_corrosive_haze")) {
+                if (this.GetCasterPlus().HasAbility("imba_slardar_slithereen_crush") && this.GetCasterPlus().HasAbility("imba_slardar_amplify_damage")) {
                     let enemies = FindUnitsInRadius(caster.GetTeamNumber(), dummy.GetAbsOrigin(), undefined, ability.GetSpecialValueFor("aura_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
                     for (const [_, enemy] of GameFunc.iPair(enemies)) {
                         enemy.AddNewModifier(caster, caster.findAbliityPlus<imba_slardar_slithereen_crush>("imba_slardar_slithereen_crush"), "modifier_imba_slithereen_crush_slow", {
                             duration: 1 * (1 - enemy.GetStatusResistance())
                         });
-                        enemy.AddNewModifier(caster, caster.findAbliityPlus<imba_slardar_corrosive_haze>("imba_slardar_corrosive_haze"), "modifier_imba_corrosive_haze_debuff", {
+                        enemy.AddNewModifier(caster, caster.findAbliityPlus<imba_slardar_amplify_damage>("imba_slardar_amplify_damage"), "modifier_imba_slardar_amplify_damage_debuff", {
                             duration: 1 * (1 - enemy.GetStatusResistance())
                         });
                     }

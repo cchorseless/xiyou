@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -92,9 +93,9 @@ export class imba_skywrath_mage_arcane_bolt extends BaseAbility_Plus {
     IsHiddenWhenStolen(): boolean {
         return false;
     }
-    GetManaCost(level: number): number {
-        return super.GetManaCost(level) - this.GetCasterPlus().GetTalentValue("special_bonus_imba_skywrath_mage_1");
-    }
+    // GetManaCost(level: number): number {
+    //     return super.GetManaCost(level) - this.GetCasterPlus().GetTalentValue("special_bonus_imba_skywrath_mage_1");
+    // }
     GetCooldown(level: number): number {
         return super.GetCooldown(level) - this.GetCasterPlus().GetTalentValue("special_bonus_imba_skywrath_mage_5");
     }
@@ -222,6 +223,13 @@ export class imba_skywrath_mage_arcane_bolt extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_skywrath_mage_10"), "modifier_special_bonus_imba_skywrath_mage_10", {});
         }
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this)
+    }
+
 }
 @registerModifier()
 export class modifier_imba_arcane_bolt_buff extends BaseModifier_Plus {
@@ -407,6 +415,12 @@ export class imba_skywrath_mage_concussive_shot extends BaseAbility_Plus {
             });
         }
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_cast(this)
+    }
 }
 @registerModifier()
 export class modifier_imba_concussive_shot_slow extends BaseModifier_Plus {
@@ -505,6 +519,12 @@ export class imba_skywrath_mage_ancient_seal extends BaseAbility_Plus {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_skywrath_mage_10") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_skywrath_mage_10")) {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_skywrath_mage_10"), "modifier_special_bonus_imba_skywrath_mage_10", {});
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this)
     }
 }
 @registerModifier()
@@ -671,39 +691,35 @@ export class imba_skywrath_mage_mystic_flare extends BaseAbility_Plus {
     }
     OnSpellStart(): void {
         let caster = this.GetCasterPlus();
-        let ability = this;
         let target_point = this.GetCursorPosition();
         let cast_response = "skywrath_mage_drag_mystic_flare_0" + math.random(1, 5);
         let sound_cast = "Hero_SkywrathMage.MysticFlare.Cast";
         let scepter = caster.HasScepter();
-        let damage_radius = ability.GetSpecialValueFor("damage_radius");
-        let scepter_search_radius = ability.GetSpecialValueFor("scepter_search_radius");
+        let damage_radius = this.GetSpecialValueFor("damage_radius");
+        let scepter_search_radius = this.GetSpecialValueFor("scepter_search_radius");
         damage_radius = damage_radius + caster.GetTalentValue("special_bonus_imba_skywrath_mage_4");
         if (RollPercentage(75)) {
             EmitSoundOn(cast_response, caster);
         }
         EmitSoundOnLocationWithCaster(target_point, sound_cast, this.GetCasterPlus());
-        ExecuteMysticFlare(caster, ability, target_point);
+        ExecuteMysticFlare(caster, this, target_point);
         if (scepter) {
-            let enemy_heroes = FindUnitsInRadius(caster.GetTeamNumber(), target_point, undefined, scepter_search_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE, FindOrder.FIND_ANY_ORDER, false);
+            let enemy_heroes = FindUnitsInRadius(caster.GetTeamNumber(), target_point, undefined, scepter_search_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE, FindOrder.FIND_ANY_ORDER, false);
             for (const [_, enemy_hero] of GameFunc.iPair(enemy_heroes)) {
                 let distance = (enemy_hero.GetAbsOrigin() - target_point as Vector).Length2D();
                 if (distance > damage_radius) {
                     EmitSoundOnLocationWithCaster(enemy_hero.GetAbsOrigin(), "Hero_SkywrathMage.MysticFlare.Scepter", this.GetCasterPlus());
-                    ExecuteMysticFlare(caster, ability, enemy_hero.GetAbsOrigin());
-                    return undefined;
-                }
-            }
-            let enemy_creeps = FindUnitsInRadius(caster.GetTeamNumber(), target_point, undefined, scepter_search_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy_creep] of GameFunc.iPair(enemy_creeps)) {
-                let distance = (enemy_creep.GetAbsOrigin() - target_point as Vector).Length2D();
-                if ((distance - 50) > damage_radius) {
-                    EmitSoundOnLocationWithCaster(enemy_creep.GetAbsOrigin(), "Hero_SkywrathMage.MysticFlare.Scepter", this.GetCasterPlus());
-                    ExecuteMysticFlare(caster, ability, enemy_creep.GetAbsOrigin());
-                    return undefined;
+                    ExecuteMysticFlare(caster, this, enemy_hero.GetAbsOrigin());
+                    break;
                 }
             }
         }
+    }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this)
     }
 }
 @registerModifier()
@@ -725,9 +741,6 @@ export class modifier_imba_mystic_flare extends BaseModifier_Plus {
     public int_increase_per_stack: number;
     public damage_per_interval: number;
     public parent_loc: any;
-    public core_particle_fx: any;
-    public particle_explosion_fx: any;
-    public particle_shockwave_fx: any;
     public caster_int: any;
     public wrath_stacks: number;
     public modifier_wrath_handler: any;
@@ -758,25 +771,21 @@ export class modifier_imba_mystic_flare extends BaseModifier_Plus {
             this.damage_per_interval = this.damage / this.damage_duration * this.damage_interval;
             this.parent_loc = this.parent.GetAbsOrigin();
             EmitSoundOnLocationWithCaster(this.GetParentPlus().GetAbsOrigin(), "Hero_SkywrathMage.MysticFlare", this.GetCasterPlus());
-            this.core_particle_fx = ResHelper.CreateParticleEx(this.core_particle, ParticleAttachment_t.PATTACH_WORLDORIGIN, undefined);
-            ParticleManager.SetParticleControl(this.core_particle_fx, 0, this.parent_loc);
-            ParticleManager.SetParticleControl(this.core_particle_fx, 1, Vector(this.damage_radius, this.damage_duration, 0));
-            ParticleManager.ReleaseParticleIndex(this.core_particle_fx);
+            let core_particle_fx = ResHelper.CreateParticleEx(this.core_particle, ParticleAttachment_t.PATTACH_WORLDORIGIN, undefined);
+            ParticleManager.SetParticleControl(core_particle_fx, 0, this.parent_loc);
+            ParticleManager.SetParticleControl(core_particle_fx, 1, Vector(this.damage_radius, this.damage_duration, 0));
+            ParticleManager.ClearParticle(core_particle_fx);
             this.StartIntervalThink(this.damage_interval);
-            if (this.caster.GetUnitName().includes("npc_imba_pugna_nether_ward")) {
-                return undefined;
-            }
             this.AddTimer(this.damage_duration, () => {
-                this.particle_explosion_fx = ResHelper.CreateParticleEx(this.particle_explosion, ParticleAttachment_t.PATTACH_WORLDORIGIN, undefined);
-                ParticleManager.SetParticleControl(this.particle_explosion_fx, 0, this.parent_loc);
-                ParticleManager.SetParticleControl(this.particle_explosion_fx, 1, Vector(this.explosion_radius, 0, 0));
+                // let particle_explosion_fx = ResHelper.CreateParticleEx(this.particle_explosion, ParticleAttachment_t.PATTACH_WORLDORIGIN, undefined);
+                // ParticleManager.SetParticleControl(particle_explosion_fx, 0, this.parent_loc);
+                // ParticleManager.SetParticleControl(particle_explosion_fx, 1, Vector(this.explosion_radius, 0, 0));
+                // ParticleManager.ClearParticle(particle_explosion_fx);
                 this.AddTimer(this.explosion_delay, () => {
-                    ParticleManager.DestroyParticle(this.particle_explosion_fx, false);
-                    ParticleManager.ReleaseParticleIndex(this.particle_explosion_fx);
-                    this.particle_shockwave_fx = ResHelper.CreateParticleEx(this.particle_shockwave, ParticleAttachment_t.PATTACH_WORLDORIGIN, undefined);
-                    ParticleManager.SetParticleControl(this.particle_shockwave_fx, 0, this.parent_loc);
-                    ParticleManager.SetParticleControl(this.particle_shockwave_fx, 1, Vector(this.explosion_radius, this.explosion_radius, 2));
-                    ParticleManager.ReleaseParticleIndex(this.particle_shockwave_fx);
+                    // let particle_shockwave_fx = ResHelper.CreateParticleEx(this.particle_shockwave, ParticleAttachment_t.PATTACH_WORLDORIGIN, undefined);
+                    // ParticleManager.SetParticleControl(particle_shockwave_fx, 0, this.parent_loc);
+                    // ParticleManager.SetParticleControl(particle_shockwave_fx, 1, Vector(this.explosion_radius, this.explosion_radius, 2));
+                    // ParticleManager.ClearParticle(particle_shockwave_fx);
                     this.caster_int = this.caster.GetIntellect();
                     this.wrath_stacks = 0;
                     if (this.caster.HasModifier(this.modifier_wrath)) {

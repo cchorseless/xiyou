@@ -13074,14 +13074,14 @@
 		"BaseClass" "ability_lua"
 		"ScriptFile" "npc/abilities/imba/hero_luna"
 		"AbilityTextureName" "luna_lunar_blessing"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"SpellImmunityType" "SPELL_IMMUNITY_ALLIES_YES"
 		"AbilityCastAnimation" "ACT_DOTA_CAST_ABILITY_3"
 		"AbilityCooldown" "180"
 		"AbilitySpecial" {
 			"01" {
 				"var_type" "FIELD_INTEGER"
-				"radius" "25000"
+				"radius" "1200"
 
 			}
 			"02" {
@@ -13117,7 +13117,7 @@
 		"BaseClass" "ability_lua"
 		"ScriptFile" "npc/abilities/imba/hero_luna"
 		"AbilityTextureName" "luna_lunar_blessing"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"SpellImmunityType" "SPELL_IMMUNITY_ALLIES_YES"
 		"AbilityCastAnimation" "ACT_DOTA_CAST_ABILITY_3"
 		"AbilityCooldown" "80"
@@ -18322,7 +18322,7 @@
 		}
 
 	}
-	"imba_silencer_arcane_curse" {
+	"imba_silencer_curse_of_the_silent" {
 		"BaseClass" "ability_lua"
 		"ScriptFile" "npc/abilities/imba/hero_silencer"
 		"AbilityTextureName" "silencer_curse_of_the_silent"
@@ -23262,203 +23262,239 @@
 		}
 
 	}
-	"imba_timbersaw_whirling_death" {
+	"imba_shredder_dendrophobia" {
 		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/imba/hero_timbersaw"
+		"ScriptFile" "npc/abilities/imba/hero_shredder"
+		"AbilityTextureName" "shredder_dendrophobia"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"AbilityType" "DOTA_ABILITY_TYPE_BASIC"
+		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_TREE"
+		"SpellDispellableType" "SPELL_DISPELLABLE_NO"
+		"FightRecapLevel" "1"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_FLOAT"
+				"dmg_amp_stack_pct" "0.2"
+
+			}
+			"02" {
+				"var_type" "FIELD_INTEGER"
+				"min_stacks" "-40"
+
+			}
+			"03" {
+				"var_type" "FIELD_INTEGER"
+				"stack_duration" "20"
+
+			}
+			"04" {
+				"var_type" "FIELD_INTEGER"
+				"fear_trees" "8"
+
+			}
+			"05" {
+				"var_type" "FIELD_INTEGER"
+				"fear_range" "450"
+
+			}
+			"06" {
+				"var_type" "FIELD_INTEGER"
+				"fear_duration" "5"
+
+			}
+
+		}
+
+	}
+	"imba_shredder_whirling_death" {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/imba/hero_shredder"
 		"AbilityTextureName" "shredder_whirling_death"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_AUTOCAST"
-		"AbilityUnitDamageType" "DAMAGE_TYPE_PURE"
+		"MaxLevel" "4"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+		"AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_TREE"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
 		"SpellImmunityType" "SPELL_IMMUNITY_ENEMIES_NO"
 		"SpellDispellableType" "SPELL_DISPELLABLE_YES"
 		"FightRecapLevel" "1"
 		"AbilitySound" "Hero_Shredder.WhirlingDeath.Cast"
 		"AbilityCastAnimation" "ACT_DOTA_CAST_ABILITY_1"
-		"AbilityCastPoint" "0.0 0.0 0.0 0.0"
+		"AbilityCastPoint" "0.0"
 		"AbilityCastRange" "300"
-		"AbilityCooldown" "6"
+		"AbilityCooldown" "6.0"
 		"AbilityManaCost" "70"
 		"AbilitySpecial" {
 			"01" {
 				"var_type" "FIELD_INTEGER"
-				"whirling_radius" "300"
+				"main_radius" "300"
 
 			}
 			"02" {
 				"var_type" "FIELD_INTEGER"
-				"whirling_damage" "90 120 150 180"
+				"damage" "100 150 200 250"
 
 			}
 			"03" {
-				"var_type" "FIELD_INTEGER"
-				"tree_damage_scale" "12 18 24 30"
+				"var_type" "FIELD_FLOAT"
+				"whirling_linger" "0.3"
 
 			}
 			"04" {
-				"var_type" "FIELD_FLOAT"
-				"whirling_tick" "0.3"
+				"var_type" "FIELD_INTEGER"
+				"stat_loss_pct" "15 18 21 24"
 
 			}
 			"05" {
 				"var_type" "FIELD_INTEGER"
-				"stat_loss_pct" "13 14 15 16"
+				"duration" "14"
 
 			}
 			"06" {
-				"var_type" "FIELD_FLOAT"
-				"duration" "14.0"
+				"var_type" "FIELD_INTEGER"
+				"radius_per_tree" "100 150 200 250"
 
 			}
 			"07" {
 				"var_type" "FIELD_INTEGER"
-				"blood_oil_convert_pct" "100"
+				"whirling_radius" "325"
 
 			}
 			"08" {
 				"var_type" "FIELD_INTEGER"
-				"blood_oil_duration" "6"
+				"whirling_damage" "80 120 160 200"
 
 			}
 			"09" {
 				"var_type" "FIELD_INTEGER"
-				"revving_down_instances" "3"
+				"tree_damage_scale" "11 18 25 32"
 
 			}
 			"10" {
 				"var_type" "FIELD_FLOAT"
-				"revving_down_interval" "0.35"
+				"whirling_tick" "0.3"
 
 			}
 			"11" {
 				"var_type" "FIELD_INTEGER"
-				"revving_down_efficacy" "45"
+				"blood_oil_convert_pct" "100"
+
+			}
+			"12" {
+				"var_type" "FIELD_INTEGER"
+				"blood_oil_duration" "6"
 
 			}
 
 		}
 
 	}
-	"imba_timbersaw_timber_chain" {
+	"imba_shredder_timber_chain" {
 		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/imba/hero_timbersaw"
+		"ScriptFile" "npc/abilities/imba/hero_shredder"
 		"AbilityTextureName" "shredder_timber_chain"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES | DOTA_ABILITY_BEHAVIOR_AUTOCAST"
+		"MaxLevel" "4"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_AUTOCAST"
+		"AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityUnitDamageType" "DAMAGE_TYPE_PURE"
 		"SpellImmunityType" "SPELL_IMMUNITY_ENEMIES_NO"
 		"FightRecapLevel" "1"
 		"AbilitySound" "Hero_Shredder.TimberChain.Cast"
 		"AbilityCastAnimation" "ACT_DOTA_CAST_ABILITY_2"
-		"AbilityCastPoint" "0.3 0.3 0.3 0.3"
-		"AbilityCastRange" "500 1000 1200 1400"
-		"AbilityCooldown" "4"
-		"AbilityManaCost" "60 70 80 90"
+		"AbilityCastPoint" "0.3"
+		"AbilityCastRange" "800 1000 1200 1400"
+		"AbilityCooldown" "16 8 4 2"
+		"AbilityManaCost" "60 80 100 100"
 		"AbilitySpecial" {
 			"01" {
 				"var_type" "FIELD_INTEGER"
-				"chain_radius" "100"
+				"chain_radius" "90"
 
 			}
 			"02" {
 				"var_type" "FIELD_INTEGER"
-				"range" "8000 1000 1200 1400"
+				"range" "800 1000 1200 1400"
 
 			}
 			"03" {
 				"var_type" "FIELD_INTEGER"
-				"radius" "225 225 225 225"
+				"radius" "225"
 
 			}
 			"04" {
 				"var_type" "FIELD_INTEGER"
-				"speed" "1600 2000 2400 2800"
+				"speed" "1600 2400 3000 3400"
 
 			}
 			"05" {
 				"var_type" "FIELD_INTEGER"
-				"damage" "100 140 180 220"
+				"damage" "100 180 240 280"
 
 			}
 			"06" {
 				"var_type" "FIELD_INTEGER"
-				"whirling_chain_stat_loss_pct" "4 5 6 7"
+				"chain_counter" "1 2 3 4"
 
 			}
 			"07" {
 				"var_type" "FIELD_INTEGER"
-				"side_hooks_damage_reduction" "70"
-
-			}
-			"08" {
-				"var_type" "FIELD_INTEGER"
-				"side_hooks_drag_pct" "70"
+				"combo_cooldown" "1"
 
 			}
 
 		}
 
 	}
-	"imba_timbersaw_reactive_armor" {
+	"imba_shredder_reactive_armor" {
 		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/imba/hero_timbersaw"
+		"ScriptFile" "npc/abilities/imba/hero_shredder"
 		"AbilityTextureName" "shredder_reactive_armor"
+		"MaxLevel" "4"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"SpellDispellableType" "SPELL_DISPELLABLE_NO"
+		"FightRecapLevel" "1"
 		"AbilityCastAnimation" "ACT_DOTA_CAST_ABILITY_3"
 		"AbilitySpecial" {
 			"01" {
 				"var_type" "FIELD_FLOAT"
-				"bonus_armor" "0.9 1.0 1.1 1.2"
+				"bonus_armor" "1.0 1.4 1.75 2.05"
 
 			}
 			"02" {
 				"var_type" "FIELD_FLOAT"
-				"bonus_hp_regen" "1.0 1.1 1.2 1.3"
+				"magic_res_pct" "0.2 0.4 0.6 0.8"
 
 			}
 			"03" {
-				"var_type" "FIELD_INTEGER"
-				"stack_limit" "6 12 18 24"
+				"var_type" "FIELD_FLOAT"
+				"bonus_hp_regen" "1.0 1.2 1.4 1.6"
 
 			}
 			"04" {
 				"var_type" "FIELD_INTEGER"
-				"stack_duration" "10 13 16 19"
+				"stack_limit" "5 15 22 26"
 
 			}
 			"05" {
 				"var_type" "FIELD_INTEGER"
-				"emergency_bunker_debuff_duration" "42"
-
-			}
-			"06" {
-				"var_type" "FIELD_INTEGER"
-				"emergency_bunker_debuff_cooldown" "90"
-
-			}
-			"07" {
-				"var_type" "FIELD_INTEGER"
-				"emergency_bunker_debuff_mana_cost" "130"
-
-			}
-			"08" {
-				"var_type" "FIELD_INTEGER"
-				"ally_hit_additional_stacks" "1"
-
-			}
-			"09" {
-				"var_type" "FIELD_INTEGER"
-				"ally_damage_reduction" "50"
+				"stack_duration" "10 13 16 19"
 
 			}
 
 		}
 
 	}
-	"imba_timbersaw_chakram" {
+	"imba_shredder_chakram" {
 		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/imba/hero_timbersaw"
+		"ScriptFile" "npc/abilities/imba/hero_shredder"
 		"AbilityTextureName" "shredder_chakram"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_AUTOCAST"
+		"MaxLevel" "3"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
 		"AbilityType" "DOTA_ABILITY_TYPE_ULTIMATE"
+		"AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_TREE"
 		"AbilityUnitDamageType" "DAMAGE_TYPE_PURE"
 		"HasScepterUpgrade" "1"
 		"SpellImmunityType" "SPELL_IMMUNITY_ENEMIES_NO"
@@ -23466,19 +23502,19 @@
 		"FightRecapLevel" "1"
 		"AbilitySound" "Hero_Shredder.Chakram.Cast"
 		"AbilityCastAnimation" "ACT_DOTA_CAST_ABILITY_4"
-		"AbilityCastPoint" "0.3 0.3 0.3"
-		"AbilityCastRange" "1200 1200 1200"
-		"AbilityCooldown" "8.0 8.0 8.0"
-		"AbilityManaCost" "80 140 200"
+		"AbilityCastPoint" "0.3"
+		"AbilityCastRange" "1200"
+		"AbilityCooldown" "8"
+		"AbilityManaCost" "60 80 100 100"
 		"AbilitySpecial" {
 			"01" {
-				"var_type" "FIELD_FLOAT"
-				"speed" "900.0 900.0 900.0"
+				"var_type" "FIELD_INTEGER"
+				"speed" "900"
 
 			}
 			"02" {
-				"var_type" "FIELD_FLOAT"
-				"radius" "200.0"
+				"var_type" "FIELD_INTEGER"
+				"radius" "200"
 
 			}
 			"03" {
@@ -23488,12 +23524,12 @@
 			}
 			"04" {
 				"var_type" "FIELD_INTEGER"
-				"damage_per_second" "50 75 100"
+				"damage_per_second" "50 100 120"
 
 			}
 			"05" {
 				"var_type" "FIELD_INTEGER"
-				"slow" "5 5 5"
+				"slow_pct" "5"
 
 			}
 			"06" {
@@ -23502,13 +23538,13 @@
 
 			}
 			"07" {
-				"var_type" "FIELD_FLOAT"
-				"break_distance" "2000.0"
+				"var_type" "FIELD_INTEGER"
+				"break_distance" "2000"
 
 			}
 			"08" {
 				"var_type" "FIELD_INTEGER"
-				"mana_per_second" "16 23 30"
+				"mana_per_second" "20 30 40"
 
 			}
 			"09" {
@@ -23518,26 +23554,59 @@
 			}
 			"10" {
 				"var_type" "FIELD_INTEGER"
-				"slow_health_percentage" "5"
+				"mana_per_second_scepter" "20 26 32"
 
 			}
 			"11" {
 				"var_type" "FIELD_INTEGER"
-				"observe_tick_scale" "4"
+				"slow_health_percentage" "5"
 
 			}
 			"12" {
+				"var_type" "FIELD_FLOAT"
+				"castpoint_scepter" "0.1"
+
+			}
+			"13" {
 				"var_type" "FIELD_INTEGER"
-				"observe_max_scale" "20"
+				"scepter_bonus_damage" "20"
+
+			}
+			"14" {
+				"var_type" "FIELD_INTEGER"
+				"slow" "observe_tick_scale"
+
+			}
+			"15" {
+				"var_type" "FIELD_INTEGER"
+				"4" "observe_max_scale"
+
+			}
+			"16" {
+				"var_type" "FIELD_INTEGER"
+				"20" "undefined"
 
 			}
 
 		}
 
 	}
-	"imba_timbersaw_chakram_2" {
+	"imba_shredder_return_chakram" {
 		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/imba/hero_timbersaw"
+		"ScriptFile" "npc/abilities/imba/hero_shredder"
+		"AbilityTextureName" "shredder_return_chakram"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+		"AbilityType" "DOTA_ABILITY_TYPE_BASIC"
+		"FightRecapLevel" "1"
+		"AbilityCastAnimation" "ACT_INVALID"
+		"AbilityCastPoint" "0.0"
+		"AbilityCooldown" "0.0"
+
+	}
+	"imba_shredder_chakram_2" {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/imba/hero_shredder"
 		"AbilityTextureName" "shredder_chakram_2"
 		"MaxLevel" "3"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_SHOW_IN_GUIDES | DOTA_ABILITY_BEHAVIOR_AUTOCAST"
@@ -23625,20 +23694,9 @@
 		}
 
 	}
-	"imba_timbersaw_return_chakram" {
+	"imba_shredder_return_chakram_2" {
 		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/imba/hero_timbersaw"
-		"AbilityTextureName" "shredder_return_chakram"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
-		"AbilityType" "DOTA_ABILITY_TYPE_ULTIMATE"
-		"AbilityCastAnimation" "ACT_INVALID"
-		"AbilityCastPoint" "0.0 0.0 0.0 0.0"
-		"AbilityCooldown" "0.0 0.0 0.0"
-
-	}
-	"imba_timbersaw_return_chakram_2" {
-		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/imba/hero_timbersaw"
+		"ScriptFile" "npc/abilities/imba/hero_shredder"
 		"AbilityTextureName" "shredder_return_chakram_2"
 		"MaxLevel" "3"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
@@ -23647,10 +23705,10 @@
 		"AbilityCooldown" "0.0 0.0 0.0"
 
 	}
-	"imba_timbersaw_chakram_3" {
+	"imba_shredder_chakram_3" {
 		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/imba/hero_timbersaw"
-		"AbilityTextureName" "timbersaw/chakram_3"
+		"ScriptFile" "npc/abilities/imba/hero_shredder"
+		"AbilityTextureName" "shredder_chakram_3"
 		"MaxLevel" "3"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_SHOW_IN_GUIDES | DOTA_ABILITY_BEHAVIOR_HIDDEN"
 		"AbilityUnitDamageType" "DAMAGE_TYPE_PURE"
@@ -23706,22 +23764,7 @@
 		}
 
 	}
-	"special_bonus_imba_timbersaw_reactive_armor_max_stacks" {
-		"BaseClass" "special_bonus_undefined"
-		"ScriptFile" ""
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"AbilityType" "DOTA_ABILITY_TYPE_ATTRIBUTES"
-		"AbilitySpecial" {
-			"01" {
-				"var_type" "FIELD_INTEGER"
-				"value" "8"
-
-			}
-
-		}
-
-	}
-	"special_bonus_imba_timbersaw_whirling_death_stat_loss_pct" {
+	"special_bonus_imba_shredder_1" {
 		"BaseClass" "special_bonus_undefined"
 		"ScriptFile" ""
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
@@ -23736,7 +23779,142 @@
 		}
 
 	}
-	"special_bonus_imba_timbersaw_timber_chain_range" {
+	"special_bonus_imba_shredder_2" {
+		"BaseClass" "special_bonus_undefined"
+		"ScriptFile" ""
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityType" "DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"value" "70"
+
+			}
+
+		}
+
+	}
+	"special_bonus_imba_shredder_3" {
+		"BaseClass" "special_bonus_undefined"
+		"ScriptFile" ""
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityType" "DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"value" "1"
+
+			}
+
+		}
+
+	}
+	"special_bonus_imba_shredder_4" {
+		"BaseClass" "special_bonus_undefined"
+		"ScriptFile" ""
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityType" "DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"value" "15"
+
+			}
+
+		}
+
+	}
+	"special_bonus_imba_shredder_5" {
+		"BaseClass" "special_bonus_undefined"
+		"ScriptFile" ""
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityType" "DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"value" "30"
+
+			}
+
+		}
+
+	}
+	"special_bonus_imba_shredder_6" {
+		"BaseClass" "special_bonus_undefined"
+		"ScriptFile" ""
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityType" "DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_FLOAT"
+				"value" "2.0"
+
+			}
+
+		}
+
+	}
+	"special_bonus_imba_shredder_7" {
+		"BaseClass" "special_bonus_undefined"
+		"ScriptFile" ""
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityType" "DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"value" "21000"
+
+			}
+
+		}
+
+	}
+	"special_bonus_imba_shredder_8" {
+		"BaseClass" "special_bonus_undefined"
+		"ScriptFile" ""
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityType" "DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"value" "1"
+
+			}
+
+		}
+
+	}
+	"special_bonus_imba_shredder_reactive_armor_max_stacks" {
+		"BaseClass" "special_bonus_undefined"
+		"ScriptFile" ""
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityType" "DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"value" "8"
+
+			}
+
+		}
+
+	}
+	"special_bonus_imba_shredder_whirling_death_stat_loss_pct" {
+		"BaseClass" "special_bonus_undefined"
+		"ScriptFile" ""
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityType" "DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"value" "12"
+
+			}
+
+		}
+
+	}
+	"special_bonus_imba_shredder_timber_chain_range" {
 		"BaseClass" "special_bonus_undefined"
 		"ScriptFile" ""
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
@@ -26528,9 +26706,9 @@
 		}
 
 	}
-	"imba_windranger_shackleshot" {
+	"imba_windrunner_shackleshot" {
 		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/imba/hero_windranger"
+		"ScriptFile" "npc/abilities/imba/hero_windrunner"
 		"AbilityTextureName" "windrunner_shackleshot"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AUTOCAST"
 		"AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_ENEMY"
@@ -26580,9 +26758,9 @@
 		}
 
 	}
-	"imba_windranger_powershot" {
+	"imba_windrunner_powershot" {
 		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/imba/hero_windranger"
+		"ScriptFile" "npc/abilities/imba/hero_windrunner"
 		"AbilityTextureName" "windrunner_powershot"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_AUTOCAST"
 		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
@@ -26701,9 +26879,9 @@
 		}
 
 	}
-	"imba_windranger_windrun" {
+	"imba_windrunner_windrun" {
 		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/imba/hero_windranger"
+		"ScriptFile" "npc/abilities/imba/hero_windrunner"
 		"AbilityTextureName" "windrunner_windrun"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"HasScepterUpgrade" "1"
@@ -26773,10 +26951,10 @@
 		}
 
 	}
-	"imba_windranger_advancement" {
+	"imba_windrunner_advancement" {
 		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/imba/hero_windranger"
-		"AbilityTextureName" "windranger/advancement"
+		"ScriptFile" "npc/abilities/imba/hero_windrunner"
+		"AbilityTextureName" "windrunner/advancement"
 		"MaxLevel" "1"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES"
 		"AbilityCooldown" "15"
@@ -26801,9 +26979,10 @@
 		}
 
 	}
-	"imba_windranger_focusfire_vanilla_enhancer" {
+	"imba_windrunner_focusfire_vanilla_enhancer" {
 		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/imba/hero_windranger"
+		"ScriptFile" "npc/abilities/imba/hero_windrunner"
+		"AbilityTextureName" "windrunner_focusfire"
 		"MaxLevel" "1"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
 		"AbilitySpecial" {
@@ -26816,9 +26995,9 @@
 		}
 
 	}
-	"imba_windranger_focusfire" {
+	"imba_windrunner_focusfire" {
 		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/imba/hero_windranger"
+		"ScriptFile" "npc/abilities/imba/hero_windrunner"
 		"AbilityTextureName" "windrunner_focusfire"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
 		"AbilityType" "DOTA_ABILITY_TYPE_ULTIMATE"
@@ -26863,7 +27042,7 @@
 		}
 
 	}
-	"special_bonus_imba_windranger_shackle_shot_cooldown" {
+	"special_bonus_imba_windrunner_shackle_shot_cooldown" {
 		"BaseClass" "special_bonus_undefined"
 		"ScriptFile" ""
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
@@ -26878,7 +27057,7 @@
 		}
 
 	}
-	"special_bonus_imba_windranger_powershot_damage" {
+	"special_bonus_imba_windrunner_powershot_damage" {
 		"BaseClass" "special_bonus_undefined"
 		"ScriptFile" ""
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
@@ -26893,7 +27072,7 @@
 		}
 
 	}
-	"special_bonus_imba_windranger_windrun_invisibility" {
+	"special_bonus_imba_windrunner_windrun_invisibility" {
 		"BaseClass" "special_bonus_undefined"
 		"ScriptFile" ""
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
@@ -26908,7 +27087,7 @@
 		}
 
 	}
-	"special_bonus_imba_windranger_shackle_shot_duration" {
+	"special_bonus_imba_windrunner_shackle_shot_duration" {
 		"BaseClass" "special_bonus_undefined"
 		"ScriptFile" ""
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
@@ -36350,6 +36529,11 @@
 				"scepter_speed" "1500"
 
 			}
+			"28" {
+				"var_type" "FIELD_INTEGER"
+				"distance" "1400"
+
+			}
 
 		}
 
@@ -42407,7 +42591,7 @@
 		}
 
 	}
-	"imba_slardar_guardian_sprint" {
+	"imba_slardar_sprint" {
 		"BaseClass" "ability_lua"
 		"ScriptFile" "npc/abilities/imba/hero_slardar"
 		"AbilityTextureName" "slardar_sprint"
@@ -42517,6 +42701,11 @@
 			"19" {
 				"var_type" "FIELD_INTEGER"
 				"river_speed_tooltip" "7 19 31 43"
+
+			}
+			"20" {
+				"var_type" "FIELD_INTEGER"
+				"damage_amp_pct" "30"
 
 			}
 
@@ -42696,7 +42885,7 @@
 		}
 
 	}
-	"imba_slardar_bash_720" {
+	"imba_slardar_bash" {
 		"BaseClass" "ability_lua"
 		"ScriptFile" "npc/abilities/imba/hero_slardar"
 		"AbilityTextureName" "slardar_bash"
@@ -42726,7 +42915,7 @@
 		}
 
 	}
-	"imba_slardar_corrosive_haze" {
+	"imba_slardar_amplify_damage" {
 		"BaseClass" "ability_lua"
 		"ScriptFile" "npc/abilities/imba/hero_slardar"
 		"AbilityTextureName" "slardar_amplify_damage"
@@ -43031,448 +43220,6 @@
 			"01" {
 				"var_type" "FIELD_INTEGER"
 				"value" "75"
-
-			}
-
-		}
-
-	}
-	"imba_shredder_dendrophobia" {
-		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/imba/hero_shredder"
-		"AbilityTextureName" "shredder_dendrophobia"
-		"MaxLevel" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-		"AbilityType" "DOTA_ABILITY_TYPE_BASIC"
-		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_TREE"
-		"SpellDispellableType" "SPELL_DISPELLABLE_NO"
-		"FightRecapLevel" "1"
-		"AbilitySpecial" {
-			"01" {
-				"var_type" "FIELD_FLOAT"
-				"dmg_amp_stack_pct" "0.2"
-
-			}
-			"02" {
-				"var_type" "FIELD_INTEGER"
-				"min_stacks" "-40"
-
-			}
-			"03" {
-				"var_type" "FIELD_INTEGER"
-				"stack_duration" "20"
-
-			}
-			"04" {
-				"var_type" "FIELD_INTEGER"
-				"fear_trees" "8"
-
-			}
-			"05" {
-				"var_type" "FIELD_INTEGER"
-				"fear_range" "450"
-
-			}
-			"06" {
-				"var_type" "FIELD_INTEGER"
-				"fear_duration" "5"
-
-			}
-
-		}
-
-	}
-	"imba_shredder_whirling_death" {
-		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/imba/hero_shredder"
-		"AbilityTextureName" "shredder_whirling_death"
-		"MaxLevel" "4"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
-		"AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_ENEMY"
-		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_TREE"
-		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
-		"SpellImmunityType" "SPELL_IMMUNITY_ENEMIES_NO"
-		"SpellDispellableType" "SPELL_DISPELLABLE_YES"
-		"FightRecapLevel" "1"
-		"AbilitySound" "Hero_Shredder.WhirlingDeath.Cast"
-		"AbilityCastAnimation" "ACT_DOTA_CAST_ABILITY_1"
-		"AbilityCastPoint" "0.0"
-		"AbilityCastRange" "300"
-		"AbilityCooldown" "6.0"
-		"AbilityManaCost" "70"
-		"AbilitySpecial" {
-			"01" {
-				"var_type" "FIELD_INTEGER"
-				"main_radius" "300"
-
-			}
-			"02" {
-				"var_type" "FIELD_INTEGER"
-				"damage" "100 150 200 250"
-
-			}
-			"03" {
-				"var_type" "FIELD_FLOAT"
-				"whirling_linger" "0.3"
-
-			}
-			"04" {
-				"var_type" "FIELD_INTEGER"
-				"stat_loss_pct" "15 18 21 24"
-
-			}
-			"05" {
-				"var_type" "FIELD_INTEGER"
-				"duration" "14"
-
-			}
-			"06" {
-				"var_type" "FIELD_INTEGER"
-				"radius_per_tree" "100 150 200 250"
-
-			}
-			"07" {
-				"var_type" "FIELD_INTEGER"
-				"whirling_radius" "325"
-
-			}
-			"08" {
-				"var_type" "FIELD_INTEGER"
-				"whirling_damage" "80 120 160 200"
-
-			}
-			"09" {
-				"var_type" "FIELD_INTEGER"
-				"tree_damage_scale" "11 18 25 32"
-
-			}
-			"10" {
-				"var_type" "FIELD_FLOAT"
-				"whirling_tick" "0.3"
-
-			}
-
-		}
-
-	}
-	"imba_shredder_timber_chain" {
-		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/imba/hero_shredder"
-		"AbilityTextureName" "shredder_timber_chain"
-		"MaxLevel" "4"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_AUTOCAST"
-		"AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_ENEMY"
-		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-		"AbilityUnitDamageType" "DAMAGE_TYPE_PURE"
-		"SpellImmunityType" "SPELL_IMMUNITY_ENEMIES_NO"
-		"FightRecapLevel" "1"
-		"AbilitySound" "Hero_Shredder.TimberChain.Cast"
-		"AbilityCastAnimation" "ACT_DOTA_CAST_ABILITY_2"
-		"AbilityCastPoint" "0.3"
-		"AbilityCastRange" "800 1000 1200 1400"
-		"AbilityCooldown" "16 8 4 2"
-		"AbilityManaCost" "60 80 100 100"
-		"AbilitySpecial" {
-			"01" {
-				"var_type" "FIELD_INTEGER"
-				"chain_radius" "90"
-
-			}
-			"02" {
-				"var_type" "FIELD_INTEGER"
-				"range" "800 1000 1200 1400"
-
-			}
-			"03" {
-				"var_type" "FIELD_INTEGER"
-				"radius" "225"
-
-			}
-			"04" {
-				"var_type" "FIELD_INTEGER"
-				"speed" "1600 2400 3000 3400"
-
-			}
-			"05" {
-				"var_type" "FIELD_INTEGER"
-				"damage" "100 180 240 280"
-
-			}
-			"06" {
-				"var_type" "FIELD_INTEGER"
-				"chain_counter" "1 2 3 4"
-
-			}
-			"07" {
-				"var_type" "FIELD_INTEGER"
-				"combo_cooldown" "1"
-
-			}
-
-		}
-
-	}
-	"imba_shredder_reactive_armor" {
-		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/imba/hero_shredder"
-		"AbilityTextureName" "shredder_reactive"
-		"MaxLevel" "4"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"SpellDispellableType" "SPELL_DISPELLABLE_NO"
-		"FightRecapLevel" "1"
-		"AbilityCastAnimation" "ACT_DOTA_CAST_ABILITY_3"
-		"AbilitySpecial" {
-			"01" {
-				"var_type" "FIELD_FLOAT"
-				"bonus_armor" "1.0 1.4 1.75 2.05"
-
-			}
-			"02" {
-				"var_type" "FIELD_FLOAT"
-				"magic_res_pct" "0.2 0.4 0.6 0.8"
-
-			}
-			"03" {
-				"var_type" "FIELD_FLOAT"
-				"bonus_hp_regen" "1.0 1.2 1.4 1.6"
-
-			}
-			"04" {
-				"var_type" "FIELD_INTEGER"
-				"stack_limit" "5 15 22 26"
-
-			}
-			"05" {
-				"var_type" "FIELD_INTEGER"
-				"stack_duration" "10 13 16 19"
-
-			}
-
-		}
-
-	}
-	"imba_shredder_chakram" {
-		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/imba/hero_shredder"
-		"AbilityTextureName" "shredder_chakram"
-		"MaxLevel" "3"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
-		"AbilityType" "DOTA_ABILITY_TYPE_ULTIMATE"
-		"AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_ENEMY"
-		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_TREE"
-		"AbilityUnitDamageType" "DAMAGE_TYPE_PURE"
-		"HasScepterUpgrade" "1"
-		"SpellImmunityType" "SPELL_IMMUNITY_ENEMIES_NO"
-		"SpellDispellableType" "SPELL_DISPELLABLE_NO"
-		"FightRecapLevel" "1"
-		"AbilitySound" "Hero_Shredder.Chakram.Cast"
-		"AbilityCastAnimation" "ACT_DOTA_CAST_ABILITY_4"
-		"AbilityCastPoint" "0.3"
-		"AbilityCastRange" "1200"
-		"AbilityCooldown" "8"
-		"AbilityManaCost" "60 80 100 100"
-		"AbilitySpecial" {
-			"01" {
-				"var_type" "FIELD_INTEGER"
-				"speed" "900"
-
-			}
-			"02" {
-				"var_type" "FIELD_INTEGER"
-				"radius" "200"
-
-			}
-			"03" {
-				"var_type" "FIELD_INTEGER"
-				"pass_damage" "100 140 180"
-
-			}
-			"04" {
-				"var_type" "FIELD_INTEGER"
-				"damage_per_second" "50 100 120"
-
-			}
-			"05" {
-				"var_type" "FIELD_INTEGER"
-				"slow_pct" "5"
-
-			}
-			"06" {
-				"var_type" "FIELD_FLOAT"
-				"damage_interval" "0.5"
-
-			}
-			"07" {
-				"var_type" "FIELD_INTEGER"
-				"break_distance" "2000"
-
-			}
-			"08" {
-				"var_type" "FIELD_INTEGER"
-				"mana_per_second" "20 30 40"
-
-			}
-			"09" {
-				"var_type" "FIELD_FLOAT"
-				"pass_slow_duration" "0.5"
-
-			}
-			"10" {
-				"var_type" "FIELD_INTEGER"
-				"mana_per_second_scepter" "20 26 32"
-
-			}
-			"11" {
-				"var_type" "FIELD_INTEGER"
-				"slow_health_percentage" "5"
-
-			}
-			"12" {
-				"var_type" "FIELD_FLOAT"
-				"castpoint_scepter" "0.1"
-
-			}
-			"13" {
-				"var_type" "FIELD_INTEGER"
-				"scepter_bonus_damage" "20"
-
-			}
-			"14" {
-				"var_type" "FIELD_INTEGER"
-				"slow" "5"
-
-			}
-
-		}
-
-	}
-	"imba_shredder_return_chakram" {
-		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/imba/hero_shredder"
-		"AbilityTextureName" "shredder_return_chakram"
-		"MaxLevel" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
-		"AbilityType" "DOTA_ABILITY_TYPE_BASIC"
-		"FightRecapLevel" "1"
-		"AbilityCastAnimation" "ACT_INVALID"
-		"AbilityCastPoint" "0.0"
-		"AbilityCooldown" "0.0"
-
-	}
-	"special_bonus_imba_shredder_1" {
-		"BaseClass" "special_bonus_undefined"
-		"ScriptFile" ""
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"AbilityType" "DOTA_ABILITY_TYPE_ATTRIBUTES"
-		"AbilitySpecial" {
-			"01" {
-				"var_type" "FIELD_INTEGER"
-				"value" "12"
-
-			}
-
-		}
-
-	}
-	"special_bonus_imba_shredder_2" {
-		"BaseClass" "special_bonus_undefined"
-		"ScriptFile" ""
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"AbilityType" "DOTA_ABILITY_TYPE_ATTRIBUTES"
-		"AbilitySpecial" {
-			"01" {
-				"var_type" "FIELD_INTEGER"
-				"value" "70"
-
-			}
-
-		}
-
-	}
-	"special_bonus_imba_shredder_3" {
-		"BaseClass" "special_bonus_undefined"
-		"ScriptFile" ""
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"AbilityType" "DOTA_ABILITY_TYPE_ATTRIBUTES"
-		"AbilitySpecial" {
-			"01" {
-				"var_type" "FIELD_INTEGER"
-				"value" "1"
-
-			}
-
-		}
-
-	}
-	"special_bonus_imba_shredder_4" {
-		"BaseClass" "special_bonus_undefined"
-		"ScriptFile" ""
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"AbilityType" "DOTA_ABILITY_TYPE_ATTRIBUTES"
-		"AbilitySpecial" {
-			"01" {
-				"var_type" "FIELD_INTEGER"
-				"value" "15"
-
-			}
-
-		}
-
-	}
-	"special_bonus_imba_shredder_5" {
-		"BaseClass" "special_bonus_undefined"
-		"ScriptFile" ""
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"AbilityType" "DOTA_ABILITY_TYPE_ATTRIBUTES"
-		"AbilitySpecial" {
-			"01" {
-				"var_type" "FIELD_INTEGER"
-				"value" "30"
-
-			}
-
-		}
-
-	}
-	"special_bonus_imba_shredder_6" {
-		"BaseClass" "special_bonus_undefined"
-		"ScriptFile" ""
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"AbilityType" "DOTA_ABILITY_TYPE_ATTRIBUTES"
-		"AbilitySpecial" {
-			"01" {
-				"var_type" "FIELD_FLOAT"
-				"value" "2.0"
-
-			}
-
-		}
-
-	}
-	"special_bonus_imba_shredder_7" {
-		"BaseClass" "special_bonus_undefined"
-		"ScriptFile" ""
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"AbilityType" "DOTA_ABILITY_TYPE_ATTRIBUTES"
-		"AbilitySpecial" {
-			"01" {
-				"var_type" "FIELD_INTEGER"
-				"value" "21000"
-
-			}
-
-		}
-
-	}
-	"special_bonus_imba_shredder_8" {
-		"BaseClass" "special_bonus_undefined"
-		"ScriptFile" ""
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"AbilityType" "DOTA_ABILITY_TYPE_ATTRIBUTES"
-		"AbilitySpecial" {
-			"01" {
-				"var_type" "FIELD_INTEGER"
-				"value" "1"
 
 			}
 
@@ -45202,7 +44949,7 @@
 		}
 
 	}
-	"imba_wraith_king_wraithfire_blast" {
+	"imba_skeleton_king_hellfire_blast" {
 		"BaseClass" "ability_lua"
 		"ScriptFile" "npc/abilities/imba/hero_skeleton_king"
 		"AbilityTextureName" "skeleton_king_hellfire_blast"
@@ -45272,7 +45019,7 @@
 		}
 
 	}
-	"imba_wraith_king_vampiric_aura" {
+	"imba_skeleton_king_vampiric_aura" {
 		"BaseClass" "ability_lua"
 		"ScriptFile" "npc/abilities/imba/hero_skeleton_king"
 		"AbilityTextureName" "skeleton_king_vampiric_aura"
@@ -45322,7 +45069,7 @@
 		}
 
 	}
-	"imba_wraith_king_mortal_strike" {
+	"imba_skeleton_king_mortal_strike" {
 		"BaseClass" "ability_lua"
 		"ScriptFile" "npc/abilities/imba/hero_skeleton_king"
 		"AbilityTextureName" "skeleton_king_mortal_strike"
@@ -45401,7 +45148,7 @@
 		}
 
 	}
-	"imba_wraith_king_kingdom_come" {
+	"imba_skeleton_king_kingdom_come" {
 		"BaseClass" "ability_lua"
 		"ScriptFile" "npc/abilities/imba/hero_skeleton_king"
 		"AbilityTextureName" "wraith_king_wraithfire_aura"
@@ -45460,7 +45207,7 @@
 		}
 
 	}
-	"imba_wraith_king_reincarnation" {
+	"imba_skeleton_king_reincarnation" {
 		"BaseClass" "ability_lua"
 		"ScriptFile" "npc/abilities/imba/hero_skeleton_king"
 		"AbilityTextureName" "skeleton_king_reincarnation"
@@ -45507,7 +45254,7 @@
 		}
 
 	}
-	"imba_wraith_king_wraith_soul_strike" {
+	"imba_skeleton_king_wraith_soul_strike" {
 		"BaseClass" "ability_lua"
 		"ScriptFile" "npc/abilities/imba/hero_skeleton_king"
 		"AbilityTextureName" "ghost_frost_attack"

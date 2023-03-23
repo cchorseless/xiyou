@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -299,6 +300,13 @@ export class imba_necrolyte_death_pulse extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_necrolyte_1"), "modifier_special_bonus_imba_necrolyte_1", {});
         }
     }
+
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_cast(this)
+    }
 }
 @registerAbility()
 export class imba_necrolyte_ghost_shroud extends BaseAbility_Plus {
@@ -351,6 +359,12 @@ export class imba_necrolyte_ghost_shroud extends BaseAbility_Plus {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_necrolyte_5") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_necrolyte_5")) {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_necrolyte_5"), "modifier_special_bonus_imba_necrolyte_5", {});
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_if_enemy(this)
     }
 }
 @registerModifier()
@@ -616,7 +630,7 @@ export class modifier_imba_heartstopper_aura extends BaseModifier_Plus {
         return true;
     }
     GetEffectName(): string {
-        return "particles/auras/aura_heartstopper.vpcf";
+        return "particles/generic/auras/aura_heartstopper.vpcf";
     }
     GetEffectAttachType(): ParticleAttachment_t {
         return ParticleAttachment_t.PATTACH_POINT_FOLLOW;
@@ -741,6 +755,14 @@ export class imba_necrolyte_reapers_scythe extends BaseAbility_Plus {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_necrolyte_7") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_necrolyte_7")) {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_necrolyte_7"), "modifier_special_bonus_imba_necrolyte_7", {});
         }
+    }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this, null, (u) => {
+            return u.GetHealthLosePect() > 50;
+        })
     }
 }
 @registerModifier()

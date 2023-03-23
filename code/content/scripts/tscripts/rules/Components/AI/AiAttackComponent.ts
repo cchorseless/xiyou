@@ -11,17 +11,23 @@ export class AiAttackComponent extends ET.Component {
             this.timerBattle.Clear();
             this.timerBattle = null;
         }
+        let npc = this.GetDomain<IBaseNpc_Plus>();
+        if (npc.GetAttackCapability() == DOTAUnitAttackCapability_t.DOTA_UNIT_CAP_NO_ATTACK) {
+            return;
+        }
+        // if (!npc.IsCreature() && !npc.IsCreep()) {
+        //     return
+        // }
         this.timerBattle = GTimerHelper.AddTimer(0.1, GHandler.create(this, () => {
             if (this.IsDisposed()) { return }
             let u = this.GetDomain<IBaseNpc_Plus>();
-            if (u.IsCommandRestricted() || u.IsStunned() || u.IsFeared() || u.IsFreeze()) {
+            if (u.IsCommandRestricted() || u.IsStunned() || u.IsFeared() || u.IsFreeze() || u.IsOutOfGame()) {
                 return 0.5;
             }
             if (u.IsChanneling()) {
                 return 0.5;
             }
-
-            if (this.castAbilityAndItem()) {
+            if (!u.IsIllusion() && this.castAbilityAndItem()) {
                 return 1;
             }
             if (this.findAroundEnemyToAttack()) {
@@ -75,8 +81,8 @@ export class AiAttackComponent extends ET.Component {
             let ability = abilitys.shift();
             if (ability && ability.AutoSpellSelf()) {
                 if (IsInToolsMode()) {
-                    GTimerHelper.AddFrameTimer(1, GHandler.create(this, () => {
-                        if (!ability.IsInAbilityPhase()) {
+                    GTimerHelper.AddFrameTimer(4, GHandler.create(this, () => {
+                        if (ability.IsCooldownReady()) {
                             GLogHelper.warn(`${ability.GetAbilityName()} AutoSpellSelf Error`)
                         }
                     }))
@@ -123,7 +129,5 @@ export class AiAttackComponent extends ET.Component {
         return false;
     }
 
-    onAwake(...args: any[]): void {
-        GLogHelper.print("AiAttackComponent onAwake" + this.GetDomain<IBaseNpc_Plus>().GetClassname())
-    }
+
 }

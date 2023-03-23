@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { AoiHelper } from "../../../helper/AoiHelper";
 import { ProjectileHelper } from "../../../helper/ProjectileHelper";
@@ -145,6 +146,12 @@ export class imba_sandking_burrowstrike extends BaseAbility_Plus {
             ResolveNPCPositions(target_point, 128);
         });
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this, null, null, FindOrder.FIND_FARTHEST);
+    }
 }
 @registerModifier()
 export class modifier_imba_burrowstrike_stun extends BaseModifier_Plus {
@@ -240,7 +247,6 @@ export class imba_sandking_sand_storm extends BaseAbility_Plus {
         this.particle_sandstorm_fx = ResHelper.CreateParticleEx(particle_sandstorm, ParticleAttachment_t.PATTACH_WORLDORIGIN, caster);
         ParticleManager.SetParticleControl(this.particle_sandstorm_fx, 0, caster.GetAbsOrigin());
         ParticleManager.SetParticleControl(this.particle_sandstorm_fx, 1, Vector(radius, radius, 0));
-        let channel_time = super.GetChannelTime();
         caster.AddNewModifier(caster, ability, modifier_sandstorm, {});
         caster.AddNewModifier(caster, ability, modifier_invis, {});
         if (caster.GetUnitName().includes("npc_imba_pugna_nether_ward")) {
@@ -273,6 +279,19 @@ export class imba_sandking_sand_storm extends BaseAbility_Plus {
                 caster.RemoveModifierByName(modifier_invis);
             }
         });
+    }
+
+    OnDestroy(): void {
+        if (this.particle_sandstorm_fx) {
+            ParticleManager.DestroyParticle(this.particle_sandstorm_fx, false);
+            ParticleManager.ReleaseParticleIndex(this.particle_sandstorm_fx);
+        }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_if_enemy(this);
     }
 }
 @registerModifier()
@@ -768,6 +787,12 @@ export class imba_sandking_epicenter extends BaseAbility_Plus {
         }
         caster.StartGesture(GameActivity_t.ACT_DOTA_OVERRIDE_ABILITY_4);
         caster.AddNewModifier(caster, ability, modifier_pulse, {});
+    }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_cast(this);
     }
 }
 @registerModifier()

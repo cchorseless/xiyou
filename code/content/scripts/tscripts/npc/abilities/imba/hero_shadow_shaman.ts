@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { AoiHelper } from "../../../helper/AoiHelper";
 import { ResHelper } from "../../../helper/ResHelper";
@@ -53,6 +54,12 @@ export class imba_shadow_shaman_ether_shock extends BaseAbility_Plus {
                 });
             }
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
     }
 }
 @registerModifier()
@@ -198,6 +205,12 @@ export class imba_shadow_shaman_voodoo extends BaseAbility_Plus {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_shadow_shaman_wards_movement") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_shadow_shaman_wards_movement")) {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_shadow_shaman_wards_movement"), "modifier_special_bonus_imba_shadow_shaman_wards_movement", {});
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
     }
 }
 @registerModifier()
@@ -511,6 +524,12 @@ export class imba_shadow_shaman_shackles extends BaseAbility_Plus {
             }
         }
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
+    }
 }
 @registerModifier()
 export class modifier_imba_shadow_shaman_shackles_handler extends BaseModifier_Plus {
@@ -781,6 +800,12 @@ export class imba_shadow_shaman_mass_serpent_ward extends BaseAbility_Plus {
         if (bChild) {
             ward.SetRenderColor(0, 0, 0);
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_most_enemy(this);
     }
 }
 @registerModifier()

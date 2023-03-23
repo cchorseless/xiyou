@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -203,6 +204,12 @@ export class imba_night_stalker_void extends BaseAbility_Plus {
             }
         }
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this)
+    }
 }
 @registerModifier()
 export class modifier_imba_void_ministun extends BaseModifier_Plus {
@@ -333,6 +340,12 @@ export class imba_night_stalker_crippling_fear extends BaseAbility_Plus {
         target.AddNewModifier(caster, ability, modifier_fear, {
             duration: duration * (1 - target.GetStatusResistance())
         });
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this)
     }
 }
 @registerModifier()
@@ -799,6 +812,12 @@ export class imba_night_stalker_darkness extends BaseAbility_Plus {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_night_stalker_10") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_night_stalker_10")) {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_night_stalker_10"), "modifier_special_bonus_imba_night_stalker_10", {});
         }
+    }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_cast(this)
     }
 }
 @registerModifier()

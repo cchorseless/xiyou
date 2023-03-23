@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 import { ResHelper } from "../../../helper/ResHelper";
@@ -59,6 +60,13 @@ export class imba_spirit_breaker_charge_of_darkness extends BaseAbility_Plus {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_spirit_breaker_bonus_health") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_spirit_breaker_bonus_health")) {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_spirit_breaker_bonus_health"), "modifier_special_bonus_imba_spirit_breaker_bonus_health", {});
         }
+    }
+
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
     }
 }
 @registerModifier()
@@ -567,6 +575,12 @@ export class imba_spirit_breaker_bulldoze extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_spirit_breaker_bulldoze_cooldown"), "modifier_special_bonus_imba_spirit_breaker_bulldoze_cooldown", {});
         }
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_if_enemy(this);
+    }
 }
 @registerModifier()
 export class modifier_imba_spirit_breaker_bulldoze extends BaseModifier_Plus {
@@ -778,13 +792,13 @@ export class imba_spirit_breaker_nether_strike extends BaseAbility_Plus {
             return super.GetCastPoint();
         }
     }
-    GetManaCost(iLevel: number): number {
-        if (this.GetCasterPlus().HasModifier("modifier_imba_spirit_breaker_nether_strike_planeswalker")) {
-            return super.GetManaCost(iLevel) * (100 - this.GetTalentSpecialValueFor("planeswalker_reduction")) * 0.01;
-        } else {
-            return super.GetManaCost(iLevel);
-        }
-    }
+    // GetManaCost(iLevel: number): number {
+    //     if (this.GetCasterPlus().HasModifier("modifier_imba_spirit_breaker_nether_strike_planeswalker")) {
+    //         return super.GetManaCost(iLevel) * (100 - this.GetTalentSpecialValueFor("planeswalker_reduction")) * 0.01;
+    //     } else {
+    //         return super.GetManaCost(iLevel);
+    //     }
+    // }
     CastFilterResultTarget(hTarget: CDOTA_BaseNPC): UnitFilterResult {
         if (!IsServer()) {
             return;
@@ -918,6 +932,12 @@ export class imba_spirit_breaker_nether_strike extends BaseAbility_Plus {
                 this.EndCooldown();
             }
         }
+    }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
     }
 }
 @registerModifier()

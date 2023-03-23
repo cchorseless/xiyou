@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -138,6 +139,12 @@ export class imba_snapfire_scatterblast extends BaseAbility_Plus {
             ParticleManager.ReleaseParticleIndex(effect_cast);
         }
         EmitSoundOn(sound_target, target);
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this)
     }
 }
 @registerModifier()
@@ -350,6 +357,12 @@ export class imba_snapfire_firesnap_cookie extends BaseAbility_Plus {
         ParticleManager.ReleaseParticleIndex(effect_cast);
         EmitSoundOn(sound_location, target);
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_friend(this, null, (u) => u != this.GetCasterPlus());
+    }
 }
 @registerAbility()
 export class imba_snapfire_lil_shredder extends BaseAbility_Plus {
@@ -359,6 +372,12 @@ export class imba_snapfire_lil_shredder extends BaseAbility_Plus {
         caster.AddNewModifier(caster, this, "modifier_imba_snapfire_lil_shredder", {
             duration: duration
         });
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_cast(this);
     }
 }
 @registerModifier()
@@ -688,6 +707,12 @@ export class imba_snapfire_mortimer_kisses extends BaseAbility_Plus {
         ParticleManager.ReleaseParticleIndex(effect_cast);
         let sound_location = "Hero_Snapfire.MortimerBlob.Impact";
         EmitSoundOnLocationWithCaster(loc, sound_location, this.GetCasterPlus());
+    }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this);
     }
 }
 @registerModifier()

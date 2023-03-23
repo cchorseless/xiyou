@@ -360,7 +360,7 @@ export module ProjectileHelper {
                 if (projectile.fVisionTickTime <= 0) {
                     projectile.fVisionTickTime = 0.1;
                 }
-                projectile.fVisionLingerDuration = info.fVisionLingerDuration || info.fVisionTickTime;
+                projectile.fVisionLingerDuration = info.fVisionLingerDuration || projectile.fVisionTickTime;
                 if (projectile.fVisionLingerDuration < projectile.fVisionTickTime) {
                     projectile.fVisionLingerDuration = projectile.fVisionTickTime;
                 }
@@ -405,21 +405,21 @@ export module ProjectileHelper {
                     let origin = v.origin || projectile.vSpawnOrigin;
                     ParticleManager.SetParticleControlEnt(projectile.id, k, unit, pattach, attachPoint, origin, true);
                 }
-                ParticleManager.SetParticleControl(projectile.id, info.iPositionCP, info.vSpawnOrigin);
-                if (info.ControlPointForwards.length > 0 && info.ControlPointOrientations.length > 0) {
-                    ParticleManager.SetParticleControlForward(projectile.id, info.iPositionCP, projectile.vel.Normalized());
+                ParticleManager.SetParticleControl(projectile.id, projectile.iPositionCP, projectile.vSpawnOrigin);
+                if (projectile.ControlPointForwards.length > 0 && projectile.ControlPointOrientations.length > 0) {
+                    ParticleManager.SetParticleControlForward(projectile.id, projectile.iPositionCP, projectile.vel.Normalized());
                 }
-                if (info.GroundBehavior == ProjectileHelper.ELineProjectBehavior.PROJECTILES_FOLLOW) {
+                if (projectile.GroundBehavior == ProjectileHelper.ELineProjectBehavior.PROJECTILES_FOLLOW) {
                     let future = projectile.pos + projectile.vel as Vector;
                     let ground = GetGroundPosition(projectile.pos, projectile.Source) + Vector(0, 0, projectile.fGroundOffset) as Vector;
                     if (ground.z > future.z) {
                         let slope = CalcSlope(ground, projectile.Source, projectile.vel);
-                        ParticleManager.SetParticleControl(projectile.id, info.iVelocityCP, projectile.vel.Length() * slope * 30 as Vector);
+                        ParticleManager.SetParticleControl(projectile.id, projectile.iVelocityCP, projectile.vel.Length() * slope * 30 as Vector);
                     } else {
-                        ParticleManager.SetParticleControl(projectile.id, info.iVelocityCP, projectile.vel * 30 as Vector);
+                        ParticleManager.SetParticleControl(projectile.id, projectile.iVelocityCP, projectile.vel * 30 as Vector);
                     }
                 } else {
-                    ParticleManager.SetParticleControl(projectile.id, info.iVelocityCP, projectile.vel * 30 as Vector);
+                    ParticleManager.SetParticleControl(projectile.id, projectile.iVelocityCP, projectile.vel * 30 as Vector);
                 }
                 GTimerHelper.AddTimer(0, GHandler.create(projectile, () => {
                     if (projectile.OnThink) {
@@ -565,7 +565,7 @@ export module ProjectileHelper {
                     }
                 }
                 for (let index = 0; index < tot; index++) {
-                    for (let i = 0; i <= ents.length; i++) {
+                    for (let i = 0; i < ents.length; i++) {
                         let v = ents[i];
                         let zOffset = v.TempData().zOffset || 0;
                         let height = (v.TempData().height || 150) + zOffset;

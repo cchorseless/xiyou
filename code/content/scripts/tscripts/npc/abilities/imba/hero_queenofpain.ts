@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 import { ResHelper } from "../../../helper/ResHelper";
@@ -38,6 +39,7 @@ export class imba_queenofpain_delightful_torment extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_queenofpain_4"), "modifier_special_bonus_imba_queenofpain_4", {});
         }
     }
+
 }
 @registerModifier()
 export class modifier_imba_delightful_torment_thinker extends BaseModifier_Plus {
@@ -250,6 +252,12 @@ export class imba_queenofpain_shadow_strike extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_queen_of_pain_shadow_strike_aoe"), "modifier_special_bonus_imba_queen_of_pain_shadow_strike_aoe", {});
         }
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this)
+    }
 }
 @registerModifier()
 export class modifier_imba_shadow_strike_debuff extends BaseModifier_Plus {
@@ -448,12 +456,23 @@ export class imba_queenofpain_blink extends BaseAbility_Plus {
             }
         }
     }
+    // GetManaCost(level: number): number {
+    //     if (this.GetCasterPlus().HasModifier("modifier_imba_queenofpain_blink_decision_time")) {
+    //         return this.GetSpecialValueFor("mana_cost") * 2;
+    //     } else {
+    //         return super.GetManaCost(level);
+    //     }
+    // }
     GetManaCost(level: number): number {
-        if (this.GetCasterPlus().HasModifier("modifier_imba_queenofpain_blink_decision_time")) {
-            return this.GetSpecialValueFor("mana_cost") * 2;
-        } else {
-            return super.GetManaCost(level);
-        }
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this, null, (enemy, index, count) => {
+            if (enemy.IsRangedAttacker() || enemy.GetHealthLosePect() > 80) {
+                return true
+            }
+            return false;
+        }, FindOrder.FIND_FARTHEST);
     }
 }
 @registerModifier()
@@ -610,6 +629,12 @@ export class imba_queenofpain_scream_of_pain extends BaseAbility_Plus {
                 }
             }
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_if_enemy(this);
     }
 }
 @registerModifier()
@@ -833,6 +858,12 @@ export class imba_queenofpain_sonic_wave extends BaseAbility_Plus {
             return this.GetSpecialValueFor("cooldown_scepter");
         }
         return super.GetCooldown(nLevel);
+    }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this);
     }
 }
 @registerModifier()

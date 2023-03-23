@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -12,6 +13,15 @@ export class imba_mars_spear extends BaseAbility_Plus {
     public trailblazer_particles: any;
     public trailblazer_thinker: any;
     public projectiles: { [k: string]: any };
+
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this)
+    }
+
+
     GetAOERadius(): number {
         if (this.GetAutoCastState()) {
             return this.GetSpecialValueFor("heaven_spear_radius");
@@ -367,7 +377,7 @@ export class modifier_imba_mars_spear_trailblazer_thinker extends BaseModifier_P
             this.Destroy();
             return;
         }
-        let damage = (this.GetSpecialValueFor("damage") * (this.GetSpecialValueFor("trailblazer_damage_pct") / 100)) * this.tick_time;
+        let damage = this.GetSpecialValueFor("damage") * this.tick_time;
         let enemies = undefined;
         if (this.heaven_spear && this.heaven_spear == 1) {
             enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.start_pos, undefined, this.GetSpecialValueFor("trailblazer_radius"), this.GetAbilityPlus().GetAbilityTargetTeam(), this.GetAbilityPlus().GetAbilityTargetType(), this.GetAbilityPlus().GetAbilityTargetFlags(), 0, false);
@@ -622,6 +632,12 @@ export class imba_mars_gods_rebuke extends BaseAbility_Plus {
         ParticleManager.ReleaseParticleIndex(effect_cast);
         EmitSoundOn(sound_cast, target);
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this)
+    }
 }
 @registerModifier()
 export class modifier_imba_mars_gods_rebuke extends BaseModifier_Plus {
@@ -706,6 +722,19 @@ export class imba_mars_bulwark extends BaseAbility_Plus {
             this.GetCasterPlus().RemoveModifierByName("modifier_mars_bulwark_active");
             this.GetCasterPlus().RemoveModifierByName("modifier_imba_mars_bulwark_active");
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        if (this.GetToggleState()) {
+            return false;
+        }
+        if (this.GetCasterPlus().GetHealthLosePect() > 80) {
+            this.ToggleAbility();
+            return false
+        }
+        return false
     }
 }
 @registerModifier()
@@ -946,6 +975,12 @@ export class imba_mars_arena_of_blood extends BaseAbility_Plus {
         }
         let attacker = EntIndexToHScript(data.entindex_source_const) as IBaseNpc_Plus;
         attacker.PerformAttack(target, true, true, true, true, false, false, true);
+    }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this)
     }
 }
 @registerModifier()

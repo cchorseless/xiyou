@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { GameServiceConfig } from "../../../shared/GameServiceConfig";
@@ -22,7 +23,7 @@ function CheckExceptions(ability: CDOTABaseAbility) {
     return false;
 }
 @registerAbility()
-export class imba_silencer_arcane_curse extends BaseAbility_Plus {
+export class imba_silencer_curse_of_the_silent extends BaseAbility_Plus {
     GetAbilityTextureName(): string {
         return "silencer_curse_of_the_silent";
     }
@@ -50,9 +51,15 @@ export class imba_silencer_arcane_curse extends BaseAbility_Plus {
         if (!IsServer()) {
             return;
         }
-        if (this.GetCasterPlus().HasTalent("special_bonus_imba_silencer_arcane_curse_slow") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_silencer_arcane_curse_slow")) {
-            this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_silencer_arcane_curse_slow"), "modifier_special_bonus_imba_silencer_arcane_curse_slow", {});
+        if (this.GetCasterPlus().HasTalent("special_bonus_imba_silencer_curse_of_the_silent_slow") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_silencer_curse_of_the_silent_slow")) {
+            this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_silencer_curse_of_the_silent_slow"), "modifier_special_bonus_imba_silencer_curse_of_the_silent_slow", {});
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_most_enemy(this);
     }
 }
 @registerModifier()
@@ -355,6 +362,15 @@ export class imba_silencer_glaives_of_wisdom extends BaseAbility_Plus {
             this.GetCasterPlus().MoveToTargetToAttack(this.GetCursorTarget());
             this.RefundManaCost();
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        if (!this.GetAutoCastState()) {
+            this.ToggleAutoCast();
+        }
+        return false
     }
 }
 @registerModifier()
@@ -803,6 +819,12 @@ export class imba_silencer_last_word extends BaseAbility_Plus {
     GetIntrinsicModifierName(): string {
         return "imba_silencer_last_word_aura";
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
+    }
 }
 @registerAbility()
 export class imba_silencer_last_word_aura extends BaseAbility_Plus {
@@ -1201,6 +1223,12 @@ export class imba_silencer_global_silence extends BaseAbility_Plus {
             }
         }
     }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_cast(this);
+    }
 }
 @registerModifier()
 export class modifier_imba_silencer_global_silence extends BaseModifier_Plus {
@@ -1549,7 +1577,7 @@ export class modifier_special_bonus_imba_silencer_4 extends BaseModifier_Plus {
     }
 }
 @registerModifier()
-export class modifier_special_bonus_imba_silencer_arcane_curse_slow extends BaseModifier_Plus {
+export class modifier_special_bonus_imba_silencer_curse_of_the_silent_slow extends BaseModifier_Plus {
     IsHidden(): boolean {
         return true;
     }

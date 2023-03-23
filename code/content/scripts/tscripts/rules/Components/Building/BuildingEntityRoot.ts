@@ -120,6 +120,7 @@ export class BuildingEntityRoot extends BattleUnitEntityRoot {
     }
     OnRound_Battle() {
         if (!IsServer()) { return };
+        if (!this.ChessComp().isInBattle) { return }
         let hCaster = this.GetDomain<IBaseNpc_Plus>();
         let vLocation = hCaster.GetAbsOrigin();
         modifier_out_of_game.applyOnly(hCaster, hCaster);

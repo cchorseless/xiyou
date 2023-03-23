@@ -486,9 +486,11 @@ export module FuncEntity {
             unit.__safedestroyed__ = true;
             if (IsServer()) {
                 let bthinker = unit.IsThinker();
-                let allm = unit.FindAllModifiers();
+                let allm = unit.FindAllModifiers() as IBaseModifier_Plus[];
                 for (let m of allm) {
-                    m.Destroy();
+                    if (IsValid(m)) {
+                        m.Destroy();
+                    }
                 }
                 if (!bthinker) {
                     let lenability = unit.GetAbilityCount()

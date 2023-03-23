@@ -2,7 +2,7 @@
 import { AllEntity } from "./AllEntity";
 import { GameCache } from "./GameCache";
 import { GameFunc } from "./GameFunc";
-import { GameRulesExt } from "./GameRulesExt";
+import { GameLibsExt } from "./GameLibsExt";
 import { EventHelper } from "./helper/EventHelper";
 import { KVHelper } from "./helper/KVHelper";
 import { LogHelper } from "./helper/LogHelper";
@@ -16,7 +16,7 @@ import { SingletonClass } from "./shared/lib/SingletonClass";
 export class GameMode_Client extends SingletonClass {
 
     public Init() {
-        GameRulesExt.Init();
+        GameLibsExt.Init();
         this.addEvent();
         KVHelper.initKVFile();
         // this.PreLoadLua();

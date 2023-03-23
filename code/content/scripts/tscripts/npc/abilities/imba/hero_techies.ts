@@ -1,10 +1,10 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { GameServiceConfig } from "../../../shared/GameServiceConfig";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifierMotionBoth_Plus, BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
-import { BaseNpc_Plus } from "../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 
@@ -15,7 +15,7 @@ function PlantProximityMine(caster: IBaseNpc_Plus, ability: IBaseAbility_Plus, s
     } else {
         mine_name = "npc_imba_techies_land_mines";
     }
-    let mine = BaseNpc_Plus.CreateUnitByName(mine_name, spawn_point, caster, true);
+    let mine = caster.CreateSummon(mine_name, spawn_point, 60, true);
     GFuncEntity.AddRangeIndicator(mine, caster, undefined, undefined, ability.GetAOERadius(), 150, 22, 22);
     let playerID = caster.GetPlayerID();
     // mine.SetControllableByPlayer(playerID, true);
@@ -71,16 +71,16 @@ export class imba_techies_land_mines extends BaseAbility_Plus {
     GetIntrinsicModifierName(): string {
         return "modifier_generic_charges";
     }
-    GetManaCost(level: number): number {
-        let caster = this.GetCasterPlus();
-        // let initial_mana_cost = this.GetSpecialValueFor("AbilityManaCost");
-        let initial_mana_cost = 0;
-        let modifier_charges = "modifier_generic_charges";
-        let mana_increase_per_stack = this.GetSpecialValueFor("mana_increase_per_stack");
-        let stacks = caster.findBuffStack(modifier_charges, caster);
-        let mana_cost = initial_mana_cost + mana_increase_per_stack * stacks;
-        return mana_cost;
-    }
+    // GetManaCost(level: number): number {
+    //     let caster = this.GetCasterPlus();
+    //     // let initial_mana_cost = this.GetSpecialValueFor("AbilityManaCost");
+    //     let initial_mana_cost = 0;
+    //     let modifier_charges = "modifier_generic_charges";
+    //     let mana_increase_per_stack = this.GetSpecialValueFor("mana_increase_per_stack");
+    //     let stacks = caster.findBuffStack(modifier_charges, caster);
+    //     let mana_cost = initial_mana_cost + mana_increase_per_stack * stacks;
+    //     return mana_cost;
+    // }
     CastFilterResultLocation(location: Vector): UnitFilterResult {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
@@ -199,6 +199,12 @@ export class imba_techies_land_mines extends BaseAbility_Plus {
                 PlantProximityMine(caster, ability, mine_point, false);
             }
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this);
     }
 }
 @registerModifier()
@@ -606,12 +612,18 @@ export class imba_techies_stasis_trap extends BaseAbility_Plus {
                 }
             });
         } else {
-            let trap = BaseNpc_Plus.CreateUnitByName("npc_imba_techies_stasis_trap", target_point, caster, true);
+            let trap = caster.CreateSummon("npc_imba_techies_stasis_trap", target_point, 60, true);
             let playerID = caster.GetPlayerID();
             // trap.SetControllableByPlayer(playerID, true);
             trap.SetOwner(caster);
             trap.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_statis_trap", {});
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this);
     }
 }
 @registerModifier()
@@ -863,7 +875,7 @@ export class imba_techies_suicide extends BaseAbility_Plus {
             target_point_z: target_point.z
         }
         if (caster.HasTalent("special_bonus_imba_techies_8")) {
-            pig = BaseNpc_Plus.CreateUnitByName("npc_imba_techies_suicide_piggy", caster.GetAbsOrigin(), caster, false);
+            pig = caster.CreateSummon("npc_imba_techies_suicide_piggy", caster.GetAbsOrigin(), 60, false);
             let playerID = caster.GetPlayerID();
             // pig.SetControllableByPlayer(playerID, true);
             pig.SetForwardVector(caster.GetForwardVector());
@@ -874,6 +886,12 @@ export class imba_techies_suicide extends BaseAbility_Plus {
         } else {
             caster.AddNewModifier(caster, ability, modifier_blast, modifierParam);
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this);
     }
 }
 @registerModifier()
@@ -1300,6 +1318,12 @@ export class imba_techies_remote_mines extends BaseAbility_Plus {
         }
         mine.SetOwner(caster);
     }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this);
+    }
 }
 @registerAbility()
 export class imba_techies_remote_mines_pinpoint_detonation extends BaseAbility_Plus {
@@ -1384,6 +1408,12 @@ export class imba_techies_remote_mines_pinpoint_detonation extends BaseAbility_P
             }
             caster.ForceKill(true);
         });
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_cast(this);
     }
 }
 @registerModifier()
@@ -1549,7 +1579,7 @@ export class imba_techies_minefield_sign extends BaseAbility_Plus {
         if (this.assigned_sign && this.assigned_sign.Destroy) {
             this.assigned_sign.Destroy();
         }
-        let sign = BaseNpc_Plus.CreateUnitByName("npc_imba_techies_minefield_sign", target_point, caster, false);
+        let sign = caster.CreateSummon("npc_imba_techies_minefield_sign", target_point, 60, false);
         GFuncEntity.AddRangeIndicator(sign, caster, this, "radius", undefined, 255, 40, 40, true);
         this.assigned_sign = sign;
         sign.AddNewModifier(caster, this, modifier_sign, {});

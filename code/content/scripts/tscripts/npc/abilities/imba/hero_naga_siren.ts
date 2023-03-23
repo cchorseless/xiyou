@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -48,16 +49,15 @@ export class imba_naga_siren_mirror_image extends BaseAbility_Plus {
             }
         }
         this.AddTimer(this.GetSpecialValueFor("invuln_duration"), () => {
-            this.illusions = this.GetCasterPlus().CreateIllusion(this.GetCasterPlus(),
-                {
-                    outgoing_damage: image_out_dmg,
-                    incoming_damage: this.GetSpecialValueFor("incoming_damage") - this.GetCasterPlus().GetTalentValue("special_bonus_imba_naga_siren_mirror_image_damage_taken"),
-                    bounty_base: this.GetCasterPlus().GetIllusionBounty(),
-                    bounty_growth: undefined,
-                    outgoing_damage_structure: undefined,
-                    outgoing_damage_roshan: undefined,
-                    duration: undefined
-                }, image_count);
+            this.illusions = this.GetCasterPlus().CreateIllusion(this.GetCasterPlus(), {
+                outgoing_damage: image_out_dmg,
+                incoming_damage: this.GetSpecialValueFor("incoming_damage") - this.GetCasterPlus().GetTalentValue("special_bonus_imba_naga_siren_mirror_image_damage_taken"),
+                bounty_base: this.GetCasterPlus().GetIllusionBounty(),
+                bounty_growth: undefined,
+                outgoing_damage_structure: undefined,
+                outgoing_damage_roshan: undefined,
+                duration: undefined
+            }, image_count);
             for (let i = 0; i < this.illusions.length; i++) {
                 let illusion = this.illusions[i];
                 let pos = this.GetCasterPlus().GetAbsOrigin() + vRandomSpawnPos[i] as Vector;
@@ -69,9 +69,16 @@ export class imba_naga_siren_mirror_image extends BaseAbility_Plus {
             ParticleManager.DestroyParticle(pfx, false);
             ParticleManager.ReleaseParticleIndex(pfx);
             this.GetCasterPlus().Stop();
-            return undefined;
+            return;
         });
         this.GetCasterPlus().EmitSound("Hero_NagaSiren.MirrorImage");
+    }
+
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_if_enemy(this)
     }
 }
 @registerModifier()
@@ -193,7 +200,7 @@ export class imba_naga_siren_ensnare extends BaseAbility_Plus {
         let projectile_duration = distance / net_speed;
         this.LaunchProjectile(this.GetCasterPlus(), this.GetCursorTarget(), projectile_duration);
         if (GameFunc.GetCount(this.naga_sirens) > 0) {
-            this.naga_sirens[RandomInt(1, GameFunc.GetCount(this.naga_sirens))].EmitSound("Hero_NagaSiren.Ensnare.Cast");
+            GFuncRandom.RandomOne(this.naga_sirens).EmitSound("Hero_NagaSiren.Ensnare.Cast");
         } else {
             this.GetCasterPlus().EmitSound("Hero_NagaSiren.Ensnare.Cast");
         }
@@ -233,6 +240,12 @@ export class imba_naga_siren_ensnare extends BaseAbility_Plus {
                 duration: this.GetSpecialValueFor("duration") * (1 - hTarget.GetStatusResistance())
             });
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this)
     }
 }
 @registerModifier()
@@ -290,6 +303,7 @@ export class imba_naga_siren_rip_tide extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_naga_siren_rip_tide_armor"), "modifier_special_bonus_imba_naga_siren_rip_tide_armor", {});
         }
     }
+
 }
 @registerModifier()
 export class modifier_imba_naga_siren_rip_tide extends BaseModifier_Plus {
@@ -407,6 +421,12 @@ export class imba_naga_siren_song_of_the_siren extends BaseAbility_Plus {
         }
         this.GetCasterPlus().EmitSound("Hero_NagaSiren.SongOfTheSiren");
         ParticleManager.ReleaseParticleIndex(pfx);
+    }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_cast(this)
     }
 }
 @registerModifier()

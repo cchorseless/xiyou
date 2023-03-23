@@ -25,7 +25,29 @@ GameRules.IsDaytimePlus = () => {
 }
 
 
-export class GameRulesExt {
+
+
+declare global {
+    interface CScriptParticleManager {
+
+        /**
+         * @Both
+         * 清理粒子
+         */
+        ClearParticle(p: ParticleID): void;
+    }
+}
+
+ParticleManager.ClearParticle = (p: ParticleID) => {
+    ParticleManager.ReleaseParticleIndex(p);
+    ParticleManager.DestroyParticle(p, false);
+}
+
+
+
+
+
+export class GameLibsExt {
     static Init() {
     }
 

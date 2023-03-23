@@ -376,7 +376,13 @@ export class BaseNpc_Plus extends BaseNpc {
         }
         return hSummon as IBaseNpc_Plus;
     }
-
+    /**
+     * 
+     * @param vLocation 
+     * @param fDuration 
+     * @param isPerma 
+     * @returns 
+     */
     CreateDummyUnit?(vLocation: Vector, fDuration: number, isPerma = false) {
         if (!IsServer()) { return };
         let sUnitName = isPerma ? "npc_imba_dummy_unit_perma" : "npc_imba_dummy_unit";

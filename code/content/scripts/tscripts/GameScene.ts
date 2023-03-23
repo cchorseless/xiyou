@@ -4,7 +4,7 @@
  */
 
 import { Assert_Sounds } from "./assert/Assert_Sounds";
-import { GameRulesExt } from "./GameRulesExt";
+import { GameLibsExt } from "./GameLibsExt";
 import { EventHelper } from "./helper/EventHelper";
 import { LogHelper } from "./helper/LogHelper";
 import { NetTablesHelper } from "./helper/NetTablesHelper";
@@ -81,7 +81,7 @@ export class GameScene {
     }
 
     static StartGame() {
-        GameRulesExt.StartGame();
+        GameLibsExt.StartGame();
         GRoundSystem.GetInstance().StartGame();
         GDrawSystem.GetInstance().StartGame();
         GPlayerEntityRoot.StartGame();

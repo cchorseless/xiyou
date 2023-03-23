@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 import { ResHelper } from "../../../helper/ResHelper";
@@ -33,10 +34,10 @@ export class imba_pangolier_swashbuckle extends BaseAbility_Plus {
     GetAssociatedSecondaryAbilities(): string {
         return "imba_pangolier_heartpiercer";
     }
-    GetManaCost(level: number): number {
-        let manacost = super.GetManaCost(level);
-        return manacost;
-    }
+    // GetManaCost(level: number): number {
+    //     let manacost = super.GetManaCost(level);
+    //     return manacost;
+    // }
     GetCastRange(p_0: Vector, p_1: CDOTA_BaseNPC | undefined,): number {
         return this.GetSpecialValueFor("dash_range");
     }
@@ -80,6 +81,13 @@ export class imba_pangolier_swashbuckle extends BaseAbility_Plus {
         let modifier_movement_handler = caster.FindModifierByName(modifier_movement) as modifier_imba_swashbuckle_dash;
         modifier_movement_handler.target_point = point;
     }
+
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this)
+    }
 }
 @registerModifier()
 export class modifier_imba_swashbuckle_dash extends BaseModifierMotionHorizontal_Plus {
@@ -95,6 +103,7 @@ export class modifier_imba_swashbuckle_dash extends BaseModifierMotionHorizontal
     public dash_time: number;
     public direction: any;
     public frametime: number;
+    public dashId: ParticleID;
     public enemies_hit: IBaseNpc_Plus[];
     BeCreated(p_0: any,): void {
         this.attack_modifier = "modifier_imba_swashbuckle_slashes";
@@ -109,9 +118,9 @@ export class modifier_imba_swashbuckle_dash extends BaseModifierMotionHorizontal
                 this.distance = (this.GetCasterPlus().GetAbsOrigin() - this.target_point as Vector).Length2D();
                 this.dash_time = this.distance / this.dash_speed;
                 this.direction = (this.target_point - this.GetCasterPlus().GetAbsOrigin() as Vector).Normalized();
-                let dash = ResHelper.CreateParticleEx(this.dash_particle, ParticleAttachment_t.PATTACH_WORLDORIGIN, this.GetCasterPlus());
-                ParticleManager.SetParticleControl(dash, 0, this.GetCasterPlus().GetAbsOrigin());
-                this.AddParticle(dash, false, false, -1, true, false);
+                this.dashId = ResHelper.CreateParticleEx(this.dash_particle, ParticleAttachment_t.PATTACH_WORLDORIGIN, this.GetCasterPlus());
+                ParticleManager.SetParticleControl(this.dashId, 0, this.GetCasterPlus().GetAbsOrigin());
+                this.AddParticle(this.dashId, false, false, -1, true, false);
                 this.BeginMotionOrDestroy()
             });
         }
@@ -189,6 +198,11 @@ export class modifier_imba_swashbuckle_dash extends BaseModifierMotionHorizontal
     }
     BeRemoved(): void {
         if (IsServer()) {
+            if (this.dashId) {
+                ParticleManager.ReleaseParticleIndex(this.dashId);
+                ParticleManager.DestroyParticle(this.dashId, false);
+                this.dashId = null;
+            }
             this.GetCasterPlus().SetUnitOnClearGround();
             let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.range, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE, FindOrder.FIND_CLOSEST, false);
             let target_unit = undefined;
@@ -198,7 +212,7 @@ export class modifier_imba_swashbuckle_dash extends BaseModifierMotionHorizontal
                     target_unit = target_unit || enemy;
                     if (enemy.IsRealUnit()) {
                         target_unit = enemy;
-                        return;
+                        break;
                     }
                 }
                 target_direction = (target_unit.GetAbsOrigin() - this.GetCasterPlus().GetAbsOrigin() as Vector).Normalized();
@@ -416,10 +430,10 @@ export class imba_pangolier_shield_crash extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_special_bonus_imba_pangolier_3", {});
         }
     }
-    GetManaCost(level: number): number {
-        let manacost = super.GetManaCost(level);
-        return manacost;
-    }
+    // GetManaCost(level: number): number {
+    //     let manacost = super.GetManaCost(level);
+    //     return manacost;
+    // }
     GetCooldown(level: number): number {
         let cooldown = super.GetCooldown(level);
         let caster = this.GetCasterPlus();
@@ -524,6 +538,12 @@ export class imba_pangolier_shield_crash extends BaseAbility_Plus {
                 }
             }
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_if_enemy(this)
     }
 }
 @registerModifier()
@@ -1205,10 +1225,10 @@ export class imba_pangolier_gyroshell extends BaseAbility_Plus {
     GetAssociatedSecondaryAbilities(): string {
         return "imba_pangolier_gyroshell_stop";
     }
-    GetManaCost(level: number): number {
-        let manacost = super.GetManaCost(level);
-        return manacost;
-    }
+    // GetManaCost(level: number): number {
+    //     let manacost = super.GetManaCost(level);
+    //     return manacost;
+    // }
     GetCastPoint(): number {
         let cast_point = super.GetCastPoint();
         return cast_point;
@@ -1266,6 +1286,13 @@ export class imba_pangolier_gyroshell extends BaseAbility_Plus {
             }
         });
         caster.SwapAbilities("imba_pangolier_gyroshell", "imba_pangolier_gyroshell_stop", false, true);
+    }
+
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_cast(this)
     }
 }
 @registerModifier()

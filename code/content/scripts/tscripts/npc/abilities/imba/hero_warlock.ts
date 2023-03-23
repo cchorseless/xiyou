@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -63,6 +64,12 @@ export class imba_warlock_fatal_bonds extends BaseAbility_Plus {
         for (const modifiers of (modifier_table)) {
             modifiers.bond_table = bond_table;
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
     }
 }
 @registerModifier()
@@ -264,6 +271,17 @@ export class imba_warlock_shadow_word extends BaseAbility_Plus {
             StopSoundOn(sound_target, caster);
         });
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        if (RollPercentage(50)) {
+            return AI_ability.TARGET_if_enemy(this);
+        }
+        else {
+            return AI_ability.TARGET_if_friend(this);
+        }
+    }
 }
 @registerModifier()
 export class modifier_imba_shadow_word extends BaseModifier_Plus {
@@ -452,6 +470,12 @@ export class imba_warlock_upheaval extends BaseAbility_Plus {
             });
         }
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this);
+    }
 }
 @registerModifier()
 export class modifier_imba_upheaval extends BaseModifier_Plus {
@@ -602,9 +626,9 @@ export class modifier_imba_upheaval_buff extends BaseModifier_Plus {
 export class imba_warlock_rain_of_chaos extends BaseAbility_Plus {
 
 
-    GetManaCost(level: number): number {
-        return 100
-    }
+    // GetManaCost(level: number): number {
+    //     return 100
+    // }
 
     IsHiddenWhenStolen(): boolean {
         return false;
@@ -730,6 +754,12 @@ export class imba_warlock_rain_of_chaos extends BaseAbility_Plus {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_warlock_chaotic_offering_magic_resistance") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_warlock_chaotic_offering_magic_resistance")) {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_warlock_chaotic_offering_magic_resistance"), "modifier_special_bonus_imba_warlock_chaotic_offering_magic_resistance", {});
         }
+    }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_most_enemy(this);
     }
 }
 @registerModifier()

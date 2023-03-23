@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -161,6 +162,13 @@ export class imba_phoenix_icarus_dive extends BaseAbility_Plus {
             ability_handle.SetLevel(1);
         }
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this, null, null, FindOrder.FIND_FARTHEST)
+    }
+
 }
 @registerModifier()
 export class modifier_imba_phoenix_icarus_dive_dash_dummy extends BaseModifier_Plus {
@@ -560,6 +568,12 @@ export class imba_phoenix_fire_spirits extends BaseAbility_Plus {
             }
         }
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_cast(this)
+    }
 }
 @registerModifier()
 export class modifier_imba_phoenix_fire_spirits_count extends BaseModifier_Plus {
@@ -596,6 +610,7 @@ export class modifier_imba_phoenix_fire_spirits_count extends BaseModifier_Plus 
         }
         let caster = this.GetCasterPlus();
         let ability = caster.findAbliityPlus<imba_phoenix_launch_fire_spirit>("imba_phoenix_launch_fire_spirit");
+        if (!ability) { return }
         let enemies = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, 192, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
         for (const [_, enemy] of GameFunc.iPair(enemies)) {
             enemy.AddNewModifier(caster, ability, "modifier_imba_phoenix_fire_spirits_debuff", {
@@ -649,13 +664,13 @@ export class imba_phoenix_launch_fire_spirit extends BaseAbility_Plus {
     GetAOERadius(): number {
         return this.GetSpecialValueFor("radius");
     }
-    GetManaCost(p_0: number,): number {
-        if (!this.GetCasterPlus().HasTalent("special_bonus_imba_phoenix_7")) {
-            return 0;
-        } else {
-            return this.GetCasterPlus().GetTalentValue("special_bonus_imba_phoenix_7", "mana_cost");
-        }
-    }
+    // GetManaCost(p_0: number,): number {
+    //     if (!this.GetCasterPlus().HasTalent("special_bonus_imba_phoenix_7")) {
+    //         return 0;
+    //     } else {
+    //         return this.GetCasterPlus().GetTalentValue("special_bonus_imba_phoenix_7", "mana_cost");
+    //     }
+    // }
     OnSpellStart(): void {
         if (!IsServer()) {
             return;
@@ -776,6 +791,12 @@ export class imba_phoenix_launch_fire_spirit extends BaseAbility_Plus {
         if (ability_level != this_abilityLevel) {
             ability_handle.SetLevel(this_abilityLevel);
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this)
     }
 }
 @registerModifier()
@@ -1092,6 +1113,12 @@ export class imba_phoenix_sun_ray extends BaseAbility_Plus {
             toggle_move.SetLevel(1);
             toggle_move.SetActivated(false);
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this)
     }
 }
 @registerModifier()
@@ -1680,6 +1707,14 @@ export class imba_phoenix_supernova extends BaseAbility_Plus {
                 egg2.StartGestureWithPlaybackRate(GameActivity_t.ACT_DOTA_IDLE, egg_playback_rate);
             }
         }
+    }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_friend(this, null, (unit) => {
+            return unit.GetHealthLosePect() > 50;
+        })
     }
 }
 @registerModifier()

@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -42,6 +43,12 @@ export class imba_visage_grave_chill extends BaseAbility_Plus {
         target.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_visage_grave_chill_debuff", {
             duration: this.GetSpecialValueFor("chill_duration") * (1 - target.GetStatusResistance())
         });
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
     }
 }
 @registerModifier()
@@ -252,6 +259,12 @@ export class imba_visage_soul_assumption extends BaseAbility_Plus {
             }
             ApplyDamage(damageTable);
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
     }
 }
 @registerModifier()
@@ -685,6 +698,12 @@ export class imba_visage_summon_familiars extends BaseAbility_Plus {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_visage_summon_familiars_bonus_move_speed") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_visage_summon_familiars_bonus_move_speed")) {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_visage_summon_familiars_bonus_move_speed"), "modifier_special_bonus_imba_visage_summon_familiars_bonus_move_speed", {});
         }
+    }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_cast(this);
     }
 }
 @registerModifier()

@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { GameServiceConfig } from "../../../shared/GameServiceConfig";
@@ -194,6 +195,12 @@ export class imba_witch_doctor_paralyzing_cask extends BaseAbility_Plus {
             return undefined;
         }
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
+    }
 }
 @registerAbility()
 export class imba_witch_doctor_voodoo_restoration extends BaseAbility_Plus {
@@ -215,13 +222,13 @@ export class imba_witch_doctor_voodoo_restoration extends BaseAbility_Plus {
             return DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_NO_TARGET + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_TOGGLE + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL;
         }
     }
-    GetManaCost(hTarget: number): number {
-        if (this.GetCasterPlus().HasTalent("special_bonus_imba_witch_doctor_6")) {
-            return 0;
-        } else {
-            return super.GetManaCost(hTarget);
-        }
-    }
+    // GetManaCost(hTarget: number): number {
+    //     if (this.GetCasterPlus().HasTalent("special_bonus_imba_witch_doctor_6")) {
+    //         return 0;
+    //     } else {
+    //         return super.GetManaCost(hTarget);
+    //     }
+    // }
     OnUpgrade(): void {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_witch_doctor_6")) {
             if (this.GetCasterPlus().HasModifier("modifier_imba_voodoo_restoration")) {
@@ -271,6 +278,15 @@ export class imba_witch_doctor_voodoo_restoration extends BaseAbility_Plus {
             StopSoundEvent("Hero_WitchDoctor.Voodoo_Restoration.Loop", this.GetCasterPlus());
             this.GetCasterPlus().RemoveModifierByName("modifier_imba_voodoo_restoration");
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        if (!this.GetToggleState()) {
+            this.ToggleAbility();
+        }
+        return false
     }
 }
 @registerModifier()
@@ -491,6 +507,12 @@ export class imba_witch_doctor_maledict extends BaseAbility_Plus {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_witch_doctor_maledict_radius") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_witch_doctor_maledict_radius")) {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_witch_doctor_maledict_radius"), "modifier_special_bonus_imba_witch_doctor_maledict_radius", {});
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this)
     }
 }
 @registerModifier()
@@ -857,6 +879,12 @@ export class imba_witch_doctor_death_ward extends BaseAbility_Plus {
             }
         }
         EmitSoundOn("Hero_Jakiro.Attack", originalTarget);
+    }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_cast(this)
     }
 }
 @registerModifier()

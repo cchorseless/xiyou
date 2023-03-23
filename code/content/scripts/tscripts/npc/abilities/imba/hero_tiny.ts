@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { AnimationHelper } from "../../../helper/AnimationHelper";
 import { ResHelper } from "../../../helper/ResHelper";
@@ -738,6 +739,12 @@ export class imba_tiny_avalanche extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_tiny_avalanche_cooldown"), "modifier_special_bonus_imba_tiny_avalanche_cooldown", {});
         }
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this);
+    }
 }
 @registerModifier()
 export class modifier_imba_tiny_avalanche_passive extends BaseModifier_Plus {
@@ -897,6 +904,12 @@ export class imba_tiny_toss extends BaseAbility_Plus {
     }
     GetAOERadius(): number {
         return this.GetSpecialValueFor("radius");
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this, null, null, FindOrder.FIND_FARTHEST);
     }
 }
 @registerModifier()
@@ -1372,6 +1385,7 @@ export class imba_tiny_grow extends BaseAbility_Plus {
         ResHelper.LoadUnitRes(this.GetCasterPlus());
         let reapply_craggy = false;
         let rolling_stone = this.GetCasterPlus().findBuff<modifier_imba_tiny_rolling_stone>("modifier_imba_tiny_rolling_stone");
+        if (!GFuncEntity.IsValid(rolling_stone)) { return }
         rolling_stone.growscale = this.GetSpecialValueFor("rolling_stone_scale_reduction");
         let old_stacks = this.GetLevelSpecialValueFor("rolling_stones_stacks", this.GetLevel() - 2);
         let new_stacks = this.GetLevelSpecialValueFor("rolling_stones_stacks", this.GetLevel() - 1);

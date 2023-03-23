@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { AoiHelper } from "../../../helper/AoiHelper";
 import { ProjectileHelper } from "../../../helper/ProjectileHelper";
@@ -426,6 +427,12 @@ export class imba_pudge_meat_hook extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_pudge_5"), "modifier_special_bonus_imba_pudge_5", {});
         }
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this)
+    }
 }
 @registerAbility()
 export class imba_pudge_sharp_hook extends BaseAbility_Plus {
@@ -810,6 +817,23 @@ export class imba_pudge_rot extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_pudge_9"), "modifier_special_bonus_imba_pudge_9", {});
         }
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        let caster = this.GetCasterPlus();
+        let range = this.GetCastRangePlus();
+        let teamFilter = DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY
+        let typeFilter = DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC
+        let flagFilter = DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE
+        let order = FindOrder.FIND_CLOSEST
+        let targets = AoiHelper.FindEntityInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), range, null, teamFilter, typeFilter, flagFilter, order)
+        let isenemy = (targets.length > 0)
+        if (this.GetToggleState() != isenemy) {
+            this.ToggleAbility();
+        }
+        return false
+    }
 }
 @registerModifier()
 export class modifier_imba_pudge_rot extends BaseModifier_Plus {
@@ -1145,6 +1169,12 @@ export class imba_pudge_dismember extends BaseAbility_Plus {
             ParticleManager.DestroyParticle(this.pfx, false);
             ParticleManager.ReleaseParticleIndex(this.pfx);
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this)
     }
 }
 @registerModifier()

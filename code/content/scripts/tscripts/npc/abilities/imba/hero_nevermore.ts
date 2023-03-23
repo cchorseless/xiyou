@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { GameServiceConfig } from "../../../shared/GameServiceConfig";
@@ -337,11 +338,11 @@ export class imba_nevermore_shadowraze_medium extends BaseAbility_Plus {
     IsHiddenWhenStolen(): boolean {
         return false;
     }
-    GetManaCost(level: number): number {
-        let caster = this.GetCasterPlus();
-        let manacost = super.GetManaCost(level);
-        return manacost;
-    }
+    // GetManaCost(level: number): number {
+    //     let caster = this.GetCasterPlus();
+    //     let manacost = super.GetManaCost(level);
+    //     return manacost;
+    // }
     GetCooldown(level: number): number {
         let caster = this.GetCasterPlus();
         let modifier_harvest = "modifier_imba_reqiuem_harvest";
@@ -402,6 +403,12 @@ export class imba_nevermore_shadowraze_medium extends BaseAbility_Plus {
         if (caster.HasModifier(modifier_harvest) && !raze_hit_hero && !extra_razes_did_hit) {
             caster.RemoveModifierByName(modifier_harvest);
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_if_enemy(this)
     }
 }
 @registerAbility()
@@ -722,7 +729,7 @@ export class modifier_imba_necromastery_souls extends BaseModifier_Plus {
     public shadowraze_soul_count: number;
     public damage_per_soul: number;
     public base_max_souls: any;
-    public scepter_max_souls: any;
+    public scepter_max_souls: number;
     public max_souls: any;
     public total_max_souls: any;
     public temporary_soul_duration: number;
@@ -744,7 +751,8 @@ export class modifier_imba_necromastery_souls extends BaseModifier_Plus {
         this.shadowraze_soul_count = this.ability.GetSpecialValueFor("shadowraze_soul_count");
         this.damage_per_soul = this.ability.GetSpecialValueFor("damage_per_soul");
         this.base_max_souls = this.ability.GetSpecialValueFor("max_souls");
-        this.scepter_max_souls = this.ability.GetSpecialValueFor("scepter_max_souls");
+        // this.scepter_max_souls = this.ability.GetSpecialValueFor("scepter_max_souls");
+        this.scepter_max_souls = 20;
         this.max_souls = this.base_max_souls;
         this.total_max_souls = this.base_max_souls;
         this.temporary_soul_duration = this.ability.GetSpecialValueFor("temporary_soul_duration");
@@ -1346,6 +1354,12 @@ export class imba_nevermore_requiem extends BaseAbility_Plus {
                 target.findBuff("modifier_nevermore_requiem_fear").SetDuration(math.min(target.FindModifierByName("modifier_nevermore_requiem_fear").GetRemainingTime() + this.GetSpecialValueFor("requiem_slow_duration"), this.GetSpecialValueFor("requiem_slow_duration_max")) * (1 - target.GetStatusResistance()), true);
             }
         }
+    }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_if_enemy(this)
     }
 }
 @registerModifier()

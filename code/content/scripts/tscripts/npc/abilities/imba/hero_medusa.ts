@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { EventHelper } from "../../../helper/EventHelper";
 import { ResHelper } from "../../../helper/ResHelper";
@@ -40,13 +41,13 @@ export class imba_medusa_split_shot extends BaseAbility_Plus {
             return DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_NO_TARGET + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_IMMEDIATE + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_AUTOCAST;
         }
     }
-    GetManaCost(level: number): number {
-        if (this.GetCasterPlus().findBuffStack("modifier_imba_medusa_split_shot", this.GetCasterPlus()) == 0) {
-            return 0;
-        } else {
-            return this.GetCasterPlus().GetMaxMana() * this.GetSpecialValueFor("enchanted_aim_mana_loss_pct") * 0.01;
-        }
-    }
+    // GetManaCost(level: number): number {
+    //     if (this.GetCasterPlus().findBuffStack("modifier_imba_medusa_split_shot", this.GetCasterPlus()) == 0) {
+    //         return 0;
+    //     } else {
+    //         return this.GetCasterPlus().GetMaxMana() * this.GetSpecialValueFor("enchanted_aim_mana_loss_pct") * 0.01;
+    //     }
+    // }
     ResetToggleOnRespawn(): boolean {
         return false;
     }
@@ -82,6 +83,15 @@ export class imba_medusa_split_shot extends BaseAbility_Plus {
                 duration: this.GetSpecialValueFor("enchanted_aim_duration")
             });
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        if (!this.GetToggleState()) {
+            this.ToggleAbility();
+        }
+        return false
     }
 }
 @registerModifier()
@@ -252,7 +262,9 @@ export class modifier_imba_medusa_serpent_shot extends BaseModifier_Plus {
                 damage_dealt = ApplyDamage(damageTable);
             }
             keys.unit.ReduceMana(damage_dealt * this.serpent_shot_mana_burn_pct * 0.01);
-            let manaburn_particle = ResHelper.CreateParticleEx("particles/item/diffusal/diffusal_manaburn_3.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, keys.unit);
+            let rpath = "particles/econ/items/antimage/antimage_weapon_basher_ti5/am_manaburn_basher_ti_5.vpcf";
+            // "particles/item/diffusal/diffusal_manaburn_3.vpcf"
+            let manaburn_particle = ResHelper.CreateParticleEx(rpath, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, keys.unit);
             ParticleManager.ReleaseParticleIndex(manaburn_particle);
         }
     }
@@ -485,6 +497,13 @@ export class imba_medusa_mystic_snake extends BaseAbility_Plus {
         }
         ProjectileManager.CreateTrackingProjectile(snake);
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+
+        return AI_ability.TARGET_if_enemy(this);
+    }
 }
 @registerModifier()
 export class modifier_imba_medusa_mystic_snake_slow extends BaseModifier_Plus {
@@ -626,6 +645,15 @@ export class imba_medusa_mana_shield extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_medusa_bonus_mana"), "modifier_special_bonus_imba_medusa_bonus_mana", {});
         }
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        if (!this.GetToggleState()) {
+            this.ToggleAbility();
+        }
+        return false
+    }
 }
 @registerModifier()
 export class modifier_imba_medusa_mana_shield_meditate extends BaseModifier_Plus {
@@ -719,6 +747,12 @@ export class imba_medusa_stone_gaze extends BaseAbility_Plus {
         this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_medusa_stone_gaze", {
             duration: this.GetTalentSpecialValueFor("duration")
         });
+    }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_cast(this)
     }
 }
 @registerModifier()

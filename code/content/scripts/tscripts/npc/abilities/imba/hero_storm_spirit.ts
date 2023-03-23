@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 import { ResHelper } from "../../../helper/ResHelper";
@@ -43,6 +44,12 @@ export class imba_storm_spirit_static_remnant extends BaseAbility_Plus {
     }
     IsHiddenWhenStolen(): boolean {
         return false;
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_if_enemy(this);
     }
 }
 @registerModifier()
@@ -234,6 +241,12 @@ export class imba_storm_spirit_electric_vortex extends BaseAbility_Plus {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_storm_spirit_2") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_storm_spirit_2")) {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_storm_spirit_2"), "modifier_special_bonus_imba_storm_spirit_2", {});
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
     }
 }
 @registerModifier()
@@ -663,7 +676,7 @@ export class imba_storm_spirit_ball_lightning extends BaseAbility_Plus {
     }
     OnProjectileThink_ExtraData(location: Vector, ExtraData: any): void {
         let caster = this.GetCasterPlus();
-        if ((this.traveled + ExtraData.speed < this.distance) && caster.IsAlive() && (caster.GetMana() > ExtraData.total_mana_cost * 0.01)) {
+        if ((this.traveled + ExtraData.speed < this.distance) && caster.IsAlive() /**&& (caster.GetMana() > ExtraData.total_mana_cost * 0.01)*/) {
             GridNav.DestroyTreesAroundPoint(location, ExtraData.tree_radius, false);
             caster.SetAbsOrigin(Vector(location.x, location.y, GetGroundPosition(location, caster).z));
             caster.Purge(false, true, true, true, true);
@@ -672,7 +685,7 @@ export class imba_storm_spirit_ball_lightning extends BaseAbility_Plus {
             });
             this.traveled = this.traveled + ExtraData.speed;
             this.units_traveled_in_last_tick = ExtraData.speed;
-            caster.ReduceMana(((ExtraData.pct_mana_cost * 0.01) + ExtraData.base_mana_cost) * this.units_traveled_in_last_tick * 0.01);
+            // caster.ReduceMana(((ExtraData.pct_mana_cost * 0.01) + ExtraData.base_mana_cost) * this.units_traveled_in_last_tick * 0.01);
             if (this.traveled_remnant != undefined && this.remnant) {
                 this.traveled_remnant = this.traveled_remnant + ExtraData.speed;
                 let remant_interval = caster.GetTalentValue("special_bonus_imba_unique_storm_spirit_4");
@@ -758,14 +771,22 @@ export class imba_storm_spirit_ball_lightning extends BaseAbility_Plus {
             }
         }
     }
-    GetManaCost(p_0: number,): number {
-        let caster = this.GetCasterPlus();
-        let base_cost = this.GetSpecialValueFor("initial_mana_cost_base");
-        let pct_cost = this.GetSpecialValueFor("initial_mana_cost_pct");
-        return (base_cost + (caster.GetMaxMana() * pct_cost * 0.01));
-    }
+    // GetManaCost(p_0: number,): number {
+    //     let caster = this.GetCasterPlus();
+    //     let base_cost = this.GetSpecialValueFor("initial_mana_cost_base");
+    //     let pct_cost = this.GetSpecialValueFor("initial_mana_cost_pct");
+    //     return (base_cost + (caster.GetMaxMana() * pct_cost * 0.01));
+    // }
     IsHiddenWhenStolen(): boolean {
         return false;
+    }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this, 1300, (u, index, count) => {
+            return index == count - 1;
+        });
     }
 }
 @registerModifier()

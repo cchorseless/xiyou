@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { EventHelper } from "../../../helper/EventHelper";
 import { ResHelper } from "../../../helper/ResHelper";
@@ -44,6 +45,12 @@ export class imba_templar_assassin_refraction extends BaseAbility_Plus {
                 });
             }
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_if_enemy(this);
     }
 }
 @registerModifier()
@@ -279,6 +286,12 @@ export class imba_templar_assassin_meld extends BaseAbility_Plus {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_templar_assassin_meld_armor_reduction") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_templar_assassin_meld_armor_reduction")) {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_templar_assassin_meld_armor_reduction"), "modifier_special_bonus_imba_templar_assassin_meld_armor_reduction", {});
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_if_enemy(this);
     }
 }
 @registerModifier()
@@ -640,6 +653,12 @@ export class imba_templar_assassin_trap extends BaseAbility_Plus {
         } else {
             EventHelper.ErrorMessage("No traps", this.GetCasterPlus().GetPlayerID());
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this);
     }
 }
 @registerModifier()

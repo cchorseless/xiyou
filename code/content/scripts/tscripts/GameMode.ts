@@ -1,5 +1,5 @@
 import { GameDebugger } from "./GameDebugger";
-import { GameRulesExt } from "./GameRulesExt";
+import { GameLibsExt } from "./GameLibsExt";
 import { GameScene } from "./GameScene";
 import { GameSetting } from "./GameSetting";
 import { KVHelper } from "./helper/KVHelper";
@@ -25,7 +25,7 @@ export class GameMode {
             this.Instance = GameRules.GetGameModeEntity();
         }
         LogHelper.print("Entering Game:InitGameMode");
-        GameRulesExt.Init();
+        GameLibsExt.Init();
         // 初始化配置
         GameSetting.init();
         // 初始化debugger

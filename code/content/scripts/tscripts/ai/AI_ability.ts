@@ -42,7 +42,7 @@ export module AI_ability {
      * @param _filter 不填，选择最近的敌人
      * @returns
      */
-    export function TARGET_if_enemy(ability: IBaseAbility_Plus, range?: number, _filter?: (enemy: IBaseNpc_Plus) => boolean, findorder?: FindOrder) {
+    export function TARGET_if_enemy(ability: IBaseAbility_Plus, range?: number, _filter?: (enemy: IBaseNpc_Plus) => boolean, findorder?: FindOrder): boolean {
         let caster = ability.GetCasterPlus();
         if (range == 0 || range == null) range = ability.GetCastRangePlus();
         if (range == 0) {

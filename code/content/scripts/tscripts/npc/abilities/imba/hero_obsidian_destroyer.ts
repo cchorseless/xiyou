@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -151,6 +152,12 @@ export class imba_obsidian_destroyer_arcane_orb extends BaseAbility_Plus {
     GetCastRange(location: Vector, target: CDOTA_BaseNPC | undefined): number {
         let caster = this.GetCasterPlus();
         return caster.Script_GetAttackRange();
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this)
     }
 }
 @registerModifier()
@@ -584,12 +591,12 @@ export class imba_obsidian_destroyer_astral_imprisonment extends BaseAbility_Plu
         let cast_range = this.GetSpecialValueFor("cast_range");
         return cast_range;
     }
-    GetManaCost(level: number): number {
-        if (this.GetCasterPlus().HasModifier("modifier_imba_astral_imprisonment_buff")) {
-            return 0;
-        }
-        return super.GetManaCost(level);
-    }
+    // GetManaCost(level: number): number {
+    //     if (this.GetCasterPlus().HasModifier("modifier_imba_astral_imprisonment_buff")) {
+    //         return 0;
+    //     }
+    //     return super.GetManaCost(level);
+    // }
     GetCooldown(level: number): number {
         let prison_duration = this.GetSpecialValueFor("prison_duration");
         if (this.GetCasterPlus().HasModifier("modifier_imba_astral_imprisonment_buff")) {
@@ -653,6 +660,12 @@ export class imba_obsidian_destroyer_astral_imprisonment extends BaseAbility_Plu
                 modifier_self_handler.target_point = target_point;
             }
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this)
     }
 }
 @registerModifier()
@@ -1399,6 +1412,12 @@ export class imba_obsidian_destroyer_sanity_eclipse extends BaseAbility_Plus {
                 }
             }
         }
+    }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_most_enemy(this)
     }
 }
 @registerAbility()

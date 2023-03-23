@@ -188,16 +188,17 @@ export class modifier_imba_huskar_inner_fire_raze_land_aura extends BaseModifier
         if (!IsServer()) {
             return;
         }
-        this.particle = ResHelper.CreateParticleEx("particles/hero/huskar/huskar_inner_fire_raze_land.vpcf", ParticleAttachment_t.PATTACH_WORLDORIGIN, this.GetParentPlus());
-        ParticleManager.SetParticleControl(this.particle, 1, this.GetParentPlus().GetAbsOrigin());
-        this.AddParticle(this.particle, false, false, -1, false, false);
+        // this.particle = ResHelper.CreateParticleEx("particles/hero/huskar/huskar_inner_fire_raze_land.vpcf", ParticleAttachment_t.PATTACH_WORLDORIGIN, this.GetParentPlus());
+        // ParticleManager.SetParticleControl(this.particle, 1, this.GetParentPlus().GetAbsOrigin());
+        // this.AddParticle(this.particle, false, false, -1, false, false);
+        // ParticleManager.DestroyParticle(this.particle, false)
         this.StartIntervalThink(this.raze_land_damage_interval);
     }
     OnIntervalThink(): void {
         GridNav.DestroyTreesAroundPoint(this.GetParentPlus().GetOrigin(), this.radius, true);
         let wards = FindUnitsInRadius(this.GetParentPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_OTHER, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_ANY_ORDER, false);
         for (const [_, ward] of GameFunc.iPair(wards)) {
-            if (ward.GetUnitName() == "npc_dota_observer_wards" || ward.GetUnitName() == "npc_dota_sentry_wards") {
+            if (ward.IsWard()) {
                 ward.Kill(this.GetAbilityPlus(), this.GetCasterPlus());
             }
         }

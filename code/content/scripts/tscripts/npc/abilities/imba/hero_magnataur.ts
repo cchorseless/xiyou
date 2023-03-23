@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { AoiHelper } from "../../../helper/AoiHelper";
 import { ResHelper } from "../../../helper/ResHelper";
@@ -333,8 +334,8 @@ export class imba_magnataur_shockwave extends BaseAbility_Plus {
             let secondary_amount = this.GetSpecialValueFor("secondary_amount");
             let secondary_occurance = this.GetSpecialValueFor("secondary_occurance");
             let distance = this.GetCastRange(caster_loc, caster) + GPropertyCalculate.GetCastRangeBonus(caster);
-            let polarize_duration = this.GetTalentSpecialValueFor("polarize_duration");
-            let magnetize_duration = this.GetTalentSpecialValueFor("magnetize_duration");
+            let polarize_duration = this.GetSpecialValueFor("polarize_duration");
+            let magnetize_duration = this.GetSpecialValueFor("magnetize_duration");
             let speed = this.GetSpecialValueFor("speed");
             if (caster.HasScepter()) {
                 speed = this.GetSpecialValueFor("scepter_speed");
@@ -679,6 +680,12 @@ export class imba_magnataur_shockwave extends BaseAbility_Plus {
             ProjectileManager.CreateLinearProjectile(projectile);
         }
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this)
+    }
 }
 @registerAbility()
 export class imba_magnataur_empower extends BaseAbility_Plus {
@@ -732,6 +739,14 @@ export class imba_magnataur_empower extends BaseAbility_Plus {
     IsStealable(): boolean {
         return true;
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_friend(this, null, (unit) => {
+            return !unit.HasModifier("modifier_imba_empower");
+        })
+    }
 }
 @registerModifier()
 export class modifier_imba_empower_aura extends BaseModifier_Plus {
@@ -745,7 +760,7 @@ export class modifier_imba_empower_aura extends BaseModifier_Plus {
             }
             if (parent.HasScepter()) {
                 if (!this.particle) {
-                    this.particle = ResHelper.CreateParticleEx("particles/auras/aura_empower.vpcf", ParticleAttachment_t.PATTACH_POINT_FOLLOW, parent);
+                    this.particle = ResHelper.CreateParticleEx("particles/generic/auras/aura_empower.vpcf", ParticleAttachment_t.PATTACH_POINT_FOLLOW, parent);
                     this.AddParticle(this.particle, false, false, -1, false, false);
                 }
                 if (target.IsRealUnit()) {
@@ -1329,12 +1344,12 @@ export class imba_magnataur_skewer extends BaseAbility_Plus {
         }
         return super.GetCooldown(iLevel);
     }
-    GetManaCost(iLevel: number): number {
-        if (this.GetCasterPlus().HasScepter()) {
-            return this.GetSpecialValueFor("skewer_manacost");
-        }
-        return super.GetManaCost(iLevel);
-    }
+    // GetManaCost(iLevel: number): number {
+    //     if (this.GetCasterPlus().HasScepter()) {
+    //         return this.GetSpecialValueFor("skewer_manacost");
+    //     }
+    //     return super.GetManaCost(iLevel);
+    // }
     OnSpellStart(): void {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
@@ -1398,6 +1413,13 @@ export class imba_magnataur_skewer extends BaseAbility_Plus {
         } else {
             return "magnataur_skewer";
         }
+    }
+
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this, null, null, FindOrder.FIND_FARTHEST)
     }
 }
 @registerModifier()
@@ -1776,7 +1798,7 @@ export class imba_magnataur_reverse_polarity extends BaseAbility_Plus {
     OnAbilityPhaseStart(): boolean {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
-            let radius = this.GetTalentSpecialValueFor("main_radius");
+            let radius = this.GetSpecialValueFor("main_radius");
             let caster_loc = caster.GetAbsOrigin();
             caster.EmitSound("Hero_Magnataur.ReversePolarity.Anim");
             let animation_pfx = ResHelper.CreateParticleEx("particles/units/heroes/hero_magnataur/magnataur_reverse_polarity.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, caster);
@@ -1799,13 +1821,13 @@ export class imba_magnataur_reverse_polarity extends BaseAbility_Plus {
             let caster = this.GetCasterPlus();
             let caster_loc = caster.GetAbsOrigin();
             let direction = caster.GetForwardVector();
-            let damage = this.GetTalentSpecialValueFor("damage");
-            let radius = this.GetTalentSpecialValueFor("main_radius");
+            let damage = this.GetSpecialValueFor("damage");
+            let radius = this.GetSpecialValueFor("main_radius");
             let hero_stun_duration = this.GetSpecialValueFor("hero_stun_duration") + caster.GetTalentValue("special_bonus_imba_magnataur_9");
             let polarize_slow_duration = hero_stun_duration;
             let creep_stun_duration = this.GetSpecialValueFor("creep_stun_duration") + caster.GetTalentValue("special_bonus_imba_magnataur_9");
             let pull_offset = this.GetSpecialValueFor("pull_offset");
-            let pull_per_stack = this.GetTalentSpecialValueFor("pull_per_stack");
+            let pull_per_stack = this.GetSpecialValueFor("pull_per_stack");
             let polarize_duration = this.GetSpecialValueFor("polarize_duration");
             let polarize_slow = this.GetSpecialValueFor("polarize_slow");
             let global_pull = this.GetSpecialValueFor("global_pull");
@@ -1927,6 +1949,12 @@ export class imba_magnataur_reverse_polarity extends BaseAbility_Plus {
     }
     GetCastRange(location: Vector, target: CDOTA_BaseNPC | undefined): number {
         return super.GetCastRange(location, target);
+    }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_if_enemy(this)
     }
 }
 @registerModifier()

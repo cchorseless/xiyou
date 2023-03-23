@@ -1208,7 +1208,7 @@ declare global {
 
         /**
          * 父节点注册自己
-         * @Both
+         * @Server
          */
         RegOwnerSelf(b: boolean): void;
 
@@ -1571,6 +1571,7 @@ BaseNPC.GetSource = function () {
     return this
 }
 BaseNPC.RegOwnerSelf = function (b: boolean) {
+    if (!IsServer()) { return }
     let owner = this.GetOwnerPlus();
     if (IsValid(owner)) {
         if (b) {

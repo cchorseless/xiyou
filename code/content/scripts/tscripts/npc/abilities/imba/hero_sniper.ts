@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -88,6 +89,12 @@ export class imba_sniper_shrapnel extends BaseAbility_Plus {
             });
             AddFOWViewer(caster.GetTeamNumber(), target_point, radius, duration, false);
         });
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this);
     }
 }
 @registerModifier()
@@ -746,7 +753,6 @@ export class modifier_imba_take_aim_range extends BaseModifier_Plus {
     public forced_aimed_assault: any;
     public passive_bonus_range: number;
     public aim_bonus_range: number;
-    public cooldown: number;
     public toggled_on_default: any;
     public headshot_modifier: any;
     Init(p_0: any,): void {
@@ -755,7 +761,6 @@ export class modifier_imba_take_aim_range extends BaseModifier_Plus {
         this.forced_aimed_assault = false;
         this.passive_bonus_range = this.ability.GetSpecialValueFor("passive_bonus_range");
         this.aim_bonus_range = this.ability.GetSpecialValueFor("aim_bonus_range");
-        this.cooldown = this.ability.GetSpecialValueFor("cooldown");
         if (IsServer()) {
             if (!this.toggled_on_default) {
                 this.toggled_on_default = true;
@@ -1135,6 +1140,12 @@ export class imba_sniper_assassinate extends BaseAbility_Plus {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_sniper_9") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_sniper_9")) {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_sniper_9"), "modifier_special_bonus_imba_sniper_9", {});
         }
+    }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this, null, null, FindOrder.FIND_FARTHEST);
     }
 }
 @registerModifier()

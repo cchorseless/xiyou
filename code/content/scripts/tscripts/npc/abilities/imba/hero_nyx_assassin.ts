@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -9,6 +10,12 @@ import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_
 export class imba_nyx_assassin_impale extends BaseAbility_Plus {
     IsHiddenWhenStolen(): boolean {
         return false;
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this)
     }
     OnUnStolen(): void {
         let caster = this.GetCasterPlus();
@@ -555,6 +562,12 @@ export class imba_nyx_assassin_mana_burn extends BaseAbility_Plus {
         }
         ApplyDamage(damageTable);
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this)
+    }
 }
 @registerModifier()
 export class modifier_imba_mana_burn_parasite extends BaseModifier_Plus {
@@ -844,6 +857,12 @@ export class imba_nyx_assassin_spiked_carapace extends BaseAbility_Plus {
             duration: reflect_duration
         });
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_if_enemy(this)
+    }
 }
 @registerModifier()
 export class modifier_imba_spiked_carapace extends BaseModifier_Plus {
@@ -1055,6 +1074,12 @@ export class imba_nyx_assassin_vendetta extends BaseAbility_Plus {
         caster.AddNewModifier(caster, ability, modifier_vendetta, {
             duration: duration
         });
+    }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_cast(this)
     }
 }
 @registerModifier()

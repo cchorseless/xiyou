@@ -6,6 +6,9 @@ import { ActiveRootAbility } from "../ActiveRootAbility";
 
 @registerAbility()
 export class courier_challenge_artifact extends ActiveRootAbility implements IAbilityChallenge {
+    IsHidden() {
+        return true;
+    }
 
     CastFilterResult(): UnitFilterResult {
         let caster = this.GetCasterPlus();

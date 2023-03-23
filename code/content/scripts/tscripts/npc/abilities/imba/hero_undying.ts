@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -35,6 +36,12 @@ function GenerateZombieType() {
 export class imba_undying_decay extends BaseAbility_Plus {
     GetAOERadius(): number {
         return this.GetSpecialValueFor("radius");
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this);
     }
     GetCooldown(level: number): number {
         return super.GetCooldown(level) - this.GetCasterPlus().GetTalentValue("special_bonus_imba_undying_decay_cooldown");
@@ -491,6 +498,14 @@ export class imba_undying_soul_rip extends BaseAbility_Plus {
                 target.ApplyHeal(tombstone_heal, this);
             }
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_friend(this, null, (u) => {
+            return u.GetHealthLosePect() > 20;
+        });
     }
 }
 @registerModifier()
@@ -1337,6 +1352,12 @@ export class imba_undying_flesh_golem extends BaseAbility_Plus {
         this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_undying_flesh_golem", {
             duration: this.GetSpecialValueFor("duration")
         });
+    }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_cast(this);
     }
 }
 @registerModifier()

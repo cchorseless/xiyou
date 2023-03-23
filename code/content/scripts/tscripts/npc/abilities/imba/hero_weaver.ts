@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 import { ResHelper } from "../../../helper/ResHelper";
@@ -91,6 +92,12 @@ export class imba_weaver_the_swarm extends BaseAbility_Plus {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_weaver_the_swarm_armor_reduction") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_weaver_the_swarm_armor_reduction")) {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_weaver_the_swarm_armor_reduction"), "modifier_special_bonus_imba_weaver_the_swarm_armor_reduction", {});
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this);
     }
 }
 @registerModifier()
@@ -308,6 +315,12 @@ export class imba_weaver_shukuchi extends BaseAbility_Plus {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_weaver_shukuchi_hasted_speed") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_weaver_shukuchi_hasted_speed")) {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_weaver_shukuchi_hasted_speed"), "modifier_special_bonus_imba_weaver_shukuchi_hasted_speed", {});
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_if_enemy(this);
     }
 }
 @registerModifier()
@@ -614,6 +627,12 @@ export class imba_weaver_time_lapse extends BaseAbility_Plus {
                 this.GetCasterPlus().FindAbilityByName(ability).EndCooldown();
             }
         }
+    }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_cast(this);
     }
 }
 @registerModifier()

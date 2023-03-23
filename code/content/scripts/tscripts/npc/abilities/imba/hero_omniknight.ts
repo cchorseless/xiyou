@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -117,6 +118,12 @@ export class imba_omniknight_purification extends BaseAbility_Plus {
                 }
             }
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_friend(this, null, (u) => { return u.GetHealthLosePect() > 10 })
     }
 }
 @registerModifier()
@@ -344,6 +351,13 @@ export class imba_omniknight_repel extends BaseAbility_Plus {
             });
         }
     }
+
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_friend(this, null, (u) => { return u.HasModifier("modifier_imba_repel") == false })
+    }
 }
 @registerModifier()
 export class modifier_imba_repel extends BaseModifier_Plus {
@@ -394,7 +408,7 @@ export class modifier_imba_degen_aura extends BaseModifier_Plus {
         this.linger_duration = this.ability.GetSpecialValueFor("linger_duration");
     }
     GetEffectName(): string {
-        return "particles/auras/aura_degen.vpcf";
+        return "particles/generic/auras/aura_degen.vpcf";
     }
     GetEffectAttachType(): ParticleAttachment_t {
         return ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW;
@@ -574,7 +588,7 @@ export class imba_omniknight_hammer_of_virtue extends BaseAbility_Plus {
         return false;
     }
     GetAbilityTextureName(): string {
-        return "omniknight_hammer_of_virtue";
+        return "omniknight_hammer_of_purity";
     }
     GetIntrinsicModifierName(): string {
         return "modifier_imba_hammer_of_virtue";
@@ -756,6 +770,12 @@ export class imba_omniknight_guardian_angel extends BaseAbility_Plus {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_omniknight_7") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_omniknight_7")) {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_omniknight_7"), "modifier_special_bonus_imba_omniknight_7", {});
         }
+    }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_cast(this)
     }
 }
 @registerModifier()

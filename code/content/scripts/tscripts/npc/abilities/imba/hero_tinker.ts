@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 import { ResHelper } from "../../../helper/ResHelper";
@@ -28,6 +29,12 @@ export class imba_tinker_technomancy extends BaseAbility_Plus {
     }
     IsHiddenWhenStolen(): boolean {
         return true;
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
     }
 }
 
@@ -152,6 +159,12 @@ export class imba_tinker_laser extends BaseAbility_Plus {
     }
     IsHiddenWhenStolen(): boolean {
         return false;
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_if_enemy(this);
     }
 }
 @registerModifier()
@@ -433,6 +446,13 @@ export class imba_tinker_heat_seeking_missile extends BaseAbility_Plus {
     }
     IsHiddenWhenStolen(): boolean {
         return false;
+    }
+
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_if_enemy(this);
     }
 }
 @registerModifier()
@@ -985,6 +1005,12 @@ export class imba_tinker_march_of_the_machines extends BaseAbility_Plus {
     IsHiddenWhenStolen(): boolean {
         return false;
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this);
+    }
 }
 @registerModifier()
 export class modifier_imba_march_flame_aura extends BaseModifier_Plus {
@@ -1186,10 +1212,10 @@ export class imba_tinker_rearm extends BaseAbility_Plus {
         }
         return 0;
     }
-    GetManaCost(p_0: number,): number {
-        let extra_cost = (this.GetLevel() - 1) * this.GetSpecialValueFor("rearm_mana_per_lvl");
-        return (this.GetSpecialValueFor("base_manacost") + extra_cost - this.GetCasterPlus().GetTalentValue("special_bonus_imba_tinker_1"));
-    }
+    // GetManaCost(p_0: number,): number {
+    //     let extra_cost = (this.GetLevel() - 1) * this.GetSpecialValueFor("rearm_mana_per_lvl");
+    //     return (this.GetSpecialValueFor("base_manacost") + extra_cost - this.GetCasterPlus().GetTalentValue("special_bonus_imba_tinker_1"));
+    // }
     GetCastAnimation(): GameActivity_t {
         return GameActivity_t.ACT_DOTA_TINKER_REARM1;
     }
@@ -1294,6 +1320,12 @@ export class imba_tinker_rearm extends BaseAbility_Plus {
             caster.FadeGesture(GameActivity_t.ACT_DOTA_TINKER_REARM3);
             caster.RemoveModifierByName("modifier_imba_rearm_animation");
         }
+    }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_cast(this);
     }
 }
 @registerModifier()

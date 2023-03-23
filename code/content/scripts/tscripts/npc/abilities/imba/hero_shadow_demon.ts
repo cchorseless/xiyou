@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -62,6 +63,12 @@ export class imba_shadow_demon_disruption extends BaseAbility_Plus {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_shadow_demon_disruption_charges") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_shadow_demon_disruption_charges")) {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_shadow_demon_disruption_charges"), "modifier_special_bonus_imba_shadow_demon_disruption_charges", {});
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
     }
 }
 @registerModifier()
@@ -455,6 +462,12 @@ export class imba_shadow_demon_soul_catcher extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_shadow_demon_soul_catcher_cd"), "modifier_special_bonus_imba_shadow_demon_soul_catcher_cd", {});
         }
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this);
+    }
 }
 @registerModifier()
 export class modifier_imba_soul_catcher_buff extends BaseModifier_Plus {
@@ -771,6 +784,12 @@ export class imba_shadow_demon_shadow_poison extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_shadow_demon_shadow_poison_cd"), "modifier_special_bonus_imba_shadow_demon_shadow_poison_cd", {});
         }
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this);
+    }
 }
 @registerModifier()
 export class modifier_shadow_poison_debuff extends BaseModifier_Plus {
@@ -1084,6 +1103,12 @@ export class imba_shadow_demon_demonic_purge extends BaseAbility_Plus {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_shadow_demon_demonic_purge_damage") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_shadow_demon_demonic_purge_damage")) {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_shadow_demon_demonic_purge_damage"), "modifier_special_bonus_imba_shadow_demon_demonic_purge_damage", {});
         }
+    }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
     }
 }
 @registerModifier()

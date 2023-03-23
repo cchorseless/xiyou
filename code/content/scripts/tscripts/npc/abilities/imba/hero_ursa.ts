@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -103,6 +104,12 @@ export class imba_ursa_earthshock extends BaseAbility_Plus {
                 duration: trembling_steps_cooldown
             });
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_if_enemy(this);
     }
 }
 @registerModifier()
@@ -397,13 +404,13 @@ export class imba_ursa_overpower extends BaseAbility_Plus {
             return;
         }
     }
-    GetManaCost(level: number): number {
-        if (this.GetCasterPlus().HasTalent("special_bonus_imba_ursa_8")) {
-            return 0;
-        } else {
-            return super.GetManaCost(level);
-        }
-    }
+    // GetManaCost(level: number): number {
+    //     if (this.GetCasterPlus().HasTalent("special_bonus_imba_ursa_8")) {
+    //         return 0;
+    //     } else {
+    //         return super.GetManaCost(level);
+    //     }
+    // }
     GetAbilityTextureName(): string {
         return "ursa_overpower";
     }
@@ -456,6 +463,12 @@ export class imba_ursa_overpower extends BaseAbility_Plus {
                 }
             }
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_if_enemy(this);
     }
 }
 @registerModifier()
@@ -830,6 +843,12 @@ export class imba_ursa_enrage extends BaseAbility_Plus {
                 duration: duration
             });
         }
+    }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_if_enemy(this);
     }
 }
 @registerModifier()

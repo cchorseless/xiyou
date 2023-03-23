@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -21,11 +22,11 @@ export class imba_luna_lucent_beam extends BaseAbility_Plus {
         ParticleManager.ReleaseParticleIndex(precast_particle);
         return true;
     }
-    OnUpgrade(): void {
-        if (this.GetLevel() == 1) {
-            this.ToggleAutoCast();
-        }
-    }
+    // OnUpgrade(): void {
+    //     if (this.GetLevel() == 1) {
+    //         this.ToggleAutoCast();
+    //     }
+    // }
     OnSpellStart(): void {
         if (!IsServer()) {
             return;
@@ -109,6 +110,13 @@ export class imba_luna_lucent_beam extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_luna_lucent_beam_cooldown"), "modifier_special_bonus_imba_luna_lucent_beam_cooldown", {});
         }
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this)
+    }
+
 }
 @registerAbility()
 export class imba_luna_moon_glaive extends BaseAbility_Plus {
@@ -547,6 +555,12 @@ export class imba_luna_eclipse extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_luna_eclipse", modifier_params);
         }
         GameRules.BeginTemporaryNight(this.GetSpecialValueFor("night_duration"));
+    }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_cast(this)
     }
 }
 @registerModifier()

@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { GameServiceConfig } from "../../../shared/GameServiceConfig";
@@ -47,8 +48,8 @@ export class modifier_special_bonus_imba_skeleton_king_2 extends BaseModifier_Pl
         if (!IsServer()) {
             return;
         }
-        if (this.GetParentPlus().findAbliityPlus<imba_wraith_king_kingdom_come>("imba_wraith_king_kingdom_come")) {
-            this.GetParentPlus().findAbliityPlus<imba_wraith_king_kingdom_come>("imba_wraith_king_kingdom_come").GetBehavior();
+        if (this.GetParentPlus().findAbliityPlus<imba_skeleton_king_kingdom_come>("imba_skeleton_king_kingdom_come")) {
+            this.GetParentPlus().findAbliityPlus<imba_skeleton_king_kingdom_come>("imba_skeleton_king_kingdom_come").GetBehavior();
         }
     }
 }
@@ -67,13 +68,13 @@ export class modifier_special_bonus_imba_skeleton_king_5 extends BaseModifier_Pl
         if (!IsServer()) {
             return;
         }
-        if (this.GetParentPlus().findAbliityPlus<imba_wraith_king_reincarnation>("imba_wraith_king_reincarnation")) {
-            this.GetParentPlus().findAbliityPlus<imba_wraith_king_reincarnation>("imba_wraith_king_reincarnation").GetBehavior();
+        if (this.GetParentPlus().findAbliityPlus<imba_skeleton_king_reincarnation>("imba_skeleton_king_reincarnation")) {
+            this.GetParentPlus().findAbliityPlus<imba_skeleton_king_reincarnation>("imba_skeleton_king_reincarnation").GetBehavior();
         }
     }
 }
 @registerAbility()
-export class imba_wraith_king_wraithfire_blast extends BaseAbility_Plus {
+export class imba_skeleton_king_hellfire_blast extends BaseAbility_Plus {
     IsHiddenWhenStolen(): boolean {
         return false;
     }
@@ -114,8 +115,8 @@ export class imba_wraith_king_wraithfire_blast extends BaseAbility_Plus {
         let ability = this;
         let kill_response = "skeleton_king_wraith_ability_hellfire_01";
         let sound_hit = "Hero_SkeletonKing.Hellfire_BlastImpact";
-        let modifier_stun = "modifier_imba_wraithfire_blast_stun";
-        let modifier_debuff = "modifier_imba_wraithfire_blast_debuff";
+        let modifier_stun = "modifier_imba_hellfire_blast_stun";
+        let modifier_debuff = "modifier_imba_hellfire_blast_debuff";
         let main_target_stun_duration = ability.GetSpecialValueFor("main_target_stun_duration");
         let damage = ability.GetSpecialValueFor("damage");
         let secondary_targets_radius = ability.GetSpecialValueFor("secondary_targets_radius");
@@ -133,7 +134,7 @@ export class imba_wraith_king_wraithfire_blast extends BaseAbility_Plus {
                 }
             }
             if (caster.HasTalent("special_bonus_imba_skeleton_king_3")) {
-                target.AddNewModifier(caster, ability, "modifier_imba_wraithfire_blast_debuff_talent", {
+                target.AddNewModifier(caster, ability, "modifier_imba_hellfire_blast_debuff_talent", {
                     duration: caster.GetTalentValue("special_bonus_imba_skeleton_king_3", "duration") * (1 - target.GetStatusResistance())
                 });
             }
@@ -173,8 +174,8 @@ export class imba_wraith_king_wraithfire_blast extends BaseAbility_Plus {
             let direction = (target.GetAbsOrigin() - caster.GetAbsOrigin() as Vector).Normalized();
             let distance = (target.GetAbsOrigin() - caster.GetAbsOrigin() as Vector).Length2D();
             let summon_point = caster.GetAbsOrigin() + direction * distance - 100 as Vector;
-            let duration = caster.findAbliityPlus<imba_wraith_king_kingdom_come>("imba_wraith_king_kingdom_come").GetSpecialValueFor("wraith_duration");
-            let wraith = caster.CreateSummon("npc_imba_wraith_king_wraith", summon_point, duration, true);
+            let duration = caster.findAbliityPlus<imba_skeleton_king_kingdom_come>("imba_skeleton_king_kingdom_come").GetSpecialValueFor("wraith_duration");
+            let wraith = caster.CreateSummon("npc_imba_skeleton_king_wraith", summon_point, duration, true);
             let playerid = caster.GetPlayerID();
             if (playerid) {
                 // wraith.SetControllableByPlayer(playerid, true);
@@ -185,9 +186,15 @@ export class imba_wraith_king_wraithfire_blast extends BaseAbility_Plus {
             ResolveNPCPositions(target.GetAbsOrigin(), 164);
         }
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
+    }
 }
 @registerModifier()
-export class modifier_imba_wraithfire_blast_stun extends BaseModifier_Plus {
+export class modifier_imba_hellfire_blast_stun extends BaseModifier_Plus {
     CheckState(): Partial<Record<modifierstate, boolean>> {
         let state = {
             [modifierstate.MODIFIER_STATE_STUNNED]: true
@@ -211,7 +218,7 @@ export class modifier_imba_wraithfire_blast_stun extends BaseModifier_Plus {
     }
 }
 @registerModifier()
-export class modifier_imba_wraithfire_blast_debuff extends BaseModifier_Plus {
+export class modifier_imba_hellfire_blast_debuff extends BaseModifier_Plus {
     public caster: IBaseNpc_Plus;
     public ability: IBaseAbility_Plus;
     public parent: IBaseNpc_Plus;
@@ -301,7 +308,7 @@ export class modifier_imba_wraithfire_blast_debuff extends BaseModifier_Plus {
     }
 }
 @registerModifier()
-export class modifier_imba_wraithfire_blast_debuff_talent extends BaseModifier_Plus {
+export class modifier_imba_hellfire_blast_debuff_talent extends BaseModifier_Plus {
     IsDebuff(): boolean {
         return true;
     }
@@ -342,7 +349,7 @@ export class modifier_imba_wraithfire_blast_debuff_talent extends BaseModifier_P
         let additional_dmg = caster.GetTalentValue("special_bonus_imba_skeleton_king_3", "add_target_dmg");
         let enemies = FindUnitsInRadius(caster.GetTeamNumber(), target.GetAbsOrigin(), undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
         for (const [_, enemy] of GameFunc.iPair(enemies)) {
-            let modifier = enemy.FindModifierByNameAndCaster("modifier_imba_wraithfire_blast_debuff", this.GetCasterPlus());
+            let modifier = enemy.FindModifierByNameAndCaster("modifier_imba_hellfire_blast_debuff", this.GetCasterPlus());
             if (modifier && enemy != target) {
                 num = num + 1;
             }
@@ -362,7 +369,7 @@ export class modifier_imba_wraithfire_blast_debuff_talent extends BaseModifier_P
     }
 }
 @registerAbility()
-export class imba_wraith_king_vampiric_aura extends BaseAbility_Plus {
+export class imba_skeleton_king_vampiric_aura extends BaseAbility_Plus {
     public toggle_state: any;
     OnToggle(): void {
         return undefined;
@@ -380,6 +387,15 @@ export class imba_wraith_king_vampiric_aura extends BaseAbility_Plus {
     }
     OnOwnerDied(): void {
         this.toggle_state = this.GetToggleState();
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        if (!this.GetToggleState()) {
+            this.ToggleAbility();
+        }
+        return false
     }
 }
 @registerModifier()
@@ -450,7 +466,7 @@ export class modifier_imba_vampiric_aura_buff extends BaseModifier_Plus {
         this.caster = this.GetCasterPlus();
         this.ability = this.GetAbilityPlus();
         this.parent = this.GetParentPlus();
-        this.particle_lifesteal = "particles/units/heroes/hero_skeletonking/wraith_king_vampiric_aura_lifesteal.vpcf";
+        this.particle_lifesteal = "particles/units/heroes/hero_skeletonking/skeleton_king_vampiric_aura_lifesteal.vpcf";
         this.particle_spellsteal = "particles/hero/skeleton_king/skeleton_king_vampiric_aura_lifesteal.vpcf";
         this.radius = this.ability.GetSpecialValueFor("radius");
         this.lifesteal_pct = this.ability.GetSpecialValueFor("lifesteal_pct");
@@ -588,7 +604,7 @@ export class modifier_imba_vampiric_aura_buff extends BaseModifier_Plus {
     }
 }
 @registerAbility()
-export class imba_wraith_king_mortal_strike extends BaseAbility_Plus {
+export class imba_skeleton_king_mortal_strike extends BaseAbility_Plus {
     public caster: IBaseNpc_Plus;
     public skeleton_duration: number;
     public max_skeleton_charges: any;
@@ -611,7 +627,7 @@ export class imba_wraith_king_mortal_strike extends BaseAbility_Plus {
             for (let unit = 0; unit <= skeleton_modifier.GetStackCount() - 1; unit++) {
                 this.AddTimer(unit * this.spawn_interval, () => {
                     for (let units_per_charge = 1; units_per_charge <= this.skeletons_per_charge; units_per_charge++) {
-                        skeleton = this.caster.CreateSummon("npc_imba_wraith_king_skeleton_warrior", this.caster.GetAbsOrigin() + RandomVector(100) as Vector, this.skeleton_duration, true);
+                        skeleton = this.caster.CreateSummon("npc_imba_skeleton_king_skeleton_warrior", this.caster.GetAbsOrigin() + RandomVector(100) as Vector, this.skeleton_duration, true);
                         skeleton.AddNewModifier(this.caster, this, "modifier_imba_mortal_strike_skeleton", {
                             duration: this.skeleton_duration - FrameTime()
                         });
@@ -637,6 +653,12 @@ export class imba_wraith_king_mortal_strike extends BaseAbility_Plus {
             }
         }
         this.caster.EmitSound("Hero_SkeletonKing.MortalStrike.Cast");
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_if_enemy(this)
     }
 }
 @registerModifier()
@@ -678,7 +700,7 @@ export class modifier_imba_mortal_strike_skeleton extends BaseModifier_Plus {
         }
     }
     OnIntervalThink(): void {
-        this.skeleton = this.caster.CreateSummon("npc_imba_wraith_king_skeleton_warrior", this.parent.GetOrigin(), this.remaining_time, true);
+        this.skeleton = this.caster.CreateSummon("npc_imba_skeleton_king_skeleton_warrior", this.parent.GetOrigin(), this.remaining_time, true);
         this.skeleton.AddNewModifier(this.caster, this.ability, "modifier_imba_mortal_strike_skeleton", {
             duration: this.remaining_time - FrameTime()
         });
@@ -985,7 +1007,7 @@ export class modifier_imba_mortal_strike_buff_talent extends BaseModifier_Plus {
     }
 }
 @registerAbility()
-export class imba_wraith_king_reincarnation extends BaseAbility_Plus {
+export class imba_skeleton_king_reincarnation extends BaseAbility_Plus {
     GetManaCost(level: number): number {
         if (!this.GetCasterPlus().HasTalent("special_bonus_imba_skeleton_king_6")) {
             return this.GetSpecialValueFor("reincarnate_mana_cost");
@@ -1039,11 +1061,11 @@ export class imba_wraith_king_reincarnation extends BaseAbility_Plus {
                 AddFOWViewer(BuffInfo.caster.GetTeamNumber(), BuffInfo.caster.GetAbsOrigin(), BuffInfo.caster.GetNightTimeVisionRange(), BuffInfo.reincarnate_delay, true);
             }
             if (BuffInfo.caster.HasTalent("special_bonus_imba_skeleton_king_10")) {
-                let wraithfire_blast = BuffInfo.caster.findAbliityPlus<imba_wraith_king_wraithfire_blast>("imba_wraith_king_wraithfire_blast");
-                if (wraithfire_blast && wraithfire_blast.IsTrained()) {
+                let hellfire_blast = BuffInfo.caster.findAbliityPlus<imba_skeleton_king_hellfire_blast>("imba_skeleton_king_hellfire_blast");
+                if (hellfire_blast && hellfire_blast.IsTrained()) {
                     let enemies = FindUnitsInRadius(BuffInfo.caster.GetTeamNumber(), unit.GetAbsOrigin(), undefined, 900, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
                     for (const [_, enemy] of GameFunc.iPair(enemies)) {
-                        LaunchWraithblastProjectile(BuffInfo.caster, wraithfire_blast, unit, enemy, 1, true);
+                        LaunchWraithblastProjectile(BuffInfo.caster, hellfire_blast, unit, enemy, 1, true);
                     }
                 }
             }
@@ -1055,7 +1077,7 @@ export class imba_wraith_king_reincarnation extends BaseAbility_Plus {
 @registerModifier()
 export class modifier_imba_reincarnation extends BaseModifier_Plus {
     public caster: IBaseNpc_Plus;
-    public ability: imba_wraith_king_reincarnation;
+    public ability: imba_skeleton_king_reincarnation;
     public particle_death: any;
     public sound_death: any;
     public sound_reincarnation: any;
@@ -1071,7 +1093,7 @@ export class modifier_imba_reincarnation extends BaseModifier_Plus {
     Init(p_0: any,): void {
         this.caster = this.GetCasterPlus();
         this.ability = this.GetAbilityPlus();
-        this.particle_death = "particles/units/heroes/hero_skeletonking/wraith_king_reincarnate.vpcf";
+        this.particle_death = "particles/units/heroes/hero_skeletonking/skeleton_king_reincarnate.vpcf";
         this.sound_death = "Hero_SkeletonKing.Reincarnate";
         this.sound_reincarnation = "Hero_SkeletonKing.Reincarnate.Stinger";
         this.sound_be_back = "Hero_WraithKing.IllBeBack";
@@ -1400,7 +1422,7 @@ export class modifier_imba_reincarnation_wraith_form extends BaseModifier_Plus {
     }
 }
 @registerAbility()
-export class imba_wraith_king_kingdom_come extends BaseAbility_Plus {
+export class imba_skeleton_king_kingdom_come extends BaseAbility_Plus {
     IsHiddenWhenStolen(): boolean {
         return true;
     }
@@ -1473,7 +1495,7 @@ export class modifier_imba_kingdom_come extends BaseModifier_Plus {
     BeCreated(p_0: any,): void {
         this.caster = this.GetCasterPlus();
         this.ability = this.GetAbilityPlus();
-        this.particle_kingdom = "particles/hero/skeleton_king/wraith_king_hellfire_eruption_tell.vpcf";
+        this.particle_kingdom = "particles/hero/skeleton_king/skeleton_king_hellfire_eruption_tell.vpcf";
         this.modifier_slow = "modifier_imba_kingdom_come_slow";
         this.radius = this.ability.GetSpecialValueFor("radius");
         this.slow_duration = this.ability.GetSpecialValueFor("slow_duration");
@@ -1543,7 +1565,7 @@ export class modifier_imba_kingdom_come_slow extends BaseModifier_Plus {
         this.caster = this.GetCasterPlus();
         this.ability = this.GetAbilityPlus();
         this.parent = this.GetParentPlus();
-        this.particle_slow = "particles/units/heroes/hero_skeletonking/wraith_king_reincarnate_slow_debuff.vpcf";
+        this.particle_slow = "particles/units/heroes/hero_skeletonking/skeleton_king_reincarnate_slow_debuff.vpcf";
         this.modifier_stun = "modifier_imba_kingdom_come_stun";
         this.position = this.GetCasterPlus().GetAbsOrigin();
         this.ms_slow_pct = this.ability.GetSpecialValueFor("ms_slow_pct");
@@ -1603,7 +1625,7 @@ export class modifier_imba_kingdom_come_slow extends BaseModifier_Plus {
                 let direction = (this.parent.GetAbsOrigin() - this.caster.GetAbsOrigin() as Vector).Normalized();
                 let distance = (this.parent.GetAbsOrigin() - this.caster.GetAbsOrigin() as Vector).Length2D();
                 let summon_point = this.caster.GetAbsOrigin() + direction * distance - 100 as Vector;
-                let wraith = this.caster.CreateSummon("npc_imba_wraith_king_wraith", summon_point, this.wraith_duration, true);
+                let wraith = this.caster.CreateSummon("npc_imba_skeleton_king_wraith", summon_point, this.wraith_duration, true);
                 let playerid = this.caster.GetPlayerID();
                 if (playerid) {
                     // wraith.SetControllableByPlayer(playerid, true);
@@ -1646,7 +1668,7 @@ export class modifier_imba_kingdom_come_stun extends BaseModifier_Plus {
     }
 }
 @registerAbility()
-export class imba_wraith_king_wraith_soul_strike extends BaseAbility_Plus {
+export class imba_skeleton_king_wraith_soul_strike extends BaseAbility_Plus {
     GetAbilityTextureName(): string {
         return "ghost_frost_attack";
     }
@@ -1847,7 +1869,7 @@ export class modifier_skeleton_king_ambient extends BaseModifier_Plus {
         if (!IsServer()) {
             return;
         }
-        this.ambient_pfx = ResHelper.CreateParticleEx("particles/units/heroes/hero_skeletonking/wraith_king_ambient_custom.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetCasterPlus(), this.GetCasterPlus());
+        this.ambient_pfx = ResHelper.CreateParticleEx("particles/units/heroes/hero_skeletonking/skeleton_king_ambient_custom.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetCasterPlus(), this.GetCasterPlus());
     }
     BeDestroy(): void {
         if (!IsServer()) {

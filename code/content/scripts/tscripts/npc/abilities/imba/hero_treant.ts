@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -38,6 +39,12 @@ export class imba_treant_natures_grasp extends BaseAbility_Plus {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_treant_natures_grasp_damage") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_treant_natures_grasp_damage")) {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_treant_natures_grasp_damage"), "modifier_special_bonus_imba_treant_natures_grasp_damage", {});
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this, null, null, FindOrder.FIND_FARTHEST);
     }
 }
 @registerModifier()
@@ -306,6 +313,12 @@ export class imba_treant_leech_seed extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_treant_leech_seed_heal"), "modifier_special_bonus_imba_treant_leech_seed_heal", {});
         }
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
+    }
 }
 @registerModifier()
 export class modifier_imba_treant_leech_seed_autocast_handler extends BaseModifier_Plus {
@@ -573,6 +586,14 @@ export class imba_treant_living_armor extends BaseAbility_Plus {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_treant_living_armor_aoe") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_treant_living_armor_aoe")) {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_treant_living_armor_aoe"), "modifier_special_bonus_imba_treant_living_armor_aoe", {});
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_friend(this, null, (u) => {
+            return !u.HasModifier("modifier_imba_treant_living_armor");
+        });
     }
 }
 @registerModifier()
@@ -934,6 +955,12 @@ export class imba_treant_overgrowth extends BaseAbility_Plus {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_treant_overgrowth_damage") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_treant_overgrowth_damage")) {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_treant_overgrowth_damage"), "modifier_special_bonus_imba_treant_overgrowth_damage", {});
         }
+    }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_cast(this);
     }
 }
 @registerModifier()

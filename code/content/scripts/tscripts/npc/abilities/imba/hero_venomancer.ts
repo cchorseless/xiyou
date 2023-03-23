@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -506,6 +507,12 @@ export class imba_venomancer_venomous_gale extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_venomancer_1"), "modifier_special_bonus_imba_venomancer_1", {});
         }
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this);
+    }
 }
 @registerModifier()
 export class modifier_imba_venomous_gale extends BaseModifier_Plus {
@@ -945,6 +952,12 @@ export class imba_venomancer_plague_ward extends BaseAbility_Plus {
             }
         }
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this);
+    }
 }
 @registerModifier()
 export class modifier_imba_plague_ward extends BaseModifier_Plus {
@@ -995,6 +1008,8 @@ export class modifier_imba_plague_ward extends BaseModifier_Plus {
             }
         }
     }
+
+
 }
 @registerAbility()
 export class imba_venomancer_poison_nova extends BaseAbility_Plus {
@@ -1062,6 +1077,12 @@ export class imba_venomancer_poison_nova extends BaseAbility_Plus {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_venomancer_poison_nova_radius") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_venomancer_poison_nova_radius")) {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_venomancer_poison_nova_radius"), "modifier_special_bonus_imba_venomancer_poison_nova_radius", {});
         }
+    }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_if_enemy(this);
     }
 }
 @registerModifier()

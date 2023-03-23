@@ -1,3 +1,4 @@
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 import { ResHelper } from "../../../helper/ResHelper";
@@ -7,11 +8,11 @@ import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 
 @registerAbility()
-export class imba_windranger_shackleshot extends BaseAbility_Plus {
+export class imba_windrunner_shackleshot extends BaseAbility_Plus {
     public responses: { [k: string]: string };
 
     GetCooldown(level: number): number {
-        return super.GetCooldown(level) - this.GetCasterPlus().GetTalentValue("special_bonus_imba_windranger_shackle_shot_cooldown");
+        return super.GetCooldown(level) - this.GetCasterPlus().GetTalentValue("special_bonus_imba_windrunner_shackle_shot_cooldown");
     }
 
     OnUpgrade(): void {
@@ -69,7 +70,7 @@ export class imba_windranger_shackleshot extends BaseAbility_Plus {
                 ParticleManager.SetParticleControlEnt(shackleshot_particle, 1, enemy, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, "attach_hitloc", enemy.GetAbsOrigin(), true);
                 ParticleManager.SetParticleControl(shackleshot_particle, 2, Vector(this.GetTalentSpecialValueFor("stun_duration"), 0, 0));
                 if (target.AddNewModifier) {
-                    let target_modifier = target.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_windranger_shackle_shot", {
+                    let target_modifier = target.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_windrunner_shackle_shot", {
                         duration: this.GetTalentSpecialValueFor("stun_duration") * (1 - target.GetStatusResistance())
                     });
                     if (target_modifier) {
@@ -77,7 +78,7 @@ export class imba_windranger_shackleshot extends BaseAbility_Plus {
                     }
                 }
                 if (enemy.AddNewModifier) {
-                    enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_windranger_shackle_shot", {
+                    enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_windrunner_shackle_shot", {
                         duration: this.GetTalentSpecialValueFor("stun_duration") * (1 - enemy.GetStatusResistance())
                     });
                 }
@@ -93,7 +94,7 @@ export class imba_windranger_shackleshot extends BaseAbility_Plus {
                         let shackleshot_tree_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_windrunner/windrunner_shackleshot_pair.vpcf", ParticleAttachment_t.PATTACH_POINT_FOLLOW, target, this.GetCasterPlus());
                         ParticleManager.SetParticleControl(shackleshot_tree_particle, 1, tree.GetAbsOrigin());
                         ParticleManager.SetParticleControl(shackleshot_tree_particle, 2, Vector(this.GetTalentSpecialValueFor("stun_duration"), 0, 0));
-                        let target_modifier = target.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_windranger_shackle_shot", {
+                        let target_modifier = target.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_windrunner_shackle_shot", {
                             duration: this.GetTalentSpecialValueFor("stun_duration") * (1 - target.GetStatusResistance())
                         });
                         if (target_modifier) {
@@ -155,14 +156,20 @@ export class imba_windranger_shackleshot extends BaseAbility_Plus {
     }
 
     OnOwnerSpawned(): void {
-        if (this.GetCasterPlus().HasTalent("special_bonus_imba_windranger_shackle_shot_cooldown") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_windranger_shackle_shot_cooldown")) {
-            this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_windranger_shackle_shot_cooldown"), "modifier_special_bonus_imba_windranger_shackle_shot_cooldown", {});
+        if (this.GetCasterPlus().HasTalent("special_bonus_imba_windrunner_shackle_shot_cooldown") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_windrunner_shackle_shot_cooldown")) {
+            this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_windrunner_shackle_shot_cooldown"), "modifier_special_bonus_imba_windrunner_shackle_shot_cooldown", {});
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
     }
 }
 
 @registerModifier()
-export class modifier_imba_windranger_shackle_shot extends BaseModifier_Plus {
+export class modifier_imba_windrunner_shackle_shot extends BaseModifier_Plus {
     CheckState(): Partial<Record<modifierstate, boolean>> {
         return {
             [modifierstate.MODIFIER_STATE_STUNNED]: true
@@ -184,7 +191,7 @@ export class modifier_imba_windranger_shackle_shot extends BaseModifier_Plus {
     CC_OnAttackLanded(keys: ModifierAttackEvent): void {
         if (keys.attacker == this.GetCasterPlus() && keys.target == this.GetParentPlus() && !keys.no_attack_cooldown && this.GetAbilityPlus() && this.GetAbilityPlus().GetAutoCastState()) {
             for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.GetCasterPlus().Script_GetAttackRange(), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ATTACK_IMMUNE, FindOrder.FIND_ANY_ORDER, false))) {
-                if (enemy != this.GetParentPlus() && enemy.FindModifierByNameAndCaster("modifier_imba_windranger_shackle_shot", this.GetCasterPlus()) && this.GetAbilityPlus()) {
+                if (enemy != this.GetParentPlus() && enemy.FindModifierByNameAndCaster("modifier_imba_windrunner_shackle_shot", this.GetCasterPlus()) && this.GetAbilityPlus()) {
                     EmitSoundOnLocationWithCaster(this.GetParentPlus().GetAbsOrigin(), "Hero_Windrunner.Attack", this.GetCasterPlus());
                     ProjectileManager.CreateTrackingProjectile({
                         Target: enemy,
@@ -210,23 +217,23 @@ export class modifier_imba_windranger_shackle_shot extends BaseModifier_Plus {
 }
 
 @registerAbility()
-export class imba_windranger_powershot extends BaseAbility_Plus {
+export class imba_windrunner_powershot extends BaseAbility_Plus {
     public powershot_modifier: any;
 
     GetIntrinsicModifierName(): string {
-        return "modifier_imba_windranger_powershot";
+        return "modifier_imba_windrunner_powershot";
     }
 
     OnSpellStart(): void {
         EmitSoundOnLocationForAllies(this.GetCasterPlus().GetAbsOrigin(), "Ability.PowershotPull", this.GetCasterPlus());
         if (!this.powershot_modifier || this.powershot_modifier.IsNull()) {
-            this.powershot_modifier = this.GetCasterPlus().FindModifierByNameAndCaster("modifier_imba_windranger_powershot", this.GetCasterPlus());
+            this.powershot_modifier = this.GetCasterPlus().FindModifierByNameAndCaster("modifier_imba_windrunner_powershot", this.GetCasterPlus());
         }
-        if (this.GetCasterPlus().HasAbility("imba_windranger_advancement")) {
-            this.GetCasterPlus().findAbliityPlus<imba_windranger_advancement>("imba_windranger_advancement").SetLevel(1);
+        if (this.GetCasterPlus().HasAbility("imba_windrunner_advancement")) {
+            this.GetCasterPlus().findAbliityPlus<imba_windrunner_advancement>("imba_windrunner_advancement").SetLevel(1);
         }
-        if (this.GetCasterPlus().HasAbility("imba_windranger_focusfire_vanilla_enhancer")) {
-            this.GetCasterPlus().findAbliityPlus<imba_windranger_focusfire_vanilla_enhancer>("imba_windranger_focusfire_vanilla_enhancer").SetLevel(1);
+        if (this.GetCasterPlus().HasAbility("imba_windrunner_focusfire_vanilla_enhancer")) {
+            this.GetCasterPlus().findAbliityPlus<imba_windrunner_focusfire_vanilla_enhancer>("imba_windrunner_focusfire_vanilla_enhancer").SetLevel(1);
         }
     }
 
@@ -246,7 +253,7 @@ export class imba_windranger_powershot extends BaseAbility_Plus {
             if (channel_pct < this.GetSpecialValueFor("scattershot_min") * 0.01 || channel_pct > this.GetSpecialValueFor("scattershot_max") * 0.01) {
                 this.FirePowershot(channel_pct);
             } else {
-                this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_windranger_powershot_scattershot", {
+                this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_windrunner_powershot_scattershot", {
                     duration: this.GetSpecialValueFor("scattershot_interval") * (this.GetSpecialValueFor("scattershot_shots") - 1),
                     channel_pct: channel_pct,
                     cursor_pos_x: this.GetCursorPosition().x,
@@ -255,7 +262,7 @@ export class imba_windranger_powershot extends BaseAbility_Plus {
                 });
             }
         } else {
-            this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_windranger_powershot_overstretch", {});
+            this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_windrunner_powershot_overstretch", {});
         }
     }
 
@@ -266,7 +273,7 @@ export class imba_windranger_powershot extends BaseAbility_Plus {
         let powershot_particle = "particles/units/heroes/hero_windrunner/windrunner_spell_powershot.vpcf";
         if (channel_pct >= this.GetSpecialValueFor("godshot_min") * 0.01 && channel_pct <= this.GetSpecialValueFor("godshot_max") * 0.01) {
             powershot_particle = "particles/units/heroes/hero_windrunner/windrunner_spell_powershot_godshot.vpcf";
-            powershot_dummy.EmitSound("Hero_Windranger.Powershot_Godshot");
+            powershot_dummy.EmitSound("Hero_windrunner.Powershot_Godshot");
         }
         this.GetCasterPlus().StartGesture(GameActivity_t.ACT_DOTA_OVERRIDE_ABILITY_2);
         if (!overstretch_bonus) {
@@ -330,17 +337,23 @@ export class imba_windranger_powershot extends BaseAbility_Plus {
             EntIndexToHScript(data.dummy_index).RemoveSelf();
         }
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this);
+    }
 }
 
 @registerModifier()
-export class modifier_imba_windranger_powershot extends BaseModifier_Plus {
+export class modifier_imba_windrunner_powershot extends BaseModifier_Plus {
     IsHidden(): boolean {
         return this.GetStackCount() <= 0;
     }
 }
 
 @registerModifier()
-export class modifier_imba_windranger_powershot_scattershot extends BaseModifier_Plus {
+export class modifier_imba_windrunner_powershot_scattershot extends BaseModifier_Plus {
     public channel_pct: number;
     public cursor_pos: any;
     public scattershot_interval: number;
@@ -365,13 +378,13 @@ export class modifier_imba_windranger_powershot_scattershot extends BaseModifier
     OnIntervalThink(): void {
         if (this.GetAbilityPlus()) {
             this.GetParentPlus().SetCursorPosition(RotatePosition(this.GetParentPlus().GetAbsOrigin(), QAngle(0, RandomInt(-this.scattershot_deviation, this.scattershot_deviation), 0), this.cursor_pos));
-            this.GetAbilityPlus<imba_windranger_powershot>().FirePowershot(this.channel_pct);
+            this.GetAbilityPlus<imba_windrunner_powershot>().FirePowershot(this.channel_pct);
         }
     }
 }
 
 @registerModifier()
-export class modifier_imba_windranger_powershot_overstretch extends BaseModifier_Plus {
+export class modifier_imba_windrunner_powershot_overstretch extends BaseModifier_Plus {
     public overstretch_bonus_range_per_second: number;
     public destroy_orders: any;
 
@@ -408,7 +421,7 @@ export class modifier_imba_windranger_powershot_overstretch extends BaseModifier
         }
         this.GetParentPlus().FadeGesture(GameActivity_t.ACT_DOTA_CAST_ABILITY_2);
         this.GetParentPlus().SetCursorPosition(this.GetParentPlus().GetAbsOrigin() + this.GetParentPlus().GetForwardVector() as Vector);
-        this.GetAbilityPlus<imba_windranger_powershot>().FirePowershot(1, this.GetStackCount() * this.overstretch_bonus_range_per_second);
+        this.GetAbilityPlus<imba_windrunner_powershot>().FirePowershot(1, this.GetStackCount() * this.overstretch_bonus_range_per_second);
     }
 
     CheckState(): Partial<Record<modifierstate, boolean>> {
@@ -432,7 +445,7 @@ export class modifier_imba_windranger_powershot_overstretch extends BaseModifier
 }
 
 @registerAbility()
-export class imba_windranger_windrun extends BaseAbility_Plus {
+export class imba_windrunner_windrun extends BaseAbility_Plus {
     public responses: { [k: string]: string };
 
     GetCooldown(level: number): number {
@@ -474,23 +487,29 @@ export class imba_windranger_windrun extends BaseAbility_Plus {
             }
             this.GetCasterPlus().EmitSound(GFuncRandom.RandomValue(this.responses));
         }
-        this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_windranger_windrun", {
+        this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_windrunner_windrun", {
             duration: this.GetSpecialValueFor("duration")
         });
-        if (this.GetCasterPlus().HasTalent("special_bonus_imba_windranger_windrun_invisibility")) {
-            this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_windranger_windrun_invis", {
+        if (this.GetCasterPlus().HasTalent("special_bonus_imba_windrunner_windrun_invisibility")) {
+            this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_windrunner_windrun_invis", {
                 duration: this.GetSpecialValueFor("duration")
             });
         }
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_cast(this);
+    }
 }
 
 @registerModifier()
-export class modifier_imba_windranger_windrun_handler extends BaseModifier_Plus {
+export class modifier_imba_windrunner_windrun_handler extends BaseModifier_Plus {
 }
 
 @registerModifier()
-export class modifier_imba_windranger_windrun extends BaseModifier_Plus {
+export class modifier_imba_windrunner_windrun extends BaseModifier_Plus {
     public movespeed_bonus_pct: number;
     public evasion_pct_tooltip: number;
     public scepter_bonus_movement: number;
@@ -527,7 +546,7 @@ export class modifier_imba_windranger_windrun extends BaseModifier_Plus {
     OnIntervalThink(): void {
         for (const [_, ally] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.gale_enchantment_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
             if (this.GetCasterPlus() == this.GetParentPlus() && ally != this.GetCasterPlus()) {
-                ally.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_windranger_windrun", {
+                ally.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_windrunner_windrun", {
                     duration: this.gale_enchantment_duration
                 });
             }
@@ -582,7 +601,7 @@ export class modifier_imba_windranger_windrun extends BaseModifier_Plus {
     }
 
     GetModifierAura(): string {
-        return "modifier_imba_windranger_windrun_slow";
+        return "modifier_imba_windrunner_windrun_slow";
     }
 
     GetAuraRadius(): number {
@@ -611,7 +630,7 @@ export class modifier_imba_windranger_windrun extends BaseModifier_Plus {
 }
 
 @registerModifier()
-export class modifier_imba_windranger_windrun_slow extends BaseModifier_Plus {
+export class modifier_imba_windrunner_windrun_slow extends BaseModifier_Plus {
     public enemy_movespeed_bonus_pct: number;
 
     GetEffectName(): string {
@@ -638,7 +657,7 @@ export class modifier_imba_windranger_windrun_slow extends BaseModifier_Plus {
 }
 
 @registerModifier()
-export class modifier_imba_windranger_windrun_invis extends BaseModifier_Plus {
+export class modifier_imba_windrunner_windrun_invis extends BaseModifier_Plus {
     CheckState(): Partial<Record<modifierstate, boolean>> {
         return {
             [modifierstate.MODIFIER_STATE_INVISIBLE]: true
@@ -666,14 +685,14 @@ export class modifier_imba_windranger_windrun_invis extends BaseModifier_Plus {
 
     @registerEvent(Enum_MODIFIER_EVENT.ON_ABILITY_FULLY_CAST)
     CC_OnAbilityFullyCast(keys: ModifierAbilityEvent): void {
-        if (keys.unit == this.GetParentPlus() && keys.ability != this.GetAbilityPlus() && keys.ability.GetAbilityName() != "imba_windranger_advancement") {
+        if (keys.unit == this.GetParentPlus() && keys.ability != this.GetAbilityPlus() && keys.ability.GetAbilityName() != "imba_windrunner_advancement") {
             this.Destroy();
         }
     }
 }
 
 @registerAbility()
-export class imba_windranger_advancement extends BaseAbility_Plus {
+export class imba_windrunner_advancement extends BaseAbility_Plus {
     IsInnateAbility() {
         return true;
     }
@@ -693,25 +712,31 @@ export class imba_windranger_advancement extends BaseAbility_Plus {
             bIgnoreTenacity: true
         });
     }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
+    }
 }
 
 @registerModifier()
-export class modifier_imba_windranger_advancement extends BaseModifier_Plus {
+export class modifier_imba_windrunner_advancement extends BaseModifier_Plus {
 }
 
 @registerAbility()
-export class imba_windranger_focusfire_vanilla_enhancer extends BaseAbility_Plus {
+export class imba_windrunner_focusfire_vanilla_enhancer extends BaseAbility_Plus {
     IsInnateAbility() {
         return true;
     }
 
     GetIntrinsicModifierName(): string {
-        return "modifier_imba_windranger_focusfire_vanilla_enhancer";
+        return "modifier_imba_windrunner_focusfire_vanilla_enhancer";
     }
 }
 
 @registerModifier()
-export class modifier_imba_windranger_focusfire_vanilla_enhancer extends BaseModifier_Plus {
+export class modifier_imba_windrunner_focusfire_vanilla_enhancer extends BaseModifier_Plus {
     public ability: IBaseAbility_Plus;
     public target: IBaseNpc_Plus;
 
@@ -745,23 +770,23 @@ export class modifier_imba_windranger_focusfire_vanilla_enhancer extends BaseMod
 }
 
 @registerAbility()
-export class imba_windranger_focusfire extends BaseAbility_Plus {
+export class imba_windrunner_focusfire extends BaseAbility_Plus {
     OnSpellStart(): void {
         this.GetCasterPlus().EmitSound("Ability.Focusfire");
-        this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_windranger_focusfire", {
+        this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_windrunner_focusfire", {
             duration: this.GetDuration()
         });
     }
 
     OnOwnerSpawned(): void {
-        if (this.GetCasterPlus().HasTalent("special_bonus_imba_windranger_focusfire_damage_reduction") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_windranger_focusfire_damage_reduction")) {
-            this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_windranger_focusfire_damage_reduction"), "modifier_special_bonus_imba_windranger_focusfire_damage_reduction", {});
+        if (this.GetCasterPlus().HasTalent("special_bonus_imba_windrunner_focusfire_damage_reduction") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_windrunner_focusfire_damage_reduction")) {
+            this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_windrunner_focusfire_damage_reduction"), "modifier_special_bonus_imba_windrunner_focusfire_damage_reduction", {});
         }
     }
 }
 
 @registerModifier()
-export class modifier_imba_windranger_focusfire extends BaseModifier_Plus {
+export class modifier_imba_windrunner_focusfire extends BaseModifier_Plus {
     public bonus_attack_speed: number;
     public focusfire_damage_reduction: number;
     public focusfire_fire_on_the_move: any;
@@ -835,7 +860,7 @@ export class modifier_imba_windranger_focusfire extends BaseModifier_Plus {
 }
 
 @registerModifier()
-export class modifier_special_bonus_imba_windranger_powershot_damage extends BaseModifier_Plus {
+export class modifier_special_bonus_imba_windrunner_powershot_damage extends BaseModifier_Plus {
     IsHidden(): boolean {
         return true;
     }
@@ -850,7 +875,7 @@ export class modifier_special_bonus_imba_windranger_powershot_damage extends Bas
 }
 
 @registerModifier()
-export class modifier_special_bonus_imba_windranger_shackle_shot_duration extends BaseModifier_Plus {
+export class modifier_special_bonus_imba_windrunner_shackle_shot_duration extends BaseModifier_Plus {
     IsHidden(): boolean {
         return true;
     }
@@ -865,7 +890,7 @@ export class modifier_special_bonus_imba_windranger_shackle_shot_duration extend
 }
 
 @registerModifier()
-export class modifier_special_bonus_imba_windranger_windrun_invisibility extends BaseModifier_Plus {
+export class modifier_special_bonus_imba_windrunner_windrun_invisibility extends BaseModifier_Plus {
     IsHidden(): boolean {
         return true;
     }
@@ -880,7 +905,7 @@ export class modifier_special_bonus_imba_windranger_windrun_invisibility extends
 }
 
 @registerModifier()
-export class modifier_special_bonus_imba_windranger_shackle_shot_cooldown extends BaseModifier_Plus {
+export class modifier_special_bonus_imba_windrunner_shackle_shot_cooldown extends BaseModifier_Plus {
     IsHidden(): boolean {
         return true;
     }
@@ -895,7 +920,7 @@ export class modifier_special_bonus_imba_windranger_shackle_shot_cooldown extend
 }
 
 @registerModifier()
-export class modifier_special_bonus_imba_windranger_focusfire_damage_reduction extends BaseModifier_Plus {
+export class modifier_special_bonus_imba_windrunner_focusfire_damage_reduction extends BaseModifier_Plus {
     IsHidden(): boolean {
         return true;
     }

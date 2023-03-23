@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { ResHelper } from "../../../helper/ResHelper";
@@ -24,6 +25,12 @@ export class imba_zuus_arc_lightning extends BaseAbility_Plus {
                 starting_unit_entindex: target.entindex()
             });
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this)
     }
 }
 @registerModifier()
@@ -313,6 +320,12 @@ export class imba_zuus_lightning_bolt extends BaseAbility_Plus {
             }
         }
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this)
+    }
 }
 @registerModifier()
 export class modifier_imba_zuus_lightning_dummy extends BaseModifier_Plus {
@@ -579,6 +592,12 @@ export class imba_zuus_cloud extends BaseAbility_Plus {
                 caster.findAbliityPlus<imba_zuus_nimbus_zap>("imba_zuus_nimbus_zap").SetActivated(true);
             }
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_most_enemy(this)
     }
 }
 @registerModifier()
@@ -1031,6 +1050,12 @@ export class imba_zuus_thundergods_wrath extends BaseAbility_Plus {
                 });
             }
         }
+    }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_cast(this)
     }
 }
 @registerModifier()

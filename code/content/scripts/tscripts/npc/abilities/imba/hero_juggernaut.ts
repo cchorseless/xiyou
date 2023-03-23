@@ -104,7 +104,7 @@ export class modifier_imba_juggernaut_blade_fury extends BaseModifier_Plus {
         this.dps = this.GetSpecialValueFor("blade_fury_damage") + this.GetCasterPlus().GetTalentValue("special_bonus_imba_unique_juggernaut_3");
         this.radius = this.GetSpecialValueFor("blade_fury_radius");
         this.tick = this.GetSpecialValueFor("blade_fury_damage_tick");
-        this.deflect_chance = this.GetAbilityPlus().GetTalentSpecialValueFor("deflect_chance");
+        this.deflect_chance = this.GetAbilityPlus().GetSpecialValueFor("deflect_chance");
         this.deflect = true;
         this.shard_interval = this.GetSpecialValueFor("shard_attack_interval");
         this.shard_interval_counter = this.shard_interval - 0.2;
@@ -465,9 +465,9 @@ export class imba_juggernaut_healing_ward extends BaseAbility_Plus {
         let targetPoint = this.GetCursorPosition();
         caster.EmitSound("Hero_Juggernaut.HealingWard.Cast");
         let healing_ward = caster.CreateSummon("npc_imba_juggernaut_healing_ward", targetPoint, this.GetDuration(), true);
-        // SetCreatureHealth(healing_ward, this.GetTalentSpecialValueFor("health"), true);
-        healing_ward.ModifyMaxHealth(this.GetTalentSpecialValueFor("health"))
-        healing_ward.SetHealth(this.GetTalentSpecialValueFor("health"));
+        // SetCreatureHealth(healing_ward, this.GetSpecialValueFor("health"), true);
+        // healing_ward.ModifyMaxHealth(this.GetSpecialValueFor("health"))
+        // healing_ward.SetHealth(this.GetSpecialValueFor("health"));
         // healing_ward.SetControllableByPlayer(caster.GetPlayerID(), true);
         this.AddTimer(FrameTime(), () => {
             healing_ward.MoveToNPC(caster);
@@ -534,7 +534,7 @@ export class modifier_imba_juggernaut_healing_ward_passive extends BaseModifier_
             caster.TempData().healing_ward_ambient_pfx = undefined;
             caster.TempData().healing_ward_ambient_pfx = ResHelper.CreateParticleEx("particles/econ/items/juggernaut/bladekeeper_healing_ward/juggernaut_healing_ward_dc.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetCasterPlus(), this.GetCasterPlus());
             ParticleManager.SetParticleControl(caster.TempData().healing_ward_ambient_pfx, 0, this.GetCasterPlus().GetAbsOrigin() + Vector(0, 0, 100) as Vector);
-            ParticleManager.SetParticleControl(caster.TempData().healing_ward_ambient_pfx, 1, Vector(this.GetAbilityPlus().GetTalentSpecialValueFor("heal_radius_totem"), 1, 1));
+            ParticleManager.SetParticleControl(caster.TempData().healing_ward_ambient_pfx, 1, Vector(this.GetAbilityPlus().GetSpecialValueFor("heal_radius_totem"), 1, 1));
             ParticleManager.SetParticleControlEnt(caster.TempData().healing_ward_ambient_pfx, 2, this.GetCasterPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", this.GetCasterPlus().GetAbsOrigin(), true);
         }
     }
@@ -719,12 +719,12 @@ export class imba_juggernaut_blade_dance extends BaseAbility_Plus {
     }
     GetCastRange(p_0: Vector, p_1: CDOTA_BaseNPC | undefined,): number {
         if (this.GetBehavior() != DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_PASSIVE) {
-            return this.GetTalentSpecialValueFor("active_distance");
+            return this.GetSpecialValueFor("active_distance");
         }
         return 0;
     }
     GetCooldown(p_0: number,): number {
-        return this.GetTalentSpecialValueFor("active_cooldown");
+        return this.GetSpecialValueFor("active_cooldown");
     }
 }
 @registerModifier()
@@ -792,10 +792,10 @@ export class modifier_imba_juggernaut_blade_dance_empowered_slice extends BaseMo
                 this.endPoint = this.GetAbilityPlus<imba_juggernaut_blade_dance>().endPoint;
             }
             if (!this.max_attack_count) {
-                this.max_attack_count = this.GetAbilityPlus().GetTalentSpecialValueFor("secret_blade_max_hits");
+                this.max_attack_count = this.GetAbilityPlus().GetSpecialValueFor("secret_blade_max_hits");
             }
-            this.speed = this.GetAbilityPlus().GetTalentSpecialValueFor("active_speed");
-            this.maxDistance = this.GetAbilityPlus().GetTalentSpecialValueFor("active_distance");
+            this.speed = this.GetAbilityPlus().GetSpecialValueFor("active_speed");
+            this.maxDistance = this.GetAbilityPlus().GetSpecialValueFor("active_distance");
             this.distance_left = (this.endPoint - this.caster.GetAbsOrigin() as Vector).Length2D();
             this.direction = (this.endPoint - this.caster.GetAbsOrigin() as Vector).Normalized();
             this.distance_limit = this.maxDistance - (this.endPoint - this.initialPos as Vector).Length2D();
@@ -1128,7 +1128,7 @@ export class modifier_imba_juggernaut_blade_dance_passive extends BaseModifier_P
                 if (bCrit) {
                     if (!wind_dance) {
                         wind_dance = this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_juggernaut_blade_dance_wind_dance", {
-                            duration: this.GetAbilityPlus().GetTalentSpecialValueFor("bonus_duration")
+                            duration: this.GetAbilityPlus().GetSpecialValueFor("bonus_duration")
                         }) as modifier_imba_juggernaut_blade_dance_wind_dance;
                     }
                     wind_dance.ForceRefresh();
@@ -1147,7 +1147,7 @@ export class modifier_imba_juggernaut_blade_dance_passive extends BaseModifier_P
                 let secret_blade = this.GetCasterPlus().findBuff<modifier_imba_juggernaut_blade_dance_secret_blade>("modifier_imba_juggernaut_blade_dance_secret_blade");
                 if (!secret_blade) {
                     secret_blade = this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_juggernaut_blade_dance_secret_blade", {
-                        duration: this.GetAbilityPlus().GetTalentSpecialValueFor("secret_blade_duration")
+                        duration: this.GetAbilityPlus().GetSpecialValueFor("secret_blade_duration")
                     }) as modifier_imba_juggernaut_blade_dance_secret_blade;
                 }
                 secret_blade.ForceRefresh();
@@ -1179,12 +1179,12 @@ export class modifier_imba_juggernaut_blade_dance_wind_dance extends BaseModifie
         return "juggernaut_blade_dance";
     }
     BeCreated(p_0: any,): void {
-        this.agi = this.GetAbilityPlus().GetTalentSpecialValueFor("bonus_agi");
-        this.ms = this.GetAbilityPlus().GetTalentSpecialValueFor("bonus_ms");
+        this.agi = this.GetAbilityPlus().GetSpecialValueFor("bonus_agi");
+        this.ms = this.GetAbilityPlus().GetSpecialValueFor("bonus_ms");
     }
     BeRefresh(p_0: any,): void {
-        this.agi = this.GetAbilityPlus().GetTalentSpecialValueFor("bonus_agi");
-        this.ms = this.GetAbilityPlus().GetTalentSpecialValueFor("bonus_ms");
+        this.agi = this.GetAbilityPlus().GetSpecialValueFor("bonus_agi");
+        this.ms = this.GetAbilityPlus().GetSpecialValueFor("bonus_ms");
         if (IsServer()) {
             this.IncrementStackCount();
             // this.GetParentPlus().CalculateStatBonus(true);
@@ -1221,18 +1221,18 @@ export class modifier_imba_juggernaut_blade_dance_secret_blade extends BaseModif
         if (IsServer()) {
             // this.GetParentPlus().CalculateStatBonus(true);
             serverCheck = 1;
-            if (this.GetStackCount() == this.GetAbilityPlus().GetTalentSpecialValueFor("active_min_stacks")) {
+            if (this.GetStackCount() == this.GetAbilityPlus().GetSpecialValueFor("active_min_stacks")) {
                 this.GetParentPlus().EmitSound("Imba.JuggernautLightsaber");
             }
         }
-        if (this.GetStackCount() + serverCheck >= this.GetAbilityPlus().GetTalentSpecialValueFor("active_min_stacks") && this.GetAbilityPlus().GetBehavior() != DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_POINT + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_IMMEDIATE) {
+        if (this.GetStackCount() + serverCheck >= this.GetAbilityPlus().GetSpecialValueFor("active_min_stacks") && this.GetAbilityPlus().GetBehavior() != DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_POINT + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_IMMEDIATE) {
             this.GetAbilityPlus().GetBehavior = () => {
                 return DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_POINT + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_IMMEDIATE;
             }
             this.GetAbilityPlus().GetBehavior();
             this.GetAbilityPlus().GetCastRange(this.GetCasterPlus().GetAbsOrigin(), this.GetCasterPlus());
             this.GetAbilityPlus().GetCooldown(this.GetAbilityPlus().GetLevel());
-        } else if (this.GetStackCount() + serverCheck < this.GetAbilityPlus().GetTalentSpecialValueFor("active_min_stacks") && this.GetAbilityPlus().GetBehavior() == DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_POINT + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_IMMEDIATE) {
+        } else if (this.GetStackCount() + serverCheck < this.GetAbilityPlus().GetSpecialValueFor("active_min_stacks") && this.GetAbilityPlus().GetBehavior() == DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_POINT + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_IMMEDIATE) {
             this.GetAbilityPlus().GetBehavior = () => {
                 return DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_PASSIVE;
             }
@@ -1531,7 +1531,7 @@ export class modifier_imba_omni_slash_talent extends BaseModifier_Plus {
     CC_GetModifierBaseAttack_BonusDamage(): number {
         this.caster = this.GetCasterPlus();
         this.hero_agility = this.caster.GetAgility();
-        this.base_bonus_damage = this.GetAbilityPlus().GetTalentSpecialValueFor("bonus_damage_att");
+        this.base_bonus_damage = this.GetAbilityPlus().GetSpecialValueFor("bonus_damage_att");
         if (this.hero_agility) {
             let bonus_damage = this.hero_agility * this.base_bonus_damage * 0.01;
             if (this.caster.HasTalent("special_bonus_imba_juggernaut_8")) {
@@ -1581,7 +1581,7 @@ export class modifier_imba_omni_slash_caster extends BaseModifier_Plus {
         this.caster = this.GetCasterPlus();
         this.parent = this.GetParentPlus();
         this.ability = this.GetAbilityPlus();
-        this.base_bonus_damage = this.GetAbilityPlus().GetTalentSpecialValueFor("bonus_damage_att");
+        this.base_bonus_damage = this.GetAbilityPlus().GetSpecialValueFor("bonus_damage_att");
         this.last_enemy = undefined;
         if (!this.GetAbilityPlus()) {
             this.Destroy();

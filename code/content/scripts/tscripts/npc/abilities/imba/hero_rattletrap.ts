@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -29,6 +30,12 @@ export class imba_rattletrap_battery_assault extends BaseAbility_Plus {
         this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_rattletrap_battery_assault", {
             duration: this.GetSpecialValueFor("duration")
         });
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_if_enemy(this);
     }
 }
 @registerModifier()
@@ -289,6 +296,12 @@ export class imba_rattletrap_power_cogs extends BaseAbility_Plus {
                 FindClearSpaceForUnit(unit, unit.GetAbsOrigin(), false);
             }
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_if_enemy(this);
     }
 }
 @registerModifier()
@@ -818,6 +831,12 @@ export class imba_rattletrap_rocket_flare extends BaseAbility_Plus {
             }, vLocation, this.GetCasterPlus().GetTeamNumber(), false);
         }
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_most_enemy(this);
+    }
 }
 @registerModifier()
 export class modifier_imba_rattletrap_rocket_flare_critical extends BaseModifier_Plus {
@@ -910,10 +929,8 @@ export class imba_rattletrap_hookshot extends BaseAbility_Plus {
                 autocast: false,
             }
         }
-        if (this.GetAutoCastState()) {
-            linear_projectile.ExtraData.autocast = true;
-            this.shish_kabob = []
-        }
+        linear_projectile.ExtraData.autocast = true;
+        this.shish_kabob = []
         this.razor_wind = {}
         this.projectile = ProjectileManager.CreateLinearProjectile(linear_projectile);
         let caster = this.GetCasterPlus();
@@ -987,8 +1004,8 @@ export class imba_rattletrap_hookshot extends BaseAbility_Plus {
                 }
             }
         } else {
-            if (ExtraData.autocast && GameFunc.GetCount(this.shish_kabob) > 0) {
-                if ((this.GetCasterPlus().GetAbsOrigin() - EntIndexToHScript(this.shish_kabob[GameFunc.GetCount(this.shish_kabob)]).GetAbsOrigin() as Vector).Length2D() > this.GetSpecialValueFor("latch_radius")) {
+            if (ExtraData.autocast && this.shish_kabob.length > 0) {
+                if ((this.GetCasterPlus().GetAbsOrigin() - EntIndexToHScript(this.shish_kabob[this.shish_kabob.length - 1]).GetAbsOrigin() as Vector).Length2D() > this.GetSpecialValueFor("latch_radius")) {
                     this.GetCasterPlus().EmitSound("Hero_Rattletrap.Hookshot.Retract");
                 }
                 this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_rattletrap_hookshot", {
@@ -998,13 +1015,19 @@ export class imba_rattletrap_hookshot extends BaseAbility_Plus {
                     stun_duration: this.GetSpecialValueFor("duration"),
                     speed: this.GetSpecialValueFor("speed"),
                     damage: this.GetSpecialValueFor("damage"),
-                    ent_index: this.shish_kabob[GameFunc.GetCount(this.shish_kabob)],
+                    ent_index: this.shish_kabob[this.shish_kabob.length - 1],
                     particle: ExtraData.hookshot_particle,
                     shish_kabob: true
                 });
             }
             ParticleManager.SetParticleControl(ExtraData.hookshot_particle, 1, this.GetCasterPlus().GetAbsOrigin());
         }
+    }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this);
     }
 }
 @registerModifier()
@@ -1016,7 +1039,7 @@ export class modifier_imba_rattletrap_hookshot extends BaseModifierMotionHorizon
     public speed: number;
     public damage: number;
     public particle: any;
-    public shish_kabob: any;
+    public shish_kabob: boolean;
     public target: IBaseNpc_Plus;
     public distance: number;
     public enemies_hit: any;
@@ -1037,7 +1060,7 @@ export class modifier_imba_rattletrap_hookshot extends BaseModifierMotionHorizon
         this.speed = params.speed;
         this.damage = params.damage;
         this.particle = params.particle;
-        this.shish_kabob = params.shish_kabob;
+        this.shish_kabob = GToBoolean(params.shish_kabob);
         this.target = EntIndexToHScript(params.ent_index) as IBaseNpc_Plus;
         this.distance = (this.target.GetAbsOrigin() - this.GetCasterPlus().GetAbsOrigin() as Vector).Normalized();
         this.enemies_hit = {}

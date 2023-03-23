@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -110,6 +111,14 @@ export class imba_pugna_nether_blast extends BaseAbility_Plus {
             }
         });
     }
+
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this)
+    }
+
 }
 @registerModifier()
 export class modifier_imba_nether_blast_magic_res extends BaseModifier_Plus {
@@ -181,6 +190,12 @@ export class imba_pugna_decrepify extends BaseAbility_Plus {
         target.AddNewModifier(caster, ability, modifier_decrep, {
             duration: duration
         });
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this)
     }
 }
 @registerModifier()
@@ -387,6 +402,12 @@ export class imba_pugna_nether_ward extends BaseAbility_Plus {
             let aura_ability = nether_ward.FindAbilityByName(ability_ward);
             aura_ability.SetLevel(ability_level);
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_friend(this)
     }
 }
 @registerAbility()
@@ -955,6 +976,12 @@ export class imba_pugna_life_drain extends BaseAbility_Plus {
             }
         }
         target.AddNewModifier(caster, ability, modifier_lifedrain, {});
+    }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this)
     }
 }
 @registerModifier()

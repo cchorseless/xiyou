@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -78,6 +79,12 @@ export class imba_winter_wyvern_arctic_burn extends BaseAbility_Plus {
                 this.ToggleAbility();
             }
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_if_enemy(this);
     }
 }
 @registerModifier()
@@ -352,6 +359,12 @@ export class imba_winter_wyvern_splinter_blast extends BaseAbility_Plus {
             ApplyDamage(damage_table);
         }
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
+    }
 }
 @registerModifier()
 export class modifier_imba_winter_wyvern_splinter_blast_slow extends BaseModifier_Plus {
@@ -437,6 +450,14 @@ export class imba_winter_wyvern_cold_embrace extends BaseAbility_Plus {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_winter_wyvern_6") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_winter_wyvern_6")) {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_special_bonus_imba_winter_wyvern_6", {});
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_friend(this, null, (u) => {
+            return u.GetHealthLosePect() > 50 && !u.HasModifier("modifier_imba_winter_wyvern_cold_embrace");
+        });
     }
 }
 @registerModifier()
@@ -604,6 +625,12 @@ export class imba_winter_wyvern_winters_curse extends BaseAbility_Plus {
     }
     GetAOERadius(): number {
         return this.GetSpecialValueFor("radius");
+    }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this, null, null, FindOrder.FIND_FARTHEST);
     }
 }
 @registerModifier()

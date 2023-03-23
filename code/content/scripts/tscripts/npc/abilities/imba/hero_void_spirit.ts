@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { EventHelper } from "../../../helper/EventHelper";
 import { ResHelper } from "../../../helper/ResHelper";
@@ -55,6 +56,13 @@ export class imba_void_spirit_dissimilate extends BaseAbility_Plus {
                 }
             }
         }
+    }
+
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_if_enemy(this);
     }
 }
 @registerModifier()
@@ -309,6 +317,12 @@ export class imba_void_spirit_resonant_pulse extends BaseAbility_Plus {
                 }
             }
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_if_enemy(this);
     }
 }
 @registerModifier()
@@ -593,9 +607,9 @@ export class imba_void_spirit_astral_step_helper extends BaseAbility_Plus {
     IsStealable(): boolean {
         return false;
     }
-    GetManaCost(level: number): number {
-        return super.GetManaCost(level) + (this.GetCasterPlus().GetMaxMana() * this.GetSpecialValueFor("max_mana_pct") * 0.01);
-    }
+    // GetManaCost(level: number): number {
+    //     return super.GetManaCost(level) + (this.GetCasterPlus().GetMaxMana() * this.GetSpecialValueFor("max_mana_pct") * 0.01);
+    // }
     OnAbilityPhaseStart(): boolean {
         if (this.GetCasterPlus().HasModifier("modifier_imba_void_spirit_astral_step_grace_time") && this.GetCasterPlus().findBuff<modifier_imba_void_spirit_astral_step_grace_time>("modifier_imba_void_spirit_astral_step_grace_time").GetElapsedTime() >= this.GetSpecialValueFor("grace_time_start")) {
             return true;
@@ -605,6 +619,12 @@ export class imba_void_spirit_astral_step_helper extends BaseAbility_Plus {
         if (this.GetCasterPlus().HasAbility("imba_void_spirit_astral_step") && this.GetCasterPlus().findAbliityPlus<imba_void_spirit_astral_step>("imba_void_spirit_astral_step").original_vector) {
             this.GetCasterPlus().findAbliityPlus<imba_void_spirit_astral_step>("imba_void_spirit_astral_step").OnSpellStart(this.GetCasterPlus().findAbliityPlus<imba_void_spirit_astral_step>("imba_void_spirit_astral_step").original_vector * (-1) as Vector);
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_if_enemy(this);
     }
 }
 @registerModifier()
@@ -847,6 +867,12 @@ export class imba_void_spirit_void_stasis extends BaseAbility_Plus {
             }
         }
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_if_enemy(this);
+    }
 }
 @registerModifier()
 export class modifier_imba_void_spirit_void_stasis extends BaseModifier_Plus {
@@ -986,6 +1012,12 @@ export class imba_void_spirit_astral_step extends BaseAbility_Plus {
                 this.GetCasterPlus().findBuff<modifier_imba_void_spirit_astral_step_invis>("modifier_imba_void_spirit_astral_step_invis").SetDuration(this.GetCasterPlus().FindModifierByName("modifier_imba_void_spirit_astral_step_invis").GetRemainingTime() + this.GetSpecialValueFor("hidden_ones_duration"), true);
             }
         }
+    }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this);
     }
 }
 @registerModifier()

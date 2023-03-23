@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { GameServiceConfig } from "../../../shared/GameServiceConfig";
@@ -101,6 +102,15 @@ export class imba_troll_warlord_berserkers_rage extends BaseAbility_Plus {
                 });
             }
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        if (!this.GetToggleState()) {
+            this.ToggleAbility();
+        }
+        return false
     }
 }
 @registerModifier()
@@ -482,6 +492,12 @@ export class imba_troll_warlord_whirling_axes_ranged extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_troll_warlord_5"), "modifier_special_bonus_imba_troll_warlord_5", {});
         }
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this)
+    }
 }
 @registerModifier()
 export class modifier_imba_whirling_axes_ranged extends BaseModifier_Plus {
@@ -639,6 +655,12 @@ export class imba_troll_warlord_whirling_axes_melee extends BaseAbility_Plus {
             });
             enemy.EmitSound("Hero_TrollWarlord.WhirlingAxes.Target");
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_if_enemy(this)
     }
 }
 @registerModifier()
@@ -872,6 +894,12 @@ export class imba_troll_warlord_battle_trance extends BaseAbility_Plus {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_troll_warlord_battle_trance_upgrade") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_troll_warlord_battle_trance_upgrade")) {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_troll_warlord_battle_trance_upgrade"), "modifier_special_bonus_imba_troll_warlord_battle_trance_upgrade", {});
         }
+    }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_cast(this)
     }
 }
 @registerModifier()

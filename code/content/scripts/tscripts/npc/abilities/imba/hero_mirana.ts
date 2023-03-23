@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -189,6 +190,12 @@ export class imba_mirana_starfall extends BaseAbility_Plus {
                 return undefined;
             }
         });
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_if_enemy(this)
     }
 }
 @registerModifier()
@@ -410,6 +417,12 @@ export class imba_mirana_arrow extends BaseAbility_Plus {
             duration: stun_duration * (1 - target.GetStatusResistance())
         });
         return true;
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_enemy(this)
     }
 }
 @registerModifier()
@@ -633,6 +646,12 @@ export class imba_mirana_leap extends BaseAbility_Plus {
             }
         }
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.POSITION_if_friend(this, null, (unit) => unit != this.GetCasterPlus())
+    }
 }
 @registerModifier()
 export class modifier_imba_mirana_leap extends BaseModifier_Plus {
@@ -670,7 +689,6 @@ export class modifier_imba_leap_movement extends BaseModifierMotionBoth_Plus {
     public ability: IBaseAbility_Plus;
     public modifier_aura: any;
     public jump_speed: number;
-    public max_height: any;
     public aura_duration: number;
     public time_elapsed: number;
     public leap_z: any;
@@ -684,7 +702,6 @@ export class modifier_imba_leap_movement extends BaseModifierMotionBoth_Plus {
         this.ability = this.GetAbilityPlus();
         this.modifier_aura = "modifier_imba_leap_aura";
         this.jump_speed = this.ability.GetSpecialValueFor("jump_speed");
-        this.max_height = this.ability.GetSpecialValueFor("max_height");
         this.aura_duration = this.ability.GetSpecialValueFor("aura_duration");
         if (IsServer()) {
             this.time_elapsed = 0;

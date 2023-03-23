@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -35,7 +36,7 @@ export class imba_lycan_summon_wolves extends BaseAbility_Plus {
         let wolves_spawn_particle = undefined;
         let wolf: IBaseNpc_Plus = undefined;
         for (let i = 0; i <= this.GetTalentSpecialValueFor("wolves_count") - 1; i++) {
-            wolf = BaseNpc_Plus.CreateUnitByName("npc_imba_lycan_wolf" + (this.GetSpecialValueFor("wolf_type") + this.GetCasterPlus().GetTalentValue("special_bonus_imba_lycan_1")), this.GetCasterPlus().GetAbsOrigin() + (this.GetCasterPlus().GetForwardVector() * 200) + (this.GetCasterPlus().GetRightVector() * 120 * (i - ((this.GetTalentSpecialValueFor("wolves_count") - 1) / 2)) as Vector) as Vector, this.GetCasterPlus(), true);
+            wolf = this.GetCasterPlus().CreateSummon("npc_imba_lycan_wolf" + (this.GetSpecialValueFor("wolf_type") + this.GetCasterPlus().GetTalentValue("special_bonus_imba_lycan_1")), this.GetCasterPlus().GetAbsOrigin() + (this.GetCasterPlus().GetForwardVector() * 200) + (this.GetCasterPlus().GetRightVector() * 120 * (i - ((this.GetTalentSpecialValueFor("wolves_count") - 1) / 2)) as Vector) as Vector, 60, true);
             wolves_spawn_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_lycan/lycan_summon_wolves_spawn.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, wolf);
             ParticleManager.ReleaseParticleIndex(wolves_spawn_particle);
             if (player_id) {
@@ -52,7 +53,7 @@ export class imba_lycan_summon_wolves extends BaseAbility_Plus {
             }
         }
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_lycan_3")) {
-            wolf = BaseNpc_Plus.CreateUnitByName("npc_lycan_summoned_wolf_talent", this.GetCasterPlus().GetAbsOrigin() + (this.GetCasterPlus().GetForwardVector() * 400) as Vector, this.GetCasterPlus(), true);
+            wolf = this.GetCasterPlus().CreateSummon("npc_lycan_summoned_wolf_talent", this.GetCasterPlus().GetAbsOrigin() + (this.GetCasterPlus().GetForwardVector() * 400) as Vector, 60, true);
             wolves_spawn_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_lycan/lycan_summon_wolves_spawn.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, wolf);
             ParticleManager.ReleaseParticleIndex(wolves_spawn_particle);
             if (player_id) {
@@ -72,6 +73,12 @@ export class imba_lycan_summon_wolves extends BaseAbility_Plus {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_lycan_10") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_lycan_10")) {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_lycan_10"), "modifier_special_bonus_imba_lycan_10", {});
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_if_enemy(this)
     }
 }
 @registerModifier()
@@ -222,6 +229,12 @@ export class imba_lycan_howl extends BaseAbility_Plus {
         if (this.GetLevel() == 1) {
             this.ToggleAutoCast();
         }
+    }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_if_enemy(this)
     }
 }
 @registerModifier()
@@ -449,7 +462,7 @@ export class modifier_imba_feral_impulse_aura extends BaseModifier_Plus {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_PERMANENT;
     }
     GetEffectName(): string {
-        return "particles/auras/aura_feral_impulse.vpcf";
+        return "particles/generic/auras/aura_feral_impulse.vpcf";
     }
     GetEffectAttachType(): ParticleAttachment_t {
         return ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW;
@@ -498,7 +511,7 @@ export class modifier_imba_feral_impulse extends BaseModifier_Plus {
     public caster: IBaseNpc_Plus;
     public ability: IBaseAbility_Plus;
     public parent: IBaseNpc_Plus;
-    public aura_buff: any;
+    public aura_buff: string;
     public base_bonus_damage_perc: number;
     public damage_inc_per_unit: number;
     public health_regen: any;
@@ -517,6 +530,10 @@ export class modifier_imba_feral_impulse extends BaseModifier_Plus {
         this.StartIntervalThink(0.1);
     }
     OnIntervalThink(): void {
+        if (!GFuncEntity.IsValid(this.caster)) {
+            this.Destroy();
+            return
+        }
         this.feral_impulse_stacks = this.caster.findBuffStack(this.aura_buff, this.caster);
     }
     /** DeclareFunctions():modifierfunction[] {
@@ -612,6 +629,12 @@ export class imba_lycan_shapeshift extends BaseAbility_Plus {
             return final_cooldown;
         }
         return super.GetCooldown(level);
+    }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_if_enemy(this)
     }
 }
 @registerModifier()
@@ -1234,8 +1257,8 @@ export class modifier_imba_summoned_wolf_wicked_crunch_debuff extends BaseModifi
                     this.stacks_table.push(GameRules.GetGameTime());
                 }
                 this.StartIntervalThink(0.1);
-                this.owner = this.caster.GetOwnerEntity();
-                if (this.owner.HasTalent("special_bonus_imba_lycan_6") && !params.lycan_attack) {
+                this.owner = this.caster.GetOwnerPlus();
+                if (this.owner && this.owner.HasTalent("special_bonus_imba_lycan_6") && !params.lycan_attack) {
                     this.stacks_table.push(GameRules.GetGameTime());
                 }
             }
@@ -1250,8 +1273,9 @@ export class modifier_imba_summoned_wolf_wicked_crunch_debuff extends BaseModifi
             this.ability = this.GetAbilityPlus();
             this.duration = params.duration;
             this.max_stacks = this.ability.GetSpecialValueFor("max_stacks");
-            this.owner = this.caster.GetOwnerEntity();
-            if (this.owner.HasTalent("special_bonus_imba_lycan_6")) {
+            this.owner = this.caster.GetOwnerPlus();
+
+            if (this.owner && this.owner.HasTalent("special_bonus_imba_lycan_6")) {
                 this.max_stacks = this.max_stacks * this.owner.GetTalentValue("special_bonus_imba_lycan_6") * 0.01;
             }
             if (!params.lycan_attack) {
@@ -1259,7 +1283,7 @@ export class modifier_imba_summoned_wolf_wicked_crunch_debuff extends BaseModifi
                 if (GameFunc.GetCount(this.stacks_table) > this.max_stacks) {
                     this.stacks_table.shift();
                 }
-                if (this.owner.HasTalent("special_bonus_imba_lycan_6")) {
+                if (this.owner && this.owner.HasTalent("special_bonus_imba_lycan_6")) {
                     this.stacks_table.push(GameRules.GetGameTime());
                 }
                 if (GameFunc.GetCount(this.stacks_table) > this.max_stacks) {
