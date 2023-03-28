@@ -28,6 +28,8 @@ export class BuildingEntityRoot extends BattleUnitEntityRoot {
         GEventHelper.AddEvent(THeroUnit.updateEventClassName(), GHandler.create(this, (_hero: THeroUnit) => {
             this.LoadServerData(_hero);
         }), this.BelongPlayerid);
+        this.SetStar(1);
+        this.SetUIOverHead(true, false);
         this.InitSyncClientInfo();
         this.JoinInRound();
     }

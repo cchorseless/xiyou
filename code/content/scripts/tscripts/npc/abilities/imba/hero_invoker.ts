@@ -40,7 +40,7 @@ export class imba_invoker {
             invoked_orbs_particle.push(p);
             ParticleManager.SetParticleControlEnt(p, 1, caster, ParticleAttachment_t.PATTACH_POINT_FOLLOW, attach_point, caster.GetAbsOrigin(), false);
             if (invoked_orbs_particle.length > max_count) {
-                ParticleManager.DestroyParticle(invoked_orbs_particle.shift(), false);
+                ParticleManager.ClearParticle(invoked_orbs_particle.shift(), false);
             }
             this.update_orb_modifiers(caster, ability, remove_orb);
             this.update_base_attack(caster);

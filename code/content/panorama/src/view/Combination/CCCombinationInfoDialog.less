@@ -1,4 +1,12 @@
 .CCCombinationInfoDialog {
+
+    .CombinationShowPanelBg {
+        padding: 10px;
+        background-color: gradient(linear, 0% 0%, 0% 25%, from(#232326), to(#1c1d20));
+        box-shadow: #00000099 0px 0px 8px 0px;
+        border: 2px solid #32383677;
+    }
+
     #SectIcon {
         width: 54px;
         height: 54px;
@@ -64,10 +72,12 @@
             background-repeat: no-repeat;
             background-position: top;
             background-size: 100%;
-            background-image: url("s2r://panorama/images/hud/item_tooltip_passive_psd.vtex");
+            background-color: gradient(linear, 0% 0%, 90% 0%, from(#3b3b3b), to(#111111));
+            // background-image: url("s2r://panorama/images/hud/item_tooltip_passive_psd.vtex");
 
             &.Active {
-                background-image: url("s2r://panorama/images/hud/item_tooltip_active_psd.vtex");
+                // background-image: url("s2r://panorama/images/hud/item_tooltip_active_psd.vtex");
+                background-color: gradient(linear, 0% 0%, 90% 0%, from(#3c29e7), to(#111111));
             }
         }
 

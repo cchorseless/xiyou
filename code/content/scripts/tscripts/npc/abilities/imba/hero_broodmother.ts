@@ -926,8 +926,7 @@ export class modifier_imba_broodmother_insatiable_hunger extends BaseModifier_Pl
         }
         this.GetCasterPlus().StopSound("Hero_Broodmother.InsatiableHunger");
         if (this.pfx) {
-            ParticleManager.DestroyParticle(this.pfx, false);
-            ParticleManager.ReleaseParticleIndex(this.pfx);
+            ParticleManager.ClearParticle(this.pfx, false);
         }
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)

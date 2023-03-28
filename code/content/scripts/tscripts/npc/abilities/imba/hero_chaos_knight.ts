@@ -264,8 +264,7 @@ export class modifier_reality_rift_armor_reduction_debuff extends BaseModifier_P
     }
     BeDestroy(): void {
         let parent = this.GetParentPlus();
-        ParticleManager.DestroyParticle(parent.TempData().ArmorDebuff, false);
-        ParticleManager.ReleaseParticleIndex(parent.TempData().ArmorDebuff);
+        ParticleManager.ClearParticle(parent.TempData().ArmorDebuff, false);
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS)
     CC_GetModifierPhysicalArmorBonus(p_0: ModifierAttackEvent,): number {

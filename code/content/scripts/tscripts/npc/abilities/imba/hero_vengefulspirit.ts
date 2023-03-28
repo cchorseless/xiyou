@@ -1292,7 +1292,7 @@ export class imba_vengefulspirit_nether_swap extends BaseAbility_Plus {
         EmitSoundOnLocationWithCaster(location, "Hero_VengefulSpirit.MagicMissileImpact", caster);
     }
     GetManaCost(level: number): number {
-        return 0;
+        return 100;
     }
     AutoSpellSelf() {
         return AI_ability.TARGET_if_enemy(this, null, null, FindOrder.FIND_FARTHEST);

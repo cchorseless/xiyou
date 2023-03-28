@@ -62,9 +62,9 @@ export class ECombination extends ET.Entity {
         for (let k in this.combination) {
             let c = this.combination[k];
             c.forEach(entity => {
-                let building = entity.GetDomain<IBaseNpc_Plus>().ETRoot.As<IBuildingEntityRoot>();
-                if (!this.uniqueConfigList.includes(building.ConfigID)) {
-                    this.uniqueConfigList.push(building.ConfigID);
+                let unit = entity.GetDomain<IBaseNpc_Plus>().ETRoot.As<IBattleUnitEntityRoot>();
+                if (!this.uniqueConfigList.includes(unit.ConfigID)) {
+                    this.uniqueConfigList.push(unit.ConfigID);
                 }
             })
         }

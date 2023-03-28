@@ -513,7 +513,7 @@ export class modifier_imba_dazzle_shallow_grave extends BaseModifier_Plus {
     BeDestroy(): void {
         if (IsServer()) {
             let parent = this.GetParentPlus();
-            ParticleManager.DestroyParticle(this.shallow_grave_particle, true);
+            ParticleManager.ClearParticle(this.shallow_grave_particle, true);
             if (parent.IsAlive() && this.shallowDamage > 0 && this.gravely != 0) {
                 if (this.shallowDamageInstances > 0) {
                     let ability = this.GetAbilityPlus();
@@ -885,7 +885,7 @@ export class modifier_imba_dazzle_nothl_protection_particle extends BaseModifier
     }
     BeRemoved(): void {
         if (IsServer()) {
-            ParticleManager.DestroyParticle(this.particles, true);
+            ParticleManager.ClearParticle(this.particles, true);
         }
     }
 }
@@ -925,7 +925,7 @@ export class modifier_imba_dazzle_post_shallow_grave_buff extends BaseModifier_P
     }
     BeRemoved(): void {
         if (IsServer()) {
-            ParticleManager.DestroyParticle(this.post_shallow_grave_particle, true);
+            ParticleManager.ClearParticle(this.post_shallow_grave_particle, true);
         }
     }
     /** DeclareFunctions():modifierfunction[] {
@@ -1049,8 +1049,7 @@ export class modifier_imba_dazzle_nothl_protection_aura_talent extends BaseModif
                     let particle = ResHelper.CreateParticleEx("particles/hero/dazzle/dazzle_shallow_grave_talent.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, parent);
                     this.AddTimer(this.GetCasterPlus().GetTalentValue("special_bonus_imba_dazzle_6", "talent_aura_nothl_duration"), () => {
                         if (!this.IsNull()) {
-                            ParticleManager.DestroyParticle(particle, false);
-                            ParticleManager.ReleaseParticleIndex(particle);
+                            ParticleManager.ClearParticle(particle, false);
                             this.Destroy();
                         }
                     });

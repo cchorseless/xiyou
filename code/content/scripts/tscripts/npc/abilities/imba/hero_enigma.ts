@@ -616,7 +616,7 @@ export class modifier_imba_enigma_midnight_pulse_thinker extends BaseModifier_Pl
         let dmg_pct = ability.GetSpecialValueFor("damage_percent") * 0.01;
         let enemies = FindUnitsInRadius(caster.GetTeamNumber(), parent.GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false) as IBaseNpc_Plus[];
         for (const [_, enemy] of GameFunc.iPair(enemies)) {
-            if (!enemy.IsRoshan()) {
+            if (GFuncEntity.IsValid(enemy)) {
                 let dmg = enemy.GetMaxHealth() * dmg_pct;
                 let damageTable = {
                     victim: enemy,
@@ -645,8 +645,7 @@ export class modifier_imba_enigma_midnight_pulse_thinker extends BaseModifier_Pl
         if (!IsServer()) {
             return;
         }
-        ParticleManager.DestroyParticle(this.particle, false);
-        ParticleManager.ReleaseParticleIndex(this.particle);
+        ParticleManager.ClearParticle(this.particle, false);
     }
 }
 @registerModifier()
@@ -908,11 +907,9 @@ export class modifier_imba_enigma_black_hole_thinker extends BaseModifier_Plus {
         StopSoundOn("Hero_Enigma.BlackHole.Cast", this.GetParentPlus());
         StopSoundOn("Hero_Enigma.BlackHole.Cast.Chasm", this.GetParentPlus());
         EmitSoundOn("Hero_Enigma.Black_Hole.Stop", this.GetParentPlus());
-        ParticleManager.DestroyParticle(this.particle, false);
-        ParticleManager.ReleaseParticleIndex(this.particle);
+        ParticleManager.ClearParticle(this.particle, false);
         if (this.pfx_ulti) {
-            ParticleManager.DestroyParticle(this.pfx_ulti, false);
-            ParticleManager.ReleaseParticleIndex(this.pfx_ulti);
+            ParticleManager.ClearParticle(this.pfx_ulti, false);
         }
         this.GetParentPlus().ForceKill(false);
     }

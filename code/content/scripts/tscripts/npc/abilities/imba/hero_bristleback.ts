@@ -705,8 +705,7 @@ export class modifier_imba_bristleback_warpath extends BaseModifier_Plus {
                     this.counter = this.counter - 1;
                     this.SetStackCount(math.min(this.counter, this.max_stacks));
                     if (GameFunc.GetCount(this.particle_table) > 0) {
-                        ParticleManager.DestroyParticle(this.particle_table[0], false);
-                        ParticleManager.ReleaseParticleIndex(this.particle_table[0]);
+                        ParticleManager.ClearParticle(this.particle_table[0], false);
                         this.particle_table.shift()
                     }
                 }

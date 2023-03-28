@@ -191,7 +191,7 @@ export class imba_abaddon_death_coil extends BaseAbility_Plus {
     }
     OnOwnerDied(): void {
         if (this.GetCasterPlus().IsRealUnit()) {
-            let units = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.GetCastRange(this.GetCasterPlus().GetAbsOrigin(), this.GetCasterPlus()), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, this.GetAbilityTargetType(), this.GetAbilityTargetFlags(), FindOrder.FIND_ANY_ORDER, false);
+            let units = this.GetCasterPlus().FindUnitsInRadiusPlus(this.GetCastRange(this.GetCasterPlus().GetAbsOrigin(), this.GetCasterPlus()), null, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, this.GetAbilityTargetType(), this.GetAbilityTargetFlags());
             for (const unit of (units)) {
                 if (unit != this.GetCasterPlus()) {
                     this.OnSpellStart(unit, true);
@@ -415,7 +415,6 @@ export class modifier_imba_aphotic_shield_buff_block extends BaseModifier_Plus {
             let target = this.GetParentPlus();
             let caster = this.GetCasterPlus();
             let ability = this.GetAbilityPlus();
-            let ability_level = ability.GetLevel();
             let radius = ability.GetSpecialValueFor("radius");
             let explode_target_team = DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH;
             let explode_target_type = DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC;
@@ -424,7 +423,7 @@ export class modifier_imba_aphotic_shield_buff_block extends BaseModifier_Plus {
             let particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_abaddon/abaddon_aphotic_shield_explosion.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, caster);
             ParticleManager.SetParticleControl(particle, 0, target_vector);
             ParticleManager.ReleaseParticleIndex(particle);
-            let units = FindUnitsInRadius(caster.GetTeamNumber(), target_vector, undefined, radius, explode_target_team, explode_target_type, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
+            let units = caster.FindUnitsInRadiusPlus(radius, target_vector, explode_target_team, explode_target_type, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
             let damage = this.shield_init_value;
             let damage_type = DAMAGE_TYPES.DAMAGE_TYPE_MAGICAL;
             let curse_of_avernus = caster.findAbliityPlus<imba_abaddon_frostmourne>("imba_abaddon_frostmourne");
@@ -711,10 +710,7 @@ export class modifier_imba_curse_of_avernus_debuff_counter extends BaseModifier_
         if (!IsServer()) {
             return;
         }
-        if (this.pfx) {
-            ParticleManager.DestroyParticle(this.pfx, false);
-            ParticleManager.ReleaseParticleIndex(this.pfx);
-        }
+        ParticleManager.ClearParticle(this.pfx);
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
     CC_GetModifierMoveSpeedBonus_Percentage(): number {

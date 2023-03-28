@@ -273,13 +273,11 @@ export class modifier_imba_stone_remnant extends BaseModifier_Plus {
     BeDestroy(): void {
         if (IsServer()) {
             if (this.explodedParticle) {
-                ParticleManager.DestroyParticle(this.explodedParticle, false);
-                ParticleManager.ReleaseParticleIndex(this.explodedParticle);
+                ParticleManager.ClearParticle(this.explodedParticle, false);
             }
             EmitSoundOn("Hero_EarthSpirit.StoneRemnant.Destroy", this.GetParentPlus());
             if (this.GetParentPlus().GetUnitName() == "npc_imba_earth_spirit_stone") {
-                ParticleManager.DestroyParticle(this.remnantParticle, false);
-                ParticleManager.ReleaseParticleIndex(this.remnantParticle);
+                ParticleManager.ClearParticle(this.remnantParticle, false);
                 GFuncEntity.SafeDestroyUnit(this.GetParentPlus());
                 if (this.GetAbilityPlus() && !this.GetAbilityPlus().IsNull()) {
                     this.GetAbilityPlus<imba_earth_spirit_stone_caller>().KillRemnant(this.GetParentPlus().GetEntityIndex());

@@ -1127,8 +1127,7 @@ export class modifier_imba_culling_blade_buff_haste extends BaseModifier_Plus {
     BeDestroy(): void {
         if (IsServer()) {
             if (this.pfx) {
-                ParticleManager.DestroyParticle(this.pfx, false);
-                ParticleManager.ReleaseParticleIndex(this.pfx);
+                ParticleManager.ClearParticle(this.pfx, false);
             }
         }
     }

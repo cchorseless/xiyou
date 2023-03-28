@@ -225,7 +225,6 @@ export class modifier_imba_earthshock_movement extends BaseModifierMotionBoth_Pl
         }
     }
     UpdateHorizontalMotion(me: CDOTA_BaseNPC, dt: number): void {
-        GLogHelper.print("UpdateHorizontalMotion")
         if (!IsServer()) {
             return;
         }

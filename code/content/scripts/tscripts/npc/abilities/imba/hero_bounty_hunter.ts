@@ -257,10 +257,8 @@ export class modifier_imba_shuriken_toss_debuff_pull extends BaseModifier_Plus {
     }
     BeRemoved(): void {
         if (IsServer()) {
-            ParticleManager.DestroyParticle(this.particle_leash_fx, false);
-            ParticleManager.ReleaseParticleIndex(this.particle_leash_fx);
-            ParticleManager.DestroyParticle(this.particle_hook_fx, true);
-            ParticleManager.ReleaseParticleIndex(this.particle_hook_fx);
+            ParticleManager.ClearParticle(this.particle_leash_fx, false);
+            ParticleManager.ClearParticle(this.particle_hook_fx, true);
         }
     }
     IsDebuff(): boolean {
@@ -873,7 +871,7 @@ export class modifier_imba_track_debuff_mark extends BaseModifier_Plus {
             this.Destroy();
             return;
         }
-        this.SetStackCount(this.parent.GetPlayerRoot().PlayerDataComp().GetGold());
+        // this.SetStackCount(this.parent.GetPlayerRoot().PlayerDataComp().GetGold());
         if (this.has_talent_2) {
             AddFOWViewer(this.caster.GetTeamNumber(), this.parent.GetAbsOrigin(), this.talent_2_vision_radius, FrameTime(), false);
         }

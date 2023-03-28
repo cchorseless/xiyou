@@ -189,7 +189,9 @@ export module KVHelper {
     }
 
     export namespace CourierUnits {
-
+        export function GetRandomCourier() {
+            return GFuncRandom.RandomOne(Object.keys(KvConfig().courier_units))
+        }
         export function GetCourierAbility(sCourierName: string) {
             if (KvConfig().courier_units[sCourierName] == null) { return }
             return KvConfig().courier_units[sCourierName].Ability1

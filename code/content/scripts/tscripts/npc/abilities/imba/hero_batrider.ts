@@ -263,8 +263,7 @@ export class imba_batrider_flamebreak extends BaseAbility_Plus {
             EntIndexToHScript(data.flamebreak_dummy_entindex).RemoveSelf();
         }
         if (data.flamebreak_particle) {
-            ParticleManager.DestroyParticle(data.flamebreak_particle, false);
-            ParticleManager.ReleaseParticleIndex(data.flamebreak_particle);
+            ParticleManager.ClearParticle(data.flamebreak_particle, false);
         }
         let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), location, undefined, this.GetSpecialValueFor("explosion_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
         if (!this.initial_damage_table) {
@@ -372,8 +371,7 @@ export class imba_batrider_firefly extends BaseAbility_Plus {
             } else {
                 mod.firefly_thinker.FollowEntity(undefined, false);
                 mod.SetStackCount(-1);
-                ParticleManager.DestroyParticle(mod.ember_particle, false);
-                ParticleManager.ReleaseParticleIndex(mod.ember_particle);
+                ParticleManager.ClearParticle(mod.ember_particle, false);
             }
             if (mod.truesight_modifier) {
                 mod.truesight_modifier.Destroy();

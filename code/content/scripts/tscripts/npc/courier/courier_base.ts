@@ -45,7 +45,8 @@ export class courier_base extends BaseNpc_Hero_Plus {
         GTimerHelper.AddFrameTimer(1, GHandler.create(this, () => {
             let playerid = this.GetPlayerID();
             // 设置出生点
-            let startPoint = GPlayerEntityRoot.HeroSpawnPoint[playerid];
+            let offset = Vector(500, 500, 0)
+            let startPoint = GPlayerEntityRoot.HeroSpawnPoint[playerid] + offset as Vector;
             let a = GetGroundPosition(startPoint, this);
             this.SetAbsOrigin(a);
             CenterCameraOnUnit(playerid, this);

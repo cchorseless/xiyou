@@ -36,8 +36,7 @@ export class imba_grimstroke_dark_artistry extends BaseAbility_Plus {
     OnAbilityPhaseInterrupted(): void {
         this.GetCasterPlus().StopSound("Hero_Grimstroke.DarkArtistry.PreCastPoint");
         if (this.precast_particle) {
-            ParticleManager.DestroyParticle(this.precast_particle, true);
-            ParticleManager.ReleaseParticleIndex(this.precast_particle);
+            ParticleManager.ClearParticle(this.precast_particle, true);
             this.precast_particle = undefined;
         }
     }
@@ -359,8 +358,7 @@ export class imba_grimstroke_ink_creature extends BaseAbility_Plus {
                 target.SetAbsOrigin(location);
                 target.FaceTowards(EntIndexToHScript(data.target_entindex).GetAbsOrigin());
             } else {
-                ParticleManager.DestroyParticle(data.phantoms_embrace_particle, false);
-                ParticleManager.ReleaseParticleIndex(data.phantoms_embrace_particle);
+                ParticleManager.ClearParticle(data.phantoms_embrace_particle, false);
             }
         }
     }
@@ -369,8 +367,7 @@ export class imba_grimstroke_ink_creature extends BaseAbility_Plus {
             return;
         }
         if (data.phantoms_embrace_particle) {
-            ParticleManager.DestroyParticle(data.phantoms_embrace_particle, false);
-            ParticleManager.ReleaseParticleIndex(data.phantoms_embrace_particle);
+            ParticleManager.ClearParticle(data.phantoms_embrace_particle, false);
         }
         if (_target && data.ink_unit_entindex) {
             let unit = EntIndexToHScript(data.ink_unit_entindex) as IBaseNpc_Plus;

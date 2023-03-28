@@ -909,7 +909,7 @@ export class imba_tiny_toss extends BaseAbility_Plus {
         return 0;
     }
     AutoSpellSelf() {
-        return AI_ability.TARGET_if_enemy(this, null, null, FindOrder.FIND_FARTHEST);
+        return AI_ability.POSITION_if_enemy(this, null, null, FindOrder.FIND_FARTHEST);
     }
 }
 @registerModifier()

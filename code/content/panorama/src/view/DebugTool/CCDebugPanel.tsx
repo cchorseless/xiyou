@@ -1,6 +1,5 @@
 import React from "react";
 import { CombinationConfig } from "../../../../scripts/tscripts/shared/CombinationConfig";
-
 import { GameProtocol } from "../../../../scripts/tscripts/shared/GameProtocol";
 import { KVHelper } from "../../helper/KVHelper";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
@@ -36,7 +35,7 @@ export class CCDebugPanel extends CCPanel<ICCDebugPanel> {
         const dotaitemsNames: string[] = Object.keys(KVHelper.KVData().dota_items);
         const dotaabilitiesNames: string[] = Object.keys(KVHelper.KVData().dota_abilities);
         const heroList: string[] = Object.keys(KVHelper.KVData().building_unit_tower);
-        const enemylist: string[] = [];
+        const enemylist: string[] = Object.keys(KVHelper.KVData().building_unit_enemy);;
         const stateList: string[] = [];
         const sectList: string[] = [...CombinationConfig.ESectNameList];
         const sectToggleList: { [k: string]: any } = {};
@@ -88,7 +87,7 @@ export class CCDebugPanel extends CCPanel<ICCDebugPanel> {
                     </CCDebugTool_Category>
                     <CCDebugTool_Category title="单位" >
                         <CCDebugTool_DemoSelectionButton eventName="SwitchHero" localtext="创建友方单位" onactivate={() => { this.addOnlyDebugDialog(CCDebugTool_HeroPicker, { title: "创建友方单位", unitNames: heroList }) }} />
-                        <CCDebugTool_DemoSelectionButton eventName="CreateEnemyButtonPressed" localtext="创建敌方单位" onactivate={() => { this.addOnlyDebugDialog(CCDebugTool_EnemyPicker, { title: "创建敌方单位", itemNames: enemylist }) }} />
+                        <CCDebugTool_DemoSelectionButton eventName="CreateEnemyButtonPressed" localtext="创建敌方单位" onactivate={() => { this.addOnlyDebugDialog(CCDebugTool_EnemyPicker, { title: "创建敌方单位", unitNames: enemylist }) }} />
                         <CCDebugTool_DemoButton eventName={GameProtocol.Protocol.req_DebugAddDummyTarget} localtext="添加傀儡" />
                         <CCDebugTool_DemoButton eventName={GameProtocol.Protocol.req_DebugRemoveDummyTarget} localtext="移除傀儡" />
                         <CCDebugTool_DemoButton eventName="RespawnHeroButtonPressed" localtext="复活英雄" />

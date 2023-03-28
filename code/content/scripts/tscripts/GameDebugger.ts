@@ -226,7 +226,10 @@ export class GameDebugger extends SingletonClass {
             let { unitname } = e.data;
             let player = GGameScene.GetPlayer(e.PlayerID);
             if (player && unitname) {
-                player.EnemyManagerComp().addEnemy(unitname as string, player.RoundManagerComp().curRoundBoard);
+                let _boardVec = GChessControlSystem.GetInstance().GetBoardEmptyGirdRandom(e.PlayerID, true, true);
+                // let _boardVec = new ChessControlConfig.ChessVector(Number(allenemy[unit_index].position_x), Number(allenemy[unit_index].position_y), playerid);
+                let pos = _boardVec.getVector3();
+                player.EnemyManagerComp().addEnemy(unitname as string, player.RoundManagerComp().curRoundBoard, null, pos);
             }
         }));
         //#endregion

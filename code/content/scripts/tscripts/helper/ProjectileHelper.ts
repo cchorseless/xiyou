@@ -151,14 +151,12 @@ export module ProjectileHelper {
             let acceleration = params.flAcceleration || 1;
             GTimerHelper.AddFrameTimer(acceleration, GHandler.create(params, () => {
                 if (projectileID.destroy) {
-                    ParticleManager.DestroyParticle(particle, false);
-                    ParticleManager.ReleaseParticleIndex(particle);
+                    ParticleManager.ClearParticle(particle);
                     OnProjectileDestroy(params, projectileID)
                     return;
                 }
                 if (params.bDestroyOnDodge && params.bDodgeable && target.TempData().dodged) {
-                    ParticleManager.DestroyParticle(particle, false);
-                    ParticleManager.ReleaseParticleIndex(particle);
+                    ParticleManager.ClearParticle(particle);
                     OnProjectileDestroy(params, projectileID)
                     return;
                 }
@@ -166,8 +164,7 @@ export module ProjectileHelper {
                     params.bProjectileDodged = true;
                 }
                 if (params.flExpireTime && GameRules.GetGameTime() - params.creation_time > params.flExpireTime) {
-                    ParticleManager.DestroyParticle(particle, false);
-                    ParticleManager.ReleaseParticleIndex(particle);
+                    ParticleManager.ClearParticle(particle);
                     OnProjectileDestroy(params, projectileID)
                     return;
                 }
@@ -192,25 +189,21 @@ export module ProjectileHelper {
                     AddFOWViewer(caster.GetTeam(), projectile, visionRadius, time * 2, true);
                 }
                 if (params.bDestroyOnGroundHit && GetGroundPosition(projectile, undefined).z - 50 > projectile.z) {
-                    ParticleManager.DestroyParticle(particle, false);
-                    ParticleManager.ReleaseParticleIndex(particle);
+                    ParticleManager.ClearParticle(particle);
                     OnProjectileDestroy(params, projectileID)
                     return;
                 }
                 if (params.bDestroyOnWallHit && !GridNav.IsTraversable(projectile)) {
-                    ParticleManager.DestroyParticle(particle, false);
-                    ParticleManager.ReleaseParticleIndex(particle);
+                    ParticleManager.ClearParticle(particle);
                     OnProjectileDestroy(params, projectileID)
                     return;
                 }
                 if ((target_location - projectile as Vector).Length() - params.flRadius < movedt) {
                     TrackingProjectiles.OnProjectileHitUnit(params, projectileID);
-                    ParticleManager.DestroyParticle(particle, false);
-                    ParticleManager.ReleaseParticleIndex(particle);
+                    ParticleManager.ClearParticle(particle);
                     return;
                 } else if (params.flMaxDistance && (target_location - projectile as Vector).Length() > params.flMaxDistance) {
-                    ParticleManager.DestroyParticle(particle, false);
-                    ParticleManager.ReleaseParticleIndex(particle);
+                    ParticleManager.ClearParticle(particle);
                     OnProjectileDestroy(params, projectileID)
                     return;
                 }
@@ -822,8 +815,7 @@ export module ProjectileHelper {
                 return this.abilitySource;
             }
             Remove() {
-                ParticleManager.DestroyParticle(this.FXid, true);
-                ParticleManager.ReleaseParticleIndex(this.FXid);
+                ParticleManager.ClearParticle(this.FXid, true);
                 GTimerHelper.ClearAll(this);
             }
             Deflect(unit: IBaseNpc_Plus) {

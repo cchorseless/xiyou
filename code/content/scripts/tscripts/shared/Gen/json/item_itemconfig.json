@@ -3148,7 +3148,7 @@
     "BagSlotType": 0,
     "AutoUse": true,
     "BatchUseable": true,
-    "BindHeroName": "building_hero_zeus",
+    "BindHeroName": "building_hero_zuus",
     "UseScript": 0,
     "UseArgs": [],
     "AwakeScript": [

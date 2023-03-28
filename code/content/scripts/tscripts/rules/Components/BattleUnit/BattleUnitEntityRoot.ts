@@ -15,7 +15,7 @@ import { ERoundBoard } from "../Round/ERoundBoard";
 import { WearableComponent } from "../Wearable/WearableComponent";
 
 export class BattleUnitEntityRoot extends BaseEntityRoot implements IRoundStateCallback {
-    public iScale: number = 1;
+    public iScale: number;
     @serializeETProps()
     public iLevel: number = 1;
     @serializeETProps()
@@ -46,15 +46,15 @@ export class BattleUnitEntityRoot extends BaseEntityRoot implements IRoundStateC
     }
 
     InitSyncClientInfo() {
-        this.iScale = this.GetDomain<IBaseNpc_Plus>().GetAbsScale();
         let domain = this.GetDomain<IBaseNpc_Plus>();
+        if (!domain.IsAttacker()) {
+            return;
+        }
         const m = modifier_hero_property.applyOnly(domain, domain);
         m.StackCountHandler = GHandler.create(this, (attr: Attributes) => {
             this.PrimaryAttribute = attr;
             this.SyncClient(true);
         }, null, false);
-        this.SetUIOverHead(true, false);
-        this.SetStar(1);
     }
 
     SetUIOverHead(isshowCustom: boolean, isshowdota: boolean) {
@@ -68,7 +68,9 @@ export class BattleUnitEntityRoot extends BaseEntityRoot implements IRoundStateC
         }
         this.SyncClient(true);
     }
-
+    GetRoundHeroDamage() {
+        return this.iStar;
+    }
     /**是否可以升星 */
     checkCanStarUp() {
         return this.iStar < BuildingConfig.MAX_STAR;
@@ -78,6 +80,7 @@ export class BattleUnitEntityRoot extends BaseEntityRoot implements IRoundStateC
     }
     SetStar(n: number) {
         this.iStar = n;
+        this.iScale = this.iScale || this.GetDomain<IBaseNpc_Plus>().GetAbsScale();
         let domain = this.GetDomain<IBaseNpc_Plus>();
         let building = domain.ETRoot.As<IBattleUnitEntityRoot>();
         // 变大

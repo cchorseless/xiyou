@@ -112,7 +112,8 @@ export class modifier_imba_bloodrage_buff_stats extends BaseModifier_Plus {
     }
 
     OnIntervalThink(): void {
-        for (const [_, target] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, 0, 0, false))) {
+        let units = this.GetCasterPlus().FindUnitsInRadiusPlus(this.radius);
+        for (const [_, target] of GameFunc.iPair(units)) {
             ApplyDamage({
                 victim: target,
                 attacker: this.GetCasterPlus(),
@@ -290,8 +291,7 @@ export class imba_bloodseeker_blood_bath extends BaseAbility_Plus {
         ParticleManager.SetParticleControl(bloodriteFX, 3, vPos);
         this.AddTimer(this.GetSpecialValueFor("delay"), () => {
             EmitSoundOnLocationWithCaster(vPos, "hero_bloodseeker.bloodRite.silence", caster);
-            ParticleManager.DestroyParticle(bloodriteFX, false);
-            ParticleManager.ReleaseParticleIndex(bloodriteFX);
+            ParticleManager.ClearParticle(bloodriteFX, false);
             let targets = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), vPos, undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, 0, 0, false);
             if (GameFunc.GetCount(targets) > 0) {
                 let overheal = caster.AddNewModifier(caster, this, "modifier_imba_blood_bath_buff_stats", {

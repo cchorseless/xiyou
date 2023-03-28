@@ -1,3 +1,4 @@
+import { ResHelper } from "../../../helper/ResHelper";
 import { registerModifier } from "../../entityPlus/Base_Plus";
 import { modifier_combination_effect } from "./modifier_combination_effect";
 
@@ -5,6 +6,14 @@ import { modifier_combination_effect } from "./modifier_combination_effect";
 
 @registerModifier()
 export class modifier_sect_atkspeed_base_a extends modifier_combination_effect {
+    Init() {
+        let parent = this.GetParentPlus();
+        // "particles/items2_fx/mask_of_madness.vpcf"
+        this.buff_fx = ResHelper.CreateParticleEx("particles/items2_fx/mask_of_madness.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, parent);
+        ParticleManager.SetParticleControlEnt(this.buff_fx, 0, parent, ParticleAttachment_t.PATTACH_POINT_FOLLOW, undefined, parent.GetAbsOrigin(), true);
+        ParticleManager.SetParticleControlEnt(this.buff_fx, 1, parent, ParticleAttachment_t.PATTACH_OVERHEAD_FOLLOW, undefined, parent.GetAbsOrigin(), true);
+        this.AddParticle(this.buff_fx, false, false, -1, false, false);
+    }
 }
 @registerModifier()
 export class modifier_sect_atkspeed_base_b extends modifier_combination_effect {

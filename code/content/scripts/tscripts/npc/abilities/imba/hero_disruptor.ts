@@ -857,8 +857,7 @@ export class modifier_imba_kinetic_field extends BaseModifier_Plus {
             this.sound_cast = "Hero_Disruptor.KineticField";
             EmitSoundOn(this.sound_cast, this.caster);
             AddFOWViewer(this.caster.GetTeamNumber(), this.target.GetAbsOrigin(), vision_aoe, this.duration, false);
-            ParticleManager.DestroyParticle(keys.formation_particle_fx, true);
-            ParticleManager.ReleaseParticleIndex(keys.formation_particle_fx);
+            ParticleManager.ClearParticle(keys.formation_particle_fx, true);
             this.field_particle = ResHelper.CreateParticleEx(particle_field, ParticleAttachment_t.PATTACH_WORLDORIGIN, undefined);
             ParticleManager.SetParticleControl(this.field_particle, 0, this.target_point);
             ParticleManager.SetParticleControl(this.field_particle, 1, Vector(this.field_radius, 1, 1));
@@ -872,8 +871,7 @@ export class modifier_imba_kinetic_field extends BaseModifier_Plus {
             let target = this.GetParentPlus();
             let ability = this.GetAbilityPlus();
             let kinetic_field_sound_end = "Hero_Disruptor.KineticField.End";
-            ParticleManager.DestroyParticle(this.field_particle, true);
-            ParticleManager.ReleaseParticleIndex(this.field_particle);
+            ParticleManager.ClearParticle(this.field_particle, true);
             StopSoundEvent(this.sound_cast, caster);
         }
     }
@@ -1375,7 +1373,7 @@ export class modifier_imba_static_storm extends BaseModifier_Plus {
     BeDestroy(): void {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
-            ParticleManager.DestroyParticle(this.particle_storm_fx, false);
+            ParticleManager.ClearParticle(this.particle_storm_fx, false);
             StopSoundEvent(this.sound_cast, caster);
             EmitSoundOnLocationWithCaster(this.target_point, this.sound_end, this.caster);
         }

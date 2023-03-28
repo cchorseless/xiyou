@@ -27,9 +27,14 @@ export class ECombinationLabelItem extends ET.Entity {
     }
 
     addSelfToManager() {
-        let building = this.GetDomain<IBaseNpc_Plus>().ETRoot.As<IBuildingEntityRoot>();
-        if (this.IsActive && building.ChessComp().isInBattle) {
-            building.GetPlayer().CombinationManager().addCombination(this);
+        let unitroot = this.GetDomain<IBaseNpc_Plus>().ETRoot.As<IBattleUnitEntityRoot>();
+        if (this.IsActive && unitroot.ChessComp().isInBattle) {
+            if (unitroot.IsBuilding()) {
+                unitroot.GetPlayer().CombinationManager().addCombination(this);
+            }
+            else if (unitroot.IsEnemy()) {
+                unitroot.GetPlayer().FakerHeroRoot().FHeroCombinationManager().addCombination(this);
+            }
         }
     }
 

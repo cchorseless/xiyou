@@ -5,6 +5,7 @@ export class modifier_combination_effect extends BaseModifier_Plus {
     public IsHidden(): boolean {
         return true;
     }
+    buff_fx: ParticleID;
 
     config() {
         return GJSONConfig.BuffEffectConfig.get(this.GetName());
@@ -16,6 +17,10 @@ export class modifier_combination_effect extends BaseModifier_Plus {
             return conf.propinfo.get(prop);
         }
         return 0;
+    }
+    BeDestroy(): void {
+        ParticleManager.ClearParticle(this.buff_fx);
+        this.buff_fx = null;
     }
 
 }

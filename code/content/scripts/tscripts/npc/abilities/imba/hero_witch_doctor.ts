@@ -332,7 +332,8 @@ export class modifier_imba_voodoo_restoration extends BaseModifier_Plus {
             let ability = this.GetAbilityPlus();
             this.interval = ability.GetSpecialValueFor("heal_interval");
             this.cleanse_interval = ability.GetSpecialValueFor("cleanse_interval");
-            this.manacost = ability.GetSpecialValueFor("mana_per_second") * this.interval;
+            // this.manacost = ability.GetSpecialValueFor("mana_per_second") * this.interval;
+            this.manacost = 0;
             this.radius = ability.GetSpecialValueFor("radius");
             this.StartIntervalThink(this.interval);
             this.mainParticle = ResHelper.CreateParticleEx("particles/units/heroes/hero_witchdoctor/witchdoctor_voodoo_restoration.vpcf", ParticleAttachment_t.PATTACH_POINT_FOLLOW, this.GetCasterPlus());
@@ -381,11 +382,11 @@ export class modifier_imba_voodoo_restoration extends BaseModifier_Plus {
             }
         }
         if (!this.GetCasterPlus().HasTalent("special_bonus_imba_witch_doctor_6")) {
-            if (this.GetCasterPlus().GetMana() >= hAbility.GetManaCost(-1)) {
-                this.GetCasterPlus().ReduceMana(this.manacost);
-            } else {
-                hAbility.ToggleAbility();
-            }
+            // if (this.GetCasterPlus().GetMana() >= hAbility.GetManaCost(-1)) {
+            //     this.GetCasterPlus().ReduceMana(this.manacost);
+            // } else {
+            //     hAbility.ToggleAbility();
+            // }
         }
     }
     IsAura(): boolean {
@@ -884,7 +885,7 @@ export class imba_witch_doctor_death_ward extends BaseAbility_Plus {
         return 100;
     }
     AutoSpellSelf() {
-        return AI_ability.NO_TARGET_cast(this)
+        return AI_ability.POSITION_if_enemy(this)
     }
 }
 @registerModifier()

@@ -3,6 +3,7 @@ import { GameProtocol } from "../../../../scripts/tscripts/shared/GameProtocol";
 import { NetHelper } from "../../helper/NetHelper";
 import { CCButton } from "../AllUIElement/CCButton/CCButton";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
+import { CCUnitSmallIcon } from "../AllUIElement/CCUnit/CCUnitSmallIcon";
 import { CCDebugTool_SelectContainer } from "./CCDebugTool";
 
 interface ICCDebugTool_EnemyPicker {
@@ -44,8 +45,7 @@ export class CCDebugTool_EnemyPicker extends CCPanel<ICCDebugTool_EnemyPicker> {
                                 <CCButton type="Empty" className="CC_DebugTool_AbilityPickerItem" key={index + ""} flowChildren="down" onactivate={self => {
                                     NetHelper.SendToLua(GameProtocol.Protocol.req_DebugAddEnemy, { unitname: unitName })
                                 }}>
-                                    {/* <DOTAHeroImage heroimagestyle={"portrait"} heroname={unitName} id="HeroPickerCardImage" scaling="stretch-to-fit-x-preserve-aspect" /> */}
-                                    {/* <CCUnitSmallIcon itemname={unitName} /> */}
+                                    <CCUnitSmallIcon itemname={unitName} />
                                     <Label className="CC_DebugTool_AbilityPickerItemName" text={this.state.rawMode ? unitName : $.Localize("#" + unitName)} />
                                 </CCButton>
                             );

@@ -76,15 +76,19 @@ export class PlayerDataComponent extends PlayerData implements IRoundStateCallba
     addEvent() {
         GEventHelper.AddEvent(ChessControlConfig.Event.ChessControl_JoinBattle,
             GHandler.create(this, (building: IBuildingEntityRoot) => {
-                let popu = building.GetPopulation();
-                this.changePopulation(popu);
+                if (building.IsBuilding()) {
+                    let popu = building.GetPopulation();
+                    this.changePopulation(popu);
+                }
             }),
             this.BelongPlayerid
         );
         GEventHelper.AddEvent(ChessControlConfig.Event.ChessControl_LeaveBattle,
             GHandler.create(this, (building: IBuildingEntityRoot) => {
-                let popu = building.GetPopulation();
-                this.changePopulation(-popu);
+                if (building.IsBuilding()) {
+                    let popu = building.GetPopulation();
+                    this.changePopulation(-popu);
+                }
             }),
             this.BelongPlayerid);
 

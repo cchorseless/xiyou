@@ -87,10 +87,10 @@
 	m_Children = 
 	[
 		{
-			m_ChildRef = resource:"particles/auras/aura_feral_impulse_a.vpcf"
+			m_ChildRef = resource:"particles/generic/auras/aura_feral_impulse_a.vpcf"
 		},
 		{
-			m_ChildRef = resource:"particles/auras/aura_feral_impulse_b.vpcf"
+			m_ChildRef = resource:"particles/generic/auras/aura_feral_impulse_b.vpcf"
 		},
 	]
 }

@@ -7,7 +7,7 @@ import { AbilityHelper } from "../../helper/DotaEntityHelper";
 import { BaseEntityRoot } from "../../libs/BaseEntityRoot";
 import { CCIcon_Scepter } from "../AllUIElement/CCIcons/CCIcon_Scepter";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
-import { CCPanelBG, CCPanelHeader } from "../AllUIElement/CCPanel/CCPanelPart";
+import { CCPanelHeader } from "../AllUIElement/CCPanel/CCPanelPart";
 import { CCCombinationIcon } from "./CCCombinationIcon";
 
 import "./CCCombinationInfoDialog.less";
@@ -19,6 +19,7 @@ interface ICCCombinationInfoDialog {
     unitentityindex?: EntityIndex,
     castentityindex?: AbilityEntityIndex,
     abilityitemname?: string,
+    showBg?: boolean,
 }
 
 export class CCCombinationInfoDialog extends CCPanel<ICCCombinationInfoDialog> {
@@ -27,6 +28,7 @@ export class CCCombinationInfoDialog extends CCPanel<ICCCombinationInfoDialog> {
         castentityindex: -1,
         unitentityindex: -1,
         playerid: -1,
+        showBg: false
     }
 
 
@@ -91,7 +93,7 @@ export class CCCombinationInfoDialog extends CCPanel<ICCCombinationInfoDialog> {
         configlist.sort((a, b) => { return a.activeCount - b.activeCount });
         let SectNameHeader = $.Localize("#lang_" + sectName);
         if (sectlock) {
-            SectNameHeader += "(需符石激活)"
+            SectNameHeader += "(5星或符石激活)"
         }
         else if (allcombs.length > 0) {
             let lastcomb = allcombs[0]
@@ -100,7 +102,7 @@ export class CCCombinationInfoDialog extends CCPanel<ICCCombinationInfoDialog> {
 
         return (
             <Panel ref={this.__root__} className="CCCombinationInfoDialog"  {...this.initRootAttrs()}>
-                <CCPanelBG width="380px" flowChildren="down" type="ToolTip">
+                <CCPanel width="380px" flowChildren="down" className={CSSHelper.ClassMaker({ CombinationShowPanelBg: this.props.showBg })}>
                     <CCPanelHeader flowChildren="right">
                         <CCCombinationIcon id="SectIcon" sectName={sectName} lock={sectlock} />
                         <CCPanel className={CSSHelper.ClassMaker("SectDes", { Disable: sectlock })} flowChildren="down" width="250px" marginLeft="8px"  >
@@ -152,7 +154,7 @@ export class CCCombinationInfoDialog extends CCPanel<ICCCombinationInfoDialog> {
                         })}
                     </CCPanel>
                     <CCCombinationUnitIconGroup marginTop={"10px"} sectName={sectName} playerid={playerid} castentityindex={castentityindex} />
-                </CCPanelBG>
+                </CCPanel>
             </Panel>
         )
     }

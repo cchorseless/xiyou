@@ -97,6 +97,8 @@ export module CombinationConfig {
         sect_control = "sect_control",
         /**策反流 */
         sect_betrayal = "sect_betrayal",
+        /**守卫流 */
+        sect_guard = "sect_guard",
     }
 
     export const ESectNameList = Object.keys(ESectName);

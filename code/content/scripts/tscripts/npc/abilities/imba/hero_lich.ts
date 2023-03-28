@@ -111,7 +111,6 @@ function FrostNova(caster: IBaseNpc_Plus, ability: IBaseAbility_Plus, target: IB
                 ability.AddTimer(explosion_delay, () => {
                     EmitSoundOnLocationWithCaster(location, sound_cast, caster);
                     ParticleManager.DestroyParticle(particle_nova_flower_fx, false);
-                    ParticleManager.ReleaseParticleIndex(particle_nova_flower_fx);
                     let particle_nova_fx = ResHelper.CreateParticleEx(particle_nova, ParticleAttachment_t.PATTACH_WORLDORIGIN, undefined);
                     ParticleManager.SetParticleControl(particle_nova_fx, 0, location);
                     ParticleManager.SetParticleControl(particle_nova_fx, 1, Vector(radius, radius, radius));
@@ -161,7 +160,6 @@ function FrostNova(caster: IBaseNpc_Plus, ability: IBaseAbility_Plus, target: IB
                             EmitSoundOnLocationWithCaster(location, sound_cast, caster);
                         }
                         ParticleManager.DestroyParticle(particle_nova_flower_fx, false);
-                        ParticleManager.ReleaseParticleIndex(particle_nova_flower_fx);
                         let particle_nova_fx = ResHelper.CreateParticleEx(particle_nova, ParticleAttachment_t.PATTACH_WORLDORIGIN, undefined);
                         ParticleManager.SetParticleControl(particle_nova_fx, 0, location);
                         ParticleManager.SetParticleControl(particle_nova_fx, 1, Vector(damage_radius, damage_radius, damage_radius));

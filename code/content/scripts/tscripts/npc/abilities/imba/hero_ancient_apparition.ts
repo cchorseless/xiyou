@@ -360,7 +360,7 @@ export class modifier_imba_ancient_apparition_ice_vortex extends BaseModifier_Pl
     } */
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
     CC_GetModifierMoveSpeedBonus_Percentage(): number {
-        if (this.GetParentPlus().GetTeamNumber() != this.GetCasterPlus().GetTeamNumber()) {
+        if (this.GetParentPlus() && this.GetParentPlus().GetTeamNumber() != this.GetCasterPlus().GetTeamNumber()) {
             return this.movement_speed_pct;
         } else {
             return this.movement_speed_pct * (-1);
@@ -369,7 +369,7 @@ export class modifier_imba_ancient_apparition_ice_vortex extends BaseModifier_Pl
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_RESISTANCE_BONUS)
     CC_GetModifierMagicalResistanceBonus(p_0: ModifierAttackEvent,): number {
-        if (this.GetParentPlus().GetTeamNumber() != this.GetCasterPlus().GetTeamNumber()) {
+        if (this.GetParentPlus() && this.GetParentPlus().GetTeamNumber() != this.GetCasterPlus().GetTeamNumber()) {
             return this.spell_resist_pct;
         } else {
             return 0;
@@ -1076,8 +1076,7 @@ export class imba_ancient_apparition_ice_blast_release extends BaseAbility_Plus 
         if (!target && this.ice_blast_ability) {
             EmitSoundOnLocationWithCaster(location, "Hero_Ancient_Apparition.IceBlast.Target", this.GetCasterPlus());
             if (data.marker_particle) {
-                ParticleManager.DestroyParticle(data.marker_particle, false);
-                ParticleManager.ReleaseParticleIndex(data.marker_particle);
+                ParticleManager.ClearParticle(data.marker_particle, false);
             }
             let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), location, undefined, data.final_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FindOrder.FIND_ANY_ORDER, false);
             let damage = this.ice_blast_ability.GetSpecialValueFor("AbilityDamage");

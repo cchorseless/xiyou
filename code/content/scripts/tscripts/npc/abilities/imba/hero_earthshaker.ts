@@ -359,8 +359,7 @@ export class modifier_imba_earthshaker_enchant_totem_movement extends BaseModifi
                 return;
             }
             if (this.blur_effect) {
-                ParticleManager.DestroyParticle(this.blur_effect, false);
-                ParticleManager.ReleaseParticleIndex(this.blur_effect);
+                ParticleManager.ClearParticle(this.blur_effect, false);
             }
             this.enchant_totem_land_commenced = true;
             this.GetParentPlus().AddNewModifier(this.GetParentPlus(), this.GetAbilityPlus(), "modifier_imba_earthshaker_enchant_totem", {

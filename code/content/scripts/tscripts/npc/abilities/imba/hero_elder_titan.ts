@@ -83,8 +83,7 @@ export class imba_elder_titan_echo_stomp extends BaseAbility_Plus {
                 this.GetCasterPlus().RemoveModifierByName("modifier_imba_elder_titan_magic_immune");
             }
             if (this.combined_particle) {
-                ParticleManager.DestroyParticle(this.combined_particle, true);
-                ParticleManager.ReleaseParticleIndex(this.combined_particle);
+                ParticleManager.ClearParticle(this.combined_particle, true);
             }
             if (interrupted) {
                 let caster = this.GetCasterPlus();
@@ -321,8 +320,7 @@ export class modifier_imba_elder_titan_ancestral_spirit_self extends BaseModifie
                     let root_fx = ResHelper.CreateParticleEx("particles/units/heroes/heroes_underlord/abyssal_underlord_pitofmalice_stun.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, enemy);
                     ParticleManager.SetParticleControl(root_fx, 0, enemy.GetAbsOrigin());
                     this.AddTimer(duration, () => {
-                        ParticleManager.DestroyParticle(root_fx, true);
-                        ParticleManager.ReleaseParticleIndex(root_fx);
+                        ParticleManager.ClearParticle(root_fx, true);
                     });
                 }
                 this.targets_hit[GameFunc.GetCount(this.targets_hit) + 1] = enemy;

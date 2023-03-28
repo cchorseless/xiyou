@@ -27,13 +27,17 @@ export class CombinationManagerComponent extends ET.Component implements IRoundS
     private addEvent() {
         GEventHelper.AddEvent(ChessControlConfig.Event.ChessControl_JoinBattle,
             GHandler.create(this, (building: IBuildingEntityRoot) => {
-                this.addBuilding(building);
+                if (building.IsBuilding()) {
+                    this.addBuilding(building);
+                }
             }),
             this.BelongPlayerid,
         );
         GEventHelper.AddEvent(ChessControlConfig.Event.ChessControl_LeaveBattle,
             GHandler.create(this, (building: IBuildingEntityRoot) => {
-                this.removeBuilding(building);
+                if (building.IsBuilding()) {
+                    this.removeBuilding(building);
+                }
             }),
             this.BelongPlayerid)
     }

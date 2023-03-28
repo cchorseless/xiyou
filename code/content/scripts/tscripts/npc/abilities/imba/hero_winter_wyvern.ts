@@ -213,7 +213,7 @@ export class imba_winter_wyvern_splinter_blast extends BaseAbility_Plus {
             let slow_duration = this.GetSpecialValueFor("duration");
             let slow = this.GetSpecialValueFor("bonus_movespeed");
             let attack_slow = this.GetSpecialValueFor("attack_slow");
-            let hero_cdr = this.GetSpecialValueFor("hero_cdr");
+            let hero_cdr = this.GetSpecialValueFor("cdr_units");
             let cdr_units = this.GetSpecialValueFor("cdr_units");
             let splinter_threshold = this.GetSpecialValueFor("threshold");
             let splinter_dmg_efficiency = this.GetSpecialValueFor("splinter_dmg_efficiency");

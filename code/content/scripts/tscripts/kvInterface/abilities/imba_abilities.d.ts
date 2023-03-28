@@ -4391,6 +4391,7 @@ declare namespace imba_abilities {
 "scepter_puddle_armor" :string ,
 "scepter_puddle_status_resistance" :string ,
 "river_speed_tooltip" :string ,
+"damage_amp_pct" :string ,
 "river_speed" :string ,
 "velocity" :string ,
 "scepter_puddle_duration" :string ,

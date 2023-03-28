@@ -1261,8 +1261,7 @@ export class modifier_imba_marksmanship extends BaseModifier_Plus {
             let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.caster.GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_CREEP_HERO + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS, FindOrder.FIND_ANY_ORDER, false);
             if (!this.caster.HasTalent("special_bonus_imba_drow_ranger_8")) {
                 if (GameFunc.GetCount(enemies) > 0 && this.marksmanship_enabled) {
-                    ParticleManager.DestroyParticle(this.particle_marksmanship_fx, false);
-                    ParticleManager.ReleaseParticleIndex(this.particle_marksmanship_fx);
+                    ParticleManager.ClearParticle(this.particle_marksmanship_fx, false);
                     this.marksmanship_enabled = false;
                 }
             }
@@ -1405,8 +1404,7 @@ export class modifier_imba_marksmanship extends BaseModifier_Plus {
     }
     BeDestroy(): void {
         if (this.particle_marksmanship_fx) {
-            ParticleManager.DestroyParticle(this.particle_marksmanship_fx, false);
-            ParticleManager.ReleaseParticleIndex(this.particle_marksmanship_fx);
+            ParticleManager.ClearParticle(this.particle_marksmanship_fx, false);
         }
     }
 

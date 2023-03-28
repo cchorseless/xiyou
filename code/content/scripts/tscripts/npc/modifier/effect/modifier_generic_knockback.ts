@@ -44,7 +44,6 @@ export class modifier_generic_knockback extends BaseModifierMotionBoth_Plus {
     }
     Init(kv: any): void {
         if (IsServer()) {
-            if (!this.BeginMotionOrDestroy()) { return };
             this.distance = kv.distance || 0;
             this.height = kv.height || -1;
             this.duration = kv.duration || 0;
@@ -83,9 +82,8 @@ export class modifier_generic_knockback extends BaseModifierMotionBoth_Plus {
             } else if (this.stun) {
                 this.SetStackCount(2);
             }
-        } else {
-            this.anim = this.GetStackCount();
         }
+        this.anim = this.GetStackCount();
     }
 
     BeDestroy( /** kv */): void {
@@ -97,12 +95,12 @@ export class modifier_generic_knockback extends BaseModifierMotionBoth_Plus {
                 GridNav.DestroyTreesAroundPoint(this.GetParentPlus().GetOrigin(), this.tree, true);
             }
         }
+        this.GetParentPlus().InterruptMotionControllers(true);
+        this.GetParentPlus().RemoveGesture(this.CC_GetOverrideAnimation());
         if (this.EndCallback) {
             this.EndCallback.runWith([this.interrupted]);
             this.EndCallback = null;
         }
-        this.GetParentPlus().InterruptMotionControllers(true);
-        this.GetParentPlus().FadeGesture(GameActivity_t.ACT_DOTA_FLAIL);
     }
     SetEndCallback(func: IGHandler) {
         this.EndCallback = func;

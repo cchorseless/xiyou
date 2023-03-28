@@ -429,8 +429,7 @@ export class modifier_imba_huskar_berserkers_blood extends BaseModifier_Plus {
         if (!IsServer()) {
             return;
         }
-        ParticleManager.DestroyParticle(this.particle, false);
-        ParticleManager.ReleaseParticleIndex(this.particle);
+        ParticleManager.ClearParticle(this.particle, false);
     }
     /** DeclareFunctions():modifierfunction[] {
         let funcs = {
@@ -813,8 +812,7 @@ export class modifier_imba_huskar_life_break_charge extends BaseModifier_Plus {
     BeDestroy(): void {
         if (IsServer()) {
             if (this.pfx) {
-                ParticleManager.DestroyParticle(this.pfx, false);
-                ParticleManager.ReleaseParticleIndex(this.pfx);
+                ParticleManager.ClearParticle(this.pfx, false);
             }
         }
     }

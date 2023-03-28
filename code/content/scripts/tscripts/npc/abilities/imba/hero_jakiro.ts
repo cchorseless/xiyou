@@ -122,7 +122,6 @@ export class base_modifier_dual_breath_caster extends BaseModifierMotionHorizont
                 let destroy_existing_breath_particle = this.existing_breath_particle;
                 this.AddTimer(0.4, () => {
                     ParticleManager.DestroyParticle(destroy_existing_breath_particle, false);
-                    ParticleManager.ReleaseParticleIndex(destroy_existing_breath_particle);
                 });
             }
             let breath_pfx = ResHelper.CreateParticleEx(particle_breath, ParticleAttachment_t.PATTACH_ABSORIGIN, caster);
@@ -200,7 +199,6 @@ export class base_modifier_dual_breath_caster extends BaseModifierMotionHorizont
                 this.existing_breath_particle = undefined;
                 this.AddTimer(0.4, () => {
                     ParticleManager.DestroyParticle(destroy_existing_breath_particle, false);
-                    ParticleManager.ReleaseParticleIndex(destroy_existing_breath_particle);
                 });
             }
             caster.SetUnitOnClearGround();

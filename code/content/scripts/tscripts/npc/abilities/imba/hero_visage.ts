@@ -772,7 +772,7 @@ export class modifier_imba_visage_summon_familiars_petrifying_breath extends Bas
     }
     Init(p_0: any,): void {
         if (this.GetAbilityPlus()) {
-            this.petrifying_breath_reduction_per_stack = this.GetSpecialValueFor("petrifying_breath_reduction_per_stack");
+            this.petrifying_breath_reduction_per_stack = 1;
         } else {
             this.petrifying_breath_reduction_per_stack = 0;
         }

@@ -62,6 +62,7 @@ export class CCCombinationSingleBottomItem extends CCPanel<ICCCombinationSingleB
                     {
                         cls: CCCombinationInfoDialog,
                         props: {
+                            showBg: true,
                             sectName: sectName,
                             playerid: lastentity.BelongPlayerid,
                         }

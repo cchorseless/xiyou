@@ -1,11 +1,11 @@
-import React, { createRef, PureComponent } from "react";
+import React from "react";
 import { CSSHelper } from "../../../helper/CSSHelper";
 import { CCPanel } from "./CCPanel";
 import "./CCPanelPart.less";
 
 
 interface ICCPanelBG {
-    type?: "Default" | "ToolTip" | "Tui3";
+    type?: "Default" | "ToolTip" | "Tui3" | "None";
 }
 
 export class CCPanelBG extends CCPanel<ICCPanelBG> {

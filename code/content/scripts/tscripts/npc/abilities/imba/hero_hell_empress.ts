@@ -261,8 +261,7 @@ export class modifier_imba_hurl_through_hell extends BaseModifier_Plus {
             parent.StopSound("Imba.HellEmpressHurlLoop");
             EmitSoundOn("Imba.HellEmpressHurlEnd", parent);
             parent.RemoveNoDraw();
-            ParticleManager.DestroyParticle(this.hurl_pfx, false);
-            ParticleManager.ReleaseParticleIndex(this.hurl_pfx);
+            ParticleManager.ClearParticle(this.hurl_pfx);
             let ability_curse = caster.findAbliityPlus<imba_empress_eleven_curses>("imba_empress_eleven_curses");
             if (ability_curse && ability_curse.GetLevel() > 0) {
                 ability_curse.OnSpellStart(parent.GetAbsOrigin());

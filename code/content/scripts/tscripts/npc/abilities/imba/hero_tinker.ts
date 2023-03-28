@@ -45,9 +45,8 @@ export class imba_tinker_laser extends BaseAbility_Plus {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
             let target = this.GetCursorTarget();
-            let technomancy_ability_name = "imba_tinker_technomancy";
             if (target.TriggerSpellAbsorb(this)) {
-                return undefined;
+                return;
             }
             if (RollPercentage(15) && (caster.GetUnitName().includes("tinker"))) {
                 caster.EmitSound("tinker_tink_ability_laser_0" + math.random(1, 4));

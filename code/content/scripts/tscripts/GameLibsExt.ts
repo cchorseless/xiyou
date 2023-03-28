@@ -34,13 +34,18 @@ declare global {
          * @Both
          * 清理粒子
          */
-        ClearParticle(p: ParticleID): void;
+        ClearParticle(p: ParticleID, immediate?: boolean): void;
     }
 }
 
-ParticleManager.ClearParticle = (p: ParticleID) => {
-    ParticleManager.ReleaseParticleIndex(p);
-    ParticleManager.DestroyParticle(p, false);
+ParticleManager.ClearParticle = (p: ParticleID, immediate = false) => {
+    if (p != null) {
+        ParticleManager.DestroyParticle(p, immediate);
+        ParticleManager.ReleaseParticleIndex(p);
+    }
+    else {
+        GLogHelper.warn("ParticleManager.ClearParticle", "p is null")
+    }
 }
 
 

@@ -1297,8 +1297,7 @@ export class modifier_imba_fiends_grip_handler extends BaseModifier_Plus {
                 if (parent.IsMagicImmune() || this.propogated == 1 || !parent.IsAlive()) {
                     let particle_table = parent.TempData<any[]>().grip_link_particle_table;
                     for (let i = 0; i < particle_table.length; i++) {
-                        ParticleManager.DestroyParticle(particle_table[i], false);
-                        ParticleManager.ReleaseParticleIndex(particle_table[i]);
+                        ParticleManager.ClearParticle(particle_table[i], false);
                     }
                     parent.TempData<any[]>().grip_link_particle_table = [];
                     let creatures = caster.FindChildByName("npc_imba_fiends_grip_demon");

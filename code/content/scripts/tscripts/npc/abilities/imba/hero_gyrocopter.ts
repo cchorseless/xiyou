@@ -425,8 +425,7 @@ export class modifier_imba_gyrocopter_homing_missile_pre_flight extends BaseModi
                 this.target = nearby_targets[0];
                 let buff = this.GetParentPlus().findBuff<modifier_imba_gyrocopter_homing_missile>("modifier_imba_gyrocopter_homing_missile");
                 buff.target = nearby_targets[0];
-                ParticleManager.DestroyParticle(buff.target_particle, false);
-                ParticleManager.ReleaseParticleIndex(buff.target_particle);
+                ParticleManager.ClearParticle(buff.target_particle, false);
                 buff.target_particle = ParticleManager.CreateParticleForTeam("particles/units/heroes/hero_gyrocopter/gyro_guided_missile_target.vpcf", ParticleAttachment_t.PATTACH_OVERHEAD_FOLLOW, this.target, this.GetCasterPlus().GetTeamNumber());
                 buff.AddParticle(buff.target_particle, false, false, -1, false, false);
             }
@@ -525,8 +524,7 @@ export class modifier_imba_gyrocopter_homing_missile extends BaseModifier_Plus {
                 if (GameFunc.GetCount(nearby_targets) >= 1) {
                     this.target = nearby_targets[0];
                     this.target = nearby_targets[0];
-                    ParticleManager.DestroyParticle(this.target_particle, false);
-                    ParticleManager.ReleaseParticleIndex(this.target_particle);
+                    ParticleManager.ClearParticle(this.target_particle, false);
                     this.target_particle = ParticleManager.CreateParticleForTeam("particles/units/heroes/hero_gyrocopter/gyro_guided_missile_target.vpcf", ParticleAttachment_t.PATTACH_OVERHEAD_FOLLOW, this.target, this.GetCasterPlus().GetTeamNumber());
                     this.AddParticle(this.target_particle, false, false, -1, false, false);
                 } else {
@@ -759,9 +757,16 @@ export class modifier_imba_gyrocopter_lock_on extends BaseModifier_Plus {
         }
     }
     CheckState(): Partial<Record<modifierstate, boolean>> {
-        if (IsServer() && !this.GetCasterPlus().CanEntityBeSeenByMyTeam(this.GetParentPlus())) {
-            this.Destroy();
-            return;
+        if (IsServer()) {
+            if (!GFuncEntity.IsValid(this.GetCasterPlus()) || !GFuncEntity.IsValid(this.GetParentPlus())) {
+                this.Destroy();
+                return;
+            }
+            if (!this.GetCasterPlus().CanEntityBeSeenByMyTeam(this.GetParentPlus())) {
+                this.Destroy();
+                return;
+            }
+
         }
         return {
             [modifierstate.MODIFIER_STATE_EVADE_DISABLED]: true

@@ -202,7 +202,7 @@ export class imba_beastmaster_call_of_the_wild extends BaseAbility_Plus {
     summonBoar(): void {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
-            let boar_name = "npc_imba_dota_beastmaster_boar_";
+            let boar_name = "npc_imba_beastmaster_boar_";
             let boar_level = this.GetLevel();
             let spawn_point = caster.GetAbsOrigin();
             let spawn_particle = "particles/units/heroes/hero_beastmaster/beastmaster_call_boar.vpcf";
@@ -232,7 +232,7 @@ export class imba_beastmaster_call_of_the_wild extends BaseAbility_Plus {
     summonHawk(): void {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
-            let hawk_name = "npc_imba_dota_beastmaster_hawk_";
+            let hawk_name = "npc_imba_beastmaster_hawk_";
             let hawk_level = this.GetLevel();
             let spawn_point = caster.GetAbsOrigin();
             let spawn_particle = "particles/units/heroes/hero_beastmaster/beastmaster_call_bird.vpcf";

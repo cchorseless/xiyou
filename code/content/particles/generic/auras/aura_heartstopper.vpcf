@@ -99,7 +99,7 @@
 	m_Children = 
 	[
 		{
-			m_ChildRef = resource:"particles/auras/aura_heartstopper_a.vpcf"
+			m_ChildRef = resource:"particles/generic/auras/aura_heartstopper_a.vpcf"
 		},
 	]
 }

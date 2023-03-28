@@ -8,7 +8,7 @@ declare namespace common_units {
 "unit_remote_mine" :OBJ_2_1 ,
 "unit_dummy" :OBJ_2_1 ,
 "unit_portal" :OBJ_2_1 ,
-"unit_base_baoxiang" :OBJ_2_1 ,
+"unit_enemy_courier" :OBJ_2_1 ,
 "unit_base_bossbaoxiang" :OBJ_2_1 ,
 "unit_base_gold_bag" :OBJ_2_1 ,
 "unit_base_equip_bag" :OBJ_2_1 ,

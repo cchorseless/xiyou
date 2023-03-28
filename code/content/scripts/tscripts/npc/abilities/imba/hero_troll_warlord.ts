@@ -107,9 +107,9 @@ export class imba_troll_warlord_berserkers_rage extends BaseAbility_Plus {
         return 0;
     }
     AutoSpellSelf() {
-        if (!this.GetToggleState()) {
-            this.ToggleAbility();
-        }
+        // if (!this.GetToggleState()) {
+        //     this.ToggleAbility();
+        // }
         return false
     }
 }

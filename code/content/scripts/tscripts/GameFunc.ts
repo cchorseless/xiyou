@@ -27,9 +27,11 @@ export module GameFunc {
 
     export function iPair<T>(obj: T[]): [number, T][] {
         let arr: [number, T][] = [];
-        for (let i = 0, len = obj.length; i < len; i++) {
-            const element = obj[i];
-            arr.push([i, element]);
+        if (obj) {
+            for (let i = 0, len = obj.length; i < len; i++) {
+                const element = obj[i];
+                arr.push([i, element]);
+            }
         }
         return arr;
     }

@@ -256,8 +256,7 @@ export class imba_centaur_double_edge extends BaseAbility_Plus {
     }
     OnAbilityPhaseInterrupted(): void {
         if (this.phase_double_edge_pfx) {
-            ParticleManager.DestroyParticle(this.phase_double_edge_pfx, false);
-            ParticleManager.ReleaseParticleIndex(this.phase_double_edge_pfx);
+            ParticleManager.ClearParticle(this.phase_double_edge_pfx, false);
         }
     }
     OnSpellStart(): void {

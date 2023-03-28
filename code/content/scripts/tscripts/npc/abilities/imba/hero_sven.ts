@@ -815,7 +815,7 @@ export class modifier_imba_god_strength extends BaseModifier_Plus {
             ParticleManager.SetParticleControlEnt(nFXIndex, 0, this.GetParentPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_weapon", this.GetParentPlus().GetOrigin(), true);
             ParticleManager.SetParticleControlEnt(nFXIndex, 2, this.GetParentPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_head", this.GetParentPlus().GetOrigin(), true);
             this.AddParticle(nFXIndex, false, false, -1, false, true);
-            this.GetCasterPlus().findAbliityPlus<imba_sven_colossal_slash>("imba_sven_colossal_slash").SetActivated(true);
+            // this.GetCasterPlus().findAbliityPlus<imba_sven_colossal_slash>("imba_sven_colossal_slash").SetActivated(true);
         }
     }
     BeRefresh(p_0: any,): void {
@@ -825,7 +825,7 @@ export class modifier_imba_god_strength extends BaseModifier_Plus {
     }
     BeDestroy(): void {
         if (IsServer()) {
-            this.GetCasterPlus().findAbliityPlus<imba_sven_colossal_slash>("imba_sven_colossal_slash").SetActivated(false);
+            // this.GetCasterPlus().findAbliityPlus<imba_sven_colossal_slash>("imba_sven_colossal_slash").SetActivated(false);
         }
     }
     IsAura(): boolean {

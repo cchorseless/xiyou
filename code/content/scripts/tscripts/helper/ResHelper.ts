@@ -166,8 +166,7 @@ export module ResHelper {
         let p_id = ParticleManager.CreateParticle(ResHelper.GetParticleReplacement(resInfo.resPath, resInfo.resNpc), resInfo.iAttachment, resInfo.owner);
         if (resInfo.validtime != null && resInfo.validtime > 0) {
             GTimerHelper.AddTimer(resInfo.validtime, GHandler.create({}, () => {
-                ParticleManager.DestroyParticle(p_id, resInfo.isimmediately);
-                ParticleManager.ReleaseParticleIndex(p_id);
+                ParticleManager.ClearParticle(p_id, resInfo.isimmediately);
             }));
         }
         return p_id;
@@ -179,8 +178,7 @@ export module ResHelper {
         let p_id = ParticleManager.CreateParticle(ResHelper.GetParticleReplacement(res, npc), iAttachment, owner);
         if (validtime != null && validtime > 0) {
             GTimerHelper.AddTimer(validtime, GHandler.create(null, () => {
-                ParticleManager.DestroyParticle(p_id, isimmediately);
-                ParticleManager.ReleaseParticleIndex(p_id);
+                ParticleManager.ClearParticle(p_id, isimmediately);
             }));
         }
         return p_id;

@@ -31,17 +31,17 @@ export class ECombination extends ET.Entity {
         const allcomb = ECombination.GetGroupInstance(BelongPlayerid)
         for (let entity of allcomb) {
             if (entity && entity.SectId == _combid) {
-                return entity
+                return entity as ECombination;
             }
         }
     }
     static GetCombinationBySectName(BelongPlayerid: PlayerID, _combname: string) {
         if (_combname == null) return;
-        return this.GetAllCombination(BelongPlayerid)[_combname]
+        return ECombination.GetAllCombination(BelongPlayerid)[_combname] as ECombination[];
     }
     static GetAllCombination(BelongPlayerid: PlayerID,) {
         let r: { [k: string]: ECombination[] } = {};
-        const allcomb = ECombination.GetGroupInstance(BelongPlayerid)
+        const allcomb = ECombination.GetGroupInstance(BelongPlayerid) as ECombination[];
         allcomb.forEach(entity => {
             if (entity && !entity.IsEmpty()) {
                 r[entity.SectName] = r[entity.SectName] || [];

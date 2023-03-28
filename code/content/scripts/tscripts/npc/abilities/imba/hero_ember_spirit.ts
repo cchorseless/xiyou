@@ -214,8 +214,7 @@ export class modifier_imba_sleight_of_fist_caster extends BaseModifier_Plus {
     }
     BeDestroy(): void {
         if (IsServer()) {
-            ParticleManager.DestroyParticle(this.sleight_caster_particle, false);
-            ParticleManager.ReleaseParticleIndex(this.sleight_caster_particle);
+            ParticleManager.ClearParticle(this.sleight_caster_particle, false);
             this.GetParentPlus().RemoveNoDraw();
             this.GetAbilityPlus().SetActivated(true);
         }

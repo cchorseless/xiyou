@@ -62,8 +62,7 @@ export class imba_dark_willow_bramble_maze extends BaseAbility_Plus {
             this.PlantBush(newSpawn);
         }
         this.AddTimer(duration, () => {
-            ParticleManager.DestroyParticle(nfx, false);
-            ParticleManager.ReleaseParticleIndex(nfx);
+            ParticleManager.ClearParticle(nfx, false);
         });
     }
     GetManaCost(level: number): number {
@@ -463,8 +462,7 @@ export class modifier_imba_dark_willow_shadow_realm_damage extends BaseModifier_
                 ParticleManager.SetParticleControl(nfx, 2, Vector(caster.GetProjectileSpeed(), 0, 0));
                 ParticleManager.SetParticleControl(nfx, 5, Vector(1, 0, 0));
                 this.AddTimer(time, () => {
-                    ParticleManager.DestroyParticle(nfx, false);
-                    ParticleManager.ReleaseParticleIndex(nfx);
+                    ParticleManager.ClearParticle(nfx, false);
                 });
                 this.Destroy();
             }
@@ -815,8 +813,7 @@ export class imba_dark_willow_terrorize extends BaseAbility_Plus {
         this.fear.abilityInterrupted = true;
         GFuncEntity.SafeDestroyUnit(this.bug);
         this.bug = null;
-        ParticleManager.DestroyParticle(this.nfx, false);
-        ParticleManager.ReleaseParticleIndex(this.nfx);
+        ParticleManager.ClearParticle(this.nfx, false);
         StopSoundOn("Hero_DarkWillow.Fear.Cast", caster);
     }
     OnSpellStart(): void {

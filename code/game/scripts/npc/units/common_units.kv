@@ -76,25 +76,25 @@
 		}
 
 	}
-	"unit_base_baoxiang" {
+	"unit_enemy_courier" {
 		"UnitLabel" "npc"
-		"vscripts" "npc/units/common/npc_unit_comon"
+		"vscripts" "npc/courier/enemy_courier"
 		"BaseClass" "npc_dota_creature"
 		"Model" "models/ui/treasure/reaver_2022_treasure/reaver_2022_treasure.vmdl"
 		"ModelScale" "1"
 		"SoundSet" "Creep_Good_Melee"
 		"BoundsHullName" "DOTA_HULL_SIZE_HERO"
-		"VisionDaytimeRange" "0"
-		"VisionNighttimeRange" "0"
+		"VisionDaytimeRange" "1000"
+		"VisionNighttimeRange" "1000"
 		"HealthBarOffset" "200"
-		"MovementSpeed" "0"
+		"MovementSpeed" "300"
 		"MovementCapabilities" "DOTA_UNIT_CAP_MOVE_GROUND"
 		"MovementTurnRate" "0.5"
 		"ArmorPhysical" "0"
 		"MagicalResistance" "0"
-		"StatusHealth" "10000"
+		"StatusHealth" "100"
 		"StatusHealthRegen" "0"
-		"StatusMana" "0"
+		"StatusMana" "100"
 		"StatusManaRegen" "0"
 		"AttackCapabilities" "DOTA_UNIT_CAP_NO_ATTACK"
 		"ProjectileSpeed" "900"
@@ -104,6 +104,7 @@
 		"AttributeAgilityGain" "0"
 		"AttributeBaseIntelligence" "0"
 		"AttributeIntelligenceGain" "0"
+		"ConsideredHero" "1"
 		"CombatClassAttack" "DOTA_COMBAT_CLASS_ATTACK_HERO"
 		"CombatClassDefend" "DOTA_COMBAT_CLASS_DEFEND_HERO"
 		"Creature" {

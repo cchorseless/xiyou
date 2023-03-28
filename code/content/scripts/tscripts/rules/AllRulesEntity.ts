@@ -2,7 +2,6 @@ import { AbilityManagerComponent } from "./Components/Ability/AbilityManagerComp
 import { AiAttackComponent } from "./Components/AI/AiAttackComponent";
 import { BattleUnitManagerComponent } from "./Components/BattleUnit/BattleUnitManagerComponent";
 import { BuildingManagerComponent } from "./Components/Building/BuildingManagerComponent";
-import { BuildingPropsComponent } from "./Components/Building/BuildingPropsComponent";
 import { ChessControlComponent } from "./Components/ChessControl/ChessControlComponent";
 import { ChessMoveComponent } from "./Components/ChessControl/ChessMoveComponent";
 import { CombinationComponent } from "./Components/Combination/CombinationComponent";
@@ -12,6 +11,7 @@ import { ECombinationLabelItem } from "./Components/Combination/ECombinationLabe
 import { DrawComponent } from "./Components/Draw/DrawComponent";
 import { EnemyKillPrizeComponent } from "./Components/Enemy/EnemyKillPrizeComponent";
 import { EnemyManagerComponent } from "./Components/Enemy/EnemyManagerComponent";
+import { FHeroAIComponent } from "./Components/FakerHero/FHeroAIComponent";
 import { FHeroCombination } from "./Components/FakerHero/FHeroCombination";
 import { FHeroCombinationManagerComponent } from "./Components/FakerHero/FHeroCombinationManagerComponent";
 import { InventoryComponent } from "./Components/Inventory/InventoryComponent";
@@ -57,10 +57,10 @@ import { WearableSystemComponent } from "./System/WearableSystemComponent";
     AiAttackComponent,
 
     FHeroCombination,
+    FHeroAIComponent,
     FHeroCombinationManagerComponent,
 
     BuffManagerComponent,
-    BuildingPropsComponent,
     ChessMoveComponent,
 
     EnemyKillPrizeComponent,

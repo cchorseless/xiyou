@@ -171,8 +171,7 @@ export class modifier_imba_acid_spray_thinker extends BaseModifier_Plus {
         if (IsServer()) {
             let thinker = this.GetParentPlus();
             thinker.StopSound("Hero_Alchemist.AcidSpray");
-            ParticleManager.DestroyParticle(this.particle, true);
-            ParticleManager.ReleaseParticleIndex(this.particle);
+            ParticleManager.ClearParticle(this.particle, true);
         }
     }
 }
@@ -767,8 +766,7 @@ export class modifier_imba_unstable_concoction_handler extends BaseModifier_Plus
                         ParticleManager.SetParticleControl(particle, 2, Vector(digits, 0, 0));
                         if (caster.HasTalent("special_bonus_imba_alchemist_6") && caster.HasModifier("modifier_imba_chemical_rage_buff_haste")) {
                             this.AddTimer(0.5 / caster.GetTalentValue("special_bonus_imba_alchemist_6"), () => {
-                                ParticleManager.DestroyParticle(particle, true);
-                                ParticleManager.ReleaseParticleIndex(particle);
+                                ParticleManager.ClearParticle(particle, true);
                             });
                         } else {
                             ParticleManager.ReleaseParticleIndex(particle);

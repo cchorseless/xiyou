@@ -1356,7 +1356,7 @@ export class modifier_imba_death_pact_spirit_aura extends BaseModifier_Plus {
         let attacker = keys.attacker as IBaseNpc_Plus;
         let modifier_spirited_aura = "modifier_imba_death_pact_spirit_aura";
         if (target == this.GetParentPlus()) {
-            if (attacker.IsRealUnit() || attacker.IsTower() || attacker.IsRoshan()) {
+            if (attacker.IsRealUnit() || attacker.IsTower()) {
                 if (this.GetParentPlus().GetHealth() <= 1) {
                     this.GetParentPlus().Kill(this.GetAbilityPlus(), attacker);
                 } else {

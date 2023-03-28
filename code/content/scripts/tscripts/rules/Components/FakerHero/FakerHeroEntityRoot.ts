@@ -1,8 +1,12 @@
 
 import { Assert_ProjectileEffect, IProjectileEffectInfo } from "../../../assert/Assert_ProjectileEffect";
 import { Assert_SpawnEffect, ISpawnEffectInfo } from "../../../assert/Assert_SpawnEffect";
+import { KVHelper } from "../../../helper/KVHelper";
+import { modifier_courier } from "../../../npc/courier/modifier_courier";
+import { modifier_jiaoxie_wudi } from "../../../npc/modifier/battle/modifier_jiaoxie_wudi";
 import { BaseEntityRoot } from "../../Entity/BaseEntityRoot";
 import { ERoundBoard } from "../Round/ERoundBoard";
+import { FHeroAIComponent } from "./FHeroAIComponent";
 import { FHeroCombinationManagerComponent } from "./FHeroCombinationManagerComponent";
 
 export class FakerHeroEntityRoot extends BaseEntityRoot implements IRoundStateCallback {
@@ -15,18 +19,36 @@ export class FakerHeroEntityRoot extends BaseEntityRoot implements IRoundStateCa
         (this.ConfigID as any) = conf;
         (this.EntityId as any) = npc.GetEntityIndex();
         this.AddComponent(GGetRegClass<typeof FHeroCombinationManagerComponent>("FHeroCombinationManagerComponent"));
+        this.AddComponent(GGetRegClass<typeof FHeroAIComponent>("FHeroAIComponent"));
         this.SyncClient(true);
-
+        modifier_jiaoxie_wudi.applyOnly(npc, npc);
     }
     public RefreshFakerHero() {
+        let hHero = this.GetDomain<IBaseNpc_Hero_Plus>();
+        if (!GFuncEntity.IsValid(hHero) || !hHero.IsAlive()) {
+            return
+        }
+        let sCurrentCourierName = this.GetCourierName()
+        let sCourierName = KVHelper.CourierUnits.GetRandomCourier();
+        if (sCurrentCourierName == sCourierName && modifier_courier.findIn(hHero)) {
+            return
+        }
+        modifier_courier.remove(hHero);
+        modifier_courier.applyOnly(hHero, hHero, null, { courier_name: sCourierName });
 
+    }
+    GetCourierName() {
+        let hero = this.GetDomain<IBaseNpc_Hero_Plus>();
+        let hModifier = modifier_courier.findIn(hero);
+        if (GFuncEntity.IsValid(hModifier)) {
+            return hModifier.GetCourierName();
+        }
+        return KVHelper.CourierUnits.GetRandomCourier();
     }
     OnRound_Start(round: ERoundBoard) {
         let player = this.GetPlayer();
         player.EnemyManagerComp().removeAllEnemy();
-        this.FHeroCombinationManager().getAllActiveCombination().forEach(comb => {
-            comb.removeAllCombination();
-        })
+        this.FHeroCombinationManager().removeAllCombination();
         this.RefreshFakerHero();
         round.CreateAllRoundBasicEnemy(this.SpawnEffect);
     }
@@ -53,7 +75,7 @@ export class FakerHeroEntityRoot extends BaseEntityRoot implements IRoundStateCa
             aliveEnemy.forEach((b) => {
                 b.OnRound_Prize(round);
                 if (b.IsEnemy()) {
-                    damage += GToNumber((b as IEnemyUnitEntityRoot).GetRoundBasicUnitConfig().failureCount || "1");
+                    damage += b.GetRoundHeroDamage();
                 }
                 else if (b.IsIllusion() || b.IsSummon()) {
                     damage += 1;
@@ -75,6 +97,9 @@ export class FakerHeroEntityRoot extends BaseEntityRoot implements IRoundStateCa
     }
     FHeroCombinationManager() {
         return this.GetComponentByName<FHeroCombinationManagerComponent>("FHeroCombinationManagerComponent");
+    }
+    FHeroAIComp() {
+        return this.GetComponentByName<FHeroAIComponent>("FHeroAIComponent");
     }
 }
 declare global {

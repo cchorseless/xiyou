@@ -21,13 +21,16 @@ export class imba_treant_natures_grasp extends BaseAbility_Plus {
             this.thinker_tracker = {}
         }
         this.GetCasterPlus().EmitSound("Hero_Treant.NaturesGrasp.Cast");
-        for (let thicket = 1; thicket <= math.floor((this.GetCastRange(cursor_position, this.GetCasterPlus()) - 100) / this.GetSpecialValueFor("vine_spawn_interval")); thicket++) {
+        let len = math.floor((this.GetCastRange(cursor_position, this.GetCasterPlus()) - 100) / this.GetSpecialValueFor("vine_spawn_interval"));
+        GLogHelper.print(len, 1111);
+        for (let thicket = 1; thicket <= len; thicket++) {
             this.AddTimer(this.GetSpecialValueFor("creation_interval") * (thicket - 1),
                 () => {
-                    thicket_thinker = BaseModifier_Plus.CreateBuffThinker(this.GetCasterPlus(), this, "modifier_imba_treant_natures_grasp_creation_thinker", {
-                        duration: this.GetSpecialValueFor("vines_duration"),
-                        unique_string: unique_string
-                    }, GetGroundPosition(cast_position + (cursor_position - cast_position as Vector).Normalized() * (100 + (this.GetSpecialValueFor("vine_spawn_interval") * (thicket - 1))) as Vector, undefined), this.GetCasterPlus().GetTeamNumber(), false);
+                    thicket_thinker = BaseModifier_Plus.CreateBuffThinker(this.GetCasterPlus(), this, "modifier_imba_treant_natures_grasp_creation_thinker",
+                        {
+                            duration: this.GetSpecialValueFor("vines_duration"),
+                            unique_string: unique_string
+                        }, GetGroundPosition(cast_position + (cursor_position - cast_position as Vector).Normalized() * (100 + (this.GetSpecialValueFor("vine_spawn_interval") * (thicket - 1))) as Vector, undefined), this.GetCasterPlus().GetTeamNumber(), false);
                     thicket_thinker.EmitSound("Hero_Treant.NaturesGrasp.Spawn");
                     if (thicket == math.floor((this.GetCastRange(cursor_position, this.GetCasterPlus()) - 100) / this.GetSpecialValueFor("vine_spawn_interval"))) {
                         this.thinker_tracker[unique_string] = undefined;

@@ -1508,13 +1508,35 @@ declare global {
          * 沉睡，受到攻击会被唤醒
          */
         IsSleeped(): boolean;
+        /**
+         * @Both
+         * 具有攻击能力
+         */
+        IsAttacker(): boolean;
 
         /**
          * @Both
          * 获取攻击距离
          */
         GetAttackRangePlus(): number;
-
+        /**
+         * @Server
+         * @param radius 
+         * @param location 
+         * @param teamFilter 
+         * @param typeFilter 
+         * @param flagFilter 
+         * @param order 
+         * @param canGrowCache 
+         */
+        FindUnitsInRadiusPlus(
+            radius: number,
+            location?: Vector,
+            teamFilter?: DOTA_UNIT_TARGET_TEAM,
+            typeFilter?: DOTA_UNIT_TARGET_TYPE,
+            flagFilter?: DOTA_UNIT_TARGET_FLAGS,
+            order?: FindOrder,
+            canGrowCache?: boolean): IBaseNpc_Plus[];
 
     }
 }
@@ -1907,6 +1929,15 @@ BaseNPC.IsDazed = function () {
 BaseNPC.IsSleeped = function () {
     return this.HasModifier("modifier_generic_sleep");
 }
+BaseNPC.IsAttacker = function () {
+    if (IsServer()) {
+        return this.GetAttackCapability() != DOTAUnitAttackCapability_t.DOTA_UNIT_CAP_NO_ATTACK;
+    }
+    else {
+        return KVHelper.GetUnitData(this.GetUnitName(), "AttackCapabilities") != "DOTA_UNIT_CAP_NO_ATTACK";
+    }
+
+}
 
 BaseNPC.GetAttackRangePlus = function () {
     return this.Script_GetAttackRange();
@@ -2095,6 +2126,24 @@ if (IsServer()) {
         if (this.IsChilled()) {
             return this.RemoveModifierByName("modifier_generic_chill");
         }
+    }
+
+    BaseNPC.FindUnitsInRadiusPlus = function (
+        radius: number,
+        location?: Vector,
+        teamFilter?: DOTA_UNIT_TARGET_TEAM,
+        typeFilter?: DOTA_UNIT_TARGET_TYPE,
+        flagFilter?: DOTA_UNIT_TARGET_FLAGS,
+        order?: FindOrder,
+        canGrowCache?: boolean
+    ) {
+        location = location || this.GetAbsOrigin();
+        teamFilter = teamFilter || DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY;
+        typeFilter = typeFilter || DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC;
+        flagFilter = flagFilter || DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE;
+        order = order || FindOrder.FIND_CLOSEST;
+        canGrowCache = canGrowCache || false;
+        return FindUnitsInRadius(this.GetTeam(), location, null, radius, teamFilter, typeFilter, flagFilter, order, canGrowCache);
     }
 }
 

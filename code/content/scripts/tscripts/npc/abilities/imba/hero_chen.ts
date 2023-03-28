@@ -337,11 +337,11 @@ export class imba_chen_holy_persuasion extends BaseAbility_Plus {
         if (!IsServer()) {
             return;
         }
-        if (hTarget == this.GetCasterPlus() || (hTarget.GetTeamNumber() != this.GetCasterPlus().GetTeamNumber() && hTarget.IsCreep() && !hTarget.IsRoshan()) && hTarget.GetLevel() <= this.GetSpecialValueFor("level_req") && (!hTarget.IsAncient() || (hTarget.IsAncient() && this.GetCasterPlus().HasAbility("imba_chen_hand_of_god") && this.GetCasterPlus().findAbliityPlus<imba_chen_hand_of_god>("imba_chen_hand_of_god").IsTrained() && this.GetCasterPlus().HasScepter())) || (hTarget.GetTeamNumber() == this.GetCasterPlus().GetTeamNumber() && (hTarget.IsRealUnit() || hTarget.IsClone() || hTarget.GetOwnerEntity() == this.GetCasterPlus() || (hTarget.GetPlayerID() == this.GetCasterPlus().GetPlayerID()) || hTarget.IsOther()))) {
+        if (hTarget == this.GetCasterPlus() || (hTarget.GetTeamNumber() != this.GetCasterPlus().GetTeamNumber() && hTarget.IsCreep()) && hTarget.GetLevel() <= this.GetSpecialValueFor("level_req") && (!hTarget.IsAncient() || (hTarget.IsAncient() && this.GetCasterPlus().HasAbility("imba_chen_hand_of_god") && this.GetCasterPlus().findAbliityPlus<imba_chen_hand_of_god>("imba_chen_hand_of_god").IsTrained() && this.GetCasterPlus().HasScepter())) || (hTarget.GetTeamNumber() == this.GetCasterPlus().GetTeamNumber() && (hTarget.IsRealUnit() || hTarget.IsClone() || hTarget.GetOwnerEntity() == this.GetCasterPlus() || (hTarget.GetPlayerID() == this.GetCasterPlus().GetPlayerID()) || hTarget.IsOther()))) {
             return UnitFilterResult.UF_SUCCESS;
-        } else if (hTarget.GetTeamNumber() != this.GetCasterPlus().GetTeamNumber() && hTarget.IsCreep() && !hTarget.IsRoshan() && hTarget.GetLevel() > this.GetSpecialValueFor("level_req")) {
+        } else if (hTarget.GetTeamNumber() != this.GetCasterPlus().GetTeamNumber() && hTarget.IsCreep() && hTarget.GetLevel() > this.GetSpecialValueFor("level_req")) {
             return UnitFilterResult.UF_FAIL_CUSTOM;
-        } else if (hTarget.GetTeamNumber() != this.GetCasterPlus().GetTeamNumber() && hTarget.IsCreep() && !hTarget.IsRoshan() && hTarget.IsAncient()) {
+        } else if (hTarget.GetTeamNumber() != this.GetCasterPlus().GetTeamNumber() && hTarget.IsCreep() && hTarget.IsAncient()) {
             return UnitFilterResult.UF_FAIL_ANCIENT;
         } else if (hTarget.GetTeamNumber() != this.GetCasterPlus().GetTeamNumber() && hTarget.IsConsideredHero()) {
             return UnitFilterResult.UF_FAIL_HERO;
@@ -355,7 +355,7 @@ export class imba_chen_holy_persuasion extends BaseAbility_Plus {
         if (!IsServer()) {
             return;
         }
-        if (hTarget.GetTeamNumber() != this.GetCasterPlus().GetTeamNumber() && hTarget.IsCreep() && !hTarget.IsRoshan() && hTarget.GetLevel() > this.GetSpecialValueFor("level_req")) {
+        if (hTarget.GetTeamNumber() != this.GetCasterPlus().GetTeamNumber() && hTarget.IsCreep() && hTarget.GetLevel() > this.GetSpecialValueFor("level_req")) {
             return "#dota_hud_error_cant_cast_creep_level";
         } else if (hTarget.GetTeamNumber() == this.GetCasterPlus().GetTeamNumber()) {
             return "#dota_hud_error_cant_cast_on_creep_not_player_controlled";
@@ -697,7 +697,7 @@ export class modifier_imba_chen_holy_persuasion_teleport extends BaseModifier_Pl
         if (!IsServer()) {
             return;
         }
-        if (keys.unit == this.GetParentPlus() && keys.attacker != this.GetParentPlus() && (keys.attacker.IsRealUnit() || (keys.attacker as IBaseNpc_Plus).IsRoshan()) && keys.original_damage > 0) {
+        if (keys.unit == this.GetParentPlus() && keys.attacker != this.GetParentPlus() && (keys.attacker.IsRealUnit()) && keys.original_damage > 0) {
             this.Destroy();
         }
     }

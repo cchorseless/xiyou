@@ -1026,8 +1026,7 @@ export class imba_brewmaster_primal_unison extends BaseAbility_Plus {
     }
     OnChannelFinish(bInterrupted: boolean): void {
         this.GetCasterPlus().RemoveGesture(GameActivity_t.ACT_DOTA_CAST_ABILITY_1);
-        ParticleManager.DestroyParticle(this.particle, false);
-        ParticleManager.ReleaseParticleIndex(this.particle);
+        ParticleManager.ClearParticle(this.particle, false);
         if (!bInterrupted) {
             let owner = this.GetCasterPlus().GetOwner() as IBaseNpc_Plus;
             if (owner) {

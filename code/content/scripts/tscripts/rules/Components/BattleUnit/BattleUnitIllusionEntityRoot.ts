@@ -10,6 +10,7 @@ export class BattleUnitIllusionEntityRoot extends BattleUnitEntityRoot {
         (this.ConfigID as any) = conf;
         (this.EntityId as any) = this.GetDomain<IBaseNpc_Plus>().GetEntityIndex();
         this.AddComponent(GGetRegClass<typeof AiAttackComponent>("AiAttackComponent"));
+        this.InitSyncClientInfo();
         this.JoinInRound();
 
     }

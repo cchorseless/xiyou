@@ -783,6 +783,13 @@ export class imba_windrunner_focusfire extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_windrunner_focusfire_damage_reduction"), "modifier_special_bonus_imba_windrunner_focusfire_damage_reduction", {});
         }
     }
+
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this);
+    }
 }
 
 @registerModifier()

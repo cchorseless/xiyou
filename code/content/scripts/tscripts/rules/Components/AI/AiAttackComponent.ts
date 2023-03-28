@@ -12,7 +12,7 @@ export class AiAttackComponent extends ET.Component {
             this.timerBattle = null;
         }
         let npc = this.GetDomain<IBaseNpc_Plus>();
-        if (npc.GetAttackCapability() == DOTAUnitAttackCapability_t.DOTA_UNIT_CAP_NO_ATTACK) {
+        if (!npc.IsAttacker()) {
             return;
         }
         // if (!npc.IsCreature() && !npc.IsCreep()) {
@@ -80,14 +80,14 @@ export class AiAttackComponent extends ET.Component {
         while (abilitys.length > 0) {
             let ability = abilitys.shift();
             if (ability && ability.AutoSpellSelf()) {
-                if (IsInToolsMode()) {
-                    GTimerHelper.AddFrameTimer(4, GHandler.create(this, () => {
-                        if (ability.IsCooldownReady()) {
-                            GLogHelper.warn(`${ability.GetAbilityName()} AutoSpellSelf Error`)
-                        }
-                    }))
+                // if (IsInToolsMode()) {
+                //     GTimerHelper.AddFrameTimer(4, GHandler.create(this, () => {
+                //         if (ability.IsCooldownReady()) {
+                //             GLogHelper.warn(`${ability.GetAbilityName()} AutoSpellSelf Error`)
+                //         }
+                //     }))
 
-                }
+                // }
                 return true;
             }
         }

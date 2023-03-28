@@ -1,11 +1,12 @@
 
 import { ET } from "../../../shared/lib/Entity";
 import { ECombinationLabelItem } from "../Combination/ECombinationLabelItem";
+import { ERoundBoard } from "../Round/ERoundBoard";
 import { FHeroCombination } from "./FHeroCombination";
 
 
 @GReloadable
-export class FHeroCombinationManagerComponent extends ET.Component {
+export class FHeroCombinationManagerComponent extends ET.Component implements IRoundStateCallback {
 
 
     onAwake(): void {
@@ -25,8 +26,31 @@ export class FHeroCombinationManagerComponent extends ET.Component {
 
     private addEvent() {
     }
+    OnRound_Start(round?: ERoundBoard): void {
 
+    }
+    OnRound_WaitingEnd(): void { };
+    public OnRound_Battle() {
+        this.getAllActiveCombination().forEach(comb => {
+            comb.OnRound_Battle();
+        })
+    }
 
+    public OnRound_Prize(round: ERoundBoard) {
+        this.getAllActiveCombination().forEach(comb => {
+            if (comb) {
+                comb.OnRound_Prize(round);
+            }
+        })
+    }
+    public removeAllCombination() {
+        for (let info in this.allCombination) {
+            let combinas = Object.values(this.allCombination[info])
+            for (let comb of combinas) {
+                comb.removeAllCombination();
+            }
+        }
+    }
     public getAllActiveCombination() {
         let r: FHeroCombination[] = [];
         for (let info in this.allCombination) {

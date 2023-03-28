@@ -1,6 +1,7 @@
 import { Assert_ProjectileEffect, IProjectileEffectInfo } from "../../../assert/Assert_ProjectileEffect";
 import { KVHelper } from "../../../helper/KVHelper";
 import { modifier_jiaoxie_wudi } from "../../../npc/modifier/battle/modifier_jiaoxie_wudi";
+import { modifier_mana_control } from "../../../npc/modifier/battle/modifier_mana_control";
 import { EnemyConfig } from "../../../shared/EnemyConfig";
 import { BattleUnitEntityRoot } from "../BattleUnit/BattleUnitEntityRoot";
 import { CombinationComponent } from "../Combination/CombinationComponent";
@@ -21,17 +22,21 @@ export class EnemyUnitEntityRoot extends BattleUnitEntityRoot {
         (this.EntityId as any) = domain.GetEntityIndex();
         this.AddComponent(GGetRegClass<typeof CombinationComponent>("CombinationComponent"));
         this.addBattleComp();
+        this.SetStar(1);
+        this.SetUIOverHead(true, false);
         this.InitSyncClientInfo();
         this.JoinInRound();
     }
     OnRound_Start() {
         let npc = this.GetDomain<IBaseNpc_Plus>();
         modifier_jiaoxie_wudi.applyOnly(npc, npc);
+        GGameScene.GetPlayer(this.BelongPlayerid).FakerHeroRoot().FHeroCombinationManager().addEnemyUnit(this);
     }
     OnRound_Battle() {
         this.SetUIOverHead(false, true);
         let npc = this.GetDomain<IBaseNpc_Plus>();
         modifier_jiaoxie_wudi.remove(npc);
+        modifier_mana_control.applyOnly(npc, npc);
         this.AbilityManagerComp().OnRound_Battle();
         this.InventoryComp().OnRound_Battle();
         GTimerHelper.AddTimer(1, GHandler.create(this, () => {
@@ -121,6 +126,9 @@ export class EnemyUnitEntityRoot extends BattleUnitEntityRoot {
         }
     }
 
+    GetRoundHeroDamage() {
+        return this.iStar;
+    }
 
 
 

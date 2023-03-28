@@ -893,7 +893,6 @@ export class modifier_imba_keeper_of_the_light_spotlights extends BaseModifier_P
         this.AddTimer(duration, () => {
             if (this && particle) {
                 ParticleManager.DestroyParticle(particle, false);
-                ParticleManager.ReleaseParticleIndex(particle);
             }
         });
     }

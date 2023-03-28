@@ -35,6 +35,7 @@ export class CCCombinationBottomPanel extends CCPanel<ICCCombinationBottomPanel>
             this.curBelongPlayerid = courier.BelongPlayerid;
             combinations = ECombination.GetAllCombination(courier.BelongPlayerid);
         }
+        // GLogHelper.print(1111, fakerhero, courier)
         return (
             <Panel ref={this.__root__} className="CCCombinationBottomPanel"    {...this.initRootAttrs()}>
                 {

@@ -975,8 +975,8 @@ export class imba_zuus_thundergods_wrath extends BaseAbility_Plus {
             damage_table.attacker = this.GetCasterPlus();
             damage_table.ability = ability;
             damage_table.damage_type = ability.GetAbilityDamageType();
-            // todo 找到所有敌人
-            const enemyList: IBaseNpc_Plus[] = [];
+            let team = this.GetCasterPlus().GetTeam() == DOTATeam_t.DOTA_TEAM_GOODGUYS ? DOTATeam_t.DOTA_TEAM_BADGUYS : DOTATeam_t.DOTA_TEAM_GOODGUYS;
+            const enemyList: IBaseNpc_Plus[] = caster.GetPlayerRoot().BattleUnitManagerComp().GetAllBattleUnitAliveNpc(team);
             for (const [_, hero] of GameFunc.iPair(enemyList)) {
                 if (hero.IsAlive() && hero.GetTeam() != caster.GetTeam() && (!hero.IsIllusion()) && !hero.IsClone()) {
                     let target_point = hero.GetAbsOrigin();

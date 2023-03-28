@@ -285,9 +285,8 @@ export class PlayerEntityRoot extends PlayerSystem {
     public CreateFakerHero() {
         if (this.FakerHero == null) {
             let spawn = GMapSystem.GetInstance().getFakerHeroSpawnPoint(this.BelongPlayerid);
-            // todo
-            (this.FakerHero as any) = BaseNpc_Plus.CreateUnitByName("unit_base_baoxiang", spawn, this.Hero, true, DOTATeam_t.DOTA_TEAM_BADGUYS);
-            FakerHeroEntityRoot.Active(this.FakerHero, this.BelongPlayerid, "unit_base_baoxiang");
+            (this.FakerHero as any) = BaseNpc_Plus.CreateUnitByName("unit_enemy_courier", spawn, this.Hero, true, DOTATeam_t.DOTA_TEAM_BADGUYS);
+            FakerHeroEntityRoot.Active(this.FakerHero, this.BelongPlayerid, "unit_enemy_courier");
         }
     }
 

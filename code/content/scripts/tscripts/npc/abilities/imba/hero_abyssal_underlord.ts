@@ -30,9 +30,6 @@ export class imba_abyssal_underlord_firestorm extends BaseAbility_Plus {
         return 0;
     }
 
-    GetCooldown(level: number): number {
-        return 20;
-    }
 
     AutoSpellSelf() {
         return AI_ability.POSITION_most_enemy(this);
@@ -60,8 +57,7 @@ export class imba_abyssal_underlord_firestorm extends BaseAbility_Plus {
 
     StopEffects() {
         if (this.effect_cast != null) {
-            ParticleManager.DestroyParticle(this.effect_cast, true);
-            ParticleManager.ReleaseParticleIndex(this.effect_cast);
+            ParticleManager.ClearParticle(this.effect_cast, true);
         }
         this.effect_cast = null;
     }
@@ -313,12 +309,9 @@ export class imba_abyssal_underlord_pit_of_malice extends BaseAbility_Plus {
     public effect_cast: ParticleID;
 
     GetManaCost(level: number): number {
-        return 0;
+        return 100;
     }
 
-    GetCooldown(level: number): number {
-        return 20;
-    }
 
     AutoSpellSelf() {
         return AI_ability.POSITION_most_enemy(this);
@@ -336,8 +329,7 @@ export class imba_abyssal_underlord_pit_of_malice extends BaseAbility_Plus {
 
     OnAbilityPhaseInterrupted(): void {
         if (this.effect_cast != null) {
-            ParticleManager.DestroyParticle(this.effect_cast, true);
-            ParticleManager.ReleaseParticleIndex(this.effect_cast);
+            ParticleManager.ClearParticle(this.effect_cast, true);
             this.effect_cast = null;
         }
     }
@@ -435,8 +427,7 @@ export class modifier_imba_abyssal_underlord_pit_of_malice_thinker extends BaseM
             return;
         }
         if (this.pfx) {
-            ParticleManager.DestroyParticle(this.pfx, false);
-            ParticleManager.ReleaseParticleIndex(this.pfx);
+            ParticleManager.ClearParticle(this.pfx, false);
         }
     }
 
@@ -504,8 +495,7 @@ export class modifier_imba_abyssal_underlord_pit_of_malice_thinker extends BaseM
             this.radius = this.radius + (bonus_radius * stack_modifier.GetStackCount());
         }
         if (this.pfx != null) {
-            ParticleManager.DestroyParticle(this.pfx, false);
-            ParticleManager.ReleaseParticleIndex(this.pfx);
+            ParticleManager.ClearParticle(this.pfx, false);
             this.pfx = null;
         }
         this.pfx = ResHelper.CreateParticleEx(particle_cast, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, parent);
@@ -751,8 +741,7 @@ export class modifier_imba_abyssal_underlord_atrophy_aura_active extends BaseMod
             return;
         }
         if (this.pfx) {
-            ParticleManager.DestroyParticle(this.pfx, false);
-            ParticleManager.ReleaseParticleIndex(this.pfx);
+            ParticleManager.ClearParticle(this.pfx, false);
         }
     }
 }
@@ -1360,7 +1349,7 @@ export class modifier_imba_abyssal_underlord_dark_rift extends BaseModifier_Plus
         let sound_cancel = "Hero_AbyssalUnderlord.DarkRift.Cancel";
         let caster = this.GetCasterPlus();
         let parent = this.GetParentPlus();
-        ParticleManager.DestroyParticle(this.effect_cast, true);
+        ParticleManager.ClearParticle(this.effect_cast, true);
         StopSoundOn(sound_cast1, caster);
         StopSoundOn(sound_cast2, parent);
         EmitSoundOn(sound_cancel, caster);

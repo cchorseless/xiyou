@@ -451,7 +451,7 @@ export class imba_crystal_maiden_frostbite extends BaseAbility_Plus {
                 }
             }
             if (target.GetTeam() != caster.GetTeam()) {
-                if (target.IsConsideredHero() || target.IsRoshan() || target.IsAncient()) {
+                if (target.IsConsideredHero() || target.IsAncient()) {
                     target.AddNewModifier(caster, this, "modifier_imba_crystal_maiden_frostbite_enemy", {
                         duration: duration * (1 - target.GetStatusResistance())
                     });
@@ -523,7 +523,7 @@ export class modifier_imba_crystal_maiden_frostbite_enemy extends BaseModifier_P
             this.ability = this.GetAbilityPlus();
             this.parent = this.GetParentPlus();
             this.damage_interval = this.ability.GetSpecialValueFor("damage_interval");
-            if (this.GetParentPlus().IsConsideredHero() || this.GetParentPlus().IsRoshan() || this.GetParentPlus().IsAncient()) {
+            if (this.GetParentPlus().IsConsideredHero() || this.GetParentPlus().IsAncient()) {
                 this.total_damage = this.ability.GetSpecialValueFor("total_damage");
                 this.duration = this.ability.GetTalentSpecialValueFor("duration");
             } else {
@@ -1015,8 +1015,7 @@ export class imba_crystal_maiden_freezing_field extends BaseAbility_Plus {
             this.StopSound("Imba.CrystalMaidenLetItGo02");
             this.StopSound("Imba.CrystalMaidenLetItGo03");
             AnimationHelper.EndAnimation(this.caster);
-            ParticleManager.DestroyParticle(this.freezing_field_particle, false);
-            ParticleManager.ReleaseParticleIndex(this.freezing_field_particle);
+            ParticleManager.ClearParticle(this.freezing_field_particle, false);
             if (this.are_we_nuclear) {
                 let meteor_delay = this.caster.GetTalentValue("special_bonus_imba_crystal_maiden_7", "meteor_delay");
                 this.StopSound("Imba.CrystalMaidenTacticalNuke");

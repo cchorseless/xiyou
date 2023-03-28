@@ -226,12 +226,10 @@ export class modifier_imba_juggernaut_blade_fury extends BaseModifier_Plus {
             }
             if (this.blade_fury_spin_pfx) {
                 ParticleManager.DestroyParticle(this.blade_fury_spin_pfx, false);
-                ParticleManager.ReleaseParticleIndex(this.blade_fury_spin_pfx);
                 this.blade_fury_spin_pfx = undefined;
             }
             if (this.blade_fury_spin_pfx_2) {
                 ParticleManager.DestroyParticle(this.blade_fury_spin_pfx_2, false);
-                ParticleManager.ReleaseParticleIndex(this.blade_fury_spin_pfx_2);
                 this.blade_fury_spin_pfx_2 = undefined;
             }
         }
@@ -530,7 +528,6 @@ export class modifier_imba_juggernaut_healing_ward_passive extends BaseModifier_
             ParticleManager.SetParticleControl(eruption_pfx, 0, this.GetCasterPlus().GetAbsOrigin());
             ParticleManager.ReleaseParticleIndex(eruption_pfx);
             ParticleManager.DestroyParticle(caster.TempData().healing_ward_ambient_pfx, false);
-            ParticleManager.ReleaseParticleIndex(caster.TempData().healing_ward_ambient_pfx);
             caster.TempData().healing_ward_ambient_pfx = undefined;
             caster.TempData().healing_ward_ambient_pfx = ResHelper.CreateParticleEx("particles/econ/items/juggernaut/bladekeeper_healing_ward/juggernaut_healing_ward_dc.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetCasterPlus(), this.GetCasterPlus());
             ParticleManager.SetParticleControl(caster.TempData().healing_ward_ambient_pfx, 0, this.GetCasterPlus().GetAbsOrigin() + Vector(0, 0, 100) as Vector);
@@ -604,7 +601,6 @@ export class modifier_imba_juggernaut_healing_ward_passive extends BaseModifier_
     CC_OnDeath(params: ModifierInstanceEvent): void {
         if (params.unit == this.GetParentPlus()) {
             ParticleManager.DestroyParticle(this.GetCasterPlus().TempData().healing_ward_ambient_pfx, false);
-            ParticleManager.ReleaseParticleIndex(this.GetCasterPlus().TempData().healing_ward_ambient_pfx);
             this.GetCasterPlus().TempData().healing_ward_ambient_pfx = undefined;
             StopSoundOn("Hero_Juggernaut.HealingWard.Loop", this.GetParentPlus());
         }
