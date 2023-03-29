@@ -93,30 +93,30 @@ export class modifier_property extends BaseModifier_Plus {
      * @returns
      */
     GetModifierBaseAttack_BonusDamage(): number {
-        return PropertyCalculate.SumProps(this.GetParentPlus(), null, GPropertyConfig.EMODIFIER_PROPERTY.BASEATTACK_BONUSDAMAGE)
+        return PropertyCalculate.GetBaseBonusDamage(this.GetParentPlus(), null)
     }
     /**
      * 技能CD减少
      */
     GetModifierPercentageCooldown(event: ModifierAbilityEvent): number {
-        return PropertyCalculate.SumProps(this.GetParentPlus(), event, GPropertyConfig.EMODIFIER_PROPERTY.COOLDOWN_PERCENTAGE)
+        return PropertyCalculate.GetCooldownReduction(this.GetParentPlus(), event as any)
     }
 
     /**闪避 */
     GetModifierEvasion_Constant(event: ModifierAttackEvent): number {
-        return PropertyCalculate.SumProps(this.GetParentPlus(), event, GPropertyConfig.EMODIFIER_PROPERTY.EVASION_CONSTANT)
+        return PropertyCalculate.GetEvasion(this.GetParentPlus(), event)
     }
 
     /**气血恢复 */
     GetModifierConstantHealthRegen(): number {
-        return PropertyCalculate.SumProps(this.GetParentPlus(), null, GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_REGEN_CONSTANT)
+        return PropertyCalculate.GetHealthRegen(this.GetParentPlus())
     }
     /**
      * 额外魔法值
      * @returns
      */
     GetModifierManaBonus(): number {
-        return PropertyCalculate.SumProps(this.GetParentPlus(), null, GPropertyConfig.EMODIFIER_PROPERTY.MANA_BONUS)
+        return PropertyCalculate.GetManaBonus(this.GetParentPlus())
     }
 
     /**
@@ -124,7 +124,7 @@ export class modifier_property extends BaseModifier_Plus {
      * @returns
      */
     GetModifierConstantManaRegen(): number {
-        return PropertyCalculate.SumProps(this.GetParentPlus(), null, GPropertyConfig.EMODIFIER_PROPERTY.MANA_REGEN_CONSTANT);
+        return PropertyCalculate.GetManaRegen(this.GetParentPlus())
     }
     /**
      * 技能增伤
@@ -132,11 +132,7 @@ export class modifier_property extends BaseModifier_Plus {
      * @returns
      */
     GetModifierSpellAmplify_Percentage(event: ModifierAttackEvent): number {
-        return PropertyCalculate.SumProps(this.GetParentPlus(), null,
-            GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_PERCENTAGE_CREEP,
-            GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_PERCENTAGE,
-            GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_PERCENTAGE_UNIQUE,
-        );
+        return PropertyCalculate.GetSpellAmplify(this.GetParentPlus(), event)
     }
 
     /**

@@ -21,7 +21,7 @@ export class CCPortraitGroup extends CCPanel<ICCPortraitGroup> {
             this.__root___isValid && (
                 <Panel id="CC_PortraitGroup" ref={this.__root__}  {...this.initRootAttrs()}>
                     <GenericPanel type="DOTAUnitName" id="unitname" hittest={false} style={{ width: "100%" }} />
-                    <CCPanel>
+                    <CCPanel width="155px">
                         <CCPanel id="PortraitGroup" marginLeft={"0px"}>
                             <DOTAParticleScenePanel id="PortraitStreakParticle" particleonly={true} cameraOrigin="-300 0 150" lookAt="0 0 180" fov={50} hittest={false} {...this.props.particleAttrs} />
                             <Panel id="PortraitStreakParticleBorder" hittest={false} />
@@ -37,8 +37,8 @@ export class CCPortraitGroup extends CCPanel<ICCPortraitGroup> {
                             </CCPanel>
                         </CCPanel>
                         <GenericPanel type="DOTAHUDDeathPanel" id="death_panel_buyback" align="right center" />
-                        <CCUnitStats align="right center" />
-                        <CCDOTAXP align="right bottom" marginRight={"140px"} CurSelectUnit={this.props.CurSelectUnit} />
+                        <CCUnitStats align="right center" CurSelectUnit={this.props.CurSelectUnit} />
+                        <CCDOTAXP align="right bottom" marginRight={"110px"} CurSelectUnit={this.props.CurSelectUnit} />
                     </CCPanel>
                     {this.props.children}
                     {this.__root___childs}

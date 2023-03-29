@@ -16,18 +16,20 @@ export module PropertyConfig {
     /**减伤 = FACTOR x 护甲 / ( 1 + (FACTOR  x |护甲|)) */
     export const PHYSICAL_ARMOR_FACTOR = 0.06;
     export const MAGICAL_ARMOR_FACTOR = 0.06;
-    /**每点力量提供攻击力 */
-    export const ATTRIBUTE_STRENGTH_ATTACK_DAMAGE = 3;
-    /**每点力量提供怒气恢复加成 */
-    export const ATTRIBUTE_STRENGTH_ENERGY_GET = 3;
-    /**每点力量提供最终伤害 */
-    export const ATTRIBUTE_STRENGTH_ALL_DAMAGE = 0.04;
+    /**每点主属性提供攻击力 */
+    export const ATTRIBUTE_PRIMARY_ATTACK_DAMAGE = 1;
+    /**每点力量提供气血 */
+    export const ATTRIBUTE_STRENGTH_HP_BONUS = 20;
+    /**每点力量提供气血恢复加成 */
+    export const ATTRIBUTE_STRENGTH_HEALTH_REGEN_CONSTANT = 0.09;
+    /**主属性加成，每点力量提供状态抗性 */
+    export const ATTRIBUTE_STRENGTH_STATUS_RESISTANCE = 0.15;
     /**每点力量提供最终伤害上限 */
-    export const ATTRIBUTE_STRENGTH_ALL_DAMAGE_MAX = 200;
+    // export const ATTRIBUTE_STRENGTH_ALL_DAMAGE_MAX = 200;
     /**每点敏捷提供攻击速度 */
-    export const ATTRIBUTE_AGILITY_ATTACK_SPEED = 0.2;
-    /**每点敏捷提供攻击距离 */
-    export const ATTRIBUTE_AGILITY_ATTACK_RANGE = 0.2;
+    export const ATTRIBUTE_AGILITY_ATTACK_SPEED = 1;
+    /**每点敏捷提供物理护甲 */
+    export const ATTRIBUTE_AGILITY_PHYSICAL_ARMOR_BASE = 0.16;
     /**每点敏捷提供攻击速度上限 */
     export const ATTRIBUTE_AGILITY_MAX_ATTACK_SPEED = 0.28;
     /**每点智力提供蓝量上限 */
@@ -35,7 +37,7 @@ export module PropertyConfig {
     /**每点智力提供技能增强 */
     export const ATTRIBUTE_INTELLECT_SPELL_AMPLIFY = 0.05;
     /**每点智力提供蓝量恢复 */
-    export const ATTRIBUTE_INTELLECT_MANA_REGEN = 0.01;
+    export const ATTRIBUTE_INTELLECT_MANA_REGEN = 0.05;
     /**每点智力提供冷却缩减 */
     export const ATTRIBUTE_INTELLECT_COOLDOWN_REDUCTION = 0.02;
     /**智力提供的冷却缩减上限 */
@@ -314,6 +316,7 @@ export module PropertyConfig {
         STATUS_RESISTANCE_STACKING = modifierfunction.MODIFIER_PROPERTY_STATUS_RESISTANCE_STACKING,
         /**
          * Method Name: `GetModifierStatusResistanceCaster`
+         * 状态加深，用于施法者抵消状态抗性
          */
         STATUS_RESISTANCE_CASTER = modifierfunction.MODIFIER_PROPERTY_STATUS_RESISTANCE_CASTER,
         /**
@@ -930,7 +933,8 @@ export module PropertyConfig {
         BASE_ATTACK_TIME_ADJUST,
         BASE_ATTACK_TIME_PERCENTAGE,
         SPELL_EVASION_CONSTANT,
-        STATUS_RESISTANCE_UNIQUE,
+        // 状态抗性
+        STATUS_RESISTANCE_BONUS,
         OUTGOING_DAMAGE_PERCENTAGE,
         OUTGOING_ALL_DAMAGE_PERCENTAGE,
         OUTGOING_PHYSICAL_DAMAGE_PERCENTAGE,

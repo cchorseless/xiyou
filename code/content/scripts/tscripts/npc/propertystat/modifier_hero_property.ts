@@ -1,3 +1,4 @@
+import { KVHelper } from "../../helper/KVHelper"
 import { BaseModifier_Plus, registerProp } from "../entityPlus/BaseModifier_Plus"
 import { registerModifier } from "../entityPlus/Base_Plus"
 
@@ -26,20 +27,42 @@ export class modifier_hero_property extends BaseModifier_Plus {
         return false
     }
     BeCreated(params: IModifierTable) {
-
+        let unitname = this.GetParentPlus().GetUnitName();
+        let str_AttributePrimary = KVHelper.GetUnitData(unitname, "AttributePrimary");
+        str_AttributePrimary = str_AttributePrimary || "DOTA_ATTRIBUTE_INVALID";
+        if (str_AttributePrimary == "DOTA_ATTRIBUTE_STRENGTH") {
+            this.AttributePrimary = Attributes.DOTA_ATTRIBUTE_STRENGTH;
+        }
+        else if (str_AttributePrimary == "DOTA_ATTRIBUTE_AGILITY") {
+            this.AttributePrimary = Attributes.DOTA_ATTRIBUTE_AGILITY;
+        }
+        else if (str_AttributePrimary == "DOTA_ATTRIBUTE_INTELLECT") {
+            this.AttributePrimary = Attributes.DOTA_ATTRIBUTE_INTELLECT;
+        }
+        else {
+            this.AttributePrimary = Attributes.DOTA_ATTRIBUTE_INVALID;
+        }
+        this.AttributeStrengthGain = GToNumber(KVHelper.GetUnitData(unitname, "AttributeStrengthGain"));
+        this.AttributeAgilityGain = GToNumber(KVHelper.GetUnitData(unitname, "AttributeAgilityGain"));
+        this.AttributeIntelligenceGain = GToNumber(KVHelper.GetUnitData(unitname, "AttributeIntelligenceGain"));
         if (IsServer()) {
-            this.CalculatePrimaryStat();
-            GTimerHelper.AddTimer(0.1, GHandler.create(this, () => {
-                this.CalculatePrimaryStat()
-                return 0.1
-            }))
+            this.SetPrimaryStat(this.AttributePrimary);
+            // this.CalculatePrimaryStat();
+            // GTimerHelper.AddTimer(0.1, GHandler.create(this, () => {
+            //     this.CalculatePrimaryStat()
+            //     return 0.1
+            // }))
         }
     }
+    AttributePrimary: number;
+    AttributeStrengthGain: number = 0;
+    AttributeAgilityGain: number = 0;
+    AttributeIntelligenceGain: number = 0;
 
-    forceSetAttributes: Attributes = Attributes.DOTA_ATTRIBUTE_INVALID;
+    private forceSetAttributes: Attributes = Attributes.DOTA_ATTRIBUTE_INVALID;
     CalculatePrimaryStat() {
         if (IsServer()) {
-            let hParent = this.GetParentPlus()
+            let hParent = this.GetParentPlus();
             if (!GFuncEntity.IsValid(hParent)) {
                 return
             }
@@ -69,6 +92,9 @@ export class modifier_hero_property extends BaseModifier_Plus {
             }
         }
     }
+
+
+
     /**
      * @Both
      * @param attr 
@@ -80,26 +106,93 @@ export class modifier_hero_property extends BaseModifier_Plus {
         }
     }
     public BeDestroy(): void {
-
         if (this.StackCountHandler) {
             this.StackCountHandler.recover();
             this.StackCountHandler = null;
         }
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.LIFESTEAL_PERCENTAGE)
-    CC_LIFESTEAL_PERCENTAGE() {
-        return 150
-    }
-    // @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASEATTACK_BONUSDAMAGE)
-    // CC_GetModifierBaseAttack_BonusDamage(params: IModifierTable) {
-    //     // return Gmodifier_property.GetStrength(this.GetParentPlus()) * Gmodifier_property.ATTRIBUTE_STRENGTH_ATTACK_DAMAGE
-    //     return 20
-    // }
 
-    // @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ENERGY_REGEN_PERCENTAGE)
-    // CC_GetModifierEnergyRegenPercentage(params: IModifierTable) {
-    //     return (this.GetStackCount() == Attributes.DOTA_ATTRIBUTE_STRENGTH) && Gmodifier_property.GetStrength(this.GetParentPlus()) * Gmodifier_property.ATTRIBUTE_STRENGTH_ENERGY_GET || 0
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BASE)
+    CC_STATS_STRENGTH_BASE() {
+        return this.GetParentPlus().GetLevel() * this.AttributeStrengthGain
+    }
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_BASE)
+    CC_STATS_AGILITY_BASE() {
+        return this.GetParentPlus().GetLevel() * this.AttributeAgilityGain
+    }
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BASE)
+    CC_STATS_INTELLECT_BASE() {
+        return this.GetParentPlus().GetLevel() * this.AttributeIntelligenceGain
+    }
+
+    // @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.LIFESTEAL_PERCENTAGE)
+    // CC_LIFESTEAL_PERCENTAGE() {
+    //     return 150
     // }
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASEATTACK_BONUSDAMAGE)
+    CC_GetModifierBaseAttack_BonusDamage(params: IModifierTable) {
+        let iStackCount = this.GetStackCount()
+        if (iStackCount == Attributes.DOTA_ATTRIBUTE_STRENGTH) {
+            return GPropertyCalculate.GetStrength(this.GetParentPlus()) * GPropertyConfig.ATTRIBUTE_PRIMARY_ATTACK_DAMAGE
+        }
+        else if (iStackCount == Attributes.DOTA_ATTRIBUTE_AGILITY) {
+            return GPropertyCalculate.GetAgility(this.GetParentPlus()) * GPropertyConfig.ATTRIBUTE_PRIMARY_ATTACK_DAMAGE
+        }
+        else if (iStackCount == Attributes.DOTA_ATTRIBUTE_AGILITY) {
+            return GPropertyCalculate.GetIntellect(this.GetParentPlus()) * GPropertyConfig.ATTRIBUTE_PRIMARY_ATTACK_DAMAGE
+        }
+        return 0;
+    }
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS)
+    CC_HP_BONUS() {
+        return GPropertyCalculate.GetStrength(this.GetParentPlus()) * GPropertyConfig.ATTRIBUTE_STRENGTH_HP_BONUS
+    }
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_REGEN_CONSTANT)
+    CC_HEALTH_REGEN_CONSTANT() {
+        return GPropertyCalculate.GetStrength(this.GetParentPlus()) * GPropertyConfig.ATTRIBUTE_STRENGTH_HEALTH_REGEN_CONSTANT;
+    }
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATUS_RESISTANCE_BONUS)
+    CC_STATUS_RESISTANCE() {
+        let iStackCount = this.GetStackCount()
+        if (iStackCount == Attributes.DOTA_ATTRIBUTE_STRENGTH) {
+            return GPropertyCalculate.GetStrength(this.GetParentPlus()) * GPropertyConfig.ATTRIBUTE_STRENGTH_STATUS_RESISTANCE
+        }
+    }
+
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BASE)
+    CC_PHYSICAL_ARMOR_BASE() {
+        return GPropertyCalculate.GetAgility(this.GetParentPlus()) * GPropertyConfig.ATTRIBUTE_AGILITY_PHYSICAL_ARMOR_BASE;
+    }
+
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
+    CC_ATTACKSPEED_BONUS_CONSTANT() {
+        return GPropertyCalculate.GetAgility(this.GetParentPlus()) * GPropertyConfig.ATTRIBUTE_AGILITY_ATTACK_SPEED;
+    }
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS,)
+    CC_GetModifierMaximumAttackSpeedBonus() {
+        let iStackCount = this.GetStackCount()
+        if (iStackCount == Attributes.DOTA_ATTRIBUTE_AGILITY) {
+            return GPropertyCalculate.GetStrength(this.GetParentPlus()) * GPropertyConfig.ATTRIBUTE_AGILITY_MAX_ATTACK_SPEED
+        }
+    }
+
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MANA_REGEN_CONSTANT,)
+    CC_GetModifierConstantManaRegen() {
+        return GPropertyCalculate.GetIntellect(this.GetParentPlus()) * GPropertyConfig.ATTRIBUTE_INTELLECT_MANA_REGEN;
+    }
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.COOLDOWN_PERCENTAGE,)
+    CC_GetModifierPercentageCooldown() {
+        let coodown = GPropertyCalculate.GetIntellect(this.GetParentPlus()) * GPropertyConfig.ATTRIBUTE_INTELLECT_COOLDOWN_REDUCTION;
+        return math.min(GPropertyConfig.ATTRIBUTE_INTELLECT_MAX_CD, (1 - math.pow(1 - GPropertyConfig.ATTRIBUTE_INTELLECT_COOLDOWN_REDUCTION, coodown)) * 100) || 0
+    }
+
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_BASE)
+    CC_SPELL_AMPLIFY_BASE(params: IModifierTable) {
+        let iStackCount = this.GetStackCount()
+        if (iStackCount == Attributes.DOTA_ATTRIBUTE_INTELLECT) {
+            return GPropertyCalculate.GetIntellect(this.GetParentPlus()) * GPropertyConfig.ATTRIBUTE_INTELLECT_SPELL_AMPLIFY
+        }
+    }
     // @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_ALL_DAMAGE_PERCENTAGE)
     // CC_GetModifierOutgoingAllDamagePercentage(params: IModifierTable) {
     //     return (this.GetStackCount() == Attributes.DOTA_ATTRIBUTE_STRENGTH) && GFuncMath.Clamp(Gmodifier_property.GetStrength(this.GetParentPlus()) * Gmodifier_property.ATTRIBUTE_STRENGTH_ALL_DAMAGE, 0, Gmodifier_property.ATTRIBUTE_STRENGTH_ALL_DAMAGE_MAX) || 0
@@ -109,18 +202,9 @@ export class modifier_hero_property extends BaseModifier_Plus {
     //     return Gmodifier_property.GetIntellect(this.GetParentPlus()) * Gmodifier_property.ATTRIBUTE_INTELLECT_MANA || 0
     // }
 
-    // @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MANA_REGEN_CONSTANT,)
-    // CC_GetModifierConstantManaRegen(params: IModifierTable) {
-    //     return (this.GetStackCount() == Attributes.DOTA_ATTRIBUTE_INTELLECT) && (Gmodifier_property.GetIntellect(this.GetParentPlus()) * Gmodifier_property.ATTRIBUTE_INTELLECT_MANA_REGEN) || 0
-    // }
-    // @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.COOLDOWN_PERCENTAGE,)
-    // CC_GetModifierPercentageCooldown(params: IModifierTable) {
-    //     return (this.GetStackCount() == Attributes.DOTA_ATTRIBUTE_INTELLECT) && math.min(Gmodifier_property.ATTRIBUTE_INTELLECT_MAX_CD, (1 - math.pow(1 - Gmodifier_property.ATTRIBUTE_INTELLECT_COOLDOWN_REDUCTION * 0.01, Gmodifier_property.GetIntellect(this.GetParentPlus()))) * 100) || 0
-    // }
-    // @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS,)
-    // CC_GetModifierMaximumAttackSpeedBonus() {
-    //     return (this.GetStackCount() == Attributes.DOTA_ATTRIBUTE_AGILITY) && Gmodifier_property.GetAgility(this.GetParentPlus()) * Gmodifier_property.ATTRIBUTE_AGILITY_MAX_ATTACK_SPEED || 0
-    // }
+
+
+
 }
 
 declare global {

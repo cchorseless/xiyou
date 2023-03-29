@@ -149,20 +149,21 @@
         margin-top: 2px;
     }
 
+
     #StrengthIcon {
-        background-image: url("file://{images}/custom_game/eom_design/ccunitstats/primary_attribute_icon_strength.png");
+        background-image: url("file://{images}/custom_game/eom_design/ccunitstats/icon_prop_str.png");
     }
 
     #AgilityIcon {
-        background-image: url("file://{images}/custom_game/eom_design/ccunitstats/primary_attribute_icon_agility.png");
+        background-image: url("file://{images}/custom_game/eom_design/ccunitstats/icon_prop_agi.png");
     }
 
     .ColorBlindModeEnabled #AgilityIcon {
-        background-image: url("file://{images}/custom_game/eom_design/ccunitstats/primary_attribute_icon_agility_colorblind.png");
+        background-image: url("file://{images}/custom_game/eom_design/ccunitstats/icon_prop_agi_colorblind.png");
     }
 
     #IntellectIcon {
-        background-image: url("file://{images}/custom_game/eom_design/ccunitstats/primary_attribute_icon_intelligence.png");
+        background-image: url("file://{images}/custom_game/eom_design/ccunitstats/icon_prop_int.png");
     }
 
     .AttributeDetails {
@@ -278,10 +279,39 @@
         width: 14px;
         height: 14px;
         margin-left: 8px;
-        background-image: url("file://{images}/custom_game/eom_design/ccunitstats/icon_props_damage.png");
+        background-image: url("file://{images}/custom_game/eom_design/ccunitstats/icon_damage.png");
         background-repeat: no-repeat;
         background-size: cover;
         wash-color: #f31f1f;
+    }
+
+
+    #PhysicalArmorIcon {
+        width: 14px;
+        height: 14px;
+        margin-left: 8px;
+        background-image: url("file://{images}/custom_game/eom_design/ccunitstats/icon_armor.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        wash-color: #e1f50b;
+    }
+
+    #MagicalArmorIcon {
+        width: 14px;
+        height: 14px;
+        margin-left: 8px;
+        background-image: url("file://{images}/custom_game/eom_design/ccunitstats/icon_magic_resist.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        wash-color: #4de705;
+    }
+
+    #PhysicalArmorLabel {
+        margin-left: 24px;
+    }
+
+    #MagicalArmorLabel {
+        margin-left: 24px;
     }
 
     #DamageLabel {
@@ -293,7 +323,7 @@
         height: 14px;
         margin-left: 6px;
         margin-top: 1px;
-        background-image: url("file://{images}/custom_game/eom_design/ccunitstats/icon_props_staff.png");
+        background-image: url("file://{images}/custom_game/eom_design/ccunitstats/icon_prop_staff.png");
         background-size: 18px 13px;
         background-repeat: no-repeat;
         wash-color: #3698f3;

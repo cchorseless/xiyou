@@ -179,7 +179,11 @@ export module PropertyCalculate {
      * @returns 
      */
     export function GetBasePhysicalArmor(hUnit: IBaseNpc_Plus) {
-        return SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BASE)
+        let fValue = 0;
+        if (GFuncEntity.IsValid(hUnit)) {
+            fValue = GetUnitCache(hUnit, "ArmorPhysical") + SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BASE)
+        }
+        return fValue;
     }
     export function GetBonusPhysicalArmor(hUnit: IBaseNpc_Plus) {
         return SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS)
@@ -196,7 +200,11 @@ export module PropertyCalculate {
     }
     //  魔法防御
     export function GetBaseMagicalArmor(hUnit: IBaseNpc_Plus) {
-        return SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_ARMOR_BASE)
+        let fValue = 0;
+        if (GFuncEntity.IsValid(hUnit)) {
+            fValue = GetUnitCache(hUnit, "MagicalResistance") + SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_ARMOR_BASE)
+        }
+        return fValue;
     }
     export function GetBonusMagicalArmor(hUnit: IBaseNpc_Plus) {
         return SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_ARMOR_BONUS)
@@ -277,7 +285,7 @@ export module PropertyCalculate {
         return SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.STATUS_RESISTANCE_STACKING)
     }
     export function GetStatusResistanceUnique(hUnit: IBaseNpc_Plus) {
-        return SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.STATUS_RESISTANCE_UNIQUE)
+        return SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.STATUS_RESISTANCE_BONUS)
     }
     export function GetStatusResistance(hUnit: IBaseNpc_Plus) {
         return (1 - (1 - GetStatusResistanceStack(hUnit) * 0.01) * (1 - GetStatusResistanceUnique(hUnit) * 0.01)) * 100
@@ -634,6 +642,7 @@ export module PropertyCalculate {
         return -((1 - IGNORE_MAGICAL_ARMOR_PERCENTAGE * 0.01) * (1 - IGNORE_MAGICAL_ARMOR_PERCENTAGE_UNIQUE * 0.01) - 1) * 100
     }
 
+
     /**
      * 物理护甲减免
      * @param target
@@ -672,7 +681,7 @@ export module PropertyCalculate {
      * @returns
      */
     export function GetPhysicalArmor_Base(target: IBaseNpc_Plus) {
-        let BasePhysicalArmor = SumProps(target, null, GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BASE);
+        let BasePhysicalArmor = GetBasePhysicalArmor(target);
         let BasePhysicalArmorPercentage = SumProps(target, null, GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BASE_PERCENTAGE);
         let PhysicalArmorPercentage = SumProps(target, null, GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_TOTAL_PERCENTAGE);
         return BasePhysicalArmor * (1 + BasePhysicalArmorPercentage * 0.01) * (1 + PhysicalArmorPercentage * 0.01)
@@ -683,7 +692,7 @@ export module PropertyCalculate {
      * @param target
      */
     export function GetPhysicalArmor(target: IBaseNpc_Plus) {
-        let BasePhysicalArmor = SumProps(target, null, GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BASE);
+        let BasePhysicalArmor = GetBasePhysicalArmor(target);
         let BasePhysicalArmorPercentage = SumProps(target, null, GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BASE_PERCENTAGE);
         let PhysicalArmorPercentage = SumProps(target, null, GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_TOTAL_PERCENTAGE);
         let BonusPhysicalArmor = SumProps(target, null, GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS);

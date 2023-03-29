@@ -4,7 +4,6 @@ export class BattleUnitEntityRoot extends BaseEntityRoot {
     public iLevel: number = 1;
     public iStar: number = 1;
     public IsShowOverhead: boolean = false;
-    public PrimaryAttribute: number = 1;
     HasOverhead(): boolean {
         if (this.IsShowOverhead) {
             return Entities.IsValidEntity(this.EntityId) && Entities.IsAlive(this.EntityId) && !Entities.IsInvisible(this.EntityId);

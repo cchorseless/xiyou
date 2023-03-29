@@ -31,7 +31,7 @@ export class CCBuildingTopBarItem extends CCOverHeadBaseItem {
                 })}
             </CCPanel>
             <CCPanel id="buildingnNameBg" backgroundImage={PathHelper.getCustomImageUrl(`rarity/titlebg_${rare.toLowerCase()}.png`)}>
-                <CCPanel id="unitprop" backgroundImage={PathHelper.getCustomImageUrl(`eom_design/ccunitstats/icon_prop_${BuildingComp.PrimaryAttribute}.png`)} />
+                <CCPanel id="unitprop" backgroundImage={PathHelper.getCustomImageUrl(`eom_design/ccunitstats/icon_prop_${UnitHelper.GetPrimaryAttribute(entityid)}.png`)} />
                 <CCLabel align="center center" text={$.Localize("#" + BuildingComp!.ConfigID)} type="UnitName" />
             </CCPanel>
             {

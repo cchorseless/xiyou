@@ -54,17 +54,17 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
         let sBonusStrength = FuncHelper.SignNumber(iBonusStrength);
         const base_strength = iBaseStrength || 0;
         const bonus_strength = sBonusStrength;
-        const total_strength = iStrength;
-
-        const strength_attack_damage = iStrength * GPropertyConfig.ATTRIBUTE_STRENGTH_ATTACK_DAMAGE;
-        const strength_energy_regen = FuncHelper.Round(iStrength * GPropertyConfig.ATTRIBUTE_STRENGTH_ENERGY_GET, 2);
-        const strength_all_damage = FuncHelper.Clamp(FuncHelper.Round(iStrength * GPropertyConfig.ATTRIBUTE_STRENGTH_ALL_DAMAGE, 2), 0, GPropertyConfig.ATTRIBUTE_STRENGTH_ALL_DAMAGE_MAX);
-        const strength_all_damage_max = GPropertyConfig.ATTRIBUTE_STRENGTH_ALL_DAMAGE_MAX;
+        const strength_prop_per_level = GToNumber(tData && tData["AttributeStrengthGain"]) || 0;
+        const strength_hp_bonus = iStrength * GPropertyConfig.ATTRIBUTE_STRENGTH_HP_BONUS;
+        const strength_hp_regen = FuncHelper.Round(iStrength * GPropertyConfig.ATTRIBUTE_STRENGTH_HEALTH_REGEN_CONSTANT, 2);
+        const strength_status_resistance = FuncHelper.Round(iStrength * GPropertyConfig.ATTRIBUTE_STRENGTH_STATUS_RESISTANCE, 2);
         const strengthdialogVariable = {
-            strength_attack_damage: strength_attack_damage + "",
-            strength_energy_regen: strength_energy_regen + "",
-            strength_all_damage: strength_all_damage + "",
-            strength_all_damage_max: strength_all_damage_max + "",
+            prop_per_level: strength_prop_per_level + "",
+            strength_hp_bonus: strength_hp_bonus + "",
+            strength_hp_regen: strength_hp_regen + "",
+            strength_status_resistance: strength_status_resistance + "",
+            // strength_all_damage_max: strength_all_damage_max + "",
+            primary_attribute_damage: iStrength + "",
         }
         const rowcls_strength = this.getRowClassName(iBaseStrength);
         // 敏捷
@@ -74,17 +74,20 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
         let sBonusAgility = FuncHelper.SignNumber(iBonusAgility);
         const base_agility = iBaseAgility || 0;
         const bonus_agility = sBonusAgility;
-        const total_agility = iAgility;
+        const agility_prop_per_level = GToNumber(tData && tData["AttributeAgilityGain"]) || 0;
         const rowcls_agility = this.getRowClassName(iBonusAgility);
+        const agility_physical_armor = FuncHelper.Round(iAgility * GPropertyConfig.ATTRIBUTE_AGILITY_PHYSICAL_ARMOR_BASE, 3);
         const agility_attack_speed = FuncHelper.Round(iAgility * GPropertyConfig.ATTRIBUTE_AGILITY_ATTACK_SPEED, 3);
         const agility_max_attack_speed = FuncHelper.Round(iAgility * GPropertyConfig.ATTRIBUTE_AGILITY_MAX_ATTACK_SPEED, 3);
         // const agility_max_energy = iAgility * GPropertyConfig.ATTRIBUTE_AGILITY_MAX_ENERGY;
         // const primary_attribute_damage = Math.floor(FuncHelper.ToFloat(iAgility * GPropertyConfig.ATTRIBUTE_PRIMARY_ATTACK_DAMAGE));
         const agilitydialogVariable = {
+            prop_per_level: agility_prop_per_level + "",
+            agility_physical_armor: agility_physical_armor + "",
             agility_attack_speed: agility_attack_speed + "",
             agility_max_attack_speed: agility_max_attack_speed + "",
             // agility_max_energy: agility_max_energy + "",
-            // primary_attribute_damage: primary_attribute_damage + "",
+            primary_attribute_damage: iAgility + "",
         }
         // 智力
         let iIntellect = UnitHelper.GetIntellect(iLocalPortraitUnit);
@@ -93,18 +96,20 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
         let sBonusIntellect = FuncHelper.SignNumber(iBonusIntellect);;
         const base_intellect = iIntellect || 0;
         const bonus_intellect = sBonusIntellect;
-        const total_intellect = iIntellect;
+        const intellect_prop_per_level = GToNumber(tData && tData["AttributeIntelligenceGain"]) || 0;
         const rowcls_intellect = this.getRowClassName(iBonusIntellect);
         const intellect_spell_amplify = iIntellect * GPropertyConfig.ATTRIBUTE_INTELLECT_SPELL_AMPLIFY;
-        const intellect_mana = iIntellect * GPropertyConfig.ATTRIBUTE_INTELLECT_MANA;
-        const intellect_cooldown_reduction = Math.min(GPropertyConfig.ATTRIBUTE_INTELLECT_MAX_CD, FuncHelper.Round((1 - Math.pow(1 - GPropertyConfig.ATTRIBUTE_INTELLECT_COOLDOWN_REDUCTION * 0.01, iIntellect)) * 100, 2));
+        const intellect_mana_regen = FuncHelper.Round(iIntellect * GPropertyConfig.ATTRIBUTE_INTELLECT_MANA_REGEN, 3);
+        let coodown = iIntellect * GPropertyConfig.ATTRIBUTE_INTELLECT_COOLDOWN_REDUCTION;
+        const intellect_cooldown_reduction = Math.min(GPropertyConfig.ATTRIBUTE_INTELLECT_MAX_CD, (1 - Math.pow(1 - GPropertyConfig.ATTRIBUTE_INTELLECT_COOLDOWN_REDUCTION, coodown)) * 100).toFixed(2);
         // const primary_attribute_damage = Math.floor(FuncHelper.ToFloat(iIntellect * FuncHelper.ToFloat(GPropertyConfig.ATTRIBUTE_PRIMARY_ATTACK_DAMAGE)));
         // const fExtraBaseManaRegen = FuncHelper.ToFloat(iIntellect * FuncHelper.ToFloat(GPropertyConfig.ATTRIBUTE_INTELLIGENCE_MANA_REGEN));
         const intellectdialogVariable = {
+            prop_per_level: intellect_prop_per_level + "",
             intellect_spell_amplify: intellect_spell_amplify + "",
-            intellect_mana: intellect_mana + "",
+            intellect_mana_regen: intellect_mana_regen + "",
             intellect_cooldown_reduction: intellect_cooldown_reduction + "",
-            // primary_attribute_damage: primary_attribute_damage + "",
+            primary_attribute_damage: iIntellect + "",
             // fExtraBaseManaRegen: fExtraBaseManaRegen + "",
         }
         // 攻击力
@@ -172,7 +177,7 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
         const rowcls_attack_range = this.getRowClassName(fBonusAttackRange);
         // 冷却减少
         let fCooldownReduction = UnitHelper.GetCooldownReduction(iLocalPortraitUnit);
-        const cooldown_reduction = FuncHelper.Round(fCooldownReduction, 1);
+        const cooldown_reduction = FuncHelper.Round(fCooldownReduction, 1)
         // 魔法恢复
         let fBaseManaRegen = (tData && tData.StatusManaRegen) ? FuncHelper.ToFloat(tData.StatusManaRegen as string) : 0;
         let fManaRegen = UnitHelper.GetManaRegen(iLocalPortraitUnit) + fBaseManaRegen;
@@ -333,6 +338,7 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
                 <Panel id="DefenseContainer" className={CSSHelper.ClassMaker("SecondaryContainer TopBottomFlow", { Hidden: !bIsHero })}>
                     <Label id="DefenseHeader" className="ContainerHeader" localizedText="#DOTA_HUD_Defense" />
                     <Panel id="PhysicalArmorRow" className={CSSHelper.ClassMaker("StatRow", rowcls_physical_armor)}>
+                        <Image id="PhysicalArmorIcon" />
                         <Label id="PhysicalArmorLabel" localizedText="#DOTA_HUD_PhysicalArmor_Custom" className="StatName" />
                         <Panel className="LeftRightFlow">
                             <Label id="PhysicalArmor" text={`${base_physical_armor}`} className="BaseValue" />
@@ -341,6 +347,7 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
                         </Panel>
                     </Panel>
                     <Panel id="MagicalArmorRow" className={CSSHelper.ClassMaker("StatRow", rowcls_magical_armor)}>
+                        <Image id="MagicalArmorIcon" />
                         <Label id="MagicalArmorLabel" localizedText="#DOTA_HUD_MagicalArmor_Custom" className="StatName" />
                         <Panel className="LeftRightFlow">
                             <Label id="MagicalArmor" text={`${base_magical_armor}`} className="BaseValue" />
@@ -497,7 +504,7 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
                 </Panel>
             </Panel>
             <Panel id="PrimaryTipContainer">
-                <Label id="PrimaryTip" localizedText="#P6_Primary_tip" />
+                <Label id="PrimaryTip" localizedText="#UnitStatPanel_Primary_tip" />
             </Panel>
             <Panel id="AttributesContainer" className="TopBottomFlow">
                 <Panel id="StrengthContainer" className={CSSHelper.ClassMaker("LeftRightFlow AttributeRow",
@@ -510,10 +517,10 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
                         <Panel id="AttributeValues" className="LeftRightFlow">
                             <Label id="BaseStrengthLabel" className="BaseAttributeValue" text={`${base_strength}`} />
                             <Label id="BonusStrengthLabel" className="BonusAttributeValue" text={`${bonus_strength}`} />
-                            {/* <Label id="TotalStrengthLabel" className="TotalAttributeValue" text={`${total_strength}`} /> */}
+                            <Label id="Prop_PerLevel" className="TotalAttributeValue" localizedText="#UnitStatPanel_Prop_PerLevel" dialogVariables={strengthdialogVariable} />
                         </Panel>
-                        <Label id="StrengthDamageLabel" className="PrimaryAttributeBonus" localizedText="#P6_StrengthDetails_Custom_Primary" html={true} dialogVariables={strengthdialogVariable} />
-                        <Label id="StrengthDetails" className="StatBreakdownLabel" localizedText="#P6_StrengthDetails_Custom" dialogVariables={strengthdialogVariable} />
+                        {iPrimaryAttribute == Attributes.DOTA_ATTRIBUTE_STRENGTH && <Label id="StrengthDamageLabel" className="PrimaryAttributeBonus" localizedText="#UnitStatPanel_StrengthDetails_Custom_Primary" html={true} dialogVariables={strengthdialogVariable} />}
+                        <Label id="StrengthDetails" className="StatBreakdownLabel" localizedText="#UnitStatPanel_StrengthDetails_Custom" dialogVariables={strengthdialogVariable} />
                     </Panel>
                 </Panel>
                 <Panel id="AgilityContainer" className={CSSHelper.ClassMaker("LeftRightFlow AttributeRow",
@@ -525,10 +532,10 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
                         <Panel id="AttributeValues" className="LeftRightFlow">
                             <Label id="BaseAgilityLabel" className="BaseAttributeValue" text={`${base_agility}`} />
                             <Label id="BonusAgilityabel" className="BonusAttributeValue" text={`${bonus_agility}`} />
-                            {/* <Label id="TotalAgilityabel" className="TotalAttributeValue" text={`${total_agility}`} /> */}
+                            <Label id="Prop_PerLevel" className="TotalAttributeValue" localizedText="#UnitStatPanel_Prop_PerLevel" dialogVariables={agilitydialogVariable} />
                         </Panel>
-                        <Label id="AgilityDamageLabel" className="PrimaryAttributeBonus" localizedText="#P6_AgilityDetails_Custom_Primary" dialogVariables={agilitydialogVariable} />
-                        <Label id="AgilityDetails" className="StatBreakdownLabel" localizedText="#P6_AgilityDetails_Custom" dialogVariables={agilitydialogVariable} />
+                        {iPrimaryAttribute == Attributes.DOTA_ATTRIBUTE_AGILITY && <Label id="AgilityDamageLabel" className="PrimaryAttributeBonus" localizedText="#UnitStatPanel_AgilityDetails_Custom_Primary" dialogVariables={agilitydialogVariable} />}
+                        <Label id="AgilityDetails" className="StatBreakdownLabel" localizedText="#UnitStatPanel_AgilityDetails_Custom" dialogVariables={agilitydialogVariable} />
                     </Panel>
                 </Panel>
                 <Panel id="IntellectContainer" className={CSSHelper.ClassMaker("LeftRightFlow AttributeRow", rowcls_intellect, {
@@ -539,10 +546,10 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
                         <Panel id="AttributeValues" className="LeftRightFlow">
                             <Label id="BaseIntellectLabel" className="BaseAttributeValue" text={`${base_intellect}`} />
                             <Label id="BonusIntellectLabel" className="BonusAttributeValue" text={`${bonus_intellect}`} />
-                            {/* <Label id="TotalIntellectLabel" className="TotalAttributeValue" text={`${total_intellect}`} /> */}
+                            <Label id="Prop_PerLevel" className="TotalAttributeValue" localizedText="#UnitStatPanel_Prop_PerLevel" dialogVariables={intellectdialogVariable} />
                         </Panel>
-                        <Label id="IntellectDamageLabel" className="PrimaryAttributeBonus" localizedText="#P6_IntellectDetails_Custom_Primary" dialogVariables={intellectdialogVariable} />
-                        <Label id="IntellectDetails" className="StatBreakdownLabel" localizedText="#P6_IntellectDetails_Custom" dialogVariables={intellectdialogVariable} />
+                        {iPrimaryAttribute == Attributes.DOTA_ATTRIBUTE_INTELLECT && <Label id="IntellectDamageLabel" className="PrimaryAttributeBonus" localizedText="#UnitStatPanel_IntellectDetails_Custom_Primary" dialogVariables={intellectdialogVariable} />}
+                        <Label id="IntellectDetails" className="StatBreakdownLabel" localizedText="#UnitStatPanel_IntellectDetails_Custom" dialogVariables={intellectdialogVariable} />
                     </Panel>
                 </Panel>
             </Panel>

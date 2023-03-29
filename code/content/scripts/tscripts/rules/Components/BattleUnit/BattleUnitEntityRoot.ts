@@ -22,8 +22,6 @@ export class BattleUnitEntityRoot extends BaseEntityRoot implements IRoundStateC
     public iStar: number = 1;
     @serializeETProps()
     public IsShowOverhead: boolean = false;
-    @serializeETProps()
-    public PrimaryAttribute: number = 1;
 
     readonly isAlive: boolean = true;
     JoinInRound(): void {
@@ -50,11 +48,11 @@ export class BattleUnitEntityRoot extends BaseEntityRoot implements IRoundStateC
         if (!domain.IsAttacker()) {
             return;
         }
-        const m = modifier_hero_property.applyOnly(domain, domain);
-        m.StackCountHandler = GHandler.create(this, (attr: Attributes) => {
-            this.PrimaryAttribute = attr;
-            this.SyncClient(true);
-        }, null, false);
+        modifier_hero_property.applyOnly(domain, domain);
+        // m.StackCountHandler = GHandler.create(this, (attr: Attributes) => {
+        //     this.PrimaryAttribute = attr;
+        //     this.SyncClient(true);
+        // }, null, false);
     }
 
     SetUIOverHead(isshowCustom: boolean, isshowdota: boolean) {
