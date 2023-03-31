@@ -1355,19 +1355,17 @@ export class modifier_imba_broodmother_spiderling_volatile_debuff extends BaseMo
         return "broodmother_spawn_spiderite";
     }
     BeCreated(p_0: any,): void {
-        if (IsServer()) {
-            if (!this.GetAbilityPlus()) {
-                this.Destroy();
-            }
-        }
-        this.caster = this.GetCasterPlus();
         this.ability = this.GetAbilityPlus();
-        this.parent = this.GetParentPlus();
-        this.owner = this.caster.GetOwner();
         this.damage_per_stack = this.ability.GetSpecialValueFor("damage_per_stack");
         this.slow_per_stack_pct = this.ability.GetSpecialValueFor("slow_per_stack_pct");
         this.damage_interval = this.ability.GetSpecialValueFor("damage_interval");
         this.damage = this.damage_per_stack * this.damage_interval;
+        if (!IsServer()) {
+            return
+        }
+        this.caster = this.GetCasterPlus();
+        this.parent = this.GetParentPlus();
+        this.owner = this.caster.GetOwner();
         if (IsServer()) {
             this.StartIntervalThink(this.damage_interval);
         }

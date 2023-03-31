@@ -1,7 +1,6 @@
 
 import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
-import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -955,13 +954,13 @@ export class modifier_phantom_assassin_gravestone extends BaseModifier_Plus {
         this.StartIntervalThink(0.25);
     }
     OnIntervalThink(): void {
-        NetTablesHelper.SetDotaEntityData("update_pa_arcana_tooltips", {
-            victim: this.GetStackCount(),
-            victim_id: this.GetParentPlus().TempData().victim_id,
-            killer_id: this.GetParentPlus().entindex(),
-            epitaph: this.GetParentPlus().TempData().epitaph_number,
-            cdp_damage: this.cdp_damage
-        })
+        // NetTablesHelper.SetDotaEntityData("update_pa_arcana_tooltips", {
+        //     victim: this.GetStackCount(),
+        //     victim_id: this.GetParentPlus().TempData().victim_id,
+        //     killer_id: this.GetParentPlus().entindex(),
+        //     epitaph: this.GetParentPlus().TempData().epitaph_number,
+        //     cdp_damage: this.cdp_damage
+        // })
     }
 }
 @registerModifier()

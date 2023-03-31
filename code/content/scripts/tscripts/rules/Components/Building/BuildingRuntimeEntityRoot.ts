@@ -34,7 +34,7 @@ export class BuildingRuntimeEntityRoot extends BattleUnitEntityRoot {
         this.AbilityManagerComp().OnRound_Prize(round);
         this.InventoryComp().OnRound_Prize(round);
         if (round.isWin) {
-            // this.StartFindTreasure();
+            this.onVictory();
         }
     }
     OnRound_WaitingEnd() {

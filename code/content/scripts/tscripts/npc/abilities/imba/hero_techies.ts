@@ -68,9 +68,9 @@ export class imba_techies_land_mines extends BaseAbility_Plus {
     IsNetherWardStealable() {
         return false;
     }
-    GetIntrinsicModifierName(): string {
-        return "modifier_generic_charges";
-    }
+    // GetIntrinsicModifierName(): string {
+    //     return "modifier_generic_charges";
+    // }
     // GetManaCost(level: number): number {
     //     let caster = this.GetCasterPlus();
     //     // let initial_mana_cost = this.GetSpecialValueFor("AbilityManaCost");
@@ -203,6 +203,8 @@ export class imba_techies_land_mines extends BaseAbility_Plus {
     GetManaCost(level: number): number {
         return 0;
     }
+
+
     AutoSpellSelf() {
         return AI_ability.POSITION_if_enemy(this);
     }
@@ -1103,7 +1105,7 @@ export class modifier_imba_blast_off_movement extends BaseModifierMotionBoth_Plu
             ParticleManager.SetParticleControl(particle_explosion_fx, 0, this.parent.GetAbsOrigin());
             ParticleManager.ReleaseParticleIndex(particle_explosion_fx);
             GridNav.DestroyTreesAroundPoint(this.parent.GetAbsOrigin(), this.radius, true);
-            let enemies = FindUnitsInRadius(this.parent.GetTeamNumber(), this.parent.GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
+            let enemies = this.parent.FindUnitsInRadiusPlus(this.radius);
             let modifier_silence = "modifier_imba_blast_off_silence";
             let enemy_killed = false;
             for (const [_, enemy] of GameFunc.iPair(enemies)) {

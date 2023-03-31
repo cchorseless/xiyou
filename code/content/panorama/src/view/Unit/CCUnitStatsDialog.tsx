@@ -113,13 +113,12 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
             // fExtraBaseManaRegen: fExtraBaseManaRegen + "",
         }
         // 攻击力
-        let fBonusDamage = Entities.GetDamageBonus(iLocalPortraitUnit);
-        let fMinDamage = Entities.GetDamageMin(iLocalPortraitUnit);
-        let fMaxDamage = Entities.GetDamageMax(iLocalPortraitUnit);
-        let fBaseDamage = (fMinDamage + fMaxDamage) / 2;
+        let fMaxDamage = UnitHelper.GetAttackDamage(iLocalPortraitUnit);
+        let fBaseDamage = UnitHelper.GetBaseAttackDamage(iLocalPortraitUnit);
+        let fBonusDamage = fMaxDamage - fBaseDamage;
         let sBonusDamage = FuncHelper.SignNumber(fBonusDamage);;
-        const base_damage_min = fMinDamage;
-        const base_damage_max = fMaxDamage;
+        // const base_damage_min = fMinDamage;
+        // const base_damage_max = fMaxDamage;
         const base_damage = fBaseDamage;
         const bonus_damage = sBonusDamage;
         const rowcls_damage = this.getRowClassName(fBonusDamage);

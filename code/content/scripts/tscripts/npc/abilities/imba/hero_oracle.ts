@@ -116,6 +116,7 @@ export class imba_oracle_fortunes_end extends BaseAbility_Plus {
         });
     }
     OnProjectileHit_ExtraData(target: CDOTA_BaseNPC | undefined, location: Vector, data: any): boolean | void {
+        if (target && !target.IsRealUnit()) { return }
         if (target && data.charge_pct && !target.TriggerSpellAbsorb(this)) {
             if (!data.autocast_state || data.autocast_state == 0) {
                 this.ApplyFortunesEnd(target, data.target_sound, data.aoe_particle_name, data.modifier_name, data.charge_pct);

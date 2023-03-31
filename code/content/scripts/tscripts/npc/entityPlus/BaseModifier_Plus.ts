@@ -46,6 +46,7 @@ export class BaseModifier_Plus extends BaseModifier {
         }
         return value;
     }
+
 }
 
 export class BaseModifierMotionBoth_Plus extends BaseModifierMotionBoth {

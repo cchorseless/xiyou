@@ -673,6 +673,7 @@ export class imba_earthshaker_echo_slam extends BaseAbility_Plus {
         if (!IsServer()) {
             return;
         }
+        if (target && !target.IsRealUnit()) { return }
         if (target && !target.IsMagicImmune()) {
             let damageTable = {
                 victim: target,

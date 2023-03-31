@@ -843,6 +843,7 @@ export class imba_witch_doctor_death_ward extends BaseAbility_Plus {
         }
     }
     OnProjectileHit_ExtraData(target: CDOTA_BaseNPC | undefined, vLocation: Vector, ExtraData: any): boolean | void {
+        if (target && !target.IsRealUnit()) { return }
         if (this.tempdata[ExtraData.index]) {
             if (!this.tempdata[ExtraData.index].IsNull()) {
                 if (this.GetCasterPlus().HasScepter()) {

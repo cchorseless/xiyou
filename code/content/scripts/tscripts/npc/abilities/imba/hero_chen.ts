@@ -38,6 +38,7 @@ export class imba_chen_penitence extends BaseAbility_Plus {
         if (!IsServer() || !hTarget) {
             return;
         }
+        if (hTarget && !hTarget.IsRealUnit()) { return }
         if (hTarget.TriggerSpellAbsorb(this)) {
             return undefined;
         }
@@ -579,6 +580,9 @@ export class modifier_imba_chen_holy_persuasion extends BaseModifier_Plus {
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
     CC_OnDeath(keys: ModifierInstanceEvent): void {
         if (!IsServer()) {
+            return;
+        }
+        if (!GFuncEntity.IsValid(this.GetCasterPlus())) {
             return;
         }
         if (keys.unit == this.GetParentPlus()) {

@@ -327,7 +327,8 @@ export class BaseNpc_Plus extends BaseNpc {
                     }
                 }
             }
-            illusion.addBuff("modifier_illusion", this, null, hModifierKeys)
+            illusion.addBuff("modifier_illusion", this, null, hModifierKeys);
+            illusion.addBuff("modifier_generic_illusion", this, null, hModifierKeys);
             illusion.SetHealth(copyunit.GetHealth())
             illusion.SetMana(copyunit.GetMana())
             let particleID = ParticleManager.CreateParticle("particles/generic_gameplay/illusion_created.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, illusion)
@@ -346,6 +347,26 @@ export class BaseNpc_Plus extends BaseNpc {
         return r;
     }
 
+    /**
+     * @Server 
+     * @param fDuration 
+     * @returns 
+     */
+    SetIllusionDuration?(fDuration: number, iscover = true) {
+        if (!IsServer()) { return }
+        if (this.IsIllusion()) {
+            let hModifier = this.FindModifierByName("modifier_illusion");
+            if (hModifier) {
+                fDuration = iscover ? fDuration : hModifier.GetRemainingTime() + fDuration;
+                hModifier.SetDuration(fDuration, true);
+            }
+            hModifier = this.FindModifierByName("modifier_generic_illusion");
+            if (hModifier) {
+                fDuration = iscover ? fDuration : hModifier.GetRemainingTime() + fDuration;
+                hModifier.SetDuration(fDuration, true);
+            }
+        }
+    }
 
 
     /**
@@ -363,7 +384,7 @@ export class BaseNpc_Plus extends BaseNpc {
         iTeamNumber = iTeamNumber || this.GetTeamNumber()
         let hSummon = BaseNpc_Plus.CreateUnitByName(sUnitName, vLocation, this, bFindClearSpace, iTeamNumber)
         fDuration = fDuration + GPropertyCalculate.SumProps(this, null, GPropertyConfig.EMODIFIER_PROPERTY.SUMMON_DURATION_BONUS);
-        hSummon.addBuff("modifier_summon", this, null, { duration: fDuration < 0 ? null : fDuration });
+        hSummon.addBuff("modifier_generic_summon", this, null, { duration: fDuration < 0 ? null : fDuration });
         if (fDuration > 0) {
             hSummon.addBuff("modifier_kill", this, null, { duration: fDuration });
         }

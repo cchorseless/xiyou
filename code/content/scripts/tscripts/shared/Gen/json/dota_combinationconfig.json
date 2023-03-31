@@ -849,7 +849,7 @@
     "active_count": 3,
     "acitve_common_effect": "modifier_sect_assault_base_a",
     "acitve_special_effect": "",
-    "heroid": "building_hero_sandking",
+    "heroid": "building_hero_sand_king",
     "Abilityid": "imba_sandking_burrowstrike",
     "Equipid": 0
   },
@@ -863,7 +863,7 @@
     "active_count": 6,
     "acitve_common_effect": "modifier_sect_assault_base_b",
     "acitve_special_effect": "modifier_sect_assault_sandking_burrowstrike_b",
-    "heroid": "building_hero_sandking",
+    "heroid": "building_hero_sand_king",
     "Abilityid": "imba_sandking_burrowstrike",
     "Equipid": 0
   },
@@ -877,7 +877,7 @@
     "active_count": 9,
     "acitve_common_effect": "modifier_sect_assault_base_c",
     "acitve_special_effect": "modifier_sect_assault_sandking_burrowstrike_c",
-    "heroid": "building_hero_sandking",
+    "heroid": "building_hero_sand_king",
     "Abilityid": "imba_sandking_burrowstrike",
     "Equipid": 0
   },
@@ -8577,7 +8577,7 @@
     "active_count": 2,
     "acitve_common_effect": "modifier_sect_poision_base_a",
     "acitve_special_effect": "",
-    "heroid": "building_hero_sandking",
+    "heroid": "building_hero_sand_king",
     "Abilityid": "imba_sandking_caustic_finale",
     "Equipid": 0
   },
@@ -8591,7 +8591,7 @@
     "active_count": 4,
     "acitve_common_effect": "modifier_sect_poision_base_b",
     "acitve_special_effect": "modifier_sect_poision_sandking_caustic_finale_b",
-    "heroid": "building_hero_sandking",
+    "heroid": "building_hero_sand_king",
     "Abilityid": "imba_sandking_caustic_finale",
     "Equipid": 0
   },
@@ -8605,7 +8605,7 @@
     "active_count": 6,
     "acitve_common_effect": "modifier_sect_poision_base_c",
     "acitve_special_effect": "modifier_sect_poision_sandking_caustic_finale_c",
-    "heroid": "building_hero_sandking",
+    "heroid": "building_hero_sand_king",
     "Abilityid": "imba_sandking_caustic_finale",
     "Equipid": 0
   },
@@ -11097,7 +11097,7 @@
     "active_count": 2,
     "acitve_common_effect": "modifier_sect_thorns_base_a",
     "acitve_special_effect": "",
-    "heroid": "building_hero_sandking",
+    "heroid": "building_hero_sand_king",
     "Abilityid": "imba_sandking_epicenter",
     "Equipid": 0
   },
@@ -11111,7 +11111,7 @@
     "active_count": 4,
     "acitve_common_effect": "modifier_sect_thorns_base_b",
     "acitve_special_effect": "modifier_sect_thorns_sandking_epicenter_b",
-    "heroid": "building_hero_sandking",
+    "heroid": "building_hero_sand_king",
     "Abilityid": "imba_sandking_epicenter",
     "Equipid": 0
   },
@@ -11125,7 +11125,7 @@
     "active_count": 6,
     "acitve_common_effect": "modifier_sect_thorns_base_c",
     "acitve_special_effect": "modifier_sect_thorns_sandking_epicenter_c",
-    "heroid": "building_hero_sandking",
+    "heroid": "building_hero_sand_king",
     "Abilityid": "imba_sandking_epicenter",
     "Equipid": 0
   },

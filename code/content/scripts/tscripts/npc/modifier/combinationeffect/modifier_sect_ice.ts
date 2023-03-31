@@ -1,61 +1,38 @@
+import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerModifier } from "../../entityPlus/Base_Plus";
 import { modifier_combination_effect } from "./modifier_combination_effect";
 
 
-@registerModifier()
-export class modifier_sect_ice_ancient_apparition_cold_feet_c extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_ice_ancient_apparition_cold_feet_b extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_ice_base_c extends modifier_combination_effect {
-}
+
 @registerModifier()
 export class modifier_sect_ice_base_a extends modifier_combination_effect {
+
+    Init() {
+        let parent = this.GetParentPlus();
+        // this.buff_fx = ResHelper.CreateParticleEx("particles/status_fx/status_effect_drow_frost_arrow.vpcf", ParticleAttachment_t.PATTACH_OVERHEAD_FOLLOW, parent);
+        // ParticleManager.SetParticleControl(this.buff_fx, 0, Vector(100, 100, 200));
+        // this.AddParticle(this.buff_fx, false, false, -1, false, false);
+    }
 }
 @registerModifier()
 export class modifier_sect_ice_base_b extends modifier_combination_effect {
 }
+
 @registerModifier()
-export class modifier_sect_ice_crystal_maiden_crystal_nova_c extends modifier_combination_effect {
+export class modifier_sect_ice_base_c extends modifier_combination_effect {
 }
+
 @registerModifier()
-export class modifier_sect_ice_crystal_maiden_crystal_nova_b extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_ice_drow_ranger_frost_arrows_c extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_ice_drow_ranger_frost_arrows_b extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_ice_invoker_cold_snap_c extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_ice_invoker_cold_snap_b extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_ice_jakiro_ice_path_c extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_ice_jakiro_ice_path_b extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_ice_lich_chain_frost_c extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_ice_lich_chain_frost_b extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_ice_tusk_ice_shards_c extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_ice_tusk_ice_shards_b extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_ice_winter_wyvern_arctic_burn_c extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_ice_winter_wyvern_arctic_burn_b extends modifier_combination_effect {
+export class modifier_sect_ice_enemy_ice extends BaseModifier_Plus {
+
+    GetStatusEffectName(): string {
+        return "particles/status_fx/status_effect_drow_frost_arrow.vpcf";
+    }
+
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
+    attack_speed_reduction: number = 0;
+
+
+    // @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_REGEN_CONSTANT)
+    // attack_speed_reduction: number = 0;
 }

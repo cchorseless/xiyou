@@ -4,7 +4,7 @@ import { HeroEquipComponent } from "../../../shared/service/equip/HeroEquipCompo
 
 @GReloadable
 export class ECombinationLabelItem extends ET.Entity {
-    public IsActive: boolean = true;
+    public IsActive: boolean = false;
     public SectName: string = "";
     public SourceEntityConfigId: string = "";
     public SourceEntityId: string = "";
@@ -16,17 +16,26 @@ export class ECombinationLabelItem extends ET.Entity {
         this.SectName = SectName;
         this.SourceEntityConfigId = this.getSourceEntity().ConfigID;
         this.checkActive();
-        this.addSelfToManager();
+
     }
     checkActive() {
+        if (this.IsActive) { return }
         let equipid = GJsonConfigHelper.GetAbilitySectUnlockEquipid(this.SourceEntityConfigId)
         // 解锁装备检查
         if (equipid > 0) {
-            this.IsActive = HeroEquipComponent.CheckPlayerIsScepter(this.BelongPlayerid, equipid)
+            let unitroot = this.GetDomain<IBaseNpc_Plus>().ETRoot.As<IBattleUnitEntityRoot>();
+            this.IsActive = unitroot.checkCanStarUp() == false || HeroEquipComponent.CheckPlayerIsScepter(this.BelongPlayerid, equipid);
+            GLogHelper.print("ECombinationLabelItem checkActive", this.IsActive, this.SourceEntityConfigId, equipid, this.BelongPlayerid)
+        }
+        else {
+            this.IsActive = true;
+        }
+        if (this.IsActive) {
+            this.addSelfToManager();
         }
     }
 
-    addSelfToManager() {
+    private addSelfToManager() {
         let unitroot = this.GetDomain<IBaseNpc_Plus>().ETRoot.As<IBattleUnitEntityRoot>();
         if (this.IsActive && unitroot.ChessComp().isInBattle) {
             if (unitroot.IsBuilding()) {

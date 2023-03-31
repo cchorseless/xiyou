@@ -46,7 +46,7 @@ export class BattleUnitManagerComponent extends ET.Component {
         let allillon = domain.GetDomainChilds(BattleUnitIllusionEntityRoot).filter((s) => {
             return s.GetDomain<IBaseNpc_Plus>().GetTeam() == team;
         });
-        r = r.concat(allsummon).concat(allillon).filter((b) => { return b.isAlive });
+        r = r.concat(allsummon).concat(allillon).filter((b) => { return b.isAlive && b.GetDomain<IBaseNpc_Plus>().IsAttacker() });
         return r;
     }
 

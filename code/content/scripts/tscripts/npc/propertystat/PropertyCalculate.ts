@@ -163,15 +163,51 @@ export module PropertyCalculate {
         let hp_base = PropertyCalculate.SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.HP_BASE)
         return fDefault + hp_base;
     }
-
-    /**额外基础攻击力
+    /**
+     * 总攻击力
      * @Both
      * @param hUnit 
      * @param tParams 
      * @returns 
      */
-    export function GetBaseBonusDamage(hUnit: IBaseNpc_Plus, tParams: ICustomModifierAttackEvent) {
-        return SumProps(hUnit, tParams, GPropertyConfig.EMODIFIER_PROPERTY.BASEATTACK_BONUSDAMAGE)
+    export function GetAttackDamage(hUnit: IBaseNpc_Plus) {
+        let baseatk = GetBaseAttackDamage(hUnit);
+        let bounsatk = SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS);
+        let bounsatk_pect = SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS_PERCENTAGE);
+        bounsatk = bounsatk * (100 + bounsatk_pect) / 100;
+        let atk_pect = SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_PERCENTAGE);
+        return math.floor((baseatk + bounsatk) * (100 + atk_pect) / 100);
+    }
+    /**基础攻击力
+     * @Both
+     * @param hUnit 
+     * @param tParams 
+     * @returns 
+     */
+    export function GetBaseAttackDamage(hUnit: IBaseNpc_Plus) {
+        let fDefault = 0;
+        if (GFuncEntity.IsValid(hUnit)) {
+            fDefault = GetUnitCache(hUnit, "AttackDamageMin");
+            if (fDefault == 0) {
+                let min = GetUnitCache(hUnit, "AttackDamageMin");
+                let count = 0;
+                if (min > 0) {
+                    fDefault += min;
+                    count++;
+                }
+                let max = GetUnitCache(hUnit, "AttackDamageMax");
+                if (max > 0) {
+                    fDefault += max;
+                    count++;
+                }
+                if (count > 0) {
+                    fDefault = fDefault / count;
+                }
+            }
+        }
+        let baseatk = fDefault + SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.BASEATTACK_BONUSDAMAGE);
+        let baseatk_pect = SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BASE_PERCENTAGE);
+        return math.floor(baseatk * (100 + baseatk_pect) / 100);
     }
     /** 基础物理防御
      * @Both
@@ -202,7 +238,7 @@ export module PropertyCalculate {
     export function GetBaseMagicalArmor(hUnit: IBaseNpc_Plus) {
         let fValue = 0;
         if (GFuncEntity.IsValid(hUnit)) {
-            fValue = GetUnitCache(hUnit, "MagicalResistance") + SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_ARMOR_BASE)
+            fValue = GetUnitCache(hUnit, "ArmorMagical") + SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_ARMOR_BASE)
         }
         return fValue;
     }
@@ -416,10 +452,10 @@ export module PropertyCalculate {
     }
     // 吸血
     export function GetLifeStealPercent(hUnit: IBaseNpc_Plus) {
-        return SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.LIFESTEAL_PERCENTAGE,)
+        return SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.LIFESTEAL_AMPLIFY_PERCENTAGE,)
     }
     export function GetSpellLifeStealPercent(hUnit: IBaseNpc_Plus) {
-        return SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.SPELL_LIFESTEAL_PERCENTAGE,)
+        return SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.SPELL_LIFESTEAL_AMPLIFY_PERCENTAGE,)
     }
 
     /**-------------基础三围-------------------- */
@@ -732,13 +768,6 @@ export module PropertyCalculate {
     }
     export function GetEntityIndex(hUnit: IBaseNpc_Plus) {
         return hUnit.GetEntityIndex()
-    }
-    export function GetSpellLifesteal(hUnit: IBaseNpc_Plus) {
-        return SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.SPELL_LIFESTEAL_PERCENTAGE);
-    }
-
-    export function GetLifesteal(hUnit: IBaseNpc_Plus) {
-        return SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.LIFESTEAL_PERCENTAGE);
     }
 
 }

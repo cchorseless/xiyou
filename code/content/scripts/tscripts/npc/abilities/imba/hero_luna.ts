@@ -130,6 +130,7 @@ export class imba_luna_moon_glaive extends BaseAbility_Plus {
             return;
         }
         if (hTarget) {
+            if (hTarget && !hTarget.IsRealUnit()) { return }
             this.damage_type = DAMAGE_TYPES.DAMAGE_TYPE_PHYSICAL;
             let damageTable = {
                 victim: hTarget,
@@ -577,8 +578,8 @@ export class modifier_imba_luna_eclipse extends BaseModifier_Plus {
     public cast_range_tooltip_scepter: number;
     public night_duration: number;
     public dark_moon_additional_beams: any;
-    public moonscraper_beams: any;
-    public moonscraper_spread: any;
+    public moonscraper_beams: number;
+    public moonscraper_spread: number;
     public moonscraper_radius: number;
     public beams_elapsed: any;
     public targets: { [k: string]: number };
@@ -609,7 +610,7 @@ export class modifier_imba_luna_eclipse extends BaseModifier_Plus {
         this.night_duration = this.GetSpecialValueFor("night_duration");
         this.dark_moon_additional_beams = this.GetSpecialValueFor("dark_moon_additional_beams");
         this.moonscraper_beams = this.GetSpecialValueFor("moonscraper_beams");
-        this.moonscraper_spread = this.GetSpecialValueFor("moonscraper_spread");
+        this.moonscraper_spread = 10;
         this.moonscraper_radius = this.GetSpecialValueFor("moonscraper_radius");
         if (!IsServer()) {
             return;

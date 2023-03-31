@@ -233,6 +233,7 @@ export class imba_naga_siren_ensnare extends BaseAbility_Plus {
     }
     OnProjectileHit_ExtraData(hTarget: CDOTA_BaseNPC | undefined, vLocation: Vector, hExtraData: any): boolean | void {
         if (hTarget) {
+            if (hTarget && !hTarget.IsRealUnit()) { return }
             if (!hTarget.HasModifier("modifier_imba_naga_siren_ensnare")) {
                 hTarget.EmitSound("Hero_NagaSiren.Ensnare.Target");
             }

@@ -122,7 +122,7 @@ export class imba_arc_warden_magnetic_field extends BaseAbility_Plus {
             if (count == 1) {
                 return true
             }
-            return unit != this.GetCasterPlus() && !unit.IsHero();
+            return unit != this.GetCasterPlus() && unit.IsRealUnit();
         }, FindOrder.FIND_FARTHEST);
     }
 }
@@ -312,6 +312,7 @@ export class imba_arc_warden_spark_wraith extends BaseAbility_Plus {
         }
     }
     OnProjectileHit_ExtraData(target: CDOTA_BaseNPC | undefined, location: Vector, ExtraData: any): boolean | void {
+        if (target && !target.IsRealUnit()) { return }
         if (target) {
             AddFOWViewer(this.GetCasterPlus().GetTeamNumber(), location, this.GetSpecialValueFor("wraith_vision_radius"), this.GetSpecialValueFor("wraith_vision_duration"), true);
             if (!target.IsMagicImmune()) {

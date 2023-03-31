@@ -93,6 +93,7 @@ export class imba_phantom_lancer_spirit_lance extends BaseAbility_Plus {
         }
     }
     OnProjectileHit_ExtraData(target: CDOTA_BaseNPC | undefined, location: Vector, extradata: any): boolean | void {
+        if (target && !target.IsRealUnit()) { return }
         if (!target || (target.GetTeamNumber() != this.GetCasterPlus().GetTeamNumber() && target.IsMagicImmune())) {
             return undefined;
         }
@@ -143,15 +144,16 @@ export class imba_phantom_lancer_spirit_lance extends BaseAbility_Plus {
                 if (!target.IsRealUnit()) {
                     illusion_type = this.GetCasterPlus();
                 }
-                let illusions = this.GetCasterPlus().CreateIllusion(illusion_type, {
-                    outgoing_damage: this.GetSpecialValueFor("illusion_damage_out_pct"),
-                    incoming_damage: this.GetSpecialValueFor("illusion_damage_in_pct"),
-                    bounty_base: 5,
-                    bounty_growth: undefined,
-                    outgoing_damage_structure: undefined,
-                    outgoing_damage_roshan: undefined,
-                    duration: this.GetSpecialValueFor("illusion_duration") + this.GetSpecialValueFor("illusory_heart_bonus_duration")
-                });
+                let illusions = this.GetCasterPlus().CreateIllusion(illusion_type,
+                    {
+                        outgoing_damage: this.GetSpecialValueFor("illusion_damage_out_pct"),
+                        incoming_damage: this.GetSpecialValueFor("illusion_damage_in_pct"),
+                        bounty_base: 5,
+                        bounty_growth: undefined,
+                        outgoing_damage_structure: undefined,
+                        outgoing_damage_roshan: undefined,
+                        duration: this.GetSpecialValueFor("illusion_duration") + this.GetSpecialValueFor("illusory_heart_bonus_duration")
+                    });
                 for (const [_, illusion] of GameFunc.iPair(illusions)) {
                     this.spawn_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_phantom_lancer/phantom_lancer_spawn_illusion.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, illusion);
                     ParticleManager.SetParticleControlEnt(this.spawn_particle, 0, illusion, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, "attach_hitloc", illusion.GetAbsOrigin(), true);
@@ -313,7 +315,7 @@ export class imba_phantom_lancer_doppelwalk extends BaseAbility_Plus {
             this.illusion_1.AddNewModifier(this.GetCasterPlus(), this, "modifier_phantom_lancer_juxtapose_illusion", {});
         } else {
             this.illusion_1.SetHealth(this.GetCasterPlus().GetHealth());
-            this.illusion_1.findBuff("modifier_illusion").SetDuration(this.GetSpecialValueFor("illusion_duration") + this.GetSpecialValueFor("delay"), true);
+            this.illusion_1.SetIllusionDuration(this.GetSpecialValueFor("illusion_duration") + this.GetSpecialValueFor("delay"));
         }
         affected_units.push(this.illusion_1);
         if (!this.illusion_2 || this.illusion_2.IsNull() || !this.illusion_2.IsAlive()) {
@@ -330,14 +332,15 @@ export class imba_phantom_lancer_doppelwalk extends BaseAbility_Plus {
             this.illusion_2.AddNewModifier(this.GetCasterPlus(), this, "modifier_phantom_lancer_juxtapose_illusion", {});
         } else {
             this.illusion_2.SetHealth(this.GetCasterPlus().GetHealth());
-            this.illusion_2.findBuff("modifier_illusion").SetDuration(this.GetSpecialValueFor("illusion_duration") + this.GetSpecialValueFor("delay"), true);
+            this.illusion_2.SetIllusionDuration(this.GetSpecialValueFor("illusion_duration") + this.GetSpecialValueFor("delay"));
         }
         affected_units.push(this.illusion_2);
         if (this.illusion_3 && !this.illusion_3.IsNull() && this.illusion_3.IsAlive()) {
             this.illusion_3.ForceKill(false);
         }
-        for (const [_, unit] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCursorPosition(), undefined, this.GetSpecialValueFor("search_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_CLOSEST, false))) {
-            if (unit.GetUnitName() != this.GetCasterPlus().GetUnitName() && (unit.IsRealUnit() || unit.IsClone() || unit.IsTempestDouble() || unit.IsIllusion())) {
+        let aroundunits = this.GetCasterPlus().FindUnitsInRadiusPlus(this.GetSpecialValueFor("search_radius"), this.GetCursorPosition(), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH);
+        for (const [_, unit] of GameFunc.iPair(aroundunits)) {
+            if (unit.GetUnitName() != this.GetCasterPlus().GetUnitName() && (unit.IsAttacker() || unit.IsClone() || unit.IsTempestDouble() || unit.IsIllusion())) {
                 this.illusion_3 = this.GetCasterPlus().CreateIllusion(unit, {
                     outgoing_damage: -100,
                     incoming_damage: 0,
@@ -350,8 +353,8 @@ export class imba_phantom_lancer_doppelwalk extends BaseAbility_Plus {
                 if (this.illusion_3) {
                     this.illusion_3.AddNewModifier(this.GetCasterPlus(), this, "modifier_phantom_lancer_doppelwalk_illusion", {});
                     this.illusion_3.AddNewModifier(this.GetCasterPlus(), this, "modifier_phantom_lancer_juxtapose_illusion", {});
+                    return;
                 }
-                return;
             }
         }
         affected_units.push(this.illusion_3);
@@ -413,9 +416,7 @@ export class modifier_imba_phantom_lancer_doppelwalk_phase extends BaseModifier_
         ParticleManager.SetParticleControl(doppleganger_particle, 0, this.GetParentPlus().GetAbsOrigin());
         ParticleManager.SetParticleControl(doppleganger_particle, 1, this.new_pos);
         this.AddParticle(doppleganger_particle, false, false, -1, false, false);
-        if (this.GetParentPlus().IsIllusion() && this.GetParentPlus().HasModifier("modifier_illusion")) {
-            this.GetParentPlus().findBuff("modifier_illusion").SetDuration(this.GetParentPlus().FindModifierByName("modifier_illusion").GetRemainingTime() + this.GetSpecialValueFor("illusion_extended_duration"), true);
-        }
+        this.GetParentPlus().SetIllusionDuration(this.GetSpecialValueFor("illusion_extended_duration"), false);
     }
     BeDestroy(): void {
         if (!IsServer()) {
@@ -748,6 +749,7 @@ export class imba_phantom_lancer_sun_catcher extends BaseAbility_Plus {
         if (!IsServer()) {
             return;
         }
+        if (hTarget && !hTarget.IsRealUnit()) { return }
         if (!hTarget) {
             ParticleManager.ReleaseParticleIndex(ExtraData.linear_particle);
         }

@@ -1,5 +1,4 @@
 
-import { AoiHelper } from "../../../helper/AoiHelper";
 import { ET } from "../../../shared/lib/Entity";
 
 @GReloadable
@@ -27,8 +26,9 @@ export class AiAttackComponent extends ET.Component {
             if (u.IsChanneling()) {
                 return 0.5;
             }
-            if (!u.IsIllusion() && this.castAbilityAndItem()) {
-                return 1;
+            let casttime = this.castAbilityAndItem();
+            if (!u.IsIllusion() && casttime > 0) {
+                return casttime;
             }
             if (this.findAroundEnemyToAttack()) {
                 return 1;
@@ -75,30 +75,20 @@ export class AiAttackComponent extends ET.Component {
     castAbilityAndItem() {
         let u = this.GetDomain<IBaseNpc_Plus>();
         let abilitys = u.GetAllCanCastAbility();
-        // GLogHelper.print(abilitys.length)
-
         while (abilitys.length > 0) {
             let ability = abilitys.shift();
             if (ability && ability.AutoSpellSelf()) {
-                // if (IsInToolsMode()) {
-                //     GTimerHelper.AddFrameTimer(4, GHandler.create(this, () => {
-                //         if (ability.IsCooldownReady()) {
-                //             GLogHelper.warn(`${ability.GetAbilityName()} AutoSpellSelf Error`)
-                //         }
-                //     }))
-
-                // }
-                return true;
+                return math.max(ability.GetCastPoint() || 0, 1);
             }
         }
         let items = u.GetAllCanCastItem();
         while (items.length > 0) {
             let item = items.shift();
             if (item && item.AutoSpellSelf()) {
-                return true;
+                return math.max(item.GetCastPoint() || 0, 1);
             }
         }
-        return false;
+        return -1;
     }
     findAroundEnemyToAttack(): boolean {
         let npc = this.GetDomain<IBaseNpc_Plus>();
@@ -107,12 +97,12 @@ export class AiAttackComponent extends ET.Component {
         }
         let new_target = npc.GetAttackTarget() as IBaseNpc_Plus;
         if (!GFuncEntity.IsValid(new_target) || !new_target.IsAlive()) {
-            let enemys = AoiHelper.FindEntityInRadius(npc.GetTeam(), npc.GetAbsOrigin(), 1000);
+            let enemys = npc.FindUnitsInRadiusPlus(1000);
             if (enemys.length == 0) {
                 let team = npc.GetTeam() == DOTATeam_t.DOTA_TEAM_GOODGUYS ? DOTATeam_t.DOTA_TEAM_BADGUYS : DOTATeam_t.DOTA_TEAM_GOODGUYS;
                 enemys = GGameScene.GetPlayer(this.BelongPlayerid).BattleUnitManagerComp().GetAllBattleUnitAliveNpc(team);
             }
-            enemys = enemys.filter((v) => { return v.IsAlive() });
+            enemys = enemys.filter((v) => { return v.IsAlive() && v.IsAttacker() });
             if (enemys.length > 0) {
                 new_target = enemys[0] as IBaseNpc_Plus;
             }

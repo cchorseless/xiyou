@@ -813,6 +813,7 @@ export class imba_dark_willow_terrorize extends BaseAbility_Plus {
         this.fear.abilityInterrupted = true;
         GFuncEntity.SafeDestroyUnit(this.bug);
         this.bug = null;
+        this.fear = null;
         ParticleManager.ClearParticle(this.nfx, false);
         StopSoundOn("Hero_DarkWillow.Fear.Cast", caster);
     }
@@ -824,6 +825,9 @@ export class imba_dark_willow_terrorize extends BaseAbility_Plus {
     }
 
     AutoSpellSelf() {
+        if (this.IsInAbilityPhase()) {
+            return true;
+        }
         return AI_ability.POSITION_if_enemy(this);
     }
 

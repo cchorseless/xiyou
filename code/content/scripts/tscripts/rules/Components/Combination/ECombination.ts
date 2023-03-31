@@ -1,6 +1,5 @@
 
 import { LogHelper } from "../../../helper/LogHelper";
-import { BaseModifier_Plus } from "../../../npc/entityPlus/BaseModifier_Plus";
 import { CombinationConfig } from "../../../shared/CombinationConfig";
 import { Dota } from "../../../shared/Gen/Types";
 import { ET, serializeETProps } from "../../../shared/lib/Entity";
@@ -128,21 +127,16 @@ export class ECombination extends ET.Entity {
                 let combuff = config.acitveCommonEffect;
                 let spebuff = config.acitveSpecialEffect;
                 if (combuff && combuff.length > 0) {
-                    combuff.split("|").forEach(buff => {
-                        buff && bufflist.set(buff, config.Abilityid);
-                    })
+                    bufflist.set(combuff, config.Abilityid);
                 }
                 if (spebuff && spebuff.length > 0) {
-                    spebuff.split("|").forEach(buff => {
-                        buff && bufflist.set(buff, config.Abilityid);
-                    })
+                    bufflist.set(spebuff, config.Abilityid);
                 }
             }
             bufflist.forEach((abilityname, buff) => {
                 if (buff && buff.length > 0) {
                     let buffconfig = GJSONConfig.BuffEffectConfig.get(buff);
-                    let type = GGetRegClass<typeof BaseModifier_Plus>(buff);
-                    if (buffconfig && type) {
+                    if (buffconfig) {
                         let battleunits: IBattleUnitEntityRoot[];
                         switch (buffconfig.target) {
                             case CombinationConfig.EEffectTargetType.self:
@@ -170,40 +164,21 @@ export class ECombination extends ET.Entity {
                                 break;
                         };
                         if (battleunits) {
-                            if (isActive) {
-                                battleunits.forEach(unit => {
-                                    let entity: IBaseNpc_Plus;
-                                    if (unit.IsBuilding()) {
-                                        let RuntimeBuilding = unit.As<IBuildingEntityRoot>().RuntimeBuilding;
-                                        if (RuntimeBuilding) {
-                                            entity = RuntimeBuilding.GetDomain<IBaseNpc_Plus>();
-                                        }
+                            battleunits.forEach(unit => {
+                                let entity: IBaseNpc_Plus;
+                                if (unit.IsBuilding()) {
+                                    let RuntimeBuilding = unit.As<IBuildingEntityRoot>().RuntimeBuilding;
+                                    if (RuntimeBuilding) {
+                                        entity = RuntimeBuilding.GetDomain<IBaseNpc_Plus>();
                                     }
-                                    else {
-                                        entity = unit.GetDomain<IBaseNpc_Plus>();
-                                    }
-                                    if (entity) {
-                                        type.applyOnly(entity, entity)
-                                    }
-                                })
-                            }
-                            else {
-                                battleunits.forEach(unit => {
-                                    let entity: IBaseNpc_Plus;
-                                    if (unit.IsBuilding()) {
-                                        let RuntimeBuilding = unit.As<IBuildingEntityRoot>().RuntimeBuilding;
-                                        if (RuntimeBuilding) {
-                                            entity = RuntimeBuilding.GetDomain<IBaseNpc_Plus>();
-                                        }
-                                    }
-                                    else {
-                                        entity = unit.GetDomain<IBaseNpc_Plus>();
-                                    }
-                                    if (entity) {
-                                        type.remove(entity)
-                                    }
-                                })
-                            }
+                                }
+                                else {
+                                    entity = unit.GetDomain<IBaseNpc_Plus>();
+                                }
+                                if (entity) {
+                                    entity.HandleCiTiao(buff, isActive);
+                                }
+                            })
                         }
                     }
                 }

@@ -452,6 +452,7 @@ export class imba_magnataur_shockwave extends BaseAbility_Plus {
         }
     }
     OnProjectileHit_ExtraData(target: CDOTA_BaseNPC | undefined, location: Vector, ExtraData: any): boolean | void {
+        if (target && !target.IsRealUnit()) { return }
         if (target) {
             let caster = this.GetCasterPlus();
             target.AddNewModifier(caster, this, "modifier_imba_shockwave_pull", {
@@ -1016,7 +1017,7 @@ export class modifier_imba_empower extends BaseModifier_Plus {
 }
 @registerModifier()
 export class modifier_imba_empower_particle extends BaseModifier_Plus {
-    public particle: any;
+    public particle: ParticleID;
     IsHidden(): boolean {
         return true;
     }
@@ -1034,6 +1035,12 @@ export class modifier_imba_empower_particle extends BaseModifier_Plus {
     }
     OnIntervalThink(): void {
         this.Init({});
+    }
+    public BeDestroy(): void {
+        if (this.particle) {
+            ParticleManager.ClearParticle(this.particle);
+            this.particle = null;
+        }
     }
 
     IsPurgable(): boolean {
@@ -1824,12 +1831,10 @@ export class imba_magnataur_reverse_polarity extends BaseAbility_Plus {
             let damage = this.GetSpecialValueFor("damage");
             let radius = this.GetSpecialValueFor("main_radius");
             let hero_stun_duration = this.GetSpecialValueFor("hero_stun_duration") + caster.GetTalentValue("special_bonus_imba_magnataur_9");
-            let polarize_slow_duration = hero_stun_duration;
             let creep_stun_duration = this.GetSpecialValueFor("creep_stun_duration") + caster.GetTalentValue("special_bonus_imba_magnataur_9");
             let pull_offset = this.GetSpecialValueFor("pull_offset");
             let pull_per_stack = this.GetSpecialValueFor("pull_per_stack");
             let polarize_duration = this.GetSpecialValueFor("polarize_duration");
-            let polarize_slow = this.GetSpecialValueFor("polarize_slow");
             let global_pull = this.GetSpecialValueFor("global_pull");
             let final_loc = caster_loc + (direction * pull_offset) as Vector;
             caster.EmitSound("Hero_Magnataur.ReversePolarity.Cast");

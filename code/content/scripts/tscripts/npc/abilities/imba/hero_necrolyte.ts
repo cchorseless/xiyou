@@ -255,6 +255,7 @@ export class imba_necrolyte_death_pulse extends BaseAbility_Plus {
     }
     OnProjectileHit_ExtraData(target: CDOTA_BaseNPC | undefined, vLocation: Vector, extraData: any): boolean | void {
         if (IsServer()) {
+            if (target && !target.IsRealUnit()) { return }
             let caster = this.GetCasterPlus();
             if (extraData.base_heal) {
                 target.ApplyHeal(extraData.base_heal, this);

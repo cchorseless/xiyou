@@ -77,6 +77,7 @@ export class imba_bounty_hunter_shuriken_toss extends BaseAbility_Plus {
     }
     OnProjectileHit_ExtraData(target: IBaseNpc_Plus | undefined, location: Vector, extradata: any): boolean | void {
         if (IsServer()) {
+            if (target && !target.IsRealUnit()) { return }
             let caster = this.GetCasterPlus();
             let ability = this;
             let particle_projectile = "particles/units/heroes/hero_bounty_hunter/bounty_hunter_suriken_toss.vpcf";

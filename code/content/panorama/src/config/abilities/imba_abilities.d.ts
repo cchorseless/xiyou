@@ -89,7 +89,7 @@ declare namespace imba_abilities {
 "imba_beastmaster_primal_roar" :OBJ_2_1 ,
 "imba_beastmaster_summon_hawk" :OBJ_2_1 ,
 "imba_beastmaster_hawk_invis" :OBJ_2_1 ,
-"imba_beastmaster_summon_boar" :OBJ_2_1 ,
+"imba_beastmaster_call_of_the_wild_boar" :OBJ_2_1 ,
 "imba_beastmaster_boar_poison" :OBJ_2_1 ,
 "imba_bloodseeker_bloodrage" :OBJ_2_1 ,
 "imba_bloodseeker_blood_bath" :OBJ_2_1 ,

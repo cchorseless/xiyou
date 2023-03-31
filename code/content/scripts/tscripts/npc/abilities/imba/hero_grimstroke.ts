@@ -134,6 +134,7 @@ export class imba_grimstroke_dark_artistry extends BaseAbility_Plus {
         if (!IsServer()) {
             return;
         }
+        if (target && !target.IsRealUnit()) { return }
         this.CreateVisibilityNode(location, this.GetSpecialValueFor("end_radius"), 2);
         if (target) {
             if (!target.IsCreep()) {
@@ -366,6 +367,7 @@ export class imba_grimstroke_ink_creature extends BaseAbility_Plus {
         if (!IsServer()) {
             return;
         }
+        if (_target && !_target.IsRealUnit()) { return }
         if (data.phantoms_embrace_particle) {
             ParticleManager.ClearParticle(data.phantoms_embrace_particle, false);
         }

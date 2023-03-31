@@ -19,8 +19,10 @@ export class modifier_combination_effect extends BaseModifier_Plus {
         return 0;
     }
     BeDestroy(): void {
-        ParticleManager.ClearParticle(this.buff_fx);
-        this.buff_fx = null;
+        if (this.buff_fx) {
+            ParticleManager.ClearParticle(this.buff_fx);
+            this.buff_fx = null;
+        }
     }
 
 }

@@ -145,12 +145,12 @@ export class modifier_item_imba_vladmir_aura extends BaseModifier_Plus {
     @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
     CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
         if (!keys.attacker.HasModifier("modifier_item_imba_vladmir_blood_aura") && !keys.attacker.HasModifier("modifier_custom_mechanics") && keys.attacker == this.GetParentPlus() && !keys.unit.IsBuilding() && !keys.unit.IsOther() && keys.unit.GetTeamNumber() != this.GetParentPlus().GetTeamNumber()) {
-            if (keys.damage_category == DamageCategory_t.DOTA_DAMAGE_CATEGORY_SPELL && keys.inflictor && GPropertyCalculate.GetSpellLifesteal(this.GetParentPlus()) > 0 && bit.band(keys.damage_flags, DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NO_SPELL_LIFESTEAL) != DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NO_SPELL_LIFESTEAL) {
+            if (keys.damage_category == DamageCategory_t.DOTA_DAMAGE_CATEGORY_SPELL && keys.inflictor && GPropertyCalculate.GetSpellLifeStealPercent(this.GetParentPlus()) > 0 && bit.band(keys.damage_flags, DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NO_SPELL_LIFESTEAL) != DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NO_SPELL_LIFESTEAL) {
                 this.lifesteal_pfx = ResHelper.CreateParticleEx("particles/items3_fx/octarine_core_lifesteal.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, keys.attacker);
                 ParticleManager.SetParticleControl(this.lifesteal_pfx, 0, keys.attacker.GetAbsOrigin());
                 ParticleManager.ReleaseParticleIndex(this.lifesteal_pfx);
                 keys.attacker.ApplyHeal(math.max(keys.damage, 0) * this.vampiric_aura * 0.01, this.GetItemPlus());
-            } else if (keys.damage_category == DamageCategory_t.DOTA_DAMAGE_CATEGORY_ATTACK && GPropertyCalculate.GetLifesteal(this.GetParentPlus()) > 0) {
+            } else if (keys.damage_category == DamageCategory_t.DOTA_DAMAGE_CATEGORY_ATTACK && GPropertyCalculate.GetLifeStealPercent(this.GetParentPlus()) > 0) {
                 this.lifesteal_pfx = ResHelper.CreateParticleEx("particles/item/vladmir/vladmir_blood_lifesteal.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, keys.attacker);
                 ParticleManager.SetParticleControl(this.lifesteal_pfx, 0, keys.attacker.GetAbsOrigin());
                 ParticleManager.ReleaseParticleIndex(this.lifesteal_pfx);
@@ -278,12 +278,12 @@ export class modifier_item_imba_vladmir_blood_aura extends BaseModifier_Plus {
     @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
     CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
         if (!keys.attacker.HasModifier("modifier_custom_mechanics") && keys.attacker == this.GetParentPlus() && !keys.unit.IsBuilding() && !keys.unit.IsOther() && keys.unit.GetTeamNumber() != this.GetParentPlus().GetTeamNumber()) {
-            if (keys.damage_category == DamageCategory_t.DOTA_DAMAGE_CATEGORY_SPELL && keys.inflictor && GPropertyCalculate.GetSpellLifesteal(this.GetParentPlus()) > 0 && bit.band(keys.damage_flags, DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NO_SPELL_LIFESTEAL) != DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NO_SPELL_LIFESTEAL) {
+            if (keys.damage_category == DamageCategory_t.DOTA_DAMAGE_CATEGORY_SPELL && keys.inflictor && GPropertyCalculate.GetSpellLifeStealPercent(this.GetParentPlus()) > 0 && bit.band(keys.damage_flags, DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NO_SPELL_LIFESTEAL) != DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NO_SPELL_LIFESTEAL) {
                 this.lifesteal_pfx = ResHelper.CreateParticleEx("particles/items3_fx/octarine_core_lifesteal.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, keys.attacker);
                 ParticleManager.SetParticleControl(this.lifesteal_pfx, 0, keys.attacker.GetAbsOrigin());
                 ParticleManager.ReleaseParticleIndex(this.lifesteal_pfx);
                 keys.attacker.ApplyHeal(math.max(keys.damage, 0) * this.vampiric_aura * 0.01, this.GetItemPlus());
-            } else if (keys.damage_category == DamageCategory_t.DOTA_DAMAGE_CATEGORY_ATTACK && GPropertyCalculate.GetLifesteal(this.GetParentPlus()) > 0) {
+            } else if (keys.damage_category == DamageCategory_t.DOTA_DAMAGE_CATEGORY_ATTACK && GPropertyCalculate.GetLifeStealPercent(this.GetParentPlus()) > 0) {
                 this.lifesteal_pfx = ResHelper.CreateParticleEx("particles/item/vladmir/vladmir_blood_lifesteal.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, keys.attacker);
                 ParticleManager.SetParticleControl(this.lifesteal_pfx, 0, keys.attacker.GetAbsOrigin());
                 ParticleManager.ReleaseParticleIndex(this.lifesteal_pfx);

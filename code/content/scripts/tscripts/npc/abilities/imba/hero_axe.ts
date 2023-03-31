@@ -37,7 +37,7 @@ export class imba_axe_berserkers_call extends BaseAbility_Plus {
         let particle = ResHelper.CreateParticleEx("particles/econ/items/axe/axe_helm_shoutmask/axe_beserkers_call_owner_shoutmask.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, caster, caster);
         ParticleManager.SetParticleControl(particle, 2, Vector(radius, radius, radius));
         ParticleManager.ReleaseParticleIndex(particle);
-        let enemies_in_radius = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false);
+        let enemies_in_radius = caster.FindUnitsInRadiusPlus(radius, null, null, null, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES);
         for (const [_, target] of GameFunc.iPair(enemies_in_radius)) {
             if (target.IsCreep()) {
                 target.SetForceAttackTarget(caster);
@@ -193,11 +193,15 @@ export class modifier_imba_berserkers_call_talent extends BaseModifier_Plus {
 export class modifier_imba_berserkers_call_debuff_cmd extends BaseModifier_Plus {
     public atk_speed: number = 0;
     public atk_bonus: number = 0;
+    citiao_b: string;
+    citiao_c: string;
 
     Init(p_0: any,): void {
         // this.bonus_as = this.GetSpecialValueFor("bonus_as");
-        this.atk_speed = this.GetAbilityPlus().GetSectSpeEffectValue("b", "atk_speed");
-        this.atk_bonus = this.GetAbilityPlus().GetSectSpeEffectValue("c", "atk_bonus");
+        this.citiao_b = this.GetAbilityPlus().GetSectCiTiaoName("b");
+        this.citiao_c = this.GetAbilityPlus().GetSectCiTiaoName("c");
+        this.atk_speed = this.GetCasterPlus().GetCiTiaoValue(this.citiao_b, "atk_speed");
+        this.atk_bonus = this.GetCasterPlus().GetCiTiaoValue(this.citiao_c, "atk_bonus");
     }
 
     CheckState(): Partial<Record<modifierstate, boolean>> {
@@ -214,7 +218,7 @@ export class modifier_imba_berserkers_call_debuff_cmd extends BaseModifier_Plus 
     } */
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
     CC_GetModifierAttackSpeedBonus_Constant(): number {
-        if (!this.GetAbilityPlus().IsSectSpeEffectActive("b")) {
+        if (!this.GetCasterPlus().HasCiTiao(this.citiao_b)) {
             return 0
         }
         return this.atk_speed + this.GetCasterPlus().GetTalentValue("special_bonus_imba_axe_5");
@@ -222,7 +226,7 @@ export class modifier_imba_berserkers_call_debuff_cmd extends BaseModifier_Plus 
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASEATTACK_BONUSDAMAGE)
     CC_GetModifierBASEATTACK_BONUSDAMAGE(): number {
-        if (!this.GetAbilityPlus().IsSectSpeEffectActive("c")) {
+        if (!this.GetCasterPlus().HasCiTiao(this.citiao_c)) {
             return 0
         }
         return this.atk_bonus;
@@ -328,7 +332,7 @@ export class imba_axe_battle_hunger extends BaseAbility_Plus {
         caster.EmitSound(random_response);
         if (caster != target) {
             if (caster.HasScepter()) {
-                let enemies = FindUnitsInRadius(caster.GetTeamNumber(), this.GetCursorPosition(), undefined, this.GetAOERadius(), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
+                let enemies = caster.FindUnitsInRadiusPlus(this.GetAOERadius(), this.GetCursorPosition());
                 for (const [_, enemy] of GameFunc.iPair(enemies)) {
                     enemy.EmitSound("Hero_Axe.Battle_Hunger");
                     this.ApplyBattleHunger(caster, enemy);
@@ -675,7 +679,7 @@ export class modifier_imba_battle_hunger_debuff_deny extends BaseModifier_Plus {
 export class imba_axe_counter_helix extends BaseAbility_Plus {
 
     GetCooldown(level: number): number {
-        if (this.IsSectSpeEffectActive("b")) {
+        if (this.GetCasterPlus().HasCiTiao(this.GetSectCiTiaoName("b"))) {
             return 0;
         }
         return 0.3;
@@ -801,7 +805,7 @@ export class modifier_imba_counter_helix_passive extends BaseModifier_Plus {
                 damage_type: DAMAGE_TYPES.DAMAGE_TYPE_PURE
             });
         }
-        if (this.ability.IsSectSpeEffectActive("c")) {
+        if (this.caster.HasCiTiao(this.ability.GetSectCiTiaoName("c"))) {
             if (spin_to_win) {
                 spin_to_win.ForceRefresh();
                 spin_to_win.IncrementStackCount();

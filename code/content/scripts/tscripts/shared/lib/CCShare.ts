@@ -125,13 +125,13 @@ export module CCShare {
     }
 
 
-    export function GetRegClass<T>(className: string, ignoreExt: boolean = false) {
+    export function GetRegClass<T>(className: string, ignoreWarn = false, ignoreExt: boolean = false) {
         let r;
         if (ignoreExt) { r = _G._GReloadClassTypeCache[className]; }
         else {
             r = _G._GReloadClassTypeCache[className + "Ext"] || _G._GReloadClassTypeCache[className];
         }
-        if (r == null) {
+        if (r == null && !ignoreWarn) {
             GLogHelper.warn("NOT Reg Reload Class " + className);
         }
         return r as T;

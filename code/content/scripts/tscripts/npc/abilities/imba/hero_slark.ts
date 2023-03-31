@@ -747,11 +747,12 @@ export class modifier_imba_slark_essence_shift_debuff_counter extends BaseModifi
             return info.apply_game_time && info.duration && GameRules.GetDOTATime(true, true) - info.apply_game_time <= info.duration;
         })
 
-        if (GameFunc.GetCount(this.stack_table) != this.GetStackCount()) {
-            this.SetStackCount(GameFunc.GetCount(this.stack_table));
+        if (this.stack_table.length != this.GetStackCount()) {
+            this.SetStackCount(this.stack_table.length);
         }
     }
     BeDestroy(): void {
+        this.stack_table = null;
         if (!IsServer()) {
             return;
         }
@@ -769,7 +770,7 @@ export class modifier_imba_slark_essence_shift_debuff_counter extends BaseModifi
     } */
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
     CC_OnAttackLanded(keys: ModifierAttackEvent): void {
-        if (keys.attacker == this.GetParentPlus() && !this.GetParentPlus().PassivesDisabled() && (keys.target.IsRealUnit() || keys.target.IsClone()) && !keys.target.IsTempestDouble()) {
+        if (this.stack_table && keys.attacker == this.GetParentPlus() && !this.GetParentPlus().PassivesDisabled() && (keys.target.IsRealUnit() || keys.target.IsClone()) && !keys.target.IsTempestDouble()) {
             this.stack_table.push({
                 apply_game_time: GameRules.GetDOTATime(true, true),
                 duration: this.GetAbilityPlus().GetTalentSpecialValueFor("duration")
@@ -926,7 +927,7 @@ export class modifier_imba_slark_shadow_dance_passive_regen extends BaseModifier
     public interval: number;
     public bHitByNeutral: any;
     public neutral_counter: number;
-    public enemy_that_sees_me: any;
+    public enemy_that_sees_me: IBaseNpc_Plus;
     IsPurgable(): boolean {
         return false;
     }
@@ -957,17 +958,17 @@ export class modifier_imba_slark_shadow_dance_passive_regen extends BaseModifier
             }
         }
         this.bVisible = false;
-        let units = FindUnitsInRadius(this.GetParentPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY,
-            DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_ALL,
-            DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD,
-            FindOrder.FIND_FARTHEST, false) as IBaseNpc_Plus[];
-        for (const enemy of units) {
-            if (enemy.GetTeamNumber() != DOTATeam_t.DOTA_TEAM_NEUTRALS && !enemy.IsRoshan() && enemy.CanEntityBeSeenByMyTeam(this.GetParentPlus()) && !enemy.GetUnitName().includes("watch_tower")) {
-                this.enemy_that_sees_me = enemy;
-                this.bVisible = true;
-                return;
-            }
-        }
+        // let units = FindUnitsInRadius(this.GetParentPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY,
+        //     DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_ALL,
+        //     DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD,
+        //     FindOrder.FIND_FARTHEST, false) as IBaseNpc_Plus[];
+        // for (const enemy of units) {
+        //     if (enemy.GetTeamNumber() != DOTATeam_t.DOTA_TEAM_NEUTRALS && enemy.CanEntityBeSeenByMyTeam(this.GetParentPlus())) {
+        //         this.enemy_that_sees_me = enemy;
+        //         this.bVisible = true;
+        //         break;
+        //     }
+        // }
         if (((this.bPassiveActive && this.bVisible) || this.bHitByNeutral) && !this.GetParentPlus().HasModifier("modifier_imba_slark_shadow_dance")) {
             if (!this.bHitByNeutral) {
                 this.counter = this.counter + this.interval;

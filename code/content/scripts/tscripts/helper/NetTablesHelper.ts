@@ -5,23 +5,50 @@ import { LogHelper } from "./LogHelper";
 export module NetTablesHelper {
     /**
      * @Both
-     * @param entityid 
+     * @param entityid npc的entityid，不要用ability的entityid,方便清理
      * @returns 
      */
     export function GetDotaEntityData(entityid: EntityIndex | string, extkey = "") {
         let _tablename = GameServiceConfig.ENetTables.dotaentity as never;
-        return (CustomNetTables.GetTableValue(_tablename, entityid + extkey) || {}) as { [key: string]: any };
+        entityid += "";
+        let olddata = (CustomNetTables.GetTableValue(_tablename, entityid) || {}) as { [key: string]: any };
+        if (extkey && extkey.length > 0) {
+            return olddata[extkey];
+        }
+        return olddata;
     }
     /**
      * @Server
-     * @param entityid 
+     * @param entityid npc的entityid，不要用ability的entityid,方便清理
      * @param data 
      * @returns 
      */
     export function SetDotaEntityData(entityid: EntityIndex | string, data: { [key: string]: any }, extkey = "") {
         let _tablename = GameServiceConfig.ENetTables.dotaentity as never;
-        return (CustomNetTables.SetTableValue(_tablename, entityid + extkey, data as never));
+        entityid += "";
+        let olddata = (CustomNetTables.GetTableValue(_tablename, entityid) || {}) as { [key: string]: any };
+        if (extkey && extkey.length > 0) {
+            olddata[extkey] = data;
+        }
+        else {
+            olddata = Object.assign(olddata, data);
+        }
+        return (CustomNetTables.SetTableValue(_tablename, entityid, olddata as never));
     }
+    /**
+     * @Server
+     * @param entityid 
+     */
+    export function ClearDotaEntityData(entityid: EntityIndex | string) {
+        if (IsServer()) {
+            let _tablename = GameServiceConfig.ENetTables.dotaentity as never;
+            entityid += "";
+            if (CustomNetTables.GetTableValue(_tablename, entityid) != null) {
+                CustomNetTables.SetTableValue(_tablename, entityid, null as never);
+            }
+        }
+    }
+
     /**
      * 获取表
      * @param tablename

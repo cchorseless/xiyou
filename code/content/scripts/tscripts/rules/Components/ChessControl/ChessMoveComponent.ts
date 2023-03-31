@@ -172,31 +172,27 @@ export class ChessMoveComponent extends ET.Component {
         }
     }
 
-    IsCanAttackTarget(target: IBattleUnitEntityRoot, x?: number, y?: number) {
-        if (target == null) {
-            return false;
-        }
+    FindAroundFriendChess() {
         let attacker = this.GetDomain<IBaseNpc_Plus>();
-        let targetUnit = target.GetDomain<IBaseNpc_Plus>();
-        if (!GFuncEntity.IsValid(attacker) || !GFuncEntity.IsValid(targetUnit)) {
-            return false;
-        }
-        if (!attacker.IsAlive() || !targetUnit.IsAlive()) {
-            return false;
-        }
-        if (x == null || y == null) {
-            let pos = attacker.GetAbsOrigin();
-            x = pos.x;
-            y = pos.y;
-        }
-        let targetpos = targetUnit.GetAbsOrigin();
-        let p = Vector(x, y, targetpos.z);
-        let p2 = targetpos;
-        if (!targetUnit.IsInvisible() && GFuncVector.AsVector(p - p2).Length2D() < attacker.Script_GetAttackRange() + targetUnit.GetHullRadius() + attacker.GetHullRadius()) {
-            return true;
-        } else {
-            return false;
-        }
+        let r: IBaseNpc_Plus[] = [];
+        let up = new ChessVector(this.ChessVector.x, this.ChessVector.y + 1, this.ChessVector.playerid);
+        let down = new ChessVector(this.ChessVector.x, this.ChessVector.y - 1, this.ChessVector.playerid);
+        let left = new ChessVector(this.ChessVector.x - 1, this.ChessVector.y, this.ChessVector.playerid);
+        let right = new ChessVector(this.ChessVector.x + 1, this.ChessVector.y, this.ChessVector.playerid);
+        let friends = attacker.FindUnitsInRadiusPlus(ChessControlConfig.Gird_Width * 1.5, null, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY)
+        friends.forEach((v) => {
+            let chess = v.ETRoot.As<IBattleUnitEntityRoot>();
+            if (chess && chess.ChessComp && chess.ChessComp()) {
+                if (chess.IsBuilding()) {
+                    return
+                }
+                let cv = chess.ChessComp().ChessVector;
+                if (cv.isSame(up) || cv.isSame(down) || cv.isSame(left) || cv.isSame(right)) {
+                    r.push(v);
+                }
+            }
+        });
+        return r;
     }
 
     RemoveMovingModifier() {

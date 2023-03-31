@@ -11,6 +11,15 @@ interface ICCUnitStats {
 
 export class CCUnitStats extends CCPanel<ICCUnitStats>  {
 
+    onInitUI() {
+        GTimerHelper.AddTimer(0.1, GHandler.create(this, () => {
+            if (Entities.IsValidEntity(this.props.CurSelectUnit)) {
+                this.updateSelf();
+            }
+            return 0.1
+        }));
+    }
+
     render() {
         let bonus_damage = "";
         let base_damage = "";
@@ -28,38 +37,37 @@ export class CCUnitStats extends CCPanel<ICCUnitStats>  {
         let base_intellect = "";
         if (Entities.IsValidEntity(this.props.CurSelectUnit)) {
             let iLocalPortraitUnit = this.props.CurSelectUnit;
-            let fBonusDamage = Entities.GetDamageBonus(iLocalPortraitUnit);
-            let fMinDamage = Entities.GetDamageMin(iLocalPortraitUnit);
-            let fMaxDamage = Entities.GetDamageMax(iLocalPortraitUnit);
-            base_damage = (fMinDamage + fMaxDamage) / 2 + "";
-            bonus_damage = FuncHelper.SignNumber(fBonusDamage);;
+            let fattackdamage = UnitHelper.GetAttackDamage(iLocalPortraitUnit);
+            let fbaseDamage = UnitHelper.GetBaseAttackDamage(iLocalPortraitUnit);
+            let fBonusDamage = fattackdamage - fbaseDamage;
+            base_damage = fbaseDamage.toFixed(0);
+            bonus_damage = FuncHelper.SignNumber(FuncHelper.Round(fBonusDamage));
             let fPhysicalArmor = UnitHelper.GetPhysicalArmor(iLocalPortraitUnit);
             let fBasePhysicalArmor = UnitHelper.GetBasePhysicalArmor(iLocalPortraitUnit);
             physical_armor = fBasePhysicalArmor.toFixed(0);
             bonus_physical_armor += FuncHelper.SignNumber(FuncHelper.Round(fPhysicalArmor - fBasePhysicalArmor));
             let fMagicalArmor = UnitHelper.GetMagicalArmor(iLocalPortraitUnit);
             let fBaseMagicalArmor = UnitHelper.GetBaseMagicalArmor(iLocalPortraitUnit);
-            bonus_magical_armor = FuncHelper.SignNumber(fMagicalArmor - fBaseMagicalArmor) + "";
+            bonus_magical_armor = FuncHelper.SignNumber(FuncHelper.Round(fMagicalArmor - fBaseMagicalArmor)) + "";
             magical_armor = fBaseMagicalArmor + "";
             let fBaseMoveSpeed = Entities.GetBaseMoveSpeed(iLocalPortraitUnit);
             let fBonusMoveSpeed = UnitHelper.GetMoveSpeed(iLocalPortraitUnit) - fBaseMoveSpeed;
-            let sBonusMoveSpeed = FuncHelper.SignNumber(fBonusMoveSpeed);;
+            bonus_move_speed = FuncHelper.SignNumber(FuncHelper.Round(fBonusMoveSpeed));
             base_move_speed = fBaseMoveSpeed.toFixed(0);
-            bonus_move_speed = sBonusMoveSpeed + "";
             let iStrength = UnitHelper.GetStrength(iLocalPortraitUnit);
             let iBaseStrength = UnitHelper.GetBaseStrength(iLocalPortraitUnit);
             let iBonusStrength = iStrength - iBaseStrength;
-            strength_bonus = FuncHelper.SignNumber(iBonusStrength);
+            strength_bonus = FuncHelper.SignNumber(FuncHelper.Round(iBonusStrength));
             base_strength = iBaseStrength + "";
             let iAgility = UnitHelper.GetAgility(iLocalPortraitUnit);
             let iBaseAgility = UnitHelper.GetBaseAgility(iLocalPortraitUnit);
             let iBonusAgility = iAgility - iBaseAgility;
-            agility_bonus = FuncHelper.SignNumber(iBonusAgility);
+            agility_bonus = FuncHelper.SignNumber(FuncHelper.Round(iBonusAgility));
             base_agility = iBaseAgility + "";
             let iIntellect = UnitHelper.GetIntellect(iLocalPortraitUnit);
             let iBaseIntellect = UnitHelper.GetBaseIntellect(iLocalPortraitUnit);
             let iBonusIntellect = iIntellect - iBaseIntellect;
-            intellect_bonus = FuncHelper.SignNumber(iBonusIntellect);
+            intellect_bonus = FuncHelper.SignNumber(FuncHelper.Round(iBonusIntellect));
             base_intellect = iBaseIntellect + "";
         }
         return (

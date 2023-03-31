@@ -366,7 +366,7 @@ declare namespace building_unit_enemy {
 "AttackRangeActivityModifiers" :OBJ_3_1 ,
 "CombatClassAttack" :string ,
 "CombatClassDefend" :string ,
-"MagicalResistance" :string ,
+"ArmorMagical" :string ,
 "RingRadius" :string ,
 "UnitLabel" :string ,
 [k:string] : string | OBJ_3_1 }

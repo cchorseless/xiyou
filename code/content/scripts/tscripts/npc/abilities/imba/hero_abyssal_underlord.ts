@@ -110,12 +110,6 @@ export class modifier_imba_abyssal_underlord_firestorm_thinker extends BaseModif
         this.StartIntervalThink(delay);
     }
 
-    BeRefresh(kv: any): void {
-    }
-
-    BeRemoved(): void {
-    }
-
     BeDestroy(): void {
         if (!IsServer()) {
             return;
@@ -130,7 +124,7 @@ export class modifier_imba_abyssal_underlord_firestorm_thinker extends BaseModif
             this.OnIntervalThink();
             return;
         }
-        let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.parent.GetOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, 0, 0, false);
+        let enemies = this.caster.FindUnitsInRadiusPlus(this.radius, this.parent.GetOrigin());
         for (const [_, enemy] of GameFunc.iPair(enemies)) {
             this.damageTable.victim = enemy;
             ApplyDamage(this.damageTable);
@@ -443,7 +437,7 @@ export class modifier_imba_abyssal_underlord_pit_of_malice_thinker extends BaseM
             this.Destroy();
             return;
         }
-        let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.parent.GetOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, 0, 0, false);
+        let enemies = this.caster.FindUnitsInRadiusPlus(this.radius, this.parent.GetOrigin());
         for (const [_, enemy] of GameFunc.iPair(enemies)) {
             let modifier = enemy.FindModifierByNameAndCaster("modifier_imba_abyssal_underlord_pit_of_malice_cooldown", this.GetCasterPlus());
             if (!modifier) {

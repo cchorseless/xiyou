@@ -42,7 +42,7 @@ export class imba_ancient_apparition_cold_feet extends BaseAbility_Plus {
                 target.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_ancient_apparition_cold_feet", {});
             }
         } else {
-            let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCursorPosition(), undefined, this.GetCasterPlus().GetTalentValue("special_bonus_imba_ancient_apparition_cold_feet_aoe"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
+            let enemies = this.GetCasterPlus().FindUnitsInRadiusPlus(this.GetCasterPlus().GetTalentValue("special_bonus_imba_ancient_apparition_cold_feet_aoe"), this.GetCursorPosition(),);
             for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 if (!enemy.HasModifier("imba_ancient_apparition_cold_feet")) {
                     enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_ancient_apparition_cold_feet", {});
@@ -512,7 +512,7 @@ export class imba_ancient_apparition_imbued_ice extends BaseAbility_Plus {
         this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_ancient_apparition_imbued_ice", {
             duration: this.GetSpecialValueFor("buff_duration")
         });
-        let allies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), position, undefined, this.GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS, FindOrder.FIND_ANY_ORDER, false);
+        let allies = this.GetCasterPlus().FindUnitsInRadiusPlus(this.GetSpecialValueFor("radius"), position, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, null, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS);
         for (const [_, ally] of GameFunc.iPair(allies)) {
             if (ally != this.GetCasterPlus()) {
                 ally.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_ancient_apparition_imbued_ice", {
@@ -798,6 +798,7 @@ export class imba_ancient_apparition_ice_blast extends BaseAbility_Plus {
     }
 
     OnProjectileHit_ExtraData(target: CDOTA_BaseNPC | undefined, location: Vector, data: any): boolean | void {
+        if (target && !target.IsRealUnit()) { return }
         if (!target && data.ice_blast_dummy) {
             let npc = EntIndexToHScript(data.ice_blast_dummy) as IBaseNpc_Plus;
             let ice_blast_thinker_modifier = npc.FindModifierByNameAndCaster("modifier_imba_ancient_apparition_ice_blast_thinker", this.GetCasterPlus());
@@ -1073,6 +1074,7 @@ export class imba_ancient_apparition_ice_blast_release extends BaseAbility_Plus 
     }
 
     OnProjectileHit_ExtraData(target: CDOTA_BaseNPC | undefined, location: Vector, data: any): boolean | void {
+        if (target && !target.IsRealUnit()) { return }
         if (!target && this.ice_blast_ability) {
             EmitSoundOnLocationWithCaster(location, "Hero_Ancient_Apparition.IceBlast.Target", this.GetCasterPlus());
             if (data.marker_particle) {

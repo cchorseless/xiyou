@@ -5,7 +5,6 @@ import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { modifier_jiaoxie_wudi } from "../../../npc/modifier/battle/modifier_jiaoxie_wudi";
 import { modifier_mana_control } from "../../../npc/modifier/battle/modifier_mana_control";
 import { modifier_out_of_game } from "../../../npc/modifier/battle/modifier_out_of_game";
-import { BuildingConfig } from "../../../shared/BuildingConfig";
 import { GEventHelper } from "../../../shared/lib/GEventHelper";
 import { THeroUnit } from "../../../shared/service/hero/THeroUnit";
 import { BattleUnitEntityRoot } from "../BattleUnit/BattleUnitEntityRoot";
@@ -73,23 +72,13 @@ export class BuildingEntityRoot extends BattleUnitEntityRoot {
      * @param n
      */
     AddStar(n: number) {
-        this.iStar += n;
+        this.SetStar(this.iStar + n);
         let domain = this.GetDomain<IBaseNpc_Plus>();
-        let levelupconfig = GJSONConfig.BuildingLevelUpConfig.get(domain.GetUnitName());
-        if (levelupconfig) {
-            let levelup = levelupconfig.StarUpInfo.find(v => v.Star == this.iStar);
-            if (levelup) {
-                if (levelup.AttachWearables.length > 0) {
-                    levelup.AttachWearables.forEach(v => {
-                        this.WearableComp().Wear(v, "levelup");
-                    })
-                }
-            }
-        }
-
+        // "particles/econ/events/fall_2021/hero_levelup_fall_2021.vpcf"
         // "particles/generic_hero_status/hero_levelup.vpcf"
         // "particles/units/heroes/hero_oracle/oracle_false_promise_cast_enemy.vpcf"
-        let iParticleID = ResHelper.CreateParticle(
+        // 	play_particle("particles/econ/events/ti9/ti9_drums_musicnotes.vpcf",PATTACH_OVERHEAD_FOLLOW,uu,3)
+        ResHelper.CreateParticle(
             new ResHelper.ParticleInfo()
                 .set_resPath("particles/generic_hero_status/hero_levelup.vpcf")
                 .set_iAttachment(ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW)
@@ -97,10 +86,6 @@ export class BuildingEntityRoot extends BattleUnitEntityRoot {
                 .set_validtime(3)
         );
         EmitSoundOn("lvl_up", domain);
-        // 变大
-        domain.SetModelScale(this.iScale * BuildingConfig.MODEL_SCALE[this.iStar - 1]);
-        // 技能升级
-        this.AbilityManagerComp().levelUpAllAbility();
         // 通知跑马灯
         this.SyncClient();
     }

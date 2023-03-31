@@ -163,7 +163,7 @@ export module FuncEntity {
 
 
     export function Custom_HasAnyAvailableInventorySpace(unit: IBaseNpc_Plus) {
-        if (unit.IsHero()) {
+        if (unit.IsRealHero()) {
             return unit.HasAnyAvailableInventorySpace();
         }
         else {

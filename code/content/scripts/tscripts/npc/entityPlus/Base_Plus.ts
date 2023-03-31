@@ -566,7 +566,7 @@ export class BaseModifierMotion extends BaseModifier {
         ]
         let modifiers = parent.FindAllModifiers() as IBaseModifier_Plus[];
         for (const modifier of (modifiers)) {
-            if (this != modifier && modifier.IsMotionBuff()) {
+            if (this != modifier && modifier.IsMotionBuff && modifier.IsMotionBuff()) {
                 is_motion_controller = true;
                 let _p = modifier.GetPriority();
                 if (non_imba_motion_controllers.includes(modifier.GetName())) {
@@ -602,7 +602,7 @@ export class BaseModifierMotion extends BaseModifier {
         let modifiers = parent.FindAllModifiers() as IBaseModifier_Plus[];
         let motion_buffs = [];
         for (const modifier of (modifiers)) {
-            if (modifier.IsMotionBuff()) {
+            if (modifier.IsMotionBuff && modifier.IsMotionBuff()) {
                 motion_buffs.push(modifier);
             }
         }

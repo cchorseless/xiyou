@@ -1,91 +1,52 @@
+import { ResHelper } from "../../../helper/ResHelper";
 import { registerModifier } from "../../entityPlus/Base_Plus";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 import { modifier_combination_effect } from "./modifier_combination_effect";
 
 
-@registerModifier()
-export class modifier_sect_demon_abyssal_underlord_dark_rift_b extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_demon_abyssal_underlord_dark_rift_c extends modifier_combination_effect {
-}
+
 @registerModifier()
 export class modifier_sect_demon_base_a extends modifier_combination_effect {
+    Init() {
+        let damage_pect = this.getSpecialData("damage_pect");
+        let parent = this.GetParentPlus();
+        let t = parent.TempData().sect_demon || { damage_pect: 0 };
+        t.damage_pect += damage_pect;
+        parent.TempData().sect_demon = t;
+        this.buff_fx = ResHelper.CreateParticleEx("particles/sect/sect_demon/sect_demon1.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, parent);
+        // ParticleManager.SetParticleControl(this.buff_fx, 0, Vector(100, 100, 200));
+        this.AddParticle(this.buff_fx, false, false, -1, false, false);
+    }
+
+
+    @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
+    CC_ON_ATTACK_LANDED(keys: ModifierAttackEvent) {
+        if (!IsServer()) { return }
+        if (keys.attacker == this.GetParentPlus()) {
+            let parent = this.GetParentPlus();
+            let target = keys.target;
+            let t = parent.TempData().sect_demon || { damage_pect: 10 };
+            let damageTable = {
+                attacker: parent,
+                victim: target,
+                damage: keys.damage * t.damage_pect / 100,
+                damage_type: DAMAGE_TYPES.DAMAGE_TYPE_PURE,
+            }
+            ApplyDamage(damageTable);
+        }
+    }
+
 }
 @registerModifier()
 export class modifier_sect_demon_base_b extends modifier_combination_effect {
+    public Init(params?: IModifierTable): void {
+        let damage_pect = this.getSpecialData("damage_pect");
+        let parent = this.GetParentPlus();
+        let t = parent.TempData().sect_demon || { damage_pect: 0 };
+        t.damage_pect += damage_pect;
+        parent.TempData().sect_demon = t;
+    }
 }
 @registerModifier()
-export class modifier_sect_demon_base_c extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_demon_bloodseeker_rupture_b extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_demon_bloodseeker_rupture_c extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_demon_chaos_knight_chaos_bolt_b extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_demon_chaos_knight_chaos_bolt_c extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_demon_doom_bringer_scorched_earth_b extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_demon_doom_bringer_scorched_earth_c extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_demon_enigma_demonic_conversion_b extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_demon_enigma_demonic_conversion_c extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_demon_leshrac_diabolic_edict_b extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_demon_leshrac_diabolic_edict_c extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_demon_lion_impale_b extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_demon_lion_impale_c extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_demon_nevermore_necromastery_b extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_demon_nevermore_necromastery_c extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_demon_night_stalker_hunter_in_the_night_b extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_demon_night_stalker_hunter_in_the_night_c extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_demon_obsidian_destroyer_arcane_orb_b extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_demon_obsidian_destroyer_arcane_orb_c extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_demon_queenofpain_sonic_wave_b extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_demon_queenofpain_sonic_wave_c extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_demon_shadow_demon_soul_catcher_b extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_demon_shadow_demon_soul_catcher_c extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_demon_terrorblade_demon_zeal_b extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_demon_terrorblade_demon_zeal_c extends modifier_combination_effect {
+export class modifier_sect_demon_base_c extends modifier_sect_demon_base_b {
 }

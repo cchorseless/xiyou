@@ -1173,7 +1173,7 @@ export class imba_wisp_overcharge extends BaseAbility_Plus {
             bonus_attack_range = bonus_attack_range * efficiency;
             bonus_damage_pct = bonus_damage_pct * efficiency;
         }
-        NetTablesHelper.SetDotaEntityData(ability.GetEntityIndex(), {
+        NetTablesHelper.SetDotaEntityData(caster.GetEntityIndex(), {
             overcharge_bonus_attack_speed: bonus_attack_speed,
             overcharge_bonus_cast_speed: bonus_cast_speed,
             overcharge_bonus_missile_speed: bonus_missile_speed,
@@ -1299,7 +1299,7 @@ export class modifier_imba_wisp_overcharge extends BaseModifier_Plus {
             this.bonus_damage_pct = params.bonus_damage_pct;
             this.bonus_attack_range = params.bonus_attack_range;
         } else {
-            let net_table = NetTablesHelper.GetDotaEntityData(this.GetAbilityPlus().GetEntityIndex(), this.GetAbilityPlus().GetAbilityName()) || {}
+            let net_table = NetTablesHelper.GetDotaEntityData(this.GetCasterPlus().GetEntityIndex(), this.GetAbilityPlus().GetAbilityName()) || {}
             this.bonus_attack_speed = net_table.overcharge_bonus_attack_speed || 0;
             this.bonus_cast_speed = net_table.overcharge_bonus_cast_speed || 0;
             this.bonus_missile_speed = net_table.overcharge_bonus_missile_speed || 0;

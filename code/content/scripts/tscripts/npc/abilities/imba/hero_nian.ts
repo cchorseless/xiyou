@@ -643,6 +643,7 @@ export class imba_nian_volcanic_burster extends BaseAbility_Plus {
         if (!IsServer()) {
             return;
         }
+        if (target && !target.IsRealUnit()) { return }
         if (target && data.bSecondary == 1) {
             target.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_nian_volcanic_burster", {
                 duration: this.GetSpecialValueFor("burn_duration") * (1 - target.GetStatusResistance())

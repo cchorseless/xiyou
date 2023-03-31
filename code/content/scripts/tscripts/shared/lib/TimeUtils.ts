@@ -170,6 +170,7 @@ export module TimeUtils {
          */
         public AddTimer(_delay: number, endCallBack: ITimerHander, _isIgnorePauseTime = false) {
             let data = this.GetTimerTask();
+            if (_delay <= 0) { _delay = this.GetUpdateInterval() }
             data.Init(false, _delay, endCallBack, _isIgnorePauseTime);
             return data;
         }
@@ -189,6 +190,7 @@ export module TimeUtils {
          */
         public AddFrameTimer(delayframeCount: number, endCallBack: ITimerHander, _isIgnorePauseTime = false): TimerTask {
             let data = this.GetTimerTask();
+            if (delayframeCount <= 0) { delayframeCount = 1 }
             data.Init(true, delayframeCount, endCallBack, _isIgnorePauseTime);
             return data;
         }

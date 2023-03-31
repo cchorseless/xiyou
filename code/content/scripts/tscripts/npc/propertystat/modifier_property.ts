@@ -3,7 +3,7 @@ import { ResHelper } from "../../helper/ResHelper";
 import { PropertyConfig } from "../../shared/PropertyConfig";
 import { BaseModifier_Plus } from "../entityPlus/BaseModifier_Plus";
 import { registerModifier } from "../entityPlus/Base_Plus";
-import { Enum_MODIFIER_EVENT, modifier_event } from "../propertystat/modifier_event";
+import { Enum_MODIFIER_EVENT, modifier_event, registerEvent } from "../propertystat/modifier_event";
 import { PropertyCalculate } from "./PropertyCalculate";
 
 
@@ -53,15 +53,16 @@ export class modifier_property extends BaseModifier_Plus {
     }
 
     BeCreated(params: object) {
-        this.SetHasCustomTransmitterData(true)
+        this.SetHasCustomTransmitterData(true);
         if (IsServer()) {
             this.Calculate_Hp();
             GTimerHelper.AddFrameTimer(1, GHandler.create(this, () => {
                 this.Calculate_Hp()
                 return 1
-            }))
+            }));
         }
     }
+
     /**用于计算气血属性 */
     Calculate_Hp() {
         let parent = this.GetParentPlus();
@@ -93,7 +94,7 @@ export class modifier_property extends BaseModifier_Plus {
      * @returns
      */
     GetModifierBaseAttack_BonusDamage(): number {
-        return PropertyCalculate.GetBaseBonusDamage(this.GetParentPlus(), null)
+        return PropertyCalculate.GetAttackDamage(this.GetParentPlus())
     }
     /**
      * 技能CD减少
@@ -333,8 +334,36 @@ export class modifier_property extends BaseModifier_Plus {
     }
 
 
-
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    CC_ON_TAKEDAMAGE(event: ModifierInstanceEvent) {
+        let attacker = event.attacker as IBaseNpc_Plus;
+        let unit = event.unit as IBaseNpc_Plus;
+        if (!GFuncEntity.IsValid(unit) || !attacker.IsRealUnit() || !unit.IsRealUnit() ||
+            unit.IsBuilding() || unit.IsOther() || attacker == unit) {
+            return
+        }
+        if (bit.band(event.damage_flags, DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NO_SPELL_LIFESTEAL) != DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NO_SPELL_LIFESTEAL) {
+            if (event.damage_type == DAMAGE_TYPES.DAMAGE_TYPE_PHYSICAL) {
+                let fValue = GPropertyCalculate.GetLifeStealPercent(attacker)
+                if (fValue > 0) {
+                    let iParticleID = ParticleManager.CreateParticle(ResHelper.EParticleCom.atk_lifesteal, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, attacker)
+                    ParticleManager.ReleaseParticleIndex(iParticleID);
+                    attacker.ApplyHeal(event.damage * fValue * 0.01, event.inflictor)
+                }
+            }
+            else if (event.damage_type == DAMAGE_TYPES.DAMAGE_TYPE_MAGICAL) {
+                let fValue = GPropertyCalculate.GetSpellLifeStealPercent(attacker)
+                if (fValue > 0) {
+                    let iParticleID = ParticleManager.CreateParticle(ResHelper.EParticleCom.spell_lifesteal, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, attacker)
+                    ParticleManager.ReleaseParticleIndex(iParticleID);
+                    attacker.ApplyHeal(event.damage * fValue * 0.01, event.inflictor)
+                }
+            }
+        }
+    }
     // GetModifierIncomingSpellDamageConstant(event: ModifierAttackEvent): number { return 0 }
+
+
 
 
 }

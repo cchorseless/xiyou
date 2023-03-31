@@ -323,6 +323,7 @@ export class imba_dazzle_poison_touch_707 extends BaseAbility_Plus {
         }
     }
     OnProjectileHit_ExtraData(target: CDOTA_BaseNPC | undefined, location: Vector, ExtraData: any): boolean | void {
+        if (target && !target.IsRealUnit()) { return }
         if (target && !target.IsMagicImmune()) {
             target.EmitSound("Hero_Dazzle.Poison_Touch");
             target.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_dazzle_poison_touch_707", {

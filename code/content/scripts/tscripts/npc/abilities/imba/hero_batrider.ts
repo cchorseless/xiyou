@@ -257,6 +257,7 @@ export class imba_batrider_flamebreak extends BaseAbility_Plus {
         }
     }
     OnProjectileHit_ExtraData(target: CDOTA_BaseNPC | undefined, location: Vector, data: any): boolean | void {
+        if (target && !target.IsRealUnit()) { return }
         EmitSoundOnLocationWithCaster(location, "Hero_Batrider.Flamebreak.Impact", this.GetCasterPlus());
         if (data.flamebreak_dummy_entindex) {
             EntIndexToHScript(data.flamebreak_dummy_entindex).StopSound("Hero_Batrider.Flamebreak");

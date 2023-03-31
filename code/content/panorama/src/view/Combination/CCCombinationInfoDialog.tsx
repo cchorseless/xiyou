@@ -1,4 +1,5 @@
 import React from "react";
+import { BuildingConfig } from "../../../../scripts/tscripts/shared/BuildingConfig";
 import { Dota } from "../../../../scripts/tscripts/shared/Gen/Types";
 import { HeroEquipComponent } from "../../../../scripts/tscripts/shared/service/equip/HeroEquipComponent";
 import { ECombination } from "../../game/components/Combination/ECombination";
@@ -58,13 +59,16 @@ export class CCCombinationInfoDialog extends CCPanel<ICCCombinationInfoDialog> {
         if (abilityitemname == null && castentityindex != -1) {
             abilityitemname = Abilities.GetAbilityName(castentityindex!);
         }
+        let iStar = 0;
         if (playerid == -1) {
             if (unitentityindex != -1) {
                 playerid = BaseEntityRoot.GetEntityBelongPlayerId(unitentityindex!);
+                iStar = BaseEntityRoot.GetBattleEntity(unitentityindex!)?.iStar || 0;
             }
             else if (castentityindex != -1) {
                 unitentityindex = Abilities.GetCaster(castentityindex!);
                 playerid = BaseEntityRoot.GetEntityBelongPlayerId(unitentityindex);
+                iStar = BaseEntityRoot.GetBattleEntity(unitentityindex!)?.iStar || 0;
             }
         }
         let allcombs: ECombination[] = [];
@@ -74,7 +78,7 @@ export class CCCombinationInfoDialog extends CCPanel<ICCCombinationInfoDialog> {
         let data = GJSONConfig.CombinationConfig.getDataList();
         let configs: { [k: string]: Dota.CombinationConfigRecord } = {};
         let bindEquipid = 0;
-        let isConditionActive = false;
+        let isConditionActive = 0;
         for (let info of data) {
             if (info.SectName == sectName && (info.Abilityid == abilityitemname || abilityitemname == null)) {
                 if (configs[info.SectId] == null) {
@@ -86,14 +90,19 @@ export class CCCombinationInfoDialog extends CCPanel<ICCCombinationInfoDialog> {
             }
         }
         if (bindEquipid != 0 && playerid !== -1) {
-            isConditionActive = HeroEquipComponent.CheckPlayerIsScepter(playerid!, bindEquipid);
+            if (iStar == BuildingConfig.MAX_STAR) {
+                isConditionActive = 1;
+            }
+            if (HeroEquipComponent.CheckPlayerIsScepter(playerid!, bindEquipid)) {
+                isConditionActive = 2;
+            }
         }
-        const sectlock = bindEquipid > 0 && isConditionActive == false;
+        const sectlock = bindEquipid > 0 && isConditionActive == 0;
         let configlist = Object.values(configs);
         configlist.sort((a, b) => { return a.activeCount - b.activeCount });
         let SectNameHeader = $.Localize("#lang_" + sectName);
         if (sectlock) {
-            SectNameHeader += "(5星或符石激活)"
+            SectNameHeader += `(${BuildingConfig.MAX_STAR}星或符石激活)`;
         }
         else if (allcombs.length > 0) {
             let lastcomb = allcombs[0]
@@ -116,7 +125,7 @@ export class CCCombinationInfoDialog extends CCPanel<ICCCombinationInfoDialog> {
                             // bOnlyNowLevelValue: true
                         })} /> */}
                         </CCPanel>
-                        {bindEquipid > 0 && <CCIcon_Scepter on={isConditionActive} />}
+                        {bindEquipid > 0 && <CCIcon_Scepter on={isConditionActive == 2} />}
                     </CCPanelHeader>
                     {/* <CCProgressBar id="RemainProgress" width="100%" max={100} value={50} >
                         <CCLabel align="center center" localizedText={"剩余:{d:value}%"} dialogVariables={{ value: 50 }} />

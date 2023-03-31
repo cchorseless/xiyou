@@ -1,0 +1,87 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{36c3961f-02a4-4c52-bf8f-6e3147d7d142} -->
+{
+	_class = "CParticleSystemDefinition"
+	m_bShouldHitboxesFallbackToRenderBounds = false
+	m_nMaxParticles = 0
+	m_ConstantColor = 
+	[
+		248,
+		232,
+		198,
+		255,
+	]
+	m_Children = 
+	[
+		
+		{
+			m_ChildRef = resource:"particles/sect/sect_shield/sect_shield2_body_glow.vpcf"
+			m_bDisableChild = true
+		},
+		
+		{
+			m_ChildRef = resource:"particles/sect/sect_shield/sect_shield2_glyph.vpcf"
+			m_bDisableChild = true
+		},
+		
+		{
+			m_ChildRef = resource:"particles/sect/sect_shield/sect_shield2_sphere.vpcf"
+			m_bDisableChild = true
+		},
+		
+		{
+			m_ChildRef = resource:"particles/sect/sect_shield/sect_shield2_flash.vpcf"
+			m_bDisableChild = true
+		},
+		
+		{
+			m_ChildRef = resource:"particles/sect/sect_shield/sect_shield2_cylinder.vpcf"
+		},
+		
+		{
+			m_ChildRef = resource:"particles/sect/sect_shield/sect_shield2_rings.vpcf"
+			m_bDisableChild = true
+		},
+		
+		{
+			m_ChildRef = resource:"particles/sect/sect_shield/sect_shield2_swoosh.vpcf"
+			m_bDisableChild = true
+		},
+		
+		{
+			m_ChildRef = resource:"particles/sect/sect_shield/sect_shield2_swoosh_b.vpcf"
+			m_bDisableChild = true
+		},
+		
+		{
+			m_ChildRef = resource:"particles/sect/sect_shield/sect_shield2_cylinder_active.vpcf"
+		},
+	]
+	m_controlPointConfigurations = 
+	[
+		
+		{
+			m_name = "preview"
+			m_drivers = 
+			[
+				
+				{
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_vecOffset = 
+					[
+						0.000000,
+						0.000000,
+						0.000000,
+					]
+					m_angOffset = 
+					[
+						null,
+						null,
+						null,
+					]
+					m_entityName = "self"
+				},
+			]
+		},
+	]
+	m_nBehaviorVersion = 10
+}

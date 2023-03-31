@@ -2297,7 +2297,7 @@
     "BagSlotType": 0,
     "AutoUse": true,
     "BatchUseable": true,
-    "BindHeroName": "building_hero_sandking",
+    "BindHeroName": "building_hero_sand_king",
     "UseScript": 0,
     "UseArgs": [],
     "AwakeScript": [

@@ -466,6 +466,7 @@ export class imba_jakiro_dual_breath extends BaseAbility_Plus {
     }
     OnProjectileHit_ExtraData(target: CDOTA_BaseNPC | undefined, location: Vector, ExtraData: any): boolean | void {
         if (target) {
+            if (target && !target.IsRealUnit()) { return }
             if (ExtraData.projectile_type == "ice") {
                 target.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_jakiro_dual_breath_slow", {
                     duration: this.GetDuration()

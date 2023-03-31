@@ -120,6 +120,7 @@ export class imba_abaddon_death_coil extends BaseAbility_Plus {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
             let target = hTarget as IBaseNpc_Plus;
+            if (target && !target.IsRealUnit()) { return }
             let ability_level = this.GetLevel() - 1;
             let special_cast = ExtraData.special_cast || false;
             target.EmitSound("Hero_Abaddon.DeathCoil.Target");
@@ -824,14 +825,14 @@ export class modifier_imba_curse_of_avernus_debuff_slow extends BaseModifier_Plu
                     }
                     heal_amount = heal_amount * heal_convert;
                     let life_steal_particle_name = "particles/generic_gameplay/generic_lifesteal.vpcf";
-                    let healFX = ResHelper.CreateParticleEx("particles/generic_gameplay/generic_lifesteal.vpcf", ParticleAttachment_t.PATTACH_POINT_FOLLOW, caster);
+                    let healFX = ResHelper.CreateParticleEx(life_steal_particle_name, ParticleAttachment_t.PATTACH_POINT_FOLLOW, caster);
                     ParticleManager.ReleaseParticleIndex(healFX);
                     caster.ApplyHeal(heal_amount, this.GetAbilityPlus());
                     if (caster.HasModifier("modifier_imba_borrowed_time_buff_hot_caster")) {
                         let buffed_allies: IBaseNpc_Plus[] = caster.TempData()._borrowed_time_buffed_allies;
                         if (buffed_allies && caster.HasScepter()) {
                             for (const [_, k] of GameFunc.iPair(buffed_allies)) {
-                                healFX = ResHelper.CreateParticleEx("particles/generic_gameplay/generic_lifesteal.vpcf", ParticleAttachment_t.PATTACH_POINT_FOLLOW, k);
+                                healFX = ResHelper.CreateParticleEx(life_steal_particle_name, ParticleAttachment_t.PATTACH_POINT_FOLLOW, k);
                                 ParticleManager.ReleaseParticleIndex(healFX);
                                 k.ApplyHeal(heal_amount, this.GetAbilityPlus());
                             }

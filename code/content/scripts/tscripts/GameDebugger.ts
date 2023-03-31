@@ -208,6 +208,15 @@ export class GameDebugger extends SingletonClass {
                 }
             })
         }));
+        EventHelper.addProtocolEvent(GameProtocol.Protocol.req_DebugMakeChessAttack, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
+            let entityindex = e.data;
+            if (entityindex) {
+                let unit = EntIndexToHScript(entityindex) as IBaseNpc_Plus;
+                if (unit) {
+                    unit.RemoveModifierByName("modifier_jiaoxie_wudi");
+                }
+            }
+        }));
         EventHelper.addProtocolEvent(GameProtocol.Protocol.req_DebugAddSect, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
             let { sectname } = e.data;
             let player = GGameScene.GetPlayer(e.PlayerID);

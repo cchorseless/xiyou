@@ -492,7 +492,7 @@ export class imba_alchemist_unstable_concoction extends BaseAbility_Plus {
         this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_unstable_concoction_handler", {
             duration: duration
         });
-        NetTablesHelper.SetDotaEntityData(this.GetEntityIndex(),
+        NetTablesHelper.SetDotaEntityData(this.GetCasterPlus().GetEntityIndex(),
             {
                 brew_start: GameRules.GetGameTime(),
                 radius_increase: this.radius_increase
@@ -673,7 +673,7 @@ export class imba_alchemist_unstable_concoction extends BaseAbility_Plus {
             brew_start = this.brew_start;
             radius_increase = this.radius_increase;
         } else {
-            let net_table = NetTablesHelper.GetDotaEntityData(this.GetEntityIndex());
+            let net_table = NetTablesHelper.GetDotaEntityData(caster.GetEntityIndex());
             brew_start = net_table.brew_start || 0;
             radius_increase = net_table.radius_increase || 0;
         }

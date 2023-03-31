@@ -1,90 +1,37 @@
+import { ResHelper } from "../../../helper/ResHelper";
 import { registerModifier } from "../../entityPlus/Base_Plus";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 import { modifier_combination_effect } from "./modifier_combination_effect";
 
 @registerModifier()
 export class modifier_sect_phycrit_base_a extends modifier_combination_effect {
+    Init() {
+        let parent = this.GetParentPlus();
+        this.buff_fx = ResHelper.CreateParticleEx("effect/assassin_buff/econ/items/bloodseeker/bloodseeker_eztzhok_weapon/bloodseeker_bloodrage_ground_eztzhok.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, parent);
+        // ParticleManager.SetParticleControl(this.buff_fx, 0, Vector(100, 100, 200));
+        this.AddParticle(this.buff_fx, false, false, -1, false, false);
+    }
+
+    @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
+    CC_OnAttackLanded(keys: ModifierAttackEvent): void {
+        if (IsServer()) {
+            let target = keys.target as IBaseNpc_Plus;
+            let attacker = keys.attacker;
+            let blood_pfx = ResHelper.CreateParticleEx("particles/hero/phantom_assassin/screen_blood_splatter.vpcf", ParticleAttachment_t.PATTACH_EYES_FOLLOW, target, attacker);
+            ParticleManager.ReleaseParticleIndex(blood_pfx);
+            target.EmitSound("Hero_PhantomAssassin.CoupDeGrace");
+            this.GetCasterPlus().EmitSound("Imba.PhantomAssassinFatality");
+            let coup_pfx = ResHelper.CreateParticleEx("particles/units/heroes/hero_phantom_assassin/phantom_assassin_crit_impact.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, target, attacker);
+            ParticleManager.SetParticleControlEnt(coup_pfx, 0, target, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", target.GetAbsOrigin(), true);
+            ParticleManager.SetParticleControl(coup_pfx, 1, target.GetAbsOrigin());
+            ParticleManager.SetParticleControlOrientation(coup_pfx, 1, this.GetParentPlus().GetForwardVector() * (-1) as Vector, this.GetParentPlus().GetRightVector(), this.GetParentPlus().GetUpVector());
+            ParticleManager.ReleaseParticleIndex(coup_pfx);
+        }
+    }
 }
 @registerModifier()
 export class modifier_sect_phycrit_base_b extends modifier_combination_effect {
 }
 @registerModifier()
 export class modifier_sect_phycrit_base_c extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_phycrit_chaos_knight_chaos_strike_b extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_phycrit_chaos_knight_chaos_strike_c extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_phycrit_dawnbreaker_luminosity_b extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_phycrit_dawnbreaker_luminosity_c extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_phycrit_juggernaut_blade_dance_b extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_phycrit_juggernaut_blade_dance_c extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_phycrit_mars_gods_rebuke_b extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_phycrit_mars_gods_rebuke_c extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_phycrit_monkey_king_boundless_strike_b extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_phycrit_monkey_king_boundless_strike_c extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_phycrit_nyx_assassin_vendetta_b extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_phycrit_nyx_assassin_vendetta_c extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_phycrit_pangolier_swashbuckle_b extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_phycrit_pangolier_swashbuckle_c extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_phycrit_phantom_assassin_coup_de_grace_b extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_phycrit_phantom_assassin_coup_de_grace_c extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_phycrit_skeleton_king_mortal_strike_b extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_phycrit_skeleton_king_mortal_strike_c extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_phycrit_slardar_bash_b extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_phycrit_slardar_bash_c extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_phycrit_sniper_headshot_b extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_phycrit_sniper_headshot_c extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_phycrit_spirit_breaker_greater_bash_b extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_phycrit_spirit_breaker_greater_bash_c extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_phycrit_tusk_walrus_punch_b extends modifier_combination_effect {
-}
-@registerModifier()
-export class modifier_sect_phycrit_tusk_walrus_punch_c extends modifier_combination_effect {
 }

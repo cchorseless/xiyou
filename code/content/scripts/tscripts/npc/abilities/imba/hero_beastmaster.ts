@@ -12,7 +12,7 @@ import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_
 
 function UpgradeBeastsSummons(caster: IBaseNpc_Plus, ability: IBaseAbility_Plus) {
     let hawk_ability = "imba_beastmaster_summon_hawk";
-    let boar_ability = "imba_beastmaster_summon_boar";
+    let boar_ability = "imba_beastmaster_call_of_the_wild_boar";
     let hawk_ability_handler;
     let boar_ability_handler;
     let raze_far_handler;
@@ -633,7 +633,7 @@ export class modifier_imba_hawk_invis extends BaseModifier_Plus {
     }
 }
 @registerAbility()
-export class imba_beastmaster_summon_boar extends BaseAbility_Plus {
+export class imba_beastmaster_call_of_the_wild_boar extends BaseAbility_Plus {
     OnUpgrade(): void {
         UpgradeBeastsSummons(this.GetCasterPlus(), this);
     }

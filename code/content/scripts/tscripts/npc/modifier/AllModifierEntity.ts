@@ -4,17 +4,15 @@ import { modifier_animation_freeze } from "./animation/modifier_animation_freeze
 import { modifier_animation_translate } from "./animation/modifier_animation_translate";
 import { modifier_animation_translate_permanent } from "./animation/modifier_animation_translate_permanent";
 import { modifier_dummy_unit } from "./battle/modifier_dummy_unit";
-import { modifier_illusion } from "./battle/modifier_illusion";
+import { modifier_generic_illusion } from "./battle/modifier_generic_illusion";
+import { modifier_generic_summon } from "./battle/modifier_generic_summon";
 import { modifier_jiaoxie_wudi } from "./battle/modifier_jiaoxie_wudi";
 import { modifier_mana_control } from "./battle/modifier_mana_control";
-import { modifier_summon } from "./battle/modifier_summon";
 
 import { modifier_sect_archer_base_a } from "./combinationeffect/modifier_sect_archer";
 import { modifier_sect_assault_base_a } from "./combinationeffect/modifier_sect_assault";
 import { modifier_sect_atkspeed_base_a } from "./combinationeffect/modifier_sect_atkspeed";
 import { modifier_sect_black_art_base_a } from "./combinationeffect/modifier_sect_black_art";
-import { modifier_sect_blink_base_a } from "./combinationeffect/modifier_sect_blink";
-import { modifier_sect_cabala_base_a } from "./combinationeffect/modifier_sect_cabala";
 import { modifier_sect_cannibalism_base_a } from "./combinationeffect/modifier_sect_cannibalism";
 import { modifier_sect_cd_down_base_a } from "./combinationeffect/modifier_sect_cd_down";
 import { modifier_sect_cleave_base_a } from "./combinationeffect/modifier_sect_cleave";
@@ -25,19 +23,15 @@ import { modifier_sect_disarm_base_a } from "./combinationeffect/modifier_sect_d
 import { modifier_sect_double_head_base_a } from "./combinationeffect/modifier_sect_double_head";
 import { modifier_sect_fish_chess_base_a } from "./combinationeffect/modifier_sect_fish_chess";
 import { modifier_sect_flame_base_a } from "./combinationeffect/modifier_sect_flame";
-import { modifier_sect_ghost_base_a } from "./combinationeffect/modifier_sect_ghost";
 import { modifier_sect_health_base_a } from "./combinationeffect/modifier_sect_health";
 import { modifier_sect_ice_base_a } from "./combinationeffect/modifier_sect_ice";
 import { modifier_sect_invent_base_a } from "./combinationeffect/modifier_sect_invent";
-import { modifier_sect_light_base_a } from "./combinationeffect/modifier_sect_light";
-import { modifier_sect_magarm_up_base_a } from "./combinationeffect/modifier_sect_magarm_up";
 import { modifier_sect_magic_base_a } from "./combinationeffect/modifier_sect_magic";
 import { modifier_sect_miss_base_a } from "./combinationeffect/modifier_sect_miss";
 import { modifier_sect_phyarm_down_base_a } from "./combinationeffect/modifier_sect_phyarm_down";
 import { modifier_sect_phyarm_up_base_a } from "./combinationeffect/modifier_sect_phyarm_up";
 import { modifier_sect_phycrit_base_a } from "./combinationeffect/modifier_sect_phycrit";
 import { modifier_sect_poision_base_a } from "./combinationeffect/modifier_sect_poision";
-import { modifier_sect_scilence_base_a } from "./combinationeffect/modifier_sect_scilence";
 import { modifier_sect_seckill_base_a } from "./combinationeffect/modifier_sect_seckill";
 import { modifier_sect_shield_base_a } from "./combinationeffect/modifier_sect_shield";
 import { modifier_sect_steal_base_a } from "./combinationeffect/modifier_sect_steal";
@@ -49,7 +43,6 @@ import { modifier_sect_transform_base_a } from "./combinationeffect/modifier_sec
 import { modifier_sect_treatment_base_a } from "./combinationeffect/modifier_sect_treatment";
 import { modifier_sect_vanity_base_a } from "./combinationeffect/modifier_sect_vanity";
 import { modifier_sect_warpath_base_a } from "./combinationeffect/modifier_sect_warpath";
-import { modifier_sect_weapon_base_a } from "./combinationeffect/modifier_sect_weapon";
 
 
 
@@ -94,8 +87,8 @@ import { modifier_spawn_activity } from "./spawn/modifier_spawn_activity";
 
 [
     modifier_property,
-    modifier_illusion,
-    modifier_summon,
+    modifier_generic_illusion,
+    modifier_generic_summon,
     modifier_dummy_unit,
     modifier_spawn_activity,
     modifier_jiaoxie_wudi,
@@ -108,8 +101,6 @@ import { modifier_spawn_activity } from "./spawn/modifier_spawn_activity";
     modifier_sect_assault_base_a,
     modifier_sect_atkspeed_base_a,
     modifier_sect_black_art_base_a,
-    modifier_sect_blink_base_a,
-    modifier_sect_cabala_base_a,
     modifier_sect_cannibalism_base_a,
     modifier_sect_cd_down_base_a,
     modifier_sect_cleave_base_a,
@@ -120,19 +111,15 @@ import { modifier_spawn_activity } from "./spawn/modifier_spawn_activity";
     modifier_sect_double_head_base_a,
     modifier_sect_fish_chess_base_a,
     modifier_sect_flame_base_a,
-    modifier_sect_ghost_base_a,
     modifier_sect_health_base_a,
     modifier_sect_ice_base_a,
     modifier_sect_invent_base_a,
-    modifier_sect_light_base_a,
-    modifier_sect_magarm_up_base_a,
     modifier_sect_magic_base_a,
     modifier_sect_miss_base_a,
     modifier_sect_phyarm_down_base_a,
     modifier_sect_phyarm_up_base_a,
     modifier_sect_phycrit_base_a,
     modifier_sect_poision_base_a,
-    modifier_sect_scilence_base_a,
     modifier_sect_seckill_base_a,
     modifier_sect_shield_base_a,
     modifier_sect_steal_base_a,
@@ -144,7 +131,6 @@ import { modifier_spawn_activity } from "./spawn/modifier_spawn_activity";
     modifier_sect_treatment_base_a,
     modifier_sect_vanity_base_a,
     modifier_sect_warpath_base_a,
-    modifier_sect_weapon_base_a,
 
 ];
 

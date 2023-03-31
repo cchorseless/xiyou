@@ -352,6 +352,7 @@ export class imba_medusa_mystic_snake extends BaseAbility_Plus {
         if (!IsServer() || !hTarget) {
             return;
         }
+        if (hTarget && !hTarget.IsRealUnit()) { return }
         if (hTarget == this.GetCasterPlus()) {
             if (this.GetCasterPlus().GiveMana) {
                 this.GetCasterPlus().GiveMana(ExtraData.mana_stolen);

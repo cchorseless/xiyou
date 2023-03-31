@@ -1088,7 +1088,7 @@ export class modifier_imba_zuus_thundergods_focus extends BaseModifier_Plus {
             }
         } else {
 
-            let net_table = NetTablesHelper.GetDotaEntityData(this.GetAbilityPlus().GetEntityIndex()) || {};
+            let net_table = NetTablesHelper.GetDotaEntityData(this.GetCasterPlus().GetEntityIndex()) || {};
             this.bonus_movement_speed = net_table.movement_speed || 10;
             this.bonus_turn_rate = net_table.turn_rate || 1;
         }

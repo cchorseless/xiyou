@@ -858,7 +858,7 @@ export class modifier_imba_tidebringer extends BaseModifier_Plus {
         if (this.GetAbilityPlus()) {
             let parent = this.GetParentPlus();
             let target = params.target;
-            if ((parent == params.attacker) && (target.GetTeamNumber() != parent.GetTeamNumber()) && (target.IsCreep || target.IsHero)) {
+            if ((parent == params.attacker) && (target.GetTeamNumber() != parent.GetTeamNumber())) {
                 if (!target.IsBuilding()) {
                     let ability = this.GetAbilityPlus();
                     this.sound_triggered = false;
@@ -1601,6 +1601,7 @@ export class imba_kunkka_ghostship extends BaseAbility_Plus {
     }
     OnProjectileHit_ExtraData(target: CDOTA_BaseNPC | undefined, location: Vector, ExtraData: any): boolean | void {
         if (target) {
+            if (target && !target.IsRealUnit()) { return }
             let caster = this.GetCasterPlus();
             if (caster.GetTeam() == target.GetTeam()) {
                 let duration = this.GetSpecialValueFor("buff_duration");

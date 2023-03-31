@@ -33,7 +33,7 @@ declare namespace common_units {
 "MovementSpeed" :string ,
 "MovementTurnRate" :string ,
 "ArmorPhysical" :string ,
-"MagicalResistance" :string ,
+"ArmorMagical" :string ,
 "StatusHealth" :string ,
 "StatusHealthRegen" :string ,
 "StatusMana" :string ,

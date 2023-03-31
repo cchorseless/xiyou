@@ -7,6 +7,12 @@ export module ResHelper {
         FLAG_WHILE_DEAD = 2,
         FLAG_GLOBAL = 4,
     }
+    export enum EParticleCom {
+        atk_lifesteal = "particles/generic_gameplay/generic_lifesteal.vpcf",
+        spell_lifesteal = "particles/items3_fx/octarine_core_lifesteal.vpcf",
+    }
+
+
 
     export function LoadUnitRes(unit: IBaseNpc_Plus): void {
         let name = unit.GetUnitName();
@@ -126,10 +132,7 @@ export module ResHelper {
             this.resPath = r;
             return this;
         }
-        set_resNpc(r: IBaseNpc_Plus) {
-            this.resNpc = r;
-            return this;
-        }
+
         set_level(r: PARTICLE_DETAIL_LEVEL) {
             this.level = r;
             return this;
@@ -140,6 +143,7 @@ export module ResHelper {
         }
         set_owner(r: IBaseNpc_Plus) {
             this.owner = r;
+            this.resNpc = r;
             return this;
         }
         set_validtime(r: number) {

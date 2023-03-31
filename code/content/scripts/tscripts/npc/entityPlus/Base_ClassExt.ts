@@ -3,6 +3,7 @@
 import { GameFunc } from "../../GameFunc";
 import { AoiHelper } from "../../helper/AoiHelper";
 import { KVHelper } from "../../helper/KVHelper";
+import { NetTablesHelper } from "../../helper/NetTablesHelper";
 import { ResHelper } from "../../helper/ResHelper";
 import { PropertyCalculate } from "../propertystat/PropertyCalculate";
 
@@ -1180,6 +1181,28 @@ declare global {
         IsFriendly(hTarget: CDOTA_BaseNPC): boolean;
 
         /**
+         * @Server
+         * 添加或者删除词条
+         * @param sCiTiaoName 词条名称 或者 技能索引
+         * @returns
+         */
+        HandleCiTiao(sCiTiaoName: string, isadd?: boolean): void;
+        /**
+         * @Both
+         * 是否有词条
+         * @param sCiTiaoName 词条名称 或者 技能索引
+         * @returns
+         */
+        HasCiTiao(sCiTiaoName: string): boolean;
+        /**
+         * @Both
+         * 获取词条的值
+         * @param sCiTiaoName 词条的名字或者索引
+         * @returns
+         */
+        GetCiTiaoValue(sCiTiaoName: string, sSpecialName?: string, default_V?: number): number;
+
+        /**
          * @Both
          * 是否有天赋
          * @param sTalentName 天赋名称 或者 技能索引
@@ -1251,7 +1274,7 @@ declare global {
         FindChildByFilter<T extends IBaseNpc_Plus>(func: (v: IBaseNpc_Plus, i: number) => boolean): T[];
 
         /**
-         * 是否是真实单位
+         * 是否是真实单位,排除信使英雄
          * @Both
          */
         IsRealUnit(): boolean;
@@ -1570,6 +1593,7 @@ BaseNPC.ClearSelf = function () {
             this.ETRoot = null;
         }
         this.RegOwnerSelf(false);
+        NetTablesHelper.ClearDotaEntityData(this.GetEntityIndex());
         GTimerHelper.ClearAll(this);
     }
 }
@@ -1581,10 +1605,7 @@ BaseNPC.HasShard = function () {
     return this.HasModifier("modifier_item_aghanims_shard")
 }
 BaseNPC.IsSummoned = function () {
-    return this.HasModifier("modifier_summon")
-}
-BaseNPC.IsIllusion = function () {
-    return this.HasModifier("modifier_illusion")
+    return this.HasModifier("modifier_generic_summon")
 }
 BaseNPC.GetSource = function () {
     if (this.IsSummoned() || this.IsClone() || this.IsIllusion()) {
@@ -1830,6 +1851,51 @@ BaseNPC.IsFriendly = function (hTarget: CDOTA_BaseNPC) {
     return false;
 };
 
+BaseNPC.HandleCiTiao = function (sTalentName: string, isadd = true): void {
+    if (!IsValid(this)) return;
+    if (!IsServer()) return;
+    if (sTalentName == null || sTalentName.length == 0 || GJSONConfig.BuffEffectConfig.get(sTalentName) == null) {
+        GLogHelper.print("AddCiTiao sTalentName is null or not config :" + sTalentName);
+        return;
+    }
+    let bufftype = GGetRegClass(sTalentName, true);
+    if (isadd) {
+        if (bufftype) {
+            this.addOnlyBuff(sTalentName, this)
+        }
+        else {
+            NetTablesHelper.SetDotaEntityData(this.GetEntityIndex(), { sTalentName: 1 }, "citiao");
+        }
+    } else {
+        if (bufftype) {
+            this.removeBuff(sTalentName, this)
+        }
+        else {
+            NetTablesHelper.SetDotaEntityData(this.GetEntityIndex(), { sTalentName: null }, "citiao");
+        }
+    }
+
+}
+
+BaseNPC.HasCiTiao = function (sTalentName: string): boolean {
+    if (!IsValid(this)) return false;
+    if (this.HasModifier(sTalentName)) {
+        return true;
+    }
+    let citiao = NetTablesHelper.GetDotaEntityData(this.GetEntityIndex(), "citiao");
+    if (citiao == null) return false;
+    return citiao[sTalentName] != null;
+}
+
+BaseNPC.GetCiTiaoValue = function (sTalentName: string, sSpecialName: string = "value", default_V: number = 0): number {
+    if (!IsValid(this)) return default_V;
+    let citiaoinfo = GJSONConfig.BuffEffectConfig.get(sTalentName)
+    if (citiaoinfo) {
+        return citiaoinfo.propinfo.get(sSpecialName);
+    }
+    return default_V;
+}
+
 BaseNPC.HasTalent = function (sTalentName: string): IBaseAbility_Plus {
     if (!IsValid(this)) return;
     let hTalent = this.FindAbilityByName(sTalentName);
@@ -1859,7 +1925,7 @@ BaseNPC.GetPlayerID = function () {
 
 BaseNPC.IsRealUnit = function () {
     if (!IsValid(this)) return false;
-    return !(this.IsIllusion() || this.IsSummoned());
+    return !(this.IsThinker() || this.IsDummyUnit() || this.IsUntargetable() || this.IsRealHero());
 }
 
 BaseNPC.GetIntellect = function () {
@@ -2013,15 +2079,9 @@ if (IsServer()) {
     BaseNPC.removeBuff = function (buffname: string, caster?: CDOTA_BaseNPC) {
         if (IsServer()) {
             if (caster) {
-                let modef = this.findBuff(buffname, caster);
-                if (modef) {
-                    modef.Destroy();
-                }
+                this.RemoveModifierByNameAndCaster(buffname, caster);
             } else {
-                let modef = this.findBuff(buffname);
-                if (modef) {
-                    modef.Destroy();
-                }
+                this.RemoveModifierByName(buffname);
             }
         }
     }
@@ -2143,7 +2203,9 @@ if (IsServer()) {
         flagFilter = flagFilter || DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE;
         order = order || FindOrder.FIND_CLOSEST;
         canGrowCache = canGrowCache || false;
-        return FindUnitsInRadius(this.GetTeam(), location, null, radius, teamFilter, typeFilter, flagFilter, order, canGrowCache);
+        let r = FindUnitsInRadius(this.GetTeam(), location, null, radius, teamFilter, typeFilter, flagFilter, order, canGrowCache);
+        r = r.filter((v) => { return v.IsRealUnit() });
+        return r;
     }
 }
 

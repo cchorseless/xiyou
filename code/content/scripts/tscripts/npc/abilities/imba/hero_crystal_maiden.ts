@@ -1084,6 +1084,7 @@ export class imba_crystal_maiden_freezing_field extends BaseAbility_Plus {
     OnProjectileHit_ExtraData(hTarget: CDOTA_BaseNPC | undefined, vLocation: Vector, ExtraData: any): boolean | void {
         let caster = this.GetCasterPlus();
         if (hTarget) {
+            if (hTarget && !hTarget.IsRealUnit()) { return }
             ApplyDamage({
                 attacker: caster,
                 victim: hTarget,

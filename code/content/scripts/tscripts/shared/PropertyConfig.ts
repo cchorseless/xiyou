@@ -250,12 +250,10 @@ export module PropertyConfig {
         HP_REGEN_AMPLIFY_PERCENTAGE = modifierfunction.MODIFIER_PROPERTY_HP_REGEN_AMPLIFY_PERCENTAGE,
         /**
          * Method Name: `GetModifierLifestealRegenAmplify_Percentage`
-         * @deprecated
          */
         LIFESTEAL_AMPLIFY_PERCENTAGE = modifierfunction.MODIFIER_PROPERTY_LIFESTEAL_AMPLIFY_PERCENTAGE,
         /**
          * Method Name: `GetModifierSpellLifestealRegenAmplify_Percentage`
-         * @deprecated
          */
         SPELL_LIFESTEAL_AMPLIFY_PERCENTAGE = modifierfunction.MODIFIER_PROPERTY_SPELL_LIFESTEAL_AMPLIFY_PERCENTAGE,
         /**
@@ -884,6 +882,14 @@ export module PropertyConfig {
         STATS_PRIMARY_PERCENTAGE,
         STATS_NO_ALL_ARMOR,
         STATUS_RESISTANCE_FORCE,
+        /**额外攻击力,绿字部分 */
+        ATTACK_DAMAGE_BONUS,
+        /**额外攻击力百分比 */
+        ATTACK_DAMAGE_BONUS_PERCENTAGE,
+        /**基础攻击力百分比 */
+        ATTACK_DAMAGE_BASE_PERCENTAGE,
+        /**最终攻击力百分比 */
+        ATTACK_DAMAGE_PERCENTAGE,
         /**基础生命值 */
         HP_BASE,
         HP_BONUS,
@@ -986,10 +992,6 @@ export module PropertyConfig {
         CRITICALSTRIKE_DAMAGE_TOTAL,
         IGNORE_PHYSICAL_ARMOR_CONSTANT,
         IGNORE_MAGICAL_ARMOR_CONSTANT,
-        // 普攻吸血百分比
-        LIFESTEAL_PERCENTAGE,
-        // 技能吸血百分比
-        SPELL_LIFESTEAL_PERCENTAGE,
         SPELL_EVASION,
         //#endregion
     }

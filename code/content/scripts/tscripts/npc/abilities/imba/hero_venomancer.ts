@@ -691,7 +691,7 @@ export class modifier_imba_poison_sting extends BaseModifier_Plus {
     CC_OnAttack(params: ModifierAttackEvent): void {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
-            if ((caster == params.target) && (params.attacker.IsCreep || params.attacker.IsHero)) {
+            if ((caster == params.target)) {
                 if (!params.attacker.IsBuilding() && caster.HasTalent("special_bonus_imba_venomancer_6")) {
                     let ability = this.GetAbilityPlus();
                     let duration = ability.GetSpecialValueFor("duration");
@@ -711,7 +711,7 @@ export class modifier_imba_poison_sting extends BaseModifier_Plus {
             if (caster.PassivesDisabled()) {
                 return;
             }
-            if ((caster == params.attacker) && (params.target.IsCreep || params.target.IsHero)) {
+            if ((caster == params.attacker)) {
                 if (!params.target.IsBuilding() && !params.target.IsMagicImmune()) {
                     let mod = params.target.AddNewModifier(caster, ability, "modifier_imba_poison_sting_debuff", {
                         duration: (duration - FrameTime()) * (1 - params.target.GetStatusResistance())

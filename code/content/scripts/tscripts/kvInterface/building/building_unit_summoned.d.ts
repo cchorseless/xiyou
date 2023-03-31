@@ -593,7 +593,7 @@ declare namespace building_unit_summoned {
 "MinimapIcon" :string ,
 "Ability1" :string ,
 "MovementTurnRate" :string ,
-"MagicalResistance" :string ,
+"ArmorMagical" :string ,
 "AttackDamageType" :string ,
 "AttributePrimary" :string ,
 "AttributeBaseStrength" :string ,

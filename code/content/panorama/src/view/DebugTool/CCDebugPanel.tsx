@@ -90,7 +90,7 @@ export class CCDebugPanel extends CCPanel<ICCDebugPanel> {
                         <CCDebugTool_DemoSelectionButton eventName="CreateEnemyButtonPressed" localtext="创建敌方单位" onactivate={() => { this.addOnlyDebugDialog(CCDebugTool_EnemyPicker, { title: "创建敌方单位", unitNames: enemylist }) }} />
                         <CCDebugTool_DemoButton eventName={GameProtocol.Protocol.req_DebugAddDummyTarget} localtext="添加傀儡" />
                         <CCDebugTool_DemoButton eventName={GameProtocol.Protocol.req_DebugRemoveDummyTarget} localtext="移除傀儡" />
-                        <CCDebugTool_DemoButton eventName="RespawnHeroButtonPressed" localtext="复活英雄" />
+                        <CCDebugTool_DemoButton eventName={GameProtocol.Protocol.req_DebugMakeChessAttack} data={Players.GetLocalPlayerPortraitUnit()} localtext="切换攻击状态" />
                         <CCDebugTool_DemoButton eventName="ControlUnitButtonPressed" localtext="切换控制权" />
                         <CCDebugTool_DemoSelectionButton eventName="CC_DebugTool_UnitInfo" localtext="单位信息面板" onactivate={() => { this.addOnlyDebugDialog(CCDebugTool_UnitInfo) }} />
                     </CCDebugTool_Category>

@@ -290,6 +290,9 @@ export class modifier_imba_frost_arrows_slow extends BaseModifier_Plus {
     }
     BeRemoved(): void {
         if (IsServer()) {
+            if (!GFuncEntity.IsValid(this.caster)) {
+                return;
+            }
             let target_stacks = this.GetStackCount();
             let stack_count = this.caster.findBuffStack(this.caster_modifier, this.caster);
             if (stack_count <= target_stacks) {
@@ -1073,6 +1076,7 @@ export class imba_drow_ranger_multishot extends BaseAbility_Plus {
         this.GetCasterPlus().RemoveModifierByName("modifier_imba_drow_ranger_multishot");
     }
     OnProjectileHit_ExtraData(target: CDOTA_BaseNPC | undefined, location: Vector, ExtraData: any): boolean | void {
+        if (target && !target.IsRealUnit()) { return }
         if (!this.targets_hit[ExtraData.volley_index]) {
             this.targets_hit[ExtraData.volley_index] = {}
         }
@@ -1155,7 +1159,7 @@ export class modifier_imba_drow_ranger_multishot extends BaseModifier_Plus {
             Ability: this.GetAbilityPlus(),
             EffectName: "particles/units/heroes/hero_drow/drow_multishot_proj_linear_proj.vpcf",
             vSpawnOrigin: this.GetParentPlus().GetAttachmentOrigin(this.GetParentPlus().ScriptLookupAttachment("attach_attack1")),
-            fDistance: this.GetParentPlus().Script_GetAttackRange() * this.arrow_range_multiplier,
+            fDistance: this.GetParentPlus().GetAttackRangePlus() * this.arrow_range_multiplier,
             fStartRadius: this.arrow_width,
             fEndRadius: this.arrow_width,
             Source: this.GetParentPlus(),

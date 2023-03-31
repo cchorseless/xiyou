@@ -1222,6 +1222,7 @@ export class imba_lich_chain_frost extends BaseAbility_Plus {
         ProjectileManager.CreateTrackingProjectile(chain_frost_projectile);
     }
     OnProjectileHit_ExtraData(target: CDOTA_BaseNPC | undefined, location: Vector, extradata: any): boolean | void {
+        if (target && !target.IsRealUnit()) { return }
         let caster = this.GetCasterPlus();
         let ability = this;
         let particle_projectile = "particles/units/heroes/hero_lich/lich_chain_frost.vpcf";

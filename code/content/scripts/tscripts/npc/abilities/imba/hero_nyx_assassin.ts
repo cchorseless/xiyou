@@ -95,6 +95,7 @@ export class imba_nyx_assassin_impale extends BaseAbility_Plus {
         if (!target) {
             return undefined;
         }
+        if (target && !target.IsRealUnit()) { return }
         if (target.IsMagicImmune()) {
             return undefined;
         }

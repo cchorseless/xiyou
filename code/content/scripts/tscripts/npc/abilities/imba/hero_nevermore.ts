@@ -1306,6 +1306,7 @@ export class imba_nevermore_requiem extends BaseAbility_Plus {
         if (!target) {
             return undefined;
         }
+        if (target && !target.IsRealUnit()) { return }
         let caster = this.GetCasterPlus();
         let ability = this;
         let modifier_debuff = "modifier_imba_reqiuem_debuff";

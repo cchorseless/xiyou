@@ -24,7 +24,7 @@ export class modifier_special_bonus_imba_lina_8 extends BaseModifier_Plus {
         if (IsServer()) {
             let parent = this.GetParentPlus();
             let target = params.target;
-            if (parent == params.attacker && target.GetTeamNumber() != parent.GetTeamNumber() && (target.IsCreep || target.IsHero)) {
+            if (parent == params.attacker && target.GetTeamNumber() != parent.GetTeamNumber()) {
                 let int = parent.GetIntellect();
                 let ticks = parent.GetTalentValue("special_bonus_imba_lina_8", "ticks_amount");
                 let duration = parent.GetTalentValue("special_bonus_imba_lina_8", "duration");
@@ -253,6 +253,7 @@ export class imba_lina_dragon_slave extends BaseAbility_Plus {
     OnProjectileHit_ExtraData(target: CDOTA_BaseNPC | undefined, location: Vector, ExtraData: any): boolean | void {
         let caster = this.GetCasterPlus();
         if (target) {
+            if (target && !target.IsRealUnit()) { return }
             let ability_laguna = this.GetCasterPlus().findAbliityPlus<imba_lina_laguna_blade>("imba_lina_laguna_blade");
             let pfx = ResHelper.CreateParticleEx("particles/units/heroes/hero_lina/lina_spell_dragon_slave_impact.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetCasterPlus(), this.GetCasterPlus());
             ParticleManager.SetParticleControl(pfx, 0, target.GetAbsOrigin());

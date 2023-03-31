@@ -18,10 +18,19 @@ export class BaseEntityRoot extends ET.EntityRoot {
         const instanceID = BaseEntityRoot.AllEntity[entityid + ""];
         if (instanceID) {
             const entity = ETEntitySystem.GetEntity(instanceID) as InstanceType<T>;
-            if (entity && entity.GetType() == this.name)
+            if (entity && entity.GetType() == this.name) {
                 return entity;
+            }
         }
     }
+    static GetBattleEntity(entityid: string | EntityIndex | number) {
+        const instanceID = BaseEntityRoot.AllEntity[entityid + ""];
+        if (instanceID) {
+            const entity = ETEntitySystem.GetEntity(instanceID) as IBattleUnitEntityRoot;
+            return entity;
+        }
+    }
+
     static GetEntityBelongPlayerId(entityid: string | EntityIndex | number): PlayerID {
         const instanceID = BaseEntityRoot.AllEntity[entityid + ""];
         if (instanceID) {

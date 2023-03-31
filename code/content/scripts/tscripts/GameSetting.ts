@@ -121,23 +121,26 @@ export class GameSetting {
                 let fDamage = event.damage;
                 let iDamageType = event.damagetype_const;
                 [hAttacker, hVictim].forEach(unit => {
-                    let iPlayerID = unit.GetPlayerID();
-                    if (PlayerResource.IsValidPlayerID(iPlayerID)) {
-                        let hHero = PlayerResource.GetSelectedHeroEntity(iPlayerID)
-                        if (hHero != unit) {
+                    let battleroot = unit.ETRoot as IBattleUnitEntityRoot;
+                    if (battleroot && battleroot.IsBattleUnit && battleroot.IsBattleUnit() && battleroot.IsFriendly()) {
+                        let iPlayerID = battleroot.BelongPlayerid;
+                        if (PlayerResource.IsValidPlayerID(iPlayerID)) {
+                            // let hHero = PlayerResource.GetSelectedHeroEntity(iPlayerID)
+                            // if (hHero == unit) {
+                            //     return
+                            // }
                             if (iDamageType == DAMAGE_TYPES.DAMAGE_TYPE_NONE) {
                                 iDamageType = DAMAGE_TYPES.DAMAGE_TYPE_PURE
                             }
-                            let building = unit.ETRoot as IBattleUnitEntityRoot;
-                            if (building && building.IsBattleUnit && building.IsBattleUnit()) {
-                                let round = building.GetPlayer().RoundManagerComp().getCurrentBoardRound();
-                                if (building.IsIllusion()) {
-
-                                }
-                                round.AddRoundDamage(unit.GetEntityIndex() + "", unit.GetUnitName(), unit == hAttacker, iDamageType, fDamage)
+                            let round = battleroot.GetPlayer().RoundManagerComp().getCurrentBoardRound();
+                            let entityindex = unit.GetEntityIndex() + "";
+                            if (battleroot.IsIllusion() || battleroot.IsSummon()) {
+                                entityindex = (battleroot as IBattleUnitIllusionEntityRoot).SourceEntityId + "";
                             }
+                            round.AddRoundDamage(entityindex, unit.GetUnitName(), unit == hAttacker, iDamageType, fDamage)
                         }
                     }
+
                 })
             }
             return true

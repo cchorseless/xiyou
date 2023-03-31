@@ -23,7 +23,7 @@ export class imba_huskar_inner_fire extends BaseAbility_Plus {
         ParticleManager.SetParticleControl(particle, 1, Vector(radius, 0, 0));
         ParticleManager.SetParticleControl(particle, 3, this.GetCasterPlus().GetAbsOrigin());
         ParticleManager.ReleaseParticleIndex(particle);
-        let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
+        let enemies = this.GetCasterPlus().FindUnitsInRadiusPlus(radius);
         for (const [_, enemy] of GameFunc.iPair(enemies)) {
             let damageTable = {
                 victim: enemy,

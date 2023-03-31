@@ -5,10 +5,12 @@ import { BattleUnitEntityRoot } from "../BattleUnit/BattleUnitEntityRoot";
 import { ERoundBoard } from "../Round/ERoundBoard";
 
 export class BattleUnitIllusionEntityRoot extends BattleUnitEntityRoot {
+    readonly SourceEntityId: EntityIndex;
     public onAwake(playerid: PlayerID, conf: string) {
         (this.BelongPlayerid as any) = playerid;
         (this.ConfigID as any) = conf;
         (this.EntityId as any) = this.GetDomain<IBaseNpc_Plus>().GetEntityIndex();
+        (this.SourceEntityId as any) = this.GetDomain<IBaseNpc_Plus>().GetOwnerPlus().GetEntityIndex();
         this.AddComponent(GGetRegClass<typeof AiAttackComponent>("AiAttackComponent"));
         this.InitSyncClientInfo();
         this.JoinInRound();
@@ -43,4 +45,7 @@ export class BattleUnitIllusionEntityRoot extends BattleUnitEntityRoot {
     GetDotaHeroName() {
         return this.Config().DotaHeroName;
     }
+}
+declare global {
+    type IBattleUnitIllusionEntityRoot = BattleUnitIllusionEntityRoot;
 }

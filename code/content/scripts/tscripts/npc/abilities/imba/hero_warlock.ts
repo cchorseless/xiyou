@@ -33,7 +33,7 @@ export class imba_warlock_fatal_bonds extends BaseAbility_Plus {
         }
         let bond_target = target;
         for (let link = 0; link < max_targets; link++) {
-            let enemies = FindUnitsInRadius(caster.GetTeamNumber(), bond_target.GetAbsOrigin(), undefined, link_search_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_CLOSEST, false);
+            let enemies = caster.FindUnitsInRadiusPlus(link_search_radius, bond_target.GetAbsOrigin(), null, null, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS);
             for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 if (!linked_units.includes(enemy.GetEntityIndex())) {
                     let bond_modifier = enemy.AddNewModifier(caster, ability, modifier_bonds, {

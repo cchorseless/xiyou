@@ -65,7 +65,7 @@ export class modifier_event extends BaseModifier_Plus {
                 let _Event = m.__AllRegisterEvent;
                 if (_Event && _Event[_k]) {
                     // 自己事件
-                    if (event == null || (a && event.attacker == parent) || (b && event.unit == parent)) {
+                    if (event == null || (a && event.attacker == parent) || (b && (event.unit == parent || event.target == parent))) {
                         _Event[_k][0].forEach((func) => {
                             if ((m as any)[func] == null || type((m as any)[func]) != 'function') { return }
                             event == null ? (m as any)[func]() : (m as any)[func](event);
@@ -318,6 +318,7 @@ export class modifier_event extends BaseModifier_Plus {
      *
      */
     OnAttacked(event: ModifierAttackEvent): void {
+        (event as IBuffEventData).eventType = EventDataType.unitIsSelf;
         modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ATTACKED);
     }
     /**
@@ -781,10 +782,26 @@ export enum Enum_MODIFIER_EVENT {
     ON_SPELL_CRIT,
     /**攻击或者技能暴击事件 ModifierAttackEvent */
     ON_ANY_CRIT,
-    /**召唤物出生 {summon:IBaseNpc_Plus} */
+    /**
+     * 召唤物出生 
+     * @Server
+     */
     ON_SPAWN_SUMMONNED,
-    /**幻象出生 */
+    /**
+     * 召唤物死亡 
+     * @Server
+     */
+    ON_DEATH_SUMMONNED,
+    /**
+     * 幻象出生
+     * @Server
+     */
     ON_SPAWN_ILLUSION,
+    /**
+     * 幻象死亡 
+     * @Server
+     */
+    ON_DEATH_ILLUSION,
     /**吸血 */
     ON_HEAL_TYPE_LIFESTEAL,
     /**TODO */

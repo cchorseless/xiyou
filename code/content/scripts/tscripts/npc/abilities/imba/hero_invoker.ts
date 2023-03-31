@@ -80,7 +80,7 @@ export class imba_invoker {
                 bonus_strength: bonus_strength,
                 health_regen_per_instance: health_regen_per_instance
             });
-            NetTablesHelper.SetDotaEntityData(ability.GetEntityIndex(), {
+            NetTablesHelper.SetDotaEntityData(caster.GetEntityIndex(), {
                 quas_bonus_strength: bonus_strength,
                 quas_health_regen_per_instance: health_regen_per_instance
             }, "quas")
@@ -95,7 +95,7 @@ export class imba_invoker {
                 move_speed_per_instance: move_speed_per_instance,
                 attack_speed_per_instance: attack_speed_per_instance
             });
-            NetTablesHelper.SetDotaEntityData(ability.GetEntityIndex(), {
+            NetTablesHelper.SetDotaEntityData(caster.GetEntityIndex(), {
                 // CustomNetTables.SetTableValue("player_table", "wex" + caster.GetPlayerID(), {
                 wex_bonus_agility: bonus_agility,
                 wex_move_speed_per_instance: move_speed_per_instance,
@@ -109,7 +109,7 @@ export class imba_invoker {
                 bonus_intelligence: bonus_intelligence,
                 bonus_damage_per_instance: bonus_damage_per_instance
             });
-            NetTablesHelper.SetDotaEntityData(ability.GetEntityIndex(), {
+            NetTablesHelper.SetDotaEntityData(caster.GetEntityIndex(), {
                 // CustomNetTables.SetTableValue("player_table", "exort" + caster.GetPlayerID(), {
                 exort_bonus_intelligence: bonus_intelligence,
                 exort_bonus_damage_per_instance: bonus_damage_per_instance
@@ -211,7 +211,7 @@ export class modifier_imba_invoker_quas extends BaseModifier_Plus {
             this.bonus_strength = kv.bonus_strength;
             this.health_regen_per_instance = kv.health_regen_per_instance;
         } else {
-            let net_table = NetTablesHelper.GetDotaEntityData(this.GetAbilityPlus().GetEntityIndex(), "quas") || {}
+            let net_table = NetTablesHelper.GetDotaEntityData(this.GetCasterPlus().GetEntityIndex(), "quas") || {}
             this.bonus_strength = net_table.quas_bonus_strength;
             this.health_regen_per_instance = net_table.quas_health_regen_per_instance;
         }
@@ -287,7 +287,7 @@ export class modifier_imba_invoker_wex extends BaseModifier_Plus {
             this.move_speed_per_instance = kv.move_speed_per_instance;
             this.attack_speed_per_instance = kv.attack_speed_per_instance;
         } else {
-            let net_table = NetTablesHelper.GetDotaEntityData(this.GetAbilityPlus().GetEntityIndex(), "wex") || {}
+            let net_table = NetTablesHelper.GetDotaEntityData(this.GetCasterPlus().GetEntityIndex(), "wex") || {}
             this.bonus_agility = net_table.wex_bonus_agility;
             this.move_speed_per_instance = net_table.wex_move_speed_per_instance;
             this.attack_speed_per_instance = net_table.wex_attack_speed_per_instance;
@@ -365,7 +365,7 @@ export class modifier_imba_invoker_exort extends BaseModifier_Plus {
             this.bonus_intelligence = kv.bonus_intelligence;
             this.bonus_damage_per_instance = kv.bonus_damage_per_instance;
         } else {
-            let net_table = NetTablesHelper.GetDotaEntityData(this.GetAbilityPlus().GetEntityIndex(), "exort") || {}
+            let net_table = NetTablesHelper.GetDotaEntityData(this.GetCasterPlus().GetEntityIndex(), "exort") || {}
             this.bonus_intelligence = net_table.exort_bonus_intelligence;
             this.bonus_damage_per_instance = net_table.exort_bonus_damage_per_instance;
         }
@@ -1374,7 +1374,7 @@ export class imba_invoker_ghost_walk extends BaseAbility_Plus {
                 area_of_effect: area_of_effect,
                 invis_fade_time: invis_fade_time
             });
-            NetTablesHelper.SetDotaEntityData(this.GetEntityIndex(), {
+            NetTablesHelper.SetDotaEntityData(caster.GetEntityIndex(), {
                 ghost_walk_self_slow: self_slow,
                 ghost_walk_enemy_slow: enemy_slow
             })
@@ -1445,7 +1445,7 @@ export class modifier_imba_invoker_ghost_walk extends BaseModifier_Plus {
             this.ghost_walk_fade_time = kv.invis_fade_time;
             this.max_movement_speed = kv.max_movement_speed;
         } else {
-            let net_table = NetTablesHelper.GetDotaEntityData(this.GetAbilityPlus().GetEntityIndex()) || {}
+            let net_table = NetTablesHelper.GetDotaEntityData(this.GetCasterPlus().GetEntityIndex()) || {}
             this.self_slow = net_table.ghost_walk_self_slow;
         }
     }
@@ -1638,7 +1638,7 @@ export class imba_invoker_alacrity extends BaseAbility_Plus {
                     bonus_damage: bonus_damage
                 });
             }
-            NetTablesHelper.SetDotaEntityData(this.GetEntityIndex(), {
+            NetTablesHelper.SetDotaEntityData(caster.GetEntityIndex(), {
                 alacrity_bonus_damage: bonus_damage,
                 alacrity_attack_speed: bonus_attack_speed
             })
@@ -1650,6 +1650,7 @@ export class imba_invoker_alacrity extends BaseAbility_Plus {
     }
     OnProjectileHit_ExtraData(target: CDOTA_BaseNPC | undefined, location: Vector, ExtraData: any): boolean | void {
         if (IsServer()) {
+            if (target && !target.IsRealUnit()) { return }
             let ability = this;
             let chains = ExtraData.chains;
             let attacker = EntIndexToHScript(ExtraData.attacker) as IBaseNpc_Plus;
@@ -1730,7 +1731,7 @@ export class modifier_imba_invoker_alacrity extends BaseModifier_Plus {
             this.bonus_damage = kv.bonus_damage;
             this.bonus_attack_speed = kv.bonus_attack_speed;
         } else {
-            let net_table = NetTablesHelper.GetDotaEntityData(this.ability.GetEntityIndex()) || {}
+            let net_table = NetTablesHelper.GetDotaEntityData(this.GetCasterPlus().GetEntityIndex()) || {}
             this.bonus_damage = net_table.alacrity_bonus_damage || 0;
             this.bonus_attack_speed = net_table.alacrity_attack_speed || 0;
         }
@@ -1825,7 +1826,7 @@ export class modifier_imba_invoker_alacrity extends BaseModifier_Plus {
             this.bonus_damage = kv.bonus_damage;
             this.bonus_attack_speed = kv.bonus_attack_speed;
         } else {
-            let net_table = NetTablesHelper.GetDotaEntityData(this.ability.GetEntityIndex()) || {}
+            let net_table = NetTablesHelper.GetDotaEntityData(this.GetCasterPlus().GetEntityIndex()) || {}
             this.bonus_damage = net_table.alacrity_bonus_damage || 0;
             this.bonus_attack_speed = net_table.alacrity_attack_speed || 0;
         }
@@ -2164,6 +2165,7 @@ export class imba_invoker_tornado extends BaseAbility_Plus {
     }
     OnProjectileHit_ExtraData(target: IBaseNpc_Plus | undefined, location: Vector, ExtraData: any): boolean | void {
         if (IsServer()) {
+            if (target && !target.IsRealUnit()) { return }
             if (target != undefined) {
                 let caster = this.GetCasterPlus();
                 let base_damage = ExtraData.base_damage;
@@ -2880,6 +2882,7 @@ export class imba_invoker_chaos_meteor extends BaseAbility_Plus {
     }
     OnProjectileHit_ExtraData(target: CDOTA_BaseNPC | undefined, location: Vector, ExtraData: any): boolean | void {
         if (IsServer()) {
+            if (target && !target.IsRealUnit()) { return }
             if (target == undefined) {
                 EntIndexToHScript(ExtraData.meteor_dummy).StopSound("Hero_Invoker.ChaosMeteor.Loop");
                 EntIndexToHScript(ExtraData.meteor_dummy).RemoveSelf();
@@ -3254,6 +3257,7 @@ export class imba_invoker_deafening_blast extends BaseAbility_Plus {
     OnProjectileHit_ExtraData(target: CDOTA_BaseNPC | undefined, location: Vector, ExtraData: any): boolean | void {
         if (IsServer()) {
             if (target) {
+                if (target && !target.IsRealUnit()) { return }
                 let caster = this.GetCasterPlus();
                 let target_entity_index = target.GetEntityIndex();
                 if (!this.hit_table.includes(target_entity_index)) {

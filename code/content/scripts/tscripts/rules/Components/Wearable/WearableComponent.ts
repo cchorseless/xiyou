@@ -106,10 +106,11 @@ export class WearableComponent extends ET.Component {
             return;
         }
         let wearitem = this.FindWearItemByItemDef(sItemDef);
-        if (wearitem == null) {
-            let type = GGetRegClass<typeof EWearableItem>("EWearableItem");
-            wearitem = this.AddChild(type, sItemDef, wearlabel);
+        if (wearitem) {
+            return
         }
+        let type = GGetRegClass<typeof EWearableItem>("EWearableItem");
+        wearitem = this.AddChild(type, sItemDef, wearlabel);
         let slot = wearitem.getSlot();
         if (this.SlotWears[slot] == null) {
             this.SlotWears[slot] = [];
