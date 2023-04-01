@@ -176,7 +176,7 @@ export module PropertyCalculate {
         let bounsatk_pect = SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS_PERCENTAGE);
         bounsatk = bounsatk * (100 + bounsatk_pect) / 100;
         let atk_pect = SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_PERCENTAGE);
-        return math.floor((baseatk + bounsatk) * (100 + atk_pect) / 100);
+        return math.floor(baseatk + bounsatk * (100 + atk_pect) / 100);
     }
     /**基础攻击力
      * @Both
@@ -207,7 +207,8 @@ export module PropertyCalculate {
         }
         let baseatk = fDefault + SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.BASEATTACK_BONUSDAMAGE);
         let baseatk_pect = SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BASE_PERCENTAGE);
-        return math.floor(baseatk * (100 + baseatk_pect) / 100);
+        let atk_pect = SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_PERCENTAGE);
+        return math.floor(baseatk * (100 + baseatk_pect) * (100 + atk_pect) / 10000);
     }
     /** 基础物理防御
      * @Both
@@ -219,20 +220,71 @@ export module PropertyCalculate {
         if (GFuncEntity.IsValid(hUnit)) {
             fValue = GetUnitCache(hUnit, "ArmorPhysical") + SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BASE)
         }
-        return fValue;
+        let BasePhysicalArmorPercentage = SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BASE_PERCENTAGE);
+        let PhysicalArmorPercentage = SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_TOTAL_PERCENTAGE);
+        return math.floor(fValue * (1 + BasePhysicalArmorPercentage * 0.01) * (1 + PhysicalArmorPercentage * 0.01))
     }
-    export function GetBonusPhysicalArmor(hUnit: IBaseNpc_Plus) {
-        return SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS)
+
+    /**
+     * 计算物理护甲
+     * @param target
+     */
+    export function GetPhysicalArmor(target: IBaseNpc_Plus) {
+        let BasePhysicalArmor = GetBasePhysicalArmor(target);
+        let PhysicalArmorPercentage = SumProps(target, null, GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_TOTAL_PERCENTAGE);
+        let BonusPhysicalArmor = SumProps(target, null, GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS);
+        // 唯一值
+        let BonusPhysicalArmor_UNIQU = SumProps(target, null, GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS_UNIQUE);
+        // 无法被无视
+        let BonusPhysicalArmor_UNIQUE_ACTIVE = SumProps(target, null, GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS_UNIQUE_ACTIVE);
+        BonusPhysicalArmor = (BonusPhysicalArmor + BonusPhysicalArmor_UNIQU + BonusPhysicalArmor_UNIQUE_ACTIVE) * (1 + PhysicalArmorPercentage * 0.01)
+        return math.floor(BasePhysicalArmor + BonusPhysicalArmor);
     }
-    export function GetBasePhysicalArmorPercentage(hUnit: IBaseNpc_Plus) {
-        return SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BASE_PERCENTAGE)
+    /**
+     * 计算无法被无视的护甲值
+     * @param target
+     * @returns
+     */
+    export function GetPhysicalArmor_Active(target: IBaseNpc_Plus) {
+        let BonusPhysicalArmor_UNIQUE_ACTIVE = SumProps(target, null, GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS_UNIQUE_ACTIVE);
+        let PhysicalArmorPercentage = SumProps(target, null, GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_TOTAL_PERCENTAGE);
+        return BonusPhysicalArmor_UNIQUE_ACTIVE * (1 + PhysicalArmorPercentage * 0.01)
     }
-    export function GetPhysicalArmorPercentage(hUnit: IBaseNpc_Plus) {
-        return SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_PERCENTAGE)
-    }
+
 
     export function GetIgnorePhysicalArmorPercentageTarget(hUnit: IBaseNpc_Plus, tParams: ICustomModifierAttackEvent) {
         return SumProps(hUnit, tParams, GPropertyConfig.EMODIFIER_PROPERTY.IGNORE_PHYSICAL_ARMOR_PERCENTAGE_TARGET)
+    }
+    /**
+     * 物理护甲减免
+     * @param target
+     * @param event
+     */
+    export function GetPhysicalReductionPect(target: IBaseNpc_Plus, event: ModifierAttackEvent) {
+        let iDamageFlags = event.damage_flags;
+        // 无视魔法护甲
+        if (iDamageFlags == DOTADamageFlag_t.DOTA_DAMAGE_FLAG_IGNORES_PHYSICAL_ARMOR) {
+            return 0
+        }
+        let fValue = GetPhysicalArmor(target);
+        // 无视基础物理护甲
+        if (iDamageFlags == DOTADamageFlag_t.DOTA_DAMAGE_FLAG_IGNORES_BASE_PHYSICAL_ARMOR) {
+            fValue -= GetBasePhysicalArmor(target);
+        }
+        let fValue_active = GetPhysicalArmor_Active(target);
+        // 负甲的时候不计算无视护甲
+        if (fValue > 0) {
+            if (event && GFuncEntity.IsValid(event.attacker)) {
+                let fIgnore = SumProps(event.attacker, event, GPropertyConfig.EMODIFIER_PROPERTY.IGNORE_PHYSICAL_ARMOR);
+                fValue = math.max(fValue - fIgnore, 0);
+                if (fValue > 0) {
+                    let fIgnorePect = GetIgnorePhysicalArmorPercentage(event.attacker);
+                    fValue = fValue - math.max(fValue * fIgnorePect * 0.01, 0);
+                }
+            }
+        }
+        fValue = math.max(fValue, fValue_active)
+        return GPropertyConfig.PHYSICAL_ARMOR_FACTOR * fValue / (1 + GPropertyConfig.PHYSICAL_ARMOR_FACTOR * math.abs(fValue))
     }
     //  魔法防御
     export function GetBaseMagicalArmor(hUnit: IBaseNpc_Plus) {
@@ -240,16 +292,19 @@ export module PropertyCalculate {
         if (GFuncEntity.IsValid(hUnit)) {
             fValue = GetUnitCache(hUnit, "ArmorMagical") + SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_ARMOR_BASE)
         }
-        return fValue;
+        let BaseMagicalArmorPercentage = SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_ARMOR_BASE_PERCENTAGE);
+        let MagicalArmorPercentage = SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_ARMOR_PERCENTAGE);
+        return math.floor(fValue * (1 + BaseMagicalArmorPercentage * 0.01) * (1 + MagicalArmorPercentage * 0.01))
     }
-    export function GetBonusMagicalArmor(hUnit: IBaseNpc_Plus) {
-        return SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_ARMOR_BONUS)
-    }
-    export function GetBaseMagicalArmorPercentage(hUnit: IBaseNpc_Plus) {
-        return SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_ARMOR_BASE_PERCENTAGE)
-    }
-    export function GetMagicalArmorPercentage(hUnit: IBaseNpc_Plus) {
-        return SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_ARMOR_PERCENTAGE)
+    /**
+     * 计算魔法护甲
+     * @param target
+     */
+    export function GetMagicalArmor(target: IBaseNpc_Plus) {
+        let BaseMagicalArmor = GetBaseMagicalArmor(target);
+        let MagicalArmorPercentage = SumProps(target, null, GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_ARMOR_PERCENTAGE);
+        let BonusMagicalArmor = SumProps(target, null, GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_ARMOR_BONUS);
+        return math.floor(BaseMagicalArmor + BonusMagicalArmor * (1 + MagicalArmorPercentage * 0.01))
     }
 
     export function GetIgnoreMagicalArmorConstant(hUnit: IBaseNpc_Plus, tParams: ICustomModifierAttackEvent) {
@@ -258,6 +313,36 @@ export module PropertyCalculate {
     export function GetIgnoreMagicalArmorPercentageTarget(hUnit: IBaseNpc_Plus, tParams: ICustomModifierAttackEvent) {
         return SumProps(hUnit, tParams, GPropertyConfig.EMODIFIER_PROPERTY.IGNORE_MAGICAL_ARMOR_PERCENTAGE_TARGET,)
     }
+    /**
+     * 计算魔法抵抗
+     * @param target
+     * @param event
+     */
+    export function GetMagicalReductionPect(target: IBaseNpc_Plus, event: ModifierAttackEvent) {
+        let iDamageFlags = event.damage_flags;
+        // 无视魔法护甲
+        if (iDamageFlags == DOTADamageFlag_t.DOTA_DAMAGE_FLAG_IGNORES_MAGIC_ARMOR) {
+            return 0
+        }
+        let fValue = GetMagicalArmor(target)
+        if (event && GFuncEntity.IsValid(event.attacker) && fValue > 0) {
+            fValue = fValue - math.min(SumProps(target, event, GPropertyConfig.EMODIFIER_PROPERTY.IGNORE_MAGICAL_ARMOR), fValue)
+            fValue = fValue - math.max(fValue * GetIgnoreMagicalArmorPercentage(event.attacker as IBaseNpc_Plus) * 0.01, 0)
+        }
+        return GPropertyConfig.MAGICAL_ARMOR_FACTOR * fValue / (1 + GPropertyConfig.MAGICAL_ARMOR_FACTOR * math.abs(fValue))
+    }
+    /**
+     * 无视魔法护甲百分比
+     * @param target
+     * @returns
+     */
+    export function GetIgnoreMagicalArmorPercentage(target: IBaseNpc_Plus) {
+        let IGNORE_MAGICAL_ARMOR_PERCENTAGE = SumProps(target, null, GPropertyConfig.EMODIFIER_PROPERTY.IGNORE_MAGICAL_ARMOR_PERCENTAGE);
+        let IGNORE_MAGICAL_ARMOR_PERCENTAGE_UNIQUE = SumProps(target, null, GPropertyConfig.EMODIFIER_PROPERTY.IGNORE_MAGICAL_ARMOR_PERCENTAGE_UNIQUE);
+        return -((1 - IGNORE_MAGICAL_ARMOR_PERCENTAGE * 0.01) * (1 - IGNORE_MAGICAL_ARMOR_PERCENTAGE_UNIQUE * 0.01) - 1) * 100
+    }
+
+
 
     //  技能增强
     export function GetBaseSpellAmplify(hUnit: IBaseNpc_Plus, tParams: ICustomModifierAttackEvent) {
@@ -637,117 +722,9 @@ export module PropertyCalculate {
         let fTotalPercent = GetIntellectPercentageWithoutPrimaryStat(hUnit) * 0.01
         return math.max(math.floor(GetBaseIntellect(hUnit) * (1 + GetBaseIntellectPercentage(hUnit) * 0.01 + fTotalPercent) + GetBonusIntellect(hUnit) * (1 + fTotalPercent) + SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BONUS_NO_PERCENTAGE)), 0)
     }
-    /**
-     * 计算魔法抵抗
-     * @param target
-     * @param event
-     */
-    export function GetMagicalReductionPect(target: IBaseNpc_Plus, event: ModifierAttackEvent) {
-        let iDamageFlags = event.damage_flags;
-        // 无视魔法护甲
-        if (iDamageFlags == DOTADamageFlag_t.DOTA_DAMAGE_FLAG_IGNORES_MAGIC_ARMOR) {
-            return 0
-        }
-        let fValue = GetMagicalArmor(target)
-        if (event && GFuncEntity.IsValid(event.attacker) && fValue > 0) {
-            fValue = fValue - math.min(SumProps(target, event, GPropertyConfig.EMODIFIER_PROPERTY.IGNORE_MAGICAL_ARMOR), fValue)
-            fValue = fValue - math.max(fValue * GetIgnoreMagicalArmorPercentage(event.attacker as IBaseNpc_Plus) * 0.01, 0)
-        }
-        return GPropertyConfig.MAGICAL_ARMOR_FACTOR * fValue / (1 + GPropertyConfig.MAGICAL_ARMOR_FACTOR * math.abs(fValue))
-    }
-    /**
-     * 计算魔法护甲
-     * @param target
-     */
-    export function GetMagicalArmor(target: IBaseNpc_Plus) {
-        let BaseMagicalArmor = SumProps(target, null, GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_ARMOR_BASE);
-        let BaseMagicalArmorPercentage = SumProps(target, null, GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_ARMOR_BASE_PERCENTAGE);
-        let MagicalArmorPercentage = SumProps(target, null, GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_ARMOR_PERCENTAGE);
-        let BonusMagicalArmor = SumProps(target, null, GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_ARMOR_BONUS);
-        return (BaseMagicalArmor * (1 + BaseMagicalArmorPercentage * 0.01) + BonusMagicalArmor) * (1 + MagicalArmorPercentage * 0.01)
-    }
-
-    /**
-     * 无视魔法护甲百分比
-     * @param target
-     * @returns
-     */
-    export function GetIgnoreMagicalArmorPercentage(target: IBaseNpc_Plus) {
-        let IGNORE_MAGICAL_ARMOR_PERCENTAGE = SumProps(target, null, GPropertyConfig.EMODIFIER_PROPERTY.IGNORE_MAGICAL_ARMOR_PERCENTAGE);
-        let IGNORE_MAGICAL_ARMOR_PERCENTAGE_UNIQUE = SumProps(target, null, GPropertyConfig.EMODIFIER_PROPERTY.IGNORE_MAGICAL_ARMOR_PERCENTAGE_UNIQUE);
-        return -((1 - IGNORE_MAGICAL_ARMOR_PERCENTAGE * 0.01) * (1 - IGNORE_MAGICAL_ARMOR_PERCENTAGE_UNIQUE * 0.01) - 1) * 100
-    }
 
 
-    /**
-     * 物理护甲减免
-     * @param target
-     * @param event
-     */
-    export function GetPhysicalReductionPect(target: IBaseNpc_Plus, event: ModifierAttackEvent) {
-        let iDamageFlags = event.damage_flags;
-        // 无视魔法护甲
-        if (iDamageFlags == DOTADamageFlag_t.DOTA_DAMAGE_FLAG_IGNORES_PHYSICAL_ARMOR) {
-            return 0
-        }
-        let fValue = GetPhysicalArmor(target);
-        // 无视基础物理护甲
-        if (iDamageFlags == DOTADamageFlag_t.DOTA_DAMAGE_FLAG_IGNORES_BASE_PHYSICAL_ARMOR) {
-            fValue -= GetPhysicalArmor_Base(target);
-        }
-        let fValue_active = GetPhysicalArmor_Active(target);
-        // 负甲的时候不计算无视护甲
-        if (fValue > 0) {
-            if (event && GFuncEntity.IsValid(event.attacker)) {
-                let fIgnore = SumProps(event.attacker, event, GPropertyConfig.EMODIFIER_PROPERTY.IGNORE_PHYSICAL_ARMOR);
-                fValue = math.max(fValue - fIgnore, 0);
-                if (fValue > 0) {
-                    let fIgnorePect = GetIgnorePhysicalArmorPercentage(event.attacker);
-                    fValue = fValue - math.max(fValue * fIgnorePect * 0.01, 0);
-                }
-            }
-        }
-        fValue = math.max(fValue, fValue_active)
-        return GPropertyConfig.PHYSICAL_ARMOR_FACTOR * fValue / (1 + GPropertyConfig.PHYSICAL_ARMOR_FACTOR * math.abs(fValue))
-    }
 
-    /**
-     * 基础物理护甲
-     * @param target
-     * @returns
-     */
-    export function GetPhysicalArmor_Base(target: IBaseNpc_Plus) {
-        let BasePhysicalArmor = GetBasePhysicalArmor(target);
-        let BasePhysicalArmorPercentage = SumProps(target, null, GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BASE_PERCENTAGE);
-        let PhysicalArmorPercentage = SumProps(target, null, GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_TOTAL_PERCENTAGE);
-        return BasePhysicalArmor * (1 + BasePhysicalArmorPercentage * 0.01) * (1 + PhysicalArmorPercentage * 0.01)
-    }
-
-    /**
-     * 计算物理护甲
-     * @param target
-     */
-    export function GetPhysicalArmor(target: IBaseNpc_Plus) {
-        let BasePhysicalArmor = GetBasePhysicalArmor(target);
-        let BasePhysicalArmorPercentage = SumProps(target, null, GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BASE_PERCENTAGE);
-        let PhysicalArmorPercentage = SumProps(target, null, GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_TOTAL_PERCENTAGE);
-        let BonusPhysicalArmor = SumProps(target, null, GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS);
-        // 唯一值
-        let BonusPhysicalArmor_UNIQU = SumProps(target, null, GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS_UNIQUE);
-        // 无法被无视
-        let BonusPhysicalArmor_UNIQUE_ACTIVE = SumProps(target, null, GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS_UNIQUE_ACTIVE);
-        return (BasePhysicalArmor * (1 + BasePhysicalArmorPercentage * 0.01) + BonusPhysicalArmor + BonusPhysicalArmor_UNIQU + BonusPhysicalArmor_UNIQUE_ACTIVE) * (1 + PhysicalArmorPercentage * 0.01)
-    }
-    /**
-     * 计算无法被无视的护甲值
-     * @param target
-     * @returns
-     */
-    export function GetPhysicalArmor_Active(target: IBaseNpc_Plus) {
-        let BonusPhysicalArmor_UNIQUE_ACTIVE = SumProps(target, null, GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS_UNIQUE_ACTIVE);
-        let PhysicalArmorPercentage = SumProps(target, null, GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_TOTAL_PERCENTAGE);
-        return BonusPhysicalArmor_UNIQUE_ACTIVE * (1 + PhysicalArmorPercentage * 0.01)
-    }
 
     export function GetCastRangeBonus(target: IBaseNpc_Plus) {
         return SumProps(target, null, GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS);
