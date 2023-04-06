@@ -74,7 +74,6 @@ export class CombinationComponent extends ET.Component {
 
     refreshCombination() {
         let r = this.GetChilds(ECombinationLabelItem);
-        GLogHelper.print(r.length);
         r.forEach(v => {
             v.checkActive();
         })

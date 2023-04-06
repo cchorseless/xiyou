@@ -14,24 +14,24 @@ export class PlayerDataComponent extends PlayerData implements IRoundStateCallba
         this.addEvent();
         this.applyPopuLevelUp(0);
         this.applyTechLevelUp(0);
-        this.perIntervalGold += 5;
         this.SyncClient();
     }
 
     isEnoughItem(type: number, count: number) {
+        count = math.abs(count);
         switch (type) {
             case EEnum.EMoneyType.Gold:
-                return this.gold + count >= 0;
+                return this.gold - count >= 0;
             case EEnum.EMoneyType.Wood:
-                return this.wood + count >= 0;
+                return this.wood - count >= 0;
             case EEnum.EMoneyType.SoulCrystal:
-                return this.soulcrystal + count >= 0;
+                return this.soulcrystal - count >= 0;
         }
         return false;
     }
 
     StartGame() {
-        this.addMoneyPerInterval();
+        this.addCoinPerInterval();
     }
 
 
@@ -39,6 +39,8 @@ export class PlayerDataComponent extends PlayerData implements IRoundStateCallba
         switch (type) {
             case EEnum.EMoneyType.Gold:
                 this.gold += count;
+                let offset = this.gold - PlayerResource.GetGold(this.BelongPlayerid);
+                PlayerResource.ModifyGold(this.BelongPlayerid, offset, true, EDOTA_ModifyGold_Reason.DOTA_ModifyGold_Unspecified)
                 break;
             case EEnum.EMoneyType.Wood:
                 this.wood += count;
@@ -51,24 +53,23 @@ export class PlayerDataComponent extends PlayerData implements IRoundStateCallba
 
     changePopulation(count: number) {
         this.population += count;
-    }
-
-    addMoneyRoundStart(gold: number, wood: number) {
-        this.changeItem(EEnum.EMoneyType.Gold, gold);
-        this.changeItem(EEnum.EMoneyType.Wood, wood);
         this.SyncClient();
     }
 
+    addMoneyRoundStart(gold: number, wood: number) {
+        this.ModifyGold(gold);
+        this.ModifyWood(wood);
+    }
+
     timePerInterval: ITimerTask;
-    addMoneyPerInterval() {
+    addCoinPerInterval() {
         if (this.timePerInterval != null) {
             this.timePerInterval.Clear()
             this.timePerInterval = null;
         }
         this.timePerInterval = GTimerHelper.AddTimer(15, GHandler.create(this, () => {
-            this.changeItem(EEnum.EMoneyType.Gold, this.perIntervalGold);
-            this.changeItem(EEnum.EMoneyType.Wood, this.perIntervalWood);
-            this.SyncClient();
+            this.ModifyGold(this.perIntervalGold);
+            this.ModifyWood(this.perIntervalWood);
             return 15
         }))
     }
@@ -80,8 +81,7 @@ export class PlayerDataComponent extends PlayerData implements IRoundStateCallba
                     let popu = building.GetPopulation();
                     this.changePopulation(popu);
                 }
-            }),
-            this.BelongPlayerid
+            }), this.BelongPlayerid
         );
         GEventHelper.AddEvent(ChessControlConfig.Event.ChessControl_LeaveBattle,
             GHandler.create(this, (building: IBuildingEntityRoot) => {
@@ -149,7 +149,7 @@ export class PlayerDataComponent extends PlayerData implements IRoundStateCallba
     }
 
     OnRound_Start(round: ERoundBoard) {
-        if (round.BelongPlayerid == (this.BelongPlayerid)) {
+        if (round.BelongPlayerid == this.BelongPlayerid) {
             this.addMoneyRoundStart(round.config.roundprizeGold, round.config.roundprizeWood);
         }
     }
@@ -157,9 +157,6 @@ export class PlayerDataComponent extends PlayerData implements IRoundStateCallba
     OnRound_Prize(round?: ERoundBoard): void { }
     OnRound_WaitingEnd(): void { }
 
-    SpendGold(gold: number, reason: EDOTA_ModifyGold_Reason = 0) {
-        this.gold -= gold;
-    }
 
     GetGold() {
         return this.gold;
@@ -174,19 +171,29 @@ export class PlayerDataComponent extends PlayerData implements IRoundStateCallba
             ParticleManager.ReleaseParticleIndex(iParticleID)
             GTimerHelper.AddTimer(1, GHandler.create(this, () => {
                 this.ModifyGold(iGold, reliable, reason);
-                SendOverheadEventMessage(PlayerResource.GetPlayer(this.BelongPlayerid), DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_GOLD, hHero, iGold, null)
             }))
         }
         else {
             this.ModifyGold(iGold, reliable, reason);
-            SendOverheadEventMessage(PlayerResource.GetPlayer(this.BelongPlayerid), DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_GOLD, hHero, iGold, null)
         }
     }
 
     ModifyGold(goldChange: number, reliable: boolean = true, reason: EDOTA_ModifyGold_Reason = 0) {
-        this.gold += goldChange;
+        this.changeItem(EEnum.EMoneyType.Gold, goldChange);
+        if (goldChange > 0) {
+            let hHero = GGameScene.GetPlayer(this.BelongPlayerid).Hero;
+            SendOverheadEventMessage(PlayerResource.GetPlayer(this.BelongPlayerid), DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_GOLD, hHero, goldChange, null)
+        }
+        this.SyncClient();
     }
 
-
+    ModifyWood(woodChange: number, reliable: boolean = true, reason: EDOTA_ModifyGold_Reason = 0) {
+        this.changeItem(EEnum.EMoneyType.Wood, woodChange);
+        if (woodChange > 0) {
+            let hHero = GGameScene.GetPlayer(this.BelongPlayerid).Hero;
+            SendOverheadEventMessage(PlayerResource.GetPlayer(this.BelongPlayerid), DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_XP, hHero, woodChange, null)
+        }
+        this.SyncClient();
+    }
 }
 

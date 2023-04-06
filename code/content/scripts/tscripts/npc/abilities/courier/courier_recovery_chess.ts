@@ -22,18 +22,12 @@ export class courier_recovery_chess extends BaseAbility_Plus {
         );
     }
 
-    GetChannelTime() {
-        if (IsInToolsMode()) {
-            return 0.01;
-        } else {
-            return super.GetChannelTime();
-        }
+
+    ProcsMagicStick() {
+        return false;
     }
 
-    OnChannelFinish(bInterrupted: boolean) {
-        if (bInterrupted) {
-            return;
-        }
+    OnSpellStart(): void {
         let caster = this.GetCasterPlus();
         //  断线不能卖塔（这应该是队友操作的）
         let iPlayerID = caster.GetPlayerID();
@@ -41,17 +35,8 @@ export class courier_recovery_chess extends BaseAbility_Plus {
             return;
         }
         let target = this.GetCursorTarget() as IBaseNpc_Plus;
-        let gold_return = this.GetSpecialValueFor("gold_return");
-        GGameScene.GetPlayer(caster.ETRoot.BelongPlayerid).BuildingManager().sellBuilding(target.ETRoot.As<IBuildingEntityRoot>());
+        let gold_return = this.GetSpecialValueFor("gold_pect") * 0.01;
+        GGameScene.GetPlayer(caster.ETRoot.BelongPlayerid).BuildingManager().sellBuilding(target.ETRoot.As<IBuildingEntityRoot>(), gold_return);
     }
 
-    ProcsMagicStick() {
-        return false;
-    }
-
-    OnUpgrade() {
-        if (this.GetLevel() == 1) {
-            this.ToggleAutoCast();
-        }
-    }
 }

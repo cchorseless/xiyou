@@ -36,7 +36,8 @@ export module BuildingConfig {
         dota_hud_error_has_same_tower = "dota_hud_error_has_same_tower",
         /**人口限制 */
         dota_hud_error_population_limit = "dota_hud_error_population_limit",
-
+        /**金币不足 */
+        dota_hud_error_gold_limit = "dota_hud_error_gold_limit",
         dota_hud_error_only_hero_can_use = "dota_hud_error_only_hero_can_use",
         dota_hud_error_cant_build_at_location = "dota_hud_error_cant_build_at_location",
     }

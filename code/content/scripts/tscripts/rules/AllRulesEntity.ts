@@ -2,7 +2,6 @@ import { AbilityManagerComponent } from "./Components/Ability/AbilityManagerComp
 import { AiAttackComponent } from "./Components/AI/AiAttackComponent";
 import { BattleUnitManagerComponent } from "./Components/BattleUnit/BattleUnitManagerComponent";
 import { BuildingManagerComponent } from "./Components/Building/BuildingManagerComponent";
-import { ChessControlComponent } from "./Components/ChessControl/ChessControlComponent";
 import { ChessMoveComponent } from "./Components/ChessControl/ChessMoveComponent";
 import { CombinationComponent } from "./Components/Combination/CombinationComponent";
 import { CombinationManagerComponent } from "./Components/Combination/CombinationManagerComponent";
@@ -52,7 +51,6 @@ import { WearableSystemComponent } from "./System/WearableSystemComponent";
     CourierBagComponent,
     CourierShopComponent,
     BuildingManagerComponent,
-    ChessControlComponent,
     EnemyManagerComponent,
     AiAttackComponent,
 

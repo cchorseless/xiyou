@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { ResHelper } from "../../../helper/ResHelper";
 import { GameServiceConfig } from "../../../shared/GameServiceConfig";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -1078,7 +1078,7 @@ export class imba_skeleton_king_reincarnation extends BaseAbility_Plus {
 export class modifier_imba_reincarnation extends BaseModifier_Plus {
     public caster: IBaseNpc_Plus;
     public ability: imba_skeleton_king_reincarnation;
-    public particle_death: any;
+    public particle_death: string;
     public sound_death: any;
     public sound_reincarnation: any;
     public sound_be_back: any;

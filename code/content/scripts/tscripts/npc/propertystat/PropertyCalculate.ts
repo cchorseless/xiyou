@@ -155,14 +155,7 @@ export module PropertyCalculate {
             hUnit.TempData()[k] = v;
         }
     }
-    export function GetBaseMaxHealth(hUnit: IBaseNpc_Plus) {
-        let fDefault = 0;
-        if (GFuncEntity.IsValid(hUnit)) {
-            fDefault = GetUnitCache(hUnit, "StatusHealth");
-        }
-        let hp_base = PropertyCalculate.SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.HP_BASE)
-        return fDefault + hp_base;
-    }
+
     /**
      * 总攻击力
      * @Both
@@ -356,6 +349,14 @@ export module PropertyCalculate {
     }
     export function GetSpellAmplify(hUnit: IBaseNpc_Plus, tParams: ICustomModifierAttackEvent) {
         return GetBaseSpellAmplify(hUnit, tParams) + GetBonusSpellAmplify(hUnit, tParams) + GetBonusSpellAmplifyUnique(hUnit, tParams)
+    }
+    export function GetBaseMaxHealth(hUnit: IBaseNpc_Plus) {
+        let fDefault = 0;
+        if (GFuncEntity.IsValid(hUnit)) {
+            fDefault = GetUnitCache(hUnit, "StatusHealth");
+        }
+        let hp_base = PropertyCalculate.SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.HP_BASE)
+        return fDefault + hp_base;
     }
     //  生命值
     export function GetHealthBonus(hUnit: IBaseNpc_Plus) {
@@ -723,9 +724,6 @@ export module PropertyCalculate {
         return math.max(math.floor(GetBaseIntellect(hUnit) * (1 + GetBaseIntellectPercentage(hUnit) * 0.01 + fTotalPercent) + GetBonusIntellect(hUnit) * (1 + fTotalPercent) + SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BONUS_NO_PERCENTAGE)), 0)
     }
 
-
-
-
     export function GetCastRangeBonus(target: IBaseNpc_Plus) {
         return SumProps(target, null, GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS);
 
@@ -745,6 +743,12 @@ export module PropertyCalculate {
     }
     export function GetEntityIndex(hUnit: IBaseNpc_Plus) {
         return hUnit.GetEntityIndex()
+    }
+    /** 召唤物 */
+    export function GetSummonDuration(hUnit: IBaseNpc_Plus, curduation: number) {
+        let fSummonDurationBonus = SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.SUMMON_DURATION_BONUS);
+        let fSummonDurationPect = SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.SUMMON_DURATION_PECT);
+        return (curduation + fSummonDurationBonus) * (1 + fSummonDurationPect * 0.01);
     }
 
 }

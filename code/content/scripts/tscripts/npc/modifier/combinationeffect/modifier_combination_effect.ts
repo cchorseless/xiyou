@@ -25,4 +25,14 @@ export class modifier_combination_effect extends BaseModifier_Plus {
         }
     }
 
+    getAllEnemy(): IBaseNpc_Plus[] {
+        if (IsServer()) {
+            let parent = this.GetParentPlus();
+            let selfteam = parent.GetTeam();
+            let enemyteam = selfteam == DOTATeam_t.DOTA_TEAM_BADGUYS ? DOTATeam_t.DOTA_TEAM_GOODGUYS : DOTATeam_t.DOTA_TEAM_BADGUYS;;
+            let enemyunits = parent.GetPlayerRoot().BattleUnitManagerComp().GetAllBattleUnitAlive(enemyteam, true);
+            return enemyunits.map((unit) => { return unit.GetDomain<IBaseNpc_Plus>() });
+        }
+    }
+
 }

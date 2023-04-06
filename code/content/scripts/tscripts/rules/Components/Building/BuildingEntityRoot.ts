@@ -58,10 +58,18 @@ export class BuildingEntityRoot extends BattleUnitEntityRoot {
         }
     }
 
-
+    SetGoldCost(gold: number) {
+        this.iGoldCost = gold;
+    }
     /**金币价格 */
     GetGoldCost() {
-        return this.iGoldCost || 0;
+        if (!this.iGoldCost) {
+            let itemName = KVHelper.GetUnitData(this.ConfigID, "CardName") as string;
+            if (itemName) {
+                this.iGoldCost = GToNumber(KVHelper.GetItemData(itemName, "ItemCost"));
+            }
+        }
+        return this.iGoldCost;
     }
 
     GetPopulation(): number {

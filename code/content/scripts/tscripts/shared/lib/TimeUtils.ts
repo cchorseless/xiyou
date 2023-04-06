@@ -225,12 +225,18 @@ export module TimeUtils {
         }
         public Update(interval: number) {
             let isPause = GameRules.GetGameFrameTime() == 0;
-            for (let i = 0, len = this.mUseTimerTasks.length; i < len; i++) {
-                if (!this.mUseTimerTasks[i].Update(interval, isPause)) {
+            let len = this.mUseTimerTasks.length;
+            for (let i = 0; i < len; i++) {
+                if (this.mUseTimerTasks[i] == null) {
+                    this.mUseTimerTasks.splice(i, 1);
+                    i--;
+                    len--;
+                }
+                else if (!this.mUseTimerTasks[i].Update(interval, isPause)) {
                     //没更新成功，mUseTimerTasks长度减1，所以需要--i
                     // hander 也可能往里面加计时器，所以需要重新计算长度
-                    len = this.mUseTimerTasks.length;
                     i--;
+                    len--;
                 }
             }
         }

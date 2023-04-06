@@ -1,10 +1,14 @@
 import { EventHelper } from "../../../helper/EventHelper";
+import { KVHelper } from "../../../helper/KVHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { BuildingConfig } from "../../../shared/BuildingConfig";
 import { ChessControlConfig } from "../../../shared/ChessControlConfig";
+import { EEnum } from "../../../shared/Gen/Types";
+import { RoundConfig } from "../../../shared/RoundConfig";
 import { ET } from "../../../shared/lib/Entity";
 import { GEventHelper } from "../../../shared/lib/GEventHelper";
+import { ChessVector } from "../ChessControl/ChessVector";
 import { PlayerScene } from "../Player/PlayerScene";
 import { ERoundBoard } from "../Round/ERoundBoard";
 import { BuildingEntityRoot } from "./BuildingEntityRoot";
@@ -94,29 +98,45 @@ export class BuildingManagerComponent extends ET.Component implements IRoundStat
         }
         let index = this.allBuilding.indexOf(target.Id);
         this.allBuilding.splice(index, 1);
-        GEventHelper.FireEvent(ChessControlConfig.Event.ChessControl_LeaveBattle, null,
-            target.BelongPlayerid, target);
+        if (target.ChessComp().isPosInBattle()) {
+            GEventHelper.FireEvent(ChessControlConfig.Event.ChessControl_LeaveBattle, null, target.BelongPlayerid, target);
+        }
         let iGoldCost = target.GetGoldCost();
         let iGoldReturn = math.floor(iGoldCost * fGoldReturn);
+        let playerroot = GPlayerEntityRoot.GetOneInstance(target.BelongPlayerid);
+        playerroot.PlayerDataComp().ModifyGold(iGoldReturn);
         target.Dispose();
     }
 
-    public addBuilding(towerID: string) {
+    public addBuilding(towerID: string, goldcostpect = 100) {
         let playerroot = this.GetDomain<PlayerScene>().ETRoot;
         let hero = playerroot.Hero;
         let playerID = playerroot.BelongPlayerid;
         if (!hero.IsAlive()) return;
+        let itemName = KVHelper.GetUnitData(towerID, "CardName") as string;
+        let iGoldCost = 0;
+        if (itemName) {
+            GLogHelper.print("itemName", towerID, itemName)
+            iGoldCost = GToNumber(KVHelper.GetItemData(itemName, "ItemCost"));
+        }
+        iGoldCost = iGoldCost * goldcostpect * 0.01;
+        let playerdata = playerroot.PlayerDataComp();
+        if (!playerdata.isEnoughItem(EEnum.EMoneyType.Gold, iGoldCost)) {
+            EventHelper.ErrorMessage(BuildingConfig.ErrorCode.dota_hud_error_gold_limit, playerID);
+            return;
+        }
         // 相同的塔 合成
         let buildings = this.getBuilding(towerID);
         if (buildings.length >= 1) {
             for (let build of buildings) {
                 if (build.checkCanStarUp()) {
                     build.AddStar(1);
+                    playerdata.ModifyGold(-iGoldCost);
                     return build;
                 }
             }
         }
-        let pos = playerroot.ChessControlComp().findEmptyStandbyChessVector();
+        let pos = this.findEmptyStandbyChessVector();
         if (pos == null) {
             EventHelper.ErrorMessage(BuildingConfig.ErrorCode.dota_hud_error_cant_build_at_location, playerID);
             return;
@@ -139,6 +159,8 @@ export class BuildingManagerComponent extends ET.Component implements IRoundStat
         building.SetControllableByPlayer(playerID, true);
         BuildingEntityRoot.Active(building, playerID, towerID);
         let buildingroot = building.ETRoot.As<IBuildingEntityRoot>();
+        buildingroot.SetGoldCost(iGoldCost);
+        playerdata.ModifyGold(-iGoldCost);
         playerroot.AddDomainChild(buildingroot);
         this.allBuilding.push(buildingroot.Id)
         return building;
@@ -171,6 +193,74 @@ export class BuildingManagerComponent extends ET.Component implements IRoundStat
         return r;
     }
 
+
+    public moveBuilding(target: IBuildingEntityRoot, v: Vector): [boolean, string] {
+        let r: [boolean, string] = [true, ""];
+        let playerRoot = GPlayerEntityRoot.GetOneInstance(this.BelongPlayerid);
+        if (!playerRoot.CheckIsAlive()) {
+            r = [false, "hero is death"];
+        }
+        if (target == null) {
+            r = [false, "EntityRoot is null"];
+        }
+        if (playerRoot.GetDomainChild(target.Id) == null) {
+            r = [false, "EntityRoot is not my"];
+        }
+        let ChessControlSystem = GChessControlSystem.GetInstance();
+        let boardVec = ChessControlSystem.GetBoardLocalVector2(v);
+        if (boardVec.playerid != playerRoot.BelongPlayerid ||
+            boardVec.x < 0 || boardVec.y < 0 ||
+            boardVec.y > ChessControlConfig.ChessValid_Max_Y) {
+            r = [false, "not  vaild vector"];
+        }
+        let currentround = playerRoot.RoundManagerComp().getCurrentBoardRound();
+        if (currentround.roundState != RoundConfig.ERoundBoardState.start
+            && !boardVec.isY(0)
+        ) {
+            r = [false, "move chess only in round start"];
+        }
+        if (target.ChessComp().ChessVector.isSame(boardVec)) {
+            r = [false, "same vector"];
+        }
+        if (!r[0]) {
+            EmitSoundOn("General.CastFail_NoMana", this.GetDomain<PlayerScene>().ETRoot.Hero);
+            return r;
+        }
+        let targetPos = ChessControlSystem.GetBoardGirdCenterVector3(boardVec);
+        let oldNpcarr = ChessControlSystem.FindBoardInGirdChess(boardVec);
+        //  人口判断
+        let iPopulationAdd = GBuildingSystem.GetInstance().GetBuildingPopulation(target.ConfigID);
+        let PlayerDataComp = playerRoot.PlayerDataComp();
+        let freePopulation = PlayerDataComp.getFreePopulation();
+        if (oldNpcarr.length > 0) {
+            let oldNpc = oldNpcarr[0];
+            iPopulationAdd -= GBuildingSystem.GetInstance().GetBuildingPopulation(oldNpc.ConfigID);
+        }
+        if (iPopulationAdd > freePopulation) {
+            return [false, BuildingConfig.ErrorCode.dota_hud_error_population_limit];
+        }
+        // 交换位置
+        if (oldNpcarr.length > 0) {
+            let oldNpc = oldNpcarr[0];
+            let curpos = target.GetDomain<IBaseNpc_Plus>().GetAbsOrigin();
+            oldNpc.ChessComp().blinkChessX(curpos);
+        }
+        target.ChessComp().blinkChessX(targetPos);
+        return [true, ""];
+    }
+
+    public findEmptyStandbyChessVector() {
+        let playerid = this.GetDomain<PlayerScene>().ETRoot.BelongPlayerid;
+        let chessVector = new ChessVector(0, 0, playerid);
+        for (let i = 0; i < ChessControlConfig.Gird_Max_X; i++) {
+            chessVector.x = i;
+            if (GChessControlSystem.GetInstance().IsBoardEmptyGird(chessVector)) {
+                return chessVector;
+            }
+        }
+        return null;
+    }
+
     /**
      *
      * @param includeSelfHelper 包括自己外派的
@@ -197,7 +287,6 @@ export class BuildingManagerComponent extends ET.Component implements IRoundStat
     }
 
     OnRound_Start(round: ERoundBoard) {
-
         this.getAllBattleBuilding().forEach((b) => {
             b.OnRound_Start();
         });

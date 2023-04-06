@@ -1509,6 +1509,28 @@ declare global {
         RemoveChilled(): void;
 
         /**
+         * @Server
+         * 中毒
+         * @param hAbility
+         * @param hCaster
+         * @param duraiton
+         */
+        ApplyPoison(hAbility: IBaseAbility_Plus, hCaster: IBaseNpc_Plus, count: number, duraiton?: number): void;
+        /**
+         * @Server
+         * 移除中毒层数
+         */
+        RemovePoison(iCount?: number): void;
+        /**
+         * @Server
+         * 触发中毒层数
+         * @param hAbility
+         * @param hCaster
+         * @param duraiton
+         */
+        PoisonActive(fPercent: number, hAbility?: IBaseAbility_Plus, hCaster?: IBaseNpc_Plus,): void;
+
+        /**
          * @Both
          * 寒冷效果
          */
@@ -1531,6 +1553,17 @@ declare global {
          * 沉睡，受到攻击会被唤醒
          */
         IsSleeped(): boolean;
+
+        /**
+         * @Both
+         * 中毒，持续掉血
+         */
+        IsPoisoned(): boolean;
+        /**
+         * @Both
+         * 中毒层数
+         */
+        GetPoisonStackCount(): number;
         /**
          * @Both
          * 具有攻击能力
@@ -1995,6 +2028,14 @@ BaseNPC.IsDazed = function () {
 BaseNPC.IsSleeped = function () {
     return this.HasModifier("modifier_generic_sleep");
 }
+BaseNPC.IsPoisoned = function () {
+    return this.HasModifier("modifier_generic_poison");
+}
+BaseNPC.GetPoisonStackCount = function () {
+    return this.GetModifierStackCount("modifier_generic_poison", null);
+}
+
+
 BaseNPC.IsAttacker = function () {
     if (IsServer()) {
         return this.GetAttackCapability() != DOTAUnitAttackCapability_t.DOTA_UNIT_CAP_NO_ATTACK;
@@ -2187,6 +2228,63 @@ if (IsServer()) {
             return this.RemoveModifierByName("modifier_generic_chill");
         }
     }
+
+
+    BaseNPC.ApplyPoison = function (hAbility: IBaseAbility_Plus, hCaster: IBaseNpc_Plus, iCount: number, duration?: number) {
+        if (!IsServer()) { return };
+        if (!GFuncEntity.IsValid(this)) return;
+        duration = duration || GPropertyConfig.POISON_DURATION;
+        if (iCount > 0) {
+            let _out = GPropertyCalculate.SumProps(hCaster, null, GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_POISON_COUNT_PERCENTAGE);
+            let _incom = GPropertyCalculate.SumProps(this, null, GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_POISON_COUNT_PERCENTAGE);
+            iCount = iCount * (1 + _out * 0.01) * (1 + _incom * 0.01)
+        }
+        let iPoisonStack = math.min(iCount, GPropertyConfig.MAX_POISON_STACK)   //  毒层数
+        let hPoisonModifier = this.findBuff("modifier_generic_poison") as Imodifier_generic_poison;
+        if (GFuncEntity.IsValid(hPoisonModifier)) {
+            let iStack = hPoisonModifier.GetStackCount()
+            let iTargetStack = GPropertyConfig.MAX_POISON_STACK - iStack
+            iPoisonStack = iTargetStack > iPoisonStack && iPoisonStack || iTargetStack
+        }
+        else {
+            hPoisonModifier = this.AddNewModifier(hCaster, hAbility, "modifier_generic_poison", {
+                duration: duration
+            }) as Imodifier_generic_poison;
+        }
+        if (hPoisonModifier) {
+            hPoisonModifier.AddPoison(hAbility, hCaster, iPoisonStack, duration)
+        }
+    }
+
+    BaseNPC.RemovePoison = function (iCount = -1) {
+        if (!IsServer()) { return };
+        if (!GFuncEntity.IsValid(this)) return;
+        let hPoisonModifier = this.findBuff("modifier_generic_poison") as IBaseModifier_Plus;
+        if (GFuncEntity.IsValid(hPoisonModifier)) {
+            if (iCount == -1) {
+                hPoisonModifier.Destroy();
+                return;
+            }
+            let iStack = hPoisonModifier.GetStackCount()
+            iCount = iStack > iCount && iCount || iStack;
+            if (iCount == 0) {
+                hPoisonModifier.Destroy();
+            }
+            else {
+                hPoisonModifier.SetStackCount(iStack - iCount)
+            }
+        }
+
+    }
+    BaseNPC.PoisonActive = function (fPercent: number, hAbility?: IBaseAbility_Plus, hCaster?: IBaseNpc_Plus) {
+        if (!IsServer()) return;
+        if (!GFuncEntity.IsValid(this)) return;
+        let hPoisonModifier = this.findBuff("modifier_generic_poison") as Imodifier_generic_poison;
+        if (GFuncEntity.IsValid(hPoisonModifier)) {
+            hPoisonModifier.PoisonActive(fPercent, hAbility, hCaster);
+        }
+    }
+
 
     BaseNPC.FindUnitsInRadiusPlus = function (
         radius: number,

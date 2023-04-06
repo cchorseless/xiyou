@@ -337,7 +337,7 @@
   },
   {
     "effectid": "modifier_sect_atkspeed_base_b",
-    "target": "",
+    "target": "team",
     "propinfo": [
       [
         "atk_speed",
@@ -347,7 +347,7 @@
   },
   {
     "effectid": "modifier_sect_atkspeed_base_c",
-    "target": "",
+    "target": "team",
     "propinfo": [
       [
         "atk_speed",
@@ -1181,7 +1181,7 @@
   },
   {
     "effectid": "modifier_sect_demon_base_a",
-    "target": "",
+    "target": "hero",
     "propinfo": [
       [
         "damage_pect",
@@ -1191,7 +1191,7 @@
   },
   {
     "effectid": "modifier_sect_demon_base_b",
-    "target": "",
+    "target": "hero",
     "propinfo": [
       [
         "damage_pect",
@@ -1201,7 +1201,7 @@
   },
   {
     "effectid": "modifier_sect_demon_base_c",
-    "target": "",
+    "target": "hero",
     "propinfo": [
       [
         "damage_pect",
@@ -1516,17 +1516,32 @@
   {
     "effectid": "modifier_sect_fish_chess_base_a",
     "target": "hero",
-    "propinfo": []
+    "propinfo": [
+      [
+        "prop_pect",
+        10
+      ]
+    ]
   },
   {
     "effectid": "modifier_sect_fish_chess_base_b",
     "target": "hero",
-    "propinfo": []
+    "propinfo": [
+      [
+        "prop_pect",
+        15
+      ]
+    ]
   },
   {
     "effectid": "modifier_sect_fish_chess_base_c",
     "target": "hero",
-    "propinfo": []
+    "propinfo": [
+      [
+        "prop_pect",
+        20
+      ]
+    ]
   },
   {
     "effectid": "modifier_sect_fish_chess_brewmaster_thunder_clap_b",
@@ -1580,18 +1595,33 @@
   },
   {
     "effectid": "modifier_sect_flame_base_a",
-    "target": "",
-    "propinfo": []
+    "target": "team",
+    "propinfo": [
+      [
+        "spell_crit_pect",
+        10
+      ]
+    ]
   },
   {
     "effectid": "modifier_sect_flame_base_b",
-    "target": "",
-    "propinfo": []
+    "target": "team",
+    "propinfo": [
+      [
+        "spell_crit_pect",
+        15
+      ]
+    ]
   },
   {
     "effectid": "modifier_sect_flame_base_c",
-    "target": "",
-    "propinfo": []
+    "target": "team",
+    "propinfo": [
+      [
+        "spell_crit_pect",
+        20
+      ]
+    ]
   },
   {
     "effectid": "modifier_sect_flame_abyssal_underlord_firestorm_b",
@@ -1650,6 +1680,76 @@
   },
   {
     "effectid": "modifier_sect_flame_lina_dragon_slave_c",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_guard_base_a",
+    "target": "hero",
+    "propinfo": [
+      [
+        "summonid",
+        1000
+      ]
+    ]
+  },
+  {
+    "effectid": "modifier_sect_guard_base_b",
+    "target": "hero",
+    "propinfo": [
+      [
+        "summonid",
+        1000
+      ]
+    ]
+  },
+  {
+    "effectid": "modifier_sect_guard_base_c",
+    "target": "hero",
+    "propinfo": [
+      [
+        "summonid",
+        1000
+      ]
+    ]
+  },
+  {
+    "effectid": "modifier_sect_guard_pugna_nether_ward_b",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_guard_pugna_nether_ward_c",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_guard_shadow_shaman_mass_serpent_ward_b",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_guard_shadow_shaman_mass_serpent_ward_c",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_guard_venomancer_plague_ward_b",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_guard_venomancer_plague_ward_c",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_guard_witch_doctor_death_ward_b",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_guard_witch_doctor_death_ward_c",
     "target": "",
     "propinfo": []
   },
@@ -1785,7 +1885,7 @@
   },
   {
     "effectid": "modifier_sect_ice_base_c",
-    "target": "enemy",
+    "target": "hero",
     "propinfo": [
       [
         "atk_speed",
@@ -1799,7 +1899,7 @@
   },
   {
     "effectid": "modifier_sect_ice_base_a",
-    "target": "enemy",
+    "target": "hero",
     "propinfo": [
       [
         "atk_speed",
@@ -1813,7 +1913,7 @@
   },
   {
     "effectid": "modifier_sect_ice_base_b",
-    "target": "enemy",
+    "target": "hero",
     "propinfo": [
       [
         "atk_speed",
@@ -1917,18 +2017,33 @@
   },
   {
     "effectid": "modifier_sect_invent_base_a",
-    "target": "",
-    "propinfo": []
+    "target": "hero",
+    "propinfo": [
+      [
+        "prize_pool",
+        10001
+      ]
+    ]
   },
   {
     "effectid": "modifier_sect_invent_base_b",
-    "target": "",
-    "propinfo": []
+    "target": "hero",
+    "propinfo": [
+      [
+        "prize_pool",
+        10001
+      ]
+    ]
   },
   {
     "effectid": "modifier_sect_invent_base_c",
-    "target": "",
-    "propinfo": []
+    "target": "hero",
+    "propinfo": [
+      [
+        "prize_pool",
+        10001
+      ]
+    ]
   },
   {
     "effectid": "modifier_sect_invent_earth_spirit_magnetize_b",
@@ -2012,18 +2127,49 @@
   },
   {
     "effectid": "modifier_sect_magic_base_c",
-    "target": "",
-    "propinfo": []
+    "target": "hero",
+    "propinfo": [
+      [
+        "magic_arm",
+        -10
+      ],
+      [
+        "spell_damage_pect",
+        20
+      ]
+    ]
   },
   {
     "effectid": "modifier_sect_magic_base_a",
-    "target": "",
-    "propinfo": []
+    "target": "hero",
+    "propinfo": [
+      [
+        "magic_arm",
+        -15
+      ],
+      [
+        "spell_damage_pect",
+        20
+      ]
+    ]
   },
   {
     "effectid": "modifier_sect_magic_base_b",
-    "target": "",
-    "propinfo": []
+    "target": "hero",
+    "propinfo": [
+      [
+        "magic_arm",
+        -20
+      ],
+      [
+        "spell_damage_pect",
+        20
+      ],
+      [
+        "duration",
+        1
+      ]
+    ]
   },
   {
     "effectid": "modifier_sect_magic_disruptor_thunder_strike_b",
@@ -2177,18 +2323,33 @@
   },
   {
     "effectid": "modifier_sect_miss_base_a",
-    "target": "",
-    "propinfo": []
+    "target": "hero",
+    "propinfo": [
+      [
+        "miss_pect",
+        20
+      ]
+    ]
   },
   {
     "effectid": "modifier_sect_miss_base_b",
-    "target": "",
-    "propinfo": []
+    "target": "hero",
+    "propinfo": [
+      [
+        "miss_pect",
+        20
+      ]
+    ]
   },
   {
     "effectid": "modifier_sect_miss_base_c",
-    "target": "",
-    "propinfo": []
+    "target": "team",
+    "propinfo": [
+      [
+        "miss_pect",
+        30
+      ]
+    ]
   },
   {
     "effectid": "modifier_sect_miss_arc_warden_magnetic_field_b",
@@ -2272,18 +2433,45 @@
   },
   {
     "effectid": "modifier_sect_phyarm_down_base_a",
-    "target": "",
-    "propinfo": []
+    "target": "hero",
+    "propinfo": [
+      [
+        "phyarm_down",
+        -6
+      ],
+      [
+        "duration",
+        1
+      ]
+    ]
   },
   {
     "effectid": "modifier_sect_phyarm_down_base_b",
-    "target": "",
-    "propinfo": []
+    "target": "hero",
+    "propinfo": [
+      [
+        "phyarm_down",
+        -9
+      ],
+      [
+        "duration",
+        2
+      ]
+    ]
   },
   {
     "effectid": "modifier_sect_phyarm_down_base_c",
-    "target": "",
-    "propinfo": []
+    "target": "hero",
+    "propinfo": [
+      [
+        "phyarm_down",
+        -15
+      ],
+      [
+        "duration",
+        3
+      ]
+    ]
   },
   {
     "effectid": "modifier_sect_phyarm_down_alchemist_acid_spray_b",
@@ -2541,18 +2729,45 @@
   },
   {
     "effectid": "modifier_sect_phycrit_base_a",
-    "target": "",
-    "propinfo": []
+    "target": "hero",
+    "propinfo": [
+      [
+        "crit_chance",
+        20
+      ],
+      [
+        "crit_damage",
+        200
+      ]
+    ]
   },
   {
     "effectid": "modifier_sect_phycrit_base_b",
-    "target": "",
-    "propinfo": []
+    "target": "hero",
+    "propinfo": [
+      [
+        "crit_chance",
+        20
+      ],
+      [
+        "crit_damage",
+        300
+      ]
+    ]
   },
   {
     "effectid": "modifier_sect_phycrit_base_c",
-    "target": "",
-    "propinfo": []
+    "target": "hero",
+    "propinfo": [
+      [
+        "crit_chance",
+        20
+      ],
+      [
+        "crit_damage",
+        400
+      ]
+    ]
   },
   {
     "effectid": "modifier_sect_phycrit_bounty_hunter_shuriken_toss_b",
@@ -2686,18 +2901,45 @@
   },
   {
     "effectid": "modifier_sect_poision_base_a",
-    "target": "",
-    "propinfo": []
+    "target": "hero",
+    "propinfo": [
+      [
+        "poision_pect",
+        20
+      ],
+      [
+        "poision_interval_pect",
+        -20
+      ]
+    ]
   },
   {
     "effectid": "modifier_sect_poision_base_b",
-    "target": "",
-    "propinfo": []
+    "target": "hero",
+    "propinfo": [
+      [
+        "poision_pect",
+        20
+      ],
+      [
+        "poision_interval_pect",
+        -20
+      ]
+    ]
   },
   {
     "effectid": "modifier_sect_poision_base_c",
-    "target": "",
-    "propinfo": []
+    "target": "hero",
+    "propinfo": [
+      [
+        "poision_pect",
+        20
+      ],
+      [
+        "poision_interval_pect",
+        -20
+      ]
+    ]
   },
   {
     "effectid": "modifier_sect_poision_broodmother_incapacitating_bite_b",
@@ -2771,18 +3013,45 @@
   },
   {
     "effectid": "modifier_sect_seckill_base_a",
-    "target": "",
-    "propinfo": []
+    "target": "hero",
+    "propinfo": [
+      [
+        "damage_hp_pect",
+        10
+      ],
+      [
+        "prop_pect",
+        20
+      ]
+    ]
   },
   {
     "effectid": "modifier_sect_seckill_base_b",
-    "target": "",
-    "propinfo": []
+    "target": "hero",
+    "propinfo": [
+      [
+        "damage_hp_pect",
+        10
+      ],
+      [
+        "prop_pect",
+        20
+      ]
+    ]
   },
   {
     "effectid": "modifier_sect_seckill_base_c",
-    "target": "",
-    "propinfo": []
+    "target": "hero",
+    "propinfo": [
+      [
+        "damage_hp_pect",
+        10
+      ],
+      [
+        "prop_pect",
+        20
+      ]
+    ]
   },
   {
     "effectid": "modifier_sect_seckill_clinkz_strafe_b",
@@ -2855,19 +3124,46 @@
     "propinfo": []
   },
   {
-    "effectid": "modifier_sect_shield_base_c",
-    "target": "",
-    "propinfo": []
-  },
-  {
     "effectid": "modifier_sect_shield_base_a",
-    "target": "",
-    "propinfo": []
+    "target": "hero",
+    "propinfo": [
+      [
+        "block_value",
+        200
+      ],
+      [
+        "prop_pect",
+        20
+      ]
+    ]
   },
   {
     "effectid": "modifier_sect_shield_base_b",
-    "target": "",
-    "propinfo": []
+    "target": "hero",
+    "propinfo": [
+      [
+        "block_value",
+        500
+      ],
+      [
+        "prop_pect",
+        20
+      ]
+    ]
+  },
+  {
+    "effectid": "modifier_sect_shield_base_c",
+    "target": "team",
+    "propinfo": [
+      [
+        "block_value",
+        500
+      ],
+      [
+        "prop_pect",
+        20
+      ]
+    ]
   },
   {
     "effectid": "modifier_sect_shield_abaddon_aphotic_shield_b",
@@ -2981,18 +3277,65 @@
   },
   {
     "effectid": "modifier_sect_steal_base_a",
-    "target": "",
-    "propinfo": []
+    "target": "hero",
+    "propinfo": [
+      [
+        "gold_min",
+        10
+      ],
+      [
+        "gold_max",
+        50
+      ],
+      [
+        "prop_pect",
+        20
+      ]
+    ]
   },
   {
     "effectid": "modifier_sect_steal_base_b",
-    "target": "",
-    "propinfo": []
+    "target": "hero",
+    "propinfo": [
+      [
+        "wood_min",
+        10
+      ],
+      [
+        "wood_max",
+        50
+      ],
+      [
+        "prop_pect",
+        20
+      ]
+    ]
   },
   {
     "effectid": "modifier_sect_steal_base_c",
-    "target": "",
-    "propinfo": []
+    "target": "hero",
+    "propinfo": [
+      [
+        "gold_min",
+        10
+      ],
+      [
+        "gold_max",
+        50
+      ],
+      [
+        "wood_min",
+        10
+      ],
+      [
+        "wood_max",
+        50
+      ],
+      [
+        "prop_pect",
+        20
+      ]
+    ]
   },
   {
     "effectid": "modifier_sect_steal_alchemist_goblins_greed_b",
@@ -3066,18 +3409,33 @@
   },
   {
     "effectid": "modifier_sect_suck_blood_base_a",
-    "target": "",
-    "propinfo": []
+    "target": "hero",
+    "propinfo": [
+      [
+        "lifesteal_pect",
+        20
+      ]
+    ]
   },
   {
     "effectid": "modifier_sect_suck_blood_base_b",
-    "target": "",
-    "propinfo": []
+    "target": "hero",
+    "propinfo": [
+      [
+        "lifesteal_pect",
+        20
+      ]
+    ]
   },
   {
     "effectid": "modifier_sect_suck_blood_base_c",
-    "target": "",
-    "propinfo": []
+    "target": "team",
+    "propinfo": [
+      [
+        "lifesteal_pect",
+        30
+      ]
+    ]
   },
   {
     "effectid": "modifier_sect_suck_blood_axe_culling_blade_b",
@@ -3151,18 +3509,57 @@
   },
   {
     "effectid": "modifier_sect_summon_base_c",
-    "target": "",
-    "propinfo": []
+    "target": "hero",
+    "propinfo": [
+      [
+        "summon_atk_pect",
+        10
+      ],
+      [
+        "summon_hp_pect",
+        10
+      ],
+      [
+        "summon_atkspeed_pect",
+        10
+      ]
+    ]
   },
   {
     "effectid": "modifier_sect_summon_base_a",
-    "target": "",
-    "propinfo": []
+    "target": "hero",
+    "propinfo": [
+      [
+        "summon_atk_pect",
+        10
+      ],
+      [
+        "summon_hp_pect",
+        10
+      ],
+      [
+        "summon_atkspeed_pect",
+        10
+      ]
+    ]
   },
   {
     "effectid": "modifier_sect_summon_base_b",
-    "target": "",
-    "propinfo": []
+    "target": "hero",
+    "propinfo": [
+      [
+        "summon_atk_pect",
+        10
+      ],
+      [
+        "summon_hp_pect",
+        10
+      ],
+      [
+        "summon_atkspeed_pect",
+        10
+      ]
+    ]
   },
   {
     "effectid": "modifier_sect_summon_arc_warden_spark_wraith_b",
@@ -3305,74 +3702,34 @@
     "propinfo": []
   },
   {
-    "effectid": "modifier_sect_guard_base_a",
-    "target": "",
-    "propinfo": []
-  },
-  {
-    "effectid": "modifier_sect_guard_base_b",
-    "target": "",
-    "propinfo": []
-  },
-  {
-    "effectid": "modifier_sect_guard_base_c",
-    "target": "",
-    "propinfo": []
-  },
-  {
-    "effectid": "modifier_sect_guard_pugna_nether_ward_b",
-    "target": "",
-    "propinfo": []
-  },
-  {
-    "effectid": "modifier_sect_guard_pugna_nether_ward_c",
-    "target": "",
-    "propinfo": []
-  },
-  {
-    "effectid": "modifier_sect_guard_shadow_shaman_mass_serpent_ward_b",
-    "target": "",
-    "propinfo": []
-  },
-  {
-    "effectid": "modifier_sect_guard_shadow_shaman_mass_serpent_ward_c",
-    "target": "",
-    "propinfo": []
-  },
-  {
-    "effectid": "modifier_sect_guard_venomancer_plague_ward_b",
-    "target": "",
-    "propinfo": []
-  },
-  {
-    "effectid": "modifier_sect_guard_venomancer_plague_ward_c",
-    "target": "",
-    "propinfo": []
-  },
-  {
-    "effectid": "modifier_sect_guard_witch_doctor_death_ward_b",
-    "target": "",
-    "propinfo": []
-  },
-  {
-    "effectid": "modifier_sect_guard_witch_doctor_death_ward_c",
-    "target": "",
-    "propinfo": []
-  },
-  {
     "effectid": "modifier_sect_thorns_base_a",
-    "target": "",
-    "propinfo": []
+    "target": "hero",
+    "propinfo": [
+      [
+        "thorns_pect",
+        50
+      ]
+    ]
   },
   {
     "effectid": "modifier_sect_thorns_base_b",
-    "target": "",
-    "propinfo": []
+    "target": "hero",
+    "propinfo": [
+      [
+        "thorns_pect",
+        50
+      ]
+    ]
   },
   {
     "effectid": "modifier_sect_thorns_base_c",
-    "target": "",
-    "propinfo": []
+    "target": "hero",
+    "propinfo": [
+      [
+        "thorns_pect",
+        50
+      ]
+    ]
   },
   {
     "effectid": "modifier_sect_thorns_axe_counter_helix_b",
@@ -3446,18 +3803,37 @@
   },
   {
     "effectid": "modifier_sect_transform_base_a",
-    "target": "",
-    "propinfo": []
+    "target": "hero",
+    "propinfo": [
+      [
+        "mana",
+        100
+      ]
+    ]
   },
   {
     "effectid": "modifier_sect_transform_base_b",
-    "target": "",
-    "propinfo": []
+    "target": "hero",
+    "propinfo": [
+      [
+        "mana",
+        100
+      ],
+      [
+        "illusion_count",
+        1
+      ]
+    ]
   },
   {
     "effectid": "modifier_sect_transform_base_c",
-    "target": "",
-    "propinfo": []
+    "target": "team",
+    "propinfo": [
+      [
+        "mana",
+        100
+      ]
+    ]
   },
   {
     "effectid": "modifier_sect_transform_alchemist_chemical_rage_b",
@@ -3570,32 +3946,56 @@
     "propinfo": []
   },
   {
-    "effectid": "modifier_sect_treatment_base_c",
-    "target": "team",
+    "effectid": "modifier_sect_treatment_base_a",
+    "target": "hero",
     "propinfo": [
       [
         "health_regen",
         10
-      ]
-    ]
-  },
-  {
-    "effectid": "modifier_sect_treatment_base_a",
-    "target": "team",
-    "propinfo": [
+      ],
       [
-        "health_regen",
-        20
+        "damage_maxhp_pect",
+        0.5
+      ],
+      [
+        "damage_per_sec",
+        50
       ]
     ]
   },
   {
     "effectid": "modifier_sect_treatment_base_b",
-    "target": "team",
+    "target": "hero",
     "propinfo": [
       [
         "health_regen",
-        30
+        15
+      ],
+      [
+        "damage_maxhp_pect",
+        0.5
+      ],
+      [
+        "damage_per_sec",
+        50
+      ]
+    ]
+  },
+  {
+    "effectid": "modifier_sect_treatment_base_c",
+    "target": "hero",
+    "propinfo": [
+      [
+        "health_regen",
+        20
+      ],
+      [
+        "damage_maxhp_pect",
+        0.5
+      ],
+      [
+        "damage_per_sec",
+        50
       ]
     ]
   },
@@ -3718,6 +4118,10 @@
         20
       ],
       [
+        "magic_arm",
+        10
+      ],
+      [
         "duration",
         1
       ]
@@ -3732,6 +4136,10 @@
         20
       ],
       [
+        "magic_arm",
+        15
+      ],
+      [
         "duration",
         1
       ]
@@ -3743,6 +4151,10 @@
     "propinfo": [
       [
         "chance_pect",
+        20
+      ],
+      [
+        "magic_arm",
         20
       ],
       [
@@ -3833,43 +4245,31 @@
   },
   {
     "effectid": "modifier_sect_warpath_base_a",
-    "target": "hero",
+    "target": "team",
     "propinfo": [
       [
-        "atk_bonus",
-        25
-      ],
-      [
-        "ignore_miss_chance_pect",
+        "atk_bonus_pect",
         20
       ]
     ]
   },
   {
     "effectid": "modifier_sect_warpath_base_b",
-    "target": "hero",
+    "target": "team",
     "propinfo": [
       [
-        "atk_bonus",
-        50
-      ],
-      [
-        "ignore_miss_chance_pect",
-        20
+        "atk_bonus_pect",
+        30
       ]
     ]
   },
   {
     "effectid": "modifier_sect_warpath_base_c",
-    "target": "hero",
+    "target": "team",
     "propinfo": [
       [
-        "atk_bonus",
-        80
-      ],
-      [
-        "ignore_miss_chance_pect",
-        20
+        "atk_bonus_pect",
+        40
       ]
     ]
   },

@@ -23,6 +23,7 @@ import { modifier_sect_disarm_base_a } from "./combinationeffect/modifier_sect_d
 import { modifier_sect_double_head_base_a } from "./combinationeffect/modifier_sect_double_head";
 import { modifier_sect_fish_chess_base_a } from "./combinationeffect/modifier_sect_fish_chess";
 import { modifier_sect_flame_base_a } from "./combinationeffect/modifier_sect_flame";
+import { modifier_sect_guard_base_a } from "./combinationeffect/modifier_sect_guard";
 import { modifier_sect_health_base_a } from "./combinationeffect/modifier_sect_health";
 import { modifier_sect_ice_base_a } from "./combinationeffect/modifier_sect_ice";
 import { modifier_sect_invent_base_a } from "./combinationeffect/modifier_sect_invent";
@@ -37,7 +38,6 @@ import { modifier_sect_shield_base_a } from "./combinationeffect/modifier_sect_s
 import { modifier_sect_steal_base_a } from "./combinationeffect/modifier_sect_steal";
 import { modifier_sect_suck_blood_base_a } from "./combinationeffect/modifier_sect_suck_blood";
 import { modifier_sect_summon_base_a } from "./combinationeffect/modifier_sect_summon";
-import { modifier_sect_territory_base_a } from "./combinationeffect/modifier_sect_territory";
 import { modifier_sect_thorns_base_a } from "./combinationeffect/modifier_sect_thorns";
 import { modifier_sect_transform_base_a } from "./combinationeffect/modifier_sect_transform";
 import { modifier_sect_treatment_base_a } from "./combinationeffect/modifier_sect_treatment";
@@ -125,7 +125,7 @@ import { modifier_spawn_activity } from "./spawn/modifier_spawn_activity";
     modifier_sect_steal_base_a,
     modifier_sect_suck_blood_base_a,
     modifier_sect_summon_base_a,
-    modifier_sect_territory_base_a,
+    modifier_sect_guard_base_a,
     modifier_sect_thorns_base_a,
     modifier_sect_transform_base_a,
     modifier_sect_treatment_base_a,

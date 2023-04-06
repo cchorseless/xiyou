@@ -8,7 +8,6 @@ import { ET } from "../../../shared/lib/Entity";
 import { PlayerConfig } from "../../../shared/PlayerConfig";
 import { BattleUnitManagerComponent } from "../BattleUnit/BattleUnitManagerComponent";
 import { BuildingManagerComponent } from "../Building/BuildingManagerComponent";
-import { ChessControlComponent } from "../ChessControl/ChessControlComponent";
 import { CombinationManagerComponent } from "../Combination/CombinationManagerComponent";
 import { CourierEntityRoot } from "../Courier/CourierEntityRoot";
 import { DrawComponent } from "../Draw/DrawComponent";
@@ -277,7 +276,6 @@ export class PlayerEntityRoot extends PlayerSystem {
         this.AddComponent(GGetRegClass<typeof EnemyManagerComponent>("EnemyManagerComponent"));
         this.AddComponent(GGetRegClass<typeof BuildingManagerComponent>("BuildingManagerComponent"));
         this.AddComponent(GGetRegClass<typeof BattleUnitManagerComponent>("BattleUnitManagerComponent"));
-        this.AddComponent(GGetRegClass<typeof ChessControlComponent>("ChessControlComponent"));
         this.CreateFakerHero();
         GGameServiceSystem.GetInstance().OnBindHeroFinish(this.BelongPlayerid);
     }
@@ -343,9 +341,7 @@ export class PlayerEntityRoot extends PlayerSystem {
     BuildingManager() {
         return this.GetComponentByName<BuildingManagerComponent>("BuildingManagerComponent");
     }
-    ChessControlComp() {
-        return this.GetComponentByName<ChessControlComponent>("ChessControlComponent");
-    }
+
     EnemyManagerComp() {
         return this.GetComponentByName<EnemyManagerComponent>("EnemyManagerComponent");
     }

@@ -73,8 +73,7 @@ export class item_building_base extends ActiveRootItem {
     OnSpellStart() {
         let hCaster = this.GetCasterPlus();
         let buildM = hCaster.ETRoot.As<IPlayerEntityRoot>().BuildingManager();
-        let chessM = hCaster.ETRoot.As<IPlayerEntityRoot>().ChessControlComp();
-        if (buildM == null || chessM == null) {
+        if (buildM == null) {
             return;
         }
         let sTowerName = this.GetCreateUnitName();

@@ -2,7 +2,6 @@ import { ChessControlConfig } from "../../../../../scripts/tscripts/shared/Chess
 import { GameEnum } from "../../../../../scripts/tscripts/shared/GameEnum";
 import { ET } from "../../../../../scripts/tscripts/shared/lib/Entity";
 import { EventHelper } from "../../../helper/EventHelper";
-import { LogHelper } from "../../../helper/LogHelper";
 import { NetHelper } from "../../../helper/NetHelper";
 import { CCMainPanel } from "../../../view/MainPanel/CCMainPanel";
 import { CCUnitChessMoveIcon } from "../../../view/Unit/CCUnitChessMoveIcon";
@@ -201,9 +200,13 @@ export class ChessControlComponent extends ET.Component {
     Jump_cursor_hero() {
         // 当前显示英雄小图标
         let position = Game.ScreenXYToWorld(GameUI.GetCursorPosition()[0], GameUI.GetCursorPosition()[1]);
-        NetHelper.SendToLua(ChessControlConfig.EProtocol.pick_chess_position, { entityid: this.PORTRAIT_UNIT, x: position[0], y: position[1], z: position[2] }, GHandler.create(this, (event) => {
-            LogHelper.print(event);
-        }));
+        NetHelper.SendToLua(ChessControlConfig.EProtocol.pick_chess_position,
+            { entityid: this.PORTRAIT_UNIT, x: position[0], y: position[1], z: position[2] },
+            GHandler.create(this, (event: JS_TO_LUA_DATA) => {
+                if (event.state) {
+
+                }
+            }));
         let par = Particles.CreateParticle("particles/ui_mouseactions/clicked_basemove.vpcf", 0, 0 as any);
         Particles.SetParticleControl(par, 0, position);
         Particles.SetParticleControl(par, 1, [0, 255, 0]);

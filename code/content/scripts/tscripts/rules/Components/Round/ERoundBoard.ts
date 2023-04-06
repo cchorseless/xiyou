@@ -77,7 +77,6 @@ export class ERoundBoard extends ERound implements IRoundStateCallback {
         this.roundState = RoundConfig.ERoundBoardState.battle;
         this.roundLeftTime = GameRules.GetGameTime() + delaytime;
         this.SyncClient();
-        player.ChessControlComp().OnRound_Battle();
         player.BuildingManager().OnRound_Battle();
         player.FakerHeroRoot().OnRound_Battle();
         let buildingCount = player.BattleUnitManagerComp().GetAllBattleUnitAlive(DOTATeam_t.DOTA_TEAM_GOODGUYS).length;

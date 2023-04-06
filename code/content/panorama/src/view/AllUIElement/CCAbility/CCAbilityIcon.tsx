@@ -11,7 +11,7 @@ import "./CCAbilityIcon.less";
 
 interface ICCAbilityIcon_Custom extends DOTAAbilityImageAttributes {
     abilityname: string;
-    castentityindex?: AbilityEntityIndex,
+    castEntityIndex?: EntityIndex,
     rarity?: Rarity;
     playerid?: PlayerID;
     tipsInfo?: {
@@ -60,7 +60,7 @@ export class CCAbilityIcon_Custom extends CCPanel<ICCAbilityIcon_Custom> {
             this.abilityindex = Entities.GetAbilityByName(castEntityIndex, this.props.abilityname);
         }
     }
-    onbtn_castability = () => {
+    onbtn_castability() {
         const castEntityIndex = this.props.castEntityIndex!;
         if (castEntityIndex < 0 || this.abilityindex == null || this.abilityindex < 0) {
             return;
@@ -108,13 +108,14 @@ export class CCAbilityIcon_Custom extends CCPanel<ICCAbilityIcon_Custom> {
     }
     render() {
         const abilityname = this.props.abilityname;
+        const castEntityIndex = this.props.castEntityIndex!;
         const lefttime = this.GetState<number>("lefttime") || -1;
         const remainingtime = this.GetState<number>("remainingtime") || 1;
         return (
             this.__root___isValid &&
             <Panel ref={this.__root__} className="CCAbilityIcon" {...this.initRootAttrs()}  >
                 <Image id="img_AbilityIcon" className={this.props.rarity} >
-                    <DOTAAbilityImage ref={this.abilityImage} abilityname={abilityname} onmouseactivate={this.onbtn_castability}>
+                    <DOTAAbilityImage ref={this.abilityImage} abilityname={abilityname} contextEntityIndex={this.abilityindex} onmouseactivate={() => this.onbtn_castability()}>
                         {lefttime >= 0 && <CCPanel width="100%" height="100%" backgroundColor="#000000DD" clip={"radial(50.0% 50.0%, 0.0deg, " + -(lefttime / remainingtime) * 360 + "deg)"} />}
                         {lefttime >= 0 && <CCLabel type="UnitName" align="center center" text={"" + (lefttime / 10).toFixed(1)} />}
                         {this.abilityImage_childs}

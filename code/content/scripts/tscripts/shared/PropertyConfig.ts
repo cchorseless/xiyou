@@ -52,7 +52,12 @@ export module PropertyConfig {
     export const BASE_SPELL_CRITICALSTRIKE_DAMAGE = 200;
     /**单条血条最大多少 */
     export const MAX_ONE_BAR_HEALTH = 100000000;
-
+    /**最大毒层数 */
+    export const MAX_POISON_STACK = 2100000000
+    /**毒伤害buff的伤害间隔 */
+    export const POISON_DAMAGE_INTERVAL = 1;
+    /**毒伤害buff的持续时间 */
+    export const POISON_DURATION = 10;
     /**
      *属性枚举统计标记
      */
@@ -923,6 +928,7 @@ export module PropertyConfig {
         IGNORE_MAGICAL_ARMOR_PERCENTAGE,
         IGNORE_MAGICAL_ARMOR_PERCENTAGE_TARGET,
         IGNORE_MAGICAL_ARMOR_PERCENTAGE_UNIQUE,
+
         CRITICALSTRIKE,
         CRITICALSTRIKE_CHANCE,
         // 普攻暴击伤害
@@ -953,16 +959,19 @@ export module PropertyConfig {
         INCOMING_ATTACK_DAMAGE_PERCENTAGE,
         INCOMING_SPELL_DAMAGE_PERCENTAGE,
         /**--------毒相关--------- */
+        /**受到毒伤害加深 */
         INCOMING_POISON_DAMAGE_PERCENTAGE,
-        OUTGOING_POISON_DAMAGE_PERCENTAGE,
         OUTGOING_POISON_COUNT_PERCENTAGE,
         INCOMING_POISON_COUNT_PERCENTAGE,
         /**中毒触发时间间隔  */
-        POISON_TICKTIME_PERCENTAGE,
         POISON_ACTIVE_TIME_PERCENTAGE,
         POISON_ACTIVE_INCREASE_PERCENTAGE,
+        /**毒素免疫 */
         POISON_IMMUNE,
+
+        /**额外召唤物召唤时间 */
         SUMMON_DURATION_BONUS,
+        SUMMON_DURATION_PECT,
         /**流血相关 */
         INCOMING_BLEED_DAMAGE_PERCENTAGE,
         OUTGOING_BLEED_DAMAGE_PERCENTAGE,

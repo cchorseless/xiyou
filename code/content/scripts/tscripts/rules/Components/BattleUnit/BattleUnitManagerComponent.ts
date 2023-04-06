@@ -29,7 +29,7 @@ export class BattleUnitManagerComponent extends ET.Component {
     }
 
 
-    public GetAllBattleUnitAlive(team: DOTATeam_t) {
+    public GetAllBattleUnitAlive(team: DOTATeam_t, bonlyChess = false) {
         let domain = GGameScene.GetPlayer(this.BelongPlayerid)
         let r: IBattleUnitEntityRoot[] = [];
         if (team == DOTATeam_t.DOTA_TEAM_GOODGUYS) {
@@ -40,13 +40,16 @@ export class BattleUnitManagerComponent extends ET.Component {
             let allruntingbuilding = domain.GetDomainChilds(EnemyUnitEntityRoot);
             r = r.concat(allruntingbuilding);
         }
-        let allsummon = domain.GetDomainChilds(BattleUnitSummonEntityRoot).filter((s) => {
-            return s.GetDomain<IBaseNpc_Plus>().GetTeam() == team;
-        });
-        let allillon = domain.GetDomainChilds(BattleUnitIllusionEntityRoot).filter((s) => {
-            return s.GetDomain<IBaseNpc_Plus>().GetTeam() == team;
-        });
-        r = r.concat(allsummon).concat(allillon).filter((b) => { return b.isAlive && b.GetDomain<IBaseNpc_Plus>().IsAttacker() });
+        if (bonlyChess) {
+            let allsummon = domain.GetDomainChilds(BattleUnitSummonEntityRoot).filter((s) => {
+                return s.GetDomain<IBaseNpc_Plus>().GetTeam() == team;
+            });
+            let allillon = domain.GetDomainChilds(BattleUnitIllusionEntityRoot).filter((s) => {
+                return s.GetDomain<IBaseNpc_Plus>().GetTeam() == team;
+            });
+            r = r.concat(allsummon).concat(allillon);
+        }
+        r = r.filter((b) => { return b.isAlive && b.GetDomain<IBaseNpc_Plus>().IsAttacker() });
         return r;
     }
 

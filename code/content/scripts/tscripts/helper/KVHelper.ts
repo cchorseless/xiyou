@@ -1,12 +1,4 @@
-/*
- * @Author: Jaxh
- * @Date: 2021-05-06 18:12:59
- * @LastEditors: your name
- * @LastEditTime: 2021-05-20 16:51:13
- * @Description: file content
- */
-
-import { allAbilitys, allItems, allUnits, KvAllPath, KvClient, KvClientInterface, KvServer, KvServerInterface, KV_Abilitys, KV_Items, KV_Units } from "../kvInterface/KvAllInterface";
+import { KV_Abilitys, KV_Items, KV_Units, KvAllPath, KvClient, KvClientInterface, KvServer, KvServerInterface, allAbilitys, allItems, allUnits } from "../kvInterface/KvAllInterface";
 import { LogHelper } from "./LogHelper";
 
 
@@ -50,11 +42,11 @@ export module KVHelper {
         }
     }
     export function GetItemData(itemname: string, k: string, bnumber = false) {
-        if (KvItems[itemname]) {
+        if (KvItems[itemname] != null) {
             if (bnumber) {
                 return GToNumber(KvItems[itemname][k]);
             }
-            return KvUnits[itemname][k];
+            return KvItems[itemname][k];
         }
         else {
             return null;
@@ -86,17 +78,20 @@ export module KVHelper {
         // 合并
         allAbilitys.push("dota_abilities");
         allAbilitys.forEach((file: any) => {
-            Object.assign(KvAbilitys, (KvServerConfig as any)[file] || (KvClientConfig as any)[file] || LoadKeyValues((KvAllPath as any)[file]))
+            let data: { [k: string]: any } = (KvServerConfig as any)[file] || (KvClientConfig as any)[file] || LoadKeyValues((KvAllPath as any)[file]);
+            (KvAbilitys as any) = Object.assign(KvAbilitys, data)
         });
-        allUnits.push("dota_items");
+        allItems.push("dota_items");
         allItems.forEach((file: any) => {
-            Object.assign(KvItems, (KvServerConfig as any)[file] || (KvClientConfig as any)[file] || LoadKeyValues((KvAllPath as any)[file]))
+            let data: { [k: string]: any } = (KvServerConfig as any)[file] || (KvClientConfig as any)[file] || LoadKeyValues((KvAllPath as any)[file]);
+            (KvItems as any) = Object.assign(KvItems, data)
         });
 
         /**英雄也加进去 */
         allUnits.push("npc_heroes_custom");
         allUnits.forEach((file: any) => {
-            Object.assign(KvUnits, (KvServerConfig as any)[file] || (KvClientConfig as any)[file] || LoadKeyValues((KvAllPath as any)[file]))
+            let data: { [k: string]: any } = (KvServerConfig as any)[file] || (KvClientConfig as any)[file] || LoadKeyValues((KvAllPath as any)[file]);
+            (KvUnits as any) = Object.assign(KvUnits, data)
         });
     }
 

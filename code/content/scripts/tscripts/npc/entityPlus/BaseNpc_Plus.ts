@@ -383,11 +383,14 @@ export class BaseNpc_Plus extends BaseNpc {
         if (!IsServer()) { return };
         iTeamNumber = iTeamNumber || this.GetTeamNumber()
         let hSummon = BaseNpc_Plus.CreateUnitByName(sUnitName, vLocation, this, bFindClearSpace, iTeamNumber)
-        fDuration = fDuration + GPropertyCalculate.SumProps(this, null, GPropertyConfig.EMODIFIER_PROPERTY.SUMMON_DURATION_BONUS);
-        hSummon.addBuff("modifier_generic_summon", this, null, { duration: fDuration < 0 ? null : fDuration });
         if (fDuration > 0) {
+            fDuration = GPropertyCalculate.GetSummonDuration(this, fDuration)
             hSummon.addBuff("modifier_kill", this, null, { duration: fDuration });
         }
+        else {
+            fDuration = null
+        }
+        hSummon.addBuff("modifier_generic_summon", this, null, { duration: fDuration });
         let BattleUnitManager: IBattleUnitManagerComponent;
         if (this.ETRoot && this.ETRoot.BelongPlayerid >= 0) {
             BattleUnitManager = GGameScene.GetPlayer(this.ETRoot.BelongPlayerid).BattleUnitManagerComp();

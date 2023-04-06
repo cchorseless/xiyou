@@ -1,5 +1,5 @@
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifierMotionBoth_Plus, BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -438,7 +438,7 @@ export class modifier_imba_battle_hunger_debuff_dot extends BaseModifier_Plus {
     }
 
     StatusEffectPriority(): modifierpriority {
-        return 9;
+        return 4;
     }
 
     IsDebuff(): boolean {
@@ -638,7 +638,7 @@ export class modifier_imba_battle_hunger_debuff_cmd extends BaseModifier_Plus {
     }
 
     StatusEffectPriority(): modifierpriority {
-        return 10;
+        return 4;
     }
 
     IsHidden(): boolean {
@@ -1117,7 +1117,7 @@ export class modifier_imba_culling_blade_buff_haste extends BaseModifier_Plus {
     }
 
     StatusEffectPriority(): modifierpriority {
-        return 11;
+        return 4;
     }
 
     GetStatusEffectName(): string {

@@ -6,7 +6,7 @@ import { ActiveRootAbility } from "../ActiveRootAbility";
 /**删除 */
 @registerAbility()
 export class courier_challenge_wood extends ActiveRootAbility implements IAbilityChallenge {
-    IsHidden() {
+    IsHiddenAbilityCastable() {
         return true;
     }
     CastFilterResult(): UnitFilterResult {

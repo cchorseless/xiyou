@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -303,10 +303,6 @@ export class modifier_imba_mist_coil_mist_ally extends BaseModifier_Plus {
 export class imba_abaddon_aphotic_shield extends BaseAbility_Plus {
     GetManaCost(level: number): number {
         return 0;
-    }
-
-    GetCooldown(level: number): number {
-        return 20;
     }
 
     AutoSpellSelf() {

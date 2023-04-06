@@ -3,7 +3,7 @@ import { ET, serializeETProps } from "../../lib/Entity";
 
 export class PlayerData extends ET.Component {
     @serializeETProps()
-    populationRoof: number = 100;
+    populationRoof: number = 0;
     @serializeETProps()
     population: number = 0;
     @serializeETProps()
@@ -28,7 +28,7 @@ export class PlayerData extends ET.Component {
     @serializeETProps()
     techLevelMax: number = 10;
     @serializeETProps()
-    perIntervalGold: number = 0;
+    perIntervalGold: number = 5;
     @serializeETProps()
-    perIntervalWood: number = 0;
+    perIntervalWood: number = 5;
 }

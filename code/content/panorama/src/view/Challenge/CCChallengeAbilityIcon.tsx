@@ -41,7 +41,7 @@ export class CCChallengeAbilityIcon extends CCPanel<ICCChallengeAbilityIcon> {
         const ability = this.GetStateEntity(this.abilityEntity);
         return (
             <Panel id="CC_ChallengeAbilityIcon" ref={this.__root__}      {...this.initRootAttrs()}>
-                <CCAbilityIcon_Custom abilityname={abilityname} abilityid={castentity} horizontalAlign={"center"}>
+                <CCAbilityIcon_Custom abilityname={abilityname} castEntityIndex={castentity} horizontalAlign={"center"}>
                     <CCLabel type="Level" text={`Lv.${Abilities.GetLevel(abilityindex)}`} align={"left bottom"} />
                 </CCAbilityIcon_Custom>
                 <CCLabel type="AbilityName" text={$.Localize("#DOTA_Tooltip_ability_" + abilityname)} horizontalAlign={"center"} />

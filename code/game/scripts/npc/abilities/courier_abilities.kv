@@ -6,7 +6,7 @@
 		"ScriptFile" "npc/abilities/courier/courier_draw_card_v1"
 		"AbilityTextureName" "card01"
 		"MaxLevel" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET|DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE|DOTA_ABILITY_BEHAVIOR_AUTOCAST"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET|DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
 		"AbilitySound" "Ability.Torrent"
 		"HasScepterUpgrade" "1"
 		"AbilityCastRange" "1500"
@@ -15,12 +15,17 @@
 		"AbilitySpecial" {
 			"01" {
 				"var_type" "FIELD_INTEGER"
-				"draw_count" "3"
+				"gold_cost" "10"
 
 			}
 			"02" {
 				"var_type" "FIELD_INTEGER"
-				"wood_cost" "5"
+				"c_pect" "80"
+
+			}
+			"03" {
+				"var_type" "FIELD_INTEGER"
+				"b_pect" "20"
 
 			}
 
@@ -32,7 +37,7 @@
 		"ScriptFile" "npc/abilities/courier/courier_draw_card_v2"
 		"AbilityTextureName" "card02"
 		"MaxLevel" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET|DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE|DOTA_ABILITY_BEHAVIOR_AUTOCAST"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET|DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
 		"AbilitySound" "Ability.Torrent"
 		"HasScepterUpgrade" "1"
 		"AbilityCastRange" "1500"
@@ -41,12 +46,22 @@
 		"AbilitySpecial" {
 			"01" {
 				"var_type" "FIELD_INTEGER"
-				"draw_count" "3"
+				"gold_cost" "20"
 
 			}
 			"02" {
 				"var_type" "FIELD_INTEGER"
-				"wood_cost" "10"
+				"c_pect" "20"
+
+			}
+			"03" {
+				"var_type" "FIELD_INTEGER"
+				"b_pect" "60"
+
+			}
+			"04" {
+				"var_type" "FIELD_INTEGER"
+				"a_pect" "20"
 
 			}
 
@@ -58,7 +73,7 @@
 		"ScriptFile" "npc/abilities/courier/courier_draw_card_v3"
 		"AbilityTextureName" "card03"
 		"MaxLevel" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET|DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE|DOTA_ABILITY_BEHAVIOR_AUTOCAST"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET|DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
 		"AbilitySound" "Ability.Torrent"
 		"HasScepterUpgrade" "1"
 		"AbilityCastRange" "1500"
@@ -67,12 +82,22 @@
 		"AbilitySpecial" {
 			"01" {
 				"var_type" "FIELD_INTEGER"
-				"draw_count" "3"
+				"gold_cost" "50"
 
 			}
 			"02" {
 				"var_type" "FIELD_INTEGER"
-				"wood_cost" "20"
+				"b_pect" "20"
+
+			}
+			"03" {
+				"var_type" "FIELD_INTEGER"
+				"a_pect" "60"
+
+			}
+			"04" {
+				"var_type" "FIELD_INTEGER"
+				"s_pect" "20"
 
 			}
 
@@ -93,22 +118,53 @@
 		"AbilitySpecial" {
 			"01" {
 				"var_type" "FIELD_INTEGER"
-				"radius" "350"
+				"gold_max" "100"
 
 			}
 			"02" {
 				"var_type" "FIELD_INTEGER"
-				"movespeed_bonus" "-50"
+				"wood_max" "100"
 
 			}
 			"03" {
 				"var_type" "FIELD_INTEGER"
-				"slow_duration" "2"
+				"gold_inc_round" "20"
 
 			}
 			"04" {
 				"var_type" "FIELD_INTEGER"
-				"stun_duration" "2"
+				"wood_inc_round" "20"
+
+			}
+			"05" {
+				"var_type" "FIELD_INTEGER"
+				"crit_min" "150"
+
+			}
+			"06" {
+				"var_type" "FIELD_INTEGER"
+				"crit_max" "300"
+
+			}
+
+		}
+
+	}
+	"courier_recovery_chess" {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/courier/courier_recovery_chess"
+		"AbilityTextureName" "recovery_chess"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE "
+		"AbilitySound" "Ability.Torrent"
+		"HasScepterUpgrade" "1"
+		"AbilityCastRange" "1500"
+		"AbilityCooldown" "0"
+		"AbilityManaCost" "0"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"gold_pect" "50"
 
 			}
 
@@ -121,42 +177,6 @@
 		"AbilityTextureName" "fire_chess"
 		"MaxLevel" "1"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT|DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-		"AbilitySound" "Ability.Torrent"
-		"HasScepterUpgrade" "1"
-		"AbilityCastRange" "1500"
-		"AbilityCooldown" "0"
-		"AbilityManaCost" "0"
-		"AbilitySpecial" {
-			"01" {
-				"var_type" "FIELD_INTEGER"
-				"radius" "350"
-
-			}
-			"02" {
-				"var_type" "FIELD_INTEGER"
-				"movespeed_bonus" "-50"
-
-			}
-			"03" {
-				"var_type" "FIELD_INTEGER"
-				"slow_duration" "2"
-
-			}
-			"04" {
-				"var_type" "FIELD_INTEGER"
-				"stun_duration" "2"
-
-			}
-
-		}
-
-	}
-	"courier_recovery_chess" {
-		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/courier/courier_recovery_chess"
-		"AbilityTextureName" "recovery_chess"
-		"MaxLevel" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_AUTOCAST"
 		"AbilitySound" "Ability.Torrent"
 		"HasScepterUpgrade" "1"
 		"AbilityCastRange" "1500"
@@ -232,7 +252,7 @@
 		"AbilityTextureName" "kunkka_torrent"
 		"MaxLevel" "50"
 		"CustomHidden" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET|DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET|DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE|DOTA_ABILITY_BEHAVIOR_HIDDEN"
 		"AbilitySound" "Ability.Torrent"
 		"HasScepterUpgrade" "1"
 		"AbilityCastRange" "1500"
@@ -259,7 +279,7 @@
 		"AbilityTextureName" "kunkka_torrent"
 		"MaxLevel" "50"
 		"CustomHidden" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET|DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET|DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE|DOTA_ABILITY_BEHAVIOR_HIDDEN"
 		"AbilitySound" "Ability.Torrent"
 		"HasScepterUpgrade" "1"
 		"AbilityCastRange" "1500"
@@ -286,7 +306,7 @@
 		"AbilityTextureName" "kunkka_torrent"
 		"MaxLevel" "50"
 		"CustomHidden" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET|DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET|DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE|DOTA_ABILITY_BEHAVIOR_HIDDEN"
 		"AbilitySound" "Ability.Torrent"
 		"HasScepterUpgrade" "1"
 		"AbilityCastRange" "1500"
@@ -313,7 +333,7 @@
 		"AbilityTextureName" "kunkka_torrent"
 		"MaxLevel" "50"
 		"CustomHidden" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET|DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET|DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE|DOTA_ABILITY_BEHAVIOR_HIDDEN"
 		"AbilitySound" "Ability.Torrent"
 		"HasScepterUpgrade" "1"
 		"AbilityCastRange" "1500"
@@ -334,348 +354,384 @@
 		}
 
 	}
-	"courier_extra_gold_sec_1" {
+	"courier_extra_all_stat_1" {
 		"BaseClass" "ability_lua"
 		"ScriptFile" "npc/abilities/courier/courier_extra_gold_sec_1"
 		"AbilityTextureName" "kunkka_torrent"
 		"MaxLevel" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-	}
-	"courier_extra_kill_1" {
-		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/courier/courier_extra_kill_1"
-		"AbilityTextureName" "kunkka_torrent"
-		"MaxLevel" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-	}
-	"courier_extra_gold_sec_3" {
-		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/courier/courier_extra_gold_sec_3"
-		"AbilityTextureName" "kunkka_torrent"
-		"MaxLevel" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-	}
-	"courier_extra_card_2" {
-		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/courier/courier_extra_card_2"
-		"AbilityTextureName" "kunkka_torrent"
-		"MaxLevel" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-	}
-	"courier_extra_star_up_3" {
-		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/courier/courier_extra_star_up_3"
-		"AbilityTextureName" "kunkka_torrent"
-		"MaxLevel" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-	}
-	"courier_extra_population_3" {
-		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/courier/courier_extra_population_3"
-		"AbilityTextureName" "kunkka_torrent"
-		"MaxLevel" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-	}
-	"courier_extra_tower_unique_3" {
-		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/courier/courier_extra_tower_unique_3"
-		"AbilityTextureName" "kunkka_torrent"
-		"MaxLevel" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-	}
-	"courier_extra_weapon_master_3" {
-		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/courier/courier_extra_weapon_master_3"
-		"AbilityTextureName" "kunkka_torrent"
-		"MaxLevel" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-	}
-	"courier_extra_random_item_3" {
-		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/courier/courier_extra_random_item_3"
-		"AbilityTextureName" "kunkka_torrent"
-		"MaxLevel" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-	}
-	"courier_extra_card_3" {
-		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/courier/courier_extra_card_3"
-		"AbilityTextureName" "kunkka_torrent"
-		"MaxLevel" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-	}
-	"courier_extra_more_card_3" {
-		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/courier/courier_extra_more_card_3"
-		"AbilityTextureName" "kunkka_torrent"
-		"MaxLevel" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-	}
-	"courier_extra_wood_sec_3" {
-		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/courier/courier_extra_wood_sec_3"
-		"AbilityTextureName" "kunkka_torrent"
-		"MaxLevel" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-	}
-	"courier_extra_more_card_2" {
-		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/courier/courier_extra_more_card_2"
-		"AbilityTextureName" "kunkka_torrent"
-		"MaxLevel" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-	}
-	"courier_extra_star_up_2" {
-		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/courier/courier_extra_star_up_2"
-		"AbilityTextureName" "kunkka_torrent"
-		"MaxLevel" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-	}
-	"courier_extra_population_2" {
-		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/courier/courier_extra_population_2"
-		"AbilityTextureName" "kunkka_torrent"
-		"MaxLevel" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-	}
-	"courier_extra_weapon_master_2" {
-		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/courier/courier_extra_weapon_master_2"
-		"AbilityTextureName" "kunkka_torrent"
-		"MaxLevel" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-	}
-	"courier_extra_random_item_2" {
-		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/courier/courier_extra_random_item_2"
-		"AbilityTextureName" "kunkka_torrent"
-		"MaxLevel" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-	}
-	"courier_extra_tower_unique_2" {
-		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/courier/courier_extra_tower_unique_2"
-		"AbilityTextureName" "kunkka_torrent"
-		"MaxLevel" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-	}
-	"courier_extra_gold_sec_2" {
-		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/courier/courier_extra_gold_sec_2"
-		"AbilityTextureName" "kunkka_torrent"
-		"MaxLevel" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-	}
-	"courier_extra_wood_sec_2" {
-		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/courier/courier_extra_wood_sec_2"
-		"AbilityTextureName" "kunkka_torrent"
-		"MaxLevel" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-	}
-	"courier_extra_artifact_select" {
-		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/courier/courier_extra_artifact_select"
-		"AbilityTextureName" "kunkka_torrent"
-		"MaxLevel" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-	}
-	"courier_extra_star_up_1" {
-		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/courier/courier_extra_star_up_1"
-		"AbilityTextureName" "kunkka_torrent"
-		"MaxLevel" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-	}
-	"courier_extra_population_1" {
-		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/courier/courier_extra_population_1"
-		"AbilityTextureName" "kunkka_torrent"
-		"MaxLevel" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-	}
-	"courier_extra_tower_unique_1" {
-		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/courier/courier_extra_tower_unique_1"
-		"AbilityTextureName" "kunkka_torrent"
-		"MaxLevel" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-	}
-	"courier_extra_weapon_master_1" {
-		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/courier/courier_extra_weapon_master_1"
-		"AbilityTextureName" "kunkka_torrent"
-		"MaxLevel" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-	}
-	"courier_extra_random_item_1" {
-		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/courier/courier_extra_random_item_1"
-		"AbilityTextureName" "kunkka_torrent"
-		"MaxLevel" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-	}
-	"courier_extra_card_1" {
-		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/courier/courier_extra_card_1"
-		"AbilityTextureName" "kunkka_torrent"
-		"MaxLevel" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-	}
-	"courier_extra_more_card_1" {
-		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/courier/courier_extra_more_card_1"
-		"AbilityTextureName" "kunkka_torrent"
-		"MaxLevel" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-	}
-	"courier_extra_wood_sec_1" {
-		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/courier/courier_extra_wood_sec_1"
-		"AbilityTextureName" "kunkka_torrent"
-		"MaxLevel" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-	}
-	"courier_extra_chest_killer_3" {
-		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/courier/courier_extra_chest_killer_3"
-		"AbilityTextureName" "kunkka_torrent"
-		"MaxLevel" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-	}
-	"courier_extra_shop_discount_3" {
-		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/courier/courier_extra_shop_discount_3"
-		"AbilityTextureName" "kunkka_torrent"
-		"MaxLevel" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-	}
-	"courier_extra_shop_discount_2" {
-		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/courier/courier_extra_shop_discount_2"
-		"AbilityTextureName" "kunkka_torrent"
-		"MaxLevel" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-	}
-	"courier_extra_shop_discount_1" {
-		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/courier/courier_extra_shop_discount_1"
-		"AbilityTextureName" "kunkka_torrent"
-		"MaxLevel" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-	}
-	"courier_extra_artifact_3" {
-		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/courier/courier_extra_artifact_3"
-		"AbilityTextureName" "kunkka_torrent"
-		"MaxLevel" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-	}
-	"courier_extra_artifact_2" {
-		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/courier/courier_extra_artifact_2"
-		"AbilityTextureName" "kunkka_torrent"
-		"MaxLevel" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-	}
-	"courier_extra_artifact_1" {
-		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/courier/courier_extra_artifact_1"
-		"AbilityTextureName" "kunkka_torrent"
-		"MaxLevel" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-	}
-	"courier_extra_upgrade_item_3" {
-		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/courier/courier_extra_upgrade_item_3"
-		"AbilityTextureName" "kunkka_torrent"
-		"MaxLevel" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-	}
-	"courier_extra_upgrade_item_2" {
-		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/courier/courier_extra_upgrade_item_2"
-		"AbilityTextureName" "kunkka_torrent"
-		"MaxLevel" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-	}
-	"courier_extra_upgrade_item_1" {
-		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/courier/courier_extra_upgrade_item_1"
-		"AbilityTextureName" "kunkka_torrent"
-		"MaxLevel" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-	}
-	"courier_extra_max_gold_3" {
-		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/courier/courier_extra_max_gold_3"
-		"AbilityTextureName" "kunkka_torrent"
-		"MaxLevel" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
 
 	}
 	"courier_extra_all_stat_2" {
 		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/courier/courier_extra_all_stat_2"
 		"AbilityTextureName" "kunkka_torrent"
 		"MaxLevel" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-
-	}
-	"courier_extra_all_stat_1" {
-		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/courier/courier_extra_all_stat_1"
-		"AbilityTextureName" "kunkka_torrent"
-		"MaxLevel" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
 
 	}
 	"courier_extra_all_stat_3" {
 		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/courier/courier_extra_all_stat_3"
 		"AbilityTextureName" "kunkka_torrent"
 		"MaxLevel" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+	}
+	"courier_extra_artifact_1" {
+		"BaseClass" "ability_lua"
+		"AbilityTextureName" "kunkka_torrent"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+	}
+	"courier_extra_artifact_2" {
+		"BaseClass" "ability_lua"
+		"AbilityTextureName" "kunkka_torrent"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+	}
+	"courier_extra_artifact_3" {
+		"BaseClass" "ability_lua"
+		"AbilityTextureName" "kunkka_torrent"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+	}
+	"courier_extra_artifact_select" {
+		"BaseClass" "ability_lua"
+		"AbilityTextureName" "kunkka_torrent"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+	}
+	"courier_extra_card_1" {
+		"BaseClass" "ability_lua"
+		"AbilityTextureName" "kunkka_torrent"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+	}
+	"courier_extra_card_2" {
+		"BaseClass" "ability_lua"
+		"AbilityTextureName" "kunkka_torrent"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+	}
+	"courier_extra_card_3" {
+		"BaseClass" "ability_lua"
+		"AbilityTextureName" "kunkka_torrent"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+	}
+	"courier_extra_chest_killer_3" {
+		"BaseClass" "ability_lua"
+		"AbilityTextureName" "kunkka_torrent"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+	}
+	"courier_extra_gold_sec_1" {
+		"BaseClass" "ability_lua"
+		"AbilityTextureName" "kunkka_torrent"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"gold_interval" "10"
+
+			}
+			"02" {
+				"var_type" "FIELD_INTEGER"
+				"interval" "5"
+
+			}
+
+		}
+
+	}
+	"courier_extra_gold_sec_2" {
+		"BaseClass" "ability_lua"
+		"AbilityTextureName" "kunkka_torrent"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"gold_interval" "20"
+
+			}
+			"02" {
+				"var_type" "FIELD_INTEGER"
+				"interval" "5"
+
+			}
+
+		}
+
+	}
+	"courier_extra_gold_sec_3" {
+		"BaseClass" "ability_lua"
+		"AbilityTextureName" "kunkka_torrent"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"gold_interval" "30"
+
+			}
+			"02" {
+				"var_type" "FIELD_INTEGER"
+				"interval" "5"
+
+			}
+
+		}
+
+	}
+	"courier_extra_kill_1" {
+		"BaseClass" "ability_lua"
+		"AbilityTextureName" "kunkka_torrent"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+	}
+	"courier_extra_max_gold_3" {
+		"BaseClass" "ability_lua"
+		"AbilityTextureName" "kunkka_torrent"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+	}
+	"courier_extra_more_card_1" {
+		"BaseClass" "ability_lua"
+		"AbilityTextureName" "kunkka_torrent"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+	}
+	"courier_extra_more_card_2" {
+		"BaseClass" "ability_lua"
+		"AbilityTextureName" "kunkka_torrent"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+	}
+	"courier_extra_more_card_3" {
+		"BaseClass" "ability_lua"
+		"AbilityTextureName" "kunkka_torrent"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+	}
+	"courier_extra_population_1" {
+		"BaseClass" "ability_lua"
+		"AbilityTextureName" "kunkka_torrent"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+	}
+	"courier_extra_population_2" {
+		"BaseClass" "ability_lua"
+		"AbilityTextureName" "kunkka_torrent"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+	}
+	"courier_extra_population_3" {
+		"BaseClass" "ability_lua"
+		"AbilityTextureName" "kunkka_torrent"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+	}
+	"courier_extra_random_item_1" {
+		"BaseClass" "ability_lua"
+		"AbilityTextureName" "kunkka_torrent"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+	}
+	"courier_extra_random_item_2" {
+		"BaseClass" "ability_lua"
+		"AbilityTextureName" "kunkka_torrent"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+	}
+	"courier_extra_random_item_3" {
+		"BaseClass" "ability_lua"
+		"AbilityTextureName" "kunkka_torrent"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+	}
+	"courier_extra_shop_discount_1" {
+		"BaseClass" "ability_lua"
+		"AbilityTextureName" "kunkka_torrent"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+	}
+	"courier_extra_shop_discount_2" {
+		"BaseClass" "ability_lua"
+		"AbilityTextureName" "kunkka_torrent"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+	}
+	"courier_extra_shop_discount_3" {
+		"BaseClass" "ability_lua"
+		"AbilityTextureName" "kunkka_torrent"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+	}
+	"courier_extra_star_up_1" {
+		"BaseClass" "ability_lua"
+		"AbilityTextureName" "kunkka_torrent"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+	}
+	"courier_extra_star_up_2" {
+		"BaseClass" "ability_lua"
+		"AbilityTextureName" "kunkka_torrent"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+	}
+	"courier_extra_star_up_3" {
+		"BaseClass" "ability_lua"
+		"AbilityTextureName" "kunkka_torrent"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+	}
+	"courier_extra_tower_unique_1" {
+		"BaseClass" "ability_lua"
+		"AbilityTextureName" "kunkka_torrent"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+	}
+	"courier_extra_tower_unique_2" {
+		"BaseClass" "ability_lua"
+		"AbilityTextureName" "kunkka_torrent"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+	}
+	"courier_extra_tower_unique_3" {
+		"BaseClass" "ability_lua"
+		"AbilityTextureName" "kunkka_torrent"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+	}
+	"courier_extra_upgrade_item_1" {
+		"BaseClass" "ability_lua"
+		"AbilityTextureName" "kunkka_torrent"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+	}
+	"courier_extra_upgrade_item_2" {
+		"BaseClass" "ability_lua"
+		"AbilityTextureName" "kunkka_torrent"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+	}
+	"courier_extra_upgrade_item_3" {
+		"BaseClass" "ability_lua"
+		"AbilityTextureName" "kunkka_torrent"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+	}
+	"courier_extra_weapon_master_1" {
+		"BaseClass" "ability_lua"
+		"AbilityTextureName" "kunkka_torrent"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+	}
+	"courier_extra_weapon_master_2" {
+		"BaseClass" "ability_lua"
+		"AbilityTextureName" "kunkka_torrent"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+	}
+	"courier_extra_weapon_master_3" {
+		"BaseClass" "ability_lua"
+		"AbilityTextureName" "kunkka_torrent"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+
+	}
+	"courier_extra_wood_sec_1" {
+		"BaseClass" "ability_lua"
+		"AbilityTextureName" "kunkka_torrent"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"wood_interval" "10"
+
+			}
+			"02" {
+				"var_type" "FIELD_INTEGER"
+				"interval" "5"
+
+			}
+
+		}
+
+	}
+	"courier_extra_wood_sec_2" {
+		"BaseClass" "ability_lua"
+		"AbilityTextureName" "kunkka_torrent"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"wood_interval" "20"
+
+			}
+			"02" {
+				"var_type" "FIELD_INTEGER"
+				"interval" "5"
+
+			}
+
+		}
+
+	}
+	"courier_extra_wood_sec_3" {
+		"BaseClass" "ability_lua"
+		"AbilityTextureName" "kunkka_torrent"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"wood_interval" "30"
+
+			}
+			"02" {
+				"var_type" "FIELD_INTEGER"
+				"interval" "5"
+
+			}
+
+		}
 
 	}
 

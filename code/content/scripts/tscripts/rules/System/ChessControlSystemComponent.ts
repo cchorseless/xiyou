@@ -21,7 +21,10 @@ export class ChessControlSystemComponent extends ET.SingletonComponent {
             if (!GFuncEntity.IsValid(entity) || entity.ETRoot == null || !entity.ETRoot.AsValid<IBuildingEntityRoot>("BuildingEntityRoot")) {
                 [event.state, event.message] = [false, "cant find entity"];
             } else {
-                [event.state, event.message] = playersys.ChessControlComp().moveChess(entity.ETRoot.As<IBuildingEntityRoot>(), v);
+                [event.state, event.message] = playersys.BuildingManager().moveBuilding(entity.ETRoot.As<IBuildingEntityRoot>(), v);
+            }
+            if (!event.state) {
+                EventHelper.ErrorMessage(event.message, event.PlayerID)
             }
         }));
     }

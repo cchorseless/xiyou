@@ -268,7 +268,7 @@ export class EWearableItem extends ET.Entity {
                         attach_type = WearableConfig.EWearableAttach[cp_table.attach_type] as any;
                         //  绑定饰品模型，且attachment为空饰品没attachment会让特效消失
                         if (cp_table.attach_entity != "this" || attachment) {
-                            GLogHelper.print(control_point_index, attach_type, attachment, position)
+                            // GLogHelper.print(control_point_index, attach_type, attachment, position)
                             ParticleManager.SetParticleControlEnt(p, control_point_index, inner_attach_entity, attach_type, attachment, position, true);
                         }
                     }

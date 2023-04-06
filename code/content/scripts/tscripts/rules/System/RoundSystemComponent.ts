@@ -9,6 +9,9 @@ import { RoundPrizeUnitEntityRoot } from "../Components/Round/RoundPrizeUnitEnti
 export class RoundSystemComponent extends ET.SingletonComponent {
     iRound: string;
 
+    GetCurrentRoundIndex() {
+        return GJSONConfig.RoundBoardConfig.get(this.iRound).roundIndex;
+    }
     GetCurrentRoundType() {
         return GJSONConfig.RoundBoardConfig.get(this.iRound).roundType;
     }
@@ -76,20 +79,20 @@ export class RoundSystemComponent extends ET.SingletonComponent {
 
     public endBoardRound() {
         let allWaiting = true;
-        GPlayerEntityRoot.GetAllInstance()
-            .forEach((player) => {
-                if (!player.RoundManagerComp().getCurrentBoardRound().IsWaitingEnd()) {
-                    allWaiting = false;
-                }
-            });
-        GLogHelper.print("endBoardRound", allWaiting)
+        GPlayerEntityRoot.GetAllInstance().forEach((player) => {
+            if (!player.RoundManagerComp().getCurrentBoardRound().IsWaitingEnd()) {
+                allWaiting = false;
+            }
+        });
         if (allWaiting) {
             GTimerHelper.AddTimer(3,
                 GHandler.create(this, () => {
                     let nextid = this.GetNextBoardRoundid();
-                    GLogHelper.print("endBoardRound", nextid)
                     if (nextid != null) {
                         this.runBoardRound(nextid);
+                    }
+                    else {
+                        GGameScene.Victory();
                     }
                 }));
         }

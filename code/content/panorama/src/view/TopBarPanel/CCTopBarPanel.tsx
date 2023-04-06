@@ -56,7 +56,7 @@ export class CCTopBarCenter<T extends NodePropsData> extends CCPanel<T> {
             <Panel id="CC_TopBarCenter" ref={this.__root__}    {...this.initRootAttrs()} hittest={false}>
                 <Image id="RoundBG" >
                     <CCPanel width="100%" flowChildren="right">
-                        <Label id="RoundLabel" localizedText="#lang_TopBarRound" dialogVariables={{ round: round?.config.roundShow || "1" }} />
+                        <Label id="RoundLabel" localizedText="#lang_TopBarRound" dialogVariables={{ round: round?.config.roundIndex+"" || "1" }} />
                         <Label id="RoundState" text={round?.getCurStateDes()} />
                     </CCPanel>
                     <Label id="RoundDifficulty" localizedText="#lang_TopBarDifficulty" dialogVariables={{ difficulty: this.getDifficultyDes() }} />

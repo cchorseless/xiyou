@@ -21,7 +21,7 @@ export class modifier_sect_suck_blood_base_a extends modifier_combination_effect
         return "particles/status_fx/status_effect_bloodrage.vpcf";
     }
     StatusEffectPriority(): modifierpriority {
-        return 8;
+        return 4;
     }
 
 }

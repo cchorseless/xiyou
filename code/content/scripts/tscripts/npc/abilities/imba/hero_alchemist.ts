@@ -1,5 +1,5 @@
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { EventHelper } from "../../../helper/EventHelper";
 import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { ResHelper } from "../../../helper/ResHelper";
@@ -1381,7 +1381,7 @@ export class modifier_imba_chemical_rage_buff_haste extends BaseModifier_Plus {
     }
 
     StatusEffectPriority(): modifierpriority {
-        return 10;
+        return 4;
     }
 
     GetHeroEffectName(): string {
@@ -1389,7 +1389,7 @@ export class modifier_imba_chemical_rage_buff_haste extends BaseModifier_Plus {
     }
 
     HeroEffectPriority(): modifierpriority {
-        return 10;
+        return 4;
     }
 }
 
@@ -1587,7 +1587,7 @@ export class modifier_mammonite_passive extends BaseModifier_Plus {
                         let gold = PlayerData.GetGold();
                         let gold_percent = this.gold_damage * 0.01;
                         let gold_damage = gold * gold_percent;
-                        PlayerData.SpendGold(gold_damage, EDOTA_ModifyGold_Reason.DOTA_ModifyGold_Unspecified);
+                        PlayerData.ModifyGold(gold_damage);
                     }
                 }
             }

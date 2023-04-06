@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -1223,7 +1223,7 @@ export class modifier_imba_poison_nova extends BaseModifier_Plus {
                     for (const [_, poison] of GameFunc.iPair(nova_poison)) {
                         if (poison.index == this.index) {
                             bAlreadyAffected = true;
-                            return;
+                            break;
                         }
                     }
                     if (!bAlreadyAffected) {
@@ -1255,7 +1255,7 @@ export class modifier_imba_poison_nova extends BaseModifier_Plus {
         return "particles/status_fx/status_effect_poison_venomancer.vpcf";
     }
     StatusEffectPriority(): modifierpriority {
-        return 10;
+        return 4;
     }
     GetEffectName(): string {
         return "particles/units/heroes/hero_venomancer/venomancer_poison_debuff_nova.vpcf";

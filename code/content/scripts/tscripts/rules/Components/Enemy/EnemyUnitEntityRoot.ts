@@ -2,6 +2,7 @@ import { Assert_ProjectileEffect, IProjectileEffectInfo } from "../../../assert/
 import { KVHelper } from "../../../helper/KVHelper";
 import { modifier_jiaoxie_wudi } from "../../../npc/modifier/battle/modifier_jiaoxie_wudi";
 import { modifier_mana_control } from "../../../npc/modifier/battle/modifier_mana_control";
+import { modifier_round_enemy } from "../../../npc/modifier/battle/modifier_round_enemy";
 import { EnemyConfig } from "../../../shared/EnemyConfig";
 import { BattleUnitEntityRoot } from "../BattleUnit/BattleUnitEntityRoot";
 import { CombinationComponent } from "../Combination/CombinationComponent";
@@ -25,6 +26,12 @@ export class EnemyUnitEntityRoot extends BattleUnitEntityRoot {
         this.SetStar(1);
         this.SetUIOverHead(true, false);
         this.InitSyncClientInfo();
+        if (onlyKey != null) {
+            modifier_round_enemy.applyOnly(domain, domain, null, {
+                roundid: roundid,
+                onlyKey: onlyKey
+            })
+        }
         this.JoinInRound();
     }
     OnRound_Start() {

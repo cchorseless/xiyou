@@ -48,6 +48,7 @@ export class TCharacter extends ET.Component {
         this.SyncClient(true)
     }
 
+
     get SeedRandomComp() {
         return this.GetComponentByName<SeedRandomComponent>("SeedRandomComponent");
     }
