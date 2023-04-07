@@ -23,6 +23,7 @@
 "lang_LevelChallenge"       "关卡挑战"
 "lang_tech"       "科技"
 "lang_bagshop"       "背包商店"
+"lang_draw"       "抽卡"
 "lang_HUD_Shop_Home"       "首页"
 "lang_HUD_Shop_Props"       "道具"
 "lang_HUD_Shop_Resource"       "资源"

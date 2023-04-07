@@ -940,69 +940,45 @@ export module AbilityHelper {
     };
 
     export function GetLevelCooldown(iEntityIndex: AbilityEntityIndex, iLevel = -1) {
-        let sCooldown = GetAbilityData(iEntityIndex, "cool_down", iLevel)
-        if (sCooldown == "") {
-            let sAbilityName = Abilities.GetAbilityName(iEntityIndex);
-            let [isitem, tData] = KVHelper.GetAbilityOrItemData(sAbilityName);
-            if (tData) {
-                if (iLevel == -1) iLevel = Abilities.GetLevel(iEntityIndex) - 1;
-                let aCooldowns = StringToValues(tData.AbilityCooldown || "");
-                if (iLevel >= 0 && aCooldowns.length > 0) {
-                    return aCooldowns[Math.min(iLevel, aCooldowns.length - 1)];
-                }
-            }
-            return 0;
-        }
+        let sCooldown = GetAbilityData(iEntityIndex, "GetCooldown", iLevel)
+        // if (sCooldown == "") {
+        //     let sAbilityName = Abilities.GetAbilityName(iEntityIndex);
+        //     let [isitem, tData] = KVHelper.GetAbilityOrItemData(sAbilityName);
+        //     if (tData) {
+        //         if (iLevel == -1) iLevel = Abilities.GetLevel(iEntityIndex) - 1;
+        //         let aCooldowns = StringToValues(tData.AbilityCooldown || "");
+        //         if (iLevel >= 0 && aCooldowns.length > 0) {
+        //             return aCooldowns[Math.min(iLevel, aCooldowns.length - 1)];
+        //         }
+        //     }
+        //     return 0;
+        // }
         return GToNumber(sCooldown);
     };
 
     export function GetLevelManaCost(iEntityIndex: AbilityEntityIndex, iLevel = -1) {
-        let sManaCost = GetAbilityData(iEntityIndex, "mana_cost", iLevel)
-        if (sManaCost == "") {
-            let sAbilityName = Abilities.GetAbilityName(iEntityIndex);
-            let [isitem, tData] = KVHelper.GetAbilityOrItemData(sAbilityName);
-            if (tData) {
-                if (iLevel == -1) iLevel = Abilities.GetLevel(iEntityIndex) - 1;
-                let aManaCosts = StringToValues(tData.AbilityManaCost || "");
-                if (iLevel >= 0 && aManaCosts.length > 0) {
-                    return aManaCosts[Math.min(iLevel, aManaCosts.length - 1)];
-                }
-            }
-            return 0;
-        }
+        let sManaCost = GetAbilityData(iEntityIndex, "GetManaCost", iLevel)
+        // if (sManaCost == "") {
+        //     let sAbilityName = Abilities.GetAbilityName(iEntityIndex);
+        //     let [isitem, tData] = KVHelper.GetAbilityOrItemData(sAbilityName);
+        //     if (tData) {
+        //         if (iLevel == -1) iLevel = Abilities.GetLevel(iEntityIndex) - 1;
+        //         let aManaCosts = StringToValues(tData.AbilityManaCost || "");
+        //         if (iLevel >= 0 && aManaCosts.length > 0) {
+        //             return aManaCosts[Math.min(iLevel, aManaCosts.length - 1)];
+        //         }
+        //     }
+        //     return 0;
+        // }
         return GToNumber(sManaCost);
     };
     export function GetLevelGoldCost(iEntityIndex: AbilityEntityIndex, iLevel = -1) {
-        let sGoldCost = GetAbilityData(iEntityIndex, "gold_cost", iLevel)
-        if (sGoldCost == "") {
-            let sAbilityName = Abilities.GetAbilityName(iEntityIndex);
-            let [isitem, tData] = KVHelper.GetAbilityOrItemData(sAbilityName);
-            if (tData) {
-                if (iLevel == -1) iLevel = Abilities.GetLevel(iEntityIndex) - 1;
-                let aGoldCosts = StringToValues(tData.AbilityGoldCost || "");
-                if (iLevel >= 0 && aGoldCosts.length > 0) {
-                    return aGoldCosts[Math.min(iLevel, aGoldCosts.length - 1)];
-                }
-            }
-            return 0;
-        }
+        let sGoldCost = GetAbilityData(iEntityIndex, "GetGoldCost", iLevel)
         return GToNumber(sGoldCost);
     };
-    export function GetLevelEnergyCost(iEntityIndex: AbilityEntityIndex, iLevel = -1) {
-        let sEnergyCost = GetAbilityData(iEntityIndex, "energy_cost", iLevel)
-        if (sEnergyCost == "") {
-            let sAbilityName = Abilities.GetAbilityName(iEntityIndex);
-            let [isitem, tData] = KVHelper.GetAbilityOrItemData(sAbilityName);
-            if (tData) {
-                if (iLevel == -1) iLevel = Abilities.GetLevel(iEntityIndex) - 1;
-                let aEnergyCosts = StringToValues(tData.AbilityEnergyCost || "");
-                if (iLevel >= 0 && aEnergyCosts.length > 0) {
-                    return aEnergyCosts[Math.min(iLevel, aEnergyCosts.length - 1)];
-                }
-            }
-            return 0;
-        }
-        return GToNumber(sEnergyCost);
+    export function GetLevelWoodCost(iEntityIndex: AbilityEntityIndex, iLevel = -1) {
+        let sWoodCost = GetAbilityData(iEntityIndex, "GetWoodCost", iLevel)
+        return GToNumber(sWoodCost);
     };
 
 

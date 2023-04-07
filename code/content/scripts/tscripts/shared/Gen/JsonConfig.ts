@@ -27638,6 +27638,658 @@
     "Equipid": 0
   }
 ] ,
+"dota_courierabilitylevelupconfig":[
+  {
+    "LevelId": "1",
+    "PopulationRoof": 2,
+    "PopuGoldCost": 200,
+    "PopuWoodCost": 20,
+    "TechExtraWood": 3,
+    "TechExtraGood": 3,
+    "TechGoldcost": 20,
+    "ChallengeGoldGoldcost": 20,
+    "ChallengeWoodGoldcost": 20,
+    "ChallengeEquipWoodcost": 20,
+    "ChallengeArtifactWoodcost": 20
+  },
+  {
+    "LevelId": "2",
+    "PopulationRoof": 2,
+    "PopuGoldCost": 300,
+    "PopuWoodCost": 30,
+    "TechExtraWood": 4,
+    "TechExtraGood": 4,
+    "TechGoldcost": 30,
+    "ChallengeGoldGoldcost": 30,
+    "ChallengeWoodGoldcost": 30,
+    "ChallengeEquipWoodcost": 30,
+    "ChallengeArtifactWoodcost": 30
+  },
+  {
+    "LevelId": "3",
+    "PopulationRoof": 2,
+    "PopuGoldCost": 400,
+    "PopuWoodCost": 40,
+    "TechExtraWood": 5,
+    "TechExtraGood": 5,
+    "TechGoldcost": 40,
+    "ChallengeGoldGoldcost": 40,
+    "ChallengeWoodGoldcost": 40,
+    "ChallengeEquipWoodcost": 40,
+    "ChallengeArtifactWoodcost": 40
+  },
+  {
+    "LevelId": "4",
+    "PopulationRoof": 2,
+    "PopuGoldCost": 500,
+    "PopuWoodCost": 50,
+    "TechExtraWood": 6,
+    "TechExtraGood": 6,
+    "TechGoldcost": 50,
+    "ChallengeGoldGoldcost": 50,
+    "ChallengeWoodGoldcost": 50,
+    "ChallengeEquipWoodcost": 50,
+    "ChallengeArtifactWoodcost": 50
+  },
+  {
+    "LevelId": "5",
+    "PopulationRoof": 2,
+    "PopuGoldCost": 600,
+    "PopuWoodCost": 60,
+    "TechExtraWood": 7,
+    "TechExtraGood": 7,
+    "TechGoldcost": 60,
+    "ChallengeGoldGoldcost": 60,
+    "ChallengeWoodGoldcost": 60,
+    "ChallengeEquipWoodcost": 60,
+    "ChallengeArtifactWoodcost": 60
+  },
+  {
+    "LevelId": "6",
+    "PopulationRoof": 2,
+    "PopuGoldCost": 700,
+    "PopuWoodCost": 70,
+    "TechExtraWood": 8,
+    "TechExtraGood": 8,
+    "TechGoldcost": 70,
+    "ChallengeGoldGoldcost": 70,
+    "ChallengeWoodGoldcost": 70,
+    "ChallengeEquipWoodcost": 70,
+    "ChallengeArtifactWoodcost": 70
+  },
+  {
+    "LevelId": "7",
+    "PopulationRoof": 2,
+    "PopuGoldCost": 800,
+    "PopuWoodCost": 80,
+    "TechExtraWood": 9,
+    "TechExtraGood": 9,
+    "TechGoldcost": 80,
+    "ChallengeGoldGoldcost": 80,
+    "ChallengeWoodGoldcost": 80,
+    "ChallengeEquipWoodcost": 80,
+    "ChallengeArtifactWoodcost": 80
+  },
+  {
+    "LevelId": "8",
+    "PopulationRoof": 2,
+    "PopuGoldCost": 900,
+    "PopuWoodCost": 90,
+    "TechExtraWood": 10,
+    "TechExtraGood": 10,
+    "TechGoldcost": 90,
+    "ChallengeGoldGoldcost": 90,
+    "ChallengeWoodGoldcost": 90,
+    "ChallengeEquipWoodcost": 90,
+    "ChallengeArtifactWoodcost": 90
+  },
+  {
+    "LevelId": "9",
+    "PopulationRoof": 2,
+    "PopuGoldCost": 1000,
+    "PopuWoodCost": 100,
+    "TechExtraWood": 11,
+    "TechExtraGood": 11,
+    "TechGoldcost": 100,
+    "ChallengeGoldGoldcost": 100,
+    "ChallengeWoodGoldcost": 100,
+    "ChallengeEquipWoodcost": 100,
+    "ChallengeArtifactWoodcost": 100
+  },
+  {
+    "LevelId": "10",
+    "PopulationRoof": 2,
+    "PopuGoldCost": 1100,
+    "PopuWoodCost": 110,
+    "TechExtraWood": 12,
+    "TechExtraGood": 12,
+    "TechGoldcost": 110,
+    "ChallengeGoldGoldcost": 110,
+    "ChallengeWoodGoldcost": 110,
+    "ChallengeEquipWoodcost": 110,
+    "ChallengeArtifactWoodcost": 110
+  },
+  {
+    "LevelId": "11",
+    "PopulationRoof": 2,
+    "PopuGoldCost": 1200,
+    "PopuWoodCost": 120,
+    "TechExtraWood": 13,
+    "TechExtraGood": 13,
+    "TechGoldcost": 120,
+    "ChallengeGoldGoldcost": 120,
+    "ChallengeWoodGoldcost": 120,
+    "ChallengeEquipWoodcost": 120,
+    "ChallengeArtifactWoodcost": 120
+  },
+  {
+    "LevelId": "12",
+    "PopulationRoof": 2,
+    "PopuGoldCost": 1300,
+    "PopuWoodCost": 130,
+    "TechExtraWood": 14,
+    "TechExtraGood": 14,
+    "TechGoldcost": 130,
+    "ChallengeGoldGoldcost": 130,
+    "ChallengeWoodGoldcost": 130,
+    "ChallengeEquipWoodcost": 130,
+    "ChallengeArtifactWoodcost": 130
+  },
+  {
+    "LevelId": "13",
+    "PopulationRoof": 2,
+    "PopuGoldCost": 1400,
+    "PopuWoodCost": 140,
+    "TechExtraWood": 15,
+    "TechExtraGood": 15,
+    "TechGoldcost": 140,
+    "ChallengeGoldGoldcost": 140,
+    "ChallengeWoodGoldcost": 140,
+    "ChallengeEquipWoodcost": 140,
+    "ChallengeArtifactWoodcost": 140
+  },
+  {
+    "LevelId": "14",
+    "PopulationRoof": 2,
+    "PopuGoldCost": 1500,
+    "PopuWoodCost": 150,
+    "TechExtraWood": 16,
+    "TechExtraGood": 16,
+    "TechGoldcost": 150,
+    "ChallengeGoldGoldcost": 150,
+    "ChallengeWoodGoldcost": 150,
+    "ChallengeEquipWoodcost": 150,
+    "ChallengeArtifactWoodcost": 150
+  },
+  {
+    "LevelId": "15",
+    "PopulationRoof": 2,
+    "PopuGoldCost": 1600,
+    "PopuWoodCost": 160,
+    "TechExtraWood": 17,
+    "TechExtraGood": 17,
+    "TechGoldcost": 160,
+    "ChallengeGoldGoldcost": 160,
+    "ChallengeWoodGoldcost": 160,
+    "ChallengeEquipWoodcost": 160,
+    "ChallengeArtifactWoodcost": 160
+  },
+  {
+    "LevelId": "16",
+    "PopulationRoof": 2,
+    "PopuGoldCost": 1700,
+    "PopuWoodCost": 170,
+    "TechExtraWood": 18,
+    "TechExtraGood": 18,
+    "TechGoldcost": 170,
+    "ChallengeGoldGoldcost": 170,
+    "ChallengeWoodGoldcost": 170,
+    "ChallengeEquipWoodcost": 170,
+    "ChallengeArtifactWoodcost": 170
+  },
+  {
+    "LevelId": "17",
+    "PopulationRoof": 2,
+    "PopuGoldCost": 1800,
+    "PopuWoodCost": 180,
+    "TechExtraWood": 19,
+    "TechExtraGood": 19,
+    "TechGoldcost": 180,
+    "ChallengeGoldGoldcost": 180,
+    "ChallengeWoodGoldcost": 180,
+    "ChallengeEquipWoodcost": 180,
+    "ChallengeArtifactWoodcost": 180
+  },
+  {
+    "LevelId": "18",
+    "PopulationRoof": 2,
+    "PopuGoldCost": 1900,
+    "PopuWoodCost": 190,
+    "TechExtraWood": 20,
+    "TechExtraGood": 20,
+    "TechGoldcost": 190,
+    "ChallengeGoldGoldcost": 190,
+    "ChallengeWoodGoldcost": 190,
+    "ChallengeEquipWoodcost": 190,
+    "ChallengeArtifactWoodcost": 190
+  },
+  {
+    "LevelId": "19",
+    "PopulationRoof": 2,
+    "PopuGoldCost": 2000,
+    "PopuWoodCost": 200,
+    "TechExtraWood": 21,
+    "TechExtraGood": 21,
+    "TechGoldcost": 200,
+    "ChallengeGoldGoldcost": 200,
+    "ChallengeWoodGoldcost": 200,
+    "ChallengeEquipWoodcost": 200,
+    "ChallengeArtifactWoodcost": 200
+  },
+  {
+    "LevelId": "20",
+    "PopulationRoof": 2,
+    "PopuGoldCost": 2100,
+    "PopuWoodCost": 210,
+    "TechExtraWood": 22,
+    "TechExtraGood": 22,
+    "TechGoldcost": 210,
+    "ChallengeGoldGoldcost": 210,
+    "ChallengeWoodGoldcost": 210,
+    "ChallengeEquipWoodcost": 210,
+    "ChallengeArtifactWoodcost": 210
+  },
+  {
+    "LevelId": "21",
+    "PopulationRoof": 2,
+    "PopuGoldCost": 2200,
+    "PopuWoodCost": 220,
+    "TechExtraWood": 23,
+    "TechExtraGood": 23,
+    "TechGoldcost": 220,
+    "ChallengeGoldGoldcost": 220,
+    "ChallengeWoodGoldcost": 220,
+    "ChallengeEquipWoodcost": 220,
+    "ChallengeArtifactWoodcost": 220
+  },
+  {
+    "LevelId": "22",
+    "PopulationRoof": 2,
+    "PopuGoldCost": 2300,
+    "PopuWoodCost": 230,
+    "TechExtraWood": 24,
+    "TechExtraGood": 24,
+    "TechGoldcost": 230,
+    "ChallengeGoldGoldcost": 230,
+    "ChallengeWoodGoldcost": 230,
+    "ChallengeEquipWoodcost": 230,
+    "ChallengeArtifactWoodcost": 230
+  },
+  {
+    "LevelId": "23",
+    "PopulationRoof": 2,
+    "PopuGoldCost": 2400,
+    "PopuWoodCost": 240,
+    "TechExtraWood": 25,
+    "TechExtraGood": 25,
+    "TechGoldcost": 240,
+    "ChallengeGoldGoldcost": 240,
+    "ChallengeWoodGoldcost": 240,
+    "ChallengeEquipWoodcost": 240,
+    "ChallengeArtifactWoodcost": 240
+  },
+  {
+    "LevelId": "24",
+    "PopulationRoof": 2,
+    "PopuGoldCost": 2500,
+    "PopuWoodCost": 250,
+    "TechExtraWood": 26,
+    "TechExtraGood": 26,
+    "TechGoldcost": 250,
+    "ChallengeGoldGoldcost": 250,
+    "ChallengeWoodGoldcost": 250,
+    "ChallengeEquipWoodcost": 250,
+    "ChallengeArtifactWoodcost": 250
+  },
+  {
+    "LevelId": "25",
+    "PopulationRoof": 2,
+    "PopuGoldCost": 2600,
+    "PopuWoodCost": 260,
+    "TechExtraWood": 27,
+    "TechExtraGood": 27,
+    "TechGoldcost": 260,
+    "ChallengeGoldGoldcost": 260,
+    "ChallengeWoodGoldcost": 260,
+    "ChallengeEquipWoodcost": 260,
+    "ChallengeArtifactWoodcost": 260
+  },
+  {
+    "LevelId": "26",
+    "PopulationRoof": 2,
+    "PopuGoldCost": 2700,
+    "PopuWoodCost": 270,
+    "TechExtraWood": 28,
+    "TechExtraGood": 28,
+    "TechGoldcost": 270,
+    "ChallengeGoldGoldcost": 270,
+    "ChallengeWoodGoldcost": 270,
+    "ChallengeEquipWoodcost": 270,
+    "ChallengeArtifactWoodcost": 270
+  },
+  {
+    "LevelId": "27",
+    "PopulationRoof": 2,
+    "PopuGoldCost": 2800,
+    "PopuWoodCost": 280,
+    "TechExtraWood": 29,
+    "TechExtraGood": 29,
+    "TechGoldcost": 280,
+    "ChallengeGoldGoldcost": 280,
+    "ChallengeWoodGoldcost": 280,
+    "ChallengeEquipWoodcost": 280,
+    "ChallengeArtifactWoodcost": 280
+  },
+  {
+    "LevelId": "28",
+    "PopulationRoof": 2,
+    "PopuGoldCost": 2900,
+    "PopuWoodCost": 290,
+    "TechExtraWood": 30,
+    "TechExtraGood": 30,
+    "TechGoldcost": 290,
+    "ChallengeGoldGoldcost": 290,
+    "ChallengeWoodGoldcost": 290,
+    "ChallengeEquipWoodcost": 290,
+    "ChallengeArtifactWoodcost": 290
+  },
+  {
+    "LevelId": "29",
+    "PopulationRoof": 2,
+    "PopuGoldCost": 3000,
+    "PopuWoodCost": 300,
+    "TechExtraWood": 31,
+    "TechExtraGood": 31,
+    "TechGoldcost": 300,
+    "ChallengeGoldGoldcost": 300,
+    "ChallengeWoodGoldcost": 300,
+    "ChallengeEquipWoodcost": 300,
+    "ChallengeArtifactWoodcost": 300
+  },
+  {
+    "LevelId": "30",
+    "PopulationRoof": 2,
+    "PopuGoldCost": 3100,
+    "PopuWoodCost": 310,
+    "TechExtraWood": 32,
+    "TechExtraGood": 32,
+    "TechGoldcost": 310,
+    "ChallengeGoldGoldcost": 310,
+    "ChallengeWoodGoldcost": 310,
+    "ChallengeEquipWoodcost": 310,
+    "ChallengeArtifactWoodcost": 310
+  },
+  {
+    "LevelId": "31",
+    "PopulationRoof": 2,
+    "PopuGoldCost": 3200,
+    "PopuWoodCost": 320,
+    "TechExtraWood": 33,
+    "TechExtraGood": 33,
+    "TechGoldcost": 320,
+    "ChallengeGoldGoldcost": 320,
+    "ChallengeWoodGoldcost": 320,
+    "ChallengeEquipWoodcost": 320,
+    "ChallengeArtifactWoodcost": 320
+  },
+  {
+    "LevelId": "32",
+    "PopulationRoof": 2,
+    "PopuGoldCost": 3300,
+    "PopuWoodCost": 330,
+    "TechExtraWood": 34,
+    "TechExtraGood": 34,
+    "TechGoldcost": 330,
+    "ChallengeGoldGoldcost": 330,
+    "ChallengeWoodGoldcost": 330,
+    "ChallengeEquipWoodcost": 330,
+    "ChallengeArtifactWoodcost": 330
+  },
+  {
+    "LevelId": "33",
+    "PopulationRoof": 2,
+    "PopuGoldCost": 3400,
+    "PopuWoodCost": 340,
+    "TechExtraWood": 35,
+    "TechExtraGood": 35,
+    "TechGoldcost": 340,
+    "ChallengeGoldGoldcost": 340,
+    "ChallengeWoodGoldcost": 340,
+    "ChallengeEquipWoodcost": 340,
+    "ChallengeArtifactWoodcost": 340
+  },
+  {
+    "LevelId": "34",
+    "PopulationRoof": 2,
+    "PopuGoldCost": 3500,
+    "PopuWoodCost": 350,
+    "TechExtraWood": 36,
+    "TechExtraGood": 36,
+    "TechGoldcost": 350,
+    "ChallengeGoldGoldcost": 350,
+    "ChallengeWoodGoldcost": 350,
+    "ChallengeEquipWoodcost": 350,
+    "ChallengeArtifactWoodcost": 350
+  },
+  {
+    "LevelId": "35",
+    "PopulationRoof": 2,
+    "PopuGoldCost": 3600,
+    "PopuWoodCost": 360,
+    "TechExtraWood": 37,
+    "TechExtraGood": 37,
+    "TechGoldcost": 360,
+    "ChallengeGoldGoldcost": 360,
+    "ChallengeWoodGoldcost": 360,
+    "ChallengeEquipWoodcost": 360,
+    "ChallengeArtifactWoodcost": 360
+  },
+  {
+    "LevelId": "36",
+    "PopulationRoof": 2,
+    "PopuGoldCost": 3700,
+    "PopuWoodCost": 370,
+    "TechExtraWood": 38,
+    "TechExtraGood": 38,
+    "TechGoldcost": 370,
+    "ChallengeGoldGoldcost": 370,
+    "ChallengeWoodGoldcost": 370,
+    "ChallengeEquipWoodcost": 370,
+    "ChallengeArtifactWoodcost": 370
+  },
+  {
+    "LevelId": "37",
+    "PopulationRoof": 2,
+    "PopuGoldCost": 3800,
+    "PopuWoodCost": 380,
+    "TechExtraWood": 39,
+    "TechExtraGood": 39,
+    "TechGoldcost": 380,
+    "ChallengeGoldGoldcost": 380,
+    "ChallengeWoodGoldcost": 380,
+    "ChallengeEquipWoodcost": 380,
+    "ChallengeArtifactWoodcost": 380
+  },
+  {
+    "LevelId": "38",
+    "PopulationRoof": 2,
+    "PopuGoldCost": 3900,
+    "PopuWoodCost": 390,
+    "TechExtraWood": 40,
+    "TechExtraGood": 40,
+    "TechGoldcost": 390,
+    "ChallengeGoldGoldcost": 390,
+    "ChallengeWoodGoldcost": 390,
+    "ChallengeEquipWoodcost": 390,
+    "ChallengeArtifactWoodcost": 390
+  },
+  {
+    "LevelId": "39",
+    "PopulationRoof": 2,
+    "PopuGoldCost": 4000,
+    "PopuWoodCost": 400,
+    "TechExtraWood": 41,
+    "TechExtraGood": 41,
+    "TechGoldcost": 400,
+    "ChallengeGoldGoldcost": 400,
+    "ChallengeWoodGoldcost": 400,
+    "ChallengeEquipWoodcost": 400,
+    "ChallengeArtifactWoodcost": 400
+  },
+  {
+    "LevelId": "40",
+    "PopulationRoof": 2,
+    "PopuGoldCost": 4100,
+    "PopuWoodCost": 410,
+    "TechExtraWood": 42,
+    "TechExtraGood": 42,
+    "TechGoldcost": 410,
+    "ChallengeGoldGoldcost": 410,
+    "ChallengeWoodGoldcost": 410,
+    "ChallengeEquipWoodcost": 410,
+    "ChallengeArtifactWoodcost": 410
+  },
+  {
+    "LevelId": "41",
+    "PopulationRoof": 2,
+    "PopuGoldCost": 4200,
+    "PopuWoodCost": 420,
+    "TechExtraWood": 43,
+    "TechExtraGood": 43,
+    "TechGoldcost": 420,
+    "ChallengeGoldGoldcost": 420,
+    "ChallengeWoodGoldcost": 420,
+    "ChallengeEquipWoodcost": 420,
+    "ChallengeArtifactWoodcost": 420
+  },
+  {
+    "LevelId": "42",
+    "PopulationRoof": 2,
+    "PopuGoldCost": 4300,
+    "PopuWoodCost": 430,
+    "TechExtraWood": 44,
+    "TechExtraGood": 44,
+    "TechGoldcost": 430,
+    "ChallengeGoldGoldcost": 430,
+    "ChallengeWoodGoldcost": 430,
+    "ChallengeEquipWoodcost": 430,
+    "ChallengeArtifactWoodcost": 430
+  },
+  {
+    "LevelId": "43",
+    "PopulationRoof": 2,
+    "PopuGoldCost": 4400,
+    "PopuWoodCost": 440,
+    "TechExtraWood": 45,
+    "TechExtraGood": 45,
+    "TechGoldcost": 440,
+    "ChallengeGoldGoldcost": 440,
+    "ChallengeWoodGoldcost": 440,
+    "ChallengeEquipWoodcost": 440,
+    "ChallengeArtifactWoodcost": 440
+  },
+  {
+    "LevelId": "44",
+    "PopulationRoof": 2,
+    "PopuGoldCost": 4500,
+    "PopuWoodCost": 450,
+    "TechExtraWood": 46,
+    "TechExtraGood": 46,
+    "TechGoldcost": 450,
+    "ChallengeGoldGoldcost": 0,
+    "ChallengeWoodGoldcost": 0,
+    "ChallengeEquipWoodcost": 0,
+    "ChallengeArtifactWoodcost": 0
+  },
+  {
+    "LevelId": "45",
+    "PopulationRoof": 2,
+    "PopuGoldCost": 4600,
+    "PopuWoodCost": 460,
+    "TechExtraWood": 47,
+    "TechExtraGood": 47,
+    "TechGoldcost": 460,
+    "ChallengeGoldGoldcost": 0,
+    "ChallengeWoodGoldcost": 0,
+    "ChallengeEquipWoodcost": 0,
+    "ChallengeArtifactWoodcost": 0
+  },
+  {
+    "LevelId": "46",
+    "PopulationRoof": 2,
+    "PopuGoldCost": 4700,
+    "PopuWoodCost": 470,
+    "TechExtraWood": 48,
+    "TechExtraGood": 48,
+    "TechGoldcost": 470,
+    "ChallengeGoldGoldcost": 0,
+    "ChallengeWoodGoldcost": 0,
+    "ChallengeEquipWoodcost": 0,
+    "ChallengeArtifactWoodcost": 0
+  },
+  {
+    "LevelId": "47",
+    "PopulationRoof": 2,
+    "PopuGoldCost": 4800,
+    "PopuWoodCost": 480,
+    "TechExtraWood": 49,
+    "TechExtraGood": 49,
+    "TechGoldcost": 480,
+    "ChallengeGoldGoldcost": 0,
+    "ChallengeWoodGoldcost": 0,
+    "ChallengeEquipWoodcost": 0,
+    "ChallengeArtifactWoodcost": 0
+  },
+  {
+    "LevelId": "48",
+    "PopulationRoof": 2,
+    "PopuGoldCost": 4900,
+    "PopuWoodCost": 490,
+    "TechExtraWood": 50,
+    "TechExtraGood": 50,
+    "TechGoldcost": 490,
+    "ChallengeGoldGoldcost": 0,
+    "ChallengeWoodGoldcost": 0,
+    "ChallengeEquipWoodcost": 0,
+    "ChallengeArtifactWoodcost": 0
+  },
+  {
+    "LevelId": "49",
+    "PopulationRoof": 2,
+    "PopuGoldCost": 5000,
+    "PopuWoodCost": 500,
+    "TechExtraWood": 51,
+    "TechExtraGood": 51,
+    "TechGoldcost": 500,
+    "ChallengeGoldGoldcost": 0,
+    "ChallengeWoodGoldcost": 0,
+    "ChallengeEquipWoodcost": 0,
+    "ChallengeArtifactWoodcost": 0
+  },
+  {
+    "LevelId": "50",
+    "PopulationRoof": 2,
+    "PopuGoldCost": 5100,
+    "PopuWoodCost": 510,
+    "TechExtraWood": 52,
+    "TechExtraGood": 52,
+    "TechGoldcost": 510,
+    "ChallengeGoldGoldcost": 0,
+    "ChallengeWoodGoldcost": 0,
+    "ChallengeEquipWoodcost": 0,
+    "ChallengeArtifactWoodcost": 0
+  }
+] ,
 "dota_poolconfig":[
   {
     "poolid": "1001",
@@ -36642,256 +37294,307 @@
   {
     "LevelId": "0",
     "ExtraWood": 2,
+    "ExtraGood": 2,
     "goldcost": 10
   },
   {
     "LevelId": "1",
-    "ExtraWood": 4,
+    "ExtraWood": 3,
+    "ExtraGood": 3,
     "goldcost": 20
   },
   {
     "LevelId": "2",
-    "ExtraWood": 6,
+    "ExtraWood": 4,
+    "ExtraGood": 4,
     "goldcost": 30
   },
   {
     "LevelId": "3",
-    "ExtraWood": 8,
+    "ExtraWood": 5,
+    "ExtraGood": 5,
     "goldcost": 40
   },
   {
     "LevelId": "4",
-    "ExtraWood": 10,
+    "ExtraWood": 6,
+    "ExtraGood": 6,
     "goldcost": 50
   },
   {
     "LevelId": "5",
-    "ExtraWood": 12,
+    "ExtraWood": 7,
+    "ExtraGood": 7,
     "goldcost": 60
   },
   {
     "LevelId": "6",
-    "ExtraWood": 14,
+    "ExtraWood": 8,
+    "ExtraGood": 8,
     "goldcost": 70
   },
   {
     "LevelId": "7",
-    "ExtraWood": 16,
+    "ExtraWood": 9,
+    "ExtraGood": 9,
     "goldcost": 80
   },
   {
     "LevelId": "8",
-    "ExtraWood": 18,
+    "ExtraWood": 10,
+    "ExtraGood": 10,
     "goldcost": 90
   },
   {
     "LevelId": "9",
-    "ExtraWood": 20,
+    "ExtraWood": 11,
+    "ExtraGood": 11,
     "goldcost": 100
   },
   {
     "LevelId": "10",
-    "ExtraWood": 22,
+    "ExtraWood": 12,
+    "ExtraGood": 12,
     "goldcost": 110
   },
   {
     "LevelId": "11",
-    "ExtraWood": 24,
+    "ExtraWood": 13,
+    "ExtraGood": 13,
     "goldcost": 120
   },
   {
     "LevelId": "12",
-    "ExtraWood": 26,
+    "ExtraWood": 14,
+    "ExtraGood": 14,
     "goldcost": 130
   },
   {
     "LevelId": "13",
-    "ExtraWood": 28,
+    "ExtraWood": 15,
+    "ExtraGood": 15,
     "goldcost": 140
   },
   {
     "LevelId": "14",
-    "ExtraWood": 30,
+    "ExtraWood": 16,
+    "ExtraGood": 16,
     "goldcost": 150
   },
   {
     "LevelId": "15",
-    "ExtraWood": 32,
+    "ExtraWood": 17,
+    "ExtraGood": 17,
     "goldcost": 160
   },
   {
     "LevelId": "16",
-    "ExtraWood": 34,
+    "ExtraWood": 18,
+    "ExtraGood": 18,
     "goldcost": 170
   },
   {
     "LevelId": "17",
-    "ExtraWood": 36,
+    "ExtraWood": 19,
+    "ExtraGood": 19,
     "goldcost": 180
   },
   {
     "LevelId": "18",
-    "ExtraWood": 38,
+    "ExtraWood": 20,
+    "ExtraGood": 20,
     "goldcost": 190
   },
   {
     "LevelId": "19",
-    "ExtraWood": 40,
+    "ExtraWood": 21,
+    "ExtraGood": 21,
     "goldcost": 200
   },
   {
     "LevelId": "20",
-    "ExtraWood": 42,
+    "ExtraWood": 22,
+    "ExtraGood": 22,
     "goldcost": 210
   },
   {
     "LevelId": "21",
-    "ExtraWood": 44,
+    "ExtraWood": 23,
+    "ExtraGood": 23,
     "goldcost": 220
   },
   {
     "LevelId": "22",
-    "ExtraWood": 46,
+    "ExtraWood": 24,
+    "ExtraGood": 24,
     "goldcost": 230
   },
   {
     "LevelId": "23",
-    "ExtraWood": 48,
+    "ExtraWood": 25,
+    "ExtraGood": 25,
     "goldcost": 240
   },
   {
     "LevelId": "24",
-    "ExtraWood": 50,
+    "ExtraWood": 26,
+    "ExtraGood": 26,
     "goldcost": 250
   },
   {
     "LevelId": "25",
-    "ExtraWood": 52,
+    "ExtraWood": 27,
+    "ExtraGood": 27,
     "goldcost": 260
   },
   {
     "LevelId": "26",
-    "ExtraWood": 54,
+    "ExtraWood": 28,
+    "ExtraGood": 28,
     "goldcost": 270
   },
   {
     "LevelId": "27",
-    "ExtraWood": 56,
+    "ExtraWood": 29,
+    "ExtraGood": 29,
     "goldcost": 280
   },
   {
     "LevelId": "28",
-    "ExtraWood": 58,
+    "ExtraWood": 30,
+    "ExtraGood": 30,
     "goldcost": 290
   },
   {
     "LevelId": "29",
-    "ExtraWood": 60,
+    "ExtraWood": 31,
+    "ExtraGood": 31,
     "goldcost": 300
   },
   {
     "LevelId": "30",
-    "ExtraWood": 62,
+    "ExtraWood": 32,
+    "ExtraGood": 32,
     "goldcost": 310
   },
   {
     "LevelId": "31",
-    "ExtraWood": 64,
+    "ExtraWood": 33,
+    "ExtraGood": 33,
     "goldcost": 320
   },
   {
     "LevelId": "32",
-    "ExtraWood": 66,
+    "ExtraWood": 34,
+    "ExtraGood": 34,
     "goldcost": 330
   },
   {
     "LevelId": "33",
-    "ExtraWood": 68,
+    "ExtraWood": 35,
+    "ExtraGood": 35,
     "goldcost": 340
   },
   {
     "LevelId": "34",
-    "ExtraWood": 70,
+    "ExtraWood": 36,
+    "ExtraGood": 36,
     "goldcost": 350
   },
   {
     "LevelId": "35",
-    "ExtraWood": 72,
+    "ExtraWood": 37,
+    "ExtraGood": 37,
     "goldcost": 360
   },
   {
     "LevelId": "36",
-    "ExtraWood": 74,
+    "ExtraWood": 38,
+    "ExtraGood": 38,
     "goldcost": 370
   },
   {
     "LevelId": "37",
-    "ExtraWood": 76,
+    "ExtraWood": 39,
+    "ExtraGood": 39,
     "goldcost": 380
   },
   {
     "LevelId": "38",
-    "ExtraWood": 78,
+    "ExtraWood": 40,
+    "ExtraGood": 40,
     "goldcost": 390
   },
   {
     "LevelId": "39",
-    "ExtraWood": 80,
+    "ExtraWood": 41,
+    "ExtraGood": 41,
     "goldcost": 400
   },
   {
     "LevelId": "40",
-    "ExtraWood": 82,
+    "ExtraWood": 42,
+    "ExtraGood": 42,
     "goldcost": 410
   },
   {
     "LevelId": "41",
-    "ExtraWood": 84,
+    "ExtraWood": 43,
+    "ExtraGood": 43,
     "goldcost": 420
   },
   {
     "LevelId": "42",
-    "ExtraWood": 86,
+    "ExtraWood": 44,
+    "ExtraGood": 44,
     "goldcost": 430
   },
   {
     "LevelId": "43",
-    "ExtraWood": 88,
+    "ExtraWood": 45,
+    "ExtraGood": 45,
     "goldcost": 440
   },
   {
     "LevelId": "44",
-    "ExtraWood": 90,
+    "ExtraWood": 46,
+    "ExtraGood": 46,
     "goldcost": 450
   },
   {
     "LevelId": "45",
-    "ExtraWood": 92,
+    "ExtraWood": 47,
+    "ExtraGood": 47,
     "goldcost": 460
   },
   {
     "LevelId": "46",
-    "ExtraWood": 94,
+    "ExtraWood": 48,
+    "ExtraGood": 48,
     "goldcost": 470
   },
   {
     "LevelId": "47",
-    "ExtraWood": 96,
+    "ExtraWood": 49,
+    "ExtraGood": 49,
     "goldcost": 480
   },
   {
     "LevelId": "48",
-    "ExtraWood": 98,
+    "ExtraWood": 50,
+    "ExtraGood": 50,
     "goldcost": 490
   },
   {
     "LevelId": "49",
-    "ExtraWood": 100,
+    "ExtraWood": 51,
+    "ExtraGood": 51,
     "goldcost": 500
   },
   {
     "LevelId": "50",
-    "ExtraWood": 102,
+    "ExtraWood": 52,
+    "ExtraGood": 52,
     "goldcost": 510
   }
 ] ,

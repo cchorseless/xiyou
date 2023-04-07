@@ -1,11 +1,9 @@
 import React from "react";
 import { PlayerConfig } from "../../../../scripts/tscripts/shared/PlayerConfig";
-import { CSSHelper } from "../../helper/CSSHelper";
 import { NetHelper } from "../../helper/NetHelper";
 import { TipsHelper } from "../../helper/TipsHelper";
 import { CCButton } from "../AllUIElement/CCButton/CCButton";
 import { CCDividerLine } from "../AllUIElement/CCDivider/CCDividerLine";
-import { CCIcon_CoinType } from "../AllUIElement/CCIcons/CCIcon_CoinType";
 import { CCLabel } from "../AllUIElement/CCLabel/CCLabel";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCDrawCardPanel } from "../Draw/CCDrawCardPanel";
@@ -21,11 +19,11 @@ export interface ICCChallengeShopPanel {
 export class CCChallengeShopPanel extends CCPanel<ICCChallengeShopPanel> {
 
     onReady() {
-        return Boolean(GGameScene.Local.PlayerDataComp) && CSSHelper.IsReadyUI();
+        return Entities.IsValidEntity(GGameScene.Local.GetHeroEntityIndex());
     }
 
     onInitUI() {
-        GGameScene.Local.PlayerDataComp.RegRef(this);
+        // GGameScene.Local.PlayerDataComp.RegRef(this);
         // GTimerHelper.AddTimer(1, GHandler.create(this, () => {
         //     this.__root__.current!.AddClass("Show")
         // }))
@@ -82,18 +80,20 @@ export class CCChallengeShopPanel extends CCPanel<ICCChallengeShopPanel> {
         if (!this.__root___isValid) {
             return this.defaultRender("CC_ChallengeShopPanel");
         }
-        const playerdata = this.GetStateEntity(GGameScene.Local.PlayerDataComp);
+        const castentity = GGameScene.Local.GetHeroEntityIndex();
+        // const playerdata = this.GetStateEntity(GGameScene.Local.PlayerDataComp);
         return (
             <Panel id="CC_ChallengeShopPanel" ref={this.__root__}      {...this.initRootAttrs()}>
                 <CCPanel id="challenge_imgBg" flowChildren="down" >
                     <CCLabel type="Title" horizontalAlign="center" text={$.Localize("#lang_LevelChallenge")} />
                     <CCPanel flowChildren="right" horizontalAlign="center" marginTop={"10px"}>
                         {["gold", "wood", "equip", "artifact"].map((ability, index) => {
-                            let abilityname = "courier_challenge_" + ability;
-                            return <CCChallengeAbilityIcon key={ability} abilityname={abilityname} />
+                            const abilityname = "courier_challenge_" + ability;
+                            const abilityindex = Entities.GetAbilityByName(castentity, abilityname);
+                            return <CCChallengeAbilityIcon key={ability} abilityname={abilityname} contextEntityIndex={abilityindex} cointype={index >= 2 ? "Wood" : "Gold"} />
                         })}
                     </CCPanel>
-                    <CCDividerLine />
+                    {/* <CCDividerLine />
                     <CCPanel flowChildren="right" horizontalAlign="center">
                         <CCPanel id="challenge_popuUp" flowChildren="down">
                             <CCButton color="Green" type="Tui3" tooltip={"#todo"} onactivate={() => { this.onbtnpop_click() }}>
@@ -116,7 +116,7 @@ export class CCChallengeShopPanel extends CCPanel<ICCChallengeShopPanel> {
                                 <CCLabel type="Gold" text={playerdata?.techLevelUpCostGold} />
                             </CCPanel>
                         </CCPanel>
-                    </CCPanel>
+                    </CCPanel> */}
                     <CCDividerLine />
                     <CCPanel flowChildren="right" horizontalAlign="center">
                         <CCButton id="challenge_draw" color="Purple" type="Tui3" tooltip={"#todo"} onactivate={() => { this.onbtndraw_click() }}>

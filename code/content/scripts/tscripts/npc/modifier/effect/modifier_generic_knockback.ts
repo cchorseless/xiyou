@@ -118,6 +118,7 @@ export class modifier_generic_knockback extends BaseModifierMotionBoth_Plus {
         } else if (this.anim == 2) {
             return GameActivity_t.ACT_DOTA_DISABLED;
         }
+        return GameActivity_t.ACT_DOTA_FLAIL;
     }
     CheckState(): Partial<Record<modifierstate, boolean>> {
         let state = {

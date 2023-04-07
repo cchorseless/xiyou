@@ -98,7 +98,7 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
         const bonus_intellect = sBonusIntellect;
         const intellect_prop_per_level = GToNumber(tData && tData["AttributeIntelligenceGain"]) || 0;
         const rowcls_intellect = this.getRowClassName(iBonusIntellect);
-        const intellect_spell_amplify = iIntellect * GPropertyConfig.ATTRIBUTE_INTELLECT_SPELL_AMPLIFY;
+        const intellect_spell_amplify = FuncHelper.Round(iIntellect * GPropertyConfig.ATTRIBUTE_INTELLECT_SPELL_AMPLIFY, 3);
         const intellect_mana_regen = FuncHelper.Round(iIntellect * GPropertyConfig.ATTRIBUTE_INTELLECT_MANA_REGEN, 3);
         let coodown = iIntellect * GPropertyConfig.ATTRIBUTE_INTELLECT_COOLDOWN_REDUCTION;
         const intellect_cooldown_reduction = Math.min(GPropertyConfig.ATTRIBUTE_INTELLECT_MAX_CD, (1 - Math.pow(1 - GPropertyConfig.ATTRIBUTE_INTELLECT_COOLDOWN_REDUCTION, coodown)) * 100).toFixed(2);

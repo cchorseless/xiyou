@@ -1,8 +1,5 @@
 import { LogHelper } from "../../helper/LogHelper";
-import { courier_challenge_artifact } from "../abilities/courier/courier_challenge_artifact";
-import { courier_challenge_equip } from "../abilities/courier/courier_challenge_equip";
-import { courier_challenge_gold } from "../abilities/courier/courier_challenge_gold";
-import { courier_challenge_wood } from "../abilities/courier/courier_challenge_wood";
+import { courier_challenge_artifact, courier_challenge_equip, courier_challenge_gold, courier_challenge_wood } from "../abilities/courier/courier_challenge_enemy";
 import { BaseNpc_Hero_Plus } from "../entityPlus/BaseNpc_Hero_Plus";
 import { registerUnit } from "../entityPlus/Base_Plus";
 
@@ -24,7 +21,6 @@ export class courier_base extends BaseNpc_Hero_Plus {
             let ability = this.GetAbilityByIndex(i);
             if (ability) ability.UpgradeAbility(true);
         }
-
         this.addAbilityPlus(courier_challenge_gold.name);
         this.addAbilityPlus(courier_challenge_wood.name);
         this.addAbilityPlus(courier_challenge_equip.name);

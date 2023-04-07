@@ -241,7 +241,20 @@ declare global {
         __DefaultSpecialValue__: { [k: string]: number | number[] };
         /**是否销毁 */
         __safedestroyed__: boolean;
+        /**临时值 */
+        __TempData: { [k: string]: any };
+        /**
+         * @both
+         */
+        TempData<T = any>(): { [k: string]: T };
 
+        /**
+         * @both
+         * 注册特殊键值的替换值
+         * @param sKey 
+         * @param fCallback 
+         */
+        RegAbilitySpecialValueOverride(sKey: string, fCallback: IGHandler<number>): void;
         /**
          * @both
          * @param fInterval
@@ -355,6 +368,19 @@ declare global {
 }
 
 const CBaseAbility = IsServer() ? CDOTABaseAbility : C_DOTABaseAbility;
+
+CBaseAbility.TempData = function () {
+    if (this.__TempData == null) {
+        this.__TempData = {};
+    }
+    return this.__TempData;
+}
+CBaseAbility.RegAbilitySpecialValueOverride = function (k: string, v: IGHandler<number>) {
+    let SpecialValueOverride = this.TempData<{ [k: string]: IGHandler<number> }>().SpecialValueOverride || {};
+    v.once = false;
+    SpecialValueOverride[k] = v;
+    this.TempData().SpecialValueOverride = SpecialValueOverride;
+}
 
 CBaseAbility.AddTimer = function (fInterval: number, fCallback: () => number | void, _isIgnorePauseTime = false) {
     if (fInterval < 0) {
@@ -470,64 +496,65 @@ CBaseAbility.GetTalentSpecialValueFor = function (s: string, default_V = 0): num
     return base;
 }
 
-// CBaseAbility.GetLevelSpecialValue = function (sKey: string, iLevel: number, bAbilityUpgrade: boolean = true, bAdded: boolean = true, hUnit?: CDOTA_BaseNPC) {
-//     if (!IsValid(this)) return 0;
-//     if (iLevel == -1) iLevel = this.GetLevel() - 1;
-//     let hCaster = this.GetCaster();
+// CBaseAbility.GetLevelSpecialValueFor = function (sKey: string, iLevel: number, bAbilityUpgrade: boolean = true, bAdded: boolean = true, hUnit?: CDOTA_BaseNPC) {
+// if (!IsValid(this)) return 0;
+// if (iLevel == -1) iLevel = this.GetLevel() - 1;
+// let hCaster = this.GetCaster();
 
-//     bAbilityUpgrade = bAbilityUpgrade && AbilityUpgrades != undefined;
+// bAbilityUpgrade = bAbilityUpgrade && AbilityUpgrades != undefined;
 
-//     let value;
-//     if (bAbilityUpgrade) {
-//         value = AbilityUpgrades.GetAbilityMechanicsUpgradeLevelSpecialValue(hCaster, this.GetName(), sKey, iLevel) ?? this.GetLevelSpecialValueFor_Engine(sKey, iLevel);
-//         value = AbilityUpgrades.CalcSpecialValueUpgrade(hCaster, this.GetName(), sKey, value);
-//     } else {
-//         value = this.GetLevelSpecialValueFor_Engine(sKey, iLevel);
-//     }
+// let value;
+// if (bAbilityUpgrade) {
+//     value = AbilityUpgrades.GetAbilityMechanicsUpgradeLevelSpecialValue(hCaster, this.GetName(), sKey, iLevel) ?? this.GetLevelSpecialValueFor_Engine(sKey, iLevel);
+//     value = AbilityUpgrades.CalcSpecialValueUpgrade(hCaster, this.GetName(), sKey, value);
+// } else {
+//     value = this.GetLevelSpecialValueFor_Engine(sKey, iLevel);
+// }
 
-//     // 附加值计算
-//     if (!IsValid(hUnit)) hUnit = hCaster;
-//     if (bAdded) {
-//         for (const k in tAddedValues) {
-//             const v = tAddedValues[k];
-//             let factor;
+// // 附加值计算
+// if (!IsValid(hUnit)) hUnit = hCaster;
+// if (bAdded) {
+//     for (const k in tAddedValues) {
+//         const v = tAddedValues[k];
+//         let factor;
+//         if (bAbilityUpgrade) {
+//             factor = toFiniteNumber(AbilityUpgrades.GetAbilityMechanicsUpgradeLevelSpecialAddedValue(hCaster, this.GetName(), sKey, iLevel, k) ?? GetAbilityNameLevelSpecialAddedValueFor(this.GetName(), sKey, iLevel, k));
+//             factor = AbilityUpgrades.CalcSpecialValuePropertyUpgrade(hCaster, this.GetName(), sKey, k, factor);
+//         } else {
+//             factor = toFiniteNumber(GetAbilityNameLevelSpecialAddedValueFor(this.GetName(), sKey, iLevel, k));
+//         }
+//         if (factor != 0 && typeof hUnit[v as keyof CDOTA_BaseNPC] === "function") {
+//             // @ts-ignore
+//             let addedValue = toFiniteNumber(hUnit[v](), 0);
+//             value = value + addedValue * factor;
+
+//             // 最终结果值不小于
+//             let min;
 //             if (bAbilityUpgrade) {
-//                 factor = toFiniteNumber(AbilityUpgrades.GetAbilityMechanicsUpgradeLevelSpecialAddedValue(hCaster, this.GetName(), sKey, iLevel, k) ?? GetAbilityNameLevelSpecialAddedValueFor(this.GetName(), sKey, iLevel, k));
-//                 factor = AbilityUpgrades.CalcSpecialValuePropertyUpgrade(hCaster, this.GetName(), sKey, k, factor);
+//                 min = AbilityUpgrades.GetAbilityMechanicsUpgradeLevelSpecialAddedValue(hCaster, this.GetName(), sKey, iLevel, "_min") ?? GetAbilityNameLevelSpecialAddedValueFor(this.GetName(), sKey, iLevel, "_min");
 //             } else {
-//                 factor = toFiniteNumber(GetAbilityNameLevelSpecialAddedValueFor(this.GetName(), sKey, iLevel, k));
+//                 min = GetAbilityNameLevelSpecialAddedValueFor(this.GetName(), sKey, iLevel, "_min");
 //             }
-//             if (factor != 0 && typeof hUnit[v as keyof CDOTA_BaseNPC] === "function") {
-//                 // @ts-ignore
-//                 let addedValue = toFiniteNumber(hUnit[v](), 0);
-//                 value = value + addedValue * factor;
-
-//                 // 最终结果值不小于
-//                 let min;
-//                 if (bAbilityUpgrade) {
-//                     min = AbilityUpgrades.GetAbilityMechanicsUpgradeLevelSpecialAddedValue(hCaster, this.GetName(), sKey, iLevel, "_min") ?? GetAbilityNameLevelSpecialAddedValueFor(this.GetName(), sKey, iLevel, "_min");
-//                 } else {
-//                     min = GetAbilityNameLevelSpecialAddedValueFor(this.GetName(), sKey, iLevel, "_min");
-//                 }
-//                 if (typeof min == "number") {
-//                     min = AbilityUpgrades.CalcSpecialValuePropertyUpgrade(hCaster, this.GetName(), sKey, "_min", min);
-//                     value = math.max(value, min);
-//                 }
-//                 // 最终结果值不大于
-//                 let max;
-//                 if (bAbilityUpgrade) {
-//                     max = AbilityUpgrades.GetAbilityMechanicsUpgradeLevelSpecialAddedValue(hCaster, this.GetName(), sKey, iLevel, "_max") ?? GetAbilityNameLevelSpecialAddedValueFor(this.GetName(), sKey, iLevel, "_max");
-//                 } else {
-//                     max = GetAbilityNameLevelSpecialAddedValueFor(this.GetName(), sKey, iLevel, "_max");
-//                 }
-//                 if (typeof max == "number") {
-//                     max = AbilityUpgrades.CalcSpecialValuePropertyUpgrade(hCaster, this.GetName(), sKey, "_max", max);
-//                     value = math.min(value, max);
-//                 }
+//             if (typeof min == "number") {
+//                 min = AbilityUpgrades.CalcSpecialValuePropertyUpgrade(hCaster, this.GetName(), sKey, "_min", min);
+//                 value = math.max(value, min);
+//             }
+//             // 最终结果值不大于
+//             let max;
+//             if (bAbilityUpgrade) {
+//                 max = AbilityUpgrades.GetAbilityMechanicsUpgradeLevelSpecialAddedValue(hCaster, this.GetName(), sKey, iLevel, "_max") ?? GetAbilityNameLevelSpecialAddedValueFor(this.GetName(), sKey, iLevel, "_max");
+//             } else {
+//                 max = GetAbilityNameLevelSpecialAddedValueFor(this.GetName(), sKey, iLevel, "_max");
+//             }
+//             if (typeof max == "number") {
+//                 max = AbilityUpgrades.CalcSpecialValuePropertyUpgrade(hCaster, this.GetName(), sKey, "_max", max);
+//                 value = math.min(value, max);
 //             }
 //         }
 //     }
-//     return value;
+// }
+// GLogHelper.print(11111);
+// return this.GetLevelSpecialValueFor_Engine(sKey, iLevel);
 // };
 
 // CBaseAbility.GetLevelSpecialAddedValue = function (sKey: string, iLevel: number, sAddedKey: string, bAbilityUpgrade: boolean = true) {
@@ -733,9 +760,9 @@ if (IsClient()) {
         }
         return 0;
     }
-    CBaseAbility.GetGoldCost = function (level: number) {
-        return 0;
-    }
+    // CBaseAbility.GetGoldCost = function (level: number) {
+    //     return 0;
+    // }
 }
 //----------------------------------------------------------------------------------------------------
 

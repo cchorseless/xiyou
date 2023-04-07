@@ -204,7 +204,6 @@ export class modifier_hero_property extends BaseModifier_Plus {
 
 
 
-
 }
 
 declare global {

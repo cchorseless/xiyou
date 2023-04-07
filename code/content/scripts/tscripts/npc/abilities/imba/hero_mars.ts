@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifierMotionBoth_Plus, BaseModifierMotionHorizontal_Plus, BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -113,7 +113,7 @@ export class imba_mars_spear extends BaseAbility_Plus {
         if (!this.projectiles[iProjectileHandle]) {
             this.addProjectile(_iProjectileHandle);
         }
-        if (!target) {
+        if (!target || !target.IsRealUnit()) {
             let projectile_vision = this.GetSpecialValueFor("spear_vision");
             AddFOWViewer(this.GetCasterPlus().GetTeamNumber(), location, projectile_vision, 1, false);
             delete this.projectiles[iProjectileHandle];
@@ -130,7 +130,7 @@ export class imba_mars_spear extends BaseAbility_Plus {
             damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NONE
         }
         ApplyDamage(damageTable);
-        if ((!target.IsRealUnit()) || this.projectiles[iProjectileHandle].unit) {
+        if (this.projectiles[iProjectileHandle].unit) {
             let direction = this.projectiles[iProjectileHandle].direction;
             let proj_angle = VectorToAngles(direction).y;
             let unit_angle = VectorToAngles(target.GetOrigin() - location as Vector).y;

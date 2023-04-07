@@ -88,7 +88,7 @@ export class CCAbilityList2 extends CCPanel<ICCAbilityList> {
                     const p = abilitypanel.GetChild(i)!;
                     const AbilityButton = p.FindChildTraverse("AbilityButton");
                     if (AbilityButton) {
-                        AbilityButton.style.tooltipPosition = "top"
+                        // AbilityButton.style.tooltipPosition = "top"
                     }
                 }
 

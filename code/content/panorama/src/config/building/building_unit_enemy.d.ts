@@ -329,6 +329,7 @@ declare namespace building_unit_enemy {
 "MovementTurnRate" :string ,
 "HasAggressiveStance" :string ,
 "ArmorPhysical" :string ,
+"ArmorMagical" :string ,
 "StatusHealth" :string ,
 "StatusHealthRegen" :string ,
 "StatusMana" :string ,
@@ -366,7 +367,6 @@ declare namespace building_unit_enemy {
 "AttackRangeActivityModifiers" :OBJ_3_1 ,
 "CombatClassAttack" :string ,
 "CombatClassDefend" :string ,
-"ArmorMagical" :string ,
 "RingRadius" :string ,
 "UnitLabel" :string ,
 [k:string] : string | OBJ_3_1 }

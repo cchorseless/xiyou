@@ -1826,6 +1826,10 @@ export module PropertyConfig {
         modifierfunction.MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
         // 攻击暴击
         modifierfunction.MODIFIER_PROPERTY_PREATTACK_CRITICALSTRIKE,
+        // 技能面板数值覆盖
+        modifierfunction.MODIFIER_PROPERTY_OVERRIDE_ABILITY_SPECIAL,
+        // 技能面板数值覆盖
+        modifierfunction.MODIFIER_PROPERTY_OVERRIDE_ABILITY_SPECIAL_VALUE,
 
         modifierfunction.MODIFIER_PROPERTY_PREATTACK_TARGET_CRITICALSTRIKE,
 

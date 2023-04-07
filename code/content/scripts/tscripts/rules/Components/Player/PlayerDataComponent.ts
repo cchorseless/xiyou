@@ -1,9 +1,7 @@
 
-import { EventHelper } from "../../../helper/EventHelper";
 import { ChessControlConfig } from "../../../shared/ChessControlConfig";
 import { EEnum } from "../../../shared/Gen/Types";
 import { GEventHelper } from "../../../shared/lib/GEventHelper";
-import { PlayerConfig } from "../../../shared/PlayerConfig";
 import { PlayerData } from "../../../shared/rules/Player/PlayerData";
 import { ERoundBoard } from "../Round/ERoundBoard";
 
@@ -12,8 +10,8 @@ export class PlayerDataComponent extends PlayerData implements IRoundStateCallba
 
     onAwake(...args: any[]): void {
         this.addEvent();
-        this.applyPopuLevelUp(0);
-        this.applyTechLevelUp(0);
+        this.applyPopuLevelUp(1);
+        this.applyTechLevelUp(1);
         this.SyncClient();
     }
 
@@ -92,39 +90,39 @@ export class PlayerDataComponent extends PlayerData implements IRoundStateCallba
             }),
             this.BelongPlayerid);
 
-        EventHelper.addProtocolEvent(PlayerConfig.EProtocol.reqApplyPopuLevelUp, GHandler.create(this, (e) => {
-            e.state = true;
-            if (this.popuLevel >= this.popuLevelMax) {
-                EventHelper.ErrorMessage("level max", this.BelongPlayerid);
-                return;
-            }
-            if (this.gold < this.popuLevelUpCostGold) {
-                EventHelper.ErrorMessage("gold not enough", this.BelongPlayerid);
-                return;
-            }
-            if (this.wood < this.popuLevelUpCostWood) {
-                EventHelper.ErrorMessage("wood not enough", this.BelongPlayerid);
-                return;
-            }
-            this.changeItem(EEnum.EMoneyType.Gold, -this.popuLevelUpCostGold);
-            this.changeItem(EEnum.EMoneyType.Wood, -this.popuLevelUpCostWood);
-            this.applyPopuLevelUp(1);
-            this.SyncClient();
-        }));
-        EventHelper.addProtocolEvent(PlayerConfig.EProtocol.reqApplyTechLevelUp, GHandler.create(this, (e) => {
-            e.state = true;
-            if (this.techLevel >= this.techLevelMax) {
-                EventHelper.ErrorMessage("tech level max", this.BelongPlayerid);
-                return;
-            }
-            if (this.gold < this.techLevelUpCostGold) {
-                EventHelper.ErrorMessage("gold not enough", this.BelongPlayerid);
-                return;
-            }
-            this.changeItem(EEnum.EMoneyType.Gold, -this.techLevelUpCostGold);
-            this.applyTechLevelUp(1);
-            this.SyncClient();
-        }));
+        // EventHelper.addProtocolEvent(PlayerConfig.EProtocol.reqApplyPopuLevelUp, GHandler.create(this, (e) => {
+        //     e.state = true;
+        //     if (this.popuLevel >= this.popuLevelMax) {
+        //         EventHelper.ErrorMessage("level max", this.BelongPlayerid);
+        //         return;
+        //     }
+        //     if (this.gold < this.popuLevelUpCostGold) {
+        //         EventHelper.ErrorMessage("gold not enough", this.BelongPlayerid);
+        //         return;
+        //     }
+        //     if (this.wood < this.popuLevelUpCostWood) {
+        //         EventHelper.ErrorMessage("wood not enough", this.BelongPlayerid);
+        //         return;
+        //     }
+        //     this.changeItem(EEnum.EMoneyType.Gold, -this.popuLevelUpCostGold);
+        //     this.changeItem(EEnum.EMoneyType.Wood, -this.popuLevelUpCostWood);
+        //     this.applyPopuLevelUp(1);
+        //     this.SyncClient();
+        // }));
+        // EventHelper.addProtocolEvent(PlayerConfig.EProtocol.reqApplyTechLevelUp, GHandler.create(this, (e) => {
+        //     e.state = true;
+        //     if (this.techLevel >= this.techLevelMax) {
+        //         EventHelper.ErrorMessage("tech level max", this.BelongPlayerid);
+        //         return;
+        //     }
+        //     if (this.gold < this.techLevelUpCostGold) {
+        //         EventHelper.ErrorMessage("gold not enough", this.BelongPlayerid);
+        //         return;
+        //     }
+        //     this.changeItem(EEnum.EMoneyType.Gold, -this.techLevelUpCostGold);
+        //     this.applyTechLevelUp(1);
+        //     this.SyncClient();
+        // }));
     }
     /**
      * 获取空闲人口数量
@@ -135,17 +133,19 @@ export class PlayerDataComponent extends PlayerData implements IRoundStateCallba
         return this.populationRoof - this.population;
     }
     applyPopuLevelUp(addlevel: number) {
-        this.popuLevel += addlevel;
-        const config = GJSONConfig.PopulationConfig.get(this.popuLevel + "");
+        const config = GJSONConfig.CourierAbilityLevelUpConfig.get(this.popuLevel + addlevel + "");
         this.populationRoof += config.PopulationRoof;
-        this.popuLevelUpCostGold += config.goldcost;
-        this.popuLevelUpCostWood += config.woodcost;
+        this.popuLevelUpCostGold = config.PopuGoldCost;
+        this.popuLevelUpCostWood = config.PopuWoodCost;
+        this.popuLevel += addlevel;
+
     }
     applyTechLevelUp(addlevel: number) {
+        const config = GJSONConfig.CourierAbilityLevelUpConfig.get(this.techLevel + addlevel + "");
+        this.perIntervalGold += config.TechExtraGood;
+        this.perIntervalWood += config.TechExtraWood;
+        this.techLevelUpCostGold = config.TechGoldcost;
         this.techLevel += addlevel;
-        const config = GJSONConfig.TechConfig.get(this.popuLevel + "");
-        this.perIntervalWood += config.ExtraWood;
-        this.techLevelUpCostGold += config.goldcost;
     }
 
     OnRound_Start(round: ERoundBoard) {

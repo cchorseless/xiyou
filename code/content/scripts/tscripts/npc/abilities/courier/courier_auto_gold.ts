@@ -1,5 +1,6 @@
+import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
-import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
+import { BaseModifier_Plus } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 
 @registerAbility()
@@ -19,15 +20,10 @@ export class courier_auto_gold extends BaseAbility_Plus {
     }
     OnSpellStart() {
         let hCaster = this.GetCasterPlus();
-        let iRound = GRoundSystem.GetInstance().GetCurrentRoundIndex();
         let iPlayerID = hCaster.GetPlayerOwnerID()
-        let basic_gold = this.GetSpecialValueFor("gold_max");
-        let gold_inc_round = this.GetSpecialValueFor("gold_inc_round");
-        let iGold = basic_gold + gold_inc_round * iRound;
+        let iGold = this.GetMaxGold();
         iGold = RandomInt(1, iGold);
-        let basic_wood = this.GetSpecialValueFor("wood_max");
-        let wood_inc_round = this.GetSpecialValueFor("wood_inc_round");
-        let iWood = basic_wood + wood_inc_round * iRound;
+        let iWood = this.GetMaxWood();
         iWood = RandomInt(1, iWood);
         if (modifier_builder_gold_crit.findIn(hCaster)) {
             iGold = iGold * RandomInt(this.GetSpecialValueFor("crit_min"), this.GetSpecialValueFor("crit_max")) * 0.01
@@ -38,6 +34,41 @@ export class courier_auto_gold extends BaseAbility_Plus {
     }
     GetIntrinsicModifierName() {
         return "modifier_builder_gold";
+    }
+
+    GetMaxGold(isoverride = true) {
+        let iRound = GRoundSystem.GetInstance().GetCurrentRoundIndex();
+        let basic_gold = this.GetSpecialValueFor("gold_max");
+        if (!isoverride) {
+            basic_gold = this.GetLevelSpecialValueNoOverride("gold_max", this.GetLevel());
+        }
+        let gold_inc_round = this.GetSpecialValueFor("gold_inc_round");
+        return basic_gold + gold_inc_round * iRound;
+    }
+
+    GetMaxWood(isoverride = true) {
+        let iRound = GRoundSystem.GetInstance().GetCurrentRoundIndex();
+        let basic_wood = this.GetSpecialValueFor("wood_max");
+        if (!isoverride) {
+            basic_wood = this.GetLevelSpecialValueNoOverride("wood_max", this.GetLevel());
+        }
+        let wood_inc_round = this.GetSpecialValueFor("wood_inc_round");
+        return basic_wood + wood_inc_round * iRound;
+    }
+
+    Init(): void {
+        let Ihander = GHandler.create(this, (keys: ModifierOverrideAbilitySpecialEvent) => {
+            let hParent = this.GetCasterPlus();
+            let data = NetTablesHelper.GetDotaEntityData(hParent.GetEntityIndex(), "modifier_builder_gold") || {};
+            if (keys.ability_special_value == "gold_max") {
+                return data.gold_max;
+            }
+            else if (keys.ability_special_value == "wood_max") {
+                return data.wood_max;
+            }
+        })
+        this.RegAbilitySpecialValueOverride("gold_max", Ihander);
+        this.RegAbilitySpecialValueOverride("wood_max", Ihander);
     }
 }
 
@@ -62,6 +93,10 @@ export class modifier_builder_gold extends BaseModifier_Plus {
     OnIntervalThink() {
         let hParent = this.GetParentPlus()
         if (GFuncEntity.IsValid(hParent)) {
+            NetTablesHelper.SetDotaEntityData(hParent.GetEntityIndex(), {
+                gold_max: this.GetAbilityPlus<courier_auto_gold>().GetMaxGold(false),
+                wood_max: this.GetAbilityPlus<courier_auto_gold>().GetMaxWood(false),
+            }, "modifier_builder_gold")
             let MemberShip = GTActivityMemberShipData.GetOneInstance(hParent.GetPlayerOwnerID());
             if (MemberShip && MemberShip.IsVip()) {
                 this.SetStackCount(1)
@@ -88,11 +123,6 @@ export class modifier_builder_gold extends BaseModifier_Plus {
                 hAbility.ToggleAutoCast();
             }
         }
-    }
-
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
-    CC_TOOLTIP(keys: any): void {
-        GLogHelper.print(keys, 1111)
     }
 }
 

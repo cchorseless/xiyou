@@ -3,7 +3,7 @@
 "courier_abilities" {
 	"courier_draw_card_v1" {
 		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/courier/courier_draw_card_v1"
+		"ScriptFile" "npc/abilities/courier/courier_draw_card"
 		"AbilityTextureName" "card01"
 		"MaxLevel" "1"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET|DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
@@ -34,7 +34,7 @@
 	}
 	"courier_draw_card_v2" {
 		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/courier/courier_draw_card_v2"
+		"ScriptFile" "npc/abilities/courier/courier_draw_card"
 		"AbilityTextureName" "card02"
 		"MaxLevel" "1"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET|DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
@@ -70,7 +70,7 @@
 	}
 	"courier_draw_card_v3" {
 		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/courier/courier_draw_card_v3"
+		"ScriptFile" "npc/abilities/courier/courier_draw_card"
 		"AbilityTextureName" "card03"
 		"MaxLevel" "1"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET|DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
@@ -171,12 +171,12 @@
 		}
 
 	}
-	"courier_fire_chess" {
+	"courier_upgrade_population" {
 		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/courier/courier_fire_chess"
-		"AbilityTextureName" "fire_chess"
+		"ScriptFile" "npc/abilities/courier/courier_upgrade_chess"
+		"AbilityTextureName" "upgrade_chess"
 		"MaxLevel" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT|DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
 		"AbilitySound" "Ability.Torrent"
 		"HasScepterUpgrade" "1"
 		"AbilityCastRange" "1500"
@@ -185,37 +185,29 @@
 		"AbilitySpecial" {
 			"01" {
 				"var_type" "FIELD_INTEGER"
-				"radius" "350"
+				"gold_cost" "50"
 
 			}
 			"02" {
 				"var_type" "FIELD_INTEGER"
-				"movespeed_bonus" "-50"
+				"wood_cost" "5"
 
 			}
 			"03" {
 				"var_type" "FIELD_INTEGER"
-				"slow_duration" "2"
-
-			}
-			"04" {
-				"var_type" "FIELD_INTEGER"
-				"stun_duration" "2"
+				"population_add" "2"
 
 			}
 
 		}
 
 	}
-	"courier_upgrade_chess" {
+	"courier_upgrade_tech" {
 		"BaseClass" "ability_lua"
 		"ScriptFile" "npc/abilities/courier/courier_upgrade_chess"
 		"AbilityTextureName" "upgrade_chess"
 		"MaxLevel" "1"
-		"CustomHidden" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT|DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-		"AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_BOTH"
-		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
 		"AbilitySound" "Ability.Torrent"
 		"HasScepterUpgrade" "1"
 		"AbilityCastRange" "1500"
@@ -224,22 +216,17 @@
 		"AbilitySpecial" {
 			"01" {
 				"var_type" "FIELD_INTEGER"
-				"radius" "350"
+				"gold_cost" "50"
 
 			}
 			"02" {
 				"var_type" "FIELD_INTEGER"
-				"movespeed_bonus" "-50"
+				"good_add_interval" "5"
 
 			}
 			"03" {
 				"var_type" "FIELD_INTEGER"
-				"slow_duration" "2"
-
-			}
-			"04" {
-				"var_type" "FIELD_INTEGER"
-				"stun_duration" "2"
+				"wood_add_interval" "5"
 
 			}
 
@@ -248,7 +235,7 @@
 	}
 	"courier_challenge_gold" {
 		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/courier/courier_challenge_gold"
+		"ScriptFile" "npc/abilities/courier/courier_challenge_enemy"
 		"AbilityTextureName" "kunkka_torrent"
 		"MaxLevel" "50"
 		"CustomHidden" "1"
@@ -275,7 +262,7 @@
 	}
 	"courier_challenge_wood" {
 		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/courier/courier_challenge_wood"
+		"ScriptFile" "npc/abilities/courier/courier_challenge_enemy"
 		"AbilityTextureName" "kunkka_torrent"
 		"MaxLevel" "50"
 		"CustomHidden" "1"
@@ -302,7 +289,7 @@
 	}
 	"courier_challenge_equip" {
 		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/courier/courier_challenge_equip"
+		"ScriptFile" "npc/abilities/courier/courier_challenge_enemy"
 		"AbilityTextureName" "kunkka_torrent"
 		"MaxLevel" "50"
 		"CustomHidden" "1"
@@ -329,7 +316,7 @@
 	}
 	"courier_challenge_artifact" {
 		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/courier/courier_challenge_artifact"
+		"ScriptFile" "npc/abilities/courier/courier_challenge_enemy"
 		"AbilityTextureName" "kunkka_torrent"
 		"MaxLevel" "50"
 		"CustomHidden" "1"
@@ -356,7 +343,7 @@
 	}
 	"courier_extra_all_stat_1" {
 		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/courier/courier_extra_gold_sec_1"
+		"ScriptFile" "npc/abilities/courier/courier_extra_gold_sec"
 		"AbilityTextureName" "kunkka_torrent"
 		"MaxLevel" "1"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
@@ -364,6 +351,7 @@
 	}
 	"courier_extra_all_stat_2" {
 		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/courier/courier_extra_gold_sec"
 		"AbilityTextureName" "kunkka_torrent"
 		"MaxLevel" "1"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
@@ -371,6 +359,7 @@
 	}
 	"courier_extra_all_stat_3" {
 		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/courier/courier_extra_gold_sec"
 		"AbilityTextureName" "kunkka_torrent"
 		"MaxLevel" "1"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
@@ -378,6 +367,7 @@
 	}
 	"courier_extra_artifact_1" {
 		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/courier/courier_extra_gold_sec"
 		"AbilityTextureName" "kunkka_torrent"
 		"MaxLevel" "1"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
@@ -385,6 +375,7 @@
 	}
 	"courier_extra_artifact_2" {
 		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/courier/courier_extra_gold_sec"
 		"AbilityTextureName" "kunkka_torrent"
 		"MaxLevel" "1"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
@@ -392,6 +383,7 @@
 	}
 	"courier_extra_artifact_3" {
 		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/courier/courier_extra_gold_sec"
 		"AbilityTextureName" "kunkka_torrent"
 		"MaxLevel" "1"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
@@ -399,6 +391,7 @@
 	}
 	"courier_extra_artifact_select" {
 		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/courier/courier_extra_gold_sec"
 		"AbilityTextureName" "kunkka_torrent"
 		"MaxLevel" "1"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
@@ -406,6 +399,7 @@
 	}
 	"courier_extra_card_1" {
 		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/courier/courier_extra_gold_sec"
 		"AbilityTextureName" "kunkka_torrent"
 		"MaxLevel" "1"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
@@ -413,6 +407,7 @@
 	}
 	"courier_extra_card_2" {
 		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/courier/courier_extra_gold_sec"
 		"AbilityTextureName" "kunkka_torrent"
 		"MaxLevel" "1"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
@@ -420,6 +415,7 @@
 	}
 	"courier_extra_card_3" {
 		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/courier/courier_extra_gold_sec"
 		"AbilityTextureName" "kunkka_torrent"
 		"MaxLevel" "1"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
@@ -427,6 +423,7 @@
 	}
 	"courier_extra_chest_killer_3" {
 		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/courier/courier_extra_gold_sec"
 		"AbilityTextureName" "kunkka_torrent"
 		"MaxLevel" "1"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
@@ -434,6 +431,7 @@
 	}
 	"courier_extra_gold_sec_1" {
 		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/courier/courier_extra_gold_sec"
 		"AbilityTextureName" "kunkka_torrent"
 		"MaxLevel" "1"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
@@ -454,6 +452,7 @@
 	}
 	"courier_extra_gold_sec_2" {
 		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/courier/courier_extra_gold_sec"
 		"AbilityTextureName" "kunkka_torrent"
 		"MaxLevel" "1"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
@@ -474,6 +473,7 @@
 	}
 	"courier_extra_gold_sec_3" {
 		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/courier/courier_extra_gold_sec"
 		"AbilityTextureName" "kunkka_torrent"
 		"MaxLevel" "1"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
@@ -494,6 +494,7 @@
 	}
 	"courier_extra_kill_1" {
 		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/courier/courier_extra_gold_sec"
 		"AbilityTextureName" "kunkka_torrent"
 		"MaxLevel" "1"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
@@ -501,6 +502,7 @@
 	}
 	"courier_extra_max_gold_3" {
 		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/courier/courier_extra_gold_sec"
 		"AbilityTextureName" "kunkka_torrent"
 		"MaxLevel" "1"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
@@ -508,6 +510,7 @@
 	}
 	"courier_extra_more_card_1" {
 		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/courier/courier_extra_gold_sec"
 		"AbilityTextureName" "kunkka_torrent"
 		"MaxLevel" "1"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
@@ -515,6 +518,7 @@
 	}
 	"courier_extra_more_card_2" {
 		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/courier/courier_extra_gold_sec"
 		"AbilityTextureName" "kunkka_torrent"
 		"MaxLevel" "1"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
@@ -522,6 +526,7 @@
 	}
 	"courier_extra_more_card_3" {
 		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/courier/courier_extra_gold_sec"
 		"AbilityTextureName" "kunkka_torrent"
 		"MaxLevel" "1"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
@@ -529,27 +534,31 @@
 	}
 	"courier_extra_population_1" {
 		"BaseClass" "ability_lua"
-		"AbilityTextureName" "kunkka_torrent"
+		"ScriptFile" "npc/abilities/courier/courier_extra_gold_sec"
+		"AbilityTextureName" "auto_gold"
 		"MaxLevel" "1"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
 
 	}
 	"courier_extra_population_2" {
 		"BaseClass" "ability_lua"
-		"AbilityTextureName" "kunkka_torrent"
+		"ScriptFile" "npc/abilities/courier/courier_extra_gold_sec"
+		"AbilityTextureName" "auto_gold"
 		"MaxLevel" "1"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
 
 	}
 	"courier_extra_population_3" {
 		"BaseClass" "ability_lua"
-		"AbilityTextureName" "kunkka_torrent"
+		"ScriptFile" "npc/abilities/courier/courier_extra_gold_sec"
+		"AbilityTextureName" "auto_gold"
 		"MaxLevel" "1"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
 
 	}
 	"courier_extra_random_item_1" {
 		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/courier/courier_extra_gold_sec"
 		"AbilityTextureName" "kunkka_torrent"
 		"MaxLevel" "1"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
@@ -557,6 +566,7 @@
 	}
 	"courier_extra_random_item_2" {
 		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/courier/courier_extra_gold_sec"
 		"AbilityTextureName" "kunkka_torrent"
 		"MaxLevel" "1"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
@@ -564,6 +574,7 @@
 	}
 	"courier_extra_random_item_3" {
 		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/courier/courier_extra_gold_sec"
 		"AbilityTextureName" "kunkka_torrent"
 		"MaxLevel" "1"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
@@ -571,6 +582,7 @@
 	}
 	"courier_extra_shop_discount_1" {
 		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/courier/courier_extra_gold_sec"
 		"AbilityTextureName" "kunkka_torrent"
 		"MaxLevel" "1"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
@@ -578,6 +590,7 @@
 	}
 	"courier_extra_shop_discount_2" {
 		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/courier/courier_extra_gold_sec"
 		"AbilityTextureName" "kunkka_torrent"
 		"MaxLevel" "1"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
@@ -585,6 +598,7 @@
 	}
 	"courier_extra_shop_discount_3" {
 		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/courier/courier_extra_gold_sec"
 		"AbilityTextureName" "kunkka_torrent"
 		"MaxLevel" "1"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
@@ -592,6 +606,7 @@
 	}
 	"courier_extra_star_up_1" {
 		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/courier/courier_extra_gold_sec"
 		"AbilityTextureName" "kunkka_torrent"
 		"MaxLevel" "1"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
@@ -599,6 +614,7 @@
 	}
 	"courier_extra_star_up_2" {
 		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/courier/courier_extra_gold_sec"
 		"AbilityTextureName" "kunkka_torrent"
 		"MaxLevel" "1"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
@@ -606,6 +622,7 @@
 	}
 	"courier_extra_star_up_3" {
 		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/courier/courier_extra_gold_sec"
 		"AbilityTextureName" "kunkka_torrent"
 		"MaxLevel" "1"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
@@ -613,6 +630,7 @@
 	}
 	"courier_extra_tower_unique_1" {
 		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/courier/courier_extra_gold_sec"
 		"AbilityTextureName" "kunkka_torrent"
 		"MaxLevel" "1"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
@@ -620,6 +638,7 @@
 	}
 	"courier_extra_tower_unique_2" {
 		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/courier/courier_extra_gold_sec"
 		"AbilityTextureName" "kunkka_torrent"
 		"MaxLevel" "1"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
@@ -627,6 +646,7 @@
 	}
 	"courier_extra_tower_unique_3" {
 		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/courier/courier_extra_gold_sec"
 		"AbilityTextureName" "kunkka_torrent"
 		"MaxLevel" "1"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
@@ -634,6 +654,7 @@
 	}
 	"courier_extra_upgrade_item_1" {
 		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/courier/courier_extra_gold_sec"
 		"AbilityTextureName" "kunkka_torrent"
 		"MaxLevel" "1"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
@@ -641,6 +662,7 @@
 	}
 	"courier_extra_upgrade_item_2" {
 		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/courier/courier_extra_gold_sec"
 		"AbilityTextureName" "kunkka_torrent"
 		"MaxLevel" "1"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
@@ -648,6 +670,7 @@
 	}
 	"courier_extra_upgrade_item_3" {
 		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/courier/courier_extra_gold_sec"
 		"AbilityTextureName" "kunkka_torrent"
 		"MaxLevel" "1"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
@@ -655,6 +678,7 @@
 	}
 	"courier_extra_weapon_master_1" {
 		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/courier/courier_extra_gold_sec"
 		"AbilityTextureName" "kunkka_torrent"
 		"MaxLevel" "1"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
@@ -662,6 +686,7 @@
 	}
 	"courier_extra_weapon_master_2" {
 		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/courier/courier_extra_gold_sec"
 		"AbilityTextureName" "kunkka_torrent"
 		"MaxLevel" "1"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
@@ -669,6 +694,7 @@
 	}
 	"courier_extra_weapon_master_3" {
 		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/courier/courier_extra_gold_sec"
 		"AbilityTextureName" "kunkka_torrent"
 		"MaxLevel" "1"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
@@ -676,6 +702,7 @@
 	}
 	"courier_extra_wood_sec_1" {
 		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/courier/courier_extra_wood_sec"
 		"AbilityTextureName" "kunkka_torrent"
 		"MaxLevel" "1"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
@@ -696,6 +723,7 @@
 	}
 	"courier_extra_wood_sec_2" {
 		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/courier/courier_extra_wood_sec"
 		"AbilityTextureName" "kunkka_torrent"
 		"MaxLevel" "1"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
@@ -716,6 +744,7 @@
 	}
 	"courier_extra_wood_sec_3" {
 		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/courier/courier_extra_wood_sec"
 		"AbilityTextureName" "kunkka_torrent"
 		"MaxLevel" "1"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"

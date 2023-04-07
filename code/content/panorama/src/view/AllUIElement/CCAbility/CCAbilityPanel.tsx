@@ -36,7 +36,7 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
         const iMaxLevel = (!bIsValid || Entities.IsEnemy(iCasterIndex)) ? 0 : Abilities.GetMaxLevel(overrideentityindex);
         return CSSHelper.ClassMaker("AbilityPanel", "AbilityMaxLevel" + iMaxLevel)
     }
-    private AbilityImage: React.RefObject<AbilityImage> = createRef<AbilityImage>();;
+    // private AbilityImage: React.RefObject<AbilityImage> = createRef<AbilityImage>();;
     private AbilityButton: React.RefObject<Panel> = createRef<Panel>();;
 
     onInitUI() {
@@ -253,9 +253,9 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
                 sHotkey = Abilities.GetKeybind(overrideentityindex);
             }
         }
-        if (this.AbilityImage.current) {
-            this.AbilityImage.current.contextEntityIndex = (bIsItem ? -1 : overrideentityindex) as AbilityEntityIndex;
-        }
+        // if (this.AbilityImage.current) {
+        //     this.AbilityImage.current.contextEntityIndex = (bIsItem ? -1 : overrideentityindex) as AbilityEntityIndex;
+        // }
         // let pItemImage = pSelf.FindChildTraverse<Panel>("ItemImage")?.FindChildTraverse<ItemImage>("CustomItemImage");
         // if (pItemImage) {
         // 	pItemImage.contextEntityIndex = (bIsItem ? overrideentityindex : -1) as ItemEntityIndex;
@@ -532,7 +532,8 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
             this.intervalRefresh()
         }
     }
-    private onbtn_moveover() {
+
+    private onbtn_custom_moveover() {
         const overrideentityindex = this.props.overrideentityindex!;
         const slot = this.props.slot!;
         if (overrideentityindex != -1 && Entities.IsValidEntity(overrideentityindex)) {
@@ -564,9 +565,21 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
             ccMainPanel.ShowCustomToolTip(this.AbilityButton.current!, dialoginfo);
         }
     }
-    private onbtn_moveout() {
+    private onbtn_custom_moveout() {
         const ccMainPanel = CCMainPanel.GetInstance();
         ccMainPanel?.HideToolTip();
+    }
+    private onbtn_moveover() {
+        const overrideentityindex = this.props.overrideentityindex!;
+        const slot = this.props.slot!;
+        if (overrideentityindex != -1 && Entities.IsValidEntity(overrideentityindex)) {
+
+            // $.DispatchEvent("DOTAShowAbilityTooltip", this.AbilityButton.current!, Abilities.GetAbilityName(overrideentityindex), Abilities.GetCaster(overrideentityindex), overrideentityindex, slot
+        }
+    }
+    private onbtn_moveout() {
+        // const ccMainPanel = CCMainPanel.GetInstance();
+        // ccMainPanel?.HideToolTip();
     }
     render() {
         const m_is_item = this.GetState("m_is_item", false);
@@ -597,11 +610,12 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
                                 <Panel id="AbilityButton" draggable={draggable} ref={this.AbilityButton}
                                     onactivate={(self) => { this.onbtn_leftclick() }}
                                     oncontextmenu={(self) => this.onbtn_rightclick()}
-                                    onmouseover={(self) => this.onbtn_moveover()}
-                                    onmouseout={(self) => this.onbtn_moveout()} >
-                                    <DOTAAbilityImage id="AbilityImage" showtooltip={false} hittest={false} ref={this.AbilityImage} />
+                                // onmouseover={(self) => this.onbtn_moveover()}
+                                // onmouseout={(self) => this.onbtn_moveout()} 
+                                >
+                                    {/* <DOTAAbilityImage id="AbilityImage" showtooltip={true} hittest={true} ref={this.AbilityImage} /> */}
                                     {/* scaling="stretch-to-fit-x-preserve-aspect" */}
-                                    <DOTAItemImage id="ItemImage" contextEntityIndex={overrideentityindex} showtooltip={false} hittest={false} hittestchildren={false} />
+                                    <DOTAItemImage id="ItemImage" style={{ tooltipPosition: "top" }} itemname={Abilities.GetAbilityName(overrideentityindex)} contextEntityIndex={overrideentityindex} showtooltip={true} hittest={true} hittestchildren={true} />
                                     <Panel hittest={false} id="AbilityBevel" />
                                     <Panel hittest={false} id="ShineContainer" >
                                         <Panel hittest={false} id="Shine" />

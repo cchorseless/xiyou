@@ -1,5 +1,4 @@
 
-import { EEnum } from "../../../shared/Gen/Types";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
@@ -17,9 +16,10 @@ export class courier_extra_gold_sec_1 extends BaseAbility_Plus {
         return modifier_courier_gold_sec_1.name;
     }
 
+    GetCooldown(level: number): number {
+        return this.GetSpecialValueFor("interval");
+    }
 }
-
-
 
 @registerModifier()
 export class modifier_courier_gold_sec_1 extends BaseModifier_Plus {
@@ -33,16 +33,16 @@ export class modifier_courier_gold_sec_1 extends BaseModifier_Plus {
         return false
     }
     interval: number;
-    gold_sec_min: number;
-    gold_sec_max: number;
+    gold_interval: number;
 
     Init(params: IModifierTable) {
+        let hParent = this.GetParentPlus()
+        if (hParent.GetTeamNumber() != DOTATeam_t.DOTA_TEAM_GOODGUYS) { return }
         this.interval = this.GetSpecialValueFor("interval")
-        this.gold_sec_min = this.GetSpecialValueFor("gold_sec_min")
-        this.gold_sec_max = this.GetSpecialValueFor("gold_sec_max")
+        this.gold_interval = this.GetSpecialValueFor("gold_interval")
         if (IsServer() && params.IsOnCreated) {
             this.CC_IntervalThink();
-            GTimerHelper.AddTimer(this.interval, GHandler.create(this, this.CC_IntervalThink));
+            GTimerHelper.AddTimer(this.interval, GHandler.create(this, () => this.CC_IntervalThink()));
         }
     }
 
@@ -58,11 +58,32 @@ export class modifier_courier_gold_sec_1 extends BaseModifier_Plus {
         //     return
         // }
         let iPlayerID = hParent.GetPlayerID()
-        let random = RandomInt(this.gold_sec_min, this.gold_sec_max);
-        GPlayerEntityRoot.GetOneInstance(iPlayerID).PlayerDataComp().changeItem(EEnum.EMoneyType.Gold, random);
+        GPlayerEntityRoot.GetOneInstance(iPlayerID).PlayerDataComp().ModifyGold(this.gold_interval);
         // PlayerData.ModifyGold(iPlayerID, random, true)
         hAbility.StartCooldown(this.interval)
-        SendOverheadEventMessage(hParent.GetPlayerOwner(), DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_GOLD, hParent, random, null)
         return this.interval;
     }
+}
+
+
+@registerAbility()
+export class courier_extra_gold_sec_2 extends courier_extra_gold_sec_1 {
+    GetIntrinsicModifierName() {
+        return modifier_courier_gold_sec_2.name;
+    }
+}
+
+@registerModifier()
+export class modifier_courier_gold_sec_2 extends modifier_courier_gold_sec_1 {
+}
+
+@registerAbility()
+export class courier_extra_gold_sec_3 extends courier_extra_gold_sec_1 {
+    GetIntrinsicModifierName() {
+        return modifier_courier_gold_sec_3.name;
+    }
+}
+
+@registerModifier()
+export class modifier_courier_gold_sec_3 extends modifier_courier_gold_sec_1 {
 }

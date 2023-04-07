@@ -45,6 +45,9 @@ export class ECombination extends ET.Entity {
         return false;
     }
 
+    IsFriendly() {
+        return true;
+    }
 
     readonly isActive: boolean = false;
     checkActive() {
@@ -131,7 +134,6 @@ export class ECombination extends ET.Entity {
                     bufflist.set(spebuff, config.Abilityid);
                 }
             }
-            let selfteam = this.GetDomain<IBaseNpc_Plus>().GetTeam();
             bufflist.forEach((abilityname, buff) => {
                 if (buff && buff.length > 0) {
                     let buffconfig = GJSONConfig.BuffEffectConfig.get(buff);
@@ -158,10 +160,10 @@ export class ECombination extends ET.Entity {
                             case CombinationConfig.EEffectTargetType.team:
                             case CombinationConfig.EEffectTargetType.enemyteam:
                                 let team = DOTATeam_t.DOTA_TEAM_GOODGUYS;
-                                if (selfteam == DOTATeam_t.DOTA_TEAM_GOODGUYS) {
+                                if (this.IsFriendly()) {
                                     team = buffconfig.target == CombinationConfig.EEffectTargetType.team ? DOTATeam_t.DOTA_TEAM_GOODGUYS : DOTATeam_t.DOTA_TEAM_BADGUYS;
                                 }
-                                else if (selfteam == DOTATeam_t.DOTA_TEAM_BADGUYS) {
+                                else {
                                     team = buffconfig.target == CombinationConfig.EEffectTargetType.enemyteam ? DOTATeam_t.DOTA_TEAM_GOODGUYS : DOTATeam_t.DOTA_TEAM_BADGUYS;
                                 }
                                 battleunits = GPlayerEntityRoot.GetOneInstance(this.BelongPlayerid).BattleUnitManagerComp().GetAllBattleUnitAlive(team, true);

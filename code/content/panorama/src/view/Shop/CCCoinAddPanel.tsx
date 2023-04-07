@@ -5,7 +5,7 @@ import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import "./CCCoinAddPanel.less";
 
 interface ICCCoinAddPanel extends NodePropsData {
-    cointype: CoinType;
+    cointype: ICoinType;
     showAddBtn?: boolean;
     value?: number;
     onaddcoin?: () => void;

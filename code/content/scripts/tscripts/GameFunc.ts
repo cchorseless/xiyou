@@ -446,6 +446,7 @@ export module FuncEntity {
                 return;
             }
             ability.__safedestroyed__ = true;
+            ability.__TempData = null;
             GTimerHelper.ClearAll(ability);
             if (ability.OnDestroy) {
                 ability.OnDestroy();
@@ -466,6 +467,7 @@ export module FuncEntity {
                 return;
             }
             item.__safedestroyed__ = true;
+            item.__TempData = null;
             GTimerHelper.ClearAll(item);
             if (item.OnDestroy) {
                 item.OnDestroy();

@@ -2,256 +2,307 @@
   {
     "LevelId": "0",
     "ExtraWood": 2,
+    "ExtraGood": 2,
     "goldcost": 10
   },
   {
     "LevelId": "1",
-    "ExtraWood": 4,
+    "ExtraWood": 3,
+    "ExtraGood": 3,
     "goldcost": 20
   },
   {
     "LevelId": "2",
-    "ExtraWood": 6,
+    "ExtraWood": 4,
+    "ExtraGood": 4,
     "goldcost": 30
   },
   {
     "LevelId": "3",
-    "ExtraWood": 8,
+    "ExtraWood": 5,
+    "ExtraGood": 5,
     "goldcost": 40
   },
   {
     "LevelId": "4",
-    "ExtraWood": 10,
+    "ExtraWood": 6,
+    "ExtraGood": 6,
     "goldcost": 50
   },
   {
     "LevelId": "5",
-    "ExtraWood": 12,
+    "ExtraWood": 7,
+    "ExtraGood": 7,
     "goldcost": 60
   },
   {
     "LevelId": "6",
-    "ExtraWood": 14,
+    "ExtraWood": 8,
+    "ExtraGood": 8,
     "goldcost": 70
   },
   {
     "LevelId": "7",
-    "ExtraWood": 16,
+    "ExtraWood": 9,
+    "ExtraGood": 9,
     "goldcost": 80
   },
   {
     "LevelId": "8",
-    "ExtraWood": 18,
+    "ExtraWood": 10,
+    "ExtraGood": 10,
     "goldcost": 90
   },
   {
     "LevelId": "9",
-    "ExtraWood": 20,
+    "ExtraWood": 11,
+    "ExtraGood": 11,
     "goldcost": 100
   },
   {
     "LevelId": "10",
-    "ExtraWood": 22,
+    "ExtraWood": 12,
+    "ExtraGood": 12,
     "goldcost": 110
   },
   {
     "LevelId": "11",
-    "ExtraWood": 24,
+    "ExtraWood": 13,
+    "ExtraGood": 13,
     "goldcost": 120
   },
   {
     "LevelId": "12",
-    "ExtraWood": 26,
+    "ExtraWood": 14,
+    "ExtraGood": 14,
     "goldcost": 130
   },
   {
     "LevelId": "13",
-    "ExtraWood": 28,
+    "ExtraWood": 15,
+    "ExtraGood": 15,
     "goldcost": 140
   },
   {
     "LevelId": "14",
-    "ExtraWood": 30,
+    "ExtraWood": 16,
+    "ExtraGood": 16,
     "goldcost": 150
   },
   {
     "LevelId": "15",
-    "ExtraWood": 32,
+    "ExtraWood": 17,
+    "ExtraGood": 17,
     "goldcost": 160
   },
   {
     "LevelId": "16",
-    "ExtraWood": 34,
+    "ExtraWood": 18,
+    "ExtraGood": 18,
     "goldcost": 170
   },
   {
     "LevelId": "17",
-    "ExtraWood": 36,
+    "ExtraWood": 19,
+    "ExtraGood": 19,
     "goldcost": 180
   },
   {
     "LevelId": "18",
-    "ExtraWood": 38,
+    "ExtraWood": 20,
+    "ExtraGood": 20,
     "goldcost": 190
   },
   {
     "LevelId": "19",
-    "ExtraWood": 40,
+    "ExtraWood": 21,
+    "ExtraGood": 21,
     "goldcost": 200
   },
   {
     "LevelId": "20",
-    "ExtraWood": 42,
+    "ExtraWood": 22,
+    "ExtraGood": 22,
     "goldcost": 210
   },
   {
     "LevelId": "21",
-    "ExtraWood": 44,
+    "ExtraWood": 23,
+    "ExtraGood": 23,
     "goldcost": 220
   },
   {
     "LevelId": "22",
-    "ExtraWood": 46,
+    "ExtraWood": 24,
+    "ExtraGood": 24,
     "goldcost": 230
   },
   {
     "LevelId": "23",
-    "ExtraWood": 48,
+    "ExtraWood": 25,
+    "ExtraGood": 25,
     "goldcost": 240
   },
   {
     "LevelId": "24",
-    "ExtraWood": 50,
+    "ExtraWood": 26,
+    "ExtraGood": 26,
     "goldcost": 250
   },
   {
     "LevelId": "25",
-    "ExtraWood": 52,
+    "ExtraWood": 27,
+    "ExtraGood": 27,
     "goldcost": 260
   },
   {
     "LevelId": "26",
-    "ExtraWood": 54,
+    "ExtraWood": 28,
+    "ExtraGood": 28,
     "goldcost": 270
   },
   {
     "LevelId": "27",
-    "ExtraWood": 56,
+    "ExtraWood": 29,
+    "ExtraGood": 29,
     "goldcost": 280
   },
   {
     "LevelId": "28",
-    "ExtraWood": 58,
+    "ExtraWood": 30,
+    "ExtraGood": 30,
     "goldcost": 290
   },
   {
     "LevelId": "29",
-    "ExtraWood": 60,
+    "ExtraWood": 31,
+    "ExtraGood": 31,
     "goldcost": 300
   },
   {
     "LevelId": "30",
-    "ExtraWood": 62,
+    "ExtraWood": 32,
+    "ExtraGood": 32,
     "goldcost": 310
   },
   {
     "LevelId": "31",
-    "ExtraWood": 64,
+    "ExtraWood": 33,
+    "ExtraGood": 33,
     "goldcost": 320
   },
   {
     "LevelId": "32",
-    "ExtraWood": 66,
+    "ExtraWood": 34,
+    "ExtraGood": 34,
     "goldcost": 330
   },
   {
     "LevelId": "33",
-    "ExtraWood": 68,
+    "ExtraWood": 35,
+    "ExtraGood": 35,
     "goldcost": 340
   },
   {
     "LevelId": "34",
-    "ExtraWood": 70,
+    "ExtraWood": 36,
+    "ExtraGood": 36,
     "goldcost": 350
   },
   {
     "LevelId": "35",
-    "ExtraWood": 72,
+    "ExtraWood": 37,
+    "ExtraGood": 37,
     "goldcost": 360
   },
   {
     "LevelId": "36",
-    "ExtraWood": 74,
+    "ExtraWood": 38,
+    "ExtraGood": 38,
     "goldcost": 370
   },
   {
     "LevelId": "37",
-    "ExtraWood": 76,
+    "ExtraWood": 39,
+    "ExtraGood": 39,
     "goldcost": 380
   },
   {
     "LevelId": "38",
-    "ExtraWood": 78,
+    "ExtraWood": 40,
+    "ExtraGood": 40,
     "goldcost": 390
   },
   {
     "LevelId": "39",
-    "ExtraWood": 80,
+    "ExtraWood": 41,
+    "ExtraGood": 41,
     "goldcost": 400
   },
   {
     "LevelId": "40",
-    "ExtraWood": 82,
+    "ExtraWood": 42,
+    "ExtraGood": 42,
     "goldcost": 410
   },
   {
     "LevelId": "41",
-    "ExtraWood": 84,
+    "ExtraWood": 43,
+    "ExtraGood": 43,
     "goldcost": 420
   },
   {
     "LevelId": "42",
-    "ExtraWood": 86,
+    "ExtraWood": 44,
+    "ExtraGood": 44,
     "goldcost": 430
   },
   {
     "LevelId": "43",
-    "ExtraWood": 88,
+    "ExtraWood": 45,
+    "ExtraGood": 45,
     "goldcost": 440
   },
   {
     "LevelId": "44",
-    "ExtraWood": 90,
+    "ExtraWood": 46,
+    "ExtraGood": 46,
     "goldcost": 450
   },
   {
     "LevelId": "45",
-    "ExtraWood": 92,
+    "ExtraWood": 47,
+    "ExtraGood": 47,
     "goldcost": 460
   },
   {
     "LevelId": "46",
-    "ExtraWood": 94,
+    "ExtraWood": 48,
+    "ExtraGood": 48,
     "goldcost": 470
   },
   {
     "LevelId": "47",
-    "ExtraWood": 96,
+    "ExtraWood": 49,
+    "ExtraGood": 49,
     "goldcost": 480
   },
   {
     "LevelId": "48",
-    "ExtraWood": 98,
+    "ExtraWood": 50,
+    "ExtraGood": 50,
     "goldcost": 490
   },
   {
     "LevelId": "49",
-    "ExtraWood": 100,
+    "ExtraWood": 51,
+    "ExtraGood": 51,
     "goldcost": 500
   },
   {
     "LevelId": "50",
-    "ExtraWood": 102,
+    "ExtraWood": 52,
+    "ExtraGood": 52,
     "goldcost": 510
   }
 ]

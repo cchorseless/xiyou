@@ -23,6 +23,7 @@ declare namespace npc_heroes_custom {
 "Ability4" :string ,
 "Ability5" :string ,
 "Ability6" :string ,
+"Ability7" :string ,
 "AbilityLayout" :string ,
 "HealthBarOffset" :string ,
 "MovementSpeed" :string ,

@@ -28,7 +28,7 @@ export class PlayerData extends ET.Component {
     @serializeETProps()
     techLevelMax: number = 10;
     @serializeETProps()
-    perIntervalGold: number = 5;
+    perIntervalGold: number = 0;
     @serializeETProps()
-    perIntervalWood: number = 5;
+    perIntervalWood: number = 0;
 }

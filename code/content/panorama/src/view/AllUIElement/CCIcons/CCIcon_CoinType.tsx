@@ -2,7 +2,7 @@ import { CCIcon } from "./CCIcon";
 
 interface ICCIcon_CoinType {
 
-    cointype: CoinType;
+    cointype: ICoinType;
 }
 
 export class CCIcon_CoinType extends CCIcon<ICCIcon_CoinType> {

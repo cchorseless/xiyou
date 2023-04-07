@@ -28,7 +28,11 @@ export class modifier_round_enemy extends BaseModifier_Plus {
         let roundid = params.roundid;
         let onlyKey = params.onlyKey;
         if (parent && roundid && onlyKey) {
-            let config = GJSONConfig.RoundBoardConfig.get(roundid).enemyinfo.find(v => { return v.id == onlyKey })
+            let config = GJSONConfig.RoundBoardConfig.get(roundid)?.enemyinfo.find(v => { return v.id == onlyKey })
+            if (config == null) {
+                config = GJSONConfig.RoundBoardChallengeConfig.get(roundid)?.enemyinfo.find(v => { return v.id == onlyKey }) as any;
+            }
+            if (config == null) { return }
             config.atk && (this.atk = GPropertyCalculate.GetBaseAttackDamage(parent) * config.atk);
             config.hp && (this.hp = GPropertyCalculate.GetBaseMaxHealth(parent) * config.hp);
             config.phyarm && (this.phyarm = GPropertyCalculate.GetBasePhysicalArmor(parent) * config.phyarm);

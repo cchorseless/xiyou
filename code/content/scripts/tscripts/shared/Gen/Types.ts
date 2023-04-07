@@ -3069,24 +3069,24 @@ export class BuffEffectConfigRecord {
 }
 
 export namespace Dota {
-export class PopulationConfig{
-    private _dataMap: Map<string, Dota.PopulationConfigRecord>
-    private _dataList: Dota.PopulationConfigRecord[]
+export class CourierAbilityLevelUpConfig{
+    private _dataMap: Map<string, Dota.CourierAbilityLevelUpConfigRecord>
+    private _dataList: Dota.CourierAbilityLevelUpConfigRecord[]
     constructor(_json_: any[]) {
- this._dataMap  = new Map<string, Dota.PopulationConfigRecord>()
+ this._dataMap  = new Map<string, Dota.CourierAbilityLevelUpConfigRecord>()
         this._dataList = []
         for(let _json2_ of _json_) {
-            let _v: Dota.PopulationConfigRecord
-            _v = new Dota.PopulationConfigRecord(_json2_)
+            let _v: Dota.CourierAbilityLevelUpConfigRecord
+            _v = new Dota.CourierAbilityLevelUpConfigRecord(_json2_)
             this._dataList.push(_v)
             this._dataMap.set(_v.LevelId, _v)
         }
     }
 
-    getDataMap(): Map<string, Dota.PopulationConfigRecord> { return this._dataMap; }
-    getDataList(): Dota.PopulationConfigRecord[] { return this._dataList; }
+    getDataMap(): Map<string, Dota.CourierAbilityLevelUpConfigRecord> { return this._dataMap; }
+    getDataList(): Dota.CourierAbilityLevelUpConfigRecord[] { return this._dataList; }
 
-    get(key: string): Dota.PopulationConfigRecord | undefined { return this._dataMap.get(key); }
+    get(key: string): Dota.CourierAbilityLevelUpConfigRecord | undefined { return this._dataMap.get(key); }
 
     resolve(_tables: Map<string, any>) {
         for(let v of this._dataList) {
@@ -3100,17 +3100,31 @@ export class PopulationConfig{
 
 
 export namespace Dota {
-export class PopulationConfigRecord {
+export class CourierAbilityLevelUpConfigRecord {
 
     constructor(_json_: any) {
         if (_json_.LevelId === undefined) { GLogHelper.error(1); }
         this.LevelId = _json_.LevelId
         if (_json_.PopulationRoof === undefined) { GLogHelper.error(1); }
         this.PopulationRoof = _json_.PopulationRoof
-        if (_json_.goldcost === undefined) { GLogHelper.error(1); }
-        this.goldcost = _json_.goldcost
-        if (_json_.woodcost === undefined) { GLogHelper.error(1); }
-        this.woodcost = _json_.woodcost
+        if (_json_.PopuGoldCost === undefined) { GLogHelper.error(1); }
+        this.PopuGoldCost = _json_.PopuGoldCost
+        if (_json_.PopuWoodCost === undefined) { GLogHelper.error(1); }
+        this.PopuWoodCost = _json_.PopuWoodCost
+        if (_json_.TechExtraWood === undefined) { GLogHelper.error(1); }
+        this.TechExtraWood = _json_.TechExtraWood
+        if (_json_.TechExtraGood === undefined) { GLogHelper.error(1); }
+        this.TechExtraGood = _json_.TechExtraGood
+        if (_json_.TechGoldcost === undefined) { GLogHelper.error(1); }
+        this.TechGoldcost = _json_.TechGoldcost
+        if (_json_.ChallengeGoldGoldcost === undefined) { GLogHelper.error(1); }
+        this.ChallengeGoldGoldcost = _json_.ChallengeGoldGoldcost
+        if (_json_.ChallengeWoodGoldcost === undefined) { GLogHelper.error(1); }
+        this.ChallengeWoodGoldcost = _json_.ChallengeWoodGoldcost
+        if (_json_.ChallengeEquipWoodcost === undefined) { GLogHelper.error(1); }
+        this.ChallengeEquipWoodcost = _json_.ChallengeEquipWoodcost
+        if (_json_.ChallengeArtifactWoodcost === undefined) { GLogHelper.error(1); }
+        this.ChallengeArtifactWoodcost = _json_.ChallengeArtifactWoodcost
     }
 
     /**
@@ -3118,79 +3132,45 @@ export class PopulationConfigRecord {
      */
     readonly LevelId: string
     /**
-     * 额外人口上限
+     * 人口升级额外人口上限
      */
     readonly PopulationRoof: number
     /**
-     * 升级金币消耗
+     * 人口升级金币消耗
      */
-    readonly goldcost: number
+    readonly PopuGoldCost: number
     /**
-     * 升级木材消耗
+     * 人口升级木材消耗
      */
-    readonly woodcost: number
-
-    resolve(_tables: Map<string, any>) {
-    }
-}
-
-}
-
-export namespace Dota {
-export class TechConfig{
-    private _dataMap: Map<string, Dota.TechConfigRecord>
-    private _dataList: Dota.TechConfigRecord[]
-    constructor(_json_: any[]) {
- this._dataMap  = new Map<string, Dota.TechConfigRecord>()
-        this._dataList = []
-        for(let _json2_ of _json_) {
-            let _v: Dota.TechConfigRecord
-            _v = new Dota.TechConfigRecord(_json2_)
-            this._dataList.push(_v)
-            this._dataMap.set(_v.LevelId, _v)
-        }
-    }
-
-    getDataMap(): Map<string, Dota.TechConfigRecord> { return this._dataMap; }
-    getDataList(): Dota.TechConfigRecord[] { return this._dataList; }
-
-    get(key: string): Dota.TechConfigRecord | undefined { return this._dataMap.get(key); }
-
-    resolve(_tables: Map<string, any>) {
-        for(let v of this._dataList) {
-            v.resolve(_tables)
-        }
-    }
-
-}
-}
-
-
-
-export namespace Dota {
-export class TechConfigRecord {
-
-    constructor(_json_: any) {
-        if (_json_.LevelId === undefined) { GLogHelper.error(1); }
-        this.LevelId = _json_.LevelId
-        if (_json_.ExtraWood === undefined) { GLogHelper.error(1); }
-        this.ExtraWood = _json_.ExtraWood
-        if (_json_.goldcost === undefined) { GLogHelper.error(1); }
-        this.goldcost = _json_.goldcost
-    }
-
+    readonly PopuWoodCost: number
     /**
-     * 主键
+     * 科技升级额外木材每阶段
      */
-    readonly LevelId: string
+    readonly TechExtraWood: number
     /**
-     * 额外木材每阶段
+     * 科技升级额外木材每阶段
      */
-    readonly ExtraWood: number
+    readonly TechExtraGood: number
     /**
-     * 升级金币消耗
+     * 科技升级升级金币消耗
      */
-    readonly goldcost: number
+    readonly TechGoldcost: number
+    /**
+     * 金币挑战升级金币消耗
+     */
+    readonly ChallengeGoldGoldcost: number
+    /**
+     * 木材挑战升级金币消耗
+     */
+    readonly ChallengeWoodGoldcost: number
+    /**
+     * 装备挑战升级木材消耗
+     */
+    readonly ChallengeEquipWoodcost: number
+    /**
+     * 神器挑战升级木材消耗
+     */
+    readonly ChallengeArtifactWoodcost: number
 
     resolve(_tables: Map<string, any>) {
     }
@@ -4136,10 +4116,8 @@ export class Tables {
     get BuildingLevelUpConfig(): Dota.BuildingLevelUpConfig  { return this._BuildingLevelUpConfig;}
     private _BuffEffectConfig: Dota.BuffEffectConfig
     get BuffEffectConfig(): Dota.BuffEffectConfig  { return this._BuffEffectConfig;}
-    private _PopulationConfig: Dota.PopulationConfig
-    get PopulationConfig(): Dota.PopulationConfig  { return this._PopulationConfig;}
-    private _TechConfig: Dota.TechConfig
-    get TechConfig(): Dota.TechConfig  { return this._TechConfig;}
+    private _CourierAbilityLevelUpConfig: Dota.CourierAbilityLevelUpConfig
+    get CourierAbilityLevelUpConfig(): Dota.CourierAbilityLevelUpConfig  { return this._CourierAbilityLevelUpConfig;}
     private _CombinationConfig: Dota.CombinationConfig
     get CombinationConfig(): Dota.CombinationConfig  { return this._CombinationConfig;}
     private _PoolConfig: Dota.PoolConfig
@@ -4215,10 +4193,8 @@ export class Tables {
         tables.set('Dota.BuildingLevelUpConfig', this._BuildingLevelUpConfig)
         this._BuffEffectConfig = new Dota.BuffEffectConfig(loader('dota_buffeffectconfig'))
         tables.set('Dota.BuffEffectConfig', this._BuffEffectConfig)
-        this._PopulationConfig = new Dota.PopulationConfig(loader('dota_populationconfig'))
-        tables.set('Dota.PopulationConfig', this._PopulationConfig)
-        this._TechConfig = new Dota.TechConfig(loader('dota_techconfig'))
-        tables.set('Dota.TechConfig', this._TechConfig)
+        this._CourierAbilityLevelUpConfig = new Dota.CourierAbilityLevelUpConfig(loader('dota_courierabilitylevelupconfig'))
+        tables.set('Dota.CourierAbilityLevelUpConfig', this._CourierAbilityLevelUpConfig)
         this._CombinationConfig = new Dota.CombinationConfig(loader('dota_combinationconfig'))
         tables.set('Dota.CombinationConfig', this._CombinationConfig)
         this._PoolConfig = new Dota.PoolConfig(loader('dota_poolconfig'))
@@ -4262,8 +4238,7 @@ export class Tables {
         this._GlobalSetting.resolve(tables)
         this._BuildingLevelUpConfig.resolve(tables)
         this._BuffEffectConfig.resolve(tables)
-        this._PopulationConfig.resolve(tables)
-        this._TechConfig.resolve(tables)
+        this._CourierAbilityLevelUpConfig.resolve(tables)
         this._CombinationConfig.resolve(tables)
         this._PoolConfig.resolve(tables)
         this._PoolGroupConfig.resolve(tables)
@@ -4333,10 +4308,8 @@ case ('dota_buildinglevelupconfig'):
         this._BuildingLevelUpConfig = new Dota.BuildingLevelUpConfig(loader('dota_buildinglevelupconfig'));break;
 case ('dota_buffeffectconfig'):
         this._BuffEffectConfig = new Dota.BuffEffectConfig(loader('dota_buffeffectconfig'));break;
-case ('dota_populationconfig'):
-        this._PopulationConfig = new Dota.PopulationConfig(loader('dota_populationconfig'));break;
-case ('dota_techconfig'):
-        this._TechConfig = new Dota.TechConfig(loader('dota_techconfig'));break;
+case ('dota_courierabilitylevelupconfig'):
+        this._CourierAbilityLevelUpConfig = new Dota.CourierAbilityLevelUpConfig(loader('dota_courierabilitylevelupconfig'));break;
 case ('dota_combinationconfig'):
         this._CombinationConfig = new Dota.CombinationConfig(loader('dota_combinationconfig'));break;
 case ('dota_poolconfig'):

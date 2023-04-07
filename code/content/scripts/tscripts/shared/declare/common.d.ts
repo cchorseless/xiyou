@@ -1,5 +1,5 @@
 declare type Rarity = "A" | "B" | "C" | "D" | "S" | "SS";
-declare type CoinType = "Gold" | "SoulCrystal" | "Wood" | "Population" | "MetaStone" | "StarStone";
+declare type ICoinType = "Gold" | "SoulCrystal" | "Wood" | "Population" | "MetaStone" | "StarStone";
 
 declare interface IItemInfo {
     itemid: string | number,

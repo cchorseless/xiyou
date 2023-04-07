@@ -22,14 +22,13 @@ export class modifier_property extends BaseModifier_Plus {
             GPropertyCalculate.call_ability = null;
             GPropertyCalculate.call_ability = null;
             GPropertyCalculate.call_key = null;
-            if (GFuncEntity.IsValid(hAbility) && hAbility.GetLevelSpecialValueFor != null) {
+            if (GFuncEntity.IsValid(hAbility)) {
+                let func = (hAbility as any)[sKeyName];
+                if (func != null && typeof func == "function") {
+                    let r = tostring((hAbility as any)[sKeyName](iLevel))
+                    return r;
+                }
                 switch (sKeyName) {
-                    case "cool_down":
-                        return tostring(hAbility.GetCooldown(iLevel));
-                    case "mana_cost":
-                        return tostring(hAbility.GetManaCost(iLevel));
-                    case "gold_cost":
-                        return tostring(hAbility.GetGoldCost(iLevel));
                     default:
                         return tostring(hAbility.GetLevelSpecialValueFor(sKeyName, iLevel));
                 }
@@ -333,6 +332,29 @@ export class modifier_property extends BaseModifier_Plus {
         return fPercent - 100
     }
 
+    /**
+     * 技能特殊值的修改
+     * @param keys 
+     * @returns 
+     */
+    GetModifierOverrideAbilitySpecial(keys: ModifierOverrideAbilitySpecialEvent): 0 | 1 {
+        if (keys.ability && keys.ability.TempData().SpecialValueOverride) {
+            return keys.ability.TempData<{ [k: string]: IGHandler<number> }>().SpecialValueOverride[keys.ability_special_value] ? 1 : 0;
+        }
+        return 0;
+    }
+    /**
+     * 技能特殊值的修改
+     * @param keys 
+     */
+    GetModifierOverrideAbilitySpecialValue(keys: ModifierOverrideAbilitySpecialEvent): number {
+        if (keys.ability && keys.ability.TempData().SpecialValueOverride) {
+            let handler = keys.ability.TempData<{ [k: string]: IGHandler<number> }>().SpecialValueOverride[keys.ability_special_value];
+            if (handler) {
+                return handler.runWith([keys]);
+            }
+        }
+    }
 
     @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
     CC_ON_TAKEDAMAGE(event: ModifierInstanceEvent) {
