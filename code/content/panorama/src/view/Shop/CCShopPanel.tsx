@@ -1,6 +1,5 @@
 
 import React from "react";
-import { EEnum } from "../../../../scripts/tscripts/shared/Gen/Types";
 import { CSSHelper } from "../../helper/CSSHelper";
 import { PathHelper } from "../../helper/PathHelper";
 import { CCImage } from "../AllUIElement/CCImage/CCImage";
@@ -23,9 +22,9 @@ export class CCShopPanel extends CCPanel<ICCShopPanel> {
     }
 
     onInitUI() {
-        GGameScene.Local.TCharacter.DataComp!.RegRef(this);
+        this.ListenUpdate(GGameScene.Local.TCharacter.DataComp!);
         GTShopUnit.GetGroupInstance(GGameScene.Local.BelongPlayerid).forEach(e => {
-            e.RegRef(this);
+            this.ListenUpdate(e);
         });
     }
 
@@ -43,11 +42,11 @@ export class CCShopPanel extends CCPanel<ICCShopPanel> {
             return this.defaultRender("CC_ShopPanel")
         }
         const sName = "store";
-        const DataComp = this.GetStateEntity(GGameScene.Local.TCharacter.DataComp!)!;
-        const MetaStone = DataComp.NumericComp!.GetAsInt(EEnum.EMoneyType.MetaStone)
-        const StarStone = DataComp.NumericComp!.GetAsInt(EEnum.EMoneyType.StarStone)
+        const DataComp = (GGameScene.Local.TCharacter.DataComp!)!;
+        const MetaStone = DataComp.NumericComp!.GetAsInt(GEEnum.EMoneyType.MetaStone)
+        const StarStone = DataComp.NumericComp!.GetAsInt(GEEnum.EMoneyType.StarStone)
         const selectindex = this.GetState<number>("selectindex") || 1;
-        const shopunits = GTShopUnit.GetGroupInstance(GGameScene.Local.BelongPlayerid).map((e) => { return this.GetStateEntity(e)! })
+        const shopunits = GTShopUnit.GetGroupInstance(GGameScene.Local.BelongPlayerid).map((e) => { return (e)! })
         shopunits.sort((a, b) => { return a.ConfigId - b.ConfigId })
 
         return (
@@ -57,8 +56,8 @@ export class CCShopPanel extends CCPanel<ICCShopPanel> {
                         <CCImage id="PanelIcon" backgroundImage={PathHelper.getCustomImageUrl("icon/" + sName + ".png")} />
                         <CCLabel id="PanelName" localizedText={"#lang_MenuButton_" + sName} />
                         <CCPanel flowChildren="right" horizontalAlign="right" verticalAlign="center" marginRight={"20px"}>
-                            <CCCoinAddPanel cointype="MetaStone" value={MetaStone} onaddcoin={() => this.addMetaStone()} />
-                            <CCCoinAddPanel marginLeft={"20px"} cointype="StarStone" value={StarStone} />
+                            <CCCoinAddPanel cointype={GEEnum.EMoneyType.MetaStone} value={MetaStone} onaddcoin={() => this.addMetaStone()} />
+                            <CCCoinAddPanel marginLeft={"20px"} cointype={GEEnum.EMoneyType.StarStone} value={StarStone} />
                         </CCPanel>
                     </CCPanel>
                     <CCPanel id="PanelContent" flowChildren="right">

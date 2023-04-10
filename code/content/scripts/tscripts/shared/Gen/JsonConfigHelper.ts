@@ -1,3 +1,4 @@
+import { EEnum } from "./Types";
 
 export module JsonConfigHelper {
     export function GetRecordItemConfig(itemid: string | number) {
@@ -19,6 +20,12 @@ export module JsonConfigHelper {
         if (_G.GJsonConfigHelper == null) {
             _G.GJsonConfigHelper = JsonConfigHelper;
         }
+        if (_G.GEEnum == null) {
+            _G.GEEnum = EEnum;
+        }
+        // 防止编译剪裁
+        GJsonConfigHelper;
+        GEEnum;
         GJSONConfig.CombinationConfig.getDataList().forEach((v) => {
             if (v.Abilityid) {
                 AbilitySectInfo[v.Abilityid] = AbilitySectInfo[v.Abilityid] || [];
@@ -53,10 +60,16 @@ export module JsonConfigHelper {
         }
     }
 
+
+
 }
 
 
 declare global {
     var GJsonConfigHelper: typeof JsonConfigHelper;
+    var GEEnum: typeof EEnum;
     type ISectLevel = "a" | "b" | "c" | "d";
+    type ICoinType = EEnum.EMoneyType;
+    type IRarityNumber = EEnum.ERarity;
+    type IRarity = "A" | "B" | "C" | "D" | "S" | "SS";
 }

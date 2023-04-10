@@ -49,8 +49,7 @@ export class DrawComponent extends ET.Component {
     DrawCard(sReservoirName: DrawConfig.EDrawCardType, iNum: number) {
         let r_arr: string[] = [];
         for (let i = 0; i < iNum; i++) {
-            let poolid = KVHelper.RandomPoolGroupConfig("" + sReservoirName);
-            let itemid = KVHelper.RandomPoolConfig("" + poolid);
+            let itemid = KVHelper.RandomPoolGroupConfig("" + sReservoirName);
             if (!r_arr.includes(itemid)) {
                 r_arr.push(itemid);
             } else {
@@ -61,8 +60,7 @@ export class DrawComponent extends ET.Component {
                         r_arr.push(itemid);
                         break;
                     } else {
-                        poolid = KVHelper.RandomPoolGroupConfig("" + sReservoirName);
-                        itemid = KVHelper.RandomPoolConfig("" + poolid);
+                        itemid = KVHelper.RandomPoolGroupConfig("" + sReservoirName);
                         if (!r_arr.includes(itemid)) {
                             r_arr.push(itemid);
                             break;
@@ -77,7 +75,7 @@ export class DrawComponent extends ET.Component {
     }
 
     OnSelectCard(index: number, unitName: string, b2Public: number = 0): [boolean, string] {
-        let player = this.GetDomain<PlayerScene>().ETRoot;
+        let player = GGameScene.GetPlayer(this.BelongPlayerid);
         if (!player.CheckIsAlive()) {
             return [false, "hero is death"];
         }
@@ -87,7 +85,7 @@ export class DrawComponent extends ET.Component {
         if (b2Public != 0) {
             let publicbag = GPublicBagSystem.GetInstance();
             if (publicbag.IsEmpty()) {
-                let itemroot = publicbag.addBuildingItem(unitName);
+                let itemroot = publicbag.addBuildingItem(this.BelongPlayerid, unitName);
                 if (itemroot == null) {
                     return [false, "itemcreate fail"];
                 }

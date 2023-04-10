@@ -1,6 +1,5 @@
 
 import React from "react";
-import { EEnum } from "../../../../scripts/tscripts/shared/Gen/Types";
 import { TItem } from "../../../../scripts/tscripts/shared/service/bag/TItem";
 import { CSSHelper } from "../../helper/CSSHelper";
 import { PathHelper } from "../../helper/PathHelper";
@@ -22,7 +21,7 @@ export class CCStorageItem extends CCPanel<ICCStorageItem> {
         const picurl = PathHelper.getCustomShopItemImageUrl((config!.ItemIcon));
         const itemname = $.Localize("#" + (config!.ItemName));
         const itemdes = $.Localize("#" + config!.ItemDes);
-        const rarity = "Rarity_" + EEnum.ERarity[item.ItemQuality || 1];
+        const rarity = "Rarity_" + GEEnum.ERarity[item.ItemQuality || 1];
         return (
             this.__root___isValid &&
             <Panel className={CSSHelper.ClassMaker("CCStorageItem", rarity)}

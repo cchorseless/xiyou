@@ -1,6 +1,3 @@
-declare type Rarity = "A" | "B" | "C" | "D" | "S" | "SS";
-declare type ICoinType = "Gold" | "SoulCrystal" | "Wood" | "Population" | "MetaStone" | "StarStone";
-
 declare interface IItemInfo {
     itemid: string | number,
     count?: number;
@@ -33,11 +30,13 @@ declare interface IGoodsInfo {
 }
 
 declare interface IPublicShopItem {
-    sItemName?: string,
+    sItemName: string,
     iSlot: number,
     iLevel?: number,
     iLeftCount?: number,
     iLimit?: number,
+    iRoundLock?: number,
+    iCoinType: ICoinType,
 }
 
 /**玩家选择进入游戏数据 */

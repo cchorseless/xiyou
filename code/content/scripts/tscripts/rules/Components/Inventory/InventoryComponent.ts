@@ -9,8 +9,7 @@ export class InventoryComponent extends ET.Component implements IRoundStateCallb
     onAwake(...args: any[]): void {
         let npc = this.GetDomain<IBaseNpc_Plus>();
         npc.SetHasInventory(true);
-        let len = DOTAScriptInventorySlot_t.DOTA_ITEM_SLOT_9;
-        for (let i = 0; i <= len; i++) {
+        for (let i = DOTAScriptInventorySlot_t.DOTA_ITEM_SLOT_1; i <= DOTAScriptInventorySlot_t.DOTA_ITEM_SLOT_9; i++) {
             let item = npc.GetItemInSlot(i) as IBaseItem_Plus;
             if (item && item.ETRoot) {
                 this.addItemRoot(item.ETRoot as IItemEntityRoot);
@@ -147,25 +146,6 @@ export class InventoryComponent extends ET.Component implements IRoundStateCallb
         CreateItemOnPositionForLaunch(vector, item);
     }
 
-
-    getAllCanCastItem() {
-        let r: IBaseItem_Plus[] = [];
-        let caster = this.GetDomain<IBaseNpc_Plus>();
-        if (caster.IsTempestDouble() || caster.IsIllusion()) {
-            return r;
-        }
-        let battleunit = this.GetDomain<IBaseNpc_Plus>().ETRoot.As<IBattleUnitEntityRoot>();
-        this.allItemRoot.forEach(str => {
-            let itemroot = battleunit.GetDomainChild<IItemEntityRoot>(str);
-            if (itemroot) {
-                let item = itemroot.GetDomain<IBaseItem_Plus>()
-                if (item.IsAbilityReady()) {
-                    r.push(item)
-                }
-            }
-        });
-        return r;
-    }
 
     //  从背包移出物品
     removeItemRootBySlot(iSlot: number, bDeleteEntity: boolean = true) {

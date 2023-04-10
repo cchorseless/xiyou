@@ -31271,6 +31271,245 @@
     "woodcost": 510
   }
 ] ,
+"dota_publicshopconfig":[
+  {
+    "id": "GoldShop",
+    "sellinfo": [
+      {
+        "ItemSlot": 1,
+        "ItemName": "item_building_hero_zuus",
+        "ItemLimit": 0,
+        "RoundLock": 1,
+        "MinDifficulty": 1
+      },
+      {
+        "ItemSlot": 2,
+        "ItemName": "item_building_hero_lina",
+        "ItemLimit": 0,
+        "RoundLock": 1,
+        "MinDifficulty": 1
+      },
+      {
+        "ItemSlot": 3,
+        "ItemName": "item_building_hero_zuus",
+        "ItemLimit": 0,
+        "RoundLock": 1,
+        "MinDifficulty": 1
+      },
+      {
+        "ItemSlot": 4,
+        "ItemName": "item_building_hero_lina",
+        "ItemLimit": 0,
+        "RoundLock": 1,
+        "MinDifficulty": 1
+      }
+    ]
+  },
+  {
+    "id": "WoodShop",
+    "sellinfo": [
+      {
+        "ItemSlot": 1,
+        "ItemName": "item_building_hero_zuus",
+        "ItemLimit": 0,
+        "RoundLock": 1,
+        "MinDifficulty": 1
+      },
+      {
+        "ItemSlot": 2,
+        "ItemName": "item_building_hero_lina",
+        "ItemLimit": 0,
+        "RoundLock": 1,
+        "MinDifficulty": 1
+      },
+      {
+        "ItemSlot": 3,
+        "ItemName": "item_building_hero_zuus",
+        "ItemLimit": 0,
+        "RoundLock": 1,
+        "MinDifficulty": 1
+      },
+      {
+        "ItemSlot": 4,
+        "ItemName": "item_building_hero_lina",
+        "ItemLimit": 0,
+        "RoundLock": 1,
+        "MinDifficulty": 1
+      },
+      {
+        "ItemSlot": 5,
+        "ItemName": "item_building_hero_zuus",
+        "ItemLimit": 0,
+        "RoundLock": 1,
+        "MinDifficulty": 1
+      },
+      {
+        "ItemSlot": 6,
+        "ItemName": "item_building_hero_lina",
+        "ItemLimit": 0,
+        "RoundLock": 1,
+        "MinDifficulty": 1
+      },
+      {
+        "ItemSlot": 7,
+        "ItemName": "item_building_hero_zuus",
+        "ItemLimit": 0,
+        "RoundLock": 1,
+        "MinDifficulty": 1
+      },
+      {
+        "ItemSlot": 8,
+        "ItemName": "item_building_hero_lina",
+        "ItemLimit": 0,
+        "RoundLock": 1,
+        "MinDifficulty": 1
+      }
+    ]
+  },
+  {
+    "id": "RoundShop",
+    "sellinfo": [
+      {
+        "ItemSlot": 1,
+        "ItemName": "10000",
+        "ItemLimit": 1,
+        "RoundLock": 1,
+        "MinDifficulty": 1
+      },
+      {
+        "ItemSlot": 2,
+        "ItemName": "10001",
+        "ItemLimit": 1,
+        "RoundLock": 1,
+        "MinDifficulty": 1
+      },
+      {
+        "ItemSlot": 3,
+        "ItemName": "10002",
+        "ItemLimit": 1,
+        "RoundLock": 1,
+        "MinDifficulty": 1
+      },
+      {
+        "ItemSlot": 4,
+        "ItemName": "10000",
+        "ItemLimit": 1,
+        "RoundLock": 1,
+        "MinDifficulty": 1
+      }
+    ]
+  },
+  {
+    "id": "RandomShop",
+    "sellinfo": [
+      {
+        "ItemSlot": 1,
+        "ItemName": "10000",
+        "ItemLimit": 1,
+        "RoundLock": 1,
+        "MinDifficulty": 1
+      },
+      {
+        "ItemSlot": 2,
+        "ItemName": "10001",
+        "ItemLimit": 1,
+        "RoundLock": 1,
+        "MinDifficulty": 1
+      },
+      {
+        "ItemSlot": 3,
+        "ItemName": "10002",
+        "ItemLimit": 1,
+        "RoundLock": 1,
+        "MinDifficulty": 1
+      },
+      {
+        "ItemSlot": 4,
+        "ItemName": "10000",
+        "ItemLimit": 1,
+        "RoundLock": 1,
+        "MinDifficulty": 1
+      },
+      {
+        "ItemSlot": 5,
+        "ItemName": "10001",
+        "ItemLimit": 1,
+        "RoundLock": 1,
+        "MinDifficulty": 1
+      },
+      {
+        "ItemSlot": 6,
+        "ItemName": "10002",
+        "ItemLimit": 1,
+        "RoundLock": 1,
+        "MinDifficulty": 1
+      },
+      {
+        "ItemSlot": 7,
+        "ItemName": "10000",
+        "ItemLimit": 1,
+        "RoundLock": 1,
+        "MinDifficulty": 1
+      },
+      {
+        "ItemSlot": 8,
+        "ItemName": "10001",
+        "ItemLimit": 1,
+        "RoundLock": 1,
+        "MinDifficulty": 1
+      },
+      {
+        "ItemSlot": 9,
+        "ItemName": "10002",
+        "ItemLimit": 1,
+        "RoundLock": 1,
+        "MinDifficulty": 1
+      },
+      {
+        "ItemSlot": 10,
+        "ItemName": "10000",
+        "ItemLimit": 1,
+        "RoundLock": 1,
+        "MinDifficulty": 1
+      },
+      {
+        "ItemSlot": 11,
+        "ItemName": "10001",
+        "ItemLimit": 1,
+        "RoundLock": 1,
+        "MinDifficulty": 1
+      },
+      {
+        "ItemSlot": 12,
+        "ItemName": "10002",
+        "ItemLimit": 1,
+        "RoundLock": 1,
+        "MinDifficulty": 1
+      },
+      {
+        "ItemSlot": 13,
+        "ItemName": "10000",
+        "ItemLimit": 1,
+        "RoundLock": 1,
+        "MinDifficulty": 3
+      },
+      {
+        "ItemSlot": 14,
+        "ItemName": "10001",
+        "ItemLimit": 1,
+        "RoundLock": 1,
+        "MinDifficulty": 3
+      },
+      {
+        "ItemSlot": 15,
+        "ItemName": "10002",
+        "ItemLimit": 1,
+        "RoundLock": 1,
+        "MinDifficulty": 3
+      }
+    ]
+  }
+] ,
 "dota_roundboardchallengeconfig":[
   {
     "id": "n1_gold",

@@ -124,14 +124,20 @@ export module KVHelper {
      * @param unitname
      * @returns K[]
      */
-    export function FindAllNPCByName(unitname: string) {
-        let r: string[] = [];
-        // for (let k in KvServerConfig.npc_position_config) {
-        //     let info = KvServerConfig.npc_position_config[k as '1001']
-        //     if (info.unitname == unitname) {
-        //         r.push(k)
-        //     }
-        // }
+    export function GetItemCoinCost(cointype: ICoinType, itemname: string) {
+        let r = 0;
+        let config = KVHelper.KvItems[itemname];
+        if (config) {
+            if (cointype == GEEnum.EMoneyType.Gold) {
+                r = GToNumber(config.ItemCost)
+            }
+            else if (cointype == GEEnum.EMoneyType.Wood) {
+                r = GToNumber(config.WoodCost)
+            }
+            else if (cointype == GEEnum.EMoneyType.SoulCrystal) {
+                r = GToNumber(config.SoulCrystalCost)
+            }
+        }
         return r;
     }
 
@@ -150,6 +156,8 @@ export module KVHelper {
         });
         return r;
     }
+
+
     export function RandomPoolGroupConfig(str: string): string {
         let _config = GJSONConfig.PoolGroupConfig.get(str);;
         if (_config == null) {
@@ -164,7 +172,8 @@ export module KVHelper {
                 weight_arr.push(k.PoolWeight);
             }
         }
-        return GFuncRandom.RandomArrayByWeight(r_arr, weight_arr)[0];
+        let poolid = GFuncRandom.RandomArrayByWeight(r_arr, weight_arr)[0];
+        return RandomPoolConfig(poolid);
     }
     export function RandomPoolConfig(str: string): string {
         let _config = GJSONConfig.PoolConfig.get(str);

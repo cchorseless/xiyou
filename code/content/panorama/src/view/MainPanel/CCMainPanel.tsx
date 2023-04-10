@@ -17,6 +17,7 @@ import { CCHandBookPanel } from "../HandBook/CCHandBookPanel";
 import { CCLuckyDrawPanel } from "../LuckyDraw/CCLuckyDrawPanel";
 import { CCMailPanel } from "../Mail/CCMailPanel";
 import { CCPlayerListPanel } from "../Player/CCPlayerListPanel";
+import { CCPublicShopBagPanel } from "../PublicShopBag/CCPublicShopBagPanel";
 import { CCRankPanel } from "../Rank/CCRankPanel";
 import { CCRecordPanel } from "../Record/CCRecordPanel";
 import { CCShopPanel } from "../Shop/CCShopPanel";
@@ -71,7 +72,7 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
                         <CCUnitDamageInfo />
                         <CCCombinationBottomPanel CurSelectUnit={curunit} />
                         <CCArtifactListPanel />
-                        {/* <CCPublicShopBagPanel /> */}
+                        <CCPublicShopBagPanel />
                         {this.panel_base_childs}
                     </Panel>
                 }
@@ -130,7 +131,7 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
                 this.addOnlyOneNodeChild(this.NODENAME.panel_allpanel, CCStoragePanel)
             }
         }
-        this.updateSelf();
+        this.UpdateSelf();
     }
 
 
@@ -243,7 +244,7 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
             if (this.CustomToolTip) {
                 this.CustomToolTip.close();
                 this.CustomToolTip = null;
-                this.updateSelf();
+                this.UpdateSelf();
             }
         };
     }
@@ -282,7 +283,7 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
             if (this.CustomToolTip) {
                 this.CustomToolTip.close();
                 this.CustomToolTip = null;
-                this.updateSelf();
+                this.UpdateSelf();
             }
         };
         bindpanel.SetPanelEvent('onmouseout', hideFunc)

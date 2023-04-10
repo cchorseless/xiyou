@@ -29,8 +29,8 @@ export class CCHero_Select extends CCPanel<NodePropsData> {
 
     onInitUI() {
         const localplayerid = Players.GetLocalPlayer()
-        GGameScene.GameServiceSystem.RegRef(this);
-        GBagComponent.GetOneInstance(localplayerid).RegRef(this);
+        this.ListenUpdate(GGameScene.GameServiceSystem);
+        this.ListenUpdate(GBagComponent.GetOneInstance(localplayerid));
         this.UpdateState({ iTimeLeft: -1 });
         GTimerHelper.AddTimer(1, GHandler.create(this, () => {
             let lefttime = GGameScene.GameServiceSystem.BeforeGameEndTime - Game.GetGameTime();;
@@ -67,8 +67,8 @@ export class CCHero_Select extends CCPanel<NodePropsData> {
         if (!this.__root___isValid) { return this.defaultRender("CC_Hero_Select") }
         const localplayerid = Players.GetLocalPlayer()
         const iTimeLeft = this.GetState<number>("iTimeLeft");
-        const GamseStateSys = this.GetStateEntity(GGameScene.GameServiceSystem)!;
-        const bagcomp = this.GetStateEntity(GBagComponent.GetOneInstance(localplayerid))!;
+        const GamseStateSys = (GGameScene.GameServiceSystem)!;
+        const bagcomp = (GBagComponent.GetOneInstance(localplayerid))!;
         const tPlayerGameSelection = GamseStateSys.tPlayerGameSelection;
         const localselect = GamseStateSys.getPlayerGameSelection(localplayerid);
         const sCourierIDInUse = localselect.Courier;

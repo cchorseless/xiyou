@@ -53,46 +53,46 @@ export class TCharacter extends ET.Component {
         return this.GetComponentByName<SeedRandomComponent>("SeedRandomComponent");
     }
     get BagComp() {
-        return this.GetComponentByName<BagComponent>("BagComponent");
+        return this.GetComponentByName<BagComponent>("BagComponent")!;
     }
     get DataComp() {
-        return this.GetComponentByName<CharacterDataComponent>("CharacterDataComponent");
+        return this.GetComponentByName<CharacterDataComponent>("CharacterDataComponent")!;
     }
     get SteamComp() {
-        return this.GetComponentByName<CharacterSteamComponent>("CharacterSteamComponent");
+        return this.GetComponentByName<CharacterSteamComponent>("CharacterSteamComponent")!;
     }
     get ShopComp() {
-        return this.GetComponentByName<CharacterShopComponent>("CharacterShopComponent");
+        return this.GetComponentByName<CharacterShopComponent>("CharacterShopComponent")!;
     }
     get TaskComp() {
-        return this.GetComponentByName<CharacterTaskComponent>("CharacterTaskComponent");
+        return this.GetComponentByName<CharacterTaskComponent>("CharacterTaskComponent")!;
     }
     get MailComp() {
-        return this.GetComponentByName<CharacterMailComponent>("CharacterMailComponent");
+        return this.GetComponentByName<CharacterMailComponent>("CharacterMailComponent")!;
     }
     get ActivityComp() {
-        return this.GetComponentByName<CharacterActivityComponent>("CharacterActivityComponent");
+        return this.GetComponentByName<CharacterActivityComponent>("CharacterActivityComponent")!;
     }
     get HeroManageComp() {
-        return this.GetComponentByName<HeroManageComponent>("HeroManageComponent");
+        return this.GetComponentByName<HeroManageComponent>("HeroManageComponent")!;
     }
     get DrawTreasureComp() {
-        return this.GetComponentByName<CharacterDrawTreasureComponent>("CharacterDrawTreasureComponent");
+        return this.GetComponentByName<CharacterDrawTreasureComponent>("CharacterDrawTreasureComponent")!;
     }
     get RechargeComp() {
-        return this.GetComponentByName<CharacterRechargeComponent>("CharacterRechargeComponent");
+        return this.GetComponentByName<CharacterRechargeComponent>("CharacterRechargeComponent")!;
     }
     get BuffComp() {
-        return this.GetComponentByName<CharacterBuffComponent>("CharacterBuffComponent");
+        return this.GetComponentByName<CharacterBuffComponent>("CharacterBuffComponent")!;
     }
     get TitleComp() {
-        return this.GetComponentByName<CharacterTitleComponent>("CharacterTitleComponent");
+        return this.GetComponentByName<CharacterTitleComponent>("CharacterTitleComponent")!;
     }
     get AchievementComp() {
-        return this.GetComponentByName<CharacterAchievementComponent>("CharacterAchievementComponent");
+        return this.GetComponentByName<CharacterAchievementComponent>("CharacterAchievementComponent")!;
     }
     get GameRecordComp() {
-        return this.GetComponentByName<CharacterGameRecordComponent>("CharacterGameRecordComponent");
+        return this.GetComponentByName<CharacterGameRecordComponent>("CharacterGameRecordComponent")!;
     }
 }
 

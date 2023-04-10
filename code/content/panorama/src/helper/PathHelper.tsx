@@ -1,13 +1,12 @@
-import { EEnum } from "../../../scripts/tscripts/shared/Gen/Types";
 
 
 export module PathHelper {
 
     export function getMoneyIcon(str: number) {
         switch (str) {
-            case EEnum.EMoneyType.Gold:
+            case GEEnum.EMoneyType.Gold:
                 return `common/money.png`;
-            case EEnum.EMoneyType.Wood:
+            case GEEnum.EMoneyType.Wood:
                 return `common/wood_png.png`;
             default:
                 return "";

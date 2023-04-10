@@ -33,7 +33,7 @@
 //             GameProtocol.Protocol.req_addBot, GHandler.create(this, (e) => {
 //                 if (e.state) {
 //                     Game.AutoAssignPlayersToTeams();
-//                     this.updateSelf();
+//                     this.UpdateSelf();
 //                     this.isAdding = false;
 //                 }
 //             }));

@@ -1,5 +1,4 @@
 import React from "react";
-import { EEnum } from "../../../../scripts/tscripts/shared/Gen/Types";
 import { CCIcon_Scepter } from "../AllUIElement/CCIcons/CCIcon_Scepter";
 
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
@@ -16,7 +15,7 @@ export class CCUnitScepterStatus extends CCPanel<ICCUnitScepterStatus> {
         if (buildingroot) {
             let herounit = buildingroot.GetHeroUnit();
             if (herounit) {
-                isHasScepter = herounit.HeroEquipComp.GetEntityBySlot(EEnum.EEquipSolt.Scepter) != null;
+                isHasScepter = herounit.HeroEquipComp.GetEntityBySlot(GEEnum.EEquipSolt.Scepter) != null;
             }
         }
         return (

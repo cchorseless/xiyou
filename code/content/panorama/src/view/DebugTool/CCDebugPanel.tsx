@@ -25,7 +25,7 @@ export class CCDebugPanel extends CCPanel<ICCDebugPanel> {
     addOnlyDebugDialog<M extends NodePropsData, T extends typeof CCPanel<M>>(nodeType: T, nodeData: M | any = {}) {
         Object.assign(nodeData, { align: "center center" });
         this.addOnlyOneNodeChild(this.NODENAME.__root__, nodeType, nodeData, true);
-        this.updateSelf();
+        this.UpdateSelf();
     }
 
 

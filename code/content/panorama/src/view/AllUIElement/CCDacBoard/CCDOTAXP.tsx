@@ -39,6 +39,7 @@ export class CCDOTAXP extends CCPanel<ICCDOTAXP> {
         this.SetExp(0, GJSONConfig.HeroLevelUpConfig.get(1)!.Exp);
     }
     SetExp(exp: number, max: number) {
+        if (!this.__DOTAXP__ || !this.__DOTAXP__.current || !this.IsRegister) return;
         let xp = this.__DOTAXP__.current!.FindChildTraverse("CircularXPProgress") as any as CircularProgressBar;
         if (xp) {
             xp.max = max;
@@ -51,7 +52,7 @@ export class CCDOTAXP extends CCPanel<ICCDOTAXP> {
     onStartUI() {
         let LifetimeLabel = this.__DOTAXP__.current!.FindChildTraverse("LifetimeLabel") as any as LabelPanel;
         LifetimeLabel.style.fontSize = "16px";
-        this.OnSelectUnit();
+        // this.OnSelectUnit();
     }
     render() {
         const xpvalue = this.GetState("xpvalue", 0);

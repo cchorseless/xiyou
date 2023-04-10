@@ -163,7 +163,10 @@ export class CourierEntityRoot extends BaseEntityRoot implements IRoundStateCall
         return this.GetComponentByName<CourierShopComponent>("CourierShopComponent");
     }
 
-    OnRound_Start(round?: ERoundBoard): void { };
+    OnRound_Start(round?: ERoundBoard): void {
+        this.CourierShopComp().refreshRoundShopItem();
+        this.CourierShopComp().SyncClient();
+    };
     OnRound_Battle(): void { }
 
     OnRound_Prize(round: ERoundBoard) {

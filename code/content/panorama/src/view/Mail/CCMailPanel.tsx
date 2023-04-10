@@ -1,6 +1,5 @@
 
 import React from "react";
-import { EEnum } from "../../../../scripts/tscripts/shared/Gen/Types";
 import { PathHelper } from "../../helper/PathHelper";
 
 import { CCImage } from "../AllUIElement/CCImage/CCImage";
@@ -21,7 +20,7 @@ export class CCMailPanel extends CCPanel<ICCMailPanel> {
     }
 
     onInitUI() {
-        GGameScene.Local.TCharacter.DataComp?.RegRef(this)
+        this.ListenUpdate(GGameScene.Local.TCharacter.DataComp)
     }
 
     closeThis() {
@@ -38,9 +37,9 @@ export class CCMailPanel extends CCPanel<ICCMailPanel> {
             return this.defaultRender("CC_MailPanel")
         }
         const sName = "mail";
-        const DataComp = this.GetStateEntity(GGameScene.Local.TCharacter.DataComp!)!;
-        const MetaStone = DataComp.NumericComp!.GetAsInt(EEnum.EMoneyType.MetaStone)
-        const StarStone = DataComp.NumericComp!.GetAsInt(EEnum.EMoneyType.StarStone)
+        const DataComp = (GGameScene.Local.TCharacter.DataComp!)!;
+        const MetaStone = DataComp.NumericComp!.GetAsInt(GEEnum.EMoneyType.MetaStone)
+        const StarStone = DataComp.NumericComp!.GetAsInt(GEEnum.EMoneyType.StarStone)
         const selectindex = this.GetState<number>("selectindex") || 0;
         return (
             <Panel id="CC_MailPanel" className="CC_root" ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
@@ -49,8 +48,8 @@ export class CCMailPanel extends CCPanel<ICCMailPanel> {
                         <CCImage id="PanelIcon" backgroundImage={PathHelper.getCustomImageUrl("icon/" + sName + ".png")} />
                         <CCLabel id="PanelName" localizedText={"#lang_MenuButton_" + sName} />
                         <CCPanel flowChildren="right" horizontalAlign="right" verticalAlign="center" marginRight={"20px"}>
-                            <CCCoinAddPanel cointype="MetaStone" value={MetaStone} onaddcoin={() => this.addMetaStone()} />
-                            <CCCoinAddPanel marginLeft={"20px"} cointype="StarStone" value={StarStone} />
+                            <CCCoinAddPanel cointype={GEEnum.EMoneyType.MetaStone} value={MetaStone} onaddcoin={() => this.addMetaStone()} />
+                            <CCCoinAddPanel marginLeft={"20px"} cointype={GEEnum.EMoneyType.StarStone} value={StarStone} />
                         </CCPanel>
                     </CCPanel>
                     <CCPanel id="PanelContent" flowChildren="right">

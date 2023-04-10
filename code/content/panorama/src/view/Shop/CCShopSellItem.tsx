@@ -1,6 +1,5 @@
 
 import React from "react";
-import { EEnum } from "../../../../scripts/tscripts/shared/Gen/Types";
 import { TShopSellItem } from "../../../../scripts/tscripts/shared/service/shop/TShopSellItem";
 import { CSSHelper } from "../../helper/CSSHelper";
 import { KVHelper } from "../../helper/KVHelper";
@@ -19,12 +18,12 @@ interface ICCShopSellItem {
 export class CCShopSellItem extends CCPanel<ICCShopSellItem> {
 
     onInitUI() {
-        this.props.entity && this.props.entity.RegRef(this);
+        this.props.entity && this.ListenUpdate(this.props.entity);
     }
 
     onBtnBuyClick() {
         let MemberShip = GTActivityMemberShipData.GetOneInstance(GGameScene.Local.BelongPlayerid);
-        const sellitem = this.GetStateEntity(this.props.entity)!;
+        const sellitem = (this.props.entity)!;
         if (sellitem.SellConfig!.VipLimit && !MemberShip?.IsVip()) {
             TipsHelper.showErrorMessage("vip limit")
             return;
@@ -33,7 +32,7 @@ export class CCShopSellItem extends CCPanel<ICCShopSellItem> {
     }
 
     render() {
-        const sellitem = this.GetStateEntity(this.props.entity)!;
+        const sellitem = (this.props.entity)!;
         const sellinfo = sellitem.SellConfig!;
         const end_time = sellinfo.SellStartTime + sellinfo.SellValidTime;
         // 按钮类型
@@ -48,13 +47,13 @@ export class CCShopSellItem extends CCPanel<ICCShopSellItem> {
         if (price == 0) {
             buttonID = "FreeBtn";
         }
-        else if (sellinfo.CostType == EEnum.EMoneyType.MetaStone) {
+        else if (sellinfo.CostType == GEEnum.EMoneyType.MetaStone) {
             buttonID = "MetaBtn";
         }
-        else if (sellinfo.CostType == EEnum.EMoneyType.StarStone) {
+        else if (sellinfo.CostType == GEEnum.EMoneyType.StarStone) {
             buttonID = "StarBtn";
         }
-        else if (sellinfo.CostType == EEnum.EMoneyType.Money) {
+        else if (sellinfo.CostType == GEEnum.EMoneyType.Money) {
             buttonID = "RMBBtn";
         }
         // 限购
@@ -97,12 +96,12 @@ export class CCShopSellItem extends CCPanel<ICCShopSellItem> {
                     {buttonID == "FreeBtn" && <Label localizedText={"#" + KVHelper.KVLang().Free.Des} />}
                     {/* Moon */}
                     {buttonID == "MetaBtn" && <Panel id="MetaWithNum" hittest={false}>
-                        <CCIcon_CoinType cointype="MetaStone" />
+                        <CCIcon_CoinType cointype={GEEnum.EMoneyType.MetaStone} />
                         <Label text={price} />
                     </Panel>}
                     {/* Star */}
                     {buttonID == "StarBtn" && <Panel id="StarWithNum" hittest={false}>
-                        <CCIcon_CoinType cointype="StarStone" />
+                        <CCIcon_CoinType cointype={GEEnum.EMoneyType.StarStone} />
                         <Label text={price} />
                     </Panel>}
                 </Button>

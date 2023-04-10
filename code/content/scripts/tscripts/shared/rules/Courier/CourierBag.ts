@@ -7,6 +7,7 @@ export class CourierBag extends ET.Component {
     @serializeETProps()
     iMaxArtifact = 6;
     /**购买道具到背包|信使 */
+    @serializeETProps()
     bBuyItem2Bag: boolean = false;
     /**神器选项列表 */
     artifactSelection: string[] = []

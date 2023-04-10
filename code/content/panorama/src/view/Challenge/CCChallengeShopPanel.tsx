@@ -23,7 +23,7 @@ export class CCChallengeShopPanel extends CCPanel<ICCChallengeShopPanel> {
     }
 
     onInitUI() {
-        // GGameScene.Local.PlayerDataComp.RegRef(this);
+        // GGameScene.Local.PlayerDataComp);
         // GTimerHelper.AddTimer(1, GHandler.create(this, () => {
         //     this.__root__.current!.AddClass("Show")
         // }))
@@ -64,6 +64,7 @@ export class CCChallengeShopPanel extends CCPanel<ICCChallengeShopPanel> {
         if (shopbag != null) {
             shopbag.showSelf(!shopbag.isShowSelf());
         }
+
     }
     onbtndraw_click() {
         let draw = CCDrawCardPanel.GetInstance();
@@ -90,7 +91,7 @@ export class CCChallengeShopPanel extends CCPanel<ICCChallengeShopPanel> {
                         {["gold", "wood", "equip", "artifact"].map((ability, index) => {
                             const abilityname = "courier_challenge_" + ability;
                             const abilityindex = Entities.GetAbilityByName(castentity, abilityname);
-                            return <CCChallengeAbilityIcon key={ability} abilityname={abilityname} contextEntityIndex={abilityindex} cointype={index >= 2 ? "Wood" : "Gold"} />
+                            return <CCChallengeAbilityIcon key={ability} abilityname={abilityname} contextEntityIndex={abilityindex} cointype={index >= 2 ? GEEnum.EMoneyType.Wood : GEEnum.EMoneyType.Gold} />
                         })}
                     </CCPanel>
                     {/* <CCDividerLine />

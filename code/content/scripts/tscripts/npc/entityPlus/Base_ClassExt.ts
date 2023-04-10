@@ -765,6 +765,86 @@ if (IsClient()) {
     // }
 }
 //----------------------------------------------------------------------------------------------------
+declare global {
+    interface CDOTA_Item {
+        /**获取作用归属NPC，在谁身上 
+         * @Server
+        */
+        GetParentPlus(): IBaseNpc_Plus;
+
+        /**自己给自己施法的 
+         * @Server
+         */
+        IsCastBySelf(): boolean;
+        /**
+         * @Server
+         * 在地面创建道具
+         * @param vCenter
+         * @param hItem
+         * @returns
+         */
+        CreateItemOnPositionRandom(vCenter: Vector): CDOTA_Item_Physical;
+
+        /**
+         * @Server
+         * 是否可以给NPC
+         * @param npc
+         * @returns
+         */
+        CanGiveToNpc(npc: IBaseNpc_Plus): boolean;
+    }
+}
+
+const CBaseItem = IsServer() ? CDOTA_Item : C_DOTA_Item;
+
+
+if (IsServer()) {
+    CBaseItem.GetParentPlus = function () {
+        return this.GetParent() as IBaseNpc_Plus;
+    }
+    CBaseItem.IsCastBySelf = function () {
+        return this.GetCasterPlus().GetEntityIndex() == this.GetOwnerPlus().GetEntityIndex();
+    }
+    CBaseItem.CreateItemOnPositionRandom = function (vCenter: Vector) {
+        let vPosition = (vCenter + RandomVector(125)) as Vector;
+        let hContainer = CreateItemOnPositionForLaunch(vPosition, this);
+        return hContainer;
+    }
+    CBaseItem.CanGiveToNpc = function (npc: IBaseNpc_Plus) {
+        // let hPurchaser = this.GetPurchaser();
+        // if (GFuncEntity.IsValid(hPurchaser)) {
+        //     if( )
+        // }
+        // let iPurchaserID = IsValid(hPurchaser) and hPurchaser: GetPlayerOwnerID() or - 1
+        // let bSamePlayer = iPurchaserID == -1 or (PlayerResource: IsValidPlayerID(iPlayerID) and iPlayerID == iPurchaserID)
+
+        // if (not bSamePlayer) and(not hItem: IsCustomShareable()) then
+        // ErrorMessage(iPlayerID, "dota_hud_error_not_shareable")
+        // return false
+        // end
+        let item = this as any as IBaseItem_Plus;
+        if (GFuncEntity.IsValid(this) &&
+            GFuncEntity.IsValid(npc) &&
+            this.IsDroppable() &&
+            item.CanUnitPickUp(npc) &&
+            npc.IsAlive() &&
+            npc.IsRealUnit() &&
+            npc.HasInventory()
+        ) {
+            return true;
+        }
+        return false;
+    }
+}
+
+
+
+
+
+
+
+
+//----------------------------------------------------------------------------------------------------
 
 declare global {
     interface CDOTA_Buff {
@@ -1621,6 +1701,28 @@ declare global {
             order?: FindOrder,
             canGrowCache?: boolean): IBaseNpc_Plus[];
 
+        /**
+         * @Server
+         * 创造属于自己的一个物品
+         * @param itemname 
+         */
+        CreateOneItem<T extends IBaseItem_Plus>(itemname: string): T;
+        /**
+         * @Server
+         * 创建一个物品给单位，如果单位身上没地方放了，就扔在他附近随机位置
+         * @param itemname 
+         */
+        AddItemOrInGround<T extends IBaseItem_Plus>(itemname: string | IBaseItem_Plus): T;
+        /**
+         * @Both
+         * 背包是否满了
+         */
+        IsInventoryFull(): boolean;
+        /**
+         * @Server
+         * @param itemname 
+         */
+        DropItem(hItem: IBaseItem_Plus, bLaunchLoot?: boolean, sNewItemName?: string): void;
     }
 }
 
@@ -2076,7 +2178,15 @@ BaseNPC.IsAttacker = function () {
 BaseNPC.GetAttackRangePlus = function () {
     return this.Script_GetAttackRange();
 }
-
+BaseNPC.IsInventoryFull = function () {
+    for (let i = DOTAScriptInventorySlot_t.DOTA_ITEM_SLOT_1; i <= DOTAScriptInventorySlot_t.DOTA_ITEM_SLOT_9; i++) {
+        let item = this.GetItemInSlot(i);
+        if (!item) {
+            return false;
+        }
+    }
+    return true
+}
 
 if (IsServer()) {
 
@@ -2331,6 +2441,74 @@ if (IsServer()) {
         let r = FindUnitsInRadius(this.GetTeam(), location, null, radius, teamFilter, typeFilter, flagFilter, order, canGrowCache);
         r = r.filter((v) => { return v.IsRealUnit() });
         return r;
+    }
+
+    BaseNPC.CreateOneItem = function (itemName: string) {
+        let owner = this as any;
+        let hItem = CreateItem(itemName, owner, owner) as IBaseItem_Plus;
+        // GameFunc.BindInstanceToCls(hItem, GGetRegClass(itemName) || BaseItem_Plus);
+        return hItem;
+    }
+    /**
+     * 创建一个物品给单位，如果单位身上没地方放了，就扔在他附近随机位置
+     * @Server
+     * @param this
+     * @param hUnit
+     * @returns
+     */
+    BaseNPC.AddItemOrInGround = function (itemname: string | IBaseItem_Plus) {
+        if (itemname == null) { return }
+        let hItem = itemname as IBaseItem_Plus;
+        if (typeof itemname == "string") {
+            hItem = this.CreateOneItem(itemname);
+        }
+        hItem.SetPurchaseTime(0);
+        if (this.IsInventoryFull()) {
+            hItem.SetParent(this, "");
+            hItem.CreateItemOnPositionRandom(this.GetAbsOrigin());
+        }
+        else {
+            this.AddItem(hItem);
+        }
+        return hItem;
+    }
+
+
+
+
+    BaseNPC.DropItem = function (hItem: IBaseItem_Plus, bLaunchLoot = false, sNewItemName = "") {
+        let vLocation = GetGroundPosition(this.GetAbsOrigin(), this);
+        let sName: string;
+        let vRandomVector = RandomVector(100);
+        if (hItem) {
+            sName = hItem.GetName();
+            this.DropItemAtPositionImmediate(hItem, vLocation);
+        } else {
+            sName = sNewItemName;
+            hItem = this.CreateOneItem(sNewItemName);
+            CreateItemOnPositionSync(vLocation, hItem);
+        }
+        if (sName == "item_imba_rapier") {
+            hItem.GetContainer().SetRenderColor(230, 240, 35);
+        } else if (sName == "item_imba_rapier_2") {
+            hItem.GetContainer().SetRenderColor(240, 150, 30);
+            hItem.TempData().rapier_pfx = ResHelper.CreateParticleEx("particles/item/rapier/item_rapier_trinity.vpcf", ParticleAttachment_t.PATTACH_CUSTOMORIGIN, undefined);
+            ParticleManager.SetParticleControl(hItem.TempData().rapier_pfx, 0, vLocation + vRandomVector as Vector);
+        } else if (sName == "item_imba_rapier_magic") {
+            hItem.GetContainer().SetRenderColor(35, 35, 240);
+        } else if (sName == "item_imba_rapier_magic_2") {
+            hItem.GetContainer().SetRenderColor(140, 70, 220);
+            hItem.TempData().rapier_pfx = ResHelper.CreateParticleEx("particles/item/rapier/item_rapier_archmage.vpcf", ParticleAttachment_t.PATTACH_CUSTOMORIGIN, undefined);
+            ParticleManager.SetParticleControl(hItem.TempData().rapier_pfx, 0, vLocation + vRandomVector as Vector);
+        } else if (sName == "item_imba_rapier_cursed") {
+            hItem.TempData().rapier_pfx = ResHelper.CreateParticleEx("particles/item/rapier/item_rapier_cursed.vpcf", ParticleAttachment_t.PATTACH_CUSTOMORIGIN, undefined);
+            ParticleManager.SetParticleControl(hItem.TempData().rapier_pfx, 0, vLocation + vRandomVector as Vector);
+            hItem.TempData().x_pfx = ResHelper.CreateParticleEx("particles/item/rapier/cursed_x.vpcf", ParticleAttachment_t.PATTACH_CUSTOMORIGIN, undefined);
+            ParticleManager.SetParticleControl(hItem.TempData().x_pfx, 0, vLocation + vRandomVector as Vector);
+        }
+        if (bLaunchLoot) {
+            hItem.LaunchLoot(false, 250, 0.5, vLocation + vRandomVector as Vector);
+        }
     }
 }
 

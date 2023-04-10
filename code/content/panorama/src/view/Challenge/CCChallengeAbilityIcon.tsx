@@ -23,15 +23,15 @@ export class CCChallengeAbilityIcon extends CCPanel<ICCChallengeAbilityIcon> {
         const abilityname = this.props.abilityname;
         const abilityindex = this.props.contextEntityIndex;
         let costcount = 0;
-        if (this.props.cointype == "Gold") {
+        if (this.props.cointype == GEEnum.EMoneyType.Gold) {
             costcount = AbilityHelper.GetLevelGoldCost(abilityindex)
         }
-        else if (this.props.cointype == "Wood") {
+        else if (this.props.cointype == GEEnum.EMoneyType.Wood) {
             costcount = AbilityHelper.GetLevelWoodCost(abilityindex)
         }
         return (
             <Panel id="CC_ChallengeAbilityIcon" ref={this.__root__}      {...this.initRootAttrs()}>
-                <CCAbilityIcon_Custom onclick={() => this.updateSelf()} abilityname={abilityname} contextEntityIndex={abilityindex} horizontalAlign={"center"}>
+                <CCAbilityIcon_Custom onclick={() => this.UpdateSelf()} abilityname={abilityname} contextEntityIndex={abilityindex} horizontalAlign={"center"}>
                     <CCLabel type="Level" text={`Lv.${Abilities.GetLevel(abilityindex)}`} align={"left bottom"} />
                 </CCAbilityIcon_Custom>
                 <CCLabel type="AbilityName" text={$.Localize("#DOTA_Tooltip_ability_" + abilityname)} horizontalAlign={"center"} />

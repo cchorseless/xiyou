@@ -1,6 +1,5 @@
 
 import React from "react";
-import { EEnum } from "../../../../scripts/tscripts/shared/Gen/Types";
 import { TItem } from "../../../../scripts/tscripts/shared/service/bag/TItem";
 import { CSSHelper } from "../../helper/CSSHelper";
 import { PathHelper } from "../../helper/PathHelper";
@@ -25,8 +24,8 @@ export class CCStoragePanel extends CCPanel<ICCStoragePanel> {
     }
 
     onInitUI() {
-        GGameScene.Local.TCharacter.DataComp?.RegRef(this)
-        GGameScene.Local.TCharacter.BagComp?.RegRef(this)
+        this.ListenUpdate(GGameScene.Local.TCharacter.DataComp)
+        this.ListenUpdate(GGameScene.Local.TCharacter.BagComp)
     }
 
     closeThis() {
@@ -51,10 +50,10 @@ export class CCStoragePanel extends CCPanel<ICCStoragePanel> {
             "装备",
             "礼包",
         ];
-        const DataComp = this.GetStateEntity(GGameScene.Local.TCharacter.DataComp!)!;
-        const BagComp = this.GetStateEntity(GGameScene.Local.TCharacter.BagComp!)!;
-        const MetaStone = DataComp.NumericComp!.GetAsInt(EEnum.EMoneyType.MetaStone)
-        const StarStone = DataComp.NumericComp!.GetAsInt(EEnum.EMoneyType.StarStone)
+        const DataComp = (GGameScene.Local.TCharacter.DataComp!)!;
+        const BagComp = (GGameScene.Local.TCharacter.BagComp!)!;
+        const MetaStone = DataComp.NumericComp!.GetAsInt(GEEnum.EMoneyType.MetaStone)
+        const StarStone = DataComp.NumericComp!.GetAsInt(GEEnum.EMoneyType.StarStone)
         const selectindex = this.GetState<number>("selectindex") || 1;
         const selectitem = this.GetState<TItem>("selectitem");
         const allbagitems = BagComp.getAllItem();
@@ -67,8 +66,8 @@ export class CCStoragePanel extends CCPanel<ICCStoragePanel> {
                         <CCLabel id="PanelName" localizedText={"#lang_MenuButton_" + sName} />
                         <CCLabel id="StorageCountLimit" text={`(${BagComp.Items.length}/${BagComp.MaxSize})`} />
                         <CCPanel flowChildren="right" horizontalAlign="right" verticalAlign="center" marginRight={"20px"}>
-                            <CCCoinAddPanel cointype="MetaStone" value={MetaStone} onaddcoin={() => this.addMetaStone()} />
-                            <CCCoinAddPanel marginLeft={"20px"} cointype="StarStone" value={StarStone} />
+                            <CCCoinAddPanel cointype={GEEnum.EMoneyType.MetaStone} value={MetaStone} onaddcoin={() => this.addMetaStone()} />
+                            <CCCoinAddPanel marginLeft={"20px"} cointype={GEEnum.EMoneyType.StarStone} value={StarStone} />
                         </CCPanel>
                     </CCPanel>
                     <CCPanel id="PanelContent" flowChildren="right">
@@ -84,13 +83,13 @@ export class CCStoragePanel extends CCPanel<ICCStoragePanel> {
                                             curitems = allbagitems.filter(item => { return GToNumber(item.CreateTime) + 24 * 3600 * 1000 >= GTimerHelper.NowUnix() })
                                             break;
                                         case 3:
-                                            curitems = allbagitems.filter(item => { return item.Config.ItemType == EEnum.EItemType.None })
+                                            curitems = allbagitems.filter(item => { return item.Config.ItemType == GEEnum.EItemType.None })
                                             break;
                                         case 4:
-                                            curitems = allbagitems.filter(item => { return item.Config.ItemType == EEnum.EItemType.TimeItem })
+                                            curitems = allbagitems.filter(item => { return item.Config.ItemType == GEEnum.EItemType.TimeItem })
                                             break;
                                         case 5:
-                                            curitems = allbagitems.filter(item => { return item.Config.ItemType == EEnum.EItemType.Treasure })
+                                            curitems = allbagitems.filter(item => { return item.Config.ItemType == GEEnum.EItemType.Treasure })
                                             break;
                                     }
                                     return <CCPanel key={_index + "1111"}
@@ -115,7 +114,7 @@ export class CCStoragePanel extends CCPanel<ICCStoragePanel> {
                                         const picurl = PathHelper.getCustomShopItemImageUrl((selectitem.Config!.ItemIcon));
                                         const itemname = $.Localize("#" + (selectitem.Config!.ItemName));
                                         const itemdes = $.Localize("#" + selectitem.Config!.ItemDes);
-                                        const rarity = "Rarity_" + EEnum.ERarity[selectitem.ItemQuality || 1];
+                                        const rarity = "Rarity_" + GEEnum.ERarity[selectitem.ItemQuality || 1];
                                         return <CCPanel id="StorageItemInfo" flowChildren="down" key={index + ""}>
                                             <CCImage id="StorageItemImg" backgroundImage={picurl} />
                                             {(num != undefined && Number(num) > 1) &&

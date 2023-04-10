@@ -85,6 +85,16 @@ export class BasePureComponentSystem {
     }
 }
 
+export class EntityRef<T>{
+    get Ref(): T {
+        return this._Ref;
+    }
+    private _Ref: T
+    constructor(ref: T) {
+        this._Ref = ref;
+    }
+}
+
 export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel> extends PureComponent<P> implements ET.IEntityRoot {
     static PanelZorder = 1;
     ETRoot?: ET.EntityRoot;
@@ -139,6 +149,46 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
     private getNode_isValid_Name(nodeName: string): string {
         return nodeName + "_isValid";
     }
+
+    /** 函数组件使用 */
+    public HookRef() {
+        // const { useState, useEffect } = require("react")
+        // const [v, setValue] = useState({ Ref: this });
+        // const hander = GHandler.create(this, () => {
+        //     setValue({ Ref: this });
+        // });
+        // useEffect(() => {
+        //     GEventHelper.AddEvent(this.updateEventName, hander, null, true);
+        //     return () => { hander._id > 0 && GEventHelper.RemoveCaller(this, hander) };
+        // }, [v])
+        // return v.Ref;
+    }
+
+    // private _ETRef: EntityRef<this>;
+
+    // public Ref(v: boolean = false) {
+    //     if (!this._ETRef || v) {
+    //         this._ETRef = new EntityRef(this);
+    //     }
+    //     return { [this.InstanceId]: this._ETRef };
+    // }
+
+    ListenUpdate(entity: ET.Entity, func?: () => void) {
+        // this.UpdateState(entity.Ref());
+        if (entity == null) {
+            GLogHelper.warn("ListenUpdate entity is null," + this.constructor.name);
+            return;
+        }
+        GEventHelper.AddEvent(entity.updateEventSelfName, GHandler.create(this, () => {
+            if (this.IsRegister) {
+                // content.setState(entity.Ref(true));
+                this.UpdateSelf();
+                if (func) {
+                    func();
+                }
+            }
+        }), entity.BelongPlayerid)
+    }
     /**数据准备检查 */
     public onReady(): boolean { return true; }
 
@@ -168,7 +218,7 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
 
     public GetStateEntity<T extends { InstanceId: string }>(entity: T) {
         if (entity == null) { return null }
-        let obj = (this.state as any)[entity.InstanceId];
+        let obj = this.GetState<any>(entity.InstanceId);
         if (obj) {
             return obj.Ref as T
         }
@@ -179,11 +229,12 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
 
     public UpdateState(obj: { [k: string]: any }) {
         if (!obj) { return; }
+        this.state = this.state || {};
         if (this.IsRegister) {
             this.setState(obj);
         }
         else {
-            this.state = Object.assign(this.state || {}, obj)
+            this.state = Object.assign(this.state, obj)
         }
     }
 
@@ -254,7 +305,7 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
         if (comp) {
             if (!bforceNew) {
                 comp.__root__.current!.visible = true;
-                comp.updateSelf();
+                comp.UpdateSelf();
                 return
             }
             else {
@@ -272,7 +323,7 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
             comp = await this.addNodeChildAsyncAt<M, T>(nodeName, nodeType, nodeData);
         } else {
             comp.__root__.current!.visible = true;
-            comp.updateSelf();
+            comp.UpdateSelf();
         }
         return comp as InstanceType<T>;
     }
@@ -363,9 +414,9 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
             let node = this.addNodeChildAt<M, T>(nodeName, nodeType, nodeData, index);
             if (node) {
                 BasePureComponentSystem.AllAsyacResolve[(node as ReactElement).key as string] = resolve;
-                this.updateSelf();
+                this.UpdateSelf();
             } else {
-                this.updateSelf();
+                this.UpdateSelf();
                 reject(node);
             }
         });
@@ -381,7 +432,7 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
             let nodeinfo = BasePureComponentSystem.GetReactElement(this.InstanceId);
             if (nodeinfo) {
                 nodeinfo.Domain.removeNodeChild(nodeinfo.NodeParentName, nodeinfo.Node);
-                nodeinfo.Domain.updateSelf();
+                nodeinfo.Domain.UpdateSelf();
                 return;
             }
             // 无法从父节点删除，就直接删除自己
@@ -428,7 +479,7 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
         }
         // 清除节点显示逻辑
         (this as any)[_isValidName] = false;
-        this.updateSelf();
+        this.UpdateSelf();
     }
 
     /**
@@ -440,20 +491,20 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
         (this.IsClosed as any) = true;
         if (this.__root__ && this.__root__.current) {
             this.__root__.current.visible = false;
-            this.updateSelf();
+            this.UpdateSelf();
         }
         this.destroy();
     }
     public show() {
         if (this.__root__ && this.__root__.current) {
             this.__root__.current.style.opacity = 1 + "";
-            this.updateSelf();
+            this.UpdateSelf();
         }
     }
     public hide() {
         if (this.__root__ && this.__root__.current) {
             this.__root__.current.style.opacity = 0 + "";
-            this.updateSelf();
+            this.UpdateSelf();
         }
     }
     public IsHide() {
@@ -471,7 +522,7 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
     }
     private _updateSelf = 0;
     /**刷新自己 */
-    public updateSelf = () => {
+    public UpdateSelf = () => {
         this._updateSelf += 1;
         if (this._updateSelf > 10000) {
             this._updateSelf = 0;
@@ -484,7 +535,7 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
             1,
             GHandler.create(this, () => {
                 if (this.IsRegister) {
-                    this.updateSelf();
+                    this.UpdateSelf();
                 }
             })
         );

@@ -23,6 +23,17 @@ export class BaseEntityRoot extends ET.EntityRoot {
             }
         }
     }
+    static GetEntityById<T extends typeof BaseEntityRoot>(this: T, selfid: string) {
+        const instanceID = selfid.includes(this.name) ? selfid : (selfid + this.name);
+        if (instanceID) {
+            const entity = ETEntitySystem.GetEntity(instanceID) as InstanceType<T>;
+            if (entity && entity.GetType() == this.name) {
+                return entity;
+            }
+        }
+    }
+
+
     static GetBattleEntity(entityid: string | EntityIndex | number) {
         const instanceID = BaseEntityRoot.AllEntity[entityid + ""];
         if (instanceID) {

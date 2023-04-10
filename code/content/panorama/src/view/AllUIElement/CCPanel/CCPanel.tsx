@@ -54,14 +54,17 @@ export class CCPanel<T = {}, P extends Panel = Panel> extends BasePureComponent<
             // 保证先initUI完成后，render才刷新。不会由于onInitUI 出发rerender
             this.onInitUI();
             this.__root___isValid = true
-            this.updateSelf();
+            this.UpdateSelf();
         }
         else {
             this.__root___isValid = false;
             GTimerHelper.AddFrameTimer(5, GHandler.create(this, () => { this.checkDataReady() }))
         }
     }
-
+    /**
+     * @deprecated 使用onInitUI
+     */
+    onInit() { }
 
     defaultClass() { return ""; };
     defaultStyle(): Partial<ICCPanelProps & VCSSStyleDeclaration & T & Omit<PanelAttributes, "ref">> | any { return {}; };

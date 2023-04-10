@@ -17,7 +17,7 @@ export class CCCombinationBottomPanel extends CCPanel<ICCCombinationBottomPanel>
     onInitUI() {
         GEventHelper.AddEvent(ECombination.name, GHandler.create(this, (e: ECombination) => {
             if (e.BelongPlayerid == this.curBelongPlayerid) {
-                this.updateSelf()
+                this.UpdateSelf()
             }
         }))
     }

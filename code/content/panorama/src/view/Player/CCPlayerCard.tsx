@@ -18,13 +18,13 @@ export class CCPlayerCard extends CCPanel<ICCPlayerCard> {
 
     onInitUI() {
         const iplayerID = this.props.iPlayerID;
-        GTActivityMemberShipData.GetOneInstance(iplayerID).RegRef(this);
+        this.ListenUpdate(GTActivityMemberShipData.GetOneInstance(iplayerID));
     }
 
     render() {
         if (!this.__root___isValid) return this.defaultRender("CC_PlayerCard");
         const iplayerID = this.props.iPlayerID;
-        const MemberData = this.GetStateEntity(GTActivityMemberShipData.GetOneInstance(iplayerID))!;
+        const MemberData = (GTActivityMemberShipData.GetOneInstance(iplayerID))!;
         const isPlus = MemberData.IsVip();
         const isPlus_p = MemberData.IsVipForever();
         const playerinfo = Game.GetPlayerInfo(iplayerID)

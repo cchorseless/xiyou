@@ -2,7 +2,6 @@ declare interface IDragPanel extends Panel {
     m_pPanel?: Panel;
     m_DragCompleted?: boolean;
     m_DragType?: string;
-    m_DragType_Extra?: any;
     m_Slot?: number;
     overrideentityindex?: ItemEntityIndex;
 }

@@ -2,7 +2,6 @@
 import React from "react";
 import { GameProtocol } from "../../../../scripts/tscripts/shared/GameProtocol";
 import { JsonConfigHelper } from "../../../../scripts/tscripts/shared/Gen/JsonConfigHelper";
-import { EEnum } from "../../../../scripts/tscripts/shared/Gen/Types";
 import { TShopSellItem } from "../../../../scripts/tscripts/shared/service/shop/TShopSellItem";
 import { CSSHelper } from "../../helper/CSSHelper";
 import { KVHelper } from "../../helper/KVHelper";
@@ -21,13 +20,13 @@ interface ICCShopSellDetailDialog {
 export class CCShopSellDetailDialog extends CCPanel<ICCShopSellDetailDialog> {
 
     onInitUI() {
-        this.props.entity && this.props.entity.RegRef(this);
+        this.props.entity && this.ListenUpdate(this.props.entity);
         this.UpdateState({ iNum: 1 })
     }
 
     onBtnBuyClick() {
         const iNum = this.GetState<number>("iNum");
-        const sellitem = this.GetStateEntity(this.props.entity)!;
+        const sellitem = (this.props.entity)!;
         let MemberShip = GTActivityMemberShipData.GetOneInstance(GGameScene.Local.BelongPlayerid);
         if (!MemberShip.IsVip() && sellitem.SellConfig!.VipLimit) {
             TipsHelper.showErrorMessage("not vip")
@@ -45,7 +44,7 @@ export class CCShopSellDetailDialog extends CCPanel<ICCShopSellDetailDialog> {
         this.close();
     }
     render() {
-        const sellitem = this.GetStateEntity(this.props.entity)!;
+        const sellitem = (this.props.entity)!;
         const sellinfo = sellitem.SellConfig!;
         const itemid = sellinfo.ItemConfigId;
         const itemconfig = JsonConfigHelper.GetRecordItemConfig(itemid)
@@ -64,13 +63,13 @@ export class CCShopSellDetailDialog extends CCPanel<ICCShopSellDetailDialog> {
         if (price == 0) {
             buttonID = "FreeBtn";
         }
-        else if (sellinfo.CostType == EEnum.EMoneyType.MetaStone) {
+        else if (sellinfo.CostType == GEEnum.EMoneyType.MetaStone) {
             buttonID = "MetaBtn";
         }
-        else if (sellinfo.CostType == EEnum.EMoneyType.StarStone) {
+        else if (sellinfo.CostType == GEEnum.EMoneyType.StarStone) {
             buttonID = "StarBtn";
         }
-        else if (sellinfo.CostType == EEnum.EMoneyType.Money) {
+        else if (sellinfo.CostType == GEEnum.EMoneyType.Money) {
             buttonID = "RMBBtn";
         }
         // 限购
@@ -104,12 +103,12 @@ export class CCShopSellDetailDialog extends CCPanel<ICCShopSellDetailDialog> {
                                 {buttonID == "FreeBtn" && <Label localizedText={"#" + KVHelper.KVLang().Free.Des} />}
                                 {/* Moon */}
                                 {buttonID == "MetaBtn" && <Panel id="MoonWithNum" hittest={false}>
-                                    <CCIcon_CoinType cointype="MetaStone" />
+                                    <CCIcon_CoinType cointype={GEEnum.EMoneyType.MetaStone} />
                                     <Label text={price * iNum} />
                                 </Panel>}
                                 {/* Star */}
                                 {buttonID == "StarBtn" && <Panel id="StarWithNum" hittest={false}>
-                                    <CCIcon_CoinType cointype="StarStone" />
+                                    <CCIcon_CoinType cointype={GEEnum.EMoneyType.StarStone} />
                                     <Label text={price * iNum} />
                                 </Panel>}
                             </Button>

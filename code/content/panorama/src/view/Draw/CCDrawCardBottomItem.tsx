@@ -47,11 +47,11 @@ export class CCDrawCardBottomItem extends CCPanel<ICCDrawCardBottomItem> {
                 </CCPanel>
                 <CCPanel horizontalAlign="center" flowChildren="right">
                     <CCPanel flowChildren="right">
-                        <CCIcon_CoinType cointype="Gold" />
+                        <CCIcon_CoinType cointype={GEEnum.EMoneyType. Gold} />
                         <CCLabel type="Gold" text={"x" + iteminfo?.ItemCost} />
                     </CCPanel>
                     <CCPanel flowChildren="right" marginLeft={"10px"}>
-                        <CCIcon_CoinType cointype="Population" />
+                        <CCIcon_CoinType cointype={GEEnum.EMoneyType.Population} />
                         <CCLabel type="Gold" text={"x" + cardinfo?.Population} />
                     </CCPanel>
                 </CCPanel>

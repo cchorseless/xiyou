@@ -37,7 +37,7 @@ export class CCOverHeadPanel extends CCPanel<NodePropsData> {
                 }
             }
         }
-        this.updateSelf();
+        this.UpdateSelf();
         $.Schedule(0, () => this.onUpdate());
     }
 

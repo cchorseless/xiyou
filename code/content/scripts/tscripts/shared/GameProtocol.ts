@@ -63,6 +63,17 @@ export module GameProtocol {
         static readonly SelectCourier = "/SelectCourier";
         static readonly SelectReady = "/SelectReady";
 
+        // 公共背包
+        static readonly req_BuyPublicBagItem = "/req_BuyPublicBagItem";
+        static readonly req_SetBuyItem2Bag = "/req_SetBuyItem2Bag";
+        static readonly req_sellAllItem = "/req_sellAllItem";
+        static readonly req_sellOneItem = "/req_sellOneItem";
+        // 移动物品
+        static readonly req_MoveItem = "/req_MoveItem";
+
+
+
+
 
     }
 

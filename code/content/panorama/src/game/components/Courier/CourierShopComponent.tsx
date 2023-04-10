@@ -1,5 +1,7 @@
+import { GameProtocol } from "../../../../../scripts/tscripts/shared/GameProtocol";
 import { ET } from "../../../../../scripts/tscripts/shared/lib/Entity";
 import { PublicBagConfig } from "../../../../../scripts/tscripts/shared/PublicBagConfig";
+import { NetHelper } from "../../../helper/NetHelper";
 
 @GReloadable
 export class CourierShopComponent extends ET.Component {
@@ -20,8 +22,20 @@ export class CourierShopComponent extends ET.Component {
     /**随机商店刷新价格 */
     refreshPrice = 20;
     /**折扣 */
-    iDiscount = 100;
+    iDiscount = 0;
+
     refreshRandomShop() {
+
+    }
+
+
+    BuyItem(toNpc: EntityIndex, shoptype: PublicBagConfig.EPublicShopType, slot: number) {
+        Game.EmitSound("General.Buy");
+        NetHelper.SendToLua(GameProtocol.Protocol.req_BuyPublicBagItem, {
+            shoptype: shoptype,
+            slot: slot,
+            entityIndex: toNpc,
+        })
 
     }
 }

@@ -34,7 +34,7 @@ export class BaseDataDriven {
     ) {
         let player = owner.GetPlayerOwner();
         let hItem = CreateItem(itemName, player, player) as any as BaseDataDriven;
-        // GameFunc.BindInstanceToCls(hItem, GGetRegClass(itemName) || BaseDataDriven);
+        GameFunc.BindInstanceToCls(hItem, GGetRegClass(itemName) || BaseDataDriven);
         return hItem
     }
 }
@@ -56,29 +56,8 @@ export class BaseItem implements ET.IEntityRoot {
         purchaser: CDOTAPlayerController | undefined,
     ) {
         let hItem = CreateItem(itemName, owner, purchaser) as IBaseItem_Plus;
-        GameFunc.BindInstanceToCls(hItem, GGetRegClass(itemName) || BaseItem);
+        // GameFunc.BindInstanceToCls(hItem, GGetRegClass(itemName) || BaseItem);
         return hItem
-    }
-    /**
-     * 创建一个物品给单位，如果单位身上没地方放了，就扔在他附近随机位置
-     * @Server
-     * @param this
-     * @param hUnit
-     * @returns
-     */
-    static CreateOneOnUnit<T extends typeof BaseItem>(this: T, hUnit: IBaseNpc_Plus, itemname: string = null): InstanceType<T> {
-        let player = hUnit.GetPlayerOwner();
-        if (itemname == null) {
-            itemname = this.name;
-        }
-        let hItem = BaseItem.CreateItem(itemname, player, player)
-        hItem.SetPurchaseTime(0);
-        hUnit.AddItem(hItem);
-        if (GFuncEntity.IsValid(hItem) && hItem.GetOwnerPlus() != hUnit && hItem.GetContainer() == null) {
-            hItem.SetParent(hUnit, "");
-            hItem.CreateItemOnPositionRandom(hUnit.GetAbsOrigin());
-        }
-        return hItem as InstanceType<T>;
     }
     /**
      * @Server

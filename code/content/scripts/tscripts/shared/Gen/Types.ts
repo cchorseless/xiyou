@@ -3481,6 +3481,105 @@ export class PoolGroupBean {
 }
 
 export namespace Dota {
+export class PublicShopConfig{
+    private _dataMap: Map<string, Dota.PublicShopConfigRecord>
+    private _dataList: Dota.PublicShopConfigRecord[]
+    constructor(_json_: any[]) {
+ this._dataMap  = new Map<string, Dota.PublicShopConfigRecord>()
+        this._dataList = []
+        for(let _json2_ of _json_) {
+            let _v: Dota.PublicShopConfigRecord
+            _v = new Dota.PublicShopConfigRecord(_json2_)
+            this._dataList.push(_v)
+            this._dataMap.set(_v.id, _v)
+        }
+    }
+
+    getDataMap(): Map<string, Dota.PublicShopConfigRecord> { return this._dataMap; }
+    getDataList(): Dota.PublicShopConfigRecord[] { return this._dataList; }
+
+    get(key: string): Dota.PublicShopConfigRecord | undefined { return this._dataMap.get(key); }
+
+    resolve(_tables: Map<string, any>) {
+        for(let v of this._dataList) {
+            v.resolve(_tables)
+        }
+    }
+
+}
+}
+
+
+
+export namespace Dota {
+export class PublicShopConfigRecord {
+
+    constructor(_json_: any) {
+        if (_json_.id === undefined) { GLogHelper.error(1); }
+        this.id = _json_.id
+        if (_json_.sellinfo === undefined) { GLogHelper.error(1); }
+        { this.sellinfo = []; for(let _ele of _json_.sellinfo) { let _e : Dota.PublicShopSellItemBean; _e = new Dota.PublicShopSellItemBean(_ele); this.sellinfo.push(_e);}}
+    }
+
+    /**
+     * 商店类型
+     */
+    readonly id: string
+    readonly sellinfo: Dota.PublicShopSellItemBean[]
+
+    resolve(_tables: Map<string, any>) {
+        for(let _e of this.sellinfo) { if (_e != null ) {_e.resolve(_tables);} }
+    }
+}
+
+}
+
+
+
+export namespace Dota {
+export class PublicShopSellItemBean {
+
+    constructor(_json_: any) {
+        if (_json_.ItemSlot === undefined) { GLogHelper.error(1); }
+        this.ItemSlot = _json_.ItemSlot
+        if (_json_.ItemName === undefined) { GLogHelper.error(1); }
+        this.ItemName = _json_.ItemName
+        if (_json_.ItemLimit === undefined) { GLogHelper.error(1); }
+        this.ItemLimit = _json_.ItemLimit
+        if (_json_.RoundLock === undefined) { GLogHelper.error(1); }
+        this.RoundLock = _json_.RoundLock
+        if (_json_.MinDifficulty === undefined) { GLogHelper.error(1); }
+        this.MinDifficulty = _json_.MinDifficulty
+    }
+
+    /**
+     * 商品槽位
+     */
+    readonly ItemSlot: number
+    /**
+     * 商品ID或者随机池
+     */
+    readonly ItemName: string
+    /**
+     * 商品限购数量
+     */
+    readonly ItemLimit: number
+    /**
+     * 回合数解锁
+     */
+    readonly RoundLock: number
+    /**
+     * 难度下限
+     */
+    readonly MinDifficulty: number
+
+    resolve(_tables: Map<string, any>) {
+    }
+}
+
+}
+
+export namespace Dota {
 export class WearableConfig{
     private _dataMap: Map<string, Dota.WearableConfigRecord>
     private _dataList: Dota.WearableConfigRecord[]
@@ -4124,6 +4223,8 @@ export class Tables {
     get PoolConfig(): Dota.PoolConfig  { return this._PoolConfig;}
     private _PoolGroupConfig: Dota.PoolGroupConfig
     get PoolGroupConfig(): Dota.PoolGroupConfig  { return this._PoolGroupConfig;}
+    private _PublicShopConfig: Dota.PublicShopConfig
+    get PublicShopConfig(): Dota.PublicShopConfig  { return this._PublicShopConfig;}
     private _WearableConfig: Dota.WearableConfig
     get WearableConfig(): Dota.WearableConfig  { return this._WearableConfig;}
     private _RoundBoardConfig: Dota.RoundBoardConfig
@@ -4201,6 +4302,8 @@ export class Tables {
         tables.set('Dota.PoolConfig', this._PoolConfig)
         this._PoolGroupConfig = new Dota.PoolGroupConfig(loader('dota_poolgroupconfig'))
         tables.set('Dota.PoolGroupConfig', this._PoolGroupConfig)
+        this._PublicShopConfig = new Dota.PublicShopConfig(loader('dota_publicshopconfig'))
+        tables.set('Dota.PublicShopConfig', this._PublicShopConfig)
         this._WearableConfig = new Dota.WearableConfig(loader('dota_wearableconfig'))
         tables.set('Dota.WearableConfig', this._WearableConfig)
         this._RoundBoardConfig = new Dota.RoundBoardConfig(loader('dota_roundboardconfig'))
@@ -4242,6 +4345,7 @@ export class Tables {
         this._CombinationConfig.resolve(tables)
         this._PoolConfig.resolve(tables)
         this._PoolGroupConfig.resolve(tables)
+        this._PublicShopConfig.resolve(tables)
         this._WearableConfig.resolve(tables)
         this._RoundBoardConfig.resolve(tables)
         this._RoundBoardChallengeConfig.resolve(tables)
@@ -4316,6 +4420,8 @@ case ('dota_poolconfig'):
         this._PoolConfig = new Dota.PoolConfig(loader('dota_poolconfig'));break;
 case ('dota_poolgroupconfig'):
         this._PoolGroupConfig = new Dota.PoolGroupConfig(loader('dota_poolgroupconfig'));break;
+case ('dota_publicshopconfig'):
+        this._PublicShopConfig = new Dota.PublicShopConfig(loader('dota_publicshopconfig'));break;
 case ('dota_wearableconfig'):
         this._WearableConfig = new Dota.WearableConfig(loader('dota_wearableconfig'));break;
 case ('dota_roundboardconfig'):

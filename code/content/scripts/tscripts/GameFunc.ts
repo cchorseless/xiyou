@@ -4,7 +4,6 @@ import { GameServiceConfig } from "./shared/GameServiceConfig";
 
 export module GameFunc {
 
-
     export function ToRadians(degrees: number) {
         return degrees * math.pi / 180
 

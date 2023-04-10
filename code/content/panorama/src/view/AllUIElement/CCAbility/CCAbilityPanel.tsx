@@ -4,6 +4,7 @@ import { GameEnum } from "../../../../../scripts/tscripts/shared/GameEnum";
 import { CSSHelper } from "../../../helper/CSSHelper";
 import { AbilityHelper, ItemHelper } from "../../../helper/DotaEntityHelper";
 import { FuncHelper } from "../../../helper/FuncHelper";
+import { TipsHelper } from "../../../helper/TipsHelper";
 import { CCMainPanel } from "../../MainPanel/CCMainPanel";
 import { CCItemInfoDialog } from "../CCItem/CCItemInfoDialog";
 import { CCPanel } from "../CCPanel/CCPanel";
@@ -68,6 +69,7 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
         if (draggable) {
             // 拖拽相关
             $.RegisterEventHandler("DragStart", pSelf, (pPanel: Panel, tDragCallbacks: DragSettings) => {
+                TipsHelper.HideAbilityTooltip(pSelf)
                 const dragstartcallback = this.props.dragstartcallback!;
                 const overrideentityindex = this.props.overrideentityindex!;
                 const overridedisplaykeybind = this.props.overridedisplaykeybind!;
@@ -569,20 +571,21 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
         const ccMainPanel = CCMainPanel.GetInstance();
         ccMainPanel?.HideToolTip();
     }
-    private onbtn_moveover() {
+    private onbtn_moveover(p: Panel) {
         const overrideentityindex = this.props.overrideentityindex!;
         const slot = this.props.slot!;
         if (overrideentityindex != -1 && Entities.IsValidEntity(overrideentityindex)) {
-
+            TipsHelper.ShowAbilityTooltip(p, Abilities.GetAbilityName(overrideentityindex), Abilities.GetCaster(overrideentityindex), slot)
             // $.DispatchEvent("DOTAShowAbilityTooltip", this.AbilityButton.current!, Abilities.GetAbilityName(overrideentityindex), Abilities.GetCaster(overrideentityindex), overrideentityindex, slot
         }
     }
-    private onbtn_moveout() {
+    private onbtn_moveout(p: Panel) {
+        TipsHelper.HideAbilityTooltip(p)
         // const ccMainPanel = CCMainPanel.GetInstance();
         // ccMainPanel?.HideToolTip();
     }
     render() {
-        const m_is_item = this.GetState("m_is_item", false);
+        const m_is_item = GToBoolean(this.GetState("m_is_item"));
         const m_max_level = this.GetState("m_max_level", 0);
         const m_level = this.GetState("m_level", 0);
         const cooldown_timer = this.GetState("cooldown_timer", 0);
@@ -608,14 +611,15 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
                             </Panel>
                             <Panel id="ButtonSize" >
                                 <Panel id="AbilityButton" draggable={draggable} ref={this.AbilityButton}
+                                    style={{ tooltipPosition: "top" }}
                                     onactivate={(self) => { this.onbtn_leftclick() }}
                                     oncontextmenu={(self) => this.onbtn_rightclick()}
-                                // onmouseover={(self) => this.onbtn_moveover()}
-                                // onmouseout={(self) => this.onbtn_moveout()} 
+                                    onmouseover={(self) => this.onbtn_moveover(self)}
+                                    onmouseout={(self) => this.onbtn_moveout(self)}
                                 >
                                     {/* <DOTAAbilityImage id="AbilityImage" showtooltip={true} hittest={true} ref={this.AbilityImage} /> */}
                                     {/* scaling="stretch-to-fit-x-preserve-aspect" */}
-                                    <DOTAItemImage id="ItemImage" style={{ tooltipPosition: "top" }} itemname={Abilities.GetAbilityName(overrideentityindex)} contextEntityIndex={overrideentityindex} showtooltip={true} hittest={true} hittestchildren={true} />
+                                    <DOTAItemImage id="ItemImage" itemname={Abilities.GetAbilityName(overrideentityindex)} contextEntityIndex={overrideentityindex} showtooltip={false} hittest={false} hittestchildren={false} />
                                     <Panel hittest={false} id="AbilityBevel" />
                                     <Panel hittest={false} id="ShineContainer" >
                                         <Panel hittest={false} id="Shine" />

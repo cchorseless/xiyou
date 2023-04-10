@@ -5,14 +5,16 @@ import { CSSHelper } from "../../helper/CSSHelper";
 import { ItemHelper } from "../../helper/DotaEntityHelper";
 import { TipsHelper } from "../../helper/TipsHelper";
 
+import { CCIcon_CoinType } from "../AllUIElement/CCIcons/CCIcon_CoinType";
 import { CCItemImage } from "../AllUIElement/CCItem/CCItemImage";
+import { CCLabel } from "../AllUIElement/CCLabel/CCLabel";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import "./CCPublicShopItem.less";
 interface ICCPublicShopItem extends IPublicShopItem {
     iType: PublicBagConfig.EPublicShopType,
 }
 
-export class CCPublicShopItem extends CCPanel<ICCPublicShopItem, Button> {
+export class CCPublicShopItem extends CCPanel<ICCPublicShopItem> {
 
     static defaultProps = {
         sItemName: "",
@@ -20,51 +22,53 @@ export class CCPublicShopItem extends CCPanel<ICCPublicShopItem, Button> {
         iLimit: 0,
         iLevel: -1,
     }
-
-    defaultClass() {
-        const sItemName = this.props.sItemName!;
-        const iLevel = this.props.iLevel!;
-        const iLeftCount = this.props.iLeftCount;
-        const iPercent = 1;
-        const playdata = GGameScene.Local.PlayerDataComp
-        const iGoldCost = ItemHelper.GetItemCostLV(sItemName, iLevel) * iPercent;
-        const iWoodCost = ItemHelper.GetItemWoodCost(sItemName) * iPercent;
-        const iSoulCrystalCost = ItemHelper.GetItemSoulCrystalCost(sItemName) * iPercent;
-        const bGoldEnough = playdata.gold >= iGoldCost;
-        const bWoodEnough = playdata.wood >= iWoodCost;
-        const bSoulCrystalEnough = playdata.soulcrystal >= iSoulCrystalCost;
-        return CSSHelper.ClassMaker("CC_PublicShopItem", {
-            HasItem: Boolean(sItemName),
-            CantBuy: !(bGoldEnough && bWoodEnough && bSoulCrystalEnough && (iLeftCount == undefined || iLeftCount > 0)),
-        })
+    onInitUI() {
+        this.ListenUpdate(GGameScene.Local.PlayerDataComp);
     }
 
     OnClick_Buy() {
         const sItemName = this.props.sItemName!;
         const iSlot = this.props.iSlot;
-        const iType = this.props.iType;
-        const iLeftCount = this.props.iLeftCount;
+        const iLeftCount = this.props.iLeftCount!;
         const iLevel = this.props.iLevel!;
-        const iDiscount = GGameScene.Local.PublicShopComp.shopDiscount;
+        const iLimit = this.props.iLimit!;
+        const iDiscount = GGameScene.Local.CourierShopComp.iDiscount;
         const iPercent = 1 - iDiscount / 100;
         const playdata = GGameScene.Local.PlayerDataComp
-        const iGoldCost = ItemHelper.GetItemCostLV(sItemName, iLevel) * iPercent;
-        const iWoodCost = ItemHelper.GetItemWoodCost(sItemName) * iPercent;
-        const iSoulCrystalCost = ItemHelper.GetItemSoulCrystalCost(sItemName) * iPercent;
-        const bGoldEnough = playdata.gold >= iGoldCost;
-        const bWoodEnough = playdata.wood >= iWoodCost;
-        const bSoulCrystalEnough = playdata.soulcrystal >= iSoulCrystalCost;
+        let costcount = 0;
+        let costenough = false;
+        switch (this.props.iCoinType) {
+            case GEEnum.EMoneyType.Gold:
+                costcount = ItemHelper.GetItemCostLV(sItemName, iLevel) * iPercent;
+                costenough = playdata.gold >= costcount;
+                break;
+            case GEEnum.EMoneyType.Wood:
+                costcount = ItemHelper.GetItemWoodCost(sItemName) * iPercent;
+                costenough = playdata.wood >= costcount;
+                break;
+            case GEEnum.EMoneyType.SoulCrystal:
+                costcount = ItemHelper.GetItemSoulCrystalCost(sItemName) * iPercent;
+                costenough = playdata.soulcrystal >= costcount;
+                break;
+        }
+        const showlimit = iLimit != null && iLimit != 0;
         if (sItemName != "" && iSlot >= 0) {
-            if (iLeftCount != undefined && iLeftCount <= 0) {
+            if (showlimit && iLeftCount && iLeftCount <= 0) {
                 TipsHelper.showErrorMessage("dota_hud_error_buy_none_left_count");
-            } else if (!bGoldEnough) {
-                TipsHelper.showErrorMessage("DOTA_Hud_NeedMoreGold");
-            } else if (!bWoodEnough) {
-                TipsHelper.showErrorMessage("dota_hud_error_wood_not_enough");
-            } else if (!bSoulCrystalEnough) {
-                TipsHelper.showErrorMessage("dota_hud_error_candy_not_enough");
+            }
+            if (!costenough) {
+                switch (this.props.iCoinType) {
+                    case GEEnum.EMoneyType.Gold:
+                        TipsHelper.showErrorMessage("DOTA_Hud_NeedMoreGold");
+                        return;
+                    case GEEnum.EMoneyType.Wood:
+                        TipsHelper.showErrorMessage("dota_hud_error_wood_not_enough");
+                        return;
+                    case GEEnum.EMoneyType.SoulCrystal:
+                        TipsHelper.showErrorMessage("dota_hud_error_SoulCrystal_not_enough");
+                        return;
+                }
             } else {
-                Game.EmitSound("General.Buy");
                 let iUnitIndex = Players.GetLocalPlayerPortraitUnit();
                 let iLocalPlayer = Players.GetLocalPlayer();
                 // 如果选中的单位不可控制，先选中英雄
@@ -72,12 +76,7 @@ export class CCPublicShopItem extends CCPanel<ICCPublicShopItem, Button> {
                     iUnitIndex = Players.GetPlayerHeroEntityIndex(iLocalPlayer);
                     GameUI.SelectUnit(iUnitIndex, false);
                 }
-                Game.PrepareUnitOrders({
-                    OrderType: dotaunitorder_t.DOTA_UNIT_ORDER_PURCHASE_ITEM,
-                    UnitIndex: iUnitIndex,
-                    TargetIndex: iSlot,
-                    Position: [iType, 0, 0],
-                });
+                GGameScene.Local.CourierShopComp.BuyItem(iUnitIndex, this.props.iType, iSlot);
             }
 
         }
@@ -85,17 +84,43 @@ export class CCPublicShopItem extends CCPanel<ICCPublicShopItem, Button> {
     render() {
         const sItemName = this.props.sItemName!;
         const iLeftCount = this.props.iLeftCount;
-        const iLevel = this.props.iLevel;
-        const iLimit = this.props.iLimit;
-        const tips = {} as any
+        const iLevel = this.props.iLevel!;
+        const iLimit = this.props.iLimit!;
+        const iDiscount = GGameScene.Local.CourierShopComp.iDiscount;
+        const iPercent = 1 - iDiscount / 100;
+        const playdata = GGameScene.Local.PlayerDataComp;
+        let costcount = 0;
+        let costenough = false;
+        switch (this.props.iCoinType) {
+            case GEEnum.EMoneyType.Gold:
+                costcount = ItemHelper.GetItemCostLV(sItemName, iLevel) * iPercent;
+                costenough = playdata.gold >= costcount;
+                break;
+            case GEEnum.EMoneyType.Wood:
+                costcount = ItemHelper.GetItemWoodCost(sItemName) * iPercent;
+                costenough = playdata.wood >= costcount;
+                break;
+            case GEEnum.EMoneyType.SoulCrystal:
+                costcount = ItemHelper.GetItemSoulCrystalCost(sItemName) * iPercent;
+                costenough = playdata.soulcrystal >= costcount;
+                break;
+        }
+        const showlimit = iLimit != null && iLimit != 0;
         return (
-            <Button ref={this.__root__}
-                oncontextmenu={() => this.OnClick_Buy()}
-                hittestchildren={false} hittest={true}  {...this.initRootAttrs()}>
-                <CCPanel id="ShopItemBorder" hittest={false} dialogTooltip={tips} />
-                <CCItemImage id="ShopItemImage" itemname={sItemName} iLevel={iLevel} showtooltip={false} />
-                {iLeftCount != undefined && <Label id="leftCount" text={`${iLeftCount}/${iLimit}`} />}
-            </Button>
+            <Panel ref={this.__root__} className={CSSHelper.ClassMaker("CC_PublicShopItem", {
+                HasItem: GToBoolean(sItemName),
+                CantBuy: !(costenough && (showlimit == false || (iLeftCount && iLeftCount > 0))),
+            })}  {...this.initRootAttrs()}>
+                <CCPanel width="100%" height="40px">
+                    <CCPanel id="ShopItemBorder" hittest={false} />
+                    <CCItemImage id="ShopItemImage" hittest={true} hittestchildren={true} onactivate={() => this.OnClick_Buy()} oncontextmenu={() => this.OnClick_Buy()} itemname={sItemName} iLevel={iLevel} showtooltip={true} />
+                    {showlimit && <Label id="leftCount" text={`${iLeftCount}/${iLimit}`} />}
+                </CCPanel>
+                <CCPanel flowChildren="right" horizontalAlign="center">
+                    <CCIcon_CoinType verticalAlign="center" width="16px" height="16px" cointype={this.props.iCoinType} />
+                    <CCLabel type="Gold" text={costcount} fontSize={'16px'} />
+                </CCPanel>
+            </Panel>
         )
     }
 }

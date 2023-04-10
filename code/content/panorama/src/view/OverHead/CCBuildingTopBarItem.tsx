@@ -11,14 +11,14 @@ export class CCBuildingTopBarItem extends CCOverHeadBaseItem {
 
     onInitUI() {
         const entityid = this.props.entityid as EntityIndex;
-        let building = GBuildingEntityRoot.GetEntity(entityid);
-        building?.RegRef(this);
+        let building = GBuildingEntityRoot.GetEntity(entityid)!;
+        this.ListenUpdate(building);
     }
 
 
     render() {
         const entityid = this.props.entityid as EntityIndex;
-        const BuildingComp = this.GetStateEntity(GBuildingEntityRoot.GetEntity(entityid)!);
+        const BuildingComp = (GBuildingEntityRoot.GetEntity(entityid)!);
         if (!BuildingComp) {
             return this.defaultRender("CC_BuildingTopBarItem");
         }

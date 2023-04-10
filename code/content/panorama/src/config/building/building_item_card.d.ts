@@ -168,6 +168,8 @@ declare namespace building_item_card {
 "ItemPermanent" :string ,
 "ItemInitialCharges" :string ,
 "ItemCost" :string ,
+"WoodCost" :string ,
+"SoulCrystalCost" :string ,
 "ItemPurchasable" :string ,
 "ItemSellable" :string ,
 "ItemKillable" :string ,

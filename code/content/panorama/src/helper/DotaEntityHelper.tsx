@@ -1,5 +1,4 @@
 import { GameProtocol } from "../../../scripts/tscripts/shared/GameProtocol";
-import { EEnum } from "../../../scripts/tscripts/shared/Gen/Types";
 import { FuncHelper } from "./FuncHelper";
 import { KVHelper } from "./KVHelper";
 
@@ -1038,17 +1037,17 @@ export module UnitHelper {
         return false;
     };
 
-    export function GetUnitRarety(unitname: string): Rarity {
+    export function GetUnitRarety(unitname: string): IRarity {
         let unitobj = KVHelper.KVUnits()[unitname];
         if (unitobj && unitobj.Rarity) {
-            return unitobj.Rarity as Rarity
+            return unitobj.Rarity as IRarity
         }
-        return ("A") as Rarity;
+        return ("A") as IRarity;
     };
 
-    export function GetUnitRaretyNumber(unitname: string): EEnum.ERarity {
+    export function GetUnitRaretyNumber(unitname: string): IRarityNumber {
         const rarity = GetUnitRarety(unitname);
-        return GToNumber(EEnum.ERarity[rarity]);
+        return GToNumber(GEEnum.ERarity[rarity]);
     };
 
     export function GetAttackSpeedPercent(iUnitEntIndex: EntityIndex) {
@@ -1259,14 +1258,14 @@ export module ItemHelper {
     }
 
     export function GetItemCost(sItemName: string) {
-        return Number(GetItemValue(sItemName, "ItemCost")) || 0;
+        return GToNumber(GetItemValue(sItemName, "ItemCost")) || 0;
     }
-    export function GetItemRarity(sItemName: string): Rarity {
-        return (GetItemValue(sItemName, "Rarity") || "A") as Rarity;
+    export function GetItemRarity(sItemName: string): IRarity {
+        return (GetItemValue(sItemName, "Rarity") || "A") as IRarity;
     }
-    export function GetItemRarityNumber(sItemName: string): EEnum.ERarity {
+    export function GetItemRarityNumber(sItemName: string): IRarityNumber {
         const rarity = GetItemRarity(sItemName);
-        return GToNumber(EEnum.ERarity[rarity]);
+        return GToNumber(GEEnum.ERarity[rarity]);
     }
 
     export function GetItemRecipes(sItemName: string) {
@@ -1324,10 +1323,11 @@ export module ItemHelper {
     }
 
     export function GetItemName(item: string | ItemEntityIndex) {
-        let sItemName: string;
+        let sItemName: string = "";
+        if (!item) return "";
         if (typeof (item) == "string") {
             sItemName = item;
-        } else {
+        } else if (typeof (item) == "number") {
             sItemName = Abilities.GetAbilityName(item);
         }
         return sItemName;
@@ -1339,7 +1339,7 @@ export module ItemHelper {
      */
     export function GetItemWoodCost(item: string | ItemEntityIndex) {
         let sItemName = GetItemName(item);
-        let total = Number(GetItemValue(sItemName, "WoodCost")) || 0;
+        let total = GToNumber(GetItemValue(sItemName, "WoodCost")) || 0;
         if (typeof (item) != "string") {
             if (Items.IsStackable(item)) {
                 total *= Items.GetCurrentCharges(item) / Items.GetInitialCharges(item);
@@ -1355,23 +1355,24 @@ export module ItemHelper {
      */
     export function GetItemPointCost(item: string | ItemEntityIndex) {
         let sItemName = GetItemName(item);
-        let total = Number(GetItemValue(sItemName, "PointCost")) || 0;
+        let total = GToNumber(GetItemValue(sItemName, "PointCost")) || 0;
         if (typeof (item) != "string") {
             if (Items.IsStackable(item)) {
                 total *= Items.GetCurrentCharges(item) / Items.GetInitialCharges(item);
             }
         }
         return total;
+
     }
 
     /**
-     * 获取物品糖果价格
+     * 获取物品魂晶价格
      * @param item 物品名字或者index
      * @returns 返回物品价格
      */
     export function GetItemSoulCrystalCost(item: string | ItemEntityIndex) {
         let sItemName = GetItemName(item);
-        let total = Number(GetItemValue(sItemName, "SoulCrystalCost")) || 0;
+        let total = GToNumber(GetItemValue(sItemName, "SoulCrystalCost")) || 0;
         if (typeof (item) != "string") {
             if (Items.IsStackable(item)) {
                 total *= Items.GetCurrentCharges(item) / Items.GetInitialCharges(item);
@@ -1388,7 +1389,7 @@ export module ItemHelper {
      */
     export function GetItemCostLV(sItemName: string, iLevel: number) {
         if (iLevel >= 1 && iLevel <= 5) {
-            return Number(GetItemValue(sItemName, "ItemCost" + iLevel)) || GetItemCost(sItemName) || 0;
+            return GToNumber(GetItemValue(sItemName, "ItemCost" + iLevel)) || GetItemCost(sItemName) || 0;
         } else {
             return GetItemCost(sItemName);
         }

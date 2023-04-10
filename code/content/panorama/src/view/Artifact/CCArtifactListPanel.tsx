@@ -19,14 +19,14 @@ export class CCArtifactListPanel extends CCPanel<ICCArtifactListPanel> {
     onInitUI() {
         // this.useEffectProps(() => {
         //     const playerid = this.props.playerid;
-        //     PlayerScene.EntityRootManage.getPlayer(playerid)?.CourierBagComp?.RegRef(this);
+        //     PlayerScene.EntityRootManage.getPlayer(playerid)?.CourierBagComp);
         // }, "playerid");
-        GGameScene.Local.CourierBagComp.RegRef(this);
+        this.ListenUpdate(GGameScene.Local.CourierBagComp);
     }
 
     render() {
         if (!this.__root___isValid) { return this.defaultRender("CC_ArtifactListPanel") };
-        const CourierBag = this.GetStateEntity(GGameScene.Local.CourierBagComp)!;
+        const CourierBag = (GGameScene.Local.CourierBagComp)!;
         const tArtifacts = CourierBag?.getAllArtifact() || [];
         const len = tArtifacts.length;
         const ExpandArtifact = this.GetState<boolean>("ExpandArtifact", false);

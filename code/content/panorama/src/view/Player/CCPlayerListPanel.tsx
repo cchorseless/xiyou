@@ -26,7 +26,7 @@ export class CCPlayerListPanel extends CCPanel<ICCPlayerListPanel> {
 
     onInitUI() {
         GPlayerEntityRoot.GetAllInstance().forEach(player => {
-            player.CourierComp.RegRef(this);
+            this.ListenUpdate(player.CourierComp);
         })
     }
 
@@ -35,7 +35,7 @@ export class CCPlayerListPanel extends CCPanel<ICCPlayerListPanel> {
             return this.defaultRender("CC_PlayerInfoContainer");
         }
         const CourierDataComps = GPlayerEntityRoot.GetAllInstance().map((player) => {
-            return this.GetStateEntity(player.CourierComp);
+            return (player.CourierComp);
         })
         return (
             <Panel ref={this.__root__} id="CC_PlayerInfoContainer" hittest={false} {...this.initRootAttrs()}>

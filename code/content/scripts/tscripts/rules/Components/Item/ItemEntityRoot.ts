@@ -6,7 +6,7 @@ import { BaseEntityRoot } from "../../Entity/BaseEntityRoot";
 @GReloadable
 export class ItemEntityRoot extends BaseEntityRoot {
     public readonly SectLabels: string[] = [];
-    public ItemType: number = PublicBagConfig.EBagItemType.COMMON;
+    public ItemType = PublicBagConfig.EBagItemType.COMMON;
     onAwake() {
         let item = this.GetDomain<IBaseItem_Plus>();
         (this.ConfigID as any) = item.GetAbilityName();
@@ -15,10 +15,9 @@ export class ItemEntityRoot extends BaseEntityRoot {
         if (hPurchaser) {
             (this.BelongPlayerid as any) = hPurchaser.GetPlayerID();
         }
-        this.regSelfToInventory();
     }
 
-    private regSelfToInventory() {
+    public regSelfToInventory() {
         let sectname = GJsonConfigHelper.GetAbilitySectLabel(this.ConfigID);
         if (sectname && sectname.length > 0) {
             if (!this.SectLabels.includes(sectname)) {

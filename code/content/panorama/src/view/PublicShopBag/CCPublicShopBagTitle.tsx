@@ -1,5 +1,5 @@
 
-import React, { createRef, PureComponent } from "react";
+import React from "react";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import "./CCPublicShopBagTitle.less";
 

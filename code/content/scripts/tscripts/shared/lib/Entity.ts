@@ -59,15 +59,7 @@ export module ET {
         SerializeDomainProps?: string[];
     }
 
-    export class EntityRef<T>{
-        get Ref(): T {
-            return this._Ref;
-        }
-        private _Ref: T
-        constructor(ref: T) {
-            this._Ref = ref;
-        }
-    }
+
     export class Entity implements IEntityFunc {
         public readonly InstanceId: string;
         public readonly Id: string;
@@ -103,37 +95,7 @@ export module ET {
         onRemove?(): void;
         onDestroy?(): void;
         onGetBelongPlayerid?(): PlayerID;
-        /** 函数组件使用 */
-        public HookRef() {
-            // const { useState, useEffect } = require("react")
-            // const [v, setValue] = useState({ Ref: this });
-            // const hander = GHandler.create(this, () => {
-            //     setValue({ Ref: this });
-            // });
-            // useEffect(() => {
-            //     GEventHelper.AddEvent(this.updateEventName, hander, null, true);
-            //     return () => { hander._id > 0 && GEventHelper.RemoveCaller(this, hander) };
-            // }, [v])
-            // return v.Ref;
-        }
-        private _Ref: EntityRef<this>;
 
-        public Ref(v: boolean = false) {
-            if (!this._Ref || v) {
-                this._Ref = new EntityRef(this);
-            }
-            return { [this.InstanceId]: this._Ref };
-        }
-
-        public RegRef(content: any & { UpdateState: (o: any) => void }) {
-            const entity = this;
-            content.UpdateState(entity.Ref());
-            GEventHelper.AddEvent(this.updateEventSelfName,
-                GHandler.create(content, () => {
-                    content && content.setState(entity.Ref(true));
-                })
-            )
-        }
 
         public IsBelongLocalPlayer() {
             if (_CODE_IN_LUA_) { return true }
@@ -174,7 +136,7 @@ export module ET {
         }
 
         public SyncClient(ignoreChild: boolean = false, isShare: boolean = false) {
-            GLogHelper.print(this.GetType(), this.BelongPlayerid);
+            // GLogHelper.print(this.GetType(), this.BelongPlayerid);
             //#region LUA
             if (!_CODE_IN_LUA_) { return };
             if (this.BelongPlayerid == -1) {

@@ -30,7 +30,9 @@ export class CCCombinationSingleBottomItem extends CCPanel<ICCCombinationSingleB
         let InstanceIdList: string[] = this.props.InstanceIdList;
         InstanceIdList.forEach(entityid => {
             let entity = ETEntitySystem.GetEntity(entityid) as ECombination;
-            entity?.RegRef(this);
+            if (entity) {
+                this.ListenUpdate(entity);
+            }
         })
     }
 
@@ -50,7 +52,7 @@ export class CCCombinationSingleBottomItem extends CCPanel<ICCCombinationSingleB
         if (!this.__root___isValid) {
             return this.defaultRender("CC_CombinationSingleBottomItem");
         }
-        const entityList = this.props.InstanceIdList.map((entityId, index) => { return this.GetStateEntity(ETEntitySystem.GetEntity(entityId) as ECombination) })
+        const entityList = this.props.InstanceIdList.map((entityId, index) => { return (ETEntitySystem.GetEntity(entityId) as ECombination) })
         const lastentity = entityList[entityList.length - 1]!
         if (lastentity.IsEmpty()) {
             return this.defaultRender("CC_CombinationSingleBottomItem");

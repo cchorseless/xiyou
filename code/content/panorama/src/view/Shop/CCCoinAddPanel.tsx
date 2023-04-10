@@ -25,7 +25,7 @@ export class CCCoinAddPanel extends CCPanel<ICCCoinAddPanel> {
         return (
             this.__root___isValid &&
             <Panel className="CC_CoinAddPanel" ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
-                <CCIcon_CoinType id="iconimg" cointype={this.props.cointype} titleTooltip={{ title: this.props.cointype, tip: this.props.cointype }} />
+                <CCIcon_CoinType id="iconimg" cointype={this.props.cointype} titleTooltip={{ title: this.props.cointype + "", tip: this.props.cointype + "" }} />
                 <Panel id="iconNumBg">
                     <Label text={this.props.value} />
                 </Panel>

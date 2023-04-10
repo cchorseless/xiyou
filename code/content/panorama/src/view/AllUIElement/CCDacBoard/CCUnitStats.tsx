@@ -14,7 +14,7 @@ export class CCUnitStats extends CCPanel<ICCUnitStats>  {
     onInitUI() {
         GTimerHelper.AddTimer(0.1, GHandler.create(this, () => {
             if (Entities.IsValidEntity(this.props.CurSelectUnit)) {
-                this.updateSelf();
+                this.UpdateSelf();
             }
             return 0.1
         }));

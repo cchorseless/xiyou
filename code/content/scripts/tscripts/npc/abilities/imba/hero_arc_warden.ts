@@ -1,9 +1,8 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
-import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 @registerAbility()
@@ -542,7 +541,7 @@ export class imba_arc_warden_tempest_double extends BaseAbility_Plus {
             if (item_in_caster != undefined) {
                 let item_name = item_in_caster.GetAbilityName();
                 if (!(item_name == "item_imba_aegis" || item_name == "item_imba_smoke_of_deceit" || item_name == "item_imba_recipe_refresher" || item_name == "item_imba_refresher" || item_name == "item_imba_ward_observer" || item_name == "item_imba_ward_sentry")) {
-                    let item_created = BaseItem_Plus.CreateItem(item_in_caster.GetAbilityName(), double as any, double as any);
+                    let item_created = double.CreateOneItem(item_in_caster.GetAbilityName());
                     if (GFuncEntity.IsValid(item_created)) {
                         item_created.EndCooldown()
                         item_created.SetPurchaser(null)

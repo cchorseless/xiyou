@@ -11,7 +11,7 @@ import "./CCAbilityIcon.less";
 interface ICCAbilityIcon_Custom extends DOTAAbilityImageAttributes {
     abilityname: string;
     contextEntityIndex?: AbilityEntityIndex,
-    rarity?: Rarity;
+    rarity?: IRarity;
     playerid?: PlayerID;
     onclick?: () => void;
     tipsInfo?: {
@@ -92,7 +92,7 @@ export class CCAbilityIcon_Custom extends CCPanel<ICCAbilityIcon_Custom> {
         this.lefttimewprk = GTimerHelper.AddTimer(0, GHandler.create(this, () => {
             if (lefttime <= 0) {
                 this.addOnlyOneNodeChild(this.NODENAME.abilityImage, CCEffectShine);
-                this.updateSelf()
+                this.UpdateSelf()
                 this.lefttimewprk = null;
                 return;
             }
@@ -126,7 +126,7 @@ export class CCAbilityIcon_Custom extends CCPanel<ICCAbilityIcon_Custom> {
 interface ICCAbilityIcon extends DOTAAbilityImageAttributes {
     abilityname: string;
     castentityindex?: AbilityEntityIndex,
-    rarity?: Rarity;
+    rarity?: IRarity;
     playerid?: PlayerID;
     showTips?: boolean;
 

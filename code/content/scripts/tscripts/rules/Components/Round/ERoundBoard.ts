@@ -54,6 +54,7 @@ export class ERoundBoard extends ERound implements IRoundStateCallback {
         let playerroot = GPlayerEntityRoot.GetOneInstance(this.BelongPlayerid);
         this.SyncClient(false);
         playerroot.PlayerDataComp().OnRound_Start(this);
+        playerroot.CourierRoot().OnRound_Start(this);
         playerroot.BuildingManager().OnRound_Start(this);
         playerroot.FakerHeroRoot().OnRound_Start(this);
         this.prizeTimer = GTimerHelper.AddTimer(delaytime, GHandler.create(this, () => {

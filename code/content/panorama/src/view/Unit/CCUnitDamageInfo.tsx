@@ -18,7 +18,7 @@ export class CCUnitDamageInfo extends CCPanel<ICCUnitDamageInfo> {
     }
     onInitUI() {
         GTimerHelper.AddTimer(0.1, GHandler.create(this, () => {
-            this.updateSelf();
+            this.UpdateSelf();
             return 0.1
         }));
     }

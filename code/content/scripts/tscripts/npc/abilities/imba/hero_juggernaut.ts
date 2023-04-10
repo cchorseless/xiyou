@@ -1,11 +1,10 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { AnimationHelper } from "../../../helper/AnimationHelper";
 import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
-import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifierMotionHorizontal_Plus, BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
@@ -915,7 +914,7 @@ export class modifier_imba_juggernaut_blade_dance_empowered_slice extends BaseMo
         return state;
     }
     StatusEffectPriority(): modifierpriority {
-        return 20;
+        return 4;
     }
     GetStatusEffectName(): string {
         return "particles/status_fx/status_effect_omnislash.vpcf";
@@ -1359,9 +1358,7 @@ export class imba_juggernaut_omni_slash extends BaseAbility_Plus {
                 if (item_in_caster != undefined) {
                     let item_name = item_in_caster.GetAbilityName();
                     if (!(item_name == "item_smoke_of_deceit" || item_name == "item_ward_observer" || item_name == "item_ward_sentry" || item_name == "item_imba_ironleaf_boots")) {
-                        let item_created = BaseItem_Plus.CreateOneOnUnit(omnislash_image, item_in_caster.GetAbilityName());
-                        omnislash_image.AddItem(item_created);
-                        item_created.SetCurrentCharges(item_in_caster.GetCurrentCharges());
+                        omnislash_image.AddItemOrInGround(item_in_caster.GetAbilityName());
                     }
                 }
             }
@@ -1764,7 +1761,7 @@ export class modifier_imba_omni_slash_caster extends BaseModifier_Plus {
         return state;
     }
     StatusEffectPriority(): modifierpriority {
-        return 20;
+        return 4;
     }
     GetStatusEffectName(): string {
         return "particles/status_fx/status_effect_omnislash.vpcf";

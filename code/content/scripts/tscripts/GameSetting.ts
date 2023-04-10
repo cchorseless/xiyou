@@ -111,8 +111,23 @@ export class GameSetting {
     public static gameFilterInit() {
         let GameMode = GameRules.Addon.Instance;
         GameMode.SetExecuteOrderFilter((event: ExecuteOrderFilterEvent) => {
+            // let iOrderType = event.order_type
+            // let iPlayerID = event.issuer_player_id_const; // 发出指令的玩家id
+            // if (GameRules.IsGamePaused()) {
+            //     EventHelper.ErrorMessage("dota_hud_error_game_is_paused", iPlayerID);
+            //     return false
+            // }
+            // let queue = event.queue;
+            // if (event.units == null || event.units["0"] == null) {
+            //     return false
+            // }
+            // let hCaster = EntIndexToHScript(event.units["0"]) as IBaseNpc_Plus;
+            // if (!GFuncEntity.IsValid(hCaster) || !hCaster.IsAlive()) {
+            //     return false
+            // }
             return true
         }, this);
+
         GameMode.SetDamageFilter((event: DamageFilterEvent) => {
             // let hAbility = EntIndexToHScript(event.entindex_inflictor_const || -1 as any)
             let hVictim = EntIndexToHScript(event.entindex_victim_const || -1 as any) as IBaseNpc_Plus;

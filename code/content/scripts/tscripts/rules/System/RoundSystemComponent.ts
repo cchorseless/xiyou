@@ -10,7 +10,10 @@ export class RoundSystemComponent extends ET.SingletonComponent {
     iRound: string;
 
     GetCurrentRoundIndex() {
-        return GJSONConfig.RoundBoardConfig.get(this.iRound).roundIndex;
+        if (this.iRound) {
+            return GJSONConfig.RoundBoardConfig.get(this.iRound).roundIndex;
+        }
+        return 1;
     }
     GetCurrentRoundType() {
         return GJSONConfig.RoundBoardConfig.get(this.iRound).roundType;

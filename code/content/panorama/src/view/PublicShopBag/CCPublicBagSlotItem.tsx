@@ -1,16 +1,17 @@
 import { render } from "@demon673/react-panorama";
 import React from "react";
 import { CSSHelper } from "../../helper/CSSHelper";
-import { ItemHelper, UnitHelper } from "../../helper/DotaEntityHelper";
+import { UnitHelper } from "../../helper/DotaEntityHelper";
 import { TipsHelper } from "../../helper/TipsHelper";
 
+import { PublicBagConfig } from "../../../../scripts/tscripts/shared/PublicBagConfig";
 import { CCItemImage } from "../AllUIElement/CCItem/CCItemImage";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCMainPanel } from "../MainPanel/CCMainPanel";
 import "./CCPublicBagSlotItem.less";
 
 interface ICCPublicBagSlotItem extends NodePropsData {
-    itemIndex: ItemEntityIndex, slot?: number, iType?: number;
+    itemIndex: ItemEntityIndex, slot?: number, iType?: PublicBagConfig.EBagSlotType;
 }
 
 
@@ -18,10 +19,10 @@ interface ICCPublicBagSlotItem extends NodePropsData {
 export class CCPublicBagSlotItem extends CCPanel<ICCPublicBagSlotItem> {
 
     static defaultProps = {
-        itemIndex: -1 as ItemEntityIndex, slot: -1, iType: 1
+        itemIndex: -1 as ItemEntityIndex, slot: -1, iType: "BackPackSlot"
     }
 
-    onInit() {
+    onStartUI() {
         this.addDragEvent()
     }
 
@@ -30,6 +31,8 @@ export class CCPublicBagSlotItem extends CCPanel<ICCPublicBagSlotItem> {
         $.RegisterEventHandler("DragStart", pSelf, (pPanel: Panel, tDragCallbacks: DragSettings) => {
             const itemIndex = this.props.itemIndex!;
             const iType = this.props.iType!;
+            const slot = this.props.slot!;
+            TipsHelper.HideAbilityTooltip(pSelf);
             if (pSelf && pPanel == pSelf) {
                 if (!Entities.IsValidEntity(itemIndex)) {
                     return true;
@@ -42,8 +45,8 @@ export class CCPublicBagSlotItem extends CCPanel<ICCPublicBagSlotItem> {
                 pDisplayPanel.overrideentityindex = itemIndex;
                 pDisplayPanel.m_pPanel = pPanel;
                 pDisplayPanel.m_DragCompleted = false;
-                pDisplayPanel.m_DragType = "BackPackSlot";
-                pDisplayPanel.m_DragType_Extra = iType;
+                pDisplayPanel.m_DragType = iType;
+                pDisplayPanel.m_Slot = slot;
                 pDisplayPanel.bIsDragItem = true;
 
                 tDragCallbacks.displayPanel = pDisplayPanel;
@@ -109,46 +112,46 @@ export class CCPublicBagSlotItem extends CCPanel<ICCPublicBagSlotItem> {
                 }
                 let iDraggedItemIndex = pDraggedPanel.overrideentityindex;
                 if (iDraggedItemIndex && iDraggedItemIndex != -1) {
-                    // 合成格子
-                    if (iType == 2) {
-                        if (!ItemHelper.IsCombinable(iDraggedItemIndex)) {
-                            TipsHelper.showErrorMessage("dota_hud_error_uncombinable_item");
-                            pDraggedPanel.m_DragCompleted = true;
-                            return false;
-                        }
-                    }
+                    let from = pDraggedPanel.m_DragType! as PublicBagConfig.EBagSlotType;
+                    let to = iType;
+                    let fromslot = pDraggedPanel.m_Slot!;
+                    let toslot = slot;
+                    GGameScene.Local.CourierBagComp.MoveItem(from, fromslot, to, toslot);
+                    pDraggedPanel.m_DragCompleted = true;
+                    // // 合成格子
+                    // if (iType == PublicBagConfig.EBagSlotType.EquipCombineSlot) {
+                    //     if (!ItemHelper.IsCombinable(iDraggedItemIndex)) {
+                    //         TipsHelper.showErrorMessage("dota_hud_error_uncombinable_item");
+                    //         pDraggedPanel.m_DragCompleted = true;
+                    //         return false;
+                    //     }
+                    // }
+                    // GLogHelper.print("DragDrop", iDraggedItemIndex, slot, iType, pDraggedPanel.m_DragType)
+                    // let iCasterIndex = Abilities.GetCaster(iDraggedItemIndex);
+                    // switch (pDraggedPanel.m_DragType) {
+                    //     case "BackPackSlot":
+                    //         // if (pDraggedPanel.m_DragType_Extra == 2 && (itemIndex != -1 && !ItemHelper.IsCombinable(itemIndex))) {
+                    //         //     TipsHelper.showErrorMessage("dota_hud_error_uncombinable_item");
+                    //         //     pDraggedPanel.m_DragCompleted = true;
+                    //         //     return false;
+                    //         // }
 
-                    let iCasterIndex = Abilities.GetCaster(iDraggedItemIndex);
-                    switch (pDraggedPanel.m_DragType) {
-                        case "BackPackSlot":
-                            if (pDraggedPanel.m_DragType_Extra == 2 && (itemIndex != -1 && !ItemHelper.IsCombinable(itemIndex))) {
-                                TipsHelper.showErrorMessage("dota_hud_error_uncombinable_item");
-                                pDraggedPanel.m_DragCompleted = true;
-                                return false;
-                            }
-                            Game.PrepareUnitOrders({
-                                UnitIndex: iCasterIndex,
-                                OrderType: dotaunitorder_t.DOTA_UNIT_ORDER_MOVE_ITEM,
-                                TargetIndex: slot,
-                                AbilityIndex: iDraggedItemIndex,
-                                OrderIssuer: PlayerOrderIssuer_t.DOTA_ORDER_ISSUER_PASSED_UNIT_ONLY
-                            });
-                            pDraggedPanel.m_DragCompleted = true;
-                            break;
-                        case "InventorySlot":
-                        case "OverHeadSlot":
-                            Game.PrepareUnitOrders({
-                                UnitIndex: iCasterIndex,
-                                OrderType: dotaunitorder_t.DOTA_UNIT_ORDER_MOVE_ITEM,
-                                TargetIndex: slot,
-                                AbilityIndex: iDraggedItemIndex,
-                                OrderIssuer: PlayerOrderIssuer_t.DOTA_ORDER_ISSUER_PASSED_UNIT_ONLY
-                            });
-                            pDraggedPanel.m_DragCompleted = true;
-                            break;
-                        default:
-                            break;
-                    }
+                    //         pDraggedPanel.m_DragCompleted = true;
+                    //         break;
+                    //     case "InventorySlot":
+                    //     case "OverHeadSlot":
+                    //         Game.PrepareUnitOrders({
+                    //             UnitIndex: iCasterIndex,
+                    //             OrderType: dotaunitorder_t.DOTA_UNIT_ORDER_MOVE_ITEM,
+                    //             TargetIndex: slot,
+                    //             AbilityIndex: iDraggedItemIndex,
+                    //             OrderIssuer: PlayerOrderIssuer_t.DOTA_ORDER_ISSUER_PASSED_UNIT_ONLY
+                    //         });
+                    //         pDraggedPanel.m_DragCompleted = true;
+                    //         break;
+                    //     default:
+                    //         break;
+                    // }
                 }
                 return true;
             }
@@ -201,21 +204,16 @@ export class CCPublicBagSlotItem extends CCPanel<ICCPublicBagSlotItem> {
         const iCharge = Items.GetCurrentCharges(itemIndex);
 
         return (
-            <Panel className={CSSHelper.ClassMaker("CC_PublicBagSlotItem", { "has_charge": iCharge > 0 })} ref={this.__root__} draggable={true} hittest={true} hittestchildren={false}
+            <Panel className={CSSHelper.ClassMaker("CC_PublicBagSlotItem", { "has_charge": iCharge > 0 })}
+                ref={this.__root__} draggable={true} hittest={true} hittestchildren={false}
                 onactivate={() => { }}
                 onmouseover={(self) => {
                     if (itemIndex != -1 && Entities.IsValidEntity(itemIndex)) {
-                        // Tooltips.ShowAbilityTooltip(self, {
-                        //     abilityname: Abilities.GetAbilityName(itemIndex),
-                        //     abilityindex: itemIndex,
-                        //     entityindex: Items.GetPurchaser(itemIndex),
-                        //     // inventoryslot: inventoryslot,
-                        //     // level: Abilities.GetLevel(itemIndex),
-                        // });
+                        TipsHelper.ShowAbilityTooltip(self, Abilities.GetAbilityName(itemIndex), itemIndex,);
                     }
                 }}
                 onmouseout={(self) => {
-                    // Tooltips.HideAbilityTooltip(self);
+                    TipsHelper.HideAbilityTooltip(self);
                 }}
                 oncontextmenu={(self) => {
                     if (itemIndex != -1 && Entities.IsValidEntity(itemIndex)) {

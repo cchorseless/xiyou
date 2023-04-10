@@ -24,6 +24,12 @@ export class GameServiceSystem extends ET.SingletonComponent {
         return GameServiceConfig.EDifficultyChapter[this.DifficultyLevel] as string;
     }
 
+    getDifficultyNumberDes() {
+        if (this.DifficultyChapter == GameServiceConfig.EDifficultyChapter.endless) {
+            return this.DifficultyChapter + this.DifficultyLevel;
+        }
+        return this.DifficultyChapter;
+    }
     getPlayerGameSelection(playerid: PlayerID) {
         return this.tPlayerGameSelection[playerid + ""];
     }

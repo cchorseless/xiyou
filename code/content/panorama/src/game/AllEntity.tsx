@@ -18,7 +18,6 @@ import { FHeroCombination } from "./components/FakerHero/FHeroCombination";
 import { ItemEntityRoot } from "./components/Item/ItemEntityRoot";
 import { PlayerDataComponent } from "./components/Player/PlayerDataComponent";
 import { PlayerEntityRoot } from "./components/Player/PlayerEntityRoot";
-import { PublicShopComponent } from "./components/Public/PublicShopComponent";
 import { ERoundBoard } from "./components/Round/ERoundBoard";
 import { RoundManagerComponent } from "./components/Round/RoundManagerComponent";
 import { GameServiceSystemComponent } from "./system/GameStateSystemComponent";
@@ -57,7 +56,6 @@ PlayerEntityRoot;
 RoundManagerComponent;
 ERoundBoard;
 
-PublicShopComponent;
 PublicBagSystemComponent;
 
 

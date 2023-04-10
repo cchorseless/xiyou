@@ -19,7 +19,7 @@ export class CCPlayerInTeamItem extends CCPanel<ICCPlayerInTeamItem> {
     }
 
     onInitUI() {
-        GGameScene.GameServiceSystem.RegRef(this);
+        this.ListenUpdate(GGameScene.GameServiceSystem);
     }
 
     defaultStyle() {
@@ -29,7 +29,7 @@ export class CCPlayerInTeamItem extends CCPanel<ICCPlayerInTeamItem> {
 
     render() {
         const iPlayerID = this.props.iPlayerID;
-        const GamseStateSys = this.GetStateEntity(GGameScene.GameServiceSystem)!;
+        const GamseStateSys = (GGameScene.GameServiceSystem)!;
         const tGameSelection = GamseStateSys.getPlayerGameSelection(iPlayerID);
         const sCourierName = tGameSelection.Courier;
         const tCourierData = KVHelper.KVData().courier_units[sCourierName];

@@ -1,7 +1,6 @@
 
 import React from "react";
 import { GEventHelper } from "../../../../scripts/tscripts/shared/lib/GEventHelper";
-import { PlayerDataComponent } from "../../game/components/Player/PlayerDataComponent";
 import { ERoundBoard } from "../../game/components/Round/ERoundBoard";
 import { CSSHelper } from "../../helper/CSSHelper";
 import { CCImageNumber } from "../AllUIElement/CCImageNumber/CCImageNumber";
@@ -24,7 +23,7 @@ export class CCTopBarCenter<T extends NodePropsData> extends CCPanel<T> {
     onInitUI() {
         GEventHelper.AddEvent(ERoundBoard.name, GHandler.create(this,
             () => {
-                this.updateSelf();
+                this.UpdateSelf();
             }));
         this.UpdateState({ gametime: -1 });
         GTimerHelper.AddTimer(1, GHandler.create(this, () => {
@@ -77,14 +76,14 @@ export class CCTopBarGameCoin<T extends NodePropsData> extends CCPanel<T> {
     }
 
     onInitUI() {
-        GGameScene.Local.PlayerDataComp.RegRef(this);
+        this.ListenUpdate(GGameScene.Local.PlayerDataComp)
 
     }
     render() {
         if (!this.__root___isValid) {
             return this.defaultRender("CC_TopBarGameCoin");
         }
-        const playerdata = this.GetStateEntity<PlayerDataComponent>(GGameScene.Local.PlayerDataComp)!;
+        const playerdata = GGameScene.Local.PlayerDataComp;
         const coindes = [
             `${playerdata.population}/${playerdata.populationRoof}`,
             `${playerdata.gold}(+${playerdata.perIntervalGold})`,
