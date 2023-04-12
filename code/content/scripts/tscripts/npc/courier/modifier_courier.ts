@@ -100,4 +100,6 @@ export class modifier_courier extends BaseModifier_Plus {
     // CC_MANA_REGEN_CONSTANT(params: IModifierTable) {
     //     return -10000
     // }
+
+
 }

@@ -25,6 +25,7 @@ export class courier_base extends BaseNpc_Hero_Plus {
         this.addAbilityPlus(courier_challenge_wood.name);
         this.addAbilityPlus(courier_challenge_equip.name);
         this.addAbilityPlus(courier_challenge_artifact.name);
+
         this.SetIdleAcquire(false);
     }
 
@@ -62,6 +63,7 @@ export class courier_base extends BaseNpc_Hero_Plus {
     IsValidHero() {
         return GPlayerEntityRoot.GetOneInstance(this.GetPlayerID()).Hero == null;
     }
+
 
 
 

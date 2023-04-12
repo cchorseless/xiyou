@@ -5,72 +5,86 @@ import { ECombinationLabelItem } from "./ECombinationLabelItem";
 @GReloadable
 export class CombinationComponent extends ET.Component {
     onAwake(): void {
-        let domain = this.GetDomain<IBaseNpc_Plus>();
     }
 
-    AbilityCombination: string[] = [];
-    ItemCombination: string[] = [];
+    AbilityCombination: { [k: string]: string[] } = {};
+    ItemCombination: { [k: string]: string[] } = {};
+
     addAbilityRoot(abilityroot: IAbilityEntityRoot) {
+        if (abilityroot == null || this.ItemCombination[abilityroot.Id]) { return }
         let type = GGetRegClass<typeof ECombinationLabelItem>("ECombinationLabelItem");
         abilityroot.SectLabels.forEach((item) => {
             if (item && item.length > 0) {
                 let entity = this.AddChild(type, "Ability", abilityroot.Id, item);
-                this.AbilityCombination.push(entity.Id);
+                if (!this.AbilityCombination[abilityroot.Id]) {
+                    this.AbilityCombination[abilityroot.Id] = [];
+                }
+                this.AbilityCombination[abilityroot.Id].push(entity.Id);
             }
         });
     }
     removeAbilityRoot(abilityroot: IAbilityEntityRoot) {
-        for (let i = 0, len = this.AbilityCombination.length; i < len; i++) {
-            let entity = this.GetChild<ECombinationLabelItem>(this.AbilityCombination[i]);
+        let idlist = this.AbilityCombination[abilityroot.Id];
+        if (!idlist) { return }
+        idlist.forEach((entityid) => {
+            let entity = this.GetChild<ECombinationLabelItem>(entityid);
             if (entity) {
-                if (entity.SourceEntityId === abilityroot.Id) {
-                    entity.Dispose();
-                    this.AbilityCombination.splice(i, 1);
-                    i--;
-                    if (i >= this.AbilityCombination.length - 1) {
-                        break;
-                    }
-                }
+                entity.Dispose();
             }
-        }
+        });
+        delete this.AbilityCombination[abilityroot.Id];
     }
 
     getAllCombinations() {
         let r: ECombinationLabelItem[] = [];
-        [].concat(this.AbilityCombination, this.ItemCombination).forEach((entityid) => {
-            let entity = this.GetChild<ECombinationLabelItem>(entityid);
-            if (entity) {
-                r.push(entity);
-            }
-        });
+        for (let k in this.AbilityCombination) {
+            let idlist = this.AbilityCombination[k];
+            idlist.forEach((entityid) => {
+                let entity = this.GetChild<ECombinationLabelItem>(entityid);
+                if (entity) {
+                    r.push(entity);
+                }
+            });
+        };
+        for (let k in this.ItemCombination) {
+            let idlist = this.ItemCombination[k];
+            idlist.forEach((entityid) => {
+                let entity = this.GetChild<ECombinationLabelItem>(entityid);
+                if (entity) {
+                    r.push(entity);
+                }
+            });
+        };
         return r;
     }
 
     addItemRoot(itemroot: IItemEntityRoot) {
+        if (itemroot == null || this.ItemCombination[itemroot.Id]) { return }
         let type = GGetRegClass<typeof ECombinationLabelItem>("ECombinationLabelItem");
         itemroot.SectLabels.forEach((item) => {
             if (item && item.length > 0) {
                 let entity = this.AddChild(type, "Item", itemroot.Id, item);
-                this.ItemCombination.push(entity.Id);
+                if (!this.ItemCombination[itemroot.Id]) {
+                    this.ItemCombination[itemroot.Id] = [];
+                }
+                this.ItemCombination[itemroot.Id].push(entity.Id);
             }
         });
     }
 
     removeItemRoot(itemroot: IItemEntityRoot) {
-        for (let i = 0, len = this.ItemCombination.length; i < len; i++) {
-            let entity = this.GetChild<ECombinationLabelItem>(this.ItemCombination[i]);
+        if (itemroot == null) { return }
+        let idlist = this.ItemCombination[itemroot.Id];
+        if (!idlist) { return }
+        idlist.forEach((entityid) => {
+            let entity = this.GetChild<ECombinationLabelItem>(entityid);
             if (entity) {
-                if (entity.SourceEntityId === itemroot.Id) {
-                    entity.Dispose();
-                    this.ItemCombination.splice(i, 1);
-                    i--;
-                    if (i >= this.ItemCombination.length - 1) {
-                        break;
-                    }
-                }
+                entity.Dispose();
             }
-        }
+        });
+        delete this.AbilityCombination[itemroot.Id];
     }
+
 
     refreshCombination() {
         let r = this.GetChilds(ECombinationLabelItem);

@@ -5,9 +5,6 @@ import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 @registerAbility()
 export class item_imba_angelic_alliance extends BaseItem_Plus {
-    GetAbilityTextureName(): string {
-        return "imba_angelic_alliance";
-    }
     GetBehavior(): DOTA_ABILITY_BEHAVIOR | Uint64 {
         return DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_UNIT_TARGET;
     }
@@ -218,7 +215,7 @@ export class modifier_imba_angelic_alliance_debuff extends BaseModifier_Plus {
         return false;
     }
     GetTexture(): string {
-        return "imba_angelic_alliance";
+        return "imba/angelic_alliance";
     }
     GetEffectName(): string {
         return "particles/item/angelic_alliance/angelic_alliance_debuff.vpcf";
@@ -278,7 +275,7 @@ export class modifier_imba_angelic_alliance_buff extends BaseModifier_Plus {
         return false;
     }
     GetTexture(): string {
-        return "imba_angelic_alliance";
+        return "imba/angelic_alliance";
     }
     GetEffectName(): string {
         return "particles/item/angelic_alliance/angelic_alliance_buff.vpcf";
@@ -339,7 +336,7 @@ export class modifier_imba_angelic_alliance_buff extends BaseModifier_Plus {
 export class modifier_imba_angelic_alliance_buff_self extends BaseModifier_Plus {
     public target_status_resistance: any;
     GetTexture(): string {
-        return "imba_angelic_alliance";
+        return "imba/angelic_alliance";
     }
     GetEffectName(): string {
         return "particles/items2_fx/sange_active.vpcf";
@@ -443,6 +440,6 @@ export class modifier_imba_angelic_alliance_passive_disarm_cooldown extends Base
         return false;
     }
     GetTexture(): string {
-        return "imba_angelic_alliance";
+        return "imba/angelic_alliance";
     }
 }

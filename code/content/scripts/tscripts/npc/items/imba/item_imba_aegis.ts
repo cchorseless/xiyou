@@ -7,16 +7,14 @@ import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 @registerAbility()
 export class item_imba_aegis extends BaseItem_Plus {
-    GetAbilityTextureName(): string {
-        return "imba_aegis";
+    GetIntrinsicModifierName(): string {
+        return "modifier_item_imba_aegis";
     }
 }
 @registerModifier()
 export class modifier_item_imba_aegis extends BaseModifier_Plus {
     public reincarnate_time: number;
     BeCreated(p_0: any,): void {
-        if (IsServer()) {
-        }
         if (!IsServer()) {
             return;
         }
@@ -30,11 +28,9 @@ export class modifier_item_imba_aegis extends BaseModifier_Plus {
             2: Enum_MODIFIER_EVENT.ON_DEATH
         });
     } */
-    GetTexture(): string {
-        return "imba_aegis";
-    }
+
     GetPriority(): modifierpriority {
-        return 100;
+        return 4;
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.REINCARNATION)
     CC_ReincarnateTime(): number {

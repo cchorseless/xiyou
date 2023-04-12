@@ -214,8 +214,7 @@ export class BuildingManagerComponent extends ET.Component implements IRoundStat
             r = [false, "not  vaild vector"];
         }
         let currentround = playerRoot.RoundManagerComp().getCurrentBoardRound();
-        if (currentround.roundState != RoundConfig.ERoundBoardState.start
-            && !boardVec.isY(0)
+        if (currentround.roundState != RoundConfig.ERoundBoardState.start && !boardVec.isY(0)
         ) {
             r = [false, "move chess only in round start"];
         }
@@ -229,7 +228,10 @@ export class BuildingManagerComponent extends ET.Component implements IRoundStat
         let targetPos = ChessControlSystem.GetBoardGirdCenterVector3(boardVec);
         let oldNpcarr = ChessControlSystem.FindBoardInGirdChess(boardVec);
         //  人口判断
-        let iPopulationAdd = GBuildingSystem.GetInstance().GetBuildingPopulation(target.ConfigID);
+        let iPopulationAdd = 0;
+        if (!target.ChessComp().isPosInBattle()) {
+            iPopulationAdd = GBuildingSystem.GetInstance().GetBuildingPopulation(target.ConfigID);
+        }
         let PlayerDataComp = playerRoot.PlayerDataComp();
         let freePopulation = PlayerDataComp.getFreePopulation();
         if (oldNpcarr.length > 0) {

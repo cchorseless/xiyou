@@ -12,17 +12,16 @@ export class item_imba_abyssal_blade extends BaseItem_Plus {
     }
     OnSpellStart(): void {
         let caster = this.GetCasterPlus();
-        let ability = this;
         let target = this.GetCursorTarget();
         let sound_cast = "DOTA_Item.AbyssalBlade.Activate";
         let particle_abyssal = "particles/items_fx/abyssal_blade.vpcf";
         let modifier_bash = "modifier_imba_abyssal_blade_bash";
         let modifier_break = "modifier_imba_abyssal_blade_skull_break";
-        let active_stun_duration = ability.GetSpecialValueFor("active_stun_duration");
-        let actual_break_duration = ability.GetSpecialValueFor("actual_break_duration");
+        let active_stun_duration = this.GetSpecialValueFor("active_stun_duration");
+        let actual_break_duration = this.GetSpecialValueFor("actual_break_duration");
         EmitSoundOn(sound_cast, target);
         if (target.GetTeamNumber() != caster.GetTeamNumber()) {
-            if (target.TriggerSpellAbsorb(ability)) {
+            if (target.TriggerSpellAbsorb(this)) {
                 return undefined;
             }
         }
@@ -46,10 +45,10 @@ export class item_imba_abyssal_blade extends BaseItem_Plus {
         }
         ApplyDamage(damageTable);
         if (target.IsAlive()) {
-            target.AddNewModifier(caster, ability, modifier_bash, {
+            target.AddNewModifier(caster, this, modifier_bash, {
                 duration: active_stun_duration * (1 - target.GetStatusResistance())
             });
-            target.AddNewModifier(caster, ability, modifier_break, {
+            target.AddNewModifier(caster, this, modifier_break, {
                 duration: actual_break_duration * (1 - target.GetStatusResistance())
             });
         }
@@ -87,13 +86,13 @@ export class modifier_imba_abyssal_blade extends BaseModifier_Plus {
             return this.GetSpecialValueFor("bonus_strength");
         }
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
     CC_GetModifierPreAttack_BonusDamage(): number {
         if (this.GetAbilityPlus()) {
             return this.GetSpecialValueFor("bonus_damage");
         }
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS)
     CC_GetModifierHealthBonus(): number {
         if (this.GetAbilityPlus()) {
             return this.GetSpecialValueFor("bonus_health");

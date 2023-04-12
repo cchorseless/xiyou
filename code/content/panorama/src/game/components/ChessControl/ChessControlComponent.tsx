@@ -39,7 +39,7 @@ export class ChessControlComponent extends ET.Component {
         const RIGHT_BUTTON = 1;
         GameUI.SetMouseCallback((eventName, mouseButton) => {
             if (Game.IsGamePaused()) { return CONSUME_EVENT; }
-            GLogHelper.print("OnMouseCallback", this.IsDisposed(), mouseButton);
+            // GLogHelper.print("OnMouseCallback", this.IsDisposed(), mouseButton);
             // if (this.IsDisposed()) { return CONTINUE_EVENT; }
             if (GameUI.GetClickBehaviors() != CLICK_BEHAVIORS.DOTA_CLICK_BEHAVIOR_NONE) return CONTINUE_EVENT;
             if (eventName === "pressed") {

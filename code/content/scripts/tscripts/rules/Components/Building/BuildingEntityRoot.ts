@@ -5,6 +5,7 @@ import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { modifier_jiaoxie_wudi } from "../../../npc/modifier/battle/modifier_jiaoxie_wudi";
 import { modifier_mana_control } from "../../../npc/modifier/battle/modifier_mana_control";
 import { modifier_out_of_game } from "../../../npc/modifier/battle/modifier_out_of_game";
+import { serializeETProps } from "../../../shared/lib/Entity";
 import { GEventHelper } from "../../../shared/lib/GEventHelper";
 import { THeroUnit } from "../../../shared/service/hero/THeroUnit";
 import { BattleUnitEntityRoot } from "../BattleUnit/BattleUnitEntityRoot";
@@ -16,6 +17,8 @@ export class BuildingEntityRoot extends BattleUnitEntityRoot {
     private iGoldCost: number;
     /**累计造成伤害 */
     public fDamage: number;
+    @serializeETProps()
+    public InventoryLock: { [slot: string]: number };
     public onAwake(playerid: PlayerID, conf: string) {
         (this.BelongPlayerid as any) = playerid;
         (this.ConfigID as any) = conf;
@@ -28,6 +31,10 @@ export class BuildingEntityRoot extends BattleUnitEntityRoot {
             this.LoadServerData(_hero);
         }), this.BelongPlayerid);
         this.SetStar(1);
+        this.SetInventoryLock(2, 2);
+        this.SetInventoryLock(3, 3);
+        this.SetInventoryLock(4, 4);
+        this.SetInventoryLock(5, 5);
         this.SetUIOverHead(true, false);
         this.InitSyncClientInfo();
         this.JoinInRound();
@@ -76,12 +83,45 @@ export class BuildingEntityRoot extends BattleUnitEntityRoot {
         return GBuildingSystem.GetInstance().GetBuildingPopulation(this.ConfigID)
     }
     /**
+     * 设置Inventory星级锁定
+     * @param slot 
+     * @param value 
+     */
+    SetInventoryLock(slot: number, iStar: number) {
+        if (!this.InventoryLock) {
+            this.InventoryLock = {};
+        }
+        let domain = this.GetDomain<IBaseNpc_Plus>();
+        if (iStar < 0) {
+            delete this.InventoryLock[slot + ""];
+            let item = domain.GetItemInSlot(slot);
+            if (item && item.IsItemBlank()) {
+                domain.RemoveItem(item);
+            }
+        }
+        else {
+            this.InventoryLock[slot + ""] = iStar;
+            domain.AddEmptyItemInSlot(slot);
+        }
+    }
+
+
+
+
+    /**
      * 升星
      * @param n
      */
     AddStar(n: number) {
         this.SetStar(this.iStar + n);
         let domain = this.GetDomain<IBaseNpc_Plus>();
+        if (this.InventoryLock) {
+            Object.keys(this.InventoryLock).forEach((slot) => {
+                if (this.InventoryLock[slot] <= this.iStar) {
+                    this.SetInventoryLock(GToNumber(slot), -1)
+                }
+            })
+        }
         // "particles/econ/events/fall_2021/hero_levelup_fall_2021.vpcf"
         // "particles/generic_hero_status/hero_levelup.vpcf"
         // "particles/units/heroes/hero_oracle/oracle_false_promise_cast_enemy.vpcf"

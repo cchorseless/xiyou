@@ -1,11 +1,13 @@
 import { PanelAttributes } from "@demon673/react-panorama";
 import React, { createRef } from "react";
 import { GameEnum } from "../../../../../scripts/tscripts/shared/GameEnum";
+import { PublicBagConfig } from "../../../../../scripts/tscripts/shared/PublicBagConfig";
 import { CSSHelper } from "../../../helper/CSSHelper";
 import { AbilityHelper, ItemHelper } from "../../../helper/DotaEntityHelper";
 import { FuncHelper } from "../../../helper/FuncHelper";
 import { TipsHelper } from "../../../helper/TipsHelper";
 import { CCMainPanel } from "../../MainPanel/CCMainPanel";
+import { CCItemImage } from "../CCItem/CCItemImage";
 import { CCItemInfoDialog } from "../CCItem/CCItemInfoDialog";
 import { CCPanel } from "../CCPanel/CCPanel";
 import { CCAbilityInfoDialog } from "./CCAbilityInfoDialog";
@@ -15,6 +17,7 @@ export interface ICCAbilityPanel extends PanelAttributes {
     overrideentityindex?: ItemEntityIndex,
     overridedisplaykeybind?: DOTAKeybindCommand_t,
     slot?: number,
+    iUnlockStar?: number,
     dragtype?: string,
     dragstartcallback?: (tDragCallbacks: DragSettings, overrideentityindex: ItemEntityIndex, overridedisplaykeybind: DOTAKeybindCommand_t, slot: number, dragtype: string) => boolean;
     dragdropcallback?: (pDraggedPanel: IDragPanel, overrideentityindex: ItemEntityIndex, overridedisplaykeybind: DOTAKeybindCommand_t, slot: number, dragtype: string) => boolean;
@@ -29,6 +32,7 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
         draggable: false,
         dragtype: "InventorySlot",
         slot: -1,
+        iUnlockStar: -1,
     }
     defaultClass() {
         const overrideentityindex = this.props.overrideentityindex!;
@@ -76,7 +80,7 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
                 const dragtype = this.props.dragtype!;
                 const slot = this.props.slot!;
                 if (pSelf && pPanel == this.AbilityButton.current) {
-                    if (!pSelf || pSelf.BHasClass("no_ability")) {
+                    if (!pSelf || (this.props.iUnlockStar && this.props.iUnlockStar > -1) || pSelf.BHasClass("no_ability")) {
                         return true;
                     }
                     if (typeof dragstartcallback == "function" && !dragstartcallback(tDragCallbacks, overrideentityindex, overridedisplaykeybind, slot, dragtype)) {
@@ -100,6 +104,7 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
                         pDisplayPanel.m_DragCompleted = false;
                         pDisplayPanel.m_DragType = dragtype;
                         pDisplayPanel.m_Slot = slot;
+                        pDisplayPanel.bIsDragItem = Abilities.IsItem(iAbilityIndex);
                         pDisplayPanel.AddClass(dragtype);
                         tDragCallbacks.displayPanel = pDisplayPanel;
                         tDragCallbacks.offsetX = 0;
@@ -112,6 +117,9 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
             });
             $.RegisterEventHandler("DragLeave", pSelf, (pPanel: Panel, pDraggedPanel: IDragPanel) => {
                 const dragtype = this.props.dragtype!;
+                if (this.props.iUnlockStar && this.props.iUnlockStar > -1) {
+                    return false
+                }
                 if (pDraggedPanel.m_pPanel == null) {
                     return false;
                 }
@@ -131,7 +139,9 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
             });
             $.RegisterEventHandler("DragEnter", pSelf, (pPanel: Panel, pDraggedPanel: IDragPanel) => {
                 const dragtype = this.props.dragtype!;
-
+                if (this.props.iUnlockStar && this.props.iUnlockStar > -1) {
+                    return true
+                }
                 if (pDraggedPanel.m_pPanel == null) {
                     return true;
                 }
@@ -153,6 +163,9 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
                 const dragtype = this.props.dragtype!;
                 const overridedisplaykeybind = this.props.overridedisplaykeybind!;
                 const slot = this.props.slot!;
+                if (this.props.iUnlockStar && this.props.iUnlockStar > -1) {
+                    return true
+                }
                 if (pDraggedPanel.m_pPanel == null) {
                     return true;
                 }
@@ -165,6 +178,10 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
                         return true;
                     }
                     if (typeof dragdropcallback == "function" && dragdropcallback(pDraggedPanel, overrideentityindex, overridedisplaykeybind, slot, dragtype)) {
+                        let m_Slot = pDraggedPanel.m_Slot!;
+                        if (m_Slot > PublicBagConfig.DOTA_ITEM_SLOT_MAX && slot <= PublicBagConfig.DOTA_ITEM_SLOT_MAX) {
+                            this.UpdateState({ "m_cooldown_ready": false, })
+                        }
                         pDraggedPanel.m_DragCompleted = true;
                     }
                     return true;
@@ -229,6 +246,10 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
 
         let iCasterMana = iCasterIndex == -1 ? 0 : Entities.GetMana(iCasterIndex);
         let iAbilityPoints = Entities.GetAbilityPoints(iCasterIndex);
+
+        if (bIsItem && overrideentityindex > -1 && Abilities.GetAbilityName(overrideentityindex) !== "item_blank") {
+
+        }
 
         let iKeybindCommand = overridedisplaykeybind;
         let sHotkey = Game.GetKeybindForCommand(iKeybindCommand);
@@ -457,7 +478,7 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
                 if (!$.GetContextPanel().BHasClass("dragging") && overrideentityindex != -1 && Entities.IsValidEntity(overrideentityindex)) {
                     let iCasterIndex = Abilities.GetCaster(overrideentityindex);
                     let sItemName = Abilities.GetAbilityName(overrideentityindex);
-                    let bSlotInStash = slot >= GameEnum.Dota2.EDotaItemSlot.DOTA_ITEM_STASH_MIN;
+                    let bSlotInStash = slot >= PublicBagConfig.DOTA_ITEM_STASH_MIN;
                     let bOwned = Entities.GetPlayerOwnerID(iCasterIndex) == Players.GetLocalPlayer();
                     let bControllable = Entities.IsControllableByPlayer(iCasterIndex, Players.GetLocalPlayer());
                     let bSellable = Items.IsSellable(overrideentityindex) && Items.CanBeSoldByLocalPlayer(overrideentityindex);
@@ -575,11 +596,14 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
         const overrideentityindex = this.props.overrideentityindex!;
         const slot = this.props.slot!;
         if (overrideentityindex != -1 && Entities.IsValidEntity(overrideentityindex)) {
+            if (Abilities.GetAbilityName(overrideentityindex) == "item_blank") { return }
             TipsHelper.ShowAbilityTooltip(p, Abilities.GetAbilityName(overrideentityindex), Abilities.GetCaster(overrideentityindex), slot)
             // $.DispatchEvent("DOTAShowAbilityTooltip", this.AbilityButton.current!, Abilities.GetAbilityName(overrideentityindex), Abilities.GetCaster(overrideentityindex), overrideentityindex, slot
         }
     }
     private onbtn_moveout(p: Panel) {
+        const overrideentityindex = this.props.overrideentityindex!;
+        if (Abilities.GetAbilityName(overrideentityindex) == "item_blank") { return }
         TipsHelper.HideAbilityTooltip(p)
         // const ccMainPanel = CCMainPanel.GetInstance();
         // ccMainPanel?.HideToolTip();
@@ -594,6 +618,7 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
         const dialogVariables = this.GetState("dialogVariables", {}) as any;
         const overrideentityindex = this.props.overrideentityindex!;
         const draggable = this.props.draggable!;
+        const iUnlockStar = this.props.iUnlockStar!;
         return (
             this.__root___isValid &&
             <Panel ref={this.__root__} {...this.initRootAttrs()}>
@@ -610,8 +635,7 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
                                 <DOTAScenePanel id="AutoCasting" map="scenes/hud/autocasting" renderdeferred={false} rendershadows={false} camera="camera_1" hittest={false} particleonly={true} />
                             </Panel>
                             <Panel id="ButtonSize" >
-                                <Panel id="AbilityButton" draggable={draggable} ref={this.AbilityButton}
-                                    style={{ tooltipPosition: "top" }}
+                                <Panel id="AbilityButton" draggable={draggable} ref={this.AbilityButton} style={{ tooltipPosition: "top" }}
                                     onactivate={(self) => { this.onbtn_leftclick() }}
                                     oncontextmenu={(self) => this.onbtn_rightclick()}
                                     onmouseover={(self) => this.onbtn_moveover(self)}
@@ -619,7 +643,8 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
                                 >
                                     {/* <DOTAAbilityImage id="AbilityImage" showtooltip={true} hittest={true} ref={this.AbilityImage} /> */}
                                     {/* scaling="stretch-to-fit-x-preserve-aspect" */}
-                                    <DOTAItemImage id="ItemImage" itemname={Abilities.GetAbilityName(overrideentityindex)} contextEntityIndex={overrideentityindex} showtooltip={false} hittest={false} hittestchildren={false} />
+                                    {/* <DOTAItemImage id="ItemImage" itemname={Abilities.GetAbilityName(overrideentityindex)} contextEntityIndex={overrideentityindex} showtooltip={false} hittest={false} hittestchildren={false} /> */}
+                                    <CCItemImage id="ItemImage" itemname={Abilities.GetAbilityName(overrideentityindex)} contextEntityIndex={overrideentityindex} iUnlockStar={iUnlockStar} showtooltip={false} hittest={false} hittestchildren={false} />
                                     <Panel hittest={false} id="AbilityBevel" />
                                     <Panel hittest={false} id="ShineContainer" >
                                         <Panel hittest={false} id="Shine" />

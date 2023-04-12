@@ -116,7 +116,7 @@ export class CCPublicBagSlotItem extends CCPanel<ICCPublicBagSlotItem> {
                     let to = iType;
                     let fromslot = pDraggedPanel.m_Slot!;
                     let toslot = slot;
-                    GGameScene.Local.CourierBagComp.MoveItem(from, fromslot, to, toslot);
+                    GGameScene.Local.CourierBagComp.MoveItem(from, fromslot, to, toslot, Abilities.GetCaster(iDraggedItemIndex));
                     pDraggedPanel.m_DragCompleted = true;
                     // // 合成格子
                     // if (iType == PublicBagConfig.EBagSlotType.EquipCombineSlot) {
@@ -166,22 +166,31 @@ export class CCPublicBagSlotItem extends CCPanel<ICCPublicBagSlotItem> {
                     if (iDraggedItemIndex && iDraggedItemIndex != -1) {
                         let iCasterIndex = Abilities.GetCaster(iDraggedItemIndex);
                         switch (pDraggedPanel.m_DragType) {
-                            case "BackPackSlot":
+                            case PublicBagConfig.EBagSlotType.BackPackSlot:
+                            case PublicBagConfig.EBagSlotType.PublicBagSlot:
+                            case PublicBagConfig.EBagSlotType.EquipCombineSlot:
                                 let iTargetIndex = UnitHelper.GetCursorUnit();
                                 if (iTargetIndex != -1) {
-                                    Game.PrepareUnitOrders({
-                                        OrderType: dotaunitorder_t.DOTA_UNIT_ORDER_GIVE_ITEM,
-                                        UnitIndex: iCasterIndex,
-                                        TargetIndex: iTargetIndex,
-                                        AbilityIndex: iDraggedItemIndex,
-                                    });
+                                    GGameScene.Local.CourierBagComp.MoveItem(
+                                        pDraggedPanel.m_DragType,
+                                        pDraggedPanel.m_Slot!,
+                                        PublicBagConfig.EBagSlotType.InventorySlot,
+                                        0,
+                                        iTargetIndex);
+                                    // Game.PrepareUnitOrders({
+                                    //     OrderType: dotaunitorder_t.DOTA_UNIT_ORDER_GIVE_ITEM,
+                                    //     UnitIndex: iCasterIndex,
+                                    //     TargetIndex: iTargetIndex,
+                                    //     AbilityIndex: iDraggedItemIndex,
+                                    // });
                                 } else {
-                                    Game.PrepareUnitOrders({
-                                        OrderType: dotaunitorder_t.DOTA_UNIT_ORDER_DROP_ITEM,
-                                        UnitIndex: iCasterIndex,
-                                        AbilityIndex: iDraggedItemIndex,
-                                        Position: Game.ScreenXYToWorld(...GameUI.GetCursorPosition()),
-                                    });
+                                    TipsHelper.showErrorMessage("背包物品无法扔在地上")
+                                    // Game.PrepareUnitOrders({
+                                    //     OrderType: dotaunitorder_t.DOTA_UNIT_ORDER_DROP_ITEM,
+                                    //     UnitIndex: iCasterIndex,
+                                    //     AbilityIndex: iDraggedItemIndex,
+                                    //     Position: Game.ScreenXYToWorld(...GameUI.GetCursorPosition()),
+                                    // });
                                 }
                                 break;
                             default:
@@ -190,7 +199,6 @@ export class CCPublicBagSlotItem extends CCPanel<ICCPublicBagSlotItem> {
                         }
                     }
                 }
-
                 pDraggedPanel.DeleteAsync(-1);
                 pPanel.RemoveClass("dragging_from");
             }

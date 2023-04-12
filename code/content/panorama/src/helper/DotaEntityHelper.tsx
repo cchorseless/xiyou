@@ -999,20 +999,20 @@ export module AbilityHelper {
 
 export module UnitHelper {
 
-    export function GetCursorUnit(iTeam: number = -1) {
+    export function GetCursorUnit(iTeam: number = -1): EntityIndex {
         let vPosCursor = GameUI.GetCursorPosition();
         let world_position = GameUI.GetScreenWorldPosition(vPosCursor);
         if (world_position == null) {
-            return -1;
+            return -1 as EntityIndex;
         }
         let targets = GameUI.FindScreenEntities(vPosCursor);
         targets = targets.filter(e => e.accurateCollision);
         if (iTeam != -1) {
-            targets.filter(e => Entities.GetTeamNumber(e.entityIndex) == iTeam);
+            targets = targets.filter(e => Entities.GetTeamNumber(e.entityIndex) == iTeam);
         }
-        targets = targets.filter(e => (!Entities.IsIllusion(e.entityIndex)) && (Entities.GetClassname(e.entityIndex) == "npc_dota_creature" || Entities.IsRealHero(e.entityIndex)) && Entities.IsInventoryEnabled(e.entityIndex));
+        targets = targets.filter(e => (!Entities.IsIllusion(e.entityIndex)) && (Entities.IsCreature(e.entityIndex) || Entities.IsConsideredHero(e.entityIndex) || Entities.IsRealHero(e.entityIndex)) && Entities.IsInventoryEnabled(e.entityIndex));
         if (targets.length == 0) {
-            return -1;
+            return -1 as EntityIndex;
         }
         targets.sort((a, b) => Game.Length2D(Entities.GetAbsOrigin(a.entityIndex), world_position!) - Game.Length2D(Entities.GetAbsOrigin(b.entityIndex), world_position!));
         return targets[0].entityIndex;
@@ -1076,7 +1076,9 @@ export module UnitHelper {
         }
         return -1 as BuffID;
     };
-
+    // export function GetEntityInventoryLock(iUnitEntIndex: EntityIndex) {
+    //     return NetHelper.GetDotaEntityData(iUnitEntIndex, "inventory_lock") as { [key: string]: number };
+    // };
     export function GetUnitData(iUnitEntIndex: EntityIndex, sFuncName: string) {
         GameEvents.SendEventClientSide(GameProtocol.Protocol.custom_call_get_unit_data as any, {
             unit_entindex: iUnitEntIndex,

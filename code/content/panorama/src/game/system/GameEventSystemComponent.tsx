@@ -19,7 +19,8 @@ export class GameEventSystemComponent extends ET.SingletonComponent {
         /**物品位置变动 */
         EventHelper.addGameEvent(GameEnum.GameEvent.dota_inventory_changed, GHandler.create(this, (e) => {
             // 通知服务器
-            NetHelper.SendToLua(GameProtocol.Protocol.req_ITEM_SLOT_CHANGE, e);
+            let entityindex = Players.GetLocalPlayerPortraitUnit();
+            NetHelper.SendToLua(GameProtocol.Protocol.req_ITEM_SLOT_CHANGE, entityindex);
         }));
         /**监听错误信息 */
         NetHelper.ListenOnLua(GameProtocol.Protocol.push_error_message,

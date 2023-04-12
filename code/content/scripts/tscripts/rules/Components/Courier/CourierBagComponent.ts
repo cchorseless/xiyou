@@ -160,7 +160,15 @@ export class CourierBagComponent extends CourierBag {
         }
     }
 
-
+    /**
+     * 移动物品
+     * @param from 
+     * @param fromslot 
+     * @param to 
+     * @param toslot 
+     * @param toNpc 
+     * @returns 
+     */
     MoveItem(from: PublicBagConfig.EBagSlotType, fromslot: number, to: PublicBagConfig.EBagSlotType, toslot: number, toNpc?: IBaseNpc_Plus) {
         if (from == to && fromslot == toslot) { return; }
         this.AllItem[PublicBagConfig.EBagSlotType.BackPackSlot] = this.AllItem[PublicBagConfig.EBagSlotType.BackPackSlot] || {};
@@ -208,6 +216,12 @@ export class CourierBagComponent extends CourierBag {
                 if (toNpc == null) { return; }
                 this.getOutItem(fromitem);
                 toNpc.AddItemOrInGround(fromitem.GetDomain<IBaseItem_Plus>())
+                if (toNpc.ETRoot) {
+                    let npcroot = toNpc.ETRoot.As<IBattleUnitEntityRoot>()
+                    if (npcroot.InventoryComp && npcroot.InventoryComp()) {
+                        npcroot.InventoryComp().putInItem(fromitem);
+                    }
+                }
                 this.SyncClient();
                 return
             }
@@ -238,6 +252,12 @@ export class CourierBagComponent extends CourierBag {
                 if (toNpc == null) { return; }
                 publicbag.getOutItem(fromitem);
                 toNpc.AddItemOrInGround(fromitem.GetDomain<IBaseItem_Plus>())
+                if (toNpc.ETRoot) {
+                    let npcroot = toNpc.ETRoot.As<IBattleUnitEntityRoot>()
+                    if (npcroot.InventoryComp && npcroot.InventoryComp()) {
+                        npcroot.InventoryComp().putInItem(fromitem);
+                    }
+                }
                 this.SyncClient();
                 return
             }
@@ -266,9 +286,61 @@ export class CourierBagComponent extends CourierBag {
                 publicbag.putInItem(fromitem);
                 return
             }
-
+            else if (to == PublicBagConfig.EBagSlotType.InventorySlot) {
+                if (toNpc == null) { return; }
+                this.getOutItem(fromitem, PublicBagConfig.EBagSlotType.EquipCombineSlot);
+                toNpc.AddItemOrInGround(fromitem.GetDomain<IBaseItem_Plus>())
+                if (toNpc.ETRoot) {
+                    let npcroot = toNpc.ETRoot.As<IBattleUnitEntityRoot>()
+                    if (npcroot.InventoryComp && npcroot.InventoryComp()) {
+                        npcroot.InventoryComp().putInItem(fromitem);
+                    }
+                }
+                this.SyncClient();
+                return
+            }
         }
-
+        else if (from == PublicBagConfig.EBagSlotType.InventorySlot) {
+            if (toNpc == null || toNpc.ETRoot == null) { return; }
+            let npcroot = toNpc.ETRoot.As<IBattleUnitEntityRoot>();
+            if (!npcroot.InventoryComp || !npcroot.InventoryComp()) {
+                return
+            }
+            let fromitem = npcroot.InventoryComp().getItemRootBySlot(fromslot);
+            if (fromitem == null) { return; }
+            let itemEntity = fromitem.GetDomain<IBaseItem_Plus>();
+            if (to == PublicBagConfig.EBagSlotType.BackPackSlot) {
+                if (!this.IsItemEmpty()) {
+                    EventHelper.ErrorMessage("背包已满")
+                    return;
+                }
+                toNpc.TakeItem(itemEntity);
+                npcroot.InventoryComp().getOutItem(fromitem, fromslot)
+                this.putInItem(fromitem);
+                return
+            }
+            else if (to == PublicBagConfig.EBagSlotType.PublicBagSlot) {
+                let publicbag = GPublicBagSystem.GetInstance();
+                if (!publicbag.IsEmpty()) {
+                    EventHelper.ErrorMessage("公共背包已满")
+                    return;
+                }
+                toNpc.TakeItem(itemEntity);
+                npcroot.InventoryComp().getOutItem(fromitem, fromslot)
+                publicbag.putInItem(fromitem);
+                return
+            }
+            else if (to == PublicBagConfig.EBagSlotType.EquipCombineSlot) {
+                if (!this.IsItemEmpty(PublicBagConfig.EBagSlotType.EquipCombineSlot)) {
+                    EventHelper.ErrorMessage("合成槽位已满")
+                    return;
+                }
+                toNpc.TakeItem(itemEntity);
+                npcroot.InventoryComp().getOutItem(fromitem, fromslot)
+                this.putInItem(fromitem, PublicBagConfig.EBagSlotType.EquipCombineSlot);
+                return
+            }
+        }
 
 
 
@@ -277,5 +349,33 @@ export class CourierBagComponent extends CourierBag {
 
 
 
-
+    /**
+     * 出售物品
+     * @param from 
+     * @param fromslot 
+     */
+    SellItem(from: PublicBagConfig.EBagSlotType, fromslot: number) {
+        this.AllItem[PublicBagConfig.EBagSlotType.BackPackSlot] = this.AllItem[PublicBagConfig.EBagSlotType.BackPackSlot] || {};
+        this.AllItem[PublicBagConfig.EBagSlotType.EquipCombineSlot] = this.AllItem[PublicBagConfig.EBagSlotType.EquipCombineSlot] || {};
+        const items = this.AllItem[PublicBagConfig.EBagSlotType.BackPackSlot];
+        const itemEquipCombine = this.AllItem[PublicBagConfig.EBagSlotType.EquipCombineSlot];
+        if (from == PublicBagConfig.EBagSlotType.BackPackSlot) {
+            let fromitem = this.getItemByIndex(fromslot + "");
+            if (fromitem == null) { return; }
+            this.getOutItem(fromitem);
+            fromitem.Dispose();
+            this.SyncClient();
+            return;
+        }
+        else if (from == PublicBagConfig.EBagSlotType.EquipCombineSlot) {
+            let fromitem = this.getItemByIndex(fromslot + "");
+            if (fromitem == null) { return; }
+            this.getOutItem(fromitem, PublicBagConfig.EBagSlotType.EquipCombineSlot);
+            fromitem.Dispose();
+            this.SyncClient();
+            return;
+        }
+        else if (from == PublicBagConfig.EBagSlotType.InventorySlot) {
+        }
+    }
 }

@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { createRef } from "react";
 import { PublicBagConfig } from "../../../../scripts/tscripts/shared/PublicBagConfig";
 import { ERoundBoard } from "../../game/components/Round/ERoundBoard";
 
@@ -336,15 +336,18 @@ export class CCPublicShopBagPanel extends CCPanel<ICCPublicBagPanel> {
         this.__root__.current!.SetHasClass("ShowPublicShopBag", isshow)
     }
 
+    SellDragArea = createRef<Panel>();
     render() {
         return (
             <Panel id="CC_PublicShopBagPanel" ref={this.__root__} hittest={false} >
                 {/* <CCIcon_XClose type="Tui7" align="right top" onactivate={() => this.showSelf(false)} /> */}
                 <CCPanelBG id="ShopLeft" scroll="y">
-                    <CCGoldShop />
-                    <CCWoodShop />
-                    <CCRoundShop />
-                    <CCRandomShop />
+                    <Panel id="SellDragArea" ref={this.SellDragArea}>
+                        <CCGoldShop />
+                        <CCWoodShop />
+                        <CCRoundShop />
+                        <CCRandomShop />
+                    </Panel>
                 </CCPanelBG>
                 <CCPanelBG id="ShopRight"  >
                     <CCPublicBag />

@@ -9,16 +9,22 @@ declare global {
  * 执行顺讯 装饰器=>DeclareFunctions=>constructor=>OnCreate=>Init
  */
 export class BaseModifier_Plus extends BaseModifier {
+    /**
+     * @Server
+     * @param bCreated 
+     * @returns 
+     */
     CheckUnique?(bCreated = false) {
-        let hParent = this.GetParent();
+        if (!IsServer()) { return }
+        let hParent = this.GetParentPlus();
         if (bCreated) {
             let mod = hParent.FindAllModifiersByName(this.GetName());
             if (mod.length >= 2) {
                 this.SetStackCount(1);
-                return true;
+                return;
             } else {
                 this.SetStackCount(0);
-                return false;
+                return;
             }
         } else {
             if (this.GetStackCount() == 0) {
@@ -27,7 +33,6 @@ export class BaseModifier_Plus extends BaseModifier {
                     mod.SetStackCount(0);
                 }
             }
-            return undefined;
         }
     }
     CheckUniqueValue?(value: number, tSuperiorModifierNames: string[]) {

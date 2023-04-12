@@ -49,6 +49,7 @@ export class GameSetting {
         GameRules.SetHeroSelectPenaltyTime(0);
         GameRules.SetStrategyTime(0.5);
         GameRules.SetShowcaseTime(0);
+
         GameRules.SetPreGameTime(3);
         GameRules.SetPostGameTime(3000);
         GameRules.SetTreeRegrowTime(10);
@@ -83,6 +84,8 @@ export class GameSetting {
         //#endregion
         // GameRules.Addon.Instance.SetCustomHeroMaxLevel(HERO_MAX_LEVEL)
         // GameRules.Addon.Instance.SetCustomXPRequiredToReachNextLevel(HERO_XP_PER_LEVEL_TABLE)
+        // 设置背包物品交换后冷却时间
+        GameRules.Addon.Instance.SetCustomBackpackSwapCooldown(0);
         /**天气 */
         GameRules.Addon.Instance.SetWeatherEffectsDisabled(true);
         GameRules.Addon.Instance.SetAlwaysShowPlayerNames(true);
@@ -161,6 +164,30 @@ export class GameSetting {
             return true
         }, this)
         GameMode.SetItemAddedToInventoryFilter((event: ItemAddedToInventoryFilterEvent) => {
+            // item_entindex_const	-- 物品
+            // inventory_parent_entindex_const	-- 单位
+            // suggested_slot	-1 -- 默认-1 如果指定了数字，对应物品栏为空则放入，不为空则直接掉在地上
+            // item_parent_entindex_const	物品容器
+            // let hTarget = EntIndexToHScript(event.inventory_parent_entindex_const) as IBaseNpc_Plus;
+            // let hItem = EntIndexToHScript(event.item_entindex_const) as IBaseItem_Plus;
+            // let hItemParent = EntIndexToHScript(event.item_parent_entindex_const) as IBaseNpc_Plus;
+            // let iPlayerID = hTarget.GetPlayerOwnerID();
+            // let suggested_slot = event.suggested_slot;
+            // if (!GFuncEntity.IsValid(hItem)) { return true }
+            // // 处理组件
+            // let itemroot = hItem.ETRoot;
+            // let npcroot = hTarget.ETRoot;
+            // if (itemroot && npcroot) {
+            //     let InventoryComp = npcroot.As<IBattleUnitEntityRoot>().InventoryComp();
+            //     if (InventoryComp) {
+            //         GLogHelper.print("ItemAddedToInventoryFilter", suggested_slot)
+            //         if (suggested_slot == -1) {
+            //             InventoryComp.dropGroundItem(itemroot as IItemEntityRoot);
+            //         } else {
+            //             InventoryComp.putInItem(itemroot as IItemEntityRoot);
+            //         }
+            //     }
+            // }
             return true
         }, this)
         // GameMode:SetBountyRunePickupFilter(Dynamic_Wrap(public, "BountyRunePickupFilter"), public)

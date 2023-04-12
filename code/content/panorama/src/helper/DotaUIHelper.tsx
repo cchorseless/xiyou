@@ -378,7 +378,6 @@ export module DotaUIHelper {
         // 计分板按钮
         FindDotaHudElement("ToggleScoreboardButton")!.style.opacity = "0";
         RegAbilityItemToolTipEvent()
-        RegDragEvent();
 
     }
     export function Quit() {

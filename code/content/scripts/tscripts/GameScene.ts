@@ -136,47 +136,52 @@ export class GameScene {
                 if (item.ETRoot && unit.ETRoot) {
                     let itemroot = item.ETRoot.As<IItemEntityRoot>();
                     let npcroot = unit.ETRoot.As<IBattleUnitEntityRoot>()
-                    if (npcroot.InventoryComp()) {
-                        npcroot.InventoryComp().addItemRoot(itemroot);
+                    if (npcroot.InventoryComp && npcroot.InventoryComp()) {
+                        npcroot.InventoryComp().putInItem(itemroot);
                     }
                 }
             }
         }));
         // 道具缺失事件
-        EventHelper.addGameEvent(GameEnum.GameEvent.DotaHeroInventoryItemChangeEvent, GHandler.create(this, (event: DotaHeroInventoryItemChangeEvent) => {
-            let item = EntIndexToHScript(event.item_entindex) as IBaseItem_Plus;
-            let state = item.GetItemState();
-            let slot = item.GetItemSlot();
-            (event as IBuffEventData).eventType = EventDataType.unitIsSelf + EventDataType.OtherCanBeAnyOne;
-            let unit = EntIndexToHScript(event.hero_entindex) as IBaseNpc_Plus;
-            (event as IBuffEventData).unit = unit;
-            // 道具不在身上
-            if (state == 0 && slot == -1) {
-                modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ITEM_LOSE);
-            }
-            // 道具销毁|出售
-            else if (state == 1 && slot == DOTAScriptInventorySlot_t.DOTA_ITEM_SLOT_1) {
-                modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ITEM_DESTROY);
-                if (item.ETRoot) {
-                    let itemroot = item.ETRoot.As<IItemEntityRoot>();
-                    itemroot.Dispose();
-                }
-            }
-        }));
+        // EventHelper.addGameEvent(GameEnum.GameEvent.DotaHeroInventoryItemChangeEvent, GHandler.create(this, (event: DotaHeroInventoryItemChangeEvent) => {
+        //     GLogHelper.print("DotaHeroInventoryItemChangeEvent", event);
+        //     let item = EntIndexToHScript(event.item_entindex) as IBaseItem_Plus;
+        //     let state = item.GetItemState();
+        //     let slot = item.GetItemSlot();
+        //     (event as IBuffEventData).eventType = EventDataType.unitIsSelf + EventDataType.OtherCanBeAnyOne;
+        //     let unit = EntIndexToHScript(event.hero_entindex) as IBaseNpc_Plus;
+        //     (event as IBuffEventData).unit = unit;
+        //     // 道具不在身上
+        //     if (state == 0 && slot == -1) {
+        //         modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ITEM_LOSE);
+        //     }
+        //     // 道具销毁|出售
+        //     else if (state == 1 && slot == DOTAScriptInventorySlot_t.DOTA_ITEM_SLOT_1) {
+        //         modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ITEM_DESTROY);
+        //         if (item.ETRoot) {
+        //             let itemroot = item.ETRoot.As<IItemEntityRoot>();
+        //             itemroot.Dispose();
+        //         }
+        //     }
+        // }));
         // 道具位置改变
         EventHelper.addProtocolEvent(GameProtocol.Protocol.req_ITEM_SLOT_CHANGE, GHandler.create(this, (event: JS_TO_LUA_DATA) => {
-            let playerid = event.PlayerID;
-            let hero = GPlayerEntityRoot.GetOneInstance(playerid).Hero!;
-            if (hero != null) {
-                // 检查位置是否改变
-                let changeData = hero.ETRoot.As<ICourierEntityRoot>().CheckItemSlotChange();
-                if (changeData) {
-                    let _event: IBuffEventData = {};
-                    (_event as IBuffEventData).eventType = EventDataType.unitIsSelf + EventDataType.OtherCanBeAnyOne;
-                    (_event as IBuffEventData).unit = hero as IBaseNpc_Plus;
-                    (_event as IBuffEventData).changeSlot = changeData[0];
-                    (_event as IBuffEventData).state = changeData[1];
-                    modifier_event.FireEvent(_event, Enum_MODIFIER_EVENT.ON_ITEM_SLOT_CHANGE);
+            if (!event.data) { return }
+            let unit = EntIndexToHScript(event.data) as IBaseNpc_Plus;
+            if (GFuncEntity.IsValid(unit)) {
+                if (!unit.ETRoot) return;
+                let hero = unit.ETRoot.As<IBattleUnitEntityRoot>();
+                if (hero.InventoryComp && hero.InventoryComp()) {
+                    // 检查位置是否改变
+                    let changeData = hero.InventoryComp().CheckItemSlotChange();
+                    if (changeData) {
+                        let _event: IBuffEventData = {};
+                        (_event as IBuffEventData).eventType = EventDataType.unitIsSelf + EventDataType.OtherCanBeAnyOne;
+                        (_event as IBuffEventData).unit = unit;
+                        (_event as IBuffEventData).changeSlot = changeData[0];
+                        (_event as IBuffEventData).state = changeData[1];
+                        modifier_event.FireEvent(_event, Enum_MODIFIER_EVENT.ON_ITEM_SLOT_CHANGE);
+                    }
                 }
             }
         }));
@@ -194,22 +199,44 @@ export class GameScene {
             }
             let itemEnity = EntIndexToHScript(itementityid) as IBaseItem_Plus;
             let npc = EntIndexToHScript(npcentindex) as IBaseNpc_Plus;
-            if (!GFuncEntity.IsValid(itemEnity) || !GFuncEntity.IsValid(npc) || itemEnity.ETRoot == null || npc.ETRoot == null) {
+            if (!GFuncEntity.IsValid(itemEnity) || !GFuncEntity.IsValid(npc)) {
                 event.state = false;
                 EventHelper.ErrorMessage("not valid item or npc", playerid);
                 return;
             }
-            let itemroot = itemEnity.ETRoot.As<IItemEntityRoot>();
-            let npcroot = npc.ETRoot.As<IBattleUnitEntityRoot>()
-            if (!itemroot.canGiveToNpc(npcroot)) {
+            if (!itemEnity.CanGiveToNpc(npc)) {
                 event.state = false;
                 EventHelper.ErrorMessage("cant give to npc", playerid);
                 return;
             }
-            npcroot.InventoryComp().addItemRoot(itemroot);
+            let oldParent = itemEnity.GetCasterPlus();
+            if (!oldParent.IsFriendly(npc) || npc.GetPlayerID() != playerid) {
+                event.state = false;
+                EventHelper.ErrorMessage("cant give to enemy npc", playerid);
+                return;
+            }
+            let oldslot = itemEnity.GetItemSlot();
+            oldParent.TakeItem(itemEnity);
+            npc.AddItemOrInGround(itemEnity);
             event.state = true;
+            // 处理组件
+            if (itemEnity.ETRoot) {
+                let itemroot = itemEnity.ETRoot.As<IItemEntityRoot>();
+                if (oldParent.ETRoot) {
+                    let oldparentroot = oldParent.ETRoot.As<IBattleUnitEntityRoot>();
+                    if (oldparentroot.InventoryComp && oldparentroot.InventoryComp()) {
+                        oldparentroot.InventoryComp().getOutItem(itemroot, oldslot);
+                    }
+                }
+                if (npc.ETRoot) {
+                    let npcroot = npc.ETRoot.As<IBattleUnitEntityRoot>()
+                    if (npcroot.InventoryComp && npcroot.InventoryComp()) {
+                        npcroot.InventoryComp().putInItem(itemroot);
+                    }
+                }
+            }
         }));
-        // 道具仍在地上
+        // 道具扔在地上
         EventHelper.addProtocolEvent(GameProtocol.Protocol.req_ITEM_DROP_POSITION, GHandler.create(this, (event: JS_TO_LUA_DATA) => {
             let playerid = event.PlayerID;
             let itemslot = event.data.slot;
@@ -222,20 +249,31 @@ export class GameScene {
                 return;
             }
             let itemEnity = EntIndexToHScript(itementityid) as IBaseItem_Plus;
-            if (!GFuncEntity.IsValid(itemEnity) || itemEnity.ETRoot == null) {
+            if (!GFuncEntity.IsValid(itemEnity)) {
                 event.state = false;
                 EventHelper.ErrorMessage("not valid item ", playerid);
                 return;
             }
-            let itemroot = itemEnity.ETRoot.As<IItemEntityRoot>();
-            if (itemroot.DomainParent == null) {
+            let npcEntity = itemEnity.GetCasterPlus();
+            if (!GFuncEntity.IsValid(npcEntity) || !npcEntity.IsControllableByAnyPlayer() || npcEntity.GetPlayerID() != playerid) {
                 event.state = false;
-                EventHelper.ErrorMessage(" item DomainParent is null", playerid);
+                EventHelper.ErrorMessage("not valid npcEntity ", playerid);
                 return;
             }
             let posV = Vector(pos.x, pos.y, pos.z);
-            itemroot.DomainParent.As<IBattleUnitEntityRoot>().InventoryComp().dropItemRoot(itemroot, posV);
+            let oldslot = itemEnity.GetItemSlot();
+            npcEntity.TakeItem(itemEnity);
+            CreateItemOnPositionForLaunch(posV, itemEnity);
             event.state = true;
+            // 处理组件
+            let itemroot = itemEnity.ETRoot;
+            let npcroot = npcEntity.ETRoot;
+            if (itemroot && npcroot) {
+                let _npcroot = npcroot.As<IBattleUnitEntityRoot>();
+                if (_npcroot.InventoryComp && _npcroot.InventoryComp()) {
+                    _npcroot.InventoryComp().dropGroundItem(itemroot as IItemEntityRoot, oldslot);
+                }
+            }
         }));
     }
     private static async onGameRulesStateChange(e: any) {

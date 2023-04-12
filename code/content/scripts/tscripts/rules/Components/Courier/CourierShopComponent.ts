@@ -220,13 +220,16 @@ export class CourierShopComponent extends ET.Component {
         else {
             let isGround = toNpc.IsInventoryFull();
             itemEntity = toNpc.AddItemOrInGround(item.sItemName);
-            ItemEntityRoot.Active(itemEntity);
             if (isGround) {
                 EventHelper.ErrorMessage("购买成功，物品已放在地上");
-                let itemroot = itemEntity.ETRoot as ItemEntityRoot;
             }
-            else {
-
+            if (toNpc.ETRoot) {
+                let npcroot = toNpc.ETRoot as IBattleUnitEntityRoot;
+                if (npcroot.InventoryComp()) {
+                    ItemEntityRoot.Active(itemEntity);
+                    let itemroot = itemEntity.ETRoot as ItemEntityRoot;
+                    npcroot.InventoryComp().putInItem(itemroot);
+                }
             }
         }
         if (GFuncEntity.IsValid(itemEntity)) {

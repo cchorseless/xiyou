@@ -930,16 +930,6 @@ export module GameEnum {
             /**多血条BUFF */
             modifier_many_hp_bar = "modifier_many_hp_bar",
         }
-
-
-        export enum EDotaItemSlot {
-            DOTA_ITEM_SLOT_MIN = 0,
-            DOTA_ITEM_SLOT_MAX = 5,
-            DOTA_ITEM_BACKPACK_MIN = 6,
-            DOTA_ITEM_BACKPACK_MAX = 8,
-            DOTA_ITEM_STASH_MIN = 9,
-            DOTA_ITEM_STASH_MAX = 14,
-        }
     }
 
 

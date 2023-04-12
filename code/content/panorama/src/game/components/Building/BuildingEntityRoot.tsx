@@ -3,7 +3,7 @@ import { BattleUnitEntityRoot } from "../BattleUnit/BattleUnitEntityRoot";
 
 @GReloadable
 export class BuildingEntityRoot extends BattleUnitEntityRoot {
-
+    public InventoryLock: { [slot: string]: number };
     Config() {
         return (KVHelper.KVData()).building_unit_tower[this.ConfigID];
     }

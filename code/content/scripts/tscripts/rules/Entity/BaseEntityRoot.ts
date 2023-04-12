@@ -14,4 +14,8 @@ export class BaseEntityRoot extends ET.EntityRoot {
         let selfv = this.GetDomain<IBaseNpc_Plus>().GetAbsOrigin();
         return ((playerorgin - selfv) as Vector).Length2D();
     }
+
+    IsCourierRoot() {
+        return false;
+    }
 }

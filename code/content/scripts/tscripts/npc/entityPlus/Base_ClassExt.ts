@@ -792,12 +792,28 @@ declare global {
          * @returns
          */
         CanGiveToNpc(npc: IBaseNpc_Plus): boolean;
+
+        /**
+         * @Server
+         * 有效的道具
+         */
+        IsValidItem(): boolean;
+        /**
+         * @Server
+         * 空物品
+         */
+        IsItemBlank(): boolean;
     }
 }
 
 const CBaseItem = IsServer() ? CDOTA_Item : C_DOTA_Item;
 
-
+CBaseItem.IsValidItem = function () {
+    return IsValid(this) && this.GetAbilityName() != "item_blank";
+}
+CBaseItem.IsItemBlank = function () {
+    return IsValid(this) && this.GetAbilityName() == "item_blank";
+}
 if (IsServer()) {
     CBaseItem.GetParentPlus = function () {
         return this.GetParent() as IBaseNpc_Plus;
@@ -811,24 +827,13 @@ if (IsServer()) {
         return hContainer;
     }
     CBaseItem.CanGiveToNpc = function (npc: IBaseNpc_Plus) {
-        // let hPurchaser = this.GetPurchaser();
-        // if (GFuncEntity.IsValid(hPurchaser)) {
-        //     if( )
-        // }
-        // let iPurchaserID = IsValid(hPurchaser) and hPurchaser: GetPlayerOwnerID() or - 1
-        // let bSamePlayer = iPurchaserID == -1 or (PlayerResource: IsValidPlayerID(iPlayerID) and iPlayerID == iPurchaserID)
-
-        // if (not bSamePlayer) and(not hItem: IsCustomShareable()) then
-        // ErrorMessage(iPlayerID, "dota_hud_error_not_shareable")
-        // return false
-        // end
         let item = this as any as IBaseItem_Plus;
         if (GFuncEntity.IsValid(this) &&
             GFuncEntity.IsValid(npc) &&
             this.IsDroppable() &&
             item.CanUnitPickUp(npc) &&
             npc.IsAlive() &&
-            npc.IsRealUnit() &&
+            (npc.IsRealHero() || npc.IsRealUnit()) &&
             npc.HasInventory()
         ) {
             return true;
@@ -997,21 +1002,18 @@ CDOTA_Buff.GetAbilityPlus = function () {
     if (!IsValid(this)) {
         return
     }
-    ;
     return this.GetAbility() as IBaseAbility_Plus;
 }
 CDOTA_Buff.GetItemPlus = function () {
     if (!IsValid(this)) {
         return
     }
-    ;
     return this.GetAbility() as IBaseItem_Plus;
 }
 CDOTA_Buff.GetCasterPlus = function () {
     if (!IsValid(this)) {
         return
     }
-    ;
     return this.GetCaster() as IBaseNpc_Plus;
 }
 
@@ -1019,7 +1021,6 @@ CDOTA_Buff.GetParentPlus = function () {
     if (!IsValid(this)) {
         return
     }
-    ;
     return this.GetParent() as IBaseNpc_Plus;
 }
 
@@ -1720,9 +1721,16 @@ declare global {
         IsInventoryFull(): boolean;
         /**
          * @Server
+         * 添加一个空的物品到指定的背包位置
+         * @param slot 
+         */
+        AddEmptyItemInSlot(slot: number): IBaseItem_Plus;
+        /**
+         * @Server
          * @param itemname 
          */
         DropItem(hItem: IBaseItem_Plus, bLaunchLoot?: boolean, sNewItemName?: string): void;
+
     }
 }
 
@@ -2464,6 +2472,7 @@ if (IsServer()) {
         }
         hItem.SetPurchaseTime(0);
         if (this.IsInventoryFull()) {
+            hItem.SetOwner(this);
             hItem.SetParent(this, "");
             hItem.CreateItemOnPositionRandom(this.GetAbsOrigin());
         }
@@ -2473,7 +2482,19 @@ if (IsServer()) {
         return hItem;
     }
 
-
+    BaseNPC.AddEmptyItemInSlot = function (slot: number) {
+        if (this.IsInventoryFull()) { return }
+        let hItem = this.CreateOneItem("item_blank");
+        hItem.SetPurchaseTime(0);
+        this.AddItem(hItem);
+        for (let i = DOTAScriptInventorySlot_t.DOTA_ITEM_SLOT_1; i < DOTAScriptInventorySlot_t.DOTA_ITEM_SLOT_9; i++) {
+            let item = this.GetItemInSlot(i);
+            if (item && item == hItem) {
+                this.SwapItems(i, slot);
+                return hItem;
+            }
+        }
+    }
 
 
     BaseNPC.DropItem = function (hItem: IBaseItem_Plus, bLaunchLoot = false, sNewItemName = "") {

@@ -86,6 +86,16 @@ export module NetHelper {
         return CustomNetTables.GetAllTableValues(tableName as never) as { key: string; value: any }[];
     }
 
+    export function GetDotaEntityData(entityid: EntityIndex | string, extkey = "") {
+        let _tablename = GameServiceConfig.ENetTables.dotaentity as never;
+        entityid += "";
+        let olddata = (CustomNetTables.GetTableValue(_tablename, entityid) || {}) as { [key: string]: any };
+        if (extkey && extkey.length > 0) {
+            return olddata[extkey];
+        }
+        return olddata;
+    }
+
 
     export function GetETEntityNetTableName(playerid: PlayerID | null = null) {
         if (playerid == null) {

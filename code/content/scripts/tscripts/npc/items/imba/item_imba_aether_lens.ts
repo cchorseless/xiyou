@@ -8,9 +8,6 @@ export class item_imba_aether_lens extends BaseItem_Plus {
     GetIntrinsicModifierName(): string {
         return "modifier_imba_aether_lens_passive";
     }
-    GetAbilityTextureName(): string {
-        return "imba_aether_lens";
-    }
 }
 @registerModifier()
 export class modifier_imba_aether_lens_passive extends BaseModifier_Plus {
@@ -36,6 +33,7 @@ export class modifier_imba_aether_lens_passive extends BaseModifier_Plus {
         if (IsServer()) {
             if (!this.GetItemPlus()) {
                 this.Destroy();
+                return;
             }
         }
         let item = this.GetItemPlus();
@@ -45,11 +43,11 @@ export class modifier_imba_aether_lens_passive extends BaseModifier_Plus {
             this.bonus_mana_regen = item.GetSpecialValueFor("bonus_mana_regen");
             this.cast_range_bonus = item.GetSpecialValueFor("cast_range_bonus");
             this.spell_power = item.GetSpecialValueFor("spell_power");
-            this.CheckUnique(true);
         }
         if (!IsServer()) {
             return;
         }
+        this.CheckUnique(true);
         for (const [_, mod] of GameFunc.iPair(this.GetParentPlus().FindAllModifiersByName(this.GetName()))) {
             mod.GetItemPlus().SetSecondaryCharges(_);
         }
@@ -84,7 +82,7 @@ export class modifier_imba_aether_lens_passive extends BaseModifier_Plus {
     CC_GetModifierManaBonus(): number {
         return this.bonus_mana;
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS_STACKING)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS)
     CC_GetModifierCastRangeBonusStacking(p_0: ModifierAbilityEvent,): number {
         return this.CheckUniqueValue(this.cast_range_bonus, [
             "modifier_imba_elder_staff",

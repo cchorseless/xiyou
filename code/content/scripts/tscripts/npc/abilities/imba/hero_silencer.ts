@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { ResHelper } from "../../../helper/ResHelper";
 import { GameServiceConfig } from "../../../shared/GameServiceConfig";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -71,6 +71,7 @@ export class modifier_imba_arcane_curse_debuff extends BaseModifier_Plus {
     public curse_damage: number;
     public penalty_duration: number;
     public damage_per_stack: number;
+    public ablity_damage_type: DAMAGE_TYPES;
     public talent_learned: any;
     public aghs_upgraded: any;
     BeCreated(kv: any): void {
@@ -84,6 +85,7 @@ export class modifier_imba_arcane_curse_debuff extends BaseModifier_Plus {
         this.talent_learned = this.caster.HasTalent("special_bonus_imba_silencer_1");
         if (IsServer()) {
             this.penalty_duration = this.penalty_duration;
+            this.ablity_damage_type = this.GetAbilityPlus().GetAbilityDamageType();
             this.curse_slow = this.curse_slow;
             if (this.caster.HasScepter()) {
                 this.aghs_upgraded = true;
@@ -128,7 +130,7 @@ export class modifier_imba_arcane_curse_debuff extends BaseModifier_Plus {
                         victim: target,
                         attacker: this.caster,
                         damage: damage_dealt,
-                        damage_type: this.GetAbilityPlus().GetAbilityDamageType(),
+                        damage_type: this.ablity_damage_type,
                         ability: this.GetAbilityPlus()
                     }
                     let actual_Damage = ApplyDamage(damage_table);

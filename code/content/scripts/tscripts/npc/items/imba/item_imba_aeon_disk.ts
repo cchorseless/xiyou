@@ -23,9 +23,9 @@ export class item_imba_aeon_disk extends BaseItem_Plus {
     }
     GetAbilityTextureName(): string {
         if (this.GetCasterPlus().findBuffStack("modifier_imba_aeon_disk_basic", this.GetCasterPlus()) == 1) {
-            return "imba_aeon_disk_icon_off";
+            return "imba/aeon_disk_icon_off";
         } else {
-            return "imba_aeon_disk_icon";
+            return "imba/aeon_disk_icon";
         }
     }
 }
@@ -102,7 +102,7 @@ export class modifier_imba_aeon_disk extends BaseModifier_Plus {
     public status_resistance: any;
     public ability: IBaseItem_Plus;
     GetTexture(): string {
-        return "item_aeon_disk";
+        return "imba/aeon_disk_icon";
     }
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({

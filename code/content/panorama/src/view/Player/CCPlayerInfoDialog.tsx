@@ -8,6 +8,7 @@ import "./CCPlayerInfoDialog.less";
 
 interface ICCPlayerInfoDialog extends NodePropsData {
     Playerid: number;
+    isFaker?: boolean;
 }
 
 export class CCPlayerInfoDialog extends CCPanel<ICCPlayerInfoDialog> {

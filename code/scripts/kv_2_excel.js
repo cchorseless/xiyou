@@ -1251,7 +1251,7 @@ function createabilityLang() {
     let rows = sheet.data;
     let nrows = rows.length;
     rows.push([]);
-    const lanstr = fs.readFileSync(imba_lang_path, "utf8");
+    const lanstr = fs.readFileSync(lang_path, "utf8");
     // let obj = keyvalues.decode(lanstr);
     // let Tokens = obj.Tokens;
     let lines = lanstr.split("\n");
@@ -1402,7 +1402,7 @@ function clearUnitPersonItemSlot() {
         let row = rows2[i];
         kv[row[0]] = row;
     }
-    console.log( nrows2)
+    console.log(nrows2)
     for (let i = 2; i < nrows; i++) {
         let len = rows[i].length;
         for (let j = 0; j < len; j++) {
@@ -1432,6 +1432,7 @@ function clearUnitPersonItemSlot() {
     // createSound();
     // createImbaUnit();
     // makeOnePropExcel();
+    createabilityLang()
     // clearUnitPersonItemSlot();
 })().catch((error) => {
     console.error(error);

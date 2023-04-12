@@ -15,24 +15,13 @@ export class ItemEntityRoot extends BaseEntityRoot {
         if (hPurchaser) {
             (this.BelongPlayerid as any) = hPurchaser.GetPlayerID();
         }
-    }
-
-    public regSelfToInventory() {
         let sectname = GJsonConfigHelper.GetAbilitySectLabel(this.ConfigID);
         if (sectname && sectname.length > 0) {
             if (!this.SectLabels.includes(sectname)) {
                 this.SectLabels.push(sectname);
             }
-            let item = this.GetDomain<IBaseItem_Plus>();
-            let owner = item.GetOwnerPlus();
-            if (this.isPickUped() && owner != null && owner.ETRoot &&
-                owner.ETRoot.As<IBattleUnitEntityRoot>().InventoryComp()
-            ) {
-                owner.ETRoot.As<IBattleUnitEntityRoot>().InventoryComp().addItemRoot(this)
-            }
         }
     }
-
 
     isPickUped() {
         let item = this.GetDomain<IBaseItem_Plus>();
@@ -72,27 +61,7 @@ export class ItemEntityRoot extends BaseEntityRoot {
         return KVHelper.KvItems["" + this.ConfigID];
     }
 
-    canGiveToNpc(unitroot: IBattleUnitEntityRoot) {
-        if (this.BelongPlayerid != -1 && this.BelongPlayerid != unitroot.BelongPlayerid) {
-            return false;
-        }
-        if (unitroot.InventoryComp() == null) {
-            return false;
-        }
-        let item = this.GetDomain<IBaseItem_Plus>();
-        let npc = unitroot.GetDomain<IBaseNpc_Plus>();
-        if (GFuncEntity.IsValid(item) &&
-            GFuncEntity.IsValid(npc) &&
-            item.IsDroppable() &&
-            item.CanUnitPickUp(npc) &&
-            npc.IsAlive() &&
-            npc.IsRealUnit() &&
-            npc.HasInventory()
-        ) {
-            return true;
-        }
-        return false;
-    }
+
 }
 declare global {
     type IItemEntityRoot = ItemEntityRoot;

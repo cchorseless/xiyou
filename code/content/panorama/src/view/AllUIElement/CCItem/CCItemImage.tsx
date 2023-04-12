@@ -5,6 +5,7 @@ import { CSSHelper } from "../../../helper/CSSHelper";
 import { ItemHelper } from "../../../helper/DotaEntityHelper";
 import { KVHelper } from "../../../helper/KVHelper";
 import { TipsHelper } from "../../../helper/TipsHelper";
+import { CCIcon_Lock } from "../CCIcons/CCIcon_Lock";
 import { CCPanel } from "../CCPanel/CCPanel";
 import "./CCItemImage.less";
 
@@ -24,6 +25,7 @@ export class CCItemImage extends CCPanel<ICCItemImage> {
         contextEntityIndex: -1,
         iLevel: -1,
         showtooltip: false,
+        iUnlockStar: -1,
     }
 
     getLevel() {
@@ -46,6 +48,7 @@ export class CCItemImage extends CCPanel<ICCItemImage> {
     render() {
         const contextEntityIndex = this.props.contextEntityIndex!;
         const itemname = this.props.itemname!;
+        const iUnlockStar = this.props.iUnlockStar!;
         // 是否是多级物品
         const bIsMultiLevelItem = ItemHelper.IsMultiLevelItem(contextEntityIndex) || ItemHelper.IsMultiLevelItem(itemname);
         // 如果是召唤卡 稀有度
@@ -55,12 +58,12 @@ export class CCItemImage extends CCPanel<ICCItemImage> {
         const m_ItemName = itemname ? itemname : Abilities.GetAbilityName(contextEntityIndex as any);
         return < Panel className="CC_ItemImage" ref={this.__root__}
             onmouseover={(self) => {
-                if (this.props.showtooltip) {
+                if (this.props.showtooltip && m_ItemName != "item_blank") {
                     TipsHelper.ShowAbilityTooltip(self, m_ItemName, contextEntityIndex);
                 }
             }}
             onmouseout={(self) => {
-                if (this.props.showtooltip) {
+                if (this.props.showtooltip && m_ItemName != "item_blank") {
                     TipsHelper.HideAbilityTooltip(self);
                 }
             }}
@@ -87,12 +90,19 @@ export class CCItemImage extends CCPanel<ICCItemImage> {
                 </Panel>
             }
             {
-                // iUnlockStar && iUnlockStar > 0 &&
-                // <Panel id="ItemLockStars" hittest={true}>
-                //     <ReactUtils.Repeat iTime={iUnlockStar} >
-                //         {index => <Image key={index} className="ItemLockStar" />}
-                //     </ReactUtils.Repeat>
-                // </Panel>
+                iUnlockStar > 0 &&
+                <>
+                    <CCPanel id="ItemLockBg" hittest={false} />
+                    <CCIcon_Lock align="center center" />
+                    <Panel id="ItemLockStars" hittest={true} >
+                        {
+                            [...Array(iUnlockStar)].map((_, index) => {
+                                return <Image key={index} className="ItemLockStar" />
+                            })
+                        }
+                    </Panel>
+                </>
+
             }
         </Panel >
 

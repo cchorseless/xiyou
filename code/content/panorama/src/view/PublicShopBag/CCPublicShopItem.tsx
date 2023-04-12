@@ -25,7 +25,77 @@ export class CCPublicShopItem extends CCPanel<ICCPublicShopItem> {
     onInitUI() {
         this.ListenUpdate(GGameScene.Local.PlayerDataComp);
     }
+    onStartUI() {
+        // this.addDragEvent();
+    }
+    addDragEvent() {
+        const pSelf = this.__root__.current!;
+        $.RegisterEventHandler("DragLeave", pSelf, (pPanel: Panel, pDraggedPanel: IDragItem) => {
+            if (pSelf && pPanel == pSelf) {
+                if (pDraggedPanel.m_pPanel == undefined) {
+                    return false;
+                }
+                if (!pDraggedPanel.bIsDragItem) {
+                    return false;
+                }
+                if (pDraggedPanel.m_pPanel == pPanel) {
+                    return false;
+                }
 
+                pPanel.RemoveClass("potential_drop_target");
+                return true;
+            }
+            return false;
+        });
+        $.RegisterEventHandler("DragEnter", pSelf, (pPanel: Panel, pDraggedPanel: IDragItem) => {
+            if (pSelf && pPanel == pSelf) {
+                // 从哪里拖过来
+                if (pDraggedPanel.m_pPanel == undefined) {
+                    return true;
+                }
+                // 拖动类型
+                if (!pDraggedPanel.bIsDragItem) {
+                    return true;
+                }
+                // 自己拖动到自己
+                if (pDraggedPanel.m_pPanel == pPanel) {
+                    return true;
+                }
+                pPanel.AddClass("potential_drop_target");
+                return true;
+            }
+            return false;
+        });
+        $.RegisterEventHandler("DragDrop", pSelf, (pPanel: Panel, pDraggedPanel: IDragItem) => {
+            const itemIndex = this.props.itemIndex!;
+            const iType = this.props.iType!;
+            const slot = this.props.slot!;
+            if (pSelf && pPanel == pSelf) {
+                if (pDraggedPanel.m_pPanel == undefined) {
+                    return true;
+                }
+                if (!pDraggedPanel.bIsDragItem) {
+                    return true;
+                }
+                if (pDraggedPanel.m_pPanel == pSelf) {
+                    pDraggedPanel.m_DragCompleted = true;
+                    return false;
+                }
+                let iDraggedItemIndex = pDraggedPanel.overrideentityindex;
+                if (iDraggedItemIndex && iDraggedItemIndex != -1) {
+                    GLogHelper.print(1111111)
+                    // let from = pDraggedPanel.m_DragType! as PublicBagConfig.EBagSlotType;
+                    // let to = iType;
+                    // let fromslot = pDraggedPanel.m_Slot!;
+                    // let toslot = slot;
+                    // GGameScene.Local.CourierBagComp.MoveItem(from, fromslot, to, toslot, Abilities.GetCaster(iDraggedItemIndex));
+                    pDraggedPanel.m_DragCompleted = true;
+                }
+                return true;
+            }
+            return false;
+        });
+    }
     OnClick_Buy() {
         const sItemName = this.props.sItemName!;
         const iSlot = this.props.iSlot;

@@ -1,4 +1,11 @@
 export module PublicBagConfig {
+
+    export const DOTA_ITEM_SLOT_MIN = 0;
+    export const DOTA_ITEM_SLOT_MAX = 5;
+    export const DOTA_ITEM_BACKPACK_MIN = 6;
+    export const DOTA_ITEM_BACKPACK_MAX = 8;
+    export const DOTA_ITEM_STASH_MIN = 9;
+    export const DOTA_ITEM_STASH_MAX = 14;
     export const DOTA_ITEM_BAG_MIN = 35;
     export const DOTA_ITEM_BAG_MAX = 50;
     export const CUSTOM_COMBINE_SLOT_MIN = 51;

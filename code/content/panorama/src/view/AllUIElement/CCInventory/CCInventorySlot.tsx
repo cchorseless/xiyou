@@ -1,7 +1,6 @@
 import React from "react";
-import { GameProtocol } from "../../../../../scripts/tscripts/shared/GameProtocol";
 import { CSSHelper } from "../../../helper/CSSHelper";
-import { NetHelper } from "../../../helper/NetHelper";
+import { UnitHelper } from "../../../helper/DotaEntityHelper";
 import { CCAbilityPanel, ICCAbilityPanel } from "../CCAbility/CCAbilityPanel";
 import { CCPanel } from "../CCPanel/CCPanel";
 interface ICCInventorySlot extends ICCAbilityPanel {
@@ -16,38 +15,37 @@ export class CCInventorySlot extends CCPanel<ICCInventorySlot> {
         draggable: true,
         dragtype: "InventorySlot",
         slot: -1,
+        iUnlockStar: -1,
         isBackpack: false,
     }
     onBtn_dragend(item_slot: number) {
         let pos = GameUI.GetCursorPosition();
-        let entitys = GameUI.FindScreenEntities(pos);
         let selectedEntityid = Players.GetLocalPlayerPortraitUnit();
+        if (!Entities.IsControllableByPlayer(selectedEntityid, Players.GetLocalPlayer())) { return }
         let itementityid = Entities.GetItemInSlot(selectedEntityid, item_slot);
-        if (entitys.length > 0) {
-            for (let info of entitys) {
-                if (info.accurateCollision) {
-                    NetHelper.SendToLua(GameProtocol.Protocol.req_ITEM_GIVE_NPC, {
-                        npc: info.entityIndex,
-                        slot: item_slot,
-                        itementityid: itementityid
-                    })
-                    break;
-                }
-            }
+        let curEntity = UnitHelper.GetCursorUnit(DOTATeam_t.DOTA_TEAM_GOODGUYS);
+        if (curEntity > -1) {
+            GGameScene.Local.CourierBagComp.GiveItemToNpc(curEntity, item_slot, itementityid)
+            // let entitys = GameUI.FindScreenEntities(pos);
+            // for (let info of entitys) {
+            //     if (info.accurateCollision) {
+            //         NetHelper.SendToLua(GameProtocol.Protocol.req_ITEM_GIVE_NPC, {
+            //             npc: info.entityIndex,
+            //             slot: item_slot,
+            //             itementityid: itementityid
+            //         })
+            //         break;
+            //     }
+            // }
         }
         else {
             // 走过去扔
-            let itemindex = Entities.GetItemInSlot(selectedEntityid, item_slot);
-            if (itemindex > -1) {
-                Game.DropItemAtCursor(selectedEntityid, itemindex)
-            }
+            // if (itementityid > -1) {
+            //     Game.DropItemAtCursor(selectedEntityid, itemindex)
+            // }
             // 直接扔
-            // let worldpos = GameUI.GetScreenWorldPosition(pos)!;
-            // NetHelper.SendToLua(GameProtocol.Protocol.req_ITEM_DROP_POSITION, {
-            //     pos: { x: worldpos[0], y: worldpos[1], z: worldpos[2] },
-            //     slot: item_slot,
-            //     itementityid: itementityid
-            // })
+            let worldpos = GameUI.GetScreenWorldPosition(pos)!;
+            GGameScene.Local.CourierBagComp.DropItem(item_slot, itementityid, worldpos)
         }
     };
     render() {
@@ -55,6 +53,7 @@ export class CCInventorySlot extends CCPanel<ICCInventorySlot> {
         const isBackpack = this.props.isBackpack!;
         const draggable = this.props.draggable!;
         const dragtype = this.props.dragtype!;
+        const iUnlockStar = this.props.iUnlockStar!;
         const overrideentityindex = this.props.overrideentityindex!;
         const overridedisplaykeybind = this.props.overridedisplaykeybind!;
         return (
@@ -65,11 +64,13 @@ export class CCInventorySlot extends CCPanel<ICCInventorySlot> {
                     overrideentityindex={overrideentityindex}
                     overridedisplaykeybind={overridedisplaykeybind}
                     slot={slot}
+                    iUnlockStar={iUnlockStar}
                     draggable={draggable}
                     dragtype={dragtype}
                     dragdropcallback={(pDraggedPanel, overrideentityindex, overridedisplaykeybind, slot, dragtype) => {
                         let iAbilityIndex = pDraggedPanel.overrideentityindex!;
                         let m_Slot = pDraggedPanel.m_Slot;
+                        GLogHelper.print("dragdropcallback", dragtype, m_Slot, slot)
                         if (iAbilityIndex != -1 && m_Slot != -1) {
                             let iCasterIndex = Abilities.GetCaster(iAbilityIndex);
                             Game.PrepareUnitOrders({

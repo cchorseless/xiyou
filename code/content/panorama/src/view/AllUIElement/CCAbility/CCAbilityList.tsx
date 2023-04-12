@@ -7,6 +7,7 @@ import "./CCAbilityList.less";
 import { CCAbilityPanel } from "./CCAbilityPanel";
 
 interface ICCAbilityList extends NodePropsData {
+    CurSelectUnit: EntityIndex;
 }
 
 export class CCAbilityList extends CCPanel<ICCAbilityList> {
@@ -79,6 +80,11 @@ export class CCAbilityList2 extends CCPanel<ICCAbilityList> {
         return CSSHelper.IsReadyUI()
     }
     onStartUI() {
+        this.useEffectProps(() => this.onRefreshUI(), "CurSelectUnit");
+        this.onRefreshUI()
+    }
+
+    onRefreshUI() {
         if (this.abilities.current) {
             const abilitypanel = this.abilities.current;
             GTimerHelper.AddFrameTimer(1, GHandler.create(this, () => {
@@ -88,17 +94,16 @@ export class CCAbilityList2 extends CCPanel<ICCAbilityList> {
                     const p = abilitypanel.GetChild(i)!;
                     const AbilityButton = p.FindChildTraverse("AbilityButton");
                     if (AbilityButton) {
-                        // AbilityButton.style.tooltipPosition = "top"
+                        let CurSelectUnit = this.props.CurSelectUnit!;
+                        if (!Entities.IsRealHero(CurSelectUnit)) {
+                            AbilityButton.style.tooltipPosition = "top"
+                        }
+                        else {
+                            AbilityButton.style.tooltipPosition = null;
+                        }
                     }
                 }
-
             }))
-            // GTimerHelper.AddFrameTimer(5, GHandler.create(this, () => {
-            //     let len = abilitypanel.GetChildCount()
-            //     if (len == 0) { return 1 }
-            //     this.updateAbilityList();
-            //     return 5;
-            // }))
 
         }
     }
@@ -119,7 +124,7 @@ export class CCAbilityList2 extends CCPanel<ICCAbilityList> {
     }
     render() {
         return <Panel id="CC_AbilityList" ref={this.__root__}  {...this.initRootAttrs()}>
-            <GenericPanel ref={this.abilities} type="DOTAAbilityList" id="abilities" hittest={false} tooltiPosition="top" />
+            <GenericPanel ref={this.abilities} type="DOTAAbilityList" id="abilities" hittest={false} />
         </Panel>
     }
 }

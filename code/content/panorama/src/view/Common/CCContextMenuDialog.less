@@ -1,0 +1,32 @@
+.CCContextMenuDialog {
+    #MenuContentItems {
+        padding: 0px;
+        margin: 0px;
+        flow-children: down;
+    }
+}
+
+
+.CCContextMenuButton {
+    width: 200px;
+    height: 40px;
+    border: 1px solid black;
+    padding: 4px;
+    padding-left: 8px;
+    background-color: #182128;
+    flow-children: right;
+
+    &>Label {
+        font-size: 16px;
+        vertical-align: center;
+        color: #acaaaa;
+    }
+
+    &:hover {
+        background-color: #8ea3c922;
+
+        &>Label {
+            color: #eae9e9;
+        }
+    }
+}

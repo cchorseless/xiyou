@@ -45,6 +45,23 @@ export class CourierBagComponent extends CourierBag {
         return GItemEntityRoot.GetEntityById(entityid);
     }
 
+    GiveItemToNpc(tonpc: number, item_slot: number, itementityid: ItemEntityIndex) {
+        NetHelper.SendToLua(GameProtocol.Protocol.req_ITEM_GIVE_NPC, {
+            npc: tonpc,
+            slot: item_slot,
+            itementityid: itementityid
+        })
+    }
+
+    DropItem(item_slot: number, itementityid: ItemEntityIndex, pos: [number, number, number]) {
+        NetHelper.SendToLua(GameProtocol.Protocol.req_ITEM_DROP_POSITION, {
+            pos: { x: pos[0], y: pos[1], z: pos[2] },
+            slot: item_slot,
+            itementityid: itementityid
+        })
+    }
+
+
 
     MoveItem(from: PublicBagConfig.EBagSlotType, fromslot: number, to: PublicBagConfig.EBagSlotType, toslot: number, toNpc?: EntityIndex) {
         NetHelper.SendToLua(GameProtocol.Protocol.req_MoveItem, {
@@ -52,7 +69,7 @@ export class CourierBagComponent extends CourierBag {
             fromslot: fromslot,
             to: to,
             toslot: toslot,
-            toNpc: toNpc,
+            tonpc: toNpc,
         })
 
     }

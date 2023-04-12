@@ -1,6 +1,6 @@
 import React from "react";
 import { GameEnum } from "../../../../../scripts/tscripts/shared/GameEnum";
-
+import { PublicBagConfig } from "../../../../../scripts/tscripts/shared/PublicBagConfig";
 import { CCPanel } from "../CCPanel/CCPanel";
 import "./CCInventory.less";
 import { CCInventorySlot } from "./CCInventorySlot";
@@ -9,23 +9,31 @@ interface ICCInventory extends NodePropsData {
 }
 
 interface ISlotInfo {
-
+    iUnlockStar?: number,
+    slot: number,
+    overrideentityindex: ItemEntityIndex,
 }
 export class CCInventory extends CCPanel<ICCInventory> {
 
-
     updateSlots() {
-        let aSlots = [];
+        let aSlots: ISlotInfo[] = [];
         let iLocalPortraitUnit = Players.GetLocalPlayerPortraitUnit();
-        for (let index = GameEnum.Dota2.EDotaItemSlot.DOTA_ITEM_SLOT_MIN; index <= GameEnum.Dota2.EDotaItemSlot.DOTA_ITEM_SLOT_MAX; index++) {
+        let inventorylock = GBuildingEntityRoot.GetEntity(iLocalPortraitUnit)?.InventoryLock;
+        for (let index = PublicBagConfig.DOTA_ITEM_SLOT_MIN; index <= PublicBagConfig.DOTA_ITEM_SLOT_MAX; index++) {
             let iItemIndex = Entities.GetItemInSlot(iLocalPortraitUnit, index);
+            let iUnlockStar = -1;
+            const iUnlockStars = inventorylock || {};
+            if (iUnlockStars[index]) {
+                iUnlockStar = iUnlockStars[index]
+            }
             aSlots.push({
                 overrideentityindex: iItemIndex,
                 slot: index,
+                iUnlockStar: iUnlockStar,
             });
         }
-        let aBackpacks = [];
-        for (let index = GameEnum.Dota2.EDotaItemSlot.DOTA_ITEM_BACKPACK_MIN; index <= GameEnum.Dota2.EDotaItemSlot.DOTA_ITEM_BACKPACK_MAX; index++) {
+        let aBackpacks: ISlotInfo[] = [];
+        for (let index = PublicBagConfig.DOTA_ITEM_BACKPACK_MIN; index <= PublicBagConfig.DOTA_ITEM_BACKPACK_MAX; index++) {
             let iItemIndex = Entities.GetItemInSlot(iLocalPortraitUnit, index);
             aBackpacks.push({
                 overrideentityindex: iItemIndex,
@@ -52,10 +60,11 @@ export class CCInventory extends CCPanel<ICCInventory> {
             });
         })
     }
+
+
     render() {
         const Slots = this.GetState<ISlotInfo[]>("Slots")
         const Backpacks = this.GetState<ISlotInfo[]>("Backpacks")
-
         return (
             this.__root___isValid && (
                 <Panel id="InventoryRoot" ref={this.__root__} {...this.initRootAttrs()}>
@@ -63,19 +72,19 @@ export class CCInventory extends CCPanel<ICCInventory> {
                         <Panel id="InventoryContainer" hittest={true} draggable={true} >
                             <Panel id="inventory_list_container" hittest={false} >
                                 <Panel id="inventory_list" className="inventory_list" hittest={false}  >
-                                    {[...Array(3).keys()].map((key) => {
+                                    {[...Array(3)].map((_, key) => {
                                         return <CCInventorySlot key={key.toString()} id={"inventory_slot_" + key} {...Slots[key]} />
                                     })}
                                 </Panel>
                                 <Panel id="inventory_list2" className="inventory_list" hittest={false}  >
-                                    {[...Array(3).keys()].map((key) => {
+                                    {[...Array(3)].map((_, key) => {
                                         return <CCInventorySlot key={key.toString()} id={"inventory_slot_" + (key + 3)} {...Slots[key + 3]} />
                                     })}
                                 </Panel>
                             </Panel>
                             <Panel id="inventory_backpack_list" hittest={false}  >
                                 {Backpacks.map((t, key) => {
-                                    return <CCInventorySlot key={key.toString()} id={"inventory_slot_" + (key + GameEnum.Dota2.EDotaItemSlot.DOTA_ITEM_BACKPACK_MIN)} {...t} isBackpack={true} />
+                                    return <CCInventorySlot key={key.toString()} id={"inventory_slot_" + (key + PublicBagConfig.DOTA_ITEM_BACKPACK_MIN)} {...t} isBackpack={true} />
                                 })}
                             </Panel>
                         </Panel>
