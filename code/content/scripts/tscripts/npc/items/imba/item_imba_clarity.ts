@@ -3,20 +3,20 @@ import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
+// 净化药水
 @registerAbility()
 export class item_imba_clarity extends BaseItem_Plus {
     OnSpellStart(): void {
         let caster = this.GetCasterPlus();
-        let ability = this;
         let target = this.GetCursorTarget();
         let cast_sound = "DOTA_Item.ClarityPotion.Activate";
         let modifier_regen = "modifier_imba_clarity";
-        let duration = ability.GetSpecialValueFor("duration");
+        let duration = this.GetSpecialValueFor("duration");
         EmitSoundOn(cast_sound, target);
-        target.AddNewModifier(caster, ability, modifier_regen, {
+        target.AddNewModifier(caster, this, modifier_regen, {
             duration: duration
         });
-        ability.SpendCharge();
+        this.SpendCharge();
     }
 }
 @registerModifier()
@@ -59,7 +59,7 @@ export class modifier_imba_clarity extends BaseModifier_Plus {
     /** DeclareFunctions():modifierfunction[] {
         let decFuncs = {
             1: GPropertyConfig.EMODIFIER_PROPERTY.MANA_REGEN_CONSTANT,
-            2: GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS_STACKING,
+            2: GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS,
             3: GPropertyConfig.EMODIFIER_PROPERTY.BONUS_DAY_VISION,
             4: GPropertyConfig.EMODIFIER_PROPERTY.BONUS_NIGHT_VISION,
             5: Enum_MODIFIER_EVENT.ON_TAKEDAMAGE
@@ -70,7 +70,7 @@ export class modifier_imba_clarity extends BaseModifier_Plus {
     CC_GetModifierConstantManaRegen(): number {
         return this.mana_regen;
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS_STACKING)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS)
     CC_GetModifierCastRangeBonusStacking(p_0: ModifierAbilityEvent,): number {
         return this.cast_range_increase;
     }

@@ -4,6 +4,7 @@ import { ResHelper } from "../../../helper/ResHelper";
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifierMotionHorizontal_Plus, BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
+// 自定义
 @registerAbility()
 export class item_imba_valiance extends BaseItem_Plus {
     FindModifierByName: string;
@@ -12,9 +13,9 @@ export class item_imba_valiance extends BaseItem_Plus {
     }
     GetAbilityTextureName(): string {
         if (!this.GetCasterPlus().HasModifier("modifier_item_imba_valiance_counter")) {
-            return "item_valiance";
+            return "imba/valiance";
         } else {
-            return "item_valiance_counter";
+            return "imba/valiance_counter";
         }
     }
     GetBehavior(): DOTA_ABILITY_BEHAVIOR | Uint64 {
@@ -90,12 +91,12 @@ export class modifier_item_imba_valiance extends BaseModifier_Plus {
     }
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS,
             2: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_REGEN_CONSTANT,
             3: GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_CONSTANT_BLOCK
         });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS)
     CC_GetModifierHealthBonus(): number {
         if (this.GetItemPlus()) {
             return this.GetItemPlus().GetSpecialValueFor("bonus_health");

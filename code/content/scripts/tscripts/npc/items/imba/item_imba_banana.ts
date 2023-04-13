@@ -2,6 +2,7 @@
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
+// 香蕉
 @registerAbility()
 export class item_imba_banana extends BaseItem_Plus {
     OnSpellStart(): void {
@@ -18,6 +19,7 @@ export class item_imba_banana extends BaseItem_Plus {
             this.Destroy();
         }
     }
+
 }
 @registerModifier()
 export class modifier_item_imba_banana extends BaseModifier_Plus {

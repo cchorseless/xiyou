@@ -4,8 +4,12 @@ import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
+// 寒铁钢爪
 @registerAbility()
 export class item_imba_iron_talon extends BaseItem_Plus {
+
+
+
     hunt_stacks: number;
     CastFilterResultTarget(hTarget: IBaseNpc_Plus): UnitFilterResult {
         if (!IsServer()) {
@@ -119,7 +123,7 @@ export class modifier_item_imba_iron_talon extends BaseModifier_Plus {
     }
     /** DeclareFunctions():modifierfunction[] {
         let funcs = {
-            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
             2: GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS,
             3: Enum_MODIFIER_EVENT.ON_DEATH,
             4: GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP,
@@ -127,12 +131,12 @@ export class modifier_item_imba_iron_talon extends BaseModifier_Plus {
         }
         return Object.values(funcs);
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
-    CC_GetModifierPreAttack_BonusDamage(keys?: { target: IBaseNpc_Plus } /** keys */): number {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    CC_GetModifierPreAttack_BonusDamage(): number {
         if (!IsServer()) {
             return;
         }
-        if ((this.GetParentPlus().FindAllModifiersByName("modifier_item_imba_iron_talon")[0] == this) && keys.target && !keys.target.IsRealUnit() && !keys.target.IsOther() && !keys.target.IsBuilding() && keys.target.GetClassname() != "npc_dota_lone_druid_bear" && keys.target.GetTeamNumber() != this.GetParentPlus().GetTeamNumber()) {
+        if ((this.GetParentPlus().FindAllModifiersByName("modifier_item_imba_iron_talon")[0] == this)) {
             if (this.GetParentPlus().HasItemInInventory("item_quelling_blade")) {
                 return this.GetStackCount();
             } else if (!this.GetParentPlus().IsRangedAttacker()) {

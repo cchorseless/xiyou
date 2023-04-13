@@ -488,11 +488,11 @@ export class modifier_imba_vampiric_aura_buff extends BaseModifier_Plus {
     }
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
             2: Enum_MODIFIER_EVENT.ON_TAKEDAMAGE
         });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
     CC_GetModifierPreAttack_BonusDamage(): number {
         if (!this.GetParentPlus().HasModifier("modifier_imba_mortal_strike_skeleton") && !this.GetParentPlus().HasModifier("modifier_mortal_strike_skeleton")) {
             return this.damage;
@@ -925,10 +925,10 @@ export class modifier_imba_mortal_strike_buff extends BaseModifier_Plus {
     }
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS
+            1: GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS
         });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS)
     CC_GetModifierHealthBonus(): number {
         if (this == undefined || this.caster == undefined) {
             return undefined;

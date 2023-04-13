@@ -89,12 +89,12 @@ export class modifier_imba_furion_wrath_of_nature_aura extends BaseModifier_Plus
     }
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
             2: GPropertyConfig.EMODIFIER_PROPERTY.EXTRA_HEALTH_BONUS,
-            3: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS
+            3: GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS
         });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.GetStackCount() * this.treant_damage_per_stack;
     }
@@ -102,7 +102,7 @@ export class modifier_imba_furion_wrath_of_nature_aura extends BaseModifier_Plus
     CC_GetModifierExtraHealthBonus(): number {
         return this.GetStackCount() * this.treant_health_per_stack;
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS)
     CC_GetModifierHealthBonus(): number {
         return this.GetStackCount() * this.treant_health_per_stack;
     }
@@ -345,10 +345,10 @@ export class modifier_imba_furion_wrath_of_nature_damage_counter extends BaseMod
     }
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE
+            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS
         });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.GetStackCount();
     }

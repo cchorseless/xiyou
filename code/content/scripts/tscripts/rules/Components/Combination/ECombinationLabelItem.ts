@@ -25,7 +25,6 @@ export class ECombinationLabelItem extends ET.Entity {
         if (equipid > 0) {
             let unitroot = this.GetDomain<IBaseNpc_Plus>().ETRoot.As<IBattleUnitEntityRoot>();
             this.IsActive = unitroot.checkCanStarUp() == false || HeroEquipComponent.CheckPlayerIsScepter(this.BelongPlayerid, equipid);
-            GLogHelper.print("ECombinationLabelItem checkActive", this.IsActive, this.SourceEntityConfigId, equipid, this.BelongPlayerid)
         }
         else {
             this.IsActive = true;

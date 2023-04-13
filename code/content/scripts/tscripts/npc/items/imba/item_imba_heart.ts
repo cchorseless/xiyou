@@ -4,6 +4,7 @@ import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
+// 恐鳌之心
 @registerAbility()
 export class item_imba_heart extends BaseItem_Plus {
     GetIntrinsicModifierName(): string {
@@ -68,7 +69,7 @@ export class modifier_item_imba_heart extends BaseModifier_Plus {
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
             1: GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BONUS,
-            2: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS,
+            2: GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS,
             3: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_REGEN_PERCENTAGE,
             4: Enum_MODIFIER_EVENT.ON_TAKEDAMAGE,
             5: GPropertyConfig.EMODIFIER_PROPERTY.HP_REGEN_AMPLIFY_PERCENTAGE
@@ -80,7 +81,7 @@ export class modifier_item_imba_heart extends BaseModifier_Plus {
             return this.GetItemPlus().GetSpecialValueFor("bonus_strength");
         }
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS)
     CC_GetModifierHealthBonus(): number {
         if (this.GetItemPlus()) {
             return this.GetItemPlus().GetSpecialValueFor("bonus_health");

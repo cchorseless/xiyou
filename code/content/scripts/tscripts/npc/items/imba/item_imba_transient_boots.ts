@@ -17,9 +17,9 @@ export class item_imba_transient_boots extends BaseItem_Plus {
     }
     GetAbilityTextureName(): string {
         if (!this.GetCasterPlus().HasModifier("modifier_item_imba_transient_boots_break")) {
-            return "imba_transient_boots";
+            return "imba/transient_boots";
         } else {
-            return "imba_transient_boots_broken";
+            return "imba/transient_boots_broken";
         }
     }
     OnSpellStart(): void {

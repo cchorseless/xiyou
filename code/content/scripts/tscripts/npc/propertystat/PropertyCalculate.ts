@@ -180,28 +180,12 @@ export module PropertyCalculate {
     export function GetBaseAttackDamage(hUnit: IBaseNpc_Plus) {
         let fDefault = 0;
         if (GFuncEntity.IsValid(hUnit)) {
-            fDefault = GetUnitCache(hUnit, "AttackDamageMin");
-            if (fDefault == 0) {
-                let min = GetUnitCache(hUnit, "AttackDamageMin");
-                let count = 0;
-                if (min > 0) {
-                    fDefault += min;
-                    count++;
-                }
-                let max = GetUnitCache(hUnit, "AttackDamageMax");
-                if (max > 0) {
-                    fDefault += max;
-                    count++;
-                }
-                if (count > 0) {
-                    fDefault = fDefault / count;
-                }
-            }
+            fDefault = GetUnitCache(hUnit, "AttackDamage");
         }
         let baseatk = fDefault + SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.BASEATTACK_BONUSDAMAGE);
         let baseatk_pect = SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BASE_PERCENTAGE);
         let atk_pect = SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_PERCENTAGE);
-        return math.floor(baseatk * (100 + baseatk_pect) * (100 + atk_pect) / 10000);
+        return math.floor(baseatk * (1 + baseatk_pect * 0.01) * (1 + atk_pect * 0.01));
     }
     /** 基础物理防御
      * @Both

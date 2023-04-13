@@ -19,15 +19,13 @@ function ProjectileHit(params: any) {
 
 }
 
-
+// 自定义
 @registerAbility()
 export class item_imba_shotgun extends BaseItem_Plus {
     GetIntrinsicModifierName(): string {
         return "modifier_imba_shotgun_passive";
     }
-    GetAbilityTextureName(): string {
-        return "imba_shotgun";
-    }
+
 }
 @registerModifier()
 export class modifier_imba_shotgun_passive extends BaseModifier_Plus {
@@ -85,7 +83,7 @@ export class modifier_imba_shotgun_passive extends BaseModifier_Plus {
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
             1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT,
-            2: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
+            2: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
             3: GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_BONUS,
             4: Enum_MODIFIER_EVENT.ON_ATTACK
         });
@@ -94,7 +92,7 @@ export class modifier_imba_shotgun_passive extends BaseModifier_Plus {
     CC_GetModifierAttackSpeedBonus_Constant(): number {
         return this.bonus_as;
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.bonus_damage;
     }
@@ -217,9 +215,7 @@ export class item_imba_starfury extends BaseItem_Plus {
     GetIntrinsicModifierName(): string {
         return "modifier_imba_starfury_passive";
     }
-    GetAbilityTextureName(): string {
-        return "imba_starfury";
-    }
+
 }
 @registerModifier()
 export class modifier_imba_starfury_passive extends BaseModifier_Plus {
@@ -271,7 +267,7 @@ export class modifier_imba_starfury_passive extends BaseModifier_Plus {
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
             1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT,
-            2: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
+            2: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
             3: GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_BONUS,
             4: Enum_MODIFIER_EVENT.ON_ATTACK_LANDED,
             5: Enum_MODIFIER_EVENT.ON_ATTACK_FAIL
@@ -281,7 +277,7 @@ export class modifier_imba_starfury_passive extends BaseModifier_Plus {
     CC_GetModifierAttackSpeedBonus_Constant(): number {
         return this.bonus_as;
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.bonus_damage;
     }

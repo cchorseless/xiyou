@@ -3,6 +3,7 @@ import { GameFunc } from "../../../GameFunc";
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
+// 死灵书
 @registerAbility()
 export class item_imba_necronomicon extends BaseItem_Plus {
     GetIntrinsicModifierName(): string {
@@ -44,7 +45,6 @@ export class item_imba_necronomicon extends BaseItem_Plus {
             "6": "imba_necronomicon_archer_multishot",
             "7": "imba_necronomicon_archer_spread_shot"
         }
-        print("Test 4");
         for (const [_, melee_ability] of GameFunc.Pair(melee_abilities)) {
             if (melee_summon.FindAbilityByName(melee_ability)) {
                 if (melee_summon.FindAbilityByName(melee_ability).GetMaxLevel() > 1) {
@@ -95,3 +95,13 @@ export class modifier_item_imba_necronomicon_summon extends BaseModifier_Plus {
         };
     }
 }
+
+// 多级死灵书
+@registerAbility()
+export class item_imba_necronomicon_2 extends item_imba_necronomicon { }
+@registerAbility()
+export class item_imba_necronomicon_3 extends item_imba_necronomicon { }
+@registerAbility()
+export class item_imba_necronomicon_4 extends item_imba_necronomicon { }
+@registerAbility()
+export class item_imba_necronomicon_5 extends item_imba_necronomicon { }

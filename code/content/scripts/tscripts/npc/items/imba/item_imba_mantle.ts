@@ -2,6 +2,7 @@
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
+// 智力斗篷
 @registerAbility()
 export class item_imba_mantle extends BaseItem_Plus {
     GetIntrinsicModifierName(): string {

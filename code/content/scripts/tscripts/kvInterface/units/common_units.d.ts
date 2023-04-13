@@ -13,6 +13,7 @@ declare namespace common_units {
 "unit_base_gold_bag" :OBJ_2_1 ,
 "unit_base_equip_bag" :OBJ_2_1 ,
 "unit_target_dummy" :OBJ_2_1 ,
+"npc_dota_target_dummy" :OBJ_2_1 ,
 [k:string] : OBJ_2_1 }
  interface OBJ_2_1 {
 "UnitLabel" :string ,

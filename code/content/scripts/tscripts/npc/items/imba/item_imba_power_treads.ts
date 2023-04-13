@@ -3,15 +3,16 @@ import { GameFunc } from "../../../GameFunc";
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
+// 动力鞋
 @registerAbility()
-export class item_imba_power_treads_2 extends BaseItem_Plus {
+export class item_imba_power_treads extends BaseItem_Plus {
     public state: any;
     public type: any;
     GetBehavior(): DOTA_ABILITY_BEHAVIOR | Uint64 {
         return DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_IMMEDIATE + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_NO_TARGET;
     }
     GetIntrinsicModifierName(): string {
-        return "modifier_imba_power_treads_2";
+        return "modifier_imba_power_treads";
     }
     OnSpellStart(): void {
         if (IsServer()) {
@@ -19,7 +20,7 @@ export class item_imba_power_treads_2 extends BaseItem_Plus {
             // if (!caster.IsRealUnit() || caster.IsClone()) {
             //     return;
             // }
-            let modifiers = caster.FindAllModifiersByName("modifier_imba_power_treads_2");
+            let modifiers = caster.FindAllModifiersByName("modifier_imba_power_treads");
             for (const [_, modifier] of GameFunc.iPair(modifiers)) {
                 if (modifier.GetItemPlus() == this) {
                     let state = modifier.GetStackCount();
@@ -35,21 +36,21 @@ export class item_imba_power_treads_2 extends BaseItem_Plus {
                 }
             }
             // caster.CalculateStatBonus(true);
-            this.type = this.GetCasterPlus().findBuffStack("modifier_imba_power_treads_2", this.GetCasterPlus());
+            this.type = this.GetCasterPlus().findBuffStack("modifier_imba_power_treads", this.GetCasterPlus());
         }
     }
     GetAbilityTextureName(): string {
         if (IsClient()) {
             if (this.state) {
-                return "imba_mega_treads_" + this.state;
+                return "imba/mega_treads_" + this.state;
             } else {
-                return "imba_mega_treads_" + this.GetCasterPlus().findBuffStack("modifier_imba_power_treads_2", this.GetCasterPlus());
+                return "imba/mega_treads_" + this.GetCasterPlus().findBuffStack("modifier_imba_power_treads", this.GetCasterPlus());
             }
         }
     }
 }
 @registerModifier()
-export class modifier_imba_power_treads_2 extends BaseModifier_Plus {
+export class modifier_imba_power_treads extends BaseModifier_Plus {
     IsHidden(): boolean {
         return true;
     }
@@ -93,10 +94,10 @@ export class modifier_imba_power_treads_2 extends BaseModifier_Plus {
                         for (const [_, hero] of GameFunc.iPair(ownerFinder)) {
                             if (hero.GetUnitName() == parent.GetUnitName()) {
                                 for (let i = 0; i <= 5; i++) {
-                                    let hero_item = hero.GetItemInSlot(i) as item_imba_power_treads_2;
-                                    if (hero_item && hero_item.GetAbilityName() == "item_imba_power_treads_2") {
-                                        let illusion_item = parent.GetItemInSlot(i) as item_imba_power_treads_2;
-                                        let ability = this.GetItemPlus() as item_imba_power_treads_2;
+                                    let hero_item = hero.GetItemInSlot(i) as item_imba_power_treads;
+                                    if (hero_item && hero_item.GetAbilityName() == "item_imba_power_treads") {
+                                        let illusion_item = parent.GetItemInSlot(i) as item_imba_power_treads;
+                                        let ability = this.GetItemPlus() as item_imba_power_treads;
                                         if (illusion_item != undefined && ability != undefined && illusion_item == ability) {
                                             let state = 0;
                                             if (hero_item.state != undefined) {
@@ -122,8 +123,8 @@ export class modifier_imba_power_treads_2 extends BaseModifier_Plus {
                     });
                 }
             }
-            if (this.GetItemPlus() && this.GetItemPlus<item_imba_power_treads_2>().type) {
-                this.SetStackCount(this.GetItemPlus<item_imba_power_treads_2>().type);
+            if (this.GetItemPlus() && this.GetItemPlus<item_imba_power_treads>().type) {
+                this.SetStackCount(this.GetItemPlus<item_imba_power_treads>().type);
             }
         }
         if (IsClient()) {
@@ -133,7 +134,7 @@ export class modifier_imba_power_treads_2 extends BaseModifier_Plus {
     OnIntervalThink(): void {
         if (IsClient()) {
             let state = this.GetStackCount();
-            let ability = this.GetItemPlus<item_imba_power_treads_2>();
+            let ability = this.GetItemPlus<item_imba_power_treads>();
             if (!ability) {
                 return undefined;
             }
@@ -276,11 +277,11 @@ export class modifier_imba_mega_treads_stat_multiplier_02 extends BaseModifier_P
     }
     /** DeclareFunctions():modifierfunction[] {
         let funcs = {
-            1: GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS_STACKING
+            1: GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS
         }
         return Object.values(funcs);
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS_STACKING)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS)
     CC_GetModifierCastRangeBonusStacking(p_0: ModifierAbilityEvent,): number {
         return this.GetItemPlus().GetSpecialValueFor("int_mode_cast_range");
     }

@@ -5,11 +5,10 @@ import { BaseModifier_Plus } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 import { item_imba_gem } from "./item_imba_gem";
+// 自定义
 @registerAbility()
 export class item_imba_soul_of_truth extends BaseItem_Plus {
-    GetAbilityTextureName(): string {
-        return "imba_soul_of_truth";
-    }
+
     CastFilterResult(): UnitFilterResult {
         if (this.GetCasterPlus().HasModifier("modifier_imba_soul_of_truth_buff")) {
             return UnitFilterResult.UF_FAIL_CUSTOM;

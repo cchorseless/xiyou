@@ -5,6 +5,7 @@ import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
+// 碎颅锤
 @registerAbility()
 export class item_imba_skull_basher extends BaseItem_Plus {
     GetIntrinsicModifierName(): string {
@@ -29,7 +30,7 @@ export class modifier_imba_skull_basher extends BaseModifier_Plus {
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
             1: GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BONUS,
-            2: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
+            2: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
             3: Enum_MODIFIER_EVENT.ON_ATTACK,
             4: Enum_MODIFIER_EVENT.ON_ATTACK_LANDED,
             5: GPropertyConfig.EMODIFIER_PROPERTY.PROCATTACK_BONUS_DAMAGE_MAGICAL
@@ -41,7 +42,7 @@ export class modifier_imba_skull_basher extends BaseModifier_Plus {
             return this.GetItemPlus().GetSpecialValueFor("bonus_strength");
         }
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
     CC_GetModifierPreAttack_BonusDamage(): number {
         if (this.GetItemPlus()) {
             return this.GetItemPlus().GetSpecialValueFor("bonus_damage");

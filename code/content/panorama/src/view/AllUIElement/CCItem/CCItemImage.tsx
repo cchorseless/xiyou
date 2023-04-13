@@ -5,7 +5,6 @@ import { CSSHelper } from "../../../helper/CSSHelper";
 import { ItemHelper } from "../../../helper/DotaEntityHelper";
 import { KVHelper } from "../../../helper/KVHelper";
 import { TipsHelper } from "../../../helper/TipsHelper";
-import { CCIcon_Lock } from "../CCIcons/CCIcon_Lock";
 import { CCPanel } from "../CCPanel/CCPanel";
 import "./CCItemImage.less";
 
@@ -92,8 +91,8 @@ export class CCItemImage extends CCPanel<ICCItemImage> {
             {
                 iUnlockStar > 0 &&
                 <>
-                    <CCPanel id="ItemLockBg" hittest={false} />
-                    <CCIcon_Lock align="center center" />
+                    {/* <CCPanel id="ItemLockBg" hittest={false} />
+                    <CCIcon_Lock align="center center" /> */}
                     <Panel id="ItemLockStars" hittest={true} >
                         {
                             [...Array(iUnlockStar)].map((_, index) => {

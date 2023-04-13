@@ -1,7 +1,18 @@
 
+import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus } from "../../entityPlus/BaseModifier_Plus";
-import { registerModifier } from "../../entityPlus/Base_Plus";
+import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
+// 不朽尸王的头盔
+@registerAbility()
+export class item_imba_hellblade extends BaseItem_Plus {
+    GetIntrinsicModifierName(): string {
+        return "modifier_item_imba_helm_of_the_undying_addendum";
+    }
+}
+
+
+
 @registerModifier()
 export class modifier_item_imba_helm_of_the_undying_addendum extends BaseModifier_Plus {
     public health_damage_pct_threshold: number;

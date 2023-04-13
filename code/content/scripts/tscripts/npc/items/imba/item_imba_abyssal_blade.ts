@@ -5,6 +5,7 @@ import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
+// 深渊之刃
 @registerAbility()
 export class item_imba_abyssal_blade extends BaseItem_Plus {
     GetIntrinsicModifierName(): string {
@@ -72,8 +73,8 @@ export class modifier_imba_abyssal_blade extends BaseModifier_Plus {
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
             1: GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BONUS,
-            2: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
-            3: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS,
+            2: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
+            3: GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS,
             4: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_REGEN_CONSTANT,
             5: GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_CONSTANT_BLOCK,
             6: Enum_MODIFIER_EVENT.ON_ATTACK,

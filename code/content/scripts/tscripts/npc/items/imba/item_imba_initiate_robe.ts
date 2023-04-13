@@ -2,14 +2,13 @@
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
+// 自定义
 @registerAbility()
 export class item_imba_initiate_robe extends BaseItem_Plus {
     GetIntrinsicModifierName(): string {
         return "modifier_imba_initiate_robe_passive";
     }
-    GetAbilityTextureName(): string {
-        return "imba_initiate_robe";
-    }
+
 }
 @registerModifier()
 export class modifier_imba_initiate_robe_passive extends BaseModifier_Plus {
@@ -28,7 +27,7 @@ export class modifier_imba_initiate_robe_passive extends BaseModifier_Plus {
     }
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS,
             2: GPropertyConfig.EMODIFIER_PROPERTY.MANA_BONUS,
             3: GPropertyConfig.EMODIFIER_PROPERTY.MANA_REGEN_CONSTANT,
             4: GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_RESISTANCE_BONUS,
@@ -60,7 +59,7 @@ export class modifier_imba_initiate_robe_passive extends BaseModifier_Plus {
         this.mana_raw = this.GetParentPlus().GetMana();
         this.mana_pct = this.GetParentPlus().GetManaPercent();
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS)
     CC_GetModifierHealthBonus(): number {
         if (this.GetItemPlus()) {
             return this.GetItemPlus().GetSpecialValueFor("bonus_health");

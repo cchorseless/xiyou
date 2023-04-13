@@ -1201,7 +1201,7 @@ export class modifier_imba_mars_arena_of_blood_coliseum extends BaseModifier_Plu
     }
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
             2: GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT,
             3: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_REGEN_CONSTANT
         });
@@ -1226,7 +1226,7 @@ export class modifier_imba_mars_arena_of_blood_coliseum extends BaseModifier_Plu
             this.SetStackCount(GameFunc.GetCount(heroes));
         }
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.bonus_damage * this.GetStackCount();
     }

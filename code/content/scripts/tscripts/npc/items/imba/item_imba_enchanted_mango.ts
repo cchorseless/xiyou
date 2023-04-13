@@ -2,6 +2,7 @@
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
+// 魔法芒果
 @registerAbility()
 export class item_imba_enchanted_mango extends BaseItem_Plus {
     GetIntrinsicModifierName(): string {
@@ -82,6 +83,6 @@ export class modifier_imba_ripe_mango_timer extends BaseModifier_Plus {
         return false;
     }
     GetTexture(): string {
-        return "item_enchanted_mango";
+        return "item/enchanted_mango";
     }
 }

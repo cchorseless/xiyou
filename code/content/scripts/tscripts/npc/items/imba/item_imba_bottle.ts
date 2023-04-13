@@ -3,6 +3,7 @@ import { ResHelper } from "../../../helper/ResHelper";
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
+// 魔瓶
 @registerAbility()
 export class item_imba_bottle extends BaseItem_Plus {
     public RuneStorage: string;
@@ -45,8 +46,10 @@ export class item_imba_bottle extends BaseItem_Plus {
         this.GetCasterPlus().EmitSound("Bottle.Cork");
     }
     GetAbilityTextureName(): string {
-        let texture = "bottle_0_3";
-        texture = this.texture_name || texture;
+        let texture = "imba/bottle_0_3";
+        if (this.texture_name) {
+            texture = this.texture_name;
+        }
         return texture;
     }
 }
@@ -105,13 +108,13 @@ export class modifier_item_imba_bottle_texture_controller extends BaseModifier_P
             this.SetStackCount(stack);
         }
         if (this.GetStackCount() >= 1 && this.GetStackCount() <= 4) {
-            item.texture_name = "bottle_" + rune_table[this.GetStackCount()];
+            item.texture_name = "imba/bottle_" + rune_table[this.GetStackCount()];
         } else {
-            item.texture_name = "bottle_rune_" + rune_table[this.GetStackCount()];
+            item.texture_name = "imba/bottle_rune_" + rune_table[this.GetStackCount()];
         }
     }
     BeDestroy(): void {
-        if (this.GetParentPlus().HasModifier("modifier_item_imba_bottle_texture_controller_2")) {
+        if (IsServer() && this.GetParentPlus().HasModifier("modifier_item_imba_bottle_texture_controller_2")) {
             this.GetParentPlus().RemoveModifierByName("modifier_item_imba_bottle_texture_controller_2");
         }
     }
@@ -151,7 +154,7 @@ export class modifier_item_imba_bottle_heal extends BaseModifier_Plus {
     public mana_restore: any;
     public pfx: any;
     GetTexture() {
-        return "bottle_0_3";
+        return "imba/bottle_0_3";
     }
     IsPurgable() {
         return false;

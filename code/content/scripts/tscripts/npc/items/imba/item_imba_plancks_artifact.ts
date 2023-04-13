@@ -5,6 +5,7 @@ import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
+// 自定义
 @registerAbility()
 export class item_imba_plancks_artifact extends BaseItem_Plus {
     GetIntrinsicModifierName(): string {
@@ -80,7 +81,7 @@ export class modifier_imba_plancks_artifact_basic extends BaseModifier_Plus {
     }
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS,
             2: GPropertyConfig.EMODIFIER_PROPERTY.MANA_BONUS,
             3: GPropertyConfig.EMODIFIER_PROPERTY.MANA_REGEN_CONSTANT,
             4: GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BONUS
@@ -90,7 +91,7 @@ export class modifier_imba_plancks_artifact_basic extends BaseModifier_Plus {
     CC_GetModifierManaBonus(): number {
         return this.GetItemPlus().GetSpecialValueFor("bonus_mana");
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS)
     CC_GetModifierHealthBonus(): number {
         return this.GetItemPlus().GetSpecialValueFor("bonus_health");
     }

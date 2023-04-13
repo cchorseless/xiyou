@@ -5,6 +5,7 @@ import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
+// 自定义
 @registerAbility()
 export class item_imba_origin_treads extends BaseItem_Plus {
     public type: any;
@@ -23,15 +24,16 @@ export class item_imba_origin_treads extends BaseItem_Plus {
         let origin_modifier_stack_count = this.GetCasterPlus().findBuffStack("modifier_item_imba_origin_treads", this.GetCasterPlus());
         if (origin_modifier_stack_count) {
             if (origin_modifier_stack_count <= 1) {
-                return "origin_treads_str";
+                return "imba/origin_treads_str";
             } else if (origin_modifier_stack_count == 2) {
-                return "origin_treads_agi";
+                return "imba/origin_treads_agi";
             } else if (origin_modifier_stack_count == 3) {
-                return "origin_treads_int";
+                return "imba/origin_treads_int";
             } else {
-                return "origin_treads_str";
+                return "imba/origin_treads_str";
             }
         }
+        return "imba/origin_treads_str";
     }
     OnSpellStart(): void {
         let target = this.GetCursorTarget();
@@ -152,15 +154,15 @@ export class modifier_item_imba_origin_treads extends BaseModifier_Plus {
             1: GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BONUS,
             2: GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_BONUS,
             3: GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BONUS,
-            4: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS,
+            4: GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS,
             5: GPropertyConfig.EMODIFIER_PROPERTY.MANA_BONUS,
             6: GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_UNIQUE,
             7: GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT,
             8: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_REGEN_CONSTANT,
             9: GPropertyConfig.EMODIFIER_PROPERTY.HP_REGEN_AMPLIFY_PERCENTAGE,
-            10: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
+            10: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
             11: GPropertyConfig.EMODIFIER_PROPERTY.PROCATTACK_BONUS_DAMAGE_PHYSICAL,
-            12: GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS_STACKING,
+            12: GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS,
             13: Enum_MODIFIER_EVENT.ON_TAKEDAMAGE
         });
     } */
@@ -188,7 +190,7 @@ export class modifier_item_imba_origin_treads extends BaseModifier_Plus {
             return this.all_stats;
         }
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS)
     CC_GetModifierHealthBonus(): number {
         return this.bonus_health;
     }
@@ -216,7 +218,7 @@ export class modifier_item_imba_origin_treads extends BaseModifier_Plus {
             return this.str_hp_regen_amp_pct;
         }
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
     CC_GetModifierPreAttack_BonusDamage(): number {
         if (this.GetStackCount() == 2) {
             return this.agi_damage_bonus;
@@ -230,7 +232,7 @@ export class modifier_item_imba_origin_treads extends BaseModifier_Plus {
             return keys.damage;
         }
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS_STACKING)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS)
     CC_GetModifierCastRangeBonusStacking(p_0: ModifierAbilityEvent,): number {
         if (this.GetStackCount() == 3) {
             return this.int_cast_range;

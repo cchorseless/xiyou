@@ -3,6 +3,7 @@ import { GameFunc } from "../../../GameFunc";
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
+// 以太透镜
 @registerAbility()
 export class item_imba_aether_lens extends BaseItem_Plus {
     GetIntrinsicModifierName(): string {
@@ -62,7 +63,7 @@ export class modifier_imba_aether_lens_passive extends BaseModifier_Plus {
     }
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS_STACKING,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS,
             2: GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_PERCENTAGE,
             3: GPropertyConfig.EMODIFIER_PROPERTY.MANA_BONUS,
             4: GPropertyConfig.EMODIFIER_PROPERTY.MANA_REGEN_CONSTANT

@@ -3,6 +3,7 @@ import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
+// 真视宝石
 @registerAbility()
 export class item_imba_gem extends BaseItem_Plus {
     dummy_unit: IBaseNpc_Plus;
@@ -16,6 +17,7 @@ export class item_imba_gem extends BaseItem_Plus {
             }
         }
     }
+
 }
 @registerModifier()
 export class modifier_item_imba_gem_of_true_sight extends BaseModifier_Plus {

@@ -4,6 +4,7 @@ import { ResHelper } from "../../../helper/ResHelper";
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
+// 自定义
 @registerAbility()
 export class item_imba_sogat_cuirass extends BaseItem_Plus {
     GetIntrinsicModifierName(): string {
@@ -73,12 +74,12 @@ export class modifier_imba_sogat_cuirass extends BaseModifier_Plus {
         return Object.values({
             1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT,
             2: GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS,
-            3: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS,
+            3: GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS,
             4: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_REGEN_CONSTANT,
             5: GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_CONSTANT_BLOCK
         });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS)
     CC_GetModifierHealthBonus(): number {
         if (this.GetItemPlus()) {
             return this.GetItemPlus().GetSpecialValueFor("bonus_health");

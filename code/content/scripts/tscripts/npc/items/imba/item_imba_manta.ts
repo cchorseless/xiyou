@@ -4,6 +4,7 @@ import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
+// 幻影斧
 @registerAbility()
 export class item_imba_manta extends BaseItem_Plus {
     manta_illusions: IBaseNpc_Plus[];
@@ -286,4 +287,11 @@ export class modifier_item_imba_manta_abyss_boost extends BaseModifier_Plus {
     CC_OnTooltip(): number {
         return this.abyss_boost_pct;
     }
+}
+
+// 幻影斧2级
+@registerAbility()
+export class item_imba_manta_2 extends item_imba_manta {
+
+
 }

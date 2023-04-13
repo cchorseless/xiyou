@@ -152,7 +152,9 @@ function ToggleSelection(sPickerName: string) {
 
 // 普通按钮
 interface ICCDebugTool_DemoButton {
-	eventName: string; data?: any; localtext: string; btncolor?: "RedButton" | "GreenButton" | "QuitButton";
+	eventName: string;
+	data?: () => any;
+	localtext: string; btncolor?: "RedButton" | "GreenButton" | "QuitButton";
 }
 export class CCDebugTool_DemoButton extends CCPanel<ICCDebugTool_DemoButton, TextButton>{
 
@@ -165,7 +167,11 @@ export class CCDebugTool_DemoButton extends CCPanel<ICCDebugTool_DemoButton, Tex
 			localizedText: this.props.localtext,
 			onactivate: (self: Panel) => {
 				if (this.props.eventName && this.props.eventName.length > 0) {
-					NetHelper.SendToLua(this.props.eventName, this.props.data)
+					let data = null;
+					if (this.props.data) {
+						data = this.props.data();
+					}
+					NetHelper.SendToLua(this.props.eventName, data)
 				}
 			}
 		}

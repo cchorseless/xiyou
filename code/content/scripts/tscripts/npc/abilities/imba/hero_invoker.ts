@@ -1717,7 +1717,7 @@ export class modifier_imba_invoker_alacrity extends BaseModifier_Plus {
     /** DeclareFunctions():modifierfunction[] {
         let funcs = {
             1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT,
-            2: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
+            2: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
             3: Enum_MODIFIER_EVENT.ON_ATTACK_LANDED
         }
         return Object.values(funcs);
@@ -1835,7 +1835,7 @@ export class modifier_imba_invoker_alacrity extends BaseModifier_Plus {
     CC_GetModifierAttackSpeedBonus_Constant(): number {
         return this.bonus_attack_speed;
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.bonus_damage;
     }

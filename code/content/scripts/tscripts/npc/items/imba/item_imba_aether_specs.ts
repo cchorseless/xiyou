@@ -5,6 +5,7 @@ import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
+// 视野卫视
 @registerAbility()
 export class item_imba_aether_specs extends BaseItem_Plus {
     GetIntrinsicModifierName(): string {
@@ -137,9 +138,9 @@ export class modifier_item_imba_aether_specs extends BaseModifier_Plus {
         return Object.values({
             1: GPropertyConfig.EMODIFIER_PROPERTY.MANA_BONUS,
             2: GPropertyConfig.EMODIFIER_PROPERTY.MANA_REGEN_CONSTANT,
-            3: GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS_STACKING,
+            3: GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS,
             4: GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_PERCENTAGE,
-            5: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
+            5: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
             6: GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BONUS,
             7: GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_BONUS,
             8: GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BONUS,
@@ -154,7 +155,7 @@ export class modifier_item_imba_aether_specs extends BaseModifier_Plus {
     CC_GetModifierConstantManaRegen(): number {
         return this.bonus_mana_regen;
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS_STACKING)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS)
     CC_GetModifierCastRangeBonusStacking(p_0: ModifierAbilityEvent,): number {
         if (this.GetStackCount() != 1) {
             return 0;
@@ -168,7 +169,7 @@ export class modifier_item_imba_aether_specs extends BaseModifier_Plus {
             return this.spell_power;
         }
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.bonus_damage;
     }
@@ -232,7 +233,7 @@ export class modifier_item_imba_aether_specs_aura_bonus extends BaseModifier_Plu
             2: GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS_UNIQUE,
             3: GPropertyConfig.EMODIFIER_PROPERTY.BONUS_DAY_VISION,
             4: GPropertyConfig.EMODIFIER_PROPERTY.BONUS_NIGHT_VISION,
-            5: GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS_STACKING
+            5: GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS
         });
     } */
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MANA_REGEN_CONSTANT_UNIQUE)
@@ -257,7 +258,7 @@ export class modifier_item_imba_aether_specs_aura_bonus extends BaseModifier_Plu
             return this.aura_bonus_vision;
         }
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS_STACKING)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS)
     CC_GetModifierCastRangeBonusStacking(p_0: ModifierAbilityEvent,): number {
         return this.aura_bonus_cast_range;
     }

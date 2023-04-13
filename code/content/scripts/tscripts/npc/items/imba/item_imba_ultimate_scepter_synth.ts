@@ -4,8 +4,7 @@ import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 
-
-
+// 阿哈利姆魔晶
 @registerAbility()
 export class item_imba_ultimate_scepter_synth extends BaseItem_Plus {
 

@@ -8,6 +8,7 @@ const OGRE_MINIMUM_HEIGHT_ABOVE_LOWEST = 150;
 const OGRE_MINIMUM_HEIGHT_ABOVE_HIGHEST = 33;
 const OGRE_ACCELERATION_Z = 1250;
 const OGRE_MAX_HORIZONTAL_ACCELERATION = 800;
+// 食人魔海豹图腾
 @registerAbility()
 export class item_imba_ogre_seal_totem extends BaseItem_Plus {
     public stun_duration: number;
@@ -289,7 +290,7 @@ export class modifier_item_imba_ogre_seal_totem extends BaseModifier_Plus {
     /** DeclareFunctions():modifierfunction[] {
         let funcs = {
             1: GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BONUS,
-            2: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS
+            2: GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS
         }
         return Object.values(funcs);
     } */
@@ -297,7 +298,7 @@ export class modifier_item_imba_ogre_seal_totem extends BaseModifier_Plus {
     CC_GetModifierBonusStats_Strength( /** params */): number {
         return this.bonus_strength;
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS)
     CC_GetModifierHealthBonus( /** params */): number {
         return this.bonus_hp;
     }

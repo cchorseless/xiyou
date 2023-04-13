@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -578,7 +578,7 @@ export class modifier_imba_brewmaster_drunken_brawler extends BaseModifier_Plus 
             3: GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE,
             4: GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP,
             5: Enum_MODIFIER_EVENT.ON_ATTACK_FAIL,
-            6: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE
+            6: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS
         });
     } */
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.EVASION_CONSTANT)
@@ -615,7 +615,7 @@ export class modifier_imba_brewmaster_drunken_brawler extends BaseModifier_Plus 
             this.SetStackCount(this.GetStackCount() + keys.damage);
         }
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
     CC_GetModifierPreAttack_BonusDamage( /** keys */): number {
         if (this.GetStackCount() > 0) {
             this.redirective_damage = this.GetStackCount();

@@ -3,6 +3,7 @@ import { GameFunc } from "../../../GameFunc";
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
+// 阿托斯之棍
 @registerAbility()
 export class item_imba_rod_of_atos extends BaseItem_Plus {
     public caster: IBaseNpc_Plus;
@@ -25,12 +26,12 @@ export class item_imba_rod_of_atos extends BaseItem_Plus {
     GetAbilityTextureName(): string {
         if (this.GetLevel() == 2) {
             if (this.GetCasterPlus().findBuffStack("modifier_item_imba_rod_of_atos", this.GetCasterPlus()) == this.GetSpecialValueFor("curtain_fire_activation_charge")) {
-                return "imba_rod_of_atos_2_cfs";
+                return "imba/rod_of_atos_2_cfs";
             } else {
-                return "imba_rod_of_atos_2";
+                return "imba/rod_of_atos_2";
             }
         } else {
-            return "item_rod_of_atos";
+            return "imba/rod_of_atos";
         }
     }
     GetAOERadius(): number {
@@ -243,3 +244,6 @@ export class modifier_item_imba_rod_of_atos extends BaseModifier_Plus {
         }
     }
 }
+// 阿托斯之棍2级
+@registerAbility()
+export class item_imba_rod_of_atos_2 extends item_imba_rod_of_atos { }

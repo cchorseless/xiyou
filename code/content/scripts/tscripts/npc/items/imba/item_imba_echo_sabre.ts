@@ -3,14 +3,13 @@ import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
+// 回音战刃
 @registerAbility()
 export class item_imba_echo_sabre extends BaseItem_Plus {
     GetIntrinsicModifierName(): string {
         return "modifier_imba_echo_sabre_passive";
     }
-    GetAbilityTextureName(): string {
-        return "imba_echo_sabre";
-    }
+
 }
 @registerModifier()
 export class modifier_imba_echo_sabre extends BaseModifier_Plus {
@@ -135,7 +134,7 @@ export class modifier_imba_echo_sabre_passive extends BaseModifier_Plus {
             1: GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BONUS,
             2: GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BONUS,
             3: GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT,
-            4: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
+            4: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
             5: GPropertyConfig.EMODIFIER_PROPERTY.MANA_REGEN_CONSTANT
         });
     } */
@@ -151,7 +150,7 @@ export class modifier_imba_echo_sabre_passive extends BaseModifier_Plus {
     CC_GetModifierAttackSpeedBonus_Constant(): number {
         return this.bonus_attack_speed;
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.bonus_damage;
     }
@@ -173,9 +172,7 @@ export class item_imba_reverb_rapier extends BaseItem_Plus {
     GetIntrinsicModifierName(): string {
         return "modifier_imba_reverb_rapier_passive";
     }
-    GetAbilityTextureName(): string {
-        return "imba_reverb_rapier";
-    }
+
 }
 @registerModifier()
 export class modifier_imba_reverb_rapier_passive extends BaseModifier_Plus {
@@ -203,7 +200,7 @@ export class modifier_imba_reverb_rapier_passive extends BaseModifier_Plus {
             1: GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BONUS,
             2: GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BONUS,
             3: GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT,
-            4: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
+            4: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
             5: GPropertyConfig.EMODIFIER_PROPERTY.MANA_REGEN_CONSTANT,
             6: Enum_MODIFIER_EVENT.ON_ATTACK
         });
@@ -237,7 +234,7 @@ export class modifier_imba_reverb_rapier_passive extends BaseModifier_Plus {
     CC_GetModifierAttackSpeedBonus_Constant(): number {
         return this.bonus_attack_speed;
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.bonus_damage;
     }

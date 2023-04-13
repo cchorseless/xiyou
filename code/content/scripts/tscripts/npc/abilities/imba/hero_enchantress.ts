@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus, BaseOrbAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -71,7 +71,7 @@ export class modifier_imba_enchantress_impetus extends BaseModifier_Plus {
     }
     /** DeclareFunctions():modifierfunction[] {
         let decFuncs = {
-            1: GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS_STACKING,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS,
             2: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_RANGE_BONUS,
             3: Enum_MODIFIER_EVENT.ON_ATTACK_START,
             4: Enum_MODIFIER_EVENT.ON_ATTACK,
@@ -81,7 +81,7 @@ export class modifier_imba_enchantress_impetus extends BaseModifier_Plus {
         }
         return Object.values(decFuncs);
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS_STACKING)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS)
     CC_GetModifierCastRangeBonusStacking(p_0: ModifierAbilityEvent,): number {
         let cast_range = this.GetStackCount() * this.attack_cast_stack;
         if (this.parent.HasScepter()) {
@@ -290,11 +290,11 @@ export class modifier_imba_enchantress_impetus_723 extends BaseModifier_Plus {
     }
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS_STACKING,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS,
             2: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_RANGE_BONUS
         });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS_STACKING)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS)
     CC_GetModifierCastRangeBonusStacking(p_0: ModifierAbilityEvent,): number {
         if (this.GetAbilityPlus()) {
             let cast_range = this.GetStackCount() * this.GetSpecialValueFor("attack_cast_stack");
@@ -444,7 +444,7 @@ export class modifier_imba_enchantress_enchant_controlled extends BaseModifier_P
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
             1: GPropertyConfig.EMODIFIER_PROPERTY.EXTRA_HEALTH_BONUS,
-            2: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
+            2: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
             3: GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS,
             4: GPropertyConfig.EMODIFIER_PROPERTY.BONUS_VISION_PERCENTAGE,
             5: Enum_MODIFIER_EVENT.ON_TAKEDAMAGE
@@ -454,7 +454,7 @@ export class modifier_imba_enchantress_enchant_controlled extends BaseModifier_P
     CC_GetModifierExtraHealthBonus(): number {
         return this.enchant_health;
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.enchant_damage;
     }
@@ -1099,11 +1099,11 @@ export class modifier_special_bonus_imba_enchantress_3 extends BaseModifier_Plus
     }
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
             2: GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_PERCENTAGE
         });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.damage;
     }

@@ -3,6 +3,7 @@ import { GameFunc } from "../../../GameFunc";
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
+// 达贡之神力
 @registerAbility()
 export class item_imba_dagon extends BaseItem_Plus {
     GetIntrinsicModifierName(): string {
@@ -100,3 +101,12 @@ export class modifier_item_imba_dagon_passive extends BaseModifier_Plus {
         return this.GetItemPlus().GetSpecialValueFor("bonus_all_stats");
     }
 }
+// 达贡之神力 多级
+@registerAbility()
+export class item_imba_dagon_2 extends item_imba_dagon { }
+@registerAbility()
+export class item_imba_dagon_3 extends item_imba_dagon { }
+@registerAbility()
+export class item_imba_dagon_4 extends item_imba_dagon { }
+@registerAbility()
+export class item_imba_dagon_5 extends item_imba_dagon { }

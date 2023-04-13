@@ -594,7 +594,7 @@ function createShiPin() {
 const imbabasepath = "E:/project/dota_project/dota_imba-master/game/scripts/npc/";
 const imbaabilitypath = imbabasepath + "npc_abilities_custom.txt";
 const imbaabilityOutPath = "excels/abilities/imba_abilities.xlsx";
-
+const imbaitemOutPath = "excels/items/imba_items.xlsx";
 function createImbaAbility() {
     const abilitystr = fs.readFileSync(imbaabilitypath, "utf8");
     const lines = abilitystr.split("\n");
@@ -1242,6 +1242,80 @@ function makeOnePropExcel(props = [
 
 }
 
+const imba_old_item_path = "E:/project/dota_project/dota_imba-master/game/scripts/npc/npc_items_custom.txt"
+function makeItemPropExcel(props = [
+    "AbilityUnitTargetTeam",
+    "AbilityUnitTargetType",
+    "Model",
+    "Effect",
+]) {
+    let sheets = xlsx.parse(imba_itemexcel_Path);
+    let sheet = sheets[0];
+    let rows = sheet.data;
+    let nrows = rows.length;
+    let kv = {};
+    let sp_k_index = {}
+    for (let prop of props) {
+        sp_k_index[prop] = rows[1].indexOf(prop)
+    }
+    console.log(sp_k_index);
+    for (let i = 2; i < nrows; i++) {
+        let row = rows[i];
+        let abilityname = row[0];
+        kv[abilityname] = row;
+    }
+    const abilitystr = fs.readFileSync(imba_old_item_path, "utf8");
+    const lines = abilitystr.split("\n");
+    let abilitys = [];
+    for (let i = 0; i < lines.length; i++) {
+        if (lines[i].startsWith("#base")) {
+            let _kvpath = imbabasepath + lines[i].substring(6);
+            if (fs.existsSync(_kvpath)) {
+                abilitys.push(fs.readFileSync(_kvpath, "utf8"));
+            }
+        }
+        if (lines[i].includes("DOTAAbilities")) {
+            let newlines = lines.slice(i, lines.length - 1);
+            abilitys.push(newlines.join("\n"));
+            break;
+        }
+    }
+    for (let str of abilitys) {
+        let obj = keyvalues.decode(str);
+        let info_ability = obj.DOTAAbilities;
+        if (!info_ability) {
+            continue;
+        }
+        for (let abilityname in info_ability) {
+            let imbaname = abilityname;
+            if (kv[imbaname] == null) {
+                continue;
+            }
+            let abilityinfo = info_ability[abilityname];
+            let excel_abilityinfo = kv[imbaname];
+            for (let prop of props) {
+                let propindex = sp_k_index[prop];
+                if (excel_abilityinfo[propindex] == null && abilityinfo[prop] != null && abilityinfo[prop] != "") {
+                    excel_abilityinfo[propindex] = abilityinfo[prop];
+                }
+            }
+            // let imbaname2 = "imba_" + abilityname + '_723';
+            // if (kv[imbaname2] == null) {
+            //     continue;
+            // }
+            // let excel_abilityinfo2 = kv[imbaname2];
+            // for (let prop of props) {
+            //     let propindex = sp_k_index[prop];
+            //     if (excel_abilityinfo2[propindex] == null && abilityinfo[prop] != null && abilityinfo[prop] != "") {
+            //         excel_abilityinfo2[propindex] = abilityinfo[prop];
+            //     }
+            // }
+
+        }
+    }
+    fs.writeFileSync(imba_itemexcel_Path, xlsx.build(sheets));
+
+}
 const lang_path = "game/scripts/dota2_abilities_schinese.txt";
 const imba_lang_path = "game/scripts/imba_addon_schinese.txt";
 
@@ -1431,8 +1505,8 @@ function clearUnitPersonItemSlot() {
     // createItem()
     // createSound();
     // createImbaUnit();
-    // makeOnePropExcel();
-    createabilityLang()
+    makeItemPropExcel();
+    // createabilityLang()
     // clearUnitPersonItemSlot();
 })().catch((error) => {
     console.error(error);

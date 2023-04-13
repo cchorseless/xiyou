@@ -6,14 +6,13 @@ import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
+// 斯嘉蒂之眼
 @registerAbility()
 export class item_imba_skadi extends BaseItem_Plus {
     GetIntrinsicModifierName(): string {
         return "modifier_item_imba_skadi";
     }
-    GetAbilityTextureName(): string {
-        return "imba_skadi";
-    }
+
     GetCastRange(p_0: Vector, p_1: CDOTA_BaseNPC | undefined,): number {
         if (IsServer()) {
             return;
@@ -130,7 +129,7 @@ export class modifier_item_imba_skadi extends BaseModifier_Plus {
             1: GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_BONUS,
             2: GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BONUS,
             3: GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BONUS,
-            4: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS,
+            4: GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS,
             5: GPropertyConfig.EMODIFIER_PROPERTY.MANA_BONUS
         });
     } */
@@ -152,7 +151,7 @@ export class modifier_item_imba_skadi extends BaseModifier_Plus {
             return this.GetItemPlus().GetSpecialValueFor("bonus_all_stats");
         }
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS)
     CC_GetModifierHealthBonus(): number {
         if (this.GetItemPlus()) {
             return this.GetItemPlus().GetSpecialValueFor("bonus_health");
@@ -248,7 +247,7 @@ export class modifier_item_imba_skadi_slow extends BaseModifier_Plus {
         return "particles/status_fx/status_effect_frost_lich.vpcf";
     }
     StatusEffectPriority(): modifierpriority {
-        return 10;
+        return 4;
     }
     BeCreated(keys: any): void {
         if (IsServer()) {
@@ -304,7 +303,7 @@ export class modifier_item_imba_skadi_freeze extends BaseModifier_Plus {
         return "particles/status_fx/status_effect_frost.vpcf";
     }
     StatusEffectPriority(): modifierpriority {
-        return 11;
+        return 4;
     }
     CheckState(): Partial<Record<modifierstate, boolean>> {
         let states = {

@@ -5,14 +5,13 @@ import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
+// 影之灵龛
 @registerAbility()
 export class item_imba_urn_of_shadows extends BaseItem_Plus {
     GetIntrinsicModifierName(): string {
         return "modifier_imba_urn_of_shadows_passive";
     }
-    GetAbilityTextureName(): string {
-        return "item_urn_of_shadows";
-    }
+
     CastFilterResultTarget(target: CDOTA_BaseNPC): UnitFilterResult {
         if (IsServer()) {
             let caster = this.GetCasterPlus();

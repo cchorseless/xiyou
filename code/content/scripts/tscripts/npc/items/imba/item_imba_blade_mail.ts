@@ -3,16 +3,16 @@ import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
+// 刃甲
 @registerAbility()
 export class item_imba_blade_mail extends BaseItem_Plus {
     GetAbilityTextureName(): string {
-
         if (this.GetLevel() == 2) {
-            return "item_bladestorm_mail";
+            return "imba/bladestorm_mail";
         } else if (this.GetCasterPlus().GetUnitName().includes("axe")) {
-            return "imba_blade_mail_axe";
+            return "imba/blade_mail_axe";
         } else {
-            return "item_blade_mail";
+            return "imba/blade_mail";
         }
     }
     GetIntrinsicModifierName(): string {
@@ -66,20 +66,20 @@ export class modifier_item_imba_blade_mail extends BaseModifier_Plus {
             return;
         }
         this.AddTimer(0.1, () => {
-            if (!this.parent.HasModifier("modifier_item_imba_blade_mail")) {
+            if (GFuncEntity.IsValid(this.parent) && !this.parent.HasModifier("modifier_item_imba_blade_mail")) {
                 this.parent.RemoveModifierByName("modifier_item_imba_blade_mail_passive");
             }
         });
     }
     /** DeclareFunctions():modifierfunction[] {
         let decFuncs = {
-            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
             2: GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS,
             3: GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BONUS
         }
         return Object.values(decFuncs);
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.bonus_damage;
     }
@@ -276,3 +276,6 @@ export class modifier_item_imba_blade_mail_passive extends BaseModifier_Plus {
         }
     }
 }
+// 2级刃甲
+@registerAbility()
+export class item_imba_blade_mail_2 extends item_imba_blade_mail { }

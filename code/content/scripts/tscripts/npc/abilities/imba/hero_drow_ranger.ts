@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus, BaseOrbAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -467,10 +467,10 @@ export class modifier_imba_drow_ranger_frost_arrows_723_bonus_damage extends Bas
     }
     /** DeclareFunctions():modifierfunction[] {
     return Object.values({
-        1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE
+        1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS
     });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.damage;
     }
@@ -962,11 +962,11 @@ export class modifier_imba_trueshot extends BaseModifier_Plus {
     }
     /** DeclareFunctions():modifierfunction[] {
     return Object.values({
-        1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
+        1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
         2: GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_BONUS
     });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
     CC_GetModifierPreAttack_BonusDamage(): number {
         let drow_agility = this.caster.GetAgility()
         let bonus_damage = drow_agility * (this.agi_to_damage_pct / 100);

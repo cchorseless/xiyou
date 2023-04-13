@@ -4,11 +4,10 @@ import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
+// 祭品
 @registerAbility()
 export class item_imba_vladmir extends BaseItem_Plus {
-    GetAbilityTextureName(): string {
-        return "imba_vladmir";
-    }
+
     GetBehavior(): DOTA_ABILITY_BEHAVIOR | Uint64 {
         return DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_PASSIVE + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_AURA;
     }
@@ -159,11 +158,10 @@ export class modifier_item_imba_vladmir_aura extends BaseModifier_Plus {
         }
     }
 }
+// 祭品2级
 @registerAbility()
 export class item_imba_vladmir_2 extends BaseItem_Plus {
-    GetAbilityTextureName(): string {
-        return "imba_vladmir_2";
-    }
+
     GetBehavior(): DOTA_ABILITY_BEHAVIOR | Uint64 {
         return DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_PASSIVE + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_AURA;
     }

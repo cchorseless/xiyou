@@ -3,16 +3,14 @@ import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 @registerAbility()
-export class item_imba_morbid_mask extends BaseItem_Plus {
+export class item_imba_lifesteal extends BaseItem_Plus {
     GetIntrinsicModifierName(): string {
-        return "modifier_imba_morbid_mask";
+        return "modifier_item_imba_lifesteal";
     }
-    GetAbilityTextureName(): string {
-        return "item_lifesteal";
-    }
+
 }
 @registerModifier()
-export class modifier_imba_morbid_mask extends BaseModifier_Plus {
+export class modifier_item_imba_lifesteal extends BaseModifier_Plus {
     public caster: IBaseNpc_Plus;
     public ability: IBaseItem_Plus;
     public particle_lifesteal: any;
@@ -40,8 +38,8 @@ export class modifier_imba_morbid_mask extends BaseModifier_Plus {
             this.damage_bonus = this.ability.GetSpecialValueFor("damage_bonus");
             if (IsServer()) {
                 GFuncEntity.ChangeAttackProjectileImba(this.caster);
-                if (!this.caster.HasModifier("modifier_imba_morbid_mask_unique")) {
-                    this.caster.AddNewModifier(this.caster, this.ability, "modifier_imba_morbid_mask_unique", {});
+                if (!this.caster.HasModifier("modifier_item_imba_lifesteal_unique")) {
+                    this.caster.AddNewModifier(this.caster, this.ability, "modifier_item_imba_lifesteal_unique", {});
                 }
             }
         }
@@ -53,8 +51,8 @@ export class modifier_imba_morbid_mask extends BaseModifier_Plus {
     } */
     BeDestroy(): void {
         if (IsServer()) {
-            if (this.caster && !this.caster.IsNull() && !this.caster.HasModifier("modifier_imba_morbid_mask")) {
-                this.caster.RemoveModifierByName("modifier_imba_morbid_mask_unique");
+            if (this.caster && !this.caster.IsNull() && !this.caster.HasModifier("modifier_item_imba_lifesteal")) {
+                this.caster.RemoveModifierByName("modifier_item_imba_lifesteal_unique");
                 GFuncEntity.ChangeAttackProjectileImba(this.caster);
             }
         }
@@ -64,7 +62,7 @@ export class modifier_imba_morbid_mask extends BaseModifier_Plus {
     }
 }
 @registerModifier()
-export class modifier_imba_morbid_mask_unique extends BaseModifier_Plus {
+export class modifier_item_imba_lifesteal_unique extends BaseModifier_Plus {
     public lifesteal_pct: number;
     IsHidden(): boolean {
         return true;

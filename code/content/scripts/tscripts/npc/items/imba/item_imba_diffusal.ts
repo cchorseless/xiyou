@@ -4,6 +4,8 @@ import { ResHelper } from "../../../helper/ResHelper";
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
+
+// 净魂之刃
 @registerAbility()
 export class item_imba_diffusal_blade extends BaseItem_Plus {
     GetIntrinsicModifierName(): string {
@@ -137,6 +139,7 @@ export class modifier_item_imba_diffusal_blade_slow extends BaseModifier_Plus {
         return this.GetStackCount();
     }
 }
+// 净魂之刃（2级）
 @registerAbility()
 export class item_imba_diffusal_blade_2 extends BaseItem_Plus {
     GetIntrinsicModifierName(): string {

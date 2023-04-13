@@ -23,11 +23,13 @@ export class modifier_round_enemy extends BaseModifier_Plus {
             this.hp = info.hp;
             this.phyarm = info.phyarm;
             this.magicarm = info.magicarm;
+
             return
         }
         let roundid = params.roundid;
         let onlyKey = params.onlyKey;
         if (parent && roundid && onlyKey) {
+
             let config = GJSONConfig.RoundBoardConfig.get(roundid)?.enemyinfo.find(v => { return v.id == onlyKey })
             if (config == null) {
                 config = GJSONConfig.RoundBoardChallengeConfig.get(roundid)?.enemyinfo.find(v => { return v.id == onlyKey }) as any;
@@ -42,6 +44,7 @@ export class modifier_round_enemy extends BaseModifier_Plus {
                 hp: this.hp,
                 phyarm: this.phyarm,
                 magicarm: this.magicarm,
+
             }, "round_enemy");
         }
 
@@ -55,4 +58,6 @@ export class modifier_round_enemy extends BaseModifier_Plus {
     phyarm: number;
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_ARMOR_BONUS)
     magicarm: number;
+
+
 }

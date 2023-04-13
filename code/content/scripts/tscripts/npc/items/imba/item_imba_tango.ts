@@ -100,7 +100,7 @@ function UseTango(ability: IBaseItem_Plus) {
     }
     ability.SpendCharge();
 }
-
+// 吃树
 @registerAbility()
 export class item_imba_tango extends BaseItem_Plus {
     CastFilterResultTarget(target: CDOTA_BaseNPC): UnitFilterResult {
@@ -195,6 +195,7 @@ export class modifier_imba_tango extends BaseModifier_Plus {
         }
     }
 }
+// 吃树共享
 @registerAbility()
 export class item_imba_tango_single extends BaseItem_Plus {
     CastFilterResultTarget(target: CDOTA_BaseNPC): UnitFilterResult {

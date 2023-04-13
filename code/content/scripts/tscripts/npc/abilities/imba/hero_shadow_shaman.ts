@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { AoiHelper } from "../../../helper/AoiHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -850,7 +850,7 @@ export class modifier_imba_mass_serpent_ward extends BaseModifier_Plus {
             2: Enum_MODIFIER_EVENT.ON_ATTACK_LANDED,
             3: Enum_MODIFIER_EVENT.ON_ATTACK,
             4: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_RANGE_BONUS,
-            5: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS,
+            5: GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS,
             6: GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_ABSOLUTE,
             7: Enum_MODIFIER_EVENT.ON_DEATH
         });

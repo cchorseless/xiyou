@@ -1,5 +1,5 @@
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { EventHelper } from "../../../helper/EventHelper";
 import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 import { ResHelper } from "../../../helper/ResHelper";
@@ -664,7 +664,7 @@ export class modifier_imba_abyssal_underlord_atrophy_aura_active extends BaseMod
 
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
             2: Enum_MODIFIER_EVENT.ON_ATTACK_LANDED,
             3: GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP,
             4: GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP2
@@ -715,7 +715,7 @@ export class modifier_imba_abyssal_underlord_atrophy_aura_active extends BaseMod
         }
     }
 
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.GetStackCount();
     }
@@ -813,7 +813,7 @@ export class modifier_imba_abyssal_underlord_atrophy_aura extends BaseModifier_P
     /** DeclareFunctions():modifierfunction[] {
         let funcs = {
             1: Enum_MODIFIER_EVENT.ON_DEATH,
-            2: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE
+            2: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS
         }
         return Object.values(funcs);
     } */
@@ -859,7 +859,7 @@ export class modifier_imba_abyssal_underlord_atrophy_aura extends BaseModifier_P
         }
     }
 
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.GetStackCount();
     }
@@ -1007,11 +1007,11 @@ export class modifier_imba_abyssal_underlord_atrophy_aura_permanent_stack extend
 
     /** DeclareFunctions():modifierfunction[] {
         let funcs = {
-            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE
+            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS
         }
         return Object.values(funcs);
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.GetStackCount();
     }
@@ -1061,11 +1061,11 @@ export class modifier_imba_abyssal_underlord_atrophy_aura_scepter extends BaseMo
 
     /** DeclareFunctions():modifierfunction[] {
         let funcs = {
-            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE
+            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS
         }
         return Object.values(funcs);
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
     CC_GetModifierPreAttack_BonusDamage(): number {
         if (this.GetParentPlus() == this.GetCasterPlus()) {
             return 0;

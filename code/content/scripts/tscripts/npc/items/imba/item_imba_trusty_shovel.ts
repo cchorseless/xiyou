@@ -4,27 +4,8 @@ import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
-@registerModifier()
-export class modifier_imba_trusty_shovel_passives extends BaseModifier_Plus {
-    IsHidden(): boolean {
-        return true;
-    }
-    IsPurgable(): boolean {
-        return false;
-    }
-    IsPurgeException(): boolean {
-        return false;
-    }
-    /** DeclareFunctions():modifierfunction[] {
-        return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS
-        });
-    } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
-    CC_GetModifierHealthBonus(): number {
-        return this.GetItemPlus().GetSpecialValueFor("bonus_health");
-    }
-}
+
+// 可靠铁铲
 @registerAbility()
 export class item_imba_trusty_shovel extends BaseItem_Plus {
     public bounty_chance_threshold: number;
@@ -106,5 +87,27 @@ export class item_imba_trusty_shovel extends BaseItem_Plus {
         item.SetSellable(false);
         item.SetShareability(EShareAbility.ITEM_FULLY_SHAREABLE);
         CreateItemOnPositionSync(vPos, item);
+    }
+
+}
+@registerModifier()
+export class modifier_imba_trusty_shovel_passives extends BaseModifier_Plus {
+    IsHidden(): boolean {
+        return true;
+    }
+    IsPurgable(): boolean {
+        return false;
+    }
+    IsPurgeException(): boolean {
+        return false;
+    }
+    /** DeclareFunctions():modifierfunction[] {
+        return Object.values({
+            1: GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS
+        });
+    } */
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS)
+    CC_GetModifierHealthBonus(): number {
+        return this.GetItemPlus().GetSpecialValueFor("bonus_health");
     }
 }

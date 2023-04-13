@@ -6,6 +6,7 @@ import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifierMotionHorizontal_Plus, BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
+// 自定义
 @registerAbility()
 export class item_imba_gungnir extends BaseItem_Plus {
     GetIntrinsicModifierName(): string {
@@ -121,7 +122,7 @@ export class modifier_item_imba_gungnir extends BaseModifier_Plus {
             2: GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_BONUS,
             3: GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BONUS,
             4: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_REGEN_CONSTANT,
-            5: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
+            5: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
             6: GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT,
             7: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_RANGE_BONUS,
             8: GPropertyConfig.EMODIFIER_PROPERTY.PROCATTACK_BONUS_DAMAGE_MAGICAL,
@@ -145,7 +146,7 @@ export class modifier_item_imba_gungnir extends BaseModifier_Plus {
     CC_GetModifierConstantHealthRegen(): number {
         return this.bonus_health_regen;
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.bonus_damage;
     }

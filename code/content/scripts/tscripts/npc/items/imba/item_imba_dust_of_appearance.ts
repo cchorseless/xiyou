@@ -4,14 +4,13 @@ import { ResHelper } from "../../../helper/ResHelper";
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
+// 显影之尘
 @registerAbility()
 export class item_imba_dust_of_appearance extends BaseItem_Plus {
     GetBehavior(): DOTA_ABILITY_BEHAVIOR | Uint64 {
         return DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_IMMEDIATE + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_NO_TARGET;
     }
-    GetAbilityTextureName(): string {
-        return "imba_dust_of_appearance";
-    }
+
     OnSpellStart(): void {
         let caster = this.GetCasterPlus();
         let aoe = this.GetSpecialValueFor("area_of_effect");

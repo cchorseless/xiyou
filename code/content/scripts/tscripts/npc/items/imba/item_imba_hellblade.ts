@@ -5,14 +5,13 @@ import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
+// 自定义
 @registerAbility()
 export class item_imba_hellblade extends BaseItem_Plus {
     GetIntrinsicModifierName(): string {
         return "modifier_item_imba_hellblade";
     }
-    GetAbilityTextureName(): string {
-        return "imba_hellblade";
-    }
+
     OnSpellStart(): void {
         if (IsServer()) {
             let caster = this.GetCasterPlus();

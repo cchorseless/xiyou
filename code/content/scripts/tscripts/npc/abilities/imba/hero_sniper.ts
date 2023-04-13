@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -482,7 +482,7 @@ export class modifier_imba_sniper_headshot extends BaseModifier_Plus {
             3: Enum_MODIFIER_EVENT.ON_ATTACK,
             4: Enum_MODIFIER_EVENT.ON_ATTACK_LANDED,
             5: GPropertyConfig.EMODIFIER_PROPERTY.PROJECTILE_NAME,
-            6: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
+            6: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
             7: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_CRITICALSTRIKE
         });
     } */
@@ -558,11 +558,9 @@ export class modifier_imba_sniper_headshot extends BaseModifier_Plus {
             return "particles/units/heroes/hero_sniper/sniper_assassinate.vpcf";
         }
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
-    CC_GetModifierPreAttack_BonusDamage(keys?: any /** keys */): number {
-        if (keys.target && !this.GetParentPlus().IsIllusion() && !keys.target.IsBuilding() && !keys.target.IsOther() && keys.target.GetTeamNumber() != this.GetParentPlus().GetTeamNumber() && this.headshot_records[keys.record]) {
-            return this.GetSpecialValueFor("headshot_damage");
-        }
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    CC_GetModifierPreAttack_BonusDamage(): number {
+        return this.GetSpecialValueFor("headshot_damage");
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_CRITICALSTRIKE)
     CC_GetModifierPreAttack_CriticalStrike(keys: ModifierAttackEvent): number {

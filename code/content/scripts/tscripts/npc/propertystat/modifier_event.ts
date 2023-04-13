@@ -513,7 +513,6 @@ export class modifier_event extends BaseModifier_Plus {
      */
     OnSpentMana(event: ModifierAbilityEvent): void {
         (event as IBuffEventData).eventType = EventDataType.unitIsSelf;
-
         modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_SPENT_MANA);
     }
     /**

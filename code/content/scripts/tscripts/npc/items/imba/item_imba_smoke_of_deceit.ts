@@ -4,6 +4,7 @@ import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
+// 诡计之雾
 @registerAbility()
 export class item_imba_smoke_of_deceit extends BaseItem_Plus {
     OnSpellStart(): void {

@@ -3,6 +3,7 @@ import { GameFunc } from "../../../GameFunc";
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
+// 幽魂权杖
 @registerAbility()
 export class item_imba_ghost extends BaseItem_Plus {
     public caster: IBaseNpc_Plus;

@@ -6,17 +6,16 @@ import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
+// 自定义
 @registerAbility()
 export class item_imba_black_queen_cape extends BaseItem_Plus {
     GetIntrinsicModifierName(): string {
         return "modifier_imba_black_queen_cape_passive";
     }
-    GetAbilityTextureName(): string {
-        return "imba_black_queen_cape";
-    }
+
     OnSpellStart(): void {
         if (!IsServer()) {
-            return undefined;
+            return;
         }
         let urn_particle = "particles/items2_fx/urn_of_shadows.vpcf";
         let bkb_modifier = "modifier_imba_black_queen_cape_active_bkb";
@@ -94,7 +93,7 @@ export class modifier_imba_black_queen_cape_passive extends BaseModifier_Plus {
     }
     /** DeclareFunctions():modifierfunction[] {
         let decFuns = {
-            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
             2: GPropertyConfig.EMODIFIER_PROPERTY.MANA_REGEN_CONSTANT,
             3: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_REGEN_CONSTANT,
             4: GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_BONUS,
@@ -166,7 +165,7 @@ export class modifier_imba_black_queen_cape_passive extends BaseModifier_Plus {
             }
         }
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.bonus_damage;
     }

@@ -3,6 +3,7 @@ import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
+// 自定义
 @registerAbility()
 export class item_imba_angelic_alliance extends BaseItem_Plus {
     GetBehavior(): DOTA_ABILITY_BEHAVIOR | Uint64 {
@@ -114,7 +115,7 @@ export class modifier_imba_angelic_alliance_passive_effect extends BaseModifier_
             5: GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_CONSTANT,
             6: GPropertyConfig.EMODIFIER_PROPERTY.EVASION_CONSTANT,
             7: GPropertyConfig.EMODIFIER_PROPERTY.MANA_REGEN_CONSTANT,
-            8: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
+            8: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
             9: GPropertyConfig.EMODIFIER_PROPERTY.STATUS_RESISTANCE_STACKING,
             10: Enum_MODIFIER_EVENT.ON_ATTACK_LANDED
         });
@@ -161,7 +162,7 @@ export class modifier_imba_angelic_alliance_passive_effect extends BaseModifier_
             return this.GetItemPlus().GetSpecialValueFor("bonus_mana_regen");
         }
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
     CC_GetModifierPreAttack_BonusDamage(): number {
         if (this.GetItemPlus()) {
             return this.GetItemPlus().GetSpecialValueFor("bonus_damage");

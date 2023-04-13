@@ -4,6 +4,7 @@ import { ResHelper } from "../../../helper/ResHelper";
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
+// 陨星锤
 @registerAbility()
 export class item_imba_meteor_hammer extends BaseItem_Plus {
     public caster: IBaseNpc_Plus;
@@ -271,3 +272,10 @@ export class modifier_item_imba_meteor_hammer_burn extends BaseModifier_Plus {
         }
     }
 }
+// 陨星锤 多级
+@registerAbility()
+export class item_imba_meteor_hammer_2 extends item_imba_meteor_hammer { }
+@registerAbility()
+export class item_imba_meteor_hammer_3 extends item_imba_meteor_hammer { }
+@registerAbility()
+export class item_imba_meteor_hammer_4 extends item_imba_meteor_hammer { }

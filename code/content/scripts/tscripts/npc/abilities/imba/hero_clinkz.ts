@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -903,10 +903,10 @@ export class modifier_imba_clinkz_burning_army_skeleton_custom extends BaseModif
     }
     /** DeclareFunctions():modifierfunction[] {
     return Object.values({
-        1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE
+        1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS
     });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.GetStackCount();
     }
@@ -1783,7 +1783,7 @@ export class modifier_imba_clinkz_death_pact_723 extends BaseModifier_Plus {
     return Object.values({
         1: GPropertyConfig.EMODIFIER_PROPERTY.EXTRA_HEALTH_BONUS,
         2: Enum_MODIFIER_EVENT.ON_ATTACK_LANDED,
-        3: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE
+        3: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS
     });
     } */
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.EXTRA_HEALTH_BONUS)
@@ -1800,7 +1800,7 @@ export class modifier_imba_clinkz_death_pact_723 extends BaseModifier_Plus {
             });
         }
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.GetStackCount();
     }
@@ -1863,10 +1863,10 @@ export class modifier_imba_clinkz_death_pact_723_permanent_buff extends BaseModi
     }
     /** DeclareFunctions():modifierfunction[] {
     return Object.values({
-        1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE
+        1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS
     });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.GetStackCount();
     }

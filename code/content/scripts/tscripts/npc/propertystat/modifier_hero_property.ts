@@ -111,18 +111,29 @@ export class modifier_hero_property extends BaseModifier_Plus {
             this.StackCountHandler = null;
         }
     }
+    /**每升一星获取的等级数 */
+    LevelPerStar = 5;
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BASE)
     CC_STATS_STRENGTH_BASE() {
-        return this.GetParentPlus().GetLevel() * this.AttributeStrengthGain
+        let parent = this.GetParentPlus()
+        let star = parent.GetStar() - 1;
+        star = star > 0 ? star : 0;
+        return (parent.GetLevel() + star * this.LevelPerStar) * this.AttributeStrengthGain
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_BASE)
     CC_STATS_AGILITY_BASE() {
-        return this.GetParentPlus().GetLevel() * this.AttributeAgilityGain
+        let parent = this.GetParentPlus()
+        let star = parent.GetStar() - 1;
+        star = star > 0 ? star : 0;
+        return (parent.GetLevel() + star * this.LevelPerStar) * this.AttributeAgilityGain
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BASE)
     CC_STATS_INTELLECT_BASE() {
-        return this.GetParentPlus().GetLevel() * this.AttributeIntelligenceGain
+        let parent = this.GetParentPlus()
+        let star = parent.GetStar() - 1;
+        star = star > 0 ? star : 0;
+        return (parent.GetLevel() + star * this.LevelPerStar) * this.AttributeIntelligenceGain
     }
 
     // @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.LIFESTEAL_PERCENTAGE)

@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -216,7 +216,7 @@ export class modifier_imba_chen_divine_favor extends BaseModifier_Plus {
     /** DeclareFunctions():modifierfunction[] {
     return Object.values({
         1: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_REGEN_CONSTANT,
-        2: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
+        2: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
         3: GPropertyConfig.EMODIFIER_PROPERTY.ABSOLUTE_NO_DAMAGE_PURE,
         4: GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP
     });
@@ -229,7 +229,7 @@ export class modifier_imba_chen_divine_favor extends BaseModifier_Plus {
     CC_GetModifierConstantHealthRegen(): number {
         return this.heal_rate;
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
     CC_GetModifierPreAttack_BonusDamage(): number {
         if (!this.GetParentPlus().IsRealUnit()) {
             return this.damage_bonus * this.creep_damage_mult;
@@ -295,7 +295,7 @@ export class modifier_imba_chen_divine_favor_aura_buff extends BaseModifier_Plus
     /** DeclareFunctions():modifierfunction[] {
     return Object.values({
         1: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_REGEN_CONSTANT,
-        2: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
+        2: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
         3: GPropertyConfig.EMODIFIER_PROPERTY.ABSOLUTE_NO_DAMAGE_PURE,
         4: GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP
     });
@@ -307,7 +307,7 @@ export class modifier_imba_chen_divine_favor_aura_buff extends BaseModifier_Plus
     CC_GetModifierConstantHealthRegen(): number {
         return this.heal_rate_aura;
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
     CC_GetModifierPreAttack_BonusDamage(): number {
         if (!this.GetParentPlus().IsRealUnit()) {
             return this.damage_bonus_aura * this.army_damage_multiplier;

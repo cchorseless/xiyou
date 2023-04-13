@@ -20,7 +20,7 @@ function ConsumeCheese(parent: IBaseNpc_Plus, item: IBaseItem_Plus) {
         item.UseResources(false, false, true);
     }
 }
-
+// 奶酪
 @registerAbility()
 export class item_imba_cheese extends BaseItem_Plus {
     GetIntrinsicModifierName(): string {

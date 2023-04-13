@@ -3,6 +3,7 @@ import { ResHelper } from "../../../helper/ResHelper";
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
+// 玄冥盾牌
 @registerAbility()
 export class item_imba_glimmerdark_shield extends BaseItem_Plus {
     public prism_duration: number;

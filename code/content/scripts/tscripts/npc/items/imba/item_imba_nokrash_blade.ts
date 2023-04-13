@@ -4,30 +4,31 @@ import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
+// 自定义
 @registerAbility()
-export class item_nokrash_blade extends BaseItem_Plus {
+export class item_imba_nokrash_blade extends BaseItem_Plus {
     GetIntrinsicModifierName(): string {
-        return "modifier_item_nokrash_blade";
+        return "modifier_item_imba_nokrash_blade";
     }
     OnSpellStart(): void {
         if (IsServer()) {
-            if (this.GetCasterPlus().HasModifier("modifier_item_nokrash_blade_unique")) {
-                this.GetCasterPlus().RemoveModifierByName("modifier_item_nokrash_blade_unique");
+            if (this.GetCasterPlus().HasModifier("modifier_item_imba_nokrash_blade_unique")) {
+                this.GetCasterPlus().RemoveModifierByName("modifier_item_imba_nokrash_blade_unique");
             } else {
-                this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_item_nokrash_blade_unique", {});
+                this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_item_imba_nokrash_blade_unique", {});
             }
         }
     }
     GetAbilityTextureName(): string {
-        if (this.GetCasterPlus().HasModifier("modifier_item_nokrash_blade_unique")) {
-            return "nokrash_blade_active";
+        if (this.GetCasterPlus().HasModifier("modifier_item_imba_nokrash_blade_unique")) {
+            return "imba/nokrash_blade_active";
         } else {
-            return "nokrash_blade";
+            return "imba/nokrash_blade";
         }
     }
 }
 @registerModifier()
-export class modifier_item_nokrash_blade extends BaseModifier_Plus {
+export class modifier_item_imba_nokrash_blade extends BaseModifier_Plus {
     IsHidden(): boolean {
         return true;
     }
@@ -67,7 +68,7 @@ export class modifier_item_nokrash_blade extends BaseModifier_Plus {
     }
 }
 @registerModifier()
-export class modifier_item_nokrash_blade_unique extends BaseModifier_Plus {
+export class modifier_item_imba_nokrash_blade_unique extends BaseModifier_Plus {
     public magicAttack: any;
     IsHidden(): boolean {
         return true;
@@ -113,7 +114,7 @@ export class modifier_item_nokrash_blade_unique extends BaseModifier_Plus {
         if (IsServer()) {
             if (this.GetParentPlus() == keys.attacker) {
                 let owner = this.GetParentPlus();
-                if ((!owner) || (!owner.HasModifier("modifier_item_nokrash_blade"))) {
+                if ((!owner) || (!owner.HasModifier("modifier_item_imba_nokrash_blade"))) {
                     this.DeactivateNokrahProjectile();
                     this.Destroy();
                     return undefined;
@@ -186,13 +187,13 @@ export class modifier_item_nokrash_blade_unique extends BaseModifier_Plus {
                     ParticleManager.ReleaseParticleIndex(impact_pfx);
                 }
                 target.EmitSound("DOTA_Item.Nokrahs_Blade.Hit");
-                owner.AddNewModifier(owner, ability, "modifier_item_nokrash_blade_buff", {
+                owner.AddNewModifier(owner, ability, "modifier_item_imba_nokrash_blade_buff", {
                     duration: 0.01
                 });
-                target.AddNewModifier(owner, ability, "modifier_item_nokrash_blade_buff", {
+                target.AddNewModifier(owner, ability, "modifier_item_imba_nokrash_blade_buff", {
                     duration: 0.01
                 });
-                target.AddNewModifier(owner, ability, "modifier_item_nokrash_blade_debuff", {
+                target.AddNewModifier(owner, ability, "modifier_item_imba_nokrash_blade_debuff", {
                     duration: ability.GetSpecialValueFor("duration")
                 });
                 ApplyDamage({
@@ -208,7 +209,7 @@ export class modifier_item_nokrash_blade_unique extends BaseModifier_Plus {
     }
 }
 @registerModifier()
-export class modifier_item_nokrash_blade_debuff extends BaseModifier_Plus {
+export class modifier_item_imba_nokrash_blade_debuff extends BaseModifier_Plus {
     IsHidden(): boolean {
         return false;
     }
@@ -233,7 +234,7 @@ export class modifier_item_nokrash_blade_debuff extends BaseModifier_Plus {
     }
 }
 @registerModifier()
-export class modifier_item_nokrash_blade_buff extends BaseModifier_Plus {
+export class modifier_item_imba_nokrash_blade_buff extends BaseModifier_Plus {
     IsHidden(): boolean {
         return true;
     }

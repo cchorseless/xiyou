@@ -2,6 +2,7 @@
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
+// 虚灵之刃
 @registerAbility()
 export class item_imba_ethereal_blade extends BaseItem_Plus {
     public caster: IBaseNpc_Plus;

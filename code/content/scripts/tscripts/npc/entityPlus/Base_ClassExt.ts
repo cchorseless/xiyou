@@ -1287,7 +1287,16 @@ declare global {
          * @Both
          */
         IsFriendly(hTarget: CDOTA_BaseNPC): boolean;
-
+        /**
+         * @Both
+         * 获取星级
+         */
+        GetStar(): number;
+        /**
+         * @Server
+         * @param iStar 设置星级
+         */
+        SetStar(iStar: number): void;
         /**
          * @Server
          * 添加或者删除词条
@@ -2047,6 +2056,11 @@ BaseNPC.HandleCiTiao = function (sTalentName: string, isadd = true): void {
 
 }
 
+BaseNPC.GetStar = function (): number {
+    let info = NetTablesHelper.GetDotaEntityData(this.GetEntityIndex(), "baseinfo") || { star: -1 };
+    return info.star;
+}
+
 BaseNPC.HasCiTiao = function (sTalentName: string): boolean {
     if (!IsValid(this)) return false;
     if (this.HasModifier(sTalentName)) {
@@ -2271,7 +2285,9 @@ if (IsServer()) {
             }
         }
     }
-
+    BaseNPC.SetStar = function (istar: number) {
+        NetTablesHelper.SetDotaEntityData(this.GetEntityIndex(), { "star": istar }, "baseinfo");
+    }
 
     BaseNPC.SetUnitOnClearGround = function () {
         GTimerHelper.AddTimer(1, GHandler.create(this, () => {

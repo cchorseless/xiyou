@@ -186,6 +186,7 @@ export class GameDebugger extends SingletonClass {
             let player = GGameScene.GetPlayer(e.PlayerID);
             if (!player) return;
             let hero = player.Hero;
+            // npc_dota_target_dummy unit_target_dummy
             let hDummy = BaseNpc_Plus.CreateUnitByName("unit_target_dummy", hero.GetAbsOrigin(), null, true, DOTATeam_t.DOTA_TEAM_BADGUYS)
             if (GFuncEntity.IsValid(hDummy)) {
                 modifier_dummy_damage.apply(hDummy, hDummy);
@@ -213,7 +214,12 @@ export class GameDebugger extends SingletonClass {
             if (entityindex) {
                 let unit = EntIndexToHScript(entityindex) as IBaseNpc_Plus;
                 if (unit) {
-                    unit.RemoveModifierByName("modifier_jiaoxie_wudi");
+                    let buff = unit.findBuff<IBaseModifier_Plus>("modifier_jiaoxie_wudi")
+                    if (buff) {
+                        buff.Destroy()
+                    }
+                    unit.removeBuff("modifier_jiaoxie_wudi")
+                    GLogHelper.print(unit.findBuff("modifier_jiaoxie_wudi") == null)
                 }
             }
         }));

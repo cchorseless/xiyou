@@ -4,6 +4,7 @@ import { ResHelper } from "../../../helper/ResHelper";
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
+// 永恒之盘
 @registerAbility()
 export class item_imba_aeon_disk extends BaseItem_Plus {
 
@@ -64,12 +65,12 @@ export class modifier_imba_aeon_disk_basic extends BaseModifier_Plus {
     }
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS,
             2: GPropertyConfig.EMODIFIER_PROPERTY.MANA_BONUS,
             3: GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE
         });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS)
     CC_GetModifierHealthBonus(): number {
         return this.bonus_health;
     }

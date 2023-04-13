@@ -3,6 +3,7 @@ import { GameServiceConfig } from "../../../shared/GameServiceConfig";
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
+// 黑皇杖
 @registerAbility()
 export class item_imba_black_king_bar extends BaseItem_Plus {
     GetIntrinsicModifierName(): string {
@@ -30,6 +31,7 @@ export class item_imba_black_king_bar extends BaseItem_Plus {
             duration: duration
         });
     }
+
 }
 @registerModifier()
 export class modifier_item_imba_black_king_bar extends BaseModifier_Plus {
@@ -69,12 +71,12 @@ export class modifier_item_imba_black_king_bar extends BaseModifier_Plus {
     }
     /** DeclareFunctions():modifierfunction[] {
         let decFuncs = {
-            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
             2: GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BONUS
         }
         return Object.values(decFuncs);
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.bonus_damage;
     }

@@ -1,14 +1,13 @@
-
 import React from "react";
 
-import { CSSHelper } from "../../../helper/CSSHelper";
-import { AbilityHelper, ItemHelper, UnitHelper } from "../../../helper/DotaEntityHelper";
-import { FuncHelper } from "../../../helper/FuncHelper";
-import { KVHelper } from "../../../helper/KVHelper";
-import { LogHelper } from "../../../helper/LogHelper";
-import { CCPanel } from "../CCPanel/CCPanel";
+import {CSSHelper} from "../../../helper/CSSHelper";
+import {AbilityHelper, ItemHelper, UnitHelper} from "../../../helper/DotaEntityHelper";
+import {FuncHelper} from "../../../helper/FuncHelper";
+import {KVHelper} from "../../../helper/KVHelper";
+import {LogHelper} from "../../../helper/LogHelper";
+import {CCPanel} from "../CCPanel/CCPanel";
 
-import { CCPanelBG } from "../CCPanel/CCPanelPart";
+import {CCPanelBG} from "../CCPanel/CCPanelPart";
 import "./CCItemInfoDialog.less";
 
 interface ICCItemInfoDialog extends NodePropsData {
@@ -62,14 +61,21 @@ export class CCItemInfoDialog extends CCPanel<ICCItemInfoDialog> {
                 let aHeaders = sDescription.match(regexp);
                 if (aHeaders) {
                     for (let sHeader of aHeaders) {
-                        list.push(<Label key={list.length} className={CSSHelper.ClassMaker('Header', { 'Active': true })} text={sHeader} html={true} />);
+                        list.push(<Label key={list.length} className={CSSHelper.ClassMaker('Header', {'Active': true})}
+                                         text={sHeader} html={true}/>);
                     }
                 }
                 sDescription = sDescription.replace(regexp, "");
                 sDescription = sDescription.replace(/%%/g, "%");
-                sDescription = AbilityHelper.ReplaceAbilityValuesDes({ sStr: sDescription, sAbilityName: sAbilityName, iLevel: level, iEntityIndex: castentityindex });
+                sDescription = AbilityHelper.ReplaceAbilityValuesDes({
+                    sStr: sDescription,
+                    sAbilityName: sAbilityName,
+                    iLevel: level,
+                    iEntityIndex: castentityindex
+                });
                 list.push(
-                    <Label key={list.length} className={CSSHelper.ClassMaker('AbilityMechanics', { 'Active': true, })} text={sDescription} html={true} />
+                    <Label key={list.length} className={CSSHelper.ClassMaker('AbilityMechanics', {'Active': true,})}
+                           text={sDescription} html={true}/>
                 );
             }
             let sExtraEffect = $.Localize("#DOTA_Tooltip_ability_" + sAbilityName + "_extra_effect");
@@ -86,15 +92,22 @@ export class CCItemInfoDialog extends CCPanel<ICCItemInfoDialog> {
                             }
                         }
                         list.push(
-                            <Label key={list.length} className={CSSHelper.ClassMaker('Header')} text={_sCondition} html={true} />
+                            <Label key={list.length} className={CSSHelper.ClassMaker('Header')} text={_sCondition}
+                                   html={true}/>
                         );
                     }
                 }
                 sExtraEffect = sExtraEffect.replace(regexp, "");
                 sExtraEffect = sExtraEffect.replace(/%%/g, "%");
-                sExtraEffect = AbilityHelper.ReplaceAbilityValuesDes({ sStr: sExtraEffect, sAbilityName: sAbilityName, iLevel: level, iEntityIndex: castentityindex });
+                sExtraEffect = AbilityHelper.ReplaceAbilityValuesDes({
+                    sStr: sExtraEffect,
+                    sAbilityName: sAbilityName,
+                    iLevel: level,
+                    iEntityIndex: castentityindex
+                });
                 list.push(
-                    <Label key={list.length} className={CSSHelper.ClassMaker('ExtraEffect', { 'Active': true, })} text={sExtraEffect} html={true} />
+                    <Label key={list.length} className={CSSHelper.ClassMaker('ExtraEffect', {'Active': true,})}
+                           text={sExtraEffect} html={true}/>
                 );
             }
         }
@@ -109,7 +122,8 @@ export class CCItemInfoDialog extends CCPanel<ICCItemInfoDialog> {
         let speclabel: string[] = AbilityHelper.GetAbilitySpecialDes(sAbilityName, level, castentityindex);
         speclabel.forEach(t => {
             list.push(
-                <Label key={list.length} className={CSSHelper.ClassMaker('AbilitySpecial', { 'Active': true, })} text={t} html={true} />
+                <Label key={list.length} className={CSSHelper.ClassMaker('AbilitySpecial', {'Active': true,})} text={t}
+                       html={true}/>
             );
         })
         return list;
@@ -170,11 +184,11 @@ export class CCItemInfoDialog extends CCPanel<ICCItemInfoDialog> {
         let iBehavior = iItemIndex != -1 ? Abilities.GetBehavior(iItemIndex) : AbilityHelper.SBehavior2IBehavior(tData.AbilityBehavior || "");
         let sCastType = AbilityHelper.getCastType(iBehavior);
         dialogVariables['casttype'] = $.Localize("#" + sCastType);
-        let iTeam = iItemIndex != -1 ? Abilities.GetAbilityTargetTeam(iItemIndex) : AbilityHelper.STeam2ITeam(tData.AbilityUnitTargetTeam as string|| "");
-        let iType = iItemIndex != -1 ? Abilities.GetAbilityTargetType(iItemIndex) : AbilityHelper.SType2IType(tData.AbilityUnitTargetType as string|| "");
+        let iTeam = iItemIndex != -1 ? Abilities.GetAbilityTargetTeam(iItemIndex) : AbilityHelper.STeam2ITeam(tData.AbilityUnitTargetTeam as string || "");
+        let iType = iItemIndex != -1 ? Abilities.GetAbilityTargetType(iItemIndex) : AbilityHelper.SType2IType(tData.AbilityUnitTargetType as string || "");
         let sTargetType = AbilityHelper.getTargetType(iTeam, iType);
         dialogVariables['targettype'] = $.Localize("#" + sTargetType);
-        let iDamageType = iItemIndex != -1 ? Abilities.GetAbilityDamageType(iItemIndex) : AbilityHelper.SDamageType2IDamageType(tData.AbilityUnitDamageType as string|| "");
+        let iDamageType = iItemIndex != -1 ? Abilities.GetAbilityDamageType(iItemIndex) : AbilityHelper.SDamageType2IDamageType(tData.AbilityUnitDamageType as string || "");
         let sDamageType = AbilityHelper.getDamageType(iDamageType);
         dialogVariables['damagetype'] = $.Localize("#" + sDamageType);
         let sSpellImmunity = AbilityHelper.getSpellImmunity(tData.SpellImmunityType as string || "");
@@ -272,10 +286,20 @@ export class CCItemInfoDialog extends CCPanel<ICCItemInfoDialog> {
                 }
             }
         }
-        sAttributes = AbilityHelper.ReplaceAbilityValuesDes({ sStr: sAttributes, sAbilityName: itemname, iLevel: iLevel, iEntityIndex: castentityindex });
+        sAttributes = AbilityHelper.ReplaceAbilityValuesDes({
+            sStr: sAttributes,
+            sAbilityName: itemname,
+            iLevel: iLevel,
+            iEntityIndex: castentityindex
+        });
         dialogVariables['attributes'] = sAttributes;
 
-        sExtraAttributes = AbilityHelper.ReplaceAbilityValuesDes({ sStr: sExtraAttributes, sAbilityName: itemname, iLevel: iLevel, iEntityIndex: castentityindex });
+        sExtraAttributes = AbilityHelper.ReplaceAbilityValuesDes({
+            sStr: sExtraAttributes,
+            sAbilityName: itemname,
+            iLevel: iLevel,
+            iEntityIndex: castentityindex
+        });
         dialogVariables['extra_attributes'] = sExtraAttributes;
 
 
@@ -293,7 +317,12 @@ export class CCItemInfoDialog extends CCPanel<ICCItemInfoDialog> {
                 sExtraDescription = sExtraDescription + $.Localize(sNote);
             }
         }
-        sExtraDescription = AbilityHelper.ReplaceAbilityValuesDes({ sStr: sExtraDescription, sAbilityName: itemname, iLevel: iLevel, iEntityIndex: castentityindex });
+        sExtraDescription = AbilityHelper.ReplaceAbilityValuesDes({
+            sStr: sExtraDescription,
+            sAbilityName: itemname,
+            iLevel: iLevel,
+            iEntityIndex: castentityindex
+        });
         dialogVariables['extradescription'] = sExtraDescription;
 
         // 冷却时间
@@ -327,7 +356,7 @@ export class CCItemInfoDialog extends CCPanel<ICCItemInfoDialog> {
         // 魔法消耗
         let fCurrentManaCost = iItemIndex != -1 ? AbilityHelper.GetLevelManaCost(iItemIndex) : 0;
         // fCurrentManaCost = AbilityHelper.CalcSpecialValueUpgrade(entityindex, itemname, "mana_cost", fCurrentManaCost);
-        let aManaCosts = AbilityHelper.StringToValues(tData.AbilityManaCost || "");
+        let aManaCosts = AbilityHelper.StringToValues(tData.AbilityManaCost + "" || "");
         for (let i = 0; i < Math.max(aManaCosts.length, iMaxLevel); i++) {
             aManaCosts[i] = iItemIndex != -1 ? AbilityHelper.GetLevelManaCost(iItemIndex, i) : (aManaCosts[i] || 0);
         }
@@ -393,101 +422,153 @@ export class CCItemInfoDialog extends CCPanel<ICCItemInfoDialog> {
             <Panel id="CC_ItemInfoDialog" ref={this.__root__}  {...this.initRootAttrs()}>
                 <CCPanelBG id="PanelBg" type="ToolTip">
                     <Panel id="ItemHeader">
-                        <DOTAItemImage id="ItemImg" itemname={itemname} showtooltip={false} />
+                        <DOTAItemImage id="ItemImg" itemname={itemname} showtooltip={false}/>
                         <Panel id="HeaderLabels">
                             <Panel id="AbilityHeader">
-                                <Label id="AbilityName" className="TitleFont" text={$.Localize("#DOTA_Tooltip_ability_" + itemname)} html={true} />
-                                <Label id="AbilityLevel" className={CSSHelper.ClassMaker({ 'Hidden': iMaxLevel <= 0 })} localizedText="#DOTA_AbilityTooltip_Level" html={true} dialogVariables={dialogVariables} />
+                                <Label id="AbilityName" className="TitleFont"
+                                       text={$.Localize("#DOTA_Tooltip_ability_" + itemname)} html={true}/>
+                                <Label id="AbilityLevel" className={CSSHelper.ClassMaker({'Hidden': iMaxLevel <= 0})}
+                                       localizedText="#DOTA_AbilityTooltip_Level" html={true}
+                                       dialogVariables={dialogVariables}/>
                             </Panel>
                             <Panel id="AbilitySubHeader">
-                                <Label id="ItemSubtitle" className={CSSHelper.ClassMaker({ 'Hidden': ShowItemSubtitle })} localizedText="{s:item_subtitle}" dialogVariables={dialogVariables} />
+                                <Label id="ItemSubtitle" className={CSSHelper.ClassMaker({'Hidden': ShowItemSubtitle})}
+                                       localizedText="{s:item_subtitle}" dialogVariables={dialogVariables}/>
                                 <Panel id="ItemAvailibilityMainShop" className="ItemAvailabilityRow">
-                                    <Panel className="ItemAvailabilityIcon MainShopIcon" />
+                                    <Panel className="ItemAvailabilityIcon MainShopIcon"/>
                                 </Panel>
                                 <Panel id="ItemAvailibilitySideShop" className="ItemAvailabilityRow">
-                                    <Panel className="ItemAvailabilityIcon SideShopIcon" />
+                                    <Panel className="ItemAvailabilityIcon SideShopIcon"/>
                                 </Panel>
                                 <Panel id="ItemAvailibilitySecretShop" className="ItemAvailabilityRow">
-                                    <Panel className="ItemAvailabilityIcon SecretShopIcon" />
+                                    <Panel className="ItemAvailabilityIcon SecretShopIcon"/>
                                 </Panel>
                                 <Panel className="TopBottomFlow">
-                                    <Label id="NeutralItemTier" className={CSSHelper.ClassMaker(siNeutralTiercls, { 'Hidden': IsNeutralItem })} html={true} localizedText="#DOTA_NeutralItemTier" />
+                                    <Label id="NeutralItemTier"
+                                           className={CSSHelper.ClassMaker(siNeutralTiercls, {'Hidden': IsNeutralItem})}
+                                           html={true} localizedText="#DOTA_NeutralItemTier"/>
                                     <Panel className="LeftRightFlow">
-                                        <Panel id="ItemCost" className={CSSHelper.ClassMaker({ 'Hidden': !ShowItemCost })} >
-                                            <Panel id="ItemCostIcon" />
-                                            <Label id="BuyCostLabel" localizedText="{d:r:buy_cost}" dialogVariables={dialogVariables} />
-                                            <Label id="BuyCostDeficit" localizedText="(-{d:r:buy_cost_deficit})" dialogVariables={dialogVariables} />
+                                        <Panel id="ItemCost"
+                                               className={CSSHelper.ClassMaker({'Hidden': !ShowItemCost})}>
+                                            <Panel id="ItemCostIcon"/>
+                                            <Label id="BuyCostLabel" localizedText="{d:r:buy_cost}"
+                                                   dialogVariables={dialogVariables}/>
+                                            <Label id="BuyCostDeficit" localizedText="(-{d:r:buy_cost_deficit})"
+                                                   dialogVariables={dialogVariables}/>
                                         </Panel>
                                         <Panel id="StockContainer">
-                                            <Label id="RestockTime" localizedText="#DOTA_HUD_Shop_Restock" />
-                                            <Label id="StockAmount" localizedText="#DOTA_HUD_Shop_StockAmount" />
+                                            <Label id="RestockTime" localizedText="#DOTA_HUD_Shop_Restock"/>
+                                            <Label id="StockAmount" localizedText="#DOTA_HUD_Shop_StockAmount"/>
                                         </Panel>
                                     </Panel>
                                 </Panel>
                             </Panel>
-                            <Label id="CostToComplete" localizedText="#DOTA_HUD_Shop_Item_Complete" />
+                            <Label id="CostToComplete" localizedText="#DOTA_HUD_Shop_Item_Complete"/>
                         </Panel>
                     </Panel>
 
                     <Panel id="AbilityTarget">
                         <Panel id="AbilityTopRowContainer">
-                            <Label id="AbilityCastType" className={CSSHelper.ClassMaker({ 'Hidden': sCastType == "" })} localizedText="#DOTA_AbilityTooltip_CastType" html={true} dialogVariables={dialogVariables} />
-                            <Panel id="CurrentAbilityCosts" className={CSSHelper.ClassMaker({ 'Hidden': (fCurrentCooldown == 0 && fCurrentManaCost == 0) })}>
-                                <Label id="CurrentAbilityManaCost" className={CSSHelper.ClassMaker("ManaCost", { 'Hidden': fCurrentManaCost == 0 })} localizedText="{s:current_manacost}" html={true} dialogVariables={dialogVariables} />
-                                <Label id="CurrentAbilityCooldown" className={CSSHelper.ClassMaker("Cooldown", { 'Hidden': fCurrentCooldown == 0 })} localizedText="{s:current_cooldown}" html={true} dialogVariables={dialogVariables} />
+                            <Label id="AbilityCastType" className={CSSHelper.ClassMaker({'Hidden': sCastType == ""})}
+                                   localizedText="#DOTA_AbilityTooltip_CastType" html={true}
+                                   dialogVariables={dialogVariables}/>
+                            <Panel id="CurrentAbilityCosts"
+                                   className={CSSHelper.ClassMaker({'Hidden': (fCurrentCooldown == 0 && fCurrentManaCost == 0)})}>
+                                <Label id="CurrentAbilityManaCost"
+                                       className={CSSHelper.ClassMaker("ManaCost", {'Hidden': fCurrentManaCost == 0})}
+                                       localizedText="{s:current_manacost}" html={true}
+                                       dialogVariables={dialogVariables}/>
+                                <Label id="CurrentAbilityCooldown"
+                                       className={CSSHelper.ClassMaker("Cooldown", {'Hidden': fCurrentCooldown == 0})}
+                                       localizedText="{s:current_cooldown}" html={true}
+                                       dialogVariables={dialogVariables}/>
                             </Panel>
                         </Panel>
-                        <Label id="AbilityTargetType" className={CSSHelper.ClassMaker({ 'Hidden': sTargetType == "" })} localizedText="#DOTA_AbilityTooltip_TargetType" html={true} dialogVariables={dialogVariables} />
-                        <Label id="AbilityDamageType" className={CSSHelper.ClassMaker({ 'Hidden': sDamageType == "" })} localizedText="#DOTA_AbilityTooltip_DamageType" html={true} dialogVariables={dialogVariables} />
-                        <Label id="AbilitySpellImmunityType" className={CSSHelper.ClassMaker({ 'Hidden': sSpellImmunity == "" })} localizedText="#DOTA_AbilityTooltip_SpellImmunityType" html={true} dialogVariables={dialogVariables} />
-                        <Label id="AbilityDispelType" className={CSSHelper.ClassMaker({ 'Hidden': sDispelType == "" })} localizedText="#DOTA_AbilityTooltip_DispelType" html={true} dialogVariables={dialogVariables} />
+                        <Label id="AbilityTargetType" className={CSSHelper.ClassMaker({'Hidden': sTargetType == ""})}
+                               localizedText="#DOTA_AbilityTooltip_TargetType" html={true}
+                               dialogVariables={dialogVariables}/>
+                        <Label id="AbilityDamageType" className={CSSHelper.ClassMaker({'Hidden': sDamageType == ""})}
+                               localizedText="#DOTA_AbilityTooltip_DamageType" html={true}
+                               dialogVariables={dialogVariables}/>
+                        <Label id="AbilitySpellImmunityType"
+                               className={CSSHelper.ClassMaker({'Hidden': sSpellImmunity == ""})}
+                               localizedText="#DOTA_AbilityTooltip_SpellImmunityType" html={true}
+                               dialogVariables={dialogVariables}/>
+                        <Label id="AbilityDispelType" className={CSSHelper.ClassMaker({'Hidden': sDispelType == ""})}
+                               localizedText="#DOTA_AbilityTooltip_DispelType" html={true}
+                               dialogVariables={dialogVariables}/>
                     </Panel>
                     <Panel id="AbilityCoreDetails">
-                        <Label id="AbilityAttributes" className={CSSHelper.ClassMaker({ 'Hidden': sAttributes == "" })} localizedText="#DOTA_AbilityTooltip_Attributes" html={true} dialogVariables={dialogVariables} />
+                        <Label id="AbilityAttributes" className={CSSHelper.ClassMaker({'Hidden': sAttributes == ""})}
+                               localizedText="#DOTA_AbilityTooltip_Attributes" html={true}
+                               dialogVariables={dialogVariables}/>
                         <Panel id="AbilityDescriptionOuterContainer">
-                            <Panel id="CurrentItemCosts" >
-                                <Label className="Cooldown" localizedText="{s:current_cooldown}" html={true} dialogVariables={dialogVariables} />
-                                <Label className="ManaCost" localizedText="{s:current_manacost}" html={true} dialogVariables={dialogVariables} />
+                            <Panel id="CurrentItemCosts">
+                                <Label className="Cooldown" localizedText="{s:current_cooldown}" html={true}
+                                       dialogVariables={dialogVariables}/>
+                                <Label className="ManaCost" localizedText="{s:current_manacost}" html={true}
+                                       dialogVariables={dialogVariables}/>
                             </Panel>
-                            <Panel id="CCAbilityDescriptionContainer" >
+                            <Panel id="CCAbilityDescriptionContainer">
                                 {this.parseAbilityDescription()}
                             </Panel>
                         </Panel>
                         <Panel id="AbilityScepterDescriptionContainer">
                             <Panel id="ScepterUpgradeHeader">
-                                <Panel className="ScepterSpecialAbilityDataIcon" />
-                                <Label className="ScepterUpgradeHeaderLabel" localizedText="#DOTA_AbilityTooltip_ScepterUpgrade_Header" />
+                                <Panel className="ScepterSpecialAbilityDataIcon"/>
+                                <Label className="ScepterUpgradeHeaderLabel"
+                                       localizedText="#DOTA_AbilityTooltip_ScepterUpgrade_Header"/>
                             </Panel>
-                            <Label className="ScepterUpgradeBodyLabel" localizedText="{s:scepter_upgrade_description}" html={true} />
+                            <Label className="ScepterUpgradeBodyLabel" localizedText="{s:scepter_upgrade_description}"
+                                   html={true}/>
                         </Panel>
                         <Panel id="AbilityDraftDescriptionContainer">
                             <Panel className="AbilityDraftUpgradeHeader">
-                                <Panel className="AbilityDraftIcon" />
-                                <Label className="AbilityDraftHeaderLabel" localizedText="#DOTA_AbilityTooltip_AbilityDraftNote_Header" />
+                                <Panel className="AbilityDraftIcon"/>
+                                <Label className="AbilityDraftHeaderLabel"
+                                       localizedText="#DOTA_AbilityTooltip_AbilityDraftNote_Header"/>
                             </Panel>
-                            <Label className="ScepterUpgradeBodyLabel" localizedText="{s:ability_draft_note}" html={true} />
+                            <Label className="ScepterUpgradeBodyLabel" localizedText="{s:ability_draft_note}"
+                                   html={true}/>
                         </Panel>
-                        <Label id="AbilityExtraDescription" className={CSSHelper.ClassMaker({ 'Hidden': sExtraDescription == "" })} localizedText="#DOTA_AbilityTooltip_ExtraDescription" html={true} dialogVariables={dialogVariables} />
-                        <Label id="ItemScepterDescription" className={CSSHelper.ClassMaker({ 'Hidden': true })} localizedText="{s:itemscepterdescription}" html={true} />
-                        <Label id="AbilityCharges" localizedText="#DOTA_AbilityTooltip_AbilityCharges" html={true} />
-                        <Label id="AbilityExtraAttributes" className={CSSHelper.ClassMaker({ 'Hidden': sExtraAttributes == "" })} localizedText="{s:extra_attributes}" html={true} dialogVariables={dialogVariables} />
+                        <Label id="AbilityExtraDescription"
+                               className={CSSHelper.ClassMaker({'Hidden': sExtraDescription == ""})}
+                               localizedText="#DOTA_AbilityTooltip_ExtraDescription" html={true}
+                               dialogVariables={dialogVariables}/>
+                        <Label id="ItemScepterDescription" className={CSSHelper.ClassMaker({'Hidden': true})}
+                               localizedText="{s:itemscepterdescription}" html={true}/>
+                        <Label id="AbilityCharges" localizedText="#DOTA_AbilityTooltip_AbilityCharges" html={true}/>
+                        <Label id="AbilityExtraAttributes"
+                               className={CSSHelper.ClassMaker({'Hidden': sExtraAttributes == ""})}
+                               localizedText="{s:extra_attributes}" html={true} dialogVariables={dialogVariables}/>
                         <Panel id="AbilityCosts">
-                            <Label id="AbilityCooldown" className={CSSHelper.ClassMaker("Cooldown", { 'Hidden': sCooldownDescription == "" })} localizedText="#DOTA_AbilityTooltip_Cooldown" html={true} dialogVariables={dialogVariables} />
-                            <Label id="AbilityManaCost" className={CSSHelper.ClassMaker("ManaCost", { 'Hidden': sManaCostDescription == "" })} localizedText="#DOTA_AbilityTooltip_ManaCost" html={true} dialogVariables={dialogVariables} />
+                            <Label id="AbilityCooldown"
+                                   className={CSSHelper.ClassMaker("Cooldown", {'Hidden': sCooldownDescription == ""})}
+                                   localizedText="#DOTA_AbilityTooltip_Cooldown" html={true}
+                                   dialogVariables={dialogVariables}/>
+                            <Label id="AbilityManaCost"
+                                   className={CSSHelper.ClassMaker("ManaCost", {'Hidden': sManaCostDescription == ""})}
+                                   localizedText="#DOTA_AbilityTooltip_ManaCost" html={true}
+                                   dialogVariables={dialogVariables}/>
                         </Panel>
                         <Panel id="AbilityGameplayChanges">
                         </Panel>
-                        <Label id="AbilityLore" className={CSSHelper.ClassMaker({ 'Hidden': $.Localize("#" + sLore) == "#" + sLore || $.Localize("#" + sLore) == "" })} localizedText="#DOTA_AbilityTooltip_Lore" html={true} dialogVariables={dialogVariables} />
+                        <Label id="AbilityLore"
+                               className={CSSHelper.ClassMaker({'Hidden': $.Localize("#" + sLore) == "#" + sLore || $.Localize("#" + sLore) == ""})}
+                               localizedText="#DOTA_AbilityTooltip_Lore" html={true} dialogVariables={dialogVariables}/>
                         {/* <Label id="AbilityUpgradeLevel" className={CSSHelper.ClassMaker({ 'Hidden': iAbilityLearnResult != AbilityLearnResult_t.ABILITY_CANNOT_BE_UPGRADED_REQUIRES_LEVEL })} localizedText="#DOTA_AbilityTooltip_UpgradeLevel" html={true} /> */}
-                        <Label id="OwnedBy" localizedText="#DOTA_HUD_Item_Owned_By" html={true} />
-                        <Label id="SellPriceLabel" localizedText="#DOTA_HUD_Item_Tooltip_Sell_Price" className={CSSHelper.ClassMaker({ 'Hidden': !ShowSellPrice })} />
-                        <Label id="SellPriceTimeLabel" localizedText="#DOTA_HUD_Item_Tooltip_Sell_Price_Time" className={CSSHelper.ClassMaker({ 'Hidden': !ShowSellPriceTime })} />
-                        <Label id="DisassembleLabel" localizedText="#DOTA_HUD_Item_Tooltip_Disassemble" />
-                        <Label id="DisassembleTimeLabel" localizedText="#DOTA_HUD_Item_Tooltip_Disassemble_Time" />
-                        <Label id="NotEnoughGoldLabel" localizedText="#DOTA_Shop_Item_Error_Cant_Afford" className={CSSHelper.ClassMaker({ 'Hidden': !NotEnoughGold })} />
+                        <Label id="OwnedBy" localizedText="#DOTA_HUD_Item_Owned_By" html={true}/>
+                        <Label id="SellPriceLabel" localizedText="#DOTA_HUD_Item_Tooltip_Sell_Price"
+                               className={CSSHelper.ClassMaker({'Hidden': !ShowSellPrice})}/>
+                        <Label id="SellPriceTimeLabel" localizedText="#DOTA_HUD_Item_Tooltip_Sell_Price_Time"
+                               className={CSSHelper.ClassMaker({'Hidden': !ShowSellPriceTime})}/>
+                        <Label id="DisassembleLabel" localizedText="#DOTA_HUD_Item_Tooltip_Disassemble"/>
+                        <Label id="DisassembleTimeLabel" localizedText="#DOTA_HUD_Item_Tooltip_Disassemble_Time"/>
+                        <Label id="NotEnoughGoldLabel" localizedText="#DOTA_Shop_Item_Error_Cant_Afford"
+                               className={CSSHelper.ClassMaker({'Hidden': !NotEnoughGold})}/>
                     </Panel>
-                    <Label id="ConsumableAbilityInfo" localizedText="#DOTA_HUD_Item_Tooltip_Consumable_Info" />
+                    <Label id="ConsumableAbilityInfo" localizedText="#DOTA_HUD_Item_Tooltip_Consumable_Info"/>
                 </CCPanelBG>
-            </Panel >)
+            </Panel>)
     }
 }

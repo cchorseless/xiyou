@@ -18,8 +18,6 @@ import { WearableComponent } from "../Wearable/WearableComponent";
 export class BattleUnitEntityRoot extends BaseEntityRoot implements IRoundStateCallback {
     public iScale: number;
     @serializeETProps()
-    public iLevel: number = 1;
-    @serializeETProps()
     public iStar: number = 1;
     @serializeETProps()
     public IsShowOverhead: boolean = false;
@@ -79,8 +77,9 @@ export class BattleUnitEntityRoot extends BaseEntityRoot implements IRoundStateC
     }
     SetStar(n: number) {
         this.iStar = n;
-        this.iScale = this.iScale || this.GetDomain<IBaseNpc_Plus>().GetAbsScale();
         let domain = this.GetDomain<IBaseNpc_Plus>();
+        domain.SetStar(n);
+        this.iScale = this.iScale || domain.GetAbsScale();
         let unitroot = domain.ETRoot.As<IBattleUnitEntityRoot>();
         // 饰品
         let levelupconfig = GJSONConfig.BuildingLevelUpConfig.get(domain.GetUnitName());

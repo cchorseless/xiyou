@@ -1668,7 +1668,7 @@ export class modifier_imba_omni_slash_caster extends BaseModifier_Plus {
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
             1: GPropertyConfig.EMODIFIER_PROPERTY.BASEATTACK_BONUSDAMAGE,
-            2: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
+            2: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
             3: GPropertyConfig.EMODIFIER_PROPERTY.OVERRIDE_ANIMATION
         });
     } */
@@ -1687,7 +1687,7 @@ export class modifier_imba_omni_slash_caster extends BaseModifier_Plus {
         }
         return 0;
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
     CC_GetModifierPreAttack_BonusDamage( /** kv */): number {
         return this.GetSpecialValueFor("bonus_damage");
     }

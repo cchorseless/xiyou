@@ -4,6 +4,7 @@ import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
+// 自定义
 @registerAbility()
 export class item_imba_spell_fencer extends BaseItem_Plus {
 
@@ -24,9 +25,9 @@ export class item_imba_spell_fencer extends BaseItem_Plus {
     }
     GetAbilityTextureName(): string {
         if (this.GetCasterPlus().HasModifier("modifier_item_imba_spell_fencer_unique")) {
-            return "imba_spell_fencer";
+            return "imba/spell_fencer";
         }
-        return "imba_spell_fencer_off";
+        return "imba/spell_fencer_off";
     }
 }
 @registerModifier()
@@ -66,7 +67,7 @@ export class modifier_item_imba_spell_fencer extends BaseModifier_Plus {
     }
     /** DeclareFunctions():modifierfunction[] {
         let funcs = {
-            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
             2: GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT,
             3: GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BONUS,
             4: GPropertyConfig.EMODIFIER_PROPERTY.COOLDOWN_PERCENTAGE,
@@ -88,7 +89,7 @@ export class modifier_item_imba_spell_fencer extends BaseModifier_Plus {
     CC_GetModifierPercentageManacost(p_0: ModifierAbilityEvent,): number {
         return this.GetItemPlus().GetSpecialValueFor("bonus_cdr");
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.GetItemPlus().GetSpecialValueFor("bonus_damage");
     }

@@ -4,6 +4,7 @@ import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
+// 摄魂怪的臂章
 @registerAbility()
 export class item_imba_armlet_of_dementor extends BaseItem_Plus {
     GetIntrinsicModifierName(): string {
@@ -18,9 +19,9 @@ export class item_imba_armlet_of_dementor extends BaseItem_Plus {
     }
     GetAbilityTextureName(): string {
         if (this.GetCasterPlus().HasModifier("modifier_item_imba_armlet_of_dementor_active")) {
-            return "armlet_of_dementor_active";
+            return "imba/armlet_of_dementor";
         } else {
-            return "armlet_of_dementor_inactive";
+            return "imba/armlet_of_dementor_inactive";
         }
     }
     OnSpellStart(): void {

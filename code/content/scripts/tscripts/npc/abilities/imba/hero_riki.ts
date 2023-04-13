@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { AStarHelper } from "../../../helper/AStarHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -1996,7 +1996,7 @@ export class modifier_imba_riki_cloak_and_dagger_723 extends BaseModifier_Plus {
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
             1: GPropertyConfig.EMODIFIER_PROPERTY.INVISIBILITY_LEVEL,
-            2: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
+            2: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
             3: Enum_MODIFIER_EVENT.ON_ATTACK_LANDED,
             4: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_REGEN_PERCENTAGE,
             5: GPropertyConfig.EMODIFIER_PROPERTY.MANA_REGEN_TOTAL_PERCENTAGE
@@ -2008,20 +2008,21 @@ export class modifier_imba_riki_cloak_and_dagger_723 extends BaseModifier_Plus {
             return 1;
         }
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
-    CC_GetModifierPreAttack_BonusDamage(keys?: { attacker: IBaseNpc_Plus, target: IBaseNpc_Plus }): number {
-        if (keys.attacker == this.GetParentPlus() && keys.target) {
-            if (!this.GetParentPlus().PassivesDisabled() && !keys.target.IsBuilding() && !keys.target.IsOther() && math.abs(AngleDiff(VectorToAngles(keys.target.GetForwardVector()).y, VectorToAngles(this.GetParentPlus().GetForwardVector()).y)) <= this.GetSpecialValueFor("backstab_angle")) {
-                this.bBackstab = true;
-                if (!this.GetParentPlus().IsIllusion() && this.GetParentPlus().GetAgility) {
-                    return this.GetParentPlus().GetAgility() * this.GetAbilityPlus().GetTalentSpecialValueFor("damage_multiplier");
-                }
-            } else {
-                this.bBackstab = false;
-            }
-        }
-        return 0
-    }
+    // 背刺伤害 todo
+    // @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    // CC_GetModifierPreAttack_BonusDamage(keys?: { attacker: IBaseNpc_Plus, target: IBaseNpc_Plus }): number {
+    //     if (keys.attacker == this.GetParentPlus() && keys.target) {
+    //         if (!this.GetParentPlus().PassivesDisabled() && !keys.target.IsBuilding() && !keys.target.IsOther() && math.abs(AngleDiff(VectorToAngles(keys.target.GetForwardVector()).y, VectorToAngles(this.GetParentPlus().GetForwardVector()).y)) <= this.GetSpecialValueFor("backstab_angle")) {
+    //             this.bBackstab = true;
+    //             if (!this.GetParentPlus().IsIllusion() && this.GetParentPlus().GetAgility) {
+    //                 return this.GetParentPlus().GetAgility() * this.GetAbilityPlus().GetTalentSpecialValueFor("damage_multiplier");
+    //             }
+    //         } else {
+    //             this.bBackstab = false;
+    //         }
+    //     }
+    //     return 0
+    // }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
     CC_OnAttackLanded(keys: ModifierAttackEvent): void {
         if (keys.attacker == this.GetParentPlus()) {

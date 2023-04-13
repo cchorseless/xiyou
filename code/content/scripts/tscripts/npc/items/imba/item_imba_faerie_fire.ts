@@ -2,6 +2,7 @@
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
+// 仙灵之火
 @registerAbility()
 export class item_imba_faerie_fire extends BaseItem_Plus {
     GetIntrinsicModifierName(): string {
@@ -9,19 +10,19 @@ export class item_imba_faerie_fire extends BaseItem_Plus {
     }
     OnSpellStart(): void {
         let caster = this.GetCasterPlus();
-        let ability = this;
         let cast_sound = "DOTA_Item.FaerieSpark.Activate";
         let particle_faerie = "";
         let modifier_fire_within = "modifier_imba_faerie_fire_fire_within";
-        let hp_restore = ability.GetSpecialValueFor("hp_restore");
-        let fire_within_duration = ability.GetSpecialValueFor("fire_within_duration");
+        let hp_restore = this.GetSpecialValueFor("hp_restore");
+        let fire_within_duration = this.GetSpecialValueFor("fire_within_duration");
         EmitSoundOn(cast_sound, caster);
         caster.ApplyHeal(hp_restore, this);
-        caster.AddNewModifier(caster, ability, modifier_fire_within, {
+        caster.AddNewModifier(caster, this, modifier_fire_within, {
             duration: fire_within_duration
         });
-        ability.SpendCharge();
+        this.SpendCharge();
     }
+
 }
 @registerModifier()
 export class modifier_imba_faerie_fire extends BaseModifier_Plus {
@@ -52,11 +53,11 @@ export class modifier_imba_faerie_fire extends BaseModifier_Plus {
     }
     /** DeclareFunctions():modifierfunction[] {
         let decFuncs = {
-            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE
+            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS
         }
         return Object.values(decFuncs);
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.bonus_damage * this.ability.GetCurrentCharges();
     }
@@ -89,12 +90,12 @@ export class modifier_imba_faerie_fire_fire_within extends BaseModifier_Plus {
     }
     /** DeclareFunctions():modifierfunction[] {
         let decFuncs = {
-            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
             2: GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE
         }
         return Object.values(decFuncs);
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.fire_within_dmg;
     }

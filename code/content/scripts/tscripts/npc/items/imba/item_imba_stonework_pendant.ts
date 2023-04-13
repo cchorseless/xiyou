@@ -2,14 +2,15 @@
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
+// 永世法衣
 @registerAbility()
-export class item_imba_stonework_pendant extends BaseItem_Plus {
+export class item_imba_eternal_shroud extends BaseItem_Plus {
     GetIntrinsicModifierName(): string {
-        return "modifier_item_imba_stonework_pendant";
+        return "modifier_item_imba_eternal_shroud";
     }
 }
 @registerModifier()
-export class modifier_item_imba_stonework_pendant extends BaseModifier_Plus {
+export class modifier_item_imba_eternal_shroud extends BaseModifier_Plus {
     public spell_lifesteal: any;
     public mana_to_hp_pct: number;
     public mana_to_hp_damage: number;
@@ -65,12 +66,12 @@ export class modifier_item_imba_stonework_pendant extends BaseModifier_Plus {
     }
     /** DeclareFunctions():modifierfunction[] {
         let funcs = {
-            1: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS,
             2: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_REGEN_CONSTANT
         }
         return Object.values(funcs);
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS)
     CC_GetModifierHealthBonus( /** params */): number {
         return this.flBonusHP;
     }

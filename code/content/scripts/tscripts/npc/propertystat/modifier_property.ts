@@ -237,14 +237,13 @@ export class modifier_property extends BaseModifier_Plus {
     //     return 100
     // }
     GetModifierDamageOutgoing_Percentage(event: ModifierAttackEvent): number {
-        return PropertyCalculate.SumProps(this.GetParentPlus(), event,
-            GPropertyConfig.EMODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE)
+        return PropertyCalculate.SumProps(this.GetParentPlus(), event, GPropertyConfig.EMODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE)
     }
 
 
 
     /**
-     * 收到伤害加深百分比
+     * 受到伤害加深百分比,计算伤害前
      * @param params
      * @returns
      */
@@ -329,6 +328,10 @@ export class modifier_property extends BaseModifier_Plus {
                 fPercent = fPercent * (1 + _tmp * 0.01)
             }
         }
+        // GLogHelper.print("伤害计算后的百分比：" + fPercent, params.original_damage, params.damage)
+        // fPercent = ((fPercent > 0) ? 1 : (-1)) * math.abs(fPercent) ^ 0.5;
+        GLogHelper.print("伤害计算后的百分比：" + fPercent, params.original_damage, params.damage)
+        params.damage = params.original_damage;
         return fPercent - 100
     }
 

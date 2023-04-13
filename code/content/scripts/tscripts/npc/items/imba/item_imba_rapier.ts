@@ -1,8 +1,8 @@
 
-import { GameServiceConfig } from "../../../shared/GameServiceConfig";
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
+
 export class rapier_base_class extends BaseItem_Plus {
     owner_entindex: EntityIndex;
     corruption_total_time: number;
@@ -39,13 +39,11 @@ export class modifier_rapier_base_class extends BaseModifier_Plus {
         }
     }
 }
+//  圣剑
 @registerAbility()
 export class item_imba_rapier extends rapier_base_class {
     GetIntrinsicModifierName(): string {
         return "modifier_imba_divine_rapier";
-    }
-    GetAbilityTextureName(): string {
-        return "imba_rapier";
     }
 }
 @registerModifier()
@@ -53,7 +51,7 @@ export class modifier_imba_divine_rapier extends modifier_rapier_base_class {
     public bonus_damage: number;
     /** DeclareFunctions():modifierfunction[] {
     let decFuns = {
-        1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE
+        1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS
     }
     return Object.values(decFuns);
     } */
@@ -75,21 +73,18 @@ export class modifier_imba_divine_rapier extends modifier_rapier_base_class {
             [modifierstate.MODIFIER_STATE_CANNOT_MISS]: true
         };
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
-    CC_GetModifierPreAttack_BonusDamage(keys?: { target: IBaseNpc_Plus } /** keys */): number {
-        if (!keys.target || (IsServer() && (keys.target.GetAbsOrigin() - this.GetParentPlus().GetAbsOrigin() as Vector).Length2D() <= GameServiceConfig.IMBA_DAMAGE_EFFECTS_DISTANCE_CUTOFF)) {
-            return this.bonus_damage;
-        }
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    CC_ATTACK_DAMAGE_BONUS(keys?: { target: IBaseNpc_Plus } /** keys */): number {
+        return this.bonus_damage;
     }
 }
+// 2级圣剑
 @registerAbility()
 export class item_imba_rapier_2 extends rapier_base_class {
     GetIntrinsicModifierName(): string {
         return "modifier_imba_divine_rapier_2";
     }
-    GetAbilityTextureName(): string {
-        return "imba_rapier_2";
-    }
+
 }
 @registerModifier()
 export class modifier_imba_divine_rapier_2 extends modifier_rapier_base_class {
@@ -97,7 +92,7 @@ export class modifier_imba_divine_rapier_2 extends modifier_rapier_base_class {
     public bonus_damage: number;
     /** DeclareFunctions():modifierfunction[] {
     let decFuns = {
-        1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
+        1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
         2: GPropertyConfig.EMODIFIER_PROPERTY.PROVIDES_FOW_POSITION,
         3: GPropertyConfig.EMODIFIER_PROPERTY.FORCE_DRAW_MINIMAP
     }
@@ -125,11 +120,9 @@ export class modifier_imba_divine_rapier_2 extends modifier_rapier_base_class {
             this.bonus_damage = 0;
         }
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
-    CC_GetModifierPreAttack_BonusDamage(keys?: { target: IBaseNpc_Plus } /** keys */): number {
-        if (!keys.target || (IsServer() && (keys.target.GetAbsOrigin() - this.GetParentPlus().GetAbsOrigin() as Vector).Length2D() <= GameServiceConfig.IMBA_DAMAGE_EFFECTS_DISTANCE_CUTOFF)) {
-            return this.bonus_damage;
-        }
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    CC_GetModifierPreAttack_BonusDamage(): number {
+        return this.bonus_damage;
     }
     GetEffectName(): string {
         return "particles/item/rapier/rapier_trail_regular.vpcf";
@@ -143,14 +136,13 @@ export class modifier_imba_divine_rapier_2 extends modifier_rapier_base_class {
         };
     }
 }
+// 魔法圣剑
 @registerAbility()
 export class item_imba_rapier_magic extends rapier_base_class {
     GetIntrinsicModifierName(): string {
         return "modifier_imba_arcane_rapier";
     }
-    GetAbilityTextureName(): string {
-        return "imba_rapier_magic";
-    }
+
 }
 @registerModifier()
 export class modifier_imba_arcane_rapier extends modifier_rapier_base_class {
@@ -179,14 +171,13 @@ export class modifier_imba_arcane_rapier extends modifier_rapier_base_class {
         return this.spell_power;
     }
 }
+// 2级魔法圣剑
 @registerAbility()
 export class item_imba_rapier_magic_2 extends rapier_base_class {
     GetIntrinsicModifierName(): string {
         return "modifier_imba_arcane_rapier_2";
     }
-    GetAbilityTextureName(): string {
-        return "imba_rapier_magic_2";
-    }
+
 }
 @registerModifier()
 export class modifier_imba_arcane_rapier_2 extends modifier_rapier_base_class {
@@ -233,14 +224,13 @@ export class modifier_imba_arcane_rapier_2 extends modifier_rapier_base_class {
         return 1;
     }
 }
+// 诅咒圣剑
 @registerAbility()
 export class item_imba_rapier_cursed extends rapier_base_class {
     GetIntrinsicModifierName(): string {
         return "modifier_imba_rapier_cursed";
     }
-    GetAbilityTextureName(): string {
-        return "imba_rapier_cursed";
-    }
+
 }
 @registerModifier()
 export class modifier_imba_rapier_cursed extends modifier_rapier_base_class {
@@ -287,7 +277,7 @@ export class modifier_imba_rapier_cursed extends modifier_rapier_base_class {
     /** DeclareFunctions():modifierfunction[] {
     return Object.values({
         1: GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_PERCENTAGE,
-        2: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
+        2: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
         3: GPropertyConfig.EMODIFIER_PROPERTY.PROVIDES_FOW_POSITION,
         4: GPropertyConfig.EMODIFIER_PROPERTY.FORCE_DRAW_MINIMAP,
         5: GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE,
@@ -302,11 +292,9 @@ export class modifier_imba_rapier_cursed extends modifier_rapier_base_class {
     CC_GetModifierSpellAmplify_Percentage(p_0: ModifierAttackEvent,): number {
         return this.spell_power;
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
-    CC_GetModifierPreAttack_BonusDamage(keys?: { target: IBaseNpc_Plus } /** keys */): number {
-        if (!keys.target || (IsServer() && (keys.target.GetAbsOrigin() - this.GetParentPlus().GetAbsOrigin() as Vector).Length2D() <= GameServiceConfig.IMBA_DAMAGE_EFFECTS_DISTANCE_CUTOFF)) {
-            return this.bonus_damage;
-        }
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    CC_GetModifierPreAttack_BonusDamage(): number {
+        return this.bonus_damage;
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PROVIDES_FOW_POSITION)
     CC_GetModifierProvidesFOWVision(): 0 | 1 {

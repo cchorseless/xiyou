@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -913,7 +913,7 @@ export class modifier_imba_zuus_nimbus_z extends BaseModifier_Plus {
     /** DeclareFunctions():modifierfunction[] {
         let funcs = {
             1: GPropertyConfig.EMODIFIER_PROPERTY.VISUAL_Z_DELTA,
-            2: GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS_STACKING
+            2: GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS
         }
         return Object.values(funcs);
     } */
@@ -921,7 +921,7 @@ export class modifier_imba_zuus_nimbus_z extends BaseModifier_Plus {
     CC_GetVisualZDelta(): number {
         return this.GetStackCount();
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS_STACKING)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS)
     CC_GetModifierCastRangeBonusStacking(p_0: ModifierAbilityEvent,): number {
         return this.GetStackCount() / 3;
     }

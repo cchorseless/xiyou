@@ -260,7 +260,7 @@ export class modifier_imba_life_stealer_feast extends BaseModifier_Plus {
         return Object.values({
             1: GPropertyConfig.EMODIFIER_PROPERTY.PROCATTACK_BONUS_DAMAGE_PHYSICAL,
             2: GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT,
-            3: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS
+            3: GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS
         });
     } */
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PROCATTACK_BONUS_DAMAGE_PHYSICAL)
@@ -294,7 +294,7 @@ export class modifier_imba_life_stealer_feast extends BaseModifier_Plus {
     CC_GetModifierAttackSpeedBonus_Constant(): number {
         return this.GetSpecialValueFor("attack_speed_bonus");
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS)
     CC_GetModifierHealthBonus(): number {
         return this.GetParentPlus().findBuffStack("modifier_imba_life_stealer_feast_engorge_counter", this.GetCasterPlus());
     }
