@@ -128,11 +128,11 @@ export class modifier_imba_templar_assassin_refraction_damage extends BaseModifi
     }
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
             2: Enum_MODIFIER_EVENT.ON_ATTACK_LANDED
         });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.bonus_damage;
     }

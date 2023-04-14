@@ -14,7 +14,7 @@ export class RoundPrizeUnitKillPrizeComponent extends ET.Component {
     }
     OnKillByEntity(entityid: EntityIndex) {
         let hUnit = EntIndexToHScript(entityid) as IBaseNpc_Plus;
-        if (!GFuncEntity.IsValid(hUnit)) {
+        if (!IsValid(hUnit)) {
             return;
         }
         if (!hUnit.ETRoot) {

@@ -37,14 +37,14 @@ export class ability6_zuus_thundergods_wrath extends BaseAbility_Plus {
         return true
     }
     OnAbilityPhaseInterrupted() {
-        if (GFuncEntity.IsValid(this.hPtclThinker)) {
+        if (IsValid(this.hPtclThinker)) {
             this.hPtclThinker.SafeDestroy();
             this.hPtclThinker = null
         }
         this.GetCasterPlus().StopSound(ResHelper.GetSoundReplacement("Hero_Zuus.GodsWrath.PreCast", this.GetCasterPlus()))
     }
     OnSpellStart() {
-        if (GFuncEntity.IsValid(this.hPtclThinker)) {
+        if (IsValid(this.hPtclThinker)) {
             this.hPtclThinker.SafeDestroy();
             this.hPtclThinker = null
         }

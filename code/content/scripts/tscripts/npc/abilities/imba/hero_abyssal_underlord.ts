@@ -114,7 +114,7 @@ export class modifier_imba_abyssal_underlord_firestorm_thinker extends BaseModif
         if (!IsServer()) {
             return;
         }
-        GFuncEntity.SafeDestroyUnit(this.GetParentPlus());
+        SafeDestroyUnit(this.GetParentPlus());
     }
 
     OnIntervalThink(): void {
@@ -345,7 +345,7 @@ export class imba_abyssal_underlord_pit_of_malice extends BaseAbility_Plus {
     }
 
     AddTwistedRealityStack() {
-        if (!GFuncEntity.IsValid(this.GetCasterPlus())) {
+        if (!IsValid(this.GetCasterPlus())) {
             return;
         }
         let stack_modifier = this.GetCasterPlus().findBuff<modifier_imba_abyssal_underlord_pit_of_malice_stack>("modifier_imba_abyssal_underlord_pit_of_malice_stack");
@@ -429,11 +429,11 @@ export class modifier_imba_abyssal_underlord_pit_of_malice_thinker extends BaseM
         if (!IsServer()) {
             return;
         }
-        GFuncEntity.SafeDestroyUnit(this.GetParentPlus());
+        SafeDestroyUnit(this.GetParentPlus());
     }
 
     OnIntervalThink(): void {
-        if (!GFuncEntity.IsValid(this.caster)) {
+        if (!IsValid(this.caster)) {
             this.Destroy();
             return;
         }
@@ -664,7 +664,7 @@ export class modifier_imba_abyssal_underlord_atrophy_aura_active extends BaseMod
 
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
             2: Enum_MODIFIER_EVENT.ON_ATTACK_LANDED,
             3: GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP,
             4: GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP2
@@ -715,7 +715,7 @@ export class modifier_imba_abyssal_underlord_atrophy_aura_active extends BaseMod
         }
     }
 
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.GetStackCount();
     }
@@ -813,7 +813,7 @@ export class modifier_imba_abyssal_underlord_atrophy_aura extends BaseModifier_P
     /** DeclareFunctions():modifierfunction[] {
         let funcs = {
             1: Enum_MODIFIER_EVENT.ON_DEATH,
-            2: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS
+            2: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE
         }
         return Object.values(funcs);
     } */
@@ -859,7 +859,7 @@ export class modifier_imba_abyssal_underlord_atrophy_aura extends BaseModifier_P
         }
     }
 
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.GetStackCount();
     }
@@ -1007,11 +1007,11 @@ export class modifier_imba_abyssal_underlord_atrophy_aura_permanent_stack extend
 
     /** DeclareFunctions():modifierfunction[] {
         let funcs = {
-            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS
+            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE
         }
         return Object.values(funcs);
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.GetStackCount();
     }
@@ -1061,11 +1061,11 @@ export class modifier_imba_abyssal_underlord_atrophy_aura_scepter extends BaseMo
 
     /** DeclareFunctions():modifierfunction[] {
         let funcs = {
-            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS
+            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE
         }
         return Object.values(funcs);
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         if (this.GetParentPlus() == this.GetCasterPlus()) {
             return 0;

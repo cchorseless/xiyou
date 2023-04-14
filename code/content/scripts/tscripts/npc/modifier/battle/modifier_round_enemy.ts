@@ -50,9 +50,9 @@ export class modifier_round_enemy extends BaseModifier_Plus {
 
     }
 
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     atk: number;
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
     hp: number;
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS)
     phyarm: number;

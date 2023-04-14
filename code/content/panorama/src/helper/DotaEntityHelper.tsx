@@ -1185,6 +1185,12 @@ export module UnitHelper {
     export function GetBasePhysicalArmor(iUnitEntIndex: EntityIndex) {
         return FuncHelper.ToFiniteNumber(Number(GetUnitData(iUnitEntIndex, "GetBasePhysicalArmor")));
     };
+    export function GetPhysicalReduction(iUnitEntIndex: EntityIndex) {
+        return FuncHelper.ToFiniteNumber(Number(GetUnitData(iUnitEntIndex, "GetPhysicalReduction")));
+    };
+    export function GetMagicalReduction(iUnitEntIndex: EntityIndex) {
+        return FuncHelper.ToFiniteNumber(Number(GetUnitData(iUnitEntIndex, "GetMagicalReduction")));
+    };
     export function GetStatusResistance(iUnitEntIndex: EntityIndex) {
         return FuncHelper.ToFiniteNumber(Number(GetUnitData(iUnitEntIndex, "GetStatusResistance")));
     };

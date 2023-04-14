@@ -121,14 +121,14 @@ export class modifier_item_imba_cultic_hammer extends BaseModifier_Plus {
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
             1: GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BONUS,
-            2: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS
+            2: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE
         });
     } */
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BONUS)
     CC_GetModifierBonusStats_Strength(): number {
         return this.bonus_str;
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.bonus_damage;
     }

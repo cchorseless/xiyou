@@ -17,7 +17,7 @@ export class t4_frost extends BaseAbility_Plus {
         modifier_t4_frost_slow.apply(hTarget, hCaster, this, { duration: duration * hTarget.GetStatusResistanceFactor(hCaster) })
 
         // let combination_t04_biting_frost  = combination_t04_biting_frost.findIn(  hCaster )
-        // if (GFuncEntity.IsValid(combination_t04_biting_frost) && combination_t04_biting_frost.IsActivated()) {
+        // if (IsValid(combination_t04_biting_frost) && combination_t04_biting_frost.IsActivated()) {
         //     combination_t04_biting_frost.BitingFrost(hTarget, duration)
         // }
     }
@@ -94,7 +94,7 @@ export class modifier_t4_frost extends BaseModifier_Plus {
         }
         if (params.attacker == this.GetParentPlus()) {
             if (this.records.indexOf(params.record) != null) {
-                if (GFuncEntity.IsValid(this.GetAbilityPlus())) {
+                if (IsValid(this.GetAbilityPlus())) {
                     (this.GetAbilityPlus() as t4_frost).Frost(params.target)
                 }
             }

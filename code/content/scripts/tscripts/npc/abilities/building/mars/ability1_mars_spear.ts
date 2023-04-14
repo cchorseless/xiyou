@@ -31,7 +31,7 @@ export class ability1_mars_spear extends ActiveRootAbility {
     OnSpellStart() {
         let hCaster = this.GetCasterPlus()
         let hTarget = this.GetCursorTarget()
-        if (!GFuncEntity.IsValid(hTarget) || !hTarget.IsAlive()) {
+        if (!IsValid(hTarget) || !hTarget.IsAlive()) {
             return
         }
         let delay = this.GetSpecialValueFor("delay")
@@ -69,7 +69,7 @@ export class ability1_mars_spear extends ActiveRootAbility {
 
         for (let i = hThinker.GetAbilityCount() - 1; i >= 0; i--) {
             let ability = hThinker.GetAbilityByIndex(i)
-            if (GFuncEntity.IsValid(ability)) {
+            if (IsValid(ability)) {
                 hThinker.RemoveAbilityByHandle(ability)
             }
         }
@@ -106,7 +106,7 @@ export class ability1_mars_spear extends ActiveRootAbility {
     }
     OnProjectileHit_ExtraData(hTarget: IBaseNpc_Plus, vLocation: Vector, ExtraData: any) {
         let hCaster = this.GetCasterPlus()
-        if (GFuncEntity.IsValid(hTarget)) {
+        if (IsValid(hTarget)) {
             if (ExtraData.target_position_x != null && ExtraData.target_position_y != null && ExtraData.target_position_z != null) {
                 let speed = this.GetSpecialValueFor("speed")
                 let radius = this.GetSpecialValueFor("radius")
@@ -173,7 +173,7 @@ export class modifier_mars_1 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -326,7 +326,7 @@ export class modifier_mars_1_move extends BaseModifierMotionHorizontal_Plus {
             let hCaster = this.GetCasterPlus()
             let hAbility = this.GetAbilityPlus()
             let fPercent = this.GetElapsedTime() / this.GetDuration()
-            if (GFuncEntity.IsValid(hCaster) && hCaster.IsAlive()) {
+            if (IsValid(hCaster) && hCaster.IsAlive()) {
                 let vPosition = GFuncVector.VectorLerp(fPercent, this.vStartPosition, this.vTargetPosition)
                 let vDirection = ((this.vTargetPosition - this.vStartPosition) as Vector).Normalized()
                 hParent.SetAbsOrigin(vPosition)

@@ -90,11 +90,11 @@ export class ability6_pangolier_gyroshell extends BaseAbility_Plus {
             modifier_pangolier_6_jump_start.apply(hCaster, hCaster, this, { duration: jump_duration })
             //  添加反向技能
             // let pangolier_3_bounce = pangolier_3_bounce.findIn(hCaster)
-            // if (!GFuncEntity.IsValid(pangolier_3_bounce)) {
+            // if (!IsValid(pangolier_3_bounce)) {
             //     pangolier_3_bounce = hCaster.AddAbility("pangolier_3_bounce")
             //     hCaster.SwapAbilities("pangolier_3", "pangolier_3_bounce", false, true)
             // }
-            // if (GFuncEntity.IsValid(pangolier_3_bounce)) {
+            // if (IsValid(pangolier_3_bounce)) {
             //     pangolier_3_bounce.SetLevel(1)
             //     this.SetActivated(false)
             //     if (pangolier_3_bounce.GetAutoCastState() != this.GetAutoCastState()) {
@@ -158,7 +158,7 @@ export class modifier_pangolier_6 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -411,7 +411,7 @@ export class modifier_pangolier_6_rolling extends BaseModifierMotionHorizontal_P
             modifier_pangolier_6_jump_back.apply(hCaster, hCaster, hAbility, { duration: this.jump_recover_time })
             modifier_pangolier_6_swashbuckle.remove(hCaster);
             let hParticleModifier = modifier_pangolier_6_particle_pangolier_gyroshell_cast.findIn(hCaster)
-            if (GFuncEntity.IsValid(hParticleModifier)) {
+            if (IsValid(hParticleModifier)) {
                 hParticleModifier.Destroy()
             }
         }
@@ -521,10 +521,10 @@ export class modifier_pangolier_6_jump_back extends BaseModifierMotionBoth_Plus 
     BeDestroy() {
 
         if (IsServer()) {
-            //  if ( GFuncEntity.IsValid(this.hPtclThinker) ) {
+            //  if ( IsValid(this.hPtclThinker) ) {
             //  	 this.hPtclThinker.sPtclName.remove( this.hPtclThinker );
             //  }
-            if (GFuncEntity.IsValid(this.hParticleModifier)) {
+            if (IsValid(this.hParticleModifier)) {
                 this.hParticleModifier.Destroy()
             }
             let hCaster = this.GetCasterPlus()

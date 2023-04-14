@@ -97,7 +97,7 @@ export class modifier_monkey_king_2 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -189,9 +189,9 @@ export class modifier_monkey_king_2_active extends BaseModifierMotionBoth_Plus {
     GetScepterSoldierCount() {
         let hCaster = this.GetCasterPlus()
         let ActivehSoldierCount = 0
-        if (GFuncEntity.IsValid(hCaster) && hCaster.HasScepter()) {
+        if (IsValid(hCaster) && hCaster.HasScepter()) {
             let hAbility3 = ability6_monkey_king_wukongs_command.findIn(hCaster) as ability6_monkey_king_wukongs_command;
-            if (GFuncEntity.IsValid(hAbility3) && hAbility3.GetLevel() >= 1) {
+            if (IsValid(hAbility3) && hAbility3.GetLevel() >= 1) {
                 if (hAbility3.tScepterSoldiers != null) {
                     for (let hSoldier of (hAbility3.tScepterSoldiers)) {
                         if (modifier_monkey_king_6_scepter_active.exist(hSoldier)) {
@@ -276,7 +276,7 @@ export class modifier_monkey_king_2_active extends BaseModifierMotionBoth_Plus {
             let hCaster = this.GetCasterPlus()
             let hParent = this.GetParentPlus()
 
-            if (!GFuncEntity.IsValid(hCaster) || !GFuncEntity.IsValid(this.hTarget)) {
+            if (!IsValid(hCaster) || !IsValid(this.hTarget)) {
                 this.Destroy()
                 return
             }

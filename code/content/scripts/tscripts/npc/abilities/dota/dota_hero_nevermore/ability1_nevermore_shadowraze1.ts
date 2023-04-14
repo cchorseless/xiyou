@@ -92,7 +92,7 @@ export class ability1_nevermore_shadowraze1 extends BaseAbility_Plus {
         let vPosition = this.GetCursorPosition()
         if (this.GetCursorTarget() != null) {
             vPosition = this.GetCursorTarget().GetAbsOrigin()
-        } else if (GFuncEntity.IsValid(hTarget)) {
+        } else if (IsValid(hTarget)) {
             vPosition = hTarget.GetAbsOrigin()
         }
         let vStartPosition = hCaster.GetAbsOrigin()
@@ -159,7 +159,7 @@ export class modifier_nevermore_1 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return

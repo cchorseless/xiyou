@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -1372,7 +1372,7 @@ export class modifier_imba_faceless_void_time_lock_720 extends BaseModifier_Plus
         ParticleManager.ReleaseParticleIndex(particle);
         this.AddTimer(0.33, () => {
             if (!ability.IsNull() && target.IsAlive()) {
-                this.GetParentPlus().PerformAttack(target, false, true, true, false, false, false, false);
+                this.GetParentPlus().AttackOnce(target, false, true, true, false, false, false, false);
                 let damageTable = {
                     victim: target,
                     damage: bonus_damage,

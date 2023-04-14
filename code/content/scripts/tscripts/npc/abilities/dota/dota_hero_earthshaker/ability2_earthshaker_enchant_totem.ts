@@ -95,7 +95,7 @@ export class modifier_earthshaker_2 extends BaseModifier_Plus {
 
             let hCaster = ability.GetCasterPlus()
 
-            if (!GFuncEntity.IsValid(hCaster)) {
+            if (!IsValid(hCaster)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -227,14 +227,14 @@ export class modifier_earthshaker_2_buff extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS_STACKING)
     Get_CastRangeBonusStacking(params: ModifierAbilityEvent) {
-        if (GFuncEntity.IsValid(params.ability) && GameFunc.IncludeArgs(params.ability.GetBehaviorInt(), DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_ATTACK)[0]) {
+        if (IsValid(params.ability) && GameFunc.IncludeArgs(params.ability.GetBehaviorInt(), DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_ATTACK)[0]) {
             return this.bonus_attack_range
         }
         return 0
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
     On_AttackLanded(params: IModifierTable) {
-        if (!GFuncEntity.IsValid(params.target) || params.target.GetClassname() == "dota_item_drop") { return }
+        if (!IsValid(params.target) || params.target.GetClassname() == "dota_item_drop") { return }
 
         if (params.attacker == this.GetParentPlus()) {
             if (params.attacker.AttackFilter(params.record, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NO_EXTENDATTACK, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_SKIPCOUNTING)) {
@@ -250,7 +250,7 @@ export class modifier_earthshaker_2_buff extends BaseModifier_Plus {
                 let _tTargets = AoiHelper.FindUnitsInRadiusByModifierName("modifier_earthshaker_1_root", params.attacker.GetTeamNumber(), Vector(0, 0, 0), 5000, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_CLOSEST)
                 for (let v of (_tTargets)) {
                     let hModifier = modifier_earthshaker_1_root.findIn(v) as modifier_earthshaker_1_root;
-                    if (GFuncEntity.IsValid(hModifier) && GFuncEntity.IsValid(hModifier.GetCasterPlus()) && hModifier.GetCasterPlus().GetPlayerOwnerID() == params.attacker.GetPlayerOwnerID()) {
+                    if (IsValid(hModifier) && IsValid(hModifier.GetCasterPlus()) && hModifier.GetCasterPlus().GetPlayerOwnerID() == params.attacker.GetPlayerOwnerID()) {
                         table.insert(tTargets, v)
                     }
                 }
@@ -263,7 +263,7 @@ export class modifier_earthshaker_2_buff extends BaseModifier_Plus {
                     damage: params.original_damage * this.splash_damage * 0.01,
                     damage_type: DAMAGE_TYPES.DAMAGE_TYPE_PHYSICAL,
                     damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION,
-                    eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_SPELL_CRIT,
+                    extra_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_SPELL_CRIT,
                 })
             }
 

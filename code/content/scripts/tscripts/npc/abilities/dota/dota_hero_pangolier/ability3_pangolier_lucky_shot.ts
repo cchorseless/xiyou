@@ -156,7 +156,7 @@ export class modifier_pangolier_3 extends BaseModifier_Plus {
                 if (modifier_pangolier_6_rolling.exist(hParent)) {
                     let hModifier = modifier_pangolier_6_rolling.findIn(hParent)
                     let hAbility3 = hModifier.GetAbilityPlus()
-                    if (GFuncEntity.IsValid(hAbility3)) {
+                    if (IsValid(hAbility3)) {
                         chance = chance + hAbility3.GetSpecialValueFor("lucky_shot_chance")
                     }
                 }

@@ -55,7 +55,7 @@ export class t15_gamble extends BaseAbility_Plus {
         //     return
         // }
         // PlayerData.ModifyGold(iPlayerID, -iGoldCost)
-        let iTotalGold = GFuncEntity.IsValid(hModifierNegative) && -hModifierNegative.GetStackCount() || hModifier.GetStackCount()
+        let iTotalGold = IsValid(hModifierNegative) && -hModifierNegative.GetStackCount() || hModifier.GetStackCount()
         this.StartCooldown(cool_down)
         let EffectName = null
         if (RandomFloat(0, 100) <= chance) {
@@ -100,7 +100,7 @@ export class t15_gamble extends BaseAbility_Plus {
 
         hModifier.SetStackCount(math.max(iTotalGold, 0))
         if (iTotalGold < 0) {
-            if (!GFuncEntity.IsValid(hModifierNegative)) {
+            if (!IsValid(hModifierNegative)) {
                 hModifierNegative = modifier_t15_gamble_negative.apply(hCaster, hCaster, this, null) as modifier_t15_gamble_negative
             }
             hModifierNegative.SetStackCount(-iTotalGold)
@@ -146,7 +146,7 @@ export class modifier_t15_gamble extends BaseModifier_Plus {
     BeDestroy() {
 
         if (IsServer()) {
-            if (GFuncEntity.IsValid(this.hParticleModifier)) {
+            if (IsValid(this.hParticleModifier)) {
                 this.hParticleModifier.Destroy()
             }
         }
@@ -156,7 +156,7 @@ export class modifier_t15_gamble extends BaseModifier_Plus {
             let hAbility = this.GetAbilityPlus()
             let hCaster = this.GetCasterPlus()
 
-            if (!GFuncEntity.IsValid(hCaster) || !GFuncEntity.IsValid(hAbility)) {
+            if (!IsValid(hCaster) || !IsValid(hAbility)) {
                 this.Destroy()
                 return
             }
@@ -166,11 +166,11 @@ export class modifier_t15_gamble extends BaseModifier_Plus {
             }
             // && !Spawner.IsEndless()
             if (hAbility.IsActivated() && hAbility.IsCooldownReady()) {
-                if (!GFuncEntity.IsValid(this.hParticleModifier)) {
+                if (!IsValid(this.hParticleModifier)) {
                     this.hParticleModifier = modifier_t15_gamble_particle_bounty_hunter_hoard_shield.apply(hCaster, hCaster, hAbility, null) as modifier_t15_gamble_particle_bounty_hunter_hoard_shield
                 }
             } else {
-                if (GFuncEntity.IsValid(this.hParticleModifier)) {
+                if (IsValid(this.hParticleModifier)) {
                     this.hParticleModifier.Destroy()
                 }
             }

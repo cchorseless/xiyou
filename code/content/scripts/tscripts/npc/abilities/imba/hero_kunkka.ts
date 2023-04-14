@@ -832,7 +832,7 @@ export class modifier_imba_tidebringer extends BaseModifier_Plus {
             1: Enum_MODIFIER_EVENT.ON_ATTACK_LANDED,
             2: Enum_MODIFIER_EVENT.ON_TAKEDAMAGE,
             3: Enum_MODIFIER_EVENT.ON_ATTACK_START,
-            4: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS
+            4: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE
         });
     } */
     BeCreated(p_0: any,): void {
@@ -1005,7 +1005,7 @@ export class modifier_imba_tidebringer extends BaseModifier_Plus {
             }
         }
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage( /** params */): number {
         this.bonus_damage = this.bonus_damage || 0;
         return this.bonus_damage;

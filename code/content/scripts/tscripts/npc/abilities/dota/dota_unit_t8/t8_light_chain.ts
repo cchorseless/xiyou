@@ -11,14 +11,14 @@ export class t8_light_chain extends BaseAbility_Plus {
     GetBehavior() {
         let iBehavior = tonumber(tostring(super.GetBehavior()))
         let hCaster = this.GetCasterPlus()
-        // if (GFuncEntity.IsValid(hCaster) && modifier_combination_t08_forked_lightning.exist(  hCaster ) && hCaster.GetStackCount("modifier_combination_t08_forked_lightning", hCaster) > 0) {;
+        // if (IsValid(hCaster) && modifier_combination_t08_forked_lightning.exist(  hCaster ) && hCaster.GetStackCount("modifier_combination_t08_forked_lightning", hCaster) > 0) {;
         //     return iBehavior + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_AOE
         // }
         return iBehavior
     }
     GetAOERadius() {
         let hCaster = this.GetCasterPlus()
-        // if (GFuncEntity.IsValid(hCaster) && modifier_combination_t08_forked_lightning.exist(  hCaster ) && hCaster.GetStackCount("modifier_combination_t08_forked_lightning", hCaster) > 0) {;
+        // if (IsValid(hCaster) && modifier_combination_t08_forked_lightning.exist(  hCaster ) && hCaster.GetStackCount("modifier_combination_t08_forked_lightning", hCaster) > 0) {;
         //     return hCaster.GetStackCount("modifier_combination_t08_forked_lightning", hCaster)
         // }
         return 500
@@ -30,10 +30,10 @@ export class t8_light_chain extends BaseAbility_Plus {
         // let chain_strikes = this.GetSpecialValueFor("chain_strikes")
         // let chain_delay = this.GetSpecialValueFor("chain_delay")
         // this.addTimer(chain_delay, () => {
-        //     if (!GFuncEntity.IsValid(caster)) {
+        //     if (!IsValid(caster)) {
         //         return
         //     }
-        //     if (!GFuncEntity.IsValid(target)) {
+        //     if (!IsValid(target)) {
         //         return
         //     }
         //     let new_target = AoiHelper.GetBounceTarget(units, caster.GetTeamNumber(), chain_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, target.GetAbsOrigin(), FindOrder.FIND_CLOSEST)
@@ -50,7 +50,7 @@ export class t8_light_chain extends BaseAbility_Plus {
         //         ParticleManager.ReleaseParticleIndex(iParticleID)
 
         //         let combination_t08_lightning_shackles  = combination_t08_lightning_shackles.findIn(  caster )
-        //         if (GFuncEntity.IsValid(combination_t08_lightning_shackles) && combination_t08_lightning_shackles.IsActivated()) {
+        //         if (IsValid(combination_t08_lightning_shackles) && combination_t08_lightning_shackles.IsActivated()) {
         //             combination_t08_lightning_shackles.LightningShackles(new_target)
         //         }
         //         let iDamage = chain_damage
@@ -62,7 +62,7 @@ export class t8_light_chain extends BaseAbility_Plus {
         //                 let hHero = hBuilding.GetUnitEntity()
         //                 for (let i = 0; i <= hHero.GetAbilityCount() - 1; i++) {
         //                     let hAbility = hHero.GetAbilityByIndex(i)
-        //                     if (GFuncEntity.IsValid(hAbility)) {
+        //                     if (IsValid(hAbility)) {
         //                         if (hAbility.GetAbilityName() == "qualification_build_t08") {
         //                             hChainAbility = hAbility
         //                         }
@@ -71,7 +71,7 @@ export class t8_light_chain extends BaseAbility_Plus {
         //             }
         //         )
         //         let hModifier  = modifier_qualification_build_t08_chain.findIn(  new_target )
-        //         if (GFuncEntity.IsValid(hModifier) && GFuncEntity.IsValid(hChainAbility)) {
+        //         if (IsValid(hModifier) && IsValid(hChainAbility)) {
         //             let damage_superposition = hChainAbility.GetSpecialValueFor("damage_superposition")
         //             iDamage = iDamage + iDamage * hModifier.GetStackCount() * damage_superposition * 0.01
         //         }
@@ -83,7 +83,7 @@ export class t8_light_chain extends BaseAbility_Plus {
         //             damage_type: this.GetAbilityDamageType()
         //         }
         //         BattleHelper.GoApplyDamage(damage_table)
-        //         if (GFuncEntity.IsValid(hChainAbility)) {
+        //         if (IsValid(hChainAbility)) {
         //              modifier_qualification_build_t08_chain.apply( new_target , caster, hChainAbility, { duration: hChainAbility.GetSpecialValueFor("duration") })
         //         }
         //         EmitSoundOnLocationWithCaster(new_target.GetAbsOrigin(), "n_creep_HarpyStorm.ChainLighting", caster)
@@ -99,7 +99,7 @@ export class t8_light_chain extends BaseAbility_Plus {
     OnSpellStart() {
         // let caster = this.GetCasterPlus()
         // let target = this.GetCursorTarget() as IBaseNpc_Plus;
-        // if (!GFuncEntity.IsValid(target) || !target.IsAlive()) {
+        // if (!IsValid(target) || !target.IsAlive()) {
         //     return
         // }
         // let chain_damage = this.GetSpecialValueFor("chain_damage") + this.GetSpecialValueFor("intellect_damage_factor") * caster.GetIntellect()
@@ -116,7 +116,7 @@ export class t8_light_chain extends BaseAbility_Plus {
         // ParticleManager.SetParticleControlEnt(iParticleID, 1, target, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", target.GetAbsOrigin(), true)
         // ParticleManager.ReleaseParticleIndex(iParticleID)
         // let combination_t08_lightning_shackles  = combination_t08_lightning_shackles.findIn(  caster )
-        // if (GFuncEntity.IsValid(combination_t08_lightning_shackles) && combination_t08_lightning_shackles.IsActivated()) {
+        // if (IsValid(combination_t08_lightning_shackles) && combination_t08_lightning_shackles.IsActivated()) {
         //     combination_t08_lightning_shackles.LightningShackles(target)
         // }
 
@@ -129,7 +129,7 @@ export class t8_light_chain extends BaseAbility_Plus {
         //         let hHero = hBuilding.GetUnitEntity()
         //         for (let i = 0; i <= hHero.GetAbilityCount() - 1; i++) {
         //             let hAbility = hHero.GetAbilityByIndex(i)
-        //             if (GFuncEntity.IsValid(hAbility)) {
+        //             if (IsValid(hAbility)) {
         //                 if (hAbility.GetAbilityName() == "qualification_build_t08") {
         //                     hChainAbility = hAbility
         //                 }
@@ -138,7 +138,7 @@ export class t8_light_chain extends BaseAbility_Plus {
         //     }
         // )
         // let hModifier  = modifier_qualification_build_t08_chain.findIn(  target ) as IBaseModifier_Plus;
-        // if (GFuncEntity.IsValid(hModifier) && GFuncEntity.IsValid(hChainAbility)) {
+        // if (IsValid(hModifier) && IsValid(hChainAbility)) {
         //     let damage_superposition = hChainAbility.GetSpecialValueFor("damage_superposition")
         //     iDamage = iDamage + iDamage * hModifier.GetStackCount() * damage_superposition * 0.01
         // }
@@ -150,7 +150,7 @@ export class t8_light_chain extends BaseAbility_Plus {
         //     damage_type: this.GetAbilityDamageType()
         // }
         // BattleHelper.GoApplyDamage(damage_table)
-        // if (GFuncEntity.IsValid(hChainAbility)) {
+        // if (IsValid(hChainAbility)) {
         //      modifier_qualification_build_t08_chain.apply( target , caster, hChainAbility, { duration: hChainAbility.GetSpecialValueFor("duration") })
         // }
         // EmitSoundOnLocationWithCaster(target.GetAbsOrigin(), "n_creep_HarpyStorm.ChainLighting", caster)
@@ -160,7 +160,7 @@ export class t8_light_chain extends BaseAbility_Plus {
         // }
         // //  组合技
         // let modifier  = modifier_combination_t08_forked_lightning.findIn(  caster ) as IBaseModifier_Plus;
-        // if (GFuncEntity.IsValid(modifier) && modifier.GetStackCount() > 0) {
+        // if (IsValid(modifier) && modifier.GetStackCount() > 0) {
         //     let radius = modifier.radius
         //     let extra_count = modifier.extra_count
         //     let count = 0
@@ -180,7 +180,7 @@ export class t8_light_chain extends BaseAbility_Plus {
         //             ParticleManager.ReleaseParticleIndex(iParticleID)
 
         //             let combination_t08_lightning_shackles  = combination_t08_lightning_shackles.findIn(  caster )
-        //             if (GFuncEntity.IsValid(combination_t08_lightning_shackles) && combination_t08_lightning_shackles.IsActivated()) {
+        //             if (IsValid(combination_t08_lightning_shackles) && combination_t08_lightning_shackles.IsActivated()) {
         //                 combination_t08_lightning_shackles.LightningShackles(hTarget)
         //             }
 
@@ -246,7 +246,7 @@ export class modifier_t8_light_chain extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return

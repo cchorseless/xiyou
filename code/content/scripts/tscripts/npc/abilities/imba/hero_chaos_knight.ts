@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { AnimationHelper } from "../../../helper/AnimationHelper";
 import { AoiHelper } from "../../../helper/AoiHelper";
 import { ProjectileHelper } from "../../../helper/ProjectileHelper";
@@ -296,12 +296,12 @@ export class modifier_imba_chaos_knight_chaos_strike_actCrit extends BaseModifie
     public crit: boolean;
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_CRITICALSTRIKE,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_CRITICALSTRIKE_UNIQUE,
             2: Enum_MODIFIER_EVENT.ON_TAKEDAMAGE,
             3: Enum_MODIFIER_EVENT.ON_ATTACK_LANDED
         });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_CRITICALSTRIKE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_CRITICALSTRIKE_UNIQUE)
     CC_GetModifierPreAttack_CriticalStrike(params: ModifierAttackEvent): number {
         let parent = this.GetParentPlus();
         EmitSoundOn("Hero_ChaosKnight.ChaosStrike", parent);

@@ -49,7 +49,7 @@ export class ability1_lone_druid_spirit_bear extends BaseAbility_Plus {
             //     this.GameTimer(0, () => {
             //         if (type(hCaster.GetBuilding) == "function") {
             //             let hBuilding = hCaster.GetBuilding()
-            //             if (GFuncEntity.IsValid(hBuilding) && hBuilding.QualificationAbilityName != null) {
+            //             if (IsValid(hBuilding) && hBuilding.QualificationAbilityName != null) {
             //                 hCaster.FireQulificationChanged(hBuilding.QualificationAbilityName)
             //             }
             //         }
@@ -107,7 +107,7 @@ export class modifier_lone_druid_2_buff extends BaseModifier_Plus {
             let hCaster = this.GetCasterPlus()
             let hParent = this.GetParentPlus()
             let hAbility = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(hCaster) || !hCaster.IsAlive()) {
+            if (!IsValid(hCaster) || !hCaster.IsAlive()) {
                 // BuildSystem.RemoveBuilding(hParent)
                 this.StartIntervalThink(-1)
                 this.Destroy()
@@ -115,15 +115,15 @@ export class modifier_lone_druid_2_buff extends BaseModifier_Plus {
             }
             if (hParent.IsBuilding()) {
                 // let hReturn = lone_druid_bear_return_custom.findIn(hParent)
-                // if (GFuncEntity.IsValid(hReturn) && hReturn.GetLevel() != hAbility.GetLevel()) {
+                // if (IsValid(hReturn) && hReturn.GetLevel() != hAbility.GetLevel()) {
                 //     hReturn.SetLevel(hAbility.GetLevel())
                 // }
                 // let hEntangle = lone_druid_bear_entangle_custom.findIn(hParent)
-                // if (GFuncEntity.IsValid(hEntangle) && hEntangle.GetLevel() != hAbility.GetLevel()) {
+                // if (IsValid(hEntangle) && hEntangle.GetLevel() != hAbility.GetLevel()) {
                 //     hEntangle.SetLevel(hAbility.GetLevel())
                 // }
                 // let hDemolish = lone_druid_bear_demolish_custom.findIn(hParent)
-                // if (GFuncEntity.IsValid(hDemolish) && hDemolish.GetLevel() != hAbility.GetLevel()) {
+                // if (IsValid(hDemolish) && hDemolish.GetLevel() != hAbility.GetLevel()) {
                 //     hDemolish.SetLevel(hAbility.GetLevel())
                 // }
                 //  攻击力
@@ -138,7 +138,7 @@ export class modifier_lone_druid_2_buff extends BaseModifier_Plus {
                     if (this.sQulificationAbility != null && !hParent.HasAbility(this.sQulificationAbility)) {
                         if (this.tInvalidQulificationAbility.indexOf(this.sQulificationAbility) > -1) {
                             let hAbility = hParent.AddAbility(this.sQulificationAbility)
-                            if (GFuncEntity.IsValid(hAbility)) {
+                            if (IsValid(hAbility)) {
                                 hParent.SwapAbilities("hidden_qualification", this.sQulificationAbility, false, true)
                             } else {
                                 //  TODO:这意味着可能技能名错了，是否有必要设置为空呢？
@@ -166,7 +166,7 @@ export class modifier_lone_druid_2_buff extends BaseModifier_Plus {
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BASE)
     CC_GetModifierBaseStats_Strength(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
-        if (GFuncEntity.IsValid(hCaster)) {
+        if (IsValid(hCaster)) {
             let inherit_attribute_per = this.GetSpecialValueFor("inherit_attribute_per") + hCaster.GetTalentValue("special_bonus_unique_lone_druid_custom_7")
             return hCaster.GetStrength() * inherit_attribute_per / 100
         }
@@ -174,7 +174,7 @@ export class modifier_lone_druid_2_buff extends BaseModifier_Plus {
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_BASE)
     CC_GetModifierBaseStats_Agility(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
-        if (GFuncEntity.IsValid(hCaster)) {
+        if (IsValid(hCaster)) {
             let inherit_attribute_per = this.GetSpecialValueFor("inherit_attribute_per") + hCaster.GetTalentValue("special_bonus_unique_lone_druid_custom_7")
             return hCaster.GetAgility() * inherit_attribute_per / 100
         }
@@ -182,7 +182,7 @@ export class modifier_lone_druid_2_buff extends BaseModifier_Plus {
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BASE)
     CC_GetModifierBaseStats_Intellect(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
-        if (GFuncEntity.IsValid(hCaster)) {
+        if (IsValid(hCaster)) {
             let inherit_attribute_per = this.GetSpecialValueFor("inherit_attribute_per") + hCaster.GetTalentValue("special_bonus_unique_lone_druid_custom_7")
             return hCaster.GetIntellect() * inherit_attribute_per / 100
         }
@@ -210,7 +210,7 @@ export class modifier_lone_druid_2_buff extends BaseModifier_Plus {
                 if (hCaster.HasScepter()) {
                     if (this.tInvalidQulificationAbility.indexOf(this.sQulificationAbility) > -1) {
                         let hAbility = hParent.AddAbility(this.sQulificationAbility)
-                        if (GFuncEntity.IsValid(hAbility)) {
+                        if (IsValid(hAbility)) {
                             hParent.SwapAbilities("hidden_qualification", this.sQulificationAbility, false, true)
                         } else {
                             //  TODO:这意味着可能技能名错了，是否有必要设置为空呢？

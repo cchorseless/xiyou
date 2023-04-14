@@ -25,7 +25,7 @@ export class modifier_sect_phyarm_down_base_a extends modifier_combination_effec
         if (IsServer()) {
             let allenemy = this.getAllEnemy();
             allenemy.forEach(enemy => {
-                if (GFuncEntity.IsValid(enemy)) {
+                if (IsValid(enemy)) {
                     let buff = modifier_sect_phyarm_down_enemy.applyOnly(enemy, parent);
                     buff.SetStackCount(math.abs(t.phyarm_down))
                 }
@@ -61,7 +61,7 @@ export class modifier_sect_phyarm_down_base_b extends modifier_combination_effec
         if (IsServer()) {
             let allenemy = this.getAllEnemy();
             allenemy.forEach(enemy => {
-                if (GFuncEntity.IsValid(enemy)) {
+                if (IsValid(enemy)) {
                     let buff = modifier_sect_phyarm_down_enemy.applyOnly(enemy, parent);
                     buff.SetStackCount(math.abs(t.phyarm_down))
                 }

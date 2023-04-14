@@ -279,7 +279,7 @@ export class modifier_sohei_flurry_self extends BaseModifier_Plus {
                     abilityMomentum.ToggleAbility();
                 }
             }
-            parent.PerformAttack(targets[0], true, true, true, false, false, false, false);
+            parent.AttackOnce(targets[0], true, true, true, false, false, false, false);
             return true;
         } else {
             parent.AddNoDraw();
@@ -517,7 +517,7 @@ export class modifier_sohei_momentum_passive extends BaseModifier_Plus {
     }
     /** DeclareFunctions():modifierfunction[] {
     let funcs = {
-        1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_CRITICALSTRIKE,
+        1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_CRITICALSTRIKE_UNIQUE,
         2: Enum_MODIFIER_EVENT.ON_ATTACK_LANDED,
         3: Enum_MODIFIER_EVENT.ON_ORDER
     }
@@ -535,7 +535,7 @@ export class modifier_sohei_momentum_passive extends BaseModifier_Plus {
             }
         }
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_CRITICALSTRIKE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_CRITICALSTRIKE_UNIQUE)
     CC_GetModifierPreAttack_CriticalStrike(event: ModifierAttackEvent): number {
         if ((this.force_casting == true || this.GetAbilityPlus().GetAutoCastState() == true) && this.IsMomentumReady() && (this.GetAbilityPlus().IsCooldownReady() || this.GetParentPlus().HasModifier("modifier_sohei_flurry_self"))) {
             let ufResult = UnitFilter(event.target, this.GetAbilityPlus().GetAbilityTargetTeam(), this.GetAbilityPlus().GetAbilityTargetType(), this.GetAbilityPlus().GetAbilityTargetFlags(), this.GetParentPlus().GetTeamNumber());

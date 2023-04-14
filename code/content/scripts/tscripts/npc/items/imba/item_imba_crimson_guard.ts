@@ -79,13 +79,13 @@ export class modifier_item_imba_crimson_guard extends BaseModifier_Plus {
     }
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS,
             2: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_REGEN_CONSTANT,
             3: GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS,
             4: GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_CONSTANT_BLOCK
         });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
     CC_GetModifierHealthBonus(): number {
         return this.health;
     }

@@ -55,13 +55,13 @@ export class ability1_earth_spirit_boulder_smash extends BaseAbility_Plus {
         let hCaster = this.GetCasterPlus()
 
         let hTarget = this.GetCursorTarget()
-        if (GFuncEntity.IsValid(hTarget)) {
+        if (IsValid(hTarget)) {
             this.smash(1, hTarget)
         } else {
             let mdf4 = modifier_earth_spirit_3.findIn(hCaster)
-            if (GFuncEntity.IsValid(mdf4)) {
+            if (IsValid(mdf4)) {
                 let hStone = mdf4.GetStone()
-                if (GFuncEntity.IsValid(hStone)) {
+                if (IsValid(hStone)) {
                     this.smash(0, hStone)
                     return
                 }
@@ -127,7 +127,7 @@ export class ability1_earth_spirit_boulder_smash extends BaseAbility_Plus {
             let abilitycount = hThinker.GetAbilityCount()
             for (let i = abilitycount - 1; i >= 0; i--) {
                 let hAbility = hThinker.GetAbilityByIndex(i)
-                if (GFuncEntity.IsValid(hAbility)) {
+                if (IsValid(hAbility)) {
                     hThinker.RemoveAbilityByHandle(hAbility)
                 }
             }
@@ -144,7 +144,7 @@ export class ability1_earth_spirit_boulder_smash extends BaseAbility_Plus {
 
     OnProjectileThink_ExtraData(vLocation: Vector, ExtraData: any) {
         let hThinker = EntIndexToHScript(ExtraData.smash_index || -1) as IBaseNpc_Plus
-        if (GFuncEntity.IsValid(hThinker)) {
+        if (IsValid(hThinker)) {
             hThinker.SetAbsOrigin(GetGroundPosition(vLocation, hThinker))
         }
     }
@@ -153,18 +153,18 @@ export class ability1_earth_spirit_boulder_smash extends BaseAbility_Plus {
         let hCaster = this.GetCasterPlus() as IBaseNpc_Plus & { tMagnetized: Array<any> }
 
         //  到达最大距离
-        if (!GFuncEntity.IsValid(hTarget)) {
+        if (!IsValid(hTarget)) {
             if (ExtraData.type == 0) { //  残岩
                 let mdf4 = modifier_earth_spirit_3.findIn(hCaster)
-                if (GFuncEntity.IsValid(mdf4) && mdf4.UseStone) {
+                if (IsValid(mdf4) && mdf4.UseStone) {
                     let hStone = EntIndexToHScript(ExtraData.smash_index || -1)
-                    if (GFuncEntity.IsValid(hStone)) {
+                    if (IsValid(hStone)) {
                         UTIL_Remove(hStone)
                     }
                 }
             } else if (ExtraData.type == 1) {
                 let hThinker = EntIndexToHScript(ExtraData.smash_index || -1)
-                if (GFuncEntity.IsValid(hThinker)) {
+                if (IsValid(hThinker)) {
                     UTIL_Remove(hThinker)
                 }
             }
@@ -203,7 +203,7 @@ export class ability1_earth_spirit_boulder_smash extends BaseAbility_Plus {
         }
 
         for (let v of (tTargets)) {
-            if (GFuncEntity.IsValid(v)) {
+            if (IsValid(v)) {
                 if (ExtraData.type == 0) { //  残岩
                     //  减速、沉默
                     modifier_earth_spirit_silence.apply(v, hCaster, this, { duration: silence_duration * v.GetStatusResistanceFactor(hCaster) })
@@ -214,7 +214,7 @@ export class ability1_earth_spirit_boulder_smash extends BaseAbility_Plus {
 
                 } else if (ExtraData.type == 1) { //  英雄
                     let hAttacker = EntIndexToHScript(ExtraData.smash_attacker_index) as IBaseNpc_Plus
-                    if (GFuncEntity.IsValid(hAttacker)) {
+                    if (IsValid(hAttacker)) {
                         modifier_earth_spirit_1_cannot_miss.apply(hAttacker, hCaster, this, null)
                         BattleHelper.Attack(hAttacker, v, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_SKIPCOOLDOWN)
                         modifier_earth_spirit_1_cannot_miss.remove(hAttacker);
@@ -294,7 +294,7 @@ export class modifier_earth_spirit_1 extends BaseModifier_Plus {
             return
         }
         let hAbility = this.GetAbilityPlus()
-        if (!GFuncEntity.IsValid(hAbility)) {
+        if (!IsValid(hAbility)) {
             this.StartIntervalThink(-1)
             this.Destroy()
             return
@@ -338,7 +338,7 @@ export class modifier_earth_spirit_1 extends BaseModifier_Plus {
         let hAbility = this.GetAbilityPlus()
         let castRange = hAbility.GetCastRange(hParent.GetAbsOrigin(), hParent) + hParent.GetCastRangeBonus()
 
-        if (GFuncEntity.IsValid(this.last_target) && hParent.IsPositionInRange(this.last_target.GetAbsOrigin(), castRange)) {
+        if (IsValid(this.last_target) && hParent.IsPositionInRange(this.last_target.GetAbsOrigin(), castRange)) {
             ExecuteOrderFromTable({
                 UnitIndex: hParent.entindex(),
                 OrderType: dotaunitorder_t.DOTA_UNIT_ORDER_CAST_TARGET,
@@ -378,9 +378,9 @@ export class modifier_earth_spirit_1 extends BaseModifier_Plus {
         let order = FindOrder.FIND_ANY_ORDER
 
         let mdf4 = modifier_earth_spirit_3.findIn(hParent)
-        if (GFuncEntity.IsValid(mdf4)) {
+        if (IsValid(mdf4)) {
             let hStone = mdf4.GetStoneNoUse()
-            if (GFuncEntity.IsValid(hStone)) {
+            if (IsValid(hStone)) {
                 let position = AoiHelper.GetLinearMostTargetsPosition(hParent.GetAbsOrigin(), fRange, hParent.GetTeamNumber(), radius, radius, null, teamFilter, typeFilter, flagFilter, order)
                 if (position != vec3_invalid && hParent.IsPositionInRange(position, fRange)) {
                     ExecuteOrderFromTable({

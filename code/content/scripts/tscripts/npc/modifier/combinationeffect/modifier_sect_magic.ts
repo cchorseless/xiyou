@@ -77,7 +77,7 @@ export class modifier_sect_magic_base_c extends modifier_combination_effect {
     CC_ON_ABILITY_EXECUTED(e: ModifierAbilityEvent) {
         if (IsServer()) {
             let ability = e.ability as IBaseAbility_Plus;
-            if (GFuncEntity.IsValid(ability)) {
+            if (IsValid(ability)) {
                 let parent = this.GetParentPlus();
                 modifier_sect_magic_enemy_ice.applyOnly(e.target, parent, ability, {
                     duration: this.getSpecialData("duration") || 1,

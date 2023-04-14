@@ -234,12 +234,12 @@ export class modifier_imba_sleight_of_fist_caster extends BaseModifier_Plus {
     }
     /** DeclareFunctions():modifierfunction[] {
         let funcs = {
-            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
             2: GPropertyConfig.EMODIFIER_PROPERTY.IGNORE_CAST_ANGLE
         }
         return Object.values(funcs);
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage( /** keys */): number {
         return this.bonus_damage;
     }
@@ -483,7 +483,7 @@ export class modifier_imba_fire_remnant_state extends BaseModifier_Plus {
         if (IsServer()) {
             GLogHelper.print(1111111111)
             this.GetAbilityPlus<imba_ember_spirit_fire_remnant>().CollectRemnant();
-            GFuncEntity.SafeDestroyUnit(this.GetParentPlus());
+            SafeDestroyUnit(this.GetParentPlus());
         }
     }
 }
@@ -668,7 +668,7 @@ export class imba_ember_spirit_sleight_of_fist extends BaseAbility_Plus {
                         ParticleManager.ReleaseParticleIndex(trail_pfx);
                         if (caster.HasModifier("modifier_imba_sleight_of_fist_caster")) {
                             caster.SetAbsOrigin(current_target.GetAbsOrigin() + original_direction * 64 as Vector);
-                            caster.PerformAttack(current_target, true, true, true, false, false, false, false);
+                            caster.AttackOnce(current_target, true, true, true, false, false, false, false);
                         }
                     }
                     current_count = current_count + 1;

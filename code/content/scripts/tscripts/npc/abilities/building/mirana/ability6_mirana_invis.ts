@@ -76,7 +76,7 @@ export class ability6_mirana_invis extends BaseAbility_Plus {
         ProjectileManager.CreateTrackingProjectile(tInfo)
     }
     OnProjectileHit_ExtraData(hTarget: IBaseNpc_Plus, vLocation: Vector, ExtraData: any) {
-        if (GFuncEntity.IsValid(hTarget)) {
+        if (IsValid(hTarget)) {
             if (hTarget.IsMagicImmune && !hTarget.IsMagicImmune()) {
                 modifier_mirana_6_stun.apply(hTarget, this.GetCasterPlus(), this, { duration: ExtraData.iDuration * hTarget.GetStatusResistanceFactor(this.GetCasterPlus()) })
                 EmitSoundOnLocationWithCaster(hTarget.GetAbsOrigin(), "Hero_Mirana.ArrowImpact", this.GetCasterPlus())

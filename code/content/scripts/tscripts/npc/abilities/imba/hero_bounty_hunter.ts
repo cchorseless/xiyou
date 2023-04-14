@@ -480,11 +480,11 @@ export class modifier_imba_jinada_buff_crit extends BaseModifier_Plus {
     }
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
             2: Enum_MODIFIER_EVENT.ON_ATTACK_LANDED
         });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage( /** keys */): number {
         if (!this.GetParentPlus().PassivesDisabled()) {
             return this.GetSpecialValueFor("bonus_damage");
@@ -868,7 +868,7 @@ export class modifier_imba_track_debuff_mark extends BaseModifier_Plus {
     }
 
     OnIntervalThink(): void {
-        if (!GFuncEntity.IsValid(this.caster)) {
+        if (!IsValid(this.caster)) {
             this.Destroy();
             return;
         }

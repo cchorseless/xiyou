@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { AoiHelper } from "../../../helper/AoiHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -690,7 +690,7 @@ export class modifier_imba_dark_willow_bedlam extends BaseModifier_Plus {
         }
     }
     OnIntervalThink(): void {
-        if (!GFuncEntity.IsValid(this.bug)) {
+        if (!IsValid(this.bug)) {
             this.Destroy();
             return
         }
@@ -705,7 +705,7 @@ export class modifier_imba_dark_willow_bedlam extends BaseModifier_Plus {
     }
     BeRemoved(): void {
         if (IsServer()) {
-            GFuncEntity.SafeDestroyUnit(this.bug);
+            SafeDestroyUnit(this.bug);
         }
     }
     GetAttributes(): DOTAModifierAttribute_t {
@@ -811,7 +811,7 @@ export class imba_dark_willow_terrorize extends BaseAbility_Plus {
     OnAbilityPhaseInterrupted(): void {
         let caster = this.GetCasterPlus();
         this.fear.abilityInterrupted = true;
-        GFuncEntity.SafeDestroyUnit(this.bug);
+        SafeDestroyUnit(this.bug);
         this.bug = null;
         this.fear = null;
         ParticleManager.ClearParticle(this.nfx, false);
@@ -906,7 +906,7 @@ export class modifier_imba_dark_willow_terrorize extends BaseModifier_Plus {
                     }
                 }
             }
-            GFuncEntity.SafeDestroyUnit(parent);
+            SafeDestroyUnit(parent);
         }
     }
 

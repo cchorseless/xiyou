@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { AnimationHelper } from "../../../helper/AnimationHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { GameServiceConfig } from "../../../shared/GameServiceConfig";
@@ -1059,7 +1059,7 @@ export class imba_crystal_maiden_freezing_field extends BaseAbility_Plus {
                         } else {
                             this.freezing_field_center = undefined;
                             if (this.freezing_field_aura && !this.freezing_field_aura.IsNull()) {
-                                GFuncEntity.SafeDestroyUnit(this.freezing_field_aura);
+                                SafeDestroyUnit(this.freezing_field_aura);
                                 this.freezing_field_aura = undefined;
                             }
                             return undefined;
@@ -1067,7 +1067,7 @@ export class imba_crystal_maiden_freezing_field extends BaseAbility_Plus {
                     } else {
                         this.freezing_field_center = undefined;
                         if (this.freezing_field_aura && !this.freezing_field_aura.IsNull()) {
-                            GFuncEntity.SafeDestroyUnit(this.freezing_field_aura);
+                            SafeDestroyUnit(this.freezing_field_aura);
                             this.freezing_field_aura = undefined;
                         }
                     }

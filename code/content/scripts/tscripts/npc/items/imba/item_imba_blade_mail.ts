@@ -66,20 +66,20 @@ export class modifier_item_imba_blade_mail extends BaseModifier_Plus {
             return;
         }
         this.AddTimer(0.1, () => {
-            if (GFuncEntity.IsValid(this.parent) && !this.parent.HasModifier("modifier_item_imba_blade_mail")) {
+            if (IsValid(this.parent) && !this.parent.HasModifier("modifier_item_imba_blade_mail")) {
                 this.parent.RemoveModifierByName("modifier_item_imba_blade_mail_passive");
             }
         });
     }
     /** DeclareFunctions():modifierfunction[] {
         let decFuncs = {
-            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
             2: GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS,
             3: GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BONUS
         }
         return Object.values(decFuncs);
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.bonus_damage;
     }
@@ -216,11 +216,11 @@ export class modifier_item_imba_blade_mail_lacerate extends BaseModifier_Plus {
     }
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.EXTRA_HEALTH_BONUS,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS,
             2: GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP
         });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.EXTRA_HEALTH_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
     CC_GetModifierExtraHealthBonus(): number {
         return this.GetStackCount() * (-1);
     }

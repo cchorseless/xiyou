@@ -165,7 +165,7 @@ export class modifier_templar_assassin_2 extends BaseModifier_Plus {
             return
         }
         let ability = this.GetAbilityPlus()
-        if (!GFuncEntity.IsValid(ability)) {
+        if (!IsValid(ability)) {
             this.StartIntervalThink(-1)
             this.Destroy()
             return

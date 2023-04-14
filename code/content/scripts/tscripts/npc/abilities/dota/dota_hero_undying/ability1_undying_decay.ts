@@ -145,14 +145,14 @@ export class modifier_undying_1 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
             }
 
             let caster = ability.GetCasterPlus()
-            if (!GFuncEntity.IsValid(caster)) {
+            if (!IsValid(caster)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -287,7 +287,7 @@ export class modifier_undying_1_health_debuff extends BaseModifier_Plus {
         return this.GetStackCount()
     }
 
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
     G_HP_BONUS() {
         return this.GetStackCount()
     }

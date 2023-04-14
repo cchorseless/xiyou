@@ -94,14 +94,14 @@ export class modifier_antimage_1 extends BaseModifier_Plus {
             hTarget.ReduceMana(total_burn_mana)
 
             let hAbility_6 = ability6_antimage_mana_void.findIn(hCaster) as ability6_antimage_mana_void;
-            if (GFuncEntity.IsValid(hAbility_6) && hAbility_6.GetLevel() >= 1) {
+            if (IsValid(hAbility_6) && hAbility_6.GetLevel() >= 1) {
                 let radius = hAbility_6.GetSpecialValueFor("radius")
                 let duration = hAbility_6.GetSpecialValueFor("duration")
                 let mana_percent = hAbility_6.GetSpecialValueFor("mana_percent")
                 let bonus_mana_limit = mana_per_hit * mana_percent * 0.01
                 let units = AoiHelper.FindEntityInRadius(hCaster.GetTeamNumber(), hCaster.GetSource().GetAbsOrigin(), radius, null, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_CLOSEST)
                 for (let unit of (units)) {
-                    if (GFuncEntity.IsValid(unit) && unit.IsAlive() && unit.GetUnitLabel() == "HERO") {
+                    if (IsValid(unit) && unit.IsAlive() && unit.GetUnitLabel() == "HERO") {
                         // 敌法师不能给召唤无添加加最大蓝上限问题
                         modifier_antimage_3_buff.apply(unit, hCaster.GetSource(), hAbility_6, { duration: duration, total_burn_mana: bonus_mana_limit })
                     }
@@ -128,7 +128,7 @@ export class modifier_antimage_1 extends BaseModifier_Plus {
             if (hCaster.HasShard() && hTarget.GetMana() <= 0) {
                 if (GFuncMath.PRD(this.shard_trigger_chance, hCaster, "modifier_antimage_1")) {
                     let hAbility3 = ability6_antimage_mana_void.findIn(hCaster)
-                    if (GFuncEntity.IsValid(hAbility3) && hAbility3.GetLevel() >= 1) {
+                    if (IsValid(hAbility3) && hAbility3.GetLevel() >= 1) {
                         hAbility3.OnSpellStart()
                     }
                 }

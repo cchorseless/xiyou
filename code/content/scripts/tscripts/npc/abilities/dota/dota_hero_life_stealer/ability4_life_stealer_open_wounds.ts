@@ -37,7 +37,7 @@ export class ability4_life_stealer_open_wounds extends BaseAbility_Plus {
         let hTarget = this.GetCursorTarget()
         let duration = this.GetSpecialValueFor("duration") + hCaster.GetTalentValue("special_bonus_unique_life_stealer_custom_1")
         let radius = this.GetSpecialValueFor("radius")
-        if (!GFuncEntity.IsValid(hTarget) || !hTarget.IsAlive()) {
+        if (!IsValid(hTarget) || !hTarget.IsAlive()) {
             return
         }
         if (hTarget.TriggerSpellAbsorb(this)) {
@@ -47,7 +47,7 @@ export class ability4_life_stealer_open_wounds extends BaseAbility_Plus {
         EmitSoundOnLocationWithCaster(hTarget.GetAbsOrigin(), ResHelper.GetSoundReplacement("Hero_LifeStealer.OpenWounds.Cast", hCaster), hTarget)
         let tTarget = FindUnitsInRadius(hCaster.GetTeamNumber(), hTarget.GetAbsOrigin(), null, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false)
         for (let hTarget of (tTarget as IBaseNpc_Plus[])) {
-            if (GFuncEntity.IsValid(hTarget) && hTarget.IsAlive()) {
+            if (IsValid(hTarget) && hTarget.IsAlive()) {
                 modifier_life_stealer_4_buff.apply(hTarget, hCaster, this, { duration: hCaster.HasTalent("special_bonus_unique_life_stealer_custom_5") && duration || duration * hTarget.GetStatusResistanceFactor(hCaster) })
             }
         }
@@ -90,7 +90,7 @@ export class modifier_life_stealer_4 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -197,7 +197,7 @@ export class modifier_life_stealer_4_buff extends BaseModifier_Plus {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
-        if (GFuncEntity.IsValid(hCaster) && GFuncEntity.IsValid(params.attacker) && params.attacker.GetUnitLabel() == "HERO" && !params.attacker.IsIllusion() && !params.attacker.IsClone() && params.attacker.GetTeamNumber() == hCaster.GetTeamNumber() && params.unit == hParent && !BattleHelper.DamageFilter(params.record, BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_BLEEDING)) {
+        if (IsValid(hCaster) && IsValid(params.attacker) && params.attacker.GetUnitLabel() == "HERO" && !params.attacker.IsIllusion() && !params.attacker.IsClone() && params.attacker.GetTeamNumber() == hCaster.GetTeamNumber() && params.unit == hParent && !BattleHelper.DamageFilter(params.record, BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_BLEEDING)) {
             let fMaxHealth = params.attacker.GetMaxHealth()
             let fCurHealth = params.attacker.GetHealth()
             let fLossHealth = fMaxHealth - fCurHealth
@@ -309,14 +309,14 @@ export class modifier_life_stealer_4_reduce_armor extends BaseModifier_Plus {
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS)
     CC_GetModifierPhysicalArmorBonus() {
-        if (GFuncEntity.IsValid(this.GetCasterPlus())) {
+        if (IsValid(this.GetCasterPlus())) {
             return this.GetStackCount() * this.GetCasterPlus().GetTalentValue("special_bonus_unique_life_stealer_custom_3")
         }
         return 0
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_ARMOR_BONUS)
     CC_GetModifierMagicalArmorBonus() {
-        if (GFuncEntity.IsValid(this.GetCasterPlus())) {
+        if (IsValid(this.GetCasterPlus())) {
             return this.GetStackCount() * this.GetCasterPlus().GetTalentValue("special_bonus_unique_life_stealer_custom_3")
         }
         return 0

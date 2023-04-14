@@ -89,20 +89,20 @@ export class modifier_imba_furion_wrath_of_nature_aura extends BaseModifier_Plus
     }
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
-            2: GPropertyConfig.EMODIFIER_PROPERTY.EXTRA_HEALTH_BONUS,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
+            2: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS,
             3: GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS
         });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.GetStackCount() * this.treant_damage_per_stack;
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.EXTRA_HEALTH_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
     CC_GetModifierExtraHealthBonus(): number {
         return this.GetStackCount() * this.treant_health_per_stack;
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
     CC_GetModifierHealthBonus(): number {
         return this.GetStackCount() * this.treant_health_per_stack;
     }
@@ -184,7 +184,7 @@ export class modifier_imba_furion_wrath_of_nature_thinker extends BaseModifier_P
                 if (this.GetCasterPlus().HasScepter()) {
                     ApplyDamage({
                         victim: enemy,
-                        damage: this.damage_scepter * ((1 + (this.damage_percent_add * 0.01)) ^ this.counter),
+                        damage: this.damage_scepter * math.pow(1 + (this.damage_percent_add * 0.01), this.counter),
                         damage_type: this.damage_type,
                         damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NONE,
                         attacker: this.GetCasterPlus(),
@@ -193,7 +193,7 @@ export class modifier_imba_furion_wrath_of_nature_thinker extends BaseModifier_P
                 } else {
                     ApplyDamage({
                         victim: enemy,
-                        damage: this.damage * ((1 + (this.damage_percent_add * 0.01)) ^ this.counter),
+                        damage: this.damage * math.pow(1 + (this.damage_percent_add * 0.01), this.counter),
                         damage_type: this.damage_type,
                         damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NONE,
                         attacker: this.GetCasterPlus(),
@@ -235,7 +235,7 @@ export class modifier_imba_furion_wrath_of_nature_thinker extends BaseModifier_P
                 if (this.GetCasterPlus().HasScepter()) {
                     ApplyDamage({
                         victim: enemy,
-                        damage: this.damage_scepter * ((1 + (this.damage_percent_add * 0.01)) ^ this.counter),
+                        damage: this.damage_scepter * math.pow(1 + (this.damage_percent_add * 0.01), this.counter),
                         damage_type: this.damage_type,
                         damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NONE,
                         attacker: this.GetCasterPlus(),
@@ -244,7 +244,7 @@ export class modifier_imba_furion_wrath_of_nature_thinker extends BaseModifier_P
                 } else {
                     ApplyDamage({
                         victim: enemy,
-                        damage: this.damage * ((1 + (this.damage_percent_add * 0.01)) ^ this.counter),
+                        damage: this.damage * math.pow(1 + (this.damage_percent_add * 0.01), this.counter),
                         damage_type: this.damage_type,
                         damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NONE,
                         attacker: this.GetCasterPlus(),
@@ -345,10 +345,10 @@ export class modifier_imba_furion_wrath_of_nature_damage_counter extends BaseMod
     }
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS
+            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE
         });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.GetStackCount();
     }

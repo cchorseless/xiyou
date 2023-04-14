@@ -60,7 +60,7 @@ export class modifier_t11_curse extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -166,12 +166,12 @@ export class modifier_t11_curse_thinker extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
-            if (!GFuncEntity.IsValid(hCaster)) {
+            if (!IsValid(hCaster)) {
                 return
             }
             let hAbility = this.GetAbilityPlus()
             // let combination_t11_corrode_curse  = combination_t11_corrode_curse.findIn(  hCaster )
-            // let has_combination_t11_corrode_curse = GFuncEntity.IsValid(combination_t11_corrode_curse) && combination_t11_corrode_curse.IsActivated()
+            // let has_combination_t11_corrode_curse = IsValid(combination_t11_corrode_curse) && combination_t11_corrode_curse.IsActivated()
 
             let tTargets = AoiHelper.FindEntityInRadius(hCaster.GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), this.aoe_radius, null, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, 0, FindOrder.FIND_CLOSEST)
             for (let hTarget of (tTargets)) {

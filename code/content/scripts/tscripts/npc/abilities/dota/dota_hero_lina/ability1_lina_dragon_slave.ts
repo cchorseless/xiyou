@@ -77,7 +77,7 @@ export class ability1_lina_dragon_slave extends BaseAbility_Plus {
         let chance_scepter = this.GetSpecialValueFor("chance_scepter")
         let hAbility_4 = ability3_lina_fiery_soul.findIn(caster)
         let hModifier = modifier_lina_3_fiery_soul.findIn(caster) as IBaseModifier_Plus;
-        if (caster.HasScepter() && GFuncEntity.IsValid(hAbility_4) && GFuncEntity.IsValid(hModifier)) {
+        if (caster.HasScepter() && IsValid(hAbility_4) && IsValid(hModifier)) {
             chance_scepter = chance_scepter + hModifier.GetStackCount() * hAbility_4.GetSpecialValueFor("chance_factor")
         }
         if (!caster.HasScepter() || !GFuncMath.PRD(chance_scepter, caster, "lina_1_scepter")) {
@@ -141,7 +141,7 @@ export class modifier_lina_1 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return

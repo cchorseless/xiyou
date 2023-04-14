@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -135,7 +135,8 @@ export class imba_phantom_lancer_spirit_lance extends BaseAbility_Plus {
                 }
             } else if (this.GetCasterPlus().IsAlive()) {
                 this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_phantom_lancer_spirit_lance_phantom_pain", {});
-                this.GetCasterPlus().PerformAttack(target, false, true, true, false, false, false, true);
+                this.GetCasterPlus().Attack(target, GEBATTLE_ATTACK_STATE.ATTACK_STATE_NOT_PROCESSPROCS +
+                    GEBATTLE_ATTACK_STATE.ATTACK_STATE_SKIPCOOLDOWN + GEBATTLE_ATTACK_STATE.ATTACK_STATE_NEVERMISS);
                 this.GetCasterPlus().RemoveModifierByName("modifier_imba_phantom_lancer_spirit_lance_phantom_pain");
             }
         } else {

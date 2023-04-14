@@ -65,12 +65,12 @@ export class modifier_imba_aeon_disk_basic extends BaseModifier_Plus {
     }
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS,
             2: GPropertyConfig.EMODIFIER_PROPERTY.MANA_BONUS,
             3: GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE
         });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
     CC_GetModifierHealthBonus(): number {
         return this.bonus_health;
     }

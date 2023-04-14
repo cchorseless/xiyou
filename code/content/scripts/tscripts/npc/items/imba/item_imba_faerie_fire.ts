@@ -53,11 +53,11 @@ export class modifier_imba_faerie_fire extends BaseModifier_Plus {
     }
     /** DeclareFunctions():modifierfunction[] {
         let decFuncs = {
-            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS
+            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE
         }
         return Object.values(decFuncs);
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.bonus_damage * this.ability.GetCurrentCharges();
     }
@@ -90,12 +90,12 @@ export class modifier_imba_faerie_fire_fire_within extends BaseModifier_Plus {
     }
     /** DeclareFunctions():modifierfunction[] {
         let decFuncs = {
-            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
             2: GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE
         }
         return Object.values(decFuncs);
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.fire_within_dmg;
     }

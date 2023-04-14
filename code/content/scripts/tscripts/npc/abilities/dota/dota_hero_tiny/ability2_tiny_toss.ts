@@ -55,20 +55,20 @@ export class ability2_tiny_toss extends BaseAbility_Plus {
                 table.remove(tTargets, i)
             }
         }
-        if (GFuncEntity.IsValid(tTargets[0])) {
+        if (IsValid(tTargets[0])) {
             // 额外抓取被抓取目标周围275范围内所有目标
             //  hCaster.StartGesture(GameActivity_t.ACT_TINY_TOSS)
             EmitSoundOnLocationWithCaster(tTargets[0].GetAbsOrigin(), ResHelper.GetSoundReplacement("Hero_Tiny.Toss.Target"), hCaster)
             let tBonusTargets = AoiHelper.FindEntityInRadius(hCaster.GetTeamNumber(), tTargets[0].GetAbsOrigin(), bonus_grab_radius, null, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE, FindOrder.FIND_CLOSEST)
             for (let hTossTarget of (tBonusTargets)) {
-                if (GFuncEntity.IsValid(hTossTarget) && hTossTarget.IsAlive() && !modifier_tiny_2_toss.exist(hTossTarget)) {
+                if (IsValid(hTossTarget) && hTossTarget.IsAlive() && !modifier_tiny_2_toss.exist(hTossTarget)) {
                     modifier_tiny_2_toss.apply(hTossTarget, hCaster, this, { target_entindex: hTarget.entindex() })
                 }
             }
         }
     }
     Toss(hTarget: IBaseNpc_Plus & { iBonusTossTimes: number }) {
-        if (!GFuncEntity.IsValid(hTarget) || !hTarget.IsAlive()) {
+        if (!IsValid(hTarget) || !hTarget.IsAlive()) {
             return
         }
         let hCaster = this.GetCasterPlus()
@@ -122,7 +122,7 @@ export class modifier_tiny_2 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -234,7 +234,7 @@ export class modifier_tiny_2_toss extends BaseModifierMotionBoth_Plus {
             let hCaster = this.GetCasterPlus()
             let hAbility = this.GetAbilityPlus() as ability2_tiny_toss
             let hParent = this.GetParentPlus() as IBaseNpc_Plus & { iBonusTossTimes: number }
-            if (GFuncEntity.IsValid(this.hTossTarget)) {
+            if (IsValid(this.hTossTarget)) {
                 // if (!((hParent.Spawner_targetCornerName == this.hTossTarget.Spawner_targetCornerName &&
                 //     hParent.Spawner_lastCornerName == this.hTossTarget.Spawner_lastCornerName) ||
                 //     (hParent.Spawner_targetCornerName == this.hTossTarget.Spawner_lastCornerName &&
@@ -245,7 +245,7 @@ export class modifier_tiny_2_toss extends BaseModifierMotionBoth_Plus {
                 // }
             }
 
-            if (!GFuncEntity.IsValid(hParent)) {
+            if (!IsValid(hParent)) {
                 return
             }
 
@@ -255,7 +255,7 @@ export class modifier_tiny_2_toss extends BaseModifierMotionBoth_Plus {
             hParent.RemoveVerticalMotionController(this)
 
             EmitSoundOnLocationWithCaster(vPosition, ResHelper.GetSoundReplacement("Ability.TossThrow"), hCaster)
-            if (!GFuncEntity.IsValid(hCaster) || !GFuncEntity.IsValid(hAbility)) {
+            if (!IsValid(hCaster) || !IsValid(hAbility)) {
                 return
             }
             let tTargets = AoiHelper.FindEntityInRadius(hCaster.GetTeamNumber(), vPosition, this.toss_radius, null, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST)
@@ -285,7 +285,7 @@ export class modifier_tiny_2_toss extends BaseModifierMotionBoth_Plus {
     UpdateHorizontalMotion(me: IBaseNpc_Plus, dt: number) {
         if (IsServer()) {
             this.fTime = this.fTime + dt
-            if (!GFuncEntity.IsValid(this.hTossTarget)) {
+            if (!IsValid(this.hTossTarget)) {
                 this.Destroy()
                 return
             }

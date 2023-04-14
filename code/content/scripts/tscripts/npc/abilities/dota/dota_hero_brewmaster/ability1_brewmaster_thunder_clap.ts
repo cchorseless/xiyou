@@ -47,7 +47,7 @@ export class ability1_brewmaster_thunder_clap extends BaseAbility_Plus {
         // 效果
         let tTargets = FindUnitsInRadius(hCaster.GetTeamNumber(), hCaster.GetAbsOrigin(), null, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false)
         for (let hTarget of (tTargets as IBaseNpc_Plus[])) {
-            if (GFuncEntity.IsValid(hTarget) && hTarget.IsAlive()) {
+            if (IsValid(hTarget) && hTarget.IsAlive()) {
                 let fDamage = damage + hCaster.GetAverageTrueAttackDamage(null) * attack_bonus_damage
                 if (modifier_brewmaster_2_debuff.exist(hTarget)) {
                     fDamage = fDamage + fDamage * damage_amplify_per * 0.01
@@ -63,7 +63,7 @@ export class ability1_brewmaster_thunder_clap extends BaseAbility_Plus {
                 BattleHelper.GoApplyDamage(damage_table)
                 // 侍从技为土元素，
                 // let hAbility_t28  = qualification_build_t28.findIn(  hCaster )
-                // if (GFuncEntity.IsValid(hAbility_t28) && hAbility_t28.GetLevel() >= 1) {
+                // if (IsValid(hAbility_t28) && hAbility_t28.GetLevel() >= 1) {
                 //     modifier_generic_stunned.apply(hTarget, hCaster, this, { duration: hCaster.HasTalent("special_bonus_unique_brewmaster_custom_6") && duration || duration * hTarget.GetStatusResistanceFactor(hCaster) })
                 // } else {
                 //     modifier_brewmaster_1_debuff.apply(hTarget, hCaster, this, { duration: hCaster.HasTalent("special_bonus_unique_brewmaster_custom_6") && duration || duration * hTarget.GetStatusResistanceFactor(hCaster) })

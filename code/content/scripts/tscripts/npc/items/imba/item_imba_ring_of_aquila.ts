@@ -75,14 +75,14 @@ export class modifier_item_imba_ring_of_aquila extends BaseModifier_Plus {
     }
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
             2: GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BONUS,
             3: GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_BONUS,
             4: GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BONUS,
             5: GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT
         });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.bonus_damage;
     }

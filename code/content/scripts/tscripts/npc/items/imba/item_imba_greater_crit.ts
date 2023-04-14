@@ -48,10 +48,10 @@ export class modifier_item_imba_greater_crit extends BaseModifier_Plus {
     }
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS
+            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE
         });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         if (this.GetItemPlus()) {
             return this.GetItemPlus().GetSpecialValueFor("bonus_damage");
@@ -84,14 +84,15 @@ export class modifier_item_imba_greater_crit_buff extends BaseModifier_Plus {
     }
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_CRITICALSTRIKE,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_CRITICALSTRIKE_UNIQUE,
             2: Enum_MODIFIER_EVENT.ON_ATTACK_LANDED
         });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_CRITICALSTRIKE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_CRITICALSTRIKE_UNIQUE)
     CC_GetModifierPreAttack_CriticalStrike(keys: ModifierAttackEvent): number {
         if (this.GetItemPlus() && (keys.target && !keys.target.IsOther() && !keys.target.IsBuilding() && keys.target.GetTeamNumber() != this.GetParentPlus().GetTeamNumber())) {
-            let multiplicative_chance = (1 - ((1 - (this.crit_chance * 0.01)) ^ GameFunc.GetCount(this.GetParentPlus().FindAllModifiersByName("modifier_item_imba_greater_crit")))) * 100;
+            let count = GameFunc.GetCount(this.GetParentPlus().FindAllModifiersByName("modifier_item_imba_greater_crit"));
+            let multiplicative_chance = (1 - math.pow(1 - this.crit_chance * 0.01, count)) * 100;
             if (GFuncRandom.PRD(math.ceil(multiplicative_chance), this)) {
                 this.bCrit = true;
                 let stacks = this.GetStackCount();

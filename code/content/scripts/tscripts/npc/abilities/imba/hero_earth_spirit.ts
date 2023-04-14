@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -22,9 +22,7 @@ export class imba_earth_spirit_stone_caller extends BaseAbility_Plus {
     ProcsMagicStick(): boolean {
         return false;
     }
-    // GetManaCost(p_0: number,): number {
-    //     return this.GetSpecialValueFor("overdraw_base_cost") * ((this.GetCasterPlus().findBuffStack("modifier_imba_earth_spirit_remnant_handler", this.GetCasterPlus()) - 1) ^ this.GetSpecialValueFor("overdraw_cost_multiplier"));
-    // }
+
     GetBehavior(): DOTA_ABILITY_BEHAVIOR | Uint64 {
         if (IsServer()) {
             return DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_UNIT_TARGET + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_OPTIONAL_POINT;
@@ -278,13 +276,13 @@ export class modifier_imba_stone_remnant extends BaseModifier_Plus {
             EmitSoundOn("Hero_EarthSpirit.StoneRemnant.Destroy", this.GetParentPlus());
             if (this.GetParentPlus().GetUnitName() == "npc_imba_earth_spirit_stone") {
                 ParticleManager.ClearParticle(this.remnantParticle, false);
-                GFuncEntity.SafeDestroyUnit(this.GetParentPlus());
+                SafeDestroyUnit(this.GetParentPlus());
                 if (this.GetAbilityPlus() && !this.GetAbilityPlus().IsNull()) {
                     this.GetAbilityPlus<imba_earth_spirit_stone_caller>().KillRemnant(this.GetParentPlus().GetEntityIndex());
                 }
             } else {
                 FindClearSpaceForUnit(this.GetParentPlus(), this.GetParentPlus().GetAbsOrigin(), false);
-                if (GFuncEntity.IsValid(this.PetrifyHandler)) {
+                if (IsValid(this.PetrifyHandler)) {
                     let damage = this.PetrifyHandler.GetSpecialValueFor("damage");
                     let damageRadius = this.PetrifyHandler.GetSpecialValueFor("aoe");
                     let units = FindUnitsInRadius(this.PetrifyHandler.GetCaster().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, damageRadius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false);

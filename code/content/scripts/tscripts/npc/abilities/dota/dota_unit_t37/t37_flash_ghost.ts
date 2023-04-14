@@ -20,7 +20,7 @@ export class t37_flash_ghost extends BaseAbility_Plus {
         modifier_t37_flash_ghost_thinker.applyThinker(vPosition, hCaster, this, { duration: duration }, hCaster.GetTeamNumber(), false)
     }
     OnProjectileHit(hTarget: IBaseNpc_Plus, vLocation: Vector) {
-        if (GFuncEntity.IsValid(hTarget)) {
+        if (IsValid(hTarget)) {
             let hCaster = this.GetCasterPlus()
             let fDamage = this.GetSpecialValueFor("spark_damage")
             let damage_radius = this.GetSpecialValueFor("damage_radius")
@@ -39,9 +39,9 @@ export class t37_flash_ghost extends BaseAbility_Plus {
                 }
                 BattleHelper.GoApplyDamage(damage_table)
                 modifier_t37_flash_ghost_slow_debuff.apply(hTarget, hCaster, this, { duration: ministun_duration })
-                // if ((GFuncEntity.IsValid(modifier_combination_t37_netherworld_assault) && modifier_combination_t37_netherworld_assault.GetStackCount() > 0) && this.HasNihilityBuff(hTarget)) {
+                // if ((IsValid(modifier_combination_t37_netherworld_assault) && modifier_combination_t37_netherworld_assault.GetStackCount() > 0) && this.HasNihilityBuff(hTarget)) {
                 // let hNetherworld = modifier_combination_t37_netherworld_assault.GetAbilityPlus() as IBaseAbility_Plus
-                // if (GFuncEntity.IsValid(hNetherworld) && hNetherworld._OnSpellStart != null) {
+                // if (IsValid(hNetherworld) && hNetherworld._OnSpellStart != null) {
                 // hNetherworld._OnSpellStart(hTarget)
                 // }
                 // }
@@ -53,7 +53,7 @@ export class t37_flash_ghost extends BaseAbility_Plus {
     HasNihilityBuff(hTarget: IBaseNpc_Plus) {
         // for (let sBuff of (DECREPIFY_EFFECT)) {
 
-        //     if (GFuncEntity.IsValid(hTarget) && sBuff.exist(  hTarget )) {;
+        //     if (IsValid(hTarget) && sBuff.exist(  hTarget )) {;
         //         return true
         //     }
         // }
@@ -97,7 +97,7 @@ export class modifier_t37_flash_ghost extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -214,7 +214,7 @@ export class modifier_t37_flash_ghost_thinker extends BaseModifier_Plus {
             let hCaster = this.GetCasterPlus()
             let hParent = this.GetParentPlus()
             let hAbility = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(hCaster)) {
+            if (!IsValid(hCaster)) {
                 this.Destroy()
                 return
             }
@@ -223,7 +223,7 @@ export class modifier_t37_flash_ghost_thinker extends BaseModifier_Plus {
                 if (tTarget.length > 0) {
                     for (let hTarget of (tTarget)) {
 
-                        if (GFuncEntity.IsValid(hTarget) && hTarget.IsAlive()) {
+                        if (IsValid(hTarget) && hTarget.IsAlive()) {
                             let info = {
                                 Target: hTarget,
                                 Source: hParent,

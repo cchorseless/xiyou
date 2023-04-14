@@ -34,7 +34,7 @@ export class ability6_juggernaut_omni_slash extends BaseAbility_Plus {
         let caster = this.GetCasterPlus()
         let target = this.GetCursorTarget()
 
-        if (!GFuncEntity.IsValid(target) || !target.IsAlive()) {
+        if (!IsValid(target) || !target.IsAlive()) {
             return
         }
         let duration = this.GetSpecialValueFor("duration") + caster.GetTalentValue('special_bonus_unique_juggernaut_custom_3')
@@ -42,7 +42,7 @@ export class ability6_juggernaut_omni_slash extends BaseAbility_Plus {
         let abilitycount = dummy.GetAbilityCount()
         for (let i = abilitycount - 1; i >= 0; i--) {
             let ability = dummy.GetAbilityByIndex(i)
-            if (GFuncEntity.IsValid(ability)) {
+            if (IsValid(ability)) {
                 dummy.RemoveAbilityByHandle(ability)
             }
         }
@@ -54,18 +54,18 @@ export class ability6_juggernaut_omni_slash extends BaseAbility_Plus {
             let interval = caster.GetTalentValue("special_bonus_unique_juggernaut_custom_5", "interval")
             let count = 0
             GTimerHelper.AddTimer(interval, GHandler.create(this, () => {
-                if (!GFuncEntity.IsValid(target) || !target.IsAlive()) {
+                if (!IsValid(target) || !target.IsAlive()) {
                     let targets = AoiHelper.FindEntityInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), this.GetCastRange(caster.GetAbsOrigin(), caster), null, this.GetAbilityTargetTeam(), this.GetAbilityTargetType(), this.GetAbilityTargetFlags(), 0)
                     target = targets[0]
                 }
-                if (!GFuncEntity.IsValid(target)) {
+                if (!IsValid(target)) {
                     return
                 }
                 let dummy = BaseNpc_Plus.CreateUnitByName(caster.GetUnitName(), caster.GetAbsOrigin(), caster, false)
                 let abilitycount = dummy.GetAbilityCount()
                 for (let i = abilitycount - 1; i >= 0; i--) {
                     let ability = dummy.GetAbilityByIndex(i)
-                    if (GFuncEntity.IsValid(ability)) {
+                    if (IsValid(ability)) {
                         dummy.RemoveAbilityByHandle(ability)
                     }
                 }
@@ -120,7 +120,7 @@ export class modifier_juggernaut_6 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -289,7 +289,7 @@ export class modifier_juggernaut_6_thinker extends BaseModifier_Plus {
             let caster = this.GetCasterPlus()
             let dummy = this.GetParentPlus()
 
-            if (!GFuncEntity.IsValid(ability) || !GFuncEntity.IsValid(caster)) {
+            if (!IsValid(ability) || !IsValid(caster)) {
                 this.Destroy()
                 UTIL_Remove(this.GetParentPlus())
                 return
@@ -332,7 +332,7 @@ export class modifier_juggernaut_6_thinker extends BaseModifier_Plus {
     HitTarget(target: IBaseNpc_Plus) {
         if (IsServer()) {
             let ability = this.GetAbilityPlus() as ability6_juggernaut_omni_slash
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 return
             }
             ability.hitting = true

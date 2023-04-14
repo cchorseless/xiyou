@@ -45,7 +45,7 @@ export class ability1_arc_warden_flux extends BaseAbility_Plus {
         EmitSoundOn(ResHelper.GetSoundReplacement("Hero_ArcWarden.Flux.Cast", hCaster), hCaster)
     }
     Process(hTarget: IBaseNpc_Plus) {
-        if (!GFuncEntity.IsValid(hTarget)) {
+        if (!IsValid(hTarget)) {
             return
         }
         let hCaster = this.GetCasterPlus()
@@ -111,7 +111,7 @@ export class modifier_arc_warden_1 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return

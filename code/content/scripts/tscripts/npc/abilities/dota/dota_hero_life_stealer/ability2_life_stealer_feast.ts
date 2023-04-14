@@ -66,7 +66,7 @@ export class modifier_life_stealer_2 extends BaseModifier_Plus {
 
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
     attackLanded(params: IModifierTable) {
-        if (!GFuncEntity.IsValid(params.target) || params.target.GetClassname() == "dota_item_drop") {
+        if (!IsValid(params.target) || params.target.GetClassname() == "dota_item_drop") {
             return
         }
         let hCaster = this.GetCasterPlus()
@@ -86,7 +86,7 @@ export class modifier_life_stealer_2 extends BaseModifier_Plus {
                     attacker: hParent,
                     victim: params.target,
                     damage: fDamage,
-                    eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_SPELL_CRIT,
+                    extra_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_SPELL_CRIT,
                     damage_type: DAMAGE_TYPES.DAMAGE_TYPE_PHYSICAL
                 }
                 BattleHelper.GoApplyDamage(damage_table)

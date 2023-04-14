@@ -51,7 +51,7 @@ export class modifier_item_the_caustic_finale extends BaseModifier_Plus {
     /** DeclareFunctions():modifierfunction[] {
         let funcs = {
             1: Enum_MODIFIER_EVENT.ON_ATTACK_LANDED,
-            2: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
+            2: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
             3: GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT
         }
         return Object.values(funcs);
@@ -82,7 +82,7 @@ export class modifier_item_the_caustic_finale extends BaseModifier_Plus {
             }
         }
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage( /** params */): number {
         return this.bonus_damage;
     }

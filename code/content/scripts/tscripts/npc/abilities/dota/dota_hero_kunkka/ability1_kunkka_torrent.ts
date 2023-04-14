@@ -124,7 +124,7 @@ export class modifier_kunkka_1 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -239,7 +239,7 @@ export class modifier_kunkka_1_thinker extends BaseModifier_Plus {
         let ability = this.GetAbilityPlus()
 
         if (IsServer()) {
-            if (GFuncEntity.IsValid(caster)) {
+            if (IsValid(caster)) {
                 let targets = AoiHelper.FindEntityInRadius(caster.GetTeamNumber(), position, this.radius, null, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, 0, FindOrder.FIND_CLOSEST)
                 for (let target of (targets)) {
                     if (!modifier_kunkka_1_sign.exist(target)) {
@@ -340,7 +340,7 @@ export class modifier_kunkka_1_torrent extends BaseModifierMotionVertical_Plus {
         let hCaster = this.GetCasterPlus()
         let extra_radius = 0
         let extra_damage_per_str = 0
-        if (GFuncEntity.IsValid(hCaster)) {
+        if (IsValid(hCaster)) {
             extra_radius = hCaster.GetTalentValue("special_bonus_unique_kunkka_custom")
             extra_damage_per_str = hCaster.GetTalentValue("special_bonus_unique_kunkka_custom_2")
         }
@@ -363,7 +363,7 @@ export class modifier_kunkka_1_torrent extends BaseModifierMotionVertical_Plus {
         if (IsServer()) {
             let caster = this.GetCasterPlus()
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(caster) || !GFuncEntity.IsValid(ability)) {
+            if (!IsValid(caster) || !IsValid(ability)) {
                 this.Destroy()
                 return
             }
@@ -380,7 +380,7 @@ export class modifier_kunkka_1_torrent extends BaseModifierMotionVertical_Plus {
                 attacker: caster,
                 damage: damage_per_second * this.tick_interval,
                 damage_type: this.damage_type,
-                eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_DOT,
+                extra_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_DOT,
             }
             BattleHelper.GoApplyDamage(damage_table)
         }
@@ -396,7 +396,7 @@ export class modifier_kunkka_1_torrent extends BaseModifierMotionVertical_Plus {
                 let hParent = this.GetParentPlus()
                 let hAbility = this.GetAbilityPlus()
                 hParent.RemoveVerticalMotionController(this)
-                if (GFuncEntity.IsValid(hCaster) && modifier_kunkka_3_tide.exist(hCaster)) {
+                if (IsValid(hCaster) && modifier_kunkka_3_tide.exist(hCaster)) {
                     let tTargets = AoiHelper.FindEntityInRadius(hCaster.GetTeamNumber(), hParent.GetAbsOrigin(), this.radius, null, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, 0, FindOrder.FIND_CLOSEST)
                     for (let hUnit of (tTargets)) {
                         modifier_generic_stunned.apply(hUnit, hCaster, hAbility, { duration: this.stun_duration * this.tide_pct * 0.01 * hUnit.GetStatusResistanceFactor(hCaster) })
@@ -494,7 +494,7 @@ export class modifier_kunkka_1_scepter extends BaseModifier_Plus {
             let hAbility = this.GetAbilityPlus() as ability1_kunkka_torrent
             let flRange = hAbility.GetCastRange(hCaster.GetAbsOrigin(), hCaster) + hCaster.GetCastRangeBonus()
             let tTargets = AoiHelper.FindEntityInRadius(hCaster.GetTeamNumber(), hCaster.GetAbsOrigin(), flRange, null, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, 0, FindOrder.FIND_ANY_ORDER)
-            if (tTargets.length > 0 && GFuncEntity.IsValid(tTargets[0])) {
+            if (tTargets.length > 0 && IsValid(tTargets[0])) {
                 hAbility.Torrent(tTargets[0].GetAbsOrigin())
             }
         }

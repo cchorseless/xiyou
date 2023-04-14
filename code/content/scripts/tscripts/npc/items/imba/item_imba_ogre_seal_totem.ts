@@ -298,7 +298,7 @@ export class modifier_item_imba_ogre_seal_totem extends BaseModifier_Plus {
     CC_GetModifierBonusStats_Strength( /** params */): number {
         return this.bonus_strength;
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
     CC_GetModifierHealthBonus( /** params */): number {
         return this.bonus_hp;
     }

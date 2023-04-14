@@ -6,7 +6,6 @@
  * @Description:统一事件监听
  */
 import { GameFunc } from "../../GameFunc";
-import { BattleHelper } from "../../helper/BattleHelper";
 import { BaseModifier_Plus } from "../entityPlus/BaseModifier_Plus";
 import { registerModifier } from "../entityPlus/Base_Plus";
 
@@ -347,6 +346,7 @@ export class modifier_event extends BaseModifier_Plus {
      *
      */
     OnAttackRecord(event: ModifierAttackEvent): void {
+        GBattleSystem.RECORD_SYSTEM_DUMMY.iLastRecord = event.record;
         modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ATTACK_RECORD);
     }
     /**
@@ -355,13 +355,14 @@ export class modifier_event extends BaseModifier_Plus {
      */
     OnAttackRecordDestroy(event: ModifierAttackEvent): void {
         modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ATTACK_RECORD_DESTROY);
+        GBattleSystem.RemoveRecord(event.record);
     }
     /**
      *
      *攻击开始
      */
     OnAttackStart(event: ModifierAttackEvent): void {
-        event.record = BattleHelper.GetNextRecord();
+        event.record = GBattleSystem.GetNextRecord();
         modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ATTACK_START);
     }
     /**
@@ -530,6 +531,7 @@ export class modifier_event extends BaseModifier_Plus {
     OnTakeDamage(event: ModifierInstanceEvent): void {
         (event as IBuffEventData).eventType = EventDataType.attackerIsSelf;
         modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_TAKEDAMAGE);
+        GBattleSystem.RemoveRecord(event.record);
     }
     /**
      *
@@ -627,9 +629,6 @@ export enum Enum_MODIFIER_EVENT {
     ON_ATTACK_FAIL = modifierfunction.MODIFIER_EVENT_ON_ATTACK_FAIL,
     /**
      * Happens even if attack can't be issued.
-     *
-     *
-     *
      * Method Name: `OnAttackAllied`.
      */
     ON_ATTACK_ALLIED = modifierfunction.MODIFIER_EVENT_ON_ATTACK_ALLIED,

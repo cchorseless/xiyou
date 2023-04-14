@@ -843,12 +843,12 @@ export class modifier_imba_necromastery_souls extends BaseModifier_Plus {
     }
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
             2: Enum_MODIFIER_EVENT.ON_ATTACK_LANDED,
             3: Enum_MODIFIER_EVENT.ON_DEATH
         });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         let stacks = this.GetStackCount();
         return this.damage_per_soul * stacks;

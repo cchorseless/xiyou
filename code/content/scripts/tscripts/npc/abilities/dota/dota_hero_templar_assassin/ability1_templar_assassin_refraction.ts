@@ -103,7 +103,7 @@ export class modifier_templar_assassin_1 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -176,7 +176,7 @@ export class modifier_templar_assassin_1_scepter extends BaseModifier_Plus {
             let hCaster = this.GetCasterPlus()
             let hParent = this.GetParentPlus()
             let hAbility = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(hAbility) && !GFuncEntity.IsValid(hCaster)) {
+            if (!IsValid(hAbility) && !IsValid(hCaster)) {
                 this.Destroy()
                 return
             }
@@ -253,14 +253,14 @@ export class modifier_templar_assassin_1_bonus_attack extends BaseModifier_Plus 
     GetPreAttack_BonusDamage(params: IModifierTable) {
         let iAgi = 0
         let hCaster = this.GetCasterPlus()
-        if (GFuncEntity.IsValid(hCaster) && hCaster.GetAgility != null) {
+        if (IsValid(hCaster) && hCaster.GetAgility != null) {
             iAgi = hCaster.GetAgility()
         }
         return this.bonus_damage + this.bonus_damage_per_agi * iAgi
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK)
     On_Attack(params: ModifierAttackEvent) {
-        if (!GFuncEntity.IsValid(params.target) || params.target.GetClassname() == "dota_item_drop") { return }
+        if (!IsValid(params.target) || params.target.GetClassname() == "dota_item_drop") { return }
         if (params.attacker == this.GetParentPlus()) {
             this.DecrementStackCount()
         }

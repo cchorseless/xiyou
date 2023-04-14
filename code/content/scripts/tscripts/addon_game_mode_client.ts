@@ -82,7 +82,7 @@ export class GameMode_Client extends SingletonClass {
         if (sUnitName == GameEnum.Unit.UnitNames.npc_dota_thinker) {
             return;
         }
-        if (GFuncEntity.checkIsFirstSpawn(spawnedUnit)) {
+        if (CheckIsFirstSpawn(spawnedUnit)) {
             let className = spawnedUnit.GetClassname();
             if (className == GameEnum.Unit.UnitClass.npc_dota_creature) {
                 // let cls = GGetRegClass<typeof BaseNpc_Plus>(sUnitName) || BaseNpc_Plus;

@@ -228,10 +228,11 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
         let fPhysicalArmor = UnitHelper.GetPhysicalArmor(iLocalPortraitUnit);
         let fBasePhysicalArmor = UnitHelper.GetBasePhysicalArmor(iLocalPortraitUnit);
         let fBonusPhysicalArmor = fPhysicalArmor - fBasePhysicalArmor;
-        let fPhysicalArmorReduction = (() => {
-            let iSign = fPhysicalArmor >= 0 ? 1 : -1;
-            return iSign * GPropertyConfig.PHYSICAL_ARMOR_FACTOR * Math.abs(fPhysicalArmor) / (1 + GPropertyConfig.PHYSICAL_ARMOR_FACTOR * Math.abs(fPhysicalArmor));
-        })();
+        let fPhysicalArmorReduction = UnitHelper.GetPhysicalReduction(iLocalPortraitUnit);
+        //     (() => {
+        //     let iSign = fPhysicalArmor >= 0 ? 1 : -1;
+        //     return iSign * GPropertyConfig.PHYSICAL_ARMOR_FACTOR * Math.abs(fPhysicalArmor) / (1 + GPropertyConfig.PHYSICAL_ARMOR_FACTOR * Math.abs(fPhysicalArmor));
+        // });
         let sBonusPhysicalArmor = FuncHelper.SignNumber(fBonusPhysicalArmor);;
         const base_physical_armor = FuncHelper.Round(fBasePhysicalArmor, 1)
         const bonus_physical_armor = sBonusPhysicalArmor;
@@ -241,10 +242,11 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
         let fMagicalArmor = UnitHelper.GetMagicalArmor(iLocalPortraitUnit);
         let fBaseMagicalArmor = UnitHelper.GetBaseMagicalArmor(iLocalPortraitUnit);
         let fBonusMagicalArmor = fMagicalArmor - fBaseMagicalArmor;
-        let fMagicalArmorReduction = (() => {
-            let iSign = fMagicalArmor >= 0 ? 1 : -1;
-            return iSign * GPropertyConfig.MAGICAL_ARMOR_FACTOR * Math.abs(fMagicalArmor) / (1 + GPropertyConfig.MAGICAL_ARMOR_FACTOR * Math.abs(fMagicalArmor));
-        })();
+        let fMagicalArmorReduction = UnitHelper.GetMagicalReduction(iLocalPortraitUnit);
+        // (() => {
+        //     let iSign = fMagicalArmor >= 0 ? 1 : -1;
+        //     return iSign * GPropertyConfig.MAGICAL_ARMOR_FACTOR * Math.abs(fMagicalArmor) / (1 + GPropertyConfig.MAGICAL_ARMOR_FACTOR * Math.abs(fMagicalArmor));
+        // })();
         let sBonusMagicalArmor = FuncHelper.SignNumber(fBonusMagicalArmor);;
         const base_magical_armor = FuncHelper.Round(fBaseMagicalArmor, 1);
         const bonus_magical_armor = sBonusMagicalArmor;

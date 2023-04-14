@@ -76,9 +76,9 @@ export class modifier_skywrath_mage_3 extends BaseModifier_Plus {
             let hParent = this.GetParentPlus()
             let hAbility = this.GetAbilityPlus()
             let hAbility_3 = ability6_skywrath_mage_mystic_flare.findIn(hParent)
-            if (GFuncEntity.IsValid(params.inflictor) && params.attacker == hParent && !params.attacker.IsIllusion() && GFuncEntity.IsValid(params.unit) && params.unit.IsAlive()) {
+            if (IsValid(params.inflictor) && params.attacker == hParent && !params.attacker.IsIllusion() && IsValid(params.unit) && params.unit.IsAlive()) {
                 if (GFuncMath.PRD(this.chance, hParent, "skywrath_mage_4")) {
-                    if (GFuncEntity.IsValid(hAbility_3) && params.inflictor == hAbility_3) {
+                    if (IsValid(hAbility_3) && params.inflictor == hAbility_3) {
                         if (modifier_skywrath_mage_3_sing.exist(params.unit)) {
                             return
                         } else {
@@ -92,7 +92,7 @@ export class modifier_skywrath_mage_3 extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_MAGICAL_DAMAGE_PERCENTAGE)
     CC_GetModifierOutgoingMagicalDamagePercentage() {
-        if (GFuncEntity.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard()) {
+        if (IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard()) {
             return math.floor(this.GetParentPlus().GetIntellect() / this.int_factor) * this.int_factor_magical_damage_pct
         }
     }

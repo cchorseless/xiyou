@@ -129,7 +129,7 @@ export class modifier_item_imba_skadi extends BaseModifier_Plus {
             1: GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_BONUS,
             2: GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BONUS,
             3: GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BONUS,
-            4: GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS,
+            4: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS,
             5: GPropertyConfig.EMODIFIER_PROPERTY.MANA_BONUS
         });
     } */
@@ -151,7 +151,7 @@ export class modifier_item_imba_skadi extends BaseModifier_Plus {
             return this.GetItemPlus().GetSpecialValueFor("bonus_all_stats");
         }
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
     CC_GetModifierHealthBonus(): number {
         if (this.GetItemPlus()) {
             return this.GetItemPlus().GetSpecialValueFor("bonus_health");

@@ -36,7 +36,7 @@ export class modifier_item_imba_sange_yasha extends BaseModifier_Plus {
     }
     /** DeclareFunctions():modifierfunction[] {
         let funcs = {
-            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
             2: GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT,
             3: GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE_UNIQUE,
             4: GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_BONUS,
@@ -45,7 +45,7 @@ export class modifier_item_imba_sange_yasha extends BaseModifier_Plus {
         }
         return Object.values(funcs);
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         if (!this.GetItemPlus()) {
             return;

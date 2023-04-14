@@ -143,7 +143,7 @@ export class modifier_tinker_6 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus() as ability6_tinker_rearm
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -265,7 +265,7 @@ export class modifier_tinker_6_thinker extends BaseModifier_Plus {
         if (IsServer()) {
             let hAbility = this.GetAbilityPlus()
             let hCaster = this.GetCasterPlus()
-            if (!GFuncEntity.IsValid(hAbility) && !GFuncEntity.IsValid(hCaster)) {
+            if (!IsValid(hAbility) && !IsValid(hCaster)) {
                 this.Destroy()
                 return
             }

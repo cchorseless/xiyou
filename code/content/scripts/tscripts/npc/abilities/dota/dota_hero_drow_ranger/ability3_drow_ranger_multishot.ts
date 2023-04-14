@@ -59,14 +59,14 @@ export class modifier_drow_ranger_3 extends BaseModifier_Plus {
     BeDestroy() {
 
         if (IsServer()) {
-            if (GFuncEntity.IsValid(this.modifier)) {
+            if (IsValid(this.modifier)) {
                 this.modifier.Destroy()
             }
         }
     }
     OnIntervalThink() {
         if (IsServer()) {
-            if (!GFuncEntity.IsValid(this.modifier) || this.level == null || this.level != this.GetAbilityPlus().GetLevel() || this.has_talent_4 == null || this.has_talent_5 == null || this.has_talent_8 == null || this.has_talent_4 != this.GetCasterPlus().HasTalent("special_bonus_unique_drow_ranger_custom_4") || this.has_talent_5 != this.GetCasterPlus().HasTalent("special_bonus_unique_drow_ranger_custom_5") || this.has_talent_8 != this.GetCasterPlus().HasTalent("special_bonus_unique_drow_ranger_custom_8")
+            if (!IsValid(this.modifier) || this.level == null || this.level != this.GetAbilityPlus().GetLevel() || this.has_talent_4 == null || this.has_talent_5 == null || this.has_talent_8 == null || this.has_talent_4 != this.GetCasterPlus().HasTalent("special_bonus_unique_drow_ranger_custom_4") || this.has_talent_5 != this.GetCasterPlus().HasTalent("special_bonus_unique_drow_ranger_custom_5") || this.has_talent_8 != this.GetCasterPlus().HasTalent("special_bonus_unique_drow_ranger_custom_8")
             /**this.hero_star == null || this.hero_star != this.GetCasterPlus().GetStar()*/) {
                 let caster = this.GetCasterPlus()
                 this.level = this.GetAbilityPlus().GetLevel()
@@ -160,12 +160,12 @@ export class modifier_drow_ranger_3_aura extends BaseModifier_Plus {
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
     G_MAX_ATTACKSPEED_BONUS() {
-        return ((GFuncEntity.IsValid(this.GetCasterPlus()) && this.GetParentPlus().GetUnitLabel() == "HERO") && this.GetCasterPlus().GetTalentValue("special_bonus_unique_drow_ranger_custom_8") || 0)
+        return ((IsValid(this.GetCasterPlus()) && this.GetParentPlus().GetUnitLabel() == "HERO") && this.GetCasterPlus().GetTalentValue("special_bonus_unique_drow_ranger_custom_8") || 0)
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
     GetAttackSpeedBonus_Constant(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
-        if (!GFuncEntity.IsValid(hCaster) || hCaster.PassivesDisabled()) {
+        if (!IsValid(hCaster) || hCaster.PassivesDisabled()) {
             return 0
         }
 
@@ -175,7 +175,7 @@ export class modifier_drow_ranger_3_aura extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_PERCENTAGE)
     CC_GetModifierStats_Agility_Percentage(params: IModifierTable) {
-        if (GFuncEntity.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard() && this.GetParentPlus().IsRangedAttacker() && this.GetParentPlus().GetUnitLabel() == "HERO") {
+        if (IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard() && this.GetParentPlus().IsRangedAttacker() && this.GetParentPlus().GetUnitLabel() == "HERO") {
             return this.increase_agi_pct
         }
     }

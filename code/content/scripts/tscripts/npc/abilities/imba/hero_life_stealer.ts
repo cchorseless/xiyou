@@ -294,7 +294,7 @@ export class modifier_imba_life_stealer_feast extends BaseModifier_Plus {
     CC_GetModifierAttackSpeedBonus_Constant(): number {
         return this.GetSpecialValueFor("attack_speed_bonus");
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
     CC_GetModifierHealthBonus(): number {
         return this.GetParentPlus().findBuffStack("modifier_imba_life_stealer_feast_engorge_counter", this.GetCasterPlus());
     }
@@ -952,7 +952,7 @@ export class modifier_imba_life_stealer_infest_effect extends BaseModifier_Plus 
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
             1: GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE,
-            2: GPropertyConfig.EMODIFIER_PROPERTY.EXTRA_HEALTH_BONUS,
+            2: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS,
             3: Enum_MODIFIER_EVENT.ON_ATTACK_LANDED,
             4: Enum_MODIFIER_EVENT.ON_ORDER,
             5: GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP,
@@ -966,7 +966,7 @@ export class modifier_imba_life_stealer_infest_effect extends BaseModifier_Plus 
             return this.bonus_movement_speed;
         }
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.EXTRA_HEALTH_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
     CC_GetModifierExtraHealthBonus( /** keys */): number {
         if (this.GetParentPlus().GetTeamNumber() == this.GetCasterPlus().GetTeamNumber() && !this.GetParentPlus().IsBuilding() && !this.GetParentPlus().IsOther()) {
             return this.bonus_health;

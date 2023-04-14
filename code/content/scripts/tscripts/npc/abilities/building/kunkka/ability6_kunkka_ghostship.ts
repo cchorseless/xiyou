@@ -51,7 +51,7 @@ export class ability6_kunkka_ghostship extends BaseAbility_Plus {
         ParticleManager.SetParticleControl(particleID, 0, vTargetPosition)
         ParticleManager.SetParticleControl(particleID, 1, Vector(stun_radius, stun_radius, stun_radius))
         let hModifier = modifier_kunkka_6.findIn(caster)
-        if (GFuncEntity.IsValid(hModifier)) {
+        if (IsValid(hModifier)) {
             hModifier.AddParticle(particleID, false, false, -1, false, false)
         }
         let thinker = unit_dummy.CreateOne(vStartPosition, caster, false)
@@ -220,7 +220,7 @@ export class modifier_kunkka_6 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus() as ability6_kunkka_ghostship
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return

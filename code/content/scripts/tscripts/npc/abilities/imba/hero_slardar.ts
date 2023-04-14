@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifierMotionHorizontal_Plus, BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -1044,12 +1044,12 @@ export class modifier_imba_slardar_amplify_damage_debuff extends BaseModifier_Pl
         }
         let caster = this.GetCasterPlus();
         let parent = this.GetParentPlus();
-        if (!GFuncEntity.IsValid(caster)) {
+        if (!IsValid(caster)) {
             return;
         }
         let victim = keys.unit;
         let damage_type = keys.damage_type;
-        if (!GFuncEntity.IsValid(caster) || !caster.HasTalent("special_bonus_imba_slardar_11")) {
+        if (!IsValid(caster) || !caster.HasTalent("special_bonus_imba_slardar_11")) {
             return;
         }
         if (damage_type !== DAMAGE_TYPES.DAMAGE_TYPE_PHYSICAL) {
@@ -1073,7 +1073,7 @@ export class modifier_imba_slardar_amplify_damage_debuff extends BaseModifier_Pl
         let caster = this.GetCasterPlus();
         let ability = this.GetAbilityPlus();
         let parent = this.GetParentPlus();
-        if (!GFuncEntity.IsValid(caster)) {
+        if (!IsValid(caster)) {
             return;
         }
         let modifier_rain = "modifier_imba_rain_cloud_buff";
@@ -1089,7 +1089,7 @@ export class modifier_imba_slardar_amplify_damage_debuff extends BaseModifier_Pl
         let caster = this.GetCasterPlus();
         let ability = this.GetAbilityPlus();
         let parent = this.GetParentPlus();
-        if (!GFuncEntity.IsValid(caster)) {
+        if (!IsValid(caster)) {
             return;
         }
         let attacker = keys.attacker;

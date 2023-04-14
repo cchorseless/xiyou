@@ -166,7 +166,7 @@ export class modifier_item_imba_gem_of_true_sight_dropped extends BaseModifier_P
             ParticleManager.ReleaseParticleIndex(this.pfx);
         }
         if (this.GetParentPlus()) {
-            GFuncEntity.SafeDestroyUnit(this.GetParentPlus());
+            SafeDestroyUnit(this.GetParentPlus());
         }
     }
 }

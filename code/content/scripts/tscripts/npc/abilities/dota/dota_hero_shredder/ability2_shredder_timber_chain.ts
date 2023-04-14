@@ -105,7 +105,7 @@ export class modifier_shredder_2 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -245,7 +245,7 @@ export class modifier_shredder_2_buff extends BaseModifier_Plus {
     BeDestroy() {
 
         if (IsServer()) {
-            if (GFuncEntity.IsValid(this.hBuffPtcl)) {
+            if (IsValid(this.hBuffPtcl)) {
                 this.hBuffPtcl.Destroy()
             }
         }
@@ -253,7 +253,7 @@ export class modifier_shredder_2_buff extends BaseModifier_Plus {
 
     OnStackCountChanged(iOldStackCount: number) {
         if (IsServer()) {
-            if (GFuncEntity.IsValid(this.hBuffPtcl)) {
+            if (IsValid(this.hBuffPtcl)) {
                 let iStackCount = this.GetStackCount()
 
                 let iStackCountPtcl = 0

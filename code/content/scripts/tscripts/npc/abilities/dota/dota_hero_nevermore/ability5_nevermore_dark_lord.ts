@@ -123,7 +123,7 @@ export class modifier_nevermore_4_presence extends BaseModifier_Plus {
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_PHYSICAL_DAMAGE_PERCENTAGE)
     GetIncomingPhysicalDamage_Percentage(params: IModifierTable) {
-        if (!GFuncEntity.IsValid(this.GetCasterPlus()) || this.GetCasterPlus().PassivesDisabled()) {
+        if (!IsValid(this.GetCasterPlus()) || this.GetCasterPlus().PassivesDisabled()) {
             return 0
         }
         return this.presence_incoming_damage_ptg
@@ -133,7 +133,7 @@ export class modifier_nevermore_4_presence extends BaseModifier_Plus {
     CC_GetModifierIncomingDamagePercentage(params: IModifierTable) {
         let hParent = this.GetParentPlus()
         let hCaster = this.GetCasterPlus()
-        if (params.target == hParent && modifier_generic_feared.exist(hParent) && GFuncEntity.IsValid(hCaster) && !hCaster.PassivesDisabled()) {
+        if (params.target == hParent && modifier_generic_feared.exist(hParent) && IsValid(hCaster) && !hCaster.PassivesDisabled()) {
             return this.fear_incoming_damage_ptg
         }
     }

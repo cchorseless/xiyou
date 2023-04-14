@@ -120,7 +120,7 @@ export class modifier_imba_medusa_split_shot extends BaseModifier_Plus {
             for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 if (enemy != keys.target) {
                     this.split_shot_target = true;
-                    this.GetParentPlus().PerformAttack(enemy, false, apply_modifiers, true, true, true, false, false);
+                    this.GetParentPlus().AttackOnce(enemy, false, apply_modifiers, true, true, true, false, false);
                     this.split_shot_target = false;
                     target_number = target_number + 1;
                     if (target_number >= this.GetAbilityPlus().GetTalentSpecialValueFor("arrow_count")) {
@@ -195,7 +195,7 @@ export class modifier_imba_medusa_serpent_shot extends BaseModifier_Plus {
             1: Enum_MODIFIER_EVENT.ON_ATTACK_RECORD,
             2: Enum_MODIFIER_EVENT.ON_ATTACK_RECORD_DESTROY,
             3: GPropertyConfig.EMODIFIER_PROPERTY.PROJECTILE_NAME,
-            4: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
+            4: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
             5: GPropertyConfig.EMODIFIER_PROPERTY.PROCATTACK_BONUS_DAMAGE_MAGICAL,
             6: GPropertyConfig.EMODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE,
             7: Enum_MODIFIER_EVENT.ON_TAKEDAMAGE
@@ -225,7 +225,7 @@ export class modifier_imba_medusa_serpent_shot extends BaseModifier_Plus {
     CC_GetModifierProjectileName( /** keys */): string {
         return "particles/units/heroes/hero_medusa/medusa_serpent_shot_particle.vpcf";
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage( /** keys */): number {
         // if ((!keys.target || (keys.target && !keys.target.IsBuilding() && !keys.target.IsOther()))) {
         return (this.GetStackCount() / (this.serpent_shot_damage_pct * 0.01)) * (100 - this.serpent_shot_damage_pct) * 0.01 * (-1);

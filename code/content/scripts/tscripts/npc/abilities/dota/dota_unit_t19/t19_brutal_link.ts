@@ -29,7 +29,7 @@ export class t19_brutal_link extends BaseAbility_Plus {
         modifier_t19_brutal_link_buff.apply(hTarget, hCaster, this, null)
 
         let t19_brutal_link_break = hCaster.AddAbility(this.GetAssociatedSecondaryAbilities()) as t19_brutal_link_break
-        if (GFuncEntity.IsValid(t19_brutal_link_break)) {
+        if (IsValid(t19_brutal_link_break)) {
             t19_brutal_link_break.SetLevel(this.GetLevel())
             hCaster.SwapAbilities(this.GetName(), t19_brutal_link_break.GetName(), false, true)
             t19_brutal_link_break.hAbility = this
@@ -41,12 +41,12 @@ export class t19_brutal_link extends BaseAbility_Plus {
         let hCaster = this.GetCasterPlus()
 
         let t19_brutal_link_break = hCaster.FindAbilityByName(this.GetAssociatedSecondaryAbilities())
-        // if (GFuncEntity.IsValid(t19_brutal_link_break)) {
+        // if (IsValid(t19_brutal_link_break)) {
         //     hCaster.SwapAbilities(t19_brutal_link_break.GetName(), this.GetName(), false, true)
         //     hCaster.RemoveAbility(t19_brutal_link_break.GetName())
         // }
 
-        if (GFuncEntity.IsValid(this.hLastTarget)) {
+        if (IsValid(this.hLastTarget)) {
             modifier_t19_brutal_link_buff.remove(this.hLastTarget);
             modifier_t21_magical_link_buff.remove(this.hLastTarget);
         }
@@ -65,7 +65,7 @@ export class t19_brutal_link_break extends BaseAbility_Plus {
     hAbility: t19_brutal_link;
     OnSpellStart() {
         let hCaster = this.GetCasterPlus()
-        if (GFuncEntity.IsValid(this.hAbility)) {
+        if (IsValid(this.hAbility)) {
             this.hAbility.LinkBreak()
         }
     }
@@ -130,14 +130,14 @@ export class modifier_t19_brutal_link_buff extends BaseModifier_Plus {
 
         if (IsServer()) {
             let hAbility = this.GetAbilityPlus() as t19_brutal_link
-            if (GFuncEntity.IsValid(hAbility) && hAbility.LinkBreak) {
+            if (IsValid(hAbility) && hAbility.LinkBreak) {
                 hAbility.LinkBreak()
             }
         }
     }
     OnIntervalThink() {
         if (IsServer()) {
-            if (!GFuncEntity.IsValid(this.GetAbilityPlus()) || !GFuncEntity.IsValid(this.GetCasterPlus())) {
+            if (!IsValid(this.GetAbilityPlus()) || !IsValid(this.GetCasterPlus())) {
                 this.Destroy()
                 return
             }
@@ -156,9 +156,9 @@ export class modifier_t19_brutal_link_buff extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
     GetAttackSpeedBonus_Constant(params: IModifierTable) {
-        if (GFuncEntity.IsValid(this.GetCasterPlus())) {
+        if (IsValid(this.GetCasterPlus())) {
             // let hModifier  = modifier_combination_t19_powerful_clap.findIn(  this.GetCasterPlus() ) as any;
-            // if (GFuncEntity.IsValid(hModifier)) {
+            // if (IsValid(hModifier)) {
             //     if (hModifier.GetStackCount() == 1) {
             //         return hModifier.bonus_attack_speed
             //     }

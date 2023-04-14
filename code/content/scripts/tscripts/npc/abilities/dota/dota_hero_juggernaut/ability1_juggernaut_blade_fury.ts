@@ -80,7 +80,7 @@ export class modifier_juggernaut_1 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -192,7 +192,7 @@ export class modifier_juggernaut_1_buff extends BaseModifier_Plus {
             let hParent = this.GetParentPlus()
             let hAbility = this.GetAbilityPlus()
 
-            if (!GFuncEntity.IsValid(hAbility) || !GFuncEntity.IsValid(hCaster)) {
+            if (!IsValid(hAbility) || !IsValid(hCaster)) {
                 this.Destroy()
                 return
             }

@@ -36,7 +36,7 @@ export class t39_ice_bomb extends BaseAbility_Plus {
         EmitSoundOn("FrostbittenShaman.FreezingBlast.Cast", hCaster)
     }
     OnProjectileHit(hTarget: IBaseNpc_Plus, vLocation: Vector) {
-        if (GFuncEntity.IsValid(hTarget)) {
+        if (IsValid(hTarget)) {
             let hCaster = this.GetCasterPlus()
             let damage = this.GetSpecialValueFor("damage")
             let int_factor = this.GetSpecialValueFor("int_factor")
@@ -64,7 +64,7 @@ export class t39_ice_bomb extends BaseAbility_Plus {
                 BattleHelper.GoApplyDamage(damage_table)
                 EmitSoundOn("FrostbittenShaman.FreezingBlast.Impact", hCaster)
                 // let modifier_combination_t39_frostbite = Load(hCaster, "modifier_combination_t39_frostbite")
-                // if ((GFuncEntity.IsValid(modifier_combination_t39_frostbite) && modifier_combination_t39_frostbite.GetStackCount() > 0)) {
+                // if ((IsValid(modifier_combination_t39_frostbite) && modifier_combination_t39_frostbite.GetStackCount() > 0)) {
                 //      modifier_t39_ice_bomb_debuff.apply( hTarget , hCaster, this, { duration = modifier_combination_t39_frostbite.duration || 0 })
                 // }
             }
@@ -107,7 +107,7 @@ export class modifier_t39_ice_bomb extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return

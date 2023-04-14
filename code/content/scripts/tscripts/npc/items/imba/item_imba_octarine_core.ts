@@ -74,7 +74,7 @@ export class modifier_imba_octarine_core_basic extends BaseModifier_Plus {
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
             1: GPropertyConfig.EMODIFIER_PROPERTY.MANA_BONUS,
-            2: GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS,
+            2: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS,
             3: GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BONUS,
             4: Enum_MODIFIER_EVENT.ON_TAKEDAMAGE,
             5: GPropertyConfig.EMODIFIER_PROPERTY.COOLDOWN_PERCENTAGE,
@@ -87,7 +87,7 @@ export class modifier_imba_octarine_core_basic extends BaseModifier_Plus {
             return this.GetItemPlus().GetSpecialValueFor("bonus_mana");
         }
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
     CC_GetModifierHealthBonus(): number {
         if (this.GetItemPlus()) {
             return this.GetItemPlus().GetSpecialValueFor("bonus_health");

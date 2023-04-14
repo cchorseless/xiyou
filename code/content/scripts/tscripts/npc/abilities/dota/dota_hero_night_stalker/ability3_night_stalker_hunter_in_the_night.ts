@@ -38,7 +38,7 @@ export class ability3_night_stalker_hunter_in_the_night extends BaseAbility_Plus
 
 
     CripplingFear(hTarget: IBaseNpc_Plus) {
-        if (!GFuncEntity.IsValid(hTarget)) {
+        if (!IsValid(hTarget)) {
             return
         }
 
@@ -101,7 +101,7 @@ export class modifier_night_stalker_3 extends BaseModifier_Plus {
             }
 
             let hAbility = params.inflictor
-            if (params.damage_category == DamageCategory_t.DOTA_DAMAGE_CATEGORY_ATTACK || (params.damage_category == DamageCategory_t.DOTA_DAMAGE_CATEGORY_SPELL && GFuncEntity.IsValid(hAbility) && !hAbility.IsItem())) {
+            if (params.damage_category == DamageCategory_t.DOTA_DAMAGE_CATEGORY_ATTACK || (params.damage_category == DamageCategory_t.DOTA_DAMAGE_CATEGORY_SPELL && IsValid(hAbility) && !hAbility.IsItem())) {
                 let ability = this.GetAbilityPlus() as ability3_night_stalker_hunter_in_the_night
                 if (ability.CripplingFear != null) {
                     ability.CripplingFear(params.target as IBaseNpc_Plus)
@@ -146,7 +146,7 @@ export class modifier_night_stalker_3_debuff extends BaseModifier_Plus {
         this.damage_per_seconds = this.GetSpecialValueFor("damage_per_seconds") + hCaster.GetTalentValue("special_bonus_unique_night_stalker_custom_2")
         this.damage_interval = this.GetSpecialValueFor("damage_interval")
         let hModifier = modifier_night_stalker_2.findIn(hCaster)
-        if (GFuncEntity.IsValid(hModifier) && hModifier.GetCripplingFearDPS != null) {
+        if (IsValid(hModifier) && hModifier.GetCripplingFearDPS != null) {
             this.damage_per_seconds = this.damage_per_seconds + hModifier.GetCripplingFearDPS()
         }
         if (IsServer()) {
@@ -170,7 +170,7 @@ export class modifier_night_stalker_3_debuff extends BaseModifier_Plus {
         this.damage_per_seconds = this.GetSpecialValueFor("damage_per_seconds") + hCaster.GetTalentValue("special_bonus_unique_night_stalker_custom_2")
         this.damage_interval = this.GetSpecialValueFor("damage_interval")
         let hModifier = modifier_night_stalker_2.findIn(hCaster)
-        if (GFuncEntity.IsValid(hModifier) && hModifier.GetCripplingFearDPS != null) {
+        if (IsValid(hModifier) && hModifier.GetCripplingFearDPS != null) {
             this.damage_per_seconds = this.damage_per_seconds + hModifier.GetCripplingFearDPS()
         }
     }
@@ -179,7 +179,7 @@ export class modifier_night_stalker_3_debuff extends BaseModifier_Plus {
             let hCaster = this.GetCasterPlus()
             let hParent = this.GetParentPlus()
             let hAbility = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(hAbility) || !GFuncEntity.IsValid(hCaster)) {
+            if (!IsValid(hAbility) || !IsValid(hCaster)) {
                 this.Destroy()
                 return
             }
@@ -241,7 +241,7 @@ export class modifier_night_stalker_3_buff extends BaseModifier_Plus {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         if (IsServer()) {
-            if (!GFuncEntity.IsValid(hCaster) || !hCaster.IsAlive()) {
+            if (!IsValid(hCaster) || !hCaster.IsAlive()) {
                 this.Destroy()
             }
         }

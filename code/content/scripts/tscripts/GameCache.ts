@@ -1,13 +1,7 @@
-import { BattleHelper } from "./helper/BattleHelper";
 /**全局缓存变量 */
 @GReloadable
 export class GameCache {
     /**攻击伤害记录 */
-    static readonly RECORD_SYSTEM_DUMMY: {
-        DAMAGE_SYSTEM: { [k: string]: BattleHelper.enum_CC_DAMAGE_FLAGS },
-        ATTACK_SYSTEM: { [k: string]: BattleHelper.AttackOptions },
-        iLastRecord: number;
-    } = {} as any;
     /**所有的游戏自带事件 */
     static readonly allGameEvent: { [v: string]: IGHandler[] } = {};
     /**所有自定义事件 */

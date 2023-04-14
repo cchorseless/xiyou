@@ -94,7 +94,7 @@ export class modifier_obsidian_destroyer_1 extends BaseModifier_Plus {
         let hTarget = params.target
         let hAbility = this.GetAbilityPlus()
 
-        if (!(GFuncEntity.IsValid(hTarget) && hTarget.GetClassname() != "dota_item_drop" && hAbility.CastFilterResult() == UnitFilterResult.UF_SUCCESS)) {
+        if (!(IsValid(hTarget) && hTarget.GetClassname() != "dota_item_drop" && hAbility.CastFilterResult() == UnitFilterResult.UF_SUCCESS)) {
             return
         }
         if (hParent.IsIllusion() || hParent.IsSilenced()) {
@@ -104,7 +104,7 @@ export class modifier_obsidian_destroyer_1 extends BaseModifier_Plus {
             return
         }
         let hBuff = modifier_obsidian_destroyer_1_projectile.apply(hParent, hParent, hAbility)
-        if (GFuncEntity.IsValid(hBuff)) {
+        if (IsValid(hBuff)) {
             print("add success")
         }
     }
@@ -123,7 +123,7 @@ export class modifier_obsidian_destroyer_1 extends BaseModifier_Plus {
     On_Attack(params: ModifierAttackEvent) {
         let hParent = this.GetParentPlus()
         let hTarget = params.target
-        if (!GFuncEntity.IsValid(hTarget) || hTarget.GetClassname() == "dota_item_drop") { return }
+        if (!IsValid(hTarget) || hTarget.GetClassname() == "dota_item_drop") { return }
 
         if (!params.attacker.IsIllusion() && !BattleHelper.AttackFilter(params.record, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NOT_USECASTATTACKORB, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NOT_PROCESSPROCS)) {
             if (this.records.indexOf(params.record) != null) {
@@ -175,7 +175,7 @@ export class modifier_obsidian_destroyer_1 extends BaseModifier_Plus {
 
                 let targets = AoiHelper.FindEntityInRadius(params.attacker.GetTeamNumber(), params.target.GetAbsOrigin(), radius, null, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, 0, 0)
                 for (let target of (targets)) {
-                    if (GFuncEntity.IsValid(target) && target.IsAlive()) {
+                    if (IsValid(target) && target.IsAlive()) {
                         let damage_table: BattleHelper.DamageOptions = {
                             ability: this.GetAbilityPlus(),
                             victim: target,
@@ -184,12 +184,12 @@ export class modifier_obsidian_destroyer_1 extends BaseModifier_Plus {
                             damage_type: this.GetAbilityPlus().GetAbilityDamageType(),
                         }
                         if (target == params.target) {
-                            damage_table.eom_flags = BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_SHOW_DAMAGE_NUMBER
+                            damage_table.extra_flags = BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_SHOW_DAMAGE_NUMBER
                         }
                         BattleHelper.GoApplyDamage(damage_table)
                         // 提供精华能量 每次伤害一个目标提供一点能量
                         let hModifier = modifier_obsidian_destroyer_3.findIn(this.GetParentPlus()) as IBaseModifier_Plus;
-                        if (GFuncEntity.IsValid(hModifier)) {
+                        if (IsValid(hModifier)) {
                             hModifier.SetStackCount(this.essence_energy + this.GetParentPlus().GetTalentValue("special_bonus_unique_obsidian_destroyer_custom_4"))
                         }
                     }

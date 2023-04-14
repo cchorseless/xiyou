@@ -140,7 +140,7 @@ export class modifier_item_imba_aether_specs extends BaseModifier_Plus {
             2: GPropertyConfig.EMODIFIER_PROPERTY.MANA_REGEN_CONSTANT,
             3: GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS,
             4: GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_PERCENTAGE,
-            5: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
+            5: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
             6: GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BONUS,
             7: GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_BONUS,
             8: GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BONUS,
@@ -169,7 +169,7 @@ export class modifier_item_imba_aether_specs extends BaseModifier_Plus {
             return this.spell_power;
         }
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.bonus_damage;
     }

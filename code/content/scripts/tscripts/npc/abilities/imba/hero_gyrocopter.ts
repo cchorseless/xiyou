@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -758,7 +758,7 @@ export class modifier_imba_gyrocopter_lock_on extends BaseModifier_Plus {
     }
     CheckState(): Partial<Record<modifierstate, boolean>> {
         if (IsServer()) {
-            if (!GFuncEntity.IsValid(this.GetCasterPlus()) || !GFuncEntity.IsValid(this.GetParentPlus())) {
+            if (!IsValid(this.GetCasterPlus()) || !IsValid(this.GetParentPlus())) {
                 this.Destroy();
                 return;
             }
@@ -845,7 +845,7 @@ export class modifier_imba_gyrocopter_flak_cannon extends BaseModifier_Plus {
                     this.GetParentPlus().AddNewModifier(this.GetParentPlus(), this.GetAbilityPlus(), "modifier_imba_gyrocopter_flak_cannon_speed_handler", {
                         projectile_speed: this.projectile_speed
                     });
-                    this.GetParentPlus().PerformAttack(enemy, false, this.GetStackCount() > this.max_attacks - this.fresh_rounds, true, true, true, false, false);
+                    this.GetParentPlus().AttackOnce(enemy, false, this.GetStackCount() > this.max_attacks - this.fresh_rounds, true, true, true, false, false);
                     this.GetParentPlus().RemoveModifierByName("modifier_imba_gyrocopter_flak_cannon_speed_handler");
                 }
             }
@@ -900,7 +900,7 @@ export class modifier_imba_gyrocopter_flak_cannon_side_gunner extends BaseModifi
         if (this.GetParentPlus().HasScepter() && !this.GetParentPlus().IsOutOfGame() && !this.GetParentPlus().IsInvisible() && !this.GetParentPlus().PassivesDisabled() && this.GetParentPlus().IsAlive()) {
             for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.GetSpecialValueFor("scepter_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BUILDING, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ATTACK_IMMUNE, FindOrder.FIND_FARTHEST, false))) {
                 if (!enemy.IsCourier()) {
-                    this.GetParentPlus().PerformAttack(enemy, false, false, true, true, true, false, false);
+                    this.GetParentPlus().AttackOnce(enemy, false, false, true, true, true, false, false);
                     return;
                 }
             }

@@ -101,7 +101,7 @@ export class modifier_jakiro_2 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -241,7 +241,7 @@ export class modifier_jakiro_2_thinker extends BaseModifier_Plus {
         let hParent = this.GetParentPlus()
         let hCaster = this.GetCasterPlus()
         if (IsServer()) {
-            if (GFuncEntity.IsValid(hParent)) {
+            if (IsValid(hParent)) {
                 UTIL_Remove(hParent)
             }
         }
@@ -312,7 +312,7 @@ export class modifier_jakiro_2_root extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_MAGICAL_DAMAGE_PERCENTAGE)
     CC_GetModifierIncomingMagicalDamagePercentage() {
-        if (GFuncEntity.IsValid(this.GetCasterPlus())) {
+        if (IsValid(this.GetCasterPlus())) {
             return this.GetCasterPlus().GetTalentValue("special_bonus_unique_jakiro_custom_7")
         }
     }

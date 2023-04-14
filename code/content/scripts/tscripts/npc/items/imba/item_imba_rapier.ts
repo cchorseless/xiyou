@@ -51,7 +51,7 @@ export class modifier_imba_divine_rapier extends modifier_rapier_base_class {
     public bonus_damage: number;
     /** DeclareFunctions():modifierfunction[] {
     let decFuns = {
-        1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS
+        1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE
     }
     return Object.values(decFuns);
     } */
@@ -73,7 +73,7 @@ export class modifier_imba_divine_rapier extends modifier_rapier_base_class {
             [modifierstate.MODIFIER_STATE_CANNOT_MISS]: true
         };
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_ATTACK_DAMAGE_BONUS(keys?: { target: IBaseNpc_Plus } /** keys */): number {
         return this.bonus_damage;
     }
@@ -92,7 +92,7 @@ export class modifier_imba_divine_rapier_2 extends modifier_rapier_base_class {
     public bonus_damage: number;
     /** DeclareFunctions():modifierfunction[] {
     let decFuns = {
-        1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
+        1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
         2: GPropertyConfig.EMODIFIER_PROPERTY.PROVIDES_FOW_POSITION,
         3: GPropertyConfig.EMODIFIER_PROPERTY.FORCE_DRAW_MINIMAP
     }
@@ -120,7 +120,7 @@ export class modifier_imba_divine_rapier_2 extends modifier_rapier_base_class {
             this.bonus_damage = 0;
         }
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.bonus_damage;
     }
@@ -277,7 +277,7 @@ export class modifier_imba_rapier_cursed extends modifier_rapier_base_class {
     /** DeclareFunctions():modifierfunction[] {
     return Object.values({
         1: GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_PERCENTAGE,
-        2: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
+        2: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
         3: GPropertyConfig.EMODIFIER_PROPERTY.PROVIDES_FOW_POSITION,
         4: GPropertyConfig.EMODIFIER_PROPERTY.FORCE_DRAW_MINIMAP,
         5: GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE,
@@ -292,7 +292,7 @@ export class modifier_imba_rapier_cursed extends modifier_rapier_base_class {
     CC_GetModifierSpellAmplify_Percentage(p_0: ModifierAttackEvent,): number {
         return this.spell_power;
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.bonus_damage;
     }

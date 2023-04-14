@@ -43,7 +43,7 @@ export class ability2_obsidian_destroyer_astral_imprisonment extends BaseAbility
         let hCaster = this.GetCasterPlus()
         let hTarget = this.GetCursorTarget()
         let fRange = this.GetCastRange(hCaster.GetAbsOrigin(), hCaster) + hCaster.GetCastRangeBonus()
-        if (!GFuncEntity.IsValid(hTarget) || !hTarget.IsAlive()) {
+        if (!IsValid(hTarget) || !hTarget.IsAlive()) {
             return
         }
         if (hTarget.TriggerSpellAbsorb(this)) {
@@ -54,7 +54,7 @@ export class ability2_obsidian_destroyer_astral_imprisonment extends BaseAbility
         //  }
         //  for (let i = this.tUnit.length- 1; i >= 0; i--) {
         //  	let hUnit = this.tUnit[i]
-        //  	if (! modifier_obsidian_destroyer_2_debuff.exist(  GFuncEntity.IsValid(hUnit) || !hUnit.IsAlive() || !hUnit ) ) {
+        //  	if (! modifier_obsidian_destroyer_2_debuff.exist(  IsValid(hUnit) || !hUnit.IsAlive() || !hUnit ) ) {
         //  		ArrayRemove(this.tUnit,hUnit)
         //  	}
         //  }
@@ -64,7 +64,7 @@ export class ability2_obsidian_destroyer_astral_imprisonment extends BaseAbility
             let targets = FindUnitsInRadius(hCaster.GetTeamNumber(), hCaster.GetAbsOrigin(), null, fRange, this.GetAbilityTargetTeam(), this.GetAbilityTargetType(), this.GetAbilityTargetFlags(), FindOrder.FIND_CLOSEST, false)
             for (let unit of (targets)) {
 
-                if (GFuncEntity.IsValid(unit) && unit.IsAlive() && unit != hTarget) {
+                if (IsValid(unit) && unit.IsAlive() && unit != hTarget) {
                     this.ImprisonmentTarget(unit)
                     break
                 }
@@ -73,7 +73,7 @@ export class ability2_obsidian_destroyer_astral_imprisonment extends BaseAbility
     }
     ImprisonmentTarget(hTarget: IBaseNpc_Plus) {
         let hCaster = this.GetCasterPlus()
-        if (!GFuncEntity.IsValid(hTarget) || !hTarget.IsAlive()) {
+        if (!IsValid(hTarget) || !hTarget.IsAlive()) {
             return
         }
         let prison_duration = this.GetSpecialValueFor("prison_duration")
@@ -92,7 +92,7 @@ export class ability2_obsidian_destroyer_astral_imprisonment extends BaseAbility
         //  	let tTarget = FindUnitsInRadius(hCaster.GetTeamNumber(), hTarget.GetAbsOrigin(), null, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO+DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_CLOSEST, false)
         //  	for (let hTarget of ( tTarget )) {
 
-        //  		if ( GFuncEntity.IsValid(hTarget) && hTarget.IsAlive() ) {
+        //  		if ( IsValid(hTarget) && hTarget.IsAlive() ) {
         //  			let damage_table = {
         //  				ability : this,
         //  				victim : hTarget,
@@ -106,7 +106,7 @@ export class ability2_obsidian_destroyer_astral_imprisonment extends BaseAbility
         //  } else {
         // 每个星体禁锢目标提供3点精华能量
         let hModifier = modifier_obsidian_destroyer_3.findIn(hCaster) as IBaseModifier_Plus;
-        if (GFuncEntity.IsValid(hModifier)) {
+        if (IsValid(hModifier)) {
             hModifier.SetStackCount(essence_energy)
         }
         modifier_obsidian_destroyer_2_debuff.remove(hTarget);
@@ -153,7 +153,7 @@ export class modifier_obsidian_destroyer_2 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -237,7 +237,7 @@ export class modifier_obsidian_destroyer_2_debuff extends BaseModifier_Plus {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
-        if (!GFuncEntity.IsValid(hCaster)) {
+        if (!IsValid(hCaster)) {
             this.Destroy()
             return
         }
@@ -297,11 +297,11 @@ export class modifier_obsidian_destroyer_2_debuff extends BaseModifier_Plus {
         let hAbility = this.GetAbilityPlus()
         if (IsServer()) {
             hParent.StopSound(this.sSoundName)
-            if (!GFuncEntity.IsValid(hCaster) || !hCaster.IsAlive()) {
+            if (!IsValid(hCaster) || !hCaster.IsAlive()) {
                 return
             }
             //   modifier_obsidian_destroyer_2_invulnerable.remove( hParent );
-            //  if ( GFuncEntity.IsValid(this.modifier_no_health_bar) ) {
+            //  if ( IsValid(this.modifier_no_health_bar) ) {
             //  	this.modifier_no_health_bar.Destroy()
             //  }
             EmitSoundOnLocationWithCaster(hParent.GetAbsOrigin(), ResHelper.GetSoundReplacement("Hero_ObsidianDestroyer.AstralImprisonment.End", hCaster), hCaster)
@@ -314,7 +314,7 @@ export class modifier_obsidian_destroyer_2_debuff extends BaseModifier_Plus {
             let tTarget = FindUnitsInRadius(hCaster.GetTeamNumber(), hParent.GetAbsOrigin(), null, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_CLOSEST, false)
             for (let hTarget of (tTarget)) {
 
-                if (GFuncEntity.IsValid(hTarget) && hTarget.IsAlive()) {
+                if (IsValid(hTarget) && hTarget.IsAlive()) {
                     let damage_table = {
                         ability: hAbility,
                         victim: hTarget,
@@ -325,7 +325,7 @@ export class modifier_obsidian_destroyer_2_debuff extends BaseModifier_Plus {
                     BattleHelper.GoApplyDamage(damage_table)
                 }
             }
-            //  if ( GFuncEntity.IsValid(hParent) && hParent.IsAlive() ) {
+            //  if ( IsValid(hParent) && hParent.IsAlive() ) {
             //  let iPlayerID = hCaster.GetPlayerOwnerID()
             //  Spawner.TempRmvRec(hParent,iPlayerID)
             //  hParent.RemoveNoDraw()

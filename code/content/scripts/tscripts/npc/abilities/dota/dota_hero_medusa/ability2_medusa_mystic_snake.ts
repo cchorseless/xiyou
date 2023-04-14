@@ -159,7 +159,7 @@ export class ability2_medusa_mystic_snake extends BaseAbility_Plus {
             }
         }
 
-        if (GFuncEntity.IsValid(hCaster)) {
+        if (IsValid(hCaster)) {
             let return_speed = this.GetSpecialValueFor("return_speed")
             let tInfo = {
                 Source: hTarget,
@@ -214,7 +214,7 @@ export class modifier_medusa_2 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -271,7 +271,7 @@ export class modifier_medusa_2 extends BaseModifier_Plus {
     attackLanded(params: ModifierAttackEvent) {
         if (IsServer()) {
             let hTarget = params.target
-            if (GFuncEntity.IsValid(hTarget) && hTarget.GetClassname() != "dota_item_drop") {
+            if (IsValid(hTarget) && hTarget.GetClassname() != "dota_item_drop") {
                 if (!BattleHelper.AttackFilter(params.record, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NOT_PROCESSPROCS)) {
                     let hParent = this.GetParentPlus()
                     if (hParent.HasScepter()) {

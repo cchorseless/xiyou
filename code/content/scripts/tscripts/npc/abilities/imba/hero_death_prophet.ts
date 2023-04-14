@@ -429,7 +429,7 @@
 //             if (this.state == stateList.ORBITING) {
 //                 let distance = pj.orbitRadius - casterDistance;
 //                 let direction = GFuncVector.CalculateDirection(position, caster);
-//                 pj.SetVelocity(GetPerpendicularVector(direction) * speed * (-1) ^ this.orientation + direction * distance);
+//                 pj.SetVelocity(GetPerpendicularVector(direction) * speed * math.pow(-1,  this.orientation) + direction * distance);
 //                 pj.SetPosition(GetGroundPosition(position + (this.GetVelocity() * ProjectileManager.FrameTime()), undefined));
 //                 let newTarget = caster.GetAttackTarget() || caster.nearbyEnemies[RandomInt(1, GameFunc.GetCount(caster.nearbyEnemies))];
 //                 if (newTarget) {

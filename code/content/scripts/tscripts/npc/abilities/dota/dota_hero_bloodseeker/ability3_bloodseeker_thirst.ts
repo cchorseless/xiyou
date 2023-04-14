@@ -88,7 +88,7 @@ export class modifier_bloodseeker_3 extends BaseModifier_Plus {
     On_AttackLanded(params: IModifierTable) {
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
-        if (!GFuncEntity.IsValid(params.target)) { return }
+        if (!IsValid(params.target)) { return }
         if (params.target.GetClassname() == "dota_item_drop") { return }
         if (params.attacker == hParent && !params.attacker.IsIllusion()) {
             if (UnitFilter(params.target, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, params.attacker.GetTeamNumber()) == UnitFilterResult.UF_SUCCESS) {
@@ -109,12 +109,12 @@ export class modifier_bloodseeker_3 extends BaseModifier_Plus {
         let hAttacker = params.attacker
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
-        if (GFuncEntity.IsValid(hAttacker) && hAttacker.GetUnitLabel() != "builder") {
+        if (IsValid(hAttacker) && hAttacker.GetUnitLabel() != "builder") {
             if (hAttacker.GetTeamNumber() == params.unit.GetTeamNumber()) {
                 return
             }
             hAttacker = hAttacker.GetSource()
-            if (GFuncEntity.IsValid(hAttacker) && !hAttacker.IsIllusion() && !hAttacker.PassivesDisabled() && params.unit.IsPositionInRange(hParent.GetAbsOrigin(), this.radius)) {
+            if (IsValid(hAttacker) && !hAttacker.IsIllusion() && !hAttacker.PassivesDisabled() && params.unit.IsPositionInRange(hParent.GetAbsOrigin(), this.radius)) {
                 let fRegenHealth = this.kill_enemy_regen_health + hParent.GetStrength() * this.per_str_kill_enemy_regen_health_factor
                 // 自己击杀恢复doubel血量
                 if (hAttacker == hParent) {
@@ -127,7 +127,7 @@ export class modifier_bloodseeker_3 extends BaseModifier_Plus {
                 if (hParent.HasTalent("special_bonus_unique_bloodseeker_custom_2")) {
                     // BuildSystem.EachBuilding(hParent.GetPlayerOwnerID(), (hBuilding) => {
                     //     let hUnit = hBuilding.GetUnitEntity()
-                    //     if (GFuncEntity.IsValid(hUnit) && hUnit != hParent && hUnit.GetUnitLabel() == "HERO") {
+                    //     if (IsValid(hUnit) && hUnit != hParent && hUnit.GetUnitLabel() == "HERO") {
                     //         hUnit.ModifyHealth(hUnit.GetHealth() + fRegenHealth, hAbility, false, 0)
                     //     }
                     // })

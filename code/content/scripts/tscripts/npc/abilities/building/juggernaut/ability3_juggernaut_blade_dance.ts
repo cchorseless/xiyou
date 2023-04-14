@@ -57,7 +57,7 @@ export class modifier_juggernaut_3 extends BaseModifier_Plus {
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
     On_AttackLanded(params: ModifierAttackEvent) {
-        if (!GFuncEntity.IsValid(params.target) || params.target.GetClassname() == "dota_item_drop") {
+        if (!IsValid(params.target) || params.target.GetClassname() == "dota_item_drop") {
             return
         }
         if (params.attacker == this.GetParentPlus() && BattleHelper.AttackFilter(params.record, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_CRIT)) {

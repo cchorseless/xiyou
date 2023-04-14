@@ -29,7 +29,7 @@ export class ability5_snapfire_spit_creep extends BaseAbility_Plus {
         modifier_snapfire_5_buff.apply(hCaster, hCaster, this, { duration: duration, vTarget: (vPosition) })
         if (hCaster.tMarkUnit != null) {
             for (let hTarget of (hCaster.tMarkUnit)) {
-                if (GFuncEntity.IsValid(hTarget)) {
+                if (IsValid(hTarget)) {
                     modifier_snapfire_5_buff.apply(hCaster, hCaster, this, { duration: duration, vTarget: (hTarget.GetAbsOrigin()) })
                 }
             }
@@ -41,7 +41,7 @@ export class ability5_snapfire_spit_creep extends BaseAbility_Plus {
     }
 
     OnProjectileHit_ExtraData(hThinker: IBaseNpc_Plus, vLocation: Vector, ExtraData: any) {
-        if (GFuncEntity.IsValid(hThinker)) {
+        if (IsValid(hThinker)) {
             let hCaster = this.GetCasterPlus()
             let vPosition = hThinker.GetAbsOrigin()
             let impact_damage = this.GetSpecialValueFor("impact_damage")
@@ -55,9 +55,9 @@ export class ability5_snapfire_spit_creep extends BaseAbility_Plus {
             for (let hTarget of (tTargets)) {
                 // 血盆大口
                 // let hModifier = modifier_snapfire_3_scepter_buff.findIn(hCaster) as IBaseModifier_Plus;
-                // if (GFuncEntity.IsValid(hModifier)) {
+                // if (IsValid(hModifier)) {
                 //     let hModifierCaster = hModifier.GetCasterPlus()
-                //     if (GFuncEntity.IsValid(hModifierCaster)) {
+                //     if (IsValid(hModifierCaster)) {
                 //         BattleHelper.Attack(hModifierCaster, hTarget, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_SKIPCOOLDOWN + BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NOT_USEPROJECTILE + BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NEVERMISS + BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NO_CLEAVE + BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NO_EXTENDATTACK + BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_SKIPCOUNTING)
                 //         fDamage = fDamage + hModifierCaster.GetAverageTrueAttackDamage(hModifierCaster)
                 //     }
@@ -124,7 +124,7 @@ export class modifier_snapfire_5 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -341,12 +341,12 @@ export class modifier_snapfire_5_debuff_burn_ground extends BaseModifier_Plus {
             let hCaster = this.GetCasterPlus()
             let hParent = this.GetParentPlus()
             let hAbility = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(hCaster) || !hCaster.IsAlive()) {
+            if (!IsValid(hCaster) || !hCaster.IsAlive()) {
                 return
             }
             let tTarget = FindUnitsInRadius(hCaster.GetTeamNumber(), hParent.GetAbsOrigin(), null, this.impact_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false)
             for (let hTarget of (tTarget)) {
-                if (GFuncEntity.IsValid(hTarget)) {
+                if (IsValid(hTarget)) {
                     modifier_snapfire_5_debuff_burn.apply(hTarget, hCaster, hAbility, { duration: this.burn_duration, burn_damage: this.burn_damage })
                 }
             }
@@ -421,7 +421,7 @@ export class modifier_snapfire_5_debuff_burn extends BaseModifier_Plus {
             let hCaster = this.GetCasterPlus()
             let hParent = this.GetParentPlus()
             let hAbility = this.GetAbilityPlus()
-            if (GFuncEntity.IsValid(hCaster)) {
+            if (IsValid(hCaster)) {
                 let damage_table =
                 {
                     ability: hAbility,
@@ -429,7 +429,7 @@ export class modifier_snapfire_5_debuff_burn extends BaseModifier_Plus {
                     victim: hParent,
                     damage: this.burn_damage,
                     damage_type: DAMAGE_TYPES.DAMAGE_TYPE_MAGICAL,
-                    eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_DOT,
+                    extra_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_DOT,
                 }
                 BattleHelper.GoApplyDamage(damage_table)
             }

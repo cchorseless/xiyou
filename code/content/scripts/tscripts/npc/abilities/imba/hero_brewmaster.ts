@@ -478,13 +478,13 @@ export class modifier_imba_brewmaster_drunken_brawler_passive extends BaseModifi
     }
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_CRITICALSTRIKE,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_CRITICALSTRIKE_UNIQUE,
             2: GPropertyConfig.EMODIFIER_PROPERTY.EVASION_CONSTANT,
             3: Enum_MODIFIER_EVENT.ON_ATTACK_LANDED,
             4: Enum_MODIFIER_EVENT.ON_ATTACK_FAIL
         });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_CRITICALSTRIKE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_CRITICALSTRIKE_UNIQUE)
     CC_GetModifierPreAttack_CriticalStrike(p_0: ModifierAttackEvent,): number {
         if (this.GetAbilityPlus()) {
             if (!this.GetParentPlus().HasModifier("modifier_imba_brewmaster_drunken_brawler_crit_cooldown") && !this.GetParentPlus().HasModifier("modifier_imba_brewmaster_drunken_brawler")) {
@@ -574,18 +574,18 @@ export class modifier_imba_brewmaster_drunken_brawler extends BaseModifier_Plus 
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
             1: GPropertyConfig.EMODIFIER_PROPERTY.EVASION_CONSTANT,
-            2: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_CRITICALSTRIKE,
+            2: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_CRITICALSTRIKE_UNIQUE,
             3: GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE,
             4: GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP,
             5: Enum_MODIFIER_EVENT.ON_ATTACK_FAIL,
-            6: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS
+            6: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE
         });
     } */
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.EVASION_CONSTANT)
     CC_GetModifierEvasion_Constant(p_0: ModifierAttackEvent,): number {
         return this.dodge_chance;
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_CRITICALSTRIKE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_CRITICALSTRIKE_UNIQUE)
     CC_GetModifierPreAttack_CriticalStrike(p_0: ModifierAttackEvent,): number {
         if (GFuncRandom.PRD(this.crit_chance, this)) {
             this.GetParentPlus().EmitSound("Hero_Brewmaster.Brawler.Crit");
@@ -615,7 +615,7 @@ export class modifier_imba_brewmaster_drunken_brawler extends BaseModifier_Plus 
             this.SetStackCount(this.GetStackCount() + keys.damage);
         }
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage( /** keys */): number {
         if (this.GetStackCount() > 0) {
             this.redirective_damage = this.GetStackCount();
@@ -1036,9 +1036,9 @@ export class imba_brewmaster_primal_unison extends BaseAbility_Plus {
                 let pos = owner.GetAbsOrigin();
                 for (let i = 0; i < pandas.length; i++) {
                     let ent = pandas[i];
-                    if (GFuncEntity.IsValid(ent)) {
+                    if (IsValid(ent)) {
                         pos = ent.GetAbsOrigin();
-                        GFuncEntity.SafeDestroyUnit(ent);
+                        SafeDestroyUnit(ent);
                     }
                 }
                 FindClearSpaceForUnit(owner, pos, true);

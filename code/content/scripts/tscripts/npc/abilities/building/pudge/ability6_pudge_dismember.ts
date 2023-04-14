@@ -45,14 +45,14 @@ export class ability6_pudge_dismember extends BaseAbility_Plus {
         let hCaster = this.GetCasterPlus()
         let radius = this.GetSpecialValueFor("radius")
         let duration = this.GetSpecialValueFor("channel_duration")
-        if (!GFuncEntity.IsValid(hTarget) || !hTarget.IsAlive()) {
+        if (!IsValid(hTarget) || !hTarget.IsAlive()) {
             return
         }
         let hThinker = BaseNpc_Plus.CreateUnitByName(hCaster.GetUnitName(), hCaster.GetAbsOrigin(), hCaster.GetTeamNumber(), false, hCaster, hCaster)
 
         for (let i = hThinker.GetAbilityCount() - 1; i >= 0; i++) {
             let hAbility = hThinker.GetAbilityByIndex(i)
-            if (GFuncEntity.IsValid(hAbility)) {
+            if (IsValid(hAbility)) {
                 hThinker.RemoveAbilityByHandle(hAbility)
             }
         }
@@ -61,7 +61,7 @@ export class ability6_pudge_dismember extends BaseAbility_Plus {
 
         let tTarget = FindUnitsInRadius(hCaster.GetTeamNumber(), hTarget.GetAbsOrigin(), null, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false)
         for (let hTarget of (tTarget as IBaseNpc_Plus[])) {
-            if (GFuncEntity.IsValid(hTarget) && hTarget.IsAlive()) {
+            if (IsValid(hTarget) && hTarget.IsAlive()) {
                 modifier_pudge_6_buff.apply(hTarget, hCaster, this, { duration: hCaster.HasTalent("special_bonus_unique_pudge_custom_6") && duration || duration * hTarget.GetStatusResistanceFactor(hCaster) })
             }
         }
@@ -104,7 +104,7 @@ export class modifier_pudge_6 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -220,7 +220,7 @@ export class modifier_pudge_6_buff extends BaseModifierMotionHorizontal_Plus {
             let hCaster = this.GetCasterPlus()
             let hAbility = this.GetAbilityPlus()
             let hParent = this.GetParentPlus()
-            if (GFuncEntity.IsValid(hCaster)) {
+            if (IsValid(hCaster)) {
                 hCaster.InterruptChannel()
             }
             hParent.RemoveHorizontalMotionController(this)
@@ -231,7 +231,7 @@ export class modifier_pudge_6_buff extends BaseModifierMotionHorizontal_Plus {
             let hCaster = this.GetCasterPlus()
             let hAbility = this.GetAbilityPlus()
             let hParent = this.GetParentPlus()
-            if (!GFuncEntity.IsValid(hCaster) || !GFuncEntity.IsValid(hAbility)) {
+            if (!IsValid(hCaster) || !IsValid(hAbility)) {
                 this.Destroy()
                 return
             }
@@ -242,7 +242,7 @@ export class modifier_pudge_6_buff extends BaseModifierMotionHorizontal_Plus {
                 // 恢复300范围内所有友方英雄生命值溢出生命值转换临时血量上限
                 let tTarget = FindUnitsInRadius(hCaster.GetTeamNumber(), hCaster.GetAbsOrigin(), null, this.scepter_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false)
                 for (let hTarget of (tTarget)) {
-                    if (GFuncEntity.IsValid(hTarget) && hTarget.IsAlive() && hTarget != hCaster) {
+                    if (IsValid(hTarget) && hTarget.IsAlive() && hTarget != hCaster) {
                         let fMaxHealth = hTarget.GetMaxHealth()
                         let fCurHealth = hTarget.GetHealth()
                         let fLossHealth = fMaxHealth - fCurHealth
@@ -269,7 +269,7 @@ export class modifier_pudge_6_buff extends BaseModifierMotionHorizontal_Plus {
     UpdateHorizontalMotion(me: IBaseNpc_Plus, dt: number) {
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
-            if (!GFuncEntity.IsValid(hCaster)) {
+            if (!IsValid(hCaster)) {
                 this.Destroy()
                 return
             }
@@ -359,7 +359,7 @@ export class modifier_pudge_6_thinker extends BaseModifier_Plus {
     BeDestroy() {
 
         if (IsServer()) {
-            GFuncEntity.SafeDestroyUnit(this.GetParentPlus());
+            SafeDestroyUnit(this.GetParentPlus());
         }
     }
     CheckState() {

@@ -1,4 +1,3 @@
-import { BattleHelper } from "../../../helper/BattleHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseModifier_Plus } from "../../entityPlus/BaseModifier_Plus";
 import { registerModifier } from "../../entityPlus/Base_Plus";
@@ -55,13 +54,13 @@ export class modifier_generic_bleeding extends BaseModifier_Plus {
         }
     }
     /**返回伤害数值 */
-    bleedingHandler: ((V: BattleHelper.DamageOptions) => number);
+    bleedingHandler: ((V: IBattleDamageOptions) => number);
     applyDamage() {
         let hParent = this.GetParentPlus()
         let hCaster = this.GetCasterPlus()
         let hAbility = this.GetAbilityPlus()
         if (IsServer()) {
-            if (!GFuncEntity.IsValid(hCaster)) {
+            if (!IsValid(hCaster)) {
                 this.Destroy()
                 return
             }
@@ -74,16 +73,16 @@ export class modifier_generic_bleeding extends BaseModifier_Plus {
             this.fDistance += ((vPosition - this.vLastPosition) as Vector).Length2D();
             let fDamageFactor = math.floor(this.fDistance / modifier_generic_bleeding.fTriggerDistance)
             if (fDamageFactor > 0) {
-                let tDamageTable: BattleHelper.DamageOptions = {
+                let tDamageTable: IBattleDamageOptions = {
                     ability: hAbility,
                     victim: hParent,
                     attacker: hCaster,
                     damage: 0,
                     damage_type: DAMAGE_TYPES.DAMAGE_TYPE_PURE,
-                    eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_BLEEDING +
-                        BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_DOT +
-                        BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_DAMAGE_TRANSFORM +
-                        BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_SPELL_CRIT
+                    extra_flags: GEBATTLE_DAMAGE_FLAGS.DAMAGE_FLAG_BLEEDING +
+                        GEBATTLE_DAMAGE_FLAGS.DAMAGE_FLAG_DOT +
+                        GEBATTLE_DAMAGE_FLAGS.DAMAGE_FLAG_NO_DAMAGE_TRANSFORM +
+                        GEBATTLE_DAMAGE_FLAGS.DAMAGE_FLAG_NO_SPELL_CRIT
                 };
                 tDamageTable.damage = this.bleedingHandler(tDamageTable)
                 if (this.GetStackCount() != 0) {
@@ -104,7 +103,7 @@ export class modifier_generic_bleeding extends BaseModifier_Plus {
                     ParticleManager.SetParticleControl(iParticleID, 2, Vector(fDuration, ('' + iNumber).length + 1, 0))
                     ParticleManager.SetParticleControl(iParticleID, 3, vColor)
                     ParticleManager.ReleaseParticleIndex(iParticleID)
-                    BattleHelper.GoApplyDamage(tDamageTable)
+                    ApplyDamage(tDamageTable)
                 }
 
             };
@@ -127,17 +126,17 @@ export class modifier_generic_bleeding extends BaseModifier_Plus {
         hCaster: IBaseNpc_Plus,
         hAbility: IBaseAbility_Plus,
         fDuration: number,
-        bleedingHandler: (V: BattleHelper.DamageOptions) => number,
+        bleedingHandler: (V: IBattleDamageOptions) => number,
         bMultiple: boolean = false) {
         if (!IsServer()) { return };
-        if (!GFuncEntity.IsValid(hTarget)) return;
+        if (!IsValid(hTarget)) return;
         let tModifiers = hTarget.FindAllModifiersByName(modifier_generic_bleeding.name) as modifier_generic_bleeding[];
         let vLastPosition;
         let fDistance;
         let hModifier;
         if (tModifiers && tModifiers.length > 0) {
             for (let _hModifier of tModifiers) {
-                if (GFuncEntity.IsValid(_hModifier) && GFuncEntity.IsValid(_hModifier.GetAbilityPlus()) && GFuncEntity.IsValid(hAbility)) {
+                if (IsValid(_hModifier) && IsValid(_hModifier.GetAbilityPlus()) && IsValid(hAbility)) {
                     if (_hModifier.GetAbilityPlus().GetAbilityName() == hAbility.GetAbilityName()) {
                         if (!bMultiple) {
                             vLastPosition = _hModifier.vLastPosition
@@ -154,7 +153,7 @@ export class modifier_generic_bleeding extends BaseModifier_Plus {
 
         }
 
-        if (!GFuncEntity.IsValid(hModifier)) {
+        if (!IsValid(hModifier)) {
             hModifier = modifier_generic_bleeding.apply(hTarget, hCaster, hAbility, {
                 vLastPosition: vLastPosition,
                 fDistance: fDistance,
@@ -165,7 +164,7 @@ export class modifier_generic_bleeding extends BaseModifier_Plus {
             hModifier.SetDuration(fDuration, true)
             hModifier.ForceRefresh()
         }
-        if (GFuncEntity.IsValid(hModifier)) {
+        if (IsValid(hModifier)) {
             hModifier.bleedingHandler = bleedingHandler
         }
     }

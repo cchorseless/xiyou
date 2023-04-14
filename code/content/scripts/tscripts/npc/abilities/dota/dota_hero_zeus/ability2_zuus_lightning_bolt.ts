@@ -101,7 +101,7 @@ export class ability2_zuus_lightning_bolt extends BaseAbility_Plus {
                 }
                 for (let hUnit of tTargets) {
                     this.addTimer(interval_add, () => {
-                        if (!GFuncEntity.IsValid(hUnit)) { return }
+                        if (!IsValid(hUnit)) { return }
                         if (!hUnit.TriggerSpellAbsorb(this)) {
                             let damageBuff = modifier_zuus_2_particle_damage.apply(hTarget, hCaster, this, { duration: 0.1, })
                             damageBuff && (damageBuff.damageInfo = tDamageTable)
@@ -121,7 +121,7 @@ export class ability2_zuus_lightning_bolt extends BaseAbility_Plus {
         //         hModifier.IncrementStackCount()
         //         if (hModifier.GetStackCount() >= gods_wrath_count) {
         //             let zuus_3  = zuus_3.findIn(  hCaster )
-        //             if (GFuncEntity.IsValid(zuus_3)) {
+        //             if (IsValid(zuus_3)) {
         //                 hModifier.SetStackCount(0)
         //                 if (zuus_3.GetLevel() > 0) {
         //                     zuus_3.OnSpellStart(true)

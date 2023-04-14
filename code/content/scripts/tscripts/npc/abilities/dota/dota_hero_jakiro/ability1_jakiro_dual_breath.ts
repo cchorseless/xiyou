@@ -97,7 +97,7 @@ export class modifier_jakiro_1 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -280,7 +280,7 @@ export class modifier_jakiro_1_ice extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
     CC_GetModifierIncomingDamagePercentage(params: IModifierTable) {
-        if (params != null && GFuncEntity.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasScepter() && params.attacker == this.GetCasterPlus()) {
+        if (params != null && IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasScepter() && params.attacker == this.GetCasterPlus()) {
             return this.scepter_amplify_all_damage
         }
         return 0
@@ -340,7 +340,7 @@ export class modifier_jakiro_1_fire extends BaseModifier_Plus {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         if (IsServer()) {
-            if (!GFuncEntity.IsValid(hCaster) || !hCaster.IsAlive()) {
+            if (!IsValid(hCaster) || !hCaster.IsAlive()) {
                 this.Destroy()
                 return
             }
@@ -357,7 +357,7 @@ export class modifier_jakiro_1_fire extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
     CC_GetModifierIncomingDamagePercentage(params: IModifierTable) {
-        if (params != null && GFuncEntity.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasScepter() && params.attacker == this.GetCasterPlus()) {
+        if (params != null && IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasScepter() && params.attacker == this.GetCasterPlus()) {
             return this.scepter_amplify_all_damage
         }
         return 0

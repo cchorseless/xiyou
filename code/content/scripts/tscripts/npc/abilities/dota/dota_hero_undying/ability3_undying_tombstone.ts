@@ -69,7 +69,7 @@ export class modifier_undying_3 extends BaseModifier_Plus {
         let hParent = this.GetParentPlus()
         let hHero = PlayerResource.GetSelectedHeroEntity(hParent.GetPlayerOwnerID())
         let hAbility = this.GetAbilityPlus()
-        if (!GFuncEntity.IsValid(hParent) || !GFuncEntity.IsValid(hHero) || !GFuncEntity.IsValid(hAbility)) {
+        if (!IsValid(hParent) || !IsValid(hHero) || !IsValid(hAbility)) {
             return
         }
         let playerID = hParent.GetPlayerOwnerID()
@@ -81,7 +81,7 @@ export class modifier_undying_3 extends BaseModifier_Plus {
         if (position == vec3_invalid) {
             let entiSpanwer = Entities.FindByName(null, "player_" + playerID + "_spawner")
             //  优先放在出怪口
-            if (GFuncEntity.IsValid(entiSpanwer) && ((vParentPos - entiSpanwer.GetAbsOrigin()) as Vector).Length2D() <= this.tomb_stone_max_distance) {
+            if (IsValid(entiSpanwer) && ((vParentPos - entiSpanwer.GetAbsOrigin()) as Vector).Length2D() <= this.tomb_stone_max_distance) {
                 let radius = this.GetSpecialValueFor("zombie_radius")
                 let vectors = [
                     Vector(- radius, 0, 0),
@@ -93,7 +93,7 @@ export class modifier_undying_3 extends BaseModifier_Plus {
             } else {
                 //  第一个转弯口
                 let corner_1 = Entities.FindByName(null, "corner_" + playerID + "_1")
-                if (GFuncEntity.IsValid(corner_1) && ((vParentPos - corner_1.GetAbsOrigin()) as Vector).Length2D() <= this.tomb_stone_max_distance) {
+                if (IsValid(corner_1) && ((vParentPos - corner_1.GetAbsOrigin()) as Vector).Length2D() <= this.tomb_stone_max_distance) {
                     position = corner_1.GetAbsOrigin()
                 }
             }
@@ -102,7 +102,7 @@ export class modifier_undying_3 extends BaseModifier_Plus {
         if (position == vec3_invalid) {
             position = (hParent.GetAbsOrigin() + RandomVector(200) as Vector)
         }
-        if (!GFuncEntity.IsValid(this.hTombStone[index])) {
+        if (!IsValid(this.hTombStone[index])) {
             this.hTombStone[index] = CreateUnitByName("npc_dota_unit_tombstone", position as Vector, false, hHero, hHero, iTeamNum)
             this.hTombStone[index].SetForwardVector(Vector(0, -1, 0))
             modifier_undying_3_aura.apply(this.hTombStone[index], hParent, hAbility, null)
@@ -120,7 +120,7 @@ export class modifier_undying_3 extends BaseModifier_Plus {
             let hHero = PlayerResource.GetSelectedHeroEntity(hParent.GetPlayerOwnerID())
             let hAbility = this.GetAbilityPlus()
 
-            if (!GFuncEntity.IsValid(hParent) || !GFuncEntity.IsValid(hHero) || !GFuncEntity.IsValid(hAbility)) {
+            if (!IsValid(hParent) || !IsValid(hHero) || !IsValid(hAbility)) {
                 this.Destroy()
                 return
             }
@@ -132,10 +132,10 @@ export class modifier_undying_3 extends BaseModifier_Plus {
     BeDestroy() {
 
         if (IsServer()) {
-            if (this.hTombStone != null && GFuncEntity.IsValid(this.hTombStone[0])) {
+            if (this.hTombStone != null && IsValid(this.hTombStone[0])) {
                 this.hTombStone[0].ForceKill(false)
             }
-            if (this.hTombStone != null && GFuncEntity.IsValid(this.hTombStone[2])) {
+            if (this.hTombStone != null && IsValid(this.hTombStone[2])) {
                 this.hTombStone[2].ForceKill(false)
             }
         }
@@ -143,21 +143,21 @@ export class modifier_undying_3 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
             }
             let caster = ability.GetCasterPlus()
-            if (!GFuncEntity.IsValid(caster)) {
+            if (!IsValid(caster)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
             }
-            if (!GFuncEntity.IsValid(this.hTombStone[0])) {
+            if (!IsValid(this.hTombStone[0])) {
                 this.CreateTombStone(1)
             }
-            if (GFuncEntity.IsValid(this.hTombStone[2])) {
+            if (IsValid(this.hTombStone[2])) {
                 this.hTombStone[2].ForceKill(false)
             }
         }
@@ -165,7 +165,7 @@ export class modifier_undying_3 extends BaseModifier_Plus {
 
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
     attackLanded(params: IModifierTable) {
-        if (!GFuncEntity.IsValid(params.target)) { return }
+        if (!IsValid(params.target)) { return }
         if (params.target.GetClassname() == "dota_item_drop") { return }
         if (params.attacker == this.GetParentPlus() && this.GetParentPlus().HasTalent("special_bonus_unique_undying_custom_2") && !params.attacker.IsRangedAttacker() && !params.attacker.IsIllusion()) {
             if (!BattleHelper.AttackFilter(params.record, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NO_CLEAVE) && UnitFilter(params.target, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, params.attacker.GetTeamNumber()) == UnitFilterResult.UF_SUCCESS) {
@@ -189,7 +189,7 @@ export class modifier_undying_3 extends BaseModifier_Plus {
                         damage: params.original_damage * this.GetParentPlus().GetTalentValue("special_bonus_unique_undying_custom_2") * 0.01,
                         damage_type: DAMAGE_TYPES.DAMAGE_TYPE_PHYSICAL,
                         damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION + DOTADamageFlag_t.DOTA_DAMAGE_FLAG_USE_COMBAT_PROFICIENCY,
-                        eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_CLEAVE + BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_SPELL_CRIT,
+                        extra_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_CLEAVE + BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_SPELL_CRIT,
                     }
                     BattleHelper.GoApplyDamage(tDamageTable)
                     n = n + 1
@@ -321,14 +321,14 @@ export class modifier_undying_3_aura_effect extends BaseModifier_Plus {
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
             let hParent = this.GetParentPlus()
-            if (!GFuncEntity.IsValid(hCaster) || !hCaster.IsAlive() || !GFuncEntity.IsValid(hParent) || !hParent.IsAlive()) {
+            if (!IsValid(hCaster) || !hCaster.IsAlive() || !IsValid(hParent) || !hParent.IsAlive()) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
             }
-            if (!GFuncEntity.IsValid(this.hZombie) || !this.hZombie.IsAlive()) {
+            if (!IsValid(this.hZombie) || !this.hZombie.IsAlive()) {
                 let hHero = PlayerResource.GetSelectedHeroEntity(hCaster.GetPlayerOwnerID())
-                if (GFuncEntity.IsValid(hCaster) && GFuncEntity.IsValid(hParent) && GFuncEntity.IsValid(hHero)) {
+                if (IsValid(hCaster) && IsValid(hParent) && IsValid(hHero)) {
                     let sZombieName = [
                         "npc_dota_unit_undying_zombie_custom",
                         "npc_dota_unit_undying_zombie_torso_custom"
@@ -350,7 +350,7 @@ export class modifier_undying_3_aura_effect extends BaseModifier_Plus {
     BeDestroy() {
 
         if (IsServer()) {
-            if (GFuncEntity.IsValid(this.hZombie)) {
+            if (IsValid(this.hZombie)) {
                 this.hZombie.ForceKill(false)
             }
         }
@@ -400,13 +400,13 @@ export class modifier_undying_3_zombie_lifetime extends BaseModifier_Plus {
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASEATTACK_BONUSDAMAGE)
     CC_GetModifierBaseAttack_BonusDamage() {
-        if (GFuncEntity.IsValid(this.GetCasterPlus())) {
+        if (IsValid(this.GetCasterPlus())) {
             return (this.GetCasterPlus() as BaseNpc_Hero_Plus).GetStrength() * this.zombie_base_damage_factor
         }
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
     attackLanded(params: IModifierTable) {
-        if (!GFuncEntity.IsValid(params.target)) { return }
+        if (!IsValid(params.target)) { return }
         if (params.target.GetClassname() == "dota_item_drop") { return }
         if (params.attacker == this.GetParentPlus() && !params.attacker.IsIllusion()) {
             modifier_undying_3_debuff.apply(params.target, this.GetCasterPlus(), this.GetAbilityPlus(), { duration: this.duration })
@@ -445,7 +445,7 @@ export class modifier_undying_3_debuff extends BaseModifier_Plus {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         this.max_stack = this.GetSpecialValueFor("max_stack")
-        this.increase_attack_damage = this.GetSpecialValueFor("increase_attack_damage") + (GFuncEntity.IsValid(hCaster) && hCaster.GetTalentValue("special_bonus_unique_undying_custom_8") || 0)
+        this.increase_attack_damage = this.GetSpecialValueFor("increase_attack_damage") + (IsValid(hCaster) && hCaster.GetTalentValue("special_bonus_unique_undying_custom_8") || 0)
         if (IsServer()) {
             this.SetStackCount(math.min(this.GetStackCount() + 1, this.max_stack))
         }

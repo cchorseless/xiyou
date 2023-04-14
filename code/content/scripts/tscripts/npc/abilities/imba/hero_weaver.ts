@@ -523,7 +523,7 @@ export class modifier_imba_weaver_geminate_attack_delay extends BaseModifier_Plu
     OnIntervalThink(): void {
         if (this.GetParentPlus().IsAlive()) {
             this.attack_bonus = true;
-            this.GetParentPlus().PerformAttack(this.GetCasterPlus(), true, true, true, false, true, false, false);
+            this.GetParentPlus().AttackOnce(this.GetCasterPlus(), true, true, true, false, true, false, false);
             this.attack_bonus = false;
             this.StartIntervalThink(-1);
             this.Destroy();
@@ -531,10 +531,10 @@ export class modifier_imba_weaver_geminate_attack_delay extends BaseModifier_Plu
     }
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS
+            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE
         });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         if (!IsServer() || !this.attack_bonus) {
             return;

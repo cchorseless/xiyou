@@ -74,7 +74,7 @@ export class ability1_vengefulspirit_magic_missile extends BaseAbility_Plus {
     }
     OnProjectileHit(hTarget: IBaseNpc_Plus, vLocation: Vector) {
         let hCaster = this.GetCasterPlus() as BaseNpc_Hero_Plus
-        if (GFuncEntity.IsValid(hTarget) && hTarget.IsAlive()) {
+        if (IsValid(hTarget) && hTarget.IsAlive()) {
             let damage = this.GetSpecialValueFor("magic_missile_damage")
             let agi_factor = this.GetSpecialValueFor("agi_factor")
             let magic_missile_stun_duration = this.GetSpecialValueFor("magic_missile_stun_duration") + hCaster.GetTalentValue("special_bonus_unique_vengefulspirit_custom_1")
@@ -129,7 +129,7 @@ export class modifier_vengefulspirit_1 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let hAbility = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(hAbility)) {
+            if (!IsValid(hAbility)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return

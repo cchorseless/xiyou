@@ -6,7 +6,7 @@ export module PropertyConfig {
     /**最大血量 */
     export const MAX_HEALTH = 2147483000;
     /**最大蓝量 */
-    export const MAX_MANA = 2 ^ 16 - 1;
+    export const MAX_MANA = 2100000000;
     /**最大怒气 */
     export const MAX_ENERGY = 2100000000;
     /**最小攻速 */
@@ -64,16 +64,17 @@ export module PropertyConfig {
     export enum EMODIFIER_PROPERTY {
         /**
          * Method Name: `GetModifierPreAttack_BonusDamage`
+         * @deprecated
          */
-        PREATTACK_BONUS_DAMAGE = modifierfunction.MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE,
+        // PREATTACK_BONUS_DAMAGE = modifierfunction.MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE,
         /**
          * Method Name: `GetModifierPreAttack_BonusDamage_Target`
          */
-        PREATTACK_BONUS_DAMAGE_TARGET = modifierfunction.MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE_TARGET,
+        // PREATTACK_BONUS_DAMAGE_TARGET = modifierfunction.MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE_TARGET,
         /**
          * Method Name: `GetModifierPreAttack_BonusDamage_Proc`
          */
-        PREATTACK_BONUS_DAMAGE_PROC = modifierfunction.MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE_PROC,
+        // PREATTACK_BONUS_DAMAGE_PROC = modifierfunction.MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE_PROC,
         /**
          * Method Name: `GetModifierPreAttack_BonusDamagePostCrit`
          */
@@ -83,17 +84,20 @@ export module PropertyConfig {
          *
          * 额外基础攻击力(白字)
          */
-        BASEATTACK_BONUSDAMAGE = modifierfunction.MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE,
+        // BASEATTACK_BONUSDAMAGE = modifierfunction.MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE,
         /**
          * Method Name: `GetModifierProcAttack_BonusDamage_Physical`
+         * 额外的物理伤害，不显示在面板上，参与计算护甲
          */
         PROCATTACK_BONUS_DAMAGE_PHYSICAL = modifierfunction.MODIFIER_PROPERTY_PROCATTACK_BONUS_DAMAGE_PHYSICAL,
         /**
          * Method Name: `GetModifierProcAttack_BonusDamage_Magical`
+         * 额外的魔法伤害，不显示在面板上，参与计算护甲
          */
         PROCATTACK_BONUS_DAMAGE_MAGICAL = modifierfunction.MODIFIER_PROPERTY_PROCATTACK_BONUS_DAMAGE_MAGICAL,
         /**
          * Method Name: `GetModifierProcAttack_BonusDamage_Pure`
+         * 额外的纯粹伤害，不显示在面板上，参与计算护甲
          */
         PROCATTACK_BONUS_DAMAGE_PURE = modifierfunction.MODIFIER_PROPERTY_PROCATTACK_BONUS_DAMAGE_PURE,
         /**
@@ -232,15 +236,15 @@ export module PropertyConfig {
         /**
          * Method Name: `GetModifierSpellAmplify_PercentageCreep`
          */
-        SPELL_AMPLIFY_PERCENTAGE_CREEP = modifierfunction.MODIFIER_PROPERTY_SPELL_AMPLIFY_PERCENTAGE_CREEP,
+        // SPELL_AMPLIFY_PERCENTAGE_CREEP = modifierfunction.MODIFIER_PROPERTY_SPELL_AMPLIFY_PERCENTAGE_CREEP,
         /**
          * Method Name: `GetModifierSpellAmplify_Percentage`
          */
-        SPELL_AMPLIFY_PERCENTAGE = modifierfunction.MODIFIER_PROPERTY_SPELL_AMPLIFY_PERCENTAGE,
+        // SPELL_AMPLIFY_PERCENTAGE = modifierfunction.MODIFIER_PROPERTY_SPELL_AMPLIFY_PERCENTAGE,
         /**
          * Method Name: `GetModifierSpellAmplify_PercentageUnique`
          */
-        SPELL_AMPLIFY_PERCENTAGE_UNIQUE = modifierfunction.MODIFIER_PROPERTY_SPELL_AMPLIFY_PERCENTAGE_UNIQUE,
+        // SPELL_AMPLIFY_PERCENTAGE_UNIQUE = modifierfunction.MODIFIER_PROPERTY_SPELL_AMPLIFY_PERCENTAGE_UNIQUE,
         /**
          * Method Name: `GetModifierHealAmplify_PercentageSource`
          */
@@ -288,11 +292,11 @@ export module PropertyConfig {
         /**
          * Method Name: `GetModifierIncomingDamage_Percentage`
          */
-        INCOMING_DAMAGE_PERCENTAGE = modifierfunction.MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE,
+        // INCOMING_DAMAGE_PERCENTAGE = modifierfunction.MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE,
         /**
          * Method Name: `GetModifierIncomingPhysicalDamage_Percentage`
          */
-        INCOMING_PHYSICAL_DAMAGE_PERCENTAGE = modifierfunction.MODIFIER_PROPERTY_INCOMING_PHYSICAL_DAMAGE_PERCENTAGE,
+        // INCOMING_PHYSICAL_DAMAGE_PERCENTAGE = modifierfunction.MODIFIER_PROPERTY_INCOMING_PHYSICAL_DAMAGE_PERCENTAGE,
         /**
          * Method Name: `GetModifierIncomingPhysicalDamageConstant`
          */
@@ -340,48 +344,55 @@ export module PropertyConfig {
          *
          *
          * Method Name: `GetModifierPhysicalArmorBase_Percentage`.
+         * @deprecated UseCustom
          */
-        PHYSICAL_ARMOR_BASE_PERCENTAGE = modifierfunction.MODIFIER_PROPERTY_PHYSICAL_ARMOR_BASE_PERCENTAGE,
+        // PHYSICAL_ARMOR_BASE_PERCENTAGE = modifierfunction.MODIFIER_PROPERTY_PHYSICAL_ARMOR_BASE_PERCENTAGE,
         /**
          * Method Name: `GetModifierPhysicalArmorTotal_Percentage`
+         * @deprecated UseCustom
          */
-        PHYSICAL_ARMOR_TOTAL_PERCENTAGE = modifierfunction.MODIFIER_PROPERTY_PHYSICAL_ARMOR_TOTAL_PERCENTAGE,
+        // PHYSICAL_ARMOR_TOTAL_PERCENTAGE = modifierfunction.MODIFIER_PROPERTY_PHYSICAL_ARMOR_TOTAL_PERCENTAGE,
         /**
          * Method Name: `GetModifierPhysicalArmorBonus`
+         * @deprecated UseCustom
          */
-        PHYSICAL_ARMOR_BONUS = modifierfunction.MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS,
+        // PHYSICAL_ARMOR_BONUS = modifierfunction.MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS,
         /**
          * Method Name: `GetModifierPhysicalArmorBonusUnique`
+         * @deprecated UseCustom
          */
-        PHYSICAL_ARMOR_BONUS_UNIQUE = modifierfunction.MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS_UNIQUE,
+        // PHYSICAL_ARMOR_BONUS_UNIQUE = modifierfunction.MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS_UNIQUE,
         /**
          * Method Name: `GetModifierPhysicalArmorBonusUniqueActive`
+         * @deprecated UseCustom
          */
-        PHYSICAL_ARMOR_BONUS_UNIQUE_ACTIVE = modifierfunction.MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS_UNIQUE_ACTIVE,
+        // PHYSICAL_ARMOR_BONUS_UNIQUE_ACTIVE = modifierfunction.MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS_UNIQUE_ACTIVE,
         /**
          * Method Name: `GetModifierIgnorePhysicalArmor`
+         * @deprecated UseCustom
          */
-        IGNORE_PHYSICAL_ARMOR = modifierfunction.MODIFIER_PROPERTY_IGNORE_PHYSICAL_ARMOR,
+        // IGNORE_PHYSICAL_ARMOR = modifierfunction.MODIFIER_PROPERTY_IGNORE_PHYSICAL_ARMOR,
         /**
          * Method Name: `GetModifierMagicalResistanceBaseReduction`
+         * @deprecated UseCustom
          */
-        MAGICAL_RESISTANCE_BASE_REDUCTION = modifierfunction.MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BASE_REDUCTION,
+        // MAGICAL_RESISTANCE_BASE_REDUCTION = modifierfunction.MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BASE_REDUCTION,
         /**
          * Method Name: `GetModifierMagicalResistanceDirectModification`
          */
-        MAGICAL_RESISTANCE_DIRECT_MODIFICATION = modifierfunction.MODIFIER_PROPERTY_MAGICAL_RESISTANCE_DIRECT_MODIFICATION,
+        // MAGICAL_RESISTANCE_DIRECT_MODIFICATION = modifierfunction.MODIFIER_PROPERTY_MAGICAL_RESISTANCE_DIRECT_MODIFICATION,
         /**
          * Method Name: `GetModifierMagicalResistanceBonus`
          */
-        MAGICAL_RESISTANCE_BONUS = modifierfunction.MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS,
+        // MAGICAL_RESISTANCE_BONUS = modifierfunction.MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS,
         /**
          * Method Name: `GetModifierMagicalResistanceBonusIllusions`
          */
-        MAGICAL_RESISTANCE_BONUS_ILLUSIONS = modifierfunction.MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS_ILLUSIONS,
+        // MAGICAL_RESISTANCE_BONUS_ILLUSIONS = modifierfunction.MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS_ILLUSIONS,
         /**
          * Method Name: `GetModifierMagicalResistanceDecrepifyUnique`
          */
-        MAGICAL_RESISTANCE_DECREPIFY_UNIQUE = modifierfunction.MODIFIER_PROPERTY_MAGICAL_RESISTANCE_DECREPIFY_UNIQUE,
+        // MAGICAL_RESISTANCE_DECREPIFY_UNIQUE = modifierfunction.MODIFIER_PROPERTY_MAGICAL_RESISTANCE_DECREPIFY_UNIQUE,
         /**
          * Method Name: `GetModifierBaseRegen`
          */
@@ -413,9 +424,8 @@ export module PropertyConfig {
         HEALTH_REGEN_PERCENTAGE_UNIQUE = modifierfunction.MODIFIER_PROPERTY_HEALTH_REGEN_PERCENTAGE_UNIQUE,
         /**
          * Method Name: `GetModifierHealthBonus`
-         * @deprecated
          */
-        HEALTH_BONUS = modifierfunction.MODIFIER_PROPERTY_HEALTH_BONUS,
+        // HEALTH_BONUS = modifierfunction.MODIFIER_PROPERTY_HEALTH_BONUS,
         /**
          * Method Name: `GetModifierManaBonus`
          */
@@ -426,18 +436,18 @@ export module PropertyConfig {
         EXTRA_STRENGTH_BONUS = modifierfunction.MODIFIER_PROPERTY_EXTRA_STRENGTH_BONUS,
         /**
          * Method Name: `GetModifierExtraHealthBonus`
-         * @deprecated
+         *
          */
-        EXTRA_HEALTH_BONUS = modifierfunction.MODIFIER_PROPERTY_EXTRA_HEALTH_BONUS,
+        // EXTRA_HEALTH_BONUS = modifierfunction.MODIFIER_PROPERTY_EXTRA_HEALTH_BONUS,
         /**
          * Method Name: `GetModifierExtraManaBonus`
          */
         EXTRA_MANA_BONUS = modifierfunction.MODIFIER_PROPERTY_EXTRA_MANA_BONUS,
         /**
          * Method Name: `GetModifierExtraHealthPercentage`
-         * @deprecated
+         * 
          */
-        EXTRA_HEALTH_PERCENTAGE = modifierfunction.MODIFIER_PROPERTY_EXTRA_HEALTH_PERCENTAGE,
+        // EXTRA_HEALTH_PERCENTAGE = modifierfunction.MODIFIER_PROPERTY_EXTRA_HEALTH_PERCENTAGE,
         /**
          * Method Name: `GetModifierExtraManaPercentage`
          */
@@ -445,27 +455,27 @@ export module PropertyConfig {
         /**
          * Method Name: `GetModifierBonusStats_Strength`
          */
-        STATS_STRENGTH_BONUS = modifierfunction.MODIFIER_PROPERTY_STATS_STRENGTH_BONUS,
+        // STATS_STRENGTH_BONUS = modifierfunction.MODIFIER_PROPERTY_STATS_STRENGTH_BONUS,
         /**
          * Method Name: `GetModifierBonusStats_Agility`
          */
-        STATS_AGILITY_BONUS = modifierfunction.MODIFIER_PROPERTY_STATS_AGILITY_BONUS,
+        // STATS_AGILITY_BONUS = modifierfunction.MODIFIER_PROPERTY_STATS_AGILITY_BONUS,
         /**
          * Method Name: `GetModifierBonusStats_Intellect`
          */
-        STATS_INTELLECT_BONUS = modifierfunction.MODIFIER_PROPERTY_STATS_INTELLECT_BONUS,
+        // STATS_INTELLECT_BONUS = modifierfunction.MODIFIER_PROPERTY_STATS_INTELLECT_BONUS,
         /**
          * Method Name: `GetModifierBonusStats_Strength_Percentage`
          */
-        STATS_STRENGTH_BONUS_PERCENTAGE = modifierfunction.MODIFIER_PROPERTY_STATS_STRENGTH_BONUS_PERCENTAGE,
+        // STATS_STRENGTH_BONUS_PERCENTAGE = modifierfunction.MODIFIER_PROPERTY_STATS_STRENGTH_BONUS_PERCENTAGE,
         /**
          * Method Name: `GetModifierBonusStats_Agility_Percentage`
          */
-        STATS_AGILITY_BONUS_PERCENTAGE = modifierfunction.MODIFIER_PROPERTY_STATS_AGILITY_BONUS_PERCENTAGE,
+        // STATS_AGILITY_BONUS_PERCENTAGE = modifierfunction.MODIFIER_PROPERTY_STATS_AGILITY_BONUS_PERCENTAGE,
         /**
          * Method Name: `GetModifierBonusStats_Intellect_Percentage`
          */
-        STATS_INTELLECT_BONUS_PERCENTAGE = modifierfunction.MODIFIER_PROPERTY_STATS_INTELLECT_BONUS_PERCENTAGE,
+        // STATS_INTELLECT_BONUS_PERCENTAGE = modifierfunction.MODIFIER_PROPERTY_STATS_INTELLECT_BONUS_PERCENTAGE,
         /**
          * Method Name: `GetModifierCastRangeBonus`
          */
@@ -561,7 +571,7 @@ export module PropertyConfig {
         /**
          * Method Name: `GetModifierPreAttack_CriticalStrike`
          */
-        PREATTACK_CRITICALSTRIKE = modifierfunction.MODIFIER_PROPERTY_PREATTACK_CRITICALSTRIKE,
+        // PREATTACK_CRITICALSTRIKE = modifierfunction.MODIFIER_PROPERTY_PREATTACK_CRITICALSTRIKE,
         /**
          * Method Name: `GetModifierPreAttack_Target_CriticalStrike`
          * 自己受击时发生暴击概率
@@ -637,7 +647,7 @@ export module PropertyConfig {
         FIXED_NIGHT_VISION = modifierfunction.MODIFIER_PROPERTY_FIXED_NIGHT_VISION,
         /**
          * Method Name: `GetMinHealth`
-         *  最小生命，在此接口中计算最大生命值
+         *  最小生命
          */
         MIN_HEALTH = modifierfunction.MODIFIER_PROPERTY_MIN_HEALTH,
         /**
@@ -864,82 +874,133 @@ export module PropertyConfig {
         //#region 自定义属性
         /**属性开始 */
         CUSTOM_PROPS_START = modifierfunction.MODIFIER_FUNCTION_INVALID + 1000,
+
         STATS_STRENGTH_BASE,
         STATS_STRENGTH_BASE_PERCENTAGE,
-        STATS_STRENGTH_BONUS_CONSTANT,
+        STATS_STRENGTH_BONUS,
+
+        /**@deprecated */
+        STATS_STRENGTH_BONUS_PERCENTAGE,
         STATS_STRENGTH_PERCENTAGE,
         STATS_STRENGTH_BONUS_NO_PERCENTAGE,
+
         STATS_AGILITY_BASE,
         STATS_AGILITY_BASE_PERCENTAGE,
-        STATS_AGILITY_BONUS_CONSTANT,
+        STATS_AGILITY_BONUS,
+        /**@deprecated */
+        STATS_AGILITY_BONUS_PERCENTAGE,
         STATS_AGILITY_PERCENTAGE,
         STATS_AGILITY_BONUS_NO_PERCENTAGE,
+
         STATS_INTELLECT_BASE,
         STATS_INTELLECT_BASE_PERCENTAGE,
-        STATS_INTELLECT_BONUS_CONSTANT,
+        STATS_INTELLECT_BONUS,
+        /**@deprecated */
+        STATS_INTELLECT_BONUS_PERCENTAGE,
         STATS_INTELLECT_PERCENTAGE,
         STATS_INTELLECT_BONUS_NO_PERCENTAGE,
+
         STATS_ALL_BASE,
         STATS_ALL_BONUS,
         STATS_ALL_PERCENTAGE,
         STATS_PRIMARY_BASE,
         STATS_PRIMARY_BONUS,
         STATS_PRIMARY_PERCENTAGE,
+
         STATS_NO_ALL_ARMOR,
         STATUS_RESISTANCE_FORCE,
+
+        // 额外基础攻击力(白字)
+        BASEATTACK_BONUSDAMAGE,
         /**额外攻击力,绿字部分 */
-        ATTACK_DAMAGE_BONUS,
+        PREATTACK_BONUS_DAMAGE,
         /**额外攻击力百分比 */
-        ATTACK_DAMAGE_BONUS_PERCENTAGE,
+        PREATTACK_BONUS_DAMAGE_PERCENTAGE,
         /**基础攻击力百分比 */
-        ATTACK_DAMAGE_BASE_PERCENTAGE,
+        BASEATTACK_DAMAGE_PERCENTAGE,
         /**最终攻击力百分比 */
         ATTACK_DAMAGE_PERCENTAGE,
+
         /**基础生命值 */
-        HP_BASE,
-        HP_BONUS,
+        HEALTH_BASE,
+        HEALTH_BONUS,
         /**额外生命百分比  */
-        HP_BONUS_PERCENTAGE,
+        HEALTH_BONUS_PERCENTAGE,
         /**最终生命百分比  */
-        HP_PERCENTAGE,
-        HP_PERCENT_ENEMY,
+        HEALTH_PERCENTAGE,
+        HEALTH_PERCENT_ENEMY,
+
 
         MANA_PERCENTAGE,
         MANA_REGEN_AMPLIFY_PERCENTAGE,
+
         ENERGY_BONUS,
         ENERGY_BONUS_PERCENTAGE,
         ENERGY_REGEN_CONSTANT,
         ENERGY_REGEN_PERCENTAGE,
 
+        // 物理护甲计算
         PHYSICAL_ARMOR_BASE,
-        MAGICAL_ARMOR_BASE,
-        MAGICAL_ARMOR_BASE_PERCENTAGE,
-        MAGICAL_ARMOR_BONUS,
-        MAGICAL_ARMOR_PERCENTAGE,
-
-        IGNORE_PHYSICAL_ARMOR_CONSTANT,
-        IGNORE_MAGICAL_ARMOR_CONSTANT,
+        PHYSICAL_ARMOR_BONUS,
+        PHYSICAL_ARMOR_BONUS_UNIQUE,
+        PHYSICAL_ARMOR_BONUS_UNIQUE_ACTIVE,
+        PHYSICAL_ARMOR_BASE_PERCENTAGE,
+        PHYSICAL_ARMOR_TOTAL_PERCENTAGE,
+        IGNORE_PHYSICAL_ARMOR,
         IGNORE_PHYSICAL_ARMOR_UNIQUE,
         IGNORE_PHYSICAL_ARMOR_PERCENTAGE,
         IGNORE_PHYSICAL_ARMOR_PERCENTAGE_TARGET,
         IGNORE_PHYSICAL_ARMOR_PERCENTAGE_UNIQUE,
+
+        // 魔法护甲计算
+        MAGICAL_ARMOR_BASE,
+        MAGICAL_ARMOR_BASE_PERCENTAGE,
+        MAGICAL_ARMOR_BONUS,
+        MAGICAL_ARMOR_PERCENTAGE,
         IGNORE_MAGICAL_ARMOR,
         IGNORE_MAGICAL_ARMOR_UNIQUE,
         IGNORE_MAGICAL_ARMOR_PERCENTAGE,
         IGNORE_MAGICAL_ARMOR_PERCENTAGE_TARGET,
         IGNORE_MAGICAL_ARMOR_PERCENTAGE_UNIQUE,
+        MAGICAL_RESISTANCE_BONUS,// 魔法抗性计算
 
-        CRITICALSTRIKE,
+        // 技能增强
+        SPELL_AMPLIFY_PERCENTAGE,
+        SPELL_AMPLIFY_PERCENTAGE_UNIQUE,
+        SPELL_AMPLIFY_BONUS_PERCENTAGE,
+
+        /**额外召唤物召唤时间 */
+        SUMMON_DURATION_BONUS,
+        SUMMON_DURATION_PECT,
+
+        // 不发生普攻暴击
+        OUTGOING_NO_CRITICALSTRIKE,
+        // 不受到普攻暴击
+        INCOMING_NO_CRITICALSTRIKE,
+        // 不发生技能暴击
+        OUTGOING_NO_SPELL_CRITICALSTRIKE,
+        // 不受到技能暴击
+        INCOMING_NO_SPELL_CRITICALSTRIKE,
+        // 普攻释放造成伤害触发，返回暴击倍率
+        PREATTACK_CRITICALSTRIKE_UNIQUE,
+        // 普攻暴击率
         CRITICALSTRIKE_CHANCE,
         // 普攻暴击伤害
         CRITICALSTRIKE_DAMAGE,
-        SPELL_AMPLIFY_BASE,
-        SPELL_AMPLIFY_BONUS,
-        SPELL_AMPLIFY_BONUS_UNIQUE,
-        SPELL_CRITICALSTRIKE,
+        // 技能释放造成伤害触发，返回暴击倍率
+        SPELL_CRITICALSTRIKE_UNIQUE,
+        // 技能暴击率
         SPELL_CRITICALSTRIKE_CHANCE,
-        SPELL_CRITICALSTRIKE_CHANCE_TARGET,
         SPELL_CRITICALSTRIKE_DAMAGE,
+        // 受到技能暴击概率百分比
+        INCOMING_SPELL_CRITICALSTRIKE_CHANCE,
+        // 受到技能暴击伤害加深百分比
+        INCOMING_SPELL_CRITICALSTRIKE_DAMAGE_PERCENTAGE,
+        // 受到普攻暴击伤害加深百分比
+        INCOMING_CRITICALSTRIKE_DAMAGE_PERCENTAGE,
+        SPELL_CRITICALSTRIKE_MIX_PERCENT,
+        CRITICALSTRIKE_MIX_PERCENT,
+
         MAX_ATTACKSPEED_BONUS_UNABLE,
         MAX_ATTACKSPEED_BONUS,
         BASE_ATTACK_TIME_ADJUST,
@@ -948,16 +1009,20 @@ export module PropertyConfig {
         // 状态抗性
         STATUS_RESISTANCE_BONUS,
         OUTGOING_DAMAGE_PERCENTAGE,
-        OUTGOING_ALL_DAMAGE_PERCENTAGE,
         OUTGOING_PHYSICAL_DAMAGE_PERCENTAGE,
         OUTGOING_MAGICAL_DAMAGE_PERCENTAGE,
         OUTGOING_PURE_DAMAGE_PERCENTAGE,
+
         OUTGOING_ATTACK_DAMAGE_PERCENTAGE,
-        OUTGOING_SPELL_DAMAGE_PERCENTAGE,
+
+        // 受到伤害加深
+        INCOMING_DAMAGE_PERCENTAGE,
+        INCOMING_PHYSICAL_DAMAGE_PERCENTAGE,
         INCOMING_MAGICAL_DAMAGE_PERCENTAGE,
         INCOMING_PURE_DAMAGE_PERCENTAGE,
         INCOMING_ATTACK_DAMAGE_PERCENTAGE,
         INCOMING_SPELL_DAMAGE_PERCENTAGE,
+
         /**--------毒相关--------- */
         /**受到毒伤害加深 */
         INCOMING_POISON_DAMAGE_PERCENTAGE,
@@ -969,9 +1034,6 @@ export module PropertyConfig {
         /**毒素免疫 */
         POISON_IMMUNE,
 
-        /**额外召唤物召唤时间 */
-        SUMMON_DURATION_BONUS,
-        SUMMON_DURATION_PECT,
         /**流血相关 */
         INCOMING_BLEED_DAMAGE_PERCENTAGE,
         OUTGOING_BLEED_DAMAGE_PERCENTAGE,
@@ -979,26 +1041,18 @@ export module PropertyConfig {
         INCOMING_SHOCK_DAMAGE_PERCENTAGE,
         INCOMING_SHOCK_COUNT_PERCENTAGE,
         OUTGOING_SHOCK_COUNT_PERCENTAGE,
-        OUTGOING_MAGICAL_DAMAGE_CONSTANT,
-        OUTGOING_DAMAGE_PERCENTAGE_SPECIAL,
-        OUTGOING_PURE_DAMAGE_CONSTANT,
         /**持续性伤害加深 */
         INCOMING_DOT_DAMAGE_PERCENTAGE,
-        INCOMING_SHOCK_DAMAGE_PERCENTAG,
-        INCOMING_CRITICALSTRIKE_PERCENT,
-        OUTGOING_PHYSICAL_DAMAGE_CONSTANT,
         INCOMING_DAMAGE_PERCENTAGE_ENEMY,
-        TARGET_CRITICALSTRIKE,
 
-        SPELL_CRITICALSTRIKE_MIX_PERCENT,
-        SPELL_CRITICALSTRIKE_DAMAGE_TOTAL,
-        INCOMING_SPELL_CRITICALSTRIKE_DAMAGE_CONSTANT,
-        NO_SPELL_CRITICALSTRIKE,
-        CRITICALSTRIKE_MIX_PERCENT,
-        INCOMING_CRITICALSTRIKE_DAMAGE_CONSTANT,
-        NO_CRITICALSTRIKE,
+
+
+
+
+
+
         MAX_COOLDOWN_PERCENTAGE,
-        CRITICALSTRIKE_DAMAGE_TOTAL,
+
 
         SPELL_EVASION,
         //#endregion
@@ -1806,6 +1860,10 @@ export module PropertyConfig {
     export const CustomDeclarePropertyEvent: Set<modifierfunction> = new Set([
         // 额外基础攻击力
         modifierfunction.MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE,
+        // 攻击前额外物理伤害
+        // modifierfunction.MODIFIER_PROPERTY_PROCATTACK_BONUS_DAMAGE_PHYSICAL,
+        // 受到攻击额外技能伤害
+        // modifierfunction.MODIFIER_PROPERTY_INCOMING_SPELL_DAMAGE_CONSTANT,
         //  CD减少百分比
         modifierfunction.MODIFIER_PROPERTY_COOLDOWN_PERCENTAGE,
         //  闪避
@@ -1826,20 +1884,19 @@ export module PropertyConfig {
         modifierfunction.MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
         // 攻击暴击
         modifierfunction.MODIFIER_PROPERTY_PREATTACK_CRITICALSTRIKE,
+        modifierfunction.MODIFIER_PROPERTY_PREATTACK_TARGET_CRITICALSTRIKE,
+        // 用于计算技能暴击
+        modifierfunction.MODIFIER_PROPERTY_TOTALDAMAGEOUTGOING_PERCENTAGE,
         // 技能面板数值覆盖
         modifierfunction.MODIFIER_PROPERTY_OVERRIDE_ABILITY_SPECIAL,
         // 技能面板数值覆盖
         modifierfunction.MODIFIER_PROPERTY_OVERRIDE_ABILITY_SPECIAL_VALUE,
 
-        modifierfunction.MODIFIER_PROPERTY_PREATTACK_TARGET_CRITICALSTRIKE,
-
-        modifierfunction.MODIFIER_PROPERTY_TOTALDAMAGEOUTGOING_PERCENTAGE,
-
-        modifierfunction.MODIFIER_PROPERTY_DAMAGEOUTGOING_PERCENTAGE,
+        // modifierfunction.MODIFIER_PROPERTY_DAMAGEOUTGOING_PERCENTAGE,
 
         modifierfunction.MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE,
 
-        modifierfunction.MODIFIER_PROPERTY_INCOMING_SPELL_DAMAGE_CONSTANT,
+
     ]);
     /**唯一值属性，计算式不累加，求最大值 */
     export const UNIQUE_PROPERTY = [
@@ -1855,11 +1912,18 @@ export module PropertyConfig {
         EMODIFIER_PROPERTY.SPELL_AMPLIFY_PERCENTAGE_UNIQUE,
         EMODIFIER_PROPERTY.MOVESPEED_BONUS_CONSTANT_UNIQUE_2,
         EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE_UNIQUE,
-        EMODIFIER_PROPERTY.MAGICAL_RESISTANCE_DECREPIFY_UNIQUE,
+        // EMODIFIER_PROPERTY.MAGICAL_RESISTANCE_DECREPIFY_UNIQUE,
         EMODIFIER_PROPERTY.BASEDAMAGEOUTGOING_PERCENTAGE_UNIQUE,
         EMODIFIER_PROPERTY.IGNORE_MAGICAL_ARMOR_PERCENTAGE_UNIQUE,
         EMODIFIER_PROPERTY.IGNORE_PHYSICAL_ARMOR_PERCENTAGE_UNIQUE,
+        // 暴击倍率不合并，取最大值
+        EMODIFIER_PROPERTY.PREATTACK_CRITICALSTRIKE_UNIQUE,
+        EMODIFIER_PROPERTY.SPELL_CRITICALSTRIKE_UNIQUE,
+
     ];
+
+
+
 }
 
 declare global {

@@ -44,7 +44,7 @@ export class ability6_lycan_shapeshift extends BaseAbility_Plus {
         modifier_lycan_6_transform.apply(hCaster, hCaster, this, { duration: transformation_time })
 
         this.addTimer(transformation_time, () => {
-            if (GFuncEntity.IsValid(hCaster) && hCaster.IsAlive()) {
+            if (IsValid(hCaster) && hCaster.IsAlive()) {
                 modifier_lycan_6_form.apply(hCaster, hCaster, this, { duration: duration })
             }
         })
@@ -90,7 +90,7 @@ export class modifier_lycan_6 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -225,7 +225,7 @@ export class modifier_lycan_6_form extends BaseModifier_Plus {
     }
     GetAuraEntityReject(hEntity: IBaseNpc_Plus) {
         let hCaster = this.GetCasterPlus()
-        if (!GFuncEntity.IsValid(hCaster)) {
+        if (!IsValid(hCaster)) {
             return true
         }
         if (hEntity.GetPlayerOwnerID() != hCaster.GetPlayerOwnerID()) {
@@ -255,7 +255,7 @@ export class modifier_lycan_6_form extends BaseModifier_Plus {
             this.SetStackCount(hParent.GetMaxHealth() * this.bonus_health_damage * 0.01)
             this.StartIntervalThink(0)
             let modifier_lycan1 = modifier_lycan_1.findIn(hParent)
-            if (GFuncEntity.IsValid(modifier_lycan1)) {
+            if (IsValid(modifier_lycan1)) {
                 modifier_lycan1.OnIntervalThink()
             }
         }
@@ -273,7 +273,7 @@ export class modifier_lycan_6_form extends BaseModifier_Plus {
             this.SetStackCount(hParent.GetMaxHealth() * this.bonus_health_damage * 0.01)
 
             let modifier_lycan1 = modifier_lycan_1.findIn(hParent)
-            if (GFuncEntity.IsValid(modifier_lycan1)) {
+            if (IsValid(modifier_lycan1)) {
                 modifier_lycan1.OnIntervalThink()
             }
         }
@@ -293,10 +293,10 @@ export class modifier_lycan_6_form extends BaseModifier_Plus {
         let hParent = this.GetParentPlus()
         if (IsServer()) {
             let modifier_lycan1 = modifier_lycan_1.findIn(hParent)
-            if (GFuncEntity.IsValid(modifier_lycan1)) {
+            if (IsValid(modifier_lycan1)) {
                 modifier_lycan1.OnIntervalThink()
             }
-            if (GFuncEntity.IsValid(this.hBuffPtcl)) {
+            if (IsValid(this.hBuffPtcl)) {
                 this.hBuffPtcl.Destroy()
             }
         }
@@ -312,7 +312,7 @@ export class modifier_lycan_6_form extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS_STACKING)
     GetCastRangeBonusStacking(params: ModifierAbilityEvent) {
-        if (GFuncEntity.IsValid(params.ability) &&
+        if (IsValid(params.ability) &&
             GameFunc.IncludeArgs(params.ability.GetBehaviorInt(), DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_ATTACK)[0]) {
             return this.bonus_attack_range
         }
@@ -371,7 +371,7 @@ export class modifier_lycan_6_aura extends BaseModifier_Plus {
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     GetPreAttack_BonusDamage(params: IModifierTable) {
-        if (!GFuncEntity.IsValid(this.GetCasterPlus()) || this.GetParentPlus() == this.GetCasterPlus()) {
+        if (!IsValid(this.GetCasterPlus()) || this.GetParentPlus() == this.GetCasterPlus()) {
             return 0
         }
         return modifier_lycan_6_form.GetStackIn(this.GetCasterPlus())
@@ -380,7 +380,7 @@ export class modifier_lycan_6_aura extends BaseModifier_Plus {
     CC_GetModifierCriticalStrike(params: IModifierTable) {
         if (params.attacker == this.GetParentPlus() && !params.attacker.PassivesDisabled() && UnitFilter(params.target, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, params.attacker.GetTeamNumber()) == UnitFilterResult.UF_SUCCESS) {
             let hCaster = this.GetCasterPlus()
-            let extra_crit_chance = (GFuncEntity.IsValid(hCaster) && hCaster.HasTalent("special_bonus_unique_lycan_custom_7")) && hCaster.GetTalentValue("special_bonus_unique_lycan_custom_7") || 0
+            let extra_crit_chance = (IsValid(hCaster) && hCaster.HasTalent("special_bonus_unique_lycan_custom_7")) && hCaster.GetTalentValue("special_bonus_unique_lycan_custom_7") || 0
             let crit_chance = this.crit_chance + extra_crit_chance
             if (GFuncMath.PRD(crit_chance, params.attacker, "lycan_3")) {
                 return this.crit_multiplier

@@ -188,7 +188,7 @@ export class GameDebugger extends SingletonClass {
             let hero = player.Hero;
             // npc_dota_target_dummy unit_target_dummy
             let hDummy = BaseNpc_Plus.CreateUnitByName("unit_target_dummy", hero.GetAbsOrigin(), null, true, DOTATeam_t.DOTA_TEAM_BADGUYS)
-            if (GFuncEntity.IsValid(hDummy)) {
+            if (IsValid(hDummy)) {
                 modifier_dummy_damage.apply(hDummy, hDummy);
                 hDummy.SetControllableByPlayer(e.PlayerID, false);
                 hDummy.Hold();
@@ -202,10 +202,10 @@ export class GameDebugger extends SingletonClass {
             const buffinfo = modifier_dummy_damage.GetAllInstance();
             Object.values(buffinfo).forEach((buff) => {
                 const hUnit = buff.GetParentPlus();
-                if (GFuncEntity.IsValid(hUnit)) {
+                if (IsValid(hUnit)) {
                     hUnit.MakeIllusion();
                     hUnit.AddNoDraw();
-                    GFuncEntity.SafeDestroyUnit(hUnit);
+                    SafeDestroyUnit(hUnit);
                 }
             })
         }));

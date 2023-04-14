@@ -68,7 +68,7 @@ export class modifier_ursa_3 extends BaseModifier_Plus {
 
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
     attackLanded(params: ModifierAttackEvent) {
-        if (!GFuncEntity.IsValid(params.target) || params.target.GetClassname() == "dota_item_drop") { return }
+        if (!IsValid(params.target) || params.target.GetClassname() == "dota_item_drop") { return }
         if (params.attacker == this.GetParentPlus() && !params.attacker.IsIllusion() && !params.attacker.PassivesDisabled()) {
             modifier_ursa_3_buff.apply(params.attacker, params.attacker, this.GetAbilityPlus(),
                 { duration: ((params.attacker as IBaseNpc_Plus).HasShard() && this.shard_bonus_reset_time || this.bonus_reset_time) })
@@ -131,7 +131,7 @@ export class modifier_ursa_3_buff extends BaseModifier_Plus {
         if (IsServer()) {
             let iStackCount = 1
             let hModifier = modifier_ursa_6_buff.findIn(this.GetParentPlus())
-            if (GFuncEntity.IsValid(hModifier)) {
+            if (IsValid(hModifier)) {
                 iStackCount = iStackCount * hModifier.enrage_multiplier
             }
             if (hCaster.HasShard()) {

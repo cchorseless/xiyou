@@ -22,7 +22,7 @@ export class t23_howl extends BaseAbility_Plus {
 
         //  唤醒光环
         // let combination_t23_wakeup  = combination_t23_wakeup.findIn(  hCaster )
-        // let has_combination_t23_wakeup = GFuncEntity.IsValid(combination_t23_wakeup) && combination_t23_wakeup.IsActivated()
+        // let has_combination_t23_wakeup = IsValid(combination_t23_wakeup) && combination_t23_wakeup.IsActivated()
         // if (has_combination_t23_wakeup) {
         //     // combination_t23_wakeup.WakeUp()
         // }
@@ -72,7 +72,7 @@ export class modifier_t23_howl extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return

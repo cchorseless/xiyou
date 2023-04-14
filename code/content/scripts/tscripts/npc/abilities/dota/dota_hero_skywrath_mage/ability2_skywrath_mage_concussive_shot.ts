@@ -87,14 +87,14 @@ export class ability2_skywrath_mage_concussive_shot extends BaseAbility_Plus {
         EmitSoundOnLocationWithCaster(vLocation, ResHelper.GetSoundReplacement("Hero_SkywrathMage.ConcussiveShot.Target", hCaster), hCaster)
 
         let tHashtable = HashTableHelper.GetHashtableByIndex(ExtraData.hashtable_index || -1)
-        if (tHashtable != null && GFuncEntity.IsValid(tHashtable.hModifier)) {
+        if (tHashtable != null && IsValid(tHashtable.hModifier)) {
             tHashtable.hModifier.Destroy()
         }
     }
     OnSpellStart() {
         let hCaster = this.GetCasterPlus()
         let hTarget = this.GetCursorTarget()
-        if (!GFuncEntity.IsValid(hTarget) || !hTarget.IsAlive()) {
+        if (!IsValid(hTarget) || !hTarget.IsAlive()) {
             return
         }
         if (!hTarget.TriggerSpellAbsorb(this)) {
@@ -110,7 +110,7 @@ export class ability2_skywrath_mage_concussive_shot extends BaseAbility_Plus {
                 if (extra_count < 0) {
                     break
                 }
-                if (GFuncEntity.IsValid(hUnit) && hUnit != hTarget) {
+                if (IsValid(hUnit) && hUnit != hTarget) {
                     this.ConcussiveShot(hUnit, false)
                 }
             }
@@ -154,7 +154,7 @@ export class modifier_skywrath_mage_2 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return

@@ -40,7 +40,7 @@ export class ability6_abyssal_underlord_dark_rift extends BaseAbility_Plus {
         let hCaster = this.GetCasterPlus()
         let hTarget = this.GetCursorTarget()
         let vPosition = this.GetCursorPosition()
-        if (GFuncEntity.IsValid(hTarget) && hTarget.IsAlive()) {
+        if (IsValid(hTarget) && hTarget.IsAlive()) {
             if (hTarget.TriggerSpellAbsorb(this)) {
                 return
             }
@@ -52,7 +52,7 @@ export class ability6_abyssal_underlord_dark_rift extends BaseAbility_Plus {
             let teleport_radius = this.GetSpecialValueFor("teleport_radius")
 
             let hModifier = modifier_abyssal_underlord_6_target.apply(hTarget, hCaster, this, { duration: teleport_delay })
-            if (GFuncEntity.IsValid(hModifier)) {
+            if (IsValid(hModifier)) {
                 // hModifier.tUnits = []
                 // table.insert(hModifier.tUnits, hTarget)
                 // let tTargets = Spawner.GetMissing(iPlayerID)
@@ -124,7 +124,7 @@ export class modifier_abyssal_underlord_6 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -150,7 +150,7 @@ export class modifier_abyssal_underlord_6 extends BaseModifier_Plus {
 
             if (targets[0] != null && ability.IsAbilityReady()) {
                 // let n = caster.GetPlayerOwnerID() + 1
-                // if (GFuncEntity.IsValid(Spawner.Spawner[n])) {
+                // if (IsValid(Spawner.Spawner[n])) {
                 //     let cal_distance = (hUnit) => { //  优先向离诞生点最近的单位释放
                 //         return (Spawner.Spawner[n]: GetAbsOrigin() - hUnit.GetAbsOrigin()).Length2D()
                 //     }
@@ -232,10 +232,10 @@ export class modifier_abyssal_underlord_6_target extends BaseModifier_Plus {
             let hParent = this.GetParentPlus()
             let hAbility = this.GetAbilityPlus()
             let vLoction = hParent.GetAbsOrigin()
-            if (GFuncEntity.IsValid(hCaster) && GFuncEntity.IsValid(hAbility)) {
+            if (IsValid(hCaster) && IsValid(hAbility)) {
                 let iUnitCount = 0
                 for (let hTarget of (this.tUnits)) {
-                    if (GFuncEntity.IsValid(hTarget) && hTarget.IsAlive()) {
+                    if (IsValid(hTarget) && hTarget.IsAlive()) {
                         if (!hTarget.IsAncient()) {
                             FindClearSpaceForUnit(hTarget, (vLoction + RandomVector(1) * RandomFloat(0, 125) as Vector), true)
                         }
@@ -248,10 +248,10 @@ export class modifier_abyssal_underlord_6_target extends BaseModifier_Plus {
                 }
                 // 延迟一帧，不然吃不到4技能的光环效果
                 hCaster.addFrameTimer(1, () => {
-                    if (GFuncEntity.IsValid(hCaster) && GFuncEntity.IsValid(hParent)) {
+                    if (IsValid(hCaster) && IsValid(hParent)) {
                         let fDamage = this.base_damage + this.damage * iStr * (1 + iUnitCount * this.damage_per_unit * 0.01)
                         for (let hTarget of (this.tUnits)) {
-                            if (GFuncEntity.IsValid(hTarget) && hTarget.IsAlive()) {
+                            if (IsValid(hTarget) && hTarget.IsAlive()) {
                                 let damage_table = {
                                     ability: hAbility,
                                     victim: hTarget,
@@ -274,12 +274,12 @@ export class modifier_abyssal_underlord_6_target extends BaseModifier_Plus {
 
                         if (hCaster.HasScepter()) {
                             let hAbility1 = ability1_abyssal_underlord_firestorm.findIn(hCaster)
-                            if (GFuncEntity.IsValid(hAbility1) && hAbility1.OnSpellStart != null) {
+                            if (IsValid(hAbility1) && hAbility1.OnSpellStart != null) {
                                 hCaster.SetCursorPosition(hParent.GetAbsOrigin())
                                 hAbility1.OnSpellStart()
                             }
                             let hAbility2 = ability2_abyssal_underlord_pit_of_malice.findIn(hCaster)
-                            if (GFuncEntity.IsValid(hAbility2) && hAbility2.OnSpellStart != null) {
+                            if (IsValid(hAbility2) && hAbility2.OnSpellStart != null) {
                                 hCaster.SetCursorPosition(hParent.GetAbsOrigin())
                                 hAbility2.OnSpellStart()
                             }

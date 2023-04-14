@@ -35,8 +35,8 @@ export class modifier_particle_thinker extends modifier_particle {
     BeDestroy() {
 
         if (IsServer()) {
-            if (GFuncEntity.IsValid(this.GetParentPlus())) {
-                GFuncEntity.SafeDestroyUnit(this.GetParentPlus())
+            if (IsValid(this.GetParentPlus())) {
+                SafeDestroyUnit(this.GetParentPlus())
             }
         }
     }

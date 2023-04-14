@@ -83,7 +83,7 @@ export class modifier_jakiro_6 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -207,7 +207,7 @@ export class modifier_jakiro_6_thinker extends BaseModifier_Plus {
         let hParent = this.GetParentPlus()
         let hCaster = this.GetCasterPlus()
         if (IsServer()) {
-            if (GFuncEntity.IsValid(hParent)) {
+            if (IsValid(hParent)) {
                 UTIL_Remove(hParent)
             }
         }
@@ -271,7 +271,7 @@ export class modifier_jakiro_6_burn_debuff extends BaseModifier_Plus {
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
         if (IsServer()) {
-            if (!GFuncEntity.IsValid(hCaster) || !hCaster.IsAlive() || !GFuncEntity.IsValid(hAbility)) {
+            if (!IsValid(hCaster) || !hCaster.IsAlive() || !IsValid(hAbility)) {
                 this.Destroy()
                 return
             }
@@ -289,7 +289,7 @@ export class modifier_jakiro_6_burn_debuff extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
     CC_GetModifierIncomingDamagePercentage(params: IModifierTable) {
-        if (params != null && GFuncEntity.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().IsAlive() && params.attacker == this.GetCasterPlus()) {
+        if (params != null && IsValid(this.GetCasterPlus()) && this.GetCasterPlus().IsAlive() && params.attacker == this.GetCasterPlus()) {
             return this.GetCasterPlus().GetTalentValue("special_bonus_unique_jakiro_custom_8")
         }
     }

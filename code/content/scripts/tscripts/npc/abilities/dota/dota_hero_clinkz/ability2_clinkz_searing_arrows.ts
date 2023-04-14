@@ -29,11 +29,11 @@ export class ability2_clinkz_searing_arrows extends BaseAbility_Plus {
         modifier_clinkz_2_bonus_attackspeed.apply(caster, caster, this, { duration: duration })
         // let clinkz_6 = ability6_clinkz_death_pact.findIn(caster);
         let clinkz_6 = caster.FindAbilityByName("ability6_clinkz_death_pact") as ability6_clinkz_death_pact;
-        if (GFuncEntity.IsValid(clinkz_6)) {
+        if (IsValid(clinkz_6)) {
             if (clinkz_6.tArmys != null) {
                 for (let hArmy of (clinkz_6.tArmys)) {
 
-                    if (GFuncEntity.IsValid(hArmy)) {
+                    if (IsValid(hArmy)) {
                         modifier_clinkz_2_bonus_attackspeed.apply(hArmy, caster, this, { duration: duration })
                     }
                 }
@@ -91,7 +91,7 @@ export class modifier_clinkz_2 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return

@@ -55,7 +55,7 @@ export class ability1_dragon_knight_breathe_fire extends BaseAbility_Plus {
 
         let iDragonLevel = 0
         let hModifier = modifier_dragon_knight_6_form.findIn(hCaster)
-        if (GFuncEntity.IsValid(hModifier)) {
+        if (IsValid(hModifier)) {
             iDragonLevel = hModifier.iLevel || iDragonLevel
         }
 
@@ -94,7 +94,7 @@ export class ability1_dragon_knight_breathe_fire extends BaseAbility_Plus {
         hCaster.EmitSound(ResHelper.GetSoundReplacement("Hero_DragonKnight.BreathFire", hCaster))
     }
     OnProjectileHit_ExtraData(hTarget: IBaseNpc_Plus, vLocation: Vector, ExtraData: any) {
-        if (GFuncEntity.IsValid(hTarget)) {
+        if (IsValid(hTarget)) {
             let hCaster = this.GetCasterPlus()
             let sTalentName = "special_bonus_unique_dragon_knight_custom_6"
             let burning_duration = this.GetSpecialValueFor("burning_duration") + hCaster.GetTalentValue(sTalentName)
@@ -153,7 +153,7 @@ export class modifier_dragon_knight_1 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -241,7 +241,7 @@ export class modifier_dragon_knight_1_thinker extends BaseModifier_Plus {
                 this.burning_radius = this.burning_radius + this.extra_burning_radius
             }
             let ability = this.GetAbilityPlus() as ability1_dragon_knight_breathe_fire
-            if (GFuncEntity.IsValid(this.GetAbilityPlus())) {
+            if (IsValid(this.GetAbilityPlus())) {
                 ability.burning_count = (ability.burning_count || 0) + 1
             }
 
@@ -265,7 +265,7 @@ export class modifier_dragon_knight_1_thinker extends BaseModifier_Plus {
             UTIL_Remove(this.GetParentPlus())
             let ability = this.GetAbilityPlus() as ability1_dragon_knight_breathe_fire
 
-            if (GFuncEntity.IsValid(this.GetAbilityPlus())) {
+            if (IsValid(this.GetAbilityPlus())) {
                 ability.burning_count = (ability.burning_count || 0) - 1
             }
         }
@@ -273,7 +273,7 @@ export class modifier_dragon_knight_1_thinker extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let caster = this.GetCasterPlus()
-            if (!GFuncEntity.IsValid(caster)) {
+            if (!IsValid(caster)) {
                 this.Destroy()
                 return
             }
@@ -296,7 +296,7 @@ export class modifier_dragon_knight_1_thinker extends BaseModifier_Plus {
                     attacker: caster,
                     damage: damage * this.tick_time,
                     damage_type: DAMAGE_TYPES.DAMAGE_TYPE_PHYSICAL,
-                    eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_DOT,
+                    extra_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_DOT,
                 }
                 BattleHelper.GoApplyDamage(tDamageTable)
             }
@@ -354,7 +354,7 @@ export class modifier_dragon_knight_1_burning extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let caster = this.GetCasterPlus()
-            if (!GFuncEntity.IsValid(caster)) {
+            if (!IsValid(caster)) {
                 this.Destroy()
                 return
             }
@@ -365,7 +365,7 @@ export class modifier_dragon_knight_1_burning extends BaseModifier_Plus {
                 attacker: caster,
                 damage: damage,
                 damage_type: DAMAGE_TYPES.DAMAGE_TYPE_PHYSICAL,
-                eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_DOT,
+                extra_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_DOT,
             }
             BattleHelper.GoApplyDamage(tDamageTable)
         }

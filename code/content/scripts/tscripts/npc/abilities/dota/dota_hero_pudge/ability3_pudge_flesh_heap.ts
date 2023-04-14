@@ -61,12 +61,12 @@ export class modifier_pudge_3 extends BaseModifier_Plus {
         let hAttacker = params.attacker
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
-        if (GFuncEntity.IsValid(hAttacker) && hAttacker.GetUnitLabel() != "builder") {
+        if (IsValid(hAttacker) && hAttacker.GetUnitLabel() != "builder") {
             if (hAttacker.GetTeamNumber() == params.unit.GetTeamNumber()) {
                 return
             }
             hAttacker = hAttacker.GetSource()
-            if (GFuncEntity.IsValid(hAttacker) && !hAttacker.IsIllusion() && !hAttacker.PassivesDisabled()
+            if (IsValid(hAttacker) && !hAttacker.IsIllusion() && !hAttacker.PassivesDisabled()
                 // && !Spawner.IsEndless()
             ) {
                 // 非击杀

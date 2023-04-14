@@ -48,7 +48,7 @@ export class ability1_necrolyte_death_pulse extends BaseAbility_Plus {
         }
     }
     _OnSpellStart(hTarget: IBaseNpc_Plus, vSourceLoc: Vector) {
-        if (GFuncEntity.IsValid(hTarget)) {
+        if (IsValid(hTarget)) {
             let hCaster = this.GetCasterPlus()
             let speed = this.GetSpecialValueFor("speed")
             let info: CreateTrackingProjectileOptions = {
@@ -63,7 +63,7 @@ export class ability1_necrolyte_death_pulse extends BaseAbility_Plus {
     }
     OnProjectileHit_ExtraData(hTarget: IBaseNpc_Plus, vLocation: Vector, ExtraData: any) {
         let hCaster = this.GetCasterPlus()
-        if (GFuncEntity.IsValid(hTarget)) {
+        if (IsValid(hTarget)) {
             let base_damage = this.GetSpecialValueFor("base_damage")
             let intellect_damage_factor = this.GetSpecialValueFor("intellect_damage_factor")
 
@@ -203,7 +203,7 @@ export class modifier_special_bonus_unique_necrolyte_custom_4 extends BaseModifi
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     On_Tooltip() {
-        if (GFuncEntity.IsValid(this.GetCasterPlus())) {
+        if (IsValid(this.GetCasterPlus())) {
             return this.GetCasterPlus().GetTalentValue("special_bonus_unique_necrolyte_custom_4", "bonus_spell_damage_pct")
         }
         return 0

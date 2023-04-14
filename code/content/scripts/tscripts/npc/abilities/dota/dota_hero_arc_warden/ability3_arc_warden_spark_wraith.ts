@@ -28,7 +28,7 @@ export class ability3_arc_warden_spark_wraith extends BaseAbility_Plus {
         // let max_count = this.GetSpecialValueFor("max_count") + hCaster.GetTalentValue("special_bonus_unique_arc_warden_custom_8")
         // for (let i = 1; i <= max_count; i++) {
         //     let hClone = arc_warden_4_table[i]
-        //     if (GFuncEntity.IsValid(hClone)) {
+        //     if (IsValid(hClone)) {
         //         this.LinkCloneProperties(hCaster, hClone)
         //          modifier_arc_warden_3_buff.apply( hClone , hCaster, this, null)
         //         hClone.SetOrigin(hCaster.GetOrigin() + RandomVector(100))
@@ -141,7 +141,7 @@ export class ability3_arc_warden_spark_wraith extends BaseAbility_Plus {
         // hClone.FireClone(hCaster)
         //  天赋极限宝典
         // let buff  = modifier_item_tome_of_stats.findIn(  hCaster ) as IBaseModifier_Plus;
-        // if (GFuncEntity.IsValid(buff)) {
+        // if (IsValid(buff)) {
         //      modifier_item_tome_of_stats.remove( hClone );
         //     let iTomeCount = 100 + hCaster.GetTalentValue("special_bonus_unique_arc_warden_custom_7")
         //    modifier_item_tome_of_stats.apply(hClone, buff.GetCasterPlus(), buff.GetAbilityPlus(), {
@@ -238,7 +238,7 @@ export class modifier_arc_warden_3 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -342,7 +342,7 @@ export class modifier_arc_warden_3_buff extends BaseModifier_Plus {
         if (!IsServer()) {
             return
         }
-        if (!GFuncEntity.IsValid(this.GetCasterPlus())) {
+        if (!IsValid(this.GetCasterPlus())) {
             this.Destroy()
         }
     }

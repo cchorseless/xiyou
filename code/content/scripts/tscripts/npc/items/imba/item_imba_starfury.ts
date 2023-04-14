@@ -83,7 +83,7 @@ export class modifier_imba_shotgun_passive extends BaseModifier_Plus {
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
             1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT,
-            2: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
+            2: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
             3: GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_BONUS,
             4: Enum_MODIFIER_EVENT.ON_ATTACK
         });
@@ -92,7 +92,7 @@ export class modifier_imba_shotgun_passive extends BaseModifier_Plus {
     CC_GetModifierAttackSpeedBonus_Constant(): number {
         return this.bonus_as;
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.bonus_damage;
     }
@@ -267,7 +267,7 @@ export class modifier_imba_starfury_passive extends BaseModifier_Plus {
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
             1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT,
-            2: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
+            2: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
             3: GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_BONUS,
             4: Enum_MODIFIER_EVENT.ON_ATTACK_LANDED,
             5: Enum_MODIFIER_EVENT.ON_ATTACK_FAIL
@@ -277,7 +277,7 @@ export class modifier_imba_starfury_passive extends BaseModifier_Plus {
     CC_GetModifierAttackSpeedBonus_Constant(): number {
         return this.bonus_as;
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.bonus_damage;
     }

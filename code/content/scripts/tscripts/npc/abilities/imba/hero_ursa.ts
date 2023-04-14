@@ -220,7 +220,7 @@ export class modifier_imba_earthshock_movement extends BaseModifierMotionBoth_Pl
         }
         this.GetParentPlus().RemoveHorizontalMotionController(this);
         this.GetParentPlus().RemoveVerticalMotionController(this);
-        if (GFuncEntity.IsValid(this.ability) && this.GetRemainingTime() <= 0) {
+        if (IsValid(this.ability) && this.GetRemainingTime() <= 0) {
             this.ability.ApplyEarthShock();
         }
     }
@@ -508,7 +508,7 @@ export class modifier_imba_overpower_buff extends BaseModifier_Plus {
         return true;
     }
     StatusEffectPriority(): modifierpriority {
-        return 10;
+        return 4;
     }
     /** DeclareFunctions():modifierfunction[] {
         let decFuncs = {
@@ -962,11 +962,11 @@ export class modifier_imba_enrage_talent_buff extends BaseModifier_Plus {
     }
     /** DeclareFunctions():modifierfunction[] {
         let decFuncs = {
-            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS
+            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE
         }
         return Object.values(decFuncs);
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage( /** keys */): number {
         return this.GetStackCount();
     }

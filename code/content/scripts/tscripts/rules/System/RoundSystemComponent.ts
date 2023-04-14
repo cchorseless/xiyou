@@ -62,7 +62,7 @@ export class RoundSystemComponent extends ET.SingletonComponent {
 
     private OnEntityHurtEvent(events: EntityHurtEvent) {
         let hUnit = EntIndexToHScript(events.entindex_attacker) as IBaseNpc_Plus;
-        if (!GFuncEntity.IsValid(hUnit)) {
+        if (!IsValid(hUnit)) {
             return;
         }
         if (!hUnit.ETRoot || !hUnit.ETRoot.AsValid<IEnemyUnitEntityRoot>("EnemyUnitEntityRoot")) {

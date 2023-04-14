@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -99,7 +99,7 @@ export class modifier_imba_static_remnant extends BaseModifier_Plus {
             if (this.ability.IsNull()) {
                 ParticleManager.DestroyParticle(this.remnant_particle_fx, false);
                 ParticleManager.ReleaseParticleIndex(this.remnant_particle_fx);
-                GFuncEntity.SafeDestroyUnit(this.dummy);
+                SafeDestroyUnit(this.dummy);
                 return;
             }
             let remnant_blowup_sound = "Hero_StormSpirit.StaticRemnantExplode";
@@ -151,7 +151,7 @@ export class modifier_imba_static_remnant extends BaseModifier_Plus {
             }
             ParticleManager.DestroyParticle(this.remnant_particle_fx, false);
             ParticleManager.ReleaseParticleIndex(this.remnant_particle_fx);
-            GFuncEntity.SafeDestroyUnit(this.dummy);
+            SafeDestroyUnit(this.dummy);
         }
     }
     CheckState(): Partial<Record<modifierstate, boolean>> {

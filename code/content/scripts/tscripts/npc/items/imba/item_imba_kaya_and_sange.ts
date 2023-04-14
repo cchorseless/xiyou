@@ -69,7 +69,7 @@ export class modifier_item_imba_kaya_and_sange extends BaseModifier_Plus {
     }
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
             2: GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BONUS,
             3: GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BONUS,
             4: GPropertyConfig.EMODIFIER_PROPERTY.COOLDOWN_PERCENTAGE,
@@ -86,7 +86,7 @@ export class modifier_item_imba_kaya_and_sange extends BaseModifier_Plus {
     CC_GetModifierBonusStats_Intellect(): number {
         return this.bonus_intellect;
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.bonus_damage;
     }

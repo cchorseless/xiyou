@@ -19,14 +19,14 @@ export class modifier_sect_health_base_a extends modifier_combination_effect {
         }
     }
 
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
     health_bonus: number
 
     StepChangeModelScale(scale: number, step = 0.02) {
         let parent = this.GetParentPlus();
         parent.TempData().target_scale = scale;
         GTimerHelper.AddFrameTimer(1, GHandler.create(this, () => {
-            if (!GFuncEntity.IsValid(parent)) { return }
+            if (!IsValid(parent)) { return }
             if (parent.TempData().target_scale !== scale) {
                 return
             }

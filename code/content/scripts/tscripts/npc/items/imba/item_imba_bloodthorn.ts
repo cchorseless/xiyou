@@ -78,7 +78,7 @@ export class modifier_item_imba_bloodthorn extends BaseModifier_Plus {
         return Object.values({
             1: GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BONUS,
             2: GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT,
-            3: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
+            3: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
             4: GPropertyConfig.EMODIFIER_PROPERTY.MANA_REGEN_CONSTANT,
             5: GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_PERCENTAGE
         });
@@ -91,7 +91,7 @@ export class modifier_item_imba_bloodthorn extends BaseModifier_Plus {
     CC_GetModifierAttackSpeedBonus_Constant(): number {
         return this.bonus_attack_speed;
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.bonus_damage;
     }
@@ -221,11 +221,11 @@ export class modifier_item_imba_bloodthorn_attacker_crit extends BaseModifier_Pl
     }
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_CRITICALSTRIKE,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_CRITICALSTRIKE_UNIQUE,
             2: Enum_MODIFIER_EVENT.ON_ATTACK_LANDED
         });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_CRITICALSTRIKE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_CRITICALSTRIKE_UNIQUE)
     CC_GetModifierPreAttack_CriticalStrike(p_0: ModifierAttackEvent,): number {
         if (IsServer()) {
             return this.target_crit_multiplier;

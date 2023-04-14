@@ -50,7 +50,7 @@ export class ability1_bounty_hunter_shuriken_toss extends BaseAbility_Plus {
         let ministun = tHashtable.bHasScepter && this.GetSpecialValueFor("scepter_ministun") || this.GetSpecialValueFor("ministun")
         ministun = ministun + extra_ministun
 
-        if (GFuncEntity.IsValid(hTarget)) {
+        if (IsValid(hTarget)) {
             if (hTarget.TriggerSpellAbsorb(this)) {
                 return
             }
@@ -59,7 +59,7 @@ export class ability1_bounty_hunter_shuriken_toss extends BaseAbility_Plus {
 
         tHashtable.count = tHashtable.count + 1
 
-        if (GFuncEntity.IsValid(hTarget)) {
+        if (IsValid(hTarget)) {
             modifier_generic_stunned.apply(hTarget, hCaster, this, { duration: ministun * hTarget.GetStatusResistanceFactor(hCaster) })
 
             let vPosition = hCaster.GetAbsOrigin()
@@ -190,7 +190,7 @@ export class modifier_bounty_hunter_1 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return

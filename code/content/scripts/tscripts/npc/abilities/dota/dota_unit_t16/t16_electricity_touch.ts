@@ -62,7 +62,7 @@ export class modifier_t16_electricity_touch extends BaseModifier_Plus {
         if (IsServer()) {
             let hCaster = this.GetParentPlus()
             let hAbility = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(hCaster) || !GFuncEntity.IsValid(hAbility)) {
+            if (!IsValid(hCaster) || !IsValid(hAbility)) {
                 this.Destroy()
                 return
             }
@@ -75,10 +75,10 @@ export class modifier_t16_electricity_touch extends BaseModifier_Plus {
             }
 
             // let combination_t16_electrical_paralysis  = combination_t16_electrical_paralysis.findIn(  hCaster )
-            // let has_combination_t16_electrical_paralysis = GFuncEntity.IsValid(combination_t16_electrical_paralysis) && combination_t16_electrical_paralysis.IsActivated()
+            // let has_combination_t16_electrical_paralysis = IsValid(combination_t16_electrical_paralysis) && combination_t16_electrical_paralysis.IsActivated()
 
             // let combination_t16_magic_weakness  = combination_t16_magic_weakness.findIn(  hCaster )
-            // let has_combination_t16_magic_weakness = GFuncEntity.IsValid(combination_t16_magic_weakness) && combination_t16_magic_weakness.IsActivated()
+            // let has_combination_t16_magic_weakness = IsValid(combination_t16_magic_weakness) && combination_t16_magic_weakness.IsActivated()
 
             let tTargets = AoiHelper.FindEntityInRadius(hCaster.GetTeamNumber(), hCaster.GetAbsOrigin(), this.radius, null, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, 0, FindOrder.FIND_CLOSEST)
 

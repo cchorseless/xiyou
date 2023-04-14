@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { AoiHelper } from "../../../helper/AoiHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -397,7 +397,7 @@ export class modifier_imba_broodmother_spin_web_aura extends BaseModifier_Plus {
         }
         if (params.unit == this.GetParentPlus()) {
             this.GetParentPlus().StopSound("Hero_Broodmother.WebLoop");
-            GFuncEntity.SafeDestroyUnit(this.GetParentPlus());
+            SafeDestroyUnit(this.GetParentPlus());
         }
     }
 }

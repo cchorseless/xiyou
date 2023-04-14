@@ -66,7 +66,7 @@ export class ability2_bloodseeker_blood_bath extends BaseAbility_Plus {
             let fDamage = damage + hCaster.GetAgility() * agi_damage_factor
             for (let hTarget of (tTarget)) {
 
-                if (GFuncEntity.IsValid(hTarget) && hTarget.IsAlive()) {
+                if (IsValid(hTarget) && hTarget.IsAlive()) {
                     let damage_table =
                     {
                         ability: this,
@@ -123,7 +123,7 @@ export class modifier_bloodseeker_2 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return

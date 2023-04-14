@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -580,7 +580,7 @@ export class modifier_imba_enfeeble_debuff_vision_handler extends BaseModifier_P
 
     OnIntervalThink(): void {
         let enfeeble_stacks = this.parent.findBuffStack("modifier_imba_enfeeble_debuff", this.GetCasterPlus());
-        this.vision_reduction = this.reduction * (1 - (this.efficiency) ^ enfeeble_stacks) / (1 - this.efficiency);
+        this.vision_reduction = this.reduction * (1 - math.pow(this.efficiency, enfeeble_stacks)) / (1 - this.efficiency);
     }
     /** DeclareFunctions():modifierfunction[] {
         let decFuncs = {

@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { AoiHelper } from "../../../helper/AoiHelper";
 import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 import { ResHelper } from "../../../helper/ResHelper";
@@ -212,7 +212,7 @@ export class imba_pudge_meat_hook extends BaseAbility_Plus {
         }
         else if (ExtraData.goorback == "back") {
             let rune = EntIndexToHScript(ExtraData.rune);
-            if (GFuncEntity.IsValid(rune)) {
+            if (IsValid(rune)) {
                 ParticleManager.SetParticleControlEnt(ExtraData.pfx_index, 1, rune, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", rune.GetAbsOrigin() + Vector(0, 0, 96) as Vector, true);
                 rune.SetAbsOrigin(GetGroundPosition(vLocation, this.GetCasterPlus()));
             } else {

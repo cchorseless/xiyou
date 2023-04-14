@@ -73,7 +73,7 @@ export class modifier_leshrac_1 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -160,7 +160,7 @@ export class modifier_leshrac_1_thinker extends BaseModifier_Plus {
         if (IsServer()) {
             let vPosition = hParent.GetAbsOrigin()
             UTIL_Remove(hParent)
-            if (!GFuncEntity.IsValid(hCaster) || !GFuncEntity.IsValid(hAbility)) {
+            if (!IsValid(hCaster) || !IsValid(hAbility)) {
                 return
             }
             let targets = AoiHelper.FindEntityInRadius(hCaster.GetTeamNumber(), vPosition, this.radius, null, hAbility.GetAbilityTargetTeam(), hAbility.GetAbilityTargetType(), hAbility.GetAbilityTargetFlags(), 0)
@@ -235,7 +235,7 @@ export class modifier_leshrac_1_debuff extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     CC_tooltip() {
-        if (GFuncEntity.IsValid(this.GetCasterPlus())) {
+        if (IsValid(this.GetCasterPlus())) {
             return this.GetCasterPlus().GetTalentValue("special_bonus_unique_leshrac_custom_3")
         }
     }
@@ -373,7 +373,7 @@ export class modifier_leshrac_1_field_aura extends BaseModifier_Plus {
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_LIMIT)
     GetMoveSpeed_Limit(params: IModifierTable) {
         if (IsServer()) {
-            if (GFuncEntity.IsValid(this.GetParentPlus())) {
+            if (IsValid(this.GetParentPlus())) {
                 let vDirection = (this.vPosition - this.GetParentPlus().GetAbsOrigin()) as Vector
                 vDirection.z = 0
                 let fToPositionDistance = vDirection.Length2D()

@@ -365,7 +365,7 @@ export class modifier_ghost_revenant_ghost_immolation extends BaseModifier_Plus 
         return "particles/status_fx/status_effect_ghost_revenant.vpcf";
     }
     StatusEffectPriority(): modifierpriority {
-        return 15;
+        return 4;
     }
     Init(p_0: any,): void {
         if (IsServer()) {
@@ -460,7 +460,7 @@ export class modifier_ghost_revenant_ghost_immolation_debuff extends BaseModifie
         }
         return Object.values(decFuncs);
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.EXTRA_HEALTH_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS_PERCENTAGE)
     CC_GetModifierExtraHealthPercentage(): number {
         if (IsServer()) {
             let hp_to_reduce = 0.01 * this.GetStackCount() * (-1);

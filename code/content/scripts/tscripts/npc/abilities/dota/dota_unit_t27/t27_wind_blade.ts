@@ -69,7 +69,7 @@ export class modifier_t27_wind_blade extends BaseModifier_Plus {
                 let max_count = this.arrow_count
 
                 //  let combination_t27_multi_attack  = combination_t27_multi_attack.findIn(  params.attacker )
-                //  let has_combination_t27_multi_attack = GFuncEntity.IsValid(combination_t27_multi_attack) && combination_t27_multi_attack.IsActivated()
+                //  let has_combination_t27_multi_attack = IsValid(combination_t27_multi_attack) && combination_t27_multi_attack.IsActivated()
                 //  let chance = combination_t27_multi_attack.GetSpecialValueFor("chance")
                 //  if ( has_combination_t27_multi_attack ) {
                 //  	max_count = max_count + combination_t27_multi_attack.GetSpecialValueFor("extra_attack_number")
@@ -99,7 +99,7 @@ export class modifier_t27_wind_blade extends BaseModifier_Plus {
                 let hTarget = params.target
                 let hCaster = params.attacker
                 // let combination_t27_cyclone  = combination_t27_cyclone.findIn(  hCaster )
-                // let has_combination_t27_cyclone = GFuncEntity.IsValid(combination_t27_cyclone) && combination_t27_cyclone.IsActivated()
+                // let has_combination_t27_cyclone = IsValid(combination_t27_cyclone) && combination_t27_cyclone.IsActivated()
                 // if (has_combination_t27_cyclone) {
                 //     combination_t27_cyclone.Cyclone(params.original_damage, hTarget)
                 // }

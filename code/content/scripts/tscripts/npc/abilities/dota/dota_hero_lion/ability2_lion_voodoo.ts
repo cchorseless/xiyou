@@ -37,14 +37,14 @@ export class ability2_lion_voodoo extends BaseAbility_Plus {
         hTarget.EmitSound(ResHelper.GetSoundReplacement("Hero_Lion.Hex.Target", hCaster))
 
         let hAbility4 = ability3_lion_mana_drain.findIn(hCaster)
-        if (GFuncEntity.IsValid(hAbility4) && hAbility4.GetTargetMana != null) {
+        if (IsValid(hAbility4) && hAbility4.GetTargetMana != null) {
             hAbility4.GetTargetMana(hTarget)
         }
     }
     OnSpellStart() {
         let hCaster = this.GetCasterPlus()
         let hTarget = this.GetCursorTarget()
-        if (!GFuncEntity.IsValid(hTarget) || !hTarget.IsAlive()) {
+        if (!IsValid(hTarget) || !hTarget.IsAlive()) {
             return
         }
         if (hTarget.TriggerSpellAbsorb(this)) {
@@ -97,7 +97,7 @@ export class modifier_lion_2 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -137,7 +137,7 @@ export class modifier_lion_2 extends BaseModifier_Plus {
         if (IsServer()) {
             let hAttacker = params.attacker
             let hTarget = params.target
-            if (GFuncEntity.IsValid(hAttacker) && GFuncEntity.IsValid(hTarget)) {
+            if (IsValid(hAttacker) && IsValid(hTarget)) {
                 if (hTarget.IsHexed()) {
                     return hAttacker.GetTalentValue("special_bonus_unique_lion_custom_7")
                 }

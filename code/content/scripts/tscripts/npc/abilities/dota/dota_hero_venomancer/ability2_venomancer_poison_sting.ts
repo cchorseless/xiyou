@@ -71,7 +71,7 @@ export class ability2_venomancer_poison_sting extends BaseAbility_Plus {
     OnOwnerDied() {
         if (this.tWards != null) {
             for (let hWard of (this.tWards)) {
-                if (GFuncEntity.IsValid(hWard)) {
+                if (IsValid(hWard)) {
                     hWard.ForceKill(false)
                 }
             }
@@ -116,7 +116,7 @@ export class modifier_venomancer_2 extends BaseModifier_Plus {
             return
         }
         let hAbility = this.GetAbilityPlus()
-        if (!GFuncEntity.IsValid(hAbility)) {
+        if (!IsValid(hAbility)) {
             this.StartIntervalThink(-1)
             this.Destroy()
             return
@@ -283,9 +283,9 @@ export class modifier_venomancer_2_ward_attack_talent extends BaseModifier_Plus 
         let hParent = this.GetParentPlus()
         let hCaster = this.GetCasterPlus()
         let hAbility = this.GetAbilityPlus()
-        if (!GFuncEntity.IsValid(hTarget)
-            || !GFuncEntity.IsValid(hCaster)
-            || !GFuncEntity.IsValid(hAbility)
+        if (!IsValid(hTarget)
+            || !IsValid(hCaster)
+            || !IsValid(hAbility)
             || hTarget.GetClassname() == "dota_item_drop"
             || params.attacker != hParent
             || !hCaster.HasTalent('special_bonus_unique_venomancer_custom_4')

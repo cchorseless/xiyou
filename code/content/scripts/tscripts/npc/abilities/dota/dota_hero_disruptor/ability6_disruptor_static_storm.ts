@@ -85,7 +85,7 @@ export class modifier_disruptor_6 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -244,7 +244,7 @@ export class modifier_disruptor_6_thinker extends BaseModifier_Plus {
     }
     Process() {
         let hCaster = this.GetCasterPlus()
-        if (!GFuncEntity.IsValid(hCaster)) {
+        if (!IsValid(hCaster)) {
             this.Destroy()
             return
         }

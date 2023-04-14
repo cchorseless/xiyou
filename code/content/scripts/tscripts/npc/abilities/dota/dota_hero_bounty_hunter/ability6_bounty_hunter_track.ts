@@ -39,7 +39,7 @@ export class ability6_bounty_hunter_track extends BaseAbility_Plus {
         let hCaster = this.GetCasterPlus()
         let hTarget = this.GetCursorTarget()
 
-        if (!GFuncEntity.IsValid(hTarget) || !hTarget.IsAlive()) {
+        if (!IsValid(hTarget) || !hTarget.IsAlive()) {
             return
         }
         if (hTarget.TriggerSpellAbsorb(this)) {
@@ -92,7 +92,7 @@ export class modifier_bounty_hunter_6 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -154,7 +154,7 @@ export class modifier_bounty_hunter_6 extends BaseModifier_Plus {
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
     GetAttackSpeedBonus_Constant() {
         if (IsServer()) {
-            if (GFuncEntity.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard() && GFuncEntity.IsValid(this.GetCasterPlus().GetAttackTarget()) && this.GetCasterPlus().GetAttackTarget().GetClassname() != "dota_item_drop" && modifier_bounty_hunter_6_track.exist(this.GetCasterPlus().GetAttackTarget())) {
+            if (IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard() && IsValid(this.GetCasterPlus().GetAttackTarget()) && this.GetCasterPlus().GetAttackTarget().GetClassname() != "dota_item_drop" && modifier_bounty_hunter_6_track.exist(this.GetCasterPlus().GetAttackTarget())) {
                 return this.shard_bonus_attack_speed
             }
             return 0
@@ -163,7 +163,7 @@ export class modifier_bounty_hunter_6 extends BaseModifier_Plus {
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
     CC_GetModifierMaximumAttackSpeedBonus() {
         if (IsServer()) {
-            if (GFuncEntity.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard() && GFuncEntity.IsValid(this.GetCasterPlus().GetAttackTarget()) && this.GetCasterPlus().GetAttackTarget().GetClassname() != "dota_item_drop" && modifier_bounty_hunter_6_track.exist(this.GetCasterPlus().GetAttackTarget())) {
+            if (IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard() && IsValid(this.GetCasterPlus().GetAttackTarget()) && this.GetCasterPlus().GetAttackTarget().GetClassname() != "dota_item_drop" && modifier_bounty_hunter_6_track.exist(this.GetCasterPlus().GetAttackTarget())) {
                 return this.shard_bonus_attack_speed_limit
             }
             return 0
@@ -287,10 +287,10 @@ export class modifier_bounty_hunter_6_track extends BaseModifier_Plus {
         if (IsServer()) {
             if (!hParent.IsAlive()) {
                 // 当标记单位死亡时，转移到附件最近的附近最近的单位身上
-                if (GFuncEntity.IsValid(hCaster) && hCaster.IsAlive()) {
+                if (IsValid(hCaster) && hCaster.IsAlive()) {
                     let tTarget = FindUnitsInRadius(hCaster.GetTeamNumber(), hParent.GetAbsOrigin(), null, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_CLOSEST, false)
                     for (let hTarget of (tTarget)) {
-                        if (GFuncEntity.IsValid(hTarget) && hTarget.IsAlive()) {
+                        if (IsValid(hTarget) && hTarget.IsAlive()) {
                             modifier_bounty_hunter_6_track.apply(hTarget, hCaster, hAbility, { bShift: true })
                             break
                         }
@@ -321,7 +321,7 @@ export class modifier_bounty_hunter_6_track extends BaseModifier_Plus {
     CC_GetModifierTargetCriticalStrike(params: IModifierTable) {
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
-            if (!GFuncEntity.IsValid(hCaster)) {
+            if (!IsValid(hCaster)) {
                 this.Destroy()
                 return
             }
@@ -336,7 +336,7 @@ export class modifier_bounty_hunter_6_track extends BaseModifier_Plus {
         let hCaster = this.GetCasterPlus()
         let hTarget = this.GetParentPlus()
 
-        if (!GFuncEntity.IsValid(hCaster)) {
+        if (!IsValid(hCaster)) {
             this.Destroy()
             return
         }
@@ -356,7 +356,7 @@ export class modifier_bounty_hunter_6_track extends BaseModifier_Plus {
                     //     return
                     // }
                     // let track_bounty  = modifier_bounty_hunter_track_bounty.findIn(  hCaster )
-                    // if (GFuncEntity.IsValid(track_bounty) && type(track_bounty.AddTotalGold) == "function") {
+                    // if (IsValid(track_bounty) && type(track_bounty.AddTotalGold) == "function") {
                     //     track_bounty.AddTotalGold(iGold)
                     // }
 

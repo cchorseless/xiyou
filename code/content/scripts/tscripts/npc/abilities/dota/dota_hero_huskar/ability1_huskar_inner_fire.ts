@@ -76,7 +76,7 @@ export class ability1_huskar_inner_fire extends BaseAbility_Plus {
             }
             // 魔晶
             let hModifier = modifier_huskar_2_counter.findIn(hTarget)
-            if (GFuncEntity.IsValid(hModifier) && hCaster.HasShard()) {
+            if (IsValid(hModifier) && hCaster.HasShard()) {
                 let fDamage = hModifier.GetStackCount() * hCaster.GetMaxHealth() * shard_damage_factor
                 let damage_table =
                 {
@@ -134,7 +134,7 @@ export class modifier_huskar_1 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return

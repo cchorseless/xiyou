@@ -44,7 +44,7 @@ export class ability1_bloodseeker_bloodrage extends BaseAbility_Plus {
         let hTarget = this.GetCursorTarget()
         let hCaster = this.GetCasterPlus()
         let duration = this.GetSpecialValueFor("duration")
-        if (!GFuncEntity.IsValid(hTarget) || !hTarget.IsAlive()) {
+        if (!IsValid(hTarget) || !hTarget.IsAlive()) {
             return
         }
         EmitSoundOnLocationWithCaster(hTarget.GetAbsOrigin(), ResHelper.GetSoundReplacement("hero_bloodseeker.bloodRage", hCaster), hCaster)
@@ -91,7 +91,7 @@ export class modifier_bloodseeker_1 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus() as ability1_bloodseeker_bloodrage
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -115,13 +115,13 @@ export class modifier_bloodseeker_1 extends BaseModifier_Plus {
             let range = ability.GetCastRange(caster.GetAbsOrigin(), caster) + caster.GetCastRangeBonus() + caster.GetHullRadius()
 
             //  优先上一个目标
-            let target = GFuncEntity.IsValid(ability.hLastTarget) && ability.hLastTarget || null
+            let target = IsValid(ability.hLastTarget) && ability.hLastTarget || null
             if (target != null && !target.IsPositionInRange(caster.GetAbsOrigin(), range + target.GetHullRadius())) {
                 target = null
             }
             // 无敌方单位，不会自动释放
             let tTarget = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), null, range, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false)
-            if (!GFuncEntity.IsValid(tTarget[0])) {
+            if (!IsValid(tTarget[0])) {
                 return
             }
             //  搜索范围
@@ -228,11 +228,11 @@ export class modifier_bloodseeker_1_buff extends BaseModifier_Plus {
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
     On_AttackLanded(params: IModifierTable) {
-        if (!GFuncEntity.IsValid(params.target)) { return }
+        if (!IsValid(params.target)) { return }
         if (params.target.GetClassname() == "dota_item_drop") { return }
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
-        if (GFuncEntity.IsValid(hCaster) && params.attacker == hParent && hCaster == hParent && hCaster.HasShard()) {
+        if (IsValid(hCaster) && params.attacker == hParent && hCaster == hParent && hCaster.HasShard()) {
             let fDamage = params.target.GetHealth() * this.damage_max_health_pct * 0.01
             let damage_table =
             {
@@ -242,7 +242,7 @@ export class modifier_bloodseeker_1_buff extends BaseModifier_Plus {
                 damage: fDamage,
                 damage_type: DAMAGE_TYPES.DAMAGE_TYPE_PURE,
                 damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION + DOTADamageFlag_t.DOTA_DAMAGE_FLAG_USE_COMBAT_PROFICIENCY,
-                eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_SPELL_CRIT + BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_DAMAGE_AMPLIFY,
+                extra_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_SPELL_CRIT + BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_DAMAGE_AMPLIFY,
 
             }
             BattleHelper.GoApplyDamage(damage_table)

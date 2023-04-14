@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { AoiHelper } from "../../../helper/AoiHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { GameServiceConfig } from "../../../shared/GameServiceConfig";
@@ -1557,7 +1557,9 @@ export class modifier_imba_dazzle_bad_juju extends BaseModifier_Plus {
                     let enemies = FindUnitsInRadius(this.GetParentPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.GetSpecialValueFor("scepter_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE, FindOrder.FIND_ANY_ORDER, false);
                     let target_number = 0;
                     for (const [_, enemy] of GameFunc.iPair(enemies)) {
-                        this.GetParentPlus().PerformAttack(enemy, false, true, true, false, true, false, false);
+                        this.GetParentPlus().Attack(enemy, GEBATTLE_ATTACK_STATE.ATTACK_STATE_NOT_PROCESSPROCS +
+                            GEBATTLE_ATTACK_STATE.ATTACK_STATE_SKIPCOOLDOWN +
+                            GEBATTLE_ATTACK_STATE.ATTACK_STATE_NOT_USEPROJECTILE);
                         target_number = target_number + 1;
                         if (target_number >= this.GetSpecialValueFor("scepter_count")) {
                             return;

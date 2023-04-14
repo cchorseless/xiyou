@@ -27,7 +27,7 @@ export class ability2_luna_moon_glaive extends BaseAbility_Plus {
         let caster = this.GetCasterPlus()
         let hashtable = HashTableHelper.GetHashtableByIndex(ExtraData.hashtable_index)
         let modifier = modifier_luna_2.findIn(caster)
-        if (GFuncEntity.IsValid(modifier)) {
+        if (IsValid(modifier)) {
             if (this.GetCasterPlus().HasTalent("special_bonus_unique_luna_custom_2")) {
                 let damage_increase_percent = this.GetCasterPlus().GetTalentValue("special_bonus_unique_luna_custom_2")
                 modifier.damage_percent = math.pow(1 + damage_increase_percent * 0.01, hashtable.count) * 100

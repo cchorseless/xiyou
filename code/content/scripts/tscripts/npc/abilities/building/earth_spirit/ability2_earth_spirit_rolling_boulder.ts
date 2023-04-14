@@ -48,7 +48,7 @@ export class ability2_earth_spirit_rolling_boulder extends BaseAbility_Plus {
 
         let enhanced = 0
         let mdf4 = modifier_earth_spirit_3.findIn(hCaster)
-        if (GFuncEntity.IsValid(mdf4) && mdf4.UseStone()) {
+        if (IsValid(mdf4) && mdf4.UseStone()) {
             enhanced = 1
         }
 
@@ -57,7 +57,7 @@ export class ability2_earth_spirit_rolling_boulder extends BaseAbility_Plus {
 
     OnProjectileThink_ExtraData(vLocation: Vector, ExtraData: any) {
         let hPhantom = EntIndexToHScript(ExtraData.phantom_index || -1)
-        if (GFuncEntity.IsValid(hPhantom)) {
+        if (IsValid(hPhantom)) {
             hPhantom.SetAbsOrigin(vLocation)
         }
     }
@@ -79,8 +79,8 @@ export class ability2_earth_spirit_rolling_boulder extends BaseAbility_Plus {
         //     DebugDrawCircle(vLocation, Vector(255, 255, 255), 1, radius, true, 1)
         // }
 
-        if (GFuncEntity.IsValid(hPhantom)) {
-            if (GFuncEntity.IsValid(hTarget)) {
+        if (IsValid(hPhantom)) {
+            if (IsValid(hTarget)) {
                 hPhantom.SetAbsOrigin(hTarget.GetAbsOrigin())
             }
             GTimerHelper.AddTimer(0, GHandler.create(null, () => {
@@ -88,7 +88,7 @@ export class ability2_earth_spirit_rolling_boulder extends BaseAbility_Plus {
             }))
         }
 
-        if (!GFuncEntity.IsValid(hTarget)) {
+        if (!IsValid(hTarget)) {
             return true
         }
 
@@ -114,7 +114,7 @@ export class ability2_earth_spirit_rolling_boulder extends BaseAbility_Plus {
         }
 
         for (let v of (tTargets)) {
-            if (GFuncEntity.IsValid(v)) {
+            if (IsValid(v)) {
                 if (hCaster.HasTalent('special_bonus_unique_earth_spirit_custom_3')) {
                     modifier_earth_spirit_2_cannot_miss.apply(hCaster, hCaster, this, null)
                     BattleHelper.Attack(hCaster, v, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_SKIPCOOLDOWN)
@@ -183,7 +183,7 @@ export class modifier_earth_spirit_2 extends BaseModifier_Plus {
             return
         }
         let hAbility = this.GetAbilityPlus()
-        if (!GFuncEntity.IsValid(hAbility)) {
+        if (!IsValid(hAbility)) {
             this.StartIntervalThink(-1)
             this.Destroy()
             return
@@ -305,7 +305,7 @@ export class modifier_earth_spirit_2_roll extends BaseModifier_Plus {
         }
 
         let hAbility = this.GetAbilityPlus()
-        if (!GFuncEntity.IsValid(hAbility)) {
+        if (!IsValid(hAbility)) {
             this.StartIntervalThink(-1)
             this.Destroy()
             return

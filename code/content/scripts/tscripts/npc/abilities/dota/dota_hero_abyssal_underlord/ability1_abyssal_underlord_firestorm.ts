@@ -124,14 +124,14 @@ export class modifier_abyssal_underlord_1_debuff extends BaseModifier_Plus {
             let hCaster = this.GetCasterPlus()
             let hParent = this.GetParentPlus()
             let hAbility = this.GetAbilityPlus()
-            if (GFuncEntity.IsValid(hCaster) && GFuncEntity.IsValid(hParent) && GFuncEntity.IsValid(hAbility)) {
+            if (IsValid(hCaster) && IsValid(hParent) && IsValid(hAbility)) {
                 let tDamageTable: BattleHelper.DamageOptions = {
                     ability: this.GetAbilityPlus(),
                     victim: hParent,
                     attacker: hCaster,
                     damage: (hCaster.HasShard() && (this.burn_damage + this.shard_burn_damage) || this.burn_damage) * hCaster.GetMaxHealth() * 0.01,
                     damage_type: hAbility.GetAbilityDamageType(),
-                    eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_DOT,
+                    extra_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_DOT,
                 }
                 BattleHelper.GoApplyDamage(tDamageTable)
             }
@@ -140,7 +140,7 @@ export class modifier_abyssal_underlord_1_debuff extends BaseModifier_Plus {
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
     on_death(params: ModifierInstanceEvent) {
         let hAttacker = params.attacker
-        if (!GFuncEntity.IsValid(hAttacker)) {
+        if (!IsValid(hAttacker)) {
             return
         }
         if (hAttacker.GetTeamNumber() == params.unit.GetTeamNumber()) {
@@ -190,7 +190,7 @@ export class modifier_abyssal_underlord_1_thinker extends modifier_particle_thin
         let hAbility = this.GetAbilityPlus()
         let vPosition = hParent.GetAbsOrigin()
         if (IsServer()) {
-            if (!GFuncEntity.IsValid(hCaster) || !GFuncEntity.IsValid(hAbility)) {
+            if (!IsValid(hCaster) || !IsValid(hAbility)) {
                 this.Destroy()
                 return
             }

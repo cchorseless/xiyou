@@ -114,7 +114,7 @@ export class modifier_alchemist_1 extends BaseModifier_Plus {
     OnIntervalThink() {
         let hAbility = this.GetAbilityPlus();
         let hCaster = this.GetCasterPlus();
-        if (!(GFuncEntity.IsValid(hAbility) && GFuncEntity.IsValid(hCaster))) {
+        if (!(IsValid(hAbility) && IsValid(hCaster))) {
             this.Destroy();
             return;
         }
@@ -169,7 +169,7 @@ export class modifier_alchemist_1_aura extends BaseModifier_Plus {
     OnIntervalThink() {
         let hAbility = this.GetAbilityPlus();
         let hCaster = this.GetCasterPlus();
-        if (!(GFuncEntity.IsValid(hAbility) && GFuncEntity.IsValid(hCaster))) {
+        if (!(IsValid(hAbility) && IsValid(hCaster))) {
             this.Destroy();
             return;
         }

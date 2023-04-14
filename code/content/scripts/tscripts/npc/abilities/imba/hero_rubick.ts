@@ -498,11 +498,11 @@ export class modifier_imba_rubick_fade_bolt extends BaseModifier_Plus {
     }
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
             2: GPropertyConfig.EMODIFIER_PROPERTY.MANACOST_PERCENTAGE_STACKING
         });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         if (this.GetParentPlus().IsRealUnit() || (this.GetParentPlus().IsRoshan && this.GetParentPlus().IsRoshan())) {
             return this.hero_attack_damage_reduction;

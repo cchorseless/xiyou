@@ -38,13 +38,13 @@ export class ability2_magnataur_empower extends BaseAbility_Plus {
     OnSpellStart() {
         let hCaster = this.GetCasterPlus()
         let hTarget = this.GetCursorTarget()
-        if (!GFuncEntity.IsValid(hTarget) || !hTarget.IsAlive()) {
+        if (!IsValid(hTarget) || !hTarget.IsAlive()) {
             return
         }
         let empower_duration = this.GetSpecialValueFor("empower_duration")
         modifier_magnataur_2_buff.apply(hTarget, hCaster, this, { duration: empower_duration })
         let hAbility4 = ability6_magnataur_reverse_polarity.findIn(hCaster)
-        if (GFuncEntity.IsValid(hAbility4)) {
+        if (IsValid(hAbility4)) {
             modifier_magnataur_2_buff.apply(hTarget, hCaster, hAbility4, { duration: empower_duration })
         }
         EmitSoundOnLocationWithCaster(hTarget.GetAbsOrigin(), ResHelper.GetSoundReplacement("Hero_Magnataur.Empower.Target", hCaster), hCaster)
@@ -91,7 +91,7 @@ export class modifier_magnataur_2 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus() as ability2_magnataur_empower
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -115,7 +115,7 @@ export class modifier_magnataur_2 extends BaseModifier_Plus {
             let range = ability.GetCastRange(caster.GetAbsOrigin(), caster) + caster.GetCastRangeBonus() + caster.GetHullRadius()
 
             //  优先上一个目标
-            let target = GFuncEntity.IsValid(ability.hLastTarget) && ability.hLastTarget || null
+            let target = IsValid(ability.hLastTarget) && ability.hLastTarget || null
             if (target != null && !target.IsPositionInRange(caster.GetAbsOrigin(), range + target.GetHullRadius())) {
                 target = null
             }
@@ -207,7 +207,7 @@ export class modifier_magnataur_2_buff extends BaseModifier_Plus {
     GetPreAttack_BonusDamage(params: IModifierTable) {
         let fValue = 0
         let hCaster = this.GetCasterPlus()
-        if (GFuncEntity.IsValid(hCaster) && hCaster.GetStrength != null) {
+        if (IsValid(hCaster) && hCaster.GetStrength != null) {
             let bonus_damage_per_str = this.GetParentPlus() == hCaster && this.bonus_damage_per_str * this.self_multiplier || this.bonus_damage_per_str
             fValue = hCaster.GetStrength() * bonus_damage_per_str
         }
@@ -216,7 +216,7 @@ export class modifier_magnataur_2_buff extends BaseModifier_Plus {
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     On_Tooltip() {
         let hCaster = this.GetCasterPlus()
-        if (GFuncEntity.IsValid(hCaster) && this.GetParentPlus() == hCaster) {
+        if (IsValid(hCaster) && this.GetParentPlus() == hCaster) {
             return this.cleave_damage_pct * this.self_multiplier
         }
         return this.cleave_damage_pct
@@ -229,7 +229,7 @@ export class modifier_magnataur_2_buff extends BaseModifier_Plus {
             let hCaster = this.GetCasterPlus()
             if (UnitFilter(params.target, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, params.attacker.GetTeamNumber()) == UnitFilterResult.UF_SUCCESS) {
                 if (!params.attacker.IsRangedAttacker() && !BattleHelper.AttackFilter(params.record, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NO_CLEAVE)) {
-                    let cleave_damage_pct = (GFuncEntity.IsValid(hCaster) && this.GetParentPlus() == hCaster) && this.cleave_damage_pct * this.self_multiplier || this.cleave_damage_pct
+                    let cleave_damage_pct = (IsValid(hCaster) && this.GetParentPlus() == hCaster) && this.cleave_damage_pct * this.self_multiplier || this.cleave_damage_pct
 
                     let sParticlePath = ResHelper.GetParticleReplacement("particles/units/heroes/hero_magnataur/magnataur_empower_cleave_effect.vpcf", hCaster)
                     let iParticleID = ResHelper.CreateParticle({
@@ -249,7 +249,7 @@ export class modifier_magnataur_2_buff extends BaseModifier_Plus {
                             damage: params.original_damage * cleave_damage_pct * 0.01,
                             damage_type: DAMAGE_TYPES.DAMAGE_TYPE_PHYSICAL,
                             damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION + DOTADamageFlag_t.DOTA_DAMAGE_FLAG_USE_COMBAT_PROFICIENCY,
-                            eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_CLEAVE + BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_SPELL_CRIT,
+                            extra_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_CLEAVE + BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_SPELL_CRIT,
                         }
                         BattleHelper.GoApplyDamage(tDamageTable)
 

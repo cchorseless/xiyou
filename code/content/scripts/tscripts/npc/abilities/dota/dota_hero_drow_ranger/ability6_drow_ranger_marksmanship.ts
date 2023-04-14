@@ -29,7 +29,7 @@ export class ability6_drow_ranger_marksmanship extends BaseAbility_Plus {
         if (hTarget != null) {
             let caster = this.GetCasterPlus()
             let modifier = modifier_drow_ranger_6.findIn(caster)
-            if (GFuncEntity.IsValid(modifier)) {
+            if (IsValid(modifier)) {
                 modifier.split_attack = true
                 BattleHelper.Attack(caster, hTarget, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_SKIPCOOLDOWN + BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_IGNOREINVIS + BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NOT_USEPROJECTILE + BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NO_EXTENDATTACK + BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_SKIPCOUNTING)
                 modifier.split_attack = null

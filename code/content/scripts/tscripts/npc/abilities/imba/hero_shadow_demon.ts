@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -514,11 +514,11 @@ export class modifier_imba_soul_catcher_buff extends BaseModifier_Plus {
     }
     /** DeclareFunctions():modifierfunction[] {
         let decFuncs = {
-            1: GPropertyConfig.EMODIFIER_PROPERTY.EXTRA_HEALTH_BONUS
+            1: GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS
         }
         return Object.values(decFuncs);
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.EXTRA_HEALTH_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
     CC_GetModifierExtraHealthBonus(): number {
         if (this.allied_heal) {
             return this.allied_heal;
@@ -881,9 +881,9 @@ export class modifier_shadow_poison_debuff extends BaseModifier_Plus {
             }
         }
         if (stacks <= this.max_multiply_stacks) {
-            multiplier = multiplier ^ (stacks - 1);
+            multiplier = math.pow(multiplier, stacks - 1);
         } else {
-            multiplier = (multiplier ^ (this.max_multiply_stacks - 1)) * this.efficient_multiplier ^ (stacks - this.max_multiply_stacks);
+            multiplier = math.pow(multiplier, this.max_multiply_stacks - 1) * math.pow(this.efficient_multiplier, stacks - this.max_multiply_stacks);
         }
         let damage = this.stack_damage * multiplier;
         return damage;

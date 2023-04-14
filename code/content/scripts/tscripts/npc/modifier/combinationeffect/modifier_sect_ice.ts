@@ -14,7 +14,7 @@ export class modifier_sect_ice_base_a extends modifier_combination_effect {
         if (IsServer()) {
             let allenemy = this.getAllEnemy();
             allenemy.forEach(enemy => {
-                if (GFuncEntity.IsValid(enemy)) {
+                if (IsValid(enemy)) {
                     let t = enemy.TempData().sect_ice || {
                         atk_speed: 0,
                         health_regen: 0

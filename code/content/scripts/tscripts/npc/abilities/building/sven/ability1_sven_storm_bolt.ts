@@ -49,12 +49,12 @@ export class ability1_sven_storm_bolt extends ActiveRootAbility {
         return true
     }
     OnAbilityPhaseInterrupted() {
-        if (GFuncEntity.IsValid(this.hBuffPtcl)) {
+        if (IsValid(this.hBuffPtcl)) {
             this.hBuffPtcl.Destroy()
         }
     }
     OnSpellStart() {
-        if (GFuncEntity.IsValid(this.hBuffPtcl)) {
+        if (IsValid(this.hBuffPtcl)) {
             this.hBuffPtcl.Destroy()
         }
 
@@ -167,7 +167,7 @@ export class modifier_sven_1 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return

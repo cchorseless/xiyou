@@ -20,7 +20,7 @@ export class modifier_imba_ironleaf_boots extends BaseModifier_Plus {
     public base_health_regen: any;
     public mana_regen: any;
     public attack_speed: number;
-    public base_magic_resistance: any;
+    public base_magic_resistance: number;
     AllowIllusionDuplicate(): boolean {
         return false;
     }

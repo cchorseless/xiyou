@@ -85,7 +85,7 @@ export class modifier_lycan_1 extends BaseModifier_Plus {
 
         if (IsServer()) {
             for (let hWolf of (this.tWolves)) {
-                if (GFuncEntity.IsValid(hWolf)) {
+                if (IsValid(hWolf)) {
                     hWolf.ForceKill(false)
                 }
             }
@@ -101,7 +101,7 @@ export class modifier_lycan_1 extends BaseModifier_Plus {
                 this.StartIntervalThink(-1)
                 return
             }
-            if (!GFuncEntity.IsValid(hHero)) {
+            if (!IsValid(hHero)) {
                 return
             }
 
@@ -110,7 +110,7 @@ export class modifier_lycan_1 extends BaseModifier_Plus {
             let wolf_count = this.wolf_count
 
             // let _modifier_lycan_3_form = modifier_lycan_3_form.findIn(hParent)
-            // if (GFuncEntity.IsValid(modifier_lycan_3_form as IBaseModifier_Plus)) {
+            // if (IsValid(modifier_lycan_3_form as IBaseModifier_Plus)) {
             // wolf_count = wolf_count + (modifier_lycan_3_form.wolf_count || 0)
             // }
 
@@ -118,12 +118,12 @@ export class modifier_lycan_1 extends BaseModifier_Plus {
             for (let i = math.max(this.tWolves.length, wolf_count) - 1; i >= 0; i--) {
                 let hWolf = this.tWolves[i]
                 if (i > wolf_count) {
-                    if (GFuncEntity.IsValid(hWolf)) {
+                    if (IsValid(hWolf)) {
                         hWolf.ForceKill(false)
                         table.remove(this.tWolves, i)
                     }
                 } else {
-                    if (!GFuncEntity.IsValid(hWolf) || !hWolf.IsAlive()) {
+                    if (!IsValid(hWolf) || !hWolf.IsAlive()) {
                         let hWolf = BaseNpc_Plus.CreateUnitByName("npc_dota_lycan_wolf_custom", (hParent.GetAbsOrigin() + RandomVector(50)) as Vector, hParent.GetTeamNumber(), false, hHero, hHero)
                         hWolf.SetForwardVector(hParent.GetForwardVector())
                         modifier_lycan_1_particle_spawn.apply(hParent, hWolf, hAbility, { duration: BaseModifier_Plus.LOCAL_PARTICLE_MODIFIER_DURATION })
@@ -140,10 +140,10 @@ export class modifier_lycan_1 extends BaseModifier_Plus {
             }
 
             for (let hWolf of (this.tWolves)) {
-                if (GFuncEntity.IsValid(hWolf)) {
+                if (IsValid(hWolf)) {
                     modifier_lycan_1_summon.apply(hWolf, hParent, hAbility, null)
                     let lycan_wolf_1 = ability1_lycan_summon_wolves.findIn(hWolf)
-                    if (GFuncEntity.IsValid(lycan_wolf_1)) {
+                    if (IsValid(lycan_wolf_1)) {
                         lycan_wolf_1.SetLevel(hAbility.GetLevel())
                     }
                     hWolf.FireSummonned(hParent, true)
@@ -161,7 +161,7 @@ export class modifier_lycan_1 extends BaseModifier_Plus {
             if (hAbility.IsCooldownReady()) {
                 hAbility.UseResources(false, false, true)
                 for (let hWolf of (this.tWolves)) {
-                    if (GFuncEntity.IsValid(hWolf) && hWolf.IsAlive()) {
+                    if (IsValid(hWolf) && hWolf.IsAlive()) {
                         modifier_lycan_1_summon_charge.apply(hWolf, params.attacker, hAbility, { duration: 5, target_entindex: params.target.entindex() })
                     }
                 }
@@ -235,14 +235,14 @@ export class modifier_lycan_1_summon extends BaseModifier_Plus {
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
             let hParent = this.GetParentPlus()
-            if (!GFuncEntity.IsValid(hCaster)) {
+            if (!IsValid(hCaster)) {
                 return
             }
             if (hParent.GetForceAttackTarget() != null) {
                 this.hAttackTarget = hParent.GetForceAttackTarget()
                 return
             }
-            if (!GFuncEntity.IsValid(this.hAttackTarget) || UnitFilter(this.hAttackTarget, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ATTACK_IMMUNE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, hCaster.GetTeamNumber()) != UnitFilterResult.UF_SUCCESS) {
+            if (!IsValid(this.hAttackTarget) || UnitFilter(this.hAttackTarget, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ATTACK_IMMUNE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, hCaster.GetTeamNumber()) != UnitFilterResult.UF_SUCCESS) {
                 let tTargets = AoiHelper.FindEntityInRadius(hCaster.GetTeamNumber(), hParent.GetAbsOrigin(), hParent.GetAcquisitionRange(), null, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ATTACK_IMMUNE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_CLOSEST)
                 for (let i = tTargets.length - 1; i >= 0; i--) {
                     if (CalcDistanceBetweenEntityOBB(tTargets[i], this.hAttackTarget) > this.wolf_max_range) {
@@ -251,7 +251,7 @@ export class modifier_lycan_1_summon extends BaseModifier_Plus {
                 }
                 this.hAttackTarget = tTargets[0]
             }
-            if (!GFuncEntity.IsValid(this.hAttackTarget) || CalcDistanceBetweenEntityOBB(hCaster, this.hAttackTarget) > this.wolf_max_range) {
+            if (!IsValid(this.hAttackTarget) || CalcDistanceBetweenEntityOBB(hCaster, this.hAttackTarget) > this.wolf_max_range) {
                 this.hAttackTarget = null
                 if (CalcDistanceBetweenEntityOBB(hCaster, hParent) > 100) {
                     ExecuteOrderFromTable(
@@ -295,7 +295,7 @@ export class modifier_lycan_1_summon extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASEATTACK_BONUSDAMAGE)
     CC_GetModifierBaseAttack_BonusDamage() {
-        if (GFuncEntity.IsValid(this.GetCasterPlus())) {
+        if (IsValid(this.GetCasterPlus())) {
             return this.str_damage_factor * this.GetCasterPlus().GetStrength()
         }
     }
@@ -331,7 +331,7 @@ export class modifier_lycan_1_summon_charge extends BaseModifier_Plus {
         this.wolf_charge_crit = this.GetSpecialValueFor("wolf_charge_crit")
         if (IsServer()) {
             this.hTarget = EntIndexToHScript(params.target_entindex || -1) as IBaseNpc_Plus
-            if (!GFuncEntity.IsValid(this.hTarget) || !this.hTarget.IsAlive()) {
+            if (!IsValid(this.hTarget) || !this.hTarget.IsAlive()) {
                 this.Destroy()
                 return
             }
@@ -353,7 +353,7 @@ export class modifier_lycan_1_summon_charge extends BaseModifier_Plus {
         this.wolf_charge_crit = this.GetSpecialValueFor("wolf_charge_crit")
         if (IsServer()) {
             this.hTarget = EntIndexToHScript(params.target_entindex || -1) as IBaseNpc_Plus
-            if (!GFuncEntity.IsValid(this.hTarget) || !this.hTarget.IsAlive()) {
+            if (!IsValid(this.hTarget) || !this.hTarget.IsAlive()) {
                 this.Destroy()
                 return
             }

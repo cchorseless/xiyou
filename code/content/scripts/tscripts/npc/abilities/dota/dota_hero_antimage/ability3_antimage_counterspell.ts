@@ -53,7 +53,7 @@ export class modifier_antimage_3_buff extends BaseModifier_Plus {
     }
     Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
-        if (!GFuncEntity.IsValid(hCaster)) {
+        if (!IsValid(hCaster)) {
             return
         }
         let hParent = this.GetParentPlus()

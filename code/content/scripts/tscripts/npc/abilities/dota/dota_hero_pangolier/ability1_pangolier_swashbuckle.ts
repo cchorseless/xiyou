@@ -96,7 +96,7 @@ export class ability1_pangolier_swashbuckle extends BaseAbility_Plus {
             return
         }
 
-        if (!GFuncEntity.IsValid(hTarget)) {
+        if (!IsValid(hTarget)) {
             return
         }
         // this.vCasterLoc = GetGroundPosition(hCaster.GetBuilding == null && hCaster.GetAbsOrigin() || hCaster.GetBuilding().GetLocation(), hCaster)
@@ -198,7 +198,7 @@ export class modifier_pangolier_1 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -330,7 +330,7 @@ export class modifier_pangolier_1_dash extends BaseModifierMotionHorizontal_Plus
     BeDestroy() {
 
         if (IsServer()) {
-            if (GFuncEntity.IsValid(this.hParticleModifier)) {
+            if (IsValid(this.hParticleModifier)) {
                 this.hParticleModifier.Destroy()
             }
             let hCaster = this.GetCasterPlus()
@@ -538,7 +538,7 @@ export class modifier_pangolier_1_rolling_back extends BaseModifierMotionBoth_Pl
     BeDestroy() {
 
         if (IsServer()) {
-            if (GFuncEntity.IsValid(this.hParticleModifier)) {
+            if (IsValid(this.hParticleModifier)) {
                 this.hParticleModifier.Destroy()
             }
             let hCaster = this.GetCasterPlus()

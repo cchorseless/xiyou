@@ -45,7 +45,7 @@ export class ability2_dragon_knight_dragon_tail extends BaseAbility_Plus {
         let hCaster = this.GetCasterPlus()
         if (!iDragonLevel) {
             let hModifier = modifier_dragon_knight_6_form.findIn(hCaster)
-            if (GFuncEntity.IsValid(hModifier)) {
+            if (IsValid(hModifier)) {
                 iDragonLevel = hModifier.iLevel || 0
             }
         }
@@ -92,12 +92,12 @@ export class ability2_dragon_knight_dragon_tail extends BaseAbility_Plus {
         let hCaster = this.GetCasterPlus()
         let hTarget = this.GetCursorTarget()
         let projectile_speed = this.GetSpecialValueFor("projectile_speed")
-        if (!GFuncEntity.IsValid(hTarget) || !hTarget.IsAlive()) {
+        if (!IsValid(hTarget) || !hTarget.IsAlive()) {
             return
         }
         let iDragonLevel = 0
         let hModifier = modifier_dragon_knight_6_form.findIn(hCaster)
-        if (GFuncEntity.IsValid(hModifier)) {
+        if (IsValid(hModifier)) {
             iDragonLevel = hModifier.iLevel || iDragonLevel
         }
 
@@ -193,7 +193,7 @@ export class modifier_dragon_knight_2 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return

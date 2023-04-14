@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -168,7 +168,7 @@ export class imba_leshrac_split_earth extends BaseAbility_Plus {
                         return splitter_blast_delay;
                     }
                     else {
-                        GFuncEntity.SafeDestroyUnit(dummy);
+                        SafeDestroyUnit(dummy);
                         return;
                     }
                 });
@@ -1589,7 +1589,7 @@ export class modifier_imba_tormented_soul_form extends BaseModifier_Plus {
     /** DeclareFunctions():modifierfunction[] {
         let decFuncs = {
             1: Enum_MODIFIER_EVENT.ON_TAKEDAMAGE,
-            2: GPropertyConfig.EMODIFIER_PROPERTY.EXTRA_HEALTH_BONUS,
+            2: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS,
             3: GPropertyConfig.EMODIFIER_PROPERTY.EXTRA_MANA_BONUS,
             4: GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP
         }
@@ -1599,7 +1599,7 @@ export class modifier_imba_tormented_soul_form extends BaseModifier_Plus {
     CC_OnTooltip(): number {
         return this.totalsteal_convertion_pct;
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.EXTRA_HEALTH_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
     CC_GetModifierExtraHealthBonus(): number {
         if (!IsServer()) {
             return;

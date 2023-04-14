@@ -73,7 +73,7 @@ export class modifier_slardar_3 extends BaseModifier_Plus {
     attackStart(params: ModifierAttackEvent) {
         let hParent = this.GetParentPlus()
         let hTarget = params.target
-        if (IsServer() && params.attacker == hParent && GFuncEntity.IsValid(hTarget) && hTarget.GetClassname() != "dota_item_drop") {
+        if (IsServer() && params.attacker == hParent && IsValid(hTarget) && hTarget.GetClassname() != "dota_item_drop") {
             if (hTarget.IsStunned() && !hParent.PassivesDisabled()) {
                 this.SetStackCount(1)
             } else {

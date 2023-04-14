@@ -77,7 +77,7 @@ export class modifier_windrunner_3 extends BaseModifier_Plus {
 
             let hCaster = ability.GetCasterPlus()
 
-            if (!GFuncEntity.IsValid(hCaster)) {
+            if (!IsValid(hCaster)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -236,7 +236,7 @@ export class modifier_windrunner_3_debuff extends BaseModifier_Plus {
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
         if (IsServer()) {
-            if (GFuncEntity.IsValid(hCaster)) {
+            if (IsValid(hCaster)) {
                 let damage_table =
                 {
                     ability: hAbility,

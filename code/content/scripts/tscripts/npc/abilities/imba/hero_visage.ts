@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -725,7 +725,7 @@ export class modifier_imba_visage_summon_familiars extends BaseModifier_Plus {
         this.StartIntervalThink(FrameTime());
     }
     OnIntervalThink(): void {
-        if (!this.GetAbilityPlus() || !GFuncEntity.IsValid(this.GetCasterPlus())) {
+        if (!this.GetAbilityPlus() || !IsValid(this.GetCasterPlus())) {
             this.StartIntervalThink(-1);
             this.GetParentPlus().ForceKill(false);
             return;

@@ -84,7 +84,7 @@ export class modifier_mirana_3 extends BaseModifier_Plus {
         //     return
         // }
         let hAttacker = params.attacker
-        if (!GFuncEntity.IsValid(hAttacker) || hAttacker.GetUnitLabel() == "builder") {
+        if (!IsValid(hAttacker) || hAttacker.GetUnitLabel() == "builder") {
             return
         }
         if (hAttacker.GetTeamNumber() == params.unit.GetTeamNumber()) {

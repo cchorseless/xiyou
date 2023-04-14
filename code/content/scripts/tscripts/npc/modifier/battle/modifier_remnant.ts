@@ -20,7 +20,7 @@ export class modifier_remnant extends BaseModifier_Plus {
         hThinker.StartGestureWithPlaybackRate(GameActivity_t.ACT_DOTA_CAST_ABILITY_1, 1.5);
         for (let i = hThinker.GetAbilityCount() - 1; i >= 0; i--) {
             let ability = hThinker.GetAbilityByIndex(i);
-            if (GFuncEntity.IsValid(ability)) {
+            if (IsValid(ability)) {
                 hThinker.RemoveAbilityByHandle(ability);
             }
         }
@@ -32,7 +32,7 @@ export class modifier_remnant extends BaseModifier_Plus {
     public BeDestroy(): void {
 
         for (let k of this.remnants) {
-            GFuncEntity.SafeDestroyUnit(k);
+            SafeDestroyUnit(k);
         }
         this.remnants = [];
     }
@@ -68,7 +68,7 @@ export class modifier_remnant_thinker extends BaseModifier_Plus {
         if (IsServer()) {
             let hParent = this.GetParentPlus();
             let vPosition = hParent.GetAbsOrigin();
-            if (GFuncEntity.IsValid(hParent)) {
+            if (IsValid(hParent)) {
                 EmitSoundOnLocationWithCaster(vPosition, "Hero_StormSpirit.StaticRemnantExplode", hParent);
             }
         }

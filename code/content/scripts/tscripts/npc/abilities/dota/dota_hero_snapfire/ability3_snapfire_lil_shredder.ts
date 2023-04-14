@@ -46,7 +46,7 @@ export class ability3_snapfire_lil_shredder extends BaseAbility_Plus {
     }
     OnProjectileHit_ExtraData(hTarget: IBaseNpc_Plus, vLocation: Vector, ExtraData: any) {
         let hCaster = this.GetCasterPlus()
-        if (GFuncEntity.IsValid(hTarget)) {
+        if (IsValid(hTarget)) {
             BattleHelper.Attack(hCaster, hTarget, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_SKIPCOOLDOWN + BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_IGNOREINVIS + BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NOT_USEPROJECTILE + BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NEVERMISS + BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NO_CLEAVE + BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NO_EXTENDATTACK + BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_SKIPCOUNTING)
         }
     }
@@ -92,7 +92,7 @@ export class modifier_snapfire_3 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -237,7 +237,7 @@ export class modifier_snapfire_3_buff extends BaseModifier_Plus {
                     let radius = attacker.GetTalentValue("special_bonus_unique_snapfire_custom_8", "radius")
                     let tTarget = FindUnitsInRadius(params.attacker.GetTeamNumber(), params.target.GetAbsOrigin(), null, radius + 400, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false)
                     for (let hTarget of (tTarget)) {
-                        if (GFuncEntity.IsValid(hTarget) && hTarget != params.target) {
+                        if (IsValid(hTarget) && hTarget != params.target) {
                             let info = {
                                 Source: params.target,
                                 Target: hTarget,
@@ -285,7 +285,7 @@ export class modifier_snapfire_3_buff extends BaseModifier_Plus {
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS_STACKING)
     GetCastRangeBonusStacking(params: ModifierAbilityEvent) {
         if (IsServer()) {
-            if (GFuncEntity.IsValid(params.ability) &&
+            if (IsValid(params.ability) &&
                 GameFunc.IncludeArgs(params.ability.GetBehaviorInt(), DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_ATTACK)[0]) {
                 return this.bonus_attack_range
             }
@@ -351,7 +351,7 @@ export class modifier_snapfire_3_debuff_reduce_armor extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_ARMOR_BONUS)
     CC_GetModifierMagicalArmorBonus() {
-        if (GFuncEntity.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasTalent("special_bonus_unique_snapfire_custom_1")) {
+        if (IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasTalent("special_bonus_unique_snapfire_custom_1")) {
             return -this.reduce_armor * this.GetStackCount()
         }
         return 0
@@ -402,7 +402,7 @@ export class modifier_snapfire_3_debuff_mark extends BaseModifier_Plus {
 
         let hCaster = this.GetCasterPlus() as IBaseNpc_Plus & { tMarkUnit: IBaseNpc_Plus[] }
         let hParent = this.GetParentPlus()
-        if (GFuncEntity.IsValid(hCaster) && hCaster.tMarkUnit != null) {
+        if (IsValid(hCaster) && hCaster.tMarkUnit != null) {
             GameFunc.ArrayFunc.ArrayRemove(hCaster.tMarkUnit, hParent)
         }
     }

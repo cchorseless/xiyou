@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifierMotionBoth_Plus, BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -438,7 +438,7 @@ export class modifier_imba_slark_pounce extends BaseModifierMotionBoth_Plus {
                     leash_radius: this.leash_radius
                 });
                 this.GetParentPlus().MoveToTargetToAttack(enemy);
-                this.GetParentPlus().PerformAttack(enemy, true, true, true, false, false, false, false);
+                this.GetParentPlus().AttackOnce(enemy, true, true, true, false, false, false, false);
                 this.Destroy();
                 return;
             }
@@ -691,7 +691,7 @@ export class modifier_imba_slark_essence_shift extends BaseModifier_Plus {
             });
             if (this.GetAbilityPlus().IsCooldownReady()) {
                 this.GetAbilityPlus().StartCooldown(this.GetAbilityPlus().GetCooldown(this.GetAbilityPlus().GetLevel() - 1) * this.GetParentPlus().GetCooldownReduction());
-                this.GetParentPlus().PerformAttack(keys.target, true, true, true, false, false, true, false);
+                this.GetParentPlus().AttackOnce(keys.target, true, true, true, false, false, true, false);
             }
         }
     }

@@ -47,10 +47,10 @@ export class ability6_obsidian_destroyer_sanity_eclipse extends BaseAbility_Plus
         let radius = this.GetSpecialValueFor("radius")
         // 需要影响星体禁锢中的目标
         //  let hAbility2  = obsidian_destroyer_2.findIn(  caster )
-        //  if ( GFuncEntity.IsValid(hAbility2) && hAbility2.tUnit!=null ) {
+        //  if ( IsValid(hAbility2) && hAbility2.tUnit!=null ) {
         //  	for (let hUnit of ( hAbility2.tUnit )) {
 
-        //  		if (  GFuncEntity.IsValid(hUnit) &&.IsAlive() && hUnit.IsPositionInRange(position, radius) && hUnit modifier_obsidian_destroyer_2_debuff.exist(  hUnit ) ) {
+        //  		if (  IsValid(hUnit) &&.IsAlive() && hUnit.IsPositionInRange(position, radius) && hUnit modifier_obsidian_destroyer_2_debuff.exist(  hUnit ) ) {
 
         //  			 modifier_obsidian_destroyer_2_invulnerable.remove( hUnit );
         //  			this.HitTarget(hUnit)
@@ -83,7 +83,7 @@ export class ability6_obsidian_destroyer_sanity_eclipse extends BaseAbility_Plus
         BattleHelper.GoApplyDamage(damage_table)
         // 每个目标获得4点能量精华
         let hModifier = modifier_obsidian_destroyer_3.findIn(caster) as IBaseModifier_Plus;
-        if (GFuncEntity.IsValid(hModifier)) {
+        if (IsValid(hModifier)) {
             hModifier.SetStackCount(essence_energy)
         }
     }
@@ -126,7 +126,7 @@ export class modifier_obsidian_destroyer_6 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return

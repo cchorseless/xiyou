@@ -35,7 +35,7 @@ export class ability3_earth_spirit_geomagnetic_grip extends BaseAbility_Plus {
         GTimerHelper.AddFrameTimer(1, GHandler.create(this, () => {
             let hCaster = this.GetCasterPlus()
             let hChargeCounter = modifier_earth_spirit_3.findIn(hCaster)
-            if (GFuncEntity.IsValid(hChargeCounter)) {
+            if (IsValid(hChargeCounter)) {
                 hChargeCounter.ForceRefresh()
                 let iMaxCount = hChargeCounter.GetMaxCount()
                 if (this.iMaxCount != null && iMaxCount > this.iMaxCount) {
@@ -168,7 +168,7 @@ export class modifier_earth_spirit_3 extends BaseModifier_Plus {
         }
 
         let hAbility = this.GetAbilityPlus()
-        if (!GFuncEntity.IsValid(hAbility)) {
+        if (!IsValid(hAbility)) {
             this.Destroy()
             return
         }
@@ -178,12 +178,12 @@ export class modifier_earth_spirit_3 extends BaseModifier_Plus {
         for (let i = math.max(iNewStackCount, this.tStones.length) - 1; i >= 0; i--) {
             let hStone = this.tStones[i]
             if (i > iNewStackCount) {
-                if (GFuncEntity.IsValid(hStone)) {
+                if (IsValid(hStone)) {
                     UTIL_Remove(hStone)
                     table.remove(this.tStones, i)
                 }
             } else {
-                if (!GFuncEntity.IsValid(hStone)) {
+                if (!IsValid(hStone)) {
                     let hStone = modifier_earth_spirit_3_stone.applyThinker(GetGroundPosition((hParent.GetAbsOrigin() + this.vStonePos) as Vector, hParent), hParent, hAbility, null, hParent.GetTeamNumber(), false)
                     hStone.SetForwardVector(hParent.GetForwardVector())
                     table.insert(this.tStones, hStone)
@@ -266,7 +266,7 @@ export class modifier_earth_spirit_3_cd extends BaseModifier_Plus {
             let hParent = this.GetParentPlus()
             let hAbility = this.GetAbilityPlus()
 
-            if (GFuncEntity.IsValid(hAbility)) {
+            if (IsValid(hAbility)) {
                 modifier_earth_spirit_3.apply(hParent, hParent, hAbility, { increase_count: 1 })
             }
         }

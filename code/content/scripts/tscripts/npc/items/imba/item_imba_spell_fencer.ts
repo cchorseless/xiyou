@@ -67,7 +67,7 @@ export class modifier_item_imba_spell_fencer extends BaseModifier_Plus {
     }
     /** DeclareFunctions():modifierfunction[] {
         let funcs = {
-            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
             2: GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT,
             3: GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BONUS,
             4: GPropertyConfig.EMODIFIER_PROPERTY.COOLDOWN_PERCENTAGE,
@@ -89,7 +89,7 @@ export class modifier_item_imba_spell_fencer extends BaseModifier_Plus {
     CC_GetModifierPercentageManacost(p_0: ModifierAbilityEvent,): number {
         return this.GetItemPlus().GetSpecialValueFor("bonus_cdr");
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.GetItemPlus().GetSpecialValueFor("bonus_damage");
     }

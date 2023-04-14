@@ -134,7 +134,7 @@ export class modifier_imba_echo_sabre_passive extends BaseModifier_Plus {
             1: GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BONUS,
             2: GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BONUS,
             3: GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT,
-            4: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
+            4: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
             5: GPropertyConfig.EMODIFIER_PROPERTY.MANA_REGEN_CONSTANT
         });
     } */
@@ -150,7 +150,7 @@ export class modifier_imba_echo_sabre_passive extends BaseModifier_Plus {
     CC_GetModifierAttackSpeedBonus_Constant(): number {
         return this.bonus_attack_speed;
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.bonus_damage;
     }
@@ -200,7 +200,7 @@ export class modifier_imba_reverb_rapier_passive extends BaseModifier_Plus {
             1: GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BONUS,
             2: GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BONUS,
             3: GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT,
-            4: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
+            4: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
             5: GPropertyConfig.EMODIFIER_PROPERTY.MANA_REGEN_CONSTANT,
             6: Enum_MODIFIER_EVENT.ON_ATTACK
         });
@@ -234,7 +234,7 @@ export class modifier_imba_reverb_rapier_passive extends BaseModifier_Plus {
     CC_GetModifierAttackSpeedBonus_Constant(): number {
         return this.bonus_attack_speed;
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.bonus_damage;
     }

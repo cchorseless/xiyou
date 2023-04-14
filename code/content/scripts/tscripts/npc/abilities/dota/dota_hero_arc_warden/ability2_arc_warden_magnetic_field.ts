@@ -87,7 +87,7 @@ export class modifier_arc_warden_2 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -200,7 +200,7 @@ export class modifier_arc_warden_2_buff_extra extends BaseModifier_Plus {
         for (let i = this.tAuraInfo.length - 1; i >= 0; i--) {
             let hOwner = EntIndexToHScript(this.tAuraInfo[i].iSourceIndex)
             let fDistance = CalcDistanceBetweenEntityOBB(hOwner, this.GetParentPlus())
-            if (!GFuncEntity.IsValid(hOwner) || fDistance > this.tAuraInfo[i].iRadius) {
+            if (!IsValid(hOwner) || fDistance > this.tAuraInfo[i].iRadius) {
                 table.remove(this.tAuraInfo, i)
                 this.DecrementStackCount()
             }
@@ -275,7 +275,7 @@ export class modifier_arc_warden_2_aura extends BaseModifier_Plus {
         if (fGameTime - this.fTickTime >= 1) {
             let hCaster = this.GetCasterPlus()
             let hParent = this.GetParentPlus()
-            if (!GFuncEntity.IsValid(hCaster)) {
+            if (!IsValid(hCaster)) {
                 this.Destroy()
                 return
             }

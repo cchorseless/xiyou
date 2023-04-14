@@ -53,7 +53,7 @@ export class ability6_queenofpain_sonic_wave extends BaseAbility_Plus {
     OnSpellStart() {
         let hCaster = this.GetCasterPlus()
         let hTarget = this.GetCursorTarget()
-        if (!GFuncEntity.IsValid(hTarget) || !hTarget.IsAlive()) {
+        if (!IsValid(hTarget) || !hTarget.IsAlive()) {
             return
         }
         let delay = this.GetSpecialValueFor("delay")
@@ -108,7 +108,7 @@ export class ability6_queenofpain_sonic_wave extends BaseAbility_Plus {
 
         for (let i = hDummy.GetAbilityCount() - 1; i >= 0; i--) {
             let ability = hDummy.GetAbilityByIndex(i)
-            if (GFuncEntity.IsValid(ability)) {
+            if (IsValid(ability)) {
                 hDummy.RemoveAbilityByHandle(ability)
             }
         }
@@ -139,7 +139,7 @@ export class ability6_queenofpain_sonic_wave extends BaseAbility_Plus {
         })
     }
     OnProjectileHit_ExtraData(hTarget: IBaseNpc_Plus, vLocation: Vector, ExtraData: any) {
-        if (GFuncEntity.IsValid(hTarget)) {
+        if (IsValid(hTarget)) {
             let hCaster = this.GetCasterPlus()
             let damage = hCaster.HasScepter() && this.GetSpecialValueFor("damage_scepter") || this.GetSpecialValueFor("damage")
             let damage_per_int = this.GetSpecialValueFor("damage_per_int")
@@ -149,7 +149,7 @@ export class ability6_queenofpain_sonic_wave extends BaseAbility_Plus {
             EmitSoundOnLocationWithCaster(hTarget.GetAbsOrigin(), ResHelper.GetSoundReplacement("Hero_QueenOfPain.ShadowStrike.Target", hCaster), hCaster)
 
             let hDummy = EntIndexToHScript(ExtraData.dummy_ent_index || -1) as IBaseNpc_Plus
-            if (GFuncEntity.IsValid(hDummy)) {
+            if (IsValid(hDummy)) {
                 modifier_queenofpain_6_particle.apply(hDummy, hTarget, this, { duration: BaseModifier_Plus.LOCAL_PARTICLE_MODIFIER_DURATION })
 
                 let vCenter = hDummy.GetAbsOrigin()
@@ -176,7 +176,7 @@ export class ability6_queenofpain_sonic_wave extends BaseAbility_Plus {
             }
             BattleHelper.GoApplyDamage(tDamageTable)
 
-            if (GFuncEntity.IsValid(hTarget) && hTarget.IsAlive()) {
+            if (IsValid(hTarget) && hTarget.IsAlive()) {
                 if (hCaster.HasTalent("special_bonus_unique_queenofpain_custom_5")) {
                     let iStackCount = modifier_generic_poison.GetPoisonStackCount(hTarget)
                     if (iStackCount > 0) {
@@ -248,7 +248,7 @@ export class modifier_queenofpain_6 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return

@@ -66,7 +66,7 @@ export class ability2_shadow_shaman_voodoo extends BaseAbility_Plus {
         modifier_kill.apply(hTotem, hCaster, this, { duration: totem_duration - 1 / 30 })
 
         let hAbility = ability3_shadow_shaman_shackles.findIn(hCaster) as ability3_shadow_shaman_shackles;
-        if (GFuncEntity.IsValid(hAbility) && hAbility.FireTotem != null) {
+        if (IsValid(hAbility) && hAbility.FireTotem != null) {
             hAbility.FireTotem(hTotem)
         }
         //  记录上一次释放的位置
@@ -114,7 +114,7 @@ export class modifier_shadow_shaman_2 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus() as ability2_shadow_shaman_voodoo
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -216,9 +216,9 @@ export class modifier_shadow_shaman_2_totem extends BaseModifier_Plus {
     BeDestroy() {
 
         if (IsServer()) {
-            if (GFuncEntity.IsValid(this.GetCasterPlus())) {
+            if (IsValid(this.GetCasterPlus())) {
                 let hAbility = ability3_shadow_shaman_shackles.findIn(this.GetCasterPlus()) as ability3_shadow_shaman_shackles;
-                if (GFuncEntity.IsValid(hAbility) && hAbility.RemoveTotem) {
+                if (IsValid(hAbility) && hAbility.RemoveTotem) {
                     hAbility.RemoveTotem(this.GetParentPlus())
                 }
             }
@@ -228,7 +228,7 @@ export class modifier_shadow_shaman_2_totem extends BaseModifier_Plus {
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
             let hParent = this.GetParentPlus()
-            if (!GFuncEntity.IsValid(hCaster)) {
+            if (!IsValid(hCaster)) {
                 hParent.ForceKill(false)
                 this.Destroy()
                 this.StartIntervalThink(-1)
@@ -305,7 +305,7 @@ export class modifier_shadow_shaman_2_debuff extends BaseModifier_Plus {
     BeDestroy() {
 
         if (IsServer()) {
-            if (GFuncEntity.IsValid(this.modifier_truesight)) {
+            if (IsValid(this.modifier_truesight)) {
                 this.modifier_truesight.Destroy()
             }
         }
@@ -315,7 +315,7 @@ export class modifier_shadow_shaman_2_debuff extends BaseModifier_Plus {
             let hCaster = this.GetCasterPlus()
             let hParent = this.GetParentPlus()
             let hAbility = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(hCaster) || !hCaster.IsAlive() || !GFuncEntity.IsValid(hAbility)) {
+            if (!IsValid(hCaster) || !hCaster.IsAlive() || !IsValid(hAbility)) {
                 this.Destroy()
                 return
             }
@@ -325,18 +325,18 @@ export class modifier_shadow_shaman_2_debuff extends BaseModifier_Plus {
                 victim: hParent,
                 damage: this.damage_per_sec,
                 damage_type: hAbility.GetAbilityDamageType(),
-                eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_DOT,
+                extra_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_DOT,
             }
             if (modifier_shadow_shaman_3_hex.exist(damage_table.victim) && hCaster.HasShard()) {
                 damage_table.damage_type = DAMAGE_TYPES.DAMAGE_TYPE_PURE
             }
             BattleHelper.GoApplyDamage(damage_table)
             this.IncrementStackCount()
-            // if (GFuncEntity.IsValid(this.GetCasterPlus().GetSummoner()) && this.GetCasterPlus().GetSummoner().HasScepter()) {
+            // if (IsValid(this.GetCasterPlus().GetSummoner()) && this.GetCasterPlus().GetSummoner().HasScepter()) {
             //     undefined
             // }
 
-            // if (GFuncEntity.IsValid(this.GetCasterPlus().GetSummoner()) && this.GetCasterPlus().GetSummoner().HasScepter()) {
+            // if (IsValid(this.GetCasterPlus().GetSummoner()) && this.GetCasterPlus().GetSummoner().HasScepter()) {
             //     undefined
             //          modifier_shadow_shaman_2_resistance.apply( this.GetParentPlus() , this.GetCasterPlus().GetSummoner(), this.GetAbilityPlus(), { duration = this.GetRemainingTime() })
             //     }

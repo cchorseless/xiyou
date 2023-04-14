@@ -49,7 +49,7 @@ export class modifier_courier_wood_sec_1 extends BaseModifier_Plus {
     CC_IntervalThink() {
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
-        if (!GFuncEntity.IsValid(hAbility)) {
+        if (!IsValid(hAbility)) {
             this.Destroy()
             return
         }

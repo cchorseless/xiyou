@@ -154,13 +154,13 @@ export class modifier_item_imba_origin_treads extends BaseModifier_Plus {
             1: GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BONUS,
             2: GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_BONUS,
             3: GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BONUS,
-            4: GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS,
+            4: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS,
             5: GPropertyConfig.EMODIFIER_PROPERTY.MANA_BONUS,
             6: GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_UNIQUE,
             7: GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT,
             8: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_REGEN_CONSTANT,
             9: GPropertyConfig.EMODIFIER_PROPERTY.HP_REGEN_AMPLIFY_PERCENTAGE,
-            10: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
+            10: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
             11: GPropertyConfig.EMODIFIER_PROPERTY.PROCATTACK_BONUS_DAMAGE_PHYSICAL,
             12: GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS,
             13: Enum_MODIFIER_EVENT.ON_TAKEDAMAGE
@@ -190,7 +190,7 @@ export class modifier_item_imba_origin_treads extends BaseModifier_Plus {
             return this.all_stats;
         }
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
     CC_GetModifierHealthBonus(): number {
         return this.bonus_health;
     }
@@ -218,7 +218,7 @@ export class modifier_item_imba_origin_treads extends BaseModifier_Plus {
             return this.str_hp_regen_amp_pct;
         }
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         if (this.GetStackCount() == 2) {
             return this.agi_damage_bonus;

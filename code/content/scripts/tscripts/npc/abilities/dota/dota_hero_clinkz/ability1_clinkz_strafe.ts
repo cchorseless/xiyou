@@ -43,7 +43,7 @@ export class ability1_clinkz_strafe extends BaseAbility_Plus {
         let hCaster = this.GetCasterPlus()
         let hTarget = this.GetCursorTarget()
         let duration = this.GetSpecialValueFor("duration")
-        if (!GFuncEntity.IsValid(hTarget) || !hTarget.IsAlive()) {
+        if (!IsValid(hTarget) || !hTarget.IsAlive()) {
             return
         }
         let attack_gain_percent = this.GetSpecialValueFor("attack_gain_percent")
@@ -108,7 +108,7 @@ export class modifier_clinkz_1 extends BaseModifier_Plus {
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
     On_AttackLanded(params: ModifierAttackEvent) {
         let hParent = this.GetParentPlus()
-        if (!GFuncEntity.IsValid(params.target)) { return }
+        if (!IsValid(params.target)) { return }
         let target = params.target as IBaseNpc_Plus
         if (params.target.GetClassname() == "dota_item_drop") { return }
 
@@ -121,7 +121,7 @@ export class modifier_clinkz_1 extends BaseModifier_Plus {
             let hParent = this.GetParentPlus()
             let hSummon = params.unit //  召唤者
             let hSummoned = params.target //  被召唤者
-            if (GFuncEntity.IsValid(hSummoned) && hSummon == hParent && hSummoned.GetUnitName() == "npc_dota_clinkz_skeleton_archer") {
+            if (IsValid(hSummoned) && hSummon == hParent && hSummoned.GetUnitName() == "npc_dota_clinkz_skeleton_archer") {
                 modifier_clinkz_1_summoned_attack_buff.apply(hSummoned, hParent, this.GetAbilityPlus(), null)
             }
         }
@@ -129,7 +129,7 @@ export class modifier_clinkz_1 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus() as ability1_clinkz_strafe
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -208,7 +208,7 @@ export class modifier_clinkz_1_summoned_attack_buff extends BaseModifier_Plus {
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
     On_AttackLanded(params: ModifierAttackEvent) {
         let hParent = this.GetParentPlus()
-        if (!GFuncEntity.IsValid(params.target)) { return }
+        if (!IsValid(params.target)) { return }
         if (params.target.GetClassname() == "dota_item_drop") { return }
         if (params.attacker == this.GetParentPlus() && !params.attacker.IsIllusion() && !BattleHelper.AttackFilter(params.record, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NOT_PROCESSPROCS) && UnitFilter(params.target, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, params.attacker.GetTeamNumber()) == UnitFilterResult.UF_SUCCESS) {
             modifier_clinkz_1_reduce_armor.apply(params.target, params.attacker, this.GetAbilityPlus(), { duration: this.armor_reduction_duration * (params.target as IBaseNpc_Plus).GetStatusResistanceFactor(params.attacker) })
@@ -265,13 +265,13 @@ export class modifier_clinkz_1_buff extends BaseModifier_Plus {
         let hAbility = this.GetAbilityPlus()
         let hParent = this.GetParentPlus()
         let hAttacker = params.attacker
-        if (GFuncEntity.IsValid(hAttacker) && hAttacker.GetUnitLabel() != "builder") {
+        if (IsValid(hAttacker) && hAttacker.GetUnitLabel() != "builder") {
             if (hAttacker.GetTeamNumber() == params.unit.GetTeamNumber()) {
                 return
             }
             if (type(hAttacker.GetSource) == "function") {
                 let hSource = hAttacker.GetSource()
-                if (GFuncEntity.IsValid(hSource)) {
+                if (IsValid(hSource)) {
                     hAttacker = hSource
                 }
             }

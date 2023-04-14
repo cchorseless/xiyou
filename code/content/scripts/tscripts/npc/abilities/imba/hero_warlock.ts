@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -360,7 +360,7 @@ export class modifier_imba_shadow_word extends BaseModifier_Plus {
         return true;
     }
     OnIntervalThink(): void {
-        if (!GFuncEntity.IsValid(this.caster)) {
+        if (!IsValid(this.caster)) {
             this.Destroy();
             return;
         }

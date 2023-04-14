@@ -31,7 +31,7 @@ export class t21_magical_link extends BaseAbility_Plus {
         modifier_t21_magical_link_buff.apply(hTarget, hCaster, this, null)
 
         let t21_magical_link_break = hCaster.AddAbility(this.GetAssociatedSecondaryAbilities()) as t21_magical_link_break
-        if (GFuncEntity.IsValid(t21_magical_link_break)) {
+        if (IsValid(t21_magical_link_break)) {
             t21_magical_link_break.SetLevel(this.GetLevel())
             hCaster.SwapAbilities(this.GetName(), t21_magical_link_break.GetName(), false, true)
             t21_magical_link_break.hAbility = this
@@ -43,12 +43,12 @@ export class t21_magical_link extends BaseAbility_Plus {
         let hCaster = this.GetCasterPlus()
 
         let t21_magical_link_break = hCaster.FindAbilityByName(this.GetAssociatedSecondaryAbilities())
-        if (GFuncEntity.IsValid(t21_magical_link_break)) {
+        if (IsValid(t21_magical_link_break)) {
             hCaster.SwapAbilities(t21_magical_link_break.GetName(), this.GetName(), false, true)
             hCaster.RemoveAbility(t21_magical_link_break.GetName())
         }
 
-        if (GFuncEntity.IsValid(this.hLastTarget)) {
+        if (IsValid(this.hLastTarget)) {
             modifier_t21_magical_link_buff.remove(this.hLastTarget);
             modifier_t19_brutal_link_buff.remove(this.hLastTarget);
         }
@@ -68,7 +68,7 @@ export class t21_magical_link_break extends BaseAbility_Plus {
     OnSpellStart() {
         let hCaster = this.GetCasterPlus()
 
-        if (GFuncEntity.IsValid(this.hAbility)) {
+        if (IsValid(this.hAbility)) {
             this.hAbility.LinkBreak()
         }
     }
@@ -134,14 +134,14 @@ export class modifier_t21_magical_link_buff extends BaseModifier_Plus {
         let hParent = this.GetParentPlus()
         if (IsServer()) {
             let hAbility = this.GetAbilityPlus() as t21_magical_link
-            if (GFuncEntity.IsValid(hAbility) && hAbility.LinkBreak) {
+            if (IsValid(hAbility) && hAbility.LinkBreak) {
                 hAbility.LinkBreak()
             }
         }
     }
     OnIntervalThink() {
         if (IsServer()) {
-            if (!GFuncEntity.IsValid(this.GetAbilityPlus()) || !GFuncEntity.IsValid(this.GetCasterPlus())) {
+            if (!IsValid(this.GetAbilityPlus()) || !IsValid(this.GetCasterPlus())) {
                 this.Destroy()
                 return
             }

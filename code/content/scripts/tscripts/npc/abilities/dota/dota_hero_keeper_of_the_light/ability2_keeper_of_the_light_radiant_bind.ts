@@ -45,7 +45,7 @@ export class ability2_keeper_of_the_light_radiant_bind extends BaseAbility_Plus 
 
         let hAbility = ability6_keeper_of_the_light_spirit_form.findIn(hCaster)
         let hModifier = modifier_keeper_of_the_light_2_thinker.findIn(hThinker)
-        if (GFuncEntity.IsValid(hAbility) && GFuncEntity.IsValid(hModifier)) {
+        if (IsValid(hAbility) && IsValid(hModifier)) {
             // hAbility.SaveModifier(hModifier)
         }
 
@@ -94,7 +94,7 @@ export class modifier_keeper_of_the_light_2 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus() as ability2_keeper_of_the_light_radiant_bind
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -211,9 +211,9 @@ export class modifier_keeper_of_the_light_2_thinker extends modifier_particle_th
     BeDestroy() {
 
         let hCaster = this.GetCasterPlus()
-        if (GFuncEntity.IsValid(hCaster)) {
+        if (IsValid(hCaster)) {
             let hAbility = ability6_keeper_of_the_light_spirit_form.findIn(hCaster)
-            // if (GFuncEntity.IsValid(hAbility) && hAbility.RemoveModifier != null) {
+            // if (IsValid(hAbility) && hAbility.RemoveModifier != null) {
             //     hAbility.RemoveModifier(this)
             // }
             UTIL_Remove(this.GetParentPlus())
@@ -224,13 +224,13 @@ export class modifier_keeper_of_the_light_2_thinker extends modifier_particle_th
             let hCaster = this.GetCasterPlus()
             let hParent = this.GetParentPlus()
             let hAbility = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(hCaster) || !GFuncEntity.IsValid(hAbility)) {
+            if (!IsValid(hCaster) || !IsValid(hAbility)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
             }
             let hModifier = hCaster.FindModifierByName(hAbility.GetIntrinsicModifierName());
-            let extra_damage = GFuncEntity.IsValid(hModifier as IBaseModifier_Plus) && hModifier.GetStackCount() || 0
+            let extra_damage = IsValid(hModifier as IBaseModifier_Plus) && hModifier.GetStackCount() || 0
             let tTargets = AoiHelper.FindEntityInRadius(hCaster.GetTeamNumber(), hParent.GetAbsOrigin(), this.radius, null, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST)
             for (let hUnit of (tTargets)) {
                 let tDamageTable = {

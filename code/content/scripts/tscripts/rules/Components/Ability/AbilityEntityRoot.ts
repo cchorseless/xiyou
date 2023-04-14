@@ -46,8 +46,8 @@ export class AbilityEntityRoot extends BaseEntityRoot {
 
     onDestroy(): void {
         let ability = this.GetDomain<IBaseAbility_Plus>();
-        if (!GFuncEntity.IsValid(ability)) { return }
-        GFuncEntity.SafeDestroyAbility(ability);
+        if (!IsValid(ability)) { return }
+        SafeDestroyAbility(ability);
     }
 
     config() {

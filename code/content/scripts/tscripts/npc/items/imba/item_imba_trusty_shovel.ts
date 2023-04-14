@@ -106,7 +106,7 @@ export class modifier_imba_trusty_shovel_passives extends BaseModifier_Plus {
             1: GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS
         });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
     CC_GetModifierHealthBonus(): number {
         return this.GetItemPlus().GetSpecialValueFor("bonus_health");
     }

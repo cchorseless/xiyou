@@ -49,7 +49,7 @@ export class modifier_tp extends BaseModifier_Plus {
         let vPosition = hCaster.GetAbsOrigin();
         let tPosition = hParent.GetAbsOrigin();
         if (IsServer()) {
-            if (GFuncEntity.IsValid(hCaster)) {
+            if (IsValid(hCaster)) {
                 hCaster.StopSound("Portal.Loop_Disappear");
                 EmitSoundOnLocationWithCaster(hCaster.GetAbsOrigin(), "Portal.Hero_Disappear", hCaster);
                 if (vPosition != null) {
@@ -60,7 +60,7 @@ export class modifier_tp extends BaseModifier_Plus {
             if (tPosition) {
                 hCaster.SetAbsOrigin(GetGroundPosition(tPosition, hParent));
             }
-            GFuncEntity.SafeDestroyUnit(hParent)
+            SafeDestroyUnit(hParent)
         }
     }
 
@@ -71,7 +71,7 @@ export class modifier_tp extends BaseModifier_Plus {
      * @param position
      */
     static TeleportToPoint(hCaster: IBaseNpc_Plus, ability: IBaseAbility_Plus, position: Vector) {
-        if (!GFuncEntity.IsValid(hCaster)) {
+        if (!IsValid(hCaster)) {
             return;
         }
         modifier_tp.applyThinker(position, hCaster, ability, { duration: 1 });

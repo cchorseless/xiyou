@@ -10,7 +10,7 @@ export class t38_wind_thunder extends BaseAbility_Plus {
 
     InheritAbility(hTarget: IBaseNpc_Plus, duration: number) {
         let hCaster = this.GetCasterPlus()
-        if (GFuncEntity.IsValid(hTarget)) {
+        if (IsValid(hTarget)) {
             modifier_t38_wind_thunder.apply(hTarget, hCaster, this, { duration: duration })
         }
     }
@@ -47,7 +47,7 @@ export class modifier_t38_wind_thunder extends BaseModifier_Plus {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         if (IsServer()) {
-            if (GFuncEntity.IsValid(hCaster) && hCaster != hParent) {
+            if (IsValid(hCaster) && hCaster != hParent) {
                 let iParticleID = ResHelper.CreateParticle({
                     resPath: "particles/units/heroes/hero_razor/razor_static_link.vpcf",
                     resNpc: null,
@@ -69,7 +69,7 @@ export class modifier_t38_wind_thunder extends BaseModifier_Plus {
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PROCATTACK_BONUS_DAMAGE_PHYSICAL)
     GetProcAttack_BonusDamage_Physical(params: IModifierTable) {
-        if (params.attacker == this.GetParentPlus() && GFuncEntity.IsValid(this.GetAbilityPlus()) && !params.attacker.IsIllusion() && !params.attacker.AttackFilter(params.record, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NOT_PROCESSPROCS) && UnitFilter(params.target, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BUILDING, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, params.attacker.GetTeamNumber()) == UnitFilterResult.UF_SUCCESS) {
+        if (params.attacker == this.GetParentPlus() && IsValid(this.GetAbilityPlus()) && !params.attacker.IsIllusion() && !params.attacker.AttackFilter(params.record, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NOT_PROCESSPROCS) && UnitFilter(params.target, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BUILDING, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, params.attacker.GetTeamNumber()) == UnitFilterResult.UF_SUCCESS) {
             let fDamage = (this.GetParentPlus().GetStrength() + this.GetParentPlus().GetAgility() + this.GetParentPlus().GetIntellect()) * this.damage_factor
             let iParticleID = ResHelper.CreateParticle({
                 resPath: "particles/units/towers/t38.vpcf",
@@ -97,18 +97,18 @@ export class modifier_t38_wind_thunder extends BaseModifier_Plus {
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
     CC_GetModifierMaximumAttackSpeedBonus() {
         let hCaster = this.GetCasterPlus()
-        if (GFuncEntity.IsValid(hCaster)) {
+        if (IsValid(hCaster)) {
             // let _modifier_combination_t38_thor_mark = modifier_combination_t38_thor_mark.findIn(hCaster) as any;
-            // return (GFuncEntity.IsValid(modifier_combination_t38_thor_mark) && modifier_combination_t38_thor_mark.GetStackCount() > 0) && modifier_combination_t38_thor_mark.attack_speed_limit || 0
+            // return (IsValid(modifier_combination_t38_thor_mark) && modifier_combination_t38_thor_mark.GetStackCount() > 0) && modifier_combination_t38_thor_mark.attack_speed_limit || 0
         }
         return 0
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_PURE_DAMAGE_PERCENTAGE)
     CC_GetModifierOutgoingPureDamagePercentage() {
         let hCaster = this.GetCasterPlus()
-        if (GFuncEntity.IsValid(hCaster)) {
+        if (IsValid(hCaster)) {
             // let modifier_combination_t38_thor_mark = modifier_combination_t38_thor_mark.findIn(hCaster) as any;
-            // return (GFuncEntity.IsValid(modifier_combination_t38_thor_mark) && modifier_combination_t38_thor_mark.GetStackCount() > 0) && modifier_combination_t38_thor_mark.increase_pure_damage_pct || 0
+            // return (IsValid(modifier_combination_t38_thor_mark) && modifier_combination_t38_thor_mark.GetStackCount() > 0) && modifier_combination_t38_thor_mark.increase_pure_damage_pct || 0
         }
         return 0
     }

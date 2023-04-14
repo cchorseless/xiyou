@@ -43,7 +43,7 @@ export class modifier_t31_poison_sting extends BaseModifier_Plus {
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
     On_AttackLanded(params: ModifierAttackEvent) {
         if (params.target == null || params.target.GetClassname() == "dota_item_drop") { return }
-        if (!GFuncEntity.IsValid(params.attacker)) { return }
+        if (!IsValid(params.attacker)) { return }
         if (params.attacker == this.GetParentPlus()) {
             if (!params.attacker.PassivesDisabled() && !BattleHelper.AttackFilter(params.record, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NO_CLEAVE) && UnitFilter(params.target, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, params.attacker.GetTeamNumber()) == UnitFilterResult.UF_SUCCESS) {
                 modifier_generic_poison.Poison(params.target, params.attacker, this.GetAbilityPlus(), this.poison_damage)

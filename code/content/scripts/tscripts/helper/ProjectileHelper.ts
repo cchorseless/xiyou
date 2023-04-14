@@ -768,7 +768,7 @@ export module ProjectileHelper {
             Start() {
                 GTimerHelper.AddFrameTimer(1, GHandler.create(this, () => {
                     this.aliveTime += GTimerHelper.GetUpdateInterval();
-                    if (this.aliveTime >= this.duration || !GFuncEntity.IsValid(this.GetCaster())) {
+                    if (this.aliveTime >= this.duration || !IsValid(this.GetCaster())) {
                         this.Remove();
                         return;
                     }

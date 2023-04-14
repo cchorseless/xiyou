@@ -368,7 +368,7 @@ export class modifier_imba_wisp_tether_ally_attack extends BaseModifier_Plus {
     CC_OnAttack(params: ModifierAttackEvent): void {
         if (IsServer()) {
             if (params.attacker == this.GetParentPlus()) {
-                this.GetCasterPlus().PerformAttack(params.target, true, true, true, false, true, false, false);
+                this.GetCasterPlus().AttackOnce(params.target, true, true, true, false, true, false, false);
             }
         }
     }

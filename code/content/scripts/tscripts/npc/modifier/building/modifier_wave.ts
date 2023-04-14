@@ -44,7 +44,7 @@ export class modifier_wave extends BaseModifier_Plus {
     public PhysicalArmor: number = 0;
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_ARMOR_BASE)
     public MagicalArmor: number = 0;
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
     public Hp: number = 0;
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MANA_BONUS)
     public Mp: number = 0;

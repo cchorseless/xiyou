@@ -87,7 +87,7 @@ export class modifier_portal extends BaseModifier_Plus {
     OnOrder(params: IModifierTable) {
         if (params.order_type == dotaunitorder_t.DOTA_UNIT_ORDER_MOVE_TO_TARGET) {
             GTimerHelper.AddFrameTimer(1, GHandler.create(this, () => {
-                if (GFuncEntity.IsValid(this) && GFuncEntity.IsValid(this.GetParentPlus())) {
+                if (IsValid(this) && IsValid(this.GetParentPlus())) {
                     GFuncEntity.ExecuteOrder(params.unit, dotaunitorder_t.DOTA_UNIT_ORDER_MOVE_TO_POSITION, null, null, this.GetParentPlus().GetAbsOrigin());
                 }
             }));

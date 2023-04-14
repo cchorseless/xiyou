@@ -68,7 +68,7 @@ export class modifier_lone_druid_1 extends BaseModifier_Plus {
     OnSummonned(params: IModifierTable) {
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
-        if (params.unit == hParent && GFuncEntity.IsValid(params.target)) {
+        if (params.unit == hParent && IsValid(params.target)) {
             modifier_lone_druid_1_buff.apply(params.target, hParent, hAbility, null)
         }
     }
@@ -119,7 +119,7 @@ export class modifier_lone_druid_1_buff extends BaseModifier_Plus {
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
             let hAbility = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(hCaster) || !hCaster.IsAlive()) {
+            if (!IsValid(hCaster) || !hCaster.IsAlive()) {
                 this.Destroy()
                 return
             }

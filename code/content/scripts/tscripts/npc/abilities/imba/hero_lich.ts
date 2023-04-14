@@ -1069,7 +1069,7 @@ export class modifier_imba_dark_ritual_creeps extends BaseModifier_Plus {
     /** DeclareFunctions():modifierfunction[] {
         let decFuncs = {
             1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT,
-            2: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS
+            2: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE
         }
         return Object.values(decFuncs);
     } */
@@ -1077,7 +1077,7 @@ export class modifier_imba_dark_ritual_creeps extends BaseModifier_Plus {
     CC_GetModifierAttackSpeedBonus_Constant(): number {
         return this.creeps_bonus_as;
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.GetStackCount() * this.creeps_bonus_dmg_pct * 0.01;
     }
@@ -1925,10 +1925,10 @@ export class modifier_imba_lich_sinister_gaze_bonus_health extends BaseModifier_
     }
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.EXTRA_HEALTH_BONUS
+            1: GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS
         });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.EXTRA_HEALTH_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
     CC_GetModifierExtraHealthBonus(): number {
         return this.GetStackCount();
     }

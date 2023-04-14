@@ -72,7 +72,7 @@ export module PropertyCalculate {
      */
     export function SumProps(target: IBaseNpc_Plus, event: any, ...k: Array<PropertyConfig.EMODIFIER_PROPERTY>): number {
         let _r = 0;
-        if (!GFuncEntity.IsValid(target)) {
+        if (!IsValid(target)) {
             return _r
         }
         let info = target.__AllModifiersInfo__;
@@ -136,7 +136,7 @@ export module PropertyCalculate {
     */
     export function GetUnitCache(hUnit: IBaseNpc_Plus, k: string) {
         let fDefault = 0;
-        if (GFuncEntity.IsValid(hUnit)) {
+        if (IsValid(hUnit)) {
 
             if (hUnit.TempData()[k] == null) {
                 hUnit.TempData()[k] = GToNumber(KVHelper.GetUnitData(hUnit.GetUnitName(), k));
@@ -151,7 +151,7 @@ export module PropertyCalculate {
      * @param v 
      */
     export function SetUnitCache(hUnit: IBaseNpc_Plus, k: string, v: number | string) {
-        if (GFuncEntity.IsValid(hUnit)) {
+        if (IsValid(hUnit)) {
             hUnit.TempData()[k] = v;
         }
     }
@@ -165,8 +165,8 @@ export module PropertyCalculate {
      */
     export function GetAttackDamage(hUnit: IBaseNpc_Plus) {
         let baseatk = GetBaseAttackDamage(hUnit);
-        let bounsatk = SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS);
-        let bounsatk_pect = SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS_PERCENTAGE);
+        let bounsatk = SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE);
+        let bounsatk_pect = SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE_PERCENTAGE);
         bounsatk = bounsatk * (100 + bounsatk_pect) / 100;
         let atk_pect = SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_PERCENTAGE);
         return math.floor(baseatk + bounsatk * (100 + atk_pect) / 100);
@@ -179,11 +179,11 @@ export module PropertyCalculate {
      */
     export function GetBaseAttackDamage(hUnit: IBaseNpc_Plus) {
         let fDefault = 0;
-        if (GFuncEntity.IsValid(hUnit)) {
+        if (IsValid(hUnit)) {
             fDefault = GetUnitCache(hUnit, "AttackDamage");
         }
         let baseatk = fDefault + SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.BASEATTACK_BONUSDAMAGE);
-        let baseatk_pect = SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BASE_PERCENTAGE);
+        let baseatk_pect = SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.BASEATTACK_DAMAGE_PERCENTAGE);
         let atk_pect = SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_PERCENTAGE);
         return math.floor(baseatk * (1 + baseatk_pect * 0.01) * (1 + atk_pect * 0.01));
     }
@@ -194,7 +194,7 @@ export module PropertyCalculate {
      */
     export function GetBasePhysicalArmor(hUnit: IBaseNpc_Plus) {
         let fValue = 0;
-        if (GFuncEntity.IsValid(hUnit)) {
+        if (IsValid(hUnit)) {
             fValue = GetUnitCache(hUnit, "ArmorPhysical") + SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BASE)
         }
         let BasePhysicalArmorPercentage = SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BASE_PERCENTAGE);
@@ -251,7 +251,7 @@ export module PropertyCalculate {
         let fValue_active = GetPhysicalArmor_Active(target);
         // 负甲的时候不计算无视护甲
         if (fValue > 0) {
-            if (event && GFuncEntity.IsValid(event.attacker)) {
+            if (event && IsValid(event.attacker)) {
                 let fIgnore = SumProps(event.attacker, event, GPropertyConfig.EMODIFIER_PROPERTY.IGNORE_PHYSICAL_ARMOR);
                 fValue = math.max(fValue - fIgnore, 0);
                 if (fValue > 0) {
@@ -263,10 +263,28 @@ export module PropertyCalculate {
         fValue = math.max(fValue, fValue_active)
         return GPropertyConfig.PHYSICAL_ARMOR_FACTOR * fValue / (1 + GPropertyConfig.PHYSICAL_ARMOR_FACTOR * math.abs(fValue))
     }
+    /**
+     * 物理护甲减免，用于客户端显示
+     * @param target 
+     * @returns 
+     */
+    export function GetPhysicalReduction(target: IBaseNpc_Plus) {
+        let fValue = GetPhysicalArmor(target)
+        return GPropertyConfig.MAGICAL_ARMOR_FACTOR * fValue / (1 + GPropertyConfig.MAGICAL_ARMOR_FACTOR * math.abs(fValue))
+    }
+    /**
+     * 无视物理护甲百分比
+     * @param target
+     */
+    export function GetIgnorePhysicalArmorPercentage(target: IBaseNpc_Plus) {
+        let IGNORE_PHYSICAL_ARMOR_PERCENTAGE = SumProps(target, null, GPropertyConfig.EMODIFIER_PROPERTY.IGNORE_PHYSICAL_ARMOR_PERCENTAGE);
+        let IGNORE_PHYSICAL_ARMOR_PERCENTAGE_UNIQUE = SumProps(target, null, GPropertyConfig.EMODIFIER_PROPERTY.IGNORE_PHYSICAL_ARMOR_PERCENTAGE_UNIQUE);
+        return -((1 - IGNORE_PHYSICAL_ARMOR_PERCENTAGE * 0.01) * (1 - IGNORE_PHYSICAL_ARMOR_PERCENTAGE_UNIQUE * 0.01) - 1) * 100
+    }
     //  魔法防御
     export function GetBaseMagicalArmor(hUnit: IBaseNpc_Plus) {
         let fValue = 0;
-        if (GFuncEntity.IsValid(hUnit)) {
+        if (IsValid(hUnit)) {
             fValue = GetUnitCache(hUnit, "ArmorMagical") + SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_ARMOR_BASE)
         }
         let BaseMagicalArmorPercentage = SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_ARMOR_BASE_PERCENTAGE);
@@ -284,14 +302,12 @@ export module PropertyCalculate {
         return math.floor(BaseMagicalArmor + BonusMagicalArmor * (1 + MagicalArmorPercentage * 0.01))
     }
 
-    export function GetIgnoreMagicalArmorConstant(hUnit: IBaseNpc_Plus, tParams: ICustomModifierAttackEvent) {
-        return SumProps(hUnit, tParams, GPropertyConfig.EMODIFIER_PROPERTY.IGNORE_MAGICAL_ARMOR_CONSTANT,)
-    }
+
     export function GetIgnoreMagicalArmorPercentageTarget(hUnit: IBaseNpc_Plus, tParams: ICustomModifierAttackEvent) {
         return SumProps(hUnit, tParams, GPropertyConfig.EMODIFIER_PROPERTY.IGNORE_MAGICAL_ARMOR_PERCENTAGE_TARGET,)
     }
     /**
-     * 计算魔法抵抗
+     * 计算魔法抵抗，用于战斗
      * @param target
      * @param event
      */
@@ -302,12 +318,27 @@ export module PropertyCalculate {
             return 0
         }
         let fValue = GetMagicalArmor(target)
-        if (event && GFuncEntity.IsValid(event.attacker) && fValue > 0) {
+        if (event && IsValid(event.attacker) && fValue > 0) {
             fValue = fValue - math.min(SumProps(target, event, GPropertyConfig.EMODIFIER_PROPERTY.IGNORE_MAGICAL_ARMOR), fValue)
             fValue = fValue - math.max(fValue * GetIgnoreMagicalArmorPercentage(event.attacker as IBaseNpc_Plus) * 0.01, 0)
         }
-        return GPropertyConfig.MAGICAL_ARMOR_FACTOR * fValue / (1 + GPropertyConfig.MAGICAL_ARMOR_FACTOR * math.abs(fValue))
+        // 统计魔法抗性
+        let magicalResistance = SumProps(target, event, GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_RESISTANCE_BONUS);
+        magicalResistance = magicalResistance * 0.01;
+        return magicalResistance + GPropertyConfig.MAGICAL_ARMOR_FACTOR * fValue / (1 + GPropertyConfig.MAGICAL_ARMOR_FACTOR * math.abs(fValue))
     }
+    /**
+     * 统计魔法抗性，用于客户端显示
+     * @param target 
+     * @returns 
+     */
+    export function GetMagicalReduction(target: IBaseNpc_Plus) {
+        let fValue = GetMagicalArmor(target)
+        let magicalResistance = SumProps(target, null, GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_RESISTANCE_BONUS);
+        magicalResistance = magicalResistance * 0.01;
+        return magicalResistance + GPropertyConfig.MAGICAL_ARMOR_FACTOR * fValue / (1 + GPropertyConfig.MAGICAL_ARMOR_FACTOR * math.abs(fValue))
+    }
+
     /**
      * 无视魔法护甲百分比
      * @param target
@@ -319,38 +350,39 @@ export module PropertyCalculate {
         return -((1 - IGNORE_MAGICAL_ARMOR_PERCENTAGE * 0.01) * (1 - IGNORE_MAGICAL_ARMOR_PERCENTAGE_UNIQUE * 0.01) - 1) * 100
     }
 
-
-
     //  技能增强
     export function GetBaseSpellAmplify(hUnit: IBaseNpc_Plus, tParams: ICustomModifierAttackEvent) {
-        return SumProps(hUnit, tParams, GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_BASE,)
+        return SumProps(hUnit, tParams, GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_PERCENTAGE)
     }
     export function GetBonusSpellAmplify(hUnit: IBaseNpc_Plus, tParams: ICustomModifierAttackEvent) {
-        return SumProps(hUnit, tParams, GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_BONUS,)
+        return SumProps(hUnit, tParams, GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_BONUS_PERCENTAGE)
     }
     export function GetBonusSpellAmplifyUnique(hUnit: IBaseNpc_Plus, tParams: ICustomModifierAttackEvent) {
-        return SumProps(hUnit, tParams, GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_BONUS_UNIQUE,)
+        return SumProps(hUnit, tParams, GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_PERCENTAGE_UNIQUE)
     }
     export function GetSpellAmplify(hUnit: IBaseNpc_Plus, tParams: ICustomModifierAttackEvent) {
         return GetBaseSpellAmplify(hUnit, tParams) + GetBonusSpellAmplify(hUnit, tParams) + GetBonusSpellAmplifyUnique(hUnit, tParams)
     }
+
+
+
     export function GetBaseMaxHealth(hUnit: IBaseNpc_Plus) {
         let fDefault = 0;
-        if (GFuncEntity.IsValid(hUnit)) {
+        if (IsValid(hUnit)) {
             fDefault = GetUnitCache(hUnit, "StatusHealth");
         }
-        let hp_base = PropertyCalculate.SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.HP_BASE)
+        let hp_base = PropertyCalculate.SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BASE)
         return fDefault + hp_base;
     }
     //  生命值
     export function GetHealthBonus(hUnit: IBaseNpc_Plus) {
-        return SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS)
+        return SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
     }
     export function GetHealthPercentage(hUnit: IBaseNpc_Plus) {
-        return SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.HP_PERCENTAGE)
+        return SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_PERCENTAGE)
     }
     export function GetHealthPercentageEnemy(hUnit: IBaseNpc_Plus) {
-        return SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.HP_PERCENT_ENEMY)
+        return SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_PERCENT_ENEMY)
     }
     //  生命恢复
     export function GetHealthRegen(hUnit: IBaseNpc_Plus) {
@@ -365,7 +397,7 @@ export module PropertyCalculate {
     }
     export function GetBaseMana(hUnit: IBaseNpc_Plus) {
         let fValue = 0
-        if (GFuncEntity.IsValid(hUnit)) {
+        if (IsValid(hUnit)) {
             fValue = GetUnitCache(hUnit, "StatusMana")
         }
         return fValue
@@ -419,21 +451,53 @@ export module PropertyCalculate {
     export function GetMaxCooldownReduction(hUnit: IBaseNpc_Plus, tParams: ICustomModifierAttackEvent) {
         return SumProps(hUnit, tParams, GPropertyConfig.EMODIFIER_PROPERTY.MAX_COOLDOWN_PERCENTAGE,)
     }
+    /**
+     * 此次是否能暴击
+     */
+    export function CanCriticalStrike(hUnit: IBaseNpc_Plus, tParams: ICustomModifierAttackEvent) {
+        if (tParams && IsValid(hUnit) && IsValid(tParams.target)) {
+            let a = 0;
+            let b = 0;
+            switch (tParams.damage_category) {
+                // 技能
+                case DamageCategory_t.DOTA_DAMAGE_CATEGORY_SPELL:
+                    a = SumProps(hUnit, tParams, GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_NO_SPELL_CRITICALSTRIKE);
+                    b = SumProps(tParams.target, tParams, GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_NO_SPELL_CRITICALSTRIKE);
+                    if (a < 1 && b < 1) {
+                        return true
+                    }
+                    return false;
+                // 普攻
+                case DamageCategory_t.DOTA_DAMAGE_CATEGORY_ATTACK:
+                    a = SumProps(hUnit, tParams, GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_NO_CRITICALSTRIKE);
+                    b = SumProps(tParams.target, tParams, GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_NO_CRITICALSTRIKE);
+                    if (a < 1 && b < 1) {
+                        return true
+                    }
+                    return false;
+            }
+        }
+        return false;
+    }
     //  物理暴击
     export function GetCriticalStrikeChance(hUnit: IBaseNpc_Plus, tParams: ICustomModifierAttackEvent) {
-        if (SumProps(hUnit, tParams, GPropertyConfig.EMODIFIER_PROPERTY.NO_CRITICALSTRIKE,) >= 1) {
+        if (SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_NO_CRITICALSTRIKE) >= 1) {
             return 0
         }
-        return SumProps(hUnit, tParams, GPropertyConfig.EMODIFIER_PROPERTY.CRITICALSTRIKE_CHANCE,) + GPropertyConfig.BASE_ATTACK_CRITICALSTRIKE_CHANCE
+        if (tParams && IsValid(tParams.target)) {
+            if (SumProps(tParams.target, null, GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_NO_CRITICALSTRIKE) >= 1) {
+                return 0
+            }
+        }
+        return SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.CRITICALSTRIKE_CHANCE) + GPropertyConfig.BASE_ATTACK_CRITICALSTRIKE_CHANCE
     }
     //  物理暴击伤害
     export function GetCriticalStrikeDamage(hUnit: IBaseNpc_Plus, tParams: ICustomModifierAttackEvent) {
         let fDamage = GPropertyConfig.BASE_ATTACK_CRITICALSTRIKE_DAMAGE + SumProps(hUnit, tParams, GPropertyConfig.EMODIFIER_PROPERTY.CRITICALSTRIKE_DAMAGE,)
-        if (tParams && GFuncEntity.IsValid(tParams.target)) {
-            fDamage = fDamage + SumProps(tParams.target, tParams, GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_CRITICALSTRIKE_DAMAGE_CONSTANT,)
+        if (tParams && IsValid(tParams.target)) {
+            fDamage = fDamage + SumProps(tParams.target, tParams, GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_CRITICALSTRIKE_DAMAGE_PERCENTAGE)
         }
-        let fPercent = SumProps(hUnit, tParams, GPropertyConfig.EMODIFIER_PROPERTY.CRITICALSTRIKE_DAMAGE_TOTAL,)
-        return fDamage * (1 + fPercent / 100)
+        return fDamage
     }
     // 物理暴击时技能暴击补偿
     export function GetCriticalStrikeDamage_Mix(hUnit: IBaseNpc_Plus, tParams: ICustomModifierAttackEvent) {
@@ -441,24 +505,27 @@ export module PropertyCalculate {
     }
     //  技能暴击概率
     export function GetSpellCriticalStrikeChance(hUnit: IBaseNpc_Plus, tParams: ICustomModifierAttackEvent) {
-        if (SumProps(hUnit, tParams, GPropertyConfig.EMODIFIER_PROPERTY.NO_SPELL_CRITICALSTRIKE,) >= 1) {
+        if (SumProps(hUnit, tParams, GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_NO_SPELL_CRITICALSTRIKE) >= 1) {
             return 0
         }
-        let fChance = SumProps(hUnit, tParams, GPropertyConfig.EMODIFIER_PROPERTY.SPELL_CRITICALSTRIKE_CHANCE,) + GPropertyConfig.BASE_SPELL_CRITICALSTRIKE_CHANCE
-        if (tParams && GFuncEntity.IsValid(tParams.target)) {
-            fChance = fChance + SumProps(tParams.target, tParams, GPropertyConfig.EMODIFIER_PROPERTY.SPELL_CRITICALSTRIKE_CHANCE_TARGET,)
+        let fChance = SumProps(hUnit, tParams, GPropertyConfig.EMODIFIER_PROPERTY.SPELL_CRITICALSTRIKE_CHANCE) + GPropertyConfig.BASE_SPELL_CRITICALSTRIKE_CHANCE
+        if (tParams && IsValid(tParams.target)) {
+            if (SumProps(tParams.target, null, GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_NO_SPELL_CRITICALSTRIKE) >= 1) {
+                return 0;
+            }
+            fChance = fChance + SumProps(tParams.target, tParams, GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_SPELL_CRITICALSTRIKE_CHANCE)
         }
         return fChance
     }
     //  技能暴击伤害
     export function GetSpellCriticalStrikeDamage(hUnit: IBaseNpc_Plus, tParams: ICustomModifierAttackEvent) {
         let fDamage = GPropertyConfig.BASE_SPELL_CRITICALSTRIKE_DAMAGE + SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.SPELL_CRITICALSTRIKE_DAMAGE)
-        if (tParams && GFuncEntity.IsValid(tParams.target)) {
-            fDamage = fDamage + SumProps(tParams.target, tParams, GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_SPELL_CRITICALSTRIKE_DAMAGE_CONSTANT)
+        if (tParams && IsValid(tParams.target)) {
+            fDamage = fDamage + SumProps(tParams.target, tParams, GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_SPELL_CRITICALSTRIKE_DAMAGE_PERCENTAGE)
         }
-        let fPercent = SumProps(hUnit, tParams, GPropertyConfig.EMODIFIER_PROPERTY.SPELL_CRITICALSTRIKE_DAMAGE_TOTAL,)
-        return fDamage * (1 + fPercent / 100)
+        return fDamage
     }
+
     // 技能暴击时物理暴击补偿
     export function GetSpellCriticalStrikeDamage_Mix(hUnit: IBaseNpc_Plus, tParams: ICustomModifierAttackEvent) {
         return SumProps(hUnit, tParams, GPropertyConfig.EMODIFIER_PROPERTY.SPELL_CRITICALSTRIKE_MIX_PERCENT,) * 0.01 * GetCriticalStrikeDamage(hUnit, tParams)
@@ -520,6 +587,14 @@ export module PropertyCalculate {
     export function GetPoisonImmune(hUnit: IBaseNpc_Plus, tParams: ICustomModifierAttackEvent) {
         return SumProps(hUnit, tParams, GPropertyConfig.EMODIFIER_PROPERTY.POISON_IMMUNE,)
     }
+    // 流血相关
+    export function GetIncomingBleedDamagePercent(hUnit: IBaseNpc_Plus, tParams: ICustomModifierAttackEvent) {
+        return SumProps(hUnit, tParams, GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_BLEED_DAMAGE_PERCENTAGE,)
+    }
+    // 持续伤害相关
+    export function GetIncomingDotDamagePercent(hUnit: IBaseNpc_Plus, tParams: ICustomModifierAttackEvent) {
+        return SumProps(hUnit, tParams, GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DOT_DAMAGE_PERCENTAGE,)
+    }
     // 吸血
     export function GetLifeStealPercent(hUnit: IBaseNpc_Plus) {
         return SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.LIFESTEAL_AMPLIFY_PERCENTAGE,)
@@ -530,21 +605,21 @@ export module PropertyCalculate {
 
     /**-------------基础三围-------------------- */
     export function GetBaseStrength(hUnit: IBaseNpc_Plus) {
-        if (!GFuncEntity.IsValid(hUnit) || !hUnit.HasModifier(GPropertyConfig.HERO_PROPERTY_BUFF_NAME)) {
+        if (!IsValid(hUnit) || !hUnit.HasModifier(GPropertyConfig.HERO_PROPERTY_BUFF_NAME)) {
             return 0
         }
         const BaseStrength = GetUnitCache(hUnit, "AttributeBaseStrength");
         return math.max(BaseStrength + math.floor(SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BASE)), 0) + GetBaseAllStat(hUnit)
     }
     export function GetBaseAgility(hUnit: IBaseNpc_Plus) {
-        if (!GFuncEntity.IsValid(hUnit) || !hUnit.HasModifier(GPropertyConfig.HERO_PROPERTY_BUFF_NAME)) {
+        if (!IsValid(hUnit) || !hUnit.HasModifier(GPropertyConfig.HERO_PROPERTY_BUFF_NAME)) {
             return 0
         }
         const BaseAgility = GetUnitCache(hUnit, "AttributeBaseAgility");
         return math.max(BaseAgility + math.floor(SumProps(hUnit, null, (GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_BASE))), 0) + GetBaseAllStat(hUnit)
     }
     export function GetBaseIntellect(hUnit: IBaseNpc_Plus) {
-        if (!GFuncEntity.IsValid(hUnit) || !hUnit.HasModifier(GPropertyConfig.HERO_PROPERTY_BUFF_NAME)) {
+        if (!IsValid(hUnit) || !hUnit.HasModifier(GPropertyConfig.HERO_PROPERTY_BUFF_NAME)) {
             return 0
         }
         const BaseIntellect = GetUnitCache(hUnit, "AttributeBaseIntelligence");
@@ -552,32 +627,32 @@ export module PropertyCalculate {
     }
     /**-------------基础三围百分比-------------------- */
     export function GetBaseStrengthPercentage(hUnit: IBaseNpc_Plus) {
-        if (!GFuncEntity.IsValid(hUnit) || !hUnit.HasModifier(GPropertyConfig.HERO_PROPERTY_BUFF_NAME)) {
+        if (!IsValid(hUnit) || !hUnit.HasModifier(GPropertyConfig.HERO_PROPERTY_BUFF_NAME)) {
             return 0
         }
         return SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BASE_PERCENTAGE)
     }
     export function GetBaseAgilityPercentage(hUnit: IBaseNpc_Plus) {
-        if (!GFuncEntity.IsValid(hUnit) || !hUnit.HasModifier(GPropertyConfig.HERO_PROPERTY_BUFF_NAME)) {
+        if (!IsValid(hUnit) || !hUnit.HasModifier(GPropertyConfig.HERO_PROPERTY_BUFF_NAME)) {
             return 0
         }
         return SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_BASE_PERCENTAGE)
     }
     export function GetBaseIntellectPercentage(hUnit: IBaseNpc_Plus) {
-        if (!GFuncEntity.IsValid(hUnit) || !hUnit.HasModifier(GPropertyConfig.HERO_PROPERTY_BUFF_NAME)) {
+        if (!IsValid(hUnit) || !hUnit.HasModifier(GPropertyConfig.HERO_PROPERTY_BUFF_NAME)) {
             return 0
         }
         return SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BASE_PERCENTAGE)
     }
     /**-------------三围加成-------------------- */
     export function GetBaseAllStat(hUnit: IBaseNpc_Plus) {
-        if (!GFuncEntity.IsValid(hUnit) || !hUnit.HasModifier(GPropertyConfig.HERO_PROPERTY_BUFF_NAME)) {
+        if (!IsValid(hUnit) || !hUnit.HasModifier(GPropertyConfig.HERO_PROPERTY_BUFF_NAME)) {
             return 0
         }
         return SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.STATS_ALL_BASE);
     }
     export function GetBonusAllStat(hUnit: IBaseNpc_Plus) {
-        if (!GFuncEntity.IsValid(hUnit) || !hUnit.HasModifier(GPropertyConfig.HERO_PROPERTY_BUFF_NAME)) {
+        if (!IsValid(hUnit) || !hUnit.HasModifier(GPropertyConfig.HERO_PROPERTY_BUFF_NAME)) {
             return 0
         }
         return SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.STATS_ALL_BONUS)
@@ -595,26 +670,26 @@ export module PropertyCalculate {
         return 0
     }
     export function GetBonusStrength(hUnit: IBaseNpc_Plus) {
-        if (!GFuncEntity.IsValid(hUnit) || !hUnit.HasModifier(GPropertyConfig.HERO_PROPERTY_BUFF_NAME)) {
+        if (!IsValid(hUnit) || !hUnit.HasModifier(GPropertyConfig.HERO_PROPERTY_BUFF_NAME)) {
             return 0
         }
         return SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BONUS) + GetBonusAllStat(hUnit)
     }
     export function GetBonusAgility(hUnit: IBaseNpc_Plus) {
-        if (!GFuncEntity.IsValid(hUnit) || !hUnit.HasModifier(GPropertyConfig.HERO_PROPERTY_BUFF_NAME)) {
+        if (!IsValid(hUnit) || !hUnit.HasModifier(GPropertyConfig.HERO_PROPERTY_BUFF_NAME)) {
             return 0
         }
         return SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_BONUS) + GetBonusAllStat(hUnit)
     }
     export function GetBonusIntellect(hUnit: IBaseNpc_Plus) {
-        if (!GFuncEntity.IsValid(hUnit) || !hUnit.HasModifier(GPropertyConfig.HERO_PROPERTY_BUFF_NAME)) {
+        if (!IsValid(hUnit) || !hUnit.HasModifier(GPropertyConfig.HERO_PROPERTY_BUFF_NAME)) {
             return 0
         }
         return SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BONUS) + GetBonusAllStat(hUnit)
     }
     // // // // // // // // // // // // // // // // // // // -三围百分比加成// // // // // // // // // // // // // // // // // // // -
     export function GetAllStatPercent(hUnit: IBaseNpc_Plus) {
-        if (!GFuncEntity.IsValid(hUnit) || !hUnit.HasModifier(GPropertyConfig.HERO_PROPERTY_BUFF_NAME)) {
+        if (!IsValid(hUnit) || !hUnit.HasModifier(GPropertyConfig.HERO_PROPERTY_BUFF_NAME)) {
             return 0
         }
         return SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.STATS_ALL_PERCENTAGE)
@@ -627,40 +702,40 @@ export module PropertyCalculate {
         }
     }
     export function GetStrengthPercentage(hUnit: IBaseNpc_Plus) {
-        if (!GFuncEntity.IsValid(hUnit) || !hUnit.HasModifier(GPropertyConfig.HERO_PROPERTY_BUFF_NAME)) {
+        if (!IsValid(hUnit) || !hUnit.HasModifier(GPropertyConfig.HERO_PROPERTY_BUFF_NAME)) {
             return 0
         }
         return SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_PERCENTAGE) + GetAllStatPercent(hUnit) + GetPrimaryStatPercent(hUnit, Attributes.DOTA_ATTRIBUTE_STRENGTH)
     }
     export function GetAgilityPercentage(hUnit: IBaseNpc_Plus) {
-        if (!GFuncEntity.IsValid(hUnit) || !hUnit.HasModifier(GPropertyConfig.HERO_PROPERTY_BUFF_NAME)) {
+        if (!IsValid(hUnit) || !hUnit.HasModifier(GPropertyConfig.HERO_PROPERTY_BUFF_NAME)) {
             return 0
         }
         return SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_PERCENTAGE) + GetAllStatPercent(hUnit) + GetPrimaryStatPercent(hUnit, Attributes.DOTA_ATTRIBUTE_AGILITY)
     }
     export function GetIntellectPercentage(hUnit: IBaseNpc_Plus) {
-        if (!GFuncEntity.IsValid(hUnit) || !hUnit.HasModifier(GPropertyConfig.HERO_PROPERTY_BUFF_NAME)) {
+        if (!IsValid(hUnit) || !hUnit.HasModifier(GPropertyConfig.HERO_PROPERTY_BUFF_NAME)) {
             return 0
         }
         return SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_PERCENTAGE) + GetAllStatPercent(hUnit) + GetPrimaryStatPercent(hUnit, Attributes.DOTA_ATTRIBUTE_INTELLECT)
     }
     // // // // // // // // // // // // // // // // // // // -总三围// // // // // // // // // // // // // // // // // // // -
     export function GetStrength(hUnit: IBaseNpc_Plus) {
-        if (!GFuncEntity.IsValid(hUnit) || !hUnit.HasModifier(GPropertyConfig.HERO_PROPERTY_BUFF_NAME)) {
+        if (!IsValid(hUnit) || !hUnit.HasModifier(GPropertyConfig.HERO_PROPERTY_BUFF_NAME)) {
             return 0
         }
         let fTotalPercent = GetStrengthPercentage(hUnit) * 0.01
         return math.max(math.floor(GetBaseStrength(hUnit) * (1 + GetBaseStrengthPercentage(hUnit) * 0.01 + fTotalPercent) + GetBonusStrength(hUnit) * (1 + fTotalPercent)), 0) + GetBonusPrimaryStat(hUnit, Attributes.DOTA_ATTRIBUTE_STRENGTH) * (1 + fTotalPercent) + SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BONUS_NO_PERCENTAGE)
     }
     export function GetAgility(hUnit: IBaseNpc_Plus) {
-        if (!GFuncEntity.IsValid(hUnit) || !hUnit.HasModifier(GPropertyConfig.HERO_PROPERTY_BUFF_NAME)) {
+        if (!IsValid(hUnit) || !hUnit.HasModifier(GPropertyConfig.HERO_PROPERTY_BUFF_NAME)) {
             return 0
         }
         let fTotalPercent = GetAgilityPercentage(hUnit) * 0.01
         return math.max(math.floor(GetBaseAgility(hUnit) * (1 + GetBaseAgilityPercentage(hUnit) * 0.01 + fTotalPercent) + GetBonusAgility(hUnit) * (1 + fTotalPercent)), 0) + GetBonusPrimaryStat(hUnit, Attributes.DOTA_ATTRIBUTE_AGILITY) * (1 + fTotalPercent) + SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_BONUS_NO_PERCENTAGE)
     }
     export function GetIntellect(hUnit: IBaseNpc_Plus) {
-        if (!GFuncEntity.IsValid(hUnit) || !hUnit.HasModifier(GPropertyConfig.HERO_PROPERTY_BUFF_NAME)) {
+        if (!IsValid(hUnit) || !hUnit.HasModifier(GPropertyConfig.HERO_PROPERTY_BUFF_NAME)) {
             return 0
         }
         let fTotalPercent = GetIntellectPercentage(hUnit) * 0.01
@@ -668,40 +743,40 @@ export module PropertyCalculate {
     }
     // // // // // // // // // // // // // // // // // // // -总三围百分比但去掉主属性加成// // // // // // // // // // // // // // // // // // // -
     export function GetStrengthPercentageWithoutPrimaryStat(hUnit: IBaseNpc_Plus) {
-        if (!GFuncEntity.IsValid(hUnit) || !hUnit.HasModifier(GPropertyConfig.HERO_PROPERTY_BUFF_NAME)) {
+        if (!IsValid(hUnit) || !hUnit.HasModifier(GPropertyConfig.HERO_PROPERTY_BUFF_NAME)) {
             return 0
         }
         return SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_PERCENTAGE) + GetAllStatPercent(hUnit)
     }
     export function GetAgilityPercentageWithoutPrimaryStat(hUnit: IBaseNpc_Plus) {
-        if (!GFuncEntity.IsValid(hUnit) || !hUnit.HasModifier(GPropertyConfig.HERO_PROPERTY_BUFF_NAME)) {
+        if (!IsValid(hUnit) || !hUnit.HasModifier(GPropertyConfig.HERO_PROPERTY_BUFF_NAME)) {
             return 0
         }
         return SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_PERCENTAGE) + GetAllStatPercent(hUnit)
     }
     export function GetIntellectPercentageWithoutPrimaryStat(hUnit: IBaseNpc_Plus) {
-        if (!GFuncEntity.IsValid(hUnit) || !hUnit.HasModifier(GPropertyConfig.HERO_PROPERTY_BUFF_NAME)) {
+        if (!IsValid(hUnit) || !hUnit.HasModifier(GPropertyConfig.HERO_PROPERTY_BUFF_NAME)) {
             return 0
         }
         return SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_PERCENTAGE) + GetAllStatPercent(hUnit)
     }
     // // // // // // // // // // // // // // // // // // // -总三围但去掉主属性加成// // // // // // // // // // // // // // // // // // // -
     export function GetStrengthWithoutPrimaryStat(hUnit: IBaseNpc_Plus) {
-        if (!GFuncEntity.IsValid(hUnit) || !hUnit.HasModifier(GPropertyConfig.HERO_PROPERTY_BUFF_NAME)) {
+        if (!IsValid(hUnit) || !hUnit.HasModifier(GPropertyConfig.HERO_PROPERTY_BUFF_NAME)) {
             return 0
         }
         let fTotalPercent = GetStrengthPercentageWithoutPrimaryStat(hUnit) * 0.01
         return math.max(math.floor(GetBaseStrength(hUnit) * (1 + GetBaseStrengthPercentage(hUnit) * 0.01 + fTotalPercent) + GetBonusStrength(hUnit) * (1 + fTotalPercent) + SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BONUS_NO_PERCENTAGE)), 0)
     }
     export function GetAgilityWithoutPrimaryStat(hUnit: IBaseNpc_Plus) {
-        if (!GFuncEntity.IsValid(hUnit) || !hUnit.HasModifier(GPropertyConfig.HERO_PROPERTY_BUFF_NAME)) {
+        if (!IsValid(hUnit) || !hUnit.HasModifier(GPropertyConfig.HERO_PROPERTY_BUFF_NAME)) {
             return 0
         }
         let fTotalPercent = GetAgilityPercentageWithoutPrimaryStat(hUnit) * 0.01
         return math.max(math.floor(GetBaseAgility(hUnit) * (1 + GetBaseAgilityPercentage(hUnit) * 0.01 + fTotalPercent) + GetBonusAgility(hUnit) * (1 + fTotalPercent) + SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_BONUS_NO_PERCENTAGE)), 0)
     }
     export function GetIntellectWithoutPrimaryStat(hUnit: IBaseNpc_Plus) {
-        if (!GFuncEntity.IsValid(hUnit) || !hUnit.HasModifier(GPropertyConfig.HERO_PROPERTY_BUFF_NAME)) {
+        if (!IsValid(hUnit) || !hUnit.HasModifier(GPropertyConfig.HERO_PROPERTY_BUFF_NAME)) {
             return 0
         }
         let fTotalPercent = GetIntellectPercentageWithoutPrimaryStat(hUnit) * 0.01
@@ -712,15 +787,7 @@ export module PropertyCalculate {
         return SumProps(target, null, GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS);
 
     }
-    /**
-     * 无视物理护甲百分比
-     * @param target
-     */
-    export function GetIgnorePhysicalArmorPercentage(target: IBaseNpc_Plus) {
-        let IGNORE_PHYSICAL_ARMOR_PERCENTAGE = SumProps(target, null, GPropertyConfig.EMODIFIER_PROPERTY.IGNORE_PHYSICAL_ARMOR_PERCENTAGE);
-        let IGNORE_PHYSICAL_ARMOR_PERCENTAGE_UNIQUE = SumProps(target, null, GPropertyConfig.EMODIFIER_PROPERTY.IGNORE_PHYSICAL_ARMOR_PERCENTAGE_UNIQUE);
-        return -((1 - IGNORE_PHYSICAL_ARMOR_PERCENTAGE * 0.01) * (1 - IGNORE_PHYSICAL_ARMOR_PERCENTAGE_UNIQUE * 0.01) - 1) * 100
-    }
+
 
     export function GetEnergyRegenPercentage(hUnit: IBaseNpc_Plus) {
         return math.max(-100, SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.ENERGY_REGEN_PERCENTAGE))

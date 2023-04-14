@@ -386,7 +386,7 @@ export class modifier_imba_arc_warden_spark_wraith_thinker extends BaseModifier_
     }
     OnIntervalThink(): void {
         let caster = this.GetCasterPlus();
-        if (!GFuncEntity.IsValid(caster)) {
+        if (!IsValid(caster)) {
             this.Destroy();
             return;
         }
@@ -542,7 +542,7 @@ export class imba_arc_warden_tempest_double extends BaseAbility_Plus {
                 let item_name = item_in_caster.GetAbilityName();
                 if (!(item_name == "item_imba_aegis" || item_name == "item_imba_smoke_of_deceit" || item_name == "item_imba_recipe_refresher" || item_name == "item_imba_refresher" || item_name == "item_imba_ward_observer" || item_name == "item_imba_ward_sentry")) {
                     let item_created = double.CreateOneItem(item_in_caster.GetAbilityName());
-                    if (GFuncEntity.IsValid(item_created)) {
+                    if (IsValid(item_created)) {
                         item_created.EndCooldown()
                         item_created.SetPurchaser(null)
                         item_created.SetShareability(EShareAbility.ITEM_FULLY_SHAREABLE)

@@ -488,11 +488,11 @@ export class modifier_imba_vampiric_aura_buff extends BaseModifier_Plus {
     }
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
             2: Enum_MODIFIER_EVENT.ON_TAKEDAMAGE
         });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         if (!this.GetParentPlus().HasModifier("modifier_imba_mortal_strike_skeleton") && !this.GetParentPlus().HasModifier("modifier_mortal_strike_skeleton")) {
             return this.damage;
@@ -773,13 +773,13 @@ export class modifier_imba_mortal_strike extends BaseModifier_Plus {
     }
     /** DeclareFunctions():modifierfunction[] {
         let decFuncs = {
-            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_CRITICALSTRIKE,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_CRITICALSTRIKE_UNIQUE,
             2: Enum_MODIFIER_EVENT.ON_ATTACK_LANDED,
             3: Enum_MODIFIER_EVENT.ON_DEATH
         }
         return Object.values(decFuncs);
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_CRITICALSTRIKE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_CRITICALSTRIKE_UNIQUE)
     CC_GetModifierPreAttack_CriticalStrike(keys: ModifierAttackEvent): number {
         if (IsServer()) {
             let attacker = keys.attacker;
@@ -928,7 +928,7 @@ export class modifier_imba_mortal_strike_buff extends BaseModifier_Plus {
             1: GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS
         });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
     CC_GetModifierHealthBonus(): number {
         if (this == undefined || this.caster == undefined) {
             return undefined;

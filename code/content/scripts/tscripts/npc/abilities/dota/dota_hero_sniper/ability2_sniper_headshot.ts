@@ -122,7 +122,7 @@ export class modifier_sniper_2 extends BaseModifier_Plus {
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
     On_AttackLanded(params: ModifierAttackEvent) {
-        if (!GFuncEntity.IsValid(params.target) || params.target.GetClassname() == "dota_item_drop") {
+        if (!IsValid(params.target) || params.target.GetClassname() == "dota_item_drop") {
             return
         }
         if (this.records.indexOf(params.record) != null) {
@@ -158,14 +158,14 @@ export class modifier_sniper_2 extends BaseModifier_Plus {
             if (hCaster.HasScepter()) {
                 let targets = FindUnitsInRadius(hCaster.GetTeamNumber(), params.target.GetAbsOrigin(), hCaster, this.scepter_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_CLOSEST, false)
                 for (let target of (targets)) {
-                    if (GFuncEntity.IsValid(target) && target.IsAlive() && target != params.target) {
+                    if (IsValid(target) && target.IsAlive() && target != params.target) {
                         let tDamageTable = {
                             ability: hAbility,
                             attacker: params.attacker,
                             victim: target,
                             damage: fDamage,
                             damage_type: hAbility.GetAbilityDamageType(),
-                            eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_SPELL_CRIT,
+                            extra_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_SPELL_CRIT,
                         }
                         BattleHelper.GoApplyDamage(tDamageTable)
                     }
@@ -177,7 +177,7 @@ export class modifier_sniper_2 extends BaseModifier_Plus {
                 victim: params.target,
                 damage: fDamage,
                 damage_type: hAbility.GetAbilityDamageType(),
-                eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_SPELL_CRIT,
+                extra_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_SPELL_CRIT,
             }
             BattleHelper.GoApplyDamage(tDamageTable)
             modifier_sniper_2_debuff.apply(params.target, hCaster, hAbility, { duration: this.stun_duration * (params.target as IBaseNpc_Plus).GetStatusResistanceFactor(hCaster) })

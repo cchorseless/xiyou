@@ -98,7 +98,7 @@ export class ability2_viper_nethertoxin extends BaseAbility_Plus {
         ParticleManager.ReleaseParticleIndex(iParticle)
     }
     OnProjectileHit(hTarget: IBaseNpc_Plus, vLocation: Vector) {
-        if (GFuncEntity.IsValid(hTarget)) {
+        if (IsValid(hTarget)) {
             return false
         }
         modifier_viper_2_thinker.applyThinker(vLocation, this.GetCasterPlus(), this, { duration: this.GetSpecialValueFor("duration") }, this.GetCasterPlus().GetTeamNumber(), false)
@@ -144,7 +144,7 @@ export class modifier_viper_2 extends BaseModifier_Plus {
             return
         }
         let hAbility = this.GetAbilityPlus()
-        if (!GFuncEntity.IsValid(hAbility)) {
+        if (!IsValid(hAbility)) {
             this.StartIntervalThink(-1)
             this.Destroy()
             return
@@ -185,7 +185,7 @@ export class modifier_viper_2 extends BaseModifier_Plus {
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_POISON_COUNT_PERCENTAGE)
     CC_GetModifierOutGoingPoisonCountPercentage() {
-        if (GFuncEntity.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard()) {
+        if (IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard()) {
             return this.poison_stack_pct
         }
         return 0
@@ -297,7 +297,7 @@ export class modifier_viper_2_debuff extends BaseModifier_Plus {
         let hParent = this.GetParentPlus()
         let hCaster = this.GetCasterPlus() as BaseNpc_Hero_Plus
         let hAbility = this.GetAbilityPlus()
-        if (!GFuncEntity.IsValid(hCaster) || !GFuncEntity.IsValid(hAbility)) {
+        if (!IsValid(hCaster) || !IsValid(hAbility)) {
             this.StartIntervalThink(-1)
             return
         }
@@ -320,14 +320,14 @@ export class modifier_viper_2_debuff extends BaseModifier_Plus {
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_POISON_DAMAGE_PERCENTAGE)
     CC_GetModifierIncomingPoisonDamagePercentage() {
-        if (GFuncEntity.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard()) {
+        if (IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard()) {
             return this.poison_percent + this.shard_incoming_poison_damage_pct
         }
         return this.poison_percent
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     Tooltip() {
-        if (GFuncEntity.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard()) {
+        if (IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard()) {
             return this.poison_percent + this.shard_incoming_poison_damage_pct
         }
         return this.poison_percent

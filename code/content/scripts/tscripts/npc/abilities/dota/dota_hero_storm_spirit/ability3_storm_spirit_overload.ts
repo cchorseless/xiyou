@@ -83,7 +83,7 @@ export class ability3_storm_spirit_overload extends BaseAbility_Plus {
         let shard_radius = this.GetSpecialValueFor("shard_radius")
         let hAttacker = EntIndexToHScript(ExtraData.attacker_index) as IBaseNpc_Plus
         let count = ExtraData.count
-        if (GFuncEntity.IsValid(hTarget) && GFuncEntity.IsValid(hAttacker) && hCaster.HasShard()) {
+        if (IsValid(hTarget) && IsValid(hAttacker) && hCaster.HasShard()) {
             let fDamage = overload_damage + hAttacker.GetMaxMana() * overload_damage_per_mana
             let iInt = hAttacker.GetIntellect()
             let shock_bonus_pct = this.GetSpecialValueFor("shock_bonus_pct") / 100
@@ -95,7 +95,7 @@ export class ability3_storm_spirit_overload extends BaseAbility_Plus {
                 for (let hTarget of (tTargets as IBaseNpc_Plus[])) {
                     let iStack = 0
                     let hModifier = modifier_storm_spirit_3_stack_debuff.findIn(hTarget) as modifier_storm_spirit_3_stack_debuff;
-                    if (GFuncEntity.IsValid(hModifier)) {
+                    if (IsValid(hModifier)) {
                         iStack = hModifier.GetStackCount()
                     }
                     modifier_storm_spirit_3_debuff.apply(hTarget, hAttacker, this, { duration: fDuration * hTarget.GetStatusResistanceFactor(hAttacker) })
@@ -166,7 +166,7 @@ export class modifier_storm_spirit_3 extends BaseModifier_Plus {
         if (hParent == params.unit && !hParent.PassivesDisabled() && !hParent.IsIllusion()) {
             let hAbility = params.ability
 
-            if (GFuncEntity.IsValid(hAbility) && !hAbility.IsItem() && hAbility.ProcsMagicStick()) {
+            if (IsValid(hAbility) && !hAbility.IsItem() && hAbility.ProcsMagicStick()) {
                 (this.GetAbilityPlus() as ability3_storm_spirit_overload).Overload()
             }
         }
@@ -206,7 +206,7 @@ export class modifier_storm_spirit_3_buff extends BaseModifier_Plus {
     Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
-        this.overload_stack = this.GetSpecialValueFor("overload_stack") + (GFuncEntity.IsValid(hCaster) && hCaster.GetTalentValue("special_bonus_unique_storm_spirit_custom_6") || 0)
+        this.overload_stack = this.GetSpecialValueFor("overload_stack") + (IsValid(hCaster) && hCaster.GetTalentValue("special_bonus_unique_storm_spirit_custom_6") || 0)
         this.overload_aoe = this.GetSpecialValueFor("overload_aoe")
         this.overload_damage = this.GetSpecialValueFor("overload_damage")
         this.overload_damage_per_mana = this.GetSpecialValueFor("overload_damage_per_mana")
@@ -238,10 +238,10 @@ export class modifier_storm_spirit_3_buff extends BaseModifier_Plus {
 
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
     On_AttackLanded(params: ModifierAttackEvent) {
-        if (!GFuncEntity.IsValid(params.target) || params.target.GetClassname() == "dota_item_drop") { return }
+        if (!IsValid(params.target) || params.target.GetClassname() == "dota_item_drop") { return }
 
         let hAbility = this.GetAbilityPlus()
-        if (!GFuncEntity.IsValid(hAbility)) {
+        if (!IsValid(hAbility)) {
             this.Destroy()
             return
         }
@@ -261,7 +261,7 @@ export class modifier_storm_spirit_3_buff extends BaseModifier_Plus {
 
                     let iStack = 0
                     let hModifier = modifier_storm_spirit_3_stack_debuff.findIn(hTarget) as modifier_storm_spirit_3_stack_debuff;
-                    if (GFuncEntity.IsValid(hModifier)) {
+                    if (IsValid(hModifier)) {
                         iStack = hModifier.GetStackCount()
                     }
                     modifier_storm_spirit_3_debuff.apply(hTarget, hParent, hAbility, { duration: fDuration * hTarget.GetStatusResistanceFactor(hParent) })

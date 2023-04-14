@@ -123,7 +123,7 @@ export class modifier_item_imba_iron_talon extends BaseModifier_Plus {
     }
     /** DeclareFunctions():modifierfunction[] {
         let funcs = {
-            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
             2: GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS,
             3: Enum_MODIFIER_EVENT.ON_DEATH,
             4: GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP,
@@ -131,7 +131,7 @@ export class modifier_item_imba_iron_talon extends BaseModifier_Plus {
         }
         return Object.values(funcs);
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         if (!IsServer()) {
             return;

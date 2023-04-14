@@ -51,7 +51,7 @@ export class ability2_mars_gods_rebuke extends BaseAbility_Plus {
         EmitSoundOnLocationWithCaster(vCaster, ResHelper.GetSoundReplacement("Hero_Mars.Shield.Cast", hCaster), hCaster)
         let hModifier = modifier_mars_2_buff.apply(hCaster, hCaster, this, null)
         for (let hTarget of (tTarget as IBaseNpc_Plus[])) {
-            if (GFuncEntity.IsValid(hTarget) && hTarget.IsAlive()) {
+            if (IsValid(hTarget) && hTarget.IsAlive()) {
                 let vTargetDir = ((hTarget.GetAbsOrigin() - vCaster) as Vector).Normalized()
                 let vTargetAngle = VectorAngles(vTargetDir).y
                 let fAngleDiff = math.abs(AngleDiff(fCasterAngle, vTargetAngle))
@@ -126,7 +126,7 @@ export class modifier_mars_2 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return

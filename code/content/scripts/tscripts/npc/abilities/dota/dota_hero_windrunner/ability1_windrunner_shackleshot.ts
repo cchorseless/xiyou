@@ -47,7 +47,7 @@ export class ability1_windrunner_shackleshot extends BaseAbility_Plus {
         hCaster.EmitSound(ResHelper.GetSoundReplacement("Hero_Windrunner.ShackleshotCast", hCaster))
     }
     OnProjectileHit(hTarget: IBaseNpc_Plus, vLocation: Vector) {
-        if (!GFuncEntity.IsValid(hTarget)) {
+        if (!IsValid(hTarget)) {
             return
         }
         if (hTarget.TriggerSpellAbsorb(this)) {
@@ -131,7 +131,7 @@ export class modifier_windrunner_1 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return

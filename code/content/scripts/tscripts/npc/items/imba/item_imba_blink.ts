@@ -1,7 +1,7 @@
 
 import { GameFunc } from "../../../GameFunc";
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
-import { BaseModifier_Plus } from "../../entityPlus/BaseModifier_Plus";
+import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 // 跳刀
@@ -90,5 +90,12 @@ export class modifier_imba_blink_dagger_handler extends BaseModifier_Plus {
             }
         }
     }
+
+    // 测试
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PROCATTACK_BONUS_DAMAGE_PHYSICAL)
+    CC_GetModifierProcAttack_BonusDamage_Physical(kv: ModifierAttackEvent): number {
+        return 20;
+    }
+
 }
 

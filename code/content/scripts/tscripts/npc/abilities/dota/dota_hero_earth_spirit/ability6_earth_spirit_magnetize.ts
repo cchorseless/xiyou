@@ -51,7 +51,7 @@ export class ability6_earth_spirit_magnetize extends BaseAbility_Plus {
 
         if (hCaster.HasScepter()) {
             let mdf4 = modifier_earth_spirit_3.findIn(hCaster)
-            if (GFuncEntity.IsValid(mdf4) && mdf4.UseStone()) {
+            if (IsValid(mdf4) && mdf4.UseStone()) {
                 modifier_earth_spirit_6_enhanced_aura.apply(hCaster, hCaster, this, { duration: duration_enhanced })
             }
         }
@@ -105,7 +105,7 @@ export class modifier_earth_spirit_6 extends BaseModifier_Plus {
             return
         }
         let hAbility = this.GetAbilityPlus()
-        if (!GFuncEntity.IsValid(hAbility)) {
+        if (!IsValid(hAbility)) {
             this.StartIntervalThink(-1)
             this.Destroy()
             return
@@ -184,7 +184,7 @@ export class modifier_earth_spirit_6_magnetized extends BaseModifier_Plus {
 
         if (IsServer()) {
             let hCaster = this.GetCasterPlus() as IBaseNpc_Plus & { tMagnetized: Array<any> }
-            if (GFuncEntity.IsValid(hCaster)) {
+            if (IsValid(hCaster)) {
                 this.GetParentPlus().EmitSound(ResHelper.GetSoundReplacement("Hero_EarthSpirit.Magnetize.End", this.GetCasterPlus()))
                 GameFunc.ArrayFunc.ArrayRemove(hCaster.tMagnetized, this.GetParentPlus())
             }
@@ -196,7 +196,7 @@ export class modifier_earth_spirit_6_magnetized extends BaseModifier_Plus {
         let hParent = this.GetParentPlus()
 
         if (IsServer()) {
-            if (!GFuncEntity.IsValid(hAbility) || !GFuncEntity.IsValid(hCaster) || !hCaster.IsAlive()) {
+            if (!IsValid(hAbility) || !IsValid(hCaster) || !hCaster.IsAlive()) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return

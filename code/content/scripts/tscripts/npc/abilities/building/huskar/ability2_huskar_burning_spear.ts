@@ -233,7 +233,7 @@ export class modifier_huskar_2_counter extends BaseModifier_Plus {
     OnIntervalThink() {
         let hCaster = this.GetCasterPlus()
         let hAbility = this.GetAbilityPlus()
-        if (!GFuncEntity.IsValid(hCaster) || !GFuncEntity.IsValid(hAbility)) {
+        if (!IsValid(hCaster) || !IsValid(hAbility)) {
             this.StartIntervalThink(-1)
             this.Destroy()
             return
@@ -246,7 +246,7 @@ export class modifier_huskar_2_counter extends BaseModifier_Plus {
                 attacker: hCaster,
                 damage: this.base_damage + ((this.burn_damage * hCaster.GetMaxHealth() * health_cost) * this.GetStackCount() || 0),
                 damage_type: hAbility.GetAbilityDamageType(),
-                eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_DOT,
+                extra_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_DOT,
             }
             BattleHelper.GoApplyDamage(damage_table)
         }

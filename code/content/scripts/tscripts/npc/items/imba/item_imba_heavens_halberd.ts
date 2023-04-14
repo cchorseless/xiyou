@@ -47,14 +47,14 @@ export class modifier_item_imba_heavens_halberd extends BaseModifier_Plus {
     }
     /** DeclareFunctions():modifierfunction[] {
         let funcs = {
-            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
             2: GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BONUS,
             3: GPropertyConfig.EMODIFIER_PROPERTY.EVASION_CONSTANT,
             4: GPropertyConfig.EMODIFIER_PROPERTY.STATUS_RESISTANCE_STACKING
         }
         return Object.values(funcs);
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         if (!this.GetItemPlus()) {
             return;

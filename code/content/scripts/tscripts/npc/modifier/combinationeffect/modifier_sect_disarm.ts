@@ -29,7 +29,7 @@ export class modifier_sect_disarm_base_a extends modifier_combination_effect {
         let attacker = keys.attacker;
         if (keys.target == parent) {
             if (GFuncRandom.PRD(this.chance_pect, this)) {
-                if (GFuncEntity.IsValid(attacker) && attacker.IsAlive()) {
+                if (IsValid(attacker) && attacker.IsAlive()) {
                     modifier_sect_disarm_stoned.apply(attacker, parent, null, {
                         duration: this.duration
                     })

@@ -55,7 +55,7 @@ export class modifier_luna_3 extends BaseModifier_Plus {
     }
     OnIntervalThink() {
         if (IsServer()) {
-            if (!GFuncEntity.IsValid(this.modifier) || this.level == null || this.level != this.GetAbilityPlus().GetLevel() || this.has_talent == null ||
+            if (!IsValid(this.modifier) || this.level == null || this.level != this.GetAbilityPlus().GetLevel() || this.has_talent == null ||
                 this.has_talent != this.GetCasterPlus().HasTalent("special_bonus_unique_luna_custom_8")) {
                 this.level = this.GetAbilityPlus().GetLevel()
                 this.has_talent = this.GetCasterPlus().HasTalent("special_bonus_unique_luna_custom_8")
@@ -67,7 +67,7 @@ export class modifier_luna_3 extends BaseModifier_Plus {
     BeDestroy() {
 
         if (IsServer()) {
-            if (GFuncEntity.IsValid(this.modifier)) {
+            if (IsValid(this.modifier)) {
                 this.modifier.Destroy()
             }
         }
@@ -144,7 +144,7 @@ export class modifier_luna_3_effect extends BaseModifier_Plus {
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_PRIMARY_BONUS)
     G_STATS_PRIMARY_BONUS() {
-        return this.bonus_attribute + (GFuncEntity.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().GetTalentValue("special_bonus_unique_luna_custom_8") || 0)
+        return this.bonus_attribute + (IsValid(this.GetCasterPlus()) && this.GetCasterPlus().GetTalentValue("special_bonus_unique_luna_custom_8") || 0)
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASEATTACK_BONUSDAMAGE)
     CC_GetModifierBaseAttack_BonusDamage() {
@@ -154,11 +154,11 @@ export class modifier_luna_3_effect extends BaseModifier_Plus {
     Tooltip() {
         this._tooltip = (this._tooltip || 0) % 4 + 1
         if (this._tooltip == 1) {
-            return this.GetParentPlus().GetPrimaryAttribute() == Attributes.DOTA_ATTRIBUTE_AGILITY && this.bonus_attribute + (GFuncEntity.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().GetTalentValue("special_bonus_unique_luna_custom_8") || 0) || 0
+            return this.GetParentPlus().GetPrimaryAttribute() == Attributes.DOTA_ATTRIBUTE_AGILITY && this.bonus_attribute + (IsValid(this.GetCasterPlus()) && this.GetCasterPlus().GetTalentValue("special_bonus_unique_luna_custom_8") || 0) || 0
         } else if (this._tooltip == 2) {
-            return this.GetParentPlus().GetPrimaryAttribute() == Attributes.DOTA_ATTRIBUTE_STRENGTH && this.bonus_attribute + (GFuncEntity.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().GetTalentValue("special_bonus_unique_luna_custom_8") || 0) || 0
+            return this.GetParentPlus().GetPrimaryAttribute() == Attributes.DOTA_ATTRIBUTE_STRENGTH && this.bonus_attribute + (IsValid(this.GetCasterPlus()) && this.GetCasterPlus().GetTalentValue("special_bonus_unique_luna_custom_8") || 0) || 0
         } else if (this._tooltip == 3) {
-            return this.GetParentPlus().GetPrimaryAttribute() == Attributes.DOTA_ATTRIBUTE_INTELLECT && this.bonus_attribute + (GFuncEntity.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().GetTalentValue("special_bonus_unique_luna_custom_8") || 0) || 0
+            return this.GetParentPlus().GetPrimaryAttribute() == Attributes.DOTA_ATTRIBUTE_INTELLECT && this.bonus_attribute + (IsValid(this.GetCasterPlus()) && this.GetCasterPlus().GetTalentValue("special_bonus_unique_luna_custom_8") || 0) || 0
         } else if (this._tooltip == 4) {
             return math.floor(this.primary_attribute_damage * this.GetParentPlus().GetPrimaryStatValue())
         }

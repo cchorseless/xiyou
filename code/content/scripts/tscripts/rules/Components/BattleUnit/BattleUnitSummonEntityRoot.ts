@@ -37,8 +37,8 @@ export class BattleUnitSummonEntityRoot extends BattleUnitEntityRoot {
     }
     onDestroy(): void {
         let npc = this.GetDomain<IBaseNpc_Plus>();
-        if (GFuncEntity.IsValid(npc) && !npc.__safedestroyed__) {
-            GFuncEntity.SafeDestroyUnit(npc);
+        if (IsValid(npc) && !npc.__safedestroyed__) {
+            SafeDestroyUnit(npc);
         }
     }
 

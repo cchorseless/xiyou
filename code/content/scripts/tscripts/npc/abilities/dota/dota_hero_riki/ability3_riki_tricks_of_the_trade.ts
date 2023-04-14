@@ -107,7 +107,7 @@ export class modifier_riki_3 extends BaseModifier_Plus {
     On_AttackLanded(params: ModifierAttackEvent) {
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
-        if (!GFuncEntity.IsValid(params.target) || params.target.GetClassname() == "dota_item_drop") {
+        if (!IsValid(params.target) || params.target.GetClassname() == "dota_item_drop") {
             return
         }
         if (params.attacker == hParent && !params.attacker.IsIllusion()) {
@@ -144,7 +144,7 @@ export class modifier_riki_3 extends BaseModifier_Plus {
                         damage: params.original_damage * this.GetParentPlus().GetTalentValue("special_bonus_unique_riki_custom_1") * 0.01,
                         damage_type: DAMAGE_TYPES.DAMAGE_TYPE_PHYSICAL,
                         damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION + DOTADamageFlag_t.DOTA_DAMAGE_FLAG_USE_COMBAT_PROFICIENCY,
-                        eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_CLEAVE + BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_SPELL_CRIT,
+                        extra_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_CLEAVE + BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_SPELL_CRIT,
                     }
                     let x = BattleHelper.GoApplyDamage(tDamageTable)
                     n = n + 1

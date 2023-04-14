@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -79,7 +79,7 @@ export class modifier_imba_bloodrage_buff_stats extends BaseModifier_Plus {
         return "particles/status_fx/status_effect_bloodrage.vpcf";
     }
     StatusEffectPriority(): modifierpriority {
-        return 8;
+        return 3;
     }
     Init(p_0: any,): void {
         this.health_bonus_pct = this.GetSpecialValueFor("health_bonus_pct");
@@ -425,7 +425,7 @@ export class modifier_imba_blood_bath_buff_stats extends BaseModifier_Plus {
     }
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.EXTRA_HEALTH_BONUS,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS,
             2: Enum_MODIFIER_EVENT.ON_TAKEDAMAGE
         });
     } */
@@ -438,7 +438,7 @@ export class modifier_imba_blood_bath_buff_stats extends BaseModifier_Plus {
             this.GetParentPlus().ApplyHeal(bonusHP, this.GetAbilityPlus());
         }
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.EXTRA_HEALTH_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
     CC_GetModifierExtraHealthBonus( /** params */): number {
         return this.GetStackCount();
     }
@@ -661,7 +661,7 @@ export class modifier_imba_thirst_debuff_vision extends BaseModifier_Plus {
         return "particles/status_fx/status_effect_thirst_vision.vpcf";
     }
     StatusEffectPriority(): modifierpriority {
-        return 8;
+        return 3;
     }
     IsPurgable(): boolean {
         return false;
@@ -749,7 +749,7 @@ export class modifier_bloodseeker_thirst_v2_vision extends BaseModifier_Plus {
         return "particles/status_fx/status_effect_thirst_vision.vpcf";
     }
     StatusEffectPriority(): modifierpriority {
-        return 8;
+        return 3;
     }
     BeCreated(p_0: any,): void {
         this.visibility_threshold_pct = this.GetSpecialValueFor("visibility_threshold_pct");

@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -443,7 +443,7 @@ export class imba_undying_soul_rip extends BaseAbility_Plus {
                         ability: ability
                     });
                 } else if (unit.GetTeamNumber() == this.GetCasterPlus().GetTeamNumber() && unit.GetTeamNumber() != target.GetTeamNumber()) {
-                    unit.PerformAttack(target, true, true, true, true, false, false, true);
+                    unit.AttackOnce(target, true, true, true, true, false, false, true);
                 }
                 units_ripped = units_ripped + 1;
                 if (units_ripped >= max_units) {

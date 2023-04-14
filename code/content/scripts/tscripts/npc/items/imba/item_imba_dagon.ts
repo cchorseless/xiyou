@@ -17,11 +17,11 @@ export class item_imba_dagon extends BaseItem_Plus {
         let target = this.GetCursorTarget();
         if (target.GetTeam() != caster.GetTeam()) {
             if (target.TriggerSpellAbsorb(this)) {
-                return undefined;
+                return;
             }
         }
         if (target.IsMagicImmune()) {
-            return undefined;
+            return;
         }
         let damage = this.GetSpecialValueFor("damage");
         let bounce_damage = damage / 100 * this.GetSpecialValueFor("bounce_damage_pct");
@@ -68,7 +68,7 @@ export class item_imba_dagon extends BaseItem_Plus {
                 victim: target,
                 ability: ability,
                 damage: damage,
-                damage_type: DAMAGE_TYPES.DAMAGE_TYPE_MAGICAL
+                damage_type: DAMAGE_TYPES.DAMAGE_TYPE_MAGICAL,
             });
         }
     }

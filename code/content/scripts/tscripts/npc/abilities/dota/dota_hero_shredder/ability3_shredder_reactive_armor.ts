@@ -92,7 +92,7 @@ export class modifier_shredder_3 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus() as ability3_shredder_reactive_armor
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -116,7 +116,7 @@ export class modifier_shredder_3 extends BaseModifier_Plus {
             let range = ability.GetCastRange(caster.GetAbsOrigin(), caster) + caster.GetCastRangeBonus() + caster.GetHullRadius()
 
             //  优先上一个目标
-            let target = GFuncEntity.IsValid(ability.hLastTarget) && ability.hLastTarget || null
+            let target = IsValid(ability.hLastTarget) && ability.hLastTarget || null
             if (target != null && !target.IsPositionInRange(caster.GetAbsOrigin(), range + target.GetHullRadius())) {
                 target = null
             }
@@ -207,7 +207,7 @@ export class modifier_shredder_3_link_buff extends BaseModifier_Plus {
     CC_GetModifierSpellCriticalStrike(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         let buff = modifier_shredder_2_buff.findIn(hCaster)
-        if (GFuncEntity.IsValid(hCaster) && GFuncEntity.IsValid(buff)) {
+        if (IsValid(hCaster) && IsValid(buff)) {
             this.bonus_spell_crit_chance = (buff.bonus_spell_crit_chance || 0) * this.inherit_crit_spell_percent * 0.01
             this.base_spell_crit_damage = buff.base_spell_crit_damage || 0
             this.SetStackCount(buff.GetStackCount())
@@ -219,7 +219,7 @@ export class modifier_shredder_3_link_buff extends BaseModifier_Plus {
     CC_GetModifierSpellCriticalStrikeDamage(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         let buff = modifier_shredder_2_buff.findIn(hCaster)
-        if (GFuncEntity.IsValid(hCaster) && GFuncEntity.IsValid(buff)) {
+        if (IsValid(hCaster) && IsValid(buff)) {
             this.bonus_spell_crit_damage = (buff.bonus_spell_crit_damage || 0) * this.inherit_crit_spell_percent * 0.01
             this.SetStackCount(buff.GetStackCount())
             return buff.CC_GetModifierSpellCriticalStrikeDamage(params)

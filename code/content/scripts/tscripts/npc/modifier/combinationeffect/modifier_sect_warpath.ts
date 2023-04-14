@@ -22,7 +22,7 @@ export class modifier_sect_warpath_base_a extends modifier_combination_effect {
     CC_ON_SPAWN_SUMMONNED(e: ModifierInstanceEvent) {
         let parent = this.GetParentPlus();
         let summon = e.unit;
-        if (GFuncEntity.IsValid(summon)) {
+        if (IsValid(summon)) {
             modifier_sect_warpath_base_a.apply(summon, parent)
         }
     }

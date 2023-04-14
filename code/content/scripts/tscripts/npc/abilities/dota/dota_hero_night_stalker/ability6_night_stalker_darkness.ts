@@ -62,7 +62,7 @@ export class ability6_night_stalker_darkness extends BaseAbility_Plus {
         hCaster.EmitSound(ResHelper.GetSoundReplacement("Hero_Nightstalker.Darkness", hCaster))
 
         let hAbility = ability2_night_stalker_crippling_fear.findIn(hCaster) as ability2_night_stalker_crippling_fear;;
-        if (GFuncEntity.IsValid(hAbility) && hAbility.CheckNightTime != null) {
+        if (IsValid(hAbility) && hAbility.CheckNightTime != null) {
             hAbility.CheckNightTime()
         }
     }
@@ -105,7 +105,7 @@ export class modifier_night_stalker_6 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -250,11 +250,11 @@ export class modifier_night_stalker_6_buff extends BaseModifier_Plus {
 
         if (IsServer()) {
             let hCaster = this.GetParentPlus()
-            if (!GFuncEntity.IsValid(hCaster)) {
+            if (!IsValid(hCaster)) {
                 return
             }
             let hAbility = ability2_night_stalker_crippling_fear.findIn(hCaster) as ability2_night_stalker_crippling_fear;
-            if (GFuncEntity.IsValid(hAbility) && hAbility.CheckNightTime != null) {
+            if (IsValid(hAbility) && hAbility.CheckNightTime != null) {
                 hAbility.CheckNightTime()
             }
         }
@@ -265,7 +265,7 @@ export class modifier_night_stalker_6_buff extends BaseModifier_Plus {
             let hParent = this.GetParentPlus()
             let hAbility = this.GetAbilityPlus()
 
-            if (!GFuncEntity.IsValid(hAbility) || !GFuncEntity.IsValid(hCaster)) {
+            if (!IsValid(hAbility) || !IsValid(hCaster)) {
                 this.Destroy()
                 return
             }

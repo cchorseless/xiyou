@@ -43,7 +43,7 @@ export class modifier_t7_enlightenment_aura extends BaseModifier_Plus {
     }
     OnIntervalThink() {
         if (IsServer()) {
-            if (!GFuncEntity.IsValid(this.modifier) || this.level == null || this.level != this.GetAbilityPlus().GetLevel()) {
+            if (!IsValid(this.modifier) || this.level == null || this.level != this.GetAbilityPlus().GetLevel()) {
                 this.level = this.GetAbilityPlus().GetLevel()
                 this.modifier = modifier_t7_enlightenment_aura_hidden.apply((this.GetParentPlus(), this.GetParentPlus(), this.GetAbilityPlus(), null)) as IBaseModifier_Plus
             }
@@ -52,7 +52,7 @@ export class modifier_t7_enlightenment_aura extends BaseModifier_Plus {
     BeDestroy() {
 
         if (IsServer()) {
-            if (GFuncEntity.IsValid(this.modifier)) {
+            if (IsValid(this.modifier)) {
                 this.modifier.Destroy()
             }
         }
@@ -111,7 +111,7 @@ export class modifier_t7_enlightenment_aura_hidden extends BaseModifier_Plus {
     }
     OnIntervalThink() {
         if (IsServer()) {
-            if (GFuncEntity.IsValid(this.GetAbilityPlus()) && this.GetAbilityPlus().IsActivated()) {
+            if (IsValid(this.GetAbilityPlus()) && this.GetAbilityPlus().IsActivated()) {
                 this.SetStackCount(0)
             } else {
                 this.SetStackCount(1)
@@ -169,7 +169,7 @@ export class modifier_t7_enlightenment_aura_effect extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BONUS)
     CC_GetModifierBonusStats_Intellect() {
-        if (GFuncEntity.IsValid(this.GetCasterPlus())) {
+        if (IsValid(this.GetCasterPlus())) {
             let iInt = this.GetCasterPlus().GetIntellect()
             let iNew = math.floor(iInt * this.aura_intellect_pct * 0.01)
             return iNew

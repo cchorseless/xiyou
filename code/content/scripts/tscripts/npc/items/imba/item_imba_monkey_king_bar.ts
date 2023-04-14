@@ -66,7 +66,7 @@ export class modifier_item_imba_monkey_king_bar extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     bonus_damage: number;
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)

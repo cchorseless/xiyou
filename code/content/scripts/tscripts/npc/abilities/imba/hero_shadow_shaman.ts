@@ -850,7 +850,7 @@ export class modifier_imba_mass_serpent_ward extends BaseModifier_Plus {
             2: Enum_MODIFIER_EVENT.ON_ATTACK_LANDED,
             3: Enum_MODIFIER_EVENT.ON_ATTACK,
             4: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_RANGE_BONUS,
-            5: GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS,
+            5: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS,
             6: GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_ABSOLUTE,
             7: Enum_MODIFIER_EVENT.ON_DEATH
         });
@@ -884,7 +884,7 @@ export class modifier_imba_mass_serpent_ward extends BaseModifier_Plus {
             let targets_aimed = 0;
             for (let i = 0; i < GameFunc.GetCount(enemies); i++) {
                 if (enemies[i] != keys.target) {
-                    this.GetParentPlus().PerformAttack(enemies[i], false, false, true, true, true, false, false);
+                    this.GetParentPlus().AttackOnce(enemies[i], false, false, true, true, true, false, false);
                     targets_aimed = targets_aimed + 1;
                     if (targets_aimed >= this.scepter_additional_targets) {
                         return;

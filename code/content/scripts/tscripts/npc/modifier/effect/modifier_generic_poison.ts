@@ -1,4 +1,3 @@
-import { BattleHelper } from "../../../helper/BattleHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerModifier } from "../../entityPlus/Base_Plus";
@@ -83,21 +82,21 @@ export class modifier_generic_poison extends BaseModifier_Plus {
                 // 根据毒来源造成伤害
                 let this_poisoner = tPoisonInfo.poisoner
                 // 如果这个单位已经不存在了，就用上个单位来造成伤害
-                if (GFuncEntity.IsValid(this_poisoner) && this_poisoner.IsAlive()) {
+                if (IsValid(this_poisoner) && this_poisoner.IsAlive()) {
                     lastPoisoner = this_poisoner
                 } else {
                     this_poisoner = lastPoisoner
                 }
                 let iDamage = tPoisonInfo.stack_count * fPercent
                 iTotalDamge = iTotalDamge + iDamage;
-                BattleHelper.GoApplyDamage({
+                ApplyDamage({
                     ability: tPoisonInfo.ability,
                     attacker: this_poisoner,
                     victim: hParent,
                     damage: iDamage,
                     damage_type: DAMAGE_TYPES.DAMAGE_TYPE_MAGICAL,
                     damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION,
-                    eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_POISON + BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_DOT + BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_DAMAGE_TRANSFORM + BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_SPELL_CRIT,
+                    extra_flags: GEBATTLE_DAMAGE_FLAGS.DAMAGE_FLAG_POISON + GEBATTLE_DAMAGE_FLAGS.DAMAGE_FLAG_DOT + GEBATTLE_DAMAGE_FLAGS.DAMAGE_FLAG_NO_DAMAGE_TRANSFORM + GEBATTLE_DAMAGE_FLAGS.DAMAGE_FLAG_NO_SPELL_CRIT,
                 })
             }
             //  头顶绿色数字
@@ -128,17 +127,17 @@ export class modifier_generic_poison extends BaseModifier_Plus {
             let _incom = GPropertyCalculate.SumProps(parent, null, GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_POISON_DAMAGE_PERCENTAGE);
             let fPoisonPercent = (1 + _incom * 0.01) || 1;
             iDamage = iDamage * fPoisonPercent
-            BattleHelper.GoApplyDamage({
+            ApplyDamage({
                 ability: hAbility,
                 attacker: hCaster,
                 victim: parent,
                 damage: iDamage,
                 damage_type: DAMAGE_TYPES.DAMAGE_TYPE_MAGICAL,
                 damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION,
-                eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_POISON +
-                    BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_DOT +
-                    BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_DAMAGE_TRANSFORM +
-                    BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_SPELL_CRIT,
+                extra_flags: GEBATTLE_DAMAGE_FLAGS.DAMAGE_FLAG_POISON +
+                    GEBATTLE_DAMAGE_FLAGS.DAMAGE_FLAG_DOT +
+                    GEBATTLE_DAMAGE_FLAGS.DAMAGE_FLAG_NO_DAMAGE_TRANSFORM +
+                    GEBATTLE_DAMAGE_FLAGS.DAMAGE_FLAG_NO_SPELL_CRIT,
             })
             SendOverheadEventMessage(null, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_BONUS_POISON_DAMAGE, parent, iDamage, parent.GetPlayerOwner())
         }

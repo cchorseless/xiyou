@@ -96,7 +96,7 @@ export class modifier_riki_6 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -191,13 +191,13 @@ export class modifier_riki_6_thinker extends BaseModifier_Plus {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         if (IsServer()) {
-            if (!GFuncEntity.IsValid(hCaster) || !hCaster.IsAlive()) {
+            if (!IsValid(hCaster) || !hCaster.IsAlive()) {
                 this.Destroy()
                 return
             }
             let tTargets = FindUnitsInRadius(hCaster.GetTeamNumber(), hParent.GetAbsOrigin(), null, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false)
             let hTarget = tTargets[0] as IBaseNpc_Plus
-            if (GFuncEntity.IsValid(hTarget)) {
+            if (IsValid(hTarget)) {
                 let vPosition = hCaster.GetAbsOrigin()
                 let vTarget = (hTarget.GetAbsOrigin() + (-hTarget.GetForwardVector() * 100)) as Vector
                 hCaster.SetAbsOrigin(vTarget)
@@ -209,7 +209,7 @@ export class modifier_riki_6_thinker extends BaseModifier_Plus {
             if (hCaster.HasScepter()) {
                 for (let i = 1; i <= this.attack_targets; i++) {
                     hTarget = tTargets[i + 1] as IBaseNpc_Plus
-                    if (GFuncEntity.IsValid(hTarget)) {
+                    if (IsValid(hTarget)) {
                         let vPosition = hCaster.GetAbsOrigin()
                         let vTarget = (hTarget.GetAbsOrigin() + (-hTarget.GetForwardVector() * 100)) as Vector
                         hCaster.SetAbsOrigin(vTarget)

@@ -49,7 +49,7 @@ export class AiAttackComponent extends ET.Component {
             return false;
         }
         let attacker = this.GetDomain<IBaseNpc_Plus>();
-        if (!GFuncEntity.IsValid(attacker) || !GFuncEntity.IsValid(target)) {
+        if (!IsValid(attacker) || !IsValid(target)) {
             return false;
         }
         if (!attacker.IsAlive() || !target.IsAlive()) {
@@ -92,11 +92,11 @@ export class AiAttackComponent extends ET.Component {
     }
     findAroundEnemyToAttack(): boolean {
         let npc = this.GetDomain<IBaseNpc_Plus>();
-        if (!GFuncEntity.IsValid(npc)) {
+        if (!IsValid(npc)) {
             return false;
         }
         let new_target = npc.GetAttackTarget() as IBaseNpc_Plus;
-        if (!GFuncEntity.IsValid(new_target) || !new_target.IsAlive()) {
+        if (!IsValid(new_target) || !new_target.IsAlive()) {
             let enemys = npc.FindUnitsInRadiusPlus(1000);
             if (enemys.length == 0) {
                 let team = npc.GetTeam() == DOTATeam_t.DOTA_TEAM_GOODGUYS ? DOTATeam_t.DOTA_TEAM_BADGUYS : DOTATeam_t.DOTA_TEAM_GOODGUYS;
@@ -107,7 +107,7 @@ export class AiAttackComponent extends ET.Component {
                 new_target = enemys[0] as IBaseNpc_Plus;
             }
         }
-        if (GFuncEntity.IsValid(new_target)) {
+        if (IsValid(new_target)) {
             if (this.IsCanAttackTarget(new_target)) {
                 GFuncEntity.ExecuteOrder(npc, dotaunitorder_t.DOTA_UNIT_ORDER_ATTACK_TARGET, new_target, null);
             }

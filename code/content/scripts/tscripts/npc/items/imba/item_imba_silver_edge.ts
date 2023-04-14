@@ -201,7 +201,7 @@ export class modifier_item_imba_silver_edge_passive extends BaseModifier_Plus {
     }
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
             2: GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT,
             3: GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BONUS,
             4: GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_BONUS,
@@ -210,7 +210,7 @@ export class modifier_item_imba_silver_edge_passive extends BaseModifier_Plus {
             7: Enum_MODIFIER_EVENT.ON_ATTACK
         });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         if (this.GetItemPlus()) {
             return this.GetItemPlus().GetSpecialValueFor("bonus_damage");

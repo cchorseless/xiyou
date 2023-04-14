@@ -122,7 +122,7 @@ export class modifier_obsidian_destroyer_3 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -246,7 +246,7 @@ export class modifier_obsidian_destroyer_3_active extends BaseModifier_Plus {
         if (IsServer()) {
             let hParent = this.GetParentPlus()
             let hAbility = this.GetAbilityPlus()
-            if (GFuncEntity.IsValid(params.inflictor) && params.attacker == hParent && !params.attacker.IsIllusion() && GFuncEntity.IsValid(params.unit) && params.unit.IsAlive()) {
+            if (IsValid(params.inflictor) && params.attacker == hParent && !params.attacker.IsIllusion() && IsValid(params.unit) && params.unit.IsAlive()) {
                 modifier_obsidian_destroyer_3_debuff.apply(params.unit, hParent, hAbility, { duration: this.slow_duration })
             }
         }

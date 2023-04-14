@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -134,7 +134,7 @@ export class imba_luna_moon_glaive extends BaseAbility_Plus {
             this.damage_type = DAMAGE_TYPES.DAMAGE_TYPE_PHYSICAL;
             let damageTable = {
                 victim: hTarget,
-                damage: ExtraData.damage * ((100 - this.GetSpecialValueFor("damage_reduction_percent")) * 0.01) ^ (ExtraData.bounces + 1),
+                damage: ExtraData.damage * (math.pow((100 - this.GetSpecialValueFor("damage_reduction_percent")) * 0.01, ExtraData.bounces + 1)),
                 damage_type: this.damage_type,
                 damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION,
                 attacker: this.GetCasterPlus(),

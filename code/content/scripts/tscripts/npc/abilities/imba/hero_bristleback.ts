@@ -670,14 +670,14 @@ export class modifier_imba_bristleback_warpath extends BaseModifier_Plus {
 
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
             2: GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE,
             3: Enum_MODIFIER_EVENT.ON_ABILITY_FULLY_CAST,
             4: GPropertyConfig.EMODIFIER_PROPERTY.MODEL_SCALE,
             5: Enum_MODIFIER_EVENT.ON_HERO_KILLED
         });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage( /** keys */): number {
         if (!this.parent.IsIllusion()) {
             this.damage_per_stack = this.ability.GetSpecialValueFor("damage_per_stack") + this.caster.GetTalentValue("special_bonus_imba_bristleback_3");

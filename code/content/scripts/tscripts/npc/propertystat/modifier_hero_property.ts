@@ -63,7 +63,7 @@ export class modifier_hero_property extends BaseModifier_Plus {
     CalculatePrimaryStat() {
         if (IsServer()) {
             let hParent = this.GetParentPlus();
-            if (!GFuncEntity.IsValid(hParent)) {
+            if (!IsValid(hParent)) {
                 return
             }
             if (this.forceSetAttributes != Attributes.DOTA_ATTRIBUTE_INVALID) {
@@ -154,7 +154,7 @@ export class modifier_hero_property extends BaseModifier_Plus {
         }
         return 0;
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
     CC_HP_BONUS() {
         return GPropertyCalculate.GetStrength(this.GetParentPlus()) * GPropertyConfig.ATTRIBUTE_STRENGTH_HP_BONUS
     }

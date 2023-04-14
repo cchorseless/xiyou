@@ -65,7 +65,7 @@ export class ability1_shredder_whirling_death extends BaseAbility_Plus {
         table.insert(tAllTargets, tTargets)
 
         //  let shredder_3  = shredder_3.findIn(  hCaster )
-        //  if ( GFuncEntity.IsValid(shredder_3) ) {
+        //  if ( IsValid(shredder_3) ) {
         //  	for _, iHashtableIndex in pairs(shredder_3.tHashtableIndexes || {}) do
         //  		let tHashtable = GetHashtableByIndex(iHashtableIndex)
         //  		if ( tHashtable.vChakramPosition ) {
@@ -85,7 +85,7 @@ export class ability1_shredder_whirling_death extends BaseAbility_Plus {
         //  }
 
         //  let shredder_3_scepter  = shredder_3_scepter.findIn(  hCaster )
-        //  if ( GFuncEntity.IsValid(shredder_3_scepter) ) {
+        //  if ( IsValid(shredder_3_scepter) ) {
         //  	for _, iHashtableIndex in pairs(shredder_3_scepter.tHashtableIndexes || {}) do
         //  		let tHashtable = GetHashtableByIndex(iHashtableIndex)
         //  		if ( tHashtable.vChakramPosition ) {
@@ -161,7 +161,7 @@ export class modifier_shredder_1 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return

@@ -503,7 +503,8 @@ export class imba_clinkz_searing_arrows extends BaseAbility_Plus {
                 }
             }
             EmitSoundOn(sound_hit, target);
-            caster.PerformAttack(target, false, true, true, false, false, false, true);
+            caster.Attack(target, GEBATTLE_ATTACK_STATE.ATTACK_STATE_NOT_PROCESSPROCS +
+                GEBATTLE_ATTACK_STATE.ATTACK_STATE_SKIPCOOLDOWN + GEBATTLE_ATTACK_STATE.ATTACK_STATE_NEVERMISS);
             target.AddNewModifier(caster, this, modifier_active, {
                 duration: active_duration * (1 - target.GetStatusResistance())
             });
@@ -571,7 +572,11 @@ export class modifier_imba_searing_arrows_passive extends BaseModifier_Plus {
                     SetArrowAttackProjectile(this.GetCasterPlus(), true);
                     if (this.GetCasterPlus().HasTalent("special_bonus_imba_clinkz_7")) {
                         if (RollPercentage(this.GetCasterPlus().GetTalentValue("special_bonus_imba_clinkz_7"))) {
-                            this.GetCasterPlus().PerformAttack(target, false, true, true, false, true, false, false);
+                            this.GetCasterPlus().Attack(target,
+                                GEBATTLE_ATTACK_STATE.ATTACK_STATE_NOT_PROCESSPROCS +
+                                GEBATTLE_ATTACK_STATE.ATTACK_STATE_SKIPCOOLDOWN +
+                                GEBATTLE_ATTACK_STATE.ATTACK_STATE_NOT_USEPROJECTILE
+                            );
                         }
                     }
                 }
@@ -584,7 +589,9 @@ export class modifier_imba_searing_arrows_passive extends BaseModifier_Plus {
         if (keys.attacker == this.GetParentPlus() && !keys.no_attack_cooldown && ((this.GetParentPlus().HasTalent && this.GetParentPlus().HasTalent("special_bonus_imba_clinkz_10")) || (this.GetParentPlus().GetOwner && owner && owner.HasTalent("special_bonus_imba_clinkz_10")))) {
             for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetParentPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.GetParentPlus().Script_GetAttackRange(), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BUILDING, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_ANY_ORDER, false))) {
                 if (enemy != keys.target) {
-                    this.GetParentPlus().PerformAttack(enemy, false, true, true, false, true, false, false);
+                    this.GetParentPlus().Attack(enemy, GEBATTLE_ATTACK_STATE.ATTACK_STATE_NOT_PROCESSPROCS +
+                        GEBATTLE_ATTACK_STATE.ATTACK_STATE_SKIPCOOLDOWN +
+                        GEBATTLE_ATTACK_STATE.ATTACK_STATE_NOT_USEPROJECTILE);
                     return;
                 }
             }
@@ -903,10 +910,10 @@ export class modifier_imba_clinkz_burning_army_skeleton_custom extends BaseModif
     }
     /** DeclareFunctions():modifierfunction[] {
     return Object.values({
-        1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS
+        1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE
     });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.GetStackCount();
     }
@@ -1253,7 +1260,7 @@ export class modifier_imba_death_pact_stack_creep extends BaseModifier_Plus {
     /** DeclareFunctions():modifierfunction[] {
     let decFuncs = {
         1: GPropertyConfig.EMODIFIER_PROPERTY.BASEATTACK_BONUSDAMAGE,
-        2: GPropertyConfig.EMODIFIER_PROPERTY.EXTRA_HEALTH_BONUS
+        2: GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS
     }
     return Object.values(decFuncs);
     } */
@@ -1263,7 +1270,7 @@ export class modifier_imba_death_pact_stack_creep extends BaseModifier_Plus {
         let bonus_damage = this.creep_bonus_dmg_pct * 0.01 * stacks;
         return bonus_damage;
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.EXTRA_HEALTH_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
     CC_GetModifierExtraHealthBonus(): number {
         let stacks = this.GetStackCount();
         let bonus_hp = this.creep_bonus_hp_pct * 0.01 * stacks;
@@ -1543,7 +1550,7 @@ export class modifier_imba_death_pact_stack_hero extends BaseModifier_Plus {
     /** DeclareFunctions():modifierfunction[] {
     let decFuncs = {
         1: GPropertyConfig.EMODIFIER_PROPERTY.BASEATTACK_BONUSDAMAGE,
-        2: GPropertyConfig.EMODIFIER_PROPERTY.EXTRA_HEALTH_BONUS
+        2: GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS
     }
     return Object.values(decFuncs);
     } */
@@ -1553,7 +1560,7 @@ export class modifier_imba_death_pact_stack_hero extends BaseModifier_Plus {
         let bonus_damage = this.hero_bonus_dmg_pct * 0.01 * stacks;
         return bonus_damage;
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.EXTRA_HEALTH_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
     CC_GetModifierExtraHealthBonus(): number {
         if (IsServer()) {
             let stacks = this.GetStackCount();
@@ -1685,7 +1692,7 @@ export class modifier_imba_death_pact_talent_buff extends BaseModifier_Plus {
     /** DeclareFunctions():modifierfunction[] {
     let decFuncs = {
         1: GPropertyConfig.EMODIFIER_PROPERTY.BASEATTACK_BONUSDAMAGE,
-        2: GPropertyConfig.EMODIFIER_PROPERTY.EXTRA_HEALTH_BONUS
+        2: GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS
     }
     return Object.values(decFuncs);
     } */
@@ -1695,7 +1702,7 @@ export class modifier_imba_death_pact_talent_buff extends BaseModifier_Plus {
         let bonus_damage = this.hero_bonus_dmg_pct * 0.01 * stacks;
         return bonus_damage;
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.EXTRA_HEALTH_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
     CC_GetModifierExtraHealthBonus(): number {
         let stacks = this.GetStackCount();
         let bonus_hp = this.hero_bonus_hp_dmg_mult * stacks;
@@ -1781,12 +1788,12 @@ export class modifier_imba_clinkz_death_pact_723 extends BaseModifier_Plus {
     }
     /** DeclareFunctions():modifierfunction[] {
     return Object.values({
-        1: GPropertyConfig.EMODIFIER_PROPERTY.EXTRA_HEALTH_BONUS,
+        1: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS,
         2: Enum_MODIFIER_EVENT.ON_ATTACK_LANDED,
-        3: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS
+        3: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE
     });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.EXTRA_HEALTH_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
     CC_GetModifierExtraHealthBonus(): number {
         return this.health_gain;
     }
@@ -1800,7 +1807,7 @@ export class modifier_imba_clinkz_death_pact_723 extends BaseModifier_Plus {
             });
         }
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.GetStackCount();
     }
@@ -1863,10 +1870,10 @@ export class modifier_imba_clinkz_death_pact_723_permanent_buff extends BaseModi
     }
     /** DeclareFunctions():modifierfunction[] {
     return Object.values({
-        1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS
+        1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE
     });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.GetStackCount();
     }

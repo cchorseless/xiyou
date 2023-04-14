@@ -393,7 +393,7 @@ export class imba_undying_soul_rip extends BaseAbility_Plus {
                 if (!unit.GetUnitName().includes("undying_zombie")) {
                     unit.SetHealth(math.max(unit.GetHealth() - this.GetSpecialValueFor("damage_per_unit"), 1));
                 } else if (unit.GetTeamNumber() == this.GetCasterPlus().GetTeamNumber() && unit.GetTeamNumber() != target.GetTeamNumber()) {
-                    unit.PerformAttack(target, true, true, true, true, false, false, true);
+                    unit.AttackOnce(target, true, true, true, true, false, false, true);
                 }
                 units_ripped = units_ripped + 1;
                 if (units_ripped >= this.GetSpecialValueFor("max_units")) {

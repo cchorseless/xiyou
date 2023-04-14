@@ -125,7 +125,7 @@ export class GameSetting {
             //     return false
             // }
             // let hCaster = EntIndexToHScript(event.units["0"]) as IBaseNpc_Plus;
-            // if (!GFuncEntity.IsValid(hCaster) || !hCaster.IsAlive()) {
+            // if (!IsValid(hCaster) || !hCaster.IsAlive()) {
             //     return false
             // }
             return true
@@ -135,7 +135,7 @@ export class GameSetting {
             // let hAbility = EntIndexToHScript(event.entindex_inflictor_const || -1 as any)
             let hVictim = EntIndexToHScript(event.entindex_victim_const || -1 as any) as IBaseNpc_Plus;
             let hAttacker = EntIndexToHScript(event.entindex_attacker_const || -1 as any) as IBaseNpc_Plus;
-            if (GFuncEntity.IsValid(hAttacker) && hAttacker != hVictim && event.damage > 0) {
+            if (IsValid(hAttacker) && hAttacker != hVictim && event.damage > 0) {
                 let fDamage = event.damage;
                 let iDamageType = event.damagetype_const;
                 [hAttacker, hVictim].forEach(unit => {
@@ -173,7 +173,7 @@ export class GameSetting {
             // let hItemParent = EntIndexToHScript(event.item_parent_entindex_const) as IBaseNpc_Plus;
             // let iPlayerID = hTarget.GetPlayerOwnerID();
             // let suggested_slot = event.suggested_slot;
-            // if (!GFuncEntity.IsValid(hItem)) { return true }
+            // if (!IsValid(hItem)) { return true }
             // // 处理组件
             // let itemroot = hItem.ETRoot;
             // let npcroot = hTarget.ETRoot;

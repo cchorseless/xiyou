@@ -8,13 +8,13 @@ export class BaseNpc_Plus extends BaseNpc {
 
     GetAllCanCastAbility?() {
         let r: IBaseAbility_Plus[] = [];
-        if (!GFuncEntity.IsValid(this) || this.IsIllusion()) {
+        if (!IsValid(this) || this.IsIllusion()) {
             return r;
         }
         let len = this.GetAbilityCount();
         for (let ability_id = 0; ability_id < len; ability_id++) {
             let ability = this.GetAbilityByIndex(ability_id) as IBaseAbility_Plus;
-            if (GFuncEntity.IsValid(ability) && ability.IsAbilityReady()) {
+            if (IsValid(ability) && ability.IsAbilityReady()) {
                 r.push(ability)
             }
         }
@@ -23,12 +23,12 @@ export class BaseNpc_Plus extends BaseNpc {
     }
     GetAllCanCastItem?() {
         let r: IBaseItem_Plus[] = [];
-        if (!GFuncEntity.IsValid(this) || this.IsIllusion()) {
+        if (!IsValid(this) || this.IsIllusion()) {
             return r;
         }
         for (let item_id = 0; item_id <= 5; item_id++) {
             let item_in_caster = this.GetItemInSlot(item_id) as IBaseItem_Plus;
-            if (GFuncEntity.IsValid(item_in_caster) && item_in_caster.IsAbilityReady()) {
+            if (IsValid(item_in_caster) && item_in_caster.IsAbilityReady()) {
                 r.push(item_in_caster)
             }
         }
@@ -207,7 +207,7 @@ export class BaseNpc_Plus extends BaseNpc {
         bFindClearSpace = true,
     ) {
         let r: IBaseNpc_Plus[] = [];
-        if (!GFuncEntity.IsValid(copyunit) || IsClient()) {
+        if (!IsValid(copyunit) || IsClient()) {
             return r;
         }
         vLocation = vLocation || copyunit.GetAbsOrigin();
@@ -269,7 +269,7 @@ export class BaseNpc_Plus extends BaseNpc {
                 let item = copyunit.GetItemInSlot(i)
                 if (item != null) {
                     let illusion_item = BaseItem_Plus.CreateItem(item.GetAbilityName(), illusion as any, illusion as any)
-                    if (GFuncEntity.IsValid(illusion_item)) {
+                    if (IsValid(illusion_item)) {
                         illusion_item.EndCooldown()
                         illusion_item.SetPurchaser(null)
                         illusion_item.SetShareability(EShareAbility.ITEM_FULLY_SHAREABLE)

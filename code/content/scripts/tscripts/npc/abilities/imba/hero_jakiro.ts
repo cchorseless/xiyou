@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifierMotionHorizontal_Plus, BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -884,7 +884,7 @@ export class imba_jakiro_liquid_fire extends BaseAbility_Plus {
             let caster = this.GetCasterPlus();
             this.cast_liquid_fire = true;
             caster.SetRangedProjectileName("particles/units/heroes/hero_jakiro/jakiro_base_attack_fire.vpcf");
-            caster.PerformAttack(target, true, true, true, true, true, false, false);
+            caster.AttackOnce(target, true, true, true, true, true, false, false);
         }
     }
     GetManaCost(level: number): number {
@@ -1226,7 +1226,7 @@ export class modifier_imba_macropyre_thinker extends BaseModifier_Plus {
         if (IsServer()) {
             if (GameRules.GetGameTime() > this.macropyre_end_time) {
                 this.GetParentPlus().StopSound(this.sound_fire_loop);
-                GFuncEntity.SafeDestroyUnit(this.GetParentPlus());
+                SafeDestroyUnit(this.GetParentPlus());
             } else {
                 let caster = this.GetCasterPlus();
                 let ability = this.GetAbilityPlus();

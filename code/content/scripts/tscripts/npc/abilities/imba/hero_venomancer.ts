@@ -157,7 +157,9 @@ export class modifier_imba_venomancer_plague_ward_v2 extends BaseModifier_Plus {
                     if (target_number >= this.split_count) {
                         return;
                     } else {
-                        this.GetParentPlus().PerformAttack(enemy, false, true, true, false, true, false, false);
+                        this.GetParentPlus().Attack(enemy, GEBATTLE_ATTACK_STATE.ATTACK_STATE_NOT_PROCESSPROCS +
+                            GEBATTLE_ATTACK_STATE.ATTACK_STATE_SKIPCOOLDOWN +
+                            GEBATTLE_ATTACK_STATE.ATTACK_STATE_NOT_USEPROJECTILE);
                         target_number = target_number + 1;
                     }
                 }
@@ -563,7 +565,7 @@ export class modifier_imba_venomous_gale extends BaseModifier_Plus {
     }
 
     OnIntervalThink(): void {
-        if (!GFuncEntity.IsValid(this.ability)) {
+        if (!IsValid(this.ability)) {
             this.Destroy();
             return;
         }
@@ -1243,7 +1245,7 @@ export class modifier_imba_poison_nova extends BaseModifier_Plus {
         }
     }
     OnIntervalThink(): void {
-        if (!GFuncEntity.IsValid(this.GetParentPlus())) {
+        if (!IsValid(this.GetParentPlus())) {
             this.Destroy();
             return;
         }

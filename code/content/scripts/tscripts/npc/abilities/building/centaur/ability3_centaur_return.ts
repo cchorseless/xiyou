@@ -35,7 +35,7 @@ export class ability3_centaur_return extends BaseAbility_Plus {
         let hCaster = this.GetCasterPlus()
         let duration = this.GetSpecialValueFor("damage_gain_duration")
         let hModifier = modifier_centaur_3.findIn(hCaster)
-        if (GFuncEntity.IsValid(hModifier)) {
+        if (IsValid(hModifier)) {
             hCaster.EmitSound(ResHelper.GetSoundReplacement("Hero_Centaur.Retaliate.Cast", hCaster))
             modifier_centaur_3_buff.apply(hCaster, hCaster, this, { duration: duration, modifier_count: hModifier.GetStackCount() })
             hModifier.SetStackCount(0)
@@ -88,7 +88,7 @@ export class modifier_centaur_3 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -132,7 +132,7 @@ export class modifier_centaur_3 extends BaseModifier_Plus {
     CC_GetModifierSpellAmplifyBonus(params: IModifierTable) {
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
-        if (params != null && params.attacker == hParent && GFuncEntity.IsValid(params.inflictor) && !params.inflictor.IsItem() && !BattleHelper.DamageFilter(params.record, BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_BLEEDING)) {
+        if (params != null && params.attacker == hParent && IsValid(params.inflictor) && !params.inflictor.IsItem() && !BattleHelper.DamageFilter(params.record, BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_BLEEDING)) {
             let iMaxHealth = hParent.GetMaxHealth()
             let iCurHealth = hParent.GetHealth()
             let iConsumeHealth = iMaxHealth * this.bonus_health_percent * 0.01

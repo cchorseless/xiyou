@@ -122,7 +122,7 @@ export class ability2_tinker_heat_seeking_missile extends BaseAbility_Plus {
         }
         if (ExtraData && ExtraData.hashtable_index != null) {
             let tHashtable = HashTableHelper.GetHashtableByIndex(ExtraData.hashtable_index || -1)
-            if (tHashtable != null && GFuncEntity.IsValid(tHashtable.hModifier)) {
+            if (tHashtable != null && IsValid(tHashtable.hModifier)) {
                 tHashtable.hModifier.Destroy()
             }
         }
@@ -167,7 +167,7 @@ export class modifier_tinker_2 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let hAbility = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(hAbility)) {
+            if (!IsValid(hAbility)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -228,13 +228,13 @@ export class modifier_tinker_2_buff extends BaseModifier_Plus {
     Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         this.damage = this.GetSpecialValueFor("damage")
-        this.damage_per_int = this.GetSpecialValueFor("damage_per_int") + (GFuncEntity.IsValid(hCaster) && hCaster.GetTalentValue("special_bonus_unique_tinker_custom_5") || 0)
+        this.damage_per_int = this.GetSpecialValueFor("damage_per_int") + (IsValid(hCaster) && hCaster.GetTalentValue("special_bonus_unique_tinker_custom_5") || 0)
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_MAGICAL_DAMAGE_CONSTANT)
     CC_GetModifierOutgoingMagicalDamageConstant() {
         let hCaster = this.GetCasterPlus()
-        if (GFuncEntity.IsValid(hCaster)) {
+        if (IsValid(hCaster)) {
             return this.damage + hCaster.GetIntellect() * this.damage_per_int
         }
         return 0
@@ -243,7 +243,7 @@ export class modifier_tinker_2_buff extends BaseModifier_Plus {
 
     On_Tooltip2() {
         let hCaster = this.GetCasterPlus()
-        if (GFuncEntity.IsValid(hCaster)) {
+        if (IsValid(hCaster)) {
             return this.damage + hCaster.GetIntellect() * this.damage_per_int
         }
         return 0

@@ -51,10 +51,10 @@ export class ItemEntityRoot extends BaseEntityRoot {
 
     onDestroy(): void {
         let item = this.GetDomain<IBaseItem_Plus>();
-        if (GFuncEntity.IsValid(item)) {
+        if (IsValid(item)) {
             item.GetContainer()?.Destroy();
             this.clearSceneContainer();
-            GFuncEntity.SafeDestroyItem(item);
+            SafeDestroyItem(item);
         }
     }
     config() {

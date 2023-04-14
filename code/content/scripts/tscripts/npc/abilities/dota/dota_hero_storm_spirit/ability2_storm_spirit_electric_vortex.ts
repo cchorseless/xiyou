@@ -62,7 +62,7 @@ export class ability2_storm_spirit_electric_vortex extends BaseAbility_Plus {
             }
         } else {
             let hTarget = this.GetCursorTarget() as IBaseNpc_Plus
-            if (!GFuncEntity.IsValid(hTarget) || !hTarget.IsAlive()) {
+            if (!IsValid(hTarget) || !hTarget.IsAlive()) {
                 return
             }
             if (hTarget.TriggerSpellAbsorb(this)) {
@@ -110,7 +110,7 @@ export class modifier_storm_spirit_2 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -233,7 +233,7 @@ export class modifier_storm_spirit_2_pull extends BaseModifierMotionHorizontal_P
     UpdateHorizontalMotion(hParent: IBaseNpc_Plus, dt: number) {
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
-            if (!GFuncEntity.IsValid(hCaster) && !this.bTeleported) {
+            if (!IsValid(hCaster) && !this.bTeleported) {
                 this.bTeleported = true
                 ParticleManager.SetParticleControl(this.iParticleID, 0, this.vTargetPosition)
             }
@@ -274,7 +274,7 @@ export class modifier_storm_spirit_2_pull extends BaseModifierMotionHorizontal_P
     CC_GetModifierIncomingDamagePercentage(params: IModifierTable) {
         if (IsServer() && params) {
             let hCaster = this.GetCasterPlus()
-            if (GFuncEntity.IsValid(hCaster)) {
+            if (IsValid(hCaster)) {
                 if (hCaster.HasTalent("special_bonus_unique_storm_spirit_custom_5") || params.attacker == hCaster) {
                     return this.electric_vortex_incoming_damage
                 }

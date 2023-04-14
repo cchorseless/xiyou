@@ -113,7 +113,7 @@ export class modifier_brewmaster_6 extends BaseModifier_Plus {
         // 侍从技为风元素，
         let hCaster = this.GetCasterPlus()
         // let hAbility_t27  = qualification_build_t27.findIn(  hCaster )
-        // if (GFuncEntity.IsValid(hAbility_t27) && hAbility_t27.GetLevel() >= 1) {
+        // if (IsValid(hAbility_t27) && hAbility_t27.GetLevel() >= 1) {
         //     return this.bonus_crit_mutipier
         // }
     }

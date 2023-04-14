@@ -74,7 +74,7 @@ export class ability2_windrunner_powershot extends BaseAbility_Plus {
         hCaster.EmitSound(ResHelper.GetSoundReplacement("Ability.Powershot", hCaster))
     }
     OnProjectileHit_ExtraData(hTarget: IBaseNpc_Plus, vLocation: Vector, extraData: any) {
-        if (!GFuncEntity.IsValid(hTarget)) {
+        if (!IsValid(hTarget)) {
             return
         }
         let hCaster = this.GetCasterPlus()
@@ -134,7 +134,7 @@ export class modifier_windrunner_2 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let hAbility = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(hAbility)) {
+            if (!IsValid(hAbility)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return

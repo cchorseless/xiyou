@@ -119,7 +119,7 @@ export class ability6_monkey_king_wukongs_command extends BaseAbility_Plus {
             modifier_monkey_king_6_soldier_active.apply(hSoldier, hCaster, this, { position: vPosition, radius: max_radius, target_position: vTargetPosition })
         }
 
-        if (GFuncEntity.IsValid(this.hDummy)) {
+        if (IsValid(this.hDummy)) {
             modifier_monkey_king_6_thinker.remove(this.hDummy);
         }
         this.hDummy = modifier_monkey_king_6_thinker.applyThinker(vPosition, hCaster, this, { radius: max_radius }, hCaster.GetTeamNumber(), false) as IBaseNpc_Plus
@@ -248,7 +248,7 @@ export class modifier_monkey_king_6 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus() as ability6_monkey_king_wukongs_command
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -413,7 +413,7 @@ export class modifier_monkey_king_6_soldier_active extends BaseModifier_Plus {
         if (IsServer()) {
             let hParent = this.GetParentPlus()
             let hCaster = this.GetCasterPlus()
-            if (!GFuncEntity.IsValid(hCaster)) {
+            if (!IsValid(hCaster)) {
                 this.Destroy()
                 return
             }
@@ -463,7 +463,7 @@ export class modifier_monkey_king_6_soldier_active extends BaseModifier_Plus {
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
 
     GetAttackSpeedBonus_Constant(params: IModifierTable) {
-        if (GFuncEntity.IsValid(this.GetCasterPlus())) {
+        if (IsValid(this.GetCasterPlus())) {
             return this.GetCasterPlus().GetIncreasedAttackSpeed() * 100
         }
     }
@@ -493,7 +493,7 @@ export class modifier_monkey_king_6_soldier_active extends BaseModifier_Plus {
     On_AttackLanded(params: ModifierAttackEvent) {
         if (params.attacker == this.GetParentPlus()) {
             let ability = this.GetAbilityPlus() as ability6_monkey_king_wukongs_command
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 return
             }
             ability.hitting = true
@@ -553,7 +553,7 @@ export class modifier_monkey_king_6_thinker extends BaseModifier_Plus {
 
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
-            if (!GFuncEntity.IsValid(hCaster)) {
+            if (!IsValid(hCaster)) {
                 return
             }
             hCaster.StopSound(ResHelper.GetSoundReplacement("Hero_MonkeyKing.FurArmy", hCaster))
@@ -565,7 +565,7 @@ export class modifier_monkey_king_6_thinker extends BaseModifier_Plus {
             let hCaster = this.GetCasterPlus()
             let hAbility = this.GetAbilityPlus() as ability6_monkey_king_wukongs_command
 
-            if (!GFuncEntity.IsValid(hCaster) || !GFuncEntity.IsValid(hAbility)) {
+            if (!IsValid(hCaster) || !IsValid(hAbility)) {
                 this.Destroy()
                 return
             }
@@ -627,7 +627,7 @@ export class modifier_monkey_king_6_soldier extends BaseModifier_Plus {
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
 
-            if (!GFuncEntity.IsValid(hCaster)) {
+            if (!IsValid(hCaster)) {
                 UTIL_Remove(this.GetParentPlus())
                 return
             }
@@ -861,7 +861,7 @@ export class modifier_monkey_king_6_scepter_active extends BaseModifier_Plus {
             let hParent = this.GetParentPlus()
             let hCaster = this.GetCasterPlus()
 
-            if (!GFuncEntity.IsValid(hCaster)) {
+            if (!IsValid(hCaster)) {
                 this.Destroy()
                 return
             }
@@ -875,7 +875,7 @@ export class modifier_monkey_king_6_scepter_active extends BaseModifier_Plus {
             if (this.iPhase == "stand") {
                 let targets = FindUnitsInRadius(hCaster.GetTeamNumber(), hParent.GetAbsOrigin(), null, hParent.Script_GetAttackRange() + hParent.GetHullRadius(), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ATTACK_IMMUNE, FindOrder.FIND_CLOSEST, false)
                 let target = targets[0]
-                if (GFuncEntity.IsValid(target)) {
+                if (IsValid(target)) {
                     if (GameRules.GetGameTime() > this.fAttackTimeRecord) {
                         ExecuteOrderFromTable({
                             UnitIndex: hParent.entindex(),
@@ -901,7 +901,7 @@ export class modifier_monkey_king_6_scepter_active extends BaseModifier_Plus {
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
     GetAttackSpeedBonus_Constant(params: IModifierTable) {
-        if (GFuncEntity.IsValid(this.GetCasterPlus())) {
+        if (IsValid(this.GetCasterPlus())) {
             return this.GetCasterPlus().GetIncreasedAttackSpeed() * 100
         }
     }
@@ -915,7 +915,7 @@ export class modifier_monkey_king_6_scepter_active extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_RANGE_BASE_OVERRIDE)
     GetAttackRangeOverride(params: IModifierTable) {
-        if (GFuncEntity.IsValid(this.GetCasterPlus())) {
+        if (IsValid(this.GetCasterPlus())) {
             return this.GetCasterPlus().Script_GetAttackRange()
         }
         return 900
@@ -934,7 +934,7 @@ export class modifier_monkey_king_6_scepter_active extends BaseModifier_Plus {
     On_AttackLanded(params: ModifierAttackEvent) {
         if (params.attacker == this.GetParentPlus()) {
             let hAbility = this.GetAbilityPlus() as ability6_monkey_king_wukongs_command
-            if (!GFuncEntity.IsValid(hAbility)) {
+            if (!IsValid(hAbility)) {
                 return
             }
             hAbility.hitting = true

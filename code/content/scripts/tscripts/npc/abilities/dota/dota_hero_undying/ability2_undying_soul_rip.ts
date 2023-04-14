@@ -202,7 +202,7 @@ export class modifier_undying_2 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus() as ability2_undying_soul_rip
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -224,7 +224,7 @@ export class modifier_undying_2 extends BaseModifier_Plus {
             }
             let range = ability.GetCastRange(caster.GetAbsOrigin(), caster) + caster.GetCastRangeBonus() + caster.GetHullRadius()
             //  优先上一个目标
-            let target = GFuncEntity.IsValid(ability.hLastTarget) && ability.hLastTarget || null
+            let target = IsValid(ability.hLastTarget) && ability.hLastTarget || null
             if (target != null && !target.IsPositionInRange(caster.GetAbsOrigin(), range + target.GetHullRadius())) {
                 target = null
             }
@@ -301,9 +301,9 @@ export class modifier_undying_2_health_buff extends BaseModifier_Plus {
     CC_GetModifierHealthBonus() {
         return this.GetStackCount() * this.damage_per_unit
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
     CC_GetModifierHealthPercentage() {
-        if (GFuncEntity.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard()) {
+        if (IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard()) {
             return this.GetStackCount() * this.damage_per_unit_pct
         }
     }

@@ -30,9 +30,9 @@ export class ability1_magnataur_shockwave extends BaseAbility_Plus {
 
     OnProjectileHit_ExtraData(hTarget: IBaseNpc_Plus, vLocation: Vector, ExtraData: any) {
         let hCaster = this.GetCasterPlus()
-        if (GFuncEntity.IsValid(hTarget)) {
+        if (IsValid(hTarget)) {
             let hAttacker = EntIndexToHScript(ExtraData.attacker_ent_index || -1) as IBaseNpc_Plus
-            if (!GFuncEntity.IsValid(hAttacker)) {
+            if (!IsValid(hAttacker)) {
                 return false
             }
             modifier_magnataur_1_hit_particle.apply(hAttacker, hTarget, this, { duration: BaseModifier_Plus.LOCAL_PARTICLE_MODIFIER_DURATION })
@@ -192,11 +192,11 @@ export class modifier_magnataur_1_buff extends BaseModifier_Plus {
 
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
     On_AttackLanded(params: ModifierAttackEvent) {
-        if (!GFuncEntity.IsValid(params.target) || params.target.GetClassname() == "dota_item_drop") { return }
+        if (!IsValid(params.target) || params.target.GetClassname() == "dota_item_drop") { return }
         if (params.attacker == this.GetParentPlus()) {
             let hCaster = this.GetCasterPlus()
             let hAbility = this.GetAbilityPlus()
-            if (GFuncEntity.IsValid(hCaster) && UnitFilter(params.target, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, params.attacker.GetTeamNumber()) == UnitFilterResult.UF_SUCCESS) {
+            if (IsValid(hCaster) && UnitFilter(params.target, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, params.attacker.GetTeamNumber()) == UnitFilterResult.UF_SUCCESS) {
                 if (!modifier_magnataur_1_attack.exist(params.attacker) && !BattleHelper.AttackFilter(params.record, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NOT_PROCESSPROCS, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NO_EXTENDATTACK)) {
                     if (GFuncMath.PRD(this.shock_chance, params.attacker, "magnataur_4")) {
                         params.attacker.EmitSound(ResHelper.GetSoundReplacement("Hero_Magnataur.ShockWave.Cast", hCaster))

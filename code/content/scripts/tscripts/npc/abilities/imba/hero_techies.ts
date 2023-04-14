@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { ResHelper } from "../../../helper/ResHelper";
 import { GameServiceConfig } from "../../../shared/GameServiceConfig";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -652,7 +652,7 @@ export class modifier_imba_statis_trap extends BaseModifier_Plus {
     CheckState(): Partial<Record<modifierstate, boolean>> {
         let state: Partial<Record<modifierstate, boolean>> = {};
         if (IsServer()) {
-            if (GFuncEntity.IsValid(this.caster) && this.caster.IsCreep()) {
+            if (IsValid(this.caster) && this.caster.IsCreep()) {
                 return state;
             }
             if (this.active) {
@@ -1497,7 +1497,7 @@ export class imba_techies_focused_detonate extends BaseAbility_Plus {
         for (let i = 0; i < GameFunc.GetCount(remote_mines); i++) {
             let unit = remote_mines[i];
             this.AddTimer(FrameTime() * (i + 1), () => {
-                if (GFuncEntity.IsValid(unit)) {
+                if (IsValid(unit)) {
                     let detonate_ability_handler = unit.FindAbilityByName(detonate_ability);
                     if (detonate_ability_handler) {
                         detonate_ability_handler.OnSpellStart();

@@ -74,7 +74,7 @@ export class modifier_item_imba_glimmerdark_shield_prism extends BaseModifier_Pl
             return 1;
         }
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_RESISTANCE_DECREPIFY_UNIQUE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_RESISTANCE_BONUS)
     CC_GetModifierMagicalResistanceDecrepifyUnique(params: ModifierAttackEvent): number {
         return this.prism_bonus_magic_dmg;
     }

@@ -277,11 +277,11 @@ export class modifier_imba_tiny_tree_damage extends BaseModifier_Plus {
     }
     /** DeclareFunctions():modifierfunction[] {
         let funcs = {
-            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS
+            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE
         }
         return Object.values(funcs);
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.GetStackCount();
     }
@@ -299,11 +299,11 @@ export class modifier_imba_tiny_tree_building extends BaseModifier_Plus {
     }
     /** DeclareFunctions():modifierfunction[] {
         let funcs = {
-            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS
+            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE
         }
         return Object.values(funcs);
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.GetStackCount();
     }
@@ -420,7 +420,7 @@ export class imba_tiny_tree_throw extends BaseAbility_Plus {
                     this.KnockBack(caster, enemy, caster.GetAbsOrigin());
                 }
             }
-            caster.PerformAttack(target, true, true, true, true, true, false, true);
+            caster.AttackOnce(target, true, true, true, true, true, false, true);
             caster.RemoveModifierByName("modifier_imba_tree_throw");
             return true;
         }
@@ -478,11 +478,11 @@ export class modifier_imba_tree_throw extends BaseModifier_Plus {
     }
     /** DeclareFunctions():modifierfunction[] {
         let funcs = {
-            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS
+            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE
         }
         return Object.values(funcs);
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         let ability = this.GetAbilityPlus();
         return ability.GetSpecialValueFor("bonus_damage");
@@ -1350,11 +1350,11 @@ export class modifier_craggy_exterior_blunt extends BaseModifier_Plus {
 
     /** DeclareFunctions():modifierfunction[] {
         let funcs = {
-            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS
+            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE
         }
         return Object.values(funcs);
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         let reduction = this.reduction + this.caster.GetTalentValue("special_bonus_imba_tiny_5");
         return reduction * this.GetStackCount();
@@ -1385,7 +1385,7 @@ export class imba_tiny_grow extends BaseAbility_Plus {
         ResHelper.LoadUnitRes(this.GetCasterPlus());
         let reapply_craggy = false;
         let rolling_stone = this.GetCasterPlus().findBuff<modifier_imba_tiny_rolling_stone>("modifier_imba_tiny_rolling_stone");
-        if (!GFuncEntity.IsValid(rolling_stone)) { return }
+        if (!IsValid(rolling_stone)) { return }
         rolling_stone.growscale = this.GetSpecialValueFor("rolling_stone_scale_reduction");
         let old_stacks = this.GetLevelSpecialValueFor("rolling_stones_stacks", this.GetLevel() - 2);
         let new_stacks = this.GetLevelSpecialValueFor("rolling_stones_stacks", this.GetLevel() - 1);

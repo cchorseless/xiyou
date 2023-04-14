@@ -122,7 +122,7 @@ export class modifier_mirana_2 extends BaseModifier_Plus {
                 return
             }
             let hCaster = ability.GetCasterPlus()
-            if (!GFuncEntity.IsValid(hCaster)) {
+            if (!IsValid(hCaster)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -310,7 +310,7 @@ export class modifier_mirana_2_buff extends BaseModifier_Plus {
     BeDestroy() {
 
         if (IsServer()) {
-            // if (GFuncEntity.IsValid(this.hPtclThinker)) {
+            // if (IsValid(this.hPtclThinker)) {
             //      this.hPtclThinker.sBuffName.remove( this.hPtclThinker );
             // }
         }
@@ -372,7 +372,7 @@ export class modifier_mirana_2_invis extends BaseModifier_Plus {
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     GetPreAttack_BonusDamage(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
-        if (GFuncEntity.IsValid(hCaster)) {
+        if (IsValid(hCaster)) {
             let extra_damage = hCaster.HasTalent("special_bonus_unique_mirana_custom_7") && hCaster.GetTalentValue("special_bonus_unique_mirana_custom_7") || 0
             if (this.GetParentPlus() == hCaster) {
                 return this.leap_damage

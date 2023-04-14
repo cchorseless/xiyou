@@ -141,7 +141,7 @@ export class modifier_t29_permanent_immolation_debuff extends BaseModifier_Plus 
             let caster = this.GetCasterPlus()
             let target = this.GetParentPlus()
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(caster) || !GFuncEntity.IsValid(ability) || caster.PassivesDisabled()) {
+            if (!IsValid(caster) || !IsValid(ability) || caster.PassivesDisabled()) {
                 this.Destroy()
                 return
             }

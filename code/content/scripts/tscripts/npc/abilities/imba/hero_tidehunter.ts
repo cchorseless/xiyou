@@ -516,7 +516,8 @@ export class imba_tidehunter_anchor_smash extends BaseAbility_Plus {
                 });
             }
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_tidehunter_anchor_smash_suppression", {});
-            this.GetCasterPlus().PerformAttack(enemy, false, true, true, false, false, false, true);
+            this.GetCasterPlus().Attack(enemy, GEBATTLE_ATTACK_STATE.ATTACK_STATE_NOT_PROCESSPROCS +
+                GEBATTLE_ATTACK_STATE.ATTACK_STATE_SKIPCOOLDOWN + GEBATTLE_ATTACK_STATE.ATTACK_STATE_NEVERMISS);
             this.GetCasterPlus().RemoveModifierByNameAndCaster("modifier_imba_tidehunter_anchor_smash_suppression", this.GetCasterPlus());
             if (!bThrown) {
                 enemy.SetForwardVector(enemy.GetForwardVector() * (-1) as Vector);
@@ -588,12 +589,12 @@ export class modifier_imba_tidehunter_anchor_smash_suppression extends BaseModif
     }
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
             2: GPropertyConfig.EMODIFIER_PROPERTY.SUPPRESS_CLEAVE,
             3: GPropertyConfig.EMODIFIER_PROPERTY.TOTALDAMAGEOUTGOING_PERCENTAGE
         });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.attack_damage;
     }

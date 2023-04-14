@@ -56,7 +56,7 @@ export class ability1_death_prophet_carrion_swarm extends BaseAbility_Plus {
         ParticleManager.SetParticleControl(iParticleID, 2, Vector(end_radius, start_radius, 0))
 
         let hModifier = modifier_death_prophet_1.findIn(hCaster)
-        if (GFuncEntity.IsValid(hModifier)) {
+        if (IsValid(hModifier)) {
             hModifier.AddParticle(iParticleID, false, false, -1, false, false)
         }
 
@@ -116,7 +116,7 @@ export class ability1_death_prophet_carrion_swarm extends BaseAbility_Plus {
             BattleHelper.GoApplyDamage(tDamageTable)
 
             let death_prophet_3 = ability6_death_prophet_exorcism.findIn(hCaster)
-            if (GFuncEntity.IsValid(death_prophet_3) && death_prophet_3.GetLevel() > 0) {
+            if (IsValid(death_prophet_3) && death_prophet_3.GetLevel() > 0) {
                 death_prophet_3.ScepterSpirit(hTarget)
             }
 
@@ -172,7 +172,7 @@ export class modifier_death_prophet_1 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return

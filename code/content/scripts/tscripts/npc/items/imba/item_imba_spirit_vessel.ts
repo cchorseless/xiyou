@@ -83,7 +83,7 @@ export class modifier_item_imba_spirit_vessel extends BaseModifier_Plus {
     }
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS,
             2: GPropertyConfig.EMODIFIER_PROPERTY.MANA_REGEN_CONSTANT,
             3: GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BONUS,
             4: GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_BONUS,
@@ -92,7 +92,7 @@ export class modifier_item_imba_spirit_vessel extends BaseModifier_Plus {
             7: Enum_MODIFIER_EVENT.ON_DEATH
         });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
     CC_GetModifierHealthBonus(): number {
         if (this.GetItemPlus()) {
             return this.GetItemPlus().GetSpecialValueFor("bonus_health");

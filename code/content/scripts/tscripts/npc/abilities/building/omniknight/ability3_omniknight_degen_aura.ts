@@ -129,7 +129,7 @@ export class modifier_omniknight_3_debuff extends BaseModifier_Plus {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
-        if (!GFuncEntity.IsValid(hCaster) || !hCaster.IsAlive() || hCaster != params.attacker || hParent != params.unit) {
+        if (!IsValid(hCaster) || !hCaster.IsAlive() || hCaster != params.attacker || hParent != params.unit) {
             return
         }
         modifier_omniknight_3_reduce_status.apply(params.unit, hCaster, hAbility, { duration: this.duration })

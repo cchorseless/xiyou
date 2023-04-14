@@ -30,7 +30,7 @@ export class CourierShopComponent extends ET.Component {
                     return
                 }
                 let hCaster = EntIndexToHScript(entityIndex) as IBaseNpc_Plus;
-                if (!GFuncEntity.IsValid(hCaster) || !hCaster.IsAlive()) {
+                if (!IsValid(hCaster) || !hCaster.IsAlive()) {
                     return
                 }
                 this.BuyItem(hCaster, shoptype, slot);
@@ -232,7 +232,7 @@ export class CourierShopComponent extends ET.Component {
                 }
             }
         }
-        if (GFuncEntity.IsValid(itemEntity)) {
+        if (IsValid(itemEntity)) {
             playerroot.PlayerDataComp().changeItem(item.iCoinType, -costcoin);
             playerroot.PlayerDataComp().SyncClient();
         }

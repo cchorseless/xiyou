@@ -224,7 +224,7 @@ export class ability2_dawnbreaker_celestial_hammer extends BaseAbility_Plus {
     OnProjectileHitHandle(hTarget: IBaseNpc_Plus, vLocation: Vector, projectileHandle: any) {
         let hCaster = this.GetCasterPlus()
         if (IsServer()) {
-            if (GFuncEntity.IsValid(hTarget)) {
+            if (IsValid(hTarget)) {
                 //  造成伤害
                 let tDamageTable = {
                     ability: this,
@@ -232,7 +232,7 @@ export class ability2_dawnbreaker_celestial_hammer extends BaseAbility_Plus {
                     attacker: hCaster,
                     damage: this.iDamage,
                     damage_type: DAMAGE_TYPES.DAMAGE_TYPE_MAGICAL,
-                    eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_DOT,
+                    extra_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_DOT,
                 }
                 BattleHelper.GoApplyDamage(tDamageTable)
                 //  音效
@@ -312,7 +312,7 @@ export class modifier_dawnbreaker_2 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let hAbility = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(hAbility)) {
+            if (!IsValid(hAbility)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return

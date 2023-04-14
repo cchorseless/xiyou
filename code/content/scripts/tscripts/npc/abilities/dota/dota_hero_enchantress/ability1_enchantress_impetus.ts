@@ -167,7 +167,7 @@ export class modifier_enchantress_1 extends BaseModifier_Plus {
                 victim: hTarget,
                 damage: fDamage,
                 damage_type: DAMAGE_TYPES.DAMAGE_TYPE_PURE,
-                eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_SHOW_DAMAGE_NUMBER,
+                extra_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_SHOW_DAMAGE_NUMBER,
             })
             EmitSoundOnLocationWithCaster(hTarget.GetAbsOrigin(), ResHelper.GetSoundReplacement("Hero_Enchantress.ImpetusDamage", this.GetCasterPlus()), this.GetCasterPlus())
         }

@@ -426,96 +426,15 @@ export module FuncEntity {
             Queue: false,
         });
     }
-    /**
-     * 判断是否有效
-     * @param obj
-     * @returns
-     */
-    export function IsValid(obj: CEntityInstance | IBaseModifier_Plus) {
-        return obj && !obj.IsNull();
-    }
-    /**
-     * @Both
-     * @param ability 
-     * @returns 
-     */
-    export function SafeDestroyAbility(ability: IBaseAbility_Plus) {
-        if (IsValid(ability)) {
-            if (ability.__safedestroyed__) {
-                return;
-            }
-            ability.__safedestroyed__ = true;
-            ability.__TempData = null;
-            GTimerHelper.ClearAll(ability);
-            if (ability.OnDestroy) {
-                ability.OnDestroy();
-            }
-            ability.Destroy();
-            // UTIL_Remove(ability);
-        }
-    }
+    // /**
+    //  * 判断是否有效
+    //  * @param obj
+    //  * @returns
+    //  */
+    // export function IsValid(obj: CEntityInstance | IBaseModifier_Plus) {
+    //     return obj && !obj.IsNull();
+    // }
 
-    /**
-     * @Both
-     * @param item 
-     * @returns 
-     */
-    export function SafeDestroyItem(item: IBaseItem_Plus) {
-        if (IsValid(item)) {
-            if (item.__safedestroyed__) {
-                return;
-            }
-            item.__safedestroyed__ = true;
-            item.__TempData = null;
-            GTimerHelper.ClearAll(item);
-            if (item.OnDestroy) {
-                item.OnDestroy();
-            }
-            item.Destroy();
-            // UTIL_Remove(item);
-        }
-    }
-
-    /**
-     * @Both
-     * @param unit 
-     * @returns 
-     */
-    export function SafeDestroyUnit(unit: IBaseNpc_Plus) {
-        if (IsValid(unit)) {
-            if (unit.__safedestroyed__) {
-                return;
-            }
-            unit.__safedestroyed__ = true;
-            if (IsServer()) {
-                let bthinker = unit.IsThinker();
-                let allm = unit.FindAllModifiers() as IBaseModifier_Plus[];
-                for (let m of allm) {
-                    if (IsValid(m)) {
-                        m.Destroy();
-                    }
-                }
-                if (!bthinker) {
-                    let lenability = unit.GetAbilityCount()
-                    for (let i = 0; i < lenability; i++) {
-                        unit.GetAbilityByIndex(i) && SafeDestroyAbility(unit.GetAbilityByIndex(i) as any);
-                    }
-                    for (let i = 0; i < DOTAScriptInventorySlot_t.DOTA_ITEM_SLOT_9; i++) {
-                        unit.GetItemInSlot(i) && SafeDestroyItem(unit.GetItemInSlot(i) as any);
-                    }
-                }
-
-            }
-            if (IsValid(unit)) {
-                if (unit.OnDestroy) {
-                    unit.OnDestroy();
-                }
-                unit.ClearSelf();
-                unit.Destroy();
-            }
-            // UTIL_Remove(unit);
-        }
-    }
     export function AsAttribute(obj: string) {
         switch (obj) {
             case "DOTA_ATTRIBUTE_STRENGTH":
@@ -531,19 +450,6 @@ export module FuncEntity {
         }
         return Attributes.DOTA_ATTRIBUTE_INVALID;
     }
-    /**
-    * 检查是否是第一次创建
-    */
-    export function checkIsFirstSpawn(hTarget: IBaseNpc_Plus) {
-        let r = hTarget.__bIsFirstSpawn
-        if (!r) {
-            hTarget.__bIsFirstSpawn = true;
-            return true
-        }
-        else {
-            return false
-        }
-    };
 
     export function Custom_bIsStrongIllusion(unit: IBaseNpc_Plus) {
         return unit && (unit.HasModifier("modifier_chaos_knight_phantasm_illusion") || unit.HasModifier("modifier_imba_chaos_knight_phantasm_illusion") || unit.HasModifier("modifier_vengefulspirit_hybrid_special"));
@@ -562,12 +468,12 @@ export module FuncEntity {
 
 
     /**
-        * 扔东西到对象附近
-        * @param hDropUnit
-        * @param item
-        * @param hTargetUnit
-        * @returns
-        */
+     * 扔东西到对象附近
+     * @param hDropUnit
+     * @param item
+     * @param hTargetUnit
+     * @returns
+     */
     export function DropItemAroundUnit(hDropUnit: IBaseNpc_Plus, item: IBaseItem_Plus, hTargetUnit: IBaseNpc_Plus) {
         if (!IsValid(hDropUnit)) {
             return
@@ -579,15 +485,6 @@ export module FuncEntity {
         CreateItemOnPositionRandom(hTargetUnit.GetAbsOrigin(), item)
     }
 
-
-    export function CreateItemOnPosition(position: Vector, item: IBaseItem_Plus) {
-        let hContainer = CreateItemOnPositionForLaunch(position, item)
-        //  let iTier = DotaTD.GetNeutralItemTier(item.GetName())
-        //  if ( iTier != -1 ) {
-        //  	hContainer.SetMaterialGroup(tostring(iTier))
-        //  }
-        return hContainer
-    }
 
     /**
      * 在地面创建道具

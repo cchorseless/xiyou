@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../../ai/AI_ability";
 import { GameSetting } from "../../../../GameSetting";
+import { AI_ability } from "../../../../ai/AI_ability";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
@@ -46,7 +46,7 @@ export class ability1_slardar_sprint extends ActiveRootAbility {
         return true
     }
     OnAbilityPhaseInterrupted() {
-        if (GFuncEntity.IsValid(this.hBuffPtcl)) {
+        if (IsValid(this.hBuffPtcl)) {
             this.hBuffPtcl.Destroy()
         }
     }
@@ -58,7 +58,7 @@ export class ability1_slardar_sprint extends ActiveRootAbility {
         return 1
     }
     OnSpellStart() {
-        if (GFuncEntity.IsValid(this.hBuffPtcl)) {
+        if (IsValid(this.hBuffPtcl)) {
             this.hBuffPtcl.Destroy()
         }
         let hCaster = this.GetCasterPlus()
@@ -128,7 +128,7 @@ export class modifier_slardar_1 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -226,7 +226,7 @@ export class modifier_slardar_1_slow extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
     CC_GetModifierIncomingDamagePercentage(params: ModifierAttackEvent) {
-        if (GFuncEntity.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard() && params != null && params.damage_category == DamageCategory_t.DOTA_DAMAGE_CATEGORY_ATTACK) {
+        if (IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard() && params != null && params.damage_category == DamageCategory_t.DOTA_DAMAGE_CATEGORY_ATTACK) {
             return this.shard_amplify_attack_damage_pct
         }
         return 0

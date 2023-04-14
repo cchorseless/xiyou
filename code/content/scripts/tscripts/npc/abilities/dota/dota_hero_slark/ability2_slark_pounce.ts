@@ -107,7 +107,7 @@ export class modifier_slark_2 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -147,7 +147,7 @@ export class modifier_slark_2 extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE)
     CC_GetModifierOutgoingDamagePercentage(params: ModifierAttackEvent) {
-        if (GFuncEntity.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard() && params != null && modifier_slark_2_leash.exist(params.target)) {
+        if (IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard() && params != null && modifier_slark_2_leash.exist(params.target)) {
             return this.shard_amplify_damage_pct
         }
         return 0
@@ -258,7 +258,7 @@ export class modifier_slark_2_thinker extends BaseModifier_Plus {
 
         if (IsServer()) {
             this.GetParentPlus().EmitSound(ResHelper.GetSoundReplacement("Hero_Slark.Pounce.End", this.GetCasterPlus()))
-            if (GFuncEntity.IsValid(this.GetParentPlus())) {
+            if (IsValid(this.GetParentPlus())) {
                 this.GetParentPlus().SafeDestroy()
             }
         }

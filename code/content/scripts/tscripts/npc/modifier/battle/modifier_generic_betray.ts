@@ -23,7 +23,7 @@
 //             new_lane_creep.SetMaximumGoldBounty(target.GetGoldBounty());
 //             target.AddNoDraw();
 //             target.ForceKill(false);
-//             GFuncEntity.SafeDestroyUnit(target);
+//             SafeDestroyUnit(target);
 //         }
 //     }
 // }

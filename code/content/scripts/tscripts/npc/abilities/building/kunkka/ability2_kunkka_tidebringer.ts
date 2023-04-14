@@ -33,7 +33,7 @@ export class ability2_kunkka_tidebringer extends BaseAbility_Plus {
         }
         let tTarget = FindUnitsInRadius(hCaster.GetTeamNumber(), hTarget.GetAbsOrigin(), null, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_CLOSEST, false)
         for (let unit of (tTarget)) {
-            if (GFuncEntity.IsValid(unit) && unit.IsAlive()) {
+            if (IsValid(unit) && unit.IsAlive()) {
                 modifier_kunkka_2_buff.apply(unit, hCaster, this, { duration: duration })
             }
         }
@@ -77,7 +77,7 @@ export class modifier_kunkka_2 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -192,7 +192,7 @@ export class modifier_kunkka_2_buff extends BaseModifier_Plus {
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
         if (IsServer()) {
-            if (!GFuncEntity.IsValid(hCaster) || !hCaster.IsAlive()) {
+            if (!IsValid(hCaster) || !hCaster.IsAlive()) {
                 return
             }
             // 涨潮，拉回原点
@@ -214,7 +214,7 @@ export class modifier_kunkka_2_buff extends BaseModifier_Plus {
                     attacker: hCaster,
                     damage: fDamage,
                     damage_type: DAMAGE_TYPES.DAMAGE_TYPE_PURE,
-                    eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_DAMAGE_AMPLIFY + BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_SPELL_CRIT,
+                    extra_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_DAMAGE_AMPLIFY + BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_SPELL_CRIT,
                 }
                 BattleHelper.GoApplyDamage(damage_table)
             }

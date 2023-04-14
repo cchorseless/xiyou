@@ -43,7 +43,7 @@ export class ability1_luna_lucent_beam extends BaseAbility_Plus {
         return true
     }
     LucentBeam(hTarget: IBaseNpc_Plus) {
-        if (!GFuncEntity.IsValid(hTarget) || !hTarget.IsAlive()) {
+        if (!IsValid(hTarget) || !hTarget.IsAlive()) {
             return
         }
         let hCaster = this.GetCasterPlus()
@@ -81,7 +81,7 @@ export class ability1_luna_lucent_beam extends BaseAbility_Plus {
     OnSpellStart() {
         let hCaster = this.GetCasterPlus()
         let hTarget = this.GetCursorTarget()
-        if (!GFuncEntity.IsValid(hTarget) || !hTarget.IsAlive()) {
+        if (!IsValid(hTarget) || !hTarget.IsAlive()) {
             return
         }
         if (hTarget.TriggerSpellAbsorb(this)) {
@@ -129,7 +129,7 @@ export class modifier_luna_1 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return

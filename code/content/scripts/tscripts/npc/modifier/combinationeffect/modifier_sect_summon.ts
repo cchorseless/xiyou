@@ -28,7 +28,7 @@ export class modifier_sect_summon_base_a extends modifier_combination_effect {
     CC_ON_SPAWN_SUMMONNED(e: ModifierInstanceEvent) {
         let parent = this.GetParentPlus();
         let summon = e.unit;
-        if (GFuncEntity.IsValid(summon)) {
+        if (IsValid(summon)) {
             modifier_sect_summon_buff_active.apply(summon, parent)
         }
     }
@@ -58,7 +58,7 @@ export class modifier_sect_summon_base_c extends modifier_sect_summon_base_b {
 export class modifier_sect_summon_buff_active extends BaseModifier_Plus {
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_PERCENTAGE)
     summon_atk_pect: number;
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_PERCENTAGE)
     summon_hp_pect: number;
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_PERCENTAGE)
     summon_atkspeed_pect: number;

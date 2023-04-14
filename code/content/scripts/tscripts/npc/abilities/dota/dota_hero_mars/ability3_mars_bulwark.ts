@@ -84,7 +84,7 @@ export class modifier_mars_3 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -126,12 +126,12 @@ export class modifier_mars_3 extends BaseModifier_Plus {
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
     OnDeath(params: IModifierTable) {
         let hAttacker = params.attacker
-        if (GFuncEntity.IsValid(hAttacker) && hAttacker.GetUnitLabel() != "builder") {
+        if (IsValid(hAttacker) && hAttacker.GetUnitLabel() != "builder") {
             if (hAttacker.GetTeamNumber() == params.unit.GetTeamNumber()) {
                 return
             }
             hAttacker = hAttacker.GetSource()
-            if (GFuncEntity.IsValid(hAttacker) && hAttacker == this.GetParentPlus() && !hAttacker.IsIllusion() && !hAttacker.PassivesDisabled()) {
+            if (IsValid(hAttacker) && hAttacker == this.GetParentPlus() && !hAttacker.IsIllusion() && !hAttacker.PassivesDisabled()) {
                 if ((this.GetParentPlus().HasTalent("special_bonus_unique_mars_custom_3"))) {
                     let hAbility = this.GetAbilityPlus()
                     let flCooldown = hAbility.GetCooldownTimeRemaining() + this.GetParentPlus().GetTalentValue("special_bonus_unique_mars_custom_3")

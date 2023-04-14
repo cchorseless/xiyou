@@ -83,20 +83,20 @@ export class ability1_puck_illusory_orb extends BaseAbility_Plus {
     }
     OnProjectileThink_ExtraData(vLocation: Vector, ExtraData: any) {
         let hDummy = EntIndexToHScript(ExtraData.dummy_entindex || -1)
-        if (GFuncEntity.IsValid(hDummy)) {
+        if (IsValid(hDummy)) {
             hDummy.SetAbsOrigin(vLocation)
         }
     }
     OnProjectileHit_ExtraData(hTarget: IBaseNpc_Plus, vLocation: Vector, ExtraData: any) {
         let hCaster = this.GetCasterPlus()
 
-        if (GFuncEntity.IsValid(hTarget)) {
+        if (IsValid(hTarget)) {
             let damage = this.GetSpecialValueFor("damage")
             let stack_duration = this.GetSpecialValueFor("stack_duration")
             let damage_int_factor_per_stack = this.GetSpecialValueFor("damage_int_factor_per_stack") + hCaster.GetTalentValue("special_bonus_unique_puck_custom_5")
 
             let hModifier = modifier_puck_1_debuff.findIn(hTarget) as modifier_puck_1_debuff;
-            let iStackCount = GFuncEntity.IsValid(hModifier) && hModifier.GetStackCount() || 0
+            let iStackCount = IsValid(hModifier) && hModifier.GetStackCount() || 0
             let iInt = type(hCaster.GetIntellect) == "function" && hCaster.GetIntellect() || 0
             let fDamage = damage + iInt * iStackCount * damage_int_factor_per_stack
 
@@ -122,7 +122,7 @@ export class ability1_puck_illusory_orb extends BaseAbility_Plus {
         }
 
         let hDummy = EntIndexToHScript(ExtraData.dummy_entindex || -1) as IBaseNpc_Plus
-        if (GFuncEntity.IsValid(hDummy)) {
+        if (IsValid(hDummy)) {
             hDummy.StopSound(ExtraData.sound_name)
             modifier_dummy.remove(hDummy);
         }
@@ -168,7 +168,7 @@ export class modifier_puck_1 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return

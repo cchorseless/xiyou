@@ -74,7 +74,7 @@ export class modifier_t25_demon_gaze extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -197,7 +197,7 @@ export class modifier_t25_demon_gaze_debuff extends BaseModifier_Plus {
         if (IsServer()) {
             let hAbility = this.GetAbilityPlus()
             let hCaster = this.GetCasterPlus()
-            if (!GFuncEntity.IsValid(hCaster)) {
+            if (!IsValid(hCaster)) {
                 return
             }
             hCaster.EmitSound("Hero_Grimstroke.InkSwell.Stun")

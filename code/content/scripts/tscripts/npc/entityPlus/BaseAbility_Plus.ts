@@ -218,11 +218,11 @@ export class BaseAbility_Plus extends BaseAbility {
      * 自动施法后，调AI
      */
     // public ToggleAutoCast() {
-    //     if (!GFuncEntity.IsValid(this)) {
+    //     if (!IsValid(this)) {
     //         return
     //     }
     //     let caster = this.GetCasterPlus()
-    //     if (!GFuncEntity.IsValid(caster) || caster.IsTempestDouble() || caster.IsIllusion()) {
+    //     if (!IsValid(caster) || caster.IsTempestDouble() || caster.IsIllusion()) {
     //         return
     //     }
     //     super.ToggleAutoCast();
@@ -230,7 +230,7 @@ export class BaseAbility_Plus extends BaseAbility {
     //         if (this.__autoSpellTimer != null) { return }
     //         this.__autoSpellTimer = GTimerHelper.AddTimer(GameSetting.AI_TIMER_TICK_TIME_HERO,
     //             GHandler.create(this, () => {
-    //                 if (!GFuncEntity.IsValid(this)) {
+    //                 if (!IsValid(this)) {
     //                     this.__autoSpellTimer = null;
     //                     return
     //                 }

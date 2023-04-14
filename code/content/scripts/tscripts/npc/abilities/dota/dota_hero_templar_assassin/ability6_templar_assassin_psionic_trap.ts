@@ -88,7 +88,7 @@ export class modifier_templar_assassin_6 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -165,7 +165,7 @@ export class modifier_templar_assassin_6_movespeed extends BaseModifier_Plus {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         if (IsServer()) {
-            if (GFuncEntity.IsValid(hCaster) && hCaster.HasShard()) {
+            if (IsValid(hCaster) && hCaster.HasShard()) {
                 BattleHelper.Attack(hCaster, hParent, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_SKIPCOOLDOWN + BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_IGNOREINVIS + BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NO_CLEAVE + BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NO_EXTENDATTACK + BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_SKIPCOUNTING)
             }
         }
@@ -173,7 +173,7 @@ export class modifier_templar_assassin_6_movespeed extends BaseModifier_Plus {
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
     GetMoveSpeedBonus_Percentage(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
-        if (GFuncEntity.IsValid(hCaster)) {
+        if (IsValid(hCaster)) {
             return -(this.move_speed_reduce + this.GetCasterPlus().GetTalentValue("special_bonus_unique_templar_assassin_custom"))
         }
         return 0
@@ -238,7 +238,7 @@ export class modifier_templar_assassin_6_thinker extends modifier_particle_think
         let hAbility = this.GetAbilityPlus()
         let vPosition = hParent.GetAbsOrigin()
         if (IsServer()) {
-            if (!GFuncEntity.IsValid(hAbility) || !GFuncEntity.IsValid(hCaster)) {
+            if (!IsValid(hAbility) || !IsValid(hCaster)) {
                 return
             }
             EmitSoundOnLocationWithCaster(vPosition, ResHelper.GetSoundReplacement("Hero_TemplarAssassin.Trap.Explode", hCaster), hCaster)

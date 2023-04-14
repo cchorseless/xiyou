@@ -162,7 +162,7 @@ export module AoiHelper {
         let find = FindEntityInRadius(team, location, radius, exclude, teamFilter, typeFilter, flagFilter, findOrder);
         while (find.length > 0) {
             let r = find.shift();
-            if (GFuncEntity.IsValid(r) && r.IsAlive()) {
+            if (IsValid(r) && r.IsAlive()) {
                 return r
             }
         }
@@ -265,7 +265,7 @@ export module AoiHelper {
                         if ((vMid - search_position as Vector).Length2D() <= search_radius) {
                             tPoints.push(vMid);
                         } else {
-                            let fHalfLength = math.sqrt(radius ^ 2 - (fDistance / 2) ^ 2);
+                            let fHalfLength = math.sqrt(radius * radius - (fDistance / 2) * (fDistance / 2));
                             let v = GFuncVector.Rotation2D(vDirection.Normalized(), math.rad(90));
                             let p = [
                                 vMid - v * fHalfLength,
@@ -423,7 +423,7 @@ export module AoiHelper {
         order: FindOrder = FindOrder.FIND_CLOSEST,
         can_bounce_bounced_unit = false): IBaseNpc_Plus | null {
         let last_target = unit_table[unit_table.length - 1];
-        if (!GFuncEntity.IsValid(last_target)) {
+        if (!IsValid(last_target)) {
             return
         }
         if (position == null) {
@@ -437,7 +437,7 @@ export module AoiHelper {
         let first_targets = FindEntityInRadius(team_number, position, radius, exclude, team_filter, type_filter, flag_filter, order)
         while (first_targets.length > 0) {
             let nextUnit = first_targets.shift();
-            if (GFuncEntity.IsValid(nextUnit) && nextUnit.IsAlive()) {
+            if (IsValid(nextUnit) && nextUnit.IsAlive()) {
                 return nextUnit
             }
         }
@@ -466,7 +466,7 @@ export module AoiHelper {
         iTypeFilter: DOTA_UNIT_TARGET_TYPE = DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC,
         iFlagFilter: DOTA_UNIT_TARGET_FLAGS = (DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ATTACK_IMMUNE),
     ) {
-        let fRadius = math.sqrt(fDistance ^ 2 + (fEndWidth / 2) ^ 2)
+        let fRadius = math.sqrt(fDistance * fDistance + (fEndWidth / 2) * (fEndWidth / 2))
         let vStart = hAttacker.GetAbsOrigin()
         let vDirection = (hTarget.GetAbsOrigin() - vStart) as Vector
         vDirection.z = 0

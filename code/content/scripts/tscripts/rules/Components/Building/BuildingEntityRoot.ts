@@ -191,8 +191,8 @@ export class BuildingEntityRoot extends BattleUnitEntityRoot {
 
     onDestroy(): void {
         let npc = this.GetDomain<IBaseNpc_Plus>();
-        if (GFuncEntity.IsValid(npc)) {
-            GFuncEntity.SafeDestroyUnit(npc);
+        if (IsValid(npc)) {
+            SafeDestroyUnit(npc);
         }
         // npc.HasScepter
     }

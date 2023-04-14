@@ -93,7 +93,7 @@ export class modifier_imba_black_queen_cape_passive extends BaseModifier_Plus {
     }
     /** DeclareFunctions():modifierfunction[] {
         let decFuns = {
-            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
             2: GPropertyConfig.EMODIFIER_PROPERTY.MANA_REGEN_CONSTANT,
             3: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_REGEN_CONSTANT,
             4: GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_BONUS,
@@ -165,7 +165,7 @@ export class modifier_imba_black_queen_cape_passive extends BaseModifier_Plus {
             }
         }
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.bonus_damage;
     }

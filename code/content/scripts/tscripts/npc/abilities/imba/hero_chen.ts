@@ -216,7 +216,7 @@ export class modifier_imba_chen_divine_favor extends BaseModifier_Plus {
     /** DeclareFunctions():modifierfunction[] {
     return Object.values({
         1: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_REGEN_CONSTANT,
-        2: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
+        2: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
         3: GPropertyConfig.EMODIFIER_PROPERTY.ABSOLUTE_NO_DAMAGE_PURE,
         4: GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP
     });
@@ -229,7 +229,7 @@ export class modifier_imba_chen_divine_favor extends BaseModifier_Plus {
     CC_GetModifierConstantHealthRegen(): number {
         return this.heal_rate;
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         if (!this.GetParentPlus().IsRealUnit()) {
             return this.damage_bonus * this.creep_damage_mult;
@@ -295,7 +295,7 @@ export class modifier_imba_chen_divine_favor_aura_buff extends BaseModifier_Plus
     /** DeclareFunctions():modifierfunction[] {
     return Object.values({
         1: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_REGEN_CONSTANT,
-        2: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
+        2: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
         3: GPropertyConfig.EMODIFIER_PROPERTY.ABSOLUTE_NO_DAMAGE_PURE,
         4: GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP
     });
@@ -307,7 +307,7 @@ export class modifier_imba_chen_divine_favor_aura_buff extends BaseModifier_Plus
     CC_GetModifierConstantHealthRegen(): number {
         return this.heal_rate_aura;
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         if (!this.GetParentPlus().IsRealUnit()) {
             return this.damage_bonus_aura * this.army_damage_multiplier;
@@ -582,7 +582,7 @@ export class modifier_imba_chen_holy_persuasion extends BaseModifier_Plus {
         if (!IsServer()) {
             return;
         }
-        if (!GFuncEntity.IsValid(this.GetCasterPlus())) {
+        if (!IsValid(this.GetCasterPlus())) {
             return;
         }
         if (keys.unit == this.GetParentPlus()) {
@@ -1030,11 +1030,11 @@ export class modifier_imba_chen_hand_of_god_overheal extends BaseModifier_Plus {
     }
     /** DeclareFunctions():modifierfunction[] {
     let decFuncs = {
-        1: GPropertyConfig.EMODIFIER_PROPERTY.EXTRA_HEALTH_BONUS
+        1: GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS
     }
     return Object.values(decFuncs);
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.EXTRA_HEALTH_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
     CC_GetModifierExtraHealthBonus(): number {
         return this.GetStackCount();
     }

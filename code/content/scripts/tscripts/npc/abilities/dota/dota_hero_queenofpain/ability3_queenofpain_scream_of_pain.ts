@@ -40,7 +40,7 @@ export class ability3_queenofpain_scream_of_pain extends BaseAbility_Plus {
         let bleeding_damage_int_factor = this.GetSpecialValueFor("bleeding_damage_int_factor") + hCaster.GetTalentValue("special_bonus_unique_queenofpain_custom_6")
 
         modifier_generic_bleeding.Bleeding(hTarget, hCaster, this, bleeding_duration, (tDamageTable) => {
-            tDamageTable.eom_flags = tDamageTable.eom_flags + BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_DAMAGE_AMPLIFY
+            tDamageTable.extra_flags = tDamageTable.extra_flags + BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_DAMAGE_AMPLIFY
             return hCaster.GetIntellect() * bleeding_damage_int_factor * 0.01
         }, true)
 
@@ -90,7 +90,7 @@ export class modifier_queenofpain_3 extends BaseModifier_Plus {
                 }
 
                 let hAbility = params.inflictor
-                if (GFuncEntity.IsValid(hAbility) && hAbility != this.GetAbilityPlus() && !hAbility.IsItem() && !hAbility.IsToggle()) {
+                if (IsValid(hAbility) && hAbility != this.GetAbilityPlus() && !hAbility.IsItem() && !hAbility.IsToggle()) {
                     (this.GetAbilityPlus() as ability3_queenofpain_scream_of_pain).Trigger(params.target as IBaseNpc_Plus)
                 }
             }

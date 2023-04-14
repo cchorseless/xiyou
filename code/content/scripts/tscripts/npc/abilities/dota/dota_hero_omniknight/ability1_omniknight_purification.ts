@@ -62,7 +62,7 @@ export class ability1_omniknight_purification extends BaseAbility_Plus {
         let iStr = 0
         let iInt = 0
         let iAgi = 0
-        if (!GFuncEntity.IsValid(hTarget) || !hTarget.IsAlive()) {
+        if (!IsValid(hTarget) || !hTarget.IsAlive()) {
             return
         }
         if (hTarget.GetStrength != null) {
@@ -105,7 +105,7 @@ export class ability1_omniknight_purification extends BaseAbility_Plus {
 
         modifier_omniknight_1_particle_cast.apply(hCaster, hTarget, this, { duration: BaseModifier_Plus.LOCAL_PARTICLE_MODIFIER_DURATION })
         this.Purification(hTarget)
-        if (GFuncEntity.IsValid(hTarget) && hCaster.HasTalent("special_bonus_unique_omniknight_custom_4")) {
+        if (IsValid(hTarget) && hCaster.HasTalent("special_bonus_unique_omniknight_custom_4")) {
             let extra_count = hCaster.GetTalentValue("special_bonus_unique_omniknight_custom_4")
             let delay = hCaster.GetTalentValue("special_bonus_unique_omniknight_custom_4", "delay")
             let iCount = 0
@@ -113,8 +113,8 @@ export class ability1_omniknight_purification extends BaseAbility_Plus {
             let vHitLoc = hLastTarget.GetAttachmentOrigin(hLastTarget.ScriptLookupAttachment("attach_hitloc"))
             let tTargets = [hLastTarget]
             this.addTimer(delay, () => {
-                let hNextTarget = AoiHelper.GetBounceTarget([hLastTarget], hCaster.GetTeamNumber(), fCastRange, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS, GFuncEntity.IsValid(hLastTarget) && hLastTarget.GetAbsOrigin() || vHitLoc, FindOrder.FIND_CLOSEST, false)
-                if (GFuncEntity.IsValid(hNextTarget)) {
+                let hNextTarget = AoiHelper.GetBounceTarget([hLastTarget], hCaster.GetTeamNumber(), fCastRange, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS, IsValid(hLastTarget) && hLastTarget.GetAbsOrigin() || vHitLoc, FindOrder.FIND_CLOSEST, false)
+                if (IsValid(hNextTarget)) {
                     let iParticleID = ResHelper.CreateParticle({
                         resPath: "particles/units/heroes/hero_omniknight/omniknight_purification_cast.vpcf",
                         resNpc: hCaster,
@@ -122,7 +122,7 @@ export class ability1_omniknight_purification extends BaseAbility_Plus {
                         owner: hLastTarget
                     });
 
-                    if (GFuncEntity.IsValid(hLastTarget)) {
+                    if (IsValid(hLastTarget)) {
                         ParticleManager.SetParticleControlEnt(iParticleID, 0, hLastTarget, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", hLastTarget.GetAbsOrigin(), true)
                     } else {
                         ParticleManager.SetParticleControl(iParticleID, ParticleAttachment_t.PATTACH_POINT_FOLLOW, vHitLoc)
@@ -181,7 +181,7 @@ export class modifier_omniknight_1 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus() as ability1_omniknight_purification
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -205,7 +205,7 @@ export class modifier_omniknight_1 extends BaseModifier_Plus {
             let range = ability.GetCastRange(caster.GetAbsOrigin(), caster) + caster.GetCastRangeBonus() + caster.GetHullRadius()
 
             //  优先上一个目标
-            let target = GFuncEntity.IsValid(ability.hLastTarget) && ability.hLastTarget || null
+            let target = IsValid(ability.hLastTarget) && ability.hLastTarget || null
             if (target != null && !target.IsPositionInRange(caster.GetAbsOrigin(), range + target.GetHullRadius())) {
                 target = null
             }

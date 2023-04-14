@@ -73,7 +73,7 @@ export class modifier_imba_sven_warcry_723 extends BaseModifier_Plus {
         return Object.values({
             1: GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE,
             2: GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS,
-            3: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
+            3: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
             4: GPropertyConfig.EMODIFIER_PROPERTY.STATUS_RESISTANCE_STACKING,
             5: GPropertyConfig.EMODIFIER_PROPERTY.TRANSLATE_ACTIVITY_MODIFIERS
         });
@@ -88,7 +88,7 @@ export class modifier_imba_sven_warcry_723 extends BaseModifier_Plus {
     CC_GetModifierPhysicalArmorBonus(p_0: ModifierAttackEvent,): number {
         return this.bonus_armor;
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.bonus_damage;
     }
@@ -298,7 +298,7 @@ export class modifier_imba_storm_bolt_crit extends BaseModifier_Plus {
             }
         }
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_CRITICALSTRIKE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_CRITICALSTRIKE_UNIQUE)
     CC_GetModifierPreAttack_CriticalStrike(params: ModifierAttackEvent): number {
         if (this.GetAbilityPlus<imba_sven_storm_bolt>().target == params.target) {
             return this.GetSpecialValueFor("crit_pct");
@@ -1062,7 +1062,7 @@ export class imba_sven_colossal_slash extends BaseAbility_Plus {
         if (target) {
             let caster = this.GetCasterPlus();
             let mod = caster.AddNewModifier(caster, this, "modifier_imba_colossal_slash_crit", {});
-            caster.PerformAttack(target, true, false, true, false, false, false, true);
+            caster.AttackOnce(target, true, false, true, false, false, false, true);
             mod.Destroy();
         }
     }

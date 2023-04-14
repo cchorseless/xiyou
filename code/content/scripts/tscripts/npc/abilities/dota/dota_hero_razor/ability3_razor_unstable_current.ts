@@ -56,7 +56,7 @@ export class modifier_razor_3 extends BaseModifier_Plus {
     ATtackLanded(params: ModifierAttackEvent) {
         let hAttacker = params.attacker as IBaseNpc_Plus
         let hTarget = params.target as IBaseNpc_Plus
-        if (GFuncEntity.IsValid(hAttacker) && GFuncEntity.IsValid(hTarget)) {
+        if (IsValid(hAttacker) && IsValid(hTarget)) {
             let iAttackDamage = hAttacker.GetAverageTrueAttackDamage(null)
             let iShockCount = this.GetSpecialValueFor("attack_damage_shock_pct")
             let iShockDamagePct = this.GetSpecialValueFor("attack_shock_damage_pct")

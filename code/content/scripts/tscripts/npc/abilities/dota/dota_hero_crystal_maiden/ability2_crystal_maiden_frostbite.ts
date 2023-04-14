@@ -110,7 +110,7 @@ export class modifier_crystal_maiden_2 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -188,7 +188,7 @@ export class modifier_crystal_maiden_2_debuff extends BaseModifier_Plus {
 
         if (IsServer()) {
             this.GetParentPlus().StopSound(this.sSoundName)
-            if (GFuncEntity.IsValid(this.modifier_truesight as IBaseModifier_Plus)) {
+            if (IsValid(this.modifier_truesight as IBaseModifier_Plus)) {
                 this.modifier_truesight.Destroy()
             }
         }

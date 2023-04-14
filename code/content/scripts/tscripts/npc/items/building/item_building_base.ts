@@ -92,7 +92,7 @@ export class item_building_base extends ActiveRootItem {
     //         return;
     //     }
     //     //  场上还没有这个单位，种下新的
-    //     if (!GFuncEntity.IsValid(hTarget)) {
+    //     if (!IsValid(hTarget)) {
     //         let sTowerName = this.GetCreateUnitName();
     //         let location = this.GetCursorPosition();
     //         let boardPos = GChessControlSystem.GetInstance().GetBoardLocalVector2(location, false);

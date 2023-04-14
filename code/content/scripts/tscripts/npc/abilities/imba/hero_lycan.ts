@@ -160,10 +160,10 @@ export class modifier_imba_lycan_summon_wolves_damage_talent extends BaseModifie
     }
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS
+            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE
         });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.GetStackCount();
     }
@@ -530,7 +530,7 @@ export class modifier_imba_feral_impulse extends BaseModifier_Plus {
         this.StartIntervalThink(0.1);
     }
     OnIntervalThink(): void {
-        if (!GFuncEntity.IsValid(this.caster)) {
+        if (!IsValid(this.caster)) {
             this.Destroy();
             return
         }
@@ -805,7 +805,7 @@ export class modifier_imba_shapeshift extends BaseModifier_Plus {
             return this.absolute_speed;
         }
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_CRITICALSTRIKE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_CRITICALSTRIKE_UNIQUE)
     CC_GetModifierPreAttack_CriticalStrike(p_0: ModifierAttackEvent,): number {
         if (IsServer()) {
             if (this.parent.HasModifier(this.certain_crit_buff)) {
@@ -969,10 +969,10 @@ export class modifier_imba_wolfsbane_wolves extends BaseModifier_Plus {
     }
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS
+            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE
         });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         let stacks = this.GetStackCount();
         if (this.GetParentPlus().PassivesDisabled()) {
@@ -1008,7 +1008,7 @@ export class modifier_imba_wolfsbane_lycan extends BaseModifier_Plus {
     }
     /** DeclareFunctions():modifierfunction[] {
         let decFuncs = {
-            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
             2: Enum_MODIFIER_EVENT.ON_HERO_KILLED,
             3: GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP
         }
@@ -1063,7 +1063,7 @@ export class modifier_imba_wolfsbane_lycan extends BaseModifier_Plus {
             }
         }
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         let stacks = this.GetStackCount();
         let damage_bonus = this.damage_bonus;

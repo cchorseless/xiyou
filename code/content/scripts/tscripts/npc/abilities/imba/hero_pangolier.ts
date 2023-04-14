@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { GameServiceConfig } from "../../../shared/GameServiceConfig";
@@ -176,7 +176,7 @@ export class modifier_imba_swashbuckle_dash extends BaseModifierMotionHorizontal
                 if (!already_hit) {
                     EmitSoundOn(this.hit_sound, enemy);
                     if (!enemy.IsAttackImmune()) {
-                        this.GetCasterPlus().PerformAttack(enemy, true, true, true, true, false, false, true);
+                        this.GetCasterPlus().AttackOnce(enemy, true, true, true, true, false, false, true);
                         this.enemies_hit.push(enemy);
                     }
                 }
@@ -303,7 +303,7 @@ export class modifier_imba_swashbuckle_slashes extends BaseModifier_Plus {
                     ParticleManager.SetParticleControl(blood_particle, 0, enemy.GetAbsOrigin());
                     ParticleManager.SetParticleControl(blood_particle, 2, this.direction * 500 as Vector);
                     this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_swashbuckle_damage_control", {});
-                    this.GetCasterPlus().PerformAttack(enemy, true, true, true, true, false, false, true);
+                    this.GetCasterPlus().AttackOnce(enemy, true, true, true, true, false, false, true);
                     this.GetCasterPlus().RemoveModifierByName("modifier_imba_swashbuckle_damage_control");
                 }
             }
@@ -501,7 +501,7 @@ export class imba_pangolier_shield_crash extends BaseAbility_Plus {
                                     ability: swashbuckle_ability
                                 }
                                 ApplyDamage(damageTable);
-                                this.GetCasterPlus().PerformAttack(enemy, true, true, true, true, false, true, true);
+                                this.GetCasterPlus().AttackOnce(enemy, true, true, true, true, false, true, true);
                                 hit_enemies.push(enemy)
                             }
                         }
@@ -878,7 +878,7 @@ export class modifier_imba_shield_crash_block extends BaseModifier_Plus {
                                     ability: undefined
                                 }
                                 ApplyDamage(damageTable);
-                                this.GetCasterPlus().PerformAttack(enemy, true, true, true, true, false, false, true);
+                                this.GetCasterPlus().AttackOnce(enemy, true, true, true, true, false, false, true);
                             } else {
                                 let damageTable: ApplyDamageOptions = {
                                     victim: enemy,
@@ -889,7 +889,7 @@ export class modifier_imba_shield_crash_block extends BaseModifier_Plus {
                                     ability: undefined
                                 }
                                 ApplyDamage(damageTable);
-                                this.GetCasterPlus().PerformAttack(enemy, true, true, true, true, false, true, true);
+                                this.GetCasterPlus().AttackOnce(enemy, true, true, true, true, false, true, true);
                             }
                         }
                     }
@@ -1132,7 +1132,7 @@ export class modifier_imba_heartpiercer_debuff extends BaseModifier_Plus {
                 }
                 ApplyDamage(damageTable);
                 this.GetCasterPlus().TempData().allow_heartpiercer = false;
-                this.GetCasterPlus().PerformAttack(this.GetParentPlus(), true, true, true, true, false, true, true);
+                this.GetCasterPlus().AttackOnce(this.GetParentPlus(), true, true, true, true, false, true, true);
                 this.GetCasterPlus().TempData().allow_heartpiercer = true;
             }
         }

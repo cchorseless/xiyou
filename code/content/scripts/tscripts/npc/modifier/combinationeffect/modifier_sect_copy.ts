@@ -24,7 +24,7 @@ export class modifier_sect_copy_base_a extends modifier_combination_effect {
     // CC_ON_SPAWN_ILLUSION(keys: ModifierInstanceEvent): void {
     //     if (!IsServer()) { return }
     //     let parent = this.GetParentPlus();
-    //     if (!GFuncEntity.IsValid(parent)) { return }
+    //     if (!IsValid(parent)) { return }
     //     GLogHelper.print("CC_ON_SPAWN_ILLUSION ", parent.GetUnitName(), keys.unit.GetUnitName(), keys.unit.GetEntityIndex())
     // }
 
@@ -32,7 +32,7 @@ export class modifier_sect_copy_base_a extends modifier_combination_effect {
     CC_ON_DEATH_ILLUSION(keys: ModifierInstanceEvent): void {
         if (!IsServer()) { return }
         let parent = this.GetParentPlus();
-        if (!GFuncEntity.IsValid(parent)) { return }
+        if (!IsValid(parent)) { return }
         let t = parent.TempData().sect_copy || { damage: 0, copy_pect: 0 };
         let particle_blast = "particles/sect/sect_copy/sect_copy2.vpcf"
         let particle_blast_fx = ResHelper.CreateParticleEx(particle_blast, ParticleAttachment_t.PATTACH_ABSORIGIN, keys.unit);

@@ -72,7 +72,7 @@ export class modifier_item_imba_aegis extends BaseModifier_Plus {
             // if (item.GetContainer) {
             //     UTIL_Remove(item.GetContainer());
             // }
-            GFuncEntity.SafeDestroyItem(item);
+            SafeDestroyItem(item);
         }
     }
 }

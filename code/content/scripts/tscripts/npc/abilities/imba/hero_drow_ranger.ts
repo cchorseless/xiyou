@@ -290,7 +290,7 @@ export class modifier_imba_frost_arrows_slow extends BaseModifier_Plus {
     }
     BeRemoved(): void {
         if (IsServer()) {
-            if (!GFuncEntity.IsValid(this.caster)) {
+            if (!IsValid(this.caster)) {
                 return;
             }
             let target_stacks = this.GetStackCount();
@@ -467,10 +467,10 @@ export class modifier_imba_drow_ranger_frost_arrows_723_bonus_damage extends Bas
     }
     /** DeclareFunctions():modifierfunction[] {
     return Object.values({
-        1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS
+        1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE
     });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.damage;
     }
@@ -962,11 +962,11 @@ export class modifier_imba_trueshot extends BaseModifier_Plus {
     }
     /** DeclareFunctions():modifierfunction[] {
     return Object.values({
-        1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
+        1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
         2: GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_BONUS
     });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         let drow_agility = this.caster.GetAgility()
         let bonus_damage = drow_agility * (this.agi_to_damage_pct / 100);
@@ -1417,7 +1417,7 @@ export class modifier_imba_marksmanship extends BaseModifier_Plus {
         let target = keys.hTarget;
         let modifier_reduction = "modifier_imba_marksmanship_scepter_dmg_reduction";
         caster.AddNewModifier(this.caster, this.ability, modifier_reduction, {});
-        caster.PerformAttack(target, false, false, true, true, false, false, false);
+        caster.Attack(target, GEBATTLE_ATTACK_STATE.ATTACK_STATE_SKIPCOOLDOWN + GEBATTLE_ATTACK_STATE.ATTACK_STATE_IGNOREINVIS)
         caster.RemoveModifierByName(modifier_reduction);
         if (this.caster.HasModifier("modifier_imba_frost_arrows_thinker")) {
             let modifier_frost = this.caster.FindModifierByName("modifier_imba_frost_arrows_thinker") as modifier_imba_frost_arrows_thinker;
@@ -1736,7 +1736,7 @@ export class modifier_imba_drow_ranger_marksmanship_723 extends BaseModifier_Plu
                                 OnProjectileHitUnit: GHandler.create(this,
                                     (params, projectileID) => {
                                         this.GetParentPlus().AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_marksmanship_scepter_dmg_reduction", {});
-                                        this.GetParentPlus().PerformAttack(enemy, false, true, true, true, false, false, false);
+                                        this.GetParentPlus().AttackOnce(enemy, false, true, true, true, false, false, false);
                                         this.GetParentPlus().RemoveModifierByName("modifier_imba_marksmanship_scepter_dmg_reduction");
                                         if (params.bFrost) {
                                             this.frost_arrow_modifier.GetAbilityPlus<imba_drow_ranger_frost_arrows_723>().OnOrbImpact({

@@ -93,14 +93,14 @@ export class modifier_item_imba_nullifier extends BaseModifier_Plus {
     }
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
             2: GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS,
             3: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_REGEN_CONSTANT,
-            4: GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS,
+            4: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS,
             5: GPropertyConfig.EMODIFIER_PROPERTY.MANA_BONUS
         });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.bonus_damage;
     }
@@ -112,7 +112,7 @@ export class modifier_item_imba_nullifier extends BaseModifier_Plus {
     CC_GetModifierConstantHealthRegen(): number {
         return this.bonus_regen;
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
     CC_GetModifierHealthBonus(): number {
         return this.bonus_health;
     }

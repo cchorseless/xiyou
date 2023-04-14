@@ -84,7 +84,7 @@ export class modifier_venomancer_3 extends BaseModifier_Plus {
         let hAbility = this.GetAbilityPlus()
         let hParent = this.GetParentPlus()
         let hTarget = params.target as BaseNpc_Hero_Plus
-        if (!GFuncEntity.IsValid(hTarget) || hTarget.GetClassname() == "dota_item_drop" || params.attacker != hParent || BattleHelper.AttackFilter(params.record, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NOT_USECASTATTACKORB, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NOT_PROCESSPROCS, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_FAKEATTACK) || !GFuncEntity.IsValid(hAbility)) {
+        if (!IsValid(hTarget) || hTarget.GetClassname() == "dota_item_drop" || params.attacker != hParent || BattleHelper.AttackFilter(params.record, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NOT_USECASTATTACKORB, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NOT_PROCESSPROCS, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_FAKEATTACK) || !IsValid(hAbility)) {
             return
         }
         modifier_generic_poison.Poison(hTarget, hParent, hAbility, this.sting_poison_count)
@@ -99,7 +99,7 @@ export class modifier_venomancer_3 extends BaseModifier_Plus {
         let hCaster = this.GetCasterPlus()
         if (hCaster.HasShard()) {
             let hAbility1 = ability1_venomancer_venomous_gale.findIn(hCaster)
-            if (GFuncEntity.IsValid(hAbility1) && hAbility1.GetLevel() > 0) {
+            if (IsValid(hAbility1) && hAbility1.GetLevel() > 0) {
                 if (GFuncMath.PRD(this.chance, hCaster, "venomancer_shard")) {
                     let vStart = (hParent == hCaster) && hParent.GetAttachmentOrigin(hParent.ScriptLookupAttachment("attach_mouth")) || hParent.GetAttachmentOrigin(hParent.ScriptLookupAttachment("attach_attack1"))
                     hAbility1.CreateLinearProjectile(vStart, hTarget.GetAbsOrigin())
@@ -143,7 +143,7 @@ export class modifier_venomancer_3_attack_debuff extends BaseModifier_Plus {
 
         let hCaster = this.GetCasterPlus()
         let slow = this.sting_movement_slow
-        if (GFuncEntity.IsValid(hCaster)) {
+        if (IsValid(hCaster)) {
             //  负数 正数
             slow = slow - this.GetCasterPlus().GetTalentValue('special_bonus_unique_venomancer_custom_2')
         }

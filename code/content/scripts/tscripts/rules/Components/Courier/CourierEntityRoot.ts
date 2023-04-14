@@ -70,7 +70,7 @@ export class CourierEntityRoot extends BaseEntityRoot implements IRoundStateCall
     }
     RefreshCourier() {
         let hHero = this.GetDomain<IBaseNpc_Hero_Plus>();
-        if (!GFuncEntity.IsValid(hHero) || !hHero.IsAlive()) {
+        if (!IsValid(hHero) || !hHero.IsAlive()) {
             return
         }
         let sCurrentCourierName = this.GetCourierName()
@@ -86,14 +86,14 @@ export class CourierEntityRoot extends BaseEntityRoot implements IRoundStateCall
     GetCourierName() {
         let hero = this.GetDomain<IBaseNpc_Hero_Plus>();
         let hModifier = modifier_courier.findIn(hero);
-        if (GFuncEntity.IsValid(hModifier)) {
+        if (IsValid(hModifier)) {
             return hModifier.GetCourierName() || GameServiceConfig.DefaultCourier;
         }
         return GameServiceConfig.DefaultCourier;
     }
     onVictory() {
         let npc = this.GetDomain<IBaseNpc_Plus>();
-        if (GFuncEntity.IsValid(npc)) {
+        if (IsValid(npc)) {
             npc.Stop();
             npc.StartGesture(GameActivity_t.ACT_DOTA_VICTORY);
         }

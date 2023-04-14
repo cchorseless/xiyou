@@ -111,7 +111,7 @@ export class modifier_razor_2 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -200,7 +200,7 @@ export class modifier_razor_2_link extends BaseModifier_Plus {
     OnIntervalThink() {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
-        if (!GFuncEntity.IsValid(hCaster) || !GFuncEntity.IsValid(hParent)) {
+        if (!IsValid(hCaster) || !IsValid(hParent)) {
             this.Destroy()
         }
         let fDistance = CalcDistanceBetweenEntityOBB(hCaster, hParent)

@@ -139,7 +139,7 @@ export class modifier_dragon_knight_6 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -215,11 +215,11 @@ export class modifier_dragon_knight_6_form extends BaseModifier_Plus {
     BeCreated(params: IModifierTable) {
 
         let hCaster = this.GetCasterPlus()
-        if (!GFuncEntity.IsValid(hCaster)) {
+        if (!IsValid(hCaster)) {
             this.Destroy()
             return
         }
-        this.iLevel = GFuncEntity.IsValid(this.GetAbilityPlus()) && this.GetAbilityPlus().GetLevel() || 0
+        this.iLevel = IsValid(this.GetAbilityPlus()) && this.GetAbilityPlus().GetLevel() || 0
         if (this.iLevel > 0 && this.GetCasterPlus().HasScepter()) {
             this.iLevel = this.iLevel + 1
         }
@@ -296,7 +296,7 @@ export class modifier_dragon_knight_6_form extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS_STACKING)
     GetCastRangeBonusStacking(params: ModifierAbilityEvent) {
-        if (GFuncEntity.IsValid(params.ability) &&
+        if (IsValid(params.ability) &&
             GameFunc.IncludeArgs(params.ability.GetBehaviorInt(), DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_ATTACK)[0]) {
             return this.bonus_attack_range
         }
@@ -363,7 +363,7 @@ export class modifier_dragon_knight_6_green extends BaseModifier_Plus {
         }
         if (params.attacker == this.GetParentPlus() && !BattleHelper.AttackFilter(params.record, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NOT_PROCESSPROCS)) {
             let ability = this.GetAbilityPlus() as ability6_dragon_knight_elder_dragon_form
-            if (GFuncEntity.IsValid(ability) && ability.Corrosive) {
+            if (IsValid(ability) && ability.Corrosive) {
                 ability.Corrosive(params.target)
             }
         }
@@ -394,7 +394,7 @@ export class modifier_dragon_knight_6_red extends BaseModifier_Plus {
         return true
     }
     Init(params: IModifierTable) {
-        this.iLevel = GFuncEntity.IsValid(this.GetAbilityPlus()) && this.GetAbilityPlus().GetLevel() || 0
+        this.iLevel = IsValid(this.GetAbilityPlus()) && this.GetAbilityPlus().GetLevel() || 0
         if (this.iLevel > 0 && this.GetCasterPlus().HasScepter()) {
             this.iLevel = this.iLevel + 1
         }
@@ -413,9 +413,9 @@ export class modifier_dragon_knight_6_red extends BaseModifier_Plus {
             for (let target of (targets)) {
                 if (target != params.target) {
                     let _modifier_dragon_knight_6_green = modifier_dragon_knight_6_green.findIn(params.attacker) as modifier_dragon_knight_6_green;
-                    if (GFuncEntity.IsValid(_modifier_dragon_knight_6_green)) {
+                    if (IsValid(_modifier_dragon_knight_6_green)) {
                         let ability = this.GetAbilityPlus() as ability6_dragon_knight_elder_dragon_form
-                        if (GFuncEntity.IsValid(this.GetAbilityPlus()) && ability.Corrosive != null) {
+                        if (IsValid(this.GetAbilityPlus()) && ability.Corrosive != null) {
                             ability.Corrosive(target)
                         }
                     }
@@ -426,7 +426,7 @@ export class modifier_dragon_knight_6_red extends BaseModifier_Plus {
                         damage: params.original_damage * this.splash_damage_percent * 0.01,
                         damage_type: DAMAGE_TYPES.DAMAGE_TYPE_PHYSICAL,
                         damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION,
-                        eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_SPELL_CRIT,
+                        extra_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_SPELL_CRIT,
                     }
                     BattleHelper.GoApplyDamage(damage_table)
                 }
@@ -462,7 +462,7 @@ export class modifier_dragon_knight_6_blue extends BaseModifier_Plus {
         }
         if (params.attacker == this.GetParentPlus() && !BattleHelper.AttackFilter(params.record, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NOT_PROCESSPROCS)) {
             let ability = this.GetAbilityPlus() as ability6_dragon_knight_elder_dragon_form
-            if (GFuncEntity.IsValid(this.GetAbilityPlus()) && ability.Frost != null) {
+            if (IsValid(this.GetAbilityPlus()) && ability.Frost != null) {
                 ability.Frost(params.target)
             }
         }
@@ -515,7 +515,7 @@ export class modifier_dragon_knight_6_frost extends BaseModifier_Plus {
         }
     }
     Init(params: IModifierTable) {
-        this.iLevel = GFuncEntity.IsValid(this.GetAbilityPlus()) && this.GetAbilityPlus().GetLevel() || 0
+        this.iLevel = IsValid(this.GetAbilityPlus()) && this.GetAbilityPlus().GetLevel() || 0
         if (this.iLevel > 0 && this.GetCasterPlus().HasScepter()) {
             this.iLevel = this.iLevel + 1
         }

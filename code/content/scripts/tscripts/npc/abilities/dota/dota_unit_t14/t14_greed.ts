@@ -55,12 +55,12 @@ export class modifier_t14_greed extends BaseModifier_Plus {
                 if (GFuncMath.PRD(this.trigger_chance, hCaster, "t14_greed")) {
                     hAbility.UseResources(true, true, true)
                     // let combination_t14_cooperate  = combination_t14_cooperate.findIn(  hCaster )
-                    // let has_combination_t14_cooperate = GFuncEntity.IsValid(combination_t14_cooperate) && combination_t14_cooperate.IsActivated()
+                    // let has_combination_t14_cooperate = IsValid(combination_t14_cooperate) && combination_t14_cooperate.IsActivated()
                     // if (has_combination_t14_cooperate && GFuncMath.PRD(combination_t14_cooperate, combination_t14_cooperate.GetSpecialValueFor("chance"), "cooperate_chance")) {
                     //     let index_target = combination_t14_cooperate.GetCooperateTargetIndex()
                     //     if (index_target) {
                     //         let target = EntIndexToHScript(index_target)
-                    //         if (GFuncEntity.IsValid(target)) {
+                    //         if (IsValid(target)) {
                     //              modifier_t14_greed_buff.apply( target , hCaster, hAbility, { duration = this.duration })
                     //         }
                     //     }
@@ -132,7 +132,7 @@ export class modifier_t14_greed_buff extends BaseModifier_Plus {
             return
         }
         if (params.attacker == this.GetParentPlus()) {
-            if (!GFuncEntity.IsValid(this.GetCasterPlus())) {
+            if (!IsValid(this.GetCasterPlus())) {
                 return
             }
             if (UnitFilter(params.target, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, params.attacker.GetTeamNumber()) == UnitFilterResult.UF_SUCCESS) {
@@ -146,7 +146,7 @@ export class modifier_t14_greed_buff extends BaseModifier_Plus {
                     let gold_bonus = RandomInt(this.min_gold_bonus, this.max_gold_bonus)
 
                     let _modifier_t14_greed = modifier_t14_greed.findIn(this.GetCasterPlus()) as modifier_t14_greed;
-                    if (GFuncEntity.IsValid(_modifier_t14_greed)) {
+                    if (IsValid(_modifier_t14_greed)) {
                         _modifier_t14_greed.SetStackCount(_modifier_t14_greed.GetStackCount() + gold_bonus)
                     }
                     // PlayerData.ModifyGold(hCaster.GetPlayerOwnerID(), gold_bonus, true)

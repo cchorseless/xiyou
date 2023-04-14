@@ -482,7 +482,7 @@ export class modifier_imba_sniper_headshot extends BaseModifier_Plus {
             3: Enum_MODIFIER_EVENT.ON_ATTACK,
             4: Enum_MODIFIER_EVENT.ON_ATTACK_LANDED,
             5: GPropertyConfig.EMODIFIER_PROPERTY.PROJECTILE_NAME,
-            6: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
+            6: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
             7: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_CRITICALSTRIKE
         });
     } */
@@ -558,11 +558,11 @@ export class modifier_imba_sniper_headshot extends BaseModifier_Plus {
             return "particles/units/heroes/hero_sniper/sniper_assassinate.vpcf";
         }
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.GetSpecialValueFor("headshot_damage");
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_CRITICALSTRIKE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_CRITICALSTRIKE_UNIQUE)
     CC_GetModifierPreAttack_CriticalStrike(keys: ModifierAttackEvent): number {
         if (keys.target && !this.GetParentPlus().IsIllusion() && !keys.target.IsBuilding() && !keys.target.IsOther() && keys.target.GetTeamNumber() != this.GetParentPlus().GetTeamNumber() && this.perfectshot_records[keys.record]) {
             return this.GetSpecialValueFor("perfectshot_critical_dmg_pct");
@@ -741,7 +741,7 @@ export class imba_sniper_take_aim extends BaseAbility_Plus {
             this.GetCasterPlus().findBuff<modifier_imba_take_aim_range>("modifier_imba_take_aim_range").SetStackCount(0);
         }
         caster.MoveToTargetToAttack(target);
-        caster.PerformAttack(target, false, true, false, false, true, false, false);
+        caster.AttackOnce(target, false, true, false, false, true, false, false);
     }
 }
 @registerModifier()

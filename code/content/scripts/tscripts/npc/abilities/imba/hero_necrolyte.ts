@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -391,7 +391,7 @@ export class modifier_imba_ghost_shroud_active extends BaseModifier_Plus {
             4: GPropertyConfig.EMODIFIER_PROPERTY.MP_RESTORE_AMPLIFY_PERCENTAGE
         });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_RESISTANCE_DECREPIFY_UNIQUE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_RESISTANCE_BONUS)
     CC_GetModifierMagicalResistanceDecrepifyUnique(params: ModifierAttackEvent): number {
         return this.GetSpecialValueFor("magic_amp_pct") * (-1);
     }
@@ -675,7 +675,7 @@ export class modifier_imba_heartstopper_aura_damage extends BaseModifier_Plus {
     OnIntervalThink(): void {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
-            if (!GFuncEntity.IsValid(caster)) {
+            if (!IsValid(caster)) {
                 this.Destroy();
                 return
             }

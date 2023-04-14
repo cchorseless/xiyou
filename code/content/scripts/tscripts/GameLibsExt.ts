@@ -1,3 +1,5 @@
+/** @noSelfInFile */
+
 import { GameMode } from "./GameMode";
 import { NetTablesHelper } from "./helper/NetTablesHelper";
 
@@ -47,8 +49,6 @@ ParticleManager.ClearParticle = (p: ParticleID, immediate = false) => {
         GLogHelper.warn("ParticleManager.ClearParticle", "p is null")
     }
 }
-
-
 
 
 

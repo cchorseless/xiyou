@@ -102,7 +102,7 @@ export class ability2_drow_ranger_wave_of_silence extends BaseAbility_Plus {
 
                 let sParticlePath = "particles/units/heroes/hero_drow/drow_base_attack_linear_proj.vpcf"
                 let hAbility = ability1_drow_ranger_frost_arrows.findIn(hCaster)
-                if (GFuncEntity.IsValid(hAbility) && hAbility.IsActivated() && hAbility.GetLevel() > 0) {
+                if (IsValid(hAbility) && hAbility.IsActivated() && hAbility.GetLevel() > 0) {
                     sParticlePath = "particles/units/heroes/hero_drow/drow_multishot_proj_linear_proj.vpcf"
                     hCaster.EmitSound("Hero_DrowRanger.Multishot.FrostArrows")
                 } else {
@@ -156,7 +156,7 @@ export class ability2_drow_ranger_wave_of_silence extends BaseAbility_Plus {
                     BattleHelper.Attack(hCaster, hTarget, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_SKIPCOOLDOWN + BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_IGNOREINVIS + BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NOT_USEPROJECTILE + BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NEVERMISS + BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NO_EXTENDATTACK + BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_SKIPCOUNTING)
                     modifier_drow_ranger_2_buff.remove(hCaster);
                     let hAbility = ability1_drow_ranger_frost_arrows.findIn(hCaster) as ability1_drow_ranger_frost_arrows;
-                    if (GFuncEntity.IsValid(hAbility) && hAbility.IsActivated() && hAbility.GetLevel() > 0) {
+                    if (IsValid(hAbility) && hAbility.IsActivated() && hAbility.GetLevel() > 0) {
                         for (let i = 1; i <= add_stack; i++) {
                             modifier_drow_ranger_1_debuff.apply(hTarget, hCaster, hAbility, null)
                         }
@@ -216,7 +216,7 @@ export class modifier_drow_ranger_2 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return

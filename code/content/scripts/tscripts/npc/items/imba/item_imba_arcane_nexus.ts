@@ -57,7 +57,7 @@ export class modifier_item_imba_arcane_nexus_passive extends BaseModifier_Plus {
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
             1: GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_PERCENTAGE_UNIQUE,
-            2: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
+            2: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
             3: GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT,
             4: GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BONUS,
             5: GPropertyConfig.EMODIFIER_PROPERTY.COOLDOWN_PERCENTAGE,
@@ -70,7 +70,7 @@ export class modifier_item_imba_arcane_nexus_passive extends BaseModifier_Plus {
             return this.GetItemPlus().GetSpecialValueFor("spell_amp");
         }
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         if (this.GetItemPlus()) {
             return this.GetItemPlus().GetSpecialValueFor("bonus_damage");

@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { AoiHelper } from "../../../helper/AoiHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -545,7 +545,7 @@ export class modifier_imba_dark_seer_ion_shell extends BaseModifier_Plus {
         if (!IsServer()) {
             return;
         }
-        if (!GFuncEntity.IsValid(this.GetCasterPlus())) {
+        if (!IsValid(this.GetCasterPlus())) {
             this.Destroy();
             return;
         }
@@ -1047,7 +1047,7 @@ export class modifier_imba_dark_seer_wall_of_replica_slow extends BaseModifier_P
             return;
         }
         if (!this.GetParentPlus().IsInvulnerable()) {
-            this.GetParentPlus().PerformAttack(this.GetParentPlus(), true, true, true, true, true, false, false);
+            this.GetParentPlus().AttackOnce(this.GetParentPlus(), true, true, true, true, true, false, false);
         }
         this.StartIntervalThink(math.max(this.GetParentPlus().GetSecondsPerAttack(), this.minimum_interval));
     }

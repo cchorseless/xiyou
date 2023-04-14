@@ -137,7 +137,7 @@ export class modifier_vengefulspirit_6 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus() as ability6_vengefulspirit_nether_swap
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -159,14 +159,14 @@ export class modifier_vengefulspirit_6 extends BaseModifier_Plus {
             }
             let range = ability.GetCastRange(caster.GetAbsOrigin(), caster) + caster.GetCastRangeBonus()
             //  优先上一个目标
-            let target = GFuncEntity.IsValid(ability.hLastTarget) && ability.hLastTarget || null
+            let target = IsValid(ability.hLastTarget) && ability.hLastTarget || null
             if (target != null && !target.IsPositionInRange(caster.GetAbsOrigin(), range + target.GetHullRadius())) {
                 target = null
             }
             if (target == null) {
                 let tTarget = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), null, range, ability.GetAbilityTargetTeam(), ability.GetAbilityTargetType(), ability.GetAbilityTargetFlags() + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_CLOSEST, false)
                 for (let hTarget of (tTarget)) {
-                    if (GFuncEntity.IsValid(hTarget) && hTarget.IsAlive() && hTarget != caster) {
+                    if (IsValid(hTarget) && hTarget.IsAlive() && hTarget != caster) {
                         target = hTarget as any
                         break
                     }
@@ -216,7 +216,7 @@ export class modifier_vengefulspirit_6_buff extends BaseModifier_Plus {
         let hParent = this.GetParentPlus()
         this.bonus_damage_percent = this.GetSpecialValueFor("bonus_damage_percent")
         this.max_bonus_damage_percent = this.GetSpecialValueFor("max_bonus_damage_percent") + hCaster.GetTalentValue("special_bonus_unique_vengefulspirit_custom_8")
-        if (!GFuncEntity.IsValid(hCaster)) {
+        if (!IsValid(hCaster)) {
             return
         }
         if (IsServer()) {
@@ -227,10 +227,10 @@ export class modifier_vengefulspirit_6_buff extends BaseModifier_Plus {
             if (hCaster.HasScepter()) {
                 let hAbility1 = ability1_vengefulspirit_magic_missile.findIn(hCaster)
                 let hAbility2 = ability2_vengefulspirit_wave_of_terror.findIn(hCaster)
-                if (GFuncEntity.IsValid(hAbility1)) {
+                if (IsValid(hAbility1)) {
                     hAbility1.SpellStart1(this.vTarget)
                 }
-                if (GFuncEntity.IsValid(hAbility2)) {
+                if (IsValid(hAbility2)) {
                     hAbility2.SpellStart2(this.vTarget)
                 }
             }
@@ -268,7 +268,7 @@ export class modifier_vengefulspirit_6_buff extends BaseModifier_Plus {
                 hParent.EmitSound("Hero_VengefulSpirit.NetherSwap")
             }
         } else {
-            if (!GFuncEntity.IsValid(hCaster)) {
+            if (!IsValid(hCaster)) {
                 return
             }
             let iParticleID = ResHelper.CreateParticle({
@@ -301,7 +301,7 @@ export class modifier_vengefulspirit_6_buff extends BaseModifier_Plus {
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
     GetAttackSpeedBonus_Constant(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
-        if (GFuncEntity.IsValid(hCaster)) {
+        if (IsValid(hCaster)) {
             return hCaster.GetTalentValue("special_bonus_unique_vengefulspirit_custom_6")
         }
     }
@@ -309,7 +309,7 @@ export class modifier_vengefulspirit_6_buff extends BaseModifier_Plus {
     On_Tooltip() {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
-        if (!GFuncEntity.IsValid(hCaster) || !GFuncEntity.IsValid(hParent)) {
+        if (!IsValid(hCaster) || !IsValid(hParent)) {
             return 0
         }
         return math.min(this.bonus_damage_percent * this.GetStackCount() * 0.01, this.max_bonus_damage_percent)

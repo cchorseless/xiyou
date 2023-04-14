@@ -373,7 +373,7 @@ export class modifier_imba_mars_spear_trailblazer_thinker extends BaseModifier_P
         this.StartIntervalThink(this.tick_time);
     }
     OnIntervalThink(): void {
-        if (!GFuncEntity.IsValid(this.GetCasterPlus())) {
+        if (!IsValid(this.GetCasterPlus())) {
             this.Destroy();
             return;
         }
@@ -574,7 +574,7 @@ export class imba_mars_gods_rebuke extends BaseAbility_Plus {
             let enemy_angle = VectorToAngles(enemy_direction).y;
             let angle_diff = math.abs(AngleDiff(cast_angle, enemy_angle));
             if (angle_diff <= angle || this.GetCasterPlus().HasTalent("special_bonus_imba_mars_1")) {
-                caster.PerformAttack(enemy, true, true, true, true, true, false, true);
+                caster.AttackOnce(enemy, true, true, true, true, true, false, true);
                 if (!enemy.HasModifier("modifier_imba_mars_spear_debuff")) {
                     enemy.AddNewModifier(caster, this, "modifier_generic_knockback", {
                         duration: duration,
@@ -685,7 +685,7 @@ export class modifier_imba_mars_gods_rebuke extends BaseModifier_Plus {
         print("Bonus Damage:", this.bonus_damage);
         return this.bonus_damage;
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_CRITICALSTRIKE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_CRITICALSTRIKE_UNIQUE)
     CC_GetModifierPreAttack_CriticalStrike(params: ModifierAttackEvent): number {
         print("Bonus Crit:", this.bonus_crit);
         return this.bonus_crit;
@@ -974,7 +974,7 @@ export class imba_mars_arena_of_blood extends BaseAbility_Plus {
             return;
         }
         let attacker = EntIndexToHScript(data.entindex_source_const) as IBaseNpc_Plus;
-        attacker.PerformAttack(target, true, true, true, true, false, false, true);
+        attacker.AttackOnce(target, true, true, true, true, false, false, true);
     }
     GetManaCost(level: number): number {
         return 100;
@@ -1201,7 +1201,7 @@ export class modifier_imba_mars_arena_of_blood_coliseum extends BaseModifier_Plu
     }
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
             2: GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT,
             3: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_REGEN_CONSTANT
         });
@@ -1226,7 +1226,7 @@ export class modifier_imba_mars_arena_of_blood_coliseum extends BaseModifier_Plu
             this.SetStackCount(GameFunc.GetCount(heroes));
         }
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.bonus_damage * this.GetStackCount();
     }
@@ -1527,7 +1527,7 @@ export class modifier_imba_mars_arena_of_blood_thinker extends BaseModifier_Plus
         StopSoundOn(sound_loop, this.GetParentPlus());
     }
     BeDestroy(): void {
-        GFuncEntity.SafeDestroyUnit(this.GetParentPlus());
+        SafeDestroyUnit(this.GetParentPlus());
     }
     OnIntervalThink(): void {
         if (this.phase_delay) {

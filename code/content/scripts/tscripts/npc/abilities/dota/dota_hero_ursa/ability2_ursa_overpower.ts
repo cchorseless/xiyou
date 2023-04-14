@@ -68,7 +68,7 @@ export class modifier_ursa_2 extends BaseModifier_Plus {
 
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
     attackLanded(params: ModifierAttackEvent) {
-        if (!GFuncEntity.IsValid(params.target) || params.target.GetClassname() == "dota_item_drop") { return }
+        if (!IsValid(params.target) || params.target.GetClassname() == "dota_item_drop") { return }
         if (params.attacker != null && params.attacker == this.GetParentPlus() && !params.attacker.PassivesDisabled()) {
             if (!modifier_ursa_2_buff.exist(params.attacker) || params.attacker.HasScepter()) {
                 let hCaster = this.GetCasterPlus()

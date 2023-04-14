@@ -107,7 +107,7 @@ export class BattleUnitEntityRoot extends BaseEntityRoot implements IRoundStateC
 
     onVictory() {
         let npc = this.GetDomain<IBaseNpc_Plus>();
-        if (GFuncEntity.IsValid(npc)) {
+        if (IsValid(npc)) {
             npc.Stop();
             npc.StartGesture(GameActivity_t.ACT_DOTA_VICTORY);
             if (this.IsRuntimeBuilding()) {

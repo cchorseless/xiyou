@@ -50,7 +50,7 @@ export class modifier_item_imba_ultimate_scepter_synth extends BaseModifier_Plus
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_ALL_BONUS)
     bonus_all_stats: number;
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
     bonus_health: number;
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MANA_BONUS)
     bonus_mana: number;
@@ -83,7 +83,7 @@ export class modifier_item_imba_ultimate_scepter_synth_stats extends BaseModifie
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_ALL_BONUS)
     bonus_all_stats: number;
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
     bonus_health: number;
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MANA_BONUS)
     bonus_mana: number;

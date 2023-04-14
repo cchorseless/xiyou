@@ -338,7 +338,7 @@ export class imba_enigma_demonic_conversion extends BaseAbility_Plus {
     }
     CreateEidolon(hParent: IBaseNpc_Plus, vLocation: Vector, iWave: number, fDuration: number) {
         let caster = this.GetCasterPlus();
-        if (!GFuncEntity.IsValid(hParent)) {
+        if (!IsValid(hParent)) {
             hParent = caster;
         }
         let eidolon = caster.CreateSummon("npc_imba_enigma_eidolon_" + math.min(4, this.GetLevel()), vLocation, fDuration, true);
@@ -398,9 +398,9 @@ export class modifier_imba_enigma_eidolon extends BaseModifier_Plus {
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
             1: Enum_MODIFIER_EVENT.ON_ATTACK_LANDED,
-            2: GPropertyConfig.EMODIFIER_PROPERTY.EXTRA_HEALTH_BONUS,
+            2: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS,
             3: GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS,
-            4: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
+            4: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
             5: GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT,
             6: GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_CONSTANT,
             7: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_RANGE_BONUS
@@ -431,7 +431,7 @@ export class modifier_imba_enigma_eidolon extends BaseModifier_Plus {
         this.damage_bonus = this.trans_pct * this.parent.GetAverageTrueAttackDamage(this.parent) * 0.01;
         this.SetStackCount(this.damage_bonus);
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.EXTRA_HEALTH_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
     CC_GetModifierExtraHealthBonus(): number {
         if (IsServer()) {
             return this.health_bonus;
@@ -449,7 +449,7 @@ export class modifier_imba_enigma_eidolon extends BaseModifier_Plus {
     CC_GetModifierAttackSpeedBonus_Constant(): number {
         return this.attack_speed_bonus;
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.GetStackCount();
     }
@@ -481,7 +481,7 @@ export class modifier_imba_enigma_eidolon extends BaseModifier_Plus {
             if (this.attacks > 1) {
                 this.attacks = this.attacks - 1;
             } else {
-                if (GFuncEntity.IsValid(this.GetCasterPlus())) {
+                if (IsValid(this.GetCasterPlus())) {
                     this.GetAbilityPlus<imba_enigma_demonic_conversion>().CreateEidolon(this.parent, this.GetParentPlus().GetAbsOrigin(), this.wave + 1, this.GetRemainingTime() + this.GetSpecialValueFor("life_extension"));
                     this.GetAbilityPlus<imba_enigma_demonic_conversion>().CreateEidolon(this.parent, this.GetParentPlus().GetAbsOrigin(), this.wave + 1, this.GetRemainingTime() + this.GetSpecialValueFor("life_extension"));
                 }
@@ -616,7 +616,7 @@ export class modifier_imba_enigma_midnight_pulse_thinker extends BaseModifier_Pl
         let dmg_pct = ability.GetSpecialValueFor("damage_percent") * 0.01;
         let enemies = FindUnitsInRadius(caster.GetTeamNumber(), parent.GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false) as IBaseNpc_Plus[];
         for (const [_, enemy] of GameFunc.iPair(enemies)) {
-            if (GFuncEntity.IsValid(enemy)) {
+            if (IsValid(enemy)) {
                 let dmg = enemy.GetMaxHealth() * dmg_pct;
                 let damageTable = {
                     victim: enemy,

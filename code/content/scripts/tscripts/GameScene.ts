@@ -168,7 +168,7 @@ export class GameScene {
         EventHelper.addProtocolEvent(GameProtocol.Protocol.req_ITEM_SLOT_CHANGE, GHandler.create(this, (event: JS_TO_LUA_DATA) => {
             if (!event.data) { return }
             let unit = EntIndexToHScript(event.data) as IBaseNpc_Plus;
-            if (GFuncEntity.IsValid(unit)) {
+            if (IsValid(unit)) {
                 if (!unit.ETRoot) return;
                 let hero = unit.ETRoot.As<IBattleUnitEntityRoot>();
                 if (hero.InventoryComp && hero.InventoryComp()) {
@@ -199,7 +199,7 @@ export class GameScene {
             }
             let itemEnity = EntIndexToHScript(itementityid) as IBaseItem_Plus;
             let npc = EntIndexToHScript(npcentindex) as IBaseNpc_Plus;
-            if (!GFuncEntity.IsValid(itemEnity) || !GFuncEntity.IsValid(npc)) {
+            if (!IsValid(itemEnity) || !IsValid(npc)) {
                 event.state = false;
                 EventHelper.ErrorMessage("not valid item or npc", playerid);
                 return;
@@ -249,13 +249,13 @@ export class GameScene {
                 return;
             }
             let itemEnity = EntIndexToHScript(itementityid) as IBaseItem_Plus;
-            if (!GFuncEntity.IsValid(itemEnity)) {
+            if (!IsValid(itemEnity)) {
                 event.state = false;
                 EventHelper.ErrorMessage("not valid item ", playerid);
                 return;
             }
             let npcEntity = itemEnity.GetCasterPlus();
-            if (!GFuncEntity.IsValid(npcEntity) || !npcEntity.IsControllableByAnyPlayer() || npcEntity.GetPlayerID() != playerid) {
+            if (!IsValid(npcEntity) || !npcEntity.IsControllableByAnyPlayer() || npcEntity.GetPlayerID() != playerid) {
                 event.state = false;
                 EventHelper.ErrorMessage("not valid npcEntity ", playerid);
                 return;
@@ -342,11 +342,13 @@ export class GameScene {
         if (sUnitName == GameEnum.Unit.UnitNames.npc_dota_thinker) {
             return;
         }
-        if (GFuncEntity.checkIsFirstSpawn(spawnedUnit)) {
+        if (CheckIsFirstSpawn(spawnedUnit)) {
             modifier_property.applyOnly(spawnedUnit, spawnedUnit, null, { test: 1 });
-            // spawnedUnit.SetMaximumGoldBounty(0);
-            // spawnedUnit.SetMinimumGoldBounty(0);
-            // spawnedUnit.SetDeathXP(0);
+            spawnedUnit.SetPhysicalArmorBaseValue(0);
+            spawnedUnit.SetBaseMagicalResistanceValue(0)
+            spawnedUnit.SetMaximumGoldBounty(0);
+            spawnedUnit.SetMinimumGoldBounty(0);
+            spawnedUnit.SetDeathXP(0);
             if (spawnedUnit.InitActivityModifier) {
                 spawnedUnit.InitActivityModifier();
             }
@@ -358,7 +360,7 @@ export class GameScene {
     }
     static OnEntityKilled(events: EntityKilledEvent) {
         let hUnit = EntIndexToHScript(events.entindex_killed) as IBaseNpc_Plus;
-        if (!GFuncEntity.IsValid(hUnit)) {
+        if (!IsValid(hUnit)) {
             return;
         }
         if (!hUnit.ETRoot) {

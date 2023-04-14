@@ -21,10 +21,10 @@ export class t20_mana_steal extends BaseAbility_Plus {
         this.addTimer(
             bounce_interval,
             () => {
-                if (!GFuncEntity.IsValid(hCaster)) {
+                if (!IsValid(hCaster)) {
                     return
                 }
-                if (!GFuncEntity.IsValid(hTarget)) {
+                if (!IsValid(hTarget)) {
                     return
                 }
 
@@ -32,7 +32,7 @@ export class t20_mana_steal extends BaseAbility_Plus {
                 if (hNewTarget != null) {
                     //  净魂 减魔抗
                     // let combination_t20_diffusal = combination_t20_diffusal.findIn(hCaster)
-                    // let has_combination_t20_diffusal = GFuncEntity.IsValid(combination_t20_diffusal) && combination_t20_diffusal.IsActivated()
+                    // let has_combination_t20_diffusal = IsValid(combination_t20_diffusal) && combination_t20_diffusal.IsActivated()
                     // if (has_combination_t20_diffusal) {
                     //     // combination_t20_diffusal.Diffusal(hNewTarget)
                     // }
@@ -78,7 +78,7 @@ export class t20_mana_steal extends BaseAbility_Plus {
 
         //  净魂 减魔抗
         // let combination_t20_diffusal  = combination_t20_diffusal.findIn(  hCaster )
-        // let has_combination_t20_diffusal = GFuncEntity.IsValid(combination_t20_diffusal) && combination_t20_diffusal.IsActivated()
+        // let has_combination_t20_diffusal = IsValid(combination_t20_diffusal) && combination_t20_diffusal.IsActivated()
         // if (has_combination_t20_diffusal) {
         //     // combination_t20_diffusal.Diffusal(hTarget)
         // }
@@ -112,7 +112,7 @@ export class t20_mana_steal extends BaseAbility_Plus {
 
     RegainManaInRaius(fDamage: number) {
         let hCaster = this.GetCasterPlus()
-        if (!GFuncEntity.IsValid(hCaster)) {
+        if (!IsValid(hCaster)) {
             return
         }
         let mana_regain_pct = this.GetSpecialValueFor("mana_regain_pct")
@@ -176,7 +176,7 @@ export class modifier_t20_mana_steal extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return

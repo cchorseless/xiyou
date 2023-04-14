@@ -122,7 +122,7 @@ export class modifier_item_imba_gungnir extends BaseModifier_Plus {
             2: GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_BONUS,
             3: GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BONUS,
             4: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_REGEN_CONSTANT,
-            5: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
+            5: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
             6: GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT,
             7: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_RANGE_BONUS,
             8: GPropertyConfig.EMODIFIER_PROPERTY.PROCATTACK_BONUS_DAMAGE_MAGICAL,
@@ -146,7 +146,7 @@ export class modifier_item_imba_gungnir extends BaseModifier_Plus {
     CC_GetModifierConstantHealthRegen(): number {
         return this.bonus_health_regen;
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.bonus_damage;
     }
@@ -261,7 +261,7 @@ export class modifier_item_imba_gungnir_force_ally extends BaseModifierMotionHor
         let enemies = FindUnitsInRadius(attacker.GetTeamNumber(), attacker.GetAbsOrigin(), undefined, this.god_piercing_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
         for (const [_, enemy] of GameFunc.iPair(enemies)) {
             if (!this.attacked_target[enemy.entindex() + ""]) {
-                attacker.PerformAttack(enemy, true, true, true, true, true, false, false);
+                attacker.AttackOnce(enemy, true, true, true, true, true, false, false);
                 this.attacked_target[enemy.entindex() + ""] = enemy.entindex();
             }
         }

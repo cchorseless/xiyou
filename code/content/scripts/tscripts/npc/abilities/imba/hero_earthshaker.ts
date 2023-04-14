@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifierMotionBoth_Plus, BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -100,7 +100,7 @@ export class modifier_imba_earthshaker_fissure_thinker extends BaseModifier_Plus
         if (IsServer()) {
             let sound_cast = "Hero_EarthShaker.FissureDestroy";
             EmitSoundOnLocationWithCaster(this.GetParentPlus().GetOrigin(), sound_cast, this.GetCasterPlus());
-            GFuncEntity.SafeDestroyUnit(this.GetParentPlus());
+            SafeDestroyUnit(this.GetParentPlus());
         }
     }
 }

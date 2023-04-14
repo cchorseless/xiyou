@@ -50,7 +50,7 @@ export class ability1_venomancer_venomous_gale extends BaseAbility_Plus {
         let hAbility2 = ability2_venomancer_poison_sting.findIn(hCaster)
         if (hAbility2 != null && hAbility2.tWards != null && hAbility2.tWards.length > 0) {
             for (let hWard of (hAbility2.tWards)) {
-                if (GFuncEntity.IsValid(hWard) && hWard.IsAlive()) {
+                if (IsValid(hWard) && hWard.IsAlive()) {
                     this.CreateLinearProjectile(hWard.GetAttachmentOrigin(hWard.ScriptLookupAttachment("attach_attack1")), vPos)
                 }
             }
@@ -77,7 +77,7 @@ export class ability1_venomancer_venomous_gale extends BaseAbility_Plus {
         })
     }
     OnProjectileHit(hTarget: IBaseNpc_Plus, vLocation: Vector) {
-        if (!GFuncEntity.IsValid(hTarget)) { return }
+        if (!IsValid(hTarget)) { return }
 
         let hCaster = this.GetCasterPlus()
         let base_damage = this.GetSpecialValueFor("base_damage")
@@ -135,7 +135,7 @@ export class modifier_venomancer_1 extends BaseModifier_Plus {
             return
         }
         let hAbility = this.GetAbilityPlus()
-        if (!GFuncEntity.IsValid(hAbility)) {
+        if (!IsValid(hAbility)) {
             this.StartIntervalThink(-1)
             this.Destroy()
             return

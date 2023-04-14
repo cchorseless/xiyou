@@ -59,7 +59,7 @@ export class modifier_t13_maim extends BaseModifier_Plus {
 
     @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
     OnTakeDamage(params: IModifierTable) {
-        if (GFuncEntity.IsValid(params.unit) && params.attacker == this.GetParentPlus() && !params.attacker.PassivesDisabled() && !params.attacker.IsIllusion()) {
+        if (IsValid(params.unit) && params.attacker == this.GetParentPlus() && !params.attacker.PassivesDisabled() && !params.attacker.IsIllusion()) {
             modifier_t13_maim_debuff.apply(params.unit, params.attacker, this.GetAbilityPlus(), { duration: this.duration * params.unit.GetStatusResistanceFactor(params.attacker) })
         }
     }

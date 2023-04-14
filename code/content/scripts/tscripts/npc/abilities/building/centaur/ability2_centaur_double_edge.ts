@@ -42,19 +42,19 @@ export class ability2_centaur_double_edge extends BaseAbility_Plus {
         return true
     }
     OnAbilityPhaseInterrupted() {
-        if (GFuncEntity.IsValid(this.hParticleModifier)) {
+        if (IsValid(this.hParticleModifier)) {
             this.hParticleModifier.Destroy()
         }
     }
     OnSpellStart() {
-        if (GFuncEntity.IsValid(this.hParticleModifier)) {
+        if (IsValid(this.hParticleModifier)) {
             this.hParticleModifier.Destroy()
         }
 
         let caster = this.GetCasterPlus()
         let target = this.GetCursorTarget()
 
-        if (!GFuncEntity.IsValid(target) || !target.IsAlive()) {
+        if (!IsValid(target) || !target.IsAlive()) {
             return
         }
         if (target.TriggerSpellAbsorb(this)) {
@@ -133,7 +133,7 @@ export class modifier_centaur_2 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -173,7 +173,7 @@ export class modifier_centaur_2 extends BaseModifier_Plus {
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
     On_AttackLanded(params: ModifierAttackEvent) {
-        if (!GFuncEntity.IsValid(params.target)) { return }
+        if (!IsValid(params.target)) { return }
         if (params.target.GetClassname() == "dota_item_drop") { return }
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus() as ability2_centaur_double_edge

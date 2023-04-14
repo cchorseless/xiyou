@@ -187,7 +187,7 @@ export class modifier_lone_druid_6_transform extends BaseModifier_Plus {
 
         let hParent = this.GetParentPlus()
         if (IsServer()) {
-            if (GFuncEntity.IsValid(hParent) && hParent.IsAlive()) {
+            if (IsValid(hParent) && hParent.IsAlive()) {
                 if (!hParent.HasShard()) {
                     modifier_lone_druid_6_form.apply(hParent, hParent, this.GetAbilityPlus(), { duration: this.duration })
                 }

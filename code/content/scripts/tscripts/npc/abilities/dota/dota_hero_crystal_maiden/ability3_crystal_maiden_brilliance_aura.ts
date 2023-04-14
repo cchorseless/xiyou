@@ -122,7 +122,7 @@ export class modifier_crystal_maiden_3_aura extends BaseModifier_Plus {
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MANA_REGEN_TOTAL_PERCENTAGE)
     CC_GetModifierConstantManaRegen(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
-        if (!GFuncEntity.IsValid(hCaster)) {
+        if (!IsValid(hCaster)) {
             return 0
         }
         return (this.GetParentPlus() == hCaster && this.mana_regen_self || this.mana_regen) + hCaster.GetTalentValue("special_bonus_unique_crystal_maiden_custom_2")
@@ -130,7 +130,7 @@ export class modifier_crystal_maiden_3_aura extends BaseModifier_Plus {
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP2)
     On_Tooltip2() {
         let hCaster = this.GetCasterPlus()
-        if (!GFuncEntity.IsValid(hCaster)) {
+        if (!IsValid(hCaster)) {
             return 0
         }
         return (this.GetParentPlus() == hCaster && this.mana_regen_self || this.mana_regen) + hCaster.GetTalentValue("special_bonus_unique_crystal_maiden_custom_2")
@@ -145,8 +145,8 @@ export class modifier_crystal_maiden_3_aura extends BaseModifier_Plus {
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
         if (params.unit == hParent) {
-            if (!GFuncEntity.IsValid(hCaster)) { return }
-            if (!GFuncEntity.IsValid(params.ability) || params.ability.IsItem() || !params.ability.ProcsMagicStick() || !hParent.IsAlive()) { return }
+            if (!IsValid(hCaster)) { return }
+            if (!IsValid(params.ability) || params.ability.IsItem() || !params.ability.ProcsMagicStick() || !hParent.IsAlive()) { return }
             if (hParent == hCaster || hCaster.HasTalent("special_bonus_unique_crystal_maiden_custom_5")) {
                 let fMaxMana = hParent.GetMaxMana()
                 let fCurMana = hParent.GetMana()
@@ -161,7 +161,7 @@ export class modifier_crystal_maiden_3_aura extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.COOLDOWN_PERCENTAGE)
     CC_GetModifierPercentageCooldown(params: IModifierTable) {
-        if (GFuncEntity.IsValid(this.GetCasterPlus())) {
+        if (IsValid(this.GetCasterPlus())) {
             return this.GetCasterPlus().GetTalentValue("special_bonus_unique_crystal_maiden_custom_8")
         }
         return 0

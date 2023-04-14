@@ -82,7 +82,9 @@ export class modifier_imba_nian_frenzy_swipes extends BaseModifier_Plus {
                 for (const [_, enemy] of GameFunc.iPair(enemies)) {
                     if (math.abs(AngleDiff(VectorToAngles(this.GetParentPlus().GetForwardVector()).y, VectorToAngles(enemy.GetAbsOrigin() - this.GetParentPlus().GetAbsOrigin() as Vector).y)) <= this.attack_angle) {
                         this.GetParentPlus().AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_nian_frenzy_swipes_suppression", {});
-                        this.GetParentPlus().PerformAttack(enemy, false, true, true, false, true, false, false);
+                        this.GetParentPlus().Attack(enemy, GEBATTLE_ATTACK_STATE.ATTACK_STATE_NOT_PROCESSPROCS +
+                            GEBATTLE_ATTACK_STATE.ATTACK_STATE_SKIPCOOLDOWN +
+                            GEBATTLE_ATTACK_STATE.ATTACK_STATE_NOT_USEPROJECTILE);
                         this.GetParentPlus().RemoveModifierByNameAndCaster("modifier_imba_nian_frenzy_swipes_suppression", this.GetCasterPlus());
                         enemy.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_nian_frenzy_swipes_slow", {
                             duration: this.move_speed_slow_duration * (1 - enemy.GetStatusResistance())

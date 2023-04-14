@@ -135,7 +135,7 @@ export class modifier_imba_spectre_haunt extends BaseModifier_Plus {
                 this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_spectre_haunt_reduce", {
                     illusion_damage_outgoing: this.illusion_damage_outgoing
                 });
-                this.GetCasterPlus().PerformAttack(this.GetParentPlus(), true, true, true, true, false, false, true);
+                this.GetCasterPlus().AttackOnce(this.GetParentPlus(), true, true, true, true, false, false, true);
                 this.GetCasterPlus().RemoveModifierByNameAndCaster("modifier_imba_spectre_haunt_reduce", this.GetCasterPlus());
             }
         } else {

@@ -117,7 +117,7 @@ export class imba_phantom_assassin_stifling_dagger extends BaseAbility_Plus {
         target_pos.x = target_pos.x - offset * distance_vector.x;
         target_pos.y = target_pos.y - offset * distance_vector.y;
         caster.SetAbsOrigin(target_pos);
-        caster.PerformAttack(target, true, true, true, true, true, false, true);
+        caster.AttackOnce(target, true, true, true, true, true, false, true);
         caster.SetAbsOrigin(initial_pos);
         caster.RemoveModifierByName("modifier_imba_stifling_dagger_bonus_damage");
         caster.RemoveModifierByName("modifier_imba_stifling_dagger_dmg_reduction");
@@ -202,10 +202,10 @@ export class modifier_imba_stifling_dagger_silence extends BaseModifier_Plus {
 export class modifier_imba_stifling_dagger_bonus_damage extends BaseModifier_Plus {
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS
+            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE
         });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.GetSpecialValueFor("bonus_damage");
     }
@@ -343,7 +343,7 @@ export class imba_phantom_assassin_phantom_strike extends BaseAbility_Plus {
     }
     OnProjectileHit(hTarget: CDOTA_BaseNPC | undefined, vLocation: Vector): boolean | void {
         if (hTarget && hTarget != this.target) {
-            this.GetCasterPlus().PerformAttack(hTarget, true, true, true, true, false, false, false);
+            this.GetCasterPlus().AttackOnce(hTarget, true, true, true, true, false, false, false);
         }
     }
     GetManaCost(level: number): number {
@@ -742,12 +742,12 @@ export class modifier_imba_coup_de_grace extends BaseModifier_Plus {
 
     /** DeclareFunctions():modifierfunction[] {
         let funcs = {
-            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_CRITICALSTRIKE,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_CRITICALSTRIKE_UNIQUE,
             2: Enum_MODIFIER_EVENT.ON_ATTACK_LANDED
         }
         return Object.values(funcs);
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_CRITICALSTRIKE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_CRITICALSTRIKE_UNIQUE)
     CC_GetModifierPreAttack_CriticalStrike(keys: ModifierAttackEvent): number {
         if (!this.GetParentPlus().PassivesDisabled()) {
             let target = keys.target;
@@ -908,11 +908,11 @@ export class modifier_imba_coup_de_grace_crit extends BaseModifier_Plus {
     }
     /** DeclareFunctions():modifierfunction[] {
         let decFunc = {
-            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS
+            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE
         }
         return Object.values(decFunc);
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.crit_increase_damage * this.GetStackCount();
     }

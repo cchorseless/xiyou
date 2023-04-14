@@ -130,7 +130,7 @@ export class modifier_item_imba_dragon_lance extends BaseModifier_Plus {
             2: GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_BONUS,
             3: GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BONUS,
             4: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_REGEN_CONSTANT,
-            5: GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS,
+            5: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS,
             6: GPropertyConfig.EMODIFIER_PROPERTY.MANA_BONUS,
             7: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_RANGE_BONUS
         });
@@ -159,7 +159,7 @@ export class modifier_item_imba_dragon_lance extends BaseModifier_Plus {
             return this.GetItemPlus().GetSpecialValueFor("bonus_health_regen");
         }
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
     CC_GetModifierHealthBonus(): number {
         if (this.GetItemPlus()) {
             return this.GetItemPlus().GetSpecialValueFor("bonus_health");
@@ -245,7 +245,7 @@ export class modifier_item_imba_dragon_lance_force_ally extends BaseModifierMoti
         let enemies = FindUnitsInRadius(attacker.GetTeamNumber(), attacker.GetAbsOrigin(), undefined, this.god_piercing_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
         for (const [_, enemy] of GameFunc.iPair(enemies)) {
             if (!this.attacked_target[enemy.entindex() + ""]) {
-                attacker.PerformAttack(enemy, true, true, true, true, true, false, true);
+                attacker.AttackOnce(enemy, true, true, true, true, true, false, true);
                 this.attacked_target[enemy.entindex() + ""] = enemy.entindex();
                 if (enemy.IsRealUnit()) {
                     let god_piercing_modifier = attacker.AddNewModifier(this.GetCasterPlus(), this.GetItemPlus(), "modifier_item_imba_dragon_lance_god_piercing_ally", {

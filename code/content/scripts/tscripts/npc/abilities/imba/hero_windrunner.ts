@@ -151,7 +151,7 @@ export class imba_windrunner_shackleshot extends BaseAbility_Plus {
             }
         } else if (target) {
             EmitSoundOnLocationWithCaster(target.GetAbsOrigin(), "Hero_Windrunner.ProjectileImpact", this.GetCasterPlus());
-            this.GetCasterPlus().PerformAttack(target, true, true, true, true, false, false, false);
+            this.GetCasterPlus().AttackOnce(target, true, true, true, true, false, false, false);
         }
     }
 
@@ -312,7 +312,7 @@ export class imba_windrunner_powershot extends BaseAbility_Plus {
         let unit = EntIndexToHScript(data.dummy_index) as IBaseNpc_Plus;;
         if (target && data.dummy_index && unit && !unit.IsNull() && unit.TempData().units_hit) {
             EmitSoundOnLocationWithCaster(location, "Hero_Windrunner.PowershotDamage", this.GetCasterPlus());
-            let damage = this.GetTalentSpecialValueFor("powershot_damage") * data.channel_pct * 0.01 * ((100 - this.GetSpecialValueFor("damage_reduction")) * 0.01) ^ unit.TempData().units_hit;
+            let damage = this.GetTalentSpecialValueFor("powershot_damage") * data.channel_pct * 0.01 * math.pow((100 - this.GetSpecialValueFor("damage_reduction")) * 0.01, unit.TempData().units_hit);
             let damage_type = this.GetAbilityDamageType();
             if (data.channel_pct >= this.GetSpecialValueFor("godshot_min") && data.channel_pct <= this.GetSpecialValueFor("godshot_max")) {
                 damage = this.GetTalentSpecialValueFor("powershot_damage") * this.GetSpecialValueFor("godshot_damage_pct") * 0.01;
@@ -321,7 +321,7 @@ export class imba_windrunner_powershot extends BaseAbility_Plus {
                     duration: this.GetSpecialValueFor("godshot_stun_duration") * (1 - target.GetStatusResistance())
                 });
             } else if (data.channel_pct >= this.GetSpecialValueFor("scattershot_min") && data.channel_pct <= this.GetSpecialValueFor("scattershot_max")) {
-                damage = this.GetTalentSpecialValueFor("powershot_damage") * this.GetSpecialValueFor("scattershot_damage_pct") * 0.01 * ((100 - this.GetSpecialValueFor("damage_reduction")) * 0.01) ^ unit.TempData().units_hit;
+                damage = this.GetTalentSpecialValueFor("powershot_damage") * this.GetSpecialValueFor("scattershot_damage_pct") * 0.01 * math.pow((100 - this.GetSpecialValueFor("damage_reduction")) * 0.01, unit.TempData().units_hit);
             }
             ApplyDamage({
                 victim: target,
@@ -819,7 +819,7 @@ export class modifier_imba_windrunner_focusfire extends BaseModifier_Plus {
     OnIntervalThink(): void {
         if (this.GetParentPlus().AttackReady() && this.target && !this.target.IsNull() && this.target.IsAlive() && (this.target.GetAbsOrigin() - this.GetParentPlus().GetAbsOrigin() as Vector).Length2D() <= this.GetParentPlus().Script_GetAttackRange() && this.bFocusing) {
             this.GetParentPlus().StartGesture(GameActivity_t.ACT_DOTA_ATTACK);
-            this.GetParentPlus().PerformAttack(this.target, true, true, false, true, true, false, false);
+            this.GetParentPlus().AttackOnce(this.target, true, true, false, true, true, false, false);
         }
     }
 
@@ -830,7 +830,7 @@ export class modifier_imba_windrunner_focusfire extends BaseModifier_Plus {
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
             1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT,
-            2: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
+            2: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
             3: GPropertyConfig.EMODIFIER_PROPERTY.TRANSLATE_ACTIVITY_MODIFIERS,
             4: Enum_MODIFIER_EVENT.ON_ORDER
         });
@@ -842,7 +842,7 @@ export class modifier_imba_windrunner_focusfire extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         if (IsClient() || this.GetParentPlus().GetAttackTarget() == this.target) {
             return this.focusfire_damage_reduction;

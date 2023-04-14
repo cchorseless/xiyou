@@ -119,7 +119,7 @@ export class modifier_skeleton_king_3_aura extends BaseModifier_Plus {
         let hParent = this.GetParentPlus()
         this.add_atk_pct_perS = this.GetSpecialValueFor("add_atk_pct_perS")
         if (IsServer()) {
-            if (GFuncEntity.IsValid(hCaster)) {
+            if (IsValid(hCaster)) {
                 if (hCaster.GetTeamNumber() == hParent.GetTeamNumber() && modifier_skeleton_king_2_summon.exist(hParent)) {
                     modifier_skeleton_king_3_attack.apply(hCaster, hParent, this.GetAbilityPlus(), null)
                 }
@@ -134,9 +134,9 @@ export class modifier_skeleton_king_3_aura extends BaseModifier_Plus {
     OnDeath(params: IModifierTable) {
         if (params.unit == this.GetParentPlus()) {
             let hCaster = this.GetCasterPlus()
-            if (GFuncEntity.IsValid(hCaster) && GFuncEntity.IsValid(this.GetAbilityPlus())) {
+            if (IsValid(hCaster) && IsValid(this.GetAbilityPlus())) {
                 let hBuff = hCaster.FindModifierByName(this.GetAbilityPlus().GetIntrinsicModifierName()) as IBaseModifier_Plus;
-                if (GFuncEntity.IsValid(hBuff)) {
+                if (IsValid(hBuff)) {
                     let iCount = this.regen
                     for (let i = 1; i <= iCount; i++) {
                         hBuff.IncrementStackCount()
@@ -199,7 +199,7 @@ export class modifier_skeleton_king_3_attack extends BaseModifier_Plus {
     //  // pipixia }
     OnIntervalThink() {
         if (IsServer()) {
-            if (!GFuncEntity.IsValid(this.GetCasterPlus()) || !this.GetCasterPlus().IsAlive()) {
+            if (!IsValid(this.GetCasterPlus()) || !this.GetCasterPlus().IsAlive()) {
                 this.Destroy()
                 return
             }

@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../../ai/AI_ability";
 import { GameSetting } from "../../../../GameSetting";
+import { AI_ability } from "../../../../ai/AI_ability";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
@@ -56,11 +56,11 @@ export class ability3_zuus_static_field extends BaseAbility_Plus {
             damage: fDamage,
             damage_type: this.GetAbilityDamageType(),
             damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_HPLOSS + DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION,
-            eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_DAMAGE_AMPLIFY
+            extra_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_DAMAGE_AMPLIFY
         }
         let zuus_2 = ability2_zuus_lightning_bolt.findIn(hCaster)
         if (modifier_zuus_3_scepter.exist(hCaster)
-            && GFuncEntity.IsValid(zuus_2)
+            && IsValid(zuus_2)
             && zuus_2.FireZuus2
             && zuus_2.GetLevel() > 0) {
             let hUnits = AoiHelper.FindEntityInRadius(
@@ -76,7 +76,7 @@ export class ability3_zuus_static_field extends BaseAbility_Plus {
             let hMaxHealthUnit = null
             let fMaxHealth = 0
             for (let hUnit of (hUnits as IBaseNpc_Plus[])) {
-                if (GFuncEntity.IsValid(hUnit)) {
+                if (IsValid(hUnit)) {
                     let fHelath = hUnit.GetHealth()
                     if (fHelath > fMaxHealth) {
                         fMaxHealth = fHelath
@@ -84,7 +84,7 @@ export class ability3_zuus_static_field extends BaseAbility_Plus {
                     }
                 }
             }
-            if (GFuncEntity.IsValid(hMaxHealthUnit)) {
+            if (IsValid(hMaxHealthUnit)) {
                 zuus_2.FireZuus2(hMaxHealthUnit, this)
             }
         }
@@ -146,7 +146,7 @@ export class modifier_zuus_3 extends BaseModifier_Plus {
                 return
             }
             let hAbility = params.inflictor
-            if (GFuncEntity.IsValid(hAbility) &&
+            if (IsValid(hAbility) &&
                 (hAbility.GetAbilityName() == ability1_zuus_arc_lightning.name ||
                     hAbility.GetAbilityName() == ability2_zuus_lightning_bolt.name ||
                     hAbility.GetAbilityName() == ability6_zuus_thundergods_wrath.name) &&
@@ -210,7 +210,7 @@ export class modifier_zuus_3_scepter extends BaseModifier_Plus {
             return
         }
         let hAbility = this.GetAbilityPlus()
-        if (!GFuncEntity.IsValid(hAbility)) {
+        if (!IsValid(hAbility)) {
             this.StartIntervalThink(-1)
             this.Destroy()
             return

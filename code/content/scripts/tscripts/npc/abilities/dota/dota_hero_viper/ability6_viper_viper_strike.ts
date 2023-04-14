@@ -85,7 +85,7 @@ export class ability6_viper_viper_strike extends BaseAbility_Plus {
         }
     }
     CreateTrackingProjectile(hTarget: IBaseNpc_Plus) {
-        if (!GFuncEntity.IsValid(hTarget)) {
+        if (!IsValid(hTarget)) {
             return
         }
         let hCaster = this.GetCasterPlus()
@@ -105,7 +105,7 @@ export class ability6_viper_viper_strike extends BaseAbility_Plus {
         ParticleManager.SetParticleControlEnt(iParticle, 5, hCaster, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_wing_barb_4", hCaster.GetAbsOrigin(), true)
         ParticleManager.SetParticleControl(iParticle, 6, Vector(projectile_speed, 0, 0))
         let hModifier = modifier_viper_6.findIn(hCaster);
-        if (GFuncEntity.IsValid(hModifier)) {
+        if (IsValid(hModifier)) {
             hModifier.AddParticle(iParticle, false, false, -1, false, false)
         }
 
@@ -129,7 +129,7 @@ export class ability6_viper_viper_strike extends BaseAbility_Plus {
             ParticleManager.DestroyParticle(extraData.iParticle, false)
         }
 
-        if (!GFuncEntity.IsValid(hTarget)) {
+        if (!IsValid(hTarget)) {
             return
         }
 
@@ -184,7 +184,7 @@ export class modifier_viper_6 extends BaseModifier_Plus {
         let hAbility = this.GetAbilityPlus()
         let hParent = this.GetParentPlus()
 
-        if (!GFuncEntity.IsValid(hAbility) || !GFuncEntity.IsValid(hParent)) {
+        if (!IsValid(hAbility) || !IsValid(hParent)) {
             this.StartIntervalThink(-1)
             this.Destroy()
             return
@@ -210,12 +210,12 @@ export class modifier_viper_6 extends BaseModifier_Plus {
 
         //  优先攻击目标
         let hTarget = hParent.GetAttackTarget()
-        if (GFuncEntity.IsValid(hTarget) && (hTarget.GetClassname() == "dota_item_drop" || !hTarget.IsPositionInRange(hParent.GetAbsOrigin(), fRange))) {
+        if (IsValid(hTarget) && (hTarget.GetClassname() == "dota_item_drop" || !hTarget.IsPositionInRange(hParent.GetAbsOrigin(), fRange))) {
             hTarget = null
         }
 
         //  搜索范围
-        if (!GFuncEntity.IsValid(hTarget)) {
+        if (!IsValid(hTarget)) {
             hTarget = AoiHelper.FindOneUnitsInRadius(hParent.GetTeamNumber(), hParent.GetAbsOrigin(), fRange, null, hAbility.GetAbilityTargetTeam(), hAbility.GetAbilityTargetType(), hAbility.GetAbilityTargetFlags() + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_CLOSEST)
         }
 

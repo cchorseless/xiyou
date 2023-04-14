@@ -78,7 +78,7 @@ export class modifier_ember_spirit_2 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -208,7 +208,7 @@ export class modifier_ember_spirit_2_buff extends BaseModifier_Plus {
 
             for (let i = this.targets.length - 1; i >= 0; i--) {
                 let _target = this.targets[i]
-                if (GFuncEntity.IsValid(_target)) {
+                if (IsValid(_target)) {
                     modifier_ember_spirit_2_marker.remove(_target);
                 }
                 table.remove(this.targets, i)
@@ -225,7 +225,7 @@ export class modifier_ember_spirit_2_buff extends BaseModifier_Plus {
             for (let i = this.targets.length - 1; i >= 0; i--) {
                 let _target = this.targets[i]
                 table.remove(this.targets, i)
-                if (GFuncEntity.IsValid(_target)) {
+                if (IsValid(_target)) {
                     modifier_ember_spirit_2_marker.remove(_target);
                     if (UnitFilter(_target, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ATTACK_IMMUNE, parent.GetTeamNumber()) == UnitFilterResult.UF_SUCCESS) {
                         target = _target
@@ -315,7 +315,7 @@ export class modifier_ember_spirit_2_invulnerability extends BaseModifier_Plus {
         if (IsServer()) {
             this.GetParentPlus().RemoveNoDraw()
 
-            if (GFuncEntity.IsValid(this.modifier_no_health_bar)) {
+            if (IsValid(this.modifier_no_health_bar)) {
                 this.modifier_no_health_bar.Destroy()
             }
         }

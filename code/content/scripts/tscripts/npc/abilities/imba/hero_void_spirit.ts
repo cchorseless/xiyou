@@ -803,12 +803,12 @@ export class modifier_imba_void_spirit_aether_remnant_helper_buff extends BaseMo
     }
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
             2: GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_CONSTANT,
             3: GPropertyConfig.EMODIFIER_PROPERTY.EVASION_CONSTANT
         });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.damage_bonus * this.GetStackCount();
     }
@@ -975,7 +975,8 @@ export class imba_void_spirit_astral_step extends BaseAbility_Plus {
             if (warpVector && !bInterrupted) {
                 enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_void_spirit_astral_step_armor_pierce", {});
             }
-            this.GetCasterPlus().PerformAttack(enemy, false, true, true, false, false, false, true);
+            this.GetCasterPlus().Attack(enemy, GEBATTLE_ATTACK_STATE.ATTACK_STATE_NOT_PROCESSPROCS +
+                GEBATTLE_ATTACK_STATE.ATTACK_STATE_SKIPCOOLDOWN + GEBATTLE_ATTACK_STATE.ATTACK_STATE_NEVERMISS);
             this.GetCasterPlus().RemoveModifierByName("modifier_imba_void_spirit_astral_step_crit");
             enemy.RemoveModifierByName("modifier_imba_void_spirit_astral_step_armor_pierce");
             enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_void_spirit_astral_step_debuff", {
@@ -1078,11 +1079,11 @@ export class modifier_imba_void_spirit_astral_step_crit extends BaseModifier_Plu
     }
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_CRITICALSTRIKE,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_CRITICALSTRIKE_UNIQUE,
             2: GPropertyConfig.EMODIFIER_PROPERTY.TOTALDAMAGEOUTGOING_PERCENTAGE
         });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_CRITICALSTRIKE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_CRITICALSTRIKE_UNIQUE)
     CC_GetModifierPreAttack_CriticalStrike(p_0: ModifierAttackEvent,): number {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_void_spirit_astral_step_crit")) {
             return this.GetCasterPlus().GetTalentValue("special_bonus_imba_void_spirit_astral_step_crit");

@@ -79,8 +79,8 @@ export class modifier_auto_findtreasure extends BaseModifier_Plus {
     CheckIntervalThink() {
         let hParent = this.GetParentPlus();
         let hAbility = this.GetAbilityPlus();
-        if (GFuncEntity.IsValid(hParent)) {
-            if (GFuncEntity.IsValid(hAbility) && hAbility.IsCooldownReady()) {
+        if (IsValid(hParent)) {
+            if (IsValid(hAbility) && hAbility.IsCooldownReady()) {
                 if (hAbility.GetAutoCastState()) {
                     this.AutoFindTreasure();
                 } else {

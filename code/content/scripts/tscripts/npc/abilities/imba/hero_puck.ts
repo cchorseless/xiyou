@@ -284,7 +284,7 @@
 //         if (this.GetCasterPlus().HasTalent("special_bonus_imba_puck_phase_shift_attacks")) {
 //             for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetAbsOrigin(), undefined, this.GetCasterPlus().Script_GetAttackRange() + 200, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BUILDING, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_ANY_ORDER, false))) {
 //                 if (!enemy.GetUnitName().includes("undying_zombie")) {
-//                     this.GetCasterPlus().PerformAttack(enemy, true, true, true, false, true, false, false);
+//                     this.GetCasterPlus().AttackOnce(enemy, true, true, true, false, true, false, false);
 //                 }
 //             }
 //         }
@@ -468,7 +468,7 @@
 //         }
 //         if (target) {
 //             EmitSoundOnLocationWithCaster(target.GetAbsOrigin(), "Hero_Puck.ProjectileImpact", this.GetCasterPlus());
-//             this.GetCasterPlus().PerformAttack(target, false, true, true, false, false, false, false);
+//             this.GetCasterPlus().AttackOnce(target, false, true, true, false, false, false, false);
 //         }
 //     }
 // }

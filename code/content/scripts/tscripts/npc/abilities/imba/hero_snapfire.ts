@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -961,7 +961,7 @@ export class modifier_imba_snapfire_mortimer_kisses_thinker extends BaseModifier
         if (!IsServer()) {
             return;
         }
-        GFuncEntity.SafeDestroyUnit(this.GetParentPlus());
+        SafeDestroyUnit(this.GetParentPlus());
     }
     IsAura(): boolean {
         return this.start;

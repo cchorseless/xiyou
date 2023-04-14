@@ -135,7 +135,7 @@ export class modifier_leshrac_6_buff extends BaseModifier_Plus {
         let damage = base_damage + hCaster.GetMaxMana() * (this.damage_per_mana + hCaster.GetTalentValue("special_bonus_unique_leshrac_custom_5"))
         let chance = hCaster.GetTalentValue("special_bonus_unique_leshrac_custom_8")
         let leshrac_2 = ability2_leshrac_diabolic_edict.findIn(hCaster)
-        let is_valid_leshrac_2 = GFuncEntity.IsValid(leshrac_2) && leshrac_2.GetLevel() > 0
+        let is_valid_leshrac_2 = IsValid(leshrac_2) && leshrac_2.GetLevel() > 0
 
         let tTargets = AoiHelper.FindEntityInRadius(hParent.GetTeamNumber(), hParent.GetAbsOrigin(), this.radius, null, hAbility.GetAbilityTargetTeam(), hAbility.GetAbilityTargetType(), hAbility.GetAbilityTargetFlags(), FindOrder.FIND_ANY_ORDER)
         for (let hTarget of (tTargets)) {

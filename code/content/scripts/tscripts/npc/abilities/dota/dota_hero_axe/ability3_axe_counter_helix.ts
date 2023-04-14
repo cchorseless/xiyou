@@ -45,7 +45,7 @@ export class ability3_axe_counter_helix extends BaseAbility_Plus {
     OnSpellStart() {
         let hCaster = this.GetCasterPlus()
         let hTarget = this.GetCursorTarget()
-        if (!GFuncEntity.IsValid(hTarget) || !hTarget.IsAlive()) {
+        if (!IsValid(hTarget) || !hTarget.IsAlive()) {
             return
         }
         let radius = this.GetSpecialValueFor("radius")
@@ -58,7 +58,7 @@ export class ability3_axe_counter_helix extends BaseAbility_Plus {
     _OnSpellStart(hTarget: IBaseNpc_Plus) {
         let hCaster = this.GetCasterPlus()
         let duration = this.GetSpecialValueFor("duration")
-        if (GFuncEntity.IsValid(hTarget)) {
+        if (IsValid(hTarget)) {
             modifier_axe_3_debuff.apply(hTarget, hCaster, this, { duration: duration })
             EmitSoundOnLocationWithCaster(hTarget.GetAbsOrigin(), "Hero_Axe.Battle_Hunger", hCaster)
         }
@@ -104,7 +104,7 @@ export class modifier_axe_3 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -161,7 +161,7 @@ export class modifier_axe_3 extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_PERCENTAGE)
     CC_GetModifierStats_Strength_Percentage() {
-        if (GFuncEntity.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard()) {
+        if (IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard()) {
             return (this.increase_str_pct + this.shard_increase_str_pct) * this.GetStackCount()
         }
         return this.increase_str_pct * this.GetStackCount()
@@ -199,9 +199,9 @@ export class modifier_axe_3_debuff extends BaseModifier_Plus {
 
         let hCaster = this.GetCasterPlus()
         if (IsServer()) {
-            if (GFuncEntity.IsValid(hCaster)) {
+            if (IsValid(hCaster)) {
                 let hModifier = modifier_axe_3.findIn(hCaster) as modifier_axe_3;
-                if (GFuncEntity.IsValid(hModifier)) {
+                if (IsValid(hModifier)) {
                     hModifier.IncrementStackCount()
                 }
             }
@@ -226,9 +226,9 @@ export class modifier_axe_3_debuff extends BaseModifier_Plus {
 
         let hCaster = this.GetCasterPlus()
         if (IsServer()) {
-            if (GFuncEntity.IsValid(hCaster)) {
+            if (IsValid(hCaster)) {
                 let hModifier = modifier_axe_3.findIn(hCaster) as modifier_axe_3;
-                if (GFuncEntity.IsValid(hModifier)) {
+                if (IsValid(hModifier)) {
                     hModifier.DecrementStackCount()
                 }
             }
@@ -239,7 +239,7 @@ export class modifier_axe_3_debuff extends BaseModifier_Plus {
             let caster = this.GetCasterPlus()
             let target = this.GetParentPlus()
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(caster) || !GFuncEntity.IsValid(ability)) {
+            if (!IsValid(caster) || !IsValid(ability)) {
                 this.Destroy()
                 return
             }
@@ -249,7 +249,7 @@ export class modifier_axe_3_debuff extends BaseModifier_Plus {
                 attacker: caster,
                 damage: caster.GetStrength() * this.damage_str_factor * this.damage_interval,
                 damage_type: ability.GetAbilityDamageType(),
-                eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_DOT,
+                extra_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_DOT,
             }
             BattleHelper.GoApplyDamage(damage_table)
         }

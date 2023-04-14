@@ -104,7 +104,7 @@ export class modifier_item_imba_bloodstone extends BaseModifier_Plus {
     }
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS,
             2: GPropertyConfig.EMODIFIER_PROPERTY.MANA_BONUS,
             3: GPropertyConfig.EMODIFIER_PROPERTY.MANA_REGEN_TOTAL_PERCENTAGE,
             4: GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_PERCENTAGE_UNIQUE,
@@ -116,7 +116,7 @@ export class modifier_item_imba_bloodstone extends BaseModifier_Plus {
             10: Enum_MODIFIER_EVENT.ON_DEATH
         });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
     CC_GetModifierHealthBonus(): number {
         return this.bonus_health;
     }

@@ -66,7 +66,7 @@ export class ability3_magnataur_skewer extends BaseAbility_Plus {
         let hThinker = CreateUnitByName(hCaster.GetUnitName(), vStartPosition, false, hCaster, hCaster, hCaster.GetTeamNumber())
         for (let i = hThinker.GetAbilityCount() - 1; i >= 0; i--) {
             let hAbility = hThinker.GetAbilityByIndex(i)
-            if (GFuncEntity.IsValid(hAbility)) {
+            if (IsValid(hAbility)) {
                 hThinker.RemoveAbilityByHandle(hAbility)
             }
         }
@@ -99,7 +99,7 @@ export class ability3_magnataur_skewer extends BaseAbility_Plus {
     }
     OnProjectileHit_ExtraData(hTarget: IBaseNpc_Plus, vLocation: Vector, ExtraData: any) {
         let hCaster = this.GetCasterPlus()
-        if (GFuncEntity.IsValid(hTarget)) {
+        if (IsValid(hTarget)) {
             if (ExtraData.target_position_x != null && ExtraData.target_position_y != null && ExtraData.target_position_z != null) {
                 let skewer_speed = this.GetSpecialValueFor("skewer_speed")
                 let skewer_radius = this.GetSpecialValueFor("skewer_radius")
@@ -119,11 +119,11 @@ export class ability3_magnataur_skewer extends BaseAbility_Plus {
         EmitSoundOnLocationWithCaster(vLocation, ResHelper.GetSoundReplacement("Hero_Magnataur.Skewer.Target", hCaster), hCaster)
 
         let hThinker = EntIndexToHScript(ExtraData.thinker_ent_index || -1) as IBaseNpc_Plus
-        if (GFuncEntity.IsValid(hThinker)) {
+        if (IsValid(hThinker)) {
             hThinker.StartGesture(GameActivity_t.ACT_DOTA_MAGNUS_SKEWER_END)
             modifier_magnataur_3_thinker.remove(hThinker);
             let hModifier = modifier_magnataur_3_dummy.apply(hThinker, hCaster, this)
-            if (GFuncEntity.IsValid(hModifier)) {
+            if (IsValid(hModifier)) {
                 hModifier.SetDuration(1, true)
             }
         }
@@ -131,9 +131,9 @@ export class ability3_magnataur_skewer extends BaseAbility_Plus {
     }
     OnProjectileThink_ExtraData(vLocation: Vector, ExtraData: any) {
         let hThinker = EntIndexToHScript(ExtraData.thinker_ent_index || -1) as IBaseNpc_Plus
-        if (GFuncEntity.IsValid(hThinker)) {
+        if (IsValid(hThinker)) {
             let hModifier = modifier_magnataur_3_thinker.findIn(hThinker)
-            if (GFuncEntity.IsValid(hModifier)) {
+            if (IsValid(hModifier)) {
                 hModifier.vPosition = vLocation
             }
         }
@@ -175,7 +175,7 @@ export class modifier_magnataur_3 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -389,7 +389,7 @@ export class modifier_magnataur_3_move extends BaseModifierMotionHorizontal_Plus
             let hCaster = this.GetCasterPlus()
             let hParent = this.GetParentPlus()
             let hAbility = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(hCaster) || !GFuncEntity.IsValid(hAbility)) {
+            if (!IsValid(hCaster) || !IsValid(hAbility)) {
                 return
             }
 

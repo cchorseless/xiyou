@@ -68,7 +68,7 @@ export class modifier_bristleback_3 extends BaseModifier_Plus {
             // 监听三技能施法，给2技能范围内的友方单位继承一定比例的战意效果
             let hAbility2 = ability2_bristleback_quill_spray.findIn(hParent)
             let hAbility3 = ability6_bristleback_warpath.findIn(hParent)
-            if (GFuncEntity.IsValid(hAbility2) && hAbility2.GetLevel() >= 1 && GFuncEntity.IsValid(hAbility3) && hAbility == hAbility3 && GFuncEntity.IsValid(hModifier)) {
+            if (IsValid(hAbility2) && hAbility2.GetLevel() >= 1 && IsValid(hAbility3) && hAbility == hAbility3 && IsValid(hModifier)) {
                 let radius = hAbility2.GetSpecialValueFor("radius")
                 let tTarget = FindUnitsInRadius(hCaster.GetTeamNumber(), hCaster.GetAbsOrigin(), null, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false)
                 for (let hTarget of (tTarget)) {

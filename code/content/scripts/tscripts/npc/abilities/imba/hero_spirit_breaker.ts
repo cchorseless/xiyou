@@ -1084,7 +1084,7 @@ export class modifier_special_bonus_imba_spirit_breaker_bonus_health extends Bas
         }
         return Object.values(decFuncs);
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
     CC_GetModifierHealthBonus(): number {
         return this.bonus_health;
     }

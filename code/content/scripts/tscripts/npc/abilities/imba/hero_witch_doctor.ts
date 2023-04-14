@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { ResHelper } from "../../../helper/ResHelper";
 import { GameServiceConfig } from "../../../shared/GameServiceConfig";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -739,12 +739,12 @@ export class imba_witch_doctor_death_ward extends BaseAbility_Plus {
                 vPosition = vPosition + ((distance / 2) * spawn_line_direction) as Vector;
                 talent_ward.EmitSound("Hero_WitchDoctor.Death_WardBuild");
                 this.AddTimer(this.GetChannelTime(), () => {
-                    GFuncEntity.SafeDestroyUnit(talent_ward);
+                    SafeDestroyUnit(talent_ward);
                     if (this.GetCasterPlus().HasTalent("special_bonus_imba_witch_doctor_5")) {
                         let units = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_OTHER, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FindOrder.FIND_ANY_ORDER, false);
                         for (const [_, unit] of GameFunc.iPair(units)) {
                             if (unit.TempData().bIsMiniDeathWard) {
-                                GFuncEntity.SafeDestroyUnit(unit);
+                                SafeDestroyUnit(unit);
                             }
                         }
                     }
@@ -828,12 +828,12 @@ export class imba_witch_doctor_death_ward extends BaseAbility_Plus {
         if (IsServer()) {
             StopSoundOn("Hero_WitchDoctor.Death_WardBuild", this.death_ward);
             StopSoundOn("Imba.WitchDoctorSingsASong", this.death_ward);
-            GFuncEntity.SafeDestroyUnit(this.death_ward);
+            SafeDestroyUnit(this.death_ward);
             if (this.GetCasterPlus().HasTalent("special_bonus_imba_witch_doctor_5")) {
                 let units = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_OTHER, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FindOrder.FIND_ANY_ORDER, false);
                 for (const [_, unit] of GameFunc.iPair(units)) {
                     if (unit.TempData().bIsMiniDeathWard) {
-                        GFuncEntity.SafeDestroyUnit(unit);
+                        SafeDestroyUnit(unit);
                     }
                 }
             }
@@ -847,9 +847,9 @@ export class imba_witch_doctor_death_ward extends BaseAbility_Plus {
         if (this.tempdata[ExtraData.index]) {
             if (!this.tempdata[ExtraData.index].IsNull()) {
                 if (this.GetCasterPlus().HasScepter()) {
-                    this.tempdata[ExtraData.index].PerformAttack(target, false, true, true, true, false, false, true);
+                    this.tempdata[ExtraData.index].AttackOnce(target, false, true, true, true, false, false, true);
                 } else {
-                    this.tempdata[ExtraData.index].PerformAttack(target, false, true, true, true, false, false, false);
+                    this.tempdata[ExtraData.index].AttackOnce(target, false, true, true, true, false, false, false);
                 }
                 if (ExtraData.bounces_left >= 0 && this.GetCasterPlus().HasScepter()) {
                     ExtraData.bounces_left = ExtraData.bounces_left - 1;

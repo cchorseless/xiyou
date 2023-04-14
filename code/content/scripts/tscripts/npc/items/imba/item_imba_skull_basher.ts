@@ -30,7 +30,7 @@ export class modifier_imba_skull_basher extends BaseModifier_Plus {
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
             1: GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BONUS,
-            2: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
+            2: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
             3: Enum_MODIFIER_EVENT.ON_ATTACK,
             4: Enum_MODIFIER_EVENT.ON_ATTACK_LANDED,
             5: GPropertyConfig.EMODIFIER_PROPERTY.PROCATTACK_BONUS_DAMAGE_MAGICAL
@@ -42,7 +42,7 @@ export class modifier_imba_skull_basher extends BaseModifier_Plus {
             return this.GetItemPlus().GetSpecialValueFor("bonus_strength");
         }
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         if (this.GetItemPlus()) {
             return this.GetItemPlus().GetSpecialValueFor("bonus_damage");

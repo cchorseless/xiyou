@@ -10,7 +10,7 @@ export class t17_bedlam extends BaseAbility_Plus {
     GetCastRange(vLocation: Vector, hTarget: IBaseNpc_Plus) {
         let hCaster = this.GetCasterPlus()
         // let modifier_combination_t17_enhanced_bedlam = Load(hCaster, "modifier_combination_t17_enhanced_bedlam")
-        // let extra_radius = (GFuncEntity.IsValid(modifier_combination_t17_enhanced_bedlam) && modifier_combination_t17_enhanced_bedlam.GetStackCount() > 0) && modifier_combination_t17_enhanced_bedlam.extra_radius || 0
+        // let extra_radius = (IsValid(modifier_combination_t17_enhanced_bedlam) && modifier_combination_t17_enhanced_bedlam.GetStackCount() > 0) && modifier_combination_t17_enhanced_bedlam.extra_radius || 0
         // return this.GetSpecialValueFor("radius") + extra_radius
         return 0
     }
@@ -57,7 +57,7 @@ export class modifier_t17_bedlam extends BaseModifier_Plus {
     GetAuraRadius() {
         let hParent = this.GetParentPlus()
         // let modifier_combination_t17_enhanced_bedlam = Load(hParent, "modifier_combination_t17_enhanced_bedlam")
-        // let extra_radius = (GFuncEntity.IsValid(modifier_combination_t17_enhanced_bedlam) && modifier_combination_t17_enhanced_bedlam.GetStackCount() > 0) && modifier_combination_t17_enhanced_bedlam.extra_radius || 0
+        // let extra_radius = (IsValid(modifier_combination_t17_enhanced_bedlam) && modifier_combination_t17_enhanced_bedlam.GetStackCount() > 0) && modifier_combination_t17_enhanced_bedlam.extra_radius || 0
         // return this.radius + extra_radius
         return 0
     }
@@ -111,14 +111,14 @@ export class modifier_t17_bedlam_slow extends BaseModifier_Plus {
     // GetMoveSpeedBonus_Percentage() {
     //     let hCaster = this.GetCasterPlus()
     //     let modifier_combination_t17_enhanced_bedlam = Load(hCaster, "modifier_combination_t17_enhanced_bedlam")
-    //     let extra_slow_movespeed = (GFuncEntity.IsValid(modifier_combination_t17_enhanced_bedlam) && modifier_combination_t17_enhanced_bedlam.GetStackCount() > 0) && modifier_combination_t17_enhanced_bedlam.extra_slow_movespeed || 0
+    //     let extra_slow_movespeed = (IsValid(modifier_combination_t17_enhanced_bedlam) && modifier_combination_t17_enhanced_bedlam.GetStackCount() > 0) && modifier_combination_t17_enhanced_bedlam.extra_slow_movespeed || 0
     //     return this.slow_movespeed + extra_slow_movespeed
     // }
     // @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TURN_RATE_PERCENTAGE)
     // GetTurnRate_Percentage() {
     //     let hCaster = this.GetCasterPlus()
     //     let modifier_combination_t17_enhanced_bedlam = Load(hCaster, "modifier_combination_t17_enhanced_bedlam")
-    //     let turn_back_rate = (GFuncEntity.IsValid(modifier_combination_t17_enhanced_bedlam) && modifier_combination_t17_enhanced_bedlam.GetStackCount() > 0) && modifier_combination_t17_enhanced_bedlam.turn_back_rate || 0
+    //     let turn_back_rate = (IsValid(modifier_combination_t17_enhanced_bedlam) && modifier_combination_t17_enhanced_bedlam.GetStackCount() > 0) && modifier_combination_t17_enhanced_bedlam.turn_back_rate || 0
     //     return turn_back_rate
     // }
 }

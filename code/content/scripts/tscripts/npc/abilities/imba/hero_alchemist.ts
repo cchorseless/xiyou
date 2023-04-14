@@ -555,7 +555,7 @@ export class imba_alchemist_unstable_concoction extends BaseAbility_Plus {
                     }
                 }
                 for (const [_, unit] of GameFunc.iPair(units)) {
-                    if (GFuncEntity.IsValid(unit) && unit.GetTeam() != caster.GetTeam()) {
+                    if (IsValid(unit) && unit.GetTeam() != caster.GetTeam()) {
                         ApplyDamage({
                             victim: unit,
                             attacker: caster,
@@ -715,7 +715,7 @@ export class modifier_imba_unstable_concoction_handler extends BaseModifier_Plus
         if (IsServer()) {
             let caster = this.GetParentPlus();
             let ability = this.GetAbilityPlus<imba_alchemist_unstable_concoction>();
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.Destroy();
                 return;
             }
@@ -894,7 +894,7 @@ export class imba_alchemist_goblins_greed extends BaseAbility_Plus {
 
     OnSpellStart(): void {
         if (IsServer()) {
-            if (GFuncEntity.IsValid(this.greevil)) {
+            if (IsValid(this.greevil)) {
                 this.EndCooldown();
                 EventHelper.ErrorMessage("#dota_hud_error_active_greevil", this.GetCasterPlus().GetPlayerID());
                 return;
@@ -1482,10 +1482,10 @@ export class modifier_imba_chemical_rage_aura_buff extends BaseModifier_Plus {
 
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS
+            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE
         });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         return this.GetStackCount();
     }
@@ -1548,7 +1548,7 @@ export class modifier_mammonite_passive extends BaseModifier_Plus {
 
     /** DeclareFunctions():modifierfunction[] {
         let decFuncs = {
-            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
             2: Enum_MODIFIER_EVENT.ON_ATTACK_FINISHED,
             3: GPropertyConfig.EMODIFIER_PROPERTY.ABILITY_LAYOUT
         }
@@ -1559,7 +1559,7 @@ export class modifier_mammonite_passive extends BaseModifier_Plus {
         return 5;
     }
 
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         if (IsServer()) {
             if (this.caster.HasScepter()) {

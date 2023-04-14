@@ -87,14 +87,14 @@ export class modifier_undying_6 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
             }
 
             let caster = ability.GetCasterPlus()
-            if (!GFuncEntity.IsValid(caster)) {
+            if (!IsValid(caster)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -191,9 +191,9 @@ export class modifier_undying_6_buff extends BaseModifier_Plus {
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
     attackLanded(params: IModifierTable) {
-        if (!GFuncEntity.IsValid(params.target)) { return }
+        if (!IsValid(params.target)) { return }
         if (params.target.GetClassname() == "dota_item_drop") { return }
-        if (GFuncEntity.IsValid(this.GetCasterPlus()) && params.attacker == this.GetParentPlus() && !params.attacker.IsIllusion() && UnitFilter(params.target, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, params.attacker.GetTeamNumber()) == UnitFilterResult.UF_SUCCESS) {
+        if (IsValid(this.GetCasterPlus()) && params.attacker == this.GetParentPlus() && !params.attacker.IsIllusion() && UnitFilter(params.target, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, params.attacker.GetTeamNumber()) == UnitFilterResult.UF_SUCCESS) {
             modifier_undying_6_slow.apply(params.target, this.GetCasterPlus(), this.GetAbilityPlus(), { duration: this.fSlowDuration })
         }
     }
@@ -203,7 +203,7 @@ export class modifier_undying_6_buff extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CASTTIME_PERCENTAGE)
     GetPercentageCasttime() {
-        if (GFuncEntity.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasScepter()) {
+        if (IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasScepter()) {
             return this.cast_point_scepter
         }
     }
@@ -285,7 +285,7 @@ export class modifier_undying_6_zombie_lifetime extends BaseModifier_Plus {
     BeDestroy() {
 
         let hParent = this.GetParentPlus()
-        if (IsServer() && GFuncEntity.IsValid(hParent)) {
+        if (IsServer() && IsValid(hParent)) {
             hParent.AddNoDraw()
             hParent.ForceKill(false)
         }

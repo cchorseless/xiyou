@@ -91,7 +91,7 @@ export class modifier_sniper_1 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -149,7 +149,7 @@ export class modifier_sniper_1_thinker extends BaseModifier_Plus {
         return false
     }
     IsAura() {
-        return this.GetStackCount() == 1 && GFuncEntity.IsValid(this.GetCasterPlus()) && GFuncEntity.IsValid(this.GetAbilityPlus())
+        return this.GetStackCount() == 1 && IsValid(this.GetCasterPlus()) && IsValid(this.GetAbilityPlus())
     }
     GetAuraSearchTeam() {
         return DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY
@@ -204,7 +204,7 @@ export class modifier_sniper_1_thinker extends BaseModifier_Plus {
         let hParent = this.GetParentPlus()
         let hCaster = this.GetCasterPlus()
         if (IsServer()) {
-            if (!GFuncEntity.IsValid(hCaster)) {
+            if (!IsValid(hCaster)) {
                 this.Destroy()
                 return
             }
@@ -286,7 +286,7 @@ export class modifier_sniper_1_debuff extends BaseModifier_Plus {
             let hCaster = this.GetCasterPlus()
             let hParent = this.GetParentPlus()
             let hAbility = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(hCaster) || !GFuncEntity.IsValid(hAbility)) {
+            if (!IsValid(hCaster) || !IsValid(hAbility)) {
                 this.Destroy()
                 return
             }
@@ -306,7 +306,7 @@ export class modifier_sniper_1_debuff extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
     GetMoveSpeedBonus_Percentage(params: IModifierTable) {
-        if (!GFuncEntity.IsValid(this.GetCasterPlus()) || !GFuncEntity.IsValid(this.GetAbilityPlus())) {
+        if (!IsValid(this.GetCasterPlus()) || !IsValid(this.GetAbilityPlus())) {
             return
         }
         let hParent = this.GetParentPlus()

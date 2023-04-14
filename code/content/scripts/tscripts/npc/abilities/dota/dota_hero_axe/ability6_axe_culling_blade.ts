@@ -47,7 +47,7 @@ export class ability6_axe_culling_blade extends BaseAbility_Plus {
             hCaster.EmitSound(ResHelper.GetSoundReplacement("Hero_Axe.Culling_Blade_Success", hCaster))
             // BuildSystem.EachBuilding(hCaster.GetPlayerOwnerID(), (hBuilding) => {
             //     let hUnit = hBuilding.GetUnitEntity()
-            //     if (GFuncEntity.IsValid(hUnit)) {
+            //     if (IsValid(hUnit)) {
             //          modifier_axe_6_attack_buff.apply( hUnit , hCaster, this, { duration = buff_duration })
             //     }
             // })
@@ -139,7 +139,7 @@ export class modifier_axe_6 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return

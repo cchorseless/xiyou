@@ -25,7 +25,7 @@ export class FakerHeroEntityRoot extends BaseEntityRoot implements IRoundStateCa
     }
     public RefreshFakerHero() {
         let hHero = this.GetDomain<IBaseNpc_Hero_Plus>();
-        if (!GFuncEntity.IsValid(hHero) || !hHero.IsAlive()) {
+        if (!IsValid(hHero) || !hHero.IsAlive()) {
             return
         }
         let sCurrentCourierName = this.GetCourierName()
@@ -40,7 +40,7 @@ export class FakerHeroEntityRoot extends BaseEntityRoot implements IRoundStateCa
     GetCourierName() {
         let hero = this.GetDomain<IBaseNpc_Hero_Plus>();
         let hModifier = modifier_courier.findIn(hero);
-        if (GFuncEntity.IsValid(hModifier)) {
+        if (IsValid(hModifier)) {
             return hModifier.GetCourierName();
         }
         return KVHelper.CourierUnits.GetRandomCourier();

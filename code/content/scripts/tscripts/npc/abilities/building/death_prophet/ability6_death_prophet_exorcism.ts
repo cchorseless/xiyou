@@ -53,7 +53,7 @@ export class ability6_death_prophet_exorcism extends BaseAbility_Plus {
         hCaster.EmitSound(ResHelper.GetSoundReplacement("Hero_DeathProphet.Exorcism.Cast", hCaster))
     }
     ScepterSpirit(hTarget: IBaseNpc_Plus) {
-        if (!GFuncEntity.IsValid(hTarget) || !hTarget.IsAlive()) {
+        if (!IsValid(hTarget) || !hTarget.IsAlive()) {
             return
         }
         let hCaster = this.GetCasterPlus()
@@ -70,7 +70,7 @@ export class ability6_death_prophet_exorcism extends BaseAbility_Plus {
         let shard_max_mana_damage_pct = this.GetSpecialValueFor("shard_max_mana_damage_pct")
 
         let hModifier = modifier_death_prophet_6.findIn(hCaster)
-        if (GFuncEntity.IsValid(hModifier)) {
+        if (IsValid(hModifier)) {
             let hGhost = modifier_death_prophet_6_ghost.applyThinker(hCaster.GetAbsOrigin(), hCaster, this, null, hCaster.GetTeamNumber(), false)
             let vForward = RandomVector(1)
             hGhost.SetForwardVector(vForward)
@@ -79,12 +79,12 @@ export class ability6_death_prophet_exorcism extends BaseAbility_Plus {
             let bReturning = false
             let fEndTime = GameRules.GetGameTime() + scepter_spirit_life_duration
             GTimerHelper.AddFrameTimer(1, GHandler.create(this, () => {
-                if (!GFuncEntity.IsValid(hGhost)) {
+                if (!IsValid(hGhost)) {
                     GameFunc.ArrayFunc.ArrayRemove(hModifier.tScepterGhosts, hGhost)
                     return
                 }
-                if (!GFuncEntity.IsValid(hTarget)) {
-                    if (GFuncEntity.IsValid(hModifier)) {
+                if (!IsValid(hTarget)) {
+                    if (IsValid(hModifier)) {
                         GameFunc.ArrayFunc.ArrayRemove(hModifier.tScepterGhosts, hGhost)
                     }
                     modifier_death_prophet_6_ghost.remove(hGhost);
@@ -96,7 +96,7 @@ export class ability6_death_prophet_exorcism extends BaseAbility_Plus {
                     }
                 }
                 if (GameRules.GetGameTime() > fEndTime) {
-                    if (GFuncEntity.IsValid(hModifier)) {
+                    if (IsValid(hModifier)) {
                         GameFunc.ArrayFunc.ArrayRemove(hModifier.tScepterGhosts, hGhost)
                     }
                     modifier_death_prophet_6_ghost.remove(hGhost);
@@ -127,7 +127,7 @@ export class ability6_death_prophet_exorcism extends BaseAbility_Plus {
 
                 if (hGhost.IsPositionInRange(vTargetPosition, 32)) {
                     if (bReturning) {
-                        if (GFuncEntity.IsValid(hModifier)) {
+                        if (IsValid(hModifier)) {
                             GameFunc.ArrayFunc.ArrayRemove(hModifier.tScepterGhosts, hGhost)
                         }
                         modifier_death_prophet_6_ghost.remove(hGhost);
@@ -206,7 +206,7 @@ export class modifier_death_prophet_6 extends BaseModifier_Plus {
 
         if (IsServer()) {
             for (let hGhost of (this.tScepterGhosts)) {
-                if (GFuncEntity.IsValid(hGhost)) {
+                if (IsValid(hGhost)) {
                     modifier_death_prophet_6_ghost.remove(hGhost);
                 }
             }
@@ -215,7 +215,7 @@ export class modifier_death_prophet_6 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -336,10 +336,10 @@ export class modifier_death_prophet_6_buff extends BaseModifier_Plus {
             this.unique_str = DoUniqueString("modifier_death_prophet_6_buff")
 
             GTimerHelper.AddTimer(0, GHandler.create(this, () => {
-                if (!GFuncEntity.IsValid(this)) {
+                if (!IsValid(this)) {
                     return
                 }
-                if (!GFuncEntity.IsValid(hAbility) || !GFuncEntity.IsValid(hCaster)) {
+                if (!IsValid(hAbility) || !IsValid(hCaster)) {
                     return
                 }
                 if (this.GetRemainingTime() <= -10) {
@@ -357,19 +357,19 @@ export class modifier_death_prophet_6_buff extends BaseModifier_Plus {
                     }
                     if (hGhost.bReturning == false) {
                         let hTarget = hGhost.hTarget
-                        if (GFuncEntity.IsValid(hTarget)) {
+                        if (IsValid(hTarget)) {
                             if (!hTarget.IsAlive() || !hParent.IsPositionInRange(hGhost.hUnit.GetAbsOrigin(), this.give_up_distance)) {
                                 hTarget = null
                             }
                         }
-                        if (!GFuncEntity.IsValid(hTarget)) {
+                        if (!IsValid(hTarget)) {
                             hTarget = hAttackTarget
-                            if (!GFuncEntity.IsValid(hTarget)) {
+                            if (!IsValid(hTarget)) {
                                 hTarget = GFuncRandom.RandomArray(tTargets)
                             }
                         }
                         hGhost.hTarget = hTarget
-                        if (!GFuncEntity.IsValid(hGhost.hTarget)) {
+                        if (!IsValid(hGhost.hTarget)) {
                             if (hGhost.vTargetPosition == null) {
                                 hGhost.vTargetPosition = hParent.GetAbsOrigin() + RandomVector(1) * RandomFloat(0, this.radius)
                             }
@@ -383,7 +383,7 @@ export class modifier_death_prophet_6_buff extends BaseModifier_Plus {
                     }
 
                     let fAngularSpeed = this.GetRemainingTime() <= 0 && (1 / (1 / 30) * FrameTime()) || ((1 / 9) / (1 / 30) * FrameTime())
-                    let vTargetPosition = GFuncEntity.IsValid(hGhost.hTarget) && hGhost.hTarget.GetAbsOrigin() || hGhost.vTargetPosition
+                    let vTargetPosition = IsValid(hGhost.hTarget) && hGhost.hTarget.GetAbsOrigin() || hGhost.vTargetPosition
                     let vDirection = (vTargetPosition - hGhost.hUnit.GetAbsOrigin()) as Vector
                     vDirection.z = 0
                     vDirection = vDirection.Normalized()
@@ -458,16 +458,16 @@ export class modifier_death_prophet_6_buff extends BaseModifier_Plus {
 
         if (IsServer()) {
             let hParent = this.GetParentPlus()
-            if (GFuncEntity.IsValid(hParent)) {
+            if (IsValid(hParent)) {
                 hParent.StopSound(this.sSoundName)
                 let modifier_intellect = modifier_death_prophet_6_intellect_buff.findIn(hParent)
-                // if (GFuncEntity.IsValid(modifier_intellect) && modifier_intellect.ClearCount) {
+                // if (IsValid(modifier_intellect) && modifier_intellect.ClearCount) {
                 //     modifier_intellect.ClearCount(this.unique_str)
                 // }
             }
 
             for (let hGhost of (this.tGhosts)) {
-                if (GFuncEntity.IsValid(hGhost.hUnit)) {
+                if (IsValid(hGhost.hUnit)) {
                     modifier_death_prophet_6_ghost.remove(hGhost.hUnit);
                 }
             }
@@ -479,7 +479,7 @@ export class modifier_death_prophet_6_buff extends BaseModifier_Plus {
             let hCaster = this.GetCasterPlus()
             let hParent = this.GetParentPlus()
 
-            if (!GFuncEntity.IsValid(hAbility) || !GFuncEntity.IsValid(hCaster)) {
+            if (!IsValid(hAbility) || !IsValid(hCaster)) {
                 this.Destroy()
                 return
             }

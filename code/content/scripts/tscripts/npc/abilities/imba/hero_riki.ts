@@ -801,7 +801,7 @@ export class imba_riki_blink_strike extends BaseAbility_Plus {
             ParticleManager.SetParticleControl(particle, 1, location);
             ParticleManager.ReleaseParticleIndex(particle);
             this.hCaster.StartGestureWithPlaybackRate(GameActivity_t.ACT_DOTA_ATTACK, 1.5);
-            this.hCaster.PerformAttack(hTarget, true, true, true, false, false, false, false);
+            this.hCaster.AttackOnce(hTarget, true, true, true, false, false, false, false);
             ApplyDamage({
                 victim: hTarget,
                 attacker: this.hCaster,
@@ -1711,10 +1711,10 @@ export class modifier_imba_riki_tricks_of_the_trade_primary extends BaseModifier
                     if (this.GetAbilityPlus().GetAbilityName() == "imba_riki_tricks_of_the_trade_723") {
                         caster.AddNewModifier(caster, this.GetAbilityPlus(), "modifier_imba_riki_tricks_of_the_trade_723_damage_reduction", {});
                         caster.SetForwardVector(unit.GetForwardVector());
-                        caster.PerformAttack(unit, true, true, true, false, false, false, false);
+                        caster.AttackOnce(unit, true, true, true, false, false, false, false);
                         caster.RemoveModifierByName("modifier_imba_riki_tricks_of_the_trade_723_damage_reduction");
                     } else {
-                        caster.PerformAttack(unit, true, true, true, false, false, false, false);
+                        caster.AttackOnce(unit, true, true, true, false, false, false, false);
                         if (backstab_ability && backstab_ability.GetLevel() > 0 && !this.GetParentPlus().PassivesDisabled()) {
                             let agility_damage_multiplier = backstab_ability.GetSpecialValueFor("agility_damage_multiplier");
                             let particle = ResHelper.CreateParticleEx(backstab_particle, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, unit);
@@ -1854,10 +1854,10 @@ export class modifier_imba_riki_tricks_of_the_trade_secondary extends BaseModifi
         }
         if (this.GetAbilityPlus().GetAbilityName() == "imba_riki_tricks_of_the_trade_723") {
             caster.AddNewModifier(caster, this.GetAbilityPlus(), "modifier_imba_riki_tricks_of_the_trade_723_damage_reduction", {});
-            caster.PerformAttack(target, true, true, true, false, false, false, false);
+            caster.AttackOnce(target, true, true, true, false, false, false, false);
             caster.RemoveModifierByName("modifier_imba_riki_tricks_of_the_trade_723_damage_reduction");
         } else {
-            caster.PerformAttack(target, true, true, true, false, false, false, false);
+            caster.AttackOnce(target, true, true, true, false, false, false, false);
         }
         if (backstab_ability && backstab_ability.GetLevel() > 0 && !this.GetParentPlus().PassivesDisabled()) {
             let agility_damage_multiplier = backstab_ability.GetSpecialValueFor("agility_damage_multiplier");
@@ -1996,7 +1996,7 @@ export class modifier_imba_riki_cloak_and_dagger_723 extends BaseModifier_Plus {
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
             1: GPropertyConfig.EMODIFIER_PROPERTY.INVISIBILITY_LEVEL,
-            2: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
+            2: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
             3: Enum_MODIFIER_EVENT.ON_ATTACK_LANDED,
             4: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_REGEN_PERCENTAGE,
             5: GPropertyConfig.EMODIFIER_PROPERTY.MANA_REGEN_TOTAL_PERCENTAGE
@@ -2009,7 +2009,7 @@ export class modifier_imba_riki_cloak_and_dagger_723 extends BaseModifier_Plus {
         }
     }
     // 背刺伤害 todo
-    // @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    // @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     // CC_GetModifierPreAttack_BonusDamage(keys?: { attacker: IBaseNpc_Plus, target: IBaseNpc_Plus }): number {
     //     if (keys.attacker == this.GetParentPlus() && keys.target) {
     //         if (!this.GetParentPlus().PassivesDisabled() && !keys.target.IsBuilding() && !keys.target.IsOther() && math.abs(AngleDiff(VectorToAngles(keys.target.GetForwardVector()).y, VectorToAngles(this.GetParentPlus().GetForwardVector()).y)) <= this.GetSpecialValueFor("backstab_angle")) {

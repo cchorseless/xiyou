@@ -7,11 +7,138 @@ import { NetTablesHelper } from "../../helper/NetTablesHelper";
 import { ResHelper } from "../../helper/ResHelper";
 import { PropertyCalculate } from "../propertystat/PropertyCalculate";
 
+//-----------------------------------------global function-----------------------------------------------------------
+//#region global function
+declare global {
+    var ApplyDamage_Engine: typeof ApplyDamage;
 
-//----------------------------------------------------------------------------------------------------
-function IsValid(h: CEntityInstance | CDOTA_Buff | undefined): h is CEntityInstance | CDOTA_Buff {
+    /**
+     * @Both
+     * @param obj 
+     */
+    function IsValid(obj: CEntityInstance | IBaseModifier_Plus): boolean;
+    /**
+     * @Both
+     * @param ability 
+     * @returns 
+     */
+    function SafeDestroyAbility(ability: IBaseAbility_Plus): void;
+    /**
+     * @Both
+     * @param item 
+     * @returns 
+     */
+    function SafeDestroyItem(item: IBaseItem_Plus): void;
+    /**
+     * @Both
+     * @param unit 
+     * @returns 
+     */
+    function SafeDestroyUnit(unit: IBaseNpc_Plus): void;
+    /**
+    * @Both
+    * 检查是否是第一次创建
+    */
+    function CheckIsFirstSpawn(hTarget: IBaseNpc_Plus): Boolean;
+
+    function ApplyDamage(options: ApplyDamageOptions & { extra_flags?: IGEBATTLE_DAMAGE_FLAGS }): number;
+}
+function IsValid(h: CEntityInstance | CDOTA_Buff | undefined) {
     return h != null && !h.IsNull();
 }
+
+function SafeDestroyAbility(ability: IBaseAbility_Plus) {
+    if (IsValid(ability)) {
+        if (ability.__safedestroyed__) {
+            return;
+        }
+        ability.__safedestroyed__ = true;
+        ability.__TempData = null;
+        GTimerHelper.ClearAll(ability);
+        if (ability.OnDestroy) {
+            ability.OnDestroy();
+        }
+        ability.Destroy();
+        // UTIL_Remove(ability);
+    }
+}
+
+function SafeDestroyItem(item: IBaseItem_Plus) {
+    if (IsValid(item)) {
+        if (item.__safedestroyed__) {
+            return;
+        }
+        item.__safedestroyed__ = true;
+        item.__TempData = null;
+        GTimerHelper.ClearAll(item);
+        if (item.OnDestroy) {
+            item.OnDestroy();
+        }
+        item.Destroy();
+        // UTIL_Remove(item);
+    }
+}
+
+function SafeDestroyUnit(unit: IBaseNpc_Plus) {
+    if (IsValid(unit)) {
+        if (unit.__safedestroyed__) {
+            return;
+        }
+        unit.__safedestroyed__ = true;
+        if (IsServer()) {
+            let bthinker = unit.IsThinker();
+            let allm = unit.FindAllModifiers() as IBaseModifier_Plus[];
+            for (let m of allm) {
+                if (IsValid(m)) {
+                    m.Destroy();
+                }
+            }
+            if (!bthinker) {
+                let lenability = unit.GetAbilityCount()
+                for (let i = 0; i < lenability; i++) {
+                    unit.GetAbilityByIndex(i) && SafeDestroyAbility(unit.GetAbilityByIndex(i) as any);
+                }
+                for (let i = 0; i < DOTAScriptInventorySlot_t.DOTA_ITEM_SLOT_9; i++) {
+                    unit.GetItemInSlot(i) && SafeDestroyItem(unit.GetItemInSlot(i) as any);
+                }
+            }
+
+        }
+        if (IsValid(unit)) {
+            if (unit.OnDestroy) {
+                unit.OnDestroy();
+            }
+            unit.ClearSelf();
+            unit.Destroy();
+        }
+        // UTIL_Remove(unit);
+    }
+}
+function CheckIsFirstSpawn(hTarget: IBaseNpc_Plus) {
+    let r = hTarget.__bIsFirstSpawn
+    if (!r) {
+        hTarget.__bIsFirstSpawn = true;
+        return true
+    }
+    else {
+        return false
+    }
+};
+if (_G.ApplyDamage_Engine == undefined) {
+    _G.ApplyDamage_Engine = ApplyDamage;
+    _G.IsValid = IsValid;
+    _G.SafeDestroyAbility = SafeDestroyAbility;
+    _G.SafeDestroyItem = SafeDestroyItem;
+    _G.SafeDestroyUnit = SafeDestroyUnit;
+    _G.CheckIsFirstSpawn = CheckIsFirstSpawn;
+}
+
+_G.ApplyDamage = function (tDamageTable: ApplyDamageOptions & { extra_flags?: IGEBATTLE_DAMAGE_FLAGS }) {
+    GBattleSystem.AddDamageFlag(tDamageTable.extra_flags);
+    return ApplyDamage_Engine(tDamageTable);
+};
+
+//#endregion
 
 /**
  * 判断是否为有效数字，如不是则缺省值，缺省值默认为0
@@ -828,8 +955,8 @@ if (IsServer()) {
     }
     CBaseItem.CanGiveToNpc = function (npc: IBaseNpc_Plus) {
         let item = this as any as IBaseItem_Plus;
-        if (GFuncEntity.IsValid(this) &&
-            GFuncEntity.IsValid(npc) &&
+        if (IsValid(this) &&
+            IsValid(npc) &&
             this.IsDroppable() &&
             item.CanUnitPickUp(npc) &&
             npc.IsAlive() &&
@@ -1456,7 +1583,28 @@ declare global {
          * @param fChanged
          */
         ModifyMaxHealth(fChanged: number): void;
-
+        /**
+         * 普通攻击一次 与AttackOnce 一样
+         * @Server 
+         * @param hTarget 
+         * @param iAttackState 
+         */
+        Attack(hTarget: IBaseNpc_Plus, iAttackState?: IGEBATTLE_ATTACK_STATE): number;
+        /**
+         * 普通攻击一次 与Attack 一样
+         * @Server 
+         * @param hTarget 
+         * @param iAttackState 
+         */
+        AttackOnce(target: CDOTA_BaseNPC,
+            useCastAttackOrb: boolean,
+            processProcs: boolean,
+            skipCooldown: boolean,
+            ignoreInvis: boolean,
+            useProjectile: boolean,
+            fakeAttack: boolean,
+            neverMiss: boolean,
+        ): number;
         /**
          * @Server
          * @param abilityname
@@ -1817,7 +1965,7 @@ BaseNPC.RemoveAllChildrenNpc = function () {
     let len = children.length;
     for (let i = 0; i < len; i++) {
         const child = children[i];
-        GFuncEntity.SafeDestroyUnit(child);
+        SafeDestroyUnit(child);
     }
     this.__CreateChildren__ = null;
 }
@@ -2238,6 +2386,19 @@ if (IsServer()) {
             PropertyCalculate.SetUnitCache(this, "StatusHealth", PropertyCalculate.GetUnitCache(this, "StatusHealth") + fChanged)
         }
     }
+    BaseNPC.Attack = function (hTarget: IBaseNpc_Plus, iAttackState = 0) {
+        return GBattleSystem.Attack(this as IBaseNpc_Plus, hTarget, iAttackState)
+    }
+    BaseNPC.AttackOnce = function (hTarget: IBaseNpc_Plus,
+        useCastAttackOrb: boolean,
+        processProcs: boolean,
+        skipCooldown: boolean,
+        ignoreInvis: boolean,
+        useProjectile: boolean,
+        fakeAttack: boolean,
+        neverMiss: boolean) {
+        return GBattleSystem.AttackOnce(this as IBaseNpc_Plus, hTarget, useCastAttackOrb, processProcs, skipCooldown, ignoreInvis, useProjectile, fakeAttack, neverMiss);
+    }
     BaseNPC.addAbilityPlus = function (abilityname: string, level: number = 1) {
         let ability = this.AddAbility(abilityname);
         if (ability) {
@@ -2255,7 +2416,7 @@ if (IsServer()) {
     BaseNPC.removeAbilityPlus = function (abilityname: string) {
         let ability = this.FindAbilityByName(abilityname) as IBaseAbility_Plus;
         if (ability) {
-            GFuncEntity.SafeDestroyAbility(ability);
+            SafeDestroyAbility(ability);
             this.RemoveAbility(abilityname);
         } else {
             GLogHelper.error("removeAbilityPlus ERROR ", abilityname)
@@ -2327,7 +2488,7 @@ if (IsServer()) {
             });
         } else if (sourceType == DamageCategory_t.DOTA_DAMAGE_CATEGORY_ATTACK) {
             let oldHP = target.GetHealth();
-            this.PerformAttack(target, true, true, true, true, false, false, false);
+            this.AttackOnce(target, true, true, true, true, false, false, false);
             damageDealt = math.abs(oldHP - target.GetHealth());
         }
         if (particles) {
@@ -2393,7 +2554,7 @@ if (IsServer()) {
 
     BaseNPC.ApplyPoison = function (hAbility: IBaseAbility_Plus, hCaster: IBaseNpc_Plus, iCount: number, duration?: number) {
         if (!IsServer()) { return };
-        if (!GFuncEntity.IsValid(this)) return;
+        if (!IsValid(this)) return;
         duration = duration || GPropertyConfig.POISON_DURATION;
         if (iCount > 0) {
             let _out = GPropertyCalculate.SumProps(hCaster, null, GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_POISON_COUNT_PERCENTAGE);
@@ -2402,7 +2563,7 @@ if (IsServer()) {
         }
         let iPoisonStack = math.min(iCount, GPropertyConfig.MAX_POISON_STACK)   //  毒层数
         let hPoisonModifier = this.findBuff("modifier_generic_poison") as Imodifier_generic_poison;
-        if (GFuncEntity.IsValid(hPoisonModifier)) {
+        if (IsValid(hPoisonModifier)) {
             let iStack = hPoisonModifier.GetStackCount()
             let iTargetStack = GPropertyConfig.MAX_POISON_STACK - iStack
             iPoisonStack = iTargetStack > iPoisonStack && iPoisonStack || iTargetStack
@@ -2419,9 +2580,9 @@ if (IsServer()) {
 
     BaseNPC.RemovePoison = function (iCount = -1) {
         if (!IsServer()) { return };
-        if (!GFuncEntity.IsValid(this)) return;
+        if (!IsValid(this)) return;
         let hPoisonModifier = this.findBuff("modifier_generic_poison") as IBaseModifier_Plus;
-        if (GFuncEntity.IsValid(hPoisonModifier)) {
+        if (IsValid(hPoisonModifier)) {
             if (iCount == -1) {
                 hPoisonModifier.Destroy();
                 return;
@@ -2439,9 +2600,9 @@ if (IsServer()) {
     }
     BaseNPC.PoisonActive = function (fPercent: number, hAbility?: IBaseAbility_Plus, hCaster?: IBaseNpc_Plus) {
         if (!IsServer()) return;
-        if (!GFuncEntity.IsValid(this)) return;
+        if (!IsValid(this)) return;
         let hPoisonModifier = this.findBuff("modifier_generic_poison") as Imodifier_generic_poison;
-        if (GFuncEntity.IsValid(hPoisonModifier)) {
+        if (IsValid(hPoisonModifier)) {
             hPoisonModifier.PoisonActive(fPercent, hAbility, hCaster);
         }
     }

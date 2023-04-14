@@ -167,7 +167,7 @@ export class modifier_item_imba_ethereal_blade_ethereal extends BaseModifier_Plu
         }
         return Object.values(decFuncs);
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_RESISTANCE_DECREPIFY_UNIQUE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_RESISTANCE_BONUS)
     CC_GetModifierMagicalResistanceDecrepifyUnique(p_0: ModifierAttackEvent,): number {
         return this.ethereal_damage_bonus;
     }

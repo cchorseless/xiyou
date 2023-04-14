@@ -126,7 +126,7 @@ export class modifier_diretide_candy_hp_loss extends BaseModifier_Plus {
         }
         return Object.values(decFuncs);
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.EXTRA_HEALTH_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS_PERCENTAGE)
     CC_GetModifierExtraHealthPercentage(): number {
         if (IsServer()) {
             let hp_to_reduce = this.hp_loss_pct / 100 * this.GetStackCount() * (-1);

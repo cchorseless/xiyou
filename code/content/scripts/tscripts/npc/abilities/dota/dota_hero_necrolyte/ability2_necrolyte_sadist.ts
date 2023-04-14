@@ -186,12 +186,12 @@ export class modifier_necrolyte_2_slow_aura extends BaseModifier_Plus {
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
     ON_DEATH(params: ModifierInstanceEvent) {
         let hAttacker = params.attacker as IBaseNpc_Plus
-        if (GFuncEntity.IsValid(hAttacker) && hAttacker.GetUnitLabel() != "builder") {
+        if (IsValid(hAttacker) && hAttacker.GetUnitLabel() != "builder") {
             if (hAttacker.GetTeamNumber() == params.unit.GetTeamNumber()) {
                 return
             }
             hAttacker = hAttacker.GetSource()
-            // if (GFuncEntity.IsValid(hAttacker) && hAttacker == this.GetParentPlus() && !hAttacker.IsIllusion() && !Spawner.IsEndless()) {
+            // if (IsValid(hAttacker) && hAttacker == this.GetParentPlus() && !hAttacker.IsIllusion() && !Spawner.IsEndless()) {
             // let factor = params.unit.IsConsideredHero() && 5 || 1
             //  modifier_bonus_health.apply( hAttacker , hAttacker, hAttacker.GetDummyAbility(), { bonus_health=this.bonus_health_mana * factor })
             //  modifier_bonus_mana.apply( hAttacker , hAttacker, hAttacker.GetDummyAbility(), { bonus_mana=this.bonus_health_mana * factor })

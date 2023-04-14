@@ -1,5 +1,4 @@
 
-import { BattleHelper } from "../../../helper/BattleHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerModifier } from "../../entityPlus/Base_Plus";
@@ -76,12 +75,12 @@ export class modifier_generic_shock extends BaseModifier_Plus {
     /**受到伤害 */
     @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     OnHurted(params: ModifierInstanceEvent) {
-        if (!BattleHelper.DamageFilter(params.record, BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_SHOCK)) {
+        if (!GBattleSystem.DamageFilter(params.record, GEBATTLE_DAMAGE_FLAGS.DAMAGE_FLAG_SHOCK)) {
             return
         }
         let hAttacker = params.attacker
         let hAbility = params.inflictor as IBaseAbility_Plus;
-        if (GFuncEntity.IsValid(hAttacker) && !this.IsCooldown) {
+        if (IsValid(hAttacker) && !this.IsCooldown) {
             modifier_generic_shock.ShockActive(this.GetParentPlus(), hAttacker, hAbility, 100, false)
         }
     }
@@ -100,7 +99,7 @@ export class modifier_generic_shock extends BaseModifier_Plus {
         }
         let iShockStack = math.min(iCount, modifier_generic_shock.MAX_SHOCK_STACK)	//  触电层数
         let hShockModifier = modifier_generic_shock.findIn(target);
-        if (GFuncEntity.IsValid(hShockModifier)) {
+        if (IsValid(hShockModifier)) {
             let iStack = hShockModifier.GetStackCount()
             let iTargetStack = modifier_generic_shock.MAX_SHOCK_STACK - iStack
             iShockStack = iTargetStack > iShockStack && iShockStack || iTargetStack
@@ -113,14 +112,14 @@ export class modifier_generic_shock extends BaseModifier_Plus {
     }
 
     static ShockActive(target: IBaseNpc_Plus, hCaster: IBaseNpc_Plus, hAbility: IBaseAbility_Plus, fPercent: number, bIgnoreCooldown = true) {
-        if (!GFuncEntity.IsValid(target)) {
+        if (!IsValid(target)) {
             return
         }
-        if (!GFuncEntity.IsValid(hCaster)) {
+        if (!IsValid(hCaster)) {
             return
         }
         let m_shock = modifier_generic_shock.findIn(target);
-        if (!GFuncEntity.IsValid(m_shock)) {
+        if (!IsValid(m_shock)) {
             return
         }
         if (m_shock.IsCooldown && !bIgnoreCooldown) {
@@ -134,9 +133,9 @@ export class modifier_generic_shock extends BaseModifier_Plus {
             damage: damage,
             damage_type: DAMAGE_TYPES.DAMAGE_TYPE_MAGICAL,
             damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION,
-            eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_SHOCK + BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_DAMAGE_TRANSFORM + BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_SPELL_CRIT,
+            extra_flags: GEBATTLE_DAMAGE_FLAGS.DAMAGE_FLAG_SHOCK + GEBATTLE_DAMAGE_FLAGS.DAMAGE_FLAG_NO_DAMAGE_TRANSFORM + GEBATTLE_DAMAGE_FLAGS.DAMAGE_FLAG_NO_SPELL_CRIT,
         }
-        BattleHelper.GoApplyDamage(damageInfo);
+        ApplyDamage(damageInfo);
         ResHelper.CreateParticle(
             {
                 resPath: "particles/units/heroes/hero_zuus/zuus_arc_lightning_impact.vpcf",

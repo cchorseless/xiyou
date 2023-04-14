@@ -141,7 +141,7 @@ export class modifier_phantom_assassin_6 extends BaseModifier_Plus {
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
     death(params: IModifierTable) {
         let hAttacker = params.attacker
-        if (!IsServer() || !GFuncEntity.IsValid(hAttacker) || hAttacker.GetTeamNumber() == params.unit.GetTeamNumber() || hAttacker == null || hAttacker.GetUnitLabel() == "builder" || hAttacker != this.GetParentPlus() || !hAttacker.HasScepter() || hAttacker.IsIllusion()) {
+        if (!IsServer() || !IsValid(hAttacker) || hAttacker.GetTeamNumber() == params.unit.GetTeamNumber() || hAttacker == null || hAttacker.GetUnitLabel() == "builder" || hAttacker != this.GetParentPlus() || !hAttacker.HasScepter() || hAttacker.IsIllusion()) {
             return
         }
         hAttacker = hAttacker.GetSource()

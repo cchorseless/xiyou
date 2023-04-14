@@ -1,5 +1,5 @@
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus, BaseOrbAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -776,7 +776,7 @@ export class imba_ancient_apparition_ice_blast extends BaseAbility_Plus {
         let r = AI_ability.POSITION_if_enemy(this, 1000);
         if (r) {
             this.AddTimer(1, () => {
-                if (GFuncEntity.IsValid(this.release_ability)) {
+                if (IsValid(this.release_ability)) {
                     ExecuteOrderFromTable({
                         UnitIndex: this.GetCasterPlus().entindex(),
                         OrderType: dotaunitorder_t.DOTA_UNIT_ORDER_CAST_NO_TARGET,

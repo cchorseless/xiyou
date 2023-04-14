@@ -92,7 +92,7 @@ export class modifier_builder_gold extends BaseModifier_Plus {
 
     OnIntervalThink() {
         let hParent = this.GetParentPlus()
-        if (GFuncEntity.IsValid(hParent)) {
+        if (IsValid(hParent)) {
             NetTablesHelper.SetDotaEntityData(hParent.GetEntityIndex(), {
                 gold_max: this.GetAbilityPlus<courier_auto_gold>().GetMaxGold(false),
                 wood_max: this.GetAbilityPlus<courier_auto_gold>().GetMaxWood(false),
@@ -101,7 +101,7 @@ export class modifier_builder_gold extends BaseModifier_Plus {
             if (MemberShip && MemberShip.IsVip()) {
                 this.SetStackCount(1)
                 let hAbility = this.GetAbilityPlus()
-                if (GFuncEntity.IsValid(hAbility) && hAbility.IsCooldownReady()) {
+                if (IsValid(hAbility) && hAbility.IsCooldownReady()) {
                     if (hAbility.GetAutoCastState()) {
                         hAbility.OnSpellStart()
                         hAbility.UseResources(false, false, true)
@@ -119,7 +119,7 @@ export class modifier_builder_gold extends BaseModifier_Plus {
         if (IsServer()) {
             this.SetStackCount(1);
             let hAbility = this.GetAbilityPlus();
-            if (GFuncEntity.IsValid(hAbility)) {
+            if (IsValid(hAbility)) {
                 hAbility.ToggleAutoCast();
             }
         }

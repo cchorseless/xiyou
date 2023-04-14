@@ -115,7 +115,7 @@ export class modifier_imba_angelic_alliance_passive_effect extends BaseModifier_
             5: GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_CONSTANT,
             6: GPropertyConfig.EMODIFIER_PROPERTY.EVASION_CONSTANT,
             7: GPropertyConfig.EMODIFIER_PROPERTY.MANA_REGEN_CONSTANT,
-            8: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
+            8: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
             9: GPropertyConfig.EMODIFIER_PROPERTY.STATUS_RESISTANCE_STACKING,
             10: Enum_MODIFIER_EVENT.ON_ATTACK_LANDED
         });
@@ -162,7 +162,7 @@ export class modifier_imba_angelic_alliance_passive_effect extends BaseModifier_
             return this.GetItemPlus().GetSpecialValueFor("bonus_mana_regen");
         }
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
         if (this.GetItemPlus()) {
             return this.GetItemPlus().GetSpecialValueFor("bonus_damage");

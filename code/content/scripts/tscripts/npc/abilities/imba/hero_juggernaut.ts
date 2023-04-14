@@ -192,7 +192,7 @@ export class modifier_imba_juggernaut_blade_fury extends BaseModifier_Plus {
                     let base_damage = this.GetCasterPlus().GetAttackDamage();
                     let bonus_damage = this.GetCasterPlus().GetAverageTrueAttackDamage(random_enemy);
                     let damage = ((base_damage + bonus_damage) * this.GetSpecialValueFor("shard_attack_damage")) / 100;
-                    this.GetCasterPlus().PerformAttack(random_enemy, true, true, true, false, false, true, false);
+                    this.GetCasterPlus().AttackOnce(random_enemy, true, true, true, false, false, true, false);
                     ApplyDamage({
                         attacker: this.GetCasterPlus(),
                         victim: random_enemy,
@@ -314,7 +314,7 @@ export class modifier_imba_juggernaut_blade_fury extends BaseModifier_Plus {
                 duration: 0.01
             });
         }
-        attacker.PerformAttack(target, false, true, true, false, false, false, false);
+        attacker.AttackOnce(target, false, true, true, false, false, false, false);
     }
 }
 @registerModifier()
@@ -840,7 +840,7 @@ export class modifier_imba_juggernaut_blade_dance_empowered_slice extends BaseMo
                     let slash_pfx = ResHelper.CreateParticleEx("particles/units/heroes/hero_juggernaut/juggernaut_blade_fury_tgt.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, enemy, this.GetCasterPlus());
                     ParticleManager.SetParticleControl(slash_pfx, 0, enemy.GetAbsOrigin());
                     ParticleManager.ReleaseParticleIndex(slash_pfx);
-                    this.caster.PerformAttack(enemy, true, true, true, true, false, false, true);
+                    this.caster.AttackOnce(enemy, true, true, true, true, false, false, true);
                     this.has_slice_enemy = true;
                     if (this.caster.HasTalent("special_bonus_imba_juggernaut_4")) {
                         this.targetted_enemy = enemy;
@@ -943,7 +943,7 @@ export class modifier_imba_juggernaut_blade_dance_empowered_slice extends BaseMo
                         let slash_pfx = ResHelper.CreateParticleEx("particles/units/heroes/hero_juggernaut/juggernaut_blade_fury_tgt.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, enemy, this.GetCasterPlus());
                         ParticleManager.SetParticleControl(slash_pfx, 0, enemy.GetAbsOrigin());
                         ParticleManager.ReleaseParticleIndex(slash_pfx);
-                        this.caster.PerformAttack(enemy, true, true, true, true, false, false, true);
+                        this.caster.AttackOnce(enemy, true, true, true, true, false, false, true);
                         this.attack_count = this.attack_count - 1;
                     }
                 }
@@ -1063,11 +1063,11 @@ export class modifier_imba_juggernaut_blade_dance_passive extends BaseModifier_P
     }
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_CRITICALSTRIKE,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_CRITICALSTRIKE_UNIQUE,
             2: Enum_MODIFIER_EVENT.ON_ATTACK_LANDED
         });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_CRITICALSTRIKE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_CRITICALSTRIKE_UNIQUE)
     CC_GetModifierPreAttack_CriticalStrike(keys: ModifierAttackEvent): number {
         if (this.GetParentPlus().PassivesDisabled()) {
             return undefined;
@@ -1409,7 +1409,7 @@ export class imba_juggernaut_omni_slash extends BaseAbility_Plus {
             this.AddTimer(FrameTime(), () => {
                 if ((!omnislash_image.IsNull())) {
                     this.current_position = omnislash_image.GetAbsOrigin();
-                    omnislash_image.PerformAttack(this.target, true, true, true, true, false, false, false);
+                    omnislash_image.AttackOnce(this.target, true, true, true, true, false, false, false);
                     let trail_pfx = ResHelper.CreateParticleEx("particles/units/heroes/hero_juggernaut/juggernaut_omni_slash_trail.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, omnislash_image, this.GetCasterPlus());
                     ParticleManager.SetParticleControl(trail_pfx, 0, this.previous_position);
                     ParticleManager.SetParticleControl(trail_pfx, 1, this.current_position);
@@ -1627,7 +1627,7 @@ export class modifier_imba_omni_slash_caster extends BaseModifier_Plus {
                 if (first_slash && enemy.TriggerSpellAbsorb(this.GetAbilityPlus())) {
                     return;
                 } else {
-                    this.parent.PerformAttack(enemy, true, true, true, true, true, false, false);
+                    this.parent.AttackOnce(enemy, true, true, true, true, true, false, false);
                 }
                 if (enemy.IsConsideredHero() || enemy.IsRoshan() || enemy.GetUnitName() == "npc_imba_mutation_golem") {
                     if (!enemy.IsAlive() && ability.omnislash_kill_count) {
@@ -1668,7 +1668,7 @@ export class modifier_imba_omni_slash_caster extends BaseModifier_Plus {
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
             1: GPropertyConfig.EMODIFIER_PROPERTY.BASEATTACK_BONUSDAMAGE,
-            2: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS,
+            2: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
             3: GPropertyConfig.EMODIFIER_PROPERTY.OVERRIDE_ANIMATION
         });
     } */
@@ -1687,7 +1687,7 @@ export class modifier_imba_omni_slash_caster extends BaseModifier_Plus {
         }
         return 0;
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_DAMAGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage( /** kv */): number {
         return this.GetSpecialValueFor("bonus_damage");
     }
@@ -1733,7 +1733,7 @@ export class modifier_imba_omni_slash_caster extends BaseModifier_Plus {
                 for (let item_id = 0; item_id <= 5; item_id++) {
                     let item_in_caster = this.parent.GetItemInSlot(item_id);
                     if (item_in_caster != undefined) {
-                        GFuncEntity.SafeDestroyItem(item_in_caster as IBaseItem_Plus);
+                        SafeDestroyItem(item_in_caster as IBaseItem_Plus);
                     }
                 }
                 let caster_modifiers = this.parent.FindAllModifiers();
@@ -1744,7 +1744,7 @@ export class modifier_imba_omni_slash_caster extends BaseModifier_Plus {
                 }
                 if ((!this.GetParentPlus().IsNull())) {
                     let iparent = this.GetParentPlus();
-                    GFuncEntity.SafeDestroyUnit(iparent);
+                    SafeDestroyUnit(iparent);
                 }
             }
         }

@@ -65,25 +65,25 @@ export class ability6_lion_finger_of_death extends BaseAbility_Plus {
     }
 
     OnAbilityPhaseInterrupted() {
-        if (GFuncEntity.IsValid(this.hParticleModifier)) {
+        if (IsValid(this.hParticleModifier)) {
             this.hParticleModifier.Destroy()
         }
         let hTarget = this.GetCursorTarget()
-        if (GFuncEntity.IsValid(hTarget) && hTarget.IsAlive()) {
+        if (IsValid(hTarget) && hTarget.IsAlive()) {
             let hModifier = modifier_lion_6_extra_finger.findIn(hTarget)
-            if (GFuncEntity.IsValid(hModifier)) {
+            if (IsValid(hModifier)) {
                 hModifier.Destroy()
             }
         }
     }
 
     OnSpellStart() {
-        if (GFuncEntity.IsValid(this.hParticleModifier)) {
+        if (IsValid(this.hParticleModifier)) {
             this.hParticleModifier.Destroy()
         }
         let hCaster = this.GetCasterPlus()
         let hTarget = this.GetCursorTarget()
-        if (!GFuncEntity.IsValid(hTarget) || !hTarget.IsAlive()) {
+        if (!IsValid(hTarget) || !hTarget.IsAlive()) {
             return
         }
         this.tTarget = []
@@ -93,7 +93,7 @@ export class ability6_lion_finger_of_death extends BaseAbility_Plus {
             table.insert(this.tTarget, hTarget)
             this.FingerOfDeath(hTarget)
             for (let unit of (tTargets)) {
-                if (GFuncEntity.IsValid(unit) && unit.IsAlive() && unit != hTarget) {
+                if (IsValid(unit) && unit.IsAlive() && unit != hTarget) {
                     this.FingerOfDeath(unit)
                     table.insert(this.tTarget, unit)
                 }
@@ -142,7 +142,7 @@ export class ability6_lion_finger_of_death extends BaseAbility_Plus {
         EmitSoundOnLocationWithCaster(hTarget.GetAbsOrigin(), ResHelper.GetSoundReplacement("Hero_Lion.FingerOfDeathImpact", hCaster), hCaster)
 
         let hAbility4 = ability3_lion_mana_drain.findIn(hCaster)
-        if (GFuncEntity.IsValid(hAbility4) && hAbility4.GetTargetMana != null) {
+        if (IsValid(hAbility4) && hAbility4.GetTargetMana != null) {
             hAbility4.GetTargetMana(hTarget)
         }
     }
@@ -193,7 +193,7 @@ export class modifier_lion_6 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -285,7 +285,7 @@ export class modifier_lion_6_damage extends BaseModifier_Plus {
             let hCaster = this.GetCasterPlus()
             let hParent = this.GetParentPlus()
             let hAbility = this.GetAbilityPlus() as ability6_lion_finger_of_death
-            if (GFuncEntity.IsValid(hCaster) && GFuncEntity.IsValid(hAbility) && hParent.IsAlive()) {
+            if (IsValid(hCaster) && IsValid(hAbility) && hParent.IsAlive()) {
                 let extra_damage_per_kill = hCaster.GetTalentValue("special_bonus_unique_lion_custom_2")
                 let damage_per_kill = this.damage_per_kill + extra_damage_per_kill
                 let fDamage = hCaster.HasScepter() && this.damage_scepter || this.damage
@@ -311,7 +311,7 @@ export class modifier_lion_6_damage extends BaseModifier_Plus {
                     }
                     if (this.IsAllAlive != null && this.IsAllAlive(tTarget)) {
                         let hModifier = modifier_lion_6_extra_finger.apply(tTarget[0], hCaster, hAbility, null)
-                        if (GFuncEntity.IsValid(hModifier)) {
+                        if (IsValid(hModifier)) {
                             let iCurLevelManaCost = hAbility.GetManaCost(hAbility.GetLevel() - 1)
                             let iExtraStack = this.GetExtraStock(hModifier.GetStackCount())
                             let iCurManaCost = iCurLevelManaCost * iExtraStack
@@ -340,7 +340,7 @@ export class modifier_lion_6_damage extends BaseModifier_Plus {
     }
     IsAllAlive(t: Array<any>) {
         for (let v of (t)) {
-            if (!GFuncEntity.IsValid(v) || !v.IsAlive()) {
+            if (!IsValid(v) || !v.IsAlive()) {
                 return false
             }
         }
@@ -382,14 +382,14 @@ export class modifier_lion_6_delay extends BaseModifier_Plus {
             let hCaster = this.GetCasterPlus()
             let hAbility = this.GetAbilityPlus()
 
-            if (!GFuncEntity.IsValid(hParent) || !hParent.IsAlive()) {
-                if (GFuncEntity.IsValid(hCaster)) {
+            if (!IsValid(hParent) || !hParent.IsAlive()) {
+                if (IsValid(hCaster)) {
                     let factor = hParent.IsConsideredHero() && 5 || 1
                     let hmodifier_lion_6 = modifier_lion_6.findIn(hCaster)
-                    // if (GFuncEntity.IsValid(hmodifier_lion_6) && !Spawner.IsEndless()) {
+                    // if (IsValid(hmodifier_lion_6) && !Spawner.IsEndless()) {
                     //     hmodifier_lion_6.SetStackCount(hmodifier_lion_6.GetStackCount() + factor)
                     // }
-                    if (GFuncEntity.IsValid(hAbility)) {
+                    if (IsValid(hAbility)) {
                         let kill_cooldown_reduce = hAbility.GetSpecialValueFor("kill_cooldown_reduce")
                         if (!hAbility.IsCooldownReady()) {
                             let fCooldownTime = hAbility.GetCooldownTimeRemaining()
@@ -442,7 +442,7 @@ export class modifier_lion_6_extra_finger extends BaseModifier_Plus {
     BeDestroy() {
 
         let ability = this.GetAbilityPlus() as ability6_lion_finger_of_death
-        if (GFuncEntity.IsValid(this.GetAbilityPlus()) && ability.fManaCostFactor != null) {
+        if (IsValid(this.GetAbilityPlus()) && ability.fManaCostFactor != null) {
             ability.fManaCostFactor = null
         }
     }

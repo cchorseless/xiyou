@@ -124,7 +124,7 @@ export class modifier_imba_ghost_state extends BaseModifier_Plus {
         }
         return Object.values(decFuncs);
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_RESISTANCE_DECREPIFY_UNIQUE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_RESISTANCE_BONUS)
     CC_GetModifierMagicalResistanceDecrepifyUnique(p_0: ModifierAttackEvent,): number {
         return this.extra_spell_damage_percent;
     }

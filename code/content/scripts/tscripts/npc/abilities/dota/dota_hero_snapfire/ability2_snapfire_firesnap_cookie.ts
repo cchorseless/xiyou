@@ -48,7 +48,7 @@ export class ability2_snapfire_firesnap_cookie extends BaseAbility_Plus {
     }
     CastSpellStart(hTarget: IBaseNpc_Plus) {
         let hCaster = this.GetCasterPlus()
-        if (GFuncEntity.IsValid(hTarget)) {
+        if (IsValid(hTarget)) {
             let iProjectileSpeed = this.GetSpecialValueFor("projectile_speed")
             // 音效
             hCaster.EmitSound(ResHelper.GetSoundReplacement("Hero_Snapfire.FeedCookie.Cast", hCaster))
@@ -67,7 +67,7 @@ export class ability2_snapfire_firesnap_cookie extends BaseAbility_Plus {
     }
     OnProjectileHit(hTarget: IBaseNpc_Plus, vLocation: Vector) {
         let hCaster = this.GetCasterPlus()
-        if (GFuncEntity.IsValid(hTarget)) {
+        if (IsValid(hTarget)) {
             ParticleManager.ReleaseParticleIndex(ResHelper.CreateParticle({
                 resPath: "particles/units/heroes/hero_snapfire/hero_snapfire_cookie_buff.vpcf",
                 resNpc: null,
@@ -83,7 +83,7 @@ export class ability2_snapfire_firesnap_cookie extends BaseAbility_Plus {
                 let radius = hCaster.GetTalentValue("special_bonus_unique_snapfire_custom_3")
                 let tTarget = FindUnitsInRadius(hCaster.GetTeamNumber(), hTarget.GetAbsOrigin(), null, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false)
                 for (let _hTarget of (tTarget)) {
-                    if (GFuncEntity.IsValid(_hTarget) && _hTarget != hTarget) {
+                    if (IsValid(_hTarget) && _hTarget != hTarget) {
                         this.CastSpellStart(_hTarget)
                     }
                 }
@@ -129,7 +129,7 @@ export class modifier_snapfire_2 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -228,7 +228,7 @@ export class modifier_snapfire_2_jump extends BaseModifierMotionBoth_Plus {
         if (IsServer()) {
             if (this.ApplyHorizontalMotionController() && this.ApplyVerticalMotionController()) {
                 // this.corner = Entities.FindByName(null, hParent.Spawner_targetCornerName)
-                // if (!GFuncEntity.IsValid(this.corner)) {
+                // if (!IsValid(this.corner)) {
                 //     this.Destroy()
                 //     return
                 // }
@@ -254,7 +254,7 @@ export class modifier_snapfire_2_jump extends BaseModifierMotionBoth_Plus {
     funcGetJmepHeight(x: number): number {
         let a = math.sqrt(this.jump_height)
         x = (x / this.jump_horizontal_distance) * a * 2 - a
-        return -(x ^ 2) + this.jump_height
+        return -(x * x) + this.jump_height
     }
     UpdateHorizontalMotion(me: IBaseNpc_Plus, dt: number): void {
         if (IsServer()) {
@@ -278,7 +278,7 @@ export class modifier_snapfire_2_jump extends BaseModifierMotionBoth_Plus {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
-        if (!GFuncEntity.IsValid(hCaster)) {
+        if (!IsValid(hCaster)) {
             return
         }
 
@@ -313,7 +313,7 @@ export class modifier_snapfire_2_jump extends BaseModifierMotionBoth_Plus {
         if (hCaster.HasTalent("special_bonus_unique_snapfire_custom_7")) {
             let hThinker = modifier_dummy.applyThinker(hParent.GetAbsOrigin(), hCaster, hAbility, null, hCaster.GetTeamNumber(), false)
             let hAbility3 = ability6_snapfire_mortimer_kisses.findIn(hCaster)
-            if (GFuncEntity.IsValid(hAbility3) && hAbility3.GetLevel() > 0) {
+            if (IsValid(hAbility3) && hAbility3.GetLevel() > 0) {
                 // hAbility3.OnProjectileHit_ExtraData(hThinker, hThinker.GetAbsOrigin(), {})
             }
         }

@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { ResHelper } from "../../../helper/ResHelper";
 import { GameServiceConfig } from "../../../shared/GameServiceConfig";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -471,7 +471,7 @@ export class imba_troll_warlord_whirling_axes_ranged extends BaseAbility_Plus {
                 damage_type: this.GetAbilityDamageType()
             });
             if (GFuncRandom.PRD(ExtraData.on_hit_pct, this)) {
-                caster.PerformAttack(target, true, true, true, true, false, true, true);
+                caster.AttackOnce(target, true, true, true, true, false, true, true);
             }
             target.AddNewModifier(caster, this, "modifier_imba_whirling_axes_ranged", {
                 duration: ExtraData.duration * (1 - target.GetStatusResistance())
@@ -648,7 +648,7 @@ export class imba_troll_warlord_whirling_axes_melee extends BaseAbility_Plus {
                 damage: damage,
                 damage_type: this.GetAbilityDamageType()
             });
-            caster.PerformAttack(enemy, true, true, true, true, false, true, true);
+            caster.AttackOnce(enemy, true, true, true, true, false, true, true);
             enemy.AddNewModifier(caster, this, "modifier_imba_whirling_axes_melee", {
                 duration: blind_duration * (1 - enemy.GetStatusResistance()),
                 blind_stacks: blind_stacks

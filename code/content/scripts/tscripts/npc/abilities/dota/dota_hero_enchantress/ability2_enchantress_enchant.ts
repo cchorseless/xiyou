@@ -65,7 +65,7 @@ export class ability2_enchantress_enchant extends BaseAbility_Plus {
         // if (this.CastFilterResultTarget(hTarget) != UnitFilterResult.UF_SUCCESS) {
         //     return
         // }
-        if (GFuncEntity.IsValid(this._LastTarget)) {
+        if (IsValid(this._LastTarget)) {
             this._LastTarget.RemoveModifierByNameAndCaster("modifier_enchantress_2_buff", hCaster)
         }
         //  单位名字转侍从技
@@ -102,7 +102,7 @@ export class ability2_enchantress_enchant extends BaseAbility_Plus {
     OnUpgrade() {
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
-            if (GFuncEntity.IsValid(this._LastTarget)) {
+            if (IsValid(this._LastTarget)) {
                 modifier_enchantress_2_buff.apply(this._LastTarget, hCaster, this, null)
             } else {
                 // if (type(hCaster.GetBuilding) != "function") {
@@ -182,7 +182,7 @@ export class modifier_enchantress_2_buff extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.COOLDOWN_PERCENTAGE)
     CC_GetModifierPercentageCooldown() {
-        if (GFuncEntity.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard()) {
+        if (IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard()) {
             return this.cd_reduce
         }
         return 0
@@ -201,7 +201,7 @@ export class modifier_enchantress_2_buff extends BaseModifier_Plus {
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
             let hAbility = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(hCaster) || !GFuncEntity.IsValid(hAbility)) {
+            if (!IsValid(hCaster) || !IsValid(hAbility)) {
                 this.Destroy()
                 return
             }

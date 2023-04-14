@@ -114,7 +114,7 @@ export class modifier_tinker_3 extends BaseModifier_Plus {
         if (IsServer()) {
             let hCaster = this.GetParentPlus()
             let hAbility = this.GetAbilityPlus() as ability3_tinker_march_of_the_machines
-            if (!GFuncEntity.IsValid(hCaster) && !GFuncEntity.IsValid(hAbility)) {
+            if (!IsValid(hCaster) && !IsValid(hAbility)) {
                 this.Destroy()
                 return
             }

@@ -79,7 +79,7 @@ export class ability3_shadow_shaman_shackles extends BaseAbility_Plus {
         }
         if (iCount >= totem_count) {
             // for i, tInfo in ipairs(shallowcopy(this.tTotems[sElderType])) do
-            //     if (GFuncEntity.IsValid(tInfo.hHandle)) {
+            //     if (IsValid(tInfo.hHandle)) {
             //         tInfo.hHandle.ForceKill(false)
             //     }
         }
@@ -91,7 +91,7 @@ export class ability3_shadow_shaman_shackles extends BaseAbility_Plus {
             let tInfo = allinfo[i]
             if (tInfo.hHandle == hTotem) {
                 table.remove(this.tTotems[hTotem.GetUnitLabel()], i)
-                if (GFuncEntity.IsValid(hTotem)) {
+                if (IsValid(hTotem)) {
                     hTotem.ForceKill(false)
                 }
                 break

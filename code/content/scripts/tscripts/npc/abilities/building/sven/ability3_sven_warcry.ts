@@ -41,7 +41,7 @@ export class ability3_sven_warcry extends BaseAbility_Plus {
         let tTarget = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), null, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false)
         let unitCount = 0
         for (let unit of (tTarget)) {
-            if (GFuncEntity.IsValid(unit) && unit.IsAlive() && unit != caster && !unit.IsIllusion() && !unit.IsSummoned()) {
+            if (IsValid(unit) && unit.IsAlive() && unit != caster && !unit.IsIllusion() && !unit.IsSummoned()) {
                 modifier_sven_3_buff.apply(unit, caster, this, { duration: duration })
                 unitCount = unitCount + 1
             }
@@ -99,7 +99,7 @@ export class modifier_sven_3 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return

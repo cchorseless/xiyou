@@ -57,7 +57,7 @@ export class ability1_pudge_meat_hook extends BaseAbility_Plus {
 
     AutoSpellSelf() {
         if (IsServer()) {
-            if (!GFuncEntity.IsValid(this)) {
+            if (!IsValid(this)) {
                 this.Destroy()
                 return
             }
@@ -293,7 +293,7 @@ export class ability1_pudge_meat_hook extends BaseAbility_Plus {
                 }
                 for (let i = tHashtable.tVictim.length - 1; i >= 0; i--) {
                     let hVictim = tHashtable.tVictim[i]
-                    if (GFuncEntity.IsValid(hVictim)) {
+                    if (IsValid(hVictim)) {
                         let vFinalHookPos = vLocation
                         modifier_pudge_1_buff.remove(hVictim)
                         let vVictimPosCheck = (hVictim.GetOrigin() - vFinalHookPos) as Vector;
@@ -404,7 +404,7 @@ export class modifier_pudge_1_buff extends BaseModifierMotionHorizontal_Plus {
         if (IsServer()) {
             this.GetParent().RemoveHorizontalMotionController(this)
             let tHashtable = HashTableHelper.GetHashtableByIndex(this.iHashtableIndex)
-            if (GFuncEntity.IsValid(tHashtable.hCaster)) {
+            if (IsValid(tHashtable.hCaster)) {
                 ParticleManager.SetParticleControlEnt(tHashtable.iParticleID, 1, tHashtable.hCaster, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_weapon_chain_rt", tHashtable.hCaster.GetAbsOrigin() + tHashtable.vHookOffset, true)
             }
             this.GetParent().StopSound("Hero_Pudge.AttackHookRetract")

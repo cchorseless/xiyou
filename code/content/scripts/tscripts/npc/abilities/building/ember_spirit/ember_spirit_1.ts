@@ -88,7 +88,7 @@ export class modifier_ember_spirit_1 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(ability)) {
+            if (!IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -196,7 +196,7 @@ export class modifier_ember_spirit_1_debuff extends BaseModifier_Plus {
     BeDestroy() {
 
         if (IsServer()) {
-            if (GFuncEntity.IsValid(this.modifier_truesight)) {
+            if (IsValid(this.modifier_truesight)) {
                 this.modifier_truesight.Destroy()
             }
         }
@@ -206,7 +206,7 @@ export class modifier_ember_spirit_1_debuff extends BaseModifier_Plus {
             let hCaster = this.GetCasterPlus()
             let hParent = this.GetParentPlus()
             let hAbility = this.GetAbilityPlus()
-            if (!GFuncEntity.IsValid(hCaster) || !hCaster.IsAlive()) {
+            if (!IsValid(hCaster) || !hCaster.IsAlive()) {
                 this.Destroy()
                 return
             }
@@ -216,7 +216,7 @@ export class modifier_ember_spirit_1_debuff extends BaseModifier_Plus {
                 attacker: hCaster,
                 damage: this.damage * this.tick_interval + this.agility * hCaster.GetAgility(),
                 damage_type: this.damage_type,
-                eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_DOT,
+                extra_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_DOT,
             }
             BattleHelper.GoApplyDamage(damage_table)
         }

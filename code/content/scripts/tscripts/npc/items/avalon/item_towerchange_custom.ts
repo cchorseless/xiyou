@@ -1,5 +1,4 @@
 
-import { BattleHelper } from "../../../helper/BattleHelper";
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { registerAbility } from "../../entityPlus/Base_Plus";
 
@@ -40,7 +39,7 @@ export class item_towerchange_custom extends BaseItem_Plus {
     OnSpellStart() {
         // this.GetCasterPlus().RemoveItem(this);
     }
-    damageInfo: BattleHelper.DamageOptions = {
+    damageInfo: IBattleDamageOptions = {
         attacker: null,
         damage: 1,
         damage_type: DAMAGE_TYPES.DAMAGE_TYPE_PHYSICAL,
@@ -63,7 +62,7 @@ export class item_towerchange_custom extends BaseItem_Plus {
         this.damageInfo.victim = this.GetCursorTarget()
         this.damageInfo.attacker = this.GetCasterPlus()
         this.damageInfo.ability = this
-        BattleHelper.GoApplyDamage(this.damageInfo)
+        ApplyDamage(this.damageInfo)
     }
     IsStackable() {
         return true
