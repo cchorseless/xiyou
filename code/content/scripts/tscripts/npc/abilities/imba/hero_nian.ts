@@ -127,12 +127,12 @@ export class modifier_imba_nian_frenzy_swipes_suppression extends BaseModifier_P
     }
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.TOTALDAMAGEOUTGOING_PERCENTAGE,
             2: GPropertyConfig.EMODIFIER_PROPERTY.SUPPRESS_CLEAVE,
             3: GPropertyConfig.EMODIFIER_PROPERTY.TOTALDAMAGEOUTGOING_PERCENTAGE
         });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOTALDAMAGEOUTGOING_PERCENTAGE)
     CC_GetModifierDamageOutgoing_Percentage(p_0: ModifierAttackEvent,): number {
         return (this.attack_damage_multiplier - 1) * 100;
     }

@@ -172,7 +172,7 @@ export class modifier_imba_malfurion_strength_of_the_wild extends BaseModifier_P
         }
         return Object.values(funcs);
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOTALDAMAGEOUTGOING_PERCENTAGE)
     CC_GetModifierDamageOutgoing_Percentage(keys: ModifierAttackEvent): number {
         if (keys.target && keys.target.IsRealHero && !keys.target.IsRealUnit() && !this.GetParentPlus().PassivesDisabled()) {
             return this.GetSpecialValueFor("bonus_damage_percentage");

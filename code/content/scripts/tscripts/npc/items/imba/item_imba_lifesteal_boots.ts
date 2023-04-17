@@ -82,7 +82,8 @@ export class modifier_imba_lifesteal_boots extends BaseModifier_Plus {
             return this.GetItemPlus().GetSpecialValueFor("armor");
         }
     }
-    GetModifierLifesteal() {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.LIFESTEAL_PERCENTAGE)
+    CC_LIFESTEAL_AMPLIFY_PERCENTAGE() {
         if (this.GetItemPlus() && this.GetParentPlus().FindAllModifiersByName(this.GetName())[0] == this) {
             return this.GetItemPlus().GetSpecialValueFor("lifesteal_pct");
         }

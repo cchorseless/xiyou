@@ -115,6 +115,7 @@ export class modifier_imba_sogat_cuirass extends BaseModifier_Plus {
             }
         }
     }
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_REDUCE_PERCENTAGE_UNIQUE)
     GetCustomIncomingDamageReductionUnique() {
         if (this.GetItemPlus()) {
             return this.GetItemPlus().GetSpecialValueFor("damage_reduction_pct_passive");
@@ -334,6 +335,7 @@ export class modifier_item_imba_sogat_cuirass_buff extends BaseModifier_Plus {
     CC_OnTooltip(): number {
         return this.damage_reduction_pct;
     }
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_REDUCE_PERCENTAGE_UNIQUE)
     GetCustomIncomingDamageReductionUnique() {
         return this.damage_reduction_pct;
     }

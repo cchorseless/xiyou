@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { AoiHelper } from "../../../helper/AoiHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -16,8 +16,6 @@ export class imba_dragon_knight_breathe_fire extends BaseAbility_Plus {
         if (this.GetCursorPosition() == this.GetCasterPlus().GetAbsOrigin()) {
             this.GetCasterPlus().SetCursorPosition(this.GetCursorPosition() + this.GetCasterPlus().GetForwardVector() as Vector);
         }
-        let ability = this;
-        let target = this.GetCursorTarget();
         let target_point = this.GetCursorPosition();
         let speed = this.GetSpecialValueFor("speed");
         EmitSoundOn("Hero_DragonKnight.BreathFire", this.GetCasterPlus());
@@ -90,11 +88,11 @@ export class modifier_imba_breathe_fire_debuff extends BaseModifier_Plus {
     }
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.BASEDAMAGEOUTGOING_PERCENTAGE,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_ATTACK_DAMAGE_PERCENTAGE,
             2: GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BONUS
         });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASEDAMAGEOUTGOING_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_ATTACK_DAMAGE_PERCENTAGE)
     CC_GetModifierBaseDamageOutgoing_Percentage(p_0: ModifierAttackEvent,): number {
         return this.GetSpecialValueFor("reduction");
     }
@@ -708,7 +706,7 @@ export class modifier_imba_elder_dragon_form_debuff extends BaseModifier_Plus {
         }
         return Object.values(funcs);
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASEDAMAGEOUTGOING_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_ATTACK_DAMAGE_PERCENTAGE)
     CC_GetModifierBaseDamageOutgoing_Percentage(p_0: ModifierAttackEvent,): number {
         return this.GetCasterPlus().GetTalentValue("special_bonus_imba_dragon_knight_6", "reduction");
     }

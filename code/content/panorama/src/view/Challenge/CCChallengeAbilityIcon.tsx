@@ -29,6 +29,9 @@ export class CCChallengeAbilityIcon extends CCPanel<ICCChallengeAbilityIcon> {
         else if (this.props.cointype == GEEnum.EMoneyType.Wood) {
             costcount = AbilityHelper.GetLevelWoodCost(abilityindex)
         }
+        else if (this.props.cointype == GEEnum.EMoneyType.SoulCrystal) {
+            costcount = AbilityHelper.GetLevelSoulCrystal(abilityindex)
+        }
         return (
             <Panel id="CC_ChallengeAbilityIcon" ref={this.__root__}      {...this.initRootAttrs()}>
                 <CCAbilityIcon_Custom onclick={() => this.UpdateSelf()} abilityname={abilityname} contextEntityIndex={abilityindex} horizontalAlign={"center"}>

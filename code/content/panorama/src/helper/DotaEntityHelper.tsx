@@ -979,6 +979,10 @@ export module AbilityHelper {
         let sWoodCost = GetAbilityData(iEntityIndex, "GetWoodCost", iLevel)
         return GToNumber(sWoodCost);
     };
+    export function GetLevelSoulCrystal(iEntityIndex: AbilityEntityIndex, iLevel = -1) {
+        let sSoulCrystal = GetAbilityData(iEntityIndex, "GetSoulCrystal", iLevel)
+        return GToNumber(sSoulCrystal);
+    };
 
 
     export function GetAbilityIndex(iEntityIndex: EntityIndex, iAbilityEntIndex: AbilityEntityIndex) {
@@ -998,6 +1002,8 @@ export module AbilityHelper {
 
 
 export module UnitHelper {
+
+
 
     export function GetCursorUnit(iTeam: number = -1): EntityIndex {
         let vPosCursor = GameUI.GetCursorPosition();
@@ -1027,7 +1033,12 @@ export module UnitHelper {
         }
         return -1;
     };
-
+    export function IsCourier(unitEntIndex: EntityIndex) {
+        return HasBuff(unitEntIndex, "modifier_courier")
+    }
+    export function IsFakerCourier(unitEntIndex: EntityIndex) {
+        return HasBuff(unitEntIndex, "modifier_faker_courier")
+    }
     export function HasBuff(unitEntIndex: EntityIndex, buffName: string) {
         for (let index = 0; index < Entities.GetNumBuffs(unitEntIndex); index++) {
             let buff = Entities.GetBuff(unitEntIndex, index);

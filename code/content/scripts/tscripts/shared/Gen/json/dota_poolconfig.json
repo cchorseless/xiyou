@@ -3,869 +3,103 @@
     "poolid": "1001",
     "PoolInfo": [
       {
-        "ItemConfigId": "building_hero_abaddon",
-        "ItemName": "亚巴顿",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_abyssal_underlord",
-        "ItemName": "孽主",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_alchemist",
-        "ItemName": "炼金",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_ancient_apparition",
-        "ItemName": "远古冰魄",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_antimage",
-        "ItemName": "敌法师",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_arc_warden",
-        "ItemName": "天穹守望者",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
         "ItemConfigId": "building_hero_axe",
-        "ItemName": "斧王",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_bane",
-        "ItemName": "祸乱之源",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_batrider",
-        "ItemName": "蝙蝠骑士",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_beastmaster",
-        "ItemName": "兽王",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_bloodseeker",
-        "ItemName": "血魔",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_bounty_hunter",
-        "ItemName": "赏金猎人",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_brewmaster",
-        "ItemName": "熊猫酒仙",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_bristleback",
-        "ItemName": "刚被兽",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_broodmother",
-        "ItemName": "蜘蛛",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_centaur",
-        "ItemName": "半人马战行者",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_chaos_knight",
-        "ItemName": "混沌骑士",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_chen",
-        "ItemName": "陈",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_clinkz",
-        "ItemName": "克林克兹",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_crystal_maiden",
-        "ItemName": "水晶室女",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_dark_seer",
-        "ItemName": "黑暗贤者",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_dark_willow",
-        "ItemName": "邪影芳灵",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_dawnbreaker",
-        "ItemName": "破晓辰星",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_dazzle",
-        "ItemName": "戴泽",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_death_prophet",
-        "ItemName": "死亡先知",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_disruptor",
-        "ItemName": "干扰者",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_doom_bringer",
-        "ItemName": "末日",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_dragon_knight",
-        "ItemName": "龙骑士",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_drow_ranger",
-        "ItemName": "卓尔游侠",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_earth_spirit",
-        "ItemName": "大地之灵",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_earthshaker",
-        "ItemName": "撼地者",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_elder_titan",
-        "ItemName": "上古巨神",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_ember_spirit",
-        "ItemName": "灰烬之灵",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_enchantress",
-        "ItemName": "魅惑魔女",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_enigma",
-        "ItemName": "谜团",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_faceless_void",
-        "ItemName": "JB脸",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_furion",
-        "ItemName": "先知",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_grimstroke",
-        "ItemName": "天涯墨客",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_gyrocopter",
-        "ItemName": "矮人直升机",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_hoodwink",
-        "ItemName": "小松鼠",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_huskar",
-        "ItemName": "神灵武士",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_invoker",
-        "ItemName": "祈求着",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": false
-      },
-      {
-        "ItemConfigId": "building_hero_jakiro",
-        "ItemName": "双头龙",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_juggernaut",
-        "ItemName": "主宰",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_keeper_of_the_light",
-        "ItemName": "光法",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_kunkka",
-        "ItemName": "船长",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_legion_commander",
-        "ItemName": "军团",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_leshrac",
-        "ItemName": "拉希克",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_lich",
-        "ItemName": "巫妖",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_life_stealer",
-        "ItemName": "小狗",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_lina",
-        "ItemName": "莉娜",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_lion",
-        "ItemName": "莱恩",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_lone_druid",
-        "ItemName": "德鲁伊",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_luna",
-        "ItemName": "露娜",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_lycan",
-        "ItemName": "狼人",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_magnataur",
-        "ItemName": "马格纳斯",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_marci",
-        "ItemName": "玛西",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_mars",
-        "ItemName": "马尔斯",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_medusa",
-        "ItemName": "美杜莎",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_meepo",
-        "ItemName": "米波",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_mirana",
-        "ItemName": "米拉娜",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_monkey_king",
-        "ItemName": "大圣",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_morphling",
-        "ItemName": "水人",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_naga_siren",
-        "ItemName": "娜迦海妖",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_necrolyte",
-        "ItemName": "瘟疫法师",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_nevermore",
-        "ItemName": "影魔",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_night_stalker",
-        "ItemName": "暗夜魔王",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_nyx_assassin",
-        "ItemName": "小强",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_obsidian_destroyer",
-        "ItemName": "黑鸟",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_ogre_magi",
-        "ItemName": "食人魔魔法师",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_omniknight",
-        "ItemName": "全能骑士",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_oracle",
-        "ItemName": "神谕者",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_pangolier",
-        "ItemName": "石鳞剑士",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_phantom_assassin",
-        "ItemName": "幻影刺客",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_phantom_lancer",
-        "ItemName": "幻影长矛手",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_phoenix",
-        "ItemName": "凤凰",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_primal_beast",
-        "ItemName": "獸",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_puck",
-        "ItemName": "帕克",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_pudge",
-        "ItemName": "屠夫",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_pugna",
-        "ItemName": "帕格纳",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_queenofpain",
-        "ItemName": "痛苦女王",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_rattletrap",
-        "ItemName": "发条地精",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_razor",
-        "ItemName": "电棍",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_riki",
-        "ItemName": "力丸",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_rubick",
-        "ItemName": "拉比克",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_sand_king",
-        "ItemName": "沙王",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_shadow_demon",
-        "ItemName": "暗影恶魔",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_shadow_shaman",
-        "ItemName": "小Y",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_shredder",
-        "ItemName": "伐木机",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_silencer",
-        "ItemName": "沉默术士",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_skeleton_king",
-        "ItemName": "骷髅王",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_skywrath_mage",
-        "ItemName": "天怒法师",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_slardar",
-        "ItemName": "斯拉达",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_slark",
-        "ItemName": "斯拉克",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_snapfire",
-        "ItemName": "电炎绝手",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_sniper",
-        "ItemName": "狙击手",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_spectre",
-        "ItemName": "幽鬼",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_spirit_breaker",
-        "ItemName": "裂魂人",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_storm_spirit",
-        "ItemName": "风暴之灵",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_sven",
-        "ItemName": "斯文",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_target_dummy",
-        "ItemName": "傀儡目标",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": false
-      },
-      {
-        "ItemConfigId": "building_hero_techies",
-        "ItemName": "地精工程师",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_templar_assassin",
-        "ItemName": "圣堂刺客",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_terrorblade",
-        "ItemName": "灵魂守卫",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_tidehunter",
-        "ItemName": "潮汐猎人",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_tinker",
-        "ItemName": "修补匠",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_tiny",
-        "ItemName": "小小",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_treant",
-        "ItemName": "大树",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_troll_warlord",
-        "ItemName": "巨魔战将",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_tusk",
-        "ItemName": "海民",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_undying",
-        "ItemName": "不朽尸王",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_ursa",
-        "ItemName": "熊战士",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_vengefulspirit",
-        "ItemName": "复仇之魂",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_venomancer",
-        "ItemName": "剧毒术士",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_viper",
-        "ItemName": "冥界亚龙",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_visage",
-        "ItemName": "维萨吉",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_void_spirit",
-        "ItemName": "虚无之灵",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_warlock",
-        "ItemName": "术士",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_weaver",
-        "ItemName": "编织者",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_windrunner",
-        "ItemName": "风行者",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_winter_wyvern",
-        "ItemName": "冰霜巨龙",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_wisp",
-        "ItemName": "艾欧",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": false
       },
       {
         "ItemConfigId": "building_hero_witch_doctor",
-        "ItemName": "巫医",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_zuus",
-        "ItemName": "宙斯",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
@@ -876,869 +110,151 @@
     "poolid": "1002",
     "PoolInfo": [
       {
-        "ItemConfigId": "building_hero_abaddon",
-        "ItemName": "亚巴顿",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_abyssal_underlord",
-        "ItemName": "孽主",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_alchemist",
-        "ItemName": "炼金",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_ancient_apparition",
-        "ItemName": "远古冰魄",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
         "ItemConfigId": "building_hero_antimage",
-        "ItemName": "敌法师",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_arc_warden",
-        "ItemName": "天穹守望者",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_axe",
-        "ItemName": "斧王",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_bane",
-        "ItemName": "祸乱之源",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_batrider",
-        "ItemName": "蝙蝠骑士",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_beastmaster",
-        "ItemName": "兽王",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_bloodseeker",
-        "ItemName": "血魔",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_bounty_hunter",
-        "ItemName": "赏金猎人",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_brewmaster",
-        "ItemName": "熊猫酒仙",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_bristleback",
-        "ItemName": "刚被兽",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_broodmother",
-        "ItemName": "蜘蛛",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_centaur",
-        "ItemName": "半人马战行者",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_chaos_knight",
-        "ItemName": "混沌骑士",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_chen",
-        "ItemName": "陈",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_clinkz",
-        "ItemName": "克林克兹",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_crystal_maiden",
-        "ItemName": "水晶室女",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_dark_seer",
-        "ItemName": "黑暗贤者",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_dark_willow",
-        "ItemName": "邪影芳灵",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_dawnbreaker",
-        "ItemName": "破晓辰星",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_dazzle",
-        "ItemName": "戴泽",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_death_prophet",
-        "ItemName": "死亡先知",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_disruptor",
-        "ItemName": "干扰者",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_doom_bringer",
-        "ItemName": "末日",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_dragon_knight",
-        "ItemName": "龙骑士",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_drow_ranger",
-        "ItemName": "卓尔游侠",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_earth_spirit",
-        "ItemName": "大地之灵",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_earthshaker",
-        "ItemName": "撼地者",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_elder_titan",
-        "ItemName": "上古巨神",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_ember_spirit",
-        "ItemName": "灰烬之灵",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_enchantress",
-        "ItemName": "魅惑魔女",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_enigma",
-        "ItemName": "谜团",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_faceless_void",
-        "ItemName": "JB脸",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_furion",
-        "ItemName": "先知",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_grimstroke",
-        "ItemName": "天涯墨客",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_gyrocopter",
-        "ItemName": "矮人直升机",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_hoodwink",
-        "ItemName": "小松鼠",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_huskar",
-        "ItemName": "神灵武士",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_invoker",
-        "ItemName": "祈求着",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": false
-      },
-      {
-        "ItemConfigId": "building_hero_jakiro",
-        "ItemName": "双头龙",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_juggernaut",
-        "ItemName": "主宰",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_keeper_of_the_light",
-        "ItemName": "光法",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_kunkka",
-        "ItemName": "船长",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_legion_commander",
-        "ItemName": "军团",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_leshrac",
-        "ItemName": "拉希克",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_lich",
-        "ItemName": "巫妖",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_life_stealer",
-        "ItemName": "小狗",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_lina",
-        "ItemName": "莉娜",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_lion",
-        "ItemName": "莱恩",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_lone_druid",
-        "ItemName": "德鲁伊",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_luna",
-        "ItemName": "露娜",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_lycan",
-        "ItemName": "狼人",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_magnataur",
-        "ItemName": "马格纳斯",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_marci",
-        "ItemName": "玛西",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_mars",
-        "ItemName": "马尔斯",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_medusa",
-        "ItemName": "美杜莎",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_meepo",
-        "ItemName": "米波",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_mirana",
-        "ItemName": "米拉娜",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_monkey_king",
-        "ItemName": "大圣",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_morphling",
-        "ItemName": "水人",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_naga_siren",
-        "ItemName": "娜迦海妖",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_necrolyte",
-        "ItemName": "瘟疫法师",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_nevermore",
-        "ItemName": "影魔",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_night_stalker",
-        "ItemName": "暗夜魔王",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_nyx_assassin",
-        "ItemName": "小强",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_obsidian_destroyer",
-        "ItemName": "黑鸟",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_ogre_magi",
-        "ItemName": "食人魔魔法师",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_omniknight",
-        "ItemName": "全能骑士",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_oracle",
-        "ItemName": "神谕者",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_pangolier",
-        "ItemName": "石鳞剑士",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_phantom_assassin",
-        "ItemName": "幻影刺客",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_phantom_lancer",
-        "ItemName": "幻影长矛手",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_phoenix",
-        "ItemName": "凤凰",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_primal_beast",
-        "ItemName": "獸",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_puck",
-        "ItemName": "帕克",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_pudge",
-        "ItemName": "屠夫",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_pugna",
-        "ItemName": "帕格纳",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_queenofpain",
-        "ItemName": "痛苦女王",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_rattletrap",
-        "ItemName": "发条地精",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_razor",
-        "ItemName": "电棍",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_riki",
-        "ItemName": "力丸",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_rubick",
-        "ItemName": "拉比克",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_sand_king",
-        "ItemName": "沙王",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_shadow_demon",
-        "ItemName": "暗影恶魔",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_shadow_shaman",
-        "ItemName": "小Y",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_shredder",
-        "ItemName": "伐木机",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_silencer",
-        "ItemName": "沉默术士",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_skeleton_king",
-        "ItemName": "骷髅王",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_skywrath_mage",
-        "ItemName": "天怒法师",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_slardar",
-        "ItemName": "斯拉达",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_slark",
-        "ItemName": "斯拉克",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_snapfire",
-        "ItemName": "电炎绝手",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_sniper",
-        "ItemName": "狙击手",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_spectre",
-        "ItemName": "幽鬼",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_spirit_breaker",
-        "ItemName": "裂魂人",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_storm_spirit",
-        "ItemName": "风暴之灵",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_sven",
-        "ItemName": "斯文",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_target_dummy",
-        "ItemName": "傀儡目标",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": false
-      },
-      {
-        "ItemConfigId": "building_hero_techies",
-        "ItemName": "地精工程师",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_templar_assassin",
-        "ItemName": "圣堂刺客",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_terrorblade",
-        "ItemName": "灵魂守卫",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_tidehunter",
-        "ItemName": "潮汐猎人",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_tinker",
-        "ItemName": "修补匠",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_tiny",
-        "ItemName": "小小",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_treant",
-        "ItemName": "大树",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_troll_warlord",
-        "ItemName": "巨魔战将",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_tusk",
-        "ItemName": "海民",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_undying",
-        "ItemName": "不朽尸王",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_ursa",
-        "ItemName": "熊战士",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_vengefulspirit",
-        "ItemName": "复仇之魂",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_venomancer",
-        "ItemName": "剧毒术士",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_viper",
-        "ItemName": "冥界亚龙",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_visage",
-        "ItemName": "维萨吉",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_void_spirit",
-        "ItemName": "虚无之灵",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_warlock",
-        "ItemName": "术士",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_weaver",
-        "ItemName": "编织者",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_windrunner",
-        "ItemName": "风行者",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_winter_wyvern",
-        "ItemName": "冰霜巨龙",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_wisp",
-        "ItemName": "艾欧",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": false
-      },
-      {
-        "ItemConfigId": "building_hero_witch_doctor",
-        "ItemName": "巫医",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_zuus",
-        "ItemName": "宙斯",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
@@ -1750,868 +266,359 @@
     "PoolInfo": [
       {
         "ItemConfigId": "building_hero_abaddon",
-        "ItemName": "亚巴顿",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_abyssal_underlord",
-        "ItemName": "孽主",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_alchemist",
-        "ItemName": "炼金",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_ancient_apparition",
-        "ItemName": "远古冰魄",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_antimage",
-        "ItemName": "敌法师",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_arc_warden",
-        "ItemName": "天穹守望者",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_axe",
-        "ItemName": "斧王",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_bane",
-        "ItemName": "祸乱之源",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_batrider",
-        "ItemName": "蝙蝠骑士",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_beastmaster",
-        "ItemName": "兽王",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_bloodseeker",
-        "ItemName": "血魔",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_bounty_hunter",
-        "ItemName": "赏金猎人",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_brewmaster",
-        "ItemName": "熊猫酒仙",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_bristleback",
-        "ItemName": "刚被兽",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_broodmother",
-        "ItemName": "蜘蛛",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_centaur",
-        "ItemName": "半人马战行者",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_chaos_knight",
-        "ItemName": "混沌骑士",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_chen",
-        "ItemName": "陈",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_clinkz",
-        "ItemName": "克林克兹",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_crystal_maiden",
-        "ItemName": "水晶室女",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_dark_seer",
-        "ItemName": "黑暗贤者",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_dark_willow",
-        "ItemName": "邪影芳灵",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_dawnbreaker",
-        "ItemName": "破晓辰星",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_dazzle",
-        "ItemName": "戴泽",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_death_prophet",
-        "ItemName": "死亡先知",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_disruptor",
-        "ItemName": "干扰者",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_doom_bringer",
-        "ItemName": "末日",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_dragon_knight",
-        "ItemName": "龙骑士",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_drow_ranger",
-        "ItemName": "卓尔游侠",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_earth_spirit",
-        "ItemName": "大地之灵",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_earthshaker",
-        "ItemName": "撼地者",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_elder_titan",
-        "ItemName": "上古巨神",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_ember_spirit",
-        "ItemName": "灰烬之灵",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_enchantress",
-        "ItemName": "魅惑魔女",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_enigma",
-        "ItemName": "谜团",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_faceless_void",
-        "ItemName": "JB脸",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_furion",
-        "ItemName": "先知",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_grimstroke",
-        "ItemName": "天涯墨客",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_gyrocopter",
-        "ItemName": "矮人直升机",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_hoodwink",
-        "ItemName": "小松鼠",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_huskar",
-        "ItemName": "神灵武士",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_invoker",
-        "ItemName": "祈求着",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": false
-      },
-      {
-        "ItemConfigId": "building_hero_jakiro",
-        "ItemName": "双头龙",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_juggernaut",
-        "ItemName": "主宰",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_keeper_of_the_light",
-        "ItemName": "光法",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_kunkka",
-        "ItemName": "船长",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_legion_commander",
-        "ItemName": "军团",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_leshrac",
-        "ItemName": "拉希克",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_lich",
-        "ItemName": "巫妖",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_life_stealer",
-        "ItemName": "小狗",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_lina",
-        "ItemName": "莉娜",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_lion",
-        "ItemName": "莱恩",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_lone_druid",
-        "ItemName": "德鲁伊",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_luna",
-        "ItemName": "露娜",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_lycan",
-        "ItemName": "狼人",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_magnataur",
-        "ItemName": "马格纳斯",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_marci",
-        "ItemName": "玛西",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_mars",
-        "ItemName": "马尔斯",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_medusa",
-        "ItemName": "美杜莎",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_meepo",
-        "ItemName": "米波",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_mirana",
-        "ItemName": "米拉娜",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_monkey_king",
-        "ItemName": "大圣",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_morphling",
-        "ItemName": "水人",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_naga_siren",
-        "ItemName": "娜迦海妖",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_necrolyte",
-        "ItemName": "瘟疫法师",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_nevermore",
-        "ItemName": "影魔",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_night_stalker",
-        "ItemName": "暗夜魔王",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_nyx_assassin",
-        "ItemName": "小强",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_obsidian_destroyer",
-        "ItemName": "黑鸟",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_ogre_magi",
-        "ItemName": "食人魔魔法师",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_omniknight",
-        "ItemName": "全能骑士",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_oracle",
-        "ItemName": "神谕者",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_pangolier",
-        "ItemName": "石鳞剑士",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_phantom_assassin",
-        "ItemName": "幻影刺客",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_phantom_lancer",
-        "ItemName": "幻影长矛手",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_phoenix",
-        "ItemName": "凤凰",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_primal_beast",
-        "ItemName": "獸",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_puck",
-        "ItemName": "帕克",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_pudge",
-        "ItemName": "屠夫",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_pugna",
-        "ItemName": "帕格纳",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_queenofpain",
-        "ItemName": "痛苦女王",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_rattletrap",
-        "ItemName": "发条地精",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_razor",
-        "ItemName": "电棍",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_riki",
-        "ItemName": "力丸",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_rubick",
-        "ItemName": "拉比克",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_sand_king",
-        "ItemName": "沙王",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_shadow_demon",
-        "ItemName": "暗影恶魔",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_shadow_shaman",
-        "ItemName": "小Y",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_shredder",
-        "ItemName": "伐木机",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_silencer",
-        "ItemName": "沉默术士",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_skeleton_king",
-        "ItemName": "骷髅王",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_skywrath_mage",
-        "ItemName": "天怒法师",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_slardar",
-        "ItemName": "斯拉达",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_slark",
-        "ItemName": "斯拉克",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_snapfire",
-        "ItemName": "电炎绝手",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_sniper",
-        "ItemName": "狙击手",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_spectre",
-        "ItemName": "幽鬼",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_spirit_breaker",
-        "ItemName": "裂魂人",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_storm_spirit",
-        "ItemName": "风暴之灵",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_sven",
-        "ItemName": "斯文",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_target_dummy",
-        "ItemName": "傀儡目标",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": false
-      },
-      {
-        "ItemConfigId": "building_hero_techies",
-        "ItemName": "地精工程师",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_templar_assassin",
-        "ItemName": "圣堂刺客",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_terrorblade",
-        "ItemName": "灵魂守卫",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_tidehunter",
-        "ItemName": "潮汐猎人",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_tinker",
-        "ItemName": "修补匠",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_tiny",
-        "ItemName": "小小",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_treant",
-        "ItemName": "大树",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_troll_warlord",
-        "ItemName": "巨魔战将",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_tusk",
-        "ItemName": "海民",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_undying",
-        "ItemName": "不朽尸王",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_ursa",
-        "ItemName": "熊战士",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_vengefulspirit",
-        "ItemName": "复仇之魂",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      }
+    ]
+  },
+  {
+    "poolid": "1004",
+    "PoolInfo": [
+      {
+        "ItemConfigId": "building_hero_abyssal_underlord",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
-        "ItemConfigId": "building_hero_venomancer",
-        "ItemName": "剧毒术士",
+        "ItemConfigId": "building_hero_arc_warden",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
-        "ItemConfigId": "building_hero_viper",
-        "ItemName": "冥界亚龙",
+        "ItemConfigId": "building_hero_dark_seer",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
-        "ItemConfigId": "building_hero_visage",
-        "ItemName": "维萨吉",
+        "ItemConfigId": "building_hero_disruptor",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
-        "ItemConfigId": "building_hero_void_spirit",
-        "ItemName": "虚无之灵",
+        "ItemConfigId": "building_hero_enigma",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "building_hero_gyrocopter",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "building_hero_jakiro",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "building_hero_leshrac",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "building_hero_lycan",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "building_hero_night_stalker",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "building_hero_obsidian_destroyer",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "building_hero_phantom_assassin",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "building_hero_phantom_lancer",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "building_hero_queenofpain",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "building_hero_skeleton_king",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "building_hero_sniper",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "building_hero_sven",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "building_hero_techies",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "building_hero_tidehunter",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "building_hero_troll_warlord",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_warlock",
-        "ItemName": "术士",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_weaver",
-        "ItemName": "编织者",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_windrunner",
-        "ItemName": "风行者",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_winter_wyvern",
-        "ItemName": "冰霜巨龙",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "building_hero_wisp",
-        "ItemName": "艾欧",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": false
-      },
-      {
-        "ItemConfigId": "building_hero_witch_doctor",
-        "ItemName": "巫医",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "building_hero_zuus",
-        "ItemName": "宙斯",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true

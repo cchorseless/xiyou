@@ -18,7 +18,7 @@ export class modifier_sect_black_art_base_a extends modifier_combination_effect 
 
     }
 
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_LIFESTEAL_AMPLIFY_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_LIFESTEAL_PERCENTAGE)
     CC_SPELL_LIFESTEAL_PERCENTAGE(): number {
         return this.spell_lifesteal;
     }

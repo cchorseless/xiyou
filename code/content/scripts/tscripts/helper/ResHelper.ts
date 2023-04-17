@@ -7,11 +7,13 @@ export module ResHelper {
         FLAG_WHILE_DEAD = 2,
         FLAG_GLOBAL = 4,
     }
-    export enum EParticleCom {
+    export enum EParticleName {
         atk_lifesteal = "particles/generic_gameplay/generic_lifesteal.vpcf",
         spell_lifesteal = "particles/items3_fx/octarine_core_lifesteal.vpcf",
     }
-
+    export enum EProjectileName {
+        lifesteal = "particles/item/lifesteal_mask/lifesteal_particle.vpcf",
+    }
 
 
     export function LoadUnitRes(unit: IBaseNpc_Plus): void {

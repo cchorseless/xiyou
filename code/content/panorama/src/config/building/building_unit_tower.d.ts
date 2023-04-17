@@ -205,8 +205,6 @@ declare namespace building_unit_tower {
 "SmallIconRes" :string ,
 "Rarity" :string ,
 "Population" :string ,
-"StatusEnergy" :string ,
-"AttackEnergy" :string ,
 "IdleExpression" :string ,
 "Ability1" :string ,
 "AttackSpeedActivityModifiers" :OBJ_3_1 ,

@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { ResHelper } from "../../../helper/ResHelper";
 import { GameServiceConfig } from "../../../shared/GameServiceConfig";
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
@@ -23,7 +24,7 @@ export class item_imba_abyssal_blade extends BaseItem_Plus {
         EmitSoundOn(sound_cast, target);
         if (target.GetTeamNumber() != caster.GetTeamNumber()) {
             if (target.TriggerSpellAbsorb(this)) {
-                return undefined;
+                return
             }
         }
         if (this.GetCasterPlus().HasModifier("modifier_imba_slark_pounce")) {
@@ -54,6 +55,10 @@ export class item_imba_abyssal_blade extends BaseItem_Plus {
             });
         }
     }
+    AutoSpellSelf() {
+        return AI_ability.TARGET_if_enemy(this, null, null, FindOrder.FIND_FARTHEST);
+    }
+
 }
 @registerModifier()
 export class modifier_imba_abyssal_blade extends BaseModifier_Plus {
@@ -105,6 +110,8 @@ export class modifier_imba_abyssal_blade extends BaseModifier_Plus {
             return this.GetSpecialValueFor("bonus_hp_regen");
         }
     }
+
+
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_CONSTANT_BLOCK)
     CC_GetModifierPhysical_ConstantBlock(p_0: ModifierAttackEvent,): number {
         if (this.GetAbilityPlus() && GFuncRandom.PRD(this.GetSpecialValueFor("block_chance"), this)) {

@@ -486,10 +486,13 @@ export class modifier_item_imba_triumvirate_v2 extends BaseModifier_Plus {
     CC_GetModifierSpellAmplify_PercentageUnique(): number {
         return this.spell_amp;
     }
-    GetModifierLifestealAmplify() {
+
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.LIFESTEAL_AMPLIFY_PERCENTAGE)
+    CC_LIFESTEAL_AMPLIFY_PERCENTAGE() {
         return this.lifesteal_amp;
     }
-    GetModifierSpellLifestealAmplify() {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_LIFESTEAL_AMPLIFY_PERCENTAGE)
+    CC_SPELL_LIFESTEAL_AMPLIFY_PERCENTAGE() {
         return this.spell_lifesteal_amp;
     }
 }

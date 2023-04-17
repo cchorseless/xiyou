@@ -2,6 +2,7 @@ import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
+import { courier_upgrade_tech } from "./courier_upgrade_chess";
 
 @registerAbility()
 export class courier_auto_gold extends BaseAbility_Plus {
@@ -37,7 +38,8 @@ export class courier_auto_gold extends BaseAbility_Plus {
     }
 
     GetMaxGold(isoverride = true) {
-        let iRound = GRoundSystem.GetInstance().GetCurrentRoundIndex();
+        // let iRound = GRoundSystem.GetInstance().GetCurrentRoundIndex();
+        let iRound = this.GetTechLevel()
         let basic_gold = this.GetSpecialValueFor("gold_max");
         if (!isoverride) {
             basic_gold = this.GetLevelSpecialValueNoOverride("gold_max", this.GetLevel());
@@ -47,13 +49,22 @@ export class courier_auto_gold extends BaseAbility_Plus {
     }
 
     GetMaxWood(isoverride = true) {
-        let iRound = GRoundSystem.GetInstance().GetCurrentRoundIndex();
+        // let iRound = GRoundSystem.GetInstance().GetCurrentRoundIndex();
+        let iRound = this.GetTechLevel()
         let basic_wood = this.GetSpecialValueFor("wood_max");
         if (!isoverride) {
             basic_wood = this.GetLevelSpecialValueNoOverride("wood_max", this.GetLevel());
         }
         let wood_inc_round = this.GetSpecialValueFor("wood_inc_round");
         return basic_wood + wood_inc_round * iRound;
+    }
+
+    GetTechLevel() {
+        let ability = courier_upgrade_tech.findIn(this.GetCasterPlus());
+        if (ability) {
+            return ability.GetLevel();
+        }
+        return 1;
     }
 
     Init(): void {

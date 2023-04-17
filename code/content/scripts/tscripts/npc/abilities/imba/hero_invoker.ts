@@ -669,7 +669,8 @@ export class modifier_imba_invoker_invoke_buff extends BaseModifier_Plus {
     GetCustomCooldownReductionStacking() {
         return this.cooldown_reduction;
     }
-    GetModifierSpellLifesteal() {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_LIFESTEAL_PERCENTAGE)
+    CC_SPELL_LIFESTEAL_AMPLIFY_PERCENTAGE() {
         return this.spell_lifesteal;
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ABILITY_EXECUTED)
@@ -3454,7 +3455,7 @@ export class modifier_imba_invoker_deafening_blast_disarm extends BaseModifier_P
         return false;
     }
     StatusEffectPriority(): modifierpriority {
-        return 15;
+        return 4;
     }
     CheckState(): Partial<Record<modifierstate, boolean>> {
         let state = {

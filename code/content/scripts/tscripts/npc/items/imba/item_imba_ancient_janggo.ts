@@ -1,5 +1,6 @@
 
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -10,7 +11,9 @@ export class item_imba_ancient_janggo extends BaseItem_Plus {
     GetIntrinsicModifierName(): string {
         return "modifier_imba_drums";
     }
-
+    AutoSpellSelf() {
+        return AI_ability.NO_TARGET_cast(this);
+    }
     OnSpellStart(): void {
         EmitSoundOn("DOTA_Item.DoE.Activate", this.GetCasterPlus());
         let allies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FindOrder.FIND_ANY_ORDER, false);
@@ -39,8 +42,8 @@ export class modifier_imba_drums_active extends BaseModifier_Plus {
     public particle_buff: any;
     public bonus_attack_speed_pct: number;
     public bonus_movement_speed_pct: number;
-    public active_as_per_ally: any;
-    public active_ms_per_ally: any;
+    public active_as_per_ally: number = 0;
+    public active_ms_per_ally: number = 0;
     BeCreated(p_0: any,): void {
         if (IsServer()) {
             if (!this.GetItemPlus()) {
@@ -50,8 +53,8 @@ export class modifier_imba_drums_active extends BaseModifier_Plus {
         this.particle_buff = "particles/items_fx/drum_of_endurance_buff.vpcf";
         this.bonus_attack_speed_pct = this.GetItemPlus().GetSpecialValueFor("bonus_attack_speed_pct");
         this.bonus_movement_speed_pct = this.GetItemPlus().GetSpecialValueFor("bonus_movement_speed_pct");
-        this.active_as_per_ally = this.GetItemPlus().GetSpecialValueFor("active_as_per_ally");
-        this.active_ms_per_ally = this.GetItemPlus().GetSpecialValueFor("active_ms_per_ally");
+        // this.active_as_per_ally = this.GetItemPlus().GetSpecialValueFor("active_as_per_ally");
+        // this.active_ms_per_ally = this.GetItemPlus().GetSpecialValueFor("active_ms_per_ally");
         let particle_buff_fx = ResHelper.CreateParticleEx(this.particle_buff, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetParentPlus());
         ParticleManager.SetParticleControl(particle_buff_fx, 0, this.GetParentPlus().GetAbsOrigin());
         ParticleManager.SetParticleControl(particle_buff_fx, 1, Vector(0, 0, 0));
@@ -65,11 +68,11 @@ export class modifier_imba_drums_active extends BaseModifier_Plus {
     } */
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
     CC_GetModifierMoveSpeedBonus_Percentage(): number {
-        return this.bonus_movement_speed_pct + this.active_ms_per_ally * this.GetStackCount();
+        return this.bonus_movement_speed_pct /**+ this.active_ms_per_ally * this.GetStackCount();*/
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
     CC_GetModifierAttackSpeedBonus_Constant(): number {
-        return this.bonus_attack_speed_pct + this.active_as_per_ally * this.GetStackCount();
+        return this.bonus_attack_speed_pct /**+ this.active_as_per_ally * this.GetStackCount();*/
     }
 }
 @registerModifier()

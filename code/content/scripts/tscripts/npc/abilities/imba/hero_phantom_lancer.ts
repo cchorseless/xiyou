@@ -248,7 +248,7 @@ export class modifier_imba_phantom_lancer_spirit_lance_phantom_pain extends Base
             1: GPropertyConfig.EMODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE
         });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOTALDAMAGEOUTGOING_PERCENTAGE)
     CC_GetModifierDamageOutgoing_Percentage(p_0: ModifierAttackEvent,): number {
         return this.phantom_pain_damage_pct;
     }

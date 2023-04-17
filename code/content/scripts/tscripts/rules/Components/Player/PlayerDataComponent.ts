@@ -68,6 +68,7 @@ export class PlayerDataComponent extends PlayerData implements IRoundStateCallba
         this.timePerInterval = GTimerHelper.AddTimer(15, GHandler.create(this, () => {
             this.ModifyGold(this.perIntervalGold);
             this.ModifyWood(this.perIntervalWood);
+            this.ModifySoulCrystal(this.perIntervalSoulCrystal);
             return 15
         }))
     }
@@ -144,6 +145,7 @@ export class PlayerDataComponent extends PlayerData implements IRoundStateCallba
         const config = GJSONConfig.CourierAbilityLevelUpConfig.get(this.techLevel + addlevel + "");
         this.perIntervalGold += config.TechExtraGood;
         this.perIntervalWood += config.TechExtraWood;
+        this.perIntervalSoulCrystal += config.TechExtraSoulCrystal;
         this.techLevelUpCostGold = config.TechGoldcost;
         this.techLevel += addlevel;
     }
@@ -193,6 +195,12 @@ export class PlayerDataComponent extends PlayerData implements IRoundStateCallba
             let hHero = GGameScene.GetPlayer(this.BelongPlayerid).Hero;
             SendOverheadEventMessage(PlayerResource.GetPlayer(this.BelongPlayerid), DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_XP, hHero, woodChange, null)
         }
+        this.SyncClient();
+    }
+
+
+    ModifySoulCrystal(soulCrystal: number, reliable: boolean = true, reason: EDOTA_ModifyGold_Reason = 0) {
+        this.changeItem(EEnum.EMoneyType.SoulCrystal, soulCrystal);
         this.SyncClient();
     }
 }

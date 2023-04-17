@@ -890,8 +890,8 @@ export module FuncRandom {
             let _rand = RandomInt(1, he);
             let index = 0;
             while (_weight[index] != null && _rand > _weight[index]) {
-                index += 1;
                 _rand -= _weight[index];
+                index += 1;
             }
             r.push(_arr[index]);
             he -= _weight[index];

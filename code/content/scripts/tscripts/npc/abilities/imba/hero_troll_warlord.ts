@@ -953,7 +953,7 @@ export class modifier_imba_battle_trance extends BaseModifier_Plus {
         }
     }
     GetPriority(): modifierpriority {
-        return 10;
+        return 4;
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
     CC_GetModifierAttackSpeedBonus_Constant(): number {
@@ -1064,7 +1064,7 @@ export class modifier_imba_battle_trance_720 extends BaseModifier_Plus {
         }
     }
     GetPriority(): modifierpriority {
-        return 10;
+        return 4;
     }
     CheckState(): Partial<Record<modifierstate, boolean>> {
         if (this.GetStackCount() == 1) {
@@ -1088,7 +1088,8 @@ export class modifier_imba_battle_trance_720 extends BaseModifier_Plus {
             6: GPropertyConfig.EMODIFIER_PROPERTY.BASE_ATTACK_TIME_CONSTANT
         });
     } */
-    GetModifierLifesteal() {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.LIFESTEAL_PERCENTAGE)
+    CC_LIFESTEAL_AMPLIFY_PERCENTAGE() {
         return this.lifesteal;
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)

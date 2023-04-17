@@ -1,7 +1,6 @@
 
 import { ResHelper } from "../../../helper/ResHelper";
 import { modifier_courier } from "../../../npc/courier/modifier_courier";
-import { modifier_jiaoxie_wudi } from "../../../npc/modifier/battle/modifier_jiaoxie_wudi";
 import { modifier_wait_portal } from "../../../npc/modifier/modifier_portal";
 import { GameServiceConfig } from "../../../shared/GameServiceConfig";
 import { serializeETProps } from "../../../shared/lib/Entity";
@@ -37,7 +36,6 @@ export class CourierEntityRoot extends BaseEntityRoot implements IRoundStateCall
         this.firstSpawnPoint = hero.GetAbsOrigin();
         this.steamID = PlayerResource.GetSteamAccountID(this.BelongPlayerid).toString();
         modifier_wait_portal.applyOnly(hero, hero);
-        modifier_jiaoxie_wudi.applyOnly(hero, hero);
         this.SyncClient(true, true)
     }
     IsCourierRoot() {

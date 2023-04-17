@@ -35,16 +35,15 @@ export class modifier_round_enemy extends BaseModifier_Plus {
                 config = GJSONConfig.RoundBoardChallengeConfig.get(roundid)?.enemyinfo.find(v => { return v.id == onlyKey }) as any;
             }
             if (config == null) { return }
-            config.atk && (this.atk = GPropertyCalculate.GetBaseAttackDamage(parent) * config.atk);
-            config.hp && (this.hp = GPropertyCalculate.GetBaseMaxHealth(parent) * config.hp);
-            config.phyarm && (this.phyarm = GPropertyCalculate.GetBasePhysicalArmor(parent) * config.phyarm);
-            config.magicarm && (this.magicarm = GPropertyCalculate.GetBaseMagicalArmor(parent) * config.magicarm);
+            config.atkpect != 0 && (this.atk = GPropertyCalculate.GetAttackDamage(parent) * config.atkpect * 0.01);
+            config.hppect != 0 && (this.hp = GPropertyCalculate.GetBaseMaxHealth(parent) * config.hppect * 0.01);
+            config.phyarmpect != 0 && (this.phyarm = GPropertyCalculate.GetPhysicalArmor(parent) * config.phyarmpect * 0.01);
+            config.magicarmpect != 0 && (this.magicarm = GPropertyCalculate.GetMagicalArmor(parent) * config.magicarmpect * 0.01);
             NetTablesHelper.SetDotaEntityData(parent.GetEntityIndex(), {
                 atk: this.atk,
                 hp: this.hp,
                 phyarm: this.phyarm,
                 magicarm: this.magicarm,
-
             }, "round_enemy");
         }
 

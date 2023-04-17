@@ -432,12 +432,20 @@ export module PropertyCalculate {
         return SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.STATUS_RESISTANCE_CASTER)
     }
     //  闪避
-    export function GetEvasion(hUnit: IBaseNpc_Plus, tParams: ICustomModifierAttackEvent) {
-        return SumProps(hUnit, tParams, GPropertyConfig.EMODIFIER_PROPERTY.EVASION_CONSTANT,)
+    export function GetEvasion(hUnit: IBaseNpc_Plus, tParams?: ICustomModifierAttackEvent) {
+        return SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.EVASION_CONSTANT,)
     }
+    // 无视闪避
+    export function GetIgnoreEvasion(hUnit: IBaseNpc_Plus) {
+        if (IsValid(hUnit)) {
+            return SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.NEGATIVE_EVASION_CONSTANT,)
+        }
+        return 0;
+    }
+
     //  技能闪避
     export function GetSpellEvasion(hUnit: IBaseNpc_Plus, tParams: ICustomModifierAttackEvent) {
-        return SumProps(hUnit, tParams, GPropertyConfig.EMODIFIER_PROPERTY.SPELL_EVASION,)
+        return SumProps(hUnit, tParams, GPropertyConfig.EMODIFIER_PROPERTY.SPELL_EVASION_CONSTANT,)
     }
     //  冷却减少
     export function GetCooldownReduction(hUnit: IBaseNpc_Plus, tParams: ICustomModifierAttackEvent) {
@@ -541,7 +549,7 @@ export module PropertyCalculate {
         return GetBonusMaximumAttackSpeed(hUnit) + GPropertyConfig.MAXIMUM_ATTACK_SPEED
     }
     export function GetOutgoingDamagePercent(hUnit: IBaseNpc_Plus, tParams: ICustomModifierAttackEvent) {
-        return SumProps(hUnit, tParams, GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE,)
+        return SumProps(hUnit, tParams, GPropertyConfig.EMODIFIER_PROPERTY.TOTALDAMAGEOUTGOING_PERCENTAGE)
     }
     export function GetOutgoingPhysicalDamagePercent(hUnit: IBaseNpc_Plus, tParams: ICustomModifierAttackEvent) {
         return SumProps(hUnit, tParams, GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_PHYSICAL_DAMAGE_PERCENTAGE,)
@@ -550,11 +558,14 @@ export module PropertyCalculate {
         return SumProps(hUnit, tParams, GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_MAGICAL_DAMAGE_PERCENTAGE,)
     }
     export function GetOutgoingPureDamagePercent(hUnit: IBaseNpc_Plus, tParams: ICustomModifierAttackEvent) {
-        return SumProps(hUnit, tParams, GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_PURE_DAMAGE_PERCENTAGE,)
+        return SumProps(hUnit, tParams, GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_PURE_DAMAGE_PERCENTAGE)
     }
     //  受到的伤害
     export function GetIncomingDamagePercent(hUnit: IBaseNpc_Plus, tParams: ICustomModifierAttackEvent) {
-        return SumProps(hUnit, tParams, GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE,)
+        let r = SumProps(hUnit, tParams, GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
+        let reduce = SumProps(hUnit, tParams, GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_REDUCE_PERCENTAGE_UNIQUE)
+        r = r - math.abs(reduce);
+        return r;
     }
     export function GetIncomingPhysicalDamagePercent(hUnit: IBaseNpc_Plus, tParams: ICustomModifierAttackEvent) {
         return SumProps(hUnit, tParams, GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_PHYSICAL_DAMAGE_PERCENTAGE,)
@@ -597,10 +608,14 @@ export module PropertyCalculate {
     }
     // 吸血
     export function GetLifeStealPercent(hUnit: IBaseNpc_Plus) {
-        return SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.LIFESTEAL_AMPLIFY_PERCENTAGE,)
+        let r = SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.LIFESTEAL_PERCENTAGE)
+        let a = SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.LIFESTEAL_AMPLIFY_PERCENTAGE)
+        return r * (1 + a * 0.01);
     }
     export function GetSpellLifeStealPercent(hUnit: IBaseNpc_Plus) {
-        return SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.SPELL_LIFESTEAL_AMPLIFY_PERCENTAGE,)
+        let r = SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.SPELL_LIFESTEAL_PERCENTAGE)
+        let a = SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.SPELL_LIFESTEAL_AMPLIFY_PERCENTAGE)
+        return r * (1 + a * 0.01);
     }
 
     /**-------------基础三围-------------------- */

@@ -95,19 +95,20 @@ export class modifier_item_imba_vladmir_aura extends BaseModifier_Plus {
             GFuncEntity.ChangeAttackProjectileImba(this.GetParentPlus());
         }
     }
-    GetModifierLifesteal() {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.LIFESTEAL_PERCENTAGE)
+    CC_LIFESTEAL_AMPLIFY_PERCENTAGE() {
         return this.GetItemPlus().GetSpecialValueFor("vampiric_aura");
     }
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.BASEDAMAGEOUTGOING_PERCENTAGE,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_ATTACK_DAMAGE_PERCENTAGE,
             2: GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS_UNIQUE,
             3: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_REGEN_CONSTANT,
             4: GPropertyConfig.EMODIFIER_PROPERTY.MANA_REGEN_CONSTANT,
             5: Enum_MODIFIER_EVENT.ON_TAKEDAMAGE
         });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASEDAMAGEOUTGOING_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_ATTACK_DAMAGE_PERCENTAGE)
     CC_GetModifierBaseDamageOutgoing_Percentage(p_0: ModifierAttackEvent,): number {
         if (this.GetParentPlus().HasModifier("modifier_item_imba_vladmir_blood_aura")) {
             return 0;
@@ -242,22 +243,24 @@ export class modifier_item_imba_vladmir_blood_aura extends BaseModifier_Plus {
             GFuncEntity.ChangeAttackProjectileImba(parent);
         }
     }
-    GetModifierLifesteal() {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.LIFESTEAL_PERCENTAGE)
+    CC_LIFESTEAL_AMPLIFY_PERCENTAGE() {
         return this.vampiric_aura;
     }
-    GetModifierSpellLifesteal() {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_LIFESTEAL_PERCENTAGE)
+    CC_SPELL_LIFESTEAL_AMPLIFY_PERCENTAGE() {
         return this.vampiric_aura;
     }
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.BASEDAMAGEOUTGOING_PERCENTAGE,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_ATTACK_DAMAGE_PERCENTAGE,
             2: GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS_UNIQUE,
             3: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_REGEN_CONSTANT,
             4: GPropertyConfig.EMODIFIER_PROPERTY.MANA_REGEN_CONSTANT,
             5: Enum_MODIFIER_EVENT.ON_TAKEDAMAGE
         });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASEDAMAGEOUTGOING_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_ATTACK_DAMAGE_PERCENTAGE)
     CC_GetModifierBaseDamageOutgoing_Percentage(p_0: ModifierAttackEvent,): number {
         return this.damage_aura;
     }

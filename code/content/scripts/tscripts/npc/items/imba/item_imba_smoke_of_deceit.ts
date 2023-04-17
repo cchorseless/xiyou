@@ -204,7 +204,7 @@ export class modifier_imba_smoke_of_deceit_surprise extends BaseModifier_Plus {
     /** DeclareFunctions():modifierfunction[] {
         let decFuncs = {
             1: GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_PERCENTAGE,
-            2: GPropertyConfig.EMODIFIER_PROPERTY.BASEDAMAGEOUTGOING_PERCENTAGE,
+            2: GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_ATTACK_DAMAGE_PERCENTAGE,
             3: Enum_MODIFIER_EVENT.ON_TAKEDAMAGE
         }
         return Object.values(decFuncs);
@@ -213,7 +213,7 @@ export class modifier_imba_smoke_of_deceit_surprise extends BaseModifier_Plus {
     CC_GetModifierSpellAmplify_Percentage(p_0: ModifierAttackEvent,): number {
         return this.surprise_atk_spell_amp;
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASEDAMAGEOUTGOING_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_ATTACK_DAMAGE_PERCENTAGE)
     CC_GetModifierBaseDamageOutgoing_Percentage(p_0: ModifierAttackEvent,): number {
         return this.surprise_atk_damage_pct;
     }

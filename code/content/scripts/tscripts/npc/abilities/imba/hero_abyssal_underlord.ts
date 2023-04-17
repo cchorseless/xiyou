@@ -957,7 +957,7 @@ export class modifier_imba_abyssal_underlord_atrophy_aura_debuff extends BaseMod
         }
         return Object.values(funcs);
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASEDAMAGEOUTGOING_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_ATTACK_DAMAGE_PERCENTAGE)
     CC_GetModifierBaseDamageOutgoing_Percentage(params: ModifierAttackEvent): number {
         return -this.reduction;
     }

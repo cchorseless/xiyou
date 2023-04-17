@@ -88,7 +88,7 @@ export class CCTopBarGameCoin<T extends NodePropsData> extends CCPanel<T> {
             `${playerdata.population}/${playerdata.populationRoof}`,
             `${playerdata.gold}(+${playerdata.perIntervalGold})`,
             `${playerdata.wood}(+${playerdata.perIntervalWood})`,
-            `${playerdata.soulcrystal}`,
+            `${playerdata.soulcrystal}(+${playerdata.perIntervalSoulCrystal})`,
         ];
         return (
             <Panel ref={this.__root__} id="CC_TopBarGameCoin"    {...this.initRootAttrs()} hittest={false}>

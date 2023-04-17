@@ -8,8 +8,8 @@ export class courier_challenge_gold extends BaseAbility_Plus {
         return true;
     }
 
-    GetGoldCost(level?: number): number {
-        return GJSONConfig.CourierAbilityLevelUpConfig.get(math.max(this.GetLevel(), 1) + "").ChallengeGoldGoldcost;
+    GetWoodCost(level?: number): number {
+        return GJSONConfig.CourierAbilityLevelUpConfig.get(math.max(this.GetLevel(), 1) + "").ChallengeGoldCost;
     }
     GetManaCost() {
         return 0
@@ -46,7 +46,7 @@ export class courier_challenge_gold extends BaseAbility_Plus {
             let challengeround = this.GetchallengeRound()
             if (challengeround) {
                 challengeround.OnRound_Start();
-                root.PlayerDataComp().ModifyGold(-this.GetGoldCost());
+                root.PlayerDataComp().ModifyGold(-this.GetWoodCost());
                 let level = this.GetLevel();
                 if (level < this.GetMaxLevel()) {
                     this.UpgradeAbility(true);
@@ -63,8 +63,8 @@ export class courier_challenge_gold extends BaseAbility_Plus {
 
 @registerAbility()
 export class courier_challenge_wood extends courier_challenge_gold {
-    GetGoldCost(level?: number): number {
-        return GJSONConfig.CourierAbilityLevelUpConfig.get(math.max(this.GetLevel(), 1) + "").ChallengeWoodGoldcost;
+    GetWoodCost(level?: number): number {
+        return GJSONConfig.CourierAbilityLevelUpConfig.get(math.max(this.GetLevel(), 1) + "").ChallengeWoodCost;
     }
     GetchallengeRound() {
         let caster = this.GetCasterPlus();
@@ -89,7 +89,7 @@ export class courier_challenge_equip extends BaseAbility_Plus {
             let playerroot = GPlayerEntityRoot.GetOneInstance(playerid);
             let round = playerroot.RoundManagerComp().getCurrentBoardRound();
             if (round.IsBattle()) {
-                if (playerroot.PlayerDataComp().isEnoughItem(EEnum.EMoneyType.Wood, this.GetWoodCost())) {
+                if (playerroot.PlayerDataComp().isEnoughItem(EEnum.EMoneyType.Wood, this.GetSoulCrystal())) {
                     return UnitFilterResult.UF_SUCCESS;
                 } else {
                     this.errorStr = "cost wood not enough";
@@ -102,8 +102,8 @@ export class courier_challenge_equip extends BaseAbility_Plus {
         }
         return UnitFilterResult.UF_SUCCESS;
     }
-    GetWoodCost(level?: number): number {
-        return GJSONConfig.CourierAbilityLevelUpConfig.get(math.max(this.GetLevel(), 1) + "").ChallengeEquipWoodcost;
+    GetSoulCrystal(level?: number): number {
+        return GJSONConfig.CourierAbilityLevelUpConfig.get(math.max(this.GetLevel(), 1) + "").ChallengeEquipCost;
     }
     GetchallengeRound() {
         let caster = this.GetCasterPlus();
@@ -121,7 +121,7 @@ export class courier_challenge_equip extends BaseAbility_Plus {
             let challengeround = this.GetchallengeRound();
             if (challengeround) {
                 challengeround.OnRound_Start();
-                root.PlayerDataComp().ModifyWood(-this.GetWoodCost());
+                root.PlayerDataComp().ModifyWood(-this.GetSoulCrystal());
                 let level = this.GetLevel();
                 if (level < this.GetMaxLevel()) {
                     this.UpgradeAbility(true);
@@ -138,8 +138,8 @@ export class courier_challenge_equip extends BaseAbility_Plus {
 
 @registerAbility()
 export class courier_challenge_artifact extends courier_challenge_equip {
-    GetWoodCost(level?: number): number {
-        return GJSONConfig.CourierAbilityLevelUpConfig.get(math.max(this.GetLevel(), 1) + "").ChallengeArtifactWoodcost;
+    GetSoulCrystal(level?: number): number {
+        return GJSONConfig.CourierAbilityLevelUpConfig.get(math.max(this.GetLevel(), 1) + "").ChallengeArtifactCost;
     }
 
     GetchallengeRound() {

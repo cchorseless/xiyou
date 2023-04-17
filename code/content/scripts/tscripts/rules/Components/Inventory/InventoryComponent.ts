@@ -188,7 +188,7 @@ export class InventoryComponent extends ET.Component implements IRoundStateCallb
         items.push(item.Id);
         let root = this.Domain.ETRoot.As<IBattleUnitEntityRoot>();
         root.AddDomainChild(item);
-        item.GetDomain<IBaseItem_Plus>().SetActivated(!root.IsCourierRoot())
+        // item.GetDomain<IBaseItem_Plus>().SetActivated(!root.IsCourierRoot())
         if (root.CombinationComp && root.CombinationComp() &&
             itemtype == PublicBagConfig.EBagSlotType.InventorySlot && this.IsValidCombinationSlot(slot)
         ) {

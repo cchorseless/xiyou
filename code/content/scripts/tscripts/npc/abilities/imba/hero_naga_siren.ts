@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -113,7 +113,7 @@ export class modifier_imba_naga_siren_mirror_image_perfect_image extends BaseMod
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
             1: GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE,
-            2: GPropertyConfig.EMODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE,
+            2: GPropertyConfig.EMODIFIER_PROPERTY.TOTALDAMAGEOUTGOING_PERCENTAGE,
             3: Enum_MODIFIER_EVENT.ON_DEATH
         });
     } */
@@ -121,7 +121,7 @@ export class modifier_imba_naga_siren_mirror_image_perfect_image extends BaseMod
     CC_GetModifierIncomingDamage_Percentage(p_0: ModifierAttackEvent,): number {
         return this.GetStackCount() * this.perfect_image_bonus_damage_incoming_pct;
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOTALDAMAGEOUTGOING_PERCENTAGE)
     CC_GetModifierDamageOutgoing_Percentage(p_0: ModifierAttackEvent,): number {
         return this.GetStackCount() * this.perfect_image_bonus_damage_outgoing_pct;
     }

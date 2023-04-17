@@ -2,8 +2,7 @@
 import { Assert_ProjectileEffect, IProjectileEffectInfo } from "../../../assert/Assert_ProjectileEffect";
 import { Assert_SpawnEffect, ISpawnEffectInfo } from "../../../assert/Assert_SpawnEffect";
 import { KVHelper } from "../../../helper/KVHelper";
-import { modifier_courier } from "../../../npc/courier/modifier_courier";
-import { modifier_jiaoxie_wudi } from "../../../npc/modifier/battle/modifier_jiaoxie_wudi";
+import { modifier_faker_courier } from "../../../npc/courier/modifier_faker_courier";
 import { BaseEntityRoot } from "../../Entity/BaseEntityRoot";
 import { ERoundBoard } from "../Round/ERoundBoard";
 import { FHeroAIComponent } from "./FHeroAIComponent";
@@ -21,7 +20,6 @@ export class FakerHeroEntityRoot extends BaseEntityRoot implements IRoundStateCa
         this.AddComponent(GGetRegClass<typeof FHeroCombinationManagerComponent>("FHeroCombinationManagerComponent"));
         this.AddComponent(GGetRegClass<typeof FHeroAIComponent>("FHeroAIComponent"));
         this.SyncClient(true);
-        modifier_jiaoxie_wudi.applyOnly(npc, npc);
     }
     public RefreshFakerHero() {
         let hHero = this.GetDomain<IBaseNpc_Hero_Plus>();
@@ -30,16 +28,16 @@ export class FakerHeroEntityRoot extends BaseEntityRoot implements IRoundStateCa
         }
         let sCurrentCourierName = this.GetCourierName()
         let sCourierName = KVHelper.CourierUnits.GetRandomCourier();
-        if (sCurrentCourierName == sCourierName && modifier_courier.findIn(hHero)) {
+        if (sCurrentCourierName == sCourierName && modifier_faker_courier.findIn(hHero)) {
             return
         }
-        modifier_courier.remove(hHero);
-        modifier_courier.applyOnly(hHero, hHero, null, { courier_name: sCourierName });
+        modifier_faker_courier.remove(hHero);
+        modifier_faker_courier.applyOnly(hHero, hHero, null, { courier_name: sCourierName });
 
     }
     GetCourierName() {
         let hero = this.GetDomain<IBaseNpc_Hero_Plus>();
-        let hModifier = modifier_courier.findIn(hero);
+        let hModifier = modifier_faker_courier.findIn(hero);
         if (IsValid(hModifier)) {
             return hModifier.GetCourierName();
         }

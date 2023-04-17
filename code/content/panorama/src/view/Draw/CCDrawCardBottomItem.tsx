@@ -32,8 +32,10 @@ export class CCDrawCardBottomItem extends CCPanel<ICCDrawCardBottomItem> {
             <Panel ref={this.__root__} id="CC_DrawCardBottomItem" className={Rarity} hittest={false} {...this.initRootAttrs()}>
                 <CCPanel horizontalAlign="center" flowChildren="right">
                     <CCLabel textAlign={"center"} type="UnitName" localizedText={"#" + unitname} verticalAlign="center" height="20px" />
-                    <CCIconButton marginLeft={"10px"} icon={<CCIcon_Share />} onactivate={() => { this.props.onShare() }} tooltip={"#todo"} />
-                    <CCIconButton icon={<CCIcon_Wanted />} onactivate={() => { this.props.onWanted() }} tooltip={"#todo"} />
+                    <CCPanel marginLeft={"20px"} flowChildren="right" verticalAlign="center">
+                        <CCIcon_CoinType cointype={GEEnum.EMoneyType.Gold} />
+                        <CCLabel type="Gold" text={"x" + iteminfo?.ItemCost} />
+                    </CCPanel>
                 </CCPanel>
                 <CCPanel horizontalAlign="center" flowChildren="right" marginTop={"10px"}>
                     {
@@ -46,14 +48,8 @@ export class CCDrawCardBottomItem extends CCPanel<ICCDrawCardBottomItem> {
                     }
                 </CCPanel>
                 <CCPanel horizontalAlign="center" flowChildren="right">
-                    <CCPanel flowChildren="right">
-                        <CCIcon_CoinType cointype={GEEnum.EMoneyType. Gold} />
-                        <CCLabel type="Gold" text={"x" + iteminfo?.ItemCost} />
-                    </CCPanel>
-                    <CCPanel flowChildren="right" marginLeft={"10px"}>
-                        <CCIcon_CoinType cointype={GEEnum.EMoneyType.Population} />
-                        <CCLabel type="Gold" text={"x" + cardinfo?.Population} />
-                    </CCPanel>
+                    <CCIconButton marginLeft={"10px"} icon={<CCIcon_Share />} onactivate={() => { this.props.onShare() }} tooltip={"#todo"} />
+                    <CCIconButton marginLeft={"30px"} icon={<CCIcon_Wanted />} onactivate={() => { this.props.onWanted() }} tooltip={"#todo"} />
                 </CCPanel>
             </Panel>
         )

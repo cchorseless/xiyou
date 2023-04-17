@@ -251,7 +251,7 @@ export class modifier_imba_earthshaker_enchant_totem extends BaseModifier_Plus {
     }
     /** DeclareFunctions():modifierfunction[] {
         let funcs = {
-            1: GPropertyConfig.EMODIFIER_PROPERTY.BASEDAMAGEOUTGOING_PERCENTAGE,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_ATTACK_DAMAGE_PERCENTAGE,
             2: GPropertyConfig.EMODIFIER_PROPERTY.PROCATTACK_FEEDBACK,
             3: GPropertyConfig.EMODIFIER_PROPERTY.TRANSLATE_ACTIVITY_MODIFIERS,
             4: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_RANGE_BONUS
@@ -266,7 +266,7 @@ export class modifier_imba_earthshaker_enchant_totem extends BaseModifier_Plus {
     CC_GetOverrideAnimation(): GameActivity_t {
         return GameActivity_t.ACT_DOTA_CAST_ABILITY_2;
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASEDAMAGEOUTGOING_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_ATTACK_DAMAGE_PERCENTAGE)
     CC_GetModifierBaseDamageOutgoing_Percentage(p_0: ModifierAttackEvent,): number {
         return this.bonus;
     }

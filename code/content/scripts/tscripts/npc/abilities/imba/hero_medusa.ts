@@ -103,7 +103,7 @@ export class modifier_imba_medusa_split_shot extends BaseModifier_Plus {
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
             1: Enum_MODIFIER_EVENT.ON_ATTACK,
-            2: GPropertyConfig.EMODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE,
+            2: GPropertyConfig.EMODIFIER_PROPERTY.TOTALDAMAGEOUTGOING_PERCENTAGE,
             3: GPropertyConfig.EMODIFIER_PROPERTY.TRANSLATE_ACTIVITY_MODIFIERS,
             4: Enum_MODIFIER_EVENT.ON_ORDER
         });
@@ -130,7 +130,7 @@ export class modifier_imba_medusa_split_shot extends BaseModifier_Plus {
             }
         }
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOTALDAMAGEOUTGOING_PERCENTAGE)
     CC_GetModifierDamageOutgoing_Percentage(p_0: ModifierAttackEvent,): number {
         if (!IsServer()) {
             return;
@@ -197,7 +197,7 @@ export class modifier_imba_medusa_serpent_shot extends BaseModifier_Plus {
             3: GPropertyConfig.EMODIFIER_PROPERTY.PROJECTILE_NAME,
             4: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE,
             5: GPropertyConfig.EMODIFIER_PROPERTY.PROCATTACK_BONUS_DAMAGE_MAGICAL,
-            6: GPropertyConfig.EMODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE,
+            6: GPropertyConfig.EMODIFIER_PROPERTY.TOTALDAMAGEOUTGOING_PERCENTAGE,
             7: Enum_MODIFIER_EVENT.ON_TAKEDAMAGE
         }
         return Object.values(decFuncs);
@@ -240,7 +240,7 @@ export class modifier_imba_medusa_serpent_shot extends BaseModifier_Plus {
             return this.GetStackCount();
         }
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOTALDAMAGEOUTGOING_PERCENTAGE)
     CC_GetModifierDamageOutgoing_Percentage(keys: ModifierAttackEvent): number {
         if (keys.attacker == this.GetParentPlus() && this.GetStackCount() > 0 && (!keys.target || (keys.target && !keys.target.IsBuilding() && !keys.target.IsOther()))) {
             return -100;

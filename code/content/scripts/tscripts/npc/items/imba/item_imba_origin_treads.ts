@@ -376,7 +376,7 @@ export class modifier_item_imba_origin_treads_power extends BaseModifier_Plus {
     CC_GetModifierBonusStats_Intellect(): number {
         return this.GetStackCount() * (-1);
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOTALDAMAGEOUTGOING_PERCENTAGE)
     CC_GetModifierDamageOutgoing_Percentage(p_0: ModifierAttackEvent,): number {
         return this.agi_cast_damage_reduction_pct * (-1);
     }

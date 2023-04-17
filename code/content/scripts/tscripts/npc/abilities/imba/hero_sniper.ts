@@ -160,7 +160,7 @@ export class modifier_imba_shrapnel_attack extends BaseModifier_Plus {
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
             1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_RANGE_BONUS,
-            2: GPropertyConfig.EMODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE,
+            2: GPropertyConfig.EMODIFIER_PROPERTY.TOTALDAMAGEOUTGOING_PERCENTAGE,
             3: Enum_MODIFIER_EVENT.ON_ORDER
         });
     } */
@@ -193,7 +193,7 @@ export class modifier_imba_shrapnel_attack extends BaseModifier_Plus {
         }
         return undefined;
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOTALDAMAGEOUTGOING_PERCENTAGE)
     CC_GetModifierDamageOutgoing_Percentage(p_0: ModifierAttackEvent,): number {
         if (IsServer()) {
             if (!this.current_target || !this.distance_from_target) {

@@ -23,7 +23,15 @@ export class modifier_courier extends BaseModifier_Plus {
     RemoveOnDeath() {
         return false;
     }
-
+    CheckState() {
+        let state = {
+            [modifierstate.MODIFIER_STATE_DISARMED]: true,
+            [modifierstate.MODIFIER_STATE_MAGIC_IMMUNE]: true,
+            [modifierstate.MODIFIER_STATE_ATTACK_IMMUNE]: true,
+            [modifierstate.MODIFIER_STATE_OUT_OF_GAME]: true,
+        };
+        return state;
+    }
     GetCourierName() {
         return this.sCourierName
     }

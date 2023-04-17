@@ -45,7 +45,8 @@ export class modifier_imba_satanic extends BaseModifier_Plus {
             GFuncEntity.ChangeAttackProjectileImba(this.GetCasterPlus());
         }
     }
-    GetModifierLifesteal() {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.LIFESTEAL_PERCENTAGE)
+    CC_LIFESTEAL_AMPLIFY_PERCENTAGE() {
         if (this.GetItemPlus() && this.GetParentPlus().FindAllModifiersByName(this.GetName())[0] == this) {
             if (this.GetParentPlus().HasModifier("modifier_imba_satanic_active")) {
                 return this.GetItemPlus().GetSpecialValueFor("lifesteal_pct") + this.GetItemPlus().GetSpecialValueFor("unholy_rage_lifesteal_bonus");

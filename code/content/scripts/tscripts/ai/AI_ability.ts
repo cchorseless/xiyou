@@ -1,7 +1,7 @@
 import { AoiHelper } from "../helper/AoiHelper";
 
 export module AI_ability {
-    export function NO_TARGET_cast(ability: IBaseAbility_Plus): boolean {
+    export function NO_TARGET_cast(ability: IBaseAbility_Plus | IBaseItem_Plus): boolean {
         let caster = ability.GetCasterPlus();
         ExecuteOrderFromTable({
             UnitIndex: caster.entindex(),
@@ -16,7 +16,7 @@ export module AI_ability {
      * @param ability
      * @param range 技能范围
      */
-    export function NO_TARGET_if_enemy(ability: IBaseAbility_Plus, range: number = 0) {
+    export function NO_TARGET_if_enemy(ability: IBaseAbility_Plus | IBaseItem_Plus, range: number = 0) {
         let caster = ability.GetCasterPlus();
         if (range == 0 || range == null) range = 200;
         let teamFilter = DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY
@@ -42,7 +42,7 @@ export module AI_ability {
      * @param _filter 不填，选择最近的敌人
      * @returns
      */
-    export function TARGET_if_enemy(ability: IBaseAbility_Plus, range?: number, _filter?: (enemy: IBaseNpc_Plus) => boolean, findorder?: FindOrder): boolean {
+    export function TARGET_if_enemy(ability: IBaseAbility_Plus | IBaseItem_Plus, range?: number, _filter?: (enemy: IBaseNpc_Plus) => boolean, findorder?: FindOrder): boolean {
         let caster = ability.GetCasterPlus();
         if (range == 0 || range == null) range = ability.GetCastRangePlus();
         if (range == 0) {
@@ -76,7 +76,7 @@ export module AI_ability {
      * @param _filter 不填，选择最近的敌人
      * @returns
      */
-    export function POSITION_if_enemy(ability: IBaseAbility_Plus, range?: number, _filter?: (enemy: IBaseNpc_Plus, index?: number, count?: number) => boolean, findorder?: FindOrder) {
+    export function POSITION_if_enemy(ability: IBaseAbility_Plus | IBaseItem_Plus, range?: number, _filter?: (enemy: IBaseNpc_Plus, index?: number, count?: number) => boolean, findorder?: FindOrder) {
         let caster = ability.GetCasterPlus();
         if (range == 0 || range == null) range = ability.GetCastRangePlus();
         if (range == 0) {
@@ -103,7 +103,7 @@ export module AI_ability {
         }
         return false;
     }
-    export function POSITION_if_friend(ability: IBaseAbility_Plus, range?: number, _filter?: (enemy: IBaseNpc_Plus, index?: number, count?: number) => boolean, findorder?: FindOrder) {
+    export function POSITION_if_friend(ability: IBaseAbility_Plus | IBaseItem_Plus, range?: number, _filter?: (enemy: IBaseNpc_Plus, index?: number, count?: number) => boolean, findorder?: FindOrder) {
         let caster = ability.GetCasterPlus();
         if (range == 0 || range == null) range = ability.GetCastRangePlus();
         if (range == 0) {
@@ -136,7 +136,7 @@ export module AI_ability {
      * @param range
      * @param radius
      */
-    export function POSITION_most_enemy(ability: IBaseAbility_Plus, range: number = 0, radius: number = 0): boolean {
+    export function POSITION_most_enemy(ability: IBaseAbility_Plus | IBaseItem_Plus, range: number = 0, radius: number = 0): boolean {
         let caster = ability.GetCasterPlus();
         if (range == 0 || range == null) range = ability.GetCastRangePlus();
         if (radius == 0 || radius == null) radius = ability.GetAOERadius();
@@ -164,7 +164,7 @@ export module AI_ability {
         return false;
     }
 
-    export function POSITION_most_friend(ability: IBaseAbility_Plus, range: number = 0, radius: number = 0): boolean {
+    export function POSITION_most_friend(ability: IBaseAbility_Plus | IBaseItem_Plus, range: number = 0, radius: number = 0): boolean {
         let caster = ability.GetCasterPlus();
         if (range == 0 || range == null) range = ability.GetCastRangePlus();
         if (radius == 0 || radius == null) radius = ability.GetAOERadius();
@@ -197,7 +197,7 @@ export module AI_ability {
      * @param _filter 不填，选择最近的敌人
      * @returns
      */
-    export function TARGET_if_friend(ability: IBaseAbility_Plus, range?: number, _filter?: (enemy: IBaseNpc_Plus) => boolean) {
+    export function TARGET_if_friend(ability: IBaseAbility_Plus | IBaseItem_Plus, range?: number, _filter?: (enemy: IBaseNpc_Plus) => boolean) {
         let caster = ability.GetCasterPlus()
         if (range == 0 || range == null) range = ability.GetCastRangePlus();
         if (range == 0) {

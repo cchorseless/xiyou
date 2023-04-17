@@ -74,6 +74,7 @@ export class modifier_item_imba_crimson_guard extends BaseModifier_Plus {
         this.block_chance = this.GetItemPlus().GetSpecialValueFor("block_chance");
         this.damage_reduction = this.GetItemPlus().GetSpecialValueFor("damage_reduction");
     }
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_REDUCE_PERCENTAGE_UNIQUE)
     GetCustomIncomingDamageReductionUnique() {
         return this.damage_reduction;
     }
@@ -140,6 +141,7 @@ export class modifier_item_imba_crimson_guard_buff extends BaseModifier_Plus {
             this.AddParticle(this.crimson_guard_pfx, false, false, -1, false, false);
         }
     }
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_REDUCE_PERCENTAGE_UNIQUE)
     GetCustomIncomingDamageReductionUnique() {
         return this.damage_reduction;
     }

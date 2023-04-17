@@ -395,7 +395,11 @@ declare global {
          * @returns
          */
         GetCasterPlus<T extends IBaseNpc_Plus>(): T;
-
+        /**
+         * @Both
+         * 获取技能施法范围
+         */
+        GetCastRangePlus(): number;
         /**
          * @Server
          * @returns
@@ -523,7 +527,18 @@ CBaseAbility.AddTimer = function (fInterval: number, fCallback: () => number | v
 CBaseAbility.GetCasterPlus = function () {
     return this.GetCaster() as IBaseNpc_Plus
 }
-
+CBaseAbility.GetCastRangePlus = function () {
+    let caster = this.GetCaster()
+    let r = 0;
+    if (caster) {
+        r = this.GetCastRange(caster.GetAbsOrigin(), null) || 0;
+        r += caster.GetCastRangeBonus();
+    }
+    if (r == 0) {
+        r = 200;
+    }
+    return r;
+}
 if (CBaseAbility.GetLevelSpecialValueFor_Engine == undefined) {
     CBaseAbility.GetLevelSpecialValueFor_Engine = CBaseAbility.GetLevelSpecialValueFor;
 }

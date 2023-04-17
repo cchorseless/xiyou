@@ -278,7 +278,8 @@ export class modifier_item_imba_skadi_slow extends BaseModifier_Plus {
     CC_GetModifierHPRegenAmplify_Percentage(): number {
         return (this.heal_reduction_pct * (-1));
     }
-    GetModifierLifestealAmplify() {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.LIFESTEAL_AMPLIFY_PERCENTAGE)
+    CC_LIFESTEAL_AMPLIFY_PERCENTAGE() {
         return (this.heal_reduction_pct * (-1));
     }
 }

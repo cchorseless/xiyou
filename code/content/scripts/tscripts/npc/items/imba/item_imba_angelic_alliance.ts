@@ -31,7 +31,7 @@ export class item_imba_angelic_alliance extends BaseItem_Plus {
             }
         }
         if (target.IsMagicImmune()) {
-            return undefined;
+            return;
         }
         target.EmitSound("Imba.AngelicAllianceCast");
         if (target.GetTeamNumber() == caster.GetTeamNumber()) {
@@ -46,7 +46,7 @@ export class item_imba_angelic_alliance extends BaseItem_Plus {
             }
         } else {
             if (target.TriggerSpellAbsorb(this)) {
-                return undefined;
+                return;
             }
             target.AddNewModifier(caster, this, "modifier_imba_angelic_alliance_debuff", {
                 duration: duration * (1 - target.GetStatusResistance())

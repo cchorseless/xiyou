@@ -1285,7 +1285,8 @@ export class modifier_imba_pudge_dismember_buff extends BaseModifier_Plus {
     IsStunDebuff(): boolean {
         return false;
     }
-    GetModifierSpellLifesteal() {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_LIFESTEAL_PERCENTAGE)
+    CC_SPELL_LIFESTEAL_AMPLIFY_PERCENTAGE() {
         return this.GetSpecialValueFor("spell_lifesteal");
     }
     /** DeclareFunctions():modifierfunction[] {

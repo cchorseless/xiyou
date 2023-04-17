@@ -133,7 +133,7 @@ export class modifier_generic_shock extends BaseModifier_Plus {
             damage: damage,
             damage_type: DAMAGE_TYPES.DAMAGE_TYPE_MAGICAL,
             damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION,
-            extra_flags: GEBATTLE_DAMAGE_FLAGS.DAMAGE_FLAG_SHOCK + GEBATTLE_DAMAGE_FLAGS.DAMAGE_FLAG_NO_DAMAGE_TRANSFORM + GEBATTLE_DAMAGE_FLAGS.DAMAGE_FLAG_NO_SPELL_CRIT,
+            extra_flags: GEBATTLE_DAMAGE_FLAGS.DAMAGE_FLAG_SHOCK + GEBATTLE_DAMAGE_FLAGS.DAMAGE_FLAG_NO_SPELL_CRIT,
         }
         ApplyDamage(damageInfo);
         ResHelper.CreateParticle(

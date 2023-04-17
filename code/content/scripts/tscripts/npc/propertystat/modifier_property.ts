@@ -104,9 +104,10 @@ export class modifier_property extends BaseModifier_Plus {
 
     /**闪避 */
     GetModifierEvasion_Constant(event: ModifierAttackEvent): number {
-        return PropertyCalculate.GetEvasion(this.GetParentPlus(), event)
+        let c = PropertyCalculate.GetEvasion(this.GetParentPlus()) - PropertyCalculate.GetIgnoreEvasion(event.attacker);
+        c = c > 0 ? c : 0;
+        return c;
     }
-
     /**气血恢复 */
     GetModifierConstantHealthRegen(): number {
         return PropertyCalculate.GetHealthRegen(this.GetParentPlus())
@@ -216,7 +217,6 @@ export class modifier_property extends BaseModifier_Plus {
      */
     GetModifierTotalDamageOutgoing_Percentage(params: ModifierAttackEvent): number {
         if (IsClient()) { return }
-        let iDamageFlags = params.damage_flags
         let iDamageType = params.damage_type
         let iDamageCategory = params.damage_category
         let fPercent = 100
@@ -254,10 +254,6 @@ export class modifier_property extends BaseModifier_Plus {
                 modifier_event.FireEvent(params, Enum_MODIFIER_EVENT.ON_ANY_CRIT);
             }
         }
-        // 造成额外毒伤害 
-        if (GBattleSystem.DamageFilter(params.record, GEBATTLE_DAMAGE_FLAGS.DAMAGE_FLAG_POISON)) {
-            // fPercent = fPercent * (1 + PropertyCalculate.GetPoisonActiveIncreasePercent GetModifierProperty(hAttacker, EOM_MODIFIER_PROPERTY_OUTGOING_POISON_DAMAGE_PERCENTAGE, params) * 0.01)
-        }
         if (iDamageType == DAMAGE_TYPES.DAMAGE_TYPE_PHYSICAL) {
             fPercent = fPercent * (1 + PropertyCalculate.GetOutgoingPhysicalDamagePercent(hAttacker, params) * 0.01)
         } else if (iDamageType == DAMAGE_TYPES.DAMAGE_TYPE_MAGICAL) {
@@ -268,11 +264,6 @@ export class modifier_property extends BaseModifier_Plus {
         fPercent = fPercent * (1 + PropertyCalculate.GetOutgoingDamagePercent(hAttacker, params) * 0.01)
         return fPercent - 100
     }
-    GetModifierDamageOutgoing_Percentage(event: ModifierAttackEvent): number {
-        return PropertyCalculate.SumProps(this.GetParentPlus(), event, GPropertyConfig.EMODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE)
-    }
-
-
 
     /**
      * 受到伤害加深百分比,计算伤害前
@@ -391,27 +382,27 @@ export class modifier_property extends BaseModifier_Plus {
             unit.IsBuilding() || unit.IsOther() || attacker == unit) {
             return
         }
-        if (bit.band(event.damage_flags, DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NO_SPELL_LIFESTEAL) != DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NO_SPELL_LIFESTEAL) {
-            if (event.damage_type == DAMAGE_TYPES.DAMAGE_TYPE_PHYSICAL) {
-                let fValue = GPropertyCalculate.GetLifeStealPercent(attacker)
-                if (fValue > 0) {
-                    let iParticleID = ParticleManager.CreateParticle(ResHelper.EParticleCom.atk_lifesteal, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, attacker)
-                    ParticleManager.ReleaseParticleIndex(iParticleID);
-                    attacker.ApplyHeal(event.damage * fValue * 0.01, event.inflictor)
-                }
+        // 攻击吸血
+        if (event.damage_category == DamageCategory_t.DOTA_DAMAGE_CATEGORY_ATTACK) {
+            let fValue = GPropertyCalculate.GetLifeStealPercent(attacker)
+            if (fValue > 0) {
+                let iParticleID = ParticleManager.CreateParticle(ResHelper.EParticleName.atk_lifesteal, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, attacker)
+                ParticleManager.ReleaseParticleIndex(iParticleID);
+                attacker.ApplyHeal(event.damage * fValue * 0.01, event.inflictor)
             }
-            else if (event.damage_type == DAMAGE_TYPES.DAMAGE_TYPE_MAGICAL) {
-                let fValue = GPropertyCalculate.GetSpellLifeStealPercent(attacker)
-                if (fValue > 0) {
-                    let iParticleID = ParticleManager.CreateParticle(ResHelper.EParticleCom.spell_lifesteal, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, attacker)
-                    ParticleManager.ReleaseParticleIndex(iParticleID);
-                    attacker.ApplyHeal(event.damage * fValue * 0.01, event.inflictor)
-                }
+        }
+        // 技能吸血
+        else if (event.damage_category == DamageCategory_t.DOTA_DAMAGE_CATEGORY_SPELL &&
+            bit.band(event.damage_flags, DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NO_SPELL_LIFESTEAL) != DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NO_SPELL_LIFESTEAL
+        ) {
+            let fValue = GPropertyCalculate.GetSpellLifeStealPercent(attacker)
+            if (fValue > 0) {
+                let iParticleID = ParticleManager.CreateParticle(ResHelper.EParticleName.spell_lifesteal, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, attacker)
+                ParticleManager.ReleaseParticleIndex(iParticleID);
+                attacker.ApplyHeal(event.damage * fValue * 0.01, event.inflictor)
             }
         }
     }
-    // GetModifierIncomingSpellDamageConstant(event: ModifierAttackEvent): number { return 0 }
-
 
 
 

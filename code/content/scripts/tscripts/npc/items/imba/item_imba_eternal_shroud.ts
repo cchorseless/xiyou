@@ -79,7 +79,8 @@ export class modifier_item_imba_eternal_shroud extends BaseModifier_Plus {
     CC_GetModifierConstantHealthRegen( /** params */): number {
         return this.flBonusHPRegen;
     }
-    GetModifierSpellLifesteal() {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_LIFESTEAL_PERCENTAGE)
+    CC_SPELL_LIFESTEAL_AMPLIFY_PERCENTAGE() {
         return this.spell_lifesteal;
     }
 }

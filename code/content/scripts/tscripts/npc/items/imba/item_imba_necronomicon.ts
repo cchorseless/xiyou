@@ -76,7 +76,7 @@ export class modifier_item_imba_necronomicon extends BaseModifier_Plus {
             2: MODIFIER_PROPERTY_EXTRA_INTELLECT_BONUS
         });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.EXTRA_STRENGTH_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BONUS)
     CC_GetModifierExtraStrengthBonus(): number {
         return this.GetItemPlus().GetSpecialValueFor("bonus_strength");
     }

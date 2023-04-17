@@ -197,7 +197,7 @@ export class modifier_hero_property extends BaseModifier_Plus {
         return math.min(GPropertyConfig.ATTRIBUTE_INTELLECT_MAX_CD, (1 - math.pow(1 - GPropertyConfig.ATTRIBUTE_INTELLECT_COOLDOWN_REDUCTION, coodown)) * 100) || 0
     }
 
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_BASE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_PERCENTAGE)
     CC_SPELL_AMPLIFY_BASE(params: IModifierTable) {
         let iStackCount = this.GetStackCount()
         if (iStackCount == Attributes.DOTA_ATTRIBUTE_INTELLECT) {

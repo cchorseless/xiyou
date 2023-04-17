@@ -24,7 +24,7 @@ export class modifier_item_poor_mans_shield_custom extends BaseModifier_Plus {
 
     public per_reduce_gold: number;
 
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BONUSDAMAGEOUTGOING_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOTALDAMAGEOUTGOING_PERCENTAGE)
     public damage_amplify_percent: number;
 
     Init(params: IModifierTable) {

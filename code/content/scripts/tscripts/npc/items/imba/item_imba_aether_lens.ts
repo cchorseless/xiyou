@@ -43,7 +43,7 @@ export class modifier_imba_aether_lens_passive extends BaseModifier_Plus {
             this.bonus_mana = item.GetSpecialValueFor("bonus_mana");
             this.bonus_mana_regen = item.GetSpecialValueFor("bonus_mana_regen");
             this.cast_range_bonus = item.GetSpecialValueFor("cast_range_bonus");
-            this.spell_power = item.GetSpecialValueFor("spell_power");
+            // this.spell_power = item.GetSpecialValueFor("spell_power");
         }
         if (!IsServer()) {
             return;
@@ -69,12 +69,16 @@ export class modifier_imba_aether_lens_passive extends BaseModifier_Plus {
             4: GPropertyConfig.EMODIFIER_PROPERTY.MANA_REGEN_CONSTANT
         });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_PERCENTAGE)
-    CC_GetModifierSpellAmplify_Percentage(p_0: ModifierAttackEvent,): number {
-        if (this.GetItemPlus().GetSecondaryCharges() == 1 && !this.GetParentPlus().HasModifier("modifier_item_imba_aether_specs") && !this.GetParentPlus().HasModifier("modifier_item_imba_cyclone_2") && !this.GetParentPlus().HasModifier("modifier_item_imba_armlet_of_dementor") && !this.GetParentPlus().HasModifier("modifier_item_imba_arcane_nexus_passive")) {
-            return this.spell_power;
-        }
-    }
+    // @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_PERCENTAGE)
+    // CC_GetModifierSpellAmplify_Percentage(p_0: ModifierAttackEvent,): number {
+    //     if (this.GetItemPlus().GetSecondaryCharges() == 1 &&
+    //         !this.GetParentPlus().HasModifier("modifier_item_imba_aether_specs") &&
+    //         !this.GetParentPlus().HasModifier("modifier_item_imba_cyclone_2") &&
+    //         !this.GetParentPlus().HasModifier("modifier_item_imba_armlet_of_dementor") &&
+    //         !this.GetParentPlus().HasModifier("modifier_item_imba_arcane_nexus_passive")) {
+    //         return this.spell_power;
+    //     }
+    // }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MANA_REGEN_CONSTANT)
     CC_GetModifierConstantManaRegen(): number {
         return this.bonus_mana_regen;

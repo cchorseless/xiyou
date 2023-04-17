@@ -81,7 +81,6 @@ export class modifier_generic_bleeding extends BaseModifier_Plus {
                     damage_type: DAMAGE_TYPES.DAMAGE_TYPE_PURE,
                     extra_flags: GEBATTLE_DAMAGE_FLAGS.DAMAGE_FLAG_BLEEDING +
                         GEBATTLE_DAMAGE_FLAGS.DAMAGE_FLAG_DOT +
-                        GEBATTLE_DAMAGE_FLAGS.DAMAGE_FLAG_NO_DAMAGE_TRANSFORM +
                         GEBATTLE_DAMAGE_FLAGS.DAMAGE_FLAG_NO_SPELL_CRIT
                 };
                 tDamageTable.damage = this.bleedingHandler(tDamageTable)

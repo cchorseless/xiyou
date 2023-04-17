@@ -80,7 +80,12 @@ export class modifier_imba_aeon_disk_basic extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
     CC_GetModifierIncomingDamage_Percentage(kv: ModifierAttackEvent): number {
-        if (this.GetParentPlus().FindAllModifiersByName("modifier_imba_aeon_disk_basic")[0] == this && this.GetStackCount() == 2 && this.GetItemPlus() && this.GetItemPlus().IsCooldownReady() && kv.attacker != this.GetParentPlus() && !this.GetParentPlus().HasModifier("modifier_imba_aeon_disk") && !this.GetParentPlus().IsIllusion()) {
+        if (this.GetParentPlus().FindAllModifiersByName("modifier_imba_aeon_disk_basic")[0] == this &&
+            this.GetStackCount() == 2 &&
+            this.GetItemPlus() &&
+            this.GetItemPlus().IsCooldownReady() && kv.attacker != this.GetParentPlus() &&
+            !this.GetParentPlus().HasModifier("modifier_imba_aeon_disk") &&
+            !this.GetParentPlus().IsIllusion()) {
             let buff_duration = this.GetItemPlus().GetSpecialValueFor("buff_duration");
             let health_threshold_pct = this.GetItemPlus().GetSpecialValueFor("health_threshold_pct") / 100.0;
             let health_threshold = this.GetParentPlus().GetHealth() / this.GetParentPlus().GetMaxHealth();

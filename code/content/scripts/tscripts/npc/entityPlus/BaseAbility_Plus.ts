@@ -84,17 +84,7 @@ export class BaseAbility_Plus extends BaseAbility {
         }
         return ProjectileManager.CreateTrackingProjectile(projectile);
     }
-    public GetCastRangePlus() {
-        let caster = this.GetCaster()
-        let r = 0;
-        if (caster) {
-            r = this.GetCastRange(caster.GetAbsOrigin(), null) || 0;
-        }
-        if (r <= 0) {
-            r = 200;
-        }
-        return r;
-    }
+
 
     public DealDamage(attacker: IBaseNpc_Plus, target: IBaseNpc_Plus, damage: number, data?: Partial<ApplyDamageOptions>, spellText?: DOTA_OVERHEAD_ALERT) {
         if (!this || !target || !attacker) {

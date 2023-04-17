@@ -1,6 +1,7 @@
 
+import { ResHelper } from "../../../helper/ResHelper";
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
-import { BaseModifier_Plus } from "../../entityPlus/BaseModifier_Plus";
+import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 @registerAbility()
 export class item_imba_lifesteal extends BaseItem_Plus {
@@ -29,6 +30,7 @@ export class modifier_item_imba_lifesteal extends BaseModifier_Plus {
         if (IsServer()) {
             if (!this.GetItemPlus()) {
                 this.Destroy();
+                return
             }
         }
         this.caster = this.GetCasterPlus();
@@ -37,7 +39,6 @@ export class modifier_item_imba_lifesteal extends BaseModifier_Plus {
         if (this.ability) {
             this.damage_bonus = this.ability.GetSpecialValueFor("damage_bonus");
             if (IsServer()) {
-                GFuncEntity.ChangeAttackProjectileImba(this.caster);
                 if (!this.caster.HasModifier("modifier_item_imba_lifesteal_unique")) {
                     this.caster.AddNewModifier(this.caster, this.ability, "modifier_item_imba_lifesteal_unique", {});
                 }
@@ -53,14 +54,17 @@ export class modifier_item_imba_lifesteal extends BaseModifier_Plus {
         if (IsServer()) {
             if (this.caster && !this.caster.IsNull() && !this.caster.HasModifier("modifier_item_imba_lifesteal")) {
                 this.caster.RemoveModifierByName("modifier_item_imba_lifesteal_unique");
-                GFuncEntity.ChangeAttackProjectileImba(this.caster);
             }
         }
     }
     GetAttributes(): DOTAModifierAttribute_t {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE;
     }
+
+
+
 }
+
 @registerModifier()
 export class modifier_item_imba_lifesteal_unique extends BaseModifier_Plus {
     public lifesteal_pct: number;
@@ -80,8 +84,12 @@ export class modifier_item_imba_lifesteal_unique extends BaseModifier_Plus {
         }
         this.lifesteal_pct = this.GetItemPlus().GetSpecialValueFor("lifesteal_pct");
     }
-
-    GetModifierLifesteal() {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PROJECTILE_NAME)
+    CC_PROJECTILE_NAME(k: any) {
+        return ResHelper.EProjectileName.lifesteal;
+    }
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.LIFESTEAL_PERCENTAGE)
+    CC_LIFESTEAL_AMPLIFY_PERCENTAGE() {
         return this.lifesteal_pct;
     }
 }

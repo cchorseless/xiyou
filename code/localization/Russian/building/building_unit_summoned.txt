@@ -339,7 +339,6 @@
 "npc_dota_sentry_wards"       "111"
 "npc_dota_spike_trap_ward"       "111"
 "npc_dota_stormspirit_remnant"       "111"
-"npc_dota_target_dummy"       "111"
 "npc_dota_techies_land_mine"       "111"
 "npc_dota_techies_minefield_sign"       "111"
 "npc_dota_techies_remote_mine"       "111"

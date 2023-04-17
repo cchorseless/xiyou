@@ -1,8 +1,9 @@
 
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
-import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
+import { registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
+import { modifier_item_imba_javelin } from "./item_imba_javelin";
 // 金箍棒
 @registerAbility()
 export class item_imba_monkey_king_bar extends BaseItem_Plus {
@@ -12,7 +13,7 @@ export class item_imba_monkey_king_bar extends BaseItem_Plus {
 }
 
 @registerModifier()
-export class modifier_item_imba_monkey_king_bar extends BaseModifier_Plus {
+export class modifier_item_imba_monkey_king_bar extends modifier_item_imba_javelin {
 
     IsHidden(): boolean {
         return true;
@@ -26,13 +27,7 @@ export class modifier_item_imba_monkey_king_bar extends BaseModifier_Plus {
     GetAttributes(): DOTAModifierAttribute_t {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE;
     }
-    ability: IBaseItem_Plus;
-    parent: IBaseNpc_Plus;
-    bonus_range: number;
-    bonus_chance: number;
-    bonus_chance_damage: number;
-    pierce_proc: boolean;
-    pierce_records: { [key: string]: boolean };
+
     BeCreated(p_0: any,): void {
         if (!this.GetItemPlus()) {
             this.Destroy();
@@ -66,8 +61,6 @@ export class modifier_item_imba_monkey_king_bar extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
-    bonus_damage: number;
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
     bonus_attack_speed: number;

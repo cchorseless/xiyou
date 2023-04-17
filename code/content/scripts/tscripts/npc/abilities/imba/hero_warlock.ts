@@ -901,7 +901,7 @@ export class modifier_imba_rain_of_chaos_demon_link extends BaseModifier_Plus {
     /** DeclareFunctions():modifierfunction[] {
         let decFuncs = {
             1: GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE,
-            2: GPropertyConfig.EMODIFIER_PROPERTY.BASEDAMAGEOUTGOING_PERCENTAGE,
+            2: GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_ATTACK_DAMAGE_PERCENTAGE,
             3: Enum_MODIFIER_EVENT.ON_DEATH,
             4: Enum_MODIFIER_EVENT.ON_TAKEDAMAGE
         }
@@ -916,7 +916,7 @@ export class modifier_imba_rain_of_chaos_demon_link extends BaseModifier_Plus {
         }
         return -100;
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASEDAMAGEOUTGOING_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_ATTACK_DAMAGE_PERCENTAGE)
     CC_GetModifierBaseDamageOutgoing_Percentage(p_0: ModifierAttackEvent,): number {
         return this.GetStackCount() * this.scepter_damage_per_demon_pct;
     }

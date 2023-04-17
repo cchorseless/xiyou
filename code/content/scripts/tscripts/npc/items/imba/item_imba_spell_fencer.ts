@@ -171,7 +171,7 @@ export class modifier_item_imba_spell_fencer_unique extends BaseModifier_Plus {
             });
         }
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOTALDAMAGEOUTGOING_PERCENTAGE)
     CC_GetModifierDamageOutgoing_Percentage(p_0: ModifierAttackEvent,): number {
         return this.damage_reduce_pct * (-1);
     }

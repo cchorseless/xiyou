@@ -608,7 +608,7 @@ export class modifier_imba_wave_of_terror extends BaseModifier_Plus {
     CC_GetModifierPhysicalArmorBonus(p_0: ModifierAttackEvent,): number {
         return this.armor_reduction;
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASEDAMAGEOUTGOING_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_ATTACK_DAMAGE_PERCENTAGE)
     CC_GetModifierBaseDamageOutgoing_Percentage(p_0: ModifierAttackEvent,): number {
         return this.atk_reduction_pct;
     }
@@ -705,7 +705,7 @@ export class modifier_imba_command_aura_positive extends BaseModifier_Plus {
     /** DeclareFunctions():modifierfunction[] {
         let decFuncs = {
             1: GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_PERCENTAGE,
-            2: GPropertyConfig.EMODIFIER_PROPERTY.BASEDAMAGEOUTGOING_PERCENTAGE,
+            2: GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_ATTACK_DAMAGE_PERCENTAGE,
             3: GPropertyConfig.EMODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE
         }
         return Object.values(decFuncs);
@@ -714,7 +714,7 @@ export class modifier_imba_command_aura_positive extends BaseModifier_Plus {
     CC_GetModifierSpellAmplify_Percentage(p_0: ModifierAttackEvent,): number {
         return this.spell_power;
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASEDAMAGEOUTGOING_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_ATTACK_DAMAGE_PERCENTAGE)
     CC_GetModifierBaseDamageOutgoing_Percentage(p_0: ModifierAttackEvent,): number {
         if (this.GetCasterPlus()) {
             if (this.GetCasterPlus().HasTalent("special_bonus_imba_vengefulspirit_8")) {
@@ -724,7 +724,7 @@ export class modifier_imba_command_aura_positive extends BaseModifier_Plus {
             }
         }
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOTALDAMAGEOUTGOING_PERCENTAGE)
     CC_GetModifierDamageOutgoing_Percentage(p_0: ModifierAttackEvent,): number {
         if (this.GetCasterPlus()) {
             if (this.GetCasterPlus().HasTalent("special_bonus_imba_vengefulspirit_8")) {
@@ -829,7 +829,7 @@ export class modifier_imba_command_aura_negative extends BaseModifier_Plus {
     /** DeclareFunctions():modifierfunction[] {
         let decFuncs = {
             1: GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_PERCENTAGE,
-            2: GPropertyConfig.EMODIFIER_PROPERTY.BASEDAMAGEOUTGOING_PERCENTAGE,
+            2: GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_ATTACK_DAMAGE_PERCENTAGE,
             3: GPropertyConfig.EMODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE
         }
         return Object.values(decFuncs);
@@ -838,7 +838,7 @@ export class modifier_imba_command_aura_negative extends BaseModifier_Plus {
     CC_GetModifierSpellAmplify_Percentage(p_0: ModifierAttackEvent,): number {
         return this.spell_power;
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASEDAMAGEOUTGOING_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_ATTACK_DAMAGE_PERCENTAGE)
     CC_GetModifierBaseDamageOutgoing_Percentage(p_0: ModifierAttackEvent,): number {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_vengefulspirit_8")) {
             return 0;
@@ -846,7 +846,7 @@ export class modifier_imba_command_aura_negative extends BaseModifier_Plus {
             return this.bonus_damage_pct;
         }
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOTALDAMAGEOUTGOING_PERCENTAGE)
     CC_GetModifierDamageOutgoing_Percentage(p_0: ModifierAttackEvent,): number {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_vengefulspirit_8")) {
             return this.bonus_damage_pct;

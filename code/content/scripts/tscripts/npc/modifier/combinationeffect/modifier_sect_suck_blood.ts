@@ -6,7 +6,7 @@ import { modifier_combination_effect } from "./modifier_combination_effect";
 @registerModifier()
 export class modifier_sect_suck_blood_base_a extends modifier_combination_effect {
 
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.LIFESTEAL_AMPLIFY_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.LIFESTEAL_PERCENTAGE)
     lifesteal_pect: number;
     Init(kv: any) {
         this.lifesteal_pect = this.getSpecialData("lifesteal_pect");
@@ -27,7 +27,7 @@ export class modifier_sect_suck_blood_base_a extends modifier_combination_effect
 }
 @registerModifier()
 export class modifier_sect_suck_blood_base_b extends modifier_combination_effect {
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.LIFESTEAL_AMPLIFY_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.LIFESTEAL_PERCENTAGE)
     lifesteal_pect: number;
     Init(kv: any) {
         this.lifesteal_pect = this.getSpecialData("lifesteal_pect");
@@ -35,7 +35,7 @@ export class modifier_sect_suck_blood_base_b extends modifier_combination_effect
 }
 @registerModifier()
 export class modifier_sect_suck_blood_base_c extends modifier_combination_effect {
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.LIFESTEAL_AMPLIFY_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.LIFESTEAL_PERCENTAGE)
     lifesteal_pect: number;
     Init(kv: any) {
         this.lifesteal_pect = this.getSpecialData("lifesteal_pect");

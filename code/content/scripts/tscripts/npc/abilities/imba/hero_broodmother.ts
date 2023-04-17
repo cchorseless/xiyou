@@ -221,7 +221,7 @@ export class modifier_imba_broodmother_spawn_spiderlings_avenger_buff extends Ba
         }
         return Object.values(funcs);
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASEDAMAGEOUTGOING_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_ATTACK_DAMAGE_PERCENTAGE)
     CC_GetModifierBaseDamageOutgoing_Percentage(p_0: ModifierAttackEvent,): number {
         return this.avenger_damage_pct * this.GetStackCount();
     }
@@ -917,7 +917,8 @@ export class modifier_imba_broodmother_insatiable_hunger extends BaseModifier_Pl
     CC_GetModifierBaseAttack_BonusDamage(): number {
         return this.bonus_damage;
     }
-    GetModifierLifesteal() {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.LIFESTEAL_PERCENTAGE)
+    CC_LIFESTEAL_AMPLIFY_PERCENTAGE() {
         return this.lifesteal_pct;
     }
     BeDestroy(): void {

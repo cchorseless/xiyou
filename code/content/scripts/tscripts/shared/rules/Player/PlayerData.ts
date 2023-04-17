@@ -31,4 +31,6 @@ export class PlayerData extends ET.Component {
     perIntervalGold: number = 0;
     @serializeETProps()
     perIntervalWood: number = 0;
+    @serializeETProps()
+    perIntervalSoulCrystal: number = 0;
 }

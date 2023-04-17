@@ -96,7 +96,7 @@ export class modifier_generic_poison extends BaseModifier_Plus {
                     damage: iDamage,
                     damage_type: DAMAGE_TYPES.DAMAGE_TYPE_MAGICAL,
                     damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION,
-                    extra_flags: GEBATTLE_DAMAGE_FLAGS.DAMAGE_FLAG_POISON + GEBATTLE_DAMAGE_FLAGS.DAMAGE_FLAG_DOT + GEBATTLE_DAMAGE_FLAGS.DAMAGE_FLAG_NO_DAMAGE_TRANSFORM + GEBATTLE_DAMAGE_FLAGS.DAMAGE_FLAG_NO_SPELL_CRIT,
+                    extra_flags: GEBATTLE_DAMAGE_FLAGS.DAMAGE_FLAG_POISON + GEBATTLE_DAMAGE_FLAGS.DAMAGE_FLAG_DOT + GEBATTLE_DAMAGE_FLAGS.DAMAGE_FLAG_NO_SPELL_CRIT,
                 })
             }
             //  头顶绿色数字
@@ -136,7 +136,6 @@ export class modifier_generic_poison extends BaseModifier_Plus {
                 damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION,
                 extra_flags: GEBATTLE_DAMAGE_FLAGS.DAMAGE_FLAG_POISON +
                     GEBATTLE_DAMAGE_FLAGS.DAMAGE_FLAG_DOT +
-                    GEBATTLE_DAMAGE_FLAGS.DAMAGE_FLAG_NO_DAMAGE_TRANSFORM +
                     GEBATTLE_DAMAGE_FLAGS.DAMAGE_FLAG_NO_SPELL_CRIT,
             })
             SendOverheadEventMessage(null, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_BONUS_POISON_DAMAGE, parent, iDamage, parent.GetPlayerOwner())

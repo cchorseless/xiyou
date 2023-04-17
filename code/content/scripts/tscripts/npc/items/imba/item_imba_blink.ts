@@ -92,9 +92,9 @@ export class modifier_imba_blink_dagger_handler extends BaseModifier_Plus {
     }
 
     // 测试
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PROCATTACK_BONUS_DAMAGE_PHYSICAL)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.NEGATIVE_EVASION_CONSTANT)
     CC_GetModifierProcAttack_BonusDamage_Physical(kv: ModifierAttackEvent): number {
-        return 20;
+        return 50;
     }
 
 }

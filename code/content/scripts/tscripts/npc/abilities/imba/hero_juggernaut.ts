@@ -240,13 +240,13 @@ export class modifier_imba_juggernaut_blade_fury extends BaseModifier_Plus {
     }
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.TOTALDAMAGEOUTGOING_PERCENTAGE,
             2: GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_CONSTANT,
             3: GPropertyConfig.EMODIFIER_PROPERTY.OVERRIDE_ANIMATION,
             4: Enum_MODIFIER_EVENT.ON_ATTACK_LANDED
         });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOTALDAMAGEOUTGOING_PERCENTAGE)
     CC_GetModifierDamageOutgoing_Percentage(keys: ModifierAttackEvent): number {
         if (keys.target && !keys.target.IsMagicImmune() && !keys.target.IsBuilding()) {
             return this.damage_penalty;
@@ -1487,7 +1487,7 @@ export class modifier_imba_omni_slash_image extends BaseModifier_Plus {
             this.Destroy();
         }
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOTALDAMAGEOUTGOING_PERCENTAGE)
     CC_GetModifierDamageOutgoing_Percentage(p_0: ModifierAttackEvent,): number {
         let image_outgoing_damage_percent = (100 - this.GetCasterPlus().GetTalentValue("special_bonus_imba_juggernaut_7")) * (-1);
         return image_outgoing_damage_percent;
@@ -1509,7 +1509,7 @@ export class modifier_imba_omni_slash_talent extends BaseModifier_Plus {
     public base_bonus_damage: number;
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE,
+            1: GPropertyConfig.EMODIFIER_PROPERTY.TOTALDAMAGEOUTGOING_PERCENTAGE,
             2: GPropertyConfig.EMODIFIER_PROPERTY.BASEATTACK_BONUSDAMAGE
         });
     } */
@@ -1538,7 +1538,7 @@ export class modifier_imba_omni_slash_talent extends BaseModifier_Plus {
         }
         return 0;
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOTALDAMAGEOUTGOING_PERCENTAGE)
     CC_GetModifierDamageOutgoing_Percentage(p_0: ModifierAttackEvent,): number {
         let caster_outgoing_damage_percent = (100 - this.GetCasterPlus().GetTalentValue("special_bonus_imba_juggernaut_7", "caster_outgoing_damage")) * (-1);
         return caster_outgoing_damage_percent;

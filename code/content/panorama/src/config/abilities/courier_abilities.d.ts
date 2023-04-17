@@ -99,6 +99,8 @@ declare namespace courier_abilities {
 "population_add" :string ,
 "good_add_interval" :string ,
 "wood_add_interval" :string ,
+"soul_add_interval" :string ,
+"stat_all_add" :string ,
 "draw_count" :string ,
 "gold_interval" :string ,
 "interval" :string ,

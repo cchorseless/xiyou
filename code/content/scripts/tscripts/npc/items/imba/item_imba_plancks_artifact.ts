@@ -177,7 +177,8 @@ export class modifier_imba_plancks_artifact_unique extends BaseModifier_Plus {
             2: Enum_MODIFIER_EVENT.ON_DEATH
         });
     } */
-    GetModifierSpellLifesteal() {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_LIFESTEAL_PERCENTAGE)
+    CC_SPELL_LIFESTEAL_AMPLIFY_PERCENTAGE() {
         return this.GetItemPlus().GetSpecialValueFor("spell_lifesteal");
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.COOLDOWN_PERCENTAGE)

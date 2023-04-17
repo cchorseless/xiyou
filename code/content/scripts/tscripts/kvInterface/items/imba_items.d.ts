@@ -734,6 +734,7 @@ declare namespace imba_items {
 "restore_per_charge" :string ,
 "initial_charges" :string ,
 "lifesteal_pct" :string ,
+"creep_lifesteal_reduction_pct" :string ,
 "rage_max_distance" :string ,
 "attack_speed_bonus" :string ,
 "damage_bonus" :string ,

@@ -454,7 +454,7 @@ export class modifier_imba_luna_lunar_blessing_723 extends BaseModifier_Plus {
         return Object.values({
             1: GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS,
             2: GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP,
-            3: GPropertyConfig.EMODIFIER_PROPERTY.BASEDAMAGEOUTGOING_PERCENTAGE,
+            3: GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_ATTACK_DAMAGE_PERCENTAGE,
             4: GPropertyConfig.EMODIFIER_PROPERTY.BONUS_NIGHT_VISION
         });
     } */
@@ -472,7 +472,7 @@ export class modifier_imba_luna_lunar_blessing_723 extends BaseModifier_Plus {
             return 0;
         }
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASEDAMAGEOUTGOING_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_ATTACK_DAMAGE_PERCENTAGE)
     CC_GetModifierBaseDamageOutgoing_Percentage(p_0: ModifierAttackEvent,): number {
         if (this.GetAbilityPlus() && !this.GetCasterPlus().PassivesDisabled()) {
             return this.GetSpecialValueFor("damage_pct");

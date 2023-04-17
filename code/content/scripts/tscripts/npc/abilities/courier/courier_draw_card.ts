@@ -26,7 +26,7 @@ export class courier_draw_card_v1 extends BaseAbility_Plus {
         return 0
     }
     GetGoldCost(level: number): number {
-        return 10;
+        return this.GetSpecialValueFor("gold_cost")
     }
 }
 
@@ -54,7 +54,7 @@ export class courier_draw_card_v2 extends BaseAbility_Plus {
         return 0
     }
     GetGoldCost(level: number): number {
-        return 20
+        return this.GetSpecialValueFor("gold_cost")
     }
 
 }
@@ -83,6 +83,6 @@ export class courier_draw_card_v3 extends BaseAbility_Plus {
     }
 
     GetGoldCost(level: number): number {
-        return 50
+        return this.GetSpecialValueFor("gold_cost")
     }
 }

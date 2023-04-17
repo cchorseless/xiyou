@@ -70,7 +70,8 @@ export class modifier_imba_mask_of_madness extends BaseModifier_Plus {
             return this.GetItemPlus().GetSpecialValueFor("attack_speed_bonus");
         }
     }
-    GetModifierLifesteal() {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.LIFESTEAL_PERCENTAGE)
+    CC_LIFESTEAL_AMPLIFY_PERCENTAGE() {
         if (this.GetItemPlus() && this.GetParentPlus().FindAllModifiersByName(this.GetName())[0] == this) {
             return this.GetItemPlus().GetSpecialValueFor("lifesteal_pct");
         }
