@@ -3,17 +3,20 @@ import { EventHelper } from "../../../helper/EventHelper";
 import { KVHelper } from "../../../helper/KVHelper";
 import { DrawConfig } from "../../../shared/DrawConfig";
 import { ET, serializeETProps } from "../../../shared/lib/Entity";
-import { PlayerScene } from "../Player/PlayerScene";
+import { ERoundBoard } from "../Round/ERoundBoard";
 
 @GReloadable
-export class DrawComponent extends ET.Component {
+export class DrawComponent extends ET.Component implements IRoundStateCallback {
     @serializeETProps()
     tLastCards: string[] = [];
 
     onAwake(...args: any[]): void {
         this.SyncClient();
     }
-
+    OnRound_Start(round: ERoundBoard) { }
+    OnRound_Battle() { }
+    OnRound_Prize(round: ERoundBoard) { }
+    OnRound_WaitingEnd() { }
     //  开局抽卡
     DrawStartCard() {
         // let sReservoirName = "draw_card_start";
@@ -71,6 +74,7 @@ export class DrawComponent extends ET.Component {
         }
         this.tLastCards = [].concat(r_arr);
         this.SyncClient();
+        // 通知客户端
         EventHelper.fireProtocolEventToPlayer(DrawConfig.EProtocol.DrawCardResult, null, this.BelongPlayerid);
     }
 
@@ -107,58 +111,7 @@ export class DrawComponent extends ET.Component {
         this.SyncClient();
         return [true, ""];
     }
-    //  选卡
-    OnSelectCard2(index: number, unitName: string, b2Public: boolean = false): [boolean, string] {
-        if (!GPlayerEntityRoot.GetOneInstance(this.BelongPlayerid).CheckIsAlive()) {
-            return [false, "hero is death"];
-        }
-        if (this.tLastCards[index] !== unitName) {
-            return [false, "index error"];
-        }
-        let cardItemName = KVHelper.KvServerConfig.building_unit_tower[unitName].CardName;
-        // let hItem = BaseItem_Plus.CreateOneToUnit(this.GetDomain<BaseNpc_Hero_Plus>(), cardItemName);
-        let hItem = this.GetDomain<PlayerScene>().ETRoot.Hero.AddItemByName(cardItemName);
-        // hItem.OnSpellStart()
-        if (IsValid(hItem) && b2Public) {
-            // Items.TryMoveEmptyPublic(iPlayerID, hHero, hItem);
-            this.tLastCards = [];
-        }
-        // let bFreeTake = this.tPlayerCards[iPlayerID].bFreeTake;
-        // let index = TableFindKey(this.tPlayerCards[iPlayerID].tTower, sTowerName);
-        // if (index != null) {
-        //     //  VIP限定卡牌
-        //     if (this.tPlayerCards[iPlayerID].tVipCards && this.tPlayerCards[iPlayerID].tVipCards[index] == 1 && !PlayerProperty.HasPlus(iPlayerID)) {
-        //         ErrorMessage(iPlayerID, "dota_hud_error_card_need_VIP");
-        //         return;
-        //     }
-        //     let sCardName = Card.Tower2CardName(sTowerName);
-        //     let iCost = GetItemCost(sCardName);
-        //     if (!bFreeTake && PlayerData.GetGold(iPlayerID) < iCost) {
-        //         ErrorMessage(iPlayerID, "DOTA_Hud_NeedMoreGold");
-        //         return;
-        //     }
-        //     if (!bFreeTake) {
-        //         PlayerData.ModifyGold(iPlayerID, -iCost);
-        //     }
 
-        //     let hItem = hHero.GiveItem(sCardName);
-        //     if (IsValid(hItem) && b2Public) {
-        //         Items.TryMoveEmptyPublic(iPlayerID, hHero, hItem);
-        //     }
-
-        //     //  if ( Card.GetCardRarity(sCardName) == "ssr" ) {
-        //     //  	CustomGameEventManager.Send_ServerToAllClients("show_drawing", { name = sCardName })
-        //     //  } else if ( Card.GetCardRarity(sCardName) == "sr" ) {
-        //     //  	CustomGameEventManager.Send_ServerToPlayer(PlayerResource.GetPlayer(iPlayerID), "show_drawing", { name = sCardName })
-        //     //  }
-        //     this.tPlayerCards[iPlayerID] = {};
-        //     this.tReDrawChance[iPlayerID] = 0;
-        //     this.tLastCards[iPlayerID] = {};
-        //     this.UpdateNetTables();
-        // }
-        this.SyncClient();
-        return [true, ""];
-    }
     // 开局选卡
     OnStartCardSelected(index: number, sCardName: string): [boolean, string] {
         if (!GPlayerEntityRoot.GetOneInstance(this.BelongPlayerid).CheckIsAlive()) {
@@ -183,15 +136,7 @@ export class DrawComponent extends ET.Component {
         // this.UpdateNetTables();
     }
 
-    OnSelectCard2Public(index: number, sCardName: string): [boolean, string] {
-        if (!GPlayerEntityRoot.GetOneInstance(this.BelongPlayerid).CheckIsAlive()) {
-            return [false, "hero is death"];
-        }
-        return [true, ""];
-        // let iPlayerID = events.PlayerID;
-        // let cardName = events.card_name || "";
-        // this.SelectCard(iPlayerID, cardName, true);
-    }
+
     OnRedrawStartCard(index: number, sCardName: string): [boolean, string] {
         if (!GPlayerEntityRoot.GetOneInstance(this.BelongPlayerid).CheckIsAlive()) {
             return [false, "hero is death"];

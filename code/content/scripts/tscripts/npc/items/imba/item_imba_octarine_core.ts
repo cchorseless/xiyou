@@ -27,7 +27,7 @@ export class item_imba_octarine_core extends BaseItem_Plus {
         this.EndCooldown();
     }
     GetAbilityTextureName(): string {
-        if (this.GetCasterPlus().findBuffStack("modifier_imba_octarine_core_basic", this.GetCasterPlus()) == 1) {
+        if (this.GetCasterPlus() && this.GetCasterPlus().findBuffStack("modifier_imba_octarine_core_basic", this.GetCasterPlus()) == 1) {
             return "imba/octarine_core_off";
         } else {
             return "imba/octarine_core";

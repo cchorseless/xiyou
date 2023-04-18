@@ -213,29 +213,46 @@ export class CourierShopComponent extends ET.Component {
                 return
             }
             itemEntity = playerroot.Hero.CreateOneItem(item.sItemName);
-            ItemEntityRoot.Active(itemEntity);
-            let itemroot = itemEntity.ETRoot as ItemEntityRoot;
-            courierroot.CourierBagComp().putInItem(itemroot);
+            // 先消耗金币，再尝试使用道具
+            if (IsValid(itemEntity)) {
+                playerroot.PlayerDataComp().changeItem(item.iCoinType, -costcoin);
+                playerroot.PlayerDataComp().SyncClient();
+            }
+            if (IsValid(itemEntity) && itemEntity.CanBeUsedOutOfInventory()) {
+                itemEntity = itemEntity.UseOutOfInventory(!bBuyItem2Bag);
+            }
+            if (IsValid(itemEntity)) {
+                ItemEntityRoot.Active(itemEntity);
+                let itemroot = itemEntity.ETRoot as ItemEntityRoot;
+                courierroot.CourierBagComp().putInItem(itemroot);
+            }
         }
         else {
             let isGround = toNpc.IsInventoryFull();
             itemEntity = toNpc.AddItemOrInGround(item.sItemName);
-            if (isGround) {
-                EventHelper.ErrorMessage("购买成功，物品已放在地上");
+            // 先消耗金币，再尝试使用道具
+            if (IsValid(itemEntity)) {
+                playerroot.PlayerDataComp().changeItem(item.iCoinType, -costcoin);
+                playerroot.PlayerDataComp().SyncClient();
             }
-            if (toNpc.ETRoot) {
-                let npcroot = toNpc.ETRoot as IBattleUnitEntityRoot;
-                if (npcroot.InventoryComp()) {
-                    ItemEntityRoot.Active(itemEntity);
-                    let itemroot = itemEntity.ETRoot as ItemEntityRoot;
-                    npcroot.InventoryComp().putInItem(itemroot);
+            if (IsValid(itemEntity) && itemEntity.CanBeUsedOutOfInventory()) {
+                itemEntity = itemEntity.UseOutOfInventory(!bBuyItem2Bag);
+            }
+            if (IsValid(itemEntity)) {
+                if (isGround) {
+                    EventHelper.ErrorMessage("购买成功，物品已放在地上");
+                }
+                if (toNpc.ETRoot) {
+                    let npcroot = toNpc.ETRoot as IBattleUnitEntityRoot;
+                    if (npcroot.InventoryComp()) {
+                        ItemEntityRoot.Active(itemEntity);
+                        let itemroot = itemEntity.ETRoot as ItemEntityRoot;
+                        npcroot.InventoryComp().putInItem(itemroot);
+                    }
                 }
             }
         }
-        if (IsValid(itemEntity)) {
-            playerroot.PlayerDataComp().changeItem(item.iCoinType, -costcoin);
-            playerroot.PlayerDataComp().SyncClient();
-        }
+
 
     }
 

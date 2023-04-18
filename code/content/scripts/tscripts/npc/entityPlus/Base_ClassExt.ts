@@ -74,6 +74,9 @@ function SafeDestroyItem(item: IBaseItem_Plus) {
         if (item.OnDestroy) {
             item.OnDestroy();
         }
+        if (item.GetContainer()) {
+            item.GetContainer().Destroy()
+        }
         item.Destroy();
         // UTIL_Remove(item);
     }
@@ -909,7 +912,7 @@ if (IsClient()) {
 //----------------------------------------------------------------------------------------------------
 declare global {
     interface CDOTA_Item {
-        /**获取作用归属NPC，在谁身上 
+        /**获取作用归属NPC，属于谁的物品 
          * @Server
         */
         GetParentPlus(): IBaseNpc_Plus;
@@ -945,6 +948,16 @@ declare global {
          * 空物品
          */
         IsItemBlank(): boolean;
+        /**
+        * @Server
+        * 是否在背包中
+        */
+        IsInInventory(): boolean;
+        /**
+         * @Server
+         * 尝试在背包外使用，返回使用后的物品
+         */
+        UseOutOfInventory(isInventory?: boolean): IBaseItem_Plus | null;
     }
 }
 
@@ -982,6 +995,13 @@ if (IsServer()) {
         }
         return false;
     }
+    CBaseItem.IsInInventory = function () {
+        return this.GetContainer() == null;
+    }
+    CBaseItem.UseOutOfInventory = function (isInventory: boolean) {
+        return this as any as IBaseItem_Plus;
+    }
+
 }
 
 

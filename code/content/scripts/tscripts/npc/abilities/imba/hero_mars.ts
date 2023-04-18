@@ -378,7 +378,7 @@ export class modifier_imba_mars_spear_trailblazer_thinker extends BaseModifier_P
             return;
         }
         let damage = this.GetSpecialValueFor("damage") * this.tick_time;
-        let enemies = undefined;
+        let enemies: IBaseNpc_Plus[] = undefined;
         if (this.heaven_spear && this.heaven_spear == 1) {
             enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.start_pos, undefined, this.GetSpecialValueFor("trailblazer_radius"), this.GetAbilityPlus().GetAbilityTargetTeam(), this.GetAbilityPlus().GetAbilityTargetType(), this.GetAbilityPlus().GetAbilityTargetFlags(), 0, false);
         } else {
@@ -921,7 +921,7 @@ export class modifier_imba_mars_bulwark_jupiters_strength extends BaseModifier_P
     }
     BeCreated(p_0: any,): void {
         if (IsServer()) {
-            this.duration = this.GetSpecialValueFor("jupiters_strength_duration");
+            this.duration = 10;
             this.stack_table = []
             this.StartIntervalThink(0.1);
         }

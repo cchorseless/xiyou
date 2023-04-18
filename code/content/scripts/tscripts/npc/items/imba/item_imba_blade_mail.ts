@@ -9,7 +9,7 @@ export class item_imba_blade_mail extends BaseItem_Plus {
     GetAbilityTextureName(): string {
         if (this.GetLevel() == 2) {
             return "imba/bladestorm_mail";
-        } else if (this.GetCasterPlus().GetUnitName().includes("axe")) {
+        } else if (this.GetCasterPlus() && this.GetCasterPlus().GetUnitName().includes("axe")) {
             return "imba/blade_mail_axe";
         } else {
             return "imba/blade_mail";

@@ -21,16 +21,16 @@ export class item_imba_origin_treads extends BaseItem_Plus {
         return UnitFilter(target, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, this.GetCasterPlus().GetTeamNumber());
     }
     GetAbilityTextureName(): string {
-        let origin_modifier_stack_count = this.GetCasterPlus().findBuffStack("modifier_item_imba_origin_treads", this.GetCasterPlus());
-        if (origin_modifier_stack_count) {
-            if (origin_modifier_stack_count <= 1) {
-                return "imba/origin_treads_str";
-            } else if (origin_modifier_stack_count == 2) {
-                return "imba/origin_treads_agi";
-            } else if (origin_modifier_stack_count == 3) {
-                return "imba/origin_treads_int";
-            } else {
-                return "imba/origin_treads_str";
+        if (IsValid(this.GetCasterPlus())) {
+            let origin_modifier_stack_count = this.GetCasterPlus().findBuffStack("modifier_item_imba_origin_treads", this.GetCasterPlus());
+            if (origin_modifier_stack_count) {
+                if (origin_modifier_stack_count <= 1) {
+                    return "imba/origin_treads_str";
+                } else if (origin_modifier_stack_count == 2) {
+                    return "imba/origin_treads_agi";
+                } else if (origin_modifier_stack_count == 3) {
+                    return "imba/origin_treads_int";
+                }
             }
         }
         return "imba/origin_treads_str";

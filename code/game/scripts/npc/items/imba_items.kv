@@ -5,1780 +5,223 @@
 		"BaseClass" "item_datadriven"
 		"AbilityTextureName" "lockicon"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "C"
 		"ItemPurchasable" "0"
 		"ItemKillable" "0"
 		"ItemSellable" "0"
 
 	}
-	"item_treasure_chest" {
-		"BaseClass" "item_bag_of_gold"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_ITEM"
-		"AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
-		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO"
-		"Model" "models/props_gameplay/treasure_chest001.vmdl"
-		"AbilityCastRange" "100"
-		"AbilityCastPoint" "0.0"
-		"ItemCost" "99999"
-		"ItemShopTags" "consumable"
-		"ItemQuality" "consumable"
-		"ItemStackable" "1"
-		"ItemShareability" "ITEM_FULLY_SHAREABLE"
-		"ItemPermanent" "0"
-		"ItemPurchasable" "0"
-		"ItemKillable" "0"
-
-	}
-	"item_bag_of_gold" {
-		"BaseClass" "item_datadriven"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
-		"AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
-		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO"
-		"Model" "models/props_winter/present.vmdl"
-		"AbilityCastRange" "100"
-		"AbilityCastPoint" "0.0"
-		"ItemCost" "99999"
-		"ItemShopTags" "consumable"
-		"ItemQuality" "consumable"
-		"ItemStackable" "1"
-		"ItemShareability" "ITEM_FULLY_SHAREABLE"
-		"ItemPermanent" "0"
-		"ItemPurchasable" "0"
-		"ItemKillable" "0"
-
-	}
-	"item_imba_dummy" {
-		"BaseClass" "item_datadriven"
+	"item_shop_gold_bag" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "shop/gold_bag"
+		"ScriptFile" "npc/items/shop/item_shop_coin_bag"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"ItemPurchasable" "0"
-		"ItemKillable" "0"
-		"ItemSellable" "0"
-
-	}
-	"item_imba_rune_bounty" {
-		"BaseClass" "item_datadriven"
-		"Model" "models/props_gameplay/rune_goldxp.vmdl"
-		"ItemCost" "0"
-		"ItemQuality" "artifact"
-		"ItemPurchasable" "0"
-		"ItemKillable" "1"
-		"ItemSellable" "0"
+		"Model" "models/props_gameplay/tpscroll01.vmdl"
+		"Effect" "particles/generic_gameplay/dropped_item_clinkz.vpcf"
+		"Rarity" "C"
+		"ItemCost" "100"
+		"WoodCost" "50"
+		"SoulCrystalCost" "10"
 		"AbilitySpecial" {
 			"01" {
 				"var_type" "FIELD_INTEGER"
-				"base_bounty" "40"
+				"gold_get" "200"
 
 			}
 			"02" {
 				"var_type" "FIELD_INTEGER"
-				"bounty_increase_per_minute" "2"
+				"cur_get" "0"
 
 			}
 			"03" {
 				"var_type" "FIELD_INTEGER"
-				"xp_increase_per_minute" "0"
+				"need_max" "1000"
+
+			}
+
+		}
+
+	}
+	"item_shop_wood_bag" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "shop/wood_bag"
+		"ScriptFile" "npc/items/shop/item_shop_coin_bag"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Model" "models/props_gameplay/tpscroll01.vmdl"
+		"Effect" "particles/generic_gameplay/dropped_item_clinkz.vpcf"
+		"Rarity" "C"
+		"ItemCost" "100"
+		"WoodCost" "50"
+		"SoulCrystalCost" "10"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"wood_get" "100"
+
+			}
+			"02" {
+				"var_type" "FIELD_INTEGER"
+				"cur_get" "0"
+
+			}
+			"03" {
+				"var_type" "FIELD_INTEGER"
+				"need_max" "500"
+
+			}
+
+		}
+
+	}
+	"item_shop_soulcrystal_bag" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "shop/soulcrystal_bag"
+		"ScriptFile" "npc/items/shop/item_shop_coin_bag"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Model" "models/props_gameplay/tpscroll01.vmdl"
+		"Effect" "particles/generic_gameplay/dropped_item_clinkz.vpcf"
+		"Rarity" "C"
+		"ItemCost" "100"
+		"WoodCost" "50"
+		"SoulCrystalCost" "10"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"soulcrystal_get" "20"
+
+			}
+			"02" {
+				"var_type" "FIELD_INTEGER"
+				"cur_get" "0"
+
+			}
+			"03" {
+				"var_type" "FIELD_INTEGER"
+				"need_max" "100"
+
+			}
+
+		}
+
+	}
+	"item_shop_lottery_ticket" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "shop/lottery_ticket"
+		"ScriptFile" "npc/items/shop/item_shop_lottery_ticket"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
+		"Model" "models/props_gameplay/tpscroll01.vmdl"
+		"Effect" "particles/generic_gameplay/dropped_item_clinkz.vpcf"
+		"Rarity" "C"
+		"ItemCost" "50"
+		"WoodCost" "25"
+		"SoulCrystalCost" "5"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"gold_cost_pect" "20"
+
+			}
+			"02" {
+				"var_type" "FIELD_INTEGER"
+				"gold_get_2" "40"
+
+			}
+			"03" {
+				"var_type" "FIELD_INTEGER"
+				"gold_get_5" "10"
 
 			}
 			"04" {
 				"var_type" "FIELD_INTEGER"
-				"super_runes_multiplier" "2"
+				"gold_get_100" "2"
 
 			}
 
 		}
 
 	}
-	"item_imba_rune_haste" {
-		"BaseClass" "item_datadriven"
-		"Model" "models/props_gameplay/rune_haste01.vmdl"
-		"ItemCost" "0"
-		"ItemQuality" "artifact"
-		"ItemPurchasable" "0"
-		"ItemKillable" "1"
-		"ItemSellable" "0"
-
-	}
-	"item_imba_rune_doubledamage" {
-		"BaseClass" "item_datadriven"
-		"Model" "models/props_gameplay/rune_doubledamage01.vmdl"
-		"ItemCost" "0"
-		"ItemQuality" "artifact"
-		"ItemPurchasable" "0"
-		"ItemKillable" "1"
-		"ItemSellable" "0"
-
-	}
-	"item_imba_rune_regen" {
-		"BaseClass" "item_datadriven"
-		"Model" "models/props_gameplay/rune_regeneration01.vmdl"
-		"ItemCost" "0"
-		"ItemQuality" "artifact"
-		"ItemPurchasable" "0"
-		"ItemKillable" "1"
-		"ItemSellable" "0"
-
-	}
-	"item_imba_rune_arcane" {
-		"BaseClass" "item_datadriven"
-		"Model" "models/props_gameplay/rune_arcane.vmdl"
-		"ItemCost" "0"
-		"ItemQuality" "artifact"
-		"ItemPurchasable" "0"
-		"ItemKillable" "1"
-		"ItemSellable" "0"
-
-	}
-	"item_imba_rune_invis" {
-		"BaseClass" "item_datadriven"
-		"Model" "models/props_gameplay/rune_invisibility01.vmdl"
-		"ItemCost" "0"
-		"ItemQuality" "artifact"
-		"ItemPurchasable" "0"
-		"ItemKillable" "1"
-		"ItemSellable" "0"
-
-	}
-	"item_imba_rune_illusion" {
-		"BaseClass" "item_datadriven"
-		"Model" "models/props_gameplay/rune_illusion01.vmdl"
-		"ItemCost" "0"
-		"ItemQuality" "artifact"
-		"ItemPurchasable" "0"
-		"ItemKillable" "1"
-		"ItemSellable" "0"
-
-	}
-	"item_imba_rune_frost" {
-		"BaseClass" "item_datadriven"
-		"Model" "models/props_gameplay/rune_ice_imba.vmdl"
-		"ItemCost" "0"
-		"ItemQuality" "artifact"
-		"ItemPurchasable" "0"
-		"ItemKillable" "1"
-		"ItemSellable" "0"
-
-	}
-	"item_imba_rune_ember" {
-		"BaseClass" "item_datadriven"
-		"Model" "models/props_destruction/lava_flow_clump.vmdl"
-		"ItemCost" "0"
-		"ItemQuality" "artifact"
-		"ItemPurchasable" "0"
-		"ItemKillable" "1"
-		"ItemSellable" "0"
-
-	}
-	"item_imba_rune_stone" {
-		"BaseClass" "item_datadriven"
-		"Model" "models/items/wards/stonebound_ward/stonebound_ward.vmdl"
-		"ItemCost" "0"
-		"ItemQuality" "artifact"
-		"ItemPurchasable" "0"
-		"ItemKillable" "1"
-		"ItemSellable" "0"
-
-	}
-	"item_imba_recipe_magic_wand" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_magic_wand"
-		"ItemRequirements" {
-			"01" "item_branches_custom;item_branches_custom;item_circlet_custom;item_imba_magic_stick_custom"
-
-		}
-		"ItemCost" "0"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_hand_of_midas" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_hand_of_midas"
-		"ItemRequirements" {
-			"01" "item_gloves_custom"
-
-		}
-		"ItemCost" "1750"
-		"ItemShopTags" ""
-		"ItemAliases" "midas; hand of midas; hom"
-
-	}
-	"item_imba_recipe_arcane_boots" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_arcane_boots"
-		"ItemRequirements" {
-			"01" "item_energy_booster_custom;item_boots_custom"
-
-		}
-		"ItemCost" "0"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_mekansm" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_mekansm"
-		"ItemRequirements" {
-			"01" "item_headdress_custom;item_chainmail_custom"
-
-		}
-		"ItemCost" "900"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_guardian_greaves" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_guardian_greaves"
-		"ItemRequirements" {
-			"01" "item_imba_mekansm_custom;item_imba_arcane_boots_custom;item_buckler_custom"
-
-		}
-		"ItemCost" "1600"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_vladmir" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_vladmir"
-		"ItemRequirements" {
-			"01" "item_buckler_custom;item_ring_of_basilius_custom;item_blades_of_attack_custom;item_imba_morbid_mask_custom"
-
-		}
-		"ItemCost" "600"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_vladmir_2" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_vladmir_2"
-		"ItemRequirements" {
-			"01" "item_imba_vladmir_custom;item_pers_custom"
-
-		}
-		"ItemCost" "1000"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_sheepstick" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_sheepstick"
-		"ItemRequirements" {
-			"01" "item_mystic_staff_custom;item_ultimate_orb_custom;item_void_stone_custom"
-
-		}
-		"ItemCost" "0"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_orchid" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_orchid"
-		"ItemRequirements" {
-			"01" "item_oblivion_staff_custom;item_oblivion_staff_custom"
-
-		}
-		"ItemCost" "775"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_bloodthorn" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_bloodthorn"
-		"ItemRequirements" {
-			"01" "item_imba_orchid_custom;item_hyperstone_custom"
-
-		}
-		"ItemCost" "1000"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_dagon" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_dagon"
-		"ItemRequirements" {
-			"01" "item_belt_of_strength_custom;item_boots_of_elves_custom;item_robe_custom"
-
-		}
-		"ItemCost" "0"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_dagon_2" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_dagon_2"
-		"ItemRequirements" {
-			"01" "item_imba_dagon_custom;item_recipe_dagon_custom"
-
-		}
-		"ItemCost" "0"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_dagon_3" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_dagon_3"
-		"ItemRequirements" {
-			"01" "item_imba_dagon_2_custom;item_recipe_dagon_custom"
-
-		}
-		"ItemCost" "0"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_dagon_4" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_dagon_4"
-		"ItemRequirements" {
-			"01" "item_imba_dagon_3_custom;item_recipe_dagon_custom"
-
-		}
-		"ItemCost" "0"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_dagon_5" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_dagon_5"
-		"ItemRequirements" {
-			"01" "item_imba_dagon_4_custom;item_recipe_dagon_custom"
-
-		}
-		"ItemCost" "0"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_necronomicon" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_necronomicon"
-		"ItemRequirements" {
-			"01" "item_sobi_mask_custom;item_sobi_mask_custom;item_belt_of_strength_custom"
-
-		}
-		"ItemCost" "1250"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_necronomicon_2" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_necronomicon_2"
-		"ItemRequirements" {
-			"01" "item_imba_necronomicon_custom;item_recipe_imba_necronomicon_custom"
-
-		}
-		"ItemCost" "0"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_necronomicon_3" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_necronomicon_3"
-		"ItemRequirements" {
-			"01" "item_imba_necronomicon_2_custom;item_recipe_imba_necronomicon_custom"
-
-		}
-		"ItemCost" "0"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_necronomicon_4" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_necronomicon_4"
-		"ItemRequirements" {
-			"01" "item_imba_necronomicon_3_custom;item_recipe_imba_necronomicon_custom"
-
-		}
-		"ItemCost" "0"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_necronomicon_5" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_necronomicon_5"
-		"ItemRequirements" {
-			"01" "item_imba_necronomicon_4_custom;item_recipe_imba_necronomicon_custom"
-
-		}
-		"ItemCost" "0"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_assault" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_assault"
-		"ItemRequirements" {
-			"01" "item_platemail_custom;item_hyperstone_custom;item_buckler_custom"
-
-		}
-		"ItemCost" "1300"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_siege_cuirass" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_siege_cuirass"
-		"ItemRequirements" {
-			"01" "item_imba_ancient_janggo_custom;item_imba_assault_custom"
-
-		}
-		"ItemCost" "225"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_heart" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_heart"
-		"ItemRequirements" {
-			"01" "item_reaver_custom;item_vitality_booster_custom"
-
-		}
-		"ItemCost" "900"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_shivas_guard" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_shivas_guard"
-		"ItemRequirements" {
-			"01" "item_platemail_custom;item_mystic_staff_custom"
-
-		}
-		"ItemCost" "600"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_bloodstone" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_bloodstone"
-		"ItemRequirements" {
-			"01" "item_pers_custom;item_soul_booster_custom"
-
-		}
-		"ItemCost" "0"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_poor_mans_shield" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_poor_mans_shield"
-		"ItemRequirements" {
-			"01" "item_imba_stout_shield_custom;item_slippers_custom;item_slippers_custom"
-
-		}
-		"ItemCost" "0"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_vanguard" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_vanguard"
-		"ItemRequirements" {
-			"01" "item_vitality_booster_custom;item_ring_of_health_custom"
-
-		}
-		"ItemCost" "0"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_crimson_guard" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_crimson_guard"
-		"ItemRequirements" {
-			"01" "item_imba_vanguard_custom;item_helm_of_iron_will_custom"
-
-		}
-		"ItemCost" "950"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_sogat_cuirass" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_sogat_cuirass"
-		"ItemRequirements" {
-			"01" "item_imba_crimson_guard_custom;item_imba_assault_custom"
-
-		}
-		"ItemCost" "695"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_monkey_king_bar" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_monkey_king_bar"
-		"ItemRequirements" {
-			"01" "item_demon_edge_custom;item_imba_javelin_custom;item_quarterstaff_custom;_custom"
-
-		}
-		"ItemCost" "0"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_radiance" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_radiance"
-		"ItemRequirements" {
-			"01" "item_relic_custom;item_imba_cloak_of_flames_custom"
-
-		}
-		"ItemCost" "0"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_butterfly" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_butterfly"
-		"ItemRequirements" {
-			"01" "item_talisman_of_evasion_custom;item_quarterstaff_custom;item_eagle_custom"
-
-		}
-		"ItemCost" "0"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_greater_crit" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_greater_crit"
-		"ItemRequirements" {
-			"01" "item_imba_lesser_crit_custom;item_demon_edge_custom"
-
-		}
-		"ItemCost" "1000"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_armlet" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_armlet"
-		"ItemRequirements" {
-			"01" "item_helm_of_iron_will_custom;item_gloves_custom;item_blades_of_attack_custom"
-
-		}
-		"ItemCost" "650"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_shadow_blade" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_shadow_blade"
-		"ItemRequirements" {
-			"01" "item_shadow_amulet_custom;item_claymore_custom"
-
-		}
-		"ItemCost" "0"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_silver_edge" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_silver_edge"
-		"ItemRequirements" {
-			"01" "item_imba_shadow_blade_custom;item_imba_echo_sabre_custom"
-
-		}
-		"ItemCost" "300"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_sange" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_sange"
-		"ItemRequirements" {
-			"01" "item_ogre_axe_custom;item_belt_of_strength_custom"
-
-		}
-		"ItemCost" "600"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_yasha" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_yasha"
-		"ItemRequirements" {
-			"01" "item_blade_of_alacrity_custom;item_boots_of_elves_custom"
-
-		}
-		"ItemCost" "600"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_kaya" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_kaya"
-		"ItemRequirements" {
-			"01" "item_staff_of_wizardry_custom;item_robe_custom"
-
-		}
-		"ItemCost" "600"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_sange_yasha" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_sange_yasha"
-		"ItemRequirements" {
-			"01" "item_imba_yasha_custom;item_imba_sange_custom"
-
-		}
-		"ItemCost" "0"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_spell_fencer" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_spell_fencer"
-		"ItemRequirements" {
-			"01" "item_imba_kaya_custom;item_oblivion_staff_custom"
-
-		}
+	"item_shop_equiptreasure_c" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "shop/equiptreasure_c"
+		"ScriptFile" "npc/items/shop/item_shop_equiptreasure"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
+		"Model" "models/props_gameplay/tpscroll01.vmdl"
+		"Effect" "particles/generic_gameplay/dropped_item_clinkz.vpcf"
+		"Rarity" "C"
 		"ItemCost" "500"
-		"ItemShopTags" ""
+		"WoodCost" "250"
+		"SoulCrystalCost" "50"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"poolgroupconfig" "10003"
 
-	}
-	"item_imba_recipe_skadi" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_skadi"
-		"ItemRequirements" {
-			"01" "item_ultimate_orb_custom;item_ultimate_orb_custom;item_point_booster_custom"
+			}
 
 		}
-		"ItemCost" "0"
-		"ItemShopTags" ""
 
 	}
-	"item_imba_recipe_maelstrom" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_maelstrom"
-		"ItemRequirements" {
-			"01" "item_mithril_hammer_custom;item_imba_javelin_custom"
-
-		}
-		"ItemCost" "0"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_mjollnir" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_mjollnir"
-		"ItemRequirements" {
-			"01" "item_hyperstone_custom;item_imba_maelstrom_custom"
-
-		}
-		"ItemCost" "900"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_desolator" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_desolator"
-		"ItemRequirements" {
-			"01" "item_mithril_hammer_custom;item_mithril_hammer_custom;item_imba_blight_stone_custom"
-
-		}
-		"ItemCost" "0"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_desolator_2" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_desolator_2"
-		"ItemRequirements" {
-			"01" "item_imba_desolator_custom;item_demon_edge_custom"
-
-		}
-		"ItemCost" "1000"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_diffusal_blade" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_diffusal_blade"
-		"ItemRequirements" {
-			"01" "item_blade_of_alacrity_custom;item_robe_custom"
-
-		}
-		"ItemCost" "700"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_diffusal_blade_2" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_diffusal_blade_2"
-		"ItemRequirements" {
-			"01" "item_imba_diffusal_blade_custom;item_blade_of_alacrity_custom;item_robe_custom"
-
-		}
-		"ItemCost" "900"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_ancient_janggo" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_ancient_janggo"
-		"ItemRequirements" {
-			"01" "item_robe_custom;item_belt_of_strength_custom;item_wind_lace_custom;_custom"
-
-		}
-		"ItemCost" "550"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_veil_of_discord" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_veil_of_discord"
-		"ItemRequirements" {
-			"01" "item_ring_of_basilius_custom;item_crown_custom"
-
-		}
-		"ItemCost" "700"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_heavens_halberd" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_heavens_halberd"
-		"ItemRequirements" {
-			"01" "item_imba_sange_custom;item_talisman_of_evasion_custom"
-
-		}
-		"ItemCost" "0"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_octarine_core" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_octarine_core"
-		"ItemRequirements" {
-			"01" "item_mystic_staff_custom;item_soul_booster_custom"
-
-		}
-		"ItemCost" "0"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_shotgun" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_shotgun"
-		"ItemRequirements" {
-			"01" "item_blade_of_alacrity_custom;item_blade_of_alacrity_custom;item_quarterstaff_custom"
-
-		}
-		"ItemCost" "0"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_starfury" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_starfury"
-		"ItemRequirements" {
-			"01" "item_imba_shotgun_custom;item_demon_edge_custom;item_eagle_custom"
-
-		}
-		"ItemCost" "0"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_soul_of_truth" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_soul_of_truth"
-		"ItemRequirements" {
-			"01" "item_imba_gem_custom"
-
-		}
-		"ItemCost" "700"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_origin_treads" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_origin_treads"
-		"ItemRequirements" {
-			"01" "item_power_treads_custom;item_soul_booster_custom;item_ultimate_orb_custom"
-
-		}
-		"ItemCost" "1400"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_haste_boots" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_haste_boots"
-		"ItemRequirements" {
-			"01" "item_phase_boots_custom;item_imba_occult_mask_custom"
-
-		}
-		"ItemCost" "660"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_ironleaf_boots" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_ironleaf_boots"
-		"ItemRequirements" {
-			"01" "item_tranquil_boots_custom;item_imba_initiate_robe_custom;item_glimmer_cape_custom"
-
-		}
-		"ItemCost" "0"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_blink_boots" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_blink_boots"
-		"ItemRequirements" {
-			"01" "item_imba_blink_custom;item_boots_custom"
-
-		}
-		"ItemCost" "1750"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_echo_sabre" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_echo_sabre"
-		"ItemRequirements" {
-			"01" "item_ogre_axe_custom;item_oblivion_staff_custom"
-
-		}
-		"ItemCost" "0"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_reverb_rapier" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_reverb_rapier"
-		"ItemRequirements" {
-			"01" "item_imba_echo_sabre_custom;item_claymore_custom;item_claymore_custom"
-
-		}
-		"ItemCost" "0"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_initiate_robe" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_initiate_robe"
-		"ItemRequirements" {
-			"01" "item_point_booster_custom;item_void_stone_custom;item_cloak_custom"
-
-		}
-		"ItemCost" "400"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_ultimate_scepter_synth" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_ultimate_scepter_synth"
-		"ItemRequirements" {
-			"01" "item_ultimate_scepter_custom"
-
-		}
-		"ItemCost" "8000"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_aether_lens" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_aether_lens"
-		"ItemRequirements" {
-			"01" "item_energy_booster_custom;item_imba_nether_wand_custom"
-
-		}
-		"ItemCost" "200"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_arcane_nexus" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_arcane_nexus"
-		"ItemRequirements" {
-			"01" "item_imba_nether_wand_custom;item_imba_kaya_custom"
-
-		}
-		"ItemCost" "900"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_rapier" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_rapier"
-		"ItemRequirements" {
-			"01" "item_relic_custom;item_demon_edge_custom"
-
-		}
-		"ItemCost" "100"
-		"ItemShopTags" ""
-		"SecretShop" "1"
-
-	}
-	"item_imba_recipe_rapier_2" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_rapier_2"
-		"ItemRequirements" {
-			"01" "item_imba_rapier_custom;item_imba_rapier_custom;item_imba_rapier_custom"
-
-		}
-		"ItemCost" "0"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_rapier_magic" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_rapier_magic"
-		"ItemRequirements" {
-			"01" "item_relic_custom;item_demon_edge_custom"
-
-		}
-		"ItemCost" "100"
-		"ItemShopTags" ""
-		"SecretShop" "1"
-
-	}
-	"item_imba_recipe_rapier_magic_2" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_rapier_magic_2"
-		"ItemRequirements" {
-			"01" "item_imba_rapier_magic_custom;item_imba_rapier_magic_custom;item_imba_rapier_magic_custom"
-
-		}
-		"ItemCost" "0"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_rapier_cursed" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_rapier_cursed"
-		"ItemRequirements" {
-			"01" "item_imba_rapier_2_custom;item_imba_rapier_magic_2_custom"
-
-		}
-		"ItemCost" "0"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_angelic_alliance" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_angelic_alliance"
-		"ItemRequirements" {
-			"01" "item_imba_heavens_halberd_custom;item_solar_crest_custom"
-
-		}
-		"ItemCost" "1175"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_curseblade" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_curseblade"
-		"ItemRequirements" {
-			"01" "item_imba_diffusal_blade_custom;item_ogre_axe_custom;item_imba_occult_mask_custom"
-
-		}
-		"ItemCost" "0"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_hellblade" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_hellblade"
-		"ItemRequirements" {
-			"01" "item_imba_curseblade_custom;item_reaver_custom"
-
-		}
-		"ItemCost" "750"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_mask_of_madness" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_mask_of_madness"
-		"ItemRequirements" {
-			"01" "item_imba_morbid_mask_custom;item_quarterstaff_custom"
-
-		}
-		"ItemCost" "0"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_satanic" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_satanic"
-		"ItemRequirements" {
-			"01" "item_reaver_custom;item_imba_morbid_mask_custom;item_claymore_custom"
-
-		}
-		"ItemCost" "0"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_urn_of_shadows" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_urn_of_shadows"
-		"ItemRequirements" {
-			"01" "item_sobi_mask_custom;item_circlet_custom;item_ring_of_protection_custom"
-
-		}
-		"ItemCost" "335"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_black_queen_cape" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_black_queen_cape"
-		"ItemRequirements" {
-			"01" "item_minotaur_horn_custom;item_ring_of_health_custom;item_imba_urn_of_shadows_custom"
-
-		}
-		"ItemCost" "425"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_hood_of_defiance" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_hood_of_defiance"
-		"ItemRequirements" {
-			"01" "item_ring_of_health_custom;item_cloak_custom;item_ring_of_regen_custom"
-
-		}
-		"ItemCost" "0"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_pipe" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_pipe"
-		"ItemRequirements" {
-			"01" "item_imba_hood_of_defiance_custom;item_headdress_custom"
-
-		}
-		"ItemCost" "1550"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_blade_mail" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_blade_mail"
-		"ItemRequirements" {
-			"01" "item_broadsword_custom;item_chainmail_custom;item_robe_custom"
-
-		}
-		"ItemCost" "0"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_occult_mask" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_occult_mask"
-		"ItemRequirements" {
-			"01" "item_belt_of_strength_custom;item_blades_of_attack_custom"
-
-		}
-		"ItemCost" "470"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_skull_basher" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_skull_basher"
-		"ItemRequirements" {
-			"01" "item_mithril_hammer_custom;item_belt_of_strength_custom"
-
-		}
-		"ItemCost" "900"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_abyssal_blade" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_abyssal_blade"
-		"ItemRequirements" {
-			"01" "item_imba_skull_basher_custom;item_imba_vanguard_custom"
-
-		}
-		"ItemCost" "1750"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_manta" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_manta"
-		"ItemRequirements" {
-			"01" "item_imba_yasha_custom;item_ultimate_orb_custom"
-
-		}
-		"ItemCost" "500"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_lesser_crit" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_lesser_crit"
-		"ItemRequirements" {
-			"01" "item_broadsword_custom;item_blades_of_attack_custom"
-
-		}
-		"ItemCost" "700"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_jarnbjorn" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_jarnbjorn"
-		"ItemRequirements" {
-			"01" "item_imba_mjollnir_custom;item_bfury_custom"
-
-		}
-		"ItemCost" "1250"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_force_staff" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_force_staff"
-		"ItemRequirements" {
-			"01" "item_staff_of_wizardry_custom;item_ring_of_regen_custom"
-
-		}
-		"ItemCost" "950"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_hurricane_pike" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_hurricane_pike"
-		"ItemRequirements" {
-			"01" "item_imba_force_staff_custom;item_dragon_lance_custom"
-
-		}
-		"ItemCost" "450"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_cyclone" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_cyclone"
-		"ItemRequirements" {
-			"01" "item_staff_of_wizardry_custom;item_void_stone_custom;item_wind_lace_custom"
-
-		}
-		"ItemCost" "100"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_plancks_artifact" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_plancks_artifact"
-		"ItemRequirements" {
-			"01" "item_imba_bloodstone_custom;item_imba_octarine_core_custom"
-
-		}
-		"ItemCost" "3150"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_lifesteal_boots" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_lifesteal_boots"
-		"ItemRequirements" {
-			"01" "item_phase_boots_custom;item_imba_morbid_mask_custom"
-
-		}
-		"ItemCost" "1740"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_kaya_and_sange" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_kaya_and_sange"
-		"ItemRequirements" {
-			"01" "item_imba_kaya_custom;item_imba_sange_custom"
-
-		}
-		"ItemCost" "0"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_yasha_and_kaya" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_yasha_and_kaya"
-		"ItemRequirements" {
-			"01" "item_imba_yasha_custom;item_imba_kaya_custom"
-
-		}
-		"ItemCost" "0"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_bloodstone_720" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_bloodstone_720"
-		"ItemRequirements" {
-			"01" "item_imba_kaya_custom;item_soul_booster_custom"
-
-		}
-		"ItemCost" "0"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_meteor_hammer" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_meteor_hammer"
-		"ItemRequirements" {
-			"01" "item_ogre_axe_custom;item_staff_of_wizardry_custom;item_ring_of_regen_custom;item_sobi_mask_custom"
-
-		}
-		"ItemCost" "0"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_meteor_hammer_2" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_meteor_hammer_2"
-		"ItemRequirements" {
-			"01" "item_imba_meteor_hammer_custom"
-
-		}
+	"item_shop_equiptreasure_b" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "shop/equiptreasure_b"
+		"ScriptFile" "npc/items/shop/item_shop_equiptreasure"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
+		"Model" "models/props_gameplay/tpscroll01.vmdl"
+		"Effect" "particles/generic_gameplay/dropped_item_clinkz.vpcf"
+		"Rarity" "B"
 		"ItemCost" "1500"
-		"ItemShopTags" ""
+		"WoodCost" "750"
+		"SoulCrystalCost" "150"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"poolgroupconfig" "10004"
 
-	}
-	"item_imba_recipe_meteor_hammer_3" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_meteor_hammer_3"
-		"ItemRequirements" {
-			"01" "item_imba_meteor_hammer_2_custom"
+			}
 
 		}
-		"ItemCost" "1500"
-		"ItemShopTags" ""
 
 	}
-	"item_imba_recipe_meteor_hammer_4" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_meteor_hammer_4"
-		"ItemRequirements" {
-			"01" "item_imba_meteor_hammer_3_custom"
+	"item_shop_equiptreasure_a" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "shop/equiptreasure_a"
+		"ScriptFile" "npc/items/shop/item_shop_equiptreasure"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
+		"Model" "models/props_gameplay/tpscroll01.vmdl"
+		"Effect" "particles/generic_gameplay/dropped_item_clinkz.vpcf"
+		"Rarity" "A"
+		"ItemCost" "3500"
+		"WoodCost" "1750"
+		"SoulCrystalCost" "350"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"poolgroupconfig" "10005"
+
+			}
 
 		}
-		"ItemCost" "1500"
-		"ItemShopTags" ""
 
 	}
-	"item_imba_recipe_spirit_vessel" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_spirit_vessel"
-		"ItemRequirements" {
-			"01" "item_imba_urn_of_shadows_custom;item_vitality_booster_custom"
+	"item_shop_equiptreasure_s" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "shop/equiptreasure_s"
+		"ScriptFile" "npc/items/shop/item_shop_equiptreasure"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
+		"Model" "models/props_gameplay/tpscroll01.vmdl"
+		"Effect" "particles/generic_gameplay/dropped_item_clinkz.vpcf"
+		"Rarity" "S"
+		"ItemCost" "7500"
+		"WoodCost" "3750"
+		"SoulCrystalCost" "750"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"poolgroupconfig" "10006"
+
+			}
 
 		}
-		"ItemCost" "1000"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_rod_of_atos" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_rod_of_atos"
-		"ItemRequirements" {
-			"01" "item_staff_of_wizardry_custom;item_crown_custom;item_crown_custom"
-
-		}
-		"ItemCost" "850"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_rod_of_atos_2" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_rod_of_atos_2"
-		"ItemRequirements" {
-			"01" "item_imba_rod_of_atos_custom;item_imba_rod_of_atos_custom;item_imba_rod_of_atos_custom"
-
-		}
-		"ItemCost" "1750"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_witchblade" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_witchblade"
-		"ItemRequirements" {
-			"01" "item_imba_diffusal_blade_2_custom;item_blade_of_alacrity_custom;item_robe_custom"
-
-		}
-		"ItemCost" "1100"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_ethereal_blade" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_ethereal_blade"
-		"ItemRequirements" {
-			"01" "item_eagle_custom;item_imba_ghost_custom"
-
-		}
-		"ItemCost" "0"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_the_triumvirate_v2" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_the_triumvirate_v2"
-		"ItemRequirements" {
-			"01" "item_imba_sange_yasha_custom;item_imba_kaya_custom"
-			"02" "item_imba_kaya_and_sange_custom;item_imba_yasha_custom"
-			"03" "item_imba_yasha_and_kaya_custom;item_imba_sange_custom"
-
-		}
-		"ItemCost" "1"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_gungnir" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_gungnir"
-		"ItemRequirements" {
-			"01" "item_imba_monkey_king_bar_custom;item_imba_hurricane_pike_custom"
-
-		}
-		"ItemCost" "3225"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_wand_of_the_brine" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_wand_of_the_brine"
-		"ItemRequirements" {
-			"01" "item_mystic_staff_custom;item_mystic_staff_custom;item_void_stone_custom"
-
-		}
-		"ItemCost" "750"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_glimmerdark_shield" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_glimmerdark_shield"
-		"ItemRequirements" {
-			"01" "item_ultimate_orb_custom;item_imba_ghost_custom;item_ring_of_health_custom;item_platemail_custom"
-
-		}
-		"ItemCost" "1100"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_transient_boots" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_transient_boots"
-		"ItemRequirements" {
-			"01" "item_tranquil_boots_custom;item_glimmer_cape_custom"
-
-		}
-		"ItemCost" "500"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_ogre_seal_totem" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_ogre_seal_totem"
-		"ItemRequirements" {
-			"01" "item_vitality_booster_custom;item_belt_of_strength_custom"
-
-		}
-		"ItemCost" "250"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_armlet_of_dementor" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_armlet_of_dementor"
-		"ItemRequirements" {
-			"01" "item_imba_nether_wand_custom;item_void_stone_custom;item_cloak_custom"
-
-		}
-		"ItemCost" "0"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_lance_of_longinus" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_lance_of_longinus"
-		"ItemRequirements" {
-			"01" "item_imba_hurricane_pike_custom;item_soul_booster_custom"
-
-		}
-		"ItemCost" "500"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_iron_talon" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_iron_talon"
-		"ItemRequirements" {
-			"01" "item_quelling_blade_custom;item_ring_of_protection_custom"
-
-		}
-		"ItemCost" "125"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_ring_of_aquila" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_ring_of_aquila"
-		"ItemRequirements" {
-			"01" "item_wraith_band_custom;item_ring_of_basilius_custom"
-
-		}
-		"ItemCost" "0"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_nullifier" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_nullifier"
-		"ItemRequirements" {
-			"01" "item_relic_custom;item_helm_of_iron_will_custom"
-
-		}
-		"ItemCost" "0"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_nullifier_2" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_nullifier_2"
-		"ItemRequirements" {
-			"01" "item_imba_nullifier_custom;item_soul_booster_custom"
-
-		}
-		"ItemCost" "500"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_bladestorm_mail" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_bladestorm_mail"
-		"ItemRequirements" {
-			"01" "item_imba_blade_mail_custom;item_claymore_custom;item_platemail_custom;item_staff_of_wizardry_custom"
-
-		}
-		"ItemCost" "1000"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_aether_specs" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_aether_specs"
-		"ItemRequirements" {
-			"01" "item_imba_aether_lens_custom;item_imba_ring_of_aquila_custom"
-
-		}
-		"ItemCost" "1050"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_valiance" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_valiance"
-		"ItemRequirements" {
-			"01" "item_imba_vanguard_custom;item_vitality_booster_custom"
-
-		}
-		"ItemCost" "575"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_cyclone_2" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_cyclone_2"
-		"ItemRequirements" {
-			"01" "item_cyclone_custom;item_imba_nether_wand_custom;item_void_stone_custom"
-
-		}
-		"ItemCost" "0"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_cultic_hammer" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_cultic_hammer"
-		"ItemRequirements" {
-			"01" "item_reaver_custom;item_mithril_hammer_custom;item_imba_occult_mask_custom"
-
-		}
-		"ItemCost" "1050"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_manta_2" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_manta_2"
-		"ItemRequirements" {
-			"01" "item_imba_manta_custom;item_hyperstone_custom"
-
-		}
-		"ItemCost" "500"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_black_king_bar" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_black_king_bar"
-		"ItemRequirements" {
-			"01" "item_ogre_axe_custom;item_mithril_hammer_custom;item_minotaur_horn_custom"
-
-		}
-		"ItemCost" "0"
-		"ItemShopTags" ""
-
-	}
-	"item_imba_recipe_lotus_orb" {
-		"BaseClass" "item_datadriven"
-		"AbilityTextureName" "imba/recipe"
-		"ItemRecipe" "1"
-		"ItemResult" "item_imba_lotus_orb"
-		"ItemRequirements" {
-			"01" "item_pers_custom;item_platemail_custom;item_energy_booster_custom;_custom"
-
-		}
-		"ItemCost" "0"
-		"ItemShopTags" ""
 
 	}
 	"item_imba_ultimate_scepter_synth" {
@@ -1790,7 +233,10 @@
 		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO"
 		"AbilityCastRange" "0"
 		"AbilityCastPoint" "0.0"
+		"Rarity" "S"
 		"ItemCost" "12200"
+		"WoodCost" "6100"
+		"SoulCrystalCost" "1220"
 		"ItemShopTags" "consumable"
 		"ItemQuality" "consumable"
 		"ItemAliases" "aghanim; scepter; ultimate; synth; alchemist"
@@ -1823,7 +269,10 @@
 		"ScriptFile" "npc/items/imba/item_imba_aeon_disk"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_IGNORE_PSEUDO_QUEUE"
 		"AbilityCooldown" "70"
+		"Rarity" "B"
 		"ItemCost" "3100"
+		"WoodCost" "1550"
+		"SoulCrystalCost" "310"
 		"ItemShopTags" "str;regen_health;health_pool"
 		"ItemQuality" "epic"
 		"ItemRequiresCharges" "0"
@@ -1874,7 +323,10 @@
 		"AbilityCastRange" "600"
 		"AbilityCastPoint" "0.0"
 		"AbilityCooldown" "90.0"
+		"Rarity" "B"
 		"ItemCost" "2250"
+		"WoodCost" "1125"
+		"SoulCrystalCost" "225"
 		"ItemShopTags" "attack_speed;hard_to_tag"
 		"ItemQuality" "common"
 		"ItemAliases" "midas; hand of midas; hom"
@@ -1911,7 +363,10 @@
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
 		"AbilityCastRange" "1800"
 		"AbilityCooldown" "45.0"
+		"Rarity" "B"
 		"ItemCost" "1300"
+		"WoodCost" "650"
+		"SoulCrystalCost" "130"
 		"ItemShopTags" "move_speed;boost_mana;mana_pool"
 		"ItemQuality" "rare"
 		"ItemAliases" "mana;mb;arcane boots"
@@ -1956,7 +411,10 @@
 		"AbilityCastRange" "1925"
 		"AbilityCooldown" "65"
 		"AbilitySharedCooldown" "mekansm"
+		"Rarity" "B"
 		"ItemCost" "2275"
+		"WoodCost" "1137"
+		"SoulCrystalCost" "227"
 		"ItemShopTags" "agi;int;str;armor;boost_health"
 		"ItemQuality" "rare"
 		"ItemAliases" "mechanism;mekansm"
@@ -2020,7 +478,10 @@
 		"AbilityCastRange" "1800"
 		"AbilityCooldown" "40"
 		"AbilitySharedCooldown" "mekansm"
+		"Rarity" "A"
 		"ItemCost" "4825"
+		"WoodCost" "2412"
+		"SoulCrystalCost" "482"
 		"ItemShopTags" "agi;int;str;armor;regen_health;boost_health;move_speed;boost_mana;mana_pool"
 		"ItemQuality" "rare"
 		"ItemAliases" "guardian greaves"
@@ -2111,9 +572,13 @@
 		"AbilityTextureName" "imba/diretide_candy"
 		"ScriptFile" "npc/items/imba/item_imba_diretide_candy"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"Model" "models/props_gameplay/halloween_candy.vmdl"
 		"AbilityCastRange" "350"
 		"AbilityCastPoint" "0.0"
 		"AbilityCooldown" "0.0"
+		"Rarity" "A"
+		"WoodCost" "0"
+		"SoulCrystalCost" "0"
 		"ItemStackable" "1"
 		"ItemShareability" "ITEM_FULLY_SHAREABLE_STACKING"
 		"ItemPermanent" "0"
@@ -2140,7 +605,10 @@
 		"BaseClass" "item_lua"
 		"AbilityTextureName" "imba/vladmir"
 		"ScriptFile" "npc/items/imba/item_imba_vladmir"
+		"Rarity" "B"
 		"ItemCost" "2055"
+		"WoodCost" "1027"
+		"SoulCrystalCost" "205"
 		"ItemShopTags" "lifesteal;damage;armor;regen_mana"
 		"ItemQuality" "rare"
 		"ItemAliases" "vladmir's offering;vlads"
@@ -2190,7 +658,10 @@
 		"BaseClass" "item_lua"
 		"AbilityTextureName" "imba/vladmir_2"
 		"ScriptFile" "npc/items/imba/item_imba_vladmir"
+		"Rarity" "A"
 		"ItemCost" "4625"
+		"WoodCost" "2312"
+		"SoulCrystalCost" "462"
 		"ItemShopTags" "lifesteal;damage;armor;regen_mana;damage;crit"
 		"ItemQuality" "rare"
 		"ItemAliases" "vladmir's blood;vlads"
@@ -2246,7 +717,10 @@
 		"AbilityCastRange" "800"
 		"AbilityCastPoint" "0.0"
 		"AbilityCooldown" "22"
+		"Rarity" "A"
 		"ItemCost" "5700"
+		"WoodCost" "2850"
+		"SoulCrystalCost" "570"
 		"ItemShopTags" "int;regen_mana;agi;hard_to_tag"
 		"ItemQuality" "rare"
 		"ItemAliases" "hex;sheepstick;scythe of vyse"
@@ -2312,7 +786,10 @@
 		"AbilityCastPoint" "0.0"
 		"AbilityCooldown" "18"
 		"AbilitySharedCooldown" "orchid"
+		"Rarity" "A"
 		"ItemCost" "4075"
+		"WoodCost" "2037"
+		"SoulCrystalCost" "407"
 		"ItemShopTags" "int;attack_speed;damage;regen_mana;damage;hard_to_tag"
 		"ItemQuality" "rare"
 		"ItemAliases" "orchid malevolence"
@@ -2370,7 +847,10 @@
 		"AbilityCastPoint" "0.0"
 		"AbilityCooldown" "14"
 		"AbilitySharedCooldown" "orchid"
+		"Rarity" "S"
 		"ItemCost" "7195"
+		"WoodCost" "3597"
+		"SoulCrystalCost" "719"
 		"ItemShopTags" "int;attack_speed;damage;regen_mana;damage;hard_to_tag"
 		"ItemQuality" "rare"
 		"ItemAliases" "bloodthorn;orchid malevolence"
@@ -2449,7 +929,10 @@
 		"AbilityCastPoint" "0.0"
 		"AbilityCooldown" "35.0 30.0 25.0 20.0 15.0"
 		"AbilitySharedCooldown" "dagon"
+		"Rarity" "B"
 		"ItemCost" "2650"
+		"WoodCost" "1325"
+		"SoulCrystalCost" "265"
 		"ItemShopTags" "damage;int;str;agi;hard_to_tag"
 		"ItemQuality" "rare"
 		"ItemAliases" "dagon"
@@ -2497,7 +980,10 @@
 		"AbilityCastPoint" "0.0"
 		"AbilityCooldown" "35.0 30.0 25.0 20.0 15.0"
 		"AbilitySharedCooldown" "dagon"
+		"Rarity" "A"
 		"ItemCost" "3950"
+		"WoodCost" "1975"
+		"SoulCrystalCost" "395"
 		"ItemShopTags" "damage;int;str;agi;hard_to_tag"
 		"ItemQuality" "rare"
 		"ItemAliases" "dagon 2"
@@ -2545,7 +1031,10 @@
 		"AbilityCastPoint" "0.0"
 		"AbilityCooldown" "35.0 30.0 25.0 20.0 15.0"
 		"AbilitySharedCooldown" "dagon"
+		"Rarity" "A"
 		"ItemCost" "5250"
+		"WoodCost" "2625"
+		"SoulCrystalCost" "525"
 		"ItemShopTags" "damage;int;str;agi;hard_to_tag"
 		"ItemQuality" "rare"
 		"ItemAliases" "dagon 3"
@@ -2593,7 +1082,10 @@
 		"AbilityCastPoint" "0.0"
 		"AbilityCooldown" "35.0 30.0 25.0 20.0 15.0"
 		"AbilitySharedCooldown" "dagon"
+		"Rarity" "S"
 		"ItemCost" "6650"
+		"WoodCost" "3325"
+		"SoulCrystalCost" "665"
 		"ItemShopTags" "damage;int;str;agi;hard_to_tag"
 		"ItemQuality" "rare"
 		"ItemAliases" "dagon 4"
@@ -2641,7 +1133,10 @@
 		"AbilityCastPoint" "0.0"
 		"AbilityCooldown" "35.0 30.0 25.0 20.0 15.0"
 		"AbilitySharedCooldown" "dagon"
+		"Rarity" "S"
 		"ItemCost" "7850"
+		"WoodCost" "3925"
+		"SoulCrystalCost" "785"
 		"ItemShopTags" "damage;int;str;agi;hard_to_tag"
 		"ItemQuality" "rare"
 		"ItemAliases" "dagon 5"
@@ -2686,7 +1181,10 @@
 		"AbilityCastPoint" "0.0"
 		"AbilityCooldown" "90"
 		"AbilitySharedCooldown" "necrobook"
+		"Rarity" "B"
 		"ItemCost" "2400"
+		"WoodCost" "1200"
+		"SoulCrystalCost" "240"
 		"ItemShopTags" "int;mana_regen;hard_to_tag;see_invis"
 		"ItemQuality" "rare"
 		"ItemAliases" "necronomicon 1; lesser necronomicon"
@@ -2779,7 +1277,10 @@
 		"AbilityCastPoint" "0.0"
 		"AbilityCooldown" "90"
 		"AbilitySharedCooldown" "necrobook"
+		"Rarity" "A"
 		"ItemCost" "3700"
+		"WoodCost" "1850"
+		"SoulCrystalCost" "370"
 		"ItemShopTags" "int;mana_regen;hard_to_tag;see_invis"
 		"ItemQuality" "rare"
 		"ItemAliases" "necronomicon 2; necronomicon"
@@ -2872,7 +1373,10 @@
 		"AbilityCastPoint" "0.0"
 		"AbilityCooldown" "90"
 		"AbilitySharedCooldown" "necrobook"
+		"Rarity" "A"
 		"ItemCost" "5000"
+		"WoodCost" "2500"
+		"SoulCrystalCost" "500"
 		"ItemShopTags" "int;mana_regen;hard_to_tag;see_invis"
 		"ItemQuality" "rare"
 		"ItemAliases" "necronomicon 3; greater necronomicon"
@@ -2965,7 +1469,10 @@
 		"AbilityCastPoint" "0.0"
 		"AbilityCooldown" "90"
 		"AbilitySharedCooldown" "necrobook"
+		"Rarity" "S"
 		"ItemCost" "6300"
+		"WoodCost" "3150"
+		"SoulCrystalCost" "630"
 		"ItemShopTags" "int;mana_regen;hard_to_tag;see_invis"
 		"ItemQuality" "rare"
 		"ItemAliases" "necronomicon 4; draconomicon"
@@ -3058,7 +1565,10 @@
 		"AbilityCastPoint" "0.0"
 		"AbilityCooldown" "90"
 		"AbilitySharedCooldown" "necrobook"
+		"Rarity" "S"
 		"ItemCost" "7600"
+		"WoodCost" "3800"
+		"SoulCrystalCost" "760"
 		"ItemShopTags" "int;mana_regen;hard_to_tag;see_invis"
 		"ItemQuality" "rare"
 		"ItemAliases" "necronomicon 5; demonomicon"
@@ -3148,7 +1658,10 @@
 		"AbilityTextureName" "imba/assault"
 		"ScriptFile" "npc/items/imba/item_imba_assault"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "A"
 		"ItemCost" "5100"
+		"WoodCost" "2550"
+		"SoulCrystalCost" "510"
 		"ItemShopTags" "attack_speed;armor;hard_to_tag"
 		"ItemQuality" "epic"
 		"ItemAliases" "ac;assault cuirass"
@@ -3201,7 +1714,10 @@
 		"AbilityCastRange" "900"
 		"AbilityCooldown" "30"
 		"AbilitySharedCooldown" "drums"
+		"Rarity" "S"
 		"ItemCost" "7000"
+		"WoodCost" "3500"
+		"SoulCrystalCost" "700"
 		"ItemShopTags" "str;agi;int;damage;move_speed;attack_speed;armor;hard_to_tag"
 		"ItemQuality" "rare"
 		"ItemAliases" "siege cuirass"
@@ -3316,7 +1832,10 @@
 		"AbilityTextureName" "imba/heart"
 		"ScriptFile" "npc/items/imba/item_imba_heart"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "A"
 		"ItemCost" "5200"
+		"WoodCost" "2600"
+		"SoulCrystalCost" "520"
 		"ItemShopTags" "str;regen_health;health_pool"
 		"ItemQuality" "epic"
 		"ItemAliases" "hot;heart of tarrasque"
@@ -3389,7 +1908,10 @@
 		"AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityCooldown" "25.0"
+		"Rarity" "A"
 		"ItemCost" "4700"
+		"WoodCost" "2350"
+		"SoulCrystalCost" "470"
 		"ItemShopTags" "int;armor;hard_to_tag"
 		"ItemQuality" "epic"
 		"ItemAliases" "shiva's guard"
@@ -3470,7 +1992,10 @@
 		"AbilityTextureName" "imba/stout_shield"
 		"ScriptFile" "npc/items/imba/item_imba_stout_shield"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "C"
 		"ItemCost" "100"
+		"WoodCost" "50"
+		"SoulCrystalCost" "10"
 		"ItemShopTags" "block"
 		"ItemQuality" "component"
 		"ItemAliases" "stout shield"
@@ -3500,7 +2025,10 @@
 		"ScriptFile" "npc/items/imba/item_imba_poor_mans_shield"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityCooldown" "25.0"
+		"Rarity" "C"
 		"ItemCost" "400"
+		"WoodCost" "200"
+		"SoulCrystalCost" "40"
 		"ItemShopTags" "agi;block"
 		"ItemQuality" "common"
 		"ItemAliases" "pms;poor man's shield"
@@ -3549,7 +2077,10 @@
 		"AbilityTextureName" "imba/vanguard"
 		"ScriptFile" "npc/items/imba/item_imba_vanguard"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "B"
 		"ItemCost" "1925"
+		"WoodCost" "962"
+		"SoulCrystalCost" "192"
 		"ItemShopTags" "regen_health;block;health_pool"
 		"ItemQuality" "artifact"
 		"ItemAliases" "vanguard"
@@ -3597,7 +2128,10 @@
 		"AbilityCastPoint" "0.0"
 		"AbilityCooldown" "40.0"
 		"AbilitySharedCooldown" "vanguard"
+		"Rarity" "A"
 		"ItemCost" "3700"
+		"WoodCost" "1850"
+		"SoulCrystalCost" "370"
 		"ItemShopTags" "armor;boost_armor;regen_health;block;health_pool"
 		"ItemQuality" "epic"
 		"ItemDeclarations" "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
@@ -3697,7 +2231,10 @@
 		"AbilityCastPoint" "0.0"
 		"AbilityCooldown" "40.0"
 		"AbilitySharedCooldown" "vanguard"
+		"Rarity" "S"
 		"ItemCost" "7950"
+		"WoodCost" "3975"
+		"SoulCrystalCost" "795"
 		"ItemShopTags" "armor;boost_armor;regen_health;block;health_pool"
 		"ItemQuality" "epic"
 		"ItemAliases" "heracle armor;heracle;armor;tide skin;tide;skin"
@@ -3817,7 +2354,10 @@
 		"AbilityTextureName" "imba/javelin"
 		"ScriptFile" "npc/items/imba/item_imba_javelin"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "B"
 		"ItemCost" "1100"
+		"WoodCost" "550"
+		"SoulCrystalCost" "110"
 		"ItemShopTags" "damage"
 		"ItemQuality" "component"
 		"ItemAliases" "javelin"
@@ -3851,7 +2391,10 @@
 		"AbilityTextureName" "imba/monkey_king_bar"
 		"ScriptFile" "npc/items/imba/item_imba_monkey_king_bar"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "A"
 		"ItemCost" "4175"
+		"WoodCost" "2087"
+		"SoulCrystalCost" "417"
 		"ItemShopTags" "damage;attack_speed;str;agi;hard_to_tag"
 		"ItemQuality" "epic"
 		"ItemAliases" "mkb;monkey king bar"
@@ -3893,7 +2436,10 @@
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_PSEUDO_QUEUE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
 		"AbilityCastRange" "700"
 		"AbilityCooldown" "0"
+		"Rarity" "A"
 		"ItemCost" "5150"
+		"WoodCost" "2575"
+		"SoulCrystalCost" "515"
 		"ItemShopTags" "damage"
 		"ItemQuality" "epic"
 		"ItemAliases" "radiance"
@@ -3947,7 +2493,10 @@
 		"ScriptFile" "npc/items/imba/item_imba_butterfly"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityCooldown" "30"
+		"Rarity" "A"
 		"ItemCost" "5525"
+		"WoodCost" "2762"
+		"SoulCrystalCost" "552"
 		"ItemShopTags" "agi;damage;evasion;attack_speed"
 		"ItemQuality" "epic"
 		"ItemAliases" "bfly;butterfly"
@@ -4033,7 +2582,10 @@
 		"AbilityTextureName" "imba/greater_crit"
 		"ScriptFile" "npc/items/imba/item_imba_greater_crit"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "A"
 		"ItemCost" "5520"
+		"WoodCost" "2760"
+		"SoulCrystalCost" "552"
 		"ItemShopTags" "damage;crit"
 		"ItemQuality" "epic"
 		"ItemAliases" "daedalus"
@@ -4070,7 +2622,10 @@
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
 		"Effect" "particles/generic_gameplay/dropped_item.vpcf"
 		"AbilityCooldown" "0.0"
+		"Rarity" "B"
 		"ItemCost" "2370"
+		"WoodCost" "1185"
+		"SoulCrystalCost" "237"
 		"ItemShopTags" "damage;attack_speed;armor;regen_health;hard_to_tag"
 		"ItemQuality" "epic"
 		"ItemAliases" "armlet of mordiggian"
@@ -4150,7 +2705,10 @@
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
 		"AbilityCooldown" "28"
 		"AbilitySharedCooldown" "shadow_blade"
+		"Rarity" "B"
 		"ItemCost" "2700"
+		"WoodCost" "1350"
+		"SoulCrystalCost" "270"
 		"ItemShopTags" "damage;attack_speed;movespeed;hard_to_tag"
 		"ItemQuality" "epic"
 		"ItemAliases" "sb;invis;shadow blade"
@@ -4214,7 +2772,10 @@
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
 		"AbilityCooldown" "24.0"
 		"AbilitySharedCooldown" "shadow_blade"
+		"Rarity" "A"
 		"ItemCost" "5150"
+		"WoodCost" "2575"
+		"SoulCrystalCost" "515"
 		"ItemShopTags" "damage;attack_speed;movespeed;strength;break;hard_to_tag"
 		"ItemQuality" "epic"
 		"ItemAliases" "sb;invis;shadow blade;break"
@@ -4329,7 +2890,10 @@
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"AbilityCooldown" "42.0"
 		"AbilitySharedCooldown" "swords"
+		"Rarity" "B"
 		"ItemCost" "2050"
+		"WoodCost" "1025"
+		"SoulCrystalCost" "205"
 		"ItemShopTags" "damage;str;unique"
 		"ItemQuality" "artifact"
 		"ItemAliases" "sange"
@@ -4371,7 +2935,10 @@
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"AbilityCooldown" "42.0"
 		"AbilitySharedCooldown" "swords"
+		"Rarity" "B"
 		"ItemCost" "2050"
+		"WoodCost" "1025"
+		"SoulCrystalCost" "205"
 		"ItemShopTags" "agi;attack_speed;move_speed"
 		"ItemQuality" "artifact"
 		"ItemAliases" "yasha"
@@ -4417,7 +2984,10 @@
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"AbilityCooldown" "42.0"
 		"AbilitySharedCooldown" "swords"
+		"Rarity" "B"
 		"ItemCost" "2050"
+		"WoodCost" "1025"
+		"SoulCrystalCost" "205"
 		"ItemShopTags" "int;unique"
 		"ItemQuality" "artifact"
 		"ItemAliases" "kaya"
@@ -4458,7 +3028,10 @@
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"AbilityCooldown" "42.0"
 		"AbilitySharedCooldown" "swords"
+		"Rarity" "A"
 		"ItemCost" "4100"
+		"WoodCost" "2050"
+		"SoulCrystalCost" "410"
 		"ItemShopTags" "damage;str;agi;attack_speed;unique"
 		"ItemQuality" "artifact"
 		"ItemAliases" "sny;s&y;sy;sange and yasha"
@@ -4525,7 +3098,10 @@
 		"AbilityTextureName" "imba/spell_fencer"
 		"ScriptFile" "npc/items/imba/item_imba_spell_fencer"
 		"AbilityCooldown" "12"
+		"Rarity" "A"
 		"ItemCost" "3900"
+		"WoodCost" "1950"
+		"SoulCrystalCost" "390"
 		"ItemShopTags" "int;attack_speed;mana_regen;unique"
 		"ItemQuality" "artifact"
 		"ItemAliases" "spellfencer;spell fencer;spell;fencer"
@@ -4606,7 +3182,10 @@
 		"ScriptFile" "npc/items/imba/item_imba_skadi"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
 		"AbilityCooldown" "80"
+		"Rarity" "A"
 		"ItemCost" "5500"
+		"WoodCost" "2750"
+		"SoulCrystalCost" "550"
 		"ItemShopTags" "agi;str;int;hard_to_tag;unique"
 		"ItemQuality" "artifact"
 		"ItemAliases" "eos;eye of skadi"
@@ -4708,7 +3287,10 @@
 		"AbilityTextureName" "imba/maelstrom"
 		"ScriptFile" "npc/items/imba/item_imba_maelstrom"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "B"
 		"ItemCost" "2800"
+		"WoodCost" "1400"
+		"SoulCrystalCost" "280"
 		"ItemShopTags" "damage;attack_speed;unique"
 		"ItemQuality" "artifact"
 		"ItemAliases" "maelstrom"
@@ -4768,7 +3350,10 @@
 		"AbilityCastRange" "800"
 		"AbilityCooldown" "35"
 		"AbilitySharedCooldown" "some_viking_shit"
+		"Rarity" "A"
 		"ItemCost" "5700"
+		"WoodCost" "2850"
+		"SoulCrystalCost" "570"
 		"ItemShopTags" "damage;attack_speed;unique"
 		"ItemQuality" "artifact"
 		"ItemAliases" "mjollnir"
@@ -4879,7 +3464,10 @@
 		"AbilityTextureName" "imba/blight_stone"
 		"ScriptFile" "npc/items/imba/item_imba_blight_stone"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "C"
 		"ItemCost" "300"
+		"WoodCost" "150"
+		"SoulCrystalCost" "30"
 		"ItemShopTags" "hard_to_tag"
 		"ItemQuality" "component"
 		"ItemAliases" "blight stone"
@@ -4908,7 +3496,10 @@
 		"AbilityTextureName" "imba/bottle"
 		"ScriptFile" "npc/items/imba/item_imba_bottle"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"Rarity" "C"
 		"ItemCost" "600"
+		"WoodCost" "300"
+		"SoulCrystalCost" "60"
 		"AbilitySpecial" {
 			"01" {
 				"var_type" "FIELD_INTEGER"
@@ -4939,7 +3530,10 @@
 		"AbilityCastRange" "1200"
 		"AbilityCooldown" "18"
 		"AbilitySharedCooldown" "desolator"
+		"Rarity" "A"
 		"ItemCost" "3500"
+		"WoodCost" "1750"
+		"SoulCrystalCost" "350"
 		"ItemShopTags" "damage;unique"
 		"ItemQuality" "artifact"
 		"ItemAliases" "desolator"
@@ -5001,7 +3595,10 @@
 		"AbilityCastRange" "1200"
 		"AbilityCooldown" "18"
 		"AbilitySharedCooldown" "desolator"
+		"Rarity" "S"
 		"ItemCost" "6900"
+		"WoodCost" "3450"
+		"SoulCrystalCost" "690"
 		"ItemShopTags" "damage;unique"
 		"ItemQuality" "artifact"
 		"ItemAliases" "stygian desolator;desolator 2"
@@ -5074,7 +3671,10 @@
 		"AbilityCastPoint" "0"
 		"AbilityCooldown" "15"
 		"AbilitySharedCooldown" "diffusal"
+		"Rarity" "B"
 		"ItemCost" "2150"
+		"WoodCost" "1075"
+		"SoulCrystalCost" "215"
 		"ItemShopTags" "agi;int;unique;hard_to_tag"
 		"ItemQuality" "artifact"
 		"ItemAliases" "diffusal blade"
@@ -5141,7 +3741,10 @@
 		"AbilityCastPoint" "0.0"
 		"AbilityCooldown" "15"
 		"AbilitySharedCooldown" "diffusal"
+		"Rarity" "A"
 		"ItemCost" "4500"
+		"WoodCost" "2250"
+		"SoulCrystalCost" "450"
 		"ItemShopTags" "agi;int;unique;hard_to_tag"
 		"ItemQuality" "artifact"
 		"ItemAliases" "diffusal blade 2;purgeblade"
@@ -5215,7 +3818,10 @@
 		"AbilityCastRange" "900"
 		"AbilityCooldown" "30"
 		"AbilitySharedCooldown" "drums"
+		"Rarity" "B"
 		"ItemCost" "1525"
+		"WoodCost" "762"
+		"SoulCrystalCost" "152"
 		"ItemShopTags" "str;agi;int;damage;move_speed;attack_speed;hard_to_tag"
 		"ItemQuality" "rare"
 		"ItemAliases" "drum of endurance"
@@ -5300,7 +3906,10 @@
 		"AbilityCastRange" "1000"
 		"AbilityCastPoint" "0.0"
 		"AbilityCooldown" "20"
+		"Rarity" "B"
 		"ItemCost" "2030"
+		"WoodCost" "1015"
+		"SoulCrystalCost" "203"
 		"ItemShopTags" "int;armor;regen_health;hard_to_tag"
 		"ItemQuality" "rare"
 		"ItemAliases" "vod;veil of discord"
@@ -5360,7 +3969,10 @@
 		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityCastRange" "600"
 		"AbilityCooldown" "18.0"
+		"Rarity" "A"
 		"ItemCost" "3200"
+		"WoodCost" "1600"
+		"SoulCrystalCost" "320"
 		"ItemShopTags" "str;damage;evasion"
 		"ItemQuality" "artifact"
 		"ItemAliases" "heaven's halberd"
@@ -5420,7 +4032,10 @@
 		"AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
 		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO"
 		"AbilityCastRange" "999999"
+		"Rarity" "A"
 		"ItemCost" "4000"
+		"WoodCost" "2000"
+		"SoulCrystalCost" "400"
 		"ItemShopTags" "attack_speed"
 		"ItemQuality" "common"
 		"ItemAliases" "moon shard"
@@ -5475,7 +4090,10 @@
 		"Effect" "particles/generic_gameplay/dropped_item.vpcf"
 		"AbilityCooldown" "5.0"
 		"AbilitySharedCooldown" "octarine"
+		"Rarity" "A"
 		"ItemCost" "5900"
+		"WoodCost" "2950"
+		"SoulCrystalCost" "590"
 		"ItemShopTags" "boost_mana;mana_pool"
 		"ItemQuality" "rare"
 		"ItemAliases" "mana;mb;octarine core"
@@ -5534,6 +4152,10 @@
 		"ScriptFile" "npc/items/imba/item_imba_aegis"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
 		"Model" "models/props_gameplay/aegis.vmdl"
+		"Rarity" "B"
+		"ItemCost" "2000"
+		"WoodCost" "1000"
+		"SoulCrystalCost" "200"
 		"ItemQuality" "epic"
 		"ItemDeclarations" "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS"
 		"ItemPurchasable" "0"
@@ -5575,7 +4197,10 @@
 		"AbilityCastRange" "0"
 		"AbilityCastPoint" "0.0"
 		"AbilityCooldown" "20.0"
+		"Rarity" "B"
 		"ItemCost" "1000"
+		"WoodCost" "500"
+		"SoulCrystalCost" "100"
 		"ItemShopTags" "consumable"
 		"ItemQuality" "epic"
 		"ItemAliases" "cheese"
@@ -5583,6 +4208,19 @@
 		"ItemShareability" "ITEM_FULLY_SHAREABLE"
 		"ItemPurchasable" "0"
 		"IsTempestDoubleClonable" "0"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"health_restore" "2000"
+
+			}
+			"02" {
+				"var_type" "FIELD_INTEGER"
+				"mana_restore" "100"
+
+			}
+
+		}
 
 	}
 	"item_imba_shotgun" {
@@ -5594,7 +4232,10 @@
 		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityCooldown" "4"
 		"AbilitySharedCooldown" "starfury"
+		"Rarity" "B"
 		"ItemCost" "2875"
+		"WoodCost" "1437"
+		"SoulCrystalCost" "287"
 		"ItemShopTags" "damage;ias;agi"
 		"ItemQuality" "common"
 		"ItemAliases" "shotgun"
@@ -5663,7 +4304,10 @@
 		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityCooldown" "1"
 		"AbilitySharedCooldown" "starfury"
+		"Rarity" "S"
 		"ItemCost" "8475"
+		"WoodCost" "4237"
+		"SoulCrystalCost" "847"
 		"ItemShopTags" "damage;ias;agi"
 		"ItemQuality" "epic"
 		"ItemAliases" "starfury"
@@ -5728,6 +4372,8 @@
 		"Model" "models/props_gameplay/gem01.vmdl"
 		"AbilityCastRange" "0"
 		"AbilityCastPoint" "0.0"
+		"WoodCost" "0"
+		"SoulCrystalCost" "0"
 		"ItemShopTags" "consumable;see_invis"
 		"ItemQuality" "consumable"
 		"ItemAliases" "soul; truth; soul of truth"
@@ -5782,7 +4428,10 @@
 		"AbilityCastRange" "950"
 		"AbilityCastPoint" "0.0"
 		"AbilityCooldown" "25.0"
+		"Rarity" "S"
 		"ItemCost" "8050"
+		"WoodCost" "4025"
+		"SoulCrystalCost" "805"
 		"ItemShopTags" "damage;attack_speed;int;str;agi;hard_to_tag"
 		"ItemQuality" "artifact"
 		"ItemAliases" "power treads;origin;origin treads"
@@ -5907,7 +4556,10 @@
 		"Effect" "particles/generic_gameplay/dropped_item.vpcf"
 		"AbilityCooldown" "6"
 		"AbilitySharedCooldown" "phase"
+		"Rarity" "A"
 		"ItemCost" "4000"
+		"WoodCost" "2000"
+		"SoulCrystalCost" "400"
 		"ItemShopTags" "damage;move_speed;hard_to_tag"
 		"ItemQuality" "common"
 		"ItemAliases" "haste boots"
@@ -5964,7 +4616,10 @@
 		"ScriptFile" "npc/items/imba/item_imba_ironleaf_boots"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityCooldown" "13"
+		"Rarity" "A"
 		"ItemCost" "3825"
+		"WoodCost" "1912"
+		"SoulCrystalCost" "382"
 		"ItemShopTags" "move_speed;regen_health;magic_resistance"
 		"ItemQuality" "rare"
 		"ItemAliases" "tranquils; tranquil boots; ironleaf boots"
@@ -6077,7 +4732,10 @@
 		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_BUILDING"
 		"AbilityCooldown" "10.0"
 		"AbilitySharedCooldown" "blink"
+		"Rarity" "B"
 		"ItemCost" "2250"
+		"WoodCost" "1125"
+		"SoulCrystalCost" "225"
 		"ItemShopTags" "teleport"
 		"ItemQuality" "component"
 		"ItemAliases" "blink dagger"
@@ -6116,7 +4774,10 @@
 		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_BUILDING"
 		"AbilityCooldown" "10.0"
 		"AbilitySharedCooldown" "blink"
+		"Rarity" "A"
 		"ItemCost" "3800"
+		"WoodCost" "1900"
+		"SoulCrystalCost" "380"
 		"ItemShopTags" "teleport"
 		"ItemQuality" "common"
 		"ItemAliases" "blink;boots"
@@ -6176,7 +4837,10 @@
 		"AbilityCastPoint" "0.0"
 		"AbilityCooldown" "4.0"
 		"AbilitySharedCooldown" "echo_sabre"
+		"Rarity" "B"
 		"ItemCost" "2650"
+		"WoodCost" "1325"
+		"SoulCrystalCost" "265"
 		"ItemShopTags" "int;attack_speed;damage;regen_mana;damage;hard_to_tag"
 		"ItemQuality" "artifact"
 		"ItemAliases" "echo sabre"
@@ -6246,7 +4910,10 @@
 		"AbilityCastPoint" "0.0"
 		"AbilityCooldown" "4.0"
 		"AbilitySharedCooldown" "echo_sabre"
+		"Rarity" "A"
 		"ItemCost" "5450"
+		"WoodCost" "2725"
+		"SoulCrystalCost" "545"
 		"ItemShopTags" "int;attack_speed;damage;regen_mana;damage;hard_to_tag"
 		"ItemQuality" "artifact"
 		"ItemAliases" "reverb rapier"
@@ -6315,7 +4982,10 @@
 		"AbilityCastRange" "0"
 		"AbilityCastPoint" "0.0"
 		"AbilityCooldown" "0.0"
+		"Rarity" "B"
 		"ItemCost" "3000"
+		"WoodCost" "1500"
+		"SoulCrystalCost" "300"
 		"ItemShopTags" "magic_resist;regen_mana"
 		"ItemQuality" "rare"
 		"ItemAliases" "initiate robe;robe"
@@ -6359,7 +5029,10 @@
 		"AbilityTextureName" "imba/aether_lens"
 		"ScriptFile" "npc/items/imba/item_imba_aether_lens"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "B"
 		"ItemCost" "2350"
+		"WoodCost" "1175"
+		"SoulCrystalCost" "235"
 		"ItemShopTags" "int;regen_mana;move_speed;hard_to_tag"
 		"ItemQuality" "rare"
 		"ItemAliases" "aether lens"
@@ -6393,7 +5066,10 @@
 		"AbilityTextureName" "imba/nether_wand"
 		"ScriptFile" "npc/items/imba/item_imba_nether_wand"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "B"
 		"ItemCost" "1250"
+		"WoodCost" "625"
+		"SoulCrystalCost" "125"
 		"ItemShopTags" "int;damage;attack_speed;attack_damage;hard_to_tag"
 		"ItemQuality" "rare"
 		"ItemAliases" "wand;nether wand"
@@ -6414,7 +5090,10 @@
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"AbilityCooldown" "42.0"
 		"AbilitySharedCooldown" "swords"
+		"Rarity" "A"
 		"ItemCost" "4250"
+		"WoodCost" "2125"
+		"SoulCrystalCost" "425"
 		"ItemShopTags" "int;damage;attack_speed;attack_damage;mana;hard_to_tag"
 		"ItemQuality" "artifact"
 		"ItemAliases" "arcane nexus"
@@ -6455,7 +5134,10 @@
 		"ScriptFile" "npc/items/imba/item_imba_rapier"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"Model" "models/props_gameplay/divine_rapier.vmdl"
+		"Rarity" "S"
 		"ItemCost" "6300"
+		"WoodCost" "3150"
+		"SoulCrystalCost" "630"
 		"ItemShopTags" "damage"
 		"ItemQuality" "epic"
 		"ItemAliases" "divine rapier"
@@ -6484,7 +5166,10 @@
 		"ScriptFile" "npc/items/imba/item_imba_rapier"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"Model" "models/props_gameplay/divine_rapier.vmdl"
+		"Rarity" "S"
 		"ItemCost" "18900"
+		"WoodCost" "9450"
+		"SoulCrystalCost" "1890"
 		"ItemShopTags" "damage"
 		"ItemQuality" "epic"
 		"ItemAliases" "divine rapier;trinity rapier"
@@ -6513,7 +5198,10 @@
 		"ScriptFile" "npc/items/imba/item_imba_rapier"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"Model" "models/props_gameplay/divine_rapier.vmdl"
+		"Rarity" "S"
 		"ItemCost" "6300"
+		"WoodCost" "3150"
+		"SoulCrystalCost" "630"
 		"ItemShopTags" "damage"
 		"ItemQuality" "epic"
 		"ItemAliases" "divine rapier;arcane rapier"
@@ -6541,7 +5229,10 @@
 		"ScriptFile" "npc/items/imba/item_imba_rapier"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"Model" "models/props_gameplay/divine_rapier.vmdl"
+		"Rarity" "S"
 		"ItemCost" "18900"
+		"WoodCost" "9450"
+		"SoulCrystalCost" "1890"
 		"ItemShopTags" "damage"
 		"ItemQuality" "epic"
 		"ItemAliases" "divine rapier;arcane rapier;archmage rapier"
@@ -6569,7 +5260,10 @@
 		"ScriptFile" "npc/items/imba/item_imba_rapier"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"Model" "models/cursed_rapier.vmdl"
+		"Rarity" "S"
 		"ItemCost" "18900"
+		"WoodCost" "9450"
+		"SoulCrystalCost" "1890"
 		"ItemShopTags" "damage"
 		"ItemQuality" "epic"
 		"ItemAliases" "divine rapier;arcane rapier;archmage rapier"
@@ -6625,7 +5319,10 @@
 		"Model" "models/props_gameplay/dust.vmdl"
 		"AbilityCastRange" "1200"
 		"AbilityCooldown" "30"
+		"Rarity" "C"
 		"ItemCost" "60"
+		"WoodCost" "30"
+		"SoulCrystalCost" "6"
 		"ItemShopTags" "dust;appearance;detection"
 		"ItemQuality" "common"
 		"ItemAliases" "dust;dust of appearance;invis;reveal"
@@ -6671,6 +5368,9 @@
 		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityCastRange" "800"
 		"AbilityCooldown" "26"
+		"Rarity" "A"
+		"WoodCost" "0"
+		"SoulCrystalCost" "0"
 		"ItemShopTags" "angelic;alliance;disarm"
 		"ItemQuality" "epic"
 		"ItemAliases" "angelic alliance;alliance"
@@ -6785,7 +5485,10 @@
 		"AbilityCastRange" "800"
 		"AbilityCooldown" "30"
 		"AbilitySharedCooldown" "curseblade"
+		"Rarity" "A"
 		"ItemCost" "5200"
+		"WoodCost" "2600"
+		"SoulCrystalCost" "520"
 		"ItemShopTags" "agi;str;unique;hard_to_tag"
 		"ItemQuality" "artifact"
 		"ItemAliases" "diffusal blade 2;curseblade;curse"
@@ -6866,7 +5569,10 @@
 		"AbilityCastRange" "800"
 		"AbilityCooldown" "30"
 		"AbilitySharedCooldown" "curseblade"
+		"Rarity" "S"
 		"ItemCost" "8250"
+		"WoodCost" "4125"
+		"SoulCrystalCost" "825"
 		"ItemShopTags" "agi;str;unique;hard_to_tag"
 		"ItemQuality" "artifact"
 		"ItemAliases" "hellblade;curse"
@@ -6950,7 +5656,10 @@
 		"Model" "models/props_gameplay/magic_wand.vmdl"
 		"AbilityCooldown" "13.0"
 		"AbilitySharedCooldown" "magicwand"
+		"Rarity" "C"
 		"ItemCost" "200"
+		"WoodCost" "100"
+		"SoulCrystalCost" "20"
 		"ItemShopTags" "regen_health;regen_mana;boost_health;boost_mana"
 		"ItemQuality" "component"
 		"ItemAliases" "magic stick"
@@ -6985,7 +5694,10 @@
 		"Model" "models/props_gameplay/magic_wand.vmdl"
 		"AbilityCooldown" "13"
 		"AbilitySharedCooldown" "magicwand"
+		"Rarity" "C"
 		"ItemCost" "375"
+		"WoodCost" "187"
+		"SoulCrystalCost" "37"
 		"ItemShopTags" "regen_health;regen_mana;boost_health;boost_mana;int;agi;str"
 		"ItemQuality" "common"
 		"ItemAliases" "magic wand"
@@ -7027,7 +5739,10 @@
 		"AbilityTextureName" "imba/lifesteal"
 		"ScriptFile" "npc/items/imba/item_imba_lifesteal"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "C"
 		"ItemCost" "900"
+		"WoodCost" "450"
+		"SoulCrystalCost" "90"
 		"ItemShopTags" "damage;hard_to_tag"
 		"ItemQuality" "common"
 		"ItemAliases" "lifesteal"
@@ -7054,7 +5769,10 @@
 		"ScriptFile" "npc/items/imba/item_imba_mask_of_madness"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityCooldown" "16"
+		"Rarity" "B"
 		"ItemCost" "1975"
+		"WoodCost" "987"
+		"SoulCrystalCost" "197"
 		"ItemShopTags" "hard_to_tag"
 		"ItemQuality" "artifact"
 		"ItemAliases" "madness;berserk"
@@ -7128,7 +5846,10 @@
 		"ScriptFile" "npc/items/imba/item_imba_satanic"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityCooldown" "35"
+		"Rarity" "A"
 		"ItemCost" "5300"
+		"WoodCost" "2650"
+		"SoulCrystalCost" "530"
 		"ItemShopTags" "damage;str;hard_to_tag"
 		"ItemQuality" "artifact"
 		"ItemAliases" "satanic;lifesteal"
@@ -7201,6 +5922,9 @@
 		"AbilityCastRange" "950"
 		"AbilityCooldown" "7"
 		"AbilitySharedCooldown" "urn"
+		"Rarity" "A"
+		"WoodCost" "0"
+		"SoulCrystalCost" "0"
 		"ItemShopTags" "agi;int;str;armor;boost_health;mana_regen"
 		"ItemQuality" "artifact"
 		"ItemAliases" "urn"
@@ -7271,7 +5995,10 @@
 		"AbilityCastRange" "950"
 		"AbilityCooldown" "26"
 		"AbilitySharedCooldown" "bkb"
+		"Rarity" "A"
 		"ItemCost" "3500"
+		"WoodCost" "1750"
+		"SoulCrystalCost" "350"
 		"ItemShopTags" "agi;int;str;armor;boost_health;mana_regen"
 		"ItemQuality" "artifact"
 		"ItemAliases" "urn;bkb"
@@ -7347,7 +6074,10 @@
 		"ScriptFile" "npc/items/imba/item_imba_hood_of_defiance"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
 		"AbilityCooldown" "60"
+		"Rarity" "B"
 		"ItemCost" "1725"
+		"WoodCost" "862"
+		"SoulCrystalCost" "172"
 		"ItemShopTags" "health_regen;defense;magic_resist"
 		"ItemQuality" "artifact"
 		"ItemAliases" "hood;defiance"
@@ -7399,7 +6129,10 @@
 		"ScriptFile" "npc/items/imba/item_imba_pipe"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
 		"AbilityCooldown" "60"
+		"Rarity" "B"
 		"ItemCost" "3150"
+		"WoodCost" "1575"
+		"SoulCrystalCost" "315"
 		"ItemShopTags" "health_regen;support;magic_resist"
 		"ItemQuality" "artifact"
 		"ItemAliases" "pipe"
@@ -7472,7 +6205,10 @@
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityCooldown" "25.0"
 		"AbilitySharedCooldown" "blade_mail"
+		"Rarity" "B"
 		"ItemCost" "2200"
+		"WoodCost" "1100"
+		"SoulCrystalCost" "220"
 		"ItemShopTags" "damage;armor;int;hard_to_tag"
 		"ItemQuality" "epic"
 		"ItemAliases" "bm;blade mail;blademail"
@@ -7530,7 +6266,10 @@
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityCooldown" "25.0"
 		"AbilitySharedCooldown" "blade_mail"
+		"Rarity" "S"
 		"ItemCost" "7000"
+		"WoodCost" "3500"
+		"SoulCrystalCost" "700"
 		"ItemShopTags" "damage;armor;int;hard_to_tag"
 		"ItemQuality" "epic"
 		"ItemAliases" "bm;bladestorm mail;bladestorm"
@@ -7591,7 +6330,10 @@
 		"AbilityTextureName" "imba/occult_mask"
 		"ScriptFile" "npc/items/imba/item_imba_occult_mask"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "B"
 		"ItemCost" "2200"
+		"WoodCost" "1100"
+		"SoulCrystalCost" "220"
 		"ItemShopTags" "str;damage"
 		"ItemQuality" "rare"
 		"ItemAliases" "occult;curse;"
@@ -7633,7 +6375,10 @@
 		"ScriptFile" "npc/items/imba/item_imba_skull_basher"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityCooldown" "2.3"
+		"Rarity" "B"
 		"ItemCost" "2950"
+		"WoodCost" "1475"
+		"SoulCrystalCost" "295"
 		"ItemShopTags" "str;damage"
 		"ItemQuality" "rare"
 		"ItemAliases" "skull;basher;"
@@ -7698,7 +6443,10 @@
 		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityCastRange" "550"
 		"AbilityCooldown" "35.0"
+		"Rarity" "S"
 		"ItemCost" "6300"
+		"WoodCost" "3150"
+		"SoulCrystalCost" "630"
 		"ItemShopTags" "str;damage;hp;hp_regen"
 		"ItemQuality" "epic"
 		"ItemAliases" "abyssal;abyssal blade;"
@@ -7806,7 +6554,10 @@
 		"AbilityCastPoint" "0.0"
 		"AbilityCooldown" "45.0"
 		"AbilitySharedCooldown" "manta"
+		"Rarity" "A"
 		"ItemCost" "4700"
+		"WoodCost" "2350"
+		"SoulCrystalCost" "470"
 		"ItemShopTags" "agi;str;int;attack_speed;move_speed;hard_to_tag"
 		"ItemQuality" "epic"
 		"ItemAliases" "manta style"
@@ -7932,7 +6683,10 @@
 		"AbilityTextureName" "imba/lesser_crit"
 		"ScriptFile" "npc/items/imba/item_imba_lesser_crit"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "B"
 		"ItemCost" "2130"
+		"WoodCost" "1065"
+		"SoulCrystalCost" "213"
 		"ItemShopTags" "damage;crit"
 		"ItemQuality" "epic"
 		"ItemAliases" "crystalys"
@@ -7967,7 +6721,10 @@
 		"AbilityCastRange" "800"
 		"AbilityCooldown" "35.0"
 		"AbilitySharedCooldown" "some_viking_shit"
+		"Rarity" "S"
 		"ItemCost" "10900"
+		"WoodCost" "5450"
+		"SoulCrystalCost" "1090"
 		"ItemShopTags" "damage;attack_speed;unique"
 		"ItemQuality" "artifact"
 		"ItemAliases" "storm breaker thor strongest avenger"
@@ -8100,7 +6857,10 @@
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"Model" "models/props_gameplay/treasure_chest001.vmdl"
 		"Effect" "particles/generic_gameplay/dropped_aegis.vpcf"
+		"Rarity" "A"
 		"ItemCost" "0"
+		"WoodCost" "0"
+		"SoulCrystalCost" "0"
 		"ItemQuality" "epic"
 		"ItemStackable" "0"
 		"ItemShareability" "ITEM_FULLY_SHAREABLE"
@@ -8160,7 +6920,10 @@
 		"AbilityCastPoint" "0.0"
 		"AbilityCooldown" "16.0"
 		"AbilitySharedCooldown" "force"
+		"Rarity" "B"
 		"ItemCost" "2250"
+		"WoodCost" "1125"
+		"SoulCrystalCost" "225"
 		"ItemShopTags" "int;damage;attack_speed;hard_to_tag"
 		"ItemQuality" "rare"
 		"ItemAliases" "fs;force staff"
@@ -8207,7 +6970,10 @@
 		"AbilityCastPoint" "0.0"
 		"AbilityCooldown" "15.0"
 		"AbilitySharedCooldown" "force"
+		"Rarity" "A"
 		"ItemCost" "4615"
+		"WoodCost" "2307"
+		"SoulCrystalCost" "461"
 		"ItemShopTags" "int;damage;attack_speed;hard_to_tag"
 		"ItemQuality" "epic"
 		"ItemAliases" "fs;force staff"
@@ -8283,7 +7049,10 @@
 		"AbilityTextureName" "imba/power_treads"
 		"ScriptFile" "npc/items/imba/item_imba_power_treads"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"Rarity" "B"
 		"ItemCost" "1400"
+		"WoodCost" "700"
+		"SoulCrystalCost" "140"
 		"ItemShopTags" "attack_speed;move_speed;int;agi;str"
 		"ItemQuality" "common"
 		"ItemAliases" "power treads"
@@ -8322,7 +7091,10 @@
 		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP | DOTA_UNIT_TARGET_CUSTOM"
 		"AbilityCooldown" "40.0"
 		"AbilitySharedCooldown" "teleport"
+		"Rarity" "B"
 		"ItemCost" "2450"
+		"WoodCost" "1225"
+		"SoulCrystalCost" "245"
 		"ItemShopTags" "teleport;move_speed"
 		"ItemQuality" "common"
 		"ItemAliases" "bot;boots of travel;tp"
@@ -8362,7 +7134,10 @@
 		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP"
 		"AbilityCooldown" "45.0"
 		"AbilitySharedCooldown" "teleport"
+		"Rarity" "A"
 		"ItemCost" "4400"
+		"WoodCost" "2200"
+		"SoulCrystalCost" "440"
 		"ItemShopTags" "teleport;move_speed"
 		"ItemQuality" "common"
 		"ItemAliases" "bot;boots of travel;tp"
@@ -8403,7 +7178,10 @@
 		"AbilityCastRange" "300"
 		"AbilityCastPoint" "0.0"
 		"AbilityCooldown" "200"
+		"Rarity" "S"
 		"ItemCost" "14000"
+		"WoodCost" "7000"
+		"SoulCrystalCost" "1400"
 		"ItemShopTags" "regen_health;regen_mana;mana_pool;health_pool"
 		"ItemQuality" "epic"
 		"ItemAliases" "planck;artifact"
@@ -8507,7 +7285,10 @@
 		"Model" "models/props_gameplay/tombstoneb01.vmdl"
 		"AbilityCastRange" "100"
 		"AbilityCastPoint" "0.0"
+		"Rarity" "A"
 		"ItemCost" "0"
+		"WoodCost" "0"
+		"SoulCrystalCost" "0"
 		"ItemShopTags" "consumable"
 		"ItemQuality" "consumable"
 		"ItemStackable" "1"
@@ -8534,7 +7315,10 @@
 		"Model" "models/props_gameplay/red_box.vmdl"
 		"Effect" "particles/generic_gameplay/dropped_item.vpcf"
 		"AbilityCastRange" "375"
+		"Rarity" "B"
 		"ItemCost" "1350"
+		"WoodCost" "675"
+		"SoulCrystalCost" "135"
 		"ItemShopTags" "artifact"
 		"ItemQuality" "artifact"
 		"AbilitySpecial" {
@@ -8565,7 +7349,10 @@
 		"Effect" "particles/generic_gameplay/dropped_item.vpcf"
 		"AbilityCooldown" "8"
 		"AbilitySharedCooldown" "phase"
+		"Rarity" "A"
 		"ItemCost" "4020"
+		"WoodCost" "2010"
+		"SoulCrystalCost" "402"
 		"ItemShopTags" "damage;move_speed;hard_to_tag"
 		"ItemQuality" "common"
 		"ItemAliases" "lifesteal boots"
@@ -8628,7 +7415,10 @@
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"AbilityCooldown" "42.0"
 		"AbilitySharedCooldown" "swords"
+		"Rarity" "A"
 		"ItemCost" "4100"
+		"WoodCost" "2050"
+		"SoulCrystalCost" "410"
 		"ItemShopTags" "damage;str;agi;attack_speed;unique"
 		"ItemQuality" "artifact"
 		"ItemAliases" "kns;k&s;ks;kaya and sange;snk;s&k;sk;sange and kaya"
@@ -8697,7 +7487,10 @@
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"AbilityCooldown" "42.0"
 		"AbilitySharedCooldown" "swords"
+		"Rarity" "A"
 		"ItemCost" "4100"
+		"WoodCost" "2050"
+		"SoulCrystalCost" "410"
 		"ItemShopTags" "damage;str;agi;attack_speed;unique"
 		"ItemQuality" "artifact"
 		"ItemAliases" "sny;s&y;sy;sange and yasha"
@@ -8772,7 +7565,10 @@
 		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO"
 		"AbilityCastPoint" "0.0"
 		"AbilityCooldown" "190.0"
+		"Rarity" "A"
 		"ItemCost" "4900"
+		"WoodCost" "2450"
+		"SoulCrystalCost" "490"
 		"ItemShopTags" "regen_health;regen_mana;mana_pool;health_pool"
 		"ItemQuality" "epic"
 		"ItemAliases" "bs;bloodstone"
@@ -8877,7 +7673,10 @@
 		"AbilityCastRange" "800"
 		"AbilityCooldown" "28.0"
 		"AbilitySharedCooldown" "meteor_hammer"
+		"Rarity" "B"
 		"ItemCost" "2625"
+		"WoodCost" "1312"
+		"SoulCrystalCost" "262"
 		"ItemQuality" "epic"
 		"ItemAliases" "mh;meteor hammer"
 		"ItemDeclarations" "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
@@ -8970,7 +7769,10 @@
 		"AbilityCastRange" "800"
 		"AbilityCooldown" "28.0"
 		"AbilitySharedCooldown" "meteor_hammer"
+		"Rarity" "A"
 		"ItemCost" "4125"
+		"WoodCost" "2062"
+		"SoulCrystalCost" "412"
 		"ItemQuality" "epic"
 		"ItemAliases" "mh;meteor hammer"
 		"ItemDeclarations" "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
@@ -9063,7 +7865,10 @@
 		"AbilityCastRange" "800"
 		"AbilityCooldown" "28.0"
 		"AbilitySharedCooldown" "meteor_hammer"
+		"Rarity" "A"
 		"ItemCost" "5625"
+		"WoodCost" "2812"
+		"SoulCrystalCost" "562"
 		"ItemQuality" "epic"
 		"ItemAliases" "mh;meteor hammer"
 		"ItemDeclarations" "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
@@ -9156,7 +7961,10 @@
 		"AbilityCastRange" "800"
 		"AbilityCooldown" "28.0"
 		"AbilitySharedCooldown" "meteor_hammer"
+		"Rarity" "S"
 		"ItemCost" "7125"
+		"WoodCost" "3562"
+		"SoulCrystalCost" "712"
 		"ItemQuality" "epic"
 		"ItemAliases" "mh;meteor hammer"
 		"ItemDeclarations" "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
@@ -9251,7 +8059,10 @@
 		"AbilityCastRange" "950"
 		"AbilityCooldown" "7.0"
 		"AbilitySharedCooldown" "urn"
+		"Rarity" "B"
 		"ItemCost" "2965"
+		"WoodCost" "1482"
+		"SoulCrystalCost" "296"
 		"ItemQuality" "rare"
 		"ItemAliases" "sv;spirit vessel"
 		"ItemStackable" "0"
@@ -9361,7 +8172,10 @@
 		"AbilityCastPoint" "0.0"
 		"AbilityCooldown" "18"
 		"AbilitySharedCooldown" "atos"
+		"Rarity" "B"
 		"ItemCost" "2750"
+		"WoodCost" "1375"
+		"SoulCrystalCost" "275"
 		"ItemShopTags" "int;regen_health"
 		"ItemQuality" "rare"
 		"ItemAliases" "rod of atos"
@@ -9418,7 +8232,10 @@
 		"AbilityCastPoint" "0.0"
 		"AbilityCooldown" "16"
 		"AbilitySharedCooldown" "atos"
+		"Rarity" "S"
 		"ItemCost" "10000"
+		"WoodCost" "5000"
+		"SoulCrystalCost" "1000"
 		"ItemShopTags" "int;regen_health"
 		"ItemQuality" "rare"
 		"ItemAliases" "rod of atos"
@@ -9522,7 +8339,10 @@
 		"AbilityCastPoint" "0.0"
 		"AbilityCooldown" "15.0"
 		"AbilitySharedCooldown" "diffusal"
+		"Rarity" "S"
 		"ItemCost" "7050"
+		"WoodCost" "3525"
+		"SoulCrystalCost" "705"
 		"ItemShopTags" "agi;int;unique;hard_to_tag"
 		"ItemQuality" "artifact"
 		"ItemAliases" "witchblade;diffusal blade 3"
@@ -9611,7 +8431,10 @@
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"AbilityCooldown" "20.0"
 		"AbilitySharedCooldown" "ethereal"
+		"Rarity" "B"
 		"ItemCost" "1500"
+		"WoodCost" "750"
+		"SoulCrystalCost" "150"
 		"ItemShopTags" "int;agi;str;hard_to_tag"
 		"ItemQuality" "component"
 		"ItemAliases" "ghost scepter"
@@ -9658,7 +8481,10 @@
 		"AbilityCastPoint" "0.0"
 		"AbilityCooldown" "20.0"
 		"AbilitySharedCooldown" "ethereal"
+		"Rarity" "A"
 		"ItemCost" "4700"
+		"WoodCost" "2350"
+		"SoulCrystalCost" "470"
 		"ItemShopTags" "agi;str;int;hard_to_tag"
 		"ItemQuality" "epic"
 		"ItemAliases" "eb;ethereal blade;eblade"
@@ -9754,7 +8580,10 @@
 		"AbilityCooldown" "42.0"
 		"AbilitySharedCooldown" "swords"
 		"ItemIsNeutralDrop" "1"
+		"Rarity" "S"
 		"ItemCost" "6151"
+		"WoodCost" "3075"
+		"SoulCrystalCost" "615"
 		"ItemShopTags" "damage;str;agi;int;unique"
 		"ItemQuality" "artifact"
 		"ItemAliases" "triumvirate;trident;sky;kys"
@@ -9862,7 +8691,10 @@
 		"AbilityCooldown" "42.0"
 		"AbilitySharedCooldown" "swords"
 		"ItemIsNeutralDrop" "1"
+		"Rarity" "S"
 		"ItemCost" "6151"
+		"WoodCost" "3075"
+		"SoulCrystalCost" "615"
 		"ItemShopTags" "damage;str;agi;int;unique"
 		"ItemQuality" "artifact"
 		"ItemAliases" "triumvirate;trident;sky;kys"
@@ -9973,7 +8805,10 @@
 		"AbilityCastPoint" "0.0"
 		"AbilityCooldown" "15.0"
 		"AbilitySharedCooldown" "force"
+		"Rarity" "S"
 		"ItemCost" "11000"
+		"WoodCost" "5500"
+		"SoulCrystalCost" "1100"
 		"ItemShopTags" "damage;attack_speed;int;str;hard_to_tag"
 		"ItemQuality" "artifact"
 		"ItemAliases" "gungnir"
@@ -10101,7 +8936,10 @@
 		"AbilityCastRange" "800"
 		"AbilityCastPoint" "0.2"
 		"AbilityCooldown" "25.0"
+		"Rarity" "S"
 		"ItemCost" "7000"
+		"WoodCost" "3500"
+		"SoulCrystalCost" "700"
 		"ItemShopTags" "int;regen_mana;hard_to_tag"
 		"ItemQuality" "artifact"
 		"ItemAliases" "brine"
@@ -10157,7 +8995,10 @@
 		"Effect" "particles/generic_gameplay/dropped_aegis.vpcf"
 		"AbilityCastRange" "100"
 		"AbilityCastPoint" "0.0"
+		"Rarity" "A"
 		"ItemCost" "5555"
+		"WoodCost" "2777"
+		"SoulCrystalCost" "555"
 		"ItemShopTags" "spell_lifesteal;blood_magic;hard_to_tag"
 		"ItemQuality" "artifact"
 		"ItemAliases" "stonework;pendant"
@@ -10201,7 +9042,10 @@
 		"Model" "models/props_gameplay/treasure_chest001.vmdl"
 		"Effect" "particles/generic_gameplay/dropped_aegis.vpcf"
 		"AbilityCooldown" "34.0"
+		"Rarity" "S"
 		"ItemCost" "7000"
+		"WoodCost" "3500"
+		"SoulCrystalCost" "700"
 		"ItemShopTags" "str;agi;int;regen_health;armor;hard_to_tag"
 		"ItemQuality" "artifact"
 		"ItemAliases" "glimmerdark"
@@ -10276,7 +9120,10 @@
 		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityCastRange" "1050"
 		"AbilityCooldown" "14.0"
+		"Rarity" "A"
 		"ItemCost" "3400"
+		"WoodCost" "1700"
+		"SoulCrystalCost" "340"
 		"ItemShopTags" "move_speed;regen_health;armor"
 		"ItemQuality" "rare"
 		"ItemAliases" "transient boots"
@@ -10347,7 +9194,10 @@
 		"AbilityCastRange" "1800"
 		"AbilityCastPoint" "0.3"
 		"AbilityCooldown" "8.0"
+		"Rarity" "B"
 		"ItemCost" "1800"
+		"WoodCost" "900"
+		"SoulCrystalCost" "180"
 		"ItemShopTags" "str;health"
 		"ItemQuality" "artifact"
 		"ItemAliases" "ogre seal totem"
@@ -10394,7 +9244,10 @@
 		"ScriptFile" "npc/items/imba/item_imba_armlet_of_dementor"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
 		"AbilityCooldown" "5.0"
+		"Rarity" "B"
 		"ItemCost" "2550"
+		"WoodCost" "1275"
+		"SoulCrystalCost" "255"
 		"ItemShopTags" "hard_to_tag"
 		"ItemQuality" "rare"
 		"ItemAliases" "armlet of the dementor;dementor;mana armlet;marmlet"
@@ -10456,7 +9309,10 @@
 		"AbilityCastPoint" "0.0"
 		"AbilityCooldown" "15.0"
 		"AbilitySharedCooldown" "force"
+		"Rarity" "S"
 		"ItemCost" "9300"
+		"WoodCost" "4650"
+		"SoulCrystalCost" "930"
 		"ItemShopTags" "damage;attack_speed;int;str;hard_to_tag"
 		"ItemQuality" "artifact"
 		"ItemAliases" "lance;longinus;lance of longinus"
@@ -10582,7 +9438,10 @@
 		"AbilityCastRange" "350"
 		"AbilityCastPoint" "0.0"
 		"AbilityCooldown" "20.0"
+		"Rarity" "A"
 		"ItemCost" "0"
+		"WoodCost" "0"
+		"SoulCrystalCost" "0"
 		"ItemShopTags" "damage"
 		"ItemQuality" "common"
 		"ItemAliases" "quelling blade"
@@ -10657,7 +9516,10 @@
 		"ScriptFile" "npc/items/imba/item_imba_ring_of_aquila"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_TOGGLE"
 		"AbilityCastRange" "1200"
+		"Rarity" "C"
 		"ItemCost" "965"
+		"WoodCost" "482"
+		"SoulCrystalCost" "96"
 		"ItemShopTags" ""
 		"ItemQuality" "rare"
 		"ItemAliases" "roa;ring of aquila"
@@ -10732,7 +9594,10 @@
 		"AbilityCastRange" "900"
 		"AbilityCooldown" "11.0"
 		"AbilitySharedCooldown" "nullifier"
+		"Rarity" "A"
 		"ItemCost" "4700"
+		"WoodCost" "2350"
+		"SoulCrystalCost" "470"
 		"ItemQuality" "epic"
 		"ItemAliases" "nlf;nullifier"
 		"ItemDeclarations" "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
@@ -10787,7 +9652,10 @@
 		"AbilityCastRange" "900"
 		"AbilityCooldown" "11.0"
 		"AbilitySharedCooldown" "nullifier"
+		"Rarity" "S"
 		"ItemCost" "8400"
+		"WoodCost" "4200"
+		"SoulCrystalCost" "840"
 		"ItemQuality" "epic"
 		"ItemAliases" "nlf 2;nullifier 2"
 		"ItemDeclarations" "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
@@ -10859,7 +9727,10 @@
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
 		"AbilityCastRange" "800"
 		"AbilityCooldown" "80.0"
+		"Rarity" "A"
 		"ItemCost" "4200"
+		"WoodCost" "2100"
+		"SoulCrystalCost" "420"
 		"ItemShopTags" "damage;armor;int;spell_amp;cast_range;hard_to_tag"
 		"ItemQuality" "epic"
 		"ItemAliases" "as;aether specs;aether;specs;glasses"
@@ -10972,7 +9843,10 @@
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
 		"AbilityCastRange" "0"
 		"AbilityCooldown" "18.0"
+		"Rarity" "A"
 		"ItemCost" "4050"
+		"WoodCost" "2025"
+		"SoulCrystalCost" "405"
 		"ItemShopTags" "regen_health;block;health_pool"
 		"ItemQuality" "epic"
 		"ItemAliases" "valiance"
@@ -11102,7 +9976,10 @@
 		"AbilityCastPoint" "0.0"
 		"AbilityCooldown" "23.0"
 		"AbilitySharedCooldown" "cyclone"
+		"Rarity" "A"
 		"ItemCost" "4850"
+		"WoodCost" "2425"
+		"SoulCrystalCost" "485"
 		"ItemShopTags" "int;regen_mana;move_speed;hard_to_tag"
 		"ItemQuality" "rare"
 		"ItemAliases" "cyclone euls;eul's scepter of divinity"
@@ -11149,7 +10026,10 @@
 		"AbilityCastPoint" "0.0"
 		"AbilityCooldown" "23.0"
 		"AbilitySharedCooldown" "cyclone"
+		"Rarity" "S"
 		"ItemCost" "4850"
+		"WoodCost" "2425"
+		"SoulCrystalCost" "485"
 		"ItemShopTags" "int;regen_mana;move_speed;hard_to_tag"
 		"ItemQuality" "rare"
 		"ItemAliases" "cyclone euls;eul's scepter of divinity"
@@ -11238,7 +10118,10 @@
 		"AbilityCastRange" "400"
 		"AbilityCastPoint" "0.0"
 		"AbilityCooldown" "32"
-		"ItemCost" ""
+		"Rarity" "A"
+		"ItemCost" "4000"
+		"WoodCost" "2000"
+		"SoulCrystalCost" "400"
 		"ItemShopTags" "str;damage;hard_to_tag"
 		"ItemQuality" "artifact"
 		"ItemAliases" "cultic;hammer;cultic hammer"
@@ -11325,7 +10208,10 @@
 		"AbilityCastPoint" "0.0"
 		"AbilityCooldown" "45.0"
 		"AbilitySharedCooldown" "manta"
+		"Rarity" "S"
 		"ItemCost" "7200"
+		"WoodCost" "3600"
+		"SoulCrystalCost" "720"
 		"ItemShopTags" "agi;str;int;attack_speed;move_speed;hard_to_tag"
 		"ItemQuality" "epic"
 		"ItemAliases" "manta style"
@@ -11458,7 +10344,10 @@
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
 		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO"
+		"Rarity" "B"
 		"ItemCost" "1800"
+		"WoodCost" "900"
+		"SoulCrystalCost" "180"
 		"ItemShopTags" "int"
 		"ItemQuality" "consumable"
 		"ItemAliases" "banana"
@@ -11522,7 +10411,10 @@
 		"AbilityCastRange" "165"
 		"AbilityCastPoint" "0.0"
 		"AbilityCooldown" "0"
+		"Rarity" "C"
 		"ItemCost" "90"
+		"WoodCost" "45"
+		"SoulCrystalCost" "9"
 		"ItemShopTags" "consumable"
 		"ItemQuality" "consumable"
 		"ItemAliases" "tango"
@@ -11582,7 +10474,10 @@
 		"AbilityCastRange" "165"
 		"AbilityCastPoint" "0.0"
 		"AbilityCooldown" "60"
+		"Rarity" "C"
 		"ItemCost" "30"
+		"WoodCost" "15"
+		"SoulCrystalCost" "3"
 		"ItemShopTags" "consumable"
 		"ItemQuality" "consumable"
 		"ItemStackable" "0"
@@ -11636,7 +10531,10 @@
 		"Model" "models/props_gameplay/clarity.vmdl"
 		"AbilityCastRange" "250"
 		"AbilityCastPoint" "0.0"
+		"Rarity" "C"
 		"ItemCost" "50"
+		"WoodCost" "25"
+		"SoulCrystalCost" "5"
 		"ItemShopTags" "consumable"
 		"ItemQuality" "consumable"
 		"ItemAliases" "clarity"
@@ -11700,7 +10598,10 @@
 		"Model" "models/props_gameplay/salve.vmdl"
 		"AbilityCastRange" "400"
 		"AbilityCastPoint" "0.0"
+		"Rarity" "C"
 		"ItemCost" "110"
+		"WoodCost" "55"
+		"SoulCrystalCost" "11"
 		"ItemShopTags" "consumable"
 		"ItemQuality" "consumable"
 		"ItemAliases" "healing salve"
@@ -11758,7 +10659,10 @@
 		"Effect" "particles/generic_gameplay/dropped_smoke.vpcf"
 		"AbilityCastRange" "1200"
 		"AbilityCooldown" "1"
+		"Rarity" "C"
 		"ItemCost" "80"
+		"WoodCost" "40"
+		"SoulCrystalCost" "8"
 		"ItemShopTags" "consumable"
 		"ItemQuality" "consumable"
 		"ItemAliases" "smoke of deceit"
@@ -11841,7 +10745,10 @@
 		"AbilityTextureName" "imba/circlet"
 		"ScriptFile" "npc/items/imba/item_imba_circlet"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "C"
 		"ItemCost" "155"
+		"WoodCost" "77"
+		"SoulCrystalCost" "15"
 		"ItemShopTags" "agi;int;str"
 		"ItemQuality" "component"
 		"ItemAliases" "circlet"
@@ -11867,7 +10774,10 @@
 		"ScriptFile" "npc/items/imba/item_imba_gauntlets"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityCooldown" "5"
+		"Rarity" "C"
 		"ItemCost" "145"
+		"WoodCost" "72"
+		"SoulCrystalCost" "14"
 		"ItemShopTags" "str"
 		"ItemQuality" "component"
 		"ItemAliases" "gauntlets of strength"
@@ -11893,7 +10803,10 @@
 		"ScriptFile" "npc/items/imba/item_imba_mantle"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityCooldown" "5"
+		"Rarity" "C"
 		"ItemCost" "145"
+		"WoodCost" "72"
+		"SoulCrystalCost" "14"
 		"ItemShopTags" "int"
 		"ItemQuality" "component"
 		"ItemAliases" "mantle of intelligence"
@@ -11923,7 +10836,10 @@
 		"Model" "models/props_gameplay/mango.vmdl"
 		"AbilityCastRange" "400"
 		"AbilityCastPoint" "0"
+		"Rarity" "C"
 		"ItemCost" "70"
+		"WoodCost" "35"
+		"SoulCrystalCost" "7"
 		"ItemShopTags" "consumable"
 		"ItemQuality" "consumable"
 		"ItemAliases" "enchanted mango"
@@ -11969,7 +10885,10 @@
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityCastPoint" "0"
 		"AbilityCooldown" "5"
+		"Rarity" "C"
 		"ItemCost" "70"
+		"WoodCost" "35"
+		"SoulCrystalCost" "7"
 		"ItemShopTags" "damage;consumable"
 		"ItemQuality" "consumable"
 		"ItemAliases" "faerie fire"
@@ -12022,7 +10941,10 @@
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityCooldown" "70"
 		"AbilitySharedCooldown" "bkb"
+		"Rarity" "A"
 		"ItemCost" "4050"
+		"WoodCost" "2025"
+		"SoulCrystalCost" "405"
 		"ItemShopTags" "str;damage;hard_to_tag"
 		"ItemQuality" "epic"
 		"ItemAliases" "bkb;black king bar"
@@ -12069,7 +10991,10 @@
 		"AbilityCastPoint" "0.1"
 		"AbilityCooldown" "55.0"
 		"ItemIsNeutralDrop" "1"
+		"Rarity" "B"
 		"ItemCost" "0"
+		"WoodCost" "0"
+		"SoulCrystalCost" "0"
 		"ItemPurchasable" "0"
 		"AbilitySpecial" {
 			"01" {
@@ -12109,7 +11034,10 @@
 		"Model" "models/props_gameplay/gem01.vmdl"
 		"Effect" "particles/generic_gameplay/dropped_gem.vpcf"
 		"AbilityCastRange" "900"
+		"Rarity" "C"
 		"ItemCost" "500"
+		"WoodCost" "250"
+		"SoulCrystalCost" "50"
 		"ItemShopTags" "see_invis"
 		"ItemQuality" "component"
 		"ItemAliases" "gem of true sight"
@@ -12148,7 +11076,10 @@
 		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO"
 		"AbilityCastRange" "900"
 		"AbilityCooldown" "15.0"
+		"Rarity" "A"
 		"ItemCost" "3950"
+		"WoodCost" "1975"
+		"SoulCrystalCost" "395"
 		"ItemShopTags" "regen_health;regen_mana;str;agi;int;hard_to_tag"
 		"ItemQuality" "epic"
 		"ItemAliases" "ls;lotus orb"
@@ -12179,6 +11110,1481 @@
 			"05" {
 				"var_type" "FIELD_INTEGER"
 				"active_duration" "7"
+
+			}
+
+		}
+
+	}
+	"item_imba_branches" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "item_branches"
+		"ScriptFile" "npc/items/imba/item_imba_branches"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT"
+		"Model" "models/props_gameplay/branch.vmdl"
+		"AbilityCastRange" "400"
+		"AbilityCastPoint" "0.0"
+		"AbilityCooldown" "0.0"
+		"Rarity" "C"
+		"ItemCost" "50"
+		"WoodCost" "25"
+		"SoulCrystalCost" "5"
+		"ItemShopTags" "agi;int;str"
+		"ItemQuality" "consumable"
+		"ItemAliases" "gg branch;iron branch"
+		"ShouldBeInitiallySuggested" "1"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_all_stats" "1"
+
+			}
+			"02" {
+				"var_type" "FIELD_INTEGER"
+				"tree_duration" "20"
+
+			}
+
+		}
+
+	}
+	"item_imba_slippers" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "item_slippers"
+		"ScriptFile" "npc/items/imba/item_imba_slippers"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "C"
+		"ItemCost" "140"
+		"WoodCost" "70"
+		"SoulCrystalCost" "14"
+		"ItemShopTags" "agi"
+		"ItemQuality" "component"
+		"ItemAliases" "slippers of agility"
+		"ShouldBeInitiallySuggested" "1"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_agility" "3"
+
+			}
+
+		}
+
+	}
+	"item_imba_belt_of_strength" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "item_belt_of_strength"
+		"ScriptFile" "npc/items/imba/item_imba_belt_of_strength"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "C"
+		"ItemCost" "450"
+		"WoodCost" "225"
+		"SoulCrystalCost" "45"
+		"ItemShopTags" "str"
+		"ItemQuality" "component"
+		"ItemAliases" "belt of strength"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_strength" "6"
+
+			}
+
+		}
+
+	}
+	"item_imba_boots_of_elves" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "item_boots_of_elves"
+		"ScriptFile" "npc/items/imba/item_imba_boots_of_elves"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "C"
+		"ItemCost" "450"
+		"WoodCost" "225"
+		"SoulCrystalCost" "45"
+		"ItemShopTags" "agi"
+		"ItemQuality" "component"
+		"ItemAliases" "band of elvenskin"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_agility" "6"
+
+			}
+
+		}
+
+	}
+	"item_imba_robe" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "item_robe"
+		"ScriptFile" "npc/items/imba/item_imba_robe"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "C"
+		"ItemCost" "450"
+		"WoodCost" "225"
+		"SoulCrystalCost" "45"
+		"ItemShopTags" "int"
+		"ItemQuality" "component"
+		"ItemAliases" "robe of the magi"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_intellect" "6"
+
+			}
+
+		}
+
+	}
+	"item_imba_crown" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "item_crown"
+		"ScriptFile" "npc/items/imba/item_imba_crown"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "C"
+		"ItemCost" "450"
+		"WoodCost" "225"
+		"SoulCrystalCost" "45"
+		"ItemShopTags" "agi;int;str"
+		"ItemQuality" "component"
+		"ItemAliases" "crown"
+		"ShouldBeInitiallySuggested" "1"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_all_stats" "4"
+
+			}
+
+		}
+
+	}
+	"item_imba_ogre_axe" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "item_ogre_axe"
+		"ScriptFile" "npc/items/imba/item_imba_ogre_axe"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "C"
+		"ItemCost" "1000"
+		"WoodCost" "500"
+		"SoulCrystalCost" "100"
+		"ItemShopTags" "str"
+		"ItemQuality" "component"
+		"ItemAliases" "ogre club"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_strength" "10"
+
+			}
+
+		}
+
+	}
+	"item_imba_blade_of_alacrity" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "item_blade_of_alacrity"
+		"ScriptFile" "npc/items/imba/item_imba_blade_of_alacrity"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "C"
+		"ItemCost" "1000"
+		"WoodCost" "500"
+		"SoulCrystalCost" "100"
+		"ItemShopTags" "agi"
+		"ItemQuality" "component"
+		"ItemAliases" "blade of alacrity"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_agility" "10"
+
+			}
+
+		}
+
+	}
+	"item_imba_staff_of_wizardry" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "item_staff_of_wizardry"
+		"ScriptFile" "npc/items/imba/item_imba_staff_of_wizardry"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "C"
+		"ItemCost" "1000"
+		"WoodCost" "500"
+		"SoulCrystalCost" "100"
+		"ItemShopTags" "int"
+		"ItemQuality" "component"
+		"ItemAliases" "staff of wizardry"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_intellect" "10"
+
+			}
+
+		}
+
+	}
+	"item_imba_orb_of_venom" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "item_orb_of_venom"
+		"ScriptFile" "npc/items/imba/item_imba_orb_of_venom"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "C"
+		"ItemCost" "275"
+		"WoodCost" "137"
+		"SoulCrystalCost" "27"
+		"ItemShopTags" "hard_to_tag"
+		"ItemQuality" "component"
+		"ItemAliases" "oov;orb of venom"
+		"ShouldBeInitiallySuggested" "1"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"poison_damage_melee" "2"
+
+			}
+			"02" {
+				"var_type" "FIELD_INTEGER"
+				"poison_damage_range" "2"
+
+			}
+			"03" {
+				"var_type" "FIELD_INTEGER"
+				"poison_movement_speed_melee" "-13"
+
+			}
+			"04" {
+				"var_type" "FIELD_INTEGER"
+				"poison_movement_speed_range" "-4"
+
+			}
+			"05" {
+				"var_type" "FIELD_INTEGER"
+				"poison_duration" "2"
+
+			}
+
+		}
+
+	}
+	"item_imba_blades_of_attack" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "item_blades_of_attack"
+		"ScriptFile" "npc/items/imba/item_imba_blades_of_attack"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "C"
+		"ItemCost" "450"
+		"WoodCost" "225"
+		"SoulCrystalCost" "45"
+		"ItemShopTags" "damage;tutorial"
+		"ItemQuality" "component"
+		"ItemAliases" "blades of attack"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_damage" "9"
+
+			}
+
+		}
+
+	}
+	"item_imba_gloves" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "item_gloves"
+		"ScriptFile" "npc/items/imba/item_imba_gloves"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "C"
+		"ItemCost" "450"
+		"WoodCost" "225"
+		"SoulCrystalCost" "45"
+		"ItemShopTags" "attack_speed"
+		"ItemQuality" "component"
+		"ItemAliases" "gloves of haste"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_attack_speed" "20"
+
+			}
+
+		}
+
+	}
+	"item_imba_chainmail" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "item_chainmail"
+		"ScriptFile" "npc/items/imba/item_imba_chainmail"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "C"
+		"ItemCost" "550"
+		"WoodCost" "275"
+		"SoulCrystalCost" "55"
+		"ItemShopTags" "armor"
+		"ItemQuality" "component"
+		"ItemAliases" "chainmail"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_armor" "4"
+
+			}
+
+		}
+
+	}
+	"item_imba_quarterstaff" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "item_quarterstaff"
+		"ScriptFile" "npc/items/imba/item_imba_quarterstaff"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "C"
+		"ItemCost" "875"
+		"WoodCost" "437"
+		"SoulCrystalCost" "87"
+		"ItemShopTags" "damage;attack_speed"
+		"ItemQuality" "component"
+		"ItemAliases" "quarterstaff"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_speed" "10"
+
+			}
+			"02" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_damage" "10"
+
+			}
+
+		}
+
+	}
+	"item_imba_helm_of_iron_will" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "item_helm_of_iron_will"
+		"ScriptFile" "npc/items/imba/item_imba_helm_of_iron_will"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "C"
+		"ItemCost" "925"
+		"WoodCost" "462"
+		"SoulCrystalCost" "92"
+		"ItemShopTags" "armor;regen_health"
+		"ItemQuality" "component"
+		"ItemAliases" "helm of iron will"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_armor" "6"
+
+			}
+			"02" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_regen" "5"
+
+			}
+
+		}
+
+	}
+	"item_imba_broadsword" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "item_broadsword"
+		"ScriptFile" "npc/items/imba/item_imba_broadsword"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "B"
+		"ItemCost" "1000"
+		"WoodCost" "500"
+		"SoulCrystalCost" "100"
+		"ItemShopTags" "damage"
+		"ItemQuality" "component"
+		"ItemAliases" "broadsword"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_damage" "15"
+
+			}
+
+		}
+
+	}
+	"item_imba_blitz_knuckles" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "item_blitz_knuckles"
+		"ScriptFile" "npc/items/imba/item_imba_blitz_knuckles"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "B"
+		"ItemCost" "1000"
+		"WoodCost" "500"
+		"SoulCrystalCost" "100"
+		"ItemShopTags" "attack_speed"
+		"ItemQuality" "component"
+		"ItemAliases" "blitz knuckles"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_attack_speed" "35"
+
+			}
+
+		}
+
+	}
+	"item_imba_claymore" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "item_claymore"
+		"ScriptFile" "npc/items/imba/item_imba_claymore"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "B"
+		"ItemCost" "1350"
+		"WoodCost" "675"
+		"SoulCrystalCost" "135"
+		"ItemShopTags" "damage"
+		"ItemQuality" "component"
+		"ItemAliases" "claymore"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_damage" "20"
+
+			}
+
+		}
+
+	}
+	"item_imba_mithril_hammer" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "item_mithril_hammer"
+		"ScriptFile" "npc/items/imba/item_imba_mithril_hammer"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "B"
+		"ItemCost" "1600"
+		"WoodCost" "800"
+		"SoulCrystalCost" "160"
+		"ItemShopTags" "damage"
+		"ItemQuality" "component"
+		"ItemAliases" "mithril hammer"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_damage" "24"
+
+			}
+
+		}
+
+	}
+	"item_imba_ring_of_regen" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "item_ring_of_regen"
+		"ScriptFile" "npc/items/imba/item_imba_ring_of_regen"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "C"
+		"ItemCost" "175"
+		"WoodCost" "87"
+		"SoulCrystalCost" "17"
+		"ItemShopTags" "regen_health"
+		"ItemQuality" "component"
+		"ItemAliases" "ror"
+		"ShouldBeInitiallySuggested" "1"
+		"UIPickupSound" "Item.PickUpRingShop"
+		"UIDropSound" "Item.DropRingShop"
+		"WorldDropSound" "Item.DropRingWorld"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_FLOAT"
+				"bonus_health_regen" "1.25"
+
+			}
+
+		}
+
+	}
+	"item_imba_sobi_mask" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "item_sobi_mask"
+		"ScriptFile" "npc/items/imba/item_imba_sobi_mask"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "C"
+		"ItemCost" "175"
+		"WoodCost" "87"
+		"SoulCrystalCost" "17"
+		"ItemShopTags" "regen_mana"
+		"ItemQuality" "component"
+		"ItemAliases" "sage's mask"
+		"ShouldBeInitiallySuggested" "1"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_FLOAT"
+				"bonus_mana_regen" "0.7"
+
+			}
+
+		}
+
+	}
+	"item_imba_fluffy_hat" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "item_fluffy_hat"
+		"ScriptFile" "npc/items/imba/item_imba_fluffy_hat"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "C"
+		"ItemCost" "250"
+		"WoodCost" "125"
+		"SoulCrystalCost" "25"
+		"ItemShopTags" "health_pool"
+		"ItemQuality" "secret_shop"
+		"ItemAliases" "flf;fluffy hat;hat;fh"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_health" "125"
+
+			}
+
+		}
+
+	}
+	"item_imba_wind_lace" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "item_wind_lace"
+		"ScriptFile" "npc/items/imba/item_imba_wind_lace"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "C"
+		"ItemCost" "250"
+		"WoodCost" "125"
+		"SoulCrystalCost" "25"
+		"ItemShopTags" "armor"
+		"ItemQuality" "component"
+		"ItemAliases" "wind lace"
+		"ItemPermanent" "1"
+		"ShouldBeInitiallySuggested" "1"
+		"UIPickupSound" "Item.PickUpRingShop"
+		"UIDropSound" "Item.DropRingShop"
+		"WorldDropSound" "Item.DropRingWorld"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"movement_speed" "20"
+
+			}
+
+		}
+
+	}
+	"item_imba_cloak" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "item_cloak"
+		"ScriptFile" "npc/items/imba/item_imba_cloak"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "C"
+		"ItemCost" "500"
+		"WoodCost" "250"
+		"SoulCrystalCost" "50"
+		"ItemShopTags" "magic_resist"
+		"ItemQuality" "component"
+		"ItemAliases" "cloak"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_magical_armor" "15"
+
+			}
+			"02" {
+				"var_type" "FIELD_INTEGER"
+				"tooltip_resist" "15"
+
+			}
+
+		}
+
+	}
+	"item_imba_boots" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "item_boots"
+		"ScriptFile" "npc/items/imba/item_imba_boots"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Model" "models/props_gameplay/boots_of_speed.vmdl"
+		"Rarity" "C"
+		"ItemCost" "500"
+		"WoodCost" "250"
+		"SoulCrystalCost" "50"
+		"ItemShopTags" "move_speed"
+		"ItemQuality" "component"
+		"ItemAliases" "boots of speed"
+		"ShouldBeSuggested" "1"
+		"ShouldBeInitiallySuggested" "1"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_movement_speed" "45"
+
+			}
+
+		}
+
+	}
+	"item_imba_voodoo_mask" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "item_voodoo_mask"
+		"ScriptFile" "npc/items/imba/item_imba_voodoo_mask"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "C"
+		"ItemCost" "700"
+		"WoodCost" "350"
+		"SoulCrystalCost" "70"
+		"ItemShopTags" "unique"
+		"ItemQuality" "component"
+		"ItemAliases" "voodoo mask;voom;vodo;vm"
+		"ShouldBeSuggested" "1"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"hero_lifesteal" "10"
+
+			}
+			"02" {
+				"var_type" "FIELD_INTEGER"
+				"creep_lifesteal" "2"
+
+			}
+
+		}
+
+	}
+	"item_imba_null_talisman" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "item_null_talisman"
+		"ScriptFile" "npc/items/imba/item_imba_null_talisman"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "C"
+		"ItemCost" "505"
+		"WoodCost" "252"
+		"SoulCrystalCost" "50"
+		"ItemShopTags" "damage;int;agi;str"
+		"ItemQuality" "common"
+		"ItemAliases" "null talisman"
+		"ShouldBeSuggested" "1"
+		"ShouldBeInitiallySuggested" "1"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_intellect" "5"
+
+			}
+			"02" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_strength" "2"
+
+			}
+			"03" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_agility" "2"
+
+			}
+			"04" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_spell_amp" "3"
+
+			}
+			"05" {
+				"var_type" "FIELD_FLOAT"
+				"bonus_mana_regen" "0.6"
+
+			}
+
+		}
+
+	}
+	"item_imba_wraith_band" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "item_wraith_band"
+		"ScriptFile" "npc/items/imba/item_imba_wraith_band"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "C"
+		"ItemCost" "505"
+		"WoodCost" "252"
+		"SoulCrystalCost" "50"
+		"ItemShopTags" "damage;int;agi;str"
+		"ItemQuality" "common"
+		"ItemAliases" "wraith band"
+		"ShouldBeSuggested" "1"
+		"ShouldBeInitiallySuggested" "1"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_agility" "5"
+
+			}
+			"02" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_strength" "2"
+
+			}
+			"03" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_intellect" "2"
+
+			}
+			"04" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_attack_speed" "5"
+
+			}
+			"05" {
+				"var_type" "FIELD_FLOAT"
+				"bonus_armor" "1.5"
+
+			}
+
+		}
+
+	}
+	"item_imba_bracer" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "item_bracer"
+		"ScriptFile" "npc/items/imba/item_imba_bracer"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "C"
+		"ItemCost" "505"
+		"WoodCost" "252"
+		"SoulCrystalCost" "50"
+		"ItemShopTags" "damage;int;agi;str"
+		"ItemQuality" "common"
+		"ItemAliases" "bracer"
+		"ShouldBeSuggested" "1"
+		"ShouldBeInitiallySuggested" "1"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_strength" "5"
+
+			}
+			"02" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_agility" "2"
+
+			}
+			"03" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_intellect" "2"
+
+			}
+			"04" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_damage" "3"
+
+			}
+			"05" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_health_regen" "1"
+
+			}
+
+		}
+
+	}
+	"item_imba_orb_of_corrosion" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "item_orb_of_corrosion"
+		"ScriptFile" "npc/items/imba/item_imba_orb_of_corrosion"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Model" "models/props_gameplay/neutral_box.vmdl"
+		"Rarity" "C"
+		"ItemCost" "925"
+		"WoodCost" "462"
+		"SoulCrystalCost" "92"
+		"ItemShopTags" "hard_to_tag"
+		"ItemQuality" "rare"
+		"ItemAliases" "ooc;orb of corrosion;corosion;corossion"
+		"ShouldBeInitiallySuggested" "1"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"armor" "3"
+
+			}
+			"02" {
+				"var_type" "FIELD_INTEGER"
+				"slow_melee" "13"
+
+			}
+			"03" {
+				"var_type" "FIELD_INTEGER"
+				"slow_range" "4"
+
+			}
+			"04" {
+				"var_type" "FIELD_INTEGER"
+				"damage" "3"
+
+			}
+			"05" {
+				"var_type" "FIELD_INTEGER"
+				"duration" "3"
+
+			}
+			"06" {
+				"var_type" "FIELD_INTEGER"
+				"health_bonus" "150"
+
+			}
+
+		}
+
+	}
+	"item_imba_falcon_blade" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "item_falcon_blade"
+		"ScriptFile" "npc/items/imba/item_imba_falcon_blade"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "B"
+		"ItemCost" "1100"
+		"WoodCost" "550"
+		"SoulCrystalCost" "110"
+		"ItemShopTags" "hard_to_tag"
+		"ItemQuality" "rare"
+		"ItemAliases" "fb;falcon blade"
+		"ShouldBeInitiallySuggested" "1"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_health" "175"
+
+			}
+			"02" {
+				"var_type" "FIELD_FLOAT"
+				"bonus_mana_regen" "1.8"
+
+			}
+			"03" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_damage" "10"
+
+			}
+
+		}
+
+	}
+	"item_imba_oblivion_staff" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "item_oblivion_staff"
+		"ScriptFile" "npc/items/imba/item_imba_oblivion_staff"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "B"
+		"ItemCost" "1500"
+		"WoodCost" "750"
+		"SoulCrystalCost" "150"
+		"ItemShopTags" "damage;int;attack_speed;regen_mana"
+		"ItemQuality" "common"
+		"ItemAliases" "oblivion staff"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_damage" "15"
+
+			}
+			"02" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_intellect" "10"
+
+			}
+			"03" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_attack_speed" "10"
+
+			}
+			"04" {
+				"var_type" "FIELD_FLOAT"
+				"bonus_mana_regen" "1.25"
+
+			}
+
+		}
+
+	}
+	"item_imba_pers" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "item_pers"
+		"ScriptFile" "npc/items/imba/item_imba_pers"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "B"
+		"ItemCost" "1650"
+		"WoodCost" "825"
+		"SoulCrystalCost" "165"
+		"ItemShopTags" "regen_health;regen_mana"
+		"ItemQuality" "common"
+		"ItemAliases" "perseverance"
+		"ItemDisassembleRule" "DOTA_ITEM_DISASSEMBLE_ALWAYS"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_FLOAT"
+				"bonus_health_regen" "6.5"
+
+			}
+			"02" {
+				"var_type" "FIELD_FLOAT"
+				"bonus_mana_regen" "2.25"
+
+			}
+
+		}
+
+	}
+	"item_imba_helm_of_the_dominator" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "item_helm_of_the_dominator"
+		"ScriptFile" "npc/items/imba/item_imba_helm_of_the_dominator"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
+		"AbilityCastRange" "700"
+		"AbilityCastPoint" "0.0"
+		"AbilityCooldown" "45.0"
+		"AbilityManaCost" "0"
+		"Rarity" "B"
+		"ItemCost" "2350"
+		"WoodCost" "1175"
+		"SoulCrystalCost" "235"
+		"ItemShopTags" "damage;armor;unique;hard_to_tag"
+		"ItemQuality" "artifact"
+		"ItemAliases" "hotd;helm of the dominator"
+		"ShouldBeSuggested" "1"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_stats" "6"
+
+			}
+			"02" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_armor" "6"
+
+			}
+			"03" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_regen" "6"
+
+			}
+			"04" {
+				"var_type" "FIELD_INTEGER"
+				"health_min" "1000"
+
+			}
+			"05" {
+				"var_type" "FIELD_INTEGER"
+				"speed_base" "380"
+
+			}
+			"06" {
+				"var_type" "FIELD_INTEGER"
+				"bounty_gold" "100"
+
+			}
+			"07" {
+				"var_type" "FIELD_INTEGER"
+				"creep_bonus_damage" "25"
+
+			}
+			"08" {
+				"var_type" "FIELD_INTEGER"
+				"creep_bonus_hp_regen" "12"
+
+			}
+			"09" {
+				"var_type" "FIELD_INTEGER"
+				"creep_bonus_mp_regen" "4"
+
+			}
+			"10" {
+				"var_type" "FIELD_INTEGER"
+				"creep_bonus_armor" "4"
+
+			}
+			"11" {
+				"var_type" "FIELD_INTEGER"
+				"model_scale" "undefined"
+
+			}
+			"12" {
+				"var_type" "FIELD_INTEGER"
+				"count_limit" "1"
+
+			}
+
+		}
+
+	}
+	"item_imba_buckler" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "item_buckler"
+		"ScriptFile" "npc/items/imba/item_imba_buckler"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityCastRange" "1200"
+		"Rarity" "C"
+		"ItemCost" "425"
+		"WoodCost" "212"
+		"SoulCrystalCost" "42"
+		"ItemShopTags" "armor;boost_armor"
+		"ItemQuality" "rare"
+		"ItemAliases" "buckler"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"armor" "1"
+
+			}
+			"02" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_aoe_armor" "2"
+
+			}
+			"03" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_aoe_radius" "1200"
+
+			}
+
+		}
+
+	}
+	"item_imba_ring_of_basilius" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "item_ring_of_basilius"
+		"ScriptFile" "npc/items/imba/item_imba_ring_of_basilius"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityCastRange" "1200"
+		"Rarity" "C"
+		"ItemCost" "425"
+		"WoodCost" "212"
+		"SoulCrystalCost" "42"
+		"ItemShopTags" "regen_mana"
+		"ItemQuality" "rare"
+		"ItemAliases" "rob;ring of basilius"
+		"ShouldBeInitiallySuggested" "1"
+		"UIPickupSound" "Item.PickUpRingShop"
+		"UIDropSound" "Item.DropRingShop"
+		"WorldDropSound" "Item.DropRingWorld"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_FLOAT"
+				"mana_regen" "0.5"
+
+			}
+			"02" {
+				"var_type" "FIELD_INTEGER"
+				"aura_mana_regen" "1"
+
+			}
+			"03" {
+				"var_type" "FIELD_INTEGER"
+				"aura_radius" "1200"
+
+			}
+
+		}
+
+	}
+	"item_imba_headdress" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "item_headdress"
+		"ScriptFile" "npc/items/imba/item_imba_headdress"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityCastRange" "1200"
+		"Rarity" "C"
+		"ItemCost" "425"
+		"WoodCost" "212"
+		"SoulCrystalCost" "42"
+		"ItemShopTags" "str;int;agi;regen_health"
+		"ItemQuality" "rare"
+		"ItemAliases" "headdress"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_FLOAT"
+				"health_regen" "0.5"
+
+			}
+			"02" {
+				"var_type" "FIELD_INTEGER"
+				"aura_health_regen" "2"
+
+			}
+			"03" {
+				"var_type" "FIELD_INTEGER"
+				"aura_radius" "1200"
+
+			}
+
+		}
+
+	}
+	"item_imba_medallion_of_courage" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "item_medallion_of_courage"
+		"ScriptFile" "npc/items/imba/item_imba_medallion_of_courage"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityCastRange" "1000"
+		"AbilityCooldown" "12.0"
+		"AbilitySharedCooldown" "medallion"
+		"Rarity" "B"
+		"ItemCost" "1025"
+		"WoodCost" "512"
+		"SoulCrystalCost" "102"
+		"ItemShopTags" "armor;regen_mana;hard_to_tag"
+		"ItemQuality" "rare"
+		"ItemAliases" "medallion of courage"
+		"ItemDeclarations" "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS"
+		"ShouldBeSuggested" "1"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_armor" "5"
+
+			}
+			"02" {
+				"var_type" "FIELD_FLOAT"
+				"bonus_mana_regen_pct" "1.5"
+
+			}
+			"03" {
+				"var_type" "FIELD_INTEGER"
+				"armor_reduction" "-5"
+
+			}
+			"04" {
+				"var_type" "FIELD_INTEGER"
+				"duration" "12"
+
+			}
+
+		}
+
+	}
+	"item_imba_ring_of_health" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "item_ring_of_health"
+		"ScriptFile" "npc/items/imba/item_imba_ring_of_health"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "C"
+		"ItemCost" "825"
+		"WoodCost" "412"
+		"SoulCrystalCost" "82"
+		"ItemShopTags" "regen_health"
+		"ItemQuality" "component"
+		"ItemAliases" "roh;ring of health"
+		"SecretShop" "1"
+		"UIPickupSound" "Item.PickUpRingShop"
+		"UIDropSound" "Item.DropRingShop"
+		"WorldDropSound" "Item.DropRingWorld"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_FLOAT"
+				"bonus_health_regen" "6.5"
+
+			}
+
+		}
+
+	}
+	"item_imba_void_stone" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "item_void_stone"
+		"ScriptFile" "npc/items/imba/item_imba_void_stone"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "C"
+		"ItemCost" "825"
+		"WoodCost" "412"
+		"SoulCrystalCost" "82"
+		"ItemShopTags" "regen_mana"
+		"ItemQuality" "component"
+		"ItemAliases" "void stone"
+		"SecretShop" "1"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_FLOAT"
+				"bonus_mana_regen" "2.25"
+
+			}
+
+		}
+
+	}
+	"item_imba_energy_booster" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "item_energy_booster"
+		"ScriptFile" "npc/items/imba/item_imba_energy_booster"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "C"
+		"ItemCost" "800"
+		"WoodCost" "400"
+		"SoulCrystalCost" "80"
+		"ItemShopTags" "mana_pool"
+		"ItemQuality" "secret_shop"
+		"ItemAliases" "energy booster"
+		"SecretShop" "1"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_mana" "250"
+
+			}
+
+		}
+
+	}
+	"item_imba_vitality_booster" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "item_vitality_booster"
+		"ScriptFile" "npc/items/imba/item_imba_vitality_booster"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "C"
+		"ItemCost" "1000"
+		"WoodCost" "500"
+		"SoulCrystalCost" "100"
+		"ItemShopTags" "health_pool"
+		"ItemQuality" "secret_shop"
+		"ItemAliases" "vitality booster"
+		"SecretShop" "1"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_health" "250"
+
+			}
+
+		}
+
+	}
+	"item_imba_point_booster" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "item_point_booster"
+		"ScriptFile" "npc/items/imba/item_imba_point_booster"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "B"
+		"ItemCost" "1200"
+		"WoodCost" "600"
+		"SoulCrystalCost" "120"
+		"ItemShopTags" "mana_pool;health_pool"
+		"ItemQuality" "secret_shop"
+		"ItemAliases" "point booster"
+		"SecretShop" "1"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_mana" "175"
+
+			}
+			"02" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_health" "175"
+
+			}
+
+		}
+
+	}
+	"item_imba_platemail" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "item_platemail"
+		"ScriptFile" "npc/items/imba/item_imba_platemail"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "B"
+		"ItemCost" "1400"
+		"WoodCost" "700"
+		"SoulCrystalCost" "140"
+		"ItemShopTags" "armor"
+		"ItemQuality" "secret_shop"
+		"ItemAliases" "platemail"
+		"SecretShop" "1"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_armor" "10"
+
+			}
+
+		}
+
+	}
+	"item_imba_talisman_of_evasion" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "item_talisman_of_evasion"
+		"ScriptFile" "npc/items/imba/item_imba_talisman_of_evasion"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "B"
+		"ItemCost" "1300"
+		"WoodCost" "650"
+		"SoulCrystalCost" "130"
+		"ItemShopTags" "evasion"
+		"ItemQuality" "secret_shop"
+		"ItemAliases" "talisman of evasion"
+		"SecretShop" "1"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_evasion" "15"
+
+			}
+
+		}
+
+	}
+	"item_imba_hyperstone" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "item_hyperstone"
+		"ScriptFile" "npc/items/imba/item_imba_hyperstone"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "B"
+		"ItemCost" "2000"
+		"WoodCost" "1000"
+		"SoulCrystalCost" "200"
+		"ItemShopTags" "attack_speed"
+		"ItemQuality" "secret_shop"
+		"ItemAliases" "hyperstone"
+		"SecretShop" "1"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_attack_speed" "60"
+
+			}
+
+		}
+
+	}
+	"item_imba_ultimate_orb" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "item_ultimate_orb"
+		"ScriptFile" "npc/items/imba/item_imba_ultimate_orb"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "B"
+		"ItemCost" "2050"
+		"WoodCost" "1025"
+		"SoulCrystalCost" "205"
+		"ItemShopTags" "agi;int;str"
+		"ItemQuality" "secret_shop"
+		"ItemAliases" "ultimate orb"
+		"SecretShop" "1"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_all_stats" "10"
+
+			}
+
+		}
+
+	}
+	"item_imba_demon_edge" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "item_demon_edge"
+		"ScriptFile" "npc/items/imba/item_imba_demon_edge"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "B"
+		"ItemCost" "2200"
+		"WoodCost" "1100"
+		"SoulCrystalCost" "220"
+		"ItemShopTags" "damage"
+		"ItemQuality" "secret_shop"
+		"ItemAliases" "demon edge"
+		"SecretShop" "1"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_damage" "40"
+
+			}
+
+		}
+
+	}
+	"item_imba_mystic_staff" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "item_mystic_staff"
+		"ScriptFile" "npc/items/imba/item_imba_mystic_staff"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "B"
+		"ItemCost" "2800"
+		"WoodCost" "1400"
+		"SoulCrystalCost" "280"
+		"ItemShopTags" "int"
+		"ItemQuality" "secret_shop"
+		"ItemAliases" "mystic staff"
+		"SecretShop" "1"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_intellect" "25"
+
+			}
+
+		}
+
+	}
+	"item_imba_reaver" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "item_reaver"
+		"ScriptFile" "npc/items/imba/item_imba_reaver"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "A"
+		"ItemCost" "2800"
+		"WoodCost" "1400"
+		"SoulCrystalCost" "280"
+		"ItemShopTags" "str"
+		"ItemQuality" "secret_shop"
+		"ItemAliases" "reaver"
+		"SecretShop" "1"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_strength" "25"
+
+			}
+
+		}
+
+	}
+	"item_imba_eagle" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "item_eagle"
+		"ScriptFile" "npc/items/imba/item_imba_eagle"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "A"
+		"ItemCost" "2800"
+		"WoodCost" "1400"
+		"SoulCrystalCost" "280"
+		"ItemShopTags" "agi"
+		"ItemQuality" "secret_shop"
+		"ItemAliases" "eaglesong"
+		"SecretShop" "1"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_agility" "25"
+
+			}
+
+		}
+
+	}
+	"item_imba_relic" {
+		"BaseClass" "item_lua"
+		"AbilityTextureName" "item_relic"
+		"ScriptFile" "npc/items/imba/item_imba_relic"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Rarity" "A"
+		"ItemCost" "3800"
+		"WoodCost" "1900"
+		"SoulCrystalCost" "380"
+		"ItemShopTags" "damage"
+		"ItemQuality" "secret_shop"
+		"ItemAliases" "sacred relic"
+		"SecretShop" "1"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_damage" "60"
 
 			}
 

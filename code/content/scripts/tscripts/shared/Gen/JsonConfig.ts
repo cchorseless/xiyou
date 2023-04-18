@@ -28546,6 +28546,974 @@
         "IsVaild": true
       }
     ]
+  },
+  {
+    "poolid": "1005",
+    "PoolInfo": [
+      {
+        "ItemConfigId": "item_imba_stout_shield",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_poor_mans_shield",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_blight_stone",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_lifesteal",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_ring_of_aquila",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_circlet",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_gauntlets",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_mantle",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_branches",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_slippers",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_belt_of_strength",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_boots_of_elves",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_robe",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_crown",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_ogre_axe",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_blade_of_alacrity",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_staff_of_wizardry",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_orb_of_venom",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_blades_of_attack",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_gloves",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_chainmail",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_quarterstaff",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_helm_of_iron_will",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_ring_of_regen",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_sobi_mask",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_fluffy_hat",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_wind_lace",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_cloak",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_boots",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_voodoo_mask",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_null_talisman",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_wraith_band",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_bracer",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_orb_of_corrosion",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_buckler",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_ring_of_basilius",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_headdress",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_ring_of_health",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_void_stone",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_energy_booster",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_vitality_booster",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      }
+    ]
+  },
+  {
+    "poolid": "1006",
+    "PoolInfo": [
+      {
+        "ItemConfigId": "item_imba_aeon_disk",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_hand_of_midas",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_arcane_boots",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_mekansm",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_vladmir",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_dagon",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_necronomicon",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_vanguard",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_javelin",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_armlet",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_invis_sword",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_sange",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_yasha",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_kaya",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_maelstrom",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_diffusal_blade",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_ancient_janggo",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_veil_of_discord",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_blink",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_echo_sabre",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_aether_lens",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_mask_of_madness",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_hood_of_defiance",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_pipe",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_blade_mail",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_skull_basher",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_lesser_crit",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_force_staff",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_power_treads",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_travel_boots",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_cloak_of_flames",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_meteor_hammer",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_spirit_vessel",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_rod_of_atos",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_ghost",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_ogre_seal_totem",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_broadsword",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_blitz_knuckles",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_claymore",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_mithril_hammer",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_falcon_blade",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_oblivion_staff",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_pers",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_helm_of_the_dominator",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_medallion_of_courage",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_point_booster",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_platemail",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_talisman_of_evasion",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_hyperstone",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_ultimate_orb",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_demon_edge",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_mystic_staff",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      }
+    ]
+  },
+  {
+    "poolid": "1007",
+    "PoolInfo": [
+      {
+        "ItemConfigId": "item_imba_guardian_greaves",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_vladmir_2",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_sheepstick",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_orchid",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_dagon_2",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_dagon_3",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_necronomicon_2",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_necronomicon_3",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_assault",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_heart",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_shivas_guard",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_crimson_guard",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_monkey_king_bar",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_radiance",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_butterfly",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_greater_crit",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_silver_edge",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_sange_and_yasha",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_skadi",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_mjollnir",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_desolator",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_diffusal_blade_2",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_heavens_halberd",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_moon_shard",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_octarine_core",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_phase_boots",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_satanic",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_urn_of_shadows",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_manta",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_hurricane_pike",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_kaya_and_sange",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_yasha_and_kaya",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_bloodstone",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_meteor_hammer_2",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_meteor_hammer_3",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_ethereal_blade",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_eternal_shroud",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_nullifier",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_cyclone",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_cultic_hammer",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_black_king_bar",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_lotus_orb",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_reaver",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_eagle",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_relic",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      }
+    ]
+  },
+  {
+    "poolid": "1008",
+    "PoolInfo": [
+      {
+        "ItemConfigId": "item_imba_bloodthorn",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_dagon_4",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_dagon_5",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_necronomicon_4",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_necronomicon_5",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_desolator_2",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_rapier",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_rapier_2",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_rapier_magic",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_rapier_magic_2",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_blade_mail_2",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_abyssal_blade",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_meteor_hammer_4",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_rod_of_atos_2",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_triumvirate",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_triumvirate_v2",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_dragon_lance",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_nullifier_2",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_cyclone_2",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_manta_2",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      }
+    ]
   }
 ] ,
 "dota_poolgroupconfig":[
@@ -28600,6 +29568,81 @@
       {
         "PoolConfigId": "1004",
         "PoolWeight": 20,
+        "IsVaild": true
+      }
+    ]
+  },
+  {
+    "poolgroupid": "10003",
+    "PoolGroup": [
+      {
+        "PoolConfigId": "1005",
+        "PoolWeight": 1,
+        "IsVaild": true
+      }
+    ]
+  },
+  {
+    "poolgroupid": "10004",
+    "PoolGroup": [
+      {
+        "PoolConfigId": "1006",
+        "PoolWeight": 1,
+        "IsVaild": true
+      }
+    ]
+  },
+  {
+    "poolgroupid": "10005",
+    "PoolGroup": [
+      {
+        "PoolConfigId": "1007",
+        "PoolWeight": 1,
+        "IsVaild": true
+      }
+    ]
+  },
+  {
+    "poolgroupid": "10006",
+    "PoolGroup": [
+      {
+        "PoolConfigId": "1008",
+        "PoolWeight": 1,
+        "IsVaild": true
+      }
+    ]
+  },
+  {
+    "poolgroupid": "10007",
+    "PoolGroup": [
+      {
+        "PoolConfigId": "1005",
+        "PoolWeight": 1,
+        "IsVaild": true
+      }
+    ]
+  },
+  {
+    "poolgroupid": "10008",
+    "PoolGroup": [
+      {
+        "PoolConfigId": "1005",
+        "PoolWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "PoolConfigId": "1006",
+        "PoolWeight": 1,
+        "IsVaild": true
+      }
+    ]
+  },
+  {
+    "poolgroupid": "10009",
+    "PoolGroup": [
+      {
+        "PoolConfigId": "1006",
+        "PoolWeight": 1,
         "IsVaild": true
       }
     ]

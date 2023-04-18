@@ -62,7 +62,7 @@ export class modifier_item_imba_aegis extends BaseModifier_Plus {
         }
         let item = this.GetItemPlus();
         if (this.GetParentPlus().IsAlive()) {
-            this.GetParentPlus().AddNewModifier(this.GetParentPlus(), undefined, "modifier_imba_regen_rune", {
+            this.GetParentPlus().AddNewModifier(this.GetParentPlus(), item, "modifier_imba_regen_rune", {
                 duration: KVHelper.GetItemData("item_imba_rune_regen", "RuneDuration", true)
             });
             this.GetParentPlus().EmitSound("Aegis.Expire");

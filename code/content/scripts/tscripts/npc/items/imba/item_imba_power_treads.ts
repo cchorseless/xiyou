@@ -40,13 +40,14 @@ export class item_imba_power_treads extends BaseItem_Plus {
         }
     }
     GetAbilityTextureName(): string {
-        if (IsClient()) {
+        if (IsClient() && this.GetCasterPlus()) {
             if (this.state) {
                 return "imba/mega_treads_" + this.state;
             } else {
                 return "imba/mega_treads_" + this.GetCasterPlus().findBuffStack("modifier_imba_power_treads", this.GetCasterPlus());
             }
         }
+        return "imba/mega_treads_1"
     }
 }
 @registerModifier()

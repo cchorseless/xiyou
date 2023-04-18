@@ -12,7 +12,7 @@ export class item_imba_valiance extends BaseItem_Plus {
         return "modifier_item_imba_valiance";
     }
     GetAbilityTextureName(): string {
-        if (!this.GetCasterPlus().HasModifier("modifier_item_imba_valiance_counter")) {
+        if (this.GetCasterPlus() && !this.GetCasterPlus().HasModifier("modifier_item_imba_valiance_counter")) {
             return "imba/valiance";
         } else {
             return "imba/valiance_counter";

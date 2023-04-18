@@ -18,7 +18,7 @@ export class item_imba_armlet_of_dementor extends BaseItem_Plus {
         return "modifier_item_imba_armlet_of_dementor";
     }
     GetAbilityTextureName(): string {
-        if (this.GetCasterPlus().HasModifier("modifier_item_imba_armlet_of_dementor_active")) {
+        if (this.GetCasterPlus() && this.GetParentPlus().HasModifier("modifier_item_imba_armlet_of_dementor_active")) {
             return "imba/armlet_of_dementor";
         } else {
             return "imba/armlet_of_dementor_inactive";

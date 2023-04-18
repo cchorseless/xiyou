@@ -127,14 +127,6 @@ declare namespace building_item_card {
 "item_building_hero_wisp" :OBJ_2_1 ,
 "item_building_hero_witch_doctor" :OBJ_2_1 ,
 "item_building_hero_zuus" :OBJ_2_1 ,
-"item_shop_gold_bag" :OBJ_2_1 ,
-"item_shop_wood_bag" :OBJ_2_1 ,
-"item_shop_soulcrystal_bag" :OBJ_2_1 ,
-"item_shop_lottery_ticket" :OBJ_2_1 ,
-"item_shop_equiptreasure_c" :OBJ_2_1 ,
-"item_shop_equiptreasure_b" :OBJ_2_1 ,
-"item_shop_equiptreasure_a" :OBJ_2_1 ,
-"item_shop_equiptreasure_s" :OBJ_2_1 ,
 [k:string] : OBJ_2_1 }
  interface OBJ_2_1 {
 "bind_unit_name" :string ,

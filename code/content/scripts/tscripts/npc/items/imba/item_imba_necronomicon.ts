@@ -64,6 +64,11 @@ export class item_imba_necronomicon extends BaseItem_Plus {
             }
         }
     }
+    Spawn(): void {
+        if (IsServer()) {
+            this.SetLevel(1)
+        }
+    }
 }
 @registerModifier()
 export class modifier_item_imba_necronomicon extends BaseModifier_Plus {
@@ -98,10 +103,34 @@ export class modifier_item_imba_necronomicon_summon extends BaseModifier_Plus {
 
 // 多级死灵书
 @registerAbility()
-export class item_imba_necronomicon_2 extends item_imba_necronomicon { }
+export class item_imba_necronomicon_2 extends item_imba_necronomicon {
+    Spawn(): void {
+        if (IsServer()) {
+            this.SetLevel(2)
+        }
+    }
+}
 @registerAbility()
-export class item_imba_necronomicon_3 extends item_imba_necronomicon { }
+export class item_imba_necronomicon_3 extends item_imba_necronomicon {
+    Spawn(): void {
+        if (IsServer()) {
+            this.SetLevel(3)
+        }
+    }
+}
 @registerAbility()
-export class item_imba_necronomicon_4 extends item_imba_necronomicon { }
+export class item_imba_necronomicon_4 extends item_imba_necronomicon {
+    Spawn(): void {
+        if (IsServer()) {
+            this.SetLevel(4)
+        }
+    }
+}
 @registerAbility()
-export class item_imba_necronomicon_5 extends item_imba_necronomicon { }
+export class item_imba_necronomicon_5 extends item_imba_necronomicon {
+    Spawn(): void {
+        if (IsServer()) {
+            this.SetLevel(5)
+        }
+    }
+}

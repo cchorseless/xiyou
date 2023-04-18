@@ -46,28 +46,31 @@ export class item_imba_hand_of_midas extends BaseItem_Plus {
     }
     GetAbilityTextureName(): string {
         let caster = this.GetCasterPlus();
-        let caster_name = caster.GetUnitName();
-        let animal_heroes: { [k: string]: boolean } = {
-            ["brewmaster"]: true,
-            ["magnataur"]: true,
-            ["lone_druid"]: true,
-            ["lone_druid_bear1"]: true,
-            ["lone_druid_bear2"]: true,
-            ["lone_druid_bear3"]: true,
-            ["lone_druid_bear4"]: true,
-            ["lone_druid_bear5"]: true,
-            ["lone_druid_bear6"]: true,
-            ["lone_druid_bear7"]: true,
-            ["broodmother"]: true,
-            ["lycan"]: true,
-            ["ursa"]: true,
-            ["malfurion"]: true
-        }
-        for (let [k, v] of GameFunc.Pair(animal_heroes)) {
-            if (caster_name.includes(k)) {
-                return "item_paw_of_midas";
+        if (IsValid(caster)) {
+            let caster_name = caster.GetUnitName();
+            let animal_heroes: { [k: string]: boolean } = {
+                ["brewmaster"]: true,
+                ["magnataur"]: true,
+                ["lone_druid"]: true,
+                ["lone_druid_bear1"]: true,
+                ["lone_druid_bear2"]: true,
+                ["lone_druid_bear3"]: true,
+                ["lone_druid_bear4"]: true,
+                ["lone_druid_bear5"]: true,
+                ["lone_druid_bear6"]: true,
+                ["lone_druid_bear7"]: true,
+                ["broodmother"]: true,
+                ["lycan"]: true,
+                ["ursa"]: true,
+                ["malfurion"]: true
+            }
+            for (let [k, v] of GameFunc.Pair(animal_heroes)) {
+                if (caster_name.includes(k)) {
+                    return "item_paw_of_midas";
+                }
             }
         }
+
         return "imba_hand_of_midas";
     }
     OnSpellStart(): void {

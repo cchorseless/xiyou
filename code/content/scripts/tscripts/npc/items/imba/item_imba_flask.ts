@@ -1,25 +1,32 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 // 治疗药膏
 @registerAbility()
 export class item_imba_flask extends BaseItem_Plus {
     OnSpellStart(): void {
         let caster = this.GetCasterPlus();
-        let ability = this;
         let target = this.GetCursorTarget();
         let cast_sound = "DOTA_Item.HealingSalve.Activate";
         let modifier_regen = "modifier_imba_flask";
-        let duration = ability.GetSpecialValueFor("duration");
-        let break_stacks = ability.GetSpecialValueFor("break_stacks");
+        let duration = this.GetSpecialValueFor("duration");
+        let break_stacks = this.GetSpecialValueFor("break_stacks");
         EmitSoundOn(cast_sound, target);
-        let modifier_regen_modifier = target.AddNewModifier(caster, ability, modifier_regen, {
+        let modifier_regen_modifier = target.AddNewModifier(caster, this, modifier_regen, {
             duration: duration
         });
         modifier_regen_modifier.SetStackCount(break_stacks);
-        ability.SpendCharge();
+        this.SpendCharge();
+    }
+
+
+    AutoSpellSelf(): boolean {
+        if (this.GetCasterPlus().GetHealthLosePect() >= 50) {
+            return AI_ability.NO_TARGET_cast(this);
+        }
+        return false
     }
 }
 @registerModifier()
@@ -64,35 +71,35 @@ export class modifier_imba_flask extends BaseModifier_Plus {
         }
         return Object.values(decFuncs);
     } */
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
-    CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
-        if (!IsServer()) {
-            return undefined;
-        }
-        let attacker = keys.attacker as IBaseNpc_Plus;
-        let target = keys.unit as IBaseNpc_Plus;
-        let damage = keys.original_damage;
-        let damage_flags = keys.damage_flags;
-        if (target != this.parent) {
-            return undefined;
-        }
-        if (damage <= 0) {
-            return undefined;
-        }
-        if (attacker == this.parent) {
-            return undefined;
-        }
-        if (damage_flags == DOTADamageFlag_t.DOTA_DAMAGE_FLAG_HPLOSS) {
-            return undefined;
-        }
-        if ((attacker.GetTeamNumber() == target.GetOpposingTeamNumber() && attacker.IsRealUnit()) || (attacker.GetTeamNumber() == target.GetOpposingTeamNumber() && attacker.GetPlayerOwner() != undefined) || attacker.GetTeamNumber() == target.GetTeamNumber() || attacker.IsRoshan()) {
-            if (this.GetStackCount() == 1) {
-                this.Destroy();
-            } else {
-                this.SetStackCount(this.GetStackCount() - 1);
-            }
-        }
-    }
+    // @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    // CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
+    //     if (!IsServer()) {
+    //         return undefined;
+    //     }
+    //     let attacker = keys.attacker as IBaseNpc_Plus;
+    //     let target = keys.unit as IBaseNpc_Plus;
+    //     let damage = keys.original_damage;
+    //     let damage_flags = keys.damage_flags;
+    //     if (target != this.parent) {
+    //         return undefined;
+    //     }
+    //     if (damage <= 0) {
+    //         return undefined;
+    //     }
+    //     if (attacker == this.parent) {
+    //         return undefined;
+    //     }
+    //     if (damage_flags == DOTADamageFlag_t.DOTA_DAMAGE_FLAG_HPLOSS) {
+    //         return undefined;
+    //     }
+    //     if ((attacker.GetTeamNumber() == target.GetOpposingTeamNumber() && attacker.IsRealUnit()) || (attacker.GetTeamNumber() == target.GetOpposingTeamNumber() && attacker.GetPlayerOwner() != undefined) || attacker.GetTeamNumber() == target.GetTeamNumber() || attacker.IsRoshan()) {
+    //         if (this.GetStackCount() == 1) {
+    //             this.Destroy();
+    //         } else {
+    //             this.SetStackCount(this.GetStackCount() - 1);
+    //         }
+    //     }
+    // }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_REGEN_CONSTANT)
     CC_GetModifierConstantHealthRegen(): number {
         let hp_regen = this.hp_regen;

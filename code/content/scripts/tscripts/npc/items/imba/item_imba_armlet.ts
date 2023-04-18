@@ -28,7 +28,7 @@ export class item_imba_armlet extends BaseItem_Plus {
         }
     }
     GetAbilityTextureName(): string {
-        if (this.GetCasterPlus().HasModifier("modifier_imba_armlet_unholy_strength")) {
+        if (this.GetCasterPlus() && this.GetCasterPlus().HasModifier("modifier_imba_armlet_unholy_strength")) {
             return "imba/armlet_active";
         } else {
             return "imba/armlet";

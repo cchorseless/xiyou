@@ -72,6 +72,12 @@ export class item_imba_dagon extends BaseItem_Plus {
             });
         }
     }
+
+    Spawn(): void {
+        if (IsServer()) {
+            this.SetLevel(1)
+        }
+    }
 }
 @registerModifier()
 export class modifier_item_imba_dagon_passive extends BaseModifier_Plus {
@@ -103,10 +109,34 @@ export class modifier_item_imba_dagon_passive extends BaseModifier_Plus {
 }
 // 达贡之神力 多级
 @registerAbility()
-export class item_imba_dagon_2 extends item_imba_dagon { }
+export class item_imba_dagon_2 extends item_imba_dagon {
+    Spawn(): void {
+        if (IsServer()) {
+            this.SetLevel(2)
+        }
+    }
+}
 @registerAbility()
-export class item_imba_dagon_3 extends item_imba_dagon { }
+export class item_imba_dagon_3 extends item_imba_dagon {
+    Spawn(): void {
+        if (IsServer()) {
+            this.SetLevel(3)
+        }
+    }
+}
 @registerAbility()
-export class item_imba_dagon_4 extends item_imba_dagon { }
+export class item_imba_dagon_4 extends item_imba_dagon {
+    Spawn(): void {
+        if (IsServer()) {
+            this.SetLevel(4)
+        }
+    }
+}
 @registerAbility()
-export class item_imba_dagon_5 extends item_imba_dagon { }
+export class item_imba_dagon_5 extends item_imba_dagon {
+    Spawn(): void {
+        if (IsServer()) {
+            this.SetLevel(5)
+        }
+    }
+}

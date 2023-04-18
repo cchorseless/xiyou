@@ -7,7 +7,7 @@ import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 export class item_imba_ring_of_aquila extends BaseItem_Plus {
     public stack: number;
     GetAbilityTextureName(): string {
-        if (this.GetCasterPlus().findBuffStack("modifier_item_imba_ring_of_aquila", this.GetCasterPlus()) == 1) {
+        if (this.GetCasterPlus() && this.GetCasterPlus().findBuffStack("modifier_item_imba_ring_of_aquila", this.GetCasterPlus()) == 1) {
             return "item_ring_of_aquila";
         } else {
             return "imba/ring_of_aquila_inactive";

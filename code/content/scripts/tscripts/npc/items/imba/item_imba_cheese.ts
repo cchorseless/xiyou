@@ -1,12 +1,15 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 function ConsumeCheese(parent: IBaseNpc_Plus, item: IBaseItem_Plus) {
     parent.EmitSound("DOTA_Item.Cheese.Activate");
-    parent.ApplyHeal(parent.GetMaxHealth(), item);
-    parent.GiveMana(parent.GetMaxMana());
+    let health_restore = item.GetSpecialValueFor("health_restore");
+    let mana_restore = item.GetSpecialValueFor("mana_restore");
+    parent.ApplyHeal(health_restore, item);
+    parent.GiveMana(mana_restore);
     item.SetCurrentCharges(item.GetCurrentCharges() - 1);
     if (item.GetCurrentCharges() <= 0) {
         if (!parent.IsClone()) {
@@ -30,6 +33,13 @@ export class item_imba_cheese extends BaseItem_Plus {
         if (IsServer()) {
             ConsumeCheese(this.GetParentPlus(), this);
         }
+    }
+
+    AutoSpellSelf(): boolean {
+        if (this.GetCasterPlus().GetHealthLosePect() >= 50) {
+            return AI_ability.NO_TARGET_cast(this);
+        }
+        return false
     }
 }
 @registerModifier()
@@ -75,6 +85,6 @@ export class modifier_item_imba_cheese_death_prevention extends BaseModifier_Plu
         if (this.GetItemPlus().IsCooldownReady() && this.GetParentPlus().IsRealUnit()) {
             return 1;
         }
-        return undefined;
+        return;
     }
 }

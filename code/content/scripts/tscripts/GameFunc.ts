@@ -792,20 +792,27 @@ export module FuncRandom {
         96.90721, 97.95918, 98.98989, 100];
     export function PRD(chance: number, entity: any, key = ""): boolean {
         if (chance >= 100) { return true; }
-        key = "PRD_pseudoRandomModifier" + key;
-        entity[key] = entity[key] || 0;
-        let prngBase = chances_table[chance - 1];
+        key = "PRD_Random_" + key;
+        if (!entity[key]) {
+            entity[key] = 0;
+        }
+        let prngBase = chances_table[chance];
         if (!prngBase) {
             return false;
         }
         if (RollPercentage(prngBase + entity[key])) {
-            entity[key] = 0;
+            delete entity[key];
             return true;
         } else {
             entity[key] += prngBase;
             return false;
         }
     }
+    export function RollPert(v: number) {
+        GLogHelper.print("RollPert:" + v, math.random())
+        return math.random() * 100 <= v;
+    }
+
     export function RandomValue<T>(obj: { [k: string]: T }): T {
         return RandomArray(Object.values(obj))[0];
     }

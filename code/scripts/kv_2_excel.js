@@ -1421,7 +1421,65 @@ function createabilityLang() {
     }
     fs.writeFileSync(imbakvtmpPath, xlsx.build(sheets));
 }
+function makeItemPropExcel2() {
+    let sheets = xlsx.parse(imbakvtmpPath);
+    let sheet = sheets[0];
+    let rows = sheet.data;
+    let nrows = rows.length;
+    let kv = {};
+    let sp_k_index = {}
+    let props = rows[0]
+    for (let prop of props) {
+        sp_k_index[prop] = rows[0].indexOf(prop)
+    }
+    console.log(sp_k_index);
+    for (let i = 2; i < nrows; i++) {
+        let row = rows[i];
+        let abilityname = row[0];
+        kv[abilityname] = row;
+    }
+    let sheet2s = xlsx.parse(old_item_out_path)
+    let sheet2 = sheet2s[0];
+    let rows2 = sheet2.data;
+    let info_ability = {};
+    let sp_k_index2 = {}
+    for (let i = 2; i < rows2.length; i++) {
+        let row = rows2[i];
+        let abilityname = row[0];
+        info_ability[abilityname] = row;
+    }
+    for (let prop of props) {
+        sp_k_index2[prop] = rows2[0].indexOf(prop)
+    }
+    for (let abilityname in kv) {
+        let imbaname = abilityname.replace("imba_", "");
+        if (info_ability[imbaname] == null) {
+            continue;
+        }
+        let abilityinfo = info_ability[imbaname];
+        let excel_abilityinfo = kv[abilityname];
+        for (let prop of props) {
+            let propindex = sp_k_index[prop];
+            let propindex2 = sp_k_index2[prop];
+            if (excel_abilityinfo[propindex] == null && abilityinfo[propindex2] != null && abilityinfo[propindex2] != "") {
+                excel_abilityinfo[propindex] = abilityinfo[propindex2];
+            }
+        }
+        // let imbaname2 = "imba_" + abilityname + '_723';
+        // if (kv[imbaname2] == null) {
+        //     continue;
+        // }
+        // let excel_abilityinfo2 = kv[imbaname2];
+        // for (let prop of props) {
+        //     let propindex = sp_k_index[prop];
+        //     if (excel_abilityinfo2[propindex] == null && abilityinfo[prop] != null && abilityinfo[prop] != "") {
+        //         excel_abilityinfo2[propindex] = abilityinfo[prop];
+        //     }
+        // }
 
+    }
+    fs.writeFileSync(imbakvtmpPath, xlsx.build(sheets));
+}
 
 function clearAbilitySameSpecial() {
     let sheets = xlsx.parse(imbaabilityOutPath);
@@ -1505,7 +1563,7 @@ function clearUnitPersonItemSlot() {
     // createItem()
     // createSound();
     // createImbaUnit();
-    makeItemPropExcel();
+    // makeItemPropExcel2();
     // createabilityLang()
     // clearUnitPersonItemSlot();
 })().catch((error) => {

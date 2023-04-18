@@ -27,6 +27,7 @@
         "!tscripts/npc/abilities/dota",
         "!tscripts/npc/items/dota",
         "!tscripts/npc/units/dota",
+        "tscripts/npc/items/imba/.ts",
     ],
     "exclude": [
         "tscripts/npc/abilities/building",

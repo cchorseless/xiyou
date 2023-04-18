@@ -25,7 +25,7 @@ export class item_imba_rod_of_atos extends BaseItem_Plus {
     }
     GetAbilityTextureName(): string {
         if (this.GetLevel() == 2) {
-            if (this.GetCasterPlus().findBuffStack("modifier_item_imba_rod_of_atos", this.GetCasterPlus()) == this.GetSpecialValueFor("curtain_fire_activation_charge")) {
+            if (this.GetCasterPlus() && this.GetCasterPlus().findBuffStack("modifier_item_imba_rod_of_atos", this.GetCasterPlus()) == this.GetSpecialValueFor("curtain_fire_activation_charge")) {
                 return "imba/rod_of_atos_2_cfs";
             } else {
                 return "imba/rod_of_atos_2";

@@ -20,7 +20,7 @@ export class item_imba_nokrash_blade extends BaseItem_Plus {
         }
     }
     GetAbilityTextureName(): string {
-        if (this.GetCasterPlus().HasModifier("modifier_item_imba_nokrash_blade_unique")) {
+        if (this.GetCasterPlus() && this.GetCasterPlus().HasModifier("modifier_item_imba_nokrash_blade_unique")) {
             return "imba/nokrash_blade_active";
         } else {
             return "imba/nokrash_blade";

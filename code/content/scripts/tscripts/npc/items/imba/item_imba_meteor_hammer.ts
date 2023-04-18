@@ -108,6 +108,11 @@ export class item_imba_meteor_hammer extends BaseItem_Plus {
         ParticleManager.ReleaseParticleIndex(this.particle);
         ParticleManager.ReleaseParticleIndex(this.particle2);
     }
+    Spawn(): void {
+        if (IsServer()) {
+            this.SetLevel(1)
+        }
+    }
 }
 @registerModifier()
 export class modifier_item_imba_meteor_hammer extends BaseModifier_Plus {
@@ -271,11 +276,30 @@ export class modifier_item_imba_meteor_hammer_burn extends BaseModifier_Plus {
             return this.spell_reduction_pct * (-1);
         }
     }
+
 }
 // 陨星锤 多级
 @registerAbility()
-export class item_imba_meteor_hammer_2 extends item_imba_meteor_hammer { }
+export class item_imba_meteor_hammer_2 extends item_imba_meteor_hammer {
+    Spawn(): void {
+        if (IsServer()) {
+            this.SetLevel(2)
+        }
+    }
+}
 @registerAbility()
-export class item_imba_meteor_hammer_3 extends item_imba_meteor_hammer { }
+export class item_imba_meteor_hammer_3 extends item_imba_meteor_hammer {
+    Spawn(): void {
+        if (IsServer()) {
+            this.SetLevel(3)
+        }
+    }
+}
 @registerAbility()
-export class item_imba_meteor_hammer_4 extends item_imba_meteor_hammer { }
+export class item_imba_meteor_hammer_4 extends item_imba_meteor_hammer {
+    Spawn(): void {
+        if (IsServer()) {
+            this.SetLevel(4)
+        }
+    }
+}

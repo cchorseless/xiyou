@@ -24,7 +24,7 @@ export class item_imba_spell_fencer extends BaseItem_Plus {
         }
     }
     GetAbilityTextureName(): string {
-        if (this.GetCasterPlus().HasModifier("modifier_item_imba_spell_fencer_unique")) {
+        if (this.GetCasterPlus() && this.GetCasterPlus().HasModifier("modifier_item_imba_spell_fencer_unique")) {
             return "imba/spell_fencer";
         }
         return "imba/spell_fencer_off";

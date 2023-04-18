@@ -6,160 +6,57 @@
   <component name="ChangeListManager">
     <list default="true" id="0afe1df3-4870-48f1-a775-af97afd6ee5a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/images/items/card04.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/images/items/dagon_1_custom.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/images/items/dagon_2_custom.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/images/items/dagon_3_custom.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/images/items/dagon_4_custom.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/images/items/dagon_5_custom.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/images/items/dagon_6_custom.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/images/items/gold_bag1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/images/items/gold_bag2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/images/items/gold_bag3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/images/items/goldbag.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/images/items/randomchest1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/images/items/randomchest2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/images/items/randomchest3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/images/items/randomchest5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/images/items/wood_bag.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/images/items/woodbag.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/code/content/panorama/src/config/KVData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/config/KVData.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/content/panorama/src/config/abilities/courier_abilities.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/config/abilities/courier_abilities.d.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/content/panorama/src/config/building/building_item_card.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/config/building/building_item_card.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/config/building/building_unit_tower.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/config/building/building_unit_tower.d.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/content/panorama/src/config/items/imba_items.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/config/items/imba_items.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/helper/DotaEntityHelper.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/helper/DotaEntityHelper.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Challenge/CCChallengeAbilityIcon.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Challenge/CCChallengeAbilityIcon.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Challenge/CCChallengeShopPanel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Challenge/CCChallengeShopPanel.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Draw/CCDrawCardBottomItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Draw/CCDrawCardBottomItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/TopBarPanel/CCTopBarPanel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/TopBarPanel/CCTopBarPanel.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/items/chest/chest.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/items/chest/chest.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/items/heroes/heroes.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/items/heroes/heroes.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/items/imba/imba.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/items/imba/imba.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/items/items.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/items/items.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/masks/masks.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/masks/masks.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/spellicons/spellicons.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/spellicons/spellicons.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/res_image.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/res_image.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tsconfig.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/GameFunc.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/GameFunc.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/ai/AI_ability.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/ai/AI_ability.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/helper/ResHelper.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/helper/ResHelper.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/kvInterface/abilities/courier_abilities.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/kvInterface/abilities/courier_abilities.d.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/kvInterface/building/building_item_card.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/kvInterface/building/building_item_card.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/kvInterface/building/building_unit_tower.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/kvInterface/building/building_unit_tower.d.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/kvInterface/items/imba_items.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/kvInterface/items/imba_items.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/courier/courier_auto_gold.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/courier/courier_auto_gold.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/courier/courier_challenge_enemy.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/courier/courier_challenge_enemy.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/courier/courier_draw_card.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/courier/courier_draw_card.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_abyssal_underlord.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_abyssal_underlord.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_batrider.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_batrider.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_broodmother.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_broodmother.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_centaur.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_centaur.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_dragon_knight.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_dragon_knight.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_drow_ranger.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_drow_ranger.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_earthshaker.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_earthshaker.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_invoker.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_invoker.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_juggernaut.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_juggernaut.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_lich.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_lich.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_luna.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_luna.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_lycan.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_lycan.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_magnataur.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_magnataur.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_malfurion.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_malfurion.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_medusa.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_medusa.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_naga_siren.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_naga_siren.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_necrolyte.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_necrolyte.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_nevermore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_nevermore.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_nian.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_nian.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_phantom_assassin.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_phantom_assassin.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_phantom_lancer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_phantom_lancer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_pudge.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_pudge.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_riki.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_riki.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_sniper.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_sniper.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_sven.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_sven.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_tidehunter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_tidehunter.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_tinker.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_tinker.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_troll_warlord.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_troll_warlord.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_vengefulspirit.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_vengefulspirit.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_warlock.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_warlock.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/courier/modifier_courier.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/courier/modifier_courier.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/entityPlus/BaseAbility_Plus.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/entityPlus/BaseAbility_Plus.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/courier/courier_upgrade_chess.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/courier/courier_upgrade_chess.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_mars.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_mars.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/entityPlus/Base_ClassExt.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/entityPlus/Base_ClassExt.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_abyssal_blade.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_abyssal_blade.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_aegis.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_aegis.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_aeon_disk.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_aeon_disk.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_aether_lens.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_aether_lens.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_ancient_janggo.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_ancient_janggo.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_angelic_alliance.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_angelic_alliance.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_blink.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_blink.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_crimson_guard.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_crimson_guard.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_javelin.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_javelin.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_lifesteal.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_lifesteal.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_lifesteal_boots.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_lifesteal_boots.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_mask_of_madness.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_mask_of_madness.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_monkey_king_bar.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_monkey_king_bar.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_armlet.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_armlet.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_armlet_of_dementor.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_armlet_of_dementor.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_blade_mail.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_blade_mail.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_cheese.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_cheese.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_dagon.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_dagon.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_flask.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_flask.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_glimmerdark_shield.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_glimmerdark_shield.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_hand_of_midas.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_hand_of_midas.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_meteor_hammer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_meteor_hammer.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_necronomicon.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_necronomicon.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_nokrash_blade.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_nokrash_blade.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_octarine_core.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_octarine_core.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_origin_treads.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_origin_treads.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_plancks_artifact.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_plancks_artifact.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_satanic.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_satanic.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_skadi.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_skadi.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_smoke_of_deceit.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_smoke_of_deceit.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_sogat_cuirass.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_sogat_cuirass.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_power_treads.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_power_treads.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_ring_of_aquila.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_ring_of_aquila.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_rod_of_atos.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_rod_of_atos.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_spell_fencer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_spell_fencer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_stonework_pendant.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_triumvirate.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_triumvirate.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_vladmir.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_vladmir.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/neutral_items/item_poor_mans_shield_custom.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/neutral_items/item_poor_mans_shield_custom.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/modifier/battle/modifier_round_enemy.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/modifier/battle/modifier_round_enemy.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/modifier/combinationeffect/modifier_sect_black_art.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/modifier/combinationeffect/modifier_sect_black_art.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/modifier/combinationeffect/modifier_sect_suck_blood.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/modifier/combinationeffect/modifier_sect_suck_blood.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/modifier/effect/modifier_generic_bleeding.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/modifier/effect/modifier_generic_bleeding.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/modifier/effect/modifier_generic_poison.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/modifier/effect/modifier_generic_poison.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/modifier/effect/modifier_generic_shock.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/modifier/effect/modifier_generic_shock.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/propertystat/PropertyCalculate.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/propertystat/PropertyCalculate.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/propertystat/modifier_hero_property.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/propertystat/modifier_hero_property.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/propertystat/modifier_property.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/propertystat/modifier_property.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/Components/Courier/CourierEntityRoot.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/Components/Courier/CourierEntityRoot.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/Components/FakerHero/FakerHeroEntityRoot.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/Components/FakerHero/FakerHeroEntityRoot.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/Components/Inventory/InventoryComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/Components/Inventory/InventoryComponent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/Components/Player/PlayerDataComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/Components/Player/PlayerDataComponent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_transient_boots.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_transient_boots.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_valiance.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_valiance.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/shop/item_shop_coin_bag.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/shop/item_shop_coin_bag.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/shop/item_shop_equiptreasure.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/shop/item_shop_equiptreasure.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/shop/item_shop_lottery_ticket.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/shop/item_shop_lottery_ticket.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/Components/Courier/CourierShopComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/Components/Courier/CourierShopComponent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/Components/Draw/DrawComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/Components/Draw/DrawComponent.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/JsonConfig.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/JsonConfig.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/Types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/Types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/json/dota_courierabilitylevelupconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/json/dota_courierabilitylevelupconfig.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/json/dota_poolconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/json/dota_poolconfig.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/json/dota_poolgroupconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/json/dota_poolgroupconfig.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/json/dota_publicshopconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/json/dota_publicshopconfig.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/json/dota_roundboardchallengeconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/json/dota_roundboardchallengeconfig.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/json/dota_roundboardconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/json/dota_roundboardconfig.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/PropertyConfig.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/PropertyConfig.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/rules/Player/PlayerData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/rules/Player/PlayerData.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/excels/abilities/courier_abilities.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/excels/abilities/courier_abilities.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/excels/abilities/imba_abilities_lang.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/excels/abilities/imba_abilities_lang.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/excels/building/building_item_card.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/excels/building/building_item_card.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/excels/building/building_item_equip.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/excels/building/building_item_shop.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/excels/building/building_unit_tower.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/excels/building/building_unit_tower.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/excels/items/avalon_items.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/excels/dota/dota_items.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/excels/dota/dota_items.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/excels/items/imba_items.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/excels/items/imba_items.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/excels/items/imba_items_lang.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/excels/items/imba_items_lang.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/excels/npc_heroes_custom.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/excels/npc_heroes_custom.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/game/scripts/npc/abilities/courier_abilities.kv" beforeDir="false" afterPath="$PROJECT_DIR$/code/game/scripts/npc/abilities/courier_abilities.kv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/game/scripts/npc/building/building_item_card.kv" beforeDir="false" afterPath="$PROJECT_DIR$/code/game/scripts/npc/building/building_item_card.kv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/game/scripts/npc/building/building_unit_tower.kv" beforeDir="false" afterPath="$PROJECT_DIR$/code/game/scripts/npc/building/building_unit_tower.kv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/game/scripts/npc/items/avalon_items.kv" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/code/game/scripts/npc/items/imba_items.kv" beforeDir="false" afterPath="$PROJECT_DIR$/code/game/scripts/npc/items/imba_items.kv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/game/scripts/npc/npc_heroes_custom.txt" beforeDir="false" afterPath="$PROJECT_DIR$/code/game/scripts/npc/npc_heroes_custom.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/localization/English/building/building_item_card.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/localization/English/building/building_unit_summoned.txt" beforeDir="false" afterPath="$PROJECT_DIR$/code/localization/English/building/building_unit_summoned.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/localization/English/items/avalon_items.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/localization/English/units/imba_units.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/localization/Russian/building/building_item_card.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/localization/Russian/building/building_unit_summoned.txt" beforeDir="false" afterPath="$PROJECT_DIR$/code/localization/Russian/building/building_unit_summoned.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/localization/Russian/items/avalon_items.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/localization/Russian/units/imba_units.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/localization/SChinese/abilities/imba_abilities_lang.txt" beforeDir="false" afterPath="$PROJECT_DIR$/code/localization/SChinese/abilities/imba_abilities_lang.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/localization/SChinese/building/building_item_card.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/localization/SChinese/building/building_unit_summoned.txt" beforeDir="false" afterPath="$PROJECT_DIR$/code/localization/SChinese/building/building_unit_summoned.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/localization/SChinese/items/avalon_items.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/code/localization/SChinese/items/imba_items_lang.txt" beforeDir="false" afterPath="$PROJECT_DIR$/code/localization/SChinese/items/imba_items_lang.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/localization/SChinese/units/imba_units.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/scripts/kv_2_excel.js" beforeDir="false" afterPath="$PROJECT_DIR$/code/scripts/kv_2_excel.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -198,7 +95,7 @@
       <recent name="E:\project\dota_project\xiyou\code\content\scripts\tscripts\npc\modifier\move" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.dev:ts">
+  <component name="RunManager" selected="npm.prod:localization">
     <configuration name="dev:kv" type="js.build_tools.npm" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/code/package.json" />
       <command value="run" />
@@ -356,6 +253,7 @@
       <workItem from="1681522877285" duration="5699000" />
       <workItem from="1681626160796" duration="2072000" />
       <workItem from="1681708657712" duration="5077000" />
+      <workItem from="1681786059617" duration="8488000" />
     </task>
     <servers />
   </component>

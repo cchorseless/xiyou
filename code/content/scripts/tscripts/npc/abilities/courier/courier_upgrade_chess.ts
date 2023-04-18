@@ -1,5 +1,6 @@
 
 import { EventHelper } from "../../../helper/EventHelper";
+import { KVHelper } from "../../../helper/KVHelper";
 import { EEnum } from "../../../shared/Gen/Types";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { registerAbility } from "../../entityPlus/Base_Plus";
@@ -126,6 +127,36 @@ export class courier_upgrade_tech extends BaseAbility_Plus {
         let playerroot = GPlayerEntityRoot.GetOneInstance(iPlayerID);
         playerroot.PlayerDataComp().applyTechLevelUp(addlevel);
         playerroot.PlayerDataComp().SyncClient();
+        this.addOneRandomEquip();
+    }
+
+    addOneRandomEquip() {
+        let hCaster = this.GetCasterPlus();
+        let iPlayerID = hCaster.GetPlayerID();
+        let playerroot = GPlayerEntityRoot.GetOneInstance(iPlayerID);
+        let poolgroupconfig: number;
+        if (this.GetTechLevel() <= 10) {
+            poolgroupconfig = this.GetSpecialValueFor("poolgroupconfig_1");
+        }
+        else if (this.GetTechLevel() <= 15) {
+            poolgroupconfig = this.GetSpecialValueFor("poolgroupconfig_2");
+        }
+        else {
+            poolgroupconfig = this.GetSpecialValueFor("poolgroupconfig_3");
+        }
+        let itemname = KVHelper.RandomPoolGroupConfig(poolgroupconfig + "");
+        if (itemname) {
+            let hero = playerroot.Hero;
+            let itemEntity = hero.AddItemOrInGround(itemname);
+            if (IsValid(itemEntity)) {
+                let npcroot = hero.ETRoot as IBattleUnitEntityRoot;
+                if (npcroot.InventoryComp()) {
+                    GItemEntityRoot.Active(itemEntity);
+                    let itemroot = itemEntity.ETRoot as IItemEntityRoot;
+                    npcroot.InventoryComp().putInItem(itemroot);
+                }
+            }
+        }
     }
     Init(): void {
         let Ihander = GHandler.create(this, (keys: ModifierOverrideAbilitySpecialEvent) => {

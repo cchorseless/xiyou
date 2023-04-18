@@ -23,7 +23,7 @@ export class item_imba_aeon_disk extends BaseItem_Plus {
         this.EndCooldown();
     }
     GetAbilityTextureName(): string {
-        if (this.GetCasterPlus().findBuffStack("modifier_imba_aeon_disk_basic", this.GetCasterPlus()) == 1) {
+        if (this.GetCasterPlus() && this.GetCasterPlus().findBuffStack("modifier_imba_aeon_disk_basic", this.GetCasterPlus()) == 1) {
             return "imba/aeon_disk_icon_off";
         } else {
             return "imba/aeon_disk_icon";

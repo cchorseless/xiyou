@@ -80,6 +80,8 @@ declare namespace courier_abilities {
 "04" :OBJ_4_1 ,
 "05" :OBJ_4_1 ,
 "06" :OBJ_4_1 ,
+"07" :OBJ_4_1 ,
+"08" :OBJ_4_1 ,
 [k:string] : OBJ_4_1 }
  interface OBJ_4_1 {
 "var_type" :string ,
@@ -101,6 +103,9 @@ declare namespace courier_abilities {
 "wood_add_interval" :string ,
 "soul_add_interval" :string ,
 "stat_all_add" :string ,
+"poolgroupconfig_1" :string ,
+"poolgroupconfig_2" :string ,
+"poolgroupconfig_3" :string ,
 "draw_count" :string ,
 "gold_interval" :string ,
 "interval" :string ,
