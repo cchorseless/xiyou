@@ -39,9 +39,9 @@ export class imba_gyrocopter_rocket_barrage extends BaseAbility_Plus {
         }
     }
 
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_if_enemy(this);
     }
@@ -298,9 +298,9 @@ export class imba_gyrocopter_homing_missile extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_gyrocopter_homing_missile_charges"), "modifier_special_bonus_imba_gyrocopter_homing_missile_charges", {});
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.TARGET_if_enemy(this);
     }
@@ -797,9 +797,9 @@ export class imba_gyrocopter_flak_cannon extends BaseAbility_Plus {
             duration: this.GetDuration()
         });
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_if_enemy(this);
     }
@@ -1214,7 +1214,7 @@ export class imba_gyrocopter_call_down extends BaseAbility_Plus {
         }
     }
     GetManaCost(level: number): number {
-        return 100;
+        return 800;
     }
     AutoSpellSelf() {
         return AI_ability.POSITION_most_enemy(this);

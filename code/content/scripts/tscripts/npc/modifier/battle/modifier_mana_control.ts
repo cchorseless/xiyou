@@ -16,13 +16,12 @@ export class modifier_mana_control extends BaseModifier_Plus {
     }
     caster: IBaseNpc_Plus;
     public BeCreated(params?: IModifierTable): void {
-        this.baseMana = 10;
         if (IsServer()) {
             this.caster = this.GetParentPlus();
-            this.caster.SetMana(0);
+            this.caster.SetMana(GPropertyCalculate.SumProps(this.caster, null, GPropertyConfig.EMODIFIER_PROPERTY.MANA_BONUS));
         }
     }
-    baseMana = 10;
+    baseMana = 2;
     takedamageCount = 0;
     @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
     public CC_OnTakeDamage(params: ModifierInstanceEvent): void {

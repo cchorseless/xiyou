@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { AoiHelper } from "../../../helper/AoiHelper";
 import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 import { ResHelper } from "../../../helper/ResHelper";
@@ -146,9 +146,9 @@ export class imba_sandking_burrowstrike extends BaseAbility_Plus {
             ResolveNPCPositions(target_point, 128);
         });
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.POSITION_if_enemy(this, null, null, FindOrder.FIND_FARTHEST);
     }
@@ -287,9 +287,9 @@ export class imba_sandking_sand_storm extends BaseAbility_Plus {
             ParticleManager.ReleaseParticleIndex(this.particle_sandstorm_fx);
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_if_enemy(this);
     }
@@ -789,7 +789,7 @@ export class imba_sandking_epicenter extends BaseAbility_Plus {
         caster.AddNewModifier(caster, ability, modifier_pulse, {});
     }
     GetManaCost(level: number): number {
-        return 100;
+        return 800;
     }
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_cast(this);

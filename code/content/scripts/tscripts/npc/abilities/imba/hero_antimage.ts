@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -309,9 +309,9 @@ export class imba_antimage_blink extends BaseAbility_Plus {
         return 20 - this.GetCasterPlus().GetTalentValue("special_bonus_imba_antimage_10");
     }
 
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     AutoSpellSelf() {
         return AI_ability.POSITION_if_enemy(this, null, (enemy, index, count) => {
@@ -551,9 +551,9 @@ export class imba_antimage_spell_shield extends BaseAbility_Plus {
         return 0
     }
 
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     AutoSpellSelf() {
         if (this.IsSpeTalentActive()) {
@@ -747,7 +747,7 @@ export class imba_antimage_mana_void extends BaseAbility_Plus {
     }
 
     GetManaCost(level: number): number {
-        return 100;
+        return 800;
     }
 
     AutoSpellSelf() {

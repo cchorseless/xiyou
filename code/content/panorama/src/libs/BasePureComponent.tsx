@@ -172,6 +172,21 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
     //     }
     //     return { [this.InstanceId]: this._ETRef };
     // }
+    ListenClassUpdate(cls: typeof ET.Entity, func?: () => void) {
+        if (cls == null) {
+            GLogHelper.warn("ListenUpdate entity is null," + this.constructor.name);
+            return;
+        }
+        GEventHelper.AddEvent(cls.updateEventClassName(), GHandler.create(this, () => {
+            if (this.IsRegister) {
+                // content.setState(entity.Ref(true));
+                this.UpdateSelf();
+                if (func) {
+                    func();
+                }
+            }
+        }))
+    }
 
     ListenUpdate(entity: ET.Entity, func?: () => void) {
         // this.UpdateState(entity.Ref());

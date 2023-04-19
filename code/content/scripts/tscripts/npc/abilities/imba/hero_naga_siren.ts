@@ -74,9 +74,9 @@ export class imba_naga_siren_mirror_image extends BaseAbility_Plus {
         this.GetCasterPlus().EmitSound("Hero_NagaSiren.MirrorImage");
     }
 
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_if_enemy(this)
     }
@@ -242,9 +242,9 @@ export class imba_naga_siren_ensnare extends BaseAbility_Plus {
             });
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.TARGET_if_enemy(this)
     }
@@ -424,7 +424,7 @@ export class imba_naga_siren_song_of_the_siren extends BaseAbility_Plus {
         ParticleManager.ReleaseParticleIndex(pfx);
     }
     GetManaCost(level: number): number {
-        return 100;
+        return 800;
     }
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_cast(this)

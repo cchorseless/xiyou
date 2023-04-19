@@ -480,9 +480,9 @@ export class imba_jakiro_dual_breath extends BaseAbility_Plus {
         }
     }
 
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.POSITION_if_enemy(this)
     }
@@ -659,9 +659,9 @@ export class imba_jakiro_ice_path extends base_ability_dual_breath {
             }, caster.GetAbsOrigin(), caster.GetTeamNumber(), false);
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.POSITION_if_enemy(this)
     }
@@ -887,9 +887,9 @@ export class imba_jakiro_liquid_fire extends BaseAbility_Plus {
             caster.AttackOnce(target, true, true, true, true, true, false, false);
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.TARGET_if_enemy(this)
     }
@@ -1144,7 +1144,7 @@ export class imba_jakiro_macropyre extends BaseAbility_Plus {
         }
     }
     GetManaCost(level: number): number {
-        return 100;
+        return 800;
     }
     AutoSpellSelf() {
         return AI_ability.POSITION_if_enemy(this)

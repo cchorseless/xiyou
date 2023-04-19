@@ -97,7 +97,8 @@ export class CCCombinationInfoDialog extends CCPanel<ICCCombinationInfoDialog> {
                 isConditionActive = 2;
             }
         }
-        const sectlock = bindEquipid > 0 && isConditionActive == 0;
+        const sectlock = abilityitemname != null && bindEquipid > 0 && isConditionActive == 0;
+        const showScepter = abilityitemname != null && bindEquipid > 0;
         let configlist = Object.values(configs);
         configlist.sort((a, b) => { return a.activeCount - b.activeCount });
         let SectNameHeader = $.Localize("#lang_" + sectName);
@@ -125,7 +126,7 @@ export class CCCombinationInfoDialog extends CCPanel<ICCCombinationInfoDialog> {
                             // bOnlyNowLevelValue: true
                         })} /> */}
                         </CCPanel>
-                        {bindEquipid > 0 && <CCIcon_Scepter on={isConditionActive == 2} />}
+                        {showScepter && <CCIcon_Scepter on={isConditionActive == 2} />}
                     </CCPanelHeader>
                     {/* <CCProgressBar id="RemainProgress" width="100%" max={100} value={50} >
                         <CCLabel align="center center" localizedText={"剩余:{d:value}%"} dialogVariables={{ value: 50 }} />

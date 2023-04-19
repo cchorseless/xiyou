@@ -58,9 +58,9 @@ export class imba_void_spirit_dissimilate extends BaseAbility_Plus {
         }
     }
 
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_if_enemy(this);
     }
@@ -318,9 +318,9 @@ export class imba_void_spirit_resonant_pulse extends BaseAbility_Plus {
             }
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_if_enemy(this);
     }
@@ -620,9 +620,9 @@ export class imba_void_spirit_astral_step_helper extends BaseAbility_Plus {
             this.GetCasterPlus().findAbliityPlus<imba_void_spirit_astral_step>("imba_void_spirit_astral_step").OnSpellStart(this.GetCasterPlus().findAbliityPlus<imba_void_spirit_astral_step>("imba_void_spirit_astral_step").original_vector * (-1) as Vector);
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_if_enemy(this);
     }
@@ -867,9 +867,9 @@ export class imba_void_spirit_void_stasis extends BaseAbility_Plus {
             }
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_if_enemy(this);
     }
@@ -1015,7 +1015,7 @@ export class imba_void_spirit_astral_step extends BaseAbility_Plus {
         }
     }
     GetManaCost(level: number): number {
-        return 100;
+        return 800;
     }
     AutoSpellSelf() {
         return AI_ability.POSITION_if_enemy(this);

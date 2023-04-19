@@ -55,9 +55,9 @@ export class imba_shadow_shaman_ether_shock extends BaseAbility_Plus {
             }
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.TARGET_if_enemy(this);
     }
@@ -206,9 +206,9 @@ export class imba_shadow_shaman_voodoo extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_shadow_shaman_wards_movement"), "modifier_special_bonus_imba_shadow_shaman_wards_movement", {});
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.TARGET_if_enemy(this);
     }
@@ -524,9 +524,9 @@ export class imba_shadow_shaman_shackles extends BaseAbility_Plus {
             }
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.TARGET_if_enemy(this);
     }
@@ -801,9 +801,9 @@ export class imba_shadow_shaman_mass_serpent_ward extends BaseAbility_Plus {
             ward.SetRenderColor(0, 0, 0);
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.POSITION_most_enemy(this);
     }

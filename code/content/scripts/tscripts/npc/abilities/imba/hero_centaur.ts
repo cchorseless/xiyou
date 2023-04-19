@@ -84,9 +84,9 @@ export class imba_centaur_hoof_stomp extends BaseAbility_Plus {
         }, this.GetCasterPlus().GetAbsOrigin(), this.GetCasterPlus().GetTeamNumber(), false);
     }
 
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_if_enemy(this);
@@ -333,9 +333,9 @@ export class imba_centaur_double_edge extends BaseAbility_Plus {
         }
     }
 
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     AutoSpellSelf() {
         return AI_ability.TARGET_if_enemy(this);
@@ -363,9 +363,9 @@ export class imba_centaur_return extends BaseAbility_Plus {
         }
     }
 
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_cast(this);
@@ -605,7 +605,7 @@ export class imba_centaur_stampede extends BaseAbility_Plus {
         }
     }
     GetManaCost(level: number): number {
-        return 100;
+        return 800;
     }
 
     AutoSpellSelf() {

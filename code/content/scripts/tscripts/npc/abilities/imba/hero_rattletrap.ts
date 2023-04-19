@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifierMotionHorizontal_Plus, BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -31,9 +31,9 @@ export class imba_rattletrap_battery_assault extends BaseAbility_Plus {
             duration: this.GetSpecialValueFor("duration")
         });
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_if_enemy(this);
     }
@@ -297,9 +297,9 @@ export class imba_rattletrap_power_cogs extends BaseAbility_Plus {
             }
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_if_enemy(this);
     }
@@ -831,9 +831,9 @@ export class imba_rattletrap_rocket_flare extends BaseAbility_Plus {
             }, vLocation, this.GetCasterPlus().GetTeamNumber(), false);
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.POSITION_most_enemy(this);
     }
@@ -1024,7 +1024,7 @@ export class imba_rattletrap_hookshot extends BaseAbility_Plus {
         }
     }
     GetManaCost(level: number): number {
-        return 100;
+        return 800;
     }
     AutoSpellSelf() {
         return AI_ability.POSITION_if_enemy(this);

@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifierMotionHorizontal_Plus, BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -72,9 +72,9 @@ export class imba_shredder_whirling_death extends BaseAbility_Plus {
             this.GetCasterPlus().EmitSound("Hero_Shredder.WhirlingDeath.Damage");
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_if_enemy(this);
     }
@@ -385,9 +385,9 @@ export class imba_shredder_timber_chain extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_shredder_timber_chain_range"), "modifier_special_bonus_imba_shredder_timber_chain_range", {});
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.POSITION_if_enemy(this);
     }
@@ -1019,7 +1019,7 @@ export class imba_shredder_chakram extends BaseAbility_Plus {
         }
     }
     GetManaCost(level: number): number {
-        return 100;
+        return 800;
     }
     AutoSpellSelf() {
         return AI_ability.POSITION_most_enemy(this);

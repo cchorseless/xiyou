@@ -810,6 +810,15 @@ export module PropertyCalculate {
     export function GetEntityIndex(hUnit: IBaseNpc_Plus) {
         return hUnit.GetEntityIndex()
     }
+    /**
+     * 获取星级
+     * @param hUnit 
+     * @returns 
+     */
+    export function GetStar(hUnit: IBaseNpc_Plus) {
+        return hUnit.GetStar()
+    }
+
     /** 召唤物 */
     export function GetSummonDuration(hUnit: IBaseNpc_Plus, curduation: number) {
         let fSummonDurationBonus = SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.SUMMON_DURATION_BONUS);

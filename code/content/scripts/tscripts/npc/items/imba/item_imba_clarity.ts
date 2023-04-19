@@ -163,7 +163,7 @@ export class modifier_imba_clarity_mana_reserves extends BaseModifier_Plus {
         }
         return Object.values(decFuncs);
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.EXTRA_MANA_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MANA_BONUS)
     CC_GetModifierExtraManaBonus(): number {
         return this.max_mana_bonus;
     }

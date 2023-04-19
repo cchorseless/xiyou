@@ -26,9 +26,9 @@ export class imba_abyssal_underlord_firestorm extends BaseAbility_Plus {
         this.StopEffects();
     }
 
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
 
     AutoSpellSelf() {
@@ -303,7 +303,7 @@ export class imba_abyssal_underlord_pit_of_malice extends BaseAbility_Plus {
     public effect_cast: ParticleID;
 
     GetManaCost(level: number): number {
-        return 100;
+        return 800;
     }
 
 
@@ -639,9 +639,9 @@ export class imba_abyssal_underlord_atrophy_aura extends BaseAbility_Plus {
         });
     }
 
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     GetCooldown(level: number): number {
         return 20;

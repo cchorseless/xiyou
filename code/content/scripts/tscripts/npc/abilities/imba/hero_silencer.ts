@@ -55,9 +55,9 @@ export class imba_silencer_curse_of_the_silent extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_silencer_curse_of_the_silent_slow"), "modifier_special_bonus_imba_silencer_curse_of_the_silent_slow", {});
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.POSITION_most_enemy(this);
     }
@@ -365,9 +365,9 @@ export class imba_silencer_glaives_of_wisdom extends BaseAbility_Plus {
             this.RefundManaCost();
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         if (!this.GetAutoCastState()) {
             this.ToggleAutoCast();
@@ -821,9 +821,9 @@ export class imba_silencer_last_word extends BaseAbility_Plus {
     GetIntrinsicModifierName(): string {
         return "imba_silencer_last_word_aura";
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.TARGET_if_enemy(this);
     }
@@ -1226,7 +1226,7 @@ export class imba_silencer_global_silence extends BaseAbility_Plus {
         }
     }
     GetManaCost(level: number): number {
-        return 100;
+        return 800;
     }
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_cast(this);

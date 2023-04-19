@@ -24,9 +24,9 @@ export class imba_arc_warden_flux extends BaseAbility_Plus {
             });
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     AutoSpellSelf() {
         return AI_ability.TARGET_if_enemy(this);
@@ -112,9 +112,9 @@ export class imba_arc_warden_magnetic_field extends BaseAbility_Plus {
             duration: this.GetSpecialValueFor("duration")
         }, this.GetCursorPosition(), this.GetCasterPlus().GetTeamNumber(), false);
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     AutoSpellSelf() {
         return AI_ability.POSITION_if_friend(this, null, (unit, index, count) => {
@@ -348,9 +348,9 @@ export class imba_arc_warden_spark_wraith extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_arc_warden_spark_wraith_damage"), "modifier_special_bonus_imba_arc_warden_spark_wraith_damage", {});
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     AutoSpellSelf() {
         return AI_ability.POSITION_if_enemy(this);
@@ -501,7 +501,7 @@ export class modifier_special_bonus_imba_arc_warden_spark_wraith_damage extends 
 @registerAbility()
 export class imba_arc_warden_tempest_double extends BaseAbility_Plus {
     GetManaCost(level: number): number {
-        return 100;
+        return 800;
     }
 
     AutoSpellSelf() {

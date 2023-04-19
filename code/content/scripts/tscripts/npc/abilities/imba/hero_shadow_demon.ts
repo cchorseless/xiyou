@@ -64,9 +64,9 @@ export class imba_shadow_demon_disruption extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_shadow_demon_disruption_charges"), "modifier_special_bonus_imba_shadow_demon_disruption_charges", {});
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.TARGET_if_enemy(this);
     }
@@ -462,9 +462,9 @@ export class imba_shadow_demon_soul_catcher extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_shadow_demon_soul_catcher_cd"), "modifier_special_bonus_imba_shadow_demon_soul_catcher_cd", {});
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.POSITION_if_enemy(this);
     }
@@ -784,9 +784,9 @@ export class imba_shadow_demon_shadow_poison extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_shadow_demon_shadow_poison_cd"), "modifier_special_bonus_imba_shadow_demon_shadow_poison_cd", {});
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.POSITION_if_enemy(this);
     }
@@ -1105,7 +1105,7 @@ export class imba_shadow_demon_demonic_purge extends BaseAbility_Plus {
         }
     }
     GetManaCost(level: number): number {
-        return 100;
+        return 800;
     }
     AutoSpellSelf() {
         return AI_ability.TARGET_if_enemy(this);

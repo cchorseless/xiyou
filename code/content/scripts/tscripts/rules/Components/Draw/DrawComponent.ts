@@ -9,9 +9,13 @@ import { ERoundBoard } from "../Round/ERoundBoard";
 export class DrawComponent extends ET.Component implements IRoundStateCallback {
     @serializeETProps()
     tLastCards: string[] = [];
+    @serializeETProps()
+    tWashCards: string[] = [];
+    /**锁定详情 */
+    tLockChess: { [k: string]: string } = {}
 
     onAwake(...args: any[]): void {
-        this.SyncClient();
+        this.SyncClient(true, true);
     }
     OnRound_Start(round: ERoundBoard) { }
     OnRound_Battle() { }
@@ -19,32 +23,6 @@ export class DrawComponent extends ET.Component implements IRoundStateCallback {
     OnRound_WaitingEnd() { }
     //  开局抽卡
     DrawStartCard() {
-        // let sReservoirName = "draw_card_start";
-        // let iNum = START_DRAW_CARD_NUM;
-        // let tTowers = {};
-        // let tVipCards = {};
-        // let vipReservoir = "draw_card_start_vip";
-        // for (let i = 1; i <= VIP_Start_Draw_Card; i++) {
-        //     let sCardName = this.DrawDouble(vipReservoir);
-        //     let sTowerName = Card.Card2TowerName(sCardName);
-        //     while (TableFindKey(tTowers, sTowerName) != null) {
-        //         sCardName = this.DrawDouble(vipReservoir);
-        //         sTowerName = Card.Card2TowerName(sCardName);
-        //     }
-        //     table.insert(tTowers, sTowerName);
-        //     tVipCards[tTowers.length] = 1;
-        // }
-        // for (let i = 1; i <= iNum; i++) {
-        //     let sCardName = this.DrawDouble(sReservoirName);
-        //     let sTowerName = Card.Card2TowerName(sCardName);
-        //     while (TableFindKey(tTowers, sTowerName) != null) {
-        //         sCardName = this.DrawDouble(sReservoirName);
-        //         sTowerName = Card.Card2TowerName(sCardName);
-        //     }
-        //     table.insert(tTowers, sTowerName);
-        // }
-        // this.tPlayerCards[iPlayerID] = { tTower = tTowers, tVipCards = tVipCards, bFreeTake = true };
-        // this.UpdateNetTables();
         this.DrawCard(DrawConfig.EDrawCardType.DrawCardV1, 4);
     }
 
@@ -55,7 +33,8 @@ export class DrawComponent extends ET.Component implements IRoundStateCallback {
             let itemid = KVHelper.RandomPoolGroupConfig("" + sReservoirName);
             if (!r_arr.includes(itemid)) {
                 r_arr.push(itemid);
-            } else {
+            }
+            else {
                 let tryTimes = 5;
                 while (tryTimes > 0) {
                     tryTimes--;
@@ -72,8 +51,15 @@ export class DrawComponent extends ET.Component implements IRoundStateCallback {
                 }
             }
         }
-        this.tLastCards = [].concat(r_arr);
-        this.SyncClient();
+        // 锁定
+        for (let k in this.tLockChess) {
+            let index = GToNumber(k);
+            if (this.tLastCards[index]) {
+                r_arr[index] = this.tLastCards[index];
+            }
+        }
+        this.tLastCards = r_arr;
+        this.SyncClient(true, true);
         // 通知客户端
         EventHelper.fireProtocolEventToPlayer(DrawConfig.EProtocol.DrawCardResult, null, this.BelongPlayerid);
     }
@@ -108,7 +94,8 @@ export class DrawComponent extends ET.Component implements IRoundStateCallback {
             }
         }
         this.tLastCards[index] = null;
-        this.SyncClient();
+        delete this.tLockChess[index + ""];
+        this.SyncClient(true, true);
         return [true, ""];
     }
 
@@ -118,22 +105,6 @@ export class DrawComponent extends ET.Component implements IRoundStateCallback {
             return [false, "hero is death"];
         }
         return [true, ""];
-        // let iPlayerID = events.PlayerID;
-        // let sCardName = events.card_name;
-        // let bFreeTake = this.tPlayerCards[iPlayerID].bFreeTake;
-        // if (!bFreeTake) {
-        //     return;
-        // }
-        // this.tPlayerCards[iPlayerID].bFreeTake = false;
-
-        // let hItem = hHero.GiveItem(sCardName);
-
-        // Service.UseConsumable(iPlayerID, "410009", 1);
-
-        // this.tPlayerCards[iPlayerID] = {};
-        // this.tReDrawChance[iPlayerID] = 0;
-        // this.tLastCards[iPlayerID] = {};
-        // this.UpdateNetTables();
     }
 
 
@@ -149,62 +120,44 @@ export class DrawComponent extends ET.Component implements IRoundStateCallback {
         //     this.DrawStartCard(iPlayerID);
         // }
     }
-    OnAdd2WishList(index: number, sCardName: string): [boolean, string] {
+
+    OnLockChess(index: number, sCardName: string, block: 0 | 1): [boolean, string] {
         if (!GPlayerEntityRoot.GetOneInstance(this.BelongPlayerid).CheckIsAlive()) {
             return [false, "hero is death"];
         }
+        if (block == 0) {
+            delete this.tLockChess[index + ""];
+        }
+        else {
+            this.tLockChess[index + ""] = sCardName;
+        }
         return [true, ""];
-        // let iPlayerID = events.PlayerID;
-        // let sTowerName = events.tower;
-        // if (this.tWishList[iPlayerID] == null) {
-        //     this.tWishList[iPlayerID] = {};
-        // }
-        // if (TableFindKey(this.tWishList[iPlayerID], sTowerName)) {
-        //     return;
-        // }
-        // table.insert(this.tWishList[iPlayerID], sTowerName);
-        // if (MaxWishCard == null) {
-        //     MaxWishCard = 5;
-        // }
-        // while (this.tWishList.length[iPlayerID] > MaxWishCard) {
-        //     table.remove(this.tWishList[iPlayerID], 1);
-        // }
-        // this.UpdateNetTables();
     }
-    OnRemoveWishList(index: number, sCardName: string): [boolean, string] {
+
+
+    OnAdd2WishList(sCardName: string, isadd: 0 | 1): [boolean, string] {
         if (!GPlayerEntityRoot.GetOneInstance(this.BelongPlayerid).CheckIsAlive()) {
             return [false, "hero is death"];
         }
-        return [true, ""];
-        // let iPlayerID = events.PlayerID;
-        // let sTowerName = events.tower;
-        // if (this.tWishList[iPlayerID] == null) {
-        //     this.tWishList[iPlayerID] = {};
-        // }
-        // ArrayRemove(this.tWishList[iPlayerID], sTowerName);
-        // this.UpdateNetTables();
-    }
-    OnToggleWishList(index: number, sCardName: string): [boolean, string] {
-        if (!GPlayerEntityRoot.GetOneInstance(this.BelongPlayerid).CheckIsAlive()) {
-            return [false, "hero is death"];
+        if (sCardName == null || sCardName == "") {
+            return [false, "sCardName is invalid"];
         }
+        if (isadd == 1) {
+            if (this.tWashCards.length >= DrawConfig.iWashCardMax) {
+                return [false, "washcard is full"];
+            }
+            if (this.tWashCards.includes(sCardName)) {
+                return [false, "washcard has this card"];
+            }
+            this.tWashCards.push(sCardName);
+        }
+        else {
+            this.tWashCards.splice(this.tWashCards.indexOf(sCardName), 1);
+        }
+        this.SyncClient(true, true);
         return [true, ""];
-        // let iPlayerID = events.PlayerID;
-        // let sTowerName = events.tower;
-        // if (this.tWishList[iPlayerID] == null) {
-        //     this.tWishList[iPlayerID] = {};
-        // }
-        // if (TableFindKey(this.tWishList[iPlayerID], sTowerName)) {
-        //     ArrayRemove(this.tWishList[iPlayerID], sTowerName);
-        // } else {
-        //     table.insert(this.tWishList[iPlayerID], sTowerName);
-        //     if (MaxWishCard == null) {
-        //         MaxWishCard = 5;
-        //     }
-        //     while (this.tWishList.length[iPlayerID] > MaxWishCard) {
-        //         table.remove(this.tWishList[iPlayerID], 1);
-        //     }
-        // }
-        // this.UpdateNetTables();
+
     }
+
+
 }

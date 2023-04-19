@@ -200,9 +200,9 @@ export class imba_techies_land_mines extends BaseAbility_Plus {
             }
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
 
     AutoSpellSelf() {
@@ -621,9 +621,9 @@ export class imba_techies_stasis_trap extends BaseAbility_Plus {
             trap.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_statis_trap", {});
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.POSITION_if_enemy(this);
     }
@@ -889,9 +889,9 @@ export class imba_techies_suicide extends BaseAbility_Plus {
             caster.AddNewModifier(caster, ability, modifier_blast, modifierParam);
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.POSITION_if_enemy(this);
     }
@@ -1321,7 +1321,7 @@ export class imba_techies_remote_mines extends BaseAbility_Plus {
         mine.SetOwner(caster);
     }
     GetManaCost(level: number): number {
-        return 100;
+        return 800;
     }
     AutoSpellSelf() {
         return AI_ability.POSITION_if_enemy(this);
@@ -1411,9 +1411,9 @@ export class imba_techies_remote_mines_pinpoint_detonation extends BaseAbility_P
             caster.ForceKill(true);
         });
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_cast(this);
     }

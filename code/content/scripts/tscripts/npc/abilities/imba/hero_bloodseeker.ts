@@ -37,9 +37,9 @@ export class imba_bloodseeker_bloodrage extends BaseAbility_Plus {
         }
     }
 
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     AutoSpellSelf() {
         if (RollPercentage(50)) {
@@ -345,9 +345,9 @@ export class imba_bloodseeker_blood_bath extends BaseAbility_Plus {
     }
 
 
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     AutoSpellSelf() {
         return AI_ability.POSITION_most_enemy(this);
@@ -866,7 +866,7 @@ export class imba_bloodseeker_rupture extends BaseAbility_Plus {
         }
     }
     GetManaCost(level: number): number {
-        return 100;
+        return 800;
     }
 
     AutoSpellSelf() {

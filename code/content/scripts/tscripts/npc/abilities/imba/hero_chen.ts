@@ -62,9 +62,9 @@ export class imba_chen_penitence extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_chen_remnants_of_penitence"), "modifier_special_bonus_imba_chen_remnants_of_penitence", {});
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     AutoSpellSelf() {
         return AI_ability.TARGET_if_enemy(this);
@@ -190,9 +190,9 @@ export class imba_chen_divine_favor extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_chen_divine_favor_cd_reduction"), "modifier_special_bonus_imba_chen_divine_favor_cd_reduction", {});
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     AutoSpellSelf() {
         return AI_ability.TARGET_if_friend(this, null, (unit) => { return unit != this.GetCasterPlus() && !unit.HasModifier("modifier_imba_chen_divine_favor") });
@@ -525,9 +525,9 @@ export class imba_chen_holy_persuasion extends BaseAbility_Plus {
             }
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     AutoSpellSelf() {
         return AI_ability.TARGET_if_enemy(this);
@@ -928,9 +928,9 @@ export class imba_chen_test_of_faith extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_chen_test_of_faith_cd_reduction"), "modifier_special_bonus_imba_chen_test_of_faith_cd_reduction", {});
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     AutoSpellSelf() {
         if (RollPercentage(50)) {
@@ -990,7 +990,7 @@ export class imba_chen_hand_of_god extends BaseAbility_Plus {
     }
 
     GetManaCost(level: number): number {
-        return 100;
+        return 800;
     }
 
     AutoSpellSelf() {

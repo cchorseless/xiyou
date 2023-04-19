@@ -8,6 +8,8 @@ interface ICCCourierCard {
     sCourierName: string,
     allowrotation?: boolean;
     showmodel?: boolean;
+    showability?: boolean;
+
 }
 
 export class CCCourierCard extends CCPanel<ICCCourierCard> {
@@ -15,12 +17,13 @@ export class CCCourierCard extends CCPanel<ICCCourierCard> {
     static defaultProps = {
         showmodel: true,
         allowrotation: true,
+        showability: false
     }
 
     defaultClass() {
         const sCourierName = this.props.sCourierName;
         const tCourierData = KVHelper.KVData().courier_units[sCourierName];
-        const sRarity = tCourierData.Rarity || "R";
+        const sRarity = tCourierData.Rarity || "A";
         return CSSHelper.ClassMaker("CourierCard", sRarity)
     }
     render() {
@@ -29,7 +32,6 @@ export class CCCourierCard extends CCPanel<ICCCourierCard> {
         const showmodel = this.props.showmodel;
         const allowrotation = this.props.allowrotation;
         return (
-            this.__root___isValid &&
             <Panel ref={this.__root__} id="CC_CourierCard"   {...this.initRootAttrs()} hittest={false}>
                 {showmodel ?
                     < Panel id="CourierScene" hittest={false} >
@@ -39,7 +41,7 @@ export class CCCourierCard extends CCPanel<ICCCourierCard> {
                 }
                 <Label id="CourierName" text={$.Localize("#" + sCourierName)} hittest={false} />
                 {
-                    tCourierData.Ability1 && <Panel id="CourierAbility" >
+                    this.props.showability && tCourierData.Ability1 && <Panel id="CourierAbility" >
                         <DOTAAbilityImage abilityname={tCourierData.Ability1} showtooltip={false} style={{ width: "100%", height: "100%" }} />
                     </Panel>
                 }

@@ -176,9 +176,9 @@ export class imba_bounty_hunter_shuriken_toss extends BaseAbility_Plus {
         return false;
     }
 
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     AutoSpellSelf() {
         return AI_ability.TARGET_if_enemy(this);
@@ -361,9 +361,9 @@ export class imba_bounty_hunter_jinada extends BaseAbility_Plus {
         return false;
     }
 
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     AutoSpellSelf() {
         return AI_ability.TARGET_if_enemy(this);
@@ -813,7 +813,7 @@ export class imba_bounty_hunter_track extends BaseAbility_Plus {
         return false;
     }
     GetManaCost(level: number): number {
-        return 100;
+        return 800;
     }
 
     AutoSpellSelf() {

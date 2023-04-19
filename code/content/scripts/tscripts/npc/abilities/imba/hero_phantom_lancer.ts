@@ -171,9 +171,9 @@ export class imba_phantom_lancer_spirit_lance extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_phantom_lancer_spirit_lance_damage"), "modifier_special_bonus_imba_phantom_lancer_spirit_lance_damage", {});
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.POSITION_if_enemy(this)
     }
@@ -390,9 +390,9 @@ export class imba_phantom_lancer_doppelwalk extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_phantom_lancer_doppelwalk_cooldown"), "modifier_special_bonus_imba_phantom_lancer_doppelwalk_cooldown", {});
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.POSITION_if_enemy(this)
     }
@@ -466,9 +466,9 @@ export class imba_phantom_lancer_phantom_edge extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_phantom_lancer_phantom_edge_distance"), "modifier_special_bonus_imba_phantom_lancer_phantom_edge_distance", {});
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         if (!this.GetToggleState()) {
             this.ToggleAbility()

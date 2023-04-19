@@ -1,10 +1,13 @@
+import { DOTAScenePanelAttributes } from "@demon673/react-panorama";
 import React from "react";
-
 import { CCPanel } from "../CCPanel/CCPanel";
+import "./CCDOTAScenePanel.less";
 
-interface ICCDOTAScenePanel extends NodePropsData {
+interface ICCDOTAScenePanel extends DOTAScenePanelAttributes {
     /**dota2单位名字 */
     unit: string;
+    /**显示高光 */
+    showlight?: boolean;
     camera?: "default_camera" | string,
     drawbackground?: boolean,
     allowrotation?: boolean,
@@ -14,10 +17,10 @@ interface ICCDOTAScenePanel extends NodePropsData {
     particleonly?: boolean,
     light?: "global_light" | string,
 }
-export class CCDOTAScenePanel extends CCPanel<ICCDOTAScenePanel, ScenePanel>{
-    defaultClass() { return "CC_DOTAScenePanel"; };
+export class CCDOTAScenePanel extends CCPanel<ICCDOTAScenePanel>{
     static defaultProps = {
         camera: "default_camera",
+        showlight: false,
         drawbackground: false,
         allowrotation: true,
         rotateonmousemove: true,
@@ -25,19 +28,19 @@ export class CCDOTAScenePanel extends CCPanel<ICCDOTAScenePanel, ScenePanel>{
         renderdeferred: false,
         particleonly: false,
         light: "global_light",
-        width: "200px",
-        height: "200px",
     }
     onInitUI() {
     }
 
     render() {
         return (
-            this.__root___isValid &&
-            <DOTAScenePanel ref={this.__root__}    {...this.initRootAttrs()}>
+            <Panel id="CC_DOTAScenePanel" ref={this.__root__}   {...this.initRootAttrs()}>
+                <Panel className="DOTASceneSelectLightBg" visible={this.props.showlight} />
+                <Panel className="DOTASceneSelectLight" visible={this.props.showlight} />
+                <DOTAScenePanel className="CCDOTAScenePanel" hittest={true} {...this.props} />
                 {this.props.children}
                 {this.__root___childs}
-            </DOTAScenePanel>
+            </Panel>
         );
     }
 }

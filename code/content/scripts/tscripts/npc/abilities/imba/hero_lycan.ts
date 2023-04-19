@@ -74,9 +74,9 @@ export class imba_lycan_summon_wolves extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_lycan_10"), "modifier_special_bonus_imba_lycan_10", {});
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_if_enemy(this)
     }
@@ -230,9 +230,9 @@ export class imba_lycan_howl extends BaseAbility_Plus {
             this.ToggleAutoCast();
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_if_enemy(this)
     }
@@ -631,7 +631,7 @@ export class imba_lycan_shapeshift extends BaseAbility_Plus {
         return super.GetCooldown(level);
     }
     GetManaCost(level: number): number {
-        return 100;
+        return 800;
     }
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_if_enemy(this)

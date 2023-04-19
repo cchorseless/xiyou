@@ -427,9 +427,9 @@ export class imba_pudge_meat_hook extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_pudge_5"), "modifier_special_bonus_imba_pudge_5", {});
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.POSITION_if_enemy(this)
     }
@@ -817,9 +817,9 @@ export class imba_pudge_rot extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_pudge_9"), "modifier_special_bonus_imba_pudge_9", {});
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         let caster = this.GetCasterPlus();
         let range = this.GetCastRangePlus();
@@ -1170,9 +1170,9 @@ export class imba_pudge_dismember extends BaseAbility_Plus {
             ParticleManager.ReleaseParticleIndex(this.pfx);
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.TARGET_if_enemy(this)
     }

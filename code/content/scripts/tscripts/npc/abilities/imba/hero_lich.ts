@@ -400,9 +400,9 @@ export class imba_lich_frost_nova extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_lich_11"), "modifier_special_bonus_imba_lich_11", {});
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.TARGET_if_enemy(this);;
     }
@@ -549,9 +549,9 @@ export class imba_lich_frost_armor extends BaseAbility_Plus {
             duration: armor_duration
         });
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.TARGET_if_friend(this, null, (unit) => {
             return !unit.HasModifier("modifier_imba_frost_armor_buff")
@@ -1024,9 +1024,9 @@ export class imba_lich_dark_ritual extends BaseAbility_Plus {
             }
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.TARGET_if_enemy(this)
     }
@@ -1334,7 +1334,7 @@ export class imba_lich_chain_frost extends BaseAbility_Plus {
         IncreaseStacksColdFront(caster, target, cold_front_stacks);
     }
     GetManaCost(level: number): number {
-        return 100;
+        return 800;
     }
     AutoSpellSelf() {
         return AI_ability.TARGET_if_enemy(this)
@@ -1453,9 +1453,9 @@ export class imba_lich_frost_shield extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_special_bonus_imba_lich_9", {});
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.TARGET_if_friend(this, null, (unit) => {
             return !unit.HasModifier("modifier_imba_lich_frost_shield")
@@ -1757,9 +1757,9 @@ export class imba_lich_sinister_gaze extends BaseAbility_Plus {
             }
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.TARGET_if_enemy(this)
     }

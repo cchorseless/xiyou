@@ -11,6 +11,8 @@ export class BuildingEntityRoot extends BattleUnitEntityRoot {
     GetHeroUnit() {
         return this.GetPlayer().TCharacter!.HeroManageComp!.GetHeroUnit(this.ConfigID);
     }
+
+
 }
 declare global {
     type IBuildingEntityRoot = BuildingEntityRoot;

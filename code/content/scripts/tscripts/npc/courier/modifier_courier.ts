@@ -1,4 +1,5 @@
 import { KVHelper } from "../../helper/KVHelper";
+import { NetTablesHelper } from "../../helper/NetTablesHelper";
 import { BaseModifier_Plus, registerProp } from "../entityPlus/BaseModifier_Plus";
 import { registerModifier } from "../entityPlus/Base_Plus";
 
@@ -43,10 +44,12 @@ export class modifier_courier extends BaseModifier_Plus {
     addAbilityName: string;
     zOffset: number = 1;
     BeCreated(params: IModifierTable) {
-
         if (IsServer()) {
             let sCourierName = params.courier_name
             this.sCourierName = sCourierName
+            NetTablesHelper.SetDotaEntityData(this.GetParentPlus().GetEntityIndex(), {
+                CourierName: sCourierName,
+            }, "CourierName")
             this.fModelScale = KVHelper.CourierUnits.GetCourierModelScale(sCourierName)
             this.model = KVHelper.CourierUnits.GetCourierModel(sCourierName)
             this.iSkin = KVHelper.CourierUnits.GetCourierSkin(sCourierName)
@@ -54,12 +57,9 @@ export class modifier_courier extends BaseModifier_Plus {
             this.addAbilityName = KVHelper.CourierUnits.GetCourierAbility(sCourierName)
             this.zOffset = KVHelper.CourierUnits.GetCourierVisualZDelta(sCourierName);
             this.StartIntervalThink(0);
-            let parent = this.GetParentPlus() as IBaseNpc_Hero_Plus;
-            parent.GetBonusManaRegen();
         }
     }
     BeDestroy() {
-
         if (IsServer()) {
             let hParent = this.GetParentPlus()
             hParent.SetSkin(0);

@@ -131,20 +131,28 @@ export class AbilityManagerComponent extends ET.Component implements IRoundState
         root.Dispose();
     }
 
-    levelUpAllAbility() {
+    /**
+     * 设置所有技能等级
+     * @param istar 
+     */
+    setAllAbilityLevel(istar: number) {
         let battleunit = this.GetDomain<IBaseNpc_Plus>().ETRoot.As<IBattleUnitEntityRoot>();
         this.allAbilityRoot.forEach(str => {
-            let ability = battleunit.GetDomainChild<IAbilityEntityRoot>(str);
-            ability.GetDomain<IBaseAbility_Plus>().UpgradeAbility(true);
-        })
-    }
-
-
-    setAllAbilityLevel(level: number) {
-        let battleunit = this.GetDomain<IBaseNpc_Plus>().ETRoot.As<IBattleUnitEntityRoot>();
-        this.allAbilityRoot.forEach(str => {
-            let ability = battleunit.GetDomainChild<IAbilityEntityRoot>(str);
-            ability.GetDomain<IBaseAbility_Plus>().SetLevel(level);
+            let abilityroot = battleunit.GetDomainChild<IAbilityEntityRoot>(str);
+            let ability = abilityroot.GetDomain<IBaseAbility_Plus>();
+            if (abilityroot.CheckCanActivate()) {
+                ability.SetActivated(true);
+                let requiredStar = abilityroot.GetRequiredStar();
+                if (requiredStar > 0) {
+                    ability.SetLevel(istar - requiredStar + 1);
+                }
+                else {
+                    ability.SetLevel(math.min(istar, 4));
+                }
+            }
+            else {
+                ability.SetActivated(false);
+            }
         })
     }
 

@@ -19,9 +19,9 @@ export class imba_chaos_knight_chaos_bolt extends BaseAbility_Plus {
     IsHiddenWhenStolen(): boolean {
         return false;
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     AutoSpellSelf() {
         return AI_ability.TARGET_if_enemy(this);
@@ -236,9 +236,9 @@ export class imba_chaos_knight_reality_rift extends BaseAbility_Plus {
         }
     }
 
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     AutoSpellSelf() {
         return AI_ability.TARGET_if_enemy(this);
@@ -396,7 +396,7 @@ export class modifier_imba_chaos_knight_chaos_strike extends BaseModifier_Plus {
 @registerAbility()
 export class imba_chaos_knight_phantasm extends BaseAbility_Plus {
     GetManaCost(level: number): number {
-        return 100;
+        return 800;
     }
 
     AutoSpellSelf() {

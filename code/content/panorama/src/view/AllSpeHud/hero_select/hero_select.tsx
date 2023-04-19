@@ -94,6 +94,7 @@ export class CCHero_Select extends CCPanel<NodePropsData> {
                                         className={CSSHelper.ClassMaker("PlayerCourierCard", { "Selected": sCourierIDInUse == sCourierName })}
                                         sCourierName={sCourierName}
                                         allowrotation={false}
+                                        showability={true}
                                         onactivate={p => {
                                             GGameScene.GameServiceSystem.SelectCourier(sCourierName);
                                             p.ScrollParentToMakePanelFit(3, false);

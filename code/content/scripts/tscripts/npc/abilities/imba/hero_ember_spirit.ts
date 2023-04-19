@@ -585,9 +585,9 @@ export class imba_ember_spirit_searing_chains extends BaseAbility_Plus {
             }
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_if_enemy(this);
@@ -695,9 +695,9 @@ export class imba_ember_spirit_sleight_of_fist extends BaseAbility_Plus {
             }
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     AutoSpellSelf() {
         return AI_ability.POSITION_if_enemy(this);
@@ -748,9 +748,9 @@ export class imba_ember_spirit_flame_guard extends BaseAbility_Plus {
             });
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_cast(this);
     }

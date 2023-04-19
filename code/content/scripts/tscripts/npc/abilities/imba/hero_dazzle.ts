@@ -42,9 +42,9 @@ export class imba_dazzle_poison_touch extends BaseAbility_Plus {
             duration: this.GetSpecialValueFor("set_in_time") * (1 - target.GetStatusResistance())
         });
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     AutoSpellSelf() {
         return AI_ability.TARGET_if_enemy(this);
@@ -331,9 +331,9 @@ export class imba_dazzle_poison_touch_707 extends BaseAbility_Plus {
             });
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     AutoSpellSelf() {
         return AI_ability.TARGET_if_enemy(this);
@@ -461,9 +461,9 @@ export class imba_dazzle_shallow_grave extends BaseAbility_Plus {
             return "modifier_imba_dazzle_nothl_protection";
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     AutoSpellSelf() {
         return AI_ability.TARGET_if_friend(this, null, (unit) => { return unit.GetHealthLosePect() > 80 });
@@ -1320,9 +1320,9 @@ export class imba_dazzle_shadow_wave extends BaseAbility_Plus {
     SetDelayedWaveData(location: number, data: any) {
         this.talentWaveDelayed[location] = data;
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     AutoSpellSelf() {
         return AI_ability.TARGET_if_friend(this, null, (unit) => { return unit.GetHealthLosePect() > 10 });

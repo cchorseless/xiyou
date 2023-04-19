@@ -45,9 +45,9 @@ export class imba_riki_smoke_screen extends BaseAbility_Plus {
             });
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.POSITION_most_enemy(this);
     }
@@ -819,9 +819,9 @@ export class imba_riki_blink_strike extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_riki_blink_strike_cast_range"), "modifier_special_bonus_imba_riki_blink_strike_cast_range", {});
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf(): boolean {
         return AI_ability.TARGET_if_enemy(this);
     }
@@ -1623,9 +1623,9 @@ export class imba_riki_tricks_of_the_trade extends BaseAbility_Plus {
             this.target = undefined;
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_if_enemy(this);
     }

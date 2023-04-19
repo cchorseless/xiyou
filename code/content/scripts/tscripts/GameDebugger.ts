@@ -168,6 +168,13 @@ export class GameDebugger extends SingletonClass {
             if (!player) return;
             player.PlayerHttpComp().DebugStopPing = GToBoolean(e.data);
         }));
+        EventHelper.addProtocolEvent(GameProtocol.Protocol.req_DebugAddGold, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
+            let player = GGameScene.GetPlayer(e.PlayerID);
+            if (!player) return;
+            player.PlayerDataComp().ModifyGold(100000);
+            player.PlayerDataComp().ModifyWood(50000);
+            player.PlayerDataComp().ModifySoulCrystal(10000);
+        }));
         EventHelper.addProtocolEvent(GameProtocol.Protocol.req_DebugWTF, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
             if (GToBoolean(e.data)) {
                 SendToConsole("dota_ability_debug 1")

@@ -8,6 +8,7 @@ import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCDrawCardBottomItem } from "./CCDrawCardBottomItem";
 
 import "./CCDrawCardPanel.less";
+import { CCDrawCardWantItem } from "./CCDrawCardWantItem";
 interface ICCDrawCardPanel {
     cards: string[];
 }
@@ -21,7 +22,7 @@ export class CCDrawCardPanel extends CCPanel<ICCDrawCardPanel> {
         })
     }
 
-    async SelectCard(itemname: string, index: number, b2Public: number = 0) {
+    async SelectCard(itemname: string, index: number, b2Public: 0 | 1 = 0) {
         let r = await GGameScene.Local.DrawComp.SelectCard(index, itemname, b2Public);
         if (r) {
             let KV_DATA = KVHelper.KVData();
@@ -41,32 +42,45 @@ export class CCDrawCardPanel extends CCPanel<ICCDrawCardPanel> {
 
 
     render() {
-        return (
-            this.__root___isValid &&
-            <Panel ref={this.__root__} id="CC_DrawCardPanel" hittest={false} {...this.initRootAttrs()}>
-                <CCPanel id="DrawBgImg" hittest={false} />
-                <CCIconButton marginRight="0px" icon={<CCIcon_XClose />} onactivate={() => { this.hide() }} />
-                <CCPanel id="DrawBgBox" hittest={false}>
-                    {
-                        this.props.cards.map((card, index) => {
-                            return (
-                                <CCPanel id="DrawCardGroup" key={index + ""} opacity={this.GetState<string>("CardGroup" + index)} >
-                                    <CCDOTAScenePanel className="DrawCardSceneBox" unit={card.replace("building", "npc_dota")} allowrotation={false} rotateonmousemove={false} onactivate={
-                                        () => {
-                                            this.SelectCard(card, index);
-                                        }} />
-                                    <CCDrawCardBottomItem unitname={card} onShare={() => {
+        return (<Panel ref={this.__root__} id="CC_DrawCardPanel" hittest={false} {...this.initRootAttrs()}>
+            <CCPanel id="DrawBgImg" hittest={false} />
+            <CCIconButton marginRight="0px" icon={<CCIcon_XClose />} onactivate={() => { this.hide() }} />
+            <CCPanel id="DrawBgBox" hittest={false}>
+                {
+                    this.props.cards.map((card, index) => {
+                        let playerid = GGameScene.Local.BelongPlayerid;
+                        let showlight = GBuildingEntityRoot.GetEntityByConfig(playerid, card) != null;
+                        return (
+                            <CCPanel id="DrawCardGroup" key={index + ""} opacity={this.GetState<string>("CardGroup" + index)} >
+                                <CCDOTAScenePanel className="DrawCardSceneBox"
+                                    unit={card.replace("building", "npc_dota")}
+                                    allowrotation={false}
+                                    rotateonmousemove={false}
+                                    // map="maps/scenes/rank_divine_ambient.vmap"
+                                    showlight={showlight}
+                                    // particleonly={true}
+                                    // renderdeferred={false}
+                                    onactivate={() => { this.SelectCard(card, index) }} />
+                                <CCDrawCardBottomItem
+                                    unitname={card}
+                                    drawIndex={index}
+                                    onShare={() => {
                                         this.SelectCard(card, index, 1);
-                                    }} onWanted={() => {
-
-                                    }} />
-                                </CCPanel>
-                            )
-                        })
-                    }
-                </CCPanel>
-
-            </Panel>
+                                    }}
+                                    onWanted={() => {
+                                        GGameScene.Local.DrawComp.WantedChess(card, true);
+                                    }}
+                                    onLocked={(block) => {
+                                        GGameScene.Local.DrawComp.LockChess(index, card, block);
+                                    }}
+                                />
+                            </CCPanel>
+                        )
+                    })
+                }
+            </CCPanel>
+            <CCDrawCardWantItem />
+        </Panel>
         )
     }
 }

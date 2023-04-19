@@ -126,9 +126,9 @@ export class imba_phantom_assassin_stifling_dagger extends BaseAbility_Plus {
     GetCastRange(p_0: Vector, p_1: CDOTA_BaseNPC | undefined,): number {
         return this.GetSpecialValueFor("cast_range");
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.TARGET_if_enemy(this)
     }
@@ -346,9 +346,9 @@ export class imba_phantom_assassin_phantom_strike extends BaseAbility_Plus {
             this.GetCasterPlus().AttackOnce(hTarget, true, true, true, true, false, false, false);
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.TARGET_if_enemy(this)
     }
@@ -445,9 +445,9 @@ export class imba_phantom_assassin_blur extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_phantom_assassin_10"), "modifier_special_bonus_imba_phantom_assassin_10", {});
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_if_enemy(this)
     }

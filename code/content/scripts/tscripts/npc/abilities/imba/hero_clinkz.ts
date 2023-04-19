@@ -109,9 +109,9 @@ export class imba_clinkz_strafe extends BaseAbility_Plus {
             });
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_cast(this);
@@ -1206,7 +1206,7 @@ export class imba_clinkz_death_pact extends BaseAbility_Plus {
         }
     }
     GetManaCost(level: number): number {
-        return 100;
+        return 800;
     }
 
     AutoSpellSelf() {

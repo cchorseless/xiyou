@@ -84,9 +84,9 @@ export class imba_medusa_split_shot extends BaseAbility_Plus {
             });
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         if (!this.GetToggleState()) {
             this.ToggleAbility();
@@ -498,9 +498,9 @@ export class imba_medusa_mystic_snake extends BaseAbility_Plus {
         }
         ProjectileManager.CreateTrackingProjectile(snake);
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
 
         return AI_ability.TARGET_if_enemy(this);
@@ -646,9 +646,9 @@ export class imba_medusa_mana_shield extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_medusa_bonus_mana"), "modifier_special_bonus_imba_medusa_bonus_mana", {});
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         if (!this.GetToggleState()) {
             this.ToggleAbility();
@@ -750,7 +750,7 @@ export class imba_medusa_stone_gaze extends BaseAbility_Plus {
         });
     }
     GetManaCost(level: number): number {
-        return 100;
+        return 800;
     }
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_cast(this)

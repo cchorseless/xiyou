@@ -14,7 +14,9 @@ export class DrawComponent extends ET.Component {
         }
     }
     tLastCards: string[];
-
+    tWashCards: string[] = [];
+    /**锁定详情 */
+    tLockChess: { [k: string]: string } = {}
     startListen() {
         // 监听服务器数据推送
         NetHelper.ListenOnLua(DrawConfig.EProtocol.DrawCardResult,
@@ -26,9 +28,17 @@ export class DrawComponent extends ET.Component {
                 }
             }));
     }
-
-    async SelectCard(index: number, sTowerName: string, b2Public: number = 0) {
-        let cbmsg = await NetHelper.SendToLuaAsync<DrawConfig.I.ICardSelected>(DrawConfig.EProtocol.CardSelected, {
+    static IsCardWanted(sTowerName: string) {
+        let AllEntity = DrawComponent.GetAllInstance();
+        for (let r of AllEntity) {
+            if (r.tWashCards.includes(sTowerName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    async SelectCard(index: number, sTowerName: string, b2Public: 0 | 1 = 0) {
+        let cbmsg = await NetHelper.SendToLuaAsync<IDrawConfig.ICardSelected>(DrawConfig.EProtocol.CardSelected, {
             index: index,
             itemName: sTowerName,
             b2Public: b2Public,
@@ -38,4 +48,39 @@ export class DrawComponent extends ET.Component {
         }
         return cbmsg.state!;
     }
+    WantedChess(itemname: string, isadd: boolean) {
+        if (isadd) {
+            if (this.tWashCards.includes(itemname)) {
+                return
+            }
+        }
+        NetHelper.SendToLua(DrawConfig.EProtocol.Add2WishList, {
+            itemName: itemname,
+            isadd: isadd ? 1 : 0,
+        })
+    }
+    LockChess(index: number, itemname: string, block: boolean) {
+        if (block) {
+            this.tLockChess[index + ""] = itemname;
+        }
+        else {
+            delete this.tLockChess[index + ""];
+        }
+        NetHelper.SendToLua(DrawConfig.EProtocol.LockSelectedCard, {
+            index: index,
+            itemName: itemname,
+            block: block ? 1 : 0,
+        })
+    }
+
+}
+
+
+
+declare global {
+    var GDrawComponent: typeof DrawComponent;
+}
+
+if (_G.GDrawComponent == undefined) {
+    _G.GDrawComponent = DrawComponent;
 }

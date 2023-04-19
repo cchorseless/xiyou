@@ -113,9 +113,9 @@ export class imba_earth_spirit_stone_caller extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_earth_spirit_4"), "modifier_special_bonus_imba_earth_spirit_4", {});
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.POSITION_if_enemy(this);
     }
@@ -614,9 +614,9 @@ export class imba_earth_spirit_boulder_smash extends BaseAbility_Plus {
         return false;
     }
 
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.TARGET_if_enemy(this);
     }
@@ -864,9 +864,9 @@ export class imba_earth_spirit_rolling_boulder extends BaseAbility_Plus {
         }
     }
 
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.POSITION_if_enemy(this);
     }
@@ -1181,9 +1181,9 @@ export class imba_earth_spirit_geomagnetic_grip extends BaseAbility_Plus {
         }
         return false;
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     AutoSpellSelf() {
         return AI_ability.TARGET_if_friend(this, null, (unit) => { return unit != this.GetCasterPlus() });
@@ -1407,7 +1407,7 @@ export class imba_earth_spirit_magnetize extends BaseAbility_Plus {
         }
     }
     GetManaCost(level: number): number {
-        return 100;
+        return 800;
     }
 
     AutoSpellSelf() {

@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -30,9 +30,9 @@ export class imba_oracle_fortunes_end extends BaseAbility_Plus {
         }
     }
 
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.TARGET_if_enemy(this)
     }
@@ -339,9 +339,9 @@ export class imba_oracle_fates_edict extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_oracle_fates_edict_cooldown"), "modifier_special_bonus_imba_oracle_fates_edict_cooldown", {});
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         if (RollPercentage(50)) {
             return AI_ability.TARGET_if_enemy(this)
@@ -592,9 +592,9 @@ export class imba_oracle_purifying_flames extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_oracle_purifying_flames_cooldown"), "modifier_special_bonus_imba_oracle_purifying_flames_cooldown", {});
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         if (RollPercentage(50)) {
             return AI_ability.TARGET_if_enemy(this)
@@ -843,7 +843,7 @@ export class imba_oracle_false_promise extends BaseAbility_Plus {
         }
     }
     GetManaCost(level: number): number {
-        return 100;
+        return 800;
     }
     AutoSpellSelf() {
         return AI_ability.TARGET_if_friend(this, null, (u) => u.GetHealthLosePect() > 80)

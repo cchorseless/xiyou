@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -119,9 +119,9 @@ export class imba_omniknight_purification extends BaseAbility_Plus {
             }
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.TARGET_if_friend(this, null, (u) => { return u.GetHealthLosePect() > 10 })
     }
@@ -352,9 +352,9 @@ export class imba_omniknight_repel extends BaseAbility_Plus {
         }
     }
 
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.TARGET_if_friend(this, null, (u) => { return u.HasModifier("modifier_imba_repel") == false })
     }
@@ -772,7 +772,7 @@ export class imba_omniknight_guardian_angel extends BaseAbility_Plus {
         }
     }
     GetManaCost(level: number): number {
-        return 100;
+        return 800;
     }
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_cast(this)

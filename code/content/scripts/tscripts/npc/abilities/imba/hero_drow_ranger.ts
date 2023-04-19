@@ -31,9 +31,9 @@ export class imba_drow_ranger_frost_arrows extends BaseAbility_Plus {
             ability.RefundManaCost();
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     AutoSpellSelf() {
         return AI_ability.TARGET_if_enemy(this);
@@ -442,9 +442,9 @@ export class imba_drow_ranger_frost_arrows_723 extends BaseOrbAbility_Plus {
     OnOrbRecordDestroy() {
         this.GetCasterPlus().RemoveModifierByName("modifier_imba_drow_ranger_frost_arrows_723_bonus_damage");
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     AutoSpellSelf() {
         return AI_ability.TARGET_if_enemy(this);
@@ -707,9 +707,9 @@ export class imba_drow_ranger_gust extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_drow_ranger_9"), "modifier_special_bonus_imba_drow_ranger_9", {});
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     AutoSpellSelf() {
         return AI_ability.POSITION_if_enemy(this, 1000);
@@ -1104,9 +1104,9 @@ export class imba_drow_ranger_multishot extends BaseAbility_Plus {
             return true;
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     AutoSpellSelf() {
         return AI_ability.POSITION_if_enemy(this, 1000);

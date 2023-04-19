@@ -112,9 +112,9 @@ export class imba_pugna_nether_blast extends BaseAbility_Plus {
         });
     }
 
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.POSITION_if_enemy(this)
     }
@@ -191,9 +191,9 @@ export class imba_pugna_decrepify extends BaseAbility_Plus {
             duration: duration
         });
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.TARGET_if_enemy(this)
     }
@@ -403,9 +403,9 @@ export class imba_pugna_nether_ward extends BaseAbility_Plus {
             aura_ability.SetLevel(ability_level);
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.POSITION_if_friend(this)
     }
@@ -978,7 +978,7 @@ export class imba_pugna_life_drain extends BaseAbility_Plus {
         target.AddNewModifier(caster, ability, modifier_lifedrain, {});
     }
     GetManaCost(level: number): number {
-        return 100;
+        return 800;
     }
     AutoSpellSelf() {
         return AI_ability.TARGET_if_enemy(this)

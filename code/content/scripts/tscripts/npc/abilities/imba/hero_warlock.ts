@@ -65,9 +65,9 @@ export class imba_warlock_fatal_bonds extends BaseAbility_Plus {
             modifiers.bond_table = bond_table;
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.TARGET_if_enemy(this);
     }
@@ -271,9 +271,9 @@ export class imba_warlock_shadow_word extends BaseAbility_Plus {
             StopSoundOn(sound_target, caster);
         });
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         if (RollPercentage(50)) {
             return AI_ability.TARGET_if_enemy(this);
@@ -470,9 +470,9 @@ export class imba_warlock_upheaval extends BaseAbility_Plus {
             });
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.POSITION_if_enemy(this);
     }
@@ -756,7 +756,7 @@ export class imba_warlock_rain_of_chaos extends BaseAbility_Plus {
         }
     }
     GetManaCost(level: number): number {
-        return 100;
+        return 800;
     }
     AutoSpellSelf() {
         return AI_ability.POSITION_most_enemy(this);

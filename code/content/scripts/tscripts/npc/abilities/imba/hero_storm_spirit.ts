@@ -45,9 +45,9 @@ export class imba_storm_spirit_static_remnant extends BaseAbility_Plus {
     IsHiddenWhenStolen(): boolean {
         return false;
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_if_enemy(this);
     }
@@ -242,9 +242,9 @@ export class imba_storm_spirit_electric_vortex extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_storm_spirit_2"), "modifier_special_bonus_imba_storm_spirit_2", {});
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.TARGET_if_enemy(this);
     }
@@ -781,7 +781,7 @@ export class imba_storm_spirit_ball_lightning extends BaseAbility_Plus {
         return false;
     }
     GetManaCost(level: number): number {
-        return 100;
+        return 800;
     }
     AutoSpellSelf() {
         return AI_ability.POSITION_if_enemy(this, 1300, (u, index, count) => {

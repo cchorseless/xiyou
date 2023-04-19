@@ -140,9 +140,9 @@ export class imba_snapfire_scatterblast extends BaseAbility_Plus {
         }
         EmitSoundOn(sound_target, target);
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.POSITION_if_enemy(this)
     }
@@ -357,9 +357,9 @@ export class imba_snapfire_firesnap_cookie extends BaseAbility_Plus {
         ParticleManager.ReleaseParticleIndex(effect_cast);
         EmitSoundOn(sound_location, target);
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.TARGET_if_friend(this, null, (u) => u != this.GetCasterPlus());
     }
@@ -373,9 +373,9 @@ export class imba_snapfire_lil_shredder extends BaseAbility_Plus {
             duration: duration
         });
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_cast(this);
     }
@@ -709,7 +709,7 @@ export class imba_snapfire_mortimer_kisses extends BaseAbility_Plus {
         EmitSoundOnLocationWithCaster(loc, sound_location, this.GetCasterPlus());
     }
     GetManaCost(level: number): number {
-        return 100;
+        return 800;
     }
     AutoSpellSelf() {
         return AI_ability.POSITION_if_enemy(this);

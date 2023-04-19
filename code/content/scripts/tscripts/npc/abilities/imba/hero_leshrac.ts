@@ -30,9 +30,9 @@ export class imba_leshrac_split_earth extends BaseAbility_Plus {
         }
         return radius;
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.POSITION_most_enemy(this)
     }
@@ -336,9 +336,9 @@ export class imba_leshrac_diabolic_edict extends BaseAbility_Plus {
             });
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_if_enemy(this)
     }
@@ -693,9 +693,9 @@ export class imba_leshrac_lightning_storm extends BaseAbility_Plus {
             }
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.TARGET_if_enemy(this)
     }
@@ -1085,7 +1085,7 @@ export class imba_leshrac_pulse_nova extends BaseAbility_Plus {
         }
     }
     GetManaCost(level: number): number {
-        return 100;
+        return 800;
     }
 
     OnSpellStart(): void {
@@ -1531,9 +1531,9 @@ export class imba_leshrac_tormented_soul_form extends BaseAbility_Plus {
             }
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_cast(this)
     }
@@ -1606,7 +1606,7 @@ export class modifier_imba_tormented_soul_form extends BaseModifier_Plus {
         }
         return this.max_hp_reduction * (-1);
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.EXTRA_MANA_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MANA_BONUS)
     CC_GetModifierExtraManaBonus(): number {
         if (!IsServer()) {
             return;

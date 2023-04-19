@@ -81,7 +81,7 @@ export class CCDebugPanel extends CCPanel<ICCDebugPanel> {
                         <CCDebugTool_DemoButton eventName="AddSelectionSectAbility" localtext="添加神器选择" />
                     </CCDebugTool_Category>
                     <CCDebugTool_Category title="英雄" >
-                        <CCDebugTool_DemoButton eventName="RefreshButtonPressed" localtext="刷新状态" />
+                        <CCDebugTool_DemoButton eventName={GameProtocol.Protocol.req_DebugAddGold} localtext="添加金币" />
                         <CCDebugTool_DemoToggle eventName={GameProtocol.Protocol.req_DebugWTF} localtext="无限技能" selected={free_spells} />
                         <CCDebugTool_DemoTextEntry eventName="LevelUpButtonPressed" localtext="升级" />
                         <CCDebugTool_DemoSelectionButton eventName="ChangeHeroButtonPressed" localtext="更换英雄" />

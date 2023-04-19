@@ -1,9 +1,10 @@
 import React from 'react';
 
+import { UnitHelper } from '../../helper/DotaEntityHelper';
 import { CCDividerHeader } from '../AllUIElement/CCDivider/CCDividerHeader';
-import { CCDOTAScenePanel } from '../AllUIElement/CCDOTAScenePanel/CCDOTAScenePanel';
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCPanelBG } from '../AllUIElement/CCPanel/CCPanelPart';
+import { CCCourierCard } from '../Courier/CCCourierCard';
 import "./CCPlayerInfoDialog.less";
 
 interface ICCPlayerInfoDialog extends NodePropsData {
@@ -16,17 +17,21 @@ export class CCPlayerInfoDialog extends CCPanel<ICCPlayerInfoDialog> {
     render() {
         const heroData = this.GetState<any>("heroData");
         // const CourierData = this.GetStateEntity(GGameScene.GetPlayer(this.props.Playerid)?.CourierDataComp!);
-        let entityid = Players.GetPlayerHeroEntityIndex(this.props.Playerid as PlayerID)
-        const playerData = { heroName: Entities.GetUnitName(entityid) }
+        let entityid = Players.GetPlayerHeroEntityIndex(this.props.Playerid as PlayerID);
+        if (this.props.isFaker) {
+            entityid = Players.GetLocalPlayerPortraitUnit()
+        }
+        const playerData = { heroName: UnitHelper.GetCourierName(entityid) }
+        GLogHelper.print(playerData)
         return (
-            this.__root___isValid &&
             <Panel ref={this.__root__} id="CC_PlayerInfoDialog" hittest={false} {...this.initRootAttrs()}>
                 <CCPanelBG width="600px" type="ToolTip" flowChildren="down">
                     <CCDividerHeader flowChildren="right">
                         <Label text="英雄信息" />
                     </CCDividerHeader>
                     <CCPanel className="AbilityRow" flowChildren="right">
-                        <CCDOTAScenePanel key={playerData?.heroName} unit={playerData?.heroName} drawbackground={false} particleonly={false} />
+                        <CCCourierCard sCourierName={playerData.heroName} allowrotation={false} showmodel={true} />
+                        {/* <CCPortraitV1 key={playerData.heroName} unitname={playerData.heroName} /> */}
                         <CCPanel flowChildren="down" >
                             <Label className="AttributeName" text={"等级：" + (1)} />
                             <Label className="AttributeDescription" text="每获得一个流派星级，等级提升1级，生命提升100点。" />

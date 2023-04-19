@@ -55,9 +55,9 @@ export class imba_juggernaut_blade_fury extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_juggernaut_blade_fury_movement_speed"), "modifier_special_bonus_imba_juggernaut_blade_fury_movement_speed", {});
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_if_enemy(this)
     }
@@ -470,9 +470,9 @@ export class imba_juggernaut_healing_ward extends BaseAbility_Plus {
             healing_ward.MoveToNPC(caster);
         });
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.POSITION_if_friend(this)
     }
@@ -1448,7 +1448,7 @@ export class imba_juggernaut_omni_slash extends BaseAbility_Plus {
     }
 
     GetManaCost(level: number): number {
-        return 100;
+        return 800;
     }
     AutoSpellSelf() {
         return AI_ability.TARGET_if_enemy(this)

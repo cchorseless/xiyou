@@ -22,8 +22,25 @@ export class AbilityEntityRoot extends BaseEntityRoot {
         (this.BelongPlayerid as any) = ability.GetOwnerPlus().GetPlayerID();
         (this.ConfigID as any) = ability.GetAbilityName();
         (this.EntityId as any) = ability.GetEntityIndex();
-        ability.SetActivated(true);
+        if (this.CheckCanActivate()) {
+            ability.SetActivated(true);
+        }
+        else {
+            ability.SetActivated(false);
+        }
         this.regSelfToM()
+    }
+
+    GetRequiredStar() {
+        let needstar = KVHelper.GetAbilityData(this.ConfigID, "RequiredStar", true) as number;
+        return needstar;
+    }
+
+    CheckCanActivate() {
+        let ability = this.GetDomain<IBaseAbility_Plus>();
+        let needstar = this.GetRequiredStar();
+        let r = GToBoolean(needstar == 0 || needstar > 0 && ability.GetOwnerPlus().GetStar() >= needstar);
+        return r;
     }
 
     private regSelfToM() {

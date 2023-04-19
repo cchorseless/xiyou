@@ -1,0 +1,32 @@
+.CCDrawCardWantItem {
+    flow-children: right;
+    horizontal-align: center;
+
+    .CardWantSlotItem {
+        width: 55px;
+        height: 40px;
+        margin: 4px;
+
+        transition-property: border, brightness;
+        transition-duration: 0.15s;
+        transition-timing-function: ease-in-out;
+
+        background-image: url("file://{images}/custom_game/eom_design/ccinventory/tui6/item_bg.png");
+        background-size: 100%;
+        background-repeat: no-repeat;
+
+        &.AnimationShine {
+            border: 2px solid #FFFFFF;
+            brightness: 2;
+            border-radius: 4px;
+        }
+
+        #BackPackSlotBorder {
+            width: 100%;
+            height: 100%;
+            background-image: url("file://{images}/custom_game/eom_design/ccinventory/tui6/item_border.png");
+            background-size: 100%;
+            background-repeat: no-repeat;
+        }
+    }
+}

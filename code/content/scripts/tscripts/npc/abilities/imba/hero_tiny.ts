@@ -739,9 +739,9 @@ export class imba_tiny_avalanche extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_tiny_avalanche_cooldown"), "modifier_special_bonus_imba_tiny_avalanche_cooldown", {});
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.POSITION_if_enemy(this);
     }
@@ -905,9 +905,9 @@ export class imba_tiny_toss extends BaseAbility_Plus {
     GetAOERadius(): number {
         return this.GetSpecialValueFor("radius");
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.POSITION_if_enemy(this, null, null, FindOrder.FIND_FARTHEST);
     }

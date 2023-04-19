@@ -443,9 +443,9 @@ export class imba_kunkka_torrent extends BaseAbility_Plus {
         }
         return range;
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.POSITION_if_enemy(this)
     }
@@ -771,9 +771,9 @@ export class imba_kunkka_tidebringer extends BaseAbility_Plus {
         }
         return cooldown;
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         if (!this.GetAutoCastState()) {
             this.ToggleAutoCast();
@@ -1653,7 +1653,7 @@ export class imba_kunkka_ghostship extends BaseAbility_Plus {
         return false;
     }
     GetManaCost(level: number): number {
-        return 100;
+        return 800;
     }
     AutoSpellSelf() {
         return AI_ability.POSITION_most_enemy(this)

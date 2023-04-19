@@ -90,9 +90,9 @@ export class imba_brewmaster_thunder_clap extends BaseAbility_Plus {
             });
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_if_enemy(this);
@@ -321,9 +321,9 @@ export class imba_brewmaster_cinder_brew extends BaseAbility_Plus {
             this.brew_modifier = undefined;
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     AutoSpellSelf() {
         return AI_ability.POSITION_most_enemy(this);
@@ -456,9 +456,9 @@ export class imba_brewmaster_drunken_brawler extends BaseAbility_Plus {
         }
     }
 
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_cast(this);
@@ -720,7 +720,7 @@ export class imba_brewmaster_primal_split extends BaseAbility_Plus {
         }
     }
     GetManaCost(level: number): number {
-        return 100;
+        return 800;
     }
 
     AutoSpellSelf() {

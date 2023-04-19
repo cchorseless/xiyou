@@ -82,9 +82,9 @@ export class imba_pangolier_swashbuckle extends BaseAbility_Plus {
         modifier_movement_handler.target_point = point;
     }
 
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.POSITION_if_enemy(this)
     }
@@ -539,9 +539,9 @@ export class imba_pangolier_shield_crash extends BaseAbility_Plus {
             }
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_if_enemy(this)
     }
@@ -1289,7 +1289,7 @@ export class imba_pangolier_gyroshell extends BaseAbility_Plus {
     }
 
     GetManaCost(level: number): number {
-        return 100;
+        return 800;
     }
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_cast(this)

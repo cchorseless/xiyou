@@ -79,6 +79,7 @@ export class BattleUnitEntityRoot extends BaseEntityRoot implements IRoundStateC
         this.iStar = n;
         let domain = this.GetDomain<IBaseNpc_Plus>();
         domain.SetStar(n);
+        // domain.GetAbilityByIndex(2).SetActivated(n >= 3);
         this.iScale = this.iScale || domain.GetAbsScale();
         let unitroot = domain.ETRoot.As<IBattleUnitEntityRoot>();
         // 饰品
@@ -95,6 +96,7 @@ export class BattleUnitEntityRoot extends BaseEntityRoot implements IRoundStateC
         }
         // 变大
         domain.SetModelScale(this.iScale * BuildingConfig.MODEL_SCALE[this.iStar - 1]);
+        domain.SetHullRadius(60 * BuildingConfig.MODEL_SCALE[this.iStar - 1])
         // 技能升级
         unitroot.AbilityManagerComp().setAllAbilityLevel(n);
         if (!this.checkCanStarUp() && unitroot.IsBuilding()) {

@@ -404,9 +404,9 @@ export class imba_nevermore_shadowraze_medium extends BaseAbility_Plus {
             caster.RemoveModifierByName(modifier_harvest);
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_if_enemy(this)
     }
@@ -647,9 +647,9 @@ export class imba_nevermore_necromastery extends BaseAbility_Plus {
         let upgrade_response = "nevermore_nev_ability_mastery_01";
         EmitSoundOn(upgrade_response, caster);
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     GetCooldown(level: number): number {
         let cooldown = this.GetCasterPlus().GetTalentValue("special_bonus_imba_nevermore_2", "cooldown");
         return cooldown;
@@ -1357,7 +1357,7 @@ export class imba_nevermore_requiem extends BaseAbility_Plus {
         }
     }
     GetManaCost(level: number): number {
-        return 100;
+        return 800;
     }
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_if_enemy(this)

@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -11,9 +11,9 @@ export class imba_nyx_assassin_impale extends BaseAbility_Plus {
     IsHiddenWhenStolen(): boolean {
         return false;
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.POSITION_if_enemy(this)
     }
@@ -563,9 +563,9 @@ export class imba_nyx_assassin_mana_burn extends BaseAbility_Plus {
         }
         ApplyDamage(damageTable);
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.TARGET_if_enemy(this)
     }
@@ -858,9 +858,9 @@ export class imba_nyx_assassin_spiked_carapace extends BaseAbility_Plus {
             duration: reflect_duration
         });
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_if_enemy(this)
     }
@@ -1077,7 +1077,7 @@ export class imba_nyx_assassin_vendetta extends BaseAbility_Plus {
         });
     }
     GetManaCost(level: number): number {
-        return 100;
+        return 800;
     }
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_cast(this)

@@ -36,9 +36,9 @@ export class imba_batrider_sticky_napalm extends BaseAbility_Plus {
         this.napalm_impact_particle = undefined;
         this.enemies = undefined;
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     AutoSpellSelf() {
         return AI_ability.POSITION_most_enemy(this);
@@ -311,9 +311,9 @@ export class imba_batrider_flamebreak extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_unique_batrider_flamebreak_cooldown"), "modifier_special_bonus_imba_unique_batrider_flamebreak_cooldown", {});
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     AutoSpellSelf() {
         return AI_ability.POSITION_most_enemy(this);
@@ -421,9 +421,9 @@ export class imba_batrider_firefly extends BaseAbility_Plus {
         });
     }
 
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_cast(this);
@@ -710,7 +710,7 @@ export class imba_batrider_flaming_lasso extends BaseAbility_Plus {
         });
     }
     GetManaCost(level: number): number {
-        return 100;
+        return 800;
     }
 
     AutoSpellSelf() {

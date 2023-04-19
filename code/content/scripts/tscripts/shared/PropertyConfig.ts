@@ -444,7 +444,7 @@ export module PropertyConfig {
         /**
          * Method Name: `GetModifierExtraManaBonus`
          */
-        EXTRA_MANA_BONUS = modifierfunction.MODIFIER_PROPERTY_EXTRA_MANA_BONUS,
+        // EXTRA_MANA_BONUS = modifierfunction.MODIFIER_PROPERTY_EXTRA_MANA_BONUS,
         /**
          * Method Name: `GetModifierExtraHealthPercentage`
          * 
@@ -453,7 +453,7 @@ export module PropertyConfig {
         /**
          * Method Name: `GetModifierExtraManaPercentage`
          */
-        EXTRA_MANA_PERCENTAGE = modifierfunction.MODIFIER_PROPERTY_EXTRA_MANA_PERCENTAGE,
+        // EXTRA_MANA_PERCENTAGE = modifierfunction.MODIFIER_PROPERTY_EXTRA_MANA_PERCENTAGE,
         /**
          * Method Name: `GetModifierBonusStats_Strength`
          */
@@ -933,7 +933,6 @@ export module PropertyConfig {
         /**最终生命百分比  */
         HEALTH_PERCENTAGE,
         HEALTH_PERCENT_ENEMY,
-
 
         MANA_PERCENTAGE,
         MANA_REGEN_AMPLIFY_PERCENTAGE,

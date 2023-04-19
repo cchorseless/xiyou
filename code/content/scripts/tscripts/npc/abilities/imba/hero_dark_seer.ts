@@ -106,9 +106,9 @@ export class imba_dark_seer_vacuum extends BaseAbility_Plus {
         }
     }
 
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     AutoSpellSelf() {
         return AI_ability.POSITION_most_enemy(this);
@@ -496,9 +496,9 @@ export class imba_dark_seer_ion_shell extends BaseAbility_Plus {
             });
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     AutoSpellSelf() {
         return AI_ability.TARGET_if_friend(this, null, (unit) => { return !unit.HasModifier("modifier_imba_dark_seer_ion_shell") });
@@ -788,9 +788,9 @@ export class imba_dark_seer_surge extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_dark_seer_surge_cast_range"), "modifier_special_bonus_imba_dark_seer_surge_cast_range", {});
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     AutoSpellSelf() {
         return AI_ability.TARGET_if_friend(this);
@@ -926,7 +926,7 @@ export class imba_dark_seer_wall_of_replica extends BaseAbility_Plus {
         }, this.GetCasterPlus().GetAbsOrigin(), this.GetCasterPlus().GetTeamNumber(), false);
     }
     GetManaCost(level: number): number {
-        return 100;
+        return 800;
     }
     AutoSpellSelf() {
         return AI_ability.POSITION_if_enemy(this);

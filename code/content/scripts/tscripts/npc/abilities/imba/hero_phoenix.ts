@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -162,9 +162,9 @@ export class imba_phoenix_icarus_dive extends BaseAbility_Plus {
             ability_handle.SetLevel(1);
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.POSITION_if_enemy(this, null, null, FindOrder.FIND_FARTHEST)
     }
@@ -568,9 +568,9 @@ export class imba_phoenix_fire_spirits extends BaseAbility_Plus {
             }
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_cast(this)
     }
@@ -792,9 +792,9 @@ export class imba_phoenix_launch_fire_spirit extends BaseAbility_Plus {
             ability_handle.SetLevel(this_abilityLevel);
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.POSITION_if_enemy(this)
     }
@@ -1114,9 +1114,9 @@ export class imba_phoenix_sun_ray extends BaseAbility_Plus {
             toggle_move.SetActivated(false);
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.POSITION_if_enemy(this)
     }
@@ -1709,7 +1709,7 @@ export class imba_phoenix_supernova extends BaseAbility_Plus {
         }
     }
     GetManaCost(level: number): number {
-        return 100;
+        return 800;
     }
     AutoSpellSelf() {
         return AI_ability.TARGET_if_friend(this, null, (unit) => {

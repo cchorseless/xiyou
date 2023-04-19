@@ -9,9 +9,9 @@ import { modifier_generic_stunned } from "../../modifier/effect/modifier_generic
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 @registerAbility()
 export class imba_slardar_sprint extends BaseAbility_Plus {
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_if_enemy(this)
     }
@@ -537,9 +537,9 @@ export class imba_slardar_slithereen_crush extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_slardar_6"), "modifier_special_bonus_imba_slardar_6", {});
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_if_enemy(this)
     }
@@ -977,7 +977,7 @@ export class imba_slardar_amplify_damage extends BaseAbility_Plus {
         }
     }
     GetManaCost(level: number): number {
-        return 100;
+        return 800;
     }
     AutoSpellSelf() {
         return AI_ability.TARGET_if_enemy(this)

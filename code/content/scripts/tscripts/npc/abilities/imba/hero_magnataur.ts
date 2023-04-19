@@ -681,9 +681,9 @@ export class imba_magnataur_shockwave extends BaseAbility_Plus {
             ProjectileManager.CreateLinearProjectile(projectile);
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.POSITION_if_enemy(this)
     }
@@ -740,9 +740,9 @@ export class imba_magnataur_empower extends BaseAbility_Plus {
     IsStealable(): boolean {
         return true;
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.TARGET_if_friend(this, null, (unit) => {
             return !unit.HasModifier("modifier_imba_empower");
@@ -1422,9 +1422,9 @@ export class imba_magnataur_skewer extends BaseAbility_Plus {
         }
     }
 
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.POSITION_if_enemy(this, null, null, FindOrder.FIND_FARTHEST)
     }
@@ -1956,7 +1956,7 @@ export class imba_magnataur_reverse_polarity extends BaseAbility_Plus {
         return super.GetCastRange(location, target);
     }
     GetManaCost(level: number): number {
-        return 100;
+        return 800;
     }
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_if_enemy(this)

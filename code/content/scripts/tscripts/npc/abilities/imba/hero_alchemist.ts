@@ -10,9 +10,9 @@ import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_
 
 @registerAbility()
 export class imba_alchemist_acid_spray extends BaseAbility_Plus {
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     GetCooldown(level: number): number {
         return 20;
@@ -388,9 +388,9 @@ export class imba_alchemist_unstable_concoction extends BaseAbility_Plus {
         return cooddown;
     }
 
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     AutoSpellSelf() {
         if (this.IsUnstableConcoction()) {
@@ -1145,7 +1145,7 @@ export class imba_alchemist_chemical_rage extends BaseAbility_Plus {
     }
 
     GetManaCost(level: number): number {
-        return 100;
+        return 800;
     }
 
     AutoSpellSelf() {

@@ -45,9 +45,9 @@ export class imba_slark_dark_pact extends BaseAbility_Plus {
             delay_modifier.AddParticle(start_particle, false, false, -1, false, false);
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_if_enemy(this)
     }
@@ -340,9 +340,9 @@ export class imba_slark_pounce extends BaseAbility_Plus {
             this.UseResources(false, false, true);
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_if_enemy(this)
     }
@@ -913,7 +913,7 @@ export class imba_slark_shadow_dance extends BaseAbility_Plus {
         }
     }
     GetManaCost(level: number): number {
-        return 100;
+        return 800;
     }
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_cast(this)

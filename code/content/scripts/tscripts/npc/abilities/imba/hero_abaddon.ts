@@ -40,10 +40,10 @@ function getOverChannelShieldIncrease(caster: IBaseNpc_Plus) {
 @registerAbility()
 export class imba_abaddon_death_coil extends BaseAbility_Plus {
 
-    GetManaCost(level: number): number {
-        return 0;
-    }
-    AutoSpellSelf() {
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
+    AutoSpellSelf(): boolean {
         return AI_ability.TARGET_if_enemy(this);
     }
 
@@ -301,9 +301,9 @@ export class modifier_imba_mist_coil_mist_ally extends BaseModifier_Plus {
 }
 @registerAbility()
 export class imba_abaddon_aphotic_shield extends BaseAbility_Plus {
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     AutoSpellSelf() {
         let range = this.GetCastRangePlus();
@@ -996,7 +996,7 @@ export class modifier_over_channel_reduction extends BaseModifier_Plus {
 @registerAbility()
 export class imba_abaddon_borrowed_time extends BaseAbility_Plus {
     GetManaCost(level: number): number {
-        return 100;
+        return 800;
     }
     GetCooldown(level: number): number {
         return 30;

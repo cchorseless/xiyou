@@ -103,9 +103,9 @@ export class imba_troll_warlord_berserkers_rage extends BaseAbility_Plus {
             }
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         // if (!this.GetToggleState()) {
         //     this.ToggleAbility();
@@ -492,9 +492,9 @@ export class imba_troll_warlord_whirling_axes_ranged extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_troll_warlord_5"), "modifier_special_bonus_imba_troll_warlord_5", {});
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.POSITION_if_enemy(this)
     }
@@ -656,9 +656,9 @@ export class imba_troll_warlord_whirling_axes_melee extends BaseAbility_Plus {
             enemy.EmitSound("Hero_TrollWarlord.WhirlingAxes.Target");
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_if_enemy(this)
     }
@@ -896,7 +896,7 @@ export class imba_troll_warlord_battle_trance extends BaseAbility_Plus {
         }
     }
     GetManaCost(level: number): number {
-        return 100;
+        return 800;
     }
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_cast(this)

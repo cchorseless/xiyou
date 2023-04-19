@@ -195,9 +195,9 @@ export class imba_witch_doctor_paralyzing_cask extends BaseAbility_Plus {
             return undefined;
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.TARGET_if_enemy(this);
     }
@@ -279,9 +279,9 @@ export class imba_witch_doctor_voodoo_restoration extends BaseAbility_Plus {
             this.GetCasterPlus().RemoveModifierByName("modifier_imba_voodoo_restoration");
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         if (!this.GetToggleState()) {
             this.ToggleAbility();
@@ -509,9 +509,9 @@ export class imba_witch_doctor_maledict extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_witch_doctor_maledict_radius"), "modifier_special_bonus_imba_witch_doctor_maledict_radius", {});
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.POSITION_if_enemy(this)
     }
@@ -883,7 +883,7 @@ export class imba_witch_doctor_death_ward extends BaseAbility_Plus {
         EmitSoundOn("Hero_Jakiro.Attack", originalTarget);
     }
     GetManaCost(level: number): number {
-        return 100;
+        return 800;
     }
     AutoSpellSelf() {
         return AI_ability.POSITION_if_enemy(this)

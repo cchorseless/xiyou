@@ -12,9 +12,9 @@ export class imba_ancient_apparition_cold_feet extends BaseAbility_Plus {
         return 20;
     }
 
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     AutoSpellSelf() {
         return AI_ability.TARGET_if_enemy(this);
@@ -206,9 +206,9 @@ export class imba_ancient_apparition_ice_vortex extends BaseAbility_Plus {
         return 20;
     }
 
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     AutoSpellSelf() {
         let r = AI_ability.POSITION_if_enemy(this);
@@ -446,11 +446,11 @@ export class imba_ancient_apparition_chilling_touch extends BaseOrbAbility_Plus 
     }
 
     GetCooldown(level: number): number {
-        return 0;
+        return 0.3;
     }
 
     GetManaCost(level: number): number {
-        return 1;
+        return 10;
     }
 
     AutoSpellSelf() {
@@ -769,7 +769,7 @@ export class imba_ancient_apparition_ice_blast extends BaseAbility_Plus {
     }
 
     GetManaCost(level: number): number {
-        return 100;
+        return 800;
     }
 
     AutoSpellSelf() {

@@ -132,9 +132,9 @@ export class imba_bristleback_viscous_nasal_goo extends BaseAbility_Plus {
             }
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     AutoSpellSelf() {
         if (this.GetCasterPlus().HasScepter()) {
@@ -274,9 +274,9 @@ export class imba_bristleback_quill_spray extends BaseAbility_Plus {
         }, this.caster.GetAbsOrigin(), this.caster.GetTeamNumber(), false);
         this.caster.EmitSound("Hero_Bristleback.QuillSpray.Cast");
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_if_enemy(this);
@@ -471,9 +471,9 @@ export class imba_bristleback_bristleback extends BaseAbility_Plus {
             this.caster.RemoveModifierByName("modifier_imba_bristleback_bristleback_has");
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     AutoSpellSelf() {
         if (!this.GetToggleState()) {

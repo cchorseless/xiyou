@@ -33,6 +33,13 @@ export class BaseEntityRoot extends ET.EntityRoot {
         }
     }
 
+    static GetEntityByConfig<T extends typeof BaseEntityRoot>(this: T, playerid: PlayerID, configname: string) {
+        let entitys = this.GetGroupInstance(playerid);
+        for (let r of entitys) {
+            if (r.ConfigID == configname)
+                return r;
+        }
+    }
 
     static GetBattleEntity(entityid: string | EntityIndex | number) {
         const instanceID = BaseEntityRoot.AllEntity[entityid + ""];

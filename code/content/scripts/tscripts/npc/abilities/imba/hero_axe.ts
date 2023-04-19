@@ -20,9 +20,9 @@ export class imba_axe_berserkers_call extends BaseAbility_Plus {
         return true;
     }
 
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_if_enemy(this);
@@ -279,9 +279,9 @@ export class modifier_imba_berserkers_call_debuff_cmd extends BaseModifier_Plus 
 
 @registerAbility()
 export class imba_axe_battle_hunger extends BaseAbility_Plus {
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     AutoSpellSelf() {
         return AI_ability.TARGET_if_enemy(this);
@@ -901,7 +901,7 @@ export class imba_axe_culling_blade extends BaseAbility_Plus {
     }
 
     GetManaCost(level: number): number {
-        return 100;
+        return 800;
     }
 
     AutoSpellSelf() {

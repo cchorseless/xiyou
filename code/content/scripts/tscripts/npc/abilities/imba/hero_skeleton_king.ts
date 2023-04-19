@@ -186,9 +186,9 @@ export class imba_skeleton_king_hellfire_blast extends BaseAbility_Plus {
             ResolveNPCPositions(target.GetAbsOrigin(), 164);
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.TARGET_if_enemy(this);
     }
@@ -388,9 +388,9 @@ export class imba_skeleton_king_vampiric_aura extends BaseAbility_Plus {
     OnOwnerDied(): void {
         this.toggle_state = this.GetToggleState();
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         if (!this.GetToggleState()) {
             this.ToggleAbility();
@@ -654,9 +654,9 @@ export class imba_skeleton_king_mortal_strike extends BaseAbility_Plus {
         }
         this.caster.EmitSound("Hero_SkeletonKing.MortalStrike.Cast");
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_if_enemy(this)
     }

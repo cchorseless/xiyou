@@ -1,5 +1,6 @@
 import React from "react";
 import { CSSHelper } from "../../../helper/CSSHelper";
+import { UnitHelper } from "../../../helper/DotaEntityHelper";
 import { CCPlayerInfoDialog } from "../../Player/CCPlayerInfoDialog";
 import { CCUnitScepterStatus } from "../../Unit/CCUnitScepterStatus";
 import { CCUnitStatsDialog } from "../../Unit/CCUnitStatsDialog";
@@ -34,8 +35,9 @@ export class CCDacBoard extends CCPanel<ICCDacBoard> {
             return this.defaultRender("CC_DacBoardPanel");
         }
         const isShowTalent = GJSONConfig.BuildingLevelUpConfig.get(Entities.GetUnitName(this.props.CurSelectUnit)) != null;
-        const tips = Entities.IsRealHero(this.props.CurSelectUnit) ?
-            { cls: CCPlayerInfoDialog, posRight: false, props: { Playerid: Entities.GetPlayerOwnerID(this.props.CurSelectUnit) } } : { cls: CCUnitStatsDialog, posRight: false };
+        const tips = (UnitHelper.IsCourier(this.props.CurSelectUnit) || UnitHelper.IsFakerCourier(this.props.CurSelectUnit)) ?
+            { cls: CCPlayerInfoDialog, posRight: false, props: { Playerid: Entities.GetPlayerOwnerID(this.props.CurSelectUnit), isFaker: UnitHelper.IsFakerCourier(this.props.CurSelectUnit) } } :
+            { cls: CCUnitStatsDialog, posRight: false };
         return (
             <Panel ref={this.__root__} id="CC_DacBoardPanel"  {...this.initRootAttrs()} hittest={false}>
                 {this.props.BShowBuffList && <CCBuffList horizontalAlign={"center"} verticalAlign="bottom" marginBottom={"140px"} />}

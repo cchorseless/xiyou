@@ -37,9 +37,9 @@ export class imba_undying_decay extends BaseAbility_Plus {
     GetAOERadius(): number {
         return this.GetSpecialValueFor("radius");
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.POSITION_if_enemy(this);
     }
@@ -499,9 +499,9 @@ export class imba_undying_soul_rip extends BaseAbility_Plus {
             }
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.TARGET_if_friend(this, null, (u) => {
             return u.GetHealthLosePect() > 20;
@@ -741,9 +741,9 @@ export class imba_undying_tombstone extends BaseAbility_Plus {
         }
     }
 
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.POSITION_if_enemy(this);
     }
@@ -1361,7 +1361,7 @@ export class imba_undying_flesh_golem extends BaseAbility_Plus {
         });
     }
     GetManaCost(level: number): number {
-        return 100;
+        return 800;
     }
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_cast(this);

@@ -184,9 +184,9 @@ export class imba_faceless_void_time_walk extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_faceless_void_11"), "modifier_special_bonus_imba_faceless_void_11", {});
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.POSITION_if_enemy(this, null, (unit) => {
             return unit.IsRangedAttacker() || unit.GetHealthLosePect() > 80;
@@ -608,9 +608,9 @@ export class imba_faceless_void_time_dilation extends BaseAbility_Plus {
         ParticleManager.SetParticleControl(cast_pfx_2, 0, caster.GetAbsOrigin());
         ParticleManager.ReleaseParticleIndex(cast_pfx_2);
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_if_enemy(this);
     }
@@ -999,7 +999,7 @@ export class imba_faceless_void_chronosphere extends BaseAbility_Plus {
     }
 
     GetManaCost(level: number): number {
-        return 100;
+        return 800;
     }
     AutoSpellSelf() {
         return AI_ability.POSITION_most_enemy(this);

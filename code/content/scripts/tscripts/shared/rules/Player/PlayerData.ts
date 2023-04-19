@@ -26,7 +26,7 @@ export class PlayerData extends ET.Component {
     @serializeETProps()
     popuLevelMax: number = 10;
     @serializeETProps()
-    techLevelMax: number = 10;
+    techLevelMax: number = 20;
     @serializeETProps()
     perIntervalGold: number = 0;
     @serializeETProps()

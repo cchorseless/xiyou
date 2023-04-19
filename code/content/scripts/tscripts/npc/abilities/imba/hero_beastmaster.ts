@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { AoiHelper } from "../../../helper/AoiHelper";
 import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 import { ResHelper } from "../../../helper/ResHelper";
@@ -112,9 +112,9 @@ export class imba_beastmaster_wild_axes extends BaseAbility_Plus {
         ProjectileHelper.LineProjectiles.SimpleLineProjectile.CreateOne(obj2);
 
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     GetCooldown(level: number): number {
         return 20;
@@ -250,9 +250,9 @@ export class imba_beastmaster_call_of_the_wild extends BaseAbility_Plus {
         }
 
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     GetCooldown(level: number): number {
         return 20;
@@ -421,7 +421,7 @@ export class imba_beastmaster_primal_roar extends BaseAbility_Plus {
     }
 
     GetManaCost(level: number): number {
-        return 100;
+        return 800;
     }
 
     AutoSpellSelf() {
@@ -499,9 +499,9 @@ export class imba_beastmaster_summon_hawk extends BaseAbility_Plus {
         }
 
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     GetCooldown(level: number): number {
         return 0;
@@ -667,9 +667,9 @@ export class imba_beastmaster_call_of_the_wild_boar extends BaseAbility_Plus {
             }
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     GetCooldown(level: number): number {
         return 0;

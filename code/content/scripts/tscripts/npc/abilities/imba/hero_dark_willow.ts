@@ -65,9 +65,9 @@ export class imba_dark_willow_bramble_maze extends BaseAbility_Plus {
             ParticleManager.ClearParticle(nfx, false);
         });
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     AutoSpellSelf() {
         return AI_ability.POSITION_most_enemy(this);
@@ -245,9 +245,9 @@ export class imba_dark_willow_shadow_realm extends BaseAbility_Plus {
             this.DealDamage(caster, hTarget, damage, {}, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_BONUS_SPELL_DAMAGE);
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_cast(this);
@@ -520,9 +520,9 @@ export class imba_dark_willow_cursed_crown extends BaseAbility_Plus {
             duration: delay
         });
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     AutoSpellSelf() {
         return AI_ability.TARGET_if_enemy(this);
@@ -658,7 +658,7 @@ export class imba_dark_willow_bedlam extends BaseAbility_Plus {
         }
     }
     GetManaCost(level: number): number {
-        return 100;
+        return 800;
     }
 
     AutoSpellSelf() {
@@ -820,9 +820,9 @@ export class imba_dark_willow_terrorize extends BaseAbility_Plus {
     OnSpellStart(): void {
         this.fear.StartIntervalThink(0.03);
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     AutoSpellSelf() {
         if (this.IsInAbilityPhase()) {

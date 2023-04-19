@@ -71,9 +71,9 @@ export class imba_earthshaker_fissure extends BaseAbility_Plus {
         EmitSoundOnLocationWithCaster(start_pos, "Hero_EarthShaker.Fissure", this.GetCasterPlus());
         EmitSoundOnLocationWithCaster(end_pos, "Hero_EarthShaker.Fissure", this.GetCasterPlus());
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     AutoSpellSelf() {
         return AI_ability.POSITION_if_enemy(this, 1000);
@@ -210,9 +210,9 @@ export class imba_earthshaker_enchant_totem extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_earthshaker_bonus_magic_resistance"), "modifier_special_bonus_imba_earthshaker_bonus_magic_resistance", {});
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     AutoSpellSelf() {
         if (this.GetCasterPlus().HasScepter()) {
@@ -687,7 +687,7 @@ export class imba_earthshaker_echo_slam extends BaseAbility_Plus {
         }
     }
     GetManaCost(level: number): number {
-        return 100;
+        return 800;
     }
 
     AutoSpellSelf() {

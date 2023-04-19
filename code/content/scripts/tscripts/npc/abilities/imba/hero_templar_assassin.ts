@@ -46,9 +46,9 @@ export class imba_templar_assassin_refraction extends BaseAbility_Plus {
             }
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_if_enemy(this);
     }
@@ -287,9 +287,9 @@ export class imba_templar_assassin_meld extends BaseAbility_Plus {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus("special_bonus_imba_templar_assassin_meld_armor_reduction"), "modifier_special_bonus_imba_templar_assassin_meld_armor_reduction", {});
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_if_enemy(this);
     }
@@ -654,9 +654,9 @@ export class imba_templar_assassin_trap extends BaseAbility_Plus {
             EventHelper.ErrorMessage("No traps", this.GetCasterPlus().GetPlayerID());
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.POSITION_if_enemy(this);
     }

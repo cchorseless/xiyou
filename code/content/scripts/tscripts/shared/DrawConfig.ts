@@ -1,4 +1,8 @@
 export module DrawConfig {
+    /**心愿清单 */
+    export const iWashCardMax = 5;
+
+
     /**抽卡类型 对应poolgroupid */
     export enum EDrawCardType {
         RoundStart,
@@ -9,19 +13,31 @@ export module DrawConfig {
 
     export enum EProtocol {
         DrawCardResult = "DrawCardResult",
+        LockSelectedCard = "LockSelectedCard",
         CardSelected = "CardSelected",
         RedrawStartCard = "RedrawStartCard",
         StartCardSelected = "StartCardSelected",
         SelectCard2Public = "SelectCard2Public",
         Add2WishList = "Add2WishList",
-        RemoveWishList = "RemoveWishList",
-        ToggleWishList = "ToggleWishList",
     }
-    export namespace I {
-        export interface ICardSelected {
+}
+
+
+declare global {
+    namespace IDrawConfig {
+        interface ICardSelected {
             index: number;
             itemName: string;
-            b2Public: number;
+            b2Public: 0 | 1;
+        }
+        interface ICardLocked {
+            index: number;
+            itemName: string;
+            block: 0 | 1;
+        }
+        interface ICardWanted {
+            itemName: string;
+            isadd: 0 | 1;
         }
     }
 }

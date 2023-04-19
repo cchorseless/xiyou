@@ -44,9 +44,9 @@ export class imba_visage_grave_chill extends BaseAbility_Plus {
             duration: this.GetSpecialValueFor("chill_duration") * (1 - target.GetStatusResistance())
         });
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.TARGET_if_enemy(this);
     }
@@ -260,9 +260,9 @@ export class imba_visage_soul_assumption extends BaseAbility_Plus {
             ApplyDamage(damageTable);
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.TARGET_if_enemy(this);
     }
@@ -700,7 +700,7 @@ export class imba_visage_summon_familiars extends BaseAbility_Plus {
         }
     }
     GetManaCost(level: number): number {
-        return 100;
+        return 800;
     }
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_cast(this);

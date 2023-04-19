@@ -1,6 +1,6 @@
 
-import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
+import { AI_ability } from "../../../ai/AI_ability";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -153,9 +153,9 @@ export class imba_obsidian_destroyer_arcane_orb extends BaseAbility_Plus {
         let caster = this.GetCasterPlus();
         return caster.Script_GetAttackRange();
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.TARGET_if_enemy(this)
     }
@@ -661,9 +661,9 @@ export class imba_obsidian_destroyer_astral_imprisonment extends BaseAbility_Plu
             }
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.TARGET_if_enemy(this)
     }
@@ -1219,7 +1219,7 @@ export class modifier_imba_essence_aura_over_maximum extends BaseModifier_Plus {
         }
         return Object.values(decFunc);
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.EXTRA_MANA_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MANA_BONUS)
     CC_GetModifierExtraManaBonus(): number {
         let stacks = this.GetStackCount();
         return stacks;
@@ -1414,7 +1414,7 @@ export class imba_obsidian_destroyer_sanity_eclipse extends BaseAbility_Plus {
         }
     }
     GetManaCost(level: number): number {
-        return 100;
+        return 800;
     }
     AutoSpellSelf() {
         return AI_ability.POSITION_most_enemy(this)

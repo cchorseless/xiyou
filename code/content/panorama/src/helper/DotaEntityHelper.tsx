@@ -1,6 +1,7 @@
 import { GameProtocol } from "../../../scripts/tscripts/shared/GameProtocol";
 import { FuncHelper } from "./FuncHelper";
 import { KVHelper } from "./KVHelper";
+import { NetHelper } from "./NetHelper";
 
 
 export module AbilityHelper {
@@ -363,7 +364,6 @@ export module AbilityHelper {
      */
     export function GetAbilityOrBuffDescription(sStr: string, abilityName: string, iLevel = -1, bOnlyNowLevelValue: boolean = false) {
         let [isitem, tData] = KVHelper.GetAbilityOrItemData(abilityName);
-        GLogHelper.print(abilityName, sStr, 1111)
         if (!tData) { return sStr; }
         let SpecialValues = GetAllSpecialValues(abilityName);
         let aValueNames = Object.keys(SpecialValues);
@@ -391,6 +391,7 @@ export module AbilityHelper {
         const str = $.Localize("#DOTA_Tooltip_ability_" + sAbilityName + "_Description");
         return GetAbilityOrBuffDescription(str, sAbilityName);
     }
+
 
     export function StringToValues(sValues: string) {
         let aStr = sValues.toString().split(" ");
@@ -1033,12 +1034,23 @@ export module UnitHelper {
         }
         return -1;
     };
+
     export function IsCourier(unitEntIndex: EntityIndex) {
         return HasBuff(unitEntIndex, "modifier_courier")
     }
     export function IsFakerCourier(unitEntIndex: EntityIndex) {
         return HasBuff(unitEntIndex, "modifier_faker_courier")
     }
+
+    export function GetCourierName(unitEntIndex: EntityIndex) {
+        if (IsCourier(unitEntIndex) || IsFakerCourier(unitEntIndex)) {
+            let data = NetHelper.GetDotaEntityData(unitEntIndex, "CourierName") || {};
+            return data.CourierName;
+        }
+    }
+
+
+
     export function HasBuff(unitEntIndex: EntityIndex, buffName: string) {
         for (let index = 0; index < Entities.GetNumBuffs(unitEntIndex); index++) {
             let buff = Entities.GetBuff(unitEntIndex, index);
@@ -1111,7 +1123,10 @@ export module UnitHelper {
         }
         return 0;
     };
-
+    export function GetStar(iUnitEntIndex: EntityIndex): number {
+        if (iUnitEntIndex == null || iUnitEntIndex == -1) { return -1 }
+        return (Number(GetUnitData(iUnitEntIndex, "GetStar")));
+    }
     export function GetEntityIndex(iUnitEntIndex: EntityIndex) {
         return (Number(GetUnitData(iUnitEntIndex, "GetEntityIndex")));
     };

@@ -38,6 +38,9 @@ export module KVHelper {
             return KvAbilitys[abilityname][k];
         }
         else {
+            if (bnumber) {
+                return 0;
+            }
             return null;
         }
     }
@@ -49,6 +52,9 @@ export module KVHelper {
             return KvItems[itemname][k];
         }
         else {
+            if (bnumber) {
+                return 0;
+            }
             return null;
         }
     }

@@ -91,7 +91,43 @@ export module KVHelper {
         let dataitem = KVItems()[abilityitemname as keyof KV_AllItems];
         return [Boolean(dataitem), dataability || dataitem] as [boolean, any];
     }
-
-
+    export function GetUnitDataForKey(unitname: string, key: string, tonumber = false): string | number {
+        let data = KVUnits()[unitname as keyof KV_AllUnits];
+        if (data) {
+            if (tonumber) {
+                return GToNumber(data[key]);
+            }
+            else {
+                return data[key] as string;
+            }
+        }
+        else {
+            if (tonumber) {
+                return 0;
+            }
+            else {
+                return "";
+            }
+        }
+    }
+    export function GetAbilityOrItemDataForKey(abilityitemname: string, key: string, tonumber = false): string | number {
+        let data: any = {};
+        let dataability = KVAbilitys()[abilityitemname as keyof KV_AllAbilitys];
+        if (dataability) {
+            data = dataability;
+        }
+        else {
+            let dataitem = KVItems()[abilityitemname as keyof KV_AllItems];
+            if (dataitem) {
+                data = dataitem;
+            }
+        }
+        if (tonumber) {
+            return GToNumber(data[key]);
+        }
+        else {
+            return data[key];
+        }
+    }
 
 }

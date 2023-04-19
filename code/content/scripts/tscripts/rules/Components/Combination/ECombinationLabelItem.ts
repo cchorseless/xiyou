@@ -23,8 +23,16 @@ export class ECombinationLabelItem extends ET.Entity {
         let equipid = GJsonConfigHelper.GetAbilitySectUnlockEquipid(this.SourceEntityConfigId)
         // 解锁装备检查
         if (equipid > 0) {
-            let unitroot = this.GetDomain<IBaseNpc_Plus>().ETRoot.As<IBattleUnitEntityRoot>();
-            this.IsActive = unitroot.checkCanStarUp() == false || HeroEquipComponent.CheckPlayerIsScepter(this.BelongPlayerid, equipid);
+            let sourceEntity = this.getSourceEntity();
+            let sourceActivated = false;
+            // 判定来源是否激活
+            if (sourceEntity) {
+                sourceActivated = sourceEntity.GetDomain<IBaseAbility_Plus>().IsActivated();
+            }
+            if (sourceActivated) {
+                let unitroot = this.GetDomain<IBaseNpc_Plus>().ETRoot.As<IBattleUnitEntityRoot>();
+                this.IsActive = unitroot.checkCanStarUp() == false || HeroEquipComponent.CheckPlayerIsScepter(this.BelongPlayerid, equipid);
+            }
         }
         else {
             this.IsActive = true;

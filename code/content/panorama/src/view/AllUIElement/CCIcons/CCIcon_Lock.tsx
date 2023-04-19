@@ -1,7 +1,7 @@
 import { CSSHelper } from "../../../helper/CSSHelper";
 import { CCIcon } from "./CCIcon";
 
-export class CCIcon_Lock extends CCIcon<{ type?: "Small" | "Plus" | "Gold" | "Shadow" | "Tui7"; }> {
+export class CCIcon_Lock extends CCIcon<{ type?: "Small" | "Plus" | "Gold" | "Shadow" | "Tui7" | "Unlock"; }> {
 	static defaultProps = {
 		type: CSSHelper.DEFAULT_ADDON_TYPE
 	};
@@ -29,7 +29,11 @@ export class CCIcon_Lock extends CCIcon<{ type?: "Small" | "Plus" | "Gold" | "Sh
 				});
 			case "Tui7":
 				return Object.assign(styles, {
-					src: "s2r://panorama/images/eom_design/icon/tui7/lock_png.vtex",
+					src: "s2r://panorama/images/custom_game/eom_design/icon/tui7/lock_png.vtex",
+				});
+			case "Unlock":
+				return Object.assign(styles, {
+					src: "s2r://panorama/images/custom_game/eom_design/icon/tui7/unlock_png.vtex",
 				});
 			default:
 				return Object.assign(styles, {

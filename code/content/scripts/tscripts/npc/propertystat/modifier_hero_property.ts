@@ -149,7 +149,7 @@ export class modifier_hero_property extends BaseModifier_Plus {
         else if (iStackCount == Attributes.DOTA_ATTRIBUTE_AGILITY) {
             return GPropertyCalculate.GetAgility(this.GetParentPlus()) * GPropertyConfig.ATTRIBUTE_PRIMARY_ATTACK_DAMAGE
         }
-        else if (iStackCount == Attributes.DOTA_ATTRIBUTE_AGILITY) {
+        else if (iStackCount == Attributes.DOTA_ATTRIBUTE_INTELLECT) {
             return GPropertyCalculate.GetIntellect(this.GetParentPlus()) * GPropertyConfig.ATTRIBUTE_PRIMARY_ATTACK_DAMAGE
         }
         return 0;

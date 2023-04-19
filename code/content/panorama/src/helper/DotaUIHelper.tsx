@@ -2,9 +2,31 @@ import { render } from "@demon673/react-panorama";
 import React from "react";
 import { CCCombinationInfoDialog } from "../view/Combination/CCCombinationInfoDialog";
 import { CCMainPanel } from "../view/MainPanel/CCMainPanel";
+import { UnitHelper } from "./DotaEntityHelper";
 import { EventHelper } from "./EventHelper";
+import { KVHelper } from "./KVHelper";
 import { LogHelper } from "./LogHelper";
 import { TipsHelper } from "./TipsHelper";
+
+declare global {
+    interface CScriptBindingPR_Abilities {
+        /**
+         * 获取技能名称
+         * @param sAbilityName 
+         */
+        GetLocalizeAbilityName(sAbilityName: string): string;
+    }
+}
+
+Abilities.GetLocalizeAbilityName = function (sAbilityName: string) {
+    const str = $.Localize("#DOTA_Tooltip_ability_" + sAbilityName);
+    return str;
+}
+
+
+
+
+
 
 export module DotaUIHelper {
     const EventObj = {};
@@ -320,6 +342,7 @@ export module DotaUIHelper {
         let TextToolTip: Panel;
         let CustomTooltipPanel: Panel;
         const customPanelid = "CustomTooltipPanel";
+        const customLabelid = "CustomTooltipLabel";
         const abilityShowTooltipHandler = GHandler.create(EventObj, (abilitypanel: Panel, ability_name: string | AbilityEntityIndex, c, d) => {
             if (typeof ability_name == "number") {
                 ability_name = Abilities.GetAbilityName(ability_name as AbilityEntityIndex);
@@ -331,6 +354,18 @@ export module DotaUIHelper {
             const AbilityDetails = DOTAAbilityToolTip_Contents.FindChild("AbilityDetails")!;
             if (AbilityDetails) {
                 AbilityDetails.style.width = "340px";
+                // 修改技能名字
+                const header = AbilityDetails.FindChild("Header")!;
+                if (header) {
+                    const AbilityHeader = header.FindChildTraverse("AbilityHeader")! as Panel;
+                    let needstar = KVHelper.GetAbilityOrItemDataForKey(ability_name, "RequiredStar", true) as number;
+                    if (needstar > 0 && UnitHelper.GetStar(c) < needstar) {
+                        render(<Label id={customLabelid} text={` (${needstar}星或符石激活)`} />, AbilityHeader)
+                    }
+                    else {
+                        render(< ></>, AbilityHeader)
+                    }
+                }
             }
             DOTAAbilityToolTip_Contents.style.width = "fit-children";
             let sectname = GJsonConfigHelper.GetAbilitySectLabel(ability_name)

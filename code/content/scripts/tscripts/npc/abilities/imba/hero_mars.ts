@@ -14,9 +14,9 @@ export class imba_mars_spear extends BaseAbility_Plus {
     public trailblazer_thinker: any;
     public projectiles: { [k: string]: any };
 
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.POSITION_if_enemy(this)
     }
@@ -632,9 +632,9 @@ export class imba_mars_gods_rebuke extends BaseAbility_Plus {
         ParticleManager.ReleaseParticleIndex(effect_cast);
         EmitSoundOn(sound_cast, target);
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.POSITION_if_enemy(this)
     }
@@ -723,9 +723,9 @@ export class imba_mars_bulwark extends BaseAbility_Plus {
             this.GetCasterPlus().RemoveModifierByName("modifier_imba_mars_bulwark_active");
         }
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         if (this.GetToggleState()) {
             return false;
@@ -977,7 +977,7 @@ export class imba_mars_arena_of_blood extends BaseAbility_Plus {
         attacker.AttackOnce(target, true, true, true, true, false, false, true);
     }
     GetManaCost(level: number): number {
-        return 100;
+        return 800;
     }
     AutoSpellSelf() {
         return AI_ability.POSITION_if_enemy(this)

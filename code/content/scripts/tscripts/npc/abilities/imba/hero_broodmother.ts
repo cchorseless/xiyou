@@ -69,9 +69,9 @@ export class imba_broodmother_spawn_spiderlings extends BaseAbility_Plus {
         });
         hTarget.EmitSound("Hero_Broodmother.SpawnSpiderlingsImpact");
     }
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
 
     AutoSpellSelf() {
         return AI_ability.TARGET_if_enemy(this);
@@ -305,9 +305,9 @@ export class imba_broodmother_spin_web extends BaseAbility_Plus {
         caster.EmitSound("Hero_Broodmother.SpinWebCast");
     }
 
-    GetManaCost(level: number): number {
-        return 0;
-    }
+    // GetManaCost(level: number): number {
+    //     return 0;
+    // }
     AutoSpellSelf() {
         return AI_ability.POSITION_most_enemy(this);
     }
@@ -830,7 +830,7 @@ export class imba_broodmother_insatiable_hunger extends BaseAbility_Plus {
         caster.EmitSound("Hero_Broodmother.InsatiableHunger");
     }
     GetManaCost(level: number): number {
-        return 100;
+        return 800;
     }
     AutoSpellSelf() {
         return AI_ability.NO_TARGET_cast(this);
