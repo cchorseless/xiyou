@@ -7,6 +7,7 @@ import { KVHelper } from "../../../helper/KVHelper";
 import { TipsHelper } from "../../../helper/TipsHelper";
 import { CCPanel } from "../CCPanel/CCPanel";
 import "./CCItemImage.less";
+import { CCItemLockStars } from "./CCItemLockStars";
 
 interface ICCItemImage extends NodePropsData {
     itemname?: string,
@@ -89,17 +90,11 @@ export class CCItemImage extends CCPanel<ICCItemImage> {
                 </Panel>
             }
             {
-                iUnlockStar > 0 &&
+                iUnlockStar > 0 && iUnlockStar < 10 &&
                 <>
                     {/* <CCPanel id="ItemLockBg" hittest={false} />
                     <CCIcon_Lock align="center center" /> */}
-                    <Panel id="ItemLockStars" hittest={true} >
-                        {
-                            [...Array(iUnlockStar)].map((_, index) => {
-                                return <Image key={index} className="ItemLockStar" />
-                            })
-                        }
-                    </Panel>
+                    <CCItemLockStars hittest={true} iUnlockStar={iUnlockStar} />
                 </>
 
             }

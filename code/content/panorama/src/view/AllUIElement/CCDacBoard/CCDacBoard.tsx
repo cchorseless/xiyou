@@ -52,7 +52,7 @@ export class CCDacBoard extends CCPanel<ICCDacBoard> {
                             <CCAbilityList2 CurSelectUnit={this.props.CurSelectUnit} horizontalAlign={"center"} verticalAlign="center" />
                             {isShowTalent && <CCUnitScepterStatus CurSelectUnit={this.props.CurSelectUnit} />}
                         </CCPanel>
-                        <CCHealthMana verticalAlign="bottom" marginBottom={"0px"} />
+                        <CCHealthMana verticalAlign="bottom" marginLeft={"5px"} marginTop={"5px"} marginBottom={"-5px"} />
                     </CCPanel>
                     <Panel id="DacBoardRight" hittest={false}>
                         <CCInventory verticalAlign="bottom" marginBottom={"0px"} />

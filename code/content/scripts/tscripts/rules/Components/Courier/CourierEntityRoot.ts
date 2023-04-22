@@ -111,6 +111,7 @@ export class CourierEntityRoot extends BaseEntityRoot implements IRoundStateCall
     }
 
     OnRound_Start(round?: ERoundBoard): void {
+        this.AbilityManagerComp().OnRound_Start(round);
         this.CourierShopComp().refreshRoundShopItem();
         this.CourierShopComp().SyncClient();
     };

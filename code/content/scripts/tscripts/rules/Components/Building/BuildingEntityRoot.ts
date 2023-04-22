@@ -31,13 +31,33 @@ export class BuildingEntityRoot extends BattleUnitEntityRoot {
             this.LoadServerData(_hero);
         }), this.BelongPlayerid);
         this.SetStar(1);
-        this.SetInventoryLock(2, 2);
-        this.SetInventoryLock(3, 3);
-        this.SetInventoryLock(4, 4);
-        this.SetInventoryLock(5, 5);
+        this.InitInventoryLock();
         this.SetUIOverHead(true, false);
         this.InitSyncClientInfo();
         this.JoinInRound();
+    }
+
+    InitInventoryLock() {
+        let rarity = this.GetRarity();
+        if (rarity == "D" || rarity == "C" || rarity == "B") {
+            this.SetInventoryLock(1, 2);
+            this.SetInventoryLock(2, 4);
+            this.SetInventoryLock(3, 999);
+            this.SetInventoryLock(4, 999);
+            this.SetInventoryLock(5, 999);
+        }
+        else if (rarity == "A") {
+            this.SetInventoryLock(2, 2);
+            this.SetInventoryLock(3, 4);
+            this.SetInventoryLock(4, 999);
+            this.SetInventoryLock(5, 999);
+        }
+        else if (rarity == "S") {
+            this.SetInventoryLock(3, 2);
+            this.SetInventoryLock(4, 4);
+            this.SetInventoryLock(5, 999);
+        }
+
     }
 
     LoadServerData(herounit: THeroUnit, isinit = false) {
@@ -204,7 +224,9 @@ export class BuildingEntityRoot extends BattleUnitEntityRoot {
     GetDotaHeroName() {
         return this.Config().DotaHeroName;
     }
-
+    GetRarity(): IRarity {
+        return (this.Config().Rarity || "B") as IRarity;
+    }
 }
 declare global {
     type IBuildingEntityRoot = BuildingEntityRoot;

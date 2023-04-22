@@ -7,6 +7,8 @@ import { ERoundBoard } from "../Round/ERoundBoard";
 
 @GReloadable
 export class DrawComponent extends ET.Component implements IRoundStateCallback {
+
+
     @serializeETProps()
     tLastCards: string[] = [];
     @serializeETProps()
@@ -93,8 +95,14 @@ export class DrawComponent extends ET.Component implements IRoundStateCallback {
                 return [false, "buy fail"];
             }
         }
-        this.tLastCards[index] = null;
-        delete this.tLockChess[index + ""];
+        if (DrawConfig.BOnlySelectOnce) {
+            this.tLastCards = [];
+            this.tLockChess = {};
+        }
+        else {
+            this.tLastCards[index] = null;
+            delete this.tLockChess[index + ""];
+        }
         this.SyncClient(true, true);
         return [true, ""];
     }

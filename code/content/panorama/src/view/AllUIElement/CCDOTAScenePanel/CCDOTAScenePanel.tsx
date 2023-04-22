@@ -37,9 +37,9 @@ export class CCDOTAScenePanel extends CCPanel<ICCDOTAScenePanel>{
             <Panel id="CC_DOTAScenePanel" ref={this.__root__}   {...this.initRootAttrs()}>
                 <Panel className="DOTASceneSelectLightBg" visible={this.props.showlight} />
                 <Panel className="DOTASceneSelectLight" visible={this.props.showlight} />
-                <DOTAScenePanel className="CCDOTAScenePanel" hittest={true} {...this.props} />
                 {this.props.children}
                 {this.__root___childs}
+                <DOTAScenePanel className="CCDOTAScenePanel" hittest={true} {...this.props} />
             </Panel>
         );
     }

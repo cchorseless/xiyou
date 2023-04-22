@@ -16,13 +16,17 @@ export class ChessControlComponent extends ET.Component {
     IS_SEASON_AWARD_AVAILABLE = true;
     addEvent() {
         this.OnMouseCallback();
-        EventHelper.addGameEvent(GameEnum.GameEvent.dota_player_update_query_unit, GHandler.create(this, async (e) => {
-            await this.OnPlayerQueryUnit(e);
+        EventHelper.addGameEvent(GameEnum.GameEvent.dota_player_update_query_unit, GHandler.create(this, (e) => {
+            this.OnPlayerQueryUnit(e);
         }));
-        EventHelper.addGameEvent(GameEnum.GameEvent.dota_player_update_selected_unit, GHandler.create(this, async (e) => {
-            await this.OnPlayerQueryUnit(e);
+        EventHelper.addGameEvent(GameEnum.GameEvent.dota_player_update_selected_unit, GHandler.create(this, (e) => {
+            this.OnPlayerQueryUnit(e);
         }));
         GTimerHelper.AddFrameTimer(1, GHandler.create(this, () => {
+            if (this.IsDisposed()) {
+                this.hide_cursor_hero();
+                return;
+            }
             this.UpdateHeroIcon();
             return 1
         }));
@@ -31,6 +35,7 @@ export class ChessControlComponent extends ET.Component {
     onDestroy(): void {
         EventHelper.removeGameEventCaller(this);
         GTimerHelper.ClearAll(this);
+        this.hide_cursor_hero();
     }
     OnMouseCallback() {
         const CONSUME_EVENT = true;
@@ -75,13 +80,13 @@ export class ChessControlComponent extends ET.Component {
         });
     }
 
-    async OnPlayerQueryUnit(keys: any) {
+    OnPlayerQueryUnit(keys: any) {
         // if (keys.splitscreenplayer == Game.GetLocalPlayerID()) {
         let localPlayer = Players.GetLocalPlayer();
         let portrait_unit = Players.GetLocalPlayerPortraitUnit();
         // 选中自己信使
         if (portrait_unit == Players.GetPlayerHeroEntityIndex(localPlayer)) {
-            await this.OnShowCursorHeroIcon(false);
+            this.OnShowCursorHeroIcon(false);
             // if (FindDotaHudElement("emotion_button")) {
             //     FindDotaHudElement("emotion_button").visible = true;
             // }
@@ -112,7 +117,7 @@ export class ChessControlComponent extends ET.Component {
             // 选中友方棋子
             if (building && building.BelongPlayerid == localPlayer) {
                 this.PORTRAIT_UNIT = portrait_unit;
-                await this.OnShowCursorHeroIcon(true);
+                this.OnShowCursorHeroIcon(true);
                 return
             }
             // 选中友方其他玩家信使
@@ -129,7 +134,7 @@ export class ChessControlComponent extends ET.Component {
                 return
             }
         }
-        await this.OnShowCursorHeroIcon(false);
+        this.OnShowCursorHeroIcon(false);
     }
 
     UpdateHeroIcon() {
@@ -165,11 +170,11 @@ export class ChessControlComponent extends ET.Component {
         }
     }
 
-    async OnShowCursorHeroIcon(isshow: boolean) {
+    OnShowCursorHeroIcon(isshow: boolean) {
         if (isshow) {
             this.ShowMovingChess();
             let unitName = Entities.GetUnitName(this.PORTRAIT_UNIT);
-            await this.show_cursor_hero(unitName);
+            this.show_cursor_hero(unitName);
         } else {
             this.hide_cursor_hero();
         }
@@ -184,17 +189,25 @@ export class ChessControlComponent extends ET.Component {
         origin[2] += 50;
         Particles.SetParticleControl(this.MOVING_PCF, 4, origin);
         Particles.SetParticleAlwaysSimulate(this.MOVING_PCF);
-        // IS_CURSOR_HERO_ICON_SHOWING = true;
+        this.IS_CURSOR_HERO_ICON_SHOWING = true;
     }
-    async show_cursor_hero(unit_name: string) {
-        await CCMainPanel.GetInstance()!.addOnlyPanel(CCUnitChessMoveIcon, { itemname: unit_name });
+    show_cursor_hero(unit_name: string) {
+        CCMainPanel.GetInstance()!.addOnlyPanel(CCUnitChessMoveIcon, { itemname: unit_name });
         this.IS_CURSOR_HERO_ICON_SHOWING = true;
     }
     hide_cursor_hero() {
         CCUnitChessMoveIcon.GetInstance()?.close();
         this.IS_CURSOR_HERO_ICON_SHOWING = false;
-        Particles.DestroyParticleEffect(this.MOVING_PCF, true);
-        Particles.ReleaseParticleIndex(this.MOVING_PCF);
+        if (this.MOVING_PCF > -1) {
+            Particles.DestroyParticleEffect(this.MOVING_PCF, true);
+            Particles.ReleaseParticleIndex(this.MOVING_PCF);
+        }
+        this.MOVING_PCF = -1 as ParticleID;
+    }
+
+
+    IsShowHeroIcon() {
+        return CCUnitChessMoveIcon.GetInstance() != null;
     }
 
     Jump_cursor_hero() {

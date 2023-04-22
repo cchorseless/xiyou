@@ -29,6 +29,8 @@ export class modifier_courier extends BaseModifier_Plus {
             [modifierstate.MODIFIER_STATE_DISARMED]: true,
             [modifierstate.MODIFIER_STATE_MAGIC_IMMUNE]: true,
             [modifierstate.MODIFIER_STATE_ATTACK_IMMUNE]: true,
+            [modifierstate.MODIFIER_STATE_NO_UNIT_COLLISION]: true,
+            // 会导致信使无法被选中
             [modifierstate.MODIFIER_STATE_OUT_OF_GAME]: true,
         };
         return state;
@@ -75,7 +77,7 @@ export class modifier_courier extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let hParent = this.GetParentPlus()
-            hParent.SetHullRadius(60);
+            hParent.SetHullRadius(40);
             hParent.SetSkin(this.iSkin)
             if (this.ambientModifiers && this.ambientModifiers.length > 0) {
                 hParent.addBuff(this.ambientModifiers, hParent)

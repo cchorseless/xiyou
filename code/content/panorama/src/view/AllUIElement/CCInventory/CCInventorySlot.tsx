@@ -70,7 +70,7 @@ export class CCInventorySlot extends CCPanel<ICCInventorySlot> {
                     dragdropcallback={(pDraggedPanel, overrideentityindex, overridedisplaykeybind, slot, dragtype) => {
                         let iAbilityIndex = pDraggedPanel.overrideentityindex!;
                         let m_Slot = pDraggedPanel.m_Slot;
-                        GLogHelper.print("dragdropcallback", dragtype, m_Slot, slot)
+                        // GLogHelper.print("dragdropcallback", dragtype, m_Slot, slot)
                         if (iAbilityIndex != -1 && m_Slot != -1) {
                             let iCasterIndex = Abilities.GetCaster(iAbilityIndex);
                             Game.PrepareUnitOrders({

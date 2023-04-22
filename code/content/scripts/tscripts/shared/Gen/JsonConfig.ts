@@ -29990,28 +29990,28 @@
       },
       {
         "ItemSlot": 5,
-        "ItemName": "item_shop_gold_bag",
+        "ItemName": "item_shop_equiptreasure_c",
         "ItemLimit": 0,
         "RoundLock": 1,
         "MinDifficulty": 1
       },
       {
         "ItemSlot": 6,
-        "ItemName": "item_shop_wood_bag",
+        "ItemName": "item_shop_equiptreasure_b",
         "ItemLimit": 0,
         "RoundLock": 1,
         "MinDifficulty": 1
       },
       {
         "ItemSlot": 7,
-        "ItemName": "item_shop_soulcrystal_bag",
+        "ItemName": "item_shop_equiptreasure_a",
         "ItemLimit": 0,
         "RoundLock": 1,
         "MinDifficulty": 1
       },
       {
         "ItemSlot": 8,
-        "ItemName": "item_shop_lottery_ticket",
+        "ItemName": "item_shop_equiptreasure_s",
         "ItemLimit": 0,
         "RoundLock": 1,
         "MinDifficulty": 1
@@ -30023,28 +30023,28 @@
     "sellinfo": [
       {
         "ItemSlot": 1,
-        "ItemName": "item_shop_equiptreasure_c",
+        "ItemName": "item_shop_gold_bag",
         "ItemLimit": 0,
         "RoundLock": 1,
         "MinDifficulty": 1
       },
       {
         "ItemSlot": 2,
-        "ItemName": "item_shop_equiptreasure_b",
+        "ItemName": "item_shop_wood_bag",
         "ItemLimit": 0,
         "RoundLock": 1,
         "MinDifficulty": 1
       },
       {
         "ItemSlot": 3,
-        "ItemName": "item_shop_equiptreasure_a",
+        "ItemName": "item_shop_soulcrystal_bag",
         "ItemLimit": 0,
         "RoundLock": 1,
         "MinDifficulty": 1
       },
       {
         "ItemSlot": 4,
-        "ItemName": "item_shop_equiptreasure_s",
+        "ItemName": "item_shop_lottery_ticket",
         "ItemLimit": 0,
         "RoundLock": 1,
         "MinDifficulty": 1

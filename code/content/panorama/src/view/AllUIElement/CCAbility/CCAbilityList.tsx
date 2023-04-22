@@ -1,7 +1,9 @@
+import { render } from "@demon673/react-panorama";
 import React, { createRef } from "react";
 import { GameEnum } from "../../../../../scripts/tscripts/shared/GameEnum";
 import { CSSHelper } from "../../../helper/CSSHelper";
 import { KVHelper } from "../../../helper/KVHelper";
+import { CCItemLockStars } from "../CCItem/CCItemLockStars";
 import { CCPanel } from "../CCPanel/CCPanel";
 import "./CCAbilityList.less";
 import { CCAbilityPanel } from "./CCAbilityPanel";
@@ -100,6 +102,19 @@ export class CCAbilityList2 extends CCPanel<ICCAbilityList> {
                         }
                         else {
                             AbilityButton.style.tooltipPosition = null;
+                        }
+                        const abilityimage = AbilityButton.FindChildTraverse("AbilityImage") as AbilityImage;
+                        let iAbilityEntIndex = abilityimage.contextEntityIndex;
+                        let ability_name = abilityimage.abilityname;
+                        if (!ability_name || ability_name.length == 0) continue;
+                        let needstar = KVHelper.GetAbilityOrItemDataForKey(ability_name, "RequiredStar", true) as number;
+                        if (abilityimage) {
+                            if (!Abilities.IsActivated(iAbilityEntIndex) && needstar > 0) {
+                                render(<CCItemLockStars id="CC_ItemLockStars" brightness={2 + ""} key={"" + Math.random()} iUnlockStar={needstar} hittest={false} align="center center" />, abilityimage);
+                            }
+                            else {
+                                render(<></>, abilityimage);
+                            }
                         }
                     }
                 }

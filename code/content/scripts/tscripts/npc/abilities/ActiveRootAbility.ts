@@ -8,9 +8,12 @@ export class ActiveRootAbility extends BaseAbility_Plus {
         super();
         AbilityEntityRoot.TryToActive(this);
     }
-    IsOwnersManaEnough() {
-        return super.IsOwnersManaEnough() && this.ETRoot.isManaEnoughForActive();
-    }
+    // IsOwnersManaEnough() {
+    //     return super.IsOwnersManaEnough() && this.ETRoot.isManaEnoughForActive();
+    // }
+
+    OnRound_Start?(round: ERoundBoard): void;
+
     // 技能战吼
     OnRound_Battle() {
         this.ETRoot.OnRound_Battle();

@@ -340,7 +340,7 @@ export module DotaUIHelper {
         let DOTAAbilityToolTip: Panel;
         let DOTAAbilityToolTip_Contents: Panel;
         let TextToolTip: Panel;
-        let CustomTooltipPanel: Panel;
+
         const customPanelid = "CustomTooltipPanel";
         const customLabelid = "CustomTooltipLabel";
         const abilityShowTooltipHandler = GHandler.create(EventObj, (abilitypanel: Panel, ability_name: string | AbilityEntityIndex, c, d) => {
@@ -360,7 +360,7 @@ export module DotaUIHelper {
                     const AbilityHeader = header.FindChildTraverse("AbilityHeader")! as Panel;
                     let needstar = KVHelper.GetAbilityOrItemDataForKey(ability_name, "RequiredStar", true) as number;
                     if (needstar > 0 && UnitHelper.GetStar(c) < needstar) {
-                        render(<Label id={customLabelid} text={` (${needstar}星或符石激活)`} />, AbilityHeader)
+                        render(<Label id={customLabelid} text={` (${needstar}星激活)`} />, AbilityHeader)
                     }
                     else {
                         render(< ></>, AbilityHeader)
@@ -368,8 +368,11 @@ export module DotaUIHelper {
                 }
             }
             DOTAAbilityToolTip_Contents.style.width = "fit-children";
-            let sectname = GJsonConfigHelper.GetAbilitySectLabel(ability_name)
-            CustomTooltipPanel = CustomTooltipPanel || DOTAAbilityToolTip_Contents.FindChild(customPanelid);
+            let sectname = GJsonConfigHelper.GetAbilitySectLabel(ability_name);
+            let CustomTooltipPanel = DOTAAbilityToolTip_Contents.FindChild(customPanelid);
+            if (CustomTooltipPanel == null) {
+                CustomTooltipPanel = $.CreatePanel("Panel", DOTAAbilityToolTip_Contents, customPanelid)
+            }
             if (CustomTooltipPanel) {
                 if (sectname) {
                     render(<CCCombinationInfoDialog key={Math.random() * 1000 + ""} unitentityindex={c} sectName={sectname} abilityitemname={ability_name as string} />, CustomTooltipPanel);
@@ -377,9 +380,6 @@ export module DotaUIHelper {
                 else {
                     render(< ></>, CustomTooltipPanel);
                 }
-            }
-            else {
-                render(<Panel id={customPanelid} />, DOTAAbilityToolTip_Contents)
             }
         })
         const abilityHideTooltipHandler = GHandler.create(EventObj, (abilitypanel: Panel, ability_name: string | AbilityEntityIndex, c, d) => {

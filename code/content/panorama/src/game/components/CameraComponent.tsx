@@ -68,6 +68,9 @@ export class CameraComponent extends ET.Component {
             return r;
         });
         GTimerHelper.AddFrameTimer(1, GHandler.create(this, () => {
+            if (this.IsDisposed()) {
+                return;
+            }
             this.onUpdate();
             return 1;
         }))

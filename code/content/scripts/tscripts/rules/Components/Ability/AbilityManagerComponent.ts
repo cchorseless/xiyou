@@ -21,7 +21,15 @@ export class AbilityManagerComponent extends ET.Component implements IRoundState
             }
         }
     }
-    OnRound_Start(round?: ERoundBoard): void { }
+    OnRound_Start(round?: ERoundBoard): void {
+        let allability = this.getAllBaseAbility();
+        allability.forEach(ability => {
+            if (ability.OnRound_Start) {
+                ability.OnRound_Start(round)
+            }
+        })
+
+    }
     OnRound_WaitingEnd(): void { };
     // 战吼
     OnRound_Battle() {

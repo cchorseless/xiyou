@@ -130,4 +130,24 @@ export module KVHelper {
         }
     }
 
+
+
+    export function GetUnitSectLabels(unitname: string) {
+        let r: string[] = [];
+        let cardinfo = KVUnits()[unitname as keyof KV_AllUnits];
+        if (cardinfo) {
+            [1, 2, 3, 6].forEach((a, i) => {
+                let abilityname = cardinfo["Ability" + a] as string;
+                if (abilityname && abilityname != "ability_empty") {
+                    let sectname = GJsonConfigHelper.GetAbilitySectLabel(abilityname)
+                    if (sectname) {
+                        r.push(sectname)
+                    }
+                }
+            })
+        }
+        return r;
+    }
+
+
 }

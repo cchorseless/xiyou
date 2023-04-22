@@ -7,7 +7,10 @@ import { CCIcon_XClose } from "../AllUIElement/CCIcons/CCIcon_XClose";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCDrawCardBottomItem } from "./CCDrawCardBottomItem";
 
+import { DrawConfig } from "../../../../scripts/tscripts/shared/DrawConfig";
+import { ECombination } from "../../game/components/Combination/ECombination";
 import "./CCDrawCardPanel.less";
+import { CCDrawCardSloganItem } from "./CCDrawCardSloganItem";
 import { CCDrawCardWantItem } from "./CCDrawCardWantItem";
 interface ICCDrawCardPanel {
     cards: string[];
@@ -19,7 +22,8 @@ export class CCDrawCardPanel extends CCPanel<ICCDrawCardPanel> {
     onInitUI() {
         this.props.cards.forEach((card, index) => {
             this.UpdateState({ ["CardGroup" + index]: "1" })
-        })
+        });
+        this.ListenClassUpdate(GDrawComponent);
     }
 
     async SelectCard(itemname: string, index: number, b2Public: 0 | 1 = 0) {
@@ -30,10 +34,17 @@ export class CCDrawCardPanel extends CCPanel<ICCDrawCardPanel> {
             if (config.HeroSelectSoundEffect) {
                 Game.EmitSound(config.HeroSelectSoundEffect);
             }
-            this.UpdateState({ ["CardGroup" + index]: "0" });
-            for (let i = 0, len = this.props.cards.length; i < len; i++) {
-                if (i != index && this.GetState<string>("CardGroup" + i) == "1") {
-                    return;
+            if (DrawConfig.BOnlySelectOnce) {
+                this.props.cards.forEach((card, index) => {
+                    this.UpdateState({ ["CardGroup" + index]: "0" })
+                })
+            }
+            else {
+                this.UpdateState({ ["CardGroup" + index]: "0" });
+                for (let i = 0, len = this.props.cards.length; i < len; i++) {
+                    if (i != index && this.GetState<string>("CardGroup" + i) == "1") {
+                        return;
+                    }
                 }
             }
             this.hide();
@@ -50,6 +61,17 @@ export class CCDrawCardPanel extends CCPanel<ICCDrawCardPanel> {
                     this.props.cards.map((card, index) => {
                         let playerid = GGameScene.Local.BelongPlayerid;
                         let showlight = GBuildingEntityRoot.GetEntityByConfig(playerid, card) != null;
+                        const iswanted = GDrawComponent.IsCardWanted(card);
+                        const allsect = KVHelper.GetUnitSectLabels(card);
+                        let bSect = false;
+                        for (let i = 0; i < allsect.length; i++) {
+                            let sectName = allsect[i];
+                            let allcombs = ECombination.GetCombinationBySectName(playerid, sectName) || [];
+                            if (allcombs.length > 0) {
+                                bSect = true;
+                                break;
+                            }
+                        }
                         return (
                             <CCPanel id="DrawCardGroup" key={index + ""} opacity={this.GetState<string>("CardGroup" + index)} >
                                 <CCDOTAScenePanel className="DrawCardSceneBox"
@@ -60,7 +82,9 @@ export class CCDrawCardPanel extends CCPanel<ICCDrawCardPanel> {
                                     showlight={showlight}
                                     // particleonly={true}
                                     // renderdeferred={false}
-                                    onactivate={() => { this.SelectCard(card, index) }} />
+                                    onactivate={() => { this.SelectCard(card, index) }} >
+                                    <CCDrawCardSloganItem bStarUp={showlight} bSect={(!showlight) && bSect} bWanted={iswanted} />
+                                </CCDOTAScenePanel>
                                 <CCDrawCardBottomItem
                                     unitname={card}
                                     drawIndex={index}

@@ -1,8 +1,8 @@
 export module DrawConfig {
     /**心愿清单 */
     export const iWashCardMax = 5;
-
-
+    /**选卡只能选一次 */
+    export const BOnlySelectOnce = true;
     /**抽卡类型 对应poolgroupid */
     export enum EDrawCardType {
         RoundStart,

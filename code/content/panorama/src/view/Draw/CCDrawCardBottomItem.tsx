@@ -7,7 +7,6 @@ import { CCIcon_Wanted } from "../AllUIElement/CCIcons/CCIcon_Wanted";
 import { CCLabel } from "../AllUIElement/CCLabel/CCLabel";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 
-import { CCIcon_Lock } from "../AllUIElement/CCIcons/CCIcon_Lock";
 import { CCCombinationDesItem } from "../Combination/CCCombinationDesItem";
 import "./CCDrawCardBottomItem.less";
 
@@ -20,13 +19,11 @@ interface ICCDrawCardBottomItem {
 }
 export class CCDrawCardBottomItem extends CCPanel<ICCDrawCardBottomItem> {
 
-    onInitUI() {
-        this.ListenClassUpdate(GDrawComponent);
-    }
+
 
     render() {
         const unitname = this.props.unitname;
-        const block = GToBoolean(GGameScene.Local.DrawComp.tLockChess[this.props.drawIndex + ""]);
+        // const block = GToBoolean(GGameScene.Local.DrawComp.tLockChess[this.props.drawIndex + ""]);
         let KV_DATA = KVHelper.KVData();
         let cardinfo = KV_DATA.building_unit_tower[unitname];
         if (cardinfo == null) {
@@ -34,12 +31,12 @@ export class CCDrawCardBottomItem extends CCPanel<ICCDrawCardBottomItem> {
         }
         let iteminfo = KV_DATA.building_item_card[cardinfo!.CardName];
         const Rarity = cardinfo?.Rarity || "A";
-        const iswanted = GDrawComponent.IsCardWanted(unitname);
+        // const iswanted = GDrawComponent.IsCardWanted(unitname);
         return (
             <Panel ref={this.__root__} id="CC_DrawCardBottomItem" className={Rarity} hittest={false} {...this.initRootAttrs()}>
                 <CCPanel horizontalAlign="center" flowChildren="right">
                     <CCLabel textAlign={"center"} type="UnitName" localizedText={"#" + unitname} verticalAlign="center" height="20px" />
-                    <CCIcon_Wanted width="30px" height="30px" verticalAlign="center" visible={iswanted} tooltip={"#在愿望单内,购买至公共背包与其他玩家分享"} />
+                    {/* <CCIcon_Wanted width="30px" height="30px" verticalAlign="center" visible={iswanted} tooltip={"#在愿望单内,购买至公共背包与其他玩家分享"} /> */}
                     <CCPanel marginLeft={"10px"} flowChildren="right" verticalAlign="center">
                         <CCIcon_CoinType width="30px" height="30px" verticalAlign="center" cointype={GEEnum.EMoneyType.Gold} />
                         <CCLabel type="Gold" text={"x" + iteminfo?.ItemCost} />
@@ -60,11 +57,11 @@ export class CCDrawCardBottomItem extends CCPanel<ICCDrawCardBottomItem> {
                     }
                 </CCPanel>
                 <CCPanel horizontalAlign="center" flowChildren="right">
-                    <CCIconButton marginLeft={"10px"} icon={<CCIcon_Lock type={block ? "Tui7" : "Unlock"} />}
+                    {/* <CCIconButton marginLeft={"10px"} icon={<CCIcon_Lock type={block ? "Tui7" : "Unlock"} />}
                         onactivate={() => {
                             this.props.onLocked(!block);
                             this.UpdateSelf();
-                        }} tooltip={"#锁定不刷新"} />
+                        }} tooltip={"#锁定不刷新"} /> */}
                     <CCIconButton marginLeft={"20px"} icon={<CCIcon_Share />} onactivate={() => { this.props.onShare() }} tooltip={"#购买至公共背包"} />
                     <CCIconButton marginLeft={"20px"} icon={<CCIcon_Wanted />} onactivate={() => { this.props.onWanted() }} tooltip={"#加入愿望单,通知其他玩家"} />
                 </CCPanel>
