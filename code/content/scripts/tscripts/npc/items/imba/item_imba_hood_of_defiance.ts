@@ -173,7 +173,7 @@ export class modifier_imba_hood_of_defiance_active_bonus extends BaseModifier_Pl
             this.magic_resist_compensation = 0;
             return;
         }
-        let current_res = this.parent.GetMagicalArmorValue();
+        let current_res = this.parent.GetMagicalReductionPect();
         if (current_res < (this.unreducable_magic_resist - this.precision)) {
             if (this.magic_resist_compensation > 0) {
                 let current_compensation = this.magic_resist_compensation / 100;

@@ -89,7 +89,7 @@ export class modifier_slardar_2 extends BaseModifier_Plus {
                 if (hAttacker.HasTalent(sTalentName)) {
                     modifier_slardar_2_talent_attackspeed.apply(hAttacker, hAttacker, this.GetAbilityPlus(), null)
                 }
-                hAbility.UseResources(false, false, true)
+                hAbility.UseResources(false, false, false, true)
                 sTalentName = "special_bonus_unique_slardar_custom_8"
                 let bonus_damage = hAttacker.HasTalent(sTalentName) && this.bonus_damage + hAttacker.GetTalentValue(sTalentName) || this.bonus_damage
                 return bonus_damage

@@ -1304,7 +1304,7 @@ export class modifier_special_bonus_imba_nyx_assassin_5 extends BaseModifier_Plu
             let current_hp = this.target.GetHealth() / this.target.GetMaxHealth();
             if (current_hp <= this.hp_threshold_pct) {
                 this.ability.OnSpellStart();
-                this.ability.UseResources(false, false, true);
+                this.ability.UseResources(false, false, false, true);
             }
         }
     }

@@ -159,7 +159,7 @@ export class modifier_lycan_1 extends BaseModifier_Plus {
         if (params.attacker == this.GetParentPlus() && !params.attacker.PassivesDisabled()) {
             let hAbility = this.GetAbilityPlus()
             if (hAbility.IsCooldownReady()) {
-                hAbility.UseResources(false, false, true)
+                hAbility.UseResources(false, false, false, true)
                 for (let hWolf of (this.tWolves)) {
                     if (IsValid(hWolf) && hWolf.IsAlive()) {
                         modifier_lycan_1_summon_charge.apply(hWolf, params.attacker, hAbility, { duration: 5, target_entindex: params.target.entindex() })

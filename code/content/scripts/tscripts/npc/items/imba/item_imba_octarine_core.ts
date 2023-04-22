@@ -109,7 +109,7 @@ export class modifier_imba_octarine_core_basic extends BaseModifier_Plus {
                 if (keys.unit.IsIllusion()) {
                     if (keys.damage_type == DAMAGE_TYPES.DAMAGE_TYPE_PHYSICAL && keys.unit.GetPhysicalArmorValue) {
                         keys.damage = keys.original_damage * (1 - GPropertyCalculate.GetPhysicalReductionPect(keys.unit, null) / 100);
-                    } else if (keys.damage_type == DAMAGE_TYPES.DAMAGE_TYPE_MAGICAL && keys.unit.GetMagicalArmorValue) {
+                    } else if (keys.damage_type == DAMAGE_TYPES.DAMAGE_TYPE_MAGICAL && keys.unit.GetMagicalReductionPect) {
                         keys.damage = keys.original_damage * (1 - GPropertyCalculate.GetMagicalReductionPect(keys.unit, null) / 100);
                     } else if (keys.damage_type == DAMAGE_TYPES.DAMAGE_TYPE_PURE) {
                         keys.damage = keys.original_damage;
@@ -132,7 +132,7 @@ export class modifier_imba_octarine_core_basic extends BaseModifier_Plus {
     @registerEvent(Enum_MODIFIER_EVENT.ON_SPENT_MANA)
     CC_OnSpentMana(keys: ModifierAbilityEvent & { cost: number }): void {
         if (this.GetItemPlus() && keys.unit == this.GetParentPlus() && keys.unit.FindAllModifiersByName(this.GetName())[0] == this && this.GetStackCount() == 2 && this.GetItemPlus().IsCooldownReady() && keys.cost > 0) {
-            this.GetItemPlus().UseResources(false, false, true);
+            this.GetItemPlus().UseResources(false, false, false, true);
             let blast_duration = 0.75 * 0.75;
             let blast_speed = this.GetItemPlus().GetSpecialValueFor("blast_radius") / blast_duration;
             let damage = keys.cost * this.GetItemPlus().GetSpecialValueFor("blast_damage") * 0.01;

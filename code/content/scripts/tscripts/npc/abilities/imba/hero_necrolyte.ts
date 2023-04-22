@@ -848,7 +848,7 @@ export class modifier_imba_reapers_scythe extends BaseModifier_Plus {
             });
             if (target.IsAlive() && this.ability) {
                 this.damage = this.damage * (target.GetMaxHealth() - target.GetHealth());
-                if ((this.damage * (1 + (caster.GetSpellAmplification(false) * 0.01)) * (1 - target.GetMagicalArmorValue())) >= target.GetHealth()) {
+                if ((this.damage * (1 + (caster.GetSpellAmplification(false) * 0.01)) * (1 - target.GetMagicalReductionPect())) >= target.GetHealth()) {
                     this.GetParentPlus().AddNewModifier(this.GetCasterPlus(), this.ability, "modifier_imba_reapers_scythe_respawn", {});
                 }
                 let actually_dmg = ApplyDamage({

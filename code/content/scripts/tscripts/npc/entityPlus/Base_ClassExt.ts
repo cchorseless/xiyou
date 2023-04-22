@@ -1507,7 +1507,11 @@ declare global {
          * @Both
          */
         GetKVData<T>(key: string, defaultv?: T): T;
-
+        /**
+         * @Server 减少魔法
+         * @param mana 
+         */
+        ReduceMana(mana: number): void;
         /**
          * 父节点注册自己
          * @Server
@@ -1583,7 +1587,11 @@ declare global {
          * @Both
          */
         GetAllStats(): number;
-
+        /**
+         * @Both
+         * 获取魔法抵抗百分比
+         */
+        GetMagicalReductionPect(): number;
         /**
          * 获取主属性值
          * @Server
@@ -2292,7 +2300,7 @@ BaseNPC.GetPlayerID = function () {
 
 BaseNPC.IsRealUnit = function () {
     if (!IsValid(this)) return false;
-    return !(this.IsThinker() || this.IsDummyUnit() || this.IsUntargetable() || this.IsRealHero());
+    return !(this.IsThinker() || this.IsDummyUnit() || this.IsUnselectable() || this.IsRealHero());
 }
 
 BaseNPC.GetIntellect = function () {
@@ -2313,6 +2321,11 @@ BaseNPC.GetAgility = function () {
 BaseNPC.GetAllStats = function () {
     if (!IsValid(this)) return 0;
     return this.GetIntellect() + this.GetStrength() + this.GetAgility();
+}
+
+BaseNPC.GetMagicalReductionPect = function () {
+    if (!IsValid(this)) return 0;
+    return PropertyCalculate.GetMagicalReductionPect(this, null)
 }
 
 BaseNPC.GetPrimaryStatValue = function () {
@@ -2405,6 +2418,10 @@ if (IsServer()) {
 
     BaseNPC.GetKVData = function (key: string, defaultValue: any = "") {
         return KVHelper.KvUnits[this.GetUnitName()][key] || defaultValue;
+    }
+
+    BaseNPC.ReduceMana = function (mana: number) {
+        this.SetMana(math.max(this.GetMana() - mana, 0));
     }
 
     BaseNPC.SetPrimaryAttribute = function (iPrimaryAttribute: Attributes) {

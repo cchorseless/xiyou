@@ -20,7 +20,7 @@ function ConsumeCheese(parent: IBaseNpc_Plus, item: IBaseItem_Plus) {
             }
         }
     } else {
-        item.UseResources(false, false, true);
+        item.UseResources(false, false, false, true);
     }
 }
 // 奶酪

@@ -8,8 +8,8 @@ interface ICCPortrait extends NodePropsData {
 
 export class CCPortrait extends CCPanel<ICCPortrait> {
     onStartUI() {
-        this.__root__.current!.FindChildTraverse("InspectButton")!.style.marginLeft = "80px";
-        this.__root__.current!.FindChildTraverse("HeroViewButton")!.style.marginLeft = "50px";
+        // this.__root__.current!.FindChildTraverse("InspectButton")?.style.marginLeft = "80px";
+        // this.__root__.current!.FindChildTraverse("HeroViewButton")?.style.marginLeft = "50px";
     }
     render() {
         return (

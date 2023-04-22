@@ -814,7 +814,7 @@ export class modifier_imba_take_aim_range extends BaseModifier_Plus {
             let attacker = keys.attacker;
             if (this.caster == attacker) {
                 if (this.GetStackCount() == 0 && this.ability.IsCooldownReady()) {
-                    this.ability.UseResources(false, false, true);
+                    this.ability.UseResources(false, false, false, true);
                 }
             }
         }

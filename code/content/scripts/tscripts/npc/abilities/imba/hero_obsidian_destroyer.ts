@@ -257,7 +257,7 @@ export class modifier_imba_arcane_orb_thinker extends BaseModifier_Plus {
                     return undefined;
                 }
                 EmitSoundOn(this.sound_cast, this.caster);
-                this.ability.UseResources(true, false, false);
+                this.ability.UseResources(true, false, false, false);
                 if (this.caster.HasModifier(this.modifier_essence)) {
                     let modifier_essence_handler = this.caster.FindModifierByName(this.modifier_essence) as modifier_imba_essence_aura_buff;
                     if (modifier_essence_handler) {
@@ -652,7 +652,7 @@ export class imba_obsidian_destroyer_astral_imprisonment extends BaseAbility_Plu
                     modifier_essence_handler.ProcEssenceAura();
                 }
             }
-            this.UseResources(false, false, true);
+            this.UseResources(false, false, false, true);
         } else {
             let target_point = this.GetCursorPosition();
             let modifier_self_handler = caster.FindModifierByName(modifier_self) as modifier_imba_astral_imprisonment_buff;
@@ -854,7 +854,7 @@ export class modifier_imba_astral_imprisonment_buff extends BaseModifier_Plus {
     }
     BeDestroy(): void {
         if (IsServer()) {
-            this.ability.UseResources(false, false, true);
+            this.ability.UseResources(false, false, false, true);
         }
     }
     IsHidden(): boolean {

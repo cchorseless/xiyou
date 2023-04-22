@@ -774,7 +774,7 @@ export class modifier_imba_counter_helix_passive extends BaseModifier_Plus {
     }
 
     Spin(repeat_allowed: boolean = true) {
-        this.ability.UseResources(false, false, true);
+        this.ability.UseResources(false, false, false, true);
         this.helix_pfx_1 = ResHelper.CreateParticleEx("particles/units/heroes/hero_axe/axe_attack_blur_counterhelix.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.caster, this.caster);
         ParticleManager.SetParticleControl(this.helix_pfx_1, 0, this.caster.GetAbsOrigin());
         // if (Battlepass && Battlepass.HasArcana(this.caster.GetPlayerID(), "axe")) {

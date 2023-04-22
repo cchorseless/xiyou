@@ -4,7 +4,7 @@ export module CSSHelper {
     export const DEFAULT_ICON_SIZE = "32px";
 
     export function IsReadyUI() {
-        return Game.GetState() === 9;
+        return Game.GetState() >= DOTA_GameState.DOTA_GAMERULES_STATE_GAME_IN_PROGRESS;
     }
 
     export enum VCSSStyle {

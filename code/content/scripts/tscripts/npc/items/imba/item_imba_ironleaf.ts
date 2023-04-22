@@ -349,7 +349,7 @@ export class modifier_imba_ironleaf_boots_meditate extends BaseModifier_Plus {
                 } else {
                     this.SetStackCount(0);
                 }
-                this.ability.UseResources(false, false, true);
+                this.ability.UseResources(false, false, false, true);
                 this.StartIntervalThink(this.meditate_interval);
             }
         }

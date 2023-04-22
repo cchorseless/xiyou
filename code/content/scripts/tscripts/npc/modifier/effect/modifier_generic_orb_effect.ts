@@ -67,7 +67,7 @@ export class modifier_generic_orb_effect extends BaseModifier_Plus {
             return;
         }
         if ((this.cast && this.ability.IsFullyCastable() && !this.GetParentPlus().IsSilenced() && UnitFilter(params.target, this.ability.GetAbilityTargetTeam(), this.ability.GetAbilityTargetType(), this.ability.GetAbilityTargetFlags(), this.GetCasterPlus().GetTeamNumber()) == UnitFilterResult.UF_SUCCESS) || this.bPrimed) {
-            this.ability.UseResources(true, false, true);
+            this.ability.UseResources(true, false, false, true);
             this.records[params.record + ""] = true;
             if (this.ability.OnOrbFire) {
                 this.ability.OnOrbFire(params);

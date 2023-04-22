@@ -52,7 +52,7 @@ export class modifier_imba_gauntlets extends BaseModifier_Plus {
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_CONSTANT_BLOCK)
     CC_GetModifierPhysical_ConstantBlock(p_0: ModifierAttackEvent,): number {
         if (this.ability.IsCooldownReady()) {
-            this.ability.UseResources(false, false, true);
+            this.ability.UseResources(false, false, false, true);
             return this.damage_block;
         }
         return undefined;

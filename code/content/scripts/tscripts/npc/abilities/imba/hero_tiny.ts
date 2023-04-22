@@ -245,7 +245,7 @@ export class modifier_imba_tiny_tree extends BaseModifier_Plus {
             let ability_slot3 = caster.findAbliityPlus<imba_tiny_tree_throw>("imba_tiny_tree_throw");
             let ability_slot4 = caster.findAbliityPlus<imba_tiny_tree_grab>("imba_tiny_tree_grab");
             caster.SwapAbilities(ability_slot3.GetAbilityName(), ability_slot4.GetAbilityName(), false, true);
-            this.GetAbilityPlus().UseResources(false, false, true);
+            this.GetAbilityPlus().UseResources(false, false, false, true);
             if (caster.HasTalent("special_bonus_imba_tiny_4")) {
                 let ability = this.GetAbilityPlus();
                 let cooldown_reduction = this.GetParentPlus().GetTalentValue("special_bonus_imba_tiny_4");

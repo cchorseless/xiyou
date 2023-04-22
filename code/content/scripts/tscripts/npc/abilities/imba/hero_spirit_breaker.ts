@@ -251,7 +251,7 @@ export class modifier_imba_spirit_breaker_charge_of_darkness extends BaseModifie
         this.GetParentPlus().RemoveHorizontalMotionController(this);
         if (this.GetAbilityPlus()) {
             this.GetAbilityPlus().SetActivated(true);
-            this.GetAbilityPlus().UseResources(false, false, true);
+            this.GetAbilityPlus().UseResources(false, false, false, true);
         }
         this.GetParentPlus().StopSound("Hero_Spirit_Breaker.ChargeOfDarkness.FP");
         this.GetParentPlus().StartGesture(GameActivity_t.ACT_DOTA_SPIRIT_BREAKER_CHARGE_END);
@@ -731,7 +731,7 @@ export class modifier_imba_spirit_breaker_greater_bash extends BaseModifier_Plus
         if (this.GetAbilityPlus() && this.GetAbilityPlus().IsTrained() && this.GetAbilityPlus().IsCooldownReady() && keys.attacker == this.GetParentPlus() && !keys.attacker.PassivesDisabled() && !keys.target.IsOther() && !keys.target.IsBuilding() && keys.target.GetTeamNumber() != this.GetParentPlus().GetTeamNumber() && !this.GetParentPlus().IsIllusion()) {
             if (GFuncRandom.PRD(this.GetAbilityPlus().GetTalentSpecialValueFor("chance_pct"), this)) {
                 this.GetAbilityPlus<imba_spirit_breaker_greater_bash>().Bash(keys.target, keys.attacker);
-                this.GetAbilityPlus().UseResources(false, false, true);
+                this.GetAbilityPlus().UseResources(false, false, false, true);
             }
         }
     }

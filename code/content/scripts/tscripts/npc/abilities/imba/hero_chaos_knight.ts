@@ -364,7 +364,7 @@ export class modifier_imba_chaos_knight_chaos_strike extends BaseModifier_Plus {
         }
         if (this.on_crit) {
             let crit = RandomInt(this.crit_min, this.crit_max);
-            ability.UseResources(true, false, true)
+            ability.UseResources(true, false,false, true)
             // 造成伤害
             let damage = crit / 100 * parent.GetAttackDamage()
             let tDamageTable = {

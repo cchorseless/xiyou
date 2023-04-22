@@ -75,6 +75,7 @@ export class modifier_courier extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let hParent = this.GetParentPlus()
+            hParent.SetHullRadius(60);
             hParent.SetSkin(this.iSkin)
             if (this.ambientModifiers && this.ambientModifiers.length > 0) {
                 hParent.addBuff(this.ambientModifiers, hParent)

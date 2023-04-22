@@ -254,7 +254,7 @@ export class modifier_imba_telekinesis extends BaseModifierMotionBoth_Plus {
             } else if (GameFunc.GetCount(enemies) > 1 && !this.is_ally) {
                 parent.EmitSound("Hero_Rubick.Telekinesis.Target.Stun");
             }
-            ability.UseResources(true, false, true);
+            ability.UseResources(true,false, false, true);
             if (this.is_ally) {
                 let current_cooldown = ability.GetCooldownTime();
                 ability.EndCooldown();

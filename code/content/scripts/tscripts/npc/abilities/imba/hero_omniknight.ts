@@ -681,7 +681,7 @@ export class modifier_imba_hammer_of_virtue extends BaseModifier_Plus {
                     this.particle_heal_fx = ResHelper.CreateParticleEx(this.particle_heal, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, ally);
                     ParticleManager.SetParticleControl(this.particle_heal_fx, 0, ally.GetAbsOrigin());
                 }
-                this.ability.UseResources(false, false, true);
+                this.ability.UseResources(false, false, false, true);
             }
         }
     }
@@ -900,7 +900,7 @@ export class modifier_imba_guardian_angel_shield extends BaseModifier_Plus {
                 if (damage_type == DAMAGE_TYPES.DAMAGE_TYPE_PURE) {
                     damage = original_damage;
                 } else if (damage_type == DAMAGE_TYPES.DAMAGE_TYPE_MAGICAL) {
-                    let magic_res = this.parent.GetMagicalArmorValue();
+                    let magic_res = this.parent.GetMagicalReductionPect();
                     damage = original_damage * (1 - magic_res);
                 } else {
                     let armornpc = this.parent.GetPhysicalArmorValue(false);

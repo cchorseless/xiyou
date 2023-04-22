@@ -337,7 +337,7 @@ export class imba_slark_pounce extends BaseAbility_Plus {
             } else {
                 this.GetCasterPlus().findBuff<modifier_imba_slark_pounce>("modifier_imba_slark_pounce").direction = this.GetCasterPlus().GetForwardVector();
             }
-            this.UseResources(false, false, true);
+            this.UseResources(false, false, false, true);
         }
     }
     // GetManaCost(level: number): number {
@@ -402,12 +402,12 @@ export class modifier_imba_slark_pounce extends BaseModifierMotionBoth_Plus {
         }
         if (this.GetAbilityPlus()) {
             if (!this.GetCasterPlus().HasScepter()) {
-                this.GetAbilityPlus().UseResources(false, false, true);
+                this.GetAbilityPlus().UseResources(false, false, false, true);
             } else {
                 if (this.GetCasterPlus().findBuffStack("modifier_imba_slark_pounce_charge_counter", this.GetCasterPlus()) == 0) {
                     this.GetAbilityPlus().StartCooldown(this.GetCasterPlus().findBuff<modifier_imba_slark_pounce_charge_counter>("modifier_imba_slark_pounce_charge_counter").GetRemainingTime());
                 } else {
-                    this.GetAbilityPlus().UseResources(false, false, true);
+                    this.GetAbilityPlus().UseResources(false, false, false, true);
                 }
             }
         }

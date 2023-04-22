@@ -217,7 +217,7 @@ export class modifier_imba_clinkz_strafe extends BaseModifier_Plus {
 //                 this.time_remaining = caster.findBuff<modifier_imba_strafe_self_root>("modifier_imba_strafe_self_root").GetRemainingTime();
 //                 caster.RemoveModifierByName("modifier_imba_strafe_self_root");
 //                 this.EndCooldown();
-//                 this.UseResources(false, false, true);
+//                 this.UseResources(false, false, false, true);
 //             }
 //             if (!caster.HasModifier(modifier_mount)) {
 //                 EmitSoundOn(sound_cast, caster);
@@ -247,7 +247,7 @@ export class modifier_imba_clinkz_strafe extends BaseModifier_Plus {
 //                 this.time_remaining = modifier_mount_handler.GetRemainingTime();
 //                 caster.RemoveModifierByName(modifier_mount);
 //                 this.EndCooldown();
-//                 this.UseResources(false, false, true);
+//                 this.UseResources(false, false, false, true);
 //             }
 //         }
 //     }
@@ -392,7 +392,7 @@ export class modifier_imba_strafe_mount extends BaseModifier_Plus {
         if (IsServer()) {
             if (this.GetAbilityPlus().IsCooldownReady()) {
                 this.GetAbilityPlus<imba_clinkz_strafe>().time_remaining = this.GetRemainingTime();
-                this.GetAbilityPlus().UseResources(false, false, true);
+                this.GetAbilityPlus().UseResources(false, false, false, true);
             }
         }
     }
@@ -418,7 +418,7 @@ export class modifier_imba_strafe_self_root extends BaseModifier_Plus {
         if (IsServer()) {
             if (this.GetAbilityPlus().IsCooldownReady()) {
                 this.GetAbilityPlus<imba_clinkz_strafe>().time_remaining = this.GetRemainingTime();
-                this.GetAbilityPlus().UseResources(false, false, true);
+                this.GetAbilityPlus().UseResources(false, false, false, true);
             }
         }
     }

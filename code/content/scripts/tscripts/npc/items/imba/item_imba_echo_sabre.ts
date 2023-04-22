@@ -61,7 +61,7 @@ export class modifier_imba_echo_sabre extends BaseModifier_Plus {
         if (keys.attacker == parent && item && !parent.IsIllusion() && this.GetParentPlus().FindAllModifiersByName(this.GetName())[0] == this && !this.GetParentPlus().HasItemInInventory("item_imba_reverb_rapier")) {
             if (!parent.IsRangedAttacker()) {
                 if (item.IsCooldownReady() && !keys.no_attack_cooldown) {
-                    item.UseResources(false, false, true);
+                    item.UseResources(false, false, false, true);
                     parent.AddNewModifier(parent, item, "modifier_imba_echo_rapier_haste", {});
                     if (!keys.target.IsBuilding() && !keys.target.IsOther()) {
                         keys.target.AddNewModifier(this.parent, this.GetItemPlus(), "modifier_imba_echo_rapier_debuff_slow", {
@@ -249,7 +249,7 @@ export class modifier_imba_reverb_rapier_passive extends BaseModifier_Plus {
         if (keys.attacker == parent && item && !parent.IsIllusion() && this.GetParentPlus().FindAllModifiersByName(this.GetName())[0] == this) {
             if (!parent.IsRangedAttacker()) {
                 if (item.IsCooldownReady() && !keys.no_attack_cooldown) {
-                    item.UseResources(false, false, true);
+                    item.UseResources(false, false, false, true);
                     parent.AddNewModifier(parent, item, "modifier_imba_echo_rapier_haste", {});
                     if (!keys.target.IsBuilding() && !keys.target.IsOther()) {
                         keys.target.AddNewModifier(this.parent, this.GetItemPlus(), "modifier_imba_echo_rapier_debuff_slow", {

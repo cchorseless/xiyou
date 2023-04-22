@@ -1040,7 +1040,7 @@ export class imba_skeleton_king_reincarnation extends BaseAbility_Plus {
         // let reincarnate = OnDeathKeys.reincarnate;
         if (/**reincarnate && */(!BuffInfo.caster.HasModifier("modifier_item_imba_aegis"))) {
             BuffInfo.reincarnation_death = true;
-            BuffInfo.ability.UseResources(false, false, true);
+            BuffInfo.ability.UseResources(false, false, false, true);
             if (BuffInfo.caster == unit) {
                 let heroes = FindUnitsInRadius(BuffInfo.caster.GetTeamNumber(), BuffInfo.caster.GetAbsOrigin(), undefined, BuffInfo.slow_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS, FindOrder.FIND_ANY_ORDER, false);
                 if (GameServiceConfig.USE_MEME_SOUNDS && GameFunc.GetCount(heroes) >= PlayerResource.GetPlayerCount() * 0.35) {
@@ -1363,7 +1363,7 @@ export class modifier_imba_reincarnation_wraith_form extends BaseModifier_Plus {
             this.damage_pool = this.damage_pool + actually_dmg;
         } else if (keys.damage_type == DAMAGE_TYPES.DAMAGE_TYPE_MAGICAL) {
             let source_dmg = keys.original_damage;
-            let multiplier = 1 - this.GetParentPlus().GetMagicalArmorValue();
+            let multiplier = 1 - this.GetParentPlus().GetMagicalReductionPect();
             let actually_dmg = source_dmg * multiplier;
             this.damage_pool = this.damage_pool + actually_dmg;
         }

@@ -116,7 +116,7 @@ export class modifier_imba_enchantress_impetus extends BaseModifier_Plus {
         if (keys.attacker == this.caster) {
             if (!this.caster.IsIllusion() && this.ability.IsFullyCastable() && !this.caster.IsSilenced() && !keys.target.IsBuilding() && !keys.target.IsOther() && (this.ability.GetAutoCastState() || this.impetus_orb)) {
                 this.attack_queue.push(true);
-                this.ability.UseResources(true, false, false);
+                this.ability.UseResources(true, false, false, false);
                 this.caster.EmitSound(this.impetus_start);
                 this.impetus_orb = false;
             } else {

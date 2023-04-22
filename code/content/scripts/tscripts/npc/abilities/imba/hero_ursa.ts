@@ -638,7 +638,7 @@ export class modifier_imba_overpower_talent_fangs extends BaseModifier_Plus {
                 });
                 EmitSoundOn(this.sound_cast, this.caster);
                 this.ability.DisarmEnemies(this.caster, this.ability);
-                this.ability.UseResources(false, false, true);
+                this.ability.UseResources(false, false, false, true);
             }
         }
     }

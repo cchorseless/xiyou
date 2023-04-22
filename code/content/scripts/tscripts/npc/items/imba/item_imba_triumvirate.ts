@@ -121,7 +121,7 @@ export class modifier_item_imba_triumvirate extends BaseModifier_Plus {
             });
             target.EmitSound("Imba.SangeProc");
             target.EmitSound("Imba.kayaProc");
-            ability.UseResources(false, false, true);
+            ability.UseResources(false, false, false, true);
         }
         let modifier_maim = target.AddNewModifier(attacker, ability, modifier_enemy_stacks, {
             duration: ability.GetSpecialValueFor("stack_duration") * (1 - target.GetStatusResistance())

@@ -120,7 +120,7 @@ export class modifier_imba_frost_arrows_thinker extends BaseModifier_Plus {
                     return undefined;
                 }
                 EmitSoundOn(this.sound_cast, this.caster);
-                this.ability.UseResources(true, false, false);
+                this.ability.UseResources(true, false, false, false);
             }
         }
     }
@@ -1714,7 +1714,7 @@ export class modifier_imba_drow_ranger_marksmanship_723 extends BaseModifier_Plu
                     if (enemy != keys.target) {
                         if (splinter_counter < this.GetSpecialValueFor("split_count_scepter")) {
                             if (this.frost_arrow_modifier && this.frost_arrow_modifier.GetAbility() && (this.frost_arrow_modifier.cast || this.frost_arrow_modifier.GetAbility().GetAutoCastState()) && this.frost_arrow_modifier.GetAbility().IsFullyCastable()) {
-                                this.frost_arrow_modifier.GetAbility().UseResources(true, false, false);
+                                this.frost_arrow_modifier.GetAbility().UseResources(true, false, false, false);
                                 this.bFrost = true;
                                 this.splinter_projectile_name = "particles/units/heroes/hero_drow/drow_frost_arrow.vpcf";
                             } else {

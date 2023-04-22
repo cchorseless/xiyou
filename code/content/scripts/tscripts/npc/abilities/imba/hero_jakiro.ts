@@ -29,7 +29,7 @@ export class base_ability_dual_breath extends BaseAbility_Plus {
             caster.EmitSound("Hero_Jakiro.DualBreath");
             caster.AddNewModifier(caster, this, this.modifier_caster_name, {});
             if (this.GetCasterPlus().HasAbility("imba_jakiro_dual_breath")) {
-                this.GetCasterPlus().findAbliityPlus<imba_jakiro_dual_breath>("imba_jakiro_dual_breath").UseResources(false, false, true);
+                this.GetCasterPlus().findAbliityPlus<imba_jakiro_dual_breath>("imba_jakiro_dual_breath").UseResources(false, false, false, true);
             }
         }
     }
@@ -458,10 +458,10 @@ export class imba_jakiro_dual_breath extends BaseAbility_Plus {
             });
         });
         if (this.GetCasterPlus().HasAbility("imba_jakiro_fire_breath")) {
-            this.GetCasterPlus().findAbliityPlus<imba_jakiro_fire_breath>("imba_jakiro_fire_breath").UseResources(false, false, true);
+            this.GetCasterPlus().findAbliityPlus<imba_jakiro_fire_breath>("imba_jakiro_fire_breath").UseResources(false, false, false, true);
         }
         if (this.GetCasterPlus().HasAbility("imba_jakiro_ice_breath")) {
-            this.GetCasterPlus().findAbliityPlus<imba_jakiro_ice_breath>("imba_jakiro_ice_breath").UseResources(false, false, true);
+            this.GetCasterPlus().findAbliityPlus<imba_jakiro_ice_breath>("imba_jakiro_ice_breath").UseResources(false, false, false, true);
         }
     }
     OnProjectileHit_ExtraData(target: CDOTA_BaseNPC | undefined, location: Vector, ExtraData: any): boolean | void {
@@ -1037,7 +1037,7 @@ export class modifier_imba_liquid_fire_caster extends BaseModifier_Plus {
                 } else {
                     this.apply_aoe_modifier_debuff_on_hit[target.GetEntityIndex() + ""] += 1;
                 }
-                ability.UseResources(false, false, true);
+                ability.UseResources(false, false, false, true);
             }
         }
     }

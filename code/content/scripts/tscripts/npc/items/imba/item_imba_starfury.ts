@@ -14,7 +14,7 @@ function ProjectileHit(params: any) {
         ability: null,
         damage: params.damage,
         damage_type: params.damage_type,
-        damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_USE_COMBAT_PROFICIENCY + DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NO_DAMAGE_MULTIPLIERS
+        damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NO_DAMAGE_MULTIPLIERS
     })
 
 }
@@ -204,7 +204,7 @@ export class modifier_imba_shotgun_passive extends BaseModifier_Plus {
                 let bullet_pfx = ResHelper.CreateParticleEx("particles/item/starfury/shotgun_bulletcase_charlie.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.parent);
                 ParticleManager.SetParticleControl(bullet_pfx, 0, hero.GetAttachmentOrigin(DOTAProjectileAttachment_t.DOTA_PROJECTILE_ATTACHMENT_ATTACK_1));
                 ParticleManager.SetParticleControl(bullet_pfx, 4, vColor);
-                this.item.UseResources(false, false, true);
+                this.item.UseResources(false, false, false, true);
                 StartSoundEventFromPosition("Imba.Shotgun", hero.GetAbsOrigin());
             }
         }
@@ -327,7 +327,7 @@ export class modifier_imba_starfury_passive extends BaseModifier_Plus {
                         ProjectileHelper.TrackingProjectiles.Projectile(projectile);
                         if (!bFound) {
                             bFound = true;
-                            this.item.UseResources(false, false, true);
+                            this.item.UseResources(false, false, false, true);
                         }
                     }
                 }

@@ -505,7 +505,7 @@ export class modifier_imba_phantom_lancer_phantom_edge extends BaseModifier_Plus
             if (this.rush_modifier) {
                 this.rush_modifier.SetStackCount(-this.target.entindex());
             }
-            this.GetAbilityPlus().UseResources(true, false, true);
+            this.GetAbilityPlus().UseResources(true, false,false, true);
             this.bRushChecking = false;
         }
     }
@@ -526,7 +526,7 @@ export class modifier_imba_phantom_lancer_phantom_edge extends BaseModifier_Plus
                             duration: 5,
                             bAgility: true
                         });
-                        this.GetAbilityPlus().UseResources(true, false, true);
+                        this.GetAbilityPlus().UseResources(true, false,false, true);
                     } else {
                         this.rush_modifier = this.GetParentPlus().AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_phantom_lancer_phantom_edge_boost", {
                             duration: 5,
@@ -558,7 +558,7 @@ export class modifier_imba_phantom_lancer_phantom_edge extends BaseModifier_Plus
                 if (this.rush_modifier) {
                     this.rush_modifier.SetStackCount(-keys.target.entindex());
                 }
-                this.GetAbilityPlus().UseResources(true, false, true);
+                this.GetAbilityPlus().UseResources(true, false,false, true);
             }
         }
     }
@@ -921,7 +921,7 @@ export class modifier_imba_phantom_lancer_juxtapose extends BaseModifier_Plus {
                         FindClearSpaceForUnit(unit, this.confusion_positions[_], true);
                     }
                     this.confusion_positions = undefined;
-                    this.owner.findAbliityPlus<imba_phantom_lancer_juxtapose>("imba_phantom_lancer_juxtapose").UseResources(true, false, true);
+                    this.owner.findAbliityPlus<imba_phantom_lancer_juxtapose>("imba_phantom_lancer_juxtapose").UseResources(true, false,false, true);
                 }
             }
             if (this.duration > 0 && (GameFunc.GetCount((this.owner.TempData().juxtapose_table)) >= this.GetAbilityPlus().GetTalentSpecialValueFor("max_illusions"))) {

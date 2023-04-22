@@ -35,7 +35,7 @@ export class BaseAbility_Plus extends BaseAbility {
         if (fCD > 0) {
             this.StartCooldown(fCD);
         } else {
-            this.UseResources(false, false, true);
+            this.UseResources(false, false, false, true);
         }
     }
 

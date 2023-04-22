@@ -869,7 +869,7 @@ export class modifier_imba_keeper_of_the_light_spotlights extends BaseModifier_P
         }
         if (keys.attacker == this.parent && !this.parent.PassivesDisabled() && this.ability.IsCooldownReady()) {
             this.Spotlight(keys.target.GetAbsOrigin(), this.passive_radius, this.attack_duration);
-            this.ability.UseResources(false, false, true);
+            this.ability.UseResources(false, false, false, true);
         }
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
@@ -879,7 +879,7 @@ export class modifier_imba_keeper_of_the_light_spotlights extends BaseModifier_P
         }
         if (keys.unit == this.parent && !this.parent.PassivesDisabled() && this.ability.IsCooldownReady()) {
             this.Spotlight(keys.attacker.GetAbsOrigin(), this.passive_radius, this.damaged_duration);
-            this.ability.UseResources(false, false, true);
+            this.ability.UseResources(false, false, false, true);
         }
     }
     Spotlight(position: Vector, radius: number, duration: number) {

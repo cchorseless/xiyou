@@ -68,7 +68,7 @@ export class modifier_item_imba_poor_mans_shield extends BaseModifier_Plus {
             this.GetParentPlus().AddNewModifier(this.GetCasterPlus(), this.GetItemPlus(), "modifier_item_imba_poor_mans_shield_active", {
                 duration: this.bonus_block_duration
             });
-            this.GetItemPlus().UseResources(false, false, true);
+            this.GetItemPlus().UseResources(false, false, false, true);
         }
         if (GFuncRandom.PRD(this.block_chance, this)) {
             if (!this.GetParentPlus().IsRangedAttacker()) {

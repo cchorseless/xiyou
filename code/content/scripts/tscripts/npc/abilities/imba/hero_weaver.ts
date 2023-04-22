@@ -482,7 +482,7 @@ export class modifier_imba_weaver_geminate_attack extends BaseModifier_Plus {
                     delay: this.GetSpecialValueFor("delay") * geminate_attacks
                 });
             }
-            this.GetAbilityPlus().UseResources(true, true, true);
+            this.GetAbilityPlus().UseResources(true, false,true, true);
         }
     }
 }

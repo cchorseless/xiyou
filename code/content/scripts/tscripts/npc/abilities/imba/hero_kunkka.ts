@@ -981,7 +981,7 @@ export class modifier_imba_tidebringer extends BaseModifier_Plus {
                     }
                     if (!((this.tide_index == 6) || (this.tide_index == 1))) {
                         let cooldown = ability.GetCooldown(ability.GetLevel() - 1);
-                        ability.UseResources(false, false, true);
+                        ability.UseResources(false, false, false, true);
                         this.AddTimer(cooldown, () => {
                             if (!parent.HasModifier("modifier_imba_tidebringer_sword_particle")) {
                                 parent.AddNewModifier(parent, ability, "modifier_imba_tidebringer_sword_particle", {});

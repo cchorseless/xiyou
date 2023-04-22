@@ -232,14 +232,14 @@ export class modifier_item_imba_valiance_counter extends BaseModifier_Plus {
         if (!IsServer() || !this.GetItemPlus()) {
             return;
         }
-        this.GetItemPlus().UseResources(false, false, true);
+        this.GetItemPlus().UseResources(false, false, false, true);
     }
     BeDestroy(): void {
         if (!IsServer()) {
             return;
         }
         if (this.GetItemPlus()) {
-            this.GetItemPlus().UseResources(false, false, true);
+            this.GetItemPlus().UseResources(false, false, false, true);
         }
     }
 }

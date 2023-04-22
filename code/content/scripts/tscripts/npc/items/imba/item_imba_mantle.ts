@@ -55,7 +55,7 @@ export class modifier_imba_mantle extends BaseModifier_Plus {
             if (this.GetParentPlus().FindAllModifiersByName(this.GetName())[0] == this) {
                 let target = keys.target;
                 if (this.ability.IsCooldownReady()) {
-                    this.ability.UseResources(false, false, true);
+                    this.ability.UseResources(false, false, false, true);
                     SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_BONUS_SPELL_DAMAGE, target, this.magical_damage, undefined);
                     return this.magical_damage;
                 }

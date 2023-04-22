@@ -96,7 +96,7 @@ export class item_imba_witch_blade extends BaseItem_Plus {
         if (target.IsMagicImmune() || target.IsBuilding()) {
             this.EndCooldown();
             this.bypass = true;
-            this.UseResources(false, false, true);
+            this.UseResources(false, false, false, true);
             this.bypass = false;
         }
     }

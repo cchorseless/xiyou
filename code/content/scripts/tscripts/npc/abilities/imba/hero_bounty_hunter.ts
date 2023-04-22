@@ -49,7 +49,7 @@ export class imba_bounty_hunter_shuriken_toss extends BaseAbility_Plus {
             let jinada_ability = caster.FindAbilityByName(jinada_ability_name)
             if (caster.HasModifier("modifier_imba_jinada_buff_crit") && jinada_ability && jinada_ability.GetLevel() > 0) {
                 // Jinada goes on cooldown
-                jinada_ability.UseResources(false, false, true)
+                jinada_ability.UseResources(false, false, false, true)
                 // Consumes Jinada's buff
                 caster.RemoveModifierByName("modifier_imba_jinada_buff_crit")
                 // Set the shuriken to be a critical shuriken
@@ -347,7 +347,7 @@ export class imba_bounty_hunter_jinada extends BaseAbility_Plus {
         let target_pos = target.GetAbsOrigin() + blink_direction * (-50) as Vector;
         FindClearSpaceForUnit(caster, target_pos, false);
         caster.SetForwardVector(GFuncVector.AsVector(target.GetAbsOrigin() - caster.GetAbsOrigin()).Normalized());
-        ability.UseResources(false, false, true);
+        ability.UseResources(false, false, false, true);
         this.AddTimer(1, () => {
             if (caster.HasModifier("modifier_imba_jinada_buff_crit")) {
                 caster.RemoveModifierByName("modifier_imba_jinada_buff_crit");
@@ -507,7 +507,7 @@ export class modifier_imba_jinada_buff_crit extends BaseModifier_Plus {
                 ParticleManager.SetParticleControl(this.particle_hit_fx, 0, target.GetAbsOrigin());
                 ParticleManager.ReleaseParticleIndex(this.particle_hit_fx);
                 if (this.ability.IsCooldownReady()) {
-                    this.ability.UseResources(false, false, true);
+                    this.ability.UseResources(false, false, false, true);
                 }
                 if (target.IsRealUnit() && target.GetPlayerID()) {
                     let actual_gold_to_steal = math.min(this.GetAbilityPlus().GetTalentSpecialValueFor("bonus_gold"), PlayerResource.GetUnreliableGold(target.GetPlayerID()));

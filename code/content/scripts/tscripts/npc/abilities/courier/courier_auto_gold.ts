@@ -115,7 +115,7 @@ export class modifier_builder_gold extends BaseModifier_Plus {
                 if (IsValid(hAbility) && hAbility.IsCooldownReady()) {
                     if (hAbility.GetAutoCastState()) {
                         hAbility.OnSpellStart()
-                        hAbility.UseResources(false, false, true)
+                        hAbility.UseResources(false, false, false, true)
                         // Notification.Combat({
                         //     message: "Notification_Plus_Auto_Gold.length",
                         //     player_id: hParent.GetPlayerOwnerID(),

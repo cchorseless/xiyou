@@ -788,7 +788,7 @@ export class modifier_imba_life_stealer_infest extends BaseModifier_Plus {
             this.GetCasterPlus().SwapAbilities(this.GetAbilityPlus().GetAbilityName(), consume_ability.GetAbilityName(), true, false);
         }
         if (this.GetAbilityPlus().GetAbilityName() == "imba_life_stealer_infest_723") {
-            this.GetAbilityPlus().UseResources(false, false, true);
+            this.GetAbilityPlus().UseResources(false, false, false, true);
         }
     }
     CheckState( /** keys */): Partial<Record<modifierstate, boolean>> {

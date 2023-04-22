@@ -257,7 +257,7 @@ export class modifier_imba_luna_moon_glaive extends BaseModifier_Plus {
                 }
             }
             if (this.GetAbilityPlus().IsCooldownReady() && GameFunc.GetCount(enemies) > 1) {
-                this.GetAbilityPlus().UseResources(false, false, true);
+                this.GetAbilityPlus().UseResources(false, false, false, true);
             }
         }
     }

@@ -96,7 +96,7 @@ export class modifier_imba_aeon_disk_basic extends BaseModifier_Plus {
                     duration: buff_duration
                 });
                 this.GetParentPlus().SetHealth(math.min(this.GetParentPlus().GetHealth(), this.GetParentPlus().GetMaxHealth() * health_threshold_pct));
-                this.GetItemPlus().UseResources(false, false, true);
+                this.GetItemPlus().UseResources(false, false, false, true);
                 return -100;
             }
         }

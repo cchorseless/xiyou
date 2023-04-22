@@ -587,7 +587,7 @@ export class modifier_sohei_momentum_passive extends BaseModifier_Plus {
                 }
             }
             if (!this.GetParentPlus().HasModifier("modifier_sohei_flurry_self")) {
-                spell.UseResources(true, true, true);
+                spell.UseResources(true, false,true, true);
             }
         }
     }
@@ -870,7 +870,7 @@ export class modifier_sohei_palm_of_life_movement extends BaseModifierMotionHori
                 let spellMomentum = parent.findAbliityPlus<sohei_momentum>("sohei_momentum");
                 if (spellMomentum) {
                     spellMomentum.EndCooldown();
-                    spellMomentum.UseResources(true, true, true);
+                    spellMomentum.UseResources(true, false,true, true);
                 }
             }
             this.Destroy();

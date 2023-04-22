@@ -269,7 +269,7 @@ export class modifier_storm_spirit_6_buff extends BaseModifierMotionHorizontal_P
             if (hParent.GetMana() >= fManaCost) {
                 let fMana = hParent.GetMana()
                 hAbility.fManaCost = fManaCost
-                hAbility.UseResources(true, false, false)
+                hAbility.UseResources(true, false, false, false)
                 let vTargetPosition = this.iSign == 1 && this.vTargetPosition || this.vStartPosition
                 let vDirection = (vTargetPosition - vPosition) as Vector
                 vDirection.z = 0
