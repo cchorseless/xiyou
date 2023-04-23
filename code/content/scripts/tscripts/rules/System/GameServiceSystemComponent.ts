@@ -138,7 +138,7 @@ export class GameServiceSystemComponent extends GameServiceSystem {
                     }
                 }
                 else {
-                    EventHelper.ErrorMessage("unlock this courier", e.PlayerID);
+                    GNotificationSystem.ErrorMessage("unlock this courier", e.PlayerID);
                 }
             }
             e.state = false;

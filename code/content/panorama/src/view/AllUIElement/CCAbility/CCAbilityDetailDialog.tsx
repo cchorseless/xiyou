@@ -1,7 +1,7 @@
 
 import React from "react";
 import { CSSHelper } from "../../../helper/CSSHelper";
-import { AbilityHelper, ItemHelper, UnitHelper } from "../../../helper/DotaEntityHelper";
+import { AbilityHelper, UnitHelper } from "../../../helper/DotaEntityHelper";
 import { FuncHelper } from "../../../helper/FuncHelper";
 import { KVHelper } from "../../../helper/KVHelper";
 import { CCPanel } from "../CCPanel/CCPanel";
@@ -319,8 +319,8 @@ export class CCAbilityDetailDialog extends CCPanel<ICCAbilityDetailDialog> {
         toggleClass['UsesAbilityCharges'] = false;
 
         // 物品等级，用中立物品的样式来显示
-        let iNeutralTier = ItemHelper.GetItemRarityNumber(abilityname);
-        if (bIsItem && iNeutralTier != -1) {
+        let iNeutralTier = Abilities.GetAbilityRarityNumber(abilityname);
+        if (bIsItem && iNeutralTier != 0) {
             // toggleClass['IsNeutralItem'] = iNeutralTier >= 0;
             // toggleClass['NeutralTier' + (iNeutralTier + 1)] = true;
             // dialogVariables['neutral_item_tier_number'] = iNeutralTier + 1;

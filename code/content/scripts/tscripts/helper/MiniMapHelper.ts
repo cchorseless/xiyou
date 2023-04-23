@@ -1,4 +1,4 @@
-import { GameProtocol } from "../shared/GameProtocol";
+import { NotificationConfig } from "../shared/NotificationConfig";
 import { EventHelper } from "./EventHelper";
 
 export module MiniMapHelper {
@@ -21,7 +21,7 @@ export module MiniMapHelper {
         let offy = math.abs(v.y - 7680) / 7680 / 2;
         v.x = offx;
         v.y = offy
-        EventHelper.fireProtocolEventToPlayer(GameProtocol.Protocol.push_update_minimap, {
+        EventHelper.fireProtocolEventToPlayer(NotificationConfig.EProtocol.push_update_minimap, {
             state: true,
             data: {
                 [showplayerid]: {
@@ -47,7 +47,7 @@ export module MiniMapHelper {
                 allTimerInfo.splice(i, 1);
             }
         }
-        EventHelper.fireProtocolEventToPlayer(GameProtocol.Protocol.push_update_minimap_nodraw, {
+        EventHelper.fireProtocolEventToPlayer(NotificationConfig.EProtocol.push_update_minimap_nodraw, {
             state: true,
             data: { [showplayerid]: 1 }
         }, forplayerid)

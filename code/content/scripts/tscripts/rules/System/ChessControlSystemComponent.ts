@@ -14,7 +14,7 @@ export class ChessControlSystemComponent extends ET.SingletonComponent {
 
     private addEvent() {
         /**移动棋子 */
-        EventHelper.addProtocolEvent(ChessControlConfig.EProtocol.pick_chess_position, GHandler.create(this, (event: CLIENT_DATA<ChessControlConfig.I.pick_chess_position>) => {
+        EventHelper.addProtocolEvent(ChessControlConfig.EProtocol.pick_chess_position, GHandler.create(this, (event: CLIENT_DATA<IChessControlConfig.IPickChessPosition>) => {
             let playersys = GPlayerEntityRoot.GetOneInstance(event.PlayerID);
             let v = Vector(event.data.x, event.data.y, event.data.z);
             let entity = EntIndexToHScript(event.data.entityid as EntityIndex) as IBaseNpc_Plus;
@@ -24,7 +24,7 @@ export class ChessControlSystemComponent extends ET.SingletonComponent {
                 [event.state, event.message] = playersys.BuildingManager().moveBuilding(entity.ETRoot.As<IBuildingEntityRoot>(), v);
             }
             if (!event.state) {
-                EventHelper.ErrorMessage(event.message, event.PlayerID)
+                GNotificationSystem.ErrorMessage(event.message, event.PlayerID)
             }
         }));
     }

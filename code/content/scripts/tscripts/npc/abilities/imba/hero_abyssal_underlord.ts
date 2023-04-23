@@ -1,6 +1,5 @@
 import { GameFunc } from "../../../GameFunc";
 import { AI_ability } from "../../../ai/AI_ability";
-import { EventHelper } from "../../../helper/EventHelper";
 import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -626,7 +625,7 @@ export class imba_abyssal_underlord_atrophy_aura extends BaseAbility_Plus {
         if (mod && mod.GetStackCount() > 0) {
             return true;
         }
-        EventHelper.ErrorMessage("Not enough stacks!", this.GetCasterPlus().GetPlayerID());
+        GNotificationSystem.ErrorMessage("Not enough stacks!", this.GetCasterPlus().GetPlayerID());
         return false;
     }
 

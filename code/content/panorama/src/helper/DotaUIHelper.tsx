@@ -2,6 +2,7 @@ import { render } from "@demon673/react-panorama";
 import React from "react";
 import { CCCombinationInfoDialog } from "../view/Combination/CCCombinationInfoDialog";
 import { CCMainPanel } from "../view/MainPanel/CCMainPanel";
+import { CSSHelper } from "./CSSHelper";
 import { UnitHelper } from "./DotaEntityHelper";
 import { EventHelper } from "./EventHelper";
 import { KVHelper } from "./KVHelper";
@@ -15,7 +16,14 @@ declare global {
          * @param sAbilityName 
          */
         GetLocalizeAbilityName(sAbilityName: string): string;
+        /**获取技能稀有度 */
+        GetAbilityRarity(sAbilityName: string): IRarity;
+        GetAbilityRarityNumber(sAbilityName: string): IRarityNumber;
+        /**获取技能颜色 */
+        GetAbilityColor(sAbilityName: string): string;
+
     }
+
 }
 
 Abilities.GetLocalizeAbilityName = function (sAbilityName: string) {
@@ -23,6 +31,34 @@ Abilities.GetLocalizeAbilityName = function (sAbilityName: string) {
     return str;
 }
 
+Abilities.GetAbilityRarity = function (sAbilityName: string) {
+    return (KVHelper.GetAbilityOrItemDataForKey(sAbilityName, "Rarity") || "B") as IRarity;
+}
+
+Abilities.GetAbilityRarityNumber = function (sAbilityName: string) {
+    const rarity = Abilities.GetAbilityRarity(sAbilityName);
+    return GToNumber(GEEnum.ERarity[rarity]);
+}
+
+Abilities.GetAbilityColor = function (sAbilityName: string) {
+    const rarity = Abilities.GetAbilityRarity(sAbilityName);
+    if (rarity == "SS") {
+        return CSSHelper.EColor.Red;
+    }
+    else if (rarity == "S") {
+        return CSSHelper.EColor.Gold;
+    }
+    else if (rarity == "A") {
+        return CSSHelper.EColor.Purple;
+    } else if (rarity == "B") {
+        return CSSHelper.EColor.Blue;
+    } else if (rarity == "C") {
+        return CSSHelper.EColor.Green;
+    } else if (rarity == "D") {
+        return CSSHelper.EColor.White;
+    }
+    return CSSHelper.EColor.White;
+}
 
 
 

@@ -276,7 +276,7 @@ export class EWearableItem extends ET.Entity {
             }
         }
     }
-    AddParticle2(hWear: WearableConfig.IUnitWearSlotInfo, particle_name: string, sSlotName: string, sStyle: string = null) {
+    AddParticle2(hWear: IWearableConfig.IUnitWearSlotInfo, particle_name: string, sSlotName: string, sStyle: string = null) {
         let hUnit = this.GetDomain<IBaseNpc_Plus>();
         let wearSys = GWearableSystem.GetInstance();
         let attach_type = ParticleAttachment_t.PATTACH_CUSTOMORIGIN;

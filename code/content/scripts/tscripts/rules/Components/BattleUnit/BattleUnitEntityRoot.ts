@@ -41,7 +41,20 @@ export class BattleUnitEntityRoot extends BaseEntityRoot implements IRoundStateC
                 break;
         }
     }
-
+    InitColor() {
+        if (!this.IsFriendly()) { return }
+        let npc = this.GetDomain<IBaseNpc_Plus>();
+        let vColor = this.GetPlayer().GetColor();
+        // npc.SetRenderColor(vColor.x, vColor.y, vColor.z);
+        // let info: ResHelper.IParticleInfo = {
+        //     resPath: "particles/items2_fx/teleport_start_playercolor.vpcf",
+        //     iAttachment: ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW,
+        //     owner: npc,
+        // };
+        // PlayerResource.GetLocalOrigin
+        // let iParticleID = ResHelper.CreateParticle(info);
+        // ParticleManager.SetParticleControl(iParticleID, 2, vColor);
+    }
     InitSyncClientInfo() {
         let domain = this.GetDomain<IBaseNpc_Plus>();
         if (!domain.IsAttacker()) {

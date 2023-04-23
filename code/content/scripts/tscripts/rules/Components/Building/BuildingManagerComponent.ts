@@ -1,4 +1,3 @@
-import { EventHelper } from "../../../helper/EventHelper";
 import { KVHelper } from "../../../helper/KVHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
@@ -40,7 +39,7 @@ export class BuildingManagerComponent extends ET.Component implements IRoundStat
         // 相同的塔
         let bHasCount = this.getBuilding(towerID).length;
         if (bHasCount >= BuildingConfig.MAX_SAME_TOWER) {
-            EventHelper.ErrorMessage(BuildingConfig.ErrorCode.dota_hud_error_has_same_tower, playerID);
+            GNotificationSystem.ErrorMessage(BuildingConfig.ErrorCode.dota_hud_error_has_same_tower, playerID);
             return;
         }
         //  人口判断
@@ -48,7 +47,7 @@ export class BuildingManagerComponent extends ET.Component implements IRoundStat
         let PlayerDataComp = playerroot.PlayerDataComp();
         let freePopulation = PlayerDataComp.getFreePopulation();
         if (iPopulationAdd > freePopulation) {
-            EventHelper.ErrorMessage(BuildingConfig.ErrorCode.dota_hud_error_population_limit);
+            GNotificationSystem.ErrorMessage(BuildingConfig.ErrorCode.dota_hud_error_population_limit);
             return;
         }
         let building = BaseNpc_Plus.CreateUnitByName(towerID, location, hero, false) as IBaseNpc_Plus;
@@ -122,7 +121,7 @@ export class BuildingManagerComponent extends ET.Component implements IRoundStat
         iGoldCost = iGoldCost * goldcostpect * 0.01;
         let playerdata = playerroot.PlayerDataComp();
         if (!playerdata.isEnoughItem(EEnum.EMoneyType.Gold, iGoldCost)) {
-            EventHelper.ErrorMessage(BuildingConfig.ErrorCode.dota_hud_error_gold_limit, playerID);
+            GNotificationSystem.ErrorMessage(BuildingConfig.ErrorCode.dota_hud_error_gold_limit, playerID);
             return;
         }
         // 相同的塔 合成
@@ -138,7 +137,7 @@ export class BuildingManagerComponent extends ET.Component implements IRoundStat
         }
         let pos = this.findEmptyStandbyChessVector();
         if (pos == null) {
-            EventHelper.ErrorMessage(BuildingConfig.ErrorCode.dota_hud_error_cant_build_at_location, playerID);
+            GNotificationSystem.ErrorMessage(BuildingConfig.ErrorCode.dota_hud_error_cant_build_at_location, playerID);
             return;
         }
         let location = pos.getVector3();

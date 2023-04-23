@@ -1,7 +1,6 @@
 
 import { GameFunc } from "../../../GameFunc";
 import { AI_ability } from "../../../ai/AI_ability";
-import { EventHelper } from "../../../helper/EventHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -28,7 +27,7 @@ export class imba_medusa_split_shot extends BaseAbility_Plus {
     }
     OnAbilityPhaseStart(): boolean {
         if (GameFunc.GetCount(this.GetCasterPlus().FindAllModifiersByName("modifier_imba_medusa_enchanted_aim")) >= this.GetSpecialValueFor("enchanted_aim_stack_limit")) {
-            EventHelper.ErrorMessage("Cannot exceed " + this.GetSpecialValueFor("enchanted_aim_stack_limit") + " stacks of Enchanted Aim.", this.GetCasterPlus().GetPlayerID(),);
+            GNotificationSystem.ErrorMessage("Cannot exceed " + this.GetSpecialValueFor("enchanted_aim_stack_limit") + " stacks of Enchanted Aim.", this.GetCasterPlus().GetPlayerID(),);
             return false;
         } else {
             return true;

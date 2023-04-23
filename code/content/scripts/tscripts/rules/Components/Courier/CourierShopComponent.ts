@@ -20,7 +20,7 @@ export class CourierShopComponent extends ET.Component {
             GHandler.create(this, (e: JS_TO_LUA_DATA) => {
                 if (e.PlayerID != this.BelongPlayerid) { return }
                 if (GameRules.IsGamePaused()) {
-                    EventHelper.ErrorMessage("dota_hud_error_game_is_paused", this.BelongPlayerid);
+                    GNotificationSystem.ErrorMessage("dota_hud_error_game_is_paused", this.BelongPlayerid);
                     return
                 }
                 let shoptype = e.data.shoptype;
@@ -172,11 +172,11 @@ export class CourierShopComponent extends ET.Component {
     BuyItem(toNpc: IBaseNpc_Plus, shoptype: PublicBagConfig.EPublicShopType, slot: number) {
         let item = this.getShopItem(shoptype, slot);
         if (item == null) {
-            EventHelper.ErrorMessage("购买失败，物品不存在");
+            GNotificationSystem.ErrorMessage("购买失败，物品不存在");
             return
         }
         if (item.iLimit > 0 && item.iLeftCount <= 0) {
-            EventHelper.ErrorMessage("购买失败，物品已售罄");
+            GNotificationSystem.ErrorMessage("购买失败，物品已售罄");
             return;
         }
         let costcoin = 0;
@@ -185,21 +185,21 @@ export class CourierShopComponent extends ET.Component {
         if (item.iCoinType == EEnum.EMoneyType.Gold) {
             costcoin = KVHelper.GetItemCoinCost(EEnum.EMoneyType.Gold, item.sItemName) * iDiscount;
             if (playerdata.isEnoughItem(EEnum.EMoneyType.Gold, costcoin) == false) {
-                EventHelper.ErrorMessage("购买失败，金币不足");
+                GNotificationSystem.ErrorMessage("购买失败，金币不足");
                 return
             }
         }
         else if (item.iCoinType == EEnum.EMoneyType.Wood) {
             costcoin = KVHelper.GetItemCoinCost(EEnum.EMoneyType.Wood, item.sItemName) * iDiscount;
             if (playerdata.isEnoughItem(EEnum.EMoneyType.Wood, costcoin) == false) {
-                EventHelper.ErrorMessage("购买失败，木材不足");
+                GNotificationSystem.ErrorMessage("购买失败，木材不足");
                 return
             }
         }
         else if (item.iCoinType == EEnum.EMoneyType.SoulCrystal) {
             costcoin = KVHelper.GetItemCoinCost(EEnum.EMoneyType.SoulCrystal, item.sItemName) * iDiscount;
             if (playerdata.isEnoughItem(EEnum.EMoneyType.SoulCrystal, costcoin) == false) {
-                EventHelper.ErrorMessage("购买失败，魂晶不足");
+                GNotificationSystem.ErrorMessage("购买失败，魂晶不足");
                 return
             }
         }
@@ -209,7 +209,7 @@ export class CourierShopComponent extends ET.Component {
         let itemEntity: IBaseItem_Plus;
         if (bBuyItem2Bag) {
             if (courierroot.CourierBagComp().IsItemEmpty() == false) {
-                EventHelper.ErrorMessage("购买失败，背包已满");
+                GNotificationSystem.ErrorMessage("购买失败，背包已满");
                 return
             }
             itemEntity = playerroot.Hero.CreateOneItem(item.sItemName);
@@ -240,7 +240,7 @@ export class CourierShopComponent extends ET.Component {
             }
             if (IsValid(itemEntity)) {
                 if (isGround) {
-                    EventHelper.ErrorMessage("购买成功，物品已放在地上");
+                    GNotificationSystem.ErrorMessage("购买成功，物品已放在地上");
                 }
                 if (toNpc.ETRoot) {
                     let npcroot = toNpc.ETRoot as IBattleUnitEntityRoot;

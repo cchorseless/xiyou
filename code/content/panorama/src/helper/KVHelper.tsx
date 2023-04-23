@@ -149,5 +149,8 @@ export module KVHelper {
         return r;
     }
 
+    export function GetLocLang(lang: string) {
+        return KVLang()[lang as any];
+    }
 
 }

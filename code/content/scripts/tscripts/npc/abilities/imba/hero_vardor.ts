@@ -1,6 +1,5 @@
 
 import { GameFunc } from "../../../GameFunc";
-import { EventHelper } from "../../../helper/EventHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -727,7 +726,7 @@ export class vardor_graceful_jump extends BaseAbility_Plus {
                     }
                 }
             }
-            EventHelper.ErrorMessage("#dota_hud_error_vardor_no_yaris_in_range", this.GetCasterPlus().GetPlayerID());
+            GNotificationSystem.ErrorMessage("#dota_hud_error_vardor_no_yaris_in_range", this.GetCasterPlus().GetPlayerID());
             return;
         }
         EmitSoundOnLocationWithCaster(this.GetCursorPosition(), "Hero_SkywrathMage.ConcussiveShot.Cast", caster);

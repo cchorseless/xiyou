@@ -1,6 +1,7 @@
 import { GameEnum } from "../../../../scripts/tscripts/shared/GameEnum";
 import { GameProtocol } from "../../../../scripts/tscripts/shared/GameProtocol";
 import { GameServiceConfig } from "../../../../scripts/tscripts/shared/GameServiceConfig";
+import { NotificationConfig } from "../../../../scripts/tscripts/shared/NotificationConfig";
 import { ET, ETEntitySystem } from "../../../../scripts/tscripts/shared/lib/Entity";
 import { EventHelper } from "../../helper/EventHelper";
 import { LogHelper } from "../../helper/LogHelper";
@@ -8,7 +9,7 @@ import { NetHelper } from "../../helper/NetHelper";
 import { TipsHelper } from "../../helper/TipsHelper";
 
 @GReloadable
-export class GameEventSystemComponent extends ET.SingletonComponent {
+export class NotificationSystemComponent extends ET.SingletonComponent {
     onAwake() {
         this.addEvent();
     }
@@ -23,14 +24,14 @@ export class GameEventSystemComponent extends ET.SingletonComponent {
             NetHelper.SendToLua(GameProtocol.Protocol.req_ITEM_SLOT_CHANGE, entityindex);
         }));
         /**监听错误信息 */
-        NetHelper.ListenOnLua(GameProtocol.Protocol.push_error_message,
+        NetHelper.ListenOnLua(NotificationConfig.EProtocol.push_error_message,
             GHandler.create(this, (event) => {
-                GLogHelper.print(event);
                 if (event.data != null) {
                     TipsHelper.showErrorMessage(event.data);
-
                 }
             }));
+
+        // 网络同步实体
         let nettable = NetHelper.GetETEntityNetTableName(Players.GetLocalPlayer())! as never;
         this.NetTableListenerList.push(
             CustomNetTables.SubscribeNetTableListener(nettable, (tableName, key, value) => {

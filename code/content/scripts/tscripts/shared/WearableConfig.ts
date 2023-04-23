@@ -20,66 +20,69 @@ export module WearableConfig {
 
     export enum EWearableType {
         wearable = "wearable",
-        weapon='weapon',
+        weapon = 'weapon',
         taunt = 'taunt',
         default_item = 'default_item',
         bundle = 'bundle',
         courier = 'courier',
         ward = 'ward',
-        
+
     }
 
-    export interface IUnitWearSlotInfo {
-        itemDef: string;
-        style?: string;
-        model?: CBaseModelEntity;
-        bRespawnItem: boolean;
-        particles: { [k: string]: ParticleID };
-        additional_wearable?: CBaseModelEntity[];
-        default_projectile?: string;
-        replace_particle_names?: { [k: string]: any };
-        model_modifiers?: any[] ;
-        bChangeSkin?: boolean;
-        bChangeModel?: boolean;
-        bChangeSummon?: { [k: string]: any };
-        bChangeScale?: boolean;
-        bActivity?: boolean;
-        bPersona?: boolean;
-    }
+}
+declare global {
+    namespace IWearableConfig {
+        interface IUnitWearSlotInfo {
+            itemDef: string;
+            style?: string;
+            model?: CBaseModelEntity;
+            bRespawnItem: boolean;
+            particles: { [k: string]: ParticleID };
+            additional_wearable?: CBaseModelEntity[];
+            default_projectile?: string;
+            replace_particle_names?: { [k: string]: any };
+            model_modifiers?: any[];
+            bChangeSkin?: boolean;
+            bChangeModel?: boolean;
+            bChangeSummon?: { [k: string]: any };
+            bChangeScale?: boolean;
+            bActivity?: boolean;
+            bPersona?: boolean;
+        }
 
-    export interface IItemSlot {
-        SlotName?: string;
-        SlotText?: string;
-        SlotIndex?: number;
-        DisplayInLoadout?: number;
-        ItemDefs?: number[];
-        DefaultItem?: number;
-        styles?: any;
+        interface IItemSlot {
+            SlotName?: string;
+            SlotText?: string;
+            SlotIndex?: number;
+            DisplayInLoadout?: number;
+            ItemDefs?: number[];
+            DefaultItem?: number;
+            styles?: any;
+        }
+        interface IHeroInfo {
+            Bundles?: number[]; // 捆绑包
+            ModelScale?: number;
+            Slots?: { [k: string]: IItemSlot };
+            SlotIndex2Name?: { [k: string]: string };
+        }
+        interface IOneItemInfo {
+            name?: string;
+            prefab?: string;
+            creation_date?: string;
+            event_id?: string;
+            image_inventory?: string;
+            item_name?: string;
+            item_rarity?: string;
+            item_slot?: string;
+            item_type_name?: string;
+            model_player?: string;
+            used_by_heroes?: { [k: string]: number };
+            bundle?: { [k: string]: number };
+            visuals?: {
+                styles?: { [k: string]: any };
+                alternate_icons?: { [k: string]: any };
+                [k: string]: any
+            };
+        }
     }
-    export interface IHeroInfo {
-        Bundles?: number[]; // 捆绑包
-        ModelScale?: number;
-        Slots?: { [k: string]: IItemSlot };
-        SlotIndex2Name?: { [k: string]: string };
-    }
-    export interface IOneItemInfo {
-        name?: string; 
-        prefab?: string; 
-        creation_date?: string; 
-        event_id?: string; 
-        image_inventory?: string; 
-        item_name?: string; 
-        item_rarity?: string; 
-        item_slot?: string; 
-        item_type_name?: string; 
-        model_player?: string; 
-        used_by_heroes?: { [k: string]: number }; 
-        bundle?: { [k: string]: number }; 
-        visuals?: {
-            styles?: { [k: string]: any };
-            alternate_icons?: { [k: string]: any };
-            [k: string]: any
-        }; 
-    }
-
 }

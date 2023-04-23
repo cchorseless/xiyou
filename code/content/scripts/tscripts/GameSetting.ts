@@ -49,7 +49,6 @@ export class GameSetting {
         GameRules.SetHeroSelectPenaltyTime(0);
         GameRules.SetStrategyTime(0.5);
         GameRules.SetShowcaseTime(0);
-
         GameRules.SetPreGameTime(3);
         GameRules.SetPostGameTime(3000);
         GameRules.SetTreeRegrowTime(10);
@@ -117,7 +116,7 @@ export class GameSetting {
             // let iOrderType = event.order_type
             // let iPlayerID = event.issuer_player_id_const; // 发出指令的玩家id
             // if (GameRules.IsGamePaused()) {
-            //     EventHelper.ErrorMessage("dota_hud_error_game_is_paused", iPlayerID);
+            //     GNotificationSystem.ErrorMessage("dota_hud_error_game_is_paused", iPlayerID);
             //     return false
             // }
             // let queue = event.queue;

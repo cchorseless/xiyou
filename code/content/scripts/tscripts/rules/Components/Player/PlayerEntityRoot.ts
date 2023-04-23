@@ -262,6 +262,8 @@ export class PlayerEntityRoot extends PlayerSystem {
 
     public onAwake(playerid: PlayerID): void {
         (this.BelongPlayerid as any) = playerid;
+        let color = this.GetColor();
+        PlayerResource.SetCustomPlayerColor(playerid, color.x, color.y, color.z);
         this.AddComponent(GGetRegClass<typeof PlayerHttpComponent>("PlayerHttpComponent"));
         this.AddComponent(GGetRegClass<typeof PlayerDataComponent>("PlayerDataComponent"));
         this.AddComponent(GGetRegClass<typeof DrawComponent>("DrawComponent"));

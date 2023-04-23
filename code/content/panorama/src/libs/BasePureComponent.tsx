@@ -4,6 +4,7 @@ import { ET } from "../../../scripts/tscripts/shared/lib/Entity";
 import { GEventHelper } from "../../../scripts/tscripts/shared/lib/GEventHelper";
 import { CSSHelper } from "../helper/CSSHelper";
 import { LogHelper } from "../helper/LogHelper";
+import { NetHelper } from "../helper/NetHelper";
 
 
 interface IBasePureCompProperty {
@@ -631,6 +632,7 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
         });
         this.allGameEventID = [];
         GEventHelper.RemoveCaller(this);
+        NetHelper.OffAllListenOnLua(this);
         GTimerHelper.ClearAll(this);
         let nodeinfo = BasePureComponentSystem.GetReactElement(this.InstanceId);
         if (nodeinfo) {

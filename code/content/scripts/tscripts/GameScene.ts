@@ -13,6 +13,7 @@ import { DrawSystemComponent } from "./rules/System/DrawSystemComponent";
 import { EnemySystemComponent } from "./rules/System/EnemySystemComponent";
 import { GameServiceSystemComponent } from "./rules/System/GameServiceSystemComponent";
 import { MapSystemComponent } from "./rules/System/MapSystemComponent";
+import { NotificationSystemComponent } from "./rules/System/NotificationSystemComponent";
 import { PublicBagSystemComponent } from "./rules/System/PublicBagSystemComponent";
 import { RoundSystemComponent } from "./rules/System/RoundSystemComponent";
 import { WearableSystemComponent } from "./rules/System/WearableSystemComponent";
@@ -49,6 +50,7 @@ export class GameScene {
     static init() {
         this.addEvent();
         GPlayerEntityRoot.Init()
+        this.Scene.AddComponent(NotificationSystemComponent);
         this.Scene.AddComponent(BattleSystemComponent);
         this.Scene.AddComponent(GameServiceSystemComponent);
         this.Scene.AddComponent(MapSystemComponent);
@@ -194,25 +196,25 @@ export class GameScene {
             let hero = GPlayerEntityRoot.GetOneInstance(playerid).Hero!;
             if (hero == null || itemslot == null || npcentindex == null) {
                 event.state = false;
-                EventHelper.ErrorMessage("not valid args", playerid);
+                GNotificationSystem.ErrorMessage("not valid args", playerid);
                 return;
             }
             let itemEnity = EntIndexToHScript(itementityid) as IBaseItem_Plus;
             let npc = EntIndexToHScript(npcentindex) as IBaseNpc_Plus;
             if (!IsValid(itemEnity) || !IsValid(npc)) {
                 event.state = false;
-                EventHelper.ErrorMessage("not valid item or npc", playerid);
+                GNotificationSystem.ErrorMessage("not valid item or npc", playerid);
                 return;
             }
             if (!itemEnity.CanGiveToNpc(npc)) {
                 event.state = false;
-                EventHelper.ErrorMessage("cant give to npc", playerid);
+                GNotificationSystem.ErrorMessage("cant give to npc", playerid);
                 return;
             }
             let oldParent = itemEnity.GetCasterPlus();
             if (!oldParent.IsFriendly(npc) || npc.GetPlayerID() != playerid) {
                 event.state = false;
-                EventHelper.ErrorMessage("cant give to enemy npc", playerid);
+                GNotificationSystem.ErrorMessage("cant give to enemy npc", playerid);
                 return;
             }
             let oldslot = itemEnity.GetItemSlot();
@@ -245,19 +247,19 @@ export class GameScene {
             let hero = GPlayerEntityRoot.GetOneInstance(playerid).Hero!;
             if (hero == null || itemslot == null || pos == null) {
                 event.state = false;
-                EventHelper.ErrorMessage("not valid args", playerid);
+                GNotificationSystem.ErrorMessage("not valid args", playerid);
                 return;
             }
             let itemEnity = EntIndexToHScript(itementityid) as IBaseItem_Plus;
             if (!IsValid(itemEnity)) {
                 event.state = false;
-                EventHelper.ErrorMessage("not valid item ", playerid);
+                GNotificationSystem.ErrorMessage("not valid item ", playerid);
                 return;
             }
             let npcEntity = itemEnity.GetCasterPlus();
             if (!IsValid(npcEntity) || !npcEntity.IsControllableByAnyPlayer() || npcEntity.GetPlayerID() != playerid) {
                 event.state = false;
-                EventHelper.ErrorMessage("not valid npcEntity ", playerid);
+                GNotificationSystem.ErrorMessage("not valid npcEntity ", playerid);
                 return;
             }
             let posV = Vector(pos.x, pos.y, pos.z);

@@ -31,11 +31,14 @@ export class BuildingEntityRoot extends BattleUnitEntityRoot {
             this.LoadServerData(_hero);
         }), this.BelongPlayerid);
         this.SetStar(1);
+        this.InitColor();
         this.InitInventoryLock();
         this.SetUIOverHead(true, false);
         this.InitSyncClientInfo();
         this.JoinInRound();
     }
+
+
 
     InitInventoryLock() {
         let rarity = this.GetRarity();

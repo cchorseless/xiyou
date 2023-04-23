@@ -1,6 +1,5 @@
 import { GameFunc } from "../../../GameFunc";
 import { AI_ability } from "../../../ai/AI_ability";
-import { EventHelper } from "../../../helper/EventHelper";
 import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -896,7 +895,7 @@ export class imba_alchemist_goblins_greed extends BaseAbility_Plus {
         if (IsServer()) {
             if (IsValid(this.greevil)) {
                 this.EndCooldown();
-                EventHelper.ErrorMessage("#dota_hud_error_active_greevil", this.GetCasterPlus().GetPlayerID());
+                GNotificationSystem.ErrorMessage("#dota_hud_error_active_greevil", this.GetCasterPlus().GetPlayerID());
                 return;
             }
             let caster = this.GetCasterPlus();

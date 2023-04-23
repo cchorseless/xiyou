@@ -13,6 +13,7 @@ export class BattleUnitSummonEntityRoot extends BattleUnitEntityRoot {
         (this.SourceEntityId as any) = this.GetDomain<IBaseNpc_Plus>().GetOwnerPlus().GetEntityIndex();
         this.AddComponent(GGetRegClass<typeof AiAttackComponent>("AiAttackComponent"));
         this.InitSyncClientInfo();
+        this.InitColor();
         this.JoinInRound();
 
     }

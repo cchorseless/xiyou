@@ -16,8 +16,10 @@ export module ChessControlConfig {
     }
 
 
-    export namespace I {
-        export interface pick_chess_position {
+}
+declare global {
+    namespace IChessControlConfig {
+        interface IPickChessPosition {
             x: number;
             y: number;
             z: number;

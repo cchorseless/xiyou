@@ -1,7 +1,6 @@
 
 import { GameFunc } from "../../../GameFunc";
 import { AI_ability } from "../../../ai/AI_ability";
-import { EventHelper } from "../../../helper/EventHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -651,7 +650,7 @@ export class imba_templar_assassin_trap extends BaseAbility_Plus {
                 this.counter_modifier.trap_table[index].Explode(this.trap_ability, this.GetSpecialValueFor("trap_radius"), this.GetSpecialValueFor("trap_duration"));
             }
         } else {
-            EventHelper.ErrorMessage("No traps", this.GetCasterPlus().GetPlayerID());
+            GNotificationSystem.ErrorMessage("No traps", this.GetCasterPlus().GetPlayerID());
         }
     }
     // GetManaCost(level: number): number {

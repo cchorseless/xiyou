@@ -1,5 +1,4 @@
 
-import { EventHelper } from "../../../helper/EventHelper";
 import { KVHelper } from "../../../helper/KVHelper";
 import { EEnum } from "../../../shared/Gen/Types";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -21,12 +20,12 @@ export class courier_upgrade_population extends BaseAbility_Plus {
         let iPlayerID = hCaster.GetPlayerID();
         let playerroot = GPlayerEntityRoot.GetOneInstance(iPlayerID);
         if (playerroot.PlayerDataComp().popuLevelMax <= this.GetLevel()) {
-            EventHelper.ErrorMessage("popu level max", iPlayerID);
+            GNotificationSystem.ErrorMessage("popu level max", iPlayerID);
             return false;
         }
         let r = playerroot.PlayerDataComp().isEnoughItem(EEnum.EMoneyType.Wood, this.GetWoodCost());
         if (!r) {
-            EventHelper.ErrorMessage("wood not enough", iPlayerID);
+            GNotificationSystem.ErrorMessage("wood not enough", iPlayerID);
         }
         return r;
     }
@@ -100,7 +99,7 @@ export class courier_upgrade_tech extends BaseAbility_Plus {
         let iPlayerID = hCaster.GetPlayerID();
         let playerroot = GPlayerEntityRoot.GetOneInstance(iPlayerID);
         if (playerroot.PlayerDataComp().techLevelMax <= this.GetLevel()) {
-            EventHelper.ErrorMessage("tech level max", iPlayerID);
+            GNotificationSystem.ErrorMessage("tech level max", iPlayerID);
             return false;
         }
         return true;

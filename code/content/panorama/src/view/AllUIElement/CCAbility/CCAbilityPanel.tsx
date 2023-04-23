@@ -315,7 +315,7 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
         this.updateDialogVariables("gold_cost", iGoldCost);
 
         // 物品等级，用中立物品的样式来显示
-        let iNeutralTier = ItemHelper.GetItemRarityNumber(Abilities.GetAbilityName(overrideentityindex));
+        let iNeutralTier = Abilities.GetAbilityRarityNumber(Abilities.GetAbilityName(overrideentityindex));
         pSelf.SetHasClass("is_neutral_item", bIsItem && iNeutralTier != 0);
         if (pSelf.BHasClass("is_neutral_item")) {
             pSelf.SwitchClass("NeutralTier", "NeutralTier" + (iNeutralTier + 1));

@@ -53,10 +53,6 @@ export module GameProtocol {
         static readonly req_Mouse_Position = "req_Mouse_Position";
         static readonly req_Update_Setting = "req_Update_Setting";
 
-        /**推送错误信息 */
-        static readonly push_error_message = "push_error_message";
-        static readonly push_update_minimap = "push_update_minimap";
-        static readonly push_update_minimap_nodraw = "push_update_minimap_nodraw";
         // 开局
         static readonly req_LoginGame = "/req_LoginGame";
         static readonly SelectDifficultyChapter = "/SelectDifficultyChapter";

@@ -6,7 +6,6 @@
  * @Description: file content
  */
 
-import { GameProtocol } from "../shared/GameProtocol";
 
 export module EventHelper {
     /**
@@ -305,28 +304,5 @@ export module EventHelper {
         CustomGameEventManager.Send_ServerToPlayer<JS_TO_LUA_DATA>(player, eventName, _event);
     }
 
-    /**
-     * 推送錯誤信息給玩家
-     * @Server
-     * @param message
-     * @param sound
-     * @param playerID
-     */
-    export function ErrorMessage(errorcode: string, ...playerID: Array<PlayerID>) {
-        if (!IsServer()) {
-            return;
-        }
-        let event: JS_TO_LUA_DATA = {};
-        event.state = true;
-        event.data = errorcode;
-        // 全部玩家
-        if (playerID == null || playerID.length == 0) {
-            EventHelper.fireProtocolEventToClient(GameProtocol.Protocol.push_error_message, event);
-        } else {
-            playerID.forEach((_id) => {
-                EventHelper.fireProtocolEventToPlayer(GameProtocol.Protocol.push_error_message, event, _id as PlayerID);
-            });
-        }
-    }
 }
 

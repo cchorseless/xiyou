@@ -1,5 +1,4 @@
 
-import { EventHelper } from "../../../helper/EventHelper";
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
@@ -17,7 +16,7 @@ export class item_imba_ultimate_scepter_synth extends BaseItem_Plus {
             return;
         }
         if (caster.HasModifier("modifier_arc_warden_tempest_double")) {
-            EventHelper.ErrorMessage("Tempest Doubles cannot create a divergent synth modifier.", caster.GetPlayerID());
+            GNotificationSystem.ErrorMessage("Tempest Doubles cannot create a divergent synth modifier.", caster.GetPlayerID());
             return;
         }
         caster.AddNewModifier(caster, this, modifier_synth, {});

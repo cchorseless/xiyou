@@ -16,6 +16,7 @@ import { CCCombinationBottomPanel } from "../Combination/CCCombinationBottomPane
 import { CCHandBookPanel } from "../HandBook/CCHandBookPanel";
 import { CCLuckyDrawPanel } from "../LuckyDraw/CCLuckyDrawPanel";
 import { CCMailPanel } from "../Mail/CCMailPanel";
+import { CCNotificationPanel } from "../Notification/CCNotificationPanel";
 import { CCPlayerListPanel } from "../Player/CCPlayerListPanel";
 import { CCPublicShopBagPanel } from "../PublicShopBag/CCPublicShopBagPanel";
 import { CCRankPanel } from "../Rank/CCRankPanel";
@@ -73,6 +74,7 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
                         <CCCombinationBottomPanel CurSelectUnit={curunit} />
                         <CCArtifactListPanel />
                         <CCPublicShopBagPanel />
+                        <CCNotificationPanel />
                         {this.panel_base_childs}
                     </Panel>
                 }

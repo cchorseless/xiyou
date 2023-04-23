@@ -16,6 +16,7 @@ export class BuildingRuntimeEntityRoot extends BattleUnitEntityRoot {
         (this.EntityId as any) = this.GetDomain<IBaseNpc_Plus>().GetEntityIndex();
         this.addBattleComp();
         this.InitSyncClientInfo();
+        this.InitColor()
         this.JoinInRound();
     }
 

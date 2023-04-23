@@ -52,7 +52,7 @@ export class CCItemImage extends CCPanel<ICCItemImage> {
         // 是否是多级物品
         const bIsMultiLevelItem = ItemHelper.IsMultiLevelItem(contextEntityIndex) || ItemHelper.IsMultiLevelItem(itemname);
         // 如果是召唤卡 稀有度
-        const sCardRarity = (itemname.indexOf("item_building_") != -1) && ItemHelper.GetItemRarity(itemname!);
+        const sCardRarity = (itemname.indexOf("item_building_") != -1) && Abilities.GetAbilityRarity(itemname!);
         // 物品等级
         const m_Level = this.getLevel();
         const m_ItemName = itemname ? itemname : Abilities.GetAbilityName(contextEntityIndex as any);

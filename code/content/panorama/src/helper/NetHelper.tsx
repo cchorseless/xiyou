@@ -71,11 +71,39 @@ export module NetHelper {
                     GameEvents.Unsubscribe(eventID);
                 }
             });
+            if (!isOnce && cbHander.caller) {
+                let __ListenOnLua__ = cbHander.caller["__ListenOnLua__"] || {};
+                __ListenOnLua__[protocol] = __ListenOnLua__[protocol] || [];
+                __ListenOnLua__[protocol].push(eventID);
+                cbHander.caller["__ListenOnLua__"] = __ListenOnLua__;
+            }
         }
     }
-    export function OffAllListenOnLua(context: any) { }
+    export function OffAllListenOnLua(context: any) {
+        if (context && context["__ListenOnLua__"]) {
+            let __ListenOnLua__ = context["__ListenOnLua__"];
+            for (let key in __ListenOnLua__) {
+                let eventIDs = __ListenOnLua__[key];
+                for (let index = 0; index < eventIDs.length; index++) {
+                    const eventID = eventIDs[index];
+                    GameEvents.Unsubscribe(eventID);
+                }
+            }
+        }
+        delete context["__ListenOnLua__"];
+    }
 
-    export function OffListenOnLua(context: any, protocol: string) { }
+    export function OffListenOnLua(context: any, protocol: string) {
+        if (context && context["__ListenOnLua__"]) {
+            let __ListenOnLua__ = context["__ListenOnLua__"];
+            let eventIDs = __ListenOnLua__[protocol];
+            for (let index = 0; index < eventIDs.length; index++) {
+                const eventID = eventIDs[index];
+                GameEvents.Unsubscribe(eventID);
+            }
+            delete __ListenOnLua__[protocol];
+        }
+    }
 
     export function GetTableValue(tableName: GameServiceConfig.ENetTables, key: string) {
         let obj = CustomNetTables.GetTableValue(tableName as never, key) as any;

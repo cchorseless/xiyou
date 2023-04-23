@@ -1294,13 +1294,7 @@ export module ItemHelper {
     export function GetItemCost(sItemName: string) {
         return GToNumber(GetItemValue(sItemName, "ItemCost")) || 0;
     }
-    export function GetItemRarity(sItemName: string): IRarity {
-        return (GetItemValue(sItemName, "Rarity") || "A") as IRarity;
-    }
-    export function GetItemRarityNumber(sItemName: string): IRarityNumber {
-        const rarity = GetItemRarity(sItemName);
-        return GToNumber(GEEnum.ERarity[rarity]);
-    }
+
 
     export function GetItemRecipes(sItemName: string) {
         let aList = [];

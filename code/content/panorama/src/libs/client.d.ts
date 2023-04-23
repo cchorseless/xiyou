@@ -14,6 +14,14 @@ declare interface IDragItem extends IDragPanel {
     tParticleIDs?: ParticleID[];
 }
 
+declare interface LabelPanel {
+    SetLocString(s: string): void;
+}
+
+declare interface ToastManager extends Panel {
+    QueueToast(p: Panel): void;
+    RemoveToast(p: Panel): void;
+}
 
 declare const PlayerResource: any;
 declare const json: any;

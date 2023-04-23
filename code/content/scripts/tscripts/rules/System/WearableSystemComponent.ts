@@ -4,8 +4,8 @@ import { WearableConfig } from "../../shared/WearableConfig";
 @GReloadable
 export class WearableSystemComponent extends ET.SingletonComponent {
 
-    readonly Allheroes: { [k: string]: WearableConfig.IHeroInfo } = {};
-    readonly Allitems: { [k: string]: WearableConfig.IOneItemInfo } = {}; //  所有饰品信息
+    readonly Allheroes: { [k: string]: IWearableConfig.IHeroInfo } = {};
+    readonly Allitems: { [k: string]: IWearableConfig.IOneItemInfo } = {}; //  所有饰品信息
     readonly AllitemsModelMap: { [k: string]: number } = {}; //  所有饰品信息
     readonly Allbundles: { [k: string]: number[] } = {}; //  捆绑包
     readonly Allcouriers: { [k: string]: any } = {}; //  信使
@@ -34,8 +34,8 @@ export class WearableSystemComponent extends ET.SingletonComponent {
                 let SlotIndex2Name = this.Allheroes[heroname].SlotIndex2Name;
                 if (hero.ItemSlots) {
                     for (let key in hero.ItemSlots) {
-                        let Slot: WearableConfig.IItemSlot = hero.ItemSlots[key];
-                        let heroSlot: WearableConfig.IItemSlot = {};
+                        let Slot: IWearableConfig.IItemSlot = hero.ItemSlots[key];
+                        let heroSlot: IWearableConfig.IItemSlot = {};
                         heroSlot.SlotIndex = Slot.SlotIndex; //  number
                         heroSlot.SlotText = Slot.SlotText;
                         heroSlot.ItemDefs = [];

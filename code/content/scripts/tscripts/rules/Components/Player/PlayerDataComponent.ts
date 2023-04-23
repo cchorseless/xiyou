@@ -69,6 +69,21 @@ export class PlayerDataComponent extends PlayerData implements IRoundStateCallba
             this.ModifyGold(this.perIntervalGold);
             this.ModifyWood(this.perIntervalWood);
             this.ModifySoulCrystal(this.perIntervalSoulCrystal);
+            GNotificationSystem.NoticeCombatMessage({
+                message: "lang_Notification_Interval_Prize_Gold",
+                coin_gold: this.perIntervalGold,
+                string_from: "lang_Module_15s_Prize",
+            }, this.BelongPlayerid);
+            GNotificationSystem.NoticeCombatMessage({
+                message: "lang_Notification_Interval_Prize_Wood",
+                coin_wood: this.perIntervalWood,
+                string_from: "lang_Module_15s_Prize",
+            }, this.BelongPlayerid);
+            GNotificationSystem.NoticeCombatMessage({
+                message: "lang_Notification_Interval_Prize_SoulCrystal",
+                coin_soulcrystal: this.perIntervalSoulCrystal,
+                string_from: "lang_Module_15s_Prize",
+            }, this.BelongPlayerid);
             return 15
         }))
     }
@@ -94,15 +109,15 @@ export class PlayerDataComponent extends PlayerData implements IRoundStateCallba
         // EventHelper.addProtocolEvent(PlayerConfig.EProtocol.reqApplyPopuLevelUp, GHandler.create(this, (e) => {
         //     e.state = true;
         //     if (this.popuLevel >= this.popuLevelMax) {
-        //         EventHelper.ErrorMessage("level max", this.BelongPlayerid);
+        //         GNotificationSystem.ErrorMessage("level max", this.BelongPlayerid);
         //         return;
         //     }
         //     if (this.gold < this.popuLevelUpCostGold) {
-        //         EventHelper.ErrorMessage("gold not enough", this.BelongPlayerid);
+        //         GNotificationSystem.ErrorMessage("gold not enough", this.BelongPlayerid);
         //         return;
         //     }
         //     if (this.wood < this.popuLevelUpCostWood) {
-        //         EventHelper.ErrorMessage("wood not enough", this.BelongPlayerid);
+        //         GNotificationSystem.ErrorMessage("wood not enough", this.BelongPlayerid);
         //         return;
         //     }
         //     this.changeItem(EEnum.EMoneyType.Gold, -this.popuLevelUpCostGold);
@@ -113,11 +128,11 @@ export class PlayerDataComponent extends PlayerData implements IRoundStateCallba
         // EventHelper.addProtocolEvent(PlayerConfig.EProtocol.reqApplyTechLevelUp, GHandler.create(this, (e) => {
         //     e.state = true;
         //     if (this.techLevel >= this.techLevelMax) {
-        //         EventHelper.ErrorMessage("tech level max", this.BelongPlayerid);
+        //         GNotificationSystem.ErrorMessage("tech level max", this.BelongPlayerid);
         //         return;
         //     }
         //     if (this.gold < this.techLevelUpCostGold) {
-        //         EventHelper.ErrorMessage("gold not enough", this.BelongPlayerid);
+        //         GNotificationSystem.ErrorMessage("gold not enough", this.BelongPlayerid);
         //         return;
         //     }
         //     this.changeItem(EEnum.EMoneyType.Gold, -this.techLevelUpCostGold);
@@ -185,6 +200,7 @@ export class PlayerDataComponent extends PlayerData implements IRoundStateCallba
         if (goldChange > 0) {
             let hHero = GGameScene.GetPlayer(this.BelongPlayerid).Hero;
             SendOverheadEventMessage(PlayerResource.GetPlayer(this.BelongPlayerid), DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_GOLD, hHero, goldChange, null)
+
         }
         this.SyncClient();
     }

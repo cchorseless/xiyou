@@ -194,7 +194,7 @@ export class CourierBagComponent extends CourierBag {
             else if (to == PublicBagConfig.EBagSlotType.PublicBagSlot) {
                 let publicbag = GPublicBagSystem.GetInstance();
                 if (!publicbag.IsEmpty()) {
-                    EventHelper.ErrorMessage("公共背包已满")
+                    GNotificationSystem.ErrorMessage("公共背包已满")
                     return;
                 }
                 this.getOutItem(fromitem);
@@ -232,7 +232,7 @@ export class CourierBagComponent extends CourierBag {
             if (fromitem == null) { return; }
             if (to == PublicBagConfig.EBagSlotType.BackPackSlot) {
                 if (!this.IsItemEmpty()) {
-                    EventHelper.ErrorMessage("背包已满")
+                    GNotificationSystem.ErrorMessage("背包已满")
                     return;
                 }
                 publicbag.getOutItem(fromitem);
@@ -241,7 +241,7 @@ export class CourierBagComponent extends CourierBag {
             }
             else if (to == PublicBagConfig.EBagSlotType.EquipCombineSlot) {
                 if (!this.IsItemEmpty(PublicBagConfig.EBagSlotType.EquipCombineSlot)) {
-                    EventHelper.ErrorMessage("合成槽位已满")
+                    GNotificationSystem.ErrorMessage("合成槽位已满")
                     return;
                 }
                 publicbag.getOutItem(fromitem);
@@ -279,7 +279,7 @@ export class CourierBagComponent extends CourierBag {
             else if (to == PublicBagConfig.EBagSlotType.PublicBagSlot) {
                 let publicbag = GPublicBagSystem.GetInstance();
                 if (!publicbag.IsEmpty()) {
-                    EventHelper.ErrorMessage("公共背包已满")
+                    GNotificationSystem.ErrorMessage("公共背包已满")
                     return;
                 }
                 this.getOutItem(fromitem, PublicBagConfig.EBagSlotType.EquipCombineSlot);
@@ -311,7 +311,7 @@ export class CourierBagComponent extends CourierBag {
             let itemEntity = fromitem.GetDomain<IBaseItem_Plus>();
             if (to == PublicBagConfig.EBagSlotType.BackPackSlot) {
                 if (!this.IsItemEmpty()) {
-                    EventHelper.ErrorMessage("背包已满")
+                    GNotificationSystem.ErrorMessage("背包已满")
                     return;
                 }
                 toNpc.TakeItem(itemEntity);
@@ -322,7 +322,7 @@ export class CourierBagComponent extends CourierBag {
             else if (to == PublicBagConfig.EBagSlotType.PublicBagSlot) {
                 let publicbag = GPublicBagSystem.GetInstance();
                 if (!publicbag.IsEmpty()) {
-                    EventHelper.ErrorMessage("公共背包已满")
+                    GNotificationSystem.ErrorMessage("公共背包已满")
                     return;
                 }
                 toNpc.TakeItem(itemEntity);
@@ -332,7 +332,7 @@ export class CourierBagComponent extends CourierBag {
             }
             else if (to == PublicBagConfig.EBagSlotType.EquipCombineSlot) {
                 if (!this.IsItemEmpty(PublicBagConfig.EBagSlotType.EquipCombineSlot)) {
-                    EventHelper.ErrorMessage("合成槽位已满")
+                    GNotificationSystem.ErrorMessage("合成槽位已满")
                     return;
                 }
                 toNpc.TakeItem(itemEntity);
