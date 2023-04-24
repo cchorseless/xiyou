@@ -16,7 +16,6 @@ declare namespace common_units {
 "npc_dota_target_dummy" :OBJ_2_1 ,
 [k:string] : OBJ_2_1 }
  interface OBJ_2_1 {
-"UnitLabel" :string ,
 "vscripts" :string ,
 "BaseClass" :string ,
 "Model" :string ,
@@ -33,6 +32,7 @@ declare namespace common_units {
 "HealthBarOffset" :string ,
 "MovementSpeed" :string ,
 "MovementTurnRate" :string ,
+"HasAggressiveStance" :string ,
 "ArmorPhysical" :string ,
 "ArmorMagical" :string ,
 "StatusHealth" :string ,

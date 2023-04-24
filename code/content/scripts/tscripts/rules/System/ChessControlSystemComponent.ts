@@ -36,48 +36,55 @@ export class ChessControlSystemComponent extends ET.SingletonComponent {
     public BoardStandbyMaxVector3: { [playerid: string]: Vector } = {};
     public BoardStandbyMinVector3: { [playerid: string]: Vector } = {};
 
-    public GetPlayerfirstSpawnPoint(playerid: PlayerID) {
-        return GPlayerEntityRoot.HeroSpawnPoint[playerid];
+    // public GetPlayerfirstSpawnPoint(playerid: PlayerID) {
+    //     return GPlayerEntityRoot.HeroSpawnPoint[playerid];
+    // }
+    public GetBoardZeroPoint(playerid: PlayerID) {
+        let offset = Vector(ChessControlConfig.Gird_Width / 2, ChessControlConfig.Gird_Height / 2, 0)
+        return GPlayerEntityRoot.HeroSpawnPoint[playerid] - offset as Vector;
     }
-
     public GetBoardMaxVector3(playerid: PlayerID) {
         if (this.BoardMaxVector3[playerid + ""]) {
             return this.BoardMaxVector3[playerid + ""];
         }
-        let spawn = this.GetPlayerfirstSpawnPoint(playerid);
-        let max_x = ChessControlConfig.Gird_Width * (ChessControlConfig.Gird_Max_X + 1.5);
-        let max_y = ChessControlConfig.Gird_Height * (ChessControlConfig.Gird_Max_Y + 4.5);
-        this.BoardMaxVector3[playerid + ""] = Vector(spawn.x + max_x, spawn.y + max_y, 128);
+        let spawn = this.GetBoardZeroPoint(playerid);
+        let extraoffx = 0;
+        let extraoffy = 0;
+        let max_x = ChessControlConfig.Gird_Width * (ChessControlConfig.Gird_Max_X + extraoffx);
+        let max_y = ChessControlConfig.Gird_Height * (ChessControlConfig.Gird_Max_Y + extraoffy + ChessControlConfig.Gird_OffSet_Y + 1);
+        this.BoardMaxVector3[playerid + ""] = Vector(spawn.x + max_x, spawn.y + max_y, 0);
         return this.BoardMaxVector3[playerid + ""];
     }
     public GetBoardMinVector3(playerid: PlayerID) {
         if (this.BoardMinVector3[playerid + ""]) {
             return this.BoardMinVector3[playerid + ""];
         }
-        let spawn = this.GetPlayerfirstSpawnPoint(playerid);
-        let min_x = ChessControlConfig.Gird_Width * 2.5;
-        let min_y = ChessControlConfig.Gird_Height * 1.5;
-        this.BoardMinVector3[playerid + ""] = Vector(spawn.x - min_x, spawn.y - min_y, 128);
+        let spawn = this.GetBoardZeroPoint(playerid);
+        let extraoffx = 0;
+        let extraoffy = 0;
+        let min_x = ChessControlConfig.Gird_Width * extraoffx;
+        let min_y = ChessControlConfig.Gird_Height * extraoffy;
+        this.BoardMinVector3[playerid + ""] = Vector(spawn.x - min_x, spawn.y - min_y, 0);
         return this.BoardMinVector3[playerid + ""];
     }
     public GetBoard8x10MaxVector3(playerid: PlayerID) {
         if (this.Board8x10MaxVector3[playerid + ""]) {
             return this.Board8x10MaxVector3[playerid + ""];
         }
-        let spawn = this.GetPlayerfirstSpawnPoint(playerid);
-        let max_x = ChessControlConfig.Gird_Width * (ChessControlConfig.Gird_Max_X - 1 + 0.5);
-        let max_y = ChessControlConfig.Gird_Height * (ChessControlConfig.Gird_Max_Y - 1 + 0.5);
-        this.Board8x10MaxVector3[playerid + ""] = Vector(spawn.x + max_x, spawn.y + 1600 - 1152 + max_y, 128);
+        let spawn = this.GetBoardZeroPoint(playerid);
+        let max_x = ChessControlConfig.Gird_Width * (ChessControlConfig.Gird_Max_X);
+        let max_y = ChessControlConfig.Gird_Height * (ChessControlConfig.Gird_Max_Y + ChessControlConfig.Gird_OffSet_Y + 1);
+        this.Board8x10MaxVector3[playerid + ""] = Vector(spawn.x + max_x, spawn.y + max_y, 0);
         return this.Board8x10MaxVector3[playerid + ""];
     }
     public GetBoard8x10MinVector3(playerid: PlayerID) {
         if (this.Board8x10MinVector3[playerid + ""]) {
             return this.Board8x10MinVector3[playerid + ""];
         }
-        let spawn = this.GetPlayerfirstSpawnPoint(playerid);
-        let min_x = ChessControlConfig.Gird_Width * 0.5;
-        let min_y = ChessControlConfig.Gird_Height * 0.5;
-        this.Board8x10MinVector3[playerid + ""] = Vector(spawn.x - min_x, spawn.y + 1600 - 1152 - min_y, 128);
+        let spawn = this.GetBoardZeroPoint(playerid);
+        let min_x = ChessControlConfig.Gird_Width * 0;
+        let min_y = ChessControlConfig.Gird_Height * (ChessControlConfig.Gird_OffSet_Y + 1);
+        this.Board8x10MinVector3[playerid + ""] = Vector(spawn.x - min_x, spawn.y + min_y, 0);
         return this.Board8x10MinVector3[playerid + ""];
     }
 
@@ -85,20 +92,20 @@ export class ChessControlSystemComponent extends ET.SingletonComponent {
         if (this.BoardStandbyMaxVector3[playerid + ""]) {
             return this.BoardStandbyMaxVector3[playerid + ""];
         }
-        let spawn = this.GetPlayerfirstSpawnPoint(playerid);
-        let max_x = ChessControlConfig.Gird_Width * (ChessControlConfig.Gird_Max_X - 1 + 0.5);
-        let max_y = ChessControlConfig.Gird_Height * 0.5;
-        this.BoardStandbyMaxVector3[playerid + ""] = Vector(spawn.x + max_x, spawn.y + max_y, 128);
+        let spawn = this.GetBoardZeroPoint(playerid);
+        let max_x = ChessControlConfig.Gird_Width * (ChessControlConfig.Gird_Max_X);
+        let max_y = ChessControlConfig.Gird_Height * 1;
+        this.BoardStandbyMaxVector3[playerid + ""] = Vector(spawn.x + max_x, spawn.y + max_y, 0);
         return this.BoardStandbyMaxVector3[playerid + ""];
     }
     public GetBoardStandbyMinVector3(playerid: PlayerID) {
         if (this.BoardStandbyMinVector3[playerid + ""]) {
             return this.BoardStandbyMinVector3[playerid + ""];
         }
-        let spawn = this.GetPlayerfirstSpawnPoint(playerid);
-        let min_x = ChessControlConfig.Gird_Width * 0.5;
-        let min_y = ChessControlConfig.Gird_Height * 0.5;
-        this.BoardStandbyMinVector3[playerid + ""] = Vector(spawn.x - min_x, spawn.y - min_y, 128);
+        let spawn = this.GetBoardZeroPoint(playerid);
+        let min_x = ChessControlConfig.Gird_Width * 0;
+        let min_y = ChessControlConfig.Gird_Height * 0;
+        this.BoardStandbyMinVector3[playerid + ""] = Vector(spawn.x - min_x, spawn.y - min_y, 0);
         return this.BoardStandbyMinVector3[playerid + ""];
     }
 

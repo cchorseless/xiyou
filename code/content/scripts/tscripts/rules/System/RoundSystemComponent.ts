@@ -56,6 +56,10 @@ export class RoundSystemComponent extends ET.SingletonComponent {
 
 
     public StartGame() {
+        GNotificationSystem.NoticeCombatMessage({
+            message: "lang_Welcome_to_our_game",
+            string_from: "addon_game_name"
+        })
         this.runBoardRound(this.GetFirstBoardRoundid());
 
     }

@@ -137,7 +137,6 @@ export module PropertyCalculate {
     export function GetUnitCache(hUnit: IBaseNpc_Plus, k: string) {
         let fDefault = 0;
         if (IsValid(hUnit)) {
-
             if (hUnit.TempData()[k] == null) {
                 hUnit.TempData()[k] = GToNumber(KVHelper.GetUnitData(hUnit.GetUnitName(), k));
             }
@@ -154,6 +153,33 @@ export module PropertyCalculate {
         if (IsValid(hUnit)) {
             hUnit.TempData()[k] = v;
         }
+    }
+    /**
+     * 获取单位的碰撞体积
+     * @param hUnit 
+     * @returns 
+     */
+    export function GetHullBoundSize(hUnit: IBaseNpc_Plus) {
+        let fDefault = 30;
+        let des = "DOTA_HULL_SIZE_HERO"
+        if (IsValid(hUnit)) {
+            des = (KVHelper.GetUnitData(hUnit.GetUnitName(), "BoundsHullName") || "DOTA_HULL_SIZE_HERO") as string;
+            switch (des) {
+                case "DOTA_HULL_SIZE_HERO":
+                    fDefault = 30;
+                    break;
+                case "DOTA_HULL_SIZE_SMALL":
+                    fDefault = 20;
+                    break;
+                case "DOTA_HULL_SIZE_HUGE":
+                    fDefault = 50;
+                    break;
+                case "DOTA_HULL_SIZE_REGULAR":
+                    fDefault = 25;
+                    break;
+            }
+        }
+        return fDefault;
     }
 
     /**

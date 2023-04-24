@@ -335,7 +335,7 @@ declare namespace building_unit_enemy {
 "StatusMana" :string ,
 "StatusManaRegen" :string ,
 "AttackCapabilities" :string ,
-"AttackDamageMin" :string ,
+"AttackDamage" :string ,
 "AttackRate" :string ,
 "AttackAnimationPoint" :string ,
 "AttackRange" :string ,

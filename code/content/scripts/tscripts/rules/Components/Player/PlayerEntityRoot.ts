@@ -3,6 +3,7 @@ import { EventHelper } from "../../../helper/EventHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
+import { ChessControlConfig } from "../../../shared/ChessControlConfig";
 import { GameProtocol } from "../../../shared/GameProtocol";
 import { ET } from "../../../shared/lib/Entity";
 import { PlayerConfig } from "../../../shared/PlayerConfig";
@@ -22,12 +23,13 @@ import { PlayerScene } from "./PlayerScene";
 export class PlayerSystem extends ET.EntityRoot {
     static readonly HeroSpawnPoint: Vector[] = [];
     static Init() {
+        let offset = Vector(ChessControlConfig.Gird_Width / 2, ChessControlConfig.Gird_Height / 2, 0)
         // 出生点
-        this.HeroSpawnPoint.push(Entities.FindByName(null, "player_startpoint0").GetAbsOrigin());
-        this.HeroSpawnPoint.push(Entities.FindByName(null, "player_startpoint1").GetAbsOrigin());
-        this.HeroSpawnPoint.push(Entities.FindByName(null, "player_startpoint2").GetAbsOrigin());
-        this.HeroSpawnPoint.push(Entities.FindByName(null, "player_startpoint3").GetAbsOrigin());
-        this.HeroSpawnPoint.push(Entities.FindByName(null, "player_startpoint4").GetAbsOrigin());
+        this.HeroSpawnPoint.push(Entities.FindByName(null, "player_startpoint0").GetAbsOrigin() + offset as Vector);
+        this.HeroSpawnPoint.push(Entities.FindByName(null, "player_startpoint1").GetAbsOrigin() + offset as Vector);
+        this.HeroSpawnPoint.push(Entities.FindByName(null, "player_startpoint2").GetAbsOrigin() + offset as Vector);
+        this.HeroSpawnPoint.push(Entities.FindByName(null, "player_startpoint3").GetAbsOrigin() + offset as Vector);
+        this.HeroSpawnPoint.push(Entities.FindByName(null, "player_startpoint4").GetAbsOrigin() + offset as Vector);
         this.addEvent();
 
     }

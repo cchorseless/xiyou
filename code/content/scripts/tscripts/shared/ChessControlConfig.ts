@@ -1,8 +1,9 @@
 export module ChessControlConfig {
-    export const Gird_Width = 256;
-    export const Gird_Height = 256;
+    export const Gird_Width = 192;
+    export const Gird_Height = 192;
     export const Gird_Max_X = 8;
     export const Gird_Max_Y = 10;
+    export const Gird_OffSet_Y = 1;
     export const ChessValid_Max_Y = 5;
 
     export enum Event {

@@ -254,6 +254,12 @@ export class GameDebugger extends SingletonClass {
                 player.EnemyManagerComp().addEnemy(unitname as string, player.RoundManagerComp().curRoundBoard, null, pos);
             }
         }));
+        EventHelper.addProtocolEvent(GameProtocol.Protocol.req_DebugRemoveEnemy, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
+            let player = GGameScene.GetPlayer(e.PlayerID);
+            if (player) {
+                player.EnemyManagerComp().removeAllEnemy();
+            }
+        }));
         //#endregion
     }
 

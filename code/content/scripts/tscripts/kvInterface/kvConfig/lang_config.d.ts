@@ -4,6 +4,7 @@ declare namespace lang_config {
 "lang_config" :OBJ_1_1 ,
 }
  interface OBJ_1_1 {
+"addon_game_name" :OBJ_2_1 ,
 "population" :OBJ_2_1 ,
 "gold" :OBJ_2_1 ,
 "wood" :OBJ_2_1 ,
@@ -159,6 +160,13 @@ declare namespace lang_config {
 "RandomShopUnlock" :OBJ_2_1 ,
 "RandomShopTime" :OBJ_2_1 ,
 "RandomShopRefresh" :OBJ_2_1 ,
+"Module_15s_Prize" :OBJ_2_1 ,
+"Notification_Plus_Auto_Gold" :OBJ_2_1 ,
+"Notification_Get_Item_from" :OBJ_2_1 ,
+"Notification_Interval_Prize_Gold" :OBJ_2_1 ,
+"Notification_Interval_Prize_Wood" :OBJ_2_1 ,
+"Notification_Interval_Prize_SoulCrystal" :OBJ_2_1 ,
+"Welcome_to_our_game" :OBJ_2_1 ,
 [k:string] : OBJ_2_1 }
  interface OBJ_2_1 {
 "Des" :string ,

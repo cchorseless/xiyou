@@ -31,6 +31,7 @@ export module GameProtocol {
         static readonly req_DebugAddDummyTarget = "/req_DebugAddDummyTarget";
         static readonly req_DebugRemoveDummyTarget = "/req_DebugRemoveDummyTarget";
         static readonly req_DebugMakeChessAttack = "/req_DebugMakeChessAttack";
+        static readonly req_DebugRemoveEnemy = "/req_DebugRemoveEnemy";
         static readonly req_DebugAddGold = "/req_DebugAddGold";
         static readonly req_DebugWTF = "/req_DebugWTF";
         static readonly req_DebugRemoveAllAbility = "/req_DebugRemoveAllAbility";

@@ -109,7 +109,8 @@ export class BattleUnitEntityRoot extends BaseEntityRoot implements IRoundStateC
         }
         // 变大
         domain.SetModelScale(this.iScale * BuildingConfig.MODEL_SCALE[this.iStar - 1]);
-        domain.SetHullRadius(60 * BuildingConfig.MODEL_SCALE[this.iStar - 1])
+        let hullradus = GPropertyCalculate.GetHullBoundSize(domain);
+        domain.SetHullRadius(hullradus * BuildingConfig.MODEL_SCALE[this.iStar - 1])
         // 技能升级
         unitroot.AbilityManagerComp().setAllAbilityLevel(n);
         if (!this.checkCanStarUp() && unitroot.IsBuilding()) {
