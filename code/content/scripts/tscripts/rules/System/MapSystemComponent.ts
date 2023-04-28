@@ -93,8 +93,8 @@ export class MapSystemComponent extends ET.SingletonComponent {
             let forvard = this.BaseVForwardPoint[i];
             this.CreatePortal(f_v, t_v, Vector(0, -1, 0), "player_" + i);
             this.CreatePortal(t_v, f_v, this.BaseVForwardPoint[i], "base_" + i, DOTATeam_t.DOTA_TEAM_BADGUYS);
-            let baoxiang = BaseNpc_Plus.CreateUnitByName("unit_base_baoxiang", this.BaseBaoXiangPoint[i], null, true, DOTATeam_t.DOTA_TEAM_GOODGUYS);
-            baoxiang.SetForwardVector(forvard);
+            // let baoxiang = BaseNpc_Plus.CreateUnitByName("unit_base_baoxiang", this.BaseBaoXiangPoint[i], null, true, DOTATeam_t.DOTA_TEAM_GOODGUYS);
+            // baoxiang.SetForwardVector(forvard);
         }
     }
     CreatePortal(vPortalPosition: Vector, vTargetPosition: Vector, vForward: Vector, sPortalName: string, team: DOTATeam_t = DOTATeam_t.DOTA_TEAM_GOODGUYS, bHasArrow: boolean = false) {

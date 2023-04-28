@@ -268,7 +268,7 @@ export class modifier_imba_dazzle_poison_touch_talent_slow extends BaseModifier_
         let sub = slow % this.HpLossForSlowProc;
         return math.max((slow - sub) * -1, this.maxSlow);
     }
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
         let damage = keys.damage;
         if (keys.unit == this.GetParentPlus() && damage > 0) {

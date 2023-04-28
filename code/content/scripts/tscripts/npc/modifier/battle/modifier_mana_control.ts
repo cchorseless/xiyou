@@ -23,7 +23,7 @@ export class modifier_mana_control extends BaseModifier_Plus {
     }
     baseMana = 2;
     takedamageCount = 0;
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, true, true)
     public CC_OnTakeDamage(params: ModifierInstanceEvent): void {
         this.takedamageCount += params.damage;
         let regenmana = math.floor(this.takedamageCount / this.baseMana);

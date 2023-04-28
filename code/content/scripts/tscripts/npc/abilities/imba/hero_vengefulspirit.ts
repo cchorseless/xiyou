@@ -99,7 +99,7 @@ export class modifier_imba_rancor extends BaseModifier_Plus {
             1: Enum_MODIFIER_EVENT.ON_TAKEDAMAGE
         });
     } */
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(params: ModifierInstanceEvent): void {
         if (this.GetAbilityPlus() && ((this.GetParentPlus() == params.unit) || params.unit.HasModifier("modifier_imba_rancor_allies")) && params.damage > 0 && !this.GetParentPlus().PassivesDisabled() && params.unit.IsRealUnit()) {
             if (params.unit.HasModifier("modifier_imba_rancor_allies") && !(this.GetParentPlus() == params.unit)) {

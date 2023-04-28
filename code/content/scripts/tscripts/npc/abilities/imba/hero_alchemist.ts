@@ -252,7 +252,7 @@ export class modifier_imba_acid_spray_handler extends BaseModifier_Plus {
                         newItem.SetCurrentCharges(gold);
                         let drop = CreateItemOnPositionSync(parent.GetAbsOrigin(), newItem);
                         let dropTarget = parent.GetAbsOrigin() + RandomVector(RandomFloat(50, 150));
-                        newItem.LaunchLoot(true, 300, 0.75, dropTarget as Vector);
+                        newItem.LaunchLoot(true, 300, 0.75, dropTarget as Vector, parent);
                         EmitSoundOn("Dungeon.TreasureItemDrop", parent);
                     }
                 }

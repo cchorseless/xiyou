@@ -63,7 +63,7 @@ export class modifier_item_imba_cheese_death_prevention extends BaseModifier_Plu
         }
         return Object.values(state);
     } */
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
         if (keys.unit.IsIllusion() || (keys.unit != this.GetParentPlus() && !keys.unit.IsClone())) {
             return;

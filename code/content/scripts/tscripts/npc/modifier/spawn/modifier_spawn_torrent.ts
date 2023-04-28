@@ -29,7 +29,7 @@ export class modifier_spawn_torrent extends BaseModifierMotionBoth_Plus {
         if (IsServer()) {
             if (!this.BeginMotionOrDestroy()) { return };
             this.vStartPosition = GetGroundPosition(this.GetParentPlus().GetOrigin(), this.GetParentPlus());
-            this.vTargetPosition = Vector(kv.vx, kv.vy, 128);
+            this.vTargetPosition = Vector(kv.vx, kv.vy, 0);
             this.vDirection = GFuncVector.AsVector(this.vTargetPosition - this.vStartPosition).Normalized();
             this.fDistance = GFuncVector.AsVector(this.vTargetPosition - this.vStartPosition).Length2D();
             this.step = 0; // 0~30

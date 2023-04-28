@@ -76,7 +76,7 @@ export class modifier_imba_blink_dagger_handler extends BaseModifier_Plus {
             1: Enum_MODIFIER_EVENT.ON_TAKEDAMAGE
         });
     } */
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
         let ability = this.GetItemPlus();
         let blink_damage_cooldown = ability.GetSpecialValueFor("blink_damage_cooldown");

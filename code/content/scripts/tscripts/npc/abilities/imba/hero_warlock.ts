@@ -147,7 +147,7 @@ export class modifier_imba_fatal_bonds extends BaseModifier_Plus {
         }
         return Object.values(decFuncs);
     } */
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, true, true)
     CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
         if (IsServer() && bit.band(keys.damage_flags, DOTADamageFlag_t.DOTA_DAMAGE_FLAG_REFLECTION) != DOTADamageFlag_t.DOTA_DAMAGE_FLAG_REFLECTION) {
             let unit = keys.unit;
@@ -172,7 +172,7 @@ export class modifier_imba_fatal_bonds extends BaseModifier_Plus {
                         ParticleManager.ReleaseParticleIndex(particle_hit_fx);
                         if (this.parent.HasModifier(this.modifier_word) && !bonded_enemy.HasModifier(this.modifier_word)) {
                             if (!this.ability_word_handler) {
-                                return undefined;
+                                continue;
                             }
                             if (!bonded_enemy.IsMagicImmune()) {
                                 let modifier_word_handler = this.parent.FindModifierByName(this.modifier_word);
@@ -186,7 +186,8 @@ export class modifier_imba_fatal_bonds extends BaseModifier_Plus {
                         }
                     }
                 }
-            } else if (keys.attacker == this.GetParentPlus() && keys.unit.GetUnitName().includes("warlock_golem") && keys.unit.GetTeamNumber() != this.GetParentPlus().GetTeamNumber()) {
+            }
+            else if (keys.attacker == this.GetParentPlus() && keys.unit.GetUnitName().includes("warlock_golem") && keys.unit.GetTeamNumber() != this.GetParentPlus().GetTeamNumber()) {
                 if ((keys.unit.GetAbsOrigin() - this.GetParentPlus().GetAbsOrigin() as Vector).Length2D() <= this.golem_link_radius) {
                     let damageTable = {
                         victim: this.GetParentPlus(),
@@ -920,7 +921,7 @@ export class modifier_imba_rain_of_chaos_demon_link extends BaseModifier_Plus {
     CC_GetModifierBaseDamageOutgoing_Percentage(p_0: ModifierAttackEvent,): number {
         return this.GetStackCount() * this.scepter_damage_per_demon_pct;
     }
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
         if (IsServer()) {
             let unit = keys.unit;

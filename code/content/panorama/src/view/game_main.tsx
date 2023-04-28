@@ -25,7 +25,7 @@ export class RootPanel extends CCPanel {
     onStartUI() {
         RootPanel.instance = this;
         // 摄像机高度
-        GameUI.SetCameraDistance(1200);
+        GameUI.SetCameraDistance(1600);
         // GameUI.SetCameraPitchMax(55);
     }
     onDestroy() {

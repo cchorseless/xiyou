@@ -3,7 +3,6 @@ import { GameEnum } from "../../../../../scripts/tscripts/shared/GameEnum";
 import { ET } from "../../../../../scripts/tscripts/shared/lib/Entity";
 import { EventHelper } from "../../../helper/EventHelper";
 import { NetHelper } from "../../../helper/NetHelper";
-import { CCMainPanel } from "../../../view/MainPanel/CCMainPanel";
 import { CCUnitChessMoveIcon } from "../../../view/Unit/CCUnitChessMoveIcon";
 @GReloadable
 export class ChessControlComponent extends ET.Component {
@@ -192,11 +191,11 @@ export class ChessControlComponent extends ET.Component {
         this.IS_CURSOR_HERO_ICON_SHOWING = true;
     }
     show_cursor_hero(unit_name: string) {
-        CCMainPanel.GetInstance()!.addOnlyPanel(CCUnitChessMoveIcon, { itemname: unit_name });
+        // CCMainPanel.GetInstance()!.addOnlyPanel(CCUnitChessMoveIcon, { itemname: unit_name });
         this.IS_CURSOR_HERO_ICON_SHOWING = true;
     }
     hide_cursor_hero() {
-        CCUnitChessMoveIcon.GetInstance()?.close();
+        // CCUnitChessMoveIcon.GetInstance()?.close();
         this.IS_CURSOR_HERO_ICON_SHOWING = false;
         if (this.MOVING_PCF > -1) {
             Particles.DestroyParticleEffect(this.MOVING_PCF, true);

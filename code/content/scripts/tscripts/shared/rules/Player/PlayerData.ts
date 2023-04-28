@@ -3,7 +3,7 @@ import { ET, serializeETProps } from "../../lib/Entity";
 
 export class PlayerData extends ET.Component {
     @serializeETProps()
-    populationRoof: number = 1;
+    populationRoof: number = 0;
     @serializeETProps()
     population: number = 0;
     @serializeETProps()

@@ -795,7 +795,7 @@ export class modifier_imba_keeper_of_the_light_recall extends BaseModifier_Plus 
         }
         return Object.values(decFuncs);
     } */
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
         if (!IsServer()) {
             return;
@@ -872,7 +872,7 @@ export class modifier_imba_keeper_of_the_light_spotlights extends BaseModifier_P
             this.ability.UseResources(false, false, false, true);
         }
     }
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
         if (!IsServer()) {
             return;

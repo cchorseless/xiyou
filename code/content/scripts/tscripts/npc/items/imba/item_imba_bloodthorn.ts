@@ -163,7 +163,7 @@ export class modifier_item_imba_bloodthorn_debuff extends BaseModifier_Plus {
             }
         }
     }
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
         if (IsServer()) {
             let owner = this.GetParentPlus();

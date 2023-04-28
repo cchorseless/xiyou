@@ -1073,11 +1073,12 @@ export module UnitHelper {
         return GToNumber(GEEnum.ERarity[rarity]);
     };
 
-    export function GetAttackSpeedPercent(iUnitEntIndex: EntityIndex) {
-        return Entities.GetAttackSpeed(iUnitEntIndex) * 100;
+    export function GetAttackSpeed(iUnitEntIndex: EntityIndex) {
+        // let a = GetUnitData(iUnitEntIndex, "GetAttackSpeed");
+        let b = Entities.GetAttackSpeed(iUnitEntIndex) * 100;
+        // GLogHelper.print("GetAttackSpeed", a, b, 111)
+        return b
     };
-
-
 
     export function GetMoveSpeed(iUnitEntIndex: EntityIndex) {
         return Entities.GetMoveSpeedModifier(iUnitEntIndex, Entities.GetBaseMoveSpeed(iUnitEntIndex));

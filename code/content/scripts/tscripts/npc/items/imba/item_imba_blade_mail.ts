@@ -134,7 +134,7 @@ export class modifier_item_imba_blade_mail_active extends BaseModifier_Plus {
         }
         this.GetParentPlus().EmitSound("DOTA_Item.BladeMail.Deactivate");
     }
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
         if (!IsServer()) {
             return;
@@ -259,7 +259,7 @@ export class modifier_item_imba_blade_mail_passive extends BaseModifier_Plus {
         this.return_damage = this.GetItemPlus().GetSpecialValueFor("passive_return_damage");
         this.return_damage_pct = this.GetItemPlus().GetSpecialValueFor("passive_return_damage_pct");
     }
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(params: ModifierInstanceEvent): void {
         if (!IsServer()) {
             return;

@@ -118,6 +118,9 @@ export class GameScene {
         EventHelper.addGameEvent(GameEnum.GameEvent.NpcSpawnedEvent, GHandler.create(this, this.OnNPCSpawned));
         EventHelper.addGameEvent(GameEnum.GameEvent.EntityKilledEvent, GHandler.create(this, this.OnEntityKilled));
         EventHelper.addGameEvent(GameEnum.GameEvent.EntityHurtEvent, GHandler.create(this, this.OnEntityHurt));
+        // 道具捡起事件
+        // EventHelper.addGameEvent(GameEnum.GameEvent.DotaItemPickedUpEvent, GHandler.create(this, this.onDotaItemPickedUpEvent));
+        // EventHelper.addGameEvent(GameEnum.GameEvent.DotaItemPhysicalDestroyedEvent, GHandler.create(this, this.onDotaItemPickedUpEvent));
         /**JS 请求LUA 事件 */
         EventHelper.addCustomEvent("JS_TO_LUA_EVENT", GHandler.create(this, this.onJS_TO_LUA_EVENT));
         this.addItemEvent();
@@ -377,6 +380,18 @@ export class GameScene {
     static OnEntityHurt(events: EntityHurtEvent) {
 
     }
+    static onDotaItemPickedUpEvent(events: DotaItemPickedUpEvent | DotaItemPhysicalDestroyedEvent) {
+        let hitem = EntIndexToHScript(events.ItemEntityIndex) as IBaseItem_Plus;
+        if (!IsValid(hitem)) {
+            return;
+        }
+        // GLogHelper.print("onDotaItemPickedUpEvent", hitem.GetAbilityName(), events);
+        if (hitem.TempData().__Drop_Effect__) {
+            ParticleManager.ClearParticle(hitem.TempData().__Drop_Effect__);
+            hitem.TempData().__Drop_Effect__ = null;
+        }
+    }
+
     static onJS_TO_LUA_EVENT(entindex: EntityIndex, event: JS_TO_LUA_DATA) {
         if (event.protocol == null) {
             return;

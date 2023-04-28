@@ -177,6 +177,9 @@ export module PropertyCalculate {
                 case "DOTA_HULL_SIZE_REGULAR":
                     fDefault = 25;
                     break;
+                case "DOTA_HULL_SIZE_TOWER":
+                    fDefault = 100;
+                    break;
             }
         }
         return fDefault;
@@ -564,16 +567,36 @@ export module PropertyCalculate {
     export function GetSpellCriticalStrikeDamage_Mix(hUnit: IBaseNpc_Plus, tParams: ICustomModifierAttackEvent) {
         return SumProps(hUnit, tParams, GPropertyConfig.EMODIFIER_PROPERTY.SPELL_CRITICALSTRIKE_MIX_PERCENT,) * 0.01 * GetCriticalStrikeDamage(hUnit, tParams)
     }
-    //  最大攻击速度
-    export function GetBonusMaximumAttackSpeed(hUnit: IBaseNpc_Plus) {
+
+    /**
+     * 最大攻击速度
+     * @param hUnit 
+     * @returns 
+     */
+    export function GetMaximumAttackSpeed(hUnit: IBaseNpc_Plus) {
         if (SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS_UNABLE) >= 1) {
             return 0
         }
         return SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
     }
-    export function GetMaximumAttackSpeed(hUnit: IBaseNpc_Plus) {
-        return GetBonusMaximumAttackSpeed(hUnit) + GPropertyConfig.MAXIMUM_ATTACK_SPEED
+    /**
+     * 当前攻击速度
+     * @param hUnit 
+     * @returns 
+     */
+    export function GetAttackSpeed(hUnit: IBaseNpc_Plus) {
+        let a = GPropertyConfig.BASE_ATTACK_SPEED + PropertyCalculate.SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
+        let b = PropertyCalculate.SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_PERCENTAGE)
+        let c = PropertyCalculate.SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_REDUCTION_PERCENTAGE)
+        return math.max(a * (1 + (b - math.abs(c)) * 0.01), GPropertyConfig.MINIMUM_ATTACK_SPEED)
     }
+    /**
+     * 额外攻速
+     */
+    export function GetAttackSpeedBonus(hUnit: IBaseNpc_Plus) {
+        return GetAttackSpeed(hUnit) - GPropertyConfig.BASE_ATTACK_SPEED;
+    }
+
     export function GetOutgoingDamagePercent(hUnit: IBaseNpc_Plus, tParams: ICustomModifierAttackEvent) {
         return SumProps(hUnit, tParams, GPropertyConfig.EMODIFIER_PROPERTY.TOTALDAMAGEOUTGOING_PERCENTAGE)
     }

@@ -4,11 +4,9 @@ import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { BuildingConfig } from "../../../shared/BuildingConfig";
 import { ChessControlConfig } from "../../../shared/ChessControlConfig";
 import { EEnum } from "../../../shared/Gen/Types";
-import { RoundConfig } from "../../../shared/RoundConfig";
 import { ET } from "../../../shared/lib/Entity";
 import { GEventHelper } from "../../../shared/lib/GEventHelper";
 import { ChessVector } from "../ChessControl/ChessVector";
-import { PlayerScene } from "../Player/PlayerScene";
 import { ERoundBoard } from "../Round/ERoundBoard";
 import { BuildingEntityRoot } from "./BuildingEntityRoot";
 
@@ -108,7 +106,7 @@ export class BuildingManagerComponent extends ET.Component implements IRoundStat
     }
 
     public addBuilding(towerID: string, goldcostpect = 100) {
-        let playerroot = this.GetDomain<PlayerScene>().ETRoot;
+        let playerroot = GGameScene.GetPlayer(this.BelongPlayerid);
         let hero = playerroot.Hero;
         let playerID = playerroot.BelongPlayerid;
         if (!hero.IsAlive()) return;
@@ -182,7 +180,7 @@ export class BuildingManagerComponent extends ET.Component implements IRoundStat
 
     public getAllBuilding() {
         let r: IBuildingEntityRoot[] = [];
-        let player = this.GetDomain<PlayerScene>().ETRoot;
+        let player = GGameScene.GetPlayer(this.BelongPlayerid);
         this.allBuilding.forEach((b) => {
             let entity = player.GetDomainChild<IBuildingEntityRoot>(b);
             if (entity) {
@@ -212,16 +210,16 @@ export class BuildingManagerComponent extends ET.Component implements IRoundStat
             boardVec.y > ChessControlConfig.ChessValid_Max_Y) {
             r = [false, "not  vaild vector"];
         }
-        let currentround = playerRoot.RoundManagerComp().getCurrentBoardRound();
-        if (currentround.roundState != RoundConfig.ERoundBoardState.start && !boardVec.isY(0)
-        ) {
-            r = [false, "move chess only in round start"];
-        }
+        // let currentround = playerRoot.RoundManagerComp().getCurrentBoardRound();
+        // if (currentround.roundState != RoundConfig.ERoundBoardState.start && !boardVec.isY(0)
+        // ) {
+        //     r = [false, "move chess only in round start"];
+        // }
         if (target.ChessComp().ChessVector.isSame(boardVec)) {
             r = [false, "same vector"];
         }
         if (!r[0]) {
-            EmitSoundOn("General.CastFail_NoMana", this.GetDomain<PlayerScene>().ETRoot.Hero);
+            EmitSoundOn("General.CastFail_NoMana", GGameScene.GetPlayer(this.BelongPlayerid).Hero);
             return r;
         }
         let targetPos = ChessControlSystem.GetBoardGirdCenterVector3(boardVec);
@@ -251,8 +249,7 @@ export class BuildingManagerComponent extends ET.Component implements IRoundStat
     }
 
     public findEmptyStandbyChessVector() {
-        let playerid = this.GetDomain<PlayerScene>().ETRoot.BelongPlayerid;
-        let chessVector = new ChessVector(0, 0, playerid);
+        let chessVector = new ChessVector(0, 0, this.BelongPlayerid);
         for (let i = 0; i < ChessControlConfig.Gird_Max_X; i++) {
             chessVector.x = i;
             if (GChessControlSystem.GetInstance().IsBoardEmptyGird(chessVector)) {
@@ -263,50 +260,59 @@ export class BuildingManagerComponent extends ET.Component implements IRoundStat
     }
 
     /**
-     *
+     * @param isbeforeBattle 是否在战斗前
      * @param includeSelfHelper 包括自己外派的
      * @param includeOtherHelper 包括他人外派的
      * @returns
      */
-    public getAllBattleBuilding(includeSelfHelper: boolean = false, includeOtherHelper: boolean = true) {
+    public getAllBattleBuilding(isbeforeBattle: boolean, includeSelfHelper: boolean = false, includeOtherHelper: boolean = true) {
         let r: IBuildingEntityRoot[] = [];
-        if (includeSelfHelper) {
-            r = this.getAllBuilding().filter((b) => {
-                return b.ChessComp().isInBattle;
-            });
-        } else {
+        // if (includeSelfHelper) {
+        //     r = this.getAllBuilding().filter((b) => {
+        //         return b.RuntimeBuilding != null;
+        //     });
+        // } else {
+        //     r = this.getAllBuilding().filter((b) => {
+        //         return b.ChessComp().isInBoardAndBattle();
+        //     });
+        // }
+        // if (includeOtherHelper) {
+        //     r = r.concat(this.allBuildingHelper.filter((b) => {
+        //         return b.ChessComp().isInBattle;
+        //     }));
+        // }
+        if (isbeforeBattle) {
             r = this.getAllBuilding().filter((b) => {
                 return b.ChessComp().isInBoardAndBattle();
             });
-        }
-        if (includeOtherHelper) {
-            r = r.concat(this.allBuildingHelper.filter((b) => {
-                return b.ChessComp().isInBattle;
-            }));
+        } else {
+            r = this.getAllBuilding().filter((b) => {
+                return b.RuntimeBuilding != null;
+            });
         }
         return r;
     }
 
     OnRound_Start(round: ERoundBoard) {
-        this.getAllBattleBuilding().forEach((b) => {
+        this.getAllBattleBuilding(true).forEach((b) => {
             b.OnRound_Start();
         });
     }
 
     OnRound_Battle() {
-        this.getAllBattleBuilding().forEach((b) => {
+        this.getAllBattleBuilding(true).forEach((b) => {
             b.OnRound_Battle();
         });
         // 先战吼技能再激活羁绊
-        let player = this.GetDomain<PlayerScene>().ETRoot;
+        let player = GGameScene.GetPlayer(this.BelongPlayerid);
         player.CombinationManager().OnRound_Battle();
 
     }
 
     OnRound_Prize(round: ERoundBoard) {
-        let player = this.GetDomain<PlayerScene>().ETRoot;
+        let player = GGameScene.GetPlayer(this.BelongPlayerid);
         player.BattleUnitManagerComp().ClearSummonIllusion(DOTATeam_t.DOTA_TEAM_GOODGUYS);
-        this.getAllBattleBuilding().forEach((b) => {
+        this.getAllBattleBuilding(false).forEach((b) => {
             if (b.RuntimeBuilding && b.RuntimeBuilding.isAlive && !b.RuntimeBuilding.IsDisposed()) {
                 if (b.RuntimeBuilding.ChessComp().isInBattle) {
                     b.RuntimeBuilding.OnRound_Prize(round);
@@ -318,7 +324,7 @@ export class BuildingManagerComponent extends ET.Component implements IRoundStat
     }
 
     OnRound_WaitingEnd() {
-        this.getAllBattleBuilding().forEach((b) => {
+        this.getAllBattleBuilding(false).forEach((b) => {
             b.OnRound_WaitingEnd();
         });
     }

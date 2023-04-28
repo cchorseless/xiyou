@@ -155,7 +155,7 @@ export class modifier_imba_royal_wrath extends BaseModifier_Plus {
             1: Enum_MODIFIER_EVENT.ON_TAKEDAMAGE
         });
     } */
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
         if (IsServer()) {
             if (keys.unit == this.GetParentPlus()) {

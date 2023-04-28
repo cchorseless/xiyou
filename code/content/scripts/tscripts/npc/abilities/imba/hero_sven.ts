@@ -842,13 +842,13 @@ export class modifier_imba_god_strength extends BaseModifier_Plus {
         return "particles/units/heroes/hero_sven/sven_gods_strength_hero_effect.vpcf";
     }
     HeroEffectPriority(): modifierpriority {
-        return 10;
+        return 4;
     }
     GetStatusEffectName(): string {
         return "particles/status_fx/status_effect_gods_strength.vpcf";
     }
     StatusEffectPriority(): modifierpriority {
-        return 10;
+        return 4;
     }
     GetAuraSearchTeam(): DOTA_UNIT_TARGET_TEAM {
         return this.GetAbilityPlus().GetAbilityTargetTeam();

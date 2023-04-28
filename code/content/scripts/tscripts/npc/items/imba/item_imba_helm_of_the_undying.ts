@@ -60,7 +60,7 @@ export class modifier_item_imba_helm_of_the_undying_addendum extends BaseModifie
             1: Enum_MODIFIER_EVENT.ON_TAKEDAMAGE
         });
     } */
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
         if (keys.unit == this.GetParentPlus()) {
             this.last_attacker = keys.attacker;

@@ -258,7 +258,7 @@ export class modifier_imba_urn_of_shadows_active_ally extends BaseModifier_Plus 
     CC_GetModifierConstantHealthRegen(): number {
         return this.health_regen;
     }
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(params: ModifierInstanceEvent): void {
         if (!IsServer()) {
             return undefined;

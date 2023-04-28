@@ -91,7 +91,7 @@ export class modifier_imba_blink_boots_handler extends BaseModifier_Plus {
             return this.GetItemPlus().GetSpecialValueFor("bonus_movement_speed");
         }
     }
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
         if (this.GetItemPlus()) {
             if (this.GetParentPlus() == keys.unit && keys.attacker.GetTeam() != this.GetParentPlus().GetTeam()) {

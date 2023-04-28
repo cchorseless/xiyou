@@ -11,6 +11,8 @@ export module PropertyConfig {
     export const MAX_ENERGY = 2100000000;
     /**最小攻速 */
     export const MINIMUM_ATTACK_SPEED = 20;
+    /**基础攻速 */
+    export const BASE_ATTACK_SPEED = 100;
     /**最大攻速 */
     export const MAXIMUM_ATTACK_SPEED = 500;
     /**减伤 = FACTOR x 护甲 / ( 1 + (FACTOR  x |护甲|)) */
@@ -188,7 +190,7 @@ export module PropertyConfig {
         /**
          * Method Name: `GetModifierAttackSpeedBonus_Constant`
          */
-        ATTACKSPEED_BONUS_CONSTANT = modifierfunction.MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
+        // ATTACKSPEED_BONUS_CONSTANT = modifierfunction.MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
         /**
          * Method Name: `GetModifierAttackSpeed_Limit`
          */
@@ -862,7 +864,7 @@ export module PropertyConfig {
         /**
          * Method Name: `GetModifierAttackSpeedReductionPercentage`
          */
-        ATTACKSPEED_REDUCTION_PERCENTAGE = modifierfunction.MODIFIER_PROPERTY_ATTACKSPEED_REDUCTION_PERCENTAGE,
+        // ATTACKSPEED_REDUCTION_PERCENTAGE = modifierfunction.MODIFIER_PROPERTY_ATTACKSPEED_REDUCTION_PERCENTAGE,
         /**
          * Method Name: `GetModifierMoveSpeedReductionPercentage`
          */
@@ -871,7 +873,7 @@ export module PropertyConfig {
         /**
          * Method Name: `GetModifierAttackSpeedPercentage`
          */
-        ATTACKSPEED_PERCENTAGE = modifierfunction.MODIFIER_PROPERTY_ATTACKSPEED_PERCENTAGE,
+        // ATTACKSPEED_PERCENTAGE = modifierfunction.MODIFIER_PROPERTY_ATTACKSPEED_PERCENTAGE,
 
         COOLDOWN_PERCENTAGE_STACKING = modifierfunction.MODIFIER_PROPERTY_COOLDOWN_PERCENTAGE_STACKING,
 
@@ -1006,9 +1008,12 @@ export module PropertyConfig {
         INCOMING_CRITICALSTRIKE_DAMAGE_PERCENTAGE,
         SPELL_CRITICALSTRIKE_MIX_PERCENT,
         CRITICALSTRIKE_MIX_PERCENT,
-
+        // 攻击速度
         MAX_ATTACKSPEED_BONUS_UNABLE,
         MAX_ATTACKSPEED_BONUS,
+        ATTACKSPEED_BONUS_CONSTANT,
+        ATTACKSPEED_REDUCTION_PERCENTAGE,
+        ATTACKSPEED_PERCENTAGE,
         BASE_ATTACK_TIME_ADJUST,
         BASE_ATTACK_TIME_PERCENTAGE,
         // 技能闪避

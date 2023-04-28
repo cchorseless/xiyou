@@ -8,7 +8,6 @@ import { CombinationManagerComponent } from "./Components/Combination/Combinatio
 import { ECombination } from "./Components/Combination/ECombination";
 import { ECombinationLabelItem } from "./Components/Combination/ECombinationLabelItem";
 import { DrawComponent } from "./Components/Draw/DrawComponent";
-import { EnemyKillPrizeComponent } from "./Components/Enemy/EnemyKillPrizeComponent";
 import { EnemyManagerComponent } from "./Components/Enemy/EnemyManagerComponent";
 import { FHeroAIComponent } from "./Components/FakerHero/FHeroAIComponent";
 import { FHeroCombination } from "./Components/FakerHero/FHeroCombination";
@@ -61,7 +60,6 @@ import { WearableSystemComponent } from "./System/WearableSystemComponent";
     BuffManagerComponent,
     ChessMoveComponent,
 
-    EnemyKillPrizeComponent,
     EWearableItem,
     WearableComponent,
     WearableSystemComponent,

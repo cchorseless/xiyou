@@ -1483,7 +1483,7 @@ export class modifier_imba_rearm_shield extends BaseModifier_Plus {
     OnIntervalThink(): void {
         this.current_health = this.GetParentPlus().GetHealth();
     }
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(params: ModifierInstanceEvent): void {
         if (IsServer()) {
             let parent = this.GetParentPlus();

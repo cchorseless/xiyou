@@ -68,13 +68,33 @@ export module Assert_SpawnEffect {
             end_effect: "particles/econ/events/fall_2021/blink_dagger_fall_2021_start_lvl2.vpcf",
         };
     }
-
-    export function ShowTPEffectAtPosition(p: Vector, e: string, time: number) {
+    /**
+     * 返回动画时间
+     * @param p 
+     * @param e 
+     * @returns 
+     */
+    export function ShowTPEffectAtPosition(p: Vector, e: ISpawnEffectInfo) {
+        let delay = 0;
         if (e != null) {
-            let ppp = ResHelper.CreateParticle(new ResHelper.ParticleInfo().set_iAttachment(ParticleAttachment_t.PATTACH_WORLDORIGIN).set_resPath(e).set_validtime(time));
+            delay = RandomFloat(0.5, 1.5);
+            let ppp = ResHelper.CreateParticle(new ResHelper.ParticleInfo().set_iAttachment(ParticleAttachment_t.PATTACH_WORLDORIGIN).set_resPath(e.tp_effect));
             ParticleManager.SetParticleControl(ppp, 0, p);
             ParticleManager.SetParticleControl(ppp, 1, p);
-            return ppp;
+            GTimerHelper.AddTimer(delay, GHandler.create({}, () => {
+                ParticleManager.ClearParticle(ppp);
+                if (e.tp_sound != null) {
+                    EmitSoundOnLocationWithCaster(p, e.tp_sound, undefined);
+                }
+                if (e.end_effect != null) {
+                    ResHelper.CreateParticle(new ResHelper.ParticleInfo()
+                        .set_iAttachment(ParticleAttachment_t.PATTACH_WORLDORIGIN)
+                        .set_resPath(e.end_effect)
+                        .set_validtime(2));
+                }
+            }));
         }
+        return delay;
+
     }
 }

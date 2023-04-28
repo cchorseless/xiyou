@@ -3839,6 +3839,8 @@ export class RoundEnemyConfigBean {
         this.unitname = _json_.unitname
         if (_json_.star === undefined) { GLogHelper.error(1); }
         this.star = _json_.star
+        if (_json_.unit_weight === undefined) { GLogHelper.error(1); }
+        this.unitWeight = _json_.unit_weight
         if (_json_.position_x === undefined) { GLogHelper.error(1); }
         this.positionX = _json_.position_x
         if (_json_.position_y === undefined) { GLogHelper.error(1); }
@@ -3849,8 +3851,8 @@ export class RoundEnemyConfigBean {
         this.anglesY = _json_.angles_y
         if (_json_.angles_z === undefined) { GLogHelper.error(1); }
         this.anglesZ = _json_.angles_z
-        if (_json_.israndompos === undefined) { GLogHelper.error(1); }
-        this.israndompos = _json_.israndompos
+        if (_json_.issummoned === undefined) { GLogHelper.error(1); }
+        this.issummoned = _json_.issummoned
         if (_json_.isground === undefined) { GLogHelper.error(1); }
         this.isground = _json_.isground
         if (_json_.atkpect === undefined) { GLogHelper.error(1); }
@@ -3884,6 +3886,10 @@ export class RoundEnemyConfigBean {
      */
     readonly star: number
     /**
+     * 随机权重
+     */
+    readonly unitWeight: number
+    /**
      * 位置x[0-7]
      */
     readonly positionX: number
@@ -3904,9 +3910,9 @@ export class RoundEnemyConfigBean {
      */
     readonly anglesZ: number
     /**
-     * 是否随机坐标
+     * 是否是召唤怪
      */
-    readonly israndompos: number
+    readonly issummoned: boolean
     /**
      * 是否在地面上
      */
@@ -4046,8 +4052,8 @@ export class RoundChallengeEnemyConfigBean {
         this.anglesY = _json_.angles_y
         if (_json_.angles_z === undefined) { GLogHelper.error(1); }
         this.anglesZ = _json_.angles_z
-        if (_json_.israndompos === undefined) { GLogHelper.error(1); }
-        this.israndompos = _json_.israndompos
+        if (_json_.issummoned === undefined) { GLogHelper.error(1); }
+        this.issummoned = _json_.issummoned
         if (_json_.isground === undefined) { GLogHelper.error(1); }
         this.isground = _json_.isground
         if (_json_.atkpect === undefined) { GLogHelper.error(1); }
@@ -4105,9 +4111,9 @@ export class RoundChallengeEnemyConfigBean {
      */
     readonly anglesZ: number
     /**
-     * 是否随机坐标
+     * 是否是召唤怪
      */
-    readonly israndompos: boolean
+    readonly issummoned: boolean
     /**
      * 是否在地面上
      */

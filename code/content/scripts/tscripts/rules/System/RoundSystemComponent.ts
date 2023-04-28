@@ -81,7 +81,7 @@ export class RoundSystemComponent extends ET.SingletonComponent {
             .forEach((player) => {
                 player.RoundManagerComp().runBoardRound(round);
             });
-        this.createRoundPrizeUnit(round);
+        // this.createRoundPrizeUnit(round);
     }
 
     public endBoardRound() {

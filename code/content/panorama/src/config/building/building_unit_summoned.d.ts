@@ -555,7 +555,6 @@ declare namespace building_unit_summoned {
 "npc_tui6_venomancer_ward_custom" :OBJ_2_1 ,
 "npc_tui6_void_spirit_summon" :OBJ_2_1 ,
 "npc_vision_revealer" :OBJ_2_1 ,
-"npc_wearable_dummy" :OBJ_2_1 ,
 [k:string] : OBJ_2_1 }
  interface OBJ_2_1 {
 "BaseClass" :string ,

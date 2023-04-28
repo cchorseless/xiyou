@@ -42,15 +42,16 @@ export class modifier_item_imba_poor_mans_shield extends BaseModifier_Plus {
         if (IsServer()) {
             if (!this.GetItemPlus()) {
                 this.Destroy();
+                return;
             }
         }
-        this.bonus_agility = this.GetItemPlus().GetSpecialValueFor("bonus_agility");
-        this.damage_block_melee = this.GetItemPlus().GetSpecialValueFor("damage_block_melee");
-        this.damage_block_ranged = this.GetItemPlus().GetSpecialValueFor("damage_block_ranged");
-        this.block_chance = this.GetItemPlus().GetSpecialValueFor("block_chance");
-        this.bonus_block_melee = this.GetItemPlus().GetSpecialValueFor("bonus_block_melee");
-        this.bonus_block_range = this.GetItemPlus().GetSpecialValueFor("bonus_block_range");
-        this.bonus_block_duration = this.GetItemPlus().GetSpecialValueFor("bonus_block_duration");
+        this.bonus_agility = this.GetSpecialValueFor("bonus_agility");
+        this.damage_block_melee = this.GetSpecialValueFor("damage_block_melee");
+        this.damage_block_ranged = this.GetSpecialValueFor("damage_block_ranged");
+        this.block_chance = this.GetSpecialValueFor("block_chance");
+        this.bonus_block_melee = this.GetSpecialValueFor("bonus_block_melee");
+        this.bonus_block_range = this.GetSpecialValueFor("bonus_block_range");
+        this.bonus_block_duration = this.GetSpecialValueFor("bonus_block_duration");
     }
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
@@ -64,17 +65,19 @@ export class modifier_item_imba_poor_mans_shield extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_CONSTANT_BLOCK)
     CC_GetModifierPhysical_ConstantBlock(keys: ModifierAttackEvent): number {
-        if (keys.attacker.IsRealUnit() && this.GetItemPlus() && this.GetItemPlus().IsCooldownReady()) {
-            this.GetParentPlus().AddNewModifier(this.GetCasterPlus(), this.GetItemPlus(), "modifier_item_imba_poor_mans_shield_active", {
-                duration: this.bonus_block_duration
-            });
-            this.GetItemPlus().UseResources(false, false, false, true);
-        }
+        // if (keys.attacker.IsRealUnit() && this.GetItemPlus() && this.GetItemPlus().IsCooldownReady()) {
+        //     this.GetParentPlus().AddNewModifier(this.GetCasterPlus(), this.GetItemPlus(), "modifier_item_imba_poor_mans_shield_active", {
+        //         duration: this.bonus_block_duration
+        //     });
+        //     this.GetItemPlus().UseResources(false, false, false, true);
+        // }
         if (GFuncRandom.PRD(this.block_chance, this)) {
             if (!this.GetParentPlus().IsRangedAttacker()) {
-                return this.damage_block_melee + ((this.GetParentPlus().HasModifier("modifier_item_imba_poor_mans_shield_active") && this.bonus_block_melee) || 0);
+                // return this.damage_block_melee + ((this.GetParentPlus().HasModifier("modifier_item_imba_poor_mans_shield_active") && this.bonus_block_melee) || 0);
+                return this.damage_block_melee
             } else {
-                return this.damage_block_ranged + ((this.GetParentPlus().HasModifier("modifier_item_imba_poor_mans_shield_active") && this.bonus_block_range) || 0);
+                // return this.damage_block_ranged + ((this.GetParentPlus().HasModifier("modifier_item_imba_poor_mans_shield_active") && this.bonus_block_range) || 0);
+                return this.damage_block_ranged
             }
         }
     }

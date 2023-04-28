@@ -126,9 +126,9 @@ export module KVHelper {
     }
 
     /**
-     * 找到所有的单位
+     * 找到道具价格
      * @param unitname
-     * @returns K[]
+     * @returns 
      */
     export function GetItemCoinCost(cointype: ICoinType, itemname: string) {
         let r = 0;
@@ -146,6 +146,18 @@ export module KVHelper {
         }
         return r;
     }
+    /**
+     * 道具品质
+     * @param itemname 
+     */
+    export function GetItemRarity(itemname: string): IRarity {
+        let config = KVHelper.KvItems[itemname];
+        if (config) {
+            return (config.Rarity || "B") as IRarity;
+        }
+        return "B";
+    }
+
 
     /**
      * 处理奖励字符串，转化出

@@ -1412,7 +1412,7 @@ export class modifier_imba_chain_frost_talent_buff extends BaseModifier_Plus {
             1: Enum_MODIFIER_EVENT.ON_TAKEDAMAGE
         });
     } */
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
         let unit = keys.unit;
         let attacker = keys.attacker;

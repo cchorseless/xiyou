@@ -1,4 +1,5 @@
 import { KVHelper } from "../../helper/KVHelper"
+import { BuildingConfig } from "../../shared/BuildingConfig"
 import { BaseModifier_Plus, registerProp } from "../entityPlus/BaseModifier_Plus"
 import { registerModifier } from "../entityPlus/Base_Plus"
 
@@ -42,6 +43,9 @@ export class modifier_hero_property extends BaseModifier_Plus {
         else {
             this.AttributePrimary = Attributes.DOTA_ATTRIBUTE_INVALID;
         }
+        this.AttributeBaseStrength = GToNumber(KVHelper.GetUnitData(unitname, "AttributeBaseStrength"));
+        this.AttributeBaseAgility = GToNumber(KVHelper.GetUnitData(unitname, "AttributeBaseAgility"));
+        this.AttributeBaseIntelligence = GToNumber(KVHelper.GetUnitData(unitname, "AttributeBaseIntelligence"));
         this.AttributeStrengthGain = GToNumber(KVHelper.GetUnitData(unitname, "AttributeStrengthGain"));
         this.AttributeAgilityGain = GToNumber(KVHelper.GetUnitData(unitname, "AttributeAgilityGain"));
         this.AttributeIntelligenceGain = GToNumber(KVHelper.GetUnitData(unitname, "AttributeIntelligenceGain"));
@@ -55,6 +59,9 @@ export class modifier_hero_property extends BaseModifier_Plus {
         }
     }
     AttributePrimary: number;
+    AttributeBaseStrength: number = 0;
+    AttributeBaseAgility: number = 0;
+    AttributeBaseIntelligence: number = 0;
     AttributeStrengthGain: number = 0;
     AttributeAgilityGain: number = 0;
     AttributeIntelligenceGain: number = 0;
@@ -117,23 +124,23 @@ export class modifier_hero_property extends BaseModifier_Plus {
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BASE)
     CC_STATS_STRENGTH_BASE() {
         let parent = this.GetParentPlus()
-        let star = parent.GetStar() - 1;
-        star = star > 0 ? star : 0;
-        return (parent.GetLevel() + star * this.LevelPerStar) * this.AttributeStrengthGain
+        // let star = parent.GetStar() - 1;
+        // star = star > 0 ? star : 0;
+        return (parent.GetLevel() + 0 * this.LevelPerStar) * this.AttributeStrengthGain
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_BASE)
     CC_STATS_AGILITY_BASE() {
         let parent = this.GetParentPlus()
-        let star = parent.GetStar() - 1;
-        star = star > 0 ? star : 0;
-        return (parent.GetLevel() + star * this.LevelPerStar) * this.AttributeAgilityGain
+        // let star = parent.GetStar() - 1;
+        // star = star > 0 ? star : 0;
+        return (parent.GetLevel() + 0 * this.LevelPerStar) * this.AttributeAgilityGain
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BASE)
     CC_STATS_INTELLECT_BASE() {
         let parent = this.GetParentPlus()
-        let star = parent.GetStar() - 1;
-        star = star > 0 ? star : 0;
-        return (parent.GetLevel() + star * this.LevelPerStar) * this.AttributeIntelligenceGain
+        // let star = parent.GetStar() - 1;
+        // star = star > 0 ? star : 0;
+        return (parent.GetLevel() + 0 * this.LevelPerStar) * this.AttributeIntelligenceGain
     }
 
     // @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.LIFESTEAL_PERCENTAGE)
@@ -142,21 +149,45 @@ export class modifier_hero_property extends BaseModifier_Plus {
     // }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASEATTACK_BONUSDAMAGE)
     CC_GetModifierBaseAttack_BonusDamage(params: IModifierTable) {
+        // 升星加成
         let iStackCount = this.GetStackCount()
+        let starBonus = this.GetStarUpBouns(iStackCount);
         if (iStackCount == Attributes.DOTA_ATTRIBUTE_STRENGTH) {
-            return GPropertyCalculate.GetStrength(this.GetParentPlus()) * GPropertyConfig.ATTRIBUTE_PRIMARY_ATTACK_DAMAGE
+            return (GPropertyCalculate.GetStrength(this.GetParentPlus()) + starBonus) * GPropertyConfig.ATTRIBUTE_PRIMARY_ATTACK_DAMAGE
         }
         else if (iStackCount == Attributes.DOTA_ATTRIBUTE_AGILITY) {
-            return GPropertyCalculate.GetAgility(this.GetParentPlus()) * GPropertyConfig.ATTRIBUTE_PRIMARY_ATTACK_DAMAGE
+            return (GPropertyCalculate.GetAgility(this.GetParentPlus()) + starBonus) * GPropertyConfig.ATTRIBUTE_PRIMARY_ATTACK_DAMAGE
         }
         else if (iStackCount == Attributes.DOTA_ATTRIBUTE_INTELLECT) {
-            return GPropertyCalculate.GetIntellect(this.GetParentPlus()) * GPropertyConfig.ATTRIBUTE_PRIMARY_ATTACK_DAMAGE
+            return (GPropertyCalculate.GetIntellect(this.GetParentPlus()) + starBonus) * GPropertyConfig.ATTRIBUTE_PRIMARY_ATTACK_DAMAGE
         }
         return 0;
     }
+
+    GetStarUpBouns(attr: Attributes, factor = 8) {
+        let parent = this.GetParentPlus();
+        let star = parent.GetStar();
+        star = star > 0 ? star : 0;
+        star = star == BuildingConfig.MAX_STAR ? (star) : math.max(star - 1, 0);
+        let starBonus = 0;
+        if (attr == Attributes.DOTA_ATTRIBUTE_STRENGTH) {
+            starBonus = (this.AttributeStrengthGain * factor) * star;
+        }
+        else if (attr == Attributes.DOTA_ATTRIBUTE_AGILITY) {
+            starBonus = (this.AttributeAgilityGain * factor) * star;
+        }
+        else if (attr == Attributes.DOTA_ATTRIBUTE_INTELLECT) {
+            starBonus = (this.AttributeIntelligenceGain * factor) * star;
+        }
+        return starBonus;
+    }
+
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
     CC_HP_BONUS() {
-        return GPropertyCalculate.GetStrength(this.GetParentPlus()) * GPropertyConfig.ATTRIBUTE_STRENGTH_HP_BONUS
+        // 升星加成
+        let parent = this.GetParentPlus();
+        let strengthbouns = this.GetStarUpBouns(Attributes.DOTA_ATTRIBUTE_STRENGTH);
+        return (GPropertyCalculate.GetStrength(parent) + strengthbouns) * GPropertyConfig.ATTRIBUTE_STRENGTH_HP_BONUS
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_REGEN_CONSTANT)
     CC_HEALTH_REGEN_CONSTANT() {

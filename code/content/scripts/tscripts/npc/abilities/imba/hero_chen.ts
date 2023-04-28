@@ -696,7 +696,7 @@ export class modifier_imba_chen_holy_persuasion_teleport extends BaseModifier_Pl
     }
     return Object.values(decFuncs);
     } */
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
         if (!IsServer()) {
             return;

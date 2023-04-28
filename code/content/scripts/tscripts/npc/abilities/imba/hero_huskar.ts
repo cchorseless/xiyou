@@ -327,7 +327,7 @@ export class modifier_imba_huskar_burning_spear_counter extends BaseModifier_Plu
         }
         return Object.values(decFuncs);
     } */
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
         if (!IsServer()) {
             return;

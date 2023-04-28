@@ -34,8 +34,7 @@ export class ERoundBoardChallenge extends ERound {
         let enemyName = info.unitname;
         let delay = 0;
         if (spawnEffect != null && spawnEffect.tp_effect != null) {
-            delay = RandomFloat(0.1, 2.1);
-            Assert_SpawnEffect.ShowTPEffectAtPosition(pos, spawnEffect.tp_effect, delay);
+            delay = Assert_SpawnEffect.ShowTPEffectAtPosition(pos, spawnEffect);
         }
         let domain = this.GetDomain<IBaseNpc_Plus>();
         let enemyManager = domain.ETRoot.As<IPlayerEntityRoot>().EnemyManagerComp();

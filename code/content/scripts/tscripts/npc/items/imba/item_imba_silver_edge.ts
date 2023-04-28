@@ -240,7 +240,7 @@ export class modifier_item_imba_silver_edge_passive extends BaseModifier_Plus {
             return this.GetItemPlus().GetSpecialValueFor("bonus_all_stats");
         }
     }
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(params: ModifierInstanceEvent): void {
         if (IsServer()) {
             if (params.unit == this.GetParentPlus()) {

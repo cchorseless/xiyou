@@ -223,7 +223,7 @@ export class modifier_imba_faceless_void_time_walk_damage_counter extends BaseMo
             }
         }
     }
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
         if (IsServer()) {
             let unit = keys.unit;

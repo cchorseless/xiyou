@@ -157,6 +157,7 @@ export module EnemyConfig {
     ];
 
     export enum EEnemyUnitType {
+        Tower = "Tower",
         wave = "wave",
         BOSS = "BOSS",
         GOLD_BOSS = "GOLD_BOSS",

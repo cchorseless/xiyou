@@ -1037,7 +1037,7 @@ export class modifier_imba_talent_enrage_damage extends BaseModifier_Plus {
     IsDebuff(): boolean {
         return false;
     }
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
         if (IsServer()) {
             let target = keys.unit;

@@ -20,12 +20,12 @@
 			}
 			"02" {
 				"var_type" "FIELD_INTEGER"
-				"c_pect" "60"
+				"c_pect" "80"
 
 			}
 			"03" {
 				"var_type" "FIELD_INTEGER"
-				"b_pect" "40"
+				"b_pect" "20"
 
 			}
 
@@ -92,7 +92,7 @@
 			}
 			"02" {
 				"var_type" "FIELD_INTEGER"
-				"b_pect" "20"
+				"b_pect" "30"
 
 			}
 			"03" {
@@ -102,7 +102,7 @@
 			}
 			"04" {
 				"var_type" "FIELD_INTEGER"
-				"s_pect" "20"
+				"s_pect" "10"
 
 			}
 			"05" {
@@ -370,6 +370,86 @@
 			"02" {
 				"var_type" "FIELD_INTEGER"
 				"wood_cost" "5"
+
+			}
+
+		}
+
+	}
+	"faker_courier_summon_enemy" {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/courier/faker_courier_summon_enemy"
+		"AbilityTextureName" "visage_summon_familiars"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET|DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE|DOTA_ABILITY_BEHAVIOR_IGNORE_SILENCE"
+		"AbilitySound" "Ability.Torrent"
+		"HasScepterUpgrade" "1"
+		"AbilityCastRange" "1500"
+		"AbilityCooldown" "3"
+		"AbilityManaCost" "0"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"summon_count_min" "2"
+
+			}
+			"02" {
+				"var_type" "FIELD_INTEGER"
+				"summon_count_max" "4"
+
+			}
+			"03" {
+				"var_type" "FIELD_INTEGER"
+				"cost_hp_pect" "5"
+
+			}
+			"04" {
+				"var_type" "FIELD_INTEGER"
+				"hp_pect_min" "40"
+
+			}
+
+		}
+
+	}
+	"faker_courier_damage_shared" {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/courier/faker_courier_damage_shared"
+		"AbilityTextureName" "visage_summon_familiars_stone_form"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE|DOTA_ABILITY_BEHAVIOR_IGNORE_SILENCE"
+		"AbilitySound" "Ability.Torrent"
+		"HasScepterUpgrade" "1"
+		"AbilityCastRange" "1500"
+		"AbilityCooldown" "0"
+		"AbilityManaCost" "0"
+
+	}
+	"faker_courier_death_prize" {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/courier/faker_courier_death_prize"
+		"AbilityTextureName" "death_prize"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE|DOTA_ABILITY_BEHAVIOR_IGNORE_SILENCE"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"hp_pect_min" "40"
+
+			}
+			"02" {
+				"var_type" "FIELD_INTEGER"
+				"atk_pect" "100"
+
+			}
+			"03" {
+				"var_type" "FIELD_INTEGER"
+				"atkspeed_pect" "100"
+
+			}
+			"04" {
+				"var_type" "FIELD_INTEGER"
+				"incom_pect" "100"
 
 			}
 

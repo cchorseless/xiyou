@@ -1236,7 +1236,7 @@ export class modifier_imba_reincarnation_wraith_form_buff extends BaseModifier_P
     CC_GetMinHealth(): number {
         return 1;
     }
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
         if (IsServer()) {
             let attacker = keys.attacker;
@@ -1347,7 +1347,7 @@ export class modifier_imba_reincarnation_wraith_form extends BaseModifier_Plus {
         }
         this.SetStackCount(math.floor(this.GetRemainingTime() + 0.5));
     }
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
         if (!IsServer()) {
             return;

@@ -7,6 +7,7 @@ import { modifier_combination_effect } from "./modifier_combination_effect";
 @registerModifier()
 export class modifier_sect_health_base_a extends modifier_combination_effect {
 
+
     Init() {
         let parent = this.GetParentPlus();
         this.health_bonus = this.getSpecialData("health_bonus");
@@ -15,34 +16,13 @@ export class modifier_sect_health_base_a extends modifier_combination_effect {
             ParticleManager.ClearParticle(this.buff_fx);
         })
         if (IsServer()) {
-            this.StepChangeModelScale(parent.GetModelScale() * 1.1);
+            parent.StepChangeModelScale(parent.GetModelScale() * 1.1);
         }
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
     health_bonus: number
 
-    StepChangeModelScale(scale: number, step = 0.02) {
-        let parent = this.GetParentPlus();
-        parent.TempData().target_scale = scale;
-        GTimerHelper.AddFrameTimer(1, GHandler.create(this, () => {
-            if (!IsValid(parent)) { return }
-            if (parent.TempData().target_scale !== scale) {
-                return
-            }
-            let cur_scale = parent.GetModelScale();
-            if (math.abs(cur_scale - scale) <= step) {
-                return
-            }
-            if (cur_scale > scale) {
-                parent.SetModelScale(cur_scale - step);
-            }
-            else {
-                parent.SetModelScale(cur_scale + step);
-            }
-            return 1;
-        }))
-    }
 
 }
 @registerModifier()

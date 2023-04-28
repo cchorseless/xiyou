@@ -9,6 +9,7 @@ export class modifier_sect_phycrit_base_a extends modifier_combination_effect {
     crit_damage: number;
     Init() {
         let parent = this.GetParentPlus();
+        "particles/econ/items/bloodseeker/bloodseeker_eztzhok_weapon/bloodseeker_bloodrage_ground_eztzhok.vpcf"
         this.buff_fx = ResHelper.CreateParticleEx("effect/assassin_buff/econ/items/bloodseeker/bloodseeker_eztzhok_weapon/bloodseeker_bloodrage_ground_eztzhok.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, parent);
         // ParticleManager.SetParticleControl(this.buff_fx, 0, Vector(100, 100, 200));
         this.AddParticle(this.buff_fx, false, false, -1, false, false);

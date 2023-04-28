@@ -4,7 +4,7 @@ export module ChessControlConfig {
     export const Gird_Max_X = 8;
     export const Gird_Max_Y = 10;
     export const Gird_OffSet_Y = 1;
-    export const ChessValid_Max_Y = 5;
+    export const ChessValid_Max_Y = 3;
 
     export enum Event {
         ChessControl_JoinBattle = "ChessControl_JoinBattle",

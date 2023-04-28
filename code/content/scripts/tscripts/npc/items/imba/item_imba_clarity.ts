@@ -88,26 +88,26 @@ export class modifier_imba_clarity extends BaseModifier_Plus {
     GetEffectAttachType(): ParticleAttachment_t {
         return ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW;
     }
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
         if (!IsServer()) {
-            return undefined;
+            return;
         }
         let attacker = keys.attacker as IBaseNpc_Plus;
         let target = keys.unit;
         let damage = keys.original_damage;
         let damage_flags = keys.damage_flags;
         if (target != this.parent) {
-            return undefined;
+            return;
         }
         if (damage <= 0) {
-            return undefined;
+            return;
         }
         if (attacker == this.parent) {
-            return undefined;
+            return;
         }
         if (damage_flags == DOTADamageFlag_t.DOTA_DAMAGE_FLAG_HPLOSS) {
-            return undefined;
+            return;
         }
         if ((attacker.GetTeamNumber() == target.GetOpposingTeamNumber() && attacker.IsRealUnit()) || (attacker.GetTeamNumber() == target.GetOpposingTeamNumber() && attacker.GetPlayerOwner() != undefined) || attacker.GetTeamNumber() == target.GetTeamNumber() || attacker.IsRoshan()) {
             this.Destroy();

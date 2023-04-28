@@ -38,13 +38,13 @@ function GreavesActivate(caster: IBaseNpc_Plus, ability: IBaseItem_Plus,
                 for (let i = 0; i <= 5; i++) {
                     let item = hero.GetItemInSlot(i);
                     if (item && item.GetAbilityName() == "item_imba_guardian_greaves") {
-                        item.UseResources(true, false,false, true);
+                        item.UseResources(true, false, false, true);
                         return;
                     }
                 }
             }
         } else {
-            ability.UseResources(true, false,false, true);
+            ability.UseResources(true, false, false, true);
         }
     }
 }
@@ -191,7 +191,7 @@ export class modifier_item_imba_guardian_greaves_aura_emitter extends BaseModifi
             1: Enum_MODIFIER_EVENT.ON_TAKEDAMAGE
         });
     } */
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
         if (IsServer()) {
             let owner = this.GetParentPlus();

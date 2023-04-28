@@ -140,7 +140,7 @@ export class modifier_imba_life_stealer_rage_insanity extends BaseModifier_Plus 
         }
         return Object.values(decFuncs);
     } */
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
         if (keys.unit == this.GetParentPlus() && !keys.attacker.FindModifierByNameAndCaster("modifier_imba_life_stealer_rage", this.GetCasterPlus())) {
             this.SetStackCount(this.GetStackCount() + 1);
@@ -514,7 +514,7 @@ export class modifier_imba_life_stealer_open_wounds extends BaseModifier_Plus {
     CC_GetModifierMoveSpeedBonus_Percentage(): number {
         return this.GetStackCount();
     }
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
         if (!IsServer()) {
             return;

@@ -915,7 +915,7 @@ export class modifier_imba_nightmare_dot extends BaseModifier_Plus {
             [modifierstate.MODIFIER_STATE_LOW_ATTACK_PRIORITY]: true
         };
     }
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(t: ModifierInstanceEvent): void {
         if (IsServer()) {
             if (t.unit == this.GetParentPlus() && t.attacker != this.GetCasterPlus() && !t.attacker.IsBuilding() && t.attacker.GetOwnerEntity()) {

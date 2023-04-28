@@ -471,9 +471,9 @@ export class imba_bristleback_bristleback extends BaseAbility_Plus {
             this.caster.RemoveModifierByName("modifier_imba_bristleback_bristleback_has");
         }
     }
-    // GetManaCost(level: number): number {
-    //     return 0;
-    // }
+    GetManaCost(level: number): number {
+        return 0;
+    }
 
     AutoSpellSelf() {
         if (!this.GetToggleState()) {
@@ -554,7 +554,7 @@ export class modifier_imba_bristleback_bristleback extends BaseModifier_Plus {
             return this.front_damage_reduction * (-1);
         }
     }
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
         if (keys.unit == this.parent) {
             if (this.parent.PassivesDisabled() || bit.band(keys.damage_flags, DOTADamageFlag_t.DOTA_DAMAGE_FLAG_REFLECTION) == DOTADamageFlag_t.DOTA_DAMAGE_FLAG_REFLECTION || bit.band(keys.damage_flags, DOTADamageFlag_t.DOTA_DAMAGE_FLAG_HPLOSS) == DOTADamageFlag_t.DOTA_DAMAGE_FLAG_HPLOSS || !this.parent.HasAbility("imba_bristleback_quill_spray") || !this.parent.findAbliityPlus<imba_bristleback_quill_spray>("imba_bristleback_quill_spray").IsTrained()) {

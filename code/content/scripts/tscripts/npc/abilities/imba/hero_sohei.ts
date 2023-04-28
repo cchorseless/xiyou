@@ -208,7 +208,7 @@ export class modifier_sohei_flurry_self extends BaseModifier_Plus {
         return false;
     }
     StatusEffectPriority(): modifierpriority {
-        return 20;
+        return 4;
     }
     GetStatusEffectName(): string {
         return "particles/status_fx/status_effect_omnislash.vpcf";
@@ -387,7 +387,7 @@ export class modifier_sohei_wholeness_of_body_status extends BaseModifier_Plus {
     CC_GetModifierStatusResistance(): number {
         return this.status_resistance;
     }
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(params: ModifierInstanceEvent): void {
         if (params.unit == this.GetParentPlus()) {
             this.endHeal = this.endHeal + params.damage * this.damageheal;
@@ -587,7 +587,7 @@ export class modifier_sohei_momentum_passive extends BaseModifier_Plus {
                 }
             }
             if (!this.GetParentPlus().HasModifier("modifier_sohei_flurry_self")) {
-                spell.UseResources(true, false,true, true);
+                spell.UseResources(true, false, true, true);
             }
         }
     }
@@ -870,7 +870,7 @@ export class modifier_sohei_palm_of_life_movement extends BaseModifierMotionHori
                 let spellMomentum = parent.findAbliityPlus<sohei_momentum>("sohei_momentum");
                 if (spellMomentum) {
                     spellMomentum.EndCooldown();
-                    spellMomentum.UseResources(true, false,true, true);
+                    spellMomentum.UseResources(true, false, true, true);
                 }
             }
             this.Destroy();

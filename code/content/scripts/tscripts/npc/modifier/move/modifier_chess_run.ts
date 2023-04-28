@@ -44,7 +44,7 @@ export class modifier_chess_run extends BaseModifierMotionHorizontal_Plus {
                 speed = kv.speed;
             }
             this.vStartPosition = GetGroundPosition(this.GetParentPlus().GetOrigin(), this.GetParentPlus());
-            this.vTargetPosition = Vector(tonumber(kv.vx), tonumber(kv.vy), 128);
+            this.vTargetPosition = Vector(tonumber(kv.vx), tonumber(kv.vy), 0);
             this.vDirection = GFuncVector.AsVector(this.vTargetPosition - this.vStartPosition).Normalized();
             this.flHorizontalSpeed = speed / 30;
             this.flDistance = GFuncVector.AsVector(this.vTargetPosition - this.vStartPosition).Length2D() + this.flHorizontalSpeed;

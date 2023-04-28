@@ -44,7 +44,8 @@ export class EWearableItem extends ET.Entity {
         let model = domain.FirstMoveChild() as CBaseModelEntity;
         while (model != null) {
             //  确保获取到的是 dota_item_wearable 的模型
-            if (model != null && model.GetClassname() == "dota_item_wearable") {
+            if (model != null && (model.GetClassname() == "dota_item_wearable" ||
+                model.GetClassname() == "prop_dynamic")) {
                 if (model.GetModelName() == modelName) {
                     return model;
                 }
@@ -398,9 +399,13 @@ export class EWearableItem extends ET.Entity {
                     _proptable["DefaultAnim"] = sDefaultAnim;
                 }
                 hModel = SpawnEntityFromTableSynchronous(sPropClass, _proptable) as CBaseModelEntity;
+                // hModel.SetModel(sModel_player);
                 hModel.SetOwner(hUnit);
                 hModel.SetParent(hUnit, "");
                 hModel.FollowEntity(hUnit, true);
+                // 无效
+                // hModel.SetRenderMode(0);
+                // hModel.SetRenderAlpha(0)
                 if (config.skin) {
                     this.oldSkin = tonumber("" + config.skin)
                     hModel.SetSkin(this.oldSkin);
@@ -609,6 +614,7 @@ export class EWearableItem extends ET.Entity {
             let prop = this.model;
             if (prop && IsValidEntity(prop)) {
                 prop.AddEffects(EntityEffects.EF_NODRAW);
+                // prop.Destroy();
             }
         }
         if (this.bChangeSkin) {

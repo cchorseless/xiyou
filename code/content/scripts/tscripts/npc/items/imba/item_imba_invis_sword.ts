@@ -165,7 +165,7 @@ export class modifier_item_imba_invis_sword_passive extends BaseModifier_Plus {
     CC_GetModifierAttackSpeedBonus_Constant(): number {
         return this.attack_speed_bonus;
     }
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(params: ModifierInstanceEvent): void {
         if (IsServer()) {
             if (params.unit == this.GetParentPlus()) {

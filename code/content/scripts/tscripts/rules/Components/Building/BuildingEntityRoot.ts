@@ -2,9 +2,9 @@
 import { KVHelper } from "../../../helper/KVHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
+import { modifier_building_battle_buff } from "../../../npc/modifier/battle/modifier_building_battle_buff";
 import { modifier_jiaoxie_wudi } from "../../../npc/modifier/battle/modifier_jiaoxie_wudi";
 import { modifier_mana_control } from "../../../npc/modifier/battle/modifier_mana_control";
-import { modifier_out_of_game } from "../../../npc/modifier/battle/modifier_out_of_game";
 import { serializeETProps } from "../../../shared/lib/Entity";
 import { GEventHelper } from "../../../shared/lib/GEventHelper";
 import { THeroUnit } from "../../../shared/service/hero/THeroUnit";
@@ -36,6 +36,7 @@ export class BuildingEntityRoot extends BattleUnitEntityRoot {
         this.SetUIOverHead(true, false);
         this.InitSyncClientInfo();
         this.JoinInRound();
+        this.SetUIOverHead(true, false)
     }
 
 
@@ -173,16 +174,15 @@ export class BuildingEntityRoot extends BattleUnitEntityRoot {
             this.RuntimeBuilding.Dispose();
         }
         this.RuntimeBuilding = null;
-        this.SetUIOverHead(true, false)
-        npc.removeBuff<modifier_out_of_game>("modifier_out_of_game");
+        modifier_building_battle_buff.remove(npc);
     }
     OnRound_Battle() {
         if (!IsServer()) { return };
         if (!this.ChessComp().isInBattle) { return }
         let hCaster = this.GetDomain<IBaseNpc_Plus>();
         let vLocation = hCaster.GetAbsOrigin();
-        modifier_out_of_game.applyOnly(hCaster, hCaster);
-        this.SetUIOverHead(false, true)
+        modifier_building_battle_buff.applyOnly(hCaster, hCaster);
+        // this.SetUIOverHead(false, true)
         let cloneRuntime = BaseNpc_Plus.CreateUnitByName(this.ConfigID, vLocation, hCaster) as IBaseNpc_Plus;
         if (cloneRuntime) {
             // cloneRuntime.RemoveGesture(GameActivity_t.ACT_DOTA_SPAWN);
@@ -210,7 +210,12 @@ export class BuildingEntityRoot extends BattleUnitEntityRoot {
         }
     }
     OnRound_Prize(round: ERoundBoard) { }
-    OnRound_WaitingEnd() { }
+    OnRound_WaitingEnd() {
+        if (this.RuntimeBuilding) {
+            this.RuntimeBuilding.Dispose();
+        }
+        this.RuntimeBuilding = null;
+    }
 
     onDestroy(): void {
         let npc = this.GetDomain<IBaseNpc_Plus>();

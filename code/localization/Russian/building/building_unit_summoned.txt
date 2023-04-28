@@ -552,4 +552,3 @@
 "npc_tui6_venomancer_ward_custom"       "剧毒蛇棒"
 "npc_tui6_void_spirit_summon"       "土猫石头"
 "npc_vision_revealer"       "111"
-"npc_wearable_dummy"       "111"

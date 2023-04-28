@@ -5,7 +5,6 @@ import { AoiHelper } from "../../helper/AoiHelper";
 import { KVHelper } from "../../helper/KVHelper";
 import { NetTablesHelper } from "../../helper/NetTablesHelper";
 import { ResHelper } from "../../helper/ResHelper";
-import { PropertyCalculate } from "../propertystat/PropertyCalculate";
 
 //-----------------------------------------global function-----------------------------------------------------------
 //#region global function
@@ -468,7 +467,11 @@ declare global {
          * @serverOnly
          */
         IsAbilityReady(): boolean;
-
+        /**
+         * 技能是否消耗生命值足够
+         * @serverOnly
+         */
+        IsOwnersHealthEnough(): boolean;
         /**尝试智能施法,AI会调用
          * @serverOnly
          */
@@ -820,6 +823,19 @@ if (IsServer()) {
         if (!IsValid(this)) return;
         return this.GetOwner() as IBaseNpc_Plus
     }
+
+    CBaseAbility.IsOwnersHealthEnough = function () {
+        if (!IsValid(this)) return false;
+        let hCaster = this.GetCaster();
+        if (!IsValid(hCaster)) {
+            return false;
+        }
+        let costhp = this.GetHealthCost(this.GetLevel()) || 0;
+        if (costhp > 0 && hCaster.GetHealth() < costhp) {
+            return false;
+        }
+        return true;
+    }
     CBaseAbility.IsAbilityReady = function () {
         if (!IsValid(this)) return false;
         let hCaster = this.GetCaster();
@@ -858,6 +874,9 @@ if (IsServer()) {
             return false;
         }
 
+        if (!this.IsOwnersHealthEnough()) {
+            return false;
+        }
         if (!this.IsOwnersGoldEnough(hCaster.GetPlayerID())) {
             return false;
         }
@@ -928,7 +947,7 @@ declare global {
          * @param hItem
          * @returns
          */
-        CreateItemOnPositionRandom(vCenter: Vector): CDOTA_Item_Physical;
+        CreateItemOnPositionRandom(vCenter: Vector, range?: number, showFly?: boolean): CDOTA_Item_Physical;
 
         /**
          * @Server
@@ -976,9 +995,20 @@ if (IsServer()) {
     CBaseItem.IsCastBySelf = function () {
         return this.GetCasterPlus().GetEntityIndex() == this.GetOwnerPlus().GetEntityIndex();
     }
-    CBaseItem.CreateItemOnPositionRandom = function (vCenter: Vector) {
-        let vPosition = (vCenter + RandomVector(125)) as Vector;
-        let hContainer = CreateItemOnPositionForLaunch(vPosition, this);
+    CBaseItem.CreateItemOnPositionRandom = function (vCenter: Vector, range = 125, showFly = true) {
+        let vPosition = (vCenter + RandomVector(range)) as Vector;
+        let hContainer: CDOTA_Item_Physical = null;
+        if (showFly) {
+            hContainer = CreateItemOnPositionForLaunch(vCenter, this);
+            this.LaunchLoot(false, 150, 0.5, vPosition, null)
+        }
+        else {
+            hContainer = CreateItemOnPositionForLaunch(vPosition, this);
+        }
+        // let p = ParticleManager.CreateParticle("particles/neutral_fx/neutral_item_drop.vpcf", ParticleAttachment_t.PATTACH_WORLDORIGIN, this.GetOwnerPlus())
+        // ParticleManager.SetParticleControl(p, 0, vPosition);
+        // this.TempData().__Drop_Effect__ = p;
+        // 设置颜色
         return hContainer;
     }
     CBaseItem.CanGiveToNpc = function (npc: IBaseNpc_Plus) {
@@ -1459,6 +1489,19 @@ declare global {
          * @param iStar 设置星级
          */
         SetStar(iStar: number): void;
+
+        /**
+         * @Server
+         * 修改当前生命
+         * @param fchange 
+         */
+        ModifyHealthPlus(fchange: number): void;
+        /**
+         * @Server
+         * 逐步改变模型大小
+         * @param fchange 
+         */
+        StepChangeModelScale(scale: number, step?: number): void;
         /**
          * @Server
          * 添加或者删除词条
@@ -1507,6 +1550,19 @@ declare global {
          * @Both
          */
         GetKVData<T>(key: string, defaultv?: T): T;
+        /**
+         * @Server
+         * 获取附着点位置
+         * @param sAttachName 
+         */
+        GetAttachmentPosition(sAttachName: string): Vector;
+
+        /**
+         * @Server
+         * 是否有附着点
+         * @param sAttachName 
+         */
+        HasAttachment(sAttachName: string): boolean;
         /**
          * @Server 减少魔法
          * @param mana 
@@ -2305,17 +2361,17 @@ BaseNPC.IsRealUnit = function () {
 
 BaseNPC.GetIntellect = function () {
     if (!IsValid(this)) return 0;
-    return PropertyCalculate.GetIntellect(this)
+    return GPropertyCalculate.GetIntellect(this)
 }
 
 BaseNPC.GetStrength = function () {
     if (!IsValid(this)) return 0;
-    return PropertyCalculate.GetStrength(this)
+    return GPropertyCalculate.GetStrength(this)
 }
 
 BaseNPC.GetAgility = function () {
     if (!IsValid(this)) return 0;
-    return PropertyCalculate.GetAgility(this)
+    return GPropertyCalculate.GetAgility(this)
 }
 
 BaseNPC.GetAllStats = function () {
@@ -2325,7 +2381,7 @@ BaseNPC.GetAllStats = function () {
 
 BaseNPC.GetMagicalReductionPect = function () {
     if (!IsValid(this)) return 0;
-    return PropertyCalculate.GetMagicalReductionPect(this, null)
+    return GPropertyCalculate.GetMagicalReductionPect(this, null)
 }
 
 BaseNPC.GetPrimaryStatValue = function () {
@@ -2350,9 +2406,9 @@ BaseNPC.GetPrimaryAttribute = function () {
 }
 
 BaseNPC.GetStatusResistanceFactor = function (hCaster: CDOTA_BaseNPC) {
-    let d: number = 1 - PropertyCalculate.GetStatusResistance(this) * 0.01;
+    let d: number = 1 - GPropertyCalculate.GetStatusResistance(this) * 0.01;
     if (IsValid(hCaster)) {
-        d = d * (1 + PropertyCalculate.GetStatusResistanceCaster(hCaster) * 0.01)
+        d = d * (1 + GPropertyCalculate.GetStatusResistanceCaster(hCaster) * 0.01)
     }
     return d
 }
@@ -2419,6 +2475,13 @@ if (IsServer()) {
     BaseNPC.GetKVData = function (key: string, defaultValue: any = "") {
         return KVHelper.KvUnits[this.GetUnitName()][key] || defaultValue;
     }
+    BaseNPC.GetAttachmentPosition = function (sAttachName: string): Vector {
+        if (!this.HasAttachment(sAttachName)) return;
+        return this.GetAttachmentOrigin(this.ScriptLookupAttachment(sAttachName));
+    };
+    BaseNPC.HasAttachment = function (sAttachName: string) {
+        return this.ScriptLookupAttachment(sAttachName) > 0;
+    };
 
     BaseNPC.ReduceMana = function (mana: number) {
         this.SetMana(math.max(this.GetMana() - mana, 0));
@@ -2435,7 +2498,7 @@ if (IsServer()) {
     }
     BaseNPC.ModifyMaxHealth = function (fChanged: number) {
         if (IsValid(this)) {
-            PropertyCalculate.SetUnitCache(this, "StatusHealth", PropertyCalculate.GetUnitCache(this, "StatusHealth") + fChanged)
+            GPropertyCalculate.SetUnitCache(this, "StatusHealth", GPropertyCalculate.GetUnitCache(this, "StatusHealth") + fChanged)
         }
     }
     BaseNPC.Attack = function (hTarget: IBaseNpc_Plus, iAttackState = 0) {
@@ -2501,7 +2564,29 @@ if (IsServer()) {
     BaseNPC.SetStar = function (istar: number) {
         NetTablesHelper.SetDotaEntityData(this.GetEntityIndex(), { "star": istar }, "baseinfo");
     }
-
+    BaseNPC.ModifyHealthPlus = function (fchange: number) {
+        this.SetHealth(math.max(this.GetHealth() + fchange, 0));
+    }
+    BaseNPC.StepChangeModelScale = function (scale: number, step = 0.02) {
+        this.TempData().target_scale = scale;
+        GTimerHelper.AddFrameTimer(1, GHandler.create(this, () => {
+            if (!IsValid(this)) { return }
+            if (this.TempData().target_scale !== scale) {
+                return
+            }
+            let cur_scale = this.GetModelScale();
+            if (math.abs(cur_scale - scale) <= step) {
+                return
+            }
+            if (cur_scale > scale) {
+                this.SetModelScale(cur_scale - step);
+            }
+            else {
+                this.SetModelScale(cur_scale + step);
+            }
+            return 1;
+        }))
+    }
     BaseNPC.SetUnitOnClearGround = function () {
         GTimerHelper.AddTimer(1, GHandler.create(this, () => {
             let pos = this.GetAbsOrigin();
@@ -2703,7 +2788,12 @@ if (IsServer()) {
         if (this.IsInventoryFull()) {
             hItem.SetOwner(this);
             hItem.SetParent(this, "");
-            hItem.CreateItemOnPositionRandom(this.GetAbsOrigin());
+            let hContainer = hItem.CreateItemOnPositionRandom(this.GetAbsOrigin());
+            if (hContainer.GetModelName() == "models/props_gameplay/neutral_box.vmdl") {
+                let Rarity = KVHelper.GetItemRarity(hItem.GetAbilityName())
+                let MaterialGroup = { C: 1, B: 2, A: 3, S: 4, SS: 5, SSS: 6 } as any;
+                hContainer.SetMaterialGroup(MaterialGroup[Rarity] + "")
+            }
         }
         else {
             this.AddItem(hItem);
@@ -2757,7 +2847,7 @@ if (IsServer()) {
             ParticleManager.SetParticleControl(hItem.TempData().x_pfx, 0, vLocation + vRandomVector as Vector);
         }
         if (bLaunchLoot) {
-            hItem.LaunchLoot(false, 250, 0.5, vLocation + vRandomVector as Vector);
+            hItem.LaunchLoot(false, 250, 0.5, vLocation + vRandomVector as Vector, this);
         }
     }
 }

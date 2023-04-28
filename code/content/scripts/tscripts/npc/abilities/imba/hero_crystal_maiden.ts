@@ -684,7 +684,7 @@ export class modifier_imba_crystal_maiden_frostbite_passive_ready extends BaseMo
         2: Enum_MODIFIER_EVENT.ON_ORDER
     });
     } */
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
         if (IsServer()) {
             if (this.ability.IsStolen()) {

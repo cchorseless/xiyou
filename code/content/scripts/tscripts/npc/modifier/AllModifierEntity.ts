@@ -8,6 +8,7 @@ import { modifier_generic_illusion } from "./battle/modifier_generic_illusion";
 import { modifier_generic_summon } from "./battle/modifier_generic_summon";
 import { modifier_jiaoxie_wudi } from "./battle/modifier_jiaoxie_wudi";
 import { modifier_mana_control } from "./battle/modifier_mana_control";
+import { modifier_tower_auto_attack } from "./battle/modifier_tower_auto_attack";
 
 import { modifier_sect_archer_base_a } from "./combinationeffect/modifier_sect_archer";
 import { modifier_sect_assault_base_a } from "./combinationeffect/modifier_sect_assault";
@@ -75,6 +76,7 @@ import { modifier_courier_fx_ambient_8 } from "./courier_ambient_effect/modifier
 import { modifier_courier_fx_ambient_9 } from "./courier_ambient_effect/modifier_courier_fx_ambient_9";
 import { AllGenericEffect } from "./effect/AllGenericEffect";
 import { modifier_generic_motion_controller } from "./generic/modifier_generic_motion_controller";
+import { modifier_wearable } from "./modifier_wearable";
 import { modifier_spawn_activity } from "./spawn/modifier_spawn_activity";
 
 
@@ -94,6 +96,8 @@ import { modifier_spawn_activity } from "./spawn/modifier_spawn_activity";
     modifier_jiaoxie_wudi,
     modifier_generic_motion_controller,
     modifier_mana_control,
+    modifier_wearable,
+    modifier_tower_auto_attack,
 ];
 
 [

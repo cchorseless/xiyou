@@ -238,7 +238,7 @@ export class modifier_item_imba_origin_treads extends BaseModifier_Plus {
             return this.int_cast_range;
         }
     }
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
         if (this.GetStackCount() == 3 && keys.unit == this.parent && keys.unit != keys.attacker && bit.band(keys.damage_flags, DOTADamageFlag_t.DOTA_DAMAGE_FLAG_REFLECTION) != DOTADamageFlag_t.DOTA_DAMAGE_FLAG_REFLECTION) {
             if (keys.damage_type == DAMAGE_TYPES.DAMAGE_TYPE_MAGICAL) {
@@ -426,7 +426,7 @@ export class modifier_item_imba_origin_treads_chaos extends BaseModifier_Plus {
             3: GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE
         });
     } */
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
         if (keys.unit == this.parent && bit.band(keys.damage_flags, DOTADamageFlag_t.DOTA_DAMAGE_FLAG_REFLECTION) != DOTADamageFlag_t.DOTA_DAMAGE_FLAG_REFLECTION) {
             let particle = ResHelper.CreateParticleEx("particles/item/origin/origin_chaos_splash.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, this.parent);

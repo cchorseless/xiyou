@@ -256,7 +256,7 @@ export class modifier_imba_impale_suffering extends BaseModifier_Plus {
         }
         return Object.values(decFuncs);
     } */
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
         if (IsServer()) {
             let unit = keys.unit;
@@ -664,7 +664,7 @@ export class modifier_imba_mana_burn_parasite extends BaseModifier_Plus {
             duration: this.scarab_duration
         });
     }
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
         if (IsServer()) {
             let unit = keys.unit;
@@ -1326,7 +1326,7 @@ export class modifier_special_bonus_imba_nyx_assassin_5 extends BaseModifier_Plu
         }
         return Object.values(funcs);
     } */
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(kv: ModifierInstanceEvent): void {
         if (IsServer()) {
             let target = this.GetParentPlus();

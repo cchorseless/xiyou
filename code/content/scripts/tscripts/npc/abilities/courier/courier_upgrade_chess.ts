@@ -1,5 +1,6 @@
 
 import { KVHelper } from "../../../helper/KVHelper";
+import { ResHelper } from "../../../helper/ResHelper";
 import { EEnum } from "../../../shared/Gen/Types";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { registerAbility } from "../../entityPlus/Base_Plus";
@@ -37,6 +38,13 @@ export class courier_upgrade_population extends BaseAbility_Plus {
         playerroot.PlayerDataComp().ModifyGold(-this.GetGoldCost());
         playerroot.PlayerDataComp().ModifyWood(-this.GetWoodCost());
         this.applyPopuLevelUp(1);
+        ResHelper.CreateParticle(new ResHelper.ParticleInfo()
+            .set_resPath("particles/units/heroes/hero_oracle/oracle_false_promise_cast_enemy.vpcf")
+            .set_iAttachment(ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW)
+            .set_owner(hCaster)
+            .set_validtime(3)
+        )
+        EmitSoundOn("lvl_up", hCaster)
     }
 
     GetGoldCost(level?: number): number {
@@ -110,6 +118,13 @@ export class courier_upgrade_tech extends BaseAbility_Plus {
         let playerroot = GPlayerEntityRoot.GetOneInstance(iPlayerID);
         playerroot.PlayerDataComp().ModifyGold(-this.GetGoldCost());
         this.applyTechLevelUp(1);
+        ResHelper.CreateParticle(new ResHelper.ParticleInfo()
+            .set_resPath("particles/units/heroes/hero_oracle/oracle_false_promise_cast_enemy.vpcf")
+            .set_iAttachment(ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW)
+            .set_owner(hCaster)
+            .set_validtime(3)
+        );
+        EmitSoundOn("lvl_up", hCaster)
     }
 
     GetGoldCost(level?: number): number {

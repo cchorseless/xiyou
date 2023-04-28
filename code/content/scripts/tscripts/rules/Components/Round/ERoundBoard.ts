@@ -1,4 +1,5 @@
 import { Assert_SpawnEffect, ISpawnEffectInfo } from "../../../assert/Assert_SpawnEffect";
+import { ChessControlConfig } from "../../../shared/ChessControlConfig";
 import { Dota } from "../../../shared/Gen/Types";
 import { serializeETProps } from "../../../shared/lib/Entity";
 import { RoundConfig } from "../../../shared/RoundConfig";
@@ -179,9 +180,30 @@ export class ERoundBoard extends ERound implements IRoundStateCallback {
     }
 
     CreateAllRoundBasicEnemy(SpawnEffect: ISpawnEffectInfo) {
-        for (let enemyinfo of this.config.enemyinfo) {
+        let baseenemys = this.config.enemyinfo.filter((value) => { return !value.issummoned });
+        for (let enemyinfo of baseenemys) {
             this.CreateRoundBasicEnemy(enemyinfo.id, SpawnEffect);
         }
+    }
+    GetBoardRandomEmptyEnemyGird(playerid: PlayerID) {
+        let min_x = 0;
+        let min_y = 8;
+        let validPos: [number, number][] = [];
+        for (let y = min_y; y <= ChessControlConfig.Gird_Max_Y; y++) {
+            for (let x = min_x; x < ChessControlConfig.Gird_Max_X; x++) {
+                if (y == min_y) {
+                    validPos.push([x, y])
+                }
+                else {
+                    if (x != 3 && x != 4) {
+                        validPos.push([x, y])
+                    }
+                }
+            }
+
+        }
+        let r = GFuncRandom.RandomArray(validPos)[0];
+        return new ChessVector(r[0], r[1], playerid);
     }
 
     CreateRoundBasicEnemy(unit_index: string, spawnEffect: ISpawnEffectInfo = null) {
@@ -190,14 +212,19 @@ export class ERoundBoard extends ERound implements IRoundStateCallback {
         let enemyinfo = this.config.enemyinfo.find((value) => {
             return value.id == unit_index
         });
-        let _boardVec = new ChessVector((enemyinfo.positionX), (enemyinfo.positionY), playerid);
+        let _boardVec: ChessVector;
+        if (enemyinfo.issummoned) {
+            _boardVec = this.GetBoardRandomEmptyEnemyGird(playerid);
+        }
+        else {
+            _boardVec = new ChessVector((enemyinfo.positionX), (enemyinfo.positionY), playerid);
+        }
         let pos = _boardVec.getVector3();
         let angle = Vector(enemyinfo.anglesX, enemyinfo.anglesY, enemyinfo.anglesZ);
         let enemyName = enemyinfo.unitname;
         let delay = 0;
         if (spawnEffect != null && spawnEffect.tp_effect != null) {
-            delay = RandomFloat(0.1, 2.1);
-            Assert_SpawnEffect.ShowTPEffectAtPosition(pos, spawnEffect.tp_effect, delay);
+            delay = Assert_SpawnEffect.ShowTPEffectAtPosition(pos, spawnEffect);
         }
         if (delay > 0) {
             GTimerHelper.AddTimer(delay, GHandler.create(this, () => {
@@ -206,7 +233,29 @@ export class ERoundBoard extends ERound implements IRoundStateCallback {
         } else {
             player.EnemyManagerComp().addEnemy(enemyName, this.configID, unit_index, pos, spawnEffect);
         }
+        return pos
     }
+
+    /**
+     * 创建召唤单位
+     * @param unit_index 
+     * @param spawnEffect 
+     */
+    CreateRoundSummonEnemy(count: number, spawnEffect: ISpawnEffectInfo = null) {
+        let baseenemys = this.config.enemyinfo.filter((value) => { return value.issummoned });
+        if (baseenemys.length == 0) { return }
+        let weightarr = baseenemys.map((value) => { return value.unitWeight });
+        let posArr: Vector[] = [];
+        for (let i = 0; i < count; i++) {
+            let enemyinfo = GFuncRandom.RandomArrayByWeight(baseenemys, weightarr)[0];
+            if (enemyinfo == null) { continue }
+            let pos = this.CreateRoundBasicEnemy(enemyinfo.id, spawnEffect);
+            posArr.push(pos);
+        }
+        return posArr;
+    }
+
+
 
     AddRoundDamage(attack: string, name: string, isattack: boolean, damagetype: DAMAGE_TYPES, damage: number) {
         if (this.unitDamageInfo[attack] == null) {

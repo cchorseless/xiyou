@@ -217,7 +217,7 @@ export class modifier_item_imba_spirit_vessel_heal extends BaseModifier_Plus {
     CC_GetModifierConstantHealthRegen(): number {
         return this.soul_heal_amount;
     }
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
         if (!IsServer()) {
             return;

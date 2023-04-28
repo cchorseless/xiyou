@@ -292,7 +292,7 @@ export class modifier_imba_mist_coil_mist_ally extends BaseModifier_Plus {
             1: Enum_MODIFIER_EVENT.ON_TAKEDAMAGE
         });
     } */
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
         if (keys.unit == this.GetParentPlus()) {
             this.SetStackCount(this.GetStackCount() + math.floor(keys.damage * this.damage_heal_pct));
@@ -803,7 +803,7 @@ export class modifier_imba_curse_of_avernus_debuff_slow extends BaseModifier_Plu
             this.hits = this.hits + 1;
         }
     }
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(kv: ModifierInstanceEvent): void {
         if (IsServer()) {
             let heal_convert = this.heal_convert;

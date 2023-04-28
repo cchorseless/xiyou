@@ -5,6 +5,20 @@ import { BaseItem_Plus } from "./BaseItem_Plus";
 import { BaseNpc } from "./Base_Plus";
 /**普通NPC单位基类 */
 export class BaseNpc_Plus extends BaseNpc {
+    /**
+     * 文字气泡弹出
+     * @param bubble 
+     * @param speech 
+     * @param duration 
+     * @param unOffsetX 
+     * @param unOffsetY 
+     */
+    AddSpeechBubblePlus?(bubble: number, speech: string, duration: number, unOffsetX: number, unOffsetY: number): void {
+        if (!IsValid(this)) return;
+        if (!this.IsAlive()) { return; }
+        ResHelper.CreateParticleEx("particles/speechbubbles/speech_voice.vpcf",
+            ParticleAttachment_t.PATTACH_OVERHEAD_FOLLOW, this, this, 3);
+    }
 
     GetAllCanCastAbility?() {
         let r: IBaseAbility_Plus[] = [];

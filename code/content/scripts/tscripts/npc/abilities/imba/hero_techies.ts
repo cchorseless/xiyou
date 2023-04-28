@@ -419,7 +419,7 @@ export class modifier_imba_proximity_mine extends BaseModifier_Plus {
     CC_GetModifierIncomingDamage_Percentage(p_0: ModifierAttackEvent,): number {
         return -100;
     }
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
         let unit = keys.unit;
         let attacker = keys.attacker;

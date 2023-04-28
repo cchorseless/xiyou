@@ -28,9 +28,9 @@ export class FHeroAIComponent extends ET.Component {
         npc.MoveToPosition(m);
     }
 
-
+    // todo: 说话
     saySomething() {
         let npc = this.GetDomain<IBaseNpc_Plus>();
-        ShowMessage("#Kill_DoubleKill")
+        npc.AddSpeechBubble(1, "hello", 3, 0, 15)
     }
 }

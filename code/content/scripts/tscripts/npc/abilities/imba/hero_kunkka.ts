@@ -1099,7 +1099,7 @@ export class modifier_imba_tidebringer_cleave_hit_target extends BaseModifier_Pl
         return false;
     }
     StatusEffectPriority(): modifierpriority {
-        return 20;
+        return 4;
     }
     BeDestroy(): void {
         if (IsServer()) {
@@ -1686,7 +1686,7 @@ export class modifier_imba_ghostship_drag extends BaseModifierMotionHorizontal_P
     }
 
     StatusEffectPriority(): modifierpriority {
-        return 20;
+        return 4;
     }
     CheckState(): Partial<Record<modifierstate, boolean>> {
         let state = {
@@ -1759,7 +1759,7 @@ export class modifier_imba_ghostship_rum extends BaseModifier_Plus {
         }
         return Object.values(decFuncs);
     } */
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(params: ModifierInstanceEvent): void {
         if (IsServer()) {
             if (params.unit == this.GetParentPlus()) {
@@ -1787,7 +1787,7 @@ export class modifier_imba_ghostship_rum extends BaseModifier_Plus {
         return "particles/status_fx/status_effect_rum.vpcf";
     }
     StatusEffectPriority(): modifierpriority {
-        return 10;
+        return 4;
     }
     GetTexture(): string {
         return "kunkka_ghostship";

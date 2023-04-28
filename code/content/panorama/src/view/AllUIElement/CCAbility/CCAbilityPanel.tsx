@@ -597,7 +597,7 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
         const slot = this.props.slot!;
         if (overrideentityindex != -1 && Entities.IsValidEntity(overrideentityindex)) {
             if (Abilities.GetAbilityName(overrideentityindex) == "item_blank") { return }
-            TipsHelper.ShowAbilityTooltip(p, Abilities.GetAbilityName(overrideentityindex), Abilities.GetCaster(overrideentityindex), slot)
+            TipsHelper.ShowAbilityTooltip(p, Abilities.GetAbilityName(overrideentityindex), overrideentityindex)
             // $.DispatchEvent("DOTAShowAbilityTooltip", this.AbilityButton.current!, Abilities.GetAbilityName(overrideentityindex), Abilities.GetCaster(overrideentityindex), overrideentityindex, slot
         }
     }

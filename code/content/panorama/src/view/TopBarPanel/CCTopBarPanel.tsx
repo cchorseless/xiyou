@@ -60,7 +60,7 @@ export class CCTopBarCenter<T extends NodePropsData> extends CCPanel<T> {
                     </CCPanel>
                     <Label id="RoundDifficulty" localizedText="#lang_TopBarDifficulty" dialogVariables={{ difficulty: this.getDifficultyDes() }} />
                 </Image>
-                <CCImageNumber id="RoundTime" type="4" value={Math.floor(gametime)} />
+                <CCImageNumber id="RoundTime" type="4" value={Math.floor(gametime - 3)} />
                 {this.props.children}
                 {this.__root___childs}
             </Panel >

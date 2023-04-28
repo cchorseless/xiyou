@@ -1,4 +1,3 @@
-// LogHelper必须放第一行先导入
 import { AllEntity } from "./AllEntity";
 import { GameCache } from "./GameCache";
 import { GameFunc } from "./GameFunc";

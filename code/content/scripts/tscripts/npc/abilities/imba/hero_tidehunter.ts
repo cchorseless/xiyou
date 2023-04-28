@@ -339,7 +339,7 @@ export class modifier_imba_tidehunter_kraken_shell extends BaseModifier_Plus {
     CC_GetModifierPhysical_ConstantBlock(p_0: ModifierAttackEvent,): number {
         return this.GetAbilityPlus().GetTalentSpecialValueFor("damage_reduction");
     }
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
         if (keys.unit == this.GetParentPlus() && !keys.attacker.IsOther() && (keys.attacker.GetOwnerEntity()) && !this.GetParentPlus().PassivesDisabled() && !this.GetParentPlus().IsIllusion() && this.GetAbilityPlus().IsTrained()) {
             this.SetStackCount(this.GetStackCount() + keys.damage);

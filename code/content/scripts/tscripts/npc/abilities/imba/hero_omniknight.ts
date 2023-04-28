@@ -222,7 +222,7 @@ export class modifier_imba_purification_omniguard_ready extends BaseModifier_Plu
         }
         return Object.values(decFuncs);
     } */
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
         if (IsServer()) {
             let unit = keys.unit;
@@ -888,7 +888,7 @@ export class modifier_imba_guardian_angel_shield extends BaseModifier_Plus {
     CC_GetModifierAvoidDamage(p_0: ModifierAttackEvent,): number {
         return 1;
     }
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
         if (IsServer()) {
             let original_damage = keys.original_damage;

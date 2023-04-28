@@ -17,11 +17,11 @@ export class CCOverHeadPanel extends CCPanel<NodePropsData> {
         $.Schedule(0, () => this.onUpdate());
     }
     onUpdate() {
-        let scale = 800 / GameUI.GetCameraPosition()[2];
+        // let scale = 800 / GameUI.GetCameraPosition()[2];
         const allenemy = GEnemyUnitEntityRoot.GetAllInstance();
-        this.updateUnitUI(scale, CCEnemyTopBarItem, allenemy)
+        this.updateUnitUI(CCEnemyTopBarItem, allenemy)
         const allbuilding = GBuildingEntityRoot.GetAllInstance();
-        this.updateUnitUI(scale, CCBuildingTopBarItem, allbuilding)
+        this.updateUnitUI(CCBuildingTopBarItem, allbuilding)
         const keys = Object.keys(this.allOverHeadUI);
         for (let k of keys) {
             let entityid = Number(k) as EntityIndex;
@@ -52,7 +52,7 @@ export class CCOverHeadPanel extends CCPanel<NodePropsData> {
     }
 
     private allOverHeadUI: { [k: string]: ReactElement } = {};
-    updateUnitUI<T extends typeof CCOverHeadBaseItem>(scale: number, uitype: T, rootlist: IBattleUnitEntityRoot[]) {
+    updateUnitUI<T extends typeof CCOverHeadBaseItem>(uitype: T, rootlist: IBattleUnitEntityRoot[]) {
         for (let entityroot of rootlist) {
             const entityid = entityroot.EntityId;
             let needclose = true;
@@ -61,9 +61,9 @@ export class CCOverHeadPanel extends CCPanel<NodePropsData> {
                 if (pos) {
                     needclose = false;
                     if (this.allOverHeadUI[entityid] == null) {
-                        this.allOverHeadUI[entityid] = this.addNodeChildAt(this.NODENAME.__root__, uitype, { entityid: Number(entityid), scale: scale, vOrigin: pos } as any)!;
+                        this.allOverHeadUI[entityid] = this.addNodeChildAt(this.NODENAME.__root__, uitype, { entityid: Number(entityid), vOrigin: pos } as any)!;
                     } else {
-                        this.getPureCompByNode<CCOverHeadBaseItem>(this.allOverHeadUI[entityid] as any)?.updatePos(scale, pos);
+                        this.getPureCompByNode<CCOverHeadBaseItem>(this.allOverHeadUI[entityid] as any)?.updatePos(pos);
                     }
                 }
             }

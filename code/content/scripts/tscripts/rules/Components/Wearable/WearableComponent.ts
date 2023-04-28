@@ -119,6 +119,10 @@ export class WearableComponent extends ET.Component {
         if (!this.SlotWears[slot].includes(wearitem.Id)) {
             this.SlotWears[slot].push(wearitem.Id);
         }
+        let npc = this.GetDomain<IBaseNpc_Plus>();
+        // npc.NotifyWearablesOfModelChange(true);
+        npc.NotifyWearablesOfModelChange(true);
+        npc.ManageModelChanges();
     }
     public FindWearItemByItemDef(sItemDef: string) {
         if (!sItemDef) {
@@ -180,7 +184,18 @@ export class WearableComponent extends ET.Component {
             }
         }
     }
-
+    // todo
+    public AddInvisEffect(noshow = true) {
+        let all = this.GetAllDressWearItem().filter((entity) => { return entity.wearLabel != "default" });
+        for (let entity of all) {
+            if (noshow) {
+                entity.model.SetRenderMode(0);
+                // entity.model.SetRenderColor(0, 0, 0);
+            } else {
+                // entity.model.AddEffects(EntityEffects.EF_NODRAW);
+            }
+        }
+    }
     public GetAbilityTextureReplacement(str: string) {
         let all = this.GetAllDressWearItem();
         for (let entity of all) {

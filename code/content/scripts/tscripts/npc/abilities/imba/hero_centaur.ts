@@ -424,7 +424,7 @@ export class modifier_imba_return_passive extends BaseModifier_Plus {
             2: Enum_MODIFIER_EVENT.ON_ATTACK_LANDED
         });
     } */
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
         if (IsServer() && this.GetAbilityPlus()) {
             let caster = this.GetCasterPlus();

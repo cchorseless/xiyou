@@ -394,7 +394,7 @@ export class modifier_imba_juggernaut_blade_fury_deflect_on_kill_credit extends 
         }
         return Object.values(decFuncs);
     } */
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
         if (IsServer()) {
             this.caster = this.GetCasterPlus();

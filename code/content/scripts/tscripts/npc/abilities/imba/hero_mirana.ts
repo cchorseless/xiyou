@@ -489,7 +489,7 @@ export class modifier_imba_sacred_arrow_stun extends BaseModifier_Plus {
             }
         }
     }
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
         if (IsServer()) {
             let attacker = keys.attacker;

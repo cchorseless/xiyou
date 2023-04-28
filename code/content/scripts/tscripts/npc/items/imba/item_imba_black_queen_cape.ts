@@ -243,16 +243,16 @@ export class modifier_imba_black_queen_cape_active_heal extends BaseModifier_Plu
     CC_GetModifierConstantHealthRegen(): number {
         return this.health_regen;
     }
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(params: ModifierInstanceEvent): void {
         if (!IsServer()) {
-            return undefined;
+            return;
         }
         if ((params.unit != this.GetParentPlus()) || (!params.attacker.IsRealUnit())) {
-            return undefined;
+            return;
         }
         if (this.GetParentPlus().HasModifier(this.bkb_modifier)) {
-            return undefined;
+            return;
         }
         if (params.damage > 0) {
             this.Destroy();

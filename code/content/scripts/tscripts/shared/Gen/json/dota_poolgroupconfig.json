@@ -4,12 +4,12 @@
     "PoolGroup": [
       {
         "PoolConfigId": "1001",
-        "PoolWeight": 60,
+        "PoolWeight": 80,
         "IsVaild": true
       },
       {
         "PoolConfigId": "1002",
-        "PoolWeight": 40,
+        "PoolWeight": 20,
         "IsVaild": true
       }
     ]
@@ -39,17 +39,17 @@
     "PoolGroup": [
       {
         "PoolConfigId": "1002",
-        "PoolWeight": 20,
+        "PoolWeight": 50,
         "IsVaild": true
       },
       {
         "PoolConfigId": "1003",
-        "PoolWeight": 60,
+        "PoolWeight": 20,
         "IsVaild": true
       },
       {
         "PoolConfigId": "1004",
-        "PoolWeight": 20,
+        "PoolWeight": 10,
         "IsVaild": true
       }
     ]

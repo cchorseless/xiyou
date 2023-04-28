@@ -97,7 +97,7 @@ export class modifier_item_imba_heart extends BaseModifier_Plus {
             }
         }
     }
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
         if (this.GetItemPlus() && this.GetItemPlus().GetSecondaryCharges() == 1 && keys.unit == this.GetParentPlus() && keys.damage > 0 && keys.attacker != keys.unit && (keys.attacker.IsRealUnit() || keys.attacker.IsConsideredHero() /**|| keys.attacker.IsRoshan()*/) && bit.band(keys.damage_flags, DOTADamageFlag_t.DOTA_DAMAGE_FLAG_HPLOSS) != DOTADamageFlag_t.DOTA_DAMAGE_FLAG_HPLOSS) {
             if (this.GetParentPlus().IsRangedAttacker()) {

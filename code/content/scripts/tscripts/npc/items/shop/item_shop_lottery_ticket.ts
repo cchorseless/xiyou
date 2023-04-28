@@ -12,8 +12,7 @@ export class item_shop_lottery_ticket extends ActiveRootItem {
     }
     UseOutOfInventory(): any {
         let sound_cast = "DOTA_Item.Hand_Of_Midas";
-
-        let hParent = this.GetParentPlus();
+        let hParent = this.GetOwnerPlus();
         let hPlayerid = hParent.GetPlayerID();
         let hPlayer = GGameScene.GetPlayer(hPlayerid);
         let getgold = -1;
@@ -31,7 +30,7 @@ export class item_shop_lottery_ticket extends ActiveRootItem {
             getgold = 100;
         }
         if (getgold > 0) {
-            EmitSoundOn(sound_cast, this.GetParentPlus());
+            EmitSoundOn(sound_cast, this.GetOwnerPlus());
         }
         let gold_get = math.floor(getgold * hPlayer.PlayerDataComp().GetGold() * gold_cost_pect * 0.01);
         hPlayer.PlayerDataComp().ModifyGold(gold_get);

@@ -33,7 +33,7 @@ export class modifier_chess_jump extends BaseModifierMotionBoth_Plus {
         if (IsServer()) {
             if (!this.BeginMotionOrDestroy()) { return };
             this.vStartPosition = GetGroundPosition(this.GetParentPlus().GetOrigin(), this.GetParentPlus());
-            this.vTargetPosition = Vector(kv.vx, kv.vy, 128);
+            this.vTargetPosition = Vector(kv.vx, kv.vy, 0);
             this.vDirection = ((this.vTargetPosition - this.vStartPosition) as Vector).Normalized();
             this.flHorizontalSpeed = 1000.0 / 30;
             this.flDistance = ((this.vTargetPosition - this.vStartPosition) as Vector).Length2D() + this.flHorizontalSpeed;

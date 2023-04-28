@@ -443,7 +443,7 @@ export class modifier_imba_shadow_shaman_voodoo_deprecation extends BaseModifier
     CC_GetOverrideAnimation(): GameActivity_t {
         return GameActivity_t.ACT_DOTA_VICTORY;
     }
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
         if (!IsServer()) {
             return;

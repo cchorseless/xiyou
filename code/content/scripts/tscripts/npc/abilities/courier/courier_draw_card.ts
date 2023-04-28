@@ -95,10 +95,9 @@ export class courier_draw_card_v2 extends ActiveRootAbility {
         if (round.config.roundIndex >= this.GetSpecialValueFor("unlock_round")) {
             if (this.IsActivated() == false) {
                 this.SetActivated(true);
-                return;
             }
         }
-        if (this.IsActivated()) {
+        else if (this.IsActivated()) {
             this.SetActivated(false);
         }
     }
@@ -154,10 +153,9 @@ export class courier_draw_card_v3 extends ActiveRootAbility {
         if (round.config.roundIndex >= this.GetSpecialValueFor("unlock_round")) {
             if (this.IsActivated() == false) {
                 this.SetActivated(true);
-                return;
             }
         }
-        if (this.IsActivated()) {
+        else if (this.IsActivated()) {
             this.SetActivated(false);
         }
     }

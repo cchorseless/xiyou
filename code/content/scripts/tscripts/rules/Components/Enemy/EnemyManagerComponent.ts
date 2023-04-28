@@ -45,7 +45,7 @@ export class EnemyManagerComponent extends ET.Component {
             GLogHelper.error("cant find emeny spawn pos");
         }
         let enemy = BaseNpc_Plus.CreateUnitByName(enemyName, pos, null, true, DOTATeam_t.DOTA_TEAM_BADGUYS);
-        enemy.SetNeverMoveToClearSpace(false);
+        enemy.SetUnitOnClearGround();
         EnemyUnitEntityRoot.Active(enemy, this.BelongPlayerid, enemyName, roundid, onlykey);
         let domain = GGameScene.GetPlayer(this.BelongPlayerid)
         domain.AddDomainChild(enemy.ETRoot);

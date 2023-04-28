@@ -48,6 +48,6 @@ export class ChessVector {
             x = minv.x + ChessControlConfig.Gird_Width * (this.x + 0.5);
             y = minv.y + ChessControlConfig.Gird_Height * (this.y - 1 + 0.5);
         }
-        return Vector(x, y, 128);
+        return Vector(x, y, 0);
     }
 }

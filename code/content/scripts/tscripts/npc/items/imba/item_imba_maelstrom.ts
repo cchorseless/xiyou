@@ -409,7 +409,7 @@ export class modifier_item_imba_static_charge extends BaseModifier_Plus {
             2: GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP
         });
     } */
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
         if (keys.unit == this.GetParentPlus() && keys.attacker != this.GetParentPlus() && !this.bStaticCooldown && keys.damage >= 5 && GFuncRandom.PRD(this.static_chance, this.GetItemPlus())) {
             this.GetParentPlus().EmitSound("Item.Maelstrom.Chain_Lightning.Jump");

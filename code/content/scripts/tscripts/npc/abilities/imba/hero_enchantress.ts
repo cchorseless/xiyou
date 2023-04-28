@@ -466,7 +466,7 @@ export class modifier_imba_enchantress_enchant_controlled extends BaseModifier_P
     CC_GetBonusVisionPercentage( /** keys */): number {
         return this.GetCasterPlus().GetTalentValue("special_bonus_imba_enchantress_4");
     }
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
         if (!IsServer()) {
             return;

@@ -383,7 +383,7 @@ export class modifier_imba_brewmaster_cinder_brew extends BaseModifier_Plus {
     CC_GetModifierMoveSpeedBonus_Percentage(): number {
         return this.movement_slow;
     }
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
         if (keys.unit == this.GetParentPlus() && !this.bIgnited && keys.damage_category == DamageCategory_t.DOTA_DAMAGE_CATEGORY_SPELL) {
             this.bIgnited = true;

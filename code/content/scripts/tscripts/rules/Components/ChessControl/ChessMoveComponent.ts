@@ -1,8 +1,10 @@
 
+import { modifier_building_battle_buff } from "../../../npc/modifier/battle/modifier_building_battle_buff";
 import { modifier_jiaoxie_wudi } from "../../../npc/modifier/battle/modifier_jiaoxie_wudi";
 import { modifier_chess_jump } from "../../../npc/modifier/move/modifier_chess_jump";
 import { modifier_chess_run } from "../../../npc/modifier/move/modifier_chess_run";
 import { ChessControlConfig } from "../../../shared/ChessControlConfig";
+import { RoundConfig } from "../../../shared/RoundConfig";
 import { ET } from "../../../shared/lib/Entity";
 import { GEventHelper } from "../../../shared/lib/GEventHelper";
 import { ChessVector } from "./ChessVector";
@@ -43,15 +45,23 @@ export class ChessMoveComponent extends ET.Component {
         domain.SetForwardVector(((position - domain.GetAbsOrigin()) as Vector).Normalized());
         domain.MoveToPosition(position);
     }
-
+    /**
+     * 棋盘内且在战斗区域
+     */
     isInBoardAndBattle() {
         return this.isInBattle && this.isInBoard();
     }
-
+    /**
+     * 是否在战斗区域
+     * @returns 
+     */
     isPosInBattle() {
         return !this.ChessVector.isY(0);
     }
-
+    /**
+     * 在棋盘内
+     * @returns 
+     */
     isInBoard() {
         let location = this.GetDomain<IBaseNpc_Plus>().GetAbsOrigin();
         let playerid = this.GetDomain<IBaseNpc_Plus>().ETRoot.As<IBattleUnitEntityRoot>().BelongPlayerid;
@@ -61,6 +71,7 @@ export class ChessMoveComponent extends ET.Component {
         let location = this.GetDomain<IBaseNpc_Plus>().GetAbsOrigin();
         return GChessControlSystem.GetInstance().IsInBaseRoom(location);
     }
+
 
     setMoving(ismoving: boolean) {
         let npc = this.GetDomain<IBaseNpc_Plus>();
@@ -147,6 +158,17 @@ export class ChessMoveComponent extends ET.Component {
         this.setMoving(false);
         (this.isMoving as any) = false;
         this.updateBoardPos();
+        // 更新棋子BUFF
+        let playerRoot = GPlayerEntityRoot.GetOneInstance(this.BelongPlayerid);
+        let currentround = playerRoot.RoundManagerComp().getCurrentBoardRound();
+        if (currentround.roundState != RoundConfig.ERoundBoardState.start && this.isInBoard()) {
+            if (this.isPosInBattle()) {
+                modifier_building_battle_buff.applyOnly(domain, domain);
+            }
+            else {
+                modifier_building_battle_buff.remove(domain);
+            }
+        }
     }
 
     FindClosePosToEnemy(enemy: IBattleUnitEntityRoot): Vector {

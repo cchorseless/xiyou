@@ -65,7 +65,7 @@ export class CCDebugPanel extends CCPanel<ICCDebugPanel> {
                         <CCDebugTool_DemoButton eventName="ReturnMenuButtonPressed" btncolor="RedButton" localtext="回到菜单" />
                         <CCDebugTool_DemoSelectionButton eventName="TeleportButtonPressed" localtext="跳转到特定区域" />
                         <CCDebugTool_DemoButton eventName="StandbyButtonPressed" localtext="备用按钮" />
-                        <CCDebugTool_DemoSlider eventName="CameraDistance" titletext="镜头高度" min={600} max={1600} defaultValue={1100} onChange={value => GameUI.SetCameraDistance(value)} />
+                        <CCDebugTool_DemoSlider eventName="CameraDistance" titletext="镜头高度" min={1000} max={2000} defaultValue={1600} onChange={value => GameUI.SetCameraDistance(value)} />
                     </CCDebugTool_Category>
                     <CCDebugTool_Category title="网表和实体" >
                         <CCDebugTool_DemoSelectionButton eventName="CreateAllyButtonPressed" localtext="todo" onactivate={() => { this.addOnlyDebugDialog(CCDebugTool_TextPicker, { title: "创建友方单位", itemNames: heroList }) }} />

@@ -16,8 +16,8 @@ export class EnemyMoveComponent extends ET.Component {
             return EnemyConfig.BOSS_CORNERS[this.BelongPlayerid];
         } else if (unitComp.IsGOLD_BOSS()) {
             return EnemyConfig.CHALLENGE_CORNERS[this.BelongPlayerid];
-        } else if (unitComp.IsCANDY_WAVE()) {
-            return EnemyConfig.CHALLENGE_CORNERS[this.BelongPlayerid];
+        // } else if (unitComp.IsCANDY_WAVE()) {
+        //     return EnemyConfig.CHALLENGE_CORNERS[this.BelongPlayerid];
         } else if (unitComp.IsCANDY_BOSS()) {
             return EnemyConfig.CANDY_BOSS_CORNERS[this.BelongPlayerid];
         }

@@ -37,11 +37,20 @@ export class EnemyUnitEntityRoot extends BattleUnitEntityRoot {
     OnRound_Start() {
         let npc = this.GetDomain<IBaseNpc_Plus>();
         modifier_jiaoxie_wudi.applyOnly(npc, npc);
+        if (this.IsEnemyTower()) {
+            npc.StartGesture(GameActivity_t.ACT_DOTA_CUSTOM_TOWER_IDLE);
+        }
+        else {
+            npc.StartGesture(GameActivity_t.ACT_DOTA_IDLE);
+        }
         GGameScene.GetPlayer(this.BelongPlayerid).FakerHeroRoot().FHeroCombinationManager().addEnemyUnit(this);
     }
     OnRound_Battle() {
         this.SetUIOverHead(false, true);
         let npc = this.GetDomain<IBaseNpc_Plus>();
+        if (!this.IsEnemyTower()) {
+            npc.RemoveGesture(GameActivity_t.ACT_DOTA_IDLE);
+        }
         modifier_jiaoxie_wudi.remove(npc);
         modifier_mana_control.applyOnly(npc, npc);
         this.AbilityManagerComp().OnRound_Battle();
@@ -76,29 +85,32 @@ export class EnemyUnitEntityRoot extends BattleUnitEntityRoot {
             bProvidesVision: false,
             iVisionRadius: 0,
             iVisionTeamNumber: hero.GetTeamNumber(),
-            iSourceAttachment: DOTAProjectileAttachment_t.DOTA_PROJECTILE_ATTACHMENT_NONE,
+            iSourceAttachment: DOTAProjectileAttachment_t.DOTA_PROJECTILE_ATTACHMENT_ATTACK_1,
         });
     }
     OnRound_WaitingEnd() {
 
     }
-    EnemyUnitType() {
-        return this.Config().UnitLabel;
-    }
+
     IsWave() {
-        return this.EnemyUnitType() == EnemyConfig.EEnemyUnitType.wave;
+        let npc = this.GetDomain<IBaseNpc_Plus>();
+        return npc.GetUnitLabel() == EnemyConfig.EEnemyUnitType.wave;
     }
     IsBoss() {
-        return this.EnemyUnitType() == EnemyConfig.EEnemyUnitType.BOSS;
+        let npc = this.GetDomain<IBaseNpc_Plus>();
+        return npc.GetUnitLabel() == EnemyConfig.EEnemyUnitType.BOSS;
     }
     IsGOLD_BOSS() {
-        return this.EnemyUnitType() == EnemyConfig.EEnemyUnitType.GOLD_BOSS;
+        let npc = this.GetDomain<IBaseNpc_Plus>();
+        return npc.GetUnitLabel() == EnemyConfig.EEnemyUnitType.GOLD_BOSS;
     }
     IsCANDY_BOSS() {
-        return this.EnemyUnitType() == EnemyConfig.EEnemyUnitType.CANDY_BOSS;
+        let npc = this.GetDomain<IBaseNpc_Plus>();
+        return npc.GetUnitLabel() == EnemyConfig.EEnemyUnitType.CANDY_BOSS;
     }
-    IsCANDY_WAVE() {
-        return this.EnemyUnitType() == EnemyConfig.EEnemyUnitType.CANDY_WAVE;
+    IsEnemyTower() {
+        let npc = this.GetDomain<IBaseNpc_Plus>();
+        return npc.GetUnitLabel() == EnemyConfig.EEnemyUnitType.Tower;
     }
 
     onDestroy(): void {
@@ -113,8 +125,45 @@ export class EnemyUnitEntityRoot extends BattleUnitEntityRoot {
         this.changeAliveState(false);
         this.AiAttackComp().endFindToAttack();
         let npc = this.GetDomain<IBaseNpc_Plus>();
-        npc.StartGesture(GameActivity_t.ACT_DOTA_DIE);
+        if (this.IsEnemyTower()) {
+            npc.StartGesture(GameActivity_t.ACT_DOTA_CUSTOM_TOWER_DIE);
+        }
+        else {
+            npc.StartGesture(GameActivity_t.ACT_DOTA_DIE);
+            // npc.add
+        }
+        this.GiveKillReward();
+        GTimerHelper.AddTimer(RandomFloat(1, 3), GHandler.create(this, () => {
+            if (IsValid(npc)) {
+                npc.AddNoDraw()
+            }
+        }));
         // this.GetPlayer().EnemyManagerComp().killEnemy(this);
+    }
+
+    GiveKillReward() {
+        let roundconfig = this.GetRoundBasicUnitConfig();
+        if (roundconfig) {
+            let player = this.GetPlayer();
+            let npc = this.GetDomain<IBaseNpc_Plus>();
+            if (this.IsEnemyTower()) {
+                for (let i = 0; i < 3; i++) {
+                    let item = npc.CreateOneItem("item_imba_aeon_disk");
+                    item.CreateItemOnPositionRandom(npc.GetAbsOrigin(), 300);
+                }
+            }
+            else {
+                let goldMin = roundconfig.goldMin || 0;
+                let goldMax = roundconfig.goldMax || 0;
+                if (goldMin > 0 && goldMax > 0) {
+                    let gold = RandomInt(goldMin, goldMax);
+                    let cast_sound = "DOTA_Item.Hand_Of_Midas";
+                    npc.EmitSound(cast_sound);
+                    SendOverheadEventMessage(null, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_GOLD, npc, gold, undefined);
+                    player.PlayerDataComp().ModifyGold(RandomInt(goldMin, goldMax));
+                }
+            }
+        }
     }
 
     Config() {

@@ -58,5 +58,8 @@ export class modifier_round_enemy extends BaseModifier_Plus {
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_ARMOR_BONUS)
     magicarm: number;
 
-
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_ATTACK_DAMAGE_PERCENTAGE)
+    outdamagePect: number = 0;
+    // @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
+    // incomdamegePect: number = 50;
 }

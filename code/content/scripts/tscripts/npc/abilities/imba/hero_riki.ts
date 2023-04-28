@@ -161,9 +161,11 @@ export class modifier_imba_smoke_screen_handler extends BaseModifier_Plus {
     BeDestroy(): void {
         if (IsServer()) {
             let afflicted = this.GetParentPlus().TempData<{ [k: string]: any }>().afflicted;
-            for (const [_, modifier] of GameFunc.Pair(afflicted)) {
-                if (!modifier.IsNull()) {
-                    modifier.Destroy();
+            if (afflicted) {
+                for (const [_, modifier] of GameFunc.Pair(afflicted)) {
+                    if (!modifier.IsNull()) {
+                        modifier.Destroy();
+                    }
                 }
             }
             let ability = this.GetAbilityPlus();

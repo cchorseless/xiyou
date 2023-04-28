@@ -8,3 +8,4 @@
 "unit_base_equip_bag"       "装备箱子"
 "unit_target_dummy"       "傀儡目标"
 "npc_dota_target_dummy"       "傀儡目标"
+"wearable_dummy"       "饰品"

@@ -617,7 +617,7 @@ export class modifier_imba_maledict extends BaseModifier_Plus {
         return "particles/status_fx/status_effect_maledict.vpcf";
     }
     StatusEffectPriority(): modifierpriority {
-        return 5;
+        return 4;
     }
     /** DeclareFunctions():modifierfunction[] {
         let funcs = {

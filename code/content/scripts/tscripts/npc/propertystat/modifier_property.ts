@@ -142,7 +142,7 @@ export class modifier_property extends BaseModifier_Plus {
      */
     GetModifierAttackSpeedBaseOverride(): number {
         let parent = this.GetParentPlus()
-        let fBonus = PropertyCalculate.SumProps(parent, null, GPropertyConfig.EMODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
+        let fBonus = PropertyCalculate.GetMaximumAttackSpeed(parent)
         let current = 1 + parent.GetIncreasedAttackSpeed();
         let minpect = GPropertyConfig.MINIMUM_ATTACK_SPEED * 0.01;
         let maxpect = (GPropertyConfig.MAXIMUM_ATTACK_SPEED + fBonus) * 0.01
@@ -150,7 +150,7 @@ export class modifier_property extends BaseModifier_Plus {
     }
     /**额外攻速 */
     GetModifierAttackSpeedBonus_Constant(): number {
-        return PropertyCalculate.SumProps(this.GetParentPlus(), null, GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
+        return PropertyCalculate.GetAttackSpeedBonus(this.GetParentPlus())
     }
 
     /**

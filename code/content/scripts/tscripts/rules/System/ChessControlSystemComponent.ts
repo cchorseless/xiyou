@@ -1,5 +1,4 @@
 
-import { AoiHelper } from "../../helper/AoiHelper";
 import { EventHelper } from "../../helper/EventHelper";
 import { ChessControlConfig } from "../../shared/ChessControlConfig";
 import { GameServiceConfig } from "../../shared/GameServiceConfig";
@@ -121,6 +120,7 @@ export class ChessControlSystemComponent extends ET.SingletonComponent {
             distance++;
         }
     }
+
     public GetBoardEmptyGirdRandom(playerid: PlayerID, isincludeEnemy: boolean, isincludeplayer: boolean) {
         let max_y = ChessControlConfig.Gird_Max_Y;
         if (!isincludeEnemy) {
@@ -194,32 +194,26 @@ export class ChessControlSystemComponent extends ET.SingletonComponent {
         } else {
             minv = this.GetBoard8x10MinVector3(playerid);
             x = minv.x + ChessControlConfig.Gird_Width * (v.x + 0.5);
-            y = minv.y + ChessControlConfig.Gird_Height * (v.y - 1 + 0.5);
+            y = minv.y + ChessControlConfig.Gird_Height * (v.y - 0.5);
         }
-        return Vector(x, y, 128);
+        return Vector(x, y, 0);
     }
 
     public FindBoardInGirdChess(v: ChessVector) {
         let playerid = v.playerid as PlayerID;
-        if (!GPlayerEntityRoot.IsValidPlayer(playerid)) {
+        let playerroot = GGameScene.GetPlayer(playerid)
+        if (!playerroot) {
             return;
         }
-        let v3 = this.GetBoardGirdCenterVector3(v);
-        let npcarr = AoiHelper.FindEntityInRadius(
-            DOTATeam_t.DOTA_TEAM_GOODGUYS,
-            v3,
-            ChessControlConfig.Gird_Width / 2,
-            null,
-            DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH
-            // DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC,
-            // DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS
-        );
+        let pos = this.GetBoardGirdCenterVector3(v);
         let r: IBuildingEntityRoot[] = [];
-        npcarr.forEach((npc) => {
-            if (npc.ETRoot != null && npc.ETRoot.AsValid<IBuildingEntityRoot>("BuildingEntityRoot")) {
-                r.push(npc.ETRoot.As<IBuildingEntityRoot>());
+        let allbuilding = playerroot.BuildingManager().getAllBuilding();
+        for (let building of allbuilding) {
+            let npcpos = building.GetDomain<IBaseNpc_Plus>().GetAbsOrigin();
+            if (GFuncVector.CalculateDistance(npcpos, pos) <= ChessControlConfig.Gird_Width * 0.5) {
+                r.push(building)
             }
-        });
+        };
         return r;
     }
 
@@ -248,7 +242,7 @@ export class ChessControlSystemComponent extends ET.SingletonComponent {
     }
 
     public IsBoardEmptyGird(v: ChessVector) {
-        return this.FindBoardInGirdChess(v).length === 0;
+        return this.FindBoardInGirdChess(v).length == 0;
     }
     public IsInBaseRoom(v: Vector) {
         let minv = GMapSystem.GetInstance().BaseRoomMinPoint;

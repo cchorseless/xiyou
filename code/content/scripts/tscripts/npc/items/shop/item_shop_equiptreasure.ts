@@ -15,10 +15,9 @@ export class item_shop_equiptreasure_c extends ActiveRootItem {
         let poolgroupconfig = this.GetSpecialValueFor("poolgroupconfig");
         let itemname = KVHelper.RandomPoolGroupConfig(poolgroupconfig + "");
         if (itemname) {
-            let item = this.GetParentPlus().CreateOneItem(itemname);
+            let item = this.GetOwnerPlus().CreateOneItem(itemname);
             if (item) {
-                let hParent = this.GetParentPlus();
-                GLogHelper.print(isuseinventory, 1111)
+                let hParent = this.GetOwnerPlus();
                 if (isuseinventory) {
                     GTimerHelper.AddFrameTimer(1, GHandler.create(item, () => {
                         hParent.AddItemOrInGround(item);

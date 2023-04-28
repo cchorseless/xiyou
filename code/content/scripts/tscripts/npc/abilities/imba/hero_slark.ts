@@ -770,7 +770,8 @@ export class modifier_imba_slark_essence_shift_debuff_counter extends BaseModifi
     } */
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
     CC_OnAttackLanded(keys: ModifierAttackEvent): void {
-        if (this.stack_table && keys.attacker == this.GetParentPlus() && !this.GetParentPlus().PassivesDisabled() && (keys.target.IsRealUnit() || keys.target.IsClone()) && !keys.target.IsTempestDouble()) {
+        if (this.stack_table && keys.attacker == this.GetParentPlus() && this.GetParentPlus().IsAlive()
+            && !this.GetParentPlus().PassivesDisabled() && (keys.target.IsRealUnit() || keys.target.IsClone()) && !keys.target.IsTempestDouble()) {
             this.stack_table.push({
                 apply_game_time: GameRules.GetDOTATime(true, true),
                 duration: this.GetAbilityPlus().GetTalentSpecialValueFor("duration")
@@ -1010,7 +1011,7 @@ export class modifier_imba_slark_shadow_dance_passive_regen extends BaseModifier
             return this.GetSpecialValueFor("bonus_regen_pct");
         }
     }
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
         if (keys.unit == this.GetParentPlus() && (keys.attacker.IsNeutralUnitType && keys.attacker.IsNeutralUnitType())) {
             this.bHitByNeutral = true;
