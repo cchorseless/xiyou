@@ -16,10 +16,10 @@ export class modifier_property extends BaseModifier_Plus {
     GetTexture(): string {
         if (GPropertyCalculate.call_ability != null) {
             let hAbility = EntIndexToHScript(GPropertyCalculate.call_ability) as IBaseAbility_Plus;
-            let iLevel = GPropertyCalculate.call_ability!;
+            let iLevel = GPropertyCalculate.call_level!;
             let sKeyName = GPropertyCalculate.call_key!;
             GPropertyCalculate.call_ability = null;
-            GPropertyCalculate.call_ability = null;
+            GPropertyCalculate.call_level = null;
             GPropertyCalculate.call_key = null;
             if (IsValid(hAbility)) {
                 let func = (hAbility as any)[sKeyName];
@@ -142,10 +142,9 @@ export class modifier_property extends BaseModifier_Plus {
      */
     GetModifierAttackSpeedBaseOverride(): number {
         let parent = this.GetParentPlus()
-        let fBonus = PropertyCalculate.GetMaximumAttackSpeed(parent)
         let current = 1 + parent.GetIncreasedAttackSpeed();
         let minpect = GPropertyConfig.MINIMUM_ATTACK_SPEED * 0.01;
-        let maxpect = (GPropertyConfig.MAXIMUM_ATTACK_SPEED + fBonus) * 0.01
+        let maxpect = PropertyCalculate.GetMaximumAttackSpeed(parent) * 0.01
         return GFuncMath.Clamp(current, minpect, maxpect)
     }
     /**额外攻速 */

@@ -1,7 +1,6 @@
 import { render } from "@demon673/react-panorama";
 import React from "react";
 import { CSSHelper } from "../../helper/CSSHelper";
-import { UnitHelper } from "../../helper/DotaEntityHelper";
 import { TipsHelper } from "../../helper/TipsHelper";
 
 import { PublicBagConfig } from "../../../../scripts/tscripts/shared/PublicBagConfig";
@@ -120,7 +119,7 @@ export class CCPublicBagSlotItem extends CCPanel<ICCPublicBagSlotItem> {
                     pDraggedPanel.m_DragCompleted = true;
                     // // 合成格子
                     // if (iType == PublicBagConfig.EBagSlotType.EquipCombineSlot) {
-                    //     if (!ItemHelper.IsCombinable(iDraggedItemIndex)) {
+                    //     if (!Items.IsCombinable(iDraggedItemIndex)) {
                     //         TipsHelper.showErrorMessage("dota_hud_error_uncombinable_item");
                     //         pDraggedPanel.m_DragCompleted = true;
                     //         return false;
@@ -130,7 +129,7 @@ export class CCPublicBagSlotItem extends CCPanel<ICCPublicBagSlotItem> {
                     // let iCasterIndex = Abilities.GetCaster(iDraggedItemIndex);
                     // switch (pDraggedPanel.m_DragType) {
                     //     case "BackPackSlot":
-                    //         // if (pDraggedPanel.m_DragType_Extra == 2 && (itemIndex != -1 && !ItemHelper.IsCombinable(itemIndex))) {
+                    //         // if (pDraggedPanel.m_DragType_Extra == 2 && (itemIndex != -1 && !Items.IsCombinable(itemIndex))) {
                     //         //     TipsHelper.showErrorMessage("dota_hud_error_uncombinable_item");
                     //         //     pDraggedPanel.m_DragCompleted = true;
                     //         //     return false;
@@ -169,7 +168,7 @@ export class CCPublicBagSlotItem extends CCPanel<ICCPublicBagSlotItem> {
                             case PublicBagConfig.EBagSlotType.BackPackSlot:
                             case PublicBagConfig.EBagSlotType.PublicBagSlot:
                             case PublicBagConfig.EBagSlotType.EquipCombineSlot:
-                                let iTargetIndex = UnitHelper.GetCursorUnit();
+                                let iTargetIndex = Entities.GetCursorUnit();
                                 if (iTargetIndex != -1) {
                                     GGameScene.Local.CourierBagComp.MoveItem(
                                         pDraggedPanel.m_DragType,

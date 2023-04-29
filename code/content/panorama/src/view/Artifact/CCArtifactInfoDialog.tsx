@@ -1,5 +1,4 @@
 import React from "react";
-import { AbilityHelper } from "../../helper/DotaEntityHelper";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCPanelHeader } from "../AllUIElement/CCPanel/CCPanelPart";
 import "./CCArtifactInfoDialog.less";
@@ -25,7 +24,7 @@ export class CCArtifactInfoDialog extends CCPanel<ICCArtifactInfoDialog> {
                         </CCPanel>
                     </CCPanelHeader>
                     <CCPanel className="SectRow" flowChildren="right">
-                        <Label className="SectDescription" html={true} text={AbilityHelper.GetAbilityDescriptionByName(itemname)} />
+                        <Label className="SectDescription" html={true} text={Abilities.GetAbilityDescriptionByName(itemname)} />
                     </CCPanel>
                     {lore != "#DOTA_Tooltip_ability_" + itemname + "_Lore" &&
                         <CCPanel id="LoreContainer">

@@ -7,16 +7,6 @@ import { ActiveRootItem } from "../ActiveRootItem";
 @registerAbility()
 export class item_shop_gold_bag extends ActiveRootItem {
 
-    Init(): void {
-        let Ihander = GHandler.create(this, (keys: ModifierOverrideAbilitySpecialEvent) => {
-            let hParent = this.GetCasterPlus();
-            let data = NetTablesHelper.GetDotaEntityData(hParent.GetEntityIndex(), "item_shop_gold_bag") || {};
-            if (keys.ability_special_value == "cur_get") {
-                return data.curGetCoin;
-            }
-        })
-        this.RegAbilitySpecialValueOverride("cur_get", Ihander);
-    }
     curGetCoin: number = 0;
     addCurGet() {
         let hParent = this.GetCasterPlus();
@@ -33,20 +23,15 @@ export class item_shop_gold_bag extends ActiveRootItem {
             }
         }
     }
+    GetAbilityJinDuInfo(): string {
+        let hParent = this.GetCasterPlus();
+        let data = NetTablesHelper.GetDotaEntityData(hParent.GetEntityIndex(), "item_shop_gold_bag") || {};
+        return `${0},${this.GetAbilityJinDuMax()},${data.curGetCoin || 0}`;
+    }
 }
 // 木材福袋
 @registerAbility()
 export class item_shop_wood_bag extends ActiveRootItem {
-    Init(): void {
-        let Ihander = GHandler.create(this, (keys: ModifierOverrideAbilitySpecialEvent) => {
-            let hParent = this.GetCasterPlus();
-            let data = NetTablesHelper.GetDotaEntityData(hParent.GetEntityIndex(), "item_shop_wood_bag") || {};
-            if (keys.ability_special_value == "cur_get") {
-                return data.curGetCoin;
-            }
-        })
-        this.RegAbilitySpecialValueOverride("cur_get", Ihander);
-    }
     curGetCoin: number = 0;
     addCurGet() {
         let hParent = this.GetCasterPlus();
@@ -64,22 +49,16 @@ export class item_shop_wood_bag extends ActiveRootItem {
             }
         }
     }
-
+    GetAbilityJinDuInfo(): string {
+        let hParent = this.GetCasterPlus();
+        let data = NetTablesHelper.GetDotaEntityData(hParent.GetEntityIndex(), "item_shop_wood_bag") || {};
+        return `${0},${this.GetAbilityJinDuMax()},${data.curGetCoin || 0}`;
+    }
 }
 // 魂晶福袋
 @registerAbility()
 export class item_shop_soulcrystal_bag extends ActiveRootItem {
 
-    Init(): void {
-        let Ihander = GHandler.create(this, (keys: ModifierOverrideAbilitySpecialEvent) => {
-            let hParent = this.GetCasterPlus();
-            let data = NetTablesHelper.GetDotaEntityData(hParent.GetEntityIndex(), "item_shop_soulcrystal_bag") || {};
-            if (keys.ability_special_value == "cur_get") {
-                return data.curGetCoin;
-            }
-        })
-        this.RegAbilitySpecialValueOverride("cur_get", Ihander);
-    }
     curGetCoin: number = 0;
     addCurGet() {
         let hParent = this.GetCasterPlus();
@@ -95,6 +74,11 @@ export class item_shop_soulcrystal_bag extends ActiveRootItem {
                 this.addCurGet();
             }
         }
+    }
+    GetAbilityJinDuInfo(): string {
+        let hParent = this.GetCasterPlus();
+        let data = NetTablesHelper.GetDotaEntityData(hParent.GetEntityIndex(), "item_shop_soulcrystal_bag") || {};
+        return `${0},${this.GetAbilityJinDuMax()},${data.curGetCoin || 0}`;
     }
 }
 

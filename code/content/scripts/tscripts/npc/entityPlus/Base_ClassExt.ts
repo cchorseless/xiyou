@@ -476,7 +476,18 @@ declare global {
          * @serverOnly
          */
         AutoSpellSelf(): boolean;
-
+        /**
+         * 获取技能进度信息
+         * @returns 值 min,max,now
+         * @Both
+         */
+        GetAbilityJinDuInfo(ilevel?: number): string;
+        /**
+         * @Both
+         * 获取技能进度最大值
+         * @param ilevel 
+         */
+        GetAbilityJinDuMax(ilevel?: number): number;
         /**
          * 是否拥有天赋
          * @param sTalent 天赋名
@@ -552,6 +563,13 @@ if (CBaseAbility.GetSpecialValueFor_Engine == null) {
     CBaseAbility.GetSpecialValueFor_Engine = CBaseAbility.GetSpecialValueFor;
 }
 
+
+CBaseAbility.GetAbilityJinDuInfo = function (ilevel = 1) {
+    return ""
+}
+CBaseAbility.GetAbilityJinDuMax = function (ilevel = 1) {
+    return this.GetSpecialValueFor("_jindu_max")
+}
 /**
  * 设置Special默认值
  * @param s

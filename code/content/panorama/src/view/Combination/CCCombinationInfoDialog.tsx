@@ -4,7 +4,6 @@ import { Dota } from "../../../../scripts/tscripts/shared/Gen/Types";
 import { HeroEquipComponent } from "../../../../scripts/tscripts/shared/service/equip/HeroEquipComponent";
 import { ECombination } from "../../game/components/Combination/ECombination";
 import { CSSHelper } from "../../helper/CSSHelper";
-import { AbilityHelper } from "../../helper/DotaEntityHelper";
 import { BaseEntityRoot } from "../../libs/BaseEntityRoot";
 import { CCIcon_Scepter } from "../AllUIElement/CCIcons/CCIcon_Scepter";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
@@ -44,7 +43,7 @@ export class CCCombinationInfoDialog extends CCPanel<ICCCombinationInfoDialog> {
                 let iResultPS = sStr.search(blockPS);
                 if (iResult == -1 && iResultPS == -1) return;
                 let aValues = (v + "").split(" ").map((value: string) => { return Number(value); });;
-                let [sValues, sValuesPS] = AbilityHelper.AbilityDescriptionCompose(aValues);
+                let [sValues, sValuesPS] = Abilities.AbilityDescriptionCompose(aValues);
                 sStr = sStr.replace(blockPS, sValuesPS);
                 sStr = sStr.replace(block, sValues);
             })

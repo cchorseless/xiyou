@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { UnitHelper } from '../../helper/DotaEntityHelper';
 import { CCDividerHeader } from '../AllUIElement/CCDivider/CCDividerHeader';
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCPanelBG } from '../AllUIElement/CCPanel/CCPanelPart';
@@ -21,7 +20,7 @@ export class CCPlayerInfoDialog extends CCPanel<ICCPlayerInfoDialog> {
         if (this.props.isFaker) {
             entityid = Players.GetLocalPlayerPortraitUnit()
         }
-        const playerData = { heroName: UnitHelper.GetCourierName(entityid) }
+        const playerData = { heroName: Entities.GetCourierName(entityid) }
         GLogHelper.print(playerData)
         return (
             <Panel ref={this.__root__} id="CC_PlayerInfoDialog" hittest={false} {...this.initRootAttrs()}>

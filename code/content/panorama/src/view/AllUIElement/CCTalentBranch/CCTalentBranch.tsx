@@ -124,7 +124,7 @@ export class CCTalentRow extends CCPanel<ICCTalentRow> {
         if (str.length > 0) {
             GLogHelper.print("天赋树 1", str)
             // const sStr = $.Localize("#DOTA_Tooltip_ability_" + str);
-            // str = AbilityHelper.GetAbilityOrBuffDescription(sStr, this.props.abilityName)
+            // str = Abilities.GetAbilityOrBuffDescription(sStr, this.props.abilityName)
             // GLogHelper.print("天赋树 2", sStr)
 
         }

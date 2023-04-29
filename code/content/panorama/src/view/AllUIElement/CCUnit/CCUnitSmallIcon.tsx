@@ -1,6 +1,5 @@
 /** Create By Editor*/
 import React from "react";
-import { UnitHelper } from "../../../helper/DotaEntityHelper";
 import { KVHelper } from "../../../helper/KVHelper";
 import { PathHelper } from "../../../helper/PathHelper";
 
@@ -22,7 +21,7 @@ export class CCUnitSmallIcon extends CCPanel<ICCUnitSmallIcon> {
     render() {
         let SmallIconRes = "";
         let unit_name = this.props.itemname;
-        let rarity = UnitHelper.GetUnitRarety(unit_name);
+        let rarity = Entities.GetUnitRarity(unit_name);
         let unitobj = KVHelper.KVUnits()[unit_name];
         if (unitobj) {
             SmallIconRes = (unitobj.SmallIconRes) as string;

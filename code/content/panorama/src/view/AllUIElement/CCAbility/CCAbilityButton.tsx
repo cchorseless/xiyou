@@ -1,15 +1,14 @@
-import React, { createRef, PureComponent } from "react";
-import { PanelAttributes } from "@demon673/react-panorama";
-import { CCPanel } from "../CCPanel/CCPanel";
+import React, { createRef } from "react";
 import { FuncHelper } from "../../../helper/FuncHelper";
-
+import { CCPanel } from "../CCPanel/CCPanel";
+import "./CCAbilityButton.less";
 
 interface ICCAbilityButton {
-    overrideentityindex: AbilityEntityIndex,
-    m_level: number,
+    contextEntityIndex: AbilityEntityIndex,
+    m_level?: number,
     iUnlockStar?: number,
-    m_cooldown_percent: number;
-    dialogVariables: {
+    m_cooldown_percent?: number;
+    dialogVariables?: {
         cooldown_timer: number;
         item_charge_count: number;
         item_alt_charge_count: number;
@@ -18,28 +17,28 @@ interface ICCAbilityButton {
 
 
 export class CCAbilityButton extends CCPanel<ICCAbilityButton> {
-    AbilityImage: React.RefObject<AbilityImage> = createRef<AbilityImage>();
+    AbilityImage = createRef<AbilityImage>();
 
     static defaultProps = {
-        overrideentityindex: -1,
+        contextEntityIndex: -1,
     }
 
     CastRangeParticleID: ParticleID;
     private onAbilityButtonclick_left() {
-        const overrideentityindex = this.props.overrideentityindex!;
-        if (overrideentityindex != -1 && Entities.IsValidEntity(overrideentityindex)) {
-            // m_bToggleState = Abilities.GetToggleState(overrideentityindex);
-            let iCasterIndex = Abilities.GetCaster(overrideentityindex);
+        const contextEntityIndex = this.props.contextEntityIndex!;
+        if (contextEntityIndex != -1 && Entities.IsValidEntity(contextEntityIndex)) {
+            // m_bToggleState = Abilities.GetToggleState(contextEntityIndex);
+            let iCasterIndex = Abilities.GetCaster(contextEntityIndex);
             if (GameUI.IsAltDown()) {
-                Abilities.PingAbility(overrideentityindex);
+                Abilities.PingAbility(contextEntityIndex);
                 return;
             }
             if (GameUI.IsControlDown()) {
-                Abilities.AttemptToUpgrade(overrideentityindex);
+                Abilities.AttemptToUpgrade(contextEntityIndex);
                 return;
             }
             // 施法范围
-            let fCastRange = Abilities.GetCastRange(overrideentityindex);
+            let fCastRange = Abilities.GetCastRange(contextEntityIndex);
             if (this.CastRangeParticleID) {
                 Particles.DestroyParticleEffect(this.CastRangeParticleID, false);
                 this.CastRangeParticleID = null as any;
@@ -49,7 +48,7 @@ export class CCAbilityButton extends CCPanel<ICCAbilityButton> {
                 Particles.SetParticleControlEnt(this.CastRangeParticleID, 0, iCasterIndex, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, "", Entities.GetAbsOrigin(iCasterIndex), true);
                 Particles.SetParticleControl(this.CastRangeParticleID, 1, [fCastRange, 1, 1]);
             }
-            if (Abilities.IsItem(overrideentityindex)) {
+            if (Abilities.IsItem(contextEntityIndex)) {
                 var iAbilityIndex = Abilities.GetLocalPlayerActiveAbility();
                 if (iAbilityIndex != -1) {
                     let iAbilityBehavior = Abilities.GetBehavior(iAbilityIndex);
@@ -60,11 +59,11 @@ export class CCAbilityButton extends CCPanel<ICCAbilityButton> {
                                 AbilityIndex: iAbilityIndex,
                                 ShowEffects: false,
                                 OrderType: dotaunitorder_t.DOTA_UNIT_ORDER_CAST_POSITION,
-                                Position: [overrideentityindex, 16300, 0],
+                                Position: [contextEntityIndex, 16300, 0],
                             });
                             // GameEvents.SendCustomGameEventToServer("ability_spell_item_target", {
                             // 	ability_index: iAbilityIndex,
-                            // 	item_index: overrideentityindex,
+                            // 	item_index: contextEntityIndex,
                             // });
                             // GameEvents.SendEventClientSide("custom_get_active_ability", { entindex: -1 as AbilityEntityIndex });
                             // Abilities.ExecuteAbility(iAbilityIndex, Abilities.GetCaster(iAbilityIndex), true);
@@ -73,26 +72,26 @@ export class CCAbilityButton extends CCPanel<ICCAbilityButton> {
                     }
                 }
             }
-            Abilities.ExecuteAbility(overrideentityindex, iCasterIndex, false);
+            Abilities.ExecuteAbility(contextEntityIndex, iCasterIndex, false);
         }
     }
     private onAbilityButtonclick_right() {
-        const overrideentityindex = this.props.overrideentityindex!;
+        const contextEntityIndex = this.props.contextEntityIndex!;
         const slot = this.props.slot!;
-        // if (overrideentityindex != -1 && Entities.IsValidEntity(overrideentityindex)) {
-        //     if (Abilities.IsItem(overrideentityindex)) {
-        //         if (!$.GetContextPanel().BHasClass("dragging") && overrideentityindex != -1 && Entities.IsValidEntity(overrideentityindex)) {
-        //             let iCasterIndex = Abilities.GetCaster(overrideentityindex);
-        //             let sItemName = Abilities.GetAbilityName(overrideentityindex);
+        // if (contextEntityIndex != -1 && Entities.IsValidEntity(contextEntityIndex)) {
+        //     if (Abilities.IsItem(contextEntityIndex)) {
+        //         if (!$.GetContextPanel().BHasClass("dragging") && contextEntityIndex != -1 && Entities.IsValidEntity(contextEntityIndex)) {
+        //             let iCasterIndex = Abilities.GetCaster(contextEntityIndex);
+        //             let sItemName = Abilities.GetAbilityName(contextEntityIndex);
         //             let bSlotInStash = slot >= DOTA_ITEM_STASH_MIN;
         //             let bOwned = Entities.GetPlayerOwnerID(iCasterIndex) == Players.GetLocalPlayer();
         //             let bControllable = Entities.IsControllableByPlayer(iCasterIndex, Players.GetLocalPlayer());
-        //             let bSellable = Items.IsSellable(overrideentityindex) && Items.CanBeSoldByLocalPlayer(overrideentityindex);
-        //             let bDisassemble = Items.IsDisassemblable(overrideentityindex) && bControllable && !bSlotInStash;
-        //             let bAlertable = Items.IsAlertableItem(overrideentityindex);
-        //             let bLocked = IsItemLocked(overrideentityindex);
-        //             let bAutocast = Abilities.IsAutocast(overrideentityindex);
-        //             // let bShowInShop = Items.IsPurchasable(overrideentityindex);
+        //             let bSellable = Items.IsSellable(contextEntityIndex) && Items.CanBeSoldByLocalPlayer(contextEntityIndex);
+        //             let bDisassemble = Items.IsDisassemblable(contextEntityIndex) && bControllable && !bSlotInStash;
+        //             let bAlertable = Items.IsAlertableItem(contextEntityIndex);
+        //             let bLocked = IsItemLocked(contextEntityIndex);
+        //             let bAutocast = Abilities.IsAutocast(contextEntityIndex);
+        //             // let bShowInShop = Items.IsPurchasable(contextEntityIndex);
         //             let bShowInShop = false;
         //             // let bMoveToStash = !bSlotInStash && bControllable;
         //             // let bDropFromStash = bSlotInStash && bControllable;
@@ -132,7 +131,7 @@ export class CCAbilityButton extends CCPanel<ICCAbilityButton> {
 
         //             let pContentsPanel = pContextMenu.GetContentsPanel<InventoryItemContextMenu>();
         //             pContentsPanel.BLoadLayout("file://{resources}/layout/custom_game/context_menu/context_menu_inventory_item/context_menu_inventory_item.xml", false, false);
-        //             pContentsPanel.SetItem(overrideentityindex, self);
+        //             pContentsPanel.SetItem(contextEntityIndex, self);
         //             pContentsPanel.SetHasClass("bSellable", bSellable);
         //             pContentsPanel.SetHasClass("bDisassemble", bDisassemble);
         //             pContentsPanel.SetHasClass("bShowInShop", bShowInShop);
@@ -143,7 +142,7 @@ export class CCAbilityButton extends CCPanel<ICCAbilityButton> {
         //             // pContentsPanel.SetHasClass("bCasting", castingName != "");
         //             pContentsPanel.SetHasClass("bAutocast", bAutocast);
         //             pContentsPanel.SetHasClass("bMoveToTraining", bMoveToTraining);
-        //             pContentsPanel.SetHasClass("bSacrifice", GetItemRarity(Abilities.GetAbilityName(overrideentityindex)) == 6);
+        //             pContentsPanel.SetHasClass("bSacrifice", GetItemRarity(Abilities.GetAbilityName(contextEntityIndex)) == 6);
         //             // pContentsPanel.SetDialogVariable("itemname", $.Localize("DOTA_Tooltip_ability_" + castingName));
         //             // if (castingName != "") {
         //             // 	pContentsPanel.SetDialogVariableInt("int_value", Number(GameUI.CustomUIConfig().ItemsKv[castingName].CastingCrystalCost || 0));
@@ -151,28 +150,28 @@ export class CCAbilityButton extends CCPanel<ICCAbilityButton> {
         //         }
         //         return;
         //     }
-        //     if (Abilities.IsAutocast(overrideentityindex)) {
+        //     if (Abilities.IsAutocast(contextEntityIndex)) {
         //         Game.PrepareUnitOrders({
         //             OrderType: dotaunitorder_t.DOTA_UNIT_ORDER_CAST_TOGGLE_AUTO,
-        //             AbilityIndex: overrideentityindex,
-        //             UnitIndex: Abilities.GetCaster(overrideentityindex),
+        //             AbilityIndex: contextEntityIndex,
+        //             UnitIndex: Abilities.GetCaster(contextEntityIndex),
         //         });
         //     }
         // }
     }
     private onAbilityButtonMouseOver() {
-        const overrideentityindex = this.props.overrideentityindex!;
-        if (overrideentityindex != -1 && Entities.IsValidEntity(overrideentityindex)) {
-            // if (Abilities.IsItem(overrideentityindex)) {
+        const contextEntityIndex = this.props.contextEntityIndex!;
+        if (contextEntityIndex != -1 && Entities.IsValidEntity(contextEntityIndex)) {
+            // if (Abilities.IsItem(contextEntityIndex)) {
             //     GameEvents.SendEventClientSide("custom_hover_item", {
-            //         item_entindex: overrideentityindex,
+            //         item_entindex: contextEntityIndex,
             //     });
             // }
-            // GameUI.CustomUIConfig().ShowAbilityTooltip(self, Abilities.GetAbilityName(overrideentityindex), Abilities.GetCaster(overrideentityindex), slot);
+            // GameUI.CustomUIConfig().ShowAbilityTooltip(self, Abilities.GetAbilityName(contextEntityIndex), Abilities.GetCaster(contextEntityIndex), slot);
         }
     }
     private onAbilityButtonMouseOut() {
-        // if (Abilities.IsItem(overrideentityindex)) {
+        // if (Abilities.IsItem(contextEntityIndex)) {
         //     GameEvents.SendEventClientSide("custom_hover_item", {
         //         item_entindex: -1 as ItemEntityIndex,
         //     });
@@ -180,43 +179,40 @@ export class CCAbilityButton extends CCPanel<ICCAbilityButton> {
         // GameUI.CustomUIConfig().HideAbilityTooltip(self);
     }
     render() {
-        const overrideentityindex = this.props.overrideentityindex!;
+        const contextEntityIndex = this.props.contextEntityIndex!;
         const m_level = this.props.m_level!;
         const m_cooldown_percent = this.props.m_cooldown_percent!;
         const dialogVariables = this.props.dialogVariables!;
 
-        return (
-            this.__root___isValid && (
-                <Panel
-                    id="AbilityButton"
-                    onactivate={(self) => { this.onAbilityButtonclick_left() }}
-                    oncontextmenu={(self) => { this.onAbilityButtonclick_right(); }}
-                    onmouseover={(self) => { this.onAbilityButtonMouseOver() }}
-                    onmouseout={(self) => { this.onAbilityButtonMouseOut() }}
-                    ref={this.__root__}
-                    {...this.initRootAttrs()}
-                >
-                    <DOTAAbilityImage id="AbilityImage" showtooltip={false} hittest={false} ref={this.AbilityImage} />
-                    {/* scaling="stretch-to-fit-x-preserve-aspect" */}
-                    <DOTAItemImage id="ItemImage" contextEntityIndex={overrideentityindex as any} showtooltip={false} hittest={false} hittestchildren={false} />
-                    {/* <CustomItemImage id="ItemImage" showtooltip={false} contextEntityIndex={overrideentityindex as ItemEntityIndex} iLevel={m_level} iUnlockStar={iUnlockStar} /> */}
-                    <Panel hittest={false} id="AbilityBevel" />
-                    <Panel hittest={false} id="ShineContainer" >
-                        <Panel hittest={false} id="Shine" />
-                    </Panel>
-                    <Panel id="TopBarUltimateCooldown" hittest={false} />
-                    <Panel id="Cooldown" hittest={false}>
-                        <Panel id="CooldownOverlay" hittest={false} style={{ clip: "radial(50.0% 50.0%, 0.0deg, " + - FuncHelper.ToFiniteNumber(m_cooldown_percent) * 360 + "deg)" }} />
-                        <Label id="CooldownTimer" className="MonoNumbersFont" localizedText="{d:cooldown_timer}" hittest={false} dialogVariables={dialogVariables} />
-                    </Panel>
-                    <Panel id="ActiveAbility" hittest={false} />
-                    <Panel id="InactiveOverlay" hittest={false} />
-                    <Label id="ItemCharges" localizedText="{d:item_charge_count}" hittest={false} dialogVariables={dialogVariables} />
-                    <Label id="ItemAltCharges" localizedText="{d:item_alt_charge_count}" hittest={false} dialogVariables={dialogVariables} />
-                    {this.props.children}
-                    {this.__root___childs}
-                </Panel>
-            )
-        );
+        return <Panel className="CCAbilityButton"
+            onactivate={(self) => { this.onAbilityButtonclick_left() }}
+            oncontextmenu={(self) => { this.onAbilityButtonclick_right(); }}
+            onmouseover={(self) => { this.onAbilityButtonMouseOver() }}
+            onmouseout={(self) => { this.onAbilityButtonMouseOut() }}
+            ref={this.__root__}
+            {...this.initRootAttrs()}
+        >
+            <DOTAAbilityImage id="AbilityImage" contextEntityIndex={contextEntityIndex} showtooltip={true} hittest={false} ref={this.AbilityImage} />
+            {/* scaling="stretch-to-fit-x-preserve-aspect" */}
+            {/* <DOTAItemImage id="ItemImage" contextEntityIndex={contextEntityIndex as any} showtooltip={false} hittest={false} hittestchildren={false} /> */}
+            {/* <CustomItemImage id="ItemImage" showtooltip={false} contextEntityIndex={contextEntityIndex as ItemEntityIndex} iLevel={m_level} iUnlockStar={iUnlockStar} /> */}
+            <Panel hittest={false} id="AbilityBevel" />
+            <Panel hittest={false} id="ShineContainer" >
+                <Panel hittest={false} id="Shine" />
+            </Panel>
+            <Panel id="TopBarUltimateCooldown" hittest={false} />
+            <Panel id="Cooldown" hittest={false}>
+                <Panel id="CooldownOverlay" hittest={false} style={{ clip: "radial(50.0% 50.0%, 0.0deg, " + - FuncHelper.ToFiniteNumber(m_cooldown_percent) * 360 + "deg)" }} />
+                <Label id="CooldownTimer" className="MonoNumbersFont" localizedText="{d:cooldown_timer}" hittest={false} dialogVariables={dialogVariables} />
+            </Panel>
+            <Panel id="ActiveAbility" hittest={false} />
+            <Panel id="InactiveOverlay" hittest={false} />
+            <Label id="ItemCharges" localizedText="{d:item_charge_count}" hittest={false} dialogVariables={dialogVariables} />
+            <Label id="ItemAltCharges" localizedText="{d:item_alt_charge_count}" hittest={false} dialogVariables={dialogVariables} />
+            {this.props.children}
+            {this.__root___childs}
+        </Panel>
     }
 }
+
+

@@ -2,7 +2,6 @@
 import React from "react";
 import { GameEnum } from "../../../../scripts/tscripts/shared/GameEnum";
 import { CSSHelper } from "../../helper/CSSHelper";
-import { UnitHelper } from "../../helper/DotaEntityHelper";
 import { FuncHelper } from "../../helper/FuncHelper";
 import { KVHelper } from "../../helper/KVHelper";
 
@@ -40,16 +39,16 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
         let iLocalPortraitUnit = this.GetState<EntityIndex>("curunit")
         let sUnitName = Entities.GetUnitName(iLocalPortraitUnit);
         let tData = KVHelper.KVUnits()[sUnitName];
-        let bIsHero = UnitHelper.HasHeroAttribute(iLocalPortraitUnit);
+        let bIsHero = Entities.HasHeroAttribute(iLocalPortraitUnit);
         let bEnemy = Entities.IsEnemy(iLocalPortraitUnit);
         let bFriendlySummon = !bEnemy && !bIsHero && !Entities.IsHero(iLocalPortraitUnit);
         let iPrimaryAttribute = Attributes.DOTA_ATTRIBUTE_INVALID;
         if (bIsHero) {
-            iPrimaryAttribute = UnitHelper.GetPrimaryAttribute(iLocalPortraitUnit);
+            iPrimaryAttribute = Entities.GetPrimaryAttribute(iLocalPortraitUnit);
         }
         // 力量
-        let iStrength = UnitHelper.GetStrength(iLocalPortraitUnit);
-        let iBaseStrength = UnitHelper.GetBaseStrength(iLocalPortraitUnit);
+        let iStrength = Entities.GetStrength(iLocalPortraitUnit);
+        let iBaseStrength = Entities.GetBaseStrength(iLocalPortraitUnit);
         let iBonusStrength = iStrength - iBaseStrength;
         let sBonusStrength = FuncHelper.SignNumber(iBonusStrength);
         const base_strength = iBaseStrength || 0;
@@ -68,8 +67,8 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
         }
         const rowcls_strength = this.getRowClassName(iBaseStrength);
         // 敏捷
-        let iAgility = UnitHelper.GetAgility(iLocalPortraitUnit);
-        let iBaseAgility = UnitHelper.GetBaseAgility(iLocalPortraitUnit);
+        let iAgility = Entities.GetAgility(iLocalPortraitUnit);
+        let iBaseAgility = Entities.GetBaseAgility(iLocalPortraitUnit);
         let iBonusAgility = iAgility - iBaseAgility;
         let sBonusAgility = FuncHelper.SignNumber(iBonusAgility);
         const base_agility = iBaseAgility || 0;
@@ -90,8 +89,8 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
             primary_attribute_damage: iAgility + "",
         }
         // 智力
-        let iIntellect = UnitHelper.GetIntellect(iLocalPortraitUnit);
-        let iBaseIntellect = UnitHelper.GetBaseIntellect(iLocalPortraitUnit);
+        let iIntellect = Entities.GetIntellect(iLocalPortraitUnit);
+        let iBaseIntellect = Entities.GetBaseIntellect(iLocalPortraitUnit);
         let iBonusIntellect = iIntellect - iBaseIntellect;
         let sBonusIntellect = FuncHelper.SignNumber(iBonusIntellect);;
         const base_intellect = iIntellect || 0;
@@ -113,8 +112,8 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
             // fExtraBaseManaRegen: fExtraBaseManaRegen + "",
         }
         // 攻击力
-        let fMaxDamage = UnitHelper.GetAttackDamage(iLocalPortraitUnit);
-        let fBaseDamage = UnitHelper.GetBaseAttackDamage(iLocalPortraitUnit);
+        let fMaxDamage = Entities.GetAttackDamage(iLocalPortraitUnit);
+        let fBaseDamage = Entities.GetBaseAttackDamage(iLocalPortraitUnit);
         let fBonusDamage = fMaxDamage - fBaseDamage;
         let sBonusDamage = FuncHelper.SignNumber(fBonusDamage);;
         // const base_damage_min = fMinDamage;
@@ -123,48 +122,48 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
         const bonus_damage = sBonusDamage;
         const rowcls_damage = this.getRowClassName(fBonusDamage);
         // 攻击速度
-        let fAttackSpeed = UnitHelper.GetAttackSpeed(iLocalPortraitUnit);
+        let fAttackSpeed = Entities.GetAttackSpeed(iLocalPortraitUnit);
         let fSecondsPerAttack = Entities.GetSecondsPerAttack(iLocalPortraitUnit);
         const attack_speed = FuncHelper.Round(fAttackSpeed, 1);
         const seconds_per_attack = FuncHelper.Round(fSecondsPerAttack, 2);
-        const max_attack_speed = FuncHelper.Round(UnitHelper.GetMaximumAttackSpeed(iLocalPortraitUnit))
+        const max_attack_speed = FuncHelper.Round(Entities.GetMaximumAttackSpeed(iLocalPortraitUnit))
         // 技能增强
-        let fBaseSpellAmplify = UnitHelper.GetBaseSpellAmplify(iLocalPortraitUnit);
-        let fSpellAmplify = UnitHelper.GetSpellAmplify(iLocalPortraitUnit);
+        let fBaseSpellAmplify = Entities.GetBaseSpellAmplify(iLocalPortraitUnit);
+        let fSpellAmplify = Entities.GetSpellAmplify(iLocalPortraitUnit);
         let fBonusSpellAmplify = FuncHelper.Round(fSpellAmplify - fBaseSpellAmplify, 1);
         const base_spell_amplify = FuncHelper.Round(fSpellAmplify, 1);
         const bonus_spell_amplify = FuncHelper.SignNumber(fBonusSpellAmplify, true);
         const rowcls_spell_amplify = this.getRowClassName(fBonusSpellAmplify);
 
         // 额外全伤害
-        let fIncomingTotalDamagePercent = UnitHelper.GetOutgoingDamagePercent(iLocalPortraitUnit);
+        let fIncomingTotalDamagePercent = Entities.GetOutgoingDamagePercent(iLocalPortraitUnit);
         const Incomingtotal_damage_percent = FuncHelper.Round(fIncomingTotalDamagePercent, 2);
         // 额外物理伤害
-        let fIncomingPhysicalDamagePercent = UnitHelper.GetOutgoingPhysicalDamagePercent(iLocalPortraitUnit);
+        let fIncomingPhysicalDamagePercent = Entities.GetOutgoingPhysicalDamagePercent(iLocalPortraitUnit);
         const Incomingphysical_damage_percent = FuncHelper.Round(fIncomingPhysicalDamagePercent, 2);
         // 额外魔法伤害
-        let fIncomingMagicalDamagePercent = UnitHelper.GetOutgoingMagicalDamagePercent(iLocalPortraitUnit);
+        let fIncomingMagicalDamagePercent = Entities.GetOutgoingMagicalDamagePercent(iLocalPortraitUnit);
         const Incomingmagical_damage_percent = FuncHelper.Round(fIncomingMagicalDamagePercent, 2);
         // 额外纯粹伤害
-        let fIncomingPureDamagePercent = UnitHelper.GetOutgoingPureDamagePercent(iLocalPortraitUnit);
+        let fIncomingPureDamagePercent = Entities.GetOutgoingPureDamagePercent(iLocalPortraitUnit);
         const Incomingpure_damage_percent = FuncHelper.Round(fIncomingPureDamagePercent, 2);
         // 攻击吸血
-        let fBloodSuckingAttackPercent = UnitHelper.GetLifeStealPercent(iLocalPortraitUnit);
+        let fBloodSuckingAttackPercent = Entities.GetLifeStealPercent(iLocalPortraitUnit);
         const blood_sucking_attack = FuncHelper.Round(fBloodSuckingAttackPercent, 2);;
         // 技能吸血
-        let fBloodSuckingSkillPercent = UnitHelper.GetSpellLifeStealPercent(iLocalPortraitUnit);
+        let fBloodSuckingSkillPercent = Entities.GetSpellLifeStealPercent(iLocalPortraitUnit);
         const blood_sucking_skill = FuncHelper.Round(fBloodSuckingSkillPercent, 2);;
         // 额外全伤害
-        let fTotalDamagePercent = UnitHelper.GetOutgoingDamagePercent(iLocalPortraitUnit);
+        let fTotalDamagePercent = Entities.GetOutgoingDamagePercent(iLocalPortraitUnit);
         const total_damage_percent = FuncHelper.Round(fTotalDamagePercent, 2);
         // 额外物理伤害
-        let fPhysicalDamagePercent = UnitHelper.GetOutgoingPhysicalDamagePercent(iLocalPortraitUnit);
+        let fPhysicalDamagePercent = Entities.GetOutgoingPhysicalDamagePercent(iLocalPortraitUnit);
         const physical_damage_percent = FuncHelper.Round(fPhysicalDamagePercent, 2);
         // 额外魔法伤害
-        let fMagicalDamagePercent = UnitHelper.GetOutgoingMagicalDamagePercent(iLocalPortraitUnit);
+        let fMagicalDamagePercent = Entities.GetOutgoingMagicalDamagePercent(iLocalPortraitUnit);
         const magical_damage_percent = FuncHelper.Round(fMagicalDamagePercent, 2);
         // 额外纯粹伤害
-        let fPureDamagePercent = UnitHelper.GetOutgoingPureDamagePercent(iLocalPortraitUnit);
+        let fPureDamagePercent = Entities.GetOutgoingPureDamagePercent(iLocalPortraitUnit);
         const pure_damage_percent = FuncHelper.Round(fPureDamagePercent, 2);
         // 攻击距离
         let fAttackRange = Entities.GetAttackRange(iLocalPortraitUnit);
@@ -175,11 +174,11 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
         const bonus_attack_range = sBonusAttackRange;
         const rowcls_attack_range = this.getRowClassName(fBonusAttackRange);
         // 冷却减少
-        let fCooldownReduction = UnitHelper.GetCooldownReduction(iLocalPortraitUnit);
+        let fCooldownReduction = Entities.GetCooldownReduction(iLocalPortraitUnit);
         const cooldown_reduction = FuncHelper.Round(fCooldownReduction, 1)
         // 魔法恢复
         let fBaseManaRegen = (tData && tData.StatusManaRegen) ? FuncHelper.ToFloat(tData.StatusManaRegen as string) : 0;
-        let fManaRegen = UnitHelper.GetManaRegen(iLocalPortraitUnit) + fBaseManaRegen;
+        let fManaRegen = Entities.GetManaRegen(iLocalPortraitUnit) + fBaseManaRegen;
         // fBaseManaRegen += fExtraBaseManaRegen;
         let fBonusManaRegen = fManaRegen - fBaseManaRegen;
         let sBonusManaRegen = FuncHelper.SignNumber(fBonusManaRegen);
@@ -187,14 +186,14 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
         const bonus_mana_regen = sBonusManaRegen;
         const rowcls_mana_regen = this.getRowClassName(fBonusManaRegen);
         // 物理防御穿透
-        let fIgnorePhysicalArmorPercent = UnitHelper.GetIgnorePhysicalArmorPercentage(iLocalPortraitUnit);
+        let fIgnorePhysicalArmorPercent = Entities.GetIgnorePhysicalArmorPercentage(iLocalPortraitUnit);
         const ignore_physical_armor_percent = FuncHelper.Round(fIgnorePhysicalArmorPercent, 2);
         // 魔法防御穿透
-        let fIgnoreMagicalArmorPercent = UnitHelper.GetIgnoreMagicalArmorPercentage(iLocalPortraitUnit);
+        let fIgnoreMagicalArmorPercent = Entities.GetIgnoreMagicalArmorPercentage(iLocalPortraitUnit);
         const ignore_magical_armor_percent = FuncHelper.Round(fIgnoreMagicalArmorPercent, 2);
         // 暴击概率
         let fBase = GPropertyConfig.BASE_ATTACK_CRITICALSTRIKE_CHANCE;
-        let fTotal = FuncHelper.Round(UnitHelper.GetCriticalStrikeChance(iLocalPortraitUnit), 2);
+        let fTotal = FuncHelper.Round(Entities.GetCriticalStrikeChance(iLocalPortraitUnit), 2);
         let fBonus = fTotal - fBase;
         let sBonus = FuncHelper.SignNumber(fBonus, true);
         const base_attack_crit_chance = fBase;
@@ -202,33 +201,33 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
         const rowcls_Crit = this.getRowClassName(fBonus);
         // 暴击伤害
         let fBaseCritDamage = GPropertyConfig.BASE_ATTACK_CRITICALSTRIKE_DAMAGE;// 基础暴击伤害
-        let fBonusCritDamage = UnitHelper.GetCriticalStrikeDamage(iLocalPortraitUnit) - fBaseCritDamage;
+        let fBonusCritDamage = Entities.GetCriticalStrikeDamage(iLocalPortraitUnit) - fBaseCritDamage;
         let sBonusCritDamage = FuncHelper.SignNumber(fBonusCritDamage, true);
         const base_attack_crit_damage = FuncHelper.Round(fBaseCritDamage, 2);
         const bonus_attack_crit_damage = sBonusCritDamage;
         const rowcls_Crit_damage = this.getRowClassName(fBonusCritDamage);
         // 技能暴击概率
         let fBase_crit_chance = GPropertyConfig.BASE_SPELL_CRITICALSTRIKE_CHANCE;
-        let fTotal_crit_chance = FuncHelper.Round(UnitHelper.GetSpellCriticalStrikeChance(iLocalPortraitUnit), 2);
+        let fTotal_crit_chance = FuncHelper.Round(Entities.GetSpellCriticalStrikeChance(iLocalPortraitUnit), 2);
         let fBonus_crit_chance = fTotal_crit_chance - fBase_crit_chance;
         let sBonus_crit_chance = FuncHelper.SignNumber(fBonus_crit_chance, true);
         const base_spell_crit_chance = fBase_crit_chance;
         const bonus_spell_crit_chance = sBonus_crit_chance;
         const rowcls_crit_chance = this.getRowClassName(fBonus_crit_chance);
         // 怒气恢复加成
-        // const energy_regen_percent = FuncHelper.Round(UnitHelper.GetEnergyRegenPercentage(iLocalPortraitUnit), 2)
+        // const energy_regen_percent = FuncHelper.Round(Entities.GetEnergyRegenPercentage(iLocalPortraitUnit), 2)
         // 技能暴击伤害
         let fBaseSpellCritDamage = GPropertyConfig.BASE_SPELL_CRITICALSTRIKE_DAMAGE;// 基础暴击概率
-        let fBonusSpellCritDamage = UnitHelper.GetSpellCriticalStrikeDamage(iLocalPortraitUnit) - fBaseSpellCritDamage;
+        let fBonusSpellCritDamage = Entities.GetSpellCriticalStrikeDamage(iLocalPortraitUnit) - fBaseSpellCritDamage;
         let sBonusSpellCritDamage = FuncHelper.SignNumber(fBonusSpellCritDamage, true);
         const spell_crit_damage = FuncHelper.Round(fBaseSpellCritDamage, 2);
         const bonus_spell_crit_damage = sBonusSpellCritDamage;
         const rowcls_spell_crit_damage = this.getRowClassName(fBonusSpellCritDamage);
         // 物理防御
-        let fPhysicalArmor = UnitHelper.GetPhysicalArmor(iLocalPortraitUnit);
-        let fBasePhysicalArmor = UnitHelper.GetBasePhysicalArmor(iLocalPortraitUnit);
+        let fPhysicalArmor = Entities.GetPhysicalArmor(iLocalPortraitUnit);
+        let fBasePhysicalArmor = Entities.GetBasePhysicalArmor(iLocalPortraitUnit);
         let fBonusPhysicalArmor = fPhysicalArmor - fBasePhysicalArmor;
-        let fPhysicalArmorReduction = UnitHelper.GetPhysicalReduction(iLocalPortraitUnit);
+        let fPhysicalArmorReduction = Entities.GetPhysicalReduction(iLocalPortraitUnit);
         //     (() => {
         //     let iSign = fPhysicalArmor >= 0 ? 1 : -1;
         //     return iSign * GPropertyConfig.PHYSICAL_ARMOR_FACTOR * Math.abs(fPhysicalArmor) / (1 + GPropertyConfig.PHYSICAL_ARMOR_FACTOR * Math.abs(fPhysicalArmor));
@@ -239,10 +238,10 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
         const physical_resistance = FuncHelper.Round(fPhysicalArmorReduction * 100, 1);
         const rowcls_physical_armor = this.getRowClassName(fBonusPhysicalArmor);
         // 魔法防御
-        let fMagicalArmor = UnitHelper.GetMagicalArmor(iLocalPortraitUnit);
-        let fBaseMagicalArmor = UnitHelper.GetBaseMagicalArmor(iLocalPortraitUnit);
+        let fMagicalArmor = Entities.GetMagicalArmor(iLocalPortraitUnit);
+        let fBaseMagicalArmor = Entities.GetBaseMagicalArmor(iLocalPortraitUnit);
         let fBonusMagicalArmor = fMagicalArmor - fBaseMagicalArmor;
-        let fMagicalArmorReduction = UnitHelper.GetMagicalReduction(iLocalPortraitUnit);
+        let fMagicalArmorReduction = Entities.GetMagicalReduction(iLocalPortraitUnit);
         // (() => {
         //     let iSign = fMagicalArmor >= 0 ? 1 : -1;
         //     return iSign * GPropertyConfig.MAGICAL_ARMOR_FACTOR * Math.abs(fMagicalArmor) / (1 + GPropertyConfig.MAGICAL_ARMOR_FACTOR * Math.abs(fMagicalArmor));
@@ -253,17 +252,17 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
         const magical_resistance = FuncHelper.Round(fMagicalArmorReduction * 100, 1);
         const rowcls_magical_armor = this.getRowClassName(fBonusMagicalArmor);
         // 闪避
-        let fEvasion = UnitHelper.GetEvasion(iLocalPortraitUnit);
+        let fEvasion = Entities.GetEvasion(iLocalPortraitUnit);
         const evasion = fEvasion.toFixed(0);
         // 移动速度
         let fBaseMoveSpeed = Entities.GetBaseMoveSpeed(iLocalPortraitUnit);
-        let fBonusMoveSpeed = UnitHelper.GetMoveSpeed(iLocalPortraitUnit) - fBaseMoveSpeed;
+        let fBonusMoveSpeed = Entities.GetMoveSpeed(iLocalPortraitUnit) - fBaseMoveSpeed;
         let sBonusMoveSpeed = FuncHelper.SignNumber(fBonusMoveSpeed);;
         const base_move_speed = fBaseMoveSpeed.toFixed(0);
         const bonus_move_speed = sBonusMoveSpeed;
         const rowcls_move_speed = this.getRowClassName(fBonusMoveSpeed);
         // 状态抗性
-        let fStatusResistance = UnitHelper.GetStatusResistance(iLocalPortraitUnit);
+        let fStatusResistance = Entities.GetStatusResistance(iLocalPortraitUnit);
         const status_resistance = FuncHelper.Round(fStatusResistance, 1);
 
         return <Panel className={CSSHelper.ClassMaker("CCUnitStatsDialog", { Hero: bIsHero })} ref={this.__root__}    {...this.initRootAttrs()}>

@@ -2,7 +2,6 @@
 import React from "react";
 
 import { CSSHelper } from "../../../helper/CSSHelper";
-import { ItemHelper } from "../../../helper/DotaEntityHelper";
 import { KVHelper } from "../../../helper/KVHelper";
 import { TipsHelper } from "../../../helper/TipsHelper";
 import { CCPanel } from "../CCPanel/CCPanel";
@@ -50,7 +49,7 @@ export class CCItemImage extends CCPanel<ICCItemImage> {
         const itemname = this.props.itemname!;
         const iUnlockStar = this.props.iUnlockStar!;
         // 是否是多级物品
-        const bIsMultiLevelItem = ItemHelper.IsMultiLevelItem(contextEntityIndex) || ItemHelper.IsMultiLevelItem(itemname);
+        const bIsMultiLevelItem = Items.IsMultiLevelItem(contextEntityIndex) || Items.IsMultiLevelItem(itemname);
         // 如果是召唤卡 稀有度
         const sCardRarity = (itemname.indexOf("item_building_") != -1) && Abilities.GetAbilityRarity(itemname!);
         // 物品等级

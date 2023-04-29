@@ -16,6 +16,12 @@ declare namespace building_unit_enemy {
 "building_enemy_tower_10" :OBJ_2_1 ,
 "building_enemy_tower_11" :OBJ_2_1 ,
 "building_enemy_tower_12" :OBJ_2_1 ,
+"building_enemy_tower_13" :OBJ_2_1 ,
+"building_enemy_tower_14" :OBJ_2_1 ,
+"building_enemy_tower_15" :OBJ_2_1 ,
+"building_enemy_tower_16" :OBJ_2_1 ,
+"building_enemy_tower_wood" :OBJ_2_1 ,
+"building_enemy_tower_good" :OBJ_2_1 ,
 "building_enemy_abaddon" :OBJ_2_1 ,
 "building_enemy_abyssal_underlord" :OBJ_2_1 ,
 "building_enemy_alchemist" :OBJ_2_1 ,
@@ -322,6 +328,7 @@ declare namespace building_unit_enemy {
 "building_enemy_boss_8" :OBJ_2_1 ,
 [k:string] : OBJ_2_1 }
  interface OBJ_2_1 {
+"UnitLabel" :string ,
 "vscripts" :string ,
 "BaseClass" :string ,
 "Model" :string ,
@@ -371,6 +378,7 @@ declare namespace building_unit_enemy {
 "IsValid" :string ,
 "Ability1" :string ,
 "Ability2" :string ,
+"AmbientModifiers" :string ,
 "HeroSelectSoundEffect" :string ,
 "GameSoundsFile" :string ,
 "VoiceFile" :string ,
@@ -385,7 +393,6 @@ declare namespace building_unit_enemy {
 "IdleExpression" :string ,
 "AttackSpeedActivityModifiers" :OBJ_3_1 ,
 "IdleSoundLoop" :string ,
-"UnitLabel" :string ,
 [k:string] : string | OBJ_3_1 }
  interface OBJ_3_1 {
 "attack_normal_range" :string ,

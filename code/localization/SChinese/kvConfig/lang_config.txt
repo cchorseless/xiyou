@@ -1,4 +1,5 @@
 "addon_game_name"       "棋盘奇兵"
+"lang_Ability_JinDu"       "进度：<font color='#EEEEEE'>{d:now}</font>/<font color='#EEEEEE'>{d:max}</font>"
 "lang_population"       "人口"
 "lang_gold"       "金币"
 "lang_wood"       "木材"

@@ -48,7 +48,7 @@ export class courier_challenge_gold extends BaseAbility_Plus {
                 challengeround.OnRound_Start();
                 root.PlayerDataComp().ModifyGold(-this.GetWoodCost());
                 let level = this.GetLevel();
-                if (level < this.GetMaxLevel()) {
+                if (level < this.GetAbilityJinDuMax()) {
                     this.UpgradeAbility(true);
                 }
             }
@@ -57,7 +57,9 @@ export class courier_challenge_gold extends BaseAbility_Plus {
     ProcsMagicStick() {
         return false;
     }
-
+    GetAbilityJinDuInfo(): string {
+        return `${0},${this.GetAbilityJinDuMax()},${this.GetLevel()}`
+    }
 }
 
 
@@ -123,7 +125,7 @@ export class courier_challenge_equip extends BaseAbility_Plus {
                 challengeround.OnRound_Start();
                 root.PlayerDataComp().ModifyWood(-this.GetSoulCrystal());
                 let level = this.GetLevel();
-                if (level < this.GetMaxLevel()) {
+                if (level < this.GetAbilityJinDuMax()) {
                     this.UpgradeAbility(true);
                 }
             }
@@ -132,7 +134,9 @@ export class courier_challenge_equip extends BaseAbility_Plus {
     ProcsMagicStick() {
         return false;
     }
-
+    GetAbilityJinDuInfo(): string {
+        return `${0},${this.GetAbilityJinDuMax()},${this.GetLevel()}`
+    }
 
 }
 

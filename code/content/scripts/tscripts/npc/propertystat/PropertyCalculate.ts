@@ -577,7 +577,7 @@ export module PropertyCalculate {
         if (SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS_UNABLE) >= 1) {
             return 0
         }
-        return SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
+        return GPropertyConfig.MAXIMUM_ATTACK_SPEED + SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
     }
     /**
      * 当前攻击速度

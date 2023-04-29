@@ -184,7 +184,7 @@
 	"courier_upgrade_population" {
 		"BaseClass" "ability_lua"
 		"ScriptFile" "npc/abilities/courier/courier_upgrade_chess"
-		"AbilityTextureName" "upgrade_chess"
+		"AbilityTextureName" "upgrade_chess_population"
 		"MaxLevel" "1"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
 		"AbilitySound" "Ability.Torrent"
@@ -208,6 +208,11 @@
 				"population_add" "2"
 
 			}
+			"04" {
+				"var_type" "FIELD_INTEGER"
+				"_jindu_max" "10"
+
+			}
 
 		}
 
@@ -215,7 +220,7 @@
 	"courier_upgrade_tech" {
 		"BaseClass" "ability_lua"
 		"ScriptFile" "npc/abilities/courier/courier_upgrade_chess"
-		"AbilityTextureName" "upgrade_chess"
+		"AbilityTextureName" "upgrade_chess_tech"
 		"MaxLevel" "1"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
 		"AbilitySound" "Ability.Torrent"
@@ -264,6 +269,11 @@
 				"poolgroupconfig_3" "10009"
 
 			}
+			"09" {
+				"var_type" "FIELD_INTEGER"
+				"_jindu_max" "20"
+
+			}
 
 		}
 
@@ -271,7 +281,7 @@
 	"courier_challenge_gold" {
 		"BaseClass" "ability_lua"
 		"ScriptFile" "npc/abilities/courier/courier_challenge_enemy"
-		"AbilityTextureName" "kunkka_torrent"
+		"AbilityTextureName" "challenge_gold"
 		"MaxLevel" "50"
 		"CustomHidden" "1"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET|DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE|DOTA_ABILITY_BEHAVIOR_HIDDEN"
@@ -291,6 +301,11 @@
 				"wood_cost" "5"
 
 			}
+			"03" {
+				"var_type" "FIELD_INTEGER"
+				"_jindu_max" "20"
+
+			}
 
 		}
 
@@ -298,7 +313,7 @@
 	"courier_challenge_wood" {
 		"BaseClass" "ability_lua"
 		"ScriptFile" "npc/abilities/courier/courier_challenge_enemy"
-		"AbilityTextureName" "kunkka_torrent"
+		"AbilityTextureName" "challenge_wood"
 		"MaxLevel" "50"
 		"CustomHidden" "1"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET|DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE|DOTA_ABILITY_BEHAVIOR_HIDDEN"
@@ -318,6 +333,11 @@
 				"wood_cost" "5"
 
 			}
+			"03" {
+				"var_type" "FIELD_INTEGER"
+				"_jindu_max" "20"
+
+			}
 
 		}
 
@@ -325,7 +345,7 @@
 	"courier_challenge_equip" {
 		"BaseClass" "ability_lua"
 		"ScriptFile" "npc/abilities/courier/courier_challenge_enemy"
-		"AbilityTextureName" "kunkka_torrent"
+		"AbilityTextureName" "challenge_equip"
 		"MaxLevel" "50"
 		"CustomHidden" "1"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET|DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE|DOTA_ABILITY_BEHAVIOR_HIDDEN"
@@ -345,6 +365,11 @@
 				"wood_cost" "5"
 
 			}
+			"03" {
+				"var_type" "FIELD_INTEGER"
+				"_jindu_max" "10"
+
+			}
 
 		}
 
@@ -352,7 +377,7 @@
 	"courier_challenge_artifact" {
 		"BaseClass" "ability_lua"
 		"ScriptFile" "npc/abilities/courier/courier_challenge_enemy"
-		"AbilityTextureName" "kunkka_torrent"
+		"AbilityTextureName" "challenge_artifact"
 		"MaxLevel" "50"
 		"CustomHidden" "1"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET|DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE|DOTA_ABILITY_BEHAVIOR_HIDDEN"
@@ -370,6 +395,11 @@
 			"02" {
 				"var_type" "FIELD_INTEGER"
 				"wood_cost" "5"
+
+			}
+			"03" {
+				"var_type" "FIELD_INTEGER"
+				"_jindu_max" "10"
 
 			}
 

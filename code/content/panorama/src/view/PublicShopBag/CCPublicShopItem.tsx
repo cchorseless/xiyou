@@ -2,7 +2,6 @@
 import React from "react";
 import { PublicBagConfig } from "../../../../scripts/tscripts/shared/PublicBagConfig";
 import { CSSHelper } from "../../helper/CSSHelper";
-import { ItemHelper } from "../../helper/DotaEntityHelper";
 import { TipsHelper } from "../../helper/TipsHelper";
 
 import { CCIcon_CoinType } from "../AllUIElement/CCIcons/CCIcon_CoinType";
@@ -109,15 +108,15 @@ export class CCPublicShopItem extends CCPanel<ICCPublicShopItem> {
         let costenough = false;
         switch (this.props.iCoinType) {
             case GEEnum.EMoneyType.Gold:
-                costcount = ItemHelper.GetItemCostLV(sItemName, iLevel) * iPercent;
+                costcount = Items.GetItemCostLV(sItemName, iLevel) * iPercent;
                 costenough = playdata.gold >= costcount;
                 break;
             case GEEnum.EMoneyType.Wood:
-                costcount = ItemHelper.GetItemWoodCost(sItemName) * iPercent;
+                costcount = Items.GetItemWoodCost(sItemName) * iPercent;
                 costenough = playdata.wood >= costcount;
                 break;
             case GEEnum.EMoneyType.SoulCrystal:
-                costcount = ItemHelper.GetItemSoulCrystalCost(sItemName) * iPercent;
+                costcount = Items.GetItemSoulCrystalCost(sItemName) * iPercent;
                 costenough = playdata.soulcrystal >= costcount;
                 break;
         }
@@ -163,15 +162,15 @@ export class CCPublicShopItem extends CCPanel<ICCPublicShopItem> {
         let costenough = false;
         switch (this.props.iCoinType) {
             case GEEnum.EMoneyType.Gold:
-                costcount = ItemHelper.GetItemCostLV(sItemName, iLevel) * iPercent;
+                costcount = Items.GetItemCostLV(sItemName, iLevel) * iPercent;
                 costenough = playdata.gold >= costcount;
                 break;
             case GEEnum.EMoneyType.Wood:
-                costcount = ItemHelper.GetItemWoodCost(sItemName) * iPercent;
+                costcount = Items.GetItemWoodCost(sItemName) * iPercent;
                 costenough = playdata.wood >= costcount;
                 break;
             case GEEnum.EMoneyType.SoulCrystal:
-                costcount = ItemHelper.GetItemSoulCrystalCost(sItemName) * iPercent;
+                costcount = Items.GetItemSoulCrystalCost(sItemName) * iPercent;
                 costenough = playdata.soulcrystal >= costcount;
                 break;
         }

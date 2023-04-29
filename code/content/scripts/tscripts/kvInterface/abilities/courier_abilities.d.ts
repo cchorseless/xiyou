@@ -85,6 +85,7 @@ declare namespace courier_abilities {
 "06" :OBJ_4_1 ,
 "07" :OBJ_4_1 ,
 "08" :OBJ_4_1 ,
+"09" :OBJ_4_1 ,
 [k:string] : OBJ_4_1 }
  interface OBJ_4_1 {
 "var_type" :string ,
@@ -103,6 +104,7 @@ declare namespace courier_abilities {
 "gold_pect" :string ,
 "gold_cost" :string ,
 "population_add" :string ,
+"_jindu_max" :string ,
 "good_add_interval" :string ,
 "wood_add_interval" :string ,
 "soul_add_interval" :string ,
@@ -115,7 +117,9 @@ declare namespace courier_abilities {
 "summon_count_max" :string ,
 "cost_hp_pect" :string ,
 "hp_pect_min" :string ,
-"prize_pect" :string ,
+"atk_pect" :string ,
+"atkspeed_pect" :string ,
+"incom_pect" :string ,
 "gold_interval" :string ,
 "interval" :string ,
 "wood_interval" :string ,

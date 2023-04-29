@@ -5,6 +5,7 @@ declare namespace lang_config {
 }
  interface OBJ_1_1 {
 "addon_game_name" :OBJ_2_1 ,
+"Ability_JinDu" :OBJ_2_1 ,
 "population" :OBJ_2_1 ,
 "gold" :OBJ_2_1 ,
 "wood" :OBJ_2_1 ,

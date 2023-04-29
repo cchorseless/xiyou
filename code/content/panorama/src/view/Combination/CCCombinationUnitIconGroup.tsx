@@ -1,6 +1,5 @@
 import React from "react";
 import { ECombination } from "../../game/components/Combination/ECombination";
-import { UnitHelper } from "../../helper/DotaEntityHelper";
 import { BaseEntityRoot } from "../../libs/BaseEntityRoot";
 import { CCIcon_Scepter } from "../AllUIElement/CCIcons/CCIcon_Scepter";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
@@ -62,8 +61,8 @@ export class CCCombinationUnitIconGroup extends CCPanel<ICCCombinationUnitIconGr
             }
         }
         herolist.sort((a, b) => {
-            const r_a = UnitHelper.GetUnitRaretyNumber(a);
-            const r_b = UnitHelper.GetUnitRaretyNumber(b);
+            const r_a = Entities.GetUnitRarityNumber(a);
+            const r_b = Entities.GetUnitRarityNumber(b);
             return r_a - r_b
         });
         return <Panel ref={this.__root__} className="CCCombinationUnitIconGroup"  {...this.initRootAttrs()}>
@@ -84,7 +83,7 @@ export class CCCombinationUnitIconGroup extends CCPanel<ICCCombinationUnitIconGr
             {/* <CCPanel id="ItemCombination" flowChildren="right-wrap">
                 {herolist.length > 0 && herolist.map(
                     (name, index) => {
-                        return <CCUnitSmallIcon key={index + ""} width="40px" height="40px" itemname={name} rarity={UnitHelper.GetUnitRarety(name)} brightness={uniqueConfigList.includes(name) ? "1" : "0.2"} />
+                        return <CCUnitSmallIcon key={index + ""} width="40px" height="40px" itemname={name} rarity={Entities.GetUnitRarety(name)} brightness={uniqueConfigList.includes(name) ? "1" : "0.2"} />
                     })}
             </CCPanel> */}
         </Panel>

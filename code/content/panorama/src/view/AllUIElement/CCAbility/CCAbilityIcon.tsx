@@ -6,6 +6,7 @@ import { CCPanel } from "../CCPanel/CCPanel";
 
 
 
+import { CCAbilityButton } from "./CCAbilityButton";
 import "./CCAbilityIcon.less";
 
 interface ICCAbilityIcon_Custom extends DOTAAbilityImageAttributes {
@@ -109,7 +110,7 @@ export class CCAbilityIcon_Custom extends CCPanel<ICCAbilityIcon_Custom> {
         const lefttime = this.GetState<number>("lefttime") || -1;
         const remainingtime = this.GetState<number>("remainingtime") || 1;
         return (<Panel ref={this.__root__} className="CCAbilityIcon" {...this.initRootAttrs()}  >
-            <Image id="img_AbilityIcon" className={this.props.rarity} >
+            <Image id="img_AbilityIcon" className={this.props.rarity} hittest={true}>
                 <DOTAAbilityImage ref={this.abilityImage} abilityname={abilityname} contextEntityIndex={contextEntityIndex} showtooltip={true} style={{ tooltipPosition: "top" }} onmouseactivate={() => this.onbtn_castability()}>
                     {lefttime >= 0 && <CCPanel width="100%" height="100%" backgroundColor="#000000DD" clip={"radial(50.0% 50.0%, 0.0deg, " + -(lefttime / remainingtime) * 360 + "deg)"} />}
                     {lefttime >= 0 && <CCLabel type="UnitName" align="center center" text={"" + (lefttime / 10).toFixed(1)} />}
@@ -147,9 +148,9 @@ export class CCAbilityIcon extends CCPanel<ICCAbilityIcon> {
         return (
             <Panel ref={this.__root__} className="CCAbilityIcon" {...this.initRootAttrs()}  >
                 <Image id="img_AbilityIcon" className={this.props.rarity} >
-                    <DOTAAbilityImage ref={this.abilityImage} showtooltip={showTips} abilityname={abilityname} contextEntityIndex={castEntityIndex} >
+                    <CCAbilityButton showtooltip={showTips} m_level={1} abilityname={abilityname} contextEntityIndex={castEntityIndex} >
                         {this.abilityImage_childs}
-                    </DOTAAbilityImage>
+                    </CCAbilityButton>
                 </Image>
                 {this.props.children}
                 {this.__root___childs}

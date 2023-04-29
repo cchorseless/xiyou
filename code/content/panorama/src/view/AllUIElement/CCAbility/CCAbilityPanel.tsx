@@ -3,7 +3,6 @@ import React, { createRef } from "react";
 import { GameEnum } from "../../../../../scripts/tscripts/shared/GameEnum";
 import { PublicBagConfig } from "../../../../../scripts/tscripts/shared/PublicBagConfig";
 import { CSSHelper } from "../../../helper/CSSHelper";
-import { AbilityHelper, ItemHelper } from "../../../helper/DotaEntityHelper";
 import { FuncHelper } from "../../../helper/FuncHelper";
 import { TipsHelper } from "../../../helper/TipsHelper";
 import { CCMainPanel } from "../../MainPanel/CCMainPanel";
@@ -19,6 +18,7 @@ export interface ICCAbilityPanel extends PanelAttributes {
     slot?: number,
     iUnlockStar?: number,
     dragtype?: string,
+    showLevelContainer?: boolean,
     dragstartcallback?: (tDragCallbacks: DragSettings, overrideentityindex: ItemEntityIndex, overridedisplaykeybind: DOTAKeybindCommand_t, slot: number, dragtype: string) => boolean;
     dragdropcallback?: (pDraggedPanel: IDragPanel, overrideentityindex: ItemEntityIndex, overridedisplaykeybind: DOTAKeybindCommand_t, slot: number, dragtype: string) => boolean;
     dragendcallback?: (pDraggedPanel: IDragPanel, overrideentityindex: ItemEntityIndex, overridedisplaykeybind: DOTAKeybindCommand_t, slot: number, dragtype: string) => void;
@@ -41,7 +41,7 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
         const iMaxLevel = (!bIsValid || Entities.IsEnemy(iCasterIndex)) ? 0 : Abilities.GetMaxLevel(overrideentityindex);
         return CSSHelper.ClassMaker("AbilityPanel", "AbilityMaxLevel" + iMaxLevel)
     }
-    // private AbilityImage: React.RefObject<AbilityImage> = createRef<AbilityImage>();;
+    private AbilityImage: React.RefObject<AbilityImage> = createRef<AbilityImage>();;
     private AbilityButton: React.RefObject<Panel> = createRef<Panel>();;
 
     onInitUI() {
@@ -216,6 +216,7 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
         // GTimerHelper.AddTimer(0.1, GHandler.create(this, () => {
         //     this.onRefreshUI();
         // }), false);
+        // TipsHelper.RefreshAbilityTooltip();
     }
 
     onRefreshUI() {
@@ -263,10 +264,10 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
                 }
             }
         } else {
-            iKeybindCommand = AbilityHelper.GetAbilityIndex(iCasterIndex, overrideentityindex) + DOTAKeybindCommand_t.DOTA_KEYBIND_ABILITY_PRIMARY1;
+            iKeybindCommand = Abilities.GetAbilityIndex(iCasterIndex, overrideentityindex) + DOTAKeybindCommand_t.DOTA_KEYBIND_ABILITY_PRIMARY1;
             sHotkey = (iKeybindCommand >= DOTAKeybindCommand_t.DOTA_KEYBIND_ABILITY_PRIMARY1 && iKeybindCommand <= DOTAKeybindCommand_t.DOTA_KEYBIND_ABILITY_ULTIMATE) ? Game.GetKeybindForCommand(iKeybindCommand) : sHotkey;
             if (sHotkey == "") {
-                iKeybindCommand = AbilityHelper.GetAbilityIndex(iCasterIndex, overrideentityindex) + DOTAKeybindCommand_t.DOTA_KEYBIND_ABILITY_PRIMARY1_QUICKCAST;
+                iKeybindCommand = Abilities.GetAbilityIndex(iCasterIndex, overrideentityindex) + DOTAKeybindCommand_t.DOTA_KEYBIND_ABILITY_PRIMARY1_QUICKCAST;
                 sHotkey = (iKeybindCommand >= DOTAKeybindCommand_t.DOTA_KEYBIND_ABILITY_PRIMARY1_QUICKCAST && iKeybindCommand <= DOTAKeybindCommand_t.DOTA_KEYBIND_ABILITY_ULTIMATE_QUICKCAST) ? Game.GetKeybindForCommand(iKeybindCommand) : sHotkey;
                 if (sHotkey == "") {
                     sHotkey = Abilities.GetKeybind(overrideentityindex);
@@ -287,9 +288,9 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
         let bInAbilityPhase = (!bIsValid || Entities.IsEnemy(iCasterIndex)) ? false : Abilities.IsInAbilityPhase(overrideentityindex);
         let bCooldownReady = (!bIsValid || Entities.IsEnemy(iCasterIndex)) ? true : Abilities.IsCooldownReady(overrideentityindex);
 
-        let iManaCost = (!bIsValid || Entities.IsEnemy(iCasterIndex)) ? 0 : AbilityHelper.GetLevelManaCost(overrideentityindex, iLevel - 1);
-        iManaCost = AbilityHelper.CalcSpecialValueUpgrade(iCasterIndex, Abilities.GetAbilityName(overrideentityindex), "mana_cost", iManaCost);
-        let iGoldCost = (!bIsValid || Entities.IsEnemy(iCasterIndex)) ? 0 : AbilityHelper.GetLevelGoldCost(overrideentityindex, iLevel - 1);
+        let iManaCost = (!bIsValid || Entities.IsEnemy(iCasterIndex)) ? 0 : Abilities.GetLevelManaCost(overrideentityindex, iLevel - 1);
+        iManaCost = Abilities.CalcSpecialValueUpgrade(iCasterIndex, Abilities.GetAbilityName(overrideentityindex), "mana_cost", iManaCost);
+        let iGoldCost = (!bIsValid || Entities.IsEnemy(iCasterIndex)) ? 0 : Abilities.GetLevelGoldCost(overrideentityindex, iLevel - 1);
 
         pSelf.SetHasClass("unitmuted", Entities.IsMuted(iCasterIndex));
         pSelf.SetHasClass("silenced", Entities.IsSilenced(iCasterIndex));
@@ -305,7 +306,7 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
         pSelf.SetHasClass("show_level_up_tab", pSelf.BHasClass("could_level_up"));
         pSelf.SetHasClass("show_level_up_frame", Game.IsInAbilityLearnMode() && pSelf.BHasClass("could_level_up"));
         pSelf.SetHasClass("is_active", bIsValid && iActiveAbility == overrideentityindex);
-        pSelf.SetHasClass("combine_locked", bIsValid && ItemHelper.IsItemLocked(overrideentityindex));
+        pSelf.SetHasClass("combine_locked", bIsValid && Items.IsItemLocked(overrideentityindex));
         pSelf.SetHasClass("ability_phase", bInAbilityPhase);
         pSelf.SetHasClass("in_cooldown", !bCooldownReady);
         pSelf.SetHasClass("cooldown_ready", bCooldownReady);
@@ -415,7 +416,7 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
         this.UpdateState({ "m_in_ability_phase": bInAbilityPhase })
         this.UpdateState({ "m_cooldown_ready": bCooldownReady })
         if (!bCooldownReady || pSelf.BHasClass("is_active")) {
-            this.intervalRefresh();
+            // this.intervalRefresh();
         }
 
     }
@@ -484,7 +485,7 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
                     let bSellable = Items.IsSellable(overrideentityindex) && Items.CanBeSoldByLocalPlayer(overrideentityindex);
                     let bDisassemble = Items.IsDisassemblable(overrideentityindex) && bControllable && !bSlotInStash;
                     let bAlertable = Items.IsAlertableItem(overrideentityindex);
-                    let bLocked = ItemHelper.IsItemLocked(overrideentityindex);
+                    let bLocked = Items.IsItemLocked(overrideentityindex);
                     let bAutocast = Abilities.IsAutocast(overrideentityindex);
                     // let bShowInShop = Items.IsPurchasable(overrideentityindex);
                     let bShowInShop = false;
@@ -536,7 +537,7 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
                     // // pContentsPanel.SetHasClass("bCasting", castingName != "");
                     // pContentsPanel.SetHasClass("bAutocast", bAutocast);
                     // pContentsPanel.SetHasClass("bMoveToTraining", bMoveToTraining);
-                    // pContentsPanel.SetHasClass("bSacrifice", ItemHelper.GetItemRarity(Abilities.GetAbilityName(overrideentityindex)) == 6);
+                    // pContentsPanel.SetHasClass("bSacrifice", Items.GetItemRarity(Abilities.GetAbilityName(overrideentityindex)) == 6);
                     // pContentsPanel.SetDialogVariable("itemname", $.Localize("DOTA_Tooltip_ability_" + castingName));
                     // if (castingName != "") {
                     //   this.updateDialogVariables("int_value", Number(GameUI.CustomUIConfig().ItemsKv[castingName].CastingCrystalCost || 0));
@@ -552,7 +553,7 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
             }
             // const pSelf = this.__root__.current!;
             // pSelf.SetHasClass("auto_cast_enabled", !Abilities.GetAutoCastState(overrideentityindex));
-            this.intervalRefresh()
+            // this.intervalRefresh()
         }
     }
 
@@ -619,6 +620,7 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
         const overrideentityindex = this.props.overrideentityindex!;
         const draggable = this.props.draggable!;
         const iUnlockStar = this.props.iUnlockStar!;
+        const showLevelContainer = this.props.showLevelContainer || false;
         return (
             this.__root___isValid &&
             <Panel ref={this.__root__} {...this.initRootAttrs()}>
@@ -641,7 +643,7 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
                                     onmouseover={(self) => this.onbtn_moveover(self)}
                                     onmouseout={(self) => this.onbtn_moveout(self)}
                                 >
-                                    {/* <DOTAAbilityImage id="AbilityImage" showtooltip={true} hittest={true} ref={this.AbilityImage} /> */}
+                                    <DOTAAbilityImage id="AbilityImage" contextEntityIndex={overrideentityindex} showtooltip={false} hittest={false} ref={this.AbilityImage} />
                                     {/* scaling="stretch-to-fit-x-preserve-aspect" */}
                                     {/* <DOTAItemImage id="ItemImage" itemname={Abilities.GetAbilityName(overrideentityindex)} contextEntityIndex={overrideentityindex} showtooltip={false} hittest={false} hittestchildren={false} /> */}
                                     <CCItemImage id="ItemImage" itemname={Abilities.GetAbilityName(overrideentityindex)} contextEntityIndex={overrideentityindex} iUnlockStar={iUnlockStar} showtooltip={false} hittest={false} hittestchildren={false} />
@@ -681,7 +683,7 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
                         </CircularProgressBar>
                     </Panel>
                     <Panel hittest={false} id="AbilityLevelContainer" >
-                        {m_max_level > 0 && [...Array(m_max_level).keys()].map((key) => {
+                        {showLevelContainer && m_max_level > 0 && [...Array(m_max_level).keys()].map((key) => {
                             return <Panel key={key.toString()} className={CSSHelper.ClassMaker("LevelPanel", { "next_level": key == m_level, "active_level": key < m_level })} />
                         })}
                     </Panel>

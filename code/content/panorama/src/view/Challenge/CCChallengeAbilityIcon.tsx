@@ -1,10 +1,9 @@
 import React from "react";
-import { CCAbilityIcon_Custom } from "../AllUIElement/CCAbility/CCAbilityIcon";
 import { CCIcon_CoinType } from "../AllUIElement/CCIcons/CCIcon_CoinType";
 import { CCLabel } from "../AllUIElement/CCLabel/CCLabel";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 
-import { AbilityHelper } from "../../helper/DotaEntityHelper";
+import { CCAbilityPanel } from "../AllUIElement/CCAbility/CCAbilityPanel";
 import "./CCChallengeAbilityIcon.less";
 
 export interface ICCChallengeAbilityIcon {
@@ -24,19 +23,20 @@ export class CCChallengeAbilityIcon extends CCPanel<ICCChallengeAbilityIcon> {
         const abilityindex = this.props.contextEntityIndex;
         let costcount = 0;
         if (this.props.cointype == GEEnum.EMoneyType.Gold) {
-            costcount = AbilityHelper.GetLevelGoldCost(abilityindex)
+            costcount = Abilities.GetLevelGoldCost(abilityindex)
         }
         else if (this.props.cointype == GEEnum.EMoneyType.Wood) {
-            costcount = AbilityHelper.GetLevelWoodCost(abilityindex)
+            costcount = Abilities.GetLevelWoodCost(abilityindex)
         }
         else if (this.props.cointype == GEEnum.EMoneyType.SoulCrystal) {
-            costcount = AbilityHelper.GetLevelSoulCrystal(abilityindex)
+            costcount = Abilities.GetLevelSoulCrystal(abilityindex)
         }
         return (
             <Panel id="CC_ChallengeAbilityIcon" ref={this.__root__}      {...this.initRootAttrs()}>
-                <CCAbilityIcon_Custom onclick={() => this.UpdateSelf()} abilityname={abilityname} contextEntityIndex={abilityindex} horizontalAlign={"center"}>
+                {/* <CCAbilityIcon_Custom onclick={() => this.UpdateSelf()} abilityname={abilityname} contextEntityIndex={abilityindex} horizontalAlign={"center"}>
                     <CCLabel type="Level" text={`Lv.${Abilities.GetLevel(abilityindex)}`} align={"left bottom"} />
-                </CCAbilityIcon_Custom>
+                </CCAbilityIcon_Custom> */}
+                <CCAbilityPanel width="64px" height="64px" abilityname={abilityname} overrideentityindex={abilityindex as any} horizontalAlign={"center"} />
                 <CCLabel type="AbilityName" text={$.Localize("#DOTA_Tooltip_ability_" + abilityname)} horizontalAlign={"center"} />
                 {
                     <CCPanel flowChildren="right" horizontalAlign="center">

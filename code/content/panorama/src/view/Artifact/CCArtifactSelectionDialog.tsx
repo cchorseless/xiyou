@@ -1,6 +1,5 @@
 import React from "react";
 import { CSSHelper } from "../../helper/CSSHelper";
-import { AbilityHelper } from "../../helper/DotaEntityHelper";
 
 import { CCButton } from "../AllUIElement/CCButton/CCButton";
 import { CCLabel } from "../AllUIElement/CCLabel/CCLabel";
@@ -27,7 +26,7 @@ export class CCArtifactSelectionDialog extends CCPanel<ICCArtifactSelectionDialo
                                 <CCButton type="Empty" key={index + ""} className="ArtifactContainer" onactivate={() => courierbag.selectArtifact(itemName)}>
                                     <DOTAItemImage itemname={itemName} />
                                     <Label className="ItemName" text={$.Localize("#DOTA_Tooltip_ability_" + itemName)} />
-                                    <Label className="ItemDescription" html text={AbilityHelper.GetAbilityDescriptionByName(itemName)} />
+                                    <Label className="ItemDescription" html text={Abilities.GetAbilityDescriptionByName(itemName)} />
                                 </CCButton>
                             );
                         })}

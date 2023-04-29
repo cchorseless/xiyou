@@ -9,6 +9,7 @@ import { CSSHelper } from "../../../helper/CSSHelper";
 import { DotaUIHelper } from "../../../helper/DotaUIHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
+import { BaseLibExt } from "../../../libs/BaseLibExt";
 import { CCButton } from "../../AllUIElement/CCButton/CCButton";
 import { CCDOTAChat } from "../../AllUIElement/CCDOTAChat/CCDOTAChat";
 import { CCImageNumber } from "../../AllUIElement/CCImageNumber/CCImageNumber";
@@ -162,6 +163,7 @@ export class CCHero_Select extends CCPanel<NodePropsData> {
 }
 AllShared.Init();
 AllEntity.Init();
+BaseLibExt.Init();
 TimerHelper.Init();
 GameScene.Init();
 DotaUIHelper.Init();

@@ -1,5 +1,4 @@
 import React from "react";
-import { UnitHelper } from "../../helper/DotaEntityHelper";
 import { PathHelper } from "../../helper/PathHelper";
 import { CCIcon_Star } from "../AllUIElement/CCIcons/CCIcon_Star";
 import { CCLabel } from "../AllUIElement/CCLabel/CCLabel";
@@ -22,7 +21,7 @@ export class CCBuildingTopBarItem extends CCOverHeadBaseItem {
         if (!BuildingComp) {
             return this.defaultRender("CC_BuildingTopBarItem");
         }
-        let rare = UnitHelper.GetUnitRarety(Entities.GetUnitName(entityid))
+        let rare = Entities.GetUnitRarity(Entities.GetUnitName(entityid))
         let ismy = Entities.IsControllableByPlayer(entityid, Game.GetLocalPlayerInfo().player_id);
         return (<Panel id="CC_BuildingTopBarItem" ref={this.__root__}   {...this.initRootAttrs()}>
             <CCPanel id="StarGroup" flowChildren="right" >
@@ -31,7 +30,7 @@ export class CCBuildingTopBarItem extends CCOverHeadBaseItem {
                 })}
             </CCPanel>
             <CCPanel id="buildingnNameBg" backgroundImage={PathHelper.getCustomImageUrl(`rarity/titlebg_${rare.toLowerCase()}.png`)}>
-                <CCPanel id="unitprop" backgroundImage={PathHelper.getCustomImageUrl(`eom_design/ccunitstats/icon_prop_${UnitHelper.GetPrimaryAttribute(entityid)}.png`)} />
+                <CCPanel id="unitprop" backgroundImage={PathHelper.getCustomImageUrl(`eom_design/ccunitstats/icon_prop_${Entities.GetPrimaryAttribute(entityid)}.png`)} />
                 <CCLabel align="center center" text={$.Localize("#" + BuildingComp!.ConfigID)} type="UnitName" />
             </CCPanel>
             {

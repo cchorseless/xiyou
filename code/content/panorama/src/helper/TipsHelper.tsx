@@ -1,8 +1,10 @@
+import { GEventHelper } from "../../../scripts/tscripts/shared/lib/GEventHelper";
 import { CCTipsPanel } from "../view/AllUIElement/CCTips/CCTipsPanel";
 import { KVHelper } from "./KVHelper";
 
 export module TipsHelper {
     export enum ToolTipType {
+        DOTARefreshAbilityTooltip = "DOTARefreshAbilityTooltip",
         UIShowCustomLayoutTooltip = 'UIShowCustomLayoutTooltip',
         UIShowCustomLayoutParametersTooltip = 'UIShowCustomLayoutParametersTooltip',
         DOTAShowAbilityInventoryItemTooltip = "DOTAShowAbilityInventoryItemTooltip",
@@ -79,7 +81,7 @@ export module TipsHelper {
     }
 
 
-    export function ShowAbilityTooltip(panel: Panel, abilityname: string, entityindex = -1, inventoryslot = -1, level = -1) {
+    export function ShowAbilityTooltip(panel: Panel, abilityname: string, abilityEntityIndex: ItemEntityIndex | AbilityEntityIndex = -1 as any, inventoryslot = -1, level = -1) {
         if (typeof (panel) != "object" || typeof (panel.IsValid) != "function" || !panel.IsValid()) {
             throw "ShowAbilityTooltip must have a panel parameter!";
         }
@@ -91,6 +93,10 @@ export module TipsHelper {
         let tItem = KVHelper.KVItems()[abilityname];
         let tData = tAbility || tItem;
         let bIsItem = (tData != tAbility && tData == tItem);
+        let entityindex = abilityEntityIndex as EntityIndex;
+        // if (entityindex !== -1) {
+        //     entityindex = Abilities.GetCaster(abilityEntityIndex)
+        // }
         if (entityindex != -1 && inventoryslot != -1) {
             $.DispatchEvent("DOTAShowAbilityInventoryItemTooltip", panel, entityindex, inventoryslot);
         } else if (entityindex != -1 && bIsItem) {
@@ -117,5 +123,8 @@ export module TipsHelper {
         // }
         $.DispatchEvent("UIHideCustomLayoutTooltip", panel, "AbilityTooltiop");
     };
+    export function RefreshAbilityTooltip() {
+        GEventHelper.FireEvent(TipsHelper.ToolTipType.DOTARefreshAbilityTooltip, null, null)
+    }
 
 }

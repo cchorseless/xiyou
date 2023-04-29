@@ -1,6 +1,5 @@
 import React from "react";
 import { CSSHelper } from "../../../helper/CSSHelper";
-import { UnitHelper } from "../../../helper/DotaEntityHelper";
 import { CCAbilityPanel, ICCAbilityPanel } from "../CCAbility/CCAbilityPanel";
 import { CCPanel } from "../CCPanel/CCPanel";
 interface ICCInventorySlot extends ICCAbilityPanel {
@@ -23,7 +22,7 @@ export class CCInventorySlot extends CCPanel<ICCInventorySlot> {
         let selectedEntityid = Players.GetLocalPlayerPortraitUnit();
         if (!Entities.IsControllableByPlayer(selectedEntityid, Players.GetLocalPlayer())) { return }
         let itementityid = Entities.GetItemInSlot(selectedEntityid, item_slot);
-        let curEntity = UnitHelper.GetCursorUnit(DOTATeam_t.DOTA_TEAM_GOODGUYS);
+        let curEntity = Entities.GetCursorUnit(DOTATeam_t.DOTA_TEAM_GOODGUYS);
         if (curEntity > -1) {
             GGameScene.Local.CourierBagComp.GiveItemToNpc(curEntity, item_slot, itementityid)
             // let entitys = GameUI.FindScreenEntities(pos);

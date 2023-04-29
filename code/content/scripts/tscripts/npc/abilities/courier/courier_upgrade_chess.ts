@@ -31,6 +31,18 @@ export class courier_upgrade_population extends BaseAbility_Plus {
         return r;
     }
 
+    GetAbilityJinDuMax(ilevel?: number): number {
+        let hCaster = this.GetCasterPlus();
+        let iPlayerID = hCaster.GetPlayerID();
+        let playerroot = GPlayerEntityRoot.GetOneInstance(iPlayerID);
+        if (playerroot) {
+            return playerroot.PlayerDataComp().popuLevelMax;
+        }
+        else {
+            return super.GetAbilityJinDuMax(ilevel);
+        }
+    }
+
     OnSpellStart() {
         let hCaster = this.GetCasterPlus();
         let iPlayerID = hCaster.GetPlayerID();
@@ -87,6 +99,10 @@ export class courier_upgrade_population extends BaseAbility_Plus {
 
     GetPopuLevel() {
         return math.max(this.GetLevel(), 1);
+    }
+
+    GetAbilityJinDuInfo(ilevel?: number): string {
+        return `${0},${this.GetAbilityJinDuMax()},${this.GetPopuLevel()}`
     }
 }
 
@@ -185,15 +201,25 @@ export class courier_upgrade_tech extends BaseAbility_Plus {
         this.RegAbilitySpecialValueOverride("gold_cost", Ihander);
         this.RegAbilitySpecialValueOverride("good_add_interval", Ihander);
         this.RegAbilitySpecialValueOverride("wood_add_interval", Ihander);
-
-
     }
-
+    GetAbilityJinDuMax(ilevel?: number): number {
+        let hCaster = this.GetCasterPlus();
+        let iPlayerID = hCaster.GetPlayerID();
+        let playerroot = GPlayerEntityRoot.GetOneInstance(iPlayerID);
+        if (playerroot) {
+            return playerroot.PlayerDataComp().techLevelMax;
+        }
+        else {
+            return super.GetAbilityJinDuMax(ilevel);
+        }
+    }
     GetTechLevel() {
         return math.max(this.GetLevel(), 1);
     }
 
-
+    GetAbilityJinDuInfo(ilevel?: number): string {
+        return `${0},${this.GetAbilityJinDuMax()},${this.GetTechLevel()}`
+    }
 }
 
 

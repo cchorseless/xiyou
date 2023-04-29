@@ -73,18 +73,20 @@ export class CCInventory extends CCPanel<ICCInventory> {
                             <Panel id="inventory_list_container" hittest={false} >
                                 <Panel id="inventory_list" className="inventory_list" hittest={false}  >
                                     {[...Array(3)].map((_, key) => {
-                                        return <CCInventorySlot key={key.toString()} id={"inventory_slot_" + key} {...Slots[key]} />
+                                        let data = Slots[key];
+                                        return <CCInventorySlot key={key.toString()} id={"inventory_slot_" + key} overrideentityindex={data.overrideentityindex} iUnlockStar={data.iUnlockStar} slot={data.slot} />
                                     })}
                                 </Panel>
                                 <Panel id="inventory_list2" className="inventory_list" hittest={false}  >
                                     {[...Array(3)].map((_, key) => {
-                                        return <CCInventorySlot key={key.toString()} id={"inventory_slot_" + (key + 3)} {...Slots[key + 3]} />
+                                        let data = Slots[key + 3];
+                                        return <CCInventorySlot key={key.toString()} id={"inventory_slot_" + (key + 3)} overrideentityindex={data.overrideentityindex} iUnlockStar={data.iUnlockStar} slot={data.slot} />
                                     })}
                                 </Panel>
                             </Panel>
                             <Panel id="inventory_backpack_list" hittest={false}  >
-                                {Backpacks.map((t, key) => {
-                                    return <CCInventorySlot key={key.toString()} id={"inventory_slot_" + (key + PublicBagConfig.DOTA_ITEM_BACKPACK_MIN)} {...t} isBackpack={true} />
+                                {Backpacks.map((data, key) => {
+                                    return <CCInventorySlot key={key.toString()} id={"inventory_slot_" + (key + PublicBagConfig.DOTA_ITEM_BACKPACK_MIN)} overrideentityindex={data.overrideentityindex} slot={data.slot} isBackpack={true} />
                                 })}
                             </Panel>
                         </Panel>

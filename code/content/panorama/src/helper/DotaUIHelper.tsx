@@ -1,64 +1,16 @@
 import { render } from "@demon673/react-panorama";
 import React from "react";
+import { GEventHelper } from "../../../scripts/tscripts/shared/lib/GEventHelper";
 import { CCCombinationInfoDialog } from "../view/Combination/CCCombinationInfoDialog";
 import { CCMainPanel } from "../view/MainPanel/CCMainPanel";
-import { CSSHelper } from "./CSSHelper";
-import { UnitHelper } from "./DotaEntityHelper";
 import { EventHelper } from "./EventHelper";
 import { KVHelper } from "./KVHelper";
 import { LogHelper } from "./LogHelper";
 import { TipsHelper } from "./TipsHelper";
 
-declare global {
-    interface CScriptBindingPR_Abilities {
-        /**
-         * 获取技能名称
-         * @param sAbilityName 
-         */
-        GetLocalizeAbilityName(sAbilityName: string): string;
-        /**获取技能稀有度 */
-        GetAbilityRarity(sAbilityName: string): IRarity;
-        GetAbilityRarityNumber(sAbilityName: string): IRarityNumber;
-        /**获取技能颜色 */
-        GetAbilityColor(sAbilityName: string): string;
 
-    }
 
-}
 
-Abilities.GetLocalizeAbilityName = function (sAbilityName: string) {
-    const str = $.Localize("#DOTA_Tooltip_ability_" + sAbilityName);
-    return str;
-}
-
-Abilities.GetAbilityRarity = function (sAbilityName: string) {
-    return (KVHelper.GetAbilityOrItemDataForKey(sAbilityName, "Rarity") || "B") as IRarity;
-}
-
-Abilities.GetAbilityRarityNumber = function (sAbilityName: string) {
-    const rarity = Abilities.GetAbilityRarity(sAbilityName);
-    return GToNumber(GEEnum.ERarity[rarity]);
-}
-
-Abilities.GetAbilityColor = function (sAbilityName: string) {
-    const rarity = Abilities.GetAbilityRarity(sAbilityName);
-    if (rarity == "SS") {
-        return CSSHelper.EColor.Red;
-    }
-    else if (rarity == "S") {
-        return CSSHelper.EColor.Gold;
-    }
-    else if (rarity == "A") {
-        return CSSHelper.EColor.Purple;
-    } else if (rarity == "B") {
-        return CSSHelper.EColor.Blue;
-    } else if (rarity == "C") {
-        return CSSHelper.EColor.Green;
-    } else if (rarity == "D") {
-        return CSSHelper.EColor.White;
-    }
-    return CSSHelper.EColor.White;
-}
 
 
 
@@ -376,13 +328,30 @@ export module DotaUIHelper {
         let DOTAAbilityToolTip: Panel;
         let DOTAAbilityToolTip_Contents: Panel;
         let TextToolTip: Panel;
-
         const customPanelid = "CustomTooltipPanel";
         const customLabelid = "CustomTooltipLabel";
-        const abilityShowTooltipHandler = GHandler.create(EventObj, (abilitypanel: Panel, ability_name: string | AbilityEntityIndex, c, d) => {
-            if (typeof ability_name == "number") {
+        const CustomJinDuPanel = "CustomJinDuPanel";
+        const params: any[] = [];
+        const abilityShowTooltipHandler = GHandler.create(EventObj, (abilitypanel: Panel, ability_name: string, abilityEntityIndex: AbilityEntityIndex, abilityEntityIndex2: AbilityEntityIndex) => {
+            params.length = 0;
+            params.push(abilitypanel, ability_name, abilityEntityIndex, abilityEntityIndex2);
+            abilityEntityIndex = GToNumber(abilityEntityIndex) as AbilityEntityIndex;
+            if (typeof ability_name == "number" && abilityEntityIndex == 0) {
+                abilityEntityIndex = ability_name;
                 ability_name = Abilities.GetAbilityName(ability_name as AbilityEntityIndex);
             }
+            else if (typeof ability_name == "string") {
+                if (abilityEntityIndex == 0) {
+                    abilityEntityIndex = abilityEntityIndex2 || -1 as AbilityEntityIndex;
+                }
+                // 判断是否是Unit EntityIndex
+                else {
+                    if (Abilities.GetCaster(abilityEntityIndex) == -1) {
+                        abilityEntityIndex = Entities.GetAbilityByName(abilityEntityIndex, ability_name);
+                    }
+                }
+            }
+            const unitEntIndex = Abilities.GetCaster(abilityEntityIndex);
             DOTAAbilityToolTip = DOTAAbilityToolTip || tooltips.FindChildTraverse("DOTAAbilityTooltip");
             if (DOTAAbilityToolTip == null) { return }
             DOTAAbilityToolTip_Contents = DOTAAbilityToolTip_Contents || DOTAAbilityToolTip.FindChildTraverse("Contents")!;
@@ -390,12 +359,26 @@ export module DotaUIHelper {
             const AbilityDetails = DOTAAbilityToolTip_Contents.FindChild("AbilityDetails")!;
             if (AbilityDetails) {
                 AbilityDetails.style.width = "340px";
+                // 升级进度条
+                const jinduinfo = Abilities.GetAbilityJinDuInfo(abilityEntityIndex > 0 ? abilityEntityIndex : ability_name);
+                const AbilityUpgradeProgress = AbilityDetails.FindChild("AbilityUpgradeProgress")!;
+                AbilityUpgradeProgress.visible = jinduinfo != null;
+                if (jinduinfo) {
+                    AbilityUpgradeProgress.Children().forEach((child) => {
+                        if (child.id != CustomJinDuPanel) {
+                            child.visible = false;
+                        }
+                    });
+                    render(<ProgressBar id={CustomJinDuPanel} value={jinduinfo.now} min={jinduinfo.min} max={jinduinfo.max} style={{ horizontalAlign: "center", marginLeft: "10px", height: "18px", width: "300px" }} >
+                        <Label localizedText={"#lang_Ability_JinDu"} dialogVariables={jinduinfo} html={true} style={{ align: "center center", }} />
+                    </ProgressBar>, AbilityUpgradeProgress)
+                }
                 // 修改技能名字
                 const header = AbilityDetails.FindChild("Header")!;
                 if (header) {
                     const AbilityHeader = header.FindChildTraverse("AbilityHeader")! as Panel;
                     let needstar = KVHelper.GetAbilityOrItemDataForKey(ability_name, "RequiredStar", true) as number;
-                    if (needstar > 0 && UnitHelper.GetStar(c) < needstar) {
+                    if (needstar > 0 && Entities.GetStar(unitEntIndex) < needstar) {
                         render(<Label id={customLabelid} text={` (${needstar}星激活)`} />, AbilityHeader)
                     }
                     else {
@@ -411,23 +394,29 @@ export module DotaUIHelper {
             }
             if (CustomTooltipPanel) {
                 if (sectname) {
-                    render(<CCCombinationInfoDialog key={Math.random() * 1000 + ""} unitentityindex={c} sectName={sectname} abilityitemname={ability_name as string} />, CustomTooltipPanel);
+                    render(<CCCombinationInfoDialog key={Math.random() * 1000 + ""} unitentityindex={unitEntIndex} sectName={sectname} abilityitemname={ability_name as string} />, CustomTooltipPanel);
                 }
                 else {
                     render(< ></>, CustomTooltipPanel);
                 }
             }
         })
-        const abilityHideTooltipHandler = GHandler.create(EventObj, (abilitypanel: Panel, ability_name: string | AbilityEntityIndex, c, d) => {
+        const abilityRefreshTooltipHandler = GHandler.create(EventObj, () => {
+            abilityShowTooltipHandler.runWith(params);
         })
-        const abilityShowDropItemTooltipHandler = GHandler.create(EventObj, (abilitypanel: Panel, x: number, y: number, ability_name: string) => {
-            abilityShowTooltipHandler.runWith([abilitypanel, ability_name, x, y])
+        const abilityShowDropItemTooltipHandler = GHandler.create(EventObj, (abilitypanel: Panel, x: number, y: number, ability_name: string, d, f, g, h) => {
+            let targets = GameUI.FindScreenEntities([x, y]);
+            targets = targets.filter(e => e.accurateCollision && Entities.IsItemPhysical(e.entityIndex));
+            // 掉落物品
+            const abilityEntityIndex = Entities.GetContainedItem(targets[0].entityIndex);
+            abilityShowTooltipHandler.runWith([abilitypanel, ability_name, abilityEntityIndex]);
         })
         EventHelper.addUnhandledEvent(TipsHelper.ToolTipType.DOTAShowAbilityTooltip, abilityShowTooltipHandler);
         EventHelper.addUnhandledEvent(TipsHelper.ToolTipType.DOTAShowAbilityTooltipForEntityIndex, abilityShowTooltipHandler);
         EventHelper.addUnhandledEvent(TipsHelper.ToolTipType.DOTAShowAbilityInventoryItemTooltip, abilityShowTooltipHandler);
         EventHelper.addUnhandledEvent(TipsHelper.ToolTipType.DOTAShowAbilityShopItemTooltip, abilityShowTooltipHandler);
         EventHelper.addUnhandledEvent(TipsHelper.ToolTipType.DOTAShowDroppedItemTooltip, abilityShowDropItemTooltipHandler);
+        GEventHelper.AddEvent(TipsHelper.ToolTipType.DOTARefreshAbilityTooltip, abilityRefreshTooltipHandler);
         // EventHelper.addUnhandledEvent(TipsHelper.ToolTipType.DOTAShowAbilityTooltipForGuide, abilityShowTooltipHandler);
         // EventHelper.addUnhandledEvent(TipsHelper.ToolTipType.DOTAShowAbilityTooltipForHero, abilityShowTooltipHandler);
         // EventHelper.addUnhandledEvent(TipsHelper.ToolTipType.DOTAShowAbilityTooltipForLevel, abilityShowTooltipHandler);

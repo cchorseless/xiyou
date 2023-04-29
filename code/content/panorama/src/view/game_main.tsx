@@ -8,6 +8,7 @@ import { DebugHelper } from "../helper/DebugHelper";
 import { DotaUIHelper } from "../helper/DotaUIHelper";
 import { LogHelper } from "../helper/LogHelper";
 import { TimerHelper } from "../helper/TimerHelper";
+import { BaseLibExt } from "../libs/BaseLibExt";
 import { CCPanel } from "./AllUIElement/CCPanel/CCPanel";
 import { CCPausePanel } from "./AllUIElement/CCPause/CCPausePanel";
 import { CCDebugPanel } from "./DebugTool/CCDebugPanel";
@@ -68,6 +69,7 @@ function StartRenderGameUI() {
     /**初始化系统 */
     AllShared.Init();
     AllEntity.Init();
+    BaseLibExt.Init();
     TimerHelper.Init();
     DebugHelper.Init();
     DotaUIHelper.Init();
