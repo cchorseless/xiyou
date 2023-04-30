@@ -20,7 +20,7 @@ export class imba_arc_warden_flux extends BaseAbility_Plus {
             ParticleManager.SetParticleControlEnt(cast_particle, 1, target, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", target.GetAbsOrigin(), true);
             ParticleManager.SetParticleControlEnt(cast_particle, 2, this.GetCasterPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_attack2", this.GetCasterPlus().GetAbsOrigin(), true);
             target.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_arc_warden_flux", {
-                duration: this.GetTalentSpecialValueFor("duration")
+                duration: this.GetSpecialValueFor("duration")
             });
         }
     }

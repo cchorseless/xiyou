@@ -143,7 +143,7 @@ export class imba_tidehunter_gush extends BaseAbility_Plus {
                     }
                     let damageTable = {
                         victim: target,
-                        damage: this.GetTalentSpecialValueFor("gush_damage"),
+                        damage: this.GetSpecialValueFor("gush_damage"),
                         damage_type: this.GetAbilityDamageType(),
                         damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NONE,
                         attacker: this.GetCasterPlus(),
@@ -200,7 +200,7 @@ export class modifier_imba_tidehunter_gush extends BaseModifier_Plus {
     Init(p_0: any,): void {
         if (this.GetAbilityPlus()) {
             this.movement_speed = this.GetSpecialValueFor("movement_speed");
-            this.negative_armor = this.GetAbilityPlus().GetTalentSpecialValueFor("negative_armor");
+            this.negative_armor = this.GetAbilityPlus().GetSpecialValueFor("negative_armor");
         } else {
             this.Destroy();
         }
@@ -337,7 +337,7 @@ export class modifier_imba_tidehunter_kraken_shell extends BaseModifier_Plus {
     } */
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_CONSTANT_BLOCK)
     CC_GetModifierPhysical_ConstantBlock(p_0: ModifierAttackEvent,): number {
-        return this.GetAbilityPlus().GetTalentSpecialValueFor("damage_reduction");
+        return this.GetAbilityPlus().GetSpecialValueFor("damage_reduction");
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
@@ -561,7 +561,7 @@ export class modifier_imba_tidehunter_anchor_smash extends BaseModifier_Plus {
     public damage_reduction: number;
     Init(p_0: any,): void {
         if (this.GetAbilityPlus()) {
-            this.damage_reduction = this.GetAbilityPlus().GetTalentSpecialValueFor("damage_reduction");
+            this.damage_reduction = this.GetAbilityPlus().GetSpecialValueFor("damage_reduction");
         } else {
             this.Destroy();
         }

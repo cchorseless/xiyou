@@ -134,7 +134,7 @@ export class imba_sven_storm_bolt extends BaseAbility_Plus {
             this.target = this.GetCursorTarget();
             let damage = this.GetSpecialValueFor("damage");
             let stun_duration = this.GetSpecialValueFor("stun_duration");
-            let radius = this.GetTalentSpecialValueFor("radius");
+            let radius = this.GetSpecialValueFor("radius");
             let vision_radius = this.GetSpecialValueFor("vision_radius");
             let bolt_speed = this.GetSpecialValueFor("bolt_speed");
             caster.EmitSound("Hero_Sven.StormBolt");
@@ -213,7 +213,7 @@ export class imba_sven_storm_bolt extends BaseAbility_Plus {
         }
     }
     GetAOERadius(): number {
-        return this.GetTalentSpecialValueFor("radius");
+        return this.GetSpecialValueFor("radius");
     }
     GetCooldown(nLevel: number): number {
         return super.GetCooldown(nLevel) - this.GetCasterPlus().GetTalentValue("special_bonus_imba_sven_5");
@@ -386,8 +386,8 @@ export class modifier_imba_great_cleave extends BaseModifier_Plus {
                 let cleave_particle = "particles/units/heroes/hero_sven/sven_spell_great_cleave.vpcf";
                 let cleave_damage_pct = ability.GetSpecialValueFor("great_cleave_damage") / 100;
                 let cleave_radius_start = ability.GetSpecialValueFor("cleave_starting_width");
-                let cleave_radius_end = ability.GetTalentSpecialValueFor("cleave_ending_width");
-                let cleave_distance = ability.GetTalentSpecialValueFor("cleave_distance");
+                let cleave_radius_end = ability.GetSpecialValueFor("cleave_ending_width");
+                let cleave_distance = ability.GetSpecialValueFor("cleave_distance");
                 DoCleaveAttack(params.attacker, params.target, ability, (params.damage * cleave_damage_pct), cleave_radius_start, cleave_radius_end, cleave_distance, cleave_particle);
             }
         }
@@ -419,7 +419,7 @@ export class modifier_imba_great_cleave_active extends BaseModifier_Plus {
         let fire_fx = ResHelper.CreateParticleEx("particles/hero/sven/great_cleave_glow_base.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, parent);
         ParticleManager.SetParticleControlEnt(fire_fx, 0, parent, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_weapon", parent.GetAbsOrigin(), true);
         this.AddParticle(fire_fx, false, false, -1, false, false);
-        this.armor_ignore = this.GetAbilityPlus().GetTalentSpecialValueFor("armor_ignore");
+        this.armor_ignore = this.GetAbilityPlus().GetSpecialValueFor("armor_ignore");
     }
     CheckState(): Partial<Record<modifierstate, boolean>> {
         return {
@@ -511,7 +511,7 @@ export class imba_sven_warcry extends BaseAbility_Plus {
     OnSpellStart(): void {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
-            let ms_bonus_pct = this.GetTalentSpecialValueFor("ms_bonus_pct");
+            let ms_bonus_pct = this.GetSpecialValueFor("ms_bonus_pct");
             let armor_bonus = this.GetSpecialValueFor("armor_bonus");
             let tenacity_bonus_pct = this.GetSpecialValueFor("tenacity_bonus_pct");
             let tenacity_self_pct = this.GetSpecialValueFor("tenacity_self_pct");
@@ -591,7 +591,7 @@ export class modifier_imba_warcry extends BaseModifier_Plus {
         return "sven_warcry";
     }
     Init(p_0: any,): void {
-        this.ms_bonus_pct = this.GetAbilityPlus().GetTalentSpecialValueFor("ms_bonus_pct");
+        this.ms_bonus_pct = this.GetAbilityPlus().GetSpecialValueFor("ms_bonus_pct");
         this.armor_bonus = this.GetSpecialValueFor("armor_bonus");
         this.tenacity_pct = this.GetSpecialValueFor("tenacity_bonus_pct");
         let caster = this.GetCasterPlus();
@@ -807,7 +807,7 @@ export class modifier_imba_god_strength extends BaseModifier_Plus {
         return true;
     }
     BeCreated(p_0: any,): void {
-        this.bonus_dmg_pct = this.GetAbilityPlus().GetTalentSpecialValueFor("bonus_dmg_pct");
+        this.bonus_dmg_pct = this.GetAbilityPlus().GetSpecialValueFor("bonus_dmg_pct");
         this.gods_strength_bonus_str = this.GetSpecialValueFor("gods_strength_bonus_str");
         this.aura_radius_scepter = this.GetSpecialValueFor("aura_radius_scepter");
         if (IsServer()) {
@@ -819,7 +819,7 @@ export class modifier_imba_god_strength extends BaseModifier_Plus {
         }
     }
     BeRefresh(p_0: any,): void {
-        this.bonus_dmg_pct = this.GetAbilityPlus().GetTalentSpecialValueFor("bonus_dmg_pct");
+        this.bonus_dmg_pct = this.GetAbilityPlus().GetSpecialValueFor("bonus_dmg_pct");
         this.gods_strength_bonus_str = this.GetSpecialValueFor("gods_strength_bonus_str");
         this.aura_radius_scepter = this.GetSpecialValueFor("aura_radius_scepter");
     }
@@ -883,7 +883,7 @@ export class modifier_imba_god_strength extends BaseModifier_Plus {
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_ATTACK_DAMAGE_PERCENTAGE)
     CC_GetModifierBaseDamageOutgoing_Percentage(p_0: ModifierAttackEvent,): number {
         if (this.GetAbilityPlus()) {
-            return this.GetAbilityPlus().GetTalentSpecialValueFor("bonus_dmg_pct");
+            return this.GetAbilityPlus().GetSpecialValueFor("bonus_dmg_pct");
         } else {
             return this.bonus_dmg_pct;
         }
@@ -1108,7 +1108,7 @@ export class modifier_imba_colossal_slash_crit extends BaseModifier_Plus {
         if (this.GetCasterPlus().HasModifier("modifier_imba_god_strength")) {
             this.bonus_dmg_pct = 0;
         } else {
-            this.bonus_dmg_pct = this.GetAbilityPlus().GetTalentSpecialValueFor("bonus_dmg_pct");
+            this.bonus_dmg_pct = this.GetAbilityPlus().GetSpecialValueFor("bonus_dmg_pct");
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_ATTACK_DAMAGE_PERCENTAGE)

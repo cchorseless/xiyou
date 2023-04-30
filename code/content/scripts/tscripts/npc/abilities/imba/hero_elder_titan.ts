@@ -189,7 +189,7 @@ export class imba_elder_titan_ancestral_spirit extends BaseAbility_Plus {
         let target_point = this.GetCursorPosition();
         let radius = this.GetSpecialValueFor("radius");
         let duration = this.GetSpecialValueFor("spirit_duration");
-        let spirit_movespeed = this.GetTalentSpecialValueFor("speed");
+        let spirit_movespeed = this.GetSpecialValueFor("speed");
         EmitSoundOn("Hero_ElderTitan.AncestralSpirit.Cast", caster);
         caster.SwapAbilities("imba_elder_titan_ancestral_spirit", "imba_elder_titan_return_spirit", false, true);
         let particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_elder_titan/elder_titan_ancestral_spirit_cast.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, caster);

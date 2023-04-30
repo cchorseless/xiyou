@@ -467,7 +467,7 @@ export class modifier_imba_blur extends BaseModifier_Plus {
         this.modifier_aura = "modifier_imba_blur_blur";
         this.modifier_speed = "modifier_imba_blur_speed";
         this.radius = this.GetSpecialValueFor("radius");
-        this.evasion = this.GetAbilityPlus().GetTalentSpecialValueFor("evasion");
+        this.evasion = this.GetAbilityPlus().GetSpecialValueFor("evasion");
         this.ms_duration = this.GetSpecialValueFor("speed_bonus_duration");
         if (IsServer()) {
             this.StartIntervalThink(0.2);
@@ -752,7 +752,7 @@ export class modifier_imba_coup_de_grace extends BaseModifier_Plus {
         if (!this.GetParentPlus().PassivesDisabled()) {
             let target = keys.target;
             let crit_duration = this.crit_increase_duration + this.caster.GetTalentValue("special_bonus_imba_phantom_assassin_7");
-            let crit_chance_total = this.GetAbilityPlus().GetTalentSpecialValueFor("crit_chance");
+            let crit_chance_total = this.GetAbilityPlus().GetSpecialValueFor("crit_chance");
             if (target.IsBuilding() || target.IsOther() || keys.target.GetTeamNumber() == keys.attacker.GetTeamNumber()) {
                 return;
             }

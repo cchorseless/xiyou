@@ -582,7 +582,7 @@ export class imba_riki_blink_strike extends BaseAbility_Plus {
             let jump_interval_frames = this.GetSpecialValueFor("jump_interval_frames");
             let cast_range = super.GetCastRange(hCaster.GetAbsOrigin(), hTarget) + GPropertyCalculate.GetCastRangeBonus(hCaster);
             let current_distance = CalcDistanceBetweenEntityOBB(hCaster, hTarget);
-            if ((this.GetTalentSpecialValueFor("max_jumps") >= 1) && (current_distance > cast_range) && this.tStoredTargets) {
+            if ((this.GetSpecialValueFor("max_jumps") >= 1) && (current_distance > cast_range) && this.tStoredTargets) {
                 this.tMarkedTargets = []
                 for (const target_entindex of (this.tStoredTargets)) {
                     if (!(target_entindex.IsCaster || target_entindex.IsTarget)) {
@@ -673,7 +673,7 @@ export class imba_riki_blink_strike extends BaseAbility_Plus {
                 return;
             }
             this.damage = this.GetSpecialValueFor("bonus_damage") || this.GetSpecialValueFor("damage");
-            this.duration = this.GetTalentSpecialValueFor("duration");
+            this.duration = this.GetSpecialValueFor("duration");
             let jump_duration = 0;
             let cast_sound = "Hero_Riki.Blink_Strike";
             this.hCaster.Stop();
@@ -894,7 +894,7 @@ export class modifier_imba_blink_strike_thinker extends BaseModifier_Plus {
             }
             this.hAbility = this.GetAbilityPlus();
             this.jump_range = this.hAbility.GetSpecialValueFor("jump_range") + GPropertyCalculate.GetCastRangeBonus(this.hCaster);
-            this.max_jumps = this.hAbility.GetTalentSpecialValueFor("max_jumps");
+            this.max_jumps = this.hAbility.GetSpecialValueFor("max_jumps");
             this.jump_interval_time = this.hAbility.GetSpecialValueFor("jump_interval_time");
             this.lagg_threshold = this.hAbility.GetSpecialValueFor("lagg_threshold");
             this.cast_range = this.hAbility.GetCastRange(this.hCaster.GetAbsOrigin(), this.hTarget) + GPropertyCalculate.GetCastRangeBonus(this.hCaster);
@@ -1134,7 +1134,7 @@ export class modifier_imba_riki_cloak_and_dagger extends BaseModifier_Plus {
         if (IsServer() && this.GetAbilityPlus() && this.GetAbilityPlus().IsTrained()) {
             let ability = this.GetAbilityPlus();
             let parent = this.GetParentPlus();
-            let fade_time = ability.GetTalentSpecialValueFor("fade_time");
+            let fade_time = ability.GetSpecialValueFor("fade_time");
             if (parent.PassivesDisabled()) {
                 if (parent.HasModifier("modifier_imba_riki_invisibility")) {
                     parent.RemoveModifierByName("modifier_imba_riki_invisibility");
@@ -1165,7 +1165,7 @@ export class modifier_imba_riki_cloak_and_dagger extends BaseModifier_Plus {
             let parent = this.GetParentPlus();
             let ability = this.GetAbilityPlus();
             if (parent == attacker) {
-                let fade_time = ability.GetTalentSpecialValueFor("fade_time");
+                let fade_time = ability.GetSpecialValueFor("fade_time");
                 let agility_multiplier = ability.GetSpecialValueFor("agility_damage_multiplier");
                 let agility_multiplier_smoke = ability.GetSpecialValueFor("agility_damage_multiplier_smoke");
                 let agility_multiplier_side = ability.GetSpecialValueFor("agility_damage_multiplier_side");
@@ -2017,7 +2017,7 @@ export class modifier_imba_riki_cloak_and_dagger_723 extends BaseModifier_Plus {
     //         if (!this.GetParentPlus().PassivesDisabled() && !keys.target.IsBuilding() && !keys.target.IsOther() && math.abs(AngleDiff(VectorToAngles(keys.target.GetForwardVector()).y, VectorToAngles(this.GetParentPlus().GetForwardVector()).y)) <= this.GetSpecialValueFor("backstab_angle")) {
     //             this.bBackstab = true;
     //             if (!this.GetParentPlus().IsIllusion() && this.GetParentPlus().GetAgility) {
-    //                 return this.GetParentPlus().GetAgility() * this.GetAbilityPlus().GetTalentSpecialValueFor("damage_multiplier");
+    //                 return this.GetParentPlus().GetAgility() * this.GetAbilityPlus().GetSpecialValueFor("damage_multiplier");
     //             }
     //         } else {
     //             this.bBackstab = false;

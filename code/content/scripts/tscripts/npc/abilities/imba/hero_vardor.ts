@@ -278,7 +278,7 @@ export class modifier_vardor_piercing_shot_charges extends BaseModifier_Plus {
             }
             this.caster = this.GetCasterPlus();
             this.ability = this.GetAbilityPlus();
-            this.initial_yari_count = this.ability.GetTalentSpecialValueFor("initial_yari_count");
+            this.initial_yari_count = this.ability.GetSpecialValueFor("initial_yari_count");
             let yariHolder = BaseNpc_Plus.CreateUnitByName("npc_spearholder_unit", this.caster.GetAbsOrigin(), this.caster, false);
             yariHolder.SetAbsOrigin(this.caster.GetAbsOrigin());
             yariHolder.AddNewModifier(this.caster, this.ability, "modifier_vardor_yari_dummy", {
@@ -293,7 +293,7 @@ export class modifier_vardor_piercing_shot_charges extends BaseModifier_Plus {
         }
     }
     OnIntervalThink(): void {
-        let expected_charges = this.ability.GetTalentSpecialValueFor("initial_yari_count");
+        let expected_charges = this.ability.GetSpecialValueFor("initial_yari_count");
         let yaris = 0;
         let units = this.caster.FindChildByName("npc_imba_vardor_spear_dummy");
         for (const [_, unit] of GameFunc.iPair(units)) {

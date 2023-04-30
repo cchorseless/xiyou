@@ -610,7 +610,7 @@ export class modifier_imba_spell_shield_buff_passive extends BaseModifier_Plus {
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_RESISTANCE_BONUS)
     CC_GetModifierMagicalResistanceBonus(params: ModifierAttackEvent): number {
         if (!this.GetParentPlus().PassivesDisabled()) {
-            return this.GetAbilityPlus().GetTalentSpecialValueFor("magic_resistance");
+            return this.GetSpecialValueFor("magic_resistance");
         }
     }
     BeDestroy(): void {

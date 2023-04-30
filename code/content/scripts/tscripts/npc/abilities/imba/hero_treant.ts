@@ -76,7 +76,7 @@ export class modifier_imba_treant_natures_grasp_creation_thinker extends BaseMod
         }
         this.latch_range = this.GetSpecialValueFor("latch_range");
         this.latch_vision = this.GetSpecialValueFor("latch_vision");
-        this.damage_per_second = this.GetAbilityPlus().GetTalentSpecialValueFor("damage_per_second");
+        this.damage_per_second = this.GetAbilityPlus().GetSpecialValueFor("damage_per_second");
         this.movement_slow = this.GetSpecialValueFor("movement_slow");
         if (this.GetCasterPlus().GetLevel() >= 25) {
             this.damage_type = DAMAGE_TYPES.DAMAGE_TYPE_PURE;
@@ -151,7 +151,7 @@ export class modifier_imba_treant_natures_grasp_damage extends BaseModifier_Plus
             return;
         }
         if (this.GetAbilityPlus()) {
-            this.damage_per_second = this.GetAbilityPlus().GetTalentSpecialValueFor("damage_per_second");
+            this.damage_per_second = this.GetAbilityPlus().GetSpecialValueFor("damage_per_second");
             this.movement_slow = this.GetSpecialValueFor("movement_slow");
             if (this.GetCasterPlus().GetLevel() >= 25) {
                 this.damage_type = DAMAGE_TYPES.DAMAGE_TYPE_PURE;
@@ -208,7 +208,7 @@ export class modifier_imba_treant_natures_grasp_damage_bonus extends BaseModifie
             return;
         }
         if (this.GetAbilityPlus()) {
-            this.damage_per_second = this.GetAbilityPlus().GetTalentSpecialValueFor("damage_per_second") * 1.5;
+            this.damage_per_second = this.GetAbilityPlus().GetSpecialValueFor("damage_per_second") * 1.5;
             this.movement_slow = this.GetSpecialValueFor("movement_slow");
             if (this.GetCasterPlus().GetLevel() >= 25) {
                 this.damage_type = DAMAGE_TYPES.DAMAGE_TYPE_PURE;
@@ -309,7 +309,7 @@ export class imba_treant_leech_seed extends BaseAbility_Plus {
         ParticleManager.ReleaseParticleIndex(seed_particle);
     }
     OnProjectileHit_ExtraData(target: CDOTA_BaseNPC | undefined, location: Vector, ExtraData: any): boolean | void {
-        target.ApplyHeal(this.GetTalentSpecialValueFor("leech_damage") * this.GetSpecialValueFor("damage_interval"), this);
+        target.ApplyHeal(this.GetSpecialValueFor("leech_damage") * this.GetSpecialValueFor("damage_interval"), this);
     }
     OnOwnerSpawned(): void {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_treant_leech_seed_heal") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_treant_leech_seed_heal")) {
@@ -378,7 +378,7 @@ export class modifier_imba_treant_leech_seed extends BaseModifier_Plus {
             return;
         }
         this.damage_interval = this.GetSpecialValueFor("damage_interval");
-        this.leech_damage = this.GetAbilityPlus().GetTalentSpecialValueFor("leech_damage");
+        this.leech_damage = this.GetAbilityPlus().GetSpecialValueFor("leech_damage");
         this.movement_slow = this.GetSpecialValueFor("movement_slow");
         this.slow_duration = this.GetSpecialValueFor("slow_duration");
         this.radius = this.GetSpecialValueFor("radius");
@@ -507,7 +507,7 @@ export class modifier_imba_treant_leech_seed_enemy_target extends BaseModifier_P
             return;
         }
         this.damage_interval = this.GetSpecialValueFor("damage_interval");
-        this.leech_damage = this.GetAbilityPlus().GetTalentSpecialValueFor("leech_damage");
+        this.leech_damage = this.GetAbilityPlus().GetSpecialValueFor("leech_damage");
         this.movement_slow = this.GetSpecialValueFor("movement_slow") * 0.5;
         this.remnants_radius = this.GetSpecialValueFor("remnants_radius");
         this.projectile_speed = this.GetSpecialValueFor("projectile_speed");
@@ -610,7 +610,7 @@ export class modifier_imba_treant_living_armor extends BaseModifier_Plus {
     public armor_particle: any;
     Init(p_0: any,): void {
 
-        this.total_heal = this.GetAbilityPlus().GetTalentSpecialValueFor("total_heal");
+        this.total_heal = this.GetAbilityPlus().GetSpecialValueFor("total_heal");
         this.bonus_armor = this.GetSpecialValueFor("bonus_armor");
         this.duration = this.GetSpecialValueFor("duration");
         this.remnants_damage_block_instances = this.GetSpecialValueFor("remnants_damage_block_instances");
@@ -920,7 +920,7 @@ export class imba_treant_overgrowth extends BaseAbility_Plus {
         this.GetCasterPlus().EmitSound("Hero_Treant.Overgrowth.Cast");
         let cast_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_treant/treant_overgrowth_cast.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetCasterPlus());
         ParticleManager.ReleaseParticleIndex(cast_particle);
-        let overgrowth_primary_enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.GetTalentSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_ANY_ORDER, false);
+        let overgrowth_primary_enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_ANY_ORDER, false);
         enemies_hit = enemies_hit + GameFunc.GetCount(overgrowth_primary_enemies);
         for (const [_, enemy] of GameFunc.iPair(overgrowth_primary_enemies)) {
             enemy.Stop();
@@ -933,7 +933,7 @@ export class imba_treant_overgrowth extends BaseAbility_Plus {
             let overgrowth_eyes_enemies = undefined;
             for (const ent of (Entities.FindAllByName("npc_dota_treant_eyes") as IBaseNpc_Plus[])) {
                 if (ent.IsAlive() && ent.GetOwnerPlus() == this.GetCasterPlus()) {
-                    overgrowth_eyes_enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), ent.GetAbsOrigin(), undefined, this.GetTalentSpecialValueFor("eyes_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_ANY_ORDER, false);
+                    overgrowth_eyes_enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), ent.GetAbsOrigin(), undefined, this.GetSpecialValueFor("eyes_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_ANY_ORDER, false);
                     enemies_hit = enemies_hit + GameFunc.GetCount(overgrowth_eyes_enemies);
                     for (const [_, enemy] of GameFunc.iPair(overgrowth_eyes_enemies)) {
                         if (!enemies_hit_table.includes(enemy.entindex())) {
@@ -978,7 +978,7 @@ export class modifier_imba_treant_overgrowth extends BaseModifier_Plus {
             this.Destroy();
             return;
         }
-        this.damage = this.GetAbilityPlus().GetTalentSpecialValueFor("damage");
+        this.damage = this.GetAbilityPlus().GetSpecialValueFor("damage");
         if (!IsServer()) {
             return;
         }

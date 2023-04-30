@@ -52,7 +52,7 @@ export class imba_luna_lucent_beam extends BaseAbility_Plus {
         ParticleManager.ReleaseParticleIndex(particle);
         let damageTable = {
             victim: this.GetCursorTarget(),
-            damage: this.GetTalentSpecialValueFor("beam_damage"),
+            damage: this.GetSpecialValueFor("beam_damage"),
             damage_type: this.GetAbilityDamageType(),
             damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NONE,
             attacker: this.GetCasterPlus(),
@@ -87,7 +87,7 @@ export class imba_luna_lucent_beam extends BaseAbility_Plus {
                     for (const [_, enemy] of GameFunc.iPair(enemies)) {
                         let damageTable = {
                             victim: enemy,
-                            damage: this.GetTalentSpecialValueFor("beam_damage"),
+                            damage: this.GetSpecialValueFor("beam_damage"),
                             damage_type: this.GetAbilityDamageType(),
                             damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NONE,
                             attacker: this.GetCasterPlus(),
@@ -666,7 +666,7 @@ export class modifier_imba_luna_eclipse extends BaseModifier_Plus {
                 if (lucent_beam_ability) {
                     let damageTable = {
                         victim: enemy,
-                        damage: lucent_beam_ability.GetTalentSpecialValueFor("beam_damage"),
+                        damage: lucent_beam_ability.GetSpecialValueFor("beam_damage"),
                         damage_type: lucent_beam_ability.GetAbilityDamageType(),
                         damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NONE,
                         attacker: this.GetCasterPlus(),
@@ -711,7 +711,7 @@ export class modifier_imba_luna_eclipse extends BaseModifier_Plus {
                         if (lucent_beam_ability) {
                             let damageTable = {
                                 victim: enemy,
-                                damage: lucent_beam_ability.GetTalentSpecialValueFor("beam_damage"),
+                                damage: lucent_beam_ability.GetSpecialValueFor("beam_damage"),
                                 damage_type: lucent_beam_ability.GetAbilityDamageType(),
                                 damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NONE,
                                 attacker: this.GetCasterPlus(),

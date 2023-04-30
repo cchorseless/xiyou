@@ -145,10 +145,13 @@ export class EnemyUnitEntityRoot extends BattleUnitEntityRoot {
         if (roundconfig) {
             let player = this.GetPlayer();
             let npc = this.GetDomain<IBaseNpc_Plus>();
+            let vCenter = player.Hero.GetAbsOrigin();
             if (this.IsEnemyTower()) {
                 for (let i = 0; i < 3; i++) {
                     let item = npc.CreateOneItem("item_imba_aeon_disk");
-                    item.CreateItemOnPositionRandom(npc.GetAbsOrigin(), 300);
+                    let vPosition = (vCenter + RandomVector(300)) as Vector;
+                    CreateItemOnPositionForLaunch(vCenter, item);
+                    item.LaunchLoot(false, 150, 0.5, vPosition, null)
                 }
             }
             else {

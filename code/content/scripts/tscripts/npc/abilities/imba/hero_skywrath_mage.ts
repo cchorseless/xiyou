@@ -540,7 +540,7 @@ export class modifier_imba_ancient_seal_main extends BaseModifier_Plus {
         this.ability = this.GetAbilityPlus();
         this.parent = this.GetParentPlus();
         this.particle_seal = "particles/units/heroes/hero_skywrath_mage/skywrath_mage_ancient_seal_debuff.vpcf";
-        this.mr_reduction_pct = this.ability.GetTalentSpecialValueFor("mr_reduction_pct");
+        this.mr_reduction_pct = this.ability.GetSpecialValueFor("mr_reduction_pct");
         this.particle_seal_fx = ResHelper.CreateParticleEx(this.particle_seal, ParticleAttachment_t.PATTACH_OVERHEAD_FOLLOW, this.parent);
         ParticleManager.SetParticleControlEnt(this.particle_seal_fx, 1, this.parent, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, "attach_hitloc", this.parent.GetAbsOrigin(), true);
         this.AddParticle(this.particle_seal_fx, false, false, -1, false, true);
@@ -639,7 +639,7 @@ export class modifier_imba_ancient_seal_secondary extends BaseModifier_Plus {
         this.ability = this.GetAbilityPlus();
         this.parent = this.GetParentPlus();
         this.particle_seal = "particles/units/heroes/hero_skywrath_mage/skywrath_mage_ancient_seal_debuff.vpcf";
-        this.mr_reduction_pct = this.ability.GetTalentSpecialValueFor("mr_reduction_pct");
+        this.mr_reduction_pct = this.ability.GetSpecialValueFor("mr_reduction_pct");
         this.particle_seal_fx = ResHelper.CreateParticleEx(this.particle_seal, ParticleAttachment_t.PATTACH_OVERHEAD_FOLLOW, this.parent);
         ParticleManager.SetParticleControlEnt(this.particle_seal_fx, 1, this.parent, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, "attach_hitloc", this.parent.GetAbsOrigin(), true);
         this.AddParticle(this.particle_seal_fx, false, false, -1, false, true);

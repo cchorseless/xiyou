@@ -397,10 +397,10 @@ export class imba_jakiro_dual_breath extends BaseAbility_Plus {
             Ability: this,
             Source: this.GetCasterPlus(),
             vSpawnOrigin: this.GetCasterPlus().GetAbsOrigin(),
-            vVelocity: ((cursor_position - caster_position) * Vector(1, 1, 0) as Vector).Normalized() * this.GetTalentSpecialValueFor("speed") as Vector,
+            vVelocity: ((cursor_position - caster_position) * Vector(1, 1, 0) as Vector).Normalized() * this.GetSpecialValueFor("speed") as Vector,
             vAcceleration: undefined,
             fMaxSpeed: undefined,
-            fDistance: this.GetTalentSpecialValueFor("range") + this.GetCasterPlus().GetCastRangeBonus(),
+            fDistance: this.GetSpecialValueFor("range") + this.GetCasterPlus().GetCastRangeBonus(),
             fStartRadius: this.GetSpecialValueFor("start_radius"),
             fEndRadius: this.GetSpecialValueFor("end_radius"),
             fExpireTime: undefined,
@@ -432,10 +432,10 @@ export class imba_jakiro_dual_breath extends BaseAbility_Plus {
                 Ability: this,
                 Source: this.GetCasterPlus(),
                 vSpawnOrigin: caster_position,
-                vVelocity: ((cursor_position - caster_position) * Vector(1, 1, 0) as Vector).Normalized() * this.GetTalentSpecialValueFor("speed_fire") as Vector,
+                vVelocity: ((cursor_position - caster_position) * Vector(1, 1, 0) as Vector).Normalized() * this.GetSpecialValueFor("speed_fire") as Vector,
                 vAcceleration: undefined,
                 fMaxSpeed: undefined,
-                fDistance: this.GetTalentSpecialValueFor("range") + this.GetCasterPlus().GetCastRangeBonus(),
+                fDistance: this.GetSpecialValueFor("range") + this.GetCasterPlus().GetCastRangeBonus(),
                 fStartRadius: this.GetSpecialValueFor("start_radius"),
                 fEndRadius: this.GetSpecialValueFor("end_radius"),
                 fExpireTime: undefined,
@@ -655,7 +655,7 @@ export class imba_jakiro_ice_path extends base_ability_dual_breath {
             }
             let caster = this.GetCasterPlus();
             BaseModifier_Plus.CreateBuffThinker(caster, this, "modifier_imba_ice_path_thinker", {
-                duration: this.GetSpecialValueFor("path_delay") + this.GetTalentSpecialValueFor("path_duration")
+                duration: this.GetSpecialValueFor("path_delay") + this.GetSpecialValueFor("path_duration")
             }, caster.GetAbsOrigin(), caster.GetTeamNumber(), false);
         }
     }

@@ -554,9 +554,9 @@ export class modifier_imba_nether_ward_degen extends BaseModifier_Plus {
             return;
         }
         if (this.GetCasterPlus() && this.GetCasterPlus().GetOwnerPlus() && this.GetCasterPlus().GetOwnerPlus().HasAbility("imba_pugna_nether_ward")) {
-            this.mana_multiplier = this.GetCasterPlus().GetOwnerPlus().findAbliityPlus<imba_pugna_nether_ward>("imba_pugna_nether_ward").GetTalentSpecialValueFor("mana_multiplier");
+            this.mana_multiplier = this.GetCasterPlus().GetOwnerPlus().findAbliityPlus<imba_pugna_nether_ward>("imba_pugna_nether_ward").GetSpecialValueFor("mana_multiplier");
         } else {
-            this.mana_multiplier = this.ability.GetTalentSpecialValueFor("mana_multiplier");
+            this.mana_multiplier = this.ability.GetSpecialValueFor("mana_multiplier");
         }
     }
     IsHidden(): boolean {

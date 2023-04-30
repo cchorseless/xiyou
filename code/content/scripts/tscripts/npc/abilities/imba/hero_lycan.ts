@@ -35,8 +35,8 @@ export class imba_lycan_summon_wolves extends BaseAbility_Plus {
         ParticleManager.ReleaseParticleIndex(particle_cast_fx);
         let wolves_spawn_particle = undefined;
         let wolf: IBaseNpc_Plus = undefined;
-        for (let i = 0; i <= this.GetTalentSpecialValueFor("wolves_count") - 1; i++) {
-            wolf = this.GetCasterPlus().CreateSummon("npc_imba_lycan_wolf" + (this.GetSpecialValueFor("wolf_type") + this.GetCasterPlus().GetTalentValue("special_bonus_imba_lycan_1")), this.GetCasterPlus().GetAbsOrigin() + (this.GetCasterPlus().GetForwardVector() * 200) + (this.GetCasterPlus().GetRightVector() * 120 * (i - ((this.GetTalentSpecialValueFor("wolves_count") - 1) / 2)) as Vector) as Vector, 60, true);
+        for (let i = 0; i <= this.GetSpecialValueFor("wolves_count") - 1; i++) {
+            wolf = this.GetCasterPlus().CreateSummon("npc_imba_lycan_wolf" + (this.GetSpecialValueFor("wolf_type") + this.GetCasterPlus().GetTalentValue("special_bonus_imba_lycan_1")), this.GetCasterPlus().GetAbsOrigin() + (this.GetCasterPlus().GetForwardVector() * 200) + (this.GetCasterPlus().GetRightVector() * 120 * (i - ((this.GetSpecialValueFor("wolves_count") - 1) / 2)) as Vector) as Vector, 60, true);
             wolves_spawn_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_lycan/lycan_summon_wolves_spawn.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, wolf);
             ParticleManager.ReleaseParticleIndex(wolves_spawn_particle);
             if (player_id) {
@@ -97,17 +97,17 @@ export class modifier_imba_lycan_summon_wolves_charges extends BaseModifier_Plus
             return;
         }
         if (this.GetAbilityPlus()) {
-            this.SetStackCount(this.GetAbilityPlus().GetTalentSpecialValueFor("max_charges"));
+            this.SetStackCount(this.GetAbilityPlus().GetSpecialValueFor("max_charges"));
         }
     }
     OnIntervalThink(): void {
-        if (this.GetAbilityPlus() && this.GetStackCount() < this.GetAbilityPlus().GetTalentSpecialValueFor("max_charges")) {
+        if (this.GetAbilityPlus() && this.GetStackCount() < this.GetAbilityPlus().GetSpecialValueFor("max_charges")) {
             this.IncrementStackCount();
         }
     }
     OnStackCountChanged(stackCount: number): void {
         if (IsServer() && this.GetAbilityPlus()) {
-            if (this.GetStackCount() < this.GetAbilityPlus().GetTalentSpecialValueFor("max_charges")) {
+            if (this.GetStackCount() < this.GetAbilityPlus().GetSpecialValueFor("max_charges")) {
                 if (this.GetRemainingTime() <= 0) {
                     this.StartIntervalThink(this.GetSpecialValueFor("charge_cooldown"));
                     this.SetDuration(this.GetSpecialValueFor("charge_cooldown"), true);
@@ -769,7 +769,7 @@ export class modifier_imba_shapeshift extends BaseModifier_Plus {
         this.transform_buff = "modifier_imba_shapeshift_transform";
         this.night_vision_bonus = this.ability.GetSpecialValueFor("night_vision_bonus");
         this.absolute_speed = this.ability.GetSpecialValueFor("absolute_speed");
-        this.crit_chance = this.ability.GetTalentSpecialValueFor("crit_chance");
+        this.crit_chance = this.ability.GetSpecialValueFor("crit_chance");
         this.crit_damage = this.ability.GetSpecialValueFor("crit_damage");
         this.certain_crit_cooldown = this.ability.GetSpecialValueFor("certain_crit_cooldown");
         if (IsServer()) {

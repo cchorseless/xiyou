@@ -478,8 +478,8 @@ export class imba_witch_doctor_maledict extends BaseAbility_Plus {
     }
     OnSpellStart(): void {
         let vPosition = this.GetCursorPosition();
-        let radius = this.GetTalentSpecialValueFor("radius");
-        let duration = this.GetTalentSpecialValueFor("duration");
+        let radius = this.GetSpecialValueFor("radius");
+        let duration = this.GetSpecialValueFor("duration");
         let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), vPosition, undefined, radius, this.GetAbilityTargetTeam(), this.GetAbilityTargetType(), DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, 0, false);
         let aoe_pfx = ResHelper.CreateParticleEx("particles/units/heroes/hero_witchdoctor/witchdoctor_maledict_aoe.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, this.GetCasterPlus());
         ParticleManager.SetParticleControl(aoe_pfx, 0, vPosition);
@@ -496,7 +496,7 @@ export class imba_witch_doctor_maledict extends BaseAbility_Plus {
         }
     }
     GetAOERadius(): number {
-        return this.GetTalentSpecialValueFor("radius");
+        return this.GetSpecialValueFor("radius");
     }
     OnOwnerSpawned(): void {
         if (!IsServer()) {
@@ -559,7 +559,7 @@ export class modifier_imba_maledict extends BaseModifier_Plus {
         this.bonus_damage_pct = hAbility.GetSpecialValueFor("bonus_damage_pct") * 0.01;
         this.tick_time_sec = hAbility.GetSpecialValueFor("tick_time_sec");
         this.tick_time_main = hAbility.GetSpecialValueFor("tick_time_main");
-        this.heal_reduce_pct = hAbility.GetTalentSpecialValueFor("heal_reduce_pct") * (-1);
+        this.heal_reduce_pct = hAbility.GetSpecialValueFor("heal_reduce_pct") * (-1);
         this.counter = 0;
         this.burstParticle = ResHelper.CreateParticleEx("particles/hero/witch_doctor/imba_witchdoctor_maledict.vpcf", ParticleAttachment_t.PATTACH_POINT_FOLLOW, this.GetCasterPlus());
         ParticleManager.SetParticleControlEnt(this.burstParticle, 0, hParent, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", hParent.GetAbsOrigin(), true);
@@ -581,7 +581,7 @@ export class modifier_imba_maledict extends BaseModifier_Plus {
         this.bonus_damage_pct = hAbility.GetSpecialValueFor("bonus_damage_pct") * 0.01;
         this.tick_time_sec = hAbility.GetSpecialValueFor("tick_time_sec");
         this.tick_time_main = hAbility.GetSpecialValueFor("tick_time_main");
-        this.heal_reduce_pct = hAbility.GetTalentSpecialValueFor("heal_reduce_pct") * (-1);
+        this.heal_reduce_pct = hAbility.GetSpecialValueFor("heal_reduce_pct") * (-1);
     }
     BeDestroy(): void {
         if (IsServer()) {

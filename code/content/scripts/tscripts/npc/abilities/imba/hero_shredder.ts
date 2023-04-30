@@ -122,7 +122,7 @@ export class modifier_imba_shredder_whirling_death_debuff extends BaseModifier_P
         }
         this.efficacy = params.efficacy;
         if (!params.stat_loss_pct) {
-            this.primary_stat_loss = this.GetParentPlus().GetPrimaryStatValue() * this.GetAbilityPlus().GetTalentSpecialValueFor("stat_loss_pct") * 0.01 * (-1) * this.efficacy;
+            this.primary_stat_loss = this.GetParentPlus().GetPrimaryStatValue() * this.GetAbilityPlus().GetSpecialValueFor("stat_loss_pct") * 0.01 * (-1) * this.efficacy;
         } else {
             this.primary_stat_loss = this.GetParentPlus().GetPrimaryStatValue() * params.stat_loss_pct * 0.01 * (-1);
         }
@@ -241,9 +241,9 @@ export class imba_shredder_timber_chain extends BaseAbility_Plus {
         this.GetCasterPlus().EmitSound("Hero_Shredder.TimberChain.Cast");
         let timber_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_shredder/shredder_timberchain.vpcf", ParticleAttachment_t.PATTACH_CUSTOMORIGIN, this.GetCasterPlus());
         ParticleManager.SetParticleControlEnt(timber_particle, 0, this.GetCasterPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_attack1", this.GetCasterPlus().GetAbsOrigin(), true);
-        ParticleManager.SetParticleControl(timber_particle, 1, this.GetCasterPlus().GetAbsOrigin() + ((this.GetCursorPosition() - this.GetCasterPlus().GetAbsOrigin() as Vector).Normalized() * (this.GetTalentSpecialValueFor("range") + this.GetCasterPlus().GetCastRangeBonus())) as Vector);
+        ParticleManager.SetParticleControl(timber_particle, 1, this.GetCasterPlus().GetAbsOrigin() + ((this.GetCursorPosition() - this.GetCasterPlus().GetAbsOrigin() as Vector).Normalized() * (this.GetSpecialValueFor("range") + this.GetCasterPlus().GetCastRangeBonus())) as Vector);
         ParticleManager.SetParticleControl(timber_particle, 2, Vector(this.GetSpecialValueFor("speed"), 0, 0));
-        ParticleManager.SetParticleControl(timber_particle, 3, Vector(((this.GetTalentSpecialValueFor("range") + this.GetCasterPlus().GetCastRangeBonus()) / this.GetSpecialValueFor("speed")) * 2, 0, 0));
+        ParticleManager.SetParticleControl(timber_particle, 3, Vector(((this.GetSpecialValueFor("range") + this.GetCasterPlus().GetCastRangeBonus()) / this.GetSpecialValueFor("speed")) * 2, 0, 0));
         if (!this.projectiles) {
             this.projectiles = {}
         }
@@ -258,7 +258,7 @@ export class imba_shredder_timber_chain extends BaseAbility_Plus {
             Ability: this,
             vSpawnOrigin: this.GetCasterPlus().GetAbsOrigin(),
             // bDeleteOnHit: false,
-            fDistance: this.GetTalentSpecialValueFor("range") + this.GetCasterPlus().GetCastRangeBonus(),
+            fDistance: this.GetSpecialValueFor("range") + this.GetCasterPlus().GetCastRangeBonus(),
             vVelocity: (this.GetCursorPosition() - this.GetCasterPlus().GetAbsOrigin() as Vector).Normalized() * this.GetSpecialValueFor("speed") * Vector(1, 1, 0) as Vector,
             fStartRadius: this.GetSpecialValueFor("chain_radius"),
             fEndRadius: this.GetSpecialValueFor("chain_radius"),
@@ -742,7 +742,7 @@ export class modifier_imba_shredder_reactive_armor_stack extends BaseModifier_Pl
         if (!IsServer()) {
             return;
         }
-        this.stack_limit = this.GetAbilityPlus().GetTalentSpecialValueFor("stack_limit");
+        this.stack_limit = this.GetAbilityPlus().GetSpecialValueFor("stack_limit");
         this.min_stacks_particle_1 = 1;
         this.min_stacks_particle_2 = 5;
         this.min_stacks_particle_3 = 9;

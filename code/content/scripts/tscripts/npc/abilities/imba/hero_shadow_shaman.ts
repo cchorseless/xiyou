@@ -38,7 +38,7 @@ export class imba_shadow_shaman_ether_shock extends BaseAbility_Plus {
             enemies_hit++;
             let damageTable: ApplyDamageOptions = {
                 victim: enemy,
-                damage: this.GetTalentSpecialValueFor("damage"),
+                damage: this.GetSpecialValueFor("damage"),
                 damage_type: this.GetAbilityDamageType(),
                 damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NONE,
                 attacker: caster,
@@ -555,9 +555,9 @@ export class modifier_imba_shadow_shaman_shackles_handler extends BaseModifier_P
         }
         if (keys.ability == this.GetAbilityPlus()) {
             if (keys.target.GetTeamNumber() != this.GetCasterPlus().GetTeamNumber()) {
-                this.GetCasterPlus().SetModifierStackCount("modifier_imba_shadow_shaman_shackles_handler", this.GetCasterPlus(), this.GetAbilityPlus().GetTalentSpecialValueFor("channel_time") * (1 - keys.target.GetStatusResistance()) * 100);
+                this.GetCasterPlus().SetModifierStackCount("modifier_imba_shadow_shaman_shackles_handler", this.GetCasterPlus(), this.GetAbilityPlus().GetSpecialValueFor("channel_time") * (1 - keys.target.GetStatusResistance()) * 100);
             } else {
-                this.GetCasterPlus().SetModifierStackCount("modifier_imba_shadow_shaman_shackles_handler", this.GetCasterPlus(), this.GetAbilityPlus().GetTalentSpecialValueFor("channel_time") * this.GetSpecialValueFor("chariot_channel_multiplier") * 100);
+                this.GetCasterPlus().SetModifierStackCount("modifier_imba_shadow_shaman_shackles_handler", this.GetCasterPlus(), this.GetAbilityPlus().GetSpecialValueFor("channel_time") * this.GetSpecialValueFor("chariot_channel_multiplier") * 100);
             }
         }
     }

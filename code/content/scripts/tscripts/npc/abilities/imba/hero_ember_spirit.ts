@@ -355,7 +355,7 @@ export class modifier_imba_fire_remnant_charges extends BaseModifier_Plus {
         if (!IsServer()) {
             return;
         }
-        let max_charges = this.GetAbilityPlus().GetTalentSpecialValueFor("max_charges");
+        let max_charges = this.GetAbilityPlus().GetSpecialValueFor("max_charges");
         if (this.GetCasterPlus().HasScepter()) {
             max_charges = max_charges + this.GetSpecialValueFor("scepter_additional_charges");
         }
@@ -400,14 +400,14 @@ export class modifier_imba_fire_remnant_charges extends BaseModifier_Plus {
             }
             if (!this.learned_charges_scepter && this.GetCasterPlus().HasScepter()) {
                 this.SetStackCount(this.GetStackCount() + this.GetSpecialValueFor("scepter_additional_charges"));
-                this.max_charges = this.GetAbilityPlus().GetTalentSpecialValueFor("max_charges") + this.GetSpecialValueFor("scepter_additional_charges");
+                this.max_charges = this.GetAbilityPlus().GetSpecialValueFor("max_charges") + this.GetSpecialValueFor("scepter_additional_charges");
                 this.learned_charges_scepter = true;
                 if (this.GetStackCount() > 0) {
                     this.GetAbilityPlus().SetActivated(true);
                 }
             } else if (this.learned_charges_scepter && !this.GetCasterPlus().HasScepter()) {
                 this.SetStackCount(this.GetStackCount() - this.GetSpecialValueFor("scepter_additional_charges"));
-                this.max_charges = this.GetAbilityPlus().GetTalentSpecialValueFor("max_charges");
+                this.max_charges = this.GetAbilityPlus().GetSpecialValueFor("max_charges");
                 this.learned_charges_scepter = false;
                 if (this.GetStackCount() <= 0) {
                     this.GetAbilityPlus().SetActivated(false);

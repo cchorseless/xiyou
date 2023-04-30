@@ -103,7 +103,7 @@ export class modifier_imba_ebb_and_flow_thinker extends BaseModifier_Plus {
             let ability = this.GetAbilityPlus();
             this.tsunami_check = this.tsunami_check || 0;
             if (this.tsunami_check == 0) {
-                let tsunami_chance = ability.GetTalentSpecialValueFor("tsunami_chance");
+                let tsunami_chance = ability.GetSpecialValueFor("tsunami_chance");
                 if (tsunami_chance >= RandomInt(1, 100)) {
                     this.tsunami_check = 1;
                 } else {
@@ -246,13 +246,13 @@ export class imba_kunkka_torrent extends BaseAbility_Plus {
             let target = this.GetCursorPosition();
             let vision_duration = 4;
             let first_delay = this.GetSpecialValueFor("launch_delay");
-            let radius = this.GetTalentSpecialValueFor("radius");
+            let radius = this.GetSpecialValueFor("radius");
             let slow_duration = this.GetSpecialValueFor("slow_duration");
             let stun_duration = this.GetSpecialValueFor("stun_duration");
             let damage = this.GetSpecialValueFor("damage");
             let sec_torrent_count = this.GetSpecialValueFor("sec_torrent_count");
             let sec_torrent_stun = this.GetSpecialValueFor("sec_torrent_stun");
-            let sec_torrent_damage = this.GetTalentSpecialValueFor("sec_torrent_damage");
+            let sec_torrent_damage = this.GetSpecialValueFor("sec_torrent_damage");
             let sec_torrent_slow_duration = this.GetSpecialValueFor("sec_torrent_slow_duration");
             let tick_count = this.GetSpecialValueFor("tick_count");
             let torrent_height = this.GetSpecialValueFor("torrent_height");
@@ -429,7 +429,7 @@ export class imba_kunkka_torrent extends BaseAbility_Plus {
     }
     GetAOERadius(): number {
         let caster = this.GetCasterPlus();
-        let radius = this.GetTalentSpecialValueFor("radius");
+        let radius = this.GetSpecialValueFor("radius");
         if (caster.HasModifier("modifier_imba_ebb_and_flow_tide_high") || caster.HasModifier("modifier_imba_ebb_and_flow_tsunami")) {
             radius = radius + this.GetSpecialValueFor("tide_high_radius");
         }
@@ -930,7 +930,7 @@ export class modifier_imba_tidebringer extends BaseModifier_Plus {
                 let target = params.target;
                 if (target != undefined && target.GetTeamNumber() != this.GetParentPlus().GetTeamNumber()) {
                     this.TidebringerEffects(target, ability);
-                    let cleaveDamage = params.damage * (ability.GetTalentSpecialValueFor("cleave_damage") / 100);
+                    let cleaveDamage = params.damage * (ability.GetSpecialValueFor("cleave_damage") / 100);
                     let enemies_to_cleave = AoiHelper.FindUnitsInCone(this.GetParentPlus().GetTeamNumber(), GFuncVector.CalculateDirection(params.target, this.GetParentPlus()), this.GetParentPlus().GetAbsOrigin(), radius_start, radius_end, range, undefined, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, 0, FindOrder.FIND_ANY_ORDER, false);
                     if (parent.HasTalent("special_bonus_imba_kunkka_7")) {
                         let enemies = FindUnitsInRadius(this.GetParentPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, 0, 0, false);
@@ -1253,11 +1253,11 @@ export class modifier_imba_x_marks_the_spot extends BaseModifier_Plus {
                 if (caster.HasTalent("special_bonus_imba_kunkka_3")) {
                     if (caster.GetTeamNumber() != parent.GetTeamNumber()) {
                         parent.AddNewModifier(caster, ability, "modifier_imba_x_marks_the_spot_talent_ms", {
-                            duration: ability.GetTalentSpecialValueFor("duration") * (1 - parent.GetStatusResistance())
+                            duration: ability.GetSpecialValueFor("duration") * (1 - parent.GetStatusResistance())
                         });
                     } else {
                         parent.AddNewModifier(caster, ability, "modifier_imba_x_marks_the_spot_talent_ms", {
-                            duration: ability.GetTalentSpecialValueFor("allied_duration")
+                            duration: ability.GetSpecialValueFor("allied_duration")
                         });
                     }
                 }

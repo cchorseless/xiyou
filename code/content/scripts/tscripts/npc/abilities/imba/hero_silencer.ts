@@ -78,7 +78,7 @@ export class modifier_imba_arcane_curse_debuff extends BaseModifier_Plus {
         this.parent = this.GetParentPlus();
         this.caster = this.GetAbilityPlus().GetCasterPlus();
         this.tick_rate = this.GetSpecialValueFor("tick_rate");
-        this.curse_slow = this.GetAbilityPlus().GetTalentSpecialValueFor("curse_slow");
+        this.curse_slow = this.GetAbilityPlus().GetSpecialValueFor("curse_slow");
         this.curse_damage = this.GetSpecialValueFor("damage_per_second");
         this.penalty_duration = this.GetSpecialValueFor("penalty_duration");
         this.damage_per_stack = this.GetSpecialValueFor("damage_per_stack");
@@ -1124,8 +1124,8 @@ export class modifier_imba_silencer_arcane_supremacy extends BaseModifier_Plus {
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
     CC_OnDeath(params: ModifierInstanceEvent): void {
         if (IsServer()) {
-            this.steal_amount = this.GetAbilityPlus().GetTalentSpecialValueFor("int_steal_amount");
-            this.global_silence_steal = this.GetAbilityPlus().GetTalentSpecialValueFor("global_silence_steal");
+            this.steal_amount = this.GetAbilityPlus().GetSpecialValueFor("int_steal_amount");
+            this.global_silence_steal = this.GetAbilityPlus().GetSpecialValueFor("global_silence_steal");
             if (this.caster.GetUnitName().includes("silencer") && this.caster.IsRealUnit()) {
                 if (params.unit.IsRealUnit() && params.unit != this.caster && params.unit.GetTeam() != this.caster.GetTeam()/** && !params.reincarnate */) {
                     let stealType = undefined;

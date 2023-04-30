@@ -196,7 +196,7 @@ export class imba_nian_crushing_leap extends BaseAbility_Plus {
         if (IsServer()) {
             return 999999;
         } else {
-            return this.GetTalentSpecialValueFor("max_distance");
+            return this.GetSpecialValueFor("max_distance");
         }
     }
     GetCooldown(level: number): number {
@@ -211,12 +211,12 @@ export class imba_nian_crushing_leap extends BaseAbility_Plus {
     OnSpellStart(): void {
         let direction_vector = this.GetCursorPosition() - this.GetCasterPlus().GetAbsOrigin() as Vector;
         this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_nian_crushing_leap_movement", {
-            distance: math.min(direction_vector.Length2D(), this.GetTalentSpecialValueFor("max_distance") + this.GetCasterPlus().GetCastRangeBonus()),
+            distance: math.min(direction_vector.Length2D(), this.GetSpecialValueFor("max_distance") + this.GetCasterPlus().GetCastRangeBonus()),
             direction_x: direction_vector.x,
             direction_y: direction_vector.y,
             direction_z: direction_vector.z,
             duration: this.GetSpecialValueFor("duration"),
-            height: this.GetSpecialValueFor("min_height") + ((this.GetSpecialValueFor("max_height") - this.GetSpecialValueFor("min_height")) * (1 - (math.min(direction_vector.Length2D(), this.GetTalentSpecialValueFor("max_distance") + this.GetCasterPlus().GetCastRangeBonus())) / (this.GetTalentSpecialValueFor("max_distance") + this.GetCasterPlus().GetCastRangeBonus()))),
+            height: this.GetSpecialValueFor("min_height") + ((this.GetSpecialValueFor("max_height") - this.GetSpecialValueFor("min_height")) * (1 - (math.min(direction_vector.Length2D(), this.GetSpecialValueFor("max_distance") + this.GetCasterPlus().GetCastRangeBonus())) / (this.GetSpecialValueFor("max_distance") + this.GetCasterPlus().GetCastRangeBonus()))),
             bGroundStop: true,
             bDecelerate: false,
             bInterruptible: false,

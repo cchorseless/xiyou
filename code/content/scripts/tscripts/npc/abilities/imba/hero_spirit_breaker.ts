@@ -98,7 +98,7 @@ export class modifier_imba_spirit_breaker_charge_of_darkness extends BaseModifie
     }
     BeCreated(params: any): void {
         if (this.GetAbilityPlus()) {
-            this.movement_speed = this.GetAbilityPlus().GetTalentSpecialValueFor("movement_speed");
+            this.movement_speed = this.GetAbilityPlus().GetSpecialValueFor("movement_speed");
             this.stun_duration = this.GetSpecialValueFor("stun_duration");
             this.bash_radius = this.GetSpecialValueFor("bash_radius");
             this.scepter_speed = this.GetSpecialValueFor("scepter_speed");
@@ -729,7 +729,7 @@ export class modifier_imba_spirit_breaker_greater_bash extends BaseModifier_Plus
             return;
         }
         if (this.GetAbilityPlus() && this.GetAbilityPlus().IsTrained() && this.GetAbilityPlus().IsCooldownReady() && keys.attacker == this.GetParentPlus() && !keys.attacker.PassivesDisabled() && !keys.target.IsOther() && !keys.target.IsBuilding() && keys.target.GetTeamNumber() != this.GetParentPlus().GetTeamNumber() && !this.GetParentPlus().IsIllusion()) {
-            if (GFuncRandom.PRD(this.GetAbilityPlus().GetTalentSpecialValueFor("chance_pct"), this)) {
+            if (GFuncRandom.PRD(this.GetAbilityPlus().GetSpecialValueFor("chance_pct"), this)) {
                 this.GetAbilityPlus<imba_spirit_breaker_greater_bash>().Bash(keys.target, keys.attacker);
                 this.GetAbilityPlus().UseResources(false, false, false, true);
             }
@@ -787,14 +787,14 @@ export class imba_spirit_breaker_nether_strike extends BaseAbility_Plus {
     }
     GetCastPoint(): number {
         if (this.GetCasterPlus().HasModifier("modifier_imba_spirit_breaker_nether_strike_planeswalker")) {
-            return super.GetCastPoint() * (100 - this.GetTalentSpecialValueFor("planeswalker_reduction")) * 0.01;
+            return super.GetCastPoint() * (100 - this.GetSpecialValueFor("planeswalker_reduction")) * 0.01;
         } else {
             return super.GetCastPoint();
         }
     }
     // GetManaCost(iLevel: number): number {
     //     if (this.GetCasterPlus().HasModifier("modifier_imba_spirit_breaker_nether_strike_planeswalker")) {
-    //         return super.GetManaCost(iLevel) * (100 - this.GetTalentSpecialValueFor("planeswalker_reduction")) * 0.01;
+    //         return super.GetManaCost(iLevel) * (100 - this.GetSpecialValueFor("planeswalker_reduction")) * 0.01;
     //     } else {
     //         return super.GetManaCost(iLevel);
     //     }

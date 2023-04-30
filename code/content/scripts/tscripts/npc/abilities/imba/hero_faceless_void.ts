@@ -1339,7 +1339,7 @@ export class modifier_imba_faceless_void_time_lock_720 extends BaseModifier_Plus
         let ability = this.GetAbilityPlus();
         let duration = ability.GetSpecialValueFor("duration");
         let duration_creep = ability.GetSpecialValueFor("duration_creep");
-        let bonus_damage = ability.GetTalentSpecialValueFor("bonus_damage");
+        let bonus_damage = ability.GetSpecialValueFor("bonus_damage");
         let moment_cd_increase = ability.GetSpecialValueFor("moment_cd_increase");
         target.EmitSound("Hero_FacelessVoid.TimeLockImpact");
         if (target.IsConsideredHero() || target.IsRoshan()) {

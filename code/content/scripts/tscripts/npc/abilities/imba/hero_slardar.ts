@@ -869,7 +869,7 @@ export class modifier_imba_slardar_bash extends BaseModifier_Plus {
                     duration: this.GetSpecialValueFor("duration") * (1 - keys.target.GetStatusResistance())
                 });
                 this.SetStackCount(0);
-                return this.GetAbilityPlus().GetTalentSpecialValueFor("bonus_damage");
+                return this.GetAbilityPlus().GetSpecialValueFor("bonus_damage");
             }
         }
     }

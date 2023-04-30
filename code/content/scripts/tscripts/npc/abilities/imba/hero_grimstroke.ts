@@ -18,7 +18,7 @@ export class imba_grimstroke_dark_artistry extends BaseAbility_Plus {
         return DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_POINT + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_AUTOCAST;
     }
     GetCastRange(location: Vector, target: CDOTA_BaseNPC | undefined): number {
-        return this.GetTalentSpecialValueFor("range_tooltip") + this.GetCasterPlus().findBuffStack("modifier_imba_grimstroke_dark_artistry_extend", this.GetCasterPlus());
+        return this.GetSpecialValueFor("range_tooltip") + this.GetCasterPlus().findBuffStack("modifier_imba_grimstroke_dark_artistry_extend", this.GetCasterPlus());
     }
     GetCooldown(level: number): number {
         if (this.GetCasterPlus().HasModifier("modifier_imba_grimstroke_dark_artistry_ink_line")) {
@@ -99,7 +99,7 @@ export class imba_grimstroke_dark_artistry extends BaseAbility_Plus {
             Ability: this,
             EffectName: "particles/units/heroes/hero_grimstroke/grimstroke_darkartistry_proj.vpcf",
             vSpawnOrigin: start_location,
-            fDistance: this.GetTalentSpecialValueFor("range_tooltip") + GPropertyCalculate.GetCastRangeBonus(this.GetCasterPlus()) + this.GetCasterPlus().findBuffStack("modifier_imba_grimstroke_dark_artistry_extend", this.GetCasterPlus()),
+            fDistance: this.GetSpecialValueFor("range_tooltip") + GPropertyCalculate.GetCastRangeBonus(this.GetCasterPlus()) + this.GetCasterPlus().findBuffStack("modifier_imba_grimstroke_dark_artistry_extend", this.GetCasterPlus()),
             fStartRadius: this.GetSpecialValueFor("start_radius"),
             fEndRadius: this.GetSpecialValueFor("end_radius"),
             Source: this.GetCasterPlus(),
@@ -319,7 +319,7 @@ export class imba_grimstroke_ink_creature extends BaseAbility_Plus {
             let ink_unit = BaseNpc_Plus.CreateUnitByName("npc_imba_grimstroke_ink_creature", this.GetCasterPlus().GetAbsOrigin() + this.GetCasterPlus().GetForwardVector() * this.GetSpecialValueFor("latched_unit_offset_short") as Vector, this.GetCasterPlus(), false);
             ink_unit.EmitSound("Hero_Grimstroke.InkCreature.Cast");
             ink_unit.AddNewModifier(caster, ability, "modifier_imba_grimstroke_ink_creature_thinker", {
-                destroy_attacks: this.GetTalentSpecialValueFor("destroy_attacks"),
+                destroy_attacks: this.GetSpecialValueFor("destroy_attacks"),
                 hero_attack_multiplier: this.GetSpecialValueFor("hero_attack_multiplier"),
                 target_entindex: _target.entindex()
             });
@@ -804,8 +804,8 @@ export class modifier_imba_grimstroke_spirit_walk_buff extends BaseModifier_Plus
     BeCreated(p_0: any,): void {
         this.buff_duration = this.GetSpecialValueFor("buff_duration");
         this.movespeed_bonus_pct = this.GetSpecialValueFor("movespeed_bonus_pct");
-        this.radius = this.GetAbilityPlus().GetTalentSpecialValueFor("radius");
-        this.max_damage = this.GetAbilityPlus().GetTalentSpecialValueFor("max_damage");
+        this.radius = this.GetAbilityPlus().GetSpecialValueFor("radius");
+        this.max_damage = this.GetAbilityPlus().GetSpecialValueFor("max_damage");
         this.max_stun = this.GetSpecialValueFor("max_stun");
         this.damage_per_tick = this.GetSpecialValueFor("damage_per_tick");
         this.tick_rate = this.GetSpecialValueFor("tick_rate");

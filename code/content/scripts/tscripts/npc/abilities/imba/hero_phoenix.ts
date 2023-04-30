@@ -514,8 +514,8 @@ export class imba_phoenix_fire_spirits extends BaseAbility_Plus {
         caster.StartGesture(GameActivity_t.ACT_DOTA_CAST_ABILITY_2);
         EmitSoundOn("Hero_Phoenix.FireSpirits.Cast", caster);
         caster.TempData().ability_spirits = this;
-        let hpCost = this.GetTalentSpecialValueFor("hp_cost_perc");
-        let numSpirits = this.GetTalentSpecialValueFor("spirit_count");
+        let hpCost = this.GetSpecialValueFor("hp_cost_perc");
+        let numSpirits = this.GetSpecialValueFor("spirit_count");
         let AfterCastHealth = caster.GetHealth() - (caster.GetHealth() * hpCost / 100);
         if (caster.HasModifier("modifier_imba_phoenix_burning_wings_buff")) {
             caster.ApplyHeal((caster.GetHealth() * hpCost / 100), this);

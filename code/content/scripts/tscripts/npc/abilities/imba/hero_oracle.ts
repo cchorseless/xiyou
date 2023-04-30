@@ -159,7 +159,7 @@ export class imba_oracle_fortunes_end extends BaseAbility_Plus {
             ParticleManager.ReleaseParticleIndex(this.damage_particle);
             enemy.Purge(true, false, false, false, false);
             enemy.AddNewModifier(this.GetCasterPlus(), this, modifier_name, {
-                duration: (math.max(this.GetTalentSpecialValueFor("maximum_purge_duration") * math.min(charge_pct, 1), this.GetSpecialValueFor("minimum_purge_duration")) * (1 - enemy.GetStatusResistance()))
+                duration: (math.max(this.GetSpecialValueFor("maximum_purge_duration") * math.min(charge_pct, 1), this.GetSpecialValueFor("minimum_purge_duration")) * (1 - enemy.GetStatusResistance()))
             });
             ApplyDamage({
                 victim: enemy,
@@ -785,7 +785,7 @@ export class imba_oracle_false_promise_alter extends BaseAbility_Plus {
         this.GetCasterPlus().EmitSound("Hero_Oracle.False_Promise_Alter");
         target.Purge(true, false, false, false, false);
         target.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_oracle_false_promise_timer_alter", {
-            duration: this.GetTalentSpecialValueFor("duration")
+            duration: this.GetSpecialValueFor("duration")
         });
         if (this.GetCasterPlus().HasAbility("imba_oracle_false_promise")) {
             this.GetCasterPlus().findAbliityPlus<imba_oracle_false_promise>("imba_oracle_false_promise").StartCooldown(this.GetSpecialValueFor("alter_cooldown") * this.GetCasterPlus().GetCooldownReduction());
@@ -836,7 +836,7 @@ export class imba_oracle_false_promise extends BaseAbility_Plus {
         this.GetCasterPlus().EmitSound("Hero_Oracle.FalsePromise.Cast");
         target.Purge(false, true, false, true, true);
         target.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_oracle_false_promise_timer", {
-            duration: this.GetTalentSpecialValueFor("duration")
+            duration: this.GetSpecialValueFor("duration")
         });
         if (this.GetCasterPlus().HasAbility("imba_oracle_false_promise_alter")) {
             this.GetCasterPlus().findAbliityPlus<imba_oracle_false_promise_alter>("imba_oracle_false_promise_alter").StartCooldown(this.GetSpecialValueFor("alter_cooldown") * this.GetCasterPlus().GetCooldownReduction());

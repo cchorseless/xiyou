@@ -24,7 +24,7 @@ export class imba_outworld_devourer_arcane_orb extends BaseOrbAbility_Plus {
     }
     OnOrbImpact(keys: ModifierAttackEvent) {
         if (!keys.target.IsMagicImmune()) {
-            let damage = this.GetCasterPlus().GetMana() * this.GetTalentSpecialValueFor("mana_pool_damage_pct") * 0.01;
+            let damage = this.GetCasterPlus().GetMana() * this.GetSpecialValueFor("mana_pool_damage_pct") * 0.01;
             if (keys.target.IsIllusion() || keys.target.IsSummoned()) {
                 damage = damage + this.GetSpecialValueFor("universe_bonus_dmg");
             }
@@ -140,7 +140,7 @@ export class modifier_imba_outworld_devourer_astral_imprisonment_prison extends 
         if (!IsServer()) {
             return;
         }
-        this.damage = this.GetAbilityPlus().GetTalentSpecialValueFor("damage");
+        this.damage = this.GetAbilityPlus().GetSpecialValueFor("damage");
         this.radius = this.GetSpecialValueFor("radius");
         this.universal_movespeed = this.GetSpecialValueFor("universal_movespeed");
         if (this.GetParentPlus() != this.GetCasterPlus() && this.GetParentPlus().GetTeamNumber() == this.GetCasterPlus().GetTeamNumber()) {
@@ -305,7 +305,7 @@ export class modifier_imba_outworld_devourer_essence_flux_debuff extends BaseMod
         return "particles/status_fx/status_effect_obsidian_matter_debuff.vpcf";
     }
     BeCreated(p_0: any,): void {
-        this.movement_slow = this.GetAbilityPlus().GetTalentSpecialValueFor("movement_slow") * (-1);
+        this.movement_slow = this.GetAbilityPlus().GetSpecialValueFor("movement_slow") * (-1);
         this.slow_duration = this.GetSpecialValueFor("slow_duration");
         this.equal_atk_speed_diff = this.GetSpecialValueFor("equal_atk_speed_diff") * (-1);
         if (!IsServer()) {
@@ -411,7 +411,7 @@ export class imba_outworld_devourer_sanity_eclipse extends BaseAbility_Plus {
                 if (!enemy.IsIllusion() && (GFuncEntity.Custom_bIsStrongIllusion(enemy))) {
                     ApplyDamage({
                         victim: enemy,
-                        damage: this.GetSpecialValueFor("base_damage") + ((this.GetCasterPlus().GetMaxMana() - enemy.GetMaxMana()) * this.GetTalentSpecialValueFor("damage_multiplier")),
+                        damage: this.GetSpecialValueFor("base_damage") + ((this.GetCasterPlus().GetMaxMana() - enemy.GetMaxMana()) * this.GetSpecialValueFor("damage_multiplier")),
                         damage_type: this.GetAbilityDamageType(),
                         damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_BYPASSES_INVULNERABILITY,
                         attacker: this.GetCasterPlus(),

@@ -361,8 +361,8 @@ export class modifier_imba_dazzle_poison_touch_707 extends BaseModifier_Plus {
         if (!IsServer()) {
             return;
         }
-        this.slow = this.GetAbilityPlus().GetTalentSpecialValueFor("slow");
-        this.damage = this.GetAbilityPlus().GetTalentSpecialValueFor("damage");
+        this.slow = this.GetAbilityPlus().GetSpecialValueFor("slow");
+        this.damage = this.GetAbilityPlus().GetSpecialValueFor("damage");
         this.poison_stack_damage = this.GetSpecialValueFor("poison_stack_damage");
         this.damage_type = this.GetAbilityPlus().GetAbilityDamageType();
         this.SetStackCount((this.slow * (1 - this.GetParentPlus().GetStatusResistance())) * 100);
@@ -372,8 +372,8 @@ export class modifier_imba_dazzle_poison_touch_707 extends BaseModifier_Plus {
         if (!IsServer()) {
             return;
         }
-        this.slow = this.GetAbilityPlus().GetTalentSpecialValueFor("slow");
-        this.damage = math.max(this.damage, this.GetAbilityPlus().GetTalentSpecialValueFor("damage"));
+        this.slow = this.GetAbilityPlus().GetSpecialValueFor("slow");
+        this.damage = math.max(this.damage, this.GetAbilityPlus().GetSpecialValueFor("damage"));
         this.poison_stack_damage = this.GetSpecialValueFor("poison_stack_damage");
         this.damage_type = this.GetAbilityPlus().GetAbilityDamageType();
         this.SetStackCount((this.slow * (1 - this.GetParentPlus().GetStatusResistance())) * 100);

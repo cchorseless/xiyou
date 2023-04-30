@@ -359,7 +359,7 @@ export class modifier_imba_void_spirit_resonant_pulse_ring extends BaseModifier_
         if (!IsServer()) {
             return;
         }
-        this.damage = this.GetAbilityPlus().GetTalentSpecialValueFor("damage");
+        this.damage = this.GetAbilityPlus().GetSpecialValueFor("damage");
         this.radius = this.GetSpecialValueFor("radius");
         this.thickness = 120;
         this.damage_type = this.GetAbilityPlus().GetAbilityDamageType();

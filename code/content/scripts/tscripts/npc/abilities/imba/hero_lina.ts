@@ -117,7 +117,7 @@ export class imba_lina_dragon_slave extends BaseAbility_Plus {
             let primary_damage = this.GetSpecialValueFor("primary_damage");
             let secondary_damage = this.GetSpecialValueFor("secondary_damage");
             let spread_angle = this.GetSpecialValueFor("spread_angle");
-            let secondary_amount = this.GetTalentSpecialValueFor("secondary_amount");
+            let secondary_amount = this.GetSpecialValueFor("secondary_amount");
             let speed = this.GetSpecialValueFor("speed");
             let width_initial = this.GetSpecialValueFor("width_initial");
             let width_end = this.GetSpecialValueFor("width_end");
@@ -322,7 +322,7 @@ export class imba_lina_light_strike_array extends BaseAbility_Plus {
             let radius = this.GetSpecialValueFor("aoe_radius");
             let cast_delay = this.GetSpecialValueFor("cast_delay");
             let stun_duration = this.GetSpecialValueFor("stun_duration");
-            let damage = this.GetTalentSpecialValueFor("damage");
+            let damage = this.GetSpecialValueFor("damage");
             let secondary_delay = this.GetSpecialValueFor("secondary_delay");
             let array_count = this.GetSpecialValueFor("array_count");
             let array_rings_count = this.GetSpecialValueFor("array_rings_count");
@@ -494,7 +494,7 @@ export class modifier_imba_lina_light_strike_array_v2_thinker extends BaseModifi
         if (!IsServer()) {
             return;
         }
-        this.light_strike_array_damage = this.GetAbilityPlus().GetTalentSpecialValueFor("light_strike_array_damage");
+        this.light_strike_array_damage = this.GetAbilityPlus().GetSpecialValueFor("light_strike_array_damage");
         this.damage_type = this.GetAbilityPlus().GetAbilityDamageType();
         EmitSoundOnLocationForAllies(this.GetParentPlus().GetAbsOrigin(), "Ability.PreLightStrikeArray", this.GetCasterPlus());
         let ray_team_particle = ParticleManager.CreateParticleForTeam("particles/units/heroes/hero_lina/lina_spell_light_strike_array_ray_team.vpcf", ParticleAttachment_t.PATTACH_WORLDORIGIN, this.GetCasterPlus(), this.GetCasterPlus().GetTeamNumber());
@@ -718,9 +718,9 @@ export class modifier_imba_fiery_soul_counter extends BaseModifier_Plus {
     public animation_pct: number;
     public particle: any;
     BeCreated(p_0: any,): void {
-        this.bonus_as = this.GetAbilityPlus().GetTalentSpecialValueFor("bonus_as");
+        this.bonus_as = this.GetAbilityPlus().GetSpecialValueFor("bonus_as");
         this.bonus_ms_pct = this.GetSpecialValueFor("bonus_ms_pct") + this.GetCasterPlus().GetTalentValue("special_bonus_imba_lina_9", "value2");
-        this.animation_pct = this.GetAbilityPlus().GetTalentSpecialValueFor("animation_pct");
+        this.animation_pct = this.GetAbilityPlus().GetSpecialValueFor("animation_pct");
         if (IsServer()) {
             let caster = this.GetCasterPlus();
             this.SetStackCount(1);
@@ -736,10 +736,10 @@ export class modifier_imba_fiery_soul_counter extends BaseModifier_Plus {
         let caster = this.GetCasterPlus();
         let ability = this.GetAbilityPlus();
         let stacks = this.GetStackCount();
-        let max_stacks = ability.GetTalentSpecialValueFor("max_stacks");
-        this.bonus_as = this.GetAbilityPlus().GetTalentSpecialValueFor("bonus_as");
+        let max_stacks = ability.GetSpecialValueFor("max_stacks");
+        this.bonus_as = this.GetAbilityPlus().GetSpecialValueFor("bonus_as");
         this.bonus_ms_pct = this.GetSpecialValueFor("bonus_ms_pct") + this.GetCasterPlus().GetTalentValue("special_bonus_imba_lina_9", "value2");
-        this.animation_pct = this.GetAbilityPlus().GetTalentSpecialValueFor("animation_pct");
+        this.animation_pct = this.GetAbilityPlus().GetSpecialValueFor("animation_pct");
         if (IsServer()) {
             if (stacks < max_stacks && !caster.PassivesDisabled()) {
                 this.SetStackCount(stacks + 1);

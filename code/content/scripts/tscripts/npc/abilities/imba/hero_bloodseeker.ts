@@ -357,7 +357,7 @@ export class imba_bloodseeker_blood_bath extends BaseAbility_Plus {
 export class modifier_imba_blood_bath_debuff_silence extends BaseModifier_Plus {
     public cdr: any;
     Init(p_0: any,): void {
-        this.cdr = 1 - this.GetAbilityPlus().GetTalentSpecialValueFor("cooldown_reduction") / 100;
+        this.cdr = 1 - this.GetSpecialValueFor("cooldown_reduction") / 100;
     }
 
     // DeclareFunctions = function () {
@@ -556,7 +556,7 @@ export class modifier_imba_thirst_passive extends BaseModifier_Plus {
     CC_OnTakeDamage(params: ModifierInstanceEvent): void {
         if (IsServer()) {
             if (params.attacker && params.attacker.GetTeam() == this.GetCasterPlus().GetTeam() && params.unit.GetTeam() != this.GetCasterPlus().GetTeam() && params.attacker.IsRealUnit() && params.unit.IsRealUnit()) {
-                let duration = this.GetAbilityPlus().GetTalentSpecialValueFor("atk_buff_duration");
+                let duration = this.GetSpecialValueFor("atk_buff_duration");
                 let attackList = this.GetCasterPlus().FindAllModifiersByName("modifier_imba_thirst_haste") as modifier_imba_thirst_haste[];
                 let confirmTheKill = false;
                 for (const [_, modifier] of GameFunc.iPair(attackList)) {
@@ -892,9 +892,9 @@ export class modifier_imba_rupture_debuff_dot extends BaseModifier_Plus {
         this.ability = this.GetAbilityPlus();
         this.parent = this.GetParentPlus();
         this.movedamage = this.GetParentPlus().GetHealth() * this.ability.GetSpecialValueFor("movement_damage_pct") / 100 / 100;
-        this.attackdamage = this.ability.GetSpecialValueFor("attack_damage");
-        this.castdamage = this.ability.GetSpecialValueFor("cast_damage");
-        this.damagecap = this.ability.GetTalentSpecialValueFor("damage_cap_amount");
+        this.attackdamage = this.GetSpecialValueFor("attack_damage");
+        this.castdamage = this.GetSpecialValueFor("cast_damage");
+        this.damagecap = this.GetSpecialValueFor("damage_cap_amount");
         this.prevLoc = this.parent.GetAbsOrigin();
         this.movedamage_think = this.ability.GetSpecialValueFor("movement_damage_pct") / 100;
         if (IsServer()) {

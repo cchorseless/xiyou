@@ -110,7 +110,7 @@ export class imba_phantom_lancer_spirit_lance extends BaseAbility_Plus {
                 });
                 ApplyDamage({
                     victim: target,
-                    damage: this.GetTalentSpecialValueFor("lance_damage"),
+                    damage: this.GetSpecialValueFor("lance_damage"),
                     damage_type: DAMAGE_TYPES.DAMAGE_TYPE_MAGICAL,
                     damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NONE,
                     attacker: this.GetCasterPlus(),
@@ -497,7 +497,7 @@ export class modifier_imba_phantom_lancer_phantom_edge extends BaseModifier_Plus
         this.StartIntervalThink(0.1);
     }
     OnIntervalThink(): void {
-        if (this.bRushChecking && this.GetParentPlus().GetAggroTarget() == this.target && ((this.target.GetAbsOrigin() - this.GetParentPlus().GetAbsOrigin() as Vector).Length2D() <= this.GetAbilityPlus().GetTalentSpecialValueFor("max_distance") || this.target.HasModifier("modifier_imba_phantom_lancer_sun_catcher_aura")) && ((this.target.GetAbsOrigin() - this.GetParentPlus().GetAbsOrigin() as Vector).Length2D() >= this.GetAbilityPlus().GetTalentSpecialValueFor("min_distance") || this.GetCasterPlus().HasScepter())) {
+        if (this.bRushChecking && this.GetParentPlus().GetAggroTarget() == this.target && ((this.target.GetAbsOrigin() - this.GetParentPlus().GetAbsOrigin() as Vector).Length2D() <= this.GetAbilityPlus().GetSpecialValueFor("max_distance") || this.target.HasModifier("modifier_imba_phantom_lancer_sun_catcher_aura")) && ((this.target.GetAbsOrigin() - this.GetParentPlus().GetAbsOrigin() as Vector).Length2D() >= this.GetAbilityPlus().GetSpecialValueFor("min_distance") || this.GetCasterPlus().HasScepter())) {
             this.GetParentPlus().EmitSound("Hero_PhantomLancer.PhantomEdge");
             this.rush_modifier = this.GetParentPlus().AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_phantom_lancer_phantom_edge_boost", {
                 duration: 5
@@ -505,7 +505,7 @@ export class modifier_imba_phantom_lancer_phantom_edge extends BaseModifier_Plus
             if (this.rush_modifier) {
                 this.rush_modifier.SetStackCount(-this.target.entindex());
             }
-            this.GetAbilityPlus().UseResources(true, false,false, true);
+            this.GetAbilityPlus().UseResources(true, false, false, true);
             this.bRushChecking = false;
         }
     }
@@ -519,14 +519,14 @@ export class modifier_imba_phantom_lancer_phantom_edge extends BaseModifier_Plus
     CC_OnOrder(keys: ModifierAbilityEvent): void {
         if (keys.unit == this.GetParentPlus() && this.GetAbilityPlus() && !this.GetAbilityPlus().GetToggleState() && (this.GetAbilityPlus().IsCooldownReady() || this.GetCasterPlus().HasScepter()) && !this.GetParentPlus().PassivesDisabled() && keys.target) {
             if (keys.order_type == dotaunitorder_t.DOTA_UNIT_ORDER_ATTACK_TARGET) {
-                if (((keys.target.GetAbsOrigin() - this.GetParentPlus().GetAbsOrigin() as Vector).Length2D() <= this.GetAbilityPlus().GetTalentSpecialValueFor("max_distance") || keys.target.HasModifier("modifier_imba_phantom_lancer_sun_catcher_aura")) && ((keys.target.GetAbsOrigin() - this.GetParentPlus().GetAbsOrigin() as Vector).Length2D() >= this.GetAbilityPlus().GetTalentSpecialValueFor("min_distance") || this.GetCasterPlus().HasScepter())) {
+                if (((keys.target.GetAbsOrigin() - this.GetParentPlus().GetAbsOrigin() as Vector).Length2D() <= this.GetAbilityPlus().GetSpecialValueFor("max_distance") || keys.target.HasModifier("modifier_imba_phantom_lancer_sun_catcher_aura")) && ((keys.target.GetAbsOrigin() - this.GetParentPlus().GetAbsOrigin() as Vector).Length2D() >= this.GetAbilityPlus().GetSpecialValueFor("min_distance") || this.GetCasterPlus().HasScepter())) {
                     this.GetParentPlus().EmitSound("Hero_PhantomLancer.PhantomEdge");
                     if (this.GetAbilityPlus().IsCooldownReady()) {
                         this.rush_modifier = this.GetParentPlus().AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_phantom_lancer_phantom_edge_boost", {
                             duration: 5,
                             bAgility: true
                         });
-                        this.GetAbilityPlus().UseResources(true, false,false, true);
+                        this.GetAbilityPlus().UseResources(true, false, false, true);
                     } else {
                         this.rush_modifier = this.GetParentPlus().AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_phantom_lancer_phantom_edge_boost", {
                             duration: 5,
@@ -558,7 +558,7 @@ export class modifier_imba_phantom_lancer_phantom_edge extends BaseModifier_Plus
                 if (this.rush_modifier) {
                     this.rush_modifier.SetStackCount(-keys.target.entindex());
                 }
-                this.GetAbilityPlus().UseResources(true, false,false, true);
+                this.GetAbilityPlus().UseResources(true, false, false, true);
             }
         }
     }
@@ -893,7 +893,7 @@ export class modifier_imba_phantom_lancer_juxtapose extends BaseModifier_Plus {
             } else if (!this.GetParentPlus().IsRealUnit() && GFuncRandom.PRD(this.GetSpecialValueFor("illusion_proc_chance_pct"), this.owner.findBuff<modifier_imba_phantom_lancer_juxtapose>("modifier_imba_phantom_lancer_juxtapose"))) {
                 this.duration = this.GetSpecialValueFor("illusion_from_illusion_duration");
             }
-            if (GameFunc.GetCount((this.owner.TempData().juxtapose_table)) < this.GetAbilityPlus().GetTalentSpecialValueFor("max_illusions") && this.duration > 0 && this.owner.TempData().juxtapose_table) {
+            if (GameFunc.GetCount((this.owner.TempData().juxtapose_table)) < this.GetAbilityPlus().GetSpecialValueFor("max_illusions") && this.duration > 0 && this.owner.TempData().juxtapose_table) {
                 let illusions = this.owner.CreateIllusion(this.GetParentPlus(), {
                     outgoing_damage: this.GetSpecialValueFor("illusion_damage_out_pct"),
                     incoming_damage: this.GetSpecialValueFor("illusion_damage_in_pct"),
@@ -921,10 +921,10 @@ export class modifier_imba_phantom_lancer_juxtapose extends BaseModifier_Plus {
                         FindClearSpaceForUnit(unit, this.confusion_positions[_], true);
                     }
                     this.confusion_positions = undefined;
-                    this.owner.findAbliityPlus<imba_phantom_lancer_juxtapose>("imba_phantom_lancer_juxtapose").UseResources(true, false,false, true);
+                    this.owner.findAbliityPlus<imba_phantom_lancer_juxtapose>("imba_phantom_lancer_juxtapose").UseResources(true, false, false, true);
                 }
             }
-            if (this.duration > 0 && (GameFunc.GetCount((this.owner.TempData().juxtapose_table)) >= this.GetAbilityPlus().GetTalentSpecialValueFor("max_illusions"))) {
+            if (this.duration > 0 && (GameFunc.GetCount((this.owner.TempData().juxtapose_table)) >= this.GetAbilityPlus().GetSpecialValueFor("max_illusions"))) {
                 for (const [_, unit] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_ANY_ORDER, false))) {
                     if (unit.GetPlayerID() == this.GetCasterPlus().GetPlayerID()) {
                         let assault_modifier = unit.AddNewModifier(this.GetParentPlus().GetOwnerPlus(), this.GetAbilityPlus(), "modifier_imba_phantom_lancer_juxtapose_assault", {

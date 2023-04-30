@@ -530,7 +530,7 @@ export class modifier_imba_whirling_axes_ranged extends BaseModifier_Plus {
             this.Destroy();
             return;
         }
-        this.slow = this.GetAbilityPlus().GetTalentSpecialValueFor("movement_speed") * (-1);
+        this.slow = this.GetAbilityPlus().GetSpecialValueFor("movement_speed") * (-1);
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
     CC_GetModifierMoveSpeedBonus_Percentage(): number {
@@ -772,7 +772,7 @@ export class modifier_imba_fervor extends BaseModifier_Plus {
                 if (modifier.last_target == params.target) {
                     modifier.IncrementStackCount();
                 } else {
-                    let loss_pct = 1 - (this.GetAbilityPlus().GetTalentSpecialValueFor("switch_lose_pct") / 100);
+                    let loss_pct = 1 - (this.GetAbilityPlus().GetSpecialValueFor("switch_lose_pct") / 100);
                     modifier.SetStackCount(math.max(math.floor(modifier.GetStackCount() * loss_pct), 1));
                     modifier.last_target = params.target;
                 }
@@ -817,7 +817,7 @@ export class modifier_imba_fervor_stacks extends BaseModifier_Plus {
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
     CC_GetModifierAttackSpeedBonus_Constant(): number {
         if (!this.GetParentPlus().PassivesDisabled()) {
-            return this.GetAbilityPlus().GetTalentSpecialValueFor("bonus_as") * this.GetStackCount();
+            return this.GetAbilityPlus().GetSpecialValueFor("bonus_as") * this.GetStackCount();
         }
         return 0;
     }
@@ -855,7 +855,7 @@ export class imba_troll_warlord_battle_trance extends BaseAbility_Plus {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
             if (!this.GetAutoCastState()) {
-                let duration = this.GetTalentSpecialValueFor("buff_duration");
+                let duration = this.GetSpecialValueFor("buff_duration");
                 let sound = "troll_warlord_troll_battletrance_0" + math.random(1, 6);
                 if ((math.random(1, 100) <= 10)) {
                     sound = "Imba.TrollAK47";
@@ -934,8 +934,8 @@ export class modifier_imba_battle_trance extends BaseModifier_Plus {
     Init(p_0: any,): void {
         let ability = this.GetAbilityPlus();
         let parent = this.GetParentPlus();
-        this.bonus_as = ability.GetTalentSpecialValueFor("bonus_as");
-        this.bonus_bat = math.min(ability.GetTalentSpecialValueFor("bonus_bat"), parent.GetBaseAttackTime());
+        this.bonus_as = ability.GetSpecialValueFor("bonus_as");
+        this.bonus_bat = math.min(ability.GetSpecialValueFor("bonus_bat"), parent.GetBaseAttackTime());
         if (parent.IsRealUnit() && IsServer()) {
             EmitSoundOnClient("Hero_TrollWarlord.BattleTrance.Cast.Team", parent.GetPlayerOwner());
             if (this.sound == "Imba.TrollAK47") {
@@ -995,7 +995,7 @@ export class modifier_imba_battle_trance_720 extends BaseModifier_Plus {
         this.attack_speed = this.ability.GetSpecialValueFor("attack_speed");
         this.movement_speed = this.ability.GetSpecialValueFor("movement_speed");
         this.range = this.ability.GetSpecialValueFor("range");
-        this.bonus_bat = math.min(this.ability.GetTalentSpecialValueFor("bonus_bat"), this.parent.GetBaseAttackTime());
+        this.bonus_bat = math.min(this.ability.GetSpecialValueFor("bonus_bat"), this.parent.GetBaseAttackTime());
         if (!IsServer()) {
             return;
         }

@@ -223,7 +223,7 @@ export class imba_visage_soul_assumption extends BaseAbility_Plus {
         let target_counter = 1;
         let enemy_heroes = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), target.GetAbsOrigin(), undefined, this.GetCastRange(this.GetCasterPlus().GetAbsOrigin(), this.GetCasterPlus()) + this.GetCasterPlus().GetCastRangeBonus(), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_ANY_ORDER, false);
         for (const [_, enemy] of GameFunc.iPair(enemy_heroes)) {
-            if (target_counter >= this.GetTalentSpecialValueFor("targets")) {
+            if (target_counter >= this.GetSpecialValueFor("targets")) {
                 return;
             }
             if (enemy != target) {
@@ -232,10 +232,10 @@ export class imba_visage_soul_assumption extends BaseAbility_Plus {
                 target_counter = target_counter + 1;
             }
         }
-        if (target_counter < this.GetTalentSpecialValueFor("targets")) {
+        if (target_counter < this.GetSpecialValueFor("targets")) {
             let enemy_creeps = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), target.GetAbsOrigin(), undefined, this.GetCastRange(this.GetCasterPlus().GetAbsOrigin(), this.GetCasterPlus()) + this.GetCasterPlus().GetCastRangeBonus(), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_ANY_ORDER, false);
             for (const [_, enemy] of GameFunc.iPair(enemy_creeps)) {
-                if (target_counter >= this.GetTalentSpecialValueFor("targets")) {
+                if (target_counter >= this.GetSpecialValueFor("targets")) {
                     return;
                 }
                 if (enemy != target) {
@@ -251,7 +251,7 @@ export class imba_visage_soul_assumption extends BaseAbility_Plus {
             target.EmitSound("Hero_Visage.SoulAssumption.Target");
             let damageTable = {
                 victim: target,
-                damage: this.GetSpecialValueFor("soul_base_damage") + (this.GetTalentSpecialValueFor("soul_charge_damage") * data.charges),
+                damage: this.GetSpecialValueFor("soul_base_damage") + (this.GetSpecialValueFor("soul_charge_damage") * data.charges),
                 damage_type: this.GetAbilityDamageType(),
                 damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NONE,
                 attacker: this.GetCasterPlus(),
@@ -401,7 +401,7 @@ export class modifier_imba_visage_gravekeepers_cloak extends BaseModifier_Plus {
             ParticleManager.SetParticleControl(this.cloak_particle, layer, Vector(1, 0, 0));
         }
         this.AddParticle(this.cloak_particle, false, false, -1, false, false);
-        this.StartIntervalThink(this.GetAbilityPlus().GetTalentSpecialValueFor("recovery_time"));
+        this.StartIntervalThink(this.GetAbilityPlus().GetSpecialValueFor("recovery_time"));
     }
     OnIntervalThink(): void {
         if (this.GetStackCount() < this.GetSpecialValueFor("max_layers")) {
@@ -426,7 +426,7 @@ export class modifier_imba_visage_gravekeepers_cloak extends BaseModifier_Plus {
             }
         }
         this.StartIntervalThink(-1);
-        this.StartIntervalThink(this.GetAbilityPlus().GetTalentSpecialValueFor("recovery_time"));
+        this.StartIntervalThink(this.GetAbilityPlus().GetSpecialValueFor("recovery_time"));
     }
     /** DeclareFunctions():modifierfunction[] {
         let decFuncs = {
@@ -685,9 +685,9 @@ export class imba_visage_summon_familiars extends BaseAbility_Plus {
             familiar.SetMaxHealth(this.GetSpecialValueFor("familiar_hp"));
             familiar.SetHealth(this.GetSpecialValueFor("familiar_hp"));
             familiar.SetPhysicalArmorBaseValue(this.GetSpecialValueFor("familiar_armor"));
-            familiar.SetBaseMoveSpeed(this.GetTalentSpecialValueFor("familiar_speed"));
-            familiar.SetBaseDamageMin(this.GetTalentSpecialValueFor("familiar_attack_damage"));
-            familiar.SetBaseDamageMax(this.GetTalentSpecialValueFor("familiar_attack_damage"));
+            familiar.SetBaseMoveSpeed(this.GetSpecialValueFor("familiar_speed"));
+            familiar.SetBaseDamageMin(this.GetSpecialValueFor("familiar_attack_damage"));
+            familiar.SetBaseDamageMax(this.GetSpecialValueFor("familiar_attack_damage"));
             this.familiar_table.push(familiar.entindex());
         }
     }
@@ -980,7 +980,7 @@ export class modifier_imba_visage_become_familiar extends BaseModifier_Plus {
         return false;
     }
     BeCreated(p_0: any,): void {
-        this.familiar_speed = this.GetAbilityPlus().GetTalentSpecialValueFor("familiar_speed");
+        this.familiar_speed = this.GetAbilityPlus().GetSpecialValueFor("familiar_speed");
         this.familiar_attack_damage = this.GetSpecialValueFor("familiar_attack_damage");
         this.familiar_attack_rate = this.GetSpecialValueFor("familiar_attack_rate");
         this.familiar_vision_daytime = this.GetSpecialValueFor("familiar_vision_daytime");

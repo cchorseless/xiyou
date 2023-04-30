@@ -859,7 +859,7 @@ export class modifier_imba_pudge_rot extends BaseModifier_Plus {
         }
         this.rot_radius = this.GetSpecialValueFor("rot_radius");
         this.rot_tick = this.GetSpecialValueFor("rot_tick");
-        this.rot_damage = this.GetAbilityPlus().GetTalentSpecialValueFor("rot_damage");
+        this.rot_damage = this.GetAbilityPlus().GetSpecialValueFor("rot_damage");
         this.stack_radius = this.GetSpecialValueFor("stack_radius");
         this.max_radius = this.GetSpecialValueFor("max_radius");
         this.bonus_damage = this.GetSpecialValueFor("bonus_damage");
@@ -883,7 +883,7 @@ export class modifier_imba_pudge_rot extends BaseModifier_Plus {
         }
         this.rot_radius = this.GetSpecialValueFor("rot_radius");
         this.rot_tick = this.GetSpecialValueFor("rot_tick");
-        this.rot_damage = this.GetAbilityPlus().GetTalentSpecialValueFor("rot_damage");
+        this.rot_damage = this.GetAbilityPlus().GetSpecialValueFor("rot_damage");
         this.stack_radius = this.GetSpecialValueFor("stack_radius");
         this.max_radius = this.GetSpecialValueFor("max_radius");
         this.bonus_damage = this.GetSpecialValueFor("bonus_damage");
@@ -962,7 +962,7 @@ export class modifier_imba_pudge_rot_slow extends BaseModifier_Plus {
             this.Destroy();
             return;
         }
-        this.rot_slow = this.GetAbilityPlus().GetTalentSpecialValueFor("rot_slow");
+        this.rot_slow = this.GetAbilityPlus().GetSpecialValueFor("rot_slow");
         return this.rot_slow;
     }
 }
@@ -1201,9 +1201,9 @@ export class modifier_imba_pudge_dismember_handler extends BaseModifier_Plus {
         }
         if (keys.ability == this.GetAbilityPlus()) {
             if (keys.target.IsRealUnit()) {
-                this.GetCasterPlus().SetModifierStackCount("modifier_imba_pudge_dismember_handler", this.GetCasterPlus(), this.GetAbilityPlus().GetTalentSpecialValueFor("hero_duration") * (1 - keys.target.GetStatusResistance()) * 100);
+                this.GetCasterPlus().SetModifierStackCount("modifier_imba_pudge_dismember_handler", this.GetCasterPlus(), this.GetAbilityPlus().GetSpecialValueFor("hero_duration") * (1 - keys.target.GetStatusResistance()) * 100);
             } else {
-                this.GetCasterPlus().SetModifierStackCount("modifier_imba_pudge_dismember_handler", this.GetCasterPlus(), this.GetAbilityPlus().GetTalentSpecialValueFor("creep_duration") * (1 - keys.target.GetStatusResistance()) * 100);
+                this.GetCasterPlus().SetModifierStackCount("modifier_imba_pudge_dismember_handler", this.GetCasterPlus(), this.GetAbilityPlus().GetSpecialValueFor("creep_duration") * (1 - keys.target.GetStatusResistance()) * 100);
             }
         }
     }

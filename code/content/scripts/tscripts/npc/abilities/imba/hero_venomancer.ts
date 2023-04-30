@@ -22,7 +22,7 @@ export class modifier_imba_poison_sting_v2_ward extends BaseModifier_Plus {
         if (!IsServer()) {
             return;
         }
-        this.SetStackCount(this.GetAbilityPlus().GetTalentSpecialValueFor("movement_speed_pct") * (1 - this.GetParentPlus().GetStatusResistance()) * (-1) * 100);
+        this.SetStackCount(this.GetAbilityPlus().GetSpecialValueFor("movement_speed_pct") * (1 - this.GetParentPlus().GetStatusResistance()) * (-1) * 100);
         this.OnIntervalThink();
         this.StartIntervalThink(1);
     }
@@ -302,7 +302,7 @@ export class modifier_imba_toxicity_debuff extends BaseModifier_Plus {
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_RESISTANCE_BONUS)
     CC_GetModifierMagicalResistanceBonus(p_0: ModifierAttackEvent,): number {
         if (this.GetAbilityPlus()) {
-            return (this.GetAbilityPlus().GetTalentSpecialValueFor("magic_amp_pct") * this.GetStackCount()) * (-1);
+            return (this.GetAbilityPlus().GetSpecialValueFor("magic_amp_pct") * this.GetStackCount()) * (-1);
         }
     }
 }
@@ -556,7 +556,7 @@ export class modifier_imba_venomous_gale extends BaseModifier_Plus {
         if (!IsServer()) {
             return;
         }
-        this.movement_slow = this.ability.GetTalentSpecialValueFor("movement_slow");
+        this.movement_slow = this.ability.GetSpecialValueFor("movement_slow");
         this.SetStackCount(this.movement_slow * (1 - this.GetParentPlus().GetStatusResistance()) * (-1) * 100);
         this.slow_recover_instances = 50;
         this.recover_per_instance = (this.movement_slow * (1 - this.GetParentPlus().GetStatusResistance())) / this.slow_recover_instances;
@@ -753,7 +753,7 @@ export class modifier_imba_poison_sting_debuff extends BaseModifier_Plus {
         if (!IsServer()) {
             return;
         }
-        this.SetStackCount(this.GetAbilityPlus().GetTalentSpecialValueFor("movement_speed_pct") * (1 - this.GetParentPlus().GetStatusResistance()) * (-1) * 100);
+        this.SetStackCount(this.GetAbilityPlus().GetSpecialValueFor("movement_speed_pct") * (1 - this.GetParentPlus().GetStatusResistance()) * (-1) * 100);
         this.OnIntervalThink();
         this.StartIntervalThink(1);
     }
@@ -1031,15 +1031,15 @@ export class imba_venomancer_poison_nova extends BaseAbility_Plus {
         return "venomancer_poison_nova";
     }
     GetCastRange(location: Vector, target: CDOTA_BaseNPC | undefined): number {
-        return this.GetTalentSpecialValueFor("radius") - this.GetCasterPlus().GetCastRangeBonus();
+        return this.GetSpecialValueFor("radius") - this.GetCasterPlus().GetCastRangeBonus();
     }
     OnSpellStart(): void {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
             let caster_loc = caster.GetAbsOrigin();
             let index = "";
-            let radius = this.GetTalentSpecialValueFor("radius");
-            let duration = this.GetTalentSpecialValueFor("duration");
+            let radius = this.GetSpecialValueFor("radius");
+            let duration = this.GetSpecialValueFor("duration");
             let main_damage;
             if (caster.HasScepter()) {
                 main_damage = this.GetSpecialValueFor("main_damage_scepter");
@@ -1065,7 +1065,7 @@ export class imba_venomancer_poison_nova extends BaseAbility_Plus {
             ParticleManager.SetParticleControl(nova_caster_pfx, 0, caster.GetAbsOrigin());
             ParticleManager.ReleaseParticleIndex(nova_caster_pfx);
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_poison_nova_ring", {
-                duration: ((this.GetTalentSpecialValueFor("radius") - this.GetSpecialValueFor("start_radius")) / this.GetSpecialValueFor("speed"))
+                duration: ((this.GetSpecialValueFor("radius") - this.GetSpecialValueFor("start_radius")) / this.GetSpecialValueFor("speed"))
             });
         }
     }
@@ -1116,10 +1116,10 @@ export class modifier_imba_poison_nova_ring extends BaseModifier_Plus {
         if (!IsServer()) {
             return;
         }
-        this.radius = this.GetAbilityPlus().GetTalentSpecialValueFor("radius");
+        this.radius = this.GetAbilityPlus().GetSpecialValueFor("radius");
         this.start_radius = this.GetSpecialValueFor("start_radius");
         this.speed = this.GetSpecialValueFor("speed");
-        this.duration = this.GetAbilityPlus().GetTalentSpecialValueFor("duration");
+        this.duration = this.GetAbilityPlus().GetSpecialValueFor("duration");
         this.main_damage = this.GetSpecialValueFor("main_damage");
         this.index = 0;
         this.damage_pct = this.GetSpecialValueFor("damage_pct") / 100;

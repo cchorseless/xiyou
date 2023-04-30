@@ -27,7 +27,7 @@ export class imba_slark_dark_pact extends BaseAbility_Plus {
             duration: this.GetSpecialValueFor("delay"),
             pulse_duration: this.GetSpecialValueFor("pulse_duration"),
             radius: this.GetSpecialValueFor("radius"),
-            total_damage: this.GetTalentSpecialValueFor("total_damage"),
+            total_damage: this.GetSpecialValueFor("total_damage"),
             total_pulses: this.GetSpecialValueFor("total_pulses"),
             pulse_interval: this.GetSpecialValueFor("pulse_interval"),
             premature_stack_activation: this.GetSpecialValueFor("premature_stack_activation"),
@@ -374,7 +374,7 @@ export class modifier_imba_slark_pounce extends BaseModifierMotionBoth_Plus {
         }
         this.pounce_speed = this.GetSpecialValueFor("pounce_speed");
         this.pounce_radius = this.GetSpecialValueFor("pounce_radius");
-        this.leash_duration = this.GetAbilityPlus().GetTalentSpecialValueFor("leash_duration");
+        this.leash_duration = this.GetAbilityPlus().GetSpecialValueFor("leash_duration");
         this.leash_radius = this.GetSpecialValueFor("leash_radius");
         this.duration = this.GetSpecialValueFor("pounce_distance") / this.pounce_speed;
         this.direction = this.GetParentPlus().GetForwardVector();
@@ -581,8 +581,8 @@ export class modifier_imba_slark_pounce_charge_counter extends BaseModifier_Plus
             this.StartIntervalThink(-1);
         } else {
             if (this.GetRemainingTime() <= 0.05) {
-                this.StartIntervalThink(this.GetAbilityPlus().GetTalentSpecialValueFor("charge_restore_time") * this.GetParentPlus().GetCooldownReduction());
-                this.SetDuration(this.GetAbilityPlus().GetTalentSpecialValueFor("charge_restore_time") * this.GetParentPlus().GetCooldownReduction(), true);
+                this.StartIntervalThink(this.GetAbilityPlus().GetSpecialValueFor("charge_restore_time") * this.GetParentPlus().GetCooldownReduction());
+                this.SetDuration(this.GetAbilityPlus().GetSpecialValueFor("charge_restore_time") * this.GetParentPlus().GetCooldownReduction(), true);
             }
             this.GetAbilityPlus().StartCooldown(0.1);
         }
@@ -682,12 +682,12 @@ export class modifier_imba_slark_essence_shift extends BaseModifier_Plus {
             ParticleManager.ReleaseParticleIndex(this.shift_particle);
             this.stack_table.push({
                 apply_game_time: GameRules.GetDOTATime(true, true),
-                duration: this.GetAbilityPlus().GetTalentSpecialValueFor("duration")
+                duration: this.GetAbilityPlus().GetSpecialValueFor("duration")
             });
-            this.SetDuration(this.GetAbilityPlus().GetTalentSpecialValueFor("duration"), true);
+            this.SetDuration(this.GetAbilityPlus().GetSpecialValueFor("duration"), true);
             this.IncrementStackCount();
             keys.target.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_slark_essence_shift_debuff_counter", {
-                duration: this.GetAbilityPlus().GetTalentSpecialValueFor("duration") * (1 - keys.target.GetStatusResistance())
+                duration: this.GetAbilityPlus().GetSpecialValueFor("duration") * (1 - keys.target.GetStatusResistance())
             });
             if (this.GetAbilityPlus().IsCooldownReady()) {
                 this.GetAbilityPlus().StartCooldown(this.GetAbilityPlus().GetCooldown(this.GetAbilityPlus().GetLevel() - 1) * this.GetParentPlus().GetCooldownReduction());
@@ -710,8 +710,9 @@ export class modifier_imba_slark_essence_shift extends BaseModifier_Plus {
 @registerModifier()
 export class modifier_imba_slark_essence_shift_debuff_counter extends BaseModifier_Plus {
     public stat_loss: any;
-    public stack_table: any[];
+    public stack_table: { apply_game_time: number, duration: number }[];
     public bStealAgi: any;
+    public debuffduration: number;
     DestroyOnExpire(): boolean {
         return this.GetParentPlus().GetHealthPercent() > 0;
     }
@@ -728,6 +729,7 @@ export class modifier_imba_slark_essence_shift_debuff_counter extends BaseModifi
         if (!this.stat_loss) {
             this.stat_loss = this.GetSpecialValueFor("stat_loss");
         }
+        this.debuffduration = this.GetSpecialValueFor("duration");
         if (!IsServer()) {
             return;
         }
@@ -736,7 +738,7 @@ export class modifier_imba_slark_essence_shift_debuff_counter extends BaseModifi
         }
         this.stack_table.push({
             apply_game_time: GameRules.GetDOTATime(true, true),
-            duration: this.GetAbilityPlus().GetTalentSpecialValueFor("duration")
+            duration: this.debuffduration
         });
         this.IncrementStackCount();
         this.StartIntervalThink(FrameTime());
@@ -774,9 +776,9 @@ export class modifier_imba_slark_essence_shift_debuff_counter extends BaseModifi
             && !this.GetParentPlus().PassivesDisabled() && (keys.target.IsRealUnit() || keys.target.IsClone()) && !keys.target.IsTempestDouble()) {
             this.stack_table.push({
                 apply_game_time: GameRules.GetDOTATime(true, true),
-                duration: this.GetAbilityPlus().GetTalentSpecialValueFor("duration")
+                duration: this.debuffduration
             });
-            this.SetDuration(this.GetAbilityPlus().GetTalentSpecialValueFor("duration"), true);
+            this.SetDuration(this.debuffduration, true);
             this.IncrementStackCount();
         }
     }
@@ -904,11 +906,11 @@ export class imba_slark_shadow_dance extends BaseAbility_Plus {
         }
         if (!this.GetAutoCastState()) {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_slark_shadow_dance_aura", {
-                duration: this.GetTalentSpecialValueFor("duration")
+                duration: this.GetSpecialValueFor("duration")
             });
         } else {
             BaseModifier_Plus.CreateBuffThinker(this.GetCasterPlus(), this, "modifier_imba_slark_shadow_dance_aura", {
-                duration: this.GetTalentSpecialValueFor("duration"),
+                duration: this.GetSpecialValueFor("duration"),
                 bAutoCast: 1
             }, this.GetCasterPlus().GetAbsOrigin(), this.GetCasterPlus().GetTeamNumber(), false);
         }
@@ -1048,7 +1050,7 @@ export class modifier_imba_slark_shadow_dance_aura extends BaseModifier_Plus {
         this.AddParticle(this.shadow_particle, false, false, -1, false, false);
         if ((!params || params && params.bAutoCast != 1)) {
             ParticleManager.SetParticleControlEnt(this.shadow_particle, 1, this.GetCasterPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", this.GetCasterPlus().GetAbsOrigin(), true);
-            let visual_unit = this.GetCasterPlus().CreateSummon("npc_imba_slark_visual", this.GetCasterPlus().GetAbsOrigin(), this.GetAbilityPlus().GetTalentSpecialValueFor("duration") + 0.5, true);
+            let visual_unit = this.GetCasterPlus().CreateSummon("npc_imba_slark_visual", this.GetCasterPlus().GetAbsOrigin(), this.GetAbilityPlus().GetSpecialValueFor("duration") + 0.5, true);
             visual_unit.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_slark_visual", {});
             let shadow_particle_name = "particles/units/heroes/hero_slark/slark_shadow_dance_dummy.vpcf";
             this.aoe = 0;

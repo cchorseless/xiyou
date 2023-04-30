@@ -647,7 +647,7 @@ export class imba_earthshaker_echo_slam extends BaseAbility_Plus {
                         flExpireTime: GameRules.GetGameTime() + 10.0,
                         bProvidesVision: false,
                         ExtraData: {
-                            damage: this.GetTalentSpecialValueFor("echo_slam_echo_damage")
+                            damage: this.GetSpecialValueFor("echo_slam_echo_damage")
                         }
                     }
                     ProjectileManager.CreateTrackingProjectile(projectile);

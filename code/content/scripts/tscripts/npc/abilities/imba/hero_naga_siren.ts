@@ -107,7 +107,7 @@ export class modifier_imba_naga_siren_mirror_image_perfect_image extends BaseMod
     }
     BeCreated(p_0: any,): void {
         this.perfect_image_bonus_damage_incoming_pct = this.GetSpecialValueFor("perfect_image_bonus_damage_incoming_pct");
-        this.perfect_image_bonus_damage_outgoing_pct = this.GetAbilityPlus().GetTalentSpecialValueFor("perfect_image_bonus_damage_outgoing_pct");
+        this.perfect_image_bonus_damage_outgoing_pct = this.GetAbilityPlus().GetSpecialValueFor("perfect_image_bonus_damage_outgoing_pct");
         this.perfect_image_max_stacks = this.GetSpecialValueFor("perfect_image_max_stacks");
     }
     /** DeclareFunctions():modifierfunction[] {

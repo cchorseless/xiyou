@@ -254,7 +254,7 @@ export class modifier_imba_telekinesis extends BaseModifierMotionBoth_Plus {
             } else if (GameFunc.GetCount(enemies) > 1 && !this.is_ally) {
                 parent.EmitSound("Hero_Rubick.Telekinesis.Target.Stun");
             }
-            ability.UseResources(true,false, false, true);
+            ability.UseResources(true, false, false, true);
             if (this.is_ally) {
                 let current_cooldown = ability.GetCooldownTime();
                 ability.EndCooldown();
@@ -770,7 +770,7 @@ export class modifier_imba_rubick_arcane_supremacy_flip_aura extends BaseModifie
         return true;
     }
     GetAuraRadius(): number {
-        return this.radius || this.GetAbilityPlus().GetTalentSpecialValueFor("radius");
+        return this.radius || this.GetAbilityPlus().GetSpecialValueFor("radius");
     }
     GetAuraSearchFlags(): DOTA_UNIT_TARGET_FLAGS {
         return DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES;

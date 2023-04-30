@@ -190,13 +190,13 @@ export class imba_necrolyte_death_pulse extends BaseAbility_Plus {
         return "necrolyte_death_pulse";
     }
     GetCastRange(location: Vector, target: CDOTA_BaseNPC | undefined): number {
-        return this.GetTalentSpecialValueFor("radius");
+        return this.GetSpecialValueFor("radius");
     }
     OnSpellStart(): void {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
             let caster_loc = caster.GetAbsOrigin();
-            let radius = this.GetTalentSpecialValueFor("radius");
+            let radius = this.GetSpecialValueFor("radius");
             let damage = this.GetSpecialValueFor("damage");
             let base_heal = this.GetSpecialValueFor("base_heal");
             let sec_heal_pct = this.GetSpecialValueFor("sec_heal_pct");
@@ -325,7 +325,7 @@ export class imba_necrolyte_ghost_shroud extends BaseAbility_Plus {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
             let duration = this.GetSpecialValueFor("duration");
-            let radius = this.GetTalentSpecialValueFor("radius");
+            let radius = this.GetSpecialValueFor("radius");
             let healing_amp_pct = this.GetSpecialValueFor("healing_amp_pct");
             let slow_pct = this.GetSpecialValueFor("slow_pct");
             caster.EmitSound("Hero_Necrolyte.SpiritForm.Cast");
@@ -348,7 +348,7 @@ export class imba_necrolyte_ghost_shroud extends BaseAbility_Plus {
         }
     }
     GetCastRange(location: Vector, target: CDOTA_BaseNPC | undefined): number {
-        return this.GetTalentSpecialValueFor("radius") - this.GetCasterPlus().GetCastRangeBonus();
+        return this.GetSpecialValueFor("radius") - this.GetCasterPlus().GetCastRangeBonus();
     }
     IsHiddenWhenStolen(): boolean {
         return false;
@@ -660,11 +660,11 @@ export class modifier_imba_heartstopper_aura_damage extends BaseModifier_Plus {
         if (IsServer()) {
             this.parent = this.GetParentPlus();
             this.radius = this.GetSpecialValueFor("radius");
-            this.damage_pct = this.GetAbilityPlus().GetTalentSpecialValueFor("damage_pct");
-            this.tick_rate = this.GetAbilityPlus().GetTalentSpecialValueFor("tick_rate");
+            this.damage_pct = this.GetAbilityPlus().GetSpecialValueFor("damage_pct");
+            this.tick_rate = this.GetAbilityPlus().GetSpecialValueFor("tick_rate");
             this.scepter_multiplier = this.GetSpecialValueFor("scepter_multiplier");
             if (this.GetParentPlus().CanEntityBeSeenByMyTeam(this.GetCasterPlus())) {
-                this.SetStackCount(this.GetAbilityPlus().GetTalentSpecialValueFor("heal_reduce_pct"));
+                this.SetStackCount(this.GetAbilityPlus().GetSpecialValueFor("heal_reduce_pct"));
             }
             if (!this.timer) {
                 this.StartIntervalThink(this.tick_rate);
@@ -680,7 +680,7 @@ export class modifier_imba_heartstopper_aura_damage extends BaseModifier_Plus {
                 return
             }
             if (this.GetParentPlus().CanEntityBeSeenByMyTeam(caster)) {
-                this.SetStackCount(this.GetAbilityPlus().GetTalentSpecialValueFor("heal_reduce_pct"));
+                this.SetStackCount(this.GetAbilityPlus().GetSpecialValueFor("heal_reduce_pct"));
             } else {
                 this.SetStackCount(0);
             }
@@ -711,7 +711,7 @@ export class modifier_imba_heartstopper_aura_damage extends BaseModifier_Plus {
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_REGEN_AMPLIFY_PERCENTAGE)
     CC_GetModifierHPRegenAmplify_Percentage(): number {
         if (this.GetAbilityPlus() != undefined) {
-            return (this.GetAbilityPlus().GetTalentSpecialValueFor("heal_reduce_pct") * (-1));
+            return (this.GetAbilityPlus().GetSpecialValueFor("heal_reduce_pct") * (-1));
         }
     }
 }
@@ -932,8 +932,8 @@ export class modifier_imba_reapers_scythe_debuff extends BaseModifier_Plus {
             this.Destroy();
             return;
         }
-        this.damage_reduction_pct = this.GetAbilityPlus().GetTalentSpecialValueFor("damage_reduction_pct") * (-1);
-        this.spellpower_reduction = this.GetAbilityPlus().GetTalentSpecialValueFor("spellpower_reduction") * (-1);
+        this.damage_reduction_pct = this.GetAbilityPlus().GetSpecialValueFor("damage_reduction_pct") * (-1);
+        this.spellpower_reduction = this.GetAbilityPlus().GetSpecialValueFor("spellpower_reduction") * (-1);
     }
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({

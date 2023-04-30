@@ -65,7 +65,7 @@ export class imba_weaver_the_swarm extends BaseAbility_Plus {
             target.EmitSound("Hero_Weaver.SwarmAttach");
             let beetle = BaseNpc_Plus.CreateUnitByName("npc_dota_weaver_swarm", this.GetCasterPlus().GetAbsOrigin() + this.GetCasterPlus().GetForwardVector() * 64 as Vector, this.GetCasterPlus(), false);
             beetle.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_weaver_the_swarm_unit", {
-                destroy_attacks: this.GetTalentSpecialValueFor("destroy_attacks"),
+                destroy_attacks: this.GetSpecialValueFor("destroy_attacks"),
                 target_entindex: target.entindex()
             });
             beetle.SetForwardVector((target.GetAbsOrigin() - beetle.GetAbsOrigin() as Vector).Normalized());
@@ -73,7 +73,7 @@ export class imba_weaver_the_swarm extends BaseAbility_Plus {
                 duration: this.GetSpecialValueFor("duration"),
                 damage: this.GetSpecialValueFor("damage"),
                 attack_rate: this.GetSpecialValueFor("attack_rate"),
-                armor_reduction: this.GetTalentSpecialValueFor("armor_reduction"),
+                armor_reduction: this.GetSpecialValueFor("armor_reduction"),
                 damage_type: this.GetAbilityDamageType(),
                 beetle_entindex: beetle.entindex()
             });
@@ -215,8 +215,8 @@ export class modifier_imba_weaver_the_swarm_debuff extends BaseModifier_Plus {
     }
     BeCreated(params: any): void {
         if (this.GetAbilityPlus()) {
-            this.armor_reduction = this.GetAbilityPlus().GetTalentSpecialValueFor("armor_reduction");
-            this.mana_burn_pct = this.GetAbilityPlus().GetTalentSpecialValueFor("mana_burn_pct");
+            this.armor_reduction = this.GetAbilityPlus().GetSpecialValueFor("armor_reduction");
+            this.mana_burn_pct = this.GetAbilityPlus().GetSpecialValueFor("mana_burn_pct");
         } else {
             this.armor_reduction = 1;
             this.mana_burn_pct = 50;
@@ -371,12 +371,12 @@ export class modifier_imba_weaver_shukuchi extends BaseModifier_Plus {
     }
     BeCreated(p_0: any,): void {
         this.fade_time = this.GetSpecialValueFor("fade_time");
-        this.speed = this.GetAbilityPlus().GetTalentSpecialValueFor("speed");
+        this.speed = this.GetAbilityPlus().GetSpecialValueFor("speed");
         if (!IsServer()) {
             return;
         }
         this.damage_type = this.GetAbilityPlus().GetAbilityDamageType();
-        this.damage = this.GetAbilityPlus().GetTalentSpecialValueFor("damage");
+        this.damage = this.GetAbilityPlus().GetSpecialValueFor("damage");
         this.radius = this.GetSpecialValueFor("radius");
         this.hit_targets = []
         this.shukuchi_particle = undefined;
@@ -477,12 +477,12 @@ export class modifier_imba_weaver_geminate_attack extends BaseModifier_Plus {
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK)
     CC_OnAttack(keys: ModifierAttackEvent): void {
         if (keys.attacker == this.GetParentPlus() && this.GetAbilityPlus().IsFullyCastable() && !this.GetParentPlus().IsIllusion() && !this.GetParentPlus().PassivesDisabled() && !keys.no_attack_cooldown && keys.target.GetUnitName() != "npc_dota_observer_wards" && keys.target.GetUnitName() != "npc_dota_sentry_wards") {
-            for (let geminate_attacks = 1; geminate_attacks <= this.GetAbilityPlus().GetTalentSpecialValueFor("tooltip_attack"); geminate_attacks++) {
+            for (let geminate_attacks = 1; geminate_attacks <= this.GetAbilityPlus().GetSpecialValueFor("tooltip_attack"); geminate_attacks++) {
                 this.GetParentPlus().AddNewModifier(keys.target, this.GetAbilityPlus(), "modifier_imba_weaver_geminate_attack_delay", {
                     delay: this.GetSpecialValueFor("delay") * geminate_attacks
                 });
             }
-            this.GetAbilityPlus().UseResources(true, false,true, true);
+            this.GetAbilityPlus().UseResources(true, false, true, true);
         }
     }
 }

@@ -426,8 +426,8 @@ export class modifier_ghost_revenant_ghost_immolation_debuff extends BaseModifie
     }
     BeCreated(p_0: any,): void {
         if (IsServer()) {
-            this.interval_time = this.GetAbilityPlus().GetTalentSpecialValueFor("tick_time");
-            this.hp_loss_pct = this.GetAbilityPlus().GetTalentSpecialValueFor("hp_loss_pct");
+            this.interval_time = this.GetAbilityPlus().GetSpecialValueFor("tick_time");
+            this.hp_loss_pct = this.GetAbilityPlus().GetSpecialValueFor("hp_loss_pct");
             this.StartIntervalThink(this.interval_time);
             this.lose_hp = false;
         }

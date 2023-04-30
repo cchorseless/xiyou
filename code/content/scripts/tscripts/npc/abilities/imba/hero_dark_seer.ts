@@ -60,14 +60,14 @@ export class imba_dark_seer_vacuum extends BaseAbility_Plus {
             if (!enemy.IsCourier()) {
                 if (enemy.IsInvulnerable() && !enemy.HasModifier("modifier_eul_cyclone")) {
                     enemy.AddNewModifier(enemy, this, "modifier_imba_dark_seer_vacuum", {
-                        duration: this.GetTalentSpecialValueFor("duration"),
+                        duration: this.GetSpecialValueFor("duration"),
                         x: this.GetCursorPosition().x,
                         y: this.GetCursorPosition().y,
                         caster_entindex: this.GetCasterPlus().entindex()
                     });
                 } else {
                     enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_dark_seer_vacuum", {
-                        duration: this.GetTalentSpecialValueFor("duration"),
+                        duration: this.GetSpecialValueFor("duration"),
                         x: this.GetCursorPosition().x,
                         y: this.GetCursorPosition().y
                     });
@@ -513,14 +513,14 @@ export class modifier_imba_dark_seer_ion_shell extends BaseModifier_Plus {
     public radius: number;
     public particle: any;
     BeCreated(p_0: any,): void {
-        this.damage_per_second = this.GetAbilityPlus().GetTalentSpecialValueFor("damage_per_second");
+        this.damage_per_second = this.GetAbilityPlus().GetSpecialValueFor("damage_per_second");
         this.proton_explosion_radius = this.GetSpecialValueFor("proton_explosion_radius");
         this.proton_damage_pct = this.GetSpecialValueFor("proton_damage_pct");
         this.interval = 0.1;
         if (!IsServer()) {
             return;
         }
-        this.radius = this.GetAbilityPlus().GetTalentSpecialValueFor("radius");
+        this.radius = this.GetAbilityPlus().GetSpecialValueFor("radius");
         this.GetParentPlus().EmitSound("Hero_Dark_Seer.Ion_Shield_lp");
         this.particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_dark_seer/dark_seer_ion_shell.vpcf", ParticleAttachment_t.PATTACH_POINT_FOLLOW, this.GetParentPlus(), this.GetCasterPlus());
         ParticleManager.SetParticleControlEnt(this.particle, 0, this.GetParentPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", this.GetParentPlus().GetAbsOrigin(), true);
@@ -534,7 +534,7 @@ export class modifier_imba_dark_seer_ion_shell extends BaseModifier_Plus {
             this.Destroy();
             return;
         }
-        this.damage_per_second = this.GetAbilityPlus().GetTalentSpecialValueFor("damage_per_second");
+        this.damage_per_second = this.GetAbilityPlus().GetSpecialValueFor("damage_per_second");
         if (!IsServer()) {
             return;
         }
@@ -557,7 +557,7 @@ export class modifier_imba_dark_seer_ion_shell extends BaseModifier_Plus {
                 ParticleManager.SetParticleControlEnt(particle, 1, enemy, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", enemy.GetAbsOrigin(), true);
                 ParticleManager.ReleaseParticleIndex(particle);
                 if (this.GetAbilityPlus()) {
-                    this.damage_per_second = this.GetAbilityPlus().GetTalentSpecialValueFor("damage_per_second");
+                    this.damage_per_second = this.GetAbilityPlus().GetSpecialValueFor("damage_per_second");
                 }
                 let damageTable = {
                     victim: enemy,
@@ -630,14 +630,14 @@ export class modifier_imba_dark_seer_ion_shell_negation extends BaseModifier_Plu
             this.Destroy();
             return;
         }
-        this.damage_per_second = this.GetAbilityPlus().GetTalentSpecialValueFor("damage_per_second");
+        this.damage_per_second = this.GetAbilityPlus().GetSpecialValueFor("damage_per_second");
         this.proton_explosion_radius = this.GetSpecialValueFor("proton_explosion_radius");
         this.proton_damage_pct = this.GetSpecialValueFor("proton_damage_pct");
         this.interval = 0.1;
         if (!IsServer()) {
             return;
         }
-        this.radius = this.GetAbilityPlus().GetTalentSpecialValueFor("radius");
+        this.radius = this.GetAbilityPlus().GetSpecialValueFor("radius");
         this.damage_table = {
             victim: this.GetParentPlus(),
             damage: this.damage_per_second * this.interval,
@@ -659,7 +659,7 @@ export class modifier_imba_dark_seer_ion_shell_negation extends BaseModifier_Plu
             this.Destroy();
             return;
         }
-        this.damage_per_second = this.GetAbilityPlus().GetTalentSpecialValueFor("damage_per_second");
+        this.damage_per_second = this.GetAbilityPlus().GetSpecialValueFor("damage_per_second");
         if (!IsServer()) {
             return;
         }
@@ -679,7 +679,7 @@ export class modifier_imba_dark_seer_ion_shell_negation extends BaseModifier_Plu
                 ParticleManager.SetParticleControlEnt(particle, 1, this.GetParentPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", this.GetParentPlus().GetAbsOrigin(), true);
                 ParticleManager.ReleaseParticleIndex(particle);
                 if (this.GetAbilityPlus()) {
-                    this.damage_per_second = this.GetAbilityPlus().GetTalentSpecialValueFor("damage_per_second");
+                    this.damage_per_second = this.GetAbilityPlus().GetSpecialValueFor("damage_per_second");
                 }
                 if (unit.GetTeamNumber() == this.GetParentPlus().GetTeamNumber()) {
                     this.damage_table.damage = this.damage_per_second * this.interval;

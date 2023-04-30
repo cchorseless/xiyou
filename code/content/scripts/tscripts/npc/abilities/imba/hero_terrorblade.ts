@@ -75,7 +75,7 @@ export class imba_terrorblade_reflection extends BaseAbility_Plus {
             }
             enemy.EmitSound("Hero_Terrorblade.Reflection");
             let illusions = this.GetCasterPlus().CreateIllusion(enemy, {
-                outgoing_damage: this.GetTalentSpecialValueFor("illusion_outgoing_damage"),
+                outgoing_damage: this.GetSpecialValueFor("illusion_outgoing_damage"),
                 incoming_damage: -100,
                 bounty_base: 0,
                 bounty_growth: undefined,
@@ -419,7 +419,7 @@ export class modifier_imba_terrorblade_metamorphosis extends BaseModifier_Plus {
             this.Destroy();
             return;
         }
-        this.bonus_range = this.GetAbilityPlus().GetTalentSpecialValueFor("bonus_range");
+        this.bonus_range = this.GetAbilityPlus().GetSpecialValueFor("bonus_range");
         this.bonus_damage = this.GetSpecialValueFor("bonus_damage");
         this.speed_loss = this.GetSpecialValueFor("speed_loss") * (-1);
         if (!IsServer()) {

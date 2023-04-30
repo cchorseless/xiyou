@@ -29,7 +29,7 @@ export class imba_gyrocopter_rocket_barrage extends BaseAbility_Plus {
             });
             ApplyDamage({
                 victim: target,
-                damage: this.GetTalentSpecialValueFor("rocket_damage"),
+                damage: this.GetSpecialValueFor("rocket_damage"),
                 damage_type: this.GetAbilityDamageType(),
                 damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NONE,
                 attacker: this.GetCasterPlus(),
@@ -72,7 +72,7 @@ export class modifier_imba_gyrocopter_rocket_barrage extends BaseModifier_Plus {
         if (!IsServer()) {
             return;
         }
-        this.rocket_damage = this.GetAbilityPlus().GetTalentSpecialValueFor("rocket_damage");
+        this.rocket_damage = this.GetAbilityPlus().GetSpecialValueFor("rocket_damage");
         this.damage_type = this.GetAbilityPlus().GetAbilityDamageType();
         this.weapons = {
             "1": "attach_attack1",
@@ -488,7 +488,7 @@ export class modifier_imba_gyrocopter_homing_missile extends BaseModifier_Plus {
         if (!IsServer()) {
             return;
         }
-        this.stun_duration = this.GetAbilityPlus().GetTalentSpecialValueFor("stun_duration");
+        this.stun_duration = this.GetAbilityPlus().GetSpecialValueFor("stun_duration");
         this.damage = this.GetAbilityPlus().GetAbilityDamage();
         this.damage_type = this.GetAbilityPlus().GetAbilityDamageType();
         this.bAutoCast = keys.bAutoCast;
@@ -819,7 +819,7 @@ export class modifier_imba_gyrocopter_flak_cannon extends BaseModifier_Plus {
     }
     BeCreated(p_0: any,): void {
         this.radius = this.GetSpecialValueFor("radius");
-        this.max_attacks = this.GetAbilityPlus().GetTalentSpecialValueFor("max_attacks");
+        this.max_attacks = this.GetAbilityPlus().GetSpecialValueFor("max_attacks");
         this.projectile_speed = this.GetSpecialValueFor("projectile_speed");
         this.fresh_rounds = this.GetSpecialValueFor("fresh_rounds");
         if (!IsServer()) {

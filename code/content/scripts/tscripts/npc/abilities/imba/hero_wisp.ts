@@ -551,7 +551,7 @@ export class imba_wisp_spirits extends BaseAbility_Plus {
             let spirit_max_radius = this.GetSpecialValueFor("max_range");
             let spirit_movement_rate = this.GetSpecialValueFor("spirit_movement_rate");
             let creep_damage = this.GetSpecialValueFor("creep_damage");
-            let explosion_damage = this.GetTalentSpecialValueFor("explosion_damage");
+            let explosion_damage = this.GetSpecialValueFor("explosion_damage");
             let slow = this.GetSpecialValueFor("slow");
             let spirit_duration = this.GetSpecialValueFor("spirit_duration");
             let spirit_summon_interval = this.GetSpecialValueFor("spirit_summon_interval");

@@ -321,7 +321,7 @@ export class imba_centaur_double_edge extends BaseAbility_Plus {
                     }
                 }
             }
-            let self_damage = math.max(damage - (this.GetCasterPlus().GetStrength() * this.GetTalentSpecialValueFor("str_damage_reduction") * 0.01), 0);
+            let self_damage = math.max(damage - (this.GetCasterPlus().GetStrength() * this.GetSpecialValueFor("str_damage_reduction") * 0.01), 0);
             ApplyDamage({
                 victim: caster,
                 attacker: caster,
@@ -434,7 +434,7 @@ export class modifier_imba_return_passive extends BaseModifier_Plus {
             let target = keys.unit;
             let particle_return = "particles/units/heroes/hero_centaur/centaur_return.vpcf";
             let particle_block_msg = "particles/msg_fx/msg_block.vpcf";
-            let damage = ability.GetTalentSpecialValueFor("damage");
+            let damage = ability.GetSpecialValueFor("damage");
             let str_pct_as_damage = ability.GetSpecialValueFor("str_pct_as_damage");
             let damage_block = ability.GetSpecialValueFor("damage_block");
             if (!target.IsRealUnit()) {

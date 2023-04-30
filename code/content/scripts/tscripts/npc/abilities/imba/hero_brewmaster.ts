@@ -35,9 +35,9 @@ export class imba_brewmaster_thunder_clap extends BaseAbility_Plus {
                     this.GetCasterPlus().EmitSound(GFuncRandom.RandomValue(this.responses));
                 }
                 if (enemy.IsRealUnit()) {
-                    slow_duration = this.GetTalentSpecialValueFor("duration");
+                    slow_duration = this.GetSpecialValueFor("duration");
                 } else {
-                    slow_duration = this.GetTalentSpecialValueFor("duration_creeps");
+                    slow_duration = this.GetSpecialValueFor("duration_creeps");
                 }
                 enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_brewmaster_thunder_clap", {
                     duration: slow_duration * (1 - enemy.GetStatusResistance())
@@ -562,7 +562,7 @@ export class modifier_imba_brewmaster_drunken_brawler extends BaseModifier_Plus 
     BeCreated(p_0: any,): void {
         this.dodge_chance = this.GetSpecialValueFor("dodge_chance");
         this.crit_chance = this.GetSpecialValueFor("crit_chance");
-        this.crit_multiplier = this.GetAbilityPlus().GetTalentSpecialValueFor("crit_multiplier");
+        this.crit_multiplier = this.GetAbilityPlus().GetSpecialValueFor("crit_multiplier");
         this.min_movement = this.GetSpecialValueFor("min_movement");
         this.max_movement = this.GetSpecialValueFor("max_movement");
         if (!IsServer()) {

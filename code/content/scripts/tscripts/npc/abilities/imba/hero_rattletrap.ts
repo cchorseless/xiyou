@@ -49,7 +49,7 @@ export class modifier_imba_rattletrap_battery_assault extends BaseModifier_Plus 
     public damage_type: number;
     BeCreated(p_0: any,): void {
         this.radius = this.GetSpecialValueFor("radius");
-        this.interval = this.GetAbilityPlus().GetTalentSpecialValueFor("interval");
+        this.interval = this.GetAbilityPlus().GetSpecialValueFor("interval");
         this.fragmentation_mult = this.GetSpecialValueFor("fragmentation_mult");
         this.fragmentation_damage = this.GetSpecialValueFor("fragmentation_damage");
         this.fragmentation_duration = this.GetSpecialValueFor("fragmentation_duration");
@@ -180,7 +180,7 @@ export class modifier_imba_rattletrap_battery_assault_percussive_maint_aura exte
         return false;
     }
     GetAuraRadius(): number {
-        return this.GetAbilityPlus().GetTalentSpecialValueFor("percussive_maint_radius");
+        return this.GetAbilityPlus().GetSpecialValueFor("percussive_maint_radius");
     }
     GetAuraSearchFlags(): DOTA_UNIT_TARGET_FLAGS {
         return DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE;
@@ -333,7 +333,7 @@ export class modifier_imba_rattletrap_power_cogs extends BaseModifier_Plus {
             this.damage = this.GetSpecialValueFor("damage");
             this.mana_burn = this.GetSpecialValueFor("mana_burn");
             this.attacks_to_destroy = this.GetSpecialValueFor("attacks_to_destroy");
-            this.push_length = this.GetAbilityPlus().GetTalentSpecialValueFor("push_length");
+            this.push_length = this.GetAbilityPlus().GetSpecialValueFor("push_length");
             this.push_duration = this.GetSpecialValueFor("push_duration");
             this.trigger_distance = this.GetSpecialValueFor("trigger_distance");
             this.rotational_speed = this.GetSpecialValueFor("rotational_speed");
@@ -696,12 +696,12 @@ export class imba_rattletrap_rocket_flare extends BaseAbility_Plus {
             let rocket_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_rattletrap/rattletrap_rocket_flare.vpcf", ParticleAttachment_t.PATTACH_CUSTOMORIGIN, undefined);
             ParticleManager.SetParticleControl(rocket_particle, 0, this.GetCasterPlus().GetAttachmentOrigin(this.GetCasterPlus().ScriptLookupAttachment("attach_rocket")));
             ParticleManager.SetParticleControl(rocket_particle, 1, this.GetCursorPosition());
-            ParticleManager.SetParticleControl(rocket_particle, 2, Vector(this.GetTalentSpecialValueFor("speed"), 0, 0));
+            ParticleManager.SetParticleControl(rocket_particle, 2, Vector(this.GetSpecialValueFor("speed"), 0, 0));
             let rocket = {
                 Target: rocket_target,
                 Source: this.GetCasterPlus(),
                 Ability: this,
-                iMoveSpeed: this.GetTalentSpecialValueFor("speed"),
+                iMoveSpeed: this.GetSpecialValueFor("speed"),
                 vSourceLoc: this.GetCasterPlus().GetAttachmentOrigin(this.GetCasterPlus().ScriptLookupAttachment("attach_rocket")),
                 bDrawsOnMinimap: true,
                 bDodgeable: true,
@@ -739,12 +739,12 @@ export class imba_rattletrap_rocket_flare extends BaseAbility_Plus {
                         let rocket_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_rattletrap/rattletrap_rocket_flare.vpcf", ParticleAttachment_t.PATTACH_CUSTOMORIGIN, undefined);
                         ParticleManager.SetParticleControl(rocket_particle, 0, this.GetCasterPlus().GetAttachmentOrigin(this.GetCasterPlus().ScriptLookupAttachment("attach_rocket")));
                         ParticleManager.SetParticleControl(rocket_particle, 1, random_position);
-                        ParticleManager.SetParticleControl(rocket_particle, 2, Vector(this.GetTalentSpecialValueFor("speed"), 0, 0));
+                        ParticleManager.SetParticleControl(rocket_particle, 2, Vector(this.GetSpecialValueFor("speed"), 0, 0));
                         let rocket = {
                             Target: rocket_target,
                             Source: this.GetCasterPlus(),
                             Ability: this,
-                            iMoveSpeed: this.GetTalentSpecialValueFor("speed"),
+                            iMoveSpeed: this.GetSpecialValueFor("speed"),
                             vSourceLoc: this.GetCasterPlus().GetAttachmentOrigin(this.GetCasterPlus().ScriptLookupAttachment("attach_rocket")),
                             bDrawsOnMinimap: true,
                             bDodgeable: true,

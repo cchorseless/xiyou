@@ -68,10 +68,10 @@ export class imba_windrunner_shackleshot extends BaseAbility_Plus {
                 enemy.EmitSound("Hero_Windrunner.ShackleshotBind");
                 let shackleshot_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_windrunner/windrunner_shackleshot_pair.vpcf", ParticleAttachment_t.PATTACH_POINT_FOLLOW, target, this.GetCasterPlus());
                 ParticleManager.SetParticleControlEnt(shackleshot_particle, 1, enemy, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, "attach_hitloc", enemy.GetAbsOrigin(), true);
-                ParticleManager.SetParticleControl(shackleshot_particle, 2, Vector(this.GetTalentSpecialValueFor("stun_duration"), 0, 0));
+                ParticleManager.SetParticleControl(shackleshot_particle, 2, Vector(this.GetSpecialValueFor("stun_duration"), 0, 0));
                 if (target.AddNewModifier) {
                     let target_modifier = target.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_windrunner_shackle_shot", {
-                        duration: this.GetTalentSpecialValueFor("stun_duration") * (1 - target.GetStatusResistance())
+                        duration: this.GetSpecialValueFor("stun_duration") * (1 - target.GetStatusResistance())
                     });
                     if (target_modifier) {
                         target_modifier.AddParticle(shackleshot_particle, false, false, -1, false, false);
@@ -79,7 +79,7 @@ export class imba_windrunner_shackleshot extends BaseAbility_Plus {
                 }
                 if (enemy.AddNewModifier) {
                     enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_windrunner_shackle_shot", {
-                        duration: this.GetTalentSpecialValueFor("stun_duration") * (1 - enemy.GetStatusResistance())
+                        duration: this.GetSpecialValueFor("stun_duration") * (1 - enemy.GetStatusResistance())
                     });
                 }
                 return;
@@ -93,9 +93,9 @@ export class imba_windrunner_shackleshot extends BaseAbility_Plus {
                     if (target.AddNewModifier) {
                         let shackleshot_tree_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_windrunner/windrunner_shackleshot_pair.vpcf", ParticleAttachment_t.PATTACH_POINT_FOLLOW, target, this.GetCasterPlus());
                         ParticleManager.SetParticleControl(shackleshot_tree_particle, 1, tree.GetAbsOrigin());
-                        ParticleManager.SetParticleControl(shackleshot_tree_particle, 2, Vector(this.GetTalentSpecialValueFor("stun_duration"), 0, 0));
+                        ParticleManager.SetParticleControl(shackleshot_tree_particle, 2, Vector(this.GetSpecialValueFor("stun_duration"), 0, 0));
                         let target_modifier = target.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_windrunner_shackle_shot", {
-                            duration: this.GetTalentSpecialValueFor("stun_duration") * (1 - target.GetStatusResistance())
+                            duration: this.GetSpecialValueFor("stun_duration") * (1 - target.GetStatusResistance())
                         });
                         if (target_modifier) {
                             target_modifier.AddParticle(shackleshot_tree_particle, false, false, -1, false, false);
@@ -312,16 +312,16 @@ export class imba_windrunner_powershot extends BaseAbility_Plus {
         let unit = EntIndexToHScript(data.dummy_index) as IBaseNpc_Plus;;
         if (target && data.dummy_index && unit && !unit.IsNull() && unit.TempData().units_hit) {
             EmitSoundOnLocationWithCaster(location, "Hero_Windrunner.PowershotDamage", this.GetCasterPlus());
-            let damage = this.GetTalentSpecialValueFor("powershot_damage") * data.channel_pct * 0.01 * math.pow((100 - this.GetSpecialValueFor("damage_reduction")) * 0.01, unit.TempData().units_hit);
+            let damage = this.GetSpecialValueFor("powershot_damage") * data.channel_pct * 0.01 * math.pow((100 - this.GetSpecialValueFor("damage_reduction")) * 0.01, unit.TempData().units_hit);
             let damage_type = this.GetAbilityDamageType();
             if (data.channel_pct >= this.GetSpecialValueFor("godshot_min") && data.channel_pct <= this.GetSpecialValueFor("godshot_max")) {
-                damage = this.GetTalentSpecialValueFor("powershot_damage") * this.GetSpecialValueFor("godshot_damage_pct") * 0.01;
+                damage = this.GetSpecialValueFor("powershot_damage") * this.GetSpecialValueFor("godshot_damage_pct") * 0.01;
                 damage_type = DAMAGE_TYPES.DAMAGE_TYPE_PURE;
                 target.AddNewModifier(this.GetCasterPlus(), this, "modifier_generic_stunned", {
                     duration: this.GetSpecialValueFor("godshot_stun_duration") * (1 - target.GetStatusResistance())
                 });
             } else if (data.channel_pct >= this.GetSpecialValueFor("scattershot_min") && data.channel_pct <= this.GetSpecialValueFor("scattershot_max")) {
-                damage = this.GetTalentSpecialValueFor("powershot_damage") * this.GetSpecialValueFor("scattershot_damage_pct") * 0.01 * math.pow((100 - this.GetSpecialValueFor("damage_reduction")) * 0.01, unit.TempData().units_hit);
+                damage = this.GetSpecialValueFor("powershot_damage") * this.GetSpecialValueFor("scattershot_damage_pct") * 0.01 * math.pow((100 - this.GetSpecialValueFor("damage_reduction")) * 0.01, unit.TempData().units_hit);
             }
             ApplyDamage({
                 victim: target,

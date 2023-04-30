@@ -13,7 +13,7 @@ function Purification(caster: IBaseNpc_Plus, ability: IBaseAbility_Plus, target:
     let particle_hit = "particles/units/heroes/hero_omniknight/omniknight_purification_hit.vpcf";
     let modifier_purifiception = "modifier_imba_purification_buff";
     let heal_amount = ability.GetSpecialValueFor("heal_amount");
-    let radius = ability.GetTalentSpecialValueFor("radius");
+    let radius = ability.GetSpecialValueFor("radius");
     let purifiception_duration = ability.GetSpecialValueFor("purifiception_duration");
     heal_amount = heal_amount + caster.GetTalentValue("special_bonus_imba_omniknight_8");
     let particle_cast_fx = ResHelper.CreateParticleEx(particle_cast, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, caster);

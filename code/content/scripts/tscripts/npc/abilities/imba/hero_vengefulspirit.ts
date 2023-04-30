@@ -287,7 +287,7 @@ export class imba_vengefulspirit_magic_missile extends BaseAbility_Plus {
         return true;
     }
     GetAOERadius(): number {
-        return this.GetTalentSpecialValueFor("split_radius");
+        return this.GetSpecialValueFor("split_radius");
     }
     GetCooldown(level: number): number {
         return super.GetCooldown(level) - this.GetCasterPlus().GetTalentValue("special_bonus_imba_vengefulspirit_11");
@@ -308,7 +308,7 @@ export class imba_vengefulspirit_magic_missile extends BaseAbility_Plus {
             } else {
                 target = this.GetCursorTarget();
             }
-            let damage = this.GetTalentSpecialValueFor("damage");
+            let damage = this.GetSpecialValueFor("damage");
             let stun_duration = this.GetSpecialValueFor("stun_duration");
             let split_radius = this.GetSpecialValueFor("split_radius");
             let split_reduce_pct = this.GetSpecialValueFor("split_reduce_pct");
@@ -595,7 +595,7 @@ export class modifier_imba_wave_of_terror extends BaseModifier_Plus {
             this.Destroy();
             return;
         }
-        this.armor_reduction = ability.GetTalentSpecialValueFor("armor_reduction") * (-1);
+        this.armor_reduction = ability.GetSpecialValueFor("armor_reduction") * (-1);
         this.atk_reduction_pct = ability.GetSpecialValueFor("atk_reduction_pct") * (-1);
     }
     /** DeclareFunctions():modifierfunction[] {
@@ -1068,7 +1068,7 @@ export class modifier_imba_vengefulspirit_command_negative_aura_effect_723 exten
     public initialized: any;
     public hero_primary_attribute: any;
     BeCreated(p_0: any,): void {
-        this.bonus_attributes = this.GetAbilityPlus().GetTalentSpecialValueFor("bonus_attributes") * (-1);
+        this.bonus_attributes = this.GetAbilityPlus().GetSpecialValueFor("bonus_attributes") * (-1);
         this.bonus_attack_range = this.GetSpecialValueFor("bonus_attack_range") * (-1);
         this.initialized = false;
         this.StartIntervalThink(FrameTime());
@@ -1194,7 +1194,7 @@ export class imba_vengefulspirit_nether_swap extends BaseAbility_Plus {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
             let target = this.GetCursorTarget();
-            let swapback_delay = this.GetTalentSpecialValueFor("swapback_delay");
+            let swapback_delay = this.GetSpecialValueFor("swapback_delay");
             let swapback_duration = this.GetSpecialValueFor("swapback_duration");
             let tree_radius = this.GetSpecialValueFor("tree_radius");
             if (target.GetTeam() != caster.GetTeam()) {

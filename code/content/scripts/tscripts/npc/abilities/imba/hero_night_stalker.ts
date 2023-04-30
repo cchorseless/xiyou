@@ -593,7 +593,7 @@ export class modifier_imba_hunter_in_the_night extends BaseModifier_Plus {
         this.normal_model = "models/heroes/nightstalker/nightstalker.vmdl";
         this.night_model = "models/heroes/nightstalker/nightstalker_night.vmdl";
         this.base_bonus_ms_pct = this.ability.GetSpecialValueFor("base_bonus_ms_pct");
-        this.base_bonus_as = this.ability.GetTalentSpecialValueFor("base_bonus_as");
+        this.base_bonus_as = this.ability.GetSpecialValueFor("base_bonus_as");
         this.ms_increase_per_stack = this.ability.GetSpecialValueFor("ms_increase_per_stack");
         this.as_increase_per_stack = this.ability.GetSpecialValueFor("as_increase_per_stack");
         if (IsServer()) {

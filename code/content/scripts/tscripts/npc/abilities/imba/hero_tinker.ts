@@ -204,13 +204,13 @@ export class imba_tinker_heat_seeking_missile extends BaseAbility_Plus {
             let caster = this.GetCasterPlus();
             let caster_loc = caster.GetAbsOrigin();
             let damage = this.GetSpecialValueFor("damage");
-            let missile_count = this.GetTalentSpecialValueFor("base_count");
+            let missile_count = this.GetSpecialValueFor("base_count");
             let vision_radius = this.GetSpecialValueFor("vision_radius");
-            let vision_duration = this.GetTalentSpecialValueFor("vision_duration");
+            let vision_duration = this.GetSpecialValueFor("vision_duration");
             let speed = this.GetSpecialValueFor("speed");
             let range = this.GetCastRange(caster_loc, caster) + GPropertyCalculate.GetCastRangeBonus(caster);
             let mini_damage = this.GetSpecialValueFor("mini_damage");
-            let mini_vision_duration = this.GetTalentSpecialValueFor("mini_vision_duration");
+            let mini_vision_duration = this.GetSpecialValueFor("mini_vision_duration");
             let mini_speed = this.GetSpecialValueFor("mini_speed");
             let mini_missile_count = this.GetSpecialValueFor("mini_missile_count");
             if ((math.random(1, 100) <= 50) && (caster.GetUnitName().includes("tinker"))) {
@@ -501,7 +501,7 @@ export class imba_tinker_march_of_the_machines extends BaseAbility_Plus {
             let spawn_radius = this.GetSpecialValueFor("spawn_radius");
             let travel_distance = this.GetSpecialValueFor("travel_distance");
             let robots_per_sec = this.GetSpecialValueFor("robots_per_sec");
-            let touch_chance_pct = this.GetTalentSpecialValueFor("touch_chance_pct");
+            let touch_chance_pct = this.GetSpecialValueFor("touch_chance_pct");
             let flame_radius = this.GetSpecialValueFor("flame_radius");
             let flame_duration = this.GetSpecialValueFor("flame_duration");
             let tesla_stun_duration = this.GetSpecialValueFor("tesla_stun_duration");
@@ -1129,11 +1129,11 @@ export class modifier_imba_march_sticky_root extends BaseModifier_Plus {
 export class modifier_imba_march_dismantle extends BaseModifier_Plus {
     public dismantle_dmg_pct: number;
     BeCreated(params: any): void {
-        this.dismantle_dmg_pct = this.GetAbilityPlus().GetTalentSpecialValueFor("dismantle_dmg_pct") * (-1);
+        this.dismantle_dmg_pct = this.GetAbilityPlus().GetSpecialValueFor("dismantle_dmg_pct") * (-1);
         this.SetStackCount(1);
     }
     BeRefresh(params: any): void {
-        this.dismantle_dmg_pct = this.GetAbilityPlus().GetTalentSpecialValueFor("dismantle_dmg_pct") * (-1);
+        this.dismantle_dmg_pct = this.GetAbilityPlus().GetSpecialValueFor("dismantle_dmg_pct") * (-1);
         this.IncrementStackCount();
     }
     IsDebuff(): boolean {

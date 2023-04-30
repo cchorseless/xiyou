@@ -122,7 +122,7 @@ export class modifier_imba_medusa_split_shot extends BaseModifier_Plus {
                     this.GetParentPlus().AttackOnce(enemy, false, apply_modifiers, true, true, true, false, false);
                     this.split_shot_target = false;
                     target_number = target_number + 1;
-                    if (target_number >= this.GetAbilityPlus().GetTalentSpecialValueFor("arrow_count")) {
+                    if (target_number >= this.GetAbilityPlus().GetSpecialValueFor("arrow_count")) {
                         return;
                     }
                 }
@@ -371,7 +371,7 @@ export class imba_medusa_mystic_snake extends BaseAbility_Plus {
                 hTarget.EmitSound("Hero_Medusa.MysticSnake.Target");
                 if (hTarget.GetMana() && hTarget.GetMaxMana() && !hTarget.IsIllusion()) {
                     let target_mana = hTarget.GetMana();
-                    let mana_to_steal = hTarget.GetMaxMana() * (this.GetTalentSpecialValueFor("snake_mana_steal") + (this.GetSpecialValueFor("mana_thief_steal") * ExtraData.bounces)) * 0.01;
+                    let mana_to_steal = hTarget.GetMaxMana() * (this.GetSpecialValueFor("snake_mana_steal") + (this.GetSpecialValueFor("mana_thief_steal") * ExtraData.bounces)) * 0.01;
                     hTarget.ReduceMana(mana_to_steal);
                     if (target_mana < mana_to_steal) {
                         ExtraData.mana_stolen = ExtraData.mana_stolen + math.max(target_mana, 0);
@@ -745,7 +745,7 @@ export class imba_medusa_stone_gaze extends BaseAbility_Plus {
         }
         this.GetCasterPlus().EmitSound("Hero_Medusa.StoneGaze.Cast");
         this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_medusa_stone_gaze", {
-            duration: this.GetTalentSpecialValueFor("duration")
+            duration: this.GetSpecialValueFor("duration")
         });
     }
     GetManaCost(level: number): number {
@@ -770,7 +770,7 @@ export class modifier_imba_medusa_stone_gaze extends BaseModifier_Plus {
     }
     BeCreated(p_0: any,): void {
         this.radius = this.GetSpecialValueFor("radius");
-        this.stone_duration = this.GetAbilityPlus().GetTalentSpecialValueFor("stone_duration");
+        this.stone_duration = this.GetAbilityPlus().GetSpecialValueFor("stone_duration");
         this.face_duration = this.GetSpecialValueFor("face_duration");
         this.vision_cone = this.GetSpecialValueFor("vision_cone");
         this.bonus_physical_damage = this.GetSpecialValueFor("bonus_physical_damage");

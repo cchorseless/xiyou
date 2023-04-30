@@ -1305,7 +1305,7 @@ export class imba_obsidian_destroyer_sanity_eclipse extends BaseAbility_Plus {
         let modifier_prison = "modifier_imba_astral_imprisonment";
         let scepter = caster.HasScepter();
         let radius = ability.GetSpecialValueFor("radius");
-        let int_multiplier = ability.GetTalentSpecialValueFor("int_multiplier");
+        let int_multiplier = ability.GetSpecialValueFor("int_multiplier");
         let max_mana_burn_pct = ability.GetSpecialValueFor("max_mana_burn_pct");
         let int_steal_count = ability.GetSpecialValueFor("int_steal_count");
         let int_steal_duration = ability.GetSpecialValueFor("int_steal_duration");

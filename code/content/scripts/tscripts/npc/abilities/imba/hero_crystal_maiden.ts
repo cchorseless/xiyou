@@ -170,7 +170,7 @@ export class imba_crystal_maiden_crystal_nova extends BaseAbility_Plus {
         let modifier_thinker_enemy = "modifier_imba_crystal_nova_snowfield_enemy_aura";
         let nova_radius = this.GetSpecialValueFor("nova_radius");
         let nova_slow_duration = this.GetSpecialValueFor("nova_slow_duration");
-        let nova_damage = this.GetTalentSpecialValueFor("nova_damage");
+        let nova_damage = this.GetSpecialValueFor("nova_damage");
         let snowfield_duration = this.GetSpecialValueFor("snowfield_duration");
         let snowfield_vision_radius = this.GetSpecialValueFor("snowfield_vision_radius");
         EmitSoundOnLocationWithCaster(target_point, "Hero_Crystal.CrystalNova", caster);
@@ -441,8 +441,8 @@ export class imba_crystal_maiden_frostbite extends BaseAbility_Plus {
             let caster = this.GetCasterPlus();
             let target = this.GetCursorTarget() as IBaseNpc_Plus;
             let position = this.GetCursorPosition();
-            let duration = this.GetTalentSpecialValueFor("duration");
-            let duration_creep = this.GetTalentSpecialValueFor("duration_creep");
+            let duration = this.GetSpecialValueFor("duration");
+            let duration_creep = this.GetSpecialValueFor("duration_creep");
             let duration_stun = this.GetSpecialValueFor("duration_stun");
             let damage_interval = this.GetSpecialValueFor("damage_interval");
             if (target.GetTeamNumber() != caster.GetTeamNumber()) {
@@ -525,10 +525,10 @@ export class modifier_imba_crystal_maiden_frostbite_enemy extends BaseModifier_P
             this.damage_interval = this.ability.GetSpecialValueFor("damage_interval");
             if (this.GetParentPlus().IsConsideredHero() || this.GetParentPlus().IsAncient()) {
                 this.total_damage = this.ability.GetSpecialValueFor("total_damage");
-                this.duration = this.ability.GetTalentSpecialValueFor("duration");
+                this.duration = this.ability.GetSpecialValueFor("duration");
             } else {
                 this.total_damage = this.ability.GetSpecialValueFor("creep_total_damage");
-                this.duration = this.ability.GetTalentSpecialValueFor("duration_creep");
+                this.duration = this.ability.GetSpecialValueFor("duration_creep");
             }
             this.total_ticks = (this.duration / this.damage_interval) + 1;
             this.damage_per_tick = this.total_damage / this.total_ticks;

@@ -262,7 +262,7 @@ export class imba_enchantress_impetus_723 extends BaseOrbAbility_Plus {
                 duration: this.GetSpecialValueFor("huntmastery_grace_period")
             });
             let distance = (this.GetCasterPlus().GetAbsOrigin() - keys.target.GetAbsOrigin() as Vector).Length();
-            let impetus_damage = distance * this.GetTalentSpecialValueFor("distance_damage_pct") / 100;
+            let impetus_damage = distance * this.GetSpecialValueFor("distance_damage_pct") / 100;
             ApplyDamage({
                 victim: keys.target,
                 damage: impetus_damage,

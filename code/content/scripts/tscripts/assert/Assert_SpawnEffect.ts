@@ -42,7 +42,7 @@ export module Assert_SpawnEffect {
             name: "不朽之守护",
             tp_effect: "particles/generic/spawn_effect/aegis/aegis.vpcf",
             tp_sound: Assert_SoundEvent.animation_aegis,
-            end_effect: "particles/items_fx/aegis_respawn_aegis_starfall.vpcf",
+            // end_effect: "particles/items_fx/aegis_respawn_aegis_starfall.vpcf",
         };
         export const Spawn_kunkka: ISpawnEffectInfo = {
             name: "洪流浪潮",
@@ -53,19 +53,19 @@ export module Assert_SpawnEffect {
             name: "龙炎饼干",
             tp_effect: "particles/econ/events/ti10/portal/portal_revealed_cookies.vpcf",
             tp_sound: Assert_SoundEvent.animation_cookie,
-            end_effect: "particles/units/heroes/hero_lion/lion_spell_voodoo.vpcf",
+            // end_effect: "particles/units/heroes/hero_lion/lion_spell_voodoo.vpcf",
         };
         export const Spawn_windrun: ISpawnEffectInfo = {
             name: "清风环佩",
             tp_effect: "particles/econ/items/windrunner/windranger_arcana/windranger_arcana_ambient.vpcf",
             tp_sound: Assert_SoundEvent.animation_windrun,
-            end_effect: "particles/units/heroes/hero_lion/lion_spell_voodoo.vpcf",
+            // end_effect: "particles/units/heroes/hero_lion/lion_spell_voodoo.vpcf",
         };
         export const Spawn_fall_2021: ISpawnEffectInfo = {
             name: "阿哈利姆传送",
             tp_effect: "particles/econ/events/fall_2021/teleport_end_fall_2021_lvl2.vpcf",
             tp_sound: Assert_SoundEvent.xiyou_tp,
-            end_effect: "particles/econ/events/fall_2021/blink_dagger_fall_2021_start_lvl2.vpcf",
+            // end_effect: "particles/econ/events/fall_2021/blink_dagger_fall_2021_start_lvl2.vpcf",
         };
     }
     /**

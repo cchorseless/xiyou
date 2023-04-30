@@ -115,17 +115,17 @@ export class imba_undying_decay extends BaseAbility_Plus {
                     ParticleManager.SetParticleControlEnt(strength_transfer_particle, 1, this.GetCasterPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", this.GetCasterPlus().GetAbsOrigin(), true);
                     ParticleManager.ReleaseParticleIndex(strength_transfer_particle);
                     enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_undying_decay_debuff_counter", {
-                        duration: this.GetTalentSpecialValueFor("decay_duration") * (1 - enemy.GetStatusResistance())
+                        duration: this.GetSpecialValueFor("decay_duration") * (1 - enemy.GetStatusResistance())
                     });
                     debuff_modifier = enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_undying_decay_debuff", {
-                        duration: this.GetTalentSpecialValueFor("decay_duration") * (1 - enemy.GetStatusResistance())
+                        duration: this.GetSpecialValueFor("decay_duration") * (1 - enemy.GetStatusResistance())
                     }) as modifier_imba_undying_decay_debuff;
                     this.debuff_modifier_table.push(debuff_modifier);
                     this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_undying_decay_buff_counter", {
-                        duration: this.GetTalentSpecialValueFor("decay_duration")
+                        duration: this.GetSpecialValueFor("decay_duration")
                     });
                     buff_modifier = this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_undying_decay_buff", {
-                        duration: this.GetTalentSpecialValueFor("decay_duration")
+                        duration: this.GetSpecialValueFor("decay_duration")
                     });
                 }
                 ApplyDamage({
@@ -147,17 +147,17 @@ export class imba_undying_decay extends BaseAbility_Plus {
                 this.GetCasterPlus().EmitSound("Hero_Undying.Decay.Transfer");
                 selected_unit = EntIndexToHScript(tables[RandomInt(1, GameFunc.GetCount(tables))]) as IBaseNpc_Plus;;
                 enemy.AddNewModifier(selected_unit, this, "modifier_imba_undying_decay_debuff_counter", {
-                    duration: this.GetTalentSpecialValueFor("decay_duration") * (1 - enemy.GetStatusResistance())
+                    duration: this.GetSpecialValueFor("decay_duration") * (1 - enemy.GetStatusResistance())
                 });
                 debuff_modifier = enemy.AddNewModifier(selected_unit, this, "modifier_imba_undying_decay_debuff", {
-                    duration: this.GetTalentSpecialValueFor("decay_duration") * (1 - enemy.GetStatusResistance())
+                    duration: this.GetSpecialValueFor("decay_duration") * (1 - enemy.GetStatusResistance())
                 }) as modifier_imba_undying_decay_debuff;
                 this.debuff_modifier_table.push(debuff_modifier);
                 this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_undying_decay_buff_counter", {
-                    duration: this.GetTalentSpecialValueFor("decay_duration")
+                    duration: this.GetSpecialValueFor("decay_duration")
                 });
                 this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_undying_decay_buff", {
-                    duration: this.GetTalentSpecialValueFor("decay_duration")
+                    duration: this.GetSpecialValueFor("decay_duration")
                 });
                 for (const enemy_entindex of tables) {
                     ApplyDamage({
@@ -574,9 +574,9 @@ export class imba_undying_tombstone extends BaseAbility_Plus {
             }
         }
         let tombstone = this.GetCasterPlus().CreateSummon("npc_imba_unit_tombstone" + this.GetLevel(), position, this.GetSpecialValueFor("duration"), true);
-        tombstone.SetBaseMaxHealth(this.GetTalentSpecialValueFor("hits_to_destroy_tooltip") * 4);
-        tombstone.SetMaxHealth(this.GetTalentSpecialValueFor("hits_to_destroy_tooltip") * 4);
-        tombstone.SetHealth(this.GetTalentSpecialValueFor("hits_to_destroy_tooltip") * 4);
+        tombstone.SetBaseMaxHealth(this.GetSpecialValueFor("hits_to_destroy_tooltip") * 4);
+        tombstone.SetMaxHealth(this.GetSpecialValueFor("hits_to_destroy_tooltip") * 4);
+        tombstone.SetHealth(this.GetSpecialValueFor("hits_to_destroy_tooltip") * 4);
         tombstone.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_undying_tombstone_zombie_aura", {
             duration: this.GetSpecialValueFor("duration")
         });

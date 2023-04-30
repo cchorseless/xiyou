@@ -702,7 +702,7 @@ export class imba_tiny_avalanche extends BaseAbility_Plus {
         }
         let hitLoc = vLocation;
         this.AddTimer(0, () => {
-            let damage = this.GetTalentSpecialValueFor("avalanche_damage") / this.GetSpecialValueFor("tick_count");
+            let damage = this.GetSpecialValueFor("avalanche_damage") / this.GetSpecialValueFor("tick_count");
             let enemies_tick = FindUnitsInRadius(caster.GetTeamNumber(), hitLoc, undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, 0, 0, false);
             for (const [_, enemy] of GameFunc.iPair(enemies_tick)) {
                 if (enemy.HasModifier("modifier_tiny_toss_movement")) {
@@ -785,7 +785,7 @@ export class modifier_imba_tiny_avalanche_passive extends BaseModifier_Plus {
                     let direction = (vPos - casterPos as Vector).Normalized();
                     let velocity = distance / delay * direction as Vector;
                     velocity.z = 0;
-                    let ticks = this.GetAbilityPlus().GetTalentSpecialValueFor("passive_ticks");
+                    let ticks = this.GetAbilityPlus().GetSpecialValueFor("passive_ticks");
                     let info = {
                         EffectName: this.GetCasterPlus().TempData().avalance_projectile_effect,
                         Ability: this.GetAbilityPlus(),

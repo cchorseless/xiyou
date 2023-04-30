@@ -169,7 +169,7 @@ export class imba_bane_brain_sap_723 extends BaseAbility_Plus {
             let damage_heal = ApplyDamage({
                 victim: target,
                 attacker: this.GetCasterPlus(),
-                damage: this.GetTalentSpecialValueFor("brain_sap_damage"),
+                damage: this.GetSpecialValueFor("brain_sap_damage"),
                 damage_type: this.GetAbilityDamageType(),
                 ability: this
             });
@@ -1100,9 +1100,9 @@ export class imba_bane_fiends_grip extends BaseAbility_Plus {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
             if (caster.HasTalent("special_bonus_imba_bane_8")) {
-                let vision_radius = this.GetTalentSpecialValueFor("talent_vision_radius");
-                let vision_cone = this.GetTalentSpecialValueFor("talent_vision_cone");
-                let fiends_grip_duration = this.GetTalentSpecialValueFor("fiends_grip_duration");
+                let vision_radius = this.GetSpecialValueFor("talent_vision_radius");
+                let vision_cone = this.GetSpecialValueFor("talent_vision_cone");
+                let fiends_grip_duration = this.GetSpecialValueFor("fiends_grip_duration");
                 let caster_location = caster.GetAbsOrigin();
                 let nearby_enemies = FindUnitsInRadius(caster.GetTeamNumber(), caster_location, undefined, vision_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
                 for (const [_, enemy] of GameFunc.iPair(nearby_enemies)) {
@@ -1339,9 +1339,9 @@ export class modifier_imba_fiends_grip_talent extends BaseModifier_Plus {
             let caster = this.GetCasterPlus();
             let ability = this.GetAbilityPlus<imba_bane_fiends_grip>();
             if (caster.HasTalent("special_bonus_imba_bane_8")) {
-                let vision_radius = ability.GetTalentSpecialValueFor("talent_vision_radius");
-                let vision_cone = ability.GetTalentSpecialValueFor("talent_vision_cone");
-                let fiends_grip_duration = ability.GetTalentSpecialValueFor("fiends_grip_duration");
+                let vision_radius = ability.GetSpecialValueFor("talent_vision_radius");
+                let vision_cone = ability.GetSpecialValueFor("talent_vision_cone");
+                let fiends_grip_duration = ability.GetSpecialValueFor("fiends_grip_duration");
                 let caster_location = caster.GetAbsOrigin();
                 let nearby_enemies = FindUnitsInRadius(caster.GetTeamNumber(), caster_location, undefined, vision_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
                 for (const [_, enemy] of GameFunc.iPair(nearby_enemies)) {

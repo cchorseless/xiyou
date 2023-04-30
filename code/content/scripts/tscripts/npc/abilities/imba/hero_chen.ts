@@ -441,7 +441,7 @@ export class imba_chen_holy_persuasion extends BaseAbility_Plus {
                 }
                 persuaded_creeps_modifiers = this.GetCasterPlus().FindAllModifiersByName("modifier_imba_chen_holy_persuasion_tracker") as modifier_imba_chen_holy_persuasion_tracker[];
                 persuaded_creeps_count = GameFunc.GetCount(persuaded_creeps_modifiers);
-                if (persuaded_creeps_count > this.GetTalentSpecialValueFor("max_units") && persuaded_creeps_modifiers[0]) {
+                if (persuaded_creeps_count > this.GetSpecialValueFor("max_units") && persuaded_creeps_modifiers[0]) {
                     persuaded_creeps_modifiers[0].creep.ForceKill(false);
                     persuaded_creeps_modifiers[0].Destroy();
                 }
@@ -475,7 +475,7 @@ export class imba_chen_holy_persuasion extends BaseAbility_Plus {
                 }
                 immortalized_creeps_modifiers = this.GetCasterPlus().FindAllModifiersByName("modifier_imba_chen_holy_persuasion_immortalized_tracker") as modifier_imba_chen_holy_persuasion_tracker[];
                 immortalized_creeps_count = GameFunc.GetCount(immortalized_creeps_modifiers);
-                if (immortalized_creeps_count > this.GetTalentSpecialValueFor("immortalize_max_units") && immortalized_creeps_modifiers[0]) {
+                if (immortalized_creeps_count > this.GetSpecialValueFor("immortalize_max_units") && immortalized_creeps_modifiers[0]) {
                     immortalized_creeps_modifiers[0].creep.ForceKill(false);
                     immortalized_creeps_modifiers[0].Destroy();
                 }
@@ -970,13 +970,13 @@ export class imba_chen_hand_of_god extends BaseAbility_Plus {
                         duration: this.GetCasterPlus().findAbliityPlus<imba_chen_divine_favor>("imba_chen_divine_favor").GetSpecialValueFor("duration")
                     });
                 }
-                let overheal_amount = this.GetTalentSpecialValueFor("heal_amount") - (ally.GetMaxHealth() - ally.GetHealth());
+                let overheal_amount = this.GetSpecialValueFor("heal_amount") - (ally.GetMaxHealth() - ally.GetHealth());
                 if (overheal_amount > 0) {
                     ally.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_chen_hand_of_god_overheal", {
                         overheal_amount: overheal_amount
                     });
                 }
-                ally.ApplyHeal(this.GetTalentSpecialValueFor("heal_amount"), this);
+                ally.ApplyHeal(this.GetSpecialValueFor("heal_amount"), this);
             }
         }
     }

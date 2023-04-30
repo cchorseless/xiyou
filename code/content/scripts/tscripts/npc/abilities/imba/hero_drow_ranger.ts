@@ -463,7 +463,7 @@ export class modifier_imba_drow_ranger_frost_arrows_723_bonus_damage extends Bas
         if (!IsServer()) {
             return;
         }
-        this.damage = this.GetAbilityPlus().GetTalentSpecialValueFor("damage");
+        this.damage = this.GetAbilityPlus().GetSpecialValueFor("damage");
     }
     /** DeclareFunctions():modifierfunction[] {
     return Object.values({
@@ -1132,7 +1132,7 @@ export class modifier_imba_drow_ranger_multishot extends BaseModifier_Plus {
     public first_salvo: any;
     BeCreated(p_0: any,): void {
         this.arrow_count = this.GetSpecialValueFor("arrow_count");
-        this.arrow_damage_pct = this.GetAbilityPlus().GetTalentSpecialValueFor("arrow_damage_pct");
+        this.arrow_damage_pct = this.GetAbilityPlus().GetSpecialValueFor("arrow_damage_pct");
         this.arrow_slow_duration = this.GetSpecialValueFor("arrow_slow_duration");
         this.arrow_width = this.GetSpecialValueFor("arrow_width");
         this.arrow_speed = this.GetSpecialValueFor("arrow_speed");
@@ -1654,7 +1654,7 @@ export class modifier_imba_drow_ranger_marksmanship_723 extends BaseModifier_Plu
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_RECORD)
     CC_OnAttackRecord(keys: ModifierAttackEvent): void {
         if (keys.attacker == this.GetParentPlus()) {
-            if (!this.GetParentPlus().PassivesDisabled() && !this.GetParentPlus().IsIllusion() && this.start_particle && !keys.target.IsOther() && !keys.target.IsBuilding() && keys.target.GetTeamNumber() != keys.attacker.GetTeamNumber() && GFuncRandom.PRD(this.GetAbilityPlus().GetTalentSpecialValueFor("chance"), this)) {
+            if (!this.GetParentPlus().PassivesDisabled() && !this.GetParentPlus().IsIllusion() && this.start_particle && !keys.target.IsOther() && !keys.target.IsBuilding() && keys.target.GetTeamNumber() != keys.attacker.GetTeamNumber() && GFuncRandom.PRD(this.GetAbilityPlus().GetSpecialValueFor("chance"), this)) {
                 this.procs[keys.record] = true;
                 this.GetParentPlus().AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_drow_ranger_marksmanship_723_proc_damage", {});
             } else {
@@ -1950,7 +1950,7 @@ export class modifier_imba_drow_ranger_trueshot_720 extends BaseModifier_Plus {
         this.StartIntervalThink(0.1);
     }
     OnIntervalThink(): void {
-        this.SetStackCount(this.GetCasterPlus().GetAgility() * (this.GetAbilityPlus().GetTalentSpecialValueFor("trueshot_ranged_attack_speed") / 100));
+        this.SetStackCount(this.GetCasterPlus().GetAgility() * (this.GetAbilityPlus().GetSpecialValueFor("trueshot_ranged_attack_speed") / 100));
         if (this.activation_counter > 0) {
             this.activation_counter = math.max(this.activation_counter - 0.1, 0);
         }

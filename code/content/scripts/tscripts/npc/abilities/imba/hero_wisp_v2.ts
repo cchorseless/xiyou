@@ -45,8 +45,8 @@ export class modifier_imba_wisp_spirits_v2 extends BaseModifier_Plus {
         if (!IsServer()) {
             return;
         }
-        this.hero_damage = this.GetAbilityPlus().GetTalentSpecialValueFor("hero_damage");
-        this.max_range = this.GetAbilityPlus().GetTalentSpecialValueFor("min_range");
+        this.hero_damage = this.GetAbilityPlus().GetSpecialValueFor("hero_damage");
+        this.max_range = this.GetAbilityPlus().GetSpecialValueFor("min_range");
         this.ability_duration = this.GetAbilityPlus().GetDuration();
         this.spirits_spawned = 0;
         this.StartIntervalThink(this.spawn_interval);

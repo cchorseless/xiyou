@@ -110,7 +110,7 @@ export class modifier_imba_templar_assassin_refraction_damage extends BaseModifi
         ParticleManager.SetParticleControlEnt(this.damage_particle, 2, this.GetParentPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_attack1", this.GetParentPlus().GetAbsOrigin(), true);
         ParticleManager.SetParticleControlEnt(this.damage_particle, 3, this.GetParentPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_attack2", this.GetParentPlus().GetAbsOrigin(), true);
         this.AddParticle(this.damage_particle, false, false, -1, true, false);
-        this.instances = this.GetAbilityPlus().GetTalentSpecialValueFor("instances");
+        this.instances = this.GetAbilityPlus().GetSpecialValueFor("instances");
         if (this.GetCasterPlus().findBuffStack("modifier_imba_templar_assassin_refraction_handler", this.GetCasterPlus()) <= 0) {
             this.SetStackCount(math.max(this.instances, this.GetStackCount()));
         } else if (this.GetCasterPlus().findBuffStack("modifier_imba_templar_assassin_refraction_handler", this.GetCasterPlus()) == 1) {
@@ -169,7 +169,7 @@ export class modifier_imba_templar_assassin_refraction_absorb extends BaseModifi
         this.refraction_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_templar_assassin/templar_assassin_refraction.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetParentPlus());
         ParticleManager.SetParticleControlEnt(this.refraction_particle, 1, this.GetParentPlus(), ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, "attach_hitloc", this.GetParentPlus().GetAbsOrigin(), true);
         this.AddParticle(this.refraction_particle, false, false, -1, true, false);
-        this.instances = this.GetAbilityPlus().GetTalentSpecialValueFor("instances");
+        this.instances = this.GetAbilityPlus().GetSpecialValueFor("instances");
         this.damage_threshold = this.GetSpecialValueFor("damage_threshold");
         this.disperse_instances = this.GetSpecialValueFor("disperse_instances");
         if (this.GetParentPlus() != this.GetCasterPlus()) {
@@ -450,7 +450,7 @@ export class modifier_imba_templar_assassin_meld_armor extends BaseModifier_Plus
     }
     BeCreated(p_0: any,): void {
         if (this.GetAbilityPlus()) {
-            this.bonus_armor = this.GetAbilityPlus().GetTalentSpecialValueFor("bonus_armor");
+            this.bonus_armor = this.GetAbilityPlus().GetSpecialValueFor("bonus_armor");
         } else {
             this.bonus_armor = 0;
         }
@@ -1035,7 +1035,7 @@ export class imba_templar_assassin_psionic_trap extends BaseAbility_Plus {
                 trap.findAbliityPlus<imba_templar_assassin_self_trap>("imba_templar_assassin_self_trap").SetLevel(this.GetLevel());
             }
             this.counter_modifier.trap_table.push(trap_modifier as any);
-            if (GameFunc.GetCount(this.counter_modifier.trap_table) > this.GetTalentSpecialValueFor("max_traps")) {
+            if (GameFunc.GetCount(this.counter_modifier.trap_table) > this.GetSpecialValueFor("max_traps")) {
                 if (this.counter_modifier.trap_table[0].GetParentPlus()) {
                     this.counter_modifier.trap_table[0].GetParentPlus().ForceKill(false);
                 }

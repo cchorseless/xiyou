@@ -14,7 +14,7 @@ export class imba_life_stealer_rage extends BaseAbility_Plus {
         this.GetCasterPlus().StartGesture(GameActivity_t.ACT_DOTA_LIFESTEALER_RAGE);
         this.GetCasterPlus().Purge(false, true, false, false, false);
         this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_life_stealer_rage", {
-            duration: this.GetTalentSpecialValueFor("duration")
+            duration: this.GetSpecialValueFor("duration")
         });
     }
 }
@@ -266,7 +266,7 @@ export class modifier_imba_life_stealer_feast extends BaseModifier_Plus {
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PROCATTACK_BONUS_DAMAGE_PHYSICAL)
     CC_GetModifierProcAttack_BonusDamage_Physical(keys: ModifierAttackEvent): number {
         if (keys.target && !keys.target.IsOther() && !keys.target.IsBuilding() && !(keys.target as IBaseNpc_Plus).IsRoshan() && keys.target.GetTeamNumber() != this.GetParentPlus().GetTeamNumber()) {
-            let heal_amount = keys.target.GetMaxHealth() * this.GetAbilityPlus().GetTalentSpecialValueFor("hp_leech_percent") * 0.01;
+            let heal_amount = keys.target.GetMaxHealth() * this.GetAbilityPlus().GetSpecialValueFor("hp_leech_percent") * 0.01;
             let lifesteal_particle = ResHelper.CreateParticleEx("particles/generic_gameplay/generic_lifesteal.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetParentPlus());
             ParticleManager.ReleaseParticleIndex(lifesteal_particle);
             if (heal_amount > this.GetParentPlus().GetMaxHealth() - this.GetParentPlus().GetHealth()) {
@@ -477,7 +477,7 @@ export class modifier_imba_life_stealer_open_wounds extends BaseModifier_Plus {
         return "particles/status_fx/status_effect_life_stealer_open_wounds.vpcf";
     }
     BeCreated(p_0: any,): void {
-        this.heal_percent = this.GetAbilityPlus().GetTalentSpecialValueFor("heal_percent");
+        this.heal_percent = this.GetAbilityPlus().GetSpecialValueFor("heal_percent");
         if (!IsServer()) {
             return;
         }
@@ -696,7 +696,7 @@ export class imba_life_stealer_infest extends BaseAbility_Plus {
             target.EmitSound("Hero_LifeStealer.Rage");
             target.Purge(false, true, false, false, false);
             target.AddNewModifier(this.GetCasterPlus(), rage_ability, "modifier_imba_life_stealer_rage", {
-                duration: rage_ability.GetTalentSpecialValueFor("duration")
+                duration: rage_ability.GetSpecialValueFor("duration")
             });
         }
     }

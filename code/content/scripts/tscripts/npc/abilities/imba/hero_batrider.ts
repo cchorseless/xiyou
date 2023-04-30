@@ -297,7 +297,7 @@ export class imba_batrider_flamebreak extends BaseAbility_Plus {
                 bDestroyTreesAlongPath: true
             });
             enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_batrider_flamebreak_damage", {
-                duration: this.GetTalentSpecialValueFor("damage_duration") * (1 - enemy.GetStatusResistance()),
+                duration: this.GetSpecialValueFor("damage_duration") * (1 - enemy.GetStatusResistance()),
                 damage_per_second: this.GetSpecialValueFor("damage_per_second"),
                 damage_type: this.GetAbilityDamageType()
             });
@@ -417,7 +417,7 @@ export class imba_batrider_firefly extends BaseAbility_Plus {
             this.GetCasterPlus().EmitSound(GFuncRandom.RandomOne(Object.values(this.responses)));
         }
         this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_batrider_firefly", {
-            duration: this.GetTalentSpecialValueFor("duration")
+            duration: this.GetSpecialValueFor("duration")
         });
     }
 
@@ -656,7 +656,7 @@ export class imba_batrider_methane_boost extends BaseAbility_Plus {
         ParticleManager.SetParticleControl(smoke_particle, 3, this.GetCasterPlus().GetAbsOrigin());
         ParticleManager.ReleaseParticleIndex(smoke_particle);
         this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_generic_motion_controller", {
-            distance: this.GetTalentSpecialValueFor("distance"),
+            distance: this.GetSpecialValueFor("distance"),
             direction_x: this.GetCasterPlus().GetForwardVector().x,
             direction_y: this.GetCasterPlus().GetForwardVector().y,
             direction_z: this.GetCasterPlus().GetForwardVector().z,

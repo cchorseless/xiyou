@@ -110,7 +110,7 @@ export class imba_bounty_hunter_shuriken_toss extends BaseAbility_Plus {
                 damage = damage + jinada_ability.GetSpecialValueFor("bonus_damage");
                 this.GetCasterPlus().EmitSound("Hero_BountyHunter.Jinada");
                 if (target.IsRealUnit() && target.GetPlayerID()) {
-                    let actual_gold_to_steal = math.min(jinada_ability.GetTalentSpecialValueFor("bonus_gold"), PlayerResource.GetUnreliableGold(target.GetPlayerID()));
+                    let actual_gold_to_steal = math.min(jinada_ability.GetSpecialValueFor("bonus_gold"), PlayerResource.GetUnreliableGold(target.GetPlayerID()));
                     if (actual_gold_to_steal > 0) {
                         this.money_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_bounty_hunter/bounty_hunter_jinada.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, target);
                         ParticleManager.SetParticleControlEnt(this.money_particle, 1, this.GetCasterPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", this.GetCasterPlus().GetAbsOrigin(), true);
@@ -510,7 +510,7 @@ export class modifier_imba_jinada_buff_crit extends BaseModifier_Plus {
                     this.ability.UseResources(false, false, false, true);
                 }
                 if (target.IsRealUnit() && target.GetPlayerID()) {
-                    let actual_gold_to_steal = math.min(this.GetAbilityPlus().GetTalentSpecialValueFor("bonus_gold"), PlayerResource.GetUnreliableGold(target.GetPlayerID()));
+                    let actual_gold_to_steal = math.min(this.GetAbilityPlus().GetSpecialValueFor("bonus_gold"), PlayerResource.GetUnreliableGold(target.GetPlayerID()));
                     if (actual_gold_to_steal > 0) {
                         this.money_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_bounty_hunter/bounty_hunter_jinada.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, target);
                         ParticleManager.SetParticleControlEnt(this.money_particle, 1, this.parent, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", this.parent.GetAbsOrigin(), true);

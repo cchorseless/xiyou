@@ -314,7 +314,7 @@ export class sohei_wholeness_of_body extends BaseAbility_Plus {
         target.EmitSound("Sohei.Guard");
         target.Purge(false, true, false, false, false);
         target.AddNewModifier(caster, this, "modifier_sohei_wholeness_of_body_status", {
-            duration: this.GetTalentSpecialValueFor("sr_duration")
+            duration: this.GetSpecialValueFor("sr_duration")
         });
         let momentum_ability = this.GetCasterPlus().findAbliityPlus<sohei_momentum>("sohei_momentum");
         if (momentum_ability && momentum_ability.IsTrained()) {
@@ -356,8 +356,8 @@ export class modifier_sohei_wholeness_of_body_status extends BaseModifier_Plus {
     }
     BeCreated(p_0: any,): void {
         let ability = this.GetAbilityPlus();
-        this.status_resistance = ability.GetTalentSpecialValueFor("status_resistance");
-        this.damageheal = ability.GetTalentSpecialValueFor("damage_taken_heal") / 100;
+        this.status_resistance = ability.GetSpecialValueFor("status_resistance");
+        this.damageheal = ability.GetSpecialValueFor("damage_taken_heal") / 100;
         this.endHeal = 0;
         if (!IsServer()) {
             return;
@@ -368,12 +368,12 @@ export class modifier_sohei_wholeness_of_body_status extends BaseModifier_Plus {
     }
     BeRefresh(p_0: any,): void {
         let ability = this.GetAbilityPlus();
-        this.status_resistance = ability.GetTalentSpecialValueFor("status_resistance");
-        this.damageheal = ability.GetTalentSpecialValueFor("damage_taken_heal") / 100;
+        this.status_resistance = ability.GetSpecialValueFor("status_resistance");
+        this.damageheal = ability.GetSpecialValueFor("damage_taken_heal") / 100;
     }
     BeDestroy(): void {
         if (IsServer()) {
-            this.GetParentPlus().ApplyHeal(this.endHeal + this.GetAbilityPlus().GetTalentSpecialValueFor("post_heal"), this.GetAbilityPlus());
+            this.GetParentPlus().ApplyHeal(this.endHeal + this.GetAbilityPlus().GetSpecialValueFor("post_heal"), this.GetAbilityPlus());
         }
     }
     /** DeclareFunctions():modifierfunction[] {
@@ -651,8 +651,8 @@ export class modifier_sohei_momentum_knockback extends BaseModifierMotionHorizon
         this.distance = event.distance;
         this.speed = event.speed;
         this.collision_radius = event.collision_radius;
-        this.slow_duration = this.GetAbilityPlus().GetTalentSpecialValueFor("slow_duration");
-        this.stun_duration = this.GetAbilityPlus().GetTalentSpecialValueFor("stun_duration");
+        this.slow_duration = this.GetAbilityPlus().GetSpecialValueFor("slow_duration");
+        this.stun_duration = this.GetAbilityPlus().GetSpecialValueFor("stun_duration");
         if (this.BeginMotionOrDestroy() == false) {
             return;
         }

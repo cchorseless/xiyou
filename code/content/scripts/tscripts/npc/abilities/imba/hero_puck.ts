@@ -130,7 +130,7 @@
 // @registerAbility()
 // export class imba_puck_waning_rift extends BaseAbility_Plus {
 //     GetAOERadius(): number {
-//         return this.GetTalentSpecialValueFor("radius");
+//         return this.GetSpecialValueFor("radius");
 //     }
 //     CastFilterResultTarget(target: CDOTA_BaseNPC): UnitFilterResult {
 //         return UnitFilterResult.UF_SUCCESS;
@@ -150,16 +150,16 @@
 //             this.GetCasterPlus().EmitSound("puck_puck_ability_rift_0" + RandomInt(1, 3));
 //         }
 //         let rift_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_puck/puck_waning_rift.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, this.GetCasterPlus());
-//         ParticleManager.SetParticleControl(rift_particle, 1, Vector(this.GetTalentSpecialValueFor("radius"), 0, 0));
+//         ParticleManager.SetParticleControl(rift_particle, 1, Vector(this.GetSpecialValueFor("radius"), 0, 0));
 //         ParticleManager.ReleaseParticleIndex(rift_particle);
 //         if (!this.GetCasterPlus().IsRooted()) {
 //             FindClearSpaceForUnit(this.GetCasterPlus(), this.GetCursorPosition(), true);
 //         }
-//         let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.GetTalentSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
+//         let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
 //         for (const [_, enemy] of GameFunc.iPair(enemies)) {
 //             let damageTable = {
 //                 victim: enemy,
-//                 damage: this.GetTalentSpecialValueFor("damage"),
+//                 damage: this.GetSpecialValueFor("damage"),
 //                 damage_type: this.GetAbilityDamageType(),
 //                 damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NONE,
 //                 attacker: this.GetCasterPlus(),
