@@ -280,6 +280,7 @@ export class CCNotification extends CCPanel<ICCNotification>{
                     <Panel id="TeamColorBar" />
                 </Panel>
                 <Label id="NotificationLabel" ref={this.lbl_notifica} className="NotificationListLabel" localizedText={str} dialogVariables={dialogV} html={true} hittest={false} />
+                <Panel id="NotificationIcon" />
             </Panel>)
     }
 }

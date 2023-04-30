@@ -1364,6 +1364,7 @@ declare global {
         HasBuff(unitEntIndex: EntityIndex, buffName: string): boolean;
         GetUnitRarity(unitname: string): IRarity;
         GetUnitRarityNumber(unitname: string): IRarityNumber;
+        GetAttackSpeedPect(iUnitEntIndex: EntityIndex): number;
         GetMoveSpeed(iUnitEntIndex: EntityIndex): number;
         GetUltiPower(iUnitEntIndex: EntityIndex): number;
         GetMaximumAttackSpeed(iUnitEntIndex: EntityIndex): number;
@@ -1483,7 +1484,7 @@ Entities.GetUnitRarityNumber = (unitname: string): IRarityNumber => {
     return GToNumber(GEEnum.ERarity[rarity]);
 };
 
-Entities.GetAttackSpeed = (iUnitEntIndex: EntityIndex) => {
+Entities.GetAttackSpeedPect = (iUnitEntIndex: EntityIndex) => {
     // let a = GetUnitData(iUnitEntIndex, "GetAttackSpeed");
     let b = Entities.GetAttackSpeed(iUnitEntIndex) * 100;
     // GLogHelper.print("GetAttackSpeed", a, b, 111)

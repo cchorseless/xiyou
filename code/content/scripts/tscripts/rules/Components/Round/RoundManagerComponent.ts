@@ -1,4 +1,5 @@
 
+import { RoundConfig } from "../../../shared/RoundConfig";
 import { ET, serializeETProps } from "../../../shared/lib/Entity";
 import { ERound } from "./ERound";
 import { ERoundBoard } from "./ERoundBoard";
@@ -60,7 +61,8 @@ export class RoundManagerComponent extends ET.Component {
         return this.RoundInfo[this.curRoundBoard] as ERoundBoard;
     }
 
-    public getBoardChallengeRound(id: string) {
-        return this.RoundInfo[id] as ERoundBoardChallenge;
+    public getBoardChallengeRound(challengetype: RoundConfig.EERoundType) {
+        let configid = GGameServiceSystem.GetInstance().getDifficultyChapterDes() + challengetype;
+        return this.RoundInfo[configid] as ERoundBoardChallenge;
     }
 }

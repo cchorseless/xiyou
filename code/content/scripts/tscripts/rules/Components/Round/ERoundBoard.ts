@@ -166,14 +166,19 @@ export class ERoundBoard extends ERound implements IRoundStateCallback {
         this.bRunning = false;
         GRoundSystem.GetInstance().endBoardRound();
     }
-
-    IsBattle() {
+    IsRoundStart() {
+        return this.roundState == RoundConfig.ERoundBoardState.start;
+    }
+    IsRoundBattle() {
         return this.roundState == RoundConfig.ERoundBoardState.battle;
     }
-
-    IsWaitingEnd() {
+    IsRoundWaitingEnd() {
         return this.roundState == RoundConfig.ERoundBoardState.waiting_next;
     }
+    IsRoundChallenge() {
+        return false
+    }
+
 
     IsBelongPlayer(playerid: PlayerID) {
         return (this.BelongPlayerid == playerid)
@@ -206,7 +211,7 @@ export class ERoundBoard extends ERound implements IRoundStateCallback {
         return new ChessVector(r[0], r[1], playerid);
     }
 
-    CreateRoundBasicEnemy(unit_index: string, spawnEffect: ISpawnEffectInfo = null) {
+    CreateRoundBasicEnemy(unit_index: string, spawnEffect: ISpawnEffectInfo = null, npcOwner: IBaseNpc_Plus = null) {
         let player = GPlayerEntityRoot.GetOneInstance(this.BelongPlayerid);
         let playerid = this.BelongPlayerid;
         let enemyinfo = this.config.enemyinfo.find((value) => {
@@ -228,10 +233,10 @@ export class ERoundBoard extends ERound implements IRoundStateCallback {
         }
         if (delay > 0) {
             GTimerHelper.AddTimer(delay, GHandler.create(this, () => {
-                player.EnemyManagerComp().addEnemy(enemyName, this.configID, unit_index, pos, spawnEffect);
+                player.EnemyManagerComp().AddEnemy(enemyName, this.configID, unit_index, pos, angle, spawnEffect, npcOwner);
             }));
         } else {
-            player.EnemyManagerComp().addEnemy(enemyName, this.configID, unit_index, pos, spawnEffect);
+            player.EnemyManagerComp().AddEnemy(enemyName, this.configID, unit_index, pos, angle, spawnEffect, npcOwner);
         }
         return pos
     }
@@ -241,7 +246,7 @@ export class ERoundBoard extends ERound implements IRoundStateCallback {
      * @param unit_index 
      * @param spawnEffect 
      */
-    CreateRoundSummonEnemy(count: number, spawnEffect: ISpawnEffectInfo = null) {
+    CreateRoundSummonEnemy(count: number, spawnEffect: ISpawnEffectInfo = null, npcOwner: IBaseNpc_Plus = null) {
         let baseenemys = this.config.enemyinfo.filter((value) => { return value.issummoned });
         if (baseenemys.length == 0) { return }
         let weightarr = baseenemys.map((value) => { return value.unitWeight });
@@ -249,7 +254,7 @@ export class ERoundBoard extends ERound implements IRoundStateCallback {
         for (let i = 0; i < count; i++) {
             let enemyinfo = GFuncRandom.RandomArrayByWeight(baseenemys, weightarr)[0];
             if (enemyinfo == null) { continue }
-            let pos = this.CreateRoundBasicEnemy(enemyinfo.id, spawnEffect);
+            let pos = this.CreateRoundBasicEnemy(enemyinfo.id, spawnEffect, npcOwner);
             posArr.push(pos);
         }
         return posArr;

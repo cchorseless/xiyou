@@ -251,7 +251,7 @@ export class GameDebugger extends SingletonClass {
                 let _boardVec = GChessControlSystem.GetInstance().GetBoardEmptyGirdRandom(e.PlayerID, true, true);
                 // let _boardVec = new ChessControlConfig.ChessVector(Number(allenemy[unit_index].position_x), Number(allenemy[unit_index].position_y), playerid);
                 let pos = _boardVec.getVector3();
-                player.EnemyManagerComp().addEnemy(unitname as string, player.RoundManagerComp().curRoundBoard, null, pos);
+                player.EnemyManagerComp().AddEnemy(unitname as string, player.RoundManagerComp().curRoundBoard, null, pos);
             }
         }));
         EventHelper.addProtocolEvent(GameProtocol.Protocol.req_DebugRemoveEnemy, GHandler.create(this, (e: JS_TO_LUA_DATA) => {

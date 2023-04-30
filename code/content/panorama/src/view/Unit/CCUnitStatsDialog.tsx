@@ -122,7 +122,7 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
         const bonus_damage = sBonusDamage;
         const rowcls_damage = this.getRowClassName(fBonusDamage);
         // 攻击速度
-        let fAttackSpeed = Entities.GetAttackSpeed(iLocalPortraitUnit);
+        let fAttackSpeed = Entities.GetAttackSpeedPect(iLocalPortraitUnit);
         let fSecondsPerAttack = Entities.GetSecondsPerAttack(iLocalPortraitUnit);
         const attack_speed = FuncHelper.Round(fAttackSpeed, 1);
         const seconds_per_attack = FuncHelper.Round(fSecondsPerAttack, 2);

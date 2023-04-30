@@ -18,11 +18,49 @@
 
 
 .CCNotification {
+    background-image: url("file://{images}/custom_game/notification/notification_bg.png");
+    background-size: 332px 30px;
+    border-brush: gradient(linear, 50% 0%, 100% 0%, from(#000000), to(#773F0D00));
     horizontal-align: left;
     flow-children: left;
     height: 30px;
     margin-top: 5px;
     overflow: noclip;
+
+    &.CombatIconFish {
+        background-image: url("file://{images}/custom_game/notification/notification_fish.png");
+
+        #NotificationIcon {
+            background-image: url("file://{images}/custom_game/notification/notification_icon_fish.png");
+        }
+    }
+
+    &.CombatIconBase {
+        background-image: url("file://{images}/custom_game/notification/notification_base.png");
+
+        #NotificationIcon {
+            background-image: url("file://{images}/custom_game/notification/notification_icon_base.png");
+        }
+    }
+
+    &.CombatIconReward {
+        background-image: url("file://{images}/custom_game/notification/notification_draw.png");
+
+        #NotificationIcon {
+            background-image: url("file://{images}/custom_game/notification/notification_icon_reward.png");
+        }
+    }
+
+    #NotificationIcon {
+        align: left bottom;
+        width: 34px;
+        height: 30px;
+        background-image: url("file://{images}/custom_game/notification/notification_icon_normal.png");
+        background-size: 100%;
+        background-repeat: no-repeat;
+    }
+
+
 }
 
 .HUDFlipped .CCNotification {

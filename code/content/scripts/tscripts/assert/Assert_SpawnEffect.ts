@@ -40,7 +40,7 @@ export module Assert_SpawnEffect {
         };
         export const Spawn_aegis: ISpawnEffectInfo = {
             name: "不朽之守护",
-            tp_effect: "effect/aegis.vpcf",
+            tp_effect: "particles/generic/spawn_effect/aegis/aegis.vpcf",
             tp_sound: Assert_SoundEvent.animation_aegis,
             end_effect: "particles/items_fx/aegis_respawn_aegis_starfall.vpcf",
         };

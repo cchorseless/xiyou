@@ -17,7 +17,6 @@ export class ChessMoveComponent extends ET.Component {
     onAwake(): void {
         let domain = this.GetDomain<IBaseNpc_Plus>();
         this.updateBoardPos();
-        domain.SetForwardVector(Vector(0, 1, 0));
         let etroot = domain.ETRoot.As<IBattleUnitEntityRoot>();
         if (!this.isInBattle) {
             modifier_jiaoxie_wudi.applyOnly(domain, domain);
@@ -25,7 +24,10 @@ export class ChessMoveComponent extends ET.Component {
         if (etroot.IsBuilding()) {
             this.setMoving(false);
         }
-        else if (etroot.IsEnemy()) {
+        if (etroot.IsFriendly()) {
+            domain.SetForwardVector(Vector(0, 1, 0));
+        }
+        else {
             domain.SetForwardVector(Vector(0, -1, 0));
         }
 

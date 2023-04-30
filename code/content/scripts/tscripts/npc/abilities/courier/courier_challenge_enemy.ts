@@ -1,9 +1,12 @@
+import { AI_ability } from "../../../ai/AI_ability";
+import { ERoundBoard } from "../../../rules/Components/Round/ERoundBoard";
 import { EEnum } from "../../../shared/Gen/Types";
-import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
+import { RoundConfig } from "../../../shared/RoundConfig";
 import { registerAbility } from "../../entityPlus/Base_Plus";
+import { ActiveRootAbility } from "../ActiveRootAbility";
 
 @registerAbility()
-export class courier_challenge_gold extends BaseAbility_Plus {
+export class courier_challenge_gold extends ActiveRootAbility {
     IsHiddenAbilityCastable() {
         return true;
     }
@@ -14,44 +17,51 @@ export class courier_challenge_gold extends BaseAbility_Plus {
     GetManaCost() {
         return 0
     }
+
+    GetCooldown(iLevel: number) {
+        return 120;
+    }
     CastFilterResult(): UnitFilterResult {
         let caster = this.GetCasterPlus();
+        let level = this.GetLevel();
+        if (level >= this.GetAbilityJinDuMax()) {
+            this.errorStr = "challenge jindu finish";
+            return UnitFilterResult.UF_FAIL_CUSTOM;
+        }
         if (IsServer()) {
             let playerid = caster.GetPlayerID()
             let playerroot = GPlayerEntityRoot.GetOneInstance(playerid);
-            let round = playerroot.RoundManagerComp().getCurrentBoardRound();
-            if (!round.IsBattle()) {
-                this.errorStr = "not in battle stage";
+            if (!playerroot.PlayerDataComp().isEnoughItem(EEnum.EMoneyType.Wood, this.GetWoodCost())) {
+                this.errorStr = "cost wood not enough";
                 return UnitFilterResult.UF_FAIL_CUSTOM;
             }
         }
         return UnitFilterResult.UF_SUCCESS;
     }
-
     GetchallengeRound() {
         let caster = this.GetCasterPlus();
         let playerid = caster.GetPlayerID()
         let root = GPlayerEntityRoot.GetOneInstance(playerid);
-        let configid = GGameServiceSystem.GetInstance().getDifficultyChapterDes() + "_gold";
-        return root.RoundManagerComp().getBoardChallengeRound(configid);
+        return root.RoundManagerComp().getBoardChallengeRound(RoundConfig.EERoundType.challenge_gold);
     }
-
-
     OnSpellStart() {
         let caster = this.GetCasterPlus();
         let playerid = caster.GetPlayerID()
         let root = GPlayerEntityRoot.GetOneInstance(playerid);
         let round = root.RoundManagerComp().getCurrentBoardRound();
-        if (round.IsBattle()) {
-            let challengeround = this.GetchallengeRound()
+        if (round.IsRoundBattle() || round.IsRoundStart()) {
+            let challengeround = this.GetchallengeRound();
             if (challengeround) {
-                challengeround.OnRound_Start();
-                root.PlayerDataComp().ModifyGold(-this.GetWoodCost());
-                let level = this.GetLevel();
-                if (level < this.GetAbilityJinDuMax()) {
-                    this.UpgradeAbility(true);
-                }
+                challengeround.OnRound_Start(this.GetLevel());
+                root.PlayerDataComp().ModifyWood(-this.GetWoodCost());
             }
+            if (this.GetAutoCastState()) {
+                this.ToggleAutoCast();
+            }
+        }
+        else {
+            this.ToggleAutoCast();
+            this.EndCooldown();
         }
     }
     ProcsMagicStick() {
@@ -59,6 +69,31 @@ export class courier_challenge_gold extends BaseAbility_Plus {
     }
     GetAbilityJinDuInfo(): string {
         return `${0},${this.GetAbilityJinDuMax()},${this.GetLevel()}`
+    }
+
+    OnRound_Start(round: ERoundBoard): void {
+        if (round.config.roundIndex >= this.GetSpecialValueFor("unlock_round")) {
+            if (this.IsActivated() == false) {
+                this.SetActivated(true);
+            }
+            else {
+                if (this.GetAutoCastState()) {
+                    AI_ability.NO_TARGET_cast(this);
+                }
+            }
+        }
+        else if (this.IsActivated()) {
+            this.SetActivated(false);
+        }
+    }
+
+    OnRound_Prize(round: ERoundBoard): void {
+        if (this.IsActivated() && round.isWin) {
+            let level = this.GetLevel();
+            if (level < this.GetAbilityJinDuMax()) {
+                this.UpgradeAbility(true);
+            }
+        }
     }
 }
 
@@ -72,33 +107,29 @@ export class courier_challenge_wood extends courier_challenge_gold {
         let caster = this.GetCasterPlus();
         let playerid = caster.GetPlayerID()
         let root = GPlayerEntityRoot.GetOneInstance(playerid);
-        let configid = GGameServiceSystem.GetInstance().getDifficultyChapterDes() + "_wood";
-        return root.RoundManagerComp().getBoardChallengeRound(configid);
+        return root.RoundManagerComp().getBoardChallengeRound(RoundConfig.EERoundType.challenge_wood);
     }
 
 }
 
 
 @registerAbility()
-export class courier_challenge_equip extends BaseAbility_Plus {
+export class courier_challenge_equip extends ActiveRootAbility {
     IsHiddenAbilityCastable() {
         return true;
     }
     CastFilterResult(): UnitFilterResult {
         let caster = this.GetCasterPlus();
+        let level = this.GetLevel();
+        if (level >= this.GetAbilityJinDuMax()) {
+            this.errorStr = "challenge jindu finish";
+            return UnitFilterResult.UF_FAIL_CUSTOM;
+        }
         if (IsServer()) {
             let playerid = caster.GetPlayerID()
             let playerroot = GPlayerEntityRoot.GetOneInstance(playerid);
-            let round = playerroot.RoundManagerComp().getCurrentBoardRound();
-            if (round.IsBattle()) {
-                if (playerroot.PlayerDataComp().isEnoughItem(EEnum.EMoneyType.Wood, this.GetSoulCrystal())) {
-                    return UnitFilterResult.UF_SUCCESS;
-                } else {
-                    this.errorStr = "cost wood not enough";
-                    return UnitFilterResult.UF_FAIL_CUSTOM;
-                }
-            } else {
-                this.errorStr = "not in battle stage";
+            if (!playerroot.PlayerDataComp().isEnoughItem(EEnum.EMoneyType.SoulCrystal, this.GetSoulCrystal())) {
+                this.errorStr = "cost wood not enough";
                 return UnitFilterResult.UF_FAIL_CUSTOM;
             }
         }
@@ -111,24 +142,26 @@ export class courier_challenge_equip extends BaseAbility_Plus {
         let caster = this.GetCasterPlus();
         let playerid = caster.GetPlayerID()
         let root = GPlayerEntityRoot.GetOneInstance(playerid);
-        let configid = GGameServiceSystem.GetInstance().getDifficultyChapterDes() + "_equip";
-        return root.RoundManagerComp().getBoardChallengeRound(configid);
+        return root.RoundManagerComp().getBoardChallengeRound(RoundConfig.EERoundType.challenge_equip);
     }
     OnSpellStart() {
         let caster = this.GetCasterPlus();
         let playerid = caster.GetPlayerID()
         let root = GPlayerEntityRoot.GetOneInstance(playerid);
         let round = root.RoundManagerComp().getCurrentBoardRound();
-        if (round.IsBattle()) {
+        if (round.IsRoundBattle() || round.IsRoundStart()) {
             let challengeround = this.GetchallengeRound();
             if (challengeround) {
-                challengeround.OnRound_Start();
-                root.PlayerDataComp().ModifyWood(-this.GetSoulCrystal());
-                let level = this.GetLevel();
-                if (level < this.GetAbilityJinDuMax()) {
-                    this.UpgradeAbility(true);
-                }
+                challengeround.OnRound_Start(this.GetLevel());
+                root.PlayerDataComp().ModifySoulCrystal(-this.GetSoulCrystal());
             }
+            if (this.GetAutoCastState()) {
+                this.ToggleAutoCast();
+            }
+        }
+        else {
+            this.ToggleAutoCast();
+            this.EndCooldown();
         }
     }
     ProcsMagicStick() {
@@ -137,7 +170,32 @@ export class courier_challenge_equip extends BaseAbility_Plus {
     GetAbilityJinDuInfo(): string {
         return `${0},${this.GetAbilityJinDuMax()},${this.GetLevel()}`
     }
-
+    GetCooldown(level?: number): number {
+        return 240;
+    }
+    OnRound_Start(round: ERoundBoard): void {
+        if (round.config.roundIndex >= this.GetSpecialValueFor("unlock_round")) {
+            if (this.IsActivated() == false) {
+                this.SetActivated(true);
+            }
+            else {
+                if (this.GetAutoCastState()) {
+                    AI_ability.NO_TARGET_cast(this);
+                }
+            }
+        }
+        else if (this.IsActivated()) {
+            this.SetActivated(false);
+        }
+    }
+    OnRound_Prize(round: ERoundBoard): void {
+        if (this.IsActivated() && round.isWin) {
+            let level = this.GetLevel();
+            if (level < this.GetAbilityJinDuMax()) {
+                this.UpgradeAbility(true);
+            }
+        }
+    }
 }
 
 @registerAbility()
@@ -145,12 +203,13 @@ export class courier_challenge_artifact extends courier_challenge_equip {
     GetSoulCrystal(level?: number): number {
         return GJSONConfig.CourierAbilityLevelUpConfig.get(math.max(this.GetLevel(), 1) + "").ChallengeArtifactCost;
     }
-
+    GetCooldown(level?: number): number {
+        return 360;
+    }
     GetchallengeRound() {
         let caster = this.GetCasterPlus();
         let playerid = caster.GetPlayerID()
         let root = GPlayerEntityRoot.GetOneInstance(playerid);
-        let configid = GGameServiceSystem.GetInstance().getDifficultyChapterDes() + "_artifact";
-        return root.RoundManagerComp().getBoardChallengeRound(configid);
+        return root.RoundManagerComp().getBoardChallengeRound(RoundConfig.EERoundType.challenge_artifact);
     }
 }

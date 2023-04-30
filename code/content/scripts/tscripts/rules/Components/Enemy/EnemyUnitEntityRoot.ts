@@ -13,7 +13,6 @@ import { ERoundBoard } from "../Round/ERoundBoard";
 export class EnemyUnitEntityRoot extends BattleUnitEntityRoot {
     readonly RoundID: string;
     readonly OnlyKey: string;
-
     onAwake(playerid: PlayerID, confid: string, roundid: string, onlyKey: string = null) {
         (this.BelongPlayerid as any) = playerid;
         (this.ConfigID as any) = confid;
@@ -181,8 +180,14 @@ export class EnemyUnitEntityRoot extends BattleUnitEntityRoot {
             return this.GetRound<ERoundBoard>().config.enemyinfo.find(v => { return v.id == this.OnlyKey })
         }
     }
-
+    /**
+     * 
+     * @returns 返回当前怪物的伤害
+     */
     GetRoundHeroDamage() {
+        if (this.IsEnemyTower()) {
+            return 10;
+        }
         return this.iStar;
     }
 

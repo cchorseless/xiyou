@@ -56,12 +56,12 @@ export class CCDebugPanel extends CCPanel<ICCDebugPanel> {
                     onRefresh={() => { }}
                 >
                     <CCDebugTool_Category title="游戏" >
-                        <CCDebugTool_DemoTextEntry eventName={GameProtocol.Protocol.ChangeHostTimescale} localtext="主机速度" />
-                        <CCDebugTool_DemoButton eventName="NextStateButtonPressed" btncolor="GreenButton" localtext="下一阶段" />
+                        <CCDebugTool_DemoTextEntry width="50%" eventName={GameProtocol.Protocol.ChangeHostTimescale} localtext="主机速度" />
+                        <CCDebugTool_DemoTextEntry width="50%" eventName={GameProtocol.Protocol.req_DebugJumpToRound} localtext="跳转至回合" />
                         <CCDebugTool_DemoToggle eventName={GameProtocol.Protocol.req_DebugChangeServerPing} localtext="暂停Ping" selected={stop_ping} />
                         {/* <CCDebugTool_DemoToggle eventName="LockCameraPauseButtonPressed" localtext="锁定镜头" selected={lock_camera} /> */}
-                        <CCDebugTool_DemoToggle eventName={GameProtocol.Protocol.PauseRoundStage} localtext="暂停阶段" selected={is_pause} />
-                        <CCDebugTool_DemoButton eventName={GameProtocol.Protocol.NextRoundStage} localtext="下一阶段" />
+                        <CCDebugTool_DemoToggle eventName={GameProtocol.Protocol.req_DebugPauseRoundStage} localtext="暂停阶段" selected={is_pause} />
+                        <CCDebugTool_DemoButton eventName={GameProtocol.Protocol.req_DebugNextRoundStage} localtext="下一阶段" />
                         <CCDebugTool_DemoButton eventName="ReturnMenuButtonPressed" btncolor="RedButton" localtext="回到菜单" />
                         <CCDebugTool_DemoSelectionButton eventName="TeleportButtonPressed" localtext="跳转到特定区域" />
                         <CCDebugTool_DemoButton eventName="StandbyButtonPressed" localtext="备用按钮" />
@@ -83,7 +83,7 @@ export class CCDebugPanel extends CCPanel<ICCDebugPanel> {
                     <CCDebugTool_Category title="英雄" >
                         <CCDebugTool_DemoButton eventName={GameProtocol.Protocol.req_DebugAddGold} localtext="添加金币" />
                         <CCDebugTool_DemoToggle eventName={GameProtocol.Protocol.req_DebugWTF} localtext="无限技能" selected={free_spells} />
-                        <CCDebugTool_DemoTextEntry eventName="LevelUpButtonPressed" localtext="升级" />
+                        <CCDebugTool_DemoTextEntry width="50%" eventName="LevelUpButtonPressed" localtext="升级" />
                         <CCDebugTool_DemoSelectionButton eventName="ChangeHeroButtonPressed" localtext="更换英雄" />
                     </CCDebugTool_Category>
                     <CCDebugTool_Category title="单位" >

@@ -6,69 +6,65 @@
   <component name="ChangeListManager">
     <list default="true" id="0afe1df3-4870-48f1-a775-af97afd6ee5a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/images/spellicons/auto_gold.png" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/images/spellicons/auto_gold.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/images/spellicons/recovery_chess.png" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/images/spellicons/recovery_chess.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/images/spellicons/upgrade_chess.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/config/KVData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/config/KVData.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/config/abilities/courier_abilities.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/config/abilities/courier_abilities.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/config/building/building_unit_enemy.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/config/building/building_unit_enemy.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/config/items/imba_items.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/config/items/imba_items.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/config/kvConfig/lang_config.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/config/kvConfig/lang_config.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/helper/DotaEntityHelper.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/helper/DotaUIHelper.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/helper/DotaUIHelper.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/helper/TipsHelper.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/helper/TipsHelper.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/AllSpeHud/hero_select/hero_select.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/AllSpeHud/hero_select/hero_select.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCAbility/CCAbilityButton.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCAbility/CCAbilityButton.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCAbility/CCAbilityButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCAbility/CCAbilityButton.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCAbility/CCAbilityDetailDialog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCAbility/CCAbilityDetailDialog.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCAbility/CCAbilityIcon.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCAbility/CCAbilityIcon.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCAbility/CCAbilityIcon.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCAbility/CCAbilityIcon.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCAbility/CCAbilityInfoDialog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCAbility/CCAbilityInfoDialog.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCAbility/CCAbilityPanel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCAbility/CCAbilityPanel.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCDacBoard/CCDacBoard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCDacBoard/CCDacBoard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCDacBoard/CCUnitStats.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCDacBoard/CCUnitStats.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCInventory/CCInventory.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCInventory/CCInventory.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCInventory/CCInventorySlot.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCInventory/CCInventorySlot.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCItem/CCItemImage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCItem/CCItemImage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCItem/CCItemInfoDialog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCItem/CCItemInfoDialog.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCTalentBranch/CCTalentBranch.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCTalentBranch/CCTalentBranch.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCUnit/CCUnitSmallIcon.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCUnit/CCUnitSmallIcon.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Artifact/CCArtifactInfoDialog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Artifact/CCArtifactInfoDialog.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Artifact/CCArtifactSelectionDialog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Artifact/CCArtifactSelectionDialog.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Challenge/CCChallengeAbilityIcon.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Challenge/CCChallengeAbilityIcon.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Combination/CCCombinationInfoDialog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Combination/CCCombinationInfoDialog.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Combination/CCCombinationUnitIconGroup.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Combination/CCCombinationUnitIconGroup.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/OverHead/CCBuildingTopBarItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/OverHead/CCBuildingTopBarItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/OverHead/CCEntityHpBarItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/OverHead/CCEntityHpBarItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Player/CCPlayerInfoDialog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Player/CCPlayerInfoDialog.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/PublicShopBag/CCPublicBagSlotItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/PublicShopBag/CCPublicBagSlotItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/PublicShopBag/CCPublicShopItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/PublicShopBag/CCPublicShopItem.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/images/custom_game/icon/gold.png" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/images/custom_game/icon/gold.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/images/custom_game/icon/notification_base.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/images/custom_game/icon/notification_fish.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/images/custom_game/icon/notification_normal.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/images/custom_game/icon/notification_reward.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/images/custom_game/icon/population.png" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/images/custom_game/icon/population.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/images/custom_game/icon/sect_attack.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/images/custom_game/icon/sect_crit.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/images/custom_game/icon/sect_evade.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/images/custom_game/icon/sect_fury.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/images/custom_game/icon/sect_health.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/images/custom_game/icon/sect_ice.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/images/custom_game/icon/sect_injury.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/images/custom_game/icon/sect_poison.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/images/custom_game/icon/sect_regen.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/images/custom_game/icon/sect_shield.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/images/custom_game/icon/sect_ulti.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/images/custom_game/icon/sect_wisp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/images/custom_game/icon/soulcrystal.png" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/images/custom_game/icon/soulcrystal.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/images/custom_game/icon/wood.png" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/images/custom_game/icon/wood.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/images/spellicons/upgrade_chess_population.png" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/images/spellicons/upgrade_chess_population.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/images/spellicons/upgrade_chess_tech.png" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/images/spellicons/upgrade_chess_tech.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/libs/BaseLibExt.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/libs/BaseLibExt.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/DebugTool/CCDebugPanel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/DebugTool/CCDebugPanel.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/DebugTool/CCDebugTool.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/DebugTool/CCDebugTool.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Notification/CCNotificationPanel.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Notification/CCNotificationPanel.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Notification/CCNotificationPanel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Notification/CCNotificationPanel.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/TopBarPanel/CCTopBarPanel.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/TopBarPanel/CCTopBarPanel.less" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Unit/CCUnitStatsDialog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Unit/CCUnitStatsDialog.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/spellicons/spellicons.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/spellicons/spellicons.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/game_main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/game_main.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/kvInterface/abilities/courier_abilities.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/kvInterface/abilities/courier_abilities.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/kvInterface/building/building_unit_enemy.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/kvInterface/building/building_unit_enemy.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/kvInterface/items/imba_items.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/kvInterface/items/imba_items.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/kvInterface/kvConfig/lang_config.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/kvInterface/kvConfig/lang_config.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/GameDebugger.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/GameDebugger.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/assert/Assert_SpawnEffect.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/assert/Assert_SpawnEffect.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/courier/courier_challenge_enemy.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/courier/courier_challenge_enemy.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/courier/courier_upgrade_chess.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/courier/courier_upgrade_chess.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/entityPlus/Base_ClassExt.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/entityPlus/Base_ClassExt.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/shop/item_shop_coin_bag.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/shop/item_shop_coin_bag.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/propertystat/PropertyCalculate.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/propertystat/PropertyCalculate.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/propertystat/modifier_property.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/propertystat/modifier_property.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/courier/faker_courier_damage_shared.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/courier/faker_courier_damage_shared.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/courier/faker_courier_death_prize.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/courier/faker_courier_death_prize.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/courier/faker_courier_summon_enemy.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/courier/faker_courier_summon_enemy.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/Components/ChessControl/ChessMoveComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/Components/ChessControl/ChessMoveComponent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/Components/Enemy/EnemyManagerComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/Components/Enemy/EnemyManagerComponent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/Components/Enemy/EnemyUnitEntityRoot.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/Components/Enemy/EnemyUnitEntityRoot.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/Components/Round/ERoundBoard.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/Components/Round/ERoundBoard.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/Components/Round/ERoundBoardChallenge.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/Components/Round/ERoundBoardChallenge.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/Components/Round/RoundManagerComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/Components/Round/RoundManagerComponent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/System/RoundSystemComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/System/RoundSystemComponent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/GameProtocol.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/GameProtocol.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/JsonConfig.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/JsonConfig.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/Types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/Types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/json/dota_roundboardchallengeconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/json/dota_roundboardchallengeconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/json/dota_roundboardconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/json/dota_roundboardconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/RoundConfig.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/RoundConfig.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/excels/abilities/courier_abilities.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/excels/abilities/courier_abilities.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/excels/abilities/imba_abilities_lang.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/excels/abilities/imba_abilities_lang.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/excels/items/imba_items.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/excels/items/imba_items.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/excels/items/imba_items_lang.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/excels/items/imba_items_lang.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/excels/kvConfig/lang_config.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/excels/kvConfig/lang_config.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/excels/building/building_ability_tower.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/excels/building/building_ability_tower.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/excels/building/building_unit_enemy.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/excels/building/building_unit_enemy.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/excels/building/building_unit_summoned.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/excels/building/building_unit_summoned.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/game/scripts/npc/abilities/courier_abilities.kv" beforeDir="false" afterPath="$PROJECT_DIR$/code/game/scripts/npc/abilities/courier_abilities.kv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/game/scripts/npc/items/imba_items.kv" beforeDir="false" afterPath="$PROJECT_DIR$/code/game/scripts/npc/items/imba_items.kv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/game/scripts/npc/kvConfig/lang_config.kv" beforeDir="false" afterPath="$PROJECT_DIR$/code/game/scripts/npc/kvConfig/lang_config.kv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/localization/English/kvConfig/lang_config.txt" beforeDir="false" afterPath="$PROJECT_DIR$/code/localization/English/kvConfig/lang_config.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/localization/Russian/kvConfig/lang_config.txt" beforeDir="false" afterPath="$PROJECT_DIR$/code/localization/Russian/kvConfig/lang_config.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/game/scripts/npc/building/building_unit_enemy.kv" beforeDir="false" afterPath="$PROJECT_DIR$/code/game/scripts/npc/building/building_unit_enemy.kv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/localization/English/building/building_unit_enemy.txt" beforeDir="false" afterPath="$PROJECT_DIR$/code/localization/English/building/building_unit_enemy.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/localization/Russian/building/building_unit_enemy.txt" beforeDir="false" afterPath="$PROJECT_DIR$/code/localization/Russian/building/building_unit_enemy.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/localization/SChinese/abilities/imba_abilities_lang.txt" beforeDir="false" afterPath="$PROJECT_DIR$/code/localization/SChinese/abilities/imba_abilities_lang.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/localization/SChinese/items/imba_items_lang.txt" beforeDir="false" afterPath="$PROJECT_DIR$/code/localization/SChinese/items/imba_items_lang.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/localization/SChinese/kvConfig/lang_config.txt" beforeDir="false" afterPath="$PROJECT_DIR$/code/localization/SChinese/kvConfig/lang_config.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/localization/SChinese/building/building_unit_enemy.txt" beforeDir="false" afterPath="$PROJECT_DIR$/code/localization/SChinese/building/building_unit_enemy.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,7 +103,7 @@
       <recent name="E:\project\dota_project\xiyou\code\content\scripts\tscripts\npc\modifier\move" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.launch">
+  <component name="RunManager" selected="npm.prod:kv2ts">
     <configuration name="dev:kv" type="js.build_tools.npm" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/code/package.json" />
       <command value="run" />
@@ -277,6 +273,7 @@
       <workItem from="1682736742022" duration="2970000" />
       <workItem from="1682754752550" duration="9217000" />
       <workItem from="1682783027700" duration="3444000" />
+      <workItem from="1682827394638" duration="9041000" />
     </task>
     <servers />
   </component>

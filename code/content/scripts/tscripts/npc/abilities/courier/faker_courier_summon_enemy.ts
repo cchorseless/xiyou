@@ -2,6 +2,7 @@
 import { AI_ability } from "../../../ai/AI_ability";
 import { Assert_SpawnEffect } from "../../../assert/Assert_SpawnEffect";
 import { ResHelper } from "../../../helper/ResHelper";
+import { RoundConfig } from "../../../shared/RoundConfig";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { registerAbility } from "../../entityPlus/Base_Plus";
 
@@ -33,13 +34,23 @@ export class faker_courier_summon_enemy extends BaseAbility_Plus {
         let playerid = caster.GetPlayerID()
         let root = GPlayerEntityRoot.GetOneInstance(playerid);
         let round = root.RoundManagerComp().getCurrentBoardRound();
-        if (round.IsBattle()) {
-            let summon_count_min = this.GetSpecialValueFor("summon_count_min");
-            let summon_count_max = this.GetSpecialValueFor("summon_count_max");
-            let summon_count = RandomInt(summon_count_min, summon_count_max);
+        if (!round.IsRoundBattle()) { return }
+        let summon_count_min = this.GetSpecialValueFor("summon_count_min");
+        let summon_count_max = this.GetSpecialValueFor("summon_count_max");
+        let summon_count = RandomInt(summon_count_min, summon_count_max);
+        let posarr: Vector[] = [];
+        // 金币挑战木材挑战塔
+        if (this.IsRoundChallenge_Gold() || this.IsRoundChallenge_Wood()) {
+            let effect = this.IsRoundChallenge_Gold() ? Assert_SpawnEffect.Effect.Spawn_aegis : Assert_SpawnEffect.Effect.Spawn_windrun;
+            let challengeround = this.GetchallengeRound();
+            posarr = challengeround.CreateRoundSummonEnemy(summon_count, effect, caster);
+        }
+        else {
+            posarr = round.CreateRoundSummonEnemy(summon_count, Assert_SpawnEffect.Effect.Spawn_fall_2021, caster);
+        }
+        if (posarr.length > 0) {
             caster.EmitSound("Hero_ShadowShaman.EtherShock");
             caster.SetHealth(caster.GetHealth() - this.GetHealthCost(1));
-            let posarr = round.CreateRoundSummonEnemy(summon_count, Assert_SpawnEffect.Effect.Spawn_fall_2021);
             for (let index = 0; index < posarr.length; index++) {
                 let lightningBolt = ResHelper.CreateParticleEx("particles/units/heroes/hero_shadowshaman/shadowshaman_ether_shock.vpcf", ParticleAttachment_t.PATTACH_CUSTOMORIGIN, caster)
                 ParticleManager.SetParticleControl(lightningBolt, 0, caster.GetAbsOrigin() + Vector(0, 0, 280) as Vector);
@@ -65,6 +76,26 @@ export class faker_courier_summon_enemy extends BaseAbility_Plus {
         return AI_ability.NO_TARGET_cast(this);
     }
 
+    IsRoundChallenge_Gold() {
+        let castername = this.GetCasterPlus().GetUnitName();
+        return castername == "building_enemy_tower_gold";
+    }
+    IsRoundChallenge_Wood() {
+        let castername = this.GetCasterPlus().GetUnitName();
+        return castername == "building_enemy_tower_wood";
+    }
+
+    GetchallengeRound() {
+        let caster = this.GetCasterPlus();
+        let playerid = caster.GetPlayerID()
+        let root = GPlayerEntityRoot.GetOneInstance(playerid);
+        if (this.IsRoundChallenge_Wood()) {
+            return root.RoundManagerComp().getBoardChallengeRound(RoundConfig.EERoundType.challenge_wood);
+        }
+        else if (this.IsRoundChallenge_Gold()) {
+            return root.RoundManagerComp().getBoardChallengeRound(RoundConfig.EERoundType.challenge_gold);
+        }
+    }
 }
 
 

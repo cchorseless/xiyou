@@ -34,7 +34,7 @@ export class EnemyManagerComponent extends ET.Component {
         }
     }
 
-    addEnemy(enemyName: string, roundid: string, onlykey: string = null, pos: Vector = null, spawnEffect: ISpawnEffectInfo = null) {
+    AddEnemy(enemyName: string, roundid: string, onlykey: string = null, pos: Vector = null, angle: Vector = null, spawnEffect: ISpawnEffectInfo = null, npcOwner: IBaseNpc_Plus = null) {
         if (enemyName == "" || enemyName == null) {
             GLogHelper.error("cant find emeny name");
         }
@@ -44,9 +44,12 @@ export class EnemyManagerComponent extends ET.Component {
         if (pos == null) {
             GLogHelper.error("cant find emeny spawn pos");
         }
-        let enemy = BaseNpc_Plus.CreateUnitByName(enemyName, pos, null, true, DOTATeam_t.DOTA_TEAM_BADGUYS);
+        let enemy = BaseNpc_Plus.CreateUnitByName(enemyName, pos, npcOwner, true, DOTATeam_t.DOTA_TEAM_BADGUYS);
         enemy.SetUnitOnClearGround();
         EnemyUnitEntityRoot.Active(enemy, this.BelongPlayerid, enemyName, roundid, onlykey);
+        if (angle != null && angle.Length2D() > 0) {
+            enemy.SetForwardVector(angle);
+        }
         let domain = GGameScene.GetPlayer(this.BelongPlayerid)
         domain.AddDomainChild(enemy.ETRoot);
         this.tAllEnemyNameList.push(enemyName);

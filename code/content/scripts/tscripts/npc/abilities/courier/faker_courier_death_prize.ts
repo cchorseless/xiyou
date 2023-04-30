@@ -53,12 +53,12 @@ export class modifier_faker_courier_death_prize extends BaseModifier_Plus {
             ParticleManager.ClearParticle(this.buff_fx);
         }
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASEATTACK_DAMAGE_PERCENTAGE)
-    CC_BASEATTACK_DAMAGE_PERCENTAGE() {
-        if (this.isJoinState()) {
-            return this.atk_pect
-        }
-    }
+    // @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASEATTACK_DAMAGE_PERCENTAGE)
+    // CC_BASEATTACK_DAMAGE_PERCENTAGE() {
+    //     if (this.isJoinState()) {
+    //         return this.atk_pect
+    //     }
+    // }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_PERCENTAGE)
     CC_ATTACKSPEED_PERCENTAGE() {
         if (this.isJoinState()) {

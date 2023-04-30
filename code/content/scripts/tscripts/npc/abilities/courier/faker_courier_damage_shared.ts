@@ -37,7 +37,11 @@ export class modifier_faker_courier_damage_shared extends BaseModifier_Plus {
             return
         }
         let allenemy = hTarget.GetPlayerRoot().BattleUnitManagerComp().GetAllBattleUnitAliveNpc(hTarget.GetTeam());
+        allenemy = allenemy.filter((enemy) => { return enemy.GetOwnerPlus() == hTarget });
         let enemyCount = allenemy.length;
+        if (enemyCount < 1) {
+            return
+        }
         let damage = math.floor(params.damage / enemyCount);
         allenemy.forEach((enemy) => {
             if (enemy !== hTarget) {

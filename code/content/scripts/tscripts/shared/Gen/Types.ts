@@ -3997,8 +3997,8 @@ export class RoundBoardChallengeConfigRecord {
         this.roundType = _json_.round_type
         if (_json_.round_label === undefined) { GLogHelper.error(1); }
         this.roundLabel = _json_.round_label
-        if (_json_.round_unitcount === undefined) { GLogHelper.error(1); }
-        this.roundUnitcount = _json_.round_unitcount
+        if (_json_.enemy_count === undefined) { GLogHelper.error(1); }
+        this.enemyCount = _json_.enemy_count
         if (_json_.enemyinfo === undefined) { GLogHelper.error(1); }
         { this.enemyinfo = []; for(let _ele of _json_.enemyinfo) { let _e : Dota.RoundChallengeEnemyConfigBean; _e = new Dota.RoundChallengeEnemyConfigBean(_ele); this.enemyinfo.push(_e);}}
     }
@@ -4016,9 +4016,9 @@ export class RoundBoardChallengeConfigRecord {
      */
     readonly roundLabel: string
     /**
-     * 怪物数量
+     * 创建的非召唤类怪物数量
      */
-    readonly roundUnitcount: number
+    readonly enemyCount: number
     readonly enemyinfo: Dota.RoundChallengeEnemyConfigBean[]
 
     resolve(_tables: Map<string, any>) {
@@ -4036,6 +4036,8 @@ export class RoundChallengeEnemyConfigBean {
     constructor(_json_: any) {
         if (_json_.id === undefined) { GLogHelper.error(1); }
         this.id = _json_.id
+        if (_json_.challengelevel === undefined) { GLogHelper.error(1); }
+        this.challengelevel = _json_.challengelevel
         if (_json_.unitname === undefined) { GLogHelper.error(1); }
         this.unitname = _json_.unitname
         if (_json_.star === undefined) { GLogHelper.error(1); }
@@ -4068,6 +4070,14 @@ export class RoundChallengeEnemyConfigBean {
         this.goldMin = _json_.gold_min
         if (_json_.gold_max === undefined) { GLogHelper.error(1); }
         this.goldMax = _json_.gold_max
+        if (_json_.wood_min === undefined) { GLogHelper.error(1); }
+        this.woodMin = _json_.wood_min
+        if (_json_.wood_max === undefined) { GLogHelper.error(1); }
+        this.woodMax = _json_.wood_max
+        if (_json_.soulcrystal_min === undefined) { GLogHelper.error(1); }
+        this.soulcrystalMin = _json_.soulcrystal_min
+        if (_json_.soulcrystal_max === undefined) { GLogHelper.error(1); }
+        this.soulcrystalMax = _json_.soulcrystal_max
         if (_json_.elite_drop_index === undefined) { GLogHelper.error(1); }
         this.eliteDropIndex = _json_.elite_drop_index
         if (_json_.spawn_buff === undefined) { GLogHelper.error(1); }
@@ -4078,6 +4088,10 @@ export class RoundChallengeEnemyConfigBean {
      * 种怪索引
      */
     readonly id: string
+    /**
+     * 挑战等级
+     */
+    readonly challengelevel: number
     /**
      * 回合单位名
      */
@@ -4142,6 +4156,22 @@ export class RoundChallengeEnemyConfigBean {
      * 单个怪物击杀金币max
      */
     readonly goldMax: number
+    /**
+     * 单个怪物击杀木材min
+     */
+    readonly woodMin: number
+    /**
+     * 单个怪物击杀木材max
+     */
+    readonly woodMax: number
+    /**
+     * 单个怪物击杀魂晶min
+     */
+    readonly soulcrystalMin: number
+    /**
+     * 单个怪物击杀魂晶max
+     */
+    readonly soulcrystalMax: number
     /**
      * 精英怪掉落池编号
      */

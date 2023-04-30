@@ -7,11 +7,11 @@ export module RoundConfig {
         candy_boss = "candy_boss",
         endless = "endless",
         challenge = "challenge",
-        challenge_wood = "challenge_wood",
-        challenge_gold = "challenge_gold",
         challenge_star_card = "challenge_star_card",
-        challenge_equip = "challenge_equip",
-        challenge_crystal = "challenge_crystal",
+        challenge_wood = "_wood",
+        challenge_gold = "_gold",
+        challenge_equip = "_equip",
+        challenge_artifact = "_artifact",
     }
 
     export enum ERoundBoardState {

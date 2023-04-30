@@ -274,7 +274,6 @@ export class CCDebugTool_DemoTextEntry extends CCPanel<ICCDebugTool_DemoTextEntr
 	textentry = createRef<TextEntry>();
 	render() {
 		return (
-			this.__root___isValid &&
 			<Panel ref={this.__root__}  {...this.initRootAttrs()} >
 				<TextButton className="DemoTextEntry" style={{ flowChildren: "right" }} onactivate={
 					(p) => {

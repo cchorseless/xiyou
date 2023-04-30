@@ -8,7 +8,7 @@ import { RoundPrizeUnitEntityRoot } from "../Components/Round/RoundPrizeUnitEnti
 @GReloadable
 export class RoundSystemComponent extends ET.SingletonComponent {
     iRound: string;
-
+    private _debug_nextround: string;
     GetCurrentRoundIndex() {
         if (this.iRound) {
             return GJSONConfig.RoundBoardConfig.get(this.iRound).roundIndex;
@@ -37,19 +37,27 @@ export class RoundSystemComponent extends ET.SingletonComponent {
     }
     public addEvent() {
         EventHelper.addGameEvent(GameEnum.GameEvent.EntityHurtEvent, GHandler.create(this, this.OnEntityHurtEvent));
-        EventHelper.addProtocolEvent(GameProtocol.Protocol.PauseRoundStage, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
+        EventHelper.addProtocolEvent(GameProtocol.Protocol.req_DebugPauseRoundStage, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
             const ispause = GToBoolean(e.data);
             GPlayerEntityRoot.GetAllInstance()
                 .forEach((player) => {
                     player.RoundManagerComp().debugPauseBoardRound(ispause)
                 });
         }));
-        EventHelper.addProtocolEvent(GameProtocol.Protocol.NextRoundStage, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
+        EventHelper.addProtocolEvent(GameProtocol.Protocol.req_DebugNextRoundStage, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
             GPlayerEntityRoot.GetAllInstance()
                 .forEach((player) => {
                     player.RoundManagerComp().debugNextBoardRound()
                 });
         }));
+        EventHelper.addProtocolEvent(GameProtocol.Protocol.req_DebugJumpToRound, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
+            let data = GToNumber(e.data);
+            if (data >= 1 && data <= 40) {
+                this._debug_nextround = GGameServiceSystem.GetInstance().getDifficultyChapterDes() + "_" + data;
+            }
+        }));
+
+
     }
 
 
@@ -87,14 +95,15 @@ export class RoundSystemComponent extends ET.SingletonComponent {
     public endBoardRound() {
         let allWaiting = true;
         GPlayerEntityRoot.GetAllInstance().forEach((player) => {
-            if (!player.RoundManagerComp().getCurrentBoardRound().IsWaitingEnd()) {
+            if (!player.RoundManagerComp().getCurrentBoardRound().IsRoundWaitingEnd()) {
                 allWaiting = false;
             }
         });
         if (allWaiting) {
             GTimerHelper.AddTimer(3,
                 GHandler.create(this, () => {
-                    let nextid = this.GetNextBoardRoundid();
+                    let nextid = this._debug_nextround || this.GetNextBoardRoundid();
+                    this._debug_nextround = null;
                     if (nextid != null) {
                         this.runBoardRound(nextid);
                     }

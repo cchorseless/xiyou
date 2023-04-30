@@ -17,8 +17,9 @@ export module GameProtocol {
         static readonly custom_call_get_player_data = "custom_call_get_player_data";
         //#region DEBUG
         static readonly ChangeHostTimescale = "/ChangeHostTimescale";
-        static readonly PauseRoundStage = "/PauseRoundStage";
-        static readonly NextRoundStage = "/NextRoundStage";
+        static readonly req_DebugPauseRoundStage = "/req_DebugPauseRoundStage";
+        static readonly req_DebugNextRoundStage = "/req_DebugNextRoundStage";
+        static readonly req_DebugJumpToRound = "/req_DebugJumpToRound";
         static readonly req_DebugGameOver = "/req_DebugGameOver";
         static readonly req_DebugReload = "/req_DebugReload";
         static readonly req_DebugRestart = "/req_DebugRestart";
