@@ -1,0 +1,38 @@
+.CCShopSixShenFuPanel {
+    align: left bottom;
+    margin-left: 240px;
+
+    .ShopSixShenFuContainer {
+        width: 150px;
+        height: 200px;
+
+        flow-children: right-wrap;
+    }
+
+}
+
+.CCShopSixShenFuItem {
+    // margin-left: 10px;
+    // margin-top: 10px;
+
+    .ShopSixShenFu {
+        width: 60px;
+        height: 70px;
+        background-repeat: no-repeat;
+        background-size: 100%;
+        brightness: 1;
+
+        // background-image: url("file://{images}/custom_game/shop/tag_bg_red.png");
+        &.isGray {
+            brightness: 0.5;
+        }
+
+        #ShenFuCount {
+            align: right bottom;
+
+            font-size: 16px;
+            color: #FFFFFF;
+            text-shadow: 0px 0px 3px 2 #000000;
+        }
+    }
+}

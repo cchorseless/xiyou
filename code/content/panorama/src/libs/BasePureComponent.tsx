@@ -173,17 +173,17 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
     //     }
     //     return { [this.InstanceId]: this._ETRef };
     // }
-    ListenClassUpdate(cls: typeof ET.Entity, func?: () => void) {
+    ListenClassUpdate<T extends typeof ET.Entity>(cls: T, func?: (e: InstanceType<T>) => void) {
         if (cls == null) {
             GLogHelper.warn("ListenUpdate entity is null," + this.constructor.name);
             return;
         }
-        GEventHelper.AddEvent(cls.updateEventClassName(), GHandler.create(this, () => {
+        GEventHelper.AddEvent(cls.updateEventClassName(), GHandler.create(this, (e: InstanceType<T>) => {
             if (this.IsRegister) {
                 // content.setState(entity.Ref(true));
                 this.UpdateSelf();
                 if (func) {
-                    func();
+                    func(e);
                 }
             }
         }))
@@ -538,7 +538,7 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
     }
     private _updateSelf = 0;
     /**刷新自己 */
-    public UpdateSelf = () => {
+    public UpdateSelf() {
         this._updateSelf += 1;
         if (this._updateSelf > 10000) {
             this._updateSelf = 0;
@@ -546,15 +546,12 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
         this.UpdateState({ _updateSelf: this._updateSelf });
     };
 
-    public delayUpdateSelf = () => {
-        GTimerHelper.AddFrameTimer(
-            1,
-            GHandler.create(this, () => {
-                if (this.IsRegister) {
-                    this.UpdateSelf();
-                }
-            })
-        );
+    public delayUpdateSelf() {
+        GTimerHelper.AddFrameTimer(1, GHandler.create(this, () => {
+            if (this.IsRegister) {
+                this.UpdateSelf();
+            }
+        }));
     };
     // 初始化数据
     public componentDidMount() {

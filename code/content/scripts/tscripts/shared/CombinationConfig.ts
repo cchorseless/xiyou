@@ -39,8 +39,8 @@ export module CombinationConfig {
         sect_summon = "sect_summon",
         /**魔法流 */
         sect_magic = "sect_magic",
-        /**加抗流 */
-        sect_magarm_up = "sect_magarm_up",
+        /**减抗流 */
+        sect_magarm_down = "sect_magarm_down",
         /**变身流 */
         sect_transform = "sect_transform",
         /**沉默流 */
@@ -99,6 +99,10 @@ export module CombinationConfig {
         sect_betrayal = "sect_betrayal",
         /**守卫流 */
         sect_guard = "sect_guard",
+        /**爆头流 */
+        sect_headshot = "sect_headshot",
+        /**溅射流 */
+        sect_splash = "sect_splash",
     }
 
     export const ESectNameList = Object.keys(ESectName);

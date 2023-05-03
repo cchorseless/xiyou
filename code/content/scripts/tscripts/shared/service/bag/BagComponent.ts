@@ -1,8 +1,7 @@
 import { GameServiceConfig } from "../../GameServiceConfig";
 import { EEnum } from "../../Gen/Types";
 import { ET, serializeETProps } from "../../lib/Entity";
-import { TEquipItem } from "../equip/TEquipItem";
-import { TItem } from "./TItem";
+import { TEquipItem, TItem } from "./TItem";
 
 
 @GReloadable
@@ -44,12 +43,42 @@ export class BagComponent extends ET.Component {
         const allitems = TItem.GetGroupInstance(this.BelongPlayerid);
         const allTEquipItems = TEquipItem.GetGroupInstance(this.BelongPlayerid);
         allitems.concat(allTEquipItems).forEach(entity => {
-            if (entity && this.Items.includes(entity.Id) && entity.IsValid && entity.Config) {
+            if (entity && entity.IsValidItem() && this.Items.includes(entity.Id) && entity.Config) {
                 items.push(entity)
             }
         })
         return items;
     }
+
+
+    getItemCount(itemid: string, includesEquip: boolean = false) {
+        let r = 0;
+        let allitems = TItem.GetGroupInstance(this.BelongPlayerid);
+        if (includesEquip) {
+            const allTEquipItems = TEquipItem.GetGroupInstance(this.BelongPlayerid);
+            allitems = allitems.concat(allTEquipItems)
+        }
+        allitems.forEach(entity => {
+            if (entity && entity.IsValidItem() && this.Items.includes(entity.Id) && entity.Config && entity.ConfigId + "" == itemid) {
+                r += entity.ItemCount;
+            }
+        })
+        return r;
+    }
+
+    GetOneItem(itemid: string) {
+        const allitems = TItem.GetGroupInstance(this.BelongPlayerid);
+        const allTEquipItems = TEquipItem.GetGroupInstance(this.BelongPlayerid);
+        let allitem = allitems.concat(allTEquipItems)
+        for (let entity of allitem) {
+            if (entity && entity.IsValidItem() && this.Items.includes(entity.Id) && entity.Config && entity.ConfigId + "" == itemid) {
+                return entity;
+            }
+        }
+    }
+
+
+
 
     getItemByType(itemtype: EEnum.EItemType) {
         let items: TItem[] = [];
@@ -61,6 +90,8 @@ export class BagComponent extends ET.Component {
         })
         return items;
     }
+
+
 
     getAllCourierNames() {
         const courierunlock = this.getItemByType(EEnum.EItemType.Courier);

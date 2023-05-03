@@ -37,7 +37,6 @@ import { TActivityTotalSpendMetaStone } from "./activity/TActivityTotalSpendMeta
 import { TActivityTotalSpendMetaStoneData } from "./activity/TActivityTotalSpendMetaStoneData";
 import { BagComponent } from "./bag/BagComponent";
 import { TItem } from "./bag/TItem";
-import { TMoneyItem } from "./bag/TMoneyItem";
 import { CharacterBuffComponent } from "./buff/CharacterBuffComponent";
 import { ServerZoneBuffComponent } from "./buff/ServerZoneBuffComponent";
 import { TBuffItem } from "./buff/TBuffItem";
@@ -46,7 +45,6 @@ import { NumericComponent } from "./common/NumericComponent";
 import { SeedRandomComponent } from "./common/SeedRandomComponent";
 import { CharacterDrawTreasureComponent } from "./draw/CharacterDrawTreasureComponent";
 import { HeroEquipComponent } from "./equip/HeroEquipComponent";
-import { TEquipItem } from "./equip/TEquipItem";
 import { TEquipItemProp } from "./equip/TEquipItemProp";
 import { CharacterGameRecordComponent } from "./gamerecord/CharacterGameRecordComponent";
 import { ServerZoneGameRecordComponent } from "./gamerecord/ServerZoneGameRecordComponent";
@@ -123,7 +121,6 @@ import { CharacterTitleItem } from "./title/CharacterTitleItem";
 
     BagComponent,
     TItem,
-    TMoneyItem,
 
     CharacterBuffComponent,
     ServerZoneBuffComponent,
@@ -136,7 +133,6 @@ import { CharacterTitleItem } from "./title/CharacterTitleItem";
     CharacterDrawTreasureComponent,
 
     HeroEquipComponent,
-    TEquipItem,
     TEquipItemProp,
 
     CharacterGameRecordComponent,

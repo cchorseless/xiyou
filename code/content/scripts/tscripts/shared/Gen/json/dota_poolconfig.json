@@ -1,6 +1,7 @@
 [
   {
     "poolid": "1001",
+    "poolItemCount": 1,
     "PoolInfo": [
       {
         "ItemConfigId": "building_hero_axe",
@@ -108,6 +109,7 @@
   },
   {
     "poolid": "1002",
+    "poolItemCount": 1,
     "PoolInfo": [
       {
         "ItemConfigId": "building_hero_antimage",
@@ -263,6 +265,7 @@
   },
   {
     "poolid": "1003",
+    "poolItemCount": 1,
     "PoolInfo": [
       {
         "ItemConfigId": "building_hero_abaddon",
@@ -490,6 +493,7 @@
   },
   {
     "poolid": "1004",
+    "poolItemCount": 1,
     "PoolInfo": [
       {
         "ItemConfigId": "building_hero_abyssal_underlord",
@@ -627,6 +631,7 @@
   },
   {
     "poolid": "1005",
+    "poolItemCount": 1,
     "PoolInfo": [
       {
         "ItemConfigId": "item_imba_stout_shield",
@@ -878,6 +883,7 @@
   },
   {
     "poolid": "1006",
+    "poolItemCount": 1,
     "PoolInfo": [
       {
         "ItemConfigId": "item_imba_aeon_disk",
@@ -1195,6 +1201,7 @@
   },
   {
     "poolid": "1007",
+    "poolItemCount": 1,
     "PoolInfo": [
       {
         "ItemConfigId": "item_imba_guardian_greaves",
@@ -1470,6 +1477,7 @@
   },
   {
     "poolid": "1008",
+    "poolItemCount": 1,
     "PoolInfo": [
       {
         "ItemConfigId": "item_imba_bloodthorn",
@@ -1592,5 +1600,10 @@
         "IsVaild": true
       }
     ]
+  },
+  {
+    "poolid": "n1_tower_drop_1",
+    "poolItemCount": 1,
+    "PoolInfo": []
   }
 ]

@@ -6,6 +6,7 @@ import { CCIcon_Lock } from "../AllUIElement/CCIcons/CCIcon_Lock";
 import { CCImage } from "../AllUIElement/CCImage/CCImage";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 
+import { CCAbilityIcon } from "../AllUIElement/CCAbility/CCAbilityIcon";
 import "./CCCombinationIcon.less";
 
 interface ICCCombinationIcon {
@@ -15,6 +16,48 @@ interface ICCCombinationIcon {
 
 
 export class CCCombinationIcon extends CCPanel<ICCCombinationIcon> {
+    defaultClass = () => { return CSSHelper.ClassMaker("CC_CombinationIcon", this.props.sectName); };
+    getIndex() {
+        let index = CombinationConfig.ESectNameList.indexOf(this.props.sectName) + 1;
+        if (index < 10) {
+            return "0" + index;
+        }
+        else if (index > 16) {
+            return "16";
+        }
+        else {
+            return index + "";
+        }
+    }
+    getColor() {
+        let em = CombinationConfig.ESectName;
+        let index = CombinationConfig.ESectNameList.indexOf(this.props.sectName) + 1;
+        let colorname = CSSHelper.EColorList[index];
+        return (CSSHelper.EColor as any)[colorname];
+    }
+    getSectImage() {
+        return this.props.sectName;
+    }
+    render() {
+        // const img = PathHelper.getCustomImageUrl("combination/icons/iconbg/leftcapsule_border_bottom_pop" + picindex + "_psd.png")
+        const lock = this.props.lock;
+        return (
+            <Panel ref={this.__root__}   {...this.initRootAttrs()}>
+
+                {/* <CCImage className="SectIconBGBorder" backgroundImage={PathHelper.getCustomImageUrl("combination/icons/iconbg/leftcapsule_border" + picindex + "_psd.png")} /> */}
+                <CCAbilityIcon id="SectAbilityIcon" abilityname={"ability_" + this.props.sectName} showTips={false}>
+                    {
+                        lock && <CCIcon_Lock align="center center" />
+                    }
+                </CCAbilityIcon>
+                {this.__root___childs}
+                {this.props.children}
+            </Panel>
+        );
+    }
+}
+
+export class CCCombinationIcon2 extends CCPanel<ICCCombinationIcon> {
     defaultClass = () => { return CSSHelper.ClassMaker("CC_CombinationIcon", this.props.sectName); };
     getIndex() {
         let index = CombinationConfig.ESectNameList.indexOf(this.props.sectName) + 1;

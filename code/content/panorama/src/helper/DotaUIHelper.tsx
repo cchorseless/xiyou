@@ -357,8 +357,9 @@ export module DotaUIHelper {
             DOTAAbilityToolTip_Contents = DOTAAbilityToolTip_Contents || DOTAAbilityToolTip.FindChildTraverse("Contents")!;
             DOTAAbilityToolTip_Contents.style.flowChildren = "right";
             const AbilityDetails = DOTAAbilityToolTip_Contents.FindChild("AbilityDetails")!;
+            const AbilityDescriptionOuterContainer = AbilityDetails.FindChildTraverse("AbilityDescriptionOuterContainer")!;
             if (AbilityDetails) {
-                AbilityDetails.style.width = "340px";
+                // AbilityDetails.style.width = "340px";
                 // 升级进度条
                 const jinduinfo = Abilities.GetAbilityJinDuInfo(abilityEntityIndex > 0 ? abilityEntityIndex : ability_name);
                 const AbilityUpgradeProgress = AbilityDetails.FindChild("AbilityUpgradeProgress")!;
@@ -386,11 +387,11 @@ export module DotaUIHelper {
                     }
                 }
             }
-            DOTAAbilityToolTip_Contents.style.width = "fit-children";
+            // DOTAAbilityToolTip_Contents.style.width = "fit-children";
             let sectname = GJsonConfigHelper.GetAbilitySectLabel(ability_name);
-            let CustomTooltipPanel = DOTAAbilityToolTip_Contents.FindChild(customPanelid);
+            let CustomTooltipPanel = AbilityDescriptionOuterContainer.FindChild(customPanelid);
             if (CustomTooltipPanel == null) {
-                CustomTooltipPanel = $.CreatePanel("Panel", DOTAAbilityToolTip_Contents, customPanelid)
+                CustomTooltipPanel = $.CreatePanel("Panel", AbilityDescriptionOuterContainer, customPanelid)
             }
             if (CustomTooltipPanel) {
                 if (sectname) {

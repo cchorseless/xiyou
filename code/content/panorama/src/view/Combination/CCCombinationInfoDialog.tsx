@@ -15,6 +15,7 @@ import { CCCombinationUnitIconGroup } from "./CCCombinationUnitIconGroup";
 
 interface ICCCombinationInfoDialog {
     sectName: string,
+    showSectName?: boolean,
     playerid?: PlayerID,
     unitentityindex?: EntityIndex,
     castentityindex?: AbilityEntityIndex,
@@ -115,7 +116,7 @@ export class CCCombinationInfoDialog extends CCPanel<ICCCombinationInfoDialog> {
                     <CCPanelHeader flowChildren="right">
                         <CCCombinationIcon id="SectIcon" sectName={sectName} lock={sectlock} />
                         <CCPanel className={CSSHelper.ClassMaker("SectDes", { Disable: sectlock })} flowChildren="down" width="250px" marginLeft="8px"  >
-                            <Label id="SectNameHeader" html={true} text={SectNameHeader} />
+                            <Label id="SectNameHeader" html={true} text={SectNameHeader} visible={this.props.showSectName || false} />
                             <Label id="SectNameHeaderDes" html={true} text={$.Localize("#lang_" + sectName + "_Des")} />
                             {/* <Label id="SectNameDescription" html={true} text={replaceValues({
                             sStr: $.Localize("#DOTA_Tooltip_ability_" + sectName + "_description"),

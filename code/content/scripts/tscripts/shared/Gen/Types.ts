@@ -294,6 +294,10 @@ export enum EItemUseScript {
      * 祝福Buff
      */
     AddBuff = 3,
+    /**
+     * 消耗数量
+     */
+    CostCount = 4,
 }
 }
 
@@ -401,6 +405,8 @@ export class ItemConfigRecord {
         this.BagSlotType = _json_.BagSlotType
         if (_json_.AutoUse === undefined) { GLogHelper.error(1); }
         this.AutoUse = _json_.AutoUse
+        if (_json_.OneGameUseLimit === undefined) { GLogHelper.error(1); }
+        this.OneGameUseLimit = _json_.OneGameUseLimit
         if (_json_.BatchUseable === undefined) { GLogHelper.error(1); }
         this.BatchUseable = _json_.BatchUseable
         if (_json_.BindHeroName === undefined) { GLogHelper.error(1); }
@@ -449,6 +455,10 @@ export class ItemConfigRecord {
      * 获得自动使用
      */
     readonly AutoUse: boolean
+    /**
+     * 单局使用次数限制
+     */
+    readonly OneGameUseLimit: number
     /**
      * 批量使用
      */
@@ -3337,6 +3347,8 @@ export class PoolConfigRecord {
     constructor(_json_: any) {
         if (_json_.poolid === undefined) { GLogHelper.error(1); }
         this.poolid = _json_.poolid
+        if (_json_.poolItemCount === undefined) { GLogHelper.error(1); }
+        this.poolItemCount = _json_.poolItemCount
         if (_json_.PoolInfo === undefined) { GLogHelper.error(1); }
         { this.PoolInfo = []; for(let _ele of _json_.PoolInfo) { let _e : Dota.PoolInfoBean; _e = new Dota.PoolInfoBean(_ele); this.PoolInfo.push(_e);}}
     }
@@ -3345,6 +3357,10 @@ export class PoolConfigRecord {
      * 池子id
      */
     readonly poolid: string
+    /**
+     * 随机数量
+     */
+    readonly poolItemCount: number
     readonly PoolInfo: Dota.PoolInfoBean[]
 
     resolve(_tables: Map<string, any>) {

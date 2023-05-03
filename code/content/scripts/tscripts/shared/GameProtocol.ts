@@ -9,14 +9,18 @@ export module GameProtocol {
         static readonly Ping = "/Ping";
         static readonly LoginOut = "/LoginOut";
         static readonly SetServerKey = "/SetServerKey";
-        static readonly Buy_ShopItem = "/Buy_ShopItem";
+
         static readonly UploadCharacterGameRecord = "/UploadCharacterGameRecord";
+        // 背包 使用道具
+        static readonly Use_BagItem = "/Use_BagItem";
+        // 商店
+        static readonly Buy_ShopItem = "/Buy_ShopItem";
         // js-clientlua
         static readonly custom_call_get_ability_data = "custom_call_get_ability_data";
         static readonly custom_call_get_unit_data = "custom_call_get_unit_data";
         static readonly custom_call_get_player_data = "custom_call_get_player_data";
         //#region DEBUG
-        static readonly ChangeHostTimescale = "/ChangeHostTimescale";
+        static readonly req_DebugChangeHostTimescale = "/req_DebugChangeHostTimescale";
         static readonly req_DebugPauseRoundStage = "/req_DebugPauseRoundStage";
         static readonly req_DebugNextRoundStage = "/req_DebugNextRoundStage";
         static readonly req_DebugJumpToRound = "/req_DebugJumpToRound";

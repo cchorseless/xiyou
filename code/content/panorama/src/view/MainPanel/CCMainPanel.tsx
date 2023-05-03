@@ -22,6 +22,7 @@ import { CCPublicShopBagPanel } from "../PublicShopBag/CCPublicShopBagPanel";
 import { CCRankPanel } from "../Rank/CCRankPanel";
 import { CCRecordPanel } from "../Record/CCRecordPanel";
 import { CCShopPanel } from "../Shop/CCShopPanel";
+import { CCShopSixShenFuPanel } from "../Shop/CCShopSixShenFuPanel";
 import { CCStoragePanel } from "../Storage/CCStoragePanel";
 import { CCTopBarCenter, CCTopBarGameCoin } from "../TopBarPanel/CCTopBarPanel";
 import { CCUnitDamageInfo } from "../Unit/CCUnitDamageInfo";
@@ -69,6 +70,7 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
                         <CCPlayerListPanel />
                         <CCMiniMap />
                         <CCChallengeShopPanel />
+                        <CCShopSixShenFuPanel />
                         <CCDacBoard BShowBuffList={BShowBuffList} CurSelectUnit={curunit} />
                         <CCUnitDamageInfo />
                         <CCCombinationBottomPanel CurSelectUnit={curunit} />

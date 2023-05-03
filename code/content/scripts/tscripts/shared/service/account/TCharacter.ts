@@ -94,6 +94,8 @@ export class TCharacter extends ET.Component {
     get GameRecordComp() {
         return this.GetComponentByName<CharacterGameRecordComponent>("CharacterGameRecordComponent")!;
     }
+
+
 }
 
 declare global {

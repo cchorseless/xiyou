@@ -397,7 +397,6 @@ export class GameScene {
             return;
         }
         let allCB = GGameCache.allCustomProtocolEvent[event.protocol] || [];
-        GLogHelper.DeepPrintTable(event);
         event.sendClientCB = () => {
             event.sendClientCB = null;
             if (event.hasCB) {

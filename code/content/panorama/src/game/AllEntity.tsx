@@ -20,7 +20,7 @@ import { PlayerDataComponent } from "./components/Player/PlayerDataComponent";
 import { PlayerEntityRoot } from "./components/Player/PlayerEntityRoot";
 import { ERoundBoard } from "./components/Round/ERoundBoard";
 import { RoundManagerComponent } from "./components/Round/RoundManagerComponent";
-import { GameServiceSystemComponent } from "./system/GameStateSystemComponent";
+import { GameServiceSystemComponent } from "./system/GameServiceSystemComponent";
 import { PublicBagSystemComponent } from "./system/PublicBagSystemComponent";
 
 LuBanConfigComponent;

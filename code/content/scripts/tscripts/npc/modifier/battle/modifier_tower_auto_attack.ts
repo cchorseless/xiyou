@@ -58,6 +58,15 @@ export class modifier_tower_auto_attack extends BaseModifier_Plus {
             delete this.allParticleID[event.record + ""];
         }
     }
+
+    @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_FAIL)
+    CC_ON_ATTACK_FAIL(event: ModifierAttackEvent) {
+        if (this.allParticleID[event.record + ""]) {
+            ParticleManager.ClearParticle(this.allParticleID[event.record + ""]);
+            delete this.allParticleID[event.record + ""];
+        }
+    }
+
     public OnDestroy(): void {
         if (IsServer()) {
             for (let k in this.allParticleID) {

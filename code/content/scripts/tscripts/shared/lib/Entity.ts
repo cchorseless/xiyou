@@ -323,27 +323,30 @@ export module ET {
                 }
             }
         }
+        private FireEntityUpdateEvent(t: typeof Entity) {
+            if (t) {
+                let playerid = (this.BelongPlayerid >= 0 ? this.BelongPlayerid : null) as PlayerID;
+                GEventHelper.FireEvent(t.updateEventClassName(), null, playerid, this);
+            }
+        }
         static FromJson(json: IEntityJson, belongPlayerid = -1) {
             let entity = ETEntitySystem.GetEntity(json._id + json._t);
-            let type: typeof Entity = GGetRegClass(json._t);
+            let t: typeof Entity = GGetRegClass(json._t);
             if (entity != null) {
                 entity.updateFromJson(json);
                 if (entity.onReload) {
                     entity.onReload();
                 }
                 GEventHelper.FireEvent(entity.updateEventSelfName, null, null, entity);
-                if (type) {
-                    let playerid = (entity.BelongPlayerid >= 0 ? entity.BelongPlayerid : null) as PlayerID;
-                    GEventHelper.FireEvent(type.updateEventClassName(), null, playerid, entity);
-                }
+                entity.FireEntityUpdateEvent(t);
                 return entity;
             }
-            if (type == null) {
+            if (t == null) {
                 GLogHelper.error("cant find class" + json._t);
             }
             entity = ETEntitySystem.GetEntity(json._id + json._t);
             if (entity == null) {
-                entity = Entity.Create(type);
+                entity = Entity.Create(t);
                 (entity.Id as any) = json._id;
                 if (belongPlayerid > -1) {
                     (entity.BelongPlayerid as any) = belongPlayerid;
@@ -353,6 +356,7 @@ export module ET {
             // 这里先创建注册然后SerializeToEntity，所以getinstance 比 getcomponent 更早拿到实体
             entity.updateFromJson(json);
             ETEntitySystem.SerializeToEntity(entity);
+            entity.FireEntityUpdateEvent(t);
             return entity;
         }
 

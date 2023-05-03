@@ -56,7 +56,7 @@ export class CCDebugPanel extends CCPanel<ICCDebugPanel> {
                     onRefresh={() => { }}
                 >
                     <CCDebugTool_Category title="游戏" >
-                        <CCDebugTool_DemoTextEntry width="50%" eventName={GameProtocol.Protocol.ChangeHostTimescale} localtext="主机速度" />
+                        <CCDebugTool_DemoTextEntry width="50%" eventName={GameProtocol.Protocol.req_DebugChangeHostTimescale} localtext="主机速度" />
                         <CCDebugTool_DemoTextEntry width="50%" eventName={GameProtocol.Protocol.req_DebugJumpToRound} localtext="跳转至回合" />
                         <CCDebugTool_DemoToggle eventName={GameProtocol.Protocol.req_DebugChangeServerPing} localtext="暂停Ping" selected={stop_ping} />
                         {/* <CCDebugTool_DemoToggle eventName="LockCameraPauseButtonPressed" localtext="锁定镜头" selected={lock_camera} /> */}

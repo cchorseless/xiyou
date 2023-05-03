@@ -37,6 +37,7 @@ export class CCCombinationDesItem extends CCPanel<IProps> {
                             showBg: true,
                             sectName: sectName,
                             playerid: playerid,
+                            showSectName: true,
                         }
                     }}
                 >

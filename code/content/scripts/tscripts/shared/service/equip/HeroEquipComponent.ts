@@ -1,7 +1,7 @@
 import { EEnum } from "../../Gen/Types";
 import { ET, serializeETProps } from "../../lib/Entity";
+import { TEquipItem } from "../bag/TItem";
 import { THeroUnit } from "../hero/THeroUnit";
-import { TEquipItem } from "./TEquipItem";
 
 
 

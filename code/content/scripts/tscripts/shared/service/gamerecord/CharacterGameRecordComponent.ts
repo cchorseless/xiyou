@@ -10,13 +10,6 @@ export class CharacterGameRecordComponent extends ET.Component {
     @serializeETProps()
     public CurRecordID: string;
 
-    public GetCurGameRecord(): TGameRecordItem | null {
-        if (this.CurRecordID != null) {
-            return GTServerZone.GetInstance().GameRecordComp.GetChild<TGameRecordItem>(this.CurRecordID);
-        }
-        return null;
-    }
-
     get Character(): TCharacter { return this.GetParent<TCharacter>(); }
     onGetBelongPlayerid() {
         let character = GTCharacter.GetOneInstanceById(this.Id);
@@ -27,9 +20,30 @@ export class CharacterGameRecordComponent extends ET.Component {
     }
     onSerializeToEntity() {
         GTCharacter.GetOneInstance(this.BelongPlayerid).AddOneComponent(this);
+        if (this.CurRecordID) {
+            (TGameRecordItem.CurRecordID as any) = this.CurRecordID;
+        }
         this.onReload();
     }
     onReload() {
         this.SyncClient();
     }
+    @serializeETProps()
+    public ItemUseRecordInfo: { [itemid: string]: number } = {};
+
+    AddItemUseRecord(itemid: string, count: number) {
+        if (!this.ItemUseRecordInfo[itemid]) {
+            this.ItemUseRecordInfo[itemid] = 0;
+        }
+        this.ItemUseRecordInfo[itemid] += count;
+        this.SyncClient(true);
+    }
+
+    GetItemUseRecord(itemid: string) {
+        if (!this.ItemUseRecordInfo[itemid]) {
+            return 0
+        }
+        return this.ItemUseRecordInfo[itemid];
+    }
+
 }

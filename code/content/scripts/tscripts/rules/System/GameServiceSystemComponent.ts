@@ -4,6 +4,7 @@ import { GameProtocol } from "../../shared/GameProtocol";
 import { GameServiceConfig } from "../../shared/GameServiceConfig";
 import { GEventHelper } from "../../shared/lib/GEventHelper";
 import { GameServiceSystem } from "../../shared/rules/System/GameServiceSystem";
+import { TItem } from "../../shared/service/bag/TItem";
 
 @GReloadable
 export class GameServiceSystemComponent extends GameServiceSystem {
@@ -143,18 +144,56 @@ export class GameServiceSystemComponent extends GameServiceSystem {
             }
             e.state = false;
         }));
-
+        //**使用背包道具 */
+        EventHelper.addProtocolEvent(GameProtocol.Protocol.Use_BagItem, GHandler.create(this, async (e: CLIENT_DATA<C2H_Use_BagItem>) => {
+            const playeroot = GGameScene.GetPlayer(e.PlayerID);
+            const data = e.data;
+            if (playeroot && data) {
+                const titem = TItem.GetItemById(data.ItemId);
+                if (titem == null) {
+                    e.state = false;
+                    e.message = "cant find item";
+                }
+                else {
+                    const ItemConfigid = titem.ConfigId + "";
+                    let uselimit = titem.Config.OneGameUseLimit;
+                    if (uselimit > 0 && playeroot.TCharacter().GameRecordComp.GetItemUseRecord(ItemConfigid) >= uselimit) {
+                        e.state = false;
+                        e.message = "use limit";
+                    }
+                    else {
+                        const useCount = data.ItemCount;
+                        const cbdata: H2C_CommonResponse = await playeroot.PlayerHttpComp().PostAsync(e.protocol, data);
+                        if (cbdata) {
+                            e.state = cbdata.Error == 0;
+                            e.message = cbdata.Message;
+                            // 道具使用
+                            if (e.state && uselimit > 0) {
+                                playeroot.TCharacter().GameRecordComp.AddItemUseRecord(ItemConfigid, useCount)
+                            }
+                        }
+                        else {
+                            e.state = false;
+                            e.message = "no message cb";
+                        }
+                    }
+                }
+            }
+            if (e.isawait && e.sendClientCB) {
+                e.sendClientCB()
+            }
+        }));
         const hander = GHandler.create(this, async (e: JS_TO_LUA_DATA) => {
             const playeroot = GGameScene.GetPlayer(e.PlayerID);
             if (playeroot) {
                 const cbdata: H2C_CommonResponse = await playeroot.PlayerHttpComp().PostAsync(e.protocol, e.data);
-                GLogHelper.print(cbdata);
                 if (cbdata) {
                     e.state = cbdata.Error == 0;
-                    e.data = cbdata.Message;
+                    e.message = cbdata.Message;
                 }
                 else {
                     e.state = false;
+                    e.message = "no message cb";
                 }
                 if (e.isawait && e.sendClientCB) {
                     e.sendClientCB()

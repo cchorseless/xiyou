@@ -7,7 +7,7 @@ import { CCIcon_Wanted } from "../AllUIElement/CCIcons/CCIcon_Wanted";
 import { CCLabel } from "../AllUIElement/CCLabel/CCLabel";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 
-import { CCCombinationDesItem } from "../Combination/CCCombinationDesItem";
+import { CCAbilityIcon } from "../AllUIElement/CCAbility/CCAbilityIcon";
 import "./CCDrawCardBottomItem.less";
 
 interface ICCDrawCardBottomItem {
@@ -46,12 +46,13 @@ export class CCDrawCardBottomItem extends CCPanel<ICCDrawCardBottomItem> {
                     {
                         [1, 2, 3, 6].map((a, i) => {
                             let abilityname = cardinfo["Ability" + a] as string;
-                            if (abilityname && abilityname != "ability_empty") {
-                                let sectname = GJsonConfigHelper.GetAbilitySectLabel(abilityname)
-                                // return <CCAbilityIcon key={"" + i} abilityname={abilityname} playerid={GGameScene.Local.BelongPlayerid} tipsInfo={{ level: 1 }} />
-                                if (sectname) {
-                                    return <CCCombinationDesItem key={"" + i} SectName={sectname} marginLeft={"10px"} ShowScepter={a == 6} />
-                                }
+                            if (abilityname && abilityname != "ability_empty" && abilityname != "ability_sect_empty") {
+                                // let sectname = GJsonConfigHelper.GetAbilitySectLabel(abilityname)
+                                // // return <CCAbilityIcon key={"" + i} abilityname={abilityname} playerid={GGameScene.Local.BelongPlayerid} tipsInfo={{ level: 1 }} />
+                                // if (sectname) {
+                                //     return <CCCombinationDesItem key={"" + i} SectName={sectname} marginLeft={"10px"} ShowScepter={a == 6} />
+                                // }
+                                return <CCAbilityIcon key={"" + i} width="50px" height="50px" marginLeft={"5px"} abilityname={abilityname} showTips={true} />
                             }
                         })
                     }

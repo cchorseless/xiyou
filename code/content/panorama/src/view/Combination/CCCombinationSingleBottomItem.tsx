@@ -67,6 +67,7 @@ export class CCCombinationSingleBottomItem extends CCPanel<ICCCombinationSingleB
                             showBg: true,
                             sectName: sectName,
                             playerid: lastentity.BelongPlayerid,
+                            showSectName: true,
                         }
                     }
                 } >

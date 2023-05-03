@@ -146,12 +146,14 @@ export class EnemyUnitEntityRoot extends BattleUnitEntityRoot {
             let player = this.GetPlayer();
             let npc = this.GetDomain<IBaseNpc_Plus>();
             let vCenter = player.Hero.GetAbsOrigin();
+            let startPos = npc.GetAbsOrigin() + Vector(0, 500, 0) as Vector;
             if (this.IsEnemyTower()) {
                 for (let i = 0; i < 3; i++) {
                     let item = npc.CreateOneItem("item_imba_aeon_disk");
                     let vPosition = (vCenter + RandomVector(300)) as Vector;
-                    CreateItemOnPositionForLaunch(vCenter, item);
-                    item.LaunchLoot(false, 150, 0.5, vPosition, null)
+                    CreateItemOnPositionForLaunch(startPos, item);
+                    let time = GFuncVector.CalculateDistance(startPos, vPosition) / 750;
+                    item.LaunchLoot(false, 150, time, vPosition, null)
                 }
             }
             else {

@@ -45,4 +45,35 @@ export class TItem extends ET.Entity {
     onReload(): void {
         this.SyncClient()
     }
+
+    static GetItemById(entiyid: string): TItem | null {
+        let item = TItem.GetOneInstanceById(entiyid);
+        if (item == null) {
+            item = TEquipItem.GetOneInstanceById(entiyid);;
+        }
+        return item as TItem
+    }
+
+
+    IsValidItem(): boolean {
+        return this.IsValid && this.ItemCount > 0 && this.Config != null
+    }
+
+    IsCanUse(): boolean {
+        if (this.Config.UseScript == GEEnum.EItemUseScript.None) {
+            return false
+        }
+        return true
+    }
+}
+
+@GReloadable
+export class TMoneyItem extends TItem {
+
+}
+
+@GReloadable
+export class TEquipItem extends TItem {
+    @serializeETProps()
+    public Props: string[];
 }

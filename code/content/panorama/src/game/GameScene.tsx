@@ -1,5 +1,5 @@
 import { ET, ETGameSceneRoot } from "../../../scripts/tscripts/shared/lib/Entity";
-import { GameServiceSystemComponent } from "./system/GameStateSystemComponent";
+import { GameServiceSystemComponent } from "./system/GameServiceSystemComponent";
 import { NotificationSystemComponent } from "./system/NotificationSystemComponent";
 import { PublicBagSystemComponent } from "./system/PublicBagSystemComponent";
 

@@ -6,7 +6,6 @@ import { CCPanel } from "../CCPanel/CCPanel";
 
 
 
-import { CCAbilityButton } from "./CCAbilityButton";
 import "./CCAbilityIcon.less";
 
 interface ICCAbilityIcon_Custom extends DOTAAbilityImageAttributes {
@@ -126,34 +125,24 @@ export class CCAbilityIcon_Custom extends CCPanel<ICCAbilityIcon_Custom> {
 
 interface ICCAbilityIcon extends DOTAAbilityImageAttributes {
     abilityname: string;
-    castentityindex?: AbilityEntityIndex,
-    rarity?: IRarity;
-    playerid?: PlayerID;
     showTips?: boolean;
 
 }
 export class CCAbilityIcon extends CCPanel<ICCAbilityIcon> {
-    NODENAME = { __root__: '__root__', abilityImage: 'abilityImage' };
-    abilityImage_childs: Array<JSX.Element> = [];
-    abilityImage: React.RefObject<AbilityImage>;
     static defaultProps = {
-        castEntityIndex: -1,
-        playerid: -1,
         showTips: true,
     }
     render() {
         const abilityname = this.props.abilityname;
-        const castEntityIndex = this.props.castEntityIndex!;
         const showTips = this.props.showTips!;
         return (
             <Panel ref={this.__root__} className="CCAbilityIcon" {...this.initRootAttrs()}  >
                 <Image id="img_AbilityIcon" className={this.props.rarity} >
-                    <CCAbilityButton showtooltip={showTips} m_level={1} abilityname={abilityname} contextEntityIndex={castEntityIndex} >
-                        {this.abilityImage_childs}
-                    </CCAbilityButton>
+                    <DOTAAbilityImage showtooltip={showTips} abilityname={abilityname}  >
+                        {this.props.children}
+                        {this.__root___childs}
+                    </DOTAAbilityImage>
                 </Image>
-                {this.props.children}
-                {this.__root___childs}
             </Panel >
         )
     }

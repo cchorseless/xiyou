@@ -146,7 +146,7 @@ export class GameDebugger extends SingletonClass {
         EventHelper.addProtocolEvent(GameProtocol.Protocol.req_DebugClearAll, GHandler.create(this, this.onDebugClearAll));
         EventHelper.addProtocolEvent(GameProtocol.Protocol.req_addBot, GHandler.create(this, this.onreq_addBot));
         // 主机速度
-        EventHelper.addProtocolEvent(GameProtocol.Protocol.ChangeHostTimescale, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
+        EventHelper.addProtocolEvent(GameProtocol.Protocol.req_DebugChangeHostTimescale, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
             SendToConsole("host_timescale " + e.data);
         }));
         EventHelper.addProtocolEvent(GameProtocol.Protocol.req_DebugAddItem, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
