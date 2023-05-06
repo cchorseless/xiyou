@@ -26,7 +26,7 @@ export class CCShopItemIcon extends CCPanel<ICCShopItemIcon> {
             <Panel ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
                 {
                     this.props.onclick ?
-                        <CCIconButton onactivate={() => this.props.onclick!()} icon={<CCPanel className="ShopItemImg" backgroundImage={picurl} />} titleTooltip={{ title: itemname, tip: itemdes }} />
+                        <CCIconButton id="ShopItemIconButton" onactivate={() => this.props.onclick!()} icon={<CCPanel className="ShopItemImg" backgroundImage={picurl} />} titleTooltip={{ title: itemname, tip: itemdes }} />
                         :
                         <CCPanel className="ShopItemImg" backgroundImage={picurl} titleTooltip={{ title: itemname, tip: itemdes }} />
                 }

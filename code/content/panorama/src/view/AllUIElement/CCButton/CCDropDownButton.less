@@ -1,4 +1,4 @@
-.CC_DropDown {
+.CCDropDown {
     min-width: 100px;
     min-height: 32px;
     background-color: #363942;
@@ -24,7 +24,7 @@
             color: white;
         }
 
-        &>#CC_DropDown_arrow {
+        &>#CCDropDown_arrow {
             wash-color: white;
         }
     }
@@ -44,7 +44,7 @@
 }
 
 /** 箭头图标*/
-#CC_DropDown_arrow {
+#CCDropDown_arrow {
     align: right center;
     background-image: url("s2r://panorama/images/control_icons/arrow_dropdown_png.vtex");
     background-size: 100%;
@@ -54,9 +54,10 @@
 }
 
 /** 下拉容器 */
-.CC_DropDownMenu {
-    // min-width: 100px;
-    // width: fit-children;
+.CCDropDownMenu {
+    min-width: 100px;
+    // width: 400px;
+    width: fit-children;
     max-height: 0px;
     padding: 4px 0px;
     border-radius: 4px;
@@ -69,13 +70,15 @@
     transition-duration: 0.15s;
     transition-timing-function: ease-in-out;
 
-    &.CC_DropDownMenuShow {
-        max-height: 1000px;
+    overflow: squish scroll;
+
+    &.CCDropDownMenuShow {
+        max-height: 500px;
     }
 }
 
 /** 下拉物品包一层 */
-.CC_DropDownMenuItem {
+.CCDropDownMenuItem {
     min-height: 30px;
     // width: 100%;
     // width: fit-children;

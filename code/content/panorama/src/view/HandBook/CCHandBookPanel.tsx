@@ -9,6 +9,9 @@ import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCPopUpDialog } from "../AllUIElement/CCPopUpDialog/CCPopUpDialog";
 import { CCVerticalTable } from "../AllUIElement/CCTable/CCVerticalTable";
 import { CCCoinAddPanel } from "../Shop/CCCoinAddPanel";
+import { CCHandBookEquip } from "./CCHandBookEquip";
+import { CCHandBookFaq } from "./CCHandBookFaq";
+import { CCHandBookHero } from "./CCHandBookHero";
 import "./CCHandBookPanel.less";
 interface ICCHandBookPanel extends NodePropsData {
 
@@ -43,7 +46,7 @@ export class CCHandBookPanel extends CCPanel<ICCHandBookPanel> {
         const selectindex = this.GetState<number>("selectindex") || 0;
         return (
             <Panel id="CC_HandBookPanel" className="CC_root" ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
-                <CCPopUpDialog id="PanelBg" fullcontent={true} verticalAlign="top" marginTop="120px" onClose={() => this.closeThis()} >
+                <CCPopUpDialog id="PanelBg" fullcontent={true} onClose={() => this.closeThis()} >
                     <CCPanel id="PanelHeader" flowChildren="right">
                         <CCImage id="PanelIcon" backgroundImage={PathHelper.getCustomImageUrl("icon/" + sName + ".png")} />
                         <CCLabel id="PanelName" localizedText={"#lang_MenuButton_" + sName} />
@@ -52,19 +55,31 @@ export class CCHandBookPanel extends CCPanel<ICCHandBookPanel> {
                             <CCCoinAddPanel marginLeft={"20px"} cointype={GEEnum.EMoneyType.StarStone} value={StarStone} />
                         </CCPanel>
                     </CCPanel>
-                    <CCPanel id="PanelContent" flowChildren="right">
+                    <CCPanel id="PanelContent" flowChildren="right" width="100%" height="100%">
                         <CCVerticalTable marginTop={"20px"} list={[
-                            "hero",
-                            "wearable",
-                            "courier",
-                            "item",
-                            "artifact",
-                            "faq"
+                            $.Localize("#lang_hero"),
+                            $.Localize("#lang_wearable"),
+                            $.Localize("#lang_courier"),
+                            $.Localize("#lang_equip"),
+                            $.Localize("#lang_artifact"),
+                            $.Localize("#lang_faq")
                         ]} onChange={(index: number, text: string) => {
-                            this.UpdateState({ selectindex: index })
+                            GLogHelper.print("index:" + index + " text:" + text)
+                            this.UpdateState({ selectindex: index - 1 })
                         }} />
                         {
+                            <CCPanel id="PanelContentBg"  >
+                                {
+                                    <CCHandBookHero opacity={selectindex == 0 ? "1" : "0"} hittest={false} />
+                                }
 
+                                {
+                                    <CCHandBookEquip opacity={selectindex == 3 ? "1" : "0"} hittest={false} />
+                                }
+                                {
+                                    <CCHandBookFaq opacity={selectindex == 5 ? "1" : "0"} hittest={false} />
+                                }
+                            </CCPanel>
                         }
                     </CCPanel>
                     {this.props.children}

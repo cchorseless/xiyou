@@ -18,7 +18,8 @@ export class HeroManageComponent extends ET.Component {
         this._HeroUnits.copy(data);
 
     }
-
+    @serializeETProps()
+    SumHeroLevel: number = 0;
     @serializeETProps()
     HeroBanDesign: string[];
     public Character(): TCharacter { return this.GetParent<TCharacter>(); }
@@ -38,11 +39,11 @@ export class HeroManageComponent extends ET.Component {
     }
 
 
-    GetHeroUnit(id: string) {
-        let config = GJSONConfig.BuildingLevelUpConfig.get(id);
+    GetHeroUnit(unitname: string) {
+        let config = GJSONConfig.BuildingLevelUpConfig.get(unitname);
         if (config !== null) {
             let heroUnits = THeroUnit.GetGroupInstance(this.BelongPlayerid);
-            return heroUnits.find((hero) => { return hero.BindHeroName() == id })
+            return heroUnits.find((hero) => { return hero.BindHeroName() == unitname })
         }
     }
 }

@@ -14,11 +14,11 @@ export module CombinationConfig {
     }
     export enum ESectName {
         /**加甲流 */
-        sect_phyarm_up = "sect_phyarm_up",
+        // sect_phyarm_up = "sect_phyarm_up",
         /**减甲流 */
         sect_phyarm_down = "sect_phyarm_down",
         /**吸血流 */
-        sect_suck_blood = "sect_suck_blood",
+        // sect_suck_blood = "sect_suck_blood",
         /**治疗流 */
         sect_treatment = "sect_treatment",
         /**暴击流 */
@@ -28,11 +28,11 @@ export module CombinationConfig {
         /**护盾流 */
         sect_shield = "sect_shield",
         /**闪避流 */
-        sect_miss = "sect_miss",
+        // sect_miss = "sect_miss",
         /**冰冻流 */
-        sect_ice = "sect_ice",
+        // sect_ice = "sect_ice",
         /**缴械流 */
-        sect_disarm = "sect_disarm",
+        // sect_disarm = "sect_disarm",
         /**复制流 */
         sect_copy = "sect_copy",
         /**召唤流 */
@@ -44,13 +44,13 @@ export module CombinationConfig {
         /**变身流 */
         sect_transform = "sect_transform",
         /**沉默流 */
-        sect_scilence = "sect_scilence",
+        // sect_scilence = "sect_scilence",
         /**攻速流 */
         sect_atkspeed = "sect_atkspeed",
         /**切入流 */
-        sect_blink = "sect_blink",
+        // sect_blink = "sect_blink",
         /**生命流 */
-        sect_health = "sect_health",
+        // sect_health = "sect_health",
         /**刺甲流 */
         sect_thorns = "sect_thorns",
         /**战意流 */
@@ -66,35 +66,35 @@ export module CombinationConfig {
         /**冷却流 */
         sect_cd_down = "sect_cd_down",
         /**双头流 */
-        sect_double_head = "sect_double_head",
+        // sect_double_head = "sect_double_head",
         /**妖术流 */
         sect_black_art = "sect_black_art",
         /**恶魔流 */
         sect_demon = "sect_demon",
         /**秘法流 */
-        sect_cabala = "sect_cabala",
+        // sect_cabala = "sect_cabala",
         /**虚空流 */
-        sect_vanity = "sect_vanity",
+        // sect_vanity = "sect_vanity",
         /**光明流 */
-        sect_light = "sect_light",
+        // sect_light = "sect_light",
         /**食人流 */
         sect_cannibalism = "sect_cannibalism",
         /**火焰流 */
         sect_flame = "sect_flame",
         /**射手流 */
-        sect_archer = "sect_archer",
+        // sect_archer = "sect_archer",
         /**亡灵流 */
-        sect_ghost = "sect_ghost",
+        // sect_ghost = "sect_ghost",
         /**武器流 */
-        sect_weapon = "sect_weapon",
+        // sect_weapon = "sect_weapon",
         /**冲锋流 */
-        sect_assault = "sect_assault",
+        // sect_assault = "sect_assault",
         /**领域流 */
-        sect_territory = "sect_territory",
+        // sect_territory = "sect_territory",
         /**秒杀流 */
         sect_seckill = "sect_seckill",
         /**控场流 */
-        sect_control = "sect_control",
+        // sect_control = "sect_control",
         /**策反流 */
         sect_betrayal = "sect_betrayal",
         /**守卫流 */

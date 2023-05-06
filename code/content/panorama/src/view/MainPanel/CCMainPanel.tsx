@@ -97,42 +97,42 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
     };
 
     private onMenuNavigationToggle = (menuName: string, state: boolean) => {
-        CCShopPanel.GetInstance()?.close();
-        CCMailPanel.GetInstance()?.close();
-        CCBattlePassPanel.GetInstance()?.close();
-        CCHandBookPanel.GetInstance()?.close();
-        CCLuckyDrawPanel.GetInstance()?.close();
-        CCRankPanel.GetInstance()?.close();
-        CCActivityPanel.GetInstance()?.close();
-        CCRecordPanel.GetInstance()?.close();
-        CCStoragePanel.GetInstance()?.close();
+        CCShopPanel.GetInstance()?.hide();
+        CCMailPanel.GetInstance()?.hide();
+        CCBattlePassPanel.GetInstance()?.hide();
+        CCHandBookPanel.GetInstance()?.hide();
+        CCLuckyDrawPanel.GetInstance()?.hide();
+        CCRankPanel.GetInstance()?.hide();
+        CCActivityPanel.GetInstance()?.hide();
+        CCRecordPanel.GetInstance()?.hide();
+        CCStoragePanel.GetInstance()?.hide();
         if (state) {
             if (menuName == "store") {
-                this.addOnlyOneNodeChild(this.NODENAME.panel_allpanel, CCShopPanel)
+                this.addOrShowOnlyNodeChild(this.NODENAME.panel_allpanel, CCShopPanel)
             }
             else if (menuName == "mail") {
-                this.addOnlyOneNodeChild(this.NODENAME.panel_allpanel, CCMailPanel)
+                this.addOrShowOnlyNodeChild(this.NODENAME.panel_allpanel, CCMailPanel)
             }
             else if (menuName == "handbook") {
-                this.addOnlyOneNodeChild(this.NODENAME.panel_allpanel, CCHandBookPanel)
+                this.addOrShowOnlyNodeChild(this.NODENAME.panel_allpanel, CCHandBookPanel)
             }
             else if (menuName == "battlepass") {
-                this.addOnlyOneNodeChild(this.NODENAME.panel_allpanel, CCBattlePassPanel)
+                this.addOrShowOnlyNodeChild(this.NODENAME.panel_allpanel, CCBattlePassPanel)
             }
             else if (menuName == "draw") {
-                this.addOnlyOneNodeChild(this.NODENAME.panel_allpanel, CCLuckyDrawPanel)
+                this.addOrShowOnlyNodeChild(this.NODENAME.panel_allpanel, CCLuckyDrawPanel)
             }
             else if (menuName == "rank") {
-                this.addOnlyOneNodeChild(this.NODENAME.panel_allpanel, CCRankPanel)
+                this.addOrShowOnlyNodeChild(this.NODENAME.panel_allpanel, CCRankPanel)
             }
             else if (menuName == "activity") {
-                this.addOnlyOneNodeChild(this.NODENAME.panel_allpanel, CCActivityPanel)
+                this.addOrShowOnlyNodeChild(this.NODENAME.panel_allpanel, CCActivityPanel)
             }
             else if (menuName == "record") {
-                this.addOnlyOneNodeChild(this.NODENAME.panel_allpanel, CCRecordPanel)
+                this.addOrShowOnlyNodeChild(this.NODENAME.panel_allpanel, CCRecordPanel)
             }
             else if (menuName == "storage") {
-                this.addOnlyOneNodeChild(this.NODENAME.panel_allpanel, CCStoragePanel)
+                this.addOrShowOnlyNodeChild(this.NODENAME.panel_allpanel, CCStoragePanel)
             }
         }
         this.UpdateSelf();

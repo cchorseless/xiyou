@@ -243,6 +243,7 @@ declare namespace imba_items {
 "AbilityUnitTargetType" :string ,
 "AbilityCastRange" :string ,
 "AbilityCastPoint" :string ,
+"ShowHandBook" :string ,
 "ItemShopTags" :string ,
 "ItemQuality" :string ,
 "ItemAliases" :string ,

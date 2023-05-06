@@ -1,7 +1,7 @@
-.CC_PopUpDialog {
+.CCPopUpDialog {
     align: center center;
-    width: 981px;
-    height: 620px;
+    width: 1280px;
+    height: 800px;
     // background-image: url("file://{images}/custom_game/eom_design/ccpopupdialog/popup_bg.png");
     // background-size: 100%;
     opacity: 0;
@@ -9,12 +9,12 @@
     transition-property: opacity, position;
     transition-duration: 0.2s;
 
-    &.CC_PopupMainShow {
+    &.CCPopupMainShow {
         opacity: 1;
         y: 0px;
     }
 
-    .CC_PopupTitle {
+    .CCPopupTitle {
         font-size: 24px;
         text-shadow: 0px 0px 2px 4 rgba(0, 0, 0, 0.5);
         color: gradient(linear, 0% 0%, 0% 100%, from(#DAC59D), to(#A07D53));
@@ -22,7 +22,7 @@
         horizontal-align: center;
     }
 
-    .CC_PopupContent {
+    .CCPopupContent {
         width: 100%;
         height: 100%;
         horizontal-align: center;
@@ -40,19 +40,19 @@
         }
 
 
-        .CC_PopupContentTop {
+        .CCPopupContentTop {
             width: 100%;
             height: 338px;
         }
 
-        .CC_PopupContentBottom {
+        .CCPopupContentBottom {
             width: 100%;
             height: 100%;
             padding-bottom: 14px;
         }
     }
 
-    .CC_IconButton {
+    .PopUpCloseButton {
         horizontal-align: right;
         wash-color: none;
 
@@ -70,7 +70,7 @@
 }
 
 // 拼接弹窗背景
-.CC_PopupBG {
+.CCPopupBG {
     width: 100%;
     height: 100%;
 
@@ -78,7 +78,7 @@
     // opacity: 0.95;
     // margin: -15px;
     &.Tui7 {
-        .CC_TitleBG {
+        .CCTitleBG {
             horizontal-align: center;
             width: 480px;
             height: 54px;
@@ -87,7 +87,7 @@
             z-index: 3;
         }
 
-        .CC_Texture {
+        .CCTexture {
             width: 100%;
             height: 100%;
             margin-top: 13px;
@@ -96,7 +96,7 @@
             z-index: 4;
         }
 
-        .CC_LeftTopBG {
+        .CCLeftTopBG {
             align: left top;
             width: 120px;
             height: 120px;
@@ -108,7 +108,7 @@
             z-index: 2;
         }
 
-        .CC_CenterTopBG {
+        .CCCenterTopBG {
             align: center top;
             width: 100%;
             height: 120px;
@@ -120,7 +120,7 @@
             background-repeat: repeat-x;
         }
 
-        .CC_RightTopBG {
+        .CCRightTopBG {
             align: right top;
             width: 120px;
             height: 120px;
@@ -132,7 +132,7 @@
             z-index: 2;
         }
 
-        .CC_CenterCenterBG {
+        .CCCenterCenterBG {
             align: center center;
             width: 100%;
             height: 100%;
@@ -144,7 +144,7 @@
             z-index: -1;
         }
 
-        .CC_LeftCenterBG {
+        .CCLeftCenterBG {
             align: left center;
             width: 120px;
             height: 100%;
@@ -155,7 +155,7 @@
             background-repeat: repeat-y;
         }
 
-        .CC_RightCenterBG {
+        .CCRightCenterBG {
             align: right center;
             width: 120px;
             height: 100%;
@@ -166,7 +166,7 @@
             background-repeat: repeat-y;
         }
 
-        .CC_LeftBottomBG {
+        .CCLeftBottomBG {
             align: left bottom;
             width: 120px;
             height: 120px;
@@ -177,7 +177,7 @@
             z-index: 2;
         }
 
-        .CC_CenterBottomBG {
+        .CCCenterBottomBG {
             align: center bottom;
             width: 100%;
             height: 120px;
@@ -188,7 +188,7 @@
             background-repeat: repeat-x;
         }
 
-        .CC_RightBottomBG {
+        .CCRightBottomBG {
             align: right bottom;
             width: 120px;
             height: 120px;
@@ -201,7 +201,7 @@
     }
 
     &.Tui3 {
-        .CC_TitleBG {
+        .CCTitleBG {
             // horizontal-align: center;
             // width: 480px;
             // height: 54px;
@@ -210,7 +210,7 @@
             // z-index: 3;
         }
 
-        .CC_Texture {
+        .CCTexture {
             // width: 100%;
             // height: 100%;
             // margin-top: 13px;
@@ -219,7 +219,7 @@
             // z-index: 4;
         }
 
-        .CC_LeftTopBG {
+        .CCLeftTopBG {
             align: left top;
             width: 37px;
             height: 37px;
@@ -230,7 +230,7 @@
             z-index: 2;
         }
 
-        .CC_CenterTopBG {
+        .CCCenterTopBG {
             align: center top;
             width: 100%;
             height: 37px;
@@ -241,7 +241,7 @@
             background-repeat: repeat-x;
         }
 
-        .CC_RightTopBG {
+        .CCRightTopBG {
             align: right top;
             width: 37px;
             height: 37px;
@@ -252,7 +252,7 @@
             z-index: 2;
         }
 
-        .CC_CenterCenterBG {
+        .CCCenterCenterBG {
             align: center center;
             width: 100%;
             height: 100%;
@@ -263,7 +263,7 @@
             z-index: -1;
         }
 
-        .CC_LeftCenterBG {
+        .CCLeftCenterBG {
             align: left center;
             width: 37px;
             height: 100%;
@@ -274,7 +274,7 @@
             background-repeat: repeat-y;
         }
 
-        .CC_RightCenterBG {
+        .CCRightCenterBG {
             align: right center;
             width: 37px;
             height: 100%;
@@ -285,7 +285,7 @@
             background-repeat: repeat-y;
         }
 
-        .CC_LeftBottomBG {
+        .CCLeftBottomBG {
             align: left bottom;
             width: 37px;
             height: 37px;
@@ -296,7 +296,7 @@
             z-index: 2;
         }
 
-        .CC_CenterBottomBG {
+        .CCCenterBottomBG {
             align: center bottom;
             width: 100%;
             height: 37px;
@@ -307,7 +307,7 @@
             background-repeat: repeat-x;
         }
 
-        .CC_RightBottomBG {
+        .CCRightBottomBG {
             align: right bottom;
             width: 37px;
             height: 37px;

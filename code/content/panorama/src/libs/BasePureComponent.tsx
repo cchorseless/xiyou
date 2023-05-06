@@ -339,7 +339,7 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
             comp = await this.addNodeChildAsyncAt<M, T>(nodeName, nodeType, nodeData);
         } else {
             comp.__root__.current!.visible = true;
-            comp.UpdateSelf();
+            comp.show();
         }
         return comp as InstanceType<T>;
     }

@@ -1013,13 +1013,24 @@ export module CSSHelper {
         Yellow = "yellow",
     }
 
-    // export function GetPlayerColor(playerid: PlayerID) {
-    //     const color = Players.GetPlayerColor(playerid)
-    //     return "#" + ('00' + (color & 0xFF).toString(16)).substring(-2) +
-    //         ('00' + ((color >> 8) & 0xFF).toString(16)).substring(-2) +
-    //         ('00' + ((color >> 16) & 0xFF).toString(16)).substring(-2) +
-    //         ('00' + ((color >> 24) & 0xFF).toString(16)).substring(-2);
-    // }
+    export function GetRarityColor(rarity: IRarity) {
+        switch (rarity) {
+            case "D":
+                return EColor.White;
+            case "C":
+                return EColor.Green;
+            case "B":
+                return EColor.Blue;
+            case "A":
+                return EColor.Purple;
+            case "S":
+                return EColor.Gold;
+            case "SS":
+                return EColor.Red;
+            default:
+                return EColorDes.White;
+        }
+    }
 
     export function IsCssStyle(kk: string) {
         return (VCSSStyle as any)[kk] != null;

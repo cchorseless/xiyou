@@ -1416,6 +1416,11 @@ declare global {
         GetPrimaryAttribute(iUnitEntIndex: EntityIndex): number;
         GetHealthBarWidth(iUnitEntIndex: EntityIndex): number;
         GetHealthBarHeight(iUnitEntIndex: EntityIndex): number;
+        /**
+         * 获取单位名称
+         * @param unitname 
+         */
+        GetLocalizeUnitName(unitname: string): string;
     }
 }
 
@@ -1681,7 +1686,9 @@ Entities.GetHealthBarWidth = (iUnitEntIndex: EntityIndex) => {
 Entities.GetHealthBarHeight = (iUnitEntIndex: EntityIndex) => {
     return FuncHelper.ToFiniteNumber(Number(Entities.GetUnitData(iUnitEntIndex, "GetHealthBarHeight")), -1);
 };
-
+Entities.GetLocalizeUnitName = (unitname: string) => {
+    return $.Localize("#" + unitname)
+};
 export class BaseLibExt {
     static Init() {
 

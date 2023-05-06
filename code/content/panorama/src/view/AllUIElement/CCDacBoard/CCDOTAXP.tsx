@@ -33,10 +33,12 @@ export class CCDOTAXP extends CCPanel<ICCDOTAXP> {
             if (herounit && herounit.Level > 0) {
                 let maxexp = GJSONConfig.HeroLevelUpConfig.get(herounit.Level)!.Exp;
                 this.SetExp(herounit.Exp, maxexp);
+                this.SetLevel(herounit.Level);
                 return;
             }
         }
         this.SetExp(0, GJSONConfig.HeroLevelUpConfig.get(1)!.Exp);
+        this.SetLevel(0);
     }
     SetExp(exp: number, max: number) {
         if (!this.__DOTAXP__ || !this.__DOTAXP__.current || !this.IsRegister) return;
@@ -47,6 +49,15 @@ export class CCDOTAXP extends CCPanel<ICCDOTAXP> {
             this.UpdateState({ xpvalue: exp, xpmax: max });
         }
     }
+
+    SetLevel(level: number) {
+        if (!this.__DOTAXP__ || !this.__DOTAXP__.current || !this.IsRegister) return;
+        let xp = this.__DOTAXP__.current!.FindChildTraverse("LevelLabel") as any as LabelPanel;
+        if (xp) {
+            xp.text = level + "";
+        }
+    }
+
     __DOTAXP__ = createRef<Panel>();
 
     onStartUI() {
@@ -68,3 +79,4 @@ export class CCDOTAXP extends CCPanel<ICCDOTAXP> {
         );
     }
 }
+

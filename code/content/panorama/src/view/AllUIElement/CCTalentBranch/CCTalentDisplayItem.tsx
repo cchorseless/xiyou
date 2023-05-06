@@ -44,11 +44,12 @@ export class CCTalentDisplayItem extends CCPanel<ICCTalentDisplayItem> {
 
     render() {
         const iLocalPortraitUnit = this.props.CurSelectUnit;
+        const showLearned = Entities.GetPlayerOwnerID(iLocalPortraitUnit) == Players.GetLocalPlayer();
         return (
             <Panel className="CCTalentDisplayItem" ref={this.__root__}      {...this.initRootAttrs()}>
                 <CCPanel dialogTooltip={{
                     cls: CCTalentBranch,
-                    props: { unitName: Entities.GetUnitName(iLocalPortraitUnit), entityIndex: iLocalPortraitUnit },
+                    props: { unitName: Entities.GetUnitName(iLocalPortraitUnit), showLearned: showLearned },
                     posRight: false,
 
                 }}>

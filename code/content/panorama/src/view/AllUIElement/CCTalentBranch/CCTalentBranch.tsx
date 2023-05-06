@@ -5,7 +5,7 @@ import { CCPanel } from "../CCPanel/CCPanel";
 import "./CCTalentBranch.less";
 interface ICCTalentBranch {
     unitName: string,
-    entityIndex?: EntityIndex,
+    showLearned?: boolean,
 }
 
 
@@ -50,32 +50,26 @@ export class CCTalentBranch extends CCPanel<ICCTalentBranch> {
         let _talent_6_can_active = false;
         let _talent_7_can_active = false;
         let _talent_8_can_active = false;
-        const entityIndex = this.props.entityIndex!;
-
-        let buildingroot = GBuildingEntityRoot.GetEntity(entityIndex);
-        if (buildingroot) {
-            let herounit = buildingroot.GetHeroUnit();
-            if (herounit && herounit.HeroTalentComp) {
-                let HeroTalentComp = herounit.HeroTalentComp;
-                _talent_1_learned = HeroTalentComp.GetTalentLearn(1, true);
-                _talent_2_learned = HeroTalentComp.GetTalentLearn(1, false);
-                _talent_3_learned = HeroTalentComp.GetTalentLearn(2, true);
-                _talent_4_learned = HeroTalentComp.GetTalentLearn(2, false);
-                _talent_5_learned = HeroTalentComp.GetTalentLearn(3, true);
-                _talent_6_learned = HeroTalentComp.GetTalentLearn(3, false);
-                _talent_7_learned = HeroTalentComp.GetTalentLearn(4, true);
-                _talent_8_learned = HeroTalentComp.GetTalentLearn(4, false);
-                GLogHelper.print("天赋树", herounit.Level, HeroTalentComp.TalentPoint)
-                if (HeroTalentComp.TalentPoint > 0) {
-                    _talent_1_can_active = _talent_1_learned ? false : herounit.Level >= 4;
-                    _talent_2_can_active = _talent_2_learned ? false : herounit.Level >= 4;
-                    _talent_3_can_active = _talent_3_learned ? false : herounit.Level >= 7;
-                    _talent_4_can_active = _talent_4_learned ? false : herounit.Level >= 7;
-                    _talent_5_can_active = _talent_5_learned ? false : herounit.Level >= 10;
-                    _talent_6_can_active = _talent_6_learned ? false : herounit.Level >= 10;
-                    _talent_7_can_active = _talent_7_learned ? false : herounit.Level >= 13;
-                    _talent_8_can_active = _talent_8_learned ? false : herounit.Level >= 13;
-                }
+        const herounit = this.props.showLearned ? GGameScene.Local.TCharacter.HeroManageComp.GetHeroUnit(unitName) : null;
+        if (herounit && herounit.HeroTalentComp) {
+            let HeroTalentComp = herounit.HeroTalentComp;
+            _talent_1_learned = HeroTalentComp.GetTalentLearn(1, true);
+            _talent_2_learned = HeroTalentComp.GetTalentLearn(1, false);
+            _talent_3_learned = HeroTalentComp.GetTalentLearn(2, true);
+            _talent_4_learned = HeroTalentComp.GetTalentLearn(2, false);
+            _talent_5_learned = HeroTalentComp.GetTalentLearn(3, true);
+            _talent_6_learned = HeroTalentComp.GetTalentLearn(3, false);
+            _talent_7_learned = HeroTalentComp.GetTalentLearn(4, true);
+            _talent_8_learned = HeroTalentComp.GetTalentLearn(4, false);
+            if (HeroTalentComp.TalentPoint > 0) {
+                _talent_1_can_active = _talent_1_learned ? false : herounit.Level >= 4;
+                _talent_2_can_active = _talent_2_learned ? false : herounit.Level >= 4;
+                _talent_3_can_active = _talent_3_learned ? false : herounit.Level >= 7;
+                _talent_4_can_active = _talent_4_learned ? false : herounit.Level >= 7;
+                _talent_5_can_active = _talent_5_learned ? false : herounit.Level >= 10;
+                _talent_6_can_active = _talent_6_learned ? false : herounit.Level >= 10;
+                _talent_7_can_active = _talent_7_learned ? false : herounit.Level >= 13;
+                _talent_8_can_active = _talent_8_learned ? false : herounit.Level >= 13;
             }
         }
 

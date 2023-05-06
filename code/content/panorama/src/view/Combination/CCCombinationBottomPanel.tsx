@@ -41,7 +41,7 @@ export class CCCombinationBottomPanel extends CCPanel<ICCCombinationBottomPanel>
                 {
                     Object.keys(combinations).map((v, index) => {
                         const combos = combinations[v].map((entity) => { return entity.InstanceId });
-                        return <CCCombinationSingleBottomItem key={index + ""} SectName={v} InstanceIdList={combos} />
+                        return <CCCombinationSingleBottomItem marginLeft={"5px"} key={index + ""} SectName={v} InstanceIdList={combos} />
                     })
                 }
             </Panel>)

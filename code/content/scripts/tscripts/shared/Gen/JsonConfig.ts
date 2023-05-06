@@ -3838,6 +3838,7 @@
     "Id": "building_hero_abaddon",
     "BindHeroId": 10001,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -3905,6 +3906,7 @@
     "Id": "building_hero_abyssal_underlord",
     "BindHeroId": 10002,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -3970,6 +3972,7 @@
     "Id": "building_hero_alchemist",
     "BindHeroId": 10003,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -4038,6 +4041,7 @@
     "Id": "building_hero_ancient_apparition",
     "BindHeroId": 10004,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -4103,6 +4107,7 @@
     "Id": "building_hero_antimage",
     "BindHeroId": 10005,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -4172,6 +4177,7 @@
     "Id": "building_hero_arc_warden",
     "BindHeroId": 10006,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -4238,6 +4244,12 @@
     "Id": "building_hero_axe",
     "BindHeroId": 10007,
     "IsValid": true,
+    "Bundles": [
+      21096,
+      21232,
+      21466,
+      22214
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -4305,6 +4317,7 @@
     "Id": "building_hero_bane",
     "BindHeroId": 10008,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -4371,6 +4384,7 @@
     "Id": "building_hero_batrider",
     "BindHeroId": 10009,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -4437,6 +4451,7 @@
     "Id": "building_hero_beastmaster",
     "BindHeroId": 10010,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -4505,6 +4520,7 @@
     "Id": "building_hero_bloodseeker",
     "BindHeroId": 10011,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -4573,6 +4589,7 @@
     "Id": "building_hero_bounty_hunter",
     "BindHeroId": 10012,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -4640,6 +4657,7 @@
     "Id": "building_hero_brewmaster",
     "BindHeroId": 10013,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -4705,6 +4723,7 @@
     "Id": "building_hero_bristleback",
     "BindHeroId": 10014,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -4769,6 +4788,7 @@
     "Id": "building_hero_broodmother",
     "BindHeroId": 10015,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -4833,6 +4853,7 @@
     "Id": "building_hero_centaur",
     "BindHeroId": 10016,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -4898,6 +4919,7 @@
     "Id": "building_hero_chaos_knight",
     "BindHeroId": 10017,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -4962,6 +4984,7 @@
     "Id": "building_hero_chen",
     "BindHeroId": 10018,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -5025,6 +5048,7 @@
     "Id": "building_hero_clinkz",
     "BindHeroId": 10019,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -5088,6 +5112,7 @@
     "Id": "building_hero_crystal_maiden",
     "BindHeroId": 10020,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -5151,6 +5176,7 @@
     "Id": "building_hero_dark_seer",
     "BindHeroId": 10021,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -5214,6 +5240,7 @@
     "Id": "building_hero_dark_willow",
     "BindHeroId": 10022,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -5277,6 +5304,7 @@
     "Id": "building_hero_dawnbreaker",
     "BindHeroId": 10023,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -5339,6 +5367,7 @@
     "Id": "building_hero_dazzle",
     "BindHeroId": 10024,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -5402,6 +5431,7 @@
     "Id": "building_hero_death_prophet",
     "BindHeroId": 10025,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -5466,6 +5496,7 @@
     "Id": "building_hero_disruptor",
     "BindHeroId": 10026,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -5531,6 +5562,7 @@
     "Id": "building_hero_doom_bringer",
     "BindHeroId": 10027,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -5596,6 +5628,7 @@
     "Id": "building_hero_dragon_knight",
     "BindHeroId": 10028,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -5661,6 +5694,7 @@
     "Id": "building_hero_drow_ranger",
     "BindHeroId": 10029,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -5726,6 +5760,7 @@
     "Id": "building_hero_earth_spirit",
     "BindHeroId": 10030,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -5791,6 +5826,7 @@
     "Id": "building_hero_earthshaker",
     "BindHeroId": 10031,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -5854,6 +5890,7 @@
     "Id": "building_hero_elder_titan",
     "BindHeroId": 10032,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -5918,6 +5955,7 @@
     "Id": "building_hero_ember_spirit",
     "BindHeroId": 10033,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -5983,6 +6021,7 @@
     "Id": "building_hero_enchantress",
     "BindHeroId": 10034,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -6046,6 +6085,7 @@
     "Id": "building_hero_enigma",
     "BindHeroId": 10035,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -6109,6 +6149,7 @@
     "Id": "building_hero_faceless_void",
     "BindHeroId": 10036,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -6172,6 +6213,7 @@
     "Id": "building_hero_furion",
     "BindHeroId": 10037,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -6237,6 +6279,7 @@
     "Id": "building_hero_grimstroke",
     "BindHeroId": 10038,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -6300,6 +6343,7 @@
     "Id": "building_hero_gyrocopter",
     "BindHeroId": 10039,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -6364,6 +6408,7 @@
     "Id": "building_hero_hoodwink",
     "BindHeroId": 10040,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -6426,6 +6471,7 @@
     "Id": "building_hero_huskar",
     "BindHeroId": 10041,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -6490,6 +6536,7 @@
     "Id": "building_hero_invoker",
     "BindHeroId": 10042,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -6553,6 +6600,7 @@
     "Id": "building_hero_jakiro",
     "BindHeroId": 10043,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -6615,6 +6663,7 @@
     "Id": "building_hero_juggernaut",
     "BindHeroId": 10044,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -6678,6 +6727,7 @@
     "Id": "building_hero_keeper_of_the_light",
     "BindHeroId": 10045,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -6740,6 +6790,7 @@
     "Id": "building_hero_kunkka",
     "BindHeroId": 10046,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -6806,6 +6857,7 @@
     "Id": "building_hero_legion_commander",
     "BindHeroId": 10047,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -6870,6 +6922,7 @@
     "Id": "building_hero_leshrac",
     "BindHeroId": 10048,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -6934,6 +6987,7 @@
     "Id": "building_hero_lich",
     "BindHeroId": 10049,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -6997,6 +7051,7 @@
     "Id": "building_hero_life_stealer",
     "BindHeroId": 10050,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -7060,6 +7115,7 @@
     "Id": "building_hero_lina",
     "BindHeroId": 10051,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -7123,6 +7179,7 @@
     "Id": "building_hero_lion",
     "BindHeroId": 10052,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -7187,6 +7244,7 @@
     "Id": "building_hero_lone_druid",
     "BindHeroId": 10053,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -7250,6 +7308,7 @@
     "Id": "building_hero_luna",
     "BindHeroId": 10054,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -7313,6 +7372,7 @@
     "Id": "building_hero_lycan",
     "BindHeroId": 10055,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -7376,6 +7436,7 @@
     "Id": "building_hero_magnataur",
     "BindHeroId": 10056,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -7440,6 +7501,7 @@
     "Id": "building_hero_marci",
     "BindHeroId": 10057,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -7497,6 +7559,7 @@
     "Id": "building_hero_mars",
     "BindHeroId": 10058,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -7559,6 +7622,7 @@
     "Id": "building_hero_medusa",
     "BindHeroId": 10059,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -7624,6 +7688,7 @@
     "Id": "building_hero_meepo",
     "BindHeroId": 10060,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -7689,6 +7754,7 @@
     "Id": "building_hero_mirana",
     "BindHeroId": 10061,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -7754,6 +7820,7 @@
     "Id": "building_hero_monkey_king",
     "BindHeroId": 10062,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -7817,6 +7884,7 @@
     "Id": "building_hero_morphling",
     "BindHeroId": 10063,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -7881,6 +7949,7 @@
     "Id": "building_hero_naga_siren",
     "BindHeroId": 10064,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -7945,6 +8014,7 @@
     "Id": "building_hero_necrolyte",
     "BindHeroId": 10065,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -8009,6 +8079,7 @@
     "Id": "building_hero_nevermore",
     "BindHeroId": 10066,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -8071,6 +8142,7 @@
     "Id": "building_hero_night_stalker",
     "BindHeroId": 10067,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -8135,6 +8207,7 @@
     "Id": "building_hero_nyx_assassin",
     "BindHeroId": 10068,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -8197,6 +8270,7 @@
     "Id": "building_hero_obsidian_destroyer",
     "BindHeroId": 10069,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -8260,6 +8334,7 @@
     "Id": "building_hero_ogre_magi",
     "BindHeroId": 10070,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -8324,6 +8399,7 @@
     "Id": "building_hero_omniknight",
     "BindHeroId": 10071,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -8388,6 +8464,7 @@
     "Id": "building_hero_oracle",
     "BindHeroId": 10072,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -8451,6 +8528,7 @@
     "Id": "building_hero_pangolier",
     "BindHeroId": 10073,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -8513,6 +8591,7 @@
     "Id": "building_hero_phantom_assassin",
     "BindHeroId": 10074,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -8577,6 +8656,7 @@
     "Id": "building_hero_phantom_lancer",
     "BindHeroId": 10075,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -8641,6 +8721,7 @@
     "Id": "building_hero_phoenix",
     "BindHeroId": 10076,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -8703,6 +8784,7 @@
     "Id": "building_hero_primal_beast",
     "BindHeroId": 10077,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -8760,6 +8842,7 @@
     "Id": "building_hero_puck",
     "BindHeroId": 10078,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -8822,6 +8905,7 @@
     "Id": "building_hero_pudge",
     "BindHeroId": 10079,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -8886,6 +8970,7 @@
     "Id": "building_hero_pugna",
     "BindHeroId": 10080,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -8950,6 +9035,7 @@
     "Id": "building_hero_queenofpain",
     "BindHeroId": 10081,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -9012,6 +9098,7 @@
     "Id": "building_hero_rattletrap",
     "BindHeroId": 10082,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -9075,6 +9162,7 @@
     "Id": "building_hero_razor",
     "BindHeroId": 10083,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -9139,6 +9227,7 @@
     "Id": "building_hero_riki",
     "BindHeroId": 10084,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -9204,6 +9293,7 @@
     "Id": "building_hero_rubick",
     "BindHeroId": 10085,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -9266,6 +9356,7 @@
     "Id": "building_hero_sand_king",
     "BindHeroId": 10086,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -9330,6 +9421,7 @@
     "Id": "building_hero_shadow_demon",
     "BindHeroId": 10087,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -9392,6 +9484,7 @@
     "Id": "building_hero_shadow_shaman",
     "BindHeroId": 10088,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -9457,6 +9550,7 @@
     "Id": "building_hero_shredder",
     "BindHeroId": 10089,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -9522,6 +9616,7 @@
     "Id": "building_hero_silencer",
     "BindHeroId": 10090,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -9587,6 +9682,7 @@
     "Id": "building_hero_skeleton_king",
     "BindHeroId": 10091,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -9652,6 +9748,7 @@
     "Id": "building_hero_skywrath_mage",
     "BindHeroId": 10092,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -9717,6 +9814,7 @@
     "Id": "building_hero_slardar",
     "BindHeroId": 10093,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -9780,6 +9878,7 @@
     "Id": "building_hero_slark",
     "BindHeroId": 10094,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -9844,6 +9943,7 @@
     "Id": "building_hero_snapfire",
     "BindHeroId": 10095,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -9901,6 +10001,7 @@
     "Id": "building_hero_sniper",
     "BindHeroId": 10096,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -9965,6 +10066,7 @@
     "Id": "building_hero_spectre",
     "BindHeroId": 10097,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -10028,6 +10130,7 @@
     "Id": "building_hero_spirit_breaker",
     "BindHeroId": 10098,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -10092,6 +10195,7 @@
     "Id": "building_hero_storm_spirit",
     "BindHeroId": 10099,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -10154,6 +10258,7 @@
     "Id": "building_hero_sven",
     "BindHeroId": 10100,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -10218,6 +10323,7 @@
     "Id": "building_hero_techies",
     "BindHeroId": 10101,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -10284,6 +10390,7 @@
     "Id": "building_hero_templar_assassin",
     "BindHeroId": 10102,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -10346,6 +10453,7 @@
     "Id": "building_hero_terrorblade",
     "BindHeroId": 10103,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -10410,6 +10518,7 @@
     "Id": "building_hero_tidehunter",
     "BindHeroId": 10104,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -10475,6 +10584,7 @@
     "Id": "building_hero_tinker",
     "BindHeroId": 10105,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -10539,6 +10649,7 @@
     "Id": "building_hero_tiny",
     "BindHeroId": 10106,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -10602,6 +10713,7 @@
     "Id": "building_hero_treant",
     "BindHeroId": 10107,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -10665,6 +10777,7 @@
     "Id": "building_hero_troll_warlord",
     "BindHeroId": 10108,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -10728,6 +10841,7 @@
     "Id": "building_hero_tusk",
     "BindHeroId": 10109,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -10794,6 +10908,7 @@
     "Id": "building_hero_undying",
     "BindHeroId": 10110,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -10856,6 +10971,7 @@
     "Id": "building_hero_ursa",
     "BindHeroId": 10111,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -10920,6 +11036,7 @@
     "Id": "building_hero_vengefulspirit",
     "BindHeroId": 10112,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -10983,6 +11100,7 @@
     "Id": "building_hero_venomancer",
     "BindHeroId": 10113,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -11047,6 +11165,7 @@
     "Id": "building_hero_viper",
     "BindHeroId": 10114,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -11108,6 +11227,7 @@
     "Id": "building_hero_visage",
     "BindHeroId": 10115,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -11170,6 +11290,7 @@
     "Id": "building_hero_void_spirit",
     "BindHeroId": 10116,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -11227,6 +11348,7 @@
     "Id": "building_hero_warlock",
     "BindHeroId": 10117,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -11293,6 +11415,7 @@
     "Id": "building_hero_weaver",
     "BindHeroId": 10118,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -11357,6 +11480,7 @@
     "Id": "building_hero_windrunner",
     "BindHeroId": 10119,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -11420,6 +11544,7 @@
     "Id": "building_hero_winter_wyvern",
     "BindHeroId": 10120,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -11481,6 +11606,7 @@
     "Id": "building_hero_wisp",
     "BindHeroId": 10121,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -11538,6 +11664,7 @@
     "Id": "building_hero_witch_doctor",
     "BindHeroId": 10122,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -11602,6 +11729,7 @@
     "Id": "building_hero_zuus",
     "BindHeroId": 10123,
     "IsValid": true,
+    "Bundles": [],
     "StarUpInfo": [
       {
         "Star": 2,

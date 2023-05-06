@@ -20,22 +20,22 @@ export class CCPopUpDialog<T = {}> extends CCPanel<ICCPopUpDialog & T> {
         fullcontent: false,
         onClose: () => { }
     };
-    defaultClass() { return "CC_PopUpDialog"; };
+    defaultClass() { return "CCPopUpDialog"; };
     render() {
         const { title } = this.props;
         return (
             <Panel ref={this.__root__}   {...this.initRootAttrs()}
-                onload={(self) => { self.AddClass("CC_PopupMainShow"); }}
+                onload={(self) => { self.AddClass("CCPopupMainShow"); }}
             >
                 <CCPopupBG type={this.props.type} hasTitle={(title != undefined && title != "")} />
                 {(title != null && title != "" && !this.props.fullcontent) &&
-                    <Label className="CC_PopupTitle" text={$.Localize(title)} />
+                    <Label className="CCPopupTitle" text={$.Localize(title)} />
                 }
-                <CCIconButton zIndex={2} type={this.props.type} icon={<CCIcon_XClose type={this.props.type} />}
+                <CCIconButton className="PopUpCloseButton" zIndex={2} type={this.props.type} icon={<CCIcon_XClose type={this.props.type} />}
                     onactivate={() => {
                         this.props.onClose()
                     }} />
-                <Panel className={CSSHelper.ClassMaker("CC_PopupContent", { IsFullContent: this.props.fullcontent! })} >
+                <Panel className={CSSHelper.ClassMaker("CCPopupContent", { IsFullContent: this.props.fullcontent! })} >
                     {this.__root___childs}
                     {this.props.children}
                 </Panel>
@@ -62,27 +62,27 @@ export class CCPopupBG extends CCPanel<ICCPopupBG> {
     };
 
     defaultClass() {
-        return CSSHelper.ClassMaker("CC_PopupBG", this.props.type)
+        return CSSHelper.ClassMaker("CCPopupBG", this.props.type)
     }
 
     render() {
         return (
             this.__root___isValid &&
             <Panel ref={this.__root__}      {...this.initRootAttrs()} hittest={false} hittestchildren={false} >
-                <Panel className="CC_Texture" />
+                <Panel className="CCTexture" />
                 {this.props.hasTitle &&
-                    <Panel className="CC_TitleBG" />
+                    <Panel className="CCTitleBG" />
                 }
-                <Panel className="CC_HeaderBG" />
-                <Panel className="CC_LeftTopBG" />
-                <Panel className="CC_CenterTopBG" />
-                <Panel className="CC_RightTopBG" />
-                <Panel className="CC_LeftCenterBG" />
-                <Panel className="CC_CenterCenterBG" />
-                <Panel className="CC_RightCenterBG" />
-                <Panel className="CC_LeftBottomBG" />
-                <Panel className="CC_CenterBottomBG" />
-                <Panel className="CC_RightBottomBG" />
+                <Panel className="CCHeaderBG" />
+                <Panel className="CCLeftTopBG" />
+                <Panel className="CCCenterTopBG" />
+                <Panel className="CCRightTopBG" />
+                <Panel className="CCLeftCenterBG" />
+                <Panel className="CCCenterCenterBG" />
+                <Panel className="CCRightCenterBG" />
+                <Panel className="CCLeftBottomBG" />
+                <Panel className="CCCenterBottomBG" />
+                <Panel className="CCRightBottomBG" />
                 {this.__root___childs}
                 {this.props.children}
             </Panel>

@@ -55,7 +55,7 @@ export class CCDrawCardPanel extends CCPanel<ICCDrawCardPanel> {
     render() {
         return (<Panel ref={this.__root__} id="CC_DrawCardPanel" hittest={false} {...this.initRootAttrs()}>
             <CCPanel id="DrawBgImg" hittest={false} />
-            <CCIconButton marginRight="0px" icon={<CCIcon_XClose />} onactivate={() => { this.hide() }} />
+            <CCIconButton id="DrawCloseButton" marginRight="0px" icon={<CCIcon_XClose />} onactivate={() => { this.hide() }} />
             <CCPanel id="DrawBgBox" hittest={false}>
                 {
                     this.props.cards.map((card, index) => {

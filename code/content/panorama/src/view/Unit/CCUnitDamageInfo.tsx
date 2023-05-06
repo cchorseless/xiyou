@@ -51,9 +51,9 @@ export class CCUnitDamageInfo extends CCPanel<ICCUnitDamageInfo> {
             <Panel id="CC_UnitDamageInfo" ref={this.__root__}    {...this.initRootAttrs()}>
                 <CCPanel id="CC_tableBg" >
                     <CCTxtTable align="center center" list={["damage", "hurt"]}
-                        separatorclass="Sptxt"
+                        sepmarginleft="10px"
                         onChange={(index: number, text: string) => {
-                            this.UpdateState({ isdamage: index == 1 })
+                            this.UpdateState({ isdamage: index == 0 })
                         }} />
                 </CCPanel>
                 {

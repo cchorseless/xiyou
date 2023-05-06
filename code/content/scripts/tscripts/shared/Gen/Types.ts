@@ -111,6 +111,10 @@ export enum EMoneyType {
      * 通用英雄经验
      */
     ComHeroExp = 104,
+    /**
+     * 铭文碎片
+     */
+    InscriptionExp = 105,
 }
 }
 
@@ -2909,6 +2913,8 @@ export class BuildingLevelUpConfigRecord {
         this.BindHeroId = _json_.BindHeroId
         if (_json_.IsValid === undefined) { GLogHelper.error(1); }
         this.IsValid = _json_.IsValid
+        if (_json_.Bundles === undefined) { GLogHelper.error(1); }
+        this.Bundles = _json_.Bundles
         if (_json_.StarUpInfo === undefined) { GLogHelper.error(1); }
         { this.StarUpInfo = []; for(let _ele of _json_.StarUpInfo) { let _e : Dota.UnitStarUpConfigBean; _e = new Dota.UnitStarUpConfigBean(_ele); this.StarUpInfo.push(_e);}}
         if (_json_.TalentInfo === undefined) { GLogHelper.error(1); }
@@ -2927,6 +2933,10 @@ export class BuildingLevelUpConfigRecord {
      * 是否启用
      */
     readonly IsValid: boolean
+    /**
+     * 套装
+     */
+    readonly Bundles: number[]
     readonly StarUpInfo: Dota.UnitStarUpConfigBean[]
     readonly TalentInfo: Dota.UnitTalentInfoBean[]
 

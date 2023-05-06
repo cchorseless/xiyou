@@ -1,5 +1,4 @@
-import { PanelAttributes } from "@demon673/react-panorama";
-import React, { Component } from "react";
+import React from "react";
 import { CSSHelper } from "../../../helper/CSSHelper";
 import { CCPanel } from "../CCPanel/CCPanel";
 import { ICCButton } from "./CCButton";
@@ -23,14 +22,13 @@ export interface ICCIconButton extends ICCButton {
     icon?: React.ReactNode;
 }
 export class CCIconButton extends CCPanel<ICCIconButton, Button> {
-    defaultClass() { return CSSHelper.ClassMaker(this.props.className, "CC_IconButton", this.props.type, this.props.color) };
+    defaultClass() { return CSSHelper.ClassMaker(this.props.className, "CCIconButton", this.props.type, this.props.color) };
     static defaultProps = {
         type: "Tui3"
     }
 
     render() {
         return (
-            this.__root___isValid &&
             <Button ref={this.__root__}      {...this.initRootAttrs()}>
                 {this.props.icon}
                 {this.props.children}
