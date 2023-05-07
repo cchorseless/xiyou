@@ -15,7 +15,7 @@ export class CCArtifactInfoDialog extends CCPanel<ICCArtifactInfoDialog> {
         const lore = $.Localize("#DOTA_Tooltip_ability_" + itemname + "_Lore");
         return (
             <Panel ref={this.__root__}  {...this.initRootAttrs()}>
-                <CCPanel className="CC_ArtifactInfoDialog"  >
+                <CCPanel className="CCArtifactInfoDialog"  >
                     <CCPanelHeader flowChildren="right">
                         <DOTAItemImage className="SectImage" itemname={itemname} />
                         <CCPanel flowChildren="down" marginLeft="8px" height="100%">

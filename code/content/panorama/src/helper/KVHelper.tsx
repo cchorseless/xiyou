@@ -152,5 +152,7 @@ export module KVHelper {
     export function GetLocLang(lang: string) {
         return KVLang()[lang as any];
     }
-
+    export function GetRarityNumber(rarity: string) {
+        return GToNumber(GEEnum.ERarity[rarity as any]);
+    }
 }

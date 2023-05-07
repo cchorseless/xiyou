@@ -1,8 +1,7 @@
-/** Create By Editor*/
 import React from "react";
+import { CSSHelper } from "../../../helper/CSSHelper";
 import { KVHelper } from "../../../helper/KVHelper";
 import { PathHelper } from "../../../helper/PathHelper";
-
 import { CCPanel } from "../CCPanel/CCPanel";
 import "./CCUnitSmallIcon.less";
 
@@ -11,12 +10,7 @@ interface ICCUnitSmallIcon extends NodePropsData {
 }
 export class CCUnitSmallIcon extends CCPanel<ICCUnitSmallIcon> {
 
-    defaultStyle() {
-        return {
-            width: "50px",
-            height: "50px",
-        }
-    }
+
 
     render() {
         let SmallIconRes = "";
@@ -30,8 +24,7 @@ export class CCUnitSmallIcon extends CCPanel<ICCUnitSmallIcon> {
             GLogHelper.warn("CCUnitSmallIcon", "unitobj is null", unit_name)
         }
         return (
-            this.__root___isValid &&
-            <Panel id="CC_UnitSmallIcon" className={rarity} ref={this.__root__}    {...this.initRootAttrs()}>
+            <Panel className={CSSHelper.ClassMaker("CCUnitSmallIcon", rarity)} ref={this.__root__}    {...this.initRootAttrs()}>
                 <CCPanel id="UnitIcon" backgroundImage={PathHelper.getCustomImageUrl(`hero/hero_icon/${SmallIconRes}.png`)} />
                 {this.props.children}
                 {this.__root___childs}

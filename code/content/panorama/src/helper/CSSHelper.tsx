@@ -1013,7 +1013,7 @@ export module CSSHelper {
         Yellow = "yellow",
     }
 
-    export function GetRarityColor(rarity: IRarity) {
+    export function GetRarityColor(rarity: IRarity | string) {
         switch (rarity) {
             case "D":
                 return EColor.White;

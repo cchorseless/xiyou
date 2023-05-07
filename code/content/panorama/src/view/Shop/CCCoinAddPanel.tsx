@@ -1,5 +1,7 @@
 import React from "react";
 
+import { CCIconButton } from "../AllUIElement/CCButton/CCIconButton";
+import { CCIcon_Add } from "../AllUIElement/CCIcons/CCIcon_Add";
 import { CCIcon_CoinType } from "../AllUIElement/CCIcons/CCIcon_CoinType";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import "./CCCoinAddPanel.less";
@@ -30,7 +32,7 @@ export class CCCoinAddPanel extends CCPanel<ICCCoinAddPanel> {
                     <Label text={this.props.value} />
                 </Panel>
                 {
-                    this.props.onaddcoin != null && <Button id="iconAddBtn" onactivate={() => this.props.onaddcoin!()} />
+                    this.props.onaddcoin != null && <CCIconButton id={"CCIcon_Add"} icon={<CCIcon_Add />} onactivate={() => { this.props.onaddcoin!() }} />
                 }
                 {this.props.children}
                 {this.__root___childs}

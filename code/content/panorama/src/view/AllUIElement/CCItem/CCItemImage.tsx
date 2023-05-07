@@ -55,7 +55,7 @@ export class CCItemImage extends CCPanel<ICCItemImage> {
         // 物品等级
         const m_Level = this.getLevel();
         const m_ItemName = itemname ? itemname : Abilities.GetAbilityName(contextEntityIndex as any);
-        return < Panel className="CC_ItemImage" ref={this.__root__}
+        return < Panel className="CCItemImage" ref={this.__root__}
             onmouseover={(self) => {
                 if (this.props.showtooltip && m_ItemName != "item_blank") {
                     TipsHelper.ShowAbilityTooltip(self, m_ItemName, contextEntityIndex);

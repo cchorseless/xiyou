@@ -2,7 +2,7 @@ import React from "react";
 
 import { CCCircleAbilityItem } from "../AllUIElement/CCAbility/CCCircleAbilityItem";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
-// import "./CCCircleArtifactItem.less";
+import "./CCCircleArtifactItem.less";
 
 interface ICCCircleArtifactItem extends NodePropsData {
     iItemIndex: ItemEntityIndex,

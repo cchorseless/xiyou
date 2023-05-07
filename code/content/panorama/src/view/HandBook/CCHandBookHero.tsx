@@ -53,12 +53,12 @@ export class CCHandBookHero extends CCPanel<ICCHandBookHero> {
             <Panel className="CCHandBookHero" ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
                 <CCPanel id="HandBookHeroLeft" flowChildren="down" width="65%" height="100%">
                     <CCPanel id="HandBookSelect" flowChildren="right" width="100%">
-                        <CCLabel text={"稀有度："} verticalAlign="center" />
+                        <CCLabel text={"稀有度："} marginLeft={"20px"} verticalAlign="center" />
                         <CCTxtTable id="HandBookSelectTable" verticalAlign="center" sepmarginleft={"5px"} list={["All", "C", "B", "A", "S"]}
                             onChange={(index: number, text: string) => {
                                 this.UpdateState({ rarity: text })
                             }} />
-                        <CCLabel text={"流派："} marginLeft={"30%"} verticalAlign="center" />
+                        <CCLabel text={"流派："} marginLeft={"150px"} verticalAlign="center" />
                         <CCDropDownButton placeholder={"All"} verticalAlign="center" onChange={(index) => {
                             this.UpdateState({ cursect: index == 0 ? "All" : allSect[index - 1] })
                         }} >

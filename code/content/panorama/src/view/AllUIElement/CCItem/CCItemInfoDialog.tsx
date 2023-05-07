@@ -325,7 +325,7 @@ export class CCItemInfoDialog extends CCPanel<ICCItemInfoDialog> {
         dialogVariables['extradescription'] = sExtraDescription;
 
         // 冷却时间
-        let aCooldowns = Abilities.StringToValues(tData.AbilityCooldown || "");
+        let aCooldowns = Abilities.StringToValues(tData.AbilityCooldown as string || "");
         for (let i = 0; i < Math.max(aCooldowns.length, iMaxLevel); i++) {
             aCooldowns[i] = iItemIndex != -1 ? Abilities.GetLevelCooldown(iItemIndex, i) : (aCooldowns[i] || 0);
         }

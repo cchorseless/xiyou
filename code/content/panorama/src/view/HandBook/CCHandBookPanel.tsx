@@ -9,10 +9,13 @@ import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCPopUpDialog } from "../AllUIElement/CCPopUpDialog/CCPopUpDialog";
 import { CCVerticalTable } from "../AllUIElement/CCTable/CCVerticalTable";
 import { CCCoinAddPanel } from "../Shop/CCCoinAddPanel";
+import { CCHandBookArtifact } from "./CCHandBookArtifact";
+import { CCHandBookCourier } from "./CCHandBookCourier";
 import { CCHandBookEquip } from "./CCHandBookEquip";
 import { CCHandBookFaq } from "./CCHandBookFaq";
 import { CCHandBookHero } from "./CCHandBookHero";
 import "./CCHandBookPanel.less";
+import { CCHandBookWearable } from "./CCHandBookWearable";
 interface ICCHandBookPanel extends NodePropsData {
 
 }
@@ -27,7 +30,7 @@ export class CCHandBookPanel extends CCPanel<ICCHandBookPanel> {
     }
 
     closeThis() {
-        this.close();
+        this.hide();
         CCMenuNavigation.GetInstance()?.NoSelectAny();
     }
 
@@ -72,9 +75,17 @@ export class CCHandBookPanel extends CCPanel<ICCHandBookPanel> {
                                 {
                                     <CCHandBookHero opacity={selectindex == 0 ? "1" : "0"} hittest={false} />
                                 }
-
+                                {
+                                    <CCHandBookWearable opacity={selectindex == 1 ? "1" : "0"} hittest={false} />
+                                }
+                                {
+                                    <CCHandBookCourier opacity={selectindex == 2 ? "1" : "0"} hittest={false} />
+                                }
                                 {
                                     <CCHandBookEquip opacity={selectindex == 3 ? "1" : "0"} hittest={false} />
+                                }
+                                {
+                                    <CCHandBookArtifact opacity={selectindex == 4 ? "1" : "0"} hittest={false} />
                                 }
                                 {
                                     <CCHandBookFaq opacity={selectindex == 5 ? "1" : "0"} hittest={false} />

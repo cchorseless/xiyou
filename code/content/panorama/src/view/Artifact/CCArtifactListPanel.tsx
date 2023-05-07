@@ -43,7 +43,7 @@ export class CCArtifactListPanel extends CCPanel<ICCArtifactListPanel> {
                     <Image id="ToggleImg" />
                 </Button>
                 <Panel id="ArtifactPanelAndTitle" className={CSSHelper.ClassMaker({ ExpandArtifact: ExpandArtifact })} hittest={false}>
-                    <Label id="ArtifactTitle" localizedText="#ArtifactTitle" />
+                    <Label id="ArtifactTitle" localizedText="#sArtifactTitle" />
                     <Panel id="ArtifactPanel" hittest={false}>
                         <Panel id="ArtifactList" hittest={false}>
                             {

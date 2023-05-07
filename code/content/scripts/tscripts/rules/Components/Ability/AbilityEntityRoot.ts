@@ -1,6 +1,4 @@
 import { KVHelper } from "../../../helper/KVHelper";
-import { ResHelper } from "../../../helper/ResHelper";
-import { CombinationConfig } from "../../../shared/CombinationConfig";
 import { BaseEntityRoot } from "../../Entity/BaseEntityRoot";
 
 export class AbilityEntityRoot extends BaseEntityRoot {
@@ -93,21 +91,21 @@ export class AbilityEntityRoot extends BaseEntityRoot {
     OnRound_Battle() {
         let ability = this.GetDomain<IBaseAbility_Plus>();
         let npc = ability.GetOwnerPlus();
-        if (this.isSectLabels(CombinationConfig.ESectName.sect_suck_blood)) {
-            EmitSoundOn("dac.warlock.soul_ring", npc);
-            ResHelper.CreateParticle(new ResHelper.ParticleInfo().set_iAttachment(ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW)
-                .set_owner(npc)
-                .set_resPath("particles/items2_fx/soul_ring.vpcf")
-                .set_validtime(2)
-            )
-            npc.StartGestureWithPlaybackRate(GameActivity_t.ACT_DOTA_CAST_ABILITY_1, 1)
-            npc.SetHealth(npc.GetHealth() * 0.8)
-            let u_mana = npc.GetMana() + 40
-            if (u_mana > 100) {
-                u_mana = 100
-            }
-            npc.SetMana(u_mana)
-        }
+        // if (this.isSectLabels(CombinationConfig.ESectName.sect_suck_blood)) {
+        //     EmitSoundOn("dac.warlock.soul_ring", npc);
+        //     ResHelper.CreateParticle(new ResHelper.ParticleInfo().set_iAttachment(ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW)
+        //         .set_owner(npc)
+        //         .set_resPath("particles/items2_fx/soul_ring.vpcf")
+        //         .set_validtime(2)
+        //     )
+        //     npc.StartGestureWithPlaybackRate(GameActivity_t.ACT_DOTA_CAST_ABILITY_1, 1)
+        //     npc.SetHealth(npc.GetHealth() * 0.8)
+        //     let u_mana = npc.GetMana() + 40
+        //     if (u_mana > 100) {
+        //         u_mana = 100
+        //     }
+        //     npc.SetMana(u_mana)
+        // }
 
     }
 }

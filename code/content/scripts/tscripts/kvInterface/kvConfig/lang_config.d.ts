@@ -199,6 +199,9 @@ declare namespace lang_config {
 "Notification_Interval_Prize_Wood" :OBJ_2_1 ,
 "Notification_Interval_Prize_SoulCrystal" :OBJ_2_1 ,
 "Welcome_to_our_game" :OBJ_2_1 ,
+"ArtifactTitle" :OBJ_2_1 ,
+"Artifact_Selector_title" :OBJ_2_1 ,
+"Artifact_Selector_No_Want" :OBJ_2_1 ,
 [k:string] : OBJ_2_1 }
  interface OBJ_2_1 {
 "Des" :string ,

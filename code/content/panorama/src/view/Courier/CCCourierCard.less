@@ -1,33 +1,39 @@
 .CourierCard {
-    width: 250px;
-    height: 350px;
+    width: 230px;
+    height: 250px;
 
-    background-image: url("file://{images}/custom_game/courier/courier_r_bg.png");
+    // background-image: url("file://{images}/custom_game/courier/courier_a_bg.png");
     background-repeat: no-repeat;
     background-size: 100% 100%;
 
-    &.R {
-        background-image: url("file://{images}/custom_game/courier/courier_r_bg.png");
+    &.B {
+        // background-image: url("file://{images}/custom_game/courier/courier_b_bg.png");
 
         #CourierAbility {
             border-color: #4e91c6 #4c92c5 #266c9f #4c92c5;
         }
+
+
     }
 
-    &.SR {
-        background-image: url("file://{images}/custom_game/courier/courier_sr_bg.png");
+    &.A {
+        // background-image: url("file://{images}/custom_game/courier/courier_a_bg.png");
 
         #CourierAbility {
             border-color: #9170f2 #8f6adc #755bb2 #8f6adc;
         }
+
+
     }
 
-    &.SSR {
-        background-image: url("file://{images}/custom_game/courier/courier_ssr_bg.png");
+    &.S {
+        // background-image: url("file://{images}/custom_game/courier/courier_s_bg.png");
 
         #CourierAbility {
             border-color: #b69f5b #a08242 #886932 #a08242;
         }
+
+
     }
 
     #CourierName {
@@ -35,8 +41,7 @@
         margin-top: 23px;
         width: 143px;
         // height: 21px;
-
-        color: #ffffff;
+        // color: #ffffff;
         font-size: 18px;
         text-shadow: 0px 0px 3px 3 #000000;
         text-overflow: shrink;
@@ -44,18 +49,18 @@
     }
 
     #CourierScene {
-        width: 90%;
-        height: 90%;
+        width: 100%;
+        height: 100%;
         horizontal-align: center;
         margin-right: 2px;
     }
 
     #CourierAbility {
-        align: right bottom;
+        align: right top;
         margin-right: 20px;
-        margin-bottom: 20px;
-        width: 52px;
-        height: width-percentage(100%);
+        margin-top: 40px;
+        width: 40px;
+        height: 40px;
         border: 2px solid transparent;
         box-shadow: 0px 0px 1px 1px #00000040;
 
@@ -66,10 +71,7 @@
         background-size: 100% 100%;
         background-repeat: no-repeat;
 
-        opacity: 0.25;
-
         &:hover {
-            box-shadow: 0px 0px 1px 1px #000000;
             opacity: 1;
         }
     }
