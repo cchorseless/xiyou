@@ -36,6 +36,19 @@ export class CCDebugPanel extends CCPanel<ICCDebugPanel> {
         const dotaitemsNames: string[] = Object.keys(KVHelper.KVData().dota_items);
         const dotaabilitiesNames: string[] = Object.keys(KVHelper.KVData().dota_abilities);
         const heroList: string[] = Object.keys(KVHelper.KVData().building_unit_tower);
+        heroList.sort((a, b) => {
+            const aData = KVHelper.GetUnitSectLabels(a);
+            const bData = KVHelper.GetUnitSectLabels(b);
+            let secta = "0";
+            let sectb = "0";
+            if (aData) {
+                secta = aData[0];
+            }
+            if (bData) {
+                sectb = bData[0];
+            }
+            return secta > sectb ? 1 : secta < sectb ? -1 : 0;
+        })
         const enemylist: string[] = Object.keys(KVHelper.KVData().building_unit_enemy);;
         const stateList: string[] = [];
         const sectList: string[] = [...CombinationConfig.ESectNameList];

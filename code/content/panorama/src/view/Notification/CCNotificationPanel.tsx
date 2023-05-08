@@ -221,7 +221,11 @@ export class CCNotification extends CCPanel<ICCNotification>{
     }
     ReplacePlayerIcon(playerID: PlayerID) {
         $.Schedule(0, () => {
-            let heroIconPanels: Panel[] = this.lbl_notifica.current?.FindChildrenWithClassTraverse("CombatEventHeroPlayer_" + playerID) || [] as Panel[];
+            let current = this.lbl_notifica.current;
+            if (!(current && current.IsValid())) {
+                return
+            }
+            let heroIconPanels: Panel[] = current.FindChildrenWithClassTraverse("CombatEventHeroPlayer_" + playerID) || [] as Panel[];
             for (let index = 0; index < heroIconPanels.length; index++) {
                 let pHeroIconPanel = heroIconPanels[index];
                 pHeroIconPanel.RemoveClass("CombatEventHeroPlayer_" + playerID);
@@ -232,7 +236,11 @@ export class CCNotification extends CCPanel<ICCNotification>{
 
     RenderCoinImg() {
         $.Schedule(0, () => {
-            let pParents = this.lbl_notifica.current?.FindChildrenWithClassTraverse("ChatCoinParent") || [] as Panel[];;
+            let current = this.lbl_notifica.current;
+            if (!(current && current.IsValid())) {
+                return
+            }
+            let pParents = current.FindChildrenWithClassTraverse("ChatCoinParent") || [] as Panel[];;
             pParents.forEach(pParent => {
                 let cointype = 0;
                 if (pParent.BHasClass("coin_gold")) {
@@ -259,7 +267,11 @@ export class CCNotification extends CCPanel<ICCNotification>{
      */
     RenderItemImg(itemName: string, sItemClass: string, iItemLevel?: number) {
         $.Schedule(0, () => {
-            let itemIconPanels = this.lbl_notifica.current?.FindChildrenWithClassTraverse(sItemClass) || [] as Panel[];
+            let current = this.lbl_notifica.current;
+            if (!(current && current.IsValid())) {
+                return
+            }
+            let itemIconPanels = current.FindChildrenWithClassTraverse(sItemClass) || [] as Panel[];
             itemIconPanels.forEach((itemIconPanel) => {
                 itemIconPanel.RemoveClass(sItemClass);
                 if (itemName.indexOf("artifact") != -1) {

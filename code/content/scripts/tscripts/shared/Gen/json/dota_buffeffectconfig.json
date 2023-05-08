@@ -8,6 +8,10 @@
         10
       ],
       [
+        "radius",
+        325
+      ],
+      [
         "prop_pect",
         20
       ]
@@ -22,6 +26,10 @@
         10
       ],
       [
+        "radius",
+        325
+      ],
+      [
         "prop_pect",
         20
       ]
@@ -34,6 +42,10 @@
       [
         "damage_hp_pect",
         10
+      ],
+      [
+        "radius",
+        325
       ],
       [
         "prop_pect",
@@ -80,12 +92,12 @@
         10
       ],
       [
-        "damage_maxhp_pect",
-        0.5
+        "heal_amount",
+        100
       ],
       [
-        "damage_per_sec",
-        50
+        "damage_amount",
+        100
       ]
     ]
   },
@@ -98,12 +110,12 @@
         15
       ],
       [
-        "damage_maxhp_pect",
-        0.5
+        "heal_amount",
+        200
       ],
       [
-        "damage_per_sec",
-        50
+        "damage_amount",
+        200
       ]
     ]
   },
@@ -116,12 +128,12 @@
         20
       ],
       [
-        "damage_maxhp_pect",
-        0.5
+        "heal_amount",
+        300
       ],
       [
-        "damage_per_sec",
-        50
+        "damage_amount",
+        300
       ]
     ]
   },
@@ -214,12 +226,12 @@
     "target": "hero",
     "propinfo": [
       [
-        "poision_pect",
-        20
+        "atkspeed",
+        -20
       ],
       [
-        "poision_interval_pect",
-        -20
+        "damage",
+        100
       ]
     ]
   },
@@ -228,12 +240,12 @@
     "target": "hero",
     "propinfo": [
       [
-        "poision_pect",
-        20
+        "atkspeed",
+        -20
       ],
       [
-        "poision_interval_pect",
-        -20
+        "damage",
+        150
       ]
     ]
   },
@@ -242,12 +254,12 @@
     "target": "hero",
     "propinfo": [
       [
-        "poision_pect",
-        20
+        "atkspeed",
+        -20
       ],
       [
-        "poision_interval_pect",
-        -20
+        "damage",
+        200
       ]
     ]
   },
@@ -257,11 +269,11 @@
     "propinfo": [
       [
         "crit_chance",
-        20
+        10
       ],
       [
         "crit_damage",
-        200
+        50
       ]
     ]
   },
@@ -271,11 +283,11 @@
     "propinfo": [
       [
         "crit_chance",
-        20
+        10
       ],
       [
         "crit_damage",
-        300
+        50
       ]
     ]
   },
@@ -285,11 +297,11 @@
     "propinfo": [
       [
         "crit_chance",
-        20
+        10
       ],
       [
         "crit_damage",
-        400
+        100
       ]
     ]
   },
@@ -313,7 +325,7 @@
     "propinfo": [
       [
         "block_value",
-        500
+        300
       ],
       [
         "prop_pect",
@@ -323,7 +335,7 @@
   },
   {
     "effectid": "modifier_sect_shield_base_c",
-    "target": "team",
+    "target": "hero",
     "propinfo": [
       [
         "block_value",

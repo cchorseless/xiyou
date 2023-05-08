@@ -83,6 +83,13 @@ export class BattleUnitManagerComponent extends ET.Component {
         allsummon.forEach((s) => { s.Dispose() })
         allillon.forEach((s) => { s.Dispose() })
     }
+
+
+    public ClearBuildingRuntime() {
+        let domain = GGameScene.GetPlayer(this.BelongPlayerid)
+        let allRuntime = domain.GetDomainChilds(BuildingRuntimeEntityRoot);
+        allRuntime.forEach((s) => { s.Dispose() })
+    }
 }
 
 declare global {

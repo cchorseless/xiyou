@@ -23,8 +23,8 @@ export class InventoryComponent extends ET.Component implements IRoundStateCallb
     OnRound_Battle() {
         let allItem = this.getAllValidCombinationItem();
         allItem.forEach(item => {
-            if (item.OnRoundStartBattle) {
-                item.OnRoundStartBattle()
+            if (item.OnRound_Battle) {
+                item.OnRound_Battle()
             }
         })
     }
@@ -32,8 +32,8 @@ export class InventoryComponent extends ET.Component implements IRoundStateCallb
     OnRound_Prize(round: ERoundBoard) {
         let allItem = this.getAllValidCombinationItem();
         allItem.forEach(item => {
-            if (item.OnRoundStartPrize) {
-                item.OnRoundStartPrize(round)
+            if (item.OnRound_Prize) {
+                item.OnRound_Prize(round)
             }
         })
     }

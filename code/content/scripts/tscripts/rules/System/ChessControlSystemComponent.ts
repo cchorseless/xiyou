@@ -182,7 +182,7 @@ export class ChessControlSystemComponent extends ET.SingletonComponent {
         return r;
     }
     // x ,y playerid
-    public GetBoardGirdCenterVector3(v: ChessVector) {
+    public GetBoardGirdVector3(v: ChessVector) {
         let playerid = v.playerid as PlayerID;
         let minv: Vector;
         let x: number;
@@ -198,14 +198,13 @@ export class ChessControlSystemComponent extends ET.SingletonComponent {
         }
         return Vector(x, y, 0);
     }
-
     public FindBoardInGirdChess(v: ChessVector) {
         let playerid = v.playerid as PlayerID;
         let playerroot = GGameScene.GetPlayer(playerid)
         if (!playerroot) {
             return;
         }
-        let pos = this.GetBoardGirdCenterVector3(v);
+        let pos = this.GetBoardGirdVector3(v);
         let r: IBuildingEntityRoot[] = [];
         let allbuilding = playerroot.BuildingManager().getAllBuilding();
         for (let building of allbuilding) {

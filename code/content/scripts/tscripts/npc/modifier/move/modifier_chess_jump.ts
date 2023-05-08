@@ -64,7 +64,7 @@ export class modifier_chess_jump extends BaseModifierMotionBoth_Plus {
 
     CheckState() {
         let state = {
-            //  [modifierstate.MODIFIER_STATE_STUNNED] : true,
+            [modifierstate.MODIFIER_STATE_STUNNED]: true,
             //  [modifierstate.MODIFIER_STATE_UNSELECTABLE] : true,
             [modifierstate.MODIFIER_STATE_SILENCED]: true,
             [modifierstate.MODIFIER_STATE_DISARMED]: true,

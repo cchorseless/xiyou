@@ -305,6 +305,7 @@ export class imba_abaddon_aphotic_shield extends BaseAbility_Plus {
     //     return 0;
     // }
 
+
     AutoSpellSelf() {
         let range = this.GetCastRangePlus();
         return AI_ability.TARGET_if_friend(this, range);

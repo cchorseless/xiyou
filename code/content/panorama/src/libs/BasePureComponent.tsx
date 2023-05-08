@@ -443,7 +443,6 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
      * @param time 时间
      */
     public destroy() {
-        this.onDestroy();
         if (this.__root__ && this.__root__.current) {
             let nodeinfo = BasePureComponentSystem.GetReactElement(this.InstanceId);
             if (nodeinfo) {
@@ -622,6 +621,7 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
         }
     }
     public componentWillUnmount() {
+        this.onDestroy();
         this.setRegister(false);
         // 移除所有监听事件
         this.allGameEventID.forEach((e) => {

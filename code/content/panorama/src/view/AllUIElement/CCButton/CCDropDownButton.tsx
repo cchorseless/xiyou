@@ -76,6 +76,8 @@ export class CCDropDownButton extends CCPanel<ICCDropDownButton, TextButton> {
     onDestroy() {
         if (this.myMenu != undefined) {
             render(<></>, this.myMenu);
+            this.myMenu.DeleteAsync(-1);
+            this.myMenu = null as any;
         }
     }
 

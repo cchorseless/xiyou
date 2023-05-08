@@ -200,15 +200,6 @@ export class CCHandBookHeroInfo extends CCPanel<ICCHandBookHeroItem> {
                 {/* </CCPanel> */}
                 <CCPanel flowChildren="down" width="100%" marginTop={"20px"}>
                     <CCLabel text="铭文详情" horizontalAlign="center" />
-                    {/* <CCPanel flowChildren="right" scroll={"x"} >
-                        {
-                            allwears && allwears.map((wear, i) => {
-                                return <CCEconItemImage key={"" + i} itemdef={wear} onactivate={() => {
-                                    this.UpdateState({ curwearid: wear });
-                                }} />
-                            })
-                        }
-                    </CCPanel> */}
                     <CCDOTAHeroRelicSummary key={Math.random() * 100 + ""} unitName={unitname} />
                 </CCPanel>
             </Panel>

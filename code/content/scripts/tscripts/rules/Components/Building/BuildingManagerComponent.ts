@@ -222,7 +222,7 @@ export class BuildingManagerComponent extends ET.Component implements IRoundStat
             EmitSoundOn("General.CastFail_NoMana", GGameScene.GetPlayer(this.BelongPlayerid).Hero);
             return r;
         }
-        let targetPos = ChessControlSystem.GetBoardGirdCenterVector3(boardVec);
+        let targetPos = ChessControlSystem.GetBoardGirdVector3(boardVec);
         let oldNpcarr = ChessControlSystem.FindBoardInGirdChess(boardVec);
         //  人口判断
         let iPopulationAdd = 0;
@@ -327,6 +327,10 @@ export class BuildingManagerComponent extends ET.Component implements IRoundStat
         this.getAllBattleBuilding(false).forEach((b) => {
             b.OnRound_WaitingEnd();
         });
+        // 防止由于售卖棋子导致的漏掉的
+        let player = GGameScene.GetPlayer(this.BelongPlayerid);
+        player.BattleUnitManagerComp().ClearBuildingRuntime();
+
     }
 
 }

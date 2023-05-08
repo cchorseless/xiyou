@@ -162,6 +162,7 @@ export class modifier_property extends BaseModifier_Plus {
         if (IsClient()) { return }
         event.damage_category = DamageCategory_t.DOTA_DAMAGE_CATEGORY_ATTACK;
         let hAttacker = event.attacker as IBaseNpc_Plus;
+        let target = event.target as IBaseNpc_Plus;
         if (!IsValid(hAttacker) || hAttacker != this.GetParentPlus()) { return }
         // 不暴击
         if (GBattleSystem.AttackFilter(event.record, GEBATTLE_ATTACK_STATE.ATTACK_STATE_NO_CRIT)) {
@@ -194,6 +195,13 @@ export class modifier_property extends BaseModifier_Plus {
         }
         if (critbool) {
             GBattleSystem._DamageStateAttackCrit(event.record);
+            let nFXIndex = ResHelper.CreateParticleEx("particles/units/heroes/hero_phantom_assassin/phantom_assassin_crit_impact.vpcf", ParticleAttachment_t.PATTACH_CUSTOMORIGIN, undefined);
+            ParticleManager.SetParticleControlEnt(nFXIndex, 0, target, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", target.GetOrigin(), true);
+            ParticleManager.SetParticleControl(nFXIndex, 1, target.GetOrigin());
+            ParticleManager.SetParticleControlForward(nFXIndex, 1, -this.GetCasterPlus().GetForwardVector() as Vector);
+            ParticleManager.SetParticleControlEnt(nFXIndex, 10, target, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, undefined, target.GetOrigin(), true);
+            ParticleManager.ReleaseParticleIndex(nFXIndex);
+            EmitSoundOn("Hero_PhantomAssassin.Spatter", target);
             modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ATTACK_CRIT);
             modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ANY_CRIT);
             return _damage_base

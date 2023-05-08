@@ -153,7 +153,7 @@ export class ChessMoveComponent extends ET.Component {
         if (chess.length > 1) {
             let pos = sys.GetBoardEmptyGirdRandomAround(chessPos);
             if (pos != null) {
-                this.blinkChessX(sys.GetBoardGirdCenterVector3(pos));
+                this.blinkChessX(sys.GetBoardGirdVector3(pos));
                 return;
             }
         }
@@ -191,7 +191,7 @@ export class ChessMoveComponent extends ET.Component {
         });
         for (let pos of around) {
             if (sys.IsBoardEmptyGird(pos) && !sys.IsBlinkTargetGird(pos)) {
-                return sys.GetBoardGirdCenterVector3(pos);
+                return sys.GetBoardGirdVector3(pos);
             }
         }
     }

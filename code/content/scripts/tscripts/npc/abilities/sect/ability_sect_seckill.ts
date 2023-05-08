@@ -8,7 +8,6 @@ export class ability_sect_seckill extends BaseAbility_Plus {
 
     OnSpellStart() {
     }
-
 }
 
 

@@ -182,7 +182,7 @@ export class ECombination extends ET.Entity {
                                     entity = unit.GetDomain<IBaseNpc_Plus>();
                                 }
                                 if (entity) {
-                                    entity.HandleCiTiao(buff, isActive);
+                                    entity.HandleCiTiao(buff, isActive, abilityname);
                                 }
                             })
                         }
@@ -194,6 +194,44 @@ export class ECombination extends ET.Entity {
 
     OnRound_Battle() {
         this.ApplyBuffEffect(true);
+        // let configMap = this.config;
+        // if (configMap) {
+        //     const abilitylist: { [abilityname: string]: string[] } = {}
+        //     for (let key in configMap) {
+        //         let config = configMap[key];
+        //         let combuff = config.acitveCommonEffect;
+        //         let spebuff = config.acitveSpecialEffect;
+        //         if (combuff && combuff.length > 0) {
+        //             abilitylist[config.Abilityid] = abilitylist[config.Abilityid] || [];
+        //             abilitylist[config.Abilityid].push(combuff);
+        //         }
+        //         if (spebuff && spebuff.length > 0) {
+        //             abilitylist[config.Abilityid] = abilitylist[config.Abilityid] || [];
+        //             abilitylist[config.Abilityid].push(spebuff);
+        //         }
+        //     };
+        //     let getAllBattleUnit = this.getAllBattleUnit();
+        //     for (let abilityname in abilitylist) {
+        //         let bufflist = abilitylist[abilityname];
+        //         getAllBattleUnit.forEach(unit => {
+        //             let root = unit.GetDomain<IBaseNpc_Plus>();
+        //             if (root) {
+        //                 let ability = root.FindAbilityByName(abilityname) as IBaseAbility_Plus;
+        //                 if (ability) {
+        //                     bufflist.forEach(buff => {
+        //                         root.addOnlyBuff(buff, root, ability);
+        //                     })
+        //                 }
+        //                 let item = root.FindItemInInventory(abilityname);
+        //                 if (item) {
+        //                     bufflist.forEach(buff => {
+        //                         root.addOnlyBuff(buff, root, item as any);
+        //                     })
+        //                 }
+        //             }
+        //         });
+        //     }
+        // }
     }
 
     OnRound_Prize(round: ERoundBoard) {

@@ -48,13 +48,18 @@ export module JsonConfigHelper {
     }
 
 
-    export function GetAbilitySectSpeEffectName(abilityid: string, level: ISectLevel = "b") {
+    export function GetAbilitySectEffectName(abilityid: string, level: ISectLevel = "b", isCommonEffect = true) {
         let list = AbilitySectInfo[abilityid];
         if (list && list.length > 0) {
             for (let i = 0; i < list.length; i++) {
                 let v = GJSONConfig.CombinationConfig.get(list[i])!;
                 if (v.SectLevel == level) {
-                    return v.acitveSpecialEffect;
+                    if (isCommonEffect) {
+                        return v.acitveCommonEffect;
+                    }
+                    else {
+                        return v.acitveSpecialEffect;
+                    }
                 }
             }
         }

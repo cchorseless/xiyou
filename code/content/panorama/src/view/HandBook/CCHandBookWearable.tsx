@@ -146,7 +146,10 @@ export class CCHandBookWearableInfo extends CCPanel<ICCHandBookWearableInfo> {
         }
 
         let allwears = GJSONConfig.BuildingLevelUpConfig.get(unitname)?.Bundles;
-        const curwearid = this.GetState<number>("curwearid", 0);
+        let curwearid = 0;
+        if (unitname == this.GetState<string>("curunitname", "")) {
+            curwearid = this.GetState<number>("curwearid", 0);
+        }
         return (
             <Panel className="CCHandBookWearableInfo" ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
                 <CCPanel horizontalAlign="center">
@@ -173,7 +176,7 @@ export class CCHandBookWearableInfo extends CCPanel<ICCHandBookWearableInfo> {
                         {
                             allwears && allwears.map((wear, i) => {
                                 return <CCEconItemImage key={"" + i} itemdef={wear} onactivate={() => {
-                                    this.UpdateState({ curwearid: wear });
+                                    this.UpdateState({ curwearid: wear, curunitname: unitname });
                                 }} />
                             })
                         }

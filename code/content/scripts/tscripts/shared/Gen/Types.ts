@@ -350,9 +350,69 @@ export enum EEquipSolt {
      */
     Scepter = 1,
     /**
+     * 皮肤
+     */
+    Skin = 2,
+    /**
+     * A类型1槽位
+     */
+    InscriptionA_1 = 3,
+    /**
+     * A类型2槽位
+     */
+    InscriptionA_2 = 4,
+    /**
+     * A类型3槽位
+     */
+    InscriptionA_3 = 5,
+    /**
+     * A类型4槽位
+     */
+    InscriptionA_4 = 6,
+    /**
+     * B类型1槽位
+     */
+    InscriptionB_1 = 7,
+    /**
+     * B类型2槽位
+     */
+    InscriptionB_2 = 8,
+    /**
+     * B类型3槽位
+     */
+    InscriptionB_3 = 9,
+    /**
+     * B类型4槽位
+     */
+    InscriptionB_4 = 10,
+    /**
+     * C类型1槽位
+     */
+    InscriptionC_1 = 11,
+    /**
+     * C类型2槽位
+     */
+    InscriptionC_2 = 12,
+    /**
+     * C类型3槽位
+     */
+    InscriptionC_3 = 13,
+    /**
+     * D类型1槽位
+     */
+    InscriptionD_1 = 14,
+    /**
+     * D类型2槽位
+     */
+    InscriptionD_2 = 15,
+    /**
+     * D类型3槽位
+     */
+    InscriptionD_3 = 16,
+    /**
      * 最大值
      */
-    SlotMax = 12,
+    SlotMax = 30,
 }
 }
 
@@ -3652,6 +3712,8 @@ export class WearableConfigRecord {
         this.itemDescription = _json_.item_description
         if (_json_.item_name === undefined) { GLogHelper.error(1); }
         this.itemName = _json_.item_name
+        if (_json_.Rarity === undefined) { GLogHelper.error(1); }
+        this.Rarity = _json_.Rarity
         if (_json_.item_rarity === undefined) { GLogHelper.error(1); }
         this.itemRarity = _json_.item_rarity
         if (_json_.item_slot === undefined) { GLogHelper.error(1); }
@@ -3700,6 +3762,7 @@ export class WearableConfigRecord {
      * 饰品名称
      */
     readonly itemName: string
+    readonly Rarity: string
     /**
      * 饰品稀有度
      */

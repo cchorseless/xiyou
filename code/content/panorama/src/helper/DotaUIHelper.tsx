@@ -409,8 +409,10 @@ export module DotaUIHelper {
             let targets = GameUI.FindScreenEntities([x, y]);
             targets = targets.filter(e => e.accurateCollision && Entities.IsItemPhysical(e.entityIndex));
             // 掉落物品
-            const abilityEntityIndex = Entities.GetContainedItem(targets[0].entityIndex);
-            abilityShowTooltipHandler.runWith([abilitypanel, ability_name, abilityEntityIndex]);
+            if (targets[0]) {
+                const abilityEntityIndex = Entities.GetContainedItem(targets[0].entityIndex);
+                abilityShowTooltipHandler.runWith([abilitypanel, ability_name, abilityEntityIndex]);
+            }
         })
         EventHelper.addUnhandledEvent(TipsHelper.ToolTipType.DOTAShowAbilityTooltip, abilityShowTooltipHandler);
         EventHelper.addUnhandledEvent(TipsHelper.ToolTipType.DOTAShowAbilityTooltipForEntityIndex, abilityShowTooltipHandler);

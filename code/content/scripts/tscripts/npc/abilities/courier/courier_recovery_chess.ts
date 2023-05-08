@@ -4,6 +4,7 @@ import { registerAbility } from "../../entityPlus/Base_Plus";
 // 回收
 @registerAbility()
 export class courier_recovery_chess extends BaseAbility_Plus {
+
     CastFilterResultTarget(target: IBaseNpc_Plus) {
         // if (target.ETRoot == null || !target.ETRoot.AsValid<IBuildingEntityRoot>("BuildingEntityRoot")) {
         //     this.errorStr = "dota_hud_error_only_can_cast_on_building";
@@ -12,6 +13,9 @@ export class courier_recovery_chess extends BaseAbility_Plus {
         let caster = this.GetCasterPlus();
         if (caster.GetPlayerID() != target.GetPlayerID()) {
             return UnitFilterResult.UF_FAIL_NOT_PLAYER_CONTROLLED;
+        }
+        if (target.HasModifier("modifier_building_battle_buff")) {
+            return UnitFilterResult.UF_SUCCESS
         }
         return UnitFilter(
             target,

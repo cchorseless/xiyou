@@ -22,3 +22,13 @@ export class ActiveRootAbility extends BaseAbility_Plus {
     OnRound_Prize?(round: ERoundBoard): void;
 }
 
+declare global {
+    /**
+     * @ServerOnly
+     */
+    var GActiveRootAbility: typeof ActiveRootAbility;
+    type IActiveRootAbility = ActiveRootAbility;
+}
+if (_G.GActiveRootAbility == undefined) {
+    _G.GActiveRootAbility = ActiveRootAbility;
+}

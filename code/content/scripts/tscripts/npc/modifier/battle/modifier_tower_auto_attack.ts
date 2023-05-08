@@ -31,6 +31,7 @@ export class modifier_tower_auto_attack extends BaseModifier_Plus {
         let target = event.target;
         parent.StartGestureWithFadeAndPlaybackRate(GameActivity_t.ACT_DOTA_CUSTOM_TOWER_ATTACK, 0.1, 0.1, parent.GetAttackSpeed());
         this.AddTimer(0.3 / parent.GetAttackSpeed(), () => {
+            if (!IsValid(parent) || !IsValid(target)) { return }
             const iParticleID = ParticleManager.CreateParticle(this.particlePath, ParticleAttachment_t.PATTACH_CUSTOMORIGIN, undefined);
             this.allParticleID[event.record + ""] = (iParticleID);
             let vstartPos = parent.GetAbsOrigin() + Vector(0, 0, 500) as Vector;

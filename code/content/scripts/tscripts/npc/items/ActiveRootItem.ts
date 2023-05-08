@@ -11,6 +11,16 @@ export class ActiveRootItem extends BaseItem_Plus {
         }
         return item as InstanceType<T>;
     }
-    OnRoundStartBattle?(): void;
-    OnRoundStartPrize?(round: ERoundBoard): void;
+    OnRound_Battle?(): void;
+    OnRound_Prize?(round: ERoundBoard): void;
+}
+declare global {
+    /**
+     * @ServerOnly
+     */
+    var GActiveRootItem: typeof ActiveRootItem;
+    type IActiveRootItem = ActiveRootItem;
+}
+if (_G.GActiveRootItem == undefined) {
+    _G.GActiveRootItem = ActiveRootItem;
 }

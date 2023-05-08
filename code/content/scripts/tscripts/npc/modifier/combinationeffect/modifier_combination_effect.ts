@@ -1,13 +1,25 @@
 import { GameFunc } from "../../../GameFunc";
 import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { ResHelper } from "../../../helper/ResHelper";
+import { ChessVector } from "../../../rules/Components/ChessControl/ChessVector";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
+import { modifier_chess_jump } from "../move/modifier_chess_jump";
 
 export class modifier_combination_effect extends BaseModifier_Plus {
+    IsPassive(): boolean {
+        return true;
+    }
 
-    public IsHidden(): boolean {
+    IsBuff() {
+        return true;
+    }
+
+    IsPurgable(): boolean {
+        return false;
+    }
+    IsHidden(): boolean {
         return true;
     }
     buff_fx: ParticleID;
@@ -43,37 +55,63 @@ export class modifier_combination_effect extends BaseModifier_Plus {
 }
 
 
-
+// 秒杀流
 @registerModifier()
 export class modifier_sect_seckill_base_a extends modifier_combination_effect {
     prop_pect: number;
     damage_hp_pect: number;
+    caster: IBaseNpc_Plus;
+    ability: IBaseAbility_Plus;
+    helix_pfx_1: ParticleID;
+    radius: number;
     Init() {
-        let parent = this.GetParentPlus();
+        this.caster = this.GetParentPlus();
+        this.ability = this.GetAbilityPlus();
         this.damage_hp_pect = this.getSpecialData("damage_hp_pect")
         this.prop_pect = this.getSpecialData("prop_pect")
+        this.radius = this.getSpecialData("radius")
         // this.buff_fx = ResHelper.CreateParticleEx("particles/sect/sect_shield/sect_shield1.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, parent);
         // ParticleManager.SetParticleControl(this.buff_fx, 0, Vector(100, 100, 200));
         // this.AddParticle(this.buff_fx, false, false, -1, false, false);
-
     }
-    @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
-    CC_ON_ATTACK_LANDED(keys: ModifierInstanceEvent) {
-        if (keys.attacker == this.GetParentPlus() && RollPercentage(this.prop_pect)) {
-            let target = keys.unit;
-            let damage = target.GetMaxHealth() * this.damage_hp_pect / 100;
-            ApplyDamage({
-                victim: target,
-                attacker: this.GetParentPlus(),
-                damage: damage,
-                damage_type: DAMAGE_TYPES.DAMAGE_TYPE_PHYSICAL,
-                damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NONE,
-                ability: undefined,
-            })
+
+    @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED, false, true)
+    CC_ON_ATTACK_LANDED(keys: ModifierAttackEvent) {
+        if (this.ability && !this.caster.PassivesDisabled() &&
+            (keys.target == this.GetParentPlus() && !keys.attacker.IsBuilding() && !keys.attacker.IsOther() && keys.attacker.GetTeamNumber() != keys.target.GetTeamNumber())) {
+            if (!this.ability.IsCooldownReady()) {
+                return
+            }
+            if (GFuncRandom.PRD(this.prop_pect, this)) {
+                this.Spin();
+            }
         }
 
     }
-
+    Spin(repeat_allowed: boolean = true) {
+        this.ability.UseResources(false, false, false, true);
+        this.helix_pfx_1 = ResHelper.CreateParticleEx("particles/units/heroes/hero_axe/axe_attack_blur_counterhelix.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.caster, this.caster);
+        ParticleManager.SetParticleControl(this.helix_pfx_1, 0, this.caster.GetAbsOrigin());
+        // if (Battlepass && Battlepass.HasArcana(this.caster.GetPlayerID(), "axe")) {
+        ParticleManager.SetParticleControlEnt(this.helix_pfx_1, 1, this.caster, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_attack1", this.caster.GetAbsOrigin(), true);
+        ParticleManager.SetParticleControlEnt(this.helix_pfx_1, 2, this.caster, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_attack2", this.caster.GetAbsOrigin(), true);
+        ParticleManager.SetParticleControl(this.helix_pfx_1, 3, this.caster.GetAbsOrigin());
+        // }
+        ParticleManager.ReleaseParticleIndex(this.helix_pfx_1);
+        this.caster.EmitSound("Hero_Axe.CounterHelix");
+        let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.caster.GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false);
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
+            let damage = enemy.GetMaxHealth() * this.damage_hp_pect * 0.01;
+            ApplyDamage({
+                attacker: this.caster,
+                victim: enemy,
+                ability: this.ability,
+                damage: damage,
+                damage_type: DAMAGE_TYPES.DAMAGE_TYPE_PHYSICAL
+            });
+            SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_DAMAGE, enemy, damage, undefined);
+        }
+    }
 }
 @registerModifier()
 export class modifier_sect_seckill_base_b extends modifier_sect_seckill_base_a {
@@ -82,7 +120,7 @@ export class modifier_sect_seckill_base_b extends modifier_sect_seckill_base_a {
 @registerModifier()
 export class modifier_sect_seckill_base_c extends modifier_sect_seckill_base_a {
 }
-
+// 反伤流
 @registerModifier()
 export class modifier_sect_thorns_base_a extends modifier_combination_effect {
     Init() {
@@ -153,7 +191,7 @@ export class modifier_sect_thorns_blade_mail_active extends BaseModifier_Plus {
         }
     }
 }
-
+// 治疗流
 @registerModifier()
 export class modifier_sect_treatment_base_a extends modifier_combination_effect {
     Init() {
@@ -162,14 +200,15 @@ export class modifier_sect_treatment_base_a extends modifier_combination_effect 
         // ParticleManager.SetParticleControl(this.buff_fx, 0, Vector(100, 100, 200));
         this.AddParticle(this.buff_fx, false, false, -1, false, false);
         let health_regen = this.getSpecialData("health_regen");
-        let damage_per_sec = this.getSpecialData("damage_per_sec");
-        let damage_maxhp_pect = this.getSpecialData("damage_maxhp_pect");
-        let t = parent.TempData().sect_treatment || { health_regen: 0, damage_per_sec: 0, damage_maxhp_pect: 0 };
+        let heal_amount = this.getSpecialData("heal_amount");
+        let damage_amount = this.getSpecialData("damage_amount");
+        // let damage_per_sec = this.getSpecialData("damage_per_sec");
+        // let damage_maxhp_pect = this.getSpecialData("damage_maxhp_pect");
+        let t = parent.TempData().sect_treatment || { health_regen: 0, heal_amount: 0, damage_amount: 0 };
         t.health_regen += health_regen;
-        t.damage_per_sec += damage_per_sec;
-        t.damage_maxhp_pect += damage_maxhp_pect;
+        t.heal_amount += heal_amount;
+        t.damage_amount += damage_amount;
         parent.TempData().sect_treatment = t;
-        modifier_sect_treatment_radiance_aura.applyOnly(parent, parent)
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_REGEN_CONSTANT)
@@ -178,6 +217,8 @@ export class modifier_sect_treatment_base_a extends modifier_combination_effect 
         let t = parent.TempData().sect_treatment || { health_regen: 0 };
         return t.health_regen;
     }
+
+
 }
 
 @registerModifier()
@@ -185,12 +226,12 @@ export class modifier_sect_treatment_base_b extends modifier_combination_effect 
     Init() {
         let parent = this.GetParentPlus();
         let health_regen = this.getSpecialData("health_regen");
-        let damage_per_sec = this.getSpecialData("damage_per_sec");
-        let damage_maxhp_pect = this.getSpecialData("damage_maxhp_pect");
-        let t = parent.TempData().sect_treatment || { health_regen: 0, damage_per_sec: 0, damage_maxhp_pect: 0 };
+        let heal_amount = this.getSpecialData("heal_amount");
+        let damage_amount = this.getSpecialData("damage_amount");
+        let t = parent.TempData().sect_treatment || { health_regen: 0, heal_amount: 0, damage_amount: 0 };
         t.health_regen += health_regen;
-        t.damage_per_sec += damage_per_sec;
-        t.damage_maxhp_pect += damage_maxhp_pect;
+        t.heal_amount += heal_amount;
+        t.damage_amount += damage_amount;
         parent.TempData().sect_treatment = t;
     }
 
@@ -277,7 +318,7 @@ export class modifier_sect_treatment_radiance_burn extends BaseModifier_Plus {
         }
     }
 }
-
+// 减抗流
 @registerModifier()
 export class modifier_sect_magarm_down_base_a extends modifier_combination_effect { }
 @registerModifier()
@@ -285,7 +326,7 @@ export class modifier_sect_magarm_down_base_b extends modifier_combination_effec
 @registerModifier()
 export class modifier_sect_magarm_down_base_c extends modifier_combination_effect { }
 
-
+// 分裂流
 @registerModifier()
 export class modifier_sect_cleave_base_a extends modifier_combination_effect {
     Init() {
@@ -373,60 +414,243 @@ export class modifier_sect_cleave_base_b extends modifier_combination_effect {
 @registerModifier()
 export class modifier_sect_cleave_base_c extends modifier_sect_cleave_base_b {
 }
-
-
+// 中毒流
 @registerModifier()
 export class modifier_sect_poision_base_a extends modifier_combination_effect {
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_POISON_COUNT_PERCENTAGE)
-    poision_pect: number;
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.POISON_ACTIVE_TIME_PERCENTAGE)
-    poision_interval_pect: number;
-    Init() {
+    public caster: IBaseNpc_Plus;
+    public ability: IBaseAbility_Plus;
+    public modifier_generic_poison: string;
+    public poison_duration: number;
+    Init(p_0: any,): void {
         let parent = this.GetParentPlus();
-        this.poision_pect = this.getSpecialData("poision_pect")
-        this.poision_interval_pect = this.getSpecialData("poision_interval_pect")
+        this.caster = this.GetCasterPlus();
+        this.ability = this.GetAbilityPlus();
+        this.modifier_generic_poison = "modifier_sect_poision_finale_poison";
+        this.poison_duration = 2;
+        let atkspeed = this.getSpecialData("atkspeed");
+        let damage = this.getSpecialData("damage");
+        let t = parent.TempData().sect_poision || { atkspeed: 0, damage: 0, };
+        t.atkspeed += atkspeed;
+        t.damage += damage;
+        parent.TempData().sect_poision = t;
+    }
+
+    IsHidden(): boolean {
+        return true;
+    }
+    IsPurgable(): boolean {
+        return false;
+    }
+    IsDebuff(): boolean {
+        return false;
+    }
+    /** DeclareFunctions():modifierfunction[] {
+        let decFuncs = {
+            1: Enum_MODIFIER_EVENT.ON_ATTACK_LANDED,
+            2: Enum_MODIFIER_EVENT.ON_TAKEDAMAGE
+        }
+        return Object.values(decFuncs);
+    } */
+    @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
+    CC_OnAttackLanded(keys: ModifierAttackEvent): void {
+        if (IsServer()) {
+            let attacker = keys.attacker;
+            let target = keys.target;
+            if (attacker == this.caster) {
+                this.ApplyCausticFinale(attacker, target);
+            }
+        }
+    }
+    ApplyCausticFinale(attacker: IBaseNpc_Plus, target: IBaseNpc_Plus) {
+        if (this.caster.PassivesDisabled()) {
+            return;
+        }
+        if (attacker.IsIllusion()) {
+            return;
+        }
+        if (target.HasModifier(this.modifier_generic_poison)) {
+            return;
+        }
+        if (target.IsBuilding() || target.IsOther()) {
+            return;
+        }
+        if (target.GetTeamNumber() == this.caster.GetTeamNumber()) {
+            return;
+        }
+
+        target.AddNewModifier(this.caster, this.ability, this.modifier_generic_poison, {
+            duration: this.poison_duration
+        });
     }
 }
 @registerModifier()
-export class modifier_sect_poision_base_b extends modifier_sect_poision_base_a {
-
+export class modifier_sect_poision_base_b extends modifier_combination_effect {
+    Init(p_0: any,): void {
+        let parent = this.GetParentPlus();
+        let atkspeed = this.getSpecialData("atkspeed");
+        let damage = this.getSpecialData("damage");
+        let t = parent.TempData().sect_poision || { atkspeed: 0, damage: 0, };
+        t.atkspeed += atkspeed;
+        t.damage += damage;
+        parent.TempData().sect_poision = t;
+    }
 }
 @registerModifier()
-export class modifier_sect_poision_base_c extends modifier_sect_poision_base_a {
+export class modifier_sect_poision_base_c extends modifier_sect_poision_base_b {
+}
+@registerModifier()
+export class modifier_sect_poision_finale_poison extends BaseModifier_Plus {
+    public caster: IBaseNpc_Plus;
+    public ability: IBaseAbility_Plus;
+    public parent: IBaseNpc_Plus;
+    public sound_explode: any;
+    public particle_explode: any;
+    public particle_debuff: any;
+    public modifier_generic_poison: any;
+    public modifier_slow: any;
+    public damage: number;
+    public radius: number;
+    public particle_debuff_fx: any;
+    public particle_explode_fx: any;
+    Init(p_0: IModifierTable): void {
+        this.caster = this.GetCasterPlus();
+        this.ability = this.GetAbilityPlus();
+        this.parent = this.GetParentPlus();
+        this.sound_explode = "Ability.SandKing_CausticFinale";
+        this.particle_explode = "particles/units/heroes/hero_sandking/sandking_caustic_finale_explode.vpcf";
+        this.particle_debuff = "particles/units/heroes/hero_sandking/sandking_caustic_finale_debuff.vpcf";
+        this.modifier_generic_poison = "modifier_sect_poision_finale_poison";
+        this.radius = 275;
+        if (IsServer()) {
+            let t = this.caster.TempData().sect_poision || { atkspeed: 0, damage: 0, };
+            this.damage = t.damage;
+            this.SetStackCount(math.abs(t.atkspeed));
+            if (p_0.IsOnCreated) {
+                this.AddTimer(0.3, () => {
+                    if (!this.IsNull()) {
+                        this.particle_debuff_fx = ResHelper.CreateParticleEx(this.particle_debuff, ParticleAttachment_t.PATTACH_CUSTOMORIGIN_FOLLOW, this.parent);
+                        ParticleManager.SetParticleControlEnt(this.particle_debuff_fx, 0, this.parent, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", this.parent.GetAbsOrigin(), true);
+                        this.AddParticle(this.particle_debuff_fx, false, false, -1, false, false);
+                    }
+                });
+            }
+        }
+    }
+    IsHidden(): boolean {
+        return false;
+    }
+    IsPurgable(): boolean {
+        return true;
+    }
+    IsDebuff(): boolean {
+        return true;
+    }
+    BeDestroy(): void {
+        if (IsServer()) {
+            if (this.GetRemainingTime() <= 0 || !IsValid(this.caster)) { return }
+            EmitSoundOn(this.sound_explode, this.parent);
+            this.particle_explode_fx = ResHelper.CreateParticleEx(this.particle_explode, ParticleAttachment_t.PATTACH_ABSORIGIN, this.parent);
+            ParticleManager.SetParticleControl(this.particle_explode_fx, 0, this.parent.GetAbsOrigin());
+            ParticleManager.ReleaseParticleIndex(this.particle_explode_fx);
+
+            let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.parent.GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
+                let damageTable = {
+                    victim: enemy,
+                    attacker: this.caster,
+                    damage: this.damage,
+                    damage_type: DAMAGE_TYPES.DAMAGE_TYPE_MAGICAL,
+                    ability: this.ability
+                }
+                ApplyDamage(damageTable);
+            }
+        }
+    }
+
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
+    CC_ATTACKSPEED_BONUS_CONSTANT(): number {
+        return -this.GetStackCount();
+    }
 
 }
 
-
+// 物暴流
 @registerModifier()
 export class modifier_sect_phycrit_base_a extends modifier_combination_effect {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CRITICALSTRIKE_CHANCE)
     crit_chance: number;
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CRITICALSTRIKE_DAMAGE)
     crit_damage: number;
+
+    GetEffectName(): string {
+        return "particles/econ/items/bloodseeker/bloodseeker_eztzhok_weapon/bloodseeker_bloodrage_eztzhok.vpcf";
+    }
+    GetStatusEffectName(): string {
+        return "particles/status_fx/status_effect_bloodrage.vpcf";
+    }
     Init() {
         let parent = this.GetParentPlus();
-        "particles/econ/items/bloodseeker/bloodseeker_eztzhok_weapon/bloodseeker_bloodrage_ground_eztzhok.vpcf"
-        this.buff_fx = ResHelper.CreateParticleEx("effect/assassin_buff/econ/items/bloodseeker/bloodseeker_eztzhok_weapon/bloodseeker_bloodrage_ground_eztzhok.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, parent);
-        // ParticleManager.SetParticleControl(this.buff_fx, 0, Vector(100, 100, 200));
-        this.AddParticle(this.buff_fx, false, false, -1, false, false);
+        // "particles/generic_gameplay/rune_doubledamage_owner.vpcf"
+        // "particles/econ/items/bloodseeker/bloodseeker_eztzhok_weapon/bloodseeker_bloodrage_ground_eztzhok.vpcf"
+        // "particles/econ/events/fall_2022/bottle/bottle_fall2022.vpcf"
+        // "particles/econ/events/fall_2021/bottle_fall_2021.vpcf"
+        // this.buff_fx = ResHelper.CreateParticleEx("particles/econ/items/bloodseeker/2022_taunt/bloodseeker_taunt_sparks_glow.vpcf", ParticleAttachment_t.PATTACH_OVERHEAD_FOLLOW, parent);
+        // // ParticleManager.SetParticleControl(this.buff_fx, 0, Vector(100, 100, 200));
+        // this.AddParticle(this.buff_fx, false, false, -1, false, false);
         this.crit_chance = this.getSpecialData("crit_chance")
         this.crit_damage = this.getSpecialData("crit_damage")
-    }
+        if (IsServer()) {
+            this.blinkChessX()
 
-    @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
+        }
+    }
+    blinkChessX() {
+        let domain = this.GetParentPlus();
+        let playerid = domain.GetPlayerID();
+        let randomX = RandomFloat(2, 5);
+        let randomY = RandomFloat(8, 10);
+        if (randomY > 9) {
+            if (randomX > 3 && randomX < 4) {
+                randomX -= 1
+            }
+            else if (randomX > 4 && randomX < 5) {
+                randomX += 1
+            }
+        }
+        let pos = new ChessVector(randomX, randomY, playerid);
+        let v = GChessControlSystem.GetInstance().GetBoardGirdVector3(pos);
+        domain.Stop();
+        domain.SetForwardVector(((v - domain.GetAbsOrigin()) as Vector).Normalized());
+        domain.MoveToPosition(v);
+        modifier_chess_jump.applyOnly(domain, domain, null, {
+            vx: v.x,
+            vy: v.y,
+        });
+    }
+    // @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
     CC_OnAttackLanded(keys: ModifierAttackEvent): void {
         if (IsServer()) {
             let target = keys.target as IBaseNpc_Plus;
             let attacker = keys.attacker;
             if (attacker == this.GetParentPlus() && RollPercentage(this.crit_chance)) {
-                let blood_pfx = ResHelper.CreateParticleEx("particles/hero/phantom_assassin/screen_blood_splatter.vpcf", ParticleAttachment_t.PATTACH_EYES_FOLLOW, target, attacker);
-                ParticleManager.ReleaseParticleIndex(blood_pfx);
-                target.EmitSound("Hero_PhantomAssassin.CoupDeGrace");
-                this.GetCasterPlus().EmitSound("Imba.PhantomAssassinFatality");
-                let coup_pfx = ResHelper.CreateParticleEx("particles/units/heroes/hero_phantom_assassin/phantom_assassin_crit_impact.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, target, attacker);
-                ParticleManager.SetParticleControlEnt(coup_pfx, 0, target, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", target.GetAbsOrigin(), true);
-                ParticleManager.SetParticleControl(coup_pfx, 1, target.GetAbsOrigin());
-                ParticleManager.SetParticleControlOrientation(coup_pfx, 1, this.GetParentPlus().GetForwardVector() * (-1) as Vector, this.GetParentPlus().GetRightVector(), this.GetParentPlus().GetUpVector());
-                ParticleManager.ReleaseParticleIndex(coup_pfx);
+                // let blood_pfx = ResHelper.CreateParticleEx("particles/hero/phantom_assassin/screen_blood_splatter.vpcf", ParticleAttachment_t.PATTACH_EYES_FOLLOW, target, attacker);
+                // ParticleManager.ReleaseParticleIndex(blood_pfx);
+                // target.EmitSound("Hero_PhantomAssassin.CoupDeGrace");
+                // this.GetCasterPlus().EmitSound("Imba.PhantomAssassinFatality");
+                // let coup_pfx = ResHelper.CreateParticleEx("particles/units/heroes/hero_phantom_assassin/phantom_assassin_crit_impact.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, target, attacker);
+                // ParticleManager.SetParticleControlEnt(coup_pfx, 0, target, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", target.GetAbsOrigin(), true);
+                // ParticleManager.SetParticleControl(coup_pfx, 1, target.GetAbsOrigin());
+                // ParticleManager.SetParticleControlOrientation(coup_pfx, 1, this.GetParentPlus().GetForwardVector() * (-1) as Vector, this.GetParentPlus().GetRightVector(), this.GetParentPlus().GetUpVector());
+                // ParticleManager.ReleaseParticleIndex(coup_pfx);
+                let nFXIndex = ResHelper.CreateParticleEx("particles/units/heroes/hero_phantom_assassin/phantom_assassin_crit_impact.vpcf", ParticleAttachment_t.PATTACH_CUSTOMORIGIN, undefined);
+                ParticleManager.SetParticleControlEnt(nFXIndex, 0, target, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", target.GetOrigin(), true);
+                ParticleManager.SetParticleControl(nFXIndex, 1, target.GetOrigin());
+                ParticleManager.SetParticleControlForward(nFXIndex, 1, -this.GetCasterPlus().GetForwardVector() as Vector);
+                ParticleManager.SetParticleControlEnt(nFXIndex, 10, target, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, undefined, target.GetOrigin(), true);
+                ParticleManager.ReleaseParticleIndex(nFXIndex);
+                EmitSoundOn("Hero_PhantomAssassin.Spatter", target);
                 let damage = keys.damage * this.crit_damage / 100;
+                SendOverheadEventMessage(null, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_CRITICAL, target, damage, null)
                 ApplyDamage({
                     victim: target,
                     attacker: this.GetParentPlus(),
@@ -434,47 +658,40 @@ export class modifier_sect_phycrit_base_a extends modifier_combination_effect {
                     damage_type: DAMAGE_TYPES.DAMAGE_TYPE_PHYSICAL,
                     damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NONE,
                     ability: undefined,
-                })
+                });
+
             }
         }
     }
 }
 @registerModifier()
-export class modifier_sect_phycrit_base_b extends modifier_sect_phycrit_base_a {
-}
-@registerModifier()
-export class modifier_sect_phycrit_base_c extends modifier_sect_phycrit_base_a {
-}
-
-
-@registerModifier()
-export class modifier_sect_shield_base_a extends modifier_combination_effect {
-    prop_pect: number;
-    block_value: number;
+export class modifier_sect_phycrit_base_b extends modifier_combination_effect {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CRITICALSTRIKE_CHANCE)
+    crit_chance: number;
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CRITICALSTRIKE_DAMAGE)
+    crit_damage: number;
     Init() {
         let parent = this.GetParentPlus();
-        let block_value = this.getSpecialData("block_value")
-        let prop_pect = this.getSpecialData("prop_pect")
-        this.prop_pect = prop_pect;
-        this.block_value = block_value;
-        // this.buff_fx = ResHelper.CreateParticleEx("particles/sect/sect_shield/sect_shield1.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, parent);
-        // ParticleManager.SetParticleControl(this.buff_fx, 0, Vector(100, 100, 200));
-        // this.AddParticle(this.buff_fx, false, false, -1, false, false);
-        if (IsServer()) {
-            this.addShield();
-            this.AddTimer(3, () => {
-                this.addShield();
-                return 3;
-            })
-        }
+        this.crit_chance = this.getSpecialData("crit_chance")
+        this.crit_damage = this.getSpecialData("crit_damage")
+
     }
-    addShield() {
-        if (RollPercentage(this.prop_pect)) {
-            modifier_sect_shield_buff_block.apply(this.GetParentPlus(), this.GetParentPlus(), null, {
-                block_value: this.block_value,
-                duration: 3
-            });
-        }
+}
+@registerModifier()
+export class modifier_sect_phycrit_base_c extends modifier_sect_phycrit_base_b {
+}
+
+// 护盾流
+@registerModifier()
+export class modifier_sect_shield_base_a extends modifier_combination_effect {
+    Init() {
+        let parent = this.GetParentPlus();
+        let block_value = this.getSpecialData("block_value");
+        let prop_pect = this.getSpecialData("prop_pect");
+        let t = parent.TempData().sect_shield || { block_value: 0, prop_pect: 0 };
+        t.block_value += block_value;
+        t.prop_pect += prop_pect;
+        parent.TempData().sect_shield = t;
     }
 
 }
@@ -491,104 +708,8 @@ export class modifier_sect_shield_base_c extends modifier_sect_shield_base_a {
     // }
 }
 
-@registerModifier()
-export class modifier_sect_shield_buff_block extends BaseModifier_Plus {
-    public shield_init_value: number;
-    public shield_remaining: number;
-    IsHidden() {
-        return false;
-    }
-    IsPurgable() {
-        return true;
-    }
-    IsDebuff() {
-        return false;
-    }
-    /** DeclareFunctions():modifierfunction[] {
-        return Object.values({
-            1: GPropertyConfig.EMODIFIER_PROPERTY.TOTAL_CONSTANT_BLOCK
-        });
-    } */
-    BeCreated(p_0: any,): void {
-        if (IsServer()) {
-            let target = this.GetParentPlus();
-            let shield_size = target.GetModelRadius() * 0.7;
-            let target_origin = target.GetAbsOrigin();
-            target.EmitSound("Hero_Abaddon.AphoticShield.Cast");
-            let attach_hitloc = "attach_hitloc";
-            this.shield_init_value = p_0.block_value || 100;
-            this.shield_remaining = this.shield_init_value;
-            let particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_abaddon/abaddon_aphotic_shield.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, target);
-            let common_vector = Vector(shield_size, 0, shield_size);
-            ParticleManager.SetParticleControl(particle, 1, common_vector);
-            ParticleManager.SetParticleControl(particle, 2, common_vector);
-            ParticleManager.SetParticleControl(particle, 4, common_vector);
-            ParticleManager.SetParticleControl(particle, 5, Vector(shield_size, 0, 0));
-            ParticleManager.SetParticleControlEnt(particle, 0, target, ParticleAttachment_t.PATTACH_POINT_FOLLOW, attach_hitloc, target_origin, true);
-            this.AddParticle(particle, false, false, -1, false, false);
-        }
-    }
 
-    public BeRefresh(p_0?: IModifierTable): void {
-        if (IsServer()) {
-            let block_value = p_0.block_value || 100;
-            if (block_value >= this.shield_init_value) {
-                this.shield_init_value = block_value;
-                this.shield_remaining = this.shield_init_value;
-            }
-        }
-    }
-
-    BeDestroy(): void {
-        if (IsServer()) {
-            let target = this.GetParentPlus();
-            let caster = this.GetCasterPlus();
-            let ability = this.GetAbilityPlus();
-            let radius = ability.GetSpecialValueFor("radius");
-            let explode_target_team = DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH;
-            let explode_target_type = DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC;
-            let target_vector = target.GetAbsOrigin();
-            target.EmitSound("Hero_Abaddon.AphoticShield.Destroy");
-            let particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_abaddon/abaddon_aphotic_shield_explosion.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, caster);
-            ParticleManager.SetParticleControl(particle, 0, target_vector);
-            ParticleManager.ReleaseParticleIndex(particle);
-            let units = caster.FindUnitsInRadiusPlus(radius, target_vector, explode_target_team, explode_target_type, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-            let damage = this.shield_init_value;
-            let damage_type = DAMAGE_TYPES.DAMAGE_TYPE_MAGICAL;
-            for (const [_, unit] of GameFunc.iPair(units)) {
-                if (unit.GetTeam() != caster.GetTeam()) {
-                    ApplyDamage({
-                        victim: unit,
-                        attacker: caster,
-                        damage: damage,
-                        damage_type: damage_type
-                    });
-                }
-            }
-        }
-    }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOTAL_CONSTANT_BLOCK)
-    CC_GetModifierTotal_ConstantBlock(kv: ModifierAttackEvent): number {
-        if (IsServer()) {
-            let target = this.GetParentPlus();
-            let original_shield_amount = this.shield_remaining;
-            if (kv.damage > 0 && bit.band(kv.damage_flags, DOTADamageFlag_t.DOTA_DAMAGE_FLAG_HPLOSS) != DOTADamageFlag_t.DOTA_DAMAGE_FLAG_HPLOSS) {
-                this.shield_remaining = this.shield_remaining - kv.damage;
-                if (kv.damage < original_shield_amount) {
-                    SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_BLOCK, target, kv.damage, undefined);
-                    return kv.damage;
-                } else {
-                    SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_BLOCK, target, original_shield_amount, undefined);
-                    this.Destroy();
-                    return original_shield_amount;
-                }
-            }
-        }
-    }
-
-}
-
-
+// 复制流
 @registerModifier()
 export class modifier_sect_copy_base_a extends modifier_combination_effect {
 
@@ -663,7 +784,7 @@ export class modifier_sect_copy_base_c extends modifier_sect_copy_base_b {
 
 }
 
-
+// 召唤流
 @registerModifier()
 export class modifier_sect_summon_base_a extends modifier_combination_effect {
     Init() {
@@ -743,7 +864,7 @@ export class modifier_sect_summon_buff_active extends BaseModifier_Plus {
 }
 
 
-
+// 战意流
 @registerModifier()
 export class modifier_sect_warpath_base_a extends modifier_combination_effect {
     Init() {
@@ -782,7 +903,7 @@ export class modifier_sect_warpath_base_c extends modifier_combination_effect {
     }
 }
 
-
+// 减甲流
 @registerModifier()
 export class modifier_sect_phyarm_down_base_a extends modifier_combination_effect {
 
@@ -801,13 +922,8 @@ export class modifier_sect_phyarm_down_base_a extends modifier_combination_effec
         t.duration += duration;
         parent.TempData().sect_phyarm_down = t;
         if (IsServer()) {
-            let allenemy = this.getAllEnemy();
-            allenemy.forEach(enemy => {
-                if (IsValid(enemy)) {
-                    let buff = modifier_sect_phyarm_down_enemy.applyOnly(enemy, parent);
-                    buff.SetStackCount(math.abs(t.phyarm_down))
-                }
-            })
+            let buff = modifier_sect_phyarm_down_arua.applyOnly(parent, parent)
+            buff.SetStackCount(math.abs(t.phyarm_down));
         }
     }
 
@@ -822,6 +938,8 @@ export class modifier_sect_phyarm_down_base_a extends modifier_combination_effec
             }
         }
     }
+
+
 }
 @registerModifier()
 export class modifier_sect_phyarm_down_base_b extends modifier_combination_effect {
@@ -837,24 +955,44 @@ export class modifier_sect_phyarm_down_base_b extends modifier_combination_effec
         t.duration += duration;
         parent.TempData().sect_phyarm_down = t;
         if (IsServer()) {
-            let allenemy = this.getAllEnemy();
-            allenemy.forEach(enemy => {
-                if (IsValid(enemy)) {
-                    let buff = modifier_sect_phyarm_down_enemy.applyOnly(enemy, parent);
-                    buff.SetStackCount(math.abs(t.phyarm_down))
-                }
-            })
+            let buff = modifier_sect_phyarm_down_arua.applyOnly(parent, parent)
+            buff.SetStackCount(math.abs(t.phyarm_down));
         }
     }
 }
 @registerModifier()
 export class modifier_sect_phyarm_down_base_c extends modifier_sect_phyarm_down_base_b {
 }
-
+@registerModifier()
+export class modifier_sect_phyarm_down_arua extends BaseModifier_Plus {
+    IsAura(): boolean {
+        return true;
+    }
+    IsHidden(): boolean {
+        return true;
+    }
+    IsDebuff(): boolean {
+        return false;
+    }
+    IsPurgable(): boolean {
+        return false;
+    }
+    GetAuraSearchTeam(): DOTA_UNIT_TARGET_TEAM {
+        return DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY;
+    }
+    GetAuraSearchType(): DOTA_UNIT_TARGET_TYPE {
+        return DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO;
+    }
+    GetModifierAura(): string {
+        return "modifier_sect_phyarm_down_enemy";
+    }
+    GetAuraRadius(): number {
+        return 1000;
+    }
+}
 
 @registerModifier()
 export class modifier_sect_phyarm_down_enemy extends BaseModifier_Plus {
-    public particle: ParticleID;
     IsHidden(): boolean {
         return false;
     }
@@ -866,28 +1004,22 @@ export class modifier_sect_phyarm_down_enemy extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS)
     CC_PHYSICAL_ARMOR_BONUS(): number {
-        return -this.GetStackCount();
+        let caster = this.GetCasterPlus();
+        if (IsValid(caster)) {
+            return -1 * caster.findBuffStack("modifier_sect_phyarm_down_arua")
+        }
     }
 
-    BeCreated(p_0: any,): void {
-        // let caster = this.GetCasterPlus();
-        // let t = caster.TempData().sect_phyarm_down || { phyarm_down: 0 };
-        // this.phyarm = t.phyarm_down;
-        if (IsServer()) {
-            // todo 碎甲特效
-            // this.particle = ResHelper.CreateParticleEx("particles/items2_fx/radiance.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetParentPlus(), this.GetCasterPlus());
-            // ParticleManager.SetParticleControl(this.particle, 0, this.GetParentPlus().GetAbsOrigin());
-            // ParticleManager.SetParticleControl(this.particle, 1, this.GetCasterPlus().GetAbsOrigin());
-        }
+    GetEffectName(): string {
+        return "particles/units/heroes/hero_dazzle/dazzle_armor_enemy.vpcf";
     }
-    BeDestroy(): void {
-        if (IsServer()) {
-            ParticleManager.ClearParticle(this.particle, false);
-        }
+    GetEffectAttachType(): ParticleAttachment_t {
+        return ParticleAttachment_t.PATTACH_OVERHEAD_FOLLOW;
     }
+
 
 }
-
+// 攻速流
 @registerModifier()
 export class modifier_sect_atkspeed_base_a extends modifier_combination_effect {
     atk_speed: number;
@@ -920,7 +1052,7 @@ export class modifier_sect_atkspeed_base_b extends modifier_combination_effect {
 @registerModifier()
 export class modifier_sect_atkspeed_base_c extends modifier_sect_atkspeed_base_b {
 }
-
+// 魅惑流
 @registerModifier()
 export class modifier_sect_betrayal_base_a extends modifier_combination_effect { }
 
@@ -930,6 +1062,7 @@ export class modifier_sect_betrayal_base_b extends modifier_combination_effect {
 @registerModifier()
 export class modifier_sect_betrayal_base_c extends modifier_combination_effect { }
 
+// 窃取流
 @registerModifier()
 export class modifier_sect_steal_base_a extends modifier_combination_effect {
     gold_min: number;
@@ -1011,7 +1144,7 @@ export class modifier_sect_steal_base_c extends modifier_combination_effect {
     }
 }
 
-
+// 冷却流
 @registerModifier()
 export class modifier_sect_cd_down_base_a extends modifier_combination_effect {
     Init() {
@@ -1036,7 +1169,7 @@ export class modifier_sect_cd_down_base_b extends modifier_sect_cd_down_base_a {
 export class modifier_sect_cd_down_base_c extends modifier_sect_cd_down_base_a {
 }
 
-
+// 魔法流
 @registerModifier()
 export class modifier_sect_magic_base_a extends modifier_combination_effect {
     Init() {
@@ -1159,7 +1292,7 @@ export class modifier_sect_magic_enemy_ice extends BaseModifier_Plus {
     }
 }
 
-
+// 火焰流
 @registerModifier()
 export class modifier_sect_flame_base_a extends modifier_combination_effect {
 
@@ -1177,7 +1310,7 @@ export class modifier_sect_flame_base_b extends modifier_sect_flame_base_a {
 @registerModifier()
 export class modifier_sect_flame_base_c extends modifier_sect_flame_base_a {
 }
-
+// 溅射流
 
 @registerModifier()
 export class modifier_sect_splash_base_a extends modifier_combination_effect { }
@@ -1188,7 +1321,7 @@ export class modifier_sect_splash_base_b extends modifier_combination_effect { }
 @registerModifier()
 export class modifier_sect_splash_base_c extends modifier_combination_effect { }
 
-
+// 发明流
 @registerModifier()
 export class modifier_sect_invent_base_a extends modifier_combination_effect {
     prize_pool: number;
@@ -1216,7 +1349,7 @@ export class modifier_sect_invent_base_c extends modifier_combination_effect {
     }
 }
 
-
+// 雷电流
 @registerModifier()
 export class modifier_sect_shock_base_a extends modifier_combination_effect { }
 @registerModifier()
@@ -1224,6 +1357,7 @@ export class modifier_sect_shock_base_b extends modifier_combination_effect { }
 @registerModifier()
 export class modifier_sect_shock_base_c extends modifier_combination_effect { }
 
+// 魔爆流
 @registerModifier()
 export class modifier_sect_magcrit_base_a extends modifier_combination_effect { }
 @registerModifier()
@@ -1231,7 +1365,7 @@ export class modifier_sect_magcrit_base_b extends modifier_combination_effect { 
 @registerModifier()
 export class modifier_sect_magcrit_base_c extends modifier_combination_effect { }
 
-
+// 妖术流
 @registerModifier()
 export class modifier_sect_black_art_base_a extends modifier_combination_effect {
 
@@ -1258,7 +1392,7 @@ export class modifier_sect_black_art_base_b extends modifier_sect_black_art_base
 export class modifier_sect_black_art_base_c extends modifier_sect_black_art_base_a {
 }
 
-
+// 钓鱼流
 @registerModifier()
 export class modifier_sect_fish_chess_base_a extends modifier_combination_effect {
     Init() {
@@ -1275,7 +1409,7 @@ export class modifier_sect_fish_chess_base_c extends modifier_combination_effect
 
 }
 
-
+// 守卫流
 @registerModifier()
 export class modifier_sect_guard_base_a extends modifier_combination_effect {
 
@@ -1284,9 +1418,9 @@ export class modifier_sect_guard_base_a extends modifier_combination_effect {
         let t = parent.TempData().sect_guard || { summonid_a: 0 };
         let summonid = this.getSpecialData("summonid");
         if (t.summonid_a == 0) {
-            parent.CreateSummon("npc_dota_creature_sect_guard", parent.GetAbsOrigin(), 60);
-            t.summonid_a = summonid;
-            parent.TempData().sect_guard = t;
+            // parent.CreateSummon("npc_dota_creature_sect_guard", parent.GetAbsOrigin(), 60);
+            // t.summonid_a = summonid;
+            // parent.TempData().sect_guard = t;
         }
 
     }
@@ -1298,9 +1432,9 @@ export class modifier_sect_guard_base_b extends modifier_combination_effect {
         let t = parent.TempData().sect_guard || { summonid_b: 0 };
         let summonid = this.getSpecialData("summonid");
         if (t.summonid_b == 0) {
-            parent.CreateSummon("npc_dota_creature_sect_guard", parent.GetAbsOrigin(), 60);
-            t.summonid_b = summonid;
-            parent.TempData().sect_guard = t;
+            // parent.CreateSummon("npc_dota_creature_sect_guard", parent.GetAbsOrigin(), 60);
+            // t.summonid_b = summonid;
+            // parent.TempData().sect_guard = t;
         }
 
     }
@@ -1312,16 +1446,16 @@ export class modifier_sect_guard_base_c extends modifier_combination_effect {
         let t = parent.TempData().sect_guard || { summonid_c: 0 };
         let summonid = this.getSpecialData("summonid");
         if (t.summonid_c == 0) {
-            parent.CreateSummon("npc_dota_creature_sect_guard", parent.GetAbsOrigin(), 60);
-            t.summonid_c = summonid;
-            parent.TempData().sect_guard = t;
+            // parent.CreateSummon("npc_dota_creature_sect_guard", parent.GetAbsOrigin(), 60);
+            // t.summonid_c = summonid;
+            // parent.TempData().sect_guard = t;
         }
 
     }
 
 }
 
-
+// 变形流
 @registerModifier()
 export class modifier_sect_transform_base_a extends modifier_combination_effect {
     Init() {
@@ -1355,7 +1489,7 @@ export class modifier_sect_transform_base_c extends modifier_combination_effect 
 }
 
 
-
+// 恶魔流
 @registerModifier()
 export class modifier_sect_demon_base_a extends modifier_combination_effect {
     Init() {
@@ -1402,7 +1536,7 @@ export class modifier_sect_demon_base_b extends modifier_combination_effect {
 export class modifier_sect_demon_base_c extends modifier_sect_demon_base_b {
 }
 
-
+// 食人流
 @registerModifier()
 export class modifier_sect_cannibalism_base_a extends modifier_combination_effect {
     prop_pect: number;

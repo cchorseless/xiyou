@@ -1526,7 +1526,7 @@ declare global {
          * @param sCiTiaoName 词条名称 或者 技能索引
          * @returns
          */
-        HandleCiTiao(sCiTiaoName: string, isadd?: boolean): void;
+        HandleCiTiao(sCiTiaoName: string, isadd?: boolean, abilityname?: string): void;
         /**
          * @Both
          * 是否有词条
@@ -2295,7 +2295,7 @@ BaseNPC.IsFriendly = function (hTarget: CDOTA_BaseNPC) {
     return false;
 };
 
-BaseNPC.HandleCiTiao = function (sTalentName: string, isadd = true): void {
+BaseNPC.HandleCiTiao = function (sTalentName: string, isadd = true, abilityname = null): void {
     if (!IsValid(this)) return;
     if (!IsServer()) return;
     if (sTalentName == null || sTalentName.length == 0 || GJSONConfig.BuffEffectConfig.get(sTalentName) == null) {
@@ -2305,7 +2305,14 @@ BaseNPC.HandleCiTiao = function (sTalentName: string, isadd = true): void {
     let bufftype = GGetRegClass(sTalentName, true);
     if (isadd) {
         if (bufftype) {
-            this.addOnlyBuff(sTalentName, this)
+            let hAbility: any = null;
+            if (abilityname) {
+                hAbility = this.FindAbilityByName(abilityname);
+                if (!hAbility) {
+                    hAbility = this.FindItemInInventory(abilityname);
+                }
+            }
+            this.addOnlyBuff(sTalentName, this, hAbility)
         }
         else {
             NetTablesHelper.SetDotaEntityData(this.GetEntityIndex(), { sTalentName: 1 }, "citiao");

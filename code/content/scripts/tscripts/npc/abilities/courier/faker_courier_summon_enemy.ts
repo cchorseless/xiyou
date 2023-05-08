@@ -50,7 +50,7 @@ export class faker_courier_summon_enemy extends BaseAbility_Plus {
         }
         if (posarr.length > 0) {
             caster.EmitSound("Hero_ShadowShaman.EtherShock");
-            caster.SetHealth(caster.GetHealth() - this.GetHealthCost(1));
+            // caster.SetHealth(caster.GetHealth() - this.GetHealthCost(1));
             for (let index = 0; index < posarr.length; index++) {
                 let lightningBolt = ResHelper.CreateParticleEx("particles/units/heroes/hero_shadowshaman/shadowshaman_ether_shock.vpcf", ParticleAttachment_t.PATTACH_CUSTOMORIGIN, caster)
                 ParticleManager.SetParticleControl(lightningBolt, 0, caster.GetAbsOrigin() + Vector(0, 0, 280) as Vector);

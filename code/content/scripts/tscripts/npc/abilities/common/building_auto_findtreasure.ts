@@ -33,7 +33,7 @@ export class building_auto_findtreasure extends BaseAbility_Plus {
         modifier.StopFindTreasure();
         let building = hParent.ETRoot.As<BuildingRuntimeEntityRoot>();
         let boardV = building.ChessComp().ChessVector;
-        let t_p = GChessControlSystem.GetInstance().GetBoardGirdCenterVector3(boardV);
+        let t_p = GChessControlSystem.GetInstance().GetBoardGirdVector3(boardV);
         modifier_tp.TeleportToPoint(hParent, null, GetGroundPosition(t_p, hParent));
         modifier_remnant.remove(hParent);
         modifier.Destroy();

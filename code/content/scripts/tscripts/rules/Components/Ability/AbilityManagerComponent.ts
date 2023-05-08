@@ -145,6 +145,8 @@ export class AbilityManagerComponent extends ET.Component implements IRoundState
      */
     setAllAbilityLevel(istar: number) {
         let battleunit = this.GetDomain<IBaseNpc_Plus>().ETRoot.As<IBattleUnitEntityRoot>();
+        const starLevel: { [k: string]: number } = { "1": 1, "2": 1, "3": 2, "4": 2, "5": 3 };
+        const level = starLevel[istar + ""];
         this.allAbilityRoot.forEach(str => {
             let abilityroot = battleunit.GetDomainChild<IAbilityEntityRoot>(str);
             let ability = abilityroot.GetDomain<IBaseAbility_Plus>();
@@ -152,11 +154,12 @@ export class AbilityManagerComponent extends ET.Component implements IRoundState
                 ability.SetActivated(true);
                 let requiredStar = abilityroot.GetRequiredStar();
                 if (requiredStar > 0) {
-                    ability.SetLevel(istar - requiredStar + 1);
+                    // ability.SetLevel(istar - requiredStar + 1);
                 }
                 else {
-                    ability.SetLevel(math.min(istar, 4));
+                    // ability.SetLevel(level);
                 }
+                ability.SetLevel(level);
             }
             else {
                 ability.SetActivated(false);

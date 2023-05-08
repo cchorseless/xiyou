@@ -224,6 +224,16 @@ export module AI_ability {
         return false;
     }
 
+    export function TARGET_Self(ability: IBaseAbility_Plus | IBaseItem_Plus,) {
+        let caster = ability.GetCasterPlus()
+        ExecuteOrderFromTable({
+            UnitIndex: caster.entindex(),
+            OrderType: dotaunitorder_t.DOTA_UNIT_ORDER_CAST_TARGET,
+            AbilityIndex: ability.entindex(),
+            TargetIndex: caster.entindex()
+        });
+        return true;
+    }
 
 
 }

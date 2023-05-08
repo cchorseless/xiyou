@@ -125,15 +125,14 @@ export class BaseAbility_Plus extends BaseAbility {
         return returnDamage;
     }
 
-
     /**
      * @both
      * 流派特殊BUFF名称
      * @param level
      * @returns
      */
-    public GetSectCiTiaoName(level: ISectLevel) {
-        return GJsonConfigHelper.GetAbilitySectSpeEffectName(this.GetAbilityName(), level);
+    public GetSectCiTiaoName(level: ISectLevel, isCommonEffect = true) {
+        return GJsonConfigHelper.GetAbilitySectEffectName(this.GetAbilityName(), level, isCommonEffect);
     }
 
     public GetSoundReplacement(s: string): string {
