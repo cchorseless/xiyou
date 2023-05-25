@@ -2126,11 +2126,12 @@ export class modifier_imba_phoenix_supernova_egg_thinker extends BaseModifier_Pl
             }
             let enemies = FindUnitsInRadius(caster.GetTeamNumber(), egg.GetAbsOrigin(), undefined, ability.GetSpecialValueFor("aura_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false);
             for (const [_, enemy] of GameFunc.iPair(enemies)) {
-                let item = BaseDataDriven.CreateItem("item_imba_dummy", caster);
-                item.ApplyDataDrivenModifier(caster, enemy, "modifier_generic_stunned", {
-                    duration: ability.GetSpecialValueFor("stun_duration")
-                });
-                UTIL_Remove(item);
+                enemy.ApplyStunned(ability, caster, ability.GetSpecialValueFor("stun_duration"))
+                // let item = BaseDataDriven.CreateItem("item_imba_dummy", caster);
+                // item.ApplyDataDrivenModifier(caster, enemy, "modifier_generic_stunned", {
+                //     duration: ability.GetSpecialValueFor("stun_duration")
+                // });
+                // UTIL_Remove(item);
             }
         } else {
             StartSoundEventFromPosition("Hero_Phoenix.SuperNova.Death", egg.GetAbsOrigin());

@@ -9,6 +9,7 @@ import { AbilityManagerComponent } from "../Ability/AbilityManagerComponent";
 import { InventoryComponent } from "../Inventory/InventoryComponent";
 import { ERoundBoard } from "../Round/ERoundBoard";
 import { CourierBagComponent } from "./CourierBagComponent";
+import { CourierEggComponent } from "./CourierEggComponent";
 import { CourierShopComponent } from "./CourierShopComponent";
 
 export class CourierEntityRoot extends BaseEntityRoot implements IRoundStateCallback {
@@ -32,6 +33,7 @@ export class CourierEntityRoot extends BaseEntityRoot implements IRoundStateCall
         this.AddComponent(GGetRegClass<typeof InventoryComponent>("InventoryComponent"));
         this.AddComponent(GGetRegClass<typeof CourierBagComponent>("CourierBagComponent"));
         this.AddComponent(GGetRegClass<typeof CourierShopComponent>("CourierShopComponent"));
+        this.AddComponent(GGetRegClass<typeof CourierEggComponent>("CourierEggComponent"));
         this.RefreshCourier();
         this.firstSpawnPoint = hero.GetAbsOrigin();
         this.steamID = PlayerResource.GetSteamAccountID(this.BelongPlayerid).toString();
@@ -109,9 +111,12 @@ export class CourierEntityRoot extends BaseEntityRoot implements IRoundStateCall
     CourierShopComp() {
         return this.GetComponentByName<CourierShopComponent>("CourierShopComponent");
     }
-
+    CourierEggComp() {
+        return this.GetComponentByName<CourierEggComponent>("CourierEggComponent");
+    }
     OnRound_Start(round?: ERoundBoard): void {
         this.AbilityManagerComp().OnRound_Start(round);
+        this.CourierEggComp().OnRound_Start(round);
         this.CourierShopComp().refreshRoundShopItem();
         this.CourierShopComp().SyncClient();
     };
@@ -135,8 +140,15 @@ export class CourierEntityRoot extends BaseEntityRoot implements IRoundStateCall
                 .set_validtime(3)
             )
         }
+        this.CourierEggComp().OnRound_Prize(round);
     }
-    OnRound_WaitingEnd() { }
+    OnRound_WaitingEnd() {
+        this.CourierEggComp().OnRound_WaitingEnd();
+
+    }
+
+
+
 }
 
 declare global {

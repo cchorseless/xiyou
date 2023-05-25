@@ -26,7 +26,7 @@ export class CCBuildingTopBarItem extends CCOverHeadBaseItem {
         return (<Panel id="CC_BuildingTopBarItem" ref={this.__root__}   {...this.initRootAttrs()}>
             <CCPanel id="StarGroup" flowChildren="right" >
                 {[...Array(5)].map((element, index) => {
-                    return <CCIcon_Star width="25px" height="25px" key={index + ""} type={BuildingComp.iStar > index ? "Filled" : "UnFilled"} />
+                    return <CCIcon_Star width="25px" height="25px" key={index + ""} type={BuildingComp.iStar > index ? (index == 0 ? "Filled" : "Spe") : "UnFilled"} />
                 })}
             </CCPanel>
             <CCPanel id="buildingnNameBg" backgroundImage={PathHelper.getCustomImageUrl(`rarity/titlebg_${rare.toLowerCase()}.png`)}>

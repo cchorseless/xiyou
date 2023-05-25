@@ -1469,7 +1469,10 @@ declare global {
          * @Both
          */
         TempData<T = any>(): { [k: string]: T };
-
+        /**
+         * @Server
+         */
+        GetPlayerRoot(): IPlayerEntityRoot;
         /**
          * @Both
          * 获取损失的生命值百分比
@@ -2496,7 +2499,9 @@ if (IsServer()) {
     BaseNPC.GetOwnerPlus = function () {
         return this.GetOwner() as IBaseNpc_Plus;
     }
-
+    BaseNPC.GetPlayerRoot = function () {
+        return GGameScene.GetPlayer(this.GetPlayerID());
+    }
     BaseNPC.GetKVData = function (key: string, defaultValue: any = "") {
         return KVHelper.KvUnits[this.GetUnitName()][key] || defaultValue;
     }

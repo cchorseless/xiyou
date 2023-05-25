@@ -6,24 +6,16 @@ import { registerAbility } from "../../entityPlus/Base_Plus";
 export class courier_recovery_chess extends BaseAbility_Plus {
 
     CastFilterResultTarget(target: IBaseNpc_Plus) {
-        // if (target.ETRoot == null || !target.ETRoot.AsValid<IBuildingEntityRoot>("BuildingEntityRoot")) {
-        //     this.errorStr = "dota_hud_error_only_can_cast_on_building";
-        //     return UnitFilterResult.UF_FAIL_CUSTOM;
-        // }
         let caster = this.GetCasterPlus();
         if (caster.GetPlayerID() != target.GetPlayerID()) {
             return UnitFilterResult.UF_FAIL_NOT_PLAYER_CONTROLLED;
         }
-        if (target.HasModifier("modifier_building_battle_buff")) {
+        if (target.HasModifier("modifier_building")) {
             return UnitFilterResult.UF_SUCCESS
         }
-        return UnitFilter(
-            target,
-            DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY,
-            DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC,
-            DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE,
-            caster.GetTeamNumber()
-        );
+        else {
+            return UnitFilterResult.UF_FAIL_NOT_PLAYER_CONTROLLED;
+        }
     }
 
 

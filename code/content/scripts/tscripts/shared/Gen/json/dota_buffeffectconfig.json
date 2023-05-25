@@ -8,10 +8,6 @@
         10
       ],
       [
-        "radius",
-        325
-      ],
-      [
         "prop_pect",
         20
       ]
@@ -26,10 +22,6 @@
         10
       ],
       [
-        "radius",
-        325
-      ],
-      [
         "prop_pect",
         20
       ]
@@ -40,16 +32,8 @@
     "target": "hero",
     "propinfo": [
       [
-        "damage_hp_pect",
+        "damage_suck_pect",
         10
-      ],
-      [
-        "radius",
-        325
-      ],
-      [
-        "prop_pect",
-        20
       ]
     ]
   },
@@ -60,6 +44,10 @@
       [
         "thorns_pect",
         50
+      ],
+      [
+        "hpmax_pect",
+        200
       ]
     ]
   },
@@ -70,6 +58,10 @@
       [
         "thorns_pect",
         50
+      ],
+      [
+        "hpmax_pect",
+        500
       ]
     ]
   },
@@ -78,7 +70,7 @@
     "target": "hero",
     "propinfo": [
       [
-        "thorns_pect",
+        "strength_get",
         50
       ]
     ]
@@ -124,16 +116,12 @@
     "target": "hero",
     "propinfo": [
       [
+        "health_pect_damage",
+        2
+      ],
+      [
         "health_regen",
-        20
-      ],
-      [
-        "heal_amount",
-        300
-      ],
-      [
-        "damage_amount",
-        300
+        30
       ]
     ]
   },
@@ -142,11 +130,11 @@
     "target": "hero",
     "propinfo": [
       [
-        "atk_range",
-        100
+        "incoming_magic_pect",
+        20
       ],
       [
-        "knock_out_pect",
+        "damage",
         20
       ]
     ]
@@ -156,11 +144,11 @@
     "target": "hero",
     "propinfo": [
       [
-        "atk_range",
-        120
+        "incoming_magic_pect",
+        20
       ],
       [
-        "knock_out_pect",
+        "damage",
         20
       ]
     ]
@@ -170,12 +158,16 @@
     "target": "hero",
     "propinfo": [
       [
-        "atk_range",
-        140
+        "incoming_magic_pect",
+        20
       ],
       [
-        "knock_out_pect",
+        "damage",
         20
+      ],
+      [
+        "outgonging_damage_pect",
+        -30
       ]
     ]
   },
@@ -185,11 +177,11 @@
     "propinfo": [
       [
         "cleave_damage_pct",
-        20
+        50
       ],
       [
-        "cleave_damage_ranged",
-        10
+        "cleave_count",
+        2
       ]
     ]
   },
@@ -199,11 +191,11 @@
     "propinfo": [
       [
         "cleave_damage_pct",
-        20
+        30
       ],
       [
-        "cleave_damage_ranged",
-        10
+        "cleave_count",
+        2
       ]
     ]
   },
@@ -212,12 +204,12 @@
     "target": "hero",
     "propinfo": [
       [
-        "cleave_damage_pct",
+        "knock_out_pct",
         20
       ],
       [
-        "cleave_damage_ranged",
-        10
+        "atk_range",
+        100
       ]
     ]
   },
@@ -302,6 +294,18 @@
       [
         "crit_damage",
         100
+      ],
+      [
+        "atk_speed_add",
+        30
+      ],
+      [
+        "duration",
+        2
+      ],
+      [
+        "count",
+        10
       ]
     ]
   },
@@ -312,10 +316,6 @@
       [
         "block_value",
         200
-      ],
-      [
-        "prop_pect",
-        20
       ]
     ]
   },
@@ -326,10 +326,6 @@
       [
         "block_value",
         300
-      ],
-      [
-        "prop_pect",
-        20
       ]
     ]
   },
@@ -340,10 +336,6 @@
       [
         "block_value",
         500
-      ],
-      [
-        "prop_pect",
-        20
       ]
     ]
   },
@@ -352,22 +344,12 @@
     "target": "hero",
     "propinfo": [
       [
-        "damage",
-        100
+        "count",
+        2
       ],
       [
-        "copy_pect",
-        10
-      ]
-    ]
-  },
-  {
-    "effectid": "modifier_sect_copy_base_b",
-    "target": "hero",
-    "propinfo": [
-      [
-        "damage",
-        200
+        "duration",
+        3
       ],
       [
         "copy_pect",
@@ -376,16 +358,30 @@
     ]
   },
   {
+    "effectid": "modifier_sect_copy_base_b",
+    "target": "hero",
+    "propinfo": [
+      [
+        "count",
+        3
+      ],
+      [
+        "duration",
+        5
+      ],
+      [
+        "copy_pect",
+        30
+      ]
+    ]
+  },
+  {
     "effectid": "modifier_sect_copy_base_c",
     "target": "hero",
     "propinfo": [
       [
-        "damage",
-        300
-      ],
-      [
-        "copy_pect",
-        20
+        "count",
+        5
       ]
     ]
   },
@@ -396,6 +392,14 @@
       [
         "summon_atk_pect",
         10
+      ],
+      [
+        "duration",
+        20
+      ],
+      [
+        "summonlevel",
+        1
       ],
       [
         "summon_hp_pect",
@@ -416,6 +420,14 @@
         10
       ],
       [
+        "duration",
+        20
+      ],
+      [
+        "summonlevel",
+        2
+      ],
+      [
         "summon_hp_pect",
         10
       ],
@@ -434,6 +446,14 @@
         10
       ],
       [
+        "duration",
+        20
+      ],
+      [
+        "summonlevel",
+        3
+      ],
+      [
         "summon_hp_pect",
         10
       ],
@@ -445,7 +465,7 @@
   },
   {
     "effectid": "modifier_sect_warpath_base_a",
-    "target": "team",
+    "target": "hero",
     "propinfo": [
       [
         "atk_bonus_pect",
@@ -455,7 +475,7 @@
   },
   {
     "effectid": "modifier_sect_warpath_base_b",
-    "target": "team",
+    "target": "hero",
     "propinfo": [
       [
         "atk_bonus_pect",
@@ -465,11 +485,11 @@
   },
   {
     "effectid": "modifier_sect_warpath_base_c",
-    "target": "team",
+    "target": "hero",
     "propinfo": [
       [
         "atk_bonus_pect",
-        40
+        100
       ]
     ]
   },
@@ -480,10 +500,6 @@
       [
         "phyarm_down",
         -6
-      ],
-      [
-        "duration",
-        1
       ]
     ]
   },
@@ -494,10 +510,6 @@
       [
         "phyarm_down",
         -9
-      ],
-      [
-        "duration",
-        2
       ]
     ]
   },
@@ -511,67 +523,87 @@
       ],
       [
         "duration",
-        3
+        5
       ]
     ]
   },
   {
     "effectid": "modifier_sect_atkspeed_base_a",
-    "target": "team",
+    "target": "hero",
     "propinfo": [
       [
         "atk_speed",
+        50
+      ],
+      [
+        "ignore_evasion",
         30
       ]
     ]
   },
   {
     "effectid": "modifier_sect_atkspeed_base_b",
-    "target": "team",
+    "target": "hero",
     "propinfo": [
       [
         "atk_speed",
         50
+      ],
+      [
+        "ignore_evasion",
+        30
       ]
     ]
   },
   {
     "effectid": "modifier_sect_atkspeed_base_c",
-    "target": "team",
+    "target": "hero",
     "propinfo": [
       [
         "atk_speed",
-        70
+        150
       ]
     ]
   },
   {
     "effectid": "modifier_sect_betrayal_base_a",
-    "target": "team",
+    "target": "hero",
     "propinfo": [
       [
+        "prop_pect",
+        20
+      ],
+      [
         "duration",
-        1
+        5
       ]
     ]
   },
   {
     "effectid": "modifier_sect_betrayal_base_b",
-    "target": "team",
+    "target": "hero",
     "propinfo": [
       [
+        "prop_pect",
+        20
+      ],
+      [
         "duration",
-        1.5
+        10
       ]
     ]
   },
   {
     "effectid": "modifier_sect_betrayal_base_c",
-    "target": "team",
+    "target": "hero",
     "propinfo": [
       [
+        "prop_pect",
+        15
+      ],
+      [
         "duration",
-        2
+        3
       ]
     ]
   },
@@ -580,16 +612,16 @@
     "target": "hero",
     "propinfo": [
       [
-        "gold_min",
+        "all_stat_per",
+        1
+      ],
+      [
+        "all_stat_death",
+        1
+      ],
+      [
+        "coin_prize",
         10
-      ],
-      [
-        "gold_max",
-        50
-      ],
-      [
-        "prop_pect",
-        20
       ]
     ]
   },
@@ -598,16 +630,16 @@
     "target": "hero",
     "propinfo": [
       [
-        "wood_min",
-        10
+        "all_stat_per",
+        1
       ],
       [
-        "wood_max",
-        50
+        "all_stat_death",
+        1
       ],
       [
-        "prop_pect",
-        20
+        "coin_prize",
+        5
       ]
     ]
   },
@@ -616,24 +648,16 @@
     "target": "hero",
     "propinfo": [
       [
-        "gold_min",
-        10
+        "all_stat_per",
+        2
       ],
       [
-        "gold_max",
-        50
+        "all_stat_death",
+        2
       ],
       [
-        "wood_min",
-        10
-      ],
-      [
-        "wood_max",
-        50
-      ],
-      [
-        "prop_pect",
-        20
+        "coin_prize",
+        1
       ]
     ]
   },
@@ -653,17 +677,17 @@
     "propinfo": [
       [
         "cooldown_pect",
-        30
+        20
       ]
     ]
   },
   {
     "effectid": "modifier_sect_cd_down_base_c",
-    "target": "team",
+    "target": "hero",
     "propinfo": [
       [
         "cooldown_pect",
-        30
+        40
       ]
     ]
   },
@@ -672,8 +696,16 @@
     "target": "hero",
     "propinfo": [
       [
-        "magic_arm",
-        -15
+        "damage",
+        50
+      ],
+      [
+        "extra_damage_pect",
+        10
+      ],
+      [
+        "count",
+        2
       ],
       [
         "spell_damage_pect",
@@ -686,8 +718,16 @@
     "target": "hero",
     "propinfo": [
       [
-        "magic_arm",
-        -10
+        "damage",
+        50
+      ],
+      [
+        "extra_damage_pect",
+        10
+      ],
+      [
+        "count",
+        2
       ],
       [
         "spell_damage_pect",
@@ -700,46 +740,54 @@
     "target": "hero",
     "propinfo": [
       [
-        "magic_arm",
-        -20
-      ],
-      [
         "spell_damage_pect",
-        20
+        50
       ],
       [
-        "duration",
+        "ice_duration",
         1
       ]
     ]
   },
   {
     "effectid": "modifier_sect_flame_base_a",
-    "target": "team",
+    "target": "hero",
     "propinfo": [
       [
-        "spell_crit_pect",
+        "damage",
         10
+      ],
+      [
+        "max_stack",
+        5
       ]
     ]
   },
   {
     "effectid": "modifier_sect_flame_base_b",
-    "target": "team",
+    "target": "hero",
     "propinfo": [
       [
-        "spell_crit_pect",
-        15
+        "damage",
+        10
+      ],
+      [
+        "max_stack",
+        5
       ]
     ]
   },
   {
     "effectid": "modifier_sect_flame_base_c",
-    "target": "team",
+    "target": "hero",
     "propinfo": [
       [
-        "spell_crit_pect",
-        20
+        "damage",
+        10
+      ],
+      [
+        "max_stack",
+        5
       ]
     ]
   },
@@ -748,11 +796,11 @@
     "target": "hero",
     "propinfo": [
       [
-        "chance_pect",
-        10
+        "splash_damage_pct",
+        30
       ],
       [
-        "duration",
+        "splash_distance",
         1
       ]
     ]
@@ -762,12 +810,12 @@
     "target": "hero",
     "propinfo": [
       [
-        "chance_pect",
-        15
+        "splash_damage_pct",
+        30
       ],
       [
-        "duration",
-        1.5
+        "splash_distance",
+        1
       ]
     ]
   },
@@ -776,12 +824,340 @@
     "target": "hero",
     "propinfo": [
       [
-        "chance_pect",
+        "splash_damage_pct",
+        50
+      ],
+      [
+        "splash_distance",
+        1
+      ]
+    ]
+  },
+  {
+    "effectid": "modifier_sect_headshot_base_a",
+    "target": "hero",
+    "propinfo": [
+      [
+        "crit_pect",
         20
       ],
       [
-        "duration",
+        "damage_pect",
+        50
+      ],
+      [
+        "crit_radius",
+        0.5
+      ]
+    ]
+  },
+  {
+    "effectid": "modifier_sect_headshot_base_b",
+    "target": "hero",
+    "propinfo": [
+      [
+        "crit_pect",
+        20
+      ],
+      [
+        "damage_pect",
+        30
+      ],
+      [
+        "crit_radius",
+        0.5
+      ]
+    ]
+  },
+  {
+    "effectid": "modifier_sect_headshot_base_c",
+    "target": "hero",
+    "propinfo": [
+      [
+        "crit_pect",
+        30
+      ],
+      [
+        "damage_pect",
+        20
+      ],
+      [
+        "crit_radius",
+        0.5
+      ]
+    ]
+  },
+  {
+    "effectid": "modifier_sect_shock_base_a",
+    "target": "hero",
+    "propinfo": [
+      [
+        "shock_pect",
+        20
+      ],
+      [
+        "shock_damage",
+        80
+      ],
+      [
+        "shock_count",
+        3
+      ]
+    ]
+  },
+  {
+    "effectid": "modifier_sect_shock_base_b",
+    "target": "hero",
+    "propinfo": [
+      [
+        "shock_pect",
+        20
+      ],
+      [
+        "shock_damage",
+        80
+      ],
+      [
+        "shock_count",
         2
+      ]
+    ]
+  },
+  {
+    "effectid": "modifier_sect_shock_base_c",
+    "target": "hero",
+    "propinfo": [
+      [
+        "shock_pect",
+        30
+      ],
+      [
+        "shock_damage",
+        100
+      ],
+      [
+        "shock_count",
+        2
+      ]
+    ]
+  },
+  {
+    "effectid": "modifier_sect_magcrit_base_a",
+    "target": "hero",
+    "propinfo": [
+      [
+        "spell_crit_pect",
+        10
+      ],
+      [
+        "spell_crit_damage_pect",
+        50
+      ]
+    ]
+  },
+  {
+    "effectid": "modifier_sect_magcrit_base_b",
+    "target": "hero",
+    "propinfo": [
+      [
+        "spell_crit_pect",
+        15
+      ],
+      [
+        "spell_crit_damage_pect",
+        50
+      ]
+    ]
+  },
+  {
+    "effectid": "modifier_sect_magcrit_base_c",
+    "target": "hero",
+    "propinfo": [
+      [
+        "spell_crit_pect",
+        20
+      ],
+      [
+        "spell_crit_damage_pect",
+        50
+      ]
+    ]
+  },
+  {
+    "effectid": "modifier_sect_black_art_base_a",
+    "target": "hero",
+    "propinfo": [
+      [
+        "sect_count",
+        -1
+      ]
+    ]
+  },
+  {
+    "effectid": "modifier_sect_black_art_base_b",
+    "target": "hero",
+    "propinfo": [
+      [
+        "sect_count",
+        -1
+      ]
+    ]
+  },
+  {
+    "effectid": "modifier_sect_black_art_base_c",
+    "target": "hero",
+    "propinfo": [
+      [
+        "sect_count",
+        -1
+      ]
+    ]
+  },
+  {
+    "effectid": "modifier_sect_guard_base_a",
+    "target": "hero",
+    "propinfo": [
+      [
+        "summonid",
+        1
+      ],
+      [
+        "max_health",
+        5000
+      ]
+    ]
+  },
+  {
+    "effectid": "modifier_sect_guard_base_b",
+    "target": "hero",
+    "propinfo": [
+      [
+        "summonid",
+        1
+      ],
+      [
+        "heal_pect",
+        1
+      ]
+    ]
+  },
+  {
+    "effectid": "modifier_sect_guard_base_c",
+    "target": "hero",
+    "propinfo": [
+      [
+        "summonid",
+        1
+      ]
+    ]
+  },
+  {
+    "effectid": "modifier_sect_transform_base_a",
+    "target": "hero",
+    "propinfo": [
+      [
+        "mana",
+        500
+      ]
+    ]
+  },
+  {
+    "effectid": "modifier_sect_transform_base_b",
+    "target": "hero",
+    "propinfo": [
+      [
+        "mana",
+        500
+      ]
+    ]
+  },
+  {
+    "effectid": "modifier_sect_transform_base_c",
+    "target": "team",
+    "propinfo": [
+      [
+        "mana",
+        500
+      ],
+      [
+        "mana_regen",
+        10
+      ]
+    ]
+  },
+  {
+    "effectid": "modifier_sect_demon_base_a",
+    "target": "hero",
+    "propinfo": [
+      [
+        "damage_pect",
+        10
+      ]
+    ]
+  },
+  {
+    "effectid": "modifier_sect_demon_base_b",
+    "target": "hero",
+    "propinfo": [
+      [
+        "damage_pect",
+        20
+      ]
+    ]
+  },
+  {
+    "effectid": "modifier_sect_demon_base_c",
+    "target": "hero",
+    "propinfo": [
+      [
+        "damage_pect",
+        30
+      ],
+      [
+        "pure_damage_pect",
+        100
+      ]
+    ]
+  },
+  {
+    "effectid": "modifier_sect_cannibalism_base_a",
+    "target": "hero",
+    "propinfo": [
+      [
+        "prop_pect",
+        20
+      ],
+      [
+        "count",
+        1
+      ]
+    ]
+  },
+  {
+    "effectid": "modifier_sect_cannibalism_base_b",
+    "target": "hero",
+    "propinfo": [
+      [
+        "prop_pect",
+        30
+      ],
+      [
+        "count",
+        1
+      ]
+    ]
+  },
+  {
+    "effectid": "modifier_sect_cannibalism_base_c",
+    "target": "hero",
+    "propinfo": [
+      [
+        "prop_pect",
+        50
+      ],
+      [
+        "count",
+        1
       ]
     ]
   },
@@ -791,7 +1167,7 @@
     "propinfo": [
       [
         "prize_pool",
-        10001
+        1009
       ]
     ]
   },
@@ -801,7 +1177,7 @@
     "propinfo": [
       [
         "prize_pool",
-        10001
+        1010
       ]
     ]
   },
@@ -811,139 +1187,7 @@
     "propinfo": [
       [
         "prize_pool",
-        10001
-      ]
-    ]
-  },
-  {
-    "effectid": "modifier_sect_headshot_base_a",
-    "target": "hero",
-    "propinfo": [
-      [
-        "miss_pect",
-        20
-      ]
-    ]
-  },
-  {
-    "effectid": "modifier_sect_headshot_base_b",
-    "target": "hero",
-    "propinfo": [
-      [
-        "miss_pect",
-        20
-      ]
-    ]
-  },
-  {
-    "effectid": "modifier_sect_headshot_base_c",
-    "target": "team",
-    "propinfo": [
-      [
-        "miss_pect",
-        30
-      ]
-    ]
-  },
-  {
-    "effectid": "modifier_sect_shock_base_a",
-    "target": "hero",
-    "propinfo": [
-      [
-        "lifesteal_pect",
-        20
-      ]
-    ]
-  },
-  {
-    "effectid": "modifier_sect_shock_base_b",
-    "target": "hero",
-    "propinfo": [
-      [
-        "lifesteal_pect",
-        20
-      ]
-    ]
-  },
-  {
-    "effectid": "modifier_sect_shock_base_c",
-    "target": "team",
-    "propinfo": [
-      [
-        "lifesteal_pect",
-        30
-      ]
-    ]
-  },
-  {
-    "effectid": "modifier_sect_magcrit_base_a",
-    "target": "hero",
-    "propinfo": [
-      [
-        "atk_speed",
-        -30
-      ],
-      [
-        "health_regen",
-        -10
-      ]
-    ]
-  },
-  {
-    "effectid": "modifier_sect_magcrit_base_b",
-    "target": "hero",
-    "propinfo": [
-      [
-        "atk_speed",
-        -50
-      ],
-      [
-        "health_regen",
-        -20
-      ]
-    ]
-  },
-  {
-    "effectid": "modifier_sect_magcrit_base_c",
-    "target": "hero",
-    "propinfo": [
-      [
-        "atk_speed",
-        -80
-      ],
-      [
-        "health_regen",
-        -30
-      ]
-    ]
-  },
-  {
-    "effectid": "modifier_sect_black_art_base_a",
-    "target": "hero",
-    "propinfo": [
-      [
-        "spell_lifesteal",
-        20
-      ]
-    ]
-  },
-  {
-    "effectid": "modifier_sect_black_art_base_b",
-    "target": "hero",
-    "propinfo": [
-      [
-        "spell_lifesteal",
-        20
-      ]
-    ]
-  },
-  {
-    "effectid": "modifier_sect_black_art_base_c",
-    "target": "hero",
-    "propinfo": [
-      [
-        "spell_lifesteal",
-        20
+        1011
       ]
     ]
   },
@@ -963,141 +1207,17 @@
     "propinfo": [
       [
         "prop_pect",
-        15
+        10
       ]
     ]
   },
   {
     "effectid": "modifier_sect_fish_chess_base_c",
-    "target": "hero",
-    "propinfo": [
-      [
-        "prop_pect",
-        20
-      ]
-    ]
-  },
-  {
-    "effectid": "modifier_sect_guard_base_a",
-    "target": "hero",
-    "propinfo": [
-      [
-        "summonid",
-        1000
-      ]
-    ]
-  },
-  {
-    "effectid": "modifier_sect_guard_base_b",
-    "target": "hero",
-    "propinfo": [
-      [
-        "summonid",
-        1000
-      ]
-    ]
-  },
-  {
-    "effectid": "modifier_sect_guard_base_c",
-    "target": "hero",
-    "propinfo": [
-      [
-        "summonid",
-        1000
-      ]
-    ]
-  },
-  {
-    "effectid": "modifier_sect_transform_base_a",
-    "target": "hero",
-    "propinfo": [
-      [
-        "mana",
-        100
-      ]
-    ]
-  },
-  {
-    "effectid": "modifier_sect_transform_base_b",
-    "target": "hero",
-    "propinfo": [
-      [
-        "mana",
-        100
-      ],
-      [
-        "illusion_count",
-        1
-      ]
-    ]
-  },
-  {
-    "effectid": "modifier_sect_transform_base_c",
     "target": "team",
     "propinfo": [
       [
-        "mana",
-        100
-      ]
-    ]
-  },
-  {
-    "effectid": "modifier_sect_demon_base_a",
-    "target": "hero",
-    "propinfo": [
-      [
-        "damage_pect",
-        30
-      ]
-    ]
-  },
-  {
-    "effectid": "modifier_sect_demon_base_b",
-    "target": "hero",
-    "propinfo": [
-      [
-        "damage_pect",
-        30
-      ]
-    ]
-  },
-  {
-    "effectid": "modifier_sect_demon_base_c",
-    "target": "hero",
-    "propinfo": [
-      [
-        "damage_pect",
-        40
-      ]
-    ]
-  },
-  {
-    "effectid": "modifier_sect_cannibalism_base_a",
-    "target": "hero",
-    "propinfo": [
-      [
         "prop_pect",
-        80
-      ]
-    ]
-  },
-  {
-    "effectid": "modifier_sect_cannibalism_base_b",
-    "target": "hero",
-    "propinfo": [
-      [
-        "prop_pect",
-        40
-      ]
-    ]
-  },
-  {
-    "effectid": "modifier_sect_cannibalism_base_c",
-    "target": "hero",
-    "propinfo": [
-      [
-        "prop_pect",
-        30
+        10
       ]
     ]
   }

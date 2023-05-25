@@ -7,7 +7,15 @@ export class BaseItem_Plus extends BaseItem {
     __IN_DOTA_DATA__: any;
     /**使用报错提示信息 */
     public errorStr: string;
-
+    GetCustomCastErrorTarget(target: CDOTA_BaseNPC): string {
+        return this.errorStr;
+    }
+    GetCustomCastError() {
+        return this.errorStr;
+    }
+    GetCustomCastErrorLocation(location: Vector): string {
+        return this.errorStr;
+    }
     /**
      * @client
      * @returns 

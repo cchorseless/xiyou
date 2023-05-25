@@ -18,7 +18,7 @@ export class item_imba_arcane_boots extends BaseItem_Plus {
     }
     OnSpellStart(): void {
         if (IsServer()) {
-            let replenish_mana = this.GetSpecialValueFor("base_replenish_mana") + this.GetSpecialValueFor("replenish_mana_pct") * this.GetCasterPlus().GetMaxMana() * 0.01;
+            let replenish_mana = this.GetSpecialValueFor("replenish_mana") /**+ this.GetSpecialValueFor("replenish_mana_pct") * this.GetCasterPlus().GetMaxMana() * 0.01*/;
             let replenish_radius = this.GetSpecialValueFor("replenish_radius");
             this.GetCasterPlus().EmitSound("DOTA_Item.ArcaneBoots.Activate");
             let arcane_pfx = ResHelper.CreateParticleEx("particles/items_fx/arcane_boots.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetCasterPlus());

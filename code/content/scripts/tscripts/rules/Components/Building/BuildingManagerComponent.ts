@@ -1,6 +1,8 @@
 import { KVHelper } from "../../../helper/KVHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
+import { modifier_building } from "../../../npc/modifier/building/modifier_building";
+import { modifier_spawn_fall } from "../../../npc/modifier/spawn/modifier_spawn_fall";
 import { BuildingConfig } from "../../../shared/BuildingConfig";
 import { ChessControlConfig } from "../../../shared/ChessControlConfig";
 import { EEnum } from "../../../shared/Gen/Types";
@@ -102,10 +104,56 @@ export class BuildingManagerComponent extends ET.Component implements IRoundStat
         let iGoldReturn = math.floor(iGoldCost * fGoldReturn);
         let playerroot = GPlayerEntityRoot.GetOneInstance(target.BelongPlayerid);
         playerroot.PlayerDataComp().ModifyGold(iGoldReturn);
+        // 卡片返还
+        for (let i = 0; i < target.iStar; i++) {
+            GDrawSystem.GetInstance().RegUseCard(target.ConfigID, false);
+        }
         target.Dispose();
     }
+    /**
+     * 获取下一个添加建筑的位置
+     * @param towerID 
+     * @returns 
+     */
+    public getNextAddBuildingPos(towerID: string): Vector {
+        let playerroot = GGameScene.GetPlayer(this.BelongPlayerid);
+        let hero = playerroot.Hero;
+        if (!hero.IsAlive()) return;
+        // 相同的塔 合成
+        // 暂时改成2格升1星
+        let buildings = this.getBuilding(towerID);
+        let buildcount = buildings.length;
+        if (buildcount >= 2) {
+            buildings.sort((a, b) => {
+                let r = b.iStar - a.iStar;
+                if (r == 0) {
+                    if (a.ChessComp().isPosInBattle()) {
+                        r = -1;
+                    }
+                    else if (b.ChessComp().isPosInBattle()) {
+                        r = 1;
+                    }
+                }
+                return r;
+            })
+            for (let i = 0; i < buildcount - 1; i++) {
+                // 升级目标
+                let build1 = buildings[i];
+                // 消耗目标
+                let build2 = buildings[i + 1];
+                if (build1.checkCanStarUp() && build2.iStar == 1) {
+                    return build1.GetDomain<IBaseNpc_Plus>().GetAbsOrigin();
+                }
+            }
+        }
+        let pos = this.findEmptyStandbyChessVector();
+        if (pos == null) {
+            return;
+        }
+        return pos.getVector3();
+    }
 
-    public addBuilding(towerID: string, goldcostpect = 100) {
+    public addBuilding(towerID: string, showfaileffect = false, goldcostpect = 100) {
         let playerroot = GGameScene.GetPlayer(this.BelongPlayerid);
         let hero = playerroot.Hero;
         let playerID = playerroot.BelongPlayerid;
@@ -113,23 +161,43 @@ export class BuildingManagerComponent extends ET.Component implements IRoundStat
         let itemName = KVHelper.GetUnitData(towerID, "CardName") as string;
         let iGoldCost = 0;
         if (itemName) {
-            GLogHelper.print("itemName", towerID, itemName)
             iGoldCost = GToNumber(KVHelper.GetItemData(itemName, "ItemCost"));
         }
-        iGoldCost = iGoldCost * goldcostpect * 0.01;
         let playerdata = playerroot.PlayerDataComp();
-        if (!playerdata.isEnoughItem(EEnum.EMoneyType.Gold, iGoldCost)) {
-            GNotificationSystem.ErrorMessage(BuildingConfig.ErrorCode.dota_hud_error_gold_limit, playerID);
-            return;
+        if (goldcostpect > 0) {
+            iGoldCost = iGoldCost * goldcostpect * 0.01;
+            if (!playerdata.isEnoughItem(EEnum.EMoneyType.Gold, iGoldCost)) {
+                GNotificationSystem.ErrorMessage(BuildingConfig.ErrorCode.dota_hud_error_gold_limit, playerID);
+                return;
+            }
         }
         // 相同的塔 合成
+        // 暂时改成2格升1星
         let buildings = this.getBuilding(towerID);
-        if (buildings.length >= 1) {
-            for (let build of buildings) {
-                if (build.checkCanStarUp()) {
-                    build.AddStar(1);
+        let buildcount = buildings.length;
+        if (buildcount >= 2) {
+            buildings.sort((a, b) => {
+                let r = b.iStar - a.iStar;
+                if (r == 0) {
+                    if (a.ChessComp().isPosInBattle()) {
+                        r = -1;
+                    }
+                    else if (b.ChessComp().isPosInBattle()) {
+                        r = 1;
+                    }
+                }
+                return r;
+            })
+            for (let i = 0; i < buildcount - 1; i++) {
+                // 升级目标
+                let build1 = buildings[i];
+                // 消耗目标
+                let build2 = buildings[i + 1];
+                if (build1.checkCanStarUp() && build2.iStar == 1) {
+                    build1.AddStar(1);
+                    build2.Dispose();
                     playerdata.ModifyGold(-iGoldCost);
-                    return build;
+                    return build1;
                 }
             }
         }
@@ -144,22 +212,27 @@ export class BuildingManagerComponent extends ET.Component implements IRoundStat
         if (!building) {
             return;
         }
-        ResHelper.CreateParticle(
-            new ResHelper.ParticleInfo()
-                .set_resPath("particles/econ/items/antimage/antimage_ti7/antimage_blink_start_ti7_ribbon_bright.vpcf")
-                .set_owner(building)
-                .set_iAttachment(ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW)
-                .set_validtime(5)
-        );
         building.SetTeam(DOTATeam_t.DOTA_TEAM_GOODGUYS);
         /**互相绑定 */
         building.SetControllableByPlayer(playerID, true);
+        modifier_building.applyOnly(building, building);
         BuildingEntityRoot.Active(building, playerID, towerID);
         let buildingroot = building.ETRoot.As<IBuildingEntityRoot>();
         buildingroot.SetGoldCost(iGoldCost);
         playerdata.ModifyGold(-iGoldCost);
         playerroot.AddDomainChild(buildingroot);
         this.allBuilding.push(buildingroot.Id)
+        if (showfaileffect) {
+            modifier_spawn_fall.applyOnly(building, building);
+        }
+        else {
+            ResHelper.CreateParticle(new ResHelper.ParticleInfo()
+                .set_resPath("particles/econ/items/antimage/antimage_ti7/antimage_blink_start_ti7_ribbon_bright.vpcf")
+                .set_owner(building)
+                .set_iAttachment(ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW)
+                .set_validtime(5)
+            );
+        }
         return building;
     }
 
@@ -223,16 +296,30 @@ export class BuildingManagerComponent extends ET.Component implements IRoundStat
             return r;
         }
         let targetPos = ChessControlSystem.GetBoardGirdVector3(boardVec);
+        // 不能移动到蛋的位置
+        let egg = playerRoot.CourierRoot().CourierEggComp().EggUnit;
+        if (IsValid(egg) && GFuncVector.CalculateDistance(egg.GetAbsOrigin(), targetPos) <= 50) {
+            return [false, "cant move to egg position"];
+        }
+        // 回合
+        let round = playerRoot.RoundManagerComp().getCurrentBoardRound();
+        const isBattle = round.IsRoundBattle();
+        if (isBattle && target.IsHuted()) {
+            return [false, "cant move huted chess in round battle"];
+        }
         let oldNpcarr = ChessControlSystem.FindBoardInGirdChess(boardVec);
         //  人口判断
         let iPopulationAdd = 0;
-        if (!target.ChessComp().isPosInBattle()) {
+        if (!target.ChessComp().isPosInBattle() && !boardVec.isY(0)) {
             iPopulationAdd = GBuildingSystem.GetInstance().GetBuildingPopulation(target.ConfigID);
         }
         let PlayerDataComp = playerRoot.PlayerDataComp();
         let freePopulation = PlayerDataComp.getFreePopulation();
         if (oldNpcarr.length > 0) {
             let oldNpc = oldNpcarr[0];
+            if (isBattle && oldNpc.IsHuted()) {
+                return [false, "cant move to huted chess in round battle"];
+            }
             iPopulationAdd -= GBuildingSystem.GetInstance().GetBuildingPopulation(oldNpc.ConfigID);
         }
         if (iPopulationAdd > freePopulation) {

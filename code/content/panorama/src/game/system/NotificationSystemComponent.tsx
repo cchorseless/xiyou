@@ -70,6 +70,11 @@ export class NotificationSystemComponent extends ET.SingletonComponent {
         for (let key in allLoadData) {
             let json = allLoadData[key];
             if (json) {
+                if (GGameScene.IsHeroSelect) {
+                    if (!GameServiceConfig.HERO_SELECT_SYNC_ENTITY.includes(json._t)) {
+                        continue
+                    }
+                }
                 let loadList = [key];
                 let _p_instanceid = json._p_instanceid;
                 while (_p_instanceid && allLoadData[_p_instanceid]) {
@@ -97,6 +102,12 @@ export class NotificationSystemComponent extends ET.SingletonComponent {
             }
             else {
                 value = GameServiceConfig.NetTableSaveDataAsSring ? JSON.parse(value._ as any) : value;
+            }
+        }
+        // 英雄选择阶段只同步部分实体
+        if (GGameScene.IsHeroSelect) {
+            if (value == null || !GameServiceConfig.HERO_SELECT_SYNC_ENTITY.includes(value._t)) {
+                return
             }
         }
         if (value != null && value._t && value._id) {

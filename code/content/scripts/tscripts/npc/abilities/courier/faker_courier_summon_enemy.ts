@@ -35,18 +35,20 @@ export class faker_courier_summon_enemy extends BaseAbility_Plus {
         let root = GPlayerEntityRoot.GetOneInstance(playerid);
         let round = root.RoundManagerComp().getCurrentBoardRound();
         if (!round.IsRoundBattle()) { return }
-        let summon_count_min = this.GetSpecialValueFor("summon_count_min");
-        let summon_count_max = this.GetSpecialValueFor("summon_count_max");
+        // let summon_count_min = this.GetSpecialValueFor("summon_count_min");
+        // let summon_count_max = this.GetSpecialValueFor("summon_count_max");
+        let summon_count_min = caster.GetLevel() - 0.5;
+        let summon_count_max = summon_count_min * 2 + 0.5;
         let summon_count = RandomInt(summon_count_min, summon_count_max);
         let posarr: Vector[] = [];
         // 金币挑战木材挑战塔
         if (this.IsRoundChallenge_Gold() || this.IsRoundChallenge_Wood()) {
-            let effect = this.IsRoundChallenge_Gold() ? Assert_SpawnEffect.Effect.Spawn_aegis : Assert_SpawnEffect.Effect.Spawn_windrun;
+            let effect = this.IsRoundChallenge_Gold() ? Assert_SpawnEffect.Effect.Spawn_breaksoil : Assert_SpawnEffect.Effect.Spawn_windrun;
             let challengeround = this.GetchallengeRound();
-            posarr = challengeround.CreateRoundSummonEnemy(summon_count, effect, caster);
+            posarr = challengeround.CreateRoundSummonBattleEnemy(summon_count, effect, caster);
         }
         else {
-            posarr = round.CreateRoundSummonEnemy(summon_count, Assert_SpawnEffect.Effect.Spawn_fall_2021, caster);
+            posarr = round.CreateRoundSummonEggEnemy(summon_count, Assert_SpawnEffect.Effect.Spawn_fall_2021, caster);
         }
         if (posarr.length > 0) {
             caster.EmitSound("Hero_ShadowShaman.EtherShock");

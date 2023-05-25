@@ -5,6 +5,7 @@ import { CSSHelper } from "../../helper/CSSHelper";
 import { FuncHelper } from "../../helper/FuncHelper";
 import { KVHelper } from "../../helper/KVHelper";
 
+import { ChessControlConfig } from "../../../../scripts/tscripts/shared/ChessControlConfig";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import "./CCUnitStatsDialog.less";
 
@@ -135,17 +136,17 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
         const bonus_spell_amplify = FuncHelper.SignNumber(fBonusSpellAmplify, true);
         const rowcls_spell_amplify = this.getRowClassName(fBonusSpellAmplify);
 
-        // 额外全伤害
-        let fIncomingTotalDamagePercent = Entities.GetOutgoingDamagePercent(iLocalPortraitUnit);
+        // 额外受到伤害
+        let fIncomingTotalDamagePercent = Entities.GetIncomingDamagePercent(iLocalPortraitUnit);
         const Incomingtotal_damage_percent = FuncHelper.Round(fIncomingTotalDamagePercent, 2);
         // 额外物理伤害
-        let fIncomingPhysicalDamagePercent = Entities.GetOutgoingPhysicalDamagePercent(iLocalPortraitUnit);
+        let fIncomingPhysicalDamagePercent = Entities.GetIncomingPhysicalDamagePercent(iLocalPortraitUnit);
         const Incomingphysical_damage_percent = FuncHelper.Round(fIncomingPhysicalDamagePercent, 2);
         // 额外魔法伤害
-        let fIncomingMagicalDamagePercent = Entities.GetOutgoingMagicalDamagePercent(iLocalPortraitUnit);
+        let fIncomingMagicalDamagePercent = Entities.GetIncomingMagicalDamagePercent(iLocalPortraitUnit);
         const Incomingmagical_damage_percent = FuncHelper.Round(fIncomingMagicalDamagePercent, 2);
         // 额外纯粹伤害
-        let fIncomingPureDamagePercent = Entities.GetOutgoingPureDamagePercent(iLocalPortraitUnit);
+        let fIncomingPureDamagePercent = Entities.GetIncomingPureDamagePercent(iLocalPortraitUnit);
         const Incomingpure_damage_percent = FuncHelper.Round(fIncomingPureDamagePercent, 2);
         // 攻击吸血
         let fBloodSuckingAttackPercent = Entities.GetLifeStealPercent(iLocalPortraitUnit);
@@ -172,6 +173,8 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
         let sBonusAttackRange = FuncHelper.SignNumber(fBonusAttackRange);
         const base_attack_range = fBaseAttackRange;
         const bonus_attack_range = sBonusAttackRange;
+        // 格子数
+        const attack_range_gezi = (fAttackRange / ChessControlConfig.Gird_Width).toFixed(1);
         const rowcls_attack_range = this.getRowClassName(fBonusAttackRange);
         // 冷却减少
         let fCooldownReduction = Entities.GetCooldownReduction(iLocalPortraitUnit);
@@ -283,6 +286,7 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
                         <Panel className="LeftRightFlow">
                             <Label id="Range" text={`${base_attack_range}`} className="BaseValue" />
                             <Label id="RangeBonus" text={`${bonus_attack_range}`} className="BonusValue" />
+                            <Label id="RangeGeZi" text={`(${attack_range_gezi}格)`} className="BaseValue AdditionalValue" />
                         </Panel>
                     </Panel>
                     <Panel id="AttackSpeedRow" className="StatRow">

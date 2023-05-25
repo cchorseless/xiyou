@@ -152,7 +152,7 @@ export class CCCombinationInfoDialog extends CCPanel<ICCCombinationInfoDialog> {
                                     <CCPanel key={"" + index} marginLeft="5px" flowChildren="down" minHeight={"30px"}>
                                         {
                                             commoneffect.length > 0 && <Label key={commoneffect} html={true} className={CSSHelper.ClassMaker('InfoDes', { 'Active': isactive })}
-                                                text={`[${$.Localize("#DOTA_Tooltip_" + commoneffect)}]: ${this.GetSectBuffDescriptionByName(commoneffect)}`} />
+                                                text={/**`[${$.Localize("#DOTA_Tooltip_" + commoneffect)}]:`+*/`${this.GetSectBuffDescriptionByName(commoneffect)}`} />
                                         }
                                         {
                                             abilityitemname && Specialeffect.length > 0 && <Label key={Specialeffect} html={true} className={CSSHelper.ClassMaker('InfoDes', { 'Active': isactive })}

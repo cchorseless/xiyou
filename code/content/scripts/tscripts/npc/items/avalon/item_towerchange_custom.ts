@@ -17,9 +17,7 @@ export class item_towerchange_custom extends BaseItem_Plus {
         this.errorStr = "dota_hud_error_only_can_cast_on_same_hero"
         return UnitFilterResult.UF_FAIL_CUSTOM
     }
-    GetCustomCastErrorTarget() {
-        return this.errorStr
-    }
+
     GetCastRange(location: Vector, target: CDOTA_BaseNPC | undefined): number {
         return 600
     }

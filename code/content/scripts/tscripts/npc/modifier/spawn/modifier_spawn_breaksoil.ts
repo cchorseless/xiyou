@@ -42,6 +42,7 @@ export class modifier_spawn_breaksoil extends BaseModifierMotionVertical_Plus {
             //  ParticleManager.SetParticleControlEnt( pp, 1, this.GetParentPlus(), ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, null, this.GetParentPlus().GetAbsOrigin(), true );
             // 目标点
             this.vTargetPosition = GetGroundPosition(this.GetParentPlus().GetAbsOrigin(), this.GetParentPlus());
+            // this.StartIntervalThink(FrameTime())
         }
     }
     DestroyHandler: IGHandler;

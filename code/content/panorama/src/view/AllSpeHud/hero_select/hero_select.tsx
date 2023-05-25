@@ -25,13 +25,11 @@ export class CCHero_Select extends CCPanel<NodePropsData> {
     TimerRef = createRef<Panel>();
     onReady() {
         const localplayerid = Players.GetLocalPlayer();
-        return Boolean(GGameScene.GameServiceSystem && GBagComponent.GetOneInstance(localplayerid))
+        return Boolean(GGameScene.GameServiceSystem)
     }
 
     onInitUI() {
-        const localplayerid = Players.GetLocalPlayer()
         this.ListenUpdate(GGameScene.GameServiceSystem);
-        this.ListenUpdate(GBagComponent.GetOneInstance(localplayerid));
         this.UpdateState({ iTimeLeft: -1 });
         GTimerHelper.AddTimer(1, GHandler.create(this, () => {
             let lefttime = GGameScene.GameServiceSystem.BeforeGameEndTime - Game.GetGameTime();;
@@ -47,7 +45,7 @@ export class CCHero_Select extends CCPanel<NodePropsData> {
     onDestroy() {
         this.__root___isValid = false;
         TimerHelper.Stop();
-        DotaUIHelper.Quit();
+        // DotaUIHelper.Quit();
         GameScene.Scene.Dispose();
         LogHelper.print("----------------CCHero_Select close----------------")
     }
@@ -69,13 +67,12 @@ export class CCHero_Select extends CCPanel<NodePropsData> {
         const localplayerid = Players.GetLocalPlayer()
         const iTimeLeft = this.GetState<number>("iTimeLeft");
         const GamseStateSys = (GGameScene.GameServiceSystem)!;
-        const bagcomp = (GBagComponent.GetOneInstance(localplayerid))!;
+        const courierNames = GamseStateSys.tPlayerCourierList[localplayerid + ""] || [];
         const tPlayerGameSelection = GamseStateSys.tPlayerGameSelection;
         const localselect = GamseStateSys.getPlayerGameSelection(localplayerid);
         const sCourierIDInUse = localselect.Courier;
         const maxDiff = localselect.Difficulty.MaxChapter
         const layers = localselect.Difficulty.MaxLevel;
-        const courierNames = bagcomp.getAllCourierNames();
         return (
             <Panel ref={this.__root__} id="CC_Hero_Select" hittest={false} {...this.initRootAttrs()}>
                 <CCMenuDashBoardBackAndSetting />
@@ -165,6 +162,6 @@ AllShared.Init();
 AllEntity.Init();
 BaseLibExt.Init();
 TimerHelper.Init();
-GameScene.Init();
-DotaUIHelper.Init();
+GameScene.Init(true);
+DotaUIHelper.Init(true);
 render(<CCHero_Select />, $.GetContextPanel());

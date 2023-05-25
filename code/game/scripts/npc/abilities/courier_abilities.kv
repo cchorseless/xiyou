@@ -66,7 +66,7 @@
 			}
 			"05" {
 				"var_type" "FIELD_INTEGER"
-				"unlock_round" "5"
+				"unlock_round" "4"
 
 			}
 
@@ -166,6 +166,8 @@
 		"AbilityTextureName" "recovery_chess"
 		"MaxLevel" "1"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE "
+		"AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilitySound" "Ability.Torrent"
 		"HasScepterUpgrade" "1"
 		"AbilityCastRange" "1500"
@@ -179,6 +181,21 @@
 			}
 
 		}
+
+	}
+	"courier_hut_change" {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/courier/courier_hut_change"
+		"AbilityTextureName" "courier_hut_change"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE "
+		"AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilitySound" "Ability.Torrent"
+		"HasScepterUpgrade" "1"
+		"AbilityCastRange" "1500"
+		"AbilityCooldown" "0"
+		"AbilityManaCost" "0"
 
 	}
 	"courier_upgrade_population" {
@@ -251,27 +268,27 @@
 			}
 			"05" {
 				"var_type" "FIELD_INTEGER"
-				"stat_all_add" "2"
+				"poolgroupconfig_1" "10007"
 
 			}
 			"06" {
 				"var_type" "FIELD_INTEGER"
-				"poolgroupconfig_1" "10007"
+				"poolgroupconfig_2" "10008"
 
 			}
 			"07" {
 				"var_type" "FIELD_INTEGER"
-				"poolgroupconfig_2" "10008"
+				"poolgroupconfig_3" "10009"
 
 			}
 			"08" {
 				"var_type" "FIELD_INTEGER"
-				"poolgroupconfig_3" "10009"
+				"_jindu_max" "20"
 
 			}
 			"09" {
 				"var_type" "FIELD_INTEGER"
-				"_jindu_max" "20"
+				"eggcount" "1"
 
 			}
 
@@ -303,7 +320,7 @@
 			}
 			"03" {
 				"var_type" "FIELD_INTEGER"
-				"_jindu_max" "20"
+				"_jindu_max" "15"
 
 			}
 
@@ -335,7 +352,7 @@
 			}
 			"03" {
 				"var_type" "FIELD_INTEGER"
-				"_jindu_max" "20"
+				"_jindu_max" "15"
 
 			}
 
@@ -399,7 +416,7 @@
 			}
 			"03" {
 				"var_type" "FIELD_INTEGER"
-				"_jindu_max" "10"
+				"_jindu_max" "5"
 
 			}
 
@@ -425,7 +442,7 @@
 			}
 			"02" {
 				"var_type" "FIELD_INTEGER"
-				"summon_count_max" "4"
+				"summon_count_max" "5"
 
 			}
 			"03" {
@@ -480,6 +497,27 @@
 			"04" {
 				"var_type" "FIELD_INTEGER"
 				"incom_pect" "100"
+
+			}
+
+		}
+
+	}
+	"courier_egg_honor" {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/courier/courier_egg_honor"
+		"AbilityTextureName" "courier_egg_honor"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE|DOTA_ABILITY_BEHAVIOR_IGNORE_SILENCE"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"egg_pect" "5"
+
+			}
+			"02" {
+				"var_type" "FIELD_INTEGER"
+				"egg_count" "5"
 
 			}
 

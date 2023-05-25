@@ -1389,6 +1389,10 @@ declare global {
         GetOutgoingPhysicalDamagePercent(iUnitEntIndex: EntityIndex): number;
         GetOutgoingMagicalDamagePercent(iUnitEntIndex: EntityIndex): number;
         GetOutgoingPureDamagePercent(iUnitEntIndex: EntityIndex): number;
+        GetIncomingDamagePercent(iUnitEntIndex: EntityIndex): number;
+        GetIncomingPhysicalDamagePercent(iUnitEntIndex: EntityIndex): number;
+        GetIncomingMagicalDamagePercent(iUnitEntIndex: EntityIndex): number;
+        GetIncomingPureDamagePercent(iUnitEntIndex: EntityIndex): number;
         GetIgnorePhysicalArmorPercentage(iUnitEntIndex: EntityIndex): number;
         GetManaRegen(iUnitEntIndex: EntityIndex): number;
         GetIgnoreMagicalArmorPercentage(iUnitEntIndex: EntityIndex): number;
@@ -1423,7 +1427,9 @@ declare global {
         GetLocalizeUnitName(unitname: string): string;
     }
 }
-
+Entities.NoHealthBar = (iUnitEntIndex) => {
+    return true;
+};
 Entities.GetCursorUnit = (iTeam: number = -1) => {
     let vPosCursor = GameUI.GetCursorPosition();
     let world_position = GameUI.GetScreenWorldPosition(vPosCursor);
@@ -1585,6 +1591,18 @@ Entities.GetSpellLifeStealPercent = (iUnitEntIndex: EntityIndex) => {
 };
 Entities.GetLifeStealPercent = (iUnitEntIndex: EntityIndex) => {
     return FuncHelper.ToFiniteNumber(Number(Entities.GetUnitData(iUnitEntIndex, "GetLifeStealPercent")));
+};
+Entities.GetIncomingDamagePercent = (iUnitEntIndex: EntityIndex) => {
+    return FuncHelper.ToFiniteNumber(Number(Entities.GetUnitData(iUnitEntIndex, "GetIncomingDamagePercent")));
+};
+Entities.GetIncomingPhysicalDamagePercent = (iUnitEntIndex: EntityIndex) => {
+    return FuncHelper.ToFiniteNumber(Number(Entities.GetUnitData(iUnitEntIndex, "GetIncomingPhysicalDamagePercent")));
+};
+Entities.GetIncomingMagicalDamagePercent = (iUnitEntIndex: EntityIndex) => {
+    return FuncHelper.ToFiniteNumber(Number(Entities.GetUnitData(iUnitEntIndex, "GetIncomingMagicalDamagePercent")));
+};
+Entities.GetIncomingPureDamagePercent = (iUnitEntIndex: EntityIndex) => {
+    return FuncHelper.ToFiniteNumber(Number(Entities.GetUnitData(iUnitEntIndex, "GetIncomingPureDamagePercent")));
 };
 Entities.GetOutgoingDamagePercent = (iUnitEntIndex: EntityIndex) => {
     return FuncHelper.ToFiniteNumber(Number(Entities.GetUnitData(iUnitEntIndex, "GetOutgoingDamagePercent")));

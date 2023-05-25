@@ -9,6 +9,7 @@ declare namespace courier_abilities {
 "courier_draw_card_v3" :OBJ_2_1 ,
 "courier_auto_gold" :OBJ_2_1 ,
 "courier_recovery_chess" :OBJ_2_1 ,
+"courier_hut_change" :OBJ_2_1 ,
 "courier_upgrade_population" :OBJ_2_1 ,
 "courier_upgrade_tech" :OBJ_2_1 ,
 "courier_challenge_gold" :OBJ_2_1 ,
@@ -18,6 +19,7 @@ declare namespace courier_abilities {
 "faker_courier_summon_enemy" :OBJ_2_1 ,
 "faker_courier_damage_shared" :OBJ_2_1 ,
 "faker_courier_death_prize" :OBJ_2_1 ,
+"courier_egg_honor" :OBJ_2_1 ,
 "courier_extra_all_stat_1" :OBJ_2_1 ,
 "courier_extra_all_stat_2" :OBJ_2_1 ,
 "courier_extra_all_stat_3" :OBJ_2_1 ,
@@ -74,6 +76,8 @@ declare namespace courier_abilities {
 "AbilityCooldown" :string ,
 "AbilityManaCost" :string ,
 "AbilitySpecial" :OBJ_3_1 ,
+"AbilityUnitTargetTeam" :string ,
+"AbilityUnitTargetType" :string ,
 "CustomHidden" :string ,
 [k:string] : string | OBJ_3_1 }
  interface OBJ_3_1 {
@@ -85,7 +89,6 @@ declare namespace courier_abilities {
 "06" :OBJ_4_1 ,
 "07" :OBJ_4_1 ,
 "08" :OBJ_4_1 ,
-"09" :OBJ_4_1 ,
 [k:string] : OBJ_4_1 }
  interface OBJ_4_1 {
 "var_type" :string ,
@@ -108,7 +111,6 @@ declare namespace courier_abilities {
 "good_add_interval" :string ,
 "wood_add_interval" :string ,
 "soul_add_interval" :string ,
-"stat_all_add" :string ,
 "poolgroupconfig_1" :string ,
 "poolgroupconfig_2" :string ,
 "poolgroupconfig_3" :string ,

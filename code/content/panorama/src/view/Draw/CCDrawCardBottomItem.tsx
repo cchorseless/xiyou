@@ -44,7 +44,7 @@ export class CCDrawCardBottomItem extends CCPanel<ICCDrawCardBottomItem> {
                 </CCPanel>
                 <CCPanel horizontalAlign="center" flowChildren="right" marginTop={"3px"}>
                     {
-                        [1, 2, 3, 6].map((a, i) => {
+                        [1, 2, 3, 4, 5, 6].map((a, i) => {
                             let abilityname = cardinfo["Ability" + a] as string;
                             if (abilityname && abilityname != "ability_empty" && abilityname != "ability_sect_empty") {
                                 // let sectname = GJsonConfigHelper.GetAbilitySectLabel(abilityname)

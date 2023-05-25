@@ -189,6 +189,24 @@ export class ChessControlComponent extends ET.Component {
         Particles.SetParticleControl(this.MOVING_PCF, 4, origin);
         Particles.SetParticleAlwaysSimulate(this.MOVING_PCF);
         this.IS_CURSOR_HERO_ICON_SHOWING = true;
+        this.ShowAttackRange();
+    }
+
+    CastRangeParticleID: ParticleID;
+    ShowAttackRange(isshow = true) {
+        // 施法范围
+        if (this.CastRangeParticleID) {
+            Particles.DestroyParticleEffect(this.CastRangeParticleID, false);
+            this.CastRangeParticleID = null as any;
+        }
+        if (isshow) {
+            let fCastRange = Entities.GetAttackRange(this.PORTRAIT_UNIT) + ChessControlConfig.Gird_Width / 2;
+            if (fCastRange > 0) {
+                this.CastRangeParticleID = Particles.CreateParticle("particles/ui_mouseactions/range_display.vpcf", ParticleAttachment_t.PATTACH_CUSTOMORIGIN, -1 as EntityIndex);
+                Particles.SetParticleControlEnt(this.CastRangeParticleID, 0, this.PORTRAIT_UNIT, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, "", Entities.GetAbsOrigin(this.PORTRAIT_UNIT), true);
+                Particles.SetParticleControl(this.CastRangeParticleID, 1, [fCastRange, 1, 1]);
+            }
+        }
     }
     show_cursor_hero(unit_name: string) {
         // CCMainPanel.GetInstance()!.addOnlyPanel(CCUnitChessMoveIcon, { itemname: unit_name });
@@ -202,6 +220,7 @@ export class ChessControlComponent extends ET.Component {
             Particles.ReleaseParticleIndex(this.MOVING_PCF);
         }
         this.MOVING_PCF = -1 as ParticleID;
+        this.ShowAttackRange(false);
     }
 
 

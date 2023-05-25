@@ -1,4 +1,7 @@
 export module RoundConfig {
+    /**回合金币利息 */
+    export const RoundGoldInterestPect = 20;
+
     export enum EERoundType {
         board = "board",
         basic = "basic",

@@ -103,6 +103,11 @@ export module CombinationConfig {
         sect_headshot = "sect_headshot",
         /**溅射流 */
         sect_splash = "sect_splash",
+        /**法爆流 */
+        sect_magcrit = "sect_magcrit",
+        /**雷电流 */
+        sect_shock = "sect_shock",
+
     }
 
     export const ESectNameList = Object.keys(ESectName);

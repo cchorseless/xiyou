@@ -53,6 +53,3 @@ export module DebugHelper {
     }
 }
 
-Entities.NoHealthBar = (iUnitEntIndex) => {
-    return true;
-};

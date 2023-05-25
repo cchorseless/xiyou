@@ -65,7 +65,8 @@ export class FakerHeroEntityRoot extends BaseEntityRoot implements IRoundStateCa
                 comb.OnRound_Prize(round);
             }
         })
-        let player = this.GetPlayer();
+        const player = this.GetPlayer();
+        player.EnemyManagerComp().ForceFlyPrizeToHero();
         if (!round.isWin) {
             let damage = 0;
             let delay_time = 0.5;

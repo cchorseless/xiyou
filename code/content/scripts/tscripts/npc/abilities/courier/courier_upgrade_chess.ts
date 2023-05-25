@@ -4,6 +4,7 @@ import { ResHelper } from "../../../helper/ResHelper";
 import { EEnum } from "../../../shared/Gen/Types";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { registerAbility } from "../../entityPlus/Base_Plus";
+import { courier_auto_gold } from "./courier_auto_gold";
 
 @registerAbility()
 export class courier_upgrade_population extends BaseAbility_Plus {
@@ -68,10 +69,11 @@ export class courier_upgrade_population extends BaseAbility_Plus {
 
 
     applyPopuLevelUp(addlevel: number) {
+        let hCaster = this.GetCasterPlus() as IBaseNpc_Hero_Plus;
         for (let i = 0; i < addlevel; i++) {
             this.UpgradeAbility(true);
+            hCaster.HeroLevelUp(true);
         }
-        let hCaster = this.GetCasterPlus();
         let iPlayerID = hCaster.GetPlayerID();
         let playerroot = GPlayerEntityRoot.GetOneInstance(iPlayerID);
         playerroot.PlayerDataComp().applyPopuLevelUp(addlevel);
@@ -149,15 +151,19 @@ export class courier_upgrade_tech extends BaseAbility_Plus {
 
 
     applyTechLevelUp(addlevel: number) {
+        let ability = courier_auto_gold.findIn(this.GetCasterPlus());
         for (let i = 0; i < addlevel; i++) {
             this.UpgradeAbility(true);
+            if (ability) {
+                ability.UpgradeAbility(true);
+            }
         }
         let hCaster = this.GetCasterPlus();
         let iPlayerID = hCaster.GetPlayerID();
         let playerroot = GPlayerEntityRoot.GetOneInstance(iPlayerID);
         playerroot.PlayerDataComp().applyTechLevelUp(addlevel);
         playerroot.PlayerDataComp().SyncClient();
-        this.addOneRandomEquip();
+        playerroot.CourierRoot().CourierEggComp().AddEggExtraHitCount(addlevel)
     }
 
     addOneRandomEquip() {
@@ -196,11 +202,14 @@ export class courier_upgrade_tech extends BaseAbility_Plus {
                 return GJSONConfig.CourierAbilityLevelUpConfig.get(this.GetTechLevel() + "").TechExtraGood;
             } else if (keys.ability_special_value == "wood_add_interval") {
                 return GJSONConfig.CourierAbilityLevelUpConfig.get(this.GetTechLevel() + "").TechExtraWood;
+            } else if (keys.ability_special_value == "soul_add_interval") {
+                return GJSONConfig.CourierAbilityLevelUpConfig.get(this.GetTechLevel() + "").TechExtraSoulCrystal;
             }
         })
         this.RegAbilitySpecialValueOverride("gold_cost", Ihander);
         this.RegAbilitySpecialValueOverride("good_add_interval", Ihander);
         this.RegAbilitySpecialValueOverride("wood_add_interval", Ihander);
+        this.RegAbilitySpecialValueOverride("soul_add_interval", Ihander);
     }
     GetAbilityJinDuMax(ilevel?: number): number {
         let hCaster = this.GetCasterPlus();

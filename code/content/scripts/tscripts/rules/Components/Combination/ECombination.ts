@@ -1,4 +1,5 @@
 
+import { KVHelper } from "../../../helper/KVHelper";
 import { CombinationConfig } from "../../../shared/CombinationConfig";
 import { Dota } from "../../../shared/Gen/Types";
 import { ET, serializeETProps } from "../../../shared/lib/Entity";
@@ -52,8 +53,10 @@ export class ECombination extends ET.Entity {
     readonly isActive: boolean = false;
     checkActive() {
         let curCount = this.getCurUniqueCount();
+        let haschange = this.isActive;
         (this.isActive as any) = curCount >= this.activeNeedCount;
         this.SyncClient();
+        return haschange != this.isActive;
     }
 
 
@@ -95,8 +98,15 @@ export class ECombination extends ET.Entity {
             if (!this.combination[c].includes(entity)) {
                 this.combination[c].push(entity);
             }
-            this.checkActive();
-            if (this.isActive) {
+            if (this.checkActive() && this.isActive) {
+                if (this.SectName == CombinationConfig.ESectName.sect_black_art) {
+                    let playerroot = GGameScene.GetPlayer(this.BelongPlayerid);
+                    let sectroot = playerroot.CombinationManager();
+                    for (let k in sectroot.allCombination) {
+                        if (k == CombinationConfig.ESectName.sect_black_art) continue;
+                        sectroot.ChangeCombinationActiveNeedCount(k, -1)
+                    }
+                }
                 // this.ApplyBuffEffect(true);
             }
         }
@@ -114,9 +124,16 @@ export class ECombination extends ET.Entity {
         if (this.combination[c] && this.combination[c].length == 0) {
             delete this.combination[c];
         }
-        this.checkActive();
-        if (!this.isActive) {
+        if (this.checkActive() && !this.isActive) {
             // this.CancelEffect();
+            if (this.SectName == CombinationConfig.ESectName.sect_black_art) {
+                let playerroot = GGameScene.GetPlayer(this.BelongPlayerid);
+                let sectroot = playerroot.CombinationManager();
+                for (let k in sectroot.allCombination) {
+                    if (k == CombinationConfig.ESectName.sect_black_art) continue;
+                    sectroot.ChangeCombinationActiveNeedCount(k, 1)
+                }
+            }
         }
     }
     ApplyBuffEffect(isActive: boolean = false) {
@@ -194,44 +211,7 @@ export class ECombination extends ET.Entity {
 
     OnRound_Battle() {
         this.ApplyBuffEffect(true);
-        // let configMap = this.config;
-        // if (configMap) {
-        //     const abilitylist: { [abilityname: string]: string[] } = {}
-        //     for (let key in configMap) {
-        //         let config = configMap[key];
-        //         let combuff = config.acitveCommonEffect;
-        //         let spebuff = config.acitveSpecialEffect;
-        //         if (combuff && combuff.length > 0) {
-        //             abilitylist[config.Abilityid] = abilitylist[config.Abilityid] || [];
-        //             abilitylist[config.Abilityid].push(combuff);
-        //         }
-        //         if (spebuff && spebuff.length > 0) {
-        //             abilitylist[config.Abilityid] = abilitylist[config.Abilityid] || [];
-        //             abilitylist[config.Abilityid].push(spebuff);
-        //         }
-        //     };
-        //     let getAllBattleUnit = this.getAllBattleUnit();
-        //     for (let abilityname in abilitylist) {
-        //         let bufflist = abilitylist[abilityname];
-        //         getAllBattleUnit.forEach(unit => {
-        //             let root = unit.GetDomain<IBaseNpc_Plus>();
-        //             if (root) {
-        //                 let ability = root.FindAbilityByName(abilityname) as IBaseAbility_Plus;
-        //                 if (ability) {
-        //                     bufflist.forEach(buff => {
-        //                         root.addOnlyBuff(buff, root, ability);
-        //                     })
-        //                 }
-        //                 let item = root.FindItemInInventory(abilityname);
-        //                 if (item) {
-        //                     bufflist.forEach(buff => {
-        //                         root.addOnlyBuff(buff, root, item as any);
-        //                     })
-        //                 }
-        //             }
-        //         });
-        //     }
-        // }
+
     }
 
     OnRound_Prize(round: ERoundBoard) {
@@ -247,43 +227,68 @@ export class ECombination extends ET.Entity {
             for (let k of runtimeunits) {
                 let entity = k.GetDomain<IBaseNpc_Plus>();
                 if (entity) {
-                    if (this.SectId == "sect_invent_a" && entity.HasModifier("modifier_sect_invent_base_a")) {
-                        isInventActive_a = GJSONConfig.BuffEffectConfig.get("modifier_sect_invent_base_a").propinfo.get("prize_pool");
+                    let buff_a = entity.FindModifierByName("modifier_sect_invent_base_a") as IBaseModifier_Plus & { prize_pool: number };
+                    let buff_b = entity.FindModifierByName("modifier_sect_invent_base_b") as IBaseModifier_Plus & { prize_pool: number };
+                    let buff_c = entity.FindModifierByName("modifier_sect_invent_base_c") as IBaseModifier_Plus & { prize_pool: number };
+                    if (this.SectId == "sect_invent_a" && buff_a) {
+                        isInventActive_a = buff_a.prize_pool;
                     }
-                    if (this.SectId == "sect_invent_b" && entity.HasModifier("modifier_sect_invent_base_b")) {
-                        isInventActive_b = GJSONConfig.BuffEffectConfig.get("modifier_sect_invent_base_b").propinfo.get("prize_pool");
+                    if (this.SectId == "sect_invent_b" && buff_b) {
+                        isInventActive_b = buff_b.prize_pool;
                     }
-                    if (this.SectId == "sect_invent_c" && entity.HasModifier("modifier_sect_invent_base_c")) {
-                        isInventActive_c = GJSONConfig.BuffEffectConfig.get("modifier_sect_invent_base_c").propinfo.get("prize_pool");
+                    if (this.SectId == "sect_invent_c" && buff_c) {
+                        isInventActive_c = buff_c.prize_pool;
                     }
                 }
             }
             if (isInventActive_a > 0) {
-                playerroot.Hero.AddItemByName("item_imba_mekansm");
+                playerroot.Hero.AddItemOrInGround(KVHelper.RandomPoolConfig(isInventActive_a + ""));
             }
             if (isInventActive_b > 0) {
-                playerroot.Hero.AddItemByName("item_imba_vladmir");
+                playerroot.Hero.AddItemOrInGround(KVHelper.RandomPoolConfig(isInventActive_b + ""));
             }
             if (isInventActive_c > 0) {
-                playerroot.Hero.AddItemByName("item_imba_sheepstick");
+                playerroot.Hero.AddItemOrInGround(KVHelper.RandomPoolConfig(isInventActive_c + ""));
             }
         }
         else if (SectName === CombinationConfig.ESectName.sect_fish_chess) {
             let prop_pect = 0;
             if (this.SectId == "sect_fish_chess_a") {
                 prop_pect = GJSONConfig.BuffEffectConfig.get("modifier_sect_fish_chess_base_a").propinfo.get("prop_pect");
+                let heros = GJsonConfigHelper.GetAllHeroBySectLabel(this.SectName)
+                for (let i = 0; i < this.uniqueConfigList.length; i++) {
+                    if (RollPercentage(prop_pect)) {
+                        playerroot.BuildingManager().addBuilding(GFuncRandom.RandomOne(heros), true, 0);
+                    }
+                }
             }
             else if (this.SectId == "sect_fish_chess_b") {
                 prop_pect = GJSONConfig.BuffEffectConfig.get("modifier_sect_fish_chess_base_b").propinfo.get("prop_pect");
+                let allCombination = playerroot.CombinationManager().getAllAtLeastOneCombination();
+                let heros: string[] = [];
+                for (let sectname of allCombination) {
+                    heros = heros.concat(GJsonConfigHelper.GetAllHeroBySectLabel(sectname))
+                }
+                for (let i = 0; i < this.uniqueConfigList.length; i++) {
+                    if (RollPercentage(prop_pect)) {
+                        playerroot.BuildingManager().addBuilding(GFuncRandom.RandomOne(heros), true, 0);
+                    }
+                }
+
             }
             else if (this.SectId == "sect_fish_chess_c") {
                 prop_pect = GJSONConfig.BuffEffectConfig.get("modifier_sect_fish_chess_base_c").propinfo.get("prop_pect");
-            }
-            if (prop_pect > 0) {
-                if (RollPercentage(prop_pect)) {
-                    playerroot.BuildingManager().addBuilding("building_hero_zuus");
+                let buildings = playerroot.BuildingManager().getAllBattleBuilding(false);
+                for (let building of buildings) {
+                    if (building.checkCanStarUp()) {
+                        if (RollPercentage(prop_pect)) {
+                            building.AddStar(1);
+                        }
+                    }
                 }
             }
+
         }
+
     }
 }

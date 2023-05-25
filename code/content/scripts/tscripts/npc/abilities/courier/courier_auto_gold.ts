@@ -1,8 +1,6 @@
-import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
-import { courier_upgrade_tech } from "./courier_upgrade_chess";
 
 @registerAbility()
 export class courier_auto_gold extends BaseAbility_Plus {
@@ -17,7 +15,7 @@ export class courier_auto_gold extends BaseAbility_Plus {
     }
 
     GetCooldown(level: number): number {
-        return 20
+        return 30
     }
     OnSpellStart() {
         let hCaster = this.GetCasterPlus();
@@ -38,45 +36,23 @@ export class courier_auto_gold extends BaseAbility_Plus {
         return "modifier_builder_gold";
     }
 
-    GetBaseGold(isoverride = true) {
-        // let iRound = GRoundSystem.GetInstance().GetCurrentRoundIndex();
-        let iRound = this.GetTechLevel()
-        let basic_gold = this.GetSpecialValueFor("gold_base");
-        if (!isoverride) {
-            basic_gold = this.GetLevelSpecialValueNoOverride("gold_base", this.GetLevel());
-        }
-        let gold_tech_per_level = this.GetSpecialValueFor("gold_tech_per_level");
-        return basic_gold + gold_tech_per_level * iRound;
+    GetBaseGold() {
+        let level = math.max(this.GetLevel(), 1);
+        return GJSONConfig.CourierAbilityLevelUpConfig.get(level + "").AutoGoldGetGold;
     }
 
     GetBaseWood(isoverride = true) {
-        // let iRound = GRoundSystem.GetInstance().GetCurrentRoundIndex();
-        let iRound = this.GetTechLevel()
-        let basic_wood = this.GetSpecialValueFor("wood_base");
-        if (!isoverride) {
-            basic_wood = this.GetLevelSpecialValueNoOverride("wood_base", this.GetLevel());
-        }
-        let wood_tech_per_level = this.GetSpecialValueFor("wood_tech_per_level");
-        return basic_wood + wood_tech_per_level * iRound;
-    }
-
-    GetTechLevel() {
-        let ability = courier_upgrade_tech.findIn(this.GetCasterPlus());
-        if (ability) {
-            return ability.GetLevel();
-        }
-        return 1;
+        let level = math.max(this.GetLevel(), 1);
+        return GJSONConfig.CourierAbilityLevelUpConfig.get(level + "").AutoGoldGetWood;
     }
 
     Init(): void {
         let Ihander = GHandler.create(this, (keys: ModifierOverrideAbilitySpecialEvent) => {
-            let hParent = this.GetCasterPlus();
-            let data = NetTablesHelper.GetDotaEntityData(hParent.GetEntityIndex(), "modifier_builder_gold") || {};
             if (keys.ability_special_value == "gold_base") {
-                return data.gold_base;
+                return this.GetBaseGold();
             }
             else if (keys.ability_special_value == "wood_base") {
-                return data.wood_base;
+                return this.GetBaseWood();
             }
         })
         this.RegAbilitySpecialValueOverride("gold_base", Ihander);
@@ -105,10 +81,6 @@ export class modifier_builder_gold extends BaseModifier_Plus {
     OnIntervalThink() {
         let hParent = this.GetParentPlus()
         if (IsValid(hParent)) {
-            NetTablesHelper.SetDotaEntityData(hParent.GetEntityIndex(), {
-                gold_base: this.GetAbilityPlus<courier_auto_gold>().GetBaseGold(false),
-                wood_base: this.GetAbilityPlus<courier_auto_gold>().GetBaseWood(false),
-            }, "modifier_builder_gold")
             let MemberShip = GTActivityMemberShipData.GetOneInstance(hParent.GetPlayerOwnerID());
             if (MemberShip && MemberShip.IsVip()) {
                 this.SetStackCount(1)

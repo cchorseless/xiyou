@@ -115,6 +115,7 @@ export class CCAbilityList2 extends CCPanel<ICCAbilityList> {
                             else {
                                 render(<></>, abilityimage);
                             }
+                            // 技能流派分割线
                         }
                     }
                 }

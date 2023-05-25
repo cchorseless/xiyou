@@ -132,7 +132,7 @@ export class modifier_imba_doom_bringer_doom extends BaseModifier_Plus {
         return "particles/status_fx/status_effect_doom_self.vpcf";
     }
     StatusEffectPriority(): modifierpriority {
-        return 10;
+        return 4;
     }
     /** DeclareFunctions():modifierfunction[] {
         let decFuns = {
@@ -234,7 +234,7 @@ export class modifier_imba_doom_bringer_doom_enemies extends BaseModifier_Plus {
         return "particles/status_fx/status_effect_doom.vpcf";
     }
     StatusEffectPriority(): modifierpriority {
-        return 10;
+        return 4;
     }
     CheckState(): Partial<Record<modifierstate, boolean>> {
         let state: Partial<Record<modifierstate, boolean>> = {

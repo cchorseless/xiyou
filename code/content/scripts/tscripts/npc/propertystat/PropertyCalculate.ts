@@ -160,25 +160,28 @@ export module PropertyCalculate {
      * @returns 
      */
     export function GetHullBoundSize(hUnit: IBaseNpc_Plus) {
-        let fDefault = 30;
+        let fDefault = 50;
         let des = "DOTA_HULL_SIZE_HERO"
         if (IsValid(hUnit)) {
             des = (KVHelper.GetUnitData(hUnit.GetUnitName(), "BoundsHullName") || "DOTA_HULL_SIZE_HERO") as string;
             switch (des) {
                 case "DOTA_HULL_SIZE_HERO":
-                    fDefault = 30;
-                    break;
-                case "DOTA_HULL_SIZE_SMALL":
-                    fDefault = 20;
-                    break;
-                case "DOTA_HULL_SIZE_HUGE":
                     fDefault = 50;
                     break;
+                case "DOTA_HULL_SIZE_SMALL":
+                    fDefault = 30;
+                    break;
+                case "DOTA_HULL_SIZE_HUGE":
+                    fDefault = 80;
+                    break;
                 case "DOTA_HULL_SIZE_REGULAR":
-                    fDefault = 25;
+                    fDefault = 30;
                     break;
                 case "DOTA_HULL_SIZE_TOWER":
                     fDefault = 100;
+                    break;
+                default:
+                    fDefault = 50;
                     break;
             }
         }

@@ -101,16 +101,20 @@ export class modifier_courier extends BaseModifier_Plus {
     CC_GetVisualZDelta(params: IModifierTable) {
         return this.zOffset
     }
+    managain = -0.1;
     /**让气血恢复=0 */
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_REGEN_CONSTANT)
     CC_HEALTH_REGEN_CONSTANT(params: IModifierTable) {
+        if (this.GetParentPlus().GetManaRegen() !== 0) {
+            this.managain = this.GetParentPlus().GetManaRegen() * -1;
+        }
         return -10000
     }
-
-    // @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MANA_REGEN_CONSTANT)
-    // CC_MANA_REGEN_CONSTANT(params: IModifierTable) {
-    //     return -10000
-    // }
+    /**让魔法恢复=0 */
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MANA_REGEN_CONSTANT)
+    CC_MANA_REGEN_CONSTANT(params: IModifierTable) {
+        return this.managain;
+    }
 
 
 }

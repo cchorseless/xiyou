@@ -916,7 +916,7 @@ export class modifier_imba_mass_serpent_ward extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_ABSOLUTE)
     CC_GetModifierMoveSpeed_Absolute(): number {
-        if (this.GetCasterPlus().HasTalent("special_bonus_imba_shadow_shaman_wards_movement")) {
+        if (this.GetCasterPlus() && this.GetCasterPlus().HasTalent("special_bonus_imba_shadow_shaman_wards_movement")) {
             return this.GetCasterPlus().GetTalentValue("special_bonus_imba_shadow_shaman_wards_movement");
         }
     }

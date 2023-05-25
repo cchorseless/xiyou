@@ -8,7 +8,7 @@ export class item_shop_equiptreasure_c extends ActiveRootItem {
     CanBeUsedOutOfInventory(): boolean {
         return true
     }
-    onSpellStart() {
+    OnSpellStart() {
         this.UseOutOfInventory(true);
     }
     UseOutOfInventory(isuseinventory: boolean) {

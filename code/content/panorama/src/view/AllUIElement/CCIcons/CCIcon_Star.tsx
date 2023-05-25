@@ -1,6 +1,6 @@
 import { CCIcon } from "./CCIcon";
 
-export class CCIcon_Star extends CCIcon<{ type?: "Favorite" | "Selected" | "Lock" | "UnFilled" | "Filled" | "Tui7Task"; }> {
+export class CCIcon_Star extends CCIcon<{ type?: "Favorite" | "Selected" | "Lock" | "UnFilled" | "Filled" | "Spe" | "Tui7Task"; }> {
 	defaultStyle() {
 		let styles = super.defaultStyle();
 		switch (this.props.type) {
@@ -15,6 +15,9 @@ export class CCIcon_Star extends CCIcon<{ type?: "Favorite" | "Selected" | "Lock
 				break;
 			case "Filled":
 				styles.src = "s2r://panorama/images/custom_game/icon/star_png.vtex";
+				break;
+			case "Spe":
+				styles.src = "s2r://panorama/images/custom_game/icon/star_spe_png.vtex";
 				break;
 			case "Tui7Task":
 				styles.src = "s2r://panorama/images/eom_design/icon/tui7/task_point_png.vtex";

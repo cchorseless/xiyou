@@ -88,6 +88,41 @@ export class BattleUnitEntityRoot extends BaseEntityRoot implements IRoundStateC
     changeAliveState(state: boolean) {
         (this.isAlive as any) = state;
     }
+    CloneSelf(vLocation: Vector, fDuration: number) {
+        let domain = this.GetDomain<IBaseNpc_Plus>();
+        let cloneRuntime = domain.CreateCloneUnit(vLocation, fDuration)
+        if (cloneRuntime) {
+            let playerid = this.BelongPlayerid;
+            if (this.IsRuntimeBuilding()) {
+                GBuildingRuntimeEntityRoot.Active(cloneRuntime, playerid, this.ConfigID);
+            }
+            else if (this.IsEnemy()) {
+                GEnemyUnitEntityRoot.Active(cloneRuntime, playerid, this.ConfigID);
+            }
+            let runtimeroot = cloneRuntime.ETRoot.As<BattleUnitEntityRoot>();
+            GGameScene.GetPlayer(playerid).AddDomainChild(runtimeroot);
+            runtimeroot.SetStar(this.iStar);
+            // wearable
+            runtimeroot.WearableComp() && runtimeroot.WearableComp().WearCopy(this.WearableComp());
+            // equip
+            runtimeroot.InventoryComp() && runtimeroot.InventoryComp().cloneItem(this.InventoryComp());
+            // ability
+            runtimeroot.AbilityManagerComp() && runtimeroot.AbilityManagerComp().cloneAbility(this.AbilityManagerComp());
+            // buff
+            runtimeroot.BuffManagerComp() && runtimeroot.BuffManagerComp().cloneRuntimeBuff(this.BuffManagerComp())
+            runtimeroot.SyncClient();
+            // 不死
+            // modifier_never_death.applyOnly(cloneRuntime, cloneRuntime);
+            // 回蓝
+            return cloneRuntime;
+        }
+    }
+
+    /**复活 */
+    ReSpawn() {
+        this.GetDomain<IBaseNpc_Plus>().RespawnUnit();
+        (this.isAlive as any) = true;
+    }
     SetStar(n: number) {
         this.iStar = n;
         let domain = this.GetDomain<IBaseNpc_Plus>();

@@ -24,7 +24,9 @@ import { LuBanConfigComponent } from "./ComponentExt/LuBanConfigComponent";
 import { BuffManagerComponent } from "./Components/Buff/BuffManagerComponent";
 import { CombEffectComponent } from "./Components/Combination/CombEffectComponent";
 import { CourierBagComponent } from "./Components/Courier/CourierBagComponent";
+import { CourierEggComponent } from "./Components/Courier/CourierEggComponent";
 import { CourierShopComponent } from "./Components/Courier/CourierShopComponent";
+import { EnemyMoveComponent } from "./Components/Enemy/EnemyMoveComponent";
 import { PlayerEntityRoot } from "./Components/Player/PlayerEntityRoot";
 import { RulesEntityPart1 } from "./RulesEntityPart1";
 import { WearableSystemComponent } from "./System/WearableSystemComponent";
@@ -49,8 +51,10 @@ import { WearableSystemComponent } from "./System/WearableSystemComponent";
     CombEffectComponent,
     CourierBagComponent,
     CourierShopComponent,
+    CourierEggComponent,
     BuildingManagerComponent,
     EnemyManagerComponent,
+    EnemyMoveComponent,
     AiAttackComponent,
 
     FHeroCombination,

@@ -20,6 +20,10 @@ export class GameServiceSystem extends ET.SingletonComponent {
     @serializeETProps()
     tPlayerGameSelection: { [playerid: string]: IPlayerGameSelection } = {}
 
+    @serializeETProps()
+    tPlayerCourierList: { [playerid: string]: string[] } = {}
+
+
     getDifficultyChapterDes() {
         return GameServiceConfig.EDifficultyChapter[this.DifficultyLevel] as string;
     }
@@ -48,6 +52,14 @@ export class GameServiceSystem extends ET.SingletonComponent {
             IsReady: false,
             bNewPlayer: false,
         };
+
+        let bagcomp = GBagComponent.GetOneInstance(playerid);
+        if (bagcomp) {
+            this.tPlayerCourierList[playerid + ""] = bagcomp.getAllCourierNames();
+        }
+        else {
+            this.tPlayerCourierList[playerid + ""] = [GameServiceConfig.DefaultCourier];
+        }
     }
 }
 

@@ -155,13 +155,7 @@ export class BaseNpc_Plus extends BaseNpc {
         }
         return true;
     }
-    /**
-     * @Server
-     * @returns 
-     */
-    GetPlayerRoot?() {
-        return GGameScene.GetPlayer(this.GetPlayerID());
-    }
+
 
     TrueKilled?(caster: IBaseNpc_Plus, ability: CDOTABaseAbility) {
         if (caster.HasModifier("modifier_item_blade_mail_reflect")) {
@@ -215,7 +209,7 @@ export class BaseNpc_Plus extends BaseNpc {
       */
     CreateIllusion?(
         copyunit: IBaseNpc_Plus,
-        hModifierKeys: CreateIllusionsModifierKeys & { duration?: number },
+        hModifierKeys: CreateIllusionsModifierKeys & { outgoingPect?: number, incomingPect?: number, duration?: number },
         nNumIllusions: number = 1,
         vLocation: Vector = null,
         bFindClearSpace = true,
@@ -309,7 +303,7 @@ export class BaseNpc_Plus extends BaseNpc {
                     }
                 }
             }
-            illusion.addBuff("modifier_illusion", this, null, hModifierKeys);
+            illusion.addBuff("modifier_illusion", this, null, { duration: hModifierKeys.duration });
             illusion.addBuff("modifier_generic_illusion", this, null, hModifierKeys);
             illusion.SetHealth(copyunit.GetHealth())
             illusion.SetMana(copyunit.GetMana())
@@ -350,6 +344,17 @@ export class BaseNpc_Plus extends BaseNpc {
         }
     }
 
+    CreateCloneUnit?(vLocation: Vector, fDuration: number) {
+        if (!IsServer()) { return };
+        let hSummon = BaseNpc_Plus.CreateUnitByName(this.GetUnitName(), vLocation, this, true, this.GetTeam())
+        if (fDuration > 0) {
+            hSummon.addBuff("modifier_kill", this, null, { duration: fDuration });
+        }
+        else {
+            fDuration = null
+        }
+        return hSummon as IBaseNpc_Plus;
+    }
 
     /**
      * 创建召唤物

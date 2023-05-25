@@ -425,7 +425,7 @@ export module DotaUIHelper {
         // EventHelper.addUnhandledEvent(TipsHelper.ToolTipType.DOTAShowAbilityTooltipForLevel, abilityShowTooltipHandler);
     }
 
-    export function Init() {
+    export function Init(IsHeroSelect = false) {
         const PreGame = FindDotaHudElement("PreGame");
         if (PreGame) {
             PreGame.enabled = false;
@@ -440,8 +440,9 @@ export module DotaUIHelper {
         FindDotaHudElement("HUDSkinMinimap")!.style.opacity = "0";
         // 计分板按钮
         FindDotaHudElement("ToggleScoreboardButton")!.style.opacity = "0";
-        RegAbilityItemToolTipEvent()
-
+        if (!IsHeroSelect) {
+            RegAbilityItemToolTipEvent()
+        }
     }
     export function Quit() {
         EventHelper.removeUnhandledEventCaller(EventObj);

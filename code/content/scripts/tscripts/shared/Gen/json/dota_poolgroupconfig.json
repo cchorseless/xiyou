@@ -128,5 +128,85 @@
         "IsVaild": true
       }
     ]
+  },
+  {
+    "poolgroupid": "10010",
+    "PoolGroup": [
+      {
+        "PoolConfigId": "1005",
+        "PoolWeight": 80,
+        "IsVaild": true
+      },
+      {
+        "PoolConfigId": "1006",
+        "PoolWeight": 20,
+        "IsVaild": true
+      }
+    ]
+  },
+  {
+    "poolgroupid": "10011",
+    "PoolGroup": [
+      {
+        "PoolConfigId": "1005",
+        "PoolWeight": 20,
+        "IsVaild": true
+      },
+      {
+        "PoolConfigId": "1006",
+        "PoolWeight": 60,
+        "IsVaild": true
+      },
+      {
+        "PoolConfigId": "1007",
+        "PoolWeight": 20,
+        "IsVaild": true
+      }
+    ]
+  },
+  {
+    "poolgroupid": "10012",
+    "PoolGroup": [
+      {
+        "PoolConfigId": "1006",
+        "PoolWeight": 30,
+        "IsVaild": true
+      },
+      {
+        "PoolConfigId": "1007",
+        "PoolWeight": 60,
+        "IsVaild": true
+      },
+      {
+        "PoolConfigId": "1008",
+        "PoolWeight": 10,
+        "IsVaild": true
+      }
+    ]
+  },
+  {
+    "poolgroupid": "10013",
+    "PoolGroup": [
+      {
+        "PoolConfigId": "1007",
+        "PoolWeight": 50,
+        "IsVaild": true
+      },
+      {
+        "PoolConfigId": "1008",
+        "PoolWeight": 50,
+        "IsVaild": true
+      }
+    ]
+  },
+  {
+    "poolgroupid": "10014",
+    "PoolGroup": [
+      {
+        "PoolConfigId": "1012",
+        "PoolWeight": 1,
+        "IsVaild": true
+      }
+    ]
   }
 ]

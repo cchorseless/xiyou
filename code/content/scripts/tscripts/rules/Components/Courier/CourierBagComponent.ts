@@ -61,6 +61,7 @@ export class CourierBagComponent extends CourierBag {
         }
         else if (itemtype == PublicBagConfig.EBagSlotType.ArtifactSlot) {
             maxcount = PublicBagConfig.DOTA_ITEM_ARTIFACT_MAX - PublicBagConfig.DOTA_ITEM_ARTIFACT_MIN + 1;
+            maxcount = math.min(maxcount, this.iMaxArtifact);
         }
         else if (itemtype == PublicBagConfig.EBagSlotType.EquipCombineSlot) {
             maxcount = PublicBagConfig.CUSTOM_COMBINE_SLOT_MAX - PublicBagConfig.CUSTOM_COMBINE_SLOT_MIN + 1;

@@ -164,4 +164,9 @@ export module EnemyConfig {
         CANDY_BOSS = "CANDY_BOSS",
         CANDY_WAVE = "CANDY_WAVE",
     }
+    export enum EEnemyPrizeModel {
+        SoulCrystalModel = "models/creeps/lane_creeps/creep_2021_radiant/creep_2021_radiant_siege_projectile.vmdl",
+        GoldModel = "models/props_gameplay/gold_coin001.vmdl",
+        GoldBagModel = "models/props_gameplay/gold_bag.vmdl",
+    }
 }

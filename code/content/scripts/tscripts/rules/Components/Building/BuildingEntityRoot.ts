@@ -1,10 +1,12 @@
 
 import { KVHelper } from "../../../helper/KVHelper";
 import { ResHelper } from "../../../helper/ResHelper";
+import { modifier_courier_hut_change } from "../../../npc/abilities/courier/courier_hut_change";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
-import { modifier_building_battle_buff } from "../../../npc/modifier/battle/modifier_building_battle_buff";
 import { modifier_jiaoxie_wudi } from "../../../npc/modifier/battle/modifier_jiaoxie_wudi";
-import { modifier_mana_control } from "../../../npc/modifier/battle/modifier_mana_control";
+import { modifier_unit_freedom } from "../../../npc/modifier/battle/modifier_unit_freedom";
+import { modifier_unit_hut } from "../../../npc/modifier/battle/modifier_unit_hut";
+import { modifier_building_battle_buff } from "../../../npc/modifier/building/modifier_building_battle_buff";
 import { serializeETProps } from "../../../shared/lib/Entity";
 import { GEventHelper } from "../../../shared/lib/GEventHelper";
 import { THeroUnit } from "../../../shared/service/hero/THeroUnit";
@@ -150,9 +152,10 @@ export class BuildingEntityRoot extends BattleUnitEntityRoot {
         // "particles/generic_hero_status/hero_levelup.vpcf"
         // "particles/units/heroes/hero_oracle/oracle_false_promise_cast_enemy.vpcf"
         // 	play_particle("particles/econ/events/ti9/ti9_drums_musicnotes.vpcf",PATTACH_OVERHEAD_FOLLOW,uu,3)
+        let res = "particles/econ/events/ti6/hero_levelup_ti6.vpcf"
         ResHelper.CreateParticle(
             new ResHelper.ParticleInfo()
-                .set_resPath("particles/generic_hero_status/hero_levelup.vpcf")
+                .set_resPath(res)
                 .set_iAttachment(ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW)
                 .set_owner(domain)
                 .set_validtime(3)
@@ -175,6 +178,9 @@ export class BuildingEntityRoot extends BattleUnitEntityRoot {
         }
         this.RuntimeBuilding = null;
         modifier_building_battle_buff.remove(npc);
+        if (modifier_courier_hut_change.findIn(npc)) {
+            npc.RemoveNoDraw();
+        }
     }
     OnRound_Battle() {
         if (!IsServer()) { return };
@@ -182,6 +188,11 @@ export class BuildingEntityRoot extends BattleUnitEntityRoot {
         let hCaster = this.GetDomain<IBaseNpc_Plus>();
         let vLocation = hCaster.GetAbsOrigin();
         modifier_building_battle_buff.applyOnly(hCaster, hCaster);
+        let isHutBuff = this.IsHuted();
+        if (isHutBuff) {
+            hCaster.AddNoDraw();
+            hCaster.NoTeamSelect
+        }
         // this.SetUIOverHead(false, true)
         let cloneRuntime = BaseNpc_Plus.CreateUnitByName(this.ConfigID, vLocation, hCaster) as IBaseNpc_Plus;
         if (cloneRuntime) {
@@ -192,6 +203,13 @@ export class BuildingEntityRoot extends BattleUnitEntityRoot {
             BuildingRuntimeEntityRoot.Active(cloneRuntime, playerid, this.ConfigID);
             let runtimeroot = cloneRuntime.ETRoot.As<BuildingRuntimeEntityRoot>();
             GGameScene.GetPlayer(playerid).AddDomainChild(runtimeroot);
+            if (isHutBuff) {
+                runtimeroot.ChessComp().setMoving(false);
+                modifier_unit_hut.applyOnly(cloneRuntime, cloneRuntime);
+            }
+            else {
+                modifier_unit_freedom.applyOnly(cloneRuntime, cloneRuntime);
+            }
             this.RuntimeBuilding = runtimeroot;
             runtimeroot.SetStar(this.iStar);
             // wearable
@@ -205,8 +223,8 @@ export class BuildingEntityRoot extends BattleUnitEntityRoot {
             runtimeroot.SyncClient();
             // 不死
             // modifier_never_death.applyOnly(cloneRuntime, cloneRuntime);
-            // 回蓝
-            modifier_mana_control.applyOnly(cloneRuntime, cloneRuntime);
+            // 跟随移动
+            // modifier_follow_courier.applyOnly(cloneRuntime, cloneRuntime);
         }
     }
     OnRound_Prize(round: ERoundBoard) { }
@@ -216,7 +234,13 @@ export class BuildingEntityRoot extends BattleUnitEntityRoot {
         }
         this.RuntimeBuilding = null;
     }
-
+    /**
+     * 是否驻扎
+     */
+    IsHuted() {
+        let hCaster = this.GetDomain<IBaseNpc_Plus>();
+        return hCaster.HasModifier("modifier_courier_hut_change");
+    }
     onDestroy(): void {
         let npc = this.GetDomain<IBaseNpc_Plus>();
         if (IsValid(npc)) {

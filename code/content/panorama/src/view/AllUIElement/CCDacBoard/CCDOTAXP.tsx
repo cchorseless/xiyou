@@ -27,6 +27,11 @@ export class CCDOTAXP extends CCPanel<ICCDOTAXP> {
 
     OnSelectUnit() {
         let unit = Players.GetLocalPlayerPortraitUnit();
+        if (Entities.IsCustomCourier(unit) || Entities.IsEnemy(unit)) {
+            this.SetExp(Entities.GetCurrentXP(unit), Entities.GetNeededXPToLevel(unit));
+            this.SetLevel(Entities.GetLevel(unit));
+            return
+        }
         let buildingroot = GBuildingEntityRoot.GetEntity(unit);
         if (buildingroot) {
             let herounit = buildingroot.GetHeroUnit();
@@ -63,7 +68,7 @@ export class CCDOTAXP extends CCPanel<ICCDOTAXP> {
     onStartUI() {
         let LifetimeLabel = this.__DOTAXP__.current!.FindChildTraverse("LifetimeLabel") as any as LabelPanel;
         LifetimeLabel.style.fontSize = "16px";
-        // this.OnSelectUnit();
+        this.OnSelectUnit();
     }
     render() {
         const xpvalue = this.GetState("xpvalue", 0);

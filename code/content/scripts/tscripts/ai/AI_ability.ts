@@ -18,7 +18,7 @@ export module AI_ability {
      */
     export function NO_TARGET_if_enemy(ability: IBaseAbility_Plus | IBaseItem_Plus, range: number = 0) {
         let caster = ability.GetCasterPlus();
-        if (range == 0 || range == null) range = 200;
+        if (range == 0 || range == null) range = math.max(200, ability.GetCastRangePlus());
         let teamFilter = DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY
         let typeFilter = DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC
         let flagFilter = DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE

@@ -36,8 +36,6 @@ export class CCArtifactListPanel extends CCPanel<ICCArtifactListPanel> {
                     className={CSSHelper.ClassMaker({ ExpandArtifact: ExpandArtifact })}
                     onactivate={
                         () => {
-                            // $.Msg(GLogHelper == null)
-                            GLogHelper.print(111111);
                             this.UpdateState({ ExpandArtifact: !ExpandArtifact })
                         }}>
                     <Image id="ToggleImg" />
@@ -53,7 +51,7 @@ export class CCArtifactListPanel extends CCPanel<ICCArtifactListPanel> {
                                     return (
                                         <CCPanel key={index + "_"} className="ArtifactBuffBG">
                                             {bLock && <CCIcon_Lock id="imglock" tooltip={$.Localize("#Tooltip_Artifact_Slot_Lock")} />}
-                                            {(!bLock) && itemIndex && <CCItemImage className="ArtifactBuff" showtooltip={false} itemname={Abilities.GetAbilityName(itemIndex)} />}
+                                            {(!bLock) && itemIndex && <CCItemImage className="ArtifactBuff" showtooltip={true} itemname={Abilities.GetAbilityName(itemIndex)} />}
                                         </CCPanel>
                                     );
                                 })

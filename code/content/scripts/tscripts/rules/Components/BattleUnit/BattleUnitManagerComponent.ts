@@ -54,10 +54,13 @@ export class BattleUnitManagerComponent extends ET.Component {
     }
 
 
-    public GetAllBattleUnitAliveNpc(team: DOTATeam_t) {
+    public GetAllBattleUnitAliveNpc(team: DOTATeam_t, fliter: (b: IBaseNpc_Plus) => boolean = null) {
         let r = this.GetAllBattleUnitAlive(team).map((b) => {
             return b.GetDomain<IBaseNpc_Plus>();
         });
+        if (fliter) {
+            r = r.filter(fliter);
+        }
         return r;
     }
 

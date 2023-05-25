@@ -76,7 +76,9 @@ export class CombinationManagerComponent extends ET.Component implements IRoundS
         }
     }
 
-    private allCombination: { [relation: string]: { [relationid: string]: ECombination } } = {};
+
+
+    public allCombination: { [relation: string]: { [relationid: string]: ECombination } } = {};
     public addBuilding(entity: IBuildingEntityRoot) {
         let comb = entity.CombinationComp();
         if (comb == null) {
@@ -87,7 +89,22 @@ export class CombinationManagerComponent extends ET.Component implements IRoundS
             this.addCombination(info);
         }
     }
-
+    /**
+     * 获取所有至少有一个英雄的羁绊
+     * @returns 
+     */
+    public getAllAtLeastOneCombination() {
+        let r: string[] = [];
+        for (let info in this.allCombination) {
+            let combinas = Object.values(this.allCombination[info])
+            for (let comb of combinas) {
+                if (comb.uniqueConfigList.length > 0 && r.includes(comb.SectName) == false) {
+                    r.push(comb.SectName);
+                }
+            }
+        }
+        return r;
+    }
     public getAllActiveCombination() {
         let r: ECombination[] = [];
         for (let info in this.allCombination) {

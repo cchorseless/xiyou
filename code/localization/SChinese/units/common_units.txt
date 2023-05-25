@@ -1,3 +1,4 @@
+"wearable_dummy"       "饰品"
 "unit_ward_observer"       "侦查守卫单位"
 "unit_remote_mine"       "遥控炸弹"
 "unit_dummy"       "目标伤害点"
@@ -8,4 +9,5 @@
 "unit_base_equip_bag"       "装备箱子"
 "unit_target_dummy"       "傀儡目标"
 "npc_dota_target_dummy"       "傀儡目标"
-"wearable_dummy"       "饰品"
+"unit_npc_eon_cart"       "拖车"
+"unit_npc_courier_egg"       "信使蛋"

@@ -16,6 +16,7 @@ export module JsonConfigHelper {
         return HeroIdNameMap.get(heroConfigId)!;
     }
     const AbilitySectInfo: { [key: string]: string[] } = {};
+    const HeroSectInfo: { [key: string]: string[] } = {};
     export function Init() {
         if (_G.GJsonConfigHelper == null) {
             _G.GJsonConfigHelper = JsonConfigHelper;
@@ -31,9 +32,16 @@ export module JsonConfigHelper {
                 AbilitySectInfo[v.Abilityid] = AbilitySectInfo[v.Abilityid] || [];
                 AbilitySectInfo[v.Abilityid].push(v.id);
             }
+            if (v.heroid) {
+                HeroSectInfo[v.SectName] = HeroSectInfo[v.SectName] || [];
+                HeroSectInfo[v.SectName].push(v.heroid);
+            }
         })
     }
-
+    export function GetAllHeroBySectLabel(sectlabel: string) {
+        let list = HeroSectInfo[sectlabel] || [];
+        return list;
+    }
     export function GetAbilitySectLabel(abilityid: string) {
         let list = AbilitySectInfo[abilityid];
         if (list && list.length > 0) {

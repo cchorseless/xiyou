@@ -182,6 +182,9 @@ export class ChessControlSystemComponent extends ET.SingletonComponent {
         return r;
     }
     // x ,y playerid
+    public GetBoardGirdVector3Plus(v: Vector) {
+        return this.GetBoardGirdVector3(new ChessVector(v.x, v.y, v.z));
+    }
     public GetBoardGirdVector3(v: ChessVector) {
         let playerid = v.playerid as PlayerID;
         let minv: Vector;
@@ -239,7 +242,17 @@ export class ChessControlSystemComponent extends ET.SingletonComponent {
             }
         }
     }
-
+    public IsBoardEmptyGirdByVector(playerid: PlayerID, v: Vector) {
+        let playerroot = GGameScene.GetPlayer(playerid)
+        let allbuilding = playerroot.BuildingManager().getAllBuilding();
+        for (let building of allbuilding) {
+            let npcpos = building.GetDomain<IBaseNpc_Plus>().GetAbsOrigin();
+            if (GFuncVector.CalculateDistance(npcpos, v) <= ChessControlConfig.Gird_Width * 0.5) {
+                return false
+            }
+        };
+        return true
+    }
     public IsBoardEmptyGird(v: ChessVector) {
         return this.FindBoardInGirdChess(v).length == 0;
     }
@@ -248,19 +261,34 @@ export class ChessControlSystemComponent extends ET.SingletonComponent {
         let maxv = GMapSystem.GetInstance().BaseRoomMaxPoint;
         return v.x >= minv.x && v.x <= maxv.x && v.y >= minv.y && v.y <= maxv.y;
     }
-
+    /**
+     * 在棋盘内
+     * @param playerid 
+     * @param v 
+     * @returns 
+     */
     public IsInBoard(playerid: PlayerID, v: Vector) {
         let minv = this.GetBoardMinVector3(playerid);
         let maxv = this.GetBoardMaxVector3(playerid);
         return v.x >= minv.x && v.x <= maxv.x && v.y >= minv.y && v.y <= maxv.y;
     }
-
+    /**
+     * 在战斗区
+     * @param playerid 
+     * @param v 
+     * @returns 
+     */
     public IsInBoard8x10(playerid: PlayerID, v: Vector) {
         let minv = this.GetBoard8x10MinVector3(playerid);
         let maxv = this.GetBoard8x10MaxVector3(playerid);
         return v.x >= minv.x && v.x <= maxv.x && v.y >= minv.y && v.y <= maxv.y;
     }
-
+    /**
+     * 在等待区
+     * @param playerid 
+     * @param v 
+     * @returns 
+     */
     public IsInBoardStandby(playerid: PlayerID, v: Vector) {
         let minv = this.GetBoardStandbyMinVector3(playerid);
         let maxv = this.GetBoardStandbyMaxVector3(playerid);

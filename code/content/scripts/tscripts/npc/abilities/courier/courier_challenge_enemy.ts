@@ -11,7 +11,7 @@ export class courier_challenge_gold extends ActiveRootAbility {
         return true;
     }
 
-    GetWoodCost(level?: number): number {
+    GetSoulCrystal(level?: number): number {
         return GJSONConfig.CourierAbilityLevelUpConfig.get(math.max(this.GetLevel(), 1) + "").ChallengeGoldCost;
     }
     GetManaCost() {
@@ -31,8 +31,8 @@ export class courier_challenge_gold extends ActiveRootAbility {
         if (IsServer()) {
             let playerid = caster.GetPlayerID()
             let playerroot = GPlayerEntityRoot.GetOneInstance(playerid);
-            if (!playerroot.PlayerDataComp().isEnoughItem(EEnum.EMoneyType.Wood, this.GetWoodCost())) {
-                this.errorStr = "cost wood not enough";
+            if (!playerroot.PlayerDataComp().isEnoughItem(EEnum.EMoneyType.SoulCrystal, this.GetSoulCrystal())) {
+                this.errorStr = "cost SoulCrystal not enough";
                 return UnitFilterResult.UF_FAIL_CUSTOM;
             }
         }
@@ -53,7 +53,7 @@ export class courier_challenge_gold extends ActiveRootAbility {
             let challengeround = this.GetchallengeRound();
             if (challengeround) {
                 challengeround.OnRound_Start(this.GetLevel());
-                root.PlayerDataComp().ModifyWood(-this.GetWoodCost());
+                root.PlayerDataComp().ModifySoulCrystal(-this.GetSoulCrystal());
             }
             if (this.GetAutoCastState()) {
                 this.ToggleAutoCast();
@@ -100,7 +100,7 @@ export class courier_challenge_gold extends ActiveRootAbility {
 
 @registerAbility()
 export class courier_challenge_wood extends courier_challenge_gold {
-    GetWoodCost(level?: number): number {
+    GetSoulCrystal(level?: number): number {
         return GJSONConfig.CourierAbilityLevelUpConfig.get(math.max(this.GetLevel(), 1) + "").ChallengeWoodCost;
     }
     GetchallengeRound() {
@@ -129,7 +129,7 @@ export class courier_challenge_equip extends ActiveRootAbility {
             let playerid = caster.GetPlayerID()
             let playerroot = GPlayerEntityRoot.GetOneInstance(playerid);
             if (!playerroot.PlayerDataComp().isEnoughItem(EEnum.EMoneyType.SoulCrystal, this.GetSoulCrystal())) {
-                this.errorStr = "cost wood not enough";
+                this.errorStr = "cost SoulCrystal not enough";
                 return UnitFilterResult.UF_FAIL_CUSTOM;
             }
         }

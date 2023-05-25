@@ -58,6 +58,7 @@ export class ERoundBoard extends ERound implements IRoundStateCallback {
         playerroot.CourierRoot().OnRound_Start(this);
         playerroot.BuildingManager().OnRound_Start(this);
         playerroot.FakerHeroRoot().OnRound_Start(this);
+        playerroot.DrawComp().OnRound_Start(this);
         this.prizeTimer = GTimerHelper.AddTimer(delaytime, GHandler.create(this, () => {
             if (this._debug_StageStopped) {
                 return 1;
@@ -112,7 +113,7 @@ export class ERoundBoard extends ERound implements IRoundStateCallback {
         if (this.roundState == RoundConfig.ERoundBoardState.prize) {
             return;
         }
-        let delaytime = 20;
+        let delaytime = 3;
         this.roundState = RoundConfig.ERoundBoardState.prize;
         this.roundLeftTime = GameRules.GetGameTime() + delaytime;
         let playerroot = GPlayerEntityRoot.GetOneInstance(this.BelongPlayerid);
@@ -185,7 +186,7 @@ export class ERoundBoard extends ERound implements IRoundStateCallback {
     }
 
     CreateAllRoundBasicEnemy(SpawnEffect: ISpawnEffectInfo) {
-        let baseenemys = this.config.enemyinfo.filter((value) => { return !value.issummoned });
+        let baseenemys = this.config.enemyinfo.filter((value) => { return value.enemycreatetype == GEEnum.EEnemyCreateType.None });
         for (let enemyinfo of baseenemys) {
             this.CreateRoundBasicEnemy(enemyinfo.id, SpawnEffect);
         }
@@ -209,8 +210,24 @@ export class ERoundBoard extends ERound implements IRoundStateCallback {
         }
         let r = GFuncRandom.RandomArray(validPos)[0];
         return new ChessVector(r[0], r[1], playerid);
+        // let min_x = -3;
+        // let max_x = 9;
+        // let min_y = 1;
+        // let max_y = 12;
+        // return new ChessVector(RandomFloat(min_x, max_x), RandomFloat(min_y, max_y), playerid);
     }
-
+    GetBoardRandomEggPos(playerid: PlayerID) {
+        let validPos = [
+            [0, ChessControlConfig.Gird_Max_Y],
+            [1, ChessControlConfig.Gird_Max_Y],
+            [2, ChessControlConfig.Gird_Max_Y],
+            [5, ChessControlConfig.Gird_Max_Y],
+            [6, ChessControlConfig.Gird_Max_Y],
+            [7, ChessControlConfig.Gird_Max_Y],
+        ]
+        let r = GFuncRandom.RandomArray(validPos)[0];
+        return new ChessVector(r[0], r[1], playerid);
+    }
     CreateRoundBasicEnemy(unit_index: string, spawnEffect: ISpawnEffectInfo = null, npcOwner: IBaseNpc_Plus = null) {
         let player = GPlayerEntityRoot.GetOneInstance(this.BelongPlayerid);
         let playerid = this.BelongPlayerid;
@@ -218,11 +235,14 @@ export class ERoundBoard extends ERound implements IRoundStateCallback {
             return value.id == unit_index
         });
         let _boardVec: ChessVector;
-        if (enemyinfo.issummoned) {
+        if (enemyinfo.enemycreatetype == GEEnum.EEnemyCreateType.None) {
+            _boardVec = new ChessVector((enemyinfo.positionX), (enemyinfo.positionY), playerid);
+        }
+        else if (enemyinfo.enemycreatetype == GEEnum.EEnemyCreateType.SummedBattle) {
             _boardVec = this.GetBoardRandomEmptyEnemyGird(playerid);
         }
-        else {
-            _boardVec = new ChessVector((enemyinfo.positionX), (enemyinfo.positionY), playerid);
+        else if (enemyinfo.enemycreatetype == GEEnum.EEnemyCreateType.SummedEgg) {
+            _boardVec = this.GetBoardRandomEggPos(playerid);
         }
         let pos = _boardVec.getVector3();
         let angle = Vector(enemyinfo.anglesX, enemyinfo.anglesY, enemyinfo.anglesZ);
@@ -246,8 +266,8 @@ export class ERoundBoard extends ERound implements IRoundStateCallback {
      * @param unit_index 
      * @param spawnEffect 
      */
-    CreateRoundSummonEnemy(count: number, spawnEffect: ISpawnEffectInfo = null, npcOwner: IBaseNpc_Plus = null) {
-        let baseenemys = this.config.enemyinfo.filter((value) => { return value.issummoned });
+    CreateRoundSummonEggEnemy(count: number, spawnEffect: ISpawnEffectInfo = null, npcOwner: IBaseNpc_Plus = null) {
+        let baseenemys = this.config.enemyinfo.filter((value) => { return value.enemycreatetype == GEEnum.EEnemyCreateType.SummedEgg });
         if (baseenemys.length == 0) { return }
         let weightarr = baseenemys.map((value) => { return value.unitWeight });
         let posArr: Vector[] = [];

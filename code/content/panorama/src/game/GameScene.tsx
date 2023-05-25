@@ -4,6 +4,8 @@ import { NotificationSystemComponent } from "./system/NotificationSystemComponen
 import { PublicBagSystemComponent } from "./system/PublicBagSystemComponent";
 
 export class GameScene {
+    /**当前是否是英雄选择阶段 */
+    static readonly IsHeroSelect = false;
     /**
      * @abstract Construct
      */
@@ -36,7 +38,8 @@ export class GameScene {
         return this.Scene.GetComponentByName<ITServerZone>("TServerZone")!;
     }
 
-    static Init() {
+    static Init(IsHeroSelect = false) {
+        (GameScene.IsHeroSelect as any) = IsHeroSelect;
         this.Scene.AddComponent(NotificationSystemComponent);
         let maxPlayers = Players.GetMaxPlayers();
         for (let i = 0; i < maxPlayers; i++) {

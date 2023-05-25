@@ -4,6 +4,8 @@ import { CCShare } from "./lib/CCShare";
 export module GameServiceConfig {
     export const GAME_Name = "xiyou";
     export const GAME_MAX_PLAYER = 5;
+    export const HERO_MAX_LEVEL = 10;
+    export const HERO_XP_PER_LEVEL_TABLE = { 0: 50, 1: 99, 2: 200, 3: 300, 4: 400, 5: 500, 6: 600, 7: 700, 8: 800, 9: 900, 10: 1000 }
     /**
      * 数据同步客户端是否压缩
      */
@@ -44,7 +46,10 @@ export module GameServiceConfig {
     export const USE_MEME_SOUNDS = true;		// Should we use meme/fun sounds on abilities occasionally?
     export const MEME_SOUNDS_CHANCE = 50;
     export const IMBA_DAMAGE_EFFECTS_DISTANCE_CUTOFF = 2500	//Range at which most on-damage effects no longer trigger
-
+    /**英雄选择阶段同步的数据实体 */
+    export const HERO_SELECT_SYNC_ENTITY = [
+        "GameServiceSystemComponent",
+    ];
     // todo
     export const IMBA_DISABLED_SKULL_BASHER = [
         "faceless_void",

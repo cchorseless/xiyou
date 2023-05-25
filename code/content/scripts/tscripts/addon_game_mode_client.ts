@@ -15,6 +15,7 @@ import { SingletonClass } from "./shared/lib/SingletonClass";
 export class GameMode_Client extends SingletonClass {
 
     public Init() {
+        this.CollectGarbage();
         GameLibsExt.Init();
         this.addEvent();
         KVHelper.initKVFile();
@@ -69,8 +70,13 @@ export class GameMode_Client extends SingletonClass {
         EventHelper.removeGameEventCaller(this);
         require("addon_game_mode_client");
         GGameCache.DebugReload();
+        this.CollectGarbage();
     }
-
+    public CollectGarbage() {
+        GLogHelper.print(`[Lua Memory]before collect:  ${collectgarbage("count") / 1024} MB `)
+        collectgarbage("collect");
+        GLogHelper.print(`[Lua Memory]after collect:  ${collectgarbage("count") / 1024} MB `)
+    }
     private OnNPCSpawned(e: NpcSpawnedEvent) {
         let spawnedUnit = EntIndexToHScript(e.entindex) as IBaseNpc_Plus;
         if (spawnedUnit == null) return;

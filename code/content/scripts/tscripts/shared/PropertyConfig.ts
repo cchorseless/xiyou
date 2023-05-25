@@ -876,7 +876,8 @@ export module PropertyConfig {
         // ATTACKSPEED_PERCENTAGE = modifierfunction.MODIFIER_PROPERTY_ATTACKSPEED_PERCENTAGE,
 
         COOLDOWN_PERCENTAGE_STACKING = modifierfunction.MODIFIER_PROPERTY_COOLDOWN_PERCENTAGE_STACKING,
-
+        HEALTHBAR_PIPS = modifierfunction.MODIFIER_PROPERTY_HEALTHBAR_PIPS,
+        INCOMING_DAMAGE_CONSTANT = modifierfunction.MODIFIER_PROPERTY_INCOMING_DAMAGE_CONSTANT,
         //#region 自定义属性
         /**属性开始 */
         CUSTOM_PROPS_START = modifierfunction.MODIFIER_FUNCTION_INVALID + 1000,
@@ -945,7 +946,7 @@ export module PropertyConfig {
         ENERGY_REGEN_PERCENTAGE,
         // 闪避
         EVASION_CONSTANT,
-        // 无视闪避
+        // 无视闪避 正直
         NEGATIVE_EVASION_CONSTANT,
         // 物理护甲计算
         PHYSICAL_ARMOR_BASE,
@@ -1870,6 +1871,10 @@ export module PropertyConfig {
          * Method Name: `GetModifierAttackSpeedPercentage`
          */
         ATTACKSPEED_PERCENTAGE = "GetModifierAttackSpeedPercentage",
+
+        HEALTHBAR_PIPS = "GetModifierHealthBarPips",
+
+        INCOMING_DAMAGE_CONSTANT = "GetModifierIncomingDamageConstant",
     }
 
     /**保留的属性计算，自定义属性计算事件 */

@@ -4,6 +4,7 @@ declare namespace common_units {
 "common_units" :OBJ_1_1 ,
 }
  interface OBJ_1_1 {
+"wearable_dummy" :OBJ_2_1 ,
 "unit_ward_observer" :OBJ_2_1 ,
 "unit_remote_mine" :OBJ_2_1 ,
 "unit_dummy" :OBJ_2_1 ,
@@ -14,14 +15,15 @@ declare namespace common_units {
 "unit_base_equip_bag" :OBJ_2_1 ,
 "unit_target_dummy" :OBJ_2_1 ,
 "npc_dota_target_dummy" :OBJ_2_1 ,
-"wearable_dummy" :OBJ_2_1 ,
+"unit_npc_eon_cart" :OBJ_2_1 ,
+"unit_npc_courier_egg" :OBJ_2_1 ,
 [k:string] : OBJ_2_1 }
  interface OBJ_2_1 {
-"vscripts" :string ,
 "BaseClass" :string ,
+"Creature" :OBJ_3_1 ,
+"vscripts" :string ,
 "Model" :string ,
 "ModelScale" :string ,
-"Creature" :OBJ_3_1 ,
 "BoundsHullName" :string ,
 "VisionDaytimeRange" :string ,
 "VisionNighttimeRange" :string ,
@@ -50,6 +52,8 @@ declare namespace common_units {
 "CombatClassAttack" :string ,
 "CombatClassDefend" :string ,
 "ConsideredHero" :string ,
+"Ability1" :string ,
+"HasInventory" :string ,
 [k:string] : string | OBJ_3_1 }
  interface OBJ_3_1 {
 [k:string] : any }

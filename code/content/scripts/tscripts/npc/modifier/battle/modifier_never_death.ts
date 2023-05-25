@@ -22,4 +22,15 @@ export class modifier_never_death extends BaseModifier_Plus {
     GetMinHealth() {
         return 1;
     }
+
+
+    public Init(params?: IModifierTable): void {
+        if (IsServer()) {
+            // let hero = this.GetParentPlus().GetPlayerRoot().Hero;
+            // hero.SetFollowRange(200);
+            // this.GetParentPlus().SetFollowRange(200);
+            // this.GetParentPlus().FollowEntity(this.GetParentPlus().GetPlayerRoot().Hero, false)
+            // this.GetParentPlus().SetOrigin
+        }
+    }
 }

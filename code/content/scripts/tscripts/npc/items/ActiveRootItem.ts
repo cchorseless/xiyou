@@ -14,6 +14,32 @@ export class ActiveRootItem extends BaseItem_Plus {
     OnRound_Battle?(): void;
     OnRound_Prize?(round: ERoundBoard): void;
 }
+
+export class ActiveRootItemWithCharge extends ActiveRootItem {
+    Spawn() {
+        if (IsServer()) {
+            this.SetCurrentCharges(1);
+        }
+    }
+
+    GetCooldown(level: number): number {
+        return 0.3
+    }
+
+    CostOneCharge() {
+        if (IsServer()) {
+            this.SetCurrentCharges(this.GetCurrentCharges() - 1);
+            if (this.GetCurrentCharges() <= 0) {
+                let hParent = this.GetCasterPlus();
+                hParent.TakeItem(this);
+                SafeDestroyItem(this);
+            }
+        }
+    }
+}
+
+
+
 declare global {
     /**
      * @ServerOnly

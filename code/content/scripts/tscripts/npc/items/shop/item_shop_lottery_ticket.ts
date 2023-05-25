@@ -7,7 +7,7 @@ export class item_shop_lottery_ticket extends ActiveRootItem {
     CanBeUsedOutOfInventory(): boolean {
         return true
     }
-    onSpellStart() {
+    OnSpellStart() {
         this.UseOutOfInventory();
     }
     UseOutOfInventory(): any {

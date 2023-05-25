@@ -17,7 +17,6 @@ export class GameSetting {
     public static readonly AI_TIMER_TICK_TIME_HERO: number = 0.25;
     /**AI时间间隔 */
     public static readonly AI_TIMER_TICK_TIME: number = 0.5;
-
     public static ServerKey(): string {
         if (IsInToolsMode()) {
             return "wIkOFc3QwBmwwefDKPgxeIele7JuQygD";
@@ -79,10 +78,10 @@ export class GameSetting {
         // 默认英雄,跳过英雄选择界面
         // GameRules.Addon.Instance.SetCustomGameForceHero(GameSetting.DEFAULT_PICKED_HERO);
         //#region  開啓后閃退
-        // GameRules.Addon.Instance.SetUseCustomHeroLevels(true)
+        GameRules.Addon.Instance.SetUseCustomHeroLevels(true)
         //#endregion
-        // GameRules.Addon.Instance.SetCustomHeroMaxLevel(HERO_MAX_LEVEL)
-        // GameRules.Addon.Instance.SetCustomXPRequiredToReachNextLevel(HERO_XP_PER_LEVEL_TABLE)
+        GameRules.Addon.Instance.SetCustomHeroMaxLevel(GameServiceConfig.HERO_MAX_LEVEL)
+        GameRules.Addon.Instance.SetCustomXPRequiredToReachNextLevel(GameServiceConfig.HERO_XP_PER_LEVEL_TABLE)
         // 设置背包物品交换后冷却时间
         GameRules.Addon.Instance.SetCustomBackpackSwapCooldown(0);
         /**天气 */
@@ -106,6 +105,7 @@ export class GameSetting {
         GameRules.Addon.Instance.SetPauseEnabled(true);
         GameRules.Addon.Instance.SetDaynightCycleDisabled(false);
         GameRules.Addon.Instance.SetSelectionGoldPenaltyEnabled(false);
+
 
     }
 

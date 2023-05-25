@@ -394,12 +394,24 @@
     height: 100%;
     background-color: gradient(linear, 0% 0%, 0% 100%, from(#00000000), to(#00000000));
     transition-property: pre-transform-scale2d, brightness, saturation, background-color, opacity;
-    transition-duration: .06s, .1s;
+    // transition-duration: .06s, .1s;
     transition-timing-function: ease-out;
-}
 
-#AbilityButton:hover {
-    brightness: 1.6;
+    transition-duration: 0.15s;
+
+    &:disabled {
+        saturation: 0.0;
+        brightness: 0.5;
+    }
+
+    &:not(:disabled):hover {
+        brightness: 2.0;
+    }
+
+    &:not(:disabled):active {
+        brightness: 0.5;
+        sound: "ui_generic_button_click";
+    }
 }
 
 #AbilityImage {

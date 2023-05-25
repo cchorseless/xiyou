@@ -95,15 +95,26 @@ export class AiAttackComponent extends ET.Component {
         if (!IsValid(npc)) {
             return false;
         }
+        if (!npc.HasMovementCapability()) {
+            return false
+        }
         let new_target = npc.GetAttackTarget() as IBaseNpc_Plus;
         if (!IsValid(new_target) || !new_target.IsAlive()) {
-            let enemys = npc.FindUnitsInRadiusPlus(1000);
-            if (enemys.length == 0) {
-                let team = npc.GetTeam() == DOTATeam_t.DOTA_TEAM_GOODGUYS ? DOTATeam_t.DOTA_TEAM_BADGUYS : DOTATeam_t.DOTA_TEAM_GOODGUYS;
-                enemys = GGameScene.GetPlayer(this.BelongPlayerid).BattleUnitManagerComp().GetAllBattleUnitAliveNpc(team);
-            }
-            enemys = enemys.filter((v) => { return v.IsAlive() && v.IsAttacker() });
+            let team = npc.GetTeam() == DOTATeam_t.DOTA_TEAM_GOODGUYS ? DOTATeam_t.DOTA_TEAM_BADGUYS : DOTATeam_t.DOTA_TEAM_GOODGUYS;
+            let enemys = GGameScene.GetPlayer(this.BelongPlayerid).BattleUnitManagerComp().GetAllBattleUnitAliveNpc(team);
+            enemys = enemys.filter((v) => { return v.HasModifier("modifier_unit_freedom") && v.IsAlive() && v.IsAttacker() });
             if (enemys.length > 0) {
+                let pos = npc.GetAbsOrigin();
+                enemys.sort((a, b) => {
+                    let apos = a.GetAbsOrigin();
+                    let bpos = b.GetAbsOrigin();
+                    let a1 = (apos - pos as Vector).Length2D();
+                    let b1 = (bpos - pos as Vector).Length2D();
+                    if (math.abs(a1 - b1) < 50) {
+                        return b.GetHealthLosePect() - a.GetHealthLosePect();
+                    }
+                    return a1 - b1;
+                });
                 new_target = enemys[0] as IBaseNpc_Plus;
             }
         }

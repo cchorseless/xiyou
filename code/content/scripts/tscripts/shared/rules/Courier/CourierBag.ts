@@ -10,5 +10,5 @@ export class CourierBag extends ET.Component {
     @serializeETProps()
     bBuyItem2Bag: boolean = false;
     /**神器选项列表 */
-    artifactSelection: string[] = []
+    artifactSelection: string[] = [];
 }

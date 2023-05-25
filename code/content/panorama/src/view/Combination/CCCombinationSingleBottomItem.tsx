@@ -84,8 +84,9 @@ export class CCCombinationSingleBottomItem extends CCPanel<ICCCombinationSingleB
                                     return (
                                         <CCPanel id="CombinationTag" key={"" + index} >
                                             {[...Array(divCount)].map((a, b) => {
-                                                return <CCPanel key={"" + b} height="6px" width={Math.floor(42 / divCount) + "px"} className={CSSHelper.ClassMaker("ImgTag", {
-                                                    IsActive: b + 1 <= activeCount
+                                                return <CCPanel key={"" + b} width={Math.floor((42 - (divCount - 1) * 2) / divCount) + "px"} className={CSSHelper.ClassMaker("ImgTag", {
+                                                    IsActive: b + 1 <= activeCount,
+                                                    TwoLine: entityList.length == 2,
                                                 })} />
                                             })}
                                         </CCPanel>

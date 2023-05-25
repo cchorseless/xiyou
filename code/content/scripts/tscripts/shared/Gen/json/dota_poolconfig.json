@@ -1602,8 +1602,507 @@
     ]
   },
   {
-    "poolid": "n1_tower_drop_1",
+    "poolid": "1009",
     "poolItemCount": 1,
-    "PoolInfo": []
+    "PoolInfo": [
+      {
+        "ItemConfigId": "item_shop_small_gold_bag",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_shop_draw_card_v1",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_shop_addstar_green",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_shop_addstar_blue",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      }
+    ]
+  },
+  {
+    "poolid": "1010",
+    "poolItemCount": 1,
+    "PoolInfo": [
+      {
+        "ItemConfigId": "item_shop_small_wood_bag",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_shop_draw_card_v2",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_shop_addstar_blue",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_shop_random_card_purple",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_shop_stat_strength_book",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_shop_stat_agility_book",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_shop_stat_intelligence_book",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_shop_addstar_purple",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      }
+    ]
+  },
+  {
+    "poolid": "1011",
+    "poolItemCount": 1,
+    "PoolInfo": [
+      {
+        "ItemConfigId": "item_shop_small_soulcrystal_bag",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_shop_draw_card_v3",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_shop_addstar_purple",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_shop_random_card_gold",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_shop_addstar_gold",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      }
+    ]
+  },
+  {
+    "poolid": "1012",
+    "poolItemCount": 1,
+    "PoolInfo": [
+      {
+        "ItemConfigId": "item_artifact_microcosm",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_artifact_ironwood_tree",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_artifact_death_note",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_artifact_plunder_stone",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_artifact_tome_of_knowledge",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_artifact_psychic_headband",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_artifact_pure_poison",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_artifact_lunpan",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_artifact_reincarnation_lamp",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_artifact_demagicking_maul",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_artifact_bottle_water",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_artifact_demon_potion",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_artifact_pocket_roshan",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_artifact_ancient_janggo",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_artifact_trading_license",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_artifact_philosophers_stone",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_artifact_courier",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_artifact_vambrace_str",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_artifact_vambrace_agi",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_artifact_vambrace_int",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_artifact_aeon_disk",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_artifact_grandmasters_glaive",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_artifact_trusty_shovel",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_artifact_quicksilver_amulet",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_artifact_tango_single",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_artifact_overwhelming_blink",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_artifact_bottle_regeneration",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_artifact_metor_ring",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_artifact_golden_stone",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_artifact_remake_master",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_artifact_soul_spirit",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_artifact_bottle_doubledamage",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_artifact_bottle_arcane",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_artifact_arcane_blink",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_artifact_voodoo_mask",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_artifact_pelt_of_wolf",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_artifact_meteor_hammer",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_artifact_star_mace",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_artifact_quarterstaff",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_artifact_grove_bow",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_artifact_falcon_blade",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_artifact_infused_raindrop",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_artifact_repair_kit",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_artifact_bottle_bounty",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_artifact_summon_master",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_artifact_fathorse_lose",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_artifact_liren",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_artifact_yingguang",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_artifact_shengguang",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_artifact_dogplayer",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_artifact_atkring",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_artifact_skillring",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_artifact_ascetic_cap",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_artifact_part_of_contracts",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_artifact_bottle_empty",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      }
+    ]
+  },
+  {
+    "poolid": "1013",
+    "poolItemCount": 1,
+    "PoolInfo": [
+      {
+        "ItemConfigId": "item_shop_equipchoose_c",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      }
+    ]
+  },
+  {
+    "poolid": "1014",
+    "poolItemCount": 1,
+    "PoolInfo": [
+      {
+        "ItemConfigId": "item_shop_equipchoose_b",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      }
+    ]
+  },
+  {
+    "poolid": "1015",
+    "poolItemCount": 1,
+    "PoolInfo": [
+      {
+        "ItemConfigId": "item_shop_equipchoose_a",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      }
+    ]
+  },
+  {
+    "poolid": "1016",
+    "poolItemCount": 1,
+    "PoolInfo": [
+      {
+        "ItemConfigId": "item_shop_equipchoose_s",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      }
+    ]
   }
 ]

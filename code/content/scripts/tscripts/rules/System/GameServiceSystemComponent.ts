@@ -5,7 +5,8 @@ import { GameServiceConfig } from "../../shared/GameServiceConfig";
 import { GEventHelper } from "../../shared/lib/GEventHelper";
 import { GameServiceSystem } from "../../shared/rules/System/GameServiceSystem";
 import { TItem } from "../../shared/service/bag/TItem";
-
+// 英雄选择阶段的数据集合
+// 英雄选择阶段只有这个数据集合同步有效
 @GReloadable
 export class GameServiceSystemComponent extends GameServiceSystem {
     static SelectionTime = 30;

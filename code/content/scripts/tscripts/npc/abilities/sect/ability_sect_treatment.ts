@@ -51,7 +51,7 @@ export class ability_sect_treatment extends BaseAbility_Plus {
         this.Purification(target);
 
     }
-    radius = 275;
+    radius = 300;
     Purification(target: IBaseNpc_Plus) {
         let particle_cast = "particles/units/heroes/hero_omniknight/omniknight_purification_cast.vpcf";
         let particle_aoe = "particles/units/heroes/hero_omniknight/omniknight_purification.vpcf";

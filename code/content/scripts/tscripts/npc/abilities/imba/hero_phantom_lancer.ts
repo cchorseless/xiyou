@@ -871,13 +871,12 @@ export class modifier_imba_phantom_lancer_juxtapose extends BaseModifier_Plus {
             return;
         }
         this.owner = this.GetParentPlus();
-        this.owner.TempData().juxtapose_table = []
         if (this.GetParentPlus().IsRealUnit()) {
             this.owner = this.GetParentPlus();
-            this.owner.TempData().juxtapose_table = []
         } else if (!this.GetParentPlus().IsRealUnit() && this.GetParentPlus().GetOwnerPlus()) {
-            // this.owner = this.GetParentPlus().GetOwnerPlus().GetAssignedHero();
+            this.owner = this.GetParentPlus().GetOwnerPlus();
         }
+        this.owner.TempData().juxtapose_table = []
     }
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
@@ -942,7 +941,7 @@ export class modifier_imba_phantom_lancer_juxtapose extends BaseModifier_Plus {
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
     CC_OnDeath(keys: ModifierInstanceEvent): void {
         if (keys.unit == this.GetParentPlus() && this.owner && !this.owner.IsNull() && this.owner.TempData().juxtapose_table) {
-            this.owner.TempData<EntityIndex[]>().juxtapose_table.filter((i, j) => {
+            this.owner.TempData<EntityIndex[]>().juxtapose_table = this.owner.TempData<EntityIndex[]>().juxtapose_table.filter((i, j) => {
                 return i != this.GetParentPlus().entindex();
             });
 

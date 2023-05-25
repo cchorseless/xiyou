@@ -2,12 +2,15 @@ import { Assert_ProjectileEffect, IProjectileEffectInfo } from "../../../assert/
 import { KVHelper } from "../../../helper/KVHelper";
 import { modifier_jiaoxie_wudi } from "../../../npc/modifier/battle/modifier_jiaoxie_wudi";
 import { modifier_mana_control } from "../../../npc/modifier/battle/modifier_mana_control";
-import { modifier_round_enemy } from "../../../npc/modifier/battle/modifier_round_enemy";
+import { modifier_unit_freedom } from "../../../npc/modifier/battle/modifier_unit_freedom";
+import { modifier_unit_hut } from "../../../npc/modifier/battle/modifier_unit_hut";
+import { modifier_round_enemy } from "../../../npc/modifier/enmey/modifier_round_enemy";
 import { EnemyConfig } from "../../../shared/EnemyConfig";
 import { BattleUnitEntityRoot } from "../BattleUnit/BattleUnitEntityRoot";
 import { CombinationComponent } from "../Combination/CombinationComponent";
 import { ERound } from "../Round/ERound";
 import { ERoundBoard } from "../Round/ERoundBoard";
+import { EnemyMoveComponent } from "./EnemyMoveComponent";
 
 @GReloadable
 export class EnemyUnitEntityRoot extends BattleUnitEntityRoot {
@@ -22,7 +25,20 @@ export class EnemyUnitEntityRoot extends BattleUnitEntityRoot {
         (this.EntityId as any) = domain.GetEntityIndex();
         this.AddComponent(GGetRegClass<typeof CombinationComponent>("CombinationComponent"));
         this.addBattleComp();
-        this.SetStar(1);
+        let config = this.GetRoundBasicUnitConfig();
+        if (config) {
+            if (config.star > 0) this.SetStar(config.star);
+            if (config.level > 0) domain.CreatureLevelUp(config.level);
+            if (config.enemycreatetype == GEEnum.EEnemyCreateType.SummedEgg) {
+                this.AddComponent(GGetRegClass<typeof EnemyMoveComponent>("EnemyMoveComponent"));
+            }
+        }
+        if (this.EnemyMoveComp()) {
+            modifier_unit_hut.applyOnly(domain, domain);
+        }
+        else {
+            modifier_unit_freedom.applyOnly(domain, domain);
+        }
         this.SetUIOverHead(true, false);
         this.InitSyncClientInfo();
         if (onlyKey != null) {
@@ -54,13 +70,23 @@ export class EnemyUnitEntityRoot extends BattleUnitEntityRoot {
         modifier_mana_control.applyOnly(npc, npc);
         this.AbilityManagerComp().OnRound_Battle();
         this.InventoryComp().OnRound_Battle();
-        GTimerHelper.AddTimer(1, GHandler.create(this, () => {
-            this.AiAttackComp().startFindEnemyAttack();
-        }))
+        if (this.EnemyMoveComp()) {
+            this.EnemyMoveComp().StartMoveToEgg();
+        }
+        else {
+            GTimerHelper.AddTimer(1, GHandler.create(this, () => {
+                this.AiAttackComp().startFindEnemyAttack();
+            }))
+        }
     }
     OnRound_Prize(round: ERoundBoard) {
         let domain = this.GetDomain<IBaseNpc_Plus>();
-        this.AiAttackComp().endFindToAttack();
+        if (this.EnemyMoveComp()) {
+            this.EnemyMoveComp().EndMoveToEgg();
+        }
+        else {
+            this.AiAttackComp().endFindToAttack();
+        }
         this.onVictory();
         this.AbilityManagerComp().OnRound_Prize(round);
         this.InventoryComp().OnRound_Prize(round);
@@ -103,9 +129,14 @@ export class EnemyUnitEntityRoot extends BattleUnitEntityRoot {
         let npc = this.GetDomain<IBaseNpc_Plus>();
         return npc.GetUnitLabel() == EnemyConfig.EEnemyUnitType.GOLD_BOSS;
     }
-    IsCANDY_BOSS() {
-        let npc = this.GetDomain<IBaseNpc_Plus>();
-        return npc.GetUnitLabel() == EnemyConfig.EEnemyUnitType.CANDY_BOSS;
+    /**
+     * 攻击蛋的怪物
+     * @returns 
+     */
+    IsEnemyEgg() {
+        let config = this.GetRoundBasicUnitConfig();
+        if (!config) return false;
+        return config.enemycreatetype == GEEnum.EEnemyCreateType.SummedEgg;
     }
     IsEnemyTower() {
         let npc = this.GetDomain<IBaseNpc_Plus>();
@@ -118,7 +149,9 @@ export class EnemyUnitEntityRoot extends BattleUnitEntityRoot {
             SafeDestroyUnit(npc);
         }
     }
-
+    EnemyMoveComp() {
+        return this.GetComponentByName<EnemyMoveComponent>("EnemyMoveComponent");
+    }
 
     onKilled(events: EntityKilledEvent): void {
         this.changeAliveState(false);
@@ -145,26 +178,48 @@ export class EnemyUnitEntityRoot extends BattleUnitEntityRoot {
         if (roundconfig) {
             let player = this.GetPlayer();
             let npc = this.GetDomain<IBaseNpc_Plus>();
-            let vCenter = player.Hero.GetAbsOrigin();
-            let startPos = npc.GetAbsOrigin() + Vector(0, 500, 0) as Vector;
+            let startPos = npc.GetAbsOrigin() as Vector;
+            let hModel = player.EnemyManagerComp().GetOnePrizeModel(EnemyConfig.EEnemyPrizeModel.SoulCrystalModel)
+            hModel.SetAbsOrigin(startPos);
+            // 金币奖励
+            let goldMin = roundconfig.goldMin || 0;
+            let goldMax = roundconfig.goldMax || 0;
+            if (goldMin > 0 && goldMax > 0) {
+                const gold = RandomInt(goldMin, goldMax);
+                let cast_sound = "DOTA_Item.Hand_Of_Midas";
+                npc.EmitSound(cast_sound);
+                SendOverheadEventMessage(null, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_GOLD, npc, gold, undefined);
+                player.PlayerDataComp().ModifyGold(gold);
+            }
+            // 木材奖励
+            let woodMin = roundconfig.woodMin || 0;
+            let woodMax = roundconfig.woodMax || 0;
+            if (woodMin > 0 && woodMax > 0) {
+                const wood = RandomInt(woodMin, woodMax);
+                // let cast_sound = "DOTA_Item.Hand_Of_Midas";
+                // npc.EmitSound(cast_sound);
+                SendOverheadEventMessage(null, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_XP, npc, wood, undefined);
+                player.PlayerDataComp().ModifyWood(wood);
+            }
+            // 魂晶奖励
+            let soulcrystalMin = roundconfig.soulcrystalMin || 0;
+            let soulcrystalMax = roundconfig.soulcrystalMax || 0;
+            if (soulcrystalMin > 0 && soulcrystalMax > 0) {
+                const soulCrystal = RandomInt(soulcrystalMin, soulcrystalMax);
+                // let cast_sound = "DOTA_Item.Hand_Of_Midas";
+                // npc.EmitSound(cast_sound);
+                SendOverheadEventMessage(null, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_MANA_ADD, npc, soulCrystal, undefined);
+                player.PlayerDataComp().ModifySoulCrystal(soulCrystal);
+            }
             if (this.IsEnemyTower()) {
-                for (let i = 0; i < 3; i++) {
-                    let item = npc.CreateOneItem("item_imba_aeon_disk");
-                    let vPosition = (vCenter + RandomVector(300)) as Vector;
+                let vCenter = player.Hero.GetAbsOrigin();
+                if (roundconfig.eliteDropIndex && roundconfig.eliteDropIndex != "") {
+                    let itemname = KVHelper.RandomPoolConfig(roundconfig.eliteDropIndex)
+                    let item = npc.CreateOneItem(itemname);
+                    let vPosition = (vCenter + RandomVector(200)) as Vector;
                     CreateItemOnPositionForLaunch(startPos, item);
                     let time = GFuncVector.CalculateDistance(startPos, vPosition) / 750;
                     item.LaunchLoot(false, 150, time, vPosition, null)
-                }
-            }
-            else {
-                let goldMin = roundconfig.goldMin || 0;
-                let goldMax = roundconfig.goldMax || 0;
-                if (goldMin > 0 && goldMax > 0) {
-                    let gold = RandomInt(goldMin, goldMax);
-                    let cast_sound = "DOTA_Item.Hand_Of_Midas";
-                    npc.EmitSound(cast_sound);
-                    SendOverheadEventMessage(null, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_GOLD, npc, gold, undefined);
-                    player.PlayerDataComp().ModifyGold(RandomInt(goldMin, goldMax));
                 }
             }
         }
@@ -202,4 +257,8 @@ export class EnemyUnitEntityRoot extends BattleUnitEntityRoot {
 declare global {
     type IEnemyUnitEntityRoot = EnemyUnitEntityRoot;
     var GEnemyUnitEntityRoot: typeof EnemyUnitEntityRoot;
+}
+
+if (_G.GEnemyUnitEntityRoot == undefined) {
+    _G.GEnemyUnitEntityRoot = EnemyUnitEntityRoot;
 }

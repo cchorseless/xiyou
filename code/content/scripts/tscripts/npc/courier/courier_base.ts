@@ -25,7 +25,6 @@ export class courier_base extends BaseNpc_Hero_Plus {
         this.addAbilityPlus(courier_challenge_wood.name);
         this.addAbilityPlus(courier_challenge_equip.name);
         this.addAbilityPlus(courier_challenge_artifact.name);
-
         this.SetIdleAcquire(false);
     }
 
@@ -47,6 +46,17 @@ export class courier_base extends BaseNpc_Hero_Plus {
             let a = GetGroundPosition(startPoint, this);
             this.SetAbsOrigin(a);
             CenterCameraOnUnit(playerid, this);
+            this.SetMana(100);
+            this.SetBaseManaRegen(0);
+            // let unit = BaseNpc_Plus.CreateUnitByName("unit_npc_eon_cart", this.GetAbsOrigin(), this)
+            // unit.FollowEntity(this, false);
+            // unit.SetLocalOrigin(this.GetLeftVector() * 150 as Vector)
+            // let unit2 = BaseNpc_Plus.CreateUnitByName("unit_npc_eon_cart", this.GetAbsOrigin(), this)
+            // unit2.FollowEntity(this, false);
+            // unit2.SetLocalOrigin(this.GetLeftVector() * 400 as Vector)
+            // let unit3 = BaseNpc_Plus.CreateUnitByName("unit_npc_eon_cart", this.GetAbsOrigin(), this)
+            // unit3.FollowEntity(this, false);
+            // unit3.SetLocalOrigin(this.GetLeftVector() * 650 as Vector)
         }));
         // TimerHelper.addTimer(2, () => {
         // MiniMapHelper.updatePlayerOnMiniForPlayer(this.GetPlayerID(), this.GetPlayerID())

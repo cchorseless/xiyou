@@ -16,15 +16,25 @@ export class BuffManagerComponent extends ET.Component {
     }
 
     cloneRuntimeBuff(comp: BuffManagerComponent) {
-        if (comp.RuntimeCloneBuff && comp.RuntimeCloneBuff.length > 0) {
+        let buffnames = comp.RuntimeCloneBuff;
+        if (buffnames && buffnames.length > 0) {
             let domain = this.GetDomain<IBaseNpc_Plus>();
             let target = comp.GetDomain<IBaseNpc_Plus>();
-            for (let buffName of (comp.RuntimeCloneBuff)) {
+            for (let buffName of buffnames) {
                 let modifier = target.findBuff(buffName);
                 if (modifier) {
                     let buff = domain.addBuff(buffName, modifier.GetCasterPlus(), modifier.GetAbilityPlus())
                     buff.SetStackCount(modifier.GetStackCount())
                 }
+            }
+        }
+    }
+
+    cloneAllBuff(npc: IBaseNpc_Plus) {
+        let allm = npc.FindAllModifiers() as IBaseModifier_Plus[];
+        for (let m of allm) {
+            if (IsValid(m)) {
+                m.Destroy();
             }
         }
     }

@@ -91,7 +91,7 @@ export class CCChallengeShopPanel extends CCPanel<ICCChallengeShopPanel> {
                         {["gold", "wood", "equip", "artifact"].map((ability, index) => {
                             const abilityname = "courier_challenge_" + ability;
                             const abilityindex = Entities.GetAbilityByName(castentity, abilityname);
-                            return <CCChallengeAbilityIcon key={ability} abilityname={abilityname} contextEntityIndex={abilityindex} cointype={index >= 2 ? GEEnum.EMoneyType.SoulCrystal : GEEnum.EMoneyType.Wood} />
+                            return <CCChallengeAbilityIcon key={ability} abilityname={abilityname} contextEntityIndex={abilityindex} cointype={GEEnum.EMoneyType.SoulCrystal} />
                         })}
                     </CCPanel>
                     {/* <CCDividerLine />

@@ -7,7 +7,7 @@ import { ActiveRootAbility } from "../ActiveRootAbility";
 // 初级抽卡
 @registerAbility()
 export class courier_draw_card_v1 extends ActiveRootAbility {
-    public readonly DrawCardType = DrawConfig.EDrawCardType.DrawCardV1;
+    public readonly DrawCardType = DrawConfig.EDrawType.DrawCardV1;
     OnSpellStart() {
         let hCaster = this.GetCasterPlus();
         let iPlayerID = hCaster.GetPlayerID();
@@ -49,7 +49,7 @@ export class courier_draw_card_v1 extends ActiveRootAbility {
 // 中级抽卡
 @registerAbility()
 export class courier_draw_card_v2 extends ActiveRootAbility {
-    public readonly DrawCardType = DrawConfig.EDrawCardType.DrawCardV2;
+    public readonly DrawCardType = DrawConfig.EDrawType.DrawCardV2;
 
 
     OnSpellStart() {
@@ -107,7 +107,7 @@ export class courier_draw_card_v2 extends ActiveRootAbility {
 // 高级抽卡
 @registerAbility()
 export class courier_draw_card_v3 extends ActiveRootAbility {
-    public readonly DrawCardType = DrawConfig.EDrawCardType.DrawCardV3;
+    public readonly DrawCardType = DrawConfig.EDrawType.DrawCardV3;
 
     OnSpellStart() {
         let hCaster = this.GetCasterPlus();

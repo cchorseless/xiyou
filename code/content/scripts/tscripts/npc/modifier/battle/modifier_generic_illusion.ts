@@ -1,4 +1,5 @@
-import { BaseModifier_Plus } from "../../entityPlus/BaseModifier_Plus";
+import { NetTablesHelper } from "../../../helper/NetTablesHelper";
+import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, EventDataType, modifier_event } from "../../propertystat/modifier_event";
 
@@ -11,8 +12,16 @@ export class modifier_generic_illusion extends BaseModifier_Plus {
     IsStunDebuff() { return false }
     AllowIllusionDuplicate() { return false }
 
-    public BeCreated(params?: IModifierTable): void {
+    IllusionSet: any;
+
+
+    public BeCreated(params?: IModifierTable & CreateIllusionsModifierKeys): void {
+        this.IllusionSet = { totalOutGoingPect: -50, incomingDamgePect: 100 };
         if (IsServer()) {
+            NetTablesHelper.SetDotaEntityData(this.GetParentPlus().GetEntityIndex(), {
+                totalOutGoingPect: params.outgoing_damage || this.IllusionSet.totalOutGoingPect,
+                incomingDamgePect: params.incoming_damage || this.IllusionSet.incomingDamgePect
+            }, "_illusion_");
             modifier_event.FireEvent({
                 attacker: this.GetCasterPlus(),
                 unit: this.GetParentPlus(),
@@ -20,7 +29,17 @@ export class modifier_generic_illusion extends BaseModifier_Plus {
             }, Enum_MODIFIER_EVENT.ON_SPAWN_ILLUSION)
         }
     }
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOTALDAMAGEOUTGOING_PERCENTAGE)
+    CC_TOTALDAMAGEOUTGOING_PERCENTAGE() {
+        let data = NetTablesHelper.GetDotaEntityData(this.GetParentPlus().GetEntityIndex(), "_illusion_") || this.IllusionSet;
+        return data.totalOutGoingPect;
+    }
 
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
+    CC_INCOMING_DAMAGE_PERCENTAGE() {
+        let data = NetTablesHelper.GetDotaEntityData(this.GetParentPlus().GetEntityIndex(), "_illusion_") || this.IllusionSet;
+        return data.incomingDamgePect
+    }
 
 
     public BeRemoved(): void {

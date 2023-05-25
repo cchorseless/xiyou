@@ -1,11 +1,12 @@
 import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { ERoundBoard } from "../../../rules/Components/Round/ERoundBoard";
 import { registerAbility } from "../../entityPlus/Base_Plus";
-import { ActiveRootItem } from "../ActiveRootItem";
+import { ActiveRootItem, ActiveRootItemWithCharge } from "../ActiveRootItem";
 
 // 金币福袋
 @registerAbility()
 export class item_shop_gold_bag extends ActiveRootItem {
+
 
     curGetCoin: number = 0;
     addCurGet() {
@@ -28,6 +29,11 @@ export class item_shop_gold_bag extends ActiveRootItem {
         let data = NetTablesHelper.GetDotaEntityData(hParent.GetEntityIndex(), "item_shop_gold_bag") || {};
         return `${0},${this.GetAbilityJinDuMax()},${data.curGetCoin || 0}`;
     }
+
+
+
+
+
 }
 // 木材福袋
 @registerAbility()
@@ -82,4 +88,43 @@ export class item_shop_soulcrystal_bag extends ActiveRootItem {
     }
 }
 
+// 小袋金币
+@registerAbility()
+export class item_shop_small_gold_bag extends ActiveRootItemWithCharge {
 
+
+    OnSpellStart(): void {
+        let hParent = this.GetCasterPlus();
+        let playerroot = hParent.GetPlayerRoot();
+        let random_min = this.GetSpecialValueFor("random_min");
+        let random_max = this.GetSpecialValueFor("random_max");
+        playerroot.PlayerDataComp().ModifyGold(RandomInt(random_min, random_max));
+        this.CostOneCharge();
+    }
+}
+// 小袋木材
+@registerAbility()
+export class item_shop_small_wood_bag extends ActiveRootItemWithCharge {
+
+    OnSpellStart(): void {
+        let hParent = this.GetCasterPlus();
+        let playerroot = hParent.GetPlayerRoot();
+        let random_min = this.GetSpecialValueFor("random_min");
+        let random_max = this.GetSpecialValueFor("random_max");
+        playerroot.PlayerDataComp().ModifyWood(RandomInt(random_min, random_max));
+        this.CostOneCharge();
+    }
+}
+// 小袋魂晶
+@registerAbility()
+export class item_shop_small_soulcrystal_bag extends ActiveRootItemWithCharge {
+
+    OnSpellStart(): void {
+        let hParent = this.GetCasterPlus();
+        let playerroot = hParent.GetPlayerRoot();
+        let random_min = this.GetSpecialValueFor("random_min");
+        let random_max = this.GetSpecialValueFor("random_max");
+        playerroot.PlayerDataComp().ModifySoulCrystal(RandomInt(random_min, random_max));
+        this.CostOneCharge();
+    }
+}

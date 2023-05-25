@@ -1,7 +1,9 @@
 import { BaseNpc_Plus } from "../../npc/entityPlus/BaseNpc_Plus";
 import { modifier_portal } from "../../npc/modifier/modifier_portal";
+import { ChessControlConfig } from "../../shared/ChessControlConfig";
 import { GameServiceConfig } from "../../shared/GameServiceConfig";
 import { ET } from "../../shared/lib/Entity";
+import { ChessVector } from "../Components/ChessControl/ChessVector";
 
 @GReloadable
 export class MapSystemComponent extends ET.SingletonComponent {
@@ -16,8 +18,9 @@ export class MapSystemComponent extends ET.SingletonComponent {
 
     readonly BaseVForwardPoint: Vector[] = [Vector(0, 1, 0), Vector(1, 1, 0), Vector(-1, 1, 0), Vector(1, 0, 0), Vector(-1, 0, 0)];
     readonly FakerHeroSpawnPoint: Vector[] = [];
+    readonly AllChessGirdEntity: { [playerid: string]: { [x: string]: { [y: string]: CBaseModelEntity } } } = {};
 
-    init() {
+    Init() {
         // 传送门
         this.PlayerTpDoorPoint.push(Entities.FindByName(null, "player_tp_door00").GetAbsOrigin());
         this.PlayerTpDoorPoint.push(Entities.FindByName(null, "player_tp_door01").GetAbsOrigin());
@@ -48,6 +51,8 @@ export class MapSystemComponent extends ET.SingletonComponent {
         (this.BaseRoomMaxPoint as any) = Vector(door4.x + 400, door4.y * 2, door4.z);
 
         this.InitPrizeUnitRefreshZone();
+
+
     }
 
     readonly BaseRoomPrizeUnitRefreshZone: [number, number, number, number];
@@ -71,7 +76,7 @@ export class MapSystemComponent extends ET.SingletonComponent {
 
 
     public onAwake(...args: any[]): void {
-        this.init();
+        this.Init();
         this.addEvent();
     }
 
@@ -88,6 +93,10 @@ export class MapSystemComponent extends ET.SingletonComponent {
 
     public CreateAllMapUnit() {
         for (let i = 0; i < GameServiceConfig.GAME_MAX_PLAYER; i++) {
+            if (!PlayerResource.IsValidPlayer(i)) {
+                continue;
+            }
+            let playerroot = GGameScene.GetPlayer(i)
             let f_v = this.PlayerTpDoorPoint[i];
             let t_v = this.BaseTpDoorPoint[i];
             let forvard = this.BaseVForwardPoint[i];
@@ -95,6 +104,25 @@ export class MapSystemComponent extends ET.SingletonComponent {
             this.CreatePortal(t_v, f_v, this.BaseVForwardPoint[i], "base_" + i, DOTATeam_t.DOTA_TEAM_BADGUYS);
             // let baoxiang = BaseNpc_Plus.CreateUnitByName("unit_base_baoxiang", this.BaseBaoXiangPoint[i], null, true, DOTATeam_t.DOTA_TEAM_GOODGUYS);
             // baoxiang.SetForwardVector(forvard);
+            this.AllChessGirdEntity[i + ""] = {};
+            for (let x = 0; x < ChessControlConfig.Gird_Max_X; x++) {
+                this.AllChessGirdEntity[i + ""][x + ""] = {};
+                for (let y = 1; y <= ChessControlConfig.Gird_Max_Y; y++) {
+                    let v = GChessControlSystem.GetInstance().GetBoardGirdVector3Plus(Vector(x, y, i));
+                    let entity = SpawnEntityFromTableSynchronous("prop_dynamic", {
+                        model: y <= 3 ? "maps/journey_assets/props/teams/logo_radiant_journey_small.vmdl" :
+                            "maps/journey_assets/props/teams/logo_dire_journey_small.vmdl",
+                    }) as CBaseModelEntity;
+                    entity.SetModelScale(1.5)
+                    entity.SetAbsOrigin(v + Vector(0, 0, 120) as Vector);
+                    this.AllChessGirdEntity[i + ""][x + ""][y + ""] = entity;
+                }
+
+            }
+
+            // "models/props_teams/logo_radiant_small.vmdl"
+            // "maps/journey_assets/props/teams/logo_radiant_journey_small.vmdl"
+            // "maps/journey_assets/props/teams/logo_dire_journey_small.vmdl"
         }
     }
     CreatePortal(vPortalPosition: Vector, vTargetPosition: Vector, vForward: Vector, sPortalName: string, team: DOTATeam_t = DOTATeam_t.DOTA_TEAM_GOODGUYS, bHasArrow: boolean = false) {
@@ -108,6 +136,103 @@ export class MapSystemComponent extends ET.SingletonComponent {
             })
         );
         return hPortal;
+    }
+
+    /**
+     * 修改到达目标点的路径
+     * @param toPos 
+     * @returns 
+     */
+    ChangeGirdPathToEgg(toPos: Vector) {
+        const playerid = toPos.z;
+        let startleftx = 0;
+        let startlefty = 3;
+        let vleftlist: ChessVector[] = [
+            new ChessVector(2, ChessControlConfig.Gird_Max_Y, playerid),
+            new ChessVector(1, ChessControlConfig.Gird_Max_Y, playerid),
+        ];
+        for (let y = ChessControlConfig.Gird_Max_Y; y >= startlefty; y--) {
+            vleftlist.push(new ChessVector(startleftx, y, playerid));
+        }
+
+        while (startleftx != toPos.x || startlefty != toPos.y) {
+            if (startleftx < toPos.x && (startlefty == toPos.y || RollPercentage(50))) {
+                startleftx++;
+                vleftlist.push(new ChessVector(startleftx, startlefty, playerid));
+                continue;
+            }
+            if (startlefty > toPos.y) {
+                startlefty--;
+                vleftlist.push(new ChessVector(startleftx, startlefty, playerid));
+            }
+        }
+        let startrightx = 7;
+        let startrighty = 3;
+        let vrightlist: ChessVector[] = [
+            new ChessVector(5, ChessControlConfig.Gird_Max_Y, playerid),
+            new ChessVector(6, ChessControlConfig.Gird_Max_Y, playerid),
+        ];
+        for (let y = ChessControlConfig.Gird_Max_Y; y >= startrighty; y--) {
+            vrightlist.push(new ChessVector(startrightx, y, playerid));
+        }
+        while (startrightx != toPos.x || startrighty != toPos.y) {
+            if (startrightx > toPos.x && (startrighty == toPos.y || RollPercentage(50))) {
+                startrightx--;
+                vrightlist.push(new ChessVector(startrightx, startrighty, playerid));
+                continue;
+            }
+            if (startrighty > toPos.y) {
+                startrighty--;
+                vrightlist.push(new ChessVector(startrightx, startrighty, playerid));
+            }
+        }
+        let allgird = this.AllChessGirdEntity[playerid + ""];
+        for (let x in allgird) {
+            for (let y of [1, 2, 3]) {
+                let entity = allgird[x][y + ""];
+                entity && entity.SetModel("maps/journey_assets/props/teams/logo_radiant_journey_small.vmdl");
+                entity && entity.SetForwardVector(Vector(0, 1, 0));
+            }
+        }
+        let vlist: ChessVector[] = [].concat(vleftlist, vrightlist);
+        for (let i = 0; i < vlist.length; i++) {
+            let v = vlist[i];
+            let entity = allgird[v.x + ""][v.y + ""];
+            if (entity) {
+                if (v.x == toPos.x && v.y == toPos.y) {
+                    entity.SetForwardVector(Vector(0, -1, 0));
+                    entity.SetModel("models/props_teams/logo_radiant_newyear_small.vmdl");
+                }
+                else {
+                    entity.SetModel("models/props_teams/logo_radiant_small.vmdl");
+                }
+            }
+            if (i < vlist.length - 1) {
+                if (v.x == toPos.x && v.y == toPos.y) { }
+                else {
+                    let v_next = vlist[i + 1];
+                    if (v_next.x == v.x) {
+                        if (v_next.y < v.y) {
+                            entity.SetForwardVector(Vector(0, 1, 0));
+                        }
+                        else {
+                            entity.SetForwardVector(Vector(0, -1, 0));
+                        }
+                    }
+                    else if (v_next.y == v.y) {
+                        if (v_next.x < v.x) {
+                            entity.SetForwardVector(Vector(1, 0, 0));
+                        }
+                        else {
+                            entity.SetForwardVector(Vector(-1, 0, 0));
+                        }
+                    }
+                }
+
+            }
+        }
+        return [vleftlist, vrightlist];
+
     }
 }
 declare global {

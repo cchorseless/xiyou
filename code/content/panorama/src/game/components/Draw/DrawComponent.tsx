@@ -1,8 +1,10 @@
 import { DrawConfig } from "../../../../../scripts/tscripts/shared/DrawConfig";
 import { ET } from "../../../../../scripts/tscripts/shared/lib/Entity";
+import { FuncHelper } from "../../../helper/FuncHelper";
 import { NetHelper } from "../../../helper/NetHelper";
-import { TipsHelper } from "../../../helper/TipsHelper";
+import { CCDrawArtifactPanel } from "../../../view/Draw/CCDrawArtifactPanel";
 import { CCDrawCardPanel } from "../../../view/Draw/CCDrawCardPanel";
+import { CCDrawEquipPanel } from "../../../view/Draw/CCDrawEquipPanel";
 import { CCMainPanel } from "../../../view/MainPanel/CCMainPanel";
 
 /**抽卡 */
@@ -19,12 +21,31 @@ export class DrawComponent extends ET.Component {
     tLockChess: { [k: string]: string } = {}
     startListen() {
         // 监听服务器数据推送
-        NetHelper.ListenOnLua(DrawConfig.EProtocol.DrawCardResult,
+        NetHelper.ListenOnLua(DrawConfig.EProtocol.DrawCardNotice,
             GHandler.create(this, (event: CLIENT_DATA<ArrayLikeObject<string>>) => {
                 if (event.state) {
                     CCDrawCardPanel.GetInstance()?.close();
                     let card = Array<string>().concat(this.tLastCards);
                     CCMainPanel.GetInstance()?.addOnlyPanel(CCDrawCardPanel, { cards: card })
+                }
+            }));
+
+        NetHelper.ListenOnLua(DrawConfig.EProtocol.DrawArtifactNotice,
+            GHandler.create(this, (event: CLIENT_DATA<ArrayLikeObject<string>>) => {
+                if (event.state) {
+                    CCDrawArtifactPanel.GetInstance()?.close();
+                    let card = FuncHelper.toArray(event.data!)
+                    GLogHelper.print("抽到神器", card)
+                    CCMainPanel.GetInstance()?.addOnlyPanel(CCDrawArtifactPanel, { cards: card })
+                }
+            }));
+        NetHelper.ListenOnLua(DrawConfig.EProtocol.DrawEquipNotice,
+            GHandler.create(this, (event: CLIENT_DATA<ArrayLikeObject<string>>) => {
+                if (event.state) {
+                    CCDrawEquipPanel.GetInstance()?.close();
+                    let card = FuncHelper.toArray(event.data!)
+                    GLogHelper.print("抽到装备", card)
+                    CCMainPanel.GetInstance()?.addOnlyPanel(CCDrawEquipPanel, { cards: card })
                 }
             }));
     }
@@ -43,9 +64,6 @@ export class DrawComponent extends ET.Component {
             itemName: sTowerName,
             b2Public: b2Public,
         });
-        if (!cbmsg.state && cbmsg.message) {
-            TipsHelper.showErrorMessage(cbmsg.message);
-        }
         return cbmsg.state!;
     }
     WantedChess(itemname: string, isadd: boolean) {
