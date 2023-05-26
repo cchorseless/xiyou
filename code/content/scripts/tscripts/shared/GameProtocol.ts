@@ -47,6 +47,10 @@ export module GameProtocol {
         /**添加机器人 */
         static readonly req_addBot = "/req_addBot";
         //#endregion DEBUG
+        /**道具锁定 */
+        static readonly req_ITEM_LOCK_CHANGE = "req_ITEM_LOCK_CHANGE";
+        /**道具拆分 */
+        static readonly req_ITEM_DisassembleItem = "req_ITEM_DisassembleItem";
         /**道具位置改变 */
         static readonly req_ITEM_SLOT_CHANGE = "req_ITEM_SLOT_CHANGE";
         /**道具给他人 */

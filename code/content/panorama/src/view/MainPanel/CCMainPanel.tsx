@@ -153,7 +153,7 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
     //#region tooltips
     private CustomToolTip: BaseEasyPureComponent | null;
     private HideToolTipFunc: (() => void) | null;
-    private UpdateToolTipPos(bindpanel: Panel, layoutleftRight: boolean) {
+    private UpdateToolTipPos(bindpanel: Panel, layoutleftRight: boolean, hittest = false) {
         const offset = 20;
         let pos = this.stagePos(bindpanel);
         let panelsize = CSSHelper.getPanelSize(bindpanel);
@@ -166,8 +166,8 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
         let istop = pos.y <= windowheight / 2;
         let setPosFunc = () => {
             let dialogpanel = this.CustomToolTip!.__root__.current!;
-            dialogpanel.hittest = false;
-            dialogpanel.hittestchildren = false;
+            dialogpanel.hittest = hittest;
+            dialogpanel.hittestchildren = hittest;
             let posdialog = { x: 0, y: 0 };
             let size = CSSHelper.getPanelSize(dialogpanel);
             if (dialogpanel.IsSizeValid()) {
@@ -225,7 +225,7 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
         }), true);
     }
     /**显示tooltip弹窗 */
-    public async ShowCustomToolTip<M extends NodePropsData, T extends typeof CCPanel<M>>(bindpanel: Panel, dialoginfo: dialogTooltipInfo<T, any>) {
+    public async ShowCustomToolTip<M extends NodePropsData, T extends typeof CCPanel<M>>(bindpanel: Panel, dialoginfo: dialogTooltipInfo<T, any>, hittest = false) {
         if (bindpanel == null || !bindpanel.IsValid()) { return };
         if (dialoginfo.cls == null) { return };
         let tipTypeClass = dialoginfo.cls;
@@ -241,7 +241,7 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
         }
         this.HideToolTip();
         this.CustomToolTip = newtip;
-        this.UpdateToolTipPos(bindpanel, layoutleftRight);
+        this.UpdateToolTipPos(bindpanel, layoutleftRight, hittest);
         this.HideToolTipFunc = () => {
             isinrange = false;
             bindpanel.style.brightness = brightness + "";

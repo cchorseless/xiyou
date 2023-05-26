@@ -5,6 +5,7 @@ import { PublicBagConfig } from "../../../../../scripts/tscripts/shared/PublicBa
 import { CSSHelper } from "../../../helper/CSSHelper";
 import { FuncHelper } from "../../../helper/FuncHelper";
 import { TipsHelper } from "../../../helper/TipsHelper";
+import { CCContextMenuDialog } from "../../Common/CCContextMenuDialog";
 import { CCMainPanel } from "../../MainPanel/CCMainPanel";
 import { CCItemImage } from "../CCItem/CCItemImage";
 import { CCItemInfoDialog } from "../CCItem/CCItemInfoDialog";
@@ -306,7 +307,7 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
         pSelf.SetHasClass("show_level_up_tab", pSelf.BHasClass("could_level_up"));
         pSelf.SetHasClass("show_level_up_frame", Game.IsInAbilityLearnMode() && pSelf.BHasClass("could_level_up"));
         pSelf.SetHasClass("is_active", bIsValid && iActiveAbility == overrideentityindex);
-        pSelf.SetHasClass("combine_locked", bIsValid && Items.IsItemLocked(overrideentityindex));
+        pSelf.SetHasClass("combine_locked", bIsValid && Items.IsCombineLocked(overrideentityindex));
         pSelf.SetHasClass("ability_phase", bInAbilityPhase);
         pSelf.SetHasClass("in_cooldown", !bCooldownReady);
         pSelf.SetHasClass("cooldown_ready", bCooldownReady);
@@ -429,7 +430,7 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
         dialogVariables = Object.assign({}, dialogVariables);
         this.UpdateState({ "dialogVariables": dialogVariables });
     }
-    private onbtn_leftclick() {
+    private onbtn_leftclick(p: Panel) {
         const overrideentityindex = this.props.overrideentityindex!;
         if (overrideentityindex != -1 && Entities.IsValidEntity(overrideentityindex)) {
             if (GameUI.IsAltDown()) {
@@ -470,79 +471,94 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
             this.intervalRefresh();
         }
     }
-    private onbtn_rightclick() {
+    private onbtn_rightclick(p: Panel) {
         const overrideentityindex = this.props.overrideentityindex!;
         const draggable = this.props.draggable!;
         const slot = this.props.slot!;
         if (overrideentityindex != -1 && Entities.IsValidEntity(overrideentityindex)) {
             if (Abilities.IsItem(overrideentityindex)) {
-                if (!$.GetContextPanel().BHasClass("dragging") && overrideentityindex != -1 && Entities.IsValidEntity(overrideentityindex)) {
-                    let iCasterIndex = Abilities.GetCaster(overrideentityindex);
-                    let sItemName = Abilities.GetAbilityName(overrideentityindex);
-                    let bSlotInStash = slot >= PublicBagConfig.DOTA_ITEM_STASH_MIN;
-                    let bOwned = Entities.GetPlayerOwnerID(iCasterIndex) == Players.GetLocalPlayer();
-                    let bControllable = Entities.IsControllableByPlayer(iCasterIndex, Players.GetLocalPlayer());
-                    let bSellable = Items.IsSellable(overrideentityindex) && Items.CanBeSoldByLocalPlayer(overrideentityindex);
-                    let bDisassemble = Items.IsDisassemblable(overrideentityindex) && bControllable && !bSlotInStash;
-                    let bAlertable = Items.IsAlertableItem(overrideentityindex);
-                    let bLocked = Items.IsItemLocked(overrideentityindex);
-                    let bAutocast = Abilities.IsAutocast(overrideentityindex);
-                    // let bShowInShop = Items.IsPurchasable(overrideentityindex);
-                    let bShowInShop = false;
-                    // let bMoveToStash = !bSlotInStash && bControllable;
-                    // let bDropFromStash = bSlotInStash && bControllable;
-                    let bMoveToStash = false;
-                    let bDropFromStash = false;
-                    let bMoveToTraining = true;
-                    // 铸造相关
-                    // let castingInfo = CustomNetTables.GetTableValue("common", "casting_info") || {};
-                    // let castingName = "";
-                    // for (const itemName in castingInfo) {
-                    // 	for (const _key in castingInfo[itemName]) {
-                    // 		if (castingInfo[itemName][_key] == sItemName) {
-                    // 			castingName = itemName;
-                    // 			break;
-                    // 		}
-                    // 	}
-                    // }
-                    if (!draggable) {
-                        return;
-                    }
-
-                    if (!bControllable) {
-                        return;
-                    }
-
-                    if (!bOwned) {
-                        return;
-                    }
-
-                    if (!bSellable && !bDisassemble && !bShowInShop && !bDropFromStash && !bAlertable && !bMoveToStash && !bAutocast && !bMoveToTraining) {
-                        return;
-                    }
-                    // let pContextMenu = $.CreatePanel("ContextMenuScript", self, "");
-                    // pContextMenu.AddClass("ContextMenu_NoArrow");
-                    // pContextMenu.AddClass("ContextMenu_NoBorder");
-
-                    // let pContentsPanel = pContextMenu.GetContentsPanel() as InventoryItemContextMenu;
-                    // pContentsPanel.BLoadLayout("file://{resources}/layout/custom_game/context_menu/context_menu_inventory_item/context_menu_inventory_item.xml", false, false);
-                    // pContentsPanel.SetItem(overrideentityindex, self);
-                    // pContentsPanel.SetHasClass("bSellable", bSellable);
-                    // pContentsPanel.SetHasClass("bDisassemble", bDisassemble);
-                    // pContentsPanel.SetHasClass("bShowInShop", bShowInShop);
-                    // pContentsPanel.SetHasClass("bDropFromStash", bDropFromStash);
-                    // pContentsPanel.SetHasClass("bAlertable", bAlertable);
-                    // pContentsPanel.SetHasClass("bMoveToStash", bMoveToStash);
-                    // pContentsPanel.SetHasClass("bLocked", bLocked);
-                    // // pContentsPanel.SetHasClass("bCasting", castingName != "");
-                    // pContentsPanel.SetHasClass("bAutocast", bAutocast);
-                    // pContentsPanel.SetHasClass("bMoveToTraining", bMoveToTraining);
-                    // pContentsPanel.SetHasClass("bSacrifice", Items.GetItemRarity(Abilities.GetAbilityName(overrideentityindex)) == 6);
-                    // pContentsPanel.SetDialogVariable("itemname", $.Localize("DOTA_Tooltip_ability_" + castingName));
-                    // if (castingName != "") {
-                    //   this.updateDialogVariables("int_value", Number(GameUI.CustomUIConfig().ItemsKv[castingName].CastingCrystalCost || 0));
-                    // }
+                let iCasterIndex = Abilities.GetCaster(overrideentityindex);
+                let sItemName = Abilities.GetAbilityName(overrideentityindex);
+                let bSlotInStash = slot >= PublicBagConfig.DOTA_ITEM_STASH_MIN;
+                let bOwned = Entities.GetPlayerOwnerID(iCasterIndex) == Players.GetLocalPlayer();
+                let bControllable = Entities.IsControllableByPlayer(iCasterIndex, Players.GetLocalPlayer());
+                let bSellable = Items.IsSellable(overrideentityindex) && Items.CanBeSoldByLocalPlayer(overrideentityindex);
+                let bDisassemble = Items.IsDisassemblable(overrideentityindex) && bControllable && !bSlotInStash;
+                let bAlertable = Items.IsAlertableItem(overrideentityindex);
+                let bLocked = Items.IsCombineLocked(overrideentityindex);
+                let bAutocast = Abilities.IsAutocast(overrideentityindex);
+                let bShowInShop = Items.IsPurchasable(overrideentityindex);
+                let bCombinable = Items.IsCombinable(overrideentityindex);
+                let bMoveToStash = !bSlotInStash && bControllable;
+                let bDropFromStash = bSlotInStash && bControllable;
+                let bMoveToTraining = true;
+                // 铸造相关
+                // let castingInfo = CustomNetTables.GetTableValue("common", "casting_info") || {};
+                // let castingName = "";
+                // for (const itemName in castingInfo) {
+                // 	for (const _key in castingInfo[itemName]) {
+                // 		if (castingInfo[itemName][_key] == sItemName) {
+                // 			castingName = itemName;
+                // 			break;
+                // 		}
+                // 	}
+                // }
+                if (!draggable) {
+                    return;
                 }
+                if (!bControllable) {
+                    return;
+                }
+                if (!bOwned) {
+                    return;
+                }
+                if (!bSellable && !bDisassemble && !bShowInShop && !bDropFromStash && !bAlertable && !bMoveToStash && !bAutocast && !bMoveToTraining) {
+                    return;
+                }
+                const buttonList: string[] = [];
+                if (bSellable) {
+                    buttonList.push("Sell");
+                }
+                if (bDisassemble) {
+                    buttonList.push("Disassemble");
+                }
+                if (bLocked) {
+                    buttonList.push("UnLock");
+                }
+                if (bCombinable && !bLocked) {
+                    buttonList.push("Lock");
+                }
+                CCMainPanel.GetInstance()!.ShowCustomToolTip(p, {
+                    cls: CCContextMenuDialog,
+                    props: {
+                        entityIndex: overrideentityindex,
+                        buttonList: buttonList
+                    },
+                    posRight: true,
+                }, true)
+
+                // let pContextMenu = $.CreatePanel("ContextMenuScript", self, "");
+                // pContextMenu.AddClass("ContextMenu_NoArrow");
+                // pContextMenu.AddClass("ContextMenu_NoBorder");
+
+                // let pContentsPanel = pContextMenu.GetContentsPanel() as InventoryItemContextMenu;
+                // pContentsPanel.BLoadLayout("file://{resources}/layout/custom_game/context_menu/context_menu_inventory_item/context_menu_inventory_item.xml", false, false);
+                // pContentsPanel.SetItem(overrideentityindex, self);
+                // pContentsPanel.SetHasClass("bSellable", bSellable);
+                // pContentsPanel.SetHasClass("bDisassemble", bDisassemble);
+                // pContentsPanel.SetHasClass("bShowInShop", bShowInShop);
+                // pContentsPanel.SetHasClass("bDropFromStash", bDropFromStash);
+                // pContentsPanel.SetHasClass("bAlertable", bAlertable);
+                // pContentsPanel.SetHasClass("bMoveToStash", bMoveToStash);
+                // pContentsPanel.SetHasClass("bLocked", bLocked);
+                // // pContentsPanel.SetHasClass("bCasting", castingName != "");
+                // pContentsPanel.SetHasClass("bAutocast", bAutocast);
+                // pContentsPanel.SetHasClass("bMoveToTraining", bMoveToTraining);
+                // pContentsPanel.SetHasClass("bSacrifice", Items.GetItemRarity(Abilities.GetAbilityName(overrideentityindex)) == 6);
+                // pContentsPanel.SetDialogVariable("itemname", $.Localize("DOTA_Tooltip_ability_" + castingName));
+                // if (castingName != "") {
+                //   this.updateDialogVariables("int_value", Number(GameUI.CustomUIConfig().ItemsKv[castingName].CastingCrystalCost || 0));
+                // }
             }
             if (Abilities.IsAutocast(overrideentityindex)) {
                 Game.PrepareUnitOrders({
@@ -638,8 +654,8 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
                             </Panel>
                             <Panel id="ButtonSize" >
                                 <Panel id="AbilityButton" draggable={draggable} ref={this.AbilityButton} style={{ tooltipPosition: "top" }}
-                                    onactivate={(self) => { this.onbtn_leftclick() }}
-                                    oncontextmenu={(self) => this.onbtn_rightclick()}
+                                    onactivate={(self) => { this.onbtn_leftclick(self) }}
+                                    oncontextmenu={(self) => this.onbtn_rightclick(self)}
                                     onmouseover={(self) => this.onbtn_moveover(self)}
                                     onmouseout={(self) => this.onbtn_moveout(self)}
                                 >

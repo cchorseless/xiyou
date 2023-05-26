@@ -3,6 +3,7 @@
 #base  "building/building_item_card.kv"
 #base  "items/imba_items.kv"
 #base  "items/artifact_items.kv"
+#base  "items/imba_item_recipes.kv"
 "DOTAAbilities" {
 
 }

@@ -995,6 +995,22 @@ declare global {
          * 尝试在背包外使用，返回使用后的物品
          */
         UseOutOfInventory(isInventory?: boolean): IBaseItem_Plus | null;
+        /**
+         * @Both
+         * 是否是合成物品
+         */
+        IsCombinable(): boolean;
+        /**
+         * @Both
+         * 是否是合成锁定的
+         */
+        IsCombineLocked(): boolean;
+        /**
+         * @Server
+         * @param isLock 
+         * 设置合成锁定，用这个，不用SetCombineLocked
+         */
+        SetCombineLockedPlus(isLock: boolean): void;
     }
 }
 
@@ -1005,6 +1021,10 @@ CBaseItem.IsValidItem = function () {
 }
 CBaseItem.IsItemBlank = function () {
     return IsValid(this) && this.GetAbilityName() == "item_blank";
+}
+
+CBaseItem.IsDisassemblable = function () {
+    return false;
 }
 if (IsServer()) {
     CBaseItem.GetParentPlus = function () {
@@ -1049,7 +1069,20 @@ if (IsServer()) {
     CBaseItem.UseOutOfInventory = function (isInventory: boolean) {
         return this as any as IBaseItem_Plus;
     }
+    CBaseItem.SetCombineLockedPlus = function (isLock: boolean) {
+        this.SetCombineLocked(isLock);
+        NetTablesHelper.SetDotaEntityData(this.GetEntityIndex(), { "isLock": isLock }, "iteminfo");
+    }
 
+}
+else {
+    CBaseItem.IsCombineLocked = function () {
+        let info = NetTablesHelper.GetDotaEntityData(this.GetEntityIndex(), "iteminfo") || { isLock: false };
+        return GToBoolean(info.isLock);
+    }
+    CBaseItem.IsCombinable = function () {
+        return false;
+    }
 }
 
 
@@ -2815,9 +2848,12 @@ if (IsServer()) {
             hItem = this.CreateOneItem(itemname);
         }
         hItem.SetPurchaseTime(0);
-        if (this.IsInventoryFull()) {
+        let addItem = this.AddItem(hItem) as IBaseItem_Plus;
+        // 如果添加失败，就扔在地上
+        if (addItem.GetItemSlot() > DOTAScriptInventorySlot_t.DOTA_ITEM_SLOT_9) {
             hItem.SetOwner(this);
             hItem.SetParent(this, "");
+            this.TakeItem(hItem);
             let hContainer = hItem.CreateItemOnPositionRandom(this.GetAbsOrigin());
             if (hContainer.GetModelName() == "models/props_gameplay/neutral_box.vmdl") {
                 let Rarity = KVHelper.GetItemRarity(hItem.GetAbilityName())
@@ -2825,10 +2861,7 @@ if (IsServer()) {
                 hContainer.SetMaterialGroup(MaterialGroup[Rarity] + "")
             }
         }
-        else {
-            this.AddItem(hItem);
-        }
-        return hItem;
+        return addItem;
     }
 
     BaseNPC.AddEmptyItemInSlot = function (slot: number) {

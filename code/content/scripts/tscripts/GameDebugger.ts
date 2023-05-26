@@ -3,7 +3,6 @@ import { BotHelper } from "./helper/BotHelper";
 import { EventHelper } from "./helper/EventHelper";
 import { LogHelper } from "./helper/LogHelper";
 import { BaseNpc_Plus } from "./npc/entityPlus/BaseNpc_Plus";
-import { ActiveRootItem } from "./npc/items/ActiveRootItem";
 import { modifier_dummy_damage } from "./npc/modifier/battle/modifier_dummy_damage";
 import { GameEnum } from "./shared/GameEnum";
 import { GameProtocol } from "./shared/GameProtocol";
@@ -153,7 +152,8 @@ export class GameDebugger extends SingletonClass {
             let { entityindex, itemname } = e.data;
             let unit = EntIndexToHScript(entityindex) as IBaseNpc_Plus;
             if (unit && itemname) {
-                ActiveRootItem.CreateOneToUnit(unit, itemname);
+                let item = unit.AddItemOrInGround(itemname);
+                GLogHelper.print("添加物品:" + itemname + "  ", item.IsRecipeGenerated());
             }
         }));
         EventHelper.addProtocolEvent(GameProtocol.Protocol.req_DebugAddAbility, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
@@ -292,10 +292,10 @@ export class GameDebugger extends SingletonClass {
             case "-test":
                 break;
             case "-additem":
-                ActiveRootItem.CreateOneToUnit(hero, tokens[1]);
+                hero.AddItemOrInGround(tokens[1]);
                 break;
             case "-b":
-                ActiveRootItem.CreateOneToUnit(hero, "item_building_hero_" + tokens[1]);
+                hero.AddItemOrInGround("item_building_hero_" + tokens[1]);
                 break;
         }
     }

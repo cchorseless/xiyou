@@ -4,6 +4,10 @@ import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 // 治疗指环
 @registerAbility()
 export class item_imba_ring_of_health extends BaseItem_Plus {
+
+    IsCombinable(): boolean {
+        return true;
+    }
     GetIntrinsicModifierName(): string {
         return "modifier_item_imba_ring_of_health";
     }

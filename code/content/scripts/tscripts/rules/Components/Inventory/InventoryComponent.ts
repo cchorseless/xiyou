@@ -17,7 +17,13 @@ export class InventoryComponent extends ET.Component implements IRoundStateCallb
             }
         }
     }
-    OnRound_Start(round?: ERoundBoard): void { }
+    OnRound_Start(round?: ERoundBoard): void {
+        let npc = this.GetDomain<IBaseNpc_Plus>();
+        let item = npc.GetItemInSlot(DOTAScriptInventorySlot_t.DOTA_ITEM_SLOT_1)
+        if (item) {
+            item.SetCombineLocked(true);
+        }
+    }
     OnRound_WaitingEnd(): void { };
     // 战吼
     OnRound_Battle() {

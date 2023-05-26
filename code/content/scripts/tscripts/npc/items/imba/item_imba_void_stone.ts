@@ -4,6 +4,9 @@ import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 // 虚无宝石
 @registerAbility()
 export class item_imba_void_stone extends BaseItem_Plus {
+    IsCombinable(): boolean {
+        return true;
+    }
     GetIntrinsicModifierName(): string {
         return "modifier_item_imba_void_stone";
     }

@@ -169,6 +169,31 @@ export class GameScene {
         //         }
         //     }
         // }));
+        /**道具锁定 */
+        EventHelper.addProtocolEvent(GameProtocol.Protocol.req_ITEM_LOCK_CHANGE, GHandler.create(this, (event: JS_TO_LUA_DATA) => {
+            if (!event.data || !event.data.entindex) { return }
+            let item = EntIndexToHScript(event.data.entindex) as IBaseItem_Plus;
+            if (IsValid(item)) {
+                if (item.SetCombineLockedPlus) {
+                    let block = GToBoolean(event.data.block);
+                    item.SetCombineLockedPlus(block);
+                    if (!block) {
+                        let unit = item.GetParentPlus();
+                        unit.TakeItem(item);
+                        unit.AddItem(item);
+                    }
+                }
+            }
+        }));
+        /**道具拆分 */
+        EventHelper.addProtocolEvent(GameProtocol.Protocol.req_ITEM_DisassembleItem, GHandler.create(this, (event: JS_TO_LUA_DATA) => {
+            if (!event.data || !event.data.entindex) { return }
+            let item = EntIndexToHScript(event.data.entindex) as IBaseItem_Plus;
+            if (IsValid(item) && item.IsDisassemblable()) {
+                GLogHelper.print("拆分道具", item.GetAbilityName())
+                item.GetParentPlus().DisassembleItem(item);
+            }
+        }));
         // 道具位置改变
         EventHelper.addProtocolEvent(GameProtocol.Protocol.req_ITEM_SLOT_CHANGE, GHandler.create(this, (event: JS_TO_LUA_DATA) => {
             if (!event.data) { return }

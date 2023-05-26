@@ -1107,7 +1107,19 @@ Abilities.GetAbilityJinDuInfo = function (sAbilityName: string | AbilityEntityIn
 
 declare global {
     interface CScriptBindingPR_Items {
-        IsItemLocked(iItemEntIndex: ItemEntityIndex): boolean;
+        /**
+         * 物品是否可以合成
+         * @param iItemIndex 物品实体index
+         */
+        IsCombinable(sItemName: ItemEntityIndex): boolean;
+        /**是否可以拆分 */
+        IsDisassemblable(iItemEntIndex: ItemEntityIndex): boolean;
+        /**设置合成锁定 */
+        SetCombineLocked(iItemEntIndex: ItemEntityIndex, block: boolean): void;
+        /**道具合成锁定 */
+        IsCombineLocked(iItemEntIndex: ItemEntityIndex): boolean;
+        /**拆分道具 */
+        DisassembleItem(iItemEntIndex: ItemEntityIndex): void;
         GetItemValue(sItemName: string, sKeyName: string): string | undefined;
         GetItemCost(sItemName: string): number;
         GetItemRecipes(sItemName: string): string[][];
@@ -1139,11 +1151,7 @@ declare global {
          * @returns 返回物品价格
          */
         GetItemCostLV(sItemName: string, iLevel: number): number;
-        /**
-         * 物品是否可以合成
-         * @param iItemIndex 物品实体index
-         */
-        IsCombinable(sItemName: ItemEntityIndex): boolean;
+
         /**
          * 物品是否可以重铸
          * @param iItemIndex 物品实体index 物品名
@@ -1163,12 +1171,26 @@ declare global {
     }
 
 }
-
-
-Items.IsItemLocked = (iItemEntIndex: ItemEntityIndex) => {
-    return false;
+Items.IsDisassemblable = (iItemEntIndex: ItemEntityIndex) => {
+    if (iItemEntIndex == null || iItemEntIndex == -1) { return false }
+    return Abilities.GetAbilityData(iItemEntIndex, "IsDisassemblable") == "true";
 }
-
+Items.IsCombinable = (iItemEntIndex: ItemEntityIndex) => {
+    if (iItemEntIndex == null || iItemEntIndex == -1) { return false }
+    return Abilities.GetAbilityData(iItemEntIndex, "IsCombinable") == "true";
+}
+Items.SetCombineLocked = (iItemEntIndex: ItemEntityIndex, block: boolean) => {
+    if (iItemEntIndex == null || iItemEntIndex == -1 || !Abilities.IsItem(iItemEntIndex)) { return }
+    NetHelper.SendToLua(GameProtocol.Protocol.req_ITEM_LOCK_CHANGE, { entindex: iItemEntIndex, block: block });
+}
+Items.IsCombineLocked = (iItemEntIndex: ItemEntityIndex) => {
+    if (iItemEntIndex == null || iItemEntIndex == -1) { return false }
+    return Abilities.GetAbilityData(iItemEntIndex, "IsCombineLocked") == "true";
+}
+Items.DisassembleItem = (iItemEntIndex: ItemEntityIndex) => {
+    if (iItemEntIndex == null || iItemEntIndex == -1 || !Abilities.IsItem(iItemEntIndex)) { return }
+    NetHelper.SendToLua(GameProtocol.Protocol.req_ITEM_DisassembleItem, { entindex: iItemEntIndex });
+}
 Items.GetItemValue = (sItemName: string, sKeyName: string) => {
     let tItemKeyValues = KVHelper.KVItems()[sItemName];
     if (tItemKeyValues) {
@@ -1288,22 +1310,7 @@ Items.GetItemCostLV = (sItemName: string, iLevel: number) => {
     }
 }
 
-Items.IsCombinable = (iItemIndex: ItemEntityIndex) => {
-    return false;
-    // const data = CustomNetTables.GetTableValue("common", "artifact");
-    // const tLocalArtifacts = (data && (data[Players.GetLocalPlayer()])) ?? {};
-    // const bCanCombine4Star = (() => {
-    //     for (let i = 0; i < CustomUIConfig.ConfigsKV.artifact.PLAYER_MAX_ARTIFACT_WITH_EXTRA; i++) {
-    //         let itemIndex: ItemEntityIndex | undefined = tLocalArtifacts[i + 1];
-    //         if (itemIndex != undefined && Abilities.GetAbilityName(itemIndex) == "item_artifact_demagicking_maul") {
-    //             return true;
-    //         }
-    //     }
-    // })();
-    // return IsUpgradable(iItemIndex)
-    //     && CustomUIConfig.ItemsKv[Abilities.GetAbilityName(iItemIndex)].Combinable == 1
-    //     && (bCanCombine4Star ? (Abilities.GetLevel(iItemIndex) < 5) : (Abilities.GetLevel(iItemIndex) < 4));
-}
+
 
 // let tRemakeGroups = {};
 // let tRemakeItem2Group = {};

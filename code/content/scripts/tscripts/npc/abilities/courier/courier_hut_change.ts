@@ -6,10 +6,6 @@ import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 @registerAbility()
 export class courier_hut_change extends BaseAbility_Plus {
     CastFilterResultTarget(target: IBaseNpc_Plus) {
-        // if (target.ETRoot == null || !target.ETRoot.AsValid<IBuildingEntityRoot>("BuildingEntityRoot")) {
-        //     this.errorStr = "dota_hud_error_only_can_cast_on_building";
-        //     return UnitFilterResult.UF_FAIL_CUSTOM;
-        // }
         let caster = this.GetCasterPlus();
         if (caster.GetPlayerID() != target.GetPlayerID()) {
             return UnitFilterResult.UF_FAIL_NOT_PLAYER_CONTROLLED;
@@ -57,7 +53,9 @@ export class modifier_courier_hut_change extends BaseModifier_Plus {
 
     towerBase: CBaseModelEntity;
     buff: modifier_courier_hut_change_debuff;
+    atkspeed: number = 0;
     public Init(params?: IModifierTable): void {
+        this.atkspeed = this.GetSpecialValueFor("atkspeed")
         if (IsServer()) {
             this.towerBase = SpawnEntityFromTableSynchronous("prop_dynamic", {
                 model: "models/props_structures/tower_upgrade/tower_upgrade_base.vmdl",
@@ -71,6 +69,11 @@ export class modifier_courier_hut_change extends BaseModifier_Plus {
                 (parent.ETRoot as IBuildingEntityRoot).BuffManagerComp().addRuntimeCloneBuff(modifier_courier_hut_change_debuff.name);
             }
         }
+    }
+
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
+    CC_ATTACKSPEED_BONUS_CONSTANT() {
+        return this.atkspeed
     }
 
     public BeDestroy(): void {
@@ -101,12 +104,18 @@ export class modifier_courier_hut_change_debuff extends BaseModifier_Plus {
     public IsPurgable(): boolean {
         return false
     }
-
+    atk_speed_debuff: number;
     public Init(params?: IModifierTable): void {
+        this.atk_speed_debuff = this.GetSpecialValueFor("atk_speed_debuff")
     }
-
+    GetEffectName(): string {
+        return "particles/units/heroes/hero_bane/bane_enfeeble.vpcf";
+    }
+    GetEffectAttachType(): ParticleAttachment_t {
+        return ParticleAttachment_t.PATTACH_OVERHEAD_FOLLOW;
+    }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
     CC_ATTACKSPEED_BONUS_CONSTANT() {
-        return -50
+        return this.atk_speed_debuff
     }
 }
