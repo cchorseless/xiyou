@@ -5,18 +5,19 @@ import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
+// 静谧之鞋
 @registerAbility()
-export class item_imba_transient_boots extends BaseItem_Plus {
+export class item_imba_tranquil_boots extends BaseItem_Plus {
     public caster: IBaseNpc_Plus;
     public parent: IBaseNpc_Plus;
     public target: IBaseNpc_Plus;
     public duration: number;
     public particle: any;
     GetIntrinsicModifierName(): string {
-        return "modifier_item_imba_transient_boots";
+        return "modifier_item_imba_tranquil_boots";
     }
     GetAbilityTextureName(): string {
-        if (this.GetCasterPlus() && !this.GetCasterPlus().HasModifier("modifier_item_imba_transient_boots_break")) {
+        if (this.GetCasterPlus() && !this.GetCasterPlus().HasModifier("modifier_item_imba_tranquil_boots_break")) {
             return "imba/transient_boots";
         } else {
             return "imba/transient_boots_broken";
@@ -33,13 +34,13 @@ export class item_imba_transient_boots extends BaseItem_Plus {
         this.caster.EmitSound("Item.GlimmerCape.Activate");
         this.particle = ResHelper.CreateParticleEx("particles/items3_fx/glimmer_cape_initial_flash.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.target);
         ParticleManager.ReleaseParticleIndex(this.particle);
-        this.target.AddNewModifier(this.caster, this, "modifier_item_imba_transient_boots_invis", {
+        this.target.AddNewModifier(this.caster, this, "modifier_item_imba_tranquil_boots_invis", {
             duration: this.duration
         });
     }
 }
 @registerModifier()
-export class modifier_item_imba_transient_boots extends BaseModifier_Plus {
+export class modifier_item_imba_tranquil_boots extends BaseModifier_Plus {
     public ability: IBaseItem_Plus;
     public caster: IBaseNpc_Plus;
     public parent: IBaseNpc_Plus;
@@ -89,7 +90,7 @@ export class modifier_item_imba_transient_boots extends BaseModifier_Plus {
     } */
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_UNIQUE)
     CC_GetModifierMoveSpeedBonus_Special_Boots(): number {
-        if (!this.parent.HasModifier("modifier_item_imba_transient_boots_break")) {
+        if (!this.parent.HasModifier("modifier_item_imba_tranquil_boots_break")) {
             return this.bonus_movement_speed;
         } else {
             return this.broken_movement_speed;
@@ -97,7 +98,7 @@ export class modifier_item_imba_transient_boots extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_REGEN_CONSTANT)
     CC_GetModifierConstantHealthRegen(): number {
-        if (!this.parent.HasModifier("modifier_item_imba_transient_boots_break")) {
+        if (!this.parent.HasModifier("modifier_item_imba_tranquil_boots_break")) {
             return this.bonus_health_regen;
         }
     }
@@ -115,14 +116,14 @@ export class modifier_item_imba_transient_boots extends BaseModifier_Plus {
             return;
         }
         if ((keys.attacker == this.parent && keys.target.IsRealUnit()) || keys.target == this.parent) {
-            this.parent.AddNewModifier(this.parent, this.ability, "modifier_item_imba_transient_boots_break", {
+            this.parent.AddNewModifier(this.parent, this.ability, "modifier_item_imba_tranquil_boots_break", {
                 duration: this.break_time * this.ability.GetEffectiveCooldown(this.ability.GetLevel()) / this.ability.GetCooldown(this.ability.GetLevel())
             });
         }
     }
 }
 @registerModifier()
-export class modifier_item_imba_transient_boots_invis extends BaseModifier_Plus {
+export class modifier_item_imba_tranquil_boots_invis extends BaseModifier_Plus {
     public ability: IBaseItem_Plus;
     public caster: IBaseNpc_Plus;
     public parent: IBaseNpc_Plus;
@@ -195,19 +196,19 @@ export class modifier_item_imba_transient_boots_invis extends BaseModifier_Plus 
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_UNIQUE)
     CC_GetModifierMoveSpeedBonus_Special_Boots(): number {
-        if (!this.caster.HasModifier("modifier_item_imba_transient_boots_break") && this.caster != this.parent && this.parent.HasModifier("modifier_generic_invisible")) {
+        if (!this.caster.HasModifier("modifier_item_imba_tranquil_boots_break") && this.caster != this.parent && this.parent.HasModifier("modifier_generic_invisible")) {
             return this.bonus_movement_speed;
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_REGEN_CONSTANT)
     CC_GetModifierConstantHealthRegen(): number {
-        if (!this.caster.HasModifier("modifier_item_imba_transient_boots_break") && this.caster != this.parent && this.parent.HasModifier("modifier_generic_invisible")) {
+        if (!this.caster.HasModifier("modifier_item_imba_tranquil_boots_break") && this.caster != this.parent && this.parent.HasModifier("modifier_generic_invisible")) {
             return this.bonus_health_regen;
         }
     }
 }
 @registerModifier()
-export class modifier_item_imba_transient_boots_break extends BaseModifier_Plus {
+export class modifier_item_imba_tranquil_boots_break extends BaseModifier_Plus {
     IsDebuff(): boolean {
         return true;
     }

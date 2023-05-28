@@ -52,13 +52,11 @@ function SafeDestroyAbility(ability: IBaseAbility_Plus) {
             return;
         }
         ability.__safedestroyed__ = true;
-        ability.__TempData = null;
-        GTimerHelper.ClearAll(ability);
+        ability.ClearSelf();
         if (ability.OnDestroy) {
             ability.OnDestroy();
         }
         ability.Destroy();
-        // UTIL_Remove(ability);
     }
 }
 
@@ -68,8 +66,7 @@ function SafeDestroyItem(item: IBaseItem_Plus) {
             return;
         }
         item.__safedestroyed__ = true;
-        item.__TempData = null;
-        GTimerHelper.ClearAll(item);
+        item.ClearSelf();
         if (item.OnDestroy) {
             item.OnDestroy();
         }
@@ -77,7 +74,6 @@ function SafeDestroyItem(item: IBaseItem_Plus) {
             item.GetContainer().Destroy()
         }
         item.Destroy();
-        // UTIL_Remove(item);
     }
 }
 
@@ -376,7 +372,8 @@ declare global {
          * @both
          */
         TempData<T = any>(): { [k: string]: T };
-
+        /**清除数据 */
+        ClearSelf(): void;
         /**
          * @both
          * 注册特殊键值的替换值
@@ -522,6 +519,18 @@ CBaseAbility.TempData = function () {
         this.__TempData = {};
     }
     return this.__TempData;
+}
+CBaseAbility.ClearSelf = function () {
+    if (IsValid(this)) {
+        if (this.__TempData) {
+            for (let k in this.__TempData) {
+                delete this.__TempData[k];
+            }
+        }
+        this.__TempData = null;
+        NetTablesHelper.ClearDotaEntityData(this.GetEntityIndex());
+        GTimerHelper.ClearAll(this);
+    }
 }
 CBaseAbility.RegAbilitySpecialValueOverride = function (k: string, v: IGHandler<number>) {
     let SpecialValueOverride = this.TempData<{ [k: string]: IGHandler<number> }>().SpecialValueOverride || {};
@@ -1011,6 +1020,12 @@ declare global {
          * 设置合成锁定，用这个，不用SetCombineLocked
          */
         SetCombineLockedPlus(isLock: boolean): void;
+
+        /**
+         * @Server
+         * 拆分道具,返回拆分是否成功
+         */
+        DisassembleItem(): boolean;
     }
 }
 
@@ -1022,10 +1037,19 @@ CBaseItem.IsValidItem = function () {
 CBaseItem.IsItemBlank = function () {
     return IsValid(this) && this.GetAbilityName() == "item_blank";
 }
-
 CBaseItem.IsDisassemblable = function () {
-    return false;
+    let info = KVHelper.KvRecipes[this.GetAbilityName()];
+    return info != null && info.from != null && info.from.length > 0;
 }
+
+CBaseItem.IsCombinable = function () {
+    let info = KVHelper.KvRecipes[this.GetAbilityName()];
+    return info != null && info.to != null && info.to.length > 0;
+}
+
+
+
+
 if (IsServer()) {
     CBaseItem.GetParentPlus = function () {
         return this.GetParent() as IBaseNpc_Plus;
@@ -1073,20 +1097,28 @@ if (IsServer()) {
         this.SetCombineLocked(isLock);
         NetTablesHelper.SetDotaEntityData(this.GetEntityIndex(), { "isLock": isLock }, "iteminfo");
     }
-
+    CBaseItem.DisassembleItem = function () {
+        if (this.IsDisassemblable() && this.IsInInventory()) {
+            let items = KVHelper.KvRecipes[this.GetAbilityName()];
+            if (items) {
+                let parent = this.GetParentPlus();
+                parent.TakeItem(this);
+                SafeDestroyItem(this as any);
+                for (let i = 0; i < items.from.length; i++) {
+                    parent.AddItemOrInGround(items.from[i], true)
+                }
+                return true;
+            }
+        }
+        return false;
+    }
 }
 else {
     CBaseItem.IsCombineLocked = function () {
         let info = NetTablesHelper.GetDotaEntityData(this.GetEntityIndex(), "iteminfo") || { isLock: false };
         return GToBoolean(info.isLock);
     }
-    CBaseItem.IsCombinable = function () {
-        return false;
-    }
 }
-
-
-
 
 
 
@@ -2022,8 +2054,9 @@ declare global {
          * @Server
          * 创建一个物品给单位，如果单位身上没地方放了，就扔在他附近随机位置
          * @param itemname 
+         * @param block 是否锁定合成
          */
-        AddItemOrInGround<T extends IBaseItem_Plus>(itemname: string | IBaseItem_Plus): T;
+        AddItemOrInGround<T extends IBaseItem_Plus>(itemname: string | IBaseItem_Plus, block?: boolean): T;
         /**
          * @Both
          * 背包是否满了
@@ -2841,11 +2874,15 @@ if (IsServer()) {
      * @param hUnit
      * @returns
      */
-    BaseNPC.AddItemOrInGround = function (itemname: string | IBaseItem_Plus) {
+    BaseNPC.AddItemOrInGround = function (itemname: string | IBaseItem_Plus, block = false) {
         if (itemname == null) { return }
         let hItem = itemname as IBaseItem_Plus;
         if (typeof itemname == "string") {
             hItem = this.CreateOneItem(itemname);
+        }
+        if (!IsValid(hItem)) { return }
+        if (block) {
+            hItem.SetCombineLockedPlus(true);
         }
         hItem.SetPurchaseTime(0);
         let addItem = this.AddItem(hItem) as IBaseItem_Plus;

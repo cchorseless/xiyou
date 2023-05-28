@@ -89,6 +89,7 @@ declare namespace courier_abilities {
 "06" :OBJ_4_1 ,
 "07" :OBJ_4_1 ,
 "08" :OBJ_4_1 ,
+"09" :OBJ_4_1 ,
 [k:string] : OBJ_4_1 }
  interface OBJ_4_1 {
 "var_type" :string ,
@@ -105,6 +106,8 @@ declare namespace courier_abilities {
 "crit_min" :string ,
 "crit_max" :string ,
 "gold_pect" :string ,
+"atk_speed" :string ,
+"atk_speed_debuff" :string ,
 "gold_cost" :string ,
 "population_add" :string ,
 "_jindu_max" :string ,
@@ -114,6 +117,7 @@ declare namespace courier_abilities {
 "poolgroupconfig_1" :string ,
 "poolgroupconfig_2" :string ,
 "poolgroupconfig_3" :string ,
+"eggcount" :string ,
 "draw_count" :string ,
 "summon_count_min" :string ,
 "summon_count_max" :string ,
@@ -122,6 +126,8 @@ declare namespace courier_abilities {
 "atk_pect" :string ,
 "atkspeed_pect" :string ,
 "incom_pect" :string ,
+"egg_pect" :string ,
+"egg_count" :string ,
 "gold_interval" :string ,
 "interval" :string ,
 "wood_interval" :string ,

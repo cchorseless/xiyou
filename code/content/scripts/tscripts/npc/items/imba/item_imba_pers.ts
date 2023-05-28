@@ -5,10 +5,6 @@ import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 @registerAbility()
 export class item_imba_pers extends BaseItem_Plus {
 
-    IsCombinable(): boolean {
-        return true;
-    }
-    IsDisassemblable() { return true }
     GetIntrinsicModifierName(): string {
         return "modifier_item_imba_pers";
     }

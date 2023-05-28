@@ -1,14 +1,13 @@
 import React from "react";
 import { CSSHelper } from "../../../helper/CSSHelper";
 import { CCPlayerInfoDialog } from "../../Player/CCPlayerInfoDialog";
-import { CCUnitScepterStatus } from "../../Unit/CCUnitScepterStatus";
 import { CCUnitStatsDialog } from "../../Unit/CCUnitStatsDialog";
 import { CCAbilityList2 } from "../CCAbility/CCAbilityList";
 import { CCInventory } from "../CCInventory/CCInventory";
 import { CCPanel } from "../CCPanel/CCPanel";
-import { CCTalentDisplayItem } from "../CCTalentBranch/CCTalentDisplayItem";
 import { CCBuffList } from "./CCBuffList";
 import "./CCDacBoard.less";
+import { CCHealthExp } from "./CCHealthExp";
 import { CCHealthMana } from "./CCHealthMana";
 import { CCPortraitGroup } from "./CCPortraitGroup";
 
@@ -33,8 +32,9 @@ export class CCDacBoard extends CCPanel<ICCDacBoard> {
         if (!this.__root___isValid) {
             return this.defaultRender("CC_DacBoardPanel");
         }
+        const IsCustomCourier = Entities.IsCustomCourier(this.props.CurSelectUnit);
         const isShowTalent = GJSONConfig.BuildingLevelUpConfig.get(Entities.GetUnitName(this.props.CurSelectUnit)) != null;
-        const tips = (Entities.IsCustomCourier(this.props.CurSelectUnit) || Entities.IsFakerCourier(this.props.CurSelectUnit)) ?
+        const tips = (IsCustomCourier || Entities.IsFakerCourier(this.props.CurSelectUnit)) ?
             { cls: CCPlayerInfoDialog, posRight: false, props: { Playerid: Entities.GetPlayerOwnerID(this.props.CurSelectUnit), isFaker: Entities.IsFakerCourier(this.props.CurSelectUnit) } } :
             { cls: CCUnitStatsDialog, posRight: false };
         return (
@@ -47,11 +47,16 @@ export class CCDacBoard extends CCPanel<ICCDacBoard> {
                     </Panel>
                     <CCPanel id="DacBoardCenter" hittest={false}>
                         <CCPanel flowChildren="right" hittest={false} verticalAlign="bottom" marginBottom={"60px"} >
-                            {isShowTalent && <CCTalentDisplayItem CurSelectUnit={this.props.CurSelectUnit} />}
+                            {/* {isShowTalent && <CCTalentDisplayItem CurSelectUnit={this.props.CurSelectUnit} />} */}
                             <CCAbilityList2 CurSelectUnit={this.props.CurSelectUnit} horizontalAlign={"center"} verticalAlign="center" />
-                            {isShowTalent && <CCUnitScepterStatus CurSelectUnit={this.props.CurSelectUnit} />}
+                            {/* {isShowTalent && <CCUnitScepterStatus CurSelectUnit={this.props.CurSelectUnit} />} */}
                         </CCPanel>
-                        <CCHealthMana verticalAlign="bottom" marginLeft={"5px"} marginTop={"5px"} marginBottom={"-5px"} />
+                        {
+                            IsCustomCourier ?
+                                <CCHealthExp entityIndex={this.props.CurSelectUnit} align="center bottom" marginBottom={"5px"} />
+                                :
+                                <CCHealthMana entityIndex={this.props.CurSelectUnit} align="center bottom" marginBottom={"5px"} />
+                        }
                     </CCPanel>
                     <Panel id="DacBoardRight" hittest={false}>
                         <CCInventory verticalAlign="bottom" marginBottom={"0px"} />

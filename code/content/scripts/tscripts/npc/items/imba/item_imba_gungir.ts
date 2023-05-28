@@ -6,16 +6,16 @@ import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifierMotionHorizontal_Plus, BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
-// 自定义
+// 缚灵索
 @registerAbility()
-export class item_imba_gungnir extends BaseItem_Plus {
+export class item_imba_gungir extends BaseItem_Plus {
     GetIntrinsicModifierName(): string {
         this.AddTimer(FrameTime(), () => {
-            for (const [_, modifier] of GameFunc.iPair(this.GetParentPlus().FindAllModifiersByName("modifier_item_imba_gungnir"))) {
+            for (const [_, modifier] of GameFunc.iPair(this.GetParentPlus().FindAllModifiersByName("modifier_item_imba_gungir"))) {
                 modifier.SetStackCount(_);
             }
         });
-        return "modifier_item_imba_gungnir";
+        return "modifier_item_imba_gungir";
     }
     OnSpellStart(): void {
         if (!IsServer()) {
@@ -27,7 +27,7 @@ export class item_imba_gungnir extends BaseItem_Plus {
         let duration = ability.GetSpecialValueFor("duration");
         if (caster.GetTeamNumber() == target.GetTeamNumber()) {
             EmitSoundOn("DOTA_Item.ForceStaff.Activate", target);
-            target.AddNewModifier(caster, ability, "modifier_item_imba_gungnir_force_ally", {
+            target.AddNewModifier(caster, ability, "modifier_item_imba_gungir_force_ally", {
                 duration: duration
             });
         } else {
@@ -35,23 +35,23 @@ export class item_imba_gungnir extends BaseItem_Plus {
                 return undefined;
             }
             if (caster.IsRangedAttacker()) {
-                target.AddNewModifier(caster, ability, "modifier_item_imba_gungnir_force_enemy_ranged", {
+                target.AddNewModifier(caster, ability, "modifier_item_imba_gungir_force_enemy_ranged", {
                     duration: duration
                 });
-                caster.AddNewModifier(target, ability, "modifier_item_imba_gungnir_force_self_ranged", {
+                caster.AddNewModifier(target, ability, "modifier_item_imba_gungir_force_self_ranged", {
                     duration: duration
                 });
             } else {
-                target.AddNewModifier(caster, ability, "modifier_item_imba_gungnir_force_enemy_melee", {
+                target.AddNewModifier(caster, ability, "modifier_item_imba_gungir_force_enemy_melee", {
                     duration: duration
                 });
-                caster.AddNewModifier(target, ability, "modifier_item_imba_gungnir_force_self_melee", {
+                caster.AddNewModifier(target, ability, "modifier_item_imba_gungir_force_self_melee", {
                     duration: duration
                 });
             }
-            let buff = caster.AddNewModifier(caster, ability, "modifier_item_imba_gungnir_attack_speed", {
+            let buff = caster.AddNewModifier(caster, ability, "modifier_item_imba_gungir_attack_speed", {
                 duration: ability.GetSpecialValueFor("range_duration")
-            }) as modifier_item_imba_gungnir_attack_speed;
+            }) as modifier_item_imba_gungir_attack_speed;
             buff.target = target;
             buff.SetStackCount(ability.GetSpecialValueFor("max_attacks"));
             EmitSoundOn("DOTA_Item.ForceStaff.Activate", target);
@@ -66,7 +66,7 @@ export class item_imba_gungnir extends BaseItem_Plus {
     }
 }
 @registerModifier()
-export class modifier_item_imba_gungnir extends BaseModifier_Plus {
+export class modifier_item_imba_gungir extends BaseModifier_Plus {
     public ability: IBaseItem_Plus;
     public parent: IBaseNpc_Plus;
     public bonus_strength: number;
@@ -201,7 +201,7 @@ export class modifier_item_imba_gungnir extends BaseModifier_Plus {
     }
 }
 @registerModifier()
-export class modifier_item_imba_gungnir_force_ally extends BaseModifierMotionHorizontal_Plus {
+export class modifier_item_imba_gungir_force_ally extends BaseModifierMotionHorizontal_Plus {
     public effect: any;
     public pfx: any;
     public angle: any;
@@ -287,7 +287,7 @@ export class modifier_item_imba_gungnir_force_ally extends BaseModifierMotionHor
     }
 }
 @registerModifier()
-export class modifier_item_imba_gungnir_force_enemy_ranged extends BaseModifierMotionHorizontal_Plus {
+export class modifier_item_imba_gungir_force_enemy_ranged extends BaseModifierMotionHorizontal_Plus {
     public effect: any;
     public pfx: any;
     public angle: any;
@@ -350,7 +350,7 @@ export class modifier_item_imba_gungnir_force_enemy_ranged extends BaseModifierM
     }
 }
 @registerModifier()
-export class modifier_item_imba_gungnir_force_self_ranged extends BaseModifierMotionHorizontal_Plus {
+export class modifier_item_imba_gungir_force_self_ranged extends BaseModifierMotionHorizontal_Plus {
     public effect: any;
     public pfx: any;
     public angle: any;
@@ -409,7 +409,7 @@ export class modifier_item_imba_gungnir_force_self_ranged extends BaseModifierMo
     }
 }
 @registerModifier()
-export class modifier_item_imba_gungnir_force_enemy_melee extends BaseModifierMotionHorizontal_Plus {
+export class modifier_item_imba_gungir_force_enemy_melee extends BaseModifierMotionHorizontal_Plus {
     public effect: any;
     public pfx: any;
     public angle: any;
@@ -468,7 +468,7 @@ export class modifier_item_imba_gungnir_force_enemy_melee extends BaseModifierMo
     }
 }
 @registerModifier()
-export class modifier_item_imba_gungnir_force_self_melee extends BaseModifierMotionHorizontal_Plus {
+export class modifier_item_imba_gungir_force_self_melee extends BaseModifierMotionHorizontal_Plus {
     public effect: any;
     public pfx: any;
     public angle: any;
@@ -527,7 +527,7 @@ export class modifier_item_imba_gungnir_force_self_melee extends BaseModifierMot
     }
 }
 @registerModifier()
-export class modifier_item_imba_gungnir_attack_speed extends BaseModifier_Plus {
+export class modifier_item_imba_gungir_attack_speed extends BaseModifier_Plus {
     public as: any;
     public ar: any;
     target: IBaseNpc_Plus;

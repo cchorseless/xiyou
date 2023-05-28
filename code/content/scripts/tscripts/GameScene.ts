@@ -190,8 +190,7 @@ export class GameScene {
             if (!event.data || !event.data.entindex) { return }
             let item = EntIndexToHScript(event.data.entindex) as IBaseItem_Plus;
             if (IsValid(item) && item.IsDisassemblable()) {
-                GLogHelper.print("拆分道具", item.GetAbilityName())
-                item.GetParentPlus().DisassembleItem(item);
+                item.DisassembleItem();
             }
         }));
         // 道具位置改变

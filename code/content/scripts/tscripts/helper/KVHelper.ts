@@ -13,6 +13,8 @@ export module KVHelper {
     export const KvItems: Readonly<dota_items.OBJ_1_1 & KV_Items> = {} as Readonly<dota_items.OBJ_1_1 & KV_Items>;
     /**所有单位 */
     export const KvUnits: Readonly<npc_heroes_custom.OBJ_1_1 & KV_Units> = {} as Readonly<npc_heroes_custom.OBJ_1_1 & KV_Units>;
+    /**所有配方 */
+    export const KvRecipes: { [k: string]: { to?: string[], from?: string[] } } = {}
 
     export function KvConfig() {
         if (IsServer()) {
@@ -69,6 +71,7 @@ export module KVHelper {
                 (KvServerConfig as any)[k] = LoadKeyValues(KvServer[k]);
                 LogHelper.print("Server LoadKeyValues Finish:", k);
             }
+
         }
         // 客户端
         else {
@@ -79,6 +82,24 @@ export module KVHelper {
             for (k as any in KvClient) {
                 (KvClientConfig as any)[k] = LoadKeyValues(KvClient[k]);
                 LogHelper.print("Client LoadKeyValues Finish:", k);
+            }
+        }
+        // 配方
+        const imba_item_recipes = KvConfig().imba_item_recipes;
+        for (let k in imba_item_recipes) {
+            let v = imba_item_recipes[k]
+            let ItemRequirements = v.ItemRequirements["01"];
+            if (v.ItemResult && ItemRequirements) {
+                KvRecipes[v.ItemResult] = KvRecipes[v.ItemResult] || {};
+                let from = ItemRequirements.split(";");
+                KvRecipes[v.ItemResult].from = from;
+                for (let i of from) {
+                    KvRecipes[i] = KvRecipes[i] || {};
+                    KvRecipes[i].to = KvRecipes[i].to || [];
+                    if (!KvRecipes[i].to.includes(v.ItemResult)) {
+                        KvRecipes[i].to.push(v.ItemResult);
+                    }
+                }
             }
         }
         // 合并
@@ -99,6 +120,7 @@ export module KVHelper {
             let data: { [k: string]: any } = (KvServerConfig as any)[file] || (KvClientConfig as any)[file] || LoadKeyValues((KvAllPath as any)[file]);
             (KvUnits as any) = Object.assign(KvUnits, data)
         });
+
     }
 
     /**

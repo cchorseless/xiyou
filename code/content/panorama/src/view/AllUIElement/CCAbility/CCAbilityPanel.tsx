@@ -519,6 +519,9 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
                 if (bSellable) {
                     buttonList.push("Sell");
                 }
+                if (bDisassemble || bCombinable) {
+                    buttonList.push("ShowCombine");
+                }
                 if (bDisassemble) {
                     buttonList.push("Disassemble");
                 }
@@ -528,6 +531,7 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
                 if (bCombinable && !bLocked) {
                     buttonList.push("Lock");
                 }
+
                 CCMainPanel.GetInstance()!.ShowCustomToolTip(p, {
                     cls: CCContextMenuDialog,
                     props: {

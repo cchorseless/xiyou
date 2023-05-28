@@ -21,6 +21,7 @@ export class CCMailPanel extends CCPanel<ICCMailPanel> {
 
     onInitUI() {
         this.ListenUpdate(GGameScene.Local.TCharacter.DataComp)
+        GLogHelper.print(222222);
     }
 
     closeThis() {
@@ -61,7 +62,6 @@ export class CCMailPanel extends CCPanel<ICCMailPanel> {
                             this.UpdateState({ selectindex: index })
                         }} />
                         {
-
                         }
                     </CCPanel>
                     {this.props.children}

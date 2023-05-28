@@ -1,20 +1,35 @@
-.CC_ProgressBar {
+.CCProgressBar {
     border-radius: 5px;
     width: 320px;
     height: 22px;
     border: 2px solid #232222;
     background-color: #222222ff;
 
-    .CC_ProgressBar_Left {
+    .CCProgressBar_Left {
         height: 100%;
         background-color: gradient(linear, 60% 0%, 0% 100%, from(#b6261f), to(#65211b));
         border-radius: 3px;
         border-top: 1px solid rgba(255, 255, 255, 0.18);
         transition-property: position, width;
         transition-duration: 0.6s;
+        transition-timing-function: ease;
+
+        &.ProgressBar_Blue {
+            background-color: gradient(linear, 60% 0%, 0% 100%, from(#0d78f2), to(#1606f8));
+        }
+
+        &.ProgressBar_Gold {
+            background-color: gradient(linear, 60% 0%, 0% 100%, from(#d9f907), to(#f9e906));
+        }
+
+        &.ProgressBar_Green {
+            background-color: gradient(linear, 60% 0%, 0% 100%, from(#22f010), to(#0ae82c));
+        }
+
+
     }
 
-    .CC_ProgressBar_Right {
+    .CCProgressBar_Right {
         height: 100%;
         background-color: gradient(linear, 0% 0%, 100% 0%, from(#222222ff), color-stop(0.1, #222222ff), to(black));
         horizontal-align: right;

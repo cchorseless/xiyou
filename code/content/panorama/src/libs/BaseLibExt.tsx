@@ -1122,9 +1122,10 @@ declare global {
         DisassembleItem(iItemEntIndex: ItemEntityIndex): void;
         GetItemValue(sItemName: string, sKeyName: string): string | undefined;
         GetItemCost(sItemName: string): number;
-        GetItemRecipes(sItemName: string): string[][];
-        GetItemRelatedRecipes(sItemName: string): string[][];
-        GetItemRelatedRecipesWithResults(sItemName: string): [string[][], string[]];
+        /**获取物品合成 */
+        GetCombinableItems(sItemName: string): string[] | undefined;
+        /**获取分解列表 */
+        GetDisassembleItems(sItemName: string): string[] | undefined;
         GetItemName(item: string | ItemEntityIndex): string;
         /**
          * 获取物品木材价格
@@ -1201,58 +1202,24 @@ Items.GetItemCost = (sItemName: string) => {
     return GToNumber(Items.GetItemValue(sItemName, "ItemCost")) || 0;
 }
 
-Items.GetItemRecipes = (sItemName: string) => {
-    let aList = [];
-    let sItemRecipe = Items.GetItemValue(sItemName, "ItemRecipe");
-    if (typeof sItemRecipe == "string") {
-        sItemRecipe = sItemRecipe.replace(/\s/g, "");
-        let a = sItemRecipe.split(/\|/g);
-        for (let i = 0; i < a.length; i++) {
-            let _a = a[i].split(/\+/g);
-            let l = [];
-            for (let j = 0; j < _a.length; j++) {
-                l.push(_a[j]);
-            }
-            aList.push(l);
-        }
+Items.GetCombinableItems = (sItemName: string) => {
+    if (!sItemName) return undefined;
+    const info = KVHelper.KvRecipes[sItemName];
+    if (info) {
+        return info.to;
     }
-    return aList;
+    return undefined;
 }
-Items.GetItemRelatedRecipes = (sItemName: string) => {
-    let aList = [];
-    let ItemsKv = KVHelper.KVItems()
-    for (const _sItemName in ItemsKv) {
-        let aRecipes = Items.GetItemRecipes(_sItemName);
-        if (aRecipes.length > 0) {
-            for (let i = 0; i < aRecipes.length; i++) {
-                const aRecipe = aRecipes[i];
-                if (aRecipe.indexOf(sItemName) != -1) {
-                    aList.push(aRecipe);
-                }
-            }
-        }
+Items.GetDisassembleItems = (sItemName: string) => {
+    if (!sItemName) return undefined;
+    const info = KVHelper.KvRecipes[sItemName];
+    if (info) {
+        return info.from;
     }
-    return aList;
+    return undefined;
 }
 
-Items.GetItemRelatedRecipesWithResults = (sItemName: string) => {
-    let aList = [];
-    let aResults = [];
-    let ItemsKv = KVHelper.KVItems()
-    for (const _sItemName in ItemsKv) {
-        let aRecipes = Items.GetItemRecipes(_sItemName);
-        if (aRecipes.length > 0) {
-            for (let i = 0; i < aRecipes.length; i++) {
-                const aRecipe = aRecipes[i];
-                if (aRecipe.indexOf(sItemName) != -1) {
-                    aList.push(aRecipe);
-                    aResults.push(_sItemName);
-                }
-            }
-        }
-    }
-    return [aList, aResults];
-}
+
 
 Items.GetItemName = (item: string | ItemEntityIndex) => {
     let sItemName: string = "";

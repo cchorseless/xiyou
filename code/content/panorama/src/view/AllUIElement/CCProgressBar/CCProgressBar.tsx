@@ -1,4 +1,5 @@
 import React from 'react';
+import { CSSHelper } from '../../../helper/CSSHelper';
 import { CCPanel } from '../CCPanel/CCPanel';
 import "./CCProgressBar.less";
 
@@ -11,25 +12,26 @@ interface ICCProgressBar {
 	max?: number,
 	/** 变化时回调函数 */
 	onChange?: (checked: boolean) => void,
+
+	color?: "Red" | "Blue" | "Gold" | "Green",
 }
 
 export class CCProgressBar extends CCPanel<ICCProgressBar> {
-	defaultClass() { return "CC_ProgressBar"; };
 	static defaultProps = {
 		value: 0,
 		min: 0,
 		max: 100,
+		color: "Red"
 	};
 	render() {
-		const { value, min, max } = this.props;
+		const { value, min, max, color } = this.props;
 		const width = (value - min!) / (max! - min!) * 100;
-		return (this.__root___isValid &&
-			<Panel ref={this.__root__}   {...this.initRootAttrs()}>
-				<CCPanel className="CC_ProgressBar_Left" width={width + "%"} />
-				<CCPanel className="CC_ProgressBar_Right" width={(100 - width) + "%"} />
-				{this.__root___childs}
-				{this.props.children}
-			</Panel>
-		);
+		return (<Panel className="CCProgressBar" ref={this.__root__}   {...this.initRootAttrs()}>
+			<CCPanel className={CSSHelper.ClassMaker("CCProgressBar_Left", "ProgressBar_" + color)} width={width + "%"} />
+			<CCPanel className="CCProgressBar_Right" width={(100 - width) + "%"} />
+			{this.__root___childs}
+			{this.props.children}
+		</Panel>
+		)
 	}
 }

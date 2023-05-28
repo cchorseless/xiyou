@@ -1,8 +1,10 @@
 import React from "react";
+import { CCItemCombinesPanel } from "../AllUIElement/CCItem/CCItemCombinesPanel";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
+import { CCMainPanel } from "../MainPanel/CCMainPanel";
 import "./CCContextMenuDialog.less";
 
-type IContextMenuButton = "Sell" | "Disassemble" | "ToBackPack" | "ToPublicBag" | "ToInventory" | "UnLock" | "Lock" | "Destroy" | "Cancel";
+type IContextMenuButton = "Sell" | "Disassemble" | "ShowCombine" | "ToBackPack" | "ToPublicBag" | "ToInventory" | "UnLock" | "Lock" | "Destroy" | "Cancel";
 
 interface ICCContextMenuDialog {
     entityIndex?: ItemEntityIndex;
@@ -17,7 +19,7 @@ export class CCContextMenuDialog extends CCPanel<ICCContextMenuDialog> {
         const sMsg = this.GetState<string>("sMsg");
         const sMsgDes = this.GetState<string>("sMsgDes") || "";
         return (<Panel className="CCContextMenuDialog" ref={this.__root__}  {...this.initRootAttrs()}>
-            <CCPanel id="MenuContentItems" hittest={true} hittestchildren={true}>
+            <CCPanel id="MenuContentItems" hittest={true} hittestchildren={true} >
                 {
                     buttonList.map((btnType, index) => {
                         return <CCContextMenuButton key={index + ""} entityIndex={entityIndex} btnType={btnType} onclose={() => this.close()} />
@@ -56,6 +58,13 @@ export class CCContextMenuButton extends CCPanel<ICCContextMenuButton, Button> {
                 break;
             case "UnLock":
                 Items.SetCombineLocked(entityIndex, false);
+                break;
+            // 显示装备合成详情
+            case "ShowCombine":
+                CCItemCombinesPanel.GetInstance()?.close();
+                CCMainPanel.GetInstance()!.addOnlyPanel(CCItemCombinesPanel, {
+                    itemname: Abilities.GetAbilityName(entityIndex),
+                })
                 break;
         }
         if (this.props.onclose) {

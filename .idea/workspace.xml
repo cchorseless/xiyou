@@ -6,29 +6,36 @@
   <component name="ChangeListManager">
     <list default="true" id="0afe1df3-4870-48f1-a775-af97afd6ee5a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/config/KVData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/config/KVData.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/config/KvAllInterface.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/config/KvAllInterface.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/config/abilities/courier_abilities.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/config/abilities/courier_abilities.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/config/items/imba_items.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/config/items/imba_items.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/helper/KVHelper.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/helper/KVHelper.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/content/panorama/src/libs/BaseLibExt.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/libs/BaseLibExt.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCAbility/CCAbilityPanel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCAbility/CCAbilityPanel.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Common/CCContextMenuDialog.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Common/CCContextMenuDialog.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCDacBoard/CCDacBoard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCDacBoard/CCDacBoard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCDacBoard/CCHealthMana.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCDacBoard/CCHealthMana.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCDacBoard/CCHealthMana.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCDacBoard/CCHealthMana.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCProgressBar/CCProgressBar.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCProgressBar/CCProgressBar.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCProgressBar/CCProgressBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCProgressBar/CCProgressBar.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Common/CCContextMenuDialog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Common/CCContextMenuDialog.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/MainPanel/CCMainPanel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/MainPanel/CCMainPanel.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/GameDebugger.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/GameDebugger.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Mail/CCMailPanel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Mail/CCMailPanel.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/game_main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/game_main.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/GameScene.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/GameScene.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/courier/courier_hut_change.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/courier/courier_hut_change.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/helper/KVHelper.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/helper/KVHelper.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/kvInterface/KvAllInterface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/kvInterface/KvAllInterface.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/kvInterface/abilities/courier_abilities.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/kvInterface/abilities/courier_abilities.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/kvInterface/items/imba_items.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/kvInterface/items/imba_items.d.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/entityPlus/Base_ClassExt.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/entityPlus/Base_ClassExt.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_bfury.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_bfury.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_gungnir.ts" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_pers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_pers.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_ring_of_health.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_ring_of_health.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_void_stone.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_void_stone.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/Components/Inventory/InventoryComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/Components/Inventory/InventoryComponent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/GameProtocol.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/GameProtocol.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/excels/abilities/courier_abilities.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/excels/abilities/courier_abilities.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/excels/abilities/imba_abilities_lang.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/excels/abilities/imba_abilities_lang.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/items/imba/item_imba_transient_boots.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/excels/items/imba_item_recipes.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/excels/items/imba_item_recipes.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/excels/items/imba_items.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/excels/items/imba_items.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/excels/kv_config.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/excels/kv_config.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/excels/npc_items_custom.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/excels/npc_items_custom.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/game/scripts/npc/abilities/courier_abilities.kv" beforeDir="false" afterPath="$PROJECT_DIR$/code/game/scripts/npc/abilities/courier_abilities.kv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/excels/items/imba_items_lang.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/excels/items/imba_items_lang.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/game/scripts/npc/items/imba_item_recipes.kv" beforeDir="false" afterPath="$PROJECT_DIR$/code/game/scripts/npc/items/imba_item_recipes.kv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/game/scripts/npc/items/imba_items.kv" beforeDir="false" afterPath="$PROJECT_DIR$/code/game/scripts/npc/items/imba_items.kv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/game/scripts/npc/kv_config.kv" beforeDir="false" afterPath="$PROJECT_DIR$/code/game/scripts/npc/kv_config.kv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/game/scripts/npc/npc_items_custom.txt" beforeDir="false" afterPath="$PROJECT_DIR$/code/game/scripts/npc/npc_items_custom.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -257,7 +264,9 @@
       <workItem from="1684463102996" duration="17740000" />
       <workItem from="1684640183801" duration="11023000" />
       <workItem from="1684733746840" duration="21647000" />
-      <workItem from="1684985548446" duration="14911000" />
+      <workItem from="1684985548446" duration="14942000" />
+      <workItem from="1685153016790" duration="7514000" />
+      <workItem from="1685239230297" duration="1868000" />
     </task>
     <servers />
   </component>
