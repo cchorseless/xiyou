@@ -180,7 +180,7 @@ export class CCItemInfoDialog extends CCPanel<ICCItemInfoDialog> {
             dialogVariables['sell_time'] = sStr;
         }
 
-        let iBehavior = iItemIndex != -1 ? Abilities.GetBehavior(iItemIndex) : Abilities.SBehavior2IBehavior(tData.AbilityBehavior || "");
+        let iBehavior = iItemIndex != -1 ? Abilities.GetBehavior(iItemIndex) : Abilities.SBehavior2IBehavior(tData.AbilityBehavior as any || "");
         let sCastType = Abilities.GetCastTypeDes(iBehavior);
         dialogVariables['casttype'] = $.Localize("#" + sCastType);
         let iTeam = iItemIndex != -1 ? Abilities.GetAbilityTargetTeam(iItemIndex) : Abilities.STeam2ITeam(tData.AbilityUnitTargetTeam as string || "");

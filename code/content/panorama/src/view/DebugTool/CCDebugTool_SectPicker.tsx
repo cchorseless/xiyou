@@ -4,6 +4,7 @@ import { NetHelper } from "../../helper/NetHelper";
 import { CCButton } from "../AllUIElement/CCButton/CCButton";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCCombinationIcon } from "../Combination/CCCombinationIcon";
+import { CCCombinationInfoDialog } from "../Combination/CCCombinationInfoDialog";
 import { CCDebugTool_SelectContainer } from "./CCDebugTool";
 
 interface IDebugTool_SectPicker {
@@ -59,7 +60,16 @@ export class CCDebugTool_SectPicker extends CCPanel<IDebugTool_SectPicker> {
                                             sectname: sectName
                                         })
                                     }} >
-                                    <CCCombinationIcon sectName={sectName} horizontalAlign="center" />
+                                    <CCCombinationIcon sectName={sectName} horizontalAlign="center" dialogTooltip={
+                                        {
+                                            cls: CCCombinationInfoDialog,
+                                            props: {
+                                                showBg: true,
+                                                sectName: sectName,
+                                                playerid: GGameScene.Local.BelongPlayerid,
+                                                showSectName: true,
+                                            }
+                                        }} />
                                     <Label className="CC_DebugTool_AbilityPickerItemName" text={this.state.rawMode ? sectName : $.Localize("#lang_" + sectName)} />
                                 </CCButton>
                             );

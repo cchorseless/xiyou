@@ -45,7 +45,7 @@ export class CCShopPanel extends CCPanel<ICCShopPanel> {
         const DataComp = (GGameScene.Local.TCharacter.DataComp!)!;
         const MetaStone = DataComp.NumericComp!.GetAsInt(GEEnum.EMoneyType.MetaStone)
         const StarStone = DataComp.NumericComp!.GetAsInt(GEEnum.EMoneyType.StarStone)
-        const selectindex = this.GetState<number>("selectindex") || 1;
+        const selectindex = this.GetState<number>("selectindex") || 0;
         const shopunits = GTShopUnit.GetGroupInstance(GGameScene.Local.BelongPlayerid).map((e) => { return (e)! })
         shopunits.sort((a, b) => { return a.ConfigId - b.ConfigId })
 
@@ -62,6 +62,7 @@ export class CCShopPanel extends CCPanel<ICCShopPanel> {
                     </CCPanel>
                     <CCPanel id="PanelContent" flowChildren="right">
                         <CCVerticalTable marginTop={"20px"} list={shopunits.map(e => { return $.Localize("#" + e.Config!.ShopName) })}
+                            defaultSelected={0}
                             onChange={(index: number, text: string) => { this.UpdateState({ selectindex: index }) }} />
                         <CCPanel >
                             {
@@ -69,7 +70,7 @@ export class CCShopPanel extends CCPanel<ICCShopPanel> {
                                     const shopunit = shopunits[_index];
                                     const allsellitems = shopunit.getAllSellItems();
                                     return <CCPanel key={_index + ""}
-                                        className={CSSHelper.ClassMaker({ Hidden: selectindex !== _index + 1 })}
+                                        className={CSSHelper.ClassMaker({ Hidden: selectindex !== _index })}
                                         flowChildren="right-wrap" scroll={"y"}  >
                                         {
                                             allsellitems.map((e, index) => {

@@ -56,7 +56,7 @@ export class CCBattlePassPanel extends CCPanel<ICCBattlePassPanel> {
                             "prize",
                             "task",
                             "charge",
-                        ]} onChange={(index: number, text: string) => {
+                        ]} defaultSelected={0} onChange={(index: number, text: string) => {
                             this.UpdateState({ selectindex: index })
                         }} />
                         {

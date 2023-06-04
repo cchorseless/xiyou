@@ -15,6 +15,21 @@ export module GameProtocol {
         static readonly Use_BagItem = "/Use_BagItem";
         // 商店
         static readonly Buy_ShopItem = "/Buy_ShopItem";
+
+        // 随机敌人
+        static readonly DrawEnemy_GetEnemyInfo = "/DrawEnemy_GetEnemyInfo";
+        // 上传阵容数据
+        static readonly DrawEnemy_UploadEnemyInfo = "/DrawEnemy_UploadEnemyInfo";
+        // 上传战斗结果数据
+        static readonly DrawEnemy_UploadBattleResult = "/DrawEnemy_UploadBattleResult";
+        // 排行榜
+        static readonly Rank_CurRankDataInfo = "/Rank_CurRankDataInfo";
+        // 获取自己的排行榜数据
+        static readonly Rank_CharacterRankDataInfo = "/Rank_CharacterRankDataInfo";
+        // 邮件
+        static readonly Handle_CharacterMail = "/Handle_CharacterMail";
+
+
         // js-clientlua
         static readonly custom_call_get_ability_data = "custom_call_get_ability_data";
         static readonly custom_call_get_unit_data = "custom_call_get_unit_data";
@@ -36,6 +51,7 @@ export module GameProtocol {
         static readonly req_DebugAddDummyTarget = "/req_DebugAddDummyTarget";
         static readonly req_DebugRemoveDummyTarget = "/req_DebugRemoveDummyTarget";
         static readonly req_DebugMakeChessAttack = "/req_DebugMakeChessAttack";
+        static readonly req_DebugMakeFullMana = "/req_DebugMakeFullMana";
         static readonly req_DebugRemoveEnemy = "/req_DebugRemoveEnemy";
         static readonly req_DebugAddGold = "/req_DebugAddGold";
         static readonly req_DebugWTF = "/req_DebugWTF";
@@ -84,8 +100,22 @@ export module GameProtocol {
 
     }
 
+    export const enum ERankType {
+        /// <summary>
+        /// 赛季天梯积分排行榜
+        /// </summary>
+        SeasonBattleSorceRank = 1,
+        HeroSumBattleSorceRank = 2,
+        SeasonSingleCharpterRank = 4,
+        SeasonTeamCharpterRank = 8,
+    }
 
+    export const enum EMailHandleType {
 
+        MailRead = 1,
+        MailGetItem = 2,
+        MailDelete = 3,
+    }
 
     // export const HTTP_URL = "http://139.196.182.10:8080";
     export const HTTP_URL = "http://127.0.0.1:11199";

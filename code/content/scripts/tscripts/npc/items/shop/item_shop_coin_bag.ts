@@ -17,7 +17,7 @@ export class item_shop_gold_bag extends ActiveRootItem {
         }, "item_shop_gold_bag")
     }
     OnRoundStartPrize(round: ERoundBoard): void {
-        if (round.isWin && IsValid(this)) {
+        if (round.isWin > 0 && IsValid(this)) {
             let hParent = this.GetCasterPlus();
             if (IsValid(hParent) && hParent.IsAlive()) {
                 this.addCurGet();
@@ -48,7 +48,7 @@ export class item_shop_wood_bag extends ActiveRootItem {
     }
 
     OnRoundStartPrize(round: ERoundBoard): void {
-        if (round.isWin && IsValid(this)) {
+        if (round.isWin > 0 && IsValid(this)) {
             let hParent = this.GetCasterPlus();
             if (IsValid(hParent) && hParent.IsAlive()) {
                 this.addCurGet();
@@ -74,7 +74,7 @@ export class item_shop_soulcrystal_bag extends ActiveRootItem {
         }, "item_shop_soulcrystal_bag")
     }
     OnRoundStartPrize(round: ERoundBoard): void {
-        if (round.isWin && IsValid(this)) {
+        if (round.isWin > 0 && IsValid(this)) {
             let hParent = this.GetCasterPlus();
             if (IsValid(hParent) && hParent.IsAlive()) {
                 this.addCurGet();

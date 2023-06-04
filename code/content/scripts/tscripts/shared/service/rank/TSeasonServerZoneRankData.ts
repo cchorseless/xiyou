@@ -3,7 +3,7 @@ import { ET, serializeETProps } from "../../lib/Entity";
 
 
 @GReloadable
-export class TSeasonRankData extends ET.Entity {
+export class TSeasonServerZoneRankData extends ET.Entity {
 
 
     @serializeETProps()

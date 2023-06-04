@@ -1,7 +1,6 @@
 import { BaseModifier_Plus } from "../../entityPlus/BaseModifier_Plus";
 import { registerModifier } from "../../entityPlus/Base_Plus";
 
-/**建造系统 */
 @registerModifier()
 export class modifier_building extends BaseModifier_Plus {
     IsHidden() {

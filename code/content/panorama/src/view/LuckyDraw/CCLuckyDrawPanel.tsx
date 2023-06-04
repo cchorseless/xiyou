@@ -53,7 +53,7 @@ export class CCLuckyDrawPanel extends CCPanel<ICCLuckyDrawPanel> {
                         </CCPanel>
                     </CCPanel>
                     <CCPanel id="PanelContent" flowChildren="right">
-                        <CCVerticalTable marginTop={"20px"} list={[
+                        <CCVerticalTable marginTop={"20px"} defaultSelected={0} list={[
                             "buff",
                             "courier",
                             "equip",

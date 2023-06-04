@@ -13,6 +13,8 @@ export class CourierEggComponent extends ET.Component {
     eggExtraHitCount: number = 0;
     PathConnerLeft: Vector[];
     PathConnerRight: Vector[];
+    /**是否是左侧道路 */
+    IsPathLeft: boolean;
     onAwake(...args: any[]): void {
 
     }
@@ -59,6 +61,7 @@ export class CourierEggComponent extends ET.Component {
         pathright.forEach((v) => {
             this.PathConnerRight.push(v.getVector3())
         })
+        this.IsPathLeft = pathleft.length > pathright.length
     }
 
 

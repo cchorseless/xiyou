@@ -3,12 +3,14 @@ import { ET, serializeETProps } from "../../lib/Entity";
 import { CharacterAchievementComponent } from "../achievement/CharacterAchievementComponent";
 import { CharacterActivityComponent } from "../activity/CharacterActivityComponent";
 import { BagComponent } from "../bag/BagComponent";
+import { CharacterBattleTeamComponent } from "../battleteam/CharacterBattleTeamComponent";
 import { CharacterBuffComponent } from "../buff/CharacterBuffComponent";
 import { SeedRandomComponent } from "../common/SeedRandomComponent";
 import { CharacterDrawTreasureComponent } from "../draw/CharacterDrawTreasureComponent";
 import { CharacterGameRecordComponent } from "../gamerecord/CharacterGameRecordComponent";
 import { HeroManageComponent } from "../hero/HeroManageComponent";
 import { CharacterMailComponent } from "../mail/CharacterMailComponent";
+import { CharacterRankComponent } from "../rank/CharacterRankComponent";
 import { CharacterRechargeComponent } from "../recharge/CharacterRechargeComponent";
 import { CharacterShopComponent } from "../shop/CharacterShopComponent";
 import { CharacterTaskComponent } from "../task/CharacterTaskComponent";
@@ -68,13 +70,13 @@ export class TCharacter extends ET.Component {
         return this.GetComponentByName<CharacterTaskComponent>("CharacterTaskComponent")!;
     }
     get MailComp() {
-        return this.GetComponentByName<CharacterMailComponent>("CharacterMailComponent")!;
+        return CharacterMailComponent.GetOneInstance(this.BelongPlayerid);;
     }
     get ActivityComp() {
         return this.GetComponentByName<CharacterActivityComponent>("CharacterActivityComponent")!;
     }
     get HeroManageComp() {
-        return this.GetComponentByName<HeroManageComponent>("HeroManageComponent")!;
+        return HeroManageComponent.GetOneInstance(this.BelongPlayerid);
     }
     get DrawTreasureComp() {
         return this.GetComponentByName<CharacterDrawTreasureComponent>("CharacterDrawTreasureComponent")!;
@@ -94,8 +96,12 @@ export class TCharacter extends ET.Component {
     get GameRecordComp() {
         return this.GetComponentByName<CharacterGameRecordComponent>("CharacterGameRecordComponent")!;
     }
-
-
+    get BattleTeamComp() {
+        return this.GetComponentByName<CharacterBattleTeamComponent>("CharacterBattleTeamComponent")!;
+    }
+    get RankComp() {
+        return CharacterRankComponent.GetOneInstance(this.BelongPlayerid);
+    }
 }
 
 declare global {

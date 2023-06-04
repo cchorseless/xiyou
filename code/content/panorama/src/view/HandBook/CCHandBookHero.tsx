@@ -120,7 +120,7 @@ export class CCHandBookHeroItem extends CCPanel<ICCHandBookHeroItem> {
         return (
             <Panel className="CCHandBookHeroItem" ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
                 <CCPanel flowChildren="right" onactivate={() => { this.props.onclick && this.props.onclick() }}>
-                    <CCLevelxp level={level} exp={exp} max={maxexp} width="40px" height="40px" />
+                    <CCLevelxp level={level} exp={exp} max={maxexp} width="30px" height="30px" />
                     <CCUnitSmallIcon itemname={unitname} />
                     <CCLabel type="UnitName" width="80px" fontSize="18px" verticalAlign="center" text={localname} color={CSSHelper.GetRarityColor(rarity)} />
                 </CCPanel>
@@ -129,7 +129,7 @@ export class CCHandBookHeroItem extends CCPanel<ICCHandBookHeroItem> {
                         [1, 2, 3, 6].map((a, i) => {
                             let abilityname = KVHelper.GetUnitDataForKey(unitname, "Ability" + a) as string;
                             if (abilityname && abilityname != "ability_empty" && abilityname != "ability_sect_empty") {
-                                return <CCAbilityIcon key={"" + i} width="40px" height="40px" marginLeft={"2px"} abilityname={abilityname} showTips={true} />
+                                return <CCAbilityIcon key={"" + i} width="30px" height="30px" marginLeft={"2px"} abilityname={abilityname} showTips={true} />
                             }
                         })
 

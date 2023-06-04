@@ -17,7 +17,7 @@ export class TMail extends ET.Entity {
     @serializeETProps()
     public Content: number;
     @serializeETProps()
-    public State: number[];
+    public State: number[] = [];
     @serializeETProps()
     public From: string;
     @serializeETProps()
@@ -27,9 +27,20 @@ export class TMail extends ET.Entity {
     @serializeETProps()
     public ToDes: string;
     @serializeETProps()
-    public Time: string;
+    public Time: string = "";
     @serializeETProps()
-    public ValidTime: number;
+    public ValidTime: number = 0;
     @serializeETProps()
-    public Items: { Item1: number, Item2: number }[];
+    public IsDelete: boolean = false;
+    @serializeETProps()
+    public Items: { ItemConfigId: number, ItemCount: number }[];
+
+
+    CanGetItem() {
+        return this.IsDelete == false && this.Items && this.Items.length > 0 && this.State && this.State.includes(EMailState.UnItemGet);
+    }
+
+    onReload() {
+        this.SyncClient();
+    }
 }

@@ -3,7 +3,7 @@ import { TRankCommon } from "./TRankCommon";
 
 
 @GReloadable
-export class TRankHeroBattleScore extends TRankCommon {
+export class TRankHeroSumBattleScore extends TRankCommon {
     @serializeETProps()
     public HeroConfigId: number;
 }

@@ -353,6 +353,10 @@ export enum EEnemyCreateType {
      * 召唤的偷蛋怪
      */
     SummedEgg = 2,
+    /**
+     * 随机替换怪
+     */
+    RandomReplace = 3,
 }
 }
 
@@ -2986,10 +2990,10 @@ export class BuildingLevelUpConfigRecord {
     constructor(_json_: any) {
         if (_json_.Id === undefined) { GLogHelper.error(1); }
         this.Id = _json_.Id
-        if (_json_.BindHeroId === undefined) { GLogHelper.error(1); }
-        this.BindHeroId = _json_.BindHeroId
         if (_json_.IsValid === undefined) { GLogHelper.error(1); }
         this.IsValid = _json_.IsValid
+        if (_json_.BattleScore === undefined) { GLogHelper.error(1); }
+        this.BattleScore = _json_.BattleScore
         if (_json_.Bundles === undefined) { GLogHelper.error(1); }
         this.Bundles = _json_.Bundles
         if (_json_.StarUpInfo === undefined) { GLogHelper.error(1); }
@@ -3003,13 +3007,13 @@ export class BuildingLevelUpConfigRecord {
      */
     readonly Id: string
     /**
-     * 绑定单位ID
-     */
-    readonly BindHeroId: number
-    /**
      * 是否启用
      */
     readonly IsValid: boolean
+    /**
+     * 初始战力
+     */
+    readonly BattleScore: number
     /**
      * 套装
      */
@@ -3888,6 +3892,8 @@ export class RoundBoardConfigRecord {
         this.roundType = _json_.round_type
         if (_json_.round_label === undefined) { GLogHelper.error(1); }
         this.roundLabel = _json_.round_label
+        if (_json_.rankScore === undefined) { GLogHelper.error(1); }
+        this.rankScore = _json_.rankScore
         if (_json_.roundprize_gold === undefined) { GLogHelper.error(1); }
         this.roundprizeGold = _json_.roundprize_gold
         if (_json_.roundprize_wood === undefined) { GLogHelper.error(1); }
@@ -3920,6 +3926,10 @@ export class RoundBoardConfigRecord {
      * 回合标签
      */
     readonly roundLabel: string
+    /**
+     * 天梯分数
+     */
+    readonly rankScore: number
     /**
      * 奖励金币
      */
@@ -4341,6 +4351,195 @@ export class RoundChallengeEnemyConfigBean {
 
 }
 
+export namespace Dota {
+export class RoundEnemyPoolConfig{
+    private _dataMap: Map<string, Dota.RoundEnemyPoolConfigRecord>
+    private _dataList: Dota.RoundEnemyPoolConfigRecord[]
+    constructor(_json_: any[]) {
+ this._dataMap  = new Map<string, Dota.RoundEnemyPoolConfigRecord>()
+        this._dataList = []
+        for(let _json2_ of _json_) {
+            let _v: Dota.RoundEnemyPoolConfigRecord
+            _v = new Dota.RoundEnemyPoolConfigRecord(_json2_)
+            this._dataList.push(_v)
+            this._dataMap.set(_v.id, _v)
+        }
+    }
+
+    getDataMap(): Map<string, Dota.RoundEnemyPoolConfigRecord> { return this._dataMap; }
+    getDataList(): Dota.RoundEnemyPoolConfigRecord[] { return this._dataList; }
+
+    get(key: string): Dota.RoundEnemyPoolConfigRecord | undefined { return this._dataMap.get(key); }
+
+    resolve(_tables: Map<string, any>) {
+        for(let v of this._dataList) {
+            v.resolve(_tables)
+        }
+    }
+
+}
+}
+
+
+
+export namespace Dota {
+export class RoundEnemyPoolConfigRecord {
+
+    constructor(_json_: any) {
+        if (_json_.id === undefined) { GLogHelper.error(1); }
+        this.id = _json_.id
+        if (_json_.playername === undefined) { GLogHelper.error(1); }
+        this.playername = _json_.playername
+        if (_json_.accountid === undefined) { GLogHelper.error(1); }
+        this.accountid = _json_.accountid
+        if (_json_.population === undefined) { GLogHelper.error(1); }
+        this.population = _json_.population
+        if (_json_.round_min === undefined) { GLogHelper.error(1); }
+        this.roundMin = _json_.round_min
+        if (_json_.round_max === undefined) { GLogHelper.error(1); }
+        this.roundMax = _json_.round_max
+        if (_json_.battlescore === undefined) { GLogHelper.error(1); }
+        this.battlescore = _json_.battlescore
+        if (_json_.sectinfo === undefined) { GLogHelper.error(1); }
+        this.sectinfo = _json_.sectinfo
+        if (_json_.enemyinfo === undefined) { GLogHelper.error(1); }
+        { this.enemyinfo = []; for(let _ele of _json_.enemyinfo) { let _e : Dota.RoundDrawEnemyConfigBean; _e = new Dota.RoundDrawEnemyConfigBean(_ele); this.enemyinfo.push(_e);}}
+    }
+
+    /**
+     * 阵容编号
+     */
+    readonly id: string
+    /**
+     * 玩家名称
+     */
+    readonly playername: string
+    /**
+     * accountid
+     */
+    readonly accountid: string
+    /**
+     * 人口数
+     */
+    readonly population: number
+    /**
+     * 匹配最小回合
+     */
+    readonly roundMin: number
+    /**
+     * 匹配最大回合
+     */
+    readonly roundMax: number
+    /**
+     * 战力
+     */
+    readonly battlescore: number
+    /**
+     * 羁绊详情
+     */
+    readonly sectinfo: string[]
+    readonly enemyinfo: Dota.RoundDrawEnemyConfigBean[]
+
+    resolve(_tables: Map<string, any>) {
+        for(let _e of this.enemyinfo) { if (_e != null ) {_e.resolve(_tables);} }
+    }
+}
+
+}
+
+
+
+export namespace Dota {
+export class RoundDrawEnemyConfigBean {
+
+    constructor(_json_: any) {
+        if (_json_.unitname === undefined) { GLogHelper.error(1); }
+        this.unitname = _json_.unitname
+        if (_json_.star === undefined) { GLogHelper.error(1); }
+        this.star = _json_.star
+        if (_json_.level === undefined) { GLogHelper.error(1); }
+        this.level = _json_.level
+        if (_json_.position_x === undefined) { GLogHelper.error(1); }
+        this.positionX = _json_.position_x
+        if (_json_.position_y === undefined) { GLogHelper.error(1); }
+        this.positionY = _json_.position_y
+        if (_json_.itemslot1 === undefined) { GLogHelper.error(1); }
+        this.itemslot1 = _json_.itemslot1
+        if (_json_.itemslot2 === undefined) { GLogHelper.error(1); }
+        this.itemslot2 = _json_.itemslot2
+        if (_json_.itemslot3 === undefined) { GLogHelper.error(1); }
+        this.itemslot3 = _json_.itemslot3
+        if (_json_.itemslot4 === undefined) { GLogHelper.error(1); }
+        this.itemslot4 = _json_.itemslot4
+        if (_json_.itemslot5 === undefined) { GLogHelper.error(1); }
+        this.itemslot5 = _json_.itemslot5
+        if (_json_.itemslot6 === undefined) { GLogHelper.error(1); }
+        this.itemslot6 = _json_.itemslot6
+        if (_json_.WearBundleId === undefined) { GLogHelper.error(1); }
+        this.WearBundleId = _json_.WearBundleId
+        if (_json_.spawn_buff === undefined) { GLogHelper.error(1); }
+        this.spawnBuff = _json_.spawn_buff
+    }
+
+    /**
+     * 回合单位名
+     */
+    readonly unitname: string
+    /**
+     * 星级
+     */
+    readonly star: number
+    /**
+     * 等级
+     */
+    readonly level: number
+    /**
+     * 位置x[0-7]
+     */
+    readonly positionX: number
+    /**
+     * 位置y[1-9]
+     */
+    readonly positionY: number
+    /**
+     * 物品栏1
+     */
+    readonly itemslot1: string
+    /**
+     * 物品栏2
+     */
+    readonly itemslot2: string
+    /**
+     * 物品栏3
+     */
+    readonly itemslot3: string
+    /**
+     * 物品栏4
+     */
+    readonly itemslot4: string
+    /**
+     * 物品栏5
+     */
+    readonly itemslot5: string
+    /**
+     * 物品栏6
+     */
+    readonly itemslot6: string
+    /**
+     * 套装Id
+     */
+    readonly WearBundleId: string
+    /**
+     * 单位自带buff
+     */
+    readonly spawnBuff: string
+
+    resolve(_tables: Map<string, any>) {
+    }
+}
+
+}
+
 
 type JsonLoader = (file: string) => any
 
@@ -4421,6 +4620,8 @@ export class Tables {
     get RoundBoardConfig(): Dota.RoundBoardConfig  { return this._RoundBoardConfig;}
     private _RoundBoardChallengeConfig: Dota.RoundBoardChallengeConfig
     get RoundBoardChallengeConfig(): Dota.RoundBoardChallengeConfig  { return this._RoundBoardChallengeConfig;}
+    private _RoundEnemyPoolConfig: Dota.RoundEnemyPoolConfig
+    get RoundEnemyPoolConfig(): Dota.RoundEnemyPoolConfig  { return this._RoundEnemyPoolConfig;}
 
     constructor(loader: JsonLoader) {
         let tables = new Map<string, any>()
@@ -4500,6 +4701,8 @@ export class Tables {
         tables.set('Dota.RoundBoardConfig', this._RoundBoardConfig)
         this._RoundBoardChallengeConfig = new Dota.RoundBoardChallengeConfig(loader('dota_roundboardchallengeconfig'))
         tables.set('Dota.RoundBoardChallengeConfig', this._RoundBoardChallengeConfig)
+        this._RoundEnemyPoolConfig = new Dota.RoundEnemyPoolConfig(loader('dota_roundenemypoolconfig'))
+        tables.set('Dota.RoundEnemyPoolConfig', this._RoundEnemyPoolConfig)
 
         this._ItemConfig.resolve(tables)
         this._ItemEquipConfig.resolve(tables)
@@ -4539,6 +4742,7 @@ export class Tables {
         this._WearableConfig.resolve(tables)
         this._RoundBoardConfig.resolve(tables)
         this._RoundBoardChallengeConfig.resolve(tables)
+        this._RoundEnemyPoolConfig.resolve(tables)
     }
 reloadConfig(k: string , loader: JsonLoader) {
  switch(k) { 
@@ -4618,6 +4822,8 @@ case ('dota_roundboardconfig'):
         this._RoundBoardConfig = new Dota.RoundBoardConfig(loader('dota_roundboardconfig'));break;
 case ('dota_roundboardchallengeconfig'):
         this._RoundBoardChallengeConfig = new Dota.RoundBoardChallengeConfig(loader('dota_roundboardchallengeconfig'));break;
+case ('dota_roundenemypoolconfig'):
+        this._RoundEnemyPoolConfig = new Dota.RoundEnemyPoolConfig(loader('dota_roundenemypoolconfig'));break;
 }
 };
 

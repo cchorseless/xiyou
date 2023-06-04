@@ -960,7 +960,7 @@ export class modifier_imba_slark_shadow_dance_passive_regen extends BaseModifier
                 this.neutral_counter = 0;
             }
         }
-        this.bVisible = false;
+        this.bVisible = !this.GetParentPlus().IsInvisible();
         // let units = FindUnitsInRadius(this.GetParentPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY,
         //     DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_ALL,
         //     DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD,

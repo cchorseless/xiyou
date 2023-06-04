@@ -56,6 +56,11 @@ export class GameServiceSystem extends ET.SingletonComponent {
         let bagcomp = GBagComponent.GetOneInstance(playerid);
         if (bagcomp) {
             this.tPlayerCourierList[playerid + ""] = bagcomp.getAllCourierNames();
+            this.tPlayerGameSelection[playerid + ""].Difficulty.Chapter = bagcomp.DifficultyChapter;
+            this.tPlayerGameSelection[playerid + ""].Difficulty.MaxChapter = bagcomp.DifficultyChapter;
+
+            this.tPlayerGameSelection[playerid + ""].Difficulty.Level = bagcomp.DifficultyLevel;
+            this.tPlayerGameSelection[playerid + ""].Difficulty.MaxLevel = bagcomp.DifficultyLevel;
         }
         else {
             this.tPlayerCourierList[playerid + ""] = [GameServiceConfig.DefaultCourier];

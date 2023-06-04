@@ -32,11 +32,10 @@ export class CCPlayerInfoDialog extends CCPanel<ICCPlayerInfoDialog> {
                         <CCCourierCard sCourierName={playerData.heroName} allowrotation={false} showmodel={true} />
                         {/* <CCPortraitV1 key={playerData.heroName} unitname={playerData.heroName} /> */}
                         <CCPanel flowChildren="down" >
-                            <Label className="AttributeName" text={"等级：" + (1)} />
-                            <Label className="AttributeDescription" text="每获得一个流派星级，等级提升1级，生命提升100点。" />
-                            <Label className="AttributeName" text={"连胜：" + 1} />
+                            <Label className="AttributeName" text={"天梯排名：" + (1)} />
+                            <Label className="AttributeName" text={"天梯积分：" + 1} />
                             <Label className="AttributeDescription" text="连胜越高，击败对手造成的伤害越高" />
-                            <Label className="AttributeName" text={"伤害：" + 1} />
+                            <Label className="AttributeName" text={"本局累计获得天梯积分：" + 1} />
                             <Label className="AttributeDescription" text="击败对手后，对其造成的伤害值。" />
                         </CCPanel>
                     </CCPanel>

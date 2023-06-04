@@ -744,10 +744,9 @@ export class imba_sandking_epicenter extends BaseAbility_Plus {
     }
     GetChannelTime(): number {
         let caster = this.GetCasterPlus();
-        let ability = this;
         let scepter = caster.HasScepter();
-        let channel_time = ability.GetSpecialValueFor("channel_time");
-        let scepter_channel_time = ability.GetSpecialValueFor("scepter_channel_time");
+        let channel_time = this.GetSpecialValueFor("channel_time");
+        let scepter_channel_time = this.GetSpecialValueFor("scepter_channel_time");
         if (scepter) {
             return scepter_channel_time;
         } else {
@@ -756,37 +755,25 @@ export class imba_sandking_epicenter extends BaseAbility_Plus {
     }
     OnSpellStart(): void {
         let caster = this.GetCasterPlus();
-        let ability = this;
         let sound_cast = "Ability.SandKing_Epicenter.spell";
         let particle_sandblast = "particles/units/heroes/hero_sandking/sandking_epicenter_tell.vpcf";
-        let modifier_pulse = "modifier_imba_epicenter_pulse";
-        let channel_time = ability.GetSpecialValueFor("channel_time");
         EmitSoundOnLocationWithCaster(caster.GetAbsOrigin(), sound_cast, caster);
         this.particle_sandblast_fx = ResHelper.CreateParticleEx(particle_sandblast, ParticleAttachment_t.PATTACH_CUSTOMORIGIN_FOLLOW, caster);
         ParticleManager.SetParticleControlEnt(this.particle_sandblast_fx, 0, caster, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_tail", caster.GetAbsOrigin(), true);
         ParticleManager.SetParticleControlEnt(this.particle_sandblast_fx, 1, caster, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_tail", caster.GetAbsOrigin(), true);
         ParticleManager.SetParticleControlEnt(this.particle_sandblast_fx, 2, caster, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_tail", caster.GetAbsOrigin(), true);
-        if (caster.GetUnitName().includes("npc_imba_pugna_nether_ward")) {
-            this.AddTimer(channel_time, () => {
-                ParticleManager.DestroyParticle(this.particle_sandblast_fx, false);
-                ParticleManager.ReleaseParticleIndex(this.particle_sandblast_fx);
-                caster.AddNewModifier(caster, ability, modifier_pulse, {});
-            });
-        }
     }
     OnChannelFinish(interrupted: boolean): void {
         let caster = this.GetCasterPlus();
-        let ability = this;
         let modifier_pulse = "modifier_imba_epicenter_pulse";
         let failed_response = "sandking_skg_ability_failure_0" + math.random(1, 6);
         ParticleManager.DestroyParticle(this.particle_sandblast_fx, false);
         ParticleManager.ReleaseParticleIndex(this.particle_sandblast_fx);
         if (interrupted) {
             EmitSoundOn(failed_response, caster);
-            return undefined;
+            return;
         }
-        caster.StartGesture(GameActivity_t.ACT_DOTA_OVERRIDE_ABILITY_4);
-        caster.AddNewModifier(caster, ability, modifier_pulse, {});
+        caster.AddNewModifier(caster, this, modifier_pulse, {});
     }
     GetManaCost(level: number): number {
         return 800;
@@ -835,6 +822,7 @@ export class modifier_imba_epicenter_pulse extends BaseModifier_Plus {
             this.scepter_pulses_count_pct = this.ability.GetSpecialValueFor("scepter_pulses_count_pct");
             this.epicenter_duration = this.ability.GetSpecialValueFor("epicenter_duration");
             EmitSoundOn(this.sound_epicenter, this.caster);
+            this.GetCasterPlus().StartGesture(GameActivity_t.ACT_DOTA_OVERRIDE_ABILITY_4);
             this.radius = this.base_radius;
             this.pulses = 0;
             if (this.scepter) {
@@ -898,6 +886,12 @@ export class modifier_imba_epicenter_pulse extends BaseModifier_Plus {
     }
     IsDebuff(): boolean {
         return false;
+    }
+
+    public BeDestroy(): void {
+        if (IsServer()) {
+            this.GetCasterPlus().RemoveGesture(GameActivity_t.ACT_DOTA_OVERRIDE_ABILITY_4);
+        }
     }
 }
 @registerModifier()

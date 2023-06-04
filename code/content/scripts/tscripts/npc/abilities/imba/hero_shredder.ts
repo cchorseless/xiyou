@@ -1412,7 +1412,9 @@ export class modifier_imba_shredder_chakram_thinker extends BaseModifierMotionHo
                 bProvidesVision: false,
                 ExtraData: ExtraData
             });
-            this.GetAbilityPlus<imba_shredder_chakram_2>().projectiles[GameRules.GetGameTime() + ""] = ExtraData;
+            if (this.GetAbilityPlus<imba_shredder_chakram_2>().projectiles) {
+                this.GetAbilityPlus<imba_shredder_chakram_2>().projectiles[GameRules.GetGameTime() + ""] = ExtraData;
+            }
         }
     }
     UpdateHorizontalMotion(me: CDOTA_BaseNPC, dt: number): void {

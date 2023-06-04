@@ -155,4 +155,15 @@ export class CombinationManagerComponent extends ET.Component implements IRoundS
 
     public onDestroy(): void {
     }
+
+    /**
+     * 获得羁绊战力
+     */
+    GetSectScore() {
+        let score = 0
+        this.getAllActiveCombination().forEach(comb => {
+            score += comb.GetSectScore()
+        })
+        return score
+    }
 }

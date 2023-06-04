@@ -1,0 +1,238 @@
+[
+  {
+    "id": "n1_r2_1",
+    "playername": "简单的电脑",
+    "accountid": "76561198",
+    "population": 3,
+    "round_min": 2,
+    "round_max": 10,
+    "battlescore": 100,
+    "sectinfo": [
+      "sect_seckill|3"
+    ],
+    "enemyinfo": [
+      {
+        "unitname": "building_hero_axe",
+        "star": 1,
+        "level": 1,
+        "position_x": 2,
+        "position_y": 7,
+        "itemslot1": "item_imba_blades_of_attack",
+        "itemslot2": "item_imba_quarterstaff",
+        "itemslot3": "",
+        "itemslot4": "",
+        "itemslot5": "",
+        "itemslot6": "",
+        "WearBundleId": "",
+        "spawn_buff": ""
+      },
+      {
+        "unitname": "building_hero_kunkka",
+        "star": 1,
+        "level": 1,
+        "position_x": 4,
+        "position_y": 7,
+        "itemslot1": "item_imba_quarterstaff",
+        "itemslot2": "",
+        "itemslot3": "",
+        "itemslot4": "",
+        "itemslot5": "",
+        "itemslot6": "",
+        "WearBundleId": "",
+        "spawn_buff": ""
+      },
+      {
+        "unitname": "building_hero_tiny",
+        "star": 1,
+        "level": 1,
+        "position_x": 6,
+        "position_y": 7,
+        "itemslot1": "item_imba_quarterstaff",
+        "itemslot2": "",
+        "itemslot3": "",
+        "itemslot4": "",
+        "itemslot5": "",
+        "itemslot6": "",
+        "WearBundleId": "",
+        "spawn_buff": ""
+      }
+    ]
+  },
+  {
+    "id": "n1_r2_2",
+    "playername": "简单的电脑",
+    "accountid": "344322234",
+    "population": 3,
+    "round_min": 2,
+    "round_max": 10,
+    "battlescore": 115,
+    "sectinfo": [
+      "sect_thorns|3"
+    ],
+    "enemyinfo": [
+      {
+        "unitname": "building_hero_abyssal_underlord",
+        "star": 1,
+        "level": 1,
+        "position_x": 2,
+        "position_y": 6,
+        "itemslot1": "item_imba_gloves",
+        "itemslot2": "",
+        "itemslot3": "",
+        "itemslot4": "",
+        "itemslot5": "",
+        "itemslot6": "",
+        "WearBundleId": "",
+        "spawn_buff": ""
+      },
+      {
+        "unitname": "building_hero_bristleback",
+        "star": 1,
+        "level": 1,
+        "position_x": 4,
+        "position_y": 6,
+        "itemslot1": "item_imba_helm_of_iron_will",
+        "itemslot2": "",
+        "itemslot3": "",
+        "itemslot4": "",
+        "itemslot5": "",
+        "itemslot6": "",
+        "WearBundleId": "",
+        "spawn_buff": ""
+      },
+      {
+        "unitname": "building_hero_ursa",
+        "star": 1,
+        "level": 1,
+        "position_x": 6,
+        "position_y": 6,
+        "itemslot1": "item_imba_crown",
+        "itemslot2": "",
+        "itemslot3": "",
+        "itemslot4": "",
+        "itemslot5": "",
+        "itemslot6": "",
+        "WearBundleId": "",
+        "spawn_buff": ""
+      }
+    ]
+  },
+  {
+    "id": "n1_r2_3",
+    "playername": "简单的电脑",
+    "accountid": "545454435",
+    "population": 3,
+    "round_min": 2,
+    "round_max": 10,
+    "battlescore": 120,
+    "sectinfo": [
+      "sect_shield|3"
+    ],
+    "enemyinfo": [
+      {
+        "unitname": "building_hero_abaddon",
+        "star": 1,
+        "level": 1,
+        "position_x": 3,
+        "position_y": 6,
+        "itemslot1": "item_imba_gloves",
+        "itemslot2": "",
+        "itemslot3": "",
+        "itemslot4": "",
+        "itemslot5": "",
+        "itemslot6": "",
+        "WearBundleId": "",
+        "spawn_buff": ""
+      },
+      {
+        "unitname": "building_hero_axe",
+        "star": 1,
+        "level": 1,
+        "position_x": 4,
+        "position_y": 6,
+        "itemslot1": "item_imba_helm_of_iron_will",
+        "itemslot2": "",
+        "itemslot3": "",
+        "itemslot4": "",
+        "itemslot5": "",
+        "itemslot6": "",
+        "WearBundleId": "",
+        "spawn_buff": ""
+      },
+      {
+        "unitname": "building_hero_bristleback",
+        "star": 1,
+        "level": 1,
+        "position_x": 5,
+        "position_y": 6,
+        "itemslot1": "item_imba_crown",
+        "itemslot2": "",
+        "itemslot3": "",
+        "itemslot4": "",
+        "itemslot5": "",
+        "itemslot6": "",
+        "WearBundleId": "",
+        "spawn_buff": ""
+      }
+    ]
+  },
+  {
+    "id": "n1_r2_4",
+    "playername": "简单的电脑",
+    "accountid": "545454935",
+    "population": 3,
+    "round_min": 2,
+    "round_max": 10,
+    "battlescore": 120,
+    "sectinfo": [
+      "sect_summon|3"
+    ],
+    "enemyinfo": [
+      {
+        "unitname": "building_hero_enigma",
+        "star": 1,
+        "level": 1,
+        "position_x": 6,
+        "position_y": 8,
+        "itemslot1": "item_imba_energy_booster",
+        "itemslot2": "",
+        "itemslot3": "",
+        "itemslot4": "",
+        "itemslot5": "",
+        "itemslot6": "",
+        "WearBundleId": "",
+        "spawn_buff": ""
+      },
+      {
+        "unitname": "building_hero_lycan",
+        "star": 1,
+        "level": 1,
+        "position_x": 4,
+        "position_y": 6,
+        "itemslot1": "item_imba_blight_stone",
+        "itemslot2": "",
+        "itemslot3": "",
+        "itemslot4": "",
+        "itemslot5": "",
+        "itemslot6": "",
+        "WearBundleId": "",
+        "spawn_buff": ""
+      },
+      {
+        "unitname": "building_hero_warlock",
+        "star": 1,
+        "level": 1,
+        "position_x": 6,
+        "position_y": 8,
+        "itemslot1": "item_imba_energy_booster",
+        "itemslot2": "",
+        "itemslot3": "",
+        "itemslot4": "",
+        "itemslot5": "",
+        "itemslot6": "",
+        "WearBundleId": "",
+        "spawn_buff": ""
+      }
+    ]
+  }
+]

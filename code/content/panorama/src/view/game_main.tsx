@@ -12,7 +12,6 @@ import { TimerHelper } from "../helper/TimerHelper";
 import { BaseLibExt } from "../libs/BaseLibExt";
 import { CCPanel } from "./AllUIElement/CCPanel/CCPanel";
 import { CCPausePanel } from "./AllUIElement/CCPause/CCPausePanel";
-import { CCDebugPanel } from "./DebugTool/CCDebugPanel";
 import { CCMainPanel } from "./MainPanel/CCMainPanel";
 import { CCOverHeadPanel } from "./OverHead/CCOverHeadPanel";
 
@@ -43,7 +42,6 @@ export class RootPanel extends CCPanel {
                 <Panel ref={this.__root__} className="CC_root" hittest={false} {...this.initRootAttrs()}>
                     <CCOverHeadPanel />
                     <CCMainPanel />
-                    <CCDebugPanel direction="left" hittest={false} />
                     <CCPausePanel tipQueue={["1", "2", "3"]} hittest={false} />
                     {this.props.children}
                     {this.__root___childs}
@@ -80,4 +78,3 @@ function StartRenderGameUI() {
 }
 LogHelper.print("StartRenderGameUI started --------------------------114");
 StartRenderGameUI();
-

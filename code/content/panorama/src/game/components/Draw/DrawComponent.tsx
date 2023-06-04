@@ -4,7 +4,9 @@ import { FuncHelper } from "../../../helper/FuncHelper";
 import { NetHelper } from "../../../helper/NetHelper";
 import { CCDrawArtifactPanel } from "../../../view/Draw/CCDrawArtifactPanel";
 import { CCDrawCardPanel } from "../../../view/Draw/CCDrawCardPanel";
+import { CCDrawEnemyPanel } from "../../../view/Draw/CCDrawEnemyPanel";
 import { CCDrawEquipPanel } from "../../../view/Draw/CCDrawEquipPanel";
+import { CCDrawSectPanel } from "../../../view/Draw/CCDrawSectPanel";
 import { CCMainPanel } from "../../../view/MainPanel/CCMainPanel";
 
 /**抽卡 */
@@ -29,7 +31,6 @@ export class DrawComponent extends ET.Component {
                     CCMainPanel.GetInstance()?.addOnlyPanel(CCDrawCardPanel, { cards: card })
                 }
             }));
-
         NetHelper.ListenOnLua(DrawConfig.EProtocol.DrawArtifactNotice,
             GHandler.create(this, (event: CLIENT_DATA<ArrayLikeObject<string>>) => {
                 if (event.state) {
@@ -46,6 +47,22 @@ export class DrawComponent extends ET.Component {
                     let card = FuncHelper.toArray(event.data!)
                     GLogHelper.print("抽到装备", card)
                     CCMainPanel.GetInstance()?.addOnlyPanel(CCDrawEquipPanel, { cards: card })
+                }
+            }));
+        NetHelper.ListenOnLua(DrawConfig.EProtocol.DrawSectNotice,
+            GHandler.create(this, (event: CLIENT_DATA<ArrayLikeObject<string>>) => {
+                if (event.state) {
+                    CCDrawSectPanel.GetInstance()?.close();
+                    let card = FuncHelper.toArray(event.data!)
+                    CCMainPanel.GetInstance()?.addOnlyPanel(CCDrawSectPanel, { cards: card })
+                }
+            }));
+        NetHelper.ListenOnLua(DrawConfig.EProtocol.DrawEnemyNotice,
+            GHandler.create(this, (event: CLIENT_DATA<ArrayLikeObject<string>>) => {
+                if (event.state) {
+                    CCDrawEnemyPanel.GetInstance()?.close();
+                    let card = FuncHelper.toArray(event.data!);
+                    CCMainPanel.GetInstance()?.addOnlyPanel(CCDrawEnemyPanel, { cards: card })
                 }
             }));
     }

@@ -116,7 +116,7 @@ export class CourierEntityRoot extends BaseEntityRoot implements IRoundStateCall
     }
     OnRound_Start(round?: ERoundBoard): void {
         this.AbilityManagerComp().OnRound_Start(round);
-        this.CourierEggComp().OnRound_Start(round);
+        // this.CourierEggComp().OnRound_Start(round);
         this.CourierShopComp().refreshRoundShopItem();
         this.CourierShopComp().SyncClient();
     };
@@ -124,7 +124,7 @@ export class CourierEntityRoot extends BaseEntityRoot implements IRoundStateCall
 
     OnRound_Prize(round: ERoundBoard) {
         let hero = this.GetDomain<IBaseNpc_Hero_Plus>();
-        if (round.isWin) {
+        if (round.isWin > 0) {
             this.onVictory();
             // 音效
             ResHelper.CreateParticle(new ResHelper.ParticleInfo()

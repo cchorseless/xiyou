@@ -145,6 +145,11 @@ export module CCShare {
         return `${a}_${b}_${uuidCount}@`;
     }
 
+    export function RandomNumber(min: number, max: number) {
+        return Math.round(Math.random() * (max - min) + min);
+    }
+
+
     export class Dictionary<K, V>  {
 
         _keys: K[] = [];
@@ -332,6 +337,7 @@ declare global {
     var GFromJson: typeof CCShare.FromJson;
     var GToJson: typeof CCShare.ToJson;
     var GGenerateUUID: typeof CCShare.GenerateUUID;
+    var GRandomNumber: typeof CCShare.RandomNumber;
     var GToNumber: typeof CCShare.ToNumber;
     var GToBoolean: typeof CCShare.ToBoolean;
     type IGDictionary<K, V> = CCShare.Dictionary<K, V>;
@@ -352,6 +358,7 @@ if (_G.GHandler == null) {
     _G.GFromJson = CCShare.FromJson;
     _G.GToJson = CCShare.ToJson;
     _G.GGenerateUUID = CCShare.GenerateUUID;
+    _G.GRandomNumber = CCShare.RandomNumber;
     _G.GToNumber = CCShare.ToNumber;
     _G.GToBoolean = CCShare.ToBoolean;
     _G.GDictionary = CCShare.Dictionary;

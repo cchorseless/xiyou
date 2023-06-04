@@ -822,7 +822,7 @@ export module FuncRandom {
 
     export function RandomRemove<T>(arr: Array<T>): T {
         let len = arr.length;
-        RandomInt(0, len - 1)
+        len = RandomInt(0, len - 1)
         return arr.splice(len, 1)[0];
     }
     /**

@@ -7,7 +7,6 @@ import { CCInventory } from "../CCInventory/CCInventory";
 import { CCPanel } from "../CCPanel/CCPanel";
 import { CCBuffList } from "./CCBuffList";
 import "./CCDacBoard.less";
-import { CCHealthExp } from "./CCHealthExp";
 import { CCHealthMana } from "./CCHealthMana";
 import { CCPortraitGroup } from "./CCPortraitGroup";
 
@@ -33,7 +32,7 @@ export class CCDacBoard extends CCPanel<ICCDacBoard> {
             return this.defaultRender("CC_DacBoardPanel");
         }
         const IsCustomCourier = Entities.IsCustomCourier(this.props.CurSelectUnit);
-        const isShowTalent = GJSONConfig.BuildingLevelUpConfig.get(Entities.GetUnitName(this.props.CurSelectUnit)) != null;
+        // const isShowTalent = GJSONConfig.BuildingLevelUpConfig.get(Entities.GetUnitName(this.props.CurSelectUnit)) != null;
         const tips = (IsCustomCourier || Entities.IsFakerCourier(this.props.CurSelectUnit)) ?
             { cls: CCPlayerInfoDialog, posRight: false, props: { Playerid: Entities.GetPlayerOwnerID(this.props.CurSelectUnit), isFaker: Entities.IsFakerCourier(this.props.CurSelectUnit) } } :
             { cls: CCUnitStatsDialog, posRight: false };
@@ -52,10 +51,10 @@ export class CCDacBoard extends CCPanel<ICCDacBoard> {
                             {/* {isShowTalent && <CCUnitScepterStatus CurSelectUnit={this.props.CurSelectUnit} />} */}
                         </CCPanel>
                         {
-                            IsCustomCourier ?
-                                <CCHealthExp entityIndex={this.props.CurSelectUnit} align="center bottom" marginBottom={"5px"} />
-                                :
-                                <CCHealthMana entityIndex={this.props.CurSelectUnit} align="center bottom" marginBottom={"5px"} />
+                            <CCHealthMana entityIndex={this.props.CurSelectUnit} align="center bottom" marginBottom={"5px"} />
+                            // IsCustomCourier ?
+                            //     <CCHealthExp entityIndex={this.props.CurSelectUnit} align="center bottom" marginBottom={"5px"} />
+                            //     :
                         }
                     </CCPanel>
                     <Panel id="DacBoardRight" hittest={false}>

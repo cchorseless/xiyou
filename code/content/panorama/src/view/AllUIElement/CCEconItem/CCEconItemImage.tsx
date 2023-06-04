@@ -7,7 +7,7 @@ import "./CCEconItemImage.less";
 
 
 interface ICCEconItemImage extends NodePropsData {
-    itemdef: number;
+    itemdef: number | string;
     showName?: boolean;
 }
 export class CCEconItemImage extends CCPanel<ICCEconItemImage> {
@@ -18,7 +18,7 @@ export class CCEconItemImage extends CCPanel<ICCEconItemImage> {
         const rarity = config?.itemRarity as IRarity;
         return (<Panel className="CCEconItemImage" ref={this.__root__}    {...this.initRootAttrs()}>
             <CCIconButton id="EconIconButton">
-                <EconItemImage itemdef={this.props.itemdef} className="EconItem" />
+                <EconItemImage itemdef={GToNumber(this.props.itemdef)} className="EconItem" />
             </CCIconButton>
             {this.props.showName && <CCLabel type="UnitName" localizedText={itemname} color={CSSHelper.GetRarityColor(rarity)} />}
             {this.props.children}

@@ -1,8 +1,10 @@
 import { Assert_SpawnEffect, ISpawnEffectInfo } from "../../../assert/Assert_SpawnEffect";
 import { ChessControlConfig } from "../../../shared/ChessControlConfig";
+import { GameProtocol } from "../../../shared/GameProtocol";
 import { Dota } from "../../../shared/Gen/Types";
 import { serializeETProps } from "../../../shared/lib/Entity";
 import { RoundConfig } from "../../../shared/RoundConfig";
+import { TBattleTeamRecord } from "../../../shared/service/battleteam/TBattleTeamRecord";
 import { ChessVector } from "../ChessControl/ChessVector";
 import { ERound } from "./ERound";
 
@@ -15,8 +17,9 @@ export class ERoundBoard extends ERound implements IRoundStateCallback {
     @serializeETProps()
     roundLeftTime: number = 0;
     @serializeETProps()
-    isWin: boolean = false;
-
+    readonly isWin: -1 | 0 | 1 = 0;
+    /**本轮对战的阵容实体ID */
+    readonly EnemyDBServerEntityId: string;
     _debug_StageStopped: boolean = false;
 
 
@@ -117,9 +120,19 @@ export class ERoundBoard extends ERound implements IRoundStateCallback {
         this.roundState = RoundConfig.ERoundBoardState.prize;
         this.roundLeftTime = GameRules.GetGameTime() + delaytime;
         let playerroot = GPlayerEntityRoot.GetOneInstance(this.BelongPlayerid);
+        let buildingCount = playerroot.BattleUnitManagerComp().GetAllBattleUnitAlive(DOTATeam_t.DOTA_TEAM_GOODGUYS).length;
         let enemyCount = playerroot.BattleUnitManagerComp().GetAllBattleUnitAlive(DOTATeam_t.DOTA_TEAM_BADGUYS).length;
-        this.isWin = enemyCount == 0;
+        if (buildingCount > 0 && enemyCount == 0) {
+            (this.isWin as any) = 1;
+        }
+        else if (buildingCount == 0 && enemyCount > 0) {
+            (this.isWin as any) = -1;
+        }
+        else {
+            (this.isWin as any) = 0;
+        }
         this.SyncClient();
+        this.UploadBattleResultData(this);
         playerroot.CourierRoot().OnRound_Prize(this);
         playerroot.BuildingManager().OnRound_Prize(this);
         playerroot.FakerHeroRoot().OnRound_Prize(this);
@@ -185,11 +198,61 @@ export class ERoundBoard extends ERound implements IRoundStateCallback {
         return (this.BelongPlayerid == playerid)
     }
 
-    CreateAllRoundBasicEnemy(SpawnEffect: ISpawnEffectInfo) {
-        let baseenemys = this.config.enemyinfo.filter((value) => { return value.enemycreatetype == GEEnum.EEnemyCreateType.None });
-        for (let enemyinfo of baseenemys) {
-            this.CreateRoundBasicEnemy(enemyinfo.id, SpawnEffect);
+    /**创建敌方阵营 */
+    CreateDrawEnemy(battleteam: TBattleTeamRecord, spawnEffect: ISpawnEffectInfo) {
+        let player = GPlayerEntityRoot.GetOneInstance(this.BelongPlayerid);
+        let playerid = this.BelongPlayerid;
+        // 记录一下用于数据上报
+        (this.EnemyDBServerEntityId as any) = battleteam.DBServerEntityId;
+        for (const enemyinfo of battleteam.UnitInfo) {
+            let _boardVec: ChessVector = new ChessVector(
+                ChessControlConfig.Gird_Max_X - 1 - enemyinfo.PosX,
+                ChessControlConfig.Gird_Max_Y + 1 - enemyinfo.PosY,
+                playerid);
+            let pos = _boardVec.getVector3();
+            let enemyName = enemyinfo.UnitName;
+            enemyName = enemyName.replace("_hero_", "_enemy_")
+            let delay = 0;
+            if (spawnEffect != null && spawnEffect.tp_effect != null) {
+                delay = Assert_SpawnEffect.ShowTPEffectAtPosition(pos, spawnEffect);
+            }
+            if (delay > 0) {
+                GTimerHelper.AddTimer(delay, GHandler.create(this, () => {
+                    let enemyroot = player.EnemyManagerComp().AddEnemy(enemyName, this.configID, enemyinfo.OnlyKey, pos, null, spawnEffect);
+                    if (enemyroot) {
+                        enemyroot.LoadData(enemyinfo)
+                    }
+
+                }));
+            } else {
+                let enemyroot = player.EnemyManagerComp().AddEnemy(enemyName, this.configID, enemyinfo.OnlyKey, pos, null, spawnEffect);
+                if (enemyroot) {
+                    enemyroot.LoadData(enemyinfo)
+                }
+            }
         }
+    }
+
+
+    RandomEnemyPrizeId() {
+        const enemyinfo = this.config.enemyinfo;
+        const weights = enemyinfo.map(v => {
+            return v.unitWeight;
+        })
+        return GFuncRandom.RandomArrayByWeight(enemyinfo, weights).map(v => { return v.id })[0]
+    }
+
+
+    CreateAllRoundBasicEnemy(SpawnEffect: ISpawnEffectInfo) {
+        let baseenemys = this.config.enemyinfo.filter((value) => {
+            return value.enemycreatetype == GEEnum.EEnemyCreateType.None
+        });
+        if (baseenemys.length > 0) {
+            for (let enemyinfo of baseenemys) {
+                this.CreateRoundBasicEnemy(enemyinfo.id, SpawnEffect);
+            }
+        }
+
     }
     GetBoardRandomEmptyEnemyGird(playerid: PlayerID) {
         let min_x = 0;
@@ -216,47 +279,62 @@ export class ERoundBoard extends ERound implements IRoundStateCallback {
         // let max_y = 12;
         // return new ChessVector(RandomFloat(min_x, max_x), RandomFloat(min_y, max_y), playerid);
     }
-    GetBoardRandomEggPos(playerid: PlayerID) {
-        let validPos = [
-            [0, ChessControlConfig.Gird_Max_Y],
-            [1, ChessControlConfig.Gird_Max_Y],
-            [2, ChessControlConfig.Gird_Max_Y],
-            [5, ChessControlConfig.Gird_Max_Y],
-            [6, ChessControlConfig.Gird_Max_Y],
-            [7, ChessControlConfig.Gird_Max_Y],
-        ]
+    GetBoardRandomEggPos() {
+        let playerroot = GGameScene.GetPlayer(this.BelongPlayerid);
+        let validPos: number[][] = [];
+        if (playerroot.CourierRoot().CourierEggComp().IsPathLeft) {
+            validPos = [
+                [0, ChessControlConfig.Gird_Max_Y],
+                [1, ChessControlConfig.Gird_Max_Y],
+                [2, ChessControlConfig.Gird_Max_Y],
+            ];
+        }
+        else {
+            validPos = [
+                [5, ChessControlConfig.Gird_Max_Y],
+                [6, ChessControlConfig.Gird_Max_Y],
+                [7, ChessControlConfig.Gird_Max_Y],
+            ];
+        }
         let r = GFuncRandom.RandomArray(validPos)[0];
-        return new ChessVector(r[0], r[1], playerid);
+        return new ChessVector(r[0], r[1], this.BelongPlayerid);
     }
-    CreateRoundBasicEnemy(unit_index: string, spawnEffect: ISpawnEffectInfo = null, npcOwner: IBaseNpc_Plus = null) {
+    CreateRoundBasicEnemy(onlykey: string, spawnEffect: ISpawnEffectInfo = null, npcOwner: IBaseNpc_Plus = null) {
         let player = GPlayerEntityRoot.GetOneInstance(this.BelongPlayerid);
         let playerid = this.BelongPlayerid;
         let enemyinfo = this.config.enemyinfo.find((value) => {
-            return value.id == unit_index
+            return value.id == onlykey
         });
         let _boardVec: ChessVector;
         if (enemyinfo.enemycreatetype == GEEnum.EEnemyCreateType.None) {
+            _boardVec = new ChessVector((enemyinfo.positionX), (enemyinfo.positionY), playerid);
+        }
+        else if (enemyinfo.enemycreatetype == GEEnum.EEnemyCreateType.RandomReplace) {
             _boardVec = new ChessVector((enemyinfo.positionX), (enemyinfo.positionY), playerid);
         }
         else if (enemyinfo.enemycreatetype == GEEnum.EEnemyCreateType.SummedBattle) {
             _boardVec = this.GetBoardRandomEmptyEnemyGird(playerid);
         }
         else if (enemyinfo.enemycreatetype == GEEnum.EEnemyCreateType.SummedEgg) {
-            _boardVec = this.GetBoardRandomEggPos(playerid);
+            _boardVec = this.GetBoardRandomEggPos();
         }
         let pos = _boardVec.getVector3();
         let angle = Vector(enemyinfo.anglesX, enemyinfo.anglesY, enemyinfo.anglesZ);
         let enemyName = enemyinfo.unitname;
+        if (enemyinfo.enemycreatetype == GEEnum.EEnemyCreateType.RandomReplace) {
+            enemyName = GFuncRandom.RandomOne(GJsonConfigHelper.GetAllHeroBySectLabel(enemyName));
+            enemyName = enemyName.replace("_hero_", "_enemy_")
+        }
         let delay = 0;
         if (spawnEffect != null && spawnEffect.tp_effect != null) {
             delay = Assert_SpawnEffect.ShowTPEffectAtPosition(pos, spawnEffect);
         }
         if (delay > 0) {
             GTimerHelper.AddTimer(delay, GHandler.create(this, () => {
-                player.EnemyManagerComp().AddEnemy(enemyName, this.configID, unit_index, pos, angle, spawnEffect, npcOwner);
+                player.EnemyManagerComp().AddEnemy(enemyName, this.configID, onlykey, pos, angle, spawnEffect, npcOwner);
             }));
         } else {
-            player.EnemyManagerComp().AddEnemy(enemyName, this.configID, unit_index, pos, angle, spawnEffect, npcOwner);
+            player.EnemyManagerComp().AddEnemy(enemyName, this.configID, onlykey, pos, angle, spawnEffect, npcOwner);
         }
         return pos
     }
@@ -280,7 +358,20 @@ export class ERoundBoard extends ERound implements IRoundStateCallback {
         return posArr;
     }
 
-
+    /**
+     * 上传战斗结果数据
+     */
+    UploadBattleResultData(round: ERoundBoard) {
+        let playeroot = GGameScene.GetPlayer(this.BelongPlayerid);
+        const RoundCharpter = GGameServiceSystem.GetInstance().getDifficultyNumberDes();
+        const score = round.isWin * round.config.rankScore;
+        playeroot.PlayerHttpComp().Post(GameProtocol.Protocol.DrawEnemy_UploadBattleResult, {
+            RoundIndex: round.config.roundIndex,
+            RoundCharpter: RoundCharpter,
+            EnemyEntityId: round.EnemyDBServerEntityId,
+            BattleScore: score,
+        })
+    }
 
     AddRoundDamage(attack: string, name: string, isattack: boolean, damagetype: DAMAGE_TYPES, damage: number) {
         if (this.unitDamageInfo[attack] == null) {

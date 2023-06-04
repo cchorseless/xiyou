@@ -9,7 +9,7 @@ export class THeroUnit extends ET.Entity {
 
 
     @serializeETProps()
-    public ConfigId: number;
+    public ConfigId: string;
     @serializeETProps()
     public Level: number = 1;
     @serializeETProps()
@@ -33,9 +33,4 @@ export class THeroUnit extends ET.Entity {
         this.SyncClient();
     }
 
-
-
-    public BindHeroName() {
-        return GJsonConfigHelper.GetHeroName(this.ConfigId);
-    }
 }

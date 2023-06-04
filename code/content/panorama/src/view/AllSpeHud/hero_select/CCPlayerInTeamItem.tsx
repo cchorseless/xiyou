@@ -50,7 +50,7 @@ export class CCPlayerInTeamItem extends CCPanel<ICCPlayerInTeamItem> {
                 <Panel id="PlayerDifficulty" hittest={false} >
                     {
                         (iDifficulty == GameServiceConfig.EDifficultyChapter.endless) ?
-                            <Label id="PlayerDifficultyEndless" localizedText="#lang_Difficult_999" /> :
+                            <Label id="PlayerDifficultyEndless" localizedText="#lang_Difficult_1000" /> :
                             <Panel id="PlayerDifficultyNum" />
                     }
                 </Panel>

@@ -8,7 +8,7 @@ import { EWearableItem } from "./EWearableItem";
 export class WearableComponent extends ET.Component {
     readonly sHeroName: string;
     readonly replaceParticles: { [k: string]: string[] } = {};
-
+    readonly WearBundleId: string;
     GetHeroConfig() {
         let wearSys = GWearableSystem.GetInstance();
         return wearSys.Allheroes[this.sHeroName];
@@ -65,6 +65,7 @@ export class WearableComponent extends ET.Component {
         //     return;
         // }
         if (config.prefab == WearableConfig.EWearableType.bundle && config.bundle) {
+            (this.WearBundleId as any) = sItemDef;
             for (let sSubItemDef of config.bundle) {
                 this.WearOneItem(sSubItemDef, sStyle, wearlabel);
             }

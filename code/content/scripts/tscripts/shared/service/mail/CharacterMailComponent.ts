@@ -1,6 +1,7 @@
 
 import { ET, serializeETProps } from "../../lib/Entity";
 import { TCharacter } from "../account/TCharacter";
+import { TMail } from "./TMail";
 
 
 
@@ -11,7 +12,7 @@ export class CharacterMailComponent extends ET.Component {
     @serializeETProps()
     public LastMailId: string;
     @serializeETProps()
-    public Mails: string[];
+    public Mails: string[] = [];
 
     public get Character(): TCharacter { return this.GetParent<TCharacter>(); }
     onGetBelongPlayerid() {
@@ -28,4 +29,19 @@ export class CharacterMailComponent extends ET.Component {
     onReload() {
         this.SyncClient();
     }
+
+
+    GetAllMail() {
+        let r: TMail[] = [];
+        for (let entityid of this.Mails) {
+            let entity = TMail.GetOneInstanceById(entityid);
+            if (entity && entity.IsDelete == false) {
+                r.push(entity)
+            }
+        }
+        return r;
+    }
+
+
+
 }

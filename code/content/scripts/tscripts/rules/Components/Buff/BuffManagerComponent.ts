@@ -15,6 +15,21 @@ export class BuffManagerComponent extends ET.Component {
         }
     }
 
+    getCloneBuffInfo() {
+        let r: string[] = [];
+        let domain = this.GetDomain<IBaseNpc_Plus>();
+        for (let buffName of this.RuntimeCloneBuff) {
+            let stack = domain.findBuffStack(buffName);
+            if (stack != 0) {
+                r.push(`${buffName}|${stack}`)
+            }
+        }
+        if (r.length > 0) {
+            return r;
+        }
+    }
+
+
     cloneRuntimeBuff(comp: BuffManagerComponent) {
         let buffnames = comp.RuntimeCloneBuff;
         if (buffnames && buffnames.length > 0) {

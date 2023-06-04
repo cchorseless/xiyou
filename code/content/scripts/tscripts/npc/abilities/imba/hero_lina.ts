@@ -639,9 +639,9 @@ export class imba_lina_fiery_soul extends BaseAbility_Plus {
     // GetManaCost(level: number): number {
     //     return 0;
     // }
-    AutoSpellSelf() {
-        return AI_ability.NO_TARGET_cast(this)
-    }
+    // AutoSpellSelf() {
+    //     return AI_ability.NO_TARGET_cast(this)
+    // }
 }
 @registerModifier()
 export class modifier_imba_fiery_soul extends BaseModifier_Plus {

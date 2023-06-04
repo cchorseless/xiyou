@@ -1251,6 +1251,9 @@ export class imba_vengefulspirit_nether_swap extends BaseAbility_Plus {
             GridNav.DestroyTreesAroundPoint(caster_loc, tree_radius, false);
             GridNav.DestroyTreesAroundPoint(target_loc, tree_radius, false);
             let ability_handle = caster.findAbliityPlus<imba_vengefulspirit_swap_back>("imba_vengefulspirit_swap_back");
+            if (!IsValid(ability_handle)) {
+                return
+            }
             this.AddTimer(swapback_delay, () => {
                 caster.AddNewModifier(caster, this, "modifier_imba_nether_swap", {
                     duration: swapback_duration

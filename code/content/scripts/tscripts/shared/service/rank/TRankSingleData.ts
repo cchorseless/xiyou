@@ -12,4 +12,18 @@ export class TRankSingleData extends ET.Entity {
     public RankIndex: number;
     @serializeETProps()
     public CharacterId: string;
+
+    @serializeETProps()
+    public RankType: number;
+
+    @serializeETProps()
+    public SteamAccountId: string;
+
+    onSerializeToEntity() {
+        this.onReload();
+    }
+
+    onReload() {
+        this.SyncClient();
+    }
 }

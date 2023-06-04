@@ -66,9 +66,8 @@ export class CCHandBookPanel extends CCPanel<ICCHandBookPanel> {
                             $.Localize("#lang_equip"),
                             $.Localize("#lang_artifact"),
                             $.Localize("#lang_faq")
-                        ]} onChange={(index: number, text: string) => {
-                            GLogHelper.print("index:" + index + " text:" + text)
-                            this.UpdateState({ selectindex: index - 1 })
+                        ]} defaultSelected={0} onChange={(index: number, text: string) => {
+                            this.UpdateState({ selectindex: index })
                         }} />
                         {
                             <CCPanel id="PanelContentBg"  >

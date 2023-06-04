@@ -112,7 +112,7 @@ export class CCGameEndlessDifficulty extends CCPanel<IEndlessDifficulty, RadioBu
                     }
                     GGameScene.GameServiceSystem.SelectDifficultyEndlessLevel(iNumber)
                 }}
-                onmouseover={p => $.DispatchEvent("DOTAShowTextTooltip", p, $.Localize("#lang_Difficult_" + 999 + "_Description"))}
+                onmouseover={p => $.DispatchEvent("DOTAShowTextTooltip", p, $.Localize("#lang_Difficult_1000_Description"))}
                 onmouseout={p => $.DispatchEvent("DOTAHideTextTooltip", p)}
                 ref={this.__root__}  {...this.initRootAttrs()}
             >
@@ -125,7 +125,7 @@ export class CCGameEndlessDifficulty extends CCPanel<IEndlessDifficulty, RadioBu
                     })}
                 </Panel>
                 <Image id="Lock" />
-                <Label id="endlessName" localizedText="#lang_Difficult_999" />
+                <Label id="endlessName" localizedText="#lang_Difficult_1000" />
                 <Panel id="TextEntryAndButtons" hittest={false}>
                     <TextEntry id="OperatorEndlessTextEntry" enabled={enable} textmode="numeric" multiline={false} placeholder="1" ref={this.refText} text={layers + ""}
                         ontextentrychange={(pSelf) => { this.onTextChange(pSelf) }} />

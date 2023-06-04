@@ -102,7 +102,7 @@ export class AiAttackComponent extends ET.Component {
         if (!IsValid(new_target) || !new_target.IsAlive()) {
             let team = npc.GetTeam() == DOTATeam_t.DOTA_TEAM_GOODGUYS ? DOTATeam_t.DOTA_TEAM_BADGUYS : DOTATeam_t.DOTA_TEAM_GOODGUYS;
             let enemys = GGameScene.GetPlayer(this.BelongPlayerid).BattleUnitManagerComp().GetAllBattleUnitAliveNpc(team);
-            enemys = enemys.filter((v) => { return v.HasModifier("modifier_unit_freedom") && v.IsAlive() && v.IsAttacker() });
+            enemys = enemys.filter((v) => { return v.IsAlive() && v.IsAttacker() });
             if (enemys.length > 0) {
                 let pos = npc.GetAbsOrigin();
                 enemys.sort((a, b) => {

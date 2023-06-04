@@ -145,6 +145,7 @@ export class MapSystemComponent extends ET.SingletonComponent {
      */
     ChangeGirdPathToEgg(toPos: Vector) {
         const playerid = toPos.z;
+        const allgird = this.AllChessGirdEntity[playerid + ""];
         let startleftx = 0;
         let startlefty = 3;
         let vleftlist: ChessVector[] = [
@@ -154,7 +155,11 @@ export class MapSystemComponent extends ET.SingletonComponent {
         for (let y = ChessControlConfig.Gird_Max_Y; y >= startlefty; y--) {
             vleftlist.push(new ChessVector(startleftx, y, playerid));
         }
-
+        vleftlist.forEach(v => {
+            let entity = allgird[v.x + ""][v.y + ""];
+            entity && entity.SetModel("maps/journey_assets/props/teams/logo_dire_journey_small.vmdl");
+            entity && entity.SetForwardVector(Vector(1, 0, 0));
+        })
         while (startleftx != toPos.x || startlefty != toPos.y) {
             if (startleftx < toPos.x && (startlefty == toPos.y || RollPercentage(50))) {
                 startleftx++;
@@ -175,6 +180,11 @@ export class MapSystemComponent extends ET.SingletonComponent {
         for (let y = ChessControlConfig.Gird_Max_Y; y >= startrighty; y--) {
             vrightlist.push(new ChessVector(startrightx, y, playerid));
         }
+        vrightlist.forEach(v => {
+            let entity = allgird[v.x + ""][v.y + ""];
+            entity && entity.SetModel("maps/journey_assets/props/teams/logo_dire_journey_small.vmdl");
+            entity && entity.SetForwardVector(Vector(1, 0, 0));
+        })
         while (startrightx != toPos.x || startrighty != toPos.y) {
             if (startrightx > toPos.x && (startrighty == toPos.y || RollPercentage(50))) {
                 startrightx--;
@@ -186,7 +196,6 @@ export class MapSystemComponent extends ET.SingletonComponent {
                 vrightlist.push(new ChessVector(startrightx, startrighty, playerid));
             }
         }
-        let allgird = this.AllChessGirdEntity[playerid + ""];
         for (let x in allgird) {
             for (let y of [1, 2, 3]) {
                 let entity = allgird[x][y + ""];
@@ -194,7 +203,14 @@ export class MapSystemComponent extends ET.SingletonComponent {
                 entity && entity.SetForwardVector(Vector(0, 1, 0));
             }
         }
-        let vlist: ChessVector[] = [].concat(vleftlist, vrightlist);
+
+        let vlist: ChessVector[] = [];
+        if (vleftlist.length > vrightlist.length) {
+            vlist = vleftlist;
+        }
+        else {
+            vlist = vrightlist;
+        }
         for (let i = 0; i < vlist.length; i++) {
             let v = vlist[i];
             let entity = allgird[v.x + ""][v.y + ""];

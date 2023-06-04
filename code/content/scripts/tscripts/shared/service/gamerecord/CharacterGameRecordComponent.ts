@@ -10,6 +10,8 @@ export class CharacterGameRecordComponent extends ET.Component {
     @serializeETProps()
     public CurRecordID: string;
 
+
+
     get Character(): TCharacter { return this.GetParent<TCharacter>(); }
     onGetBelongPlayerid() {
         let character = GTCharacter.GetOneInstanceById(this.Id);
@@ -45,5 +47,9 @@ export class CharacterGameRecordComponent extends ET.Component {
         }
         return this.ItemUseRecordInfo[itemid];
     }
+
+
+
+
 
 }

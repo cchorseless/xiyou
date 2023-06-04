@@ -866,7 +866,7 @@ export class modifier_sect_poision_finale_poison extends BaseModifier_Plus {
     }
     BeDestroy(): void {
         if (IsServer()) {
-            if (this.GetRemainingTime() <= 0 || !IsValid(this.caster)) { return }
+            if (this.GetRemainingTime() <= 0 || !IsValid(this.caster) || !IsValid(this.parent)) { return }
             EmitSoundOn(this.sound_explode, this.parent);
             this.particle_explode_fx = ResHelper.CreateParticleEx(this.particle_explode, ParticleAttachment_t.PATTACH_ABSORIGIN, this.parent);
             ParticleManager.SetParticleControl(this.particle_explode_fx, 0, this.parent.GetAbsOrigin());
@@ -1303,12 +1303,12 @@ export class modifier_sect_warpath_base_a extends modifier_sect_effect_base {
         this.AddParticle(this.buff_fx, false, false, -1, false, false);
         let atk_bonus_pect = this.getSpecialData("atk_bonus_pect");
         let t = parent.TempData().sect_warpath || { atk_bonus_pect: 0 };
-        t.sect_warpath += atk_bonus_pect;
+        t.atk_bonus_pect += atk_bonus_pect;
         parent.TempData().sect_warpath = t;
         EmitSoundOn("hero_bloodseeker.bloodRage", parent);
         if (IsServer()) {
             let buff = modifier_sect_warpath_aura.applyOnly(parent, parent, this.GetAbilityPlus());
-            buff.SetStackCount(t.sect_warpath);
+            buff.SetStackCount(t.atk_bonus_pect);
         }
     }
 
@@ -1327,11 +1327,11 @@ export class modifier_sect_warpath_base_b extends modifier_sect_effect_base {
         let parent = this.GetParentPlus();
         let atk_bonus_pect = this.getSpecialData("atk_bonus_pect");
         let t = parent.TempData().sect_warpath || { atk_bonus_pect: 0 };
-        t.sect_warpath += atk_bonus_pect;
+        t.atk_bonus_pect += atk_bonus_pect;
         parent.TempData().sect_warpath = t;
         if (IsServer()) {
             let buff = modifier_sect_warpath_aura.applyOnly(parent, parent, this.GetAbilityPlus());
-            buff.SetStackCount(t.sect_warpath);
+            buff.SetStackCount(t.atk_bonus_pect);
         }
     }
 

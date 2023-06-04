@@ -36,7 +36,7 @@ export class BuildingRuntimeEntityRoot extends BattleUnitEntityRoot {
         this.AiAttackComp().endFindToAttack();
         this.AbilityManagerComp().OnRound_Prize(round);
         this.InventoryComp().OnRound_Prize(round);
-        if (round.isWin) {
+        if (round.isWin > 0) {
             this.onVictory();
         }
     }
@@ -53,7 +53,7 @@ export class BuildingRuntimeEntityRoot extends BattleUnitEntityRoot {
 
     onKilled(events: EntityKilledEvent): void {
         this.changeAliveState(false);
-        this.AiAttackComp().endFindToAttack();
+        this.AiAttackComp()?.endFindToAttack();
         let npc = this.GetDomain<IBaseNpc_Plus>();
         npc.StartGesture(GameActivity_t.ACT_DOTA_DIE);
     }

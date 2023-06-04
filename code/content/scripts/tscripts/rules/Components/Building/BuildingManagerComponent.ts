@@ -5,9 +5,11 @@ import { modifier_building } from "../../../npc/modifier/building/modifier_build
 import { modifier_spawn_fall } from "../../../npc/modifier/spawn/modifier_spawn_fall";
 import { BuildingConfig } from "../../../shared/BuildingConfig";
 import { ChessControlConfig } from "../../../shared/ChessControlConfig";
+import { GameProtocol } from "../../../shared/GameProtocol";
 import { EEnum } from "../../../shared/Gen/Types";
 import { ET } from "../../../shared/lib/Entity";
 import { GEventHelper } from "../../../shared/lib/GEventHelper";
+import { TBattleTeamRecord } from "../../../shared/service/battleteam/TBattleTeamRecord";
 import { ChessVector } from "../ChessControl/ChessVector";
 import { ERoundBoard } from "../Round/ERoundBoard";
 import { BuildingEntityRoot } from "./BuildingEntityRoot";
@@ -195,6 +197,11 @@ export class BuildingManagerComponent extends ET.Component implements IRoundStat
                 let build2 = buildings[i + 1];
                 if (build1.checkCanStarUp() && build2.iStar == 1) {
                     build1.AddStar(1);
+                    let build2_index = this.allBuilding.indexOf(build2.Id);
+                    this.allBuilding.splice(build2_index, 1);
+                    if (build2.ChessComp().isPosInBattle()) {
+                        GEventHelper.FireEvent(ChessControlConfig.Event.ChessControl_LeaveBattle, null, build2.BelongPlayerid, build2);
+                    }
                     build2.Dispose();
                     playerdata.ModifyGold(-iGoldCost);
                     return build1;
@@ -219,7 +226,9 @@ export class BuildingManagerComponent extends ET.Component implements IRoundStat
         BuildingEntityRoot.Active(building, playerID, towerID);
         let buildingroot = building.ETRoot.As<IBuildingEntityRoot>();
         buildingroot.SetGoldCost(iGoldCost);
-        playerdata.ModifyGold(-iGoldCost);
+        if (goldcostpect > 0) {
+            playerdata.ModifyGold(-iGoldCost);
+        }
         playerroot.AddDomainChild(buildingroot);
         this.allBuilding.push(buildingroot.Id)
         if (showfaileffect) {
@@ -387,6 +396,8 @@ export class BuildingManagerComponent extends ET.Component implements IRoundStat
     }
 
     OnRound_Battle() {
+        this.UploadBuildingData();
+        // 上传阵容数据
         this.getAllBattleBuilding(true).forEach((b) => {
             b.OnRound_Battle();
         });
@@ -418,6 +429,81 @@ export class BuildingManagerComponent extends ET.Component implements IRoundStat
         let player = GGameScene.GetPlayer(this.BelongPlayerid);
         player.BattleUnitManagerComp().ClearBuildingRuntime();
 
+    }
+
+    /**
+     * 上传阵容数据
+     */
+    UploadBuildingData() {
+        let playeroot = GGameScene.GetPlayer(this.BelongPlayerid);
+        const UnitInfoDes: IBattleUnitInfoItem[] = [];
+        this.getAllBattleBuilding(true).forEach((b) => {
+            const npc = b.GetDomain<IBaseNpc_Plus>();
+            const ChessComp = b.ChessComp();
+            const equips: string[] = [];
+            for (let i = DOTAScriptInventorySlot_t.DOTA_ITEM_SLOT_1; i <= DOTAScriptInventorySlot_t.DOTA_ITEM_SLOT_6; i++) {
+                let item = npc.GetItemInSlot(i) as IBaseItem_Plus;
+                if (item && item.IsValidItem()) {
+                    equips.push(item.GetAbilityName())
+                }
+            }
+            UnitInfoDes.push({
+                UnitName: b.ConfigID,
+                Level: npc.GetLevel(),
+                Star: b.iStar,
+                PosX: ChessComp.ChessVector.x,
+                PosY: ChessComp.ChessVector.y,
+                WearBundleId: b.WearableComp().WearBundleId,
+                EquipInfo: equips.length > 0 ? equips : null,
+                Buffs: b.BuffManagerComp().getCloneBuffInfo(),
+
+            })
+        });
+        if (UnitInfoDes.length == 0) { return }
+        const round = playeroot.RoundManagerComp().getCurrentBoardRound();
+        const roundIndex = round.config.roundIndex;
+        const RoundCharpter = GGameServiceSystem.GetInstance().getDifficultyNumberDes();
+        const accoutid = PlayerResource.GetSteamAccountID(this.BelongPlayerid) + "";
+        const playername = PlayerResource.GetPlayerName(this.BelongPlayerid);
+        const allcomb = playeroot.CombinationManager().getAllActiveCombination();
+        const SectInfo: { [k: string]: number } = {};
+        allcomb.forEach(v => {
+            SectInfo[v.SectName] = v.uniqueConfigList.length;
+        })
+        const SectInfoDes: string[] = [];
+        for (let k in SectInfo) {
+            SectInfoDes.push(`${k}|${SectInfo[k]}`)
+        }
+        const child1: TBattleTeamRecord = {} as any;
+        child1.SteamAccountId = accoutid;
+        child1.SteamAccountName = playername;
+        child1.RoundIndex = roundIndex;
+        child1.RoundCharpter = RoundCharpter;
+        child1.Score = this.GetBuildingTeamScore();
+        child1.SectInfo = SectInfoDes;
+        child1.UnitInfo = UnitInfoDes;
+        playeroot.PlayerHttpComp().Post(GameProtocol.Protocol.DrawEnemy_UploadEnemyInfo, {
+            SteamAccountId: accoutid,
+            SteamAccountName: playername,
+            TeamInfo: [child1],
+        })
+    }
+
+
+
+
+
+    /**
+     * 获得战力
+     */
+    GetBuildingTeamScore() {
+        let score = 0;
+        this.getAllBattleBuilding(true).forEach((b) => {
+            score += b.GetScore();
+        });
+        let player = GGameScene.GetPlayer(this.BelongPlayerid);
+        score += player.CombinationManager().GetSectScore();
+        return score;
     }
 
 }

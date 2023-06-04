@@ -72,32 +72,32 @@ export class modifier_imba_juggernaut_blade_fury extends BaseModifier_Plus {
     public deflect: any;
     public shard_interval: number;
     public shard_interval_counter: number;
-    public damage_penalty: number;
     public talent_movespeed: number;
     public shard_ms: any;
     public blade_fury_spin_pfx: any;
     public blade_fury_spin_pfx_2: any;
     public bladedance: any;
     public prng: any;
-    IsAura(): boolean {
-        if (this.original_caster.HasTalent("special_bonus_imba_juggernaut_1")) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-    GetAuraSearchTeam(): DOTA_UNIT_TARGET_TEAM {
-        return DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY;
-    }
-    GetAuraSearchType(): DOTA_UNIT_TARGET_TYPE {
-        return DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO;
-    }
-    GetAuraRadius(): number {
-        return this.radius + 250;
-    }
-    GetModifierAura(): string {
-        return "modifier_imba_juggernaut_blade_fury_succ";
-    }
+    // IsAura(): boolean {
+    //     // if (this.original_caster.HasTalent("special_bonus_imba_juggernaut_1")) {
+    //     //     return true;
+    //     // } else {
+    //     //     return false;
+    //     // }
+    //     return false
+    // }
+    // GetAuraSearchTeam(): DOTA_UNIT_TARGET_TEAM {
+    //     return DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY;
+    // }
+    // GetAuraSearchType(): DOTA_UNIT_TARGET_TYPE {
+    //     return DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO;
+    // }
+    // GetAuraRadius(): number {
+    //     return this.radius + 250;
+    // }
+    // GetModifierAura(): string {
+    //     return "modifier_imba_juggernaut_blade_fury_succ";
+    // }
     BeCreated(p_0: any,): void {
         this.original_caster = this.GetCasterPlus();
         this.dps = this.GetSpecialValueFor("blade_fury_damage") + this.GetCasterPlus().GetTalentValue("special_bonus_imba_unique_juggernaut_3");
@@ -107,7 +107,6 @@ export class modifier_imba_juggernaut_blade_fury extends BaseModifier_Plus {
         this.deflect = true;
         this.shard_interval = this.GetSpecialValueFor("shard_attack_interval");
         this.shard_interval_counter = this.shard_interval - 0.2;
-        this.damage_penalty = -100;
         this.talent_movespeed = this.GetCasterPlus().GetTalentValue("special_bonus_imba_juggernaut_blade_fury_movement_speed");
         this.shard_ms = 0;
         if (this.GetCasterPlus().HasShard()) {
@@ -148,33 +147,33 @@ export class modifier_imba_juggernaut_blade_fury extends BaseModifier_Plus {
             let slash_pfx = ResHelper.CreateParticleEx("particles/units/heroes/hero_juggernaut/juggernaut_blade_fury_tgt.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, enemy, this.GetCasterPlus());
             ParticleManager.SetParticleControl(slash_pfx, 0, enemy.GetAbsOrigin());
             ParticleManager.ReleaseParticleIndex(slash_pfx);
-            if (this.original_caster.HasTalent("special_bonus_imba_juggernaut_6") && this.GetCasterPlus().findAbliityPlus<imba_juggernaut_blade_dance>("imba_juggernaut_blade_dance")) {
-                this.bladedance = this.bladedance || this.GetCasterPlus().findAbliityPlus<imba_juggernaut_blade_dance>("imba_juggernaut_blade_dance");
-                this.prng = this.prng || 0;
-                let wind_dance = this.original_caster.findBuff<modifier_imba_juggernaut_blade_dance_wind_dance>("modifier_imba_juggernaut_blade_dance_wind_dance");
-                if (wind_dance) {
-                    damage = damage + (wind_dance.GetStackCount() * this.original_caster.GetTalentValue("special_bonus_imba_juggernaut_6", "dps") * this.tick);
-                }
-                let crit = this.bladedance.GetSpecialValueFor("blade_dance_crit_mult") / 100;
-                let chance = this.bladedance.GetSpecialValueFor("blade_dance_crit_chance");
-                if (RollPercentage(chance + this.prng - math.floor((chance - 5) / chance))) {
-                    this.prng = 0;
-                    let crit_pfx = ResHelper.CreateParticleEx("particles/units/heroes/hero_juggernaut/jugg_crit_blur.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetParentPlus(), this.GetCasterPlus());
-                    if (this.GetCasterPlus().HasModifier("modifier_juggernaut_arcana")) {
-                        ParticleManager.SetParticleControl(crit_pfx, 1, enemy.GetAbsOrigin());
-                        ParticleManager.SetParticleControl(crit_pfx, 3, enemy.GetAbsOrigin());
-                    }
-                    ParticleManager.SetParticleControl(crit_pfx, 0, this.GetParentPlus().GetAbsOrigin());
-                    ParticleManager.ReleaseParticleIndex(crit_pfx);
-                    this.GetParentPlus().EmitSound("Hero_Juggernaut.BladeDance");
-                    this.GetParentPlus().EmitSound("Hero_Juggernaut.PreAttack");
-                    damage = damage * crit;
-                    let player = PlayerResource.GetPlayer(this.GetCasterPlus().GetPlayerID());
-                    SendOverheadEventMessage(player, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_CRITICAL, enemy, damage, player);
-                } else {
-                    this.prng = this.prng + 1;
-                }
-            }
+            // if (this.original_caster.HasTalent("special_bonus_imba_juggernaut_6") && this.GetCasterPlus().findAbliityPlus<imba_juggernaut_blade_dance>("imba_juggernaut_blade_dance")) {
+            //     this.bladedance = this.bladedance || this.GetCasterPlus().findAbliityPlus<imba_juggernaut_blade_dance>("imba_juggernaut_blade_dance");
+            //     this.prng = this.prng || 0;
+            //     let wind_dance = this.original_caster.findBuff<modifier_imba_juggernaut_blade_dance_wind_dance>("modifier_imba_juggernaut_blade_dance_wind_dance");
+            //     if (wind_dance) {
+            //         damage = damage + (wind_dance.GetStackCount() * this.original_caster.GetTalentValue("special_bonus_imba_juggernaut_6", "dps") * this.tick);
+            //     }
+            //     let crit = this.bladedance.GetSpecialValueFor("blade_dance_crit_mult") / 100;
+            //     let chance = this.bladedance.GetSpecialValueFor("blade_dance_crit_chance");
+            //     if (RollPercentage(chance + this.prng - math.floor((chance - 5) / chance))) {
+            //         this.prng = 0;
+            //         let crit_pfx = ResHelper.CreateParticleEx("particles/units/heroes/hero_juggernaut/jugg_crit_blur.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetParentPlus(), this.GetCasterPlus());
+            //         if (this.GetCasterPlus().HasModifier("modifier_juggernaut_arcana")) {
+            //             ParticleManager.SetParticleControl(crit_pfx, 1, enemy.GetAbsOrigin());
+            //             ParticleManager.SetParticleControl(crit_pfx, 3, enemy.GetAbsOrigin());
+            //         }
+            //         ParticleManager.SetParticleControl(crit_pfx, 0, this.GetParentPlus().GetAbsOrigin());
+            //         ParticleManager.ReleaseParticleIndex(crit_pfx);
+            //         this.GetParentPlus().EmitSound("Hero_Juggernaut.BladeDance");
+            //         this.GetParentPlus().EmitSound("Hero_Juggernaut.PreAttack");
+            //         damage = damage * crit;
+            //         let player = PlayerResource.GetPlayer(this.GetCasterPlus().GetPlayerID());
+            //         SendOverheadEventMessage(player, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_CRITICAL, enemy, damage, player);
+            //     } else {
+            //         this.prng = this.prng + 1;
+            //     }
+            // }
             ApplyDamage({
                 attacker: this.GetCasterPlus(),
                 victim: enemy,
@@ -246,12 +245,6 @@ export class modifier_imba_juggernaut_blade_fury extends BaseModifier_Plus {
             4: Enum_MODIFIER_EVENT.ON_ATTACK_LANDED
         });
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOTALDAMAGEOUTGOING_PERCENTAGE)
-    CC_GetModifierDamageOutgoing_Percentage(keys: ModifierAttackEvent): number {
-        if (keys.target && !keys.target.IsMagicImmune() && !keys.target.IsBuilding()) {
-            return this.damage_penalty;
-        }
-    }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_CONSTANT)
     CC_GetModifierMoveSpeedBonus_Constant(): number {
         return this.talent_movespeed + this.shard_ms;

@@ -7,25 +7,26 @@ interface ICCLevelxp {
     exp?: number;
     min?: number;
     max?: number;
+    showProgress?: boolean;
 }
 
 export class CCLevelxp extends CCPanel<ICCLevelxp> {
+
     render() {
-        const showExpProgress = this.props.max !== null;
-        const exp = this.props.exp || 0;
+        const showExpProgress = this.props.showProgress || false;
+        const exp = this.props.exp || 100;
         const min = this.props.min || 0;
         const max = this.props.max || 100;
         return (
-            <Panel className='CC_Levelxp' ref={this.__root__}  {...this.initRootAttrs()}>
-
+            <Panel className='CCLevelxp' ref={this.__root__}  {...this.initRootAttrs()}>
                 {
                     showExpProgress ?
                         <CCPanel tooltip={`${exp}/${max}`}>
                             <CircularProgressBar className='CCLevelxpProgressBar' max={max} min={min} value={exp} />
                         </CCPanel>
-                        : <Image className="CC_LevelxpBorder" />
+                        : <Panel className="CCLevelxpBorder" />
                 }
-                <Label className="CC_LevelxpLabel" text={this.props.level} />
+                <Label className="CCLevelxpLabel" text={this.props.level} />
             </Panel>
         );
     }

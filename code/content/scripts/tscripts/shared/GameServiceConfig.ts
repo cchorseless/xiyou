@@ -73,10 +73,10 @@ export module GameServiceConfig {
         n9 = 9,
         n10 = 10,
         /**无尽关卡 */
-        endless = 999
+        endless = 1000
     }
     /**无尽最大层数 */
-    export const iMaxEndless = 999;
+    export const iMaxEndless = 1000;
     /**普通最大难度 */
     export const DIFFICULTY_LAST = EDifficultyChapter.n6;
     export const ENDLESS_ENEMEY_fHPMult = {

@@ -63,12 +63,12 @@ export class CCCombinationInfoDialog extends CCPanel<ICCCombinationInfoDialog> {
         if (playerid == -1) {
             if (unitentityindex != -1) {
                 playerid = BaseEntityRoot.GetEntityBelongPlayerId(unitentityindex!);
-                iStar = BaseEntityRoot.GetBattleEntity(unitentityindex!)?.iStar || 0;
+                iStar = Entities.GetStar(unitentityindex!) || 0;
             }
             else if (castentityindex != -1) {
                 unitentityindex = Abilities.GetCaster(castentityindex!);
                 playerid = BaseEntityRoot.GetEntityBelongPlayerId(unitentityindex);
-                iStar = BaseEntityRoot.GetBattleEntity(unitentityindex!)?.iStar || 0;
+                iStar = Entities.GetStar(unitentityindex!) || 0;
             }
         }
         let allcombs: ECombination[] = [];

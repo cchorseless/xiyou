@@ -120,9 +120,12 @@ export class DrawSystemComponent extends ET.SingletonComponent {
         this.addEvent();
     }
     public addEvent() {
-        /**开局选卡 */
-        EventHelper.addProtocolEvent(DrawConfig.EProtocol.StartCardSelected, GHandler.create(this, (event: CLIENT_DATA<IDrawConfig.ICardSelected>) => {
-            event.state = GPlayerEntityRoot.GetOneInstance(event.PlayerID).DrawComp().OnStartCardSelected(1, event.data.itemName);
+        /**开局选流派 */
+        EventHelper.addProtocolEvent(DrawConfig.EProtocol.DrawSectSelected, GHandler.create(this, (event: CLIENT_DATA<IDrawConfig.ICardSelected>) => {
+            event.state = GPlayerEntityRoot.GetOneInstance(event.PlayerID).DrawComp().OnSelectSect(event.data.index, event.data.itemName);
+        }));
+        EventHelper.addProtocolEvent(DrawConfig.EProtocol.DrawEnemySelected, GHandler.create(this, (event: CLIENT_DATA<IDrawConfig.ICardSelected>) => {
+            event.state = GPlayerEntityRoot.GetOneInstance(event.PlayerID).DrawComp().OnSelectEnemy(event.data.index, event.data.itemName);
         }));
         /**选卡 */
         EventHelper.addProtocolEvent(DrawConfig.EProtocol.CardSelected, GHandler.create(this, (event: CLIENT_DATA<IDrawConfig.ICardSelected>) => {

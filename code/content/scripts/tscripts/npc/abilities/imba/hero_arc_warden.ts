@@ -257,9 +257,7 @@ export class modifier_imba_arc_warden_magnetic_field_evasion extends BaseModifie
     } */
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.EVASION_CONSTANT)
     CC_GetModifierEvasion_Constant(keys: ModifierAttackEvent): number {
-        if (keys.attacker && this.GetAuraOwner() && this.GetAuraOwner().HasModifier("modifier_imba_arc_warden_magnetic_field_thinker_evasion") && this.GetAuraOwner().findBuff<modifier_imba_arc_warden_magnetic_field_thinker_evasion>("modifier_imba_arc_warden_magnetic_field_thinker_evasion").radius && GFuncVector.AsVector(keys.attacker.GetAbsOrigin() - this.GetAuraOwner().GetAbsOrigin()).Length2D() > this.GetAuraOwner().findBuff<modifier_imba_arc_warden_magnetic_field_thinker_evasion>("modifier_imba_arc_warden_magnetic_field_thinker_evasion").radius) {
-            return this.evasion_chance;
-        }
+        return this.evasion_chance;
     }
 }
 @registerAbility()

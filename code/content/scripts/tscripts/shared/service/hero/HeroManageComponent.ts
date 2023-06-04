@@ -43,7 +43,7 @@ export class HeroManageComponent extends ET.Component {
         let config = GJSONConfig.BuildingLevelUpConfig.get(unitname);
         if (config !== null) {
             let heroUnits = THeroUnit.GetGroupInstance(this.BelongPlayerid);
-            return heroUnits.find((hero) => { return hero.BindHeroName() == unitname })
+            return heroUnits.find((hero) => { return hero.ConfigId == unitname })
         }
     }
 }

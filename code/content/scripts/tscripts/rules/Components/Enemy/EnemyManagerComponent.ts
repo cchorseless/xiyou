@@ -92,7 +92,7 @@ export class EnemyManagerComponent extends ET.Component {
                 };
             })
         );
-        return enemy;
+        return enemy.ETRoot as EnemyUnitEntityRoot;
     }
 
     killEnemy(etroot: IEnemyUnitEntityRoot) {

@@ -24,7 +24,10 @@ export class CCProgressBar extends CCPanel<ICCProgressBar> {
 		color: "Red"
 	};
 	render() {
-		const { value, min, max, color } = this.props;
+		let { value, min, max, color } = this.props;
+		if (max == 0) {
+			max = 1
+		}
 		const width = (value - min!) / (max! - min!) * 100;
 		return (<Panel className="CCProgressBar" ref={this.__root__}   {...this.initRootAttrs()}>
 			<CCPanel className={CSSHelper.ClassMaker("CCProgressBar_Left", "ProgressBar_" + color)} width={width + "%"} />

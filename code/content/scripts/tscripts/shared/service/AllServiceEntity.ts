@@ -37,6 +37,8 @@ import { TActivityTotalSpendMetaStone } from "./activity/TActivityTotalSpendMeta
 import { TActivityTotalSpendMetaStoneData } from "./activity/TActivityTotalSpendMetaStoneData";
 import { BagComponent } from "./bag/BagComponent";
 import { TItem } from "./bag/TItem";
+import { CharacterBattleTeamComponent } from "./battleteam/CharacterBattleTeamComponent";
+import { TBattleTeamRecord } from "./battleteam/TBattleTeamRecord";
 import { CharacterBuffComponent } from "./buff/CharacterBuffComponent";
 import { ServerZoneBuffComponent } from "./buff/ServerZoneBuffComponent";
 import { TBuffItem } from "./buff/TBuffItem";
@@ -55,15 +57,16 @@ import { THeroBanDesign } from "./hero/THeroBanDesign";
 import { THeroUnit } from "./hero/THeroUnit";
 import { CharacterMailComponent } from "./mail/CharacterMailComponent";
 import { TMail } from "./mail/TMail";
+import { CharacterRankComponent } from "./rank/CharacterRankComponent";
 import { ServerZoneRankComponent } from "./rank/ServerZoneRankComponent";
 import { TRankCommon } from "./rank/TRankCommon";
-import { TRankHeroBattleScore } from "./rank/TRankHeroBattleScore";
-import { TRankHeroBattleScoreGroup } from "./rank/TRankHeroBattleScoreGroup";
+import { TRankHeroSumBattleScore } from "./rank/TRankHeroSumBattleScore";
+import { TRankSeasonBattleSorce } from "./rank/TRankSeasonBattleSorce";
 import { TRankSeasonSingleCharpter } from "./rank/TRankSeasonSingleCharpter";
 import { TRankSeasonTeamCharpter } from "./rank/TRankSeasonTeamCharpter";
 import { TRankSingleData } from "./rank/TRankSingleData";
-import { TRankSumBattleSorce } from "./rank/TRankSumBattleSorce";
-import { TSeasonRankData } from "./rank/TSeasonRankData";
+import { TSeasonCharacterRankData } from "./rank/TSeasonCharacterRankData";
+import { TSeasonServerZoneRankData } from "./rank/TSeasonServerZoneRankData";
 import { CharacterRechargeComponent } from "./recharge/CharacterRechargeComponent";
 import { ServerZoneSeasonComponent } from "./season/ServerZoneSeasonComponent";
 import { TServerZoneSeason } from "./season/TServerZoneSeason";
@@ -138,6 +141,8 @@ import { CharacterTitleItem } from "./title/CharacterTitleItem";
     CharacterGameRecordComponent,
     ServerZoneGameRecordComponent,
     TGameRecordItem,
+    TBattleTeamRecord,
+    CharacterBattleTeamComponent,
 
     HeroManageComponent,
     HeroTalentComponent,
@@ -149,13 +154,16 @@ import { CharacterTitleItem } from "./title/CharacterTitleItem";
 
     ServerZoneRankComponent,
     TRankCommon,
-    TRankHeroBattleScore,
-    TRankHeroBattleScoreGroup,
+    TRankHeroSumBattleScore,
     TRankSeasonSingleCharpter,
     TRankSeasonTeamCharpter,
     TRankSingleData,
-    TRankSumBattleSorce,
-    TSeasonRankData,
+    TRankSeasonBattleSorce,
+    TSeasonServerZoneRankData,
+    CharacterRankComponent,
+    TSeasonCharacterRankData,
+
+
 
     CharacterRechargeComponent,
 

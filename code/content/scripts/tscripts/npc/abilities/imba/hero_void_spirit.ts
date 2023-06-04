@@ -555,12 +555,15 @@ export class modifier_imba_void_spirit_resonant_pulse_thinker_buff extends BaseM
         this.deflect_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_void_spirit/pulse/void_spirit_pulse_shield_deflect.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetAuraOwner());
         ParticleManager.SetParticleControl(this.deflect_particle, 1, Vector(this.radius, 1, 1));
         ParticleManager.ReleaseParticleIndex(this.deflect_particle);
-        if (keys.damage >= this.GetAuraOwner().findBuff<modifier_imba_void_spirit_resonant_pulse_thinker_aura>("modifier_imba_void_spirit_resonant_pulse_thinker_aura").GetStackCount()) {
+        let buffcount = this.GetAuraOwner().findBuffStack("modifier_imba_void_spirit_resonant_pulse_thinker_aura")
+        if (keys.damage >= buffcount) {
             this.GetAuraOwner().Destroy();
             this.Destroy();
-            return this.GetAuraOwner().findBuff<modifier_imba_void_spirit_resonant_pulse_thinker_aura>("modifier_imba_void_spirit_resonant_pulse_thinker_aura").GetStackCount() * (-1);
+            return buffcount * (-1);
         } else {
-            this.GetAuraOwner().findBuff<modifier_imba_void_spirit_resonant_pulse_thinker_aura>("modifier_imba_void_spirit_resonant_pulse_thinker_aura").SetStackCount(this.GetAuraOwner().FindModifierByName("modifier_imba_void_spirit_resonant_pulse_thinker_aura").GetStackCount() - keys.damage);
+            if (IsServer()) {
+                modifier_imba_void_spirit_resonant_pulse_thinker_aura.findIn(this.GetAuraOwner()).SetStackCount(buffcount - keys.damage)
+            }
             return keys.damage * (-1);
         }
     }

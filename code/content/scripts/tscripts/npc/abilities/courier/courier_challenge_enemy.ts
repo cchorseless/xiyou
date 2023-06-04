@@ -88,7 +88,7 @@ export class courier_challenge_gold extends ActiveRootAbility {
     }
 
     OnRound_Prize(round: ERoundBoard): void {
-        if (this.IsActivated() && round.isWin) {
+        if (this.IsActivated() && round.isWin > 0) {
             let level = this.GetLevel();
             if (level < this.GetAbilityJinDuMax()) {
                 this.UpgradeAbility(true);
@@ -189,7 +189,7 @@ export class courier_challenge_equip extends ActiveRootAbility {
         }
     }
     OnRound_Prize(round: ERoundBoard): void {
-        if (this.IsActivated() && round.isWin) {
+        if (this.IsActivated() && round.isWin > 0) {
             let level = this.GetLevel();
             if (level < this.GetAbilityJinDuMax()) {
                 this.UpgradeAbility(true);

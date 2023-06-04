@@ -67,7 +67,7 @@ export class FakerHeroEntityRoot extends BaseEntityRoot implements IRoundStateCa
         })
         const player = this.GetPlayer();
         player.EnemyManagerComp().ForceFlyPrizeToHero();
-        if (!round.isWin) {
+        if (round.isWin < 0) {
             let damage = 0;
             let delay_time = 0.5;
             let aliveEnemy = player.BattleUnitManagerComp().GetAllBattleUnitAlive(DOTATeam_t.DOTA_TEAM_BADGUYS);

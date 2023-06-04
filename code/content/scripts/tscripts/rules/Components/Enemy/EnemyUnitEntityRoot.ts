@@ -25,14 +25,14 @@ export class EnemyUnitEntityRoot extends BattleUnitEntityRoot {
         (this.EntityId as any) = domain.GetEntityIndex();
         this.AddComponent(GGetRegClass<typeof CombinationComponent>("CombinationComponent"));
         this.addBattleComp();
-        let config = this.GetRoundBasicUnitConfig();
-        if (config) {
-            if (config.star > 0) this.SetStar(config.star);
-            if (config.level > 0) domain.CreatureLevelUp(config.level);
-            if (config.enemycreatetype == GEEnum.EEnemyCreateType.SummedEgg) {
-                this.AddComponent(GGetRegClass<typeof EnemyMoveComponent>("EnemyMoveComponent"));
-            }
-        }
+        // let config = this.GetRoundBasicUnitConfig();
+        // if (config) {
+        //     if (config.star > 0) this.SetStar(config.star);
+        //     if (config.level > 0) domain.CreatureLevelUp(config.level);
+        //     // if (config.enemycreatetype == GEEnum.EEnemyCreateType.SummedEgg) {
+        //     //     this.AddComponent(GGetRegClass<typeof EnemyMoveComponent>("EnemyMoveComponent"));
+        //     // }
+        // }
         if (this.EnemyMoveComp()) {
             modifier_unit_hut.applyOnly(domain, domain);
         }
@@ -49,6 +49,40 @@ export class EnemyUnitEntityRoot extends BattleUnitEntityRoot {
         }
         this.JoinInRound();
     }
+
+    LoadData(data: IBattleUnitInfoItem) {
+        if (data) {
+            const domain = this.GetDomain<IBaseNpc_Plus>();
+            if (data.Star > 0) this.SetStar(data.Star);
+            if (data.Level > 0) domain.CreatureLevelUp(data.Level);
+            if (data.EquipInfo) {
+                data.EquipInfo.forEach(v => {
+                    domain.AddItemOrInGround(v)
+                })
+            }
+            if (data.Buffs) {
+                data.Buffs.forEach(v => {
+                    const buffinfo = v.split("|");
+                    if (buffinfo.length == 2 && buffinfo[0] != "") {
+                        const buff = domain.addOnlyBuff(buffinfo[0], domain);
+                        if (buff == null) {
+                            GLogHelper.error("cant find " + buffinfo[0])
+                        }
+                        else {
+                            buff.SetStackCount(GToNumber(buffinfo[1]))
+
+                        }
+                    }
+
+                })
+            }
+            if (data.WearBundleId && data.WearBundleId.length > 0) {
+                this.WearableComp().Wear(data.WearBundleId, "createunit")
+            }
+        }
+
+    }
+
     OnRound_Start() {
         let npc = this.GetDomain<IBaseNpc_Plus>();
         modifier_jiaoxie_wudi.applyOnly(npc, npc);
@@ -179,8 +213,9 @@ export class EnemyUnitEntityRoot extends BattleUnitEntityRoot {
             let player = this.GetPlayer();
             let npc = this.GetDomain<IBaseNpc_Plus>();
             let startPos = npc.GetAbsOrigin() as Vector;
-            let hModel = player.EnemyManagerComp().GetOnePrizeModel(EnemyConfig.EEnemyPrizeModel.SoulCrystalModel)
-            hModel.SetAbsOrigin(startPos);
+            // 掉东西的模型
+            // let hModel = player.EnemyManagerComp().GetOnePrizeModel(EnemyConfig.EEnemyPrizeModel.SoulCrystalModel)
+            // hModel.SetAbsOrigin(startPos);
             // 金币奖励
             let goldMin = roundconfig.goldMin || 0;
             let goldMax = roundconfig.goldMax || 0;

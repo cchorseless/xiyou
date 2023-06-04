@@ -9,6 +9,7 @@ export class ERoundBoard extends ERound {
     roundLeftTime: number = -1;
     configID: string;
     unitSpawned: number = 0;
+    readonly isWin: number = 0;
     config: Dota.RoundBoardConfigRecord;
     unitDamageInfo: { [k: string]: BuildingConfig.IBuildingDamageInfo } = {};
 

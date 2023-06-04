@@ -20,6 +20,7 @@ import { WearableSystemComponent } from "./rules/System/WearableSystemComponent"
 import { GameEnum } from "./shared/GameEnum";
 import { GameProtocol } from "./shared/GameProtocol";
 import { ET, ETGameSceneRoot } from "./shared/lib/Entity";
+import { TServerZone } from "./shared/service/serverzone/TServerZone";
 
 @GReloadable
 export class GameScene {
@@ -29,6 +30,10 @@ export class GameScene {
     }
     static GetPlayer(playerid: PlayerID | number) {
         return GPlayerEntityRoot.GetOneInstance(playerid as PlayerID)
+    }
+
+    static GetServerZone() {
+        return ETGameSceneRoot.GetInstance().GetComponent(TServerZone);
     }
 
     private static _WaitSyncEntity: { obj: ET.Entity, ignoreChild: boolean }[] = [];

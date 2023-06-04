@@ -180,10 +180,48 @@ export class GameServiceSystemComponent extends GameServiceSystem {
                     }
                 }
             }
+            if (e.state == false) {
+                GNotificationSystem.ErrorMessage(e.message);
+            }
             if (e.isawait && e.sendClientCB) {
                 e.sendClientCB()
             }
         }));
+        EventHelper.addProtocolEvent(GameProtocol.Protocol.Rank_CurRankDataInfo, GHandler.create(this, async (e: JS_TO_LUA_DATA) => {
+            const playeroot = GGameScene.GetPlayer(e.PlayerID);
+            if (playeroot) {
+                const rankcomp = GGameScene.GetServerZone().RankComp;
+                const RankType = e.data.RankType;
+                const Page = e.data.Page;
+                const tempdata = rankcomp.GetTempRankData(RankType, Page);
+                if (tempdata) {
+                    e.state = true;
+                    e.message = tempdata.str;
+                }
+                else {
+                    const cbdata: H2C_CommonResponse = await playeroot.PlayerHttpComp().PostAsync(e.protocol, e.data);
+                    if (cbdata) {
+                        e.state = cbdata.Error == 0;
+                        e.message = cbdata.Message;
+                        if (e.state) {
+                            // 缓存一下数据
+                            rankcomp.SetTempRankData(RankType, Page, e.message, 60 * 10);
+                        }
+                    }
+                    else {
+                        e.state = false;
+                        e.message = "no message cb";
+                    }
+                }
+                if (e.state == false) {
+                    GNotificationSystem.ErrorMessage(e.message);
+                }
+                if (e.isawait && e.sendClientCB) {
+                    e.sendClientCB()
+                }
+            }
+        }));
+
         const hander = GHandler.create(this, async (e: JS_TO_LUA_DATA) => {
             const playeroot = GGameScene.GetPlayer(e.PlayerID);
             if (playeroot) {
@@ -196,12 +234,18 @@ export class GameServiceSystemComponent extends GameServiceSystem {
                     e.state = false;
                     e.message = "no message cb";
                 }
+                if (e.state == false) {
+                    GNotificationSystem.ErrorMessage(e.message);
+                }
                 if (e.isawait && e.sendClientCB) {
                     e.sendClientCB()
                 }
             }
         });
         EventHelper.addProtocolEvent(GameProtocol.Protocol.Buy_ShopItem, hander);
+        EventHelper.addProtocolEvent(GameProtocol.Protocol.Handle_CharacterMail, hander);
+
+
 
     }
 

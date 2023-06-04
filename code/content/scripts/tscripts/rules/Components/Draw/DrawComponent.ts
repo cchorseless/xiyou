@@ -1,8 +1,12 @@
 
 import { EventHelper } from "../../../helper/EventHelper";
+import { CombinationConfig } from "../../../shared/CombinationConfig";
 import { DrawConfig } from "../../../shared/DrawConfig";
+import { GameProtocol } from "../../../shared/GameProtocol";
 import { PublicBagConfig } from "../../../shared/PublicBagConfig";
 import { ET, serializeETProps } from "../../../shared/lib/Entity";
+import { TimeUtils } from "../../../shared/lib/TimeUtils";
+import { TBattleTeamRecord } from "../../../shared/service/battleteam/TBattleTeamRecord";
 import { ItemEntityRoot } from "../Item/ItemEntityRoot";
 import { ERoundBoard } from "../Round/ERoundBoard";
 
@@ -16,15 +20,31 @@ export class DrawComponent extends ET.Component implements IRoundStateCallback {
     tWashCards: string[] = [];
     /**锁定详情 */
     tLockChess: { [k: string]: string } = {}
-
+    tLastSects: { select: string, result: string[] };
     tLastArtifacts: { itemEntity: IBaseItem_Plus, drawtype: DrawConfig.EDrawType, result: string[] };
     tLastEquips: { itemEntity: IBaseItem_Plus, drawtype: DrawConfig.EDrawType, result: string[] };
+    tLastEnemys: TBattleTeamRecord[] = [];
+
+
 
 
     onAwake(...args: any[]): void {
         this.SyncClient(true, true);
     }
     OnRound_Start(round: ERoundBoard) {
+        // 开局抽流派
+        if (round.config.roundIndex == 1) {
+            GTimerHelper.AddTimer(1, GHandler.create(this, () => {
+                this.DrawStartSect();
+            }));
+            return
+        }
+        else {
+            GTimerHelper.AddTimer(1, GHandler.create(this, () => {
+                this.DrawEnemy(round);
+            }));
+            return
+        }
         let Hero = GGameScene.GetPlayer(this.BelongPlayerid).Hero;
         if (Hero) {
             // 1秒后抽卡
@@ -49,11 +69,115 @@ export class DrawComponent extends ET.Component implements IRoundStateCallback {
 
     }
     OnRound_Battle() { }
-    OnRound_Prize(round: ERoundBoard) { }
+    OnRound_Prize(round: ERoundBoard) {
+
+
+    }
     OnRound_WaitingEnd() { }
-    //  开局抽卡
-    DrawStartCard() {
-        // this.DrawCard(DrawConfig.EDrawType.DrawCardV1, 4);
+
+
+    drawEnemyTimer: TimeUtils.TimerTask;
+
+    /**抽本局对手 */
+    async DrawEnemy(round: ERoundBoard, onlyfakerdata: boolean = false) {
+        const EnemyCount = 3;
+        const roundIndex = round.config.roundIndex;
+        let playeroot = GGameScene.GetPlayer(this.BelongPlayerid);
+        const RoundCharpter = GGameServiceSystem.GetInstance().getDifficultyNumberDes();
+        const score = playeroot.BuildingManager().GetBuildingTeamScore();
+        const data: any[] = [];
+        if (onlyfakerdata == false) {
+            const cbdata: H2C_CommonResponse = await playeroot.PlayerHttpComp().PostAsync(GameProtocol.Protocol.DrawEnemy_GetEnemyInfo, {
+                RoundIndex: roundIndex,
+                RoundCharpter: RoundCharpter,
+                EnemyCount: EnemyCount,
+                Score: score,
+            });
+            if (cbdata.Error == 0) {
+                let msgcb: any[] = json.decode(cbdata.Message)[0];
+                for (let i = 0, len = msgcb.length; i < len; i++) {
+                    const child1 = this.tLastEnemys[i] || this.AddChild(TBattleTeamRecord);
+                    this.tLastEnemys[i] = child1;
+                    const info = msgcb[i];
+                    child1.DBServerEntityId = info.Id;
+                    child1.SteamAccountId = info.SteamAccountId;
+                    child1.SteamAccountName = info.SteamAccountName;
+                    child1.RoundIndex = info.RoundIndex;
+                    child1.RoundCharpter = info.RoundCharpter;
+                    child1.Score = info.Score;
+                    child1.BattleWinCount = info.BattleWinCount;
+                    child1.BattleLoseCount = info.BattleLoseCount;
+                    child1.BattleDrawCount = info.BattleDrawCount;
+                    child1.SectInfo = info.SectInfo;
+                    child1.UnitInfo = info.UnitInfo;
+                    child1.UnitInfo.forEach(enemyinfo => {
+                        enemyinfo.OnlyKey = round.RandomEnemyPrizeId();
+                    })
+                    data.push(child1.toJsonObject())
+                }
+            }
+        }
+        // 数量不足
+        const leftEnemycount = EnemyCount - data.length
+        if (leftEnemycount > 0) {
+            const allenemyInfo = GJSONConfig.RoundEnemyPoolConfig.getDataList().filter((v) => {
+                return v.roundMin <= roundIndex && v.roundMax >= roundIndex;
+            });
+            const allenemy = GFuncRandom.RandomArray(allenemyInfo, EnemyCount, false);
+            for (let i = 0; i < EnemyCount; i++) {
+                if (data[i]) { continue; }
+                const child1 = this.tLastEnemys[i] || this.AddChild(TBattleTeamRecord);
+                this.tLastEnemys[i] = child1;
+                const info = allenemy[i];
+                child1.DBServerEntityId = "Robot";
+                child1.SteamAccountId = info.accountid;
+                child1.SteamAccountName = info.playername;
+                child1.RoundIndex = roundIndex;
+                child1.RoundCharpter = RoundCharpter;
+                child1.Score = info.battlescore;
+                child1.BattleWinCount = RandomInt(100, 200);
+                child1.BattleLoseCount = RandomInt(100, 200);
+                child1.BattleDrawCount = RandomInt(100, 200);
+                child1.SectInfo = info.sectinfo;
+                child1.UnitInfo = [];
+                info.enemyinfo.forEach((v) => {
+                    child1.UnitInfo.push({
+                        OnlyKey: round.RandomEnemyPrizeId(),
+                        UnitName: v.unitname,
+                        Level: v.level,
+                        Star: v.star,
+                        PosX: v.positionX,
+                        PosY: v.positionY,
+                        WearBundleId: v.WearBundleId,
+                        EquipInfo: [v.itemslot1, v.itemslot2, v.itemslot3, v.itemslot4, v.itemslot5, v.itemslot6],
+                        Buffs: (v.spawnBuff || "").split("|"),
+                    })
+                });
+                data.push(child1.toJsonObject())
+            }
+        }
+        EventHelper.fireProtocolEventToPlayer(DrawConfig.EProtocol.DrawEnemyNotice, { data: data }, this.BelongPlayerid);
+        // 阵容倒计时
+        if (this.drawEnemyTimer) {
+            this.drawEnemyTimer.Clear();
+            this.drawEnemyTimer = null;
+        }
+        this.drawEnemyTimer = GTimerHelper.AddTimer(DrawConfig.DrawEnemyWaitingTime, GHandler.create(this, () => {
+            if (this.drawEnemyTimer && this.tLastEnemys.length > 0) {
+                const index = RandomInt(0, this.tLastEnemys.length - 0.5)
+                const team = this.tLastEnemys[index];
+                this.OnSelectEnemy(index, team.SteamAccountId);
+            }
+
+        }))
+    }
+
+    //  开局抽流派
+    DrawStartSect() {
+        let r = GFuncRandom.RandomArray(CombinationConfig.ESectNameList, 3, false);
+        this.tLastSects = { select: r[0], result: r };
+        EventHelper.fireProtocolEventToPlayer(DrawConfig.EProtocol.DrawSectNotice, { data: r }, this.BelongPlayerid);
+
     }
     //  抽神器
     DrawArtifact(itemEntity: IBaseItem_Plus, sReservoirName: DrawConfig.EDrawType, iNum: number) {
@@ -146,28 +270,77 @@ export class DrawComponent extends ET.Component implements IRoundStateCallback {
         return true;
     }
 
-    // 开局选卡
-    OnStartCardSelected(index: number, sCardName: string): boolean {
-        if (!GPlayerEntityRoot.GetOneInstance(this.BelongPlayerid).CheckIsAlive()) {
+    // 开局选流派
+    OnSelectSect(index: number, sectName: string): boolean {
+        let playerroot = GGameScene.GetPlayer(this.BelongPlayerid);
+        if (!playerroot.CheckIsAlive()) {
             GNotificationSystem.ErrorMessage("hero is death")
             return false;
         }
+        if (!this.tLastSects || !this.tLastSects.result) {
+            GNotificationSystem.ErrorMessage("data error")
+            return false;
+        }
+        // 随机抽取
+        if (index == -1 || sectName == null) {
+            sectName = null;
+            for (let i = 0; i < 10; i++) {
+                let r = GFuncRandom.RandomArray(CombinationConfig.ESectNameList, 10, false);
+                for (let otheritem of r) {
+                    if (!this.tLastSects.result.includes(otheritem)) {
+                        sectName = otheritem;
+                        break;
+                    }
+                }
+                if (sectName) {
+                    break;
+                }
+            }
+        }
+        else if (this.tLastSects.result[index] !== sectName) {
+            GNotificationSystem.ErrorMessage("index error")
+            return false;
+        }
+        if (!sectName) {
+            GNotificationSystem.ErrorMessage("sectName is invalid")
+            return false
+        }
+        this.tLastSects.select = sectName;
+        let allhero = GFuncRandom.RandomArray(GJsonConfigHelper.GetAllHeroBySectLabel(sectName), 2, false);
+        allhero.forEach(heroname => {
+            playerroot.BuildingManager().addBuilding(heroname, true, 0);
+        })
         return true;
     }
 
-
-    OnRedrawStartCard(index: number, sCardName: string): boolean {
-        if (!GPlayerEntityRoot.GetOneInstance(this.BelongPlayerid).CheckIsAlive()) {
+    /**
+     * 选对手
+     * @param index 
+     * @param sCardName 
+     * @returns 
+     */
+    OnSelectEnemy(index: number, accountid: string): boolean {
+        if (this.drawEnemyTimer == null) { return }
+        // 清除计时器
+        this.drawEnemyTimer.Clear();
+        this.drawEnemyTimer = null;
+        let playerroot = GGameScene.GetPlayer(this.BelongPlayerid);
+        if (!playerroot.CheckIsAlive()) {
             GNotificationSystem.ErrorMessage("hero is death")
             return false;
         }
+        if (!this.tLastEnemys || !this.tLastEnemys[index]) {
+            GNotificationSystem.ErrorMessage("data error")
+            return false;
+        }
+        const battleteam = this.tLastEnemys[index];
+        if (battleteam.SteamAccountId !== accountid) {
+            GNotificationSystem.ErrorMessage("index error")
+            return false;
+        }
+        const round = playerroot.RoundManagerComp().getCurrentBoardRound();
+        round.CreateDrawEnemy(battleteam, playerroot.FakerHeroRoot().SpawnEffect);
         return true;
-        // let iPlayerID = events.PlayerID;
-        // let iRedraw = this.tReDrawChance[iPlayerID] || 0;
-        // if (iRedraw > 0) {
-        //     this.tReDrawChance[iPlayerID] = iRedraw - 1;
-        //     this.DrawStartCard(iPlayerID);
-        // }
     }
 
     OnLockChess(index: number, sCardName: string, block: 0 | 1): boolean {

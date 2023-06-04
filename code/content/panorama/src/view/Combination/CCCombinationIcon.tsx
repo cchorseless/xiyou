@@ -7,11 +7,13 @@ import { CCImage } from "../AllUIElement/CCImage/CCImage";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 
 import { CCAbilityIcon } from "../AllUIElement/CCAbility/CCAbilityIcon";
+import { CCLabel } from "../AllUIElement/CCLabel/CCLabel";
 import "./CCCombinationIcon.less";
 
 interface ICCCombinationIcon {
     sectName: string;
     lock?: boolean;
+    count?: number;
 }
 
 
@@ -41,6 +43,7 @@ export class CCCombinationIcon extends CCPanel<ICCCombinationIcon> {
     render() {
         // const img = PathHelper.getCustomImageUrl("combination/icons/iconbg/leftcapsule_border_bottom_pop" + picindex + "_psd.png")
         const lock = this.props.lock;
+        const count = this.props.count;
         return (
             <Panel ref={this.__root__}   {...this.initRootAttrs()}>
 
@@ -49,7 +52,11 @@ export class CCCombinationIcon extends CCPanel<ICCCombinationIcon> {
                     {
                         lock && <CCIcon_Lock align="center center" />
                     }
+
                 </CCAbilityIcon>
+                {
+                    count && <CCLabel align="center bottom" fontSize="25px" text={`(${count})`} type="UnitName" color="Gold" />
+                }
                 {this.__root___childs}
                 {this.props.children}
             </Panel>

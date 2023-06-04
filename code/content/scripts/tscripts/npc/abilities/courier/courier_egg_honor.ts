@@ -33,6 +33,7 @@ export class courier_egg_honor extends BaseAbility_Plus {
             }
             if (heros.length == 0) {
                 caster.SetModel("models/props_winter/egg_shatter_02.vmdl")
+                caster.SetModelScale(3)
                 return
             }
             caster.SetModel("models/items/phoenix/phoenix_taunt/phoenix_taunt_egg_cooked.vmdl");
@@ -58,6 +59,7 @@ export class courier_egg_honor extends BaseAbility_Plus {
         }
         else {
             caster.SetModel("models/props_winter/egg_shatter_02.vmdl")
+            caster.SetModelScale(3)
         }
     }
 }

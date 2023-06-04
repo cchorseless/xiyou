@@ -33,8 +33,10 @@ export class PlayerHttpComponent extends ET.Component {
         url = url || this.getAdressPort();
         return await HttpHelper.PostRequestAsync(sAction, hParams, url, this.TOKEN);
     }
-
-
+    public Post(sAction: string, hParams: { [v: string]: any }, hFunc: (Body: any, response: CScriptHTTPResponse) => void = null, url: string = null) {
+        url = url || this.getAdressPort();
+        HttpHelper.PostRequest(sAction, hParams, hFunc, url, this.TOKEN);
+    }
     public async PlayerLogin(playerid: PlayerID) {
         let accountid = GPlayerEntityRoot.GetAccountID(playerid);
         let loginUrl = GameProtocol.LoginUrl();

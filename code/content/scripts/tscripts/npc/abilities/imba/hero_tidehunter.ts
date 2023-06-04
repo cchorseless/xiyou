@@ -842,13 +842,13 @@ export class imba_tidehunter_ravage extends BaseAbility_Plus {
             let hit_sound = "Hero_Tidehunter.RavageDamage";
             let kill_responses = "tidehunter_tide_ability_ravage_0";
             let particle = "particles/units/heroes/hero_tidehunter/tidehunter_spell_ravage.vpcf";
-            let end_radius = this.GetSpecialValueFor("radius");
+            let end_radius = 1250;
             let stun_duration = this.GetSpecialValueFor("duration");
             let suggestive_duration = this.GetSpecialValueFor("suggestive_duration");
             caster.EmitSound(cast_sound);
             this.particle_fx = ResHelper.CreateParticleEx(particle, ParticleAttachment_t.PATTACH_ABSORIGIN, caster);
             ParticleManager.SetParticleControl(this.particle_fx, 0, caster_pos);
-            for (let i = 0; i < 5; i++) {
+            for (let i = 1; i <= 5; i++) {
                 ParticleManager.SetParticleControl(this.particle_fx, i, Vector(end_radius * 0.2 * i, 0, 0));
             }
             ParticleManager.ReleaseParticleIndex(this.particle_fx);

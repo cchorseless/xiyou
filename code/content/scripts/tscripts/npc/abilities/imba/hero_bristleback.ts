@@ -360,7 +360,9 @@ export class modifier_imba_bristleback_quillspray_thinker extends BaseModifier_P
         if (!IsServer()) {
             return;
         }
-        this.parent.RemoveSelf();
+        if (IsValid(this.parent)) {
+            this.parent.Destroy();
+        }
     }
 }
 @registerModifier()

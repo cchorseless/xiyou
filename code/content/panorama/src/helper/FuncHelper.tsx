@@ -50,11 +50,13 @@ export module FuncHelper {
         return uuid;
     }
 
-    export function toArray<T>(a: ArrayLikeObject<T>) {
+    export function toArray<T>(a: ArrayLikeObject<T> | any) {
         let r: T[] = [];
-        let keys = Object.keys(a).sort();
-        for (let k of keys) {
-            r.push((a as any)[k] as T);
+        if (a) {
+            let keys = Object.keys(a).sort();
+            for (let k of keys) {
+                r.push((a as any)[k] as T);
+            }
         }
         return r;
     }
@@ -178,10 +180,20 @@ export module FuncHelper {
         }
 
         /**
-         * 随机整数
+         * 随机整数,两侧都包含
          */
         export function RandomInt(min: number, max: number): number {
             return Math.round(Math.random() * (max - min) + min);
+        }
+
+
+        export function RandomString(e: number) {
+            e = e || 32;
+            let t = "ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678",
+                a = t.length,
+                n = "";
+            for (let i = 0; i < e; i++) n += t.charAt(Math.floor(Math.random() * a));
+            return n
         }
     }
 

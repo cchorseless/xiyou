@@ -241,7 +241,7 @@ export class GameDebugger extends SingletonClass {
             let { unitname } = e.data;
             let player = GGameScene.GetPlayer(e.PlayerID);
             if (player && unitname) {
-                player.BuildingManager().addBuilding(unitname as string);
+                player.BuildingManager().addBuilding(unitname as string, false, 0);
             }
         }));
         EventHelper.addProtocolEvent(GameProtocol.Protocol.req_DebugAddEnemy, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
@@ -258,6 +258,15 @@ export class GameDebugger extends SingletonClass {
             let player = GGameScene.GetPlayer(e.PlayerID);
             if (player) {
                 player.EnemyManagerComp().removeAllEnemy();
+            }
+        }));
+        EventHelper.addProtocolEvent(GameProtocol.Protocol.req_DebugMakeFullMana, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
+            let entityindex = e.data;
+            if (entityindex) {
+                let unit = EntIndexToHScript(entityindex) as IBaseNpc_Plus;
+                if (unit) {
+                    unit.SetMana(unit.GetMaxMana());
+                }
             }
         }));
         //#endregion

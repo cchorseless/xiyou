@@ -7,6 +7,7 @@ import { modifier_jiaoxie_wudi } from "../../../npc/modifier/battle/modifier_jia
 import { modifier_unit_freedom } from "../../../npc/modifier/battle/modifier_unit_freedom";
 import { modifier_unit_hut } from "../../../npc/modifier/battle/modifier_unit_hut";
 import { modifier_building_battle_buff } from "../../../npc/modifier/building/modifier_building_battle_buff";
+import { modifier_building_hut } from "../../../npc/modifier/building/modifier_building_hut";
 import { serializeETProps } from "../../../shared/lib/Entity";
 import { GEventHelper } from "../../../shared/lib/GEventHelper";
 import { THeroUnit } from "../../../shared/service/hero/THeroUnit";
@@ -69,7 +70,7 @@ export class BuildingEntityRoot extends BattleUnitEntityRoot {
     LoadServerData(herounit: THeroUnit, isinit = false) {
         if (!herounit || herounit.IsDisposed()) { return }
         let npc = this.GetDomain<IBaseNpc_Plus>();
-        if (herounit.BindHeroName() != npc.GetUnitName()) { return }
+        if (herounit.ConfigId != npc.GetUnitName()) { return }
         // 设置等级
         if (herounit && herounit.Level > npc.GetLevel()) {
             let iLevel = herounit.Level - npc.GetLevel();
@@ -206,6 +207,7 @@ export class BuildingEntityRoot extends BattleUnitEntityRoot {
             if (isHutBuff) {
                 runtimeroot.ChessComp().setMoving(false);
                 modifier_unit_hut.applyOnly(cloneRuntime, cloneRuntime);
+                modifier_building_hut.applyOnly(cloneRuntime, cloneRuntime);
             }
             else {
                 modifier_unit_freedom.applyOnly(cloneRuntime, cloneRuntime);

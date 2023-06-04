@@ -154,7 +154,13 @@ export class BattleUnitEntityRoot extends BaseEntityRoot implements IRoundStateC
         }
 
     }
-
+    /**
+     * 获得战力
+     * @returns 
+     */
+    GetScore() {
+        return 100
+    }
 
     onVictory() {
         let npc = this.GetDomain<IBaseNpc_Plus>();

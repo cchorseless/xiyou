@@ -243,7 +243,7 @@ export class modifier_imba_keeper_of_the_light_illuminate extends BaseModifier_P
             for (const [_, hit_target] of GameFunc.iPair(this.hit_targets)) {
                 if (hit_target == target) {
                     hit_already = true;
-                    return;
+                    break;
                 }
             }
             if (!hit_already) {

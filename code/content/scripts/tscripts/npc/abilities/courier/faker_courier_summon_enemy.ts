@@ -48,7 +48,7 @@ export class faker_courier_summon_enemy extends BaseAbility_Plus {
             posarr = challengeround.CreateRoundSummonBattleEnemy(summon_count, effect, caster);
         }
         else {
-            posarr = round.CreateRoundSummonEggEnemy(summon_count, Assert_SpawnEffect.Effect.Spawn_fall_2021, caster);
+            // posarr = round.CreateRoundSummonEggEnemy(summon_count, Assert_SpawnEffect.Effect.Spawn_fall_2021, caster);
         }
         if (posarr.length > 0) {
             caster.EmitSound("Hero_ShadowShaman.EtherShock");

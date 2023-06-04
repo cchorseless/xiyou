@@ -26,7 +26,10 @@ export class BagComponent extends ET.Component {
     public Items: string[];
     @serializeETProps()
     public MaxSize: number;
-
+    @serializeETProps()
+    public DifficultyChapter: number = 1;
+    @serializeETProps()
+    public DifficultyLevel: number = 0;
 
     addItem(item: TItem) {
         if (this.GetChild(item.Id) == null) {

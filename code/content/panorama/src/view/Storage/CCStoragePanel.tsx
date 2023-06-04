@@ -54,7 +54,7 @@ export class CCStoragePanel extends CCPanel<ICCStoragePanel> {
         const BagComp = (GGameScene.Local.TCharacter.BagComp!)!;
         const MetaStone = DataComp.NumericComp!.GetAsInt(GEEnum.EMoneyType.MetaStone)
         const StarStone = DataComp.NumericComp!.GetAsInt(GEEnum.EMoneyType.StarStone)
-        const selectindex = this.GetState<number>("selectindex") || 1;
+        const selectindex = this.GetState<number>("selectindex") || 0;
         const selectitem = this.GetState<TItem>("selectitem");
         const allbagitems = BagComp.getAllItem();
 
@@ -71,9 +71,11 @@ export class CCStoragePanel extends CCPanel<ICCStoragePanel> {
                         </CCPanel>
                     </CCPanel>
                     <CCPanel id="PanelContent" flowChildren="right">
-                        <CCVerticalTable marginTop={"20px"} list={tablist} onChange={(index: number, text: string) => {
-                            this.UpdateState({ selectindex: index })
-                        }} />
+                        <CCVerticalTable marginTop={"20px"} list={tablist}
+                            defaultSelected={0}
+                            onChange={(index: number, text: string) => {
+                                this.UpdateState({ selectindex: index })
+                            }} />
                         <CCPanel width="600px">
                             {
                                 [...Array(tablist.length)].map((_, _index) => {
@@ -93,7 +95,7 @@ export class CCStoragePanel extends CCPanel<ICCStoragePanel> {
                                             break;
                                     }
                                     return <CCPanel key={_index + "1111"}
-                                        className={CSSHelper.ClassMaker({ Hidden: selectindex !== _index + 1 })}
+                                        className={CSSHelper.ClassMaker({ Hidden: selectindex !== _index })}
                                         flowChildren="right-wrap" scroll={"y"}  >
                                         {
                                             curitems.map((e, index) => {

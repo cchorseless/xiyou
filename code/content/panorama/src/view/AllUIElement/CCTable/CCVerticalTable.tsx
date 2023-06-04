@@ -23,7 +23,7 @@ export class CCVerticalTable extends CCPanel<ICCVerticalTable> {
     onSelect = (index: number) => {
         this.setState({ selectedIndex: index });
         if (this.props.onChange) {
-            this.props.onChange(index + 1, this.props.list[index]);
+            this.props.onChange(index, this.props.list[index]);
         }
     };
     render() {

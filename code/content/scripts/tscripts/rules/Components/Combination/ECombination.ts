@@ -291,4 +291,8 @@ export class ECombination extends ET.Entity {
         }
 
     }
+
+    GetSectScore() {
+        return 100
+    }
 }

@@ -13,6 +13,7 @@ import { CCArtifactListPanel } from "../Artifact/CCArtifactListPanel";
 import { CCBattlePassPanel } from "../BattlePass/CCBattlePassPanel";
 import { CCChallengeShopPanel } from "../Challenge/CCChallengeShopPanel";
 import { CCCombinationBottomPanel } from "../Combination/CCCombinationBottomPanel";
+import { CCDebugPanel } from "../DebugTool/CCDebugPanel";
 import { CCHandBookPanel } from "../HandBook/CCHandBookPanel";
 import { CCLuckyDrawPanel } from "../LuckyDraw/CCLuckyDrawPanel";
 import { CCMailPanel } from "../Mail/CCMailPanel";
@@ -77,6 +78,7 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
                         <CCArtifactListPanel />
                         <CCPublicShopBagPanel />
                         <CCNotificationPanel />
+                        <CCDebugPanel direction="left" hittest={false} />
                         {this.panel_base_childs}
                     </Panel>
                 }

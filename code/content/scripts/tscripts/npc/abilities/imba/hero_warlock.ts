@@ -760,7 +760,7 @@ export class imba_warlock_rain_of_chaos extends BaseAbility_Plus {
         return 800;
     }
     AutoSpellSelf() {
-        return AI_ability.POSITION_most_enemy(this);
+        return AI_ability.POSITION_if_enemy(this);
     }
 }
 @registerModifier()

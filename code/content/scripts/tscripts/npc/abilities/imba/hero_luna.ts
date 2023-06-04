@@ -349,36 +349,40 @@ export class modifier_imba_luna_lunar_blessing_aura extends BaseModifier_Plus {
         }
         return Object.values(decFuncs);
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BONUS)
-    CC_GetModifierBonusStats_Strength(): number {
-        let ability = this.GetAbilityPlus<imba_luna_lunar_blessing>();
-        if (ability && (this.hero_primary_attribute == Attributes.DOTA_ATTRIBUTE_STRENGTH ||
-            (ability.full_moon && GameRules.GetDOTATime(true, true) - ability.full_moon <= this.GetSpecialValueFor("full_moon_duration"))) && !this.GetCasterPlus().PassivesDisabled()) {
-            return this.GetSpecialValueFor("primary_attribute");
-        }
-    }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_BONUS)
-    CC_GetModifierBonusStats_Agility(): number {
-        let ability = this.GetAbilityPlus<imba_luna_lunar_blessing>();
-        if (ability && (this.hero_primary_attribute == Attributes.DOTA_ATTRIBUTE_AGILITY ||
-            (ability.full_moon && GameRules.GetDOTATime(true, true) - ability.full_moon <= this.GetSpecialValueFor("full_moon_duration"))) && !this.GetCasterPlus().PassivesDisabled()) {
-            return this.GetSpecialValueFor("primary_attribute");
-        }
-    }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BONUS)
-    CC_GetModifierBonusStats_Intellect(): number {
-        let ability = this.GetAbilityPlus<imba_luna_lunar_blessing>();
-        if (ability && (this.hero_primary_attribute == Attributes.DOTA_ATTRIBUTE_INTELLECT || (ability.full_moon && GameRules.GetDOTATime(true, true) - ability.full_moon <= this.GetSpecialValueFor("full_moon_duration"))) && !this.GetCasterPlus().PassivesDisabled()) {
-            return this.GetSpecialValueFor("primary_attribute");
-        }
-    }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BONUS_NIGHT_VISION)
-    CC_GetBonusNightVision(): number {
-        let ability = this.GetAbilityPlus<imba_luna_lunar_blessing>();
-        if (this.GetAbilityPlus() && (this.GetParentPlus() == this.GetCasterPlus() || (ability.full_moon && GameRules.GetDOTATime(true, true) - ability.full_moon <= this.GetSpecialValueFor("full_moon_duration"))) && !this.GetCasterPlus().PassivesDisabled()) {
-            return this.GetSpecialValueFor("bonus_night_vision");
-        }
-    }
+    // @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BONUS)
+    // CC_GetModifierBonusStats_Strength(): number {
+    //     let ability = this.GetAbilityPlus<imba_luna_lunar_blessing>();
+    //     if (!IsValid(ability)) { return }
+    //     if ((this.hero_primary_attribute == Attributes.DOTA_ATTRIBUTE_STRENGTH ||
+    //         (ability.full_moon && GameRules.GetDOTATime(true, true) - ability.full_moon <= this.GetSpecialValueFor("full_moon_duration"))) && !this.GetCasterPlus().PassivesDisabled()) {
+    //         return this.GetSpecialValueFor("primary_attribute");
+    //     }
+    // }
+    // @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_BONUS)
+    // CC_GetModifierBonusStats_Agility(): number {
+    //     let ability = this.GetAbilityPlus<imba_luna_lunar_blessing>();
+    //     if (!IsValid(ability)) { return }
+    //     if ((this.hero_primary_attribute == Attributes.DOTA_ATTRIBUTE_AGILITY ||
+    //         (ability.full_moon && GameRules.GetDOTATime(true, true) - ability.full_moon <= this.GetSpecialValueFor("full_moon_duration"))) && !this.GetCasterPlus().PassivesDisabled()) {
+    //         return this.GetSpecialValueFor("primary_attribute");
+    //     }
+    // }
+    // @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BONUS)
+    // CC_GetModifierBonusStats_Intellect(): number {
+    //     let ability = this.GetAbilityPlus<imba_luna_lunar_blessing>();
+    //     if (!IsValid(ability)) { return }
+    //     if ((this.hero_primary_attribute == Attributes.DOTA_ATTRIBUTE_INTELLECT || (ability.full_moon && GameRules.GetDOTATime(true, true) - ability.full_moon <= this.GetSpecialValueFor("full_moon_duration"))) && !this.GetCasterPlus().PassivesDisabled()) {
+    //         return this.GetSpecialValueFor("primary_attribute");
+    //     }
+    // }
+    // @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BONUS_NIGHT_VISION)
+    // CC_GetBonusNightVision(): number {
+    //     let ability = this.GetAbilityPlus<imba_luna_lunar_blessing>();
+    //     if (!IsValid(ability)) { return }
+    //     if ((this.GetParentPlus() == this.GetCasterPlus() || (ability.full_moon && GameRules.GetDOTATime(true, true) - ability.full_moon <= this.GetSpecialValueFor("full_moon_duration"))) && !this.GetCasterPlus().PassivesDisabled()) {
+    //         return this.GetSpecialValueFor("bonus_night_vision");
+    //     }
+    // }
 }
 @registerAbility()
 export class imba_luna_lunar_blessing_723 extends BaseAbility_Plus {

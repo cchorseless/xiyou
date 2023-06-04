@@ -107,6 +107,8 @@ export class CCDebugPanel extends CCPanel<ICCDebugPanel> {
                         <CCDebugTool_DemoButton eventName={GameProtocol.Protocol.req_DebugAddDummyTarget} localtext="添加傀儡" />
                         <CCDebugTool_DemoButton eventName={GameProtocol.Protocol.req_DebugRemoveDummyTarget} localtext="移除傀儡" />
                         <CCDebugTool_DemoSelectionButton eventName="CC_DebugTool_UnitInfo" localtext="单位信息面板" onactivate={() => { this.addOnlyDebugDialog(CCDebugTool_UnitInfo) }} />
+                        <CCDebugTool_DemoButton eventName={GameProtocol.Protocol.req_DebugMakeFullMana} data={() => Players.GetLocalPlayerPortraitUnit()} localtext="满魔法" />
+
                     </CCDebugTool_Category>
 
                     <CCDebugTool_Category title="其他" >

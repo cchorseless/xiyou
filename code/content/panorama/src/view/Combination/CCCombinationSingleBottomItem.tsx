@@ -96,7 +96,7 @@ export class CCCombinationSingleBottomItem extends CCPanel<ICCCombinationSingleB
                         }
 
                     </CCPanel>
-                    <CCCombinationIcon id="CombinationIcon" sectName={sectName} />
+                    <CCCombinationIcon id="CombinationIcon" sectName={sectName} count={lastentity.uniqueConfigList.length} />
                 </CCPanel>
                 {this.__root___childs}
                 {this.props.children}

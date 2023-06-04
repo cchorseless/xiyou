@@ -9,7 +9,7 @@ export class CourierEntityRoot extends BaseEntityRoot {
     damage: number = 0;
 
     IsValidSteamID() {
-        return this.steamID && this.steamID != "0";
+        return this.steamID != null && this.steamID.length > 1;
     }
 }
 declare global {

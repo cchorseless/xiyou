@@ -3,6 +3,8 @@ export module DrawConfig {
     export const iWashCardMax = 5;
     /**选卡只能选一次 */
     export const BOnlySelectOnce = true;
+    /**选择敌人最大时间 */
+    export const DrawEnemyWaitingTime = 20;
     /**抽卡类型 对应poolgroupid */
     export enum EDrawType {
         RoundStart,
@@ -22,15 +24,16 @@ export module DrawConfig {
         LockSelectedCard = "LockSelectedCard",
         CardSelected = "CardSelected",
         RedrawStartCard = "RedrawStartCard",
-        StartCardSelected = "StartCardSelected",
         SelectCard2Public = "SelectCard2Public",
         Add2WishList = "Add2WishList",
         DrawEquipNotice = "DrawEquipNotice",
         DrawEquipSelected = "DrawEquipSelected",
         DrawArtifactNotice = "DrawArtifactNotice",
         DrawArtifactSelected = "DrawArtifactSelected",
-
-
+        DrawSectNotice = "DrawSectNotice",
+        DrawSectSelected = "DrawSectSelected",
+        DrawEnemyNotice = "DrawEnemyNotice",
+        DrawEnemySelected = "DrawEnemySelected",
     }
 }
 
@@ -50,6 +53,21 @@ declare global {
         interface ICardWanted {
             itemName: string;
             isadd: 0 | 1;
+        }
+        /**敌人相关 */
+        interface IDrawEnemyInfo {
+            unitname: string;
+            level: number;
+            star: number;
+            equip: string[];
+            score: number;
+            buffs?: { [buff: string]: number };
+        }
+        /**抽敌人通知 */
+        interface IDrawEnemyNotice {
+            accountid?: string;
+            sectInfo?: { [k: string]: number };
+            heroInfo?: IDrawEnemyInfo[];
         }
     }
 }

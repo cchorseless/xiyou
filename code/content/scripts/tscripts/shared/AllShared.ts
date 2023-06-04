@@ -16,6 +16,7 @@ export class AllShared {
         RefreshConfig();
         JsonConfigHelper.Init();
         AllServiceEntity.init();
+
         GLogHelper.print(`-------------------------------CODE ON LUA ${_CODE_IN_LUA_}---------------------------------`);
 
     }

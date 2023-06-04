@@ -3968,8 +3968,8 @@
 "dota_buildinglevelupconfig":[
   {
     "Id": "building_hero_abaddon",
-    "BindHeroId": 10001,
     "IsValid": true,
+    "BattleScore": 200,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -4036,8 +4036,8 @@
   },
   {
     "Id": "building_hero_abyssal_underlord",
-    "BindHeroId": 10002,
     "IsValid": true,
+    "BattleScore": 210,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -4102,8 +4102,8 @@
   },
   {
     "Id": "building_hero_alchemist",
-    "BindHeroId": 10003,
     "IsValid": true,
+    "BattleScore": 220,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -4171,8 +4171,8 @@
   },
   {
     "Id": "building_hero_ancient_apparition",
-    "BindHeroId": 10004,
     "IsValid": true,
+    "BattleScore": 230,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -4237,8 +4237,8 @@
   },
   {
     "Id": "building_hero_antimage",
-    "BindHeroId": 10005,
     "IsValid": true,
+    "BattleScore": 240,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -4307,8 +4307,8 @@
   },
   {
     "Id": "building_hero_arc_warden",
-    "BindHeroId": 10006,
     "IsValid": true,
+    "BattleScore": 250,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -4374,8 +4374,8 @@
   },
   {
     "Id": "building_hero_axe",
-    "BindHeroId": 10007,
     "IsValid": true,
+    "BattleScore": 200,
     "Bundles": [
       21096,
       21232,
@@ -4447,8 +4447,8 @@
   },
   {
     "Id": "building_hero_bane",
-    "BindHeroId": 10008,
     "IsValid": true,
+    "BattleScore": 210,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -4514,8 +4514,8 @@
   },
   {
     "Id": "building_hero_batrider",
-    "BindHeroId": 10009,
     "IsValid": true,
+    "BattleScore": 220,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -4581,8 +4581,8 @@
   },
   {
     "Id": "building_hero_beastmaster",
-    "BindHeroId": 10010,
     "IsValid": true,
+    "BattleScore": 230,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -4650,8 +4650,8 @@
   },
   {
     "Id": "building_hero_bloodseeker",
-    "BindHeroId": 10011,
     "IsValid": true,
+    "BattleScore": 240,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -4719,8 +4719,8 @@
   },
   {
     "Id": "building_hero_bounty_hunter",
-    "BindHeroId": 10012,
     "IsValid": true,
+    "BattleScore": 250,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -4787,8 +4787,8 @@
   },
   {
     "Id": "building_hero_brewmaster",
-    "BindHeroId": 10013,
     "IsValid": true,
+    "BattleScore": 200,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -4853,8 +4853,8 @@
   },
   {
     "Id": "building_hero_bristleback",
-    "BindHeroId": 10014,
     "IsValid": true,
+    "BattleScore": 210,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -4918,8 +4918,8 @@
   },
   {
     "Id": "building_hero_broodmother",
-    "BindHeroId": 10015,
     "IsValid": true,
+    "BattleScore": 220,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -4983,8 +4983,8 @@
   },
   {
     "Id": "building_hero_centaur",
-    "BindHeroId": 10016,
     "IsValid": true,
+    "BattleScore": 230,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -5049,8 +5049,8 @@
   },
   {
     "Id": "building_hero_chaos_knight",
-    "BindHeroId": 10017,
     "IsValid": true,
+    "BattleScore": 240,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -5114,8 +5114,8 @@
   },
   {
     "Id": "building_hero_chen",
-    "BindHeroId": 10018,
     "IsValid": true,
+    "BattleScore": 250,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -5178,8 +5178,8 @@
   },
   {
     "Id": "building_hero_clinkz",
-    "BindHeroId": 10019,
     "IsValid": true,
+    "BattleScore": 200,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -5242,8 +5242,8 @@
   },
   {
     "Id": "building_hero_crystal_maiden",
-    "BindHeroId": 10020,
     "IsValid": true,
+    "BattleScore": 210,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -5306,8 +5306,8 @@
   },
   {
     "Id": "building_hero_dark_seer",
-    "BindHeroId": 10021,
     "IsValid": true,
+    "BattleScore": 220,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -5370,8 +5370,8 @@
   },
   {
     "Id": "building_hero_dark_willow",
-    "BindHeroId": 10022,
     "IsValid": true,
+    "BattleScore": 230,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -5434,8 +5434,8 @@
   },
   {
     "Id": "building_hero_dawnbreaker",
-    "BindHeroId": 10023,
     "IsValid": true,
+    "BattleScore": 240,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -5497,8 +5497,8 @@
   },
   {
     "Id": "building_hero_dazzle",
-    "BindHeroId": 10024,
     "IsValid": true,
+    "BattleScore": 250,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -5561,8 +5561,8 @@
   },
   {
     "Id": "building_hero_death_prophet",
-    "BindHeroId": 10025,
     "IsValid": true,
+    "BattleScore": 200,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -5626,8 +5626,8 @@
   },
   {
     "Id": "building_hero_disruptor",
-    "BindHeroId": 10026,
     "IsValid": true,
+    "BattleScore": 210,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -5692,8 +5692,8 @@
   },
   {
     "Id": "building_hero_doom_bringer",
-    "BindHeroId": 10027,
     "IsValid": true,
+    "BattleScore": 220,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -5758,8 +5758,8 @@
   },
   {
     "Id": "building_hero_dragon_knight",
-    "BindHeroId": 10028,
     "IsValid": true,
+    "BattleScore": 230,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -5824,8 +5824,8 @@
   },
   {
     "Id": "building_hero_drow_ranger",
-    "BindHeroId": 10029,
     "IsValid": true,
+    "BattleScore": 240,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -5890,8 +5890,8 @@
   },
   {
     "Id": "building_hero_earth_spirit",
-    "BindHeroId": 10030,
     "IsValid": true,
+    "BattleScore": 250,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -5956,8 +5956,8 @@
   },
   {
     "Id": "building_hero_earthshaker",
-    "BindHeroId": 10031,
     "IsValid": true,
+    "BattleScore": 200,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -6020,8 +6020,8 @@
   },
   {
     "Id": "building_hero_elder_titan",
-    "BindHeroId": 10032,
     "IsValid": true,
+    "BattleScore": 210,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -6085,8 +6085,8 @@
   },
   {
     "Id": "building_hero_ember_spirit",
-    "BindHeroId": 10033,
     "IsValid": true,
+    "BattleScore": 220,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -6151,8 +6151,8 @@
   },
   {
     "Id": "building_hero_enchantress",
-    "BindHeroId": 10034,
     "IsValid": true,
+    "BattleScore": 230,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -6215,8 +6215,8 @@
   },
   {
     "Id": "building_hero_enigma",
-    "BindHeroId": 10035,
     "IsValid": true,
+    "BattleScore": 240,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -6279,8 +6279,8 @@
   },
   {
     "Id": "building_hero_faceless_void",
-    "BindHeroId": 10036,
     "IsValid": true,
+    "BattleScore": 250,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -6343,8 +6343,8 @@
   },
   {
     "Id": "building_hero_furion",
-    "BindHeroId": 10037,
     "IsValid": true,
+    "BattleScore": 200,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -6409,8 +6409,8 @@
   },
   {
     "Id": "building_hero_grimstroke",
-    "BindHeroId": 10038,
     "IsValid": true,
+    "BattleScore": 210,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -6473,8 +6473,8 @@
   },
   {
     "Id": "building_hero_gyrocopter",
-    "BindHeroId": 10039,
     "IsValid": true,
+    "BattleScore": 220,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -6538,8 +6538,8 @@
   },
   {
     "Id": "building_hero_hoodwink",
-    "BindHeroId": 10040,
     "IsValid": true,
+    "BattleScore": 230,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -6601,8 +6601,8 @@
   },
   {
     "Id": "building_hero_huskar",
-    "BindHeroId": 10041,
     "IsValid": true,
+    "BattleScore": 240,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -6666,8 +6666,8 @@
   },
   {
     "Id": "building_hero_invoker",
-    "BindHeroId": 10042,
     "IsValid": true,
+    "BattleScore": 250,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -6730,8 +6730,8 @@
   },
   {
     "Id": "building_hero_jakiro",
-    "BindHeroId": 10043,
     "IsValid": true,
+    "BattleScore": 200,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -6793,8 +6793,8 @@
   },
   {
     "Id": "building_hero_juggernaut",
-    "BindHeroId": 10044,
     "IsValid": true,
+    "BattleScore": 210,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -6857,8 +6857,8 @@
   },
   {
     "Id": "building_hero_keeper_of_the_light",
-    "BindHeroId": 10045,
     "IsValid": true,
+    "BattleScore": 220,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -6920,8 +6920,8 @@
   },
   {
     "Id": "building_hero_kunkka",
-    "BindHeroId": 10046,
     "IsValid": true,
+    "BattleScore": 230,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -6987,8 +6987,8 @@
   },
   {
     "Id": "building_hero_legion_commander",
-    "BindHeroId": 10047,
     "IsValid": true,
+    "BattleScore": 240,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -7052,8 +7052,8 @@
   },
   {
     "Id": "building_hero_leshrac",
-    "BindHeroId": 10048,
     "IsValid": true,
+    "BattleScore": 250,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -7117,8 +7117,8 @@
   },
   {
     "Id": "building_hero_lich",
-    "BindHeroId": 10049,
     "IsValid": true,
+    "BattleScore": 200,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -7181,8 +7181,8 @@
   },
   {
     "Id": "building_hero_life_stealer",
-    "BindHeroId": 10050,
     "IsValid": true,
+    "BattleScore": 210,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -7245,8 +7245,8 @@
   },
   {
     "Id": "building_hero_lina",
-    "BindHeroId": 10051,
     "IsValid": true,
+    "BattleScore": 220,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -7309,8 +7309,8 @@
   },
   {
     "Id": "building_hero_lion",
-    "BindHeroId": 10052,
     "IsValid": true,
+    "BattleScore": 230,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -7374,8 +7374,8 @@
   },
   {
     "Id": "building_hero_lone_druid",
-    "BindHeroId": 10053,
     "IsValid": true,
+    "BattleScore": 240,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -7438,8 +7438,8 @@
   },
   {
     "Id": "building_hero_luna",
-    "BindHeroId": 10054,
     "IsValid": true,
+    "BattleScore": 250,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -7502,8 +7502,8 @@
   },
   {
     "Id": "building_hero_lycan",
-    "BindHeroId": 10055,
     "IsValid": true,
+    "BattleScore": 200,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -7566,8 +7566,8 @@
   },
   {
     "Id": "building_hero_magnataur",
-    "BindHeroId": 10056,
     "IsValid": true,
+    "BattleScore": 210,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -7631,8 +7631,8 @@
   },
   {
     "Id": "building_hero_marci",
-    "BindHeroId": 10057,
     "IsValid": true,
+    "BattleScore": 220,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -7689,8 +7689,8 @@
   },
   {
     "Id": "building_hero_mars",
-    "BindHeroId": 10058,
     "IsValid": true,
+    "BattleScore": 230,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -7752,8 +7752,8 @@
   },
   {
     "Id": "building_hero_medusa",
-    "BindHeroId": 10059,
     "IsValid": true,
+    "BattleScore": 240,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -7818,8 +7818,8 @@
   },
   {
     "Id": "building_hero_meepo",
-    "BindHeroId": 10060,
     "IsValid": true,
+    "BattleScore": 250,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -7884,8 +7884,8 @@
   },
   {
     "Id": "building_hero_mirana",
-    "BindHeroId": 10061,
     "IsValid": true,
+    "BattleScore": 200,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -7950,8 +7950,8 @@
   },
   {
     "Id": "building_hero_monkey_king",
-    "BindHeroId": 10062,
     "IsValid": true,
+    "BattleScore": 210,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -8014,8 +8014,8 @@
   },
   {
     "Id": "building_hero_morphling",
-    "BindHeroId": 10063,
     "IsValid": true,
+    "BattleScore": 220,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -8079,8 +8079,8 @@
   },
   {
     "Id": "building_hero_naga_siren",
-    "BindHeroId": 10064,
     "IsValid": true,
+    "BattleScore": 230,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -8144,8 +8144,8 @@
   },
   {
     "Id": "building_hero_necrolyte",
-    "BindHeroId": 10065,
     "IsValid": true,
+    "BattleScore": 240,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -8209,8 +8209,8 @@
   },
   {
     "Id": "building_hero_nevermore",
-    "BindHeroId": 10066,
     "IsValid": true,
+    "BattleScore": 250,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -8272,8 +8272,8 @@
   },
   {
     "Id": "building_hero_night_stalker",
-    "BindHeroId": 10067,
     "IsValid": true,
+    "BattleScore": 200,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -8337,8 +8337,8 @@
   },
   {
     "Id": "building_hero_nyx_assassin",
-    "BindHeroId": 10068,
     "IsValid": true,
+    "BattleScore": 210,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -8400,8 +8400,8 @@
   },
   {
     "Id": "building_hero_obsidian_destroyer",
-    "BindHeroId": 10069,
     "IsValid": true,
+    "BattleScore": 220,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -8464,8 +8464,8 @@
   },
   {
     "Id": "building_hero_ogre_magi",
-    "BindHeroId": 10070,
     "IsValid": true,
+    "BattleScore": 230,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -8529,8 +8529,8 @@
   },
   {
     "Id": "building_hero_omniknight",
-    "BindHeroId": 10071,
     "IsValid": true,
+    "BattleScore": 240,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -8594,8 +8594,8 @@
   },
   {
     "Id": "building_hero_oracle",
-    "BindHeroId": 10072,
     "IsValid": true,
+    "BattleScore": 250,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -8658,8 +8658,8 @@
   },
   {
     "Id": "building_hero_pangolier",
-    "BindHeroId": 10073,
     "IsValid": true,
+    "BattleScore": 200,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -8721,8 +8721,8 @@
   },
   {
     "Id": "building_hero_phantom_assassin",
-    "BindHeroId": 10074,
     "IsValid": true,
+    "BattleScore": 210,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -8786,8 +8786,8 @@
   },
   {
     "Id": "building_hero_phantom_lancer",
-    "BindHeroId": 10075,
     "IsValid": true,
+    "BattleScore": 220,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -8851,8 +8851,8 @@
   },
   {
     "Id": "building_hero_phoenix",
-    "BindHeroId": 10076,
     "IsValid": true,
+    "BattleScore": 230,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -8914,8 +8914,8 @@
   },
   {
     "Id": "building_hero_primal_beast",
-    "BindHeroId": 10077,
     "IsValid": true,
+    "BattleScore": 240,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -8972,8 +8972,8 @@
   },
   {
     "Id": "building_hero_puck",
-    "BindHeroId": 10078,
     "IsValid": true,
+    "BattleScore": 250,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -9035,8 +9035,8 @@
   },
   {
     "Id": "building_hero_pudge",
-    "BindHeroId": 10079,
     "IsValid": true,
+    "BattleScore": 200,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -9100,8 +9100,8 @@
   },
   {
     "Id": "building_hero_pugna",
-    "BindHeroId": 10080,
     "IsValid": true,
+    "BattleScore": 210,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -9165,8 +9165,8 @@
   },
   {
     "Id": "building_hero_queenofpain",
-    "BindHeroId": 10081,
     "IsValid": true,
+    "BattleScore": 220,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -9228,8 +9228,8 @@
   },
   {
     "Id": "building_hero_rattletrap",
-    "BindHeroId": 10082,
     "IsValid": true,
+    "BattleScore": 230,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -9292,8 +9292,8 @@
   },
   {
     "Id": "building_hero_razor",
-    "BindHeroId": 10083,
     "IsValid": true,
+    "BattleScore": 240,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -9357,8 +9357,8 @@
   },
   {
     "Id": "building_hero_riki",
-    "BindHeroId": 10084,
     "IsValid": true,
+    "BattleScore": 250,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -9423,8 +9423,8 @@
   },
   {
     "Id": "building_hero_rubick",
-    "BindHeroId": 10085,
     "IsValid": true,
+    "BattleScore": 200,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -9486,8 +9486,8 @@
   },
   {
     "Id": "building_hero_sand_king",
-    "BindHeroId": 10086,
     "IsValid": true,
+    "BattleScore": 210,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -9551,8 +9551,8 @@
   },
   {
     "Id": "building_hero_shadow_demon",
-    "BindHeroId": 10087,
     "IsValid": true,
+    "BattleScore": 220,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -9614,8 +9614,8 @@
   },
   {
     "Id": "building_hero_shadow_shaman",
-    "BindHeroId": 10088,
     "IsValid": true,
+    "BattleScore": 230,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -9680,8 +9680,8 @@
   },
   {
     "Id": "building_hero_shredder",
-    "BindHeroId": 10089,
     "IsValid": true,
+    "BattleScore": 240,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -9746,8 +9746,8 @@
   },
   {
     "Id": "building_hero_silencer",
-    "BindHeroId": 10090,
     "IsValid": true,
+    "BattleScore": 250,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -9812,8 +9812,8 @@
   },
   {
     "Id": "building_hero_skeleton_king",
-    "BindHeroId": 10091,
     "IsValid": true,
+    "BattleScore": 200,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -9878,8 +9878,8 @@
   },
   {
     "Id": "building_hero_skywrath_mage",
-    "BindHeroId": 10092,
     "IsValid": true,
+    "BattleScore": 210,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -9944,8 +9944,8 @@
   },
   {
     "Id": "building_hero_slardar",
-    "BindHeroId": 10093,
     "IsValid": true,
+    "BattleScore": 220,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -10008,8 +10008,8 @@
   },
   {
     "Id": "building_hero_slark",
-    "BindHeroId": 10094,
     "IsValid": true,
+    "BattleScore": 230,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -10073,8 +10073,8 @@
   },
   {
     "Id": "building_hero_snapfire",
-    "BindHeroId": 10095,
     "IsValid": true,
+    "BattleScore": 240,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -10131,8 +10131,8 @@
   },
   {
     "Id": "building_hero_sniper",
-    "BindHeroId": 10096,
     "IsValid": true,
+    "BattleScore": 250,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -10196,8 +10196,8 @@
   },
   {
     "Id": "building_hero_spectre",
-    "BindHeroId": 10097,
     "IsValid": true,
+    "BattleScore": 200,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -10260,8 +10260,8 @@
   },
   {
     "Id": "building_hero_spirit_breaker",
-    "BindHeroId": 10098,
     "IsValid": true,
+    "BattleScore": 210,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -10325,8 +10325,8 @@
   },
   {
     "Id": "building_hero_storm_spirit",
-    "BindHeroId": 10099,
     "IsValid": true,
+    "BattleScore": 220,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -10388,8 +10388,8 @@
   },
   {
     "Id": "building_hero_sven",
-    "BindHeroId": 10100,
     "IsValid": true,
+    "BattleScore": 230,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -10453,8 +10453,8 @@
   },
   {
     "Id": "building_hero_techies",
-    "BindHeroId": 10101,
     "IsValid": true,
+    "BattleScore": 240,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -10520,8 +10520,8 @@
   },
   {
     "Id": "building_hero_templar_assassin",
-    "BindHeroId": 10102,
     "IsValid": true,
+    "BattleScore": 250,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -10583,8 +10583,8 @@
   },
   {
     "Id": "building_hero_terrorblade",
-    "BindHeroId": 10103,
     "IsValid": true,
+    "BattleScore": 200,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -10648,8 +10648,8 @@
   },
   {
     "Id": "building_hero_tidehunter",
-    "BindHeroId": 10104,
     "IsValid": true,
+    "BattleScore": 210,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -10714,8 +10714,8 @@
   },
   {
     "Id": "building_hero_tinker",
-    "BindHeroId": 10105,
     "IsValid": true,
+    "BattleScore": 220,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -10779,8 +10779,8 @@
   },
   {
     "Id": "building_hero_tiny",
-    "BindHeroId": 10106,
     "IsValid": true,
+    "BattleScore": 230,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -10843,8 +10843,8 @@
   },
   {
     "Id": "building_hero_treant",
-    "BindHeroId": 10107,
     "IsValid": true,
+    "BattleScore": 240,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -10907,8 +10907,8 @@
   },
   {
     "Id": "building_hero_troll_warlord",
-    "BindHeroId": 10108,
     "IsValid": true,
+    "BattleScore": 250,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -10971,8 +10971,8 @@
   },
   {
     "Id": "building_hero_tusk",
-    "BindHeroId": 10109,
     "IsValid": true,
+    "BattleScore": 200,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -11038,8 +11038,8 @@
   },
   {
     "Id": "building_hero_undying",
-    "BindHeroId": 10110,
     "IsValid": true,
+    "BattleScore": 210,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -11101,8 +11101,8 @@
   },
   {
     "Id": "building_hero_ursa",
-    "BindHeroId": 10111,
     "IsValid": true,
+    "BattleScore": 220,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -11166,8 +11166,8 @@
   },
   {
     "Id": "building_hero_vengefulspirit",
-    "BindHeroId": 10112,
     "IsValid": true,
+    "BattleScore": 230,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -11230,8 +11230,8 @@
   },
   {
     "Id": "building_hero_venomancer",
-    "BindHeroId": 10113,
     "IsValid": true,
+    "BattleScore": 240,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -11295,8 +11295,8 @@
   },
   {
     "Id": "building_hero_viper",
-    "BindHeroId": 10114,
     "IsValid": true,
+    "BattleScore": 250,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -11357,8 +11357,8 @@
   },
   {
     "Id": "building_hero_visage",
-    "BindHeroId": 10115,
     "IsValid": true,
+    "BattleScore": 200,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -11420,8 +11420,8 @@
   },
   {
     "Id": "building_hero_void_spirit",
-    "BindHeroId": 10116,
     "IsValid": true,
+    "BattleScore": 210,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -11478,8 +11478,8 @@
   },
   {
     "Id": "building_hero_warlock",
-    "BindHeroId": 10117,
     "IsValid": true,
+    "BattleScore": 220,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -11545,8 +11545,8 @@
   },
   {
     "Id": "building_hero_weaver",
-    "BindHeroId": 10118,
     "IsValid": true,
+    "BattleScore": 230,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -11610,8 +11610,8 @@
   },
   {
     "Id": "building_hero_windrunner",
-    "BindHeroId": 10119,
     "IsValid": true,
+    "BattleScore": 240,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -11674,8 +11674,8 @@
   },
   {
     "Id": "building_hero_winter_wyvern",
-    "BindHeroId": 10120,
     "IsValid": true,
+    "BattleScore": 250,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -11736,8 +11736,8 @@
   },
   {
     "Id": "building_hero_wisp",
-    "BindHeroId": 10121,
     "IsValid": true,
+    "BattleScore": 200,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -11794,8 +11794,8 @@
   },
   {
     "Id": "building_hero_witch_doctor",
-    "BindHeroId": 10122,
     "IsValid": true,
+    "BattleScore": 210,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -11859,8 +11859,8 @@
   },
   {
     "Id": "building_hero_zuus",
-    "BindHeroId": 10123,
     "IsValid": true,
+    "BattleScore": 220,
     "Bundles": [],
     "StarUpInfo": [
       {
@@ -21402,19 +21402,43 @@
     "poolItemCount": 1,
     "PoolInfo": [
       {
-        "ItemConfigId": "item_imba_stout_shield",
+        "ItemConfigId": "item_imba_blades_of_attack",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
-        "ItemConfigId": "item_imba_poor_mans_shield",
+        "ItemConfigId": "item_imba_quarterstaff",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
-        "ItemConfigId": "item_imba_blight_stone",
+        "ItemConfigId": "item_imba_ring_of_health",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_void_stone",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_vitality_booster",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_energy_booster",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_cloak",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
@@ -21426,37 +21450,19 @@
         "IsVaild": true
       },
       {
-        "ItemConfigId": "item_imba_ring_of_aquila",
+        "ItemConfigId": "item_imba_blight_stone",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
-        "ItemConfigId": "item_imba_circlet",
+        "ItemConfigId": "item_imba_orb_of_venom",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
-        "ItemConfigId": "item_imba_gauntlets",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_mantle",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_branches",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_slippers",
+        "ItemConfigId": "item_imba_gloves",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
@@ -21486,6 +21492,48 @@
         "IsVaild": true
       },
       {
+        "ItemConfigId": "item_imba_chainmail",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_helm_of_iron_will",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_boots",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_voodoo_mask",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_buckler",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      }
+    ]
+  },
+  {
+    "poolid": "1006",
+    "poolItemCount": 1,
+    "PoolInfo": [
+      {
+        "ItemConfigId": "item_imba_talisman_of_evasion",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
         "ItemConfigId": "item_imba_ogre_axe",
         "ItemCount": 1,
         "ItemWeight": 1,
@@ -21504,367 +21552,7 @@
         "IsVaild": true
       },
       {
-        "ItemConfigId": "item_imba_orb_of_venom",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_blades_of_attack",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_gloves",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_chainmail",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_quarterstaff",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_helm_of_iron_will",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_ring_of_regen",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_sobi_mask",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_fluffy_hat",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_wind_lace",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_cloak",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_boots",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_voodoo_mask",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_null_talisman",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_wraith_band",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_bracer",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_orb_of_corrosion",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_buckler",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_ring_of_basilius",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_headdress",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_ring_of_health",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_void_stone",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_energy_booster",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_vitality_booster",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      }
-    ]
-  },
-  {
-    "poolid": "1006",
-    "poolItemCount": 1,
-    "PoolInfo": [
-      {
-        "ItemConfigId": "item_imba_aeon_disk",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_hand_of_midas",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_arcane_boots",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_mekansm",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_vladmir",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_dagon",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_necronomicon",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_vanguard",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_javelin",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_armlet",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_invis_sword",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_sange",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_yasha",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_kaya",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_maelstrom",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_diffusal_blade",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_ancient_janggo",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_veil_of_discord",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_blink",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_echo_sabre",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_aether_lens",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_mask_of_madness",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_hood_of_defiance",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_pipe",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_blade_mail",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_skull_basher",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_lesser_crit",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_force_staff",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_power_treads",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_travel_boots",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_cloak_of_flames",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_meteor_hammer",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_spirit_vessel",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_rod_of_atos",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_ghost",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_ogre_seal_totem",
+        "ItemConfigId": "item_imba_platemail",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
@@ -21882,7 +21570,7 @@
         "IsVaild": true
       },
       {
-        "ItemConfigId": "item_imba_claymore",
+        "ItemConfigId": "item_imba_javelin",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
@@ -21894,13 +21582,13 @@
         "IsVaild": true
       },
       {
-        "ItemConfigId": "item_imba_falcon_blade",
+        "ItemConfigId": "item_imba_blink",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
-        "ItemConfigId": "item_imba_oblivion_staff",
+        "ItemConfigId": "item_imba_soul_booster",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
@@ -21912,7 +21600,91 @@
         "IsVaild": true
       },
       {
+        "ItemConfigId": "item_imba_phase_boots",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_arcane_boots",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_tranquil_boots",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
         "ItemConfigId": "item_imba_helm_of_the_dominator",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_aether_lens",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_vanguard",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_oblivion_staff",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_power_treads",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_ancient_janggo",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_mekansm",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_orb_of_corrosion",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_hood_of_defiance",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_armlet",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_falcon_blade",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_meteor_hammer",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
@@ -21924,23 +21696,17 @@
         "IsVaild": true
       },
       {
-        "ItemConfigId": "item_imba_point_booster",
+        "ItemConfigId": "item_imba_veil_of_discord",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_platemail",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_talisman_of_evasion",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
+      }
+    ]
+  },
+  {
+    "poolid": "1007",
+    "poolItemCount": 1,
+    "PoolInfo": [
       {
         "ItemConfigId": "item_imba_hyperstone",
         "ItemCount": 1,
@@ -21964,264 +21730,6 @@
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
-      }
-    ]
-  },
-  {
-    "poolid": "1007",
-    "poolItemCount": 1,
-    "PoolInfo": [
-      {
-        "ItemConfigId": "item_imba_guardian_greaves",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_vladmir_2",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_sheepstick",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_orchid",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_dagon_2",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_dagon_3",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_necronomicon_2",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_necronomicon_3",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_assault",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_heart",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_shivas_guard",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_crimson_guard",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_monkey_king_bar",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_radiance",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_butterfly",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_greater_crit",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_silver_edge",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_sange_and_yasha",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_skadi",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_mjollnir",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_desolator",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_diffusal_blade_2",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_heavens_halberd",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_moon_shard",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_octarine_core",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_phase_boots",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_satanic",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_urn_of_shadows",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_manta",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_hurricane_pike",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_kaya_and_sange",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_yasha_and_kaya",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_bloodstone",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_meteor_hammer_2",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_meteor_hammer_3",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_ethereal_blade",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_eternal_shroud",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_nullifier",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_cyclone",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_cultic_hammer",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_black_king_bar",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_lotus_orb",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
       },
       {
         "ItemConfigId": "item_imba_reaver",
@@ -22240,15 +21748,39 @@
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
-      }
-    ]
-  },
-  {
-    "poolid": "1008",
-    "poolItemCount": 1,
-    "PoolInfo": [
+      },
       {
-        "ItemConfigId": "item_imba_bloodthorn",
+        "ItemConfigId": "item_imba_lesser_crit",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_bfury",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_witch_blade",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_dagon",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_dagon_2",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_dagon_3",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
@@ -22266,6 +21798,24 @@
         "IsVaild": true
       },
       {
+        "ItemConfigId": "item_imba_necronomicon",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_necronomicon_2",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_necronomicon_3",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
         "ItemConfigId": "item_imba_necronomicon_4",
         "ItemCount": 1,
         "ItemWeight": 1,
@@ -22278,11 +21828,215 @@
         "IsVaild": true
       },
       {
+        "ItemConfigId": "item_imba_meteor_hammer",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_meteor_hammer_2",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_meteor_hammer_3",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_meteor_hammer_4",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_rod_of_atos",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_rod_of_atos_2",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_dragon_lance",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_force_staff",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_blade_mail",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_blade_mail_2",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_desolator",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
         "ItemConfigId": "item_imba_desolator_2",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
+      {
+        "ItemConfigId": "item_imba_maelstrom",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_skull_basher",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_diffusal_blade",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_diffusal_blade_2",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_sange",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_yasha",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_kaya",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_echo_sabre",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_pipe",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_guardian_greaves",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_vladmir",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_vladmir_2",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_bloodstone",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_octarine_core",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_eternal_shroud",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_aeon_disk",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_crimson_guard",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_black_king_bar",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_lotus_orb",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_orchid",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_heavens_halberd",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_boots_of_bearing",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      }
+    ]
+  },
+  {
+    "poolid": "1008",
+    "poolItemCount": 1,
+    "PoolInfo": [
       {
         "ItemConfigId": "item_imba_rapier",
         "ItemCount": 1,
@@ -22308,7 +22062,31 @@
         "IsVaild": true
       },
       {
-        "ItemConfigId": "item_imba_blade_mail_2",
+        "ItemConfigId": "item_imba_radiance",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_monkey_king_bar",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_butterfly",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_greater_crit",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_mjollnir",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
@@ -22320,13 +22098,85 @@
         "IsVaild": true
       },
       {
-        "ItemConfigId": "item_imba_meteor_hammer_4",
+        "ItemConfigId": "item_imba_satanic",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
-        "ItemConfigId": "item_imba_rod_of_atos_2",
+        "ItemConfigId": "item_imba_assault",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_sheepstick",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_moon_shard",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_skadi",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_manta",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_manta_2",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_shivas_guard",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_bloodthorn",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_heart",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_hurricane_pike",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_kaya_and_sange",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_yasha_and_kaya",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_imba_sange_and_yasha",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
@@ -22344,25 +22194,13 @@
         "IsVaild": true
       },
       {
-        "ItemConfigId": "item_imba_dragon_lance",
+        "ItemConfigId": "item_imba_nullifier",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
       },
       {
         "ItemConfigId": "item_imba_nullifier_2",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_cyclone_2",
-        "ItemCount": 1,
-        "ItemWeight": 1,
-        "IsVaild": true
-      },
-      {
-        "ItemConfigId": "item_imba_manta_2",
         "ItemCount": 1,
         "ItemWeight": 1,
         "IsVaild": true
@@ -26865,19 +26703,20 @@
     "round_nextid": "n1_2",
     "round_type": "basic",
     "round_label": "n1",
+    "rankScore": 5,
     "roundprize_gold": 500,
     "roundprize_wood": 20,
     "round_readytime": 30,
     "round_time": 50,
     "enemyinfo": [
       {
-        "id": "1000",
-        "unitname": "building_enemy_tower_1",
+        "id": "1002",
+        "unitname": "building_enemy_1",
         "star": 1,
-        "level": 1,
+        "level": 0,
         "unit_weight": 10,
-        "position_x": 3.5,
-        "position_y": 9.5,
+        "position_x": 0,
+        "position_y": 8,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -26887,36 +26726,23 @@
         "hppect": 0,
         "phyarmpect": 0,
         "magicarmpect": 0,
-        "gold_min": 100,
-        "gold_max": 100,
+        "gold_min": 5,
+        "gold_max": 15,
         "wood_min": 0,
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
         "elite_drop_index": "1013",
         "spawn_buff": ""
-      }
-    ]
-  },
-  {
-    "id": "n1_2",
-    "round_index": 2,
-    "round_nextid": "n1_3",
-    "round_type": "basic",
-    "round_label": "n1",
-    "roundprize_gold": 500,
-    "roundprize_wood": 25,
-    "round_readytime": 30,
-    "round_time": 50,
-    "enemyinfo": [
+      },
       {
-        "id": "1001",
-        "unitname": "building_enemy_tower_2",
+        "id": "1003",
+        "unitname": "building_enemy_1",
         "star": 1,
-        "level": 1,
+        "level": 0,
         "unit_weight": 10,
-        "position_x": 3.5,
-        "position_y": 9.5,
+        "position_x": 1,
+        "position_y": 8,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -26926,18 +26752,18 @@
         "hppect": 0,
         "phyarmpect": 0,
         "magicarmpect": 0,
-        "gold_min": 100,
-        "gold_max": 100,
+        "gold_min": 5,
+        "gold_max": 15,
         "wood_min": 0,
         "wood_max": 0,
-        "soulcrystal_min": 10,
-        "soulcrystal_max": 10,
-        "elite_drop_index": "1013",
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
-        "id": "1002",
-        "unitname": "building_enemy_2",
+        "id": "1004",
+        "unitname": "building_enemy_1",
         "star": 1,
         "level": 0,
         "unit_weight": 10,
@@ -26956,14 +26782,14 @@
         "gold_max": 15,
         "wood_min": 0,
         "wood_max": 0,
-        "soulcrystal_min": 10,
-        "soulcrystal_max": 10,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
         "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
-        "id": "1003",
-        "unitname": "building_enemy_2",
+        "id": "1005",
+        "unitname": "building_enemy_1",
         "star": 1,
         "level": 0,
         "unit_weight": 10,
@@ -26982,14 +26808,14 @@
         "gold_max": 15,
         "wood_min": 0,
         "wood_max": 0,
-        "soulcrystal_min": 10,
-        "soulcrystal_max": 10,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
         "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
-        "id": "1004",
-        "unitname": "building_enemy_2",
+        "id": "1006",
+        "unitname": "building_enemy_1",
         "star": 1,
         "level": 0,
         "unit_weight": 10,
@@ -27008,14 +26834,14 @@
         "gold_max": 15,
         "wood_min": 0,
         "wood_max": 0,
-        "soulcrystal_min": 10,
-        "soulcrystal_max": 10,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
         "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
-        "id": "1005",
-        "unitname": "building_enemy_2",
+        "id": "1007",
+        "unitname": "building_enemy_1",
         "star": 1,
         "level": 0,
         "unit_weight": 10,
@@ -27034,23 +26860,479 @@
         "gold_max": 15,
         "wood_min": 0,
         "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": "",
+        "spawn_buff": ""
+      },
+      {
+        "id": "1008",
+        "unitname": "building_enemy_1",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 6,
+        "position_y": 8,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 0,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": "",
+        "spawn_buff": ""
+      },
+      {
+        "id": "1009",
+        "unitname": "building_enemy_1",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 7,
+        "position_y": 8,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 0,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": "",
+        "spawn_buff": ""
+      },
+      {
+        "id": "1010",
+        "unitname": "building_enemy_1",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 0,
+        "position_y": 7,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 0,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": "",
+        "spawn_buff": ""
+      },
+      {
+        "id": "1011",
+        "unitname": "building_enemy_1",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 1,
+        "position_y": 7,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 0,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": "",
+        "spawn_buff": ""
+      },
+      {
+        "id": "1012",
+        "unitname": "building_enemy_1",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 2,
+        "position_y": 7,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 0,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": "",
+        "spawn_buff": ""
+      },
+      {
+        "id": "1013",
+        "unitname": "building_enemy_1",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 3,
+        "position_y": 7,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 0,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": "",
+        "spawn_buff": ""
+      }
+    ]
+  },
+  {
+    "id": "n1_2",
+    "round_index": 2,
+    "round_nextid": "n1_3",
+    "round_type": "basic",
+    "round_label": "n1",
+    "rankScore": 5,
+    "roundprize_gold": 500,
+    "roundprize_wood": 25,
+    "round_readytime": 30,
+    "round_time": 50,
+    "enemyinfo": [
+      {
+        "id": "1026",
+        "unitname": "building_enemy_2",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 0,
+        "position_y": 8,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 3,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 100,
+        "gold_max": 100,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 10,
+        "soulcrystal_max": 10,
+        "elite_drop_index": "1013",
+        "spawn_buff": ""
+      },
+      {
+        "id": "1027",
+        "unitname": "building_enemy_2",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 1,
+        "position_y": 8,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 3,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
         "soulcrystal_min": 10,
         "soulcrystal_max": 10,
         "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
-        "id": "1006",
+        "id": "1028",
+        "unitname": "building_enemy_2",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 2,
+        "position_y": 8,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 3,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": "",
+        "spawn_buff": ""
+      },
+      {
+        "id": "1029",
+        "unitname": "building_enemy_2",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 3,
+        "position_y": 8,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 3,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": "",
+        "spawn_buff": ""
+      },
+      {
+        "id": "1030",
+        "unitname": "building_enemy_2",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 4,
+        "position_y": 8,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 3,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": "",
+        "spawn_buff": ""
+      },
+      {
+        "id": "1031",
+        "unitname": "building_enemy_2",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 5,
+        "position_y": 8,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 3,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": "",
+        "spawn_buff": ""
+      },
+      {
+        "id": "1032",
+        "unitname": "building_enemy_2",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 6,
+        "position_y": 8,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 3,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": "",
+        "spawn_buff": ""
+      },
+      {
+        "id": "1033",
+        "unitname": "building_enemy_2",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 7,
+        "position_y": 8,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 3,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": "",
+        "spawn_buff": ""
+      },
+      {
+        "id": "1034",
         "unitname": "building_enemy_2",
         "star": 1,
         "level": 0,
         "unit_weight": 10,
         "position_x": 0,
-        "position_y": 0,
+        "position_y": 7,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 2,
+        "enemycreatetype": 3,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": "",
+        "spawn_buff": ""
+      },
+      {
+        "id": "1035",
+        "unitname": "building_enemy_2",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 1,
+        "position_y": 7,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 3,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": "",
+        "spawn_buff": ""
+      },
+      {
+        "id": "1036",
+        "unitname": "building_enemy_2",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 2,
+        "position_y": 7,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 3,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": "",
+        "spawn_buff": ""
+      },
+      {
+        "id": "1037",
+        "unitname": "building_enemy_2",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 3,
+        "position_y": 7,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -27073,23 +27355,24 @@
     "round_nextid": "n1_4",
     "round_type": "basic",
     "round_label": "n1",
+    "rankScore": 5,
     "roundprize_gold": 500,
     "roundprize_wood": 30,
     "round_readytime": 30,
     "round_time": 50,
     "enemyinfo": [
       {
-        "id": "1007",
-        "unitname": "building_enemy_tower_3",
+        "id": "1050",
+        "unitname": "building_enemy_3",
         "star": 1,
-        "level": 2,
+        "level": 0,
         "unit_weight": 10,
-        "position_x": 3.5,
-        "position_y": 9.5,
+        "position_x": 1,
+        "position_y": 8,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -27105,33 +27388,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1009",
-        "unitname": "building_enemy_3",
-        "star": 1,
-        "level": 0,
-        "unit_weight": 10,
-        "position_x": 1,
-        "position_y": 8,
-        "angles_x": 0,
-        "angles_y": 0,
-        "angles_z": 0,
-        "enemycreatetype": 0,
-        "isground": 1,
-        "atkpect": 0,
-        "hppect": 0,
-        "phyarmpect": 0,
-        "magicarmpect": 0,
-        "gold_min": 5,
-        "gold_max": 15,
-        "wood_min": 0,
-        "wood_max": 0,
-        "soulcrystal_min": 0,
-        "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
-      },
-      {
-        "id": "1010",
+        "id": "1051",
         "unitname": "building_enemy_3",
         "star": 1,
         "level": 0,
@@ -27141,7 +27398,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -27157,7 +27414,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1011",
+        "id": "1052",
         "unitname": "building_enemy_3",
         "star": 1,
         "level": 0,
@@ -27167,7 +27424,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -27183,7 +27440,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1012",
+        "id": "1053",
         "unitname": "building_enemy_3",
         "star": 1,
         "level": 0,
@@ -27193,7 +27450,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -27209,7 +27466,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1013",
+        "id": "1054",
         "unitname": "building_enemy_3",
         "star": 1,
         "level": 0,
@@ -27219,7 +27476,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -27235,7 +27492,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1014",
+        "id": "1055",
         "unitname": "building_enemy_3",
         "star": 1,
         "level": 0,
@@ -27245,7 +27502,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -27261,17 +27518,147 @@
         "spawn_buff": ""
       },
       {
-        "id": "1008",
+        "id": "1056",
         "unitname": "building_enemy_3",
         "star": 1,
         "level": 0,
         "unit_weight": 10,
-        "position_x": 0,
-        "position_y": 0,
+        "position_x": 1,
+        "position_y": 7,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 2,
+        "enemycreatetype": 3,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": "",
+        "spawn_buff": ""
+      },
+      {
+        "id": "1057",
+        "unitname": "building_enemy_3",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 2,
+        "position_y": 7,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 3,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": "",
+        "spawn_buff": ""
+      },
+      {
+        "id": "1058",
+        "unitname": "building_enemy_3",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 3,
+        "position_y": 7,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 3,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": "",
+        "spawn_buff": ""
+      },
+      {
+        "id": "1059",
+        "unitname": "building_enemy_3",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 4,
+        "position_y": 7,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 3,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": "",
+        "spawn_buff": ""
+      },
+      {
+        "id": "1060",
+        "unitname": "building_enemy_3",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 5,
+        "position_y": 7,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 3,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": "",
+        "spawn_buff": ""
+      },
+      {
+        "id": "1061",
+        "unitname": "building_enemy_3",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 6,
+        "position_y": 7,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -27294,23 +27681,24 @@
     "round_nextid": "n1_5",
     "round_type": "basic",
     "round_label": "n1",
+    "rankScore": 5,
     "roundprize_gold": 500,
     "roundprize_wood": 35,
     "round_readytime": 30,
     "round_time": 50,
     "enemyinfo": [
       {
-        "id": "1019",
-        "unitname": "building_enemy_tower_4",
+        "id": "1062",
+        "unitname": "building_enemy_4",
         "star": 1,
-        "level": 2,
+        "level": 0,
         "unit_weight": 10,
-        "position_x": 3.5,
-        "position_y": 9.5,
+        "position_x": 1,
+        "position_y": 8,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -27326,33 +27714,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1021",
-        "unitname": "building_enemy_4",
-        "star": 1,
-        "level": 0,
-        "unit_weight": 10,
-        "position_x": 1,
-        "position_y": 8,
-        "angles_x": 0,
-        "angles_y": 0,
-        "angles_z": 0,
-        "enemycreatetype": 0,
-        "isground": 1,
-        "atkpect": 0,
-        "hppect": 0,
-        "phyarmpect": 0,
-        "magicarmpect": 0,
-        "gold_min": 5,
-        "gold_max": 15,
-        "wood_min": 0,
-        "wood_max": 0,
-        "soulcrystal_min": 0,
-        "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
-      },
-      {
-        "id": "1022",
+        "id": "1063",
         "unitname": "building_enemy_4",
         "star": 1,
         "level": 0,
@@ -27362,7 +27724,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -27378,7 +27740,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1023",
+        "id": "1064",
         "unitname": "building_enemy_4",
         "star": 1,
         "level": 0,
@@ -27388,7 +27750,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -27404,7 +27766,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1024",
+        "id": "1065",
         "unitname": "building_enemy_4",
         "star": 1,
         "level": 0,
@@ -27414,7 +27776,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -27430,7 +27792,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1025",
+        "id": "1066",
         "unitname": "building_enemy_4",
         "star": 1,
         "level": 0,
@@ -27440,7 +27802,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -27456,7 +27818,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1026",
+        "id": "1067",
         "unitname": "building_enemy_4",
         "star": 1,
         "level": 0,
@@ -27466,7 +27828,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -27482,17 +27844,17 @@
         "spawn_buff": ""
       },
       {
-        "id": "1027",
+        "id": "1068",
         "unitname": "building_enemy_4",
         "star": 1,
         "level": 0,
         "unit_weight": 10,
         "position_x": 1,
-        "position_y": 9,
+        "position_y": 7,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -27508,17 +27870,17 @@
         "spawn_buff": ""
       },
       {
-        "id": "1028",
+        "id": "1069",
         "unitname": "building_enemy_4",
         "star": 1,
         "level": 0,
         "unit_weight": 10,
         "position_x": 2,
-        "position_y": 9,
+        "position_y": 7,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -27534,17 +27896,69 @@
         "spawn_buff": ""
       },
       {
-        "id": "1029",
+        "id": "1070",
+        "unitname": "building_enemy_4",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 3,
+        "position_y": 7,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 3,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": "",
+        "spawn_buff": ""
+      },
+      {
+        "id": "1071",
+        "unitname": "building_enemy_4",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 4,
+        "position_y": 7,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 3,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": "",
+        "spawn_buff": ""
+      },
+      {
+        "id": "1072",
         "unitname": "building_enemy_4",
         "star": 1,
         "level": 0,
         "unit_weight": 10,
         "position_x": 5,
-        "position_y": 9,
+        "position_y": 7,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -27560,43 +27974,17 @@
         "spawn_buff": ""
       },
       {
-        "id": "1030",
+        "id": "1073",
         "unitname": "building_enemy_4",
         "star": 1,
         "level": 0,
         "unit_weight": 10,
         "position_x": 6,
-        "position_y": 9,
+        "position_y": 7,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
-        "isground": 1,
-        "atkpect": 0,
-        "hppect": 0,
-        "phyarmpect": 0,
-        "magicarmpect": 0,
-        "gold_min": 5,
-        "gold_max": 15,
-        "wood_min": 0,
-        "wood_max": 0,
-        "soulcrystal_min": 0,
-        "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
-      },
-      {
-        "id": "1020",
-        "unitname": "building_enemy_4",
-        "star": 1,
-        "level": 0,
-        "unit_weight": 10,
-        "position_x": 0,
-        "position_y": 0,
-        "angles_x": 0,
-        "angles_y": 0,
-        "angles_z": 0,
-        "enemycreatetype": 2,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -27619,23 +28007,24 @@
     "round_nextid": "n1_6",
     "round_type": "basic",
     "round_label": "n1",
+    "rankScore": 5,
     "roundprize_gold": 500,
     "roundprize_wood": 40,
     "round_readytime": 30,
     "round_time": 50,
     "enemyinfo": [
       {
-        "id": "1031",
-        "unitname": "building_enemy_tower_5",
+        "id": "1074",
+        "unitname": "building_enemy_5",
         "star": 1,
         "level": 2,
         "unit_weight": 10,
-        "position_x": 3.5,
-        "position_y": 9.5,
+        "position_x": 1,
+        "position_y": 8,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -27651,33 +28040,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1033",
-        "unitname": "building_enemy_5",
-        "star": 1,
-        "level": 0,
-        "unit_weight": 10,
-        "position_x": 1,
-        "position_y": 8,
-        "angles_x": 0,
-        "angles_y": 0,
-        "angles_z": 0,
-        "enemycreatetype": 0,
-        "isground": 1,
-        "atkpect": 0,
-        "hppect": 0,
-        "phyarmpect": 0,
-        "magicarmpect": 0,
-        "gold_min": 5,
-        "gold_max": 15,
-        "wood_min": 0,
-        "wood_max": 0,
-        "soulcrystal_min": 0,
-        "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
-      },
-      {
-        "id": "1034",
+        "id": "1075",
         "unitname": "building_enemy_5",
         "star": 1,
         "level": 0,
@@ -27687,7 +28050,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -27703,7 +28066,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1035",
+        "id": "1076",
         "unitname": "building_enemy_5",
         "star": 1,
         "level": 0,
@@ -27713,7 +28076,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -27729,7 +28092,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1036",
+        "id": "1077",
         "unitname": "building_enemy_5",
         "star": 1,
         "level": 0,
@@ -27739,7 +28102,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -27755,7 +28118,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1037",
+        "id": "1078",
         "unitname": "building_enemy_5",
         "star": 1,
         "level": 0,
@@ -27765,7 +28128,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -27781,7 +28144,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1038",
+        "id": "1079",
         "unitname": "building_enemy_5",
         "star": 1,
         "level": 0,
@@ -27791,7 +28154,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -27807,17 +28170,17 @@
         "spawn_buff": ""
       },
       {
-        "id": "1039",
+        "id": "1080",
         "unitname": "building_enemy_5",
         "star": 1,
         "level": 0,
         "unit_weight": 10,
         "position_x": 1,
-        "position_y": 9,
+        "position_y": 7,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -27833,17 +28196,17 @@
         "spawn_buff": ""
       },
       {
-        "id": "1040",
+        "id": "1081",
         "unitname": "building_enemy_5",
         "star": 1,
         "level": 0,
         "unit_weight": 10,
         "position_x": 2,
-        "position_y": 9,
+        "position_y": 7,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -27859,17 +28222,69 @@
         "spawn_buff": ""
       },
       {
-        "id": "1041",
+        "id": "1082",
+        "unitname": "building_enemy_5",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 3,
+        "position_y": 7,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 3,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": "",
+        "spawn_buff": ""
+      },
+      {
+        "id": "1083",
+        "unitname": "building_enemy_5",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 4,
+        "position_y": 7,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 3,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": "",
+        "spawn_buff": ""
+      },
+      {
+        "id": "1084",
         "unitname": "building_enemy_5",
         "star": 1,
         "level": 0,
         "unit_weight": 10,
         "position_x": 5,
-        "position_y": 9,
+        "position_y": 7,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -27885,43 +28300,17 @@
         "spawn_buff": ""
       },
       {
-        "id": "1042",
+        "id": "1085",
         "unitname": "building_enemy_5",
         "star": 1,
         "level": 0,
         "unit_weight": 10,
         "position_x": 6,
-        "position_y": 9,
+        "position_y": 7,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
-        "isground": 1,
-        "atkpect": 0,
-        "hppect": 0,
-        "phyarmpect": 0,
-        "magicarmpect": 0,
-        "gold_min": 5,
-        "gold_max": 15,
-        "wood_min": 0,
-        "wood_max": 0,
-        "soulcrystal_min": 0,
-        "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
-      },
-      {
-        "id": "1032",
-        "unitname": "building_enemy_5",
-        "star": 1,
-        "level": 0,
-        "unit_weight": 10,
-        "position_x": 0,
-        "position_y": 0,
-        "angles_x": 0,
-        "angles_y": 0,
-        "angles_z": 0,
-        "enemycreatetype": 2,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -27944,23 +28333,24 @@
     "round_nextid": "n1_7",
     "round_type": "basic",
     "round_label": "n1",
+    "rankScore": 5,
     "roundprize_gold": 500,
     "roundprize_wood": 45,
     "round_readytime": 30,
     "round_time": 50,
     "enemyinfo": [
       {
-        "id": "1043",
-        "unitname": "building_enemy_tower_6",
+        "id": "1086",
+        "unitname": "building_enemy_6",
         "star": 1,
         "level": 3,
         "unit_weight": 10,
-        "position_x": 3.5,
-        "position_y": 9.5,
+        "position_x": 1,
+        "position_y": 8,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -27976,33 +28366,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1044",
-        "unitname": "building_enemy_6",
-        "star": 1,
-        "level": 0,
-        "unit_weight": 10,
-        "position_x": 1,
-        "position_y": 8,
-        "angles_x": 0,
-        "angles_y": 0,
-        "angles_z": 0,
-        "enemycreatetype": 0,
-        "isground": 1,
-        "atkpect": 0,
-        "hppect": 0,
-        "phyarmpect": 0,
-        "magicarmpect": 0,
-        "gold_min": 5,
-        "gold_max": 15,
-        "wood_min": 0,
-        "wood_max": 0,
-        "soulcrystal_min": 0,
-        "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
-      },
-      {
-        "id": "1045",
+        "id": "1087",
         "unitname": "building_enemy_6",
         "star": 1,
         "level": 0,
@@ -28012,7 +28376,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -28028,7 +28392,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1046",
+        "id": "1088",
         "unitname": "building_enemy_6",
         "star": 1,
         "level": 0,
@@ -28038,7 +28402,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -28054,7 +28418,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1047",
+        "id": "1089",
         "unitname": "building_enemy_6",
         "star": 1,
         "level": 0,
@@ -28064,7 +28428,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -28080,7 +28444,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1048",
+        "id": "1090",
         "unitname": "building_enemy_6",
         "star": 1,
         "level": 0,
@@ -28090,7 +28454,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -28106,7 +28470,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1049",
+        "id": "1091",
         "unitname": "building_enemy_6",
         "star": 1,
         "level": 0,
@@ -28116,7 +28480,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -28132,17 +28496,17 @@
         "spawn_buff": ""
       },
       {
-        "id": "1050",
+        "id": "1092",
         "unitname": "building_enemy_6",
         "star": 1,
         "level": 0,
         "unit_weight": 10,
         "position_x": 1,
-        "position_y": 9,
+        "position_y": 7,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -28158,17 +28522,17 @@
         "spawn_buff": ""
       },
       {
-        "id": "1051",
+        "id": "1093",
         "unitname": "building_enemy_6",
         "star": 1,
         "level": 0,
         "unit_weight": 10,
         "position_x": 2,
-        "position_y": 9,
+        "position_y": 7,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -28184,17 +28548,69 @@
         "spawn_buff": ""
       },
       {
-        "id": "1052",
+        "id": "1094",
+        "unitname": "building_enemy_6",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 3,
+        "position_y": 7,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 3,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": "",
+        "spawn_buff": ""
+      },
+      {
+        "id": "1095",
+        "unitname": "building_enemy_6",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 4,
+        "position_y": 7,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 3,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": "",
+        "spawn_buff": ""
+      },
+      {
+        "id": "1096",
         "unitname": "building_enemy_6",
         "star": 1,
         "level": 0,
         "unit_weight": 10,
         "position_x": 5,
-        "position_y": 9,
+        "position_y": 7,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -28210,43 +28626,17 @@
         "spawn_buff": ""
       },
       {
-        "id": "1053",
+        "id": "1097",
         "unitname": "building_enemy_6",
         "star": 1,
         "level": 0,
         "unit_weight": 10,
         "position_x": 6,
-        "position_y": 9,
+        "position_y": 7,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
-        "isground": 1,
-        "atkpect": 0,
-        "hppect": 0,
-        "phyarmpect": 0,
-        "magicarmpect": 0,
-        "gold_min": 5,
-        "gold_max": 15,
-        "wood_min": 0,
-        "wood_max": 0,
-        "soulcrystal_min": 0,
-        "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
-      },
-      {
-        "id": "1054",
-        "unitname": "building_enemy_6",
-        "star": 1,
-        "level": 0,
-        "unit_weight": 10,
-        "position_x": 0,
-        "position_y": 0,
-        "angles_x": 0,
-        "angles_y": 0,
-        "angles_z": 0,
-        "enemycreatetype": 2,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -28269,23 +28659,24 @@
     "round_nextid": "n1_8",
     "round_type": "basic",
     "round_label": "n1",
+    "rankScore": 5,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
     "round_readytime": 30,
     "round_time": 50,
     "enemyinfo": [
       {
-        "id": "1055",
-        "unitname": "building_enemy_tower_7",
+        "id": "1098",
+        "unitname": "building_enemy_7",
         "star": 1,
         "level": 3,
         "unit_weight": 10,
-        "position_x": 3.5,
-        "position_y": 9.5,
+        "position_x": 1,
+        "position_y": 8,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -28301,33 +28692,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1056",
-        "unitname": "building_enemy_7",
-        "star": 1,
-        "level": 0,
-        "unit_weight": 10,
-        "position_x": 1,
-        "position_y": 8,
-        "angles_x": 0,
-        "angles_y": 0,
-        "angles_z": 0,
-        "enemycreatetype": 0,
-        "isground": 1,
-        "atkpect": 0,
-        "hppect": 0,
-        "phyarmpect": 0,
-        "magicarmpect": 0,
-        "gold_min": 5,
-        "gold_max": 15,
-        "wood_min": 0,
-        "wood_max": 0,
-        "soulcrystal_min": 0,
-        "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
-      },
-      {
-        "id": "1057",
+        "id": "1099",
         "unitname": "building_enemy_7",
         "star": 1,
         "level": 0,
@@ -28337,7 +28702,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -28353,7 +28718,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1058",
+        "id": "1100",
         "unitname": "building_enemy_7",
         "star": 1,
         "level": 0,
@@ -28363,7 +28728,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -28379,7 +28744,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1059",
+        "id": "1101",
         "unitname": "building_enemy_7",
         "star": 1,
         "level": 0,
@@ -28389,7 +28754,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -28405,7 +28770,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1060",
+        "id": "1102",
         "unitname": "building_enemy_7",
         "star": 1,
         "level": 0,
@@ -28415,7 +28780,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -28431,7 +28796,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1061",
+        "id": "1103",
         "unitname": "building_enemy_7",
         "star": 1,
         "level": 0,
@@ -28441,7 +28806,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -28457,17 +28822,17 @@
         "spawn_buff": ""
       },
       {
-        "id": "1062",
+        "id": "1104",
         "unitname": "building_enemy_7",
         "star": 1,
         "level": 0,
         "unit_weight": 10,
         "position_x": 1,
-        "position_y": 9,
+        "position_y": 7,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -28483,17 +28848,17 @@
         "spawn_buff": ""
       },
       {
-        "id": "1063",
+        "id": "1105",
         "unitname": "building_enemy_7",
         "star": 1,
         "level": 0,
         "unit_weight": 10,
         "position_x": 2,
-        "position_y": 9,
+        "position_y": 7,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -28509,17 +28874,69 @@
         "spawn_buff": ""
       },
       {
-        "id": "1064",
+        "id": "1106",
+        "unitname": "building_enemy_7",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 3,
+        "position_y": 7,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 3,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": "",
+        "spawn_buff": ""
+      },
+      {
+        "id": "1107",
+        "unitname": "building_enemy_7",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 4,
+        "position_y": 7,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 3,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": "",
+        "spawn_buff": ""
+      },
+      {
+        "id": "1108",
         "unitname": "building_enemy_7",
         "star": 1,
         "level": 0,
         "unit_weight": 10,
         "position_x": 5,
-        "position_y": 9,
+        "position_y": 7,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -28535,43 +28952,17 @@
         "spawn_buff": ""
       },
       {
-        "id": "1065",
+        "id": "1109",
         "unitname": "building_enemy_7",
         "star": 1,
         "level": 0,
         "unit_weight": 10,
         "position_x": 6,
-        "position_y": 9,
+        "position_y": 7,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
-        "isground": 1,
-        "atkpect": 0,
-        "hppect": 0,
-        "phyarmpect": 0,
-        "magicarmpect": 0,
-        "gold_min": 5,
-        "gold_max": 15,
-        "wood_min": 0,
-        "wood_max": 0,
-        "soulcrystal_min": 0,
-        "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
-      },
-      {
-        "id": "1066",
-        "unitname": "building_enemy_7",
-        "star": 1,
-        "level": 0,
-        "unit_weight": 10,
-        "position_x": 0,
-        "position_y": 0,
-        "angles_x": 0,
-        "angles_y": 0,
-        "angles_z": 0,
-        "enemycreatetype": 2,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -28594,23 +28985,24 @@
     "round_nextid": "n1_9",
     "round_type": "basic",
     "round_label": "n1",
+    "rankScore": 5,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
     "round_readytime": 30,
     "round_time": 50,
     "enemyinfo": [
       {
-        "id": "1067",
-        "unitname": "building_enemy_tower_8",
+        "id": "1110",
+        "unitname": "building_enemy_8",
         "star": 1,
         "level": 3,
         "unit_weight": 10,
-        "position_x": 3.5,
-        "position_y": 9.5,
+        "position_x": 1,
+        "position_y": 8,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -28626,33 +29018,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1068",
-        "unitname": "building_enemy_8",
-        "star": 1,
-        "level": 0,
-        "unit_weight": 10,
-        "position_x": 1,
-        "position_y": 8,
-        "angles_x": 0,
-        "angles_y": 0,
-        "angles_z": 0,
-        "enemycreatetype": 0,
-        "isground": 1,
-        "atkpect": 0,
-        "hppect": 0,
-        "phyarmpect": 0,
-        "magicarmpect": 0,
-        "gold_min": 5,
-        "gold_max": 15,
-        "wood_min": 0,
-        "wood_max": 0,
-        "soulcrystal_min": 0,
-        "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
-      },
-      {
-        "id": "1069",
+        "id": "1111",
         "unitname": "building_enemy_8",
         "star": 1,
         "level": 0,
@@ -28662,7 +29028,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -28678,7 +29044,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1070",
+        "id": "1112",
         "unitname": "building_enemy_8",
         "star": 1,
         "level": 0,
@@ -28688,7 +29054,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -28704,7 +29070,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1071",
+        "id": "1113",
         "unitname": "building_enemy_8",
         "star": 1,
         "level": 0,
@@ -28714,7 +29080,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -28730,7 +29096,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1072",
+        "id": "1114",
         "unitname": "building_enemy_8",
         "star": 1,
         "level": 0,
@@ -28740,7 +29106,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -28756,7 +29122,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1073",
+        "id": "1115",
         "unitname": "building_enemy_8",
         "star": 1,
         "level": 0,
@@ -28766,7 +29132,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -28782,17 +29148,17 @@
         "spawn_buff": ""
       },
       {
-        "id": "1074",
+        "id": "1116",
         "unitname": "building_enemy_8",
         "star": 1,
         "level": 0,
         "unit_weight": 10,
         "position_x": 1,
-        "position_y": 9,
+        "position_y": 7,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -28808,17 +29174,17 @@
         "spawn_buff": ""
       },
       {
-        "id": "1075",
+        "id": "1117",
         "unitname": "building_enemy_8",
         "star": 1,
         "level": 0,
         "unit_weight": 10,
         "position_x": 2,
-        "position_y": 9,
+        "position_y": 7,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -28834,17 +29200,69 @@
         "spawn_buff": ""
       },
       {
-        "id": "1076",
+        "id": "1118",
+        "unitname": "building_enemy_8",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 3,
+        "position_y": 7,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 3,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": "",
+        "spawn_buff": ""
+      },
+      {
+        "id": "1119",
+        "unitname": "building_enemy_8",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 4,
+        "position_y": 7,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 3,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": "",
+        "spawn_buff": ""
+      },
+      {
+        "id": "1120",
         "unitname": "building_enemy_8",
         "star": 1,
         "level": 0,
         "unit_weight": 10,
         "position_x": 5,
-        "position_y": 9,
+        "position_y": 7,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -28860,43 +29278,17 @@
         "spawn_buff": ""
       },
       {
-        "id": "1077",
+        "id": "1121",
         "unitname": "building_enemy_8",
         "star": 1,
         "level": 0,
         "unit_weight": 10,
         "position_x": 6,
-        "position_y": 9,
+        "position_y": 7,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
-        "isground": 1,
-        "atkpect": 0,
-        "hppect": 0,
-        "phyarmpect": 0,
-        "magicarmpect": 0,
-        "gold_min": 5,
-        "gold_max": 15,
-        "wood_min": 0,
-        "wood_max": 0,
-        "soulcrystal_min": 0,
-        "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
-      },
-      {
-        "id": "1078",
-        "unitname": "building_enemy_8",
-        "star": 1,
-        "level": 0,
-        "unit_weight": 10,
-        "position_x": 0,
-        "position_y": 0,
-        "angles_x": 0,
-        "angles_y": 0,
-        "angles_z": 0,
-        "enemycreatetype": 2,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -28919,23 +29311,24 @@
     "round_nextid": "n1_10",
     "round_type": "basic",
     "round_label": "n1",
+    "rankScore": 5,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
     "round_readytime": 30,
     "round_time": 50,
     "enemyinfo": [
       {
-        "id": "1079",
-        "unitname": "building_enemy_tower_9",
+        "id": "1122",
+        "unitname": "building_enemy_9",
         "star": 1,
         "level": 4,
         "unit_weight": 10,
-        "position_x": 3.5,
-        "position_y": 9.5,
+        "position_x": 1,
+        "position_y": 8,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -28951,33 +29344,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1080",
-        "unitname": "building_enemy_9",
-        "star": 1,
-        "level": 0,
-        "unit_weight": 10,
-        "position_x": 1,
-        "position_y": 8,
-        "angles_x": 0,
-        "angles_y": 0,
-        "angles_z": 0,
-        "enemycreatetype": 0,
-        "isground": 1,
-        "atkpect": 0,
-        "hppect": 0,
-        "phyarmpect": 0,
-        "magicarmpect": 0,
-        "gold_min": 5,
-        "gold_max": 15,
-        "wood_min": 0,
-        "wood_max": 0,
-        "soulcrystal_min": 0,
-        "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
-      },
-      {
-        "id": "1081",
+        "id": "1123",
         "unitname": "building_enemy_9",
         "star": 1,
         "level": 0,
@@ -28987,7 +29354,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -29003,7 +29370,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1082",
+        "id": "1124",
         "unitname": "building_enemy_9",
         "star": 1,
         "level": 0,
@@ -29013,7 +29380,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -29029,7 +29396,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1083",
+        "id": "1125",
         "unitname": "building_enemy_9",
         "star": 1,
         "level": 0,
@@ -29039,7 +29406,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -29055,7 +29422,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1084",
+        "id": "1126",
         "unitname": "building_enemy_9",
         "star": 1,
         "level": 0,
@@ -29065,7 +29432,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -29081,7 +29448,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1085",
+        "id": "1127",
         "unitname": "building_enemy_9",
         "star": 1,
         "level": 0,
@@ -29091,7 +29458,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -29107,17 +29474,17 @@
         "spawn_buff": ""
       },
       {
-        "id": "1086",
+        "id": "1128",
         "unitname": "building_enemy_9",
         "star": 1,
         "level": 0,
         "unit_weight": 10,
         "position_x": 1,
-        "position_y": 9,
+        "position_y": 7,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -29133,17 +29500,17 @@
         "spawn_buff": ""
       },
       {
-        "id": "1087",
+        "id": "1129",
         "unitname": "building_enemy_9",
         "star": 1,
         "level": 0,
         "unit_weight": 10,
         "position_x": 2,
-        "position_y": 9,
+        "position_y": 7,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -29159,17 +29526,69 @@
         "spawn_buff": ""
       },
       {
-        "id": "1088",
+        "id": "1130",
+        "unitname": "building_enemy_9",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 3,
+        "position_y": 7,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 3,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": "",
+        "spawn_buff": ""
+      },
+      {
+        "id": "1131",
+        "unitname": "building_enemy_9",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 4,
+        "position_y": 7,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 3,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": "",
+        "spawn_buff": ""
+      },
+      {
+        "id": "1132",
         "unitname": "building_enemy_9",
         "star": 1,
         "level": 0,
         "unit_weight": 10,
         "position_x": 5,
-        "position_y": 9,
+        "position_y": 7,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -29185,43 +29604,17 @@
         "spawn_buff": ""
       },
       {
-        "id": "1089",
+        "id": "1133",
         "unitname": "building_enemy_9",
         "star": 1,
         "level": 0,
         "unit_weight": 10,
         "position_x": 6,
-        "position_y": 9,
+        "position_y": 7,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
-        "isground": 1,
-        "atkpect": 0,
-        "hppect": 0,
-        "phyarmpect": 0,
-        "magicarmpect": 0,
-        "gold_min": 5,
-        "gold_max": 15,
-        "wood_min": 0,
-        "wood_max": 0,
-        "soulcrystal_min": 0,
-        "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
-      },
-      {
-        "id": "1090",
-        "unitname": "building_enemy_9",
-        "star": 1,
-        "level": 0,
-        "unit_weight": 10,
-        "position_x": 0,
-        "position_y": 0,
-        "angles_x": 0,
-        "angles_y": 0,
-        "angles_z": 0,
-        "enemycreatetype": 2,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -29244,23 +29637,24 @@
     "round_nextid": "n1_11",
     "round_type": "basic",
     "round_label": "n1",
+    "rankScore": 5,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
     "round_readytime": 30,
     "round_time": 50,
     "enemyinfo": [
       {
-        "id": "1091",
-        "unitname": "building_enemy_tower_10",
+        "id": "1134",
+        "unitname": "building_enemy_10",
         "star": 1,
         "level": 4,
         "unit_weight": 10,
-        "position_x": 3.5,
-        "position_y": 9.5,
+        "position_x": 1,
+        "position_y": 8,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -29276,33 +29670,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1092",
-        "unitname": "building_enemy_10",
-        "star": 1,
-        "level": 0,
-        "unit_weight": 10,
-        "position_x": 1,
-        "position_y": 8,
-        "angles_x": 0,
-        "angles_y": 0,
-        "angles_z": 0,
-        "enemycreatetype": 0,
-        "isground": 1,
-        "atkpect": 0,
-        "hppect": 0,
-        "phyarmpect": 0,
-        "magicarmpect": 0,
-        "gold_min": 5,
-        "gold_max": 15,
-        "wood_min": 0,
-        "wood_max": 0,
-        "soulcrystal_min": 0,
-        "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
-      },
-      {
-        "id": "1093",
+        "id": "1135",
         "unitname": "building_enemy_10",
         "star": 1,
         "level": 0,
@@ -29312,7 +29680,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -29328,7 +29696,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1094",
+        "id": "1136",
         "unitname": "building_enemy_10",
         "star": 1,
         "level": 0,
@@ -29338,7 +29706,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -29354,7 +29722,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1095",
+        "id": "1137",
         "unitname": "building_enemy_10",
         "star": 1,
         "level": 0,
@@ -29364,7 +29732,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -29380,7 +29748,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1096",
+        "id": "1138",
         "unitname": "building_enemy_10",
         "star": 1,
         "level": 0,
@@ -29390,7 +29758,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -29406,7 +29774,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1097",
+        "id": "1139",
         "unitname": "building_enemy_10",
         "star": 1,
         "level": 0,
@@ -29416,7 +29784,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -29432,17 +29800,17 @@
         "spawn_buff": ""
       },
       {
-        "id": "1098",
+        "id": "1140",
         "unitname": "building_enemy_10",
         "star": 1,
         "level": 0,
         "unit_weight": 10,
         "position_x": 1,
-        "position_y": 9,
+        "position_y": 7,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -29458,17 +29826,17 @@
         "spawn_buff": ""
       },
       {
-        "id": "1099",
+        "id": "1141",
         "unitname": "building_enemy_10",
         "star": 1,
         "level": 0,
         "unit_weight": 10,
         "position_x": 2,
-        "position_y": 9,
+        "position_y": 7,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -29484,17 +29852,69 @@
         "spawn_buff": ""
       },
       {
-        "id": "1100",
+        "id": "1142",
+        "unitname": "building_enemy_10",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 3,
+        "position_y": 7,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 3,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": "",
+        "spawn_buff": ""
+      },
+      {
+        "id": "1143",
+        "unitname": "building_enemy_10",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 4,
+        "position_y": 7,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 3,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": "",
+        "spawn_buff": ""
+      },
+      {
+        "id": "1144",
         "unitname": "building_enemy_10",
         "star": 1,
         "level": 0,
         "unit_weight": 10,
         "position_x": 5,
-        "position_y": 9,
+        "position_y": 7,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -29510,43 +29930,17 @@
         "spawn_buff": ""
       },
       {
-        "id": "1101",
+        "id": "1145",
         "unitname": "building_enemy_10",
         "star": 1,
         "level": 0,
         "unit_weight": 10,
         "position_x": 6,
-        "position_y": 9,
+        "position_y": 7,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
-        "isground": 1,
-        "atkpect": 0,
-        "hppect": 0,
-        "phyarmpect": 0,
-        "magicarmpect": 0,
-        "gold_min": 5,
-        "gold_max": 15,
-        "wood_min": 0,
-        "wood_max": 0,
-        "soulcrystal_min": 0,
-        "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
-      },
-      {
-        "id": "1102",
-        "unitname": "building_enemy_10",
-        "star": 1,
-        "level": 0,
-        "unit_weight": 10,
-        "position_x": 0,
-        "position_y": 0,
-        "angles_x": 0,
-        "angles_y": 0,
-        "angles_z": 0,
-        "enemycreatetype": 2,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -29569,13 +29963,14 @@
     "round_nextid": "n1_12",
     "round_type": "basic",
     "round_label": "n1",
+    "rankScore": 10,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
     "round_readytime": 30,
     "round_time": 50,
     "enemyinfo": [
       {
-        "id": "1103",
+        "id": "1146",
         "unitname": "building_enemy_tower_11",
         "star": 1,
         "level": 4,
@@ -29585,7 +29980,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -29601,7 +29996,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1104",
+        "id": "1147",
         "unitname": "building_enemy_11",
         "star": 1,
         "level": 0,
@@ -29611,7 +30006,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -29627,7 +30022,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1105",
+        "id": "1148",
         "unitname": "building_enemy_11",
         "star": 1,
         "level": 0,
@@ -29637,7 +30032,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -29653,7 +30048,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1106",
+        "id": "1149",
         "unitname": "building_enemy_11",
         "star": 1,
         "level": 0,
@@ -29663,7 +30058,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -29679,7 +30074,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1107",
+        "id": "1150",
         "unitname": "building_enemy_11",
         "star": 1,
         "level": 0,
@@ -29689,7 +30084,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -29705,7 +30100,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1108",
+        "id": "1151",
         "unitname": "building_enemy_11",
         "star": 1,
         "level": 0,
@@ -29715,7 +30110,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -29731,7 +30126,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1109",
+        "id": "1152",
         "unitname": "building_enemy_11",
         "star": 1,
         "level": 0,
@@ -29741,7 +30136,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -29757,7 +30152,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1110",
+        "id": "1153",
         "unitname": "building_enemy_11",
         "star": 1,
         "level": 0,
@@ -29767,7 +30162,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -29783,7 +30178,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1111",
+        "id": "1154",
         "unitname": "building_enemy_11",
         "star": 1,
         "level": 0,
@@ -29793,7 +30188,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -29809,7 +30204,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1112",
+        "id": "1155",
         "unitname": "building_enemy_11",
         "star": 1,
         "level": 0,
@@ -29819,7 +30214,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -29835,7 +30230,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1113",
+        "id": "1156",
         "unitname": "building_enemy_11",
         "star": 1,
         "level": 0,
@@ -29845,7 +30240,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -29861,7 +30256,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1114",
+        "id": "1157",
         "unitname": "building_enemy_11",
         "star": 1,
         "level": 0,
@@ -29871,7 +30266,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 2,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -29894,13 +30289,14 @@
     "round_nextid": "n1_13",
     "round_type": "basic",
     "round_label": "n1",
+    "rankScore": 10,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
     "round_readytime": 30,
     "round_time": 50,
     "enemyinfo": [
       {
-        "id": "1115",
+        "id": "1158",
         "unitname": "building_enemy_tower_12",
         "star": 1,
         "level": 4,
@@ -29910,7 +30306,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -29926,7 +30322,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1116",
+        "id": "1159",
         "unitname": "building_enemy_12",
         "star": 1,
         "level": 0,
@@ -29936,7 +30332,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -29952,7 +30348,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1117",
+        "id": "1160",
         "unitname": "building_enemy_12",
         "star": 1,
         "level": 0,
@@ -29962,7 +30358,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -29978,7 +30374,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1118",
+        "id": "1161",
         "unitname": "building_enemy_12",
         "star": 1,
         "level": 0,
@@ -29988,7 +30384,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -30004,7 +30400,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1119",
+        "id": "1162",
         "unitname": "building_enemy_12",
         "star": 1,
         "level": 0,
@@ -30014,7 +30410,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -30030,7 +30426,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1120",
+        "id": "1163",
         "unitname": "building_enemy_12",
         "star": 1,
         "level": 0,
@@ -30040,7 +30436,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -30056,7 +30452,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1121",
+        "id": "1164",
         "unitname": "building_enemy_12",
         "star": 1,
         "level": 0,
@@ -30066,7 +30462,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -30082,7 +30478,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1122",
+        "id": "1165",
         "unitname": "building_enemy_12",
         "star": 1,
         "level": 0,
@@ -30092,7 +30488,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -30108,7 +30504,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1123",
+        "id": "1166",
         "unitname": "building_enemy_12",
         "star": 1,
         "level": 0,
@@ -30118,7 +30514,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -30134,7 +30530,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1124",
+        "id": "1167",
         "unitname": "building_enemy_12",
         "star": 1,
         "level": 0,
@@ -30144,7 +30540,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -30160,7 +30556,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1125",
+        "id": "1168",
         "unitname": "building_enemy_12",
         "star": 1,
         "level": 0,
@@ -30170,7 +30566,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -30186,7 +30582,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1126",
+        "id": "1169",
         "unitname": "building_enemy_12",
         "star": 1,
         "level": 0,
@@ -30196,7 +30592,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 2,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -30219,13 +30615,14 @@
     "round_nextid": "n1_14",
     "round_type": "basic",
     "round_label": "n1",
+    "rankScore": 10,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
     "round_readytime": 30,
     "round_time": 50,
     "enemyinfo": [
       {
-        "id": "1127",
+        "id": "1170",
         "unitname": "building_enemy_tower_12",
         "star": 1,
         "level": 0,
@@ -30235,7 +30632,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -30251,7 +30648,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1128",
+        "id": "1171",
         "unitname": "building_enemy_12",
         "star": 1,
         "level": 0,
@@ -30261,7 +30658,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -30284,13 +30681,14 @@
     "round_nextid": "n1_15",
     "round_type": "basic",
     "round_label": "n1",
+    "rankScore": 10,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
     "round_readytime": 30,
     "round_time": 50,
     "enemyinfo": [
       {
-        "id": "1129",
+        "id": "1172",
         "unitname": "building_enemy_tower_12",
         "star": 1,
         "level": 0,
@@ -30300,7 +30698,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -30316,7 +30714,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1130",
+        "id": "1173",
         "unitname": "building_enemy_12",
         "star": 1,
         "level": 0,
@@ -30326,7 +30724,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -30349,13 +30747,14 @@
     "round_nextid": "n1_16",
     "round_type": "basic",
     "round_label": "n1",
+    "rankScore": 10,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
     "round_readytime": 30,
     "round_time": 50,
     "enemyinfo": [
       {
-        "id": "1131",
+        "id": "1174",
         "unitname": "building_enemy_tower_12",
         "star": 1,
         "level": 0,
@@ -30365,7 +30764,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -30381,7 +30780,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1132",
+        "id": "1175",
         "unitname": "building_enemy_12",
         "star": 1,
         "level": 0,
@@ -30391,7 +30790,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -30414,13 +30813,14 @@
     "round_nextid": "n1_17",
     "round_type": "basic",
     "round_label": "n1",
+    "rankScore": 10,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
     "round_readytime": 30,
     "round_time": 50,
     "enemyinfo": [
       {
-        "id": "1133",
+        "id": "1176",
         "unitname": "building_enemy_tower_12",
         "star": 1,
         "level": 0,
@@ -30430,7 +30830,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -30446,7 +30846,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1134",
+        "id": "1177",
         "unitname": "building_enemy_12",
         "star": 1,
         "level": 0,
@@ -30456,7 +30856,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -30479,13 +30879,14 @@
     "round_nextid": "n1_18",
     "round_type": "basic",
     "round_label": "n1",
+    "rankScore": 10,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
     "round_readytime": 30,
     "round_time": 50,
     "enemyinfo": [
       {
-        "id": "1135",
+        "id": "1178",
         "unitname": "building_enemy_tower_12",
         "star": 1,
         "level": 0,
@@ -30495,7 +30896,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -30511,7 +30912,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1136",
+        "id": "1179",
         "unitname": "building_enemy_12",
         "star": 1,
         "level": 0,
@@ -30521,7 +30922,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -30544,13 +30945,14 @@
     "round_nextid": "n1_19",
     "round_type": "basic",
     "round_label": "n1",
+    "rankScore": 10,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
     "round_readytime": 30,
     "round_time": 50,
     "enemyinfo": [
       {
-        "id": "1137",
+        "id": "1180",
         "unitname": "building_enemy_tower_12",
         "star": 1,
         "level": 0,
@@ -30560,7 +30962,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -30576,7 +30978,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1138",
+        "id": "1181",
         "unitname": "building_enemy_12",
         "star": 1,
         "level": 0,
@@ -30586,7 +30988,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -30609,13 +31011,14 @@
     "round_nextid": "n1_20",
     "round_type": "basic",
     "round_label": "n1",
+    "rankScore": 10,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
     "round_readytime": 30,
     "round_time": 50,
     "enemyinfo": [
       {
-        "id": "1139",
+        "id": "1182",
         "unitname": "building_enemy_tower_12",
         "star": 1,
         "level": 0,
@@ -30625,7 +31028,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -30641,7 +31044,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1140",
+        "id": "1183",
         "unitname": "building_enemy_12",
         "star": 1,
         "level": 0,
@@ -30651,7 +31054,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -30674,13 +31077,14 @@
     "round_nextid": "n1_21",
     "round_type": "basic",
     "round_label": "n1",
+    "rankScore": 10,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
     "round_readytime": 30,
     "round_time": 50,
     "enemyinfo": [
       {
-        "id": "1141",
+        "id": "1184",
         "unitname": "building_enemy_tower_12",
         "star": 1,
         "level": 0,
@@ -30690,7 +31094,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -30706,7 +31110,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1142",
+        "id": "1185",
         "unitname": "building_enemy_12",
         "star": 1,
         "level": 0,
@@ -30716,7 +31120,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -30739,13 +31143,14 @@
     "round_nextid": "n1_22",
     "round_type": "basic",
     "round_label": "n1",
+    "rankScore": 15,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
     "round_readytime": 30,
     "round_time": 50,
     "enemyinfo": [
       {
-        "id": "1143",
+        "id": "1186",
         "unitname": "building_enemy_tower_12",
         "star": 1,
         "level": 0,
@@ -30755,7 +31160,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -30771,7 +31176,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1144",
+        "id": "1187",
         "unitname": "building_enemy_12",
         "star": 1,
         "level": 0,
@@ -30781,7 +31186,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -30804,13 +31209,14 @@
     "round_nextid": "n1_23",
     "round_type": "basic",
     "round_label": "n1",
+    "rankScore": 15,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
     "round_readytime": 30,
     "round_time": 50,
     "enemyinfo": [
       {
-        "id": "1145",
+        "id": "1188",
         "unitname": "building_enemy_tower_12",
         "star": 1,
         "level": 0,
@@ -30820,7 +31226,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -30836,7 +31242,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1146",
+        "id": "1189",
         "unitname": "building_enemy_12",
         "star": 1,
         "level": 0,
@@ -30846,7 +31252,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -30869,13 +31275,14 @@
     "round_nextid": "n1_24",
     "round_type": "basic",
     "round_label": "n1",
+    "rankScore": 15,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
     "round_readytime": 30,
     "round_time": 50,
     "enemyinfo": [
       {
-        "id": "1147",
+        "id": "1190",
         "unitname": "building_enemy_tower_12",
         "star": 1,
         "level": 0,
@@ -30885,7 +31292,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -30901,7 +31308,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1148",
+        "id": "1191",
         "unitname": "building_enemy_12",
         "star": 1,
         "level": 0,
@@ -30911,7 +31318,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -30934,13 +31341,14 @@
     "round_nextid": "n1_25",
     "round_type": "basic",
     "round_label": "n1",
+    "rankScore": 15,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
     "round_readytime": 30,
     "round_time": 50,
     "enemyinfo": [
       {
-        "id": "1149",
+        "id": "1192",
         "unitname": "building_enemy_tower_12",
         "star": 1,
         "level": 0,
@@ -30950,7 +31358,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -30966,7 +31374,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1150",
+        "id": "1193",
         "unitname": "building_enemy_12",
         "star": 1,
         "level": 0,
@@ -30976,7 +31384,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -30999,13 +31407,14 @@
     "round_nextid": "n1_26",
     "round_type": "basic",
     "round_label": "n1",
+    "rankScore": 15,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
     "round_readytime": 30,
     "round_time": 50,
     "enemyinfo": [
       {
-        "id": "1151",
+        "id": "1194",
         "unitname": "building_enemy_tower_12",
         "star": 1,
         "level": 0,
@@ -31015,7 +31424,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -31031,7 +31440,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1152",
+        "id": "1195",
         "unitname": "building_enemy_12",
         "star": 1,
         "level": 0,
@@ -31041,7 +31450,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -31064,13 +31473,14 @@
     "round_nextid": "n1_27",
     "round_type": "basic",
     "round_label": "n1",
+    "rankScore": 15,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
     "round_readytime": 30,
     "round_time": 50,
     "enemyinfo": [
       {
-        "id": "1153",
+        "id": "1196",
         "unitname": "building_enemy_tower_12",
         "star": 1,
         "level": 0,
@@ -31080,7 +31490,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -31096,7 +31506,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1154",
+        "id": "1197",
         "unitname": "building_enemy_12",
         "star": 1,
         "level": 0,
@@ -31106,7 +31516,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -31129,13 +31539,14 @@
     "round_nextid": "n1_28",
     "round_type": "basic",
     "round_label": "n1",
+    "rankScore": 15,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
     "round_readytime": 30,
     "round_time": 50,
     "enemyinfo": [
       {
-        "id": "1155",
+        "id": "1198",
         "unitname": "building_enemy_tower_12",
         "star": 1,
         "level": 0,
@@ -31145,7 +31556,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -31161,7 +31572,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1156",
+        "id": "1199",
         "unitname": "building_enemy_12",
         "star": 1,
         "level": 0,
@@ -31171,7 +31582,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -31194,13 +31605,14 @@
     "round_nextid": "n1_29",
     "round_type": "basic",
     "round_label": "n1",
+    "rankScore": 15,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
     "round_readytime": 30,
     "round_time": 50,
     "enemyinfo": [
       {
-        "id": "1157",
+        "id": "1200",
         "unitname": "building_enemy_tower_12",
         "star": 1,
         "level": 0,
@@ -31210,7 +31622,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -31226,7 +31638,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1158",
+        "id": "1201",
         "unitname": "building_enemy_12",
         "star": 1,
         "level": 0,
@@ -31236,7 +31648,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -31259,13 +31671,14 @@
     "round_nextid": "n1_30",
     "round_type": "basic",
     "round_label": "n1",
+    "rankScore": 15,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
     "round_readytime": 30,
     "round_time": 50,
     "enemyinfo": [
       {
-        "id": "1159",
+        "id": "1202",
         "unitname": "building_enemy_tower_12",
         "star": 1,
         "level": 0,
@@ -31275,7 +31688,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -31291,7 +31704,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1160",
+        "id": "1203",
         "unitname": "building_enemy_12",
         "star": 1,
         "level": 0,
@@ -31301,7 +31714,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -31324,13 +31737,14 @@
     "round_nextid": "n1_31",
     "round_type": "basic",
     "round_label": "n1",
+    "rankScore": 15,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
     "round_readytime": 30,
     "round_time": 50,
     "enemyinfo": [
       {
-        "id": "1161",
+        "id": "1204",
         "unitname": "building_enemy_tower_12",
         "star": 1,
         "level": 0,
@@ -31340,7 +31754,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -31356,7 +31770,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1162",
+        "id": "1205",
         "unitname": "building_enemy_12",
         "star": 1,
         "level": 0,
@@ -31366,7 +31780,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -31389,13 +31803,14 @@
     "round_nextid": "n1_32",
     "round_type": "basic",
     "round_label": "n1",
+    "rankScore": 20,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
     "round_readytime": 30,
     "round_time": 50,
     "enemyinfo": [
       {
-        "id": "1163",
+        "id": "1206",
         "unitname": "building_enemy_tower_12",
         "star": 1,
         "level": 0,
@@ -31405,7 +31820,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -31421,7 +31836,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1164",
+        "id": "1207",
         "unitname": "building_enemy_12",
         "star": 1,
         "level": 0,
@@ -31431,7 +31846,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -31454,13 +31869,14 @@
     "round_nextid": "n1_33",
     "round_type": "basic",
     "round_label": "n1",
+    "rankScore": 20,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
     "round_readytime": 30,
     "round_time": 50,
     "enemyinfo": [
       {
-        "id": "1165",
+        "id": "1208",
         "unitname": "building_enemy_tower_12",
         "star": 1,
         "level": 0,
@@ -31470,7 +31886,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -31486,7 +31902,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1166",
+        "id": "1209",
         "unitname": "building_enemy_12",
         "star": 1,
         "level": 0,
@@ -31496,7 +31912,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -31519,13 +31935,14 @@
     "round_nextid": "n1_34",
     "round_type": "basic",
     "round_label": "n1",
+    "rankScore": 20,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
     "round_readytime": 30,
     "round_time": 50,
     "enemyinfo": [
       {
-        "id": "1167",
+        "id": "1210",
         "unitname": "building_enemy_tower_12",
         "star": 1,
         "level": 0,
@@ -31535,7 +31952,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -31551,7 +31968,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1168",
+        "id": "1211",
         "unitname": "building_enemy_12",
         "star": 1,
         "level": 0,
@@ -31561,7 +31978,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -31584,13 +32001,14 @@
     "round_nextid": "n1_35",
     "round_type": "basic",
     "round_label": "n1",
+    "rankScore": 20,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
     "round_readytime": 30,
     "round_time": 50,
     "enemyinfo": [
       {
-        "id": "1169",
+        "id": "1212",
         "unitname": "building_enemy_tower_12",
         "star": 1,
         "level": 0,
@@ -31600,7 +32018,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -31616,7 +32034,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1170",
+        "id": "1213",
         "unitname": "building_enemy_12",
         "star": 1,
         "level": 0,
@@ -31626,7 +32044,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -31649,13 +32067,14 @@
     "round_nextid": "n1_36",
     "round_type": "basic",
     "round_label": "n1",
+    "rankScore": 20,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
     "round_readytime": 30,
     "round_time": 50,
     "enemyinfo": [
       {
-        "id": "1171",
+        "id": "1214",
         "unitname": "building_enemy_tower_12",
         "star": 1,
         "level": 0,
@@ -31665,7 +32084,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -31681,7 +32100,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1172",
+        "id": "1215",
         "unitname": "building_enemy_12",
         "star": 1,
         "level": 0,
@@ -31691,7 +32110,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -31714,13 +32133,14 @@
     "round_nextid": "n1_37",
     "round_type": "basic",
     "round_label": "n1",
+    "rankScore": 20,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
     "round_readytime": 30,
     "round_time": 50,
     "enemyinfo": [
       {
-        "id": "1173",
+        "id": "1216",
         "unitname": "building_enemy_tower_12",
         "star": 1,
         "level": 0,
@@ -31730,7 +32150,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -31746,7 +32166,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1174",
+        "id": "1217",
         "unitname": "building_enemy_12",
         "star": 1,
         "level": 0,
@@ -31756,7 +32176,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -31779,13 +32199,14 @@
     "round_nextid": "n1_38",
     "round_type": "basic",
     "round_label": "n1",
+    "rankScore": 20,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
     "round_readytime": 30,
     "round_time": 50,
     "enemyinfo": [
       {
-        "id": "1175",
+        "id": "1218",
         "unitname": "building_enemy_tower_12",
         "star": 1,
         "level": 0,
@@ -31795,7 +32216,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -31811,7 +32232,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1176",
+        "id": "1219",
         "unitname": "building_enemy_12",
         "star": 1,
         "level": 0,
@@ -31821,7 +32242,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -31844,13 +32265,14 @@
     "round_nextid": "n1_39",
     "round_type": "basic",
     "round_label": "n1",
+    "rankScore": 20,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
     "round_readytime": 30,
     "round_time": 50,
     "enemyinfo": [
       {
-        "id": "1177",
+        "id": "1220",
         "unitname": "building_enemy_tower_12",
         "star": 1,
         "level": 0,
@@ -31860,7 +32282,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -31876,7 +32298,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1178",
+        "id": "1221",
         "unitname": "building_enemy_12",
         "star": 1,
         "level": 0,
@@ -31886,7 +32308,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -31909,13 +32331,14 @@
     "round_nextid": "n1_40",
     "round_type": "basic",
     "round_label": "n1",
+    "rankScore": 20,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
     "round_readytime": 30,
     "round_time": 50,
     "enemyinfo": [
       {
-        "id": "1179",
+        "id": "1222",
         "unitname": "building_enemy_tower_12",
         "star": 1,
         "level": 0,
@@ -31925,7 +32348,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -31941,7 +32364,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1180",
+        "id": "1223",
         "unitname": "building_enemy_12",
         "star": 1,
         "level": 0,
@@ -31951,7 +32374,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -31974,13 +32397,14 @@
     "round_nextid": "",
     "round_type": "basic",
     "round_label": "n1",
+    "rankScore": 20,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
     "round_readytime": 30,
     "round_time": 50,
     "enemyinfo": [
       {
-        "id": "1181",
+        "id": "1224",
         "unitname": "building_enemy_tower_12",
         "star": 1,
         "level": 0,
@@ -31990,7 +32414,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -32006,7 +32430,7 @@
         "spawn_buff": ""
       },
       {
-        "id": "1182",
+        "id": "1225",
         "unitname": "building_enemy_12",
         "star": 1,
         "level": 0,
@@ -32016,7 +32440,7 @@
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
-        "enemycreatetype": 0,
+        "enemycreatetype": 3,
         "isground": 1,
         "atkpect": 0,
         "hppect": 0,
@@ -32029,6 +32453,244 @@
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
         "elite_drop_index": "",
+        "spawn_buff": ""
+      }
+    ]
+  }
+] ,
+"dota_roundenemypoolconfig":[
+  {
+    "id": "n1_r2_1",
+    "playername": "简单的电脑",
+    "accountid": "76561198",
+    "population": 3,
+    "round_min": 2,
+    "round_max": 10,
+    "battlescore": 100,
+    "sectinfo": [
+      "sect_seckill|3"
+    ],
+    "enemyinfo": [
+      {
+        "unitname": "building_hero_axe",
+        "star": 1,
+        "level": 1,
+        "position_x": 2,
+        "position_y": 7,
+        "itemslot1": "item_imba_blades_of_attack",
+        "itemslot2": "item_imba_quarterstaff",
+        "itemslot3": "",
+        "itemslot4": "",
+        "itemslot5": "",
+        "itemslot6": "",
+        "WearBundleId": "",
+        "spawn_buff": ""
+      },
+      {
+        "unitname": "building_hero_kunkka",
+        "star": 1,
+        "level": 1,
+        "position_x": 4,
+        "position_y": 7,
+        "itemslot1": "item_imba_quarterstaff",
+        "itemslot2": "",
+        "itemslot3": "",
+        "itemslot4": "",
+        "itemslot5": "",
+        "itemslot6": "",
+        "WearBundleId": "",
+        "spawn_buff": ""
+      },
+      {
+        "unitname": "building_hero_tiny",
+        "star": 1,
+        "level": 1,
+        "position_x": 6,
+        "position_y": 7,
+        "itemslot1": "item_imba_quarterstaff",
+        "itemslot2": "",
+        "itemslot3": "",
+        "itemslot4": "",
+        "itemslot5": "",
+        "itemslot6": "",
+        "WearBundleId": "",
+        "spawn_buff": ""
+      }
+    ]
+  },
+  {
+    "id": "n1_r2_2",
+    "playername": "简单的电脑",
+    "accountid": "344322234",
+    "population": 3,
+    "round_min": 2,
+    "round_max": 10,
+    "battlescore": 115,
+    "sectinfo": [
+      "sect_thorns|3"
+    ],
+    "enemyinfo": [
+      {
+        "unitname": "building_hero_abyssal_underlord",
+        "star": 1,
+        "level": 1,
+        "position_x": 2,
+        "position_y": 6,
+        "itemslot1": "item_imba_gloves",
+        "itemslot2": "",
+        "itemslot3": "",
+        "itemslot4": "",
+        "itemslot5": "",
+        "itemslot6": "",
+        "WearBundleId": "",
+        "spawn_buff": ""
+      },
+      {
+        "unitname": "building_hero_bristleback",
+        "star": 1,
+        "level": 1,
+        "position_x": 4,
+        "position_y": 6,
+        "itemslot1": "item_imba_helm_of_iron_will",
+        "itemslot2": "",
+        "itemslot3": "",
+        "itemslot4": "",
+        "itemslot5": "",
+        "itemslot6": "",
+        "WearBundleId": "",
+        "spawn_buff": ""
+      },
+      {
+        "unitname": "building_hero_ursa",
+        "star": 1,
+        "level": 1,
+        "position_x": 6,
+        "position_y": 6,
+        "itemslot1": "item_imba_crown",
+        "itemslot2": "",
+        "itemslot3": "",
+        "itemslot4": "",
+        "itemslot5": "",
+        "itemslot6": "",
+        "WearBundleId": "",
+        "spawn_buff": ""
+      }
+    ]
+  },
+  {
+    "id": "n1_r2_3",
+    "playername": "简单的电脑",
+    "accountid": "545454435",
+    "population": 3,
+    "round_min": 2,
+    "round_max": 10,
+    "battlescore": 120,
+    "sectinfo": [
+      "sect_shield|3"
+    ],
+    "enemyinfo": [
+      {
+        "unitname": "building_hero_abaddon",
+        "star": 1,
+        "level": 1,
+        "position_x": 3,
+        "position_y": 6,
+        "itemslot1": "item_imba_gloves",
+        "itemslot2": "",
+        "itemslot3": "",
+        "itemslot4": "",
+        "itemslot5": "",
+        "itemslot6": "",
+        "WearBundleId": "",
+        "spawn_buff": ""
+      },
+      {
+        "unitname": "building_hero_axe",
+        "star": 1,
+        "level": 1,
+        "position_x": 4,
+        "position_y": 6,
+        "itemslot1": "item_imba_helm_of_iron_will",
+        "itemslot2": "",
+        "itemslot3": "",
+        "itemslot4": "",
+        "itemslot5": "",
+        "itemslot6": "",
+        "WearBundleId": "",
+        "spawn_buff": ""
+      },
+      {
+        "unitname": "building_hero_bristleback",
+        "star": 1,
+        "level": 1,
+        "position_x": 5,
+        "position_y": 6,
+        "itemslot1": "item_imba_crown",
+        "itemslot2": "",
+        "itemslot3": "",
+        "itemslot4": "",
+        "itemslot5": "",
+        "itemslot6": "",
+        "WearBundleId": "",
+        "spawn_buff": ""
+      }
+    ]
+  },
+  {
+    "id": "n1_r2_4",
+    "playername": "简单的电脑",
+    "accountid": "545454935",
+    "population": 3,
+    "round_min": 2,
+    "round_max": 10,
+    "battlescore": 120,
+    "sectinfo": [
+      "sect_summon|3"
+    ],
+    "enemyinfo": [
+      {
+        "unitname": "building_hero_enigma",
+        "star": 1,
+        "level": 1,
+        "position_x": 6,
+        "position_y": 8,
+        "itemslot1": "item_imba_energy_booster",
+        "itemslot2": "",
+        "itemslot3": "",
+        "itemslot4": "",
+        "itemslot5": "",
+        "itemslot6": "",
+        "WearBundleId": "",
+        "spawn_buff": ""
+      },
+      {
+        "unitname": "building_hero_lycan",
+        "star": 1,
+        "level": 1,
+        "position_x": 4,
+        "position_y": 6,
+        "itemslot1": "item_imba_blight_stone",
+        "itemslot2": "",
+        "itemslot3": "",
+        "itemslot4": "",
+        "itemslot5": "",
+        "itemslot6": "",
+        "WearBundleId": "",
+        "spawn_buff": ""
+      },
+      {
+        "unitname": "building_hero_warlock",
+        "star": 1,
+        "level": 1,
+        "position_x": 6,
+        "position_y": 8,
+        "itemslot1": "item_imba_energy_booster",
+        "itemslot2": "",
+        "itemslot3": "",
+        "itemslot4": "",
+        "itemslot5": "",
+        "itemslot6": "",
+        "WearBundleId": "",
         "spawn_buff": ""
       }
     ]
