@@ -1,39 +1,5 @@
 [
   {
-    "id": 1,
-    "isVaild": true,
-    "ItemName": "金币",
-    "ItemIcon": "",
-    "ItemQuality": 0,
-    "ItemType": 0,
-    "ItemDes": "",
-    "BagSlotType": 0,
-    "AutoUse": false,
-    "OneGameUseLimit": 0,
-    "BatchUseable": false,
-    "BindHeroName": "",
-    "UseScript": 0,
-    "UseArgs": [],
-    "AwakeScript": []
-  },
-  {
-    "id": 2,
-    "isVaild": true,
-    "ItemName": "木材",
-    "ItemIcon": "",
-    "ItemQuality": 0,
-    "ItemType": 0,
-    "ItemDes": "",
-    "BagSlotType": 0,
-    "AutoUse": false,
-    "OneGameUseLimit": 0,
-    "BatchUseable": false,
-    "BindHeroName": "",
-    "UseScript": 0,
-    "UseArgs": [],
-    "AwakeScript": []
-  },
-  {
     "id": 100,
     "isVaild": false,
     "ItemName": "",
@@ -44,6 +10,7 @@
     "BagSlotType": 0,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": false,
     "BindHeroName": "",
     "UseScript": 0,
@@ -61,6 +28,7 @@
     "BagSlotType": 0,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": false,
     "BindHeroName": "",
     "UseScript": 0,
@@ -78,6 +46,7 @@
     "BagSlotType": 0,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": false,
     "BindHeroName": "",
     "UseScript": 1,
@@ -98,6 +67,7 @@
     "BagSlotType": 0,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": false,
     "BindHeroName": "",
     "UseScript": 1,
@@ -115,6 +85,7 @@
     "BagSlotType": 0,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": false,
     "BindHeroName": "",
     "UseScript": 1,
@@ -132,6 +103,7 @@
     "BagSlotType": 0,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": false,
     "BindHeroName": "",
     "UseScript": 0,
@@ -149,6 +121,7 @@
     "BagSlotType": 0,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": false,
     "BindHeroName": "",
     "UseScript": 0,
@@ -166,6 +139,7 @@
     "BagSlotType": 0,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": false,
     "BindHeroName": "",
     "UseScript": 0,
@@ -183,6 +157,7 @@
     "BagSlotType": 1,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": false,
     "BindHeroName": "",
     "UseScript": 0,
@@ -200,6 +175,7 @@
     "BagSlotType": 2,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": false,
     "BindHeroName": "",
     "UseScript": 0,
@@ -217,6 +193,7 @@
     "BagSlotType": 0,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": false,
     "BindHeroName": "",
     "UseScript": 3,
@@ -236,6 +213,7 @@
     "BagSlotType": 2,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": false,
     "BindHeroName": "",
     "UseScript": 0,
@@ -260,6 +238,7 @@
     "BagSlotType": 0,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": false,
     "BindHeroName": "",
     "UseScript": 0,
@@ -277,6 +256,7 @@
     "BagSlotType": 0,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": false,
     "BindHeroName": "",
     "UseScript": 0,
@@ -286,14 +266,15 @@
   {
     "id": 10013,
     "isVaild": true,
-    "ItemName": "测试宝箱4",
+    "ItemName": "熟练度宝瓶",
     "ItemIcon": "110001",
     "ItemQuality": 4,
     "ItemType": 2,
     "ItemDes": "这是一件11123",
-    "BagSlotType": 0,
+    "BagSlotType": 2,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": false,
     "BindHeroName": "",
     "UseScript": 0,
@@ -303,14 +284,15 @@
   {
     "id": 10014,
     "isVaild": true,
-    "ItemName": "测试宝箱5",
+    "ItemName": "铭文宝瓶",
     "ItemIcon": "202001",
     "ItemQuality": 4,
     "ItemType": 2,
     "ItemDes": "这是一件11124",
-    "BagSlotType": 0,
+    "BagSlotType": 2,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": false,
     "BindHeroName": "",
     "UseScript": 0,
@@ -320,14 +302,15 @@
   {
     "id": 10015,
     "isVaild": true,
-    "ItemName": "测试宝箱6",
+    "ItemName": "信使宝瓶",
     "ItemIcon": "204001",
     "ItemQuality": 5,
     "ItemType": 2,
     "ItemDes": "这是一件11125",
-    "BagSlotType": 0,
+    "BagSlotType": 2,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": false,
     "BindHeroName": "",
     "UseScript": 0,
@@ -337,14 +320,15 @@
   {
     "id": 10016,
     "isVaild": true,
-    "ItemName": "测试宝箱7",
+    "ItemName": "皮肤宝瓶",
     "ItemIcon": "201001",
     "ItemQuality": 5,
     "ItemType": 2,
     "ItemDes": "这是一件11126",
-    "BagSlotType": 0,
+    "BagSlotType": 2,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": false,
     "BindHeroName": "",
     "UseScript": 0,
@@ -362,6 +346,7 @@
     "BagSlotType": 0,
     "AutoUse": false,
     "OneGameUseLimit": 1,
+    "MaxOwnerCount": 0,
     "BatchUseable": false,
     "BindHeroName": "",
     "UseScript": 4,
@@ -379,6 +364,7 @@
     "BagSlotType": 0,
     "AutoUse": false,
     "OneGameUseLimit": 1,
+    "MaxOwnerCount": 0,
     "BatchUseable": false,
     "BindHeroName": "",
     "UseScript": 4,
@@ -396,6 +382,7 @@
     "BagSlotType": 0,
     "AutoUse": false,
     "OneGameUseLimit": 1,
+    "MaxOwnerCount": 0,
     "BatchUseable": false,
     "BindHeroName": "",
     "UseScript": 4,
@@ -413,6 +400,7 @@
     "BagSlotType": 0,
     "AutoUse": false,
     "OneGameUseLimit": 1,
+    "MaxOwnerCount": 0,
     "BatchUseable": false,
     "BindHeroName": "",
     "UseScript": 4,
@@ -430,6 +418,7 @@
     "BagSlotType": 0,
     "AutoUse": false,
     "OneGameUseLimit": 1,
+    "MaxOwnerCount": 0,
     "BatchUseable": false,
     "BindHeroName": "",
     "UseScript": 4,
@@ -447,6 +436,7 @@
     "BagSlotType": 0,
     "AutoUse": false,
     "OneGameUseLimit": 1,
+    "MaxOwnerCount": 0,
     "BatchUseable": false,
     "BindHeroName": "",
     "UseScript": 4,
@@ -461,9 +451,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_abaddon",
     "UseScript": 0,
@@ -472,7 +463,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -485,9 +476,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_abyssal_underlord",
     "UseScript": 0,
@@ -496,7 +488,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -509,9 +501,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_alchemist",
     "UseScript": 0,
@@ -520,7 +513,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -533,9 +526,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_ancient_apparition",
     "UseScript": 0,
@@ -544,7 +538,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -557,9 +551,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_antimage",
     "UseScript": 0,
@@ -568,7 +563,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -581,9 +576,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_arc_warden",
     "UseScript": 0,
@@ -592,7 +588,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -605,9 +601,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_axe",
     "UseScript": 0,
@@ -616,7 +613,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -629,9 +626,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_bane",
     "UseScript": 0,
@@ -640,7 +638,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -653,9 +651,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_batrider",
     "UseScript": 0,
@@ -664,7 +663,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -677,9 +676,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_beastmaster",
     "UseScript": 0,
@@ -688,7 +688,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -701,9 +701,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_bloodseeker",
     "UseScript": 0,
@@ -712,7 +713,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -725,9 +726,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_bounty_hunter",
     "UseScript": 0,
@@ -736,7 +738,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -749,9 +751,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_brewmaster",
     "UseScript": 0,
@@ -760,7 +763,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -773,9 +776,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_bristleback",
     "UseScript": 0,
@@ -784,7 +788,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -797,9 +801,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_broodmother",
     "UseScript": 0,
@@ -808,7 +813,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -821,9 +826,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_centaur",
     "UseScript": 0,
@@ -832,7 +838,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -845,9 +851,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_chaos_knight",
     "UseScript": 0,
@@ -856,7 +863,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -869,9 +876,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_chen",
     "UseScript": 0,
@@ -880,7 +888,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -893,9 +901,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_clinkz",
     "UseScript": 0,
@@ -904,7 +913,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -917,9 +926,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_crystal_maiden",
     "UseScript": 0,
@@ -928,7 +938,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -941,9 +951,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_dark_seer",
     "UseScript": 0,
@@ -952,7 +963,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -965,9 +976,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_dark_willow",
     "UseScript": 0,
@@ -976,7 +988,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -989,9 +1001,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_dawnbreaker",
     "UseScript": 0,
@@ -1000,7 +1013,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -1013,9 +1026,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_dazzle",
     "UseScript": 0,
@@ -1024,7 +1038,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -1037,9 +1051,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_death_prophet",
     "UseScript": 0,
@@ -1048,7 +1063,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -1061,9 +1076,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_disruptor",
     "UseScript": 0,
@@ -1072,7 +1088,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -1085,9 +1101,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_doom_bringer",
     "UseScript": 0,
@@ -1096,7 +1113,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -1109,9 +1126,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_dragon_knight",
     "UseScript": 0,
@@ -1120,7 +1138,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -1133,9 +1151,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_drow_ranger",
     "UseScript": 0,
@@ -1144,7 +1163,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -1157,9 +1176,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_earth_spirit",
     "UseScript": 0,
@@ -1168,7 +1188,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -1181,9 +1201,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_earthshaker",
     "UseScript": 0,
@@ -1192,7 +1213,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -1205,9 +1226,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_elder_titan",
     "UseScript": 0,
@@ -1216,7 +1238,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -1229,9 +1251,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_ember_spirit",
     "UseScript": 0,
@@ -1240,7 +1263,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -1253,9 +1276,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_enchantress",
     "UseScript": 0,
@@ -1264,7 +1288,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -1277,9 +1301,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_enigma",
     "UseScript": 0,
@@ -1288,7 +1313,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -1301,9 +1326,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_faceless_void",
     "UseScript": 0,
@@ -1312,7 +1338,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -1325,9 +1351,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_furion",
     "UseScript": 0,
@@ -1336,7 +1363,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -1349,9 +1376,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_grimstroke",
     "UseScript": 0,
@@ -1360,7 +1388,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -1373,9 +1401,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_gyrocopter",
     "UseScript": 0,
@@ -1384,7 +1413,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -1397,9 +1426,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_hoodwink",
     "UseScript": 0,
@@ -1408,7 +1438,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -1421,9 +1451,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_huskar",
     "UseScript": 0,
@@ -1432,7 +1463,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -1445,9 +1476,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_invoker",
     "UseScript": 0,
@@ -1456,7 +1488,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -1469,9 +1501,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_jakiro",
     "UseScript": 0,
@@ -1480,7 +1513,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -1493,9 +1526,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_juggernaut",
     "UseScript": 0,
@@ -1504,7 +1538,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -1517,9 +1551,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_keeper_of_the_light",
     "UseScript": 0,
@@ -1528,7 +1563,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -1541,9 +1576,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_kunkka",
     "UseScript": 0,
@@ -1552,7 +1588,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -1565,9 +1601,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_legion_commander",
     "UseScript": 0,
@@ -1576,7 +1613,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -1589,9 +1626,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_leshrac",
     "UseScript": 0,
@@ -1600,7 +1638,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -1613,9 +1651,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_lich",
     "UseScript": 0,
@@ -1624,7 +1663,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -1637,9 +1676,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_life_stealer",
     "UseScript": 0,
@@ -1648,7 +1688,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -1661,9 +1701,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_lina",
     "UseScript": 0,
@@ -1672,7 +1713,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -1685,9 +1726,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_lion",
     "UseScript": 0,
@@ -1696,7 +1738,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -1709,9 +1751,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_lone_druid",
     "UseScript": 0,
@@ -1720,7 +1763,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -1733,9 +1776,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_luna",
     "UseScript": 0,
@@ -1744,7 +1788,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -1757,9 +1801,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_lycan",
     "UseScript": 0,
@@ -1768,7 +1813,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -1781,9 +1826,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_magnataur",
     "UseScript": 0,
@@ -1792,7 +1838,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -1805,9 +1851,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_marci",
     "UseScript": 0,
@@ -1816,7 +1863,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -1829,9 +1876,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_mars",
     "UseScript": 0,
@@ -1840,7 +1888,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -1853,9 +1901,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_medusa",
     "UseScript": 0,
@@ -1864,7 +1913,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -1877,9 +1926,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_meepo",
     "UseScript": 0,
@@ -1888,7 +1938,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -1901,9 +1951,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_mirana",
     "UseScript": 0,
@@ -1912,7 +1963,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -1925,9 +1976,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_monkey_king",
     "UseScript": 0,
@@ -1936,7 +1988,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -1949,9 +2001,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_morphling",
     "UseScript": 0,
@@ -1960,7 +2013,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -1973,9 +2026,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_naga_siren",
     "UseScript": 0,
@@ -1984,7 +2038,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -1997,9 +2051,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_necrolyte",
     "UseScript": 0,
@@ -2008,7 +2063,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -2021,9 +2076,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_nevermore",
     "UseScript": 0,
@@ -2032,7 +2088,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -2045,9 +2101,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_night_stalker",
     "UseScript": 0,
@@ -2056,7 +2113,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -2069,9 +2126,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_nyx_assassin",
     "UseScript": 0,
@@ -2080,7 +2138,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -2093,9 +2151,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_obsidian_destroyer",
     "UseScript": 0,
@@ -2104,7 +2163,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -2117,9 +2176,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_ogre_magi",
     "UseScript": 0,
@@ -2128,7 +2188,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -2141,9 +2201,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_omniknight",
     "UseScript": 0,
@@ -2152,7 +2213,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -2165,9 +2226,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_oracle",
     "UseScript": 0,
@@ -2176,7 +2238,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -2189,9 +2251,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_pangolier",
     "UseScript": 0,
@@ -2200,7 +2263,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -2213,9 +2276,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_phantom_assassin",
     "UseScript": 0,
@@ -2224,7 +2288,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -2237,9 +2301,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_phantom_lancer",
     "UseScript": 0,
@@ -2248,7 +2313,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -2261,9 +2326,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_phoenix",
     "UseScript": 0,
@@ -2272,7 +2338,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -2285,9 +2351,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_primal_beast",
     "UseScript": 0,
@@ -2296,7 +2363,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -2309,9 +2376,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_puck",
     "UseScript": 0,
@@ -2320,7 +2388,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -2333,9 +2401,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_pudge",
     "UseScript": 0,
@@ -2344,7 +2413,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -2357,9 +2426,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_pugna",
     "UseScript": 0,
@@ -2368,7 +2438,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -2381,9 +2451,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_queenofpain",
     "UseScript": 0,
@@ -2392,7 +2463,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -2405,9 +2476,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_rattletrap",
     "UseScript": 0,
@@ -2416,7 +2488,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -2429,9 +2501,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_razor",
     "UseScript": 0,
@@ -2440,7 +2513,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -2453,9 +2526,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_riki",
     "UseScript": 0,
@@ -2464,7 +2538,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -2477,9 +2551,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_rubick",
     "UseScript": 0,
@@ -2488,7 +2563,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -2501,9 +2576,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_sand_king",
     "UseScript": 0,
@@ -2512,7 +2588,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -2525,9 +2601,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_shadow_demon",
     "UseScript": 0,
@@ -2536,7 +2613,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -2549,9 +2626,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_shadow_shaman",
     "UseScript": 0,
@@ -2560,7 +2638,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -2573,9 +2651,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_shredder",
     "UseScript": 0,
@@ -2584,7 +2663,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -2597,9 +2676,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_silencer",
     "UseScript": 0,
@@ -2608,7 +2688,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -2621,9 +2701,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_skeleton_king",
     "UseScript": 0,
@@ -2632,7 +2713,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -2645,9 +2726,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_skywrath_mage",
     "UseScript": 0,
@@ -2656,7 +2738,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -2669,9 +2751,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_slardar",
     "UseScript": 0,
@@ -2680,7 +2763,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -2693,9 +2776,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_slark",
     "UseScript": 0,
@@ -2704,7 +2788,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -2717,9 +2801,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_snapfire",
     "UseScript": 0,
@@ -2728,7 +2813,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -2741,9 +2826,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_sniper",
     "UseScript": 0,
@@ -2752,7 +2838,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -2765,9 +2851,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_spectre",
     "UseScript": 0,
@@ -2776,7 +2863,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -2789,9 +2876,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_spirit_breaker",
     "UseScript": 0,
@@ -2800,7 +2888,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -2813,9 +2901,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_storm_spirit",
     "UseScript": 0,
@@ -2824,7 +2913,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -2837,9 +2926,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_sven",
     "UseScript": 0,
@@ -2848,7 +2938,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -2861,9 +2951,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_techies",
     "UseScript": 0,
@@ -2872,7 +2963,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -2885,9 +2976,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_templar_assassin",
     "UseScript": 0,
@@ -2896,7 +2988,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -2909,9 +3001,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_terrorblade",
     "UseScript": 0,
@@ -2920,7 +3013,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -2933,9 +3026,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_tidehunter",
     "UseScript": 0,
@@ -2944,7 +3038,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -2957,9 +3051,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_tinker",
     "UseScript": 0,
@@ -2968,7 +3063,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -2981,9 +3076,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_tiny",
     "UseScript": 0,
@@ -2992,7 +3088,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -3005,9 +3101,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_treant",
     "UseScript": 0,
@@ -3016,7 +3113,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -3029,9 +3126,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_troll_warlord",
     "UseScript": 0,
@@ -3040,7 +3138,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -3053,9 +3151,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_tusk",
     "UseScript": 0,
@@ -3064,7 +3163,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -3077,9 +3176,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_undying",
     "UseScript": 0,
@@ -3088,7 +3188,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -3101,9 +3201,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_ursa",
     "UseScript": 0,
@@ -3112,7 +3213,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -3125,9 +3226,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_vengefulspirit",
     "UseScript": 0,
@@ -3136,7 +3238,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -3149,9 +3251,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_venomancer",
     "UseScript": 0,
@@ -3160,7 +3263,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -3173,9 +3276,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_viper",
     "UseScript": 0,
@@ -3184,7 +3288,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -3197,9 +3301,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_visage",
     "UseScript": 0,
@@ -3208,7 +3313,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -3221,9 +3326,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_void_spirit",
     "UseScript": 0,
@@ -3232,7 +3338,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -3245,9 +3351,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_warlock",
     "UseScript": 0,
@@ -3256,7 +3363,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -3269,9 +3376,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_weaver",
     "UseScript": 0,
@@ -3280,7 +3388,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -3293,9 +3401,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_windrunner",
     "UseScript": 0,
@@ -3304,7 +3413,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -3317,9 +3426,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_winter_wyvern",
     "UseScript": 0,
@@ -3328,7 +3438,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -3341,9 +3451,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_wisp",
     "UseScript": 0,
@@ -3352,7 +3463,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -3365,9 +3476,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_witch_doctor",
     "UseScript": 0,
@@ -3376,7 +3488,7 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
-          100
+          1
         ]
       }
     ]
@@ -3389,9 +3501,10 @@
     "ItemQuality": 4,
     "ItemType": 0,
     "ItemDes": "这是经验",
-    "BagSlotType": 0,
-    "AutoUse": true,
+    "BagSlotType": 2,
+    "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
     "BatchUseable": true,
     "BindHeroName": "building_hero_zuus",
     "UseScript": 0,
@@ -3400,2715 +3513,1624 @@
       {
         "ScriptName": 1,
         "ScriptValue": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12001,
+    "isVaild": true,
+    "ItemName": "小鸡粑粑",
+    "ItemIcon": "",
+    "ItemQuality": 3,
+    "ItemType": 4,
+    "ItemDes": "",
+    "BagSlotType": 2,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 1,
+    "BatchUseable": false,
+    "BindHeroName": "courier_1",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 4,
+        "ScriptValue": [
           100
         ]
       }
     ]
   },
   {
-    "id": 20004,
+    "id": 12002,
     "isVaild": true,
-    "ItemName": "亚巴顿符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
-    "AutoUse": false,
-    "OneGameUseLimit": 0,
-    "BatchUseable": false,
-    "BindHeroName": "building_hero_abaddon",
-    "UseScript": 2,
-    "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
-  },
-  {
-    "id": 20005,
-    "isVaild": true,
-    "ItemName": "孽主符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
-    "AutoUse": false,
-    "OneGameUseLimit": 0,
-    "BatchUseable": false,
-    "BindHeroName": "building_hero_abyssal_underlord",
-    "UseScript": 2,
-    "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
-  },
-  {
-    "id": 20006,
-    "isVaild": true,
-    "ItemName": "炼金符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
-    "AutoUse": false,
-    "OneGameUseLimit": 0,
-    "BatchUseable": false,
-    "BindHeroName": "building_hero_alchemist",
-    "UseScript": 2,
-    "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
-  },
-  {
-    "id": 20007,
-    "isVaild": true,
-    "ItemName": "远古冰魄符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
-    "AutoUse": false,
-    "OneGameUseLimit": 0,
-    "BatchUseable": false,
-    "BindHeroName": "building_hero_ancient_apparition",
-    "UseScript": 2,
-    "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
-  },
-  {
-    "id": 20008,
-    "isVaild": true,
-    "ItemName": "敌法师符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
-    "AutoUse": false,
-    "OneGameUseLimit": 0,
-    "BatchUseable": false,
-    "BindHeroName": "building_hero_antimage",
-    "UseScript": 2,
-    "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
-  },
-  {
-    "id": 20009,
-    "isVaild": true,
-    "ItemName": "天穹守望者符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
-    "AutoUse": false,
-    "OneGameUseLimit": 0,
-    "BatchUseable": false,
-    "BindHeroName": "building_hero_arc_warden",
-    "UseScript": 2,
-    "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
-  },
-  {
-    "id": 20010,
-    "isVaild": true,
-    "ItemName": "斧王符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
-    "AutoUse": false,
-    "OneGameUseLimit": 0,
-    "BatchUseable": false,
-    "BindHeroName": "building_hero_axe",
-    "UseScript": 2,
-    "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
-  },
-  {
-    "id": 20011,
-    "isVaild": true,
-    "ItemName": "祸乱之源符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
-    "AutoUse": false,
-    "OneGameUseLimit": 0,
-    "BatchUseable": false,
-    "BindHeroName": "building_hero_bane",
-    "UseScript": 2,
-    "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
-  },
-  {
-    "id": 20012,
-    "isVaild": true,
-    "ItemName": "蝙蝠骑士符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
-    "AutoUse": false,
-    "OneGameUseLimit": 0,
-    "BatchUseable": false,
-    "BindHeroName": "building_hero_batrider",
-    "UseScript": 2,
-    "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
-  },
-  {
-    "id": 20013,
-    "isVaild": true,
-    "ItemName": "兽王符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
-    "AutoUse": false,
-    "OneGameUseLimit": 0,
-    "BatchUseable": false,
-    "BindHeroName": "building_hero_beastmaster",
-    "UseScript": 2,
-    "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
-  },
-  {
-    "id": 20014,
-    "isVaild": true,
-    "ItemName": "血魔符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
-    "AutoUse": false,
-    "OneGameUseLimit": 0,
-    "BatchUseable": false,
-    "BindHeroName": "building_hero_bloodseeker",
-    "UseScript": 2,
-    "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
-  },
-  {
-    "id": 20015,
-    "isVaild": true,
-    "ItemName": "赏金猎人符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
-    "AutoUse": false,
-    "OneGameUseLimit": 0,
-    "BatchUseable": false,
-    "BindHeroName": "building_hero_bounty_hunter",
-    "UseScript": 2,
-    "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
-  },
-  {
-    "id": 20016,
-    "isVaild": true,
-    "ItemName": "熊猫酒仙符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
-    "AutoUse": false,
-    "OneGameUseLimit": 0,
-    "BatchUseable": false,
-    "BindHeroName": "building_hero_brewmaster",
-    "UseScript": 2,
-    "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
-  },
-  {
-    "id": 20017,
-    "isVaild": true,
-    "ItemName": "刚被兽符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
-    "AutoUse": false,
-    "OneGameUseLimit": 0,
-    "BatchUseable": false,
-    "BindHeroName": "building_hero_bristleback",
-    "UseScript": 2,
-    "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
-  },
-  {
-    "id": 20018,
-    "isVaild": true,
-    "ItemName": "蜘蛛符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
-    "AutoUse": false,
-    "OneGameUseLimit": 0,
-    "BatchUseable": false,
-    "BindHeroName": "building_hero_broodmother",
-    "UseScript": 2,
-    "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
-  },
-  {
-    "id": 20019,
-    "isVaild": true,
-    "ItemName": "半人马战行者符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
-    "AutoUse": false,
-    "OneGameUseLimit": 0,
-    "BatchUseable": false,
-    "BindHeroName": "building_hero_centaur",
-    "UseScript": 2,
-    "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
-  },
-  {
-    "id": 20020,
-    "isVaild": true,
-    "ItemName": "混沌骑士符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
-    "AutoUse": false,
-    "OneGameUseLimit": 0,
-    "BatchUseable": false,
-    "BindHeroName": "building_hero_chaos_knight",
-    "UseScript": 2,
-    "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
-  },
-  {
-    "id": 20021,
-    "isVaild": true,
-    "ItemName": "陈符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
-    "AutoUse": false,
-    "OneGameUseLimit": 0,
-    "BatchUseable": false,
-    "BindHeroName": "building_hero_chen",
-    "UseScript": 2,
-    "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
-  },
-  {
-    "id": 20022,
-    "isVaild": true,
-    "ItemName": "克林克兹符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
-    "AutoUse": false,
-    "OneGameUseLimit": 0,
-    "BatchUseable": false,
-    "BindHeroName": "building_hero_clinkz",
-    "UseScript": 2,
-    "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
-  },
-  {
-    "id": 20023,
-    "isVaild": true,
-    "ItemName": "水晶室女符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
-    "AutoUse": false,
-    "OneGameUseLimit": 0,
-    "BatchUseable": false,
-    "BindHeroName": "building_hero_crystal_maiden",
-    "UseScript": 2,
-    "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
-  },
-  {
-    "id": 20024,
-    "isVaild": true,
-    "ItemName": "黑暗贤者符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
-    "AutoUse": false,
-    "OneGameUseLimit": 0,
-    "BatchUseable": false,
-    "BindHeroName": "building_hero_dark_seer",
-    "UseScript": 2,
-    "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
-  },
-  {
-    "id": 20025,
-    "isVaild": true,
-    "ItemName": "邪影芳灵符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
-    "AutoUse": false,
-    "OneGameUseLimit": 0,
-    "BatchUseable": false,
-    "BindHeroName": "building_hero_dark_willow",
-    "UseScript": 2,
-    "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
-  },
-  {
-    "id": 20026,
-    "isVaild": true,
-    "ItemName": "破晓辰星符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
-    "AutoUse": false,
-    "OneGameUseLimit": 0,
-    "BatchUseable": false,
-    "BindHeroName": "building_hero_dawnbreaker",
-    "UseScript": 2,
-    "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
-  },
-  {
-    "id": 20027,
-    "isVaild": true,
-    "ItemName": "戴泽符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
-    "AutoUse": false,
-    "OneGameUseLimit": 0,
-    "BatchUseable": false,
-    "BindHeroName": "building_hero_dazzle",
-    "UseScript": 2,
-    "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
-  },
-  {
-    "id": 20028,
-    "isVaild": true,
-    "ItemName": "死亡先知符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
-    "AutoUse": false,
-    "OneGameUseLimit": 0,
-    "BatchUseable": false,
-    "BindHeroName": "building_hero_death_prophet",
-    "UseScript": 2,
-    "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
-  },
-  {
-    "id": 20029,
-    "isVaild": true,
-    "ItemName": "干扰者符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
-    "AutoUse": false,
-    "OneGameUseLimit": 0,
-    "BatchUseable": false,
-    "BindHeroName": "building_hero_disruptor",
-    "UseScript": 2,
-    "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
-  },
-  {
-    "id": 20030,
-    "isVaild": true,
-    "ItemName": "末日符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
-    "AutoUse": false,
-    "OneGameUseLimit": 0,
-    "BatchUseable": false,
-    "BindHeroName": "building_hero_doom_bringer",
-    "UseScript": 2,
-    "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
-  },
-  {
-    "id": 20031,
-    "isVaild": true,
-    "ItemName": "龙骑士符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
-    "AutoUse": false,
-    "OneGameUseLimit": 0,
-    "BatchUseable": false,
-    "BindHeroName": "building_hero_dragon_knight",
-    "UseScript": 2,
-    "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
-  },
-  {
-    "id": 20032,
-    "isVaild": true,
-    "ItemName": "卓尔游侠符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
-    "AutoUse": false,
-    "OneGameUseLimit": 0,
-    "BatchUseable": false,
-    "BindHeroName": "building_hero_drow_ranger",
-    "UseScript": 2,
-    "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
-  },
-  {
-    "id": 20033,
-    "isVaild": true,
-    "ItemName": "大地之灵符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
-    "AutoUse": false,
-    "OneGameUseLimit": 0,
-    "BatchUseable": false,
-    "BindHeroName": "building_hero_earth_spirit",
-    "UseScript": 2,
-    "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
-  },
-  {
-    "id": 20034,
-    "isVaild": true,
-    "ItemName": "撼地者符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
-    "AutoUse": false,
-    "OneGameUseLimit": 0,
-    "BatchUseable": false,
-    "BindHeroName": "building_hero_earthshaker",
-    "UseScript": 2,
-    "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
-  },
-  {
-    "id": 20035,
-    "isVaild": true,
-    "ItemName": "上古巨神符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
-    "AutoUse": false,
-    "OneGameUseLimit": 0,
-    "BatchUseable": false,
-    "BindHeroName": "building_hero_elder_titan",
-    "UseScript": 2,
-    "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
-  },
-  {
-    "id": 20036,
-    "isVaild": true,
-    "ItemName": "灰烬之灵符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
-    "AutoUse": false,
-    "OneGameUseLimit": 0,
-    "BatchUseable": false,
-    "BindHeroName": "building_hero_ember_spirit",
-    "UseScript": 2,
-    "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
-  },
-  {
-    "id": 20037,
-    "isVaild": true,
-    "ItemName": "魅惑魔女符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
-    "AutoUse": false,
-    "OneGameUseLimit": 0,
-    "BatchUseable": false,
-    "BindHeroName": "building_hero_enchantress",
-    "UseScript": 2,
-    "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
-  },
-  {
-    "id": 20038,
-    "isVaild": true,
-    "ItemName": "谜团符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
-    "AutoUse": false,
-    "OneGameUseLimit": 0,
-    "BatchUseable": false,
-    "BindHeroName": "building_hero_enigma",
-    "UseScript": 2,
-    "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
-  },
-  {
-    "id": 20039,
-    "isVaild": true,
-    "ItemName": "JB脸符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
-    "AutoUse": false,
-    "OneGameUseLimit": 0,
-    "BatchUseable": false,
-    "BindHeroName": "building_hero_faceless_void",
-    "UseScript": 2,
-    "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
-  },
-  {
-    "id": 20040,
-    "isVaild": true,
-    "ItemName": "先知符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
-    "AutoUse": false,
-    "OneGameUseLimit": 0,
-    "BatchUseable": false,
-    "BindHeroName": "building_hero_furion",
-    "UseScript": 2,
-    "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
-  },
-  {
-    "id": 20041,
-    "isVaild": true,
-    "ItemName": "天涯墨客符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
-    "AutoUse": false,
-    "OneGameUseLimit": 0,
-    "BatchUseable": false,
-    "BindHeroName": "building_hero_grimstroke",
-    "UseScript": 2,
-    "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
-  },
-  {
-    "id": 20042,
-    "isVaild": true,
-    "ItemName": "矮人直升机符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
-    "AutoUse": false,
-    "OneGameUseLimit": 0,
-    "BatchUseable": false,
-    "BindHeroName": "building_hero_gyrocopter",
-    "UseScript": 2,
-    "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
-  },
-  {
-    "id": 20043,
-    "isVaild": true,
-    "ItemName": "小松鼠符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
-    "AutoUse": false,
-    "OneGameUseLimit": 0,
-    "BatchUseable": false,
-    "BindHeroName": "building_hero_hoodwink",
-    "UseScript": 2,
-    "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
-  },
-  {
-    "id": 20044,
-    "isVaild": true,
-    "ItemName": "神灵武士符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
-    "AutoUse": false,
-    "OneGameUseLimit": 0,
-    "BatchUseable": false,
-    "BindHeroName": "building_hero_huskar",
-    "UseScript": 2,
-    "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
-  },
-  {
-    "id": 20045,
-    "isVaild": true,
-    "ItemName": "祈求着符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
-    "AutoUse": false,
-    "OneGameUseLimit": 0,
-    "BatchUseable": false,
-    "BindHeroName": "building_hero_invoker",
-    "UseScript": 2,
-    "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
-  },
-  {
-    "id": 20046,
-    "isVaild": true,
-    "ItemName": "双头龙符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
-    "AutoUse": false,
-    "OneGameUseLimit": 0,
-    "BatchUseable": false,
-    "BindHeroName": "building_hero_jakiro",
-    "UseScript": 2,
-    "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
-  },
-  {
-    "id": 20047,
-    "isVaild": true,
-    "ItemName": "主宰符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
-    "AutoUse": false,
-    "OneGameUseLimit": 0,
-    "BatchUseable": false,
-    "BindHeroName": "building_hero_juggernaut",
-    "UseScript": 2,
-    "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
-  },
-  {
-    "id": 20048,
-    "isVaild": true,
-    "ItemName": "光法符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
-    "AutoUse": false,
-    "OneGameUseLimit": 0,
-    "BatchUseable": false,
-    "BindHeroName": "building_hero_keeper_of_the_light",
-    "UseScript": 2,
-    "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
-  },
-  {
-    "id": 20049,
-    "isVaild": true,
-    "ItemName": "船长符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
-    "AutoUse": false,
-    "OneGameUseLimit": 0,
-    "BatchUseable": false,
-    "BindHeroName": "building_hero_kunkka",
-    "UseScript": 2,
-    "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
-  },
-  {
-    "id": 20050,
-    "isVaild": true,
-    "ItemName": "军团符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
-    "AutoUse": false,
-    "OneGameUseLimit": 0,
-    "BatchUseable": false,
-    "BindHeroName": "building_hero_legion_commander",
-    "UseScript": 2,
-    "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
-  },
-  {
-    "id": 20051,
-    "isVaild": true,
-    "ItemName": "拉希克符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
-    "AutoUse": false,
-    "OneGameUseLimit": 0,
-    "BatchUseable": false,
-    "BindHeroName": "building_hero_leshrac",
-    "UseScript": 2,
-    "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
-  },
-  {
-    "id": 20052,
-    "isVaild": true,
-    "ItemName": "巫妖符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
-    "AutoUse": false,
-    "OneGameUseLimit": 0,
-    "BatchUseable": false,
-    "BindHeroName": "building_hero_lich",
-    "UseScript": 2,
-    "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
-  },
-  {
-    "id": 20053,
-    "isVaild": true,
-    "ItemName": "小狗符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
-    "AutoUse": false,
-    "OneGameUseLimit": 0,
-    "BatchUseable": false,
-    "BindHeroName": "building_hero_life_stealer",
-    "UseScript": 2,
-    "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
-  },
-  {
-    "id": 20054,
-    "isVaild": true,
-    "ItemName": "莉娜符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
-    "AutoUse": false,
-    "OneGameUseLimit": 0,
-    "BatchUseable": false,
-    "BindHeroName": "building_hero_lina",
-    "UseScript": 2,
-    "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
-  },
-  {
-    "id": 20055,
-    "isVaild": true,
-    "ItemName": "莱恩符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
+    "ItemName": "变色龙蝶",
+    "ItemIcon": "",
+    "ItemQuality": 3,
+    "ItemType": 4,
+    "ItemDes": "",
+    "BagSlotType": 2,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 1,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_lion",
-    "UseScript": 2,
+    "BindHeroName": "courier_2",
+    "UseScript": 0,
     "UseArgs": [],
     "AwakeScript": [
       {
-        "ScriptName": 3,
-        "ScriptValue": []
+        "ScriptName": 4,
+        "ScriptValue": [
+          100
+        ]
       }
     ]
   },
   {
-    "id": 20056,
+    "id": 12003,
     "isVaild": true,
-    "ItemName": "德鲁伊符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
+    "ItemName": "金鲲咬人箱",
+    "ItemIcon": "",
+    "ItemQuality": 10,
+    "ItemType": 4,
+    "ItemDes": "",
+    "BagSlotType": 2,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 1,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_lone_druid",
-    "UseScript": 2,
+    "BindHeroName": "courier_3",
+    "UseScript": 0,
     "UseArgs": [],
     "AwakeScript": [
       {
-        "ScriptName": 3,
-        "ScriptValue": []
+        "ScriptName": 4,
+        "ScriptValue": [
+          100
+        ]
       }
     ]
   },
   {
-    "id": 20057,
+    "id": 12004,
     "isVaild": true,
-    "ItemName": "露娜符石",
-    "ItemIcon": "201001",
+    "ItemName": "骑驴法师",
+    "ItemIcon": "",
     "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
+    "ItemType": 4,
+    "ItemDes": "",
+    "BagSlotType": 2,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 1,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_luna",
-    "UseScript": 2,
+    "BindHeroName": "courier_4",
+    "UseScript": 0,
     "UseArgs": [],
     "AwakeScript": [
       {
-        "ScriptName": 3,
-        "ScriptValue": []
+        "ScriptName": 4,
+        "ScriptValue": [
+          100
+        ]
       }
     ]
   },
   {
-    "id": 20058,
+    "id": 12005,
     "isVaild": true,
-    "ItemName": "狼人符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
+    "ItemName": "纯金蝾小螈",
+    "ItemIcon": "",
+    "ItemQuality": 10,
+    "ItemType": 4,
+    "ItemDes": "",
+    "BagSlotType": 2,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 1,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_lycan",
-    "UseScript": 2,
+    "BindHeroName": "courier_5",
+    "UseScript": 0,
     "UseArgs": [],
     "AwakeScript": [
       {
-        "ScriptName": 3,
-        "ScriptValue": []
+        "ScriptName": 4,
+        "ScriptValue": [
+          100
+        ]
       }
     ]
   },
   {
-    "id": 20059,
+    "id": 12006,
     "isVaild": true,
-    "ItemName": "马格纳斯符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
+    "ItemName": "纯金飞小龙",
+    "ItemIcon": "",
+    "ItemQuality": 10,
+    "ItemType": 4,
+    "ItemDes": "",
+    "BagSlotType": 2,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 1,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_magnataur",
-    "UseScript": 2,
+    "BindHeroName": "courier_6",
+    "UseScript": 0,
     "UseArgs": [],
     "AwakeScript": [
       {
-        "ScriptName": 3,
-        "ScriptValue": []
+        "ScriptName": 4,
+        "ScriptValue": [
+          100
+        ]
       }
     ]
   },
   {
-    "id": 20060,
+    "id": 12007,
     "isVaild": true,
-    "ItemName": "玛西符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
+    "ItemName": "纯金独角小仙",
+    "ItemIcon": "",
+    "ItemQuality": 10,
+    "ItemType": 4,
+    "ItemDes": "",
+    "BagSlotType": 2,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 1,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_marci",
-    "UseScript": 2,
+    "BindHeroName": "courier_7",
+    "UseScript": 0,
     "UseArgs": [],
     "AwakeScript": [
       {
-        "ScriptName": 3,
-        "ScriptValue": []
+        "ScriptName": 4,
+        "ScriptValue": [
+          100
+        ]
       }
     ]
   },
   {
-    "id": 20061,
+    "id": 12008,
     "isVaild": true,
-    "ItemName": "马尔斯符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
+    "ItemName": "纯金黑曜石小鸟",
+    "ItemIcon": "",
+    "ItemQuality": 10,
+    "ItemType": 4,
+    "ItemDes": "",
+    "BagSlotType": 2,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 1,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_mars",
-    "UseScript": 2,
+    "BindHeroName": "courier_8",
+    "UseScript": 0,
     "UseArgs": [],
     "AwakeScript": [
       {
-        "ScriptName": 3,
-        "ScriptValue": []
+        "ScriptName": 4,
+        "ScriptValue": [
+          100
+        ]
       }
     ]
   },
   {
-    "id": 20062,
+    "id": 12009,
     "isVaild": true,
-    "ItemName": "美杜莎符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
+    "ItemName": "纯金末日小子",
+    "ItemIcon": "",
+    "ItemQuality": 10,
+    "ItemType": 4,
+    "ItemDes": "",
+    "BagSlotType": 2,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 1,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_medusa",
-    "UseScript": 2,
+    "BindHeroName": "courier_9",
+    "UseScript": 0,
     "UseArgs": [],
     "AwakeScript": [
       {
-        "ScriptName": 3,
-        "ScriptValue": []
+        "ScriptName": 4,
+        "ScriptValue": [
+          100
+        ]
       }
     ]
   },
   {
-    "id": 20063,
+    "id": 12010,
     "isVaild": true,
-    "ItemName": "米波符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
+    "ItemName": "纯金珍小宝",
+    "ItemIcon": "",
+    "ItemQuality": 10,
+    "ItemType": 4,
+    "ItemDes": "",
+    "BagSlotType": 2,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 1,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_meepo",
-    "UseScript": 2,
+    "BindHeroName": "courier_10",
+    "UseScript": 0,
     "UseArgs": [],
     "AwakeScript": [
       {
-        "ScriptName": 3,
-        "ScriptValue": []
+        "ScriptName": 4,
+        "ScriptValue": [
+          100
+        ]
       }
     ]
   },
   {
-    "id": 20064,
+    "id": 12011,
     "isVaild": true,
-    "ItemName": "米拉娜符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
+    "ItemName": "纯金血小魔",
+    "ItemIcon": "",
+    "ItemQuality": 10,
+    "ItemType": 4,
+    "ItemDes": "",
+    "BagSlotType": 2,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 1,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_mirana",
-    "UseScript": 2,
+    "BindHeroName": "courier_11",
+    "UseScript": 0,
     "UseArgs": [],
     "AwakeScript": [
       {
-        "ScriptName": 3,
-        "ScriptValue": []
+        "ScriptName": 4,
+        "ScriptValue": [
+          100
+        ]
       }
     ]
   },
   {
-    "id": 20065,
+    "id": 12012,
     "isVaild": true,
-    "ItemName": "大圣符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
+    "ItemName": "纯金剧小毒",
+    "ItemIcon": "",
+    "ItemQuality": 10,
+    "ItemType": 4,
+    "ItemDes": "",
+    "BagSlotType": 2,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 1,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_monkey_king",
-    "UseScript": 2,
+    "BindHeroName": "courier_12",
+    "UseScript": 0,
     "UseArgs": [],
     "AwakeScript": [
       {
-        "ScriptName": 3,
-        "ScriptValue": []
+        "ScriptName": 4,
+        "ScriptValue": [
+          100
+        ]
       }
     ]
   },
   {
-    "id": 20066,
+    "id": 12013,
     "isVaild": true,
-    "ItemName": "水人符石",
-    "ItemIcon": "201001",
+    "ItemName": "天照小神",
+    "ItemIcon": "",
     "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
+    "ItemType": 4,
+    "ItemDes": "",
+    "BagSlotType": 2,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 1,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_morphling",
-    "UseScript": 2,
+    "BindHeroName": "courier_13",
+    "UseScript": 0,
     "UseArgs": [],
     "AwakeScript": [
       {
-        "ScriptName": 3,
-        "ScriptValue": []
+        "ScriptName": 4,
+        "ScriptValue": [
+          100
+        ]
       }
     ]
   },
   {
-    "id": 20067,
+    "id": 12014,
     "isVaild": true,
-    "ItemName": "娜迦海妖符石",
-    "ItemIcon": "201001",
+    "ItemName": "腥红蝾小螈",
+    "ItemIcon": "",
     "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
+    "ItemType": 4,
+    "ItemDes": "",
+    "BagSlotType": 2,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 1,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_naga_siren",
-    "UseScript": 2,
+    "BindHeroName": "courier_14",
+    "UseScript": 0,
     "UseArgs": [],
     "AwakeScript": [
       {
-        "ScriptName": 3,
-        "ScriptValue": []
+        "ScriptName": 4,
+        "ScriptValue": [
+          100
+        ]
       }
     ]
   },
   {
-    "id": 20068,
+    "id": 12015,
     "isVaild": true,
-    "ItemName": "瘟疫法师符石",
-    "ItemIcon": "201001",
+    "ItemName": "火焰飞小龙",
+    "ItemIcon": "",
     "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
+    "ItemType": 4,
+    "ItemDes": "",
+    "BagSlotType": 2,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 1,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_necrolyte",
-    "UseScript": 2,
+    "BindHeroName": "courier_15",
+    "UseScript": 0,
     "UseArgs": [],
     "AwakeScript": [
       {
-        "ScriptName": 3,
-        "ScriptValue": []
+        "ScriptName": 4,
+        "ScriptValue": [
+          100
+        ]
       }
     ]
   },
   {
-    "id": 20069,
+    "id": 12016,
     "isVaild": true,
-    "ItemName": "影魔符石",
-    "ItemIcon": "201001",
+    "ItemName": "寒冰飞小龙",
+    "ItemIcon": "",
     "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
+    "ItemType": 4,
+    "ItemDes": "",
+    "BagSlotType": 2,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 1,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_nevermore",
-    "UseScript": 2,
+    "BindHeroName": "courier_16",
+    "UseScript": 0,
     "UseArgs": [],
     "AwakeScript": [
       {
-        "ScriptName": 3,
-        "ScriptValue": []
+        "ScriptName": 4,
+        "ScriptValue": [
+          100
+        ]
       }
     ]
   },
   {
-    "id": 20070,
+    "id": 12017,
     "isVaild": true,
-    "ItemName": "暗夜魔王符石",
-    "ItemIcon": "201001",
+    "ItemName": "蜚廉",
+    "ItemIcon": "",
     "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
+    "ItemType": 4,
+    "ItemDes": "",
+    "BagSlotType": 2,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 1,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_night_stalker",
-    "UseScript": 2,
+    "BindHeroName": "courier_17",
+    "UseScript": 0,
     "UseArgs": [],
     "AwakeScript": [
       {
-        "ScriptName": 3,
-        "ScriptValue": []
+        "ScriptName": 4,
+        "ScriptValue": [
+          100
+        ]
       }
     ]
   },
   {
-    "id": 20071,
+    "id": 12018,
     "isVaild": true,
-    "ItemName": "小强符石",
-    "ItemIcon": "201001",
+    "ItemName": "灵犀弗拉尔",
+    "ItemIcon": "",
     "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
+    "ItemType": 4,
+    "ItemDes": "",
+    "BagSlotType": 2,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 1,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_nyx_assassin",
-    "UseScript": 2,
+    "BindHeroName": "courier_18",
+    "UseScript": 0,
     "UseArgs": [],
     "AwakeScript": [
       {
-        "ScriptName": 3,
-        "ScriptValue": []
+        "ScriptName": 4,
+        "ScriptValue": [
+          100
+        ]
       }
     ]
   },
   {
-    "id": 20072,
+    "id": 12019,
     "isVaild": true,
-    "ItemName": "黑鸟符石",
-    "ItemIcon": "201001",
+    "ItemName": "圣盾蟹小蜗",
+    "ItemIcon": "",
     "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
+    "ItemType": 4,
+    "ItemDes": "",
+    "BagSlotType": 2,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 1,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_obsidian_destroyer",
-    "UseScript": 2,
+    "BindHeroName": "courier_19",
+    "UseScript": 0,
     "UseArgs": [],
     "AwakeScript": [
       {
-        "ScriptName": 3,
-        "ScriptValue": []
+        "ScriptName": 4,
+        "ScriptValue": [
+          100
+        ]
       }
     ]
   },
   {
-    "id": 20073,
+    "id": 12020,
     "isVaild": true,
-    "ItemName": "食人魔魔法师符石",
-    "ItemIcon": "201001",
+    "ItemName": "苦木独小苗",
+    "ItemIcon": "",
     "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
+    "ItemType": 4,
+    "ItemDes": "",
+    "BagSlotType": 2,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 1,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_ogre_magi",
-    "UseScript": 2,
+    "BindHeroName": "courier_20",
+    "UseScript": 0,
     "UseArgs": [],
     "AwakeScript": [
       {
-        "ScriptName": 3,
-        "ScriptValue": []
+        "ScriptName": 4,
+        "ScriptValue": [
+          100
+        ]
       }
     ]
   },
   {
-    "id": 20074,
+    "id": 12021,
     "isVaild": true,
-    "ItemName": "全能骑士符石",
-    "ItemIcon": "201001",
+    "ItemName": "战龟飞船",
+    "ItemIcon": "",
     "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
+    "ItemType": 4,
+    "ItemDes": "",
+    "BagSlotType": 2,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 1,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_omniknight",
-    "UseScript": 2,
+    "BindHeroName": "courier_21",
+    "UseScript": 0,
     "UseArgs": [],
     "AwakeScript": [
       {
-        "ScriptName": 3,
-        "ScriptValue": []
+        "ScriptName": 4,
+        "ScriptValue": [
+          100
+        ]
       }
     ]
   },
   {
-    "id": 20075,
+    "id": 12022,
     "isVaild": true,
-    "ItemName": "神谕者符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
+    "ItemName": "飞掠之翼",
+    "ItemIcon": "",
+    "ItemQuality": 3,
+    "ItemType": 4,
+    "ItemDes": "",
+    "BagSlotType": 2,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 1,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_oracle",
-    "UseScript": 2,
+    "BindHeroName": "courier_22",
+    "UseScript": 0,
     "UseArgs": [],
     "AwakeScript": [
       {
-        "ScriptName": 3,
-        "ScriptValue": []
+        "ScriptName": 4,
+        "ScriptValue": [
+          100
+        ]
       }
     ]
   },
   {
-    "id": 20076,
+    "id": 12023,
     "isVaild": true,
-    "ItemName": "石鳞剑士符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
+    "ItemName": "蔚蓝小龙",
+    "ItemIcon": "",
+    "ItemQuality": 3,
+    "ItemType": 4,
+    "ItemDes": "",
+    "BagSlotType": 2,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 1,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_pangolier",
-    "UseScript": 2,
+    "BindHeroName": "courier_23",
+    "UseScript": 0,
     "UseArgs": [],
     "AwakeScript": [
       {
-        "ScriptName": 3,
-        "ScriptValue": []
+        "ScriptName": 4,
+        "ScriptValue": [
+          100
+        ]
       }
     ]
   },
   {
-    "id": 20077,
+    "id": 12024,
     "isVaild": true,
-    "ItemName": "幻影刺客符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
+    "ItemName": "白小虎",
+    "ItemIcon": "",
+    "ItemQuality": 3,
+    "ItemType": 4,
+    "ItemDes": "",
+    "BagSlotType": 2,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 1,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_phantom_assassin",
-    "UseScript": 2,
+    "BindHeroName": "courier_24",
+    "UseScript": 0,
     "UseArgs": [],
     "AwakeScript": [
       {
-        "ScriptName": 3,
-        "ScriptValue": []
+        "ScriptName": 4,
+        "ScriptValue": [
+          100
+        ]
       }
     ]
   },
   {
-    "id": 20078,
+    "id": 12025,
     "isVaild": true,
-    "ItemName": "幻影长矛手符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
+    "ItemName": "八小戒",
+    "ItemIcon": "",
+    "ItemQuality": 3,
+    "ItemType": 4,
+    "ItemDes": "",
+    "BagSlotType": 2,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 1,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_phantom_lancer",
-    "UseScript": 2,
+    "BindHeroName": "courier_25",
+    "UseScript": 0,
     "UseArgs": [],
     "AwakeScript": [
       {
-        "ScriptName": 3,
-        "ScriptValue": []
+        "ScriptName": 4,
+        "ScriptValue": [
+          100
+        ]
       }
     ]
   },
   {
-    "id": 20079,
+    "id": 12026,
     "isVaild": true,
-    "ItemName": "凤凰符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
+    "ItemName": "海狸勇士",
+    "ItemIcon": "",
+    "ItemQuality": 3,
+    "ItemType": 4,
+    "ItemDes": "",
+    "BagSlotType": 2,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 1,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_phoenix",
-    "UseScript": 2,
+    "BindHeroName": "courier_26",
+    "UseScript": 0,
     "UseArgs": [],
     "AwakeScript": [
       {
-        "ScriptName": 3,
-        "ScriptValue": []
+        "ScriptName": 4,
+        "ScriptValue": [
+          100
+        ]
       }
     ]
   },
   {
-    "id": 20080,
+    "id": 12027,
     "isVaild": true,
-    "ItemName": "獸符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
+    "ItemName": "老绅士",
+    "ItemIcon": "",
+    "ItemQuality": 3,
+    "ItemType": 4,
+    "ItemDes": "",
+    "BagSlotType": 2,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 1,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_primal_beast",
-    "UseScript": 2,
+    "BindHeroName": "courier_27",
+    "UseScript": 0,
     "UseArgs": [],
     "AwakeScript": [
       {
-        "ScriptName": 3,
-        "ScriptValue": []
+        "ScriptName": 4,
+        "ScriptValue": [
+          100
+        ]
       }
     ]
   },
   {
-    "id": 20081,
+    "id": 12028,
     "isVaild": true,
-    "ItemName": "帕克符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
+    "ItemName": "伐士奇",
+    "ItemIcon": "",
+    "ItemQuality": 3,
+    "ItemType": 4,
+    "ItemDes": "",
+    "BagSlotType": 2,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 1,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_puck",
-    "UseScript": 2,
+    "BindHeroName": "courier_28",
+    "UseScript": 0,
     "UseArgs": [],
     "AwakeScript": [
       {
-        "ScriptName": 3,
-        "ScriptValue": []
+        "ScriptName": 4,
+        "ScriptValue": [
+          100
+        ]
       }
     ]
   },
   {
-    "id": 20082,
+    "id": 12029,
     "isVaild": true,
-    "ItemName": "屠夫符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
+    "ItemName": "勇士欢欢",
+    "ItemIcon": "",
+    "ItemQuality": 3,
+    "ItemType": 4,
+    "ItemDes": "",
+    "BagSlotType": 2,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 1,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_pudge",
-    "UseScript": 2,
+    "BindHeroName": "courier_29",
+    "UseScript": 0,
     "UseArgs": [],
     "AwakeScript": [
       {
-        "ScriptName": 3,
-        "ScriptValue": []
+        "ScriptName": 4,
+        "ScriptValue": [
+          100
+        ]
       }
     ]
   },
   {
-    "id": 20083,
+    "id": 12030,
     "isVaild": true,
-    "ItemName": "帕格纳符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
+    "ItemName": "纯金死亡先知",
+    "ItemIcon": "",
+    "ItemQuality": 10,
+    "ItemType": 4,
+    "ItemDes": "",
+    "BagSlotType": 2,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 1,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_pugna",
-    "UseScript": 2,
+    "BindHeroName": "courier_30",
+    "UseScript": 0,
     "UseArgs": [],
     "AwakeScript": [
       {
-        "ScriptName": 3,
-        "ScriptValue": []
+        "ScriptName": 4,
+        "ScriptValue": [
+          100
+        ]
       }
     ]
   },
   {
-    "id": 20084,
+    "id": 12031,
     "isVaild": true,
-    "ItemName": "痛苦女王符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
+    "ItemName": "纯金赏小金",
+    "ItemIcon": "",
+    "ItemQuality": 10,
+    "ItemType": 4,
+    "ItemDes": "",
+    "BagSlotType": 2,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 1,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_queenofpain",
-    "UseScript": 2,
+    "BindHeroName": "courier_31",
+    "UseScript": 0,
     "UseArgs": [],
     "AwakeScript": [
       {
-        "ScriptName": 3,
-        "ScriptValue": []
+        "ScriptName": 4,
+        "ScriptValue": [
+          100
+        ]
       }
     ]
   },
   {
-    "id": 20085,
+    "id": 12032,
     "isVaild": true,
-    "ItemName": "发条地精符石",
-    "ItemIcon": "201001",
+    "ItemName": "时尚赏小金",
+    "ItemIcon": "",
     "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
+    "ItemType": 4,
+    "ItemDes": "",
+    "BagSlotType": 2,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 1,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_rattletrap",
-    "UseScript": 2,
+    "BindHeroName": "courier_32",
+    "UseScript": 0,
     "UseArgs": [],
     "AwakeScript": [
       {
-        "ScriptName": 3,
-        "ScriptValue": []
+        "ScriptName": 4,
+        "ScriptValue": [
+          100
+        ]
       }
     ]
   },
   {
-    "id": 20086,
+    "id": 12033,
     "isVaild": true,
-    "ItemName": "电棍符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
+    "ItemName": "皇家小狮鹫",
+    "ItemIcon": "",
+    "ItemQuality": 3,
+    "ItemType": 4,
+    "ItemDes": "",
+    "BagSlotType": 2,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 1,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_razor",
-    "UseScript": 2,
+    "BindHeroName": "courier_33",
+    "UseScript": 0,
     "UseArgs": [],
     "AwakeScript": [
       {
-        "ScriptName": 3,
-        "ScriptValue": []
+        "ScriptName": 4,
+        "ScriptValue": [
+          100
+        ]
       }
     ]
   },
   {
-    "id": 20087,
+    "id": 12034,
     "isVaild": true,
-    "ItemName": "力丸符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
+    "ItemName": "纯金羊咩咩",
+    "ItemIcon": "",
+    "ItemQuality": 10,
+    "ItemType": 4,
+    "ItemDes": "",
+    "BagSlotType": 2,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 1,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_riki",
-    "UseScript": 2,
+    "BindHeroName": "courier_34",
+    "UseScript": 0,
     "UseArgs": [],
     "AwakeScript": [
       {
-        "ScriptName": 3,
-        "ScriptValue": []
+        "ScriptName": 4,
+        "ScriptValue": [
+          100
+        ]
       }
     ]
   },
   {
-    "id": 20088,
+    "id": 12035,
     "isVaild": true,
-    "ItemName": "拉比克符石",
-    "ItemIcon": "201001",
+    "ItemName": "玉角羊咩咩",
+    "ItemIcon": "",
     "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
+    "ItemType": 4,
+    "ItemDes": "",
+    "BagSlotType": 2,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 1,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_rubick",
-    "UseScript": 2,
+    "BindHeroName": "courier_35",
+    "UseScript": 0,
     "UseArgs": [],
     "AwakeScript": [
       {
-        "ScriptName": 3,
-        "ScriptValue": []
+        "ScriptName": 4,
+        "ScriptValue": [
+          100
+        ]
       }
     ]
   },
   {
-    "id": 20089,
+    "id": 12036,
     "isVaild": true,
-    "ItemName": "沙王符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
+    "ItemName": "赤角羊咩咩",
+    "ItemIcon": "",
+    "ItemQuality": 3,
+    "ItemType": 4,
+    "ItemDes": "",
+    "BagSlotType": 2,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 1,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_sand_king",
-    "UseScript": 2,
+    "BindHeroName": "courier_36",
+    "UseScript": 0,
     "UseArgs": [],
     "AwakeScript": [
       {
-        "ScriptName": 3,
-        "ScriptValue": []
+        "ScriptName": 4,
+        "ScriptValue": [
+          100
+        ]
       }
     ]
   },
   {
-    "id": 20090,
+    "id": 12037,
     "isVaild": true,
-    "ItemName": "暗影恶魔符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
+    "ItemName": "纯金虎小喵",
+    "ItemIcon": "",
+    "ItemQuality": 10,
+    "ItemType": 4,
+    "ItemDes": "",
+    "BagSlotType": 2,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 1,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_shadow_demon",
-    "UseScript": 2,
+    "BindHeroName": "courier_37",
+    "UseScript": 0,
     "UseArgs": [],
     "AwakeScript": [
       {
-        "ScriptName": 3,
-        "ScriptValue": []
+        "ScriptName": 4,
+        "ScriptValue": [
+          100
+        ]
       }
     ]
   },
   {
-    "id": 20091,
+    "id": 12038,
     "isVaild": true,
-    "ItemName": "小Y符石",
-    "ItemIcon": "201001",
+    "ItemName": "灵动虎小喵",
+    "ItemIcon": "",
     "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
+    "ItemType": 4,
+    "ItemDes": "",
+    "BagSlotType": 2,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 1,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_shadow_shaman",
-    "UseScript": 2,
+    "BindHeroName": "courier_38",
+    "UseScript": 0,
     "UseArgs": [],
     "AwakeScript": [
       {
-        "ScriptName": 3,
-        "ScriptValue": []
+        "ScriptName": 4,
+        "ScriptValue": [
+          100
+        ]
       }
     ]
   },
   {
-    "id": 20092,
+    "id": 12039,
     "isVaild": true,
-    "ItemName": "伐木机符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
+    "ItemName": "虎小喵",
+    "ItemIcon": "",
+    "ItemQuality": 3,
+    "ItemType": 4,
+    "ItemDes": "",
+    "BagSlotType": 2,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 1,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_shredder",
-    "UseScript": 2,
+    "BindHeroName": "courier_39",
+    "UseScript": 0,
     "UseArgs": [],
     "AwakeScript": [
       {
-        "ScriptName": 3,
-        "ScriptValue": []
+        "ScriptName": 4,
+        "ScriptValue": [
+          100
+        ]
       }
     ]
   },
   {
-    "id": 20093,
+    "id": 12040,
     "isVaild": true,
-    "ItemName": "沉默术士符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
+    "ItemName": "纯金贪小魔",
+    "ItemIcon": "",
+    "ItemQuality": 10,
+    "ItemType": 4,
+    "ItemDes": "",
+    "BagSlotType": 2,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 1,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_silencer",
-    "UseScript": 2,
+    "BindHeroName": "courier_40",
+    "UseScript": 0,
     "UseArgs": [],
     "AwakeScript": [
       {
-        "ScriptName": 3,
-        "ScriptValue": []
+        "ScriptName": 4,
+        "ScriptValue": [
+          100
+        ]
       }
     ]
   },
   {
-    "id": 20094,
+    "id": 12041,
     "isVaild": true,
-    "ItemName": "骷髅王符石",
-    "ItemIcon": "201001",
+    "ItemName": "老司机矿车鼠",
+    "ItemIcon": "",
     "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
+    "ItemType": 4,
+    "ItemDes": "",
+    "BagSlotType": 2,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 1,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_skeleton_king",
-    "UseScript": 2,
+    "BindHeroName": "courier_41",
+    "UseScript": 0,
     "UseArgs": [],
     "AwakeScript": [
       {
-        "ScriptName": 3,
-        "ScriptValue": []
+        "ScriptName": 4,
+        "ScriptValue": [
+          100
+        ]
       }
     ]
   },
   {
-    "id": 20095,
+    "id": 12042,
     "isVaild": true,
-    "ItemName": "天怒法师符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
+    "ItemName": "矿车鼠",
+    "ItemIcon": "",
+    "ItemQuality": 3,
+    "ItemType": 4,
+    "ItemDes": "",
+    "BagSlotType": 2,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 1,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_skywrath_mage",
-    "UseScript": 2,
+    "BindHeroName": "courier_42",
+    "UseScript": 0,
     "UseArgs": [],
     "AwakeScript": [
       {
-        "ScriptName": 3,
-        "ScriptValue": []
+        "ScriptName": 4,
+        "ScriptValue": [
+          100
+        ]
       }
     ]
   },
   {
-    "id": 20096,
+    "id": 12043,
     "isVaild": true,
-    "ItemName": "斯拉达符石",
-    "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
-    "BagSlotType": 1,
+    "ItemName": "纯金矿车鼠",
+    "ItemIcon": "",
+    "ItemQuality": 10,
+    "ItemType": 4,
+    "ItemDes": "",
+    "BagSlotType": 2,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 1,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_slardar",
-    "UseScript": 2,
+    "BindHeroName": "courier_43",
+    "UseScript": 0,
     "UseArgs": [],
     "AwakeScript": [
       {
-        "ScriptName": 3,
-        "ScriptValue": []
+        "ScriptName": 4,
+        "ScriptValue": [
+          100
+        ]
       }
     ]
   },
   {
-    "id": 20097,
+    "id": 13001,
     "isVaild": true,
-    "ItemName": "斯拉克符石",
+    "ItemName": "圣人",
     "ItemIcon": "201001",
     "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
+    "ItemType": 6,
+    "ItemDes": "这是铭文",
     "BagSlotType": 1,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 5,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_slark",
-    "UseScript": 2,
+    "BindHeroName": "",
+    "UseScript": 0,
     "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
+    "AwakeScript": []
   },
   {
-    "id": 20098,
+    "id": 13002,
     "isVaild": true,
-    "ItemName": "电炎绝手符石",
+    "ItemName": "传承",
     "ItemIcon": "201001",
     "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
+    "ItemType": 6,
+    "ItemDes": "这是铭文",
     "BagSlotType": 1,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 5,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_snapfire",
-    "UseScript": 2,
+    "BindHeroName": "",
+    "UseScript": 0,
     "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
+    "AwakeScript": []
   },
   {
-    "id": 20099,
+    "id": 13003,
     "isVaild": true,
-    "ItemName": "狙击手符石",
+    "ItemName": "异变",
     "ItemIcon": "201001",
     "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
+    "ItemType": 6,
+    "ItemDes": "这是铭文",
     "BagSlotType": 1,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 5,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_sniper",
-    "UseScript": 2,
+    "BindHeroName": "",
+    "UseScript": 0,
     "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
+    "AwakeScript": []
   },
   {
-    "id": 20100,
+    "id": 13004,
     "isVaild": true,
-    "ItemName": "幽鬼符石",
+    "ItemName": "纷争",
     "ItemIcon": "201001",
     "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
+    "ItemType": 6,
+    "ItemDes": "这是铭文",
     "BagSlotType": 1,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 5,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_spectre",
-    "UseScript": 2,
+    "BindHeroName": "",
+    "UseScript": 0,
     "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
+    "AwakeScript": []
   },
   {
-    "id": 20101,
+    "id": 13005,
     "isVaild": true,
-    "ItemName": "裂魂人符石",
+    "ItemName": "无双",
     "ItemIcon": "201001",
     "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
+    "ItemType": 6,
+    "ItemDes": "这是铭文",
     "BagSlotType": 1,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 5,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_spirit_breaker",
-    "UseScript": 2,
+    "BindHeroName": "",
+    "UseScript": 0,
     "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
+    "AwakeScript": []
   },
   {
-    "id": 20102,
+    "id": 13006,
     "isVaild": true,
-    "ItemName": "风暴之灵符石",
+    "ItemName": "宿命",
     "ItemIcon": "201001",
     "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
+    "ItemType": 6,
+    "ItemDes": "这是铭文",
     "BagSlotType": 1,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 5,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_storm_spirit",
-    "UseScript": 2,
+    "BindHeroName": "",
+    "UseScript": 0,
     "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
+    "AwakeScript": []
   },
   {
-    "id": 20103,
+    "id": 13007,
     "isVaild": true,
-    "ItemName": "斯文符石",
+    "ItemName": "梦魇",
     "ItemIcon": "201001",
     "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
+    "ItemType": 6,
+    "ItemDes": "这是铭文",
     "BagSlotType": 1,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 5,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_sven",
-    "UseScript": 2,
+    "BindHeroName": "",
+    "UseScript": 0,
     "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
+    "AwakeScript": []
   },
   {
-    "id": 20104,
+    "id": 13008,
     "isVaild": true,
-    "ItemName": "地精工程师符石",
+    "ItemName": "凶兆",
     "ItemIcon": "201001",
     "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
+    "ItemType": 6,
+    "ItemDes": "这是铭文",
     "BagSlotType": 1,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 5,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_techies",
-    "UseScript": 2,
+    "BindHeroName": "",
+    "UseScript": 0,
     "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
+    "AwakeScript": []
   },
   {
-    "id": 20105,
+    "id": 13009,
     "isVaild": true,
-    "ItemName": "圣堂刺客符石",
+    "ItemName": "祸源",
     "ItemIcon": "201001",
     "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
+    "ItemType": 6,
+    "ItemDes": "这是铭文",
     "BagSlotType": 1,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 5,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_templar_assassin",
-    "UseScript": 2,
+    "BindHeroName": "",
+    "UseScript": 0,
     "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
+    "AwakeScript": []
   },
   {
-    "id": 20106,
+    "id": 13010,
     "isVaild": true,
-    "ItemName": "灵魂守卫符石",
+    "ItemName": "红月",
     "ItemIcon": "201001",
     "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
+    "ItemType": 6,
+    "ItemDes": "这是铭文",
     "BagSlotType": 1,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 5,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_terrorblade",
-    "UseScript": 2,
+    "BindHeroName": "",
+    "UseScript": 0,
     "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
+    "AwakeScript": []
   },
   {
-    "id": 20107,
+    "id": 13011,
     "isVaild": true,
-    "ItemName": "潮汐猎人符石",
+    "ItemName": "长生",
     "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
+    "ItemQuality": 3,
+    "ItemType": 6,
+    "ItemDes": "这是铭文",
     "BagSlotType": 1,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 5,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_tidehunter",
-    "UseScript": 2,
+    "BindHeroName": "",
+    "UseScript": 0,
     "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
+    "AwakeScript": []
   },
   {
-    "id": 20108,
+    "id": 13012,
     "isVaild": true,
-    "ItemName": "修补匠符石",
+    "ItemName": "贪婪",
     "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
+    "ItemQuality": 3,
+    "ItemType": 6,
+    "ItemDes": "这是铭文",
     "BagSlotType": 1,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 5,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_tinker",
-    "UseScript": 2,
+    "BindHeroName": "",
+    "UseScript": 0,
     "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
+    "AwakeScript": []
   },
   {
-    "id": 20109,
+    "id": 13013,
     "isVaild": true,
-    "ItemName": "小小符石",
+    "ItemName": "夺萃",
     "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
+    "ItemQuality": 3,
+    "ItemType": 6,
+    "ItemDes": "这是铭文",
     "BagSlotType": 1,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 5,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_tiny",
-    "UseScript": 2,
+    "BindHeroName": "",
+    "UseScript": 0,
     "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
+    "AwakeScript": []
   },
   {
-    "id": 20110,
+    "id": 13014,
     "isVaild": true,
-    "ItemName": "大树符石",
+    "ItemName": "兽痕",
     "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
+    "ItemQuality": 3,
+    "ItemType": 6,
+    "ItemDes": "这是铭文",
     "BagSlotType": 1,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 5,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_treant",
-    "UseScript": 2,
+    "BindHeroName": "",
+    "UseScript": 0,
     "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
+    "AwakeScript": []
   },
   {
-    "id": 20111,
+    "id": 13015,
     "isVaild": true,
-    "ItemName": "巨魔战将符石",
+    "ItemName": "冥想",
     "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
+    "ItemQuality": 3,
+    "ItemType": 6,
+    "ItemDes": "这是铭文",
     "BagSlotType": 1,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 5,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_troll_warlord",
-    "UseScript": 2,
+    "BindHeroName": "",
+    "UseScript": 0,
     "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
+    "AwakeScript": []
   },
   {
-    "id": 20112,
+    "id": 13016,
     "isVaild": true,
-    "ItemName": "海民符石",
+    "ItemName": "繁荣",
     "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
+    "ItemQuality": 3,
+    "ItemType": 6,
+    "ItemDes": "这是铭文",
     "BagSlotType": 1,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 5,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_tusk",
-    "UseScript": 2,
+    "BindHeroName": "",
+    "UseScript": 0,
     "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
+    "AwakeScript": []
   },
   {
-    "id": 20113,
+    "id": 13017,
     "isVaild": true,
-    "ItemName": "不朽尸王符石",
+    "ItemName": "轮回",
     "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
+    "ItemQuality": 3,
+    "ItemType": 6,
+    "ItemDes": "这是铭文",
     "BagSlotType": 1,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 5,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_undying",
-    "UseScript": 2,
+    "BindHeroName": "",
+    "UseScript": 0,
     "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
+    "AwakeScript": []
   },
   {
-    "id": 20114,
+    "id": 13018,
     "isVaild": true,
-    "ItemName": "熊战士符石",
+    "ItemName": "调和",
     "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
+    "ItemQuality": 3,
+    "ItemType": 6,
+    "ItemDes": "这是铭文",
     "BagSlotType": 1,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 5,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_ursa",
-    "UseScript": 2,
+    "BindHeroName": "",
+    "UseScript": 0,
     "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
+    "AwakeScript": []
   },
   {
-    "id": 20115,
+    "id": 13019,
     "isVaild": true,
-    "ItemName": "复仇之魂符石",
+    "ItemName": "隐匿",
     "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
+    "ItemQuality": 3,
+    "ItemType": 6,
+    "ItemDes": "这是铭文",
     "BagSlotType": 1,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 5,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_vengefulspirit",
-    "UseScript": 2,
+    "BindHeroName": "",
+    "UseScript": 0,
     "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
+    "AwakeScript": []
   },
   {
-    "id": 20116,
+    "id": 13020,
     "isVaild": true,
-    "ItemName": "剧毒术士符石",
+    "ItemName": "狩猎",
     "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
+    "ItemQuality": 3,
+    "ItemType": 6,
+    "ItemDes": "这是铭文",
     "BagSlotType": 1,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 5,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_venomancer",
-    "UseScript": 2,
+    "BindHeroName": "",
+    "UseScript": 0,
     "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
+    "AwakeScript": []
   },
   {
-    "id": 20117,
+    "id": 13021,
     "isVaild": true,
-    "ItemName": "冥界亚龙符石",
+    "ItemName": "霸者",
     "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
+    "ItemQuality": 2,
+    "ItemType": 6,
+    "ItemDes": "这是铭文",
     "BagSlotType": 1,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 5,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_viper",
-    "UseScript": 2,
+    "BindHeroName": "",
+    "UseScript": 0,
     "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
+    "AwakeScript": []
   },
   {
-    "id": 20118,
+    "id": 13022,
     "isVaild": true,
-    "ItemName": "维萨吉符石",
+    "ItemName": "均衡",
     "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
+    "ItemQuality": 2,
+    "ItemType": 6,
+    "ItemDes": "这是铭文",
     "BagSlotType": 1,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 5,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_visage",
-    "UseScript": 2,
+    "BindHeroName": "",
+    "UseScript": 0,
     "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
+    "AwakeScript": []
   },
   {
-    "id": 20119,
+    "id": 13023,
     "isVaild": true,
-    "ItemName": "虚无之灵符石",
+    "ItemName": "虚空",
     "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
+    "ItemQuality": 2,
+    "ItemType": 6,
+    "ItemDes": "这是铭文",
     "BagSlotType": 1,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 5,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_void_spirit",
-    "UseScript": 2,
+    "BindHeroName": "",
+    "UseScript": 0,
     "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
+    "AwakeScript": []
   },
   {
-    "id": 20120,
+    "id": 13024,
     "isVaild": true,
-    "ItemName": "术士符石",
+    "ItemName": "灵山",
     "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
+    "ItemQuality": 2,
+    "ItemType": 6,
+    "ItemDes": "这是铭文",
     "BagSlotType": 1,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 5,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_warlock",
-    "UseScript": 2,
+    "BindHeroName": "",
+    "UseScript": 0,
     "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
+    "AwakeScript": []
   },
   {
-    "id": 20121,
+    "id": 13025,
     "isVaild": true,
-    "ItemName": "编织者符石",
+    "ItemName": "献祭",
     "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
+    "ItemQuality": 2,
+    "ItemType": 6,
+    "ItemDes": "这是铭文",
     "BagSlotType": 1,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 5,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_weaver",
-    "UseScript": 2,
+    "BindHeroName": "",
+    "UseScript": 0,
     "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
+    "AwakeScript": []
   },
   {
-    "id": 20122,
+    "id": 13026,
     "isVaild": true,
-    "ItemName": "风行者符石",
+    "ItemName": "鹰眼",
     "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
+    "ItemQuality": 2,
+    "ItemType": 6,
+    "ItemDes": "这是铭文",
     "BagSlotType": 1,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 5,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_windrunner",
-    "UseScript": 2,
+    "BindHeroName": "",
+    "UseScript": 0,
     "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
+    "AwakeScript": []
   },
   {
-    "id": 20123,
+    "id": 13027,
     "isVaild": true,
-    "ItemName": "冰霜巨龙符石",
+    "ItemName": "心眼",
     "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
+    "ItemQuality": 2,
+    "ItemType": 6,
+    "ItemDes": "这是铭文",
     "BagSlotType": 1,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 5,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_winter_wyvern",
-    "UseScript": 2,
+    "BindHeroName": "",
+    "UseScript": 0,
     "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
+    "AwakeScript": []
   },
   {
-    "id": 20124,
+    "id": 13028,
     "isVaild": true,
-    "ItemName": "艾欧符石",
+    "ItemName": "怜悯",
     "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
+    "ItemQuality": 2,
+    "ItemType": 6,
+    "ItemDes": "这是铭文",
     "BagSlotType": 1,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 5,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_wisp",
-    "UseScript": 2,
+    "BindHeroName": "",
+    "UseScript": 0,
     "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
+    "AwakeScript": []
   },
   {
-    "id": 20125,
+    "id": 13029,
     "isVaild": true,
-    "ItemName": "巫医符石",
+    "ItemName": "敬畏",
     "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
+    "ItemQuality": 2,
+    "ItemType": 6,
+    "ItemDes": "这是铭文",
     "BagSlotType": 1,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 5,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_witch_doctor",
-    "UseScript": 2,
+    "BindHeroName": "",
+    "UseScript": 0,
     "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
+    "AwakeScript": []
   },
   {
-    "id": 20126,
+    "id": 13030,
     "isVaild": true,
-    "ItemName": "宙斯符石",
+    "ItemName": "回声",
     "ItemIcon": "201001",
-    "ItemQuality": 4,
-    "ItemType": 1,
-    "ItemDes": "这是符石",
+    "ItemQuality": 2,
+    "ItemType": 6,
+    "ItemDes": "这是铭文",
     "BagSlotType": 1,
     "AutoUse": false,
     "OneGameUseLimit": 0,
+    "MaxOwnerCount": 5,
     "BatchUseable": false,
-    "BindHeroName": "building_hero_zuus",
-    "UseScript": 2,
+    "BindHeroName": "",
+    "UseScript": 0,
     "UseArgs": [],
-    "AwakeScript": [
-      {
-        "ScriptName": 3,
-        "ScriptValue": []
-      }
-    ]
+    "AwakeScript": []
   }
 ]

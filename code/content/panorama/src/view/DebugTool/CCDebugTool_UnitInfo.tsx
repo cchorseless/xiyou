@@ -46,31 +46,29 @@ export class CCDebugTool_UnitInfo extends CCPanel {
         const hp = this.GetState<string>("hp");
         const mp = this.GetState<string>("mp");
         const buff = this.GetState<number[]>("buff");
-        return (
-            this.__root___isValid &&
-            <Panel ref={this.__root__} id="CC_DebugTool_UnitInfo"   {...this.initRootAttrs()} hittest={false}>
-                <CCDebugTool_SelectContainer
-                    title={"单位信息面板"}
-                    width="480px"
-                    height="620px"
-                    hasRawMode={false}
-                    hasToggleSize={false}
-                    hasFilter={false}
-                    DomainPanel={this}
-                >
-                    <CCPanel flowChildren="down">
-                        <Label text={"单位名：" + unitname} />
-                        <Label text={"位置：" + position} />
-                        <Label text={"朝向：" + forward} />
-                        <Label text={"生命：" + hp} />
-                        <Label text={"魔法：" + mp} />
-                        <Label text={"Modifier："} />
-                        {buff?.map((_, index) => {
-                            return <Label key={index} text={"		" + Buffs.GetName(unitIndex, Entities.GetBuff(unitIndex, index))} />
-                        })}
-                    </CCPanel>
-                </CCDebugTool_SelectContainer>
-            </Panel>
+        return (<Panel ref={this.__root__} id="CC_DebugTool_UnitInfo"   {...this.initRootAttrs()} hittest={false}>
+            <CCDebugTool_SelectContainer
+                title={"单位信息面板"}
+                width="480px"
+                height="620px"
+                hasRawMode={false}
+                hasToggleSize={false}
+                hasFilter={false}
+                DomainPanel={this}
+            >
+                <CCPanel flowChildren="down">
+                    <Label text={"单位名：" + unitname} />
+                    <Label text={"位置：" + position} />
+                    <Label text={"朝向：" + forward} />
+                    <Label text={"生命：" + hp} />
+                    <Label text={"魔法：" + mp} />
+                    <Label text={"Modifier："} />
+                    {buff?.map((_, index) => {
+                        return <Label key={index} text={"		" + Buffs.GetName(unitIndex, Entities.GetBuff(unitIndex, index))} />
+                    })}
+                </CCPanel>
+            </CCDebugTool_SelectContainer>
+        </Panel>
         );
     }
 }

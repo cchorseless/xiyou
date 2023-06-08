@@ -1,4 +1,3 @@
-import React from "react";
 import { CSSHelper } from "../../../helper/CSSHelper";
 import { CCIcon } from "./CCIcon";
 

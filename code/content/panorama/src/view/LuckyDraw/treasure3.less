@@ -1,0 +1,204 @@
+#Treasure10015 {
+	.chain {
+		pre-transform-scale2d: 1;
+		opacity: 1;
+		transform: translate3d(0, 0, 0);
+
+		transition-property: pre-transform-scale2d, opacity, transform;
+		transition-duration: 1s, 0.2s, 0.05s;
+		transition-delay: 0s, 0.1s, 0s;
+		transition-timing-function: ease, ease, ease-out;
+	}
+
+	#chest_light {
+		width: 400px;
+		height: 430px;
+		align: center center;
+
+		pre-transform-scale2d: 1.2;
+		opacity: .6;
+		transition-property: opacity, pre-transform-scale2d;
+		transition-duration: .5s;
+		transition-timing-function: linear;
+	}
+
+	#chest_light2 {
+		width: 400px;
+		height: 430px;
+		align: center center;
+	}
+
+	#chest_top {
+		background-image: url("file://{images}/custom_game/treasure/3/chest_2.png");
+	}
+
+	#chest_bottom {
+		background-image: url("file://{images}/custom_game/treasure/3/chest_1.png");
+	}
+
+	#chain_1_front {
+		background-image: url("file://{images}/custom_game/treasure/3/front_1.png");
+	}
+
+	#chain_1_back {
+		background-image: url("file://{images}/custom_game/treasure/3/back_1.png");
+	}
+
+	#chain_2_front {
+		background-image: url("file://{images}/custom_game/treasure/3/front_2.png");
+	}
+
+	#chain_2_back {
+		background-image: url("file://{images}/custom_game/treasure/3/back_2.png");
+	}
+
+	#chain_3_front {
+		background-image: url("file://{images}/custom_game/treasure/3/front_3.png");
+	}
+
+	#chain_3_back {
+		background-image: url("file://{images}/custom_game/treasure/3/back_3.png");
+	}
+
+	&.TreasureHover {
+		width: 400px*1.05;
+		height: 430px*1.05;
+
+		.chest {
+			animation-duration: 5s;
+			animation-timing-function: linear;
+			animation-iteration-count: infinite;
+		}
+
+		#chest_top {
+			animation-name: ChestBreath;
+		}
+
+		#chest_bottom {
+			animation-name: ChestBreath2;
+		}
+
+		#chest_light {
+			animation-name: LightBreath;
+			animation-duration: 5s;
+			animation-timing-function: linear;
+			animation-iteration-count: infinite;
+		}
+
+		.chain {
+			animation-duration: 5s;
+			animation-timing-function: linear;
+			animation-iteration-count: infinite;
+		}
+
+		#chain_1_front,
+		#chain_1_back {
+			animation-name: ChainBreath4;
+		}
+
+		#chain_2_front,
+		#chain_2_back {
+			animation-name: ChainBreath;
+		}
+
+		#chain_3_front,
+		#chain_3_back {
+			animation-name: ChainBreath2;
+		}
+	}
+
+	.Opening & {
+		width: 400px*1.3;
+		height: 430px*1.3;
+
+		.chest {
+			animation-name: ChestShake;
+			animation-duration: 0.12s;
+			animation-timing-function: linear;
+			animation-iteration-count: infinite;
+		}
+
+		#chest_bottom {
+			animation-direction: reverse;
+		}
+
+		#chest_light {
+			opacity: .5;
+		}
+
+		.chain {
+			animation-duration: .12s;
+			animation-timing-function: linear;
+			animation-iteration-count: infinite;
+		}
+
+		#chain_1_front,
+		#chain_1_back {
+			animation-name: ChainShake;
+		}
+
+		#chain_2_front,
+		#chain_2_back {
+			animation-name: ChainShake2;
+		}
+
+		#chain_3_front,
+		#chain_3_back {
+			animation-name: ChainShake2;
+		}
+	}
+
+	.OpenSuccess & {
+		width: 400px*1.3;
+		height: 430px*1.3;
+
+		.chest {
+			animation-duration: 1.5s;
+			animation-timing-function: linear;
+		}
+
+		#chest_top {
+			animation-name: ChestWillOpen;
+		}
+
+		#chest_bottom {
+			animation-name: ChestWillOpen2;
+		}
+
+		#chest_light {
+			pre-transform-scale2d: 2.5;
+			opacity: 1.5;
+		}
+
+		.chain {
+			pre-transform-scale2d: 1.3;
+			opacity: 0;
+		}
+
+		// @transfrom_dis: 400px;
+
+		// #chain_1_front {
+		// 	transform: translate3d(0, @transfrom_dis, 0);
+		// }
+
+		// #chain_1_back {
+		// 	transform: translate3d(0, -@transfrom_dis, 0);
+		// }
+
+		// #chain_2_front {
+		// 	transform: translate3d(-@transfrom_dis, 0, 0);
+		// }
+
+		// #chain_2_back {
+		// 	transform: translate3d(@transfrom_dis, 0, 0);
+		// }
+
+		// #chain_3_front {
+		// 	transform: translate3d(-@transfrom_dis, @transfrom_dis, 0);
+		// }
+
+		// #chain_3_back {
+		// 	transform: translate3d(@transfrom_dis, -@transfrom_dis, 0);
+		// }
+	}
+}

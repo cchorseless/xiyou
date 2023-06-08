@@ -30,53 +30,51 @@ export class CCDebugTool_SectPicker extends CCPanel<IDebugTool_SectPicker> {
     };
 
     render() {
-        return (
-            this.__root___isValid &&
-            <Panel ref={this.__root__} id="CC_DebugTool_SectPicker"  {...this.initRootAttrs()} hittest={false}>
-                <CCDebugTool_SelectContainer
-                    title={this.props.title}
-                    toggleList={this.props.toggleList}
-                    onSearch={text => this.UpdateState({ filterWord: text })}
-                    onToggleType={text => this.UpdateState({ toggleType: text })}
-                    onChangeRawMode={rawMode => this.UpdateState({ rawMode: rawMode })}
-                    DomainPanel={this}
-                >
-                    <CCPanel className="CC_DebugTool_AbilityPicker" flowChildren="right-wrap" width="100%" scroll="y" >
-                        {this.props.abilityNames?.map((sectName, index) => {
-                            if (this.props.filterFunc) {
-                                if (!this.props.filterFunc(this.state.toggleType, sectName)) {
-                                    return;
-                                }
+        return (<Panel ref={this.__root__} id="CC_DebugTool_SectPicker"  {...this.initRootAttrs()} hittest={false}>
+            <CCDebugTool_SelectContainer
+                title={this.props.title}
+                toggleList={this.props.toggleList}
+                onSearch={text => this.UpdateState({ filterWord: text })}
+                onToggleType={text => this.UpdateState({ toggleType: text })}
+                onChangeRawMode={rawMode => this.UpdateState({ rawMode: rawMode })}
+                DomainPanel={this}
+            >
+                <CCPanel className="CC_DebugTool_AbilityPicker" flowChildren="right-wrap" width="100%" scroll="y" >
+                    {this.props.abilityNames?.map((sectName, index) => {
+                        if (this.props.filterFunc) {
+                            if (!this.props.filterFunc(this.state.toggleType, sectName)) {
+                                return;
                             }
-                            if (this.state.filterWord != "") {
-                                if (sectName.search(new RegExp(this.state.filterWord, "gim")) == -1 && $.Localize("#lang_" + sectName).search(new RegExp(this.state.filterWord, "gim")) == -1) {
-                                    return;
-                                }
+                        }
+                        if (this.state.filterWord != "") {
+                            if (sectName.search(new RegExp(this.state.filterWord, "gim")) == -1 && $.Localize("#lang_" + sectName).search(new RegExp(this.state.filterWord, "gim")) == -1) {
+                                return;
                             }
-                            return (
-                                <CCButton type="Empty" className="CC_DebugTool_AbilityPickerItem" key={index + ""} width="64px" flowChildren="down"
-                                    onactivate={self => {
-                                        NetHelper.SendToLua(GameProtocol.Protocol.req_DebugAddSect, {
-                                            sectname: sectName
-                                        })
-                                    }} >
-                                    <CCCombinationIcon sectName={sectName} horizontalAlign="center" dialogTooltip={
-                                        {
-                                            cls: CCCombinationInfoDialog,
-                                            props: {
-                                                showBg: true,
-                                                sectName: sectName,
-                                                playerid: GGameScene.Local.BelongPlayerid,
-                                                showSectName: true,
-                                            }
-                                        }} />
-                                    <Label className="CC_DebugTool_AbilityPickerItemName" text={this.state.rawMode ? sectName : $.Localize("#lang_" + sectName)} />
-                                </CCButton>
-                            );
-                        })}
-                    </CCPanel>
-                </CCDebugTool_SelectContainer>
-            </Panel>
+                        }
+                        return (
+                            <CCButton type="Empty" className="CC_DebugTool_AbilityPickerItem" key={index + ""} width="64px" flowChildren="down"
+                                onactivate={self => {
+                                    NetHelper.SendToLua(GameProtocol.Protocol.req_DebugAddSect, {
+                                        sectname: sectName
+                                    })
+                                }} >
+                                <CCCombinationIcon sectName={sectName} horizontalAlign="center" dialogTooltip={
+                                    {
+                                        cls: CCCombinationInfoDialog,
+                                        props: {
+                                            showBg: true,
+                                            sectName: sectName,
+                                            playerid: GGameScene.Local.BelongPlayerid,
+                                            showSectName: true,
+                                        }
+                                    }} />
+                                <Label className="CC_DebugTool_AbilityPickerItemName" text={this.state.rawMode ? sectName : $.Localize("#lang_" + sectName)} />
+                            </CCButton>
+                        );
+                    })}
+                </CCPanel>
+            </CCDebugTool_SelectContainer>
+        </Panel>
         );
     }
 }

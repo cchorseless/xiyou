@@ -28,7 +28,7 @@ export class CCPortraitGroup extends CCPanel<ICCPortraitGroup> {
                             <Panel id="PortraitBacker" hittest={false} />
                             <Panel id="PortraitBackerColor" hittest={false} />
                             <CCPanel id="PortraitContainer" width="100%" height="100%" hittest={false}>
-                                <CCPortrait hudType={"portraitHUD"} width="100%" height="100%" />
+                                <CCPortrait align="center center" />
                                 {/* <CCPortrait hudType={"portraitHUDOverlay"} /> */}
                                 <Image id="RightSideHeroBlur" src="panel://portraitHUD" hittest={false} />
                                 <Panel id="SilenceIcon" hittest={false} always-cache-composition-layer={true} />

@@ -6,6 +6,7 @@ import { TShopSellItem } from "../../../../scripts/tscripts/shared/service/shop/
 import { CSSHelper } from "../../helper/CSSHelper";
 import { KVHelper } from "../../helper/KVHelper";
 import { TipsHelper } from "../../helper/TipsHelper";
+import { CCButton } from "../AllUIElement/CCButton/CCButton";
 import { CCIcon_CoinType } from "../AllUIElement/CCIcons/CCIcon_CoinType";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCPopUpDialog } from "../AllUIElement/CCPopUpDialog/CCPopUpDialog";
@@ -79,24 +80,32 @@ export class CCShopSellDetailDialog extends CCPanel<ICCShopSellDetailDialog> {
             bEnable = sellitem.BuyCount < iLimitCount;
         }
         return (
-            <Panel className="CC_ShopSellDetailDialog" ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
-                <CCPopUpDialog id="PopUpBg" onClose={() => this.close()}>
+            <Panel className="CCShopSellDetailDialog" ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
+                <CCPopUpDialog id="PopUpBg" title="商品购买" onClose={() => this.close()}>
                     <CCPanel flowChildren="right" >
                         <CCShopItem itemname={sellinfo.ItemName} itemid={sellinfo.ItemConfigId} count={sellinfo.ItemCount} />
                         <CCPanel flowChildren="down" >
                             <Label id="ShopDetailDesc" text={itemconfig?.ItemDes} html={true} />
                             <Panel id="NumberEntry" hittest={false}>
-                                <Button id="NumberReduce" enabled={iNum > 0} onactivate={() => this.UpdateState({ iNum: iNum - 1 })} />
+                                <CCButton id="NumberReduce" enabled={iNum > 0} onactivate={() => {
+                                    if (iNum <= 1) { return }
+                                    this.UpdateState({ iNum: iNum - 1 })
+                                }
+                                } />
                                 <TextEntry text={String(iNum)} textmode="numeric" ontextentrychange={(t) => {
                                     let curcount = Number(t.text);
                                     if (curcount <= 0) { curcount = 1 }
                                     else if (curcount >= maxNum) { curcount = maxNum }
                                     this.UpdateState({ iNum: curcount })
                                 }} />
-                                <Button id="NumberAdd" enabled={iNum < maxNum} onactivate={() => this.UpdateState({ iNum: iNum + 1 })} />
+                                <CCButton id="NumberAdd" enabled={iNum < maxNum} onactivate={() => {
+                                    if (iNum >= maxNum) { return }
+                                    this.UpdateState({ iNum: iNum + 1 })
+                                }
+                                } />
                             </Panel>
                             {/* 购买按钮 */}
-                            <Button className={CSSHelper.ClassMaker("BuyButton ", buttonID)} onactivate={() => this.onBtnBuyClick()} enabled={bEnable}>
+                            <CCButton className={CSSHelper.ClassMaker("BuyButton ", buttonID)} onactivate={() => this.onBtnBuyClick()} enabled={bEnable}>
                                 {/* RMB */}
                                 {buttonID == "RMBBtn" && <Label localizedText={"#" + KVHelper.KVLang().Shop_Buy_With_Money.Des} dialogVariables={{ price: String(price * iNum) }} />}
                                 {/* Free */}
@@ -111,7 +120,7 @@ export class CCShopSellDetailDialog extends CCPanel<ICCShopSellDetailDialog> {
                                     <CCIcon_CoinType cointype={GEEnum.EMoneyType.StarStone} />
                                     <Label text={price * iNum} />
                                 </Panel>}
-                            </Button>
+                            </CCButton>
                         </CCPanel>
                     </CCPanel>
                     {this.props.children}

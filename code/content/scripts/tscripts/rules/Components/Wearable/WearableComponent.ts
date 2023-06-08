@@ -52,7 +52,7 @@ export class WearableComponent extends ET.Component {
     }
     SlotWears: { [slot: string]: string[] } = {}
     public GetWearConfig(sItemDef: string) {
-        return GJSONConfig.WearableConfig.get(sItemDef);
+        return KVHelper.KvServerConfig.WearableConfig[sItemDef];
     }
     public Wear(sItemDef: string | number, wearlabel: string, sStyle: string = "0") {
         sItemDef = sItemDef + "";
@@ -64,14 +64,24 @@ export class WearableComponent extends ET.Component {
         // if (!this.IsPersona(sSlotName) && sSlotName != "persona_selector") {
         //     return;
         // }
-        if (config.prefab == WearableConfig.EWearableType.bundle && config.bundle) {
+        if (config.prefab == WearableConfig.EWearableType.bundle && config.bundle && config.bundle.length > 0) {
+            if (this.WearBundleId == sItemDef) {
+                return;
+            }
+            for (let slot in this.SlotWears) {
+                this.TakeOffSlot(slot)
+            }
             (this.WearBundleId as any) = sItemDef;
-            for (let sSubItemDef of config.bundle) {
+            this.GetDomain<IBaseNpc_Plus>().SetWearableBundle(GToNumber(sItemDef))
+            const bundles = config.bundle.split("|");
+            for (let sSubItemDef of bundles) {
                 this.WearOneItem(sSubItemDef, sStyle, wearlabel);
             }
-            return;
+
         }
-        this.WearOneItem(sItemDef, sStyle, wearlabel);
+        else {
+            this.WearOneItem(sItemDef, sStyle, wearlabel);
+        }
     }
     public GetDressWearItem(sSlotName: string) {
         if (!this.SlotWears[sSlotName]) {
@@ -122,8 +132,8 @@ export class WearableComponent extends ET.Component {
         }
         let npc = this.GetDomain<IBaseNpc_Plus>();
         // npc.NotifyWearablesOfModelChange(true);
-        npc.NotifyWearablesOfModelChange(true);
-        npc.ManageModelChanges();
+        // npc.NotifyWearablesOfModelChange(true);
+        // npc.ManageModelChanges();
     }
     public FindWearItemByItemDef(sItemDef: string) {
         if (!sItemDef) {
@@ -161,8 +171,10 @@ export class WearableComponent extends ET.Component {
             let entity = this.GetChild<EWearableItem>(entityid);
             if (entity) {
                 entity.takeOff();
+                entity.Dispose();
             }
         }
+        this.SlotWears[sSlotName] = [];
     }
 
     //  复制英雄饰品

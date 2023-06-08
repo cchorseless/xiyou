@@ -1,8 +1,21 @@
+@import "./treasure1.less";
+@import "./treasure2.less";
+@import "./treasure3.less";
+@import "./treasure4.less";
+@import "./treasure5.less";
+@import "./treasure_animation.less";
+
 #CC_LuckyDrawPanel {
     #PanelBg {
+        margin-top: 60px;
+        vertical-align: top;
+
         #PanelHeader {
             width: 100%;
-            background-color: darkblue;
+            background-color: #0000004d;
+            border: 1px solid #62758B;
+            margin-right: 16px;
+            padding: 3px;
 
             #PanelIcon {
                 width: 50px;
@@ -16,6 +29,331 @@
                 font-size: 40;
             }
 
+            #StorageCountLimit {
+                font-size: 30;
+                vertical-align: center;
+            }
+        }
+
+        #PanelContent {
+            width: 1300px;
+            height: 800px;
+            background-color: #0000004d;
+            border: 1px solid #62758B;
+            margin-right: 16px;
+            padding: 8px;
+
+
+
+            #TreasureMain {
+                width: 100%;
+                height: 100%;
+                background-color: #000000EE;
+                // opacity: 1;
+                // transition-property: opacity;
+                // transition-duration: 0.3s;
+                // transition-timing-function: ease;
+
+
+                #TreasureTitle {
+                    margin-top: 50px;
+                    margin-left: 100px;
+                    background-color: gradient(linear, 0% 0%, 100% 0%, from(#000000), to(#00000066));
+
+                    Label {
+                        font-size: 24px;
+                        color: #E8BF67;
+                        text-shadow: 0px 0px 1px 2 #000000;
+                    }
+                }
+
+                #TreasureDesc {
+                    margin-top: 90px;
+                    margin-left: 100px;
+                    flow-children: down;
+
+                    #TreasureGuarantees {
+                        max-width: 380px;
+                        font-size: 20px;
+                        color: #f7b0a7;
+                        text-shadow: 0px 0px 1px 2 #4d3532;
+                    }
+
+                    #TreasureDescText {
+                        margin-top: 8px;
+                        max-width: 380px;
+                        font-size: 20px;
+                        color: #eed1aa;
+                        text-shadow: 0px 0px 1px 2 #000000;
+
+                        .NationalRuneCard {
+                            width: 16px;
+                            height: 16px;
+                            overflow: noclip;
+                            margin: 0px 16px;
+                            margin-top: -4px;
+                            background-image: url("file://{images}/custom_game/store_items/370001.png");
+                            background-repeat: no-repeat;
+                            background-size: 250px*0.2 350px*0.2;
+                            background-position: center;
+                        }
+                    }
+                }
+            }
+
+            #TreasureBottomContainer {
+                width: 100%;
+                height: 100%;
+
+
+                .Opening &,
+                .OpenSuccess &,
+                .ShowTreasureResult & {
+                    visibility: collapse;
+                }
+
+                #TreasureListBG {
+                    width: 815px;
+                    height: 75px;
+                    align: center bottom;
+                    margin-bottom: 119px;
+                    background-image: url("file://{images}/custom_game/treasure/treasure_list_bg.png");
+                    background-repeat: no-repeat;
+                    background-size: 100% 100%;
+                }
+
+                #TreasureList {
+                    min-width: 534px;
+                    min-height: 167px;
+                    flow-children: right;
+                    align: center bottom;
+                    margin-bottom: 75px;
+
+                    RadioButton {
+                        width: 115px;
+                        height: 115px;
+                        vertical-align: center;
+                        margin: 0px 16px;
+                        flow-children: none;
+
+                        background-image: url("file://{images}/custom_game/treasure/treasure_bg.png");
+                        background-repeat: no-repeat;
+                        background-size: 100% 100%;
+
+                        transition-property: width, height, background-image;
+                        transition-duration: 0.15s;
+                        transition-timing-function: ease-in-out;
+
+                        &:selected {
+                            width: 208px;
+                            height: 167px;
+
+                            background-image: url("file://{images}/custom_game/treasure/treasure_selected_bg.png");
+
+                            Image {
+                                ui-scale: 140%;
+                            }
+
+                            Label {
+                                x: 155px;
+                                y: 36px;
+                            }
+                        }
+
+                        &:hover {
+                            brightness: 1.5;
+                        }
+
+                        &:active {
+                            brightness: 0.95;
+                            pre-transform-scale2d: 0.95;
+                        }
+
+                        .RadioBox {
+                            visibility: collapse;
+                        }
+
+                        Image {
+                            width: 100%;
+                            height: 100%;
+                            background-repeat: no-repeat;
+                            background-position: center;
+                            ui-scale: 100%;
+                            transition-property: ui-scale;
+                            transition-duration: 0.15s;
+                            transition-timing-function: ease-in-out;
+                        }
+
+                        Label {
+                            width: 21px;
+                            height: 21px;
+                            x: 94px;
+                            y: 12px;
+                            margin-left: 0px;
+
+                            background-color: #BF0008;
+                            border-radius: 50%;
+                            text-overflow: shrink;
+                            text-align: center;
+                            color: white;
+
+                            transition-property: position;
+                            transition-duration: 0.15s;
+                            transition-timing-function: ease-in-out;
+                        }
+                    }
+
+                    #TreasureSelector0 {
+                        Image {
+                            background-image: url("file://{images}/custom_game/treasure/1/btn.png");
+                            background-size: 250px*0.5 350px*0.5;
+                        }
+                    }
+
+                    #TreasureSelector1 {
+                        Image {
+                            background-image: url("file://{images}/custom_game/treasure/2/btn.png");
+                            background-size: 250px*0.5 350px*0.5;
+                        }
+                    }
+
+                    #TreasureSelector2 {
+                        Image {
+                            background-image: url("file://{images}/custom_game/treasure/3/btn.png");
+                            background-size: 250px*0.5 350px*0.5;
+                        }
+                    }
+
+                    #TreasureSelector3 {
+                        Image {
+                            background-image: url("file://{images}/custom_game/treasure/4/btn.png");
+                            background-size: 250px*0.45 350px*0.45;
+                        }
+                    }
+
+                    #TreasureSelector4 {
+                        Image {
+                            background-image: url("file://{images}/custom_game/treasure/5/btn.png");
+                            background-size: 250px*0.45 350px*0.45;
+                        }
+                    }
+                }
+
+
+
+            }
+
+            #SkipTreasureAnimation {
+                align: right bottom;
+                margin-right: 380px;
+                margin-bottom: 285px;
+            }
+
+
+            #TreasureResult {
+                width: 100%;
+                height: 100%;
+                opacity: 0;
+                pre-transform-scale2d: 0;
+                transition-property: opacity, pre-transform-scale2d;
+                transition-duration: 0.15s;
+                transition-timing-function: ease-in-out;
+                background-color: #000000aa;
+                z-index: 10;
+
+                .ShowTreasureResult & {
+                    opacity: 1;
+                    pre-transform-scale2d: 1;
+                }
+
+                #TreasureResultList {
+                    max-width: 1600*0.82px;
+                    max-height: 900*0.82px;
+                    horizontal-align: center;
+                    margin-top: 125px;
+                    padding-right: 32px;
+
+                    flow-children: right-wrap;
+                    // .CommonVerticalList();
+
+                    .TreasureRuslt {
+                        margin: 15px 13px;
+                    }
+
+                    .TreasureStoreItem {
+                        ui-scale: 90%;
+                    }
+                }
+
+                #CourierScene {
+                    height: 100%;
+                    width: 100%;
+                    align: center center;
+                    background-color: #000000EE;
+
+                    #CourierSceneList {
+                        align: center center;
+                        flow-children: right;
+                        overflow: scroll clip;
+
+                        .SenseCourier {
+                            width: 648px;
+                            height: 648px;
+                            vertical-align: center;
+
+                            #SenseCourierName {
+                                horizontal-align: center;
+                                margin-top: 80px;
+                                font-size: 26px;
+                                text-shadow: 0px 0px 2px 4 #000000;
+                                color: #FFFFFF;
+                                z-index: 2;
+
+                                &.R {
+                                    text-shadow: 0px 0px 2px 3 #4e91c6;
+                                }
+
+                                &.SR {
+                                    text-shadow: 0px 0px 3px 3 #9170f2;
+                                }
+
+                                &.SSR {
+                                    text-shadow: 0px 0px 3px 3 #e1c989;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                #ClickBlankClose {
+                    align: center bottom;
+                    margin-bottom: 178px;
+                    font-size: 18px;
+                    color: #E6C293;
+                }
+            }
+
+            #WhiteScreen {
+                width: 100%;
+                height: 100%;
+                background-color: #AAA;
+                opacity: 0;
+                transition-property: opacity;
+                transition-duration: 0.4s;
+                transition-timing-function: ease-in-out;
+                transition-delay: 1.1s;
+
+                .OpenSuccess & {
+                    opacity: 1;
+                    transition-duration: .2s;
+                    transition-timing-function: ease-in-out;
+                    transition-delay: 0s;
+                }
+            }
+
+            .TreasureCourier {
+                // ui-scale: 28000/350%;
+            }
         }
     }
 }

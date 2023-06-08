@@ -24,3 +24,7 @@ declare namespace BuildingConfig {
     }
 }
 
+declare interface IFItemInfo {
+    ItemConfigId: number,
+    ItemCount: number
+}

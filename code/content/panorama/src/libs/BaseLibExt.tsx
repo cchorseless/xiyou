@@ -1344,6 +1344,7 @@ declare global {
         GetMaximumAttackSpeed(iUnitEntIndex: EntityIndex): number;
         GetBuffByName(iUnitEntIndex: EntityIndex, buffName: string): BuffID;
         GetUnitData(iUnitEntIndex: EntityIndex, sFuncName: string): any;
+        GetWearableBundle(iUnitEntIndex: EntityIndex): number;
         GetStar(iUnitEntIndex: EntityIndex): number;
         GetEntityIndex(iUnitEntIndex: EntityIndex): number;
         GetCustomMaxHealth(iUnitEntIndex: EntityIndex): number;
@@ -1520,6 +1521,11 @@ Entities.GetUnitData = (iUnitEntIndex: EntityIndex, sFuncName: string) => {
     }
     return 0;
 };
+
+Entities.GetWearableBundle = (iUnitEntIndex: EntityIndex): number => {
+    if (iUnitEntIndex == null || iUnitEntIndex == -1) { return -1 }
+    return (Number(Entities.GetUnitData(iUnitEntIndex, "GetWearableBundle")));
+}
 Entities.GetStar = (iUnitEntIndex: EntityIndex): number => {
     if (iUnitEntIndex == null || iUnitEntIndex == -1) { return -1 }
     return (Number(Entities.GetUnitData(iUnitEntIndex, "GetStar")));

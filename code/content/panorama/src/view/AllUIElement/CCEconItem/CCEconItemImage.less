@@ -1,15 +1,35 @@
 .CCEconItemImage {
-    width: 100px;
-    height: 64px;
     flow-children: down;
+    width: 100px;
+
+    #EconIconButtonBg {
+        &.Rarity_C {
+            border: 2px solid #07f31b;
+        }
+
+        &.Rarity_B {
+            border: 2px solid #0762f3;
+        }
+
+        &.Rarity_A {
+            border: 2px solid #cc07f3;
+        }
+
+        &.Rarity_S {
+            border: 2px solid #f3f307;
+        }
+    }
 
     #EconIconButton {
-        width: 100%;
-        height: 100%;
+        width: 100px;
+        height: 64px;
+
+
+
+        .EconItem {
+            width: 100%;
+            height: 100%;
+        }
     }
 
-    .EconItem {
-        width: 100%;
-        height: 100%;
-    }
 }

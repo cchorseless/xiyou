@@ -49,37 +49,35 @@ export class CCDebugTool extends CCPanel<ICCDebugTool> {
 
 
 	render() {
-		return (
-			this.__root___isValid &&
-			<Panel ref={this.__root__} id="CC_DebugTool"  {...this.initRootAttrs()} hittest={false}>
-				<Panel id="CC_DebugToolControlPanel"
-					className={CSSHelper.ClassMaker("ControlPanel", { Minimized: this.state.Minimized, DirectionLeft: this.state.direction == "left", DirectionRight: this.state.direction == "right", DirectionTop: this.state.direction == "top", })}>
-					<Panel className="ControlPanelContainer">
-						<Panel className="ControlPanelTitle">
-							<Panel className="CategoryHeaderFilledFront" />
-							<Label className="CategoryHeader" localizedText={"工具"} />
-							<Panel className="CategoryHeaderFilledNext" />
-							<CCIconButton className="CategoryHeaderIcon" tooltip={"切换布局"} verticalAlign="center" width="20px" icon={<CCIcon_Arrow type="Popout" />} >
-								<CCDropDownButton id="ToggleSize" onChange={(index, item) => { this.setState({ direction: item.id }) }}>
-									<Label text={"左侧"} id="left" />
-									<Label text={"上方"} id="top" />
-									<Label text={"右侧"} id="right" />
-								</CCDropDownButton>
-							</CCIconButton>
-							<CCIconButton className="CategoryHeaderIcon" tooltip={"重载数据"} verticalAlign="center" width="20px" icon={<CCIcon_Refresh />} onactivate={self => { this.props.onRefresh && this.props.onRefresh(self) }} />
-							<CCIconButton className="CategoryHeaderIcon" tooltip={"设置"} verticalAlign="center" width="20px" icon={<CCIcon_Gear />} onactivate={self => { this.props.onSetting && this.props.onSetting(self) }} />
-						</Panel>
-						{this.props.children}
+		return (<Panel ref={this.__root__} id="CC_DebugTool"  {...this.initRootAttrs()} hittest={false}>
+			<Panel id="CC_DebugToolControlPanel"
+				className={CSSHelper.ClassMaker("ControlPanel", { Minimized: this.state.Minimized, DirectionLeft: this.state.direction == "left", DirectionRight: this.state.direction == "right", DirectionTop: this.state.direction == "top", })}>
+				<Panel className="ControlPanelContainer">
+					<Panel className="ControlPanelTitle">
+						<Panel className="CategoryHeaderFilledFront" />
+						<Label className="CategoryHeader" localizedText={"工具"} />
+						<Panel className="CategoryHeaderFilledNext" />
+						<CCIconButton className="CategoryHeaderIcon" tooltip={"切换布局"} verticalAlign="center" width="20px" icon={<CCIcon_Arrow type="Popout" />} >
+							<CCDropDownButton id="ToggleSize" onChange={(index, item) => { this.setState({ direction: item.id }) }}>
+								<Label text={"左侧"} id="left" />
+								<Label text={"上方"} id="top" />
+								<Label text={"右侧"} id="right" />
+							</CCDropDownButton>
+						</CCIconButton>
+						<CCIconButton className="CategoryHeaderIcon" tooltip={"重载数据"} verticalAlign="center" width="20px" icon={<CCIcon_Refresh />} onactivate={self => { this.props.onRefresh && this.props.onRefresh(self) }} />
+						<CCIconButton className="CategoryHeaderIcon" tooltip={"设置"} verticalAlign="center" width="20px" icon={<CCIcon_Gear />} onactivate={self => { this.props.onSetting && this.props.onSetting(self) }} />
 					</Panel>
-					<CCPanel id="ExpandButtonContainer" horizontalAlign="left" verticalAlign="center" >
-						<Button id="ExpandButton" onactivate={self => {
-							this.UpdateState({ bManualShowPanel: this.state.Minimized, Minimized: !this.state.Minimized });
-						}} >
-							<CCIcon_Arrow type="Right" width="8px" height="14px" align="center center" rotate={this.state.Minimized ? (this.state.direction == "top" ? 90 : 0) : (this.state.direction == "top" ? 270 : 180)} />
-						</Button>
-					</CCPanel>
+					{this.props.children}
 				</Panel>
-			</Panel >
+				<CCPanel id="ExpandButtonContainer" horizontalAlign="left" verticalAlign="center" >
+					<Button id="ExpandButton" onactivate={self => {
+						this.UpdateState({ bManualShowPanel: this.state.Minimized, Minimized: !this.state.Minimized });
+					}} >
+						<CCIcon_Arrow type="Right" width="8px" height="14px" align="center center" rotate={this.state.Minimized ? (this.state.direction == "top" ? 90 : 0) : (this.state.direction == "top" ? 270 : 180)} />
+					</Button>
+				</CCPanel>
+			</Panel>
+		</Panel >
 		);
 	}
 }

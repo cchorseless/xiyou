@@ -9,12 +9,14 @@ import { CCIconButton } from "../AllUIElement/CCButton/CCIconButton";
 import { CCDOTAScenePanel } from "../AllUIElement/CCDOTAScenePanel/CCDOTAScenePanel";
 import { CCDOTAUIEconSetPreview } from "../AllUIElement/CCDOTAScenePanel/CCDOTAUIEconSetPreview";
 import { CCIcon_Add } from "../AllUIElement/CCIcons/CCIcon_Add";
+import { CCIcon_BattleScore } from "../AllUIElement/CCIcons/CCIcon_BattleScore";
 import { CCLabel } from "../AllUIElement/CCLabel/CCLabel";
 import { CCLevelxp } from "../AllUIElement/CCLevelxp/CCLevelxp";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCTxtTable } from "../AllUIElement/CCTable/CCTxtTable";
 import { CCUnitSmallIcon } from "../AllUIElement/CCUnit/CCUnitSmallIcon";
-import { CCDOTAHeroRelicSummary } from "../RelicSummary/CCDOTAHeroRelicSummary";
+import { CCMingWenLevel } from "../MingWen/CCMingWenLevel";
+import { CCMingWenPanel } from "../MingWen/CCMingWenPanel";
 import "./CCHandBookHero.less";
 interface ICCHandBookHero extends NodePropsData {
 
@@ -26,7 +28,7 @@ export class CCHandBookHero extends CCPanel<ICCHandBookHero> {
         const DataComp = (GGameScene.Local.TCharacter.DataComp!);
         const HeroManageComp = (GGameScene.Local.TCharacter.HeroManageComp!);
         const ComHeroExp = DataComp.NumericComp!.GetAsInt(GEEnum.EMoneyType.ComHeroExp)
-        const InscriptionExp = DataComp.NumericComp!.GetAsInt(GEEnum.EMoneyType.InscriptionExp)
+        const InscriptionExp = DataComp.NumericComp!.GetAsInt(GEEnum.EMoneyType.MingWenExp)
         const SumHeroLevel = HeroManageComp.SumHeroLevel;
         const currarity = this.GetState<string>("rarity") || "All";
         const cursect = this.GetState<string>("cursect") || "All";
@@ -120,9 +122,12 @@ export class CCHandBookHeroItem extends CCPanel<ICCHandBookHeroItem> {
         return (
             <Panel className="CCHandBookHeroItem" ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
                 <CCPanel flowChildren="right" onactivate={() => { this.props.onclick && this.props.onclick() }}>
-                    <CCLevelxp level={level} exp={exp} max={maxexp} width="30px" height="30px" />
+                    <CCPanel flowChildren="down">
+                        <CCLevelxp level={25} exp={exp} max={maxexp} width="40px" height="40px" uiScale={"60% 60% 60%"} />
+                        <CCMingWenLevel level={25} width="40px" height="40px" uiScale={"60% 60% 60%"} />
+                    </CCPanel>
                     <CCUnitSmallIcon itemname={unitname} />
-                    <CCLabel type="UnitName" width="80px" fontSize="18px" verticalAlign="center" text={localname} color={CSSHelper.GetRarityColor(rarity)} />
+                    <CCLabel type="Menu" width="80px" fontSize="18px" verticalAlign="center" text={localname} color={CSSHelper.GetRarityColor(rarity)} />
                 </CCPanel>
                 <CCPanel verticalAlign="center" flowChildren="right">
                     {
@@ -177,9 +182,14 @@ export class CCHandBookHeroInfo extends CCPanel<ICCHandBookHeroItem> {
                         // renderdeferred={false}
                         />
                 }
+                <CCPanel flowChildren="right" horizontalAlign="center">
+                    <CCLabel text="英雄战力:" type="Title" verticalAlign="center" />
+                    <CCIcon_BattleScore verticalAlign="center" width="30px" height="30px" marginLeft={"10px"} />
+                    <CCLabel text="1000" type="UnitName" verticalAlign="center" />
+                </CCPanel>
 
                 <CCPanel flowChildren="right" horizontalAlign="center">
-                    <CCLevelxp level={level} width="40px" height="40px" />
+                    <CCLevelxp level={level} width="30px" height="30px" />
                     <ProgressBar className="CardLevelBar" value={exp / maxexp} >
                         <Label className="CardLevelLabel" text={`${exp}/${maxexp}`} hittest={false} />
                     </ProgressBar>
@@ -199,8 +209,19 @@ export class CCHandBookHeroInfo extends CCPanel<ICCHandBookHeroItem> {
 
                 {/* </CCPanel> */}
                 <CCPanel flowChildren="down" width="100%" marginTop={"20px"}>
-                    <CCLabel text="铭文详情" horizontalAlign="center" />
-                    <CCDOTAHeroRelicSummary key={Math.random() * 100 + ""} unitName={unitname} />
+                    <CCLabel text="铭文详情" type="Title" horizontalAlign="center" />
+                    <CCPanel flowChildren="right" horizontalAlign="center">
+                        <CCPanel flowChildren="right">
+                            <CCLabel text={"槽位解锁："} />
+                            <CCLabel text={"100/100"} type="UnitName" />
+                        </CCPanel >
+
+                        <CCPanel flowChildren="right" marginLeft={"20px"}>
+                            <CCLabel text={"铭文总等级："} />
+                            <CCMingWenLevel level={25} width="30px" height="30px" />
+                        </CCPanel>
+                    </CCPanel>
+                    <CCMingWenPanel key={Math.random() * 100 + ""} horizontalAlign="center" />
                 </CCPanel>
             </Panel>
         )

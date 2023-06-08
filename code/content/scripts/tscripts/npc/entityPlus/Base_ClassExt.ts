@@ -1571,11 +1571,20 @@ declare global {
          */
         GetStar(): number;
         /**
+         * @Both
+         * 获取套装Id
+         */
+        GetWearableBundle(): number;
+        /**
          * @Server
          * @param iStar 设置星级
          */
         SetStar(iStar: number): void;
-
+        /**
+         * @Server
+         * @param bundleid 设置套装id
+         */
+        SetWearableBundle(bundleid: number): void;
         /**
          * @Server
          * 修改当前生命
@@ -2401,7 +2410,10 @@ BaseNPC.GetStar = function (): number {
     let info = NetTablesHelper.GetDotaEntityData(this.GetEntityIndex(), "baseinfo") || { star: -1 };
     return info.star;
 }
-
+BaseNPC.GetWearableBundle = function (): number {
+    let info = NetTablesHelper.GetDotaEntityData(this.GetEntityIndex(), "wearinfo") || { bundleId: -1 };
+    return info.bundleId;
+}
 BaseNPC.HasCiTiao = function (sTalentName: string): boolean {
     if (!IsValid(this)) return false;
     if (this.HasModifier(sTalentName)) {
@@ -2659,6 +2671,9 @@ if (IsServer()) {
     }
     BaseNPC.SetStar = function (istar: number) {
         NetTablesHelper.SetDotaEntityData(this.GetEntityIndex(), { "star": istar }, "baseinfo");
+    }
+    BaseNPC.SetWearableBundle = function (BundleId: number) {
+        NetTablesHelper.SetDotaEntityData(this.GetEntityIndex(), { "bundleId": BundleId }, "wearinfo");
     }
     BaseNPC.ModifyHealthPlus = function (fchange: number) {
         this.SetHealth(math.max(this.GetHealth() + fchange, 0));

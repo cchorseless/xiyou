@@ -47,6 +47,11 @@ export class CCHandBookPanel extends CCPanel<ICCHandBookPanel> {
         const MetaStone = DataComp.NumericComp!.GetAsInt(GEEnum.EMoneyType.MetaStone)
         const StarStone = DataComp.NumericComp!.GetAsInt(GEEnum.EMoneyType.StarStone)
         const selectindex = this.GetState<number>("selectindex") || 0;
+        const show_1 = this.GetState<boolean>("show_1") || false;
+        const show_2 = this.GetState<boolean>("show_2") || false;
+        const show_3 = this.GetState<boolean>("show_3") || false;
+        const show_4 = this.GetState<boolean>("show_4") || false;
+        const show_5 = this.GetState<boolean>("show_5") || false;
         return (
             <Panel id="CC_HandBookPanel" className="CC_root" ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
                 <CCPopUpDialog id="PanelBg" fullcontent={true} onClose={() => this.closeThis()} >
@@ -67,7 +72,7 @@ export class CCHandBookPanel extends CCPanel<ICCHandBookPanel> {
                             $.Localize("#lang_artifact"),
                             $.Localize("#lang_faq")
                         ]} defaultSelected={0} onChange={(index: number, text: string) => {
-                            this.UpdateState({ selectindex: index })
+                            this.UpdateState({ selectindex: index, ["show_" + index]: true })
                         }} />
                         {
                             <CCPanel id="PanelContentBg"  >
@@ -75,19 +80,19 @@ export class CCHandBookPanel extends CCPanel<ICCHandBookPanel> {
                                     <CCHandBookHero opacity={selectindex == 0 ? "1" : "0"} hittest={false} />
                                 }
                                 {
-                                    <CCHandBookWearable opacity={selectindex == 1 ? "1" : "0"} hittest={false} />
+                                    show_1 && <CCHandBookWearable opacity={selectindex == 1 ? "1" : "0"} hittest={false} />
                                 }
                                 {
-                                    <CCHandBookCourier opacity={selectindex == 2 ? "1" : "0"} hittest={false} />
+                                    show_2 && <CCHandBookCourier opacity={selectindex == 2 ? "1" : "0"} hittest={false} />
                                 }
                                 {
-                                    <CCHandBookEquip opacity={selectindex == 3 ? "1" : "0"} hittest={false} />
+                                    show_3 && <CCHandBookEquip opacity={selectindex == 3 ? "1" : "0"} hittest={false} />
                                 }
                                 {
-                                    <CCHandBookArtifact opacity={selectindex == 4 ? "1" : "0"} hittest={false} />
+                                    show_4 && <CCHandBookArtifact opacity={selectindex == 4 ? "1" : "0"} hittest={false} />
                                 }
                                 {
-                                    <CCHandBookFaq opacity={selectindex == 5 ? "1" : "0"} hittest={false} />
+                                    show_5 && <CCHandBookFaq opacity={selectindex == 5 ? "1" : "0"} hittest={false} />
                                 }
                             </CCPanel>
                         }

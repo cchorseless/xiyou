@@ -1,3 +1,4 @@
+import { KVHelper } from "../../helper/KVHelper";
 import { ET } from "../../shared/lib/Entity";
 import { WearableConfig } from "../../shared/WearableConfig";
 
@@ -50,10 +51,10 @@ export class WearableSystemComponent extends ET.SingletonComponent {
         }
     }
     LoadItem() {
-        let items_game = GJSONConfig.WearableConfig.getDataList();
+        let items_game = KVHelper.KvServerConfig.WearableConfig
         let name2itemdef_Map: { [K: string]: number } = {};
-        for (let item of items_game) {
-            let itemDef = item.id;
+        for (let itemDef in items_game) {
+            let item = items_game[itemDef];
             let heroname = item.usedByHeroes;
             if (heroname == null) {
                 continue;

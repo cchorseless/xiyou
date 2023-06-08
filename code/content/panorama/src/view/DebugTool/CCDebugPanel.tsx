@@ -13,6 +13,7 @@ import { CCDebugTool_SectPicker } from "./CCDebugTool_SectPicker";
 import { CCDebugTool_Setting } from "./CCDebugTool_Setting";
 import { CCDebugTool_TextPicker } from "./CCDebugTool_TextPicker";
 import { CCDebugTool_UnitInfo } from "./CCDebugTool_UnitInfo";
+import { CCDebugTool_WearableBundlePicker } from "./CCDebugTool_WearableBundlePicker";
 
 interface ICCDebugPanel {
     /** 面板的方向 */
@@ -97,7 +98,7 @@ export class CCDebugPanel extends CCPanel<ICCDebugPanel> {
                         <CCDebugTool_DemoButton eventName={GameProtocol.Protocol.req_DebugAddGold} localtext="添加金币" />
                         <CCDebugTool_DemoToggle eventName={GameProtocol.Protocol.req_DebugWTF} localtext="无限技能" selected={free_spells} />
                         <CCDebugTool_DemoTextEntry width="50%" eventName="LevelUpButtonPressed" localtext="升级" />
-                        <CCDebugTool_DemoSelectionButton eventName="ChangeHeroButtonPressed" localtext="更换英雄" />
+                        <CCDebugTool_DemoSelectionButton eventName="ChangeHeroButtonPressed" localtext="更换英雄皮肤" onactivate={() => { this.addOnlyDebugDialog(CCDebugTool_WearableBundlePicker, { title: "添加饰品套装" }) }} />
                     </CCDebugTool_Category>
                     <CCDebugTool_Category title="单位" >
                         <CCDebugTool_DemoSelectionButton eventName="SwitchHero" localtext="创建友方单位" onactivate={() => { this.addOnlyDebugDialog(CCDebugTool_HeroPicker, { title: "创建友方单位", unitNames: heroList }) }} />

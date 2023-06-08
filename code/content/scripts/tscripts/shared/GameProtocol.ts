@@ -45,6 +45,7 @@ export module GameProtocol {
         static readonly req_DebugClearAll = "/req_DebugClearAll";
         static readonly req_DebugAddItem = "/req_DebugAddItem";
         static readonly req_DebugAddAbility = "/req_DebugAddAbility";
+        static readonly req_DebugAddWearableBundle = "/req_DebugAddWearableBundle";
         static readonly req_DebugAddSect = "/req_DebugAddSect";
         static readonly req_DebugAddHero = "/req_DebugAddHero";
         static readonly req_DebugAddEnemy = "/req_DebugAddEnemy";

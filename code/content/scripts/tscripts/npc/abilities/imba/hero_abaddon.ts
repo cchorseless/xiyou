@@ -1284,6 +1284,7 @@ export class modifier_imba_borrowed_time_buff_hot_ally extends BaseModifier_Plus
     BeRemoved(): void {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
+            if (!IsValid(caster)) { return }
             let buff_list: IBaseNpc_Plus[] = caster.TempData()._borrowed_time_buffed_allies;
             if (buff_list) {
                 let index = buff_list.indexOf(this.GetParentPlus());

@@ -30,6 +30,10 @@ export class EWearableItem extends ET.Entity {
         (this.itemDef as any) = itemDef;
         (this.wearLabel as any) = wearLabel;
     }
+
+    isDefaultItem() {
+        return this.wearLabel == "default";
+    }
     getSlot() {
         let comp = this.GetParent<WearableComponent>();
         let config = comp.GetWearConfig(this.itemDef);
@@ -218,9 +222,9 @@ export class EWearableItem extends ET.Entity {
             attach_entity = this.model;
         }
         let pointinfo: any;
-        if (config.controlPoint.length > 0) {
+        if (config.controlPoint && config.controlPoint.length > 0) {
             let control_point: any[] = [];
-            config.controlPoint.forEach(key => {
+            config.controlPoint.split("|").forEach(key => {
                 if (key) {
                     control_point.push(json.decode(key)[0])
                 }
@@ -420,7 +424,7 @@ export class EWearableItem extends ET.Entity {
         if (config.styles && config.styles != "") {
             let styleinfo = json.decode(config.styles)[0];
             if (styleinfo == null) {
-                GLogHelper.print(config.styles)
+                // GLogHelper.print(config.styles)
             }
             if (styleinfo) {
                 //  不同款式设置模型皮肤
@@ -440,9 +444,9 @@ export class EWearableItem extends ET.Entity {
             }
 
         }
-        if (config.assetModifier.length > 0) {
+        if (config.assetModifier && config.assetModifier.length > 0) {
             let asset_modifiers: any[] = [];
-            config.assetModifier.forEach(key => {
+            config.assetModifier.split("|").forEach(key => {
                 if (key) {
                     asset_modifiers.push(json.decode(key)[0])
                 }
@@ -607,15 +611,18 @@ export class EWearableItem extends ET.Entity {
             for (let prop of this.additional_wearable) {
                 if (prop && IsValidEntity(prop)) {
                     prop.AddEffects(EntityEffects.EF_NODRAW);
+                    prop.Destroy();
                 }
             }
+            this.additional_wearable = null;
         }
         if (this.model) {
             let prop = this.model;
             if (prop && IsValidEntity(prop)) {
                 prop.AddEffects(EntityEffects.EF_NODRAW);
-                // prop.Destroy();
+                prop.Destroy();
             }
+            this.model = null;
         }
         if (this.bChangeSkin) {
             hUnit.SetSkin(this.oldSkin);
@@ -642,5 +649,7 @@ export class EWearableItem extends ET.Entity {
             this.addBuff = null;
         }
     }
+
+
 
 }

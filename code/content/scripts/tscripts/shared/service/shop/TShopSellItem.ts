@@ -26,6 +26,17 @@ export class TShopSellItem extends ET.Entity {
     //     this.SellConfig = GFromJson(s);
     //     this._ConfigJson = s;
     // }
+
+
+    static GetOneByItemConfigId(playerid: PlayerID, ItemConfigId: number | string) {
+        let all = TShopSellItem.GetGroupInstance(playerid);
+        for (let e of all) {
+            const SellConfig = e.SellConfig;
+            if (SellConfig && SellConfig.ItemConfigId + "" == ItemConfigId) {
+                return e
+            }
+        }
+    }
     onSerializeToEntity() {
         this.onReload();
     }

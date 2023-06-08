@@ -109,75 +109,73 @@ export class CCDebugTool_Setting extends CCPanel<ICCDebugTool_Setting> {
         const buttonTypeList = this.GetState<string[]>("buttonTypeList");
         const deleteMode = this.GetState<boolean>("deleteMode");
         const tSettings = this.GetState<{ [k: string]: string }>("tSettings");
-        return (
-            this.__root___isValid &&
-            <Panel ref={this.__root__}  {...this.initRootAttrs()} hittest={false}>
-                <CCDebugTool_SelectContainer
-                    eventName={"CC_DebugTool_Setting"}
-                    title={"调试工具设置"}
-                    width="500px"
-                    height="700px"
-                    hasRawMode={false}
-                    hasToggleSize={false}
-                    hasFilter={false}
-                    DomainPanel={this}
+        return (<Panel ref={this.__root__}  {...this.initRootAttrs()} hittest={false}>
+            <CCDebugTool_SelectContainer
+                eventName={"CC_DebugTool_Setting"}
+                title={"调试工具设置"}
+                width="500px"
+                height="700px"
+                hasRawMode={false}
+                hasToggleSize={false}
+                hasFilter={false}
+                DomainPanel={this}
 
-                >
-                    <CCPanel id="CC_DebugTool_Setting" className="CC_DebugTool_Setting" flowChildren="down" width="100%" height="100%">
-                        {/* 面板热键 */}
-                        <CCPanel flowChildren="down" width="100%" marginTop="12px" onload={self => this.OnLoad(self)}>
-                            <Label text="面板热键" className="SectionHeader" />
-                            <Panel className="SectionHeaderLine" />
-                            {/* 默认设置 */}
-                            {eventNameList.length > 0 && defaultSettingList.map((eventName, index) => {
-                                return <CCKeyBinder key={"defaultSettingList" + eventName + index} text={buttonTextList[eventNameList.indexOf(eventName)]} initKey={tSettings["hotkey_" + eventName]} callback={(key) => this.RegisterDemoButton(key, "hotkey_" + eventName, false)} />
-                            })}
-                            {/* 已保存的自定义热键设置 */}
-                            {buttonTextList.length > 0 && Object.keys(tSettings).map((eventName, index) => {
-                                if (eventName.indexOf("hotkey_") != -1 && defaultSettingList.indexOf(eventName.replace("hotkey_", "")) == -1) {
-                                    return (
-                                        <CCPanel width="100%" height="36px" key={"saved" + eventName + index} flowChildren="right" className={CSSHelper.ClassMaker("CanRemoveKeyBind", { deleteMode: deleteMode })}>
-                                            <CCIconButton verticalAlign="center" icon={<CCImage src="s2r://panorama/images/control_icons/x_close_png.vtex" />} onactivate={self => { }} />
-                                            <CCKeyBinder text={buttonTextList} initDropIndex={eventNameList.indexOf(eventName.replace("hotkey_", "")) + 1} initKey={tSettings[eventName]} callback={(key, bInit, dropIndex) => {
-                                                if (eventNameList[dropIndex]) {
+            >
+                <CCPanel id="CC_DebugTool_Setting" className="CC_DebugTool_Setting" flowChildren="down" width="100%" height="100%">
+                    {/* 面板热键 */}
+                    <CCPanel flowChildren="down" width="100%" marginTop="12px" onload={self => this.OnLoad(self)}>
+                        <Label text="面板热键" className="SectionHeader" />
+                        <Panel className="SectionHeaderLine" />
+                        {/* 默认设置 */}
+                        {eventNameList.length > 0 && defaultSettingList.map((eventName, index) => {
+                            return <CCKeyBinder key={"defaultSettingList" + eventName + index} text={buttonTextList[eventNameList.indexOf(eventName)]} initKey={tSettings["hotkey_" + eventName]} callback={(key) => this.RegisterDemoButton(key, "hotkey_" + eventName, false)} />
+                        })}
+                        {/* 已保存的自定义热键设置 */}
+                        {buttonTextList.length > 0 && Object.keys(tSettings).map((eventName, index) => {
+                            if (eventName.indexOf("hotkey_") != -1 && defaultSettingList.indexOf(eventName.replace("hotkey_", "")) == -1) {
+                                return (
+                                    <CCPanel width="100%" height="36px" key={"saved" + eventName + index} flowChildren="right" className={CSSHelper.ClassMaker("CanRemoveKeyBind", { deleteMode: deleteMode })}>
+                                        <CCIconButton verticalAlign="center" icon={<CCImage src="s2r://panorama/images/control_icons/x_close_png.vtex" />} onactivate={self => { }} />
+                                        <CCKeyBinder text={buttonTextList} initDropIndex={eventNameList.indexOf(eventName.replace("hotkey_", "")) + 1} initKey={tSettings[eventName]} callback={(key, bInit, dropIndex) => {
+                                            if (eventNameList[dropIndex]) {
+                                                this.RegisterDemoButton(key, "hotkey_" + eventNameList[dropIndex], bInit);
+                                            }
+                                        }} />
+                                    </CCPanel>
+                                );
+                            }
+                        })}
+                        {/* 添加热键 */}
+                        {[...Array(customKeyBindCount)].map((_, index) => {
+                            if (buttonTextList.length > 0) {
+                                return (
+                                    <CCPanel width="100%" height="36px" key={index + ""} flowChildren="right" className={CSSHelper.ClassMaker("CanRemoveKeyBind", { deleteMode: deleteMode })}>
+                                        <CCIconButton verticalAlign="center" icon={<CCImage src="s2r://panorama/images/control_icons/x_close_png.vtex" />} onactivate={self => this.UpdateState({ customKeyBindCount: customKeyBindCount - 1 })} />
+                                        <CCKeyBinder text={buttonTextList} callback={(key, bInit, dropIndex) => {
+                                            if (eventNameList[dropIndex]) {
+                                                if (key && key != "") {
                                                     this.RegisterDemoButton(key, "hotkey_" + eventNameList[dropIndex], bInit);
                                                 }
-                                            }} />
-                                        </CCPanel>
-                                    );
-                                }
-                            })}
-                            {/* 添加热键 */}
-                            {[...Array(customKeyBindCount)].map((_, index) => {
-                                if (buttonTextList.length > 0) {
-                                    return (
-                                        <CCPanel width="100%" height="36px" key={index + ""} flowChildren="right" className={CSSHelper.ClassMaker("CanRemoveKeyBind", { deleteMode: deleteMode })}>
-                                            <CCIconButton verticalAlign="center" icon={<CCImage src="s2r://panorama/images/control_icons/x_close_png.vtex" />} onactivate={self => this.UpdateState({ customKeyBindCount: customKeyBindCount - 1 })} />
-                                            <CCKeyBinder text={buttonTextList} callback={(key, bInit, dropIndex) => {
-                                                if (eventNameList[dropIndex]) {
-                                                    if (key && key != "") {
-                                                        this.RegisterDemoButton(key, "hotkey_" + eventNameList[dropIndex], bInit);
-                                                    }
-                                                }
-                                            }} />
-                                        </CCPanel>
-                                    );
-                                }
-                            })}
-                            <CCPanel width="100%">
-                                <CCButton margin="4px 8px" className="AddNewKeyBind" type="Text" text="+ 按键绑定" onactivate={self => this.addKeyBind(self)} />
-                                {!deleteMode &&
-                                    <CCButton margin="4px 8px" className="AddNewKeyBind" horizontalAlign="right" type="Text" text="- 删除绑定" onactivate={self => this.UpdateState({ deleteMode: true })} />
-                                }
-                                {deleteMode &&
-                                    <CCButton margin="4px 8px" className="AddNewKeyBind" horizontalAlign="right" type="Text" text="取消" onactivate={self => this.UpdateState({ deleteMode: false })} />
-                                }
-                            </CCPanel>
+                                            }
+                                        }} />
+                                    </CCPanel>
+                                );
+                            }
+                        })}
+                        <CCPanel width="100%">
+                            <CCButton margin="4px 8px" className="AddNewKeyBind" type="Text" text="+ 按键绑定" onactivate={self => this.addKeyBind(self)} />
+                            {!deleteMode &&
+                                <CCButton margin="4px 8px" className="AddNewKeyBind" horizontalAlign="right" type="Text" text="- 删除绑定" onactivate={self => this.UpdateState({ deleteMode: true })} />
+                            }
+                            {deleteMode &&
+                                <CCButton margin="4px 8px" className="AddNewKeyBind" horizontalAlign="right" type="Text" text="取消" onactivate={self => this.UpdateState({ deleteMode: false })} />
+                            }
                         </CCPanel>
-                        <CCButton verticalAlign="bottom" type="Outline" color="Blue" text="清空设置" onactivate={self => { this.UpdateState({ customKeyBindCount: 0 }); }} />
                     </CCPanel>
-                </CCDebugTool_SelectContainer>
-            </Panel>
+                    <CCButton verticalAlign="bottom" type="Outline" color="Blue" text="清空设置" onactivate={self => { this.UpdateState({ customKeyBindCount: 0 }); }} />
+                </CCPanel>
+            </CCDebugTool_SelectContainer>
+        </Panel>
         )
     }
 }

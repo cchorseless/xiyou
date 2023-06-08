@@ -64,7 +64,7 @@ export class CCShopPanel extends CCPanel<ICCShopPanel> {
                         <CCVerticalTable marginTop={"20px"} list={shopunits.map(e => { return $.Localize("#" + e.Config!.ShopName) })}
                             defaultSelected={0}
                             onChange={(index: number, text: string) => { this.UpdateState({ selectindex: index }) }} />
-                        <CCPanel >
+                        <CCPanel id="PanelContent">
                             {
                                 [...Array(shopunits.length)].map((_, _index) => {
                                     const shopunit = shopunits[_index];

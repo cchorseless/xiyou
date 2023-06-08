@@ -23,7 +23,7 @@ export class CCDOTALargeModelPreview extends CCPanel<ICCDOTALargeModelPreview>{
     render() {
         return (
             <Panel className="CCDOTALargeModelPreview" ref={this.__root__}   {...this.initRootAttrs()}>
-                <GenericPanel type="DOTALargeModelPreview" id="ModelPreview" hittest={false} {... this.props} />
+                <GenericPanel type="DOTALargeModelPreview" style={{ width: "100%", height: "100%" }} id="ModelPreview" hittest={false} {... this.props} />
                 {this.props.children}
                 {this.__root___childs}
             </Panel>

@@ -163,6 +163,15 @@ export class GameDebugger extends SingletonClass {
                 unit.addAbilityPlus(abilityname);
             }
         }));
+        EventHelper.addProtocolEvent(GameProtocol.Protocol.req_DebugAddWearableBundle, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
+            let { entityindex, bundlename } = e.data;
+            let unit = EntIndexToHScript(entityindex) as IBaseNpc_Plus;
+            if (unit && bundlename && unit.ETRoot && (unit.ETRoot as IBattleUnitEntityRoot).WearableComp()) {
+                (unit.ETRoot as IBattleUnitEntityRoot).WearableComp().Wear(bundlename as string, "createunit")
+            }
+        }));
+
+
         EventHelper.addProtocolEvent(GameProtocol.Protocol.req_DebugChangeServerPing, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
             let player = GGameScene.GetPlayer(e.PlayerID);
             if (!player) return;

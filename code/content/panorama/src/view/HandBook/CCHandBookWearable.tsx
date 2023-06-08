@@ -4,6 +4,7 @@ import { CSSHelper } from "../../helper/CSSHelper";
 import { KVHelper } from "../../helper/KVHelper";
 import { CCButton } from "../AllUIElement/CCButton/CCButton";
 import { CCDropDownButton } from "../AllUIElement/CCButton/CCDropDownButton";
+import { CCIconButton } from "../AllUIElement/CCButton/CCIconButton";
 import { CCDOTAScenePanel } from "../AllUIElement/CCDOTAScenePanel/CCDOTAScenePanel";
 import { CCDOTAUIEconSetPreview } from "../AllUIElement/CCDOTAScenePanel/CCDOTAUIEconSetPreview";
 import { CCEconItemImage } from "../AllUIElement/CCEconItem/CCEconItemImage";
@@ -98,8 +99,10 @@ export class CCHandBookWearableItem extends CCPanel<ICCHandBookWearableItem> {
         }
         return (
             <Panel className="CCHandBookWearableItem" ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
-                <CCPanel flowChildren="down" onactivate={() => { this.props.onclick && this.props.onclick() }}>
-                    <CCUnitBustIcon itemname={unitname} />
+                <CCPanel flowChildren="down">
+                    <CCIconButton width="142px" height="188px" onactivate={() => { this.props.onclick && this.props.onclick() }}>
+                        <CCUnitBustIcon itemname={unitname} />
+                    </CCIconButton>
                     <CCLabel type="UnitName" fontSize="18px" horizontalAlign="center" text={localname} color={CSSHelper.GetRarityColor(rarity)} />
                 </CCPanel>
                 <CCPanel verticalAlign="center" flowChildren="right">
@@ -140,22 +143,28 @@ export class CCHandBookWearableInfo extends CCPanel<ICCHandBookWearableInfo> {
         const herounit = HeroManageComp.GetHeroUnit(unitname);
         let level = 0;
         let exp = 0;
+        let curwearid = 0;
+        let dressID = 0;
         if (herounit) {
             level = herounit.Level;
             exp = herounit.Exp;
+            dressID = GToNumber(herounit.SkinConfigId);
+            curwearid = dressID;
         }
-
         let allwears = GJSONConfig.BuildingLevelUpConfig.get(unitname)?.Bundles;
-        let curwearid = 0;
         if (unitname == this.GetState<string>("curunitname", "")) {
             curwearid = this.GetState<number>("curwearid", 0);
+        }
+        const hasDressed = dressID != 0 && dressID == curwearid;
+        let Curblock = true;
+        if (herounit) {
+            Curblock = herounit.IsSkinlock(curwearid)
         }
         return (
             <Panel className="CCHandBookWearableInfo" ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
                 <CCPanel horizontalAlign="center">
                     {
-                        curwearid > 0 ? <CCDOTAUIEconSetPreview className="CCHandBookWearableSceneBox" key={Math.random() * 100 + ""} unit={unitname.replace("building", "npc_dota")} itemdef={curwearid} allowrotation={true}
-                            rotateonmousemove={true} />
+                        curwearid > 0 ? <CCDOTAUIEconSetPreview className="CCHandBookWearableSceneBox" key={Math.random() * 100 + ""} unit={unitname.replace("building", "npc_dota")} itemdef={curwearid} allowrotation={true} />
                             : <CCDOTAScenePanel className="CCHandBookWearableSceneBox"
                                 key={Math.random() * 100 + ""}
                                 unit={unitname.replace("building", "npc_dota")}
@@ -172,20 +181,28 @@ export class CCHandBookWearableInfo extends CCPanel<ICCHandBookWearableInfo> {
                 </CCPanel>
                 <CCPanel flowChildren="down" width="100%" marginTop={"20px"}>
                     <CCLabel text="皮肤详情" horizontalAlign="center" />
-                    <CCPanel flowChildren="right" scroll={"y"} >
+                    <CCPanel flowChildren="right" width="100%" scroll={"y"} height="100px">
                         {
                             allwears && allwears.map((wear, i) => {
-                                return <CCEconItemImage key={"" + i} itemdef={wear} onactivate={() => {
-                                    this.UpdateState({ curwearid: wear, curunitname: unitname });
-                                }} />
+                                let block = true;
+                                if (herounit) {
+                                    block = herounit.IsSkinlock(wear)
+                                }
+                                return <CCEconItemImage id="CC_EconItemImage" uiScale={curwearid == wear ? "100%" : "80%"} key={"" + Math.random()}
+                                    itemdef={wear} marginLeft={"10px"}
+                                    block={block}
+                                    showName={true}
+                                    onactivate={() => {
+                                        this.UpdateState({ curwearid: wear, curunitname: unitname });
+                                    }} />
                             })
                         }
                     </CCPanel>
-                    <CCPanel flowChildren="down" width="100%" marginTop={"20px"}>
+                    <CCPanel flowChildren="down" width="100%" >
                         <CCLabel text="穿戴效果" horizontalAlign="center" />
                         <CCLabel text="皮肤描述" horizontalAlign="center" />
                         <CCPanel flowChildren="right" horizontalAlign="center">
-                            <CCButton text="穿戴" horizontalAlign="center" />
+                            <CCButton text={hasDressed ? "已穿戴" : "穿戴"} enabled={!Curblock} horizontalAlign="center" />
                         </CCPanel>
                     </CCPanel>
                 </CCPanel>

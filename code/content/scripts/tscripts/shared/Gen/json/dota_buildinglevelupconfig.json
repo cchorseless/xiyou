@@ -3,45 +3,40 @@
     "Id": "building_hero_abaddon",
     "IsValid": true,
     "BattleScore": 200,
-    "Bundles": [],
+    "Bundles": [
+      20315,
+      20333,
+      20344,
+      20486
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "13264",
-          "13263"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "13262"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 4,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "13236"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 5,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "13235",
-          "13533"
-        ]
+        "AttachWearables": []
       }
     ],
     "TalentInfo": [
@@ -71,43 +66,40 @@
     "Id": "building_hero_abyssal_underlord",
     "IsValid": true,
     "BattleScore": 210,
-    "Bundles": [],
+    "Bundles": [
+      21084,
+      21231,
+      21515,
+      21983
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "14200"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "14199"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 4,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "14197"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 5,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "14198"
-        ]
+        "AttachWearables": []
       }
     ],
     "TalentInfo": [
@@ -137,46 +129,40 @@
     "Id": "building_hero_alchemist",
     "IsValid": true,
     "BattleScore": 220,
-    "Bundles": [],
+    "Bundles": [
+      21026,
+      21037,
+      21155,
+      21284
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "14194",
-          "14193"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "14192",
-          "14171"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 4,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "14170"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 5,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "14169",
-          "14168"
-        ]
+        "AttachWearables": []
       }
     ],
     "TalentInfo": [
@@ -206,43 +192,40 @@
     "Id": "building_hero_ancient_apparition",
     "IsValid": true,
     "BattleScore": 230,
-    "Bundles": [],
+    "Bundles": [
+      21166,
+      21237,
+      21261,
+      21508
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "14165"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "14164"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 4,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "14163"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 5,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "14162"
-        ]
+        "AttachWearables": []
       }
     ],
     "TalentInfo": [
@@ -272,47 +255,40 @@
     "Id": "building_hero_antimage",
     "IsValid": true,
     "BattleScore": 240,
-    "Bundles": [],
+    "Bundles": [
+      21186,
+      21238,
+      21278,
+      21570
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "9766",
-          "9763"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "9765",
-          "9768"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 4,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "9770",
-          "9769"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 5,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "9764",
-          "11656"
-        ]
+        "AttachWearables": []
       }
     ],
     "TalentInfo": [
@@ -342,44 +318,40 @@
     "Id": "building_hero_arc_warden",
     "IsValid": true,
     "BattleScore": 250,
-    "Bundles": [],
+    "Bundles": [
+      20814,
+      21170,
+      21393,
+      21446
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "7294",
-          "7295"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "7296"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 4,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "11569"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 5,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "9672"
-        ]
+        "AttachWearables": []
       }
     ],
     "TalentInfo": [
@@ -421,38 +393,28 @@
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "12305",
-          "12304"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "12303"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 4,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "12302"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 5,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "12301",
-          "12300"
-        ]
+        "AttachWearables": []
       }
     ],
     "TalentInfo": [
@@ -482,44 +444,40 @@
     "Id": "building_hero_bane",
     "IsValid": true,
     "BattleScore": 210,
-    "Bundles": [],
+    "Bundles": [
+      21019,
+      21039,
+      21286,
+      21384
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "11907",
-          "8549"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "8547"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 4,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "8548"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 5,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "8550"
-        ]
+        "AttachWearables": []
       }
     ],
     "TalentInfo": [
@@ -549,44 +507,40 @@
     "Id": "building_hero_batrider",
     "IsValid": true,
     "BattleScore": 220,
-    "Bundles": [],
+    "Bundles": [
+      20595,
+      20856,
+      20872,
+      20913
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "17925",
-          "17924"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "17923"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 4,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "17922"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 5,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "17921"
-        ]
+        "AttachWearables": []
       }
     ],
     "TalentInfo": [
@@ -616,46 +570,40 @@
     "Id": "building_hero_beastmaster",
     "IsValid": true,
     "BattleScore": 230,
-    "Bundles": [],
+    "Bundles": [
+      21036,
+      21168,
+      21358,
+      21396
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "6250",
-          "6254"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "6253",
-          "6255"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 4,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "6251"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 5,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "6252",
-          "6300"
-        ]
+        "AttachWearables": []
       }
     ],
     "TalentInfo": [
@@ -685,46 +633,40 @@
     "Id": "building_hero_bloodseeker",
     "IsValid": true,
     "BattleScore": 240,
-    "Bundles": [],
+    "Bundles": [
+      21052,
+      21192,
+      21287,
+      21352
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "22806",
-          "22807"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "22808",
-          "22809"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 4,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "22810"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 5,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "22811",
-          "22812"
-        ]
+        "AttachWearables": []
       }
     ],
     "TalentInfo": [
@@ -754,45 +696,40 @@
     "Id": "building_hero_bounty_hunter",
     "IsValid": true,
     "BattleScore": 250,
-    "Bundles": [],
+    "Bundles": [
+      20931,
+      21004,
+      21063,
+      21274
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "14286",
-          "14285"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "14284"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 4,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "14282"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 5,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "14272",
-          "14283"
-        ]
+        "AttachWearables": []
       }
     ],
     "TalentInfo": [
@@ -822,22 +759,19 @@
     "Id": "building_hero_brewmaster",
     "IsValid": true,
     "BattleScore": 200,
-    "Bundles": [],
+    "Bundles": [
+      21099,
+      21113,
+      21157,
+      21208
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "12210",
-          "9949",
-          "9948",
-          "9947",
-          "9946",
-          "9945",
-          "9944"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -888,21 +822,19 @@
     "Id": "building_hero_bristleback",
     "IsValid": true,
     "BattleScore": 210,
-    "Bundles": [],
+    "Bundles": [
+      21571,
+      21763,
+      21817,
+      21949
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "18505",
-          "18504",
-          "18503",
-          "18502",
-          "18501",
-          "18500"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -953,21 +885,19 @@
     "Id": "building_hero_broodmother",
     "IsValid": true,
     "BattleScore": 220,
-    "Bundles": [],
+    "Bundles": [
+      21398,
+      21439,
+      21720,
+      21951
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "19780",
-          "19779",
-          "19778",
-          "19777",
-          "19776",
-          "19775"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -1018,22 +948,19 @@
     "Id": "building_hero_centaur",
     "IsValid": true,
     "BattleScore": 230,
-    "Bundles": [],
+    "Bundles": [
+      21288,
+      21490,
+      21572,
+      21790
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "12610",
-          "12609",
-          "12608",
-          "12607",
-          "12606",
-          "9754",
-          "9753"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -1084,21 +1011,19 @@
     "Id": "building_hero_chaos_knight",
     "IsValid": true,
     "BattleScore": 240,
-    "Bundles": [],
+    "Bundles": [
+      20900,
+      21066,
+      21474,
+      21505
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "19531",
-          "19530",
-          "19529",
-          "19528",
-          "19527",
-          "19526"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -1149,20 +1074,19 @@
     "Id": "building_hero_chen",
     "IsValid": true,
     "BattleScore": 250,
-    "Bundles": [],
+    "Bundles": [
+      20965,
+      21117,
+      21209,
+      21372
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "19351",
-          "19350",
-          "19349",
-          "19348",
-          "19347"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -1213,20 +1137,19 @@
     "Id": "building_hero_clinkz",
     "IsValid": true,
     "BattleScore": 200,
-    "Bundles": [],
+    "Bundles": [
+      20694,
+      21005,
+      21016,
+      21040
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "22139",
-          "22138",
-          "22141",
-          "22140",
-          "22137"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -1277,20 +1200,19 @@
     "Id": "building_hero_crystal_maiden",
     "IsValid": true,
     "BattleScore": 210,
-    "Bundles": [],
+    "Bundles": [
+      20910,
+      20929,
+      20955,
+      21171
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "18114",
-          "18115",
-          "18116",
-          "18159",
-          "18160"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -1341,20 +1263,19 @@
     "Id": "building_hero_dark_seer",
     "IsValid": true,
     "BattleScore": 220,
-    "Bundles": [],
+    "Bundles": [
+      20584,
+      20859,
+      20980,
+      21053
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "14527",
-          "14526",
-          "14505",
-          "14504",
-          "14503"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -1405,20 +1326,19 @@
     "Id": "building_hero_dark_willow",
     "IsValid": true,
     "BattleScore": 230,
-    "Bundles": [],
+    "Bundles": [
+      21391,
+      21428,
+      21438,
+      21457
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "13700",
-          "13699",
-          "13698",
-          "13697",
-          "13696"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -1469,19 +1389,16 @@
     "Id": "building_hero_dawnbreaker",
     "IsValid": true,
     "BattleScore": 240,
-    "Bundles": [],
+    "Bundles": [
+      21921
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "19614",
-          "19613",
-          "19612",
-          "19611"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -1532,20 +1449,19 @@
     "Id": "building_hero_dazzle",
     "IsValid": true,
     "BattleScore": 250,
-    "Bundles": [],
+    "Bundles": [
+      20987,
+      21326,
+      21330,
+      21415
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "22201",
-          "22200",
-          "22198",
-          "22197",
-          "22199"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -1596,21 +1512,19 @@
     "Id": "building_hero_death_prophet",
     "IsValid": true,
     "BattleScore": 200,
-    "Bundles": [],
+    "Bundles": [
+      20861,
+      20977,
+      21042,
+      21109
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "22782",
-          "22783",
-          "22784",
-          "22785",
-          "22786",
-          "22787"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -1661,22 +1575,19 @@
     "Id": "building_hero_disruptor",
     "IsValid": true,
     "BattleScore": 210,
-    "Bundles": [],
+    "Bundles": [
+      20772,
+      20854,
+      21031,
+      21086
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "18712",
-          "18711",
-          "18614",
-          "18613",
-          "18612",
-          "18605",
-          "18604"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -1727,22 +1638,19 @@
     "Id": "building_hero_doom_bringer",
     "IsValid": true,
     "BattleScore": 220,
-    "Bundles": [],
+    "Bundles": [
+      20956,
+      21033,
+      21216,
+      21228
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "17990",
-          "17989",
-          "17988",
-          "17987",
-          "17986",
-          "17984",
-          "17985"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -1793,22 +1701,19 @@
     "Id": "building_hero_dragon_knight",
     "IsValid": true,
     "BattleScore": 230,
-    "Bundles": [],
+    "Bundles": [
+      20863,
+      20902,
+      20986,
+      21092
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "22856",
-          "22857",
-          "22858",
-          "22859",
-          "22860",
-          "22861",
-          "22855"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -1859,22 +1764,19 @@
     "Id": "building_hero_drow_ranger",
     "IsValid": true,
     "BattleScore": 240,
-    "Bundles": [],
+    "Bundles": [
+      21375,
+      21461,
+      21610,
+      21702
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "22359",
-          "22358",
-          "22355",
-          "22354",
-          "22353",
-          "22352",
-          "22351"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -1925,22 +1827,19 @@
     "Id": "building_hero_earth_spirit",
     "IsValid": true,
     "BattleScore": 250,
-    "Bundles": [],
+    "Bundles": [
+      20368,
+      20495,
+      21399,
+      21608
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "6004",
-          "6005",
-          "6002",
-          "6006",
-          "6008",
-          "10418",
-          "6003"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -1991,20 +1890,19 @@
     "Id": "building_hero_earthshaker",
     "IsValid": true,
     "BattleScore": 200,
-    "Bundles": [],
+    "Bundles": [
+      20484,
+      20616,
+      20786,
+      20942
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "9730",
-          "9735",
-          "9737",
-          "9738",
-          "12182"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -2055,21 +1953,19 @@
     "Id": "building_hero_elder_titan",
     "IsValid": true,
     "BattleScore": 210,
-    "Bundles": [],
+    "Bundles": [
+      20482,
+      20573,
+      20857,
+      20937
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "6382",
-          "6384",
-          "6385",
-          "6386",
-          "6381",
-          "10533"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -2120,22 +2016,19 @@
     "Id": "building_hero_ember_spirit",
     "IsValid": true,
     "BattleScore": 220,
-    "Bundles": [],
+    "Bundles": [
+      20926,
+      21007,
+      21054,
+      21227
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "6013",
-          "6014",
-          "6015",
-          "6016",
-          "6017",
-          "6018",
-          "10410"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -2186,20 +2079,19 @@
     "Id": "building_hero_enchantress",
     "IsValid": true,
     "BattleScore": 230,
-    "Bundles": [],
+    "Bundles": [
+      21510,
+      21591,
+      21697,
+      21757
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "12690",
-          "12689",
-          "12688",
-          "12687",
-          "12686"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -2250,20 +2142,19 @@
     "Id": "building_hero_enigma",
     "IsValid": true,
     "BattleScore": 240,
-    "Bundles": [],
+    "Bundles": [
+      21235,
+      21331,
+      21379,
+      21584
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "9288",
-          "9289",
-          "9290",
-          "9352",
-          "12019"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -2314,20 +2205,19 @@
     "Id": "building_hero_faceless_void",
     "IsValid": true,
     "BattleScore": 250,
-    "Bundles": [],
+    "Bundles": [
+      20805,
+      21094,
+      21276,
+      21567
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "14489",
-          "14488",
-          "14487",
-          "14486",
-          "14485"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -2378,22 +2268,19 @@
     "Id": "building_hero_furion",
     "IsValid": true,
     "BattleScore": 200,
-    "Bundles": [],
+    "Bundles": [
+      21069,
+      21128,
+      21246,
+      21498
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "5803",
-          "5797",
-          "5798",
-          "5799",
-          "5800",
-          "5802",
-          "5806"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -2444,20 +2331,19 @@
     "Id": "building_hero_grimstroke",
     "IsValid": true,
     "BattleScore": 210,
-    "Bundles": [],
+    "Bundles": [
+      21339,
+      21432,
+      21455,
+      21459
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "13064",
-          "13063",
-          "13062",
-          "13061",
-          "13060"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -2508,21 +2394,19 @@
     "Id": "building_hero_gyrocopter",
     "IsValid": true,
     "BattleScore": 220,
-    "Bundles": [],
+    "Bundles": [
+      21093,
+      21125,
+      21161,
+      21193
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "6898",
-          "6903",
-          "7121",
-          "6899",
-          "10499",
-          "6897"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -2573,19 +2457,18 @@
     "Id": "building_hero_hoodwink",
     "IsValid": true,
     "BattleScore": 230,
-    "Bundles": [],
+    "Bundles": [
+      22224,
+      23256,
+      24051
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "23249",
-          "23248",
-          "23247",
-          "23246"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -2636,21 +2519,19 @@
     "Id": "building_hero_huskar",
     "IsValid": true,
     "BattleScore": 240,
-    "Bundles": [],
+    "Bundles": [
+      21386,
+      21565,
+      21823,
+      21829
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "9291",
-          "9292",
-          "9293",
-          "9294",
-          "9295",
-          "12020"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -2701,20 +2582,19 @@
     "Id": "building_hero_invoker",
     "IsValid": true,
     "BattleScore": 250,
-    "Bundles": [],
+    "Bundles": [
+      20947,
+      21043,
+      21088,
+      21130
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "5785",
-          "5867",
-          "5865",
-          "5869",
-          "5866"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -2765,19 +2645,18 @@
     "Id": "building_hero_jakiro",
     "IsValid": true,
     "BattleScore": 200,
-    "Bundles": [],
+    "Bundles": [
+      21153,
+      21332,
+      21500
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "14126",
-          "14125",
-          "14124",
-          "14123"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -2828,20 +2707,19 @@
     "Id": "building_hero_juggernaut",
     "IsValid": true,
     "BattleScore": 210,
-    "Bundles": [],
+    "Bundles": [
+      21295,
+      21367,
+      21397,
+      21653
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "6056",
-          "6058",
-          "6057",
-          "6055",
-          "6059"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -2892,19 +2770,19 @@
     "Id": "building_hero_keeper_of_the_light",
     "IsValid": true,
     "BattleScore": 220,
-    "Bundles": [],
+    "Bundles": [
+      20743,
+      21091,
+      21097,
+      21159
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "4868",
-          "4866",
-          "4865",
-          "9119"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -2955,23 +2833,19 @@
     "Id": "building_hero_kunkka",
     "IsValid": true,
     "BattleScore": 230,
-    "Bundles": [],
+    "Bundles": [
+      20311,
+      20451,
+      20523,
+      20563
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "5385",
-          "5669",
-          "5671",
-          "5670",
-          "5661",
-          "4500",
-          "5374",
-          "5373"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -3022,21 +2896,19 @@
     "Id": "building_hero_legion_commander",
     "IsValid": true,
     "BattleScore": 240,
-    "Bundles": [],
+    "Bundles": [
+      21401,
+      21475,
+      21683,
+      21792
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "5885",
-          "5886",
-          "5890",
-          "5887",
-          "5889",
-          "10391"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -3087,21 +2959,19 @@
     "Id": "building_hero_leshrac",
     "IsValid": true,
     "BattleScore": 250,
-    "Bundles": [],
+    "Bundles": [
+      20778,
+      20892,
+      20988,
+      21313
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "7734",
-          "7731",
-          "7732",
-          "7730",
-          "7733",
-          "11661"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -3152,20 +3022,19 @@
     "Id": "building_hero_lich",
     "IsValid": true,
     "BattleScore": 200,
-    "Bundles": [],
+    "Bundles": [
+      20932,
+      21008,
+      21044,
+      21273
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "6218",
-          "6216",
-          "6217",
-          "6214",
-          "10451"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -3216,20 +3085,19 @@
     "Id": "building_hero_life_stealer",
     "IsValid": true,
     "BattleScore": 210,
-    "Bundles": [],
+    "Bundles": [
+      20455,
+      20499,
+      20696,
+      20706
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "11979",
-          "9108",
-          "9107",
-          "9106",
-          "9105"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -3280,20 +3148,19 @@
     "Id": "building_hero_lina",
     "IsValid": true,
     "BattleScore": 220,
-    "Bundles": [],
+    "Bundles": [
+      21478,
+      21507,
+      21524,
+      21877
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "5941",
-          "5942",
-          "10401",
-          "5940",
-          "5969"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -3344,21 +3211,19 @@
     "Id": "building_hero_lion",
     "IsValid": true,
     "BattleScore": 230,
-    "Bundles": [],
+    "Bundles": [
+      20663,
+      20860,
+      21076,
+      21322
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "9042",
-          "9043",
-          "9044",
-          "9046",
-          "11944",
-          "9045"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -3409,20 +3274,19 @@
     "Id": "building_hero_lone_druid",
     "IsValid": true,
     "BattleScore": 240,
-    "Bundles": [],
+    "Bundles": [
+      20591,
+      20996,
+      21160,
+      21314
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "4660",
-          "4661",
-          "4662",
-          "4663",
-          "4764"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -3473,20 +3337,19 @@
     "Id": "building_hero_luna",
     "IsValid": true,
     "BattleScore": 250,
-    "Bundles": [],
+    "Bundles": [
+      21312,
+      21454,
+      21793,
+      22212
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "5822",
-          "5823",
-          "5824",
-          "5826",
-          "5825"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -3537,20 +3400,19 @@
     "Id": "building_hero_lycan",
     "IsValid": true,
     "BattleScore": 200,
-    "Bundles": [],
+    "Bundles": [
+      21599,
+      21671,
+      21760,
+      21941
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "4859",
-          "4862",
-          "4860",
-          "4861",
-          "4863"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -3601,21 +3463,19 @@
     "Id": "building_hero_magnataur",
     "IsValid": true,
     "BattleScore": 210,
-    "Bundles": [],
+    "Bundles": [
+      20917,
+      20952,
+      20985,
+      21183
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "11625",
-          "7959",
-          "7958",
-          "7957",
-          "7956",
-          "7955"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -3724,19 +3584,19 @@
     "Id": "building_hero_mars",
     "IsValid": true,
     "BattleScore": 230,
-    "Bundles": [],
+    "Bundles": [
+      21587,
+      21612,
+      21645,
+      21674
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "14429",
-          "14428",
-          "14427",
-          "14426"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -3787,22 +3647,19 @@
     "Id": "building_hero_medusa",
     "IsValid": true,
     "BattleScore": 240,
-    "Bundles": [],
+    "Bundles": [
+      21106,
+      21582,
+      21765,
+      22280
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "8191",
-          "8195",
-          "8196",
-          "11283",
-          "8194",
-          "8193",
-          "16417"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -3853,22 +3710,19 @@
     "Id": "building_hero_meepo",
     "IsValid": true,
     "BattleScore": 250,
-    "Bundles": [],
+    "Bundles": [
+      21333,
+      21353,
+      21434,
+      21699
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "7669",
-          "7670",
-          "7683",
-          "7684",
-          "7685",
-          "7686",
-          "11309"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -3919,22 +3773,19 @@
     "Id": "building_hero_mirana",
     "IsValid": true,
     "BattleScore": 200,
-    "Bundles": [],
+    "Bundles": [
+      20637,
+      20639,
+      20642,
+      20936
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "4387",
-          "4694",
-          "4645",
-          "4693",
-          "4690",
-          "4691",
-          "4692"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -3985,20 +3836,19 @@
     "Id": "building_hero_monkey_king",
     "IsValid": true,
     "BattleScore": 210,
-    "Bundles": [],
+    "Bundles": [
+      21078,
+      21126,
+      21283,
+      21425
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "9399",
-          "9400",
-          "9401",
-          "12032",
-          "9675"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -4049,21 +3899,19 @@
     "Id": "building_hero_morphling",
     "IsValid": true,
     "BattleScore": 220,
-    "Bundles": [],
+    "Bundles": [
+      20749,
+      20762,
+      20896,
+      20978
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "7560",
-          "7559",
-          "7561",
-          "7558",
-          "7562",
-          "11152"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -4114,21 +3962,19 @@
     "Id": "building_hero_naga_siren",
     "IsValid": true,
     "BattleScore": 230,
-    "Bundles": [],
+    "Bundles": [
+      20644,
+      20682,
+      20847,
+      20939
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "6427",
-          "6423",
-          "6426",
-          "6424",
-          "6425",
-          "10384"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -4179,21 +4025,19 @@
     "Id": "building_hero_necrolyte",
     "IsValid": true,
     "BattleScore": 240,
-    "Bundles": [],
+    "Bundles": [
+      20676,
+      20823,
+      20882,
+      20894
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "10886",
-          "6291",
-          "7083",
-          "7124",
-          "7132",
-          "10892"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -4244,19 +4088,19 @@
     "Id": "building_hero_nevermore",
     "IsValid": true,
     "BattleScore": 250,
-    "Bundles": [],
+    "Bundles": [
+      21279,
+      21419,
+      21752,
+      21964
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "11558",
-          "7193",
-          "7188",
-          "7279"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -4307,21 +4151,19 @@
     "Id": "building_hero_night_stalker",
     "IsValid": true,
     "BattleScore": 200,
-    "Bundles": [],
+    "Bundles": [
+      21486,
+      21576,
+      21667,
+      21715
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "11923",
-          "8889",
-          "8888",
-          "8887",
-          "8886",
-          "8885"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -4372,19 +4214,19 @@
     "Id": "building_hero_nyx_assassin",
     "IsValid": true,
     "BattleScore": 210,
-    "Bundles": [],
+    "Bundles": [
+      20356,
+      20521,
+      20745,
+      20773
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "5926",
-          "5927",
-          "5928",
-          "5929"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -4435,20 +4277,19 @@
     "Id": "building_hero_obsidian_destroyer",
     "IsValid": true,
     "BattleScore": 220,
-    "Bundles": [],
+    "Bundles": [
+      20601,
+      20641,
+      20858,
+      21226
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "9367",
-          "9368",
-          "9369",
-          "9370",
-          "11443"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -4499,21 +4340,19 @@
     "Id": "building_hero_ogre_magi",
     "IsValid": true,
     "BattleScore": 230,
-    "Bundles": [],
+    "Bundles": [
+      21300,
+      21743,
+      21872,
+      22281
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "11149",
-          "7845",
-          "7839",
-          "7846",
-          "7847",
-          "7848"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -4564,21 +4403,19 @@
     "Id": "building_hero_omniknight",
     "IsValid": true,
     "BattleScore": 240,
-    "Bundles": [],
+    "Bundles": [
+      21064,
+      21152,
+      21272,
+      21368
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "8955",
-          "8956",
-          "8954",
-          "8958",
-          "8957",
-          "11932"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -4629,20 +4466,19 @@
     "Id": "building_hero_oracle",
     "IsValid": true,
     "BattleScore": 250,
-    "Bundles": [],
+    "Bundles": [
+      21405,
+      21406,
+      21463,
+      21583
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "13426",
-          "13425",
-          "13424",
-          "13423",
-          "13422"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -4693,19 +4529,19 @@
     "Id": "building_hero_pangolier",
     "IsValid": true,
     "BattleScore": 200,
-    "Bundles": [],
+    "Bundles": [
+      21421,
+      21731,
+      21778,
+      21927
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "12207",
-          "9850",
-          "9849",
-          "9848"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -4756,21 +4592,19 @@
     "Id": "building_hero_phantom_assassin",
     "IsValid": true,
     "BattleScore": 210,
-    "Bundles": [],
+    "Bundles": [
+      21449,
+      21725,
+      21809,
+      21845
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "11636",
-          "7297",
-          "7307",
-          "7308",
-          "7310",
-          "7309"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -4821,21 +4655,19 @@
     "Id": "building_hero_phantom_lancer",
     "IsValid": true,
     "BattleScore": 220,
-    "Bundles": [],
+    "Bundles": [
+      21154,
+      21473,
+      21707,
+      22794
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "12909",
-          "12033",
-          "9302",
-          "9301",
-          "9300",
-          "9299"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -4886,19 +4718,19 @@
     "Id": "building_hero_phoenix",
     "IsValid": true,
     "BattleScore": 230,
-    "Bundles": [],
+    "Bundles": [
+      21224,
+      21374,
+      21431,
+      21527
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "11955",
-          "7837",
-          "7836",
-          "7835"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -5007,19 +4839,19 @@
     "Id": "building_hero_puck",
     "IsValid": true,
     "BattleScore": 250,
-    "Bundles": [],
+    "Bundles": [
+      20557,
+      20576,
+      20588,
+      20911
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "11924",
-          "6290",
-          "6292",
-          "6618"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -5070,21 +4902,19 @@
     "Id": "building_hero_pudge",
     "IsValid": true,
     "BattleScore": 200,
-    "Bundles": [],
+    "Bundles": [
+      20678,
+      20690,
+      20727,
+      20729
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "5051",
-          "5050",
-          "5049",
-          "5048",
-          "5047",
-          "5046"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -5135,21 +4965,19 @@
     "Id": "building_hero_pugna",
     "IsValid": true,
     "BattleScore": 210,
-    "Bundles": [],
+    "Bundles": [
+      20991,
+      21551,
+      21613,
+      22344
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "5992",
-          "5996",
-          "5994",
-          "5997",
-          "6000",
-          "6001"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -5200,19 +5028,19 @@
     "Id": "building_hero_queenofpain",
     "IsValid": true,
     "BattleScore": 220,
-    "Bundles": [],
+    "Bundles": [
+      20747,
+      20813,
+      20880,
+      20904
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "7530",
-          "7528",
-          "7529",
-          "7527"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -5263,20 +5091,19 @@
     "Id": "building_hero_rattletrap",
     "IsValid": true,
     "BattleScore": 230,
-    "Bundles": [],
+    "Bundles": [
+      21141,
+      21221,
+      21240,
+      21289
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "6809",
-          "6805",
-          "6810",
-          "6811",
-          "10695"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -5327,21 +5154,19 @@
     "Id": "building_hero_razor",
     "IsValid": true,
     "BattleScore": 240,
-    "Bundles": [],
+    "Bundles": [
+      20850,
+      21045,
+      21065,
+      21262
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "9353",
-          "9354",
-          "9355",
-          "9356",
-          "9357",
-          "11441"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -5392,22 +5217,19 @@
     "Id": "building_hero_riki",
     "IsValid": true,
     "BattleScore": 250,
-    "Bundles": [],
+    "Bundles": [
+      20647,
+      20801,
+      20983,
+      21133
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "9434",
-          "9435",
-          "9436",
-          "9437",
-          "9438",
-          "9439",
-          "12039"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -5458,19 +5280,19 @@
     "Id": "building_hero_rubick",
     "IsValid": true,
     "BattleScore": 200,
-    "Bundles": [],
+    "Bundles": [
+      20832,
+      20843,
+      20873,
+      20927
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "4836",
-          "4837",
-          "4839",
-          "4838"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -5521,21 +5343,19 @@
     "Id": "building_hero_sand_king",
     "IsValid": true,
     "BattleScore": 210,
-    "Bundles": [],
+    "Bundles": [
+      21270,
+      21303,
+      21635,
+      22329
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "6612",
-          "6613",
-          "6611",
-          "6614",
-          "6610",
-          "10581"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -5586,19 +5406,19 @@
     "Id": "building_hero_shadow_demon",
     "IsValid": true,
     "BattleScore": 220,
-    "Bundles": [],
+    "Bundles": [
+      21149,
+      21356,
+      21548,
+      21810
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "14371",
-          "14370",
-          "14369",
-          "14368"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -5649,22 +5469,19 @@
     "Id": "building_hero_shadow_shaman",
     "IsValid": true,
     "BattleScore": 230,
-    "Bundles": [],
+    "Bundles": [
+      20922,
+      21201,
+      21395,
+      21547
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "6817",
-          "6819",
-          "6818",
-          "6815",
-          "6816",
-          "6814",
-          "10700"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -5715,22 +5532,19 @@
     "Id": "building_hero_shredder",
     "IsValid": true,
     "BattleScore": 240,
-    "Bundles": [],
+    "Bundles": [
+      20941,
+      21148,
+      21180,
+      21308
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "6519",
-          "6524",
-          "6520",
-          "6521",
-          "6522",
-          "6523",
-          "10659"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -5781,22 +5595,19 @@
     "Id": "building_hero_silencer",
     "IsValid": true,
     "BattleScore": 250,
-    "Bundles": [],
+    "Bundles": [
+      21071,
+      21090,
+      21304,
+      21320
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "6387",
-          "6393",
-          "6394",
-          "6389",
-          "6390",
-          "6391",
-          "10535"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -5847,22 +5658,19 @@
     "Id": "building_hero_skeleton_king",
     "IsValid": true,
     "BattleScore": 200,
-    "Bundles": [],
+    "Bundles": [
+      21167,
+      21207,
+      21334,
+      21402
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "11746",
-          "8422",
-          "8420",
-          "8418",
-          "8416",
-          "8414",
-          "8411"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -5913,22 +5721,19 @@
     "Id": "building_hero_skywrath_mage",
     "IsValid": true,
     "BattleScore": 210,
-    "Bundles": [],
+    "Bundles": [
+      20865,
+      20972,
+      21002,
+      21252
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "11435",
-          "6974",
-          "6973",
-          "6975",
-          "6972",
-          "6734",
-          "6733"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -5979,20 +5784,19 @@
     "Id": "building_hero_slardar",
     "IsValid": true,
     "BattleScore": 220,
-    "Bundles": [],
+    "Bundles": [
+      20975,
+      21049,
+      21277,
+      21281
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "8789",
-          "8790",
-          "8791",
-          "8792",
-          "11752"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -6043,21 +5847,19 @@
     "Id": "building_hero_slark",
     "IsValid": true,
     "BattleScore": 230,
-    "Bundles": [],
+    "Bundles": [
+      21046,
+      21385,
+      21412,
+      21506
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "11915",
-          "8688",
-          "8683",
-          "8682",
-          "8681",
-          "8689"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -6108,7 +5910,9 @@
     "Id": "building_hero_snapfire",
     "IsValid": true,
     "BattleScore": 240,
-    "Bundles": [],
+    "Bundles": [
+      21798
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -6166,21 +5970,19 @@
     "Id": "building_hero_sniper",
     "IsValid": true,
     "BattleScore": 250,
-    "Bundles": [],
+    "Bundles": [
+      21176,
+      21517,
+      21578,
+      21654
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "8161",
-          "8163",
-          "8164",
-          "8165",
-          "8197",
-          "10915"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -6231,20 +6033,19 @@
     "Id": "building_hero_spectre",
     "IsValid": true,
     "BattleScore": 200,
-    "Bundles": [],
+    "Bundles": [
+      20808,
+      20895,
+      21145,
+      21361
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "7521",
-          "7518",
-          "7520",
-          "7517",
-          "7519"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -6295,21 +6096,19 @@
     "Id": "building_hero_spirit_breaker",
     "IsValid": true,
     "BattleScore": 210,
-    "Bundles": [],
+    "Bundles": [
+      21409,
+      21803,
+      21852,
+      21925
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "5627",
-          "5621",
-          "5620",
-          "5619",
-          "5618",
-          "5617"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -6360,19 +6159,19 @@
     "Id": "building_hero_storm_spirit",
     "IsValid": true,
     "BattleScore": 220,
-    "Bundles": [],
+    "Bundles": [
+      21072,
+      21251,
+      21269,
+      21345
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "6023",
-          "6022",
-          "10411",
-          "6019"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -6423,21 +6222,19 @@
     "Id": "building_hero_sven",
     "IsValid": true,
     "BattleScore": 230,
-    "Bundles": [],
+    "Bundles": [
+      20748,
+      20780,
+      20797,
+      20809
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "5650",
-          "5648",
-          "5652",
-          "5653",
-          "5645",
-          "5647"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -6488,23 +6285,19 @@
     "Id": "building_hero_techies",
     "IsValid": true,
     "BattleScore": 240,
-    "Bundles": [],
+    "Bundles": [
+      20610,
+      21211,
+      21306,
+      21307
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "10835",
-          "6289",
-          "6288",
-          "6046",
-          "6045",
-          "6044",
-          "6043",
-          "6042"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -6555,19 +6348,19 @@
     "Id": "building_hero_templar_assassin",
     "IsValid": true,
     "BattleScore": 250,
-    "Bundles": [],
+    "Bundles": [
+      20757,
+      20764,
+      20898,
+      20916
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "6900",
-          "6901",
-          "6902",
-          "10710"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -6618,21 +6411,19 @@
     "Id": "building_hero_terrorblade",
     "IsValid": true,
     "BattleScore": 200,
-    "Bundles": [],
+    "Bundles": [
+      20777,
+      20914,
+      21139,
+      21542
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "12160",
-          "9501",
-          "9500",
-          "9499",
-          "9498",
-          "9497"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -6683,22 +6474,19 @@
     "Id": "building_hero_tidehunter",
     "IsValid": true,
     "BattleScore": 210,
-    "Bundles": [],
+    "Bundles": [
+      21173,
+      21355,
+      21371,
+      21493
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "7773",
-          "7775",
-          "7774",
-          "7776",
-          "11659",
-          "7777",
-          "7778"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -6749,21 +6537,18 @@
     "Id": "building_hero_tinker",
     "IsValid": true,
     "BattleScore": 220,
-    "Bundles": [],
+    "Bundles": [
+      20940,
+      21110,
+      21489
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "11631",
-          "7968",
-          "7970",
-          "7969",
-          "7967",
-          "7972"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -6814,20 +6599,19 @@
     "Id": "building_hero_tiny",
     "IsValid": true,
     "BattleScore": 230,
-    "Bundles": [],
+    "Bundles": [
+      20628,
+      20697,
+      21255,
+      21423
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "12533",
-          "12532",
-          "12531",
-          "12530",
-          "12534"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -6878,20 +6662,19 @@
     "Id": "building_hero_treant",
     "IsValid": true,
     "BattleScore": 240,
-    "Bundles": [],
+    "Bundles": [
+      20816,
+      20971,
+      21001,
+      21058
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "11926",
-          "8902",
-          "8901",
-          "8900",
-          "8899"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -6942,20 +6725,19 @@
     "Id": "building_hero_troll_warlord",
     "IsValid": true,
     "BattleScore": 250,
-    "Bundles": [],
+    "Bundles": [
+      21006,
+      21165,
+      21259,
+      21815
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "11957",
-          "7875",
-          "7867",
-          "7873",
-          "9677"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -7006,23 +6788,19 @@
     "Id": "building_hero_tusk",
     "IsValid": true,
     "BattleScore": 200,
-    "Bundles": [],
+    "Bundles": [
+      21344,
+      21786,
+      21859,
+      21963
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "9006",
-          "9007",
-          "9008",
-          "9009",
-          "9010",
-          "9011",
-          "9012",
-          "11416"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -7073,19 +6851,19 @@
     "Id": "building_hero_undying",
     "IsValid": true,
     "BattleScore": 210,
-    "Bundles": [],
+    "Bundles": [
+      21202,
+      21247,
+      21310,
+      21418
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "7960",
-          "7973",
-          "7961",
-          "11632"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -7136,21 +6914,19 @@
     "Id": "building_hero_ursa",
     "IsValid": true,
     "BattleScore": 220,
-    "Bundles": [],
+    "Bundles": [
+      20309,
+      20330,
+      20350,
+      20766
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "7653",
-          "7652",
-          "7650",
-          "7651",
-          "7654",
-          "11645"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -7201,20 +6977,19 @@
     "Id": "building_hero_vengefulspirit",
     "IsValid": true,
     "BattleScore": 230,
-    "Bundles": [],
+    "Bundles": [
+      20870,
+      20923,
+      20950,
+      21243
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "8919",
-          "8918",
-          "8920",
-          "10923",
-          "8994"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -7265,21 +7040,19 @@
     "Id": "building_hero_venomancer",
     "IsValid": true,
     "BattleScore": 240,
-    "Bundles": [],
+    "Bundles": [
+      20522,
+      20660,
+      20924,
+      21047
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "6643",
-          "6642",
-          "6644",
-          "6645",
-          "6682",
-          "10580"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -7330,18 +7103,19 @@
     "Id": "building_hero_viper",
     "IsValid": true,
     "BattleScore": 250,
-    "Bundles": [],
+    "Bundles": [
+      21253,
+      21436,
+      21708,
+      21814
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "9230",
-          "9233",
-          "9670"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -7392,19 +7166,19 @@
     "Id": "building_hero_visage",
     "IsValid": true,
     "BattleScore": 200,
-    "Bundles": [],
+    "Bundles": [
+      21150,
+      21248,
+      21311,
+      21407
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "11964",
-          "9051",
-          "7998",
-          "7997"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -7455,7 +7229,9 @@
     "Id": "building_hero_void_spirit",
     "IsValid": true,
     "BattleScore": 210,
-    "Bundles": [],
+    "Bundles": [
+      21797
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
@@ -7513,23 +7289,19 @@
     "Id": "building_hero_warlock",
     "IsValid": true,
     "BattleScore": 220,
-    "Bundles": [],
+    "Bundles": [
+      21378,
+      21477,
+      21534,
+      21776
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "4477",
-          "4472",
-          "4478",
-          "4475",
-          "4474",
-          "4468",
-          "4470",
-          "4640"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -7580,21 +7352,19 @@
     "Id": "building_hero_weaver",
     "IsValid": true,
     "BattleScore": 230,
-    "Bundles": [],
+    "Bundles": [
+      21205,
+      21360,
+      21714,
+      21811
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "11093",
-          "9070",
-          "9069",
-          "9068",
-          "9067",
-          "9066"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -7645,20 +7415,19 @@
     "Id": "building_hero_windrunner",
     "IsValid": true,
     "BattleScore": 240,
-    "Bundles": [],
+    "Bundles": [
+      21060,
+      21444,
+      21806,
+      22287
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "4835",
-          "4834",
-          "4833",
-          "4831",
-          "4832"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -7709,18 +7478,19 @@
     "Id": "building_hero_winter_wyvern",
     "IsValid": true,
     "BattleScore": 250,
-    "Bundles": [],
+    "Bundles": [
+      20811,
+      20963,
+      21034,
+      21074
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "11568",
-          "7292",
-          "7291"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -7829,21 +7599,19 @@
     "Id": "building_hero_witch_doctor",
     "IsValid": true,
     "BattleScore": 210,
-    "Bundles": [],
+    "Bundles": [
+      21841,
+      21853,
+      21930,
+      22279
+    ],
     "StarUpInfo": [
       {
         "Star": 2,
         "AttributeBaseStrength": 30,
         "AttributeBaseAgility": 30,
         "AttributeBaseIntelligence": 30,
-        "AttachWearables": [
-          "7553",
-          "7554",
-          "7550",
-          "7551",
-          "7552",
-          "11630"
-        ]
+        "AttachWearables": []
       },
       {
         "Star": 3,
@@ -7894,7 +7662,12 @@
     "Id": "building_hero_zuus",
     "IsValid": true,
     "BattleScore": 220,
-    "Bundles": [],
+    "Bundles": [
+      21075,
+      21452,
+      21642,
+      22024
+    ],
     "StarUpInfo": [
       {
         "Star": 2,

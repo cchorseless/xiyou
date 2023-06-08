@@ -114,7 +114,7 @@ export enum EMoneyType {
     /**
      * 铭文碎片
      */
-    InscriptionExp = 105,
+    MingWenExp = 105,
 }
 }
 
@@ -219,6 +219,10 @@ export enum EItemType {
      * 祝福
      */
     Buff = 5,
+    /**
+     * 铭文
+     */
+    MingWen = 6,
 }
 }
 
@@ -323,6 +327,10 @@ export enum EItemAwakeScript {
      * 穿戴装备
      */
     BindEquip = 3,
+    /**
+     * 检查唯一转化成星石
+     */
+    OwnedToStarStone = 4,
 }
 }
 
@@ -377,59 +385,63 @@ export enum EEquipSolt {
     /**
      * A类型1槽位
      */
-    InscriptionA_1 = 3,
+    InscriptionA_1 = 10,
     /**
      * A类型2槽位
      */
-    InscriptionA_2 = 4,
+    InscriptionA_2 = 11,
     /**
      * A类型3槽位
      */
-    InscriptionA_3 = 5,
+    InscriptionA_3 = 12,
     /**
      * A类型4槽位
      */
-    InscriptionA_4 = 6,
+    InscriptionA_4 = 13,
+    /**
+     * A类型5槽位
+     */
+    InscriptionA_5 = 14,
     /**
      * B类型1槽位
      */
-    InscriptionB_1 = 7,
+    InscriptionB_1 = 15,
     /**
      * B类型2槽位
      */
-    InscriptionB_2 = 8,
+    InscriptionB_2 = 16,
     /**
      * B类型3槽位
      */
-    InscriptionB_3 = 9,
+    InscriptionB_3 = 17,
     /**
      * B类型4槽位
      */
-    InscriptionB_4 = 10,
+    InscriptionB_4 = 18,
+    /**
+     * B类型5槽位
+     */
+    InscriptionB_5 = 19,
     /**
      * C类型1槽位
      */
-    InscriptionC_1 = 11,
+    InscriptionC_1 = 20,
     /**
      * C类型2槽位
      */
-    InscriptionC_2 = 12,
+    InscriptionC_2 = 21,
     /**
      * C类型3槽位
      */
-    InscriptionC_3 = 13,
+    InscriptionC_3 = 22,
     /**
-     * D类型1槽位
+     * C类型4槽位
      */
-    InscriptionD_1 = 14,
+    InscriptionC_4 = 23,
     /**
-     * D类型2槽位
+     * C类型5槽位
      */
-    InscriptionD_2 = 15,
-    /**
-     * D类型3槽位
-     */
-    InscriptionD_3 = 16,
+    InscriptionC_5 = 24,
     /**
      * 最大值
      */
@@ -492,6 +504,8 @@ export class ItemConfigRecord {
         this.AutoUse = _json_.AutoUse
         if (_json_.OneGameUseLimit === undefined) { GLogHelper.error(1); }
         this.OneGameUseLimit = _json_.OneGameUseLimit
+        if (_json_.MaxOwnerCount === undefined) { GLogHelper.error(1); }
+        this.MaxOwnerCount = _json_.MaxOwnerCount
         if (_json_.BatchUseable === undefined) { GLogHelper.error(1); }
         this.BatchUseable = _json_.BatchUseable
         if (_json_.BindHeroName === undefined) { GLogHelper.error(1); }
@@ -544,6 +558,10 @@ export class ItemConfigRecord {
      * 单局使用次数限制
      */
     readonly OneGameUseLimit: number
+    /**
+     * 最大拥有数量
+     */
+    readonly MaxOwnerCount: number
     /**
      * 批量使用
      */
@@ -3749,26 +3767,10 @@ export class WearableConfigRecord {
         this.Rarity = _json_.Rarity
         if (_json_.item_rarity === undefined) { GLogHelper.error(1); }
         this.itemRarity = _json_.item_rarity
-        if (_json_.item_slot === undefined) { GLogHelper.error(1); }
-        this.itemSlot = _json_.item_slot
-        if (_json_.item_type_name === undefined) { GLogHelper.error(1); }
-        this.itemTypeName = _json_.item_type_name
-        if (_json_.model_player === undefined) { GLogHelper.error(1); }
-        this.modelPlayer = _json_.model_player
         if (_json_.used_by_heroes === undefined) { GLogHelper.error(1); }
         this.usedByHeroes = _json_.used_by_heroes
         if (_json_.bundle === undefined) { GLogHelper.error(1); }
         this.bundle = _json_.bundle
-        if (_json_.skin === undefined) { GLogHelper.error(1); }
-        this.skin = _json_.skin
-        if (_json_.skip_model_combine === undefined) { GLogHelper.error(1); }
-        this.skipModelCombine = _json_.skip_model_combine
-        if (_json_.asset_modifier === undefined) { GLogHelper.error(1); }
-        this.assetModifier = _json_.asset_modifier
-        if (_json_.control_point === undefined) { GLogHelper.error(1); }
-        this.controlPoint = _json_.control_point
-        if (_json_.styles === undefined) { GLogHelper.error(1); }
-        this.styles = _json_.styles
     }
 
     /**
@@ -3795,23 +3797,14 @@ export class WearableConfigRecord {
      * 饰品名称
      */
     readonly itemName: string
+    /**
+     * 饰品稀有度
+     */
     readonly Rarity: string
     /**
      * 饰品稀有度
      */
     readonly itemRarity: string
-    /**
-     * 饰品槽位
-     */
-    readonly itemSlot: string
-    /**
-     * 饰品类型名称
-     */
-    readonly itemTypeName: string
-    /**
-     * 饰品模型
-     */
-    readonly modelPlayer: string
     /**
      * 使用英雄
      */
@@ -3820,26 +3813,6 @@ export class WearableConfigRecord {
      * 礼包内道具
      */
     readonly bundle: string[]
-    /**
-     * 皮肤
-     */
-    readonly skin: number
-    /**
-     * 跳过模型融合
-     */
-    readonly skipModelCombine: boolean
-    /**
-     * 特殊效果修改
-     */
-    readonly assetModifier: string[]
-    /**
-     * 创建特效数据
-     */
-    readonly controlPoint: string[]
-    /**
-     * 样式
-     */
-    readonly styles: string
 
     resolve(_tables: Map<string, any>) {
     }

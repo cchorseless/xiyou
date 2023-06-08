@@ -76,7 +76,7 @@ export class CCStoragePanel extends CCPanel<ICCStoragePanel> {
                             onChange={(index: number, text: string) => {
                                 this.UpdateState({ selectindex: index })
                             }} />
-                        <CCPanel width="600px">
+                        <CCPanel id="PanelContentBg" >
                             {
                                 [...Array(tablist.length)].map((_, _index) => {
                                     let curitems = allbagitems;
@@ -94,9 +94,8 @@ export class CCStoragePanel extends CCPanel<ICCStoragePanel> {
                                             curitems = allbagitems.filter(item => { return item.Config.ItemType == GEEnum.EItemType.Treasure })
                                             break;
                                     }
-                                    return <CCPanel key={_index + "1111"}
-                                        className={CSSHelper.ClassMaker({ Hidden: selectindex !== _index })}
-                                        flowChildren="right-wrap" scroll={"y"}  >
+                                    return <CCPanel key={_index + "1111"} className={CSSHelper.ClassMaker({ Hidden: selectindex !== _index })}
+                                        flowChildren="right-wrap" width="100%" height="100%" scroll={"y"}  >
                                         {
                                             curitems.map((e, index) => {
                                                 return <CCStorageItem key={index + "CCStorageItem"} entity={e} onclick={() => {

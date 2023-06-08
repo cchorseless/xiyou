@@ -2,9 +2,29 @@ import { KV_Abilitys, KV_Items, KV_Units, KvAllPath, KvClient, KvClientInterface
 import { LogHelper } from "./LogHelper";
 
 
+interface IWearableInfo {
+    "name": string,
+    "prefab": string,
+    "imageInventory": string,
+    "itemDescription": string,
+    "itemName": string,
+    "modelPlayer": string,
+    "usedByHeroes": string,
+    "assetModifier": string,
+    "controlPoint": string,
+    "itemSlot": string,
+    "itemTypeName": string,
+    "skipModelCombine": string,
+    "itemRarity": string,
+    "skin": string,
+    "bundle": string,
+    "styles": string,
+}
+
+type IWearableConfig = { WearableConfig: { [k: string]: IWearableInfo } };
 export module KVHelper {
     /**服務器KV配置 */
-    export const KvServerConfig: Readonly<KvServerInterface> = {} as Readonly<KvServerInterface>;
+    export const KvServerConfig: Readonly<KvServerInterface & IWearableConfig> = {} as Readonly<KvServerInterface & IWearableConfig>;
     /**客戶端KV配置 */
     export const KvClientConfig: Readonly<KvClientInterface> = {} as Readonly<KvClientInterface>;
     /**所有技能 */
@@ -67,6 +87,7 @@ export module KVHelper {
             if (Object.keys(KvServer).length == 0) {
                 return;
             }
+            (KvServer as any)["WearableConfig"] = "scripts/npc/kvConfig/shipin_config.kv";
             for (k in KvServer) {
                 (KvServerConfig as any)[k] = LoadKeyValues(KvServer[k]);
                 LogHelper.print("Server LoadKeyValues Finish:", k);

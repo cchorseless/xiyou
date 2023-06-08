@@ -39,10 +39,17 @@ export class modifier_property extends BaseModifier_Plus {
             let sFunctionName = GPropertyCalculate.call_func!;
             GPropertyCalculate.call_unit = null;
             GPropertyCalculate.call_func = null;
-            let func = (GPropertyCalculate as any)[sFunctionName];
-            if (IsValid(hUnit) && func != null && typeof func == "function") {
-                let r = tostring(func(hUnit))
-                return r;
+            if (IsValid(hUnit)) {
+                let func = (hUnit as any)[sFunctionName];
+                if (func != null && typeof func == "function") {
+                    let r = tostring((hUnit as any)[sFunctionName]())
+                    return r;
+                }
+                func = (GPropertyCalculate as any)[sFunctionName];
+                if (func != null && typeof func == "function") {
+                    let r = tostring((GPropertyCalculate as any)[sFunctionName](hUnit))
+                    return r;
+                }
             }
             GLogHelper.error(`cant find func:${sFunctionName} in PropertyCalculate`)
             return "";

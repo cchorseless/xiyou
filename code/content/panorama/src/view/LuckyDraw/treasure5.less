@@ -1,0 +1,88 @@
+#Treasure206001 {
+	#chest_light {
+		width: 400px;
+		height: 430px;
+		align: center center;
+		opacity: .3;
+		transition-property: opacity, position, pre-transform-scale2d;
+		transition-duration: .5s;
+		transition-timing-function: linear;
+	}
+
+	#chest_top {
+		background-image: url("file://{images}/custom_game/treasure/5/chest_2.png");
+	}
+
+	#chest_bottom {
+		background-image: url("file://{images}/custom_game/treasure/5/chest_1.png");
+	}
+
+	&.TreasureHover {
+		width: 400px*1.05;
+		height: 430px*1.05;
+
+		.chest {
+			animation-duration: 5s;
+			animation-timing-function: linear;
+			animation-iteration-count: infinite;
+		}
+
+		#chest_top {
+			animation-name: ChestBreath;
+		}
+
+		#chest_bottom {
+			animation-name: ChestBreath2;
+		}
+
+		#chest_light {
+			animation-name: LightBreath;
+			animation-duration: 5s;
+			animation-timing-function: linear;
+			animation-iteration-count: infinite;
+		}
+	}
+
+	.Opening & {
+		width: 400px*1.3;
+		height: 430px*1.3;
+
+		.chest {
+			animation-name: ChestShake;
+			animation-duration: 0.12s;
+			animation-timing-function: linear;
+			animation-iteration-count: infinite;
+		}
+
+		#chest_bottom {
+			animation-direction: reverse;
+		}
+
+		#chest_light {
+			opacity: .5;
+		}
+	}
+
+	.OpenSuccess & {
+		width: 400px*1.3;
+		height: 430px*1.3;
+
+		.chest {
+			animation-duration: 1.5s;
+			animation-timing-function: linear;
+		}
+
+		#chest_top {
+			animation-name: ChestWillOpen;
+		}
+
+		#chest_bottom {
+			animation-name: ChestWillOpen2;
+		}
+
+		#chest_light {
+			pre-transform-scale2d: 1.5;
+			opacity: 1;
+		}
+	}
+}
