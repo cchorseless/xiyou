@@ -2741,6 +2741,3966 @@
     ]
   }
 ] ,
+"dota_battlepasschargeconfig":[
+  {
+    "id": 10001,
+    "SeasonId": 1,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13001,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11017,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10002,
+    "SeasonId": 1,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13002,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11018,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10003,
+    "SeasonId": 1,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13003,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11019,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10004,
+    "SeasonId": 1,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13004,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11020,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10005,
+    "SeasonId": 1,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13005,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11021,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10006,
+    "SeasonId": 1,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13006,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11022,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10007,
+    "SeasonId": 1,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13007,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11023,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10008,
+    "SeasonId": 1,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13008,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11024,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10009,
+    "SeasonId": 1,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13009,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11025,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10010,
+    "SeasonId": 1,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13010,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11026,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10011,
+    "SeasonId": 1,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13011,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11027,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10012,
+    "SeasonId": 1,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13012,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11028,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10013,
+    "SeasonId": 1,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13013,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11029,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10014,
+    "SeasonId": 1,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13014,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11030,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10015,
+    "SeasonId": 1,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13015,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11031,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10016,
+    "SeasonId": 1,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13016,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11032,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10017,
+    "SeasonId": 1,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13017,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11033,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10018,
+    "SeasonId": 1,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13018,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11034,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10019,
+    "SeasonId": 1,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13019,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11035,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10020,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13020,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11036,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10021,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13021,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11037,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10022,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13022,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11038,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10023,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13023,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11039,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10024,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13024,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11040,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10025,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13025,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11041,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10026,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13026,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11042,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10027,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13027,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11043,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10028,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13028,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11044,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10029,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13029,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11045,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10030,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13030,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11046,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10031,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13001,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11017,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10032,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13002,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11018,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10033,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13003,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11019,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10034,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13004,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11020,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10035,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13005,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11021,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10036,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13006,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11022,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10037,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13007,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11023,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10038,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13008,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11024,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10039,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13009,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11025,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10040,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13010,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11026,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10041,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13011,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11027,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10042,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13012,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11028,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10043,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13013,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11029,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10044,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13014,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11030,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10045,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13015,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11031,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10046,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13016,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11032,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10047,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13017,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11033,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10048,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13018,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11034,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10049,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13019,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11035,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10050,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13020,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11036,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10051,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13021,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11037,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10052,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13022,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11038,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10053,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13023,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11039,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10054,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13024,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11040,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10055,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13025,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11041,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10056,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13026,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11042,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10057,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13027,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11043,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10058,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13028,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11044,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10059,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13029,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11045,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10060,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13030,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11046,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10061,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13021,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11037,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10062,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13022,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11038,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10063,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13023,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11039,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10064,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13024,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11040,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10065,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13025,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11041,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10066,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13026,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11042,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10067,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13027,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11043,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10068,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13028,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11044,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10069,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13029,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11045,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10070,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13030,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11046,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10071,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13028,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11044,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10072,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13001,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11017,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10073,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13002,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11018,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10074,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13003,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11019,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10075,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13004,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11020,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10076,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13005,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11021,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10077,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13006,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11022,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10078,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13007,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11023,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10079,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13008,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11024,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10080,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13009,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11025,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10081,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13010,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11026,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10082,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13011,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11027,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10083,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13012,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11028,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10084,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13013,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11029,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10085,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13014,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11030,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10086,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13015,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11031,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10087,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13016,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11032,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10088,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13017,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11033,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10089,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13018,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11034,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10090,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13019,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11035,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10091,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13020,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11036,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10092,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13021,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11037,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10093,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13022,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11038,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10094,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13023,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11039,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10095,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13024,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11040,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10096,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13025,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11041,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10097,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13026,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11042,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10098,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13027,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11043,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10099,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13028,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11044,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10100,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13029,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11045,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10101,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13030,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11046,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10102,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13001,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11017,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10103,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13002,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11018,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10104,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13003,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11019,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10105,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13004,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11020,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10106,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13005,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11021,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10107,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13006,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11022,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10108,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13007,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11023,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10109,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13008,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11024,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10110,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13009,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11025,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10111,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13010,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11026,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10112,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13011,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11027,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10113,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13012,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11028,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10114,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13013,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11029,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10115,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13014,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11030,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10116,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13015,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11031,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10117,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13016,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11032,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10118,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13017,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11033,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10119,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13018,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11034,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10120,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13019,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11035,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10121,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13020,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11036,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10122,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13021,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11037,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10123,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13022,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11038,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10124,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13023,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11039,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10125,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13024,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11040,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10126,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13025,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11041,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10127,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13026,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11042,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10128,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13027,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11043,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10129,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13028,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11044,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10130,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13029,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11045,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10131,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13030,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11046,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10132,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13021,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11037,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10133,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13022,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11038,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10134,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13023,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11039,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10135,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13024,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11040,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10136,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13025,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11041,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10137,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13026,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11042,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10138,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13027,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11043,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10139,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13028,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11044,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10140,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13029,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11045,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10141,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13030,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11046,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10142,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13028,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11044,
+      "ItemCount": 1
+    }
+  }
+] ,
+"dota_battlepasslevelupconfig":[
+  {
+    "id": 10001,
+    "BattlePassLevel": 0,
+    "SeasonId": 1,
+    "LevelUpExp": 70,
+    "TaskComPrize": {
+      "ItemConfigId": 13001,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11017,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10002,
+    "BattlePassLevel": 1,
+    "SeasonId": 1,
+    "LevelUpExp": 80,
+    "TaskComPrize": {
+      "ItemConfigId": 13002,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11018,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10003,
+    "BattlePassLevel": 2,
+    "SeasonId": 1,
+    "LevelUpExp": 90,
+    "TaskComPrize": {
+      "ItemConfigId": 13003,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11019,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10004,
+    "BattlePassLevel": 3,
+    "SeasonId": 1,
+    "LevelUpExp": 100,
+    "TaskComPrize": {
+      "ItemConfigId": 13004,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11020,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10005,
+    "BattlePassLevel": 4,
+    "SeasonId": 1,
+    "LevelUpExp": 110,
+    "TaskComPrize": {
+      "ItemConfigId": 13005,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11021,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10006,
+    "BattlePassLevel": 5,
+    "SeasonId": 1,
+    "LevelUpExp": 120,
+    "TaskComPrize": {
+      "ItemConfigId": 13006,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11022,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10007,
+    "BattlePassLevel": 6,
+    "SeasonId": 1,
+    "LevelUpExp": 130,
+    "TaskComPrize": {
+      "ItemConfigId": 13007,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11023,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10008,
+    "BattlePassLevel": 7,
+    "SeasonId": 1,
+    "LevelUpExp": 140,
+    "TaskComPrize": {
+      "ItemConfigId": 13008,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11024,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10009,
+    "BattlePassLevel": 8,
+    "SeasonId": 1,
+    "LevelUpExp": 150,
+    "TaskComPrize": {
+      "ItemConfigId": 13009,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11025,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10010,
+    "BattlePassLevel": 9,
+    "SeasonId": 1,
+    "LevelUpExp": 200,
+    "TaskComPrize": {
+      "ItemConfigId": 13010,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11026,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10011,
+    "BattlePassLevel": 10,
+    "SeasonId": 1,
+    "LevelUpExp": 250,
+    "TaskComPrize": {
+      "ItemConfigId": 13011,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11027,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10012,
+    "BattlePassLevel": 11,
+    "SeasonId": 1,
+    "LevelUpExp": 300,
+    "TaskComPrize": {
+      "ItemConfigId": 13012,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11028,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10013,
+    "BattlePassLevel": 12,
+    "SeasonId": 1,
+    "LevelUpExp": 350,
+    "TaskComPrize": {
+      "ItemConfigId": 13013,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11029,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10014,
+    "BattlePassLevel": 13,
+    "SeasonId": 1,
+    "LevelUpExp": 400,
+    "TaskComPrize": {
+      "ItemConfigId": 13014,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11030,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10015,
+    "BattlePassLevel": 14,
+    "SeasonId": 1,
+    "LevelUpExp": 450,
+    "TaskComPrize": {
+      "ItemConfigId": 13015,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11031,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10016,
+    "BattlePassLevel": 15,
+    "SeasonId": 1,
+    "LevelUpExp": 500,
+    "TaskComPrize": {
+      "ItemConfigId": 13016,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11032,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10017,
+    "BattlePassLevel": 16,
+    "SeasonId": 1,
+    "LevelUpExp": 550,
+    "TaskComPrize": {
+      "ItemConfigId": 13017,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11033,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10018,
+    "BattlePassLevel": 17,
+    "SeasonId": 1,
+    "LevelUpExp": 600,
+    "TaskComPrize": {
+      "ItemConfigId": 13018,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11034,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10019,
+    "BattlePassLevel": 18,
+    "SeasonId": 1,
+    "LevelUpExp": 650,
+    "TaskComPrize": {
+      "ItemConfigId": 13019,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11035,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10020,
+    "BattlePassLevel": 19,
+    "SeasonId": 1,
+    "LevelUpExp": 700,
+    "TaskComPrize": {
+      "ItemConfigId": 13020,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11036,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10021,
+    "BattlePassLevel": 20,
+    "SeasonId": 1,
+    "LevelUpExp": 750,
+    "TaskComPrize": {
+      "ItemConfigId": 13021,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11037,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10022,
+    "BattlePassLevel": 21,
+    "SeasonId": 1,
+    "LevelUpExp": 800,
+    "TaskComPrize": {
+      "ItemConfigId": 13022,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11038,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10023,
+    "BattlePassLevel": 22,
+    "SeasonId": 1,
+    "LevelUpExp": 850,
+    "TaskComPrize": {
+      "ItemConfigId": 13023,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11039,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10024,
+    "BattlePassLevel": 23,
+    "SeasonId": 1,
+    "LevelUpExp": 900,
+    "TaskComPrize": {
+      "ItemConfigId": 13024,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11040,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10025,
+    "BattlePassLevel": 24,
+    "SeasonId": 1,
+    "LevelUpExp": 950,
+    "TaskComPrize": {
+      "ItemConfigId": 13025,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11041,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10026,
+    "BattlePassLevel": 25,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13026,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11042,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10027,
+    "BattlePassLevel": 26,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13027,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11043,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10028,
+    "BattlePassLevel": 27,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13028,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11044,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10029,
+    "BattlePassLevel": 28,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13029,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11045,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10030,
+    "BattlePassLevel": 29,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13030,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11046,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10031,
+    "BattlePassLevel": 30,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13001,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11017,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10032,
+    "BattlePassLevel": 31,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13002,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11018,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10033,
+    "BattlePassLevel": 32,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13003,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11019,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10034,
+    "BattlePassLevel": 33,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13004,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11020,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10035,
+    "BattlePassLevel": 34,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13005,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11021,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10036,
+    "BattlePassLevel": 35,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13006,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11022,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10037,
+    "BattlePassLevel": 36,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13007,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11023,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10038,
+    "BattlePassLevel": 37,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13008,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11024,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10039,
+    "BattlePassLevel": 38,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13009,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11025,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10040,
+    "BattlePassLevel": 39,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13010,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11026,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10041,
+    "BattlePassLevel": 40,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13011,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11027,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10042,
+    "BattlePassLevel": 41,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13012,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11028,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10043,
+    "BattlePassLevel": 42,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13013,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11029,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10044,
+    "BattlePassLevel": 43,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13014,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11030,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10045,
+    "BattlePassLevel": 44,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13015,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11031,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10046,
+    "BattlePassLevel": 45,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13016,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11032,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10047,
+    "BattlePassLevel": 46,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13017,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11033,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10048,
+    "BattlePassLevel": 47,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13018,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11034,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10049,
+    "BattlePassLevel": 48,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13019,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11035,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10050,
+    "BattlePassLevel": 49,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13020,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11036,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10051,
+    "BattlePassLevel": 50,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13021,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11037,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10052,
+    "BattlePassLevel": 51,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13022,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11038,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10053,
+    "BattlePassLevel": 52,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13023,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11039,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10054,
+    "BattlePassLevel": 53,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13024,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11040,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10055,
+    "BattlePassLevel": 54,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13025,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11041,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10056,
+    "BattlePassLevel": 55,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13026,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11042,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10057,
+    "BattlePassLevel": 56,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13027,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11043,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10058,
+    "BattlePassLevel": 57,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13028,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11044,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10059,
+    "BattlePassLevel": 58,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13029,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11045,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10060,
+    "BattlePassLevel": 59,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13030,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11046,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10061,
+    "BattlePassLevel": 60,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13021,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11037,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10062,
+    "BattlePassLevel": 61,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13022,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11038,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10063,
+    "BattlePassLevel": 62,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13023,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11039,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10064,
+    "BattlePassLevel": 63,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13024,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11040,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10065,
+    "BattlePassLevel": 64,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13025,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11041,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10066,
+    "BattlePassLevel": 65,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13026,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11042,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10067,
+    "BattlePassLevel": 66,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13027,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11043,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10068,
+    "BattlePassLevel": 67,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13028,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11044,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10069,
+    "BattlePassLevel": 68,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13029,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11045,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10070,
+    "BattlePassLevel": 69,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13030,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11046,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10071,
+    "BattlePassLevel": 70,
+    "SeasonId": 1,
+    "LevelUpExp": 0,
+    "TaskComPrize": {
+      "ItemConfigId": 13028,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11044,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10072,
+    "BattlePassLevel": 0,
+    "SeasonId": 2,
+    "LevelUpExp": 70,
+    "TaskComPrize": {
+      "ItemConfigId": 13001,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11017,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10073,
+    "BattlePassLevel": 1,
+    "SeasonId": 2,
+    "LevelUpExp": 80,
+    "TaskComPrize": {
+      "ItemConfigId": 13002,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11018,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10074,
+    "BattlePassLevel": 2,
+    "SeasonId": 2,
+    "LevelUpExp": 90,
+    "TaskComPrize": {
+      "ItemConfigId": 13003,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11019,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10075,
+    "BattlePassLevel": 3,
+    "SeasonId": 2,
+    "LevelUpExp": 100,
+    "TaskComPrize": {
+      "ItemConfigId": 13004,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11020,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10076,
+    "BattlePassLevel": 4,
+    "SeasonId": 2,
+    "LevelUpExp": 110,
+    "TaskComPrize": {
+      "ItemConfigId": 13005,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11021,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10077,
+    "BattlePassLevel": 5,
+    "SeasonId": 2,
+    "LevelUpExp": 120,
+    "TaskComPrize": {
+      "ItemConfigId": 13006,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11022,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10078,
+    "BattlePassLevel": 6,
+    "SeasonId": 2,
+    "LevelUpExp": 130,
+    "TaskComPrize": {
+      "ItemConfigId": 13007,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11023,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10079,
+    "BattlePassLevel": 7,
+    "SeasonId": 2,
+    "LevelUpExp": 140,
+    "TaskComPrize": {
+      "ItemConfigId": 13008,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11024,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10080,
+    "BattlePassLevel": 8,
+    "SeasonId": 2,
+    "LevelUpExp": 150,
+    "TaskComPrize": {
+      "ItemConfigId": 13009,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11025,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10081,
+    "BattlePassLevel": 9,
+    "SeasonId": 2,
+    "LevelUpExp": 200,
+    "TaskComPrize": {
+      "ItemConfigId": 13010,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11026,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10082,
+    "BattlePassLevel": 10,
+    "SeasonId": 2,
+    "LevelUpExp": 250,
+    "TaskComPrize": {
+      "ItemConfigId": 13011,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11027,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10083,
+    "BattlePassLevel": 11,
+    "SeasonId": 2,
+    "LevelUpExp": 300,
+    "TaskComPrize": {
+      "ItemConfigId": 13012,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11028,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10084,
+    "BattlePassLevel": 12,
+    "SeasonId": 2,
+    "LevelUpExp": 350,
+    "TaskComPrize": {
+      "ItemConfigId": 13013,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11029,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10085,
+    "BattlePassLevel": 13,
+    "SeasonId": 2,
+    "LevelUpExp": 400,
+    "TaskComPrize": {
+      "ItemConfigId": 13014,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11030,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10086,
+    "BattlePassLevel": 14,
+    "SeasonId": 2,
+    "LevelUpExp": 450,
+    "TaskComPrize": {
+      "ItemConfigId": 13015,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11031,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10087,
+    "BattlePassLevel": 15,
+    "SeasonId": 2,
+    "LevelUpExp": 500,
+    "TaskComPrize": {
+      "ItemConfigId": 13016,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11032,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10088,
+    "BattlePassLevel": 16,
+    "SeasonId": 2,
+    "LevelUpExp": 550,
+    "TaskComPrize": {
+      "ItemConfigId": 13017,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11033,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10089,
+    "BattlePassLevel": 17,
+    "SeasonId": 2,
+    "LevelUpExp": 600,
+    "TaskComPrize": {
+      "ItemConfigId": 13018,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11034,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10090,
+    "BattlePassLevel": 18,
+    "SeasonId": 2,
+    "LevelUpExp": 650,
+    "TaskComPrize": {
+      "ItemConfigId": 13019,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11035,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10091,
+    "BattlePassLevel": 19,
+    "SeasonId": 2,
+    "LevelUpExp": 700,
+    "TaskComPrize": {
+      "ItemConfigId": 13020,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11036,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10092,
+    "BattlePassLevel": 20,
+    "SeasonId": 2,
+    "LevelUpExp": 750,
+    "TaskComPrize": {
+      "ItemConfigId": 13021,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11037,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10093,
+    "BattlePassLevel": 21,
+    "SeasonId": 2,
+    "LevelUpExp": 800,
+    "TaskComPrize": {
+      "ItemConfigId": 13022,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11038,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10094,
+    "BattlePassLevel": 22,
+    "SeasonId": 2,
+    "LevelUpExp": 850,
+    "TaskComPrize": {
+      "ItemConfigId": 13023,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11039,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10095,
+    "BattlePassLevel": 23,
+    "SeasonId": 2,
+    "LevelUpExp": 900,
+    "TaskComPrize": {
+      "ItemConfigId": 13024,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11040,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10096,
+    "BattlePassLevel": 24,
+    "SeasonId": 2,
+    "LevelUpExp": 950,
+    "TaskComPrize": {
+      "ItemConfigId": 13025,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11041,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10097,
+    "BattlePassLevel": 25,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13026,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11042,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10098,
+    "BattlePassLevel": 26,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13027,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11043,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10099,
+    "BattlePassLevel": 27,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13028,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11044,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10100,
+    "BattlePassLevel": 28,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13029,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11045,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10101,
+    "BattlePassLevel": 29,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13030,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11046,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10102,
+    "BattlePassLevel": 30,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13001,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11017,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10103,
+    "BattlePassLevel": 31,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13002,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11018,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10104,
+    "BattlePassLevel": 32,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13003,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11019,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10105,
+    "BattlePassLevel": 33,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13004,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11020,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10106,
+    "BattlePassLevel": 34,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13005,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11021,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10107,
+    "BattlePassLevel": 35,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13006,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11022,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10108,
+    "BattlePassLevel": 36,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13007,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11023,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10109,
+    "BattlePassLevel": 37,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13008,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11024,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10110,
+    "BattlePassLevel": 38,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13009,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11025,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10111,
+    "BattlePassLevel": 39,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13010,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11026,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10112,
+    "BattlePassLevel": 40,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13011,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11027,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10113,
+    "BattlePassLevel": 41,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13012,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11028,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10114,
+    "BattlePassLevel": 42,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13013,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11029,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10115,
+    "BattlePassLevel": 43,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13014,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11030,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10116,
+    "BattlePassLevel": 44,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13015,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11031,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10117,
+    "BattlePassLevel": 45,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13016,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11032,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10118,
+    "BattlePassLevel": 46,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13017,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11033,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10119,
+    "BattlePassLevel": 47,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13018,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11034,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10120,
+    "BattlePassLevel": 48,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13019,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11035,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10121,
+    "BattlePassLevel": 49,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13020,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11036,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10122,
+    "BattlePassLevel": 50,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13021,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11037,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10123,
+    "BattlePassLevel": 51,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13022,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11038,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10124,
+    "BattlePassLevel": 52,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13023,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11039,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10125,
+    "BattlePassLevel": 53,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13024,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11040,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10126,
+    "BattlePassLevel": 54,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13025,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11041,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10127,
+    "BattlePassLevel": 55,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13026,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11042,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10128,
+    "BattlePassLevel": 56,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13027,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11043,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10129,
+    "BattlePassLevel": 57,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13028,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11044,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10130,
+    "BattlePassLevel": 58,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13029,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11045,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10131,
+    "BattlePassLevel": 59,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13030,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11046,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10132,
+    "BattlePassLevel": 60,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13021,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11037,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10133,
+    "BattlePassLevel": 61,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13022,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11038,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10134,
+    "BattlePassLevel": 62,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13023,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11039,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10135,
+    "BattlePassLevel": 63,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13024,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11040,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10136,
+    "BattlePassLevel": 64,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13025,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11041,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10137,
+    "BattlePassLevel": 65,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13026,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11042,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10138,
+    "BattlePassLevel": 66,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13027,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11043,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10139,
+    "BattlePassLevel": 67,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13028,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11044,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10140,
+    "BattlePassLevel": 68,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13029,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11045,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10141,
+    "BattlePassLevel": 69,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13030,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11046,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10142,
+    "BattlePassLevel": 70,
+    "SeasonId": 2,
+    "LevelUpExp": 0,
+    "TaskComPrize": {
+      "ItemConfigId": 13028,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11044,
+      "ItemCount": 1
+    }
+  }
+] ,
+"dota_battlepasstaskconfig":[
+  {
+    "id": 10001,
+    "TaskName": "测试每日1",
+    "TaskDes": "11",
+    "TaskType": "Daily",
+    "BindHero": "",
+    "TaskFinishCondition": {
+      "KeyString": "",
+      "ValueInt": 0
+    },
+    "TaskPrize": {
+      "ItemConfigId": 0,
+      "ItemCount": 0
+    }
+  },
+  {
+    "id": 10002,
+    "TaskName": "测试每日2",
+    "TaskDes": "11",
+    "TaskType": "Daily",
+    "BindHero": "",
+    "TaskFinishCondition": {
+      "KeyString": "",
+      "ValueInt": 0
+    },
+    "TaskPrize": {
+      "ItemConfigId": 0,
+      "ItemCount": 0
+    }
+  },
+  {
+    "id": 10003,
+    "TaskName": "测试每日3",
+    "TaskDes": "11",
+    "TaskType": "Daily",
+    "BindHero": "",
+    "TaskFinishCondition": {
+      "KeyString": "",
+      "ValueInt": 0
+    },
+    "TaskPrize": {
+      "ItemConfigId": 0,
+      "ItemCount": 0
+    }
+  },
+  {
+    "id": 10004,
+    "TaskName": "测试每日4",
+    "TaskDes": "11",
+    "TaskType": "Daily",
+    "BindHero": "",
+    "TaskFinishCondition": {
+      "KeyString": "",
+      "ValueInt": 0
+    },
+    "TaskPrize": {
+      "ItemConfigId": 0,
+      "ItemCount": 0
+    }
+  },
+  {
+    "id": 10005,
+    "TaskName": "测试每周1",
+    "TaskDes": "11",
+    "TaskType": "Week",
+    "BindHero": "",
+    "TaskFinishCondition": {
+      "KeyString": "",
+      "ValueInt": 0
+    },
+    "TaskPrize": {
+      "ItemConfigId": 0,
+      "ItemCount": 0
+    }
+  },
+  {
+    "id": 10006,
+    "TaskName": "测试每周2",
+    "TaskDes": "11",
+    "TaskType": "Week",
+    "BindHero": "",
+    "TaskFinishCondition": {
+      "KeyString": "",
+      "ValueInt": 0
+    },
+    "TaskPrize": {
+      "ItemConfigId": 0,
+      "ItemCount": 0
+    }
+  },
+  {
+    "id": 10007,
+    "TaskName": "测试每赛季1",
+    "TaskDes": "11",
+    "TaskType": "Season",
+    "BindHero": "",
+    "TaskFinishCondition": {
+      "KeyString": "",
+      "ValueInt": 0
+    },
+    "TaskPrize": {
+      "ItemConfigId": 0,
+      "ItemCount": 0
+    }
+  },
+  {
+    "id": 10008,
+    "TaskName": "测试每赛季2",
+    "TaskDes": "11",
+    "TaskType": "Season",
+    "BindHero": "",
+    "TaskFinishCondition": {
+      "KeyString": "",
+      "ValueInt": 0
+    },
+    "TaskPrize": {
+      "ItemConfigId": 0,
+      "ItemCount": 0
+    }
+  }
+] ,
 "dota_buffeffectconfig":[
   {
     "effectid": "modifier_sect_seckill_base_a",
@@ -69010,6 +72970,11322 @@
     "UseScript": 0,
     "UseArgs": [],
     "AwakeScript": []
+  },
+  {
+    "id": 20001,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20315",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20002,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20333",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20003,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20344",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20004,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20486",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20005,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21084",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20006,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21231",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20007,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21515",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20008,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21983",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20009,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21026",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20010,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21037",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20011,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21155",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20012,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21284",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20013,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21166",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20014,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21237",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20015,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21261",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20016,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21508",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20017,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21186",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20018,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21238",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20019,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21278",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20020,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21570",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20021,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20814",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20022,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21170",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20023,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21393",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20024,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21446",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20025,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21096",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20026,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21232",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20027,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21466",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20028,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "22214",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20029,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21019",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20030,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21039",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20031,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21286",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20032,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21384",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20033,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20595",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20034,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20856",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20035,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20872",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20036,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20913",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20037,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21036",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20038,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21168",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20039,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21358",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20040,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21396",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20041,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21052",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20042,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21192",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20043,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21287",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20044,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21352",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20045,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20931",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20046,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21004",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20047,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21063",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20048,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21274",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20049,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21099",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20050,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21113",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20051,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21157",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20052,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21208",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20053,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21571",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20054,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21763",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20055,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21817",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20056,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21949",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20057,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21398",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20058,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21439",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20059,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21720",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20060,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21951",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20061,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21288",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20062,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21490",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20063,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21572",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20064,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21790",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20065,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20900",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20066,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21066",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20067,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21474",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20068,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21505",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20069,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20965",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20070,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21117",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20071,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21209",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20072,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21372",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20073,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20694",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20074,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21005",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20075,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21016",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20076,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21040",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20077,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20910",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20078,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20929",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20079,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20955",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20080,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21171",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20081,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20584",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20082,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20859",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20083,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20980",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20084,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21053",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20085,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21391",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20086,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21428",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20087,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21438",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20088,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21457",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20089,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21921",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20090,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20091,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20092,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20093,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20987",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20094,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21326",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20095,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21330",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20096,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21415",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20097,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20861",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20098,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20977",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20099,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21042",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20100,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21109",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20101,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20772",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20102,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20854",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20103,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21031",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20104,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21086",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20105,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20956",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20106,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21033",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20107,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21216",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20108,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21228",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20109,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20863",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20110,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20902",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20111,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20986",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20112,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21092",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20113,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21375",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20114,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21461",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20115,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21610",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20116,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21702",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20117,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20368",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20118,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20495",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20119,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21399",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20120,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21608",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20121,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20484",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20122,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20616",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20123,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20786",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20124,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20942",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20125,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20482",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20126,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20573",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20127,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20857",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20128,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20937",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20129,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20926",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20130,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21007",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20131,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21054",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20132,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21227",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20133,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21510",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20134,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21591",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20135,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21697",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20136,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21757",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20137,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21235",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20138,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21331",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20139,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21379",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20140,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21584",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20141,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20805",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20142,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21094",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20143,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21276",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20144,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21567",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20145,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21069",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20146,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21128",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20147,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21246",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20148,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21498",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20149,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21339",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20150,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21432",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20151,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21455",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20152,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21459",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20153,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21093",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20154,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21125",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20155,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21161",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20156,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21193",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20157,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "22224",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20158,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "23256",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20159,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "24051",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20160,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20161,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21386",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20162,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21565",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20163,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21823",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20164,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21829",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20165,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20947",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20166,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21043",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20167,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21088",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20168,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21130",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20169,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21153",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20170,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21332",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20171,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21500",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20172,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20173,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21295",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20174,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21367",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20175,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21397",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20176,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21653",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20177,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20743",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20178,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21091",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20179,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21097",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20180,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21159",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20181,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20311",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20182,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20451",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20183,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20523",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20184,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20563",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20185,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21401",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20186,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21475",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20187,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21683",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20188,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21792",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20189,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20778",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20190,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20892",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20191,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20988",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20192,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21313",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20193,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20932",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20194,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21008",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20195,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21044",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20196,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21273",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20197,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20455",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20198,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20499",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20199,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20696",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20200,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20706",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20201,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21478",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20202,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21507",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20203,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21524",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20204,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21877",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20205,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20663",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20206,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20860",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20207,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21076",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20208,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21322",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20209,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20591",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20210,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20996",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20211,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21160",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20212,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21314",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20213,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21312",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20214,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21454",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20215,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21793",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20216,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "22212",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20217,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21599",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20218,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21671",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20219,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21760",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20220,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21941",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20221,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20917",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20222,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20952",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20223,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20985",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20224,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21183",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20225,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20226,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20227,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20228,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20229,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21587",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20230,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21612",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20231,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21645",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20232,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21674",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20233,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21106",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20234,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21582",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20235,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21765",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20236,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "22280",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20237,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21333",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20238,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21353",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20239,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21434",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20240,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21699",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20241,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20637",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20242,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20639",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20243,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20642",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20244,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20936",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20245,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21078",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20246,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21126",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20247,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21283",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20248,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21425",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20249,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20749",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20250,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20762",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20251,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20896",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20252,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20978",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20253,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20644",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20254,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20682",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20255,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20847",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20256,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20939",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20257,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20676",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20258,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20823",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20259,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20882",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20260,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20894",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20261,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21279",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20262,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21419",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20263,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21752",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20264,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21964",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20265,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21486",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20266,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21576",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20267,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21667",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20268,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21715",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20269,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20356",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20270,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20521",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20271,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20745",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20272,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20773",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20273,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20601",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20274,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20641",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20275,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20858",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20276,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21226",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20277,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21300",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20278,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21743",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20279,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21872",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20280,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "22281",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20281,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21064",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20282,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21152",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20283,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21272",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20284,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21368",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20285,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21405",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20286,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21406",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20287,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21463",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20288,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21583",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20289,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21421",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20290,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21731",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20291,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21778",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20292,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21927",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20293,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21449",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20294,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21725",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20295,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21809",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20296,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21845",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20297,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21154",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20298,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21473",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20299,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21707",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20300,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "22794",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20301,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21224",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20302,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21374",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20303,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21431",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20304,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21527",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20305,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20306,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20307,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20308,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20309,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20557",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20310,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20576",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20311,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20588",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20312,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20911",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20313,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20678",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20314,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20690",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20315,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20727",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20316,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20729",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20317,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20991",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20318,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21551",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20319,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21613",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20320,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "22344",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20321,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20747",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20322,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20813",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20323,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20880",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20324,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20904",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20325,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21141",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20326,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21221",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20327,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21240",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20328,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21289",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20329,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20850",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20330,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21045",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20331,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21065",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20332,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21262",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20333,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20647",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20334,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20801",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20335,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20983",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20336,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21133",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20337,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20832",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20338,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20843",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20339,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20873",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20340,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20927",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20341,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21270",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20342,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21303",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20343,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21635",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20344,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "22329",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20345,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21149",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20346,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21356",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20347,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21548",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20348,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21810",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20349,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20922",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20350,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21201",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20351,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21395",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20352,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21547",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20353,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20941",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20354,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21148",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20355,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21180",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20356,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21308",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20357,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21071",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20358,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21090",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20359,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21304",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20360,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21320",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20361,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21167",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20362,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21207",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20363,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21334",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20364,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21402",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20365,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20865",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20366,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20972",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20367,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21002",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20368,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21252",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20369,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20975",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20370,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21049",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20371,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21277",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20372,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21281",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20373,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21046",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20374,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21385",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20375,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21412",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20376,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21506",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20377,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21798",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20378,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20379,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20380,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20381,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21176",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20382,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21517",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20383,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21578",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20384,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21654",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20385,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20808",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20386,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20895",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20387,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21145",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20388,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21361",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20389,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21409",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20390,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21803",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20391,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21852",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20392,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21925",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20393,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21072",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20394,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21251",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20395,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21269",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20396,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21345",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20397,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20748",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20398,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20780",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20399,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20797",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20400,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20809",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20401,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20610",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20402,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21211",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20403,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21306",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20404,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21307",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20405,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20757",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20406,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20764",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20407,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20898",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20408,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20916",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20409,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20777",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20410,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20914",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20411,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21139",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20412,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21542",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20413,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21173",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20414,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21355",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20415,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21371",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20416,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21493",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20417,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20940",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20418,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21110",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20419,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21489",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20420,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20421,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20628",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20422,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20697",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20423,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21255",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20424,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21423",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20425,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20816",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20426,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20971",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20427,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21001",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20428,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21058",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20429,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21006",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20430,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21165",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20431,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21259",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20432,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21815",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20433,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21344",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20434,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21786",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20435,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21859",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20436,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21963",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20437,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21202",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20438,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21247",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20439,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21310",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20440,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21418",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20441,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20309",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20442,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20330",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20443,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20350",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20444,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20766",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20445,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20870",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20446,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20923",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20447,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20950",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20448,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21243",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20449,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20522",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20450,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20660",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20451,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20924",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20452,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21047",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20453,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21253",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20454,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21436",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20455,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21708",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20456,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21814",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20457,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21150",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20458,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21248",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20459,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21311",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20460,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21407",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20461,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21797",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20462,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20463,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20464,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20465,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21378",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20466,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21477",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20467,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21534",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20468,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21776",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20469,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21205",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20470,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21360",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20471,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21714",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20472,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21811",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20473,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21060",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20474,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21444",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20475,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21806",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20476,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "22287",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20477,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20811",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20478,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "20963",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20479,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21034",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20480,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21074",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20481,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20482,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20483,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20484,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20485,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21841",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20486,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21853",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20487,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21930",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20488,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "22279",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20489,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21075",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20490,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21452",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20491,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "21642",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 20492,
+    "isVaild": true,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": 7,
+    "ItemDes": "这是皮肤",
+    "BagSlotType": 1,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "MaxOwnerCount": 0,
+    "BatchUseable": false,
+    "BindHeroName": "22024",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": 5,
+        "ScriptValue": []
+      }
+    ]
   }
 ] ,
 "item_itemequipconfig":[

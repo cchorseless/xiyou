@@ -37,6 +37,8 @@ import { TActivityTotalSpendMetaStone } from "./activity/TActivityTotalSpendMeta
 import { TActivityTotalSpendMetaStoneData } from "./activity/TActivityTotalSpendMetaStoneData";
 import { BagComponent } from "./bag/BagComponent";
 import { TItem } from "./bag/TItem";
+import { CharacterBattlePassComponent } from "./battlepass/CharacterBattlePassComponent";
+import { TBattlePassTaskItem } from "./battlepass/TBattlePassTaskItem";
 import { CharacterBattleTeamComponent } from "./battleteam/CharacterBattleTeamComponent";
 import { TBattleTeamRecord } from "./battleteam/TBattleTeamRecord";
 import { CharacterBuffComponent } from "./buff/CharacterBuffComponent";
@@ -75,8 +77,6 @@ import { CharacterShopComponent } from "./shop/CharacterShopComponent";
 import { ServerZoneShopComponent } from "./shop/ServerZoneShopComponent";
 import { TShopSellItem } from "./shop/TShopSellItem";
 import { TShopUnit } from "./shop/TShopUnit";
-import { CharacterTaskComponent } from "./task/CharacterTaskComponent";
-import { TCharacterTaskItem } from "./task/TCharacterTaskItem";
 import { CharacterTitleComponent } from "./title/CharacterTitleComponent";
 import { CharacterTitleItem } from "./title/CharacterTitleItem";
 
@@ -177,8 +177,8 @@ import { CharacterTitleItem } from "./title/CharacterTitleItem";
     TShopSellItem,
     TShopUnit,
 
-    CharacterTaskComponent,
-    TCharacterTaskItem,
+    CharacterBattlePassComponent,
+    TBattlePassTaskItem,
 
     CharacterTitleComponent,
     CharacterTitleItem,

@@ -3,6 +3,7 @@ import { ET, serializeETProps } from "../../lib/Entity";
 import { CharacterAchievementComponent } from "../achievement/CharacterAchievementComponent";
 import { CharacterActivityComponent } from "../activity/CharacterActivityComponent";
 import { BagComponent } from "../bag/BagComponent";
+import { CharacterBattlePassComponent } from "../battlepass/CharacterBattlePassComponent";
 import { CharacterBattleTeamComponent } from "../battleteam/CharacterBattleTeamComponent";
 import { CharacterBuffComponent } from "../buff/CharacterBuffComponent";
 import { SeedRandomComponent } from "../common/SeedRandomComponent";
@@ -13,7 +14,6 @@ import { CharacterMailComponent } from "../mail/CharacterMailComponent";
 import { CharacterRankComponent } from "../rank/CharacterRankComponent";
 import { CharacterRechargeComponent } from "../recharge/CharacterRechargeComponent";
 import { CharacterShopComponent } from "../shop/CharacterShopComponent";
-import { CharacterTaskComponent } from "../task/CharacterTaskComponent";
 import { CharacterTitleComponent } from "../title/CharacterTitleComponent";
 import { CharacterDataComponent } from "./CharacterDataComponent";
 import { CharacterSteamComponent } from "./CharacterSteamComponent";
@@ -66,8 +66,8 @@ export class TCharacter extends ET.Component {
     get ShopComp() {
         return this.GetComponentByName<CharacterShopComponent>("CharacterShopComponent")!;
     }
-    get TaskComp() {
-        return this.GetComponentByName<CharacterTaskComponent>("CharacterTaskComponent")!;
+    get BattlePassComp() {
+        return CharacterBattlePassComponent.GetOneInstance(this.BelongPlayerid);
     }
     get MailComp() {
         return CharacterMailComponent.GetOneInstance(this.BelongPlayerid);;

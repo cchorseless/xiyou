@@ -1,13 +1,16 @@
-import React from "react";
 import { CCIcon } from "./CCIcon";
 
 interface IIcon_BattlepassLogoType {
-	type?: "Flat" | "GrayScale" | "GrayScaleSmall" | "Small";
+	type?: "Tui3" | "Flat" | "GrayScale" | "GrayScaleSmall" | "Small";
 }
 export class CCIcon_BattlepassLogo extends CCIcon<IIcon_BattlepassLogoType> {
 	defaultStyle() {
 		let styles = super.defaultStyle();
 		switch (this.props.type) {
+			case "Tui3":
+				return Object.assign(styles, {
+					src: "s2r://panorama/images/custom_game/bp/plus_small_png.vtex",
+				});
 			case "Flat":
 				return Object.assign(styles, {
 					src: "s2r://panorama/images/control_icons/battlepass_logo_flat_png.vtex",

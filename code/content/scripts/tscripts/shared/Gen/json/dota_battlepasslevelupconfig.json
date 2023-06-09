@@ -1,0 +1,1990 @@
+[
+  {
+    "id": 10001,
+    "BattlePassLevel": 0,
+    "SeasonId": 1,
+    "LevelUpExp": 70,
+    "TaskComPrize": {
+      "ItemConfigId": 13001,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11017,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10002,
+    "BattlePassLevel": 1,
+    "SeasonId": 1,
+    "LevelUpExp": 80,
+    "TaskComPrize": {
+      "ItemConfigId": 13002,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11018,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10003,
+    "BattlePassLevel": 2,
+    "SeasonId": 1,
+    "LevelUpExp": 90,
+    "TaskComPrize": {
+      "ItemConfigId": 13003,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11019,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10004,
+    "BattlePassLevel": 3,
+    "SeasonId": 1,
+    "LevelUpExp": 100,
+    "TaskComPrize": {
+      "ItemConfigId": 13004,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11020,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10005,
+    "BattlePassLevel": 4,
+    "SeasonId": 1,
+    "LevelUpExp": 110,
+    "TaskComPrize": {
+      "ItemConfigId": 13005,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11021,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10006,
+    "BattlePassLevel": 5,
+    "SeasonId": 1,
+    "LevelUpExp": 120,
+    "TaskComPrize": {
+      "ItemConfigId": 13006,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11022,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10007,
+    "BattlePassLevel": 6,
+    "SeasonId": 1,
+    "LevelUpExp": 130,
+    "TaskComPrize": {
+      "ItemConfigId": 13007,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11023,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10008,
+    "BattlePassLevel": 7,
+    "SeasonId": 1,
+    "LevelUpExp": 140,
+    "TaskComPrize": {
+      "ItemConfigId": 13008,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11024,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10009,
+    "BattlePassLevel": 8,
+    "SeasonId": 1,
+    "LevelUpExp": 150,
+    "TaskComPrize": {
+      "ItemConfigId": 13009,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11025,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10010,
+    "BattlePassLevel": 9,
+    "SeasonId": 1,
+    "LevelUpExp": 200,
+    "TaskComPrize": {
+      "ItemConfigId": 13010,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11026,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10011,
+    "BattlePassLevel": 10,
+    "SeasonId": 1,
+    "LevelUpExp": 250,
+    "TaskComPrize": {
+      "ItemConfigId": 13011,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11027,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10012,
+    "BattlePassLevel": 11,
+    "SeasonId": 1,
+    "LevelUpExp": 300,
+    "TaskComPrize": {
+      "ItemConfigId": 13012,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11028,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10013,
+    "BattlePassLevel": 12,
+    "SeasonId": 1,
+    "LevelUpExp": 350,
+    "TaskComPrize": {
+      "ItemConfigId": 13013,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11029,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10014,
+    "BattlePassLevel": 13,
+    "SeasonId": 1,
+    "LevelUpExp": 400,
+    "TaskComPrize": {
+      "ItemConfigId": 13014,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11030,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10015,
+    "BattlePassLevel": 14,
+    "SeasonId": 1,
+    "LevelUpExp": 450,
+    "TaskComPrize": {
+      "ItemConfigId": 13015,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11031,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10016,
+    "BattlePassLevel": 15,
+    "SeasonId": 1,
+    "LevelUpExp": 500,
+    "TaskComPrize": {
+      "ItemConfigId": 13016,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11032,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10017,
+    "BattlePassLevel": 16,
+    "SeasonId": 1,
+    "LevelUpExp": 550,
+    "TaskComPrize": {
+      "ItemConfigId": 13017,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11033,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10018,
+    "BattlePassLevel": 17,
+    "SeasonId": 1,
+    "LevelUpExp": 600,
+    "TaskComPrize": {
+      "ItemConfigId": 13018,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11034,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10019,
+    "BattlePassLevel": 18,
+    "SeasonId": 1,
+    "LevelUpExp": 650,
+    "TaskComPrize": {
+      "ItemConfigId": 13019,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11035,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10020,
+    "BattlePassLevel": 19,
+    "SeasonId": 1,
+    "LevelUpExp": 700,
+    "TaskComPrize": {
+      "ItemConfigId": 13020,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11036,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10021,
+    "BattlePassLevel": 20,
+    "SeasonId": 1,
+    "LevelUpExp": 750,
+    "TaskComPrize": {
+      "ItemConfigId": 13021,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11037,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10022,
+    "BattlePassLevel": 21,
+    "SeasonId": 1,
+    "LevelUpExp": 800,
+    "TaskComPrize": {
+      "ItemConfigId": 13022,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11038,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10023,
+    "BattlePassLevel": 22,
+    "SeasonId": 1,
+    "LevelUpExp": 850,
+    "TaskComPrize": {
+      "ItemConfigId": 13023,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11039,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10024,
+    "BattlePassLevel": 23,
+    "SeasonId": 1,
+    "LevelUpExp": 900,
+    "TaskComPrize": {
+      "ItemConfigId": 13024,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11040,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10025,
+    "BattlePassLevel": 24,
+    "SeasonId": 1,
+    "LevelUpExp": 950,
+    "TaskComPrize": {
+      "ItemConfigId": 13025,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11041,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10026,
+    "BattlePassLevel": 25,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13026,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11042,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10027,
+    "BattlePassLevel": 26,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13027,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11043,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10028,
+    "BattlePassLevel": 27,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13028,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11044,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10029,
+    "BattlePassLevel": 28,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13029,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11045,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10030,
+    "BattlePassLevel": 29,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13030,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11046,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10031,
+    "BattlePassLevel": 30,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13001,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11017,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10032,
+    "BattlePassLevel": 31,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13002,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11018,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10033,
+    "BattlePassLevel": 32,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13003,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11019,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10034,
+    "BattlePassLevel": 33,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13004,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11020,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10035,
+    "BattlePassLevel": 34,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13005,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11021,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10036,
+    "BattlePassLevel": 35,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13006,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11022,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10037,
+    "BattlePassLevel": 36,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13007,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11023,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10038,
+    "BattlePassLevel": 37,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13008,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11024,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10039,
+    "BattlePassLevel": 38,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13009,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11025,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10040,
+    "BattlePassLevel": 39,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13010,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11026,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10041,
+    "BattlePassLevel": 40,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13011,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11027,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10042,
+    "BattlePassLevel": 41,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13012,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11028,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10043,
+    "BattlePassLevel": 42,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13013,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11029,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10044,
+    "BattlePassLevel": 43,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13014,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11030,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10045,
+    "BattlePassLevel": 44,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13015,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11031,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10046,
+    "BattlePassLevel": 45,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13016,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11032,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10047,
+    "BattlePassLevel": 46,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13017,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11033,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10048,
+    "BattlePassLevel": 47,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13018,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11034,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10049,
+    "BattlePassLevel": 48,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13019,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11035,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10050,
+    "BattlePassLevel": 49,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13020,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11036,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10051,
+    "BattlePassLevel": 50,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13021,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11037,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10052,
+    "BattlePassLevel": 51,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13022,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11038,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10053,
+    "BattlePassLevel": 52,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13023,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11039,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10054,
+    "BattlePassLevel": 53,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13024,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11040,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10055,
+    "BattlePassLevel": 54,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13025,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11041,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10056,
+    "BattlePassLevel": 55,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13026,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11042,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10057,
+    "BattlePassLevel": 56,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13027,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11043,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10058,
+    "BattlePassLevel": 57,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13028,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11044,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10059,
+    "BattlePassLevel": 58,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13029,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11045,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10060,
+    "BattlePassLevel": 59,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13030,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11046,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10061,
+    "BattlePassLevel": 60,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13021,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11037,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10062,
+    "BattlePassLevel": 61,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13022,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11038,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10063,
+    "BattlePassLevel": 62,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13023,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11039,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10064,
+    "BattlePassLevel": 63,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13024,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11040,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10065,
+    "BattlePassLevel": 64,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13025,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11041,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10066,
+    "BattlePassLevel": 65,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13026,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11042,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10067,
+    "BattlePassLevel": 66,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13027,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11043,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10068,
+    "BattlePassLevel": 67,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13028,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11044,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10069,
+    "BattlePassLevel": 68,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13029,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11045,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10070,
+    "BattlePassLevel": 69,
+    "SeasonId": 1,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13030,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11046,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10071,
+    "BattlePassLevel": 70,
+    "SeasonId": 1,
+    "LevelUpExp": 0,
+    "TaskComPrize": {
+      "ItemConfigId": 13028,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11044,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10072,
+    "BattlePassLevel": 0,
+    "SeasonId": 2,
+    "LevelUpExp": 70,
+    "TaskComPrize": {
+      "ItemConfigId": 13001,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11017,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10073,
+    "BattlePassLevel": 1,
+    "SeasonId": 2,
+    "LevelUpExp": 80,
+    "TaskComPrize": {
+      "ItemConfigId": 13002,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11018,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10074,
+    "BattlePassLevel": 2,
+    "SeasonId": 2,
+    "LevelUpExp": 90,
+    "TaskComPrize": {
+      "ItemConfigId": 13003,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11019,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10075,
+    "BattlePassLevel": 3,
+    "SeasonId": 2,
+    "LevelUpExp": 100,
+    "TaskComPrize": {
+      "ItemConfigId": 13004,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11020,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10076,
+    "BattlePassLevel": 4,
+    "SeasonId": 2,
+    "LevelUpExp": 110,
+    "TaskComPrize": {
+      "ItemConfigId": 13005,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11021,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10077,
+    "BattlePassLevel": 5,
+    "SeasonId": 2,
+    "LevelUpExp": 120,
+    "TaskComPrize": {
+      "ItemConfigId": 13006,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11022,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10078,
+    "BattlePassLevel": 6,
+    "SeasonId": 2,
+    "LevelUpExp": 130,
+    "TaskComPrize": {
+      "ItemConfigId": 13007,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11023,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10079,
+    "BattlePassLevel": 7,
+    "SeasonId": 2,
+    "LevelUpExp": 140,
+    "TaskComPrize": {
+      "ItemConfigId": 13008,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11024,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10080,
+    "BattlePassLevel": 8,
+    "SeasonId": 2,
+    "LevelUpExp": 150,
+    "TaskComPrize": {
+      "ItemConfigId": 13009,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11025,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10081,
+    "BattlePassLevel": 9,
+    "SeasonId": 2,
+    "LevelUpExp": 200,
+    "TaskComPrize": {
+      "ItemConfigId": 13010,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11026,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10082,
+    "BattlePassLevel": 10,
+    "SeasonId": 2,
+    "LevelUpExp": 250,
+    "TaskComPrize": {
+      "ItemConfigId": 13011,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11027,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10083,
+    "BattlePassLevel": 11,
+    "SeasonId": 2,
+    "LevelUpExp": 300,
+    "TaskComPrize": {
+      "ItemConfigId": 13012,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11028,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10084,
+    "BattlePassLevel": 12,
+    "SeasonId": 2,
+    "LevelUpExp": 350,
+    "TaskComPrize": {
+      "ItemConfigId": 13013,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11029,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10085,
+    "BattlePassLevel": 13,
+    "SeasonId": 2,
+    "LevelUpExp": 400,
+    "TaskComPrize": {
+      "ItemConfigId": 13014,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11030,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10086,
+    "BattlePassLevel": 14,
+    "SeasonId": 2,
+    "LevelUpExp": 450,
+    "TaskComPrize": {
+      "ItemConfigId": 13015,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11031,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10087,
+    "BattlePassLevel": 15,
+    "SeasonId": 2,
+    "LevelUpExp": 500,
+    "TaskComPrize": {
+      "ItemConfigId": 13016,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11032,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10088,
+    "BattlePassLevel": 16,
+    "SeasonId": 2,
+    "LevelUpExp": 550,
+    "TaskComPrize": {
+      "ItemConfigId": 13017,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11033,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10089,
+    "BattlePassLevel": 17,
+    "SeasonId": 2,
+    "LevelUpExp": 600,
+    "TaskComPrize": {
+      "ItemConfigId": 13018,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11034,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10090,
+    "BattlePassLevel": 18,
+    "SeasonId": 2,
+    "LevelUpExp": 650,
+    "TaskComPrize": {
+      "ItemConfigId": 13019,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11035,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10091,
+    "BattlePassLevel": 19,
+    "SeasonId": 2,
+    "LevelUpExp": 700,
+    "TaskComPrize": {
+      "ItemConfigId": 13020,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11036,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10092,
+    "BattlePassLevel": 20,
+    "SeasonId": 2,
+    "LevelUpExp": 750,
+    "TaskComPrize": {
+      "ItemConfigId": 13021,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11037,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10093,
+    "BattlePassLevel": 21,
+    "SeasonId": 2,
+    "LevelUpExp": 800,
+    "TaskComPrize": {
+      "ItemConfigId": 13022,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11038,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10094,
+    "BattlePassLevel": 22,
+    "SeasonId": 2,
+    "LevelUpExp": 850,
+    "TaskComPrize": {
+      "ItemConfigId": 13023,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11039,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10095,
+    "BattlePassLevel": 23,
+    "SeasonId": 2,
+    "LevelUpExp": 900,
+    "TaskComPrize": {
+      "ItemConfigId": 13024,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11040,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10096,
+    "BattlePassLevel": 24,
+    "SeasonId": 2,
+    "LevelUpExp": 950,
+    "TaskComPrize": {
+      "ItemConfigId": 13025,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11041,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10097,
+    "BattlePassLevel": 25,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13026,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11042,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10098,
+    "BattlePassLevel": 26,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13027,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11043,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10099,
+    "BattlePassLevel": 27,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13028,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11044,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10100,
+    "BattlePassLevel": 28,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13029,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11045,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10101,
+    "BattlePassLevel": 29,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13030,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11046,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10102,
+    "BattlePassLevel": 30,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13001,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11017,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10103,
+    "BattlePassLevel": 31,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13002,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11018,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10104,
+    "BattlePassLevel": 32,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13003,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11019,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10105,
+    "BattlePassLevel": 33,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13004,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11020,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10106,
+    "BattlePassLevel": 34,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13005,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11021,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10107,
+    "BattlePassLevel": 35,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13006,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11022,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10108,
+    "BattlePassLevel": 36,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13007,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11023,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10109,
+    "BattlePassLevel": 37,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13008,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11024,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10110,
+    "BattlePassLevel": 38,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13009,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11025,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10111,
+    "BattlePassLevel": 39,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13010,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11026,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10112,
+    "BattlePassLevel": 40,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13011,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11027,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10113,
+    "BattlePassLevel": 41,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13012,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11028,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10114,
+    "BattlePassLevel": 42,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13013,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11029,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10115,
+    "BattlePassLevel": 43,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13014,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11030,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10116,
+    "BattlePassLevel": 44,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13015,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11031,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10117,
+    "BattlePassLevel": 45,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13016,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11032,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10118,
+    "BattlePassLevel": 46,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13017,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11033,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10119,
+    "BattlePassLevel": 47,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13018,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11034,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10120,
+    "BattlePassLevel": 48,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13019,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11035,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10121,
+    "BattlePassLevel": 49,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13020,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11036,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10122,
+    "BattlePassLevel": 50,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13021,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11037,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10123,
+    "BattlePassLevel": 51,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13022,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11038,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10124,
+    "BattlePassLevel": 52,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13023,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11039,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10125,
+    "BattlePassLevel": 53,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13024,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11040,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10126,
+    "BattlePassLevel": 54,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13025,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11041,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10127,
+    "BattlePassLevel": 55,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13026,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11042,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10128,
+    "BattlePassLevel": 56,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13027,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11043,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10129,
+    "BattlePassLevel": 57,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13028,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11044,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10130,
+    "BattlePassLevel": 58,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13029,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11045,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10131,
+    "BattlePassLevel": 59,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13030,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11046,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10132,
+    "BattlePassLevel": 60,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13021,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11037,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10133,
+    "BattlePassLevel": 61,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13022,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11038,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10134,
+    "BattlePassLevel": 62,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13023,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11039,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10135,
+    "BattlePassLevel": 63,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13024,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11040,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10136,
+    "BattlePassLevel": 64,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13025,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11041,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10137,
+    "BattlePassLevel": 65,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13026,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11042,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10138,
+    "BattlePassLevel": 66,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13027,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11043,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10139,
+    "BattlePassLevel": 67,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13028,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11044,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10140,
+    "BattlePassLevel": 68,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13029,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11045,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10141,
+    "BattlePassLevel": 69,
+    "SeasonId": 2,
+    "LevelUpExp": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13030,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11046,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10142,
+    "BattlePassLevel": 70,
+    "SeasonId": 2,
+    "LevelUpExp": 0,
+    "TaskComPrize": {
+      "ItemConfigId": 13028,
+      "ItemCount": 1
+    },
+    "TaskSpePrize": {
+      "ItemConfigId": 11044,
+      "ItemCount": 1
+    }
+  }
+]

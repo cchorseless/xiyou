@@ -27,21 +27,20 @@ export class CCVerticalTable extends CCPanel<ICCVerticalTable> {
         }
     };
     render() {
-        return (this.__root___isValid &&
-            <Panel className="CC_VerticalTable" ref={this.__root__}  {...this.initRootAttrs()}>
-                {this.props.list.map((sName, index) => {
-                    return (
-                        <TabButton onactivate={() => this.onSelect(index)}
-                            selected={this.props.selected != undefined ? this.props.selected - 1 == index : this.state.selectedIndex == index} group={this.props.group}
-                            className={CSSHelper.ClassMaker("VerticalTab")} key={sName}>
-                            <Panel id="SelectBG" hittest={false} />
-                            <Label localizedText={sName} hittest={false} />
-                        </TabButton>
-                    );
-                })}
-                {this.__root___childs}
-                {this.props.children}
-            </Panel >
+        return (<Panel className="CC_VerticalTable" ref={this.__root__}  {...this.initRootAttrs()}>
+            {this.props.list.map((sName, index) => {
+                return (
+                    <TabButton onactivate={() => this.onSelect(index)}
+                        selected={this.props.selected != undefined ? this.props.selected - 1 == index : this.state.selectedIndex == index} group={this.props.group}
+                        className={CSSHelper.ClassMaker("VerticalTab")} key={sName}>
+                        <Panel id="SelectBG" hittest={false} />
+                        <Label localizedText={sName} hittest={false} />
+                    </TabButton>
+                );
+            })}
+            {this.__root___childs}
+            {this.props.children}
+        </Panel >
         );
     }
 }

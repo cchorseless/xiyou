@@ -64,7 +64,7 @@ export class CCShopSellItem extends CCPanel<ICCShopSellItem> {
         }
         let discont = sellinfo.Discount;
         return (
-            <Panel className="CC_ShopSellItem" ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
+            <Panel className="CCShopSellItem" ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
                 {/* 商品图 */}
                 <CCShopItem itemname={sellinfo.ItemName} itemid={sellinfo.ItemConfigId} count={sellinfo.ItemCount} >
                     {/* 限购倒计时 */}

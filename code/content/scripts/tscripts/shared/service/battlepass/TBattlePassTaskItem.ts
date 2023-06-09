@@ -1,9 +1,9 @@
 import { ET, serializeETProps } from "../../lib/Entity";
-import { CharacterTaskComponent } from "./CharacterTaskComponent";
+import { CharacterBattlePassComponent } from "./CharacterBattlePassComponent";
 
 
 @GReloadable
-export class TCharacterTaskItem extends ET.Entity {
+export class TBattlePassTaskItem extends ET.Entity {
 
 
     @serializeETProps()
@@ -15,5 +15,8 @@ export class TCharacterTaskItem extends ET.Entity {
     @serializeETProps()
     public IsPrizeGet: boolean;
 
-    public get CharacterTaskComp(): CharacterTaskComponent { return this.GetParent<CharacterTaskComponent>(); }
+    public get BattlePassComp(): CharacterBattlePassComponent { return this.GetParent<CharacterBattlePassComponent>(); }
+
+
+
 }

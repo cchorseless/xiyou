@@ -1,0 +1,1848 @@
+[
+  {
+    "id": 10001,
+    "SeasonId": 1,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13001,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11017,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10002,
+    "SeasonId": 1,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13002,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11018,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10003,
+    "SeasonId": 1,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13003,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11019,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10004,
+    "SeasonId": 1,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13004,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11020,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10005,
+    "SeasonId": 1,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13005,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11021,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10006,
+    "SeasonId": 1,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13006,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11022,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10007,
+    "SeasonId": 1,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13007,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11023,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10008,
+    "SeasonId": 1,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13008,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11024,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10009,
+    "SeasonId": 1,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13009,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11025,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10010,
+    "SeasonId": 1,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13010,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11026,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10011,
+    "SeasonId": 1,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13011,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11027,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10012,
+    "SeasonId": 1,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13012,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11028,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10013,
+    "SeasonId": 1,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13013,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11029,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10014,
+    "SeasonId": 1,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13014,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11030,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10015,
+    "SeasonId": 1,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13015,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11031,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10016,
+    "SeasonId": 1,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13016,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11032,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10017,
+    "SeasonId": 1,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13017,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11033,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10018,
+    "SeasonId": 1,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13018,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11034,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10019,
+    "SeasonId": 1,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13019,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11035,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10020,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13020,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11036,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10021,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13021,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11037,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10022,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13022,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11038,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10023,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13023,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11039,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10024,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13024,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11040,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10025,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13025,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11041,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10026,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13026,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11042,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10027,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13027,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11043,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10028,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13028,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11044,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10029,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13029,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11045,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10030,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13030,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11046,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10031,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13001,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11017,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10032,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13002,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11018,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10033,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13003,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11019,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10034,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13004,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11020,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10035,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13005,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11021,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10036,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13006,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11022,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10037,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13007,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11023,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10038,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13008,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11024,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10039,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13009,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11025,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10040,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13010,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11026,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10041,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13011,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11027,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10042,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13012,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11028,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10043,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13013,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11029,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10044,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13014,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11030,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10045,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13015,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11031,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10046,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13016,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11032,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10047,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13017,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11033,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10048,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13018,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11034,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10049,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13019,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11035,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10050,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13020,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11036,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10051,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13021,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11037,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10052,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13022,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11038,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10053,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13023,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11039,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10054,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13024,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11040,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10055,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13025,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11041,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10056,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13026,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11042,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10057,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13027,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11043,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10058,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13028,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11044,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10059,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13029,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11045,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10060,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13030,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11046,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10061,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13021,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11037,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10062,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13022,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11038,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10063,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13023,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11039,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10064,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13024,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11040,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10065,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13025,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11041,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10066,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13026,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11042,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10067,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13027,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11043,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10068,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13028,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11044,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10069,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13029,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11045,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10070,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13030,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11046,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10071,
+    "SeasonId": 1,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13028,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11044,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10072,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13001,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11017,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10073,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13002,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11018,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10074,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13003,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11019,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10075,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13004,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11020,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10076,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13005,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11021,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10077,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13006,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11022,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10078,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13007,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11023,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10079,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13008,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11024,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10080,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13009,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11025,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10081,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13010,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11026,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10082,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13011,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11027,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10083,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13012,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11028,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10084,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13013,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11029,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10085,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13014,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11030,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10086,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13015,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11031,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10087,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13016,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11032,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10088,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13017,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11033,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10089,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13018,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11034,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10090,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13019,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11035,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10091,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13020,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11036,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10092,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13021,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11037,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10093,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13022,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11038,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10094,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13023,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11039,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10095,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13024,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11040,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10096,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13025,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11041,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10097,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13026,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11042,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10098,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13027,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11043,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10099,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13028,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11044,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10100,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13029,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11045,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10101,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13030,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11046,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10102,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13001,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11017,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10103,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13002,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11018,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10104,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13003,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11019,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10105,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13004,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11020,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10106,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13005,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11021,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10107,
+    "SeasonId": 2,
+    "IsCourier": true,
+    "ChargeTo": {
+      "ItemConfigId": 13006,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11022,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10108,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13007,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11023,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10109,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13008,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11024,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10110,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13009,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11025,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10111,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13010,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11026,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10112,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13011,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11027,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10113,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13012,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11028,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10114,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13013,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11029,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10115,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13014,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11030,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10116,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13015,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11031,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10117,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13016,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11032,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10118,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13017,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11033,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10119,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13018,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11034,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10120,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13019,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11035,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10121,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13020,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11036,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10122,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13021,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11037,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10123,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13022,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11038,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10124,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13023,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11039,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10125,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13024,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11040,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10126,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13025,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11041,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10127,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13026,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11042,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10128,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13027,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11043,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10129,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13028,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11044,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10130,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13029,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11045,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10131,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13030,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11046,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10132,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13021,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11037,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10133,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13022,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11038,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10134,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13023,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11039,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10135,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13024,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11040,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10136,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13025,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11041,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10137,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13026,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11042,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10138,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13027,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11043,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10139,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13028,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11044,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10140,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13029,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11045,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10141,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13030,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11046,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10142,
+    "SeasonId": 2,
+    "IsCourier": false,
+    "ChargeTo": {
+      "ItemConfigId": 13028,
+      "ItemCount": 1
+    },
+    "ChargeBy": {
+      "ItemConfigId": 11044,
+      "ItemCount": 1
+    }
+  }
+]

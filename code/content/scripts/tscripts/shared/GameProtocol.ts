@@ -28,7 +28,10 @@ export module GameProtocol {
         static readonly Rank_CharacterRankDataInfo = "/Rank_CharacterRankDataInfo";
         // 邮件
         static readonly Handle_CharacterMail = "/Handle_CharacterMail";
-
+        // 战令
+        static readonly BattlePass_GetPrize = "/BattlePass_GetPrize";
+        static readonly GetPrize_TaskPrize = "/GetPrize_TaskPrize";
+        static readonly BattlePass_ChargePrize = "/BattlePass_ChargePrize";
 
         // js-clientlua
         static readonly custom_call_get_ability_data = "custom_call_get_ability_data";

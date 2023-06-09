@@ -15,7 +15,7 @@ interface ICCShopItem extends IItemInfo {
 
 export class CCShopItem extends CCPanel<ICCShopItem> {
     defaultClass() {
-        return CSSHelper.ClassMaker("CC_ShopItem", { UnAvailable: this.props.isUnAvailable })
+        return CSSHelper.ClassMaker("CCShopItem", { UnAvailable: this.props.isUnAvailable })
     }
 
     render() {
@@ -26,7 +26,6 @@ export class CCShopItem extends CCPanel<ICCShopItem> {
         const itemdes = $.Localize("#" + config!.ItemDes);
 
         return (
-            this.__root___isValid &&
             <Panel ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
                 <Label id="ShopItemName" text={itemname} />
                 <CCImage id="ShopItemImg" backgroundImage={picurl} titleTooltip={{ title: itemname, tip: itemdes }} />

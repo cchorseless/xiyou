@@ -21,7 +21,9 @@ export class CCStorageItemGetDialog extends CCPanel<ICCStorageItemGetDialog> {
                 <CCPanel id="PopUpContent" flowChildren="right-wrap" scroll={"y"}>
                     {
                         Items.map((v, index) => {
-                            return <CCStorageIconItem key={index + ""} itemid={v.ItemConfigId} count={v.ItemCount} />
+                            if (v.ItemConfigId && v.ItemCount) {
+                                return <CCStorageIconItem key={index + ""} itemid={v.ItemConfigId} count={v.ItemCount} />
+                            }
                         })
                     }
                 </CCPanel>

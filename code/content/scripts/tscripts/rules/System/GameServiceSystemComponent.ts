@@ -244,7 +244,7 @@ export class GameServiceSystemComponent extends GameServiceSystem {
         });
         EventHelper.addProtocolEvent(GameProtocol.Protocol.Buy_ShopItem, hander);
         EventHelper.addProtocolEvent(GameProtocol.Protocol.Handle_CharacterMail, hander);
-
+        EventHelper.addProtocolEvent(GameProtocol.Protocol.BattlePass_GetPrize, hander);
 
 
     }

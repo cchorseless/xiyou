@@ -35,17 +35,15 @@ export class CCIcon<T = {}> extends CCPanel<ImageAttributes & ICCIcon & T, Image
 			washColor: this.props.color,
 			animationDuration: (this.props.spinDuration != undefined) ? this.props.spinDuration + "s" : undefined,
 			opacity: (this.props.opacity != undefined) ? String(this.props.opacity) : undefined,
-			width: CSSHelper.DEFAULT_ICON_SIZE,
-			height: CSSHelper.DEFAULT_ICON_SIZE,
+			// width: CSSHelper.DEFAULT_ICON_SIZE,
+			// height: CSSHelper.DEFAULT_ICON_SIZE,
 		} as any;
 	};
 	render() {
-		return (
-			this.__root___isValid &&
-			<Image ref={this.__root__}    {...this.initRootAttrs()}>
-				{this.props.children}
-				{this.__root___childs}
-			</Image>
+		return (<Image ref={this.__root__}    {...this.initRootAttrs()}>
+			{this.props.children}
+			{this.__root___childs}
+		</Image>
 		);
 	}
 }

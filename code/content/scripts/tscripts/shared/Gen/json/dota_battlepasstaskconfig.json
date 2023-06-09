@@ -1,0 +1,122 @@
+[
+  {
+    "id": 10001,
+    "TaskName": "测试每日1",
+    "TaskDes": "11",
+    "TaskType": "Daily",
+    "BindHero": "",
+    "TaskFinishCondition": {
+      "KeyString": "",
+      "ValueInt": 0
+    },
+    "TaskPrize": {
+      "ItemConfigId": 0,
+      "ItemCount": 0
+    }
+  },
+  {
+    "id": 10002,
+    "TaskName": "测试每日2",
+    "TaskDes": "11",
+    "TaskType": "Daily",
+    "BindHero": "",
+    "TaskFinishCondition": {
+      "KeyString": "",
+      "ValueInt": 0
+    },
+    "TaskPrize": {
+      "ItemConfigId": 0,
+      "ItemCount": 0
+    }
+  },
+  {
+    "id": 10003,
+    "TaskName": "测试每日3",
+    "TaskDes": "11",
+    "TaskType": "Daily",
+    "BindHero": "",
+    "TaskFinishCondition": {
+      "KeyString": "",
+      "ValueInt": 0
+    },
+    "TaskPrize": {
+      "ItemConfigId": 0,
+      "ItemCount": 0
+    }
+  },
+  {
+    "id": 10004,
+    "TaskName": "测试每日4",
+    "TaskDes": "11",
+    "TaskType": "Daily",
+    "BindHero": "",
+    "TaskFinishCondition": {
+      "KeyString": "",
+      "ValueInt": 0
+    },
+    "TaskPrize": {
+      "ItemConfigId": 0,
+      "ItemCount": 0
+    }
+  },
+  {
+    "id": 10005,
+    "TaskName": "测试每周1",
+    "TaskDes": "11",
+    "TaskType": "Week",
+    "BindHero": "",
+    "TaskFinishCondition": {
+      "KeyString": "",
+      "ValueInt": 0
+    },
+    "TaskPrize": {
+      "ItemConfigId": 0,
+      "ItemCount": 0
+    }
+  },
+  {
+    "id": 10006,
+    "TaskName": "测试每周2",
+    "TaskDes": "11",
+    "TaskType": "Week",
+    "BindHero": "",
+    "TaskFinishCondition": {
+      "KeyString": "",
+      "ValueInt": 0
+    },
+    "TaskPrize": {
+      "ItemConfigId": 0,
+      "ItemCount": 0
+    }
+  },
+  {
+    "id": 10007,
+    "TaskName": "测试每赛季1",
+    "TaskDes": "11",
+    "TaskType": "Season",
+    "BindHero": "",
+    "TaskFinishCondition": {
+      "KeyString": "",
+      "ValueInt": 0
+    },
+    "TaskPrize": {
+      "ItemConfigId": 0,
+      "ItemCount": 0
+    }
+  },
+  {
+    "id": 10008,
+    "TaskName": "测试每赛季2",
+    "TaskDes": "11",
+    "TaskType": "Season",
+    "BindHero": "",
+    "TaskFinishCondition": {
+      "KeyString": "",
+      "ValueInt": 0
+    },
+    "TaskPrize": {
+      "ItemConfigId": 0,
+      "ItemCount": 0
+    }
+  }
+]

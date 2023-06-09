@@ -223,6 +223,10 @@ export enum EItemType {
      * 铭文
      */
     MingWen = 6,
+    /**
+     * 皮肤
+     */
+    Skin = 7,
 }
 }
 
@@ -331,6 +335,10 @@ export enum EItemAwakeScript {
      * 检查唯一转化成星石
      */
     OwnedToStarStone = 4,
+    /**
+     * 激活皮肤
+     */
+    ActiveSkin = 5,
 }
 }
 
@@ -2619,115 +2627,6 @@ export class DrawTreasureConfigRecord {
 
 }
 
-export namespace Task {
-export class TaskConfig{
-    private _dataMap: Map<number, Task.TaskConfigRecord>
-    private _dataList: Task.TaskConfigRecord[]
-    constructor(_json_: any[]) {
- this._dataMap  = new Map<number, Task.TaskConfigRecord>()
-        this._dataList = []
-        for(let _json2_ of _json_) {
-            let _v: Task.TaskConfigRecord
-            _v = new Task.TaskConfigRecord(_json2_)
-            this._dataList.push(_v)
-            this._dataMap.set(_v.id, _v)
-        }
-    }
-
-    getDataMap(): Map<number, Task.TaskConfigRecord> { return this._dataMap; }
-    getDataList(): Task.TaskConfigRecord[] { return this._dataList; }
-
-    get(key: number): Task.TaskConfigRecord | undefined { return this._dataMap.get(key); }
-
-    resolve(_tables: Map<string, any>) {
-        for(let v of this._dataList) {
-            v.resolve(_tables)
-        }
-    }
-
-}
-}
-
-
-
-export namespace Task {
-export class TaskConfigRecord {
-
-    constructor(_json_: any) {
-        if (_json_.id === undefined) { GLogHelper.error(1); }
-        this.id = _json_.id
-        if (_json_.TaskName === undefined) { GLogHelper.error(1); }
-        this.TaskName = _json_.TaskName
-        if (_json_.TaskDes === undefined) { GLogHelper.error(1); }
-        this.TaskDes = _json_.TaskDes
-        if (_json_.TaskType === undefined) { GLogHelper.error(1); }
-        this.TaskType = _json_.TaskType
-        if (_json_.TaskFinishType === undefined) { GLogHelper.error(1); }
-        this.TaskFinishType = _json_.TaskFinishType
-        if (_json_.TaskFinishCondition === undefined) { GLogHelper.error(1); }
-        { this.TaskFinishCondition = []; for(let _ele of _json_.TaskFinishCondition) { let _e : Task.TaskFinishConditionBean; _e = new Task.TaskFinishConditionBean(_ele); this.TaskFinishCondition.push(_e);}}
-        if (_json_.TaskPrize === undefined) { GLogHelper.error(1); }
-        { this.TaskPrize = []; for(let _ele of _json_.TaskPrize) { let _e : Item.ItemInfoBean; _e = new Item.ItemInfoBean(_ele); this.TaskPrize.push(_e);}}
-    }
-
-    /**
-     * 任务id
-     */
-    readonly id: number
-    /**
-     * 任务名称
-     */
-    readonly TaskName: string
-    /**
-     * 任务描述
-     */
-    readonly TaskDes: string
-    /**
-     * 任务类型
-     */
-    readonly TaskType: string
-    /**
-     * 任务完成类型
-     */
-    readonly TaskFinishType: string
-    readonly TaskFinishCondition: Task.TaskFinishConditionBean[]
-    readonly TaskPrize: Item.ItemInfoBean[]
-
-    resolve(_tables: Map<string, any>) {
-        for(let _e of this.TaskFinishCondition) { if (_e != null ) {_e.resolve(_tables);} }
-        for(let _e of this.TaskPrize) { if (_e != null ) {_e.resolve(_tables);} }
-    }
-}
-
-}
-
-
-
-export namespace Task {
-export class TaskFinishConditionBean {
-
-    constructor(_json_: any) {
-        if (_json_.KeyString === undefined) { GLogHelper.error(1); }
-        this.KeyString = _json_.KeyString
-        if (_json_.ValueInt === undefined) { GLogHelper.error(1); }
-        this.ValueInt = _json_.ValueInt
-    }
-
-    /**
-     * 条件Key
-     */
-    readonly KeyString: string
-    /**
-     * 条件Value
-     */
-    readonly ValueInt: number
-
-    resolve(_tables: Map<string, any>) {
-    }
-}
-
-}
-
 export namespace Achievement {
 export class AchievementConfig{
     private _dataMap: Map<number, Achievement.AchievementConfigRecord>
@@ -2817,6 +2716,33 @@ export class AchievementConfigRecord {
     resolve(_tables: Map<string, any>) {
         for(let _e of this.AchieveFinishCondition) { if (_e != null ) {_e.resolve(_tables);} }
         for(let _e of this.AchievePrize) { if (_e != null ) {_e.resolve(_tables);} }
+    }
+}
+
+}
+
+
+
+export namespace Task {
+export class TaskFinishConditionBean {
+
+    constructor(_json_: any) {
+        if (_json_.KeyString === undefined) { GLogHelper.error(1); }
+        this.KeyString = _json_.KeyString
+        if (_json_.ValueInt === undefined) { GLogHelper.error(1); }
+        this.ValueInt = _json_.ValueInt
+    }
+
+    /**
+     * 条件Key
+     */
+    readonly KeyString: string
+    /**
+     * 条件Value
+     */
+    readonly ValueInt: number
+
+    resolve(_tables: Map<string, any>) {
     }
 }
 
@@ -3120,6 +3046,234 @@ export class UnitTalentInfoBean {
     readonly TalentRight: string
 
     resolve(_tables: Map<string, any>) {
+    }
+}
+
+}
+
+export namespace Dota {
+export class BattlePassChargeConfig{
+    private _dataMap: Map<number, Dota.BattlePassChargeConfigRecord>
+    private _dataList: Dota.BattlePassChargeConfigRecord[]
+    constructor(_json_: any[]) {
+ this._dataMap  = new Map<number, Dota.BattlePassChargeConfigRecord>()
+        this._dataList = []
+        for(let _json2_ of _json_) {
+            let _v: Dota.BattlePassChargeConfigRecord
+            _v = new Dota.BattlePassChargeConfigRecord(_json2_)
+            this._dataList.push(_v)
+            this._dataMap.set(_v.id, _v)
+        }
+    }
+
+    getDataMap(): Map<number, Dota.BattlePassChargeConfigRecord> { return this._dataMap; }
+    getDataList(): Dota.BattlePassChargeConfigRecord[] { return this._dataList; }
+
+    get(key: number): Dota.BattlePassChargeConfigRecord | undefined { return this._dataMap.get(key); }
+
+    resolve(_tables: Map<string, any>) {
+        for(let v of this._dataList) {
+            v.resolve(_tables)
+        }
+    }
+
+}
+}
+
+
+
+export namespace Dota {
+export class BattlePassChargeConfigRecord {
+
+    constructor(_json_: any) {
+        if (_json_.id === undefined) { GLogHelper.error(1); }
+        this.id = _json_.id
+        if (_json_.SeasonId === undefined) { GLogHelper.error(1); }
+        this.SeasonId = _json_.SeasonId
+        if (_json_.IsCourier === undefined) { GLogHelper.error(1); }
+        this.IsCourier = _json_.IsCourier
+        if (_json_.ChargeTo === undefined) { GLogHelper.error(1); }
+        this.ChargeTo = new Item.ItemInfoBean(_json_.ChargeTo)
+        if (_json_.ChargeBy === undefined) { GLogHelper.error(1); }
+        this.ChargeBy = new Item.ItemInfoBean(_json_.ChargeBy)
+    }
+
+    /**
+     * 唯一id
+     */
+    readonly id: number
+    /**
+     * 赛季ID
+     */
+    readonly SeasonId: number
+    /**
+     * 是否是信使
+     */
+    readonly IsCourier: boolean
+    readonly ChargeTo: Item.ItemInfoBean
+    readonly ChargeBy: Item.ItemInfoBean
+
+    resolve(_tables: Map<string, any>) {
+        if (this.ChargeTo != null) { this.ChargeTo.resolve(_tables);}
+        if (this.ChargeBy != null) { this.ChargeBy.resolve(_tables);}
+    }
+}
+
+}
+
+export namespace Dota {
+export class BattlePassTaskConfig{
+    private _dataMap: Map<number, Dota.BattlePassTaskConfigRecord>
+    private _dataList: Dota.BattlePassTaskConfigRecord[]
+    constructor(_json_: any[]) {
+ this._dataMap  = new Map<number, Dota.BattlePassTaskConfigRecord>()
+        this._dataList = []
+        for(let _json2_ of _json_) {
+            let _v: Dota.BattlePassTaskConfigRecord
+            _v = new Dota.BattlePassTaskConfigRecord(_json2_)
+            this._dataList.push(_v)
+            this._dataMap.set(_v.id, _v)
+        }
+    }
+
+    getDataMap(): Map<number, Dota.BattlePassTaskConfigRecord> { return this._dataMap; }
+    getDataList(): Dota.BattlePassTaskConfigRecord[] { return this._dataList; }
+
+    get(key: number): Dota.BattlePassTaskConfigRecord | undefined { return this._dataMap.get(key); }
+
+    resolve(_tables: Map<string, any>) {
+        for(let v of this._dataList) {
+            v.resolve(_tables)
+        }
+    }
+
+}
+}
+
+
+
+export namespace Dota {
+export class BattlePassTaskConfigRecord {
+
+    constructor(_json_: any) {
+        if (_json_.id === undefined) { GLogHelper.error(1); }
+        this.id = _json_.id
+        if (_json_.TaskName === undefined) { GLogHelper.error(1); }
+        this.TaskName = _json_.TaskName
+        if (_json_.TaskDes === undefined) { GLogHelper.error(1); }
+        this.TaskDes = _json_.TaskDes
+        if (_json_.TaskType === undefined) { GLogHelper.error(1); }
+        this.TaskType = _json_.TaskType
+        if (_json_.BindHero === undefined) { GLogHelper.error(1); }
+        this.BindHero = _json_.BindHero
+        if (_json_.TaskFinishCondition === undefined) { GLogHelper.error(1); }
+        this.TaskFinishCondition = new Task.TaskFinishConditionBean(_json_.TaskFinishCondition)
+        if (_json_.TaskPrize === undefined) { GLogHelper.error(1); }
+        this.TaskPrize = new Item.ItemInfoBean(_json_.TaskPrize)
+    }
+
+    /**
+     * 任务id
+     */
+    readonly id: number
+    /**
+     * 任务名称
+     */
+    readonly TaskName: string
+    /**
+     * 任务描述
+     */
+    readonly TaskDes: string
+    /**
+     * 任务类型
+     */
+    readonly TaskType: string
+    /**
+     * 绑定的英雄
+     */
+    readonly BindHero: string
+    readonly TaskFinishCondition: Task.TaskFinishConditionBean
+    readonly TaskPrize: Item.ItemInfoBean
+
+    resolve(_tables: Map<string, any>) {
+        if (this.TaskFinishCondition != null) { this.TaskFinishCondition.resolve(_tables);}
+        if (this.TaskPrize != null) { this.TaskPrize.resolve(_tables);}
+    }
+}
+
+}
+
+export namespace Dota {
+export class BattlePassLevelUpConfig{
+    private _dataMap: Map<number, Dota.BattlePassLevelUpConfigRecord>
+    private _dataList: Dota.BattlePassLevelUpConfigRecord[]
+    constructor(_json_: any[]) {
+ this._dataMap  = new Map<number, Dota.BattlePassLevelUpConfigRecord>()
+        this._dataList = []
+        for(let _json2_ of _json_) {
+            let _v: Dota.BattlePassLevelUpConfigRecord
+            _v = new Dota.BattlePassLevelUpConfigRecord(_json2_)
+            this._dataList.push(_v)
+            this._dataMap.set(_v.id, _v)
+        }
+    }
+
+    getDataMap(): Map<number, Dota.BattlePassLevelUpConfigRecord> { return this._dataMap; }
+    getDataList(): Dota.BattlePassLevelUpConfigRecord[] { return this._dataList; }
+
+    get(key: number): Dota.BattlePassLevelUpConfigRecord | undefined { return this._dataMap.get(key); }
+
+    resolve(_tables: Map<string, any>) {
+        for(let v of this._dataList) {
+            v.resolve(_tables)
+        }
+    }
+
+}
+}
+
+
+
+export namespace Dota {
+export class BattlePassLevelUpConfigRecord {
+
+    constructor(_json_: any) {
+        if (_json_.id === undefined) { GLogHelper.error(1); }
+        this.id = _json_.id
+        if (_json_.BattlePassLevel === undefined) { GLogHelper.error(1); }
+        this.BattlePassLevel = _json_.BattlePassLevel
+        if (_json_.SeasonId === undefined) { GLogHelper.error(1); }
+        this.SeasonId = _json_.SeasonId
+        if (_json_.LevelUpExp === undefined) { GLogHelper.error(1); }
+        this.LevelUpExp = _json_.LevelUpExp
+        if (_json_.TaskComPrize === undefined) { GLogHelper.error(1); }
+        this.TaskComPrize = new Item.ItemInfoBean(_json_.TaskComPrize)
+        if (_json_.TaskSpePrize === undefined) { GLogHelper.error(1); }
+        this.TaskSpePrize = new Item.ItemInfoBean(_json_.TaskSpePrize)
+    }
+
+    /**
+     * 唯一id
+     */
+    readonly id: number
+    /**
+     * BattlePass等级
+     */
+    readonly BattlePassLevel: number
+    /**
+     * 赛季ID
+     */
+    readonly SeasonId: number
+    /**
+     * 升级所需经验
+     */
+    readonly LevelUpExp: number
+    readonly TaskComPrize: Item.ItemInfoBean
+    readonly TaskSpePrize: Item.ItemInfoBean
+
+    resolve(_tables: Map<string, any>) {
+        if (this.TaskComPrize != null) { this.TaskComPrize.resolve(_tables);}
+        if (this.TaskSpePrize != null) { this.TaskSpePrize.resolve(_tables);}
     }
 }
 
@@ -4565,8 +4719,6 @@ export class Tables {
     get RankPrizeConfig(): Rank.RankPrizeConfig  { return this._RankPrizeConfig;}
     private _DrawTreasureConfig: Draw.DrawTreasureConfig
     get DrawTreasureConfig(): Draw.DrawTreasureConfig  { return this._DrawTreasureConfig;}
-    private _TaskConfig: Task.TaskConfig
-    get TaskConfig(): Task.TaskConfig  { return this._TaskConfig;}
     private _AchievementConfig: Achievement.AchievementConfig
     get AchievementConfig(): Achievement.AchievementConfig  { return this._AchievementConfig;}
     private _TitleConfig: Title.TitleConfig
@@ -4575,6 +4727,12 @@ export class Tables {
     get GlobalSetting(): Glob.GlobalSetting  { return this._GlobalSetting;}
     private _BuildingLevelUpConfig: Dota.BuildingLevelUpConfig
     get BuildingLevelUpConfig(): Dota.BuildingLevelUpConfig  { return this._BuildingLevelUpConfig;}
+    private _BattlePassChargeConfig: Dota.BattlePassChargeConfig
+    get BattlePassChargeConfig(): Dota.BattlePassChargeConfig  { return this._BattlePassChargeConfig;}
+    private _BattlePassTaskConfig: Dota.BattlePassTaskConfig
+    get BattlePassTaskConfig(): Dota.BattlePassTaskConfig  { return this._BattlePassTaskConfig;}
+    private _BattlePassLevelUpConfig: Dota.BattlePassLevelUpConfig
+    get BattlePassLevelUpConfig(): Dota.BattlePassLevelUpConfig  { return this._BattlePassLevelUpConfig;}
     private _BuffEffectConfig: Dota.BuffEffectConfig
     get BuffEffectConfig(): Dota.BuffEffectConfig  { return this._BuffEffectConfig;}
     private _CourierAbilityLevelUpConfig: Dota.CourierAbilityLevelUpConfig
@@ -4646,8 +4804,6 @@ export class Tables {
         tables.set('Rank.RankPrizeConfig', this._RankPrizeConfig)
         this._DrawTreasureConfig = new Draw.DrawTreasureConfig(loader('draw_drawtreasureconfig'))
         tables.set('Draw.DrawTreasureConfig', this._DrawTreasureConfig)
-        this._TaskConfig = new Task.TaskConfig(loader('task_taskconfig'))
-        tables.set('Task.TaskConfig', this._TaskConfig)
         this._AchievementConfig = new Achievement.AchievementConfig(loader('achievement_achievementconfig'))
         tables.set('Achievement.AchievementConfig', this._AchievementConfig)
         this._TitleConfig = new Title.TitleConfig(loader('title_titleconfig'))
@@ -4656,6 +4812,12 @@ export class Tables {
         tables.set('Glob.GlobalSetting', this._GlobalSetting)
         this._BuildingLevelUpConfig = new Dota.BuildingLevelUpConfig(loader('dota_buildinglevelupconfig'))
         tables.set('Dota.BuildingLevelUpConfig', this._BuildingLevelUpConfig)
+        this._BattlePassChargeConfig = new Dota.BattlePassChargeConfig(loader('dota_battlepasschargeconfig'))
+        tables.set('Dota.BattlePassChargeConfig', this._BattlePassChargeConfig)
+        this._BattlePassTaskConfig = new Dota.BattlePassTaskConfig(loader('dota_battlepasstaskconfig'))
+        tables.set('Dota.BattlePassTaskConfig', this._BattlePassTaskConfig)
+        this._BattlePassLevelUpConfig = new Dota.BattlePassLevelUpConfig(loader('dota_battlepasslevelupconfig'))
+        tables.set('Dota.BattlePassLevelUpConfig', this._BattlePassLevelUpConfig)
         this._BuffEffectConfig = new Dota.BuffEffectConfig(loader('dota_buffeffectconfig'))
         tables.set('Dota.BuffEffectConfig', this._BuffEffectConfig)
         this._CourierAbilityLevelUpConfig = new Dota.CourierAbilityLevelUpConfig(loader('dota_courierabilitylevelupconfig'))
@@ -4701,11 +4863,13 @@ export class Tables {
         this._SeasonConfig.resolve(tables)
         this._RankPrizeConfig.resolve(tables)
         this._DrawTreasureConfig.resolve(tables)
-        this._TaskConfig.resolve(tables)
         this._AchievementConfig.resolve(tables)
         this._TitleConfig.resolve(tables)
         this._GlobalSetting.resolve(tables)
         this._BuildingLevelUpConfig.resolve(tables)
+        this._BattlePassChargeConfig.resolve(tables)
+        this._BattlePassTaskConfig.resolve(tables)
+        this._BattlePassLevelUpConfig.resolve(tables)
         this._BuffEffectConfig.resolve(tables)
         this._CourierAbilityLevelUpConfig.resolve(tables)
         this._CombinationConfig.resolve(tables)
@@ -4767,8 +4931,6 @@ case ('rank_rankprizeconfig'):
         this._RankPrizeConfig = new Rank.RankPrizeConfig(loader('rank_rankprizeconfig'));break;
 case ('draw_drawtreasureconfig'):
         this._DrawTreasureConfig = new Draw.DrawTreasureConfig(loader('draw_drawtreasureconfig'));break;
-case ('task_taskconfig'):
-        this._TaskConfig = new Task.TaskConfig(loader('task_taskconfig'));break;
 case ('achievement_achievementconfig'):
         this._AchievementConfig = new Achievement.AchievementConfig(loader('achievement_achievementconfig'));break;
 case ('title_titleconfig'):
@@ -4777,6 +4939,12 @@ case ('glob_globalsetting'):
         this._GlobalSetting = new Glob.GlobalSetting(loader('glob_globalsetting'));break;
 case ('dota_buildinglevelupconfig'):
         this._BuildingLevelUpConfig = new Dota.BuildingLevelUpConfig(loader('dota_buildinglevelupconfig'));break;
+case ('dota_battlepasschargeconfig'):
+        this._BattlePassChargeConfig = new Dota.BattlePassChargeConfig(loader('dota_battlepasschargeconfig'));break;
+case ('dota_battlepasstaskconfig'):
+        this._BattlePassTaskConfig = new Dota.BattlePassTaskConfig(loader('dota_battlepasstaskconfig'));break;
+case ('dota_battlepasslevelupconfig'):
+        this._BattlePassLevelUpConfig = new Dota.BattlePassLevelUpConfig(loader('dota_battlepasslevelupconfig'));break;
 case ('dota_buffeffectconfig'):
         this._BuffEffectConfig = new Dota.BuffEffectConfig(loader('dota_buffeffectconfig'));break;
 case ('dota_courierabilitylevelupconfig'):

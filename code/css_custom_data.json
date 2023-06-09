@@ -55,6 +55,11 @@
 
         },
         {
+            "name": "ui-scale",
+            "description": "缩放 100%"
+
+        },
+        {
             "name": "x",
             "description": "30px"
         },
