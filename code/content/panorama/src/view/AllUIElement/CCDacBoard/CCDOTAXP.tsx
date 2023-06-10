@@ -1,8 +1,8 @@
-import React, { createRef } from "react";
-import { GameEnum } from "../../../../../scripts/tscripts/shared/GameEnum";
-import { GEventHelper } from "../../../../../scripts/tscripts/shared/lib/GEventHelper";
-import { THeroUnit } from "../../../../../scripts/tscripts/shared/service/hero/THeroUnit";
-import { CCPanel } from "../CCPanel/CCPanel";
+import React, {createRef} from "react";
+import {GameEnum} from "../../../../../scripts/tscripts/shared/GameEnum";
+import {GEventHelper} from "../../../../../scripts/tscripts/shared/lib/GEventHelper";
+import {THeroUnit} from "../../../../../scripts/tscripts/shared/service/hero/THeroUnit";
+import {CCPanel} from "../CCPanel/CCPanel";
 import "./CCDOTAXP.less";
 
 export interface ICCDOTAXP {
@@ -36,22 +36,23 @@ export class CCDOTAXP extends CCPanel<ICCDOTAXP> {
         if (buildingroot) {
             let herounit = buildingroot.GetHeroUnit();
             if (herounit && herounit.Level > 0) {
-                let maxexp = GJSONConfig.HeroLevelUpConfig.get(herounit.Level)!.Exp;
+                let maxexp = GJSONConfig.BuildingLevelUpExpConfig.get(herounit.Level)!.Exp;
                 this.SetExp(herounit.Exp, maxexp);
                 this.SetLevel(herounit.Level);
                 return;
             }
         }
-        this.SetExp(0, GJSONConfig.HeroLevelUpConfig.get(1)!.Exp);
+        this.SetExp(0, GJSONConfig.BuildingLevelUpExpConfig.get(1)!.Exp);
         this.SetLevel(0);
     }
+
     SetExp(exp: number, max: number) {
         if (!this.__DOTAXP__ || !this.__DOTAXP__.current || !this.IsRegister) return;
         let xp = this.__DOTAXP__.current!.FindChildTraverse("CircularXPProgress") as any as CircularProgressBar;
         if (xp) {
             xp.max = max;
             xp.value = exp;
-            this.UpdateState({ xpvalue: exp, xpmax: max });
+            this.UpdateState({xpvalue: exp, xpmax: max});
         }
     }
 
@@ -70,13 +71,16 @@ export class CCDOTAXP extends CCPanel<ICCDOTAXP> {
         LifetimeLabel.style.fontSize = "16px";
         this.OnSelectUnit();
     }
+
     render() {
         const xpvalue = this.GetState("xpvalue", 0);
         const xpmax = this.GetState("xpmax", 0);
         return (
             <Panel id="CC_DOTAXP" className="ShowXPBar" ref={this.__root__}      {...this.initRootAttrs()}>
                 <CCPanel tooltipPosition="top" tooltip={`${xpvalue}/${xpmax}`}>
-                    <GenericPanel type="DOTAXP" id="xp" ref={this.__DOTAXP__} style={{ width: "45px", height: "45px" }} hittest={false} always-cache-composition-layer={true} require-composition-layer={true} />
+                    <GenericPanel type="DOTAXP" id="xp" ref={this.__DOTAXP__} style={{width: "45px", height: "45px"}}
+                                  hittest={false} always-cache-composition-layer={true}
+                                  require-composition-layer={true}/>
                 </CCPanel>
                 {this.__root___childs}
                 {this.props.children}

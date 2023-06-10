@@ -6,16 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0afe1df3-4870-48f1-a775-af97afd6ee5a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Activity/CCActivityPanel.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Activity/CCActivityPanel.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Activity/CCActivityPanel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Activity/CCActivityPanel.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/HandBook/CCHandBookHero.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/HandBook/CCHandBookHero.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/GameProtocol.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/GameProtocol.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/JsonConfig.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/JsonConfig.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/Types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/Types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/service/AllServiceEntity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/service/AllServiceEntity.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/service/activity/TActivityHeroRecordLevel.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/service/activity/TActivityHeroRecordLevelData.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/service/activity/TActivitySevenDayLogin.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/service/activity/TActivitySevenDayLogin.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCDacBoard/CCDOTAXP.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCDacBoard/CCDOTAXP.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/service/activity/TActivitySevenDayLoginData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/service/activity/TActivitySevenDayLoginData.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -258,7 +249,7 @@
       <workItem from="1685934289657" duration="18155000" />
       <workItem from="1686126092151" duration="4998000" />
       <workItem from="1686189357802" duration="15306000" />
-      <workItem from="1686359968368" duration="7515000" />
+      <workItem from="1686359968368" duration="8161000" />
     </task>
     <servers />
   </component>

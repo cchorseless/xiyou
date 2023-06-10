@@ -14,4 +14,7 @@ export class TActivitySevenDayLoginData extends TActivityData {
     @serializeETProps()
     public LoginDayCount: number;
 
+    @serializeETProps()
+    public SeasonConfigId: number;
+
 }
