@@ -118,7 +118,7 @@ export class CCHandBookHeroItem extends CCPanel<ICCHandBookHeroItem> {
             level = herounit.Level;
             exp = herounit.Exp;
         }
-        let maxexp = GJSONConfig.HeroLevelUpConfig.get(level + 1)!.Exp;
+        let maxexp = GJSONConfig.BuildingLevelUpExpConfig.get(level + 1)!.Exp;
         return (
             <Panel className="CCHandBookHeroItem" ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
                 <CCPanel flowChildren="right" onactivate={() => { this.props.onclick && this.props.onclick() }}>
@@ -161,7 +161,7 @@ export class CCHandBookHeroInfo extends CCPanel<ICCHandBookHeroItem> {
             level = herounit.Level;
             exp = herounit.Exp;
         }
-        let maxexp = GJSONConfig.HeroLevelUpConfig.get(level + 1)!.Exp;
+        let maxexp = GJSONConfig.BuildingLevelUpExpConfig.get(level + 1)!.Exp;
         const add_strength = 0 + "";
         const add_agility = 0 + "";
         const add_intellect = 0 + "";

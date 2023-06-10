@@ -1243,167 +1243,6 @@ export class ShopSellItemBean {
 
 }
 
-export namespace Prop {
-export class PropConfig{
-    private _dataMap: Map<number, Prop.PropConfigRecord>
-    private _dataList: Prop.PropConfigRecord[]
-    constructor(_json_: any[]) {
- this._dataMap  = new Map<number, Prop.PropConfigRecord>()
-        this._dataList = []
-        for(let _json2_ of _json_) {
-            let _v: Prop.PropConfigRecord
-            _v = new Prop.PropConfigRecord(_json2_)
-            this._dataList.push(_v)
-            this._dataMap.set(_v.id, _v)
-        }
-    }
-
-    getDataMap(): Map<number, Prop.PropConfigRecord> { return this._dataMap; }
-    getDataList(): Prop.PropConfigRecord[] { return this._dataList; }
-
-    get(key: number): Prop.PropConfigRecord | undefined { return this._dataMap.get(key); }
-
-    resolve(_tables: Map<string, any>) {
-        for(let v of this._dataList) {
-            v.resolve(_tables)
-        }
-    }
-
-}
-}
-
-
-
-export namespace Prop {
-export class PropConfigRecord {
-
-    constructor(_json_: any) {
-        if (_json_.id === undefined) { GLogHelper.error(1); }
-        this.id = _json_.id
-        if (_json_.PropName === undefined) { GLogHelper.error(1); }
-        this.PropName = _json_.PropName
-        if (_json_.Des === undefined) { GLogHelper.error(1); }
-        this.Des = _json_.Des
-    }
-
-    /**
-     * 主键
-     */
-    readonly id: number
-    /**
-     * 属性名称
-     */
-    readonly PropName: string
-    /**
-     * 属性描述
-     */
-    readonly Des: string
-
-    resolve(_tables: Map<string, any>) {
-    }
-}
-
-}
-
-export namespace Prop {
-export class RandomPropConfig{
-    private _dataMap: Map<number, Prop.RandomPropConfigRecord>
-    private _dataList: Prop.RandomPropConfigRecord[]
-    constructor(_json_: any[]) {
- this._dataMap  = new Map<number, Prop.RandomPropConfigRecord>()
-        this._dataList = []
-        for(let _json2_ of _json_) {
-            let _v: Prop.RandomPropConfigRecord
-            _v = new Prop.RandomPropConfigRecord(_json2_)
-            this._dataList.push(_v)
-            this._dataMap.set(_v.id, _v)
-        }
-    }
-
-    getDataMap(): Map<number, Prop.RandomPropConfigRecord> { return this._dataMap; }
-    getDataList(): Prop.RandomPropConfigRecord[] { return this._dataList; }
-
-    get(key: number): Prop.RandomPropConfigRecord | undefined { return this._dataMap.get(key); }
-
-    resolve(_tables: Map<string, any>) {
-        for(let v of this._dataList) {
-            v.resolve(_tables)
-        }
-    }
-
-}
-}
-
-
-
-export namespace Prop {
-export class RandomPropConfigRecord {
-
-    constructor(_json_: any) {
-        if (_json_.id === undefined) { GLogHelper.error(1); }
-        this.id = _json_.id
-        if (_json_.propPool === undefined) { GLogHelper.error(1); }
-        { this.propPool = []; for(let _ele of _json_.propPool) { let _e : Prop.PropPoolBean; _e = new Prop.PropPoolBean(_ele); this.propPool.push(_e);}}
-    }
-
-    /**
-     * 随机属性id
-     */
-    readonly id: number
-    readonly propPool: Prop.PropPoolBean[]
-
-    resolve(_tables: Map<string, any>) {
-        for(let _e of this.propPool) { if (_e != null ) {_e.resolve(_tables);} }
-    }
-}
-
-}
-
-
-
-export namespace Prop {
-export class PropPoolBean {
-
-    constructor(_json_: any) {
-        if (_json_.Propid === undefined) { GLogHelper.error(1); }
-        this.Propid = _json_.Propid
-        if (_json_.PropDes === undefined) { GLogHelper.error(1); }
-        this.PropDes = _json_.PropDes
-        if (_json_.PropWeight === undefined) { GLogHelper.error(1); }
-        this.PropWeight = _json_.PropWeight
-        if (_json_.PropMax === undefined) { GLogHelper.error(1); }
-        this.PropMax = _json_.PropMax
-        if (_json_.PropMin === undefined) { GLogHelper.error(1); }
-        this.PropMin = _json_.PropMin
-    }
-
-    /**
-     * 属性id
-     */
-    readonly Propid: number
-    /**
-     * 属性描述
-     */
-    readonly PropDes: string
-    /**
-     * 属性权重
-     */
-    readonly PropWeight: number
-    /**
-     * 属性显示最大值
-     */
-    readonly PropMax: number
-    /**
-     * 属性显示最小值
-     */
-    readonly PropMin: number
-
-    resolve(_tables: Map<string, any>) {
-    }
-}
-
-}
-
 export namespace Activity {
 export class ActivityConfig{
     private _dataMap: Map<number, Activity.ActivityConfigRecord>
@@ -1520,9 +1359,9 @@ export class TActivityMonthLoginRecord {
         if (_json_.ActivityEndTime === undefined) { GLogHelper.error(1); }
         this.ActivityEndTime = _json_.ActivityEndTime
         if (_json_.LoginPrize === undefined) { GLogHelper.error(1); }
-        { this.LoginPrize = []; for(let _ele of _json_.LoginPrize) { let _e : Item.ItemGroupBean; _e = new Item.ItemGroupBean(_ele); this.LoginPrize.push(_e);}}
+        { this.LoginPrize = []; for(let _ele of _json_.LoginPrize) { let _e : Item.ItemInfoWithIndexBean; _e = new Item.ItemInfoWithIndexBean(_ele); this.LoginPrize.push(_e);}}
         if (_json_.TotalLoginPrize === undefined) { GLogHelper.error(1); }
-        { this.TotalLoginPrize = []; for(let _ele of _json_.TotalLoginPrize) { let _e : Item.ItemGroupBean; _e = new Item.ItemGroupBean(_ele); this.TotalLoginPrize.push(_e);}}
+        { this.TotalLoginPrize = []; for(let _ele of _json_.TotalLoginPrize) { let _e : Item.ItemInfoWithIndexBean; _e = new Item.ItemInfoWithIndexBean(_ele); this.TotalLoginPrize.push(_e);}}
     }
 
     /**
@@ -1537,8 +1376,8 @@ export class TActivityMonthLoginRecord {
      * 结束时间
      */
     readonly ActivityEndTime: number
-    readonly LoginPrize: Item.ItemGroupBean[]
-    readonly TotalLoginPrize: Item.ItemGroupBean[]
+    readonly LoginPrize: Item.ItemInfoWithIndexBean[]
+    readonly TotalLoginPrize: Item.ItemInfoWithIndexBean[]
 
     resolve(_tables: Map<string, any>) {
         for(let _e of this.LoginPrize) { if (_e != null ) {_e.resolve(_tables);} }
@@ -1551,43 +1390,21 @@ export class TActivityMonthLoginRecord {
 
 
 export namespace Item {
-export class ItemGroupBean {
+export class ItemInfoWithIndexBean {
 
     constructor(_json_: any) {
         if (_json_.Index === undefined) { GLogHelper.error(1); }
         this.Index = _json_.Index
-        if (_json_.ItemGroup === undefined) { GLogHelper.error(1); }
-        { this.ItemGroup = []; for(let _ele of _json_.ItemGroup) { let _e : Item.ItemInfoBean; _e = new Item.ItemInfoBean(_ele); this.ItemGroup.push(_e);}}
-    }
-
-    /**
-     * 道具组索引
-     */
-    readonly Index: number
-    /**
-     * 道具组
-     */
-    readonly ItemGroup: Item.ItemInfoBean[]
-
-    resolve(_tables: Map<string, any>) {
-        for(let _e of this.ItemGroup) { if (_e != null ) {_e.resolve(_tables);} }
-    }
-}
-
-}
-
-
-
-export namespace Item {
-export class ItemInfoBean {
-
-    constructor(_json_: any) {
         if (_json_.ItemConfigId === undefined) { GLogHelper.error(1); }
         this.ItemConfigId = _json_.ItemConfigId
         if (_json_.ItemCount === undefined) { GLogHelper.error(1); }
         this.ItemCount = _json_.ItemCount
     }
 
+    /**
+     * 道具组索引
+     */
+    readonly Index: number
     /**
      * 道具索引
      */
@@ -1669,67 +1486,29 @@ export class TActivitySevenDayLoginRecord {
 
 }
 
-export namespace Activity {
-export class TActivityBattlePass{
-    private _dataMap: Map<number, Activity.TActivityBattlePassRecord>
-    private _dataList: Activity.TActivityBattlePassRecord[]
-    constructor(_json_: any[]) {
- this._dataMap  = new Map<number, Activity.TActivityBattlePassRecord>()
-        this._dataList = []
-        for(let _json2_ of _json_) {
-            let _v: Activity.TActivityBattlePassRecord
-            _v = new Activity.TActivityBattlePassRecord(_json2_)
-            this._dataList.push(_v)
-            this._dataMap.set(_v.id, _v)
-        }
-    }
-
-    getDataMap(): Map<number, Activity.TActivityBattlePassRecord> { return this._dataMap; }
-    getDataList(): Activity.TActivityBattlePassRecord[] { return this._dataList; }
-
-    get(key: number): Activity.TActivityBattlePassRecord | undefined { return this._dataMap.get(key); }
-
-    resolve(_tables: Map<string, any>) {
-        for(let v of this._dataList) {
-            v.resolve(_tables)
-        }
-    }
-
-}
-}
 
 
-
-export namespace Activity {
-export class TActivityBattlePassRecord {
+export namespace Item {
+export class ItemGroupBean {
 
     constructor(_json_: any) {
-        if (_json_.id === undefined) { GLogHelper.error(1); }
-        this.id = _json_.id
-        if (_json_.ActivityStartTime === undefined) { GLogHelper.error(1); }
-        this.ActivityStartTime = _json_.ActivityStartTime
-        if (_json_.ActivityEndTime === undefined) { GLogHelper.error(1); }
-        this.ActivityEndTime = _json_.ActivityEndTime
-        if (_json_.ItemPrize === undefined) { GLogHelper.error(1); }
-        { this.ItemPrize = []; for(let _ele of _json_.ItemPrize) { let _e : Activity.BattlePassBean; _e = new Activity.BattlePassBean(_ele); this.ItemPrize.push(_e);}}
+        if (_json_.Index === undefined) { GLogHelper.error(1); }
+        this.Index = _json_.Index
+        if (_json_.ItemGroup === undefined) { GLogHelper.error(1); }
+        { this.ItemGroup = []; for(let _ele of _json_.ItemGroup) { let _e : Item.ItemInfoBean; _e = new Item.ItemInfoBean(_ele); this.ItemGroup.push(_e);}}
     }
 
     /**
-     * 活动id
+     * 道具组索引
      */
-    readonly id: number
+    readonly Index: number
     /**
-     * 开启时间
+     * 道具组
      */
-    readonly ActivityStartTime: number
-    /**
-     * 结束时间
-     */
-    readonly ActivityEndTime: number
-    readonly ItemPrize: Activity.BattlePassBean[]
+    readonly ItemGroup: Item.ItemInfoBean[]
 
     resolve(_tables: Map<string, any>) {
-        for(let _e of this.ItemPrize) { if (_e != null ) {_e.resolve(_tables);} }
+        for(let _e of this.ItemGroup) { if (_e != null ) {_e.resolve(_tables);} }
     }
 }
 
@@ -1737,32 +1516,16 @@ export class TActivityBattlePassRecord {
 
 
 
-export namespace Activity {
-export class BattlePassBean {
+export namespace Item {
+export class ItemInfoBean {
 
     constructor(_json_: any) {
-        if (_json_.Level === undefined) { GLogHelper.error(1); }
-        this.Level = _json_.Level
-        if (_json_.Exp === undefined) { GLogHelper.error(1); }
-        this.Exp = _json_.Exp
         if (_json_.ItemConfigId === undefined) { GLogHelper.error(1); }
         this.ItemConfigId = _json_.ItemConfigId
         if (_json_.ItemCount === undefined) { GLogHelper.error(1); }
         this.ItemCount = _json_.ItemCount
-        if (_json_.VIP_ItemConfigId === undefined) { GLogHelper.error(1); }
-        this.VIPItemConfigId = _json_.VIP_ItemConfigId
-        if (_json_.VIP_ItemCount === undefined) { GLogHelper.error(1); }
-        this.VIPItemCount = _json_.VIP_ItemCount
     }
 
-    /**
-     * 等级
-     */
-    readonly Level: number
-    /**
-     * 升级经验
-     */
-    readonly Exp: number
     /**
      * 道具索引
      */
@@ -1771,70 +1534,8 @@ export class BattlePassBean {
      * 道具数量
      */
     readonly ItemCount: number
-    /**
-     * vip道具索引
-     */
-    readonly VIPItemConfigId: number
-    /**
-     * vip道具数量
-     */
-    readonly VIPItemCount: number
 
     resolve(_tables: Map<string, any>) {
-    }
-}
-
-}
-
-export namespace Activity {
-export class TActivityHeroRecordLevel{
-    private _dataMap: Map<number, Activity.TActivityHeroRecordLevelRecord>
-    private _dataList: Activity.TActivityHeroRecordLevelRecord[]
-    constructor(_json_: any[]) {
- this._dataMap  = new Map<number, Activity.TActivityHeroRecordLevelRecord>()
-        this._dataList = []
-        for(let _json2_ of _json_) {
-            let _v: Activity.TActivityHeroRecordLevelRecord
-            _v = new Activity.TActivityHeroRecordLevelRecord(_json2_)
-            this._dataList.push(_v)
-            this._dataMap.set(_v.id, _v)
-        }
-    }
-
-    getDataMap(): Map<number, Activity.TActivityHeroRecordLevelRecord> { return this._dataMap; }
-    getDataList(): Activity.TActivityHeroRecordLevelRecord[] { return this._dataList; }
-
-    get(key: number): Activity.TActivityHeroRecordLevelRecord | undefined { return this._dataMap.get(key); }
-
-    resolve(_tables: Map<string, any>) {
-        for(let v of this._dataList) {
-            v.resolve(_tables)
-        }
-    }
-
-}
-}
-
-
-
-export namespace Activity {
-export class TActivityHeroRecordLevelRecord {
-
-    constructor(_json_: any) {
-        if (_json_.id === undefined) { GLogHelper.error(1); }
-        this.id = _json_.id
-        if (_json_.ItemGroup === undefined) { GLogHelper.error(1); }
-        { this.ItemGroup = []; for(let _ele of _json_.ItemGroup) { let _e : Item.ItemInfoBean; _e = new Item.ItemInfoBean(_ele); this.ItemGroup.push(_e);}}
-    }
-
-    /**
-     * 等级
-     */
-    readonly id: number
-    readonly ItemGroup: Item.ItemInfoBean[]
-
-    resolve(_tables: Map<string, any>) {
-        for(let _e of this.ItemGroup) { if (_e != null ) {_e.resolve(_tables);} }
     }
 }
 
@@ -2348,68 +2049,6 @@ export class TActivityMentorshipTreeRecord {
 
     resolve(_tables: Map<string, any>) {
         for(let _e of this.ItemGroup) { if (_e != null ) {_e.resolve(_tables);} }
-    }
-}
-
-}
-
-export namespace Hero {
-export class HeroLevelUpConfig{
-    private _dataMap: Map<number, Hero.HeroLevelUpConfigRecord>
-    private _dataList: Hero.HeroLevelUpConfigRecord[]
-    constructor(_json_: any[]) {
- this._dataMap  = new Map<number, Hero.HeroLevelUpConfigRecord>()
-        this._dataList = []
-        for(let _json2_ of _json_) {
-            let _v: Hero.HeroLevelUpConfigRecord
-            _v = new Hero.HeroLevelUpConfigRecord(_json2_)
-            this._dataList.push(_v)
-            this._dataMap.set(_v.id, _v)
-        }
-    }
-
-    getDataMap(): Map<number, Hero.HeroLevelUpConfigRecord> { return this._dataMap; }
-    getDataList(): Hero.HeroLevelUpConfigRecord[] { return this._dataList; }
-
-    get(key: number): Hero.HeroLevelUpConfigRecord | undefined { return this._dataMap.get(key); }
-
-    resolve(_tables: Map<string, any>) {
-        for(let v of this._dataList) {
-            v.resolve(_tables)
-        }
-    }
-
-}
-}
-
-
-
-export namespace Hero {
-export class HeroLevelUpConfigRecord {
-
-    constructor(_json_: any) {
-        if (_json_.id === undefined) { GLogHelper.error(1); }
-        this.id = _json_.id
-        if (_json_.Exp === undefined) { GLogHelper.error(1); }
-        this.Exp = _json_.Exp
-        if (_json_.TotalTalentPoint === undefined) { GLogHelper.error(1); }
-        this.TotalTalentPoint = _json_.TotalTalentPoint
-    }
-
-    /**
-     * 等级
-     */
-    readonly id: number
-    /**
-     * 所需经验
-     */
-    readonly Exp: number
-    /**
-     * 天赋总点数
-     */
-    readonly TotalTalentPoint: number
-
-    resolve(_tables: Map<string, any>) {
     }
 }
 
@@ -3044,6 +2683,229 @@ export class UnitTalentInfoBean {
      * 右侧天赋
      */
     readonly TalentRight: string
+
+    resolve(_tables: Map<string, any>) {
+    }
+}
+
+}
+
+export namespace Dota {
+export class BuildingLevelUpExpConfig{
+    private _dataMap: Map<number, Dota.BuildingLevelUpExpConfigRecord>
+    private _dataList: Dota.BuildingLevelUpExpConfigRecord[]
+    constructor(_json_: any[]) {
+ this._dataMap  = new Map<number, Dota.BuildingLevelUpExpConfigRecord>()
+        this._dataList = []
+        for(let _json2_ of _json_) {
+            let _v: Dota.BuildingLevelUpExpConfigRecord
+            _v = new Dota.BuildingLevelUpExpConfigRecord(_json2_)
+            this._dataList.push(_v)
+            this._dataMap.set(_v.id, _v)
+        }
+    }
+
+    getDataMap(): Map<number, Dota.BuildingLevelUpExpConfigRecord> { return this._dataMap; }
+    getDataList(): Dota.BuildingLevelUpExpConfigRecord[] { return this._dataList; }
+
+    get(key: number): Dota.BuildingLevelUpExpConfigRecord | undefined { return this._dataMap.get(key); }
+
+    resolve(_tables: Map<string, any>) {
+        for(let v of this._dataList) {
+            v.resolve(_tables)
+        }
+    }
+
+}
+}
+
+
+
+export namespace Dota {
+export class BuildingLevelUpExpConfigRecord {
+
+    constructor(_json_: any) {
+        if (_json_.id === undefined) { GLogHelper.error(1); }
+        this.id = _json_.id
+        if (_json_.Exp === undefined) { GLogHelper.error(1); }
+        this.Exp = _json_.Exp
+        if (_json_.TotalTalentPoint === undefined) { GLogHelper.error(1); }
+        this.TotalTalentPoint = _json_.TotalTalentPoint
+    }
+
+    /**
+     * 等级
+     */
+    readonly id: number
+    /**
+     * 所需经验
+     */
+    readonly Exp: number
+    /**
+     * 天赋总点数
+     */
+    readonly TotalTalentPoint: number
+
+    resolve(_tables: Map<string, any>) {
+    }
+}
+
+}
+
+export namespace Dota {
+export class PropConfig{
+    private _dataMap: Map<number, Dota.PropConfigRecord>
+    private _dataList: Dota.PropConfigRecord[]
+    constructor(_json_: any[]) {
+ this._dataMap  = new Map<number, Dota.PropConfigRecord>()
+        this._dataList = []
+        for(let _json2_ of _json_) {
+            let _v: Dota.PropConfigRecord
+            _v = new Dota.PropConfigRecord(_json2_)
+            this._dataList.push(_v)
+            this._dataMap.set(_v.id, _v)
+        }
+    }
+
+    getDataMap(): Map<number, Dota.PropConfigRecord> { return this._dataMap; }
+    getDataList(): Dota.PropConfigRecord[] { return this._dataList; }
+
+    get(key: number): Dota.PropConfigRecord | undefined { return this._dataMap.get(key); }
+
+    resolve(_tables: Map<string, any>) {
+        for(let v of this._dataList) {
+            v.resolve(_tables)
+        }
+    }
+
+}
+}
+
+
+
+export namespace Dota {
+export class PropConfigRecord {
+
+    constructor(_json_: any) {
+        if (_json_.id === undefined) { GLogHelper.error(1); }
+        this.id = _json_.id
+        if (_json_.PropName === undefined) { GLogHelper.error(1); }
+        this.PropName = _json_.PropName
+        if (_json_.Des === undefined) { GLogHelper.error(1); }
+        this.Des = _json_.Des
+    }
+
+    /**
+     * 主键
+     */
+    readonly id: number
+    /**
+     * 属性名称
+     */
+    readonly PropName: string
+    /**
+     * 属性描述
+     */
+    readonly Des: string
+
+    resolve(_tables: Map<string, any>) {
+    }
+}
+
+}
+
+export namespace Dota {
+export class PropRandomConfig{
+    private _dataMap: Map<number, Dota.PropRandomConfigRecord>
+    private _dataList: Dota.PropRandomConfigRecord[]
+    constructor(_json_: any[]) {
+ this._dataMap  = new Map<number, Dota.PropRandomConfigRecord>()
+        this._dataList = []
+        for(let _json2_ of _json_) {
+            let _v: Dota.PropRandomConfigRecord
+            _v = new Dota.PropRandomConfigRecord(_json2_)
+            this._dataList.push(_v)
+            this._dataMap.set(_v.id, _v)
+        }
+    }
+
+    getDataMap(): Map<number, Dota.PropRandomConfigRecord> { return this._dataMap; }
+    getDataList(): Dota.PropRandomConfigRecord[] { return this._dataList; }
+
+    get(key: number): Dota.PropRandomConfigRecord | undefined { return this._dataMap.get(key); }
+
+    resolve(_tables: Map<string, any>) {
+        for(let v of this._dataList) {
+            v.resolve(_tables)
+        }
+    }
+
+}
+}
+
+
+
+export namespace Dota {
+export class PropRandomConfigRecord {
+
+    constructor(_json_: any) {
+        if (_json_.id === undefined) { GLogHelper.error(1); }
+        this.id = _json_.id
+        if (_json_.propPool === undefined) { GLogHelper.error(1); }
+        { this.propPool = []; for(let _ele of _json_.propPool) { let _e : Dota.PropPoolBean; _e = new Dota.PropPoolBean(_ele); this.propPool.push(_e);}}
+    }
+
+    /**
+     * 随机属性id
+     */
+    readonly id: number
+    readonly propPool: Dota.PropPoolBean[]
+
+    resolve(_tables: Map<string, any>) {
+        for(let _e of this.propPool) { if (_e != null ) {_e.resolve(_tables);} }
+    }
+}
+
+}
+
+
+
+export namespace Dota {
+export class PropPoolBean {
+
+    constructor(_json_: any) {
+        if (_json_.Propid === undefined) { GLogHelper.error(1); }
+        this.Propid = _json_.Propid
+        if (_json_.PropDes === undefined) { GLogHelper.error(1); }
+        this.PropDes = _json_.PropDes
+        if (_json_.PropWeight === undefined) { GLogHelper.error(1); }
+        this.PropWeight = _json_.PropWeight
+        if (_json_.PropMax === undefined) { GLogHelper.error(1); }
+        this.PropMax = _json_.PropMax
+        if (_json_.PropMin === undefined) { GLogHelper.error(1); }
+        this.PropMin = _json_.PropMin
+    }
+
+    /**
+     * 属性id
+     */
+    readonly Propid: number
+    /**
+     * 属性描述
+     */
+    readonly PropDes: string
+    /**
+     * 属性权重
+     */
+    readonly PropWeight: number
+    /**
+     * 属性显示最大值
+     */
+    readonly PropMax: number
+    /**
+     * 属性显示最小值
+     */
+    readonly PropMin: number
 
     resolve(_tables: Map<string, any>) {
     }
@@ -4737,20 +4599,12 @@ export class Tables {
     get ItemPrizePoolGroupConfig(): Item.ItemPrizePoolGroupConfig  { return this._ItemPrizePoolGroupConfig;}
     private _ShopConfig: Shop.ShopConfig
     get ShopConfig(): Shop.ShopConfig  { return this._ShopConfig;}
-    private _PropConfig: Prop.PropConfig
-    get PropConfig(): Prop.PropConfig  { return this._PropConfig;}
-    private _RandomPropConfig: Prop.RandomPropConfig
-    get RandomPropConfig(): Prop.RandomPropConfig  { return this._RandomPropConfig;}
     private _ActivityConfig: Activity.ActivityConfig
     get ActivityConfig(): Activity.ActivityConfig  { return this._ActivityConfig;}
     private _TActivityMonthLogin: Activity.TActivityMonthLogin
     get TActivityMonthLogin(): Activity.TActivityMonthLogin  { return this._TActivityMonthLogin;}
     private _TActivitySevenDayLogin: Activity.TActivitySevenDayLogin
     get TActivitySevenDayLogin(): Activity.TActivitySevenDayLogin  { return this._TActivitySevenDayLogin;}
-    private _TActivityBattlePass: Activity.TActivityBattlePass
-    get TActivityBattlePass(): Activity.TActivityBattlePass  { return this._TActivityBattlePass;}
-    private _TActivityHeroRecordLevel: Activity.TActivityHeroRecordLevel
-    get TActivityHeroRecordLevel(): Activity.TActivityHeroRecordLevel  { return this._TActivityHeroRecordLevel;}
     private _TActivityDailyOnlinePrize: Activity.TActivityDailyOnlinePrize
     get TActivityDailyOnlinePrize(): Activity.TActivityDailyOnlinePrize  { return this._TActivityDailyOnlinePrize;}
     private _TActivityInvestMetaStone: Activity.TActivityInvestMetaStone
@@ -4765,8 +4619,6 @@ export class Tables {
     get TActivityGiftCommond(): Activity.TActivityGiftCommond  { return this._TActivityGiftCommond;}
     private _TActivityMentorshipTree: Activity.TActivityMentorshipTree
     get TActivityMentorshipTree(): Activity.TActivityMentorshipTree  { return this._TActivityMentorshipTree;}
-    private _HeroLevelUpConfig: Hero.HeroLevelUpConfig
-    get HeroLevelUpConfig(): Hero.HeroLevelUpConfig  { return this._HeroLevelUpConfig;}
     private _SeasonConfig: Season.SeasonConfig
     get SeasonConfig(): Season.SeasonConfig  { return this._SeasonConfig;}
     private _RankPrizeConfig: Rank.RankPrizeConfig
@@ -4781,6 +4633,12 @@ export class Tables {
     get GlobalSetting(): Glob.GlobalSetting  { return this._GlobalSetting;}
     private _BuildingLevelUpConfig: Dota.BuildingLevelUpConfig
     get BuildingLevelUpConfig(): Dota.BuildingLevelUpConfig  { return this._BuildingLevelUpConfig;}
+    private _BuildingLevelUpExpConfig: Dota.BuildingLevelUpExpConfig
+    get BuildingLevelUpExpConfig(): Dota.BuildingLevelUpExpConfig  { return this._BuildingLevelUpExpConfig;}
+    private _PropConfig: Dota.PropConfig
+    get PropConfig(): Dota.PropConfig  { return this._PropConfig;}
+    private _PropRandomConfig: Dota.PropRandomConfig
+    get PropRandomConfig(): Dota.PropRandomConfig  { return this._PropRandomConfig;}
     private _BattlePassChargeConfig: Dota.BattlePassChargeConfig
     get BattlePassChargeConfig(): Dota.BattlePassChargeConfig  { return this._BattlePassChargeConfig;}
     private _BattlePassTaskConfig: Dota.BattlePassTaskConfig
@@ -4824,20 +4682,12 @@ export class Tables {
         tables.set('Item.ItemPrizePoolGroupConfig', this._ItemPrizePoolGroupConfig)
         this._ShopConfig = new Shop.ShopConfig(loader('shop_shopconfig'))
         tables.set('Shop.ShopConfig', this._ShopConfig)
-        this._PropConfig = new Prop.PropConfig(loader('prop_propconfig'))
-        tables.set('Prop.PropConfig', this._PropConfig)
-        this._RandomPropConfig = new Prop.RandomPropConfig(loader('prop_randompropconfig'))
-        tables.set('Prop.RandomPropConfig', this._RandomPropConfig)
         this._ActivityConfig = new Activity.ActivityConfig(loader('activity_activityconfig'))
         tables.set('Activity.ActivityConfig', this._ActivityConfig)
         this._TActivityMonthLogin = new Activity.TActivityMonthLogin(loader('activity_tactivitymonthlogin'))
         tables.set('Activity.TActivityMonthLogin', this._TActivityMonthLogin)
         this._TActivitySevenDayLogin = new Activity.TActivitySevenDayLogin(loader('activity_tactivitysevendaylogin'))
         tables.set('Activity.TActivitySevenDayLogin', this._TActivitySevenDayLogin)
-        this._TActivityBattlePass = new Activity.TActivityBattlePass(loader('activity_tactivitybattlepass'))
-        tables.set('Activity.TActivityBattlePass', this._TActivityBattlePass)
-        this._TActivityHeroRecordLevel = new Activity.TActivityHeroRecordLevel(loader('activity_tactivityherorecordlevel'))
-        tables.set('Activity.TActivityHeroRecordLevel', this._TActivityHeroRecordLevel)
         this._TActivityDailyOnlinePrize = new Activity.TActivityDailyOnlinePrize(loader('activity_tactivitydailyonlineprize'))
         tables.set('Activity.TActivityDailyOnlinePrize', this._TActivityDailyOnlinePrize)
         this._TActivityInvestMetaStone = new Activity.TActivityInvestMetaStone(loader('activity_tactivityinvestmetastone'))
@@ -4852,8 +4702,6 @@ export class Tables {
         tables.set('Activity.TActivityGiftCommond', this._TActivityGiftCommond)
         this._TActivityMentorshipTree = new Activity.TActivityMentorshipTree(loader('activity_tactivitymentorshiptree'))
         tables.set('Activity.TActivityMentorshipTree', this._TActivityMentorshipTree)
-        this._HeroLevelUpConfig = new Hero.HeroLevelUpConfig(loader('hero_herolevelupconfig'))
-        tables.set('Hero.HeroLevelUpConfig', this._HeroLevelUpConfig)
         this._SeasonConfig = new Season.SeasonConfig(loader('season_seasonconfig'))
         tables.set('Season.SeasonConfig', this._SeasonConfig)
         this._RankPrizeConfig = new Rank.RankPrizeConfig(loader('rank_rankprizeconfig'))
@@ -4868,6 +4716,12 @@ export class Tables {
         tables.set('Glob.GlobalSetting', this._GlobalSetting)
         this._BuildingLevelUpConfig = new Dota.BuildingLevelUpConfig(loader('dota_buildinglevelupconfig'))
         tables.set('Dota.BuildingLevelUpConfig', this._BuildingLevelUpConfig)
+        this._BuildingLevelUpExpConfig = new Dota.BuildingLevelUpExpConfig(loader('dota_buildinglevelupexpconfig'))
+        tables.set('Dota.BuildingLevelUpExpConfig', this._BuildingLevelUpExpConfig)
+        this._PropConfig = new Dota.PropConfig(loader('dota_propconfig'))
+        tables.set('Dota.PropConfig', this._PropConfig)
+        this._PropRandomConfig = new Dota.PropRandomConfig(loader('dota_proprandomconfig'))
+        tables.set('Dota.PropRandomConfig', this._PropRandomConfig)
         this._BattlePassChargeConfig = new Dota.BattlePassChargeConfig(loader('dota_battlepasschargeconfig'))
         tables.set('Dota.BattlePassChargeConfig', this._BattlePassChargeConfig)
         this._BattlePassTaskConfig = new Dota.BattlePassTaskConfig(loader('dota_battlepasstaskconfig'))
@@ -4903,13 +4757,9 @@ export class Tables {
         this._ItemPrizePoolConfig.resolve(tables)
         this._ItemPrizePoolGroupConfig.resolve(tables)
         this._ShopConfig.resolve(tables)
-        this._PropConfig.resolve(tables)
-        this._RandomPropConfig.resolve(tables)
         this._ActivityConfig.resolve(tables)
         this._TActivityMonthLogin.resolve(tables)
         this._TActivitySevenDayLogin.resolve(tables)
-        this._TActivityBattlePass.resolve(tables)
-        this._TActivityHeroRecordLevel.resolve(tables)
         this._TActivityDailyOnlinePrize.resolve(tables)
         this._TActivityInvestMetaStone.resolve(tables)
         this._TActivityTotalGainMetaStone.resolve(tables)
@@ -4917,7 +4767,6 @@ export class Tables {
         this._TActivityTotalSpendMetaStone.resolve(tables)
         this._TActivityGiftCommond.resolve(tables)
         this._TActivityMentorshipTree.resolve(tables)
-        this._HeroLevelUpConfig.resolve(tables)
         this._SeasonConfig.resolve(tables)
         this._RankPrizeConfig.resolve(tables)
         this._DrawTreasureConfig.resolve(tables)
@@ -4925,6 +4774,9 @@ export class Tables {
         this._TitleConfig.resolve(tables)
         this._GlobalSetting.resolve(tables)
         this._BuildingLevelUpConfig.resolve(tables)
+        this._BuildingLevelUpExpConfig.resolve(tables)
+        this._PropConfig.resolve(tables)
+        this._PropRandomConfig.resolve(tables)
         this._BattlePassChargeConfig.resolve(tables)
         this._BattlePassTaskConfig.resolve(tables)
         this._BattlePassLevelUpConfig.resolve(tables)
@@ -4954,20 +4806,12 @@ case ('item_itemprizepoolgroupconfig'):
         this._ItemPrizePoolGroupConfig = new Item.ItemPrizePoolGroupConfig(loader('item_itemprizepoolgroupconfig'));break;
 case ('shop_shopconfig'):
         this._ShopConfig = new Shop.ShopConfig(loader('shop_shopconfig'));break;
-case ('prop_propconfig'):
-        this._PropConfig = new Prop.PropConfig(loader('prop_propconfig'));break;
-case ('prop_randompropconfig'):
-        this._RandomPropConfig = new Prop.RandomPropConfig(loader('prop_randompropconfig'));break;
 case ('activity_activityconfig'):
         this._ActivityConfig = new Activity.ActivityConfig(loader('activity_activityconfig'));break;
 case ('activity_tactivitymonthlogin'):
         this._TActivityMonthLogin = new Activity.TActivityMonthLogin(loader('activity_tactivitymonthlogin'));break;
 case ('activity_tactivitysevendaylogin'):
         this._TActivitySevenDayLogin = new Activity.TActivitySevenDayLogin(loader('activity_tactivitysevendaylogin'));break;
-case ('activity_tactivitybattlepass'):
-        this._TActivityBattlePass = new Activity.TActivityBattlePass(loader('activity_tactivitybattlepass'));break;
-case ('activity_tactivityherorecordlevel'):
-        this._TActivityHeroRecordLevel = new Activity.TActivityHeroRecordLevel(loader('activity_tactivityherorecordlevel'));break;
 case ('activity_tactivitydailyonlineprize'):
         this._TActivityDailyOnlinePrize = new Activity.TActivityDailyOnlinePrize(loader('activity_tactivitydailyonlineprize'));break;
 case ('activity_tactivityinvestmetastone'):
@@ -4982,8 +4826,6 @@ case ('activity_tactivitygiftcommond'):
         this._TActivityGiftCommond = new Activity.TActivityGiftCommond(loader('activity_tactivitygiftcommond'));break;
 case ('activity_tactivitymentorshiptree'):
         this._TActivityMentorshipTree = new Activity.TActivityMentorshipTree(loader('activity_tactivitymentorshiptree'));break;
-case ('hero_herolevelupconfig'):
-        this._HeroLevelUpConfig = new Hero.HeroLevelUpConfig(loader('hero_herolevelupconfig'));break;
 case ('season_seasonconfig'):
         this._SeasonConfig = new Season.SeasonConfig(loader('season_seasonconfig'));break;
 case ('rank_rankprizeconfig'):
@@ -4998,6 +4840,12 @@ case ('glob_globalsetting'):
         this._GlobalSetting = new Glob.GlobalSetting(loader('glob_globalsetting'));break;
 case ('dota_buildinglevelupconfig'):
         this._BuildingLevelUpConfig = new Dota.BuildingLevelUpConfig(loader('dota_buildinglevelupconfig'));break;
+case ('dota_buildinglevelupexpconfig'):
+        this._BuildingLevelUpExpConfig = new Dota.BuildingLevelUpExpConfig(loader('dota_buildinglevelupexpconfig'));break;
+case ('dota_propconfig'):
+        this._PropConfig = new Dota.PropConfig(loader('dota_propconfig'));break;
+case ('dota_proprandomconfig'):
+        this._PropRandomConfig = new Dota.PropRandomConfig(loader('dota_proprandomconfig'));break;
 case ('dota_battlepasschargeconfig'):
         this._BattlePassChargeConfig = new Dota.BattlePassChargeConfig(loader('dota_battlepasschargeconfig'));break;
 case ('dota_battlepasstaskconfig'):

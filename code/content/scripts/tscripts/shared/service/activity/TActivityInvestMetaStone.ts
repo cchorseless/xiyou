@@ -1,6 +1,5 @@
 
-import { ET, serializeETProps } from "../../lib/Entity";
-import { ValueTupleStruct } from "../common/ValueTupleStruct";
+import { serializeETProps } from "../../lib/Entity";
 import { TActivity } from "./TActivity";
 
 
@@ -10,7 +9,7 @@ export class TActivityInvestMetaStone extends TActivity {
 
     private _Items = new GDictionary<
         number,
-        ValueTupleStruct<number, number>
+        IFItemInfo
     >();
     @serializeETProps()
     public get Items() {

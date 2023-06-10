@@ -6,40 +6,17 @@
   <component name="ChangeListManager">
     <list default="true" id="0afe1df3-4870-48f1-a775-af97afd6ee5a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/images/custom_game/bp/bg.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCIcons/CCIcon_BattlepassLogo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCIcons/CCIcon_BattlepassLogo.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCIcons/CCIcon_Vip.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCIcons/CCIcon_Vip.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCImageNumber/CCImageNumber.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCImageNumber/CCImageNumber.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCImageNumber/CCImageNumber.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCImageNumber/CCImageNumber.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Artifact/CCArtifactListPanel.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Artifact/CCArtifactListPanel.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Artifact/CCArtifactListPanel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Artifact/CCArtifactListPanel.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Artifact/CCArtifactSelectionDialog.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Artifact/CCArtifactSelectionDialog.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Artifact/CCArtifactSelectionDialog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Artifact/CCArtifactSelectionDialog.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/BattlePass/CCBattlePassPrizeItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/BattlePass/CCBattlePassPrizeItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Mail/CCMailPanel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Mail/CCMailPanel.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Mail/CCMailSingleDataDialog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Mail/CCMailSingleDataDialog.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Mail/CCMailSingleDataItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Mail/CCMailSingleDataItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/MainPanel/CCMainPanel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/MainPanel/CCMainPanel.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Player/CCPlayerCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Player/CCPlayerCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Rank/CCRankPanel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Rank/CCRankPanel.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Record/CCRecordPanel.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Record/CCRecordPanel.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Record/CCRecordPanel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Record/CCRecordPanel.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/RecordItem/CCRecordItem.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/RecordItem/CCRecordItem.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Shop/CCShopSellDetailDialog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Shop/CCShopSellDetailDialog.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Shop/CCShopSellItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Shop/CCShopSellItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Task/CCTaskPanel.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/courier/courier_auto_gold.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/courier/courier_auto_gold.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Activity/CCActivityPanel.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Activity/CCActivityPanel.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Activity/CCActivityPanel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Activity/CCActivityPanel.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/HandBook/CCHandBookHero.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/HandBook/CCHandBookHero.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/GameProtocol.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/GameProtocol.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/JsonConfig.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/JsonConfig.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/Types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/Types.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/service/AllServiceEntity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/service/AllServiceEntity.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/service/account/TCharacter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/service/account/TCharacter.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/service/activity/TActivityBattlePass.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/service/activity/TActivityBattlePassData.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/service/activity/TActivityMemberShip.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/service/activity/TActivityMemberShipData.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/service/activity/TActivityMentorshipApplyForItem.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/service/activity/TActivityMentorshipApplyForItem.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/service/hero/HeroManageComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/service/hero/HeroManageComponent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/service/activity/TActivityHeroRecordLevel.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/service/activity/TActivityHeroRecordLevelData.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/service/activity/TActivitySevenDayLogin.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/service/activity/TActivitySevenDayLogin.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/service/activity/TActivitySevenDayLoginData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/service/activity/TActivitySevenDayLoginData.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -281,7 +258,7 @@
       <workItem from="1685934289657" duration="18155000" />
       <workItem from="1686126092151" duration="4998000" />
       <workItem from="1686189357802" duration="15306000" />
-      <workItem from="1686359968368" duration="5493000" />
+      <workItem from="1686359968368" duration="7515000" />
     </task>
     <servers />
   </component>

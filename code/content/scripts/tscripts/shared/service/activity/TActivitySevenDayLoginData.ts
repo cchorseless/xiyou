@@ -7,19 +7,11 @@ import { TActivityData } from "./TActivityData";
 @GReloadable
 export class TActivitySevenDayLoginData extends TActivityData {
 
-    private _ItemState: IGDictionary<number, number> = new GDictionary<
-        number,
-        number
-    >();
+
     @serializeETProps()
-    public get ItemState() {
-        return this._ItemState;
-    }
-    public set ItemState(data: IGDictionary<number, number>) {
-        this._ItemState.copy(data);
+    public ItemHadGet: number[] = [];
 
-    }
-
+    @serializeETProps()
     public LoginDayCount: number;
 
 }

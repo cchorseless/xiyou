@@ -14,8 +14,6 @@ import { TActivityData } from "./activity/TActivityData";
 import { TActivityGiftCommond } from "./activity/TActivityGiftCommond";
 import { TActivityGiftCommondData } from "./activity/TActivityGiftCommondData";
 import { TActivityGiftCommondItem } from "./activity/TActivityGiftCommondItem";
-import { TActivityHeroRecordLevel } from "./activity/TActivityHeroRecordLevel";
-import { TActivityHeroRecordLevelData } from "./activity/TActivityHeroRecordLevelData";
 import { TActivityInvestMetaStone } from "./activity/TActivityInvestMetaStone";
 import { TActivityInvestMetaStoneData } from "./activity/TActivityInvestMetaStoneData";
 import { TActivityMentorshipApplyForItem } from "./activity/TActivityMentorshipApplyForItem";
@@ -96,8 +94,6 @@ import { CharacterTitleItem } from "./title/CharacterTitleItem";
     TActivityGiftCommond,
     TActivityGiftCommondData,
     TActivityGiftCommondItem,
-    TActivityHeroRecordLevel,
-    TActivityHeroRecordLevelData,
     TActivityInvestMetaStone,
     TActivityInvestMetaStoneData,
     TActivityMentorshipApplyForItem,

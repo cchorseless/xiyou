@@ -122,7 +122,12 @@ export module GameProtocol {
         MailGetItem = 2,
         MailDelete = 3,
     }
-
+    export const enum EItemPrizeState {
+        CanGet = 1,
+        CanNotGet = 2,
+        HadGet = 4,
+        OutOfDate = 8,
+    }
     // export const HTTP_URL = "http://139.196.182.10:8080";
     export const HTTP_URL = "http://127.0.0.1:11199";
 

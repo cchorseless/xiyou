@@ -1614,310 +1614,180 @@
     "LoginPrize": [
       {
         "Index": 1,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 2,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 3,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 4,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 5,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 6,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 7,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 8,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 9,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 10,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 11,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 12,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 13,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 14,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 15,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 16,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 17,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 18,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 19,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 20,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 21,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 22,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 23,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 24,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 25,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 26,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 27,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 28,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 29,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 30,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 31,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       }
     ],
     "TotalLoginPrize": [
       {
         "Index": 5,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10002,
-            "ItemCount": 5
-          },
-          {
-            "ItemConfigId": 10003,
-            "ItemCount": 4
-          }
-        ]
+        "ItemConfigId": 10002,
+        "ItemCount": 5
       },
       {
         "Index": 10,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10002,
-            "ItemCount": 5
-          },
-          {
-            "ItemConfigId": 10003,
-            "ItemCount": 4
-          }
-        ]
+        "ItemConfigId": 10003,
+        "ItemCount": 4
+      },
+      {
+        "Index": 15,
+        "ItemConfigId": 10002,
+        "ItemCount": 5
+      },
+      {
+        "Index": 20,
+        "ItemConfigId": 10003,
+        "ItemCount": 4
       }
     ]
   },
@@ -1928,282 +1798,158 @@
     "LoginPrize": [
       {
         "Index": 1,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 2,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 3,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 4,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 5,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 6,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 7,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 8,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 9,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 10,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 11,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 12,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 13,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 14,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 15,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 16,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 17,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 18,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 19,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 20,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 21,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 22,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 23,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 24,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 25,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 26,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 27,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 28,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 29,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 30,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       },
       {
         "Index": 31,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
+        "ItemConfigId": 10001,
+        "ItemCount": 1
       }
     ],
     "TotalLoginPrize": []
@@ -15649,6 +15395,133 @@
     ]
   }
 ] ,
+"dota_buildinglevelupexpconfig":[
+  {
+    "id": 1,
+    "Exp": 100,
+    "TotalTalentPoint": 0
+  },
+  {
+    "id": 2,
+    "Exp": 200,
+    "TotalTalentPoint": 0
+  },
+  {
+    "id": 3,
+    "Exp": 300,
+    "TotalTalentPoint": 0
+  },
+  {
+    "id": 4,
+    "Exp": 400,
+    "TotalTalentPoint": 1
+  },
+  {
+    "id": 5,
+    "Exp": 500,
+    "TotalTalentPoint": 1
+  },
+  {
+    "id": 6,
+    "Exp": 600,
+    "TotalTalentPoint": 1
+  },
+  {
+    "id": 7,
+    "Exp": 700,
+    "TotalTalentPoint": 2
+  },
+  {
+    "id": 8,
+    "Exp": 800,
+    "TotalTalentPoint": 2
+  },
+  {
+    "id": 9,
+    "Exp": 900,
+    "TotalTalentPoint": 2
+  },
+  {
+    "id": 10,
+    "Exp": 1000,
+    "TotalTalentPoint": 3
+  },
+  {
+    "id": 11,
+    "Exp": 1100,
+    "TotalTalentPoint": 3
+  },
+  {
+    "id": 12,
+    "Exp": 1200,
+    "TotalTalentPoint": 3
+  },
+  {
+    "id": 13,
+    "Exp": 1300,
+    "TotalTalentPoint": 4
+  },
+  {
+    "id": 14,
+    "Exp": 1400,
+    "TotalTalentPoint": 4
+  },
+  {
+    "id": 15,
+    "Exp": 1500,
+    "TotalTalentPoint": 4
+  },
+  {
+    "id": 16,
+    "Exp": 1600,
+    "TotalTalentPoint": 5
+  },
+  {
+    "id": 17,
+    "Exp": 1700,
+    "TotalTalentPoint": 5
+  },
+  {
+    "id": 18,
+    "Exp": 1800,
+    "TotalTalentPoint": 5
+  },
+  {
+    "id": 19,
+    "Exp": 1900,
+    "TotalTalentPoint": 6
+  },
+  {
+    "id": 20,
+    "Exp": 2000,
+    "TotalTalentPoint": 6
+  },
+  {
+    "id": 21,
+    "Exp": 2100,
+    "TotalTalentPoint": 6
+  },
+  {
+    "id": 22,
+    "Exp": 2200,
+    "TotalTalentPoint": 7
+  },
+  {
+    "id": 23,
+    "Exp": 2300,
+    "TotalTalentPoint": 7
+  },
+  {
+    "id": 24,
+    "Exp": 2400,
+    "TotalTalentPoint": 7
+  },
+  {
+    "id": 25,
+    "Exp": 0,
+    "TotalTalentPoint": 8
+  }
+] ,
 "dota_combinationconfig":[
   {
     "id": "sect_seckill_1_a",
@@ -28792,6 +28665,575 @@
     "PopulationRoof": 2,
     "goldcost": 5100,
     "woodcost": 510
+  }
+] ,
+"dota_propconfig":[
+  {
+    "id": 20010,
+    "PropName": "STATS_STRENGTH_BASE",
+    "Des": "力量基础"
+  },
+  {
+    "id": 20011,
+    "PropName": "STATS_STRENGTH_BASE_PERCENTAGE",
+    "Des": "力量基础百分比"
+  },
+  {
+    "id": 20012,
+    "PropName": "STATS_STRENGTH_BONUS",
+    "Des": "力量额外"
+  },
+  {
+    "id": 20013,
+    "PropName": "STATS_STRENGTH_BONUS_CONSTANT",
+    "Des": "力量最终"
+  },
+  {
+    "id": 20014,
+    "PropName": "STATS_STRENGTH_PERCENTAGE",
+    "Des": "力量百分比"
+  },
+  {
+    "id": 20020,
+    "PropName": "STATS_AGILITY_BASE",
+    "Des": "敏捷基础"
+  },
+  {
+    "id": 20021,
+    "PropName": "STATS_AGILITY_BASE_PERCENTAGE",
+    "Des": "敏捷基础百分比"
+  },
+  {
+    "id": 20022,
+    "PropName": "STATS_AGILITY_BONUS",
+    "Des": "敏捷额外"
+  },
+  {
+    "id": 20023,
+    "PropName": "STATS_AGILITY_BONUS_CONSTANT",
+    "Des": "敏捷最终"
+  },
+  {
+    "id": 20024,
+    "PropName": "STATS_AGILITY_PERCENTAGE",
+    "Des": "敏捷百分比"
+  },
+  {
+    "id": 20030,
+    "PropName": "STATS_INTELLECT_BASE",
+    "Des": "智力基础"
+  },
+  {
+    "id": 20031,
+    "PropName": "STATS_INTELLECT_BASE_PERCENTAGE",
+    "Des": "智力基础百分比"
+  },
+  {
+    "id": 20032,
+    "PropName": "STATS_INTELLECT_BONUS",
+    "Des": "智力额外"
+  },
+  {
+    "id": 20033,
+    "PropName": "STATS_INTELLECT_BONUS_CONSTANT",
+    "Des": "智力最终"
+  },
+  {
+    "id": 20034,
+    "PropName": "STATS_INTELLECT_PERCENTAGE",
+    "Des": "智力百分比"
+  },
+  {
+    "id": 20040,
+    "PropName": "STATS_ALL_BASE",
+    "Des": "全属性基础"
+  },
+  {
+    "id": 20041,
+    "PropName": "STATS_ALL_BONUS",
+    "Des": "全属性额外"
+  },
+  {
+    "id": 20042,
+    "PropName": "STATS_ALL_PERCENTAGE",
+    "Des": "全属性百分比"
+  },
+  {
+    "id": 20050,
+    "PropName": "STATS_PRIMARY_BASE",
+    "Des": "主属性基础"
+  },
+  {
+    "id": 20051,
+    "PropName": "STATS_PRIMARY_BONUS",
+    "Des": "主属性额外"
+  },
+  {
+    "id": 20052,
+    "PropName": "STATS_PRIMARY_PERCENTAGE",
+    "Des": "主属性百分比"
+  },
+  {
+    "id": 20060,
+    "PropName": "HEALTH_BONUS",
+    "Des": "生命值额外"
+  },
+  {
+    "id": 20061,
+    "PropName": "HEALTH_PERCENTAGE",
+    "Des": "生命值百分比"
+  },
+  {
+    "id": 20062,
+    "PropName": "HEALTH_REGEN_CONSTANT",
+    "Des": "生命恢复"
+  },
+  {
+    "id": 20070,
+    "PropName": "MANA_BONUS",
+    "Des": "魔法额外"
+  },
+  {
+    "id": 20071,
+    "PropName": "MANA_PERCENTAGE",
+    "Des": "魔法百分比"
+  },
+  {
+    "id": 20080,
+    "PropName": "MANACOST_REDUCTION_CONSTANT",
+    "Des": "魔法消耗"
+  },
+  {
+    "id": 20081,
+    "PropName": "MANACOST_PERCENTAGE",
+    "Des": "魔法消耗百分比"
+  },
+  {
+    "id": 20082,
+    "PropName": "MANACOST_PERCENTAGE_STACKING",
+    "Des": "魔法消耗"
+  },
+  {
+    "id": 20090,
+    "PropName": "MANA_REGEN_CONSTANT",
+    "Des": "魔法恢复"
+  },
+  {
+    "id": 20091,
+    "PropName": "MANA_REGEN_CONSTANT_UNIQUE",
+    "Des": "魔法恢复最终"
+  },
+  {
+    "id": 20092,
+    "PropName": "MANA_REGEN_AMPLIFY_PERCENTAGE",
+    "Des": "魔法恢复百分比"
+  },
+  {
+    "id": 20100,
+    "PropName": "ENERGY_BONUS",
+    "Des": "怒气额外"
+  },
+  {
+    "id": 20101,
+    "PropName": "ENERGY_BONUS_PERCENTAGE",
+    "Des": "怒气额外百分比"
+  },
+  {
+    "id": 20102,
+    "PropName": "ENERGY_REGEN_CONSTANT",
+    "Des": "怒气恢复"
+  },
+  {
+    "id": 20103,
+    "PropName": "ENERGY_REGEN_PERCENTAGE",
+    "Des": "怒气恢复百分比"
+  },
+  {
+    "id": 20110,
+    "PropName": "BASEATTACK_BONUSDAMAGE",
+    "Des": "基础攻击力"
+  },
+  {
+    "id": 20111,
+    "PropName": "BASEDAMAGEOUTGOING_PERCENTAGE",
+    "Des": "基础攻击力百分比"
+  },
+  {
+    "id": 20120,
+    "PropName": "PHYSICAL_ARMOR_BASE",
+    "Des": "物理护甲基础"
+  },
+  {
+    "id": 20121,
+    "PropName": "PHYSICAL_ARMOR_BASE_PERCENTAGE",
+    "Des": "物理护甲基础百分比"
+  },
+  {
+    "id": 20122,
+    "PropName": "PHYSICAL_ARMOR_BONUS",
+    "Des": "物理护甲额外"
+  },
+  {
+    "id": 20123,
+    "PropName": "PHYSICAL_ARMOR_BONUS_CONSTANT",
+    "Des": "物理护甲最终"
+  },
+  {
+    "id": 20124,
+    "PropName": "PHYSICAL_ARMOR_PERCENTAGE",
+    "Des": "物理护甲百分比"
+  },
+  {
+    "id": 20130,
+    "PropName": "MAGICAL_ARMOR_BASE",
+    "Des": "魔法护甲基础"
+  },
+  {
+    "id": 20131,
+    "PropName": "MAGICAL_ARMOR_BASE_PERCENTAGE",
+    "Des": "魔法护甲基础百分比"
+  },
+  {
+    "id": 20132,
+    "PropName": "MAGICAL_ARMOR_BONUS",
+    "Des": "魔法护甲额外"
+  },
+  {
+    "id": 20133,
+    "PropName": "MAGICAL_ARMOR_BONUS_CONSTANT",
+    "Des": "魔法护甲最终"
+  },
+  {
+    "id": 20134,
+    "PropName": "MAGICAL_ARMOR_PERCENTAGE",
+    "Des": "魔法护甲百分比"
+  },
+  {
+    "id": 20140,
+    "PropName": "IGNORE_PHYSICAL_ARMOR_UNIQUE",
+    "Des": "无视物理护甲"
+  },
+  {
+    "id": 20141,
+    "PropName": "IGNORE_PHYSICAL_ARMOR_PERCENTAGE",
+    "Des": "无视物理护甲百分比"
+  },
+  {
+    "id": 20142,
+    "PropName": "IGNORE_PHYSICAL_ARMOR_PERCENTAGE_TARGET",
+    "Des": "无视特定单位物理护甲百分比"
+  },
+  {
+    "id": 20150,
+    "PropName": "IGNORE_MAGICAL_ARMOR_UNIQUE",
+    "Des": "无视魔法护甲"
+  },
+  {
+    "id": 20151,
+    "PropName": "IGNORE_MAGICAL_ARMOR_PERCENTAGE",
+    "Des": "无视魔法护甲百分比"
+  },
+  {
+    "id": 20152,
+    "PropName": "IGNORE_MAGICAL_ARMOR_PERCENTAGE_TARGET",
+    "Des": "无视特定单位魔法护甲百分比"
+  },
+  {
+    "id": 20160,
+    "PropName": "CRITICALSTRIKE",
+    "Des": "攻击暴击值"
+  },
+  {
+    "id": 20161,
+    "PropName": "CRITICALSTRIKE_CHANCE",
+    "Des": "攻击暴击概率"
+  },
+  {
+    "id": 20162,
+    "PropName": "CRITICALSTRIKE_DAMAGE",
+    "Des": "攻击暴击伤害"
+  },
+  {
+    "id": 20170,
+    "PropName": "SPELL_AMPLIFY_BASE",
+    "Des": "技能基础增强"
+  },
+  {
+    "id": 20171,
+    "PropName": "SPELL_AMPLIFY_BONUS",
+    "Des": "技能额外增强"
+  },
+  {
+    "id": 20172,
+    "PropName": "SPELL_AMPLIFY_BONUS_UNIQUE",
+    "Des": "技能最终增强"
+  },
+  {
+    "id": 20180,
+    "PropName": "SPELL_CRITICALSTRIKE",
+    "Des": "技能暴击值"
+  },
+  {
+    "id": 20181,
+    "PropName": "SPELL_CRITICALSTRIKE_CHANCE",
+    "Des": "技能暴击概率"
+  },
+  {
+    "id": 20182,
+    "PropName": "SPELL_CRITICALSTRIKE_CHANCE_TARGET",
+    "Des": "技能特定目标暴击概率"
+  },
+  {
+    "id": 20183,
+    "PropName": "SPELL_CRITICALSTRIKE_DAMAGE",
+    "Des": "技能暴击伤害"
+  },
+  {
+    "id": 20190,
+    "PropName": "MAX_ATTACKSPEED_BONUS",
+    "Des": "最大攻击速度"
+  },
+  {
+    "id": 20191,
+    "PropName": "ATTACKSPEED_PERCENTAGE",
+    "Des": "攻速百分比"
+  },
+  {
+    "id": 20192,
+    "PropName": "BASE_ATTACK_TIME_CONSTANT",
+    "Des": "攻击间隔"
+  },
+  {
+    "id": 20193,
+    "PropName": "BASE_ATTACK_TIME_ADJUST",
+    "Des": "攻击间隔"
+  },
+  {
+    "id": 20194,
+    "PropName": "BASE_ATTACK_TIME_PERCENTAGE",
+    "Des": "攻击间隔百分比"
+  },
+  {
+    "id": 20200,
+    "PropName": "COOLDOWN_PERCENTAGE",
+    "Des": "冷却减少百分比"
+  },
+  {
+    "id": 20210,
+    "PropName": "EVASION_CONSTANT",
+    "Des": "攻击闪避"
+  },
+  {
+    "id": 20211,
+    "PropName": "SPELL_EVASION_CONSTANT",
+    "Des": "技能闪避"
+  },
+  {
+    "id": 20212,
+    "PropName": "NEGATIVE_EVASION_CONSTANT",
+    "Des": "无视攻击闪避"
+  },
+  {
+    "id": 20220,
+    "PropName": "STATUS_RESISTANCE_STACKING",
+    "Des": "状态抗性"
+  },
+  {
+    "id": 20221,
+    "PropName": "STATUS_RESISTANCE_UNIQUE",
+    "Des": "状态抗性"
+  },
+  {
+    "id": 20222,
+    "PropName": "STATUS_RESISTANCE_CASTER",
+    "Des": "状态抗性"
+  },
+  {
+    "id": 20230,
+    "PropName": "OUTGOING_DAMAGE_PERCENTAGE",
+    "Des": "造成全伤害提升"
+  },
+  {
+    "id": 20231,
+    "PropName": "OUTGOING_ALL_DAMAGE_PERCENTAGE",
+    "Des": "最终伤害提升"
+  },
+  {
+    "id": 20232,
+    "PropName": "OUTGOING_PHYSICAL_DAMAGE_PERCENTAGE",
+    "Des": "物理伤害打出提升"
+  },
+  {
+    "id": 20233,
+    "PropName": "OUTGOING_MAGICAL_DAMAGE_PERCENTAGE",
+    "Des": "魔法伤害打出提升"
+  },
+  {
+    "id": 20234,
+    "PropName": "OUTGOING_PURE_DAMAGE_PERCENTAGE",
+    "Des": "纯碎伤害打出提升"
+  },
+  {
+    "id": 20235,
+    "PropName": "OUTGOING_ATTACK_DAMAGE_PERCENTAGE",
+    "Des": "造成普攻伤害提升"
+  },
+  {
+    "id": 20236,
+    "PropName": "OUTGOING_SPELL_DAMAGE_PERCENTAGE",
+    "Des": "造成技能伤害提升"
+  },
+  {
+    "id": 20240,
+    "PropName": "INCOMING_DAMAGE_PERCENTAGE",
+    "Des": "受到伤害加成"
+  },
+  {
+    "id": 20241,
+    "PropName": "INCOMING_PHYSICAL_DAMAGE_PERCENTAGE",
+    "Des": "受到物理伤害加成"
+  },
+  {
+    "id": 20242,
+    "PropName": "INCOMING_MAGICAL_DAMAGE_PERCENTAGE",
+    "Des": "受到魔法伤害加成"
+  },
+  {
+    "id": 20243,
+    "PropName": "INCOMING_PURE_DAMAGE_PERCENTAGE",
+    "Des": "受到纯粹伤害加成"
+  },
+  {
+    "id": 20244,
+    "PropName": "INCOMING_ATTACK_DAMAGE_PERCENTAGE",
+    "Des": "受到普攻伤害加成"
+  },
+  {
+    "id": 20245,
+    "PropName": "INCOMING_SPELL_DAMAGE_PERCENTAGE",
+    "Des": "受到技能伤害加成"
+  },
+  {
+    "id": 20250,
+    "PropName": "INCOMING_POISON_DAMAGE_PERCENTAGE",
+    "Des": "毒伤害加深"
+  },
+  {
+    "id": 20251,
+    "PropName": "OUTGOING_POISON_DAMAGE_PERCENTAGE",
+    "Des": "造成的毒伤害降低"
+  },
+  {
+    "id": 20252,
+    "PropName": "OUTGOING_POISON_COUNT_PERCENTAGE",
+    "Des": "施加的毒层数增加比例"
+  },
+  {
+    "id": 20253,
+    "PropName": "INCOMING_POISON_COUNT_PERCENTAGE",
+    "Des": "被施加的毒层数增加比例"
+  },
+  {
+    "id": 20254,
+    "PropName": "POISON_ACTIVE_TIME_PERCENTAGE",
+    "Des": "毒激发速度比例"
+  },
+  {
+    "id": 20255,
+    "PropName": "POISON_ACTIVE_INCREASE_PERCENTAGE",
+    "Des": "毒激发保留的层数比例，和原本减少的比例加法叠加"
+  },
+  {
+    "id": 20260,
+    "PropName": "SUMMON_DURATION_BONUS",
+    "Des": "召唤物的存在时间增加"
+  }
+] ,
+"dota_proprandomconfig":[
+  {
+    "id": 10001,
+    "propPool": [
+      {
+        "Propid": 20010,
+        "PropDes": "sss",
+        "PropWeight": 10,
+        "PropMax": 100,
+        "PropMin": 20
+      },
+      {
+        "Propid": 20011,
+        "PropDes": "sss",
+        "PropWeight": 10,
+        "PropMax": 100,
+        "PropMin": 20
+      },
+      {
+        "Propid": 20012,
+        "PropDes": "sss",
+        "PropWeight": 10,
+        "PropMax": 100,
+        "PropMin": 20
+      },
+      {
+        "Propid": 20013,
+        "PropDes": "sss",
+        "PropWeight": 10,
+        "PropMax": 100,
+        "PropMin": 20
+      }
+    ]
+  },
+  {
+    "id": 20002,
+    "propPool": [
+      {
+        "Propid": 20011,
+        "PropDes": "sss",
+        "PropWeight": 10,
+        "PropMax": 100,
+        "PropMin": 20
+      },
+      {
+        "Propid": 20012,
+        "PropDes": "sss",
+        "PropWeight": 10,
+        "PropMax": 100,
+        "PropMin": 20
+      },
+      {
+        "Propid": 20013,
+        "PropDes": "sss",
+        "PropWeight": 10,
+        "PropMax": 100,
+        "PropMin": 20
+      }
+    ]
+  },
+  {
+    "id": 20003,
+    "propPool": [
+      {
+        "Propid": 20011,
+        "PropDes": "sss",
+        "PropWeight": 10,
+        "PropMax": 100,
+        "PropMin": 20
+      },
+      {
+        "Propid": 20012,
+        "PropDes": "sss",
+        "PropWeight": 10,
+        "PropMax": 100,
+        "PropMin": 20
+      },
+      {
+        "Propid": 20013,
+        "PropDes": "sss",
+        "PropWeight": 10,
+        "PropMax": 100,
+        "PropMin": 20
+      }
+    ]
   }
 ] ,
 "dota_publicshopconfig":[

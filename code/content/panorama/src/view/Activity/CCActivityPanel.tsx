@@ -9,6 +9,7 @@ import { CCPopUpDialog } from "../AllUIElement/CCPopUpDialog/CCPopUpDialog";
 import { CCVerticalTable } from "../AllUIElement/CCTable/CCVerticalTable";
 import { CCCoinAddPanel } from "../Shop/CCCoinAddPanel";
 import "./CCActivityPanel.less";
+import { CCActivitySevenDayLogin } from "./CCActivitySevenDayLogin";
 interface ICCActivityPanel extends NodePropsData {
 
 }
@@ -52,22 +53,22 @@ export class CCActivityPanel extends CCPanel<ICCActivityPanel> {
                         </CCPanel>
                     </CCPanel>
                     <CCPanel id="PanelContent" flowChildren="right">
-                        <CCVerticalTable marginTop={"20px"} list={[
+                        <CCVerticalTable defaultSelected={0} marginTop={"20px"} list={[
                             "首充",
-                            "每月30天登陆",
-                            "每日在线祈福",
+                            "七日登录",
+                            "每月登陆",
+                            "在线祈福",
                             "储钱罐翻倍",
-                            "赛季开始7天登录",
-                            "赛季累计消费原石奖励",
-                            "赛季累计获得原石奖励",
-                            "赛季累计在线奖励",
-                            "师徒关系",
+                            "累计充值",
+                            "兑换码"
                         ]} onChange={(index: number, text: string) => {
                             this.UpdateState({ selectindex: index })
                         }} />
-                        {
-
-                        }
+                        <CCPanel id="PanelContentBg">
+                            {
+                                <CCActivitySevenDayLogin opacity={selectindex == 1 ? "1" : "0"} hittest={false} />
+                            }
+                        </CCPanel>
                     </CCPanel>
                     {this.props.children}
                     {this.__root___childs}
