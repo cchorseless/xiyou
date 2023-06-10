@@ -1,16 +1,16 @@
-#CC_ArtifactListPanel {
+#CC_BattlePassTaskHudDialog {
     width: 287px;
     min-height: 115px;
     align: right bottom;
-    margin-bottom: 254px;
+    margin-bottom: 500px;
 
-    #ToggleArtifact {
+    #ToggleBattlePassTask {
         width: 30px;
         height: 48px;
         align: right center;
         margin-bottom: 50px;
-
-        background-image: url("file://{images}/custom_game/artifact/artifact_toggle.png");
+        flow-children: right;
+        background-image: url("file://{images}/custom_game/bp/hudtask_toggle.png");
         background-size: 100% 100%;
         background-repeat: no-repeat;
         z-index: 1;
@@ -37,26 +37,26 @@
             }
         }
 
-        &.ExpandArtifact {
+        &.ExpandBattlePassTask {
             Image {
                 transform: rotateZ(180deg);
             }
         }
     }
 
-    #ArtifactPanelAndTitle {
+    #BattlePassTaskPanelAndTitle {
         flow-children: down;
         transform: translateX(300px);
         opacity: 0;
         transition-property: transform, opacity;
         transition-duration: 0.5s;
 
-        &.ExpandArtifact {
+        &.ExpandBattlePassTask {
             transform: none;
             opacity: 1;
         }
 
-        #ArtifactTitle {
+        #BattlePassTaskTitle {
             padding-left: 24px;
             padding-top: 2px;
             align: right top;
@@ -66,47 +66,52 @@
             background-color: gradient(linear, 100% 0%, 0% 0%, from(#000000), color-stop(0.8, #00000099), to(#00000000));
         }
 
-        #ArtifactPanel {
+        #BattlePassTaskPanel {
             margin-top: -4px;
-            background-image: url("file://{images}/custom_game/artifact/artifact_bg.png");
+            background-image: url("file://{images}/custom_game/bp/hudtask_bg.png");
             background-size: 100% 100%;
             background-repeat: no-repeat;
-
-            #ArtifactList {
-                width: 287px;
-                min-height: 115px;
-                align: right bottom;
-                margin-right: 5px;
-                padding: 12px 12px;
-                flow-children: left-wrap;
-
-                .ArtifactBuffBG {
-                    width: 40px;
-                    height: 40px;
-                    margin: 3px 4px;
-                    background-image: url("file://{images}/custom_game/artifact/buff_bg.png");
-                    background-size: 100% 100%;
-                    background-position: center;
-                    background-repeat: no-repeat;
-                    overflow: noclip;
-                    // tooltip-position: left;
-
-                    #imglock {
-                        width: 100%;
-                        height: 100%;
-                        align: center center;
-                    }
-
-                    .ArtifactBuff {
-                        width: 36px;
-                        height: width-percentage(100%);
-                        border-radius: 50%;
-                        box-shadow: fill #00000099 0px 0px 4px 2px;
-                        align: center center;
-                    }
-                }
-            }
+            flow-children: down;
         }
     }
 
+}
+
+
+.CCBpTaskHudItem {
+    flow-children: right;
+    width: 287px;
+    height: 50px;
+    border: 1px solid #62758B;
+
+    #TaskDesc {
+        width: 200px;
+        max-height: 88px;
+        font-size: 16px;
+        color: #B8B8B8;
+        text-shadow: 0px 0px 1px 2 #000000;
+        text-overflow: shrink;
+    }
+
+    #TaskProgressBar {
+        width: 200px;
+        height: 22px;
+        margin-left: 4px;
+        background-color: #000000;
+        border: 1px solid #1F2F3F;
+        border-radius: 4px;
+
+        .ProgressBarLeft {
+            background-color: gradient(linear, 0% 0%, 0% 100%, from(#005196), color-stop(0.48, #187DD3), to(#31BBDD));
+            border-radius: 4px;
+            border-top-width: 0px;
+        }
+
+        Label {
+            align: center center;
+            font-size: 16px;
+            color: #FFFFFF;
+            text-shadow: 0px 0px 1px 2 #000000;
+        }
+    }
 }

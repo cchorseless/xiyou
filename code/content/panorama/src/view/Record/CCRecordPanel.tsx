@@ -8,7 +8,7 @@ import { CCMenuNavigation } from "../AllUIElement/CCNavigation/CCMenuNavigation"
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCPopUpDialog } from "../AllUIElement/CCPopUpDialog/CCPopUpDialog";
 import { CCVerticalTable } from "../AllUIElement/CCTable/CCVerticalTable";
-import { CCCoinAddPanel } from "../Shop/CCCoinAddPanel";
+import { CCRecordMainItem } from "./CCRecordMainItem";
 import "./CCRecordPanel.less";
 interface ICCRecordPanel extends NodePropsData {
 
@@ -37,9 +37,6 @@ export class CCRecordPanel extends CCPanel<ICCRecordPanel> {
             return this.defaultRender("CC_RecordPanel")
         }
         const sName = "record";
-        const DataComp = (GGameScene.Local.TCharacter.DataComp!)!;
-        const MetaStone = DataComp.NumericComp!.GetAsInt(GEEnum.EMoneyType.MetaStone)
-        const StarStone = DataComp.NumericComp!.GetAsInt(GEEnum.EMoneyType.StarStone)
         const selectindex = this.GetState<number>("selectindex") || 0;
         return (
             <Panel id="CC_RecordPanel" className="CC_root" ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
@@ -47,22 +44,25 @@ export class CCRecordPanel extends CCPanel<ICCRecordPanel> {
                     <CCPanel id="PanelHeader" flowChildren="right">
                         <CCImage id="PanelIcon" backgroundImage={PathHelper.getCustomImageUrl("icon/" + sName + ".png")} />
                         <CCLabel id="PanelName" localizedText={"#lang_MenuButton_" + sName} />
-                        <CCPanel flowChildren="right" horizontalAlign="right" verticalAlign="center" marginRight={"20px"}>
-                            <CCCoinAddPanel cointype={GEEnum.EMoneyType.MetaStone} value={MetaStone} onaddcoin={() => this.addMetaStone()} />
-                            <CCCoinAddPanel marginLeft={"20px"} cointype={GEEnum.EMoneyType.StarStone} value={StarStone} />
-                        </CCPanel>
                     </CCPanel>
                     <CCPanel id="PanelContent" flowChildren="right">
-                        <CCVerticalTable marginTop={"20px"} list={[
-                            "主页",
-                            "战绩",
-                            "祝福",
-                            "称号",
-                            "成就",
-                        ]} onChange={(index: number, text: string) => {
-                            this.UpdateState({ selectindex: index })
-                        }} />
+                        <CCVerticalTable marginTop={"20px"}
+                            defaultSelected={0}
+                            list={[
+                                "主页",
+                                "战绩",
+                            ]} onChange={(index: number, text: string) => {
+                                this.UpdateState({ selectindex: index })
+                            }} />
                         {
+                            <CCPanel id="PanelContentBg"  >
+                                <CCRecordMainItem opacity={selectindex == 0 ? "1" : "0"} />
+
+                                {/* <CCBattlePassTaskItem opacity={selectindex == 1 ? "1" : "0"} /> */}
+
+                                {/* <CCBattlePassChargeItem opacity={selectindex == 2 ? "1" : "0"} /> */}
+
+                            </CCPanel>
 
                         }
                     </CCPanel>

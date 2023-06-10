@@ -22,6 +22,8 @@ export class HeroManageComponent extends ET.Component {
     SumHeroLevel: number = 0;
     @serializeETProps()
     HeroBanDesign: string[];
+    @serializeETProps()
+    HeroLevelPrizeGet: number[] = [];
     public Character(): TCharacter { return this.GetParent<TCharacter>(); }
     onGetBelongPlayerid() {
         let character = GTCharacter.GetOneInstanceById(this.Id);

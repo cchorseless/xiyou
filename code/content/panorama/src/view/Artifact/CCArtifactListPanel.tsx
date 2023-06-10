@@ -4,6 +4,7 @@ import { CSSHelper } from "../../helper/CSSHelper";
 
 import { CCIcon_Lock } from "../AllUIElement/CCIcons/CCIcon_Lock";
 import { CCItemImage } from "../AllUIElement/CCItem/CCItemImage";
+import { CCLabel } from "../AllUIElement/CCLabel/CCLabel";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import "./CCArtifactListPanel.less";
 
@@ -38,6 +39,7 @@ export class CCArtifactListPanel extends CCPanel<ICCArtifactListPanel> {
                         () => {
                             this.UpdateState({ ExpandArtifact: !ExpandArtifact })
                         }}>
+                    <CCLabel id="ToggleDes" text={"神器"} verticalAlign="center" width="20px" fontSize="16px" type="Title" />
                     <Image id="ToggleImg" />
                 </Button>
                 <Panel id="ArtifactPanelAndTitle" className={CSSHelper.ClassMaker({ ExpandArtifact: ExpandArtifact })} hittest={false}>

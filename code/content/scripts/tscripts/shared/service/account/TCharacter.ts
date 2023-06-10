@@ -26,6 +26,10 @@ export class TCharacter extends ET.Component {
     /**STEAM 短id */
     @serializeETProps()
     Name: string;
+    @serializeETProps()
+    VipType = 0;
+    @serializeETProps()
+    VipEndTimeSpan = "";
     CreateTime: string;
     LastLoginTime: string;
     IsFirstLoginToday: boolean;
@@ -49,7 +53,20 @@ export class TCharacter extends ET.Component {
     onReload(): void {
         this.SyncClient(true)
     }
-
+    IsVip() {
+        if (this.IsVipForever()) { return true }
+        const now = GTimerHelper.NowUnix();
+        return Number(this.VipEndTimeSpan) >= now;
+    }
+    IsVipMonth() {
+        return this.VipType == 1;
+    }
+    IsVipSeason() {
+        return this.VipType == 2;
+    }
+    IsVipForever() {
+        return this.VipType == 3;
+    }
 
     get SeedRandomComp() {
         return this.GetComponentByName<SeedRandomComponent>("SeedRandomComponent");

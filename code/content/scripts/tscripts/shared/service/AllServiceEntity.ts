@@ -8,8 +8,6 @@ import { TCharacterAchievementItem } from "./achievement/TCharacterAchievementIt
 import { CharacterActivityComponent } from "./activity/CharacterActivityComponent";
 import { ServerZoneActivityComponent } from "./activity/ServerZoneActivityComponent";
 import { TActivity } from "./activity/TActivity";
-import { TActivityBattlePass } from "./activity/TActivityBattlePass";
-import { TActivityBattlePassData } from "./activity/TActivityBattlePassData";
 import { TActivityDailyOnlinePrize } from "./activity/TActivityDailyOnlinePrize";
 import { TActivityDailyOnlinePrizeData } from "./activity/TActivityDailyOnlinePrizeData";
 import { TActivityData } from "./activity/TActivityData";
@@ -20,8 +18,6 @@ import { TActivityHeroRecordLevel } from "./activity/TActivityHeroRecordLevel";
 import { TActivityHeroRecordLevelData } from "./activity/TActivityHeroRecordLevelData";
 import { TActivityInvestMetaStone } from "./activity/TActivityInvestMetaStone";
 import { TActivityInvestMetaStoneData } from "./activity/TActivityInvestMetaStoneData";
-import { TActivityMemberShip } from "./activity/TActivityMemberShip";
-import { TActivityMemberShipData } from "./activity/TActivityMemberShipData";
 import { TActivityMentorshipApplyForItem } from "./activity/TActivityMentorshipApplyForItem";
 import { TActivityMentorshipTree } from "./activity/TActivityMentorshipTree";
 import { TActivityMentorshipTreeData } from "./activity/TActivityMentorshipTreeData";
@@ -94,8 +90,6 @@ import { CharacterTitleItem } from "./title/CharacterTitleItem";
     CharacterActivityComponent,
     ServerZoneActivityComponent,
     TActivity,
-    TActivityBattlePass,
-    TActivityBattlePassData,
     TActivityDailyOnlinePrize,
     TActivityDailyOnlinePrizeData,
     TActivityData,
@@ -106,8 +100,6 @@ import { CharacterTitleItem } from "./title/CharacterTitleItem";
     TActivityHeroRecordLevelData,
     TActivityInvestMetaStone,
     TActivityInvestMetaStoneData,
-    TActivityMemberShip,
-    TActivityMemberShipData,
     TActivityMentorshipApplyForItem,
     TActivityMentorshipTree,
     TActivityMentorshipTreeData,

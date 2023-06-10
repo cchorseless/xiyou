@@ -24499,6 +24499,1835 @@
     "ChallengeArtifactCost": 0
   }
 ] ,
+"dota_infopasslevelupconfig":[
+  {
+    "id": 0,
+    "TaskComPrize": {
+      "ItemConfigId": 13001,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 10,
+    "TaskComPrize": {
+      "ItemConfigId": 13002,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 20,
+    "TaskComPrize": {
+      "ItemConfigId": 13003,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 30,
+    "TaskComPrize": {
+      "ItemConfigId": 13004,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 40,
+    "TaskComPrize": {
+      "ItemConfigId": 13005,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 50,
+    "TaskComPrize": {
+      "ItemConfigId": 13006,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 60,
+    "TaskComPrize": {
+      "ItemConfigId": 13007,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 70,
+    "TaskComPrize": {
+      "ItemConfigId": 13008,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 80,
+    "TaskComPrize": {
+      "ItemConfigId": 13009,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 90,
+    "TaskComPrize": {
+      "ItemConfigId": 13010,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 100,
+    "TaskComPrize": {
+      "ItemConfigId": 13011,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 110,
+    "TaskComPrize": {
+      "ItemConfigId": 13012,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 120,
+    "TaskComPrize": {
+      "ItemConfigId": 13013,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 130,
+    "TaskComPrize": {
+      "ItemConfigId": 13014,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 140,
+    "TaskComPrize": {
+      "ItemConfigId": 13015,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 150,
+    "TaskComPrize": {
+      "ItemConfigId": 13016,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 160,
+    "TaskComPrize": {
+      "ItemConfigId": 13017,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 170,
+    "TaskComPrize": {
+      "ItemConfigId": 13018,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 180,
+    "TaskComPrize": {
+      "ItemConfigId": 13019,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 190,
+    "TaskComPrize": {
+      "ItemConfigId": 13020,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 200,
+    "TaskComPrize": {
+      "ItemConfigId": 13021,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 210,
+    "TaskComPrize": {
+      "ItemConfigId": 13022,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 220,
+    "TaskComPrize": {
+      "ItemConfigId": 13023,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 230,
+    "TaskComPrize": {
+      "ItemConfigId": 13024,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 240,
+    "TaskComPrize": {
+      "ItemConfigId": 13025,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 250,
+    "TaskComPrize": {
+      "ItemConfigId": 13026,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 260,
+    "TaskComPrize": {
+      "ItemConfigId": 13027,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 270,
+    "TaskComPrize": {
+      "ItemConfigId": 13028,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 280,
+    "TaskComPrize": {
+      "ItemConfigId": 13029,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 290,
+    "TaskComPrize": {
+      "ItemConfigId": 13030,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 300,
+    "TaskComPrize": {
+      "ItemConfigId": 13001,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 310,
+    "TaskComPrize": {
+      "ItemConfigId": 13002,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 320,
+    "TaskComPrize": {
+      "ItemConfigId": 13003,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 330,
+    "TaskComPrize": {
+      "ItemConfigId": 13004,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 340,
+    "TaskComPrize": {
+      "ItemConfigId": 13005,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 350,
+    "TaskComPrize": {
+      "ItemConfigId": 13006,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 360,
+    "TaskComPrize": {
+      "ItemConfigId": 13007,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 370,
+    "TaskComPrize": {
+      "ItemConfigId": 13008,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 380,
+    "TaskComPrize": {
+      "ItemConfigId": 13009,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 390,
+    "TaskComPrize": {
+      "ItemConfigId": 13010,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 400,
+    "TaskComPrize": {
+      "ItemConfigId": 13011,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 410,
+    "TaskComPrize": {
+      "ItemConfigId": 13012,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 420,
+    "TaskComPrize": {
+      "ItemConfigId": 13013,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 430,
+    "TaskComPrize": {
+      "ItemConfigId": 13014,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 440,
+    "TaskComPrize": {
+      "ItemConfigId": 13015,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 450,
+    "TaskComPrize": {
+      "ItemConfigId": 13016,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 460,
+    "TaskComPrize": {
+      "ItemConfigId": 13017,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 470,
+    "TaskComPrize": {
+      "ItemConfigId": 13018,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 480,
+    "TaskComPrize": {
+      "ItemConfigId": 13019,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 490,
+    "TaskComPrize": {
+      "ItemConfigId": 13020,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 500,
+    "TaskComPrize": {
+      "ItemConfigId": 13021,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 510,
+    "TaskComPrize": {
+      "ItemConfigId": 13022,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 520,
+    "TaskComPrize": {
+      "ItemConfigId": 13023,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 530,
+    "TaskComPrize": {
+      "ItemConfigId": 13024,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 540,
+    "TaskComPrize": {
+      "ItemConfigId": 13025,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 550,
+    "TaskComPrize": {
+      "ItemConfigId": 13026,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 560,
+    "TaskComPrize": {
+      "ItemConfigId": 13027,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 570,
+    "TaskComPrize": {
+      "ItemConfigId": 13028,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 580,
+    "TaskComPrize": {
+      "ItemConfigId": 13029,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 590,
+    "TaskComPrize": {
+      "ItemConfigId": 13030,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 600,
+    "TaskComPrize": {
+      "ItemConfigId": 13021,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 610,
+    "TaskComPrize": {
+      "ItemConfigId": 13022,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 620,
+    "TaskComPrize": {
+      "ItemConfigId": 13023,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 630,
+    "TaskComPrize": {
+      "ItemConfigId": 13024,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 640,
+    "TaskComPrize": {
+      "ItemConfigId": 13025,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 650,
+    "TaskComPrize": {
+      "ItemConfigId": 13026,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 660,
+    "TaskComPrize": {
+      "ItemConfigId": 13027,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 670,
+    "TaskComPrize": {
+      "ItemConfigId": 13028,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 680,
+    "TaskComPrize": {
+      "ItemConfigId": 13029,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 690,
+    "TaskComPrize": {
+      "ItemConfigId": 13030,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 700,
+    "TaskComPrize": {
+      "ItemConfigId": 13028,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 710,
+    "TaskComPrize": {
+      "ItemConfigId": 13001,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 720,
+    "TaskComPrize": {
+      "ItemConfigId": 13002,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 730,
+    "TaskComPrize": {
+      "ItemConfigId": 13003,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 740,
+    "TaskComPrize": {
+      "ItemConfigId": 13004,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 750,
+    "TaskComPrize": {
+      "ItemConfigId": 13005,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 760,
+    "TaskComPrize": {
+      "ItemConfigId": 13006,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 770,
+    "TaskComPrize": {
+      "ItemConfigId": 13007,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 780,
+    "TaskComPrize": {
+      "ItemConfigId": 13008,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 790,
+    "TaskComPrize": {
+      "ItemConfigId": 13009,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 800,
+    "TaskComPrize": {
+      "ItemConfigId": 13010,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 810,
+    "TaskComPrize": {
+      "ItemConfigId": 13011,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 820,
+    "TaskComPrize": {
+      "ItemConfigId": 13012,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 830,
+    "TaskComPrize": {
+      "ItemConfigId": 13013,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 840,
+    "TaskComPrize": {
+      "ItemConfigId": 13014,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 850,
+    "TaskComPrize": {
+      "ItemConfigId": 13015,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 860,
+    "TaskComPrize": {
+      "ItemConfigId": 13016,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 870,
+    "TaskComPrize": {
+      "ItemConfigId": 13017,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 880,
+    "TaskComPrize": {
+      "ItemConfigId": 13018,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 890,
+    "TaskComPrize": {
+      "ItemConfigId": 13019,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 900,
+    "TaskComPrize": {
+      "ItemConfigId": 13020,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 910,
+    "TaskComPrize": {
+      "ItemConfigId": 13021,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 920,
+    "TaskComPrize": {
+      "ItemConfigId": 13022,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 930,
+    "TaskComPrize": {
+      "ItemConfigId": 13023,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 940,
+    "TaskComPrize": {
+      "ItemConfigId": 13024,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 950,
+    "TaskComPrize": {
+      "ItemConfigId": 13025,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 960,
+    "TaskComPrize": {
+      "ItemConfigId": 13026,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 970,
+    "TaskComPrize": {
+      "ItemConfigId": 13027,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 980,
+    "TaskComPrize": {
+      "ItemConfigId": 13028,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 990,
+    "TaskComPrize": {
+      "ItemConfigId": 13029,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1000,
+    "TaskComPrize": {
+      "ItemConfigId": 13030,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1010,
+    "TaskComPrize": {
+      "ItemConfigId": 13001,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1020,
+    "TaskComPrize": {
+      "ItemConfigId": 13002,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1030,
+    "TaskComPrize": {
+      "ItemConfigId": 13003,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1040,
+    "TaskComPrize": {
+      "ItemConfigId": 13004,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1050,
+    "TaskComPrize": {
+      "ItemConfigId": 13005,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1060,
+    "TaskComPrize": {
+      "ItemConfigId": 13006,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1070,
+    "TaskComPrize": {
+      "ItemConfigId": 13007,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1080,
+    "TaskComPrize": {
+      "ItemConfigId": 13008,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1090,
+    "TaskComPrize": {
+      "ItemConfigId": 13009,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1100,
+    "TaskComPrize": {
+      "ItemConfigId": 13010,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1110,
+    "TaskComPrize": {
+      "ItemConfigId": 13011,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1120,
+    "TaskComPrize": {
+      "ItemConfigId": 13012,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1130,
+    "TaskComPrize": {
+      "ItemConfigId": 13013,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1140,
+    "TaskComPrize": {
+      "ItemConfigId": 13014,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1150,
+    "TaskComPrize": {
+      "ItemConfigId": 13015,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1160,
+    "TaskComPrize": {
+      "ItemConfigId": 13016,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1170,
+    "TaskComPrize": {
+      "ItemConfigId": 13017,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1180,
+    "TaskComPrize": {
+      "ItemConfigId": 13018,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1190,
+    "TaskComPrize": {
+      "ItemConfigId": 13019,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1200,
+    "TaskComPrize": {
+      "ItemConfigId": 13020,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1210,
+    "TaskComPrize": {
+      "ItemConfigId": 13021,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1220,
+    "TaskComPrize": {
+      "ItemConfigId": 13022,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1230,
+    "TaskComPrize": {
+      "ItemConfigId": 13023,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1240,
+    "TaskComPrize": {
+      "ItemConfigId": 13024,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1250,
+    "TaskComPrize": {
+      "ItemConfigId": 13025,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1260,
+    "TaskComPrize": {
+      "ItemConfigId": 13026,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1270,
+    "TaskComPrize": {
+      "ItemConfigId": 13027,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1280,
+    "TaskComPrize": {
+      "ItemConfigId": 13028,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1290,
+    "TaskComPrize": {
+      "ItemConfigId": 13029,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1300,
+    "TaskComPrize": {
+      "ItemConfigId": 13030,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1310,
+    "TaskComPrize": {
+      "ItemConfigId": 13021,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1320,
+    "TaskComPrize": {
+      "ItemConfigId": 13022,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1330,
+    "TaskComPrize": {
+      "ItemConfigId": 13023,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1340,
+    "TaskComPrize": {
+      "ItemConfigId": 13024,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1350,
+    "TaskComPrize": {
+      "ItemConfigId": 13025,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1360,
+    "TaskComPrize": {
+      "ItemConfigId": 13026,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1370,
+    "TaskComPrize": {
+      "ItemConfigId": 13027,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1380,
+    "TaskComPrize": {
+      "ItemConfigId": 13028,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1390,
+    "TaskComPrize": {
+      "ItemConfigId": 13029,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1400,
+    "TaskComPrize": {
+      "ItemConfigId": 13030,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1410,
+    "TaskComPrize": {
+      "ItemConfigId": 13028,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1420,
+    "TaskComPrize": {
+      "ItemConfigId": 13001,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1430,
+    "TaskComPrize": {
+      "ItemConfigId": 13002,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1440,
+    "TaskComPrize": {
+      "ItemConfigId": 13003,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1450,
+    "TaskComPrize": {
+      "ItemConfigId": 13004,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1460,
+    "TaskComPrize": {
+      "ItemConfigId": 13005,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1470,
+    "TaskComPrize": {
+      "ItemConfigId": 13006,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1480,
+    "TaskComPrize": {
+      "ItemConfigId": 13007,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1490,
+    "TaskComPrize": {
+      "ItemConfigId": 13008,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1500,
+    "TaskComPrize": {
+      "ItemConfigId": 13009,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1510,
+    "TaskComPrize": {
+      "ItemConfigId": 13010,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1520,
+    "TaskComPrize": {
+      "ItemConfigId": 13011,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1530,
+    "TaskComPrize": {
+      "ItemConfigId": 13012,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1540,
+    "TaskComPrize": {
+      "ItemConfigId": 13013,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1550,
+    "TaskComPrize": {
+      "ItemConfigId": 13014,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1560,
+    "TaskComPrize": {
+      "ItemConfigId": 13015,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1570,
+    "TaskComPrize": {
+      "ItemConfigId": 13016,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1580,
+    "TaskComPrize": {
+      "ItemConfigId": 13017,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1590,
+    "TaskComPrize": {
+      "ItemConfigId": 13018,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1600,
+    "TaskComPrize": {
+      "ItemConfigId": 13019,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1610,
+    "TaskComPrize": {
+      "ItemConfigId": 13020,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1620,
+    "TaskComPrize": {
+      "ItemConfigId": 13021,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1630,
+    "TaskComPrize": {
+      "ItemConfigId": 13022,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1640,
+    "TaskComPrize": {
+      "ItemConfigId": 13023,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1650,
+    "TaskComPrize": {
+      "ItemConfigId": 13024,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1660,
+    "TaskComPrize": {
+      "ItemConfigId": 13025,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1670,
+    "TaskComPrize": {
+      "ItemConfigId": 13026,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1680,
+    "TaskComPrize": {
+      "ItemConfigId": 13027,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1690,
+    "TaskComPrize": {
+      "ItemConfigId": 13028,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1700,
+    "TaskComPrize": {
+      "ItemConfigId": 13029,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1710,
+    "TaskComPrize": {
+      "ItemConfigId": 13030,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1720,
+    "TaskComPrize": {
+      "ItemConfigId": 13001,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1730,
+    "TaskComPrize": {
+      "ItemConfigId": 13002,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1740,
+    "TaskComPrize": {
+      "ItemConfigId": 13003,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1750,
+    "TaskComPrize": {
+      "ItemConfigId": 13004,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1760,
+    "TaskComPrize": {
+      "ItemConfigId": 13005,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1770,
+    "TaskComPrize": {
+      "ItemConfigId": 13006,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1780,
+    "TaskComPrize": {
+      "ItemConfigId": 13007,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1790,
+    "TaskComPrize": {
+      "ItemConfigId": 13008,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1800,
+    "TaskComPrize": {
+      "ItemConfigId": 13009,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1810,
+    "TaskComPrize": {
+      "ItemConfigId": 13010,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1820,
+    "TaskComPrize": {
+      "ItemConfigId": 13011,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1830,
+    "TaskComPrize": {
+      "ItemConfigId": 13012,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1840,
+    "TaskComPrize": {
+      "ItemConfigId": 13013,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1850,
+    "TaskComPrize": {
+      "ItemConfigId": 13014,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1860,
+    "TaskComPrize": {
+      "ItemConfigId": 13015,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1870,
+    "TaskComPrize": {
+      "ItemConfigId": 13016,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1880,
+    "TaskComPrize": {
+      "ItemConfigId": 13017,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1890,
+    "TaskComPrize": {
+      "ItemConfigId": 13018,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1900,
+    "TaskComPrize": {
+      "ItemConfigId": 13019,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1910,
+    "TaskComPrize": {
+      "ItemConfigId": 13020,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1920,
+    "TaskComPrize": {
+      "ItemConfigId": 13021,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1930,
+    "TaskComPrize": {
+      "ItemConfigId": 13022,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1940,
+    "TaskComPrize": {
+      "ItemConfigId": 13023,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1950,
+    "TaskComPrize": {
+      "ItemConfigId": 13024,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1960,
+    "TaskComPrize": {
+      "ItemConfigId": 13025,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1970,
+    "TaskComPrize": {
+      "ItemConfigId": 13026,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1980,
+    "TaskComPrize": {
+      "ItemConfigId": 13027,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 1990,
+    "TaskComPrize": {
+      "ItemConfigId": 13028,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2000,
+    "TaskComPrize": {
+      "ItemConfigId": 13029,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2010,
+    "TaskComPrize": {
+      "ItemConfigId": 13030,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2020,
+    "TaskComPrize": {
+      "ItemConfigId": 13021,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2030,
+    "TaskComPrize": {
+      "ItemConfigId": 13022,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2040,
+    "TaskComPrize": {
+      "ItemConfigId": 13023,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2050,
+    "TaskComPrize": {
+      "ItemConfigId": 13024,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2060,
+    "TaskComPrize": {
+      "ItemConfigId": 13025,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2070,
+    "TaskComPrize": {
+      "ItemConfigId": 13026,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2080,
+    "TaskComPrize": {
+      "ItemConfigId": 13027,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2090,
+    "TaskComPrize": {
+      "ItemConfigId": 13028,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2100,
+    "TaskComPrize": {
+      "ItemConfigId": 13029,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2110,
+    "TaskComPrize": {
+      "ItemConfigId": 13030,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2120,
+    "TaskComPrize": {
+      "ItemConfigId": 13028,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2130,
+    "TaskComPrize": {
+      "ItemConfigId": 13001,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2140,
+    "TaskComPrize": {
+      "ItemConfigId": 13002,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2150,
+    "TaskComPrize": {
+      "ItemConfigId": 13003,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2160,
+    "TaskComPrize": {
+      "ItemConfigId": 13004,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2170,
+    "TaskComPrize": {
+      "ItemConfigId": 13005,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2180,
+    "TaskComPrize": {
+      "ItemConfigId": 13006,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2190,
+    "TaskComPrize": {
+      "ItemConfigId": 13007,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2200,
+    "TaskComPrize": {
+      "ItemConfigId": 13008,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2210,
+    "TaskComPrize": {
+      "ItemConfigId": 13009,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2220,
+    "TaskComPrize": {
+      "ItemConfigId": 13010,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2230,
+    "TaskComPrize": {
+      "ItemConfigId": 13011,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2240,
+    "TaskComPrize": {
+      "ItemConfigId": 13012,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2250,
+    "TaskComPrize": {
+      "ItemConfigId": 13013,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2260,
+    "TaskComPrize": {
+      "ItemConfigId": 13014,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2270,
+    "TaskComPrize": {
+      "ItemConfigId": 13015,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2280,
+    "TaskComPrize": {
+      "ItemConfigId": 13016,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2290,
+    "TaskComPrize": {
+      "ItemConfigId": 13017,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2300,
+    "TaskComPrize": {
+      "ItemConfigId": 13018,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2310,
+    "TaskComPrize": {
+      "ItemConfigId": 13019,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2320,
+    "TaskComPrize": {
+      "ItemConfigId": 13020,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2330,
+    "TaskComPrize": {
+      "ItemConfigId": 13021,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2340,
+    "TaskComPrize": {
+      "ItemConfigId": 13022,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2350,
+    "TaskComPrize": {
+      "ItemConfigId": 13023,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2360,
+    "TaskComPrize": {
+      "ItemConfigId": 13024,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2370,
+    "TaskComPrize": {
+      "ItemConfigId": 13025,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2380,
+    "TaskComPrize": {
+      "ItemConfigId": 13026,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2390,
+    "TaskComPrize": {
+      "ItemConfigId": 13027,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2400,
+    "TaskComPrize": {
+      "ItemConfigId": 13028,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2410,
+    "TaskComPrize": {
+      "ItemConfigId": 13029,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2420,
+    "TaskComPrize": {
+      "ItemConfigId": 13030,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2430,
+    "TaskComPrize": {
+      "ItemConfigId": 13001,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2440,
+    "TaskComPrize": {
+      "ItemConfigId": 13002,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2450,
+    "TaskComPrize": {
+      "ItemConfigId": 13003,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2460,
+    "TaskComPrize": {
+      "ItemConfigId": 13004,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2470,
+    "TaskComPrize": {
+      "ItemConfigId": 13005,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2480,
+    "TaskComPrize": {
+      "ItemConfigId": 13006,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2490,
+    "TaskComPrize": {
+      "ItemConfigId": 13007,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2500,
+    "TaskComPrize": {
+      "ItemConfigId": 13008,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2510,
+    "TaskComPrize": {
+      "ItemConfigId": 13009,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2520,
+    "TaskComPrize": {
+      "ItemConfigId": 13010,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2530,
+    "TaskComPrize": {
+      "ItemConfigId": 13011,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2540,
+    "TaskComPrize": {
+      "ItemConfigId": 13012,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2550,
+    "TaskComPrize": {
+      "ItemConfigId": 13013,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2560,
+    "TaskComPrize": {
+      "ItemConfigId": 13014,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2570,
+    "TaskComPrize": {
+      "ItemConfigId": 13015,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2580,
+    "TaskComPrize": {
+      "ItemConfigId": 13016,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2590,
+    "TaskComPrize": {
+      "ItemConfigId": 13017,
+      "ItemCount": 1
+    }
+  },
+  {
+    "id": 2600,
+    "TaskComPrize": {
+      "ItemConfigId": 13018,
+      "ItemCount": 1
+    }
+  }
+] ,
 "dota_poolconfig":[
   {
     "poolid": "1001",

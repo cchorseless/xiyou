@@ -68,7 +68,7 @@ export class CCBattlePassPrizeItem extends CCPanel<ICCBattlePassPrizeItem> {
             <CCPanel flowChildren="right" horizontalAlign="center">
                 {!IsBattlePass && <CCButton color="Green" width="200px" verticalAlign="center" flowChildren="right">
                     <CCLabel type="UnitName" text={"启用高级战令"} verticalAlign="center" marginLeft={"15px"} />
-                    <CCIcon_BattlepassLogo type="Tui3" width="40px" height="40px" verticalAlign="center" />
+                    <CCIcon_BattlepassLogo type="Plus" width="40px" height="40px" verticalAlign="center" />
                 </CCButton>
                 }
                 <CCButton color="Purple" text={"购买经验"} marginLeft={"100px"} verticalAlign="center" />
@@ -191,7 +191,7 @@ export class CCBPLevelRewards extends CCPanel<ICCBPLevelRewards> {
             }}>
                 <CCShopItem id="PlusItem" hittest={false} isUnAvailable={info_plus.gray} itemid={info_plus.ItemConfigId} count={info_plus.ItemCount}>
                     {info_plus.check && <CCIcon_Check align="right bottom" width="60px" height="60px" marginRight={"20px"} marginBottom={"20px"} />}
-                    {!IsBattlePass && <CCIcon_BattlepassLogo type="Tui3" id="PlusIcon" align="right bottom" marginRight={"20px"} marginBottom={"20px"} />}
+                    {!IsBattlePass && <CCIcon_BattlepassLogo type="Plus" id="PlusIcon" align="right bottom" marginRight={"20px"} marginBottom={"20px"} />}
                 </CCShopItem>
             </CCButtonBox>
             }

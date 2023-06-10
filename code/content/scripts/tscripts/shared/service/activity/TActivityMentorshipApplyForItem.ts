@@ -1,5 +1,5 @@
 import { ET, serializeETProps } from "../../lib/Entity";
-import { TActivityMemberShipData } from "./TActivityMemberShipData";
+import { TActivityMentorshipTreeData } from "./TActivityMentorshipTreeData";
 
 
 @GReloadable
@@ -17,6 +17,6 @@ export class TActivityMentorshipApplyForItem extends ET.Entity {
     @serializeETProps()
     public PrizeGet: string[];
 
-    public get MemberShipData() { return this.GetParent<TActivityMemberShipData>(); }
+    public get MentorshipTreeData() { return this.GetParent<TActivityMentorshipTreeData>(); }
 
 }

@@ -14,7 +14,7 @@ interface ICCMailSingleDataItem {
 }
 
 export class CCMailSingleDataItem extends CCPanel<ICCMailSingleDataItem> {
-    Init() {
+    onInitUI() {
         if (this.props.mail) {
             this.ListenUpdate(this.props.mail)
         }

@@ -81,8 +81,8 @@ export class modifier_builder_gold extends BaseModifier_Plus {
     OnIntervalThink() {
         let hParent = this.GetParentPlus()
         if (IsValid(hParent)) {
-            let MemberShip = GTActivityMemberShipData.GetOneInstance(hParent.GetPlayerOwnerID());
-            if (MemberShip && MemberShip.IsVip()) {
+            let tCharacter = GTCharacter.GetOneInstance(hParent.GetPlayerOwnerID());
+            if (tCharacter && tCharacter.IsVip()) {
                 this.SetStackCount(1)
                 let hAbility = this.GetAbilityPlus()
                 if (IsValid(hAbility) && hAbility.IsCooldownReady()) {

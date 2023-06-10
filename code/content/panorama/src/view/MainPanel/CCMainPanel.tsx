@@ -11,6 +11,7 @@ import { CCMenuNavigation } from "../AllUIElement/CCNavigation/CCMenuNavigation"
 import { CCPanel, dialogTooltipInfo } from "../AllUIElement/CCPanel/CCPanel";
 import { CCArtifactListPanel } from "../Artifact/CCArtifactListPanel";
 import { CCBattlePassPanel } from "../BattlePass/CCBattlePassPanel";
+import { CCBattlePassTaskHudDialog } from "../BattlePass/CCBattlePassTaskHudDialog";
 import { CCChallengeShopPanel } from "../Challenge/CCChallengeShopPanel";
 import { CCCombinationBottomPanel } from "../Combination/CCCombinationBottomPanel";
 import { CCDebugPanel } from "../DebugTool/CCDebugPanel";
@@ -75,6 +76,7 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
                         <CCDacBoard BShowBuffList={BShowBuffList} CurSelectUnit={curunit} />
                         <CCUnitDamageInfo />
                         <CCCombinationBottomPanel CurSelectUnit={curunit} />
+                        <CCBattlePassTaskHudDialog />
                         <CCArtifactListPanel />
                         <CCPublicShopBagPanel />
                         <CCNotificationPanel />

@@ -12,7 +12,9 @@ import { CCMenuNavigation } from "../AllUIElement/CCNavigation/CCMenuNavigation"
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCPopUpDialog } from "../AllUIElement/CCPopUpDialog/CCPopUpDialog";
 import { CCVerticalTable } from "../AllUIElement/CCTable/CCVerticalTable";
+import { CCMainPanel } from "../MainPanel/CCMainPanel";
 import { CCCoinAddPanel } from "../Shop/CCCoinAddPanel";
+import { CCStorageItemGetDialog } from "../Storage/CCStorageItemGetDialog";
 import "./CCMailPanel.less";
 import { CCMailSingleDataDialog } from "./CCMailSingleDataDialog";
 import { CCMailSingleDataItem } from "./CCMailSingleDataItem";
@@ -41,7 +43,7 @@ export class CCMailPanel extends CCPanel<ICCMailPanel> {
         const Mail = this.props.mail;
         if (Mail == null) { return }
         NetHelper.SendToCSharp(GameProtocol.Protocol.Handle_CharacterMail, {
-            HandleType: GameProtocol.EMailHandleType.MailGetItem,
+            HandleType: GameProtocol.EMailHandleType.MailDelete,
             IsOneKey: false,
             MailId: Mail.Id,
         })
@@ -53,7 +55,15 @@ export class CCMailPanel extends CCPanel<ICCMailPanel> {
         NetHelper.SendToCSharp(GameProtocol.Protocol.Handle_CharacterMail, {
             HandleType: GameProtocol.EMailHandleType.MailGetItem,
             IsOneKey: true,
-        })
+        }, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
+            if (e.state) {
+                const items = JSON.parse(e.message!) as IFItemInfo[];
+                CCMainPanel.GetInstance()!.addOnlyPanel(CCStorageItemGetDialog, {
+                    Items: items
+                })
+            }
+            this.UpdateSelf();
+        }))
     }
 
     render() {

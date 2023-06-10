@@ -13,20 +13,20 @@ export class CCPlayerCard extends CCPanel<ICCPlayerCard> {
 
     onReady() {
         const iplayerID = this.props.iPlayerID;
-        return Boolean(GTActivityMemberShipData.GetOneInstance(iplayerID))
+        return Boolean(GTCharacter.GetOneInstance(iplayerID))
     }
 
     onInitUI() {
         const iplayerID = this.props.iPlayerID;
-        this.ListenUpdate(GTActivityMemberShipData.GetOneInstance(iplayerID));
+        this.ListenUpdate(GTCharacter.GetOneInstance(iplayerID));
     }
 
     render() {
         if (!this.__root___isValid) return this.defaultRender("CC_PlayerCard");
         const iplayerID = this.props.iPlayerID;
-        const MemberData = (GTActivityMemberShipData.GetOneInstance(iplayerID))!;
-        const isPlus = MemberData.IsVip();
-        const isPlus_p = MemberData.IsVipForever();
+        const tCharacter = (GTCharacter.GetOneInstance(iplayerID))!;
+        const isPlus = tCharacter.IsVip();
+        const isPlus_p = tCharacter.IsVipForever();
         const playerinfo = Game.GetPlayerInfo(iplayerID)
         return <Panel id="CC_PlayerCard"
             className={CSSHelper.ClassMaker("CCPlayerCard", { Plus: isPlus && !isPlus_p, PlusPlus: isPlus_p })}

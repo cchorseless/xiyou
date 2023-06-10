@@ -1,0 +1,130 @@
+.CCRecordMainItem {
+    flow-children: down;
+    width: 100%;
+    height: 100%;
+
+    #RecordTitleBg {
+        width: 100%;
+        height: 29px;
+        background-image: url("file://{images}/custom_game/record/titlebg2.png");
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+    }
+
+    #RecordVipIcon {
+        width: 100px;
+        height: 100px;
+        z-index: 5;
+        margin-top: 30px;
+        horizontal-align: center;
+        saturation: 0;
+
+        &:Hover {
+            brightness: 2;
+        }
+
+
+        & .IsVip {
+            saturation: 1;
+        }
+
+    }
+
+    #RecordBattlePassIcon {
+        width: 100px;
+        height: 100px;
+        z-index: 5;
+        margin-top: 30px;
+        horizontal-align: center;
+
+        &:Hover {
+            brightness: 2;
+        }
+
+    }
+
+    #CCRecordAvatar {
+        width: 126px;
+        height: 126px;
+        border: 2px solid #111111FF
+    }
+
+
+
+    .RecordInfoBox {
+        margin-top: 15px;
+        flow-children: right;
+
+        Label {
+            text-shadow: 0px 0px 2px 2 #000000;
+            text-overflow: shrink;
+            font-size: 16px;
+            color: #E6C293;
+        }
+    }
+}
+
+
+
+.CCRecordLevelNum {
+    height: 50px;
+    width: 60px;
+    z-index: 2;
+    background-image: url("file://{images}/custom_game/record/levelicon.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    flow-children: right;
+
+    & .isUnActive {
+        saturation: .3;
+        brightness: .5;
+    }
+}
+
+.CCRecordLevelRewards {
+    flow-children: down;
+
+    #FreeItem {
+        ui-scale: 60%;
+        vertical-align: top;
+        margin-top: 3px;
+        horizontal-align: center;
+
+        #ShopItemName {
+            font-size: 30px;
+        }
+
+    }
+
+
+    #BPListProgressBar {
+        width: 100%;
+        height: 26px;
+        vertical-align: center;
+        background-color: #452A4D;
+        box-shadow: #19110466 0px 1px 0px 0px;
+        opacity-mask: url("file://{images}/custom_game/bp/bp_list_mask.png");
+
+        #BPListProgressBarCenter {
+            width: 100%;
+            height: 18px;
+            vertical-align: center;
+            background-color: #1F1623;
+            border: 1px solid #472750;
+            border-left-width: 0px;
+            border-right-width: 0px;
+            box-shadow: inset #19110466 0px 0px 2px 2px;
+        }
+    }
+
+    .BPListProgressBarLeft {
+        height: 16px;
+        background-color: gradient(linear, 0% 0%, 0% 100%, from(#6d3611), to(#9a5e1d));
+        border: 1px solid #2C1B0D;
+        border-left-width: 0px;
+        border-right-width: 0px;
+        vertical-align: center;
+    }
+
+
+}

@@ -105,7 +105,7 @@ export class CCRankPanel extends CCPanel<ICCRankPanel> {
                                         <CCLabel type="UnitName" text={"天梯积分"} marginLeft={"150px"} />
                                     </CCPanel>
                                     {
-                                        curdata0.length == 0 ? <CCIcon_Loading align="center center" />
+                                        curdata0.length == 0 ? <CCIcon_Loading align="center center" width="50px" height="50px" />
                                             :
                                             curdata0.map((v: TRankSingleData, index) => {
                                                 const rank = v.RankIndex;
@@ -128,7 +128,7 @@ export class CCRankPanel extends CCPanel<ICCRankPanel> {
                                         <CCLabel type="UnitName" text={"章节进度"} marginLeft={"150px"} />
                                     </CCPanel>
                                     {
-                                        curdata1.length == 0 ? <CCIcon_Loading align="center center" />
+                                        curdata1.length == 0 ? <CCIcon_Loading align="center center" width="50px" height="50px" />
                                             :
                                             curdata1.map((v: TRankSingleData, index) => {
                                                 const rank = v.RankIndex;
@@ -151,7 +151,7 @@ export class CCRankPanel extends CCPanel<ICCRankPanel> {
                                         <CCLabel type="UnitName" text={"英雄总战力"} marginLeft={"150px"} />
                                     </CCPanel>
                                     {
-                                        curdata2.length == 0 ? <CCIcon_Loading align="center center" />
+                                        curdata2.length == 0 ? <CCIcon_Loading align="center center" width="50px" height="50px" />
                                             :
                                             curdata2.map((v: TRankSingleData, index) => {
                                                 const rank = v.RankIndex;

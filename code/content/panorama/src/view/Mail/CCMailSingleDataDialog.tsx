@@ -6,7 +6,9 @@ import { TimerHelper } from "../../helper/TimerHelper";
 import { CCButton } from "../AllUIElement/CCButton/CCButton";
 import { CCLabel } from "../AllUIElement/CCLabel/CCLabel";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
+import { CCMainPanel } from "../MainPanel/CCMainPanel";
 import { CCStorageIconItem } from "../Storage/CCStorageIconItem";
+import { CCStorageItemGetDialog } from "../Storage/CCStorageItemGetDialog";
 import { CCMailPanel } from "./CCMailPanel";
 import "./CCMailSingleDataDialog.less";
 
@@ -16,6 +18,14 @@ interface ICCMailSingleDataDialog {
 }
 
 export class CCMailSingleDataDialog extends CCPanel<ICCMailSingleDataDialog> {
+
+    onInitUI() {
+        this.ListenClassUpdate(TMail, (e) => {
+            if (e.Id == this.props.mail.Id) {
+                this.UpdateSelf();
+            }
+        })
+    }
     onbtndelete_click() {
         const Mail = this.props.mail;
         if (Mail == null) { return }
@@ -34,7 +44,13 @@ export class CCMailSingleDataDialog extends CCPanel<ICCMailSingleDataDialog> {
             HandleType: GameProtocol.EMailHandleType.MailGetItem,
             IsOneKey: false,
             MailId: Mail.Id,
-        }, GHandler.create(this, () => {
+        }, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
+            if (e.state) {
+                const items = JSON.parse(e.message!) as IFItemInfo[];
+                CCMainPanel.GetInstance()!.addOnlyPanel(CCStorageItemGetDialog, {
+                    Items: items
+                })
+            }
             CCMailPanel.GetInstance()?.UpdateSelf();
         }))
     }

@@ -22,9 +22,9 @@ export class CCShopSellItem extends CCPanel<ICCShopSellItem> {
     }
 
     onBtnBuyClick() {
-        let MemberShip = GTActivityMemberShipData.GetOneInstance(GGameScene.Local.BelongPlayerid);
+        let tCharacter = GTCharacter.GetOneInstance(GGameScene.Local.BelongPlayerid);
         const sellitem = (this.props.entity)!;
-        if (sellitem.SellConfig!.VipLimit && !MemberShip?.IsVip()) {
+        if (sellitem.SellConfig!.VipLimit && !tCharacter.IsVip()) {
             TipsHelper.showErrorMessage("vip limit")
             return;
         }

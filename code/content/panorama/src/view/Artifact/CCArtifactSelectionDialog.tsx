@@ -16,7 +16,7 @@ export class CCArtifactSelectionDialog extends CCPanel<ICCArtifactSelectionDialo
     render() {
         const courierbag = GGameScene.Local.CourierBagComp!;
         return (
-            <Panel className={CSSHelper.ClassMaker("CC_ArtifactSelectionDialog")} ref={this.__root__}  {...this.initRootAttrs()}>
+            <Panel className={CSSHelper.ClassMaker("CCArtifactSelectionDialog")} ref={this.__root__}  {...this.initRootAttrs()}>
                 <CCPopupBG type="Tui3" />
                 <CCPanel flowChildren="down" margin="20px 20px">
                     <CCLabel className="ArtifactTitle" text={"神器选择"} />

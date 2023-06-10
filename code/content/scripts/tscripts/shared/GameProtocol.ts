@@ -32,6 +32,8 @@ export module GameProtocol {
         static readonly BattlePass_GetPrize = "/BattlePass_GetPrize";
         static readonly GetPrize_TaskPrize = "/GetPrize_TaskPrize";
         static readonly BattlePass_ChargePrize = "/BattlePass_ChargePrize";
+        // 档案奖励
+        static readonly InfoPass_GetInfoPassPrize = "/InfoPass_GetInfoPassPrize";
 
         // js-clientlua
         static readonly custom_call_get_ability_data = "custom_call_get_ability_data";

@@ -3280,6 +3280,60 @@ export class BattlePassLevelUpConfigRecord {
 }
 
 export namespace Dota {
+export class InfoPassLevelUpConfig{
+    private _dataMap: Map<number, Dota.InfoPassLevelUpConfigRecord>
+    private _dataList: Dota.InfoPassLevelUpConfigRecord[]
+    constructor(_json_: any[]) {
+ this._dataMap  = new Map<number, Dota.InfoPassLevelUpConfigRecord>()
+        this._dataList = []
+        for(let _json2_ of _json_) {
+            let _v: Dota.InfoPassLevelUpConfigRecord
+            _v = new Dota.InfoPassLevelUpConfigRecord(_json2_)
+            this._dataList.push(_v)
+            this._dataMap.set(_v.id, _v)
+        }
+    }
+
+    getDataMap(): Map<number, Dota.InfoPassLevelUpConfigRecord> { return this._dataMap; }
+    getDataList(): Dota.InfoPassLevelUpConfigRecord[] { return this._dataList; }
+
+    get(key: number): Dota.InfoPassLevelUpConfigRecord | undefined { return this._dataMap.get(key); }
+
+    resolve(_tables: Map<string, any>) {
+        for(let v of this._dataList) {
+            v.resolve(_tables)
+        }
+    }
+
+}
+}
+
+
+
+export namespace Dota {
+export class InfoPassLevelUpConfigRecord {
+
+    constructor(_json_: any) {
+        if (_json_.id === undefined) { GLogHelper.error(1); }
+        this.id = _json_.id
+        if (_json_.TaskComPrize === undefined) { GLogHelper.error(1); }
+        this.TaskComPrize = new Item.ItemInfoBean(_json_.TaskComPrize)
+    }
+
+    /**
+     * 唯一id
+     */
+    readonly id: number
+    readonly TaskComPrize: Item.ItemInfoBean
+
+    resolve(_tables: Map<string, any>) {
+        if (this.TaskComPrize != null) { this.TaskComPrize.resolve(_tables);}
+    }
+}
+
+}
+
+export namespace Dota {
 export class BuffEffectConfig{
     private _dataMap: Map<string, Dota.BuffEffectConfigRecord>
     private _dataList: Dota.BuffEffectConfigRecord[]
@@ -4733,6 +4787,8 @@ export class Tables {
     get BattlePassTaskConfig(): Dota.BattlePassTaskConfig  { return this._BattlePassTaskConfig;}
     private _BattlePassLevelUpConfig: Dota.BattlePassLevelUpConfig
     get BattlePassLevelUpConfig(): Dota.BattlePassLevelUpConfig  { return this._BattlePassLevelUpConfig;}
+    private _InfoPassLevelUpConfig: Dota.InfoPassLevelUpConfig
+    get InfoPassLevelUpConfig(): Dota.InfoPassLevelUpConfig  { return this._InfoPassLevelUpConfig;}
     private _BuffEffectConfig: Dota.BuffEffectConfig
     get BuffEffectConfig(): Dota.BuffEffectConfig  { return this._BuffEffectConfig;}
     private _CourierAbilityLevelUpConfig: Dota.CourierAbilityLevelUpConfig
@@ -4818,6 +4874,8 @@ export class Tables {
         tables.set('Dota.BattlePassTaskConfig', this._BattlePassTaskConfig)
         this._BattlePassLevelUpConfig = new Dota.BattlePassLevelUpConfig(loader('dota_battlepasslevelupconfig'))
         tables.set('Dota.BattlePassLevelUpConfig', this._BattlePassLevelUpConfig)
+        this._InfoPassLevelUpConfig = new Dota.InfoPassLevelUpConfig(loader('dota_infopasslevelupconfig'))
+        tables.set('Dota.InfoPassLevelUpConfig', this._InfoPassLevelUpConfig)
         this._BuffEffectConfig = new Dota.BuffEffectConfig(loader('dota_buffeffectconfig'))
         tables.set('Dota.BuffEffectConfig', this._BuffEffectConfig)
         this._CourierAbilityLevelUpConfig = new Dota.CourierAbilityLevelUpConfig(loader('dota_courierabilitylevelupconfig'))
@@ -4870,6 +4928,7 @@ export class Tables {
         this._BattlePassChargeConfig.resolve(tables)
         this._BattlePassTaskConfig.resolve(tables)
         this._BattlePassLevelUpConfig.resolve(tables)
+        this._InfoPassLevelUpConfig.resolve(tables)
         this._BuffEffectConfig.resolve(tables)
         this._CourierAbilityLevelUpConfig.resolve(tables)
         this._CombinationConfig.resolve(tables)
@@ -4945,6 +5004,8 @@ case ('dota_battlepasstaskconfig'):
         this._BattlePassTaskConfig = new Dota.BattlePassTaskConfig(loader('dota_battlepasstaskconfig'));break;
 case ('dota_battlepasslevelupconfig'):
         this._BattlePassLevelUpConfig = new Dota.BattlePassLevelUpConfig(loader('dota_battlepasslevelupconfig'));break;
+case ('dota_infopasslevelupconfig'):
+        this._InfoPassLevelUpConfig = new Dota.InfoPassLevelUpConfig(loader('dota_infopasslevelupconfig'));break;
 case ('dota_buffeffectconfig'):
         this._BuffEffectConfig = new Dota.BuffEffectConfig(loader('dota_buffeffectconfig'));break;
 case ('dota_courierabilitylevelupconfig'):
