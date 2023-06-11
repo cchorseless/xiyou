@@ -1,17 +1,18 @@
 
 import { serializeETProps } from "../../lib/Entity";
 import { CharacterActivityComponent } from "./CharacterActivityComponent";
-import { TActivityData } from "./TActivityData";
+import { TActivity } from "./TActivity";
 
 
 @GReloadable
-export class TActivityDailyOnlinePrizeData extends TActivityData {
+export class TActivityFirstCharge extends TActivity {
 
     @serializeETProps()
-    public ItemHadGet: number[] = []
+    public ChargeFirstPrize: IFItemInfo[] = [];
 
     @serializeETProps()
-    LoginTimeSpan: string;
+    public SecondFirstPrize: IFItemInfo[] = [];
+
     public ActivityComp() { return this.GetParent<CharacterActivityComponent>(); }
 
 }

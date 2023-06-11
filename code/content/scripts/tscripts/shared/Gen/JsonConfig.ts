@@ -29,28 +29,70 @@
     "id": 1,
     "IsValid": true,
     "IsCyclicActivity": true,
-    "ActivityName": "",
+    "ActivityName": "TActivitySevenDayLogin",
     "ActivityScript": ""
   },
   {
     "id": 2,
     "IsValid": true,
     "IsCyclicActivity": true,
-    "ActivityName": "",
+    "ActivityName": "TActivityMonthLogin",
     "ActivityScript": ""
   },
   {
     "id": 3,
     "IsValid": true,
     "IsCyclicActivity": true,
-    "ActivityName": "",
+    "ActivityName": "TActivityDailyOnlinePrize",
     "ActivityScript": ""
   },
   {
     "id": 4,
     "IsValid": true,
     "IsCyclicActivity": true,
-    "ActivityName": "",
+    "ActivityName": "TActivityInvestMetaStone",
+    "ActivityScript": ""
+  },
+  {
+    "id": 5,
+    "IsValid": true,
+    "IsCyclicActivity": true,
+    "ActivityName": "TActivityTotalGainMetaStone",
+    "ActivityScript": ""
+  },
+  {
+    "id": 6,
+    "IsValid": true,
+    "IsCyclicActivity": true,
+    "ActivityName": "TActivityGiftCommond",
+    "ActivityScript": ""
+  },
+  {
+    "id": 7,
+    "IsValid": true,
+    "IsCyclicActivity": true,
+    "ActivityName": "TActivityFirstCharge",
+    "ActivityScript": ""
+  },
+  {
+    "id": 8,
+    "IsValid": false,
+    "IsCyclicActivity": true,
+    "ActivityName": "TActivityTotalOnlineTime",
+    "ActivityScript": ""
+  },
+  {
+    "id": 9,
+    "IsValid": false,
+    "IsCyclicActivity": true,
+    "ActivityName": "TActivityTotalSpendMetaStone",
+    "ActivityScript": ""
+  },
+  {
+    "id": 10,
+    "IsValid": false,
+    "IsCyclicActivity": true,
+    "ActivityName": "TActivityMentorshipTree",
     "ActivityScript": ""
   }
 ] ,
@@ -844,12 +886,11 @@
 ] ,
 "activity_tactivitygiftcommond":[
   {
-    "id": 1,
+    "id": "1",
     "IsValid": true,
-    "GiftCommond": "HappyNewYear",
     "GiftCount": 100,
     "ActivityStartTime": 1655913600,
-    "ActivityEndTime": 1656518400,
+    "ActivityEndTime": 1719676800,
     "ItemGroup": [
       {
         "ItemConfigId": 10001,
@@ -862,12 +903,11 @@
     ]
   },
   {
-    "id": 10,
+    "id": "10",
     "IsValid": true,
-    "GiftCommond": "",
     "GiftCount": 0,
     "ActivityStartTime": 1655913600,
-    "ActivityEndTime": 1656518400,
+    "ActivityEndTime": 1719676800,
     "ItemGroup": [
       {
         "ItemConfigId": 10001,
@@ -912,9 +952,8 @@
     ]
   },
   {
-    "id": 110,
+    "id": "110",
     "IsValid": true,
-    "GiftCommond": "",
     "GiftCount": 0,
     "ActivityStartTime": 1655913600,
     "ActivityEndTime": 1656518400,
@@ -986,9 +1025,8 @@
     ]
   },
   {
-    "id": 270,
+    "id": "270",
     "IsValid": true,
-    "GiftCommond": "",
     "GiftCount": 0,
     "ActivityStartTime": 1655913600,
     "ActivityEndTime": 1656518400,
@@ -1287,8 +1325,8 @@
 "activity_tactivityinvestmetastone":[
   {
     "id": 10001,
-    "ActivityStartTime": 1655913600,
-    "ActivityEndTime": 1656518400,
+    "ActivityStartTime": 1685548800,
+    "ActivityEndTime": 1719676800,
     "InvestItemGroup": [
       {
         "Need": 100,
@@ -1358,33 +1396,6 @@
       {
         "Need": 1400,
         "GainMin": 10001,
-        "GainMax": 10001
-      }
-    ]
-  },
-  {
-    "id": 10002,
-    "ActivityStartTime": 1655913600,
-    "ActivityEndTime": 1656518400,
-    "InvestItemGroup": [
-      {
-        "Need": 1100,
-        "GainMin": 10001,
-        "GainMax": 10002
-      },
-      {
-        "Need": 1200,
-        "GainMin": 10002,
-        "GainMax": 10001
-      },
-      {
-        "Need": 1300,
-        "GainMin": 10001,
-        "GainMax": 10002
-      },
-      {
-        "Need": 1400,
-        "GainMin": 10002,
         "GainMax": 10001
       }
     ]
@@ -1609,8 +1620,8 @@
 "activity_tactivitymonthlogin":[
   {
     "id": 10001,
-    "ActivityStartTime": 1655913600,
-    "ActivityEndTime": 1658505600,
+    "ActivityStartTime": 1685548800,
+    "ActivityEndTime": 1688054400,
     "LoginPrize": [
       {
         "Index": 1,
@@ -1793,8 +1804,8 @@
   },
   {
     "id": 10002,
-    "ActivityStartTime": 1658505600,
-    "ActivityEndTime": 1661184000,
+    "ActivityStartTime": 1656604800,
+    "ActivityEndTime": 1659196800,
     "LoginPrize": [
       {
         "Index": 1,
@@ -1958,8 +1969,8 @@
 "activity_tactivitysevendaylogin":[
   {
     "id": 10001,
-    "ActivityStartTime": 1655913600,
-    "ActivityEndTime": 1656518400,
+    "ActivityStartTime": 1685548800,
+    "ActivityEndTime": 1719676800,
     "PrizeItemGroup": [
       {
         "Index": 1,
@@ -2053,46 +2064,13 @@
         ]
       }
     ]
-  },
-  {
-    "id": 10002,
-    "ActivityStartTime": 1655913600,
-    "ActivityEndTime": 1656518400,
-    "PrizeItemGroup": [
-      {
-        "Index": 1,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          },
-          {
-            "ItemConfigId": 10002,
-            "ItemCount": 1
-          }
-        ]
-      },
-      {
-        "Index": 2,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          },
-          {
-            "ItemConfigId": 10002,
-            "ItemCount": 1
-          }
-        ]
-      }
-    ]
   }
 ] ,
 "activity_tactivitytotalgainmetastone":[
   {
     "id": 10001,
     "ActivityStartTime": 1655913600,
-    "ActivityEndTime": 1656518400,
+    "ActivityEndTime": 1719676800,
     "PrizeItemGroup": [
       {
         "Index": 1,

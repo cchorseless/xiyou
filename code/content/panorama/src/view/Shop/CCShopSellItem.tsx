@@ -4,7 +4,9 @@ import { TShopSellItem } from "../../../../scripts/tscripts/shared/service/shop/
 import { CSSHelper } from "../../helper/CSSHelper";
 import { KVHelper } from "../../helper/KVHelper";
 import { TipsHelper } from "../../helper/TipsHelper";
+import { CCButton } from "../AllUIElement/CCButton/CCButton";
 import { CCIcon_CoinType } from "../AllUIElement/CCIcons/CCIcon_CoinType";
+import { CCLabel } from "../AllUIElement/CCLabel/CCLabel";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCMainPanel } from "../MainPanel/CCMainPanel";
 import { CCShopItem } from "./CCShopItem";
@@ -89,22 +91,22 @@ export class CCShopSellItem extends CCPanel<ICCShopSellItem> {
                     }
                 </CCShopItem>
                 {/* 购买按钮 */}
-                <Button className={CSSHelper.ClassMaker("ShopItemButton ", buttonID)} onactivate={() => this.onBtnBuyClick()} enabled={bEnable}>
+                <CCButton id="ShopItemButton" className={buttonID} onactivate={() => this.onBtnBuyClick()} enabled={bEnable}>
                     {/* RMB */}
                     {buttonID == "RMBBtn" && <Label localizedText={"#" + KVHelper.KVLang().Shop_Buy_With_Money.Des} dialogVariables={{ price: String(price) }} />}
                     {/* Free */}
                     {buttonID == "FreeBtn" && <Label localizedText={"#" + KVHelper.KVLang().Free.Des} />}
                     {/* Moon */}
-                    {buttonID == "MetaBtn" && <Panel id="MetaWithNum" hittest={false}>
-                        <CCIcon_CoinType cointype={GEEnum.EMoneyType.MetaStone} />
-                        <Label text={price} />
-                    </Panel>}
+                    {buttonID == "MetaBtn" && <CCPanel id="MetaWithNum" hittest={false} align="center center" flowChildren="right">
+                        <CCIcon_CoinType cointype={GEEnum.EMoneyType.MetaStone} width="25px" height="25px" />
+                        <CCLabel text={price} marginLeft={"6px"} />
+                    </CCPanel>}
                     {/* Star */}
-                    {buttonID == "StarBtn" && <Panel id="StarWithNum" hittest={false}>
-                        <CCIcon_CoinType cointype={GEEnum.EMoneyType.StarStone} />
+                    {buttonID == "StarBtn" && <CCPanel id="StarWithNum" hittest={false}>
+                        <CCIcon_CoinType cointype={GEEnum.EMoneyType.StarStone} width="25px" height="25px" />
                         <Label text={price} />
-                    </Panel>}
-                </Button>
+                    </CCPanel>}
+                </CCButton>
                 {this.props.children}
                 {this.__root___childs}
             </Panel>

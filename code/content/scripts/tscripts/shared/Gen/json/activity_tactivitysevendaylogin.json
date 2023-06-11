@@ -1,8 +1,8 @@
 [
   {
     "id": 10001,
-    "ActivityStartTime": 1655913600,
-    "ActivityEndTime": 1656518400,
+    "ActivityStartTime": 1685548800,
+    "ActivityEndTime": 1719676800,
     "PrizeItemGroup": [
       {
         "Index": 1,
@@ -91,39 +91,6 @@
           },
           {
             "ItemConfigId": 10001,
-            "ItemCount": 1
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": 10002,
-    "ActivityStartTime": 1655913600,
-    "ActivityEndTime": 1656518400,
-    "PrizeItemGroup": [
-      {
-        "Index": 1,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          },
-          {
-            "ItemConfigId": 10002,
-            "ItemCount": 1
-          }
-        ]
-      },
-      {
-        "Index": 2,
-        "ItemGroup": [
-          {
-            "ItemConfigId": 10001,
-            "ItemCount": 1
-          },
-          {
-            "ItemConfigId": 10002,
             "ItemCount": 1
           }
         ]

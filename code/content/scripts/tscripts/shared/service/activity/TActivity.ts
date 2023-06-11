@@ -17,4 +17,12 @@ export class TActivity extends ET.Entity {
     public EndTime: string;
     public ServerZoneActivity() { return this.GetParent<ServerZoneActivityComponent>(); }
 
+    onSerializeToEntity() {
+        this.onReload();
+    }
+
+    onReload() {
+        this.SyncClient();
+    }
+
 }

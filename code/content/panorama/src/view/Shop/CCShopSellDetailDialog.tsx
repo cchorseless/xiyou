@@ -112,12 +112,12 @@ export class CCShopSellDetailDialog extends CCPanel<ICCShopSellDetailDialog> {
                                 {buttonID == "FreeBtn" && <Label localizedText={"#" + KVHelper.KVLang().Free.Des} />}
                                 {/* Moon */}
                                 {buttonID == "MetaBtn" && <Panel id="MoonWithNum" hittest={false}>
-                                    <CCIcon_CoinType cointype={GEEnum.EMoneyType.MetaStone} />
+                                    <CCIcon_CoinType cointype={GEEnum.EMoneyType.MetaStone} width="25px" height="25px" />
                                     <Label text={price * iNum} />
                                 </Panel>}
                                 {/* Star */}
                                 {buttonID == "StarBtn" && <Panel id="StarWithNum" hittest={false}>
-                                    <CCIcon_CoinType cointype={GEEnum.EMoneyType.StarStone} />
+                                    <CCIcon_CoinType cointype={GEEnum.EMoneyType.StarStone} width="25px" height="25px" />
                                     <Label text={price * iNum} />
                                 </Panel>}
                             </CCButton>

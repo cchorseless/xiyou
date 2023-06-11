@@ -7,7 +7,7 @@ import { TActivity } from "./TActivity";
 export class TActivityDailyOnlinePrize extends TActivity {
     private _Items = new GDictionary<
         number,
-        IFItemInfo
+        IFItemInfo[]
     >();
     @serializeETProps()
     public get Items() {

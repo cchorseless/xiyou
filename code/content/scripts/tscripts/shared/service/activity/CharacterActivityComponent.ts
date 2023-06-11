@@ -31,7 +31,7 @@ export class CharacterActivityComponent extends ET.Component {
     }
 
     onReload() {
-        this.SyncClient();
+        this.SyncClient(true);
     }
 
 }

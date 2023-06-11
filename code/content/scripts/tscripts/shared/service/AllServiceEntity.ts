@@ -11,6 +11,8 @@ import { TActivity } from "./activity/TActivity";
 import { TActivityDailyOnlinePrize } from "./activity/TActivityDailyOnlinePrize";
 import { TActivityDailyOnlinePrizeData } from "./activity/TActivityDailyOnlinePrizeData";
 import { TActivityData } from "./activity/TActivityData";
+import { TActivityFirstCharge } from "./activity/TActivityFirstCharge";
+import { TActivityFirstChargeData } from "./activity/TActivityFirstChargeData";
 import { TActivityGiftCommond } from "./activity/TActivityGiftCommond";
 import { TActivityGiftCommondData } from "./activity/TActivityGiftCommondData";
 import { TActivityGiftCommondItem } from "./activity/TActivityGiftCommondItem";
@@ -88,6 +90,8 @@ import { CharacterTitleItem } from "./title/CharacterTitleItem";
     CharacterActivityComponent,
     ServerZoneActivityComponent,
     TActivity,
+    TActivityFirstCharge,
+    TActivityFirstChargeData,
     TActivityDailyOnlinePrize,
     TActivityDailyOnlinePrizeData,
     TActivityData,

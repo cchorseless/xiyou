@@ -13,5 +13,11 @@ export class TActivityData extends ET.Entity {
     @serializeETProps()
     public EndTime: string;
     get CharacterActivity() { return this.GetParent<CharacterActivityComponent>(); }
+    onSerializeToEntity() {
+        this.onReload();
+    }
 
+    onReload() {
+        this.SyncClient();
+    }
 }

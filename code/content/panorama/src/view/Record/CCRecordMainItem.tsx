@@ -13,6 +13,7 @@ import { CCIcon_Vip } from "../AllUIElement/CCIcons/CCIcon_Vip";
 import { CCImageNumber } from "../AllUIElement/CCImageNumber/CCImageNumber";
 import { CCLabel } from "../AllUIElement/CCLabel/CCLabel";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
+import { CCPanelHeader } from "../AllUIElement/CCPanel/CCPanelPart";
 import { CCUserName } from "../AllUIElement/CCUserName/CCUserName";
 import { CCMainPanel } from "../MainPanel/CCMainPanel";
 import { CCShopItem } from "../Shop/CCShopItem";
@@ -74,9 +75,7 @@ export class CCRecordMainItem extends CCPanel<ICCRecordMainItem> {
 
             <CCPanel flowChildren="right" width="100%" marginTop={"10px"}>
                 <CCPanel flowChildren="down" width="200px">
-                    <Panel id="RecordTitleBg">
-                        <CCLabel type="Title" localizedText={"#档案等级"} horizontalAlign="center" />
-                    </Panel>
+                    <CCPanelHeader type="Tui7" localizedStr="#档案等级" />
                     <CCLabel type="UnitName" localizedText="#InfoPassLevelDesc" fontSize="16px" horizontalAlign="center" />
                     <CCRecordLevelNum iLevel={SumHeroLevel} uiScale={"250%"} horizontalAlign="center" marginTop={"50px"} />
                     <CCButton color="Green" marginTop={"20px"} onactivate={() => {
@@ -102,9 +101,7 @@ export class CCRecordMainItem extends CCPanel<ICCRecordMainItem> {
             </CCPanel>
             <CCPanel flowChildren="right" width="100%" marginTop={"10px"}>
                 <CCPanel flowChildren="down" width="400px" height="300px">
-                    <Panel id="RecordTitleBg">
-                        <CCLabel type="Title" localizedText={"#档案信息"} horizontalAlign="center" />
-                    </Panel>
+                    <CCPanelHeader type="Tui7" localizedStr="#档案信息" />
                     <CCPanel flowChildren="right" >
                         <CCPanel flowChildren="down" width="150px" height="250px">
                             <CCAvatar id="CCRecordAvatar" steamid="local" horizontalAlign="center" marginTop={"20px"} />
@@ -140,9 +137,7 @@ export class CCRecordMainItem extends CCPanel<ICCRecordMainItem> {
 
                 </CCPanel>
                 <CCPanel flowChildren="down" width="300px" height="300px" marginLeft={"30px"}>
-                    <Panel id="RecordTitleBg">
-                        <CCLabel type="Title" localizedText={"#会员"} horizontalAlign="center" />
-                    </Panel>
+                    <CCPanelHeader type="Tui7" localizedStr="#会员" />
                     <CCIcon_Vip id="RecordVipIcon" type={IsVipForever ? "Gold" : (IsVipSeason ? "Purple" : "Blue")} className={CSSHelper.ClassMaker({ IsVip: IsVip })} horizontalAlign="center" />
                     <CCPanel marginTop={"20px"} horizontalAlign="center">
                         {IsVipForever ? <CCLabel type="Title" localizedText={"#永久会员"} fontSize="16px" />
@@ -157,9 +152,7 @@ export class CCRecordMainItem extends CCPanel<ICCRecordMainItem> {
                     }} color={IsVip ? "Purple" : "Blue"} horizontalAlign="center" visible={!IsVipForever} />
                 </CCPanel>
                 <CCPanel flowChildren="down" width="300px" height="300px" marginLeft={"30px"}>
-                    <Panel id="RecordTitleBg">
-                        <CCLabel type="Title" localizedText={"#战令通行证"} horizontalAlign="center" />
-                    </Panel>
+                    <CCPanelHeader type="Tui7" localizedStr="#战令通行证" />
                     <CCIcon_BattlepassLogo id="RecordBattlePassIcon" type={IsBattlePass ? "Plus" : "Common"} />
                     <CCPanel marginTop={"20px"} horizontalAlign="center">
                         {!IsBattlePass ? <CCLabel type="Title" localizedText={"#第10赛季 普通战令"} fontSize="16px" />

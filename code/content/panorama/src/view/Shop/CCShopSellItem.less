@@ -1,8 +1,14 @@
 .CCShopSellItem {
+    flow-children: down;
 
     .CCShopItem {
+
+        #ShopItemNumBG {
+            margin-bottom: 60px;
+        }
+
         #SaleCountingDown {
-            width: 157px;
+            width: 220px;
             height: 19px;
             background-repeat: no-repeat;
             background-size: 92px 19px;
@@ -27,7 +33,8 @@
         }
 
         #SaleLimit {
-            margin-top: 187px;
+            margin-top: 200px;
+            horizontal-align: center;
             width: 157px;
             height: 19px;
             background-image: url("file://{images}/custom_game/shop/tag_bg_red.png");
@@ -48,7 +55,8 @@
         #Discount {
             width: 157px;
             height: 19px;
-            margin-top: 168px;
+            margin-top: 180px;
+            horizontal-align: center;
             background-image: url("file://{images}/custom_game/shop/tag_bg_green.png");
             background-repeat: no-repeat;
             background-size: 92px 19px;
@@ -74,11 +82,10 @@
 
     }
 
-    .ShopItemButton {
+    #ShopItemButton {
         width: 156px;
         height: 46px;
         horizontal-align: center;
-        y: 216px;
         background-image: url("file://{images}/custom_game/shop/btn_free.png");
         background-repeat: no-repeat;
         background-size: 100% 100%;
@@ -114,27 +121,21 @@
 
         &.MetaBtn {
             background-image: url("file://{images}/custom_game/shop/btn_meta.png");
+        }
 
-            #MetaWithNum {
-                align: center center;
-                flow-children: right;
+        &.StarBtn {}
 
-                Label {
-                    margin-left: 6px;
-                }
+
+
+        #StarWithNum {
+            align: center center;
+            flow-children: right;
+
+            Label {
+                margin-left: 6px;
             }
         }
 
-        &.StarBtn {
-            #StarWithNum {
-                align: center center;
-                flow-children: right;
-
-                Label {
-                    margin-left: 6px;
-                }
-            }
-        }
     }
 
 

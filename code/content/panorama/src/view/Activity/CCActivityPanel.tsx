@@ -8,6 +8,8 @@ import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCPopUpDialog } from "../AllUIElement/CCPopUpDialog/CCPopUpDialog";
 import { CCVerticalTable } from "../AllUIElement/CCTable/CCVerticalTable";
 import { CCCoinAddPanel } from "../Shop/CCCoinAddPanel";
+import { CCActivityGiftCommond } from "./CCActivityGiftCommond";
+import { CCActivityMonthLogin } from "./CCActivityMonthLogin";
 import "./CCActivityPanel.less";
 import { CCActivitySevenDayLogin } from "./CCActivitySevenDayLogin";
 interface ICCActivityPanel extends NodePropsData {
@@ -57,7 +59,7 @@ export class CCActivityPanel extends CCPanel<ICCActivityPanel> {
                             "首充",
                             "七日登录",
                             "每月登陆",
-                            "在线祈福",
+                            "每日在线",
                             "储钱罐翻倍",
                             "累计充值",
                             "兑换码"
@@ -67,6 +69,14 @@ export class CCActivityPanel extends CCPanel<ICCActivityPanel> {
                         <CCPanel id="PanelContentBg">
                             {
                                 <CCActivitySevenDayLogin opacity={selectindex == 1 ? "1" : "0"} hittest={false} />
+                            }
+                            {
+                                <CCActivityMonthLogin opacity={selectindex == 2 ? "1" : "0"} hittest={false} />
+                            }
+
+                            {
+                                <CCActivityGiftCommond opacity={selectindex == 6 ? "1" : "0"} hittest={false} />
+
                             }
                         </CCPanel>
                     </CCPanel>

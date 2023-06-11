@@ -115,7 +115,7 @@ export class CCBpChargeItem extends CCPanel<{ configId: number, chargebyCount: n
         const ItemCount = config.ChargeBy.ItemCount;
 
         return <Panel className={"CCBpChargeItem"} ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
-            <CCButtonBox uiScale={"60%"} onactivate={() => { }}>
+            <CCButtonBox uiScale={"70%"} onactivate={() => { }}>
                 <CCShopItem itemid={config.ChargeTo.ItemConfigId} count={config.ChargeTo.ItemCount} isUnAvailable={chargebyCount < ItemCount}>
                     <CCBpChargeCoinItem chargebyCount={ItemCount} align="center bottom" marginBottom={"3px"} />
                 </CCShopItem>

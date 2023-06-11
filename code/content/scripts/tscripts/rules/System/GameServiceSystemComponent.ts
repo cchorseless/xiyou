@@ -246,6 +246,10 @@ export class GameServiceSystemComponent extends GameServiceSystem {
         EventHelper.addProtocolEvent(GameProtocol.Protocol.Handle_CharacterMail, hander);
         EventHelper.addProtocolEvent(GameProtocol.Protocol.BattlePass_GetPrize, hander);
         EventHelper.addProtocolEvent(GameProtocol.Protocol.InfoPass_GetInfoPassPrize, hander);
+        EventHelper.addProtocolEvent(GameProtocol.Protocol.GetPrize_ActivitySevenDayLogin, hander);
+        EventHelper.addProtocolEvent(GameProtocol.Protocol.GetPrize_ActivityMonthLogin, hander);
+        EventHelper.addProtocolEvent(GameProtocol.Protocol.GetPrize_ActivityMonthTotalLogin, hander);
+        EventHelper.addProtocolEvent(GameProtocol.Protocol.GetPrize_ActivityGiftCommond, hander);
 
     }
 

@@ -52,8 +52,26 @@
     }
 }
 
-.CC_PanelHeader {
+.CCPanelHeader {
     width: 100%;
     background-image: url("file://{images}/custom_game/eom_design/ccpanel/bg_tip_title.png");
     background-size: 100%;
+    background-repeat: no-repeat;
+
+    &.Tui3 {
+        background-image: url("file://{images}/custom_game/eom_design/ccpanel/bg_tip_title.png");
+
+        #HeadTitle {
+            margin-left: 10px;
+        }
+    }
+
+    &.Tui7 {
+        height: 29px;
+        background-image: url("file://{images}/custom_game/eom_design/ccpanel/titlebg2.png");
+
+        #HeadTitle {
+            horizontal-align: center;
+        }
+    }
 }

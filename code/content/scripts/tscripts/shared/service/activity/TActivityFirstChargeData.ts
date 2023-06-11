@@ -5,13 +5,11 @@ import { TActivityData } from "./TActivityData";
 
 
 @GReloadable
-export class TActivityDailyOnlinePrizeData extends TActivityData {
+export class TActivityFirstChargeData extends TActivityData {
 
     @serializeETProps()
-    public ItemHadGet: number[] = []
+    public ChargeTime = 0;
 
-    @serializeETProps()
-    LoginTimeSpan: string;
     public ActivityComp() { return this.GetParent<CharacterActivityComponent>(); }
 
 }

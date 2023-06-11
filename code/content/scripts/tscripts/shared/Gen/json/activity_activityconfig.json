@@ -3,28 +3,70 @@
     "id": 1,
     "IsValid": true,
     "IsCyclicActivity": true,
-    "ActivityName": "",
+    "ActivityName": "TActivitySevenDayLogin",
     "ActivityScript": ""
   },
   {
     "id": 2,
     "IsValid": true,
     "IsCyclicActivity": true,
-    "ActivityName": "",
+    "ActivityName": "TActivityMonthLogin",
     "ActivityScript": ""
   },
   {
     "id": 3,
     "IsValid": true,
     "IsCyclicActivity": true,
-    "ActivityName": "",
+    "ActivityName": "TActivityDailyOnlinePrize",
     "ActivityScript": ""
   },
   {
     "id": 4,
     "IsValid": true,
     "IsCyclicActivity": true,
-    "ActivityName": "",
+    "ActivityName": "TActivityInvestMetaStone",
+    "ActivityScript": ""
+  },
+  {
+    "id": 5,
+    "IsValid": true,
+    "IsCyclicActivity": true,
+    "ActivityName": "TActivityTotalGainMetaStone",
+    "ActivityScript": ""
+  },
+  {
+    "id": 6,
+    "IsValid": true,
+    "IsCyclicActivity": true,
+    "ActivityName": "TActivityGiftCommond",
+    "ActivityScript": ""
+  },
+  {
+    "id": 7,
+    "IsValid": true,
+    "IsCyclicActivity": true,
+    "ActivityName": "TActivityFirstCharge",
+    "ActivityScript": ""
+  },
+  {
+    "id": 8,
+    "IsValid": false,
+    "IsCyclicActivity": true,
+    "ActivityName": "TActivityTotalOnlineTime",
+    "ActivityScript": ""
+  },
+  {
+    "id": 9,
+    "IsValid": false,
+    "IsCyclicActivity": true,
+    "ActivityName": "TActivityTotalSpendMetaStone",
+    "ActivityScript": ""
+  },
+  {
+    "id": 10,
+    "IsValid": false,
+    "IsCyclicActivity": true,
+    "ActivityName": "TActivityMentorshipTree",
     "ActivityScript": ""
   }
 ]

@@ -34,6 +34,15 @@ export module GameProtocol {
         static readonly BattlePass_ChargePrize = "/BattlePass_ChargePrize";
         // 档案奖励
         static readonly InfoPass_GetInfoPassPrize = "/InfoPass_GetInfoPassPrize";
+        // 活动
+        // 七日登录
+        static readonly GetPrize_ActivitySevenDayLogin = "/GetPrize_ActivitySevenDayLogin";
+        // 每月登录
+        static readonly GetPrize_ActivityMonthLogin = "/GetPrize_ActivityMonthLogin";
+        // 每月登录累计
+        static readonly GetPrize_ActivityMonthTotalLogin = "/GetPrize_ActivityMonthTotalLogin";
+        // 礼包码
+        static readonly GetPrize_ActivityGiftCommond = "/GetPrize_ActivityGiftCommond";
 
         // js-clientlua
         static readonly custom_call_get_ability_data = "custom_call_get_ability_data";

@@ -1894,10 +1894,10 @@ export class TActivityTotalSpendMetaStoneRecord {
 
 export namespace Activity {
 export class TActivityGiftCommond{
-    private _dataMap: Map<number, Activity.TActivityGiftCommondRecord>
+    private _dataMap: Map<string, Activity.TActivityGiftCommondRecord>
     private _dataList: Activity.TActivityGiftCommondRecord[]
     constructor(_json_: any[]) {
- this._dataMap  = new Map<number, Activity.TActivityGiftCommondRecord>()
+ this._dataMap  = new Map<string, Activity.TActivityGiftCommondRecord>()
         this._dataList = []
         for(let _json2_ of _json_) {
             let _v: Activity.TActivityGiftCommondRecord
@@ -1907,10 +1907,10 @@ export class TActivityGiftCommond{
         }
     }
 
-    getDataMap(): Map<number, Activity.TActivityGiftCommondRecord> { return this._dataMap; }
+    getDataMap(): Map<string, Activity.TActivityGiftCommondRecord> { return this._dataMap; }
     getDataList(): Activity.TActivityGiftCommondRecord[] { return this._dataList; }
 
-    get(key: number): Activity.TActivityGiftCommondRecord | undefined { return this._dataMap.get(key); }
+    get(key: string): Activity.TActivityGiftCommondRecord | undefined { return this._dataMap.get(key); }
 
     resolve(_tables: Map<string, any>) {
         for(let v of this._dataList) {
@@ -1931,8 +1931,6 @@ export class TActivityGiftCommondRecord {
         this.id = _json_.id
         if (_json_.IsValid === undefined) { GLogHelper.error(1); }
         this.IsValid = _json_.IsValid
-        if (_json_.GiftCommond === undefined) { GLogHelper.error(1); }
-        this.GiftCommond = _json_.GiftCommond
         if (_json_.GiftCount === undefined) { GLogHelper.error(1); }
         this.GiftCount = _json_.GiftCount
         if (_json_.ActivityStartTime === undefined) { GLogHelper.error(1); }
@@ -1946,15 +1944,11 @@ export class TActivityGiftCommondRecord {
     /**
      * 礼包Id
      */
-    readonly id: number
+    readonly id: string
     /**
      * 是否有效
      */
     readonly IsValid: boolean
-    /**
-     * 礼包口令
-     */
-    readonly GiftCommond: string
     /**
      * 礼包数量
      */
