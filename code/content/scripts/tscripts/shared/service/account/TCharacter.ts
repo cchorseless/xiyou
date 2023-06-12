@@ -30,6 +30,7 @@ export class TCharacter extends ET.Component {
     VipType = 0;
     @serializeETProps()
     VipEndTimeSpan = "";
+
     CreateTime: string;
     LastLoginTime: string;
     IsFirstLoginToday: boolean;

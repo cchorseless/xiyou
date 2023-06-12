@@ -39,7 +39,7 @@ export class CCActivitySevenDayLogin extends CCPanel<ICCActivitySevenDayLogin> {
                 }
             </CCPanel>
             <CCPanel flowChildren="down">
-                <CCActivityRuleNoteItem str="11111111111" height="200px" />
+                <CCActivityRuleNoteItem str="赛季内登录对应天数即可领取奖励，每个赛季开始重置登录。" height="200px" />
                 <CCActivitySevenDayPrizeItem key={7 + ""} day={7}
                     ischeck={SevenDayLoginData.ItemHadGet.includes(7)}
                     items={SevenDayLogin.Items.get(7)} isgray={logdaycount < 7} />
@@ -64,11 +64,9 @@ export class CCActivitySevenDayPrizeItem extends CCPanel<ICCActivitySevenDayPriz
             Day: day
         }, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
             if (e.state) {
-                let info = JSON.parse(e.message!) as IFItemInfo;
+                let info = JSON.parse(e.message!) as IFItemInfo[];
                 CCMainPanel.GetInstance()!.addOnlyPanel(CCStorageItemGetDialog, {
-                    Items: [
-                        { ItemConfigId: info.ItemConfigId, ItemCount: info.ItemCount },
-                    ]
+                    Items: info
                 })
             }
         }))

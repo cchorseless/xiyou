@@ -43,6 +43,12 @@ export module GameProtocol {
         static readonly GetPrize_ActivityMonthTotalLogin = "/GetPrize_ActivityMonthTotalLogin";
         // 礼包码
         static readonly GetPrize_ActivityGiftCommond = "/GetPrize_ActivityGiftCommond";
+        // 在线奖励
+        static readonly GetPrize_ActivityDailyOnlinePrize = "/GetPrize_ActivityDailyOnlinePrize";
+        // 原石投资
+        static readonly GetPrize_ActivityInvestMetaStone = "/GetPrize_ActivityInvestMetaStone";
+        // 累计充值
+        static readonly GetPrize_ActivityTotalGainMetaStone = "/GetPrize_ActivityTotalGainMetaStone";
 
         // js-clientlua
         static readonly custom_call_get_ability_data = "custom_call_get_ability_data";

@@ -14,7 +14,7 @@ export class CCActivityRuleNoteItem extends CCPanel<ICCActivityRuleNoteItem> {
         const str = this.props.str || "";
         return <Panel className={"CCActivityRuleNoteItem"} ref={this.__root__}  {...this.initRootAttrs()}>
             <CCLabel type="Title" text={`活动规则`} horizontalAlign="center" marginTop={"15px"} />
-            <CCPanel id="RuleNoteDiv" width="80%" height="60%" horizontalAlign="center" marginTop={"50px"}>
+            <CCPanel id="RuleNoteDiv" width="80%" height="80%" horizontalAlign="center" marginTop={"50px"}>
                 <Label id="RuleDes" html={true} text={str} />
             </CCPanel>
         </Panel>

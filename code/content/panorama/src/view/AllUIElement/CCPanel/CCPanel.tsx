@@ -113,6 +113,9 @@ export class CCPanel<T = {}, P extends Panel = Panel> extends BasePureComponent<
                 case "none" || ["none", "none"]:
                     r.style.overflow = "squish squish";
                     break;
+                case "noclip":
+                    r.style.overflow = "noclip noclip";
+                    break;
                 default:
                     break;
             }

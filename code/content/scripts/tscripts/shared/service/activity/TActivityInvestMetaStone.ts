@@ -15,7 +15,7 @@ export class TActivityInvestMetaStone extends TActivity {
     public get Items() {
         return this._Items;
     }
-    public set Items(data: any) {
+    public set Items(data: IGDictionary<number, IFItemInfo>) {
         this._Items.copy(data);
 
     }

@@ -41,7 +41,7 @@ export class CCPanelHeader extends CCPanel<ICCPanelHeader> {
     render() {
         const localizedStr = this.props.localizedStr;
         return (<Panel ref={this.__root__}      {...this.initRootAttrs()}>
-            {localizedStr && localizedStr.length > 0 && <CCLabel id="HeadTitle" type="Title" localizedText={localizedStr} />}
+            {localizedStr && localizedStr.length > 0 && <CCLabel id="HeadTitle" type="Title" key={Math.random() + ""} localizedText={localizedStr} />}
             {this.__root___childs}
             {this.props.children}
         </Panel>)

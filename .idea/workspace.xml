@@ -6,44 +6,31 @@
   <component name="ChangeListManager">
     <list default="true" id="0afe1df3-4870-48f1-a775-af97afd6ee5a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/images/custom_game/record/titlebg1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/images/custom_game/record/titlebg2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Activity/CCActivityDailyOnlinePrize.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Activity/CCActivityDailyOnlinePrize.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Activity/CCActivityDailyOnlinePrize.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Activity/CCActivityDailyOnlinePrize.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Activity/CCActivityGiftCommond.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Activity/CCActivityGiftCommond.less" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Activity/CCActivityGiftCommond.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Activity/CCActivityGiftCommond.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Activity/CCActivityMonthLogin.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Activity/CCActivityMonthLogin.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Activity/CCActivityMonthLogin.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Activity/CCActivityMonthLogin.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Activity/CCActivityInvestMetaStone.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Activity/CCActivityInvestMetaStone.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Activity/CCActivityInvestMetaStone.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Activity/CCActivityInvestMetaStone.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Activity/CCActivityPanel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Activity/CCActivityPanel.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Activity/CCActivitySevenDayLogin.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Activity/CCActivitySevenDayLogin.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Activity/CCActivityRuleNoteItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Activity/CCActivityRuleNoteItem.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Activity/CCActivitySevenDayLogin.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Activity/CCActivitySevenDayLogin.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCButton/CCButton.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCButton/CCButton.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCButton/CCButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCButton/CCButton.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCPanel/CCPanelPart.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCPanel/CCPanelPart.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Activity/CCActivityTotalGainMetaStone.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Activity/CCActivityTotalGainMetaStone.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Activity/CCActivityTotalGainMetaStone.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Activity/CCActivityTotalGainMetaStone.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCPanel/CCPanel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCPanel/CCPanel.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCPanel/CCPanelPart.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCPanel/CCPanelPart.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/BattlePass/CCBattlePassChargeItem.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/BattlePass/CCBattlePassChargeItem.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/BattlePass/CCBattlePassChargeItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/BattlePass/CCBattlePassChargeItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/BattlePass/CCBattlePassPrizeItem.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/BattlePass/CCBattlePassPrizeItem.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Record/CCRecordMainItem.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Record/CCRecordMainItem.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Record/CCRecordMainItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Record/CCRecordMainItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Shop/CCShopItem.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Shop/CCShopItem.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Shop/CCShopSellDetailDialog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Shop/CCShopSellDetailDialog.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Shop/CCShopSellItem.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Shop/CCShopSellItem.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Shop/CCShopSellItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Shop/CCShopSellItem.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/System/GameServiceSystemComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/System/GameServiceSystemComponent.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/GameProtocol.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/GameProtocol.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/JsonConfig.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/JsonConfig.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/Types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/Types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/json/activity_activityconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/json/activity_activityconfig.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/json/activity_tactivitygiftcommond.json" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/json/activity_tactivitygiftcommond.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/json/activity_tactivityinvestmetastone.json" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/json/activity_tactivityinvestmetastone.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/json/activity_tactivitymonthlogin.json" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/json/activity_tactivitymonthlogin.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/json/activity_tactivitysevendaylogin.json" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/json/activity_tactivitysevendaylogin.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/json/activity_tactivitytotalgainmetastone.json" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/json/activity_tactivitytotalgainmetastone.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/service/AllServiceEntity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/service/AllServiceEntity.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/service/activity/CharacterActivityComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/service/activity/CharacterActivityComponent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/service/activity/TActivity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/service/activity/TActivity.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/json/item_itemconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/json/item_itemconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/service/account/TCharacter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/service/account/TCharacter.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/service/activity/TActivityDailyOnlinePrize.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/service/activity/TActivityDailyOnlinePrize.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/service/activity/TActivityDailyOnlinePrizeData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/service/activity/TActivityDailyOnlinePrizeData.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/service/activity/TActivityData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/service/activity/TActivityData.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/service/activity/TActivityGiftCommondItem.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/service/activity/TActivityGiftCommondItem.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/service/activity/TActivityInvestMetaStone.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/service/activity/TActivityInvestMetaStone.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/service/activity/TActivityTotalGainMetaStone.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/service/activity/TActivityTotalGainMetaStone.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/service/activity/TActivityTotalGainMetaStoneData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/service/activity/TActivityTotalGainMetaStoneData.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,7 +69,7 @@
       <recent name="E:\project\dota_project\xiyou\code\content\scripts\tscripts\npc\modifier\move" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.launch">
+  <component name="RunManager" selected="npm.dev:ui">
     <configuration name="dev:kv" type="js.build_tools.npm" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/code/package.json" />
       <command value="run" />
@@ -287,6 +274,8 @@
       <workItem from="1686189357802" duration="15306000" />
       <workItem from="1686359968368" duration="8161000" />
       <workItem from="1686451269803" duration="8486000" />
+      <workItem from="1686536084538" duration="6806000" />
+      <workItem from="1686567872639" duration="4696000" />
     </task>
     <servers />
   </component>

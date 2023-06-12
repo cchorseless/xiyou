@@ -8,10 +8,13 @@ import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCPopUpDialog } from "../AllUIElement/CCPopUpDialog/CCPopUpDialog";
 import { CCVerticalTable } from "../AllUIElement/CCTable/CCVerticalTable";
 import { CCCoinAddPanel } from "../Shop/CCCoinAddPanel";
+import { CCActivityDailyOnlinePrize } from "./CCActivityDailyOnlinePrize";
 import { CCActivityGiftCommond } from "./CCActivityGiftCommond";
+import { CCActivityInvestMetaStone } from "./CCActivityInvestMetaStone";
 import { CCActivityMonthLogin } from "./CCActivityMonthLogin";
 import "./CCActivityPanel.less";
 import { CCActivitySevenDayLogin } from "./CCActivitySevenDayLogin";
+import { CCActivityTotalGainMetaStone } from "./CCActivityTotalGainMetaStone";
 interface ICCActivityPanel extends NodePropsData {
 
 }
@@ -56,11 +59,10 @@ export class CCActivityPanel extends CCPanel<ICCActivityPanel> {
                     </CCPanel>
                     <CCPanel id="PanelContent" flowChildren="right">
                         <CCVerticalTable defaultSelected={0} marginTop={"20px"} list={[
-                            "首充",
+                            "每日在线",
                             "七日登录",
                             "每月登陆",
-                            "每日在线",
-                            "储钱罐翻倍",
+                            "原石理财",
                             "累计充值",
                             "兑换码"
                         ]} onChange={(index: number, text: string) => {
@@ -68,14 +70,24 @@ export class CCActivityPanel extends CCPanel<ICCActivityPanel> {
                         }} />
                         <CCPanel id="PanelContentBg">
                             {
+                                <CCActivityDailyOnlinePrize opacity={selectindex == 0 ? "1" : "0"} hittest={false} />
+                            }
+                            {
                                 <CCActivitySevenDayLogin opacity={selectindex == 1 ? "1" : "0"} hittest={false} />
                             }
                             {
                                 <CCActivityMonthLogin opacity={selectindex == 2 ? "1" : "0"} hittest={false} />
                             }
+                            {
+                                <CCActivityInvestMetaStone opacity={selectindex == 3 ? "1" : "0"} hittest={false} />
+                            }
 
                             {
-                                <CCActivityGiftCommond opacity={selectindex == 6 ? "1" : "0"} hittest={false} />
+                                <CCActivityTotalGainMetaStone opacity={selectindex == 4 ? "1" : "0"} hittest={false} />
+                            }
+
+                            {
+                                <CCActivityGiftCommond opacity={selectindex == 5 ? "1" : "0"} hittest={false} />
 
                             }
                         </CCPanel>

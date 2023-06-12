@@ -250,6 +250,10 @@ export class GameServiceSystemComponent extends GameServiceSystem {
         EventHelper.addProtocolEvent(GameProtocol.Protocol.GetPrize_ActivityMonthLogin, hander);
         EventHelper.addProtocolEvent(GameProtocol.Protocol.GetPrize_ActivityMonthTotalLogin, hander);
         EventHelper.addProtocolEvent(GameProtocol.Protocol.GetPrize_ActivityGiftCommond, hander);
+        EventHelper.addProtocolEvent(GameProtocol.Protocol.GetPrize_ActivityDailyOnlinePrize, hander);
+        EventHelper.addProtocolEvent(GameProtocol.Protocol.GetPrize_ActivityInvestMetaStone, hander);
+        EventHelper.addProtocolEvent(GameProtocol.Protocol.GetPrize_ActivityTotalGainMetaStone, hander);
+
 
     }
 

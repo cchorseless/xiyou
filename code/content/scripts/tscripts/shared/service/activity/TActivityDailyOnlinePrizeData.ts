@@ -12,6 +12,9 @@ export class TActivityDailyOnlinePrizeData extends TActivityData {
 
     @serializeETProps()
     LoginTimeSpan: string;
+
+    @serializeETProps()
+    TodayOnlineTime: string;
     public ActivityComp() { return this.GetParent<CharacterActivityComponent>(); }
 
 }

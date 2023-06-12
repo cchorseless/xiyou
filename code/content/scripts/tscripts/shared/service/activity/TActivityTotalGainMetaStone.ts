@@ -5,15 +5,15 @@ import { TActivity } from "./TActivity";
 
 @GReloadable
 export class TActivityTotalGainMetaStone extends TActivity {
-    private _Items: IGDictionary<number, IFItemInfo> = new GDictionary<
+    private _Items: IGDictionary<number, IFItemInfo[]> = new GDictionary<
         number,
-        IFItemInfo
+        IFItemInfo[]
     >();
     @serializeETProps()
     public get Items() {
         return this._Items;
     }
-    public set Items(data: IGDictionary<number, IFItemInfo>) {
+    public set Items(data: IGDictionary<number, IFItemInfo[]>) {
         this._Items.copy(data);
 
     }
