@@ -34,11 +34,11 @@ export class MapSystemComponent extends ET.SingletonComponent {
         this.BaseTpDoorPoint.push(Entities.FindByName(null, "base_tp_door03").GetAbsOrigin());
         this.BaseTpDoorPoint.push(Entities.FindByName(null, "base_tp_door04").GetAbsOrigin());
 
-        this.BaseBaoXiangPoint.push(Entities.FindByName(null, "base_baoxiang00").GetAbsOrigin());
-        this.BaseBaoXiangPoint.push(Entities.FindByName(null, "base_baoxiang01").GetAbsOrigin());
-        this.BaseBaoXiangPoint.push(Entities.FindByName(null, "base_baoxiang02").GetAbsOrigin());
-        this.BaseBaoXiangPoint.push(Entities.FindByName(null, "base_baoxiang03").GetAbsOrigin());
-        this.BaseBaoXiangPoint.push(Entities.FindByName(null, "base_baoxiang04").GetAbsOrigin());
+        // this.BaseBaoXiangPoint.push(Entities.FindByName(null, "base_baoxiang00").GetAbsOrigin());
+        // this.BaseBaoXiangPoint.push(Entities.FindByName(null, "base_baoxiang01").GetAbsOrigin());
+        // this.BaseBaoXiangPoint.push(Entities.FindByName(null, "base_baoxiang02").GetAbsOrigin());
+        // this.BaseBaoXiangPoint.push(Entities.FindByName(null, "base_baoxiang03").GetAbsOrigin());
+        // this.BaseBaoXiangPoint.push(Entities.FindByName(null, "base_baoxiang04").GetAbsOrigin());
 
         // 敵方出生點
         this.PlayerTpDoorPoint.forEach(s => {
@@ -86,8 +86,10 @@ export class MapSystemComponent extends ET.SingletonComponent {
         return this.FakerHeroSpawnPoint[player];
     }
 
-
-    public StartGame() {
+    /**
+     * 预创建单位
+     */
+    public StartPreGame() {
         this.CreateAllMapUnit();
     }
 
@@ -124,6 +126,7 @@ export class MapSystemComponent extends ET.SingletonComponent {
             // "maps/journey_assets/props/teams/logo_radiant_journey_small.vmdl"
             // "maps/journey_assets/props/teams/logo_dire_journey_small.vmdl"
         }
+
     }
     CreatePortal(vPortalPosition: Vector, vTargetPosition: Vector, vForward: Vector, sPortalName: string, team: DOTATeam_t = DOTATeam_t.DOTA_TEAM_GOODGUYS, bHasArrow: boolean = false) {
         let hPortal = BaseNpc_Plus.CreateUnitByName("unit_portal", vPortalPosition, null, true, team);

@@ -65,57 +65,56 @@ export class imba_witch_doctor_paralyzing_cask extends BaseAbility_Plus {
     }
     OnProjectileHit_ExtraData(hTarget: IBaseNpc_Plus | undefined, vLocation: Vector, ExtraData: any): boolean | void {
         EmitSoundOn("Hero_WitchDoctor.Paralyzing_Cask_Bounce", hTarget);
-        if (hTarget) {
-            if (hTarget.IsRealUnit() || hTarget.IsConsideredHero() || hTarget.IsRoshan()) {
-                if (hTarget.GetTeamNumber() != this.GetCasterPlus().GetTeamNumber()) {
-                    if (!hTarget.IsMagicImmune() && (ExtraData.bFirstCast == 0 || !hTarget.TriggerSpellAbsorb(this))) {
-                        if (IsServer() && this.GetCasterPlus().HasTalent("special_bonus_imba_witch_doctor_4")) {
-                            let maledict_ability = this.GetCasterPlus().findAbliityPlus<imba_witch_doctor_maledict>("imba_witch_doctor_maledict");
-                            if (hTarget.findBuff<modifier_imba_maledict>("modifier_imba_maledict")) {
-                                this.cursed_casket = true;
-                            } else {
-                                this.cursed_casket = false;
-                            }
-                            if (ExtraData.cursed_casket == 1 && maledict_ability) {
-                                hTarget.AddNewModifier(this.GetCasterPlus(), maledict_ability, "modifier_imba_maledict", {
-                                    duration: maledict_ability.GetSpecialValueFor("duration") + FrameTime()
-                                });
-                            }
+        if (!IsValid(hTarget)) { return }
+        if (hTarget.IsRealUnit() || hTarget.IsConsideredHero() || hTarget.IsRoshan()) {
+            if (hTarget.GetTeamNumber() != this.GetCasterPlus().GetTeamNumber()) {
+                if (!hTarget.IsMagicImmune() && (ExtraData.bFirstCast == 0 || !hTarget.TriggerSpellAbsorb(this))) {
+                    if (IsServer() && this.GetCasterPlus().HasTalent("special_bonus_imba_witch_doctor_4")) {
+                        let maledict_ability = this.GetCasterPlus().findAbliityPlus<imba_witch_doctor_maledict>("imba_witch_doctor_maledict");
+                        if (hTarget.findBuff<modifier_imba_maledict>("modifier_imba_maledict")) {
+                            this.cursed_casket = true;
+                        } else {
+                            this.cursed_casket = false;
                         }
-                        hTarget.AddNewModifier(hTarget, this, "modifier_generic_stunned", {
-                            duration: ExtraData.hero_duration * (1 - hTarget.GetStatusResistance())
-                        });
-                        ApplyDamage({
-                            victim: hTarget,
-                            attacker: this.GetCasterPlus(),
-                            damage: ExtraData.hero_damage,
-                            damage_type: this.GetAbilityDamageType()
-                        });
+                        if (ExtraData.cursed_casket == 1 && maledict_ability) {
+                            hTarget.AddNewModifier(this.GetCasterPlus(), maledict_ability, "modifier_imba_maledict", {
+                                duration: maledict_ability.GetSpecialValueFor("duration") + FrameTime()
+                            });
+                        }
                     }
-                } else {
-                    let heal = ExtraData.hero_damage;
-                    hTarget.ApplyHeal(heal, this);
+                    hTarget.AddNewModifier(hTarget, this, "modifier_generic_stunned", {
+                        duration: ExtraData.hero_duration * (1 - hTarget.GetStatusResistance())
+                    });
+                    ApplyDamage({
+                        victim: hTarget,
+                        attacker: this.GetCasterPlus(),
+                        damage: ExtraData.hero_damage,
+                        damage_type: this.GetAbilityDamageType()
+                    });
                 }
             } else {
-                if (hTarget.GetTeamNumber() != this.GetCasterPlus().GetTeamNumber()) {
-                    if (!hTarget.IsMagicImmune() && (ExtraData.bFirstCast == 0 || !hTarget.TriggerSpellAbsorb(this))) {
-                        hTarget.AddNewModifier(hTarget, this, "modifier_generic_stunned", {
-                            duration: ExtraData.creep_duration * (1 - hTarget.GetStatusResistance())
-                        });
-                        ApplyDamage({
-                            victim: hTarget,
-                            attacker: this.GetCasterPlus(),
-                            damage: ExtraData.creep_damage,
-                            damage_type: this.GetAbilityDamageType()
-                        });
-                    }
-                } else {
-                    let heal = ExtraData.creep_damage;
-                    hTarget.ApplyHeal(heal, this);
-                }
+                let heal = ExtraData.hero_damage;
+                hTarget.ApplyHeal(heal, this);
             }
         } else {
+            if (hTarget.GetTeamNumber() != this.GetCasterPlus().GetTeamNumber()) {
+                if (!hTarget.IsMagicImmune() && (ExtraData.bFirstCast == 0 || !hTarget.TriggerSpellAbsorb(this))) {
+                    hTarget.AddNewModifier(hTarget, this, "modifier_generic_stunned", {
+                        duration: ExtraData.creep_duration * (1 - hTarget.GetStatusResistance())
+                    });
+                    ApplyDamage({
+                        victim: hTarget,
+                        attacker: this.GetCasterPlus(),
+                        damage: ExtraData.creep_damage,
+                        damage_type: this.GetAbilityDamageType()
+                    });
+                }
+            } else {
+                let heal = ExtraData.creep_damage;
+                hTarget.ApplyHeal(heal, this);
+            }
         }
+
         if (ExtraData.bounces >= 1) {
             this.AddTimer(ExtraData.bounce_delay, () => {
                 let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), hTarget.GetAbsOrigin(), undefined, ExtraData.bounce_range, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, this.GetAbilityTargetType(), DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, 0, false);

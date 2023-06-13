@@ -373,6 +373,14 @@ export enum EEnemyCreateType {
      * 随机替换怪
      */
     RandomReplace = 3,
+    /**
+     * 数据绑定匹配敌人
+     */
+    DataDriver = 4,
+    /**
+     * 共同的敌人
+     */
+    PublicEnemy = 5,
 }
 }
 
@@ -3181,6 +3189,8 @@ export class RoundBoardConfigRecord {
         this.roundLabel = _json_.round_label
         if (_json_.rankScore === undefined) { GLogHelper.error(1); }
         this.rankScore = _json_.rankScore
+        if (_json_.randomEnemy === undefined) { GLogHelper.error(1); }
+        this.randomEnemy = _json_.randomEnemy
         if (_json_.roundprize_gold === undefined) { GLogHelper.error(1); }
         this.roundprizeGold = _json_.roundprize_gold
         if (_json_.roundprize_wood === undefined) { GLogHelper.error(1); }
@@ -3217,6 +3227,10 @@ export class RoundBoardConfigRecord {
      * 天梯分数
      */
     readonly rankScore: number
+    /**
+     * 是否随机敌人
+     */
+    readonly randomEnemy: boolean
     /**
      * 奖励金币
      */

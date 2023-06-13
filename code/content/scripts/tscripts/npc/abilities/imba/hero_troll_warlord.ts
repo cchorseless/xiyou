@@ -451,18 +451,19 @@ export class imba_troll_warlord_whirling_axes_ranged extends BaseAbility_Plus {
     }
     OnProjectileHit_ExtraData(target: CDOTA_BaseNPC | undefined, location: Vector, ExtraData: any): boolean | void {
         let caster = this.GetCasterPlus();
+        const info = this.tempdata[ExtraData.index] as IBaseNpc_Plus[];
         if (target) {
             let was_hit = false;
-            for (const [_, stored_target] of GameFunc.iPair(this.tempdata[ExtraData.index])) {
+            for (const [_, stored_target] of GameFunc.iPair(info)) {
                 if (target == stored_target) {
                     was_hit = true;
-                    return;
+                    break;
                 }
             }
             if (was_hit) {
                 return undefined;
             }
-            this.tempdata[ExtraData.index].push(target);
+            info.push(target);
             ApplyDamage({
                 victim: target,
                 attacker: caster,
@@ -478,8 +479,8 @@ export class imba_troll_warlord_whirling_axes_ranged extends BaseAbility_Plus {
             });
             target.EmitSound("Hero_TrollWarlord.WhirlingAxes.Target");
         } else {
-            this.tempdata[ExtraData.index].push(null);
-            if (this.tempdata[ExtraData.index].length == ExtraData.axe_count) {
+            info.push(null);
+            if (info.length == ExtraData.axe_count) {
                 this.tempdata[ExtraData.index] = undefined;
             }
         }

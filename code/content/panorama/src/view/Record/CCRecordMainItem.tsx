@@ -36,11 +36,9 @@ export class CCRecordMainItem extends CCPanel<ICCRecordMainItem> {
             IsOnlyKey: true,
         }, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
             if (e.state) {
-                let info = JSON.parse(e.message!) as IFItemInfo;
+                let info = JSON.parse(e.message!) as IFItemInfo[];
                 CCMainPanel.GetInstance()!.addOnlyPanel(CCStorageItemGetDialog, {
-                    Items: [
-                        { ItemConfigId: info.ItemConfigId, ItemCount: info.ItemCount },
-                    ]
+                    Items: info
                 })
             }
         }))
@@ -202,11 +200,9 @@ export class CCRecordLevelRewards extends CCPanel<ICCRecordLevelRewards> {
             IsOnlyKey: false,
         }, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
             if (e.state) {
-                let info = JSON.parse(e.message!) as IFItemInfo;
+                let info = JSON.parse(e.message!) as IFItemInfo[];
                 CCMainPanel.GetInstance()!.addOnlyPanel(CCStorageItemGetDialog, {
-                    Items: [
-                        { ItemConfigId: info.ItemConfigId, ItemCount: info.ItemCount },
-                    ]
+                    Items: info
                 })
             }
         }))

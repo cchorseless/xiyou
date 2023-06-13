@@ -647,7 +647,7 @@ export class modifier_imba_searing_arrows_active extends BaseModifier_Plus {
         }
     }
     OnIntervalThink(): void {
-        AddFOWViewer(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), this.vision_radius, FrameTime(), false);
+        // AddFOWViewer(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), this.vision_radius, FrameTime(), false);
     }
     /** DeclareFunctions():modifierfunction[] {
     return Object.values({

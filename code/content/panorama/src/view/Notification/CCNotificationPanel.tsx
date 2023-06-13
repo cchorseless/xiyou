@@ -88,6 +88,11 @@ export class CCNotificationPanel extends CCPanel<ICCNotificationPanel> {
                     dialogV[key] = sLoc;
                     bCoin = true;
                 }
+                // 带coin的各种类型都在后面渲染一个货币图片
+                else if (key == "roundresult") {
+                    let sLoc = `<panel class=\"CCNotificationReRenderRoot RoundResultParent ${value}\" />`;
+                    dialogV[key] = sLoc;
+                }
             }
             sMessage = tParams.message;
             if (sMessage[0] != "#") {
@@ -212,6 +217,7 @@ export class CCNotification extends CCPanel<ICCNotification>{
         if (this.props.bCoin) {
             this.RenderCoinImg();
         }
+
         if (this.props.itemInfo && Object.keys(this.props.itemInfo).length > 0) {
             Object.keys(this.props.itemInfo).forEach((itemcls: string) => {
                 let itemInfo = this.props.itemInfo[itemcls];
@@ -259,6 +265,8 @@ export class CCNotification extends CCPanel<ICCNotification>{
             });
         });
     }
+
+
     /**
      * 将物品图片渲染到Panel内
      * @param panel 目标panel的parent

@@ -32,6 +32,8 @@ declare global {
             item_get?: string;
             /**玩法功能 */
             string_from?: string;
+            /**战斗结果 */
+            roundresult?: "RoundResultWin" | "RoundResultLose" | "RoundResultDraw";
             [x: string]: any;
         }
     }

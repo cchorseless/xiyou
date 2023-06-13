@@ -20,6 +20,7 @@
 .CCNotification {
     background-image: url("file://{images}/custom_game/notification/notification_bg.png");
     background-size: 332px 30px;
+    background-repeat: no-repeat;
     border-brush: gradient(linear, 50% 0%, 100% 0%, from(#000000), to(#773F0D00));
     horizontal-align: left;
     flow-children: left;
@@ -60,7 +61,35 @@
         background-repeat: no-repeat;
     }
 
+    .RoundResultWin {
+        width: 34px;
+        height: 30px;
+        margin-left: 2px;
+        margin-right: 2px;
+        background-image: url("file://{images}/custom_game/notification/round_win.png");
+        background-size: 100%;
+        background-repeat: no-repeat;
+    }
 
+    .RoundResultLose {
+        width: 34px;
+        height: 30px;
+        margin-left: 2px;
+        margin-right: 2px;
+        background-image: url("file://{images}/custom_game/notification/round_lose.png");
+        background-size: 100%;
+        background-repeat: no-repeat;
+    }
+
+    .RoundResultDraw {
+        width: 34px;
+        height: 30px;
+        margin-left: 2px;
+        margin-right: 2px;
+        background-image: url("file://{images}/custom_game/notification/round_draw.png");
+        background-size: 100%;
+        background-repeat: no-repeat;
+    }
 }
 
 .HUDFlipped .CCNotification {
@@ -135,6 +164,8 @@
     background-image: url("s2r://panorama/images/hud/icon_kill_enemy_psd.vtex");
     background-size: 100%;
 }
+
+
 
 .AllyEvent .CombatEventKillIcon {
     background-image: url("s2r://panorama/images/hud/icon_kill_ally_psd.vtex");

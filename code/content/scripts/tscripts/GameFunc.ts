@@ -832,30 +832,34 @@ export module FuncRandom {
      * @param isRepeat 是否重复
      */
     export function RandomArray<T>(arr: Array<T>, count: number = 1, isRepeat: boolean = false): T[] {
-        let len = arr.length;
+        const len = arr.length;
         count = Math.min(count, len);
         let r: T[] = [];
         if (count <= 0) {
             return r;
         }
-        let index = [];
+        const index: number[] = [];
         if (isRepeat) {
             while (count > 0) {
                 count -= 1;
                 index.push(RandomInt(0, len - 1));
             }
         } else {
-            let _arr = Object.keys(arr);
+            const _arr: number[] = [];
+            for (let i = 0; i < len; i++) {
+                _arr.push(i);
+            }
+            let _len = _arr.length;
             while (count > 0) {
-                count -= 1;
-                let _len = _arr.length;
-                let _i = _arr.splice(RandomInt(0, _len - 1), 1)[0];
-                index.push(tonumber(_i));
+                count--;
+                _len--;
+                const _index = RandomInt(0, _len - 1);
+                index.push(_arr[_index]);
+                _arr.splice(_index, 1)
             }
         }
-        // 这里需要-1 适配
         for (let k of index) {
-            r.push(arr[k - 1]);
+            r.push(arr[k]);
         }
         if (r.length != index.length) {
             GLogHelper.error("RandomArray out of range");

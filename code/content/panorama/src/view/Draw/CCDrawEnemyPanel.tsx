@@ -5,7 +5,7 @@ import { FuncHelper } from "../../helper/FuncHelper";
 import { NetHelper } from "../../helper/NetHelper";
 import { CCCircleAbilityItem } from "../AllUIElement/CCAbility/CCCircleAbilityItem";
 import { CCAvatar } from "../AllUIElement/CCAvatar/CCAvatar";
-import { CCIconButton } from "../AllUIElement/CCButton/CCIconButton";
+import { CCButtonBox } from "../AllUIElement/CCButton/CCButtonBox";
 import { CCEconItemImage } from "../AllUIElement/CCEconItem/CCEconItemImage";
 import { CCIcon_BattleScore } from "../AllUIElement/CCIcons/CCIcon_BattleScore";
 import { CCIcon_CoinType } from "../AllUIElement/CCIcons/CCIcon_CoinType";
@@ -65,11 +65,9 @@ export class CCDrawEnemyPanel extends CCPanel<ICCDrawEnemyPanel> {
                     <CCPanel flowChildren="right" horizontalAlign="center">
                         {EnemySelection.map((Info, index) => {
                             const accountid = Info.SteamAccountId;
-                            return (
-                                <CCIconButton key={index + ""} className="EnemyContainer" onactivate={() => this.onSelectEnemy(index, accountid)}>
-                                    <CCDrawEnemyInfoItem {...Info as any} />
-                                </CCIconButton>
-                            );
+                            return <CCButtonBox key={index + ""} className="EnemyContainer" onactivate={() => this.onSelectEnemy(index, accountid)}>
+                                <CCDrawEnemyInfoItem {...Info as any} />
+                            </CCButtonBox>
                         })}
                     </CCPanel>
                     <CCPanel flowChildren="down" horizontalAlign="center">
@@ -111,28 +109,28 @@ export class CCDrawEnemyInfoItem extends CCPanel<ICCDrawEnemyInfoItem> {
 
                 </CCPanel>
                 <CCPanel className="BattleTeamDiv" flowChildren="down" >
-                    <CCPanel flowChildren="right" marginTop={"5px"} >
+                    <CCPanel flowChildren="right" marginTop={"5px"} height="45px">
                         <CCLabel text={"统计:"} verticalAlign="center" />
                         <CCPanel flowChildren="right" marginLeft={"10px"} verticalAlign="center" tooltip="战斗力">
-                            <CCIcon_BattleScore hittest={false} />
+                            <CCIcon_BattleScore hittest={false} width="30px" height="30px" />
                             <CCLabel type="UnitName" text={":" + score} fontSize="25px" verticalAlign="center" hittest={false} />
                         </CCPanel>
-                        <CCPanel flowChildren="right" marginLeft={"20px"} verticalAlign="center" tooltip="人口">
-                            <CCIcon_CoinType cointype={GEEnum.EMoneyType.Population} hittest={false} />
+                        <CCPanel flowChildren="right" marginLeft={"10px"} verticalAlign="center" tooltip="人口">
+                            <CCIcon_CoinType cointype={GEEnum.EMoneyType.Population} verticalAlign="center" hittest={false} width="30px" height="30px" />
                             <CCLabel type="UnitName" text={"x" + heroInfo.length} fontSize="25px" verticalAlign="center" hittest={false} />
                         </CCPanel>
-                        <CCPanel flowChildren="down" marginLeft={"20px"} tooltip="历史对战记录">
-                            <CCLabel type="UnitName" text={"胜负平"} fontSize="14px" hittest={false} />
+                        <CCPanel flowChildren="down" marginLeft={"10px"} tooltip="历史对战记录">
+                            <CCLabel type="UnitName" text={"胜/负/平"} fontSize="14px" hittest={false} />
                             <CCLabel type="Level" text={`${BattleWinCount}/${BattleLoseCount}/${BattleDrawCount}`} hittest={false} />
                         </CCPanel>
                     </CCPanel>
-                    <CCPanel flowChildren="right" marginTop={"5px"}>
+                    <CCPanel flowChildren="right" marginTop={"5px"} width="100%">
                         <CCLabel text={"流派:"} verticalAlign="center" />
                         <CCPanel flowChildren="right">
                             {sectInfo.map((sectstr, index) => {
                                 const _sectstr = sectstr.split("|");
                                 const sectName = _sectstr[0];
-                                return <CCCombinationIcon key={index + ""} uiScale={"60% 60% 60%"} marginLeft={"3px"} sectName={sectName} count={GToNumber(_sectstr[1])} dialogTooltip={
+                                return <CCCombinationIcon key={index + ""} uiScale={"70%"} marginLeft={"3px"} sectName={sectName} count={GToNumber(_sectstr[1])} dialogTooltip={
                                     {
                                         cls: CCCombinationInfoDialog,
                                         props: {
@@ -145,7 +143,7 @@ export class CCDrawEnemyInfoItem extends CCPanel<ICCDrawEnemyInfoItem> {
                             })}
                         </CCPanel>
                     </CCPanel>
-                    <CCPanel flowChildren="down" marginTop={"10px"} scroll={"y"}>
+                    <CCPanel flowChildren="down" marginTop={"10px"} scroll={"y"} width="100%">
                         {heroInfo.map((info, index) => {
                             return <CCDrawHeroInfoItem key={index + ""} {...info} marginTop={"5px"} />
                         })}

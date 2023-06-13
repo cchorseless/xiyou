@@ -341,7 +341,7 @@ export class GameScene {
                 break;
             // 	-- 准备阶段(进游戏，刷怪前)
             case DOTA_GameState.DOTA_GAMERULES_STATE_PRE_GAME:
-                GMapSystem.GetInstance().StartGame();
+                GMapSystem.GetInstance().StartPreGame();
                 break;
             // -- 游戏准备开始
             case DOTA_GameState.DOTA_GAMERULES_STATE_GAME_IN_PROGRESS:

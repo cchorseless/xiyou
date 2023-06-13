@@ -39,12 +39,14 @@ export class DrawComponent extends ET.Component implements IRoundStateCallback {
             }));
             return
         }
-        else {
+        // 抽敌人
+        else if (round.config.randomEnemy) {
             GTimerHelper.AddTimer(1, GHandler.create(this, () => {
                 this.DrawEnemy(round);
             }));
             return
         }
+        // 抽棋子
         let Hero = GGameScene.GetPlayer(this.BelongPlayerid).Hero;
         if (Hero) {
             // 1秒后抽卡
@@ -99,7 +101,7 @@ export class DrawComponent extends ET.Component implements IRoundStateCallback {
                     const child1 = this.tLastEnemys[i] || this.AddChild(TBattleTeamRecord);
                     this.tLastEnemys[i] = child1;
                     const info = msgcb[i];
-                    child1.DBServerEntityId = info.Id;
+                    child1.DBServerEntityId = info._id;
                     child1.SteamAccountId = info.SteamAccountId;
                     child1.SteamAccountName = info.SteamAccountName;
                     child1.RoundIndex = info.RoundIndex;
@@ -129,7 +131,7 @@ export class DrawComponent extends ET.Component implements IRoundStateCallback {
                 const child1 = this.tLastEnemys[i] || this.AddChild(TBattleTeamRecord);
                 this.tLastEnemys[i] = child1;
                 const info = allenemy[i];
-                child1.DBServerEntityId = "Robot";
+                child1.DBServerEntityId = "-1";
                 child1.SteamAccountId = info.accountid;
                 child1.SteamAccountName = info.playername;
                 child1.RoundIndex = roundIndex;

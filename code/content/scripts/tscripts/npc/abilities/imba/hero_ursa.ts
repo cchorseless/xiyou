@@ -234,7 +234,6 @@ export class modifier_imba_earthshock_movement extends BaseModifierMotionBoth_Pl
         this.Destroy();
     }
     UpdateVerticalMotion(me: CDOTA_BaseNPC, dt: number): void {
-        GLogHelper.print("UpdateVerticalMotion")
         if (!IsServer()) {
             return;
         }

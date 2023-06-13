@@ -14,7 +14,7 @@ export class courier_draw_card_v1 extends ActiveRootAbility {
         let playerroot = GPlayerEntityRoot.GetOneInstance(iPlayerID);
         playerroot.DrawComp().DrawCard(this.DrawCardType, 4);
         playerroot.PlayerDataComp().ModifyWood(-this.GetWoodCost(this.GetLevel()));
-        playerroot.DrawComp().DrawEnemy(playerroot.RoundManagerComp().getCurrentBoardRound());
+        // playerroot.DrawComp().DrawEnemy(playerroot.RoundManagerComp().getCurrentBoardRound());
 
 
     }

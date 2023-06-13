@@ -140,10 +140,13 @@ export class CourierEntityRoot extends BaseEntityRoot implements IRoundStateCall
                 .set_validtime(3)
             )
         }
-        this.CourierEggComp().OnRound_Prize(round);
+        else {
+
+        }
+        // this.CourierEggComp().OnRound_Prize(round);
     }
     OnRound_WaitingEnd() {
-        this.CourierEggComp().OnRound_WaitingEnd();
+        // this.CourierEggComp().OnRound_WaitingEnd();
 
     }
 

@@ -198,7 +198,7 @@ export class ERoundBoard extends ERound implements IRoundStateCallback {
         return (this.BelongPlayerid == playerid)
     }
 
-    /**创建敌方阵营 */
+    /**创建随机敌方阵营 */
     CreateDrawEnemy(battleteam: TBattleTeamRecord, spawnEffect: ISpawnEffectInfo) {
         let player = GPlayerEntityRoot.GetOneInstance(this.BelongPlayerid);
         let playerid = this.BelongPlayerid;
@@ -209,6 +209,8 @@ export class ERoundBoard extends ERound implements IRoundStateCallback {
                 ChessControlConfig.Gird_Max_X - 1 - enemyinfo.PosX,
                 ChessControlConfig.Gird_Max_Y + 1 - enemyinfo.PosY,
                 playerid);
+            // GLogHelper.print(_boardVec.x, _boardVec.y);
+            // GLogHelper.print(enemyinfo.PosX, enemyinfo.PosY);
             let pos = _boardVec.getVector3();
             let enemyName = enemyinfo.UnitName;
             enemyName = enemyName.replace("_hero_", "_enemy_")
@@ -233,17 +235,20 @@ export class ERoundBoard extends ERound implements IRoundStateCallback {
         }
     }
 
-
+    /**随机一个怪物onlyId给随机的敌方阵营，绑定属性和奖励 */
     RandomEnemyPrizeId() {
-        const enemyinfo = this.config.enemyinfo;
+        const enemyinfo = this.config.enemyinfo.filter(v => v.enemycreatetype == GEEnum.EEnemyCreateType.DataDriver);
         const weights = enemyinfo.map(v => {
             return v.unitWeight;
         })
         return GFuncRandom.RandomArrayByWeight(enemyinfo, weights).map(v => { return v.id })[0]
     }
 
-
+    /**创建固定的敌方阵营 */
     CreateAllRoundBasicEnemy(SpawnEffect: ISpawnEffectInfo) {
+        if (this.config.randomEnemy) {
+            return;
+        }
         let baseenemys = this.config.enemyinfo.filter((value) => {
             return value.enemycreatetype == GEEnum.EEnemyCreateType.None
         });
@@ -362,6 +367,8 @@ export class ERoundBoard extends ERound implements IRoundStateCallback {
      * 上传战斗结果数据
      */
     UploadBattleResultData(round: ERoundBoard) {
+        if (!round.config.randomEnemy) { return }
+        if (round.EnemyDBServerEntityId == "-1") { return }
         let playeroot = GGameScene.GetPlayer(this.BelongPlayerid);
         const RoundCharpter = GGameServiceSystem.GetInstance().getDifficultyNumberDes();
         const score = round.isWin * round.config.rankScore;
@@ -370,6 +377,18 @@ export class ERoundBoard extends ERound implements IRoundStateCallback {
             RoundCharpter: RoundCharpter,
             EnemyEntityId: round.EnemyDBServerEntityId,
             BattleScore: score,
+        }, (Body: H2C_CommonResponse, response: CScriptHTTPResponse) => {
+            GLogHelper.print(Body, 1111)
+            if (Body.Error == 0) {
+                GNotificationSystem.NoticeCombatMessage({
+                    string_from: "lang_Module_Round_Result",
+                    message: "lang_Notification_Round_Result",
+                    player_id: this.BelongPlayerid,
+                    roundindex: "" + round.config.roundIndex,
+                    roundresult: round.isWin == 1 ? "RoundResultWin" : (round.isWin == 0 ? "RoundResultDraw" : "RoundResultLose"),
+                    scorechange: `${score}(${Body.Message})`,
+                });
+            }
         })
     }
 

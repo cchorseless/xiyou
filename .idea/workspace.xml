@@ -4,7 +4,43 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0afe1df3-4870-48f1-a775-af97afd6ee5a" name="Changes" comment="" />
+    <list default="true" id="0afe1df3-4870-48f1-a775-af97afd6ee5a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/maps/bigmap01.vmap" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/maps/bigmap01.vmap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Draw/CCDrawEnemyPanel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Draw/CCDrawEnemyPanel.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Notification/CCNotificationPanel.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Notification/CCNotificationPanel.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Notification/CCNotificationPanel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Notification/CCNotificationPanel.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Rank/CCRankPanel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Rank/CCRankPanel.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Record/CCRecordMainItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Record/CCRecordMainItem.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/GameFunc.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/GameFunc.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/GameScene.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/GameScene.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/courier/courier_draw_card.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/courier/courier_draw_card.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_clinkz.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_clinkz.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_leshrac.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_leshrac.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_silencer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_silencer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_troll_warlord.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_troll_warlord.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_ursa.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_ursa.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_witch_doctor.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_witch_doctor.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/Components/Courier/CourierEntityRoot.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/Components/Courier/CourierEntityRoot.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/Components/Draw/DrawComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/Components/Draw/DrawComponent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/Components/FakerHero/FakerHeroEntityRoot.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/Components/FakerHero/FakerHeroEntityRoot.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/Components/Player/PlayerDataComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/Components/Player/PlayerDataComponent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/Components/Round/ERoundBoard.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/Components/Round/ERoundBoard.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/Components/Round/ERoundBoardChallenge.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/Components/Round/ERoundBoardChallenge.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/System/GameServiceSystemComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/System/GameServiceSystemComponent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/System/MapSystemComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/System/MapSystemComponent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/System/RoundSystemComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/System/RoundSystemComponent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/JsonConfig.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/JsonConfig.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/Types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/Types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/json/dota_roundboardconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/json/dota_roundboardconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/json/dota_roundenemypoolconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/json/dota_roundenemypoolconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/NotificationConfig.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/NotificationConfig.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/excels/kvConfig/lang_config.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/excels/kvConfig/lang_config.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/game/scripts/npc/kvConfig/lang_config.kv" beforeDir="false" afterPath="$PROJECT_DIR$/code/game/scripts/npc/kvConfig/lang_config.kv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/localization/English/kvConfig/lang_config.txt" beforeDir="false" afterPath="$PROJECT_DIR$/code/localization/English/kvConfig/lang_config.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/localization/Russian/kvConfig/lang_config.txt" beforeDir="false" afterPath="$PROJECT_DIR$/code/localization/Russian/kvConfig/lang_config.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/localization/SChinese/kvConfig/lang_config.txt" beforeDir="false" afterPath="$PROJECT_DIR$/code/localization/SChinese/kvConfig/lang_config.txt" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -42,7 +78,7 @@
       <recent name="E:\project\dota_project\xiyou\code\content\scripts\tscripts\npc\modifier\move" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.jsontots">
+  <component name="RunManager" selected="npm.launch">
     <configuration name="dev:kv" type="js.build_tools.npm" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/code/package.json" />
       <command value="run" />
@@ -248,7 +284,8 @@
       <workItem from="1686359968368" duration="8161000" />
       <workItem from="1686451269803" duration="8486000" />
       <workItem from="1686536084538" duration="6806000" />
-      <workItem from="1686567872639" duration="5286000" />
+      <workItem from="1686567872639" duration="5357000" />
+      <workItem from="1686629867884" duration="9152000" />
     </task>
     <servers />
   </component>

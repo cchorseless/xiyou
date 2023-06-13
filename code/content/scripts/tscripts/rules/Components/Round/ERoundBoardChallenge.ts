@@ -22,7 +22,7 @@ export class ERoundBoardChallenge extends ERound {
         let unitcount = this.config.enemyCount;
         let unitinfoid: string[] = [];
         let unitWeight: number[] = [];
-        let enemys = this.config.enemyinfo.filter((v) => { return v.challengelevel <= lvl && v.enemycreatetype == GEEnum.EEnemyCreateType.SummedBattle });
+        let enemys = this.config.enemyinfo.filter((v) => { return v.challengelevel == lvl && v.enemycreatetype == GEEnum.EEnemyCreateType.None });
         for (let info of enemys) {
             unitinfoid.push(info.id);
             unitWeight.push(info.unitWeight);

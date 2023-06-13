@@ -70,17 +70,17 @@ export class PlayerDataComponent extends PlayerData implements IRoundStateCallba
             this.ModifyWood(this.perIntervalWood);
             this.ModifySoulCrystal(this.perIntervalSoulCrystal);
             GNotificationSystem.NoticeCombatMessage({
-                message: "lang_Notification_Interval_Prize_Gold",
+                message: "lang_Notification_Prize_Gold",
                 coin_gold: this.perIntervalGold,
                 string_from: "lang_Module_15s_Prize",
             }, this.BelongPlayerid);
             GNotificationSystem.NoticeCombatMessage({
-                message: "lang_Notification_Interval_Prize_Wood",
+                message: "lang_Notification_Prize_Wood",
                 coin_wood: this.perIntervalWood,
                 string_from: "lang_Module_15s_Prize",
             }, this.BelongPlayerid);
             GNotificationSystem.NoticeCombatMessage({
-                message: "lang_Notification_Interval_Prize_SoulCrystal",
+                message: "lang_Notification_Prize_SoulCrystal",
                 coin_soulcrystal: this.perIntervalSoulCrystal,
                 string_from: "lang_Module_15s_Prize",
             }, this.BelongPlayerid);

@@ -25,7 +25,10 @@ export class CCRankPanel extends CCPanel<ICCRankPanel> {
     }
 
     onInitUI() {
-        this.ListenUpdate(GGameScene.Local.TCharacter.RankComp);
+        const RankComp = GGameScene.Local.TCharacter.RankComp!;
+        const SeasonRankData = RankComp.GetSeasonRankData()!;
+        this.ListenUpdate(RankComp);
+        this.ListenUpdate(SeasonRankData);
         this.loadRankData(GameProtocol.ERankType.SeasonBattleSorceRank)
     }
 

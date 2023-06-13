@@ -566,7 +566,7 @@ export class modifier_imba_silencer_glaives_of_wisdom extends BaseModifier_Plus 
                             modifier_buff = this.caster.AddNewModifier(this.caster, this.ability, "modifier_imba_silencer_glaives_of_wisdom_buff", {
                                 duration: this.ability.GetSpecialValueFor("int_steal_duration") * (1 - target.GetStatusResistance())
                             }) as modifier_imba_silencer_glaives_of_wisdom_buff;
-                            modifier_buff.SetStackCount(this.ability.GetSpecialValueFor("int_steal"));
+                            modifier_buff && modifier_buff.SetStackCount(this.ability.GetSpecialValueFor("int_steal"));
                         } else {
                             modifier_buff.SetStackCount(modifier_buff.GetStackCount() + this.ability.GetSpecialValueFor("int_steal"));
                         }

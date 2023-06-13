@@ -81,6 +81,10 @@ export class FakerHeroEntityRoot extends BaseEntityRoot implements IRoundStateCa
                 }
                 delay_time = math.min(delay_time, b.GetDistance2Player() / 1000);
             });
+            // 怪物回合没有通关直接秒杀
+            if (round.config.roundIndex > 1 && !round.config.randomEnemy) {
+                damage = 1000;
+            }
             GTimerHelper.AddTimer(delay_time, GHandler.create(this, () => {
                 player.EnemyManagerComp().ApplyDamageHero(damage, this.ProjectileInfo);
             }));

@@ -137,7 +137,7 @@ export class imba_leshrac_split_earth extends BaseAbility_Plus {
                     while (!valid_chosen_enemy) {
                         let picked_enemy_num = RandomInt(0, GameFunc.GetCount(splitter_enemies));
                         chosen_enemy = splitter_enemies[picked_enemy_num];
-                        if (chosen_enemy && !chosen_enemy.IsMagicImmune() && chosen_enemy.IsAlive()) {
+                        if (chosen_enemy != null && !chosen_enemy.IsMagicImmune() && chosen_enemy.IsAlive()) {
                             valid_chosen_enemy = true;
                         } else {
                             tries = tries + 1;

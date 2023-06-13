@@ -27,6 +27,17 @@ export class RoundSystemComponent extends ET.SingletonComponent {
         const difficultydes = GGameServiceSystem.GetInstance().getDifficultyChapterDes()
         return difficultydes + "_1";
     }
+    /**
+     * 结束回合
+     * @returns 
+     */
+    GetFinishBoardRoundid() {
+        let roundid = this.GetFirstBoardRoundid();
+        while (GJSONConfig.RoundBoardConfig.get(roundid).roundNextid != "") {
+            roundid = GJSONConfig.RoundBoardConfig.get(roundid).roundNextid;
+        }
+        return roundid;
+    }
 
     GetNextBoardRoundid() {
         return GJSONConfig.RoundBoardConfig.get(this.iRound).roundNextid;
@@ -69,7 +80,23 @@ export class RoundSystemComponent extends ET.SingletonComponent {
             string_from: "addon_game_name"
         })
         this.runBoardRound(this.GetFirstBoardRoundid());
+        this.CreateFinishBoss()
+    }
+    RoundFinishEnemys: IBaseNpc_Plus[] = [];
+    /**
+     * 创建最终的Boss
+     */
+    public CreateFinishBoss() {
+        let endindex = this.GetFinishBoardRoundid();
+        const config = GJSONConfig.RoundBoardConfig.get(endindex);
+        let enemys = config.enemyinfo.filter(v => v.enemycreatetype == GEEnum.EEnemyCreateType.PublicEnemy);
+        const pos = GMapSystem.GetInstance().BaseBaoXiangBossPoint;
 
+        for (let enemyinfo of enemys) {
+            let enemy = BaseNpc_Plus.CreateUnitByName(enemyinfo.unitname, pos, null, true, DOTATeam_t.DOTA_TEAM_BADGUYS);
+            enemy.SetUnitOnClearGround();
+            this.RoundFinishEnemys.push(enemy);
+        }
     }
 
     private OnEntityHurtEvent(events: EntityHurtEvent) {
