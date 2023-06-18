@@ -218,7 +218,69 @@ export module KVHelper {
         });
         return r;
     }
-
+    /**
+         * 随机道具池
+         * @param itemPrizePoolConfigid 
+         * @returns 
+         */
+    export function RandomItemPrizePoolConfigPrize(itemPrizePoolConfigid: number) {
+        let config = GJSONConfig.ItemPrizePoolConfig.get(itemPrizePoolConfigid);
+        if (config == null) { return }
+        let count: IFItemInfo[] = [];
+        let weight: number[] = [];
+        for (let data of config.itempool) {
+            if (data.ItemConfigId > 0 && data.ItemWeight > 0) {
+                count.push({ ItemConfigId: data.ItemConfigId, ItemCount: data.ItemCount });
+                weight.push(data.ItemWeight);
+            }
+        }
+        return GFuncRandom.RandomArrayByWeight(count, weight)[0];
+    }
+    /**
+     * 随机道具池组
+     * @param itemPrizePoolGroupConfigid 
+     * @returns 
+     */
+    export function RandomItemPrizePoolGroupPrize(itemPrizePoolGroupConfigid: number) {
+        let config = GJSONConfig.ItemPrizePoolGroupConfig.get(itemPrizePoolGroupConfigid);
+        if (config == null) { return }
+        let count: number[] = [];
+        let weight: number[] = [];
+        let randomTimes = 1;
+        if (config.RandomCountInfo.length == 1) {
+            randomTimes = config.RandomCountInfo[0].RandomCount;
+        }
+        else if (config.RandomCountInfo.length > 1) {
+            for (let data of config.RandomCountInfo) {
+                if (data.RandomWeight > 0 && data.RandomCount > 0) {
+                    count.push(data.RandomCount);
+                    weight.push(data.RandomWeight);
+                }
+            }
+            randomTimes = GFuncRandom.RandomArrayByWeight(count, weight)[0];
+        }
+        count = [];
+        weight = [];
+        for (let data of config.ItemPoolGroup) {
+            if (data.ItemPoolConfigId > 0 && data.ItemPoolWeight > 0) {
+                count.push(data.ItemPoolConfigId);
+                weight.push(data.ItemPoolWeight);
+            }
+        }
+        let r: { [itemconfigid: string]: number } = {};
+        for (let i = 0; i < randomTimes; i++) {
+            let poolConfigId = GFuncRandom.RandomArrayByWeight(count, weight)[0];
+            let poolConfig = GJSONConfig.ItemPrizePoolConfig.get(poolConfigId);
+            if (poolConfig != null) {
+                let result = RandomItemPrizePoolConfigPrize(poolConfigId);
+                if (result) {
+                    r[result.ItemConfigId + ""] = r[result.ItemConfigId + ""] || 0;
+                    r[result.ItemConfigId + ""] += result.ItemCount;
+                }
+            }
+        }
+        return r;
+    }
 
     export function RandomPoolGroupConfig(str: string): string {
         let _config = GJSONConfig.PoolGroupConfig.get(str);;

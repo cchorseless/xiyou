@@ -14,7 +14,7 @@ export class CCHandBookCourier extends CCPanel<ICCHandBookCourier> {
 
     render() {
         const courier_units = KVHelper.KVData().courier_units;
-        const allunlockCourier = (GGameScene.Local.TCharacter.BagComp!).getAllCourierNames();;
+        const allunlockCourier = (GGameScene.Local.TCharacter.DataComp!).getAllCourierNames();;
         const courierNames = Object.keys(courier_units);
         courierNames.sort((a, b) => {
             const tCourierData_a = courier_units[a];

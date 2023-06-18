@@ -105,7 +105,7 @@ export class PlayerSystem extends ET.EntityRoot {
     public static ListenPlayerDisconnect(inter: number = 1) {
         GTimerHelper.AddTimer(inter,
             GHandler.create(this, () => {
-                this.GetAllValidPlayer().forEach(async (playerroot) => {
+                this.GetAllOnlinePlayer().forEach(async (playerroot) => {
                     const iPlayerID = playerroot.BelongPlayerid;
                     if (PlayerResource.GetConnectionState(iPlayerID) == DOTAConnectionState_t.DOTA_CONNECTION_STATE_ABANDONED) {
                         await this.OnPlayerLeaveGame(iPlayerID);
@@ -127,6 +127,7 @@ export class PlayerSystem extends ET.EntityRoot {
         if (hHero && hHero.IsAlive()) {
             // -- 数据存储
             // this.UpdatePlayerEndData(hHero)
+
             hHero.ForceKill(false);
             let allLose = true;
             this.GetAllPlayerid()
@@ -166,7 +167,7 @@ export class PlayerSystem extends ET.EntityRoot {
         return null;
     }
 
-    public static GetAllValidPlayer(): IPlayerEntityRoot[] {
+    public static GetAllOnlinePlayer(): IPlayerEntityRoot[] {
         return PlayerEntityRoot.GetAllInstance().filter(player => { return !player.IsLeaveGame })
     }
 
@@ -260,6 +261,7 @@ export class PlayerEntityRoot extends PlayerSystem {
     readonly FakerHero?: IBaseNpc_Plus;
 
     public IsLogin: boolean;
+    public IsGameEnd: boolean = false;
     public IsLeaveGame: boolean = false;
 
     public onAwake(playerid: PlayerID): void {
@@ -271,6 +273,18 @@ export class PlayerEntityRoot extends PlayerSystem {
         this.AddComponent(GGetRegClass<typeof DrawComponent>("DrawComponent"));
     }
 
+    public IsPlayingGame() {
+        return this.IsGameEnd == false && this.IsLeaveGame == false;
+    }
+    public OnGame_End(iswin: boolean) {
+        if (this.IsGameEnd) { return }
+        this.IsGameEnd = true;
+        this.BattleUnitManagerComp().OnGame_End(false);
+        this.BuildingManager().OnGame_End(false);
+        this.PlayerDataComp().OnGame_End(false);
+        this.FakerHeroRoot().OnGame_End(false);
+        this.RoundManagerComp().OnGame_End(false);
+    }
     public BindHero(hero: IBaseNpc_Hero_Plus): void {
         LogHelper.print("BindHero :=>", this.BelongPlayerid);
         (this.Hero as any) = hero;

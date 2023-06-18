@@ -1,4 +1,3 @@
-import { GameServiceConfig } from "../../GameServiceConfig";
 import { EEnum } from "../../Gen/Types";
 import { ET, serializeETProps } from "../../lib/Entity";
 import { TEquipItem, TItem } from "./TItem";
@@ -92,20 +91,6 @@ export class BagComponent extends ET.Component {
             }
         })
         return items;
-    }
-
-
-
-    getAllCourierNames() {
-        const courierunlock = this.getItemByType(EEnum.EItemType.Courier);
-        const courierNames: string[] = [];
-        courierNames.push(GameServiceConfig.DefaultCourier);
-        courierunlock.forEach(item => {
-            if (item.Config.ItemName && !courierNames.includes(item.Config.ItemName)) {
-                courierNames.push(item.Config.ItemName)
-            }
-        })
-        return courierNames
     }
 
 }

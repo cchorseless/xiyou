@@ -26,6 +26,8 @@ export class CCRankSingleDataItem extends CCPanel<ICCRankSingleDataItem> {
             <CCAvatar id="playerAvatar" width="48px" height="48px" accountid={accoundid} />
             <CCUserName id="PlayerName" accountid={accoundid} width="120px" height="24px" fontSize={"24"} />
             <CCLabel id="RankDes" type="UnitName" text={ScoreDes} hittest={false} width="100px" marginLeft={"30px"} />
+            {this.props.children}
+            {this.__root___childs}
         </Panel>
     }
 }

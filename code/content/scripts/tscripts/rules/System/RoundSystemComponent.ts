@@ -112,17 +112,16 @@ export class RoundSystemComponent extends ET.SingletonComponent {
 
     public runBoardRound(round: string) {
         this.iRound = round;
-        GPlayerEntityRoot.GetAllInstance()
-            .forEach((player) => {
-                player.RoundManagerComp().runBoardRound(round);
-            });
+        GPlayerEntityRoot.GetAllInstance().forEach((player) => {
+            player.IsPlayingGame() && player.RoundManagerComp().runBoardRound(round);
+        });
         // this.createRoundPrizeUnit(round);
     }
 
     public endBoardRound() {
         let allWaiting = true;
         GPlayerEntityRoot.GetAllInstance().forEach((player) => {
-            if (!player.RoundManagerComp().getCurrentBoardRound().IsRoundWaitingEnd()) {
+            if (player.IsPlayingGame() && !player.RoundManagerComp().getCurrentBoardRound().IsRoundWaitingEnd()) {
                 allWaiting = false;
             }
         });

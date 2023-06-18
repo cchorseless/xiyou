@@ -933,7 +933,7 @@ export class modifier_imba_brewmaster_primal_split_duration extends BaseModifier
             [modifierstate.MODIFIER_STATE_OUT_OF_GAME]: isreal,
             [modifierstate.MODIFIER_STATE_STUNNED]: isreal,
             [modifierstate.MODIFIER_STATE_NOT_ON_MINIMAP]: isreal,
-            [modifierstate.MODIFIER_STATE_NO_UNIT_COLLISION]: isreal || this.GetCasterPlus().HasScepter() || this.GetParentPlus().GetUnitName().includes("brewmaster_fire"),
+            // [modifierstate.MODIFIER_STATE_NO_UNIT_COLLISION]: isreal || this.GetCasterPlus().HasScepter() || this.GetParentPlus().GetUnitName().includes("brewmaster_fire"),
             [modifierstate.MODIFIER_STATE_UNSELECTABLE]: isreal
         };
     }

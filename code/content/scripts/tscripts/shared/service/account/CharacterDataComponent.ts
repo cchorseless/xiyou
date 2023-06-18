@@ -1,4 +1,5 @@
 import { GameProtocol } from "../../GameProtocol";
+import { GameServiceConfig } from "../../GameServiceConfig";
 import { ET, serializeETProps } from "../../lib/Entity";
 import { GEventHelper } from "../../lib/GEventHelper";
 import { NumericComponent } from "../common/NumericComponent";
@@ -7,6 +8,8 @@ import { CharacterInGameDataComponent } from "./CharacterInGameDataComponent";
 
 @GReloadable
 export class CharacterDataComponent extends ET.Component {
+    AllCouriers: string[] = [];
+
     onGetBelongPlayerid() {
         let character = GTCharacter.GetOneInstanceById(this.Id);
         if (character != null) {
@@ -34,17 +37,36 @@ export class CharacterDataComponent extends ET.Component {
     public set GameRecord(data: IGDictionary<string, string>) {
         this._GameRecord.copy(data);
     }
-
-    getGameRecord(key: GameProtocol.ECharacterGameRecordKey): string {
-        return this.GameRecord.get(key)
+    getAllCourierNames() {
+        const courierNames: string[] = [];
+        courierNames.push(GameServiceConfig.DefaultCourier);
+        this.AllCouriers.forEach(item => {
+            if (!courierNames.includes(item)) {
+                courierNames.push(item)
+            }
+        })
+        return courierNames
     }
-    getGameRecordAsNumber(key: GameProtocol.ECharacterGameRecordKey) {
+    getGameRecord(key: GameProtocol.ECharacterGameRecordKey, d: string = ""): string {
+        return this.GameRecord.get(key) || d;
+    }
+    getGameRecordAsNumber(key: GameProtocol.ECharacterGameRecordKey, d: number = 0) {
         const value = this.GameRecord.get(key)
         if (value) {
-            return Number(value)
+            return GToNumber(value)
         }
+        return d
     }
 
+    getDifficultyChapter() {
+        return this.getGameRecordAsNumber(GameProtocol.ECharacterGameRecordKey.iDifficultyMaxChapter, GameServiceConfig.EDifficultyChapter.n1)
+    }
+    getDifficultyLevel() {
+        return this.getGameRecordAsNumber(GameProtocol.ECharacterGameRecordKey.iDifficultyMaxLevel)
+    }
+    getCourierInUse() {
+        return this.getGameRecord(GameProtocol.ECharacterGameRecordKey.sCourierIDInUse, GameServiceConfig.DefaultCourier)
+    }
     get NumericComp() {
         return this.GetComponentByName<NumericComponent>("NumericComponent");
     }

@@ -1,0 +1,387 @@
+[
+  {
+    "id": 1,
+    "ScoreMin": 100,
+    "ScoreMax": 200,
+    "Name": "先锋一段",
+    "Icon": "rank1_psd"
+  },
+  {
+    "id": 2,
+    "ScoreMin": 200,
+    "ScoreMax": 300,
+    "Name": "先锋二段",
+    "Icon": "rank1_psd"
+  },
+  {
+    "id": 3,
+    "ScoreMin": 300,
+    "ScoreMax": 400,
+    "Name": "先锋三段",
+    "Icon": "rank1_psd"
+  },
+  {
+    "id": 4,
+    "ScoreMin": 400,
+    "ScoreMax": 500,
+    "Name": "先锋四段",
+    "Icon": "rank1_psd"
+  },
+  {
+    "id": 5,
+    "ScoreMin": 500,
+    "ScoreMax": 600,
+    "Name": "先锋五段",
+    "Icon": "rank1_psd"
+  },
+  {
+    "id": 6,
+    "ScoreMin": 600,
+    "ScoreMax": 700,
+    "Name": "先锋六段",
+    "Icon": "rank1_psd"
+  },
+  {
+    "id": 7,
+    "ScoreMin": 700,
+    "ScoreMax": 800,
+    "Name": "先锋七段",
+    "Icon": "rank1_psd"
+  },
+  {
+    "id": 8,
+    "ScoreMin": 800,
+    "ScoreMax": 900,
+    "Name": "先锋八段",
+    "Icon": "rank1_psd"
+  },
+  {
+    "id": 9,
+    "ScoreMin": 900,
+    "ScoreMax": 1000,
+    "Name": "先锋九段",
+    "Icon": "rank1_psd"
+  },
+  {
+    "id": 10,
+    "ScoreMin": 1000,
+    "ScoreMax": 1100,
+    "Name": "卫士一段",
+    "Icon": "rank2_psd"
+  },
+  {
+    "id": 11,
+    "ScoreMin": 1100,
+    "ScoreMax": 1200,
+    "Name": "卫士二段",
+    "Icon": "rank2_psd"
+  },
+  {
+    "id": 12,
+    "ScoreMin": 1200,
+    "ScoreMax": 1300,
+    "Name": "卫士三段",
+    "Icon": "rank2_psd"
+  },
+  {
+    "id": 13,
+    "ScoreMin": 1300,
+    "ScoreMax": 1400,
+    "Name": "卫士四段",
+    "Icon": "rank2_psd"
+  },
+  {
+    "id": 14,
+    "ScoreMin": 1400,
+    "ScoreMax": 1500,
+    "Name": "卫士五段",
+    "Icon": "rank2_psd"
+  },
+  {
+    "id": 15,
+    "ScoreMin": 1500,
+    "ScoreMax": 1600,
+    "Name": "卫士六段",
+    "Icon": "rank2_psd"
+  },
+  {
+    "id": 16,
+    "ScoreMin": 1600,
+    "ScoreMax": 1700,
+    "Name": "卫士七段",
+    "Icon": "rank2_psd"
+  },
+  {
+    "id": 17,
+    "ScoreMin": 1700,
+    "ScoreMax": 1800,
+    "Name": "卫士八段",
+    "Icon": "rank2_psd"
+  },
+  {
+    "id": 18,
+    "ScoreMin": 1800,
+    "ScoreMax": 1900,
+    "Name": "卫士九段",
+    "Icon": "rank2_psd"
+  },
+  {
+    "id": 19,
+    "ScoreMin": 1900,
+    "ScoreMax": 2000,
+    "Name": "中军一段",
+    "Icon": "rank3_psd"
+  },
+  {
+    "id": 20,
+    "ScoreMin": 2000,
+    "ScoreMax": 2100,
+    "Name": "中军二段",
+    "Icon": "rank3_psd"
+  },
+  {
+    "id": 21,
+    "ScoreMin": 2100,
+    "ScoreMax": 2200,
+    "Name": "中军三段",
+    "Icon": "rank3_psd"
+  },
+  {
+    "id": 22,
+    "ScoreMin": 2200,
+    "ScoreMax": 2300,
+    "Name": "中军四段",
+    "Icon": "rank3_psd"
+  },
+  {
+    "id": 23,
+    "ScoreMin": 2300,
+    "ScoreMax": 2400,
+    "Name": "中军五段",
+    "Icon": "rank3_psd"
+  },
+  {
+    "id": 24,
+    "ScoreMin": 2400,
+    "ScoreMax": 2500,
+    "Name": "中军六段",
+    "Icon": "rank3_psd"
+  },
+  {
+    "id": 25,
+    "ScoreMin": 2500,
+    "ScoreMax": 2600,
+    "Name": "中军七段",
+    "Icon": "rank3_psd"
+  },
+  {
+    "id": 26,
+    "ScoreMin": 2600,
+    "ScoreMax": 2700,
+    "Name": "中军八段",
+    "Icon": "rank3_psd"
+  },
+  {
+    "id": 27,
+    "ScoreMin": 2700,
+    "ScoreMax": 2800,
+    "Name": "中军九段",
+    "Icon": "rank3_psd"
+  },
+  {
+    "id": 28,
+    "ScoreMin": 2800,
+    "ScoreMax": 2900,
+    "Name": "统帅一段",
+    "Icon": "rank4_psd"
+  },
+  {
+    "id": 29,
+    "ScoreMin": 2900,
+    "ScoreMax": 3000,
+    "Name": "统帅二段",
+    "Icon": "rank4_psd"
+  },
+  {
+    "id": 30,
+    "ScoreMin": 3000,
+    "ScoreMax": 3100,
+    "Name": "统帅三段",
+    "Icon": "rank4_psd"
+  },
+  {
+    "id": 31,
+    "ScoreMin": 3100,
+    "ScoreMax": 3200,
+    "Name": "统帅四段",
+    "Icon": "rank4_psd"
+  },
+  {
+    "id": 32,
+    "ScoreMin": 3200,
+    "ScoreMax": 3300,
+    "Name": "统帅五段",
+    "Icon": "rank4_psd"
+  },
+  {
+    "id": 33,
+    "ScoreMin": 3300,
+    "ScoreMax": 3400,
+    "Name": "统帅六段",
+    "Icon": "rank4_psd"
+  },
+  {
+    "id": 34,
+    "ScoreMin": 3400,
+    "ScoreMax": 3500,
+    "Name": "统帅七段",
+    "Icon": "rank4_psd"
+  },
+  {
+    "id": 35,
+    "ScoreMin": 3500,
+    "ScoreMax": 3600,
+    "Name": "统帅八段",
+    "Icon": "rank4_psd"
+  },
+  {
+    "id": 36,
+    "ScoreMin": 3600,
+    "ScoreMax": 3700,
+    "Name": "统帅九段",
+    "Icon": "rank4_psd"
+  },
+  {
+    "id": 37,
+    "ScoreMin": 3700,
+    "ScoreMax": 3800,
+    "Name": "传奇一段",
+    "Icon": "rank5_psd"
+  },
+  {
+    "id": 38,
+    "ScoreMin": 3800,
+    "ScoreMax": 3900,
+    "Name": "传奇二段",
+    "Icon": "rank5_psd"
+  },
+  {
+    "id": 39,
+    "ScoreMin": 3900,
+    "ScoreMax": 4000,
+    "Name": "传奇三段",
+    "Icon": "rank5_psd"
+  },
+  {
+    "id": 40,
+    "ScoreMin": 4000,
+    "ScoreMax": 4100,
+    "Name": "传奇四段",
+    "Icon": "rank5_psd"
+  },
+  {
+    "id": 41,
+    "ScoreMin": 4100,
+    "ScoreMax": 4200,
+    "Name": "传奇五段",
+    "Icon": "rank5_psd"
+  },
+  {
+    "id": 42,
+    "ScoreMin": 4200,
+    "ScoreMax": 4300,
+    "Name": "传奇六段",
+    "Icon": "rank5_psd"
+  },
+  {
+    "id": 43,
+    "ScoreMin": 4300,
+    "ScoreMax": 4400,
+    "Name": "传奇七段",
+    "Icon": "rank5_psd"
+  },
+  {
+    "id": 44,
+    "ScoreMin": 4400,
+    "ScoreMax": 4500,
+    "Name": "传奇八段",
+    "Icon": "rank5_psd"
+  },
+  {
+    "id": 45,
+    "ScoreMin": 4500,
+    "ScoreMax": 4600,
+    "Name": "传奇九段",
+    "Icon": "rank5_psd"
+  },
+  {
+    "id": 46,
+    "ScoreMin": 4600,
+    "ScoreMax": 4700,
+    "Name": "万古一段",
+    "Icon": "rank6_psd"
+  },
+  {
+    "id": 47,
+    "ScoreMin": 4700,
+    "ScoreMax": 4800,
+    "Name": "万古二段",
+    "Icon": "rank6_psd"
+  },
+  {
+    "id": 48,
+    "ScoreMin": 4800,
+    "ScoreMax": 4900,
+    "Name": "万古三段",
+    "Icon": "rank6_psd"
+  },
+  {
+    "id": 49,
+    "ScoreMin": 4900,
+    "ScoreMax": 5000,
+    "Name": "万古四段",
+    "Icon": "rank6_psd"
+  },
+  {
+    "id": 50,
+    "ScoreMin": 5000,
+    "ScoreMax": 5100,
+    "Name": "万古五段",
+    "Icon": "rank6_psd"
+  },
+  {
+    "id": 51,
+    "ScoreMin": 5100,
+    "ScoreMax": 5200,
+    "Name": "万古六段",
+    "Icon": "rank6_psd"
+  },
+  {
+    "id": 52,
+    "ScoreMin": 5200,
+    "ScoreMax": 5300,
+    "Name": "万古七段",
+    "Icon": "rank6_psd"
+  },
+  {
+    "id": 53,
+    "ScoreMin": 5300,
+    "ScoreMax": 5400,
+    "Name": "万古八段",
+    "Icon": "rank6_psd"
+  },
+  {
+    "id": 54,
+    "ScoreMin": 5400,
+    "ScoreMax": 5500,
+    "Name": "万古九段",
+    "Icon": "rank6_psd"
+  },
+  {
+    "id": 55,
+    "ScoreMin": 5500,
+    "ScoreMax": 0,
+    "Name": "至尊",
+    "Icon": "rank7_psd"
+  }
+]

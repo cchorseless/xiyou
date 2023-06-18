@@ -93,7 +93,9 @@ export class GameScene {
         this.bVictory = true;
         EmitAnnouncerSound(Assert_Sounds.Announcer.end_02);
         EmitGlobalSound(Assert_Sounds.Game.Victory);
-        GameRules.SetGameWinner(DOTATeam_t.DOTA_TEAM_GOODGUYS);
+        // GameRules.SetGameWinner(DOTATeam_t.DOTA_TEAM_GOODGUYS);
+        EventHelper.fireProtocolEventToClient(GameProtocol.Protocol.push_GameEndResult, {})
+
     }
     static Defeat() {
         if (this.bGameEnd == true) return;
@@ -110,11 +112,16 @@ export class GameScene {
         this.bVictory = false;
         EmitAnnouncerSound(Assert_Sounds.Announcer.end_08);
         EmitGlobalSound(Assert_Sounds.Game.Defeat);
-        GameRules.SetGameWinner(DOTATeam_t.DOTA_TEAM_BADGUYS);
+        // GameRules.SetGameWinner(DOTATeam_t.DOTA_TEAM_BADGUYS);
+        EventHelper.fireProtocolEventToClient(GameProtocol.Protocol.push_GameEndResult, {})
     }
 
-    private static OnGameEnd() {
-
+    static DefeatPlayer(playerid: PlayerID) {
+        const playeroot = this.GetPlayer(playerid)
+        EmitAnnouncerSoundForPlayer(Assert_Sounds.Announcer.end_08, playerid);
+        EmitSoundOn(Assert_Sounds.Game.Defeat, playeroot.Hero);
+        playeroot.OnGame_End(false);
+        EventHelper.fireProtocolEventToPlayer(GameProtocol.Protocol.push_PlayerGameEnd, null, playerid)
     }
 
     private static addEvent() {

@@ -227,6 +227,10 @@ export enum EItemType {
      * 皮肤
      */
     Skin = 7,
+    /**
+     * 英雄经验
+     */
+    HeroExp = 8,
 }
 }
 
@@ -332,9 +336,9 @@ export enum EItemAwakeScript {
      */
     BindEquip = 3,
     /**
-     * 检查唯一转化成星石
+     * 激活信使
      */
-    OwnedToStarStone = 4,
+    ActiveCourier = 4,
     /**
      * 激活皮肤
      */
@@ -520,8 +524,8 @@ export class ItemConfigRecord {
         this.AutoUse = _json_.AutoUse
         if (_json_.OneGameUseLimit === undefined) { GLogHelper.error(1); }
         this.OneGameUseLimit = _json_.OneGameUseLimit
-        if (_json_.MaxOwnerCount === undefined) { GLogHelper.error(1); }
-        this.MaxOwnerCount = _json_.MaxOwnerCount
+        if (_json_.DecomposeStarStone === undefined) { GLogHelper.error(1); }
+        this.DecomposeStarStone = _json_.DecomposeStarStone
         if (_json_.BatchUseable === undefined) { GLogHelper.error(1); }
         this.BatchUseable = _json_.BatchUseable
         if (_json_.BindHeroName === undefined) { GLogHelper.error(1); }
@@ -575,9 +579,9 @@ export class ItemConfigRecord {
      */
     readonly OneGameUseLimit: number
     /**
-     * 最大拥有数量
+     * 自动分解获得星石数量
      */
-    readonly MaxOwnerCount: number
+    readonly DecomposeStarStone: number
     /**
      * 批量使用
      */
@@ -978,7 +982,7 @@ export class ItemPrizePoolGroupConfigRecord {
     /**
      * 随机奖励是否重复
      */
-    readonly IsRandomRepeat: number
+    readonly IsRandomRepeat: boolean
     readonly RandomCountInfo: Item.ItemRandomCountBean[]
     readonly ItemPoolGroup: Item.ItemPoolGroupBean[]
 
@@ -2394,6 +2398,110 @@ export class BattlePassLevelUpConfigRecord {
 }
 
 export namespace Dota {
+export class WearableConfig{
+    private _dataMap: Map<string, Dota.WearableConfigRecord>
+    private _dataList: Dota.WearableConfigRecord[]
+    constructor(_json_: any[]) {
+ this._dataMap  = new Map<string, Dota.WearableConfigRecord>()
+        this._dataList = []
+        for(let _json2_ of _json_) {
+            let _v: Dota.WearableConfigRecord
+            _v = new Dota.WearableConfigRecord(_json2_)
+            this._dataList.push(_v)
+            this._dataMap.set(_v.id, _v)
+        }
+    }
+
+    getDataMap(): Map<string, Dota.WearableConfigRecord> { return this._dataMap; }
+    getDataList(): Dota.WearableConfigRecord[] { return this._dataList; }
+
+    get(key: string): Dota.WearableConfigRecord | undefined { return this._dataMap.get(key); }
+
+    resolve(_tables: Map<string, any>) {
+        for(let v of this._dataList) {
+            v.resolve(_tables)
+        }
+    }
+
+}
+}
+
+
+
+export namespace Dota {
+export class WearableConfigRecord {
+
+    constructor(_json_: any) {
+        if (_json_.id === undefined) { GLogHelper.error(1); }
+        this.id = _json_.id
+        if (_json_.name === undefined) { GLogHelper.error(1); }
+        this.name = _json_.name
+        if (_json_.prefab === undefined) { GLogHelper.error(1); }
+        this.prefab = _json_.prefab
+        if (_json_.image_inventory === undefined) { GLogHelper.error(1); }
+        this.imageInventory = _json_.image_inventory
+        if (_json_.item_description === undefined) { GLogHelper.error(1); }
+        this.itemDescription = _json_.item_description
+        if (_json_.item_name === undefined) { GLogHelper.error(1); }
+        this.itemName = _json_.item_name
+        if (_json_.Rarity === undefined) { GLogHelper.error(1); }
+        this.Rarity = _json_.Rarity
+        if (_json_.item_rarity === undefined) { GLogHelper.error(1); }
+        this.itemRarity = _json_.item_rarity
+        if (_json_.used_by_heroes === undefined) { GLogHelper.error(1); }
+        this.usedByHeroes = _json_.used_by_heroes
+        if (_json_.bundle === undefined) { GLogHelper.error(1); }
+        this.bundle = _json_.bundle
+    }
+
+    /**
+     * 主键
+     */
+    readonly id: string
+    /**
+     * 名称
+     */
+    readonly name: string
+    /**
+     * 类型
+     */
+    readonly prefab: string
+    /**
+     * icon
+     */
+    readonly imageInventory: string
+    /**
+     * 描述
+     */
+    readonly itemDescription: string
+    /**
+     * 饰品名称
+     */
+    readonly itemName: string
+    /**
+     * 饰品稀有度
+     */
+    readonly Rarity: string
+    /**
+     * 饰品稀有度
+     */
+    readonly itemRarity: string
+    /**
+     * 使用英雄
+     */
+    readonly usedByHeroes: string
+    /**
+     * 礼包内道具
+     */
+    readonly bundle: string[]
+
+    resolve(_tables: Map<string, any>) {
+    }
+}
+
+}
+
+export namespace Dota {
 export class InfoPassLevelUpConfig{
     private _dataMap: Map<number, Dota.InfoPassLevelUpConfigRecord>
     private _dataList: Dota.InfoPassLevelUpConfigRecord[]
@@ -3039,110 +3147,6 @@ export class PublicShopSellItemBean {
 }
 
 export namespace Dota {
-export class WearableConfig{
-    private _dataMap: Map<string, Dota.WearableConfigRecord>
-    private _dataList: Dota.WearableConfigRecord[]
-    constructor(_json_: any[]) {
- this._dataMap  = new Map<string, Dota.WearableConfigRecord>()
-        this._dataList = []
-        for(let _json2_ of _json_) {
-            let _v: Dota.WearableConfigRecord
-            _v = new Dota.WearableConfigRecord(_json2_)
-            this._dataList.push(_v)
-            this._dataMap.set(_v.id, _v)
-        }
-    }
-
-    getDataMap(): Map<string, Dota.WearableConfigRecord> { return this._dataMap; }
-    getDataList(): Dota.WearableConfigRecord[] { return this._dataList; }
-
-    get(key: string): Dota.WearableConfigRecord | undefined { return this._dataMap.get(key); }
-
-    resolve(_tables: Map<string, any>) {
-        for(let v of this._dataList) {
-            v.resolve(_tables)
-        }
-    }
-
-}
-}
-
-
-
-export namespace Dota {
-export class WearableConfigRecord {
-
-    constructor(_json_: any) {
-        if (_json_.id === undefined) { GLogHelper.error(1); }
-        this.id = _json_.id
-        if (_json_.name === undefined) { GLogHelper.error(1); }
-        this.name = _json_.name
-        if (_json_.prefab === undefined) { GLogHelper.error(1); }
-        this.prefab = _json_.prefab
-        if (_json_.image_inventory === undefined) { GLogHelper.error(1); }
-        this.imageInventory = _json_.image_inventory
-        if (_json_.item_description === undefined) { GLogHelper.error(1); }
-        this.itemDescription = _json_.item_description
-        if (_json_.item_name === undefined) { GLogHelper.error(1); }
-        this.itemName = _json_.item_name
-        if (_json_.Rarity === undefined) { GLogHelper.error(1); }
-        this.Rarity = _json_.Rarity
-        if (_json_.item_rarity === undefined) { GLogHelper.error(1); }
-        this.itemRarity = _json_.item_rarity
-        if (_json_.used_by_heroes === undefined) { GLogHelper.error(1); }
-        this.usedByHeroes = _json_.used_by_heroes
-        if (_json_.bundle === undefined) { GLogHelper.error(1); }
-        this.bundle = _json_.bundle
-    }
-
-    /**
-     * 主键
-     */
-    readonly id: string
-    /**
-     * 名称
-     */
-    readonly name: string
-    /**
-     * 类型
-     */
-    readonly prefab: string
-    /**
-     * icon
-     */
-    readonly imageInventory: string
-    /**
-     * 描述
-     */
-    readonly itemDescription: string
-    /**
-     * 饰品名称
-     */
-    readonly itemName: string
-    /**
-     * 饰品稀有度
-     */
-    readonly Rarity: string
-    /**
-     * 饰品稀有度
-     */
-    readonly itemRarity: string
-    /**
-     * 使用英雄
-     */
-    readonly usedByHeroes: string
-    /**
-     * 礼包内道具
-     */
-    readonly bundle: string[]
-
-    resolve(_tables: Map<string, any>) {
-    }
-}
-
-}
-
-export namespace Dota {
 export class RoundBoardConfig{
     private _dataMap: Map<string, Dota.RoundBoardConfigRecord>
     private _dataList: Dota.RoundBoardConfigRecord[]
@@ -3189,6 +3193,10 @@ export class RoundBoardConfigRecord {
         this.roundLabel = _json_.round_label
         if (_json_.rankScore === undefined) { GLogHelper.error(1); }
         this.rankScore = _json_.rankScore
+        if (_json_.winPrizeHeroExp === undefined) { GLogHelper.error(1); }
+        this.winPrizeHeroExp = _json_.winPrizeHeroExp
+        if (_json_.winPrizeItems === undefined) { GLogHelper.error(1); }
+        this.winPrizeItems = _json_.winPrizeItems
         if (_json_.randomEnemy === undefined) { GLogHelper.error(1); }
         this.randomEnemy = _json_.randomEnemy
         if (_json_.roundprize_gold === undefined) { GLogHelper.error(1); }
@@ -3227,6 +3235,14 @@ export class RoundBoardConfigRecord {
      * 天梯分数
      */
     readonly rankScore: number
+    /**
+     * 获胜参与战斗英雄经验
+     */
+    readonly winPrizeHeroExp: number
+    /**
+     * 获胜局外随机道具奖励池
+     */
+    readonly winPrizeItems: number
     /**
      * 是否随机敌人
      */
@@ -3841,6 +3857,80 @@ export class RoundDrawEnemyConfigBean {
 
 }
 
+export namespace Dota {
+export class RankBattleScoreExpConfig{
+    private _dataMap: Map<number, Dota.RankBattleScoreExpConfigRecord>
+    private _dataList: Dota.RankBattleScoreExpConfigRecord[]
+    constructor(_json_: any[]) {
+ this._dataMap  = new Map<number, Dota.RankBattleScoreExpConfigRecord>()
+        this._dataList = []
+        for(let _json2_ of _json_) {
+            let _v: Dota.RankBattleScoreExpConfigRecord
+            _v = new Dota.RankBattleScoreExpConfigRecord(_json2_)
+            this._dataList.push(_v)
+            this._dataMap.set(_v.id, _v)
+        }
+    }
+
+    getDataMap(): Map<number, Dota.RankBattleScoreExpConfigRecord> { return this._dataMap; }
+    getDataList(): Dota.RankBattleScoreExpConfigRecord[] { return this._dataList; }
+
+    get(key: number): Dota.RankBattleScoreExpConfigRecord | undefined { return this._dataMap.get(key); }
+
+    resolve(_tables: Map<string, any>) {
+        for(let v of this._dataList) {
+            v.resolve(_tables)
+        }
+    }
+
+}
+}
+
+
+
+export namespace Dota {
+export class RankBattleScoreExpConfigRecord {
+
+    constructor(_json_: any) {
+        if (_json_.id === undefined) { GLogHelper.error(1); }
+        this.id = _json_.id
+        if (_json_.ScoreMin === undefined) { GLogHelper.error(1); }
+        this.ScoreMin = _json_.ScoreMin
+        if (_json_.ScoreMax === undefined) { GLogHelper.error(1); }
+        this.ScoreMax = _json_.ScoreMax
+        if (_json_.Name === undefined) { GLogHelper.error(1); }
+        this.Name = _json_.Name
+        if (_json_.Icon === undefined) { GLogHelper.error(1); }
+        this.Icon = _json_.Icon
+    }
+
+    /**
+     * 等级
+     */
+    readonly id: number
+    /**
+     * 分数最小
+     */
+    readonly ScoreMin: number
+    /**
+     * 分数最大
+     */
+    readonly ScoreMax: number
+    /**
+     * 段位名称
+     */
+    readonly Name: string
+    /**
+     * 段位ICON
+     */
+    readonly Icon: string
+
+    resolve(_tables: Map<string, any>) {
+    }
+}
+
+}
+
 
 type JsonLoader = (file: string) => any
 
@@ -3883,6 +3973,8 @@ export class Tables {
     get BattlePassTaskConfig(): Dota.BattlePassTaskConfig  { return this._BattlePassTaskConfig;}
     private _BattlePassLevelUpConfig: Dota.BattlePassLevelUpConfig
     get BattlePassLevelUpConfig(): Dota.BattlePassLevelUpConfig  { return this._BattlePassLevelUpConfig;}
+    private _WearableConfig: Dota.WearableConfig
+    get WearableConfig(): Dota.WearableConfig  { return this._WearableConfig;}
     private _InfoPassLevelUpConfig: Dota.InfoPassLevelUpConfig
     get InfoPassLevelUpConfig(): Dota.InfoPassLevelUpConfig  { return this._InfoPassLevelUpConfig;}
     private _BuffEffectConfig: Dota.BuffEffectConfig
@@ -3897,14 +3989,14 @@ export class Tables {
     get PoolGroupConfig(): Dota.PoolGroupConfig  { return this._PoolGroupConfig;}
     private _PublicShopConfig: Dota.PublicShopConfig
     get PublicShopConfig(): Dota.PublicShopConfig  { return this._PublicShopConfig;}
-    private _WearableConfig: Dota.WearableConfig
-    get WearableConfig(): Dota.WearableConfig  { return this._WearableConfig;}
     private _RoundBoardConfig: Dota.RoundBoardConfig
     get RoundBoardConfig(): Dota.RoundBoardConfig  { return this._RoundBoardConfig;}
     private _RoundBoardChallengeConfig: Dota.RoundBoardChallengeConfig
     get RoundBoardChallengeConfig(): Dota.RoundBoardChallengeConfig  { return this._RoundBoardChallengeConfig;}
     private _RoundEnemyPoolConfig: Dota.RoundEnemyPoolConfig
     get RoundEnemyPoolConfig(): Dota.RoundEnemyPoolConfig  { return this._RoundEnemyPoolConfig;}
+    private _RankBattleScoreExpConfig: Dota.RankBattleScoreExpConfig
+    get RankBattleScoreExpConfig(): Dota.RankBattleScoreExpConfig  { return this._RankBattleScoreExpConfig;}
 
     constructor(loader: JsonLoader) {
         let tables = new Map<string, any>()
@@ -3946,6 +4038,8 @@ export class Tables {
         tables.set('Dota.BattlePassTaskConfig', this._BattlePassTaskConfig)
         this._BattlePassLevelUpConfig = new Dota.BattlePassLevelUpConfig(loader('dota_battlepasslevelupconfig'))
         tables.set('Dota.BattlePassLevelUpConfig', this._BattlePassLevelUpConfig)
+        this._WearableConfig = new Dota.WearableConfig(loader('dota_wearableconfig'))
+        tables.set('Dota.WearableConfig', this._WearableConfig)
         this._InfoPassLevelUpConfig = new Dota.InfoPassLevelUpConfig(loader('dota_infopasslevelupconfig'))
         tables.set('Dota.InfoPassLevelUpConfig', this._InfoPassLevelUpConfig)
         this._BuffEffectConfig = new Dota.BuffEffectConfig(loader('dota_buffeffectconfig'))
@@ -3960,14 +4054,14 @@ export class Tables {
         tables.set('Dota.PoolGroupConfig', this._PoolGroupConfig)
         this._PublicShopConfig = new Dota.PublicShopConfig(loader('dota_publicshopconfig'))
         tables.set('Dota.PublicShopConfig', this._PublicShopConfig)
-        this._WearableConfig = new Dota.WearableConfig(loader('dota_wearableconfig'))
-        tables.set('Dota.WearableConfig', this._WearableConfig)
         this._RoundBoardConfig = new Dota.RoundBoardConfig(loader('dota_roundboardconfig'))
         tables.set('Dota.RoundBoardConfig', this._RoundBoardConfig)
         this._RoundBoardChallengeConfig = new Dota.RoundBoardChallengeConfig(loader('dota_roundboardchallengeconfig'))
         tables.set('Dota.RoundBoardChallengeConfig', this._RoundBoardChallengeConfig)
         this._RoundEnemyPoolConfig = new Dota.RoundEnemyPoolConfig(loader('dota_roundenemypoolconfig'))
         tables.set('Dota.RoundEnemyPoolConfig', this._RoundEnemyPoolConfig)
+        this._RankBattleScoreExpConfig = new Dota.RankBattleScoreExpConfig(loader('dota_rankbattlescoreexpconfig'))
+        tables.set('Dota.RankBattleScoreExpConfig', this._RankBattleScoreExpConfig)
 
         this._ItemConfig.resolve(tables)
         this._ItemEquipConfig.resolve(tables)
@@ -3988,6 +4082,7 @@ export class Tables {
         this._BattlePassChargeConfig.resolve(tables)
         this._BattlePassTaskConfig.resolve(tables)
         this._BattlePassLevelUpConfig.resolve(tables)
+        this._WearableConfig.resolve(tables)
         this._InfoPassLevelUpConfig.resolve(tables)
         this._BuffEffectConfig.resolve(tables)
         this._CourierAbilityLevelUpConfig.resolve(tables)
@@ -3995,10 +4090,10 @@ export class Tables {
         this._PoolConfig.resolve(tables)
         this._PoolGroupConfig.resolve(tables)
         this._PublicShopConfig.resolve(tables)
-        this._WearableConfig.resolve(tables)
         this._RoundBoardConfig.resolve(tables)
         this._RoundBoardChallengeConfig.resolve(tables)
         this._RoundEnemyPoolConfig.resolve(tables)
+        this._RankBattleScoreExpConfig.resolve(tables)
     }
 reloadConfig(k: string , loader: JsonLoader) {
  switch(k) { 
@@ -4040,6 +4135,8 @@ case ('dota_battlepasstaskconfig'):
         this._BattlePassTaskConfig = new Dota.BattlePassTaskConfig(loader('dota_battlepasstaskconfig'));break;
 case ('dota_battlepasslevelupconfig'):
         this._BattlePassLevelUpConfig = new Dota.BattlePassLevelUpConfig(loader('dota_battlepasslevelupconfig'));break;
+case ('dota_wearableconfig'):
+        this._WearableConfig = new Dota.WearableConfig(loader('dota_wearableconfig'));break;
 case ('dota_infopasslevelupconfig'):
         this._InfoPassLevelUpConfig = new Dota.InfoPassLevelUpConfig(loader('dota_infopasslevelupconfig'));break;
 case ('dota_buffeffectconfig'):
@@ -4054,14 +4151,14 @@ case ('dota_poolgroupconfig'):
         this._PoolGroupConfig = new Dota.PoolGroupConfig(loader('dota_poolgroupconfig'));break;
 case ('dota_publicshopconfig'):
         this._PublicShopConfig = new Dota.PublicShopConfig(loader('dota_publicshopconfig'));break;
-case ('dota_wearableconfig'):
-        this._WearableConfig = new Dota.WearableConfig(loader('dota_wearableconfig'));break;
 case ('dota_roundboardconfig'):
         this._RoundBoardConfig = new Dota.RoundBoardConfig(loader('dota_roundboardconfig'));break;
 case ('dota_roundboardchallengeconfig'):
         this._RoundBoardChallengeConfig = new Dota.RoundBoardChallengeConfig(loader('dota_roundboardchallengeconfig'));break;
 case ('dota_roundenemypoolconfig'):
         this._RoundEnemyPoolConfig = new Dota.RoundEnemyPoolConfig(loader('dota_roundenemypoolconfig'));break;
+case ('dota_rankbattlescoreexpconfig'):
+        this._RankBattleScoreExpConfig = new Dota.RankBattleScoreExpConfig(loader('dota_rankbattlescoreexpconfig'));break;
 }
 };
 

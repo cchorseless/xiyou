@@ -53,14 +53,15 @@ export class GameServiceSystem extends ET.SingletonComponent {
             bNewPlayer: false,
         };
 
-        let bagcomp = GBagComponent.GetOneInstance(playerid);
-        if (bagcomp) {
-            this.tPlayerCourierList[playerid + ""] = bagcomp.getAllCourierNames();
-            this.tPlayerGameSelection[playerid + ""].Difficulty.Chapter = bagcomp.DifficultyChapter;
-            this.tPlayerGameSelection[playerid + ""].Difficulty.MaxChapter = bagcomp.DifficultyChapter;
-
-            this.tPlayerGameSelection[playerid + ""].Difficulty.Level = bagcomp.DifficultyLevel;
-            this.tPlayerGameSelection[playerid + ""].Difficulty.MaxLevel = bagcomp.DifficultyLevel;
+        let DataComp = GCharacterDataComponent.GetOneInstance(playerid);
+        if (DataComp) {
+            const DifficultyChapter = DataComp.getDifficultyChapter();
+            const DifficultyLevel = DataComp.getDifficultyLevel();
+            this.tPlayerCourierList[playerid + ""] = DataComp.getAllCourierNames();
+            this.tPlayerGameSelection[playerid + ""].Difficulty.Chapter = DifficultyChapter;
+            this.tPlayerGameSelection[playerid + ""].Difficulty.MaxChapter = DifficultyChapter;
+            this.tPlayerGameSelection[playerid + ""].Difficulty.Level = DifficultyLevel;
+            this.tPlayerGameSelection[playerid + ""].Difficulty.MaxLevel = DifficultyLevel;
         }
         else {
             this.tPlayerCourierList[playerid + ""] = [GameServiceConfig.DefaultCourier];

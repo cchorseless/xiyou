@@ -93,6 +93,15 @@ export class BattleUnitManagerComponent extends ET.Component {
         let allRuntime = domain.GetDomainChilds(BuildingRuntimeEntityRoot);
         allRuntime.forEach((s) => { s.Dispose() })
     }
+    public OnGame_End(iswin: boolean) {
+        let domain = GGameScene.GetPlayer(this.BelongPlayerid)
+        if (!iswin) {
+            this.GetAllBuildingRuntimeEntityRoot().forEach((s) => { s.Dispose() });
+            this.GetAllEnemyUnitEntityRoot().forEach((s) => { s.Dispose() });
+            domain.GetDomainChilds(BattleUnitSummonEntityRoot).forEach((s) => { s.Dispose() });
+            domain.GetDomainChilds(BattleUnitIllusionEntityRoot).forEach((s) => { s.Dispose() });
+        }
+    }
 }
 
 declare global {

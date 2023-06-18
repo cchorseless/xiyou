@@ -431,6 +431,19 @@ export class BuildingManagerComponent extends ET.Component implements IRoundStat
 
     }
 
+
+    OnGame_End(iswin: boolean) {
+        if (iswin) {
+
+        }
+        else {
+            this.OnRound_WaitingEnd();
+            BuildingEntityRoot.GetGroupInstance(this.BelongPlayerid).forEach((b) => {
+                b.Dispose();
+            });
+        }
+    }
+
     /**
      * 上传阵容数据
      */

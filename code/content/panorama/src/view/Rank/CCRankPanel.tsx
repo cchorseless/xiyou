@@ -13,7 +13,9 @@ import { CCPagination } from "../AllUIElement/CCPagination/CCPagination";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCPopUpDialog } from "../AllUIElement/CCPopUpDialog/CCPopUpDialog";
 import { CCVerticalTable } from "../AllUIElement/CCTable/CCVerticalTable";
+import { CCRankIconItem } from "./CCRankIconItem";
 import "./CCRankPanel.less";
+import { CCRankProgressItem } from "./CCRankProgressItem";
 import { CCRankSingleDataItem } from "./CCRankSingleDataItem";
 interface ICCRankPanel extends NodePropsData {
 
@@ -29,7 +31,7 @@ export class CCRankPanel extends CCPanel<ICCRankPanel> {
         const SeasonRankData = RankComp.GetSeasonRankData()!;
         this.ListenUpdate(RankComp);
         this.ListenUpdate(SeasonRankData);
-        this.loadRankData(GameProtocol.ERankType.SeasonBattleSorceRank)
+        this.loadRankData(0)
     }
 
     closeThis() {
@@ -114,14 +116,20 @@ export class CCRankPanel extends CCPanel<ICCRankPanel> {
                                                 const rank = v.RankIndex;
                                                 const accoundid = v.SteamAccountId;
                                                 const score = v.Score + "";
-                                                return <CCRankSingleDataItem key={"" + index} rank={rank} accoundid={accoundid} score={score} marginTop={"3px"} />
+                                                return <CCRankSingleDataItem width="450px" rank={rank} key={"" + index} accoundid={accoundid} score={score} marginTop={"3px"} >
+                                                    <CCRankIconItem score={v.Score} />
+                                                </CCRankSingleDataItem>
                                             })
                                     }
                                     <CCPagination boundaryCount={5} pageCount={20} defaultPage={1} showJumpButton={false} marginTop={"20px"} onChange={(page: number) => {
                                         this.loadRankData(selectindex, page)
                                     }} />
                                     {
-                                        selfdata0 && <CCRankSingleDataItem rank={selfdata0.RankIndex} accoundid={selfdata0.SteamAccountId} score={selfdata0.Score + ""} marginTop={"20px"} />
+                                        selfdata0 && <CCPanel flowChildren="right" marginTop={"20px"}>
+                                            <CCRankSingleDataItem width="720px" rank={selfdata0.RankIndex} accoundid={selfdata0.SteamAccountId} score={selfdata0.Score + ""} >
+                                                <CCRankProgressItem />
+                                            </CCRankSingleDataItem>
+                                        </CCPanel>
                                     }
                                 </CCPanel>
                                 <CCPanel opacity={selectindex == 1 ? "1" : "0"} flowChildren="down" hittest={false} >

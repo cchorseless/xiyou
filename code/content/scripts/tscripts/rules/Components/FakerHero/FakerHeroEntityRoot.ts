@@ -83,7 +83,7 @@ export class FakerHeroEntityRoot extends BaseEntityRoot implements IRoundStateCa
             });
             // 怪物回合没有通关直接秒杀
             if (round.config.roundIndex > 1 && !round.config.randomEnemy) {
-                damage = 1000;
+                damage = 100;
             }
             GTimerHelper.AddTimer(delay_time, GHandler.create(this, () => {
                 player.EnemyManagerComp().ApplyDamageHero(damage, this.ProjectileInfo);
@@ -97,6 +97,12 @@ export class FakerHeroEntityRoot extends BaseEntityRoot implements IRoundStateCa
             .forEach((b) => {
                 b.OnRound_WaitingEnd();
             });
+    }
+
+    OnGame_End(iswin: boolean) {
+        let hHero = this.GetDomain<IBaseNpc_Hero_Plus>();
+        hHero.Kill(null, hHero);
+        hHero.AddNoDraw();
     }
     FHeroCombinationManager() {
         return this.GetComponentByName<FHeroCombinationManagerComponent>("FHeroCombinationManagerComponent");

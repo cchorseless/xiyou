@@ -45,8 +45,33 @@ export module JsonConfigHelper {
             return GJSONConfig.CombinationConfig.get(list[0])!.Equipid;
         }
     }
-
-
+    /**
+     * 获取英雄经验物品id
+     * @param heroname 
+     * @returns 
+     */
+    export function GetHeroExpItemConfigId(heroname: string) {
+        let config = GJSONConfig.ItemConfig.getDataList();
+        for (let _v of config) {
+            if (_v.ItemType == EEnum.EItemType.HeroExp && _v.BindHeroName == heroname) {
+                return _v.id;
+            }
+        }
+    }
+    /**
+     * 获取排行榜id
+     * @param score 
+     * @returns 
+     */
+    export function GetRankScoreExpItemConfigId(score: number) {
+        let config = GJSONConfig.RankBattleScoreExpConfig.getDataList();
+        for (let _v of config) {
+            if (_v.ScoreMin <= score && (_v.ScoreMax > score || _v.ScoreMax == 0)) {
+                return _v.id;
+            }
+        }
+        return 1;
+    }
     export function GetAbilitySectEffectName(abilityid: string, level: ISectLevel = "b", isCommonEffect = true) {
         let list = AbilitySectInfo[abilityid];
         if (list && list.length > 0) {

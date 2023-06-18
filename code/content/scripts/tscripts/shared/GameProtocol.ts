@@ -13,6 +13,9 @@ export module GameProtocol {
         static readonly UploadCharacterGameRecord = "/UploadCharacterGameRecord";
         // 背包 使用道具
         static readonly Use_BagItem = "/Use_BagItem";
+        // 背包 添加道具
+        static readonly Add_BagItem = "/Add_BagItem";
+
         // 商店
         static readonly Buy_ShopItem = "/Buy_ShopItem";
 
@@ -76,6 +79,7 @@ export module GameProtocol {
         static readonly req_DebugRemoveEnemy = "/req_DebugRemoveEnemy";
         static readonly req_DebugAddGold = "/req_DebugAddGold";
         static readonly req_DebugWTF = "/req_DebugWTF";
+        static readonly req_DebugKillPlayer = "/req_DebugKillPlayer";
         static readonly req_DebugRemoveAllAbility = "/req_DebugRemoveAllAbility";
         static readonly req_DebugRemoveAllItem = "/req_DebugRemoveAllItem";
         static readonly req_DebugChangeServerPing = "/req_DebugChangeServerPing";
@@ -107,6 +111,8 @@ export module GameProtocol {
         static readonly SelectCourier = "/SelectCourier";
         static readonly SelectReady = "/SelectReady";
 
+        static readonly push_PlayerGameEnd = "/push_PlayerGameEnd";
+        static readonly push_GameEndResult = "/push_GameEndResult";
         // 公共背包
         static readonly req_BuyPublicBagItem = "/req_BuyPublicBagItem";
         static readonly req_SetBuyItem2Bag = "/req_SetBuyItem2Bag";

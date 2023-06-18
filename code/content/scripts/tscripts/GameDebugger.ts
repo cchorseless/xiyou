@@ -192,6 +192,15 @@ export class GameDebugger extends SingletonClass {
                 SendToConsole("dota_ability_debug 0")
             }
         }));
+        EventHelper.addProtocolEvent(GameProtocol.Protocol.req_DebugKillPlayer, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
+            let playerid = GToNumber(e.data);
+            let playerroot = GGameScene.GetPlayer(playerid);
+            if (playerroot) {
+                playerroot.CourierRoot().onKilled();
+            }
+
+        }));
+
         EventHelper.addProtocolEvent(GameProtocol.Protocol.req_DebugRemoveAllItem, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
 
         }));

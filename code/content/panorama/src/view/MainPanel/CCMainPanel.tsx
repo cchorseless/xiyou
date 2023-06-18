@@ -15,6 +15,8 @@ import { CCBattlePassTaskHudDialog } from "../BattlePass/CCBattlePassTaskHudDial
 import { CCChallengeShopPanel } from "../Challenge/CCChallengeShopPanel";
 import { CCCombinationBottomPanel } from "../Combination/CCCombinationBottomPanel";
 import { CCDebugPanel } from "../DebugTool/CCDebugPanel";
+import { CCGameEndPanel } from "../GameEnd/CCGameEndPanel";
+import { CCPlayerEndPanel } from "../GameEnd/CCPlayerEndPanel";
 import { CCHandBookPanel } from "../HandBook/CCHandBookPanel";
 import { CCLuckyDrawPanel } from "../LuckyDraw/CCLuckyDrawPanel";
 import { CCMailPanel } from "../Mail/CCMailPanel";
@@ -23,6 +25,7 @@ import { CCPlayerListPanel } from "../Player/CCPlayerListPanel";
 import { CCPublicShopBagPanel } from "../PublicShopBag/CCPublicShopBagPanel";
 import { CCRankPanel } from "../Rank/CCRankPanel";
 import { CCRecordPanel } from "../Record/CCRecordPanel";
+import { CCRoundBattleRecord } from "../Round/CCRoundBattleRecord";
 import { CCShopPanel } from "../Shop/CCShopPanel";
 import { CCShopSixShenFuPanel } from "../Shop/CCShopSixShenFuPanel";
 import { CCStoragePanel } from "../Storage/CCStoragePanel";
@@ -77,9 +80,12 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
                         <CCUnitDamageInfo />
                         <CCCombinationBottomPanel CurSelectUnit={curunit} />
                         <CCBattlePassTaskHudDialog />
+                        <CCRoundBattleRecord />
                         <CCArtifactListPanel />
                         <CCPublicShopBagPanel />
                         <CCNotificationPanel />
+                        <CCPlayerEndPanel />
+                        <CCGameEndPanel />
                         <CCDebugPanel direction="left" hittest={false} />
                         {this.panel_base_childs}
                     </Panel>

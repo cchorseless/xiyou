@@ -9,7 +9,7 @@ const {
 const isProduction = false;;
 const fileList = () => {
     let viewdir = [
-        "config","zlib"
+        "config", "zlib"
     ];
     let r = [];
     viewdir.forEach(file => {
@@ -44,78 +44,79 @@ module.exports = {
     // },
     module: {
         rules: [{
-                test: /\.xml$/,
-                use: [{
-                    loader: '@aabao/webpack-panorama/lib/layout-loader',
-                    options: {
-                        cacheable: true,
-                    },
-                    },
-                    {
-                        loader: path.resolve(__dirname, "./webpackloader/importless.js")
-                    }
-                ]
-            },
-            {
-                test: /\.[jt]sx$/,
-                issuer: /\.xml$/,
-                loader: '@aabao/webpack-panorama/lib/entry-loader',
+            test: /\.xml$/,
+            use: [{
+                loader: '@aabao/webpack-panorama/lib/layout-loader',
                 options: {
                     cacheable: true,
                 },
             },
             {
-                test: /\.tsx?$/,
-                use: [{
-                        loader: 'ts-loader',
-                        options: {
-                            transpileOnly: true
-                        }
-                    },
-                    {
-                        loader: path.resolve(__dirname, "./webpackloader/tscssloader.js")
-                    },
-                ]
+                loader: path.resolve(__dirname, "./webpackloader/importless.js")
+            }
+            ]
+        },
+        {
+            test: /\.[jt]sx$/,
+            issuer: /\.xml$/,
+            loader: '@aabao/webpack-panorama/lib/entry-loader',
+            options: {
+                cacheable: true,
+            },
+        },
+        {
+            test: /\.tsx?$/,
+            use: [{
+                loader: 'ts-loader',
+                options: {
+                    transpileOnly: true
+                }
             },
             {
-                test: /\.js?$|\.jsx?$/,
-                use: [
-                    {
-                        loader: path.resolve(__dirname, "./webpackloader/jsloader.js")
-                    },
-                 {
+                loader: path.resolve(__dirname, "./webpackloader/tscssloader.js")
+            },
+            ]
+        },
+        {
+            test: /\.js?$|\.jsx?$/,
+            use: [
+                {
+                    loader: path.resolve(__dirname, "./webpackloader/jsloader.js")
+                },
+                {
                     loader: 'babel-loader',
                     options: {
                         presets: ['@babel/preset-react', '@babel/preset-env']
-                    }, },
-                ],
-             
-            },
-            {
-                test: /\.css$/,
-                test: /\.(css|less)$/,
-                issuer: /\.xml$/,
-                loader: 'file-loader',
-                options: {
-                    name: '[path][name].css',
-                    esModule: false
+                    },
                 },
+            ],
+
+        },
+        {
+            test: /\.css$/,
+            test: /\.(css|less)$/,
+            issuer: /\.xml$/,
+            loader: 'file-loader',
+            options: {
+                name: '[path][name].css',
+                esModule: false
+            },
+        },
+        {
+            test: /\.less$/,
+            use: [{
+                loader: path.resolve(__dirname, "./webpackloader/dota2keyframesloader.js")
             },
             {
-                test: /\.less$/,
-                use: [{
-                        loader: path.resolve(__dirname, "./webpackloader/dota2keyframesloader.js")
-                    },
-                    {
-                        loader: 'less-loader',
-                        options: {
-                            lessOptions: {
-                                relativeUrls: false,
-                            }
-                        }
-                    },
-                ]
+                loader: 'less-loader',
+                options: {
+                    lessOptions: {
+                        relativeUrls: false,
+                    }
+                }
             },
+            ]
+        },
         ],
     },
 
@@ -123,9 +124,9 @@ module.exports = {
         new PanoramaTargetPlugin(),
         new PanoramaManifestPlugin({
             minify: {
-				caseSensitive: true,
-				keepClosingSlash: true,
-			},
+                caseSensitive: true,
+                keepClosingSlash: true,
+            },
             entries: [
                 // 编译载入界面到custom_loading_screen
                 {
@@ -141,11 +142,7 @@ module.exports = {
                     import: './view/AllSpeHud/hero_select/hero_select.xml',
                     type: 'HeroSelection'
                 },
-                // 结束界面
-                {
-                    import: './view/AllSpeHud/end_screen/end_screen.xml',
-                    type: 'EndScreen'
-                },
+
                 // 游戏界面
                 {
                     import: './view/game_main.xml',

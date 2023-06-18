@@ -1,7 +1,11 @@
 import React from "react";
 import { CSSHelper } from "../../helper/CSSHelper";
 
+import { GameProtocol } from "../../../../scripts/tscripts/shared/GameProtocol";
 import { TBattlePassTaskItem } from "../../../../scripts/tscripts/shared/service/battlepass/TBattlePassTaskItem";
+import { NetHelper } from "../../helper/NetHelper";
+import { TipsHelper } from "../../helper/TipsHelper";
+import { CCButtonBox } from "../AllUIElement/CCButton/CCButtonBox";
 import { CCIcon_Point } from "../AllUIElement/CCIcons/CCIcon_Point";
 import { CCLabel } from "../AllUIElement/CCLabel/CCLabel";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
@@ -18,6 +22,13 @@ export class CCBattlePassTaskHudDialog extends CCPanel<ICCBattlePassTaskHudDialo
     }
     onInitUI() {
         this.ListenUpdate(GGameScene.Local.TCharacter.BattlePassComp);
+        NetHelper.ListenOnLua(GameProtocol.Protocol.push_GameEndResult, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
+            this.UpdateState({ ExpandBattlePassTask: true })
+        }))
+        NetHelper.ListenOnLua(GameProtocol.Protocol.push_PlayerGameEnd, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
+            this.UpdateState({ ExpandBattlePassTask: true })
+        }))
+
     }
 
     render() {
@@ -56,7 +67,20 @@ export class CCBpTaskHudItem extends CCPanel<{ entity: TBattlePassTaskItem }> {
     onInitUI() {
         this.ListenUpdate(this.props.entity)
     }
+    OnBtnTaskGet(entity: TBattlePassTaskItem) {
+        if (!entity.IsAchieve) {
+            TipsHelper.showErrorMessage("任务尚未完成");
+            return;
+        }
+        if (entity.IsPrizeGet) {
+            TipsHelper.showErrorMessage("奖励已领取");
+            return;
+        }
 
+        NetHelper.SendToCSharp(GameProtocol.Protocol.GetPrize_TaskPrize, {
+            TaskId: entity.Id
+        })
+    }
     render() {
         const entity = this.props.entity;
         const config = GJSONConfig.BattlePassTaskConfig.get(entity.ConfigId)!;
@@ -67,15 +91,20 @@ export class CCBpTaskHudItem extends CCPanel<{ entity: TBattlePassTaskItem }> {
         const current = entity.Progress;
         const total = config.TaskFinishCondition.ValueInt;
         return <Panel className={"CCBpTaskHudItem"} ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
-            {hero != null ? <CCUnitSmallIcon itemname={hero} width="25px" height="25px" marginLeft={"10px"} verticalAlign="center" />
-                : <CCIcon_Point type="Full" width="25px" height="25px" marginLeft={"10px"} verticalAlign="center" />
-            }
-            <CCPanel flowChildren="down" marginLeft={"3px"}>
-                <Label id="TaskDesc" key={"desc" + config.TaskType} localizedText={"#bp_task_desc_" + config.TaskType} dialogVariables={{ hero_name: ($.Localize("#" + (hero ?? ""))) as string }} />
-                <ProgressBar id="TaskProgressBar" value={current / total} >
-                    <Label text={`${current}/${total}`} />
-                </ProgressBar>
-            </CCPanel>
+            <CCButtonBox width="100%" height="100%" flowChildren="right" onactivate={() => {
+                this.OnBtnTaskGet(entity);
+            }}>
+                {hero != null ? <CCUnitSmallIcon itemname={hero} width="25px" height="25px" marginLeft={"10px"} verticalAlign="center" />
+                    : <CCIcon_Point type="Full" width="25px" height="25px" marginLeft={"10px"} verticalAlign="center" />
+                }
+                <CCPanel flowChildren="down" marginLeft={"3px"}>
+                    <Label id="TaskDesc" key={"desc" + config.TaskType} localizedText={"#bp_task_desc_" + config.TaskType} dialogVariables={{ hero_name: ($.Localize("#" + (hero ?? ""))) as string }} />
+                    <ProgressBar id="TaskProgressBar" value={current / total} >
+                        <Label text={`${current}/${total}`} />
+                    </ProgressBar>
+                </CCPanel>
+            </CCButtonBox>
+
         </Panel>
     }
 }

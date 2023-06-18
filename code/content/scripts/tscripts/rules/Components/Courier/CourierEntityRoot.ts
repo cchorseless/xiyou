@@ -50,14 +50,18 @@ export class CourierEntityRoot extends BaseEntityRoot implements IRoundStateCall
         hero.SetHealth(this.health);
         this.SyncClient(true, true)
         if (this.health <= 0) {
-            this.onKilled({})
+            this.onKilled()
         }
     }
 
-    onKilled(e: any) {
+    onKilled(e?: any) {
         let hHero = this.GetDomain<IBaseNpc_Hero_Plus>();
+        if (!hHero.IsAlive()) { return }
         hHero.StartGesture(GameActivity_t.ACT_DOTA_DIE);
+        hHero.SetRespawnsDisabled(false);
         hHero.ForceKill(false);
+        hHero.Kill(null, hHero)
+        hHero.AddNoDraw();
         let isgameend = true;
         CourierEntityRoot.GetAllInstance().forEach((instance) => {
             if (instance.health > 0) {
@@ -65,7 +69,11 @@ export class CourierEntityRoot extends BaseEntityRoot implements IRoundStateCall
             }
         });
         if (isgameend) {
-            GGameScene.Defeat();
+            // GGameScene.Defeat();
+            GGameScene.DefeatPlayer(this.BelongPlayerid);
+        }
+        else {
+            GGameScene.DefeatPlayer(this.BelongPlayerid);
         }
     }
     RefreshCourier() {

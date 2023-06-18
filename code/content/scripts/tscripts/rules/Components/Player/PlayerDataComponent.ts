@@ -173,7 +173,12 @@ export class PlayerDataComponent extends PlayerData implements IRoundStateCallba
     OnRound_Battle(): void { }
     OnRound_Prize(round?: ERoundBoard): void { }
     OnRound_WaitingEnd(): void { }
-
+    OnGame_End(iswin: boolean): void {
+        if (this.timePerInterval != null) {
+            this.timePerInterval.Clear()
+            this.timePerInterval = null;
+        }
+    }
 
     GetGold() {
         return this.gold;

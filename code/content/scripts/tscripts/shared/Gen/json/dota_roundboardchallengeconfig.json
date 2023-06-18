@@ -29,7 +29,7 @@
         "wood_max": 0,
         "soulcrystal_min": 10,
         "soulcrystal_max": 10,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -56,7 +56,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -83,7 +83,7 @@
         "wood_max": 0,
         "soulcrystal_min": 10,
         "soulcrystal_max": 10,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -110,7 +110,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -137,7 +137,7 @@
         "wood_max": 0,
         "soulcrystal_min": 10,
         "soulcrystal_max": 10,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -164,7 +164,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -191,7 +191,7 @@
         "wood_max": 0,
         "soulcrystal_min": 10,
         "soulcrystal_max": 10,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -218,7 +218,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -245,7 +245,7 @@
         "wood_max": 0,
         "soulcrystal_min": 10,
         "soulcrystal_max": 10,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -272,7 +272,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -299,7 +299,7 @@
         "wood_max": 0,
         "soulcrystal_min": 10,
         "soulcrystal_max": 10,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -326,7 +326,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -353,7 +353,7 @@
         "wood_max": 0,
         "soulcrystal_min": 10,
         "soulcrystal_max": 10,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -380,7 +380,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -407,7 +407,7 @@
         "wood_max": 0,
         "soulcrystal_min": 10,
         "soulcrystal_max": 10,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -434,7 +434,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -461,7 +461,7 @@
         "wood_max": 0,
         "soulcrystal_min": 10,
         "soulcrystal_max": 10,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -488,7 +488,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -515,7 +515,7 @@
         "wood_max": 0,
         "soulcrystal_min": 10,
         "soulcrystal_max": 10,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -542,7 +542,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -569,7 +569,7 @@
         "wood_max": 0,
         "soulcrystal_min": 10,
         "soulcrystal_max": 10,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -596,7 +596,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -623,7 +623,7 @@
         "wood_max": 0,
         "soulcrystal_min": 10,
         "soulcrystal_max": 10,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -650,7 +650,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -677,7 +677,7 @@
         "wood_max": 0,
         "soulcrystal_min": 10,
         "soulcrystal_max": 10,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -704,7 +704,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -731,7 +731,7 @@
         "wood_max": 0,
         "soulcrystal_min": 10,
         "soulcrystal_max": 10,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -758,7 +758,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -785,7 +785,7 @@
         "wood_max": 0,
         "soulcrystal_min": 10,
         "soulcrystal_max": 10,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -812,7 +812,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -839,7 +839,7 @@
         "wood_max": 0,
         "soulcrystal_min": 10,
         "soulcrystal_max": 10,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -866,7 +866,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -893,7 +893,7 @@
         "wood_max": 0,
         "soulcrystal_min": 10,
         "soulcrystal_max": 10,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -920,7 +920,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -947,7 +947,7 @@
         "wood_max": 0,
         "soulcrystal_min": 10,
         "soulcrystal_max": 10,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -974,7 +974,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -1001,7 +1001,7 @@
         "wood_max": 0,
         "soulcrystal_min": 10,
         "soulcrystal_max": 10,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -1028,7 +1028,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -1055,7 +1055,7 @@
         "wood_max": 0,
         "soulcrystal_min": 10,
         "soulcrystal_max": 10,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -1082,7 +1082,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       }
     ]
@@ -1117,7 +1117,7 @@
         "wood_max": 100,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -1144,7 +1144,7 @@
         "wood_max": 5,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -1171,7 +1171,7 @@
         "wood_max": 100,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -1198,7 +1198,7 @@
         "wood_max": 5,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -1225,7 +1225,7 @@
         "wood_max": 100,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -1252,7 +1252,7 @@
         "wood_max": 5,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -1279,7 +1279,7 @@
         "wood_max": 100,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -1306,7 +1306,7 @@
         "wood_max": 5,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -1333,7 +1333,7 @@
         "wood_max": 100,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -1360,7 +1360,7 @@
         "wood_max": 5,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -1387,7 +1387,7 @@
         "wood_max": 100,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -1414,7 +1414,7 @@
         "wood_max": 5,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -1441,7 +1441,7 @@
         "wood_max": 100,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -1468,7 +1468,7 @@
         "wood_max": 5,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -1495,7 +1495,7 @@
         "wood_max": 100,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -1522,7 +1522,7 @@
         "wood_max": 5,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -1549,7 +1549,7 @@
         "wood_max": 100,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -1576,7 +1576,7 @@
         "wood_max": 5,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -1603,7 +1603,7 @@
         "wood_max": 100,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -1630,7 +1630,7 @@
         "wood_max": 5,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -1657,7 +1657,7 @@
         "wood_max": 100,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -1684,7 +1684,7 @@
         "wood_max": 5,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -1711,7 +1711,7 @@
         "wood_max": 100,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -1738,7 +1738,7 @@
         "wood_max": 5,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -1765,7 +1765,7 @@
         "wood_max": 100,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -1792,7 +1792,7 @@
         "wood_max": 5,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -1819,7 +1819,7 @@
         "wood_max": 100,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -1846,7 +1846,7 @@
         "wood_max": 5,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -1873,7 +1873,7 @@
         "wood_max": 100,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -1900,7 +1900,7 @@
         "wood_max": 5,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -1927,7 +1927,7 @@
         "wood_max": 100,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -1954,7 +1954,7 @@
         "wood_max": 5,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -1981,7 +1981,7 @@
         "wood_max": 100,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -2008,7 +2008,7 @@
         "wood_max": 5,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -2035,7 +2035,7 @@
         "wood_max": 100,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -2062,7 +2062,7 @@
         "wood_max": 5,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -2089,7 +2089,7 @@
         "wood_max": 100,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -2116,7 +2116,7 @@
         "wood_max": 5,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -2143,7 +2143,7 @@
         "wood_max": 100,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -2170,7 +2170,7 @@
         "wood_max": 5,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       }
     ]
@@ -2205,7 +2205,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -2232,7 +2232,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "5",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -2259,7 +2259,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "4",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -2286,7 +2286,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "5",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -2313,7 +2313,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "6",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -2475,7 +2475,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -2502,7 +2502,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "5",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -2529,7 +2529,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "4",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -2556,7 +2556,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "5",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -2583,7 +2583,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "6",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -2753,7 +2753,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "2",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -2780,7 +2780,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "4",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -2807,7 +2807,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "5",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -2834,7 +2834,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "4",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -2861,7 +2861,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "6",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -2915,7 +2915,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "6",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -2969,7 +2969,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "6",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -3023,7 +3023,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "2",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -3050,7 +3050,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "4",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -3077,7 +3077,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "5",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -3104,7 +3104,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "4",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -3131,7 +3131,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "6",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -3185,7 +3185,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "6",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {
@@ -3239,7 +3239,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "6",
+        "elite_drop_index": "",
         "spawn_buff": ""
       },
       {

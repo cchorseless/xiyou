@@ -65,26 +65,22 @@ export class CCPopupBG extends CCPanel<ICCPopupBG> {
     }
 
     render() {
-        return (
-            this.__root___isValid &&
-            <Panel ref={this.__root__}      {...this.initRootAttrs()} hittest={false} hittestchildren={false} >
-                <Panel className="CCTexture" />
-                {this.props.hasTitle &&
-                    <Panel className="CCTitleBG" />
-                }
-                <Panel className="CCHeaderBG" />
-                <Panel className="CCLeftTopBG" />
-                <Panel className="CCCenterTopBG" />
-                <Panel className="CCRightTopBG" />
-                <Panel className="CCLeftCenterBG" />
-                <Panel className="CCCenterCenterBG" />
-                <Panel className="CCRightCenterBG" />
-                <Panel className="CCLeftBottomBG" />
-                <Panel className="CCCenterBottomBG" />
-                <Panel className="CCRightBottomBG" />
-                {this.__root___childs}
-                {this.props.children}
-            </Panel>
+        return (<Panel ref={this.__root__} hittest={false}   {...this.initRootAttrs()}>
+            <Panel className="CCTexture" />
+            {this.props.hasTitle &&
+                <Panel className="CCTitleBG" />
+            }
+            <Panel className="CCHeaderBG" />
+            <Panel className="CCLeftTopBG" />
+            <Panel className="CCCenterTopBG" />
+            <Panel className="CCRightTopBG" />
+            <Panel className="CCLeftCenterBG" />
+            <Panel className="CCCenterCenterBG" />
+            <Panel className="CCRightCenterBG" />
+            <Panel className="CCLeftBottomBG" />
+            <Panel className="CCCenterBottomBG" />
+            <Panel className="CCRightBottomBG" />
+        </Panel>
         );
     }
 }

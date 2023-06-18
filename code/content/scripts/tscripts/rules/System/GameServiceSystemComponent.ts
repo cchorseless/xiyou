@@ -43,7 +43,7 @@ export class GameServiceSystemComponent extends GameServiceSystem {
     FinishGameModeSelection() {
         this.BeforeGameEndTime = -1;
         let iSelectedDifficulty = GameServiceConfig.EDifficultyChapter.endless;
-        const allPlayerroot = GPlayerEntityRoot.GetAllValidPlayer();
+        const allPlayerroot = GPlayerEntityRoot.GetAllOnlinePlayer();
         allPlayerroot.forEach((playerroot) => {
             const data = this.getPlayerGameSelection(playerroot.BelongPlayerid);
             if (data) {
@@ -75,11 +75,11 @@ export class GameServiceSystemComponent extends GameServiceSystem {
             const playerid = e.BelongPlayerid;
             this.initPlayerGameSelection(playerid);
             const data = this.getPlayerGameSelection(playerid);
-            data.Difficulty.MaxChapter = e.getGameRecordAsNumber(GameProtocol.ECharacterGameRecordKey.iDifficultyMaxChapter) || GameServiceConfig.EDifficultyChapter.n1;
-            data.Difficulty.MaxLevel = e.getGameRecordAsNumber(GameProtocol.ECharacterGameRecordKey.iDifficultyMaxLevel) || 0;
+            data.Difficulty.MaxChapter = e.getDifficultyChapter();
+            data.Difficulty.MaxLevel = e.getDifficultyLevel();
             data.Difficulty.Chapter = data.Difficulty.MaxChapter
             data.Difficulty.Level = data.Difficulty.MaxLevel;
-            data.Courier = e.getGameRecord(GameProtocol.ECharacterGameRecordKey.sCourierIDInUse) || GameServiceConfig.DefaultCourier;
+            data.Courier = e.getCourierInUse();
             this.SyncClient();
         }))
         EventHelper.addProtocolEvent(GameProtocol.Protocol.SelectDifficultyChapter, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
@@ -110,7 +110,7 @@ export class GameServiceSystemComponent extends GameServiceSystem {
             if (characterdata && !characterdata.IsReady) {
                 characterdata.IsReady = true;
                 let allready = true;
-                GPlayerEntityRoot.GetAllValidPlayer().forEach(player => {
+                GPlayerEntityRoot.GetAllOnlinePlayer().forEach(player => {
                     if (!this.getPlayerGameSelection(player.BelongPlayerid).IsReady) {
                         allready = false;
                     }
@@ -126,8 +126,8 @@ export class GameServiceSystemComponent extends GameServiceSystem {
         }));
 
         EventHelper.addProtocolEvent(GameProtocol.Protocol.SelectCourier, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
-            const bagcomp = GBagComponent.GetOneInstance(e.PlayerID);
-            const allcouriers = bagcomp.getAllCourierNames();
+            const DataComp = GCharacterDataComponent.GetOneInstance(e.PlayerID);
+            const allcouriers = DataComp.getAllCourierNames();
             const characterdata = this.tPlayerGameSelection[e.PlayerID + ""];
             const couriername = e.data;
             if (characterdata && couriername) {

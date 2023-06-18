@@ -902,6 +902,9 @@ export class modifier_shadow_poison_debuff extends BaseModifier_Plus {
         if (!IsServer()) {
             return;
         }
+        if (!IsValid(this.caster)) {
+            return;
+        }
         this.particle_kill_fx = ResHelper.CreateParticleEx(this.particle_kill, ParticleAttachment_t.PATTACH_ABSORIGIN, this.parent);
         ParticleManager.SetParticleControlEnt(this.particle_kill_fx, 0, this.parent, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", this.parent.GetAbsOrigin(), true);
         ParticleManager.SetParticleControlEnt(this.particle_kill_fx, 2, this.parent, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", this.parent.GetAbsOrigin(), true);

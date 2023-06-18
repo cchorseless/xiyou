@@ -65,4 +65,8 @@ export class RoundManagerComponent extends ET.Component {
         let configid = GGameServiceSystem.GetInstance().getDifficultyChapterDes() + challengetype;
         return this.RoundInfo[configid] as ERoundBoardChallenge;
     }
+
+    OnGame_End(iswin: boolean) {
+        // this.debugPauseBoardRound(true)
+    }
 }

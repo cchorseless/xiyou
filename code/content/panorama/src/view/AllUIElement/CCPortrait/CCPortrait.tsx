@@ -43,8 +43,9 @@ export class CCPortrait extends CCPanel<ICCPortrait> {
         const entityindex = Players.GetLocalPlayerPortraitUnit();
         const unitname = Entities.GetUnitName(entityindex).replace("_enemy_", "_hero_").replace("building_", "npc_dota_")
         const curwearid = Entities.GetWearableBundle(entityindex);
+        const IsNotAlive = !Entities.IsAlive(entityindex);
 
-        return (<Panel className={CSSHelper.ClassMaker("CCPortrait", { "CCEconScalePortrait": curwearid > 0 })} ref={this.__root__}  {...this.initRootAttrs()}>
+        return (<Panel className={CSSHelper.ClassMaker("CCPortrait", { "CCEconScalePortrait": curwearid > 0, "IsNotAlive": IsNotAlive })} ref={this.__root__}  {...this.initRootAttrs()}>
             {
                 curwearid > 0 ? <CCDOTAUIEconSetPreview className="CCEconPortrait" key={Math.random() * 100 + ""} unit={unitname} itemdef={curwearid} allowrotation={true} drawbackground={true} />
                     :

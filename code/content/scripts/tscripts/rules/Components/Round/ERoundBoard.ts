@@ -1,9 +1,11 @@
 import { Assert_SpawnEffect, ISpawnEffectInfo } from "../../../assert/Assert_SpawnEffect";
+import { KVHelper } from "../../../helper/KVHelper";
 import { ChessControlConfig } from "../../../shared/ChessControlConfig";
 import { GameProtocol } from "../../../shared/GameProtocol";
 import { Dota } from "../../../shared/Gen/Types";
 import { serializeETProps } from "../../../shared/lib/Entity";
 import { RoundConfig } from "../../../shared/RoundConfig";
+import { ERoundBoardResultRecord } from "../../../shared/rules/Round/ERoundBoardResultRecord";
 import { TBattleTeamRecord } from "../../../shared/service/battleteam/TBattleTeamRecord";
 import { ChessVector } from "../ChessControl/ChessVector";
 import { ERound } from "./ERound";
@@ -18,8 +20,10 @@ export class ERoundBoard extends ERound implements IRoundStateCallback {
     roundLeftTime: number = 0;
     @serializeETProps()
     readonly isWin: -1 | 0 | 1 = 0;
-    /**本轮对战的阵容实体ID */
-    readonly EnemyDBServerEntityId: string;
+    /**本轮对战的阵容实体 */
+    readonly BattleTeam: TBattleTeamRecord;
+    /**本轮参展的队伍 */
+    readonly BattleBuilding: string[] = [];
     _debug_StageStopped: boolean = false;
 
 
@@ -56,7 +60,7 @@ export class ERoundBoard extends ERound implements IRoundStateCallback {
         this.roundState = RoundConfig.ERoundBoardState.start;
         this.roundLeftTime = GameRules.GetGameTime() + delaytime;
         let playerroot = GPlayerEntityRoot.GetOneInstance(this.BelongPlayerid);
-        this.SyncClient(false);
+        this.SyncClient(true);
         playerroot.PlayerDataComp().OnRound_Start(this);
         playerroot.CourierRoot().OnRound_Start(this);
         playerroot.BuildingManager().OnRound_Start(this);
@@ -82,7 +86,11 @@ export class ERoundBoard extends ERound implements IRoundStateCallback {
         let player = GPlayerEntityRoot.GetOneInstance(this.BelongPlayerid);
         this.roundState = RoundConfig.ERoundBoardState.battle;
         this.roundLeftTime = GameRules.GetGameTime() + delaytime;
-        this.SyncClient();
+        (this.BattleBuilding as any) = [];
+        player.BuildingManager().getAllBattleBuilding(true).forEach((b) => {
+            this.BattleBuilding.push(b.ConfigID);
+        });
+        this.SyncClient(true);
         player.BuildingManager().OnRound_Battle();
         player.FakerHeroRoot().OnRound_Battle();
         let buildingCount = player.BattleUnitManagerComp().GetAllBattleUnitAlive(DOTATeam_t.DOTA_TEAM_GOODGUYS).length;
@@ -131,7 +139,8 @@ export class ERoundBoard extends ERound implements IRoundStateCallback {
         else {
             (this.isWin as any) = 0;
         }
-        this.SyncClient();
+        this.SyncClient(true);
+        this.NoticeBattleResultData(this);
         this.UploadBattleResultData(this);
         playerroot.CourierRoot().OnRound_Prize(this);
         playerroot.BuildingManager().OnRound_Prize(this);
@@ -155,7 +164,7 @@ export class ERoundBoard extends ERound implements IRoundStateCallback {
         }
         this.roundState = RoundConfig.ERoundBoardState.waiting_next;
         this.roundLeftTime = -1;
-        this.SyncClient();
+        this.SyncClient(true);
         let playerroot = GPlayerEntityRoot.GetOneInstance(this.BelongPlayerid);
         playerroot.CourierRoot().OnRound_WaitingEnd();
         playerroot.BuildingManager().OnRound_WaitingEnd();
@@ -203,14 +212,12 @@ export class ERoundBoard extends ERound implements IRoundStateCallback {
         let player = GPlayerEntityRoot.GetOneInstance(this.BelongPlayerid);
         let playerid = this.BelongPlayerid;
         // 记录一下用于数据上报
-        (this.EnemyDBServerEntityId as any) = battleteam.DBServerEntityId;
+        (this.BattleTeam as any) = battleteam;
         for (const enemyinfo of battleteam.UnitInfo) {
             let _boardVec: ChessVector = new ChessVector(
                 ChessControlConfig.Gird_Max_X - 1 - enemyinfo.PosX,
                 ChessControlConfig.Gird_Max_Y + 1 - enemyinfo.PosY,
                 playerid);
-            // GLogHelper.print(_boardVec.x, _boardVec.y);
-            // GLogHelper.print(enemyinfo.PosX, enemyinfo.PosY);
             let pos = _boardVec.getVector3();
             let enemyName = enemyinfo.UnitName;
             enemyName = enemyName.replace("_hero_", "_enemy_")
@@ -362,23 +369,100 @@ export class ERoundBoard extends ERound implements IRoundStateCallback {
         }
         return posArr;
     }
-
+    /**
+     * 通知客户端战斗结果
+     * @param round 
+     */
+    NoticeBattleResultData(round: ERoundBoard) {
+        let entity = this.AddChild(ERoundBoardResultRecord);
+        entity.configID = round.configID;
+        entity.isWin = round.isWin;
+        if (round.config.randomEnemy) {
+            entity.iBattleScoreChange = round.isWin * round.config.rankScore;
+            if (round.BattleTeam) {
+                entity.accountid = round.BattleTeam.SteamAccountId;
+                entity.enemyBattleScore = round.BattleTeam.Score;
+            }
+        }
+        else {
+            let baseenemy = round.config.enemyinfo.filter((value) => {
+                return value.enemycreatetype == GEEnum.EEnemyCreateType.None
+            })[0];
+            entity.enemyid = baseenemy.unitname;
+        }
+        // 回合奖励
+        if (round.isWin == 1) {
+            const items: { [itemconfig: string]: number } = {};
+            // 英雄经验
+            if (round.config.winPrizeHeroExp && round.config.winPrizeHeroExp > 0 && this.BattleBuilding.length > 0) {
+                entity.heroExps = entity.heroExps || {};
+                for (let heroname of this.BattleBuilding) {
+                    const itemid = GJsonConfigHelper.GetHeroExpItemConfigId(heroname);
+                    if (itemid) {
+                        entity.heroExps[heroname] = entity.heroExps[heroname] || 0;
+                        entity.heroExps[heroname] += round.config.winPrizeHeroExp;
+                        items[itemid + ""] = items[itemid + ""] || 0;
+                        items[itemid + ""] += round.config.winPrizeHeroExp;
+                    }
+                }
+            }
+            // 奖励局内道具
+            if (round.config.winPrizeItems && round.config.winPrizeItems > 0) {
+                entity.prizeItems = KVHelper.RandomItemPrizePoolGroupPrize(round.config.winPrizeItems)
+                for (let itemid in entity.prizeItems) {
+                    items[itemid + ""] = items[itemid + ""] || 0;
+                    items[itemid + ""] += entity.prizeItems[itemid + ""]
+                }
+            }
+            // 通知服务器添加道具
+            if (Object.keys(items).length > 0) {
+                const ItemDes: string[] = [];
+                for (let k in items) {
+                    ItemDes.push(`${k}|${items[k]}`)
+                }
+                const playeroot = GGameScene.GetPlayer(this.BelongPlayerid);
+                playeroot.PlayerHttpComp().Post(GameProtocol.Protocol.Add_BagItem, {
+                    AddReason: "RoundWin",
+                    ItemDes: ItemDes,
+                }, (Body: H2C_CommonResponse, response: CScriptHTTPResponse) => {
+                    GLogHelper.print(Body.Message)
+                    if (Body.Error == 0) {
+                        const message = {
+                            string_from: "lang_Module_Round_Result",
+                            message: "lang_Notification_Round_ItemPrize",
+                            player_id: this.BelongPlayerid,
+                            roundindex: "" + round.config.roundIndex,
+                            roundresult: round.isWin == 1 ? "RoundResultWin" : (round.isWin == 0 ? "RoundResultDraw" : "RoundResultLose"),
+                            item_get: "",
+                        }
+                        ItemDes.forEach(v => {
+                            message.item_get = v;
+                            GNotificationSystem.NoticeCombatMessage(message as any, this.BelongPlayerid);
+                        })
+                    }
+                    else {
+                        GNotificationSystem.ErrorMessage(Body.Message)
+                    }
+                })
+            }
+        }
+        entity.SyncClient(true)
+    }
     /**
      * 上传战斗结果数据
      */
     UploadBattleResultData(round: ERoundBoard) {
         if (!round.config.randomEnemy) { return }
-        if (round.EnemyDBServerEntityId == "-1") { return }
+        if (round.BattleTeam.DBServerEntityId == "-1") { return }
         let playeroot = GGameScene.GetPlayer(this.BelongPlayerid);
         const RoundCharpter = GGameServiceSystem.GetInstance().getDifficultyNumberDes();
         const score = round.isWin * round.config.rankScore;
         playeroot.PlayerHttpComp().Post(GameProtocol.Protocol.DrawEnemy_UploadBattleResult, {
             RoundIndex: round.config.roundIndex,
             RoundCharpter: RoundCharpter,
-            EnemyEntityId: round.EnemyDBServerEntityId,
+            EnemyEntityId: round.BattleTeam.DBServerEntityId,
             BattleScore: score,
         }, (Body: H2C_CommonResponse, response: CScriptHTTPResponse) => {
-            GLogHelper.print(Body, 1111)
             if (Body.Error == 0) {
                 GNotificationSystem.NoticeCombatMessage({
                     string_from: "lang_Module_Round_Result",
@@ -386,7 +470,7 @@ export class ERoundBoard extends ERound implements IRoundStateCallback {
                     player_id: this.BelongPlayerid,
                     roundindex: "" + round.config.roundIndex,
                     roundresult: round.isWin == 1 ? "RoundResultWin" : (round.isWin == 0 ? "RoundResultDraw" : "RoundResultLose"),
-                    scorechange: `${score}(${Body.Message})`,
+                    scorechange: `${score > 0 ? "+" : ""}${score}(${Body.Message})`,
                 });
             }
         })
@@ -426,7 +510,7 @@ export class ERoundBoard extends ERound implements IRoundStateCallback {
         if (this.isSynced) {
             return
         }
-        this.SyncClient();
+        this.SyncClient(true);
         this.isSynced = true;
         GTimerHelper.AddTimer(1, GHandler.create(this, () => {
             this.isSynced = false;
@@ -441,5 +525,6 @@ declare global {
         OnRound_Prize(round?: ERoundBoard): void;
         OnRound_WaitingEnd(): void;
         OnRound_End?(): void;
+        OnGame_End?(iswin: boolean): void;
     }
 }

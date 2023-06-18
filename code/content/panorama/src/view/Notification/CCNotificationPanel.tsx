@@ -11,6 +11,7 @@ import { CCItemImage } from "../AllUIElement/CCItem/CCItemImage";
 import { CCLabel } from "../AllUIElement/CCLabel/CCLabel";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCToastManager } from "../AllUIElement/CCTips/CCToastManager";
+import { CCShopItemIcon } from "../Shop/CCShopItemIcon";
 import "./CCNotificationPanel.less";
 
 interface ICCNotificationPanel extends NodePropsData {
@@ -69,14 +70,19 @@ export class CCNotificationPanel extends CCPanel<ICCNotificationPanel> {
                 if (key.indexOf("string_") != -1) {
                     dialogV[key] = $.Localize(value[0] == "#" ? value : ("#" + value));
                 }
-                // 物品图标
+                // 局内和局外物品图标
                 else if (key.indexOf("item_get") != -1) {
                     let sItemClass = `NotificationItem_${key}`;
                     let sLoc = ` <panel class=\"CCNotificationReRenderRoot NotificationItem ${sItemClass}\" />`;
                     dialogV[key] = sLoc;
-                    if ((value as string).includes(",")) {
-                        let tInfo = (value as string).split(",");
-                        itemInfo[sItemClass] = { itemname: tInfo[0], level: GToNumber(tInfo[1]) };
+                    if ((value as string).includes("|")) {
+                        let tInfo = (value as string).split("|");
+                        if (tInfo.length == 2) {
+                            itemInfo[sItemClass] = { itemname: tInfo[0], count: GToNumber(tInfo[1]) };
+                        }
+                        else if (tInfo.length == 3) {
+                            itemInfo[sItemClass] = { itemname: tInfo[0], count: GToNumber(tInfo[1]), level: GToNumber(tInfo[2]) };
+                        }
                     }
                     else {
                         itemInfo[sItemClass] = { itemname: value };
@@ -166,15 +172,22 @@ export class CCCombatEventPlayerIconWithName extends CCPanel<{ iPlayerID: Player
 }
 
 
-export class CCCombatEventItemIconWithName extends CCPanel<{ itemname: string, iLevel?: number }>{
+export class CCCombatEventItemIconWithName extends CCPanel<{ itemname: string, iLevel?: number, iCount?: number }>{
     render() {
         const itemname = this.props.itemname;
+        const icount = this.props.iCount || 1;
+        const isshopitem = GJSONConfig.ItemConfig.getDataMap().has(itemname as any);
         const iLevel = this.props.iLevel || -1;
         const sitemColor = Abilities.GetAbilityColor(itemname);
-        const str = "<font color='" + sitemColor + "'>[" + Abilities.GetLocalizeAbilityName(itemname) + "]</font>";
+        const itemlocname = Abilities.GetLocalizeAbilityName(itemname);
+        let str = "<font color='" + sitemColor + "'>[" + itemlocname + (icount > 1 ? `]x${icount}` : "]") + "</font>";
         return (
             <Panel className="CCNotificationImageRoot" ref={this.__root__} hittest={false} hittestchildren={false}  {...this.initRootAttrs()}>
-                <CCItemImage width="36px" height="30px" itemname={itemname} iLevel={iLevel} showtooltip={false} hittest={false} hittestchildren={false} />
+                {
+                    isshopitem ? <CCShopItemIcon width="36px" height="30px" itemid={itemname} showtooltip={false} hittest={false} hittestchildren={false} />
+                        : <CCItemImage width="36px" height="30px" itemname={itemname} iLevel={iLevel} showtooltip={false} hittest={false} hittestchildren={false} />
+
+                }
                 <Label id="ItemName" text={str} html={true} hittest={false} />
             </Panel>)
     }
@@ -202,7 +215,7 @@ interface ICCNotification {
     iPlayerID2?: PlayerID;
     dialogV?: { [k: string]: any };
     bCoin?: boolean;
-    itemInfo: { [k: string]: { itemname: string, level?: number } }
+    itemInfo: { [k: string]: { itemname: string, level?: number, count?: number } }
 }
 
 export class CCNotification extends CCPanel<ICCNotification>{
@@ -221,7 +234,7 @@ export class CCNotification extends CCPanel<ICCNotification>{
         if (this.props.itemInfo && Object.keys(this.props.itemInfo).length > 0) {
             Object.keys(this.props.itemInfo).forEach((itemcls: string) => {
                 let itemInfo = this.props.itemInfo[itemcls];
-                this.RenderItemImg(itemInfo.itemname, itemcls, itemInfo.level);
+                this.RenderItemImg(itemInfo.itemname, itemcls, itemInfo.count, itemInfo.level);
             });
         }
     }
@@ -273,7 +286,7 @@ export class CCNotification extends CCPanel<ICCNotification>{
      * @param itemName 物品名
      * @param sItemClass 根据class寻找panel
      */
-    RenderItemImg(itemName: string, sItemClass: string, iItemLevel?: number) {
+    RenderItemImg(itemName: string, sItemClass: string, iItemCount?: number, iItemLevel?: number) {
         $.Schedule(0, () => {
             let current = this.lbl_notifica.current;
             if (!(current && current.IsValid())) {
@@ -285,7 +298,7 @@ export class CCNotification extends CCPanel<ICCNotification>{
                 if (itemName.indexOf("artifact") != -1) {
                     itemIconPanel.AddClass("Artifact");
                 }
-                render(<CCCombatEventItemIconWithName itemname={itemName} iLevel={iItemLevel} />, itemIconPanel);
+                render(<CCCombatEventItemIconWithName itemname={itemName} iLevel={iItemLevel} iCount={iItemCount} />, itemIconPanel);
             });
         });
     }
