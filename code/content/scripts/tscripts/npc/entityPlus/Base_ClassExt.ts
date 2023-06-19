@@ -1932,8 +1932,24 @@ declare global {
          * @param duraiton
          */
         ApplyStunned(hAbility: IBaseAbility_Plus, hCaster: IBaseNpc_Plus, duraiton: number): IBaseModifier_Plus;
-
-
+        /**
+         * @Server
+         * 霸体
+         * @param hAbility
+         * @param hCaster
+         * @param duraiton
+         */
+        ApplyTenacity(hAbility: IBaseAbility_Plus, hCaster: IBaseNpc_Plus, duraiton: number): IBaseModifier_Plus;
+        /**
+         * @Both
+         * 是否有霸体
+         */
+        IsTenacityed(): boolean;
+        /**
+         * @Server
+         * 移除霸体效果
+         */
+        RemoveTenacityed(): void;
         /**
          * @Server
          * 混乱
@@ -2777,6 +2793,20 @@ if (IsServer()) {
             duration: stunDuration
         }) as IBaseModifier_Plus;
         ;
+    }
+    BaseNPC.ApplyTenacity = function (hAbility: IBaseAbility_Plus, hCaster: IBaseNpc_Plus, stunDuration: number) {
+        return this.AddNewModifier(hCaster, hAbility, "modifier_generic_tenacity", {
+            duration: stunDuration
+        }) as IBaseModifier_Plus;
+        ;
+    }
+    BaseNPC.IsTenacityed = function () {
+        return this.HasModifier("modifier_generic_tenacity")
+    }
+    BaseNPC.RemoveTenacityed = function () {
+        if (this.IsTenacityed()) {
+            return this.RemoveModifierByName("modifier_generic_tenacity");
+        }
     }
     BaseNPC.ApplyDaze = function (hAbility: IBaseAbility_Plus, hCaster: IBaseNpc_Plus, dazeDuration: number) {
         return this.AddNewModifier(hCaster, hAbility, "modifier_generic_daze", {

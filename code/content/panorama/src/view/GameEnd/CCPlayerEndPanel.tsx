@@ -39,7 +39,7 @@ export class CCPlayerEndPanel extends CCPanel<ICCPlayerEndPanel> {
         const difficultydes = GGameScene.GameServiceSystem.getDifficultyChapterDes();
         const round = ERoundBoard.CurRoundBoard || { config: { roundIndex: 1 } };
         const HeroManageComp = (GGameScene.Local.TCharacter.HeroManageComp!);
-        const PopUpEffect = this.GetState<boolean>("PopUpEffect") || true;
+        const PopUpEffect = this.GetState<boolean>("PopUpEffect");
         const tCharacter = GGameScene.Local.TCharacter!;
         const BattlePassComp = (GGameScene.Local.TCharacter.BattlePassComp!)!;
         const IsVip = tCharacter.IsVip();
@@ -180,7 +180,7 @@ export class CCPlayerEndPanel extends CCPanel<ICCPlayerEndPanel> {
                     {
                         Object.keys(heroExps).length > 0 && <CCPanelHeader type="Tui7" localizedStr="#英雄熟练度" horizontalAlign="center" fontSize="30px" width="400px" />
                     }
-                    <CCPanel flowChildren="right-wrap" width="600px" scroll={"y"}>
+                    <CCPanel flowChildren="right-wrap" width="700px" height="350px" scroll={"y"}>
                         {
                             Object.keys(heroExps).map((unitname, index) => {
                                 const exp = heroExps[unitname];

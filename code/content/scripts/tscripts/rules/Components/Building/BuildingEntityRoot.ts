@@ -4,6 +4,7 @@ import { ResHelper } from "../../../helper/ResHelper";
 import { modifier_courier_hut_change } from "../../../npc/abilities/courier/courier_hut_change";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { modifier_jiaoxie_wudi } from "../../../npc/modifier/battle/modifier_jiaoxie_wudi";
+import { modifier_never_death } from "../../../npc/modifier/battle/modifier_never_death";
 import { modifier_unit_freedom } from "../../../npc/modifier/battle/modifier_unit_freedom";
 import { modifier_unit_hut } from "../../../npc/modifier/battle/modifier_unit_hut";
 import { modifier_building_battle_buff } from "../../../npc/modifier/building/modifier_building_battle_buff";
@@ -224,7 +225,7 @@ export class BuildingEntityRoot extends BattleUnitEntityRoot {
             runtimeroot.BuffManagerComp().cloneRuntimeBuff(this.BuffManagerComp())
             runtimeroot.SyncClient();
             // 不死
-            // modifier_never_death.applyOnly(cloneRuntime, cloneRuntime);
+            modifier_never_death.applyOnly(cloneRuntime, cloneRuntime);
             // 跟随移动
             // modifier_follow_courier.applyOnly(cloneRuntime, cloneRuntime);
         }

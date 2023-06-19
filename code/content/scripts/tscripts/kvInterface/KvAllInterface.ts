@@ -7,6 +7,7 @@ export interface KvAllInterface  {
 "common_units": common_units.OBJ_1_1,
 "courier_units": courier_units.OBJ_1_1,
 "building_item_card": building_item_card.OBJ_1_1,
+"building_unit_boss": building_unit_boss.OBJ_1_1,
 "building_unit_tower": building_unit_tower.OBJ_1_1,
 "building_unit_enemy": building_unit_enemy.OBJ_1_1,
 "building_unit_summoned": building_unit_summoned.OBJ_1_1,
@@ -25,6 +26,7 @@ export const KvAllPath = {
 "common_units": "scripts/npc/units/common_units.kv",
 "courier_units": "scripts/npc/units/courier_units.kv",
 "building_item_card": "scripts/npc/building/building_item_card.kv",
+"building_unit_boss": "scripts/npc/building/building_unit_boss.kv",
 "building_unit_tower": "scripts/npc/building/building_unit_tower.kv",
 "building_unit_enemy": "scripts/npc/building/building_unit_enemy.kv",
 "building_unit_summoned": "scripts/npc/building/building_unit_summoned.kv",
@@ -43,6 +45,7 @@ export interface KvServerInterface   {
 "common_units": common_units.OBJ_1_1,
 "courier_units": courier_units.OBJ_1_1,
 "building_item_card": building_item_card.OBJ_1_1,
+"building_unit_boss": building_unit_boss.OBJ_1_1,
 "building_unit_tower": building_unit_tower.OBJ_1_1,
 "building_unit_enemy": building_unit_enemy.OBJ_1_1,
 "building_unit_summoned": building_unit_summoned.OBJ_1_1,
@@ -61,6 +64,7 @@ export const KvServer = {
 "common_units": "scripts/npc/units/common_units.kv",
 "courier_units": "scripts/npc/units/courier_units.kv",
 "building_item_card": "scripts/npc/building/building_item_card.kv",
+"building_unit_boss": "scripts/npc/building/building_unit_boss.kv",
 "building_unit_tower": "scripts/npc/building/building_unit_tower.kv",
 "building_unit_enemy": "scripts/npc/building/building_unit_enemy.kv",
 "building_unit_summoned": "scripts/npc/building/building_unit_summoned.kv",
@@ -79,6 +83,7 @@ export interface KvClientInterface   {
 "common_units": common_units.OBJ_1_1,
 "courier_units": courier_units.OBJ_1_1,
 "building_item_card": building_item_card.OBJ_1_1,
+"building_unit_boss": building_unit_boss.OBJ_1_1,
 "building_unit_tower": building_unit_tower.OBJ_1_1,
 "building_unit_enemy": building_unit_enemy.OBJ_1_1,
 "building_unit_summoned": building_unit_summoned.OBJ_1_1,
@@ -97,6 +102,7 @@ export const KvClient = {
 "common_units": "scripts/npc/units/common_units.kv",
 "courier_units": "scripts/npc/units/courier_units.kv",
 "building_item_card": "scripts/npc/building/building_item_card.kv",
+"building_unit_boss": "scripts/npc/building/building_unit_boss.kv",
 "building_unit_tower": "scripts/npc/building/building_unit_tower.kv",
 "building_unit_enemy": "scripts/npc/building/building_unit_enemy.kv",
 "building_unit_summoned": "scripts/npc/building/building_unit_summoned.kv",
@@ -111,5 +117,5 @@ export const allAbilitys = ["courier_abilities","imba_abilities","building_abili
 export type KV_Abilitys = courier_abilities.OBJ_1_1|imba_abilities.OBJ_1_1|building_ability_tower.OBJ_1_1;
 export const allItems = ["building_item_card","imba_items","artifact_items","imba_item_recipes"];
 export type KV_Items = building_item_card.OBJ_1_1|imba_items.OBJ_1_1|artifact_items.OBJ_1_1|imba_item_recipes.OBJ_1_1;
-export const allUnits = ["building_unit_enemy","building_unit_tower","building_unit_summoned","common_units"];
-export type KV_Units = building_unit_enemy.OBJ_1_1|building_unit_tower.OBJ_1_1|building_unit_summoned.OBJ_1_1|common_units.OBJ_1_1;
+export const allUnits = ["building_unit_enemy","building_unit_tower","building_unit_summoned","building_unit_boss","common_units"];
+export type KV_Units = building_unit_enemy.OBJ_1_1|building_unit_tower.OBJ_1_1|building_unit_summoned.OBJ_1_1|building_unit_boss.OBJ_1_1|common_units.OBJ_1_1;

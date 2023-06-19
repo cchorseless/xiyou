@@ -1,0 +1,82 @@
+
+declare namespace building_unit_boss { 
+ interface OBJ_0_1 {
+"building_unit_boss" :OBJ_1_1 ,
+}
+ interface OBJ_1_1 {
+"building_boss_kingkong" :OBJ_2_1 ,
+"building_boss_knight" :OBJ_2_1 ,
+"building_boss_sand_king" :OBJ_2_1 ,
+"building_boss_jakiro" :OBJ_2_1 ,
+"building_boss_nian" :OBJ_2_1 ,
+"building_boss_tidehunter" :OBJ_2_1 ,
+"building_boss_skywrath" :OBJ_2_1 ,
+"building_boss_vengeful" :OBJ_2_1 ,
+[k:string] : OBJ_2_1 }
+ interface OBJ_2_1 {
+"UnitLabel" :string ,
+"vscripts" :string ,
+"BaseClass" :string ,
+"Model" :string ,
+"ModelScale" :string ,
+"MinimapIcon" :string ,
+"MinimapIconSize" :string ,
+"VisionDaytimeRange" :string ,
+"VisionNighttimeRange" :string ,
+"SoundSet" :string ,
+"BoundsHullName" :string ,
+"BoundsHullRadius" :string ,
+"GameSoundsFile" :string ,
+"VoiceFile" :string ,
+"Ability1" :string ,
+"Ability2" :string ,
+"Ability3" :string ,
+"Ability4" :string ,
+"Ability5" :string ,
+"Ability6" :string ,
+"Ability7" :string ,
+"Ability8" :string ,
+"AbilityLayout" :string ,
+"HealthBarOffset" :string ,
+"MovementSpeed" :string ,
+"MovementCapabilities" :string ,
+"MovementTurnRate" :string ,
+"HasAggressiveStance" :string ,
+"ArmorPhysical" :string ,
+"ArmorMagical" :string ,
+"StatusHealth" :string ,
+"StatusHealthRegen" :string ,
+"StatusMana" :string ,
+"StatusManaRegen" :string ,
+"AttackCapabilities" :string ,
+"AttackDamage" :string ,
+"AttackRate" :string ,
+"AttackAnimationPoint" :string ,
+"AttackRange" :string ,
+"AttackAcquisitionRange" :string ,
+"AttributePrimary" :string ,
+"HasInventory" :string ,
+"ConsideredHero" :string ,
+"RingRadius" :string ,
+"CombatClassAttack" :string ,
+"CombatClassDefend" :string ,
+"Creature" :OBJ_3_1 ,
+"IsValid" :string ,
+"ProjectileModel" :string ,
+"ProjectileSpeed" :string ,
+[k:string] : string | OBJ_3_1 }
+ interface OBJ_3_1 {
+"AttachWearables" :OBJ_4_1 ,
+[k:string] : OBJ_4_1 }
+ interface OBJ_4_1 {
+"1" :OBJ_5_1 ,
+"2" :OBJ_5_1 ,
+"3" :OBJ_5_1 ,
+"4" :OBJ_5_1 ,
+"5" :OBJ_5_1 ,
+"6" :OBJ_5_1 ,
+[k:string] : OBJ_5_1 }
+ interface OBJ_5_1 {
+"ItemDef" :string ,
+[k:string] : string }
+}

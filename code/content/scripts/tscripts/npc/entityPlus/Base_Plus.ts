@@ -289,6 +289,16 @@ export class BaseModifier {
     public BeRemoved?(): void;
     public BeDestroy?(): void;
     /**
+     * @Server 在Server端返回需要传递的数据
+     */
+    public AddCustomTransmitterData?(): void;
+    /**
+     * @Client 在Client端接受传递过来的数据（会被像nettable一样处理）
+     */
+    public HandleCustomTransmitterData?(tData: any): void;
+
+
+    /**
      * modifier_property 注册方法的补充
      * @returns 
      */

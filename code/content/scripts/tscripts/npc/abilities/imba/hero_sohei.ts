@@ -383,10 +383,10 @@ export class modifier_sohei_wholeness_of_body_status extends BaseModifier_Plus {
     }
     return Object.values(funcs);
     } */
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATUS_RESISTANCE)
-    CC_GetModifierStatusResistance(): number {
-        return this.status_resistance;
-    }
+    // @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATUS_RESISTANCE)
+    // CC_GetModifierStatusResistance(): number {
+    //     return this.status_resistance;
+    // }
     @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(params: ModifierInstanceEvent): void {
         if (params.unit == this.GetParentPlus()) {

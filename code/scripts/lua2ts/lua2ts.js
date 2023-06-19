@@ -237,7 +237,7 @@ function todota2ts(content) {
     content = content.replace(/\bFindUnitsInRadiusByModifierName\(/g, "AoiHelper.FindUnitsInRadiusByModifierName(");
     content = content.replace(/\bGetAOEMostTargetsPosition\(/g, "AoiHelper.GetAOEMostTargetsPosition(");
     content = content.replace(/\bAssetModifiers./g, "ResHelper.");
-    content = content.replace(/\bApplyDamage/g, "BattleHelper.GoApplyDamage");
+    // content = content.replace(/\bApplyDamage/g, "GoApplyDamage");
     content = content.replace(/GetAbilitySpecialValueFor/g, "GetSpecialValueFor");
     content = content.replace(/\.GetParent\(\)/g, ".GetParentPlus()");
     content = content.replace(/\.GetCaster\(\)/g, ".GetCasterPlus()");
@@ -248,10 +248,10 @@ function todota2ts(content) {
     content = content.replace(/FIND_CLOSEST/g, "FindOrder.FIND_CLOSEST");
     content = content.replace(/FIND_FARTHEST/g, "FindOrder.FIND_FARTHEST");
     content = content.replace(/GetValidTalentValue/g, "GetTalentValue");
-    content = content.replace(/\(params\)/g, "(params: ModifierTable)");
-    content = content.replace(/\bMODIFIER_PROPERTY_/g, "@registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.");
+    content = content.replace(/\(params\)/g, "(params: IModifierTable)");
+    content = content.replace(/\bMODIFIER_PROPERTY_/g, "@registerProp(PropertyConfig.EMODIFIER_PROPERTY.");
     content = content.replace(/\MODIFIER_EVENT_/g, "@registerEvent(Enum_MODIFIER_EVENT.");
-    content = content.replace(/\bEOM_MODIFIER_PROPERTY_/g, "@registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.");
+    content = content.replace(/\bEOM_MODIFIER_PROPERTY_/g, "@registerProp(PropertyConfig.EMODIFIER_PROPERTY.");
     content = content.replace(/\bGetModifier/g, "Get");
     content = content.replace(/\bUF_SUCCESS/g, " UnitFilterResult.UF_SUCCESS");
     content = content.replace(/\bLOCAL_PARTICLE_MODIFIER_DURATION/g, " BaseModifier_Plus.LOCAL_PARTICLE_MODIFIER_DURATION");
@@ -290,11 +290,11 @@ function todota2ts(content) {
             return ss[1] + "modifierstate.MODIFIER_STATE_"
         }
     );
-    content = content.replace(/([^\.])IsValid\(/g,
-        (...ss) => {
-            return ss[1] + "GameFunc.IsValid("
-        }
-    );
+    // content = content.replace(/([^\.])IsValid\(/g,
+    //     (...ss) => {
+    //         return ss[1] + "GameFunc.IsValid("
+    //     }
+    // );
     content = content.replace(/([^\.])IsValidTalent\(/g,
         (...ss) => {
             return ss[1] + "EntityHelper.HasTalent("
@@ -312,7 +312,7 @@ function todota2ts(content) {
     );
     content = content.replace(/([^\.])EOM_DAMAGE_FLAG_/g,
         (...ss) => {
-            return ss[1] + "BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_"
+            return ss[1] + "EBATTLE_DAMAGE_FLAGS.DAMAGE_FLAG_"
         }
     );
     content = content.replace(/([^\.])DOTA_DAMAGE_FLAG_/g,
@@ -332,7 +332,7 @@ function todota2ts(content) {
     );
     content = content.replace(/([^\.])ATTACK_STATE_/g,
         (...ss) => {
-            return ss[1] + "BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_"
+            return ss[1] + "EBATTLE_ATTACK_STATE.ATTACK_STATE_"
         }
     );
     content = content.replace(/([^\.])DOTA_ABILITY_BEHAVIOR_/g,

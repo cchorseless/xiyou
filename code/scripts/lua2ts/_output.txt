@@ -1,279 +1,223 @@
-//  额外基础攻击力
-function GetBaseBonusDamage(hUnit, tParams)
-	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.BASEATTACK_BONUSDAMAGE, tParams)
+LinkLuaModifier("modifier_kingkong_8", "abilities/boss/kingkong_8.lua", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_kingkong_8_rush", "abilities/boss/kingkong_8.lua", LUA_MODIFIER_MOTION_HORIZONTAL)
+// Abilities
+if ( kingkong_8 == null ) {
+	kingkong_8 = class({})
 }
-//  物理防御
-function GetBasePhysicalArmor(hUnit)
-	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PHYSICAL_ARMOR_BASE)
-}
-function GetBonusPhysicalArmor(hUnit)
-	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS)
-}
-function GetBasePhysicalArmorPercentage(hUnit)
-	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PHYSICAL_ARMOR_BASE_PERCENTAGE)
-}
-function GetPhysicalArmorPercentage(hUnit)
-	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PHYSICAL_ARMOR_PERCENTAGE)
-}
-function GetPhysicalArmor(hUnit)
-	let fTotalPercent = GetPhysicalArmorPercentage(hUnit) * 0.01 //  不要调用两遍
-	return GetBasePhysicalArmor(hUnit) * (1 + GetBasePhysicalArmorPercentage(hUnit) * 0.01 + fTotalPercent) + GetBonusPhysicalArmor(hUnit) * (1 + fTotalPercent)
-}
-function GetIgnorePhysicalArmorPercentage(hUnit, tParams)
-	return SubtractionMultiplicationPercentage(GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.IGNORE_PHYSICAL_ARMOR_PERCENTAGE, tParams), GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.IGNORE_PHYSICAL_ARMOR_PERCENTAGE_UNIQUE, tParams))
-}
-function GetIgnorePhysicalArmorPercentageTarget(hUnit, tParams)
-	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.IGNORE_PHYSICAL_ARMOR_PERCENTAGE_TARGET, tParams)
-}
-function GetPhysicalReduction(hUnit, tParams)
-	let fValue = GetPhysicalArmor(hUnit)
-	//  负甲的时候不计算无视护甲
-	if ( fValue > 0 ) {
-		let fIgnore = GetIgnorePhysicalArmorPercentageTarget(hUnit, tParams) //  自身被百分比无视护甲
-		if ( tParams && GameFunc.IsValid(tParams.attacker) ) {
-			fValue = math.max(0, fValue - GetProperty(tParams.attacker, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.IGNORE_PHYSICAL_ARMOR_CONSTANT, tParams))
-			fIgnore = SubtractionMultiplicationPercentage(fIgnore, GetIgnorePhysicalArmorPercentage(tParams.attacker, tParams))
+ OnAbilityPhaseStart() {
+	let hCaster = this.GetCasterPlus()
+	let vCasterLoc = hCaster.GetAbsOrigin()
+	//  播放动作
+	hCaster.StartGestureWithPlaybackRate(GameActivity_t.ACT_DOTA_DEFEAT, 2)
+	if ( IsServer() ) {
+		//  播放伤害预警
+		let flDistance = this.GetSpecialValueFor("distance")
+		let flRadius = this.GetSpecialValueFor("radius")
+		let vForward = hCaster.GetForwardVector()
+		let tPosition = {
+			vCasterLoc + Rotation2D(vForward, math.rad(0)) * flDistance,
+			vCasterLoc + Rotation2D(vForward, math.rad(90)) * flDistance,
+			vCasterLoc + Rotation2D(vForward, math.rad(180)) * flDistance,
+			vCasterLoc + Rotation2D(vForward, math.rad(270)) * flDistance,
 		}
-		fValue = fValue - math.max(fValue * fIgnore * 0.01, 0)
-	}
-	return PHYSICAL_ARMOR_FACTOR * fValue / (1 + PHYSICAL_ARMOR_FACTOR * math.abs(fValue))
-}
-//  魔法防御
-function GetBaseMagicalArmor(hUnit)
-	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MAGICAL_ARMOR_BASE)
-}
-function GetBonusMagicalArmor(hUnit)
-	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MAGICAL_ARMOR_BONUS)
-}
-function GetBaseMagicalArmorPercentage(hUnit)
-	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MAGICAL_ARMOR_BASE_PERCENTAGE)
-}
-function GetMagicalArmorPercentage(hUnit)
-	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MAGICAL_ARMOR_PERCENTAGE)
-}
-function GetMagicalArmor(hUnit)
-	return GetBaseMagicalArmor(hUnit) * (1 + GetBaseMagicalArmorPercentage(hUnit) * 0.01 + GetMagicalArmorPercentage(hUnit) * 0.01) + GetBonusMagicalArmor(hUnit) * (1 + GetMagicalArmorPercentage(hUnit) * 0.01)
-}
-function GetIgnoreMagicalArmorPercentage(hUnit, tParams)
-	return SubtractionMultiplicationPercentage(GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.IGNORE_MAGICAL_ARMOR_PERCENTAGE, tParams), GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.IGNORE_MAGICAL_ARMOR_PERCENTAGE_UNIQUE, tParams))
-}
-function GetIgnoreMagicalArmorConstant(hUnit, tParams)
-	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.IGNORE_MAGICAL_ARMOR_CONSTANT, tParams)
-}
-function GetIgnoreMagicalArmorPercentageTarget(hUnit, tParams)
-	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.IGNORE_MAGICAL_ARMOR_PERCENTAGE_TARGET, tParams)
-}
-function GetMagicalReduction(hUnit, tParams)
-	let fValue = GetMagicalArmor(hUnit)
-	//  负甲的时候不计算无视护甲
-	if ( fValue > 0 ) {
-		let fIgnore = GetIgnoreMagicalArmorPercentageTarget(hUnit, tParams) //  自身的被百分比无视护甲
-		if ( tParams && GameFunc.IsValid(tParams.attacker) ) {
-			fValue = fValue - math.min(GetIgnoreMagicalArmorConstant(tParams.attacker, tParams), fValue)
-			fIgnore = SubtractionMultiplicationPercentage(fIgnore, GetIgnoreMagicalArmorPercentage(tParams.attacker, tParams))
+		this.tParticleID = {}
+		for (let i = 1; i <= tPosition.length ; i++) {
+			let iParticleID = ParticleManager.CreateParticle("particles/units/boss/damage_line.vpcf", ParticleAttachment_t.PATTACH_CUSTOMORIGIN, null)
+			ParticleManager.SetParticleControl(iParticleID, 0, vCasterLoc)
+			ParticleManager.SetParticleControl(iParticleID, 1, tPosition[i])
+			ParticleManager.SetParticleControl(iParticleID, 2, Vector(flRadius, 0, 0))
+			table.insert(this.tParticleID, iParticleID)
 		}
-		fValue = fValue - math.max(fValue * fIgnore * 0.01, 0)
+		this.hModifier = hCaster.AddBuff(hCaster, BUFF_TYPE.TENACITY, this.GetCastPoint())
 	}
+	return true
+}
+ OnAbilityPhaseInterrupted() {
+	//  清空特效
+	for (let iParticleID of ( this.tParticleID)) {
+	 
 
-	return MAGICAL_ARMOR_FACTOR * fValue / (1 + MAGICAL_ARMOR_FACTOR * math.abs(fValue))
+		ParticleManager.DestroyParticle(iParticleID, false)
+	}
+	this.GetCasterPlus().FadeGesture(GameActivity_t.ACT_DOTA_DEFEAT)
 }
-//  技能增强
-function GetBaseSpellAmplify(hUnit, tParams)
-	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.SPELL_AMPLIFY_BASE, tParams)
+ OnSpellStart() {
+	//  清空特效
+	for (let iParticleID of ( this.tParticleID)) {
+	 
+
+		ParticleManager.DestroyParticle(iParticleID, false)
+	}
+	this.GetCasterPlus().FadeGesture(GameActivity_t.ACT_DOTA_DEFEAT)
+	let hCaster = this.GetCasterPlus()
+	let vPosition = this.GetCursorPosition()
+
+	let vCasterLoc = hCaster.GetAbsOrigin()
+	let vForward = hCaster.GetForwardVector()
+	let flDistance = this.GetSpecialValueFor("distance")
+	let tPosition = {
+		vCasterLoc + Rotation2D(vForward, math.rad(0)) * flDistance,
+		vCasterLoc + Rotation2D(vForward, math.rad(90)) * flDistance,
+		vCasterLoc + Rotation2D(vForward, math.rad(180)) * flDistance,
+		vCasterLoc + Rotation2D(vForward, math.rad(270)) * flDistance,
+	}
+	for (let i = 1; i <= tPosition.length ; i++) {
+		let hIllusion = CreateUnitByName(hCaster.GetUnitName(), vCasterLoc, false, hCaster, hCaster, hCaster.GetTeamNumber())
+		hIllusion.SetForwardVector((tPosition[i] - vCasterLoc).Normalized())
+		hIllusion.MakeIllusion()
+		hIllusion.AddNewModifier(hCaster, this, "modifier_kingkong_8_rush", { vPosX = tPosition[i].x, vPosY = tPosition[i].y })
+	}
+	hCaster.EmitSound("Hero_Magnataur.Skewer.Cast")
 }
-function GetBonusSpellAmplify(hUnit, tParams)
-	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.SPELL_AMPLIFY_BONUS, tParams)
+ GetIntrinsicModifierName() {
+	return "modifier_kingkong_8"
 }
-function GetBonusSpellAmplifyUnique(hUnit, tParams)
-	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.SPELL_AMPLIFY_BONUS_UNIQUE, tParams)
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
+// Modifiers
+if ( modifier_kingkong_8 == null ) {
+@registerModifier()
+export class 	modifier_kingkong_8 extends BaseModifier_Plus {
 }
-function GetSpellAmplify(hUnit, tParams)
-	return GetBaseSpellAmplify(hUnit, tParams) + GetBonusSpellAmplify(hUnit, tParams) + GetBonusSpellAmplifyUnique(hUnit, tParams)
+ IsHidden() {
+	return true
 }
-//  生命值
-function GetHealthBonus(hUnit)
-	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.HEALTH_BONUS)
+ OnCreated(params: IModifierTable) {
+	this.trigger_time = this.GetSpecialValueFor("trigger_time")
+	if ( IsServer() ) {
+		this.StartIntervalThink(this.trigger_time)
+	}
 }
-function GetHealthPercentage(hUnit)
-	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.HEALTH_PERCENTAGE)
+ EDeclareFunctions() {
+	return {
+		@registerEvent(Enum_MODIFIER_EVENT.ON_DEATH
+	}
 }
-function GetHealthPercentageEnemy(hUnit)
-	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.HEALTH_PERCENT_ENEMY)
+ OnDeath(params: IModifierTable) {
+	if ( IsServer() && params.unit.IsFriendly(this.GetParentPlus()) == false ) {
+		this.StartIntervalThink(this.trigger_time)
+	}
 }
-//  生命恢复
-function GetHealthRegen(hUnit)
-	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.HEALTH_REGEN_CONSTANT)
+ OnIntervalThink() {
+	let hParent = this.GetParentPlus()
+	if ( this.GetParentPlus().IsAbilityReady(this.GetAbilityPlus()) ) {
+		ExecuteOrderFromTable({
+			UnitIndex : this.GetParentPlus().entindex(),
+			OrderType : dotaunitorder_t.DOTA_UNIT_ORDER_CAST_POSITION,
+			AbilityIndex : this.GetAbilityPlus().entindex(),
+			Position : this.GetParentPlus().GetAbsOrigin() + this.GetParentPlus().GetForwardVector()
+		})
+	}
 }
-//  魔法值
-function GetManaBonus(hUnit)
-	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MANA_BONUS)
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
+if ( modifier_kingkong_8_rush == null ) {
+	modifier_kingkong_8_rush = class({}, null, HorizontalModifier)
 }
-function GetManaPercentage(hUnit)
-	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MANA_PERCENTAGE)
+ GetEffectAttachType() {
+	return ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW
 }
-function GetBaseMana(hUnit)
-	let fValue = 0
-	if ( hUnit != null ) {
-		if ( GameFunc.IsValid(hUnit) && hUnit._StatusMana == null ) {
-			let sUnitName = hUnit.GetUnitName()
-			let tData = hUnit.IsHero() && KeyValues.HeroesKv[sUnitName] || KeyValues.UnitsKv[sUnitName]
-			if ( tData ) {
-				hUnit._StatusMana = tonumber(tData.StatusMana) || 0
+ GetPriority() {
+	return DOTA_MOTION_CONTROLLER_PRIORITY_HIGHEST
+}
+ OnCreated(params: IModifierTable) {
+	if ( IsServer() ) {
+		if ( !this.ApplyHorizontalMotionController() ) {
+			this.Destroy()
+			return
+		}
+		this.distance = this.GetSpecialValueFor('distance')
+		this.fSpeed = this.GetSpecialValueFor('speed')
+		this.vS = this.GetParentPlus().GetAbsOrigin()
+		this.vV = (Vector(params.vPosX, params.vPosY, 0) - this.vS).Normalized() * this.fSpeed
+		this.radius = this.GetSpecialValueFor('radius')
+		this.impact_damage = this.GetSpecialValueFor("damage")
+		this.knockback_duration = this.GetSpecialValueFor("knockback_duration")
+		this.knockback_distance = this.GetSpecialValueFor("knockback_distance")
+		this.knockback_height = this.GetSpecialValueFor("knockback_height")
+		this.tTargets = {}
+	} else {
+		let iParticleID = ParticleManager.CreateParticle("particles/units/boss/kingkong/kingkong_6.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetParentPlus())
+		this.AddParticle(iParticleID, false, false, -1, false, false)
+		let iParticleID = ParticleManager.CreateParticle("particles/units/boss/kingkong/kingkong_6_rush.vpcf", ParticleAttachment_t.PATTACH_CENTER_FOLLOW, this.GetParentPlus())
+		this.AddParticle(iParticleID, false, false, -1, false, false)
+	}
+}
+ OnDestroy(params: IModifierTable) {
+	if ( IsServer() ) {
+		this.GetParentPlus().RemoveHorizontalMotionController(this)
+		for (let hUnit of ( this.tTargets )) {
+
+			if ( IsValid(hUnit) ) {
+				FindClearSpaceForUnit(hUnit, hUnit.GetAbsOrigin(), true)
 			}
 		}
-		if ( hUnit._StatusMana != null ) {
-			fValue = hUnit._StatusMana
+		if ( this.GetParentPlus().IsIllusion() ) {
+			this.GetParentPlus().AddNoDraw()
+			this.GetParentPlus().ForceKill(false)
 		}
 	}
-	return fValue
 }
-function GetTotalManaBonus(hUnit)
-	let fPercent = GetManaPercentage(hUnit) * 0.01
-	return GetManaBonus(hUnit) * (1 + fPercent) + GetBaseMana(hUnit) * fPercent
-}
-//  魔法恢复
-function GetManaRegen(hUnit)
-	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MANA_REGEN_CONSTANT) + GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MANA_REGEN_CONSTANT_UNIQUE)
-}
+ UpdateHorizontalMotion(me:BaseNpc_Plus, dt:number) {
+	if ( IsServer() ) {
+		let vPos = this.vV * dt + this.GetParentPlus().GetAbsOrigin()
+		let fDis = (vPos - this.vS).Length2D()
+		if ( fDis > this.distance || GridNav.CanFindPath(this.GetParentPlus().GetAbsOrigin(), vPos) == false ) {
+			fDis = this.distance
+		}
+		me.SetAbsOrigin(vPos)
 
-function GetManaRegenAmplify(hUnit, params)
-	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MP_REGEN_AMPLIFY_PERCENTAGE, params)
-}
+		let tTargets = FindUnitsInRadius(me.GetTeamNumber(), vPos, null, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false)
+		for (let hUnit of ( tTargets )) {
 
-function GetManaRegenTotal(hUnit)
-	return (hUnit.GetStatusManaRegen() + GetManaRegen(hUnit)) * (1 + GetManaRegenAmplify(hUnit) / 100)
-}
-//  状态抗性
-function GetStatusResistanceStack(hUnit)
-	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.STATUS_RESISTANCE_STACKING)
-}
-function GetStatusResistanceUnique(hUnit)
-	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.STATUS_RESISTANCE_UNIQUE)
-}
-function GetStatusResistance(hUnit)
-	return (1 - (1 - GetStatusResistanceStack(hUnit) * 0.01) * (1 - GetStatusResistanceUnique(hUnit) * 0.01)) * 100
-}
-function GetStatusResistanceCaster(hUnit)
-	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.STATUS_RESISTANCE_CASTER)
-}
-//  闪避
-function GetEvasion(hUnit, tParams)
-	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.EVASION_CONSTANT, tParams)
-}
-//  技能闪避
-function GetSpellEvasion(hUnit, tParams)
-	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.SPELL_EVASION, tParams)
-}
-//  冷却减少
-function GetCooldownReduction(hUnit, tParams)
-	let cd_reduction = GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.COOLDOWN_PERCENTAGE, tParams)
-	let max_cd_reduction = GetMaxCooldownReduction(hUnit, tParams)
-	if ( max_cd_reduction > 0 && max_cd_reduction < cd_reduction ) {
-		return max_cd_reduction
+			if ( TableFindKey(this.tTargets, hUnit) == null ) {
+				table.insert(this.tTargets, hUnit)
+				let tDamageInfo = {
+					attacker : this.GetCasterPlus(),
+					victim : hUnit,
+					ability : this.GetAbilityPlus(),
+					damage : this.impact_damage,
+					damage_type : this.GetAbilityPlus().GetAbilityDamageType()
+				}
+				ApplyDamage(tDamageInfo)
+
+				me.KnockBack(me.GetAbsOrigin(), hUnit, this.knockback_distance, this.knockback_height, this.knockback_duration, true)
+				let iParticleID = ParticleManager.CreateParticle("particles/units/heroes/hero_spirit_breaker/spirit_breaker_greater_bash.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, hUnit)
+				this.AddParticle(iParticleID, false, false, -1, false, false)
+			}
+		}
+
+		if ( fDis == this.distance ) {
+			this.Destroy()
+		}
 	}
-	return cd_reduction
 }
-function GetMaxCooldownReduction(hUnit, tParams)
-	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MAX_COOLDOWN_PERCENTAGE, tParams)
-}
-//  物理暴击
-function GetCriticalStrikeChance(hUnit, tParams)
-	if ( GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.NO_CRITICALSTRIKE, tParams) >= 1 ) {
-		return 0
+ OnHorizontalMotionInterrupted() {
+	if ( IsServer() ) {
+		this.Destroy()
 	}
-	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.CRITICALSTRIKE_CHANCE, tParams) + BASE_ATTACK_CRITICALSTRIKE_CHANCE
 }
-//  物理暴击伤害
-function GetCriticalStrikeDamage(hUnit, tParams)
-	let fDamage = BASE_ATTACK_CRITICALSTRIKE_DAMAGE + GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.CRITICALSTRIKE_DAMAGE, tParams)
-	if ( tParams && GameFunc.IsValid(tParams.target) ) {
-		fDamage = fDamage + GetProperty(tParams.target, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_CRITICALSTRIKE_DAMAGE_CONSTANT, tParams)
+ DeclareFunctions() {
+	return {
+		@registerProp(PropertyConfig.EMODIFIER_PROPERTY.OVERRIDE_ANIMATION,
+		@registerProp(PropertyConfig.EMODIFIER_PROPERTY.OVERRIDE_ANIMATION_RATE,
+		@registerProp(PropertyConfig.EMODIFIER_PROPERTY.TRANSLATE_ACTIVITY_MODIFIERS
 	}
-	let fPercent = GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.CRITICALSTRIKE_DAMAGE_TOTAL, tParams)
-	return fDamage * (1 + fPercent / 100)
 }
-// 物理暴击时技能暴击补偿
-function GetCriticalStrikeDamage_Mix(hUnit, tParams)
-	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.CRITICALSTRIKE_MIX_PERCENT, tParams) * 0.01  * GetSpellCriticalStrikeDamage(hUnit, tParams)
+ GetOverrideAnimation(params: IModifierTable) {
+	return GameActivity_t.ACT_DOTA_RUN
 }
-//  技能暴击概率
-function GetSpellCriticalStrikeChance(hUnit, tParams)
-	if ( GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.NO_SPELL_CRITICALSTRIKE, tParams) >= 1 ) {
-		return 0
+ GetOverrideAnimationRate(params: IModifierTable) {
+	return 2.5
+}
+ GetActivityTranslationModifiers(params: IModifierTable) {
+	return "haste"
+}
+ CheckState() {
+	return {
+		[modifierstate.MODIFIER_STATE_STUNNED] : true,
+		[modifierstate.MODIFIER_STATE_NO_HEALTH_BAR] : true,
+		[modifierstate.MODIFIER_STATE_INVULNERABLE] : true,
+		[modifierstate.MODIFIER_STATE_OUT_OF_GAME] : true,
+		[modifierstate.MODIFIER_STATE_UNSELECTABLE] : true,
+		[modifierstate.MODIFIER_STATE_UNTARGETABLE] : true,
 	}
-	let fChance = GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.SPELL_CRITICALSTRIKE_CHANCE, tParams) + BASE_SPELL_CRITICALSTRIKE_CHANCE
-	if ( tParams && GameFunc.IsValid(tParams.target) ) {
-		fChance = fChance + GetProperty(tParams.target, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.SPELL_CRITICALSTRIKE_CHANCE_TARGET, tParams)
-	}
-	return fChance
-}
-//  技能暴击伤害
-function GetSpellCriticalStrikeDamage(hUnit, tParams)
-	let fDamage = BASE_SPELL_CRITICALSTRIKE_DAMAGE + GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.SPELL_CRITICALSTRIKE_DAMAGE)
-	if ( tParams && GameFunc.IsValid(tParams.target) ) {
-		fDamage = fDamage + GetProperty(tParams.target, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_SPELL_CRITICALSTRIKE_DAMAGE_CONSTANT, tParams)
-	}
-	let fPercent = GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.SPELL_CRITICALSTRIKE_DAMAGE_TOTAL, tParams)
-	return fDamage * (1 + fPercent / 100)
-}
-// 技能暴击时物理暴击补偿
-function GetSpellCriticalStrikeDamage_Mix(hUnit, tParams)
-	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.SPELL_CRITICALSTRIKE_MIX_PERCENT, tParams) * 0.01  * GetCriticalStrikeDamage(hUnit, tParams)
-}
-//  最大攻击速度
-function GetBonusMaximumAttackSpeed(hUnit)
-	if ( GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS_UNABLE) >= 1 ) {
-		return 0
-	}
-	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
-}
-function GetMaximumAttackSpeed(hUnit)
-	return GetBonusMaximumAttackSpeed(hUnit) + MAXIMUM_ATTACK_SPEED
-}
-function GetOutgoingDamagePercent(hUnit, tParams)
-	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE, tParams)
-}
-function GetOutgoingPhysicalDamagePercent(hUnit, tParams)
-	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OUTGOING_PHYSICAL_DAMAGE_PERCENTAGE, tParams)
-}
-function GetOutgoingMagicalDamagePercent(hUnit, tParams)
-	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OUTGOING_MAGICAL_DAMAGE_PERCENTAGE, tParams)
-}
-function GetOutgoingPureDamagePercent(hUnit, tParams)
-	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OUTGOING_PURE_DAMAGE_PERCENTAGE, tParams)
-}
-//  受到的伤害
-function GetIncomingDamagePercent(hUnit, tParams)
-	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE, tParams)
-}
-function GetIncomingPhysicalDamagePercent(hUnit, tParams)
-	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_PHYSICAL_DAMAGE_PERCENTAGE, tParams)
-}
-function GetIncomingMagicalDamagePercent(hUnit, tParams)
-	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_MAGICAL_DAMAGE_PERCENTAGE, tParams)
-}
-function GetIncomingPureDamagePercent(hUnit, tParams)
-	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_PURE_DAMAGE_PERCENTAGE, tParams)
-}
-function GetIncomingDamagePercentEnemy(hUnit, tParams)
-	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE_ENEMY, tParams)
-}
-// 毒伤害相关
-function GetIncomingPoisonDamagePercent(hUnit, tParams)
-	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_POISON_DAMAGE_PERCENTAGE, tParams)
-}
-function GetOutgoingPoisonCountPercent(hUnit)
-	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OUTGOING_POISON_COUNT_PERCENTAGE)
-}
-function GetIncomingPoisonCountPercent(hUnit)
-	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_POISON_COUNT_PERCENTAGE)
-}
-function GetPoisonActiveTimePercent(hUnit)
-	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.POISON_ACTIVE_TIME_PERCENTAGE)
-}
-function GetPoisonActiveIncreasePercent(hUnit)
-	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.POISON_ACTIVE_INCREASE_PERCENTAGE)
-}
-function GetPoisonImmune(hUnit, tParams)
-	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.POISON_IMMUNE, tParams)
 }

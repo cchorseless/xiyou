@@ -1,0 +1,81 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:vpcf26:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
+{
+	_class = "CParticleSystemDefinition"
+	m_flConstantLifespan = 2.0
+	m_Children = 
+	[
+		{
+			m_ChildRef = resource:"particles/units/boss/omniknight/omniknight_4_f0.vpcf"
+			m_flDelay = 0.1
+		},
+		{
+			m_ChildRef = resource:"particles/units/boss/omniknight/omniknight_4_f0.vpcf"
+			m_flDelay = 0.05
+		},
+		{
+			m_ChildRef = resource:"particles/units/boss/omniknight/omniknight_4_f0.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/units/boss/omniknight/omniknight_4_f0.vpcf"
+			m_flDelay = 0.15
+			m_bDisableChild = true
+		},
+	]
+	m_Operators = 
+	[
+		{
+			_class = "C_OP_Decay"
+		},
+		{
+			_class = "C_OP_BasicMovement"
+		},
+		{
+			_class = "C_OP_SetPerChildControlPoint"
+			m_nFirstControlPoint = 3
+			m_bSetOrientation = true
+			m_bNumBasedOnParticleCount = true
+		},
+		{
+			_class = "C_OP_PositionLock"
+		},
+	]
+	m_Renderers = 
+	[
+		{
+			_class = "C_OP_RenderSprites"
+			m_bDisableOperator = true
+		},
+	]
+	m_Initializers = 
+	[
+		{
+			_class = "C_INIT_RingWave"
+			m_flParticlesPerOrbit = 3.0
+			m_flInitialRadius = 100.0
+			m_flThickness = 20.0
+			m_flRoll = -10.0
+			m_bEvenDistribution = true
+		},
+		{
+			_class = "C_INIT_Orient2DRelToCP"
+		},
+	]
+	m_Emitters = 
+	[
+		{
+			_class = "C_OP_InstantaneousEmitter"
+			m_flStartTime = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 0.0
+			}
+			m_nParticlesToEmit = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 3.0
+			}
+		},
+	]
+	m_PreEmissionOperators = [  ]
+	m_nBehaviorVersion = 4
+}

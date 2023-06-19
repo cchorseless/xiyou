@@ -757,7 +757,7 @@ export module FuncVector {
     }
     //  判断点是否在不规则图形里（不规则图形里是点集，点集每个都是固定住的）
     export function IsPointInPolygon(point: Vector, polygonPoints: Vector[]) {
-        let j = polygonPoints.length;
+        let j = polygonPoints.length - 1;
         let bool = 0;
         for (let i = 0; i < polygonPoints.length; i++) {
             let polygonPoint1 = polygonPoints[j];

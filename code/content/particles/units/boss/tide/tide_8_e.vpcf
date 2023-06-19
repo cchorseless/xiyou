@@ -1,0 +1,31 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:vpcf31:version{593cd181-a1d6-4c6f-9a8c-0534e8d44db0} -->
+{
+	_class = "CParticleSystemDefinition"
+	m_bShouldHitboxesFallbackToRenderBounds = false
+	m_nMaxParticles = 32
+	m_hFallback = resource:"particles/units/boss/tide/tide_8_e1.vpcf"
+	m_nFallbackMaxCount = 4
+	m_Children = 
+	[
+		{
+			m_ChildRef = resource:"particles/units/boss/tide/tide_8_c.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/units/boss/tide/tide_8_e3.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/units/boss/tide/tide_8_e2.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/units/boss/tide/tide_8_e5.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/units/boss/tide/tide_8_e0.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/units/boss/tide/tide_8_e4.vpcf"
+		},
+	]
+	m_PreEmissionOperators = [  ]
+	m_nBehaviorVersion = 10
+}

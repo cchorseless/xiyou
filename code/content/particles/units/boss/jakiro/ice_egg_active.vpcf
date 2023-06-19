@@ -1,0 +1,92 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:vpcf26:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
+{
+	_class = "CParticleSystemDefinition"
+	m_nBehaviorVersion = 10
+	m_Children = 
+	[
+		{
+			m_ChildRef = resource:"particles/units/boss/jakiro/ice_egg_active_a.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/units/boss/jakiro/ice_egg_active_f.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/units/boss/jakiro/ice_egg_active_g.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/units/boss/jakiro/ice_egg_active_e.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/units/boss/jakiro/ice_egg_active_h.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/units/boss/jakiro/ice_egg_active_d.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/units/boss/jakiro/ice_egg_active_b.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/units/boss/jakiro/ice_egg_active_c.vpcf"
+			m_bEndCap = true
+		},
+	]
+	m_nMaxParticles = 0
+	m_controlPointConfigurations = 
+	[
+		{
+			m_name = "preview"
+			m_drivers = 
+			[
+				{
+					m_iAttachType = "PATTACH_ABSORIGIN_FOLLOW"
+					m_vecOffset = [ 0.0, 0.0, 0.0 ]
+					m_angOffset = [ 0.0, 0.0, 0.0 ]
+					m_entityName = "self"
+				},
+				{
+					m_iControlPoint = 1
+					m_iAttachType = "PATTACH_POINT_FOLLOW"
+					m_vecOffset = [ 0.0, 0.0, 0.0 ]
+					m_angOffset = [ 0.0, 0.0, 0.0 ]
+					m_entityName = "self"
+					m_attachmentName = "attach_hitloc"
+				},
+			]
+			m_previewState = 
+			{
+				m_previewModel = "models/items/phoenix/ultimate/blazing_wing_blazing_egg/blazing_wing_blazing_egg.vmdl"
+				m_nModSpecificData = 331
+				m_sequenceName = "idle"
+				m_hitboxSetName = "default"
+			}
+		},
+		{
+			m_name = "game"
+			m_drivers = 
+			[
+				{
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_vecOffset = [ 0.0, 0.0, 0.0 ]
+					m_angOffset = [ null, null, null ]
+					m_entityName = "self"
+				},
+				{
+					m_iControlPoint = 1
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_vecOffset = [ 0.0, 0.0, 0.0 ]
+					m_angOffset = [ null, null, null ]
+					m_entityName = "self"
+				},
+			]
+		},
+	]
+	m_PreEmissionOperators = 
+	[
+		{
+			_class = "C_OP_SetSingleControlPointPosition"
+			m_nCP1 = 2
+			m_vecCP1Pos = [ 300.0, 1.0, 1.0 ]
+			m_bUseWorldLocation = true
+		},
+	]
+}

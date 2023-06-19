@@ -1,4 +1,5 @@
 import { GameFunc } from "../../GameFunc";
+import { AoiHelper } from "../../helper/AoiHelper";
 import { modifier_event } from "../../npc/propertystat/modifier_event";
 import { ET } from "../../shared/lib/Entity";
 
@@ -179,7 +180,56 @@ export class BattleSystemComponent extends ET.SingletonComponent {
         hCaster.PerformAttack(hTarget, useCastAttackOrb, processProcs, skipCooldown, ignoreInvis, useProjectile, fakeAttack, neverMiss)
         return iNextRecord;
     }
-
+    /**
+     * 进行分裂操作
+     * @param hAttacker 攻击者，
+     * @param hTarget 攻击目标，
+     * @param fStartWidth 开始宽度，
+     * @param fEndWidth 结束宽度，
+     * @param fDistance 距离，
+     * @param func 操作函数
+     * @param iTeamFilter
+     * @param iTypeFilter
+     * @param iFlagFilter
+     */
+    public static DoCleaveAction(
+        hAttacker: IBaseNpc_Plus,
+        hTarget: IBaseNpc_Plus,
+        fStartWidth: number,
+        fEndWidth: number,
+        fDistance: number,
+        func: (s: IBaseNpc_Plus) => Boolean | void,
+        iTeamFilter: DOTA_UNIT_TARGET_TEAM = DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY,
+        iTypeFilter: DOTA_UNIT_TARGET_TYPE = DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC,
+        iFlagFilter: DOTA_UNIT_TARGET_FLAGS = (DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ATTACK_IMMUNE),
+    ) {
+        let fRadius = math.sqrt(fDistance * fDistance + (fEndWidth / 2) * (fEndWidth / 2))
+        let vStart = hAttacker.GetAbsOrigin()
+        let vDirection = (hTarget.GetAbsOrigin() - vStart) as Vector
+        vDirection.z = 0
+        vDirection = vDirection.Normalized()
+        let vEnd = (vStart + vDirection * fDistance) as Vector
+        let v = GFuncVector.Rotation2D(vDirection, math.rad(90))
+        let tPolygon = [
+            vStart + v * fStartWidth,
+            vEnd + v * fEndWidth,
+            vEnd - v * fEndWidth,
+            vStart - v * fStartWidth
+        ] as Vector[]
+        DebugDrawLine(tPolygon[0], tPolygon[2], 255, 255, 255, true, hAttacker.GetSecondsPerAttack())
+        DebugDrawLine(tPolygon[2], tPolygon[3], 255, 255, 255, true, hAttacker.GetSecondsPerAttack())
+        DebugDrawLine(tPolygon[3], tPolygon[4], 255, 255, 255, true, hAttacker.GetSecondsPerAttack())
+        DebugDrawLine(tPolygon[4], tPolygon[0], 255, 255, 255, true, hAttacker.GetSecondsPerAttack())
+        let iTeamNumber = hAttacker.GetTeamNumber()
+        let tTargets = AoiHelper.FindEntityInRadius(iTeamNumber, vStart, fRadius + 100, [hTarget], iTeamFilter, iTypeFilter, iFlagFilter, FindOrder.FIND_CLOSEST)
+        for (let hUnit of (tTargets)) {
+            if (IsValid(hUnit) && GFuncVector.IsPointInPolygon(hUnit.GetAbsOrigin(), tPolygon)) {
+                if (func(hUnit)) {
+                    break
+                }
+            }
+        }
+    }
     /**
      * 只要有参数中的任何一个DAMAGE_FLAG就返回true
      * @param iRecord

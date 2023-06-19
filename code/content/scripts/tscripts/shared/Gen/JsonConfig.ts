@@ -36268,7 +36268,7 @@
     "enemyinfo": [
       {
         "id": "1307",
-        "unitname": "building_enemy_40",
+        "unitname": "building_boss_kingkong",
         "star": 1,
         "level": 0,
         "unit_weight": 10,

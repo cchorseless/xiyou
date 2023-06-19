@@ -261,7 +261,7 @@ export class EnemyUnitEntityRoot extends BattleUnitEntityRoot {
     }
 
     Config() {
-        return KVHelper.KvServerConfig.building_unit_enemy[this.ConfigID];
+        return KVHelper.KvUnits[this.ConfigID];
     }
     GetDotaHeroName() {
         return this.Config().DotaHeroName as string;

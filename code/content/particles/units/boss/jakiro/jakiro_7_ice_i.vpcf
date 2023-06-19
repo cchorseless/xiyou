@@ -1,0 +1,32 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:vpcf26:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
+{
+	_class = "CParticleSystemDefinition"
+	m_bShouldHitboxesFallbackToRenderBounds = false
+	m_nMaxParticles = 1
+	m_flConstantRadius = 15.0
+	m_ConstantColor = [ 255, 255, 255, 80 ]
+	m_flMaxRecreationTime = -1.0
+	m_Children = 
+	[
+		{
+			m_ChildRef = resource:"particles/units/boss/jakiro/jakiro_7_ice_i0.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/units/boss/jakiro/jakiro_7_ice_i4.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/units/boss/jakiro/jakiro_7_ice_i1.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/units/boss/jakiro/jakiro_7_ice_i5.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/units/boss/jakiro/jakiro_7_ice_i2.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/units/boss/jakiro/jakiro_7_ice_i3.vpcf"
+		},
+	]
+	m_PreEmissionOperators = [  ]
+	m_nBehaviorVersion = 10
+}

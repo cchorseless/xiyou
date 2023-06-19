@@ -1,279 +1,216 @@
--- 额外基础攻击力
-function GetBaseBonusDamage(hUnit, tParams)
-	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE, tParams)
+LinkLuaModifier("modifier_kingkong_8", "abilities/boss/kingkong_8.lua", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_kingkong_8_rush", "abilities/boss/kingkong_8.lua", LUA_MODIFIER_MOTION_HORIZONTAL)
+--Abilities
+if kingkong_8 == nil then
+	kingkong_8 = class({})
 end
--- 物理防御
-function GetBasePhysicalArmor(hUnit)
-	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_PHYSICAL_ARMOR_BASE)
-end
-function GetBonusPhysicalArmor(hUnit)
-	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS)
-end
-function GetBasePhysicalArmorPercentage(hUnit)
-	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_PHYSICAL_ARMOR_BASE_PERCENTAGE)
-end
-function GetPhysicalArmorPercentage(hUnit)
-	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_PHYSICAL_ARMOR_PERCENTAGE)
-end
-function GetPhysicalArmor(hUnit)
-	local fTotalPercent = GetPhysicalArmorPercentage(hUnit) * 0.01 -- 不要调用两遍
-	return GetBasePhysicalArmor(hUnit) * (1 + GetBasePhysicalArmorPercentage(hUnit) * 0.01 + fTotalPercent) + GetBonusPhysicalArmor(hUnit) * (1 + fTotalPercent)
-end
-function GetIgnorePhysicalArmorPercentage(hUnit, tParams)
-	return SubtractionMultiplicationPercentage(GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_IGNORE_PHYSICAL_ARMOR_PERCENTAGE, tParams), GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_IGNORE_PHYSICAL_ARMOR_PERCENTAGE_UNIQUE, tParams))
-end
-function GetIgnorePhysicalArmorPercentageTarget(hUnit, tParams)
-	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_IGNORE_PHYSICAL_ARMOR_PERCENTAGE_TARGET, tParams)
-end
-function GetPhysicalReduction(hUnit, tParams)
-	local fValue = GetPhysicalArmor(hUnit)
-	-- 负甲的时候不计算无视护甲
-	if fValue > 0 then
-		local fIgnore = GetIgnorePhysicalArmorPercentageTarget(hUnit, tParams) -- 自身被百分比无视护甲
-		if tParams and IsValid(tParams.attacker) then
-			fValue = math.max(0, fValue - GetModifierProperty(tParams.attacker, EOM_MODIFIER_PROPERTY_IGNORE_PHYSICAL_ARMOR_CONSTANT, tParams))
-			fIgnore = SubtractionMultiplicationPercentage(fIgnore, GetIgnorePhysicalArmorPercentage(tParams.attacker, tParams))
+function kingkong_8:OnAbilityPhaseStart()
+	local hCaster = self:GetCaster()
+	local vCasterLoc = hCaster:GetAbsOrigin()
+	-- 播放动作
+	hCaster:StartGestureWithPlaybackRate(ACT_DOTA_DEFEAT, 2)
+	if IsServer() then
+		-- 播放伤害预警
+		local flDistance = self:GetSpecialValueFor("distance")
+		local flRadius = self:GetSpecialValueFor("radius")
+		local vForward = hCaster:GetForwardVector()
+		local tPosition = {
+			vCasterLoc + Rotation2D(vForward, math.rad(0)) * flDistance,
+			vCasterLoc + Rotation2D(vForward, math.rad(90)) * flDistance,
+			vCasterLoc + Rotation2D(vForward, math.rad(180)) * flDistance,
+			vCasterLoc + Rotation2D(vForward, math.rad(270)) * flDistance,
+		}
+		self.tParticleID = {}
+		for i = 1, #tPosition do
+			local iParticleID = ParticleManager:CreateParticle("particles/units/boss/damage_line.vpcf", PATTACH_CUSTOMORIGIN, nil)
+			ParticleManager:SetParticleControl(iParticleID, 0, vCasterLoc)
+			ParticleManager:SetParticleControl(iParticleID, 1, tPosition[i])
+			ParticleManager:SetParticleControl(iParticleID, 2, Vector(flRadius, 0, 0))
+			table.insert(self.tParticleID, iParticleID)
 		end
-		fValue = fValue - math.max(fValue * fIgnore * 0.01, 0)
+		self.hModifier = hCaster:AddBuff(hCaster, BUFF_TYPE.TENACITY, self:GetCastPoint())
 	end
-	return PHYSICAL_ARMOR_FACTOR * fValue / (1 + PHYSICAL_ARMOR_FACTOR * math.abs(fValue))
+	return true
 end
--- 魔法防御
-function GetBaseMagicalArmor(hUnit)
-	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_MAGICAL_ARMOR_BASE)
-end
-function GetBonusMagicalArmor(hUnit)
-	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_MAGICAL_ARMOR_BONUS)
-end
-function GetBaseMagicalArmorPercentage(hUnit)
-	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_MAGICAL_ARMOR_BASE_PERCENTAGE)
-end
-function GetMagicalArmorPercentage(hUnit)
-	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_MAGICAL_ARMOR_PERCENTAGE)
-end
-function GetMagicalArmor(hUnit)
-	return GetBaseMagicalArmor(hUnit) * (1 + GetBaseMagicalArmorPercentage(hUnit) * 0.01 + GetMagicalArmorPercentage(hUnit) * 0.01) + GetBonusMagicalArmor(hUnit) * (1 + GetMagicalArmorPercentage(hUnit) * 0.01)
-end
-function GetIgnoreMagicalArmorPercentage(hUnit, tParams)
-	return SubtractionMultiplicationPercentage(GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_IGNORE_MAGICAL_ARMOR_PERCENTAGE, tParams), GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_IGNORE_MAGICAL_ARMOR_PERCENTAGE_UNIQUE, tParams))
-end
-function GetIgnoreMagicalArmorConstant(hUnit, tParams)
-	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_IGNORE_MAGICAL_ARMOR_CONSTANT, tParams)
-end
-function GetIgnoreMagicalArmorPercentageTarget(hUnit, tParams)
-	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_IGNORE_MAGICAL_ARMOR_PERCENTAGE_TARGET, tParams)
-end
-function GetMagicalReduction(hUnit, tParams)
-	local fValue = GetMagicalArmor(hUnit)
-	-- 负甲的时候不计算无视护甲
-	if fValue > 0 then
-		local fIgnore = GetIgnoreMagicalArmorPercentageTarget(hUnit, tParams) -- 自身的被百分比无视护甲
-		if tParams and IsValid(tParams.attacker) then
-			fValue = fValue - math.min(GetIgnoreMagicalArmorConstant(tParams.attacker, tParams), fValue)
-			fIgnore = SubtractionMultiplicationPercentage(fIgnore, GetIgnoreMagicalArmorPercentage(tParams.attacker, tParams))
-		end
-		fValue = fValue - math.max(fValue * fIgnore * 0.01, 0)
+function kingkong_8:OnAbilityPhaseInterrupted()
+	-- 清空特效
+	for i, iParticleID in ipairs(self.tParticleID) do
+		ParticleManager:DestroyParticle(iParticleID, false)
 	end
+	self:GetCaster():FadeGesture(ACT_DOTA_DEFEAT)
+end
+function kingkong_8:OnSpellStart()
+	-- 清空特效
+	for i, iParticleID in ipairs(self.tParticleID) do
+		ParticleManager:DestroyParticle(iParticleID, false)
+	end
+	self:GetCaster():FadeGesture(ACT_DOTA_DEFEAT)
+	local hCaster = self:GetCaster()
+	local vPosition = self:GetCursorPosition()
 
-	return MAGICAL_ARMOR_FACTOR * fValue / (1 + MAGICAL_ARMOR_FACTOR * math.abs(fValue))
+	local vCasterLoc = hCaster:GetAbsOrigin()
+	local vForward = hCaster:GetForwardVector()
+	local flDistance = self:GetSpecialValueFor("distance")
+	local tPosition = {
+		vCasterLoc + Rotation2D(vForward, math.rad(0)) * flDistance,
+		vCasterLoc + Rotation2D(vForward, math.rad(90)) * flDistance,
+		vCasterLoc + Rotation2D(vForward, math.rad(180)) * flDistance,
+		vCasterLoc + Rotation2D(vForward, math.rad(270)) * flDistance,
+	}
+	for i = 1, #tPosition do
+		local hIllusion = CreateUnitByName(hCaster:GetUnitName(), vCasterLoc, false, hCaster, hCaster, hCaster:GetTeamNumber())
+		hIllusion:SetForwardVector((tPosition[i] - vCasterLoc):Normalized())
+		hIllusion:MakeIllusion()
+		hIllusion:AddNewModifier(hCaster, self, "modifier_kingkong_8_rush", { vPosX = tPosition[i].x, vPosY = tPosition[i].y })
+	end
+	hCaster:EmitSound("Hero_Magnataur.Skewer.Cast")
 end
--- 技能增强
-function GetBaseSpellAmplify(hUnit, tParams)
-	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_SPELL_AMPLIFY_BASE, tParams)
+function kingkong_8:GetIntrinsicModifierName()
+	return "modifier_kingkong_8"
 end
-function GetBonusSpellAmplify(hUnit, tParams)
-	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_SPELL_AMPLIFY_BONUS, tParams)
+---------------------------------------------------------------------
+--Modifiers
+if modifier_kingkong_8 == nil then
+	modifier_kingkong_8 = eom_modifier({})
 end
-function GetBonusSpellAmplifyUnique(hUnit, tParams)
-	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_SPELL_AMPLIFY_BONUS_UNIQUE, tParams)
+function modifier_kingkong_8:IsHidden()
+	return true
 end
-function GetSpellAmplify(hUnit, tParams)
-	return GetBaseSpellAmplify(hUnit, tParams) + GetBonusSpellAmplify(hUnit, tParams) + GetBonusSpellAmplifyUnique(hUnit, tParams)
+function modifier_kingkong_8:OnCreated(params)
+	self.trigger_time = self:GetAbilitySpecialValueFor("trigger_time")
+	if IsServer() then
+		self:StartIntervalThink(self.trigger_time)
+	end
 end
--- 生命值
-function GetHealthBonus(hUnit)
-	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_HEALTH_BONUS)
+function modifier_kingkong_8:EDeclareFunctions()
+	return {
+		MODIFIER_EVENT_ON_DEATH
+	}
 end
-function GetHealthPercentage(hUnit)
-	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_HEALTH_PERCENTAGE)
+function modifier_kingkong_8:OnDeath(params)
+	if IsServer() and params.unit:IsFriendly(self:GetParent()) == false then
+		self:StartIntervalThink(self.trigger_time)
+	end
 end
-function GetHealthPercentageEnemy(hUnit)
-	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_HEALTH_PERCENT_ENEMY)
+function modifier_kingkong_8:OnIntervalThink()
+	local hParent = self:GetParent()
+	if self:GetParent():IsAbilityReady(self:GetAbility()) then
+		ExecuteOrderFromTable({
+			UnitIndex = self:GetParent():entindex(),
+			OrderType = DOTA_UNIT_ORDER_CAST_POSITION,
+			AbilityIndex = self:GetAbility():entindex(),
+			Position = self:GetParent():GetAbsOrigin() + self:GetParent():GetForwardVector()
+		})
+	end
 end
--- 生命恢复
-function GetHealthRegen(hUnit)
-	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT)
+---------------------------------------------------------------------
+if modifier_kingkong_8_rush == nil then
+	modifier_kingkong_8_rush = class({}, nil, HorizontalModifier)
 end
--- 魔法值
-function GetManaBonus(hUnit)
-	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_MANA_BONUS)
+function modifier_kingkong_8_rush:GetEffectAttachType()
+	return PATTACH_ABSORIGIN_FOLLOW
 end
-function GetManaPercentage(hUnit)
-	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_MANA_PERCENTAGE)
+function modifier_kingkong_8_rush:GetPriority()
+	return DOTA_MOTION_CONTROLLER_PRIORITY_HIGHEST
 end
-function GetBaseMana(hUnit)
-	local fValue = 0
-	if hUnit ~= nil then
-		if IsValid(hUnit) and hUnit._StatusMana == nil then
-			local sUnitName = hUnit:GetUnitName()
-			local tData = hUnit:IsHero() and KeyValues.HeroesKv[sUnitName] or KeyValues.UnitsKv[sUnitName]
-			if tData then
-				hUnit._StatusMana = tonumber(tData.StatusMana) or 0
+function modifier_kingkong_8_rush:OnCreated(params)
+	if IsServer() then
+		if not self:ApplyHorizontalMotionController() then
+			self:Destroy()
+			return
+		end
+		self.distance = self:GetAbilitySpecialValueFor('distance')
+		self.fSpeed = self:GetAbilitySpecialValueFor('speed')
+		self.vS = self:GetParent():GetAbsOrigin()
+		self.vV = (Vector(params.vPosX, params.vPosY, 0) - self.vS):Normalized() * self.fSpeed
+		self.radius = self:GetAbilitySpecialValueFor('radius')
+		self.impact_damage = self:GetAbilitySpecialValueFor("damage")
+		self.knockback_duration = self:GetAbilitySpecialValueFor("knockback_duration")
+		self.knockback_distance = self:GetAbilitySpecialValueFor("knockback_distance")
+		self.knockback_height = self:GetAbilitySpecialValueFor("knockback_height")
+		self.tTargets = {}
+	else
+		local iParticleID = ParticleManager:CreateParticle("particles/units/boss/kingkong/kingkong_6.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
+		self:AddParticle(iParticleID, false, false, -1, false, false)
+		local iParticleID = ParticleManager:CreateParticle("particles/units/boss/kingkong/kingkong_6_rush.vpcf", PATTACH_CENTER_FOLLOW, self:GetParent())
+		self:AddParticle(iParticleID, false, false, -1, false, false)
+	end
+end
+function modifier_kingkong_8_rush:OnDestroy(params)
+	if IsServer() then
+		self:GetParent():RemoveHorizontalMotionController(self)
+		for _, hUnit in pairs(self.tTargets) do
+			if IsValid(hUnit) then
+				FindClearSpaceForUnit(hUnit, hUnit:GetAbsOrigin(), true)
 			end
 		end
-		if hUnit._StatusMana ~= nil then
-			fValue = hUnit._StatusMana
+		if self:GetParent():IsIllusion() then
+			self:GetParent():AddNoDraw()
+			self:GetParent():ForceKill(false)
 		end
 	end
-	return fValue
 end
-function GetTotalManaBonus(hUnit)
-	local fPercent = GetManaPercentage(hUnit) * 0.01
-	return GetManaBonus(hUnit) * (1 + fPercent) + GetBaseMana(hUnit) * fPercent
-end
--- 魔法恢复
-function GetManaRegen(hUnit)
-	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_MANA_REGEN_CONSTANT) + GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_MANA_REGEN_CONSTANT_UNIQUE)
-end
+function modifier_kingkong_8_rush:UpdateHorizontalMotion(me, dt)
+	if IsServer() then
+		local vPos = self.vV * dt + self:GetParent():GetAbsOrigin()
+		local fDis = (vPos - self.vS):Length2D()
+		if fDis > self.distance or GridNav:CanFindPath(self:GetParent():GetAbsOrigin(), vPos) == false then
+			fDis = self.distance
+		end
+		me:SetAbsOrigin(vPos)
 
-function GetManaRegenAmplify(hUnit, params)
-	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_MP_REGEN_AMPLIFY_PERCENTAGE, params)
-end
+		local tTargets = FindUnitsInRadius(me:GetTeamNumber(), vPos, nil, self.radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_NONE, FIND_ANY_ORDER, false)
+		for _, hUnit in pairs(tTargets) do
+			if TableFindKey(self.tTargets, hUnit) == nil then
+				table.insert(self.tTargets, hUnit)
+				local tDamageInfo = {
+					attacker = self:GetCaster(),
+					victim = hUnit,
+					ability = self:GetAbility(),
+					damage = self.impact_damage,
+					damage_type = self:GetAbility():GetAbilityDamageType()
+				}
+				ApplyDamage(tDamageInfo)
 
-function GetManaRegenTotal(hUnit)
-	return (hUnit:GetStatusManaRegen() + GetManaRegen(hUnit)) * (1 + GetManaRegenAmplify(hUnit) / 100)
-end
--- 状态抗性
-function GetStatusResistanceStack(hUnit)
-	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_STATUS_RESISTANCE_STACKING)
-end
-function GetStatusResistanceUnique(hUnit)
-	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_STATUS_RESISTANCE_UNIQUE)
-end
-function GetStatusResistance(hUnit)
-	return (1 - (1 - GetStatusResistanceStack(hUnit) * 0.01) * (1 - GetStatusResistanceUnique(hUnit) * 0.01)) * 100
-end
-function GetStatusResistanceCaster(hUnit)
-	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_STATUS_RESISTANCE_CASTER)
-end
--- 闪避
-function GetEvasion(hUnit, tParams)
-	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_EVASION_CONSTANT, tParams)
-end
--- 技能闪避
-function GetSpellEvasion(hUnit, tParams)
-	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_SPELL_EVASION, tParams)
-end
--- 冷却减少
-function GetCooldownReduction(hUnit, tParams)
-	local cd_reduction = GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_COOLDOWN_PERCENTAGE, tParams)
-	local max_cd_reduction = GetMaxCooldownReduction(hUnit, tParams)
-	if max_cd_reduction > 0 and max_cd_reduction < cd_reduction then
-		return max_cd_reduction
+				me:KnockBack(me:GetAbsOrigin(), hUnit, self.knockback_distance, self.knockback_height, self.knockback_duration, true)
+				local iParticleID = ParticleManager:CreateParticle("particles/units/heroes/hero_spirit_breaker/spirit_breaker_greater_bash.vpcf", PATTACH_ABSORIGIN_FOLLOW, hUnit)
+				self:AddParticle(iParticleID, false, false, -1, false, false)
+			end
+		end
+
+		if fDis == self.distance then
+			self:Destroy()
+		end
 	end
-	return cd_reduction
 end
-function GetMaxCooldownReduction(hUnit, tParams)
-	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_MAX_COOLDOWN_PERCENTAGE, tParams)
-end
--- 物理暴击
-function GetCriticalStrikeChance(hUnit, tParams)
-	if GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_NO_CRITICALSTRIKE, tParams) >= 1 then
-		return 0
+function modifier_kingkong_8_rush:OnHorizontalMotionInterrupted()
+	if IsServer() then
+		self:Destroy()
 	end
-	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_CRITICALSTRIKE_CHANCE, tParams) + BASE_ATTACK_CRITICALSTRIKE_CHANCE
 end
--- 物理暴击伤害
-function GetCriticalStrikeDamage(hUnit, tParams)
-	local fDamage = BASE_ATTACK_CRITICALSTRIKE_DAMAGE + GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_CRITICALSTRIKE_DAMAGE, tParams)
-	if tParams and IsValid(tParams.target) then
-		fDamage = fDamage + GetModifierProperty(tParams.target, EOM_MODIFIER_PROPERTY_INCOMING_CRITICALSTRIKE_DAMAGE_CONSTANT, tParams)
-	end
-	local fPercent = GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_CRITICALSTRIKE_DAMAGE_TOTAL, tParams)
-	return fDamage * (1 + fPercent / 100)
+function modifier_kingkong_8_rush:DeclareFunctions()
+	return {
+		MODIFIER_PROPERTY_OVERRIDE_ANIMATION,
+		MODIFIER_PROPERTY_OVERRIDE_ANIMATION_RATE,
+		MODIFIER_PROPERTY_TRANSLATE_ACTIVITY_MODIFIERS
+	}
 end
---物理暴击时技能暴击补偿
-function GetCriticalStrikeDamage_Mix(hUnit, tParams)
-	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_CRITICALSTRIKE_MIX_PERCENT, tParams) * 0.01  * GetSpellCriticalStrikeDamage(hUnit, tParams)
+function modifier_kingkong_8_rush:GetOverrideAnimation(params)
+	return ACT_DOTA_RUN
 end
--- 技能暴击概率
-function GetSpellCriticalStrikeChance(hUnit, tParams)
-	if GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_NO_SPELL_CRITICALSTRIKE, tParams) >= 1 then
-		return 0
-	end
-	local fChance = GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_SPELL_CRITICALSTRIKE_CHANCE, tParams) + BASE_SPELL_CRITICALSTRIKE_CHANCE
-	if tParams and IsValid(tParams.target) then
-		fChance = fChance + GetModifierProperty(tParams.target, EOM_MODIFIER_PROPERTY_SPELL_CRITICALSTRIKE_CHANCE_TARGET, tParams)
-	end
-	return fChance
+function modifier_kingkong_8_rush:GetOverrideAnimationRate(params)
+	return 2.5
 end
--- 技能暴击伤害
-function GetSpellCriticalStrikeDamage(hUnit, tParams)
-	local fDamage = BASE_SPELL_CRITICALSTRIKE_DAMAGE + GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_SPELL_CRITICALSTRIKE_DAMAGE)
-	if tParams and IsValid(tParams.target) then
-		fDamage = fDamage + GetModifierProperty(tParams.target, EOM_MODIFIER_PROPERTY_INCOMING_SPELL_CRITICALSTRIKE_DAMAGE_CONSTANT, tParams)
-	end
-	local fPercent = GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_SPELL_CRITICALSTRIKE_DAMAGE_TOTAL, tParams)
-	return fDamage * (1 + fPercent / 100)
+function modifier_kingkong_8_rush:GetActivityTranslationModifiers(params)
+	return "haste"
 end
---技能暴击时物理暴击补偿
-function GetSpellCriticalStrikeDamage_Mix(hUnit, tParams)
-	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_SPELL_CRITICALSTRIKE_MIX_PERCENT, tParams) * 0.01  * GetCriticalStrikeDamage(hUnit, tParams)
-end
--- 最大攻击速度
-function GetBonusMaximumAttackSpeed(hUnit)
-	if GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_MAX_ATTACKSPEED_BONUS_UNABLE) >= 1 then
-		return 0
-	end
-	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_MAX_ATTACKSPEED_BONUS)
-end
-function GetMaximumAttackSpeed(hUnit)
-	return GetBonusMaximumAttackSpeed(hUnit) + MAXIMUM_ATTACK_SPEED
-end
-function GetOutgoingDamagePercent(hUnit, tParams)
-	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_OUTGOING_DAMAGE_PERCENTAGE, tParams)
-end
-function GetOutgoingPhysicalDamagePercent(hUnit, tParams)
-	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_OUTGOING_PHYSICAL_DAMAGE_PERCENTAGE, tParams)
-end
-function GetOutgoingMagicalDamagePercent(hUnit, tParams)
-	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_OUTGOING_MAGICAL_DAMAGE_PERCENTAGE, tParams)
-end
-function GetOutgoingPureDamagePercent(hUnit, tParams)
-	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_OUTGOING_PURE_DAMAGE_PERCENTAGE, tParams)
-end
--- 受到的伤害
-function GetIncomingDamagePercent(hUnit, tParams)
-	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE, tParams)
-end
-function GetIncomingPhysicalDamagePercent(hUnit, tParams)
-	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_INCOMING_PHYSICAL_DAMAGE_PERCENTAGE, tParams)
-end
-function GetIncomingMagicalDamagePercent(hUnit, tParams)
-	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_INCOMING_MAGICAL_DAMAGE_PERCENTAGE, tParams)
-end
-function GetIncomingPureDamagePercent(hUnit, tParams)
-	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_INCOMING_PURE_DAMAGE_PERCENTAGE, tParams)
-end
-function GetIncomingDamagePercentEnemy(hUnit, tParams)
-	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE_ENEMY, tParams)
-end
---毒伤害相关
-function GetIncomingPoisonDamagePercent(hUnit, tParams)
-	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_INCOMING_POISON_DAMAGE_PERCENTAGE, tParams)
-end
-function GetOutgoingPoisonCountPercent(hUnit)
-	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_OUTGOING_POISON_COUNT_PERCENTAGE)
-end
-function GetIncomingPoisonCountPercent(hUnit)
-	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_INCOMING_POISON_COUNT_PERCENTAGE)
-end
-function GetPoisonActiveTimePercent(hUnit)
-	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_POISON_ACTIVE_TIME_PERCENTAGE)
-end
-function GetPoisonActiveIncreasePercent(hUnit)
-	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_POISON_ACTIVE_INCREASE_PERCENTAGE)
-end
-function GetPoisonImmune(hUnit, tParams)
-	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_POISON_IMMUNE, tParams)
+function modifier_kingkong_8_rush:CheckState()
+	return {
+		[MODIFIER_STATE_STUNNED] = true,
+		[MODIFIER_STATE_NO_HEALTH_BAR] = true,
+		[MODIFIER_STATE_INVULNERABLE] = true,
+		[MODIFIER_STATE_OUT_OF_GAME] = true,
+		[MODIFIER_STATE_UNSELECTABLE] = true,
+		[MODIFIER_STATE_UNTARGETABLE] = true,
+	}
 end

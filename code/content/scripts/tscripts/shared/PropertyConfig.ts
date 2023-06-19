@@ -320,7 +320,7 @@ export module PropertyConfig {
         /**
          * Method Name: `GetModifierStatusResistance`
          */
-        STATUS_RESISTANCE = modifierfunction.MODIFIER_PROPERTY_STATUS_RESISTANCE,
+        // STATUS_RESISTANCE = modifierfunction.MODIFIER_PROPERTY_STATUS_RESISTANCE,
         /**
          * Method Name: `GetModifierStatusResistanceStacking`
          */
@@ -915,7 +915,6 @@ export module PropertyConfig {
         STATS_PRIMARY_PERCENTAGE,
 
         STATS_ALL_NO_ARMOR,
-        STATUS_RESISTANCE_FORCE,
 
         // 额外基础攻击力(白字)
         BASEATTACK_BONUSDAMAGE,
@@ -1019,8 +1018,8 @@ export module PropertyConfig {
         BASE_ATTACK_TIME_PERCENTAGE,
         // 技能闪避
         SPELL_EVASION_CONSTANT,
-        // 状态抗性
-        STATUS_RESISTANCE_BONUS,
+        // 状态抗性 --不知道咋用
+        STATUS_RESISTANCE_UNIQUE,
 
         // 输出总加深
         TOTALDAMAGEOUTGOING_PERCENTAGE,

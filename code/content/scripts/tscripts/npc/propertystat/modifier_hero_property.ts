@@ -193,7 +193,7 @@ export class modifier_hero_property extends BaseModifier_Plus {
     CC_HEALTH_REGEN_CONSTANT() {
         return GPropertyCalculate.GetStrength(this.GetParentPlus()) * GPropertyConfig.ATTRIBUTE_STRENGTH_HEALTH_REGEN_CONSTANT;
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATUS_RESISTANCE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATUS_RESISTANCE_STACKING)
     CC_STATUS_RESISTANCE() {
         let iStackCount = this.GetStackCount()
         if (iStackCount == Attributes.DOTA_ATTRIBUTE_STRENGTH) {

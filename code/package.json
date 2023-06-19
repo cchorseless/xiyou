@@ -38,6 +38,7 @@
         "lua2ts": "node scripts/lua2ts/lua2ts.js",
         "luamini": "node scripts/luamini.js",
         "kv2excel": "node scripts/kv_2_excel.js",
+        "excel_line_change": "node scripts/excel_line_change.js",
         "preprod": "node scripts/prepublish.js",
         "prod": "run-s prod:*",
         "outputImage": "node scripts/output_image_less.js",

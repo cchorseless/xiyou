@@ -1,0 +1,8 @@
+"building_boss_kingkong"       "邪魔金刚"
+"building_boss_knight"       "湮灭骑士"
+"building_boss_sand_king"       "沙王"
+"building_boss_jakiro"       "双头龙"
+"building_boss_nian"       "年"
+"building_boss_tidehunter"       "深海巨兽"
+"building_boss_skywrath"       "天怒法师"
+"building_boss_vengeful"       "复仇之魂"

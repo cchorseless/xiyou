@@ -140,10 +140,10 @@ export class PlayerHttpComponent extends ET.Component {
                 GameProtocol.Protocol.Ping,
                 (a, b, r) => {
                     if (a == 200) {
-                        LogHelper.print("http cb=>", GameProtocol.Protocol.Ping, a, b);
+                        // LogHelper.print("http cb=>", GameProtocol.Protocol.Ping, a, b);
                         let msg: G2C_Ping = json.decode(b)[0];
                         if (msg.Message) {
-                            GLogHelper.print("Message length :", msg.Message.length)
+                            // GLogHelper.print("Message length :", msg.Message.length)
                             let msgcb: any[] = json.decode(msg.Message)[0];
                             for (let entitystr of msgcb) {
                                 let _str = entitystr;

@@ -455,11 +455,17 @@ export module PropertyCalculate {
         return SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.STATUS_RESISTANCE_STACKING)
     }
     export function GetStatusResistanceUnique(hUnit: IBaseNpc_Plus) {
-        return SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.STATUS_RESISTANCE_BONUS)
+        return SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.STATUS_RESISTANCE_UNIQUE)
     }
     export function GetStatusResistance(hUnit: IBaseNpc_Plus) {
+        // todo 这个与 hUnit.GetStatusResistance 区别？？？
         return (1 - (1 - GetStatusResistanceStack(hUnit) * 0.01) * (1 - GetStatusResistanceUnique(hUnit) * 0.01)) * 100
     }
+    /**
+     * 施法效果状态效果增强
+     * @param hUnit 
+     * @returns 
+     */
     export function GetStatusResistanceCaster(hUnit: IBaseNpc_Plus) {
         return SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.STATUS_RESISTANCE_CASTER)
     }

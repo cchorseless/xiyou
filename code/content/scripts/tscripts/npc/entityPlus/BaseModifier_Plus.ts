@@ -54,6 +54,34 @@ export class BaseModifier_Plus extends BaseModifier {
 
 }
 
+export class ParticleModifierThinker extends BaseModifier {
+    IsHidden() { return true }
+    IsDebuff() { return false }
+    IsPurgable() { return false }
+    IsPurgeException() { return false }
+    IsStunDebuff() { return false }
+    AllowIllusionDuplicate() { return false }
+    GetAttributes() { return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE }
+    BeDestroy() {
+        if (IsServer()) {
+            if (IsValid(this.GetParentPlus())) {
+                this.GetParentPlus().RemoveSelf()
+            }
+        }
+    }
+    CheckState() {
+        return {
+            [modifierstate.MODIFIER_STATE_FLYING_FOR_PATHING_PURPOSES_ONLY]: true,
+            [modifierstate.MODIFIER_STATE_NO_HEALTH_BAR]: true,
+            [modifierstate.MODIFIER_STATE_INVULNERABLE]: true,
+            [modifierstate.MODIFIER_STATE_NO_UNIT_COLLISION]: true,
+            [modifierstate.MODIFIER_STATE_OUT_OF_GAME]: true,
+            [modifierstate.MODIFIER_STATE_UNSELECTABLE]: true
+        }
+    }
+}
+
+
 export class BaseModifierMotionBoth_Plus extends BaseModifierMotionBoth {
 }
 export class BaseModifierMotionVertical_Plus extends BaseModifierMotionVertical {

@@ -486,7 +486,7 @@ export module AoiHelper {
         let iTeamNumber = hAttacker.GetTeamNumber()
         let tTargets = AoiHelper.FindEntityInRadius(iTeamNumber, vStart, fRadius + 100, [hTarget], iTeamFilter, iTypeFilter, iFlagFilter, FindOrder.FIND_CLOSEST)
         for (let hUnit of (tTargets)) {
-            if (GFuncVector.IsPointInPolygon(hUnit.GetAbsOrigin(), tPolygon)) {
+            if (IsValid(hUnit) && GFuncVector.IsPointInPolygon(hUnit.GetAbsOrigin(), tPolygon)) {
                 if (func(hUnit)) {
                     break
                 }

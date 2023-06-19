@@ -531,6 +531,9 @@ export class modifier_event extends BaseModifier_Plus {
     OnTakeDamage(event: ModifierInstanceEvent): void {
         (event as IBuffEventData).eventType = EventDataType.attackerIsSelf;
         modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_TAKEDAMAGE);
+        if (event.damage_category == DamageCategory_t.DOTA_DAMAGE_CATEGORY_ATTACK) {
+            modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ATTACK_DAMAGE);
+        }
         GBattleSystem.RemoveRecord(event.record);
     }
     /**
@@ -780,6 +783,8 @@ export enum Enum_MODIFIER_EVENT {
     ON_SPELL_CRIT,
     /**攻击或者技能暴击事件 ModifierAttackEvent */
     ON_ANY_CRIT,
+    /**普攻造成伤害 */
+    ON_ATTACK_DAMAGE,
     /**
      * 召唤物出生 
      * @Server

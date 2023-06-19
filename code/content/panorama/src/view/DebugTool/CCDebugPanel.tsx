@@ -50,7 +50,7 @@ export class CCDebugPanel extends CCPanel<ICCDebugPanel> {
             }
             return secta > sectb ? 1 : secta < sectb ? -1 : 0;
         })
-        const enemylist: string[] = Object.keys(KVHelper.KVData().building_unit_enemy);;
+        const enemylist: string[] = Object.keys((KVHelper.KVData() as any).building_unit_boss as any);;
         const stateList: string[] = [];
         const sectList: string[] = [...CombinationConfig.ESectNameList];
         const sectToggleList: { [k: string]: any } = {};
