@@ -53,3 +53,16 @@ interface IPlayerGameSelection {
     IsReady: boolean;
     bNewPlayer: boolean;
 }
+
+interface ICCGameSingleDataItem {
+    isonline: boolean,
+    accountid: string,
+    score: number,
+    totaldamage: number,
+    wincount: number;
+    losecount: number;
+    drawcount: number;
+    scorechange: number,
+    units: { unitname: string, star: number }[],
+    sectInfo: string[]
+}

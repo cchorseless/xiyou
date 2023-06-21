@@ -113,6 +113,5 @@ export module KVHelper {
             }
         }
         GLogHelper.print("KVHelper Init")
-        GLogHelper.print(Object.keys(KvRecipes).length, 111111);
     }
 }

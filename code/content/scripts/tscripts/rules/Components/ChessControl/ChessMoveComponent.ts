@@ -1,5 +1,4 @@
 
-import { modifier_courier_hut_change } from "../../../npc/abilities/courier/courier_hut_change";
 import { modifier_jiaoxie_wudi } from "../../../npc/modifier/battle/modifier_jiaoxie_wudi";
 import { modifier_building_battle_buff } from "../../../npc/modifier/building/modifier_building_battle_buff";
 import { modifier_chess_jump } from "../../../npc/modifier/move/modifier_chess_jump";
@@ -224,6 +223,5 @@ export class ChessMoveComponent extends ET.Component {
         let domain = this.GetDomain<IBaseNpc_Plus>();
         modifier_chess_jump.remove(domain);
         modifier_chess_run.remove(domain);
-        modifier_courier_hut_change.remove(domain);
     }
 }

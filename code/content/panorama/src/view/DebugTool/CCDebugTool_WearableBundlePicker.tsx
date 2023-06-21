@@ -76,7 +76,7 @@ export class CCDebugTool_WearableBundlePicker extends CCPanel<ICCDebugTool_Weara
                             }
                         }
                         return (<CCEconItemImage key={Math.random() + ""} marginLeft={"5px"} marginTop={"5px"} itemdef={bundlename} showName={true} onactivate={self => {
-                            GLogHelper.print(bundlename, 11111111)
+                            // GLogHelper.print(bundlename, 11111111)
                             NetHelper.SendToLua(GameProtocol.Protocol.req_DebugAddWearableBundle, {
                                 entityindex: entityindex,
                                 bundlename: bundlename

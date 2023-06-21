@@ -98,10 +98,14 @@ export class AiAttackComponent extends ET.Component {
         if (!npc.HasMovementCapability()) {
             return false
         }
+        const playerroot = GGameScene.GetPlayer(this.BelongPlayerid);
+        if (!playerroot) {
+            return false
+        }
         let new_target = npc.GetAttackTarget() as IBaseNpc_Plus;
         if (!IsValid(new_target) || !new_target.IsAlive()) {
             let team = npc.GetTeam() == DOTATeam_t.DOTA_TEAM_GOODGUYS ? DOTATeam_t.DOTA_TEAM_BADGUYS : DOTATeam_t.DOTA_TEAM_GOODGUYS;
-            let enemys = GGameScene.GetPlayer(this.BelongPlayerid).BattleUnitManagerComp().GetAllBattleUnitAliveNpc(team);
+            let enemys = playerroot.BattleUnitManagerComp().GetAllBattleUnitAliveNpc(team);
             enemys = enemys.filter((v) => { return v.IsAlive() && v.IsAttacker() });
             if (enemys.length > 0) {
                 let pos = npc.GetAbsOrigin();

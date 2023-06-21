@@ -17,9 +17,7 @@ export class modifier_building_battle_buff extends BaseModifier_Plus {
 
 
     CheckState() {
-        let hParent = this.GetParentPlus();
         // 有这个BUFF不能选中
-        let iscanselect = hParent.HasModifier("modifier_courier_hut_change");
         let state = {
             [modifierstate.MODIFIER_STATE_DISARMED]: true,
             [modifierstate.MODIFIER_STATE_PASSIVES_DISABLED]: true,
@@ -29,7 +27,7 @@ export class modifier_building_battle_buff extends BaseModifier_Plus {
             [modifierstate.MODIFIER_STATE_NO_HEALTH_BAR]: true,
             [modifierstate.MODIFIER_STATE_INVULNERABLE]: true,
             [modifierstate.MODIFIER_STATE_NO_UNIT_COLLISION]: true,
-            [modifierstate.MODIFIER_STATE_UNSELECTABLE]: iscanselect,
+            // [modifierstate.MODIFIER_STATE_UNSELECTABLE]: iscanselect,
         };
         return state
     }

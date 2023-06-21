@@ -277,7 +277,7 @@ export class modifier_imba_stone_remnant extends BaseModifier_Plus {
             if (this.GetParentPlus().GetUnitName() == "npc_imba_earth_spirit_stone") {
                 ParticleManager.ClearParticle(this.remnantParticle, false);
                 SafeDestroyUnit(this.GetParentPlus());
-                if (this.GetAbilityPlus() && !this.GetAbilityPlus().IsNull()) {
+                if (this.GetAbilityPlus() && !this.GetAbilityPlus().IsNull() && this.GetAbilityPlus<imba_earth_spirit_stone_caller>().KillRemnant) {
                     this.GetAbilityPlus<imba_earth_spirit_stone_caller>().KillRemnant(this.GetParentPlus().GetEntityIndex());
                 }
             } else {

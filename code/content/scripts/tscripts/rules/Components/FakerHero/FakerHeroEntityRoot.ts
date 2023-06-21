@@ -21,10 +21,13 @@ export class FakerHeroEntityRoot extends BaseEntityRoot implements IRoundStateCa
         this.AddComponent(GGetRegClass<typeof FHeroAIComponent>("FHeroAIComponent"));
         this.SyncClient(true);
     }
-    public RefreshFakerHero() {
+    public RefreshFakerHero(IsFinalRound: boolean = false) {
         let hHero = this.GetDomain<IBaseNpc_Hero_Plus>();
         if (!IsValid(hHero) || !hHero.IsAlive()) {
             return
+        }
+        if (IsFinalRound) {
+            hHero.AddNoDraw();
         }
         let sCurrentCourierName = this.GetCourierName()
         let sCourierName = KVHelper.CourierUnits.GetRandomCourier();
@@ -47,17 +50,20 @@ export class FakerHeroEntityRoot extends BaseEntityRoot implements IRoundStateCa
         let player = this.GetPlayer();
         player.EnemyManagerComp().removeAllEnemy();
         this.FHeroCombinationManager().removeAllCombination();
-        this.RefreshFakerHero();
+        this.RefreshFakerHero(round.IsFinalRound());
         round.CreateAllRoundBasicEnemy(this.SpawnEffect);
     }
-    OnRound_Battle() {
+    OnRound_Battle(round: ERoundBoard) {
         let player = this.GetPlayer();
         player.BattleUnitManagerComp().GetAllBattleUnitAlive(DOTATeam_t.DOTA_TEAM_BADGUYS).forEach(b => {
-            b.OnRound_Battle();
+            b.OnRound_Battle(round);
         })
         this.FHeroCombinationManager().getAllActiveCombination().forEach(comb => {
-            comb.OnRound_Battle();
+            comb.OnRound_Battle(round);
         })
+        if (round.IsFinalRound()) {
+            GRoundSystem.GetInstance().OnFinishRound_Battle(round);
+        }
     }
     OnRound_Prize(round: ERoundBoard) {
         this.FHeroCombinationManager().getAllActiveCombination().forEach(comb => {
@@ -82,8 +88,8 @@ export class FakerHeroEntityRoot extends BaseEntityRoot implements IRoundStateCa
                 delay_time = math.min(delay_time, b.GetDistance2Player() / 1000);
             });
             // 怪物回合没有通关直接秒杀
-            if (round.config.roundIndex > 1 && !round.config.randomEnemy) {
-                damage = 100;
+            if (round.config.randomEnemy == false) {
+                damage = round.config.enemyDamge;
             }
             GTimerHelper.AddTimer(delay_time, GHandler.create(this, () => {
                 player.EnemyManagerComp().ApplyDamageHero(damage, this.ProjectileInfo);

@@ -21,6 +21,7 @@ import { CCHandBookPanel } from "../HandBook/CCHandBookPanel";
 import { CCLuckyDrawPanel } from "../LuckyDraw/CCLuckyDrawPanel";
 import { CCMailPanel } from "../Mail/CCMailPanel";
 import { CCNotificationPanel } from "../Notification/CCNotificationPanel";
+import { CCBossHpBarItem } from "../OverHead/CCBossHpBarItem";
 import { CCPlayerListPanel } from "../Player/CCPlayerListPanel";
 import { CCPublicShopBagPanel } from "../PublicShopBag/CCPublicShopBagPanel";
 import { CCRankPanel } from "../Rank/CCRankPanel";
@@ -84,6 +85,7 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
                         <CCArtifactListPanel />
                         <CCPublicShopBagPanel />
                         <CCNotificationPanel />
+                        <CCBossHpBarItem />
                         <CCPlayerEndPanel />
                         <CCGameEndPanel />
                         <CCDebugPanel direction="left" hittest={false} />

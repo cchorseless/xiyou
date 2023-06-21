@@ -4,6 +4,7 @@ import { building_auto_findtreasure } from "../../../npc/abilities/common/buildi
 import { modifier_jiaoxie_wudi } from "../../../npc/modifier/battle/modifier_jiaoxie_wudi";
 import { modifier_mana_control } from "../../../npc/modifier/battle/modifier_mana_control";
 import { modifier_wait_portal } from "../../../npc/modifier/modifier_portal";
+import { modifier_tp } from "../../../npc/modifier/modifier_tp";
 import { BattleUnitEntityRoot } from "../BattleUnit/BattleUnitEntityRoot";
 import { ERoundBoard } from "../Round/ERoundBoard";
 
@@ -22,13 +23,18 @@ export class BuildingRuntimeEntityRoot extends BattleUnitEntityRoot {
     }
 
 
-    OnRound_Battle() {
+    OnRound_Battle(round: ERoundBoard) {
         let npc = this.GetDomain<IBaseNpc_Plus>();
         modifier_jiaoxie_wudi.remove(npc);
         modifier_mana_control.applyOnly(npc, npc);
         this.AbilityManagerComp().OnRound_Battle();
         this.InventoryComp().OnRound_Battle();
-        GTimerHelper.AddTimer(1, GHandler.create(this, () => {
+        let delay = 1;
+        if (round.IsFinalRound()) {
+            modifier_tp.TeleportToPoint(npc, null, GMapSystem.GetInstance().changeToEndBossPos(this.BelongPlayerid, npc.GetAbsOrigin()))
+            delay = 1.5;
+        }
+        GTimerHelper.AddTimer(delay, GHandler.create(this, () => {
             this.AiAttackComp().startFindEnemyAttack();
         }))
     }

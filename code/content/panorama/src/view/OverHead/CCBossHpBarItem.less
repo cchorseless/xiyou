@@ -1,0 +1,105 @@
+.CCBossHpBarItem {
+
+    width: 720px;
+    height: 140px;
+    horizontal-align: center;
+    margin-top: 40px;
+
+
+
+    #Name_panel {
+        // width: 150px;
+        height: 100px;
+        // margin-left: 230px;
+        horizontal-align: center;
+        margin-top: 68px;
+
+        Label {
+            margin-top: 2px;
+            horizontal-align: center;
+            font-size: 14px;
+            color: #FFE4B0;
+            // border: 1px solid #00000000;
+        }
+    }
+
+    .BossIntensify {
+        margin-top: 68px;
+        horizontal-align: right;
+        opacity: 0;
+
+        Image {
+            align: center center;
+            width: 50px;
+            height: 50px;
+            background-size: 100%;
+        }
+
+        Label {
+            align: center top;
+            margin-top: 7px;
+            margin-right: 5px;
+            text-align: center;
+            width: 100%;
+            height: 30px;
+            font-size: 26px;
+            font-weight: bold;
+            text-shadow: 2px 2px 0px 2 #000;
+            text-overflow: shrink;
+        }
+
+        .GS_EpisodeBegin & {
+            opacity: 0;
+            visibility: collapse;
+        }
+    }
+
+    #HealthBar {
+        margin-top: 40px;
+        horizontal-align: center;
+        vertical-align: center;
+        width: 600px;
+        height: 62px;
+        background-image: url("file://{images}/custom_game/overhead/boss_health.png");
+        background-size: 100% 100%;
+
+        #HealthProgressBar {
+            width: 538px;
+            height: 18px;
+            align: center center;
+            margin-top: 22px;
+            border-radius: 7px;
+            background-color: #000000;
+
+            // &>Panel {
+            //     border-radius: 0px;
+            // }
+
+            // #HealthProgressBar_Left {
+            //     height: 100%;
+            //     background-color: rgb(224, 23, 23);
+            // }
+        }
+
+        // #HealthProgressBar_atk {
+        //     z-index: -1;
+        //     background-color: #efa355;
+        //     width: 100%;
+        //     height: 100%;
+        //     margin-left: -1px;
+        //     transition-property: width;
+        //     transition-duration: 0.5s;
+        //     transition-timing-function: ease;
+        // }
+
+        // &.New {
+        //     #HealthProgressBar_atk {
+        //         transition-duration: 0s;
+        //     }
+        // }
+    }
+
+
+
+
+}

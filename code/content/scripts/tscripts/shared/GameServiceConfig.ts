@@ -3,7 +3,7 @@ import { CCShare } from "./lib/CCShare";
 
 export module GameServiceConfig {
     export const GAME_Name = "xiyou";
-    export const GAME_MAX_PLAYER = 5;
+    export const GAME_MAX_PLAYER = 4;
     export const HERO_MAX_LEVEL = 10;
     export const HERO_XP_PER_LEVEL_TABLE = { 0: 50, 1: 99, 2: 200, 3: 300, 4: 400, 5: 500, 6: 600, 7: 700, 8: 800, 9: 900, 10: 1000 }
     /**

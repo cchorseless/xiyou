@@ -25,11 +25,9 @@ export class PlayerSystem extends ET.EntityRoot {
     static Init() {
         let offset = Vector(ChessControlConfig.Gird_Width / 2, ChessControlConfig.Gird_Height / 2, 0)
         // 出生点
-        this.HeroSpawnPoint.push(Entities.FindByName(null, "player_startpoint0").GetAbsOrigin() + offset as Vector);
-        this.HeroSpawnPoint.push(Entities.FindByName(null, "player_startpoint1").GetAbsOrigin() + offset as Vector);
-        this.HeroSpawnPoint.push(Entities.FindByName(null, "player_startpoint2").GetAbsOrigin() + offset as Vector);
-        this.HeroSpawnPoint.push(Entities.FindByName(null, "player_startpoint3").GetAbsOrigin() + offset as Vector);
-        this.HeroSpawnPoint.push(Entities.FindByName(null, "player_startpoint4").GetAbsOrigin() + offset as Vector);
+        GMapSystem.GetInstance().PlayerStartPoint.forEach(v => {
+            this.HeroSpawnPoint.push(v + offset as Vector);
+        })
         this.addEvent();
 
     }
@@ -170,7 +168,9 @@ export class PlayerSystem extends ET.EntityRoot {
     public static GetAllOnlinePlayer(): IPlayerEntityRoot[] {
         return PlayerEntityRoot.GetAllInstance().filter(player => { return !player.IsLeaveGame })
     }
-
+    public static GetAllValidPlayer(): IPlayerEntityRoot[] {
+        return PlayerEntityRoot.GetAllInstance().filter(player => { return !player.IsLeaveGame && !player.IsGameEnd })
+    }
     /**
      * 开始游戏
      */

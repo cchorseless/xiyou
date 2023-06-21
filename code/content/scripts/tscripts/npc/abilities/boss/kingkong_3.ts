@@ -1,3 +1,4 @@
+import { AI_ability } from "../../../ai/AI_ability";
 import { EBATTLE_ATTACK_STATE } from "../../../rules/System/BattleSystemComponent";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus } from "../../entityPlus/BaseModifier_Plus";
@@ -33,7 +34,7 @@ export class kingkong_3 extends BaseAbility_Plus {
         let tUnitName = ["kingkong_beasts_boar", "kingkong_telepathy_beast"];
         let tModifier = ["modifier_kingkong_3_1", "modifier_kingkong_3_2"];
 
-        let iPlayerCount = GPlayerEntityRoot.GetAllOnlinePlayer().length;
+        let iPlayerCount = GPlayerEntityRoot.GetAllValidPlayer().length;
         if (iPlayerCount > 2) {
             tPosition = [
                 hCaster.GetAbsOrigin() + GFuncVector.Rotation2D(vDirection, math.rad(angle)) * distance as Vector,
@@ -59,37 +60,18 @@ export class kingkong_3 extends BaseAbility_Plus {
         }
         return tUnit
     }
-    GetIntrinsicModifierName() {
-        return "modifier_kingkong_3"
-    }
-}
-// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
-// Modifiers
 
-@registerModifier()
-export class modifier_kingkong_3 extends BaseModifier_Plus {
-    IsHidden() {
-        return true
-    }
-    trigger_pct: number;
-    BeCreated(params: IModifierTable) {
-        this.trigger_pct = this.GetSpecialValueFor("trigger_pct")
-        if (IsServer()) {
-            this.StartIntervalThink(1)
+    AutoSpellSelf(): boolean {
+        let trigger_pct = this.GetSpecialValueFor("trigger_pct")
+        let hCaster = this.GetCasterPlus();
+        if (100 - hCaster.GetHealthLosePect() <= trigger_pct) {
+            hCaster.Purge(false, true, false, true, true)
+            return AI_ability.NO_TARGET_cast(this)
         }
-    }
-    OnIntervalThink() {
-        if (this.GetParentPlus().GetHealthPercent() <= this.trigger_pct && this.GetStackCount() == 0) {
-            this.GetParentPlus().Purge(false, true, false, true, true)
-            ExecuteOrderFromTable({
-                UnitIndex: this.GetParentPlus().entindex(),
-                OrderType: dotaunitorder_t.DOTA_UNIT_ORDER_CAST_NO_TARGET,
-                AbilityIndex: this.GetAbilityPlus().entindex(),
-            })
-            this.SetStackCount(1)
-        }
+        return false
     }
 }
+
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_kingkong_3_1 extends BaseModifier_Plus {

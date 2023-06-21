@@ -1,8 +1,9 @@
 import { EventHelper } from "../../helper/EventHelper";
 import { BaseNpc_Plus } from "../../npc/entityPlus/BaseNpc_Plus";
-import { GameEnum } from "../../shared/GameEnum";
 import { GameProtocol } from "../../shared/GameProtocol";
 import { ET } from "../../shared/lib/Entity";
+import { EnemyUnitEntityRoot } from "../Components/Enemy/EnemyUnitEntityRoot";
+import { ERoundBoard } from "../Components/Round/ERoundBoard";
 import { RoundPrizeUnitEntityRoot } from "../Components/Round/RoundPrizeUnitEntityRoot";
 
 @GReloadable
@@ -47,7 +48,7 @@ export class RoundSystemComponent extends ET.SingletonComponent {
         this.addEvent();
     }
     public addEvent() {
-        EventHelper.addGameEvent(GameEnum.GameEvent.EntityHurtEvent, GHandler.create(this, this.OnEntityHurtEvent));
+        // EventHelper.addGameEvent(GameEnum.GameEvent.EntityHurtEvent, GHandler.create(this, this.OnEntityHurtEvent));
         EventHelper.addProtocolEvent(GameProtocol.Protocol.req_DebugPauseRoundStage, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
             const ispause = GToBoolean(e.data);
             GPlayerEntityRoot.GetAllInstance()
@@ -82,7 +83,8 @@ export class RoundSystemComponent extends ET.SingletonComponent {
         this.runBoardRound(this.GetFirstBoardRoundid());
         this.CreateFinishBoss()
     }
-    RoundFinishEnemys: IBaseNpc_Plus[] = [];
+    readonly RoundFinishEnemys: IBaseNpc_Plus[] = [];
+    private IsFinishRoundBattle = false;
     /**
      * 创建最终的Boss
      */
@@ -93,22 +95,32 @@ export class RoundSystemComponent extends ET.SingletonComponent {
         const pos = GMapSystem.GetInstance().BaseBaoXiangBossPoint;
 
         for (let enemyinfo of enemys) {
-            let enemy = BaseNpc_Plus.CreateUnitByName(enemyinfo.unitname, pos, null, true, DOTATeam_t.DOTA_TEAM_BADGUYS);
+            const enemy = BaseNpc_Plus.CreateUnitByName(enemyinfo.unitname, pos, null, true, DOTATeam_t.DOTA_TEAM_BADGUYS);
             enemy.SetUnitOnClearGround();
+            enemy.SetForwardVector(Vector(0, -1, 0));
+            EnemyUnitEntityRoot.Active(enemy, this.BelongPlayerid, enemyinfo.unitname, config.id, enemyinfo.id);
             this.RoundFinishEnemys.push(enemy);
         }
     }
-
-    private OnEntityHurtEvent(events: EntityHurtEvent) {
-        let hUnit = EntIndexToHScript(events.entindex_attacker) as IBaseNpc_Plus;
-        if (!IsValid(hUnit)) {
-            return;
-        }
-        if (!hUnit.ETRoot || !hUnit.ETRoot.AsValid<IEnemyUnitEntityRoot>("EnemyUnitEntityRoot")) {
-            return;
-        }
-        hUnit.ETRoot.As<IEnemyUnitEntityRoot>().GetRound().onEntityHurt(events.entindex_attacker, events.damage);
+    public OnFinishRound_Battle(round: ERoundBoard) {
+        if (this.IsFinishRoundBattle) { return }
+        this.IsFinishRoundBattle = true;
+        this.RoundFinishEnemys.forEach(v => {
+            if (v && v.ETRoot) {
+                (v.ETRoot as IEnemyUnitEntityRoot).OnRound_Battle(round);
+            }
+        })
     }
+    // private OnEntityHurtEvent(events: EntityHurtEvent) {
+    //     let hUnit = EntIndexToHScript(events.entindex_attacker) as IBaseNpc_Plus;
+    //     if (!IsValid(hUnit)) {
+    //         return;
+    //     }
+    //     if (!hUnit.ETRoot || !hUnit.ETRoot.AsValid<IEnemyUnitEntityRoot>("EnemyUnitEntityRoot")) {
+    //         return;
+    //     }
+    //     hUnit.ETRoot.As<IEnemyUnitEntityRoot>().GetRound().onEntityHurt(events.entindex_attacker, events.damage);
+    // }
 
     public runBoardRound(round: string) {
         this.iRound = round;
@@ -130,7 +142,7 @@ export class RoundSystemComponent extends ET.SingletonComponent {
                 GHandler.create(this, () => {
                     let nextid = this._debug_nextround || this.GetNextBoardRoundid();
                     this._debug_nextround = null;
-                    if (nextid != null) {
+                    if (nextid != null && nextid != "") {
                         this.runBoardRound(nextid);
                     }
                     else {
@@ -170,20 +182,7 @@ export class RoundSystemComponent extends ET.SingletonComponent {
         return GFuncRandom.RandomArray(allunit);
     }
 
-    public runBasicRound(round: string) {
-        // PlayerSystem.GetAllPlayer().forEach((player) => {
-        //     player.RoundManagerComp().runBasicRound(round);
-        // });
-        // let round_time = KVHelper.KvServerConfig.building_round[round as "10"].round_time;
-        // TimerHelper.addTimer(
-        //     tonumber(round_time),
-        //     () => {
-        //         RoundSystem.runBasicRound("" + (tonumber(round) + 1));
-        //     },
-        //     this,
-        //     true
-        // );
-    }
+
 }
 declare global {
     /**

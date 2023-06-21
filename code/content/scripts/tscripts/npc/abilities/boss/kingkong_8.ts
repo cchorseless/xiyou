@@ -1,8 +1,8 @@
+import { AI_ability } from "../../../ai/AI_ability";
 import { PropertyConfig } from "../../../shared/PropertyConfig";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
-import { BaseModifierMotionHorizontal_Plus, BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
+import { BaseModifierMotionHorizontal_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 
 @registerAbility()
 export class kingkong_8 extends BaseAbility_Plus {
@@ -68,46 +68,15 @@ export class kingkong_8 extends BaseAbility_Plus {
         }
         hCaster.EmitSound("Hero_Magnataur.Skewer.Cast")
     }
-    GetIntrinsicModifierName() {
-        return "modifier_kingkong_8"
+    AutoSpellSelf(): boolean {
+        return AI_ability.POSITION_if_enemy(this)
     }
 }
-// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
-// Modifiers
-@registerModifier()
-export class modifier_kingkong_8 extends BaseModifier_Plus {
-    IsHidden() {
-        return true
-    }
-    trigger_time: number;
-    OnCreated(params: IModifierTable) {
-        this.trigger_time = this.GetSpecialValueFor("trigger_time")
-        if (IsServer()) {
-            this.StartIntervalThink(this.trigger_time)
-        }
-    }
-    @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
-    CC_OnDeath(params: IModifierTable) {
-        if (IsServer() && params.unit.IsFriendly(this.GetParentPlus()) == false) {
-            this.StartIntervalThink(this.trigger_time)
-        }
-    }
-    OnIntervalThink() {
-        let hParent = this.GetParentPlus()
-        if (this.GetAbilityPlus().IsAbilityReady()) {
-            ExecuteOrderFromTable({
-                UnitIndex: this.GetParentPlus().entindex(),
-                OrderType: dotaunitorder_t.DOTA_UNIT_ORDER_CAST_POSITION,
-                AbilityIndex: this.GetAbilityPlus().entindex(),
-                Position: this.GetParentPlus().GetAbsOrigin() + this.GetParentPlus().GetForwardVector() as Vector
-            })
-        }
-    }
-}
+
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 
 @registerModifier()
-export class modifier_kingkong_7_thinker extends BaseModifierMotionHorizontal_Plus {
+export class modifier_kingkong_8_rush extends BaseModifierMotionHorizontal_Plus {
     GetEffectAttachType() {
         return ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW
     }

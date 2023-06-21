@@ -311,11 +311,6 @@ export class BuildingManagerComponent extends ET.Component implements IRoundStat
             return [false, "cant move to egg position"];
         }
         // 回合
-        let round = playerRoot.RoundManagerComp().getCurrentBoardRound();
-        const isBattle = round.IsRoundBattle();
-        if (isBattle && target.IsHuted()) {
-            return [false, "cant move huted chess in round battle"];
-        }
         let oldNpcarr = ChessControlSystem.FindBoardInGirdChess(boardVec);
         //  人口判断
         let iPopulationAdd = 0;
@@ -326,9 +321,6 @@ export class BuildingManagerComponent extends ET.Component implements IRoundStat
         let freePopulation = PlayerDataComp.getFreePopulation();
         if (oldNpcarr.length > 0) {
             let oldNpc = oldNpcarr[0];
-            if (isBattle && oldNpc.IsHuted()) {
-                return [false, "cant move to huted chess in round battle"];
-            }
             iPopulationAdd -= GBuildingSystem.GetInstance().GetBuildingPopulation(oldNpc.ConfigID);
         }
         if (iPopulationAdd > freePopulation) {
@@ -395,15 +387,15 @@ export class BuildingManagerComponent extends ET.Component implements IRoundStat
         });
     }
 
-    OnRound_Battle() {
+    OnRound_Battle(round: ERoundBoard) {
         this.UploadBuildingData();
         // 上传阵容数据
         this.getAllBattleBuilding(true).forEach((b) => {
-            b.OnRound_Battle();
+            b.OnRound_Battle(round);
         });
         // 先战吼技能再激活羁绊
         let player = GGameScene.GetPlayer(this.BelongPlayerid);
-        player.CombinationManager().OnRound_Battle();
+        player.CombinationManager().OnRound_Battle(round);
 
     }
 

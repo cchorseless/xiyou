@@ -39,10 +39,10 @@ export class ERound extends ET.Entity {
         GRoundSystem.GetInstance().endBoardRound();
     }
 
-    private onEntitySpawn(enemy: IBaseNpc_Plus) { }
-    onEntityHurt(entindex: EntityIndex, damage: number) {
-        this.tTowerDamage[entindex] = this.tTowerDamage[entindex] || 0;
-        this.tTowerDamage[entindex] += damage;
-        this.tTotalDamage += damage;
-    }
+    // private onEntitySpawn(enemy: IBaseNpc_Plus) { }
+    // onEntityHurt(entindex: EntityIndex, damage: number) {
+    //     this.tTowerDamage[entindex] = this.tTowerDamage[entindex] || 0;
+    //     this.tTowerDamage[entindex] += damage;
+    //     this.tTotalDamage += damage;
+    // }
 }

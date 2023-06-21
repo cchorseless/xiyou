@@ -162,6 +162,24 @@
     "AwakeScript": []
   },
   {
+    "id": 106,
+    "isVaild": true,
+    "ItemName": "天梯积分",
+    "ItemIcon": "410005",
+    "ItemQuality": 10,
+    "ItemType": 0,
+    "ItemDes": "",
+    "BagSlotType": 2,
+    "AutoUse": false,
+    "OneGameUseLimit": 0,
+    "DecomposeStarStone": 0,
+    "BatchUseable": false,
+    "BindHeroName": "",
+    "UseScript": 0,
+    "UseArgs": [],
+    "AwakeScript": []
+  },
+  {
     "id": 1000,
     "isVaild": false,
     "ItemName": "",

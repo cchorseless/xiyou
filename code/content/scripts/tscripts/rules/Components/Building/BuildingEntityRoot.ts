@@ -1,14 +1,10 @@
 
 import { KVHelper } from "../../../helper/KVHelper";
 import { ResHelper } from "../../../helper/ResHelper";
-import { modifier_courier_hut_change } from "../../../npc/abilities/courier/courier_hut_change";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { modifier_jiaoxie_wudi } from "../../../npc/modifier/battle/modifier_jiaoxie_wudi";
 import { modifier_never_death } from "../../../npc/modifier/battle/modifier_never_death";
-import { modifier_unit_freedom } from "../../../npc/modifier/battle/modifier_unit_freedom";
-import { modifier_unit_hut } from "../../../npc/modifier/battle/modifier_unit_hut";
 import { modifier_building_battle_buff } from "../../../npc/modifier/building/modifier_building_battle_buff";
-import { modifier_building_hut } from "../../../npc/modifier/building/modifier_building_hut";
 import { serializeETProps } from "../../../shared/lib/Entity";
 import { GEventHelper } from "../../../shared/lib/GEventHelper";
 import { THeroUnit } from "../../../shared/service/hero/THeroUnit";
@@ -180,39 +176,23 @@ export class BuildingEntityRoot extends BattleUnitEntityRoot {
         }
         this.RuntimeBuilding = null;
         modifier_building_battle_buff.remove(npc);
-        if (modifier_courier_hut_change.findIn(npc)) {
-            npc.RemoveNoDraw();
-        }
     }
-    OnRound_Battle() {
+    OnRound_Battle(round: ERoundBoard) {
         if (!IsServer()) { return };
         if (!this.ChessComp().isInBattle) { return }
-        let hCaster = this.GetDomain<IBaseNpc_Plus>();
-        let vLocation = hCaster.GetAbsOrigin();
+        const hCaster = this.GetDomain<IBaseNpc_Plus>();
+        const vLocation = hCaster.GetAbsOrigin();
         modifier_building_battle_buff.applyOnly(hCaster, hCaster);
-        let isHutBuff = this.IsHuted();
-        if (isHutBuff) {
-            hCaster.AddNoDraw();
-            hCaster.NoTeamSelect
-        }
         // this.SetUIOverHead(false, true)
-        let cloneRuntime = BaseNpc_Plus.CreateUnitByName(this.ConfigID, vLocation, hCaster) as IBaseNpc_Plus;
+        const cloneRuntime = BaseNpc_Plus.CreateUnitByName(this.ConfigID, vLocation, hCaster) as IBaseNpc_Plus;
         if (cloneRuntime) {
             // cloneRuntime.RemoveGesture(GameActivity_t.ACT_DOTA_SPAWN);
             // 可能助战情况下，助战玩家ID不是自己
-            let playerid = this.HelperPlayerid || this.BelongPlayerid;
+            const playerid = this.HelperPlayerid || this.BelongPlayerid;
             cloneRuntime.StartGestureFadeWithSequenceSettings(GameActivity_t.ACT_DOTA_TAUNT);
             BuildingRuntimeEntityRoot.Active(cloneRuntime, playerid, this.ConfigID);
-            let runtimeroot = cloneRuntime.ETRoot.As<BuildingRuntimeEntityRoot>();
+            const runtimeroot = cloneRuntime.ETRoot.As<BuildingRuntimeEntityRoot>();
             GGameScene.GetPlayer(playerid).AddDomainChild(runtimeroot);
-            if (isHutBuff) {
-                runtimeroot.ChessComp().setMoving(false);
-                modifier_unit_hut.applyOnly(cloneRuntime, cloneRuntime);
-                modifier_building_hut.applyOnly(cloneRuntime, cloneRuntime);
-            }
-            else {
-                modifier_unit_freedom.applyOnly(cloneRuntime, cloneRuntime);
-            }
             this.RuntimeBuilding = runtimeroot;
             runtimeroot.SetStar(this.iStar);
             // wearable
@@ -237,13 +217,7 @@ export class BuildingEntityRoot extends BattleUnitEntityRoot {
         }
         this.RuntimeBuilding = null;
     }
-    /**
-     * 是否驻扎
-     */
-    IsHuted() {
-        let hCaster = this.GetDomain<IBaseNpc_Plus>();
-        return hCaster.HasModifier("modifier_courier_hut_change");
-    }
+
     onDestroy(): void {
         let npc = this.GetDomain<IBaseNpc_Plus>();
         if (IsValid(npc)) {

@@ -32,8 +32,8 @@
     "scripts": {
         "httpserver": "node scripts/httpserver.js",
         "postinstall": "node scripts/install.js",
-        "mapBuild": "node scripts/mapBuild.js --m bigmap01",
-        "launch": "node scripts/launch.js --m bigmap01",
+        "mapBuild": "node scripts/mapBuild.js --m bigmap02",
+        "launch": "node scripts/launch.js --m bigmap02",
         "updateApp": "node scripts/updateApp.js 2598019781",
         "lua2ts": "node scripts/lua2ts/lua2ts.js",
         "luamini": "node scripts/luamini.js",

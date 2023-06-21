@@ -1,5 +1,4 @@
 import { Dota } from "../../../../../scripts/tscripts/shared/Gen/Types";
-import { GEventHelper } from "../../../../../scripts/tscripts/shared/lib/GEventHelper";
 import { RoundConfig } from "../../../../../scripts/tscripts/shared/RoundConfig";
 import { KVHelper } from "../../../helper/KVHelper";
 import { ERound } from "./ERound";
@@ -33,7 +32,6 @@ export class ERoundBoard extends ERound {
     onReload(): void {
         if (this.bRunning) {
             ERoundBoard.CurRoundBoard = this;
-            GEventHelper.FireEvent(ERoundBoard.name, null, null, this);
         }
     }
 

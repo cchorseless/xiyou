@@ -1,14 +1,13 @@
 import { Assert_ProjectileEffect, IProjectileEffectInfo } from "../../../assert/Assert_ProjectileEffect";
+import { EventHelper } from "../../../helper/EventHelper";
 import { KVHelper } from "../../../helper/KVHelper";
 import { modifier_jiaoxie_wudi } from "../../../npc/modifier/battle/modifier_jiaoxie_wudi";
 import { modifier_mana_control } from "../../../npc/modifier/battle/modifier_mana_control";
-import { modifier_unit_freedom } from "../../../npc/modifier/battle/modifier_unit_freedom";
-import { modifier_unit_hut } from "../../../npc/modifier/battle/modifier_unit_hut";
 import { modifier_round_enemy } from "../../../npc/modifier/enmey/modifier_round_enemy";
 import { EnemyConfig } from "../../../shared/EnemyConfig";
+import { RoundConfig } from "../../../shared/RoundConfig";
 import { BattleUnitEntityRoot } from "../BattleUnit/BattleUnitEntityRoot";
 import { CombinationComponent } from "../Combination/CombinationComponent";
-import { ERound } from "../Round/ERound";
 import { ERoundBoard } from "../Round/ERoundBoard";
 import { EnemyMoveComponent } from "./EnemyMoveComponent";
 
@@ -29,16 +28,7 @@ export class EnemyUnitEntityRoot extends BattleUnitEntityRoot {
         // if (config) {
         //     if (config.star > 0) this.SetStar(config.star);
         //     if (config.level > 0) domain.CreatureLevelUp(config.level);
-        //     // if (config.enemycreatetype == GEEnum.EEnemyCreateType.SummedEgg) {
-        //     //     this.AddComponent(GGetRegClass<typeof EnemyMoveComponent>("EnemyMoveComponent"));
-        //     // }
         // }
-        if (this.EnemyMoveComp()) {
-            modifier_unit_hut.applyOnly(domain, domain);
-        }
-        else {
-            modifier_unit_freedom.applyOnly(domain, domain);
-        }
         this.SetUIOverHead(true, false);
         this.InitSyncClientInfo();
         if (onlyKey != null) {
@@ -47,7 +37,9 @@ export class EnemyUnitEntityRoot extends BattleUnitEntityRoot {
                 onlyKey: onlyKey
             })
         }
-        this.JoinInRound();
+        if (!this.IsEndBoss()) {
+            this.JoinInRound();
+        }
     }
 
     LoadData(data: IBattleUnitInfoItem) {
@@ -83,7 +75,7 @@ export class EnemyUnitEntityRoot extends BattleUnitEntityRoot {
 
     }
 
-    OnRound_Start() {
+    OnRound_Start(round: ERoundBoard) {
         let npc = this.GetDomain<IBaseNpc_Plus>();
         modifier_jiaoxie_wudi.applyOnly(npc, npc);
         if (this.IsEnemyTower()) {
@@ -94,8 +86,8 @@ export class EnemyUnitEntityRoot extends BattleUnitEntityRoot {
         }
         GGameScene.GetPlayer(this.BelongPlayerid).FakerHeroRoot().FHeroCombinationManager().addEnemyUnit(this);
     }
-    OnRound_Battle() {
-        this.SetUIOverHead(false, true);
+    OnRound_Battle(round: ERoundBoard) {
+        this.SetUIOverHead(false, !this.IsBoss());
         let npc = this.GetDomain<IBaseNpc_Plus>();
         if (!this.IsEnemyTower()) {
             npc.RemoveGesture(GameActivity_t.ACT_DOTA_IDLE);
@@ -112,6 +104,17 @@ export class EnemyUnitEntityRoot extends BattleUnitEntityRoot {
                 this.AiAttackComp().startFindEnemyAttack();
             }))
         }
+        if (this.IsEndBoss()) {
+            EventHelper.fireProtocolEventToClient(RoundConfig.EProtocol.roundboard_showbosshp, {
+                data: this.EntityId
+            });
+        }
+        else if (this.IsBoss() && this.BelongPlayerid != -1) {
+            EventHelper.fireProtocolEventToPlayer(RoundConfig.EProtocol.roundboard_showbosshp, {
+                data: this.EntityId
+            }, this.BelongPlayerid);
+        }
+
     }
     OnRound_Prize(round: ERoundBoard) {
         let domain = this.GetDomain<IBaseNpc_Plus>();
@@ -150,18 +153,21 @@ export class EnemyUnitEntityRoot extends BattleUnitEntityRoot {
     OnRound_WaitingEnd() {
 
     }
-
-    IsWave() {
+    IsEnemyTower() {
         let npc = this.GetDomain<IBaseNpc_Plus>();
-        return npc.GetUnitLabel() == EnemyConfig.EEnemyUnitType.wave;
+        return npc.GetUnitLabel().split("|").includes(EnemyConfig.EEnemyUnitType.Tower);
+    }
+    IsChallenge() {
+        let npc = this.GetDomain<IBaseNpc_Plus>();
+        return npc.GetUnitLabel().split("|").includes(EnemyConfig.EEnemyUnitType.Challenge);
     }
     IsBoss() {
         let npc = this.GetDomain<IBaseNpc_Plus>();
-        return npc.GetUnitLabel() == EnemyConfig.EEnemyUnitType.BOSS;
+        return npc.GetUnitLabel().split("|").includes(EnemyConfig.EEnemyUnitType.Boss) || this.IsEndBoss();
     }
-    IsGOLD_BOSS() {
+    IsEndBoss() {
         let npc = this.GetDomain<IBaseNpc_Plus>();
-        return npc.GetUnitLabel() == EnemyConfig.EEnemyUnitType.GOLD_BOSS;
+        return npc.GetUnitLabel().split("|").includes(EnemyConfig.EEnemyUnitType.EndBoss);
     }
     /**
      * 攻击蛋的怪物
@@ -171,10 +177,6 @@ export class EnemyUnitEntityRoot extends BattleUnitEntityRoot {
         let config = this.GetRoundBasicUnitConfig();
         if (!config) return false;
         return config.enemycreatetype == GEEnum.EEnemyCreateType.SummedEgg;
-    }
-    IsEnemyTower() {
-        let npc = this.GetDomain<IBaseNpc_Plus>();
-        return npc.GetUnitLabel() == EnemyConfig.EEnemyUnitType.Tower;
     }
 
     onDestroy(): void {
@@ -208,6 +210,7 @@ export class EnemyUnitEntityRoot extends BattleUnitEntityRoot {
     }
 
     GiveKillReward() {
+        if (this.IsEndBoss()) { return }
         let roundconfig = this.GetRoundBasicUnitConfig();
         if (roundconfig) {
             let player = this.GetPlayer();
@@ -266,13 +269,14 @@ export class EnemyUnitEntityRoot extends BattleUnitEntityRoot {
     GetDotaHeroName() {
         return this.Config().DotaHeroName as string;
     }
-    GetRound<T extends ERound>(): T {
-        return this.GetPlayer().RoundManagerComp().RoundInfo[this.RoundID] as T;
-    }
-
     GetRoundBasicUnitConfig() {
         if (this.OnlyKey != null) {
-            return this.GetRound<ERoundBoard>().config.enemyinfo.find(v => { return v.id == this.OnlyKey })
+            if (this.IsChallenge()) {
+                return GJSONConfig.RoundBoardChallengeConfig.get(this.RoundID).enemyinfo.find(v => { return v.id == this.OnlyKey })
+            }
+            else {
+                return GJSONConfig.RoundBoardConfig.get(this.RoundID).enemyinfo.find(v => { return v.id == this.OnlyKey })
+            }
         }
     }
     /**

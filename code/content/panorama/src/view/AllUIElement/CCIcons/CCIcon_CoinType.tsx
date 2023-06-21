@@ -27,6 +27,10 @@ export class CCIcon_CoinType extends CCIcon<ICCIcon_CoinType> {
             case GEEnum.EMoneyType.StarStone:
                 src = "s2r://panorama/images/custom_game/icon/starstone_png.vtex";
                 break;
+            case GEEnum.EMoneyType.BattleScore:
+                src = "s2r://panorama/images/custom_game/icon/battlescore_png.vtex";
+                break;
+
         }
         if (src.length > 0) {
             superStyle.src = src;

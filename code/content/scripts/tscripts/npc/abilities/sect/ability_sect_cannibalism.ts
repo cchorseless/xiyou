@@ -47,7 +47,7 @@ export class modifier_sect_cannibalism_eatenemy extends BaseModifier_Plus {
                     if (npc.IsAlive() && !npc.IsFriendly(parent) &&
                         npc.TempData().sect_cannibalism_eatfriend == null &&
                         npc.GetUnitLabel() != EnemyConfig.EEnemyUnitType.Tower &&
-                        npc.GetUnitLabel() != EnemyConfig.EEnemyUnitType.BOSS
+                        npc.GetUnitLabel() != EnemyConfig.EEnemyUnitType.Boss
                     ) {
                         npc.TempData().sect_cannibalism_eatfriend = true;
                         hpadd += npc.GetMaxHealth() * prop_pect * 0.01;

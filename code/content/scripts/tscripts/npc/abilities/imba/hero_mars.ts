@@ -682,12 +682,12 @@ export class modifier_imba_mars_gods_rebuke extends BaseModifier_Plus {
         if (!IsServer()) {
             return;
         }
-        print("Bonus Damage:", this.bonus_damage);
+        // print("Bonus Damage:", this.bonus_damage);
         return this.bonus_damage;
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_CRITICALSTRIKE_UNIQUE)
     CC_GetModifierPreAttack_CriticalStrike(params: ModifierAttackEvent): number {
-        print("Bonus Crit:", this.bonus_crit);
+        // print("Bonus Crit:", this.bonus_crit);
         return this.bonus_crit;
     }
 }

@@ -1,6 +1,5 @@
 
 import React from "react";
-import { GEventHelper } from "../../../../scripts/tscripts/shared/lib/GEventHelper";
 import { ERoundBoard } from "../../game/components/Round/ERoundBoard";
 import { CSSHelper } from "../../helper/CSSHelper";
 import { CCImageNumber } from "../AllUIElement/CCImageNumber/CCImageNumber";
@@ -21,10 +20,7 @@ export class CCTopBarCenter<T extends NodePropsData> extends CCPanel<T> {
     }
 
     onInitUI() {
-        GEventHelper.AddEvent(ERoundBoard.name, GHandler.create(this,
-            () => {
-                this.UpdateSelf();
-            }));
+        this.ListenClassUpdate(ERoundBoard)
         this.UpdateState({ gametime: -1 });
         GTimerHelper.AddTimer(1, GHandler.create(this, () => {
             let round = ERoundBoard.CurRoundBoard;
@@ -60,7 +56,7 @@ export class CCTopBarCenter<T extends NodePropsData> extends CCPanel<T> {
                     </CCPanel>
                     <Label id="RoundDifficulty" localizedText="#lang_TopBarDifficulty" dialogVariables={{ difficulty: this.getDifficultyDes() }} />
                 </Image>
-                <CCImageNumber id="RoundTime" type="4" value={Math.floor(gametime - 3)} />
+                <CCImageNumber id="RoundTime" type="9" value={Math.floor(gametime - 3)} />
                 {this.props.children}
                 {this.__root___childs}
             </Panel >

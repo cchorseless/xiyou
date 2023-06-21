@@ -59,6 +59,20 @@ export module JsonConfigHelper {
         }
     }
     /**
+     * 根据分数获取天梯配置ID
+     * @param score 
+     * @returns 
+     */
+    export function GetRankScoreLevel(score: number) {
+        const t = GJSONConfig.RankBattleScoreExpConfig.getDataList();
+        for (const _t of t) {
+            if (_t.ScoreMin <= score && (_t.ScoreMax > score || _t.ScoreMax == 0)) {
+                return _t.id;
+            }
+        }
+        return 1;
+    }
+    /**
      * 获取排行榜id
      * @param score 
      * @returns 

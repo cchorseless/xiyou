@@ -57,39 +57,56 @@
         }
 
         #BattleRecordTitle {
+            width: 300px;
             padding-left: 24px;
             padding-top: 2px;
             align: left top;
-            color: #DAB774;
+            color: #daaa74;
             text-shadow: 0px 0px 0px 2 black;
             font-size: 16px;
             background-color: gradient(linear, 100% 0%, 0% 0%, from(#00000000), color-stop(0.8, #00000099), to(#000000));
         }
 
         #BattleRecordPanel {
-            margin-top: -5px;
             background-image: url("file://{images}/custom_game/artifact/artifact_bg1.png");
             background-size: 100% 100%;
             background-repeat: no-repeat;
-            flow-children: down;
+
+            #BattleRecordInfo {
+                width: 380px;
+                height: 300px;
+                margin-top: 5px;
+                flow-children: down;
+
+                .CCPanelHeader {
+                    #HeadTitle {
+                        margin-left: 40px;
+                        font-size: 18px;
+                    }
+                }
+
+            }
 
             #BattleRecordList {
                 width: 380px;
-                margin-top: 25px;
-                min-height: 115px;
-                max-height: 300px;
+                height: 280px;
+                margin-top: 5px;
+                // min-height: 115px;
+                // max-height: 300px;
                 margin-left: 30px;
                 padding: 12px 12px;
                 flow-children: down;
             }
 
-            #BattleRecordTongJi {
-                width: 380px;
-                height: 30px;
-                background-image: url("file://{images}/custom_game/hud/player_battle_bg_right.png");
-                background-size: 100% 100%;
-                background-repeat: no-repeat;
-            }
+
+        }
+
+        #BattleRecordTongJi {
+            width: 380px;
+            height: 30px;
+            background-image: url("file://{images}/custom_game/hud/player_battle_bg_right.png");
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
         }
     }
 

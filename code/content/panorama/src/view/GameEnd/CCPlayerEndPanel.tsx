@@ -8,8 +8,6 @@ import { CSSHelper } from "../../helper/CSSHelper";
 import { NetHelper } from "../../helper/NetHelper";
 import { CCAvatar } from "../AllUIElement/CCAvatar/CCAvatar";
 import { CCButton } from "../AllUIElement/CCButton/CCButton";
-import { CCIcon_BattlepassLogo } from "../AllUIElement/CCIcons/CCIcon_BattlepassLogo";
-import { CCIcon_Vip } from "../AllUIElement/CCIcons/CCIcon_Vip";
 import { CCLabel } from "../AllUIElement/CCLabel/CCLabel";
 import { CCLevelxp } from "../AllUIElement/CCLevelxp/CCLevelxp";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
@@ -18,7 +16,6 @@ import { CCPopupBG } from "../AllUIElement/CCPopUpDialog/CCPopUpDialog";
 import { CCUnitSmallIcon } from "../AllUIElement/CCUnit/CCUnitSmallIcon";
 import { CCUserName } from "../AllUIElement/CCUserName/CCUserName";
 import { CCRankProgressItem } from "../Rank/CCRankProgressItem";
-import { CCRecordLevelNum } from "../Record/CCRecordMainItem";
 import { CCStorageIconItem } from "../Storage/CCStorageIconItem";
 import "./CCPlayerEndPanel.less";
 interface ICCPlayerEndPanel extends NodePropsData {
@@ -85,54 +82,6 @@ export class CCPlayerEndPanel extends CCPanel<ICCPlayerEndPanel> {
             <CCPopupBG type="Tui7" hasTitle={false} />
             <CCPanel flowChildren="down" width="100%" height="100%">
                 <CCLabel type="Title" text={"你已阵亡···"} color="Red" fontSize="40px" horizontalAlign="center" marginTop={"40px"} />
-                <CCPanel flowChildren="right" width="100%" marginTop={"10px"} visible={false}>
-                    <CCPanel flowChildren="down" width="400px" height="300px">
-                        <CCPanelHeader type="Tui7" localizedStr="#档案信息" />
-                        <CCPanel flowChildren="right" >
-                            <CCPanel flowChildren="down" width="150px" height="250px">
-                                <CCAvatar id="CCRecordAvatar" steamid="local" horizontalAlign="center" marginTop={"20px"} />
-                                <CCUserName accountid={tCharacter.Name} fontSize={"30px"} marginLeft={"10px"} width="100%" marginTop={"20px"} height="50px" />
-                            </CCPanel>
-                            <CCPanel flowChildren="down" width="250px" marginTop={"30px"}>
-                                <CCRecordLevelNum iLevel={SumHeroLevel} uiScale={"250%"} horizontalAlign="center" marginTop={"50px"} />
-                            </CCPanel>
-                        </CCPanel>
-
-                    </CCPanel>
-                    <CCPanel flowChildren="down" width="300px" height="300px" marginLeft={"30px"}>
-                        <CCPanelHeader type="Tui7" localizedStr="#会员" />
-                        <CCIcon_Vip id="RecordVipIcon" type={IsVipForever ? "Gold" : (IsVipSeason ? "Purple" : "Blue")} className={CSSHelper.ClassMaker({ IsVip: IsVip })} horizontalAlign="center" />
-                        <CCPanel marginTop={"20px"} horizontalAlign="center">
-                            {IsVipForever ? <CCLabel type="Title" localizedText={"#永久会员"} fontSize="16px" />
-                                : <Countdown id="BPCountDown" endTime={GToNumber(BattlePassComp.SeasonEndTimeSpan)}>
-                                    <CCLabel localizedText="#lang_hud_bp_deadline" fontSize="16px" />
-                                </Countdown>
-                            }
-                        </CCPanel>
-                        <CCButton text={IsVip ? "开通永久会员" : "开通会员"} marginTop={"20px"} onactivate={() => {
-                            if (IsVipForever) { return }
-                            // this.OnBtnVipGet(IsVip)
-                        }} color={IsVip ? "Purple" : "Blue"} horizontalAlign="center" visible={!IsVipForever} />
-                    </CCPanel>
-                    <CCPanel flowChildren="down" width="300px" height="300px" marginLeft={"30px"}>
-                        <CCPanelHeader type="Tui7" localizedStr="#战令通行证" />
-                        <CCIcon_BattlepassLogo id="RecordBattlePassIcon" type={IsBattlePass ? "Plus" : "Common"} />
-                        <CCPanel marginTop={"20px"} horizontalAlign="center">
-                            {!IsBattlePass ? <CCLabel type="Title" localizedText={"#第10赛季 普通战令"} fontSize="16px" />
-                                : <Countdown id="BPCountDown" endTime={GToNumber(BattlePassComp.SeasonEndTimeSpan)}>
-                                    <CCLabel localizedText="#lang_hud_bp_deadline" fontSize="16px" />
-                                </Countdown>
-                            }
-                        </CCPanel>
-                        <CCButton color="Green" marginTop={"20px"} onactivate={() => {
-                            if (IsBattlePass) { return }
-                            // this.OnBtnBattlePassGet()
-                        }} width="200px" horizontalAlign="center" flowChildren="right">
-                            <CCLabel type="UnitName" text={"启用高级战令"} verticalAlign="center" marginLeft={"15px"} />
-                            <CCIcon_BattlepassLogo visible={!IsBattlePass} type="Plus" width="40px" height="40px" verticalAlign="center" />
-                        </CCButton>
-                    </CCPanel>
-                </CCPanel>
                 <CCPanel flowChildren="right" horizontalAlign="center">
                     <CCPanel flowChildren="down" width="150px" height="250px">
                         <CCAvatar id="CCRecordAvatar" steamid="local" horizontalAlign="center" />

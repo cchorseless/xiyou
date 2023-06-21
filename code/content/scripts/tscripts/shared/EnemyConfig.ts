@@ -158,9 +158,10 @@ export module EnemyConfig {
 
     export enum EEnemyUnitType {
         Tower = "Tower",
+        Challenge = "Challenge",
         wave = "wave",
-        BOSS = "BOSS",
-        GOLD_BOSS = "GOLD_BOSS",
+        Boss = "Boss",
+        EndBoss = "EndBoss",
         CANDY_BOSS = "CANDY_BOSS",
         CANDY_WAVE = "CANDY_WAVE",
     }

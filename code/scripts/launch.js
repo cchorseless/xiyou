@@ -6,7 +6,7 @@ const { getAddonName, getDotaPath } = require('./utils');
     const dotaPath = await getDotaPath();
     const win64 = path.join(dotaPath, 'game', 'bin', 'win64');
     // You can add any arguments there
-    // minimap_create
+    // minimap_create 编译小地图
     // For example `+dota_launch_custom_game ${getAddonName()} dota` would automatically load "dota" map
     let addon_name = getAddonName();
     let map_name;

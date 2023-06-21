@@ -40,7 +40,7 @@ export class ChessControlSystemComponent extends ET.SingletonComponent {
     // }
     public GetBoardZeroPoint(playerid: PlayerID) {
         let offset = Vector(ChessControlConfig.Gird_Width / 2, ChessControlConfig.Gird_Height / 2, 0)
-        return GPlayerEntityRoot.HeroSpawnPoint[playerid] - offset as Vector;
+        return GMapSystem.GetInstance().PlayerStartPoint[playerid] - offset as Vector;
     }
     public GetBoardMaxVector3(playerid: PlayerID) {
         if (this.BoardMaxVector3[playerid + ""]) {

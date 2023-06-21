@@ -21,13 +21,7 @@ export class TRankSingleData extends ET.Entity {
 
 
     GetLevel() {
-        const t = GJSONConfig.RankBattleScoreExpConfig.getDataList();
-        for (const _t of t) {
-            if (_t.ScoreMin <= this.Score && (_t.ScoreMax > this.Score || _t.ScoreMax == 0)) {
-                return _t.id;
-            }
-        }
-        return 1;
+        return GJsonConfigHelper.GetRankScoreLevel(this.Score)
     }
 
     onSerializeToEntity() {

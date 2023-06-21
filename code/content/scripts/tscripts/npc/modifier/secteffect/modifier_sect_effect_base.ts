@@ -1640,7 +1640,7 @@ export class modifier_sect_betrayal_base_a extends modifier_sect_effect_base {
             if (keys.target.GetUnitLabel() == EnemyConfig.EEnemyUnitType.Tower) {
                 return
             }
-            if (keys.target.GetUnitLabel() == EnemyConfig.EEnemyUnitType.BOSS) {
+            if (keys.target.GetUnitLabel() == EnemyConfig.EEnemyUnitType.Boss) {
                 return
             }
             let parent = this.GetParentPlus();

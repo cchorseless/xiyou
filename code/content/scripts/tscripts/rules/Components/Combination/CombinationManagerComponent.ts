@@ -43,9 +43,9 @@ export class CombinationManagerComponent extends ET.Component implements IRoundS
     }
     OnRound_Start(round?: ERoundBoard): void { }
     OnRound_WaitingEnd(): void { };
-    public OnRound_Battle() {
+    public OnRound_Battle(round: ERoundBoard) {
         this.getAllActiveCombination().forEach(comb => {
-            comb.OnRound_Battle();
+            comb.OnRound_Battle(round);
         })
     }
 

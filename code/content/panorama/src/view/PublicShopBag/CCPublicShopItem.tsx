@@ -82,7 +82,6 @@ export class CCPublicShopItem extends CCPanel<ICCPublicShopItem> {
                 }
                 let iDraggedItemIndex = pDraggedPanel.overrideentityindex;
                 if (iDraggedItemIndex && iDraggedItemIndex != -1) {
-                    GLogHelper.print(1111111)
                     // let from = pDraggedPanel.m_DragType! as PublicBagConfig.EBagSlotType;
                     // let to = iType;
                     // let fromslot = pDraggedPanel.m_Slot!;

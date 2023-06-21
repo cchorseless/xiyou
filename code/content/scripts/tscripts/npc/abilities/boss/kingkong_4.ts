@@ -1,3 +1,4 @@
+import { AI_ability } from "../../../ai/AI_ability";
 import { PropertyConfig } from "../../../shared/PropertyConfig";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -22,36 +23,17 @@ export class kingkong_4 extends BaseAbility_Plus {
             this.GetCasterPlus().FindModifierByName("modifier_kingkong_3").SetStackCount(0)
         }
     }
-    GetIntrinsicModifierName() {
-        return "modifier_kingkong_4"
+    AutoSpellSelf(): boolean {
+        let trigger_pct = this.GetSpecialValueFor("trigger_pct")
+        let hCaster = this.GetCasterPlus();
+        if (100 - hCaster.GetHealthLosePect() <= trigger_pct) {
+            hCaster.Purge(false, true, false, true, true)
+            return AI_ability.NO_TARGET_cast(this)
+        }
+        return false
     }
 }
-// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
-// Modifiers
-@registerModifier()
-export class modifier_kingkong_4 extends BaseModifier_Plus {
-    IsHidden() {
-        return true
-    }
-    trigger_pct: number;
-    BeCreated(params: IModifierTable) {
-        this.trigger_pct = this.GetSpecialValueFor("trigger_pct")
-        if (IsServer()) {
-            this.StartIntervalThink(1)
-        }
-    }
-    OnIntervalThink() {
-        if (this.GetParentPlus().GetHealthPercent() <= this.trigger_pct) {
-            this.GetParentPlus().Purge(false, true, false, true, true)
-            ExecuteOrderFromTable({
-                UnitIndex: this.GetParentPlus().entindex(),
-                OrderType: dotaunitorder_t.DOTA_UNIT_ORDER_CAST_NO_TARGET,
-                AbilityIndex: this.GetAbilityPlus().entindex(),
-            })
-            this.StartIntervalThink(-1)
-        }
-    }
-}
+
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 
 @registerModifier()

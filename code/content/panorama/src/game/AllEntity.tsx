@@ -61,6 +61,6 @@ PublicBagSystemComponent;
 
 export class AllEntity {
     static Init() {
-        LogHelper.print("register all entity 111111");
+        LogHelper.print("register all entity ");
     }
 }

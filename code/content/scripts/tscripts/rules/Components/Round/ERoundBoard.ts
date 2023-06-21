@@ -1,4 +1,5 @@
 import { Assert_SpawnEffect, ISpawnEffectInfo } from "../../../assert/Assert_SpawnEffect";
+import { EventHelper } from "../../../helper/EventHelper";
 import { KVHelper } from "../../../helper/KVHelper";
 import { ChessControlConfig } from "../../../shared/ChessControlConfig";
 import { GameProtocol } from "../../../shared/GameProtocol";
@@ -23,7 +24,8 @@ export class ERoundBoard extends ERound implements IRoundStateCallback {
     /**本轮对战的阵容实体 */
     readonly BattleTeam: TBattleTeamRecord;
     /**本轮参展的队伍 */
-    readonly BattleBuilding: string[] = [];
+    readonly BattleBuilding: { unitname: string, star: number }[] = [];
+
     _debug_StageStopped: boolean = false;
 
 
@@ -66,6 +68,7 @@ export class ERoundBoard extends ERound implements IRoundStateCallback {
         playerroot.BuildingManager().OnRound_Start(this);
         playerroot.FakerHeroRoot().OnRound_Start(this);
         playerroot.DrawComp().OnRound_Start(this);
+        EventHelper.fireProtocolEventToPlayer(RoundConfig.EProtocol.roundboard_onstart, {}, this.BelongPlayerid);
         this.prizeTimer = GTimerHelper.AddTimer(delaytime, GHandler.create(this, () => {
             if (this._debug_StageStopped) {
                 return 1;
@@ -88,13 +91,24 @@ export class ERoundBoard extends ERound implements IRoundStateCallback {
         this.roundLeftTime = GameRules.GetGameTime() + delaytime;
         (this.BattleBuilding as any) = [];
         player.BuildingManager().getAllBattleBuilding(true).forEach((b) => {
-            this.BattleBuilding.push(b.ConfigID);
+            this.BattleBuilding.push({ unitname: b.ConfigID, star: b.iStar });
         });
         this.SyncClient(true);
-        player.BuildingManager().OnRound_Battle();
-        player.FakerHeroRoot().OnRound_Battle();
+
+        player.BuildingManager().OnRound_Battle(this);
+        player.CourierRoot().OnRound_Battle(this);
+        player.FakerHeroRoot().OnRound_Battle(this);
+
         let buildingCount = player.BattleUnitManagerComp().GetAllBattleUnitAlive(DOTATeam_t.DOTA_TEAM_GOODGUYS).length;
         let enemyCount = player.BattleUnitManagerComp().GetAllBattleUnitAlive(DOTATeam_t.DOTA_TEAM_BADGUYS).length;
+        if (this.IsFinalRound()) {
+            enemyCount = GRoundSystem.GetInstance().RoundFinishEnemys.filter((v) => v.IsAlive()).length;
+            GPlayerEntityRoot.GetAllValidPlayer().forEach(v => {
+                if (v != player) {
+                    buildingCount += v.BattleUnitManagerComp().GetAllBattleUnitAlive(DOTATeam_t.DOTA_TEAM_GOODGUYS).length;
+                }
+            })
+        }
         if (buildingCount == 0 || enemyCount == 0) {
             delaytime = 1;
         }
@@ -102,6 +116,14 @@ export class ERoundBoard extends ERound implements IRoundStateCallback {
             delaytime--;
             buildingCount = player.BattleUnitManagerComp().GetAllBattleUnitAlive(DOTATeam_t.DOTA_TEAM_GOODGUYS).length;
             enemyCount = player.BattleUnitManagerComp().GetAllBattleUnitAlive(DOTATeam_t.DOTA_TEAM_BADGUYS).length;
+            if (this.IsFinalRound()) {
+                enemyCount = GRoundSystem.GetInstance().RoundFinishEnemys.filter((v) => v.IsAlive()).length;
+                GPlayerEntityRoot.GetAllValidPlayer().forEach(v => {
+                    if (v != player) {
+                        buildingCount += v.BattleUnitManagerComp().GetAllBattleUnitAlive(DOTATeam_t.DOTA_TEAM_GOODGUYS).length;
+                    }
+                })
+            }
             if (delaytime > 0) {
                 if (buildingCount > 0 && enemyCount > 0) {
                     return 1;
@@ -130,6 +152,14 @@ export class ERoundBoard extends ERound implements IRoundStateCallback {
         let playerroot = GPlayerEntityRoot.GetOneInstance(this.BelongPlayerid);
         let buildingCount = playerroot.BattleUnitManagerComp().GetAllBattleUnitAlive(DOTATeam_t.DOTA_TEAM_GOODGUYS).length;
         let enemyCount = playerroot.BattleUnitManagerComp().GetAllBattleUnitAlive(DOTATeam_t.DOTA_TEAM_BADGUYS).length;
+        if (this.IsFinalRound()) {
+            enemyCount = GRoundSystem.GetInstance().RoundFinishEnemys.filter((v) => v.IsAlive()).length;
+            GPlayerEntityRoot.GetAllValidPlayer().forEach(v => {
+                if (v != playerroot) {
+                    buildingCount += v.BattleUnitManagerComp().GetAllBattleUnitAlive(DOTATeam_t.DOTA_TEAM_GOODGUYS).length;
+                }
+            })
+        }
         if (buildingCount > 0 && enemyCount == 0) {
             (this.isWin as any) = 1;
         }
@@ -169,6 +199,15 @@ export class ERoundBoard extends ERound implements IRoundStateCallback {
         playerroot.CourierRoot().OnRound_WaitingEnd();
         playerroot.BuildingManager().OnRound_WaitingEnd();
         playerroot.FakerHeroRoot().OnRound_WaitingEnd();
+        if (this.IsFinalRound()) {
+            if (this.isWin <= 0) {
+                GGameScene.Defeat()
+            }
+            else {
+                GGameScene.Victory()
+            }
+            return
+        }
         this.prizeTimer = GTimerHelper.AddTimer(0.1,
             GHandler.create(this, () => {
                 if (this._debug_StageStopped) {
@@ -201,7 +240,10 @@ export class ERoundBoard extends ERound implements IRoundStateCallback {
     IsRoundChallenge() {
         return false
     }
-
+    /** 最终回合 */
+    IsFinalRound() {
+        return this.config.roundNextid == "";
+    }
 
     IsBelongPlayer(playerid: PlayerID) {
         return (this.BelongPlayerid == playerid)
@@ -386,9 +428,11 @@ export class ERoundBoard extends ERound implements IRoundStateCallback {
         }
         else {
             let baseenemy = round.config.enemyinfo.filter((value) => {
-                return value.enemycreatetype == GEEnum.EEnemyCreateType.None
+                return value.enemycreatetype == GEEnum.EEnemyCreateType.None || value.enemycreatetype == GEEnum.EEnemyCreateType.PublicEnemy;
             })[0];
-            entity.enemyid = baseenemy.unitname;
+            if (baseenemy) {
+                entity.enemyid = baseenemy.unitname;
+            }
         }
         // 回合奖励
         if (round.isWin == 1) {
@@ -396,7 +440,8 @@ export class ERoundBoard extends ERound implements IRoundStateCallback {
             // 英雄经验
             if (round.config.winPrizeHeroExp && round.config.winPrizeHeroExp > 0 && this.BattleBuilding.length > 0) {
                 entity.heroExps = entity.heroExps || {};
-                for (let heroname of this.BattleBuilding) {
+                for (let unitinfo of this.BattleBuilding) {
+                    const heroname = unitinfo.unitname;
                     const itemid = GJsonConfigHelper.GetHeroExpItemConfigId(heroname);
                     if (itemid) {
                         entity.heroExps[heroname] = entity.heroExps[heroname] || 0;
@@ -425,7 +470,6 @@ export class ERoundBoard extends ERound implements IRoundStateCallback {
                     AddReason: "RoundWin",
                     ItemDes: ItemDes,
                 }, (Body: H2C_CommonResponse, response: CScriptHTTPResponse) => {
-                    GLogHelper.print(Body.Message)
                     if (Body.Error == 0) {
                         const message = {
                             string_from: "lang_Module_Round_Result",
@@ -453,6 +497,7 @@ export class ERoundBoard extends ERound implements IRoundStateCallback {
      */
     UploadBattleResultData(round: ERoundBoard) {
         if (!round.config.randomEnemy) { return }
+        if (!round.BattleTeam) { return }
         if (round.BattleTeam.DBServerEntityId == "-1") { return }
         let playeroot = GGameScene.GetPlayer(this.BelongPlayerid);
         const RoundCharpter = GGameServiceSystem.GetInstance().getDifficultyNumberDes();
@@ -481,6 +526,7 @@ export class ERoundBoard extends ERound implements IRoundStateCallback {
             this.unitDamageInfo[attack] = { name: name, phyD: 0, magD: 0, pureD: 0, byphyD: 0, bymagD: 0, bypureD: 0 };
         }
         damage = Math.floor(damage);
+        this.tTotalDamage += damage;
         if (damagetype == DAMAGE_TYPES.DAMAGE_TYPE_PHYSICAL) {
             if (isattack) {
                 this.unitDamageInfo[attack].phyD += damage
@@ -521,7 +567,7 @@ export class ERoundBoard extends ERound implements IRoundStateCallback {
 declare global {
     interface IRoundStateCallback {
         OnRound_Start(round?: ERoundBoard): void;
-        OnRound_Battle(): void;
+        OnRound_Battle(round?: ERoundBoard): void;
         OnRound_Prize(round?: ERoundBoard): void;
         OnRound_WaitingEnd(): void;
         OnRound_End?(): void;

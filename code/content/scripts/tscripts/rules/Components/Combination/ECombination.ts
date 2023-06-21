@@ -209,7 +209,7 @@ export class ECombination extends ET.Entity {
         }
     }
 
-    OnRound_Battle() {
+    OnRound_Battle(round: ERoundBoard) {
         this.ApplyBuffEffect(true);
 
     }

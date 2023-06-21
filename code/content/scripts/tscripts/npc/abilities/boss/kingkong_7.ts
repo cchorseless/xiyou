@@ -33,42 +33,17 @@ export class kingkong_7 extends BaseAbility_Plus {
             this.GetCasterPlus().RemoveTenacityed()
         }
     }
-    GetIntrinsicModifierName() {
-        return "modifier_kingkong_7"
+    AutoSpellSelf(): boolean {
+        let trigger_pct = this.GetSpecialValueFor("trigger_pct")
+        let enemy_count = this.GetSpecialValueFor("enemy_count")
+        let hCaster = this.GetCasterPlus();
+        if (100 - hCaster.GetHealthLosePect() <= trigger_pct) {
+            return AI_ability.NO_TARGET_cast(this)
+        }
+        return false
     }
 }
-// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
-// Modifiers
 
-@registerModifier()
-export class modifier_kingkong_7 extends BaseModifier_Plus {
-    trigger_pct: number;
-    enemy_count: number;
-    BeCreated(params: IModifierTable) {
-        //  this.trigger_time = this.GetSpecialValueFor("trigger_time")
-        this.trigger_pct = this.GetSpecialValueFor("trigger_pct")
-        this.enemy_count = this.GetSpecialValueFor("enemy_count")
-        if (IsServer()) {
-            this.StartIntervalThink(1)
-        }
-    }
-    OnIntervalThink() {
-        let hParent = this.GetParentPlus()
-        //  let iPlayerLevel = 0
-        //  DotaTD.EachPlayer( (_, iPlayerID) => {
-        //  	iPlayerLevel = iPlayerLevel + PlayerData.GetPlayerLevel(iPlayerID) - this.enemy_count
-        //  })
-        //  let tTargets = FindUnitsInRadiusWithAbility(hParent, hParent.GetAbsOrigin(), -1, this.GetAbilityPlus())
-        //  if ( this.GetElapsedTime() > this.trigger_time && //  60秒后激活
-        //  hParent.IsAbilityReady(this.GetAbilityPlus()) && 
-        //  tTargets.length >= iPlayerLevel * PlayerData.GetAlivePlayerCount() ) {	//  当前单位大于等于（玩家人口-1） * 玩家人数
-        //  	ExecuteOrder(hParent, dotaunitorder_t.DOTA_UNIT_ORDER_CAST_NO_TARGET, null, this.GetAbilityPlus())
-        //  }
-        if (this.GetAbilityPlus().IsCooldownReady() && this.GetParentPlus().GetHealthPercent() <= this.trigger_pct) {
-            AI_ability.NO_TARGET_cast(this.GetAbilityPlus())
-        }
-    }
-}
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 
 @registerModifier()

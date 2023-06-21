@@ -30,13 +30,13 @@ export class modifier_tp extends BaseModifier_Plus {
                     // resPath: "particles/items2_fx/teleport_end.vpcf",
                     resPath: "particles/econ/events/fall_major_2015/teleport_end_fallmjr_2015.vpcf",
                     iAttachment: ParticleAttachment_t.PATTACH_CUSTOMORIGIN,
-                    // owner: hParent
+                    owner: hParent
                 };
                 let iParticleID = ResHelper.CreateParticle(infoend);
                 ParticleManager.SetParticleControl(iParticleID, 0, tPosition);
                 ParticleManager.SetParticleControl(iParticleID, 1, tPosition);
                 ParticleManager.SetParticleControl(iParticleID, 2, vColor);
-                ParticleManager.SetParticleControlEnt(iParticleID, 3, hCaster, ParticleAttachment_t.PATTACH_ABSORIGIN, null, tPosition, true);
+                ParticleManager.SetParticleControlEnt(iParticleID, 3, hParent, ParticleAttachment_t.PATTACH_ABSORIGIN, null, tPosition, true);
                 ParticleManager.SetParticleControl(iParticleID, 4, Vector(0, 0, 0));
                 ParticleManager.SetParticleControl(iParticleID, 5, tPosition);
                 this.AddParticle(iParticleID, false, false, -1, false, false);

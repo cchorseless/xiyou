@@ -1,5 +1,6 @@
+import { AI_ability } from "../../../ai/AI_ability";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
-import { BaseModifier_Plus, ParticleModifierThinker } from "../../entityPlus/BaseModifier_Plus";
+import { ParticleModifierThinker } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 
 @registerAbility()
@@ -8,7 +9,7 @@ export class kingkong_1 extends BaseAbility_Plus {
         let hCaster = this.GetCasterPlus()
         let vPosition = this.GetCursorPosition()
         let iProjectileSpeed = this.GetSpecialValueFor("projectile_speed")
-        let hThinker = modifier_kingkong_1_thinker.applyThinker(vPosition,hCaster, this,  { duration: 10 },  hCaster.GetTeamNumber(), false)
+        let hThinker = modifier_kingkong_1_thinker.applyThinker(vPosition, hCaster, this, { duration: 10 }, hCaster.GetTeamNumber(), false)
         let info = {
             EffectName: "particles/units/boss/kingkong/kingkong_1.vpcf",
             Ability: this,
@@ -53,37 +54,11 @@ export class kingkong_1 extends BaseAbility_Plus {
             hCaster.EmitSound("n_creep_Thunderlizard_Big.Stomp")
         }
     }
-    GetIntrinsicModifierName() {
-        return "modifier_kingkong_1"
-    }
-}
-// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
-// Modifiers
 
-@registerModifier()
-export class modifier_kingkong_1 extends BaseModifier_Plus {
-    IsHidden() {
-        return true
+    AutoSpellSelf(): boolean {
+        return AI_ability.POSITION_if_enemy(this)
     }
-    BeCreated(params: IModifierTable) {
-        if (IsServer()) {
-            this.StartIntervalThink(1)
-        }
-    }
-    OnIntervalThink() {
-        if (this.GetAbilityPlus().IsAbilityReady()) {
-            let radius = this.GetAbilityPlus().GetCastRange(this.GetCasterPlus().GetAbsOrigin(), null)
-            let tTargets = FindUnitsInRadius(this.GetParentPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), null, radius, this.GetAbilityPlus().GetAbilityTargetTeam(), this.GetAbilityPlus().GetAbilityTargetType(), this.GetAbilityPlus().GetAbilityTargetFlags(), FindOrder.FIND_CLOSEST, false)
-            if (IsValid(tTargets[0])) {
-                ExecuteOrderFromTable({
-                    UnitIndex: this.GetParentPlus().entindex(),
-                    OrderType: dotaunitorder_t.DOTA_UNIT_ORDER_CAST_POSITION,
-                    AbilityIndex: this.GetAbilityPlus().entindex(),
-                    Position: tTargets[0].GetAbsOrigin()
-                })
-            }
-        }
-    }
+
 }
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()

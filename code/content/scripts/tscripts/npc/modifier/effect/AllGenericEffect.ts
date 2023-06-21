@@ -17,6 +17,7 @@ import { modifier_generic_shock } from "./modifier_generic_shock";
 import { modifier_generic_sleep } from "./modifier_generic_sleep";
 import { modifier_generic_stunned } from "./modifier_generic_stunned";
 import { modifier_generic_taunt } from "./modifier_generic_taunt";
+import { modifier_generic_tenacity } from "./modifier_generic_tenacity";
 
 
 
@@ -42,6 +43,7 @@ import { modifier_generic_taunt } from "./modifier_generic_taunt";
     modifier_generic_stunned,
     modifier_generic_taunt,
     modifier_generic_blind,
+    modifier_generic_tenacity,
 ]
 
 

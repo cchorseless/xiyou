@@ -20,11 +20,12 @@ export class EnemyMoveComponent extends ET.Component {
     }
     public getMoveWay() {
         let unitComp = this.Domain.ETRoot.As<IEnemyUnitEntityRoot>()
-        if (unitComp.IsWave()) {
-            return EnemyConfig.ENEMY_CORNERS[this.BelongPlayerid];
-        } else if (unitComp.IsBoss()) {
-            return EnemyConfig.BOSS_CORNERS[this.BelongPlayerid];
-        } else if (unitComp.IsGOLD_BOSS()) {
+        // if (unitComp.IsWave()) {
+        //     return EnemyConfig.ENEMY_CORNERS[this.BelongPlayerid];
+        // } else if (unitComp.IsBoss()) {
+        //     return EnemyConfig.BOSS_CORNERS[this.BelongPlayerid];
+        // } else
+        if (unitComp.IsEndBoss()) {
             return EnemyConfig.CHALLENGE_CORNERS[this.BelongPlayerid];
             // } else if (unitComp.IsCANDY_WAVE()) {
             //     return EnemyConfig.CHALLENGE_CORNERS[this.BelongPlayerid];

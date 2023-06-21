@@ -452,7 +452,7 @@ export class modifier_imba_zuus_static_field extends BaseModifier_Plus {
                 damage_table.ability = ability;
                 damage_table.damage_type = ability.GetAbilityDamageType();
                 for (const [_, unit] of GameFunc.iPair(nearby_enemy_units as IBaseNpc_Plus[])) {
-                    if (unit.IsAlive() && unit != caster && !unit.IsRoshan()) {
+                    if (unit.IsAlive() && unit != caster) {
                         let current_health = unit.GetHealth();
                         damage_table.damage = (current_health / 100) * damage_health_pct;
                         damage_table.victim = unit;
@@ -472,7 +472,7 @@ export class modifier_imba_zuus_static_field extends BaseModifier_Plus {
         if (!IsServer()) {
             return;
         }
-        if (this.GetCasterPlus().PassivesDisabled() || !target.IsAlive() || target == this.GetCasterPlus() || target.IsRoshan()) {
+        if (this.GetCasterPlus().PassivesDisabled() || !target.IsAlive() || target == this.GetCasterPlus()) {
             return;
         }
         let ability = this.GetAbilityPlus();

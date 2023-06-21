@@ -25,12 +25,13 @@ export module RoundConfig {
         end,
 
     }
-    export enum Event {
+    export enum EProtocol {
         roundboard_onstart = "roundboard_onstart",
         roundboard_onbattle = "roundboard_onbattle",
         roundboard_onprize = "roundboard_onprize",
         roundboard_onwaitingend = "roundboard_onwaitingend",
         roundboard_challenge_onstart = "roundboard_challenge_onstart",
+        roundboard_showbosshp = "roundboard_showbosshp",
 
     }
 }

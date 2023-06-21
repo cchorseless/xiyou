@@ -20,6 +20,7 @@ import { WearableSystemComponent } from "./rules/System/WearableSystemComponent"
 import { GameEnum } from "./shared/GameEnum";
 import { GameProtocol } from "./shared/GameProtocol";
 import { ET, ETGameSceneRoot } from "./shared/lib/Entity";
+import { ERoundBoardResultRecord } from "./shared/rules/Round/ERoundBoardResultRecord";
 import { TServerZone } from "./shared/service/serverzone/TServerZone";
 
 @GReloadable
@@ -54,7 +55,6 @@ export class GameScene {
 
     static init() {
         this.addEvent();
-        GPlayerEntityRoot.Init()
         this.Scene.AddComponent(NotificationSystemComponent);
         this.Scene.AddComponent(BattleSystemComponent);
         this.Scene.AddComponent(GameServiceSystemComponent);
@@ -67,6 +67,7 @@ export class GameScene {
         this.Scene.AddComponent(CombinationSystemComponent);
         this.Scene.AddComponent(WearableSystemComponent);
         this.Scene.AddComponent(PublicBagSystemComponent);
+        GPlayerEntityRoot.Init()
     }
 
     static StartGame() {
@@ -94,8 +95,7 @@ export class GameScene {
         EmitAnnouncerSound(Assert_Sounds.Announcer.end_02);
         EmitGlobalSound(Assert_Sounds.Game.Victory);
         // GameRules.SetGameWinner(DOTATeam_t.DOTA_TEAM_GOODGUYS);
-        EventHelper.fireProtocolEventToClient(GameProtocol.Protocol.push_GameEndResult, {})
-
+        GGameScene.NoticeClientGameEnd(true)
     }
     static Defeat() {
         if (this.bGameEnd == true) return;
@@ -113,7 +113,59 @@ export class GameScene {
         EmitAnnouncerSound(Assert_Sounds.Announcer.end_08);
         EmitGlobalSound(Assert_Sounds.Game.Defeat);
         // GameRules.SetGameWinner(DOTATeam_t.DOTA_TEAM_BADGUYS);
-        EventHelper.fireProtocolEventToClient(GameProtocol.Protocol.push_GameEndResult, {})
+        GGameScene.NoticeClientGameEnd(false)
+    }
+
+    static NoticeClientGameEnd(iswin: boolean) {
+        const allPlayers = GPlayerEntityRoot.GetAllInstance();
+        const playdata: { [k: string]: ICCGameSingleDataItem } = {};
+        allPlayers.forEach((v) => {
+            playdata[v.BelongPlayerid + ""] = {} as ICCGameSingleDataItem;
+            const data = playdata[v.BelongPlayerid + ""];
+            data.isonline = !v.IsLeaveGame;
+            data.accountid = v.TCharacter().Name;
+            data.score = v.TCharacter().RankComp.GetRankData(GameProtocol.ERankType.SeasonBattleSorceRank).Score;
+            const tBattleRecords = ERoundBoardResultRecord.GetGroupInstance(v.BelongPlayerid);
+            let scorechange = 0;
+            let wincount = 0;
+            let losecount = 0;
+            let drawcount = 0;
+            tBattleRecords.forEach(v => {
+                scorechange += v.iBattleScoreChange;
+                if (v.isWin == 1) {
+                    wincount++;
+                }
+                else if (v.isWin == 0) {
+                    drawcount++
+                }
+                else if (v.isWin == -1) {
+                    losecount++;
+                }
+            })
+            data.scorechange = scorechange;
+            data.wincount = wincount;
+            data.losecount = losecount;
+            data.drawcount = drawcount;
+            const curround = v.RoundManagerComp().getCurrentBoardRound();
+            data.units = curround.BattleBuilding;
+            data.totaldamage = curround.tTotalDamage;
+            const allcomb = v.CombinationManager().getAllActiveCombination();
+            const SectInfo: { [k: string]: number } = {};
+            allcomb.forEach(v => {
+                SectInfo[v.SectName] = v.uniqueConfigList.length;
+            })
+            const SectInfoDes: string[] = [];
+            for (let k in SectInfo) {
+                SectInfoDes.push(`${k}|${SectInfo[k]}`)
+            }
+            data.sectInfo = SectInfoDes;
+        })
+        EventHelper.fireProtocolEventToClient(GameProtocol.Protocol.push_GameEndResult, {
+            data: {
+                iswin: iswin,
+                playdata: playdata
+            }
+        })
     }
 
     static DefeatPlayer(playerid: PlayerID) {

@@ -284,7 +284,7 @@ export class imba_chaos_knight_chaos_strike extends BaseAbility_Plus {
         return "modifier_imba_chaos_knight_chaos_strike";
     }
     GetAbilityTextureName(): string {
-        if (this.GetCasterPlus().HasModifier("modifier_imba_chaos_knight_chaos_strike_actCrit")) {
+        if (this.GetCasterPlus().HasModifier("modifier_imba_chaos_knight_chaos_strike_actcrit")) {
             return "custom/chaos_knight_chaos_strike_active";
         } else {
             return "chaos_knight_chaos_strike";
@@ -292,7 +292,7 @@ export class imba_chaos_knight_chaos_strike extends BaseAbility_Plus {
     }
 }
 @registerModifier()
-export class modifier_imba_chaos_knight_chaos_strike_actCrit extends BaseModifier_Plus {
+export class modifier_imba_chaos_knight_chaos_strike_actcrit extends BaseModifier_Plus {
     public crit: boolean;
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
@@ -354,7 +354,7 @@ export class modifier_imba_chaos_knight_chaos_strike extends BaseModifier_Plus {
     CC_OnAttackLanded(params: ModifierAttackEvent): void {
         let parent = this.GetParentPlus();
         let ability = this.GetAbilityPlus();
-        if (!params.attacker.PassivesDisabled() && ability.IsCooldownReady() && GFuncRandom.PRD(this.crit_chance, this) && !this.GetParentPlus().HasModifier("modifier_imba_chaos_knight_chaos_strike_actCrit")) {
+        if (!params.attacker.PassivesDisabled() && ability.IsCooldownReady() && GFuncRandom.PRD(this.crit_chance, this) && !this.GetParentPlus().HasModifier("modifier_imba_chaos_knight_chaos_strike_actcrit")) {
             this.on_crit = true;
             EmitSoundOn("Hero_ChaosKnight.ChaosStrike", parent);
             let p = ResHelper.CreateParticleEx("particles/units/heroes/hero_chaos_knight/chaos_knight_weapon_blur_critical.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, parent);
@@ -364,7 +364,7 @@ export class modifier_imba_chaos_knight_chaos_strike extends BaseModifier_Plus {
         }
         if (this.on_crit) {
             let crit = RandomInt(this.crit_min, this.crit_max);
-            ability.UseResources(true, false,false, true)
+            ability.UseResources(true, false, false, true)
             // 造成伤害
             let damage = crit / 100 * parent.GetAttackDamage()
             let tDamageTable = {

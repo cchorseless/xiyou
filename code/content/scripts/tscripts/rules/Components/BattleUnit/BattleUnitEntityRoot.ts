@@ -28,10 +28,10 @@ export class BattleUnitEntityRoot extends BaseEntityRoot implements IRoundStateC
         let currentround = domain.ETRoot.As<IBattleUnitEntityRoot>().GetPlayer().RoundManagerComp().getCurrentBoardRound();
         switch (currentround.roundState) {
             case RoundConfig.ERoundBoardState.start:
-                this.OnRound_Start();
+                this.OnRound_Start(currentround);
                 break;
             case RoundConfig.ERoundBoardState.battle:
-                this.OnRound_Battle();
+                this.OnRound_Battle(currentround);
                 break;
             case RoundConfig.ERoundBoardState.prize:
                 this.OnRound_Prize(currentround);
@@ -190,7 +190,7 @@ export class BattleUnitEntityRoot extends BaseEntityRoot implements IRoundStateC
 
 
     OnRound_Start(round?: ERoundBoard): void { }
-    OnRound_Battle(): void { }
+    OnRound_Battle(round?: ERoundBoard): void { }
     OnRound_Prize(round?: ERoundBoard): void { }
     OnRound_WaitingEnd(): void { }
 

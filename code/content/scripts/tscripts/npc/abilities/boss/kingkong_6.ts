@@ -1,6 +1,7 @@
+import { AI_ability } from "../../../ai/AI_ability";
 import { PropertyConfig } from "../../../shared/PropertyConfig";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
-import { BaseModifierMotionHorizontal_Plus, BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
+import { BaseModifierMotionHorizontal_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 
 @registerAbility()
@@ -23,38 +24,16 @@ export class kingkong_6 extends BaseAbility_Plus {
         hCaster.AddNewModifier(hCaster, this, "modifier_kingkong_6_rush", null)
         hCaster.EmitSound("Hero_Magnataur.Skewer.Cast")
     }
-    GetIntrinsicModifierName() {
-        return "modifier_kingkong_6"
+    AutoSpellSelf(): boolean {
+        let trigger_pct = this.GetSpecialValueFor("trigger_pct")
+        let hCaster = this.GetCasterPlus();
+        if (100 - hCaster.GetHealthLosePect() <= trigger_pct) {
+            return AI_ability.POSITION_if_enemy(this)
+        }
+        return false
     }
 }
-// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
-// Modifiers
 
-@registerModifier()
-export class modifier_kingkong_6 extends BaseModifier_Plus {
-    IsHidden() {
-        return true
-    }
-    trigger_pct: number;
-    BeCreated(params: IModifierTable) {
-        this.trigger_pct = this.GetSpecialValueFor("trigger_pct")
-        if (IsServer()) {
-            this.StartIntervalThink(1)
-        }
-    }
-    OnIntervalThink() {
-        if (this.GetAbilityPlus().IsAbilityReady() && this.GetParentPlus().GetHealthPercent() <= this.trigger_pct) {
-            if (this.GetParentPlus().GetAttackTarget()) {
-                ExecuteOrderFromTable({
-                    UnitIndex: this.GetParentPlus().entindex(),
-                    OrderType: dotaunitorder_t.DOTA_UNIT_ORDER_CAST_POSITION,
-                    AbilityIndex: this.GetAbilityPlus().entindex(),
-                    Position: this.GetParentPlus().GetAttackTarget().GetAbsOrigin()
-                })
-            }
-        }
-    }
-}
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 
 @registerModifier()

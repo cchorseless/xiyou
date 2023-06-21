@@ -66,7 +66,7 @@ export class imba_witch_doctor_paralyzing_cask extends BaseAbility_Plus {
     OnProjectileHit_ExtraData(hTarget: IBaseNpc_Plus | undefined, vLocation: Vector, ExtraData: any): boolean | void {
         EmitSoundOn("Hero_WitchDoctor.Paralyzing_Cask_Bounce", hTarget);
         if (!IsValid(hTarget)) { return }
-        if (hTarget.IsRealUnit() || hTarget.IsConsideredHero() || hTarget.IsRoshan()) {
+        if (hTarget.IsRealUnit() || hTarget.IsConsideredHero()) {
             if (hTarget.GetTeamNumber() != this.GetCasterPlus().GetTeamNumber()) {
                 if (!hTarget.IsMagicImmune() && (ExtraData.bFirstCast == 0 || !hTarget.TriggerSpellAbsorb(this))) {
                     if (IsServer() && this.GetCasterPlus().HasTalent("special_bonus_imba_witch_doctor_4")) {

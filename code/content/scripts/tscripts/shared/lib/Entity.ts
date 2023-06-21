@@ -782,7 +782,9 @@ export module ET {
         }
 
         public GetDomainChild<T extends EntityRoot>(id: string) {
-            return this.DomainChildren[id] as T;
+            if (this.DomainChildren) {
+                return this.DomainChildren[id] as T;
+            }
         }
         public GetDomainChilds<K extends typeof EntityRoot>(type: K): InstanceType<K>[] {
             let r: InstanceType<K>[] = [];

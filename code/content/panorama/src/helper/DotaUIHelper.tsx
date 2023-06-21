@@ -238,7 +238,7 @@ export module DotaUIHelper {
 
     function RegDragEvent() {
         EventHelper.addUnhandledEvent("DragStart", GHandler.create(EventObj, (pPanel: Panel, tDragCallbacks: DragSettings) => {
-            LogHelper.print("DragStart", "111111")
+            // LogHelper.print("DragStart", "111111")
             // runDragHandler(pDraggedPanel, "DragStart", pPanel)
         }));
         EventHelper.addUnhandledEvent("DragEnter", GHandler.create(EventObj, (pPanel: Panel, pDraggedPanel: ItemImage | AbilityImage) => {

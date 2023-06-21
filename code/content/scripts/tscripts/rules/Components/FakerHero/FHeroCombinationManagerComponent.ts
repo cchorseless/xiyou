@@ -30,9 +30,9 @@ export class FHeroCombinationManagerComponent extends ET.Component implements IR
 
     }
     OnRound_WaitingEnd(): void { };
-    public OnRound_Battle() {
+    public OnRound_Battle(round: ERoundBoard) {
         this.getAllActiveCombination().forEach(comb => {
-            comb.OnRound_Battle();
+            comb.OnRound_Battle(round);
         })
     }
 

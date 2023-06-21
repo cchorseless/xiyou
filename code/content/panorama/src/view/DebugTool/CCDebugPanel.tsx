@@ -2,7 +2,9 @@ import React from "react";
 import { CombinationConfig } from "../../../../scripts/tscripts/shared/CombinationConfig";
 import { GameProtocol } from "../../../../scripts/tscripts/shared/GameProtocol";
 import { KVHelper } from "../../helper/KVHelper";
+import { CCLabel } from "../AllUIElement/CCLabel/CCLabel";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
+import { CCTxtTable } from "../AllUIElement/CCTable/CCTxtTable";
 import { CCDebugTool, CCDebugTool_Category, CCDebugTool_DemoButton, CCDebugTool_DemoSelectionButton, CCDebugTool_DemoSlider, CCDebugTool_DemoTextEntry, CCDebugTool_DemoToggle } from "./CCDebugTool";
 import { CCDebugTool_AbilityPicker } from "./CCDebugTool_AbilityPicker";
 import { CCDebugTool_EnemyPicker } from "./CCDebugTool_EnemyPicker";
@@ -79,8 +81,20 @@ export class CCDebugPanel extends CCPanel<ICCDebugPanel> {
                         <CCDebugTool_DemoButton eventName="ReturnMenuButtonPressed" btncolor="RedButton" localtext="回到菜单" />
                         <CCDebugTool_DemoSelectionButton eventName="TeleportButtonPressed" localtext="跳转到特定区域" />
                         <CCDebugTool_DemoButton eventName="StandbyButtonPressed" localtext="备用按钮" />
-                        <CCDebugTool_DemoSlider eventName="CameraDistance" titletext="镜头高度" min={1000} max={2000} defaultValue={1600} onChange={value => GameUI.SetCameraDistance(value)} />
                     </CCDebugTool_Category>
+                    <CCDebugTool_Category title="镜头" >
+                        <CCPanel flowChildren="down">
+                            <CCDebugTool_DemoSlider eventName="CameraDistance" titletext="镜头高度" min={1000} max={2000} defaultValue={1600} onChange={value => GameUI.SetCameraDistance(value)} />
+                            <CCPanel flowChildren="right">
+                                <CCLabel text="镜头方向" />
+                                <CCTxtTable marginLeft={"10px"} list={["前", "后", "左", "右"]} onChange={(index, text) => {
+                                    const yaw = [0, 90, 180, 270][index];
+                                    GameUI.SetCameraYaw(yaw);
+                                }} />
+                            </CCPanel>
+                        </CCPanel>
+                    </CCDebugTool_Category>
+
                     <CCDebugTool_Category title="网表和实体" >
                         <CCDebugTool_DemoSelectionButton eventName="CreateAllyButtonPressed" localtext="todo" onactivate={() => { this.addOnlyDebugDialog(CCDebugTool_TextPicker, { title: "创建友方单位", itemNames: heroList }) }} />
                         <CCDebugTool_DemoSelectionButton eventName="CC_DebugTool_UnitInfo" localtext="网表信息面板" onactivate={() => { this.addOnlyDebugDialog(CCDebugTool_NetTableInfo) }} />

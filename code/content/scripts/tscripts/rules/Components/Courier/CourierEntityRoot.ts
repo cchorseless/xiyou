@@ -2,6 +2,7 @@
 import { ResHelper } from "../../../helper/ResHelper";
 import { modifier_courier } from "../../../npc/courier/modifier_courier";
 import { modifier_wait_portal } from "../../../npc/modifier/modifier_portal";
+import { modifier_tp } from "../../../npc/modifier/modifier_tp";
 import { GameServiceConfig } from "../../../shared/GameServiceConfig";
 import { serializeETProps } from "../../../shared/lib/Entity";
 import { BaseEntityRoot } from "../../Entity/BaseEntityRoot";
@@ -128,7 +129,16 @@ export class CourierEntityRoot extends BaseEntityRoot implements IRoundStateCall
         this.CourierShopComp().refreshRoundShopItem();
         this.CourierShopComp().SyncClient();
     };
-    OnRound_Battle(): void { }
+    OnRound_Battle(round: ERoundBoard): void {
+        let hero = this.GetDomain<IBaseNpc_Hero_Plus>();
+        if (round.IsFinalRound() && hero.IsAlive()) {
+            let to = GMapSystem.GetInstance().changeToEndBossPos(this.BelongPlayerid, hero.GetAbsOrigin())
+            modifier_tp.TeleportToPoint(hero, null, to);
+            GTimerHelper.AddTimer(1.1, GHandler.create(this, () => {
+                CenterCameraOnUnit(this.BelongPlayerid, hero)
+            }))
+        }
+    }
 
     OnRound_Prize(round: ERoundBoard) {
         let hero = this.GetDomain<IBaseNpc_Hero_Plus>();

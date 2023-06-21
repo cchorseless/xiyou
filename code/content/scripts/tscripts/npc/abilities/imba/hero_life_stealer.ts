@@ -265,7 +265,7 @@ export class modifier_imba_life_stealer_feast extends BaseModifier_Plus {
     } */
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PROCATTACK_BONUS_DAMAGE_PHYSICAL)
     CC_GetModifierProcAttack_BonusDamage_Physical(keys: ModifierAttackEvent): number {
-        if (keys.target && !keys.target.IsOther() && !keys.target.IsBuilding() && !(keys.target as IBaseNpc_Plus).IsRoshan() && keys.target.GetTeamNumber() != this.GetParentPlus().GetTeamNumber()) {
+        if (keys.target && !keys.target.IsOther() && !keys.target.IsBuilding() && keys.target.GetTeamNumber() != this.GetParentPlus().GetTeamNumber()) {
             let heal_amount = keys.target.GetMaxHealth() * this.GetAbilityPlus().GetSpecialValueFor("hp_leech_percent") * 0.01;
             let lifesteal_particle = ResHelper.CreateParticleEx("particles/generic_gameplay/generic_lifesteal.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetParentPlus());
             ParticleManager.ReleaseParticleIndex(lifesteal_particle);
