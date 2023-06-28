@@ -130,7 +130,7 @@ export class imba_lina_dragon_slave extends BaseAbility_Plus {
             let cdr_units = this.GetSpecialValueFor("cdr_units");
             let direction = (target_loc - caster_loc as Vector).Normalized();
             let primary_direction = (target_loc - caster_loc as Vector).Normalized();
-            let split_timer = (GFuncVector.CalculateDistance(caster_loc, target_loc) / speed);
+            let split_timer = math.max(0.5, (GFuncVector.CalculateDistance(caster_loc, target_loc) / speed));
             let velocity = direction * speed as Vector;
             let primary_velocity = primary_direction * speed as Vector;
             let projectile = {

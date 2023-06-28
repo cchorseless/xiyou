@@ -47,14 +47,14 @@ export class CCItemCombinesPanel extends CCPanel<ICCItemCombinesPanel> {
                         </CCPanel>
                     </CCPanel>
                 }
-                {Combinables && Combinables.length > 0 && <CCIcon_Arrow key="UP" type="SolidUp" horizontalAlign="center" />}
+                {Combinables && Combinables.length > 0 && <CCIcon_Arrow key="UP" width="50px" height="40px" type="SolidUp" horizontalAlign="center" />}
                 <CCPanel className="ItemInfoDiv" >
                     <CCPanel flowChildren="right" marginLeft={"10px"} >
                         <CCItemImage className="ItemInfo" itemname={itemname} showtooltip={true} />
                         <CCLabel className="ItemInfoName" color={CSSHelper.GetRarityColor(Abilities.GetAbilityRarity(itemname))} text={$.Localize("#DOTA_Tooltip_ability_" + itemname)} />
                     </CCPanel>
                 </CCPanel>
-                {Disassembles && Disassembles.length > 0 && <CCIcon_Arrow key="DOWN" type="SolidDown" horizontalAlign="center" />}
+                {Disassembles && Disassembles.length > 0 && <CCIcon_Arrow key="DOWN" width="50px" height="40px" type="SolidDown" horizontalAlign="center" />}
 
                 {
                     Disassembles && Disassembles.length > 0 &&

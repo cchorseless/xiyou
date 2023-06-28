@@ -1,0 +1,23 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:vpcf35:version{ec5bfcca-b89d-4591-9ef4-c8679487d623} -->
+{
+	_class = "CParticleSystemDefinition"
+	m_bShouldHitboxesFallbackToRenderBounds = false
+	m_nMaxParticles = 32
+	m_Children = 
+	[
+		{
+			m_ChildRef = resource:"particles/performance/hero_promotion/hero_promotiontgt_end_glow.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/performance/hero_promotion/hero_promotiontgt_end_rings.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/performance/hero_promotion/hero_promotiontgt_end_sparks.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/performance/hero_promotion/hero_promotiontgt_end_twinkle.vpcf"
+		},
+	]
+	m_PreEmissionOperators = [  ]
+	m_nBehaviorVersion = 11
+}

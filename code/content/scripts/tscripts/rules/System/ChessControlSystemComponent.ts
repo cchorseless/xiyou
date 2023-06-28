@@ -35,6 +35,32 @@ export class ChessControlSystemComponent extends ET.SingletonComponent {
     public BoardStandbyMaxVector3: { [playerid: string]: Vector } = {};
     public BoardStandbyMinVector3: { [playerid: string]: Vector } = {};
 
+    public changeToEndBossPos(v: ChessVector, isCourier = false): { pos: Vector, forward: Vector, angle: number } {
+        const playerid = v.playerid + 1;
+        const BaseBaoXiangBossPoint = GMapSystem.GetInstance().BaseBaoXiangBossPoint;
+        const offVector = Vector(0, -1500, 0);
+        const centerPos = BaseBaoXiangBossPoint + offVector as Vector;
+        let pos = Vector(0, 0, 0);
+        let forward = Vector(0, 1, 0);
+        if (isCourier) {
+            pos = centerPos + RandomVector(200) as Vector;
+        }
+        else {
+            const centerX = (ChessControlConfig.Gird_Max_X - 1) / 2;
+            const centerY = 1;
+            const posX = ChessControlConfig.Gird_Width * (v.x - centerX) + centerPos.x;
+            const posY = ChessControlConfig.Gird_Height * (v.y - centerY) + centerPos.y;
+            const posZ = BaseBaoXiangBossPoint.z;
+            pos = Vector(posX, posY, posZ);
+        }
+        const offsetAngle = [0, 90, 180, 270];
+        if (playerid > 0) {
+            pos = GFuncVector.Rotation2D(pos, offsetAngle[playerid], true, BaseBaoXiangBossPoint);
+            forward = GFuncVector.Rotation2D(forward, offsetAngle[playerid], true);
+        }
+        return { pos: pos, forward: forward, angle: offsetAngle[playerid] };
+
+    }
     // public GetPlayerfirstSpawnPoint(playerid: PlayerID) {
     //     return GPlayerEntityRoot.HeroSpawnPoint[playerid];
     // }

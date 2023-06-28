@@ -86,11 +86,17 @@ export class MapSystemComponent extends ET.SingletonComponent {
 
     public addEvent() { }
 
-    public changeToEndBossPos(player: PlayerID, v: Vector): Vector {
+    public changeToEndBossPos(player: PlayerID, v: Vector, isCourier = false): Vector {
         // const spawnPos = GPlayerEntityRoot.HeroSpawnPoint[player];
-        // const offset = [Vector(0, -3000, 0), Vector(-1000, -3000, 0), Vector(1000, -3000, 0), Vector(-1000, -1500, 0), Vector(1000, -1500, 0)];
-        // return v - spawnPos + this.BaseBaoXiangBossPoint + offset[player] as Vector;
-        return this.BaseBaoXiangBossPoint + RandomVector(300) as Vector;
+        const radius = 2000;
+        const offset = [Vector(0, -radius, 0), Vector(-radius, 0, 0), Vector(0, radius, 0), Vector(radius, 0, 0)];
+        const centerPos = GChessControlSystem.GetInstance().GetBoardGirdVector3Plus(Vector((ChessControlConfig.Gird_Max_X - 1 / 2), 1, player))
+        if (isCourier) {
+            return this.BaseBaoXiangBossPoint + offset[player] + RandomVector(200) as Vector;
+        }
+        else {
+            return v - centerPos + this.BaseBaoXiangBossPoint + offset[player] as Vector;
+        }
     }
 
 
@@ -102,7 +108,7 @@ export class MapSystemComponent extends ET.SingletonComponent {
      * 预创建单位
      */
     public StartPreGame() {
-        // this.CreateAllMapUnit();
+        this.CreateAllMapUnit();
     }
 
     public CreateAllMapUnit() {
@@ -121,14 +127,17 @@ export class MapSystemComponent extends ET.SingletonComponent {
             this.AllChessGirdEntity[i + ""] = {};
             for (let x = 0; x < ChessControlConfig.Gird_Max_X; x++) {
                 this.AllChessGirdEntity[i + ""][x + ""] = {};
-                for (let y = 1; y <= ChessControlConfig.Gird_Max_Y; y++) {
+                for (let y = 1; y <= ChessControlConfig.ChessValid_Max_Y; y++) {
                     let v = GChessControlSystem.GetInstance().GetBoardGirdVector3Plus(Vector(x, y, i));
                     let entity = SpawnEntityFromTableSynchronous("prop_dynamic", {
-                        model: y <= 3 ? "maps/journey_assets/props/teams/logo_radiant_journey_small.vmdl" :
-                            "maps/journey_assets/props/teams/logo_dire_journey_small.vmdl",
+                        model: "models/props_debris/shop_set_seat001.vmdl"
+                        // model: "models/items/winter_major_effects/tp_effects/tp_effects_model.vmdl"
+                        // model: "maps/jungle_assets/temple/temple_warddisc_01.vmdl"
+                        // model: y <= 3 ? "maps/journey_assets/props/teams/logo_radiant_journey_small.vmdl" :
+                        //     "maps/journey_assets/props/teams/logo_dire_journey_small.vmdl",
                     }) as CBaseModelEntity;
-                    entity.SetModelScale(1.5)
-                    entity.SetAbsOrigin(v + Vector(0, 0, 120) as Vector);
+                    // entity.SetModelScale(0.8)
+                    entity.SetAbsOrigin(v + Vector(0, 0, 100) as Vector);
                     this.AllChessGirdEntity[i + ""][x + ""][y + ""] = entity;
                 }
 

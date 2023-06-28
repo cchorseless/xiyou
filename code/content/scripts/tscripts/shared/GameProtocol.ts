@@ -100,6 +100,8 @@ export module GameProtocol {
         static readonly req_ITEM_DROP_POSITION = "req_ITEM_DROP_POSITION";
         /**摄像机环绕 */
         static readonly req_Camera_Yaw_Change = "req_Camera_Yaw_Change";
+        /**设置摄像机角度 */
+        static readonly push_Camera_Yaw_Change = "push_Camera_Yaw_Change";
         static readonly req_Mouse_Event = "req_Mouse_Event";
         static readonly req_Mouse_Position = "req_Mouse_Position";
         static readonly req_Update_Setting = "req_Update_Setting";

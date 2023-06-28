@@ -1,6 +1,5 @@
 import { ET } from "../../../../../scripts/tscripts/shared/lib/Entity";
 import { BuildingManagerComponent } from "../Building/BuildingManagerComponent";
-import { ChessControlComponent } from "../ChessControl/ChessControlComponent";
 import { CourierBagComponent } from "../Courier/CourierBagComponent";
 import { CourierShopComponent } from "../Courier/CourierShopComponent";
 import { DrawComponent } from "../Draw/DrawComponent";
@@ -17,7 +16,6 @@ export class PlayerEntityRoot extends ET.Entity {
         (this.BelongPlayerid as any) = playerid;
         if (this.IsLocalPlayer) {
             (GGameScene.Local as any) = this;
-            this.AddComponent(GGetRegClass<typeof ChessControlComponent>("ChessControlComponent"));
             // 添加移动组件
             //  PlayerScene.Scene.AddComponent(ControlComponent);
             //  PlayerScene.Scene.AddComponent(CameraComponent);
@@ -62,11 +60,6 @@ export class PlayerEntityRoot extends ET.Entity {
     get PlayerDataComp() {
         return PlayerDataComponent.GetOneInstance(this.BelongPlayerid);
     }
-
-    get ChessControlComp() {
-        return this.GetComponentByName<ChessControlComponent>("ChessControlComponent")!;
-    }
-
     get BuildingManager() {
         return BuildingManagerComponent.GetOneInstance(this.BelongPlayerid);
     }

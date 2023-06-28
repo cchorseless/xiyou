@@ -918,7 +918,7 @@ export class imba_alchemist_goblins_greed extends BaseAbility_Plus {
             target.Kill(this, caster);
             const playerroot = GGameScene.GetPlayer(caster.GetPlayerID());
             // caster.AddExperience(total_exp, false, false);
-            playerroot.PlayerDataComp().ModifyGold(total_gold, true, EDOTA_ModifyGold_Reason.DOTA_ModifyGold_Unspecified);
+            playerroot.PlayerDataComp().ModifyGold(total_gold,);
             modifier.SetStackCount(modifier.GetStackCount() + bonus_stacks);
             this.greevil = caster.CreateSummon("npc_imba_alchemist_greevil", target.GetAbsOrigin(), greevil_duration);
             this.greevil_ability = this.greevil.findAbliityPlus<imba_alchemist_greevils_greed>("imba_alchemist_greevils_greed");
@@ -964,7 +964,7 @@ export class modifier_imba_greevil_gold extends BaseModifier_Plus {
             ParticleManager.SetParticleControl(msg_particle_fx, 3, Vector(255, 200, 33));
             let playerroot = GGameScene.GetPlayer(caster.GetPlayerID());
             let PlayerData = playerroot.PlayerDataComp();
-            PlayerData.ModifyGold(total_gold, false, EDOTA_ModifyGold_Reason.DOTA_ModifyGold_Unspecified);
+            PlayerData.ModifyGold(total_gold,);
         }
     }
 
@@ -1025,7 +1025,7 @@ export class modifier_imba_goblins_greed_passive extends BaseModifier_Plus {
             }
             let playerroot = GGameScene.GetPlayer(caster.GetPlayerID());
             let PlayerData = playerroot.PlayerDataComp();
-            PlayerData.ModifyGold(stacks * hero_multiplier, false, EDOTA_ModifyGold_Reason.DOTA_ModifyGold_Unspecified);
+            PlayerData.ModifyGold(stacks * hero_multiplier,);
             let player = PlayerResource.GetPlayer(caster.GetPlayerID());
             let particleName = "particles/units/heroes/hero_alchemist/alchemist_lasthit_coins.vpcf";
             let particle1 = ParticleManager.CreateParticleForPlayer(particleName, ParticleAttachment_t.PATTACH_ABSORIGIN, unit, player);

@@ -184,44 +184,74 @@ export class PlayerDataComponent extends PlayerData implements IRoundStateCallba
         return this.gold;
     }
 
-    FlyGoldEffect(vStart: Vector, iGold: number, reliable: boolean = true, reason: EDOTA_ModifyGold_Reason = 0) {
-        let hHero = GGameScene.GetPlayer(this.BelongPlayerid).Hero;
-        if (hHero != null && !hHero.IsNull()) {
-            let iParticleID = ParticleManager.CreateParticle("particles/econ/courier/courier_beetlejaw/courier_beetlejaw_ambient_gold.vpcf", ParticleAttachment_t.PATTACH_POINT, hHero)
-            ParticleManager.SetParticleControl(iParticleID, 0, vStart)
-            ParticleManager.SetParticleControlEnt(iParticleID, 1, hHero, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", hHero.GetAbsOrigin(), false)
-            ParticleManager.ReleaseParticleIndex(iParticleID)
-            GTimerHelper.AddTimer(1, GHandler.create(this, () => {
-                this.ModifyGold(iGold, reliable, reason);
-            }))
-        }
-        else {
-            this.ModifyGold(iGold, reliable, reason);
-        }
-    }
-
-    ModifyGold(goldChange: number, reliable: boolean = true, reason: EDOTA_ModifyGold_Reason = 0) {
+    /**
+     * 
+     * @param goldChange 
+     * @param vStart 特效起点
+     * @returns 
+     */
+    ModifyGold(goldChange: number, vStart: Vector = null) {
         this.changeItem(EEnum.EMoneyType.Gold, goldChange);
         if (goldChange > 0) {
             let hHero = GGameScene.GetPlayer(this.BelongPlayerid).Hero;
+            if (vStart && hHero != null && !hHero.IsNull()) {
+                let respath1 = "particles/econ/courier/courier_beetlejaw/courier_beetlejaw_ambient_gold.vpcf";
+                let respath2 = "particles/performance/gold/gold_trail.vpcf";
+                let iParticleID = ParticleManager.CreateParticle(respath2, ParticleAttachment_t.PATTACH_POINT, hHero)
+                ParticleManager.SetParticleControl(iParticleID, 0, vStart)
+                ParticleManager.SetParticleControlEnt(iParticleID, 1, hHero, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", hHero.GetAbsOrigin(), false)
+                ParticleManager.ReleaseParticleIndex(iParticleID)
+                GTimerHelper.AddTimer(1, GHandler.create(this, () => {
+                    SendOverheadEventMessage(PlayerResource.GetPlayer(this.BelongPlayerid), DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_GOLD, hHero, goldChange, null)
+                    this.SyncClient();
+                }))
+                return
+            }
             SendOverheadEventMessage(PlayerResource.GetPlayer(this.BelongPlayerid), DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_GOLD, hHero, goldChange, null)
-
         }
         this.SyncClient();
     }
 
-    ModifyWood(woodChange: number, reliable: boolean = true, reason: EDOTA_ModifyGold_Reason = 0) {
+    ModifyWood(woodChange: number, vStart: Vector = null) {
         this.changeItem(EEnum.EMoneyType.Wood, woodChange);
         if (woodChange > 0) {
             let hHero = GGameScene.GetPlayer(this.BelongPlayerid).Hero;
+            if (vStart && hHero != null && !hHero.IsNull()) {
+                let respath2 = "particles/performance/wood/wood_trail.vpcf";
+                let iParticleID = ParticleManager.CreateParticle(respath2, ParticleAttachment_t.PATTACH_POINT, hHero)
+                ParticleManager.SetParticleControl(iParticleID, 0, vStart)
+                ParticleManager.SetParticleControlEnt(iParticleID, 1, hHero, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", hHero.GetAbsOrigin(), false)
+                ParticleManager.ReleaseParticleIndex(iParticleID)
+                GTimerHelper.AddTimer(1, GHandler.create(this, () => {
+                    SendOverheadEventMessage(PlayerResource.GetPlayer(this.BelongPlayerid), DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_XP, hHero, woodChange, null)
+                    this.SyncClient();
+                }))
+                return
+            }
             SendOverheadEventMessage(PlayerResource.GetPlayer(this.BelongPlayerid), DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_XP, hHero, woodChange, null)
         }
         this.SyncClient();
     }
 
 
-    ModifySoulCrystal(soulCrystal: number, reliable: boolean = true, reason: EDOTA_ModifyGold_Reason = 0) {
+    ModifySoulCrystal(soulCrystal: number, vStart: Vector = null) {
         this.changeItem(EEnum.EMoneyType.SoulCrystal, soulCrystal);
+        if (soulCrystal > 0) {
+            let hHero = GGameScene.GetPlayer(this.BelongPlayerid).Hero;
+            if (vStart && hHero != null && !hHero.IsNull()) {
+                let respath2 = "particles/performance/crystal/crystal_trail.vpcf";
+                let iParticleID = ParticleManager.CreateParticle(respath2, ParticleAttachment_t.PATTACH_POINT, hHero)
+                ParticleManager.SetParticleControl(iParticleID, 0, vStart)
+                ParticleManager.SetParticleControlEnt(iParticleID, 1, hHero, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", hHero.GetAbsOrigin(), false)
+                ParticleManager.ReleaseParticleIndex(iParticleID)
+                GTimerHelper.AddTimer(1, GHandler.create(this, () => {
+                    SendOverheadEventMessage(PlayerResource.GetPlayer(this.BelongPlayerid), DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_XP, hHero, soulCrystal, null)
+                    this.SyncClient();
+                }))
+                return
+            }
+            SendOverheadEventMessage(PlayerResource.GetPlayer(this.BelongPlayerid), DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_XP, hHero, soulCrystal, null)
+        }
         this.SyncClient();
     }
 }

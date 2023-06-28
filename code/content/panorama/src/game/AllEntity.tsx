@@ -6,7 +6,6 @@ import { BattleUnitSummonEntityRoot } from "./components/BattleUnit/BattleUnitSu
 import { BuildingEntityRoot } from "./components/Building/BuildingEntityRoot";
 import { BuildingManagerComponent } from "./components/Building/BuildingManagerComponent";
 import { BuildingRuntimeEntityRoot } from "./components/Building/BuildingRuntimeEntityRoot";
-import { ChessControlComponent } from "./components/ChessControl/ChessControlComponent";
 import { ECombination } from "./components/Combination/ECombination";
 import { CourierBagComponent } from "./components/Courier/CourierBagComponent";
 import { CourierEntityRoot } from "./components/Courier/CourierEntityRoot";
@@ -49,7 +48,6 @@ EnemyUnitEntityRoot;
 FakerHeroEntityRoot;
 FHeroCombination;
 
-ChessControlComponent;
 DrawComponent;
 PlayerDataComponent;
 PlayerEntityRoot;

@@ -6,6 +6,8 @@ import { registerModifier } from "../entityPlus/Base_Plus";
 /**传送 */
 @registerModifier()
 export class modifier_tp extends BaseModifier_Plus {
+    finishCB: () => void = null;
+
     Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus();
         let hParent = this.GetParentPlus();
@@ -61,6 +63,10 @@ export class modifier_tp extends BaseModifier_Plus {
                 hCaster.SetAbsOrigin(GetGroundPosition(tPosition, hParent));
             }
             SafeDestroyUnit(hParent)
+            if (this.finishCB) {
+                this.finishCB();
+                this.finishCB = null;
+            }
         }
     }
 
@@ -70,10 +76,14 @@ export class modifier_tp extends BaseModifier_Plus {
      * @param ability
      * @param position
      */
-    static TeleportToPoint(hCaster: IBaseNpc_Plus, ability: IBaseAbility_Plus, position: Vector) {
-        if (!IsValid(hCaster)) {
+    static TeleportToPoint(hCaster: IBaseNpc_Plus, position: Vector, duration = 1, finishCB: () => void = null) {
+        if (!IsServer() || !IsValid(hCaster)) {
             return;
         }
-        modifier_tp.applyThinker(position, hCaster, ability, { duration: 1 });
+        let npc = modifier_tp.applyThinker(position, hCaster, null, { duration: duration });
+        if (npc) {
+            let buff = npc.findBuff<modifier_tp>("modifier_tp");
+            if (buff) buff.finishCB = finishCB;
+        }
     }
 }

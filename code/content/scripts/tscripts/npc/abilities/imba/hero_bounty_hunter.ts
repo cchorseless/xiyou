@@ -119,7 +119,7 @@ export class imba_bounty_hunter_shuriken_toss extends BaseAbility_Plus {
                     // target.ModifyGold(-actual_gold_to_steal, false, EDOTA_ModifyGold_Reason.DOTA_ModifyGold_Unspecified);
                     let playerid = this.GetCasterPlus().GetPlayerID()
                     let playerroot = GGameScene.GetPlayer(playerid);
-                    playerroot.PlayerDataComp().ModifyGold(actual_gold_to_steal, false, EDOTA_ModifyGold_Reason.DOTA_ModifyGold_Unspecified);
+                    playerroot.PlayerDataComp().ModifyGold(actual_gold_to_steal);
                     SendOverheadEventMessage(PlayerResource.GetPlayer(playerid), DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_GOLD, this.GetCasterPlus(), actual_gold_to_steal, undefined);
                     if (this.GetCasterPlus().HasModifier("modifier_imba_jinada_gold_tracker")) {
                         this.GetCasterPlus().findBuff<modifier_imba_jinada_gold_tracker>("modifier_imba_jinada_gold_tracker").SetStackCount(this.GetCasterPlus().FindModifierByName("modifier_imba_jinada_gold_tracker").GetStackCount() + actual_gold_to_steal);
@@ -518,7 +518,7 @@ export class modifier_imba_jinada_buff_crit extends BaseModifier_Plus {
                     }
                     // target.ModifyGold(-actual_gold_to_steal, false, EDOTA_ModifyGold_Reason.DOTA_ModifyGold_Unspecified);
                     let playerroot = GGameScene.GetPlayer(attacker.GetPlayerID());
-                    playerroot.PlayerDataComp().ModifyGold(actual_gold_to_steal, false, EDOTA_ModifyGold_Reason.DOTA_ModifyGold_Unspecified);
+                    playerroot.PlayerDataComp().ModifyGold(actual_gold_to_steal);
                     SendOverheadEventMessage(PlayerResource.GetPlayer(playerroot.BelongPlayerid), DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_GOLD, attacker, actual_gold_to_steal, undefined);
                     if (this.GetCasterPlus().HasModifier("modifier_imba_jinada_gold_tracker")) {
                         this.GetCasterPlus().findBuff<modifier_imba_jinada_gold_tracker>("modifier_imba_jinada_gold_tracker").SetStackCount(this.GetCasterPlus().FindModifierByName("modifier_imba_jinada_gold_tracker").GetStackCount() + actual_gold_to_steal);
@@ -960,7 +960,7 @@ export class modifier_imba_track_debuff_mark extends BaseModifier_Plus {
                 //     return undefined;
                 // }
                 let playerroot = GGameScene.GetPlayer(this.caster.GetPlayerID());
-                playerroot.PlayerDataComp().ModifyGold(this.bonus_gold_self, true, EDOTA_ModifyGold_Reason.DOTA_ModifyGold_Unspecified);
+                playerroot.PlayerDataComp().ModifyGold(this.bonus_gold_self,);
                 SendOverheadEventMessage(PlayerResource.GetPlayer(playerroot.BelongPlayerid), DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_GOLD, this.caster, this.bonus_gold_self, undefined);
                 let allies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.parent.GetAbsOrigin(), undefined, this.haste_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FindOrder.FIND_ANY_ORDER, false);
                 for (const [_, ally] of GameFunc.iPair(allies)) {
@@ -1233,7 +1233,7 @@ export class modifier_imba_headhunter_debuff_handler extends BaseModifier_Plus {
                     }
                     this.contract_gold = this.contract_gold * this.contract_gold_mult;
                     let playerroot = GGameScene.GetPlayer(this.caster.GetPlayerID());
-                    playerroot.PlayerDataComp().ModifyGold(this.contract_gold, true, EDOTA_ModifyGold_Reason.DOTA_ModifyGold_Unspecified);
+                    playerroot.PlayerDataComp().ModifyGold(this.contract_gold,);
                     SendOverheadEventMessage(PlayerResource.GetPlayer(playerroot.BelongPlayerid), DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_GOLD, this.caster, this.contract_gold, undefined);
                     if (this.caster.HasModifier(this.modifier_contract_buff)) {
                         this.caster.RemoveModifierByName(this.modifier_contract_buff);

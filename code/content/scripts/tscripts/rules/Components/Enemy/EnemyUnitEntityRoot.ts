@@ -226,8 +226,8 @@ export class EnemyUnitEntityRoot extends BattleUnitEntityRoot {
                 const gold = RandomInt(goldMin, goldMax);
                 let cast_sound = "DOTA_Item.Hand_Of_Midas";
                 npc.EmitSound(cast_sound);
-                SendOverheadEventMessage(null, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_GOLD, npc, gold, undefined);
-                player.PlayerDataComp().ModifyGold(gold);
+                // SendOverheadEventMessage(null, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_GOLD, npc, gold, undefined);
+                player.PlayerDataComp().ModifyGold(gold, npc.GetAbsOrigin());
             }
             // 木材奖励
             let woodMin = roundconfig.woodMin || 0;
@@ -237,7 +237,7 @@ export class EnemyUnitEntityRoot extends BattleUnitEntityRoot {
                 // let cast_sound = "DOTA_Item.Hand_Of_Midas";
                 // npc.EmitSound(cast_sound);
                 SendOverheadEventMessage(null, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_XP, npc, wood, undefined);
-                player.PlayerDataComp().ModifyWood(wood);
+                player.PlayerDataComp().ModifyWood(wood, npc.GetAbsOrigin());
             }
             // 魂晶奖励
             let soulcrystalMin = roundconfig.soulcrystalMin || 0;
@@ -249,17 +249,19 @@ export class EnemyUnitEntityRoot extends BattleUnitEntityRoot {
                 SendOverheadEventMessage(null, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_MANA_ADD, npc, soulCrystal, undefined);
                 player.PlayerDataComp().ModifySoulCrystal(soulCrystal);
             }
-            if (this.IsEnemyTower()) {
-                let vCenter = player.Hero.GetAbsOrigin();
-                if (roundconfig.eliteDropIndex && roundconfig.eliteDropIndex != "") {
-                    let itemname = KVHelper.RandomPoolConfig(roundconfig.eliteDropIndex)
-                    let item = npc.CreateOneItem(itemname);
-                    let vPosition = (vCenter + RandomVector(200)) as Vector;
-                    CreateItemOnPositionForLaunch(startPos, item);
-                    let time = GFuncVector.CalculateDistance(startPos, vPosition) / 750;
-                    item.LaunchLoot(false, 150, time, vPosition, null)
-                }
+            // 宝箱掉落
+            let vCenter = player.Hero.GetAbsOrigin();
+            if (roundconfig.eliteDropIndex && roundconfig.eliteDropIndex != "") {
+                let itemname = KVHelper.RandomPoolConfig(roundconfig.eliteDropIndex)
+                let item = npc.CreateOneItem(itemname);
+                let vPosition = (vCenter + RandomVector(200)) as Vector;
+                CreateItemOnPositionForLaunch(startPos, item);
+                let time = GFuncVector.CalculateDistance(startPos, vPosition) / 750;
+                item.LaunchLoot(false, 150, time, vPosition, null)
             }
+
+
+
         }
     }
 

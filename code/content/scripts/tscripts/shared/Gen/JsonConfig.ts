@@ -29822,8 +29822,7 @@
         "wood_max": 0,
         "soulcrystal_min": 10,
         "soulcrystal_max": 10,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20002",
@@ -29849,8 +29848,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20003",
@@ -29876,8 +29874,7 @@
         "wood_max": 0,
         "soulcrystal_min": 10,
         "soulcrystal_max": 10,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20004",
@@ -29903,8 +29900,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20005",
@@ -29930,8 +29926,7 @@
         "wood_max": 0,
         "soulcrystal_min": 10,
         "soulcrystal_max": 10,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20006",
@@ -29957,8 +29952,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20007",
@@ -29984,8 +29978,7 @@
         "wood_max": 0,
         "soulcrystal_min": 10,
         "soulcrystal_max": 10,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20008",
@@ -30011,8 +30004,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20009",
@@ -30038,8 +30030,7 @@
         "wood_max": 0,
         "soulcrystal_min": 10,
         "soulcrystal_max": 10,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20010",
@@ -30065,8 +30056,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20011",
@@ -30092,8 +30082,7 @@
         "wood_max": 0,
         "soulcrystal_min": 10,
         "soulcrystal_max": 10,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20012",
@@ -30119,8 +30108,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20013",
@@ -30146,8 +30134,7 @@
         "wood_max": 0,
         "soulcrystal_min": 10,
         "soulcrystal_max": 10,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20014",
@@ -30173,8 +30160,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20015",
@@ -30200,8 +30186,7 @@
         "wood_max": 0,
         "soulcrystal_min": 10,
         "soulcrystal_max": 10,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20016",
@@ -30227,8 +30212,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20017",
@@ -30254,8 +30238,7 @@
         "wood_max": 0,
         "soulcrystal_min": 10,
         "soulcrystal_max": 10,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20018",
@@ -30281,8 +30264,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20019",
@@ -30308,8 +30290,7 @@
         "wood_max": 0,
         "soulcrystal_min": 10,
         "soulcrystal_max": 10,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20020",
@@ -30335,8 +30316,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20021",
@@ -30362,8 +30342,7 @@
         "wood_max": 0,
         "soulcrystal_min": 10,
         "soulcrystal_max": 10,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20022",
@@ -30389,8 +30368,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20023",
@@ -30416,8 +30394,7 @@
         "wood_max": 0,
         "soulcrystal_min": 10,
         "soulcrystal_max": 10,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20024",
@@ -30443,8 +30420,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20025",
@@ -30470,8 +30446,7 @@
         "wood_max": 0,
         "soulcrystal_min": 10,
         "soulcrystal_max": 10,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20026",
@@ -30497,8 +30472,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20027",
@@ -30524,8 +30498,7 @@
         "wood_max": 0,
         "soulcrystal_min": 10,
         "soulcrystal_max": 10,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20028",
@@ -30551,8 +30524,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20029",
@@ -30578,8 +30550,7 @@
         "wood_max": 0,
         "soulcrystal_min": 10,
         "soulcrystal_max": 10,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20030",
@@ -30605,8 +30576,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20031",
@@ -30632,8 +30602,7 @@
         "wood_max": 0,
         "soulcrystal_min": 10,
         "soulcrystal_max": 10,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20032",
@@ -30659,8 +30628,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20033",
@@ -30686,8 +30654,7 @@
         "wood_max": 0,
         "soulcrystal_min": 10,
         "soulcrystal_max": 10,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20034",
@@ -30713,8 +30680,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20035",
@@ -30740,8 +30706,7 @@
         "wood_max": 0,
         "soulcrystal_min": 10,
         "soulcrystal_max": 10,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20036",
@@ -30767,8 +30732,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20037",
@@ -30794,8 +30758,7 @@
         "wood_max": 0,
         "soulcrystal_min": 10,
         "soulcrystal_max": 10,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20038",
@@ -30821,8 +30784,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20039",
@@ -30848,8 +30810,7 @@
         "wood_max": 0,
         "soulcrystal_min": 10,
         "soulcrystal_max": 10,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20040",
@@ -30875,8 +30836,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       }
     ]
   },
@@ -30910,8 +30870,7 @@
         "wood_max": 100,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20042",
@@ -30937,8 +30896,7 @@
         "wood_max": 5,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20043",
@@ -30964,8 +30922,7 @@
         "wood_max": 100,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20044",
@@ -30991,8 +30948,7 @@
         "wood_max": 5,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20045",
@@ -31018,8 +30974,7 @@
         "wood_max": 100,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20046",
@@ -31045,8 +31000,7 @@
         "wood_max": 5,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20047",
@@ -31072,8 +31026,7 @@
         "wood_max": 100,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20048",
@@ -31099,8 +31052,7 @@
         "wood_max": 5,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20049",
@@ -31126,8 +31078,7 @@
         "wood_max": 100,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20050",
@@ -31153,8 +31104,7 @@
         "wood_max": 5,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20051",
@@ -31180,8 +31130,7 @@
         "wood_max": 100,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20052",
@@ -31207,8 +31156,7 @@
         "wood_max": 5,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20053",
@@ -31234,8 +31182,7 @@
         "wood_max": 100,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20054",
@@ -31261,8 +31208,7 @@
         "wood_max": 5,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20055",
@@ -31288,8 +31234,7 @@
         "wood_max": 100,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20056",
@@ -31315,8 +31260,7 @@
         "wood_max": 5,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20057",
@@ -31342,8 +31286,7 @@
         "wood_max": 100,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20058",
@@ -31369,8 +31312,7 @@
         "wood_max": 5,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20059",
@@ -31396,8 +31338,7 @@
         "wood_max": 100,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20060",
@@ -31423,8 +31364,7 @@
         "wood_max": 5,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20061",
@@ -31450,8 +31390,7 @@
         "wood_max": 100,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20062",
@@ -31477,8 +31416,7 @@
         "wood_max": 5,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20063",
@@ -31504,8 +31442,7 @@
         "wood_max": 100,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20064",
@@ -31531,8 +31468,7 @@
         "wood_max": 5,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20065",
@@ -31558,8 +31494,7 @@
         "wood_max": 100,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20066",
@@ -31585,8 +31520,7 @@
         "wood_max": 5,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20067",
@@ -31612,8 +31546,7 @@
         "wood_max": 100,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20068",
@@ -31639,8 +31572,7 @@
         "wood_max": 5,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20069",
@@ -31666,8 +31598,7 @@
         "wood_max": 100,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20070",
@@ -31693,8 +31624,7 @@
         "wood_max": 5,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20071",
@@ -31720,8 +31650,7 @@
         "wood_max": 100,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20072",
@@ -31747,8 +31676,7 @@
         "wood_max": 5,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20073",
@@ -31774,8 +31702,7 @@
         "wood_max": 100,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20074",
@@ -31801,8 +31728,7 @@
         "wood_max": 5,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20075",
@@ -31828,8 +31754,7 @@
         "wood_max": 100,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20076",
@@ -31855,8 +31780,7 @@
         "wood_max": 5,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20077",
@@ -31882,8 +31806,7 @@
         "wood_max": 100,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20078",
@@ -31909,8 +31832,7 @@
         "wood_max": 5,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20079",
@@ -31936,8 +31858,7 @@
         "wood_max": 100,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20080",
@@ -31963,8 +31884,7 @@
         "wood_max": 5,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       }
     ]
   },
@@ -31998,8 +31918,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20082",
@@ -32025,8 +31944,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20083",
@@ -32052,8 +31970,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20084",
@@ -32079,8 +31996,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20085",
@@ -32106,8 +32022,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20086",
@@ -32133,8 +32048,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20087",
@@ -32160,8 +32074,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20088",
@@ -32187,8 +32100,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20089",
@@ -32214,8 +32126,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20090",
@@ -32241,8 +32152,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20091",
@@ -32268,8 +32178,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20092",
@@ -32295,8 +32204,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20093",
@@ -32322,8 +32230,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20094",
@@ -32349,8 +32256,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20095",
@@ -32376,8 +32282,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20096",
@@ -32403,8 +32308,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20097",
@@ -32430,8 +32334,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20098",
@@ -32457,8 +32360,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20099",
@@ -32484,8 +32386,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20100",
@@ -32511,8 +32412,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       }
     ]
   },
@@ -32546,8 +32446,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20102",
@@ -32573,8 +32472,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20103",
@@ -32600,8 +32498,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20104",
@@ -32627,8 +32524,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20105",
@@ -32654,8 +32550,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20106",
@@ -32681,8 +32576,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20107",
@@ -32708,8 +32602,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20108",
@@ -32735,8 +32628,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20109",
@@ -32762,8 +32654,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20110",
@@ -32789,8 +32680,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20111",
@@ -32816,8 +32706,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20112",
@@ -32843,8 +32732,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20113",
@@ -32870,8 +32758,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20114",
@@ -32897,8 +32784,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20115",
@@ -32924,8 +32810,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20116",
@@ -32951,8 +32836,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20117",
@@ -32978,8 +32862,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20118",
@@ -33005,8 +32888,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20119",
@@ -33032,8 +32914,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "20120",
@@ -33059,8 +32940,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       }
     ]
   }
@@ -33078,6 +32958,7 @@
     "rankScore": 5,
     "winPrizeHeroExp": 10,
     "winPrizeItems": 0,
+    "winDropItems": "1013",
     "randomEnemy": false,
     "roundprize_gold": 500,
     "roundprize_wood": 20,
@@ -33091,7 +32972,7 @@
         "level": 0,
         "unit_weight": 10,
         "position_x": 0,
-        "position_y": 8,
+        "position_y": 11,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -33107,8 +32988,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "1013",
-        "spawn_buff": ""
+        "elite_drop_index": "1013"
       },
       {
         "id": "1003",
@@ -33117,7 +32997,7 @@
         "level": 0,
         "unit_weight": 10,
         "position_x": 1,
-        "position_y": 8,
+        "position_y": 11,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -33133,8 +33013,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "1004",
@@ -33143,7 +33022,7 @@
         "level": 0,
         "unit_weight": 10,
         "position_x": 2,
-        "position_y": 8,
+        "position_y": 11,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -33159,8 +33038,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": "1013"
       },
       {
         "id": "1005",
@@ -33169,7 +33047,7 @@
         "level": 0,
         "unit_weight": 10,
         "position_x": 3,
-        "position_y": 8,
+        "position_y": 11,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -33185,8 +33063,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "1006",
@@ -33195,7 +33072,7 @@
         "level": 0,
         "unit_weight": 10,
         "position_x": 4,
-        "position_y": 8,
+        "position_y": 11,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -33211,8 +33088,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": "1013"
       },
       {
         "id": "1007",
@@ -33221,7 +33097,7 @@
         "level": 0,
         "unit_weight": 10,
         "position_x": 5,
-        "position_y": 8,
+        "position_y": 11,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -33237,8 +33113,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "1008",
@@ -33247,7 +33122,7 @@
         "level": 0,
         "unit_weight": 10,
         "position_x": 6,
-        "position_y": 8,
+        "position_y": 11,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -33263,8 +33138,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": "1013"
       },
       {
         "id": "1009",
@@ -33273,7 +33147,7 @@
         "level": 0,
         "unit_weight": 10,
         "position_x": 7,
-        "position_y": 8,
+        "position_y": 11,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -33289,112 +33163,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
-      },
-      {
-        "id": "1010",
-        "unitname": "building_enemy_1",
-        "star": 1,
-        "level": 0,
-        "unit_weight": 10,
-        "position_x": 0,
-        "position_y": 7,
-        "angles_x": 0,
-        "angles_y": 0,
-        "angles_z": 0,
-        "enemycreatetype": 0,
-        "isground": 1,
-        "atkpect": 0,
-        "hppect": 0,
-        "phyarmpect": 0,
-        "magicarmpect": 0,
-        "gold_min": 5,
-        "gold_max": 15,
-        "wood_min": 0,
-        "wood_max": 0,
-        "soulcrystal_min": 0,
-        "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
-      },
-      {
-        "id": "1011",
-        "unitname": "building_enemy_1",
-        "star": 1,
-        "level": 0,
-        "unit_weight": 10,
-        "position_x": 1,
-        "position_y": 7,
-        "angles_x": 0,
-        "angles_y": 0,
-        "angles_z": 0,
-        "enemycreatetype": 0,
-        "isground": 1,
-        "atkpect": 0,
-        "hppect": 0,
-        "phyarmpect": 0,
-        "magicarmpect": 0,
-        "gold_min": 5,
-        "gold_max": 15,
-        "wood_min": 0,
-        "wood_max": 0,
-        "soulcrystal_min": 0,
-        "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
-      },
-      {
-        "id": "1012",
-        "unitname": "building_enemy_1",
-        "star": 1,
-        "level": 0,
-        "unit_weight": 10,
-        "position_x": 2,
-        "position_y": 7,
-        "angles_x": 0,
-        "angles_y": 0,
-        "angles_z": 0,
-        "enemycreatetype": 0,
-        "isground": 1,
-        "atkpect": 0,
-        "hppect": 0,
-        "phyarmpect": 0,
-        "magicarmpect": 0,
-        "gold_min": 5,
-        "gold_max": 15,
-        "wood_min": 0,
-        "wood_max": 0,
-        "soulcrystal_min": 0,
-        "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
-      },
-      {
-        "id": "1013",
-        "unitname": "building_enemy_1",
-        "star": 1,
-        "level": 0,
-        "unit_weight": 10,
-        "position_x": 3,
-        "position_y": 7,
-        "angles_x": 0,
-        "angles_y": 0,
-        "angles_z": 0,
-        "enemycreatetype": 0,
-        "isground": 1,
-        "atkpect": 0,
-        "hppect": 0,
-        "phyarmpect": 0,
-        "magicarmpect": 0,
-        "gold_min": 5,
-        "gold_max": 15,
-        "wood_min": 0,
-        "wood_max": 0,
-        "soulcrystal_min": 0,
-        "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       }
     ]
   },
@@ -33410,6 +33179,7 @@
     "rankScore": 5,
     "winPrizeHeroExp": 0,
     "winPrizeItems": 0,
+    "winDropItems": "1013",
     "randomEnemy": true,
     "roundprize_gold": 500,
     "roundprize_wood": 25,
@@ -33423,33 +33193,7 @@
         "level": 0,
         "unit_weight": 10,
         "position_x": 0,
-        "position_y": 8,
-        "angles_x": 0,
-        "angles_y": 0,
-        "angles_z": 0,
-        "enemycreatetype": 4,
-        "isground": 1,
-        "atkpect": 0,
-        "hppect": 0,
-        "phyarmpect": 0,
-        "magicarmpect": 0,
-        "gold_min": 100,
-        "gold_max": 100,
-        "wood_min": 0,
-        "wood_max": 0,
-        "soulcrystal_min": 10,
-        "soulcrystal_max": 10,
-        "elite_drop_index": "1013",
-        "spawn_buff": ""
-      },
-      {
-        "id": "1027",
-        "unitname": "",
-        "star": 1,
-        "level": 0,
-        "unit_weight": 10,
-        "position_x": 1,
-        "position_y": 8,
+        "position_y": 0,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -33463,10 +33207,34 @@
         "gold_max": 15,
         "wood_min": 0,
         "wood_max": 0,
-        "soulcrystal_min": 10,
-        "soulcrystal_max": 10,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": "1013"
+      },
+      {
+        "id": "1027",
+        "unitname": "",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 0,
+        "position_y": 0,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 4,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": ""
       }
     ]
   },
@@ -33482,6 +33250,7 @@
     "rankScore": 5,
     "winPrizeHeroExp": 0,
     "winPrizeItems": 0,
+    "winDropItems": "1013",
     "randomEnemy": true,
     "roundprize_gold": 500,
     "roundprize_wood": 30,
@@ -33494,34 +33263,8 @@
         "star": 1,
         "level": 0,
         "unit_weight": 10,
-        "position_x": 1,
-        "position_y": 8,
-        "angles_x": 0,
-        "angles_y": 0,
-        "angles_z": 0,
-        "enemycreatetype": 4,
-        "isground": 1,
-        "atkpect": 0,
-        "hppect": 0,
-        "phyarmpect": 0,
-        "magicarmpect": 0,
-        "gold_min": 100,
-        "gold_max": 100,
-        "wood_min": 0,
-        "wood_max": 0,
-        "soulcrystal_min": 10,
-        "soulcrystal_max": 10,
-        "elite_drop_index": "1013",
-        "spawn_buff": ""
-      },
-      {
-        "id": "1051",
-        "unitname": "",
-        "star": 1,
-        "level": 0,
-        "unit_weight": 10,
-        "position_x": 2,
-        "position_y": 8,
+        "position_x": 0,
+        "position_y": 0,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -33537,8 +33280,32 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": "1013"
+      },
+      {
+        "id": "1051",
+        "unitname": "",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 0,
+        "position_y": 0,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 4,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": ""
       }
     ]
   },
@@ -33554,6 +33321,7 @@
     "rankScore": 5,
     "winPrizeHeroExp": 0,
     "winPrizeItems": 0,
+    "winDropItems": "1013",
     "randomEnemy": true,
     "roundprize_gold": 500,
     "roundprize_wood": 35,
@@ -33566,34 +33334,8 @@
         "star": 1,
         "level": 0,
         "unit_weight": 10,
-        "position_x": 1,
-        "position_y": 8,
-        "angles_x": 0,
-        "angles_y": 0,
-        "angles_z": 0,
-        "enemycreatetype": 4,
-        "isground": 1,
-        "atkpect": 0,
-        "hppect": 0,
-        "phyarmpect": 0,
-        "magicarmpect": 0,
-        "gold_min": 100,
-        "gold_max": 100,
-        "wood_min": 0,
-        "wood_max": 0,
-        "soulcrystal_min": 10,
-        "soulcrystal_max": 10,
-        "elite_drop_index": "1013",
-        "spawn_buff": ""
-      },
-      {
-        "id": "1063",
-        "unitname": "",
-        "star": 1,
-        "level": 0,
-        "unit_weight": 10,
-        "position_x": 2,
-        "position_y": 8,
+        "position_x": 0,
+        "position_y": 0,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -33609,8 +33351,32 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": "1013"
+      },
+      {
+        "id": "1063",
+        "unitname": "",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 0,
+        "position_y": 0,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 4,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": ""
       }
     ]
   },
@@ -33626,6 +33392,7 @@
     "rankScore": 5,
     "winPrizeHeroExp": 0,
     "winPrizeItems": 0,
+    "winDropItems": "1013",
     "randomEnemy": true,
     "roundprize_gold": 500,
     "roundprize_wood": 40,
@@ -33636,36 +33403,10 @@
         "id": "1074",
         "unitname": "",
         "star": 1,
-        "level": 2,
-        "unit_weight": 10,
-        "position_x": 1,
-        "position_y": 8,
-        "angles_x": 0,
-        "angles_y": 0,
-        "angles_z": 0,
-        "enemycreatetype": 4,
-        "isground": 1,
-        "atkpect": 0,
-        "hppect": 0,
-        "phyarmpect": 0,
-        "magicarmpect": 0,
-        "gold_min": 100,
-        "gold_max": 100,
-        "wood_min": 0,
-        "wood_max": 0,
-        "soulcrystal_min": 10,
-        "soulcrystal_max": 10,
-        "elite_drop_index": "1013",
-        "spawn_buff": ""
-      },
-      {
-        "id": "1075",
-        "unitname": "",
-        "star": 1,
         "level": 0,
         "unit_weight": 10,
-        "position_x": 2,
-        "position_y": 8,
+        "position_x": 0,
+        "position_y": 0,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -33681,8 +33422,32 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": "1013"
+      },
+      {
+        "id": "1075",
+        "unitname": "",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 0,
+        "position_y": 0,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 4,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": ""
       }
     ]
   },
@@ -33698,6 +33463,7 @@
     "rankScore": 5,
     "winPrizeHeroExp": 0,
     "winPrizeItems": 0,
+    "winDropItems": "1013",
     "randomEnemy": true,
     "roundprize_gold": 500,
     "roundprize_wood": 45,
@@ -33708,36 +33474,10 @@
         "id": "1086",
         "unitname": "",
         "star": 1,
-        "level": 3,
-        "unit_weight": 10,
-        "position_x": 1,
-        "position_y": 8,
-        "angles_x": 0,
-        "angles_y": 0,
-        "angles_z": 0,
-        "enemycreatetype": 4,
-        "isground": 1,
-        "atkpect": 0,
-        "hppect": 0,
-        "phyarmpect": 0,
-        "magicarmpect": 0,
-        "gold_min": 100,
-        "gold_max": 100,
-        "wood_min": 0,
-        "wood_max": 0,
-        "soulcrystal_min": 10,
-        "soulcrystal_max": 10,
-        "elite_drop_index": "1013",
-        "spawn_buff": ""
-      },
-      {
-        "id": "1087",
-        "unitname": "",
-        "star": 1,
         "level": 0,
         "unit_weight": 10,
-        "position_x": 2,
-        "position_y": 8,
+        "position_x": 0,
+        "position_y": 0,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -33753,8 +33493,32 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": "1013"
+      },
+      {
+        "id": "1087",
+        "unitname": "",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 0,
+        "position_y": 0,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 4,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": ""
       }
     ]
   },
@@ -33770,6 +33534,7 @@
     "rankScore": 5,
     "winPrizeHeroExp": 0,
     "winPrizeItems": 0,
+    "winDropItems": "1013",
     "randomEnemy": true,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
@@ -33780,36 +33545,10 @@
         "id": "1098",
         "unitname": "",
         "star": 1,
-        "level": 3,
-        "unit_weight": 10,
-        "position_x": 1,
-        "position_y": 8,
-        "angles_x": 0,
-        "angles_y": 0,
-        "angles_z": 0,
-        "enemycreatetype": 4,
-        "isground": 1,
-        "atkpect": 0,
-        "hppect": 0,
-        "phyarmpect": 0,
-        "magicarmpect": 0,
-        "gold_min": 100,
-        "gold_max": 100,
-        "wood_min": 0,
-        "wood_max": 0,
-        "soulcrystal_min": 10,
-        "soulcrystal_max": 10,
-        "elite_drop_index": "1013",
-        "spawn_buff": ""
-      },
-      {
-        "id": "1099",
-        "unitname": "",
-        "star": 1,
         "level": 0,
         "unit_weight": 10,
-        "position_x": 2,
-        "position_y": 8,
+        "position_x": 0,
+        "position_y": 0,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -33825,8 +33564,32 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": "1013"
+      },
+      {
+        "id": "1099",
+        "unitname": "",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 0,
+        "position_y": 0,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 4,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": ""
       }
     ]
   },
@@ -33842,6 +33605,7 @@
     "rankScore": 5,
     "winPrizeHeroExp": 0,
     "winPrizeItems": 0,
+    "winDropItems": "1013",
     "randomEnemy": true,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
@@ -33852,36 +33616,10 @@
         "id": "1110",
         "unitname": "",
         "star": 1,
-        "level": 3,
-        "unit_weight": 10,
-        "position_x": 1,
-        "position_y": 8,
-        "angles_x": 0,
-        "angles_y": 0,
-        "angles_z": 0,
-        "enemycreatetype": 4,
-        "isground": 1,
-        "atkpect": 0,
-        "hppect": 0,
-        "phyarmpect": 0,
-        "magicarmpect": 0,
-        "gold_min": 100,
-        "gold_max": 100,
-        "wood_min": 0,
-        "wood_max": 0,
-        "soulcrystal_min": 10,
-        "soulcrystal_max": 10,
-        "elite_drop_index": "1013",
-        "spawn_buff": ""
-      },
-      {
-        "id": "1111",
-        "unitname": "",
-        "star": 1,
         "level": 0,
         "unit_weight": 10,
-        "position_x": 2,
-        "position_y": 8,
+        "position_x": 0,
+        "position_y": 0,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -33897,8 +33635,32 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": "1013"
+      },
+      {
+        "id": "1111",
+        "unitname": "",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 0,
+        "position_y": 0,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 4,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": ""
       }
     ]
   },
@@ -33914,6 +33676,7 @@
     "rankScore": 5,
     "winPrizeHeroExp": 0,
     "winPrizeItems": 0,
+    "winDropItems": "1013",
     "randomEnemy": true,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
@@ -33924,36 +33687,10 @@
         "id": "1122",
         "unitname": "",
         "star": 1,
-        "level": 4,
-        "unit_weight": 10,
-        "position_x": 1,
-        "position_y": 8,
-        "angles_x": 0,
-        "angles_y": 0,
-        "angles_z": 0,
-        "enemycreatetype": 4,
-        "isground": 1,
-        "atkpect": 0,
-        "hppect": 0,
-        "phyarmpect": 0,
-        "magicarmpect": 0,
-        "gold_min": 100,
-        "gold_max": 100,
-        "wood_min": 0,
-        "wood_max": 0,
-        "soulcrystal_min": 10,
-        "soulcrystal_max": 10,
-        "elite_drop_index": "1013",
-        "spawn_buff": ""
-      },
-      {
-        "id": "1123",
-        "unitname": "",
-        "star": 1,
         "level": 0,
         "unit_weight": 10,
-        "position_x": 2,
-        "position_y": 8,
+        "position_x": 0,
+        "position_y": 0,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -33969,8 +33706,32 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": "1013"
+      },
+      {
+        "id": "1123",
+        "unitname": "",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 0,
+        "position_y": 0,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 4,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": ""
       }
     ]
   },
@@ -33986,6 +33747,7 @@
     "rankScore": 5,
     "winPrizeHeroExp": 30,
     "winPrizeItems": 0,
+    "winDropItems": "1014",
     "randomEnemy": false,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
@@ -33996,10 +33758,10 @@
         "id": "1134",
         "unitname": "building_enemy_10",
         "star": 1,
-        "level": 4,
+        "level": 0,
         "unit_weight": 10,
         "position_x": 1,
-        "position_y": 8,
+        "position_y": 11,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -34009,14 +33771,13 @@
         "hppect": 0,
         "phyarmpect": 0,
         "magicarmpect": 0,
-        "gold_min": 100,
-        "gold_max": 100,
+        "gold_min": 5,
+        "gold_max": 15,
         "wood_min": 0,
         "wood_max": 0,
-        "soulcrystal_min": 10,
-        "soulcrystal_max": 10,
-        "elite_drop_index": "1013",
-        "spawn_buff": ""
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": "1013"
       },
       {
         "id": "1135",
@@ -34025,7 +33786,7 @@
         "level": 0,
         "unit_weight": 10,
         "position_x": 2,
-        "position_y": 8,
+        "position_y": 11,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -34041,8 +33802,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "1136",
@@ -34051,7 +33811,7 @@
         "level": 0,
         "unit_weight": 10,
         "position_x": 3,
-        "position_y": 8,
+        "position_y": 11,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -34067,8 +33827,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "1137",
@@ -34077,7 +33836,7 @@
         "level": 0,
         "unit_weight": 10,
         "position_x": 4,
-        "position_y": 8,
+        "position_y": 11,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -34093,8 +33852,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "1138",
@@ -34103,7 +33861,7 @@
         "level": 0,
         "unit_weight": 10,
         "position_x": 5,
-        "position_y": 8,
+        "position_y": 11,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -34119,8 +33877,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       }
     ]
   },
@@ -34136,6 +33893,7 @@
     "rankScore": 10,
     "winPrizeHeroExp": 0,
     "winPrizeItems": 0,
+    "winDropItems": "1014",
     "randomEnemy": true,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
@@ -34146,36 +33904,10 @@
         "id": "1146",
         "unitname": "",
         "star": 1,
-        "level": 4,
-        "unit_weight": 10,
-        "position_x": 3.5,
-        "position_y": 9.5,
-        "angles_x": 0,
-        "angles_y": 0,
-        "angles_z": 0,
-        "enemycreatetype": 4,
-        "isground": 1,
-        "atkpect": 0,
-        "hppect": 0,
-        "phyarmpect": 0,
-        "magicarmpect": 0,
-        "gold_min": 100,
-        "gold_max": 100,
-        "wood_min": 0,
-        "wood_max": 0,
-        "soulcrystal_min": 10,
-        "soulcrystal_max": 10,
-        "elite_drop_index": "1014",
-        "spawn_buff": ""
-      },
-      {
-        "id": "1147",
-        "unitname": "",
-        "star": 1,
         "level": 0,
         "unit_weight": 10,
-        "position_x": 1,
-        "position_y": 8,
+        "position_x": 0,
+        "position_y": 0,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -34191,8 +33923,32 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": "1014"
+      },
+      {
+        "id": "1147",
+        "unitname": "",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 0,
+        "position_y": 0,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 4,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": ""
       }
     ]
   },
@@ -34208,6 +33964,7 @@
     "rankScore": 10,
     "winPrizeHeroExp": 0,
     "winPrizeItems": 0,
+    "winDropItems": "1014",
     "randomEnemy": true,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
@@ -34218,36 +33975,10 @@
         "id": "1158",
         "unitname": "",
         "star": 1,
-        "level": 4,
-        "unit_weight": 10,
-        "position_x": 3.5,
-        "position_y": 9.5,
-        "angles_x": 0,
-        "angles_y": 0,
-        "angles_z": 0,
-        "enemycreatetype": 4,
-        "isground": 1,
-        "atkpect": 0,
-        "hppect": 0,
-        "phyarmpect": 0,
-        "magicarmpect": 0,
-        "gold_min": 100,
-        "gold_max": 100,
-        "wood_min": 0,
-        "wood_max": 0,
-        "soulcrystal_min": 10,
-        "soulcrystal_max": 10,
-        "elite_drop_index": "1014",
-        "spawn_buff": ""
-      },
-      {
-        "id": "1159",
-        "unitname": "",
-        "star": 1,
         "level": 0,
         "unit_weight": 10,
-        "position_x": 1,
-        "position_y": 8,
+        "position_x": 0,
+        "position_y": 0,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -34263,8 +33994,32 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": "1014"
+      },
+      {
+        "id": "1159",
+        "unitname": "",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 0,
+        "position_y": 0,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 4,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": ""
       }
     ]
   },
@@ -34280,6 +34035,7 @@
     "rankScore": 10,
     "winPrizeHeroExp": 0,
     "winPrizeItems": 0,
+    "winDropItems": "1014",
     "randomEnemy": true,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
@@ -34292,34 +34048,8 @@
         "star": 1,
         "level": 0,
         "unit_weight": 10,
-        "position_x": 1,
-        "position_y": 7,
-        "angles_x": 0,
-        "angles_y": 0,
-        "angles_z": 0,
-        "enemycreatetype": 4,
-        "isground": 1,
-        "atkpect": 0,
-        "hppect": 0,
-        "phyarmpect": 0,
-        "magicarmpect": 0,
-        "gold_min": 100,
-        "gold_max": 100,
-        "wood_min": 0,
-        "wood_max": 0,
-        "soulcrystal_min": 10,
-        "soulcrystal_max": 10,
-        "elite_drop_index": "1014",
-        "spawn_buff": ""
-      },
-      {
-        "id": "1171",
-        "unitname": "",
-        "star": 1,
-        "level": 0,
-        "unit_weight": 10,
-        "position_x": 2,
-        "position_y": 7,
+        "position_x": 0,
+        "position_y": 0,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -34335,8 +34065,32 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": "1014"
+      },
+      {
+        "id": "1171",
+        "unitname": "",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 0,
+        "position_y": 0,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 4,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": ""
       }
     ]
   },
@@ -34352,6 +34106,7 @@
     "rankScore": 10,
     "winPrizeHeroExp": 0,
     "winPrizeItems": 0,
+    "winDropItems": "1014",
     "randomEnemy": true,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
@@ -34364,34 +34119,8 @@
         "star": 1,
         "level": 0,
         "unit_weight": 10,
-        "position_x": 1,
-        "position_y": 7,
-        "angles_x": 0,
-        "angles_y": 0,
-        "angles_z": 0,
-        "enemycreatetype": 4,
-        "isground": 1,
-        "atkpect": 0,
-        "hppect": 0,
-        "phyarmpect": 0,
-        "magicarmpect": 0,
-        "gold_min": 100,
-        "gold_max": 100,
-        "wood_min": 0,
-        "wood_max": 0,
-        "soulcrystal_min": 10,
-        "soulcrystal_max": 10,
-        "elite_drop_index": "1014",
-        "spawn_buff": ""
-      },
-      {
-        "id": "1173",
-        "unitname": "",
-        "star": 1,
-        "level": 0,
-        "unit_weight": 10,
-        "position_x": 2,
-        "position_y": 7,
+        "position_x": 0,
+        "position_y": 0,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -34407,8 +34136,32 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": "1014"
+      },
+      {
+        "id": "1173",
+        "unitname": "",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 0,
+        "position_y": 0,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 4,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": ""
       }
     ]
   },
@@ -34424,6 +34177,7 @@
     "rankScore": 10,
     "winPrizeHeroExp": 0,
     "winPrizeItems": 0,
+    "winDropItems": "1014",
     "randomEnemy": true,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
@@ -34436,34 +34190,8 @@
         "star": 1,
         "level": 0,
         "unit_weight": 10,
-        "position_x": 1,
-        "position_y": 7,
-        "angles_x": 0,
-        "angles_y": 0,
-        "angles_z": 0,
-        "enemycreatetype": 4,
-        "isground": 1,
-        "atkpect": 0,
-        "hppect": 0,
-        "phyarmpect": 0,
-        "magicarmpect": 0,
-        "gold_min": 100,
-        "gold_max": 100,
-        "wood_min": 0,
-        "wood_max": 0,
-        "soulcrystal_min": 10,
-        "soulcrystal_max": 10,
-        "elite_drop_index": "1014",
-        "spawn_buff": ""
-      },
-      {
-        "id": "1175",
-        "unitname": "",
-        "star": 1,
-        "level": 0,
-        "unit_weight": 10,
-        "position_x": 2,
-        "position_y": 7,
+        "position_x": 0,
+        "position_y": 0,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -34479,8 +34207,32 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": "1014"
+      },
+      {
+        "id": "1175",
+        "unitname": "",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 0,
+        "position_y": 0,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 4,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": ""
       }
     ]
   },
@@ -34496,6 +34248,7 @@
     "rankScore": 10,
     "winPrizeHeroExp": 0,
     "winPrizeItems": 0,
+    "winDropItems": "1014",
     "randomEnemy": true,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
@@ -34508,34 +34261,8 @@
         "star": 1,
         "level": 0,
         "unit_weight": 10,
-        "position_x": 1,
-        "position_y": 7,
-        "angles_x": 0,
-        "angles_y": 0,
-        "angles_z": 0,
-        "enemycreatetype": 4,
-        "isground": 1,
-        "atkpect": 0,
-        "hppect": 0,
-        "phyarmpect": 0,
-        "magicarmpect": 0,
-        "gold_min": 100,
-        "gold_max": 100,
-        "wood_min": 0,
-        "wood_max": 0,
-        "soulcrystal_min": 10,
-        "soulcrystal_max": 10,
-        "elite_drop_index": "1014",
-        "spawn_buff": ""
-      },
-      {
-        "id": "1177",
-        "unitname": "",
-        "star": 1,
-        "level": 0,
-        "unit_weight": 10,
-        "position_x": 2,
-        "position_y": 7,
+        "position_x": 0,
+        "position_y": 0,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -34551,8 +34278,32 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": "1014"
+      },
+      {
+        "id": "1177",
+        "unitname": "",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 0,
+        "position_y": 0,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 4,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": ""
       }
     ]
   },
@@ -34568,6 +34319,7 @@
     "rankScore": 10,
     "winPrizeHeroExp": 0,
     "winPrizeItems": 0,
+    "winDropItems": "1014",
     "randomEnemy": true,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
@@ -34580,34 +34332,8 @@
         "star": 1,
         "level": 0,
         "unit_weight": 10,
-        "position_x": 1,
-        "position_y": 7,
-        "angles_x": 0,
-        "angles_y": 0,
-        "angles_z": 0,
-        "enemycreatetype": 4,
-        "isground": 1,
-        "atkpect": 0,
-        "hppect": 0,
-        "phyarmpect": 0,
-        "magicarmpect": 0,
-        "gold_min": 100,
-        "gold_max": 100,
-        "wood_min": 0,
-        "wood_max": 0,
-        "soulcrystal_min": 10,
-        "soulcrystal_max": 10,
-        "elite_drop_index": "1014",
-        "spawn_buff": ""
-      },
-      {
-        "id": "1179",
-        "unitname": "",
-        "star": 1,
-        "level": 0,
-        "unit_weight": 10,
-        "position_x": 2,
-        "position_y": 7,
+        "position_x": 0,
+        "position_y": 0,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -34623,8 +34349,32 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": "1014"
+      },
+      {
+        "id": "1179",
+        "unitname": "",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 0,
+        "position_y": 0,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 4,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": ""
       }
     ]
   },
@@ -34640,6 +34390,7 @@
     "rankScore": 10,
     "winPrizeHeroExp": 0,
     "winPrizeItems": 0,
+    "winDropItems": "1014",
     "randomEnemy": true,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
@@ -34652,34 +34403,8 @@
         "star": 1,
         "level": 0,
         "unit_weight": 10,
-        "position_x": 1,
-        "position_y": 7,
-        "angles_x": 0,
-        "angles_y": 0,
-        "angles_z": 0,
-        "enemycreatetype": 4,
-        "isground": 1,
-        "atkpect": 0,
-        "hppect": 0,
-        "phyarmpect": 0,
-        "magicarmpect": 0,
-        "gold_min": 100,
-        "gold_max": 100,
-        "wood_min": 0,
-        "wood_max": 0,
-        "soulcrystal_min": 10,
-        "soulcrystal_max": 10,
-        "elite_drop_index": "1014",
-        "spawn_buff": ""
-      },
-      {
-        "id": "1181",
-        "unitname": "",
-        "star": 1,
-        "level": 0,
-        "unit_weight": 10,
-        "position_x": 2,
-        "position_y": 7,
+        "position_x": 0,
+        "position_y": 0,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -34695,8 +34420,32 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": "1014"
+      },
+      {
+        "id": "1181",
+        "unitname": "",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 0,
+        "position_y": 0,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 4,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": ""
       }
     ]
   },
@@ -34712,6 +34461,7 @@
     "rankScore": 10,
     "winPrizeHeroExp": 0,
     "winPrizeItems": 0,
+    "winDropItems": "1014",
     "randomEnemy": true,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
@@ -34724,34 +34474,8 @@
         "star": 1,
         "level": 0,
         "unit_weight": 10,
-        "position_x": 1,
-        "position_y": 7,
-        "angles_x": 0,
-        "angles_y": 0,
-        "angles_z": 0,
-        "enemycreatetype": 4,
-        "isground": 1,
-        "atkpect": 0,
-        "hppect": 0,
-        "phyarmpect": 0,
-        "magicarmpect": 0,
-        "gold_min": 100,
-        "gold_max": 100,
-        "wood_min": 0,
-        "wood_max": 0,
-        "soulcrystal_min": 10,
-        "soulcrystal_max": 10,
-        "elite_drop_index": "1014",
-        "spawn_buff": ""
-      },
-      {
-        "id": "1183",
-        "unitname": "",
-        "star": 1,
-        "level": 0,
-        "unit_weight": 10,
-        "position_x": 2,
-        "position_y": 7,
+        "position_x": 0,
+        "position_y": 0,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -34767,8 +34491,32 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": "1014"
+      },
+      {
+        "id": "1183",
+        "unitname": "",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 0,
+        "position_y": 0,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 4,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": ""
       }
     ]
   },
@@ -34784,6 +34532,7 @@
     "rankScore": 10,
     "winPrizeHeroExp": 50,
     "winPrizeItems": 0,
+    "winDropItems": "1015",
     "randomEnemy": false,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
@@ -34797,7 +34546,7 @@
         "level": 0,
         "unit_weight": 10,
         "position_x": 1,
-        "position_y": 8,
+        "position_y": 11,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -34807,14 +34556,13 @@
         "hppect": 0,
         "phyarmpect": 0,
         "magicarmpect": 0,
-        "gold_min": 100,
-        "gold_max": 100,
+        "gold_min": 5,
+        "gold_max": 15,
         "wood_min": 0,
         "wood_max": 0,
-        "soulcrystal_min": 10,
-        "soulcrystal_max": 10,
-        "elite_drop_index": "1014",
-        "spawn_buff": ""
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": "1014"
       },
       {
         "id": "1185",
@@ -34823,7 +34571,7 @@
         "level": 0,
         "unit_weight": 10,
         "position_x": 2,
-        "position_y": 8,
+        "position_y": 11,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -34839,8 +34587,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "1186",
@@ -34849,7 +34596,7 @@
         "level": 0,
         "unit_weight": 10,
         "position_x": 3,
-        "position_y": 8,
+        "position_y": 11,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -34865,8 +34612,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "1187",
@@ -34875,7 +34621,7 @@
         "level": 0,
         "unit_weight": 10,
         "position_x": 4,
-        "position_y": 8,
+        "position_y": 11,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -34891,8 +34637,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "1188",
@@ -34901,7 +34646,7 @@
         "level": 0,
         "unit_weight": 10,
         "position_x": 5,
-        "position_y": 8,
+        "position_y": 11,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -34917,8 +34662,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       }
     ]
   },
@@ -34934,6 +34678,7 @@
     "rankScore": 15,
     "winPrizeHeroExp": 0,
     "winPrizeItems": 0,
+    "winDropItems": "1015",
     "randomEnemy": true,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
@@ -34946,34 +34691,8 @@
         "star": 1,
         "level": 0,
         "unit_weight": 10,
-        "position_x": 3,
-        "position_y": 7,
-        "angles_x": 0,
-        "angles_y": 0,
-        "angles_z": 0,
-        "enemycreatetype": 4,
-        "isground": 1,
-        "atkpect": 0,
-        "hppect": 0,
-        "phyarmpect": 0,
-        "magicarmpect": 0,
-        "gold_min": 5,
-        "gold_max": 15,
-        "wood_min": 0,
-        "wood_max": 0,
-        "soulcrystal_min": 10,
-        "soulcrystal_max": 10,
-        "elite_drop_index": "1015",
-        "spawn_buff": ""
-      },
-      {
-        "id": "1193",
-        "unitname": "",
-        "star": 1,
-        "level": 0,
-        "unit_weight": 10,
-        "position_x": 2,
-        "position_y": 7,
+        "position_x": 0,
+        "position_y": 0,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -34989,8 +34708,32 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": "1015"
+      },
+      {
+        "id": "1193",
+        "unitname": "",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 0,
+        "position_y": 0,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 4,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": ""
       }
     ]
   },
@@ -35006,6 +34749,7 @@
     "rankScore": 15,
     "winPrizeHeroExp": 0,
     "winPrizeItems": 0,
+    "winDropItems": "1015",
     "randomEnemy": true,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
@@ -35018,34 +34762,8 @@
         "star": 1,
         "level": 0,
         "unit_weight": 10,
-        "position_x": 1,
-        "position_y": 7,
-        "angles_x": 0,
-        "angles_y": 0,
-        "angles_z": 0,
-        "enemycreatetype": 4,
-        "isground": 1,
-        "atkpect": 0,
-        "hppect": 0,
-        "phyarmpect": 0,
-        "magicarmpect": 0,
-        "gold_min": 100,
-        "gold_max": 100,
-        "wood_min": 0,
-        "wood_max": 0,
-        "soulcrystal_min": 10,
-        "soulcrystal_max": 10,
-        "elite_drop_index": "1015",
-        "spawn_buff": ""
-      },
-      {
-        "id": "1195",
-        "unitname": "",
-        "star": 1,
-        "level": 0,
-        "unit_weight": 10,
-        "position_x": 2,
-        "position_y": 7,
+        "position_x": 0,
+        "position_y": 0,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -35061,8 +34779,32 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": "1015"
+      },
+      {
+        "id": "1195",
+        "unitname": "",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 0,
+        "position_y": 0,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 4,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": ""
       }
     ]
   },
@@ -35078,6 +34820,7 @@
     "rankScore": 15,
     "winPrizeHeroExp": 0,
     "winPrizeItems": 0,
+    "winDropItems": "1015",
     "randomEnemy": true,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
@@ -35090,34 +34833,8 @@
         "star": 1,
         "level": 0,
         "unit_weight": 10,
-        "position_x": 1,
-        "position_y": 7,
-        "angles_x": 0,
-        "angles_y": 0,
-        "angles_z": 0,
-        "enemycreatetype": 4,
-        "isground": 1,
-        "atkpect": 0,
-        "hppect": 0,
-        "phyarmpect": 0,
-        "magicarmpect": 0,
-        "gold_min": 100,
-        "gold_max": 100,
-        "wood_min": 0,
-        "wood_max": 0,
-        "soulcrystal_min": 10,
-        "soulcrystal_max": 10,
-        "elite_drop_index": "1015",
-        "spawn_buff": ""
-      },
-      {
-        "id": "1197",
-        "unitname": "",
-        "star": 1,
-        "level": 0,
-        "unit_weight": 10,
-        "position_x": 2,
-        "position_y": 7,
+        "position_x": 0,
+        "position_y": 0,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -35133,8 +34850,32 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": "1015"
+      },
+      {
+        "id": "1197",
+        "unitname": "",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 0,
+        "position_y": 0,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 4,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": ""
       }
     ]
   },
@@ -35150,6 +34891,7 @@
     "rankScore": 15,
     "winPrizeHeroExp": 0,
     "winPrizeItems": 0,
+    "winDropItems": "1015",
     "randomEnemy": true,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
@@ -35162,34 +34904,8 @@
         "star": 1,
         "level": 0,
         "unit_weight": 10,
-        "position_x": 1,
-        "position_y": 7,
-        "angles_x": 0,
-        "angles_y": 0,
-        "angles_z": 0,
-        "enemycreatetype": 4,
-        "isground": 1,
-        "atkpect": 0,
-        "hppect": 0,
-        "phyarmpect": 0,
-        "magicarmpect": 0,
-        "gold_min": 100,
-        "gold_max": 100,
-        "wood_min": 0,
-        "wood_max": 0,
-        "soulcrystal_min": 10,
-        "soulcrystal_max": 10,
-        "elite_drop_index": "1015",
-        "spawn_buff": ""
-      },
-      {
-        "id": "1199",
-        "unitname": "",
-        "star": 1,
-        "level": 0,
-        "unit_weight": 10,
-        "position_x": 2,
-        "position_y": 7,
+        "position_x": 0,
+        "position_y": 0,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -35205,8 +34921,32 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": "1015"
+      },
+      {
+        "id": "1199",
+        "unitname": "",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 0,
+        "position_y": 0,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 4,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": ""
       }
     ]
   },
@@ -35222,6 +34962,7 @@
     "rankScore": 15,
     "winPrizeHeroExp": 0,
     "winPrizeItems": 0,
+    "winDropItems": "1015",
     "randomEnemy": true,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
@@ -35234,34 +34975,8 @@
         "star": 1,
         "level": 0,
         "unit_weight": 10,
-        "position_x": 1,
-        "position_y": 7,
-        "angles_x": 0,
-        "angles_y": 0,
-        "angles_z": 0,
-        "enemycreatetype": 4,
-        "isground": 1,
-        "atkpect": 0,
-        "hppect": 0,
-        "phyarmpect": 0,
-        "magicarmpect": 0,
-        "gold_min": 100,
-        "gold_max": 100,
-        "wood_min": 0,
-        "wood_max": 0,
-        "soulcrystal_min": 10,
-        "soulcrystal_max": 10,
-        "elite_drop_index": "1015",
-        "spawn_buff": ""
-      },
-      {
-        "id": "1201",
-        "unitname": "",
-        "star": 1,
-        "level": 0,
-        "unit_weight": 10,
-        "position_x": 2,
-        "position_y": 7,
+        "position_x": 0,
+        "position_y": 0,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -35277,8 +34992,32 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": "1015"
+      },
+      {
+        "id": "1201",
+        "unitname": "",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 0,
+        "position_y": 0,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 4,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": ""
       }
     ]
   },
@@ -35294,6 +35033,7 @@
     "rankScore": 15,
     "winPrizeHeroExp": 0,
     "winPrizeItems": 0,
+    "winDropItems": "1015",
     "randomEnemy": true,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
@@ -35306,34 +35046,8 @@
         "star": 1,
         "level": 0,
         "unit_weight": 10,
-        "position_x": 1,
-        "position_y": 7,
-        "angles_x": 0,
-        "angles_y": 0,
-        "angles_z": 0,
-        "enemycreatetype": 4,
-        "isground": 1,
-        "atkpect": 0,
-        "hppect": 0,
-        "phyarmpect": 0,
-        "magicarmpect": 0,
-        "gold_min": 100,
-        "gold_max": 100,
-        "wood_min": 0,
-        "wood_max": 0,
-        "soulcrystal_min": 10,
-        "soulcrystal_max": 10,
-        "elite_drop_index": "1015",
-        "spawn_buff": ""
-      },
-      {
-        "id": "1203",
-        "unitname": "",
-        "star": 1,
-        "level": 0,
-        "unit_weight": 10,
-        "position_x": 2,
-        "position_y": 7,
+        "position_x": 0,
+        "position_y": 0,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -35349,8 +35063,32 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": "1015"
+      },
+      {
+        "id": "1203",
+        "unitname": "",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 0,
+        "position_y": 0,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 4,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": ""
       }
     ]
   },
@@ -35366,6 +35104,7 @@
     "rankScore": 15,
     "winPrizeHeroExp": 0,
     "winPrizeItems": 0,
+    "winDropItems": "1015",
     "randomEnemy": true,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
@@ -35378,34 +35117,8 @@
         "star": 1,
         "level": 0,
         "unit_weight": 10,
-        "position_x": 1,
-        "position_y": 7,
-        "angles_x": 0,
-        "angles_y": 0,
-        "angles_z": 0,
-        "enemycreatetype": 4,
-        "isground": 1,
-        "atkpect": 0,
-        "hppect": 0,
-        "phyarmpect": 0,
-        "magicarmpect": 0,
-        "gold_min": 100,
-        "gold_max": 100,
-        "wood_min": 0,
-        "wood_max": 0,
-        "soulcrystal_min": 10,
-        "soulcrystal_max": 10,
-        "elite_drop_index": "1015",
-        "spawn_buff": ""
-      },
-      {
-        "id": "1205",
-        "unitname": "",
-        "star": 1,
-        "level": 0,
-        "unit_weight": 10,
-        "position_x": 2,
-        "position_y": 7,
+        "position_x": 0,
+        "position_y": 0,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -35421,8 +35134,32 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": "1015"
+      },
+      {
+        "id": "1205",
+        "unitname": "",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 0,
+        "position_y": 0,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 4,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": ""
       }
     ]
   },
@@ -35438,6 +35175,7 @@
     "rankScore": 15,
     "winPrizeHeroExp": 0,
     "winPrizeItems": 0,
+    "winDropItems": "1015",
     "randomEnemy": true,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
@@ -35450,34 +35188,8 @@
         "star": 1,
         "level": 0,
         "unit_weight": 10,
-        "position_x": 1,
-        "position_y": 7,
-        "angles_x": 0,
-        "angles_y": 0,
-        "angles_z": 0,
-        "enemycreatetype": 4,
-        "isground": 1,
-        "atkpect": 0,
-        "hppect": 0,
-        "phyarmpect": 0,
-        "magicarmpect": 0,
-        "gold_min": 100,
-        "gold_max": 100,
-        "wood_min": 0,
-        "wood_max": 0,
-        "soulcrystal_min": 10,
-        "soulcrystal_max": 10,
-        "elite_drop_index": "1015",
-        "spawn_buff": ""
-      },
-      {
-        "id": "1207",
-        "unitname": "",
-        "star": 1,
-        "level": 0,
-        "unit_weight": 10,
-        "position_x": 2,
-        "position_y": 7,
+        "position_x": 0,
+        "position_y": 0,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -35493,8 +35205,32 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": "1015"
+      },
+      {
+        "id": "1207",
+        "unitname": "",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 0,
+        "position_y": 0,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 4,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": ""
       }
     ]
   },
@@ -35510,6 +35246,7 @@
     "rankScore": 15,
     "winPrizeHeroExp": 0,
     "winPrizeItems": 0,
+    "winDropItems": "1015",
     "randomEnemy": true,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
@@ -35522,34 +35259,8 @@
         "star": 1,
         "level": 0,
         "unit_weight": 10,
-        "position_x": 1,
-        "position_y": 7,
-        "angles_x": 0,
-        "angles_y": 0,
-        "angles_z": 0,
-        "enemycreatetype": 4,
-        "isground": 1,
-        "atkpect": 0,
-        "hppect": 0,
-        "phyarmpect": 0,
-        "magicarmpect": 0,
-        "gold_min": 5,
-        "gold_max": 15,
-        "wood_min": 0,
-        "wood_max": 0,
-        "soulcrystal_min": 10,
-        "soulcrystal_max": 10,
-        "elite_drop_index": "1015",
-        "spawn_buff": ""
-      },
-      {
-        "id": "1209",
-        "unitname": "",
-        "star": 1,
-        "level": 0,
-        "unit_weight": 10,
-        "position_x": 2,
-        "position_y": 7,
+        "position_x": 0,
+        "position_y": 0,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -35565,8 +35276,32 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": "1015"
+      },
+      {
+        "id": "1209",
+        "unitname": "",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 0,
+        "position_y": 0,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 4,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": ""
       }
     ]
   },
@@ -35582,6 +35317,7 @@
     "rankScore": 15,
     "winPrizeHeroExp": 100,
     "winPrizeItems": 0,
+    "winDropItems": "1016",
     "randomEnemy": false,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
@@ -35595,7 +35331,7 @@
         "level": 0,
         "unit_weight": 10,
         "position_x": 1,
-        "position_y": 8,
+        "position_y": 11,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -35605,14 +35341,13 @@
         "hppect": 0,
         "phyarmpect": 0,
         "magicarmpect": 0,
-        "gold_min": 100,
-        "gold_max": 100,
+        "gold_min": 5,
+        "gold_max": 15,
         "wood_min": 0,
         "wood_max": 0,
-        "soulcrystal_min": 10,
-        "soulcrystal_max": 10,
-        "elite_drop_index": "1015",
-        "spawn_buff": ""
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": "1015"
       },
       {
         "id": "1219",
@@ -35621,7 +35356,7 @@
         "level": 0,
         "unit_weight": 10,
         "position_x": 2,
-        "position_y": 8,
+        "position_y": 11,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -35637,8 +35372,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "1223",
@@ -35647,7 +35381,7 @@
         "level": 0,
         "unit_weight": 10,
         "position_x": 3,
-        "position_y": 8,
+        "position_y": 11,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -35663,8 +35397,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "1227",
@@ -35673,7 +35406,7 @@
         "level": 0,
         "unit_weight": 10,
         "position_x": 4,
-        "position_y": 8,
+        "position_y": 11,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -35689,8 +35422,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       },
       {
         "id": "1231",
@@ -35699,7 +35431,7 @@
         "level": 0,
         "unit_weight": 10,
         "position_x": 5,
-        "position_y": 8,
+        "position_y": 11,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -35715,8 +35447,7 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": ""
       }
     ]
   },
@@ -35732,6 +35463,7 @@
     "rankScore": 20,
     "winPrizeHeroExp": 0,
     "winPrizeItems": 0,
+    "winDropItems": "1016",
     "randomEnemy": true,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
@@ -35744,34 +35476,8 @@
         "star": 1,
         "level": 0,
         "unit_weight": 10,
-        "position_x": 1,
-        "position_y": 7,
-        "angles_x": 0,
-        "angles_y": 0,
-        "angles_z": 0,
-        "enemycreatetype": 4,
-        "isground": 1,
-        "atkpect": 0,
-        "hppect": 0,
-        "phyarmpect": 0,
-        "magicarmpect": 0,
-        "gold_min": 100,
-        "gold_max": 100,
-        "wood_min": 0,
-        "wood_max": 0,
-        "soulcrystal_min": 10,
-        "soulcrystal_max": 10,
-        "elite_drop_index": "1016",
-        "spawn_buff": ""
-      },
-      {
-        "id": "1239",
-        "unitname": "",
-        "star": 1,
-        "level": 0,
-        "unit_weight": 10,
-        "position_x": 2,
-        "position_y": 7,
+        "position_x": 0,
+        "position_y": 0,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -35787,8 +35493,32 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": "1016"
+      },
+      {
+        "id": "1239",
+        "unitname": "",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 0,
+        "position_y": 0,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 4,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": ""
       }
     ]
   },
@@ -35804,6 +35534,7 @@
     "rankScore": 20,
     "winPrizeHeroExp": 0,
     "winPrizeItems": 0,
+    "winDropItems": "1016",
     "randomEnemy": true,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
@@ -35816,34 +35547,8 @@
         "star": 1,
         "level": 0,
         "unit_weight": 10,
-        "position_x": 1,
-        "position_y": 7,
-        "angles_x": 0,
-        "angles_y": 0,
-        "angles_z": 0,
-        "enemycreatetype": 4,
-        "isground": 1,
-        "atkpect": 0,
-        "hppect": 0,
-        "phyarmpect": 0,
-        "magicarmpect": 0,
-        "gold_min": 100,
-        "gold_max": 100,
-        "wood_min": 0,
-        "wood_max": 0,
-        "soulcrystal_min": 10,
-        "soulcrystal_max": 10,
-        "elite_drop_index": "1016",
-        "spawn_buff": ""
-      },
-      {
-        "id": "1247",
-        "unitname": "",
-        "star": 1,
-        "level": 0,
-        "unit_weight": 10,
-        "position_x": 2,
-        "position_y": 7,
+        "position_x": 0,
+        "position_y": 0,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -35859,8 +35564,32 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": "1016"
+      },
+      {
+        "id": "1247",
+        "unitname": "",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 0,
+        "position_y": 0,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 4,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": ""
       }
     ]
   },
@@ -35876,6 +35605,7 @@
     "rankScore": 20,
     "winPrizeHeroExp": 0,
     "winPrizeItems": 0,
+    "winDropItems": "1016",
     "randomEnemy": true,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
@@ -35888,34 +35618,8 @@
         "star": 1,
         "level": 0,
         "unit_weight": 10,
-        "position_x": 1,
-        "position_y": 7,
-        "angles_x": 0,
-        "angles_y": 0,
-        "angles_z": 0,
-        "enemycreatetype": 4,
-        "isground": 1,
-        "atkpect": 0,
-        "hppect": 0,
-        "phyarmpect": 0,
-        "magicarmpect": 0,
-        "gold_min": 100,
-        "gold_max": 100,
-        "wood_min": 0,
-        "wood_max": 0,
-        "soulcrystal_min": 10,
-        "soulcrystal_max": 10,
-        "elite_drop_index": "1016",
-        "spawn_buff": ""
-      },
-      {
-        "id": "1255",
-        "unitname": "",
-        "star": 1,
-        "level": 0,
-        "unit_weight": 10,
-        "position_x": 2,
-        "position_y": 7,
+        "position_x": 0,
+        "position_y": 0,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -35931,8 +35635,32 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": "1016"
+      },
+      {
+        "id": "1255",
+        "unitname": "",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 0,
+        "position_y": 0,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 4,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": ""
       }
     ]
   },
@@ -35948,6 +35676,7 @@
     "rankScore": 20,
     "winPrizeHeroExp": 0,
     "winPrizeItems": 0,
+    "winDropItems": "1016",
     "randomEnemy": true,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
@@ -35960,34 +35689,8 @@
         "star": 1,
         "level": 0,
         "unit_weight": 10,
-        "position_x": 1,
-        "position_y": 7,
-        "angles_x": 0,
-        "angles_y": 0,
-        "angles_z": 0,
-        "enemycreatetype": 4,
-        "isground": 1,
-        "atkpect": 0,
-        "hppect": 0,
-        "phyarmpect": 0,
-        "magicarmpect": 0,
-        "gold_min": 100,
-        "gold_max": 100,
-        "wood_min": 0,
-        "wood_max": 0,
-        "soulcrystal_min": 10,
-        "soulcrystal_max": 10,
-        "elite_drop_index": "1016",
-        "spawn_buff": ""
-      },
-      {
-        "id": "1263",
-        "unitname": "",
-        "star": 1,
-        "level": 0,
-        "unit_weight": 10,
-        "position_x": 2,
-        "position_y": 7,
+        "position_x": 0,
+        "position_y": 0,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -36003,8 +35706,32 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": "1016"
+      },
+      {
+        "id": "1263",
+        "unitname": "",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 0,
+        "position_y": 0,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 4,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": ""
       }
     ]
   },
@@ -36020,6 +35747,7 @@
     "rankScore": 20,
     "winPrizeHeroExp": 0,
     "winPrizeItems": 0,
+    "winDropItems": "1016",
     "randomEnemy": true,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
@@ -36032,34 +35760,8 @@
         "star": 1,
         "level": 0,
         "unit_weight": 10,
-        "position_x": 1,
-        "position_y": 7,
-        "angles_x": 0,
-        "angles_y": 0,
-        "angles_z": 0,
-        "enemycreatetype": 4,
-        "isground": 1,
-        "atkpect": 0,
-        "hppect": 0,
-        "phyarmpect": 0,
-        "magicarmpect": 0,
-        "gold_min": 100,
-        "gold_max": 100,
-        "wood_min": 0,
-        "wood_max": 0,
-        "soulcrystal_min": 10,
-        "soulcrystal_max": 10,
-        "elite_drop_index": "1016",
-        "spawn_buff": ""
-      },
-      {
-        "id": "1271",
-        "unitname": "",
-        "star": 1,
-        "level": 0,
-        "unit_weight": 10,
-        "position_x": 2,
-        "position_y": 7,
+        "position_x": 0,
+        "position_y": 0,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -36075,8 +35777,32 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": "1016"
+      },
+      {
+        "id": "1271",
+        "unitname": "",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 0,
+        "position_y": 0,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 4,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": ""
       }
     ]
   },
@@ -36092,6 +35818,7 @@
     "rankScore": 20,
     "winPrizeHeroExp": 0,
     "winPrizeItems": 0,
+    "winDropItems": "1016",
     "randomEnemy": true,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
@@ -36104,34 +35831,8 @@
         "star": 1,
         "level": 0,
         "unit_weight": 10,
-        "position_x": 1,
-        "position_y": 7,
-        "angles_x": 0,
-        "angles_y": 0,
-        "angles_z": 0,
-        "enemycreatetype": 4,
-        "isground": 1,
-        "atkpect": 0,
-        "hppect": 0,
-        "phyarmpect": 0,
-        "magicarmpect": 0,
-        "gold_min": 100,
-        "gold_max": 100,
-        "wood_min": 0,
-        "wood_max": 0,
-        "soulcrystal_min": 10,
-        "soulcrystal_max": 10,
-        "elite_drop_index": "1016",
-        "spawn_buff": ""
-      },
-      {
-        "id": "1279",
-        "unitname": "",
-        "star": 1,
-        "level": 0,
-        "unit_weight": 10,
-        "position_x": 2,
-        "position_y": 7,
+        "position_x": 0,
+        "position_y": 0,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -36147,8 +35848,32 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": "1016"
+      },
+      {
+        "id": "1279",
+        "unitname": "",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 0,
+        "position_y": 0,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 4,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": ""
       }
     ]
   },
@@ -36164,6 +35889,7 @@
     "rankScore": 20,
     "winPrizeHeroExp": 0,
     "winPrizeItems": 0,
+    "winDropItems": "1016",
     "randomEnemy": true,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
@@ -36176,34 +35902,8 @@
         "star": 1,
         "level": 0,
         "unit_weight": 10,
-        "position_x": 1,
-        "position_y": 7,
-        "angles_x": 0,
-        "angles_y": 0,
-        "angles_z": 0,
-        "enemycreatetype": 4,
-        "isground": 1,
-        "atkpect": 0,
-        "hppect": 0,
-        "phyarmpect": 0,
-        "magicarmpect": 0,
-        "gold_min": 100,
-        "gold_max": 100,
-        "wood_min": 0,
-        "wood_max": 0,
-        "soulcrystal_min": 10,
-        "soulcrystal_max": 10,
-        "elite_drop_index": "1016",
-        "spawn_buff": ""
-      },
-      {
-        "id": "1287",
-        "unitname": "",
-        "star": 1,
-        "level": 0,
-        "unit_weight": 10,
-        "position_x": 2,
-        "position_y": 7,
+        "position_x": 0,
+        "position_y": 0,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -36219,8 +35919,32 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": "1016"
+      },
+      {
+        "id": "1287",
+        "unitname": "",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 0,
+        "position_y": 0,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 4,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": ""
       }
     ]
   },
@@ -36236,6 +35960,7 @@
     "rankScore": 20,
     "winPrizeHeroExp": 0,
     "winPrizeItems": 0,
+    "winDropItems": "1016",
     "randomEnemy": true,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
@@ -36248,34 +35973,8 @@
         "star": 1,
         "level": 0,
         "unit_weight": 10,
-        "position_x": 1,
-        "position_y": 7,
-        "angles_x": 0,
-        "angles_y": 0,
-        "angles_z": 0,
-        "enemycreatetype": 4,
-        "isground": 1,
-        "atkpect": 0,
-        "hppect": 0,
-        "phyarmpect": 0,
-        "magicarmpect": 0,
-        "gold_min": 100,
-        "gold_max": 100,
-        "wood_min": 0,
-        "wood_max": 0,
-        "soulcrystal_min": 10,
-        "soulcrystal_max": 10,
-        "elite_drop_index": "1016",
-        "spawn_buff": ""
-      },
-      {
-        "id": "1295",
-        "unitname": "",
-        "star": 1,
-        "level": 0,
-        "unit_weight": 10,
-        "position_x": 2,
-        "position_y": 7,
+        "position_x": 0,
+        "position_y": 0,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -36291,8 +35990,32 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": "1016"
+      },
+      {
+        "id": "1295",
+        "unitname": "",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 0,
+        "position_y": 0,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 4,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": ""
       }
     ]
   },
@@ -36308,6 +36031,7 @@
     "rankScore": 20,
     "winPrizeHeroExp": 0,
     "winPrizeItems": 0,
+    "winDropItems": "1016",
     "randomEnemy": true,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
@@ -36320,34 +36044,8 @@
         "star": 1,
         "level": 0,
         "unit_weight": 10,
-        "position_x": 1,
-        "position_y": 7,
-        "angles_x": 0,
-        "angles_y": 0,
-        "angles_z": 0,
-        "enemycreatetype": 4,
-        "isground": 1,
-        "atkpect": 0,
-        "hppect": 0,
-        "phyarmpect": 0,
-        "magicarmpect": 0,
-        "gold_min": 100,
-        "gold_max": 100,
-        "wood_min": 0,
-        "wood_max": 0,
-        "soulcrystal_min": 10,
-        "soulcrystal_max": 10,
-        "elite_drop_index": "1016",
-        "spawn_buff": ""
-      },
-      {
-        "id": "1303",
-        "unitname": "",
-        "star": 1,
-        "level": 0,
-        "unit_weight": 10,
-        "position_x": 2,
-        "position_y": 7,
+        "position_x": 0,
+        "position_y": 0,
         "angles_x": 0,
         "angles_y": 0,
         "angles_z": 0,
@@ -36363,8 +36061,32 @@
         "wood_max": 0,
         "soulcrystal_min": 0,
         "soulcrystal_max": 0,
-        "elite_drop_index": "",
-        "spawn_buff": ""
+        "elite_drop_index": "1016"
+      },
+      {
+        "id": "1303",
+        "unitname": "",
+        "star": 1,
+        "level": 0,
+        "unit_weight": 10,
+        "position_x": 0,
+        "position_y": 0,
+        "angles_x": 0,
+        "angles_y": 0,
+        "angles_z": 0,
+        "enemycreatetype": 4,
+        "isground": 1,
+        "atkpect": 0,
+        "hppect": 0,
+        "phyarmpect": 0,
+        "magicarmpect": 0,
+        "gold_min": 5,
+        "gold_max": 15,
+        "wood_min": 0,
+        "wood_max": 0,
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": ""
       }
     ]
   },
@@ -36380,6 +36102,7 @@
     "rankScore": 20,
     "winPrizeHeroExp": 400,
     "winPrizeItems": 0,
+    "winDropItems": "",
     "randomEnemy": false,
     "roundprize_gold": 500,
     "roundprize_wood": 50,
@@ -36403,14 +36126,13 @@
         "hppect": 0,
         "phyarmpect": 0,
         "magicarmpect": 0,
-        "gold_min": 100,
-        "gold_max": 100,
+        "gold_min": 5,
+        "gold_max": 15,
         "wood_min": 0,
         "wood_max": 0,
-        "soulcrystal_min": 10,
-        "soulcrystal_max": 10,
-        "elite_drop_index": "1016",
-        "spawn_buff": ""
+        "soulcrystal_min": 0,
+        "soulcrystal_max": 0,
+        "elite_drop_index": "1016"
       }
     ]
   }

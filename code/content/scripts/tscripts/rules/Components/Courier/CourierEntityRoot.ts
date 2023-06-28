@@ -1,12 +1,16 @@
 
+import { EventHelper } from "../../../helper/EventHelper";
+import { KVHelper } from "../../../helper/KVHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { modifier_courier } from "../../../npc/courier/modifier_courier";
 import { modifier_wait_portal } from "../../../npc/modifier/modifier_portal";
 import { modifier_tp } from "../../../npc/modifier/modifier_tp";
+import { GameProtocol } from "../../../shared/GameProtocol";
 import { GameServiceConfig } from "../../../shared/GameServiceConfig";
 import { serializeETProps } from "../../../shared/lib/Entity";
 import { BaseEntityRoot } from "../../Entity/BaseEntityRoot";
 import { AbilityManagerComponent } from "../Ability/AbilityManagerComponent";
+import { ChessVector } from "../ChessControl/ChessVector";
 import { InventoryComponent } from "../Inventory/InventoryComponent";
 import { ERoundBoard } from "../Round/ERoundBoard";
 import { CourierBagComponent } from "./CourierBagComponent";
@@ -132,11 +136,14 @@ export class CourierEntityRoot extends BaseEntityRoot implements IRoundStateCall
     OnRound_Battle(round: ERoundBoard): void {
         let hero = this.GetDomain<IBaseNpc_Hero_Plus>();
         if (round.IsFinalRound() && hero.IsAlive()) {
-            let to = GMapSystem.GetInstance().changeToEndBossPos(this.BelongPlayerid, hero.GetAbsOrigin())
-            modifier_tp.TeleportToPoint(hero, null, to);
-            GTimerHelper.AddTimer(1.1, GHandler.create(this, () => {
-                CenterCameraOnUnit(this.BelongPlayerid, hero)
-            }))
+            let info = GChessControlSystem.GetInstance().changeToEndBossPos(new ChessVector(0, 0, this.BelongPlayerid), true)
+            modifier_tp.TeleportToPoint(hero, info.pos, 0.6, () => {
+                hero.SetForwardVector(info.forward);
+                EventHelper.fireProtocolEventToPlayer(GameProtocol.Protocol.push_Camera_Yaw_Change, {
+                    data: info.angle
+                }, this.BelongPlayerid)
+                CenterCameraOnUnit(this.BelongPlayerid, hero);
+            });
         }
     }
 
@@ -156,7 +163,12 @@ export class CourierEntityRoot extends BaseEntityRoot implements IRoundStateCall
                 .set_iAttachment(ParticleAttachment_t.PATTACH_OVERHEAD_FOLLOW)
                 .set_owner(hero)
                 .set_validtime(3)
-            )
+            );
+            // 回合奖励
+            if (round.config.winDropItems && round.config.winDropItems.length > 0) {
+                let itemname = KVHelper.RandomPoolConfig(round.config.winDropItems)
+                hero.AddItemOrInGround(itemname)
+            }
         }
         else {
 

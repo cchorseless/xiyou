@@ -23,6 +23,8 @@ export class GameServiceSystem extends ET.SingletonComponent {
     @serializeETProps()
     tPlayerCourierList: { [playerid: string]: string[] } = {}
 
+    @serializeETProps()
+    tPlayerStartPoint: { [playerid: string]: string } = {}
 
     getDifficultyChapterDes() {
         return GameServiceConfig.EDifficultyChapter[this.DifficultyLevel] as string;

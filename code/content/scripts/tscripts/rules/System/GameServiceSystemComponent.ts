@@ -7,6 +7,7 @@ import { GameServiceSystem } from "../../shared/rules/System/GameServiceSystem";
 import { TItem } from "../../shared/service/bag/TItem";
 // 英雄选择阶段的数据集合
 // 英雄选择阶段只有这个数据集合同步有效
+// 放在mapsystem后面，因为需要用到mapsystem的数据
 @GReloadable
 export class GameServiceSystemComponent extends GameServiceSystem {
     static SelectionTime = 30;
@@ -14,7 +15,11 @@ export class GameServiceSystemComponent extends GameServiceSystem {
 
     public onAwake(): void {
         this.addEvent();
-
+        GTimerHelper.AddFrameTimer(1, GHandler.create(this, () => {
+            GMapSystem.GetInstance().PlayerStartPoint.forEach((v, k) => {
+                this.tPlayerStartPoint[k + ""] = `${v.x}|${v.y}|${v.z}`;
+            })
+        }))
     }
 
     onDebugReload(): void {

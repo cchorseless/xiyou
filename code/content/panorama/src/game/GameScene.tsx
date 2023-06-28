@@ -1,4 +1,5 @@
 import { ET, ETGameSceneRoot } from "../../../scripts/tscripts/shared/lib/Entity";
+import { ChessControlSystemComponent } from "./system/ChessControlSystemComponent";
 import { GameServiceSystemComponent } from "./system/GameServiceSystemComponent";
 import { NotificationSystemComponent } from "./system/NotificationSystemComponent";
 import { PublicBagSystemComponent } from "./system/PublicBagSystemComponent";
@@ -29,6 +30,9 @@ export class GameScene {
     static get GameServiceSystem() {
         return GameServiceSystemComponent.GetInstance()!;
     }
+    static get ChessControlSystem() {
+        return ChessControlSystemComponent.GetInstance()!;
+    }
 
     static get NotificationSystem() {
         return NotificationSystemComponent.GetInstance()!;
@@ -41,6 +45,7 @@ export class GameScene {
     static Init(IsHeroSelect = false) {
         (GameScene.IsHeroSelect as any) = IsHeroSelect;
         this.Scene.AddComponent(NotificationSystemComponent);
+        this.Scene.AddComponent(ChessControlSystemComponent);
         let maxPlayers = Players.GetMaxPlayers();
         for (let i = 0; i < maxPlayers; i++) {
             let playerid = i as PlayerID;

@@ -638,16 +638,26 @@ export module FuncVector {
     /**
      * 逆時針旋轉
      * @param vVector
-     * @param radian
+     * @param radian 弧度
+     * @param bIsDegree 是否為角度
+     * @param center 旋轉中心
      * @returns
      */
-    export function Rotation2D(vVector: Vector, radian: number): Vector {
+    export function Rotation2D(vVector: Vector, radian: number, bIsDegree = false, center: Vector = null): Vector {
+        if (bIsDegree) {
+            radian = math.rad(radian);
+        }
+        if (!center) {
+            center = Vector(0, 0, 0);
+        }
+        vVector = vVector - center as Vector;
         const fLength2D = vVector.Length2D();
         const vUnitVector2D = (vVector / fLength2D) as Vector;
         const fCos = math.cos(radian);
         const fSin = math.sin(radian);
-        return (Vector(vUnitVector2D.x * fCos - vUnitVector2D.y * fSin, vUnitVector2D.x * fSin + vUnitVector2D.y * fCos, vUnitVector2D.z) * fLength2D) as Vector;
+        return (center + Vector(vUnitVector2D.x * fCos - vUnitVector2D.y * fSin, vUnitVector2D.x * fSin + vUnitVector2D.y * fCos, vUnitVector2D.z) * fLength2D) as Vector;
     }
+
 
     export function RotateVector2D(v: Vector, angle: number, bIsDegree = false): Vector {
         if (bIsDegree) {

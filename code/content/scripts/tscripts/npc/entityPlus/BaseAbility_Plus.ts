@@ -150,6 +150,15 @@ export class BaseAbility_Plus extends BaseAbility {
             return ""
         }
         let config = KVHelper.KvAbilitys[this.GetAbilityName()];
+        if (config && config.RequiredStar != "") {
+            let needstar = GToNumber(config.RequiredStar);
+            if (needstar > 0) {
+                let star = this.GetCaster().GetStar();
+                if (star < needstar) {
+                    return "skill_unlock_" + needstar;
+                }
+            }
+        }
         let iconpath = "";
         if (config && config.AbilityTextureName) {
             iconpath = config.AbilityTextureName;

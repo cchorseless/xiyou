@@ -15,7 +15,8 @@ export class courier_draw_card_v1 extends ActiveRootAbility {
         playerroot.DrawComp().DrawCard(this.DrawCardType, 4);
         playerroot.PlayerDataComp().ModifyWood(-this.GetWoodCost(this.GetLevel()));
         // playerroot.DrawComp().DrawEnemy(playerroot.RoundManagerComp().getCurrentBoardRound());
-
+        const forward = Vector(0, 1, 0);
+        GLogHelper.print("changeToEndBossPos 1", GFuncVector.Rotation2D(forward, 90, true))
 
     }
     ProcsMagicStick() {

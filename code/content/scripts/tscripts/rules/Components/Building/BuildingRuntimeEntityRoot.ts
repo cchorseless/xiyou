@@ -31,7 +31,10 @@ export class BuildingRuntimeEntityRoot extends BattleUnitEntityRoot {
         this.InventoryComp().OnRound_Battle();
         let delay = 1;
         if (round.IsFinalRound()) {
-            modifier_tp.TeleportToPoint(npc, null, GMapSystem.GetInstance().changeToEndBossPos(this.BelongPlayerid, npc.GetAbsOrigin()))
+            let infp = GChessControlSystem.GetInstance().changeToEndBossPos(this.ChessComp().ChessVector)
+            modifier_tp.TeleportToPoint(npc, infp.pos, 1, () => {
+                npc.SetForwardVector(infp.forward);
+            });
             delay = 1.5;
         }
         GTimerHelper.AddTimer(delay, GHandler.create(this, () => {

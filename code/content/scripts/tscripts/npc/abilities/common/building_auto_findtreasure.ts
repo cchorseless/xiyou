@@ -34,7 +34,7 @@ export class building_auto_findtreasure extends BaseAbility_Plus {
         let building = hParent.ETRoot.As<BuildingRuntimeEntityRoot>();
         let boardV = building.ChessComp().ChessVector;
         let t_p = GChessControlSystem.GetInstance().GetBoardGirdVector3(boardV);
-        modifier_tp.TeleportToPoint(hParent, null, GetGroundPosition(t_p, hParent));
+        modifier_tp.TeleportToPoint(hParent, GetGroundPosition(t_p, hParent));
         modifier_remnant.remove(hParent);
         modifier.Destroy();
         GTimerHelper.AddTimer(1.1, GHandler.create(this,
