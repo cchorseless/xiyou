@@ -9,7 +9,6 @@ import { CCButtonBox } from "../AllUIElement/CCButton/CCButtonBox";
 import { CCLabel } from "../AllUIElement/CCLabel/CCLabel";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCPanelHeader } from "../AllUIElement/CCPanel/CCPanelPart";
-import { CCMainPanel } from "../MainPanel/CCMainPanel";
 import { CCShopItem } from "../Shop/CCShopItem";
 import { CCStorageItemGetDialog } from "../Storage/CCStorageItemGetDialog";
 import "./CCActivityDailyOnlinePrize.less";
@@ -77,7 +76,7 @@ export class CCActivityDailyOnlinePrizeItem extends CCPanel<ICCActivityDailyOnli
         }, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
             if (e.state) {
                 let info = JSON.parse(e.message!) as IFItemInfo[];
-                CCMainPanel.GetInstance()!.addOnlyPanel(CCStorageItemGetDialog, {
+                CCStorageItemGetDialog.showItemGetDialog({
                     Items: info
                 })
             }

@@ -1,14 +1,16 @@
-import { render } from "@demon673/react-panorama";
 import React, { createRef } from "react";
 import { AllShared } from "../../../../../scripts/tscripts/shared/AllShared";
 import { GameEnum } from "../../../../../scripts/tscripts/shared/GameEnum";
+import { GameProtocol } from "../../../../../scripts/tscripts/shared/GameProtocol";
 import { GameServiceConfig } from "../../../../../scripts/tscripts/shared/GameServiceConfig";
 import { AllEntity } from "../../../game/AllEntity";
 import { GameScene } from "../../../game/GameScene";
 import { CSSHelper } from "../../../helper/CSSHelper";
 import { DotaUIHelper } from "../../../helper/DotaUIHelper";
 import { LogHelper } from "../../../helper/LogHelper";
+import { NetHelper } from "../../../helper/NetHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
+import { TipsHelper } from "../../../helper/TipsHelper";
 import { BaseLibExt } from "../../../libs/BaseLibExt";
 import { CCButton } from "../../AllUIElement/CCButton/CCButton";
 import { CCDOTAChat } from "../../AllUIElement/CCDOTAChat/CCDOTAChat";
@@ -24,7 +26,6 @@ export class CCHero_Select extends CCPanel<NodePropsData> {
 
     TimerRef = createRef<Panel>();
     onReady() {
-        const localplayerid = Players.GetLocalPlayer();
         return Boolean(GGameScene.GameServiceSystem)
     }
 
@@ -62,6 +63,7 @@ export class CCHero_Select extends CCPanel<NodePropsData> {
             this.close()
         }
     }
+    textentry = createRef<TextEntry>();
     render() {
         if (!this.__root___isValid) { return this.defaultRender("CC_Hero_Select") }
         const localplayerid = Players.GetLocalPlayer()
@@ -74,7 +76,7 @@ export class CCHero_Select extends CCPanel<NodePropsData> {
         const maxDiff = localselect.Difficulty.MaxChapter
         const layers = localselect.Difficulty.MaxLevel;
         return (
-            <Panel ref={this.__root__} id="CC_Hero_Select" hittest={false} {...this.initRootAttrs()}>
+            <Panel ref={this.__root__} id="CC_Hero_Select" className="CCHero_Select" hittest={false} {...this.initRootAttrs()}>
                 <CCMenuDashBoardBackAndSetting />
                 <Label id="TimerTitle" localizedText="#lang_TimerTitle" />
                 <Panel id="Timer" hittest={false} ref={this.TimerRef}>
@@ -143,6 +145,25 @@ export class CCHero_Select extends CCPanel<NodePropsData> {
                             return <CCGameDifficulty key={index + ""} iDifficulty={charpter} selected={selected} max={maxDiff} aPlayerIDs={aPlayerIDs} />
                         })}
                 </Panel>
+                <CCPanel id="TestCdk" visible={GameServiceConfig.GAME_NeedTestCDK}>
+                    <TextButton className="DemoTextEntry" style={{ flowChildren: "right" }} text={"测试码："} onactivate={
+                        (p) => {
+                            if (this.textentry.current && this.textentry.current?.text.length > 0) {
+                                NetHelper.SendToLua(GameProtocol.Protocol.req_TestCDK, this.textentry.current?.text,
+                                    GHandler.create(this, (e) => {
+                                        if (e.state) {
+                                        }
+                                        else {
+                                            TipsHelper.showErrorMessage("测试码错误");
+                                        }
+                                    })
+                                )
+                            }
+                        }}>
+                        <TextEntry id="DemoTextEntry" ref={this.textentry} text={""}>
+                        </TextEntry>
+                    </TextButton>
+                </CCPanel>
                 {/* 准备 */}
                 <CCButton id="ReadyButton"
                     type="Style1"
@@ -164,4 +185,4 @@ BaseLibExt.Init();
 TimerHelper.Init();
 GameScene.Init(true);
 DotaUIHelper.Init(true);
-render(<CCHero_Select />, $.GetContextPanel());
+DotaUIHelper.ErrorRender(<CCHero_Select />, $.GetContextPanel());

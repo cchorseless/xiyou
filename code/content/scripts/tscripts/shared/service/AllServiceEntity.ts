@@ -1,5 +1,4 @@
 import { CharacterDataComponent } from "./account/CharacterDataComponent";
-import { CharacterInGameDataComponent } from "./account/CharacterInGameDataComponent";
 import { CharacterSteamComponent } from "./account/CharacterSteamComponent";
 import { CharacterSteamDigestItem } from "./account/CharacterSteamDigestItem";
 import { TCharacter } from "./account/TCharacter";
@@ -43,6 +42,7 @@ import { TBuffItem } from "./buff/TBuffItem";
 import { GhostEntityComponent } from "./common/GhostEntityComponent";
 import { NumericComponent } from "./common/NumericComponent";
 import { SeedRandomComponent } from "./common/SeedRandomComponent";
+import { TPayOrderItem } from "./common/TPayOrderItem";
 import { CharacterDrawTreasureComponent } from "./draw/CharacterDrawTreasureComponent";
 import { HeroEquipComponent } from "./equip/HeroEquipComponent";
 import { TEquipItemProp } from "./equip/TEquipItemProp";
@@ -79,7 +79,6 @@ import { CharacterTitleItem } from "./title/CharacterTitleItem";
 [
     // service -----------
     CharacterDataComponent,
-    CharacterInGameDataComponent,
     CharacterSteamComponent,
     CharacterSteamDigestItem,
     TCharacter,
@@ -120,7 +119,7 @@ import { CharacterTitleItem } from "./title/CharacterTitleItem";
     CharacterBuffComponent,
     ServerZoneBuffComponent,
     TBuffItem,
-
+    TPayOrderItem,
     SeedRandomComponent,
     NumericComponent,
     GhostEntityComponent,

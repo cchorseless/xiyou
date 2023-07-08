@@ -28,3 +28,5 @@ declare const json: any;
 declare const GameRules: CScriptBindingPR_Game;
 
 declare const IsServer: Function;
+
+declare const IsInToolsMode: Function;

@@ -47,13 +47,13 @@ export class CCWaitProgressDialog extends CCPanel<ICCWaitProgressDialog> {
         const sMsg = this.GetState<string>("sMsg");
         const sMsgDes = this.GetState<string>("sMsgDes") || "";
         return (
-            <Panel className="CC_WaitProgressDialog" ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
-                <CCPopUpDialog id="PopUpBg" onClose={() => this.close()}>
+            <Panel className="CCWaitProgressDialog" ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
+                <CCPopUpDialog id="PopUpBg" title={sMsg ? $.Localize("#" + sMsg) : ""} onClose={() => this.close()}>
                     <Panel visible={sMsg == null} className="Pleasewait" hittest={false}>
                         <Label id="waitMsg" key={waitMsg} localizedText={"#" + waitMsg} />
                         <Image id="refresh" />
                     </Panel>
-                    <Label visible={sMsg != null} id="Msg" key={sMsg} text={$.Localize("#" + sMsg) + "\n" + sMsgDes} />
+                    <Label visible={sMsg != null} id="Msg" key={sMsg} text={+ sMsgDes} />
                     {this.props.children}
                     {this.__root___childs}
                 </CCPopUpDialog>

@@ -27,7 +27,7 @@ const { getAddonName, getDotaPath } = require('./utils');
         //     console.log(_ItemDetails[appid])
         //     delete _ItemDetails[appid]
         // }
-        fs.writeFileSync(appworkshop_570, keyvalues.encode(cfg))
+        // fs.writeFileSync(appworkshop_570, keyvalues.encode(cfg))
     }
     if (fs.existsSync(apppath)) {
         fs.removeSync(apppath)

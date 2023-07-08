@@ -11,7 +11,6 @@ import { CCIcon_Check } from "../AllUIElement/CCIcons/CCIcon_Check";
 import { CCImageNumber } from "../AllUIElement/CCImageNumber/CCImageNumber";
 import { CCLabel } from "../AllUIElement/CCLabel/CCLabel";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
-import { CCMainPanel } from "../MainPanel/CCMainPanel";
 import { CCShopItem } from "../Shop/CCShopItem";
 import { CCStorageItemGetDialog } from "../Storage/CCStorageItemGetDialog";
 import "./CCBattlePassPrizeItem.less";
@@ -145,7 +144,7 @@ export class CCBPLevelRewards extends CCPanel<ICCBPLevelRewards> {
         }, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
             if (e.state) {
                 let info = JSON.parse(e.message!) as IFItemInfo;
-                CCMainPanel.GetInstance()!.addOnlyPanel(CCStorageItemGetDialog, {
+                CCStorageItemGetDialog.showItemGetDialog({
                     Items: [
                         { ItemConfigId: info.ItemConfigId, ItemCount: info.ItemCount },
                     ]

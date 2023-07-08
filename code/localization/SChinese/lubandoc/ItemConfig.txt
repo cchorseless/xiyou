@@ -6,6 +6,7 @@
 "DOTA_Tooltip_ability_102"       "星石"
 "DOTA_Tooltip_ability_104"       "通用英雄经验"
 "DOTA_Tooltip_ability_105"       "铭文碎片"
+"DOTA_Tooltip_ability_106"       "天梯积分"
 "DOTA_Tooltip_ability_10001"       "测试宝箱"
 "DOTA_Tooltip_ability_10002"       "宝箱"
 "DOTA_Tooltip_ability_10003"       "宝箱"

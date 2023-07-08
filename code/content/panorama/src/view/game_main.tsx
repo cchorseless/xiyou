@@ -1,5 +1,4 @@
 // LogHelper必须放第一行先导入
-import { render } from "@demon673/react-panorama";
 import React from "react";
 import { AllShared } from "../../../scripts/tscripts/shared/AllShared";
 import { AllEntity } from "../game/AllEntity";
@@ -74,7 +73,7 @@ function StartRenderGameUI() {
     DotaUIHelper.Init();
     KVHelper.Init();
     GameScene.Init();
-    render(<RootPanel />, $.GetContextPanel());
+    DotaUIHelper.ErrorRender(<RootPanel />, $.GetContextPanel());
 }
 LogHelper.print("StartRenderGameUI started --------------------------114");
 StartRenderGameUI();

@@ -41,10 +41,14 @@ export class CCGameEndPanel extends CCPanel<ICCGameEndPanel> {
 
 
     render() {
+        const PopUpEffect = this.GetState<boolean>("PopUpEffect");
+        if (!PopUpEffect) {
+            return this.defaultRender("CC_GameEndPanel");
+        }
         const difficultydes = GGameScene.GameServiceSystem.getDifficultyChapterDes();
         const round = ERoundBoard.CurRoundBoard || { config: { roundIndex: 1 } };
         const HeroManageComp = (GGameScene.Local.TCharacter.HeroManageComp!);
-        const PopUpEffect = this.GetState<boolean>("PopUpEffect");
+
         const iswin = this.GetState<boolean>("iswin");
         const playdata = this.GetState<{ [k: string]: ICCGameSingleDataItem }>("playdata") || {};
         const playdataarr = Object.values(playdata);
@@ -91,7 +95,7 @@ export class CCGameEndPanel extends CCPanel<ICCGameEndPanel> {
             }
         })
         return (
-            <Panel className={CSSHelper.ClassMaker("CCGameEndPanel", { PopUpEffect: PopUpEffect })} ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
+            <Panel id="CC_GameEndPanel" className={CSSHelper.ClassMaker("CCGameEndPanel", { PopUpEffect: PopUpEffect })} ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
                 <CCPopupBG type="Tui7" hasTitle={false} />
                 <CCPanel flowChildren="down">
                     <CCLabel type="Title" text={`` + (iswin ? "通关成功" : "通关失败")} color="Red" fontSize="40px" horizontalAlign="center" marginTop={"40px"} />

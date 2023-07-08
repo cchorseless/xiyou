@@ -52,7 +52,7 @@ export class TCharacter extends ET.Component {
         this.onReload()
     }
     onReload(): void {
-        this.SyncClient(true)
+        this.SyncClient(true, true)
     }
     IsVip() {
         if (this.IsVipForever()) { return true }

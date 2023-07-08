@@ -103,9 +103,7 @@ export class GameScene {
             let _hHero = PlayerResource.GetSelectedHeroEntity(iPlayerID);
             if (_hHero && _hHero.IsAlive()) {
                 // this.UpdatePlayerEndData(hHero)
-                if (!IsInToolsMode()) {
-                    _hHero.ForceKill(false);
-                }
+                _hHero.ForceKill(false);
             }
         });
         this.bGameEnd = true;
@@ -369,7 +367,7 @@ export class GameScene {
             }
         }));
     }
-    private static async onGameRulesStateChange(e: any) {
+    private static onGameRulesStateChange(e: any) {
         const nNewState = GameRules.State_Get();
         LogHelper.print("OnGameRulesStateChange", nNewState);
         switch (nNewState) {
@@ -382,12 +380,10 @@ export class GameScene {
             // -- 游戏初始化
             case DOTA_GameState.DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP:
                 GPlayerEntityRoot.UploadGameRecord(GameEnum.EGameRecordKey.GameTime.GAMERULES_STATE_CUSTOM_GAME_SETUP, GetSystemTimeMS() / 1000);
-                await GPlayerEntityRoot.LoginServer();
-                // GameRules.SetCustomGameSetupRemainingTime(1)
+                GPlayerEntityRoot.LoginServer();
                 break;
             // 	-- 选择英雄,可以获取玩家数量
             case DOTA_GameState.DOTA_GAMERULES_STATE_HERO_SELECTION:
-                GGameServiceSystem.GetInstance().StartGameModeSelection()
                 break;
             // 	-- 策略时间 创建初始英雄，调用初始英雄脚本
             case DOTA_GameState.DOTA_GAMERULES_STATE_STRATEGY_TIME:

@@ -2,6 +2,7 @@
 import React from "react";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCPopUpDialog } from "../AllUIElement/CCPopUpDialog/CCPopUpDialog";
+import { CCMainPanel } from "../MainPanel/CCMainPanel";
 import { CCStorageIconItem } from "./CCStorageIconItem";
 import "./CCStorageItemGetDialog.less";
 
@@ -12,6 +13,10 @@ interface ICCStorageItemGetDialog {
 export class CCStorageItemGetDialog extends CCPanel<ICCStorageItemGetDialog> {
     onInitUI() {
 
+    }
+
+    static showItemGetDialog(data: ICCStorageItemGetDialog) {
+        CCMainPanel.GetInstance()!.addOnlyPanel(CCStorageItemGetDialog, data)
     }
 
     render() {

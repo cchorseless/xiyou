@@ -33,10 +33,13 @@ export class CCPlayerEndPanel extends CCPanel<ICCPlayerEndPanel> {
 
 
     render() {
+        const PopUpEffect = this.GetState<boolean>("PopUpEffect");
+        if (!PopUpEffect) {
+            return this.defaultRender("CC_PlayerEndPanel");
+        }
         const difficultydes = GGameScene.GameServiceSystem.getDifficultyChapterDes();
         const round = ERoundBoard.CurRoundBoard || { config: { roundIndex: 1 } };
         const HeroManageComp = (GGameScene.Local.TCharacter.HeroManageComp!);
-        const PopUpEffect = this.GetState<boolean>("PopUpEffect");
         const tCharacter = GGameScene.Local.TCharacter!;
         const BattlePassComp = (GGameScene.Local.TCharacter.BattlePassComp!)!;
         const IsVip = tCharacter.IsVip();
@@ -78,7 +81,7 @@ export class CCPlayerEndPanel extends CCPanel<ICCPlayerEndPanel> {
                 losecount++;
             }
         })
-        return (<Panel className={CSSHelper.ClassMaker("CCPlayerEndPanel", { PopUpEffect: PopUpEffect })} ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
+        return (<Panel id="CC_PlayerEndPanel" className={CSSHelper.ClassMaker("CCPlayerEndPanel", { PopUpEffect: PopUpEffect })} ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
             <CCPopupBG type="Tui7" hasTitle={false} />
             <CCPanel flowChildren="down" width="100%" height="100%">
                 <CCLabel type="Title" text={"你已阵亡···"} color="Red" fontSize="40px" horizontalAlign="center" marginTop={"40px"} />

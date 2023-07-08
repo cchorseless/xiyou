@@ -1942,5 +1942,125 @@
         "IsVaild": true
       }
     ]
+  },
+  {
+    "poolid": "1021",
+    "poolItemCount": 1,
+    "PoolInfo": [
+      {
+        "ItemConfigId": "item_shop_small_gold_bag",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_shop_draw_card_v1",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_shop_addstar_green",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_shop_addstar_blue",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      }
+    ]
+  },
+  {
+    "poolid": "1022",
+    "poolItemCount": 1,
+    "PoolInfo": [
+      {
+        "ItemConfigId": "item_shop_small_wood_bag",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_shop_draw_card_v2",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_shop_addstar_blue",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_shop_random_card_purple",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_shop_stat_strength_book",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_shop_stat_agility_book",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_shop_stat_intelligence_book",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_shop_addstar_purple",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      }
+    ]
+  },
+  {
+    "poolid": "1023",
+    "poolItemCount": 1,
+    "PoolInfo": [
+      {
+        "ItemConfigId": "item_shop_small_soulcrystal_bag",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_shop_draw_card_v3",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_shop_addstar_purple",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_shop_random_card_gold",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "ItemConfigId": "item_shop_addstar_gold",
+        "ItemCount": 1,
+        "ItemWeight": 1,
+        "IsVaild": true
+      }
+    ]
   }
 ]

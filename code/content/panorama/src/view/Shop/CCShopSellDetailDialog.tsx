@@ -9,8 +9,10 @@ import { TipsHelper } from "../../helper/TipsHelper";
 import { CCButton } from "../AllUIElement/CCButton/CCButton";
 import { CCIcon_CoinType } from "../AllUIElement/CCIcons/CCIcon_CoinType";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
+import { CCPaymentDialog } from "../AllUIElement/CCPayment/CCPaymentDialog";
 import { CCPopUpDialog } from "../AllUIElement/CCPopUpDialog/CCPopUpDialog";
 import { CCWaitProgressDialog } from "../Common/CCWaitProgressDialog";
+import { CCMainPanel } from "../MainPanel/CCMainPanel";
 import { CCShopItem } from "./CCShopItem";
 import "./CCShopSellDetailDialog.less";
 
@@ -33,15 +35,23 @@ export class CCShopSellDetailDialog extends CCPanel<ICCShopSellDetailDialog> {
             TipsHelper.showErrorMessage("not vip")
             return;
         }
-        CCWaitProgressDialog.showProgressDialog({
-            protocol: GameProtocol.Protocol.Buy_ShopItem,
-            data: {
-                ShopConfigId: sellitem.ShopId,
-                SellConfigId: sellitem.SellConfig!.SellConfigid,
-                PriceType: CSSHelper.IsChineseLanguage() ? 0 : 1,
-                ItemCount: iNum
-            } as C2H_Buy_ShopItem,
-        })
+        if (sellitem.SellConfig!.CostType == GEEnum.EMoneyType.Money) {
+            CCMainPanel.GetInstance()!.addOnlyPanel(CCPaymentDialog, {
+                iNum: iNum,
+                entity: sellitem
+            })
+        }
+        else {
+            CCWaitProgressDialog.showProgressDialog({
+                protocol: GameProtocol.Protocol.Buy_ShopItem,
+                data: {
+                    ShopConfigId: sellitem.ShopId,
+                    SellConfigId: sellitem.SellConfig!.SellConfigid,
+                    PriceType: CSSHelper.IsChineseLanguage() ? 0 : 1,
+                    ItemCount: iNum,
+                } as C2H_Buy_ShopItem,
+            })
+        }
         this.close();
     }
     render() {

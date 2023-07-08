@@ -6,7 +6,6 @@ import { TimerHelper } from "../../helper/TimerHelper";
 import { CCButton } from "../AllUIElement/CCButton/CCButton";
 import { CCLabel } from "../AllUIElement/CCLabel/CCLabel";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
-import { CCMainPanel } from "../MainPanel/CCMainPanel";
 import { CCStorageIconItem } from "../Storage/CCStorageIconItem";
 import { CCStorageItemGetDialog } from "../Storage/CCStorageItemGetDialog";
 import { CCMailPanel } from "./CCMailPanel";
@@ -47,7 +46,7 @@ export class CCMailSingleDataDialog extends CCPanel<ICCMailSingleDataDialog> {
         }, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
             if (e.state) {
                 const items = JSON.parse(e.message!) as IFItemInfo[];
-                CCMainPanel.GetInstance()!.addOnlyPanel(CCStorageItemGetDialog, {
+                CCStorageItemGetDialog.showItemGetDialog({
                     Items: items
                 })
             }

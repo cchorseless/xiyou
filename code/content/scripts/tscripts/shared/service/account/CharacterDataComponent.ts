@@ -3,7 +3,6 @@ import { GameServiceConfig } from "../../GameServiceConfig";
 import { ET, serializeETProps } from "../../lib/Entity";
 import { GEventHelper } from "../../lib/GEventHelper";
 import { NumericComponent } from "../common/NumericComponent";
-import { CharacterInGameDataComponent } from "./CharacterInGameDataComponent";
 
 
 @GReloadable
@@ -69,9 +68,6 @@ export class CharacterDataComponent extends ET.Component {
     }
     get NumericComp() {
         return this.GetComponentByName<NumericComponent>("NumericComponent");
-    }
-    get InGameDataComp() {
-        return this.GetComponentByName<CharacterInGameDataComponent>("CharacterInGameDataComponent");
     }
 
 }

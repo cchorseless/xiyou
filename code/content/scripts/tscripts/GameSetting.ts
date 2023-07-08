@@ -1,29 +1,6 @@
 import { GameServiceConfig } from "./shared/GameServiceConfig";
 @GReloadable
 export class GameSetting {
-    /**版本号 */
-    public static readonly GAME_VERSION: string = "1.0.0";
-
-    public static readonly GAME_ISDEBUG: boolean = true;
-    /**每队最大玩家数量 */
-    public static readonly TEAM_MAX_PLAYER: number = 1;
-    /**开局金币数量 */
-    public static readonly GAME_START_GOLD: number = 100;
-    /**最小攻击速度 */
-    public static readonly MINIMUM_ATTACK_SPEED: number = 20;
-    /**最大攻击速度 */
-    public static readonly MAXIMUM_ATTACK_SPEED: number = 500;
-    /**英雄AI时间间隔 */
-    public static readonly AI_TIMER_TICK_TIME_HERO: number = 0.25;
-    /**AI时间间隔 */
-    public static readonly AI_TIMER_TICK_TIME: number = 0.5;
-    public static ServerKey(): string {
-        if (IsInToolsMode()) {
-            return "wIkOFc3QwBmwwefDKPgxeIele7JuQygD";
-        }
-        return GetDedicatedServerKeyV2(GameSetting.GAME_VERSION);
-    }
-
     public static init() {
         GameSetting.gameRulesInit();
         GameSetting.gameModeInit();
@@ -40,7 +17,12 @@ export class GameSetting {
             GameRules.Addon.Instance.SetBuybackEnabled(false);
         }
     }
-
+    public static GetServerKey(): string {
+        if (IsInToolsMode()) {
+            return "90C865A2E432539702FEA672E1C9C7029242B5D7";
+        }
+        return GetDedicatedServerKeyV2(GameServiceConfig.GAME_VERSION);
+    }
     public static gameRulesInit() {
         GameRules.SetHeroRespawnEnabled(false);
         GameRules.SetSameHeroSelectionEnabled(true);
@@ -57,24 +39,21 @@ export class GameSetting {
         GameRules.SetFirstBloodActive(false);
         GameRules.SetHideKillMessageHeaders(true);
         GameRules.SetUseUniversalShopMode(true);
-        GameRules.SetStartingGold(GameSetting.GAME_START_GOLD);
+        GameRules.SetStartingGold(GameServiceConfig.GAME_START_GOLD);
         GameRules.SetCustomGameTeamMaxPlayers(DOTATeam_t.DOTA_TEAM_GOODGUYS, GameServiceConfig.GAME_MAX_PLAYER);
-        GameRules.SetCustomGameTeamMaxPlayers(DOTATeam_t.DOTA_TEAM_BADGUYS, GameServiceConfig.GAME_MAX_PLAYER);
-        GameRules.SetCustomGameTeamMaxPlayers(DOTATeam_t.DOTA_TEAM_CUSTOM_1, GameServiceConfig.GAME_MAX_PLAYER);
-        GameRules.SetCustomGameTeamMaxPlayers(DOTATeam_t.DOTA_TEAM_CUSTOM_2, GameServiceConfig.GAME_MAX_PLAYER);
-        GameRules.SetCustomGameTeamMaxPlayers(DOTATeam_t.DOTA_TEAM_CUSTOM_3, GameServiceConfig.GAME_MAX_PLAYER);
-        GameRules.SetCustomGameTeamMaxPlayers(DOTATeam_t.DOTA_TEAM_CUSTOM_4, GameServiceConfig.GAME_MAX_PLAYER);
-        GameRules.SetCustomGameTeamMaxPlayers(DOTATeam_t.DOTA_TEAM_CUSTOM_5, GameServiceConfig.GAME_MAX_PLAYER);
-        GameRules.SetCustomGameTeamMaxPlayers(DOTATeam_t.DOTA_TEAM_CUSTOM_6, GameServiceConfig.GAME_MAX_PLAYER);
-        GameRules.SetCustomGameTeamMaxPlayers(DOTATeam_t.DOTA_TEAM_CUSTOM_7, GameServiceConfig.GAME_MAX_PLAYER);
-        GameRules.SetCustomGameTeamMaxPlayers(DOTATeam_t.DOTA_TEAM_CUSTOM_8, GameServiceConfig.GAME_MAX_PLAYER);
+        GameRules.SetCustomGameTeamMaxPlayers(DOTATeam_t.DOTA_TEAM_BADGUYS, 0);
+        // GameRules.SetCustomGameTeamMaxPlayers(DOTATeam_t.DOTA_TEAM_CUSTOM_1, GameServiceConfig.GAME_MAX_PLAYER);
+        // GameRules.SetCustomGameTeamMaxPlayers(DOTATeam_t.DOTA_TEAM_CUSTOM_2, GameServiceConfig.GAME_MAX_PLAYER);
+        // GameRules.SetCustomGameTeamMaxPlayers(DOTATeam_t.DOTA_TEAM_CUSTOM_3, GameServiceConfig.GAME_MAX_PLAYER);
+        // GameRules.SetCustomGameTeamMaxPlayers(DOTATeam_t.DOTA_TEAM_CUSTOM_4, GameServiceConfig.GAME_MAX_PLAYER);
+        // GameRules.SetCustomGameTeamMaxPlayers(DOTATeam_t.DOTA_TEAM_CUSTOM_5, GameServiceConfig.GAME_MAX_PLAYER);
+        // GameRules.SetCustomGameTeamMaxPlayers(DOTATeam_t.DOTA_TEAM_CUSTOM_6, GameServiceConfig.GAME_MAX_PLAYER);
+        // GameRules.SetCustomGameTeamMaxPlayers(DOTATeam_t.DOTA_TEAM_CUSTOM_7, GameServiceConfig.GAME_MAX_PLAYER);
+        // GameRules.SetCustomGameTeamMaxPlayers(DOTATeam_t.DOTA_TEAM_CUSTOM_8, GameServiceConfig.GAME_MAX_PLAYER);
         GameRules.SetUseCustomHeroXPValues(true);
     }
 
     public static gameModeInit() {
-        if (GameRules.Addon.Instance == null) {
-            GLogHelper.error("GameRules.Addon.Instance == null");
-        }
         // 默认英雄,跳过英雄选择界面
         // GameRules.Addon.Instance.SetCustomGameForceHero(GameSetting.DEFAULT_PICKED_HERO);
         //#region  開啓后閃退
@@ -95,8 +74,8 @@ export class GameSetting {
         GameRules.Addon.Instance.SetLoseGoldOnDeath(false);
         GameRules.Addon.Instance.SetCustomBuybackCooldownEnabled(true);
         GameRules.Addon.Instance.SetCustomBuybackCostEnabled(true);
-        GameRules.Addon.Instance.SetMinimumAttackSpeed(GameSetting.MINIMUM_ATTACK_SPEED);
-        GameRules.Addon.Instance.SetMaximumAttackSpeed(GameSetting.MAXIMUM_ATTACK_SPEED);
+        GameRules.Addon.Instance.SetMinimumAttackSpeed(GameServiceConfig.MINIMUM_ATTACK_SPEED);
+        GameRules.Addon.Instance.SetMaximumAttackSpeed(GameServiceConfig.MAXIMUM_ATTACK_SPEED);
         GameRules.Addon.Instance.SetStashPurchasingDisabled(false);
         GameRules.Addon.Instance.SetStickyItemDisabled(true);
         GameRules.Addon.Instance.SetDaynightCycleDisabled(false);

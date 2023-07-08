@@ -15,7 +15,6 @@ import { CCLabel } from "../AllUIElement/CCLabel/CCLabel";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCPanelHeader } from "../AllUIElement/CCPanel/CCPanelPart";
 import { CCUserName } from "../AllUIElement/CCUserName/CCUserName";
-import { CCMainPanel } from "../MainPanel/CCMainPanel";
 import { CCShopItem } from "../Shop/CCShopItem";
 import { CCStorageItemGetDialog } from "../Storage/CCStorageItemGetDialog";
 import "./CCRecordMainItem.less";
@@ -37,7 +36,7 @@ export class CCRecordMainItem extends CCPanel<ICCRecordMainItem> {
         }, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
             if (e.state) {
                 let info = JSON.parse(e.message!) as IFItemInfo[];
-                CCMainPanel.GetInstance()!.addOnlyPanel(CCStorageItemGetDialog, {
+                CCStorageItemGetDialog.showItemGetDialog({
                     Items: info
                 })
             }
@@ -103,9 +102,10 @@ export class CCRecordMainItem extends CCPanel<ICCRecordMainItem> {
                     <CCPanel flowChildren="right" >
                         <CCPanel flowChildren="down" width="150px" height="250px">
                             <CCAvatar id="CCRecordAvatar" steamid="local" horizontalAlign="center" marginTop={"20px"} />
-                            <CCUserName accountid={tCharacter.Name} fontSize={"30px"} marginLeft={"10px"} width="100%" marginTop={"20px"} height="50px" />
+                            <CCUserName accountid={tCharacter.Name} fontSize={"25px"} marginLeft={"10px"} width="100%" marginTop={"20px"} height="40px" />
                         </CCPanel>
                         <CCPanel flowChildren="down" width="250px" marginTop={"30px"}>
+                            <CCLabel type="UnitName" text={"ID:" + tCharacter.Name} fontSize={"20px"} width="100%" />
                             <Panel className='RecordInfoBox'>
                                 <CCIcon_Point type="Full" width="20px" height="20px" />
                                 <Label id='Record_Time' html={true} localizedText={"#Record_Time"} dialogVariables={{ hrs: '999' }} />
@@ -201,7 +201,7 @@ export class CCRecordLevelRewards extends CCPanel<ICCRecordLevelRewards> {
         }, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
             if (e.state) {
                 let info = JSON.parse(e.message!) as IFItemInfo[];
-                CCMainPanel.GetInstance()!.addOnlyPanel(CCStorageItemGetDialog, {
+                CCStorageItemGetDialog.showItemGetDialog({
                     Items: info
                 })
             }

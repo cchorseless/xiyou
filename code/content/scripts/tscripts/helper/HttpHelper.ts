@@ -32,7 +32,7 @@ export module HttpHelper {
                     // LogHelper.print("http cb=>", sAction, response.StatusCode, response.Body);
                     resolve(json.decode(response.Body)[0]);
                 } else {
-                    LogHelper.error("http cb=>", sAction, response.StatusCode);
+                    LogHelper.error("http cb=>", address, sAction, response.StatusCode);
                     reject(response.Body);
                 }
             });
@@ -63,7 +63,7 @@ export module HttpHelper {
                     hFunc(json.decode(response.Body)[0], response);
                 }
             } else {
-                LogHelper.error("http cb=>", sAction, response.StatusCode, '-----------');
+                LogHelper.error("http cb=>", address, sAction, response.StatusCode, response.Body, '-----------');
             }
         });
     }
@@ -84,7 +84,7 @@ export module HttpHelper {
                     // LogHelper.print("http cb=>", sAction, response.StatusCode, response.Body);
                     resolve(json.decode(response.Body)[0]);
                 } else {
-                    LogHelper.error("http cb=>", sAction, response.StatusCode, '-----------');
+                    LogHelper.error("http cb=>", address, sAction, response.StatusCode, response.Body, '-----------');
                     reject(response.Body);
                 }
             });

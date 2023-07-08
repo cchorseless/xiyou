@@ -42,25 +42,46 @@ export class PlayerSystem extends ET.EntityRoot {
     /**
      * 登录服务器
      */
-    static async LoginServer() {
-        let allPlayer = this.GetAllPlayerid();
-        let allServerPlayerId: string[] = [];
+    static LoginServer() {
+        GameRules.SetCustomGameSetupRemainingTime(999999)
+        const allPlayer = this.GetAllPlayerid();
+        const allServerPlayerId: string[] = [];
         for (let playerid of allPlayer) {
             let playerScene = new PlayerScene();
             PlayerEntityRoot.Active(playerScene, playerid);
             let playerRoot = playerScene.ETRoot;
-            await playerRoot.PlayerHttpComp().PlayerLogin(playerid);
-            allServerPlayerId.push(playerRoot.PlayerHttpComp().ServerPlayerID)
+            playerRoot.PlayerHttpComp().PlayerLogin(playerid).then(
+                (b) => {
+                    if (b) {
+                        allServerPlayerId.push(playerRoot.PlayerHttpComp().ServerPlayerID)
+                    }
+                }
+            );
         }
-        let playerRoot = this.GetOneOnlinePlayer();;
-        await playerRoot.PlayerHttpComp().CreateGameRecord(allServerPlayerId);
-        GLogHelper.print("登录服务器成功");
-        // GTimerHelper.AddTimer(5, GHandler.create(this, () => {
-        //     GLogHelper.print("开始游戏");
-        //     playerRoot.PlayerHttpComp().PlayerLogin(0);
-        //     return 5
-        // }))
-        this.ListenPlayerDisconnect();
+        let waitmaxtime = 20;
+        GTimerHelper.AddTimer(0.5, GHandler.create(this, () => {
+            waitmaxtime -= 0.5;
+            if (allServerPlayerId.length > 0) {
+                // 全部登录完成
+                if (allPlayer.length == allServerPlayerId.length || waitmaxtime <= 0) {
+                    let playerRoot = this.GetOneOnlinePlayer();
+                    playerRoot.PlayerHttpComp().CreateGameRecord(allServerPlayerId).then((success) => {
+                        if (success) {
+                            GGameServiceSystem.GetInstance().StartGameModeSelection();
+                            this.ListenPlayerDisconnect();
+                            GameRules.SetCustomGameSetupRemainingTime(1);
+                            GLogHelper.print("创建游戏记录成功");
+                        }
+                    })
+                    return;
+                }
+            }
+            if (waitmaxtime > 0) {
+                return 0.5;
+            }
+        }))
+
+
     }
     static readonly IsAllLogin: boolean = false;
     private static OnClientLoginPlayer(playerid: PlayerID) {

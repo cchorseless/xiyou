@@ -14,7 +14,7 @@ export enum ResType {
     soundfile = "soundfile",
     particle = "particle",
     model = "model",
-    Model = "Model",
+    // Model = "Model",
     PickSound = "PickSound",
     BanSound = "BanSound",
     IdleExpression = "IdleExpression",
@@ -30,6 +30,8 @@ export class PrecacheHelper {
     public static init(context: CScriptPrecacheContext) {
         // 初始化KV文件
         PrecacheHelper.initKVFile();
+        // 加载模型文件
+        PrecacheHelper.precacheAllModel(context);
         // 加载音频文件
         PrecacheHelper.precacheAllSound(context);
         // 加载资源文件
@@ -48,7 +50,14 @@ export class PrecacheHelper {
     private static initKVFile() {
         KVHelper.initKVFile();
     }
-
+    private static precacheAllModel(context: CScriptPrecacheContext) {
+        // 需要加载音频的资源文件
+        Assert_Precache.modelfile.forEach((v) => {
+            if (v && v.endsWith("vmdl")) {
+                PrecacheHelper.precachRes(ResType.model, v, context);
+            }
+        });
+    }
     private static precacheAllSound(context: CScriptPrecacheContext) {
         // 需要加载音频的资源文件
         Assert_Precache.soundfile.forEach((v) => {

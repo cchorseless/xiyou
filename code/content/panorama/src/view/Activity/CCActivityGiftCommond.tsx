@@ -8,7 +8,6 @@ import { CCButton } from "../AllUIElement/CCButton/CCButton";
 import { CCLabel } from "../AllUIElement/CCLabel/CCLabel";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCPanelHeader } from "../AllUIElement/CCPanel/CCPanelPart";
-import { CCMainPanel } from "../MainPanel/CCMainPanel";
 import { CCStorageItemGetDialog } from "../Storage/CCStorageItemGetDialog";
 import "./CCActivityGiftCommond.less";
 import { CCActivityRuleNoteItem } from "./CCActivityRuleNoteItem";
@@ -28,7 +27,7 @@ export class CCActivityGiftCommond extends CCPanel<ICCActivityGiftCommond> {
         }, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
             if (e.state) {
                 let info = JSON.parse(e.message!) as IFItemInfo;
-                CCMainPanel.GetInstance()!.addOnlyPanel(CCStorageItemGetDialog, {
+                CCStorageItemGetDialog.showItemGetDialog({
                     Items: [
                         { ItemConfigId: info.ItemConfigId, ItemCount: info.ItemCount },
                     ]

@@ -29,20 +29,15 @@ let argv = process.argv;
 let publishlua = argv[2] == "true";
 /**发布res */
 let publishres = argv[3] == "true";
+/**是否加密代码 */
+let encrypt = argv[4] == "true";
 /**密匙 */
 const keyinfo = [
-    { key: "117DFDBC5F636E65B3826707246DBAF19389F188", name: "c2", token: "1.0.0" },
-    { key: "9C44D4B05F11BFB30C7BE83885925F9A147F6288", name: "c2", token: "1.0.1" },
-    { key: "A530D6C0869D6737BF79C2C75EC87074050C3C5E", name: "c2", token: "1.0.2" },
-    { key: "ECBF6972224D46014FD7B0D6B8E78C9E6211C719", name: "c2", token: "1.0.3" },
-    { key: "9010F6B85B864113346A1DE76216E633F0D5BFA8", name: "c2", token: "1.0.4" },
-    { key: "E6292454FE5F714E43E5F010582E7A6D3A88A0BB", name: "c2", token: "1.0.5" },
-    { key: "E0C380289890E13161BC918FFD08421784698E4C", name: "c2", token: "1.0.6" },
-    { key: "C13D8B449E72C7B4AD276EFD372D6EA7A434CDC2", name: "c2", token: "1.0.7" },
-    { key: "C6C51CFD08B4301873F813FA4269ECD533AB19E2", name: "c2", token: "1.0.8" },
-    { key: "B25530704A94DA3272B8DF55FB30AA2749F74306", name: "c2", token: "1.0.9" },
-    { key: "C014CC19D37CF34DCF9AB3DC2A339D70256282FF", name: "c2", token: "1.1.0" },
-    { key: "DFB3F90541B943AAE794C7708CD6E069461769C4", name: "c2", token: "1.1.1" },
+    { key: "90C865A2E432539702FEA672E1C9C7029242B5D7", name: "xiyou", token: "1.0.0" },
+    { key: "11708B8C7FC5CF1F39CB8C859BCDA626D08B9CFF", name: "xiyou", token: "1.0.1" },
+    { key: "B6392736A80D27D1A589B94DFCF27BDCDF68DC7B", name: "xiyou", token: "1.0.2" },
+    { key: "042D8AF82A311297C734D25EB928F2136BBC7E84", name: "xiyou", token: "1.0.3" },
+    { key: "20A6F90CE89B81F9457182D3F16DFD2D5BFA1D8C", name: "xiyou", token: "1.0.4" },
 ];
 
 const GetdedicatedServerKey = (v) => {
@@ -69,13 +64,14 @@ walker.on("file", (root, fileStats, next) => {
         if (fileName.indexOf(" ") == -1) {
             if (encryptFilter(fileName)) {
                 // lua 代码优化
-                // if(ismin){
-                //     let code = fs.readFileSync(fileName, { encoding: 'utf8' });
-                //     code = luamin.minify(code);
-                // }
-                // console.log(code);
+                if (!encrypt) {
+                    let code = fs.readFileSync(fileName, { encoding: 'utf8' });
+                    code = luamin.minify(code);
+                    fs.writeFileSync(getPublishPath(fileName), code, { encoding: 'utf8' })
+                    console.log(`[publish.js] [not encrypt mini] ->${fileName}`);
+                }
                 // 发布lua
-                if (publishlua) {
+                else if (publishlua) {
                     exec(`lua scripts/aeslua/encrypt_file.lua ${fileName} ${getPublishPath(fileName)} ${dedicatedServerKey} ${"code"} ${version}`, (err, out, stderr) => {
                         if (err) {
                             errorarr.push(fileName);

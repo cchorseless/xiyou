@@ -12,7 +12,6 @@ import { CCMenuNavigation } from "../AllUIElement/CCNavigation/CCMenuNavigation"
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCPopUpDialog } from "../AllUIElement/CCPopUpDialog/CCPopUpDialog";
 import { CCVerticalTable } from "../AllUIElement/CCTable/CCVerticalTable";
-import { CCMainPanel } from "../MainPanel/CCMainPanel";
 import { CCCoinAddPanel } from "../Shop/CCCoinAddPanel";
 import { CCStorageItemGetDialog } from "../Storage/CCStorageItemGetDialog";
 import "./CCMailPanel.less";
@@ -58,7 +57,7 @@ export class CCMailPanel extends CCPanel<ICCMailPanel> {
         }, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
             if (e.state) {
                 const items = JSON.parse(e.message!) as IFItemInfo[];
-                CCMainPanel.GetInstance()!.addOnlyPanel(CCStorageItemGetDialog, {
+                CCStorageItemGetDialog.showItemGetDialog({
                     Items: items
                 })
             }

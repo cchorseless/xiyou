@@ -8,7 +8,6 @@ import { CCButton } from "../AllUIElement/CCButton/CCButton";
 import { CCButtonBox } from "../AllUIElement/CCButton/CCButtonBox";
 import { CCLabel } from "../AllUIElement/CCLabel/CCLabel";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
-import { CCMainPanel } from "../MainPanel/CCMainPanel";
 import { CCShopItem } from "../Shop/CCShopItem";
 import { CCStorageItemGetDialog } from "../Storage/CCStorageItemGetDialog";
 import { CCActivityRuleNoteItem } from "./CCActivityRuleNoteItem";
@@ -65,7 +64,7 @@ export class CCActivitySevenDayPrizeItem extends CCPanel<ICCActivitySevenDayPriz
         }, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
             if (e.state) {
                 let info = JSON.parse(e.message!) as IFItemInfo[];
-                CCMainPanel.GetInstance()!.addOnlyPanel(CCStorageItemGetDialog, {
+                CCStorageItemGetDialog.showItemGetDialog({
                     Items: info
                 })
             }

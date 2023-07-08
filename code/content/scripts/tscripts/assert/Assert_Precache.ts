@@ -1,8 +1,9 @@
 export module Assert_Precache {
-    interface IParticleInfo {
-        name?: string;
-        effect?: string;
-    }
+
+
+    export const modelfile: string[] = [
+        "models/items/lone_druid/true_form/tarzan_and_kingkong_trueform/tarzan_and_kingkong_trueform.vmdl",
+    ]
 
     export const soundfile: string[] = [
         "soundevents/soundevents_dota_ui.vsndevts",

@@ -6,114 +6,63 @@
   <component name="ChangeListManager">
     <list default="true" id="0afe1df3-4870-48f1-a775-af97afd6ee5a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/maps/boss_area.vmap" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/maps/boss_area.vmap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/materials/overviews/bigmap02.tga" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/materials/overviews/bigmap02.tga" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/images/spellicons/skill_blank.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/game/AllEntity.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/game/AllEntity.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/game/GameScene.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/game/GameScene.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/game/components/ChessControl/ChessControlComponent.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/game/components/Player/PlayerEntityRoot.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/game/components/Player/PlayerEntityRoot.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCAbility/CCAbilityList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCAbility/CCAbilityList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCAbility/CCAbilityPanel.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCAbility/CCAbilityPanel.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCItem/CCItemCombinesPanel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCItem/CCItemCombinesPanel.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/combination/icons/icons.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/combination/icons/icons.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/contract/contract.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/contract/contract.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/draw/draw.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/draw/draw.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/end_game/end_game.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/end_game/end_game.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/ccability/ccability.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/ccability/ccability.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/ccbutton/style1/style1.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/ccbutton/style1/style1.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/ccbutton/tui3/tui3.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/ccbutton/tui3/tui3.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/ccbutton/tui6/tui6.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/ccbutton/tui6/tui6.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/ccbutton/tui7/tui7.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/ccbutton/tui7/tui7.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/ccdacboard/ccdacboard.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/ccdacboard/ccdacboard.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/ccdacboard/style1/style1.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/ccdacboard/style1/style1.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/ccdacboard/tui3/tui3.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/ccdacboard/tui3/tui3.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/ccdivider/default/default.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/ccdivider/default/default.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/ccdivider/tui3/tui3.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/ccdivider/tui3/tui3.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/ccdotascenepanel/ccdotascenepanel.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/ccdotascenepanel/ccdotascenepanel.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/ccinventory/tui6/tui6.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/ccinventory/tui6/tui6.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/cclevelxp/cclevelxp.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/cclevelxp/cclevelxp.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/ccminimap/ccminimap.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/ccminimap/ccminimap.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/ccnavigation/ccnavigation.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/ccnavigation/ccnavigation.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/ccpanel/ccpanel.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/ccpanel/ccpanel.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/ccpayment/ccpayment.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/ccpayment/ccpayment.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/ccpayment/payssion_icon/payssion_icon.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/ccpayment/payssion_icon/payssion_icon.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/ccpopupdialog/tui3/tui3.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/ccpopupdialog/tui3/tui3.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/ccpopupdialog/tui7/tui7.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/ccpopupdialog/tui7/tui7.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/cctable/cctable.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/cctable/cctable.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/cctalentbranch/cctalentbranch.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/cctalentbranch/cctalentbranch.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/ccunitstats/ccunitstats.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/ccunitstats/ccunitstats.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/icon/eom/eom.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/icon/eom/eom.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/icon/style1/style1.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/icon/style1/style1.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/icon/tui3/tui3.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/icon/tui3/tui3.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/icon/tui6/tui6.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/icon/tui6/tui6.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/icon/tui7/tui7.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/icon/tui7/tui7.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/image_number/type_1/type_1.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/image_number/type_1/type_1.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/image_number/type_2/type_2.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/image_number/type_2/type_2.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/image_number/type_3/type_3.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/image_number/type_3/type_3.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/image_number/type_4/type_4.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/image_number/type_4/type_4.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/image_number/type_5/type_5.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/image_number/type_5/type_5.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/image_number/type_6/type_6.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/image_number/type_6/type_6.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/image_number/type_7/type_7.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/image_number/type_7/type_7.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/image_number/type_8/type_8.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/image_number/type_8/type_8.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/image_number/type_9/type_9.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/eom_design/image_number/type_9/type_9.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/handbook/handbook.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/handbook/handbook.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/hero/hero_icon/hero_icon.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/hero/hero_icon/hero_icon.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/hero/hero_relics/hero_relics.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/hero/hero_relics/hero_relics.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/hero/hero_relics/icons/icons.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/hero/hero_relics/icons/icons.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/hero/herolabel/herolabel.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/hero/herolabel/herolabel.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/hero/selection/selection.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/hero/selection/selection.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/hud/hud.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/hud/hud.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/icon/icon.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/icon/icon.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/notification/notification.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/notification/notification.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/overhead/overhead.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/overhead/overhead.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/overhead/title/title.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/overhead/title/title.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/publicshopbag/publicshopbag.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/publicshopbag/publicshopbag.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/rank/rank.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/rank/rank.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/rarity/rarity.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/rarity/rarity.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/record/record.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/record/record.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/shop/shop.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/shop/shop.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/shop_items/shop_items.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/shop_items/shop_items.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/treasure/1/1.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/treasure/1/1.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/treasure/2/2.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/treasure/2/2.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/treasure/3/3.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/treasure/3/3.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/treasure/4/4.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/treasure/4/4.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/treasure/5/5.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/treasure/5/5.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/treasure/treasure.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/custom_game/treasure/treasure.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/items/artifact/artifact.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/items/artifact/artifact.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/items/chest/chest.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/items/chest/chest.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/items/heroes/heroes.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/items/heroes/heroes.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/items/imba/imba.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/items/imba/imba.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/items/items.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/items/items.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/items/shop/shop.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/items/shop/shop.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/masks/masks.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/masks/masks.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/spellicons/sect/sect.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/spellicons/sect/sect.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/spellicons/sect_bk/sect_bk.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/spellicons/sect_bk/sect_bk.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/spellicons/spellicons.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/allres_image/spellicons/spellicons.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/res_image.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/res_image.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/GameFunc.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/GameFunc.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/common/building_auto_findtreasure.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/common/building_auto_findtreasure.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/courier/courier_draw_card.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/courier/courier_draw_card.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_alchemist.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_alchemist.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_bounty_hunter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_bounty_hunter.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_lina.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/abilities/imba/hero_lina.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/entityPlus/BaseAbility_Plus.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/entityPlus/BaseAbility_Plus.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/modifier/modifier_tp.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/npc/modifier/modifier_tp.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/Components/Building/BuildingRuntimeEntityRoot.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/Components/Building/BuildingRuntimeEntityRoot.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/Components/Courier/CourierEntityRoot.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/Components/Courier/CourierEntityRoot.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/Components/Enemy/EnemyUnitEntityRoot.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/Components/Enemy/EnemyUnitEntityRoot.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/Components/Player/PlayerDataComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/Components/Player/PlayerDataComponent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/System/ChessControlSystemComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/System/ChessControlSystemComponent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/myLaya.laya" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/helper/DotaUIHelper.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/helper/DotaUIHelper.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/helper/QRcodeHelper.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/helper/QRcodeHelper.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/libs/client.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/libs/client.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Activity/CCActivityDailyOnlinePrize.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Activity/CCActivityDailyOnlinePrize.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Activity/CCActivityGiftCommond.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Activity/CCActivityGiftCommond.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Activity/CCActivityInvestMetaStone.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Activity/CCActivityInvestMetaStone.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Activity/CCActivityMonthLogin.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Activity/CCActivityMonthLogin.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Activity/CCActivitySevenDayLogin.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Activity/CCActivitySevenDayLogin.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Activity/CCActivityTotalGainMetaStone.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Activity/CCActivityTotalGainMetaStone.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/AllSpeHud/hero_select/hero_select.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/AllSpeHud/hero_select/hero_select.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/AllSpeHud/hero_select/hero_select.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/AllSpeHud/hero_select/hero_select.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/AllSpeHud/loading/loading.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/AllSpeHud/loading/loading.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCPayment/CCPayQrcode.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCPayment/CCPayQrcode.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCPayment/CCPayQrcode.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCPayment/CCPayQrcode.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCPayment/CCPayment.less" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/AllUIElement/CCPayment/CCPayment.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/BattlePass/CCBattlePassPrizeItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/BattlePass/CCBattlePassPrizeItem.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/BattlePass/CCBattlePassTaskHudDialog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/BattlePass/CCBattlePassTaskHudDialog.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Common/CCWaitProgressDialog.less" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Common/CCWaitProgressDialog.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Common/CCWaitProgressDialog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Common/CCWaitProgressDialog.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/GameEnd/CCGameEndPanel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/GameEnd/CCGameEndPanel.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/GameEnd/CCPlayerEndPanel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/GameEnd/CCPlayerEndPanel.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/LuckyDraw/CCLuckyDrawPanel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/LuckyDraw/CCLuckyDrawPanel.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Mail/CCMailPanel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Mail/CCMailPanel.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Mail/CCMailSingleDataDialog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Mail/CCMailSingleDataDialog.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Player/CCPlayerInfoDialog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Player/CCPlayerInfoDialog.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Record/CCRecordMainItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Record/CCRecordMainItem.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Shop/CCShopSellDetailDialog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Shop/CCShopSellDetailDialog.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/Storage/CCStorageItemGetDialog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/Storage/CCStorageItemGetDialog.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/panorama/src/view/game_main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/panorama/src/view/game_main.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/GameDebugger.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/GameDebugger.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/GameScene.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/GameScene.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/GameSetting.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/GameSetting.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/assert/Assert_Precache.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/assert/Assert_Precache.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/helper/HttpHelper.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/helper/HttpHelper.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/helper/LogHelper.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/helper/LogHelper.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/helper/PrecacheHelper.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/helper/PrecacheHelper.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/Components/Player/PlayerEntityRoot.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/Components/Player/PlayerEntityRoot.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/Components/Player/PlayerHttpComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/Components/Player/PlayerHttpComponent.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/System/GameServiceSystemComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/System/GameServiceSystemComponent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/System/MapSystemComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/rules/System/MapSystemComponent.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/GameProtocol.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/GameProtocol.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/GameServiceConfig.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/GameServiceConfig.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/JsonConfig.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/JsonConfig.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/Types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/Types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/json/dota_roundboardchallengeconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/json/dota_roundboardchallengeconfig.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/json/dota_roundboardconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/json/dota_roundboardconfig.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/rules/System/GameServiceSystem.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/rules/System/GameServiceSystem.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/excels/abilities/imba_abilities.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/excels/abilities/imba_abilities.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/game/scripts/npc/abilities/imba_abilities.kv" beforeDir="false" afterPath="$PROJECT_DIR$/code/game/scripts/npc/abilities/imba_abilities.kv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/json/dota_poolconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/Gen/json/dota_poolconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/declare/serverprotocol.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/declare/serverprotocol.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/service/AllServiceEntity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/service/AllServiceEntity.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/service/account/CharacterDataComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/service/account/CharacterDataComponent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/service/account/CharacterInGameDataComponent.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/service/account/TCharacter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/code/content/scripts/tscripts/shared/service/account/TCharacter.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/excels/abilities/boss_abilities.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/excels/abilities/boss_abilities.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/excels/abilities/imba_abilities_lang.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/code/excels/abilities/imba_abilities_lang.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/localization/SChinese/abilities/imba_abilities_lang.txt" beforeDir="false" afterPath="$PROJECT_DIR$/code/localization/SChinese/abilities/imba_abilities_lang.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/localization/SChinese/lubandoc/ItemConfig.txt" beforeDir="false" afterPath="$PROJECT_DIR$/code/localization/SChinese/lubandoc/ItemConfig.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/code/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/scripts/publish.js" beforeDir="false" afterPath="$PROJECT_DIR$/code/scripts/publish.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/scripts/updateApp.js" beforeDir="false" afterPath="$PROJECT_DIR$/code/scripts/updateApp.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -134,19 +83,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "E:/project/gm_project/GmServer",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "ts.external.directory.path": "E:\\project\\dota_project\\xiyou\\code\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/project/dota_project/xiyou&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;E:\\project\\dota_project\\xiyou\\code\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\project\dota_project\xiyou\code\content\scripts\tscripts\npc\modifier\spawn" />
@@ -374,6 +323,16 @@
       <workItem from="1687585604958" duration="1986000" />
       <workItem from="1687755929962" duration="1189000" />
       <workItem from="1687869677291" duration="1436000" />
+      <workItem from="1688201238974" duration="28000" />
+      <workItem from="1688378086302" duration="114000" />
+      <workItem from="1688541704755" duration="8272000" />
+      <workItem from="1688575280617" duration="1212000" />
+      <workItem from="1688617866870" duration="596000" />
+      <workItem from="1688627856351" duration="4873000" />
+      <workItem from="1688645421704" duration="1089000" />
+      <workItem from="1688654292280" duration="2255000" />
+      <workItem from="1688709769861" duration="6240000" />
+      <workItem from="1688796923723" duration="1406000" />
     </task>
     <servers />
   </component>

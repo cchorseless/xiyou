@@ -82,7 +82,7 @@ export class CCLuckyDrawPanel extends CCPanel<ICCLuckyDrawPanel> {
         ChestSequence.actions.push(new AddClassAction(pSelf, "OpenSuccess"));
         ChestSequence.actions.push(new WaitAction(1.5));
         ChestSequence.actions.push(new RemoveClassAction(pSelf, "OpenSuccess"));
-        CCMainPanel.GetInstance()!.addOnlyPanel(CCStorageItemGetDialog, {
+        CCStorageItemGetDialog.showItemGetDialog({
             Items: [
                 { ItemConfigId: 10013, ItemCount: 20 },
                 { ItemConfigId: 10013, ItemCount: 20 },

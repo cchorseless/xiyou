@@ -9,7 +9,6 @@ import { CCScrollImageNumber } from "../AllUIElement/CCImageNumber/CCScrollImage
 import { CCLabel } from "../AllUIElement/CCLabel/CCLabel";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCPanelHeader } from "../AllUIElement/CCPanel/CCPanelPart";
-import { CCMainPanel } from "../MainPanel/CCMainPanel";
 import { CCStorageItemGetDialog } from "../Storage/CCStorageItemGetDialog";
 import "./CCActivityInvestMetaStone.less";
 import { CCActivityRuleNoteItem } from "./CCActivityRuleNoteItem";
@@ -68,7 +67,7 @@ export class CCActivityInvestMetaStone extends CCPanel<ICCActivityInvestMetaSton
                     <CCLabel type="Title" text={`投入原石`} fontSize="40px" marginTop={"20px"} horizontalAlign="center" />
                     <CCPanel flowChildren="right" marginTop={"100px"} horizontalAlign="center" >
                         <CCScrollImageNumber key={curInvest + "1"} type="9" start={GToNumber(curInvestArr[0])} to={GToNumber(tometastoneArr[0])} anistoptime={4} isaniplay={isstartani} anistopFunc={() => {
-                            CCMainPanel.GetInstance()!.addOnlyPanel(CCStorageItemGetDialog, {
+                            CCStorageItemGetDialog.showItemGetDialog({
                                 Items: [{ ItemConfigId: GEEnum.EMoneyType.MetaStone, ItemCount: tometastone }]
                             });
                             this.UpdateState({ isstartani: false, tometastone: 0 })

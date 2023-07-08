@@ -3,14 +3,18 @@ export module GameProtocol {
         static readonly AccountLoginKey = "/AccountLoginKey";
         static readonly LoginRealm = "/LoginRealm";
         static readonly LoginGate = "/LoginGate";
+        static readonly EasyLoginGate = "/EasyLoginGate";
         static readonly CreateGameRecord = "/CreateGameRecord";
         static readonly UploadGameRecord = "/UploadGameRecord";
         static readonly RefreshToken = "/RefreshToken";
         static readonly Ping = "/Ping";
         static readonly LoginOut = "/LoginOut";
         static readonly SetServerKey = "/SetServerKey";
+        static readonly ReportGameError = "/ReportGameError";
+        static readonly ReportGameSuggest = "/ReportGameSuggest";
 
-        static readonly UploadCharacterGameRecord = "/UploadCharacterGameRecord";
+        // 游戏数据记录
+        static readonly UploadCharacterData = "/UploadCharacterData";
         // 背包 使用道具
         static readonly Use_BagItem = "/Use_BagItem";
         // 背包 添加道具
@@ -58,6 +62,7 @@ export module GameProtocol {
         static readonly custom_call_get_unit_data = "custom_call_get_unit_data";
         static readonly custom_call_get_player_data = "custom_call_get_player_data";
         //#region DEBUG
+        static readonly req_DebugClientErrorLog = "/req_DebugClientErrorLog";
         static readonly req_DebugChangeHostTimescale = "/req_DebugChangeHostTimescale";
         static readonly req_DebugPauseRoundStage = "/req_DebugPauseRoundStage";
         static readonly req_DebugNextRoundStage = "/req_DebugNextRoundStage";
@@ -108,6 +113,7 @@ export module GameProtocol {
 
         // 开局
         static readonly req_LoginGame = "/req_LoginGame";
+        static readonly req_TestCDK = "/req_TestCDK";
         static readonly SelectDifficultyChapter = "/SelectDifficultyChapter";
         static readonly SelectDifficultyEndlessLevel = "/SelectDifficultyEndlessLevel";
         static readonly SelectCourier = "/SelectCourier";
@@ -151,13 +157,6 @@ export module GameProtocol {
         HadGet = 4,
         OutOfDate = 8,
     }
-    // export const HTTP_URL = "http://139.196.182.10:8080";
-    export const HTTP_URL = "http://127.0.0.1:11199";
-
-    export function LoginUrl() {
-        return "http://127.0.0.1:11002";
-        // return "http://139.196.182.10:10002";
-    }
 
     /**服务器存的key */
     export enum ECharacterGameRecordKey {
@@ -170,5 +169,23 @@ export module GameProtocol {
         /**通关的无尽最大难度层数 */
         iDifficultyMaxLevel = "iDifficultyMaxLevel",
     }
-
+    /**支付方式 */
+    export enum EPayOrderSourceType {
+        AliPay_QrCode = 1000,
+        WeChat_QrCodeV3 = 2000,
+        WeChat_H5PayV3 = 2001,
+        Paypal_H5Pay = 3000,
+        YooMoney_H5Pay = 4000,
+    }
+    export enum EPayOrderState {
+        CreateSuccess = 1,
+        CreateFail = 2,
+        CreateError = 4,
+        PaySuccess = 8,
+        PayFail = 16,
+        PayWait = 32,
+        PayAddItemSuccess = 64,
+        PayAddItemFail = 128,
+        PayAddItemByEmail = 256,
+    }
 }

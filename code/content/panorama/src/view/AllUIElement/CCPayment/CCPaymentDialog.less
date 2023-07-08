@@ -1,0 +1,41 @@
+.CCPaymentDialog {
+    align: center center;
+
+    #PanelBg {
+        width: 609px;
+        height: 389px;
+        vertical-align: center;
+
+        #DefaultPayments {
+            align: center center;
+            flow-children: right;
+
+            .Pleasewait {
+                width: 210px;
+                height: 210px;
+                background-color: #00000055;
+                margin-left: 20px;
+
+                #RefreshButton {
+                    width: 150px;
+                    height: 36px;
+                    align: center center;
+                }
+
+                #refresh {
+                    width: 36px;
+                    height: 36px;
+                    align: center center;
+                    background-image: url("file://{images}/control_icons/refresh.png");
+                    background-size: 100%;
+                    background-repeat: no-repeat;
+                    animation-name: RequestAnimation;
+                    animation-duration: 0.5s;
+                    animation-timing-function: linear;
+                    animation-iteration-count: infinite;
+                    animation-direction: reverse;
+                }
+            }
+        }
+    }
+}

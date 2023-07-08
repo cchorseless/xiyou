@@ -1,4 +1,3 @@
-import { GameSetting } from "./GameSetting";
 import { BotHelper } from "./helper/BotHelper";
 import { EventHelper } from "./helper/EventHelper";
 import { LogHelper } from "./helper/LogHelper";
@@ -13,7 +12,7 @@ import { SingletonClass } from "./shared/lib/SingletonClass";
 export class GameDebugger extends SingletonClass {
     public init(): void {
 
-        if (GameSetting.GAME_ISDEBUG) {
+        if (GameServiceConfig.GAME_ISDEBUG || IsInToolsMode()) {
             // this.debugger_LuaMemory(5);
             // this.debuger_globalcache(5);
             this.addDebugEvent();
@@ -144,6 +143,12 @@ export class GameDebugger extends SingletonClass {
         // 清除打印
         EventHelper.addProtocolEvent(GameProtocol.Protocol.req_DebugClearAll, GHandler.create(this, this.onDebugClearAll));
         EventHelper.addProtocolEvent(GameProtocol.Protocol.req_addBot, GHandler.create(this, this.onreq_addBot));
+        //  报错上报
+        EventHelper.addProtocolEvent(GameProtocol.Protocol.req_DebugClientErrorLog, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
+            if (e.data) {
+                GGameServiceSystem.GetInstance().SendErrorLog(e.data, true)
+            }
+        }));
         // 主机速度
         EventHelper.addProtocolEvent(GameProtocol.Protocol.req_DebugChangeHostTimescale, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
             SendToConsole("host_timescale " + e.data);
@@ -292,13 +297,23 @@ export class GameDebugger extends SingletonClass {
 
     /**聊天添加GM指令 */
     OnPlayerChat(events: PlayerChatEvent) {
+        if (!GameServiceConfig.GAME_ISDEBUG) { return; }
+        const nNewState = GameRules.State_Get();
+        if (nNewState < DOTA_GameState.DOTA_GAMERULES_STATE_PRE_GAME) { return; }
         let iPlayerID = events.playerid;
         let player = GPlayerEntityRoot.GetOneInstance(iPlayerID);
         let hero = player.Hero!;
         let sText = events.text.toLowerCase();
         let tokens = sText.split(" ");
         switch (tokens[0]) {
+            case "-code":
+                Say(hero, "code:" + GameServiceConfig.Code_VERSION, true)
+                print("code:" + GameServiceConfig.Code_VERSION)
+                break;
             case "-sendkey":
+                if (!tokens[1]) {
+                    tokens.push(GameServiceConfig.GAME_VERSION)
+                }
                 let serverkey = GetDedicatedServerKeyV2(tokens[1]);
                 GGameServiceSystem.GetInstance().SendServerKey(GameServiceConfig.GAME_Name, tokens[1], serverkey);
                 break;

@@ -7,7 +7,6 @@ import { LogHelper } from "../../../helper/LogHelper";
 import { NetHelper } from "../../../helper/NetHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { CCIntervalTips } from "../../AllUIElement/CCIntervalTips/CCIntervalTips";
-import { CCLinkLabel } from "../../AllUIElement/CCLabel/CCLinkLabel";
 import { CCPanel } from "../../AllUIElement/CCPanel/CCPanel";
 import "./loading.less";
 
@@ -30,6 +29,20 @@ export class CCLoading extends CCPanel<NodePropsData> {
         })
     }
 
+    JoinGame() {
+        let playerID = Game.GetLocalPlayerID();
+        let ishost = false;
+        if (Players.IsValidPlayerID(playerID)) {
+            ishost = Boolean(Game.GetPlayerInfo(playerID).player_has_host_privileges);
+        }
+        // 主机结束队伍选择阶段
+        if (ishost) {
+            Game.SetAutoLaunchEnabled(false);
+            Game.AutoAssignPlayersToTeams();
+            Game.SetRemainingSetupTime(0);
+        }
+    }
+
     onGameStateChange() {
         const state = Game.GetState();
         if (!$.GetContextPanel().layoutfile.includes("custom_loading_screen")) {
@@ -42,17 +55,7 @@ export class CCLoading extends CCPanel<NodePropsData> {
         }
         if (state == DOTA_GameState.DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP) {
             this.LoginServer();
-            let playerID = Game.GetLocalPlayerID();
-            let ishost = false;
-            if (Players.IsValidPlayerID(playerID)) {
-                ishost = Boolean(Game.GetPlayerInfo(playerID).player_has_host_privileges);
-            }
-            // 主机结束队伍选择阶段
-            if (ishost) {
-                Game.SetAutoLaunchEnabled(false);
-                Game.AutoAssignPlayersToTeams();
-                Game.SetRemainingSetupTime(0);
-            }
+            this.JoinGame();
         }
         this.UpdateState({ gamestate: state })
     }
@@ -62,15 +65,19 @@ export class CCLoading extends CCPanel<NodePropsData> {
             this.UpdateState({ login: e.state })
         }));
     }
+
     render() {
         const login = this.GetState<boolean>("login", false);
         const tips = ["111", "22222", "33333"];
         return (
             <Panel className="CC_Loading" ref={this.__root__} hittest={false} >
                 <CCPanel id="loadingBg" />
+
                 <Image id="Logo" />
                 <CCIntervalTips id="LoadingCustomTip" tick={5} tipQueue={tips} />
-                <Panel id="EOM" hittest={false}>
+
+
+                {/* <Panel id="EOM" hittest={false}>
                     <Image id="EOM_Logo" />
                     <Label localizedText="#lang_FishManPublish" />
                 </Panel>
@@ -82,7 +89,7 @@ export class CCLoading extends CCPanel<NodePropsData> {
                 <Panel id="Discord" hittest={false}>
                     <CCLinkLabel text={$.Localize("#lang_DiscordLink")} url="https://discord.gg/9GMEaq3re8" />
                     <Image id="DiscordImg" />
-                </Panel>
+                </Panel> */}
                 {/* <Panel id="DouyuActivity" hittest={false}>
                     <Image />
                     <QQGroup text="点击打开活动页面" url="https://yuba.douyu.com/p/276083141631946810" />

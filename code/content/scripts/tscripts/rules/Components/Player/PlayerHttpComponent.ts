@@ -16,13 +16,21 @@ export class PlayerHttpComponent extends ET.Component {
     public Address = "";
     public Port = "";
     public ServerPlayerID = "";
-    public ReConnectTime = 10;
+    public ReConnectTime = 5;
+    public RePingTime = 10;
     public DebugStopPing = false;
     public readonly IsOnline: boolean = false;
     public static readonly GateId: number = 0;
+    public static readonly Port: string = "";
+
+
 
     public getAdressPort() {
-        return this.Address + ":" + this.Port;
+        if (PlayerHttpComponent.Port == "") {
+            const index = RandomInt(0, GameServiceConfig.GatePorts.length - 1);
+            (PlayerHttpComponent.Port as any) = GameServiceConfig.GatePorts[index] + "";
+        }
+        return GameServiceConfig.GetHost() + ":" + PlayerHttpComponent.Port;
     }
 
     public async GetAsync(sAction: string, url: string = null) {
@@ -37,46 +45,77 @@ export class PlayerHttpComponent extends ET.Component {
         url = url || this.getAdressPort();
         HttpHelper.PostRequest(sAction, hParams, hFunc, url, this.TOKEN);
     }
+    // public async PlayerLogin_Old(playerid: PlayerID) {
+    //     const accountid = GPlayerEntityRoot.GetAccountID(playerid);
+    //     const loginUrl = GameServiceConfig.LoginUrl();
+    //     print(`Login begin => steamid:${accountid}  playerid:${playerid} ${loginUrl}`);
+    //     let cbmsg: H2C_GetAccountLoginKey = await this.PostAsync(GameProtocol.Protocol.AccountLoginKey, { Account: accountid }, loginUrl);
+    //     let password = md5.sumhexa(cbmsg.Key + GameSetting.GetServerKey());;
+    //     let cbmsg1: R2C_Login = await this.PostAsync(GameProtocol.Protocol.LoginRealm, { Account: accountid, Password: password, ServerId: 1, GateId: PlayerHttpComponent.GateId }, loginUrl);
+    //     if (cbmsg1.Error == 0) {
+    //         (PlayerHttpComponent.GateId as any) = cbmsg1.GateId;
+    //         let _adress = cbmsg1.Address.split(":");
+    //         this.Address = "http://" + _adress[0];
+    //         this.Port = _adress[1];
+    //         this.ServerPlayerID = cbmsg1.UserId;
+    //         let cbmsg2: H2C_CommonResponse = await this.PostAsync(GameProtocol.Protocol.LoginGate, { UserId: cbmsg1.UserId, Key: cbmsg1.Key, ServerId: 1 });
+    //         if (cbmsg2.Error == 0) {
+    //             this.ReConnectTime = 5;
+    //             this.TOKEN = "Bearer " + cbmsg2.Message;
+    //             (this.IsOnline as any) = true;
+    //             print(`Login success => steamid:${accountid}  playerid:${playerid}`);
+    //             this.Ping();
+    //             return true;
+    //         }
+    //     }
+    //     else {
+    //         print(`Login error => cbmsg: `);
+    //         DeepPrintTable(cbmsg1);
+    //     }
+    //     if (this.ReConnectTime > 0) {
+    //         this.ReConnectTime--;
+    //         LogHelper.error(`Login ReConnect => steamid:${accountid}  playerid:${playerid}`);
+    //         GTimerHelper.AddTimer(2, GHandler.create(this, async () => {
+    //             await this.PlayerLogin_Old(playerid);
+    //         }));
+    //     }
+    //     else {
+    //         //  重连失败
+    //         GGameScene.DefeatPlayer(playerid);
+    //     }
+    // }
     public async PlayerLogin(playerid: PlayerID) {
-        let accountid = GPlayerEntityRoot.GetAccountID(playerid);
-        let loginUrl = GameProtocol.LoginUrl();
-        LogHelper.print(`Login begin => steamid:${accountid}  playerid:${playerid}`);
-        let cbmsg: H2C_GetAccountLoginKey = await this.PostAsync(GameProtocol.Protocol.AccountLoginKey, { Account: accountid }, loginUrl);
-        let password = "";
-        if (cbmsg.Error == 0) {
-            password = md5.sumhexa(cbmsg.Key + GameSetting.ServerKey() + accountid);
-        } else {
-            password = md5.sumhexa(cbmsg.Key + GameSetting.ServerKey()) + accountid;
-        }
-        let cbmsg1: R2C_Login = await this.PostAsync(GameProtocol.Protocol.LoginRealm, { Account: accountid, Password: password, ServerId: 1, GateId: PlayerHttpComponent.GateId }, loginUrl);
-        if (cbmsg1.Error == 0) {
-            (PlayerHttpComponent.GateId as any) = cbmsg1.GateId;
-            let _adress = cbmsg1.Address.split(":");
-            this.Address = "http://" + _adress[0];
-            this.Port = _adress[1];
-            this.ServerPlayerID = cbmsg1.UserId;
-            let cbmsg2: H2C_CommonResponse = await this.PostAsync(GameProtocol.Protocol.LoginGate, { UserId: cbmsg1.UserId, Key: cbmsg1.Key, ServerId: 1 });
-            if (cbmsg2.Error == 0) {
-                this.ReConnectTime = 10;
-                this.TOKEN = "Bearer " + cbmsg2.Message;
-                (this.IsOnline as any) = true;
-                LogHelper.print(`Login success => steamid:${accountid}  playerid:${playerid}`);
-                this.Ping();
-                return;
-            }
-        }
-        LogHelper.error(`Login error => steamid:${accountid}  playerid:${playerid}`);
-        if (this.ReConnectTime > 0) {
-            // this.ReConnectTime--;
-            // GTimerHelper.AddTimer(5, GHandler.create(this, async () => {
-            //     await this.PlayerLogin(playerid);
-            // }));
+        const accountid = GPlayerEntityRoot.GetAccountID(playerid);
+        const password = md5.sumhexa(accountid + "@" + GameSetting.GetServerKey());;
+        print(`Login begin => steamid:${accountid}  playerid:${playerid} ${this.getAdressPort()}`);
+        let cbmsg2: G2C_EasyLoginGate = await this.PostAsync(GameProtocol.Protocol.EasyLoginGate, {
+            Account: accountid, Password: password
+        });
+        if (cbmsg2.Error == 0) {
+            this.ServerPlayerID = cbmsg2.PlayerId;
+            this.ReConnectTime = 5;
+            this.TOKEN = "Bearer " + cbmsg2.Message;
+            (this.IsOnline as any) = true;
+            print(`Login success => steamid:${accountid}  playerid:${playerid}`);
+            this.Ping();
+            return true;
         }
         else {
-            // todo 重连失败
+            print(`Login error => cbmsg: ${cbmsg2.Message}`);
+            DeepPrintTable(cbmsg2);
+        }
+        if (this.ReConnectTime > 0) {
+            this.ReConnectTime--;
+            LogHelper.error(`Login ReConnect => steamid:${accountid}  playerid:${playerid}`);
+            GTimerHelper.AddTimer(2, GHandler.create(this, async () => {
+                await this.PlayerLogin(playerid);
+            }));
+        }
+        else {
+            //  重连失败
+            GGameScene.DefeatPlayer(playerid);
         }
     }
-
     public async PlayerLoginOut() {
         if (this.IsDisposed() || !this.IsOnline) {
             return;
@@ -88,17 +127,17 @@ export class PlayerHttpComponent extends ET.Component {
         }
         LogHelper.error(`PlayerLoginOut error -----------------------`);
     }
-    public UploadCharacterGameRecord(key: string[], v: string[]) {
+    public UploadCharacterData(key: string[], v: string[]) {
         if (this.IsDisposed() || !this.IsOnline) {
             return;
         }
-        HttpHelper.PostRequest(GameProtocol.Protocol.UploadCharacterGameRecord, { Keys: key, Values: v }, (b, c) => {
+        HttpHelper.PostRequest(GameProtocol.Protocol.UploadCharacterData, { Keys: key, Values: v }, (b, c) => {
             let cbmsg1: H2C_CommonResponse = b;
             if (cbmsg1.Error == 0) {
-                LogHelper.print(`UploadCharacterGameRecord => ${this.BelongPlayerid}-----------------------`);
+                LogHelper.print(`UploadCharacterData => ${this.BelongPlayerid}-----------------------`);
                 return;
             }
-            LogHelper.error(`UploadCharacterGameRecord error -----------------------`);
+            LogHelper.error(`UploadCharacterData error -----------------------`);
         }, this.getAdressPort(), this.TOKEN);
     }
 
@@ -119,10 +158,10 @@ export class PlayerHttpComponent extends ET.Component {
             return;
         }
         let cbmsg1: H2C_CommonResponse = await this.PostAsync(GameProtocol.Protocol.CreateGameRecord, { Players: serverplayerIds });
-        if (cbmsg1.Error == 0) {
-            return;
+        if (cbmsg1.Error !== 0) {
+            error(`CreateGameRecord error -----------------------`);
         }
-        LogHelper.error(`CreateGameRecord error -----------------------`);
+        return cbmsg1.Error == 0
     }
 
     public Ping() {
@@ -136,52 +175,66 @@ export class PlayerHttpComponent extends ET.Component {
             return;
         }
         if (this.TOKEN != null && this.TOKEN.length > 0) {
-            HttpHelper.GetRequest(
-                GameProtocol.Protocol.Ping,
+            HttpHelper.GetRequest(GameProtocol.Protocol.Ping,
                 (a, b, r) => {
                     if (a == 200) {
-                        // LogHelper.print("http cb=>", GameProtocol.Protocol.Ping, a, b);
-                        let msg: G2C_Ping = json.decode(b)[0];
-                        if (msg.Message) {
-                            // GLogHelper.print("Message length :", msg.Message.length)
-                            let msgcb: any[] = json.decode(msg.Message)[0];
-                            for (let entitystr of msgcb) {
-                                let _str = entitystr;
-                                try {
-                                    if (GameServiceConfig.SyncClientToBase64) {
-                                        _str = FromBase64(_str)
-                                        if (_str == null || _str == "null" || _str == "nil") {
-                                            GLogHelper.error("FromBase64 error: ", entitystr)
+                        if (b && b.length > 0) {
+                            this.RePingTime = 10;
+                            let msg: G2C_Ping = json.decode(b)[0];
+                            if (msg == null) {
+                                LogHelper.error("http ping error cant to json =>", b);
+                            }
+                            if (msg && msg.Message) {
+                                // GLogHelper.print("Message length :", msg.Message.length)
+                                let msgcb: any[] = json.decode(msg.Message)[0];
+                                for (let entitystr of msgcb) {
+                                    let _str = entitystr;
+                                    try {
+                                        if (GameServiceConfig.SyncClientToBase64) {
+                                            _str = FromBase64(_str)
+                                            if (_str == null || _str == "null" || _str == "nil") {
+                                                GLogHelper.error("FromBase64 error: ", entitystr)
+                                            }
                                         }
-                                    }
-                                    if (GameServiceConfig.SyncClientCompress) {
-                                        _str = DecompressZlib(_str)
-                                        if (_str == null || _str == "null" || _str == "nil") {
-                                            GLogHelper.error("DecompressZlib error: ", entitystr)
+                                        if (GameServiceConfig.SyncClientCompress) {
+                                            _str = DecompressZlib(_str)
+                                            if (_str == null || _str == "null" || _str == "nil") {
+                                                GLogHelper.error("DecompressZlib error: ", entitystr)
+                                            }
                                         }
-                                    }
-                                    if (typeof _str === "string" && _str !== "null" && _str !== "nil") {
-                                        let tmpstr = json.decode(_str)[0];
-                                        if (tmpstr == null) {
-                                            GLogHelper.error("json.decode error: ", _str, typeof _str)
+                                        if (typeof _str === "string" && _str !== "null" && _str !== "nil") {
+                                            let tmpstr = json.decode(_str)[0];
+                                            if (tmpstr == null) {
+                                                GLogHelper.error("json.decode error: ", _str, typeof _str)
+                                            }
+                                            _str = tmpstr;
                                         }
-                                        _str = tmpstr;
+                                        ET.Entity.FromJson(_str);
+                                    } catch (e) {
+                                        LogHelper.print(entitystr);
+                                        LogHelper.error(e);
                                     }
-                                    ET.Entity.FromJson(_str);
-                                } catch (e) {
-                                    LogHelper.print(entitystr);
-                                    LogHelper.error(e);
                                 }
                             }
-                        }
-                        // 计算服务器的时区
-                        if (msg.Time) {
-                            TimerHelper.UpdateTimeZoneOffSet(Number(msg.Time))
+                            // 计算服务器的时区
+                            if (msg && msg.Time) {
+                                TimerHelper.UpdateTimeZoneOffSet(Number(msg.Time))
+                            }
                         }
                         this.Ping();
                     } else {
-                        (this.IsOnline as any) = false;
-                        LogHelper.error("ping error-------------------");
+                        this.RePingTime--;
+                        if (this.RePingTime <= 0) {
+                            (this.IsOnline as any) = false;
+                            // 重新登录
+                            this.PlayerLogin(this.BelongPlayerid);
+                            LogHelper.error("ping error-------------------", a, b);
+                        }
+                        else {
+                            GTimerHelper.AddTimer(2, GHandler.create(this, () => {
+                                this.Ping();
+                            }));
+                        }
                     }
                 },
                 this.getAdressPort(),

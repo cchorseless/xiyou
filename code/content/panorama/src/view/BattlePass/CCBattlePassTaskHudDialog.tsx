@@ -18,7 +18,7 @@ interface ICCBattlePassTaskHudDialog {
 export class CCBattlePassTaskHudDialog extends CCPanel<ICCBattlePassTaskHudDialog> {
 
     onReady() {
-        return GGameScene.Local.TCharacter.BattlePassComp != null
+        return GGameScene.Local.TCharacter != null && GGameScene.Local.TCharacter.BattlePassComp != null
     }
     onInitUI() {
         this.ListenUpdate(GGameScene.Local.TCharacter.BattlePassComp);

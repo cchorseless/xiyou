@@ -15,13 +15,13 @@ export class CCPlayerInfoDialog extends CCPanel<ICCPlayerInfoDialog> {
 
     render() {
         const heroData = this.GetState<any>("heroData");
+        const chatacter = GTCharacter.GetOneInstance(this.props.Playerid as PlayerID) || {};
         // const CourierData = this.GetStateEntity(GGameScene.GetPlayer(this.props.Playerid)?.CourierDataComp!);
         let entityid = Players.GetPlayerHeroEntityIndex(this.props.Playerid as PlayerID);
         if (this.props.isFaker) {
             entityid = Players.GetLocalPlayerPortraitUnit()
         }
         const playerData = { heroName: Entities.GetCourierName(entityid) }
-        GLogHelper.print(playerData)
         return (
             <Panel ref={this.__root__} id="CC_PlayerInfoDialog" hittest={false} {...this.initRootAttrs()}>
                 <CCPanelBG width="600px" type="ToolTip" flowChildren="down">
@@ -32,6 +32,7 @@ export class CCPlayerInfoDialog extends CCPanel<ICCPlayerInfoDialog> {
                         <CCCourierCard sCourierName={playerData.heroName} allowrotation={false} showmodel={true} />
                         {/* <CCPortraitV1 key={playerData.heroName} unitname={playerData.heroName} /> */}
                         <CCPanel flowChildren="down" >
+                            <Label className="AttributeName" text={"游戏ID：" + chatacter.Name} />
                             <Label className="AttributeName" text={"天梯排名：" + (1)} />
                             <Label className="AttributeName" text={"天梯积分：" + 1} />
                             <Label className="AttributeDescription" text="连胜越高，击败对手造成的伤害越高" />

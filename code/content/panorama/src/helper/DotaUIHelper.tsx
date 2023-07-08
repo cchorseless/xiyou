@@ -1,18 +1,14 @@
 import { render } from "@demon673/react-panorama";
-import React from "react";
+import React, { ReactElement } from "react";
+import { GameProtocol } from "../../../scripts/tscripts/shared/GameProtocol";
 import { GEventHelper } from "../../../scripts/tscripts/shared/lib/GEventHelper";
 import { CCCombinationInfoDialog } from "../view/Combination/CCCombinationInfoDialog";
 import { CCMainPanel } from "../view/MainPanel/CCMainPanel";
 import { EventHelper } from "./EventHelper";
 import { KVHelper } from "./KVHelper";
 import { LogHelper } from "./LogHelper";
+import { NetHelper } from "./NetHelper";
 import { TipsHelper } from "./TipsHelper";
-
-
-
-
-
-
 
 
 
@@ -424,7 +420,19 @@ export module DotaUIHelper {
         // EventHelper.addUnhandledEvent(TipsHelper.ToolTipType.DOTAShowAbilityTooltipForHero, abilityShowTooltipHandler);
         // EventHelper.addUnhandledEvent(TipsHelper.ToolTipType.DOTAShowAbilityTooltipForLevel, abilityShowTooltipHandler);
     }
-
+    /**
+     * 报错上报
+     * @param element 
+     * @param container 
+     * @param callback 
+     */
+    export function ErrorRender(element: ReactElement, container: Panel, callback?: () => void) {
+        try {
+            render(element, container, callback);
+        } catch (error) {
+            NetHelper.SendToLua(GameProtocol.Protocol.req_DebugClientErrorLog, (error as any).stack);
+        }
+    }
     export function Init(IsHeroSelect = false) {
         const PreGame = FindDotaHudElement("PreGame");
         if (PreGame) {

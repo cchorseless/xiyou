@@ -27,7 +27,12 @@ declare interface G2C_LoginGate {
     Message: string;
     PlayerId: string;
 }
-
+declare interface G2C_EasyLoginGate {
+    RpcId: number;
+    Error: number;
+    Message: string;
+    PlayerId: string;
+}
 declare interface G2C_Ping {
     RpcId: number;
     Error: number;
@@ -42,6 +47,7 @@ declare interface C2H_Buy_ShopItem // IRequest
     SellConfigId: number;
     PriceType: number;
     ItemCount: number;
+    PayType?: number
 }
 
 //ResponseType H2C_CommonResponse

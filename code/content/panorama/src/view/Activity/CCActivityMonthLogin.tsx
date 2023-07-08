@@ -10,7 +10,6 @@ import { CCIcon_Check } from "../AllUIElement/CCIcons/CCIcon_Check";
 import { CCLabel } from "../AllUIElement/CCLabel/CCLabel";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCPanelHeader } from "../AllUIElement/CCPanel/CCPanelPart";
-import { CCMainPanel } from "../MainPanel/CCMainPanel";
 import { CCShopItem } from "../Shop/CCShopItem";
 import { CCStorageItemGetDialog } from "../Storage/CCStorageItemGetDialog";
 import "./CCActivityMonthLogin.less";
@@ -21,6 +20,10 @@ interface ICCActivityMonthLogin {
 }
 
 export class CCActivityMonthLogin extends CCPanel<ICCActivityMonthLogin> {
+    onReady() {
+        return TActivityMonthLoginData.GetOneInstance(GGameScene.Local.BelongPlayerid) != null;
+    }
+
     onInitUI() {
         this.ListenUpdate(TActivityMonthLoginData.GetOneInstance(GGameScene.Local.BelongPlayerid))
     }
@@ -31,7 +34,7 @@ export class CCActivityMonthLogin extends CCPanel<ICCActivityMonthLogin> {
         }, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
             if (e.state) {
                 let info = JSON.parse(e.message!) as IFItemInfo;
-                CCMainPanel.GetInstance()!.addOnlyPanel(CCStorageItemGetDialog, {
+                CCStorageItemGetDialog.showItemGetDialog({
                     Items: [
                         { ItemConfigId: info.ItemConfigId, ItemCount: info.ItemCount },
                     ]
@@ -41,6 +44,9 @@ export class CCActivityMonthLogin extends CCPanel<ICCActivityMonthLogin> {
 
     }
     render() {
+        if (!this.__root___isValid) {
+            return this.defaultRender("CC_ActivityMonthLogin");
+        }
         const MonthLogin = TActivityMonthLogin.GetOneInstance(-1);
         const MonthLoginData = TActivityMonthLoginData.GetOneInstance(GGameScene.Local.BelongPlayerid);
         const logdaycount = MonthLoginData.LoginDayCount;
@@ -55,7 +61,7 @@ export class CCActivityMonthLogin extends CCPanel<ICCActivityMonthLogin> {
             }
         }
         const totalitem = MonthLogin.TotalLoginItems.get(totalday);
-        return <Panel className={"CCActivityMonthLogin"} ref={this.__root__}  {...this.initRootAttrs()}>
+        return <Panel id="CC_ActivityMonthLogin" className={"CCActivityMonthLogin"} ref={this.__root__}  {...this.initRootAttrs()}>
             <CCPanel flowChildren="right-wrap" width="75%" height="100%" scroll={"y"}>
                 {
                     allmonthitems.map((v, index) => {
@@ -102,7 +108,7 @@ export class CCActivityMonthLoginPrizeItem extends CCPanel<ICCActivityMonthLogin
         }, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
             if (e.state) {
                 let info = JSON.parse(e.message!) as IFItemInfo;
-                CCMainPanel.GetInstance()!.addOnlyPanel(CCStorageItemGetDialog, {
+                CCStorageItemGetDialog.showItemGetDialog({
                     Items: [
                         { ItemConfigId: info.ItemConfigId, ItemCount: info.ItemCount },
                     ]

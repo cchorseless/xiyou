@@ -12,7 +12,6 @@ import { TItem } from "../../shared/service/bag/TItem";
 export class GameServiceSystemComponent extends GameServiceSystem {
     static SelectionTime = 30;
     static SelectionReadyLockTime = 5;
-
     public onAwake(): void {
         this.addEvent();
         GTimerHelper.AddFrameTimer(1, GHandler.create(this, () => {
@@ -36,6 +35,9 @@ export class GameServiceSystemComponent extends GameServiceSystem {
             this.initPlayerGameSelection(playerid);
         })
         GTimerHelper.AddTimer(0.1, GHandler.create(this, () => {
+            if (GameServiceConfig.GAME_NeedTestCDK) {
+                return 0.1;
+            }
             if (GameRules.GetGameTime() >= this.BeforeGameEndTime) {
                 this.FinishGameModeSelection()
                 return
@@ -87,6 +89,16 @@ export class GameServiceSystemComponent extends GameServiceSystem {
             data.Courier = e.getCourierInUse();
             this.SyncClient();
         }))
+        EventHelper.addProtocolEvent(GameProtocol.Protocol.req_TestCDK, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
+            if (e.data == "76868") {
+                e.state = true;
+                e.message = "success";
+                GameServiceConfig.GAME_NeedTestCDK = false;
+            }
+            else {
+                e.state = false;
+            }
+        }));
         EventHelper.addProtocolEvent(GameProtocol.Protocol.SelectDifficultyChapter, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
             const characterdata = this.tPlayerGameSelection[e.PlayerID + ""];
             const charpter = e.data;
@@ -270,19 +282,16 @@ export class GameServiceSystemComponent extends GameServiceSystem {
      * @param token
      * @returns
      */
-    public async SendServerKey(label: string, name: string, token: string) {
+    public SendServerKey(label: string, name: string, token: string) {
         if (!token) {
             return;
         }
-        await HttpHelper.PostRequestAsync(
-            GameProtocol.Protocol.SetServerKey,
+        HttpHelper.PostRequest(GameProtocol.Protocol.SetServerKey,
             {
                 ServerKey: token,
                 Name: name,
                 Label: label,
-            },
-            GameProtocol.HTTP_URL,
-            ""
+            }, null, GameServiceConfig.HttpUrl(), ""
         );
     }
 
@@ -290,11 +299,18 @@ export class GameServiceSystemComponent extends GameServiceSystem {
      *
      * @param error 发送错误日志
      */
-    public SendErrorLog(error: any) {
+    public SendErrorLog(error: any, isui = false) {
         if (error == null) {
             return;
         }
-        // this.HTTPRequest("PUT", 0, { tc: "c2_debug", t: "error", d: error }, null, "http://111.231.89.227:8080/tag");
+        HttpHelper.PostRequest(GameProtocol.Protocol.ReportGameError,
+            {
+                Label: GameServiceConfig.GAME_Name + (isui ? "_UI" : "_Server"),
+                ErrorMsg: error + "",
+                GameTime: GameRules.GetGameTime() + "",
+                GameId: GTGameRecordItem.CurRecordID || "",
+            }, null, GameServiceConfig.HttpUrl(), ""
+        );
     }
 
     private getDifficultyConfig(arr: { [k: string]: number }) {

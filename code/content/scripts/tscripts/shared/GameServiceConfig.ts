@@ -4,8 +4,57 @@ import { CCShare } from "./lib/CCShare";
 export module GameServiceConfig {
     export const GAME_Name = "xiyou";
     export const GAME_MAX_PLAYER = 4;
+    /**每队最大玩家数量 */
+    export const TEAM_MAX_PLAYER: number = 4;
+    /**开局金币数量 */
+    export const GAME_START_GOLD: number = 100;
+    /**最小攻击速度 */
+    export const MINIMUM_ATTACK_SPEED: number = 20;
+    /**最大攻击速度 */
+    export const MAXIMUM_ATTACK_SPEED: number = 500;
+    /**英雄AI时间间隔 */
+    export const AI_TIMER_TICK_TIME_HERO: number = 0.25;
+    /**AI时间间隔 */
+    export const AI_TIMER_TICK_TIME: number = 0.5;
+
     export const HERO_MAX_LEVEL = 10;
     export const HERO_XP_PER_LEVEL_TABLE = { 0: 50, 1: 99, 2: 200, 3: 300, 4: 400, 5: 500, 6: 600, 7: 700, 8: 800, 9: 900, 10: 1000 }
+    /**版本号 */
+    export const GAME_VERSION: string = "1.0.0";
+    export const Code_VERSION: string = "103";
+    export const GAME_ISDEBUG: boolean = true;
+    /**是否需要测试码 */
+    export let GAME_NeedTestCDK: boolean = true;
+    export function GetHost() {
+        // if (IsInToolsMode()) {
+        //     return "http://127.0.0.1"
+        // }
+        return "http://101.132.117.140"
+    }
+    export function HttpUrl() {
+        return GetHost() + ":" + 8080;
+    }
+    /**弃用 */
+    export function LoginUrl() {
+        const ports = ["10101", "10111", "10121", "10131"];
+        const r = Math.random();
+        let port = "10101";
+        if (r < 0.25) {
+            port = "10101"
+        }
+        else if (r < 0.5) {
+            port = "10111"
+        }
+        else if (r < 0.75) {
+            port = "10121"
+        }
+        else {
+            port = "10131"
+        }
+        return GetHost() + ":" + port;
+    }
+    /**服务器端口 */
+    export const GatePorts = ["10102", "10103", "10112", "10113", "10122", "10123", "10132", "10133"];
     /**
      * 数据同步客户端是否压缩
      */
