@@ -1293,7 +1293,6 @@ export class modifier_sect_summon_buff_active extends BaseModifier_Plus {
 }
 
 
-// 战意流
 @registerModifier()
 export class modifier_sect_warpath_base_a extends modifier_sect_effect_base {
     Init() {
@@ -2555,9 +2554,7 @@ export class modifier_sect_transform_base_a extends modifier_sect_effect_base {
             this.buff_fx = ResHelper.CreateParticleEx("particles/hero/lion/aura_manadrain.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, parent);
             ParticleManager.SetParticleControl(this.buff_fx, 0, parent.GetAbsOrigin());
         }
-
     }
-
 }
 @registerModifier()
 export class modifier_sect_transform_base_b extends modifier_sect_transform_base_a {

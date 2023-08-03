@@ -1,6 +1,7 @@
 import { BaseModifier_Plus } from "../../entityPlus/BaseModifier_Plus";
 import { registerModifier } from "../../entityPlus/Base_Plus";
 
+// 缴械
 @registerModifier()
 export class modifier_generic_disarm extends BaseModifier_Plus {
     GetEffectName(): string {

@@ -1,6 +1,6 @@
 import { BaseModifier_Plus } from "../../entityPlus/BaseModifier_Plus";
 import { registerModifier } from "../../entityPlus/Base_Plus";
-
+// 混乱
 @registerModifier()
 export class modifier_generic_dazed extends BaseModifier_Plus {
     BeCreated(p_0: any,): void {

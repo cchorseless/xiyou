@@ -1,5 +1,4 @@
 
-import { KVHelper } from "../../../helper/KVHelper";
 import { CombinationConfig } from "../../../shared/CombinationConfig";
 import { Dota } from "../../../shared/Gen/Types";
 import { ET, serializeETProps } from "../../../shared/lib/Entity";
@@ -99,14 +98,14 @@ export class ECombination extends ET.Entity {
                 this.combination[c].push(entity);
             }
             if (this.checkActive() && this.isActive) {
-                if (this.SectName == CombinationConfig.ESectName.sect_black_art) {
-                    let playerroot = GGameScene.GetPlayer(this.BelongPlayerid);
-                    let sectroot = playerroot.CombinationManager();
-                    for (let k in sectroot.allCombination) {
-                        if (k == CombinationConfig.ESectName.sect_black_art) continue;
-                        sectroot.ChangeCombinationActiveNeedCount(k, -1)
-                    }
-                }
+                /**   if (this.SectName == CombinationConfig.ESectName.sect_black_art) {
+                      let playerroot = GGameScene.GetPlayer(this.BelongPlayerid);
+                      let sectroot = playerroot.CombinationManager();
+                      for (let k in sectroot.allCombination) {
+                          if (k == CombinationConfig.ESectName.sect_black_art) continue;
+                          sectroot.ChangeCombinationActiveNeedCount(k, -1)
+                      }
+                  }*/
                 // this.ApplyBuffEffect(true);
             }
         }
@@ -126,14 +125,14 @@ export class ECombination extends ET.Entity {
         }
         if (this.checkActive() && !this.isActive) {
             // this.CancelEffect();
-            if (this.SectName == CombinationConfig.ESectName.sect_black_art) {
-                let playerroot = GGameScene.GetPlayer(this.BelongPlayerid);
-                let sectroot = playerroot.CombinationManager();
-                for (let k in sectroot.allCombination) {
-                    if (k == CombinationConfig.ESectName.sect_black_art) continue;
-                    sectroot.ChangeCombinationActiveNeedCount(k, 1)
-                }
-            }
+            /**   if (this.SectName == CombinationConfig.ESectName.sect_black_art) {
+                  let playerroot = GGameScene.GetPlayer(this.BelongPlayerid);
+                  let sectroot = playerroot.CombinationManager();
+                  for (let k in sectroot.allCombination) {
+                      if (k == CombinationConfig.ESectName.sect_black_art) continue;
+                      sectroot.ChangeCombinationActiveNeedCount(k, 1)
+                  }
+              }*/
         }
     }
     ApplyBuffEffect(isActive: boolean = false) {
@@ -218,7 +217,7 @@ export class ECombination extends ET.Entity {
         if (!this.isActive) { return }
         let SectName = this.SectName;
         let playerroot = GGameScene.GetPlayer(this.BelongPlayerid);
-        if (SectName === CombinationConfig.ESectName.sect_invent) {
+      /**   if (SectName === CombinationConfig.ESectName.sect_invent) {
             let runtimeunits = playerroot.BattleUnitManagerComp().GetAllBuildingRuntimeEntityRoot();
             runtimeunits = runtimeunits.filter(unit => { return unit.isAlive });
             let isInventActive_a = -1;
@@ -251,7 +250,7 @@ export class ECombination extends ET.Entity {
                 playerroot.Hero.AddItemOrInGround(KVHelper.RandomPoolConfig(isInventActive_c + ""));
             }
         }
-        else if (SectName === CombinationConfig.ESectName.sect_fish_chess) {
+        else */if (SectName === CombinationConfig.ESectName.sect_fish_chess) {
             let prop_pect = 0;
             if (this.SectId == "sect_fish_chess_a") {
                 prop_pect = GJSONConfig.BuffEffectConfig.get("modifier_sect_fish_chess_base_a").propinfo.get("prop_pect");
@@ -276,18 +275,6 @@ export class ECombination extends ET.Entity {
                 }
 
             }
-            else if (this.SectId == "sect_fish_chess_c") {
-                prop_pect = GJSONConfig.BuffEffectConfig.get("modifier_sect_fish_chess_base_c").propinfo.get("prop_pect");
-                let buildings = playerroot.BuildingManager().getAllBattleBuilding(false);
-                for (let building of buildings) {
-                    if (building.checkCanStarUp()) {
-                        if (RollPercentage(prop_pect)) {
-                            building.AddStar(1);
-                        }
-                    }
-                }
-            }
-
         }
 
     }

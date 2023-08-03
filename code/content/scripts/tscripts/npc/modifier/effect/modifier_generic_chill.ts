@@ -1,6 +1,6 @@
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerModifier } from "../../entityPlus/Base_Plus";
-
+// 冰冻
 @registerModifier()
 export class modifier_generic_chill extends BaseModifier_Plus {
     BeCreated(table: any): void {
@@ -48,7 +48,7 @@ export class modifier_generic_chill extends BaseModifier_Plus {
         return "particles/econ/items/effigies/status_fx_effigies/status_effect_effigy_frosty_dire.vpcf";
     }
     StatusEffectPriority(): modifierpriority {
-        return 10;
+        return 4;
     }
     IsPurgable(): boolean {
         return true;

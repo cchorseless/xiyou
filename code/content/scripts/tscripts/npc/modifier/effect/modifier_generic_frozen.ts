@@ -1,5 +1,7 @@
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerModifier } from "../../entityPlus/Base_Plus";
+
+// 冰冻
 @registerModifier()
 export class modifier_generic_frozen extends BaseModifier_Plus {
     BeCreated(table: any): void {
@@ -63,7 +65,7 @@ export class modifier_generic_frozen extends BaseModifier_Plus {
         return "particles/econ/items/effigies/status_fx_effigies/status_effect_effigy_frosty_l2_dire.vpcf";
     }
     StatusEffectPriority(): modifierpriority {
-        return 11;
+        return 4;
     }
     GetEffectName(): string {
         return "particles/generic/generic_frozen.vpcf";

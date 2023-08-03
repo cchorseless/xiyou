@@ -1,6 +1,9 @@
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseModifier_Plus } from "../../entityPlus/BaseModifier_Plus";
 import { registerModifier } from "../../entityPlus/Base_Plus";
+
+
+// 魅惑
 @registerModifier()
 export class modifier_generic_charm extends BaseModifier_Plus {
     BeCreated(p_0: any,): void {

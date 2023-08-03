@@ -1,6 +1,8 @@
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
+
+// 沉睡
 @registerModifier()
 export class modifier_generic_sleep extends BaseModifier_Plus {
     public minDuration: number;
@@ -38,7 +40,7 @@ export class modifier_generic_sleep extends BaseModifier_Plus {
         return "particles/status_fx/status_effect_nightmare.vpcf";
     }
     StatusEffectPriority(): modifierpriority {
-        return 10;
+        return 4;
     }
     CheckState(): Partial<Record<modifierstate, boolean>> {
         return {

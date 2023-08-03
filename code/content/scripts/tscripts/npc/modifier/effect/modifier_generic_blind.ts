@@ -1,5 +1,6 @@
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerModifier } from "../../entityPlus/Base_Plus";
+// 致盲
 
 @registerModifier()
 export class modifier_generic_blind extends BaseModifier_Plus {

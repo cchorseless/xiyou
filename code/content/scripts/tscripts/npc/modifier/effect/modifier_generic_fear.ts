@@ -1,10 +1,3 @@
-/*
- * @Author: Jaxh
- * @Date: 2021-05-11 16:57:41
- * @LastEditors: your name
- * @LastEditTime: 2021-06-16 11:05:02
- * @Description: 眩晕BUFF
- */
 import { GameFunc } from "../../../GameFunc";
 import { AoiHelper } from "../../../helper/AoiHelper";
 import { BaseModifier_Plus } from "../../entityPlus/BaseModifier_Plus";
@@ -86,7 +79,7 @@ export class modifier_generic_fear extends BaseModifier_Plus {
         return "particles/status_fx/status_effect_lone_druid_savage_roar.vpcf";
     }
     StatusEffectPriority(): modifierpriority {
-        return 10;
+        return 4;
     }
     CheckState(): Partial<Record<modifierstate, boolean>> {
         return {
